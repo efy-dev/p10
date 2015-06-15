@@ -1,4 +1,4 @@
-package com.ming800.core.taglib;
+package com.efeiyi.ec.tag;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.ApplicationContextUtil;

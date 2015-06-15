@@ -1,7 +1,8 @@
-package com.ming800.core.taglib;
+package com.efeiyi.ec.tag;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.ming800.core.taglib.ScopeTag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;

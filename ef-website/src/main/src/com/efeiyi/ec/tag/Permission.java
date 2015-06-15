@@ -1,4 +1,4 @@
-package com.ming800.core.taglib;
+package com.efeiyi.ec.tag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.*;
