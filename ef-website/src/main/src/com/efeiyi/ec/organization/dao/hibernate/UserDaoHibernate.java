@@ -1,11 +1,9 @@
-package com.ming800.organization.dao.hibernate;
+package com.efeiyi.ec.organization.dao.hibernate;
 
 
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
-import com.ming800.core.base.model.SpObserver;
-import com.ming800.organization.dao.UserDao;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.model.MyUser;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -13,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.LinkedHashMap;
 
 @Repository
-public class UserDaoHibernate extends BaseDaoSupport<BigUser> implements UserDao {
+public class UserDaoHibernate extends BaseDaoSupport<BigUser> implements com.efeiyi.ec.organization.dao.UserDao {
 
 
     @Override

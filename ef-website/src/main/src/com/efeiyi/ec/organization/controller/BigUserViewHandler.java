@@ -1,4 +1,4 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;

@@ -1,11 +1,11 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
 
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.service.BranchManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.GlobalManager;
 import com.ming800.core.base.controller.BaseController;
-import com.ming800.organization.model.MyUser;
-import com.ming800.organization.service.BranchManager;
 import com.ming800.core.p.service.JmenuManager;
 import com.ming800.core.util.DateUtil;
 import org.dom4j.Document;

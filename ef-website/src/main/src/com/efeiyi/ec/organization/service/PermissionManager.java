@@ -1,4 +1,4 @@
-package com.ming800.organization.service;
+package com.efeiyi.ec.organization.service;
 
 /**
  * Created with IntelliJ IDEA.

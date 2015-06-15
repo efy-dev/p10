@@ -1,9 +1,9 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
 import com.ming800.core.base.controller.BaseController;
+import com.ming800.core.does.model.ConfigProperty;
 import com.ming800.core.does.model.Module;
 import com.ming800.core.does.service.ModuleManager;
-import com.ming800.organization.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

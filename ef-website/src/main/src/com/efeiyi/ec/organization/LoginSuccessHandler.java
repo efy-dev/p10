@@ -1,10 +1,10 @@
-package com.ming800.organization;
+package com.efeiyi.ec.organization;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;
 import com.ming800.core.util.HttpUtil;
-import com.ming800.organization.model.MyUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

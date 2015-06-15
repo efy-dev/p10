@@ -1,12 +1,12 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
+import com.efeiyi.ec.organization.model.Permission;
+import com.efeiyi.ec.organization.model.Role;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.util.ApplicationContextUtil;
-import com.ming800.organization.model.Permission;
-import com.ming800.organization.model.Role;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
