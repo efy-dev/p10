@@ -1,10 +1,10 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
+import com.efeiyi.ec.organization.OrganizationConst;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.util.StringUtil;
-import com.ming800.organization.OrganizationConst;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

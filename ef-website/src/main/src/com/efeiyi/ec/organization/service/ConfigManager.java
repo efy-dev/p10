@@ -1,6 +1,5 @@
-package com.ming800.organization.service;
+package com.efeiyi.ec.organization.service;
 
-import com.ming800.organization.model.ConfigProperty;
 
 import java.util.Map;
 

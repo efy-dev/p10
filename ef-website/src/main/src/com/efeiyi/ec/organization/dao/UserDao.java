@@ -1,8 +1,9 @@
-package com.ming800.organization.dao;
+package com.efeiyi.ec.organization.dao;
 
+
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.dao.BaseDao;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.model.MyUser;
 
 import java.util.LinkedHashMap;
 

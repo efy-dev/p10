@@ -1,5 +1,6 @@
-package com.ming800.organization.controller;
+package com.efeiyi.ec.organization.controller;
 
+import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.Page;
@@ -8,7 +9,6 @@ import com.ming800.core.does.service.DoManager;
 import com.ming800.core.base.model.MethodCache;
 import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.MD5Encode;
-import com.ming800.organization.model.BigUser;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
