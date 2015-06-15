@@ -1,0 +1,77 @@
+<decorators defaultdir="/decorators">
+    <excludes>
+        <pattern>/*ajax=true*</pattern>
+        <pattern>*/*.htm*</pattern>
+        <pattern>/WEB-INF/springmvc/index.jsp</pattern>
+        <pattern>/index.do*</pattern>
+        <pattern>/main.do*</pattern>
+        <pattern>/userDefinedPortlet/listMyDefinedPortlet.do*</pattern>
+        <pattern>/home.do*</pattern>
+        <pattern>/basic/generateQueryHtml.do*</pattern>
+        <pattern>/basic/xm.do?qm=formCall*</pattern>
+        <pattern>/call/saveCallRecord.do*</pattern>
+        <pattern>/call/play.do*</pattern>
+        <pattern>/basic/xmp.do*</pattern>
+        <pattern>/menu/menu.do*</pattern>
+        <!--<pattern>/reg/saveEnrollUser.do*</pattern>-->
+    </excludes>
+    <decorator name="printable" page="manage/contentPrintableDec.jsp"/>
+    <decorator name="websiteDec" page="manage/websiteDec.jsp">
+        <pattern>/website/*.jsp*</pattern>
+    </decorator>
+    <decorator name="registerDec" page="manage/registerDec.jsp">
+        <pattern>/reg/*.do*</pattern>
+    </decorator>
+    <decorator name="spinachDec" page="manage/spinachDec.jsp">
+        <pattern>/spinach/*.do*</pattern>
+        <pattern>/basic/spinach/xm.do</pattern>
+    </decorator>
+
+    <decorator name="pcEnrollTamplateDec" page="pc/pcEnrollTamplateDec.jsp">
+        <pattern>/pc/consumer/**.do</pattern>
+    </decorator>
+    <!--消费者左导航栏-->
+    <decorator name="consumerMenu" page="pc/consumerMenu.jsp">
+        <pattern>/pc/consumerMenu/*</pattern>
+        <pattern>/pc/order/view.do</pattern>
+        <pattern>/pc/consumerPhoto/**</pattern>
+    </decorator>
+    <!--摄影师做导航栏-->
+    <decorator name="photographerMenu" page="pc/photographerMenu.jsp">
+        <pattern>/pc/photographerMenu/*</pattern>
+        <pattern>/pc/order/photographer/view.do</pattern>
+
+    </decorator>
+
+    <!--<decorator name="homeDec" page="pc/pcTamplateDec.jsp">-->
+    <!--<pattern>/</pattern>-->
+    <!--</decorator>-->
+
+    <decorator name="pcTamplateDec" page="pc/pcTamplateDec.jsp">
+        <pattern>/**/**/**.do</pattern>
+        <pattern>/pc/**.do</pattern>
+        <pattern>**</pattern>
+        <!--<pattern>/basic/xm.do</pattern>-->
+    </decorator>
+
+    <!--<decorator name="pcTamplateDec" page="pc/pcTamplateDec.jsp">-->
+    <!--<pattern>/basic/xm.do</pattern>-->
+    <!--</decorator>-->
+    <!--<decorator name="pcTamplateDec" page="pc/pcTamplateDec.jsp">-->
+    <!--<pattern>/pc/photographer/list.do</pattern>-->
+    <!--</decorator>-->
+    <!--    <decorator name="studentContentDec" page="studentContentDec.jsp">
+            <pattern>/studentCenter/*.do*</pattern>
+            <pattern>/studentMain.do*</pattern>
+        </decorator>-->
+    <decorator name="theme" page="pc/empty.jsp">
+        <pattern>/activity/**</pattern>
+    </decorator>
+
+
+    <decorator name="contentDec" page="manage/contentDec.jsp">
+        <pattern>*/*.do*</pattern>
+    </decorator>
+
+</decorators>
+

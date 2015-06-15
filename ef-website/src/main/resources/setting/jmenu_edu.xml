@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu name="edu">
+
+    <jmenu id="organmgmt"><!--系统管理-->
+        <jnode url="" setting="" access="admin,manager" tenant="" text_zh_CN="组织机构管理"
+               text_en_US="Organization management">
+            <jnode url="/basic/xm.do?qm=plistBigUser_default" extend=""
+                   setting="" access="admin" tenant="" text_zh_CN="所有用户管理" text_en_US="BigUser management"/>
+            <jnode url="/basic/xm.do?qm=plistManager_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="内部用户管理" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistRole_default"
+                   setting="" access="admin" tenant="" text_zh_CN="角色管理"
+                   text_en_US="Authorization groups/Post management"/>
+            <!--
+                        <jnode url="/organization/viewMyTeachArea.do" setting="" access="admin" tenant=""
+                               text_zh_CN="地区与部门管理" text_en_US="School area and departmental management"/>-->
+        </jnode>
+
+        <jnode url="" setting="" access="admin" tenant="" text_zh_CN="系统设置" text_en_US="System setting">
+            <!--  <jnode url="/tenant/viewMyBranch.do"
+                     setting="" access="admin" tenant="" text_zh_CN="信息和标识" text_en_US="School information"/>
+              <jnode url="/basic/xm.do?qm=plistPrintTemplateSetting_default" setting=""
+                     access="admin" tenant="" text_zh_CN="打印模板管理" text_en_US="Print template management"/>-->
+            <jnode url="/xdos/xme.do?type=manager"
+                   setting="" access="admin" tenant="" text_zh_CN="模块参数设置"
+                   text_en_US=""/>
+            <jnode url="/manage/reload.do"
+                   setting="" access="admin" tenant="" text_zh_CN="更新城市"
+                   text_en_US=""/>
+        </jnode>
+        <jnode url="" setting="" access="admin" tenant=""  text_zh_CN="系统日志"
+               text_en_US="System log">
+            <jnode url="/executeHql/formExecute.do"
+                   setting="" access="" tenant="" text_zh_CN="执行查询"
+                   text_en_US=""/>
+            <jnode url="/update/formUpdate.do"
+                   setting="" access="" tenant="" text_zh_CN="更新信息"
+                   text_en_US=""/>
+            <jnode url="/basic/xm.do?qm=plistSystemLog_default"
+                   setting="" access="admin" tenant="" text_zh_CN="系统日志" text_en_US="School log"/>
+            <jnode url="/basic/xm.do?qm=plistOperationLog_default"
+                   setting="" access="admin" tenant="" text_zh_CN="操作日志" text_en_US="Operation log"/>
+        </jnode>
+        <jnode url="" setting="" access="admin" tenant="" state="closed" text_zh_CN="系统配置" text_en_US="System setting">
+            <jnode url="/xdos/xme.do"
+                   setting="" access="admin" tenant="" text_zh_CN="模块(module)"
+                   text_en_US=""/>
+            <jnode url="/module/checkField.do"
+                   setting="" access="admin" tenant="" text_zh_CN="检测Field"
+                   text_en_US=""/>
+            <jnode url="/module/checkBranch.do"
+                   setting="" access="admin" tenant="" text_zh_CN="检测查询范围"
+                   text_en_US=""/>
+            <jnode url="/xdos/xmd.do"
+                   setting="" access="admin" tenant="" text_zh_CN="查询"
+                   text_en_US=""/>
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="orderLeft">
+
+
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="待确认订单" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistConfirmPurchaseOrder_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="已确认订单" text_en_US="Outbox"/>
+
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="订单支付记录" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistMnPurchaseOrderComment_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="订单评价管理" text_en_US="Outbox"/>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="优惠劵管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistCoupon_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="优惠劵管理" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistCouponRecord_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="优惠劵生成记录管理" text_en_US="Outbox"/>
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="matterLeft">
+
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="轮播图管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistBannerHPI_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="首页轮播图" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistBannerCI_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="频道页轮播图" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager,photographerManager"
+               tenant="" text_zh_CN="摄影作品管理" text_en_US="Outbox">
+
+            <jnode url="/basic/xm.do?qm=plistSamplePhotoGroupHPI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="首页推荐" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistSamplePhotoGroupCI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="频道页推荐" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistSamplePhotoGroupLI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="列表页推荐" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistNewSamplePhotoGroup_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="最新作品" text_en_US="Outbox">
+            </jnode>
+
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager,photographerManager"
+               tenant="" text_zh_CN="摄影师推荐管理" text_en_US="Outbox">
+
+            <jnode url="/basic/xm.do?qm=plistPhotographerTypePriceHPI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="首页推荐" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPhotographerTypePriceCI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="频道页推荐" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPhotographerTypePriceLI_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="列表页推荐" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+
+        <jnode url="" setting="" access="admin,manager,dressManager"
+               tenant="" text_zh_CN="服装管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistDressShop_default" setting="" access="admin,manager,dressManager"
+                   tenant="" text_zh_CN="服装管理" text_en_US="Outbox">
+            </jnode>
+
+            <jnode url="/basic/xm.do?qm=plistDressBrand_default" setting="" access="admin,manager,dressManager"
+                   tenant="" text_zh_CN="服装供应商管理" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistShop_default" setting="" access="admin,manager,dressManager"
+                   tenant="" text_zh_CN="体验店管理" text_en_US="Outbox">
+            </jnode>
+        </jnode>
+
+
+        <jnode url="" setting="" access="admin,manager,sceneManager"
+               tenant="" text_zh_CN="场景管理" text_en_US="Outbox">
+
+            <jnode url="/basic/xm.do?qm=plistScene_default" setting="" access="admin,manager,sceneManager"
+                   tenant="" text_zh_CN="场景管理" text_en_US="Outbox">
+            </jnode>
+
+
+        </jnode>
+
+        <jnode url="" setting="" access="admin,manager,photoFrameManager"
+               tenant="" text_zh_CN="相框管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistPhotoFrame_default" setting="" access="admin,manager,photoFrameManager"
+                   tenant="" text_zh_CN="相框管理" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager,packageManager"
+               tenant="" text_zh_CN="套餐管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistPackage_default" setting="" access="admin,manager,packageManager"
+                   tenant="" text_zh_CN="套餐管理" text_en_US="Outbox">
+            </jnode>
+
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="团购管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistGroupShot_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="团购管理" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistGroupShotTemplate_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="团购类型管理" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="文章管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistDocument_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="文章管理" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="摄影师价格设定管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistPhotographerTypePrice2_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="摄影师价格设定列表" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="短信管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistSms_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="短信发送记录" text_en_US="Outbox">
+            </jnode>
+
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="roleLeft">
+
+
+        <jnode url="" setting="" access="admin,manager,photographerManager,photoFrameManager"
+               tenant="" text_zh_CN="专业用户管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistPhotographer_default" setting="" access="admin,manager,photographerManager"
+                   tenant="" text_zh_CN="摄影师管理" text_en_US="Outbox">
+            </jnode>
+
+            <jnode url="/basic/xm.do?qm=plistDresser_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="化妆师管理" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistAgent_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="经纪人管理" text_en_US="Outbox">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPhotoFrameProvider_default" setting="" access="admin,manager,photoFrameManager"
+                   tenant="" text_zh_CN="供应商管理" text_en_US="Outbox">
+            </jnode>
+
+
+        </jnode>
+
+
+    </jmenu>
+
+
+    <jmenu id="consumerLeft">
+
+        <jnode url="" setting="" access="admin,manager"
+               tenant="" text_zh_CN="消费者管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistConsumer_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="消费者列表" text_en_US="Outbox">
+
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistConsumerOrganization_default" setting="" access="admin,manager"
+                   tenant="" text_zh_CN="来源机构" text_en_US="Outbox">
+
+            </jnode>
+
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="agentLeft">
+
+
+        <jnode url="/basic/xm.do?qm=plistAgentPhotographer_default" setting="" access="agent"
+               tenant="" text_zh_CN="我的摄影师" text_en_US="Outbox">
+
+        </jnode>
+        <jnode url="/basic/xm.do?qm=plistAgentPurchaseOrder_default" setting="" access="agent"
+               tenant="" text_zh_CN="我的摄影师的订单" text_en_US="Outbox">
+
+        </jnode>
+
+
+    </jmenu>
+
+    <jmenu id="dresserLeft">
+
+
+        <jnode url="" setting="" access="dresser"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistDresserPurchaseOrder_default" setting="" access="dresser"
+                   tenant="" text_zh_CN="我的订单" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistDresserPurchaseOrderComment_default" setting="" access="dresser"
+                   tenant="" text_zh_CN="我的订单评价" text_en_US="Outbox"/>
+
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="fixerLeft">
+
+
+        <jnode url="" setting="" access="fixer"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistFixerPurchaseOrder_default" setting="" access="fixer"
+                   tenant="" text_zh_CN="我的订单" text_en_US="Outbox"/>
+            <jnode url="" setting="" access="fixer"
+                   tenant="" text_zh_CN="我的收入" text_en_US="Outbox"/>
+
+        </jnode>
+
+    </jmenu>
+
+    <jmenu id="designerLeft">
+
+        =
+        <jnode url="" setting="" access="designer"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistDesignerPurchaseOrder_default" setting="" access="designer"
+                   tenant="" text_zh_CN="我的订单" text_en_US="Outbox"/>
+            <jnode url="" setting="" access="designer"
+                   tenant="" text_zh_CN="我的订单评价" text_en_US="Outbox"/>
+
+        </jnode>
+
+    </jmenu>
+
+    <jmenu id="frameProviderLeft">
+
+
+        <jnode url="" setting="" access="provider"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+            <jnode url="/basic/xm.do?qm=plistProviderPurchaseOrder_default" setting="" access="provider"
+                   tenant="" text_zh_CN="我的订单" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" setting="" access="provider"
+                   tenant="" text_zh_CN="我的发货记录" text_en_US="Outbox"/>
+
+        </jnode>
+
+    </jmenu>
+
+
+    <jmenu id="training">
+
+        <jnode url="orderLeft" setting="" access="admin"
+               tenant="" text_zh_CN="订单管理" text_en_US="Outbox">
+        </jnode>
+        <jnode url="matterLeft" setting="" access="admin,manager,sceneManager,dressManager,photoFrameManager,packageManager,photographerManager"
+               tenant="" text_zh_CN="网站内容管理" text_en_US="Outbox"/>
+
+
+        <jnode url="roleLeft" setting="" access="admin,manager,photoFrameManager,photographerManager"
+               tenant="" text_zh_CN="专业用户管理" text_en_US="Outbox"/>
+
+        <jnode url="consumerLeft" setting="" access="admin,manager"
+               tenant="" text_zh_CN="消费者管理" text_en_US="Outbox">
+        </jnode>
+        <jnode url="agentLeft" setting="" access="agent"
+               tenant="" text_zh_CN="经纪人" text_en_US="Outbox">
+        </jnode>
+        <jnode url="dresserLeft" setting="" access="dresser"
+               tenant="" text_zh_CN="化妆师" text_en_US="Outbox">
+        </jnode>
+        <jnode url="fixerLeft" setting="" access="fixer"
+               tenant="" text_zh_CN="修片师" text_en_US="Outbox">
+        </jnode>
+        <jnode url="designerLeft" setting="" access="designer"
+               tenant="" text_zh_CN="排版师" text_en_US="Outbox">
+        </jnode>
+        <jnode url="frameProviderLeft" setting="" access="provider"
+               tenant="" text_zh_CN="相框供应商" text_en_US="Outbox">
+        </jnode>
+
+
+        <jnode url="organmgmt" setting="" access="admin,manager"
+               tenant="" text_zh_CN="系统设置" text_en_US="Outbox"/>
+
+
+    </jmenu>
+
+
+</menu>
+
+
+
+
+
+
