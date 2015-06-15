@@ -1,12 +1,12 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
+import com.efeiyi.ec.organization.OrganizationConst;
+import com.efeiyi.ec.organization.dao.UserDao;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.service.UserManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.util.StringUtil;
-import com.ming800.organization.OrganizationConst;
-import com.ming800.organization.dao.UserDao;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.model.MyUser;
-import com.ming800.organization.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
