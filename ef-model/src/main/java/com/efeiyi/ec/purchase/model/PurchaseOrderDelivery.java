@@ -28,7 +28,7 @@ public class PurchaseOrderDelivery {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;

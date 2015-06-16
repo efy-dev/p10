@@ -29,7 +29,7 @@ public class PurchaseProduct {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;
@@ -39,7 +39,7 @@ public class PurchaseProduct {
         this.purchaseOrder = purchaseOrder;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public Product getProduct() {
         return product;
