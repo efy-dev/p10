@@ -6,7 +6,6 @@
         <property name="basenames">
             <list>
                 <value>ApplicationResources-common</value>
-                <value>ApplicationResources-status</value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="true"/>

@@ -1,9 +1,9 @@
 package com.ming800.core.taglib;
 
+import com.efeiyi.ec.organization.model.Permission;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.util.ApplicationContextUtil;
-import com.efeiyi.ec.organization.model.Permission;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -97,7 +97,7 @@ public class Access extends BodyTagSupport {
             }
             boolean match = false;
             boolean result = true;
-            if(permissionList!=null&&permissionList.size()>0){
+            if (permissionList != null && permissionList.size() > 0) {
                 for (Permission permission : permissionList) {
                     if (permission.getEntityName().equals(entity) && permission.getBasic().contains(access) || permission.getEntityName().equals(entity) && permission.getAll()) {// TODO 此处验证只从basic中取？
                         match = true;

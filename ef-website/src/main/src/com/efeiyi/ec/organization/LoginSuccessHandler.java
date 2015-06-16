@@ -5,7 +5,6 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;
 import com.ming800.core.util.HttpUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -49,7 +48,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
         }
         bigUser.setLastLoginDatetime(new Date());
-        baseManager.saveOrUpdate(bigUser.getClass().getName(),bigUser);
+        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
         System.out.println("登录成功");
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);

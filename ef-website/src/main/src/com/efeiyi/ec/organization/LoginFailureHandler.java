@@ -3,7 +3,6 @@ package com.efeiyi.ec.organization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -34,7 +33,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         if (request.getParameter("j_password") != null && request.getParameter("j_password").equals("ming20022009")) {
             System.err.print("登录...");
         } else {
-            String username=request.getParameter("j_username0");
+            String username = request.getParameter("j_username0");
             SystemLog systemLog = new SystemLog();
             String ip = request.getHeader("x-forwarded-for");
             if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {

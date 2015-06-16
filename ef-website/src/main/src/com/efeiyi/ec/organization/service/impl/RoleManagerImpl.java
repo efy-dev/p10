@@ -82,9 +82,9 @@ public class RoleManagerImpl implements RoleManager {
         String hql = "select s from com.ming800.organization.model.Role s where s.basicType=:basicType and s.theStatus=1";
         LinkedHashMap<String, Object> linkedHashMap = new LinkedHashMap<>();
         linkedHashMap.put("basicType", basicType);
-        List<Role> roleList=new ArrayList<>();
-        roleList=xdoDao.getObjectList(hql,linkedHashMap);
-        if (roleList!=null&&roleList.size()>0){
+        List<Role> roleList = new ArrayList<>();
+        roleList = xdoDao.getObjectList(hql, linkedHashMap);
+        if (roleList != null && roleList.size() > 0) {
             return roleList.get(0);
         }
         return null;

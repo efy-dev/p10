@@ -1,8 +1,8 @@
 package com.ming800.core.taglib;
 
+import com.efeiyi.ec.organization.model.User;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.ApplicationContextUtil;
-import com.efeiyi.ec.organization.model.User;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

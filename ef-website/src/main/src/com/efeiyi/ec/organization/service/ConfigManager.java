@@ -1,8 +1,6 @@
 package com.efeiyi.ec.organization.service;
 
 
-import java.util.Map;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator

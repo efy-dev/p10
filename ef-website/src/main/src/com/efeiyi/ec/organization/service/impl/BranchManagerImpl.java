@@ -1,9 +1,10 @@
 package com.efeiyi.ec.organization.service.impl;
 
-import com.ming800.core.base.dao.XdoDao;
 import com.efeiyi.ec.organization.OrganizationConst;
-import com.efeiyi.ec.organization.model.*;
+import com.efeiyi.ec.organization.model.Tenant;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.organization.service.BranchManager;
+import com.ming800.core.base.dao.XdoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

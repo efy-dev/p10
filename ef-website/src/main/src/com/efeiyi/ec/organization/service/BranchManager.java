@@ -1,5 +1,7 @@
 package com.efeiyi.ec.organization.service;
-import com.efeiyi.ec.organization.model.*;
+
+import com.efeiyi.ec.organization.model.Tenant;
+import com.efeiyi.ec.organization.model.User;
 
 import java.util.List;
 
