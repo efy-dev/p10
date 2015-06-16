@@ -1,4 +1,4 @@
-package com.efeiyi.ec.base;
+package com.efeiyi.ec.basic;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.base;
+package com.efeiyi.ec.basic;
 
 import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
