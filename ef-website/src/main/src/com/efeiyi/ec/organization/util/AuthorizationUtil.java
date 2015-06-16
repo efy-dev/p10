@@ -26,7 +26,6 @@ public class AuthorizationUtil {
             role.setBasicType("all");
 
             myUser.setRole(role);
-            myUser.setCityShotType("headquarters");
             return myUser;
 
 
