@@ -1,6 +1,7 @@
 package com.efeiyi.ec.organization;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;

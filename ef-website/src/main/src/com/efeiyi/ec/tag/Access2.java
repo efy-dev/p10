@@ -1,5 +1,7 @@
 package com.efeiyi.ec.tag;
 
+import com.efeiyi.ec.organization.util.AuthorizationUtil;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
