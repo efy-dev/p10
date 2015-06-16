@@ -79,7 +79,8 @@ public class PurchaseOrder {
         this.user = user;
     }
 
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_address_id")
     public UserAddress getUserAddress() {
         return userAddress;
     }
