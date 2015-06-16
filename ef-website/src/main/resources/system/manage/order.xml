@@ -13,7 +13,7 @@
 
                 <field name="ptype" label="订单类型" inputType="select_status" dataType="int" key="PurchaseOrder.ptype">
                     <statusType fieldName="ptype">
-                        <item label="个人写真" value="1"></item>
+                        <item label="个人写真" value="1"/>
                         <item label="婚纱摄影" value="2"></item>
                         <item label="母婴-孕妇照" value="111"></item>
                         <item label="母婴-百天照" value="112"></item>

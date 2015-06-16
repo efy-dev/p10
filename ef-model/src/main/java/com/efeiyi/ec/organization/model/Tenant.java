@@ -24,7 +24,6 @@ public class Tenant implements Serializable {
 
     private String id;
     private String name;                //名称标识
-    private String schoolName;         //学校名称
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private Province province;
     private District district;
@@ -51,14 +50,6 @@ public class Tenant implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "school_name")
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
-    }
 
     @Column(name = "the_status")
     public Integer getTheStatus() {
