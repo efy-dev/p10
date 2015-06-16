@@ -1,10 +1,12 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
+import com.efeiyi.ec.organization.model.Role;
+import com.efeiyi.ec.organization.service.RoleManager;
+import com.efeiyi.ec.organization.util.AuthorizationUtil;
 import com.ming800.core.base.dao.XdoDao;
+import com.ming800.core.does.model.ConfigProperty;
 import com.ming800.core.does.model.Module;
 import com.ming800.core.does.service.ModuleManager;
-import com.ming800.organization.model.*;
-import com.ming800.organization.service.RoleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

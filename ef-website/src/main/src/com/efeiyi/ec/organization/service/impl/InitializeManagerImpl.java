@@ -1,13 +1,16 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
+import com.efeiyi.ec.organization.OrganizationConst;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Permission;
+import com.efeiyi.ec.organization.model.Role;
+import com.efeiyi.ec.organization.service.InitializeManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.model.M8idGenerator;
 import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.MD5Encode;
 import com.ming800.core.util.StringUtil;
-import com.ming800.organization.OrganizationConst;
-import com.ming800.organization.model.*;
-import com.ming800.organization.service.InitializeManager;
+import org.dom4j.Branch;
 
 import java.util.Date;
 

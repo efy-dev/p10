@@ -1,14 +1,14 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
+import com.efeiyi.ec.organization.OrganizationConst;
+import com.efeiyi.ec.organization.dao.UserDao;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.service.UserManager;
 import com.ming800.core.base.dao.XdoDao;
-import com.ming800.core.util.StringUtil;
-import com.ming800.organization.OrganizationConst;
-import com.ming800.organization.dao.UserDao;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.model.MyUser;
-import com.ming800.organization.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
+import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

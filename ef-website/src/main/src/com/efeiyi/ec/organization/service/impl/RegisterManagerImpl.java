@@ -1,9 +1,9 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.service.InitializeManager;
+import com.efeiyi.ec.organization.service.RegisterManager;
 import com.ming800.core.base.dao.XdoDao;
-import com.ming800.organization.model.BigUser;
-import com.ming800.organization.service.InitializeManager;
-import com.ming800.organization.service.RegisterManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

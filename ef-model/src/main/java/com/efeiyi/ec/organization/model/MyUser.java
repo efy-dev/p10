@@ -53,7 +53,6 @@ public class MyUser implements Serializable, UserDetails {
 
     private Integer utype; //总部用户，分公司用户
 
-    private String cityShotType;
 
     private BigUser bigUser;
 
@@ -81,14 +80,6 @@ public class MyUser implements Serializable, UserDetails {
         this.role = role;
     }
 
-    @Column(name = "city_id")
-    public String getCityShotType() {
-        return cityShotType;
-    }
-
-    public void setCityShotType(String cityShotType) {
-        this.cityShotType = cityShotType;
-    }
 
     @Column(name = "utype")
     public Integer getUtype() {
