@@ -25,7 +25,7 @@ public class ProductDescription {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public Product getProduct() {
         return product;

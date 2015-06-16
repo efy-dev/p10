@@ -1,6 +1,7 @@
 package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.UserAddress;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class PurchaseOrder {
     private Date createDatetime;
     private String payWay;
     private Consumer user;
+    private UserAddress userAddress;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,5 +77,14 @@ public class PurchaseOrder {
 
     public void setUser(Consumer user) {
         this.user = user;
+    }
+
+    @Column
+    public UserAddress getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
     }
 }

@@ -34,7 +34,7 @@ public class ProductCategory {
         this.name = name;
     }
 
-    @Column(name = "fathercategory")
+    @Column(name = "fathercategory_id")
     public String getFatherCategory() {
         return fatherCategory;
     }

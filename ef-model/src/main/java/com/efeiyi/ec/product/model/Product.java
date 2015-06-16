@@ -51,7 +51,7 @@ public class Product {
         this.serial = serial;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
@@ -61,7 +61,7 @@ public class Product {
         this.tenant = tenant;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     public ProductCategory getCategory() {
         return category;
