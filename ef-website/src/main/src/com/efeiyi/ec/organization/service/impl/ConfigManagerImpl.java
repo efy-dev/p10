@@ -1,6 +1,7 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
-import com.ming800.organization.service.ConfigManager;
+
+import com.efeiyi.ec.organization.service.ConfigManager;
 
 /**
  * Created with IntelliJ IDEA.
