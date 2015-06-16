@@ -1,4 +1,4 @@
-package com.ming800.organization.service.impl;
+package com.efeiyi.ec.organization.service.impl;
 
 import com.ming800.core.base.service.impl.QueryHandler;
 import com.ming800.core.does.model.XQuery;
