@@ -1,4 +1,4 @@
-package com.ming800.core.taglib;
+package com.efeiyi.ec.tag;
 
 import com.efeiyi.ec.organization.model.Permission;
 import com.ming800.core.does.model.Do;

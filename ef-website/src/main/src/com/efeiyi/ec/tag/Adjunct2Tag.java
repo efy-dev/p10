@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   AdjunctTag.java
 
-package com.ming800.core.taglib;
+package com.efeiyi.ec.tag;
 
 import com.ming800.core.p.PConst;
 

@@ -1,14 +1,14 @@
 package com.ming800.organization.service.impl;
 
 import com.ming800.core.base.dao.XdoDao;
-import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
 import com.ming800.core.util.StringUtil;
 import com.ming800.organization.OrganizationConst;
 import com.ming800.organization.dao.UserDao;
 import com.ming800.organization.model.BigUser;
 import com.ming800.organization.model.MyUser;
 import com.ming800.organization.service.UserManager;
+import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
