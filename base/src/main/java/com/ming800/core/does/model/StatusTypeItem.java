@@ -1,6 +1,7 @@
 package com.ming800.core.does.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created with IntelliJ IDEA.
