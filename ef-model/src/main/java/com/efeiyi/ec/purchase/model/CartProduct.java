@@ -38,8 +38,8 @@ public class CartProduct {
         this.cart = cart;
     }
 
-    @OneToOne
-    @Column(name="product_id")
+    @ManyToOne
+    @JoinColumn(name="product_id")
     public Product getProduct() {
         return product;
     }

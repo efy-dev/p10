@@ -275,7 +275,7 @@
         <dependency>    <!--测试时使用  会导致打包时多引入几个tomcat jar包-->
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
-            <version>7.0.35</version>
+            <version>8.0.23</version>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
