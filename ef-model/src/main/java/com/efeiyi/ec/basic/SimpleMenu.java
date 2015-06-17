@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2015/6/16.
  */
 @Entity
-@Table(name="simple_menu")
+@Table(name="basic_simple_menu")
 public class SimpleMenu {
     private String id;
     private String name;

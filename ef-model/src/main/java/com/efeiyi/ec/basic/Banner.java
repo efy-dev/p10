@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/6/16.
  */
 @Entity
-@Table(name="banner")
+@Table(name="basic_banner")
 public class Banner {
     private String id;
     private String title;

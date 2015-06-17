@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/6/16.
  */
 @Entity
-@Table(name="simple_menu_item")
+@Table(name="basic_simple_menu_item")
 public class SimpleMenuItem {
     private String id;
     private String name;
