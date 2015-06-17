@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Time: 下午2:50
  * To change this template use File | Settings | File Templates.
  */
-public class Menu {
+public class JmenuTree {
 
     private String name;
     private HashMap<String, Jmenu> jmenuHashMap;

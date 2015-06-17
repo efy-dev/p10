@@ -6,7 +6,7 @@ import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.QueryCondition;
 import com.ming800.core.does.model.TypeXml;
-import com.ming800.core.does.service.TypeXmlManager;
+//import com.ming800.core.does.service.TypeXmlManager;
 import com.ming800.core.p.model.*;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.base.util.ReflectUtil;
@@ -35,14 +35,14 @@ public class ModuleCheckController {
     @Autowired
     private ModuleManager moduleManager;
 
-    @Autowired
-    private TypeXmlManager typeXmlManager;
+/*    @Autowired
+    private TypeXmlManager typeXmlManager;*/
 
     @RequestMapping("/checkField")
     public ModelAndView checkField(ModelMap modelMap) throws Exception {
 
 
-        Map<String, TypeXml> typeXmlMap = typeXmlManager.fetchTypeXmlMap();
+        //Map<String, TypeXml> typeXmlMap = typeXmlManager.fetchTypeXmlMap();
 
 
         List<CheckFieldBean> checkFieldBeanList = new ArrayList<>();
@@ -61,10 +61,10 @@ public class ModuleCheckController {
 
                 int flag = 0;
                 String xentityType = xentity.getName();
-                if (!checkXmlProperty(xentity.getType(), typeXmlMap.get("xentity.type").getTypeXmlList())) {
+/*                if (!checkXmlProperty(xentity.getType(), typeXmlMap.get("xentity.type").getTypeXmlList())) {
                     flag = 1;
                     xentityType += "<br/>type=" + xentity.getType() + "异常";
-                }
+                }*/
 
 
                 Map<String, Do> tempDoMap = xentity.getDoMap();
@@ -82,10 +82,10 @@ public class ModuleCheckController {
                         tempDoException += "<br/>result=" + tempDoResult + "异常";
                     }
 
-                    if (!checkXmlProperty(tempDo.getType(), typeXmlMap.get("do.type").getTypeXmlList())) {
+/*                    if (!checkXmlProperty(tempDo.getType(), typeXmlMap.get("do.type").getTypeXmlList())) {
                         doFlag = 3;
                         tempDoException += "<br/>type=" + tempDo.getType() + "异常";
-                    }
+                    }*/
 
                     if (tempDo.getDoQueryList() != null) {
                         for (DoQuery tempDoQuery : tempDo.getDoQueryList()) {
@@ -110,11 +110,11 @@ public class ModuleCheckController {
                                             checkFieldNames += queryCondition.getLabel() + "(" + queryCondition.getName() + ")" + "<br/>";
                                         } else {
 
-                                            if (!checkXmlProperty(queryCondition.getInputType(), typeXmlMap.get("inputType").getTypeXmlList())) {
+/*                                            if (!checkXmlProperty(queryCondition.getInputType(), typeXmlMap.get("inputType").getTypeXmlList())) {
                                                 checkFieldNames += queryCondition.getLabel() + "(inputType:" + queryCondition.getInputType() + ")" + "<br/>";
                                             } else if (!checkXmlProperty(queryCondition.getDataType(), typeXmlMap.get("dataType").getTypeXmlList())) {
                                                 checkFieldNames += queryCondition.getLabel() + "(dataType:" + queryCondition.getDataType() + ")" + "<br/>";
-                                            }
+                                            }*/
 
                                         }
                                     }

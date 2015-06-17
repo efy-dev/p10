@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu name="edu">
+<jmenuTree name="edu">
 
     <jmenu id="organmgmt"><!--系统管理-->
         <jnode url="" setting="" access="admin,manager" tenant="" text_zh_CN="组织机构管理"
@@ -363,7 +363,7 @@
     </jmenu>
 
 
-</menu>
+</jmenuTree>
 
 
 
