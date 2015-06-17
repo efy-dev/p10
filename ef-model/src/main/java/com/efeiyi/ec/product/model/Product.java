@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Product {
     private ProductCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
+    private ProductDescription productDescription;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -97,5 +99,15 @@ public class Product {
 
     public void setProductPictureList(List<ProductPicture> productPictureList) {
         this.productPictureList = productPictureList;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_description_id")
+    public ProductDescription getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(ProductDescription productDescription) {
+        this.productDescription = productDescription;
     }
 }
