@@ -7,6 +7,8 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 
+    <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.organization.LoginSuccessHandler"/>
+    <b:bean id="loginFailureHandler" class="com.efeiyi.ec.organization.LoginFailureHandler"/>
     <http realm="Contacts Realm" use-expressions="true">
 
         <intercept-url pattern="/**/order/form.do" access="isAuthenticated()"/>

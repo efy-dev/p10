@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <menus>
-    <menu name="main">
+    <jmenuTree name="main">
         <item name="favorite" label="我的收藏场景" father="" url="/pc/consumerMenu/xm.do?qm=plistFavoriteScene_default"/>
 
-    </menu>
-    <menu name="consumer">
+    </jmenuTree>
+    <jmenuTree name="consumer">
 
         <item name="myOrder" label="我的订单" father="交易中心" url="/pc/consumerMenu/xm.do?qm=plistPCPurchaseOrder_default"/>
         <item name="shopCar" label="充值优惠" father="" url="#"/>
@@ -21,8 +21,8 @@
         <item name="receiveAddress" label="收货地址" father="" url="/pc/consumerMenu/xm.do?qm=plistReceiveAddress_default"/>
         <item name="modifyPassword" label="修改密码" father="" url="/pc/consumerMenu/modifyPasswordView.do"/>
 
-    </menu>
-    <menu name="photographer">
+    </jmenuTree>
+    <jmenuTree name="photographer">
         <item name="myOrder" label="我的订单" father="交易中心"
               url="/pc/photographerMenu/xm.do?qm=plistPCPhotographerPurchaseOrder_default"/>
         <item name="myArrangement" label="档期管理" father="" url="/pc/photographerMenu/viewArrangement.do"/>
@@ -41,5 +41,5 @@
         <item name="tipsLevelsInfo" label="摄影师星级说明" father="" url="/pc/photographerMenu/document/tipsLevelsInfo"/>
         <item name="tipsUpgradeRule" label="摄影师星级升级规则" father="" url="/pc/photographerMenu/document/tipsUpgradeRule"/>
         <item name="tipsRecommendRule" label="摄影作品推荐规则" father="" url="/pc/photographerMenu/document/tipsRecommendRule"/>
-    </menu>
+    </jmenuTree>
 </menus>

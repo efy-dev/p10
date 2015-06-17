@@ -39,8 +39,8 @@ public class District implements Serializable {
         this.name = name;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "opened_city_id", referencedColumnName = "opened_city_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     public City getCity() {
         return city;
     }

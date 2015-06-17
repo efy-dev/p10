@@ -17,9 +17,9 @@ import java.io.IOException;
  * Time: 下午3:26
  * To change this template use File | Settings | File Templates.
  */
-public class MyFilter implements Filter {
+public class MultiDataSourceFilter implements Filter {
 
-    public MyFilter() {
+    public MultiDataSourceFilter() {
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {

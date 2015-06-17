@@ -40,7 +40,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- menu -->
+    <!-- jmenuTree -->
     <bean id="jmenuManagerImpl" class="com.ming800.core.p.service.impl.JmenuManagerImpl" init-method="initMenu"
           scope="singleton"/>
 
@@ -53,8 +53,8 @@
     <!-- 获取spring上下文applicationContext  用于java读取国际化文件等 -->
     <bean id="applicationContextUtil" class="com.ming800.core.util.ApplicationContextUtil" scope="singleton"/>
 
-    <bean id="typeXmlManagerImpl" class="com.ming800.core.does.service.impl.TypeXmlManagerImpl"
-          init-method="readXmlFiles" scope="singleton"/>
+<!--    <bean id="typeXmlManagerImpl" class="com.ming800.core.does.service.impl.TypeXmlManagerImpl"
+          init-method="readXmlFiles" scope="singleton"/>-->
     <bean id="moduleManagerImpl" class="com.ming800.core.does.service.impl.ModuleManagerImpl" init-method="readXmlFiles"
           scope="singleton"/>
 <!--    <bean id="checkTaskManagerImpl" class="com.ming800.core.develop.service.impl.CheckTaskManagerImpl"

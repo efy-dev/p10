@@ -12,7 +12,7 @@
         <pattern>/call/saveCallRecord.do*</pattern>
         <pattern>/call/play.do*</pattern>
         <pattern>/basic/xmp.do*</pattern>
-        <pattern>/menu/menu.do*</pattern>
+        <pattern>/jmenuTree/jmenuTree.do*</pattern>
         <!--<pattern>/reg/saveEnrollUser.do*</pattern>-->
     </excludes>
     <decorator name="printable" page="manage/contentPrintableDec.jsp"/>

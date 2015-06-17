@@ -3,8 +3,8 @@ package com.ming800.core.p.service.impl;
 
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Jmenu;
+import com.ming800.core.p.model.JmenuTree;
 import com.ming800.core.p.model.Jnode;
-import com.ming800.core.p.model.Menu;
 import com.ming800.core.p.service.GlobalManager;
 import com.ming800.core.p.service.JmenuManager;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -34,7 +34,7 @@ public class JmenuManagerImpl implements JmenuManager {
     private static final String MENU_ADVANCE = "/setting/jmenu_advance.xml";
     private static final String MENU_EDU = "/setting/jmenu_edu.xml";
     //    private static HashMap<String, Jmenu> jmenuMap;
-    private static HashMap<String, Menu> menuHashMap;
+    private static HashMap<String, JmenuTree> menuHashMap;
     private static int jmenuId = 1;
     private DoManager doManager;
 
@@ -43,16 +43,16 @@ public class JmenuManagerImpl implements JmenuManager {
 
 
     private static void initMenu() {
-        menuHashMap = new HashMap<>();
+/*        menuHashMap = new HashMap<>();
         File tempFile = new File(JmenuManagerImpl.class.getClassLoader().getResource("/").getPath());
         String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();
 
-        File dir_standard = new File(tempFileName + "/home/setting3/jmenu_standard.xml");
-        File dir_professional = new File(tempFileName + "/home/setting3/jmenu_professional.xml");
-        File dir_advance = new File(tempFileName + "/home/setting3/jmenu_advance.xml");
-        File dir_edu = new File(tempFileName + "/home/setting3/jmenu_edu.xml");
+        File dir_standard = new File(tempFileName + "/home/setting/jmenu_standard.xml");
+        File dir_professional = new File(tempFileName + "/home/setting/jmenu_professional.xml");
+        File dir_advance = new File(tempFileName + "/home/setting/jmenu_advance.xml");
+        File dir_edu = new File(tempFileName + "/home/setting/jmenu_edu.xml");
 
-        /*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*/
+        *//*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*//*
         Document infoDocument_standard = null;
         if (dir_standard.exists()) {
             try {
@@ -101,15 +101,15 @@ public class JmenuManagerImpl implements JmenuManager {
             infoDocument_edu = ResourcesUtil.getDocument(MENU_EDU);
         }
 
-        Menu menu_standard = initJmenuMap(infoDocument_standard);
-        Menu menu_professional = initJmenuMap(infoDocument_professional);
-        Menu menu_advance = initJmenuMap(infoDocument_advance);
-        Menu menu_edu = initJmenuMap(infoDocument_edu);
+        JmenuTree jmenuTree_standard = initJmenuMap(infoDocument_standard);
+        JmenuTree jmenuTree_professional = initJmenuMap(infoDocument_professional);
+        JmenuTree jmenuTree_advance = initJmenuMap(infoDocument_advance);
+        JmenuTree jmenuTree_edu = initJmenuMap(infoDocument_edu);
 
-        menuHashMap.put(menu_standard.getName(), menu_standard);
-        menuHashMap.put(menu_professional.getName(), menu_professional);
-        menuHashMap.put(menu_advance.getName(), menu_advance);
-        menuHashMap.put(menu_edu.getName(), menu_edu);
+        menuHashMap.put(jmenuTree_standard.getName(), jmenuTree_standard);
+        menuHashMap.put(jmenuTree_professional.getName(), jmenuTree_professional);
+        menuHashMap.put(jmenuTree_advance.getName(), jmenuTree_advance);
+        menuHashMap.put(jmenuTree_edu.getName(), jmenuTree_edu);*/
     }
 
     private HashMap<String, Jmenu> fetchJmenuMap() {
@@ -128,8 +128,8 @@ public class JmenuManagerImpl implements JmenuManager {
     /**
      * 将菜单对应的xml文件转为Jmenu对象 并存入jmenuMap
      */
-    private static Menu initJmenuMap(Document infoDocument) {
-        Menu menu = new Menu();
+    private static JmenuTree initJmenuMap(Document infoDocument) {
+        JmenuTree jmenuTree = new JmenuTree();
 //        Document infoDocument = ResourcesUtil.getDocument(xmlPath);
         if (infoDocument != null) {
 
@@ -157,11 +157,11 @@ public class JmenuManagerImpl implements JmenuManager {
                 jmenuMap.put(jmenu.getId(), jmenu);
             }
 
-            menu.setName(name);
-            menu.setJmenuHashMap(jmenuMap);
+            jmenuTree.setName(name);
+            jmenuTree.setJmenuHashMap(jmenuMap);
         }
 
-        return menu;
+        return jmenuTree;
     }
 
     /**
