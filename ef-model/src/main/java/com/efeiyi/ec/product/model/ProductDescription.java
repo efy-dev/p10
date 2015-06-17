@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "product_description")
 public class ProductDescription {
     private String id;
-    private Product product;
     private String content;
 
     @Id
@@ -25,15 +24,6 @@ public class ProductDescription {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 
     @Column(name = "content")
     public String getContent() {
