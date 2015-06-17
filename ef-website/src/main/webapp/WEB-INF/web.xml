@@ -26,7 +26,15 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -46,7 +54,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- 拦截匹配的请求，这里所有请求采用名字为lei-dispatcher的DispatcherServlet处理 -->
+    <!-- 拦截匹配的请求，这里所有请求采用名字为dispatcher的DispatcherServlet处理 -->
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
