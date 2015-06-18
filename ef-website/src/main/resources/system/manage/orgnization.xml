@@ -31,7 +31,7 @@
 
         <entity name="XxBigUser" type="defined"
                 label="用户管理" basic="simple" others=""
-                model="com.efeiyi.ec.organization.model.BigUser">
+                model="com.efeiyi.ec.website.organization.model.BigUser">
             <fields>
                 <field name="username" label="名称" inputType="text"/>
                 <field name="name" label="别名" inputType="text"/>
@@ -184,7 +184,7 @@
                     label="七天内过生日的老师"
                     result="xpage"><!--员工档案-->
                     <query name="default" type="auto" label="默认" orderBy="createDatetime:desc"
-                           execute="com.efeiyi.ec.organization.service.impl.BigUserByBirthDayHandler">
+                           execute="com.efeiyi.ec.website.organization.service.impl.BigUserByBirthDayHandler">
                         <condition label="校区" name="teachArea.id" inputType="default" defaultValue="${ALL_TEACH_AREA}"
                                    operation="in"/>
                         <condition label="状态" name="theStatus" inputType="default" defaultValue="1,2,3" operation="in"
@@ -334,12 +334,12 @@
 
 
                 <do name="formXxBigUser"
-                    execute="com.efeiyi.ec.organization.controller.BigUserFormHandler"
+                    execute="com.efeiyi.ec.website.organization.controller.BigUserFormHandler"
                     result="/organization/user/bigUserForm"/>
                 <do name="removeXxBigUser"
                     result="redirect:/basic/xm.do?qm=plistBigUser_default"/>
                 <do name="viewXxBigUser"
-                    execute="com.efeiyi.ec.organization.controller.BigUserViewHandler"
+                    execute="com.efeiyi.ec.website.organization.controller.BigUserViewHandler"
                     result="/organization/user/bigUserView"/>
                 <do name="saveOrUpdateXxBigUser"
                     result="redirect:/basic/xm.do?qm=plistBigUser_default">
@@ -378,7 +378,7 @@
 
         <entity name="XxRole"
                 label="角色" basic="" others=""
-                model="com.efeiyi.ec.organization.model.Role">
+                model="com.efeiyi.ec.website.organization.model.Role">
             <fields>
                 <field name="name" label="名称" inputType="text"/>
                 <field name="tenant.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
@@ -490,7 +490,7 @@
 
 
                 <do name="saveOrUpdateXxRole"
-                    execute="com.efeiyi.ec.organization.controller.RoleHandler"
+                    execute="com.efeiyi.ec.website.organization.controller.RoleHandler"
                     result="redirect:/basic/xm.do?qm=plistRole_default">
                     <page>
                         <fields>
@@ -560,7 +560,7 @@
         </entity>
 
         <entity name="User" label="用户" basic="simple" others=""
-                model="com.efeiyi.ec.organization.model.User">
+                model="com.efeiyi.ec.website.organization.model.User">
             <fields>
                 <field name="username" label="用户名" inputType="text"/>
                 <field name="name" label="姓名" inputType="text"/>
@@ -577,7 +577,7 @@
         </entity>
 
         <entity name="Province" label="省" basic="" others=""
-                model="com.efeiyi.ec.organization.model.Province">
+                model="com.efeiyi.ec.website.organization.model.Province">
             <fields>
                 <field name="name" label="省" inputType="text"/>
             </fields>
@@ -615,7 +615,7 @@
 
 
         <entity name="ProvinceCity" label="市" basic="" others=""
-                model="com.efeiyi.ec.organization.model.City">
+                model="com.efeiyi.ec.website.organization.model.City">
             <fields>
                 <field name="name" label="市" inputType="text"/>
                 <field name="province.id" label="省份" inputType="dialog_do" key="ProvinceCity.province"
@@ -683,7 +683,7 @@
         </entity>
 
         <entity name="District" label="区"
-                model="com.efeiyi.ec.organization.model.District">
+                model="com.efeiyi.ec.website.organization.model.District">
             <fields>
                 <field name="name" label="名称" inputType="text"/>
                 <!--<field name="city.id" label="城市" inputType="dialog_do" key="" reference="City"/>-->
