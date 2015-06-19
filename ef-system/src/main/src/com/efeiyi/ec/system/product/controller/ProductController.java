@@ -26,7 +26,7 @@ public class ProductController extends BaseController {
     public ModelAndView getProductList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
         modelMap.put("listProduct", baseManager.listObject("from Product"));
-        return new ModelAndView("/Jsp/ListProduct", modelMap);
+        return new ModelAndView("/ListProduct", modelMap);
     }
 
 
