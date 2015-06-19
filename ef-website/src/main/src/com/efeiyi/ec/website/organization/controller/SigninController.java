@@ -49,12 +49,12 @@ public class SigninController extends BaseController {
 
     @Autowired
     private MessageVerifyManager messageVerifyManager;
-
+/*
     @Autowired
     private CouponManager couponManager;
 
     @Autowired
-    private SmsCheckManager smsCheckManager;
+    private SmsCheckManager smsCheckManager;*/
 
     /**
      * 查看当前用户名是否存在
@@ -122,7 +122,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/verification/send.do"})
     @ResponseBody
     public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
-        String cellPhoneNumber = request.getParameter("phone");
+       /* String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
         boolean validate = this.smsCheckManager.validate(cellPhoneNumber, String.valueOf(request.getSession().getAttribute(cellPhoneNumber)));
@@ -135,7 +135,8 @@ public class SigninController extends BaseController {
             }
         } else {
             return false;
-        }
+        }*/
+        return false;
     }
     /**
      * 跳转到注册页面的controller
