@@ -7,6 +7,7 @@ import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.ming800.core.base.dao.XdoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * Time: 下午4:58
  * To change this template use File | Settings | File Templates.
  */
+@Transactional
 @Service
 public class BranchManagerImpl implements BranchManager {
 
