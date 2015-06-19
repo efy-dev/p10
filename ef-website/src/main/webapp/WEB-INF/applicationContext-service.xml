@@ -24,7 +24,7 @@
 
     <!-- 定义切面 -->
     <aop:config>
-        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))"/>
+        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(**.service.*Manager.*(..))"/>
     </aop:config>
 
     <tx:annotation-driven/>

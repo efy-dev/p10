@@ -7,13 +7,10 @@ package com.efeiyi.ec.website.organization.controller;
 import com.efeiyi.ec.website.organization.model.BigUser;
 import com.efeiyi.ec.website.organization.model.User;
 import com.efeiyi.ec.website.organization.service.BranchManager;
-import com.efeiyi.ec.website.organization.service.RegisterManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.MessageVerifyManager;
-import com.ming800.core.util.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +38,6 @@ public class SigninController extends BaseController {
     private RoleManager roleManager;
     //@Autowired
     private BranchManager branchManager;
-   // @Autowired
-    private RegisterManager registerManager;
 
     @Autowired
     private BaseManager baseManager;
