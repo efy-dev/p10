@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
+
+    <entities>
+        <entity name="ProductList" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.website.product.model.Product">
+            <fields>
+                <field name="id" label="产品" inputType="text"/>
+                <field name="name" label="产品名字" inputType="text"/>
+            </fields>
+            <does>
+                <!--<do name="plistPCPurchaseOrder" access="$consumer"-->
+                    <!--label="消费者用户订单查询"-->
+                    <!--result="/order/orderList">&lt;!&ndash;订单查询&ndash;&gt;-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition label="订单主键" name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>-->
+                        <!--<condition label="订单状态" name="theStatus" dataType="int" defaultValue="0" operation="ne"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+                <!--<do name="listPCPurchaseOrderAlbum" access="$consumer" label="用户-我的相册" result="/order/albumList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"></condition>-->
+                    <!--</query>-->
+
+                <!--</do>-->
+
+                <!--<do name="plistPCPhotographerPurchaseOrder" access="$photographer" label="摄影师-我的订单"-->
+                    <!--result="/order/photographerOrderList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="photographer.id" defaultValue="${MY_USER}" operation="eq"></condition>-->
+                        <!--<condition name="theStatus" label="数据状态"  dataType="int" defaultValue="1" operation="gt"/>-->
+                    <!--</query>-->
+                <!--</do>-->
+
+                <do name="removeProduct" label="删除产品" access="" result="json"/>
+                <do name="listProduct" label="产品列表" access="" result="/productList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+    </entities>
+
+</module>
