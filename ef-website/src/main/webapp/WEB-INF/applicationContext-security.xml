@@ -9,9 +9,6 @@
 
     <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.website.organization.LoginSuccessHandler"/>
     <b:bean id="loginFailureHandler" class="com.efeiyi.ec.website.organization.LoginFailureHandler"/>
-    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
-
-
 
     <http realm="Contacts Realm" use-expressions="true">
 
@@ -35,7 +32,7 @@
 
 
     </http>
-
+    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
     <authentication-manager>
         <authentication-provider user-service-ref="userManager">
             <password-encoder hash="sha"/>
