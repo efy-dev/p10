@@ -1,7 +1,7 @@
 package com.efeiyi.ec.website.organization.controller;
 
 import com.efeiyi.ec.website.organization.OrganizationConst;
-import com.efeiyi.ec.website.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;

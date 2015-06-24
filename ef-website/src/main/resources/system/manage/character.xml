@@ -775,7 +775,7 @@
 
         <entity name="User" label="用户"
                 basic="new,delete,edit,view" other=""
-                model="com.efeiyi.ec.website.organization.model.User">
+                model="com.efeiyi.ec.organization.model.User">
             <fields>
                 <field name="username" label="账号" inputType="text"></field>
                 <field name="name" label="名称" inputType="text"></field>
@@ -904,7 +904,7 @@
 
         <entity name="Role" label="角色"
                 basic="new,delete,edit,view" other=""
-                model="com.efeiyi.ec.website.organization.model.Role">
+                model="com.efeiyi.ec.organization.model.Role">
             <fields>
 
                 <field name="basicType" label="基础类型" inputType="radio_status" key="Role.basicType">
@@ -1208,7 +1208,7 @@
 
         <entity name="BigUser" label="所有用户"
                 basic="new,delete,edit,view" other=""
-                model="com.efeiyi.ec.website.organization.model.BigUser">
+                model="com.efeiyi.ec.organization.model.BigUser">
             <fields>
                 <field name="createDatetime" label="创建日期" inputType="date" dataType="datetime"/>
                 <field name="lastLoginDatetime" label="最后登陆时间" inputType="date" dataType="datetime"/>

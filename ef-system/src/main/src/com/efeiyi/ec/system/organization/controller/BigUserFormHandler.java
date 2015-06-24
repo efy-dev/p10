@@ -1,7 +1,7 @@
 package com.efeiyi.ec.system.organization.controller;
 
 
-import com.efeiyi.ec.website.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.base.model.MethodCache;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;

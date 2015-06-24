@@ -2,7 +2,7 @@ package com.efeiyi.ec.system.product.controller;
 
 
 
-import com.efeiyi.ec.website.product.model.Product;
+import com.efeiyi.ec.product.model.Product;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;

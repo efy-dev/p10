@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website.tag;
 
-import com.efeiyi.ec.website.organization.model.User;
+import com.efeiyi.ec.organization.model.User;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.util.ApplicationContextUtil;
 

@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.website.organization.model.User;
+import com.efeiyi.ec.organization.model.User;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
