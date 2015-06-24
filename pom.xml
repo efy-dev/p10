@@ -279,9 +279,9 @@
         </dependency>
 
         <dependency>
-            <groupId>opensymphony</groupId>
+            <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
-            <version>2.4.2</version>
+            <version>3.0.0</version>
         </dependency>
 
         <dependency>    <!--测试时使用  会导致打包时多引入几个tomcat jar包-->
