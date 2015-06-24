@@ -7,7 +7,7 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 
-    <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.website.organization.LoginSuccessHandler"/>
+    <!--<b:bean id="loginSuccessHandler" class="com.efeiyi.ec.website.organization.LoginSuccessHandler"/>
     <b:bean id="loginFailureHandler" class="com.efeiyi.ec.website.organization.LoginFailureHandler"/>
 
     <http realm="Contacts Realm" use-expressions="true">
@@ -21,7 +21,7 @@
         <intercept-url pattern="/**/consumerMenu/**" access="isAuthenticated()"/>
         <intercept-url pattern="/**/photographerMenu/**" access="isAuthenticated()" />
 
-        <!--<intercept-url pattern="/**/photographerMenu/**" access="i" />-->
+        &lt;!&ndash;<intercept-url pattern="/**/photographerMenu/**" access="i" />&ndash;&gt;
 
         <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
         <form-login login-page="/pc/login.do" login-processing-url="/j_spring_security_check"
@@ -37,6 +37,6 @@
         <authentication-provider user-service-ref="userManager">
             <password-encoder hash="sha"/>
         </authentication-provider>
-    </authentication-manager>
+    </authentication-manager>-->
 
 </b:beans>

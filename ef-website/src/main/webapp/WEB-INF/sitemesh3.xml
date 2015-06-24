@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<sitemesh>
+    &lt;!&ndash; 指明满足“/*”的页面，将被“/WEB-INF/views/decorators/decorator.html”所装饰 &ndash;&gt;
+    <mapping path="/*" decorator="/WEB-INF/jsp/layouts/main.jsp" />
+    &lt;!&ndash; 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 &ndash;&gt;
+    <mapping path="/login" exclue="true" />
+</sitemesh>-->
 <sitemesh>
     <property name="decorators-file" value="decorators.xml"/>
     <excludes file="${decorators-file}"/>

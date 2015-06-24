@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -148,9 +149,14 @@ public class SigninController extends BaseController {
     /**
      * 跳转到登录页面的controller
      */
+    @RequestMapping("/toLogin.do")
+    public String toLogin(Model model){
+        return "/login";
+    }
+
     @RequestMapping(value = {"login.do", "login"})
-    public String login(HttpServletRequest request, Model model) {
-        if (request.getParameter("redirect") != null) {
+    public String login(HttpServletRequest request , HttpServletResponse response, Model model) {
+        /*if (request.getParameter("redirect") != null) {
             String redirectUrl = request.getParameter("redirect");
             model.addAttribute("redirect", redirectUrl);
         }
@@ -158,9 +164,29 @@ public class SigninController extends BaseController {
             model.addAttribute("message", "用户名密码不匹配");
         } else if ("1".equals(request.getParameter("updatePsw"))) {
             model.addAttribute("message", "密码修改成功");
+        }*/
+        int result = 0;
+        String username = request.getParameter("j_username");
+        String password = request.getParameter("j_password");
+        if (username != null && !"".equals(username) && password != null && !"".equals(password)){
+            if (username.equals("admin") && password.equals("123456")){
+                model.addAttribute("message","登录成功!");
+                result = 1;
+            }else{
+                model.addAttribute("message","用户名或密码输入错误!");
+                result = -1;
+            }
+        }else{
+            model.addAttribute("message","用户名或密码不能为空!");
+            result = -2;
         }
-        model.addAttribute("enrollUsername", request.getParameter("enrollUsername"));
-        return (request) + "/login";
+        model.addAttribute("result",result);
+        if (result == 1){
+            return "/loginForm";
+        }else if(result == -1 || result == -2){
+            return  "/login";
+        }
+        return null;
     }
 
 }
