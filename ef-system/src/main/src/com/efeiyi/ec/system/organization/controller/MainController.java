@@ -3,7 +3,7 @@ package com.efeiyi.ec.system.organization.controller;
 
 import com.efeiyi.ec.system.organization.service.BranchManager;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.website.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.GlobalManager;

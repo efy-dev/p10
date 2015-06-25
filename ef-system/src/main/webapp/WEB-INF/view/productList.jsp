@@ -17,23 +17,23 @@
 </head>
 <body>
   <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
-    <%--<tr>--%>
-    <%--<td>产品id</td>--%>
-      <%--<td>产品名称</td>--%>
-      <%--<td>图片地址</td>--%>
-      <%--<td>分类</td>--%>
-      <%--<td>价格</td>--%>
-    <%--</tr>--%>
+    <tr>
+      <td>产品id</td>
+      <td>产品名称</td>
+      <td>图片地址</td>
+      <td>价格</td>
+      <td>系列</td>
+    </tr>
 
-      <%--<c:forEach items="${objectList}" var="product">--%>
-    <%--<tr>--%>
-        <%--<td>${product.id}</td>--%>
-        <%--<td>${product.name}</td>--%>
-        <%--<td>${product.picture_url}</td>--%>
-        <%--<td>${product.category}</td>--%>
-        <%--<td>${product.price}</td>--%>
-    <%--</tr>--%>
-      <%--</c:forEach>--%>
+      <c:forEach items="${objectList}" var="product">
+    <tr>
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.picture_url}</td>
+        <td>${product.price}</td>
+        <td>${product.serial}</td>
+    </tr>
+      </c:forEach>
     <%--<c:forEach items="${objectList}" var="product">--%>
       <%--<tr>--%>
         <%--<td><c:out value="${product.id}"></c:out></td>--%>
@@ -44,10 +44,10 @@
       <%--</tr>--%>
     <%--</c:forEach>--%>
 
-    <c:forEach items="${objectList}" var="product">
+    <%--<c:forEach items="${objectList}" var="product">--%>
 
-        ${product.name}
-    </c:forEach>
+        <%--${product.name}--%>
+    <%--</c:forEach>--%>
 
   </table>
 </body>

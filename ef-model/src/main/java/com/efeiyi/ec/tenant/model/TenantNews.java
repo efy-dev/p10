@@ -1,0 +1,66 @@
+package com.efeiyi.ec.tenant.model;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * Created by Administrator on 2015/6/24.
+ */
+@Entity
+@Table(name="tenant_news")
+public class TenantNews {
+    private String id;
+    private String title;
+    private Date createDatetime;
+    private String creator;
+    private String content;
+
+    @Id
+    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
+    @GeneratedValue(generator = "id")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Column(name="title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name="createdatetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
+    }
+
+    @Column(name="creator")
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    @Column(name="content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}

@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website.tag;
 
-import com.efeiyi.ec.website.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.taglib.ScopeTag;
 
 import javax.servlet.jsp.JspException;

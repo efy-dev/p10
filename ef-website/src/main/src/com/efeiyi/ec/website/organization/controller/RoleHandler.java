@@ -1,7 +1,7 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.website.organization.model.Permission;
-import com.efeiyi.ec.website.organization.model.Role;
+import com.efeiyi.ec.organization.model.Permission;
+import com.efeiyi.ec.organization.model.Role;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;

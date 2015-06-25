@@ -4,8 +4,8 @@ package com.efeiyi.ec.website.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.website.organization.model.BigUser;
-import com.efeiyi.ec.website.organization.model.User;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.ming800.core.base.controller.BaseController;

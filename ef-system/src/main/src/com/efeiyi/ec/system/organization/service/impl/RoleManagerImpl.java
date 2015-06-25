@@ -2,7 +2,7 @@ package com.efeiyi.ec.system.organization.service.impl;
 
 import com.efeiyi.ec.system.organization.service.RoleManager;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.website.organization.model.Role;
+import com.efeiyi.ec.organization.model.Role;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.does.model.ConfigProperty;
 import com.ming800.core.does.model.Module;

@@ -2,8 +2,8 @@ package com.efeiyi.ec.website.organization.service.impl;
 
 import com.efeiyi.ec.website.organization.OrganizationConst;
 import com.efeiyi.ec.website.organization.dao.UserDao;
-import com.efeiyi.ec.website.organization.model.BigUser;
-import com.efeiyi.ec.website.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
