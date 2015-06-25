@@ -6,48 +6,101 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 13-1-8
- * Time: 下午5:00
+ * Time: 下午5:01
  * To change this template use File | Settings | File Templates.
  */
-public interface Page {
+public class Page{
 
-    public String getName();
 
-    public void setName(String name);
+    private String name;
+    private String label;
+    private String type;       /*分页*/
+    private String url;        /*form  页面的保存链接*/
+    private String total;
+    private String sortName;
 
-    public String getLabel();
+    private List<PageField> fieldList;
+    private List<Command> commandList;
+    private List<Command> operationList;
+    private List<Command> batchOperationList;
 
-    public void setLabel(String label);
+    public String getName() {
+        return name;
+    }
 
-    public String getType();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setType(String type);
+    public String getLabel() {
+        return label;
+    }
 
-    public String getUrl();
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-    public void setUrl(String url);
+    public String getType() {
+        return type;
+    }
 
-    public String getTotal();
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public void setTotal(String total);
+    public String getUrl() {
+        return url;
+    }
 
-    public String getSortName();
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-    public void setSortName(String sortName);
+    public String getTotal() {
+        return total;
+    }
 
-    public List<PageField> getFieldList();
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
-    public void setFieldList(List<PageField> fieldList);
+    public String getSortName() {
+        return sortName;
+    }
 
-    public List<Command> getCommandList();
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
+    }
 
-    public void setCommandList(List<Command> commandList);
+    public List<Command> getCommandList() {
+        return commandList;
+    }
 
-    public List<Command> getOperationList();
+    public void setCommandList(List<Command> commandList) {
+        this.commandList = commandList;
+    }
 
-    public void setOperationList(List<Command> operationList);
+    public List<PageField> getFieldList() {
+        return fieldList;
+    }
 
-    public List<Command> getBatchOperationList();
+    public void setFieldList(List<PageField> fieldList) {
+        this.fieldList = fieldList;
+    }
 
-    public void setBatchOperationList(List<Command> batchOperationList);
+    public List<Command> getOperationList() {
+        return operationList;
+    }
+
+    public void setOperationList(List<Command> operationList) {
+        this.operationList = operationList;
+    }
+
+    public List<Command> getBatchOperationList() {
+        return batchOperationList;
+    }
+
+    public void setBatchOperationList(List<Command> batchOperationList) {
+        this.batchOperationList = batchOperationList;
+    }
 }

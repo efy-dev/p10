@@ -3,42 +3,83 @@ package com.ming800.core.does.model;
 /**
  * Created with IntelliJ IDEA.
  * User: ming
- * Date: 12-11-19
- * Time: 上午9:08
+ * Date: 12-11-10
+ * Time: 上午10:03
  * To change this template use File | Settings | File Templates.
  */
-public interface QueryCondition {
+public class QueryCondition{
 
-    public String getName();
+    private String name;
+    private String value;
+    private String label;
+    private String inputType;
+    private String key;
+    private String dataType;
+    private String operation;
+    private Boolean isRequired;
 
-    public void setName(String name);
+    public String getName() {
+        return name;
+    }
 
-    public String getValue();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setValue(String value);
+    public String getValue() {
+        return value;
+    }
 
-    public String getLabel();
+    public void setValue(String value) {
+        this.value = value;
+    }
 
-    public void setLabel(String label);
+    public String getOperation() {
+        return operation;
+    }
 
-    public String getOperation();
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
 
-    public void setOperation(String operation);
+    public String getLabel() {
 
-    public String getInputType();
+        return label;
+    }
 
-    public void setInputType(String inputType);
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-    public String getKey();
+    public String getInputType() {
+        return inputType;
+    }
 
-    public void setKey(String key);
+    public void setInputType(String inputType) {
+        this.inputType = inputType;
+    }
 
-    public String getDataType();
+    public String getKey() {
+        return key;
+    }
 
-    public void setDataType(String dataType);
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-    public Boolean getRequired();
+    public String getDataType() {
+        return dataType;
+    }
 
-    public void setRequired(Boolean required);
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
 
+    public Boolean getRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(Boolean required) {
+        isRequired = required;
+    }
 }
