@@ -124,7 +124,8 @@ public class Product {
         this.status = status;
     }
 
-    @Column(name="project_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="project_id")
     public Project getProject() {
         return project;
     }

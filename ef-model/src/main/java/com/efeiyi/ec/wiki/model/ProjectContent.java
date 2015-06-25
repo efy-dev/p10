@@ -38,7 +38,8 @@ public class ProjectContent {
         this.content = content;
     }
 
-    @Column(name="category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
     public Category getCategory() {
         return category;
     }

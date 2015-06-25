@@ -57,7 +57,8 @@ public class PurchaseOrderPayment {
         this.payWay = payWay;
     }
 
-    @Column(name="user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
     public User getUser() {
         return user;
     }

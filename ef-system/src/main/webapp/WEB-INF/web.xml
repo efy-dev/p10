@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
@@ -72,4 +73,14 @@
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <jsp-config>
+        <!--增加自定义标签 -->
+        <taglib>
+            <!-- 确定标签库的URI-->
+            <taglib-uri>http://java.ming800.com/taglib</taglib-uri>
+            <!-- 确定标签库定义文件的位置 -->
+            <taglib-location>/WEB-INF/taglib/ming800.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
