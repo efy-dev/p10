@@ -95,7 +95,7 @@ public class DoManagerImpl implements DoManager {
 
         for (Node node : nodeList) {
 
-            Do tempDo = new DoXml();
+            Do tempDo = new Do();
             tempDo.setName(node.selectSingleNode("@name").getText());
             tempDo.setXentity(xentity);
 //            tempDo.setModel(node.selectSingleNode("@model").getText());
@@ -112,7 +112,7 @@ public class DoManagerImpl implements DoManager {
 
             if (nodeDoQueryList != null && nodeDoQueryList.size() > 0) {
                 for (Node doQueryNode : nodeDoQueryList) {
-                    DoQuery doQuery = new DoQueryXml();
+                    DoQuery doQuery = new DoQuery();
                     doQuery.setName(doQueryNode.selectSingleNode("@name").getText());
                     doQuery.setLabel(doQueryNode.selectSingleNode("@label").getText());
                     doQuery.setOrderBy(doQueryNode.selectSingleNode("@orderBy") == null ? "" : doQueryNode.selectSingleNode("@orderBy").getText());
@@ -126,7 +126,7 @@ public class DoManagerImpl implements DoManager {
                     List<Node> nodeConditionList = doQueryNode.selectNodes("condition");
                     if (nodeConditionList != null && nodeConditionList.size() > 0) {
                         for (Node conditionNode : nodeConditionList) {
-                            QueryCondition tempQueryCondition = new QueryConditionXml();
+                            QueryCondition tempQueryCondition = new QueryCondition();
 
                             String name = conditionNode.selectSingleNode("@name").getText();
 
@@ -197,7 +197,7 @@ public class DoManagerImpl implements DoManager {
                     List<Node> nodeGroupByList = doQueryNode.selectNodes("groupby");
                     if (nodeGroupByList != null && nodeGroupByList.size() > 0) {
                         for (Node groupByNode : nodeGroupByList) {
-                            Groupby groupBy = new GroupbyXml();
+                            Groupby groupBy = new Groupby();
                             groupBy.setName(groupByNode.selectSingleNode("@name").getText());
                             groupBy.setKey(groupByNode.selectSingleNode("@key") == null ? "" : groupByNode.selectSingleNode("@key").getText());
                             groupBy.setGtype(groupByNode.selectSingleNode("@gtype") == null ? "" : groupByNode.selectSingleNode("@gtype").getText());
@@ -253,7 +253,7 @@ public class DoManagerImpl implements DoManager {
 
             if (!flag) {
                 if (tempDo == null) {
-                    tempDo = new DoXml();
+                    tempDo = new Do();
                 }
                 tempDo.setName(node.selectSingleNode("@name").getText());
                 tempDo.setXentity(xentity);
@@ -325,7 +325,7 @@ public class DoManagerImpl implements DoManager {
 
                 if (!flag) {
                     if (doQuery == null) {
-                        doQuery = new DoQueryXml();
+                        doQuery = new DoQuery();
                     }
                     doQuery.setName(doQueryName);
                     doQuery.setLabel(doQueryNode.selectSingleNode("@label").getText());
@@ -409,7 +409,7 @@ public class DoManagerImpl implements DoManager {
                 if (!flag) {
 
                     if (queryCondition == null) {
-                        queryCondition = new QueryConditionXml();
+                        queryCondition = new QueryCondition();
                     }
 
                     Field tempField = null;
@@ -506,7 +506,7 @@ public class DoManagerImpl implements DoManager {
         List<Node> nodeGroupByList = doQueryNode.selectNodes("groupby");
         if (nodeGroupByList != null && nodeGroupByList.size() > 0) {
             for (Node groupByNode : nodeGroupByList) {
-                Groupby groupBy = new GroupbyXml();
+                Groupby groupBy = new Groupby();
                 groupBy.setName(groupByNode.selectSingleNode("@name").getText());
                 groupBy.setKey(groupByNode.selectSingleNode("@key") == null ? "" : groupByNode.selectSingleNode("@key").getText());
                 groupBy.setGtype(groupByNode.selectSingleNode("@gtype") == null ? "" : groupByNode.selectSingleNode("@gtype").getText());
@@ -542,7 +542,7 @@ public class DoManagerImpl implements DoManager {
 
         for (Node node : nodeXmlDataModelViewList) {
 
-            Page tempPage = new PageXml();
+            Page tempPage = new Page();
             tempPage.setName(node.selectSingleNode("@name") == null ? "" : node.selectSingleNode("@name").getText());
             tempPage.setLabel(node.selectSingleNode("@label") == null ? "" : node.selectSingleNode("@label").getText());
             tempPage.setType(node.selectSingleNode("@type") == null ? "" : node.selectSingleNode("@type").getText());

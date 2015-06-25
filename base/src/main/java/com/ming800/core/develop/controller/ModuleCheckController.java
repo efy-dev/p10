@@ -1,11 +1,6 @@
 package com.ming800.core.develop.controller;
 
-import com.ming800.core.does.model.Module;
-import com.ming800.core.does.model.Xentity;
-import com.ming800.core.does.model.Do;
-import com.ming800.core.does.model.DoQuery;
-import com.ming800.core.does.model.QueryCondition;
-import com.ming800.core.does.model.TypeXml;
+import com.ming800.core.does.model.*;
 //import com.ming800.core.does.service.TypeXmlManager;
 import com.ming800.core.p.model.*;
 import com.ming800.core.does.service.ModuleManager;

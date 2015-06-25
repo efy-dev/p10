@@ -2,7 +2,6 @@ package com.efeiyi.ec.website.organization.service.impl;
 
 import com.efeiyi.ec.website.organization.service.PermissionManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
-import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -7,25 +7,51 @@ package com.ming800.core.does.model;
  * Time: 上午10:21
  * To change this template use File | Settings | File Templates.
  */
-public interface Groupby {
+public class Groupby {
 
-    public String getName();
+    private String name;
+    private String key;
+    private String gtype;       //
+    private String extendName;
+    private String expression;
 
-    public void setName(String name);
+    public String getName() {
+        return name;
+    }
 
-    public String getKey();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setKey(String key);
+    public String getKey() {
+        return key;
+    }
 
-    public String getGtype();
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-    public void setGtype(String gtype);
+    public String getGtype() {
+        return gtype;
+    }
 
-    public String getExtendName();
+    public void setGtype(String gtype) {
+        this.gtype = gtype;
+    }
 
-    public void setExtendName(String extendName);
+    public String getExtendName() {
+        return extendName;
+    }
 
-    public String getExpression();
+    public void setExtendName(String extendName) {
+        this.extendName = extendName;
+    }
 
-    public void setExpression(String expression);
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
 }

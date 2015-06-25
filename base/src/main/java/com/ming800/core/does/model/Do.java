@@ -5,56 +5,134 @@ import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: ming
- * Date: 12-11-17
- * Time: 下午6:09
+ * Date: 12-11-10
+ * Time: 上午9:59
  * To change this template use File | Settings | File Templates.
  */
-public interface Do {
+public class Do{
 
-    public String getName();
 
-    public void setName(String name);
+    private String name;
+    private String label;
+    //    private String model;
+    private String type;
+    private Xentity xentity;
+    private String execute;
+    //    private String entity;
+    private String result;
+    private List<DoQuery> doQueryList;
+    private List<Page> pageList;
+    private String access;
 
-    public String getLabel();
+    private String data;
 
-    public void setLabel(String label);
+    public String getName() {
+        return name;
+    }
 
-    public String getType();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setType(String type);
+    public String getLabel() {
+        return label;
+    }
 
-    /*public String getModel();
-    public void setModel(String model);*/
-    public Xentity getXentity();
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-    public void setXentity(Xentity xentity);
+    public String getType() {
+        return type;
+    }
 
-    public String getExecute();
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public void setExecute(String execute);
+/*public String getModel() {
+        return model;
+    }
 
-/*    public String getEntity();
-    public void setEntity(String entity);*/
+    public void setModel(String model) {
+        this.model = model;
+    }*/
 
-    public String getResult();
+    public String getAccess() {
+        return access;
+    }
 
-    public void setResult(String result);
+    public void setAccess(String access) {
+        this.access = access;
+    }
 
-    public String getAccess();
+    public Xentity getXentity() {
+        return xentity;
+    }
 
-    public void setAccess(String access);
+    public void setXentity(Xentity xentity) {
+        this.xentity = xentity;
+    }
 
-    public List<DoQuery> getDoQueryList();
+    public String getExecute() {
+        return execute;
+    }
 
-    public void setDoQueryList(List<DoQuery> doQueryList);
+    public void setExecute(String execute) {
+        this.execute = execute;
+    }
 
-    public List<Page> getPageList();
+/*    public String getEntity() {
+        return entity;
+    }
 
-    public void setPageList(List<Page> pageList);
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }*/
 
-    public DoQuery getDoQueryByName(String name);
+    public String getResult() {
+        return result;
+    }
 
-    public String getData();
+    public void setResult(String result) {
+        this.result = result;
+    }
 
-    public void setData(String data);
+    public List<DoQuery> getDoQueryList() {
+        return doQueryList;
+    }
+
+    public void setDoQueryList(List<DoQuery> doQueryList) {
+        this.doQueryList = doQueryList;
+    }
+
+    public List<Page> getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(List<Page> pageList) {
+        this.pageList = pageList;
+    }
+
+    public DoQuery getDoQueryByName(String name) {
+
+        DoQuery doQuery = doQueryList.get(0);
+
+        for (DoQuery tempDoQuery : doQueryList) {
+            if (tempDoQuery.getName() != null && tempDoQuery.getName().equals(name)) {
+                doQuery = tempDoQuery;
+                break;
+            }
+        }
+
+        return doQuery;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 }
