@@ -3,7 +3,7 @@
 <html>
 <head>
 
-  <title>登录<sitemesh:write property='title'/></title>
+  <title>登录</title>
 
   <style type="text/css">
     .title {
@@ -12,20 +12,16 @@
       border-bottom: 2px solid #247ba0;
     }
   </style>
-  <sitemesh:write property='head'/>
 </head>
 <body>
-<sitemesh:write property='body'/>
 <div class="am-g am-g-fixed">
   <hr>
   <div class="am-g" style="margin-top: 100px">
     <div class="am-u-md-4" style="margin-top: 55px;">
-
       <form class="am-form" method="post" id="loginForm" action="<c:url value="/pc/login.do" />"
             onsubmit="return loginSubmit();">
         <input type="hidden" name="dispatcher" value=""/>
         <input type="hidden" name="requestType" value="pc"/>
-
         <div class="am-form-group">
           <label for="j_username">用户</label>
           <input type="text" class="form-control" id="j_username" name="j_username"
@@ -38,10 +34,8 @@
         </div>
         <div class="message">${message}</div>
         <input id="login" type="submit" class="am-btn am-btn-default form-btn" value="登录"/>
-
         <%--<div style="text-align: right"><a class="ypl-a" href="/pc/forget.do">密码忘了？</a></div>--%>
       </form>
-
     </div>
   </div>
 </div>
