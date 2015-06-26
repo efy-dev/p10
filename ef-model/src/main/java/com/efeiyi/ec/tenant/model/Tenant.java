@@ -1,7 +1,7 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.District;
-import com.efeiyi.ec.organization.model.Province;
+import com.efeiyi.ec.organization.model.AddressDistrict;
+import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -27,8 +27,8 @@ public class Tenant implements Serializable {
     private String id;
     private String name;                //名称标识
     private Integer theStatus;         // 正常，删除，停止，隐藏
-    private Province province;
-    private District district;
+    private AddressProvince addressProvince;
+    private AddressDistrict addressDistrict;
     private Date createDate;
 
 
@@ -65,24 +65,24 @@ public class Tenant implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id")
-    public Province getProvince() {
-        return province;
+    public AddressProvince getAddressProvince() {
+        return addressProvince;
     }
 
-    public void setProvince(Province province) {
-        this.province = province;
+    public void setAddressProvince(AddressProvince addressProvince) {
+        this.addressProvince = addressProvince;
     }
 
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id")
-    public District getDistrict() {
-        return district;
+    public AddressDistrict getAddressDistrict() {
+        return addressDistrict;
     }
 
-    public void setDistrict(District district) {
-        this.district = district;
+    public void setAddressDistrict(AddressDistrict addressDistrict) {
+        this.addressDistrict = addressDistrict;
     }
 
     @Column(name = "create_date")

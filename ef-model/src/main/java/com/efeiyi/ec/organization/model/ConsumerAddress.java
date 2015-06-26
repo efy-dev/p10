@@ -8,11 +8,11 @@ import javax.persistence.*;
  * Created by Administrator on 2015/5/29.
  */
 @Entity
-@Table(name = "user_address")
-public class UserAddress {
+@Table(name = "organization_consumer_address")
+public class ConsumerAddress {
     private String id;
-    private String province;
-    private String city;
+    private AddressProvince province;
+    private AddressCity city;
     private String details;
     private String post;
     private String phone;
@@ -29,21 +29,23 @@ public class UserAddress {
         this.id = id;
     }
 
-    @Column(name = "porovince")
-    public String getProvince() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="address_province_id")
+    public AddressProvince getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(AddressProvince province) {
         this.province = province;
     }
 
-    @Column(name = "city")
-    public String getCity() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="address_city_id")
+    public AddressCity getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(AddressCity city) {
         this.city = city;
     }
 

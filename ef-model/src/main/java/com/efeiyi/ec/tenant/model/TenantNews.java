@@ -16,6 +16,7 @@ public class TenantNews {
     private Date createDatetime;
     private String creator;
     private String content;
+    private String type;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -62,5 +63,14 @@ public class TenantNews {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Column(name="type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

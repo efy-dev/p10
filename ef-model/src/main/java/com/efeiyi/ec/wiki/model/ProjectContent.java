@@ -1,6 +1,7 @@
 package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.project.model.Category;
+import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ public class ProjectContent {
     private String id;
     private String content;
     private Category category;
-    private String creator;
+    private Tenant creator;
     private Date createDatetime;
 
     @Id
@@ -48,12 +49,13 @@ public class ProjectContent {
         this.category = category;
     }
 
-    @Column(name="creator")
-    public String getCreator() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="creator")
+    public Tenant getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(Tenant creator) {
         this.creator = creator;
     }
 

@@ -577,7 +577,7 @@
         </entity>
 
         <entity name="Province" label="省" basic="" others=""
-                model="com.efeiyi.ec.organization.model.Province">
+                model="com.efeiyi.ec.organization.model.AddressProvince">
             <fields>
                 <field name="name" label="省" inputType="text"/>
             </fields>
@@ -615,10 +615,10 @@
 
 
         <entity name="ProvinceCity" label="市" basic="" others=""
-                model="com.efeiyi.ec.organization.model.City">
+                model="com.efeiyi.ec.organization.model.AddressCity">
             <fields>
                 <field name="name" label="市" inputType="text"/>
-                <field name="province.id" label="省份" inputType="dialog_do" key="ProvinceCity.province"
+                <field name="addressProvince.id" label="省份" inputType="dialog_do" key="ProvinceCity.addressProvince"
                        reference="Province"/>
             </fields>
 
@@ -627,7 +627,7 @@
                 <do name="listProvinceCityJson" label="列出市"
                     result="json">
                     <query name="default" label="默认" orderBy="id:asc">
-                        <condition name="province.id" label="主键" defaultValue="" operation="eq" dataType="int"/>
+                        <condition name="addressProvince.id" label="主键" defaultValue="" operation="eq" dataType="int"/>
                     </query>
                     <page>
                         <fields>
@@ -638,7 +638,7 @@
                 </do>
                 <do name="listProCityJson" label="省份城市" access="view" result="json">
                     <query name="cascade" label="省份城市" orderBy="id:desc">
-                        <condition name="province.id" label="省份" defaultValue="" inputType="default"
+                        <condition name="addressProvince.id" label="省份" defaultValue="" inputType="default"
                                    operation="eq"></condition>
                     </query>
                     <page>
@@ -658,7 +658,7 @@
                 model="com.yuepaila.basic.model.CityShotType">
             <fields>
                 <field name="name" label="地区" inputType="text"/>
-                <!--<field name="province.id" label="省" inputType="dialog_do" key="" reference="Province"/>-->
+                <!--<field name="addressProvince.id" label="省" inputType="dialog_do" key="" reference="Province"/>-->
             </fields>
 
             <does>
@@ -683,10 +683,10 @@
         </entity>
 
         <entity name="District" label="区"
-                model="com.efeiyi.ec.organization.model.District">
+                model="com.efeiyi.ec.organization.model.AddressDistrict">
             <fields>
                 <field name="name" label="名称" inputType="text"/>
-                <!--<field name="city.id" label="城市" inputType="dialog_do" key="" reference="City"/>-->
+                <!--<field name="addressCity.id" label="城市" inputType="dialog_do" key="" reference="City"/>-->
             </fields>
 
             <does>
@@ -694,7 +694,7 @@
                     result="json">
                     <query name="default" label="默认" orderBy="id:asc">
                         <condition name="id" label="主键" defaultValue="0" operation="ge" dataType="int"/>
-                        <condition name="city.id" label="城市" defaultValue="" operation="eq" dataType="int"/>
+                        <condition name="addressCity.id" label="城市" defaultValue="" operation="eq" dataType="int"/>
                     </query>
                     <page>
                         <fields>

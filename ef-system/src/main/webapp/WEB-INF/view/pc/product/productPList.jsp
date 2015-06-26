@@ -38,10 +38,20 @@
         </tr>
     </c:forEach>
 
+
 </table>
-<ming800:page bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
-    <ming800:page-param name="qm" value="${requestScope.qm}"/>
-    <ming800:page-param name="conditions" value="${requestScope.conditions}"/>
-</ming800:page>
+<div style="clear: both">
+    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+        <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+        <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+    </ming800:pcPageList>
+</div>
+<%--<div style="clear: both">--%>
+    <%--<ming800:page bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">--%>
+        <%--<ming800:page-param name="qm" value="${requestScope.qm}"/>--%>
+        <%--<ming800:page-param name="conditions" value="${requestScope.conditions}"/>--%>
+    <%--</ming800:page>--%>
+<%--</div>--%>
+
 </body>
 </html>

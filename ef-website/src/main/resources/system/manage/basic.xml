@@ -46,7 +46,7 @@
 
                     <query name="advance" label="城市查询" orderBy="bannerOrder:desc">
                         <condition name="cityId" label="城市" defaultValue="${MY_CITY}" inputType="dialog_pop"
-                                   operation="eq" key="city"></condition>
+                                   operation="eq" key="addressCity"></condition>
                         <condition name="theStatus" label="状态" defaultValue="0" operation="gt" dataType="int"
                                    inputType="default"></condition>
                         <condition name="channel" label="频道页" defaultValue="-1" operation="eq" dataType="int"
@@ -60,7 +60,7 @@
 
                     <query name="advance" label="频道查询" orderBy="bannerOrder:desc">
                         <condition name="cityId" label="城市" defaultValue="${MY_CITY}" inputType="dialog_pop"
-                                   operation="eq" key="city"></condition>
+                                   operation="eq" key="addressCity"></condition>
                         <condition name="channel" label="频道" defaultValue="" operation="eq" inputType="select_status"
                                    dataType="int" key="Banner.channel"></condition>
                         <condition name="theStatus" label="状态" defaultValue="0" operation="gt" dataType="int"

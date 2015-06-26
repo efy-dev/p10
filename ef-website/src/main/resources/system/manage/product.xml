@@ -54,7 +54,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="gt"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition name="ptype" label="拍摄类型" inputType="select_status" operation="eq" dataType="int"
                                    defaultValue="" key="PurchaseOrder.ptype"/>
                         <condition label="支付状态" name="theStatus" defaultValue="" dataType="int" inputType="select_status"
@@ -103,7 +103,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="ne"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition label="起始时间" name="createDatetime" inputType="date" dataType="datetime"
                                    operation="gt"/>
                         <condition label="截止时间" name="createDatetime2" inputType="date" dataType="datetime"
@@ -138,7 +138,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="ne"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition label="起始时间" name="createDatetime" inputType="date" dataType="datetime"
                                    operation="gt"/>
                         <condition label="截止时间" name="createDatetime2" inputType="date" dataType="datetime"
@@ -184,7 +184,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="ne"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition label="起始时间" name="createDatetime" inputType="date" dataType="datetime"
                                    operation="gt"/>
                         <condition label="截止时间" name="createDatetime2" inputType="date" dataType="datetime"
@@ -221,7 +221,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="ne"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition label="起始时间" name="createDatetime" inputType="date" dataType="datetime"
                                    operation="gt"/>
                         <condition label="截止时间" name="createDatetime2" inputType="date" dataType="datetime"
@@ -257,7 +257,7 @@
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="ne"
                                    inputType="default" dataType="int"/>
                         <condition label="城市" name="photographer.cityId" defaultValue="${MY_CITY}"
-                                   inputType="dialog_pop" operation="eq" key="city"/>
+                                   inputType="dialog_pop" operation="eq" key="addressCity"/>
                         <condition label="起始时间" name="createDatetime" inputType="date" dataType="datetime"
                                    operation="gt"/>
                         <condition label="截止时间" name="createDatetime2" inputType="date" dataType="datetime"

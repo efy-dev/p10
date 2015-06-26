@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "organization_address_district")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "city"})
-public class District implements Serializable {
+public class AddressDistrict implements Serializable {
     private Integer id;
     private String name;
-    private City city;
+    private AddressCity addressCity;
 
     @Id
     @GenericGenerator(name = "id", strategy = "increment")
@@ -40,12 +40,12 @@ public class District implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
-    public City getCity() {
-        return city;
+    @JoinColumn(name = "opened_city_id")
+    public AddressCity getAddressCity() {
+        return addressCity;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setAddressCity(AddressCity addressCity) {
+        this.addressCity = addressCity;
     }
 }

@@ -4,54 +4,32 @@ import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by Administrator on 2015/5/28.
  */
 @Entity
-@Table(name = "organization_user")
-public class Consumer {
-    private String id;
-    private String name;
-    private String type;
-    private Tenant tenant;
+@Table(name = "organization_consumer")
+public class Consumer extends BigUser{
+    private BigDecimal deposit;
+    private Integer score;
 
-    @Id
-    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
-    @GeneratedValue(generator = "id")
-    public String getId() {
-        return id;
+    @Column(name="deposit")
+    public BigDecimal getDeposit() {
+        return deposit;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
     }
 
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Column(name="score")
+    public Integer getScore() {
+        return score;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }

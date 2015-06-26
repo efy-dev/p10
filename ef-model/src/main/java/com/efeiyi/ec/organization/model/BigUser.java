@@ -59,17 +59,17 @@ public class BigUser {
     protected String addressCityId;
     protected String provinceName;
     protected String addressCityName;
-    protected Province province;
+    protected AddressProvince addressProvince;
     protected Date lastLoginDatetime; //最后一次登陆时间
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id", updatable = false, insertable = false)
-    public Province getProvince() {
-        return province;
+    public AddressProvince getAddressProvince() {
+        return addressProvince;
     }
 
-    public void setProvince(Province province) {
-        this.province = province;
+    public void setAddressProvince(AddressProvince addressProvince) {
+        this.addressProvince = addressProvince;
     }
 
     @Column(name = "province_id")

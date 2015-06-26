@@ -2265,7 +2265,7 @@
 
         <entity name="Province"
                 label="省份" basic="sample" others=""
-                model="com.efeiyi.ec.organization.model.Province">
+                model="com.efeiyi.ec.organization.model.AddressProvince">
             <fields>
                 <field name="id" label="" inputType="text"/>
                 <field name="name" label="" inputType="text"/>

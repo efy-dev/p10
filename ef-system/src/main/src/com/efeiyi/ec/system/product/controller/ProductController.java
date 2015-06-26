@@ -35,7 +35,7 @@ public class ProductController extends BaseController {
 
         }
         modelMap.put("listProduct", list);
-        return new ModelAndView("/productList", modelMap);
+        return new ModelAndView("/pc/product/productList", modelMap);
     }
 
 

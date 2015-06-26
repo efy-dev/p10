@@ -1,6 +1,6 @@
 package com.efeiyi.ec.purchase.model;
 
-import com.efeiyi.ec.organization.model.UserAddress;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import java.util.Date;
 public class PurchaseOrderDelivery {
     private String id;
     private PurchaseOrder purchaseOrder;
-    private UserAddress userAddress;
+    private ConsumerAddress consumerAddress;
     private Date createDatetime;
 
     @Id
@@ -40,12 +40,12 @@ public class PurchaseOrderDelivery {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_address_id")
-    public UserAddress getUserAddress() {
-        return userAddress;
+    public ConsumerAddress getConsumerAddress() {
+        return consumerAddress;
     }
 
-    public void setUserAddress(UserAddress userAddress) {
-        this.userAddress = userAddress;
+    public void setConsumerAddress(ConsumerAddress consumerAddress) {
+        this.consumerAddress = consumerAddress;
     }
 
     @Column(name = "create_datetime")

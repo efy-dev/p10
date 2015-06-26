@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization_address_province")
-public class Province implements Serializable {
+public class AddressProvince implements Serializable {
     private String id;
     private String name;
 
@@ -44,9 +44,9 @@ public class Province implements Serializable {
             return false;
         }
 
-        Province province = (Province) o;
+        AddressProvince addressProvince = (AddressProvince) o;
 
-        if (id != null ? !id.equals(province.id) : province.id != null) {
+        if (id != null ? !id.equals(addressProvince.id) : addressProvince.id != null) {
             return false;
         }
 

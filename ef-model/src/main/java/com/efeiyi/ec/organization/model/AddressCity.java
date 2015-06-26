@@ -10,10 +10,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization_address_city")
-public class City implements Serializable {
+public class AddressCity implements Serializable {
     private String id;
     private String name;
-    private Province province;
+    private AddressProvince addressProvince;
 
 
     @Id
@@ -38,11 +38,11 @@ public class City implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id")
-    public Province getProvince() {
-        return province;
+    public AddressProvince getAddressProvince() {
+        return addressProvince;
     }
 
-    public void setProvince(Province province) {
-        this.province = province;
+    public void setAddressProvince(AddressProvince addressProvince) {
+        this.addressProvince = addressProvince;
     }
 }

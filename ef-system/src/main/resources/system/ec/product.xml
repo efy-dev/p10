@@ -31,7 +31,7 @@
                 <!--</do>-->
 
                 <do name="plistProduct" access="" label="产品分页列表"
-                    result="/productPList">
+                    result="/product/productPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="name" defaultValue="2" operation="eq"></condition>
                     </query>
