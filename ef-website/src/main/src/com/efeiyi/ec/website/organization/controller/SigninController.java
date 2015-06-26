@@ -35,9 +35,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping({"/pc"})
 public class SigninController extends BaseController {
-    //@Autowired
+    @Autowired
     private RoleManager roleManager;
-    //@Autowired
+    @Autowired
     private BranchManager branchManager;
 
     @Autowired

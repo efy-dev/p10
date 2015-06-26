@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.tag;
 
 import com.efeiyi.ec.organization.model.Permission;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.util.ApplicationContextUtil;
 
