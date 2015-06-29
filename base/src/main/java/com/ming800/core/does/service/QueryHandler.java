@@ -1,4 +1,4 @@
-package com.ming800.core.base.service.impl;
+package com.ming800.core.does.service;
 
 import com.ming800.core.does.model.XQuery;
 
@@ -11,6 +11,6 @@ import com.ming800.core.does.model.XQuery;
  */
 public interface QueryHandler {
 
-    public XQuery handle(XQuery xQuery) throws Exception;
+    XQuery handle(XQuery xQuery) throws Exception;
 
 }

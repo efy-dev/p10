@@ -13,5 +13,5 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface DoHandler {
 
-    public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception;
+    ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception;
 }
