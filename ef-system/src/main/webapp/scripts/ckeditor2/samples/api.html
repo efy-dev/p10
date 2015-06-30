@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>API Usage &mdash; CKEditor Sample</title>
+	<script src="../ckeditor.js"></script>
+	<link href="sample.css" rel="stylesheet">
+	<script>
+
+
+	</script>
+
+</head>
+<body>
+
+	<form action="../../../samples/sample_posteddata.php" method="post">
+		<textarea cols="100" id="editor1" name="editor1" rows="10">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+
+		<script>
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			CKEDITOR.replace( 'editor1'
+			);
+		</script>
+
+		
+
+
+	</form>
+	
+</body>
+</html>

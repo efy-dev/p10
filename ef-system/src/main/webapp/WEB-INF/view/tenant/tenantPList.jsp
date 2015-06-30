@@ -20,20 +20,14 @@
 <body>
 <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
     <tr>
-        <td>产品id</td>
-        <td>产品名称</td>
-        <td>图片地址</td>
-        <td>价格</td>
-        <td>系列</td>
+        <td>传承人id</td>
+        <td>传承人名称</td>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="product">
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>
-            <td>${product.picture_url}</td>
-            <td>${product.price}</td>
-            <td>${product.serial}</td>
         </tr>
     </c:forEach>
 
@@ -45,12 +39,6 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
-<%--<div style="clear: both">--%>
-    <%--<ming800:page bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">--%>
-        <%--<ming800:page-param name="qm" value="${requestScope.qm}"/>--%>
-        <%--<ming800:page-param name="conditions" value="${requestScope.conditions}"/>--%>
-    <%--</ming800:page>--%>
-<%--</div>--%>
 
 </body>
 </html>
