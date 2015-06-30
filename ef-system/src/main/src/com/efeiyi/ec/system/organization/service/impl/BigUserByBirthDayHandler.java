@@ -1,6 +1,6 @@
 package com.efeiyi.ec.system.organization.service.impl;
 
-import com.ming800.core.base.service.impl.QueryHandler;
+import com.ming800.core.does.service.QueryHandler;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.util.DateUtil;
 
