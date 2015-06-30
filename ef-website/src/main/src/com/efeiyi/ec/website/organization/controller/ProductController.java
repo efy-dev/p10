@@ -1,15 +1,22 @@
 package com.efeiyi.ec.website.organization.controller;
 
-import com.efeiyi.ec.website.organization.model.User;
+
+import com.efeiyi.ec.website.organization.service.ProductManger;
+import com.efeiyi.ec.website.product.model.Product;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+
+import com.thoughtworks.xstream.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 
 /**
  * Created by AC丶man on 2015/6/17.
@@ -18,58 +25,51 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/product")
 public class ProductController extends BaseController {
 
-   /* @Autowired
-    private ProductManager productManager;*/
+   @Autowired
+    private ProductManger productManger;
     @Autowired
     private BaseManager baseManager;
 
     /**
-     * 添加商品
+     * 商品的编辑
      */
 
-    @RequestMapping(value = "/addProduct.do")
-    public ModelAndView saveProduct(HttpServletRequest request ,HttpServletResponse response){
-        User user = new User();
-        /*String id = String.valueOf(request.getParameter("id"));
-        if (id != null && id != ""){
-            Product product = (Product) baseManager.getObject("Product",id);
-            if(product == null){
-                Product p = new Product();
-                p.setName(String.valueOf(request.getParameter("name")));
-                String str = String.valueOf(request.getParameter("price"));
-                p.setPrice(BigDecimal.valueOf(Double.valueOf(str)));
-                String cid = (String) request.getParameter("category");
-                if (cid != null && cid != ""){
-                    ProductCategory pc = (ProductCategory) baseManager.getObject("ProductCategory",cid);
-                    if(pc != null){
-                        p.setCategory(pc);
-                    }else{
-                        p.setCategory(null);
-                    }
-                }
-                p.setPicture_url(String.valueOf(request.getParameter("picture_url")));
-                p.setSerial(String.valueOf(request.getParameter("serial")));
-                String tid = String.valueOf(request.getParameter("tenant"));
-                if(tid != null && tid != ""){
-                    Tenant ten = (Tenant) baseManager.getObject("Tenant",tid);
-                    if (ten != null){
-                        p.setTenant(ten);
-                    }else{
-                        p.setTenant(null);
-                    }
-                }
-            }
-        }else{
-
-        }*/
-        /*baseManager.saveOrUpdate("Product",p);*/
-        return new ModelAndView("/");
+    @RequestMapping(value = "/getProduct.do")
+    public ModelAndView getProduct(HttpServletRequest request, ModelMap model){
+        String id = request.getParameter("pid");
+        Product product = (Product) baseManager.getObject("com.efeiyi.ec.organzation.model.Product",id);
+        model.addAttribute("product",product);
+        return new ModelAndView("/product",model);
     }
-
-    public ModelAndView deleteProduct(){
-
-        return new ModelAndView();
+    @RequestMapping(value= "/deleteProduct.do")
+    public ModelAndView deleteProduct(HttpServletRequest request, ModelMap model){
+       String id =request.getParameter("id");
+       baseManager.delete("com.efeiyi.ec.organzation.model.Product",id);
+       model.addAttribute("result",1);
+       return new ModelAndView("/yemain",model);
     }
+    @RequestMapping(value= "/removeProduct.do")
+    public ModelAndView removeProduct(HttpServletRequest request,ModelMap model){
+       String id = request.getParameter("id");
+       baseManager.remove("com.efeiyi.ec.orgnzation.model.product",id);
+       model.addAttribute("result",1);
+       return new ModelAndView("/yemian",model);
+    }
+    @RequestMapping(value = "/saveProduct.do")
+    public ModelAndView saveProduct(HttpServletRequest request,ModelMap model){
+        String id =request.getParameter("id");
+        baseManager.saveOrUpdate("com.efeiyi.orgnzation.model.Product",id);
+        model.addAttribute("result",1);
+        return new ModelAndView("/yemian",model);
+    }
+   @RequestMapping(value = "/productlist.do")
+   public ModelAndView getProductList(HttpServletRequest request,ModelMap model){
+       List<Product> productlist = productManger.getProduct();
+        model.addAttribute("productlist",productlist);
 
+           return new ModelAndView("/pc/product/productlist",model);
+
+
+   }
 
 }
