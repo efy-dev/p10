@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class TenantHonor {
     private String id;
     private String memo;
+    private Tenant tenant;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -31,5 +32,14 @@ public class TenantHonor {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    @Column(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }
