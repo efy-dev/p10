@@ -17,6 +17,7 @@ public class TenantNews {
     private String creator;
     private String content;
     private String type;
+    private Tenant tenant;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -72,5 +73,14 @@ public class TenantNews {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Column(name="tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }
