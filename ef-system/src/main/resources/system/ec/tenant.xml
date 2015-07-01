@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="tenant" label="系统-传承人" version="" package="com.efeiyi.ec.tenant" path="">
+
+    <entities>
+        <entity name="TenantList" label="传承人列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.Tenant">
+            <fields>
+                <field name="id" label="传承人" inputType="text"/>
+                <field name="name" label="传承人名字" inputType="text"/>
+            </fields>
+            <does>
+                <!--<do name="plistPCPurchaseOrder" access="$consumer"-->
+                <!--label="消费者用户订单查询"-->
+                <!--result="/order/orderList">&lt;!&ndash;订单查询&ndash;&gt;-->
+                <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                <!--<condition label="订单主键" name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>-->
+                <!--<condition label="订单状态" name="theStatus" dataType="int" defaultValue="0" operation="ne"/>-->
+                <!--</query>-->
+                <!--</do>-->
+                <!--<do name="listPCPurchaseOrderAlbum" access="$consumer" label="用户-我的相册" result="/order/albumList">-->
+                <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                <!--<condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"></condition>-->
+                <!--</query>-->
+
+                <!--</do>-->
+
+                <do name="plistTenant" access="" label="传承人分页列表"
+                    result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="name" defaultValue="ten1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"></do>
+                <do name="saveOrUpdateTenant" label="保存大师" access="" result="/tenant/tenantSaveSuccess">
+                </do>
+                <do name="removeTenant" label="删除大师" access="" result="json"/>
+                <do name="listTenant" label="传承人列表" access="" result="/tenant/tenantList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
+                        <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+    </entities>
+
+</module>

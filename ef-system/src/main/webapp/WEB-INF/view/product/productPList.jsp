@@ -16,7 +16,6 @@
 <head>
     <title></title>
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery.easyui.min.js'/>"></script>
 </head>
 <body>
 <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
