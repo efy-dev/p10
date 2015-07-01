@@ -43,7 +43,7 @@ public class UserController extends BaseController {
     public ModelAndView formUser(BigUser bigUser) throws Exception {
         ModelMap modelMap = new ModelMap();
         if (bigUser != null && bigUser.getId() != null) {//修改
-            bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), bigUser.getId());
+            bigUser = (BigUser) baseManager.getObject(BigUser.class, bigUser.getId());
             modelMap.put("bigUser", bigUser);
         }
         return new ModelAndView("organization/user/bigUserForm", modelMap);
@@ -183,7 +183,7 @@ public class UserController extends BaseController {
     @RequestMapping("/checkOldPassword.do")
     @ResponseBody
     public Boolean checkOldPassword(String oldPassword) {
-        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), AuthorizationUtil.getMyUser().getId());
+        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class, AuthorizationUtil.getMyUser().getId());
         return bigUser.getPassword().equals(StringUtil.encodePassword(oldPassword, "SHA"));
     }
 
@@ -198,7 +198,7 @@ public class UserController extends BaseController {
         BigUser bigUser = null;
         String url = "";
         if (request.getParameter("bigUserId") != null && !"".equals(request.getParameter("bigUserId"))) {
-            bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), request.getParameter("bigUserId"));
+            bigUser = (BigUser) baseManager.getObject(BigUser.class, request.getParameter("bigUserId"));
 
             /*String branchId = request.getParameter("branchId");
             String currentBranchId = AuthorizationUtil.getMyBranch().getId();
@@ -209,7 +209,7 @@ public class UserController extends BaseController {
             }*/
 
         } else {
-            bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), AuthorizationUtil.getMyUser().getId());
+            bigUser = (BigUser) baseManager.getObject(BigUser.class, AuthorizationUtil.getMyUser().getId());
 //            url = "/organization/user/userContactWaySetSuccessView";
             modelMap.put("object", bigUser);
         }
@@ -231,7 +231,7 @@ public class UserController extends BaseController {
     @RequestMapping("/setUpUserContactWay.do")
     public ModelAndView setUpUserContact(HttpServletRequest request) {
         ModelMap modelMap = new ModelMap();
-        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(), AuthorizationUtil.getMyUser().getId());
+        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class, AuthorizationUtil.getMyUser().getId());
         bigUser.setPhone(request.getParameter("phone"));
         bigUser.setEmail(request.getParameter("email"));
         baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);

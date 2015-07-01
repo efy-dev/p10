@@ -25,12 +25,12 @@ public class BranchManagerImpl implements BranchManager {
 
     @Override
     public void saveOrUpdate(Tenant tenant) {
-        xdoDao.saveOrUpdateObject(Tenant.class.getName(), tenant);
+        xdoDao.saveOrUpdateObject(Tenant.class, tenant);
     }
 
     @Override
     public Tenant getBranch(String branchId) {
-        return (Tenant) xdoDao.getObject(Tenant.class.getName(), branchId);
+        return (Tenant) xdoDao.getObject(Tenant.class, branchId);
     }
 
     @Override

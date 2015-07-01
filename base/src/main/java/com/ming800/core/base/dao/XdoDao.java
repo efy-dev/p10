@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface XdoDao {
 
-    void saveOrUpdateObject(String modelType, Object object);
+    void saveOrUpdateObject(Class modelType, Object object);
 
-    void deleteObject(String modelType, String id);
+    void deleteObject(Class model, String id);
 
-    int removeObject(String modelType, String id);
+    int removeObject(Class model, String id);
 
-    Object getObject(String modelType, String id);
+    Object getObject(Class model, String id);
 
     List getObjectList(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
@@ -36,7 +36,7 @@ public interface XdoDao {
     Object getUniqueObjectByConditions(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
 
-    void batchSaveOrUpdate(String type, String modelType, List<Object> objectList);
+    void batchSaveOrUpdate(String type, Class model, List<Object> objectList);
 
     Object executeSql(String type, String queryStr, LinkedHashMap<String, Object> queryParamMap);
 
