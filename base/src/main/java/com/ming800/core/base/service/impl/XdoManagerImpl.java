@@ -55,10 +55,10 @@ public class XdoManagerImpl implements XdoManager {
 
         String resultPage = tempDo.getResult();
         if (resultPage.contains("$")) {
-            resultPage = convertPageUrl(resultPage, xdoDao.getObject(tempDo.getXentity().getModel(), id));
+            resultPage = convertPageUrl(resultPage, xdoDao.getObject(tempDo.getXentity().getModel().getClass(), id));
         }
 
-        xdoDao.removeObject(tempDo.getXentity().getModel(), id);
+        xdoDao.removeObject(tempDo.getXentity().getModel().getClass(), id);
 
         //saveOrUpdateOperationLog(tempDo, "id:" + id, "假删");
         return resultPage;
@@ -73,10 +73,10 @@ public class XdoManagerImpl implements XdoManager {
 
         String resultPage = tempDo.getResult();
         if (resultPage.contains("$")) {
-            resultPage = convertPageUrl(resultPage, xdoDao.getObject(tempDo.getXentity().getModel(), id));
+            resultPage = convertPageUrl(resultPage, xdoDao.getObject(tempDo.getXentity().getModel().getClass(), id));
         }
 
-        xdoDao.deleteObject(tempDo.getXentity().getModel(), id);
+        xdoDao.deleteObject(tempDo.getXentity().getModel().getClass(), id);
 
 //        saveOrUpdateOperationLog(tempDo, "id:" + id, "真删");
 
@@ -86,7 +86,7 @@ public class XdoManagerImpl implements XdoManager {
     @Override
     public void deleteObject(String queryModel, String id) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(queryModel);
-        xdoDao.deleteObject(tempDo.getXentity().getModel(), id);
+        xdoDao.deleteObject(tempDo.getXentity().getModel().getClass(), id);
     }
 
     @Override
@@ -100,13 +100,13 @@ public class XdoManagerImpl implements XdoManager {
             object = Class.forName(tempDo.getXentity().getModel()).newInstance();
         } else {
             type = "edit";
-            object = xdoDao.getObject(tempDo.getXentity().getModel(), idValue);
+            object = xdoDao.getObject(tempDo.getXentity().getModel().getClass(), idValue);
         }
 
         object = processSaveOrUpdateTempObject(tempDo, object, object.getClass(), request, type);
 
         try {
-            xdoDao.saveOrUpdateObject(object.getClass().getName(), object);
+            xdoDao.saveOrUpdateObject(object.getClass(), object);
         } catch (Exception e) {
 
 //            e.printStackTrace();
@@ -174,7 +174,7 @@ public class XdoManagerImpl implements XdoManager {
 
         Object object;
         if (id != null) {
-            object = xdoDao.getObject(tempDo.getXentity().getModel(), id);
+            object = xdoDao.getObject(tempDo.getXentity().getModel().getClass(), id);
         } else {
             object = ReflectUtil.getNewInstance(tempDo.getXentity().getModel());
             if (tempDo.getPageList() != null && tempDo.getPageList().size() > 0) {
@@ -293,7 +293,7 @@ public class XdoManagerImpl implements XdoManager {
 //                Object objectIdValue = null;
                 Object objectNameValue = null;
                 if (fieldValue != null && !fieldValue.equals("")) {
-                    objectValue = xdoDao.getObject(Class.forName(field.getType().getName()).getName(), fieldValue);
+                    objectValue = xdoDao.getObject(Class.forName(field.getType().getName()), fieldValue);
                     objectNameValue = fetchIdValueByClassType(simpleName, objectValue);//获取对象的指定字段值
                 }
 
@@ -795,7 +795,7 @@ public class XdoManagerImpl implements XdoManager {
                             String xentityName = tempDo.getXentity().getName();          /*获取非user的对象的name值*/
                             sb.append("<a href='###' onclick='chooseObject(\\\"").append(xentityName).append("\\\",\\\"").append(id).append("\\\")'>").append(fieldValue.toString()).append("</a>");
                         } else if (pageField.getInputType().equals("select_dictionary") || pageField.getInputType().equals("radio_dictionary")) {
-                            DictionaryData dictionaryData = (DictionaryData) xdoDao.getObject(DictionaryData.class.getName(), fieldValue.toString());
+                            DictionaryData dictionaryData = (DictionaryData) xdoDao.getObject(DictionaryData.class, fieldValue.toString());
                             sb.append(dictionaryData.getData());
                         } else if (pageField.getDataType().equals("status")) {
                             sb.append(moduleManager.convertStatusTypeLabel(pageField.getKey(), fieldValue.toString()));
@@ -914,7 +914,7 @@ public class XdoManagerImpl implements XdoManager {
 
                 Object tempObject = null;
                 if (field.getType().getName().startsWith("com.ming800")) {
-                    tempObject = xdoDao.getObject(field.getType().getName(), tempStr[1]);
+                    tempObject = xdoDao.getObject(field.getType(), tempStr[1]);
 
                 } else if (field.getType().getName().equals("java.lang.Integer")) {
                     tempObject = Integer.parseInt(tempStr[1]);
@@ -940,7 +940,7 @@ public class XdoManagerImpl implements XdoManager {
 
         Object object;
         if (id != null && !id.equals("")) {
-            object = xdoDao.getObject(tempDo.getXentity().getModel(), id);
+            object = xdoDao.getObject(tempDo.getXentity().getModel().getClass(), id);
         } else {
             object = ReflectUtil.getNewInstance(tempDo.getXentity().getModel());
             object = fetchObjectByConditions(object, conditions);
@@ -1119,7 +1119,7 @@ public class XdoManagerImpl implements XdoManager {
             operationLog.setContent(content);
             operationLog.setOperationType(operationType);
 
-            xdoDao.saveOrUpdateObject(OperationLog.class.getName(), operationLog);
+            xdoDao.saveOrUpdateObject(OperationLog.class, operationLog);
 
         }
 

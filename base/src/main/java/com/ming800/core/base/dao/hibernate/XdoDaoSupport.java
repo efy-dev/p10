@@ -51,38 +51,38 @@ public class XdoDaoSupport implements XdoDao {
     }
 
     @Override
-    public Object getObject(String modelType, String id) {
+    public Object getObject(Class model, String id) {
 /*        try {
-            Class.forName(modelType);
+            Class.forName(model);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        String entityName = BaseDaoSupport.getEntityName(modelType.getClass());*/
-        return this.getSession().get(modelType, id);
+        String entityName = BaseDaoSupport.getEntityName(model.getClass());*/
+        return this.getSession().get(model, id);
     }
 
     @Override
-    public void saveOrUpdateObject(String modelType, Object object) {
-        this.getSession().saveOrUpdate(modelType, object);
+    public void saveOrUpdateObject(Class modelType, Object object) {
+        this.getSession().saveOrUpdate(modelType.toString(), object);
     }
 
     @Override
-    public void deleteObject(String modelType, String id) {
+    public void deleteObject(Class modelType, String id) {
         String query = "delete from " + modelType + " s where s.id =:id";
         this.getSession().createQuery(query).setString("id", id).executeUpdate();//To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void batchSaveOrUpdate(String type, String modelType, List<Object> objectList) {
+    public void batchSaveOrUpdate(String type, Class model, List<Object> objectList) {
 
         StatelessSession session = sessionFactory.openStatelessSession();
         Transaction tx = session.beginTransaction();
 
         for (Object object : objectList) {
             if ("save".equals(type)) {
-                session.insert(modelType, object);
+                session.insert(model.toString(), object);
             } else {
-                session.update(modelType, object);
+                session.update(model.toString(), object);
             }
         }
         tx.commit();
@@ -135,7 +135,7 @@ public class XdoDaoSupport implements XdoDao {
 
 
     @Override
-    public int removeObject(String modelType, String id) {
+    public int removeObject(Class modelType, String id) {
 
         String query = "update " + modelType + " s set s.theStatus = 0 where s.id =:id";
         return this.getSession().createQuery(query).setString("id", id).executeUpdate();

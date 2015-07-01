@@ -123,7 +123,7 @@ public class BaseController {
         Object id = ReflectUtil.getFieldValue(tempObject1, "id");
         if (id != null) {
             type = "edit";
-            tempObject2 = baseManager.getObject(tempObject1.getClass().getName(), id.toString());
+            tempObject2 = baseManager.getObject(tempObject1.getClass(), id.toString());
         }
 
         tempObject2 = generateResult(tempObject1, classObject1, type, tempObject2, request);
@@ -142,7 +142,7 @@ public class BaseController {
         Object id = ReflectUtil.getFieldValue(tempObject1, "id");
         if (id != null) {
             type = "edit";
-            tempObject2 = baseManager.getObject(tempObject1.getClass().getName(), id.toString());
+            tempObject2 = baseManager.getObject(tempObject1.getClass(), id.toString());
         }
 
         tempObject2 = generateResult(tempObject1, classObject1, type, tempObject2);
@@ -153,7 +153,7 @@ public class BaseController {
     /*不返回对象的保存*/
     public void saveOrUpdateObject(Object tempObject1) throws Exception {
         Object tempObject2 = manulSaveOrUpdate(tempObject1);
-        baseManager.saveOrUpdate(tempObject2.getClass().getName(), tempObject2);
+        baseManager.saveOrUpdate(tempObject2.getClass(), tempObject2);
     }
 
 

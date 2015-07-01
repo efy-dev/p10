@@ -88,7 +88,7 @@ public class BatchUpdateObjectController {
                 nameValue = nameValue.split("\\.")[0];
                 Object object = Class.forName(xentity.getModel()).newInstance();
                 Field field = ReflectUtil.getDeclaredField(object, nameValue);
-                tempObjectValue = baseManager.getObject(field.getType().getName(), updateValue);
+                tempObjectValue = baseManager.getObject(field.getType(), updateValue);
             } else {
                 tempObjectValue = null;
             }
@@ -100,14 +100,14 @@ public class BatchUpdateObjectController {
 
         String[] objectIdArray = objectIds.split(",");
         for (String objectId : objectIdArray) {
-            Object object = baseManager.getObject(xentity.getModel(), objectId);
+            Object object = baseManager.getObject(xentity.getModel().getClass(), objectId);
 
             ReflectUtil.invokeSetterMethod(object, nameValue, tempObjectValue);
 
             objectList.add(object);
         }
 
-        baseManager.batchSaveOrUpdate("update", xentity.getModel(), objectList);
+        baseManager.batchSaveOrUpdate("update", xentity.getModel().getClass(), objectList);
 
         return new ModelAndView("url");
     }

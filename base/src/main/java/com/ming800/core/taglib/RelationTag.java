@@ -129,11 +129,11 @@ public class RelationTag extends TagSupport {
                 if (conditions.contains("objectId:")) {
                     objectId = relation.getObjectId1();
                     xentity = xentityMap.get(relation.getEntity1());
-                    object = baseManager.getObject(xentity.getModel(), relation.getObjectId1());
+                    object = baseManager.getObject(xentity.getModel().getClass(), relation.getObjectId1());
                 } else {
                     objectId = relation.getObjectId();
                     xentity = xentityMap.get(relation.getEntity());
-                    object = baseManager.getObject(xentity.getModel(), relation.getObjectId());
+                    object = baseManager.getObject(xentity.getModel().getClass(), relation.getObjectId());
                 }
 
                 /*RelationObject relationObject = new RelationObject();

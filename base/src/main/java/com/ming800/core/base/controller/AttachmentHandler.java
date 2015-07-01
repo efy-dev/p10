@@ -48,7 +48,7 @@ public class AttachmentHandler implements MultipartHandler {
         String id = request.getParameter("id");
         if (id != null && !id.equals("")) {
             type = "edit";
-            object = baseManager.getObject(tempDo.getXentity().getModel(), id);
+            object = baseManager.getObject(tempDo.getXentity().getModel().getClass(), id);
 
             /*删除以前的附件*/
             attachmentManager.deleteAttachments(tempDo.getExecute(), request.getParameterValues("attachementIds"));

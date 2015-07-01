@@ -32,7 +32,7 @@ public class BranchManagerImpl implements BranchManager {
 
     @Override
     public Tenant getBranch(String branchId) {
-        return (Tenant) xdoDao.getObject(Tenant.class.getName(), branchId);
+        return (Tenant) xdoDao.getObject(Tenant.class, branchId);
     }
 
     @Override
