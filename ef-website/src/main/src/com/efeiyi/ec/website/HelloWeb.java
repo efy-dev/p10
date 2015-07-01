@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website;
 
-import com.efeiyi.ec.website.product.model.Product;
+import com.efeiyi.ec.product.model.Product;
 
 /**
  * Created by Hugh on 2015/6/1.

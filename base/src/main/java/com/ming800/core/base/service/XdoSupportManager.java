@@ -17,11 +17,11 @@ import java.util.Map;
 public interface XdoSupportManager {
 
 
-    public void generateTempPageConditions(String url, Map map, String tempIndex, String tempSize) throws Exception;
+    void generateTempPageConditions(String url, Map map, String tempIndex, String tempSize) throws Exception;
 
 
-    public ModelMap execute(Do tempDo, ModelMap modelMap, HttpServletRequest request) throws Exception;
+    ModelMap execute(Do tempDo, ModelMap modelMap, HttpServletRequest request) throws Exception;
 
-    public ModelMap executeMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception;
+    ModelMap executeMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception;
 
 }

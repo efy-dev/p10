@@ -1,7 +1,7 @@
 package com.efeiyi.ec.website.organization;
 
 
-import com.efeiyi.ec.website.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;

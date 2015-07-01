@@ -5,7 +5,7 @@
            已开通的拍摄类型添加属性isOpened="true"-->
 <cities>
     <cityShotType>
-        <city name="beijing" label="北京市" id="1236547891159753" shortname="北京">
+        <addressCity name="beijing" label="北京市" id="1236547891159753" shortname="北京">
             <shotType isOpened="true" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
@@ -15,10 +15,10 @@
             <shotType isOpened="true" ref="21" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
 
-        <city name="shanghai" label="上海市" id="i4podyze00006dds" shortname="上海">
+        <addressCity name="shanghai" label="上海市" id="i4podyze00006dds" shortname="上海">
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
                       referencePrice="400,500,700,1400,2500,5000"/>
             <shotType isOpened="false" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
@@ -29,9 +29,9 @@
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
 
-        </city>
+        </addressCity>
 
-        <city name="xining" label="西宁市" id="3256547891159754" shortname="西宁">
+        <addressCity name="xining" label="西宁市" id="3256547891159754" shortname="西宁">
             <shotType isOpened="true" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
@@ -42,10 +42,10 @@
             <shotType isOpened="false" ref="21" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
 
-        <city name="chengdu" label="成都市" id="1226545211159156" shortname="成都">
+        <addressCity name="chengdu" label="成都市" id="1226545211159156" shortname="成都">
             <shotType isOpened="true" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="false" ref="11" queryPrice="0-600,600-1200,1200-2500,2500-5000" referencePrice="300,400,600,1000,1800,3000"/>
@@ -54,9 +54,9 @@
             <shotType isOpened="true" ref="21" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
-        <city name="chongqing" label="重庆市" id="1512312165166199" shortname="重庆">
+        <addressCity name="chongqing" label="重庆市" id="1512312165166199" shortname="重庆">
             <shotType isOpened="false" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+" referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="false" ref="11" queryPrice="0-600,600-1200,1200-2500,2500-5000" referencePrice="300,400,600,1000,1800,3000"/>
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
@@ -64,10 +64,10 @@
             <shotType isOpened="true" ref="21" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
 
-        <city name="wulumuqi" label="乌鲁木齐市" id="2536547891159755" shortname="乌鲁木齐">
+        <addressCity name="wulumuqi" label="乌鲁木齐市" id="2536547891159755" shortname="乌鲁木齐">
             <shotType isOpened="true" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
@@ -77,9 +77,9 @@
             <shotType isOpened="true" ref="11" queryPrice="0-600,600-1200,1200-2500,2500-5000,5000+"
                       referencePrice="1000,1000,1700,3400,5000,6000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
-        <city name="guangzhou" label="广州市" id="2536547891195768" shortname="广州">
+        <addressCity name="guangzhou" label="广州市" id="2536547891195768" shortname="广州">
             <shotType isOpened="true" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="true" ref="1" queryPrice="600-1200,1200-2500,2500-5000,5000+"
@@ -89,10 +89,10 @@
             <shotType isOpened="true" ref="21" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="0-200,201-400" referencePrice="300,400,600,1000,1800,3000"/>
-        </city>
+        </addressCity>
 
 
-        <city name="nanjing" label="南京市" id="9536547891195768" shortname="南京">
+        <addressCity name="nanjing" label="南京市" id="9536547891195768" shortname="南京">
             <shotType isOpened="false" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="false" ref="11" queryPrice="0-600,600-1200,1200-2500,2500-5000,5000+"
@@ -103,10 +103,10 @@
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
-        </city>
+        </addressCity>
 
 
-        <city name="zongbu" label="总部" id="headquarters" type="manage" shortname="总部">
+        <addressCity name="zongbu" label="总部" id="headquarters" type="manage" shortname="总部">
             <shotType isOpened="false" ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"
                       referencePrice="1400,1400,2000,4000,6000,8000"/>
             <shotType isOpened="false" ref="11" queryPrice="0-600,600-1200,1200-2500,2500-5000,5000+"
@@ -117,28 +117,28 @@
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
             <shotType isOpened="false" ref="31" queryPrice="1000-2500,2500-5000,5000-10000,10000+"
                       referencePrice="1000,1000,2000,2000,4000,10000"/>
-        </city>
+        </addressCity>
 
 
-        <!--<city name="sanya" label="三亚市" id="6536547898825489" shortname="三亚">-->
-
-        <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"-->
-        <!--referencePrice="1400,1400,2000,4000,6000,8000"/>-->
-        <!--</city>-->
-
-        <!--<city name="xiamen" label="厦门市" id="2136247891120469" shortname="厦门">-->
+        <!--<addressCity name="sanya" label="三亚市" id="6536547898825489" shortname="三亚">-->
 
         <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"-->
         <!--referencePrice="1400,1400,2000,4000,6000,8000"/>-->
-        <!--</city>-->
+        <!--</addressCity>-->
 
-        <!--<city name="bali" label="巴厘岛" id="2135678234120469" shortname="巴厘岛">-->
-        <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+" referencePrice="600,700,1000,1800,3000,8000"/>-->
-        <!--</city>-->
+        <!--<addressCity name="xiamen" label="厦门市" id="2136247891120469" shortname="厦门">-->
 
-        <!--<city name="maldives" label="马尔代夫" id="2135345345312049" shortname="马尔代夫">-->
+        <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+"-->
+        <!--referencePrice="1400,1400,2000,4000,6000,8000"/>-->
+        <!--</addressCity>-->
+
+        <!--<addressCity name="bali" label="巴厘岛" id="2135678234120469" shortname="巴厘岛">-->
         <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+" referencePrice="600,700,1000,1800,3000,8000"/>-->
-        <!--</city>-->
+        <!--</addressCity>-->
+
+        <!--<addressCity name="maldives" label="马尔代夫" id="2135345345312049" shortname="马尔代夫">-->
+        <!--<shotType ref="2" queryPrice="1000-2000,2000-4000,4000-8000,8000+" referencePrice="600,700,1000,1800,3000,8000"/>-->
+        <!--</addressCity>-->
 
 
     </cityShotType>

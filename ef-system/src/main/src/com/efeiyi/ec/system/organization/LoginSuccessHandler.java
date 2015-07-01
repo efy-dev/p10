@@ -2,7 +2,7 @@ package com.efeiyi.ec.system.organization;
 
 
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.website.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;

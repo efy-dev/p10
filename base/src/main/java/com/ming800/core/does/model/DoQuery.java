@@ -6,49 +6,100 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  * User: ming
  * Date: 12-12-1
- * Time: 下午2:46
+ * Time: 下午2:53
  * To change this template use File | Settings | File Templates.
  */
-public interface DoQuery {
+public class DoQuery {
 
-    String getName();
 
-    void setName(String name);
+    private String name;
+    private String label;
+    private String type;
+    private String orderBy;
+    private String groupBy;
+    private String queryHql;
+    private String queryExpress;
+    private String queryExecute;
+    private List<QueryCondition> conditionList;
+    private List<Groupby> groupByList;
 
-    String getLabel();
+    public String getName() {
+        return name;
+    }
 
-    void setLabel(String label);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    String getType();
+    public String getLabel() {
+        return label;
+    }
 
-    void setType(String type);
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-    String getOrderBy();
+    public String getOrderBy() {
+        return orderBy;
+    }
 
-    void setOrderBy(String orderBy);
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
 
-    String getGroupBy();
+    public String getGroupBy() {
+        return groupBy;
+    }
 
-    void setGroupBy(String groupBy);
+    public void setGroupBy(String groupBy) {
+        this.groupBy = groupBy;
+    }
 
-     String getQueryHql();
+    public String getQueryHql() {
+        return queryHql;
+    }
 
-     void setQueryHql(String queryHql);
+    public void setQueryHql(String queryHql) {
+        this.queryHql = queryHql;
+    }
 
-     String getQueryExpress();
+    public String getQueryExpress() {
+        return queryExpress;
+    }
 
-     void setQueryExpress(String queryExpress);
+    public void setQueryExpress(String queryExpress) {
+        this.queryExpress = queryExpress;
+    }
 
-     String getQueryExecute();
+    public String getQueryExecute() {
+        return queryExecute;
+    }
 
-     void setQueryExecute(String queryExecute);
+    public void setQueryExecute(String queryExecute) {
+        this.queryExecute = queryExecute;
+    }
 
-     List<QueryCondition> getConditionList();
+    public String getType() {
+        return type;
+    }
 
-     void setConditionList(List<QueryCondition> conditionList);
+    public void setType(String type) {
+        this.type = type;
+    }
 
-     List<Groupby> getGroupByList();
+    public List<QueryCondition> getConditionList() {
+        return conditionList;
+    }
 
-     void setGroupByList(List<Groupby> groupByList);
+    public void setConditionList(List<QueryCondition> conditionList) {
+        this.conditionList = conditionList;
+    }
 
+    public List<Groupby> getGroupByList() {
+        return groupByList;
+    }
+
+    public void setGroupByList(List<Groupby> groupByList) {
+        this.groupByList = groupByList;
+    }
 }

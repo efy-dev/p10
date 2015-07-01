@@ -1,8 +1,8 @@
 package com.efeiyi.ec.website.organization.service.impl;
 
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.website.organization.service.ProductManger;
-import com.efeiyi.ec.website.product.model.Product;
-import com.ming800.core.base.dao.BaseDao;
+
 import com.ming800.core.base.dao.XdoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

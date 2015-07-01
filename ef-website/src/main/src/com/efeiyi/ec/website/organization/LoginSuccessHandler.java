@@ -1,6 +1,6 @@
 package com.efeiyi.ec.website.organization;
 
-import com.efeiyi.ec.website.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
@@ -36,15 +36,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         MyUser bigUser = AuthorizationUtil.getMyUser();
-        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("ming20022009")) {
+        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("123456")) {
             SystemLog systemLog = new SystemLog();
             WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) authentication.getDetails();
             String ip = webAuthenticationDetails.getRemoteAddress();
             systemLog.setIp(ip);
             systemLog.setContent("登录成功");
             systemLog.setTheDateTime(new Date());
-//                systemLog.setTeachArea(bigUser.getTeachArea());
-
             systemLog.setTheType(PConst.SYSTEM_LOG_THE_TYPE_LOGIN);
             baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
         }
@@ -56,27 +54,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (savedRequest != null) {
             response.sendRedirect(savedRequest.getRedirectUrl());
         } else {
-
-            if (bigUser.getRole().getBasicType().equals("photographer")) {//摄影师  校验审核状态
-                //未审核
-
-
-                if (HttpUtil.isPhone(request.getHeader("User-Agent"))) {
-                    response.sendRedirect(request.getContextPath() + "/pc/myypl");
-                } else {
-
-                }
-
-            } else if (bigUser.getRole().getBasicType().equals("consumer")) {//普通用户
-                if (request.getParameter("redirect") == null) {
-                    response.sendRedirect(request.getContextPath() + "/");
-                } else {
-                    response.sendRedirect(request.getContextPath() + request.getParameter("redirect"));
-                }
-            } else {
-                response.sendRedirect(request.getContextPath() + "/main.do");
-            }
+            response.sendRedirect(request.getContextPath() + "/main.do");
         }
-//        }
     }
 }

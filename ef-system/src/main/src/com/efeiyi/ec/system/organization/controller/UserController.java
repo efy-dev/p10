@@ -3,7 +3,7 @@ package com.efeiyi.ec.system.organization.controller;
 import com.efeiyi.ec.system.organization.OrganizationConst;
 import com.efeiyi.ec.system.organization.service.UserManager;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
-import com.efeiyi.ec.website.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

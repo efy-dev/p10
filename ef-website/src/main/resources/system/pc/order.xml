@@ -479,7 +479,7 @@
         <entity name="ReceiveAddress" label="收货地址" basic="simple" others=""
                 model="com.yuepaila.order.model.ReceiveAddress">
             <fields>
-                <field name="city" label="城市" key="ReceiveAddress.city" reference="ProvinceCity"></field>
+                <field name="addressCity" label="城市" key="ReceiveAddress.addressCity" reference="ProvinceCity"></field>
             </fields>
 
             <does>

@@ -13,9 +13,9 @@
             <fields>
                 <field name="name" label="名称" inputType="text"/>
                 <field name="schoolName" label="学校名称" inputType="text"/>
-                <field name="province.id" label="省" inputType="dialog_do" key="" reference="Province"/>
-                <field name="city.id" label="市" inputType="dialog_do" key="" reference="City"/>
-                <field name="district.id" label="区" inputType="dialog_do" key="" reference="District"/>
+                <field name="addressProvince.id" label="省" inputType="dialog_do" key="" reference="Province"/>
+                <field name="addressCity.id" label="市" inputType="dialog_do" key="" reference="City"/>
+                <field name="addressDistrict.id" label="区" inputType="dialog_do" key="" reference="District"/>
                 <field name="createDate" label="创建日期" inputType="datetime"/>
                 <field name="theStatus" label="状态" inputType="radio_status" key="Branch.theStatus">
                     <statusType fieldName="theStatus">

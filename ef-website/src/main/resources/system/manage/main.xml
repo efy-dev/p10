@@ -63,7 +63,7 @@
                     </query>
                     <query name="advance" label="分类查找" orderBy="channelIndex:desc">
                         <condition label="城市" name="cityId" defaultValue="${MY_CITY}" inputType="dialog_pop"
-                                   operation="eq" key="city"/>
+                                   operation="eq" key="addressCity"/>
                         <condition label="场景类型" name="sceneType" operation="eq" inputType="select_status"
                                    dataType="int"/>
                         <condition label="频道" name="ptype" operation="eq" inputType="select_status"
@@ -330,7 +330,7 @@
                 model="com.yuepaila.main.model.Shop">
             <fields>
                 <field name="name" label="名称" defaultValue="text"></field>
-                <field name="province.id" label="省份" inputType="dialog_pop" key="Shop" reference="Province"></field>
+                <field name="addressProvince.id" label="省份" inputType="dialog_pop" key="Shop" reference="Province"></field>
                 <field name="cityId" label="城市" inputType="text"></field>
                 <field name="address" label="详细地址" inputType="text"></field>
                 <field name="header" label="负责人姓名" inputType="text"></field>
@@ -358,7 +358,7 @@
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
                         <condition name="cityId" label="城市" defaultValue="${MY_CITY}" inputType="dialog_pop"
-                                   operation="eq" key="city"></condition>
+                                   operation="eq" key="addressCity"></condition>
                         <condition name="theStatus" label="状态" dataType="int" defaultValue="1" operation="eq"
                                    inputType="default"></condition>
                     </query>
@@ -380,7 +380,7 @@
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
                         <condition name="cityId" label="城市" defaultValue="${MY_CITY}" inputType="dialog_pop"
-                                   operation="eq" key="city"></condition>
+                                   operation="eq" key="addressCity"></condition>
                         <condition name="theStatus" label="状态" dataType="int" defaultValue="1" operation="eq"
                                    inputType="default"></condition>
                     </query>
@@ -439,14 +439,14 @@
                     </query>
                     <query name="type" label="频道查询" orderBy="channelIndex:desc">
                         <condition label="城市" name="cityId" defaultValue="${MY_CITY}" operation="eq"
-                                   inputType="dialog_pop" key="city"/>
+                                   inputType="dialog_pop" key="addressCity"/>
                         <condition name="dress.dressType" label="服装类型" defaultValue="" operation="eq"
                                    inputType="select_status" dataType="int" key="Dress.dressType"/>
                         <condition name="theStatus" label="状态" defaultValue="1" dataType="int" operation="eq"
                                    inputType="default"></condition>
                     </query>
                     <query name="advance" label="分类查询" orderBy="channelIndex:desc">
-                        <condition name="cityId" label="城市" inputType="dialog_pop" key="city" defaultValue="${MY_CITY}"
+                        <condition name="cityId" label="城市" inputType="dialog_pop" key="addressCity" defaultValue="${MY_CITY}"
                                    operation="eq"></condition>
                         <condition name="dress.ptype" label="拍摄类型" inputType="select_status" defaultValue="" dataType="int"
                                    operation="eq" key="Dress.ptype"></condition>
@@ -633,7 +633,7 @@
                     <query name="advance" label="分类查找" orderBy="homePageIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition name="photographer.name" label="摄影师" defaultValue="" inputType="text"
                                    operation="like"></condition>
                         <condition name="ptype" label="频道" defaultValue="" dataType="int" inputType="select_status"
@@ -647,7 +647,7 @@
                     <query name="status" label="审核状态" orderBy="homePageIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition name="photographer2.theStatus" label="审核状态" defaultValue="9" operation="eq"
                                    inputType="default" dataType="int"/>
                         <condition label="审核状态" name="theStatus" defaultValue="1" operation="eq"
@@ -677,7 +677,7 @@
                     <query name="advance" label="频道查找" orderBy="channelIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="gt"
                                    inputType="default" dataType="int"/>
                         <condition name="ptype" label="频道" inputType="select_status" operation="eq" dataType="int"/>
@@ -687,7 +687,7 @@
                     <query name="status" label="审核状态" orderBy="channelIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition name="photographer2.theStatus" label="审核状态" defaultValue="9" operation="eq"
                                    inputType="default" dataType="int"/>
                         <condition label="审核状态" name="theStatus" defaultValue="1" operation="eq"
@@ -716,7 +716,7 @@
                     <query name="advance" label="频道查找" orderBy="listIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition label="状态类型" name="theStatus" defaultValue="0" operation="gt"
                                    inputType="default" dataType="int"/>
                         <condition name="ptype" label="频道" inputType="select_status" operation="eq" dataType="int"/>
@@ -726,7 +726,7 @@
                     <query name="status" label="审核状态" orderBy="listIndex:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition name="photographer2.theStatus" label="审核状态" defaultValue="9" operation="eq"
                                    inputType="default" dataType="int"/>
                         <condition label="审核状态" name="theStatus" defaultValue="1" operation="eq"
@@ -747,7 +747,7 @@
                     <query name="advance" label="分类查找" orderBy="id:desc">
                         <condition name="photographer.cityId" label="城市" defaultValue="${MY_CITY}"
                                    inputType="dialog_pop" operation="eq"
-                                   key="city"/>
+                                   key="addressCity"/>
                         <condition label="作品集名称" name="title" operation="like" inputType="text"/>
                         <condition name="photographer2.theStatus" label="审核状态" defaultValue="9" operation="eq"
                                    inputType="default" dataType="int"/>
@@ -1026,7 +1026,7 @@
                         <condition name="theStatus" label="状态" defaultValue="1" dataType="int" inputType="default"
                                    operation="eq"></condition>
                         <condition name="cityId" label="城市" defaultValue="${MY_CITY}" operation="eq"
-                                   inputType="dialog_pop" key="city"></condition>
+                                   inputType="dialog_pop" key="addressCity"></condition>
                         <condition name="ptype" label="频道" defaultValue="" operation="eq" dataType="int"
                                    inputType="select_status"></condition>
                     </query>
@@ -1091,7 +1091,7 @@
                     </query>
                     <query name="advance" label="城市查询" orderBy="id:desc">
                         <condition name="aPackage.cityId" label="城市" defaultValue="${MY_CITY}" operation="eq"
-                                   inputType="dialog_pop" key="city"></condition>
+                                   inputType="dialog_pop" key="addressCity"></condition>
                         <condition name="aPackage.ptype" label="类型" defaultValue="" operation="eq" dataType="int"
                                    inputType="select_status"></condition>
                     </query>
@@ -1199,7 +1199,7 @@
                     </query>
                     <query name="advance" label="城市查询" orderBy="id:desc">
                         <condition name="cityId" label="城市" inputType="dialog_pop" defaultValue="${MY_CITY}"
-                                   operation="eq" key="city"></condition>
+                                   operation="eq" key="addressCity"></condition>
                         <condition name="theStatus" label="状态" inputType="default" defaultValue="1" operation="eq" dataType="int"></condition>
                     </query>
                 </do>

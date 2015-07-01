@@ -1,9 +1,9 @@
 package com.efeiyi.ec.website.organization.util;
 
 
-import com.efeiyi.ec.website.organization.model.MyUser;
-import com.efeiyi.ec.website.organization.model.Role;
-import com.efeiyi.ec.website.organization.model.User;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.Role;
+import com.efeiyi.ec.organization.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

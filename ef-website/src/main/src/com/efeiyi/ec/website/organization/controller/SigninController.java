@@ -4,8 +4,8 @@ package com.efeiyi.ec.website.organization.controller;
  * Created by Administrator on 2014/11/13.
  */
 
-import com.efeiyi.ec.website.organization.model.BigUser;
-import com.efeiyi.ec.website.organization.model.User;
+import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.ming800.core.base.controller.BaseController;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -27,16 +28,16 @@ import java.io.IOException;
  * Created by IntelliJ IDEA.
  * User: ming
  * Date: 12-10-15
- * Time: ÏÂÎç4:56
+ * Time: ï¿½ï¿½ï¿½ï¿½4:56
  * To change this template use File | Settings | File Templates.
  */
 
 @Controller
 @RequestMapping({"/pc"})
 public class SigninController extends BaseController {
-    //@Autowired
+    @Autowired
     private RoleManager roleManager;
-    //@Autowired
+    @Autowired
     private BranchManager branchManager;
 
     @Autowired
@@ -52,10 +53,10 @@ public class SigninController extends BaseController {
     private SmsCheckManager smsCheckManager;*/
 
     /**
-     * ²é¿´µ±Ç°ÓÃ»§ÃûÊÇ·ñ´æÔÚ
+     * ï¿½é¿´ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
      *
-     * @param username ÓÃ»§Ãû
-     * @return ÊÇ·ñ´æÔÚ
+     * @param username ï¿½Ã»ï¿½ï¿½ï¿½
+     * @return ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping(value = "/checkUserName.do")
     @ResponseBody
@@ -72,28 +73,26 @@ public class SigninController extends BaseController {
 
 
     /**
-     * ×¢²áĞÂµÄÏû·ÑÕß
+     * ×¢ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param request
-     * @param bigUser  Ïû·ÑÕßµÄ³õÊ¼ĞÅÏ¢
-     * @param modelMap ·µ»Ø¸øÊÓÍ¼µÄÊı¾İ
-     * @return jspµÄÂ·¾¶
+     * @param bigUser  ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ³ï¿½Ê¼ï¿½ï¿½Ï¢
+     * @param modelMap ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return jspï¿½ï¿½Â·ï¿½ï¿½
      * @throws Exception
      */
     @RequestMapping(value = "/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, BigUser bigUser, ModelMap modelMap) throws Exception {
         bigUser.setRole(roleManager.getRole("consumer"));
-        /*if (this.baseManager.viewUserByUsername(bigUser.getUsername()) == null) {
-            registerManager.saveEnrollMessage(bigUser);
-        }*/
+
         modelMap.put("user", bigUser);
-        modelMap.put("message", "×¢²á³É¹¦");
+        modelMap.put("message", "×¢ï¿½ï¿½É¹ï¿½");
         request.getSession().setAttribute("username", bigUser.getUsername());
         return new ModelAndView((request) + "/signinSuccess");
     }
 
     /*
-    ÈÏÖ¤ÊÖ»úÑéÖ¤Âë
+    ï¿½ï¿½Ö¤ï¿½Ö»ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
      */
     @RequestMapping({"/verification/verify.do"})
     @ResponseBody
@@ -112,11 +111,11 @@ public class SigninController extends BaseController {
     }
 
     /*
-    ·¢ËÍÊÖ»úÑéÖ¤Âë
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
      */
     @RequestMapping({"/verification/send.do"})
     @ResponseBody
-    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
+    public boolean sendVerificationCode() throws IOException {
        /* String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
@@ -134,7 +133,7 @@ public class SigninController extends BaseController {
         return false;
     }
     /**
-     * Ìø×ªµ½×¢²áÒ³ÃæµÄcontroller
+     * ï¿½ï¿½×ªï¿½ï¿½×¢ï¿½ï¿½Ò³ï¿½ï¿½ï¿½controller
      */
     @RequestMapping(value = {"enroll.do", "register"})
     public String enroll(HttpServletRequest request, Model model) {
@@ -146,21 +145,47 @@ public class SigninController extends BaseController {
     }
 
     /**
-     * Ìø×ªµ½µÇÂ¼Ò³ÃæµÄcontroller
+     * ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½ï¿½controller
      */
+    @RequestMapping("/toLogin.do")
+    public String toLogin(){
+        return "/login";
+    }
+
     @RequestMapping(value = {"login.do", "login"})
-    public String login(HttpServletRequest request, Model model) {
-        if (request.getParameter("redirect") != null) {
+    public String login(HttpServletRequest request , Model model) {
+        /*if (request.getParameter("redirect") != null) {
             String redirectUrl = request.getParameter("redirect");
             model.addAttribute("redirect", redirectUrl);
         }
         if (request.getParameter("error") != null && request.getParameter("error").equals("true")) {
-            model.addAttribute("message", "ÓÃ»§ÃûÃÜÂë²»Æ¥Åä");
+            model.addAttribute("message", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Æ¥ï¿½ï¿½");
         } else if ("1".equals(request.getParameter("updatePsw"))) {
-            model.addAttribute("message", "ÃÜÂëĞŞ¸Ä³É¹¦");
+            model.addAttribute("message", "ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä³É¹ï¿½");
+        }*/
+        int result;
+        String username = request.getParameter("j_username");
+        String password = request.getParameter("j_password");
+        if (username != null && !"".equals(username) && password != null && !"".equals(password)){
+            if (username.equals("admin") && password.equals("123456")){
+                model.addAttribute("message","ç™»å½•æˆåŠŸ!");
+                result = 1;
+            }else{
+                model.addAttribute("message","ç”¨æˆ·åæˆ–å¯†ç è¾“å…¥é”™è¯¯!");
+                result = -1;
+            }
+        }else{
+            model.addAttribute("message","ç”¨æˆ·åæˆ–å¯†ç ä¸èƒ½ä¸ºç©º");
+            result = -2;
         }
-        model.addAttribute("enrollUsername", request.getParameter("enrollUsername"));
-        return (request) + "/login";
+        model.addAttribute("result",result);
+        if (result == 1){
+            return "/loginForm";
+        }else if(result == -1){
+            return  "/login";
+        }else{
+            return  "/login";
+        }
     }
 
 }
