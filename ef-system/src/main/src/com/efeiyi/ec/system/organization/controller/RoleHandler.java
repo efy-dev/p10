@@ -36,7 +36,7 @@ public class RoleHandler implements DoHandler {
         String id = request.getParameter("id");
         if (id != null && !id.equals("")) {
             type = "edit";
-            role = (Role) baseManager.getObject(Role.class, id);
+            role = (Role) baseManager.getObject(Role.class.getName(), id);
             if (role.getPermissionsList() != null && role.getPermissionsList().size() > 0) {
                 String[] deletePermissionIdArray = new String[role.getPermissionsList().size()];
                 for (int i = 0; i < role.getPermissionsList().size(); i++) {

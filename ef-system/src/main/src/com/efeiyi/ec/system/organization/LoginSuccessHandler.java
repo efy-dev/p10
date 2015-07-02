@@ -47,10 +47,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //                systemLog.setTeachArea(bigUser.getTeachArea());
 
             systemLog.setTheType(PConst.SYSTEM_LOG_THE_TYPE_LOGIN);
-            baseManager.saveOrUpdate(systemLog.getClass(), systemLog);
+            baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
         }
         bigUser.setLastLoginDatetime(new Date());
-        baseManager.saveOrUpdate(bigUser.getClass(), bigUser);
+        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
         System.out.println("登录成功");
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);

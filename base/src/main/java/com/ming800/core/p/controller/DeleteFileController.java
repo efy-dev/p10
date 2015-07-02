@@ -49,7 +49,7 @@ public class DeleteFileController {
 
                 if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DATABASE)) {
                     String fileDataId = attachmentArray[1].toString();
-                    baseManager.delete(FileData.class, fileDataId);
+                    baseManager.delete(FileData.class.getName(), fileDataId);
                 } else if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DISK)) {
                     // 获取路径
                     File file = new File(attachmentArray[2].toString());
