@@ -68,7 +68,7 @@ public class AttachmentManagerImpl implements AttachmentManager {
                 FileData fileData = (FileData) ReflectUtil.invokeGetterMethod(obj, "data");
                 String storeType = ReflectUtil.invokeGetterMethod(obj, "storeType").toString();
                 if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DATABASE)) {
-                    baseDao.deleteObject(FileData.class, fileData.getId());
+                    baseDao.deleteObject(FileData.class.getName(), fileData.getId());
                 } else if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DISK)) {
                     // 获取路径
                     File file = new File(fileData.getPath());

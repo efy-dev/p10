@@ -75,7 +75,8 @@ public class TenantNews {
         this.type = type;
     }
 
-    @Column(name="tenant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
     }

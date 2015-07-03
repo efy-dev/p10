@@ -33,7 +33,7 @@ public class BaseManagerImpl implements BaseManager {
 
 
     @Override
-    public Object getObject(Class model, String id) {
+    public Object getObject(String model, String id) {
         return xdoDao.getObject(model, id);
     }
 
@@ -41,17 +41,17 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
-    public void saveOrUpdate(Class model, Object object) {
+    public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
 
     @Override
-    public void delete(Class model, String id) {
+    public void delete(String model, String id) {
         xdoDao.deleteObject(model, id);
     }
 
     @Override
-    public void remove(Class model, String id) {
+    public void remove(String model, String id) {
         xdoDao.removeObject(model,id);
     }
 
@@ -110,9 +110,9 @@ public class BaseManagerImpl implements BaseManager {
 
 
     @Override
-    public void batchSaveOrUpdate(String type, Class model, List<Object> objectList) {
+    public void batchSaveOrUpdate(String type, String modelType, List<Object> objectList) {
 
-        xdoDao.batchSaveOrUpdate(type, model, objectList);
+        xdoDao.batchSaveOrUpdate(type, modelType, objectList);
 
         //To change body of implemented methods use File | Settings | File Templates.
     }

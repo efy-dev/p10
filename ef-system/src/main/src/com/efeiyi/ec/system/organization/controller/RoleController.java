@@ -38,7 +38,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/formRole.do")
     public ModelAndView formRole(Role role, ModelMap modelMap) throws Exception {
         if (role != null && role.getId() != null) {
-            role = (Role) baseManager.getObject(role.getClass(), role.getId());
+            role = (Role) baseManager.getObject(role.getClass().getName(), role.getId());
             if (role.getPermissionsList() != null && role.getPermissionsList().size() > 0) {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Permission permission : role.getPermissionsList()) {

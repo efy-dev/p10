@@ -381,7 +381,7 @@ public class XdoController {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
 
                 object = modelMap.get("object");
-                baseManager.saveOrUpdate(object.getClass(), object);
+                baseManager.saveOrUpdate(object.getClass().getName(), object);
             } else {
                 xdoManager.saveOrUpdateObject(tempDo, request);
             }

@@ -19,13 +19,13 @@ import java.util.Map;
 public interface BaseManager {
 
 
-    Object getObject(Class model, String id);
+    Object getObject(String model, String id);
 
-    void saveOrUpdate(Class model, Object object);
+    void saveOrUpdate(String model, Object object);
 
-    void delete(Class model, String id);
+    void delete(String model, String id);
 
-    void remove(Class model, String id);
+    void remove(String model, String id);
 
     List listObject(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
@@ -39,7 +39,7 @@ public interface BaseManager {
 
     int batchDelete(String model, String[] idArray);
 
-    void batchSaveOrUpdate(String type, Class modelType, List<Object> objectList);
+    void batchSaveOrUpdate(String type, String modelType, List<Object> objectList);
 
     Object executeSql(String type, String queryStr, LinkedHashMap<String, Object> queryParamMap);
 

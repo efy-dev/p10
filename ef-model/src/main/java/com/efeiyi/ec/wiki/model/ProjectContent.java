@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by Administrator on 2015/6/24.
  */
 @Entity
-@Table(name="wiki_projectcontent")
+@Table(name="wiki_project_content")
 public class ProjectContent {
     private String id;
     private String content;

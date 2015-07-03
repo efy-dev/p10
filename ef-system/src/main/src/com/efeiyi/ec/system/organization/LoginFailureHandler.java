@@ -50,7 +50,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             systemLog.setTheType(PConst.SYSTEM_LOG_THE_TYPE_LOGIN);
             systemLog.setContent("登陆失败");
             //systemLog.setUser(branchManager.checkUsername(username));
-            baseManager.saveOrUpdate(systemLog.getClass(), systemLog);
+            baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
             String j_username = request.getParameter("j_username");
 
             try {
