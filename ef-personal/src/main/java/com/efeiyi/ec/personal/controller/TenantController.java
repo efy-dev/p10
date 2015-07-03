@@ -33,7 +33,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/getTenant.do")
     public ModelAndView getTenant(String tenantId , ModelMap model){
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class,tenantId);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
         model.addAttribute("entity",tenant);
         return new ModelAndView("/tenant/tenantView" , model);
     }
@@ -61,7 +61,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/getTenantHonor.do")
     public ModelAndView getTenantHonor(String honorId , ModelMap model){
-       TenantHonor honor = (TenantHonor) baseManager.getObject(TenantHonor.class,honorId);
+       TenantHonor honor = (TenantHonor) baseManager.getObject(TenantHonor.class.getName(),honorId);
         model.addAttribute("entity",honor);
         return new ModelAndView("/tenant/tenantHonor/tenantHonorView",model);
     }
@@ -74,7 +74,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/tenantHonorList.do")
     public ModelAndView listTenantHonor(HttpServletRequest request ,String tenantId ,ModelMap model){
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class,tenantId);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
         model.addAttribute("tenant",tenant);
         String condition = request.getParameter("condition");
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
@@ -100,7 +100,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/getTenantIntroduction.do")
     public ModelAndView getTenantIntroduction(String introductionId ,ModelMap model){
-        TenantIntroduction introduction = (TenantIntroduction) baseManager.getObject(TenantIntroduction.class,introductionId);
+        TenantIntroduction introduction = (TenantIntroduction) baseManager.getObject(TenantIntroduction.class.getName(),introductionId);
         model.addAttribute("entity",introduction);
         return new ModelAndView("/tenant/tenantIntroduction/tenantIntroductionView",model);
     }
