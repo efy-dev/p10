@@ -136,7 +136,7 @@ public class Product {
         this.project = project;
     }
 
-    @Column(name = "create_date_time")
+    @Column(name = "createDateTime")
     public Date getCreateDateTime() {
         return createDateTime;
     }

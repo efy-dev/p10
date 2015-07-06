@@ -14,7 +14,7 @@ import java.util.Date;
 public class PurchaseOrderPayment {
     private String id;
     private PurchaseOrder purchaseOrder;
-    private Date createDatetime;
+    private Date createDateTime;
     private String payWay;
     private User user;
 
@@ -39,13 +39,13 @@ public class PurchaseOrderPayment {
         this.purchaseOrder = purchaseOrder;
     }
 
-    @Column(name = "create_datetime")
-    public Date getCreateDatetime() {
-        return createDatetime;
+    @Column(name = "createDateTime")
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
     @Column(name = "payway")

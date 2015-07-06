@@ -14,8 +14,7 @@ public class TenantHonor {
     private String id;
     private String memo;
     private Tenant tenant;
-    private Date createDate;
-    private Date modifyDate;
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -47,21 +46,13 @@ public class TenantHonor {
         this.tenant = tenant;
     }
 
-    @Column(name = "create_date")
-    public Date getCreateDate() {
-        return createDate;
+    @Column(name = "createDateTime")
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
-    @Column(name = "modify_date")
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
 }

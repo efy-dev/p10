@@ -69,7 +69,7 @@ public class ProjectNews {
         this.creator = creator;
     }
 
-    @Column(name="createdatetime")
+    @Column(name="createDateTime")
     public Date getCreateDatetime() {
         return createDatetime;
     }

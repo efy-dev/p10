@@ -15,7 +15,7 @@ public class PurchaseOrderDelivery {
     private String id;
     private PurchaseOrder purchaseOrder;
     private ConsumerAddress consumerAddress;
-    private Date createDatetime;
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -48,12 +48,12 @@ public class PurchaseOrderDelivery {
         this.consumerAddress = consumerAddress;
     }
 
-    @Column(name = "create_datetime")
-    public Date getCreateDatetime() {
-        return createDatetime;
+    @Column(name = "createDateTime")
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }

@@ -29,7 +29,7 @@ public class Tenant implements Serializable {
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private AddressProvince addressProvince;
     private AddressDistrict addressDistrict;
-    private Date createDate;
+    private Date createDateTime;
 
 
     @Id
@@ -85,13 +85,13 @@ public class Tenant implements Serializable {
         this.addressDistrict = addressDistrict;
     }
 
-    @Column(name = "create_date")
-    public Date getCreateDate() {
-        return createDate;
+    @Column(name = "createDateTime")
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateDateTime(Date createDate) {
+        this.createDateTime = createDateTime;
     }
 
 

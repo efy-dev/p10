@@ -14,7 +14,7 @@ import java.util.Date;
 public class TenantNews {
     private String id;
     private String title;
-    private Date createDatetime;
+    private Date createDateTime;
     private User creator;
     private String content;
     private String type;
@@ -40,13 +40,13 @@ public class TenantNews {
         this.title = title;
     }
 
-    @Column(name="createdatetime")
-    public Date getCreateDatetime() {
-        return createDatetime;
+    @Column(name="createDateTime")
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
