@@ -59,7 +59,7 @@ public class ProjectContent {
         this.creator = creator;
     }
 
-    @Column(name="createDateTime")
+    @Column(name="create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }

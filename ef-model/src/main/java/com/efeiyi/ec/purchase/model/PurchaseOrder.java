@@ -51,7 +51,7 @@ public class PurchaseOrder {
         this.purchaseOrderProductList = purchaseOrderProductList;
     }
 
-    @Column(name = "createDateTime")
+    @Column(name = "create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }

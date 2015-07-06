@@ -58,7 +58,7 @@ public class TenantWorkShop {
         this.picture_url = picture_url;
     }
 
-    @Column(name="createDateTime")
+    @Column(name="create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }

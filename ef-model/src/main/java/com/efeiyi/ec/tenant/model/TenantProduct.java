@@ -137,7 +137,7 @@ public class TenantProduct {
         this.project = project;
     }
 
-    @Column(name="createDateTime")
+    @Column(name="create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }

@@ -39,7 +39,7 @@ public class Cart {
         this.cartProductList = cartProductList;
     }
 
-    @Column(name="createDateTime")
+    @Column(name="create_datetime")
     public Date getCreateDatetime() {
         return createDatetime;
     }

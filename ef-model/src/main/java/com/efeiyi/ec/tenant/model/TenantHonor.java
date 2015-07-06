@@ -46,7 +46,7 @@ public class TenantHonor {
         this.tenant = tenant;
     }
 
-    @Column(name = "createDateTime")
+    @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }

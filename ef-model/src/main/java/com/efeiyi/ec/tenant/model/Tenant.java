@@ -85,7 +85,7 @@ public class Tenant implements Serializable {
         this.addressDistrict = addressDistrict;
     }
 
-    @Column(name = "createDateTime")
+    @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }

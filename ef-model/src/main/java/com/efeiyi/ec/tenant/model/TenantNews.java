@@ -40,7 +40,7 @@ public class TenantNews {
         this.title = title;
     }
 
-    @Column(name="createDateTime")
+    @Column(name="create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;
     }
