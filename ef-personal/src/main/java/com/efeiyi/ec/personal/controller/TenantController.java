@@ -191,6 +191,8 @@ public class TenantController extends BaseController {
         model.addAttribute("productWorkShop", productWorkShop);
         return new ModelAndView("/tenant/tenantWorkShop/tenantWorkShopView", model);
     }
-
+/**
+ *
+ */
 
 }
