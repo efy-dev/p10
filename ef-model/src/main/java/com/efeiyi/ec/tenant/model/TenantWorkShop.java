@@ -15,7 +15,7 @@ public class TenantWorkShop {
     private String name;
     private Tenant tenant;
     private String picture_url;
-    private Date createDatetime;
+    private Date createDateTime;
     private String shopIntroduction;
 
 
@@ -59,12 +59,12 @@ public class TenantWorkShop {
     }
 
     @Column(name="createdatetime")
-    public Date getCreateDatetime() {
-        return createDatetime;
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 
     @Column(name="shop_introduction")
