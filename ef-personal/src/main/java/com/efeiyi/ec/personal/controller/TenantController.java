@@ -139,7 +139,7 @@ public class TenantController extends BaseController {
             sb.append(" and YEAR(p.createDateTime) = "+ Integer.valueOf(condition));
         }
         sb.append(" order by p.createDateTime DESC");
-        List<TenantProduct> productList = baseManager.listObject(sb.toString(), queryParamMap);
+        List productList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productList",productList);
         return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
 
@@ -163,7 +163,7 @@ public class TenantController extends BaseController {
             sb.append(" and YEAR(t.createDateTime) = "+ Integer.valueOf(condition));
         }
         sb.append(" order by t.createDateTime DESC");
-        List<TenantWork> productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
+        List productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productWorkList", productWorkList);
         return new ModelAndView("/tenant/tenantWork/tenantWorkView", model);
     }
