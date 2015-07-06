@@ -136,12 +136,12 @@ public class TenantController extends BaseController {
          * 根据页面传递查询参数来选择展示的数据
          */
         if(condition != null && Long.valueOf(condition) > 0){
-            sb.append(" and YEAR(p.createDate) = "+ Integer.valueOf(condition));
+            sb.append(" and YEAR(p.createDateTime) = "+ Integer.valueOf(condition));
         }
-        sb.append(" order by p.createDate DESC");
+        sb.append(" order by p.createDateTime DESC");
         List<TenantProduct> productList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productList",productList);
-        return new ModelAndView("/tenant/tenantProduction/tenantProductionView",model);
+        return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
 
     }
     /**
@@ -160,12 +160,12 @@ public class TenantController extends BaseController {
         queryParamMap.put("tenantId",tenantId);
 
         if(condition != null && Long.valueOf(condition) > 0){
-            sb.append(" and YEAR(t.createDatetime) = "+ Integer.valueOf(condition));
+            sb.append(" and YEAR(t.createDateTime) = "+ Integer.valueOf(condition));
         }
-        sb.append(" order by t.createDatetime DESC");
+        sb.append(" order by t.createDateTime DESC");
         List<TenantWork> productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productWorkList", productWorkList);
-        return new ModelAndView("", model);
+        return new ModelAndView("/tenant/tenantWork/tenantWorkView", model);
     }
     /**
      * 注释

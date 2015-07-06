@@ -15,7 +15,7 @@ public class TenantWork {
     private String name;
     private Tenant tenant;
     private String picture_url;
-    private Date createDatetime;
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -57,11 +57,11 @@ public class TenantWork {
     }
 
     @Column(name="createdatetime")
-    public Date getCreateDatetime() {
-        return createDatetime;
+    public Date getCreateDateTime() {
+        return createDateTime;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }
