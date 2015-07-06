@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class Product {
     private ProductDescription productDescription;
     private String status;
     private Project project;
+    private Date createDateTime;
 
 
     @Id
@@ -132,5 +134,14 @@ public class Product {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    @Column(name = "create_date_time")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }

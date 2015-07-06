@@ -1,5 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
+import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class TenantNews {
     private String id;
     private String title;
     private Date createDatetime;
-    private String creator;
+    private User creator;
     private String content;
     private String type;
     private Tenant tenant;
@@ -48,12 +49,13 @@ public class TenantNews {
         this.createDatetime = createDatetime;
     }
 
-    @Column(name="creator")
-    public String getCreator() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
