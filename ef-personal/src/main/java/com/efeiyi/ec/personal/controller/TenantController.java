@@ -139,7 +139,7 @@ public class TenantController extends BaseController {
             sb.append(" and YEAR(p.createDateTime) = "+ Integer.valueOf(condition));
         }
         sb.append(" order by p.createDateTime DESC");
-        List<TenantProduct> productList = baseManager.listObject(sb.toString(), queryParamMap);
+        List productList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productList",productList);
         return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
 
@@ -163,13 +163,36 @@ public class TenantController extends BaseController {
             sb.append(" and YEAR(t.createDateTime) = "+ Integer.valueOf(condition));
         }
         sb.append(" order by t.createDateTime DESC");
-        List<TenantWork> productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
+        List productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productWorkList", productWorkList);
         return new ModelAndView("/tenant/tenantWork/tenantWorkView", model);
     }
-    /**
-     * 注释
-     */
 
+    /**
+     * 获取传承人工作坊
+     * @param model
+     * @return
+     */
+    @RequestMapping("/tenantWorkShopList.do")
+    public ModelAndView listTenantWorkShop(HttpServletRequest request ,ModelMap model){
+        String condition = request.getParameter("condition");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        String tenantId = request.getParameter("tenantId");
+        Tenant tenant = (Tenant)baseManager.getObject(Tenant.class.getName(),tenantId);
+        model.addAttribute("tenant",tenant);
+        StringBuffer sb = new StringBuffer("from TenantWorkShop t where t.tenant.id = :tenantId");
+        queryParamMap.put("tenantId",tenantId);
+
+        if(condition != null && !"".equals(condition) && Long.valueOf(condition) > 0){
+            sb.append(" and YEAR(t.createDateTime) = "+ Integer.valueOf(condition));
+        }
+        sb.append(" order by t.createDateTime DESC");
+        TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(sb.toString(), queryParamMap);
+        model.addAttribute("productWorkShop", productWorkShop);
+        return new ModelAndView("/tenant/tenantWorkShop/tenantWorkShopView", model);
+    }
+/**
+ *
+ */
 
 }
