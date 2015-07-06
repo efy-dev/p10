@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="tenantHonor" label="系统-传承人殊荣" version="" package="com.efeiyi.ec.tenant" path="">
+
+    <entities>
+        <entity name="TenantHonorList" label="传承人殊荣列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantHonor">
+            <fields>
+                <field name="id" label="传承人殊荣id" inputType="text"/>
+                <field name="memo" label="传承人殊荣memo" inputType="text"/>
+            </fields>
+            <does>
+                <do name="plistTenantHonor" access="" label="传承人殊荣分页列表"
+                    result="/tenantHonor/tenantHonorPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="formTenantHonor" label="保存大师殊荣页" access="" result="/tenantHonor/tenantHonorForm"></do>
+                <do name="saveOrUpdateTenantHonor" label="保存大师殊荣" access="" result="/tenantHonor/tenantHonorSaveSuccess">
+                </do>
+                <do name="removeTenantHonor" label="删除大师" access="" result="json"/>
+                <do name="listTenantHonor" label="传承人列表" access="" result="/tenantHonor/tenantHonorList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品名称" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+    </entities>
+
+</module>
