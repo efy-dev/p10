@@ -1,8 +1,6 @@
 package com.efeiyi.ec.personal.controller;
 
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantHonor;
-import com.efeiyi.ec.tenant.model.TenantIntroduction;
+import com.efeiyi.ec.tenant.model.*;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +118,58 @@ public class TenantController extends BaseController {
         return new ModelAndView("",model);
     }
 
+    /**
+     * 获取传承人作品列表
+     * @param model
+     * @return
+     */
+    @RequestMapping("/tenantProductList.do")
+    public ModelAndView listTenantProduct(HttpServletRequest request ,ModelMap model){
+        String condition = request.getParameter("condition");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        String tenantId = request.getParameter("tenantId");
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        model.addAttribute("tenant",tenant);
+        StringBuffer sb = new StringBuffer("from TenantProduct p where p.tenant.id = :tenantId");
+        queryParamMap.put("tenantId",tenantId);
+        /**
+         * 根据页面传递查询参数来选择展示的数据
+         */
+        if(condition != null && Long.valueOf(condition) > 0){
+            sb.append(" and YEAR(p.createDate) = "+ Integer.valueOf(condition));
+        }
+        sb.append(" order by p.createDate DESC");
+        List<TenantProduct> productList = baseManager.listObject(sb.toString(), queryParamMap);
+        model.addAttribute("productList",productList);
+        return new ModelAndView("/tenant/tenantProduction/tenantProductionView",model);
 
+    }
+    /**
+     * 获取传承人著作列表
+     * @param model
+     * @return
+     */
+    @RequestMapping("/tenantWorkList.do")
+    public ModelAndView listTenantWork(HttpServletRequest request ,ModelMap model){
+        String condition = request.getParameter("condition");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        String tenantId = request.getParameter("tenantId");
+        Tenant tenant = (Tenant)baseManager.getObject(Tenant.class.getName(),tenantId);
+        model.addAttribute("tenant",tenant);
+        StringBuffer sb = new StringBuffer("from TenantWork t where t.tenant.id = :tenantId");
+        queryParamMap.put("tenantId",tenantId);
+
+        if(condition != null && Long.valueOf(condition) > 0){
+            sb.append(" and YEAR(t.createDatetime) = "+ Integer.valueOf(condition));
+        }
+        sb.append(" order by t.createDatetime DESC");
+        List<TenantWork> productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
+        model.addAttribute("productWorkList", productWorkList);
+        return new ModelAndView("", model);
+    }
+    /**
+     * 注释
+     */
 
 
 }
