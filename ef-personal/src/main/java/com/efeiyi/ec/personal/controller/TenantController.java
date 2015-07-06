@@ -160,9 +160,9 @@ public class TenantController extends BaseController {
         queryParamMap.put("tenantId",tenantId);
 
         if(condition != null && Long.valueOf(condition) > 0){
-            sb.append(" and YEAR(t.createDate) = "+ Integer.valueOf(condition));
+            sb.append(" and YEAR(t.createDatetime) = "+ Integer.valueOf(condition));
         }
-        sb.append(" order by t.createDate DESC");
+        sb.append(" order by t.createDatetime DESC");
         List<TenantWork> productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productWorkList", productWorkList);
         return new ModelAndView("", model);
