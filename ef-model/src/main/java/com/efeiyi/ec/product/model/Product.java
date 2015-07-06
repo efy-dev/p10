@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,8 +26,6 @@ public class Product {
     private ProductDescription productDescription;
     private String status;
     private Project project;
-    private Date createDate;
-    private Date modifyDate;
 
 
     @Id
@@ -135,23 +132,5 @@ public class Product {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    @Column(name="create_date")
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    @Column(name="modify_date")
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
     }
 }
