@@ -57,9 +57,9 @@ public interface XdoManager {
 
     //public LinkedHashMap<GroupTypeEntity, String> generateDataReportData2(Do tempDo, DoQuery tempDoQuery, Page tempPage, String tempConditions) throws Exception;
 
-    Object processSaveOrUpdateObject(Do tempDo, Object object, Class objectClass, HttpServletRequest request, String type) throws Exception;
-
-    Object processSaveOrUpdateTempObject(Do tempDo, Object object, Class objectClass, HttpServletRequest request, String type) throws Exception;
+//    Object processSaveOrUpdateObject(Do tempDo, Object object, Class objectClass, HttpServletRequest request, String type) throws Exception;
+//
+//    Object processSaveOrUpdateTempObject(Do tempDo, Object object, Class objectClass, HttpServletRequest request, String type) throws Exception;
 
     /**
      * 批量更新
@@ -71,5 +71,5 @@ public interface XdoManager {
     int batchUpdate(Do tempDo, String ids) throws Exception;
 
     /*处理数据*/
-    Object convertPropertyValue(QueryCondition condition, String tempConditions, String tempOperator);
+//    Object convertPropertyValue(QueryCondition condition, String tempConditions, String tempOperator);
 }

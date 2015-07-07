@@ -18,7 +18,7 @@
 <div>
   <sitemesh:body/>
 </div>
-  <%@ include file="/layouts/footer.jsp"%>
+<%@ include file="/layouts/footer.jsp"%>
 </body>
 
 </html>

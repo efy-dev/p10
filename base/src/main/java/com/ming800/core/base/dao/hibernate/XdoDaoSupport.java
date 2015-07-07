@@ -167,7 +167,9 @@ public class XdoDaoSupport implements XdoDao {
             countQuery = this.getSession().createQuery("SELECT COUNT(*) " + queryHql);
         }
 
+        //查询主要数据
         listQuery = setQueryParams(listQuery, queryParamMap);
+        //查询数据的总条数（分页）
         countQuery = setQueryParams(countQuery, queryParamMap);
 
         return this.getPage(listQuery, countQuery, pageEntity);
@@ -238,6 +240,7 @@ public class XdoDaoSupport implements XdoDao {
             info.setList(list);
         }
 
+        //查询所有数据的条数
         info.setCount(((Long) countQuery.uniqueResult()).intValue());
 
         pageEntity.setCount(info.getCount());

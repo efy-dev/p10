@@ -14,8 +14,8 @@
     <http pattern="/**/*.png" security="none"/>
     <http pattern="/js/*.js" security="none"/>
     <http auto-config="true">
-        <intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>
-        <intercept-url pattern="/**" access="ROLE_ADMIN"/>
+        <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->
+        <!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
     </http>
     <authentication-manager>
         <authentication-provider>

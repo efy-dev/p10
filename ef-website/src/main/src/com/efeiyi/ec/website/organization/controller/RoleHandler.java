@@ -2,8 +2,10 @@ package com.efeiyi.ec.website.organization.controller;
 
 import com.efeiyi.ec.organization.model.Permission;
 import com.efeiyi.ec.organization.model.Role;
+import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -25,6 +27,7 @@ public class RoleHandler implements DoHandler {
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
     private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
+    private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
@@ -46,7 +49,7 @@ public class RoleHandler implements DoHandler {
             }
         }
         Do tempDo = (Do) modelMap.get("tempDo");
-        role = (Role) xdoManager.processSaveOrUpdateTempObject(tempDo, role, role.getClass(), request, type);
+        role = (Role) XDoUtil.processSaveOrUpdateTempObject(tempDo, role, role.getClass(), request, type,xdoDao);
 
         //建立新的权限
         List<Permission> permissionList = new ArrayList<>();

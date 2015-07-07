@@ -37,6 +37,7 @@ public class SystemValueUtil {
         if (defaultValue.startsWith("${")) {
             defaultValue = defaultValue.substring(defaultValue.indexOf("${") + 2, defaultValue.indexOf("}"));
             switch (defaultValue) {
+                //@TODO 这里注释掉那么以后在配置文件中将不能使用MyUser的默认值了
 /*                case "MY_USER":
                     if (type.equals("id")) {
                         resultValue = AuthorizationUtil.getUser().getId();
