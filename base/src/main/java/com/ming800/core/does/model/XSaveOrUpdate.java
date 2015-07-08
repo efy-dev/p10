@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class XSaveOrUpdate {
 
-    private HashMap<String, Object> paramMap;  //需要更新或者保存的字段值
     private Do tempDo;  //数据类型信息
+    private HashMap<String, Object> paramMap;  //需要更新或者保存的字段值
 
     private DoManager doManager = (DoManager) ApplicationContextUtil.getApplicationContext().getBean("doManagerImpl");
 

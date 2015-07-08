@@ -31,7 +31,6 @@ public class DoController {
     public ModelAndView generateTabs(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
-        System.out.println("======================" + request.getRequestURI() + "====================================");
         modelMap.put("qm", qm);
 
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
@@ -81,27 +80,4 @@ public class DoController {
         return stringBuilder.toString();
     }
 
-    @RequestMapping("/spinach/generateTabs.do")
-    public ModelAndView spinachGenerateTabs(HttpServletRequest request, ModelMap modelMap) throws Exception {
-
-        String qm = request.getParameter("qm");
-        modelMap.put("qm", qm);
-
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        modelMap.put("tempDo", tempDo);
-        modelMap.put("doQueryList", tempDo.getDoQueryList());
-
-/*
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-*/
-
-        return new ModelAndView("/core/base/spinachTabDiv");
-    }
-
-    @RequestMapping("/spinach/listCondition.do")
-    @ResponseBody
-    public String spinachListCondition(HttpServletRequest request) throws Exception {
-        return listCondition(request);
-    }
 }

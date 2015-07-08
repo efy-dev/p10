@@ -56,6 +56,16 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <jsp-config>
+        <!--增加自定义标签 -->
+        <taglib>
+            <!-- 确定标签库的URI-->
+            <taglib-uri>http://java.ming800.com/taglib</taglib-uri>
+            <!-- 确定标签库定义文件的位置 -->
+            <taglib-location>/WEB-INF/taglib/ming800.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <!-- 定义DispatcherServlet -->
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>

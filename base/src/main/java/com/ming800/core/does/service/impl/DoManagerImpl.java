@@ -21,8 +21,6 @@ import java.util.*;
 @Service
 public class DoManagerImpl implements DoManager {
 
-    @Autowired
-    private XdoDao xdoDao;
     private static Map<String, Do> queryModelMap = new HashMap<>();
 
 
