@@ -2,17 +2,15 @@
 
 
 <!--用户-->
-<module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
+<module name="productDescription" label="系统-产品描述" version="" package="com.efeiyi.ec.system.product" path="">
 
     <entities>
-        <entity name="ProductList" label="产品列表"
+        <entity name="ProductDescriptionList" label="产品描述列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.product.model.Product">
+                model="com.efeiyi.ec.product.model.ProductDescription">
             <fields>
-                <field name="id" label="产品" inputType="text"/>
-                <field name="name" label="产品名字" inputType="text"/>
-                <field name="price" label="产品价格" inputType="text"/>
-                <field name="picture_url" label="产品图片链接" inputType="text"/>
+                <field name="id" label="产品描述id" inputType="text"/>
+                <field name="content" label="产品内容" inputType="text"/>
             </fields>
             <does>
                 <!--<do name="plistPCPurchaseOrder" access="$consumer"-->
@@ -30,21 +28,19 @@
 
                 <!--</do>-->
 
-                <do name="plistProduct" access="" label="产品分页列表"
-                    result="/product/productPList">
+                <do name="plistProductDescription" access="" label="产品描述分页列表"
+                    result="/productDescription/productDescriptionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="name" defaultValue="2" operation="eq"></condition>
+                        <condition name="content" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="removeProduct" label="删除产品" access="" result="json"/>
-                <do name="formProduct" label="保存产品页" access="" result="/product/productForm"></do>
-                <do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess"></do>
-                <do name="listProduct" label="产品列表" access="" result="/product/productList">
+                <do name="removeProductDescription" label="删除产品描述" access="" result="json"/>
+                <do name="formProductDescription" label="保存产品描述页" access="" result="/productDescription/productDescriptionForm"></do>
+                <do name="saveOrUpdateProductDescription" label="保存产品描述" access="" result="/productDescription/productDescriptionSaveSuccess"></do>
+                <do name="listProductDescription" label="产品描述列表" access="" result="/productDescription/productDescriptionList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <!--<condition label="产品主键" name="id" defaultValue="1" operation="eq"/>-->
-                        <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
-                        <condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
