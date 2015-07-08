@@ -19,7 +19,6 @@ public class XSaveOrUpdate {
     private DoManager doManager = (DoManager) ApplicationContextUtil.getApplicationContext().getBean("doManagerImpl");
 
     public XSaveOrUpdate() {
-
     }
 
     public XSaveOrUpdate(String doName, HttpServletRequest request) throws Exception {
@@ -27,9 +26,9 @@ public class XSaveOrUpdate {
         paramMap = new HashMap<>();
         Enumeration<String> keySet = request.getParameterNames();
         //把request转化成map来操作
-        while (keySet.hasMoreElements()){
+        while (keySet.hasMoreElements()) {
             String key = keySet.nextElement();
-            paramMap.put(key,request.getParameter(key));
+            paramMap.put(key, request.getParameter(key));
         }
     }
 

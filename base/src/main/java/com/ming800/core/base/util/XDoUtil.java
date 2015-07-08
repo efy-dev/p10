@@ -2,10 +2,14 @@ package com.ming800.core.base.util;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.does.model.*;
+import com.ming800.core.does.model.Field;
+import com.ming800.core.does.service.QueryHandler;
 import com.ming800.core.taglib.PageEntity;
+import com.ming800.core.util.ApplicationContextUtil;
 import com.ming800.core.util.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -669,5 +673,103 @@ public class XDoUtil {
 
         return objectValue;
     }
+
+
+    public static Object fetchObjectByConditions(Object object, String conditions, XdoDao xdoDao) {
+
+        if (conditions != null && !conditions.equals("")) {
+            String[] tempConditions = conditions.split(";");
+            for (String str : tempConditions) {
+                String[] tempStr = str.split(":");
+                if (tempStr[0].contains(".")) {
+                    tempStr[0] = tempStr[0].split("\\.")[0];
+                }
+                java.lang.reflect.Field field = ReflectUtil.getDeclaredField(object, tempStr[0]);
+                field.setAccessible(true);
+
+                Object tempObject = null;
+                if (field.getType().getName().startsWith("com.ming800")) {
+                    tempObject = xdoDao.getObject(field.getType().getName(), tempStr[1]);
+
+                } else if (field.getType().getName().equals("java.lang.Integer")) {
+                    tempObject = Integer.parseInt(tempStr[1]);
+                } else if (field.getType().getName().equals("java.util.Date")) {
+                    tempObject = DateUtil.parseDate(tempStr[1]);
+                } else {
+                    tempObject = tempStr[1];
+                }
+                generateFetchObjectSetValue(object, object.getClass(), tempStr[0], tempObject);
+            }
+        }
+
+        return object;
+    }
+
+
+    /*FORM 或者 VIEW的时候set指定的值*/
+    public static void generateFetchObjectSetValue(Object object, Class objectClass, String fieldName, Object value) {
+
+        try {
+            java.lang.reflect.Field field = objectClass.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(object, value);
+        } catch (Exception e) {
+            generateFetchObjectSetValue(object, objectClass.getSuperclass(), fieldName, value);
+        }
+
+    }
+
+
+    public static XQuery executeXQueryHandler(XQuery xQuery, DoQuery doQuery) throws Exception {
+        QueryHandler queryHandler = (QueryHandler) Class.forName(doQuery.getQueryExecute()).newInstance();
+
+        return queryHandler.handle(xQuery);
+    }
+
+    /*list页面    生成operation   操作链接*/
+    public static StringBuilder generateOperation(Object object, Page tempPage) throws Exception {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\"操作\":\"");
+        for (Command command : tempPage.getOperationList()) {
+            String url = convertPageUrl(command.getUrl(), object);
+            url = ApplicationContextUtil.getApplicationContext().getApplicationName() + url;
+            if (command.getType() != null && command.getType().equals("dialog")) {
+                stringBuilder.append("<a class='ho' href='###'")
+                        .append(" onclick='artDialog.open(\\\"")
+                        .append(url)
+                        .append("\\\", {width:800,height:600})'")
+                        .append("'>")
+                        .append(command.getLabel())
+                        .append("</a>");
+            } else {
+                stringBuilder.append("<a class='ho' href='")
+                        .append(url)
+                        .append("'>")
+                        .append(command.getLabel())
+                        .append("</a>");
+            }
+
+
+            stringBuilder.append("   ");
+        }
+        stringBuilder.append("\",");
+        return stringBuilder;
+    }
+
+    /*转化url中${}中包含的对象属性*/
+    public static String convertPageUrl(String pageUrl, Object object) throws Exception {
+
+        while (pageUrl.contains("$")) {
+            String tempField = pageUrl.substring(pageUrl.indexOf("${") + 2, pageUrl.indexOf("}"));
+            Object tempObjectValue2 = SystemValueUtil.generateTempObjectValue(object, tempField.split("\\."));
+            if (tempObjectValue2 == null) {
+                throw new Exception(pageUrl + ":" + tempField + "为空");
+            }
+            pageUrl = pageUrl.replace("${" + tempField + "}", tempObjectValue2.toString());
+        }
+
+        return pageUrl;
+    }
+
 
 }

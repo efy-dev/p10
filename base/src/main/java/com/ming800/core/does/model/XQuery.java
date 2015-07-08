@@ -57,6 +57,31 @@ public class XQuery {
         this.setQueryParamMap(xQuery.getQueryParamMap());
     }
 
+//
+//    public XQuery(Do tempDo , DoQuery tempDoQuery , String tempConditions) throws Exception {
+//        //判断是否是分页查询
+//        if (tempDoQuery.getName().startsWith("plist")) {
+//            this.setPageEntity(XDoUtil.getPageEntity(request));
+//        }
+//
+//        DoQuery tempDoQuery = tempDo.getDoQueryByName(doQueryName.split("_")[1]);
+//        XQuery xQuery = XDoUtil.generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, request.getParameter("conditions"));
+//
+//        //判断是否有排序参数
+//        if (request.getParameter("sort") != null) {
+//            this.setSortHql(XDoUtil.fetchOrderStr(tempDoQuery, request.getParameter("sort")));
+//        }
+//
+//        //补全查询语句
+//        xQuery.setHql(xQuery.getHql() + getSortHql());
+//        //初始化
+//        this.setFlag(xQuery.getFlag());
+//        this.setQueryHql(xQuery.getQueryHql());
+//        this.setHeadHql(xQuery.getHeadHql());
+//        this.setHql(xQuery.getHql());
+//        this.setQueryParamMap(xQuery.getQueryParamMap());
+//    }
+
     public XQuery() {
     }
 

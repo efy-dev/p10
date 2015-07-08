@@ -35,15 +35,15 @@ public interface XdoManager {
 
     Object saveOrUpdateObject(Do tempDo, HttpServletRequest request) throws Exception;
 
-    String convertPageUrl(String pageUrl, Object object) throws Exception;
-
-    String generateResultListPage(String queryModel, Do tempDo, DoQuery tempDoQuery, Page tempPage, String tempConditions, PageEntity pageEntity) throws Exception;
-
-    String generateResultList(String queryModel, Do tempDo, DoQuery tempDoQuery, Page tempPage, String tempConditions) throws Exception;
-
-    String generateResultViewPage(Do tempDo, String id, String conditions) throws Exception;
-
-    String viewPageJson(Page tempPage, Object object, MethodCache methodCache) throws Exception;
+//    String convertPageUrl(String pageUrl, Object object) throws Exception;
+//
+//    String generateResultListPage(String queryModel, Do tempDo, DoQuery tempDoQuery, Page tempPage, String tempConditions, PageEntity pageEntity) throws Exception;
+//
+//    String generateResultList(String queryModel, Do tempDo, DoQuery tempDoQuery, Page tempPage, String tempConditions) throws Exception;
+//
+//    String generateResultViewPage(Do tempDo, String id, String conditions) throws Exception;
+//
+//    String viewPageJson(Page tempPage, Object object, MethodCache methodCache) throws Exception;
 
     //public String generateJsonData(Do tempDo, DoQuery tempDoQuery, String tempConditions) throws Exception;
 

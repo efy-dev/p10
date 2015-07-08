@@ -1,6 +1,5 @@
 package com.ming800.core.base.service.impl;
 
-import com.ming800.core.base.util.SystemValueUtil;
 import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
@@ -9,14 +8,11 @@ import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.DateUtil;
 import com.ming800.core.util.PageInfo;
-import org.infinispan.commons.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -45,7 +41,6 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
-    @Deprecated
     public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
@@ -54,7 +49,6 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
-    @Deprecated
     public void saveOrUpdate(String doQueryName, HttpServletRequest request) throws Exception {
         Do tempDo = null;
         Object object;
