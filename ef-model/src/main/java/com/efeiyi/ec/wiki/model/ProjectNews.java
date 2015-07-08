@@ -60,7 +60,7 @@ public class ProjectNews {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="creator")
+    @JoinColumn(name="user_id")
     public Tenant getCreator() {
         return creator;
     }
