@@ -2,17 +2,12 @@ package com.ming800.core.base.util;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.does.model.*;
-import com.ming800.core.does.model.Field;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by pgwt on 2015/7/7.
@@ -32,11 +27,15 @@ public class XDoUtil {
 
         StringBuilder queryStringBuilder = new StringBuilder(150);
         /*查询对象 select from */
-        queryStringBuilder.append(fetchQueryHead(queryModel, doQuery));
+        String queryHead = fetchQueryHead(queryModel, doQuery);
+        queryStringBuilder.append(queryHead);
         /*转换  第一个and  为 where*/
-        queryStringBuilder.append(sb.toString().replaceFirst("and", "where"));
+        String queryCondition = sb.toString().replaceFirst("and", "where");
+        queryStringBuilder.append(queryCondition);
 
         XQuery xQuery = new XQuery();
+        xQuery.setHeadHql(queryHead);
+        xQuery.setQueryHql(queryCondition);
         xQuery.setHql(queryStringBuilder.toString());
         xQuery.setQueryParamMap(tempXQuery.getQueryParamMap());
         return xQuery;
@@ -110,7 +109,6 @@ public class XDoUtil {
 
                 }
                 queryParamMap.put(tempPropertyName, value);
-
 
 
             } else {
@@ -338,6 +336,7 @@ public class XDoUtil {
 
     /**
      * 解析请求参数中的分页信息，返回PageEntity对象
+     *
      * @param request
      * @return
      */
@@ -361,6 +360,7 @@ public class XDoUtil {
 
     /**
      * 获得设完值的对象
+     *
      * @param tempDo
      * @param object
      * @param objectClass
@@ -372,7 +372,35 @@ public class XDoUtil {
      */
     public static Object processSaveOrUpdateTempObject(Do tempDo, Object object, Class objectClass, HttpServletRequest request, String type, XdoDao xdoDao) throws Exception {
 
-        object = processSaveOrUpdateObject(tempDo, object, objectClass, request, type,xdoDao);
+        object = processSaveOrUpdateObject(tempDo, object, objectClass, request, type, xdoDao);
+
+        /*配置文件*/
+        if (tempDo.getPageList() != null && tempDo.getPageList().size() > 0) {
+            Page tempPage = tempDo.getPageList().get(0);
+            for (PageField pageField : tempPage.getFieldList()) {
+                String propertyValue = pageField.getValue();
+                Object paramObject = SystemValueUtil.getValue(propertyValue, "object");
+                if (pageField.getDataType().equals("int")) {
+                    paramObject = Integer.parseInt(paramObject.toString());
+                } else if (pageField.getDataType().equals("boolean")) {
+                    paramObject = Boolean.valueOf(paramObject.toString());
+                } else if (pageField.getDataType().equals("float")) {
+                    paramObject = Float.valueOf(paramObject.toString());
+                }
+
+                if (ReflectUtil.invokeGetterMethod(object, pageField.getName()) == null) {
+                    ReflectUtil.invokeSetterMethod(object, pageField.getName(), paramObject);
+                }
+            }
+        }
+
+        return object;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    public static Object processSaveOrUpdateTempObject(Do tempDo, Object object, Class objectClass, HashMap paramMap, String type, XdoDao xdoDao) throws Exception {
+
+        object = processSaveOrUpdateObject(tempDo, object, objectClass, paramMap, type, xdoDao);
 
         /*配置文件*/
         if (tempDo.getPageList() != null && tempDo.getPageList().size() > 0) {
@@ -406,12 +434,14 @@ public class XDoUtil {
         for (java.lang.reflect.Field field : fields) {
             field.setAccessible(true);
 
+            //如果当前字段是id就跳过
             if (field.getName().equals("id")) {
                 continue;
             }
-            Object objectValue = null;
 
-            if (field.getType().getName().startsWith("com.ming800") || field.getType().getName().startsWith("com.yuepaila")) { //处理实体属性
+            Object objectValue = null;
+            //判断该属性不是简单类行
+            if (field.getType().getName().startsWith("com.ming800") || field.getType().getName().startsWith("com.efeiyi.ec")) { //处理实体属性
                 String fieldValue = request.getParameter(field.getName() + ".id");
                 if (fieldValue == null) {//异步请求时，使用property_id来发送关联实体的id
                     fieldValue = request.getParameter(field.getName() + "_id");
@@ -435,7 +465,7 @@ public class XDoUtil {
 
                     if (fieldValue != null && (tempObjectIdValue == null || !tempObjectIdValue.toString().equals(fieldValue))) {
                         if (tempDo != null) {
-                            content += field.getName() + ".id:" + tempObjectNameValue + " => " + objectNameValue==null?"":objectNameValue + "<br/>";
+                            content += field.getName() + ".id:" + tempObjectNameValue + " => " + objectNameValue == null ? "" : objectNameValue + "<br/>";
                         }
                     } else {
                         continue;
@@ -499,7 +529,119 @@ public class XDoUtil {
 
         /*如果tempObject1有父类，读取*/
         if (!objectClass.getSuperclass().getName().equals("java.lang.Object")) {
-            object = processSaveOrUpdateObject(tempDo, object, objectClass.getSuperclass(), request, type,xdoDao);
+            object = processSaveOrUpdateObject(tempDo, object, objectClass.getSuperclass(), request, type, xdoDao);
+        }
+
+      /*  if (!content.equals("")) {
+            saveOrUpdateOperationLog(tempDo, content.substring(0, content.length() - 1), "修改");
+        }
+*/
+        return object;
+    }
+
+
+    public static Object processSaveOrUpdateObject(Do tempDo, Object object, Class objectClass, HashMap paramMap, String type, XdoDao xdoDao) throws Exception {
+        java.lang.reflect.Field[] fields = objectClass.getDeclaredFields();
+        String content = "";
+        for (java.lang.reflect.Field field : fields) {
+            field.setAccessible(true);
+
+            //如果当前字段是id就跳过
+            if (field.getName().equals("id")) {
+                continue;
+            }
+
+            Object objectValue = null;
+            //判断该属性不是简单类行
+            if (field.getType().getName().startsWith("com.ming800") || field.getType().getName().startsWith("com.efeiyi.ec")) { //处理实体属性
+                Object fieldValue = paramMap.get(field.getName() + ".id");
+                if (fieldValue == null) {//异步请求时，使用property_id来发送关联实体的id
+                    fieldValue = paramMap.get(field.getName() + "_id");
+                }
+                Class simpleName = Class.forName(field.getType().getName());
+//                Object objectIdValue = null;
+                Object objectNameValue = null;
+                if (fieldValue != null && !fieldValue.equals("")) {
+                    objectValue = xdoDao.getObject(Class.forName(field.getType().getName()).getName(), fieldValue.toString());
+                    objectNameValue = fetchIdValueByClassType(simpleName, objectValue);//获取对象的指定字段值
+                }
+
+                if (type.equals("edit")) {
+
+                    Object tempObjectValue = SystemValueUtil.generateTempObjectValue(object, field.getName().split("\\."));
+                    Object tempObjectIdValue = SystemValueUtil.generateTempObjectValue(object, (field.getName() + ".id").split("\\."));
+                    Object tempObjectNameValue = null;
+                    if (tempObjectValue != null) {
+                        tempObjectNameValue = fetchIdValueByClassType(simpleName, tempObjectValue);
+                    }
+
+                    if (fieldValue != null && (tempObjectIdValue == null || !tempObjectIdValue.toString().equals(fieldValue))) {
+                        if (tempDo != null) {
+                            content += field.getName() + ".id:" + tempObjectNameValue + " => " + objectNameValue == null ? "" : objectNameValue + "<br/>";
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+            } else {                //
+                Object fieldValue = paramMap.get(field.getName());
+                if (fieldValue != null) {
+
+                    if (field.getType().equals(String.class)) {
+                        objectValue = SystemValueUtil.transformSpecialSymbol(fieldValue.toString());
+                    } else if (field.getType().equals(Integer.class) && !fieldValue.equals("")) {
+                        objectValue = Integer.parseInt(fieldValue.toString());
+                    } else if (field.getType().equals(Date.class) && !fieldValue.equals("")) {
+                        objectValue = DateUtil.parseAllDate(fieldValue.toString());
+                    } else if (field.getType().equals(Float.class) && !fieldValue.equals("")) {
+                        objectValue = Float.parseFloat(fieldValue.toString());
+                    } else if (field.getType().equals(BigDecimal.class) && !fieldValue.equals("")) {
+                        objectValue = new BigDecimal(fieldValue.toString());
+                    } else if (field.getType().equals(Byte.class) && !fieldValue.equals("")) {
+                        objectValue = Byte.parseByte(fieldValue.toString());
+                    } else if (field.getType().equals(Boolean.class) && !fieldValue.equals("")) {
+                        objectValue = Boolean.parseBoolean(fieldValue.toString());
+                    }
+                  /*   else {
+                        objectValue = SystemValueUtil.transformSpecialSymbol(fieldValue);
+//                        objectValue = fieldValue;
+                    }*/
+                }
+
+                /*修改的时候判断属性值是否和上次相等，相等的话，不进行修改，进入下一次循环*/
+                /*暂时不考虑   子表的情况*/
+                if (type.equals("edit")) {
+                    if (!SystemValueUtil.isEqual(field.getName(), objectValue, object)) {
+                        /*continue;
+                    } else {*/
+                        if (tempDo != null) {
+                            content += field.getName() + ":" + ReflectUtil.invokeGetterMethod(object, field.getName()) + " => " + fieldValue + "<br/>";
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+//            if (type.equals("new") && objectValue == null) {              //fieldValue注解  赋默认值
+//                boolean hasAnnotation = field.isAnnotationPresent(FieldValue.class);
+//                if (hasAnnotation) {
+//                    FieldValue annotation = field.getAnnotation(FieldValue.class);
+//                    String annotationValue = annotation.value();
+//
+//                    /*只有当新建的时候 转换默认的值   MY_USER...*/
+//                    if (!annotationValue.equals("DICTIONARY")) {
+//                        objectValue = SystemValueUtil.getValue(annotationValue, "object");
+//                    }
+//                }
+//            }
+
+            field.set(object, objectValue);
+        }
+
+        /*如果tempObject1有父类，读取*/
+        if (!objectClass.getSuperclass().getName().equals("java.lang.Object")) {
+            object = processSaveOrUpdateObject(tempDo, object, objectClass.getSuperclass(), paramMap, type, xdoDao);
         }
 
       /*  if (!content.equals("")) {

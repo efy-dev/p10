@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.test.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,22 @@ public class TestController {
                         <condition label="作品" name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
+
+                <do name="listPCProduct"
+                    label="作品列表"
+                    result="/choiceness" access="$consumer"><!--用户查询-->
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="作品" name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="saveOrUpdatePCProduct">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"></field>
+                        </fields>
+                    </page>
+                </do>
                 <do name="removePCSamplePhoto" lable="假删作品" access="$photographer" result=""></do>
             </does>
         </entity>
@@ -55,6 +72,14 @@ public class TestController {
     public List<Object> listProduct(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listPCProduct_default",request);
         return baseManager.listObject(xQuery);
+    }
+
+    //不分页的用法
+    @RequestMapping({"/test/saveOrUpdateproduct"})
+    @ResponseBody
+    public void saveOrUpdateProduct(HttpServletRequest request) throws Exception{
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePCProduct",request);
+        baseManager.saveOrUpdate(xSaveOrUpdate);
     }
 
 }

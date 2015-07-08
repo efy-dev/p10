@@ -60,6 +60,14 @@
                         <condition label="作品" name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
+                <do name="saveOrUpdatePCProduct">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"></field>
+                        </fields>
+                    </page>
+                </do>
                 <do name="removePCSamplePhoto" lable="假删作品" access="$photographer" result=""></do>
             </does>
         </entity>
@@ -135,7 +143,6 @@
                             <field name="theStatus" dataType="int" defaultValue="1"></field>
                             <field name="ptype"  dataType="int" defaultValue="0"></field>
                             <field name="photographer"  defaultValue="${MY_USER}" dataType="default"/>
-
                         </fields>
                     </page>
                 </do>

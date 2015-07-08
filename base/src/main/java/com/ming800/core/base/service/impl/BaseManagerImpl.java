@@ -11,6 +11,7 @@ import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.DateUtil;
 import com.ming800.core.util.PageInfo;
+import org.infinispan.commons.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,7 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
+    @Deprecated
     public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
@@ -52,6 +54,7 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
+    @Deprecated
     public void saveOrUpdate(String doQueryName, HttpServletRequest request) throws Exception {
         Do tempDo = null;
         Object object;
@@ -80,6 +83,34 @@ public class BaseManagerImpl implements BaseManager {
         }
 
     }
+
+    /**
+     * 保存
+     */
+    @Override
+    public void saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception {
+        Object object;
+        String type;
+        Object idValue = xSaveOrUpdate.getParamMap().get("id");
+        if (idValue == null || idValue.equals("")) {
+            type = "new";
+            object = Class.forName(xSaveOrUpdate.getTempDo().getXentity().getModel()).newInstance();
+        } else {
+            type = "edit";
+            object = xdoDao.getObject(xSaveOrUpdate.getTempDo().getXentity().getModel(), idValue.toString());
+        }
+
+        object = XDoUtil.processSaveOrUpdateTempObject(xSaveOrUpdate.getTempDo(), object, object.getClass(), xSaveOrUpdate.getParamMap(), type, xdoDao);
+
+        try {
+            xdoDao.saveOrUpdateObject(object.getClass().getName(), object);
+        } catch (Exception e) {
+
+//            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public void delete(String model, String id) {
