@@ -122,22 +122,17 @@ public class JmenuManagerImpl implements JmenuManager {
     private static Jnode parseXmlNodeToJavaBean(Node xmlNode) {
         String url = xmlNode.selectSingleNode("@url").getText();
         String text_zh_CN = xmlNode.selectSingleNode("@text_zh_CN").getText();
-        String text_en_US = xmlNode.selectSingleNode("@text_en_US").getText();
         String state = "open";
         if (xmlNode.selectSingleNode("@state") != null) {
             state = xmlNode.selectSingleNode("@state").getText();
         }
-//        String extend = xmlNode.selectSingleNode("@extend").getText();
-        String setting = xmlNode.selectSingleNode("@setting").getText();
         String access = xmlNode.selectSingleNode("@access").getText();
 
         Jnode jnode = new Jnode();
         jnode.setId(jmenuId++ + "");
         jnode.setText_zh_CN(text_zh_CN);
-        jnode.setText_en_US(text_en_US);
         jnode.setUrl(url);
         jnode.setState(state);
-        jnode.setSetting(setting);
         jnode.setAccess(access);
         return jnode;
     }

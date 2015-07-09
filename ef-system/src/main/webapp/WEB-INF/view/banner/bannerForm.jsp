@@ -11,12 +11,10 @@
     <title></title>
 </head>
 <body>
-  <form action="/basic/xm.do" method="post">
-    <input type="hidden" value="saveOrUpdateTenant" name="qm">
-    <input type="hidden" name=id" id="id">
-    姓名：<input type="text" name="name" id="name">
+<form action="/basic/xm.do" method="post">
+    <input type="hidden" value="saveOrUpdateBanner" name="qm">
+    title：<input type="text" name="title" id="title">
     <input type="submit" value="保存">
-  </form>
-
+</form>
 </body>
 </html>

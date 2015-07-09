@@ -9,7 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <html>
 <head>
@@ -19,22 +18,18 @@
 <body>
 <table>
   <tr>
-    <td>传承人新闻id</td>
-    <td>传承人新闻title</td>
+    <td>菜单id</td>
+    <td>菜单名称</td>
   </tr>
 
-  <c:forEach items="${requestScope.pageInfo.list}" var="tenantNews">
+  <c:forEach items="${objectList}" var="simpleMenu">
     <tr>
-      <td>${tenantNews.id}</td>
-      <td>${tenantNews.title}</td>
+      <td>${simpleMenu.id}</td>
+      <td>${simpleMenu.name}</td>
     </tr>
   </c:forEach>
+
 </table>
-<div style="clear: both">
-  <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
-    <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
-    <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-  </ming800:pcPageList>
-</div>
+
 </body>
 </html>

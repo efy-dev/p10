@@ -18,16 +18,16 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
+<table>
     <tr>
-        <td>传承人id</td>
-        <td>传承人memo</td>
+        <td>banner——id</td>
+        <td>banner——title</td>
     </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="tenantHonor">
+    <c:forEach items="${requestScope.pageInfo.list}" var="banner">
         <tr>
-            <td>${tenantHonor.id}</td>
-            <td>${tenantHonor.memo}</td>
+            <td>${banner.id}</td>
+            <td>${banner.title}</td>
         </tr>
     </c:forEach>
 </table>
