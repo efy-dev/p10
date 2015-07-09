@@ -3,6 +3,7 @@ package com.ming800.core.base.controller;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
+import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.does.service.ModuleManager;
@@ -207,7 +208,7 @@ public class XdoController {
                 }
             } else {*/
                 modelMap.put("object", xdoManager.fetchObject(tempDo, id, conditions));
-                resultPage = xdoManager.convertPageUrl(resultPage, modelMap.get("object"));
+                resultPage = XDoUtil.convertPageUrl(resultPage, modelMap.get("object"));
            // }
 
 /*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
@@ -249,9 +250,9 @@ public class XdoController {
             String tempResultPage = request.getParameter("resultPage");
 
             if (tempResultPage != null && !tempResultPage.equals("")) {
-                resultPage = xdoManager.convertPageUrl(tempResultPage, object);
+                resultPage = XDoUtil.convertPageUrl(tempResultPage, object);
             } else {
-                resultPage = xdoManager.convertPageUrl(tempDo.getResult(), object);
+                resultPage = XDoUtil.convertPageUrl(tempDo.getResult(), object);
             }
             //在使用saveOrUpdate时，若do的result是jsp视图时，会导致页面无法显示
             /*if(resultPage.contains("?")){

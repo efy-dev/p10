@@ -26,10 +26,10 @@ public class BigUserByBirthDayHandler implements QueryHandler {
         sb.append(" and date_format(s.birthDate, '%m-%d') <=").append("'").append(DateUtil.formatDateMonthDay(date)).append("'");
 
 
-        StringBuilder xQueryStr = xQuery.getStringBuilder();
+        StringBuilder xQueryStr = new StringBuilder(xQuery.getHql());
         xQueryStr.insert(xQueryStr.indexOf(" order by"), sb.toString());
 
-        xQuery.setStringBuilder(xQueryStr);
+        xQuery.setHql(xQueryStr.toString());
 
         return xQuery;  //To change body of implemented methods use File | Settings | File Templates.
     }

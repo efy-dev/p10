@@ -2,9 +2,12 @@ package com.ming800.core.base.service;
 
 import com.ming800.core.does.model.Field;
 import com.ming800.core.does.model.StatusTypeItem;
+import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,17 +24,31 @@ public interface BaseManager {
 
     Object getObject(String model, String id);
 
+    @Deprecated
     void saveOrUpdate(String model, Object object);
+
+    @Deprecated
+    void saveOrUpdate(String doQueryName, HttpServletRequest request) throws Exception;
+
+    void saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception;
 
     void delete(String model, String id);
 
     void remove(String model, String id);
 
+    @Deprecated
     List listObject(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
+    @Deprecated
     List listObject(String queryHql, Object... params);
 
+
+    List listObject(XQuery xQuery);
+
+    @Deprecated
     PageInfo listPageInfo(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap);
+
+    PageInfo listPageInfo(XQuery xQuery);
 
     Object getUniqueObjectByConditions(String queryHql, LinkedHashMap<String, Object> queryParamMap);
 

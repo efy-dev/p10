@@ -1,9 +1,11 @@
 package com.ming800.core.base.controller;
 
+import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.util.ReflectUtil;
 import com.ming800.core.base.util.SystemValueUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.MultipartHandler;
 import com.ming800.core.p.service.AttachmentManager;
@@ -30,7 +32,7 @@ public class AttachmentHandler implements MultipartHandler {
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
     private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
     private AttachmentManager attachmentManager = (AttachmentManager) ApplicationContextUtil.getApplicationContext().getBean("attachmentManagerImpl");
-
+    private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
     /**
      * newsAttachment  / messageAttachment  无法确定
@@ -58,7 +60,7 @@ public class AttachmentHandler implements MultipartHandler {
             object = ReflectUtil.getNewInstance(tempDo.getXentity().getModel());
         }
 
-        object = xdoManager.processSaveOrUpdateObject(tempDo, object, object.getClass(), request, type);
+        object = XDoUtil.processSaveOrUpdateObject(tempDo, object, object.getClass(), request, type,xdoDao);
 
         String storeType = request.getParameter("storeType");
 
