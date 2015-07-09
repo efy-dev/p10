@@ -29,11 +29,8 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class JmenuManagerImpl implements JmenuManager {
-    private static final String MENU_STANDARD = "/setting/jmenu_standard.xml";
-    private static final String MENU_PROFESSIONAL = "/setting/jmenu_professional.xml";
-    private static final String MENU_ADVANCE = "/setting/jmenu_advance.xml";
-    private static final String MENU_EDU = "/setting/jmenu_edu.xml";
-    //    private static HashMap<String, Jmenu> jmenuMap;
+
+    private static final String MENU_COMMONMENU = "/setting/jmenu_commonMenu.xml";
     private static HashMap<String, JmenuTree> menuHashMap;
     private static int jmenuId = 1;
     private DoManager doManager;
@@ -43,84 +40,37 @@ public class JmenuManagerImpl implements JmenuManager {
 
 
     private static void initMenu() {
-/*        menuHashMap = new HashMap<>();
+        menuHashMap = new HashMap<>();
         File tempFile = new File(JmenuManagerImpl.class.getClassLoader().getResource("/").getPath());
-        String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();
+       /* String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();*/
 
-        File dir_standard = new File(tempFileName + "/home/setting/jmenu_standard.xml");
-        File dir_professional = new File(tempFileName + "/home/setting/jmenu_professional.xml");
-        File dir_advance = new File(tempFileName + "/home/setting/jmenu_advance.xml");
-        File dir_edu = new File(tempFileName + "/home/setting/jmenu_edu.xml");
+        File dir_commonMenu = new File(tempFile + "/setting/jmenu_commonMenu.xml");
 
-        *//*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*//*
-        Document infoDocument_standard = null;
-        if (dir_standard.exists()) {
+        Document infoDocument_commonMenu = null;
+        if (dir_commonMenu.exists()) {
             try {
-                infoDocument_standard = new SAXReader().read(dir_standard);
+                infoDocument_commonMenu = new SAXReader().read(dir_commonMenu);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (infoDocument_standard == null) {
-            infoDocument_standard = ResourcesUtil.getDocument(MENU_STANDARD);
+        if (infoDocument_commonMenu == null) {
+            infoDocument_commonMenu = ResourcesUtil.getDocument(MENU_COMMONMENU);
         }
 
-        Document infoDocument_professional = null;
-        if (dir_professional.exists()) {
-            try {
-                infoDocument_professional = new SAXReader().read(dir_professional);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (infoDocument_professional == null) {
-            infoDocument_professional = ResourcesUtil.getDocument(MENU_PROFESSIONAL);
-        }
+        JmenuTree jmenuTree_commonMenu = initJmenuMap(infoDocument_commonMenu);
 
-        Document infoDocument_advance = null;
-        if (dir_advance.exists()) {
-            try {
-                infoDocument_advance = new SAXReader().read(dir_advance);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (infoDocument_advance == null) {
-            infoDocument_advance = ResourcesUtil.getDocument(MENU_ADVANCE);
-        }
-
-        Document infoDocument_edu = null;
-        if (dir_edu.exists()) {
-            try {
-                infoDocument_edu = new SAXReader().read(dir_edu);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (infoDocument_edu == null) {
-            infoDocument_edu = ResourcesUtil.getDocument(MENU_EDU);
-        }
-
-        JmenuTree jmenuTree_standard = initJmenuMap(infoDocument_standard);
-        JmenuTree jmenuTree_professional = initJmenuMap(infoDocument_professional);
-        JmenuTree jmenuTree_advance = initJmenuMap(infoDocument_advance);
-        JmenuTree jmenuTree_edu = initJmenuMap(infoDocument_edu);
-
-        menuHashMap.put(jmenuTree_standard.getName(), jmenuTree_standard);
-        menuHashMap.put(jmenuTree_professional.getName(), jmenuTree_professional);
-        menuHashMap.put(jmenuTree_advance.getName(), jmenuTree_advance);
-        menuHashMap.put(jmenuTree_edu.getName(), jmenuTree_edu);*/
+        menuHashMap.put(jmenuTree_commonMenu.getName(), jmenuTree_commonMenu);
     }
 
     private HashMap<String, Jmenu> fetchJmenuMap() {
-        /*String version = AuthorizationUtil.getMyBranch().getVersion();*/
-        String version = "edu";
-        if (version == null || version.equals("")) {
+        String version = "commonMenu";
+        /*if (version == null || version.equals("")) {
             Document globalDocument = globalManager.load();
             List<Node> nodeList = globalDocument.selectNodes("/global");
             version = nodeList.get(0).selectSingleNode("@version").getText();
         }
-
+*/
 
         return menuHashMap.get(version).getJmenuHashMap();
     }
@@ -130,14 +80,13 @@ public class JmenuManagerImpl implements JmenuManager {
      */
     private static JmenuTree initJmenuMap(Document infoDocument) {
         JmenuTree jmenuTree = new JmenuTree();
-//        Document infoDocument = ResourcesUtil.getDocument(xmlPath);
         if (infoDocument != null) {
 
-            List<Node> menuNodeList = infoDocument.selectNodes("menu");
+            List<Node> menuNodeList = infoDocument.selectNodes("jmenuTree");
             String name = menuNodeList.get(0).selectSingleNode("@name").getText();
 
             HashMap<String, Jmenu> jmenuMap = new HashMap<>();
-            List<Node> jmenuNodeList = infoDocument.selectNodes("menu/jmenu");
+            List<Node> jmenuNodeList = infoDocument.selectNodes("jmenuTree/jmenu");
             for (Node jMenuXmlNode : jmenuNodeList) {
                 Jmenu jmenu = new Jmenu();
                 jmenu.setChildren(new ArrayList<Jnode>());
@@ -181,7 +130,6 @@ public class JmenuManagerImpl implements JmenuManager {
 //        String extend = xmlNode.selectSingleNode("@extend").getText();
         String setting = xmlNode.selectSingleNode("@setting").getText();
         String access = xmlNode.selectSingleNode("@access").getText();
-        String branch = xmlNode.selectSingleNode("@branch").getText();
 
         Jnode jnode = new Jnode();
         jnode.setId(jmenuId++ + "");
@@ -191,20 +139,18 @@ public class JmenuManagerImpl implements JmenuManager {
         jnode.setState(state);
         jnode.setSetting(setting);
         jnode.setAccess(access);
-        jnode.setBranch(branch);
         return jnode;
     }
 
     /**
      * 取得Jmenu对应的Json格式，String类型的字符串
-     *
+     *~
      * @param jmenuName
      * @param type      菜单类型
      * @return
      */
     public String getJmenuJson(String jmenuName, Integer type) {
-        doManager = (DoManager) ApplicationContextUtil.getApplicationContext().getBean("doManagerImpl");
-        Jmenu jmenu = (Jmenu) fetchJmenuMap().get(jmenuName);
+        Jmenu jmenu = fetchJmenuMap().get(jmenuName);
         StringBuilder jMenuJson = new StringBuilder(500);
         if (jmenu.getChildren() != null && jmenu.getChildren().size() > 0) {
             jMenuJson.append("[");
@@ -236,7 +182,7 @@ public class JmenuManagerImpl implements JmenuManager {
             access = doRoleFilter(jnode,role);
         }*/
 
-        if (!doRoleFilter(jnode, roleType)) return jNodeJson;
+//        if (!doRoleFilter(jnode, roleType)) return jNodeJson;
 
 //        access = doLisenceFilter(jnode,role);
 //
@@ -343,35 +289,6 @@ public class JmenuManagerImpl implements JmenuManager {
         }
         return false;
     }*/
-
-
-   /* *//**
-     * 根据机构权限（lisence 或者 t1分配）判断
-     * @param jnode
-     * @return
-     *//*
-    private boolean doExtendFilter(Jnode jnode) {
-        String extend = jnode.getExtend();
-        User user = AuthorizationUtil.getBigUser();
-        if(extend!=""){
-            String branchExtend="";
-            if(user.getBranch().getLicenseProperties()!=null){
-                branchExtend=user.getBranch().getLicenseProperties().getPropertiesString();
-            }
-            if(branchExtend.indexOf(extend)!=-1){
-                if(extend.indexOf("*")!=-1){
-                    return false;
-                }
-            }else{
-                if(extend.indexOf("*")==-1){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    */
 
     /**
      * 根据机构类型判断
