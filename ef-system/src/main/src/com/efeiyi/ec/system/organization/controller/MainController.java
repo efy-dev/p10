@@ -1,7 +1,5 @@
 package com.efeiyi.ec.system.organization.controller;
 
-
-import com.efeiyi.ec.system.organization.service.BranchManager;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.controller.BaseController;
@@ -35,8 +33,6 @@ public class MainController extends BaseController {
 
     @Autowired
     private JmenuManager jmenuManager;
-    @Autowired
-    private BranchManager branchManager;
     @Autowired
     private GlobalManager globalManager;
 
@@ -95,10 +91,6 @@ public class MainController extends BaseController {
         ModelMap modelMap = new ModelMap();
         MyUser myUser = AuthorizationUtil.getMyUser();
         modelMap.put("myUser", myUser);
-      /*  if(myUser.getBranch().getBranchAttachment() !=null && myUser.getBranch().getBranchAttachment().getId() != null){
-            BranchAttachment branchAttachment = (BranchAttachment) baseManager.getObject(BranchAttachment.class.getName(),myUser.getBranch().getBranchAttachment().getId());
-            modelMap.put("branchAttachment",branchAttachment);
-        }*/
         modelMap.put("currentCalendar", DateUtil.getCurrentCalendarString());
         return new ModelAndView("/main", modelMap);
     }
@@ -128,38 +120,16 @@ public class MainController extends BaseController {
         String menuId = request.getParameter("menuId");
         if (menuId != null && !menuId.equals("")) {
             //如果menuId 等于 head 说明是加载头部导航栏  否则是加载左侧导航栏
-            if (menuId.equals("head")) {
-                //user.type=1 说明是学生用户  登陆时加载学生的头部导航栏
+            /*if (menuId.equals("head")) {
                 menuId = "training";
                 jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
 
             } else {
                 jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_LEFT);
-            }
+            }*/
+            menuId = "organmgmt";
+            jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
         }
         return jMenuJson;
     }
-
-
-    /*@RequestMapping("/testUpload")
-    public String testUpload(HttpServletRequest httpServletRequest, ModelMap modelMap) throws Exception {
-
-        String upload = httpServletRequest.getParameter("upload");
-
-        *//*String[] str = upload.split(".");
-        String tempUpload = upload.replace(".",",");
-        String[] tempStr = upload.replace(".",",").split(",");*//*
-        SNDAStorage storage = new SNDAStorageBuilder().credential("irl5vxia0hs2iq3pq", "MmI3MGE1Yjk0OGEzNzc4YzFmMzFmODY3NTFjYTFkY2Y=").build();
-
-        storage.bucket("ming1").object(upload).entity(new File(upload)).upload();
-
-        storage.bucket("ming1").object(upload).download().to(new File("f:/download/def." + upload.replace(".",",").split(",")[1]));
-
-        storage.destory();
-
-        return "";
-
-    }*/
-
-
 }

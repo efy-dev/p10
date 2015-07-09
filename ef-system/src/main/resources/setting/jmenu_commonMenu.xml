@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenuTree name="commonMenu">
+    <jmenu id="organmgmt"><!--系统管理-->
+        <jnode url="" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
+            <jnode url="/basic/xm.do?qm=plistBigUser_default" extend="" access="admin" text_zh_CN="所有用户管理"/>
+            <jnode url="/basic/xm.do?qm=plistManager_default"  access="admin,manager" text_zh_CN="内部用户管理" text_en_US="Outbox"/>
+            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理"/>
+        </jnode>
+        <jnode url=""  access="admin" state="closed" text_zh_CN="系统配置">
+            <jnode url="/xdos/xme.do" access="admin" text_zh_CN="模块(module)"/>
+        </jnode>
+    </jmenu>
+</jmenuTree>
+
+
+
+
+
+
