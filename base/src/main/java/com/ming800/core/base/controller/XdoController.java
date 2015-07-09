@@ -56,10 +56,12 @@ public class XdoController {
 
         String qm = request.getParameter("qm");
         String resultPage = "";
+        request.setAttribute("qm",qm);
 
 
         if (qm.startsWith("plist")) {       /*分页*/
             String conditions = request.getParameter("conditions");
+            request.setAttribute("conditions",conditions);
 /*            String mrb = request.getParameter("mrb");
             if (mrb != null && !mrb.equals("")) {
                 modelMap.put("mrb", mrb);
