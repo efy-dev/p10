@@ -27,11 +27,6 @@
 
             </does>
         </entity>
-
-    </entities>
-
-
-    <entities>
         <entity name="simpleMenu" label="菜单"
                 basic="simple" others=""
                 model="com.efeiyi.ec.basic.model.SimpleMenu">
@@ -56,7 +51,4 @@
         </entity>
 
     </entities>
-
-
-
 </module>
