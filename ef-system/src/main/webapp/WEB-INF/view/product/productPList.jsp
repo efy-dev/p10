@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
+<table>
     <tr>
         <td>产品id</td>
         <td>产品名称</td>

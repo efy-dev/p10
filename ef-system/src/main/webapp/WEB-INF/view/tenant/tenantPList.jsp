@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
+<table>
     <tr>
         <td>传承人id</td>
         <td>传承人名称</td>
@@ -30,8 +30,6 @@
             <td>${product.name}</td>
         </tr>
     </c:forEach>
-
-
 </table>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
