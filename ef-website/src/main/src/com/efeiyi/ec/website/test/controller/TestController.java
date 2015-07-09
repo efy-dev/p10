@@ -21,44 +21,43 @@ public class TestController {
     private BaseManager baseManager;
 
 
-    /*  ÅäÖÃÎÄ¼şÑùÀı
+    /*  é…ç½®æ–‡ä»¶æ ·ä¾‹
         <entity name="PCProduct"
-                label="¾«Ñ¡×÷Æ·"
+                label="ç²¾é€‰ä½œå“"
                 model="com.efeiyi.ec.product.model.Product">
             <fields>
-                <field name="id" label="×÷Æ·" inputType="text" />
+                <field name="id" label="ä½œå“" inputType="text" />
             </fields>
             <does>
                 <do name="plistPCProduct"
-                    label="×÷Æ·ÁĞ±í"
-                    result="/choiceness" access="$consumer"><!--ÓÃ»§²éÑ¯-->
-                    <query name="default" label="Ä¬ÈÏ" type="auto" orderBy="id:desc">
-                        <condition label="×÷Æ·" name="id" defaultValue="0" operation="ne"/>
+                    label="ä½œå“åˆ—è¡¨"
+                    result="/choiceness" access="$consumer"><!--ç”¨æˆ·æŸ¥è¯¢-->
+                    <query name="default" label="é»˜è®¤" type="auto" orderBy="id:desc">
+                        <condition label="ä½œå“" name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-
                 <do name="listPCProduct"
-                    label="×÷Æ·ÁĞ±í"
-                    result="/choiceness" access="$consumer"><!--ÓÃ»§²éÑ¯-->
-                    <query name="default" label="Ä¬ÈÏ" type="auto" orderBy="id:desc">
-                        <condition label="×÷Æ·" name="id" defaultValue="0" operation="ne"/>
+                    label="ä½œå“åˆ—è¡¨"
+                    result="/choiceness" access="$consumer"><!--ç”¨æˆ·æŸ¥è¯¢-->
+                    <query name="default" label="é»˜è®¤" type="auto" orderBy="id:desc">
+                        <condition label="ä½œå“" name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="saveOrUpdatePCProduct">
                     <page>
                         <fields>
-                            <field name="status" label="×´Ì¬" defaultValue="1"
+                            <field name="status" label="çŠ¶æ€" defaultValue="1"
                                    inputType="default"></field>
                         </fields>
                     </page>
                 </do>
-                <do name="removePCSamplePhoto" lable="¼ÙÉ¾×÷Æ·" access="$photographer" result=""></do>
+                <do name="removePCSamplePhoto" lable="å‡åˆ ä½œå“" access="$photographer" result=""></do>
             </does>
         </entity>
      */
 
 
-    //·ÖÒ³µÄÓÃ·¨
+    //åˆ†é¡µçš„ç”¨æ³•
     @RequestMapping({"/test/pproducts"})
     @ResponseBody
     public List<Object> plistProduct(HttpServletRequest request) throws Exception{
@@ -66,7 +65,7 @@ public class TestController {
         return baseManager.listPageInfo(xQuery).getList();
     }
 
-    //²»·ÖÒ³µÄÓÃ·¨
+    //ä¸åˆ†é¡µçš„ç”¨æ³•
     @RequestMapping({"/test/products"})
     @ResponseBody
     public List<Object> listProduct(HttpServletRequest request) throws Exception{
@@ -74,7 +73,7 @@ public class TestController {
         return baseManager.listObject(xQuery);
     }
 
-    //²»·ÖÒ³µÄÓÃ·¨
+    //ä¸åˆ†é¡µçš„ç”¨æ³•
     @RequestMapping({"/test/saveOrUpdateproduct"})
     @ResponseBody
     public void saveOrUpdateProduct(HttpServletRequest request) throws Exception{

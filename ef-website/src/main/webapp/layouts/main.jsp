@@ -13,7 +13,7 @@
     <title><sitemesh:title default="装饰器页面..." /></title>
   <script src="/scripts/jquery-1.11.1.min.js"></script>
 
-  <link href="/scripts/assets/css/amazeui.min.css" type="text/css">
+  <link href="/scripts/assets/css/amazeui.min.css" rel="stylesheet">
   <script src="/scripts/assets/js/amazeui.min.js"></script>
   <sitemesh:head/>
 </head>

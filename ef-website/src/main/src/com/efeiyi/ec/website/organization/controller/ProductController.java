@@ -7,6 +7,7 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import com.thoughtworks.xstream.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +24,7 @@ import java.util.List;
 
 
 /**
- * Created by ACØ¼man on 2015/6/17.
+ * Created by ACä¸¶man on 2015/6/17.
  */
 @Controller
 @RequestMapping("/product")
@@ -34,7 +36,7 @@ public class ProductController extends BaseController {
     private BaseManager baseManager;
 
     /**
-     * ÉÌÆ·µÄ±à¼­
+     * å•†å“çš„ç¼–è¾‘
      */
 
     @RequestMapping(value = "/getProduct.do")
@@ -81,7 +83,7 @@ public class ProductController extends BaseController {
 
 
     /**
-     * ÁĞ³öËùÓĞµÄ²úÆ·
+     * åˆ—å‡ºæ‰€æœ‰çš„äº§å“
      *
      * @param request
      * @param model
@@ -90,7 +92,7 @@ public class ProductController extends BaseController {
      */
     @RequestMapping("/product/list")
     public String listProduct(HttpServletRequest request, Model model) throws Exception {
-        //ÔÚ²éÑ¯µÄÊ±ºòÊ×ÏÈĞèÒª´´½¨XQeury¶ÔÏó
+        //åœ¨æŸ¥è¯¢çš„æ—¶å€™é¦–å…ˆéœ€è¦åˆ›å»ºXQeuryå¯¹è±¡
         XQuery xQuery = new XQuery("listPCProduct_default", request);
         List<Object> productList = baseManager.listObject(xQuery);
         model.addAttribute("productlist", productList);
@@ -99,7 +101,7 @@ public class ProductController extends BaseController {
 
 
     /**
-     * ·ÖÒ³ÁĞ³ö¹Ì¶¨ÊıÁ¿µÄ²úÆ·£¬Í¨¹ıÅäÖÃPageEntityÀ´¸Ä±äÊıÁ¿ ÕâÀïĞèÒª±£Ö¤ËùÓĞµÄÁĞ±íÒ³ÃæµÄÊı¾İÊıÁ¿±£³ÖÒ»ÖÂ
+     * åˆ†é¡µåˆ—å‡ºå›ºå®šæ•°é‡çš„äº§å“ï¼Œé€šè¿‡é…ç½®PageEntityæ¥æ”¹å˜æ•°é‡ è¿™é‡Œéœ€è¦æ‰€æœ‰çš„åˆ—è¡¨é¡µé¢çš„æ•°æ®æ•°é‡ä¿æŒä¸€è‡´
      *
      * @param request
      * @param model
@@ -108,12 +110,37 @@ public class ProductController extends BaseController {
      */
     @RequestMapping("/product/plist")
     public String plistProduct(HttpServletRequest request, Model model) throws Exception {
-        //ÔÚ²éÑ¯µÄÊ±ºòÊ×ÏÈĞèÒª´´½¨XQeury¶ÔÏó
+        //åœ¨æŸ¥è¯¢çš„æ—¶å€™é¦–å…ˆéœ€è¦åˆ›å»ºXQeuryå¯¹è±¡
         XQuery xQuery = new XQuery("plistPCProduct_default", request);
         List<Object> productList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("productlist", productList);
         xQuery.addRequestParamToModel(model, request);
         return "/pc/product/productplist";
+    }
+
+
+    /**
+     * ä¿å­˜äº§å“çš„æ ·ä¾‹
+     */
+    @RequestMapping({"/product/saveOrUpdate"})
+    @ResponseBody
+    public boolean saveOrUpdateProduct(HttpServletRequest request) {
+        try {
+            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePCProduct", request);
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * ä¿å­˜äº§å“çš„æ ·ä¾‹
+     */
+    @RequestMapping({"/product/form"})
+    public String formProduct(HttpServletRequest request) {
+        return "/pc/product/productform";
     }
 
 
