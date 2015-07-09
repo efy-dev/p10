@@ -30,8 +30,6 @@
             <td>${tenantWork.name}</td>
         </tr>
     </c:forEach>
-
-
 </table>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
