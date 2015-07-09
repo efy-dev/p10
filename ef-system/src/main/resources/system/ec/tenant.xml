@@ -105,15 +105,11 @@
         <entity name="TenantNewsList" label="传承人新闻列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantNews">
-            <fields>
-                <field name="id" label="传承人新闻id" inputType="text"/>
-                <field name="title" label="传承人新闻标题" inputType="text"/>
-            </fields>
             <does>
                 <do name="plistTenantNews" access="" label="传承人新闻分页列表"
                     result="/tenantNews/tenantNewsPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="name" defaultValue="ten1" operation="eq"></condition>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 

@@ -23,7 +23,7 @@
     <td>传承人新闻title</td>
   </tr>
 
-  <c:forEach items="${objectList}" var="tenantNews">
+  <c:forEach items="${requestScope.pageInfo.list}" var="tenantNews">
     <tr>
       <td>${tenantNews.id}</td>
       <td>${tenantNews.title}</td>

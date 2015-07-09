@@ -4,7 +4,7 @@
     <!-- decorator实例 -->
     <!--decMobile.jsp为 名为“mobile”的decorator 所使用的模板页面-->
     <decorator name="main" page="main.jsp">
-        <pattern>/*</pattern>
+        <pattern>/index/</pattern>
     </decorator>
 
     <excludes>
