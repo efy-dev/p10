@@ -1,22 +1,19 @@
 package com.ming800.core.base.service.impl;
 
+import com.ming800.core.base.util.XDoUtil;
+import com.ming800.core.does.model.*;
+import com.ming800.core.does.service.DoManager;
 import com.ming800.core.does.service.impl.ModuleManagerImpl;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.Field;
-import com.ming800.core.does.model.StatusTypeField;
-import com.ming800.core.does.model.StatusTypeItem;
-import com.ming800.core.does.model.Xentity;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +27,9 @@ public class BaseManagerImpl implements BaseManager {
 
     @Autowired
     private XdoDao xdoDao;
+
+    @Autowired
+    private DoManager doManager;
 
 
     @Override
@@ -45,6 +45,67 @@ public class BaseManagerImpl implements BaseManager {
         xdoDao.saveOrUpdateObject(model, object);
     }
 
+    /**
+     * 保存
+     */
+    @Override
+    public void saveOrUpdate(String doQueryName, HttpServletRequest request) throws Exception {
+        Do tempDo = null;
+        Object object;
+        String type;
+        String idValue = request.getParameter("id");
+        try {
+            tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (idValue == null || idValue.equals("")) {
+            type = "new";
+            object = Class.forName(tempDo.getXentity().getModel()).newInstance();
+        } else {
+            type = "edit";
+            object = xdoDao.getObject(tempDo.getXentity().getModel(), idValue);
+        }
+
+        object = XDoUtil.processSaveOrUpdateTempObject(tempDo, object, object.getClass(), request, type, xdoDao);
+
+        try {
+            xdoDao.saveOrUpdateObject(object.getClass().getName(), object);
+        } catch (Exception e) {
+
+//            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 保存
+     */
+    @Override
+    public void saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception {
+        Object object;
+        String type;
+        Object idValue = xSaveOrUpdate.getParamMap().get("id");
+        if (idValue == null || idValue.equals("")) {
+            type = "new";
+            object = Class.forName(xSaveOrUpdate.getTempDo().getXentity().getModel()).newInstance();
+        } else {
+            type = "edit";
+            object = xdoDao.getObject(xSaveOrUpdate.getTempDo().getXentity().getModel(), idValue.toString());
+        }
+
+        object = XDoUtil.processSaveOrUpdateTempObject(xSaveOrUpdate.getTempDo(), object, object.getClass(), xSaveOrUpdate.getParamMap(), type, xdoDao);
+
+        try {
+            xdoDao.saveOrUpdateObject(object.getClass().getName(), object);
+        } catch (Exception e) {
+
+//            e.printStackTrace();
+        }
+
+    }
+
+
     @Override
     public void delete(String model, String id) {
         xdoDao.deleteObject(model, id);
@@ -52,7 +113,7 @@ public class BaseManagerImpl implements BaseManager {
 
     @Override
     public void remove(String model, String id) {
-        xdoDao.removeObject(model,id);
+        xdoDao.removeObject(model, id);
     }
 
     /**
@@ -67,6 +128,20 @@ public class BaseManagerImpl implements BaseManager {
     public List listObject(String queryHql, Object... params) {
         return xdoDao.getObjectList(queryHql, params);
     }
+
+    /*
+    这里传入doQueryName的目的是直接得到DoQuery对象，该对象中包含了某个查询的所有信息，查询条件查询参数的种类和参数类型
+     */
+    @Override
+    public List listObject(XQuery xQuery) {
+        return xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());
+    }
+
+    @Override
+    public PageInfo listPageInfo(XQuery xQuery) {
+        return xdoDao.getPageByConditions(xQuery.getPageEntity(), xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 
     @Override
     public PageInfo listPageInfo(String queryHql, PageEntity pageEntity, LinkedHashMap<String, Object> queryParamMap) {
@@ -169,4 +244,6 @@ public class BaseManagerImpl implements BaseManager {
         this.listStatusType(entityName, Arrays.asList(fieldName));
         return statusTypeItemList;
     }
+
+
 }

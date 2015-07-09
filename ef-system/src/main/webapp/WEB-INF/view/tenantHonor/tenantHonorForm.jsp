@@ -11,7 +11,8 @@
     <title></title>
 </head>
 <body>
-  <form action="/basic/xm.do?qm=saveOrUpdateTenantHonor" method="post">
+  <form action="/basic/xm.do" method="post">
+    <input type="hidden" name="qm" value="saveOrUpdateTenantHonor">
     memo：<input type="text" name="memo" id="memo">
     <input type="submit" value="保存">
   </form>

@@ -21,8 +21,6 @@ import java.util.*;
 @Service
 public class DoManagerImpl implements DoManager {
 
-    @Autowired
-    private XdoDao xdoDao;
     private static Map<String, Do> queryModelMap = new HashMap<>();
 
 
@@ -743,21 +741,29 @@ public class DoManagerImpl implements DoManager {
     public Do getDoByQueryModel(String queryModel) throws Exception {
         Do tempDo = null;
         tempDo = queryModelMap.get(queryModel);
-        String currentRoleType ="";
+//        String currentRoleType ="";
         //权限校验
         //当前用户角色类型
         //Role role=AuthorizationUtil.getMyUser().getRole();
 
-        //currentRoleType=AuthorizationUtil.getMyUser().getRole().getBasicType();
+//        currentRoleType=AuthorizationUtil.getMyUser().getRole().getBasicType();
 
         //拥有当前动作权限的用户角色
-        String access = tempDo.getAccess();
-        if (tempDo != null && access.contains("$")) {
+//        String access = tempDo.getAccess();
+//        if (tempDo != null && access.contains("$")) {
+//
+//            //do标签未配置access属性，或者access为空，或者access属性不含当前用户的角色类型
+//            if (!access.contains(currentRoleType)) {
+//                throw new Exception("当前用户权限不足");
+//            }
+//        }
+        /*
+        @TODO 暂时先注释掉权限判断的代码
+         */
+        if (tempDo == null) {
 
             //do标签未配置access属性，或者access为空，或者access属性不含当前用户的角色类型
-            if (!access.contains(currentRoleType)) {
-                throw new Exception("当前用户权限不足");
-            }
+            throw new Exception("tempDo is null");
         }
         return tempDo;  //To change body of implemented methods use File | Settings | File Templates.
     }

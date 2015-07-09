@@ -11,7 +11,8 @@
     <title></title>
 </head>
 <body>
-  <form action="/basic/xm.do?qm=saveOrUpdateTenant&id=${object.id}" method="post">
+  <form action="/basic/xm.do" method="post">
+    <input type="hidden" value="saveOrUpdateTenant" name="qm">
     <input type="hidden" value="${object.id}"name=id" id="id">
     姓名：<input type="text" name="name" id="name" value="${object.name}">
     <input type="submit" value="保存">

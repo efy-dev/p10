@@ -3,6 +3,7 @@ package com.efeiyi.ec.product.model;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.project.model.Category;
 import com.efeiyi.ec.project.model.Project;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -61,6 +62,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @JsonIgnore
     public Tenant getTenant() {
         return tenant;
     }
@@ -71,6 +73,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
+    @JsonIgnore
     public Category getCategory() {
         return category;
     }
@@ -98,6 +101,7 @@ public class Product {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;
     }
@@ -109,6 +113,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_description_id")
+    @JsonIgnore
     public ProductDescription getProductDescription() {
         return productDescription;
     }
@@ -128,6 +133,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="project_id")
+    @JsonIgnore
     public Project getProject() {
         return project;
     }
