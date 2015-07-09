@@ -5,7 +5,7 @@
 <module name="basic" label="basic" version="" package="com.efeiyi.ec.basic" path="">
 
     <entities>
-        <entity name="bannerList" label="banner"
+        <entity name="banner" label="banner"
                 basic="simple" others=""
                 model="com.efeiyi.ec.basic.model.Banner">
             <does>
@@ -27,31 +27,45 @@
 
             </does>
         </entity>
-
-    </entities>
-
-    <entities>
-        <entity name="projectNewsList" label="百科新闻"
+        <entity name="simpleMenu" label="菜单"
                 basic="simple" others=""
-                model="com.efeiyi.ec.wiki.model.ProjectNews">
-            <fields>
-                <field name="id" label="百科新闻id" inputType="text"/>
-                <field name="content" label="百科新闻" inputType="text"/>
-            </fields>
+                model="com.efeiyi.ec.basic.model.SimpleMenu">
             <does>
-                <do name="plistProjectNews" access="" label="百科新闻分页列表"
-                    result="/projectNews/projectNewsPList">
+                <do name="plistSimpleMenu" access="" label="菜单列表"
+                    result="/simpleMenu/simpleMenuPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="content" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="removeProjectNews" label="删除百科内容" access="" result="json"/>
-                <do name="formProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsForm"></do>
-                <do name="saveOrUpdateProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsSaveSuccess"></do>
-                <do name="listProjectNews" label="百科内容列表" access="" result="/ProjectNews/projectNewsList">
+                <do name="removeSimpleMenu" label="删除菜单" access="" result="json"/>
+                <do name="formSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuForm"></do>
+                <do name="saveOrUpdateSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuSaveSuccess"></do>
+                <do name="listSimpleMenu" label="菜单列表" access="" result="/simpleMenu/simpleMenuList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="百科内容主键" name="id" defaultValue="1" operation="eq"/>
+                        <condition label="菜单主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="simpleMenuItem" label="菜单项"
+                basic="simple" others=""
+                model="com.efeiyi.ec.basic.model.SimpleMenuItem">
+            <does>
+                <do name="plistSimpleMenuItem" access="" label="菜单项列表"
+                    result="/simpleMenuItem/simpleMenuItemPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeSimpleMenuItem" label="删除菜单项" access="" result="json"/>
+                <do name="formSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemForm"></do>
+                <do name="saveOrUpdateSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemSaveSuccess"></do>
+                <do name="listSimpleMenuItem" label="菜单项列表" access="" result="/simpleMenuItem/simpleMenuItemList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="菜单项主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
@@ -59,5 +73,4 @@
         </entity>
 
     </entities>
-
 </module>

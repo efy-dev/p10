@@ -12,9 +12,8 @@
 </head>
 <body>
   <form action="/basic/xm.do" method="post">
-    <input type="hidden" value="saveOrUpdateTenant" name="qm">
-    <input type="hidden" name=id" id="id">
-    姓名：<input type="text" name="name" id="name">
+    <input type="hidden" value="saveOrUpdateSimpleMenuItem" name="qm">
+    name：<input type="text" name="name" id="name">
     <input type="submit" value="保存">
   </form>
 
