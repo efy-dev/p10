@@ -53,14 +53,14 @@ public class XdoController {
         if (menuId == null || "".equals(menuId)) {
             menuId = "organmgmt";
         }
-        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
-        modelMap.put("jmenu", jmenu);
-        for (Jnode jnode : jmenu.getChildren()) {
-            if (menuId.equals(jnode.getId())) {
-                modelMap.put("jnode", jnode);
-                break;
-            }
-        }
+//        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
+//        modelMap.put("jmenu", jmenu);
+//        for (Jnode jnode : jmenu.getChildren()) {
+//            if (menuId.equals(jnode.getId())) {
+//                modelMap.put("jnode", jnode);
+//                break;
+//            }
+//        }
         Map map = request.getParameterMap();
 /*        for (Object key : map.keySet()) {
             String[] values = (String[]) map.get(key);

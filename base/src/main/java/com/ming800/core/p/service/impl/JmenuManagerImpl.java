@@ -28,7 +28,7 @@ import java.util.*;
 public class JmenuManagerImpl implements JmenuManager {
 
     private static final String MENU_STANDARD = "/setting/jmenu_commonMenu.xml";
-    public static HashMap<String, Jmenu> menuHashMap;
+    private static HashMap<String, Jmenu> menuHashMap;
     private static int jmenuId = 1;
 
     private static void initMenu() {
@@ -37,10 +37,6 @@ public class JmenuManagerImpl implements JmenuManager {
         String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();
 
         File dir_standard = new File(tempFileName + "/home/setting3/jmenu_standard.xml");
-//        File dir_professional = new File(tempFileName + "/home/setting3/jmenu_professional.xml");
-//        File dir_advance = new File(tempFileName + "/home/setting3/jmenu_advance.xml");
-//        File dir_edu = new File(tempFileName + "/home/setting3/jmenu_edu.xml");
-
         /*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*/
         Document infoDocument_standard = null;
         if (dir_standard.exists()) {
@@ -56,14 +52,13 @@ public class JmenuManagerImpl implements JmenuManager {
 
 
         Jmenu menu_standard = initJmenuMap(infoDocument_standard);
-//        Jmenu menu_professional = initJmenuMap(infoDocument_professional);
-//        Jmenu menu_advance = initJmenuMap(infoDocument_advance);
-//        Jmenu menu_edu = initJmenuMap(infoDocument_edu);
 
         menuHashMap.put(menu_standard.getId(), menu_standard);
-//        menuHashMap.put(menu_professional.getId(), menu_professional);
-//        menuHashMap.put(menu_advance.getId(), menu_advance);
-//        menuHashMap.put(menu_edu.getId(), menu_edu);
+    }
+
+
+    public static Jmenu getJmenu(String jmenuName){
+        return menuHashMap.get(jmenuName);
     }
 
     private List<Jnode> fetchJmenuMap() {
