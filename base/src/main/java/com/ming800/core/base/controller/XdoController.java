@@ -7,6 +7,9 @@ import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.does.service.ModuleManager;
+import com.ming800.core.p.model.Jmenu;
+import com.ming800.core.p.model.Jnode;
+import com.ming800.core.p.service.impl.JmenuManagerImpl;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.PageInfo;
 
@@ -46,8 +49,18 @@ public class XdoController {
 
     @RequestMapping("/xm.do")
     public ModelAndView xm(HttpServletRequest request, ModelMap modelMap) throws Exception {
-
-        
+        String menuId = request.getParameter("menuId");
+        if (menuId == null || "".equals(menuId)) {
+            menuId = "organmgmt";
+        }
+        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
+        modelMap.put("jmenu", jmenu);
+        for (Jnode jnode : jmenu.getChildren()) {
+            if (menuId.equals(jnode.getId())) {
+                modelMap.put("jnode", jnode);
+                break;
+            }
+        }
         Map map = request.getParameterMap();
 /*        for (Object key : map.keySet()) {
             String[] values = (String[]) map.get(key);
@@ -56,12 +69,13 @@ public class XdoController {
 
         String qm = request.getParameter("qm");
         String resultPage = "";
-        request.setAttribute("qm",qm);
+        request.setAttribute("qm", qm);
+        request.setAttribute("menuId", menuId);
 
 
         if (qm.startsWith("plist")) {       /*分页*/
             String conditions = request.getParameter("conditions");
-            request.setAttribute("conditions",conditions);
+            request.setAttribute("conditions", conditions);
 /*            String mrb = request.getParameter("mrb");
             if (mrb != null && !mrb.equals("")) {
                 modelMap.put("mrb", mrb);
@@ -127,15 +141,15 @@ public class XdoController {
                 }*/
 /*            } else {*/
 
-                modelMap.put("tabTitle", tempDoQuery.getLabel());
+            modelMap.put("tabTitle", tempDoQuery.getLabel());
 //                resultPage = "/pc/choiceness";
-                PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, conditions, pageEntity);
-                modelMap.put("pageInfo", pageInfo);
-                modelMap.put("pageEntity", pageInfo.getPageEntity());
+            PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, conditions, pageEntity);
+            modelMap.put("pageInfo", pageInfo);
+            modelMap.put("pageEntity", pageInfo.getPageEntity());
 
 //                返回列表
-                xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
-                // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
+            xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
+            // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
 
 
 /*
@@ -209,9 +223,9 @@ public class XdoController {
                     resultPage = "/core/base/relatedformPage";
                 }
             } else {*/
-                modelMap.put("object", xdoManager.fetchObject(tempDo, id, conditions));
-                resultPage = XDoUtil.convertPageUrl(resultPage, modelMap.get("object"));
-           // }
+            modelMap.put("object", xdoManager.fetchObject(tempDo, id, conditions));
+            resultPage = XDoUtil.convertPageUrl(resultPage, modelMap.get("object"));
+            // }
 
 /*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
@@ -245,8 +259,8 @@ public class XdoController {
                 object = modelMap.get("object");
                 baseManager.saveOrUpdate(object.getClass().getName(), object);
             } else {*/
-                object = xdoManager.saveOrUpdateObject(tempDo, request);
-                modelMap.put("object", object);
+            object = xdoManager.saveOrUpdateObject(tempDo, request);
+            modelMap.put("object", object);
             //}
 
             String tempResultPage = request.getParameter("resultPage");
@@ -395,7 +409,7 @@ public class XdoController {
             String fieldName = request.getParameter("fieldName");
 
             return moduleManager.listStatusTypeItem(fieldName);
-        }  else {
+        } else {
             return null;
         }
     }

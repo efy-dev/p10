@@ -1,5 +1,7 @@
 package com.ming800.core.p.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 /**
@@ -12,13 +14,12 @@ import java.util.List;
 public class Jnode {
     private String id;
     private String text_zh_CN;
-    private String text_en_US;
     private String url;
     private String state;
-    private String setting;
     private String access;
-    private String branch;
     private List<Jnode> children;
+    private Jnode father;//节点的父节点
+    private List<String> qmList; //菜单相关页面的qm请求列表
 
     public String getId() {
         return id;
@@ -34,14 +35,6 @@ public class Jnode {
 
     public void setText_zh_CN(String text_zh_CN) {
         this.text_zh_CN = text_zh_CN;
-    }
-
-    public String getText_en_US() {
-        return text_en_US;
-    }
-
-    public void setText_en_US(String text_en_US) {
-        this.text_en_US = text_en_US;
     }
 
     public String getUrl() {
@@ -60,14 +53,6 @@ public class Jnode {
         this.state = state;
     }
 
-    public String getSetting() {
-        return setting;
-    }
-
-    public void setSetting(String setting) {
-        this.setting = setting;
-    }
-
     public String getAccess() {
         return access;
     }
@@ -76,19 +61,60 @@ public class Jnode {
         this.access = access;
     }
 
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
-
     public List<Jnode> getChildren() {
         return children;
     }
 
     public void setChildren(List<Jnode> children) {
         this.children = children;
+    }
+
+
+    public List<String> getQmList() {
+        return qmList;
+    }
+
+    public void setQmList(List<String> qmList) {
+        this.qmList = qmList;
+    }
+
+    @JsonIgnore
+    public Jnode getFather() {
+        return father;
+    }
+
+    @JsonIgnore
+    public Jnode getRootFather() {
+        if (father == null) {
+            return this;
+        } else
+            return getRootFather(father);
+    }
+
+    private Jnode getRootFather(Jnode jnode) {
+        if (jnode.father == null) {
+            return jnode;
+        } else {
+            return getRootFather(jnode.father);
+        }
+    }
+
+    public void setFather(Jnode father) {
+        this.father = father;
+    }
+
+    //判断是否包含qm请求
+    public boolean contain(String qm) {
+        if (qmList != null && qmList.size() > 0 && qm != null) {
+            boolean flag = false;
+            for (String qmTemp : qmList) {
+                if (qm.equals(qmTemp)) {
+                    flag = true;
+                }
+            }
+            return flag;
+        } else {
+            return false;
+        }
     }
 }

@@ -4,8 +4,11 @@ import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.p.PConst;
+import com.ming800.core.p.model.Jmenu;
+import com.ming800.core.p.model.Jnode;
 import com.ming800.core.p.service.GlobalManager;
 import com.ming800.core.p.service.JmenuManager;
+import com.ming800.core.p.service.impl.JmenuManagerImpl;
 import com.ming800.core.util.DateUtil;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -87,11 +90,25 @@ public class MainController extends BaseController {
      * @throws Exception
      */
     @RequestMapping("/main.do")
-    public ModelAndView main() throws Exception {
+    public ModelAndView main(HttpServletRequest request) throws Exception {
+        String menuId = request.getParameter("menuId");
         ModelMap modelMap = new ModelMap();
         MyUser myUser = AuthorizationUtil.getMyUser();
         modelMap.put("myUser", myUser);
         modelMap.put("currentCalendar", DateUtil.getCurrentCalendarString());
+        if (menuId == null) {
+            menuId = "organmgmt";
+        }
+        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
+        modelMap.put("jmenu", jmenu);
+        for (Jnode jnode : jmenu.getChildren()) {
+            if (menuId.equals(jnode.getId())) {
+                modelMap.put("jnode", jnode);
+                break;
+            }
+        }
+        request.setAttribute("menuId", menuId);
+
         return new ModelAndView("/main", modelMap);
     }
 
@@ -118,8 +135,8 @@ public class MainController extends BaseController {
     public String getMenu(HttpServletRequest request) {
         String jMenuJson = "";
         String menuId = request.getParameter("menuId");
-        if (menuId != null && !menuId.equals("")) {
-            //如果menuId 等于 head 说明是加载头部导航栏  否则是加载左侧导航栏
+//        if (menuId != null && !menuId.equals("")) {
+        //如果menuId 等于 head 说明是加载头部导航栏  否则是加载左侧导航栏
             /*if (menuId.equals("head")) {
                 menuId = "training";
                 jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
@@ -127,9 +144,9 @@ public class MainController extends BaseController {
             } else {
                 jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_LEFT);
             }*/
-            menuId = "organmgmt";
-            jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
-        }
+        menuId = "organmgmt";
+        jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
+//        }
         return jMenuJson;
     }
 }

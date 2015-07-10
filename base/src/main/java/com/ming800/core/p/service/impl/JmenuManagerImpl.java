@@ -16,10 +16,7 @@ import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,87 +27,104 @@ import java.util.Map;
  */
 public class JmenuManagerImpl implements JmenuManager {
 
-    private static final String MENU_COMMONMENU = "/setting/jmenu_commonMenu.xml";
-    private static HashMap<String, JmenuTree> menuHashMap;
+    private static final String MENU_STANDARD = "/setting/jmenu_commonMenu.xml";
+    public static HashMap<String, Jmenu> menuHashMap;
     private static int jmenuId = 1;
-    private DoManager doManager;
-
-    @Autowired
-    private GlobalManager globalManager;
-
 
     private static void initMenu() {
         menuHashMap = new HashMap<>();
         File tempFile = new File(JmenuManagerImpl.class.getClassLoader().getResource("/").getPath());
-       /* String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();*/
+        String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();
 
-        File dir_commonMenu = new File(tempFile + "/setting/jmenu_commonMenu.xml");
+        File dir_standard = new File(tempFileName + "/home/setting3/jmenu_standard.xml");
+//        File dir_professional = new File(tempFileName + "/home/setting3/jmenu_professional.xml");
+//        File dir_advance = new File(tempFileName + "/home/setting3/jmenu_advance.xml");
+//        File dir_edu = new File(tempFileName + "/home/setting3/jmenu_edu.xml");
 
-        Document infoDocument_commonMenu = null;
-        if (dir_commonMenu.exists()) {
+        /*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*/
+        Document infoDocument_standard = null;
+        if (dir_standard.exists()) {
             try {
-                infoDocument_commonMenu = new SAXReader().read(dir_commonMenu);
+                infoDocument_standard = new SAXReader().read(dir_standard);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (infoDocument_commonMenu == null) {
-            infoDocument_commonMenu = ResourcesUtil.getDocument(MENU_COMMONMENU);
+        if (infoDocument_standard == null) {
+            infoDocument_standard = ResourcesUtil.getDocument(MENU_STANDARD);
         }
 
-        JmenuTree jmenuTree_commonMenu = initJmenuMap(infoDocument_commonMenu);
 
-        menuHashMap.put(jmenuTree_commonMenu.getName(), jmenuTree_commonMenu);
+        Jmenu menu_standard = initJmenuMap(infoDocument_standard);
+//        Jmenu menu_professional = initJmenuMap(infoDocument_professional);
+//        Jmenu menu_advance = initJmenuMap(infoDocument_advance);
+//        Jmenu menu_edu = initJmenuMap(infoDocument_edu);
+
+        menuHashMap.put(menu_standard.getId(), menu_standard);
+//        menuHashMap.put(menu_professional.getId(), menu_professional);
+//        menuHashMap.put(menu_advance.getId(), menu_advance);
+//        menuHashMap.put(menu_edu.getId(), menu_edu);
     }
 
-    private HashMap<String, Jmenu> fetchJmenuMap() {
+    private List<Jnode> fetchJmenuMap() {
+        /*String version = AuthorizationUtil.getMyBranch().getVersion();*/
         String version = "commonMenu";
-        /*if (version == null || version.equals("")) {
-            Document globalDocument = globalManager.load();
-            List<Node> nodeList = globalDocument.selectNodes("/global");
-            version = nodeList.get(0).selectSingleNode("@version").getText();
-        }
-*/
+//        if (version == null || version.equals("")) {
+//            Document globalDocument = globalManager.load();
+//            List<Node> nodeList = globalDocument.selectNodes("/global");
+//            version = nodeList.get(0).selectSingleNode("@version").getText();
+//        }
 
-        return menuHashMap.get(version).getJmenuHashMap();
+
+        return menuHashMap.get(version).getChildren();
     }
+
 
     /**
      * 将菜单对应的xml文件转为Jmenu对象 并存入jmenuMap
      */
-    private static JmenuTree initJmenuMap(Document infoDocument) {
-        JmenuTree jmenuTree = new JmenuTree();
+    private static Jmenu initJmenuMap(Document infoDocument) {
+        Jmenu jmenu = new Jmenu(); //初始化Jmenu对象
         if (infoDocument != null) {
+            jmenu.setChildren(new ArrayList<Jnode>());
+            List<Node> jmenuNodeList = infoDocument.selectNodes("jmenu"); //获取Jmenu根节点
+            String name = jmenuNodeList.get(0).selectSingleNode("@id").getText();  //或的jmenu的名称
 
-            List<Node> menuNodeList = infoDocument.selectNodes("jmenuTree");
-            String name = menuNodeList.get(0).selectSingleNode("@name").getText();
-
-            HashMap<String, Jmenu> jmenuMap = new HashMap<>();
-            List<Node> jmenuNodeList = infoDocument.selectNodes("jmenuTree/jmenu");
-            for (Node jMenuXmlNode : jmenuNodeList) {
-                Jmenu jmenu = new Jmenu();
-                jmenu.setChildren(new ArrayList<Jnode>());
-                String id = jMenuXmlNode.selectSingleNode("@id").getText();
-                jmenu.setId(id);
-                List<Node> firstLayerList = jMenuXmlNode.selectNodes("jnode");
+            List<Jnode> jnodeList = new ArrayList<>();   //初始化JNode对象
+            List<Node> jnodeNodeList = infoDocument.selectNodes("jmenu/jnode");
+            //遍历第一层Jnode
+            for (Node jnodeXmlNode : jnodeNodeList) {
+                Jnode jnode = new Jnode();
+                jnode.setChildren(new ArrayList<Jnode>());
+                String id = jnodeXmlNode.selectSingleNode("@id").getText();
+                String url = jnodeXmlNode.selectSingleNode("@url").getText();
+                String text_zh_CN = jnodeXmlNode.selectSingleNode("@text_zh_CN").getText();
+                jnode.setId(id);
+                jnode.setUrl(url);
+                jnode.setText_zh_CN(text_zh_CN);
+                List<Node> firstLayerList = jnodeXmlNode.selectNodes("jnode");
+                //便利第二层jnode
                 for (Node firstLayerXmlNode : firstLayerList) {
                     Jnode firstLayerJnode = JmenuManagerImpl.parseXmlNodeToJavaBean(firstLayerXmlNode);
                     firstLayerJnode.setChildren(new ArrayList<Jnode>());
                     List<Node> secondLayerList = firstLayerXmlNode.selectNodes("jnode");
+                    //便利第三层jnode
                     for (Node secondLayerXmlNode : secondLayerList) {
                         Jnode secondLayerJnode = JmenuManagerImpl.parseXmlNodeToJavaBean(secondLayerXmlNode);
+                        secondLayerJnode.setFather(firstLayerJnode);
                         firstLayerJnode.getChildren().add(secondLayerJnode);
                     }
-                    jmenu.getChildren().add(firstLayerJnode);
+                    firstLayerJnode.setFather(jnode);
+                    jnode.getChildren().add(firstLayerJnode);
                 }
-                jmenuMap.put(jmenu.getId(), jmenu);
+                jnodeList.add(jnode);
             }
 
-            jmenuTree.setName(name);
-            jmenuTree.setJmenuHashMap(jmenuMap);
+            jmenu.setId(name);
+            jmenu.setChildren(jnodeList);
         }
 
-        return jmenuTree;
+        return jmenu;
     }
 
     /**
@@ -122,11 +136,16 @@ public class JmenuManagerImpl implements JmenuManager {
     private static Jnode parseXmlNodeToJavaBean(Node xmlNode) {
         String url = xmlNode.selectSingleNode("@url").getText();
         String text_zh_CN = xmlNode.selectSingleNode("@text_zh_CN").getText();
+        Node qmNode = xmlNode.selectSingleNode("@qm");
+        List<String> qmList = new ArrayList<>();
+        if (qmNode != null) {
+            qmList = Arrays.asList(qmNode.getText().split(","));
+        }
         String state = "open";
         if (xmlNode.selectSingleNode("@state") != null) {
             state = xmlNode.selectSingleNode("@state").getText();
         }
-        String access = xmlNode.selectSingleNode("@access").getText();
+        String access = xmlNode.selectSingleNode("@access") != null ? xmlNode.selectSingleNode("@access").getText() : "";
 
         Jnode jnode = new Jnode();
         jnode.setId(jmenuId++ + "");
@@ -134,23 +153,25 @@ public class JmenuManagerImpl implements JmenuManager {
         jnode.setUrl(url);
         jnode.setState(state);
         jnode.setAccess(access);
+        jnode.setQmList(qmList);
         return jnode;
     }
 
     /**
      * 取得Jmenu对应的Json格式，String类型的字符串
-     *~
+     * ~
+     *
      * @param jmenuName
      * @param type      菜单类型
      * @return
      */
     public String getJmenuJson(String jmenuName, Integer type) {
-        Jmenu jmenu = fetchJmenuMap().get(jmenuName);
+        List<Jnode> jnodeList = fetchJmenuMap();
         StringBuilder jMenuJson = new StringBuilder(500);
-        if (jmenu.getChildren() != null && jmenu.getChildren().size() > 0) {
+        if (jnodeList != null && jnodeList.size() > 0) {
             jMenuJson.append("[");
-            for (Jnode jnode : jmenu.getChildren()) {
-                jMenuJson.append(this.getJnodeJson(jnode, type));
+            for (Jnode jnodeTemp : jnodeList) {
+                jMenuJson.append(this.getJnodeJson(jnodeTemp, type));
             }
             jMenuJson.deleteCharAt(jMenuJson.length() - 1);
             jMenuJson.append("]");
@@ -167,7 +188,7 @@ public class JmenuManagerImpl implements JmenuManager {
      */
     private StringBuilder getJnodeJson(Jnode jnode, Integer type) {
         StringBuilder jNodeJson = new StringBuilder(50);
-        String roleType="ALL";
+        String roleType = "ALL";
 
         Boolean access;
 
@@ -190,10 +211,6 @@ public class JmenuManagerImpl implements JmenuManager {
 
         String text = jnode.getText_zh_CN();
 //        String locale = AuthorizationUtil.getBigUser().getLocale().toString();
-        String locale = "zh_CN";
-        if (locale.startsWith("en")) {
-            text = jnode.getText_en_US();
-        }
         jNodeJson.append('{');
         jNodeJson.append("\"id\":\"" + jnode.getId()).append("\",")
                 .append("\"text\":\"" + text).append("\",")
@@ -306,37 +323,37 @@ public class JmenuManagerImpl implements JmenuManager {
      * @param jnode      jnode.setting 键与值用冒号隔开，多个键用分号隔开    例：key1:value1;key2:value2
      * @return
      */
-    private boolean doSettingFilter(Jnode jnode, Map<String, String> settingMap) {
-
-        String jnodeSetting = jnode.getSetting();
-        if (jnodeSetting.equals("")) {
-            return true;
-        }
-
-        for (String settting : jnodeSetting.split(";")) {
-            if (settting.split(":").length < 2) {
-                System.out.print(jnode.getText_zh_CN() + "setting设置异常/n");
-            }
-            String name = settting.split(":")[0];
-            String value = settting.split(":")[1];
-
-            if (value.startsWith("*")) {  //星号开头的值 配置了反而不显示
-                if (settingMap.containsKey(name) && settingMap.get(name).equals(value.substring(1, value.length()))) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                if (settingMap.containsKey(name) && settingMap.get(name).equals(value)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-        }
-        return false;
-    }
+//    private boolean doSettingFilter(Jnode jnode, Map<String, String> settingMap) {
+//
+//        String jnodeSetting = jnode.getSetting();
+//        if (jnodeSetting.equals("")) {
+//            return true;
+//        }
+//
+//        for (String settting : jnodeSetting.split(";")) {
+//            if (settting.split(":").length < 2) {
+//                System.out.print(jnode.getText_zh_CN() + "setting设置异常/n");
+//            }
+//            String name = settting.split(":")[0];
+//            String value = settting.split(":")[1];
+//
+//            if (value.startsWith("*")) {  //星号开头的值 配置了反而不显示
+//                if (settingMap.containsKey(name) && settingMap.get(name).equals(value.substring(1, value.length()))) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            } else {
+//                if (settingMap.containsKey(name) && settingMap.get(name).equals(value)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//
+//        }
+//        return false;
+//    }
 
 //    private boolean doLisenceFilter(Jnode jnode,Role role){
 //        String jnodeSetting = jnode.getSetting();
