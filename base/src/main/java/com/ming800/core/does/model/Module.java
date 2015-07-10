@@ -1,7 +1,6 @@
 package com.ming800.core.does.model;
 
 
-
 import java.util.List;
 
 /**
@@ -16,9 +15,7 @@ public class Module {
 
     private String name;
     private String label;
-    private String version;
     private String packagePath;
-    private String path;
 
 
     private List<Xentity> xentityList;
@@ -41,13 +38,6 @@ public class Module {
         this.label = label;
     }
 
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     public String getPackagePath() {
         return packagePath;
@@ -57,13 +47,6 @@ public class Module {
         this.packagePath = packagePath;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 
     public List<Xentity> getXentityList() {
         return xentityList;

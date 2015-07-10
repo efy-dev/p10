@@ -13,5 +13,5 @@ public interface JmenuManager {
      * @param type      菜单类型
      * @return
      */
-    public String getJmenuJson(String jmenuName, Integer type);
+    String getJmenuJson(String jmenuName, Integer type);
 }

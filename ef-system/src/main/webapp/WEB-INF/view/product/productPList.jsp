@@ -43,6 +43,7 @@
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+        <ming800:pcPageParam name="menuId" value="${requestScope.menuId}"/>
     </ming800:pcPageList>
 </div>
 </body>

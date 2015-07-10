@@ -133,9 +133,7 @@ public class ModuleManagerImpl implements ModuleManager {
             Module module = new Module();
             module.setName(node.selectSingleNode("@name").getText());
             module.setLabel(node.selectSingleNode("@label").getText());
-            module.setVersion(node.selectSingleNode("@version").getText());
             module.setPackagePath(node.selectSingleNode("@package").getText());
-            module.setPath(node.selectSingleNode("@path").getText());
 
             /*生成entityMap*/
             List<Xentity> xentityList = createEntityMap(module, node);
@@ -202,9 +200,7 @@ public class ModuleManagerImpl implements ModuleManager {
                 }
                 module.setName(node.selectSingleNode("@name").getText());
                 module.setLabel(node.selectSingleNode("@label").getText());
-                module.setVersion(node.selectSingleNode("@version").getText());
                 module.setPackagePath(node.selectSingleNode("@package").getText());
-                module.setPath(node.selectSingleNode("@path").getText());
             }
 
             /*生成entityMap*/
