@@ -49,7 +49,7 @@
 
             </does>
         </entity>
-        <entity name="ProjcetProperty" label="ProjcetProperty"
+        <entity name="ProjectProperty" label="ProjectProperty"
                 basic="simple" others=""
                 model="com.efeiyi.ec.project.model.ProjectProperty">
             <does>
