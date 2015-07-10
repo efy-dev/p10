@@ -18,19 +18,19 @@
   <table width="95%" align="center" cellpadding="10" cellspacing="0" border="1">
     <tr>
       <td width="120">商品名称</td>
-      <td><input type="text" name="proname" value=${model.product.name}/></td>
+      <td><input type="text" name="proname" value=${product.name}/></td>
     </tr>
     <tr>
       <td>市场价格:</td>
-      <td><input type="text" name="marketprice" value=${model.product.price}/></td>
+      <td><input type="text" name="marketprice" value=${product.price}/></td>
     </tr>
     <tr>
       <td>销售价格:</td>
-      <td><input type="text" name="saleprice" value=${model.product.price}/></td>
+      <td><input type="text" name="saleprice" value=${product.price}/></td>
     </tr>
     <tr>
       <td>商品图片</td>
-      <td><input type="file" name="proimage"  value=${model.product.picture_url}/></td>
+      <td><input type="file" name="proimage"  value=${product.picture_url}/></td>
     </tr>
     <tr>
       <td>商品简介</td>

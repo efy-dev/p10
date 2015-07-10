@@ -7,7 +7,14 @@
             <does>
                 <do name="listProduct" access="" label="商品列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="name" defaultValue="2" operation="eq"/>
+                        <condition name="" defaultValue="" operation="eq"/>
+
+                    </query>
+                </do>
+                <do name="plistProduct" access="" label="商品列表分页">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="" defaultValue="" operation="eq"/>
+
                     </query>
                 </do>
             </does>
