@@ -5,7 +5,9 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/7/8.
  */
-
+@Controller
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -26,13 +29,13 @@ public class ProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/product/list")
-    public String listProduct(HttpServletRequest request, Model model) throws Exception{
+    @RequestMapping(value = "/productList.do")
+    public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
         //在查询的时候首先需要创建XQeury对象
-        XQuery xQuery = new XQuery("listPCProduct_default",request);
+        XQuery xQuery = new XQuery("listProduct_default",request);
         List<Object> productList = baseManager.listObject(xQuery);
         model.addAttribute("productList",productList);
-        return "/pc/productlist";
+        return  new ModelAndView("/pc/product/productList",model);
     }
 
 
