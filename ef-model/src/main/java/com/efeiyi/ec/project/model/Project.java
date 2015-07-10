@@ -3,6 +3,7 @@ package com.efeiyi.ec.project.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -16,6 +17,7 @@ public class Project {
     private String status;
     private String level;
     private Category category;
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -72,5 +74,14 @@ public class Project {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Column(name="create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }
