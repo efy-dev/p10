@@ -1865,7 +1865,7 @@
             </does>
         </entity>
 
-        <entity name="Category"
+        <!--<entity name="Category"
                 label="类别" basic="new,va,ea,da" others=""
                 model="com.ming800.material.nutrition.model.Category">
             <fields>
@@ -1898,7 +1898,7 @@
                                    dataType="int"/>
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        &lt;!&ndash;<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
                     </query>
                     <page>
                         <fields>
@@ -1916,7 +1916,7 @@
                     <query name="default" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        &lt;!&ndash;<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
                     </query>
                     <page>
                         <commands type="command">
@@ -1967,7 +1967,7 @@
                 </do>
 
             </does>
-        </entity>
+        </entity>-->
 
         <entity name="DiseaseItem"
                 label="疾病" basic="new,va,ea,da" others=""
