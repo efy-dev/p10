@@ -81,4 +81,10 @@ public class TestController {
         baseManager.saveOrUpdate(xSaveOrUpdate);
     }
 
+
+    @RequestMapping({"/test/jmenutest"})
+    public String testJmenu(){
+        return "/view/test/jmenuTest";
+    }
+
 }

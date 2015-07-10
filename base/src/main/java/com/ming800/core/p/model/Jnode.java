@@ -117,4 +117,59 @@ public class Jnode {
             return false;
         }
     }
+
+    public boolean contain(Jnode jnode, String qm) {
+        if (jnode.qmList != null && jnode.qmList.size() > 0 && qm != null) {
+            boolean flag = false;
+            for (String qmTemp : jnode.qmList) {
+                if (qm.equals(qmTemp)) {
+                    flag = true;
+                }
+            }
+            return flag;
+        } else {
+            return false;
+        }
+    }
+
+    public String jnodeMatch(String style, String url) {
+        if (!url.equals("") && contain(url)) {
+            return style;
+        } else return "";
+    }
+
+    public String jnodeMatch(String style, Jnode jnode) {
+        if (jnode != null && id.equals(jnode.getId())) {
+            return style;
+        } else return "";
+    }
+
+    public String fatherJnodeMatch(String style, String url, String fatherNodeId) {
+        if (contain(url) && getRootFather().getId().equals(fatherNodeId)) {
+            return style;
+        } else return "";
+    }
+
+    public String childJnodeMatch(String style, String url, String fatherNodeId) {
+        boolean flag = false;
+        if (children != null) {
+            flag = containChildMatch(this, url);
+        }
+        if (flag && getRootFather().getId().equals(fatherNodeId)) {
+            return style;
+        } else return "";
+    }
+
+    private boolean containChildMatch(Jnode jnode, String url) {
+        boolean flag = false;
+//        for (Jnode jnodeTemp : jnode.children) {
+//            if (jnodeTemp.contain(url)) {
+//                flag = true;
+//            } else flag = containChildMatch(jnodeTemp, url);
+//            if (flag) {
+//                break;
+//            }
+//        }
+        return flag;
+    }
 }

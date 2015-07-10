@@ -14,11 +14,13 @@ import org.dom4j.Document;
 import org.dom4j.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.management.remote.JMXConnectionNotification;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -99,7 +101,7 @@ public class MainController extends BaseController {
         if (menuId == null) {
             menuId = "organmgmt";
         }
-        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu("commonMenu");
         modelMap.put("jmenu", jmenu);
         for (Jnode jnode : jmenu.getChildren()) {
             if (menuId.equals(jnode.getId())) {
@@ -131,22 +133,120 @@ public class MainController extends BaseController {
      * @throws Exception
      */
     @RequestMapping("/getMenu")
-    @ResponseBody
-    public String getMenu(HttpServletRequest request) {
-        String jMenuJson = "";
-        String menuId = request.getParameter("menuId");
-//        if (menuId != null && !menuId.equals("")) {
-        //如果menuId 等于 head 说明是加载头部导航栏  否则是加载左侧导航栏
-            /*if (menuId.equals("head")) {
-                menuId = "training";
-                jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
+    public String getMenu(HttpServletRequest request, Model model) {
 
-            } else {
-                jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_LEFT);
-            }*/
-        menuId = "organmgmt";
-        jMenuJson = jmenuManager.getJmenuJson(menuId, PConst.JMENU_TYPE_HEAD);
-//        }
-        return jMenuJson;
+        String url = request.getParameter("url");
+        String resultPage = request.getParameter("resultPage");
+        String jmenuName = request.getParameter("jmenuName");
+        String menuId = request.getParameter("menuId");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuName);
+        model.addAttribute("jmenu", jmenu);
+        if (menuId != null) {
+            for (Jnode jnodeTemp : jmenu.getChildren()) {
+                if (jnodeTemp.getId().equals(menuId)) {
+                    model.addAttribute("jnode", jnodeTemp);
+                    break;
+                }
+            }
+        } else {
+            model.addAttribute("jnode", jmenu.getChildren().get(0));
+        }
+        return resultPage;
+
     }
+
+
+    @RequestMapping("/manage/getMenu/header")
+    public String getManageJmenuHeader(HttpServletRequest request, Model model) {
+
+        String url = request.getParameter("url"); //用来得到menuId，筛选jmenu
+        String resultPage = request.getParameter("resultPage");
+        String jmenuName = request.getParameter("jmenuName");
+        String menuId = request.getParameter("menuId");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuName);
+        Jnode currentJnode = getCurrentJnode(jmenu, url);
+        model.addAttribute("jmenu", jmenu);
+        if (currentJnode != null) {
+            model.addAttribute("currentJnode", currentJnode);
+            model.addAttribute("jnode", currentJnode.getRootFather());
+        } else if (menuId != null) {
+            for (Jnode jnodeTemp : jmenu.getChildren()) {
+                if (jnodeTemp.getId().equals(menuId)) {
+                    model.addAttribute("jnode", jnodeTemp);
+                    break;
+                }
+            }
+        } else {
+            model.addAttribute("jnode", jmenu.getChildren().get(0));
+        }
+        return resultPage;
+
+    }
+
+
+    @RequestMapping("/manage/getMenu/left")
+    public String getManageJmenuLeft(HttpServletRequest request, Model model) {
+
+        String url = request.getParameter("url"); //用来得到menuId，筛选jmenu
+        String resultPage = request.getParameter("resultPage");
+        String jmenuName = request.getParameter("jmenuName");
+        String menuId = request.getParameter("menuId");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuName);
+        Jnode currentJnode = getCurrentJnode(jmenu, url);
+        model.addAttribute("jmenu", jmenu);
+        if (currentJnode != null) {
+            model.addAttribute("currentJnode", currentJnode);
+            model.addAttribute("jnode", currentJnode.getRootFather());
+        } else if (menuId != null) {
+            for (Jnode jnodeTemp : jmenu.getChildren()) {
+                if (jnodeTemp.getId().equals(menuId)) {
+                    model.addAttribute("jnode", jnodeTemp);
+                    break;
+                }
+            }
+        } else {
+            model.addAttribute("jnode", jmenu.getChildren().get(0));
+        }
+        return resultPage;
+
+    }
+
+    private Jnode getCurrentJnode(Jmenu jmenu, String url) {
+        if (url == null || url.equals("")) {
+            return null;
+        }
+        Jnode resultJnode = null;
+        for (Jnode jnodeTemp : jmenu.getChildren()) {
+            if (resultJnode == null) {
+                resultJnode = findJnode(jnodeTemp, url);
+            }
+        }
+        return resultJnode;
+    }
+
+    private Jnode findJnode(Jnode jnode, String url) {
+        Jnode resultJnode = null;
+        if (jnode.getChildren() != null && jnode.getChildren().size() > 0) {
+            for (Jnode jnodeTemp : jnode.getChildren()) {
+                if (jnodeTemp.contain(url)) {
+                    resultJnode = jnodeTemp;
+                    break;
+                } else {
+                    resultJnode = findJnode(jnodeTemp, url);
+                    if (resultJnode != null) {
+                        break;
+                    }
+                }
+            }
+        }
+        return resultJnode;
+    }
+
+
+    @RequestMapping({"/test/jmenutest"})
+    public String testJmenu(HttpServletRequest request) {
+        return "/test/jmenuTest";
+    }
+
+
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="commonMenu">
-    <jnode id="organmgmt" url="?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
+    <jnode id="organmgmt" url="/test/jmenutest?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
         <jnode url="" id="organization" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
-            <jnode url="/basic/xm.do?qm=plistProduct_default" extend="" access="admin" text_zh_CN="产品列表"/>
+            <jnode url="/basic/xm.do?qm=plistProduct_default" qm="plistProduct_default" extend="" access="admin" text_zh_CN="产品列表"/>urls其实就是匹配的一个标识
             <jnode url="/basic/xm.do?qm=plistManager_default"  access="admin,manager" text_zh_CN="内部用户管理" text_en_US="Outbox"/>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理"/>
         </jnode>
@@ -10,9 +10,9 @@
             <jnode url="/xdos/xme.do"   text_zh_CN="模块(module)"/>
         </jnode>
     </jnode>
-    <jnode id="organmgmt2" url="?menuId=organmgmt2" text_zh_CN="系统管理2"><!--系统管理-->
+    <jnode id="organmgmt2" url="/test/jmenutest?menuId=organmgmt2" text_zh_CN="系统管理2"><!--系统管理-->
         <jnode url="" id="organization2" access="admin,manager" state="closed"  text_zh_CN="组织机构管理1">
-            <jnode url="/basic/xm.do?qm=plistProduct_default"   text_zh_CN="所有用户管理1"/>
+            <jnode url="/basic/xm.do?qm=plistProduct_default"  qm="plistProduct_default" text_zh_CN="所有用户管理1"/>
             <jnode url="/basic/xm.do?qm=plistManager_default"   text_zh_CN="内部用户管理1"/>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理1"/>
         </jnode>
