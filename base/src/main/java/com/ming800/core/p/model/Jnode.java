@@ -19,7 +19,7 @@ public class Jnode {
     private String access;
     private List<Jnode> children;
     private Jnode father;//节点的父节点
-    private List<String> qmList; //菜单相关页面的qm请求列表
+    private List<String> matchList; //菜单相关页面的匹配项
 
     public String getId() {
         return id;
@@ -69,13 +69,12 @@ public class Jnode {
         this.children = children;
     }
 
-
-    public List<String> getQmList() {
-        return qmList;
+    public List<String> getMatchList() {
+        return matchList;
     }
 
-    public void setQmList(List<String> qmList) {
-        this.qmList = qmList;
+    public void setMatchList(List<String> matchList) {
+        this.matchList = matchList;
     }
 
     @JsonIgnore
@@ -103,12 +102,17 @@ public class Jnode {
         this.father = father;
     }
 
-    //判断是否包含qm请求
-    public boolean contain(String qm) {
-        if (qmList != null && qmList.size() > 0 && qm != null) {
+
+    /**
+     * 判断jnode中是否包含匹配项
+     * @param match 匹配项，在配置文件中配置
+     * @return
+     */
+    public boolean contain(String match) {
+        if (matchList != null && matchList.size() > 0 && match != null && !"".equals(match)) {
             boolean flag = false;
-            for (String qmTemp : qmList) {
-                if (qm.equals(qmTemp)) {
+            for (String matchTemp : matchList) {
+                if (match.equals(matchTemp)) {
                     flag = true;
                 }
             }
@@ -119,10 +123,10 @@ public class Jnode {
     }
 
     public boolean contain(Jnode jnode, String qm) {
-        if (jnode.qmList != null && jnode.qmList.size() > 0 && qm != null) {
+        if (jnode.matchList != null && jnode.matchList.size() > 0 && qm != null) {
             boolean flag = false;
-            for (String qmTemp : jnode.qmList) {
-                if (qm.equals(qmTemp)) {
+            for (String matchTemp : jnode.matchList) {
+                if (qm.equals(matchTemp)) {
                     flag = true;
                 }
             }
@@ -144,32 +148,4 @@ public class Jnode {
         } else return "";
     }
 
-    public String fatherJnodeMatch(String style, String url, String fatherNodeId) {
-        if (contain(url) && getRootFather().getId().equals(fatherNodeId)) {
-            return style;
-        } else return "";
-    }
-
-    public String childJnodeMatch(String style, String url, String fatherNodeId) {
-        boolean flag = false;
-        if (children != null) {
-            flag = containChildMatch(this, url);
-        }
-        if (flag && getRootFather().getId().equals(fatherNodeId)) {
-            return style;
-        } else return "";
-    }
-
-    private boolean containChildMatch(Jnode jnode, String url) {
-        boolean flag = false;
-//        for (Jnode jnodeTemp : jnode.children) {
-//            if (jnodeTemp.contain(url)) {
-//                flag = true;
-//            } else flag = containChildMatch(jnodeTemp, url);
-//            if (flag) {
-//                break;
-//            }
-//        }
-        return flag;
-    }
 }

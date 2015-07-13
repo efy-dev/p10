@@ -15,10 +15,10 @@ import java.util.List;
  */
 public interface AliOssUploadManager {
 
-    public Boolean uploadFile(MultipartFile multipartFile, String bucket, String uploadName) throws IOException;
+    Boolean uploadFile(MultipartFile multipartFile, String bucket, String uploadName) throws IOException;
 
-    public void deleteFile(String bucket, String uploadName) throws IOException;
+    void deleteFile(String bucket, String uploadName) throws IOException;
 
-    public Long calculateFileSize(String bucketName, List<String[]> keysList);
+    Long calculateFileSize(String bucketName, List<String[]> keysList);
 
 }

@@ -20,11 +20,11 @@
 <body>
 
 
-<jsp:include flush="true" page="/manage/getMenu/header?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateHeader&url=${requestScope.qm}"></jsp:include>
+<jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateHeader&url=${requestScope.qm}"></jsp:include>
 
 <div class="am-cf admin-main">
 
-    <jsp:include flush="true" page="/manage/getMenu/left?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateLeft&url=${requestScope.qm}"></jsp:include>
+    <jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateLeft&url=${requestScope.qm}"></jsp:include>
 
     <div class="admin-content">
 

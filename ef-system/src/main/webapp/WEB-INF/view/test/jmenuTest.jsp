@@ -12,11 +12,11 @@
 </head>
 <body>
 
-<jsp:include flush="true" page="/manage/getMenu/header?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateHeader"></jsp:include>
+<jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateHeader"></jsp:include>
 
 <div class="am-cf admin-main">
 
-<jsp:include flush="true" page="/manage/getMenu/left?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateLeft"></jsp:include>
+<jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateLeft"></jsp:include>
 
 <div class="admin-content">
 </div>

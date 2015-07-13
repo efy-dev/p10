@@ -3,9 +3,9 @@
 
     <entities>
 
-        <entity name="PCPhotographer"
+        <entity name="PCBigUser"
                 label="摄影师"
-                model="com.yuepaila.character.model.SamplePhoto">
+                model="com.efeiyi.ec.organization.model.BigUser">
             <fields>
                 <field name="id" label="摄影师" inputType="text"/>
                 <field name="name" label="名称" inputType="text"/>
@@ -15,23 +15,6 @@
                         <item label="女" value="2"/>
                     </statusType>
                 </field>
-                <field name="photoType" label="作品类型" inputType="text">
-                    <statusType fieldName="photoType">
-                        <item label="婚纱摄影" value="wedding"/>
-                        <item label="商业摄影" value="mirror"/>
-                        <item label="儿童摄影" value="mirror"/>
-                        <item label="职业照" value="mirror"/>
-                        <item label="写真" value="mirror"/>
-                    </statusType>
-                </field>
-                <field name="photoStyle" label="风格" inputType="text">
-                    <statusType fieldName="photoStyle">
-                        <item label="韩氏" value="korea"/>
-                        <item label="欧美" value="europe"/>
-                        <item label="古典 " value="classical"/>
-                    </statusType>
-                </field>
-
 
                 <field name="grade" label="拍摄星级" inputType="text">
                     <statusType fieldName="grade">
@@ -54,6 +37,13 @@
                 </field>
             </fields>
             <does>
+                <do name="saveOrUpdatePCBigUser">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1" ></field>
+                        </fields>
+                    </page>
+                </do>
             </does>
         </entity>
 
