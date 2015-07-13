@@ -22,15 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 public class MainController extends BaseController {
 
 
-    @RequestMapping("/manage/getMenu.do")
+    @RequestMapping("/getMenu.do")
     public String getManageJmenuHeader(HttpServletRequest request, Model model) {
 
-        String url = request.getParameter("url"); //用来得到menuId，筛选jmenu
+        String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
         String resultPage = request.getParameter("resultPage");
         String jmenuName = request.getParameter("jmenuName");
         String menuId = request.getParameter("menuId");
         Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuName);
-        Jnode currentJnode = getCurrentJnode(jmenu, url);
+        Jnode currentJnode = getCurrentJnode(jmenu, match);
         model.addAttribute("jmenu", jmenu);
         if (currentJnode != null) {
             model.addAttribute("currentJnode", currentJnode);
@@ -50,28 +50,28 @@ public class MainController extends BaseController {
     }
 
 
-    private Jnode getCurrentJnode(Jmenu jmenu, String url) {
-        if (url == null || url.equals("")) {
+    private Jnode getCurrentJnode(Jmenu jmenu, String match) {
+        if (match == null || match.equals("")) {
             return null;
         }
         Jnode resultJnode = null;
         for (Jnode jnodeTemp : jmenu.getChildren()) {
             if (resultJnode == null) {
-                resultJnode = findJnode(jnodeTemp, url);
+                resultJnode = findJnode(jnodeTemp, match);
             }
         }
         return resultJnode;
     }
 
-    private Jnode findJnode(Jnode jnode, String url) {
+    private Jnode findJnode(Jnode jnode, String match) {
         Jnode resultJnode = null;
         if (jnode.getChildren() != null && jnode.getChildren().size() > 0) {
             for (Jnode jnodeTemp : jnode.getChildren()) {
-                if (jnodeTemp.contain(url)) {
+                if (jnodeTemp.contain(match)) {
                     resultJnode = jnodeTemp;
                     break;
                 } else {
-                    resultJnode = findJnode(jnodeTemp, url);
+                    resultJnode = findJnode(jnodeTemp, match);
                     if (resultJnode != null) {
                         break;
                     }

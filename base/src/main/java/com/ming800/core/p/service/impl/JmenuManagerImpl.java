@@ -37,38 +37,15 @@ public class JmenuManagerImpl implements JmenuManager {
 
     private static void initMenu() throws Exception{
         menuHashMap = new HashMap<>();
-//        File tempFile = new File(JmenuManagerImpl.class.getClassLoader().getResource("/").getPath());
-//        String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath();
-//
-//        File dir_standard = new File(tempFileName + "/home/setting3/jmenu_standard.xml");
-        /*先读取 setting3,  如果没有的话 ， 读取setting2，  最后读取setting*/
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Logger logger = Logger.getLogger(JmenuManagerImpl.class);
-        Resource[] xmlFiles = resolver.getResources("/setting/jmenu_*.xml");
+        Resource[] xmlFiles = resolver.getResources("/setting/jmenu_*");
         if (xmlFiles != null) {
             for (Resource resource : xmlFiles) {
                 logger.info("开始解析文件："+resource.getURL());
                 initJmenuMap(new SAXReader().read(resource.getInputStream()),menuHashMap);
             }
         }
-
-//
-//        Document infoDocument_standard = null;
-//        if (dir_standard.exists()) {
-//            try {
-//                infoDocument_standard = new SAXReader().read(dir_standard);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (infoDocument_standard == null) {
-//            infoDocument_standard = ResourcesUtil.getDocument(MENU_STANDARD);
-//        }
-//
-//
-//        Jmenu menu_standard = initJmenuMap(infoDocument_standard);
-//
-//        menuHashMap.put(menu_standard.getId(), menu_standard);
     }
 
 
