@@ -4,8 +4,7 @@
 
 <script type="text/javascript">
     function loginOrRegister(o){
-        var result = $(o).val();
-       window.location.href="/pc/forward.do?result="+result;
+       window.location.href="/pc/forward.do?result="+o;
     }
 </script>
 <h2>Hello World!</h2>
