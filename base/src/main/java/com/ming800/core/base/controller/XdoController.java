@@ -53,20 +53,7 @@ public class XdoController {
         if (menuId == null || "".equals(menuId)) {
             menuId = "organmgmt";
         }
-//        Jmenu jmenu = JmenuManagerImpl.menuHashMap.get("commonMenu");
-//        modelMap.put("jmenu", jmenu);
-//        for (Jnode jnode : jmenu.getChildren()) {
-//            if (menuId.equals(jnode.getId())) {
-//                modelMap.put("jnode", jnode);
-//                break;
-//            }
-//        }
         Map map = request.getParameterMap();
-/*        for (Object key : map.keySet()) {
-            String[] values = (String[]) map.get(key);
-            modelMap.put(key.toString(), values[0]);
-        }*/
-
         String qm = request.getParameter("qm");
         String resultPage = "";
         request.setAttribute("qm", qm);
@@ -76,10 +63,6 @@ public class XdoController {
         if (qm.startsWith("plist")) {       /*分页*/
             String conditions = request.getParameter("conditions");
             request.setAttribute("conditions", conditions);
-/*            String mrb = request.getParameter("mrb");
-            if (mrb != null && !mrb.equals("")) {
-                modelMap.put("mrb", mrb);
-            }*/
             if (qm.split("_").length < 2) {
                 throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
             }

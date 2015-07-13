@@ -105,6 +105,7 @@ public class Jnode {
 
     /**
      * 判断jnode中是否包含匹配项
+     *
      * @param match 匹配项，在配置文件中配置
      * @return
      */
@@ -112,7 +113,7 @@ public class Jnode {
         if (matchList != null && matchList.size() > 0 && match != null && !"".equals(match)) {
             boolean flag = false;
             for (String matchTemp : matchList) {
-                if (match.equals(matchTemp)) {
+                if (match.trim().equals(matchTemp.trim())) {
                     flag = true;
                 }
             }
@@ -122,11 +123,11 @@ public class Jnode {
         }
     }
 
-    public boolean contain(Jnode jnode, String qm) {
-        if (jnode.matchList != null && jnode.matchList.size() > 0 && qm != null) {
+    public boolean contain(Jnode jnode, String match) {
+        if (jnode.matchList != null && jnode.matchList.size() > 0 && match != null && !"".equals(match)) {
             boolean flag = false;
             for (String matchTemp : jnode.matchList) {
-                if (qm.equals(matchTemp)) {
+                if (match.trim().equals(matchTemp.trim())) {
                     flag = true;
                 }
             }

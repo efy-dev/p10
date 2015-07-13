@@ -2,7 +2,7 @@
 <jmenu id="commonMenu">
     <jnode id="organmgmt" url="/test/jmenutest?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
         <jnode url="" id="organization" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
-            <jnode url="/basic/xm.do?qm=plistProduct_default" match="plistProduct_default" extend="" access="admin" text_zh_CN="产品列表"/>urls其实就是匹配的一个标识
+            <jnode url="/basic/xm.do?qm=plistProduct_default" match="plistProduct_default" extend="" access="admin" text_zh_CN="产品列表"/>
             <jnode url="/basic/xm.do?qm=plistManager_default"  access="admin,manager" text_zh_CN="内部用户管理" text_en_US="Outbox"/>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理"/>
         </jnode>
