@@ -59,44 +59,6 @@ public class ModuleManagerImpl implements ModuleManager {
                 }
             }
 
-            /*tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParent()*/
-            File tempFile = new File(AttachmentManagerImpl.class.getClassLoader().getResource("/").getPath());
-//            String tempFileName = tempFile.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath()/* + "home*//*.xml"*/;
-//            System.out.println(tempFileName);
-
-//            Resource[] xmlFiles3 = null;
-//            try {
-////                xmlFiles3 = resolver.getResources(tempFileName + "/home");
-//                File dir = new File(tempFileName + "/home");
-//                File[] files = dir.listFiles();
-//                if (files != null && files.length > 0) {
-//                    for (int i = 0; i < files.length; i++) {
-//                        if (files[i].isFile()) {
-//                            String fileName = files[i].getName();
-//                            if (fileName.endsWith(".xml") || fileName.endsWith(".XML")) {
-//                                org.dom4j.Document document = new SAXReader().read(files[i]);
-//                                List<Node> nodeList = document.selectNodes("/modules/module");
-//                                if (nodeList != null && nodeList.size() > 0) {
-//                                    initXmlFiles2(nodeList);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
-            /*if (xmlFiles3 != null) {
-                for (Resource resource : xmlFiles3) {
-                    org.dom4j.Document document = new SAXReader().read(resource.getInputStream());
-                    List<Node> nodeList = document.selectNodes("/modules/module");
-                    if (nodeList != null && nodeList.size() > 0) {
-                        initXmlFiles2(nodeList);
-                    }
-                }
-            }*/
-
 
             generateEntityMap();
             DoManagerImpl.generateDoMap(entityMap);
@@ -133,9 +95,7 @@ public class ModuleManagerImpl implements ModuleManager {
             Module module = new Module();
             module.setName(node.selectSingleNode("@name").getText());
             module.setLabel(node.selectSingleNode("@label").getText());
-            module.setVersion(node.selectSingleNode("@version").getText());
             module.setPackagePath(node.selectSingleNode("@package").getText());
-            module.setPath(node.selectSingleNode("@path").getText());
 
             /*生成entityMap*/
             List<Xentity> xentityList = createEntityMap(module, node);
@@ -202,9 +162,7 @@ public class ModuleManagerImpl implements ModuleManager {
                 }
                 module.setName(node.selectSingleNode("@name").getText());
                 module.setLabel(node.selectSingleNode("@label").getText());
-                module.setVersion(node.selectSingleNode("@version").getText());
                 module.setPackagePath(node.selectSingleNode("@package").getText());
-                module.setPath(node.selectSingleNode("@path").getText());
             }
 
             /*生成entityMap*/

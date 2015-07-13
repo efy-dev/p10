@@ -45,6 +45,8 @@ public class XQuery {
         //判断是否有排序参数
         if (request.getParameter("sort") != null) {
             this.setSortHql(XDoUtil.fetchOrderStr(tempDoQuery, request.getParameter("sort")));
+        }else if(tempDoQuery.getOrderBy()!=null&&tempDoQuery.getOrderBy()!=""){
+            this.setSortHql(XDoUtil.fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
         }
 
         //补全查询语句
