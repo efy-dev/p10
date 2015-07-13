@@ -1,25 +1,18 @@
 package com.ming800.core.p.service.impl;
 
 
-import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Jmenu;
-import com.ming800.core.p.model.JmenuTree;
 import com.ming800.core.p.model.Jnode;
-import com.ming800.core.p.service.GlobalManager;
 import com.ming800.core.p.service.JmenuManager;
-import com.ming800.core.util.ApplicationContextUtil;
-import com.ming800.core.util.ResourcesUtil;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import java.io.File;
 import java.util.*;
 
 /**
@@ -35,21 +28,21 @@ public class JmenuManagerImpl implements JmenuManager {
     private static HashMap<String, Jmenu> menuHashMap;
     private static int jmenuId = 1;
 
-    private static void initMenu() throws Exception{
+    private static void initMenu() throws Exception {
         menuHashMap = new HashMap<>();
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Logger logger = Logger.getLogger(JmenuManagerImpl.class);
         Resource[] xmlFiles = resolver.getResources("/setting/jmenu_*");
         if (xmlFiles != null) {
             for (Resource resource : xmlFiles) {
-                logger.info("开始解析文件："+resource.getURL());
-                initJmenuMap(new SAXReader().read(resource.getInputStream()),menuHashMap);
+                logger.info("开始解析文件：" + resource.getURL());
+                initJmenuMap(new SAXReader().read(resource.getInputStream()), menuHashMap);
             }
         }
     }
 
 
-    public static Jmenu getJmenu(String jmenuName){
+    public static Jmenu getJmenu(String jmenuName) {
         return menuHashMap.get(jmenuName);
     }
 
@@ -70,7 +63,7 @@ public class JmenuManagerImpl implements JmenuManager {
     /**
      * 将菜单对应的xml文件转为Jmenu对象 并存入jmenuMap
      */
-    private static Jmenu initJmenuMap(Document infoDocument,HashMap<String,Jmenu> jmenuHashMapTemp) {
+    private static Jmenu initJmenuMap(Document infoDocument, HashMap<String, Jmenu> jmenuHashMapTemp) {
 //        HashMap<String,Jmenu> jmenuHashMapTemp = new HashMap<>();
         Jmenu jmenu = new Jmenu(); //初始化Jmenu对象
         if (infoDocument != null) {
@@ -112,7 +105,7 @@ public class JmenuManagerImpl implements JmenuManager {
             jmenu.setChildren(jnodeList);
         }
 
-        jmenuHashMapTemp.put(jmenu.getId(),jmenu);
+        jmenuHashMapTemp.put(jmenu.getId(), jmenu);
 
         return jmenu;
     }
@@ -126,17 +119,19 @@ public class JmenuManagerImpl implements JmenuManager {
     private static Jnode parseXmlNodeToJavaBean(Node xmlNode) {
         String url = xmlNode.selectSingleNode("@url").getText();
         String text_zh_CN = xmlNode.selectSingleNode("@text_zh_CN").getText();
-        Node qmNode = xmlNode.selectSingleNode("@match");
         List<String> matchList = new ArrayList<>();
-        if (qmNode != null) {
-            matchList = Arrays.asList(qmNode.getText().split(","));
+        List<Node> matchNodeList = xmlNode.selectNodes("match");
+        if (matchNodeList != null && matchNodeList.size() > 0) {
+            for (Node matchTemp : matchNodeList) {
+                matchList.add(matchTemp.selectSingleNode("@url").getText());
+            }
         }
         String state = "open";
         if (xmlNode.selectSingleNode("@state") != null) {
             state = xmlNode.selectSingleNode("@state").getText();
         }
         String access = xmlNode.selectSingleNode("@access") != null ? xmlNode.selectSingleNode("@access").getText() : "";
-
+        matchList.add(url);
         Jnode jnode = new Jnode();
         jnode.setId(jmenuId++ + "");
         jnode.setText_zh_CN(text_zh_CN);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -11,6 +12,7 @@
     <title></title>
 </head>
 <body>
-<jsp:include flush="true" page="/getMenu.do?menuId=nav&jmenuName=nav&resultPage=/jmenu/nav&match=${pageContext.request.servletPath} "></jsp:include>
+<c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+<jsp:include flush="true" page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/jmenu/nav&match=${match} "></jsp:include>
 </body>
 </html>
