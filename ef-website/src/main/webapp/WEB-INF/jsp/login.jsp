@@ -18,18 +18,16 @@
   <hr>
   <div class="am-g" style="margin-top: 100px">
     <div class="am-u-md-4" style="margin-top: 55px;">
-      <form class="am-form" method="post" id="loginForm" action="<c:url value="/pc/login.do" />"
-            onsubmit="return loginSubmit();">
+      <form class="am-form" method="post" id="loginForm" action="<c:url value="/pc/login.do" />">
         <input type="hidden" name="dispatcher" value=""/>
         <input type="hidden" name="requestType" value="pc"/>
         <div class="am-form-group">
-          <label for="j_username">用户</label>
-          <input type="text" class="form-control" id="j_username" name="j_username"
-                 value="${enrollUsername}"/>
+          <label for="username">用户</label>
+          <input type="text" id="username" name="username" value="${enrollUsername}"/>
         </div>
         <div class="am-form-group">
-          <label for="j_password">密码</label>
-          <input type="password" class="form-control" id="j_password" name="j_password"
+          <label for="password">密码</label>
+          <input type="password" class="form-control" id="password" name="password"
                  value="${j_password}"/>
         </div>
         <div class="message">${message}</div>
@@ -41,9 +39,7 @@
 </div>
 
 <script type="text/javascript">
-
-
-  function init() {
+ /* function init() {
     var j_yey = document.getElementById("j_yey");
     var j_username0 = document.getElementById("j_username");
     var j_password = document.getElementById("j_password");
@@ -111,7 +107,7 @@
     } else {
       return false;
     }
-  }
+  }*/
 </script>
 </body>
 </html>
