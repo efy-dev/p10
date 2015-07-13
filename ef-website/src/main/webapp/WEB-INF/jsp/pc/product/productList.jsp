@@ -15,7 +15,8 @@
   <script>
 
     function find(o){
-      var pid = $("#productId").val();
+      var pid = $(o).val();
+
       window.location=("/product/getProduct.do?id="+pid);
     }
   </script>
