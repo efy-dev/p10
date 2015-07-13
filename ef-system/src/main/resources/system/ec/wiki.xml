@@ -31,10 +31,6 @@
 
             </does>
         </entity>
-
-    </entities>
-
-    <entities>
         <entity name="projectNewsList" label="百科新闻"
                 basic="simple" others=""
                 model="com.efeiyi.ec.wiki.model.ProjectNews">
@@ -63,5 +59,4 @@
         </entity>
 
     </entities>
-
 </module>

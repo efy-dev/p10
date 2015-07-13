@@ -225,7 +225,7 @@ public class BigUser {
     }*/
 
     @Column(name = "account_enabled")
-    public boolean getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
@@ -234,29 +234,29 @@ public class BigUser {
     }
 
     @Column(name = "account_expired")
-    public boolean getAccountExpired() {
+    public Boolean getAccountExpired() {
         return accountExpired;
     }
 
-    public void setAccountExpired(boolean accountExpired) {
+    public void setAccountExpired(Boolean accountExpired) {
         this.accountExpired = accountExpired;
     }
 
     @Column(name = "account_locked")
-    public boolean getAccountLocked() {
+    public Boolean getAccountLocked() {
         return accountLocked;
     }
 
-    public void setAccountLocked(boolean accountLocked) {
+    public void setAccountLocked(Boolean accountLocked) {
         this.accountLocked = accountLocked;
     }
 
     @Column(name = "credentials_expited")
-    public boolean getCredentialsExpired() {
+    public Boolean getCredentialsExpired() {
         return credentialsExpired;
     }
 
-    public void setCredentialsExpired(boolean credentialsExpired) {
+    public void setCredentialsExpired(Boolean credentialsExpired) {
         this.credentialsExpired = credentialsExpired;
     }
 

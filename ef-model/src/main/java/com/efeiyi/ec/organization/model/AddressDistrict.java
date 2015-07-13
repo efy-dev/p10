@@ -12,20 +12,19 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization_address_district")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "city"})
 public class AddressDistrict implements Serializable {
-    private Integer id;
+    private String id;
     private String name;
     private AddressCity addressCity;
 
     @Id
-    @GenericGenerator(name = "id", strategy = "increment")
+    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

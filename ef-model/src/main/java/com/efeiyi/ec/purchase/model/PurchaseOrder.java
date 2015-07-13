@@ -69,7 +69,7 @@ public class PurchaseOrder {
         this.payWay = payWay;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public Consumer getUser() {
         return user;

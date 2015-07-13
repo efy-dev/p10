@@ -2,19 +2,20 @@ package com.efeiyi.ec.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Administrator on 2015/6/24.
  */
+@Entity
+@Table(name="project_property")
 public class ProjectProperty {
     private String id;
     private String name;
     private Category category;
 
-    @Column(name="category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
     public Category getCategory() {
         return category;
     }

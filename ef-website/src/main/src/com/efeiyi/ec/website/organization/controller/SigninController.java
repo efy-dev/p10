@@ -8,9 +8,11 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
+import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.p.service.MessageVerifyManager;
+import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 
 /**
@@ -39,18 +41,12 @@ public class SigninController extends BaseController {
     private RoleManager roleManager;
     @Autowired
     private BranchManager branchManager;
-
     @Autowired
     private BaseManager baseManager;
-
     @Autowired
-    private MessageVerifyManager messageVerifyManager;
-/*
+    private UserManager userManager;
     @Autowired
-    private CouponManager couponManager;
-
-    @Autowired
-    private SmsCheckManager smsCheckManager;*/
+    private XdoManager xdoManager;
 
     /**
      * �鿴��ǰ�û����Ƿ����
@@ -147,45 +143,47 @@ public class SigninController extends BaseController {
     /**
      * ��ת����¼ҳ���controller
      */
-    @RequestMapping("/toLogin.do")
-    public String toLogin(){
-        return "/login";
+    @RequestMapping("/forward.do")
+    public String forward(String result){
+        if("2".equals(result)){
+            return "/register";
+        }else if("1".equals(result)){
+            return "/login";
+        }else {
+            return "/error";
+        }
     }
 
-    @RequestMapping(value = {"login.do", "login"})
-    public String login(HttpServletRequest request , Model model) {
-        /*if (request.getParameter("redirect") != null) {
-            String redirectUrl = request.getParameter("redirect");
-            model.addAttribute("redirect", redirectUrl);
-        }
-        if (request.getParameter("error") != null && request.getParameter("error").equals("true")) {
-            model.addAttribute("message", "�û������벻ƥ��");
-        } else if ("1".equals(request.getParameter("updatePsw"))) {
-            model.addAttribute("message", "�����޸ĳɹ�");
-        }*/
-        int result;
-        String username = request.getParameter("j_username");
-        String password = request.getParameter("j_password");
-        if (username != null && !"".equals(username) && password != null && !"".equals(password)){
-            if (username.equals("admin") && password.equals("123456")){
-                model.addAttribute("message","登录成功!");
-                result = 1;
-            }else{
-                model.addAttribute("message","用户名或密码输入错误!");
-                result = -1;
-            }
+    @RequestMapping(value ="/login.do")
+    public ModelAndView login(HttpServletRequest request,ModelMap model) {
+        String username = request.getParameter("username");
+        String pword = request.getParameter("password");
+        String password = StringUtil.encodePassword(pword,"SHA");
+        String queryHql = "from BigUser b where b.username =:username and b.password =:password";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username",username);
+        queryParamMap.put("password",password);
+        Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
+        if(obj != null){
+            model.addAttribute("user",obj);
+            return new ModelAndView("/loginAccess",model);
         }else{
-            model.addAttribute("message","用户名或密码不能为空");
-            result = -2;
+            model.addAttribute("username",username);
+            return new ModelAndView("/error",model);
         }
-        model.addAttribute("result",result);
-        if (result == 1){
-            return "/loginForm";
-        }else if(result == -1){
-            return  "/login";
-        }else{
-            return  "/login";
-        }
+    }
+
+    @RequestMapping("/register.do")
+    public ModelAndView register(HttpServletRequest request , ModelMap model) throws Exception {
+        String username = request.getParameter("username");
+        String pword = request.getParameter("password");
+        String password = StringUtil.encodePassword(pword,"SHA");
+        BigUser user = new BigUser();
+        user.setUsername(username);
+        user.setPassword(password);
+        userManager.saveOrUpdateBigUser(user);
+        model.addAttribute("user",user);
+        return new ModelAndView("/loginform",model);
     }
 
 }

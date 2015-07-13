@@ -27,17 +27,17 @@ public class MainController extends BaseController {
 
         String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
         String resultPage = request.getParameter("resultPage");
-        String jmenuName = request.getParameter("jmenuName");
-        String menuId = request.getParameter("menuId");
-        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuName);
+        String jnodeId = request.getParameter("jnodeId");
+        String jmenuId = request.getParameter("jmenuId");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuId);
         Jnode currentJnode = getCurrentJnode(jmenu, match);
         model.addAttribute("jmenu", jmenu);
         if (currentJnode != null) {
             model.addAttribute("currentJnode", currentJnode);
             model.addAttribute("jnode", currentJnode.getRootFather());
-        } else if (menuId != null) {
+        } else if (jnodeId != null) {
             for (Jnode jnodeTemp : jmenu.getChildren()) {
-                if (jnodeTemp.getId().equals(menuId)) {
+                if (jnodeTemp.getId().equals(jnodeId)) {
                     model.addAttribute("jnode", jnodeTemp);
                     break;
                 }

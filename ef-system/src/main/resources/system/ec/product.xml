@@ -35,10 +35,6 @@
 
             </does>
         </entity>
-
-    </entities>
-
-    <entities>
         <entity name="ProductDescriptionList" label="产品描述列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.ProductDescription">
@@ -64,6 +60,5 @@
 
             </does>
         </entity>
-
     </entities>
 </module>
