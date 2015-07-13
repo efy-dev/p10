@@ -28,8 +28,8 @@ public interface ModuleManager {
 
     String convertStatusTypeLabel(String key, String propertyValue);
 
-    public StatusType fetchStatusType(String key);
+    StatusType fetchStatusType(String key);
 
-    public List<StatusTypeItem> listStatusTypeItem(String key);
+    List<StatusTypeItem> listStatusTypeItem(String key);
 
 }

@@ -87,4 +87,13 @@ public class TestController {
         return "/view/test/jmenuTest";
     }
 
+
+    @RequestMapping({"/test/saveOrUpdateBigUser"})
+    @ResponseBody
+    public void saveOrUpdateBigUser(HttpServletRequest request) throws Exception{
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePCBigUser",request);
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+    }
+
+
 }
