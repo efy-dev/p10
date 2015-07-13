@@ -183,7 +183,7 @@ public class SigninController extends BaseController {
         user.setPassword(password);
         userManager.saveOrUpdateBigUser(user);
         model.addAttribute("user",user);
-        return new ModelAndView("/loginForm",model);
+        return new ModelAndView("/loginform",model);
     }
 
 }
