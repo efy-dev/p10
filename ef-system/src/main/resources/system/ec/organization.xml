@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="organization" label="organization" version="" package="com.efeiyi.ec.organization" path="">
+
+    <entities>
+        <entity name="AddressCity" label="市"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.AddressCity">
+            <does>
+                <do name="plistAddressCity" access="" label="市列表"
+                    result="/addressCity/addressCityPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeAddressCity" label="删除addressCity" access="" result="json"/>
+                <do name="formAddressCity" label="保存addressCity" access="" result="/addressCity/addressCityForm"></do>
+                <do name="saveOrUpdateAddressCity" label="保存addressCity" access="" result="/addressCity/addressCitySaveSuccess"></do>
+                <do name="listAddressCity" label="addressCity列表" access="" result="/addressCity/addressCityList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="AddressDistrict" label="区"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.AddressDistrict">
+            <does>
+                <do name="plistAddressDistrict" access="" label="菜单列表"
+                    result="/addressDistrict/addressDistrictPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeAddressDistrict" label="删除菜单" access="" result="json"/>
+                <do name="formAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictForm"></do>
+                <do name="saveOrUpdateAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictSaveSuccess"></do>
+                <do name="listAddressDistrict" label="菜单列表" access="" result="/addressDistrict/addressDistrictList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="菜单主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="AddressProvince" label="省"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.AddressProvince">
+            <does>
+                <do name="plistAddressProvince" access="" label="省列表"
+                    result="/addressProvince/addressProvincePList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeAddressProvince" label="删除省" access="" result="json"/>
+                <do name="formAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceForm"></do>
+                <do name="saveOrUpdateAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceSaveSuccess"></do>
+                <do name="listAddressProvince" label="省列表" access="" result="/simpleMenuItem/simpleMenuItemList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="BigUser" label="用户"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.BigUser">
+            <does>
+                <do name="plistBigUser" access="" label="用户列表"
+                    result="/bigUser/bigUserPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeBigUser" label="删除省" access="" result="json"/>
+                <do name="formBigUser" label="保存省" access="" result="/bigUser/bigUserForm"></do>
+                <do name="saveOrUpdateBigUser" label="保存省" access="" result="/bigUser/bigUserSaveSuccess"></do>
+                <do name="listBigUser" label="省列表" access="" result="/bigUser/bigUserList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="consumer" label="消费者"
+                         basic="simple" others=""
+                         model="com.efeiyi.ec.organization.model.Consumer">
+        <does>
+            <do name="plistConsumer" access="" label="消费者列表"
+                result="/consumer/consumerPList">
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="id" defaultValue="1" operation="eq"></condition>
+                </query>
+            </do>
+
+            <do name="removeConsumer" label="删除消费者" access="" result="json"/>
+            <do name="formConsumer" label="保存消费者" access="" result="/consumer/consumerForm"></do>
+            <do name="saveOrUpdateConsumer" label="保存消费者" access="" result="/consumer/consumerSaveSuccess"></do>
+            <do name="listConsumer" label="消费者列表" access="" result="/consumer/consumerList">
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                </query>
+            </do>
+
+        </does>
+    </entity>
+        <entity name="ConsumerAddress" label="消费者地址"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.ConsumerAddress">
+            <does>
+                <do name="plistConsumerAddress" access="" label="消费者地址列表"
+                    result="/consumerAddress/consumerAddressPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeConsumerAddress" label="删除消费者地址" access="" result="json"/>
+                <do name="formConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressForm"></do>
+                <do name="saveOrUpdateConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressSaveSuccess"></do>
+                <do name="listConsumerAddress" label="消费者地址列表" access="" result="/consumerAddress/consumerAddressList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Manager" label="管理员"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.Manager">
+            <does>
+                <do name="plistManager" access="" label="管理员列表"
+                    result="/manager/managerPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeManager" label="删除管理员" access="" result="json"/>
+                <do name="formManager" label="保存管理员" access="" result="/manager/managerForm"></do>
+                <do name="saveOrUpdateManager" label="保存管理员" access="" result="/manager/managerSaveSuccess"></do>
+                <do name="listManager" label="管理员列表" access="" result="/manager/managerList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="MyUser" label="用户"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.MyUser">
+            <does>
+                <do name="plistMyUser" access="" label="用户列表"
+                    result="/myUser/myUserPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeMyUser" label="删除用户" access="" result="json"/>
+                <do name="formMyUser" label="保存用户" access="" result="/myUser/myUserForm"></do>
+                <do name="saveOrUpdateMyUser" label="保存用户" access="" result="/myUser/myUserSaveSuccess"></do>
+                <do name="listMyUser" label="用户列表" access="" result="/myUser/myUserList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Permission" label="权限"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.Permission">
+            <does>
+                <do name="plistPermission" access="" label="权限列表"
+                    result="/permission/permissionPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removePermission" label="删除用户" access="" result="json"/>
+                <do name="formPermission" label="保存用户" access="" result="/permission/permissionForm"></do>
+                <do name="saveOrUpdatePermission" label="保存用户" access="" result="/permission/permissionSaveSuccess"></do>
+                <do name="listPermission" label="用户列表" access="" result="/permission/permissionList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Professional" label="Professional"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.Professional">
+            <does>
+                <do name="plistProfessional" access="" label="Professional列表"
+                    result="/professional/professionalPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeProfessional" label="删除Professional" access="" result="json"/>
+                <do name="formProfessional" label="保存Professional" access="" result="/professional/professionalForm"></do>
+                <do name="saveOrUpdateProfessional" label="保存Professional" access="" result="/professional/professionalSaveSuccess"></do>
+                <do name="listProfessional" label="Professional列表" access="" result="/professional/professionalList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Role" label="角色"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.Role">
+            <does>
+                <do name="plistRole" access="" label="角色列表"
+                    result="/role/rolePList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeRole" label="删除角色" access="" result="json"/>
+                <do name="formRole" label="保存角色" access="" result="/role/roleForm"></do>
+                <do name="saveOrUpdateRole" label="保存角色" access="" result="/role/roleSaveSuccess"></do>
+                <do name="listRole" label="角色列表" access="" result="/role/roleList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="User" label="用户"
+                basic="simple" others=""
+                model="com.efeiyi.ec.organization.model.User">
+            <does>
+                <do name="plistUser" access="" label="用户列表"
+                    result="/user/userPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeUser" label="删除用户" access="" result="json"/>
+                <do name="formUser" label="保存用户" access="" result="/user/userForm"></do>
+                <do name="saveOrUpdateUser" label="保存用户" access="" result="/user/userSaveSuccess"></do>
+                <do name="listUser" label="用户列表" access="" result="/user/userList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+
+    </entities>
+</module>
