@@ -145,10 +145,12 @@ public class SigninController extends BaseController {
      */
     @RequestMapping("/forward.do")
     public String forward(String result){
-        if("注册".equals(result)){
+        if("2".equals(result)){
             return "/register";
-        }else{
+        }else if("1".equals(result)){
             return "/login";
+        }else {
+            return "/error";
         }
     }
 

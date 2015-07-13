@@ -9,7 +9,7 @@
     }
 </script>
 <h2>Hello World!</h2>
-<input type="button" value="登录" onclick="loginOrRegister(this);"/>
-<input type="button" value="注册" onclick="loginOrRegister(this);"/>
+<input type="button" value="登录" onclick="loginOrRegister(1);"/>
+<input type="button" value="注册" onclick="loginOrRegister(2);"/>
 </body>
 </html>
