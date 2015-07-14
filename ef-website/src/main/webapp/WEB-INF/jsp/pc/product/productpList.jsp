@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -13,11 +14,13 @@
 <html>
 <head>
   <title></title>
+  <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
   <script>
 
     function find(o){
-      var pid = $(o).val();
-      window.location=("/product/getProduct.do?id="+pid);
+      var pid = $(o).next().val();
+      window.location.href="/product/getProduct.do?id="+pid;
+
     }
   </script>
 </head>
@@ -35,7 +38,8 @@
       <tr>
         <td><input type="checkbox"  value="1"/></td>
         <td><input type="text" name="productName" value="${product.name}"/></td>
-        <td><input type="button" value="浏览" onclick="find(this);"><input type="hidden" id="productId" value="${product.id}"></td>
+        <td><input type="button" value="浏览" onclick="find(this);">
+          <input type="hidden" id="productId" value="${product.id}"></td>
       </tr>
     </c:forEach>
   </table>
