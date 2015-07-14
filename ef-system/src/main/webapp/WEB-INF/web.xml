@@ -85,9 +85,18 @@
     </jsp-config>
 
     <!--sitemesh2.4.2 配置-->
+    <!--<filter>-->
+        <!--<filter-name>sitemesh</filter-name>-->
+        <!--<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>sitemesh</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <filter>
         <filter-name>sitemesh</filter-name>
-        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
