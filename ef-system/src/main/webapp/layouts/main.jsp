@@ -37,11 +37,13 @@
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 
-<%--<div class="am-cf admin-main">--%>
+<div class="am-cf admin-main">
 <%----%>
-<%--<div class="admin-content">--%>
+    <jsp:include flush="true"
+                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
+<div class="admin-content">
 <sitemesh:write property='body'/>
-<%--</div>--%>
+</div>
 
 </div>
 </body>

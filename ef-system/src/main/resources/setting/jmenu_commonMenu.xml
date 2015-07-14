@@ -4,10 +4,10 @@
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="订单管理">
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
                 <match url="plistPurchaseOrder_default"/>
-                <match url="plistPurchaseOrder_default"/>
-                <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录"/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
+                <match url="plistPurchaseOrderPayment_default"/>
+            </jnode>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
             <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表" />
