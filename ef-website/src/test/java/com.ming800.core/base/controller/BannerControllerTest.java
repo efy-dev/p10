@@ -16,9 +16,14 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -30,9 +35,12 @@ import java.util.List;
  *
  * @BeforeClass –> @Before –> @Test –> @After –> @AfterClass
  */
+@SuppressWarnings("unchecked")
+@Transactional
+@TransactionConfiguration(transactionManager ="transactionManager", defaultRollback = true)
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"file:src/main/webapp//WEB-INF/applicationContext-*.xml"
-,"file:src/main/webapp//WEB-INF/spring-servlet.xml"})
+@ContextConfiguration(locations={"file:src/main/webapp//WEB-INF/applicationContext-*.xml",
+        "file:src/main/webapp//WEB-INF/spring-servlet.xml"})
 @Controller
 public class BannerControllerTest {
     private static Logger logger = Logger.getLogger(BannerController.class);
@@ -40,8 +48,12 @@ public class BannerControllerTest {
 
 
    //HttpServletRequest request;
-   MockHttpServletRequest request =null;
-
+     MockHttpServletRequest request;
+     MockHttpServletResponse response;
+     ModelAndView mv ;
+     @Resource
+     BannerController bannerController;
+     ModelMap  map ;
     @Autowired
     private BaseManager baseManager;
 
@@ -55,7 +67,11 @@ public class BannerControllerTest {
 	      /* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); */
          //service = (CatalogGqRepository) ctx.getBean("cataGqRepository");
          //logger.info("加载spring配置结束.............");
+        map = new ModelMap();
         request = new MockHttpServletRequest();
+        response = new MockHttpServletResponse();
+        request.setCharacterEncoding("UTF-8");
+        //bannerController = new BannerController();
     }
     @Test
     public void testdemo1() {
@@ -82,7 +98,12 @@ public class BannerControllerTest {
         }
     }
 
+    @Test
+    public void testdemo2()throws  Exception{
 
+        mv =bannerController.getBannerByModlueId(map, request);
+
+    }
 
     @After
     public  void setUpAfter() throws Exception {
