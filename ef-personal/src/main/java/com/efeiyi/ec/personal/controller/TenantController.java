@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -191,8 +192,22 @@ public class TenantController extends BaseController {
         model.addAttribute("productWorkShop", productWorkShop);
         return new ModelAndView("/tenant/tenantWorkShop/tenantWorkShopView", model);
     }
-/**
- *
- */
+
+    /**
+     * 传承人资讯
+     * @param request
+     * @param model
+     * @return
+     */
+     @RequestMapping("/tenantInfoList.do")
+     public ModelAndView listTenantInfo(HttpServletRequest request,ModelMap model){
+         String tenantId=request.getParameter("tenantId");
+         String queryHql= "from TenantNews t where t.tenant.id= :tenantId";
+         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+         queryParamMap.put("tenantId", tenantId);
+         List list = baseManager.listObject(queryHql, queryParamMap);
+         model.addAttribute("tenantInfo",list);
+         return new ModelAndView("/tenant/tenantInFo/tenantInFoView",model);
+}
 
 }
