@@ -46,7 +46,7 @@
 </form>
 
 
-<ming800:pcPageList bean="${pageEntity}" url="/product/product/plist">
+<ming800:pcPageList bean="${pageEntity}" url="/product/plist.do">
   <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
