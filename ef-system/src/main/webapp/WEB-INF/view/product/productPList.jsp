@@ -19,15 +19,6 @@
 </head>
 <body>
 
-
-<jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"></jsp:include>
-
-<div class="am-cf admin-main">
-
-    <jsp:include flush="true" page="/manage/getMenu.do?jmenuName=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
-
-    <div class="admin-content">
-
         <table>
             <tr>
                 <td>产品id</td>
@@ -57,9 +48,6 @@
             </ming800:pcPageList>
         </div>
 
-    </div>
-
-</div>
 
 
 

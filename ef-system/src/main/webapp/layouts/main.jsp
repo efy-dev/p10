@@ -36,14 +36,16 @@
 </head>
 <body>
 
-<%--<div class="am-cf admin-main">--%>
-    <%----%>
-    <%--<div class="admin-content">--%>
-        <decorator:body/>
-    <%--</div>--%>
+<jsp:include flush="true" page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 
-<%--</div>--%>
+<div class="a>
 
+    <jsp:include flush="true" page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
+    <div class="admin-content">
+<decorator:body/>
+</div>
+
+</div>
 </body>
 
-</html>
+</html>m-cf admin-main"
