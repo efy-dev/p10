@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
-<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.

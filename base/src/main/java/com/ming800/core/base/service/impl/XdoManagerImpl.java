@@ -118,7 +118,7 @@ public class XdoManagerImpl implements XdoManager {
     /*分页列表*/
     @Override
     public PageInfo listPage(Do tempDo, DoQuery tempDoQuery, String tempConditions, PageEntity pageEntity) throws Exception {
-        XQuery xQuery = XDoUtil.generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions);
+        XQuery xQuery = new XQuery(tempDo,tempDoQuery,pageEntity,tempConditions);
 
         if (tempDoQuery.getQueryExecute() != null && !tempDoQuery.getQueryExecute().equals("")) {
             xQuery = XDoUtil.executeXQueryHandler(xQuery, tempDoQuery);
@@ -130,7 +130,7 @@ public class XdoManagerImpl implements XdoManager {
     /*普通列表, 参数有tempDo*/
     @Override
     public Object list(Do tempDo, DoQuery tempDoQuery, String tempConditions) throws Exception {
-        XQuery xQuery = XDoUtil.generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions);
+        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
 
         if (tempDoQuery.getQueryExecute() != null && !tempDoQuery.getQueryExecute().equals("")) {
             xQuery = XDoUtil.executeXQueryHandler(xQuery, tempDoQuery);
@@ -141,9 +141,9 @@ public class XdoManagerImpl implements XdoManager {
 
     /*统计收费总额, */
     @Override
-    public String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField) {
+    public String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField) throws Exception{
 
-        XQuery xQuery = XDoUtil.generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions);
+        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
 
         String queryStr = xQuery.getHql();
         queryStr = queryStr.substring(queryStr.indexOf("from"), queryStr.length());
@@ -163,7 +163,7 @@ public class XdoManagerImpl implements XdoManager {
 
         Do tempDo = doManager.getDoByQueryModel(queryModel.split("_")[0]);
         DoQuery tempDoQuery = tempDo.getDoQueryByName(queryModel.split("_")[1]);
-        XQuery xQuery = XDoUtil.generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions);
+        XQuery xQuery = new XQuery(tempDo,tempDoQuery,null,tempConditions);
 
         return xdoDao.getObjectList(xQuery.getHql(), xQuery.getQueryParamMap());  //To change body of implemented methods use File | Settings | File Templates.
     }
