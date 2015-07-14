@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table>
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr>
         <td>purchaseOrder——id</td>
         <td>serial</td>

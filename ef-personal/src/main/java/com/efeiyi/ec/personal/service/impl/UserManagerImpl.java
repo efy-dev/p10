@@ -63,12 +63,10 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
         String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.theStatus != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username.split(",")[0]);
-        System.out.println("username is " + username);
 
         MyUser myUser = userDao.getUniqueMyUserByConditions(username.split(",")[1], queryStr, queryParamMap);
         System.out.println("查询完数据 ");
         if (myUser == null) {
-            System.out.println("myuser is null");
             throw new UsernameNotFoundException("user '" + username + "' not found...");
         } else {
             if (username.split(",")[2].equals("2009")) {
