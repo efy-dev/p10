@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>--%>
 <html class="no-js">
@@ -27,7 +26,7 @@
     <link rel="stylesheet" href="../scripts/assets/css/admin.css">
     <script src="<c:url value='../scripts/assets/js/jquery.min.js'/>"></script>
     <script src="<c:url value='../scripts/assets/js/amazeui.min.js'/>"></script>
-    <decorator:head/>
+    <sitemesh:write property='head'/>
     <style>
         .efy-active {
             background-color: #9a9a9a;
@@ -35,17 +34,14 @@
     </style>
 </head>
 <body>
-
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 
-<div class="am-cf admin-main">
-
-    <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
-    <div class="admin-content">
-        <decorator:body/>
-    </div>
+<%--<div class="am-cf admin-main">--%>
+<%----%>
+<%--<div class="admin-content">--%>
+<sitemesh:write property='body'/>
+<%--</div>--%>
 
 </div>
 </body>
