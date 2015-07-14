@@ -9,6 +9,6 @@ package com.ming800.core.develop.service;
  */
 public interface UpdateHandler {
 
-    public Boolean executeUpdate();
+    Boolean executeUpdate();
 
 }

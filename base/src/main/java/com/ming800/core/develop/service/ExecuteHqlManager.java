@@ -9,5 +9,5 @@ package com.ming800.core.develop.service;
  */
 public interface ExecuteHqlManager {
 
-    public String execute(String queryHql, String[] names) throws Exception;
+    String execute(String queryHql, String[] names) throws Exception;
 }

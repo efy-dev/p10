@@ -24,7 +24,7 @@ public interface AttachmentManager {
      * @return
      * @throws Exception
      */
-    public List getAttachmentList(String[] urlNameArray, String[] urlArray, Object object, String attachment) throws Exception;
+    List getAttachmentList(String[] urlNameArray, String[] urlArray, Object object, String attachment) throws Exception;
 
     /**
      * 上传的附件
@@ -36,7 +36,7 @@ public interface AttachmentManager {
      * @return
      * @throws Exception
      */
-    public List getAttachmentList(List<MultipartFile> fileList, String storeType, String bucketName, String folderName, Object object, String attachment) throws Exception;
+    List getAttachmentList(List<MultipartFile> fileList, String storeType, String bucketName, String folderName, Object object, String attachment) throws Exception;
 
     //public List getAttachmentList(List<MultipartFile> fileList, String storeType, String bucketName, String folderName, Object object, String attachment, Branch branch) throws Exception;
 
@@ -47,5 +47,5 @@ public interface AttachmentManager {
      * @param attachementIds 要删除的附件 id 数组
      * @throws Exception
      */
-    public void deleteAttachments(String name, String[] attachementIds) throws Exception;
+    void deleteAttachments(String name, String[] attachementIds) throws Exception;
 }

@@ -8,6 +8,7 @@ import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +37,15 @@ public class ProductController extends BaseController {
         }
         modelMap.put("listProduct", list);
         return new ModelAndView("/pc/product/productList", modelMap);
+    }
+
+
+    @RequestMapping({"/test/nav/{item}"})
+    public String testNav(HttpServletRequest request,@PathVariable String item){
+        String match = request.getServletPath();
+//        System.out.println(match);
+        request.setAttribute("match",match);
+        return "/test/navTest";
     }
 
 

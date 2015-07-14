@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmenuTree name="commonMenu">
-    <jmenu id="organmgmt"><!--系统管理-->
-        <jnode url="" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
-            <jnode url="/basic/xm.do?qm=plistBigUser_default" extend="" access="admin" text_zh_CN="所有用户管理"/>
+<jmenu id="commonMenu">
+    <jnode id="organmgmt" url="/test/jmenutest?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
+        <jnode url="" id="organization" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
+            <jnode url="/basic/xm.do?qm=plistProduct_default" match="plistProduct_default" extend="" access="admin" text_zh_CN="产品列表">
+                <match url="plistProduct_default"/>
+                <match url="plistProduct_default"/>
+                <match url="plistProduct_default"/>
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistManager_default"  access="admin,manager" text_zh_CN="内部用户管理" text_en_US="Outbox"/>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理"/>
         </jnode>
-        <jnode url=""  access="admin" state="closed" text_zh_CN="系统配置">
-            <jnode url="/xdos/xme.do" access="admin" text_zh_CN="模块(module)"/>
+        <jnode url="" id="systemsetting"  access="admin" state="closed" text_zh_CN="系统配置">
+            <jnode url="/xdos/xme.do"   text_zh_CN="模块(module)"/>
         </jnode>
-    </jmenu>
-</jmenuTree>
+    </jnode>
+    <jnode id="organmgmt2" url="/test/jmenutest?menuId=organmgmt2" text_zh_CN="系统管理2"><!--系统管理-->
+        <jnode url="" id="organization2" access="admin,manager" state="closed"  text_zh_CN="组织机构管理1">
+            <jnode url="/basic/xm.do?qm=plistProduct_default"  match="plistProduct_default" text_zh_CN="所有用户管理1"/>
+            <jnode url="/basic/xm.do?qm=plistManager_default"   text_zh_CN="内部用户管理1"/>
+            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理1"/>
+        </jnode>
+        <jnode url="" id="systemsetting2"  state="closed" text_zh_CN="系统配置1">
+            <jnode url="/xdos/xme.do" text_zh_CN="模块(module1)"/>
+        </jnode>
+    </jnode>
+</jmenu>
 
 
 

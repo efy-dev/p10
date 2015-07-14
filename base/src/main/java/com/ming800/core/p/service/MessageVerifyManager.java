@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public interface MessageVerifyManager {
 
-    public boolean sendVerificationCode(String cellPhoneNumber, String params) throws IOException;
+    boolean sendVerificationCode(String cellPhoneNumber, String params) throws IOException;
 
-    public boolean sendSaleCode(String cellPhoneNumber, String params) throws IOException;
+    boolean sendSaleCode(String cellPhoneNumber, String params) throws IOException;
 
 }
