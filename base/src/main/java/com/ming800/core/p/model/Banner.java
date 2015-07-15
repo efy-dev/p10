@@ -1,4 +1,4 @@
-package com.ming800.core.base.model;
+package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,6 +1,6 @@
-package com.ming800.core.base.controller;
+package com.ming800.core.p.controller;
 
-import com.ming800.core.base.model.Banner;
+import com.ming800.core.p.model.Banner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.apache.log4j.Logger;
