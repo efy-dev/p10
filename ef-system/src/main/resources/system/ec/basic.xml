@@ -5,14 +5,19 @@
 <module name="basic" label="basic" version="" package="com.efeiyi.ec.basic" path="">
 
     <entities>
-        <entity name="banner" label="banner"
+        <entity name="banner" label="轮播图"
                 basic="simple" others=""
                 model="com.ming800.core.p.model.Banner">
             <does>
                 <do name="plistBanner" access="" label="banner列表"
                     result="/banner/bannerPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="id:desc"><!--电商轮播图查询-->
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="001" operation="eq"/>
+                    </query>
+                    <query name="tenant" label="默认" type="auto" orderBy="id:desc"><!--传承人轮播图查询-->
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="002" operation="eq"/>
                     </query>
                 </do>
 
@@ -66,6 +71,33 @@
                 <do name="listSimpleMenuItem" label="菜单项列表" access="" result="/simpleMenuItem/simpleMenuItemList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="菜单项主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="document" label="文档"
+                basic="simple" others=""
+                model="com.ming800.core.p.model.Document">
+            <does>
+                <do name="plistDocument" access="" label="文档列表"
+                    result="/document/documentPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc"><!--电商文档查询-->
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="001" operation="eq"/>
+                    </query>
+                    <query name="tenant" label="默认" type="auto" orderBy="id:desc"><!--传承人文档查询-->
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="002" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeDocument" label="删除文档" access="" result="json"/>
+                <do name="formDocument" label="保存文档" access="" result="/document/documentForm"/>
+                <do name="saveOrUpdateDocument" label="保存文档" access="" result="/document/documentSaveSuccess"/>
+                <do name="listDocument" label="文档列表" access="" result="/document/documentList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
