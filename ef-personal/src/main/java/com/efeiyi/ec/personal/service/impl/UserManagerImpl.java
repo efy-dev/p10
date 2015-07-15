@@ -6,7 +6,7 @@ import com.efeiyi.ec.personal.OrganizationConst;
 import com.efeiyi.ec.personal.dao.UserDao;
 import com.efeiyi.ec.personal.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -63,12 +63,10 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
         String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.theStatus != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username.split(",")[0]);
-        System.out.println("username is " + username);
 
         MyUser myUser = userDao.getUniqueMyUserByConditions(username.split(",")[1], queryStr, queryParamMap);
         System.out.println("查询完数据 ");
         if (myUser == null) {
-            System.out.println("myuser is null");
             throw new UsernameNotFoundException("user '" + username + "' not found...");
         } else {
             if (username.split(",")[2].equals("2009")) {

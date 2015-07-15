@@ -23,7 +23,7 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/listProject.do")
     public String queryProjectList(Model model,HttpServletRequest request ) throws Exception{
 
-        XQuery xQuery = new XQuery("plistProject_default",request);
+        XQuery xQuery = new XQuery("listProject_default",request);
         List list = this.baseManager.listObject(xQuery);
 //        xQuery.addRequestParamToModel(model,request);
 //        List list = baseManager.listPageInfo(xQuery).getList();

@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-<table>
+<table width="95%" align="center" cellpadding="10" cellspacing="0" border="1">
 <c:forEach items="${list}" var="project">
   <tr>
     <td>${project.id}</td>

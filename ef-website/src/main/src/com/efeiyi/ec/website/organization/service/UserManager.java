@@ -2,7 +2,7 @@ package com.efeiyi.ec.website.organization.service;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import java.util.List;
 

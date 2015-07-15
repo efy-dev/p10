@@ -1,4 +1,4 @@
-package com.ming800.core.util;
+package com.ming800.core.does.model;
 
 import com.ming800.core.taglib.PageEntity;
 

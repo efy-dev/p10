@@ -20,7 +20,7 @@
     <tr>
       <td>传承人资讯</td>
     </tr>
-    <c:forEach items="${tenantInFo}" var="tenantinfo" >
+    <c:forEach items="${tenantInfo}" var="tenantinfo" >
       <tr>
         <td><input type="text" name="title" value="${tenantinfo.title}"/></td>
       </tr>

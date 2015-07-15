@@ -18,16 +18,16 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
+<table>
     <tr>
-        <td>purchaseOrder——id</td>
-        <td>serial</td>
+        <td>myUser——id</td>
+        <td>myUser——username</td>
     </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
+    <c:forEach items="${requestScope.pageInfo.list}" var="myUser">
         <tr>
-            <td>${purchaseOrder.id}</td>
-            <td>${purchaseOrder.serial}</td>
+            <td>${myUser.id}</td>
+            <td>${myUser.username}</td>
         </tr>
     </c:forEach>
 </table>

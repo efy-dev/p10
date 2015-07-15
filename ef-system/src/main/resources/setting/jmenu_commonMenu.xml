@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="commonMenu">
-    <jnode id="organmgmt" url="/test/jmenutest?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
-        <jnode url="" id="organization" access="admin,manager" state="closed"  text_zh_CN="组织机构管理">
-            <jnode url="/basic/xm.do?qm=plistProduct_default" match="plistProduct_default" extend="" access="admin" text_zh_CN="产品列表">
-                <match url="plistProduct_default"/>
-                <match url="plistProduct_default"/>
-                <match url="plistProduct_default"/>
+    <jnode id="serviceManager" url="/main.do?jnodeId=serviceManager" text_zh_CN="业务管理"><!--系统管理-->
+        <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="订单管理">
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
+                <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistManager_default"  access="admin,manager" text_zh_CN="内部用户管理" text_en_US="Outbox"/>
-            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理"/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
+                <match url="plistPurchaseOrderPayment_default"/>
+            </jnode>
         </jnode>
-        <jnode url="" id="systemsetting"  access="admin" state="closed" text_zh_CN="系统配置">
-            <jnode url="/xdos/xme.do"   text_zh_CN="模块(module)"/>
+        <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
+            <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表" />
         </jnode>
     </jnode>
-    <jnode id="organmgmt2" url="/test/jmenutest?menuId=organmgmt2" text_zh_CN="系统管理2"><!--系统管理-->
-        <jnode url="" id="organization2" access="admin,manager" state="closed"  text_zh_CN="组织机构管理1">
-            <jnode url="/basic/xm.do?qm=plistProduct_default"  match="plistProduct_default" text_zh_CN="所有用户管理1"/>
-            <jnode url="/basic/xm.do?qm=plistManager_default"   text_zh_CN="内部用户管理1"/>
-            <jnode url="/basic/xm.do?qm=plistRole_default" access="admin" text_zh_CN="角色管理1"/>
-        </jnode>
-        <jnode url="" id="systemsetting2"  state="closed" text_zh_CN="系统配置1">
-            <jnode url="/xdos/xme.do" text_zh_CN="模块(module1)"/>
-        </jnode>
+    <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理"><!--系统管理-->
+        <jnode url="" id="tu" access="admin,manager" state="closed"  text_zh_CN="轮播图管理"/>
+        <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="news" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
+        <jnode url="" id="" access="admin,manager" state="closed"  text_zh_CN="文档管理"/>
+    </jnode>
+    <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
+        <jnode url="/basic/xm.do?qm=plistBigUser_default" id="userManager" access="admin,manager" state="closed"  text_zh_CN="用户管理"/>
+        <jnode url="" id="logManager" access="admin,manager" state="closed"  text_zh_CN="日志记录"/>
     </jnode>
 </jmenu>
 

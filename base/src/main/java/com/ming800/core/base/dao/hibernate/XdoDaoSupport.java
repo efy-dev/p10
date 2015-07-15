@@ -2,7 +2,7 @@ package com.ming800.core.base.dao.hibernate;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

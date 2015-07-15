@@ -1,9 +1,8 @@
 package com.ming800.core.base.service;
 
 import com.ming800.core.does.model.*;
-import com.ming800.core.base.model.MethodCache;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface XdoManager {
 
 
-    String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField);
+    String generateTotalMoney(Do tempDo, DoQuery tempDoQuery, String tempConditions, String countField) throws Exception;
 
     Object list(Do tempDo, DoQuery tempDoQuery, String tempConditions) throws Exception;
 

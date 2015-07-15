@@ -81,7 +81,7 @@ public class MyUser implements Serializable, UserDetails {
     }
 
 
-    @Column(name = "utype")
+    @Column(name = "type")
     public Integer getUtype() {
         return utype;
     }
