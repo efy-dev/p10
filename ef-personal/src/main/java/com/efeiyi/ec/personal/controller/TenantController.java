@@ -60,7 +60,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/getTenantHonor.do")
     public ModelAndView getTenantHonor(String honorId , ModelMap model){
-       TenantHonor honor = (TenantHonor) baseManager.getObject(TenantHonor.class.getName(),honorId);
+        TenantHonor honor = (TenantHonor) baseManager.getObject(TenantHonor.class.getName(),honorId);
         model.addAttribute("entity",honor);
         return new ModelAndView("/tenant/tenantHonor/tenantHonorView",model);
     }
@@ -199,15 +199,23 @@ public class TenantController extends BaseController {
      * @param model
      * @return
      */
-     @RequestMapping("/tenantInfoList.do")
-     public ModelAndView listTenantInfo(HttpServletRequest request,ModelMap model){
-         String tenantId=request.getParameter("tenantId");
-         String queryHql= "from TenantNews t where t.tenant.id= :tenantId";
-         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-         queryParamMap.put("tenantId", tenantId);
-         List list = baseManager.listObject(queryHql, queryParamMap);
-         model.addAttribute("tenantInfo",list);
-         return new ModelAndView("/tenant/tenantInFo/tenantInFoView",model);
-}
+    @RequestMapping("/tenantInfoList.do")
+    public ModelAndView listTenantInfo(HttpServletRequest request,ModelMap model){
+        String tenantId=request.getParameter("tenantId");
+        String type=request.getParameter("type");
+        StringBuffer queryHql = new StringBuffer();
+        queryHql.append("from TenantNews t where t.tenant.id= :tenantId");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        if("0".equals(type)) {
+            queryHql.append("");
+        }else if("1".equals(type)|| "2".equals(type) ||"3".equals(type)){
+            queryParamMap.put("type",type);
+            queryHql.append(" and t.type =:type ");
+        }
+        queryParamMap.put("tenantId", tenantId);
+        List list = baseManager.listObject(queryHql.toString(), queryParamMap);
+        model.addAttribute("tenantInfo",list);
+        return new ModelAndView("/tenant/tenantInFo/tenantInFoView",model);
+    }
 
 }
