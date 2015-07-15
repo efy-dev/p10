@@ -81,8 +81,8 @@ public class MainController extends BaseController {
         return resultJnode;
     }
 
-/*
-    @RequestMapping({"/test/jmenutest"})
+
+   /* @RequestMapping({"/test/jmenutest"})
     public String testJmenu(HttpServletRequest request) {
         return "/test/jmenuTest";
     }*/

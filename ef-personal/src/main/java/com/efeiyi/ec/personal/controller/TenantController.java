@@ -112,10 +112,10 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/tenantIntroductionList.do")
     public ModelAndView listTenantIntroduction(String tenantId , ModelMap model){
-        /*String queryHql = "from TenantIntroduction i left join fetch i.tenant t where t.id = ?";
+        String queryHql = "from TenantIntroduction i left join fetch i.tenant t where t.id = ?";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
-        baseManager.listObject(queryHql,queryParamMap);*/
+        baseManager.listObject(queryHql,queryParamMap);
         return new ModelAndView("",model);
     }
 
