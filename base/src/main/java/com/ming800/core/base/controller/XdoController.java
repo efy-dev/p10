@@ -7,11 +7,8 @@ import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.does.service.ModuleManager;
-import com.ming800.core.p.model.Jmenu;
-import com.ming800.core.p.model.Jnode;
-import com.ming800.core.p.service.impl.JmenuManagerImpl;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

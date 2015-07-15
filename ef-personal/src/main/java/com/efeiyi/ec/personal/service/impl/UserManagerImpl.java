@@ -6,7 +6,7 @@ import com.efeiyi.ec.personal.OrganizationConst;
 import com.efeiyi.ec.personal.dao.UserDao;
 import com.efeiyi.ec.personal.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
