@@ -6,12 +6,14 @@ import javax.persistence.*;
 
 /**
  * Created by Administrator on 2015/6/16.
+ *
  */
+
 @Entity
 @Table(name="basic_banner")
 public class Banner {
     private String id;
-    private String modules;
+    private String group;
     private String title;
     private Integer bannerOrder;
     private String imageUrl;
@@ -37,7 +39,6 @@ public class Banner {
     public void setTitle(String title) {
         this.title = title;
     }
-
     @Column(name="banner_order")
     public Integer getBannerOrder() {
         return bannerOrder;
@@ -64,13 +65,13 @@ public class Banner {
     public void setDirectUrl(String directUrl) {
         this.directUrl = directUrl;
     }
-    @Column(name="module_id")
-    public String getModules() {
-        return modules;
+    @Column(name="group_id")
+    public String getGroup() {
+        return group;
     }
 
-    public void setModules(String modules) {
-        this.modules = modules;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Column(name="the_status")
