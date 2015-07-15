@@ -16,11 +16,11 @@
                 <do name="plistTenant" access="" label="传承人分页列表"
                     result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="name" defaultValue="ten1" operation="eq"></condition>
+                        <condition name="name" defaultValue="ten1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"></do>
+                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"/>
                 <do name="saveOrUpdateTenant" label="保存大师" access="" result="/tenant/tenantSaveSuccess">
                 </do>
                 <do name="removeTenant" label="删除大师" access="" result="json"/>
@@ -34,7 +34,7 @@
 
             </does>
         </entity>
-        <entity name="TenantWorkList" label="传承人工作坊列表"
+        <entity name="TenantWorkShopList" label="传承人工作坊列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWorkShop">
             <fields>
@@ -45,11 +45,11 @@
                 <do name="plistTenantWorkShop" access="" label="传承人工作坊分页列表"
                     result="/tenantWorkShop/tenantWorkShopPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantWorkShop" label="保存工作坊页" access="" result="/tenantWorkShop/tenantWorkShopForm"></do>
+                <do name="formTenantWorkShop" label="保存工作坊页" access="" result="/tenantWorkShop/tenantWorkShopForm"/>
                 <do name="saveOrUpdateTenantWorkShop" label="保存工作坊著作" access="" result="/tenantWorkShop/tenantWorkShopSaveSuccess">
                 </do>
                 <do name="removeTenantWorkShop" label="删除工作坊著作" access="" result="json"/>
@@ -72,11 +72,11 @@
                 <do name="plistTenantHonor" access="" label="传承人殊荣分页列表"
                     result="/tenantHonor/tenantHonorPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantHonor" label="保存大师殊荣页" access="" result="/tenantHonor/tenantHonorForm"></do>
+                <do name="formTenantHonor" label="保存大师殊荣页" access="" result="/tenantHonor/tenantHonorForm"/>
                 <do name="saveOrUpdateTenantHonor" label="保存大师殊荣" access="" result="/tenantHonor/tenantHonorSaveSuccess">
                 </do>
                 <do name="removeTenantHonor" label="删除大师殊荣" access="" result="json"/>
@@ -99,11 +99,11 @@
                 <do name="plistTenantIntroduction" access="" label="传承人简介分页列表"
                     result="/tenantIntroduction/tenantIntroductionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantIntroduction" label="保存大师简介页" access="" result="/tenantIntroduction/tenantIntroductionForm"></do>
+                <do name="formTenantIntroduction" label="保存大师简介页" access="" result="/tenantIntroduction/tenantIntroductionForm"/>
                 <do name="saveOrUpdateTenantIntroduction" label="保存大师简介" access="" result="/tenantIntroduction/tenantIntroductionSaveSuccess">
                 </do>
                 <do name="removeTenantIntroduction" label="删除大师简介" access="" result="json"/>
@@ -124,11 +124,11 @@
                 <do name="plistTenantNews" access="" label="传承人新闻分页列表"
                     result="/tenantNews/tenantNewsPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"></condition>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantNews" label="保存大师新闻页" access="" result="/tenantNews/tenantNewsForm"></do>
+                <do name="formTenantNews" label="保存大师新闻页" access="" result="/tenantNews/tenantNewsForm"/>
                 <do name="saveOrUpdateTenantNews" label="保存大师新闻" access="" result="/tenantNews/tenantNewsSaveSuccess">
                 </do>
                 <do name="removeTenantNews" label="删除大师新闻" access="" result="json"/>
@@ -153,11 +153,11 @@
                 <do name="plistTenantProduct" access="" label="传承人产品分页列表"
                     result="/tenantProduct/tenantProductPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantProduct" label="保存传承人产品页" access="" result="/tenantProduct/tenantProductForm"></do>
+                <do name="formTenantProduct" label="保存传承人产品页" access="" result="/tenantProduct/tenantProductForm"/>
                 <do name="saveOrUpdateTenantProduct" label="保存传承人产品" access="" result="/tenantProduct/tenantProductSaveSuccess">
                 </do>
                 <do name="removeTenantProduct" label="删除大师产品" access="" result="json"/>
@@ -180,11 +180,11 @@
                 <do name="plistTenantWork" access="" label="传承人著作分页列表"
                     result="/tenantWork/tenantWorkPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
-                <do name="formTenantWork" label="保存大师著作页" access="" result="/tenantWork/tenantWorkForm"></do>
+                <do name="formTenantWork" label="保存大师著作页" access="" result="/tenantWork/tenantWorkForm"/>
                 <do name="saveOrUpdateTenantWork" label="保存大师著作" access="" result="/tenantWork/tenantWorkSaveSuccess">
                 </do>
                 <do name="removeTenantWork" label="删除大师著作" access="" result="json"/>

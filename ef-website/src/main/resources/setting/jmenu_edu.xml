@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <jmenu id="nav">
-        <jnode id="nav" url="/test/jmenutest?menuId=organmgmt" text_zh_CN="系统管理"><!--系统管理-->
-            <jnode url="/product/test/nav/1" id="organization" access="admin,manager" state="closed"
-                   match="/product/test/nav/1" text_zh_CN="navItem1"/>
-            <jnode url="/product/test/nav/2" id="organization" access="admin,manager" state="closed"
-                   match="/product/test/nav/2" text_zh_CN="navItem2"/>
-            <jnode url="/product/test/nav/3" id="organization" access="admin,manager" state="closed"
-                   match="/product/test/nav/3" text_zh_CN="navItem3"/>
-            <jnode url="/product/test/nav/4" id="organization" access="admin,manager" state="closed"
-                   match="/product/test/nav/4" text_zh_CN="navItem4"/>
+<jmenu id="webMenu">
+    <jnode id="web" url="/getMenu.do?menuId=web" text_zh_CN="飞蚂首页"><!--系统管理-->
+        <jnode url="/purchaseOrder/listOrder.do" id="purchaseOrder" access="admin,manager" state="closed" text_zh_CN="订单">
         </jnode>
-    </jmenu>
+        <jnode url="/product/plist.do" id="product" access="admin,manager" state="closed" text_zh_CN="商品">
+        </jnode>
+        <jnode url="/project/listProject.do" id="project" access="admin,manager" state="closed" text_zh_CN="品类">
+        </jnode>
+    </jnode>
+    <jnode id="web1" url="/getMenu.do?menuId=web" text_zh_CN="飞蚂首页"><!--系统管理-->
+        <jnode url="/purchaseOrder/listOrder.do" id="purchaseOrder" access="admin,manager" state="closed" text_zh_CN="订单">
+        </jnode>
+        <jnode url="/product/plist.do" id="product" access="admin,manager" state="closed" text_zh_CN="商品">
+        </jnode>
+        <jnode url="/project/listProject.do" id="project" access="admin,manager" state="closed" text_zh_CN="品类">
+        </jnode>
+    </jnode>
+</jmenu>
+
 
 
 

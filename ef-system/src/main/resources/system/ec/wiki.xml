@@ -16,13 +16,13 @@
                 <do name="plistProjectContent" access="" label="百科内容分页列表"
                     result="/projectContent/projectContentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="content" defaultValue="1" operation="eq"></condition>
+                        <condition name="content" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeProjectContent" label="删除百科内容" access="" result="json"/>
-                <do name="formProjectContent" label="保存百科内容" access="" result="/projectContent/projectContentForm"></do>
-                <do name="saveOrUpdateProjectContent" label="保存百科内容" access="" result="/projectContent/projectContentSaveSuccess"></do>
+                <do name="formProjectContent" label="保存百科内容" access="" result="/projectContent/projectContentForm"/>
+                <do name="saveOrUpdateProjectContent" label="保存百科内容" access="" result="/projectContent/projectContentSaveSuccess"/>
                 <do name="listProjectContent" label="百科内容列表" access="" result="/projectContent/projectContentList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="百科内容主键" name="id" defaultValue="1" operation="eq"/>
@@ -30,7 +30,7 @@
                 </do>
 
             </does>
-        </entity>
+    </entity>
         <entity name="projectNewsList" label="百科新闻"
                 basic="simple" others=""
                 model="com.efeiyi.ec.wiki.model.ProjectNews">
@@ -42,13 +42,13 @@
                 <do name="plistProjectNews" access="" label="百科新闻分页列表"
                     result="/projectNews/projectNewsPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="content" defaultValue="1" operation="eq"></condition>
+                        <condition name="content" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeProjectNews" label="删除百科内容" access="" result="json"/>
-                <do name="formProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsForm"></do>
-                <do name="saveOrUpdateProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsSaveSuccess"></do>
+                <do name="formProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsForm"/>
+                <do name="saveOrUpdateProjectNews" label="保存百科内容" access="" result="/ProjectNews/projectNewsSaveSuccess"/>
                 <do name="listProjectNews" label="百科内容列表" access="" result="/ProjectNews/projectNewsList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="百科内容主键" name="id" defaultValue="1" operation="eq"/>
