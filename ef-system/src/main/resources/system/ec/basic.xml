@@ -7,7 +7,7 @@
     <entities>
         <entity name="banner" label="banner"
                 basic="simple" others=""
-                model="com.efeiyi.ec.basic.model.Banner">
+                model="com.ming800.core.p.model.Banner">
             <does>
                 <do name="plistBanner" access="" label="banner列表"
                     result="/banner/bannerPList">

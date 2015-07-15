@@ -8,7 +8,7 @@ import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,14 @@ public class BaseManagerImpl implements BaseManager {
     public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
-
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Override
+    public void saveOrUpdateObject(Object object) {
+        xdoDao.saveOrUpdateObject(object);
+    }
     /**
      * 保存
      */
