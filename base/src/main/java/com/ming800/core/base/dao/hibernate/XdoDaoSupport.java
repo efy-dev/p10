@@ -2,7 +2,7 @@ package com.ming800.core.base.dao.hibernate;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,6 +66,14 @@ public class XdoDaoSupport implements XdoDao {
         this.getSession().saveOrUpdate(modelType, object);
     }
 
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Override
+    public void saveOrUpdateObject(Object object) {
+        this.getSession().saveOrUpdate(object);
+    }
     @Override
     public void deleteObject(String modelType, String id) {
         String query = "delete from " + modelType + " s where s.id =:id";

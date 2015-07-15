@@ -7,18 +7,18 @@
     <entities>
         <entity name="banner" label="banner"
                 basic="simple" others=""
-                model="com.efeiyi.ec.basic.model.Banner">
+                model="com.ming800.core.p.model.Banner">
             <does>
                 <do name="plistBanner" access="" label="banner列表"
                     result="/banner/bannerPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeBanner" label="删除banner" access="" result="json"/>
-                <do name="formBanner" label="保存banner" access="" result="/banner/bannerForm"></do>
-                <do name="saveOrUpdateBanner" label="保存banner" access="" result="/banner/bannerSaveSuccess"></do>
+                <do name="formBanner" label="保存banner" access="" result="/banner/bannerForm"/>
+                <do name="saveOrUpdateBanner" label="保存banner" access="" result="/banner/bannerSaveSuccess"/>
                 <do name="listBanner" label="banner列表" access="" result="/banner/bannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
@@ -34,13 +34,13 @@
                 <do name="plistSimpleMenu" access="" label="菜单列表"
                     result="/simpleMenu/simpleMenuPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeSimpleMenu" label="删除菜单" access="" result="json"/>
-                <do name="formSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuForm"></do>
-                <do name="saveOrUpdateSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuSaveSuccess"></do>
+                <do name="formSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuForm"/>
+                <do name="saveOrUpdateSimpleMenu" label="保存菜单" access="" result="/simpleMenu/simpleMenuSaveSuccess"/>
                 <do name="listSimpleMenu" label="菜单列表" access="" result="/simpleMenu/simpleMenuList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="菜单主键" name="id" defaultValue="1" operation="eq"/>
@@ -56,13 +56,13 @@
                 <do name="plistSimpleMenuItem" access="" label="菜单项列表"
                     result="/simpleMenuItem/simpleMenuItemPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeSimpleMenuItem" label="删除菜单项" access="" result="json"/>
-                <do name="formSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemForm"></do>
-                <do name="saveOrUpdateSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemSaveSuccess"></do>
+                <do name="formSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemForm"/>
+                <do name="saveOrUpdateSimpleMenuItem" label="保存菜单项" access="" result="/simpleMenuItem/simpleMenuItemSaveSuccess"/>
                 <do name="listSimpleMenuItem" label="菜单项列表" access="" result="/simpleMenuItem/simpleMenuItemList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="菜单项主键" name="id" defaultValue="1" operation="eq"/>
