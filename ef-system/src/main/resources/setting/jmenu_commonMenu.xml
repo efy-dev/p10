@@ -15,7 +15,7 @@
     </jnode>
     <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理"><!--系统管理-->
         <jnode url="" id="tu" access="admin,manager" state="closed"  text_zh_CN="轮播图管理"/>
-        <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="news" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
+        <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
         <jnode url="" id="" access="admin,manager" state="closed"  text_zh_CN="文档管理"/>
     </jnode>
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
