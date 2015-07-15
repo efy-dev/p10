@@ -14,22 +14,18 @@ public class HttpUtil {
      */
     public static boolean isPhone(String userAgent) {
 
-        if (userAgent.indexOf("Mozilla/") != -1 && userAgent.indexOf("iPhone") != -1) {
+        if (userAgent.contains("Mozilla/") && userAgent.contains("iPhone")) {
             return true;
-        } else if (userAgent.indexOf("Android") != -1 && userAgent.indexOf("Linux") != -1) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return userAgent.contains("Android") && userAgent.contains("Linux");
     }
 
     public static boolean isPhone(HttpServletRequest request) {
         String serverName = request.getServerName();
-        String cityName = serverName.split("\\.")[0];
+        String cityName = "\\.".split(serverName)[0];
         String userAgent = request.getHeader("User-Agent");
-        if (userAgent.indexOf("Mozilla/") != -1 && userAgent.indexOf("iPhone") != -1) {
+        if (userAgent.contains("Mozilla/") && userAgent.contains("iPhone")) {
             return true;
-        } else if (userAgent.indexOf("Android") != -1 && userAgent.indexOf("Linux") != -1) {
+        } else if (userAgent.contains("Android") && userAgent.contains("Linux")) {
             return true;
         } else if(cityName.equals("m")){
             return true;
