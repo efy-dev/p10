@@ -9,7 +9,7 @@ import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.DateUtil;
 import com.ming800.core.base.util.ReflectUtil;
 import com.ming800.core.base.util.SystemValueUtil;
-import com.ming800.core.util.ValueObjectUtil;
+import com.ming800.core.base.util.ValueObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
