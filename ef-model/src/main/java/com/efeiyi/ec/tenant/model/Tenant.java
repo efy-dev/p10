@@ -25,7 +25,18 @@ import java.util.Date;
 public class Tenant implements Serializable {
 
     private String id;
-    private String name;                //名称标识
+    private String name;//名称标识
+    private String fullName;
+
+    @Column(name="full_name")
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private AddressProvince addressProvince;
     private AddressDistrict addressDistrict;
@@ -90,7 +101,7 @@ public class Tenant implements Serializable {
         return createDateTime;
     }
 
-    public void setCreateDateTime(Date createDate) {
+    public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
 

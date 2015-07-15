@@ -82,9 +82,9 @@ public class MainController extends BaseController {
     }
 
 
-    @RequestMapping({"/test/jmenutest"})
+   /* @RequestMapping({"/test/jmenutest"})
     public String testJmenu(HttpServletRequest request) {
         return "/test/jmenuTest";
-    }
+    }*/
 
 }
