@@ -1,4 +1,4 @@
-package com.ming800.core.util;
+package com.ming800.core.base.util;
 
 import java.lang.reflect.Method;
 

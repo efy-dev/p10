@@ -1,7 +1,7 @@
 package com.ming800.core.base.dao;
 
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 public interface XdoDao {
 
     void saveOrUpdateObject(String modelType, Object object);
+    void saveOrUpdateObject( Object object);
 
     void deleteObject(String modelType, String id);
 

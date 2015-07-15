@@ -1,9 +1,8 @@
 package com.ming800.core.base.service;
 
 import com.ming800.core.does.model.*;
-import com.ming800.core.base.model.MethodCache;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
 

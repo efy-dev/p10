@@ -5,7 +5,7 @@ import com.ming800.core.does.model.StatusTypeItem;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.PageInfo;
+import com.ming800.core.does.model.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -65,5 +65,10 @@ public interface BaseManager {
     Map<Field, List<StatusTypeItem>> listStatusType(String entityName, String[] fieldNameList);
 
     List<StatusTypeItem> listStatusType(String entityName, String fieldName);
-
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Deprecated
+    void saveOrUpdateObject(Object object) ;
 }

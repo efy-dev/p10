@@ -1,6 +1,5 @@
-package com.efeiyi.ec.basic.model;
+package com.ming800.core.p.model;
 
-import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,11 +11,11 @@ import javax.persistence.*;
 @Table(name="basic_banner")
 public class Banner {
     private String id;
+    private String modules;
     private String title;
     private Integer bannerOrder;
     private String imageUrl;
     private String directUrl;
-    private User createUser;
     private String theStatus;
 
     @Id
@@ -65,15 +64,13 @@ public class Banner {
     public void setDirectUrl(String directUrl) {
         this.directUrl = directUrl;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    public User getCreateUser() {
-        return createUser;
+    @Column(name="module_id")
+    public String getModules() {
+        return modules;
     }
 
-    public void setCreateUser(User createUser) {
-        this.createUser = createUser;
+    public void setModules(String modules) {
+        this.modules = modules;
     }
 
     @Column(name="the_status")

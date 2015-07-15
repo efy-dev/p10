@@ -1,7 +1,5 @@
 package com.ming800.core.does.model;
 
-import com.ming800.core.util.PageInfo;
-
 /**
  * Created with IntelliJ IDEA.
  * User: ming
