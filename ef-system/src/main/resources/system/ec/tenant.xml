@@ -5,7 +5,7 @@
 <module name="tenant" label="系统-传承人" version="" package="com.efeiyi.ec.tenant" path="">
 
     <entities>
-        <entity name="TenantList" label="传承人列表"
+        <entity name="Tenant" label="传承人列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.Tenant">
             <fields>
@@ -34,7 +34,7 @@
 
             </does>
         </entity>
-        <entity name="TenantWorkShopList" label="传承人工作坊列表"
+        <entity name="TenantWorkShop" label="传承人工作坊列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWorkShop">
             <fields>
@@ -61,7 +61,7 @@
 
             </does>
         </entity>
-        <entity name="TenantHonorList" label="传承人殊荣列表"
+        <entity name="TenantHonor" label="传承人殊荣列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantHonor">
             <fields>
@@ -88,7 +88,7 @@
 
             </does>
         </entity>
-        <entity name="TenantIntroductionList" label="传承人简介列表"
+        <entity name="TenantIntroduction" label="传承人简介列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantIntroduction">
             <fields>
@@ -117,14 +117,14 @@
 
             </does>
         </entity>
-        <entity name="TenantNewsList" label="传承人新闻列表"
+        <entity name="TenantNews" label="传承人新闻列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantNews">
             <does>
                 <do name="plistTenantNews" access="" label="传承人新闻分页列表"
                     result="/tenantNews/tenantNewsPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
@@ -142,7 +142,7 @@
 
             </does>
         </entity>
-        <entity name="TenantProductList" label="传承人产品列表"
+        <entity name="TenantProduct" label="传承人产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantProduct">
             <fields>
@@ -169,7 +169,7 @@
 
             </does>
         </entity>
-        <entity name="TenantWorkList" label="传承人著作列表"
+        <entity name="TenantWork" label="传承人著作列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWork">
             <fields>

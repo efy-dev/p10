@@ -1,6 +1,5 @@
 package com.ming800.core.p.model;
 
-import com.ming800.core.p.model.Document;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,14 +12,7 @@ public class DocumentContent {
     private Document document;
     private String content;
 
-    public DocumentContent(String id, Document document, String content) {
-        this.id = id;
-        this.document = document;
-        this.content = content;
-    }
 
-    public DocumentContent() {
-    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
