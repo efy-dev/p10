@@ -16,6 +16,7 @@ import java.util.List;
 public interface XdoDao {
 
     void saveOrUpdateObject(String modelType, Object object);
+    void saveOrUpdateObject( Object object);
 
     void deleteObject(String modelType, String id);
 

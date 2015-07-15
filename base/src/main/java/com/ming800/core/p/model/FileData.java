@@ -12,7 +12,7 @@ import javax.persistence.*;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "core_p_file_data")
+@Table(name = "basic_file_data")
 public class FileData {
     private String id;
     private String path;        //存在硬盘中的名称

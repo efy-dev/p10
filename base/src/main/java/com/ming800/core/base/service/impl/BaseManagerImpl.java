@@ -44,7 +44,14 @@ public class BaseManagerImpl implements BaseManager {
     public void saveOrUpdate(String model, Object object) {
         xdoDao.saveOrUpdateObject(model, object);
     }
-
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Override
+    public void saveOrUpdateObject(Object object) {
+        xdoDao.saveOrUpdateObject(object);
+    }
     /**
      * 保存
      */

@@ -65,5 +65,10 @@ public interface BaseManager {
     Map<Field, List<StatusTypeItem>> listStatusType(String entityName, String[] fieldNameList);
 
     List<StatusTypeItem> listStatusType(String entityName, String fieldName);
-
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Deprecated
+    void saveOrUpdateObject(Object object) ;
 }

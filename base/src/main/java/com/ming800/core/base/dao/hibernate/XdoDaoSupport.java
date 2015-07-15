@@ -66,6 +66,14 @@ public class XdoDaoSupport implements XdoDao {
         this.getSession().saveOrUpdate(modelType, object);
     }
 
+    /***
+     * 临时添加测试使用
+     * @param object
+     */
+    @Override
+    public void saveOrUpdateObject(Object object) {
+        this.getSession().saveOrUpdate(object);
+    }
     @Override
     public void deleteObject(String modelType, String id) {
         String query = "delete from " + modelType + " s where s.id =:id";
