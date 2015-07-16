@@ -13,7 +13,7 @@
             <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表" />
         </jnode>
     </jnode>
-    <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理"><!--系统管理-->
+    <jnode id="contentManager" url="/main.do?jnodeId=contentManager?conditions=groupid:sajlkfjaskldfj; " text_zh_CN="内容管理"><!--系统管理-->
         <jnode url="" id="tu" access="admin,manager" state="closed"  text_zh_CN="轮播图管理"/>
         <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="news" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
         <jnode url="" id="" access="admin,manager" state="closed"  text_zh_CN="文档管理"/>

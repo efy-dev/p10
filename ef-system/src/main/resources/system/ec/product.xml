@@ -13,12 +13,23 @@
                 <field name="name" label="产品名字" inputType="text"/>
                 <field name="price" label="产品价格" inputType="text"/>
                 <field name="picture_url" label="产品图片链接" inputType="text"/>
+                <field name="createDatetime" label="创建时间" inputType="date"/>
+
             </fields>
             <does>
                 <do name="plistProduct" access="" label="产品分页列表"
-                    result="/product/productPList">
+                    result="/test/generateTap">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"></condition>
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="name" defaultValue="0" operation="ne" />
+                    </query>
+                    <query name="default1" label="默认1" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="name" defaultValue="0" operation="ne" />
+                    </query>
+                    <query name="default2" label="默认2" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="name" defaultValue="0" operation="ne" />
                     </query>
                 </do>
 
@@ -46,7 +57,7 @@
                 <do name="plistProductDescription" access="" label="产品描述分页列表"
                     result="/productDescription/productDescriptionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="content" defaultValue="1" operation="eq"></condition>
+                        <condition name="content" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
                 <do name="removeProductDescription" label="删除产品描述" access="" result="json"/>

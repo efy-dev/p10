@@ -2,6 +2,7 @@ package com.ming800.core.p.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,17 +111,49 @@ public class Jnode {
      * @return
      */
     public boolean contain(String match) {
+        boolean flag = false;
         if (matchList != null && matchList.size() > 0 && match != null && !"".equals(match)) {
-            boolean flag = false;
             for (String matchTemp : matchList) {
                 if (match.trim().equals(matchTemp.trim())) {
                     flag = true;
                 }
+//                else if(match.trim()) {
+//
+//                }
             }
-            return flag;
-        } else {
-            return false;
         }
+        return flag;
+    }
+
+
+    //只匹配** a** a**b **b
+    private boolean isMatch(String configurationStr,String matchStr){
+        boolean flag = false;
+        if (!configurationStr.contains("**")){
+            return flag;
+        } else
+        if (configurationStr.startsWith("**")){
+            //通配前缀
+            String tepStr = configurationStr.substring(2,configurationStr.length());
+            if (matchStr.endsWith(tepStr)){
+                flag = true;
+            }
+        }else if (configurationStr.endsWith("**")){
+            //通配后缀
+            String tepStr = configurationStr.substring(0,configurationStr.length()-2);
+            if (matchStr.startsWith(tepStr)){
+                flag = true;
+            }
+        }else {
+            List<String> tepStrList = Arrays.asList(configurationStr.split("\\*\\*"));
+            //通配中间部分
+            String tepStr0 = tepStrList.get(0);
+            String tepStr1 = tepStrList.get(1);
+            if (matchStr.startsWith(tepStr0)&& matchStr.endsWith(tepStr1)){
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     public boolean contain(Jnode jnode, String match) {
