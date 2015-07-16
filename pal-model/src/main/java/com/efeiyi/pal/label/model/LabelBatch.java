@@ -61,7 +61,7 @@ public class LabelBatch {
         this.amount = amount;
     }
 
-    @Column(name = "create_Date")
+    @Column(name = "create_date")
     public Date getCreateDate() {
         return createDate;
     }
