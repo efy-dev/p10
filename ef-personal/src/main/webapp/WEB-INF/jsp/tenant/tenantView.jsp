@@ -20,7 +20,7 @@
         <li><a href="${pageContext.request.contextPath}/tenant/tenantIntroductionList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-jj.gif"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenant/tenantProductList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zp.gif"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenant/tenantInfoList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zx.gif"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/tenantWorkShopList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/getTenantWorkShop.do?tenantId=1"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
     </ul>
 </div>
 
@@ -46,15 +46,15 @@
 
 <div id="center">
     <dl class="center-1">
-        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenant/"><img src="/scripts/assets/images/img1.gif"></a></dt>
+        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenant/getProduct.do?tenantId=1"><img src="/scripts/assets/images/img1.gif"></a></dt>
         <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
     </dl>
     <dl class="center-2">
-        <dt class="center-1-dt"><a href="#"><img src="/scripts/assets/images/img2.gif"></a></dt>
+        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenant/getProduct.do?tenantId=1"><img src="/scripts/assets/images/img2.gif"></a></dt>
         <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
     </dl>
     <dl class="center-3">
-        <dt class="center-1-dt"><a href="#"><img src="/scripts/assets/images/img3.gif"></a></dt>
+        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenant/getProduct.do?tenantId=1"><img src="/scripts/assets/images/img3.gif"></a></dt>
         <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
     </dl>
 </div>

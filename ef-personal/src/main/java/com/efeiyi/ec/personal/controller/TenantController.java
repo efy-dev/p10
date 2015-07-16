@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -113,11 +112,12 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/tenantIntroductionList.do")
     public ModelAndView listTenantIntroduction(String tenantId , ModelMap model){
-        String queryHql = "from TenantIntroduction i left join fetch i.tenant t where t.id = ?";
+        String queryHql = "from TenantIntroduction i where i.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
-        baseManager.listObject(queryHql, queryParamMap);
-        return new ModelAndView("",model);
+        List list = baseManager.listObject(queryHql, queryParamMap);
+        model.addAttribute("tenantIntroductionList",list);
+        return new ModelAndView("/tenant/tenantIntroduction/tenantIntroductionList",model);
     }
 
     /**
@@ -143,7 +143,7 @@ public class TenantController extends BaseController {
         sb.append(" order by p.createDateTime DESC");
         List productList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productList",productList);
-        return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
+        return new ModelAndView("/tenant/tenantProduct/tenantProductList",model);
 
     }
     /**
@@ -159,7 +159,7 @@ public class TenantController extends BaseController {
         Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
         model.addAttribute("tenant",tenant);
         model.addAttribute("product", product);
-        return new ModelAndView("/tenant/tenantProduct/productView",model);
+        return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
 
     }
     /**

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title></title>
+    <title></title>
 </head>
 <body>
 <div id="header">
@@ -33,14 +33,16 @@
 </div>
 <form action="" method="post">
   <table>
+    <c:forEach items="${productList}" var="product" >
       <tr>
-        <td>${productWorkShop.id}</td>
-        <td>${productWorkShop.name}</td>
-        <td>${productWorkShop.createDateTime}</td>
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
       </tr>
+    </c:forEach>
     <c:if test="${tenant.id != null }">
-    <a href="">ddddds</a>
-  </c:if>
+      <a href="">ddddd</a>
+    </c:if>
   </table>
 </form>
 </body>
