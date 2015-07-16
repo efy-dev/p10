@@ -30,6 +30,12 @@ public class Tenant implements Serializable {
     private String brief; // 简介(短)
     private String title; // 头衔/称号
     private String favicon; //网站头像
+    private String sex; //性别
+    private String birthday; //出生年月
+    private String level; //等级
+    private String presentAddress; //现居地
+    private String representativeWorks; // 代表作品
+    private String nativePlace; //籍贯
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private AddressProvince addressProvince;
     private AddressDistrict addressDistrict;
@@ -131,5 +137,59 @@ public class Tenant implements Serializable {
 
     public void setFavicon(String favicon) {
         this.favicon = favicon;
+    }
+
+    @Column(name = "sex")
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    @Column(name = "birthday")
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    @Column(name = "level")
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    @Column(name = "present_address")
+    public String getPresentAddress() {
+        return presentAddress;
+    }
+
+    public void setPresentAddress(String presentAddress) {
+        this.presentAddress = presentAddress;
+    }
+
+    @Column(name = "representative_works")
+    public String getRepresentativeWorks() {
+        return representativeWorks;
+    }
+
+    public void setRepresentativeWorks(String representativeWorks) {
+        this.representativeWorks = representativeWorks;
+    }
+
+    @Column(name = "native_place")
+    public String getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
     }
 }
