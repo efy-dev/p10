@@ -1,5 +1,6 @@
 package com.efeiyi.ec.personal.controller;
 
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.tenant.model.*;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -143,6 +144,21 @@ public class TenantController extends BaseController {
         List productList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productList",productList);
         return new ModelAndView("/tenant/tenantProduct/tenantProductView",model);
+
+    }
+    /**
+     * 获取传承人作品列表
+     * @param model
+     * @return
+     */
+    @RequestMapping("/getProduct.do")
+    public ModelAndView getProduct(HttpServletRequest request ,ModelMap model){
+        String tenantId = request.getParameter("tenantId");
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        model.addAttribute("tenant",tenant);
+        Product product = (Product)baseManager.getObject(Product.class.getName(), tenantId);
+        model.addAttribute("product", product);
+        return new ModelAndView("/tenant/tenantProduct/productView",model);
 
     }
     /**
