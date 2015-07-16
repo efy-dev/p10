@@ -18,8 +18,8 @@
             </fields>
             <does>
                 <do name="plistProduct" access="" label="产品分页列表"
-                    result="/test/generateTap">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    result="/test/generateTap" execute="com.efeiyi.ec.system.product.controller.ProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc" >
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="name" defaultValue="0" operation="ne"/>
                     </query>

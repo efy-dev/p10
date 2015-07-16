@@ -39,6 +39,8 @@
 
 <div class="am-cf admin-main">
     <%----%>
+        <jsp:include flush="true"
+                     page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
     <div class="admin-content">
         <sitemesh:write property='body'/>
     </div>
