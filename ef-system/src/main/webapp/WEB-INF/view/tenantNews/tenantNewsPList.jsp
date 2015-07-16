@@ -18,16 +18,16 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
+<table>
     <tr>
-        <td>百科新闻id</td>
-        <td>百科新闻</td>
+        <td>tenantNews-id</td>
+        <td>title</td>
     </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="projectNews">
+    <c:forEach items="${requestScope.pageInfo.list}" var="tenantNews">
         <tr>
-            <td>${projectNews.id}</td>
-            <td>${projectNews.content}</td>
+            <td>${tenantNews.id}</td>
+            <td>${tenantNews.title}</td>
         </tr>
     </c:forEach>
 
@@ -39,5 +39,6 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
+
 </body>
 </html>

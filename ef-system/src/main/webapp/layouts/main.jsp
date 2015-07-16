@@ -19,13 +19,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="../scripts/assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="../scripts/assets/i/app-icon72x72@2x.png">
+    <link rel="icon" type="image/png" href="/scripts/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/scripts/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="../scripts/assets/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="../scripts/assets/css/admin.css">
-    <script src="<c:url value='../scripts/assets/js/jquery.min.js'/>"></script>
-    <script src="<c:url value='../scripts/assets/js/amazeui.min.js'/>"></script>
+    <link rel="stylesheet" href="/scripts/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/scripts/assets/css/admin.css">
+    <script src="/scripts/assets/js/jquery.min.js"></script>
+    <script src="/scripts/assets/js/amazeui.min.js"></script>
     <sitemesh:write property='head'/>
     <style>
         .efy-active {
@@ -38,12 +38,10 @@
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 
 <div class="am-cf admin-main">
-<%----%>
-    <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
-<div class="admin-content">
-<sitemesh:write property='body'/>
-</div>
+    <%----%>
+    <div class="admin-content">
+        <sitemesh:write property='body'/>
+    </div>
 
 </div>
 </body>
