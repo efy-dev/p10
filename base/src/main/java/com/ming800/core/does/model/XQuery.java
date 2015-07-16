@@ -45,12 +45,12 @@ public class XQuery {
         }
 
         DoQuery tempDoQuery = tempDo.getDoQueryByName(doQueryName.split("_")[1]);
-        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, request.getParameter("conditions"),this);
+        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, request.getParameter("conditions"), this);
 
         //判断是否有排序参数
         if (request.getParameter("sort") != null) {
             this.setSortHql(fetchOrderStr(tempDoQuery, request.getParameter("sort")));
-        }else if(tempDoQuery.getOrderBy()!=null&&tempDoQuery.getOrderBy()!=""){
+        } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
             this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
         }
 
@@ -61,14 +61,14 @@ public class XQuery {
     }
 
 
-    public XQuery(Do tempDo,DoQuery tempDoQuery,PageEntity pageEntity, String tempConditions) throws Exception {
+    public XQuery(Do tempDo, DoQuery tempDoQuery, PageEntity pageEntity, String tempConditions) throws Exception {
         //判断是否是分页查询
-        if (pageEntity!=null) {
+        if (pageEntity != null) {
             this.setPageEntity(pageEntity);
         }
-        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions,this);
+        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, tempConditions, this);
         //判断是否有排序参数
-            this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
+        this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
 
         //补全查询语句
         if (sortHql != null) {
@@ -168,11 +168,10 @@ public class XQuery {
     }
 
 
-
-    private void generateQueryString(String queryModel, DoQuery doQuery, String tempConditions ,XQuery xQuery) {
+    private void generateQueryString(String queryModel, DoQuery doQuery, String tempConditions, XQuery xQuery) {
         StringBuilder sb = new StringBuilder(100);
         /*拼写 配置文件中的conditon*/
-        fetchXQueryByConditions(doQuery.getConditionList(), doQuery, tempConditions,xQuery);
+        fetchXQueryByConditions(doQuery.getConditionList(), doQuery, tempConditions, xQuery);
         sb.append(xQuery.getHql());
         StringBuilder queryStringBuilder = new StringBuilder(150);
         /*查询对象 select from */

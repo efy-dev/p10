@@ -1,87 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="commonMenu">
-    <jnode id="efecManager" url="/main.do?jnodeId=efecManager" text_zh_CN="电商网站管理"><!--系统管理-->
+    <jnode id="serviceManager" url="/main.do?jnodeId=serviceManager" text_zh_CN="业务管理"><!--系统管理-->
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="订单管理">
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
                 <match url="plistPurchaseOrder_default"/>
+                <match url="plistPurchaseOrder_default"/>
+                <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
-                <match url="plistPurchaseOrderPayment_default"/>
-            </jnode>
-        </jnode>
-        <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
-            <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="最新商品列表">
-                <match url="plistProduct_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="推荐商品管理">
-                <match url="plistProduct_default"/>
-            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录"/>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
-            <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表">
-                <match url="plistTenant_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistProfessional_default"  access="admin,manager" text_zh_CN="商家用户列表">
-                <match url="plistProfessional_default"/>
-            </jnode>
-        </jnode>
-        <jnode url="" id="consumer"  access="admin" state="closed" text_zh_CN="消费者管理">
-            <jnode url="/basic/xm.do?qm=plistConsumer_default"  access="admin,manager" text_zh_CN="消费者列表">
-                <match url="plistConsumer_default"/>
-            </jnode>
-        </jnode>
-        <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_default"  access="admin,manager" text_zh_CN="电商网站轮播图">
-                <match url="plistBanner_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_default"  access="admin,manager" text_zh_CN="电商网站文档">
-                <match url="plistDocument_default"/>
-            </jnode>
+            <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表" />
         </jnode>
     </jnode>
-
-    <jnode id="ttManager" url="/main.do?jnodeId=ttManager" text_zh_CN="传承人网站管理"><!--系统管理-->
-        <jnode url="" id="tenantManager" access="admin,manager" state="closed"  text_zh_CN="传承人管理">
-            <jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" access="admin" text_zh_CN="传承人介绍管理">
-                <match url="plistTenantIntroduction_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistTenantProduct_default"  access="admin,manager" text_zh_CN="传承人作品管理">
-                <match url="plistTenantProduct_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistTenantNews_default"  access="admin,manager" text_zh_CN="传承人资讯管理">
-                <match url="plistTenantNews_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistTenantWorkShop_default"  access="admin,manager" text_zh_CN="传承人工作坊管理">
-                <match url="plistTenantWorkShop_default"/>
-            </jnode>
-        </jnode>
-        <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="传承人轮播图">
-                <match url="plistBanner_tenant"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_tenant"  access="admin,manager" text_zh_CN="传承人网站文档">
-                <match url="plistDocument_tenant"/>
-            </jnode>
-        </jnode>
-    </jnode>
-
-    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科网站管理"><!--系统管理-->
-        <jnode url="/basic/xm.do?qm=plistProjectContent_default"  access="admin,manager"  text_zh_CN="内容">
-            <match url="plistProjectContent_default"/>
-        </jnode>
-        <jnode url="/basic/xm.do?qm=plistProjectNews_default"  access="admin,manager" text_zh_CN="资讯">
-            <match url="plistProjectNews_default"/>
-        </jnode>
+    <jnode id="contentManager" url="/main.do?jnodeId=contentManager?conditions=groupid:sajlkfjaskldfj; " text_zh_CN="内容管理"><!--系统管理-->
+        <jnode url="" id="tu" access="admin,manager" state="closed"  text_zh_CN="轮播图管理"/>
+        <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="news" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
+        <jnode url="" id="" access="admin,manager" state="closed"  text_zh_CN="文档管理"/>
     </jnode>
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
-        <jnode url="" id="userManager"  access="admin" state="closed" text_zh_CN="用户管理">
-            <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户列表">
-                <match url="plistUser_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistRole_default"  access="admin,manager" text_zh_CN="角色管理">
-                <match url="plistRole_default"/>
-            </jnode>
-        </jnode>
+        <jnode url="/basic/xm.do?qm=plistBigUser_default" id="userManager" access="admin,manager" state="closed"  text_zh_CN="用户管理"/>
+        <jnode url="" id="logManager" access="admin,manager" state="closed"  text_zh_CN="日志记录"/>
     </jnode>
 </jmenu>
 
