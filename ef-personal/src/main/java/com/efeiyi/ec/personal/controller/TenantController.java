@@ -59,12 +59,12 @@ public class TenantController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/getTenantHonor.do")
+    /*@RequestMapping("/getTenantHonor.do")
     public ModelAndView getTenantHonor(String honorId , ModelMap model){
         TenantHonor honor = (TenantHonor) baseManager.getObject(TenantHonor.class.getName(),honorId);
         model.addAttribute("entity",honor);
         return new ModelAndView("/tenant/tenantHonor/tenantHonorView",model);
-    }
+    }*/
 
     /**
      * 获取传承人ID对应的所有殊荣
@@ -72,7 +72,7 @@ public class TenantController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantHonorList.do")
+    /*@RequestMapping("/tenantHonorList.do")
     public ModelAndView listTenantHonor(HttpServletRequest request ,String tenantId ,ModelMap model){
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
         model.addAttribute("tenant",tenant);
@@ -80,9 +80,9 @@ public class TenantController extends BaseController {
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
         StringBuffer sb = new StringBuffer("from TenantHonor h where h.tenant.id = (:tenantId)");
-        /**
+        *//**
          * 根据页面传递查询参数来选择展示的数据
-         */
+         *//*
         if(Long.valueOf(condition) > 0){
             sb.append(" and LEFT(create_date,4)='(:condition)'");
             queryParamMap.put("condition",condition);
@@ -90,7 +90,7 @@ public class TenantController extends BaseController {
         sb.append(" order by h.createDate DESC");
         baseManager.listObject(sb.toString(), queryParamMap);
         return new ModelAndView("",model);
-    }
+    }*/
 
     /**
      * 获取传承人简介
@@ -116,7 +116,7 @@ public class TenantController extends BaseController {
         String queryHql = "from TenantIntroduction i left join fetch i.tenant t where t.id = ?";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
-        baseManager.listObject(queryHql,queryParamMap);
+        baseManager.listObject(queryHql, queryParamMap);
         return new ModelAndView("",model);
     }
 
@@ -154,9 +154,10 @@ public class TenantController extends BaseController {
     @RequestMapping("/getProduct.do")
     public ModelAndView getProduct(HttpServletRequest request ,ModelMap model){
         String tenantId = request.getParameter("tenantId");
+        String productId = request.getParameter("productId");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
         model.addAttribute("tenant",tenant);
-        Product product = (Product)baseManager.getObject(Product.class.getName(), tenantId);
         model.addAttribute("product", product);
         return new ModelAndView("/tenant/tenantProduct/productView",model);
 
@@ -166,7 +167,7 @@ public class TenantController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantWorkList.do")
+    /*@RequestMapping("/tenantWorkList.do")
     public ModelAndView listTenantWork(HttpServletRequest request ,ModelMap model){
         String condition = request.getParameter("condition");
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
@@ -183,28 +184,20 @@ public class TenantController extends BaseController {
         List productWorkList = baseManager.listObject(sb.toString(), queryParamMap);
         model.addAttribute("productWorkList", productWorkList);
         return new ModelAndView("/tenant/tenantWork/tenantWorkView", model);
-    }
+    }*/
 
     /**
      * 获取传承人工作坊
      * @param model
      * @return
      */
-    @RequestMapping("/tenantWorkShopList.do")
-    public ModelAndView listTenantWorkShop(HttpServletRequest request ,ModelMap model){
-        String condition = request.getParameter("condition");
+    @RequestMapping("/getTenantWorkShop.do")
+    public ModelAndView getTenantWorkShop(HttpServletRequest request ,ModelMap model){
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         String tenantId = request.getParameter("tenantId");
-        Tenant tenant = (Tenant)baseManager.getObject(Tenant.class.getName(),tenantId);
-        model.addAttribute("tenant",tenant);
-        StringBuffer sb = new StringBuffer("from TenantWorkShop t where t.tenant.id = :tenantId");
+        String queryHql = "from TenantWorkShop t where t.tenant.id = :tenantId";
         queryParamMap.put("tenantId",tenantId);
-
-        if(condition != null && !"".equals(condition) && Long.valueOf(condition) > 0){
-            sb.append(" and YEAR(t.createDateTime) = "+ Integer.valueOf(condition));
-        }
-        sb.append(" order by t.createDateTime DESC");
-        TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(sb.toString(), queryParamMap);
+        TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         model.addAttribute("productWorkShop", productWorkShop);
         return new ModelAndView("/tenant/tenantWorkShop/tenantWorkShopView", model);
     }
