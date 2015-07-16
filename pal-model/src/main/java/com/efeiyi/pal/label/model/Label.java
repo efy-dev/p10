@@ -82,7 +82,7 @@ public class Label {
         this.status = status;
     }
 
-    @Column(name = "used_Date")
+    @Column(name = "used_date")
     public Date getUsedDate() {
         return usedDate;
     }
