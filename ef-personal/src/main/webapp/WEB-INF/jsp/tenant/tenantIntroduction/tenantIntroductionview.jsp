@@ -27,7 +27,7 @@
         <li><a href="${pageContext.request.contextPath}/tenant/tenantIntroductionList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-jj.gif"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenant/tenantProductList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zp.gif"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenant/tenantInfoList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zx.gif"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/tenantWorkShopList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/getTenantWorkShop.do?tenantId=1"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
     </ul>
 </div>
 
