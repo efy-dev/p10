@@ -43,8 +43,14 @@
 
     <div class="am-tabs-bd">
         <c:forEach items="${doQueryList}" var="doQuery">
+            <c:if test="${tabTitle==doQuery.label}">
             <div class="am-tab-panel am-active" id="${doQuery.name}">
             </div>
+            </c:if>
+            <c:if test="${tabTitle!=doQuery.label}">
+                <div class="am-tab-panel" id="${doQuery.name}">
+                </div>
+            </c:if>
         </c:forEach>
     </div>
 </div>
