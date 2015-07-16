@@ -15,7 +15,7 @@ function generateValue(divId) {
 
     var conditionsValue = "";
 
-    var defaultConditionsValue = document.getElementById("defaultConditions").value;
+    var defaultConditionsValue = document.getElementById("defaultConditions"+divId).value;
     var tempArray = queryConditionArrayMap[divId];
     for (var i = 0; i < tempArray.length; i++) {
         var propertyName = tempArray[i].propertyName;
@@ -24,11 +24,11 @@ function generateValue(divId) {
 
             var tempIdValue = "";
             if (tempArray[i].inputType == 'date') {
-                tempIdValue = $("#" + tempId).datebox('getValue');
+                tempIdValue = $("#" + tempId).val();
                 if (tempId.indexOf("2") <= 0) {
                     var tempObject2 = $("#" + tempId + "2");
                     if (tempObject2.val() != undefined) {
-                        var tempId2Value = tempObject2.datebox('getValue');
+                        var tempId2Value = tempObject2.val();
                         if (parseInt(tempId2Value.split("-")[0]) - parseInt(tempIdValue.split("-")[0]) > 2) {
                             alert("选择日期查询的时候， 日期跨度不要超过两年");
                             $("#form").submit(function () {
@@ -75,13 +75,12 @@ function generateValue(divId) {
         if (tempSortName != null && tempSortName != '') {
             resultConditions += ";" + $("#tempSortOrder").val() + ":" + tempSortName;
         }
-        $("#conditions").val(resultConditions);
+        $("#conditions"+divId).val(resultConditions);
 //        document.getElementById('conditions').value = conditionsValue.substring(0, conditionsValue.length - 1);
     }
     /*为什么不这样提交    */
 //    $("#form").m8uSubmit();
 }
-
 
 
 function generateCondition(divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
@@ -92,7 +91,7 @@ function generateCondition(divId, queryModel, queryLabel, conditions, model, tab
         type: "post",
         url: '/do/listCondition.do',
         cache: false,
-        data: {qm: queryModel+'_'+divId},
+        data: {qm: queryModel + '_' + divId},
         dataType: "json",
         success: function (data) {
 
@@ -111,7 +110,7 @@ function generateCondition(divId, queryModel, queryLabel, conditions, model, tab
                     queryConditionArray.push(queryCondition);
                     queryConditionArrayTemp.push(queryCondition);
                 }
-                queryConditionArrayMap[divId]=queryConditionArrayTemp;
+                queryConditionArrayMap[divId] = queryConditionArrayTemp;
                 generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle, title);
                 queryConditionArray = new Array();
 
@@ -129,7 +128,10 @@ function addSelectAndRadios(conditions) {
             if (queryConditionArray[i].inputType == "select_dictionary" || queryConditionArray[i].inputType == "radio_dictionary") {
                 addOptions(tempId, "/data/loadDictionaryData.do", defaultValue, {sid: queryConditionArray[i].key}, queryConditionArray[i].inputType, queryConditionArray[i].required);
             } else if (queryConditionArray[i].inputType == "select_status" || queryConditionArray[i].inputType == "radio_status") {
-                addOptions(tempId, "/basic/xmj.do", defaultValue, {qm: "statusType", fieldName: queryConditionArray[i].key}, queryConditionArray[i].inputType, queryConditionArray[i].required);
+                addOptions(tempId, "/basic/xmj.do", defaultValue, {
+                    qm: "statusType",
+                    fieldName: queryConditionArray[i].key
+                }, queryConditionArray[i].inputType, queryConditionArray[i].required);
             }
         }
     }
@@ -137,16 +139,18 @@ function addSelectAndRadios(conditions) {
 
 function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
     var tagStr = "<div class=\"queryDiv inline-block\">";
-    tagStr += "<form class='am-form-inline' id=\"form\" action=\"/basic/xm.do?qm=" + queryModel + "\" method=\"post\">";
+    tagStr += "<form class='am-form-inline' id=\"form\" action=\"/basic/xm.do?qm=" + queryModel + "_" + divId + "\" method=\"post\">";
 
-    tagStr += " <input type=\"hidden\" id=\"conditions\" name=\"conditions\"/> ";
+    tagStr += " <input type=\"hidden\" id=\"conditions"+divId+"\" name=\"conditions\"/> ";
 
-    tagStr += " <input type=\"hidden\" id=\"defaultConditions\" name=\"defaultConditions\" value=\"" + conditions + "\"/> ";
+    var datatimeIdArray = new Array();
+
+    tagStr += " <input type=\"hidden\" id=\"defaultConditions"+divId+"\" name=\"defaultConditions\" value=\"" + conditions + "\"/> ";
     for (var i = 0; i < queryConditionArray.length; i++) {
         if (queryConditionArray[i].inputType != "default") {
             var tempId = queryConditionArray[i].propertyName.replace(/\./g, "_");
             var thePropertyValue = generatePropertyValue(conditions, queryConditionArray[i].propertyName, queryConditionArray[i].propertyValue);
-            tagStr+="<div class=\"am-form-group\">"
+            tagStr += "<div class=\"am-form-group\">"
             tagStr += "" + queryConditionArray[i].label;
 
             if (queryConditionArray[i].inputType == "dialog_do" || queryConditionArray[i].inputType == "dialog_pop") {
@@ -191,7 +195,8 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
             } else {
                 tagStr += " <input  type=\"text\"";
                 if (queryConditionArray[i].inputType == "date") {
-                    tagStr += " class=\"am-form-field\" size=\"14\"";
+                    datatimeIdArray.push(tempId);
+                    tagStr += " class=\"am-form-field\" readonly size=\"14\"";
                 } else {
                     tagStr += " class=\"am-form-field\" size=\"15\"";
                 }
@@ -214,11 +219,11 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
 
                 tagStr += "&nbsp;&nbsp;";
             }
-            tagStr+="</div>"
+            tagStr += "</div>"
 
         }
     }
-    tagStr += " <input id=\"search\" class=\"am-btn am-btn-default\" type=\"submit\" onclick=\"generateValue('"+divId+"');\" value=\"查找\"/> ";
+    tagStr += " <input id=\"search\" class=\"am-btn am-btn-default\" type=\"submit\" onclick=\"generateValue('" + divId + "');\" value=\"查找\"/> ";
 
     tagStr += "</form>";
     tagStr += "</div>";
@@ -241,6 +246,11 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
     $("#" + divId).html(tagStr);
 
     addSelectAndRadios(conditions);
+
+
+    for (var did = 0; did < datatimeIdArray.length; did++) {
+        $('#' + datatimeIdArray[did]).datepicker();
+    }
 
 //
 //        $(".easyui-datebox").datebox({
