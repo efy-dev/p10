@@ -19,29 +19,12 @@ public class Document {
     private DocumentContent documentContent;
     private Date theDatetime;
     private Integer documentOrder;
-    private String type; //news 新闻 word 文档
+    private String group;
     private Integer theStatus;
     private String sampleContent;
     private Date publishDate;
     private List<DocumentAttachment> documentAttachmentList;
 
-    public Document(String id, String title, String name, String keywords, DocumentContent documentContent, Date theDatetime, Integer documentOrder, String type, Integer theStatus, String sampleContent, Date publishDate, List<DocumentAttachment> documentAttachmentList) {
-        this.id = id;
-        this.title = title;
-        this.name = name;
-        this.keywords = keywords;
-        this.documentContent = documentContent;
-        this.theDatetime = theDatetime;
-        this.documentOrder = documentOrder;
-        this.type = type;
-        this.theStatus = theStatus;
-        this.sampleContent = sampleContent;
-        this.publishDate = publishDate;
-        this.documentAttachmentList = documentAttachmentList;
-    }
-
-    public Document() {
-    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -100,15 +83,6 @@ public class Document {
         this.theDatetime = theDatetime;
     }
 
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "document", cascade = CascadeType.ALL)
     public List<DocumentAttachment> getDocumentAttachmentList() {
         return documentAttachmentList;
@@ -126,6 +100,16 @@ public class Document {
     public void setDocumentOrder(Integer documentOrder) {
         this.documentOrder = documentOrder;
     }
+
+    @Column(name = "group_id")
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     @Column(name="status")
     public Integer getTheStatus() {
         return theStatus;

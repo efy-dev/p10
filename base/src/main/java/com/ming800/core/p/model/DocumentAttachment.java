@@ -20,19 +20,8 @@ public class DocumentAttachment {
     private Document document;
     private String generate;   //页面的现实内容  图片类型直接显示   其他类型设置为下载链接
 
-    public DocumentAttachment() {
-    }
 
-    public DocumentAttachment(String id, String storeType, String fileName, String fileType, FileData data, String path, Document document, String generate) {
-        this.id = id;
-        this.storeType = storeType;
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.data = data;
-        this.path = path;
-        this.document = document;
-        this.generate = generate;
-    }
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -91,10 +80,8 @@ public class DocumentAttachment {
         this.path = path;
     }
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "document_id")
     public Document getDocument() {
         return document;
     }
@@ -107,5 +94,9 @@ public class DocumentAttachment {
     public String getGenerate() {
         String dataId = data == null ? null : data.getId();
         return AttachmentUtil.getGenerate(storeType, fileName, fileType, dataId, path);
+    }
+
+    public void setGenerate(String generate) {
+        this.generate = generate;
     }
 }

@@ -7,10 +7,6 @@ import com.ming800.core.p.controller.DocumentController;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.DocumentAttachment;
-import com.ming800.core.p.model.DocumentContent;
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.After;
@@ -28,18 +24,16 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 
 /**
- * Created by Administrator on 2015/7/14.
- */
-/*
+ * Created by kayson on 2015/7/14.
  *
- * @BeforeClass –> @Before –> @Test –> @After –> @AfterClass
+ *
  */
+
 @SuppressWarnings("unchecked")
 //@Transactional
 //@TransactionConfiguration(transactionManager ="transactionManager", defaultRollback = true)
@@ -47,33 +41,35 @@ import java.util.List;
 //@ContextConfiguration(locations={"file:src/main/webapp//WEB-INF/applicationContext-*.xml","file:src/main/webapp//WEB-INF/spring-servlet.xml"})
 @Controller
 public class BannerControllerTest {
-    private static Logger logger = Logger.getLogger(BannerController.class);
+    private static Logger logger = Logger.getLogger(BannerControllerTest.class);
 
-
+    // 加载顺序 @BeforeClass –> @Before –> @Test –> @After –> @AfterClass
 
    //HttpServletRequest request;
      MockHttpServletRequest request;
      MockHttpServletResponse response;
-     ModelAndView mv ;
+    // ModelAndView mv ;
      @Resource
      BannerController bannerController;
-    @Resource
-    DocumentController documentController;
+     @Resource
+     DocumentController documentController;
      ModelMap  map ;
-    @Autowired
-    private BaseManager baseManager;
+     @Autowired
+     private BaseManager baseManager;
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+     @BeforeClass
+     public static void setUpBeforeClass() throws Exception {
 
-    }
+     }
+    @SuppressWarnings("SuppressWarnings")
     @Before
     public void init() {
-          //logger.info("加载spring配置开始 ............");
+          logger.info("加载spring配置开始 ............");
 	      /* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); */
-        ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{"src/main/webapp//WEB-INF/applicationContext-*.xml",
+        ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
+                "src/main/webapp//WEB-INF/applicationContext-*.xml",
                 "src/main/webapp//WEB-INF/spring-servlet.xml"});
-         //logger.info("加载spring配置结束.............");
+         logger.info("加载spring配置结束.............");
         map = new ModelMap();
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
@@ -86,7 +82,7 @@ public class BannerControllerTest {
     @Test
     public void testdemo1() {
 
-        List<Banner> banners = null;
+        List<Banner> banners;
         XQuery xQuery = null;
         try {
             xQuery = new XQuery("listPCBanner_default",request);
@@ -111,14 +107,14 @@ public class BannerControllerTest {
     @Test
     public void testdemo2()throws  Exception{
 
-        mv =bannerController.getBannerByModlueId(map, request);
+        bannerController.getBannerByGroupId(request);
        /* Assert.assertNotNull(mv);
         Assert.assertEquals(response.getStatus(), 200);*/
     }
     @Test
     public void testdemo3()throws  Exception{
 
-        documentController.getDocById(map,request);
+        documentController.getDocByGroupId(request);
 
     }
     @After
