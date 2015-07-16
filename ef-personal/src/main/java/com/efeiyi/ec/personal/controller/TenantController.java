@@ -147,7 +147,7 @@ public class TenantController extends BaseController {
 
     }
     /**
-     * 获取传承人作品列表
+     * 获取传承人作品详情
      * @param model
      * @return
      */
