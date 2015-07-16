@@ -16,11 +16,11 @@
 <div id="nav">
     <h1><a href="#"><img src="/scripts/assets/images/logo2.gif"></a></h1>
     <ul class="nav-centent">
-        <li><a href="#"><img src="/scripts/assets/images/i/nav-sy.gif"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/nav-jj.gif"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/nav-zp.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/getTenant.do?tenantId=1"><img src="/scripts/assets/images/i/nav-sy.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/tenantIntroductionList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-jj.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/tenantProductList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zp.gif"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenant/tenantInfoList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-zx.gif"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/tenantWorkShopList.do?tenantId=1"><img src="/scripts/assets/images/i/nav-gzf.gif"></a></li>
     </ul>
 </div>
 
@@ -34,11 +34,11 @@
         </ul>
     </div>
     <div id="tab">
-        <h1>${entity.name}</h1>
-        <p>国家级非物质文化遗产传承人</p>
+        <h1>${entity.fullName}</h1>
+        <p>${entity.title}</p>
         <dl class="tab-dl">
             <dt><a href="#"><img src="/scripts/assets/images/img5.jpg"></a></dt>
-            <dd>魏立中，自幼学习绘画艺术，师从赵燕、冯远、全山石、张耕源、陈品超、徐银森。</dd>
+            <dd>${entity.brief}</dd>
         </dl>
         <span><a href="#">了解详细</a></span>
     </div>
@@ -46,7 +46,7 @@
 
 <div id="center">
     <dl class="center-1">
-        <dt class="center-1-dt"><a href="#"><img src="/scripts/assets/images/img1.gif"></a></dt>
+        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenant/"><img src="/scripts/assets/images/img1.gif"></a></dt>
         <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
     </dl>
     <dl class="center-2">

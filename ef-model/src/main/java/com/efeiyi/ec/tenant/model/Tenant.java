@@ -29,6 +29,7 @@ public class Tenant implements Serializable {
     private String fullName; //中文名
     private String brief; // 简介(短)
     private String title; // 头衔/称号
+    private String favicon; //网站头像
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private AddressProvince addressProvince;
     private AddressDistrict addressDistrict;
@@ -121,5 +122,14 @@ public class Tenant implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Column(name = "favicon")
+    public String getFavicon() {
+        return favicon;
+    }
+
+    public void setFavicon(String favicon) {
+        this.favicon = favicon;
     }
 }
