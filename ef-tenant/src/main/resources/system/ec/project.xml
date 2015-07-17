@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="project" label="project" version="" package="com.efeiyi.ec.project" path="">
+
+    <entities>
+        <entity name="Category" label="Category"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.Category">
+            <does>
+                <do name="plistCategory" access="" label="Category列表"
+                    result="/category/categoryPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeCategory" label="删除category" access="" result="json"/>
+                <do name="formCategory" label="保存category" access="" result="/category/categoryForm"/>
+                <do name="saveOrUpdateCategory" label="保存category" access="" result="/category/categorySaveSuccess"/>
+                <do name="listCategory" label="category列表" access="" result="/category/categoryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="category主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Project" label="Project"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.Project">
+            <does>
+                <do name="plistProject" access="" label="project列表"
+                    result="/project/projectPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeProject" label="删除Project" access="" result="json"/>
+                <do name="formProject" label="保存Project" access="" result="/project/projectForm"/>
+                <do name="saveOrUpdateProject" label="保存project" access="" result="/project/projectSaveSuccess"/>
+                <do name="listProject" label="project列表" access="" result="/project/projectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="project主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="ProjectProperty" label="ProjectProperty"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectProperty">
+            <does>
+                <do name="plistProjectProperty" access="" label="projectProperty列表"
+                    result="/projectProperty/projectPropertyPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeProjectProperty" label="删除ProjectProperty" access="" result="json"/>
+                <do name="formProjectProperty" label="保存ProjectProperty" access="" result="/projectProperty/projectPropertyForm"/>
+                <do name="saveOrUpdateProjectProperty" label="保存ProjectProperty" access="" result="/projectProperty/projectPropertySaveSuccess"/>
+                <do name="listProjectProperty" label="ProjectProperty列表" access="" result="/projectProperty/projectPropertyList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+    </entities>
+</module>

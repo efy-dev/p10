@@ -1,5 +1,6 @@
 package com.efeiyi.pal.label.model;
 
+import com.efeiyi.pal.orgnization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,7 +19,7 @@ public class Label {
     private String serial;
     private LabelBatch labelBatch;
     private Product product;
-    private String seller;
+    private Tenant seller;
     private String status;
     private Date usedDate;
 
@@ -62,12 +63,13 @@ public class Label {
         this.product = product;
     }
 
-    @Column(name="seller")
-    public String getSeller() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public Tenant getSeller() {
         return seller;
     }
 
-    public void setSeller(String seller) {
+    public void setSeller(Tenant seller) {
         this.seller = seller;
     }
 
@@ -80,7 +82,7 @@ public class Label {
         this.status = status;
     }
 
-    @Column(name = "used_Date")
+    @Column(name = "used_date")
     public Date getUsedDate() {
         return usedDate;
     }
