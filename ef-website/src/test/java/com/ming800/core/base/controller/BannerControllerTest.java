@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -66,9 +67,12 @@ public class BannerControllerTest {
     public void init() {
           logger.info("加载spring配置开始 ............");
 	      /* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); */
-        ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
+        /*ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
                 "src/main/webapp//WEB-INF/applicationContext-*.xml",
-                "src/main/webapp//WEB-INF/spring-servlet.xml"});
+                "src/main/webapp//WEB-INF/spring-servlet.xml"});*/
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{
+                "classpath*:applicationContext-*.xml",
+                "classpath*:spring-servlet.xml"});
          logger.info("加载spring配置结束.............");
         map = new ModelMap();
         request = new MockHttpServletRequest();
@@ -80,7 +84,7 @@ public class BannerControllerTest {
         documentController = (DocumentController)applicationContext.getBean("documentController");
     }
     @Test
-    public void testdemo1() {
+    public void demo1() {
 
         List<Banner> banners;
         XQuery xQuery = null;
@@ -105,14 +109,14 @@ public class BannerControllerTest {
     }
 
     @Test
-    public void testdemo2()throws  Exception{
+    public void demo2()throws  Exception{
 
         bannerController.getBannerByGroupId(request);
        /* Assert.assertNotNull(mv);
         Assert.assertEquals(response.getStatus(), 200);*/
     }
     @Test
-    public void testdemo3()throws  Exception{
+    public void demo3()throws  Exception{
 
         documentController.getDocByGroupId(request);
 
