@@ -1,10 +1,8 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.ming800.core.p.model.DocumentAttachment;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -16,7 +14,6 @@ public class TenantIntroduction {
     private Tenant tenant;
     private String type;
     private String content;
-    private List<DocumentAttachment> attachmentList;
 
 
     @Id
@@ -58,12 +55,4 @@ public class TenantIntroduction {
         this.content = content;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantIntroduction")
-    public List<DocumentAttachment> getAttachmentList() {
-        return attachmentList;
-    }
-
-    public void setAttachmentList(List<DocumentAttachment> attachmentList) {
-        this.attachmentList = attachmentList;
-    }
 }

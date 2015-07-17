@@ -1,6 +1,5 @@
 package com.ming800.core.p.model;
 
-import com.efeiyi.ec.tenant.model.TenantIntroduction;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,7 +14,6 @@ public class DocumentAttachment {
     private String fileType;
     private String path;        //地址
     private Document document;
-    private TenantIntroduction tenantIntroduction;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -74,13 +72,4 @@ public class DocumentAttachment {
         this.document = document;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_introduction_id")
-    public TenantIntroduction getTenantIntroduction() {
-        return tenantIntroduction;
-    }
-
-    public void setTenantIntroduction(TenantIntroduction tenantIntroduction) {
-        this.tenantIntroduction = tenantIntroduction;
-    }
 }
