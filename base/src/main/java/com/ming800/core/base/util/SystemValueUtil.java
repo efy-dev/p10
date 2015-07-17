@@ -259,7 +259,7 @@ public class SystemValueUtil {
         return String.valueOf(strArray);
     }
 
-    /*如果 license中包含limitSystem:true  或者  当前日期大于指定日期  死循环*/
+/*    *//*如果 license中包含limitSystem:true  或者  当前日期大于指定日期  死循环*//*
     public static void stopSystem(String license) {
 
         Boolean flag = true;
@@ -272,6 +272,6 @@ public class SystemValueUtil {
             System.exit(0);
 //            System.err.println("stop");
         }
-    }
+    }*/
 
 }
