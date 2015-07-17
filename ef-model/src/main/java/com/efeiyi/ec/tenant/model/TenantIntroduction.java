@@ -3,6 +3,7 @@ package com.efeiyi.ec.tenant.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -13,7 +14,8 @@ public class TenantIntroduction {
     private String id;
     private Tenant tenant;
     private String type;
-    private String content;
+    private String title;
+    private List<TenantAttachment> attachmentList;
 
 
     @Id
@@ -46,13 +48,21 @@ public class TenantIntroduction {
         this.type = type;
     }
 
-    @Column(name="content")
-    public String getContent() {
-        return content;
+    @Column(name="title")
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "introduction")
+    public List<TenantAttachment> getAttachmentList() {
+        return attachmentList;
+    }
+
+    public void setAttachmentList(List<TenantAttachment> attachmentList) {
+        this.attachmentList = attachmentList;
+    }
 }

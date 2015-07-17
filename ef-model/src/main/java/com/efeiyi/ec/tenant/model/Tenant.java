@@ -33,6 +33,7 @@ public class Tenant implements Serializable {
     private String sex; //性别
     private String birthday; //出生年月
     private String level; //等级
+    private String content; // 简介(长)
     private String presentAddress; //现居地
     private String representativeWorks; // 代表作品
     private String nativePlace; //籍贯
@@ -137,6 +138,15 @@ public class Tenant implements Serializable {
 
     public void setFavicon(String favicon) {
         this.favicon = favicon;
+    }
+
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Column(name = "sex")
