@@ -25,14 +25,14 @@
             </thead>
             <tbody>
             <tr>
-                <%--<td class="am-primary am-u-md-3">key</td>--%>
-                <%--<td class="am-u-md-3">value</td>--%>
+                <td class="am-primary am-u-md-3">key</td>
+                <td class="am-u-md-3">value</td>
                 <td class="am-primary am-u-md-3">key</td>
                 <td class="am-u-md-3">value</td>
             </tr>
             <tr>
-                <%--<td class="am-primary am-u-md-3">key</td>--%>
-                <%--<td class="am-u-md-3">value</td>--%>
+                <td class="am-primary am-u-md-3">key</td>
+                <td class="am-u-md-3">value</td>
                 <td class="am-primary am-u-md-3">key</td>
                 <td class="am-u-md-3">卡拉集散地反抗了的加速卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡</td>
             </tr>
