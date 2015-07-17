@@ -1,0 +1,89 @@
+<!ELEMENT module (entities, properties)>
+        <!ATTLIST module name>
+        <!ATTLIST module label>
+        <!ATTLIST module version>
+        <!ATTLIST module package>
+        <!ATTLIST module path>
+        <!ELEMENT properties (property)>
+        <!ELEMENT property (#PCDATA))>
+        <!ATTLIST property name>
+        <!ATTLIST property label>
+        <!ATTLIST property defaultValue>
+        <!ATTLIST property values>
+        <!ATTLIST property type>
+        <!ATTLIST property memo>
+
+        <!ELEMENT entities (entity)>
+        <!ELEMENT entity (fields, does)>
+        <!ATTLIST entity name>
+        <!ATTLIST entity label>
+        <!ATTLIST entity type>
+        <!ATTLIST entity basic>
+        <!ATTLIST entity others>
+        <!ATTLIST entity model>
+        <!ATTLIST entity reference>
+        <!ELEMENT fields (field)>
+        <!ELEMENT field (statusType, dictDefination)>
+        <!ATTLIST field name>
+        <!ATTLIST field label>
+        <!ATTLIST field defaultValue>
+        <!ATTLIST field inputType>
+        <!ATTLIST field key>
+        <!ATTLIST field dataType>
+        <!ATTLIST field gtype>
+        <!ATTLIST field gvalue>
+        <!ATTLIST field orderby>
+        <!ATTLIST field url>
+        <!ATTLIST field reference>
+
+        <!ELEMENT statusType (item)>
+        <!ATTLIST statusType fieldName>
+        <!ELEMENT item (#PCDATA)>
+        <!ATTLIST item value>
+        <!ATTLIST item label>
+        <!ELEMENT dictDefination (dictData)>
+        <!ATTLIST dictDefination sid>
+        <!ELEMENT dictData (#PCDATA)>
+        <!ATTLIST dictData value>
+
+        <!ELEMENT does (do)>
+        <!ELEMENT do (query, page)>
+        <!ATTLIST do name>
+        <!ATTLIST do label>
+        <!ATTLIST do type>
+        <!ATTLIST do execute>
+        <!ATTLIST do result>
+        <!ATTLIST do data>
+        <!ELEMENT query (condition, groupby)>
+        <!ATTLIST query name>
+        <!ATTLIST query label>
+        <!ATTLIST query type>
+        <!ATTLIST query orderBy>
+
+        <!ELEMENT groupby (#PCDATA)>
+        <!ATTLIST groupby name>
+        <!ATTLIST groupby key>
+        <!ATTLIST groupby gtype>
+        <!ATTLIST groupby extendName>
+
+        <!ELEMENT condition (#PCDATA)>
+        <!ATTLIST condition name>
+        <!ATTLIST condition label>
+        <!ATTLIST condition defaultValue>
+        <!ATTLIST condition inputType>
+        <!ATTLIST condition key>
+        <!ATTLIST condition dataType>
+        <!ATTLIST condition operation>
+        <!ELEMENT page (commands, fields)>
+        <!ATTLIST page name>
+        <!ATTLIST page type>
+        <!ATTLIST page total>
+        <!ELEMENT commands (command)>
+        <!ATTLIST commands type>
+        <!ELEMENT command (#PCDATA)>
+        <!ATTLIST command name>
+        <!ATTLIST command label>
+        <!ATTLIST command type>
+        <!ATTLIST command url>
+        <!ATTLIST command access>
+        <!ATTLIST command owner>

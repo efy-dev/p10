@@ -15,6 +15,7 @@
         <module>ef-system</module>
         <module>ef-model</module>
         <module>ef-personal</module>
+        <module>pal-system</module>
         <module>ef-tenant</module>
         <module>pal-model</module>
     </modules>

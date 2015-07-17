@@ -18,16 +18,16 @@
             </thead>
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">类型</td>
-                <td class="am-u-md-3">${object.type}</td>
-                <td class="am-primary am-u-md-3">简介</td>
-                <td class="am-u-md-3">Asdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff大苏打三大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</td>
+                <td class="am-primary am-u-md-3">名字</td>
+                <td class="am-u-md-3">${object.name}</td>
+                <td class="am-primary am-u-md-3">头衔</td>
+                <td class="am-u-md-3">${object.title}</td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">key</td>
-                <td class="am-u-md-3">value</td>
-                <td class="am-primary am-u-md-3">key</td>
-                <td class="am-u-md-3">卡拉集散地反抗了的加速卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡</td>
+                <td class="am-primary am-u-md-3">等级</td>
+                <td class="am-u-md-3">${object.level}</td>
+                <td class="am-primary am-u-md-3">简介</td>
+                <td class="am-u-md-3">${object.brief}</td>
             </tr>
             </tbody>
         </table>
