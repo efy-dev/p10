@@ -145,7 +145,7 @@ public class XdoDaoSupport implements XdoDao {
     @Override
     public int removeObject(String modelType, String id) {
 
-        String query = "update " + modelType + " s set s.theStatus = 0 where s.id =:id";
+        String query = "update " + modelType + " s set s.status = 0 where s.id =:id";
         return this.getSession().createQuery(query).setString("id", id).executeUpdate();
     }
 

@@ -34,11 +34,23 @@
                 <td class="am-primary am-u-md-3">key</td>
                 <td class="am-u-md-3">value</td>
                 <td class="am-primary am-u-md-3">key</td>
-                <td class="am-u-md-3">卡拉集散地反抗了的加速卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡</td>
+                <td class="am-u-md-3">
+                    卡拉集散地反抗了的加速卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<form action="/basic/xmm.do" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="qm" value="saveOrUpdateProduct">
+    <div class="am-form-group am-form-file">
+        <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        <input name="test" type="file" multiple>
+    </div>
+    <input type="submit" class="am-btm am-btn-default" value="提交">
+</form>
+
 </body>
 </html>
