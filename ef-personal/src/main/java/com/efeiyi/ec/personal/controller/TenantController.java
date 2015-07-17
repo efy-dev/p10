@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -32,8 +33,20 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/getTenant.do")
     public ModelAndView getTenant(String tenantId , ModelMap model){
+        LinkedHashMap queryParamMap = new LinkedHashMap();
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        String queryHql = "from TenantProduct p where p.tenant.id = :tenantId order by p.createDateTime desc";
+        queryParamMap.put("tenantId",tenantId);
+        List productList = baseManager.listObject(queryHql, queryParamMap);
+        List listProduct = new ArrayList();
+        for(int i = 0;i<productList.size();i++){
+            if (i>2){
+                break;
+            }
+            listProduct.add(productList.get(i));
+        }
         model.addAttribute("entity",tenant);
+        model.addAttribute("productList", listProduct);
         return new ModelAndView("/tenant/tenantView" , model);
     }
 
@@ -74,10 +87,16 @@ public class TenantController extends BaseController {
     @RequestMapping("/tenantIntroductionList.do")
     public ModelAndView listTenantIntroduction(String tenantId , ModelMap model){
         String queryHql = "from TenantIntroduction i where i.tenant.id = :tenantId";
+        String queryHql1 = "from TenantHonor h where h.tenant.id = :tenantId";
+        String queryHql2 = "from TenantWork t where t.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
         List list = baseManager.listObject(queryHql, queryParamMap);
+        List list1 = baseManager.listObject(queryHql1,queryParamMap);
+        List list2 = baseManager.listObject(queryHql2, queryParamMap);
         model.addAttribute("tenantIntroductionList",list);
+        model.addAttribute("tenantHonorList", list1);
+        model.addAttribute("tenantWorkList", list2);
         return new ModelAndView("/tenant/tenantIntroduction/tenantIntroductionList",model);
     }
 

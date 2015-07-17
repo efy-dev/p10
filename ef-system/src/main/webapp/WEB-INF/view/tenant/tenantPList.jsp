@@ -18,21 +18,6 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-
-<%--<table>--%>
-    <%--<tr>--%>
-        <%--<td>传承人id</td>--%>
-        <%--<td>传承人名称</td>--%>
-    <%--</tr>--%>
-
-    <%--<c:forEach items="${requestScope.pageInfo.list}" var="product">--%>
-        <%--<tr>--%>
-            <%--<td>${product.id}</td>--%>
-            <%--<td>${product.name}</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</table>--%>
-
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12">
