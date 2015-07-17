@@ -1,6 +1,6 @@
 /*! Amaze UI v2.4.0 | by Amaze UI Team | (c) 2015 AllMobilize, Inc. | Licensed under MIT | 2015-06-01T09:54:08+0800 */
 /* ==========================================================================
-   Component: Base
+   Component: BaseUserUtil
  ============================================================================ */
 /**
  * Fix the flawed CSS box model - Yes, IE6's box model is better
@@ -377,7 +377,7 @@ td,
 th {
   padding: 0;
 }
-/* AMUI Base
+/* AMUI BaseUserUtil
    ========================================================================== */
 /**
  * `font-size` is set in `html` element to support the `rem` unit for font-sizes

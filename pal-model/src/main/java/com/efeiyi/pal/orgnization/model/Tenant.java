@@ -1,5 +1,6 @@
 package com.efeiyi.pal.orgnization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,9 +15,8 @@ public class Tenant {
 
     private String id;
     private String name;
-    private String province;
-    private String city;
-    private String address;
+    private AddressProvince province;
+    private AddressDistrict address;
     private String type;
 
     @Id
@@ -39,30 +39,25 @@ public class Tenant {
         this.name = name;
     }
 
-    @Column(name = "province")
-    public String getProvince() {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id")
+    public AddressProvince getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(AddressProvince province) {
         this.province = province;
     }
 
-    @Column(name = "city")
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Column(name = "address")
-    public String getAddress() {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "district_id")
+    public AddressDistrict getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(AddressDistrict address) {
         this.address = address;
     }
 

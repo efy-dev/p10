@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="purchase" label="purchase" version="" package="com.efeiyi.ec.purchase" path="">
+
+    <entities>
+        <entity name="cart" label="cart"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.Cart">
+            <does>
+                <do name="plistCart" access="" label="cart列表"
+                    result="/cart/cartPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeCart" label="删除cart" access="" result="json"/>
+                <do name="formCart" label="保存cart" access="" result="/cart/cartForm"></do>
+                <do name="saveOrUpdateCart" label="保存cart" access="" result="/cart/cartSaveSuccess"></do>
+                <do name="listCart" label="cart列表" access="" result="/cart/cartList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="cartProduct" label="cartProduct"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.CartProduct">
+            <does>
+                <do name="plistCartProduct" access="" label="cartProduct列表"
+                    result="/cartProduct/cartProductPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removeCartProduct" label="删除cartProduct" access="" result="json"/>
+                <do name="formCartProduct" label="保存cartProduct" access="" result="/cartProduct/cartProductForm"></do>
+                <do name="saveOrUpdateCartProduct" label="保存cartProduct" access="" result="/cartProduct/cartProductSaveSuccess"></do>
+                <do name="listCartProduct" label="cartProduct列表" access="" result="/cartProduct/cartProductList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="purchaseOrder" label="purchaseOrder"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrder">
+            <does>
+                <do name="plistPurchaseOrder" access="" label="购买订单"
+                    result="/purchaseOrder/purchaseOrderPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"></condition>
+                    </query>
+                </do>
+                <do name="viewPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderView"></do>
+                <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
+                <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"></do>
+                <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderSaveSuccess"></do>
+                <do name="listPurchaseOrder" label="购买订单列表" access="" result="/purchaseOrder/purchaseOrderList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="purchaseOrderDelivery" label="purchaseOrderDelivery"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderDelivery">
+            <does>
+                <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
+                    result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removePurchaseOrderDelivery" label="删除purchaseOrderDelivery" access="" result="json"/>
+                <do name="formPurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"></do>
+                <do name="saveOrUpdatePurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"></do>
+                <do name="listPurchaseOrderDelivery" label="purchaseOrderDelivery列表" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="purchaseOrderPayment" label="purchaseOrderPayment"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderPayment">
+            <does>
+                <do name="plistPurchaseOrderPayment" access="" label="购买订单"
+                    result="/purchaseOrderPayment/purchaseOrderPaymentPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removePurchaseOrderPayment" label="删除purchaseOrderPayment" access="" result="json"/>
+                <do name="formPurchaseOrderPayment" label="保存purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentForm"></do>
+                <do name="saveOrUpdatePurchaseOrderPayment" label="保存purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"></do>
+                <do name="listPurchaseOrderPayment" label="购买purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
+            <does>
+                <do name="plistPurchaseOrderProduct" access="" label="购买订单"
+                    result="/purchaseOrderProduct/purchaseOrderProductPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                    </query>
+                </do>
+
+                <do name="removePurchaseOrderProduct" label="删除购买订单" access="" result="json"/>
+                <do name="formPurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductForm"></do>
+                <do name="saveOrUpdatePurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductSaveSuccess"></do>
+                <do name="listPurchaseOrderProduct" label="购买订单列表" access="" result="/purchaseOrderProduct/purchaseOrderProductList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+    </entities>
+</module>

@@ -16,6 +16,7 @@
         <module>ef-model</module>
         <module>ef-personal</module>
         <module>pal-system</module>
+        <module>pal-model</module>
     </modules>
 
     <repositories>
