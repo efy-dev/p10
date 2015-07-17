@@ -4,7 +4,7 @@
          xmlns:b="http://www.springframework.org/schema/beans"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- 配置不过滤的资源（静态资源及登录相关） -->
     <http pattern="/**/*.css" security="none"/>
@@ -13,15 +13,36 @@
     <http pattern="/**/*.gif" security="none"/>
     <http pattern="/**/*.png" security="none"/>
     <http pattern="/js/*.js" security="none"/>
-    <http auto-config="true">
-        <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->
-        <!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
+    <!--<http auto-config="true">-->
+    <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->
+    <!--&lt;!&ndash;<intercept-url pattern="/**" access="ROLE_ADMIN"/>&ndash;&gt;-->
+    <!--</http>-->
+
+
+    <http realm="Contacts Realm" use-expressions="true">
+        <csrf disabled="true"/>
+        <!--<intercept-url pattern="/**" access="isAuthenticated()"/>-->
+        <!--<anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>-->
+        <form-login login-page="/pc/login.do" login-processing-url="/j_spring_security_check"
+                    authentication-success-handler-ref="loginSuccessHandler"
+                    authentication-failure-handler-ref="loginFailureHandler"/>
+        <logout invalidate-session="true" logout-url="/j_spring_security_logout"
+                success-handler-ref="loginOutSuccessHandler"/>
+
     </http>
+    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
+
+    <!--<authentication-manager>-->
+    <!--<authentication-provider>-->
+    <!--<user-service>-->
+    <!--<user name="admin" password="admin" authorities="ROLE_ADMIN"/>-->
+    <!--</user-service>-->
+    <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-            </user-service>
+        <authentication-provider user-service-ref="userManager">
+            <password-encoder hash="sha"/>
         </authentication-provider>
     </authentication-manager>
 </b:beans>

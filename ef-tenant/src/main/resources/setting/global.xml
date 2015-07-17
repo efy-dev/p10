@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<global title="明日客户管理系统" index="/index" version="commonMenu"
+        initializeClass="com.ming800.xedu.init.service.impl.InitializeManagerImpl">
+    <sms provider="" username="" password="" url=""/>
+    <call recordUrl="http://127.0.0.1:8080/edu/call/saveCallRecord.do" popUrl="/home">
+    </call>
+</global>

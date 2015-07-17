@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenu id="tenantMenu">
+    <jnode id="" url="" text_zh_CN="">
+        <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default" state="closed" extend="" access="" text_zh_CN="订单管理">
+                <match url="plistPurchaseOrder_default"/>
+            </jnode>
+            <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="评价管理">
+                <match url=""/>
+            </jnode>
+        </jnode>
+        <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->
+            <jnode id="" url="/basic/xm.do?qm=plistProduct_default" state=""  extend="" access="" text_zh_CN="商品列表">
+                <match url="plistProduct_default"/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="商品模板">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="分类管理">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="橱窗推荐">
+                <match url=""/>
+            </jnode>
+        </jnode>
+       <!-- <jnode id="storeManager" url="" text_zh_CN="店铺管理">
+            <jnode id="" url="" state=""  extend="" access="" text_zh_CN="信息统计">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="结算系统">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="角色管理">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url="" state="" access="" text_zh_CN="添加店员">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url=""  state="" access="" text_zh_CN="店铺信息">
+                <match url=""/>
+            </jnode>
+        </jnode>
+        -->
+        <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
+            <jnode id="" url="/account/accountChange.do?qm=accountChange_default" state="" extend="" access="" text_zh_CN="修改密码">
+                <match url=""/>
+            </jnode>
+            <jnode id="" url="/basic/xm.do?qm=formIndex" state="" extend="" access="" text_zh_CN="安全退出">
+                <match url="viewIndex_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+</jmenu>
+
+
+
+
+
+

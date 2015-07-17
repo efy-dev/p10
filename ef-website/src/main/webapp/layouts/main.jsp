@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -25,7 +24,7 @@
     <link rel="stylesheet" href="../scripts/assets/css/admin.css">
     <script src="<c:url value='../scripts/assets/js/jquery.min.js'/>"></script>
     <script src="<c:url value='../scripts/assets/js/amazeui.min.js'/>"></script>
-    <sitemesh:head/>
+    <sitemesh:write property='head'/>
     <style>
         .efy-active {
             background-color: #9a9a9a;
@@ -33,13 +32,13 @@
     </style>
 </head>
 <body>
-<jsp:include flush="true" page="/getMenu.do?jmenuId=webMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}
-"/>
+<%--<jsp:include flush="true" page="/getMenu.do?jmenuId=webMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}--%>
+<%--"/>--%>
 <div class="am-cf admin-main">
 
     <%--<jsp:include flush="true" page="/getMenu.do?jmenuId=webMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}"/>--%>
     <div class="admin-content">
-        <sitemesh:body/>
+        <sitemesh:write property='body'/>
     </div>
 
 </div>

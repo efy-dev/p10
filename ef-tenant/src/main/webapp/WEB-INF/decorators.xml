@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 设置用于包装的模板所在的位置 -->
+<decorators defaultdir="/layouts/">
+    <!-- decorator实例 -->
+    <!--decMobile.jsp为 名为“mobile”的decorator 所使用的模板页面-->
+    <decorator name="main" page="main.jsp">
+        <pattern>/index/</pattern>
+    </decorator>
+
+    <excludes>
+        <pattern>/403*</pattern>
+        <pattern>/404*</pattern>
+        <pattern>/500*</pattern>
+    </excludes>
+</decorators>
+
