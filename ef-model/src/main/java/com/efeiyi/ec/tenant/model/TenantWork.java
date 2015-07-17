@@ -1,21 +1,35 @@
 package com.efeiyi.ec.tenant.model;
 
+import com.efeiyi.ec.product.model.ProductDescription;
+import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.project.model.Category;
+import com.efeiyi.ec.project.model.Project;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/26.
  */
 @Entity
-@Table(name="tenant_work")
+@Table(name = "product")
 public class TenantWork {
     private String id;
     private String name;
-    private Tenant tenant;
+    private String serial;
     private String picture_url;
+    private Tenant tenant;
+    private Category category;
+    private BigDecimal price;
+    private List<ProductPicture> productPictureList;
+    private ProductDescription productDescription;
+    private String status;
+    private Project project;
     private Date createDateTime;
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -28,7 +42,7 @@ public class TenantWork {
         this.id = id;
     }
 
-    @Column(name="name")
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -37,8 +51,17 @@ public class TenantWork {
         this.name = name;
     }
 
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="tenant_id")
+    @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
     }
@@ -47,13 +70,71 @@ public class TenantWork {
         this.tenant = tenant;
     }
 
-    @Column(name="picture_url")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Column(name = "picture_url")
     public String getPicture_url() {
         return picture_url;
     }
 
     public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
+    }
+
+    @Column(name = "price")
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public List<ProductPicture> getProductPictureList() {
+        return productPictureList;
+    }
+
+
+    public void setProductPictureList(List<ProductPicture> productPictureList) {
+        this.productPictureList = productPictureList;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_description_id")
+    public ProductDescription getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(ProductDescription productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Column(name="create_datetime")

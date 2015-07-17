@@ -53,8 +53,8 @@
                 <match url="removeTenantIntroduction"/>
                 <match url="formTenantIntroduction"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistTenantProduct_default" id="tenantProductManager"  access="admin,manager" text_zh_CN="传承人作品管理">
-                <match url="plistTenantProduct_default"/>
+            <jnode url="/basic/xm.do?qm=plistTenantWork_default" id="tenantWorkManager"  access="admin,manager" text_zh_CN="传承人作品管理">
+                <match url="plistTenantWork_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="tenantNewsManager"  access="admin,manager" text_zh_CN="传承人资讯管理">
                 <match url="plistTenantNews_default"/>
