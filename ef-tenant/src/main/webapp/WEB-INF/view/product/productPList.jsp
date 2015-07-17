@@ -24,7 +24,6 @@
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
                 <td>操作</td>
-                <td>产品id</td>
                 <td>产品名称</td>
                 <td>图片地址</td>
                 <td>价格</td>
@@ -33,20 +32,19 @@
 
           <c:forEach items="${requestScope.pageInfo.list}" var="product">
                 <tr style="text-align: center">
-                    <td>
-                        <div class="am-dropdown" data-am-dropdown>
-                            <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                            <ul class="am-dropdown-content">
-                                <li><a href="#">1. 详情</a></li>
-                                <li><a href="#">2. 删除</a></li>
-                            </ul>
+                    <td width="20%">
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
+                                <button style="margin-left: 20%;" onclick="window.location.href='/basic/xm.do?qm=viewProduct&id=${product.id}'"  class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-book"></span> 详情</button>
+                                <button onclick="window.location.href='/basic/xm.do?qm=formProduct&id=${product.id}'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                <button onclick="window.location.href='/basic/xm.do?qm=removeProduct&id=${product.id}'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                            </div>
                         </div>
                     </td>
-                    <td>${product.id}</td>
-                    <td>${product.name}</td>
-                    <td>${product.picture_url}</td>
-                    <td>${product.price}</td>
-                    <td>${product.serial}</td>
+                    <td width="20%">${product.name}</td>
+                    <td width="20%">${product.picture_url}</td>
+                    <td width="20%">${product.price}</td>
+                    <td width="20%">${product.serial}</td>
                 </tr>
             </c:forEach>
         </table>

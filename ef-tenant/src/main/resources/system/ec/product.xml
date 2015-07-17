@@ -22,6 +22,7 @@
                 </do>
                 <do name="formIndex" access="" label="安全退出" result="/index">
                 </do>
+                <do name="viewProduct" label="商品详情" access="" result="/product/productView" />
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" />
                 <do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess" />

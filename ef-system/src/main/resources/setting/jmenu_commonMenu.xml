@@ -85,6 +85,7 @@
             <match url="plistProjectNews_default"/>
         </jnode>
     </jnode>
+
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
         <jnode url="" id="userManager"  access="admin" state="closed" text_zh_CN="用户管理">
             <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户列表">

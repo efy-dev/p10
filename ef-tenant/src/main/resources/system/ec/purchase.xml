@@ -59,7 +59,7 @@
                         <condition name="id" defaultValue="0" operation="ne"></condition>
                     </query>
                 </do>
-                <do name="viewPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderView"></do>
+                <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView"></do>
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
                 <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"></do>
                 <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderSaveSuccess"></do>
