@@ -27,7 +27,7 @@ public class ProductHandler implements MultipartHandler {
 
         modelMap.put("object",object);
 
-        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("test"), "ef-video", "testfile");
+        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("test"), "tenant", "news/123/tstfile");
 
         return modelMap;
 
