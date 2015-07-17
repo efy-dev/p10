@@ -18,8 +18,8 @@
             </jnode>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
-            <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表">
-                <match url="plistTenant_default"/>
+            <jnode url="/basic/xm.do?qm=plistBusiness_default"  access="admin,manager" text_zh_CN="商家列表">
+                <match url="plistBusiness_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default"  access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="plistProfessional_default"/>
@@ -42,6 +42,12 @@
 
     <jnode id="ttManager" url="/main.do?jnodeId=ttManager" text_zh_CN="传承人网站管理"><!--系统管理-->
         <jnode url="" id="tenantManager" access="admin,manager" state="closed"  text_zh_CN="传承人管理">
+            <jnode url="/basic/xm.do?qm=plistTenant_default" id="tenantList" access="admin" text_zh_CN="传承人列表">
+                <match url="plistTenant_default"/>
+                <match url="formTenant"/>
+                <match url="removeTenant"/>
+                <match url="viewTenant"/>
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">
                 <match url="plistTenantIntroduction_default"/>
                 <match url="removeTenantIntroduction"/>
@@ -60,9 +66,13 @@
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
             <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="传承人轮播图">
                 <match url="plistBanner_tenant"/>
+                <match url="formBanner"/>
+                <match url="removeBanner"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistDocument_tenant"  access="admin,manager" text_zh_CN="传承人网站文档">
                 <match url="plistDocument_tenant"/>
+                <match url="formDocument_tenant"/>
+                <match url="removeDocument_tenant"/>
             </jnode>
         </jnode>
     </jnode>

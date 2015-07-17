@@ -32,9 +32,8 @@
         <tr style="text-align: center">
             <td width="20%">
                 <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs" >
-                        <button onclick="window.location.href='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'"  class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-book"></span> 详情</button>
-                        <button onclick="window.location.href='/basic/xm.do?qm=formPurchaseOrder&id=${purchaseOrder.id}'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
+                        <button style="margin-left: 30%;" onclick="window.location.href='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'"  class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-book"></span> 详情</button>
                         <button onclick="window.location.href='/basic/xm.do?qm=removePurchaseOrder&id=${purchaseOrder.id}'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                     </div>
                 </div>

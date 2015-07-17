@@ -12,34 +12,49 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加商品</strong> / <small>Add Product</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单详情</strong> / <small>Order Details</small></div>
 </div>
 <hr/>
 
 <div class="am-g">
-    <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateProduct">
-      <div class="am-form-group">
-        <label name="name" for="user-name" class="am-u-sm-3 am-form-label">商品名称</label>
-        <div class="am-u-sm-9">
-          <input type="text" name="name" id="user-name" placeholder="商品名称">
-          <small>必填项*</small>
-        </div>
+  <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
+    <input type="hidden" name="qm" value="">
+    <div class="am-form-group">
+      <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label">传承人</label>
+      <div class="am-u-sm-9">
+        <input type="text" name="tenantName" id="tenantName" placeholder="传承人" value="${object.tenant.fullName}" readonly="readonly">
+        <!-- <small>必填项*</small>-->
       </div>
-      <div class="am-form-group">
-        <label name="price" for="price" class="am-u-sm-3 am-form-label">商品价格</label>
-        <div class="am-u-sm-9">
-          <input type="text" name="price" id="price" placeholder="商品价格">
-          <small>必填项*</small>
-        </div>
+    </div>
+    <div class="am-form-group">
+      <label name="name" for="name" class="am-u-sm-3 am-form-label">商品名称</label>
+      <div class="am-u-sm-9">
+        <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}" readonly="readonly">
+        <!--<small>必填项*</small>-->
       </div>
-      <div class="am-form-group">
-        <div class="am-u-sm-9 am-u-sm-push-3">
-          <input type="submit" class="am-btn am-btn-primary" value="保存"/>
-        </div>
+    </div>
+    <div class="am-form-group">
+      <label name="price" for="price" class="am-u-sm-3 am-form-label">价格</label>
+      <div class="am-u-sm-9">
+        <input type="text" name="price" id="price" placeholder="价格" value="${object.price}" readonly="readonly">
+        <!-- <small>必填项*</small>-->
       </div>
-    </form>
- </div>
+    </div>
+    <div class="am-form-group">
+      <label name="createDate" for="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
+      <div class="am-u-sm-9">
+        <input type="text" name="createDate" id="createDate" placeholder="创建时间" value="${object.createDateTime}" readonly="readonly">
+        <!-- <small>必填项*</small>-->
+      </div>
+    </div>
+
+    <div class="am-form-group">
+      <div class="am-u-sm-9 am-u-sm-push-3">
+        <input type="button" onclick="window.location.href='/basic/xm.do?qm=plistProduct_default'" class="am-btn am-btn-primary" value="返回"/>
+      </div>
+    </div>
+  </form>
+</div>
 <!-- content end -->
 <hr/>
 
