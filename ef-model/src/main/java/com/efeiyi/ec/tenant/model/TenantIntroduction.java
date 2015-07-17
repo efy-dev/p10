@@ -26,7 +26,7 @@ public class TenantIntroduction {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
