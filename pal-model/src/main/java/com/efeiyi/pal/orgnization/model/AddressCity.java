@@ -6,15 +6,16 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2014/12/11.
+ * Created by Administrator on 2015/7/16.
  */
+
 @Entity
 @Table(name = "organization_address_city")
 public class AddressCity implements Serializable {
+
     private String id;
     private String name;
     private AddressProvince addressProvince;
-
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -45,4 +46,5 @@ public class AddressCity implements Serializable {
     public void setAddressProvince(AddressProvince addressProvince) {
         this.addressProvince = addressProvince;
     }
+
 }

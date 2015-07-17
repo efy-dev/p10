@@ -6,12 +6,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * User: Kyll
- * Time: 2008-7-3 15:27:28
+ * Created by Administrator on 2015/7/16.
  */
+
 @Entity
 @Table(name = "organization_address_district")
 public class AddressDistrict implements Serializable {
+
     private String id;
     private String name;
     private AddressCity addressCity;
@@ -46,4 +47,5 @@ public class AddressDistrict implements Serializable {
     public void setAddressCity(AddressCity addressCity) {
         this.addressCity = addressCity;
     }
+
 }
