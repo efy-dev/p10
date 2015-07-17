@@ -35,7 +35,6 @@ public class Tenant implements Serializable {
     private String level; //等级
     private String content; // 简介(长)
     private String presentAddress; //现居地
-    private TenantWork tenantWork; // 代表作品
     private AddressProvince originProvince; //籍贯（省）
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private Date createDateTime;
@@ -159,16 +158,6 @@ public class Tenant implements Serializable {
 
     public void setPresentAddress(String presentAddress) {
         this.presentAddress = presentAddress;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="tenant_work_id")
-    public TenantWork getTenantWork() {
-        return tenantWork;
-    }
-
-    public void setTenantWork(TenantWork tenantWork) {
-        this.tenantWork = tenantWork;
     }
 
     @Column(name="origin_province_id")
