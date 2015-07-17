@@ -18,6 +18,7 @@
         <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="news" access="admin,manager" state="closed"  text_zh_CN="资讯管理"/>
         <jnode url="" id="" access="admin,manager" state="closed"  text_zh_CN="文档管理"/>
     </jnode>
+
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
         <jnode url="/basic/xm.do?qm=plistBigUser_default" id="userManager" access="admin,manager" state="closed"  text_zh_CN="用户管理"/>
         <jnode url="" id="logManager" access="admin,manager" state="closed"  text_zh_CN="日志记录"/>

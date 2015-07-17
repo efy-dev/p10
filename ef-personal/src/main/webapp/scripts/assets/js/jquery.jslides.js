@@ -130,3 +130,12 @@ function gotoTop(acceleration,stime) {
        window.setTimeout(run, stime);
    }
 }
+/**文本字数限制**/
+function text()
+{
+	document.getElementById('txta1').onkeydown = function()
+{   
+    if(this.value.length >= 10)
+      event.returnValue = false;
+}
+}

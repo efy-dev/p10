@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.1.xsd ">
+
+    <!--<task:scheduled-tasks>-->
+    <!--<task:scheduled ref="smsManagerImpl" method="scheduleCheckSms" cron="0 0/10 * * * *"/>&lt;!&ndash;每隔十分钟执行一次&ndash;&gt;-->
+    <!--</task:scheduled-tasks>-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ming800"/>
+    <context:component-scan base-package="com.efeiyi.ec"/>
+
+    <!-- 定义切面 -->
+    <aop:config>
+        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))"/>
+        <!--<aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.efeiyi.ec.website.organization.service.*.*(..))"/>-->
+    </aop:config>
+
+    <tx:annotation-driven/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 定义事务 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
+            <tx:method name="list*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
+            <tx:method name="form*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- jmenuTree -->
+
+    <bean id="jmenuManagerImpl" class="com.ming800.core.p.service.impl.JmenuManagerImpl" init-method="initMenu"
+          scope="singleton"/>
+
+    <!--<bean id="cityShotTypeManagerImpl" class="com.yuepaila.basic.service.impl.CityManagerImpl" init-method="initCities" scope="singleton"/>-->
+<!--    <bean id="versionManagerImpl" class="com.ming800.core.p.service.impl.VersionManagerImpl" init-method="loadVersion"
+          scope="singleton"/>-->
+<!--    <bean id="menuManagerImpl" class="com.yuepaila.basic.service.impl.MenuManagerImpl" init-method="initMenu"
+          scope="singleton"/>-->
+
+    <!-- 获取spring上下文applicationContext  用于java读取国际化文件等 -->
+    <bean id="applicationContextUtil" class="com.ming800.core.util.ApplicationContextUtil" scope="singleton"/>
+
+<!--    <bean id="typeXmlManagerImpl" class="com.ming800.core.does.service.impl.TypeXmlManagerImpl"
+          init-method="readXmlFiles" scope="singleton"/>-->
+    <bean id="moduleManagerImpl" class="com.ming800.core.does.service.impl.ModuleManagerImpl" init-method="readXmlFiles"
+          scope="singleton"/>
+<!--    <bean id="checkTaskManagerImpl" class="com.ming800.core.develop.service.impl.CheckTaskManagerImpl"
+          init-method="initCheckTask" scope="singleton"/>
+
+
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">yes</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.image.width">125</prop>
+                        <prop key="kaptcha.image.height">45</prop>
+                        <prop key="kaptcha.textproducer.font.size">45</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>-->
+
+</beans>
