@@ -1,4 +1,4 @@
-package com.ming800.core.p.model;
+package com.ming800.core.develop.model;
 
 /**
  * Created with IntelliJ IDEA.
