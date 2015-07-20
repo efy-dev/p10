@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.dao;
+package com.efeiyi.ec.personal.tenant.dao;
 
 
 import com.efeiyi.ec.organization.model.BigUser;

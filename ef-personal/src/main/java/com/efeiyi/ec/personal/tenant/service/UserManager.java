@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.service;
+package com.efeiyi.ec.personal.tenant.service;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.ming800.core.taglib.PageEntity;
