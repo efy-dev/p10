@@ -35,10 +35,10 @@
     <h1><a href="#"><img src="<c:url value="/scripts/assets/images/logo2.gif"/>"></a></h1>
     <ul class="nav-centent">
         <li><a href="${pageContext.request.contextPath}/tenant/getTenant.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/tenantIntroductionList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/tenantProductList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/tenantInfoList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenant/getTenantWorkShop.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/tenantIntroductionList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantProduct/tenantProductList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantInfo/tenantInfoList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWork/getTenantWorkShop.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
     </ul>
 </div>
 <sitemesh:write property='body'/>
