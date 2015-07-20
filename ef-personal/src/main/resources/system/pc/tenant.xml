@@ -20,7 +20,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="TenantIntroduction" label="商品列表"  model="com.efeiyi.ec.tenant.model.TenantIntroduction">
+        <entity name="TenantIntroduction" label="简介列表"  model="com.efeiyi.ec.tenant.model.TenantIntroduction">
             <does>
                 <do name="listTenantIntroduction" access="" label="简介列表">
                     <query name="default" label="默认" type="auto">
@@ -29,7 +29,16 @@
                 </do>
             </does>
         </entity>
-        <entity name="TenantAttachment" label="商品列表"  model="com.efeiyi.ec.tenant.model.TenantAttachment">
+        <entity name="TenantAttachment" label="附件列表"  model="com.efeiyi.ec.tenant.model.TenantAttachment">
+            <does>
+                <do name="listAttachment" access="" label="附件列表">
+                    <query name="default" label="默认" type="auto" orderBy="">
+                        <condition name="introduction.tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="ProductDescription" label="作品信息"  model="com.efeiyi.ec.product.model.ProductDescription">
             <does>
                 <do name="listAttachment" access="" label="附件列表">
                     <query name="default" label="默认" type="auto" orderBy="">
