@@ -19,7 +19,7 @@
 <body>
 
      <div style="text-align: left" >
-        <input onclick="window.location.href='/basic/xm.do?qm=formProduct'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="添加商品" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
      </div>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
@@ -35,9 +35,9 @@
                     <td width="20%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
-                                <button style="margin-left: 20%;" onclick="window.location.href='/basic/xm.do?qm=viewProduct&id=${product.id}'"  class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-book"></span> 详情</button>
-                                <button onclick="window.location.href='/basic/xm.do?qm=formProduct&id=${product.id}'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                <button onclick="window.location.href='/basic/xm.do?qm=removeProduct&id=${product.id}'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                <button style="margin-left: 20%;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewProduct&id=${product.id}"/>'"  class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-book"></span> 详情</button>
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
                     </td>
