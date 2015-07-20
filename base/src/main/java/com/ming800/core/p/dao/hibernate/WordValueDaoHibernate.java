@@ -1,5 +1,6 @@
 package com.ming800.core.p.dao.hibernate;
 
+import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
 import com.ming800.core.p.dao.DictionaryDao;
 import com.ming800.core.p.dao.WordValueDao;
@@ -25,7 +26,7 @@ import java.util.Objects;
 public class WordValueDaoHibernate extends BaseDaoSupport<WordValue> implements WordValueDao {
 
     @Autowired
-    private  WordValueDao wordValueDao;
+    private XdoDao xdoDao;
 
     @Override
     public  List listWordValueByGroup(WordValue wordValue){
@@ -35,7 +36,7 @@ public class WordValueDaoHibernate extends BaseDaoSupport<WordValue> implements 
              hql += " and d.group = ?";
             valueList.add(wordValue.getGroup());
         }
-          return wordValueDao.getObjectList(hql,valueList);
+          return xdoDao.getObjectList(hql,valueList);
     }
 
    /* @Override
