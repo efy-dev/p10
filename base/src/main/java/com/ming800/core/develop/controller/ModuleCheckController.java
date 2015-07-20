@@ -1,8 +1,8 @@
 package com.ming800.core.develop.controller;
 
-import com.ming800.core.develop.model.CheckFieldBean;
 import com.ming800.core.does.model.*;
 //import com.ming800.core.does.service.TypeXmlManager;
+import com.ming800.core.p.model.*;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.base.util.ReflectUtil;
 import org.springframework.beans.factory.annotation.Autowired;

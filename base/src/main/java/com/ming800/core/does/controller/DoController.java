@@ -40,7 +40,7 @@ public class DoController {
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         modelMap.put("tabTitle", tempDoQuery.getLabel());
 
-        return new ModelAndView("/jmenu/tabDiv");
+        return new ModelAndView("/core/base/tabDiv");
     }
 
     /*jsp页面根据配置文件basic_do.xml生成  tabs*/

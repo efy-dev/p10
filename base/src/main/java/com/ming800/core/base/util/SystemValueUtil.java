@@ -38,25 +38,15 @@ public class SystemValueUtil {
             defaultValue = defaultValue.substring(defaultValue.indexOf("${") + 2, defaultValue.indexOf("}"));
             switch (defaultValue) {
                 //@TODO 这里注释掉那么以后在配置文件中将不能使用MyUser的默认值了
-                case "MY_USER":
+/*                case "MY_USER":
                     if (type.equals("id")) {
-                        resultValue = BaseUserUtil.getMyUser().getId();
+                        resultValue = AuthorizationUtil.getUser().getId();
                     } else if (type.equals("name")) {
-                        resultValue = BaseUserUtil.getMyUser().getId() + "_" + BaseUserUtil.getMyUser().getName();
+                        resultValue = AuthorizationUtil.getUser().getId() + "_" + AuthorizationUtil.getUser().getName();
                     } else {
-                        resultValue = BaseUserUtil.getMyUser();
+                        resultValue = AuthorizationUtil.getUser();
                     }
-                    break;
-
-                case "MY_TENANT":
-                    if (type.equals("id")) {
-                        resultValue = BaseUserUtil.getMyTenant().getId();
-                    } else if (type.equals("name")) {
-                        resultValue = BaseUserUtil.getMyTenant().getId() + "_" + BaseUserUtil.getMyTenant().getName();
-                    } else {
-                        resultValue = BaseUserUtil.getMyTenant();
-                    }
-                    break;
+                    break;*/
 
              /*   case "MY_ROLE":
                     if (type.equals("id")) {
@@ -269,7 +259,7 @@ public class SystemValueUtil {
         return String.valueOf(strArray);
     }
 
-/*    *//*如果 license中包含limitSystem:true  或者  当前日期大于指定日期  死循环*//*
+    /*如果 license中包含limitSystem:true  或者  当前日期大于指定日期  死循环*/
     public static void stopSystem(String license) {
 
         Boolean flag = true;
@@ -282,6 +272,6 @@ public class SystemValueUtil {
             System.exit(0);
 //            System.err.println("stop");
         }
-    }*/
+    }
 
 }

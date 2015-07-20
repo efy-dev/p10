@@ -1,4 +1,4 @@
-﻿/**
+﻿﻿/**
  * jQuery jslides 1.1.0
  *
  * http://www.cactussoft.cn

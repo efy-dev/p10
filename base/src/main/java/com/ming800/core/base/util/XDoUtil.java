@@ -408,11 +408,8 @@ public class XDoUtil {
 
         return queryHandler.handle(xQuery);
     }
-/*
 
-    */
-/*list页面    生成operation   操作链接*//*
-
+    /*list页面    生成operation   操作链接*/
     public static StringBuilder generateOperation(Object object, Page tempPage) throws Exception {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\"操作\":\"");
@@ -441,7 +438,6 @@ public class XDoUtil {
         stringBuilder.append("\",");
         return stringBuilder;
     }
-*/
 
     /*转化url中${}中包含的对象属性*/
     public static String convertPageUrl(String pageUrl, Object object) throws Exception {

@@ -135,9 +135,11 @@ public class XdoController {
             // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
 
 
+/*
             if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
             }
+*/
 
 
         } else if (qm.startsWith("list")) {           /*不分页*/
@@ -153,9 +155,9 @@ public class XdoController {
             modelMap.put("objectList", xdoManager.list(tempDo, tempDoQuery, conditions));
             resultPage = tempDo.getResult();
 
-            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+/*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-            }
+            }*/
 
             //String export = request.getParameter("resultPage");
            /* if (export != null && export.equals("xexcel")) {
@@ -208,41 +210,41 @@ public class XdoController {
             resultPage = XDoUtil.convertPageUrl(resultPage, modelMap.get("object"));
             // }
 
-            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+/*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-            }
+            }*/
 
         } else if (qm.startsWith("remove")) {  //假删
             String id = request.getParameter("id");
             Do tempDo = doManager.getDoByQueryModel(qm);
             modelMap.put("tempDo", tempDo);
-            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+/*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-            }
+            }*/
             resultPage = xdoManager.removeObject(tempDo, id);
         } else if (qm.startsWith("delete")) {  //真删
             String id = request.getParameter("id");
             Do tempDo = doManager.getDoByQueryModel(qm);
             modelMap.put("tempDo", tempDo);
-            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+/*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-            }
+            }*/
             resultPage = xdoManager.deleteObject(tempDo, id);
         } else if (qm.startsWith("saveOrUpdate")) {
             Do tempDo = doManager.getDoByQueryModel(qm);
 
             tempDo.getPageList();
             Object object = null;
-            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+/*            if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
                 modelMap.put("tempDo", tempDo);
                 modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
 
                 object = modelMap.get("object");
                 baseManager.saveOrUpdate(object.getClass().getName(), object);
-            } else {
-                object = xdoManager.saveOrUpdateObject(tempDo, request);
-                modelMap.put("object", object);
-            }
+            } else {*/
+            object = xdoManager.saveOrUpdateObject(tempDo, request);
+            modelMap.put("object", object);
+            //}
 
             String tempResultPage = request.getParameter("resultPage");
 
