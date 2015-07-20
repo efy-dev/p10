@@ -68,17 +68,17 @@
             <div class="img-pictures-show">
                 <c:forEach var="is" items="${tenantHonorList}" varStatus="ln">
                     <c:if test="${tenantHonorList.size()  - 1 != ln.index && ln.index%2 ==0}">
-                    <div class="one-img-pictures">
+                        <div class="one-img-pictures">
                         <dl class="one-img-dl-l">
                             <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
                             <dd>1988中国工艺美术大师</dd>
                         </dl>
                     </c:if>
                     <c:if test="${ln.index%2 ==1}">
-                            <dl class="one-img-dl-r">
-                                <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
-                                <dd>1988中国工艺美术大师</dd>
-                            </dl>
+                        <dl class="one-img-dl-r">
+                            <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
+                            <dd>1988中国工艺美术大师</dd>
+                        </dl>
                         </div>
                     </c:if>
                     <c:if test="${ln.index == tenantHonorList.size() - 1 && ln.index%2 ==0}">
