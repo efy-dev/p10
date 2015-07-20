@@ -35,11 +35,8 @@ public class Tenant implements Serializable {
     private String level; //等级
     private String content; // 简介(长)
     private String presentAddress; //现居地
-    private String representativeWorks; // 代表作品
-    private String nativePlace; //籍贯
+    private AddressProvince originProvince; //籍贯（省）
     private Integer theStatus;         // 正常，删除，停止，隐藏
-    private AddressProvince addressProvince;
-    private AddressDistrict addressDistrict;
     private Date createDateTime;
 
 
@@ -73,28 +70,6 @@ public class Tenant implements Serializable {
         this.theStatus = theStatus;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id")
-    public AddressProvince getAddressProvince() {
-        return addressProvince;
-    }
-
-    public void setAddressProvince(AddressProvince addressProvince) {
-        this.addressProvince = addressProvince;
-    }
-
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id")
-    public AddressDistrict getAddressDistrict() {
-        return addressDistrict;
-    }
-
-    public void setAddressDistrict(AddressDistrict addressDistrict) {
-        this.addressDistrict = addressDistrict;
-    }
 
     @Column(name = "create_datetime")
     public Date getCreateDateTime() {
@@ -185,21 +160,12 @@ public class Tenant implements Serializable {
         this.presentAddress = presentAddress;
     }
 
-    @Column(name = "representative_works")
-    public String getRepresentativeWorks() {
-        return representativeWorks;
+    @Column(name="origin_province_id")
+    public AddressProvince getOriginProvince() {
+        return originProvince;
     }
 
-    public void setRepresentativeWorks(String representativeWorks) {
-        this.representativeWorks = representativeWorks;
-    }
-
-    @Column(name = "native_place")
-    public String getNativePlace() {
-        return nativePlace;
-    }
-
-    public void setNativePlace(String nativePlace) {
-        this.nativePlace = nativePlace;
+    public void setOriginProvince(AddressProvince originProvince) {
+        this.originProvince = originProvince;
     }
 }

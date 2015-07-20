@@ -58,24 +58,24 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach items="${requestScope.pageInfo.list}" var="tenantProduct">
+                    <c:forEach items="${requestScope.pageInfo.list}" var="tenantWork">
                         <tr>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formTenantProduct&id=${tenantProduct.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formTenantWork&id=${tenantWork.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=removeTenantIntroduction&id=${tenantProduct.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=removeTenantWork&id=${tenantWork.id}"/>"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </a>
                                     </div>
                                 </div>
                             </td>
-                            <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantProduct.id}"/>">${tenantProduct.name}</a></td>
-                            <td class="am-hide-sm-only">${tenantProduct.tenant.name}</td>
-                            <td class="am-hide-sm-only">${tenantProduct.price}</td>
-                            <td class="am-hide-sm-only">${tenantProduct.productDescription.content}</td>
+                            <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenantWork&id=${tenantWork.id}"/>">${tenantWork.name}</a></td>
+                            <td class="am-hide-sm-only">${tenantWork.tenant.name}</td>
+                            <td class="am-hide-sm-only">${tenantWork.price}</td>
+                            <td class="am-hide-sm-only">${tenantWork.productDescription.content}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

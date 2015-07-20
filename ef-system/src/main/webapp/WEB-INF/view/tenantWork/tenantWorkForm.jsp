@@ -32,7 +32,7 @@
 
       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">
-          <input type="hidden" value="saveOrUpdateTenantProduct" name="qm">
+          <input type="hidden" value="saveOrUpdateTenantWork" name="qm">
           <input type="hidden" name="id" value="${object.id}">
           <div class="am-form-group">
             <label for="type" class="am-u-sm-3 am-form-label">类型 / Type</label>
