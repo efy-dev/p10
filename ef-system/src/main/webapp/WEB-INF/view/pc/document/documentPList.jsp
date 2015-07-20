@@ -26,28 +26,32 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
+                    <th class="table-title">名字</th>
+                    <th class="table-title">创建时间</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="banner">
+                <c:forEach items="${requestScope.pageInfo.list}" var="document">
                     <tr>
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formBanner&id=${banner.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formDocument&id=${document.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeBanner&id=${banner.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=removeDocument&id=${document.id}"/>"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only">${banner.title}</td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewDocument&id=${document.id}"/>">${document.title}</a></td>
+                        <td class="am-hide-sm-only">${document.name}</td>
+                        <td class="am-hide-sm-only">${document.theDatetime}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

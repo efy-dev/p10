@@ -10,8 +10,8 @@
 
 <header class="am-topbar admin-header">
   <div class="am-topbar-brand">
-    <strong>Amaze UI</strong>
-    <small>后台管理模板</small>
+    <h1>e飞蚁后台管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+    <%--<small>后台管理</small>--%>
   </div>
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
@@ -26,7 +26,7 @@
           <li>
               <%--<c:if test="${jnode.contain(requestScope.qm)&& jnode.getRootFather.id==jmenuNode.id}">--%>
             <a class="${jmenuNode.jnodeMatch('efy-active',jnode)}"
-               href="${jmenuNode.url}">${jmenuNode.text_zh_CN}</a>
+               href="${jmenuNode.url}"><h3>${jmenuNode.text_zh_CN}</h3></a>
               <%--</c:if>--%>
               <%--<c:if test="${!jnode.contain(requestScope.qm)|| jnode.getRootFather.id!=jmenuNode.id}">--%>
               <%--<a href="http://<%=request.getServerName()+':'+request.getServerPort()%>/main.do${jmenuNode.url}">${jmenuNode.text_zh_CN}</a>--%>
