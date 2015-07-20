@@ -1,8 +1,8 @@
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -106,18 +106,22 @@
                 <div class="alllist-border"></div>
             </div>
         </C:forEach>
-        <div class="page-number">
-            <a href="#">1</a><span>/</span><a href="#">2</a><span>/</span><a href="#">3</a><span>/</span><a href="#">4</a>
-        </div>
     </div>
 </div>
+<ming800:pcPageList bean="${pageEntity}" url="/tenant/tenantInfoList.do">
+    <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+    <ming800:pcPageParam name="conditions"
+                         value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+    <ming800:pcPageParam name="sort"
+                         value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+</ming800:pcPageList>
 <!--其他内容-->
 <div id="footer">
     <ul class="guild">
-        <li><a href="#"><img src="/scripts/assets/images/i/fybk.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/efeiyi.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/cpb.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/gl.jpg"></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
     </ul>
     <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
 </div>
@@ -131,7 +135,7 @@
         <dd class="qrcord">
             <span></span>
             <div class="floating_left floating_ewm">
-                <i><img src="images/images/img6_03.jpg"></i>
+                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/> "></i>
             </div>
         </dd>
         <dd class="quote">
@@ -142,12 +146,6 @@
 
     </dl>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="/tenant/tenantInfoList.do">
-    <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
-    <ming800:pcPageParam name="conditions"
-                         value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-    <ming800:pcPageParam name="sort"
-                         value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
-</ming800:pcPageList>
+
 </body>
 </html>
