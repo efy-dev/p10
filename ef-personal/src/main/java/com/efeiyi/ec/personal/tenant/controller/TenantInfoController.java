@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.tenantInfo;
+package com.efeiyi.ec.personal.tenant.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;

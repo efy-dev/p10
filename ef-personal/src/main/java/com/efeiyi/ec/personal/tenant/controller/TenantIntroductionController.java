@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.tenantIntroduction;
+package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.tenant.model.TenantIntroduction;
 import com.ming800.core.base.service.BaseManager;

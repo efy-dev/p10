@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.tenantProduct;
+package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.tenant.model.Tenant;
