@@ -38,14 +38,5 @@
                 </do>
             </does>
         </entity>
-        <entity name="ProductDescription" label="作品信息"  model="com.efeiyi.ec.product.model.ProductDescription">
-            <does>
-                <do name="listAttachment" access="" label="附件列表">
-                    <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="introduction.tenant.id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-            </does>
-        </entity>
     </entities>
 </module>
