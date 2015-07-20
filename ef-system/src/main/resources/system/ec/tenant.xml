@@ -23,7 +23,12 @@
 
                 <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"/>
                 <do name="viewTenant" label="查看大师页" access="" result="/tenant/tenantView"/>
-                <do name="saveOrUpdateTenant" label="保存大师" access="" result="redirect:/basic/xm.do?qm=plistTenant_default">
+                <do name="saveOrUpdateTenant" label="保存大师" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>
+                        </fields>
+                    </page>
                 </do>
                 <do name="removeTenant" label="删除大师" access="" result="json"/>
                 <do name="listTenant" label="传承人列表" access="" result="/tenant/tenantList">

@@ -30,7 +30,7 @@ public interface BaseManager {
     @Deprecated
     void saveOrUpdate(String doQueryName, HttpServletRequest request) throws Exception;
 
-    void saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception;
+    Object saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception;
 
     void delete(String model, String id);
 
