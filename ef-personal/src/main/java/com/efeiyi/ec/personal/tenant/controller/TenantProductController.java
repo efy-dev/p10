@@ -1,6 +1,8 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductDescription;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -60,18 +62,22 @@ public class TenantProductController {
     }
     /**
      * 获取传承人作品详情
-     * @param model
+     * @param modelMap
      * @return
      */
     @RequestMapping("/getProduct.do")
-    public ModelAndView getProduct(HttpServletRequest request ,ModelMap model){
-        String tenantId = request.getParameter("tenantId");
+    public ModelAndView getProduct(HttpServletRequest request ,ModelMap modelMap){
         String productId = request.getParameter("productId");
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
-        Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
-        model.addAttribute("tenant",tenant);
-        model.addAttribute("product", product);
-        return new ModelAndView("/tenantProduct/tenantProductView",model);
+        String queryHql = "from ProductDescription p where p.product.id = :productId";
+        String queryHql1 = "from ProductPicture pr where pr.product.id = :productId";
+        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("productId", productId);
+        //Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
+        ProductDescription productDescription = (ProductDescription) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
+        ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);
+        modelMap.addAttribute("productDescription",productDescription);
+        modelMap.addAttribute("productPicture", productPicture);
+        return new ModelAndView("/tenantProduct/tenantProductView",modelMap);
 
     }
 
