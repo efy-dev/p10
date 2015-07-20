@@ -1,3 +1,9 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -74,146 +80,32 @@
         </div>
     </div>
     <div class="center-right">
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
+        <C:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
+            <div class="alllist">
+                <div class="alllist-content">
+                    <div class="alllist-time">
+                        <h1><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="dd/MM" />
+                        </h1>
+                        <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
+                    </div>
+                    <div class="alllist-xq">
+                        <h1><a href="#">${tenantInfo.title}</a></h1>
+                        <p>
+                            <c:choose>
+                                <c:when test="${fn:length(tenantInfo.content)  > 60}">
+                                    ${fn:substring(tenantInfo.content,0 ,60 ) }......
+                                </c:when>
+                                <c:otherwise>
+                                    ${tenantinfo.content}
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                        <span><a href="#">详情</a></span>
+                    </div>
                 </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
+                <div class="alllist-border"></div>
             </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
-        <div class="alllist">
-            <div class="alllist-content">
-                <div class="alllist-time">
-                    <h1>07.03</h1>
-                    <p>2015</p>
-                </div>
-                <div class="alllist-xq">
-                    <h1><a href="#">[动态]国家图书馆举办木版水印培训 魏立中大师授课</a></h1>
-                    <p>在中山北路237号，有家不起眼的店面，木雕门扇，绿竹掩映，上书“十竹斋”。拾级而下，素白墙面上，挂满水墨书画，其中不乏名家手笔，但令人惊奇的是</p>
-                    <span><a href="#">详情</a></span>
-                </div>
-            </div>
-            <div class="alllist-border"></div>
-        </div>
+        </C:forEach>
         <div class="page-number">
             <a href="#">1</a><span>/</span><a href="#">2</a><span>/</span><a href="#">3</a><span>/</span><a href="#">4</a>
         </div>
@@ -222,10 +114,10 @@
 <!--其他内容-->
 <div id="footer">
     <ul class="guild">
-        <li><a href="#"><img src="images/i/fybk.jpg"></a></li>
-        <li><a href="#"><img src="images/i/efeiyi.jpg"></a></li>
-        <li><a href="#"><img src="images/i/cpb.jpg"></a></li>
-        <li><a href="#"><img src="images/i/gl.jpg"></a></li>
+        <li><a href="#"><img src="/scripts/assets/images/i/fybk.jpg"></a></li>
+        <li><a href="#"><img src="/scripts/assets/images/i/efeiyi.jpg"></a></li>
+        <li><a href="#"><img src="/scripts/assets/images/i/cpb.jpg"></a></li>
+        <li><a href="#"><img src="/scripts/assets/images/i/gl.jpg"></a></li>
     </ul>
     <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
 </div>
@@ -250,5 +142,12 @@
 
     </dl>
 </div>
+<ming800:pcPageList bean="${pageEntity}" url="/tenant/tenantInfoList.do">
+    <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+    <ming800:pcPageParam name="conditions"
+                         value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+    <ming800:pcPageParam name="sort"
+                         value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+</ming800:pcPageList>
 </body>
 </html>
