@@ -12,12 +12,12 @@
     <script src="../scripts/assets/js/jquery.jslides.js"></script>
     <script src="../scripts/assets/js/amazeui.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $.post("", { tenantId: ""},
-                function(data){
-                    process(data);
-                }, "text");
-        })
+//        $(document).ready(function(){
+//            $.post("", { tenantId: ""},
+//                function(data){
+//                    process(data);
+//                }, "text");
+//        })
     </script>
     <sitemesh:write property='head'/>
 </head>

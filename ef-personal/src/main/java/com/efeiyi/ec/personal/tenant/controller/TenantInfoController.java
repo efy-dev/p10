@@ -38,7 +38,6 @@ public class TenantInfoController {
 //            queryParamMap.put("type",type);
 //            queryHql.append(" and t.type =:type ");
 //        }
-
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
         xQuery.addRequestParamToModel(model,request);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
