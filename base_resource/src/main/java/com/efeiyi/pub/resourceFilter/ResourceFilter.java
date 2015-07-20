@@ -1,8 +1,10 @@
 package com.efeiyi.pub.resourceFilter;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.commons.io.IOUtils;
-/**
- * Created by Administrator on 2015/7/17.
- *
- */
 
-
-@WebServlet(urlPatterns = "/pub_resource/js/*", asyncSupported = true)
+@WebServlet(urlPatterns = "/base_resource/p/*", asyncSupported = true)
 public class ResourceFilter extends HttpServlet {
 
     /**
-     * @Fields serialVersionUID : TODO
+     * @Fields serialVersionUID : 111111111111111l
+     *
      */
     private static final long serialVersionUID = 1L;
     private static Logger logger = Logger.getLogger(ResourceFilter.class);
@@ -32,12 +30,12 @@ public class ResourceFilter extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // HttpServletRequest request = (HttpServletRequest) req;
         String url = req.getRequestURI();
-        if (url.startsWith("/pub_resource/js/")) {
+        if (url.startsWith("/base_resource/p/")) {
 
             InputStream in = this.getClass().getClassLoader()
-                    .getResourceAsStream("scripts/test/js/" + url.substring("/pub_resource/js/".length()));
+                    .getResourceAsStream(url.substring("/base_resource/p/".length()));
             if (in == null) {
-                logger.info("scripts/test/js/" + url.substring("/pub_resource/js/".length()) + " is not exists");
+                logger.info(url.substring("/base_resource/p/".length()) + " is not exists");
                 resp.setContentType("text/javascript;charset=utf-8");
                 PrintWriter pw = resp.getWriter();
                 pw.println("can not find this js file");
