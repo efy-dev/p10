@@ -29,7 +29,6 @@
                     <th class="table-title">头衔</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
-                    <th class="table-title">籍贯</th>
                     <th class="table-title">简介</th>
 
                 </tr>
@@ -56,7 +55,6 @@
                         <td class="am-hide-sm-only">${tenantIntroduction.title}</td>
                         <td class="am-hide-sm-only">${tenantIntroduction.sex}</td>
                         <td class="am-hide-sm-only">${tenantIntroduction.level}</td>
-                        <td class="am-hide-sm-only">${tenantIntroduction.nativePlace}</td>
                         <td class="am-hide-sm-only">${tenantIntroduction.brief}</td>
                     </tr>
                 </c:forEach>

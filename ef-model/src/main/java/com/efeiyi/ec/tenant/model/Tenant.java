@@ -5,7 +5,6 @@ import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -160,7 +159,8 @@ public class Tenant implements Serializable {
         this.presentAddress = presentAddress;
     }
 
-    @Column(name="origin_province_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="origin_province_id")
     public AddressProvince getOriginProvince() {
         return originProvince;
     }
