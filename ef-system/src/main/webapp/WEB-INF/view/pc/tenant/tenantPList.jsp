@@ -20,6 +20,13 @@
 <body>
 <div class="admin-content">
     <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span> 新增</a>
+                </div>
+            </div>
+        </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
@@ -52,10 +59,10 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
-                        <td class="am-hide-sm-only">${tenantIntroduction.title}</td>
-                        <td class="am-hide-sm-only">${tenantIntroduction.sex}</td>
-                        <td class="am-hide-sm-only">${tenantIntroduction.level}</td>
-                        <td class="am-hide-sm-only">${tenantIntroduction.brief}</td>
+                        <td class="am-hide-sm-only">${tenant.title}</td>
+                        <td class="am-hide-sm-only">${tenant.sex}</td>
+                        <td class="am-hide-sm-only">${tenant.level}</td>
+                        <td class="am-hide-sm-only">${tenant.brief}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

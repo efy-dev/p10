@@ -89,7 +89,7 @@ public class BaseManagerImpl implements BaseManager {
      * 保存
      */
     @Override
-    public void saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception {
+    public Object saveOrUpdate(XSaveOrUpdate xSaveOrUpdate) throws Exception {
         Object object;
         String type;
         Object idValue = xSaveOrUpdate.getParamMap().get("id");
@@ -109,6 +109,8 @@ public class BaseManagerImpl implements BaseManager {
 
 //            e.printStackTrace();
         }
+
+        return object;
 
     }
 

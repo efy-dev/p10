@@ -20,16 +20,18 @@
 <body>
 <table>
     <tr>
-        <td>banner——id</td>
-        <td>banner——title</td>
+        <td>tenantNews-id</td>
+        <td>title</td>
     </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="banner">
+    <c:forEach items="${requestScope.pageInfo.list}" var="tenantNews">
         <tr>
-            <td>${banner.id}</td>
-            <td>${banner.title}</td>
+            <td>${tenantNews.id}</td>
+            <td>${tenantNews.title}</td>
         </tr>
     </c:forEach>
+
+
 </table>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">

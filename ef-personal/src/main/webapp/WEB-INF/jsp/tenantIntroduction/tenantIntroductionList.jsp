@@ -22,6 +22,7 @@
         <div class="page-img"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></div>
         <div class="buttom-text floating_cl">
             <p><a href="#ji-ben-xin-xi">基本信息</a></p>
+
             <p><a href="#da-shi-rong-yu">大师荣誉</a></p>
             <p><a href="#chu-ban-zhu-zuo">出版著作</a></p>
             <p><a href="#yi-shu-nian-biao">艺术年表</a></p>
@@ -48,13 +49,13 @@
                 </tr>
                 <tr class="tr4">
                     <td height="47" width="80"  class="td-1 td-s">籍贯</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"><input type="text" value="${tenant.nativePlace}" class="column-tex1 tr-q" maxlength="6"></td>
+                    <td height="47" width="173" style="border-right:1px solid #000"><input type="text" value="${tenant.originProvince.name}" class="column-tex1 tr-q" maxlength="6"></td>
                     <td height="47" width="80" class="td-1 td-s">现居地</td>
                     <td height="47" width="173" style="border-right:1px solid #000"><input type="text" value="${tenant.presentAddress}" class="column-tex1 tr-q" maxlength="10"></td>
                 </tr>
                 <tr class="tr5">
                     <td height="47" width="80"  class="td-1 td-s">代表作品</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"><textarea class="td-r" rows="4">${tenant.representativeWorks}</textarea></td>
+                    <td height="47" width="173" style="border-right:1px solid #000"><textarea class="td-r" rows="4"></textarea></td>
                     <td height="47" width="80" class="td-1 td-s">级别</td>
                     <td height="47" width="173" style="border-right:1px solid #000"><textarea class="td-r" rows="4" >${tenant.level}</textarea></td>
                 </tr>
@@ -70,22 +71,22 @@
         <div id="da-shi-rong-yu">
             <h1>大师荣誉</h1>
             <div class="img-pictures-show">
-                <c:forEach items="${tenantIntroductionList}" varStatus="ln">
-                    <c:if test="${tenantIntroductionList.size()-1 != ln.index && ln.index%2 == 0}">
+                <c:forEach items="${list2}" varStatus="ln">
+                    <c:if test="${list2.size()-1 != ln.index && ln.index%2 == 0}">
                         <div class="one-img-pictures">
-                        <dl class="one-img-dl-l">
-                            <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
-                            <dd>1988中国工艺美术大师</dd>
-                        </dl>
+                            <dl class="one-img-dl-l">
+                                <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
+                                <dd>1988中国工艺美术大师</dd>
+                            </dl>
                     </c:if>
                     <c:if test="${ln.index%2 == 1}">
-                        <dl class="one-img-dl-r">
-                            <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
-                            <dd>1988中国工艺美术大师</dd>
-                        </dl>
+                            <dl class="one-img-dl-r">
+                                <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
+                                <dd>1988中国工艺美术大师</dd>
+                            </dl>
                         </div>
                     </c:if>
-                    <c:if test="tenantIntroductionList.size()-1 == ln.index && ln.index%2 == 0">
+                    <c:if test="${list2.size()-1 == ln.index && ln.index%2 == 0}">
                         <div class="one-img-pictures">
                             <dl class="one-img-dl-l">
                                 <dt><a href="#"><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></a></dt>
@@ -99,7 +100,7 @@
         <div id="chu-ban-zhu-zuo">
             <h1>出版著作</h1>
             <ul>
-                <c:forEach items="${tenantIntroductionList}" var="tenantintroduction">
+                <c:forEach items="${list3}" var="list3">
                     <li><a href="#"><img src="<c:url value="/scripts/assets/images/img7.jpg"/>"></a></li>
                 </c:forEach>
             </ul>
@@ -107,9 +108,7 @@
         <div id="yi-shu-nian-biao">
             <h1>艺术年表</h1>
             <div class="text-line">
-                <c:forEach items="${tenantIntroductionList}" var="tenantintroduction">
-                    tenantintroduction.
-                </c:forEach>
+               ${list4.get(0).path}
             </div>
         </div>
     </div>
