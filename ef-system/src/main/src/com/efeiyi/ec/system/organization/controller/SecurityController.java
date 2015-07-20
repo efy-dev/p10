@@ -15,7 +15,7 @@ public class SecurityController {
     @RequestMapping({"/pc/login.do"})
     public String login(HttpServletRequest request){
 
-        return "/login";
+        return "/pc/login";
 
     }
 

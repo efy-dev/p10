@@ -63,8 +63,8 @@ public class XdoSupportManagerImpl implements XdoSupportManager {
 
     @Override
     public ModelMap executeMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-        // MultipartHandler multipartHandler = new AttchmentHandler();
-        MultipartHandler multipartHandler = null;
+//         MultipartHandler multipartHandler = new AttchmentHandler();
+        MultipartHandler multipartHandler  = (MultipartHandler) Class.forName(tempDo.getExecute()).newInstance();;
 
         return multipartHandler.handleMultipart(tempDo, modelMap, request, multipartRequest);
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="Tenant" label="ch" version="" package="com.efeiyi.ec.tenant.model.Tenant" path="">
+    <entities>
+        <entity name="tenant" label="传承人"  model="com.efeiyi.ec.tenant.model.Tenant">
+            <does>
+                <do name="listTenant" access="" label="传承人列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="tenantInfo" label="传承人资讯"  model="com.efeiyi.ec.tenant.model.TenantNews">
+            <does>
+                <do name="plistTenantInfo" access="" label="传承人资讯列表">
+                    <query name="default" label="默认" type="auto" orderBy="">
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+
+                    </query>
+                </do>
+            </does>
+        </entity>
+    </entities>
+</module>

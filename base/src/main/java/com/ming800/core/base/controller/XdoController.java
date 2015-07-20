@@ -3,6 +3,8 @@ package com.ming800.core.base.controller;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
+import com.ming800.core.base.util.ReflectUtil;
+import com.ming800.core.base.util.SystemValueUtil;
 import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -261,7 +264,7 @@ public class XdoController {
         return new ModelAndView(resultPage);
     }
 
-/*
+
 
     @RequestMapping("/xmm.do")   //多附件的情况
     public ModelAndView xmm(HttpServletRequest request, MultipartRequest multipartRequest, ModelMap modelMap) throws Exception {
@@ -273,8 +276,7 @@ public class XdoController {
         modelMap = xdoSupportManager.executeMultipart(tempDo, modelMap, request, multipartRequest);
         Object object = modelMap.get("object");
 
-        */
-/*配置文件*//*
+/*配置文件*/
 
         if (tempDo.getPageList() != null && tempDo.getPageList().size() > 0) {
             Page tempPage = tempDo.getPageList().get(0);
@@ -297,14 +299,14 @@ public class XdoController {
 
         String tempResultPage = request.getParameter("resultPage");
         if (tempResultPage != null && !tempResultPage.equals("")) {
-            tempResultPage = xdoManager.convertPageUrl(tempResultPage, object);
+            tempResultPage = XDoUtil.convertPageUrl(tempResultPage, object);
         } else {
-            tempResultPage = xdoManager.convertPageUrl(tempDo.getResult(), object);
+            tempResultPage = XDoUtil.convertPageUrl(tempDo.getResult(), object);
         }
 
         return new ModelAndView(tempResultPage);
     }
-*/
+
 
 
     /*返回json*/
