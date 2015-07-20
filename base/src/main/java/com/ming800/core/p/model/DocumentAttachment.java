@@ -1,27 +1,19 @@
 package com.ming800.core.p.model;
 
-import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.FileData;
-import com.ming800.core.util.AttachmentUtil;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "basic_attachment")
+@Table(name = "basic_document_attachment")
 public class DocumentAttachment {
     private String id;
     private String storeType;  // database,  disk,  cloud
     private String fileName;
     private String fileType;
-    private FileData data;      //附件
     private String path;        //地址
     private Document document;
-    private String generate;   //页面的现实内容  图片类型直接显示   其他类型设置为下载链接
-
-
-
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -61,16 +53,6 @@ public class DocumentAttachment {
         this.fileType = fileType;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "data_id")
-    public FileData getData() {
-        return data;
-    }
-
-    public void setData(FileData data) {
-        this.data = data;
-    }
-
     @Column(name = "path")
     public String getPath() {
         return path;
@@ -90,13 +72,4 @@ public class DocumentAttachment {
         this.document = document;
     }
 
-    @Transient
-    public String getGenerate() {
-        String dataId = data == null ? null : data.getId();
-        return AttachmentUtil.getGenerate(storeType, fileName, fileType, dataId, path);
-    }
-
-    public void setGenerate(String generate) {
-        this.generate = generate;
-    }
 }

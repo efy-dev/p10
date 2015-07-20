@@ -29,6 +29,8 @@ a:hover{color:#0b3775;}
 #nav h1{width:143px;height:143px;margin-left:39px;float:left;}
 .nav-centent{width:500px;height:14px;float:left;padding:135px 0 0 63px;}
 .nav-centent li{float:left;padding-left:51px;}
+.nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;}
+.nav-centent li a:hover{color:#ff2120;}
 #banner1{position:relative;width:1000px;margin:0 auto;}
 /*banner*/
 #banner{width:100%;height:351px;margin-bottom:37px;}
@@ -60,7 +62,8 @@ a:hover{color:#0b3775;}
 body{margin:0;}
 dl,dd,dt{margin:0;padding:0;}
 a{ text-decoration:none;}
-.floating_ck{position:fixed;right:240px;top:54%;}
+.floating_ck{position:fixed;right:10%;top:54%;}
+.floating_cl{position:fixed;left:25%;top:54%;}
 .floating_ck dl dd{position:relative;background-color:#fff;border:solid 1px #000;text-align:center;background-repeat:no-repeat;background-position:center 50%;cursor:pointer;}
 .floating_ck dl dd:hover{background-color:#fff;border:solid 1px #000;}
 .floating_ck dl dd:hover .floating_left{display:block;}
@@ -77,3 +80,60 @@ a{ text-decoration:none;}
 .floating_ewm p{color:#000;margin-top:5px;}
 .floating_ewm .qrcord_p01{font-size:12px;line-height:20px;}
 .floating_ewm .qrcord_p02{font-size:18px;}
+/*简介头*/
+#page-nav{width:960px;height:17px;;margin:0 auto;padding-left:60px;}
+#page-nav span{width:60px;height:17px;padding-left:15px;background:url(../images/logo6.jpg) no-repeat 5px 5px;}
+#page-nav p{display:block;width:101px;height:12px;}
+#page-nav a:link,#page-nav a:visited{color:#CDCDCD;}
+#page-nav a:hover{color:#0b3775;}
+.border-nav{width:100%;height:1px;background-color:#EEEEEE;}
+/*简介内容*/
+#page-column{width:960px;overflow:hidden;margin:0 auto;padding-left:35px;}
+.column-left{width:272px;float:left;}
+.column-right{width:503px;float:left;}
+.column-right h1{font-size:14px;line-height:69px;height:69px; font-family:"楷体"; font-weight: bold;; color:#dcbb69;}
+.page-img{padding:25px;height:220px;width:274px;}
+/*简介表格*/
+.table-bg{ width:508px;height:268px;border:1px solid #000;}
+.tr1{width:501px;height:3px;border-bottom:1px solid #000;}
+.tr1 td{height:3px;}
+.tr2{width:501px;height:57px; border-bottom:1px solid #000;}
+.tr3{height:47px; border-bottom:1px solid #000;}
+.tr3 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
+.tr4 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
+.tr5 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
+.tr4{height:47px; border-bottom:1px solid #000;}
+.tr5{height:103px; border-bottom:1px solid #000;}
+.tr6{height:3px;}
+.td-s{ font-family:"楷体"; font-size:12px; color:#cc9900; text-align:center;}
+.td-r{font-size:12px; font-family:"宋体";color:#000; resize:none;width:126px;height:84px;border:none; text-align:center;padding:18px 0 0 33px;font-size:12px;color:#666666;}
+.tr-q{font-size:12px; font-family:"宋体";color:#666;}
+.column-tex1{width:100px;height:14px;padding-left:12px;}
+.column-tex2{width:70px;height:14px;padding-left:12px;font-size:14px; font-family:"Microsoft YaHei";color:#666;}
+.column-text-p{width:494px;height:96px;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
+/*简介大师荣誉*/
+#da-shi-rong-yu{width:501px;overflow:hidden;}
+#da-shi-rong-yu h1{height:113px;padding-top:73px;line-height:0;}
+.img-pictures-show{width:501px;;overflow:hidden;}
+.one-img-dl-l{width:219px;height:167px;float:left;}
+.one-img-dl-l dt{width:195px;height:133px;}
+.one-img-dl-l dd{color:#999;font-size:12px; text-align:center;}
+.one-img-dl-r{width:219px;height:167px;float:left;padding-left:24px;}
+.one-img-dl-r dt{width:195px;height:133px;}
+.one-img-dl-r dd{color:#999;font-size:12px; text-align:center;}
+/*出版著作*/
+#chu-ban-zhu-zuo{width:501px;overflow:hidden;}
+#chu-ban-zhu-zuo h1{height:113px;padding-top:73px;line-height:0;}
+#chu-ban-zhu-zuo ul{width:501px;height:195px;}
+#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}
+/*艺术年表*/
+#yi-shu-nian-biao{width:501px;overflow:hidden; margin-bottom:190px;}
+#yi-shu-nian-biao h1{height:113px;padding-top:73px;line-height:0}
+.year-container{width:502px; overflow:hidden;}
+.text-size-color{font-size:12px;color:#666;font-family:"宋体"; line-height:22px;}
+.text-padding{padding-top:35px;}
+/*按钮*/
+.buttom-text{padding-left:73px;}
+.buttom-text p{width:70px;height:38px;text-align:center;}
+.buttom-text p a:link,.buttom-text p a:visited{color:#666; font-family:"楷体";font-size:12px; text-decoration:none;}
+.buttom-text p a:hover{color:#ff2120}

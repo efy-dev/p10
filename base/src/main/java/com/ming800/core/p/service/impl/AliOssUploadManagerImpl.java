@@ -23,14 +23,14 @@ import java.util.List;
 @Service
 public class AliOssUploadManagerImpl implements AliOssUploadManager {
 
-    private static String accessKeyId = "Mlfmxetirzbsso0O";
-    private static String accessKeySecret = "BxIPUCoDF7IqeSjrvhH9cJLqHNi6cL";
+    private static String accessKeyId = "maTnALCpSvWjxyAy";
+    private static String accessKeySecret = "0Ou6P67WhuSHESKrwJClFqCKo5BuBf";
 
 //    private String bucketName = "lms";
 
     @Override
     public Boolean uploadFile(MultipartFile multipartFile, String bucketName, String uploadName) throws IOException {
-        OSSClient client = new OSSClient(accessKeyId, accessKeySecret);
+        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com",accessKeyId, accessKeySecret);
 
         // 获取Bucket的存在信息
         boolean exists = client.doesBucketExist(bucketName);

@@ -18,14 +18,14 @@
 <body>
 <table>
   <tr>
-    <td>传承人著作id</td>
-    <td>传承人著作名字</td>
+    <td>传承人产品id</td>
+    <td>传承人产品名字</td>
   </tr>
 
-  <c:forEach items="${objectList}" var="tenantWork">
+  <c:forEach items="${objectList}" var="tenantProduct">
     <tr>
-      <td>${tenantWork.id}</td>
-      <td>${tenantWork.name}</td>
+      <td>${tenantProduct.id}</td>
+      <td>${tenantProduct.name}</td>
     </tr>
   </c:forEach>
 
