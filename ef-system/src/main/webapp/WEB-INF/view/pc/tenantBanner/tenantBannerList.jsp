@@ -23,80 +23,72 @@
         <%--<th>传承人轮播图</th>--%>
     <%--</tr>--%>
     <%--</thead>--%>
-    <c:forEach items="${objectList}" var="tenantBanner" varStatus="banner">
-        <%--<c:if test="${banner.index % 3 == 0 && objectList.size() - 1 != banner.index}">--%>
-            <%--<tr>--%>
-            <%--<td>--%>
-            <div class="am-u-sm-4">
-                <div class="am-thumbnail">
-                    <img src="<c:url value="${tenantBanner.imageUrl}@!tenant-manage-photo"/>" alt=""/>
-
-                    <h3 class="am-thumbnail-caption">${tenantBanner.title}</h3>
-                    <p>
-                        <button class="am-btn am-btn-primary">删除</button>
-                    </p>
-                </div>
-            </div>
-        <%--</c:if>--%>
-        <%--<c:if test="${banner.index % 3 == 1 && objectList.size() - 1 != banner.index}">--%>
-            <%--<div class="am-u-sm-4">--%>
+    <%--<c:forEach items="${objectList}" var="tenantBanner" varStatus="banner">--%>
+        <%--&lt;%&ndash;<c:if test="${banner.index % 3 == 0 && objectList.size() - 1 != banner.index}">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<tr>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<td>&ndash;%&gt;--%>
+            <%--<div class="am-u-sm-4" id="${tenantBanner.id}">--%>
                 <%--<div class="am-thumbnail">--%>
-                    <%--<img src="<c:url value="${tenantBanner.imageUrl}"/>" alt=""/>--%>
+                    <%--<img src="<c:url value="http://tenant.efeiyi.com/${tenantBanner.imageUrl}@!tenant-manage-photo"/>" alt=""/>--%>
 
                     <%--<h3 class="am-thumbnail-caption">${tenantBanner.title}</h3>--%>
                     <%--<p>--%>
-                        <%--<button class="am-btn am-btn-primary">删除</button>--%>
+                        <%--<a class="am-btn am-btn-primary" onclick="removeTenantBanner('${tenantBanner.id}')">删除</a>--%>
                     <%--</p>--%>
                 <%--</div>--%>
             <%--</div>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${banner.index % 3 == 2}">--%>
-            <%--<div class="am-u-sm-4">--%>
-                <%--<div class="am-thumbnail">--%>
-                    <%--<img src="<c:url value="${tenantBanner.imageUrl}"/>" alt=""/>--%>
+    <%--</c:forEach>--%>
 
-                    <%--<h3 class="am-thumbnail-caption">${tenantBanner.title}</h3>--%>
-                    <%--<p>--%>
-                        <%--<button class="am-btn am-btn-primary">删除</button>--%>
-                    <%--</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--</td>--%>
-            <%--</tr>--%>
-        <%--</c:if>--%>
 
-        <%--<c:if test="${banner.index % 3 == 0 && objectList.size() - 1 == banner.index}">--%>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<div class="am-u-sm-4">--%>
-                    <%--<div class="am-thumbnail">--%>
-                        <%--<img src="<c:url value="${tenantBanner.imageUrl}"/>" alt=""/>--%>
+    <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+            <th class="table-set">操作</th>
+            <th class="table-title">标题</th>
+            <th class="table-title">图片</th>
 
-                        <%--<h3 class="am-thumbnail-caption">${tenantBanner.title}</h3>--%>
-                        <%--<p>--%>
-                            <%--<button class="am-btn am-btn-primary">删除</button>--%>
-                        <%--</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-        <%--</c:if>--%>
 
-        <%--<c:if test="${banner.index % 3 == 1 && objectList.size() - 1 == banner.index}">--%>
-            <%--<div class="am-u-sm-4">--%>
-                <%--<div class="am-thumbnail">--%>
-                    <%--<img src="<c:url value="${tenantBanner.imageUrl}"/>" alt=""/>--%>
+        </tr>
+        </thead>
+        <tbody>
 
-                    <%--<h3 class="am-thumbnail-caption">${tenantBanner.title}</h3>--%>
-                    <%--<p>--%>
-                        <%--<button class="am-btn am-btn-default">删除</button>--%>
-                    <%--</p>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--</td>--%>
-            <%--</tr>--%>
-        <%--</c:if>--%>
+        <c:forEach items="${objectList}" var="tenantBanner" varStatus="banner">
+            <tr id="${tenantBanner.id}">
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeTenantBanner('${tenantBanner.id}')"><span
+                                    class="am-icon-trash-o"></span> 删除
+                            </a>
+                        </div>
+                    </div>
+                </td>
+                <td class="am-hide-sm-only">${tenantBanner.title}</td>
+                <td class="am-hide-sm-only"><img src="<c:url value="http://tenant.efeiyi.com/${tenantBanner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 
-    </c:forEach>
+
+
+
 <%--</table>--%>
 </div>
+
+<script>
+
+    function removeTenantBanner(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantBanner"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+
+</script>

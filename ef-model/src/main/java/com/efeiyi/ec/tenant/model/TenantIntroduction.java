@@ -1,6 +1,7 @@
 package com.efeiyi.ec.tenant.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -78,6 +79,7 @@ public class TenantIntroduction {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "introduction")
+    @Where( clause = "status=1")
     public List<TenantAttachment> getAttachmentList() {
         return attachmentList;
     }
