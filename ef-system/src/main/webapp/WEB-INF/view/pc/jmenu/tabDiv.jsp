@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ include file="/common/taglibs.jsp" %>--%>
 <script type="text/javascript" src="<c:url value="/scripts/doQuery.js?m=2.4"/>"></script>
+<script type="text/javascript" src="<c:url value="/scripts/function.js?m=2.4"/>"></script>
 <%--<script type="text/javascript" src="<c:url value="/scripts/m8u/jquery.m8u2.min.js"/>"></script>--%>
 
 
@@ -44,8 +45,8 @@
     <div class="am-tabs-bd">
         <c:forEach items="${doQueryList}" var="doQuery">
             <c:if test="${tabTitle==doQuery.label}">
-            <div class="am-tab-panel am-active" id="${doQuery.name}">
-            </div>
+                <div class="am-tab-panel am-active" id="${doQuery.name}">
+                </div>
             </c:if>
             <c:if test="${tabTitle!=doQuery.label}">
                 <div class="am-tab-panel" id="${doQuery.name}">

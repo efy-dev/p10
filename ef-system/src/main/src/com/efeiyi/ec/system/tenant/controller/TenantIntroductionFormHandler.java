@@ -6,14 +6,17 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Administrator on 2015/7/20.
+ * Created by Administrator on 2015/7/21.
  */
-public class ToTenantBannerFormHandler implements DoHandler {
+public class TenantIntroductionFormHandler implements DoHandler {
+
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
+
         if (request.getParameter("tenantId") != null) {
-            modelMap.put("tenant_id", request.getParameter("tenantId"));
+            modelMap.put("tenantId", request.getParameter("tenantId"));
         }
+
         return modelMap;
     }
 }
