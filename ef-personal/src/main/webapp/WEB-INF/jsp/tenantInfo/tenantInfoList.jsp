@@ -92,7 +92,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <span><a href="#">详情</a></span>
+                        <span><a href="<c:url value="/tenantInfo/getTenantInfo.do?tenantNewsId=1"/>">详情</a></span>
                     </div>
                 </div>
                 <div class="alllist-border"></div>

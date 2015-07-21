@@ -57,7 +57,7 @@ public class TenantInfoController {
     public  String getTenantInfo(HttpServletRequest request,Model model){
         String  tenantNewsId = request.getParameter("tenantNewsId");
         TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantNewsId);
-        model.addAttribute("teanatNews",tenantNews);
-        return "";
+        model.addAttribute("tenantNews",tenantNews);
+        return "/tenantInfo/tenantInfoView";
     }
 }
