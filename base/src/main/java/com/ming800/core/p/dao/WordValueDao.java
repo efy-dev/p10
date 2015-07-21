@@ -14,5 +14,5 @@ public interface WordValueDao extends BaseDao<WordValue> {
      * @param wordValue
      * @return
      */
-    List listWordValueByGroup(WordValue wordValue);
+    List listWordValueByGroup(String group);
 }

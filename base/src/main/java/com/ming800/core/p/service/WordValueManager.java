@@ -15,5 +15,5 @@ public interface WordValueManager {
      * @param wordValue
      * @return
      */
-    List listWordValueByGroup(WordValue wordValue);
+    List listWordValueByGroup(String group);
 }

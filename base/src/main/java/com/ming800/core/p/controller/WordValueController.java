@@ -1,5 +1,7 @@
 package com.ming800.core.p.controller;
 
+import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.WordValue;
 import com.ming800.core.p.service.DictionaryDataManager;
 import com.ming800.core.p.service.WordValueManager;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,17 +27,20 @@ import java.util.List;
 @RequestMapping("/WordValue")
 public class WordValueController {
 
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(WordValueController.class);
+    @Autowired
+    private BaseManager baseManager;
 
     @Autowired
     private WordValueManager wordValueManager;
 
-
     @RequestMapping("/listWordValue.do")
-    public ModelAndView listWordValueByGroup(WordValue wordValue,ModelMap modelMap){
-        List list = wordValueManager.listWordValueByGroup(wordValue);
-        modelMap.put("wordValueList",list);
+    public ModelAndView listWordValueByGroup(ModelMap modelMap) throws  Exception{
+        List<WordValue> wordValues  = wordValueManager.listWordValueByGroup("1");
+        modelMap.put("wv",wordValues);
         return  new ModelAndView("/");
     }
+
 
 
 
