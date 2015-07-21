@@ -22,7 +22,7 @@
 
         <dependency>
             <groupId>com.efeiyi.ec</groupId>
-            <artifactId>ef-model</artifactId>
+            <artifactId>pal-model</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

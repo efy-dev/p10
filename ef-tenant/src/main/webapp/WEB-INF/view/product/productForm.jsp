@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加商品</strong> / <small>Add Product</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建商品</strong> / <small>New Product</small></div>
 </div>
 <hr/>
 
