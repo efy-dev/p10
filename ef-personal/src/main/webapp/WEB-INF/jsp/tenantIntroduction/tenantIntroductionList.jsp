@@ -108,7 +108,11 @@
         <div id="yi-shu-nian-biao">
             <h1>艺术年表</h1>
             <div class="text-line">
-               ${list4.get(0).path}
+                <c:forEach items="${list}" var="introduction">
+                    <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
+                        ${introduction.content}
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
     </div>
