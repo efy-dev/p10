@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建字典</strong> / <small>New Dictionary</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑字典</strong> / <small>New/Edit Dictionary</small></div>
 </div>
 <hr/>
 
@@ -43,6 +43,5 @@
  </div>
 <!-- content end -->
 <hr/>
-
 </body>
 </html>
