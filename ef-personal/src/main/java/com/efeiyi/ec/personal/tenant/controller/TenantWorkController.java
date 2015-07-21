@@ -34,7 +34,7 @@ public class TenantWorkController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantWorkList.do")
+    @RequestMapping("/listTenantWork.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
 
         XQuery xQuery = new XQuery("plistTenantWork_default",request);
