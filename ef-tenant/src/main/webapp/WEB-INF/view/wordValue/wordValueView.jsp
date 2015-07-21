@@ -12,17 +12,19 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单详情</strong> / <small>Order Details</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">字典详情</strong> / <small>Order Details</small></div>
 </div>
 <hr/>
 
+
+属性：
 <div class="am-g">
   <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
     <input type="hidden" name="qm" value="">
     <div class="am-form-group">
-      <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label">传承人</label>
+      <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label"></label>
       <div class="am-u-sm-9">
-        <input type="text" name="tenantName" id="tenantName" placeholder="传承人" value="${object.tenant.id}" readonly="readonly">
+        <input type="text" name="tenantName" id="tenantName" placeholder="字典代码" value="${object.tenant.fullName}" readonly="readonly">
         <!-- <small>必填项*</small>-->
       </div>
     </div>
