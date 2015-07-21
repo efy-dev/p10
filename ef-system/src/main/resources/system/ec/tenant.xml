@@ -33,9 +33,33 @@
                 <do name="removeTenant" label="删除大师" access="" result="json"/>
                 <do name="listTenant" label="传承人列表" access="" result="/tenant/tenantList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
-                        <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
-                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                        <condition label="主键" name="id" defaultValue="0" peration="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="TenantBanner" label="传承人轮播图列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantBanner">
+            <does>
+                <do name="plistTenantBanner" access="" label="传承人轮播图分页列表"
+                    result="/tenantBanner/tenantBannerPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+
+                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
+                <do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>
+                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
+                </do>
+                <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
+                <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" operation="eq"/>
+                        <condition label="状态" name="theStatus" operation="eq"/>
                     </query>
                 </do>
 

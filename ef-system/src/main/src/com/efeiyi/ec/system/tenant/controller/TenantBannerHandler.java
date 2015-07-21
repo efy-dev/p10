@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.tenant.controller;
 
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2015/7/20.
  */
-public class TenantHandler implements MultipartHandler{
+public class TenantBannerHandler implements MultipartHandler{
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
@@ -27,15 +28,21 @@ public class TenantHandler implements MultipartHandler{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "photo/"+identify+".jpg";
-        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("favicon"), "tenant", url);
+        String url = "banner/"+identify+".jpg";
+        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("imageUrl"), "tenant", url);
 
-        //保存对象 start
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
         HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
-        paramMap.put("favicon",url);
+        paramMap.put("imageUrl",url);
+        paramMap.put("group","tenant");
+        paramMap.put("theStatus","1");
+
+        Tenant tenant = new Tenant();
+        tenant.setId(request.getParameter("tenant_id"));
+        paramMap.put("tenant",tenant);
+
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
-        //保存对象 end
+
         modelMap.put("object",object);
 
         return modelMap;
