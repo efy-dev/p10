@@ -34,13 +34,43 @@
 <div id="nav">
     <h1><a href="#"><img src="<c:url value="/scripts/assets/images/logo2.gif"/>"></a></h1>
     <ul class="nav-centent">
-        <li><a href="${pageContext.request.contextPath}/tenant/getTenant.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/tenantIntroductionList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/getTenant/{tenantId}"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/tenantIntroductionList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantProduct/tenantProductList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantInfo/tenantInfoList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantWork/getTenantWorkShop.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
     </ul>
 </div>
 <sitemesh:write property='body'/>
+<div id="footer">
+    <ul class="guild">
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
+        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
+    </ul>
+    <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
+</div>
+<!--分析-->
+<div class="floating_ck">
+    <dl>
+        <dt></dt>
+        <dd class="return">
+            <span onClick="gotoTop();return false;"></span>
+        </dd>
+        <dd class="qrcord">
+            <span></span>
+            <div class="floating_left floating_ewm">
+                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/> "></i>
+            </div>
+        </dd>
+        <dd class="quote">
+            <span>分享</span>
+            <div class="floating_left"><a href="#">分享</a></div>
+        </dd>
+
+
+    </dl>
+</div>
 </body>
 </html>
