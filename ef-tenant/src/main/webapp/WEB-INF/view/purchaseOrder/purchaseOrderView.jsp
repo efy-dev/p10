@@ -21,42 +21,42 @@
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="">
         <div class="am-form-group">
-            <label name="serial" for="user-name" class="am-u-sm-3 am-form-label">购买物品</label>
+            <label name="serial" class="am-u-sm-3 am-form-label">购买物品</label>
             <div class="am-u-sm-9">
-                <input type="text" name="serial" id="user-name" placeholder="购买物品" value="${object.serial}" readonly="readonly">
+                ${object.serial}
                 <!--<small>必填项*</small>-->
             </div>
         </div>
         <div class="am-form-group">
-            <label name="createDatetime" for="createDatetime" class="am-u-sm-3 am-form-label">下单时间</label>
+            <label name="createDatetime" class="am-u-sm-3 am-form-label">下单时间</label>
             <div class="am-u-sm-9">
-                <input type="text" name="createDatetime" id="createDatetime" placeholder="下单时间" value="${object.createDatetime}" readonly="readonly">
+                ${object.createDatetime}
                <!-- <small>必填项*</small>-->
             </div>
         </div>
         <div class="am-form-group">
-            <label name="userName" for="userName" class="am-u-sm-3 am-form-label">用户姓名</label>
+            <label name="userName"  class="am-u-sm-3 am-form-label">用户姓名</label>
             <div class="am-u-sm-9">
-                <input type="text" name="userName" id="userName" placeholder="用户姓名" value="${object.user.name}" readonly="readonly">
+                ${object.user.name}
                 <!-- <small>必填项*</small>-->
             </div>
         </div>
         <div class="am-form-group">
-            <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式</label>
+            <label name="payWay"  class="am-u-sm-3 am-form-label">支付方式</label>
             <div class="am-u-sm-9">
                 <c:if test="${object.payWay==1}">
-                    <input type="text" name="payWay" id="payWay" placeholder="支付方式" value="支付宝支付" readonly="readonly">
+                    支付宝支付
                 </c:if>
                 <c:if test="${object.payWay==2}">
-                    <input type="text" name="payWay" id="payWay" placeholder="支付方式" value="微信支付" readonly="readonly">
+                    微信支付
                 </c:if>
                 <!-- <small>必填项*</small>-->
             </div>
         </div>
         <div class="am-form-group">
-            <label name="userAddress" for="userAddress" class="am-u-sm-3 am-form-label">用户地址</label>
+            <label name="userAddress" class="am-u-sm-3 am-form-label">用户地址</label>
             <div class="am-u-sm-9">
-                <input type="text" name="userAddress" id="userAddress" placeholder="用户地址" value="${object.consumerAddress.details}" readonly="readonly">
+               用户地址
                 <!-- <small>必填项*</small>-->
             </div>
         </div>
