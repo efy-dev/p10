@@ -1,9 +1,8 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
-import com.efeiyi.ec.product.model.Product;
+
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,22 +35,7 @@ public class TenantProductController {
      */
     @RequestMapping("/tenantProductList.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-//        String condition = request.getParameter("condition");
-//        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-//        String tenantId = request.getParameter("tenantId");
-//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
-//        model.addAttribute("tenant",tenant);
-//        StringBuffer sb = new StringBuffer("from TenantProduct p where p.tenant.id = :tenantId");
-//        queryParamMap.put("tenantId",tenantId);
-//        /**
-//         * 根据页面传递查询参数来选择展示的数据
-//         */
-//        if(condition != null && Long.valueOf(condition) > 0){
-//            sb.append(" and YEAR(p.createDateTime) = "+ Integer.valueOf(condition));
-//        }
-//        sb.append(" order by p.createDateTime DESC");
-//        List productList = baseManager.listObject(sb.toString(), queryParamMap);
-//        model.addAttribute("productList",productList);
+
         XQuery xQuery = new XQuery("plistProduct_default",request);
         xQuery.addRequestParamToModel(model,request);
         List productList = baseManager.listPageInfo(xQuery).getList();

@@ -13,8 +13,8 @@
         <entity name="tenantInfo" label="传承人资讯"  model="com.efeiyi.ec.tenant.model.TenantNews">
             <does>
                 <do name="plistTenantInfo" access="" label="传承人资讯列表">
-                    <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
 
                     </query>
                 </do>
@@ -41,8 +41,8 @@
         <entity name="tenant" label="传承人"  model="com.efeiyi.ec.tenant.model.TenantWork">
             <does>
                 <do name="plistProduct" access="" label="传承人作品">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="name" defaultValue="111" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
             </does>
