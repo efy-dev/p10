@@ -45,6 +45,12 @@ public class TenantInfoController {
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
+        String queryHql = "from WordValue w where w.group = :group";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("group","1");
+        List list = baseManager.listObject(queryHql,queryParamMap);
+        model.addAttribute("tagList",list);
+
        return "/tenantInfo/tenantInfoList";
     }
 
