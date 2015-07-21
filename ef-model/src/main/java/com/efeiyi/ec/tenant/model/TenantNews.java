@@ -19,6 +19,7 @@ public class TenantNews {
     private String content;
     private String type;
     private Tenant tenant;
+    private String dataSource; //来源
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -85,5 +86,14 @@ public class TenantNews {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @Column(name = "data_source")
+    public String getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
     }
 }

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 
 
@@ -158,7 +159,7 @@ public class SigninController extends BaseController {
     public ModelAndView login(HttpServletRequest request,ModelMap model) {
         String username = request.getParameter("username");
         String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA");
+        String password = StringUtil.encodePassword(pword,"SHA1");
         String queryHql = "from BigUser b where b.username =:username and b.password =:password";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username",username);
@@ -177,7 +178,7 @@ public class SigninController extends BaseController {
     public ModelAndView register(HttpServletRequest request , ModelMap model) throws Exception {
         String username = request.getParameter("username");
         String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA");
+        String password = StringUtil.encodePassword(pword,"SHA1");
         BigUser user = new BigUser();
         user.setUsername(username);
         user.setPassword(password);

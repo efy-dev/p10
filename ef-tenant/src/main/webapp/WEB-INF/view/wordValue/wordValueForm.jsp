@@ -12,25 +12,25 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑商品</strong> / <small>New/Edit Product</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑字典</strong> / <small>New/Edit Dictionary</small></div>
 </div>
 <hr/>
 
 <div class="am-g">
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateProduct">
+        <input type="hidden" name="qm" value="saveOrUpdateWordValue">
       <input type="hidden" name="id" value="${object.id}">
       <div class="am-form-group">
-        <label name="name" for="user-name" class="am-u-sm-3 am-form-label">商品名称</label>
+        <label name="group" for="group" class="am-u-sm-3 am-form-label">字典组</label>
         <div class="am-u-sm-9">
-          <input type="text" name="name" id="user-name" placeholder="商品名称" value="${object.name}">
+          <input type="text" name="group" id="group" placeholder="字典组" value="${object.group}">
           <small>必填项*</small>
         </div>
       </div>
       <div class="am-form-group">
-        <label name="price" for="price" class="am-u-sm-3 am-form-label">商品价格</label>
+        <label name="value" for="value" class="am-u-sm-3 am-form-label">字典名称</label>
         <div class="am-u-sm-9">
-          <input type="text" name="price" id="price" placeholder="商品价格" value="${object.price}">
+          <input type="text" name="value" id="value" placeholder="字典名称" value="${object.value}">
           <small>必填项*</small>
         </div>
       </div>
@@ -43,6 +43,5 @@
  </div>
 <!-- content end -->
 <hr/>
-
 </body>
 </html>

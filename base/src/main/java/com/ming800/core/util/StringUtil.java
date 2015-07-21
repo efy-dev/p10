@@ -14,8 +14,13 @@ import java.util.Random;
 
 public class StringUtil {
 
-    public static String encodePassword(String password, String algorithm) {
-        byte[] unencodedPassword = password.getBytes();
+    public static String encodePassword(String password, String algorithm){
+        byte[] unencodedPassword={};
+     try{
+         unencodedPassword=password.getBytes("utf-8");
+        }catch(UnsupportedEncodingException e){
+         e.printStackTrace();
+        }
         MessageDigest md;
         try {
             md = MessageDigest.getInstance(algorithm);
@@ -28,14 +33,15 @@ public class StringUtil {
         md.update(unencodedPassword);
         // now calculate the hash
         byte[] encodedPassword = md.digest();
-        StringBuffer buf = new StringBuffer();
+        /*StringBuffer buf = new StringBuffer();
         for (byte anEncodedPassword : encodedPassword) {
             if ((anEncodedPassword & 0xff) < 0x10) {
                 buf.append("0");
             }
             buf.append(Long.toString(anEncodedPassword & 0xff, 16));
         }
-        return buf.toString();
+        return buf.toString();*/
+        return getFormattedText(encodedPassword);
     }
 
     /**
@@ -184,4 +190,16 @@ public class StringUtil {
         }
         return stringBuilder.toString();
     }
+
+    private static String getFormattedText(byte bytes[]) {
+        StringBuilder buf = new StringBuilder(bytes.length * 2);
+        for (int j = 0; j < bytes.length; j++) {
+            buf.append(HEX_DIGITS[bytes[j] >> 4 & 15]);
+            buf.append(HEX_DIGITS[bytes[j] & 15]);
+        }
+
+        return buf.toString();
+    }
+    private static final char HEX_DIGITS[] = { '0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 }

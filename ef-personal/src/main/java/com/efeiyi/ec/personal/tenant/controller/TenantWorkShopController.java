@@ -4,9 +4,8 @@ import com.efeiyi.ec.tenant.model.TenantWorkShop;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -29,14 +28,14 @@ public class TenantWorkShopController {
      * @return
      */
     @RequestMapping("/getTenantWorkShop.do")
-    public ModelAndView getTenantWorkShop(HttpServletRequest request ,ModelMap model){
+    public String getTenantWorkShop(HttpServletRequest request ,Model model){
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         String tenantId = request.getParameter("tenantId");
         String queryHql = "from TenantWorkShop t where t.tenant.id = :tenantId";
         queryParamMap.put("tenantId",tenantId);
         TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         model.addAttribute("productWorkShop", productWorkShop);
-        return new ModelAndView("/tenantWorkShop/tenantWorkShopView", model);
+        return "/tenantWorkShop/tenantWorkShopView";
     }
 
 

@@ -19,31 +19,27 @@
 <body>
 
      <div style="text-align: left" >
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formWordValue"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建字典" />
      </div>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
                 <td>操作</td>
-                <td>产品名称</td>
-                <td>图片地址</td>
-                <td>价格</td>
-                <td>系列</td>
+                <td>字典组</td>
+                <td>字典名称</td>
             </tr>
 
-          <c:forEach items="${requestScope.pageInfo.list}" var="product">
+          <c:forEach items="${requestScope.pageInfo.list}" var="wordValue">
                 <tr style="text-align: center">
                     <td width="20%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                <button style="margin-left: 35%;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
                     </td>
-                    <td width="20%"><a href="/basic/xm.do?qm=viewProduct&id=${product.id}"> ${product.name}</a></td>
-                    <td width="20%">${product.picture_url}</td>
-                    <td width="20%">${product.price}</td>
-                    <td width="20%">${product.serial}</td>
+                    <td width="20%">${wordValue.group}</td>
+                    <td width="20%">${wordValue.value}</td>
                 </tr>
             </c:forEach>
         </table>
