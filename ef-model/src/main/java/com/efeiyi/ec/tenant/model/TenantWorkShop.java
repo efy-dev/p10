@@ -15,6 +15,7 @@ public class TenantWorkShop {
     private String name;
     private Tenant tenant;
     private String picture_url;
+    private String videoPath;
     private Date createDateTime;
     private String shopIntroduction;
 
@@ -56,6 +57,15 @@ public class TenantWorkShop {
 
     public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
+    }
+
+    @Column(name = "video_path")
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 
     @Column(name="create_datetime")

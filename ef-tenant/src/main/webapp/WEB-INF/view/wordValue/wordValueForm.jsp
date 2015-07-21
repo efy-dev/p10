@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加商品</strong> / <small>Add Product</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建字典</strong> / <small>New Dictionary</small></div>
 </div>
 <hr/>
 
@@ -21,9 +21,9 @@
         <input type="hidden" name="qm" value="saveOrUpdateWordValue">
       <input type="hidden" name="id" value="${object.id}">
       <div class="am-form-group">
-        <label name="group" for="group" class="am-u-sm-3 am-form-label">字典代码</label>
+        <label name="group" for="group" class="am-u-sm-3 am-form-label">字典组</label>
         <div class="am-u-sm-9">
-          <input type="text" name="group" id="group" placeholder="字典代码" value="${object.group}">
+          <input type="text" name="group" id="group" placeholder="字典组" value="${object.group}">
           <small>必填项*</small>
         </div>
       </div>
