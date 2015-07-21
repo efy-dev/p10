@@ -78,24 +78,24 @@
     </div>
   </div>
   <div class="center-right">
-    <c:forEach items="${productList}" var="product" varStatus="vs">
-      <c:if test="${productList.size()-1 != vs.index && vs.index%3 == 0}">
+    <c:forEach items="${tenantWorkList}" var="product" varStatus="vs">
+      <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
         <div class="works-container">
           <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </c:if>
-       <c:if test="${productList.size()-1 != vs.index && vs.index%3==1}">
+       <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
          <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
        </c:if>
       <c:if test="${ vs.index%3==2}">
           <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img-1"></a>
     </div>
       </c:if>
-      <c:if test="${productList.size()-1 == vs.index && vs.index%3 == 0}">
+      <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
       <div class="works-container">
         <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </div>
       </c:if>
-      <c:if test="${productList.size()-1 == vs.index && vs.index%3 == 1}">
+      <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
       <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </div>
       </c:if>
@@ -112,52 +112,5 @@
                        value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
 </ming800:pcPageList>
 <!--其他内容-->
-<div id="footer">
-  <ul class="guild">
-    <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/>"></a></li>
-    <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/>"></a></li>
-    <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/>"></a></li>
-    <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/>"></a></li>
-  </ul>
-  <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-
-<!--分析-->
-<div class="floating_ck">
-  <dl>
-    <dt></dt>
-    <dd class="return">
-      <span onClick="gotoTop();return false;"></span>
-    </dd>
-    <dd class="qrcord">
-      <span ></span>
-      <div class="floating_left floating_ewm floating_left-1">
-        <i><img src="/scripts/assets/images/images/img6_03.jpg"></i>
-      </div>
-    </dd>
-    <dd class="quote">
-      <span>分享</span>
-      <div class="floating_left">
-        <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wx.gif"/>"></a>
-        <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wqq.gif"/>"></a>
-        <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/kj.gif"/>"></a>
-        <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/xl.gif"/>"></a>
-        <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif"/>"></a>
-      </div>
-    </dd>
-
-
-  </dl>
-</div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js/"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="js/amazeui.min.js"></script>
-
 </body>
 </html>

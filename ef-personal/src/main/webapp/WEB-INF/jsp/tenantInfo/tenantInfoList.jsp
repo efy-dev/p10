@@ -108,36 +108,5 @@
                          value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
 </ming800:pcPageList>
 <!--其他内容-->
-<div id="footer">
-    <ul class="guild">
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
-    </ul>
-    <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-<!--分析-->
-<div class="floating_ck">
-    <dl>
-        <dt></dt>
-        <dd class="return">
-            <span onClick="gotoTop();return false;"></span>
-        </dd>
-        <dd class="qrcord">
-            <span></span>
-            <div class="floating_left floating_ewm">
-                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/> "></i>
-            </div>
-        </dd>
-        <dd class="quote">
-            <span>分享</span>
-            <div class="floating_left"><a href="#">分享</a></div>
-        </dd>
-
-
-    </dl>
-</div>
-
 </body>
 </html>

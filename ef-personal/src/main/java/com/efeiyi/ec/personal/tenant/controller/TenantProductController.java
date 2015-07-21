@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/tenantProduct")
+@RequestMapping("/tenantWork")
 public class TenantProductController {
 
     @Autowired
@@ -33,15 +33,15 @@ public class TenantProductController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantProductList.do")
+    @RequestMapping("/tenantWorkList.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistProduct_default",request);
-        xQuery.addRequestParamToModel(model,request);
-        List productList = baseManager.listPageInfo(xQuery).getList();
-        model.addAttribute("productList",productList);
+        XQuery xQuery = new XQuery("plistTenantWork_default",request);
+        xQuery.addRequestParamToModel(model, request);
+        List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
+        model.addAttribute("tenantWorkList",tenantWorkList);
 
-        return "/tenantProduct/tenantProductList";
+        return "/tenantWork/tenantWorkList";
 
     }
     /**
@@ -61,7 +61,7 @@ public class TenantProductController {
         ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);
         modelMap.addAttribute("productDescription",productDescription);
         modelMap.addAttribute("productPicture", productPicture);
-        return new ModelAndView("/tenantProduct/tenantProductView",modelMap);
+        return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
 
