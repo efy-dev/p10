@@ -13,25 +13,20 @@
 <link href="/script/assets/css/amazeui.css">
 <html>
 <head>
-    <title>产品列表</title>
+    <title>字典列表</title>
 </head>
 <body>
   <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
     <tr>
-      <td>产品id</td>
-      <td>产品名称</td>
-      <td>图片地址</td>
-      <td>价格</td>
-      <td>系列</td>
+      <td>字典id</td>
+      <td>字典代码</td>
+      <td>字典名称</td>
     </tr>
-
-      <c:forEach items="${objectList}" var="product">
+      <c:forEach items="${objectList}" var="wordValue">
     <tr>
-        <td>${product.id}</td>
-        <td>${product.name}</td>
-        <td>${product.picture_url}</td>
-        <td>${product.price}</td>
-        <td>${product.serial}</td>
+        <td>${wordValue.id}</td>
+        <td>${wordValue.group}</td>
+        <td>${wordValue.value}</td>
     </tr>
       </c:forEach>
     <%--<c:forEach items="${objectList}" var="product">--%>
