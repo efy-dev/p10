@@ -41,7 +41,11 @@ public class WordValueController {
         return  new ModelAndView("/");
     }
 
-
+    @RequestMapping("/test.do")
+   public List test(){
+       List list = wordValueManager.listWordValueByGroup("1");
+       return  list;
+   }
 
 
 }
