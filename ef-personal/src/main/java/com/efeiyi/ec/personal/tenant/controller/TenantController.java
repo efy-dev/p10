@@ -1,6 +1,7 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantWork;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -33,8 +35,12 @@ public class TenantController extends BaseController {
      */
     @RequestMapping({"/{tenantId}"})
     public ModelAndView getTenant(HttpServletRequest request ,  @PathVariable String tenantId , Model model)throws Exception{
-
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        String queryHql = "from TenantWork t where t.tenant.id = :tenantId";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("tenantId",tenantId);
+        List list = baseManager.listObject(queryHql,queryParamMap);
+        model.addAttribute("tenantWorkList",list);
         model.addAttribute("entity", tenant);
         return new ModelAndView("/tenant/tenantView");
     }
