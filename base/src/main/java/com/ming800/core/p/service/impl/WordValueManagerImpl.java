@@ -32,13 +32,12 @@ public class WordValueManagerImpl implements WordValueManager {
     @Autowired
     private WordValueDao  wordValueDao;
 
-    private static final String DICTIONARIES_MODEL = "/setting/dictionaries.xml";
-    private static Map<String, Dictionary> dictionaryMap = new HashMap<>();
+
 
     @Override
-    public  List listWordValueByGroup(WordValue wordValue){
+    public  List listWordValueByGroup(String group){
 
-        return  wordValueDao.listWordValueByGroup(wordValue);
+        return  wordValueDao.listWordValueByGroup(group);
     }
 
 }

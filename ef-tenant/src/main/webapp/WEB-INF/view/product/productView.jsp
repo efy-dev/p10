@@ -22,7 +22,7 @@
     <div class="am-form-group">
       <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label">传承人</label>
       <div class="am-u-sm-9">
-        <input type="text" name="tenantName" id="tenantName" placeholder="传承人" value="${object.tenant.fullName}" readonly="readonly">
+        <input type="text" name="tenantName" id="tenantName" placeholder="传承人" value="${object.tenant.id}" readonly="readonly">
         <!-- <small>必填项*</small>-->
       </div>
     </div>
