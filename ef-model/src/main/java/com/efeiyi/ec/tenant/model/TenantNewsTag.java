@@ -9,10 +9,10 @@ import javax.persistence.*;
  * Created by Administrator on 2015/6/26.
  */
 @Entity
-@Table(name = "tenant_work_tag")
-public class TenantWorkTag {
+@Table(name = "tenant_news_tag")
+public class TenantNewsTag {
     private String id;
-    private TenantWork tenantWork;
+    private TenantNews tenantNews;
     private WordValue wordValue;
     private String status;
 
@@ -27,14 +27,14 @@ public class TenantWorkTag {
         this.id = id;
     }
 
-    @JoinColumn(name = "tenant_work_id")
+    @JoinColumn(name = "tenant_news_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    public TenantWork getTenantWork() {
-        return tenantWork;
+    public TenantNews getTenantNews() {
+        return tenantNews;
     }
 
-    public void setTenantWork(TenantWork tenantWork) {
-        this.tenantWork = tenantWork;
+    public void setTenantNews(TenantNews tenantNews) {
+        this.tenantNews = tenantNews;
     }
 
     @JoinColumn(name = "base_word_value_id")
