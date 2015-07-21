@@ -5,9 +5,7 @@ import com.ming800.core.base.util.SystemValueUtil;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.PConst;
-import com.ming800.core.p.model.FileData;
 import com.ming800.core.p.service.AttachmentManager;
-import com.ming800.core.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,23 +61,8 @@ public class AttachmentManagerImpl implements AttachmentManager {
             String queryStr = "from " + name + " o where o.id in (:attachementIds)";
             LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
             queryParamMap.put("attachementIds", attachementIds);
-            List attachementList = baseDao.getObjectList(queryStr, queryParamMap);
-            for (Object obj : attachementList) {
-                FileData fileData = (FileData) ReflectUtil.invokeGetterMethod(obj, "data");
-                String storeType = ReflectUtil.invokeGetterMethod(obj, "storeType").toString();
-                if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DATABASE)) {
-                    baseDao.deleteObject(FileData.class.getName(), fileData.getId());
-                } else if (storeType.equals(PConst.ATTACHMENT_STORETYPE_DISK)) {
-                    // 获取路径
-                    File file = new File(fileData.getPath());
-                    if (file.exists()) {
-                        file.delete();
-                    }
-                } else if (storeType.equals(PConst.ATTACHMENT_STORETYPE_ALI_CLOUD)) {
-                    String path = ReflectUtil.invokeGetterMethod(obj, "path").toString();
-                    aliOssUploadManager.deleteFile("m80", path);
-                }
-            }
+
+
             StringBuilder queryStrBuilder = new StringBuilder("delete from " + name + " where id in (:ids)");
             LinkedHashMap<String, Object> paramMap = new LinkedHashMap<>();
             paramMap.put("ids", attachementIds);
