@@ -14,7 +14,7 @@
 <div style="width:100%;height:23px;"></div>
 <div id="page-column">
   <h5>[${tenantNews.type}]${tenantNews.title}</h5>
-  <div class="p"><fmt:formatDate value="${tenantNews.createDateTime}" pattern="yyyy.MM.dd" />  来源：${tenantNews.dataSource}</div>
+  <div class="p"><fmt:formatDate value="${tenantNews.createDateTime}" pattern="yyyy.MM.dd" />  来源:${tenantNews.dataSource}</div>
 
   <div class="column-text-page">
       ${tenantNews.content}
