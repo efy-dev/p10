@@ -51,7 +51,7 @@ public class WordValue {
         return status;
     }
 
-    public void setStatus(Integer theStatus) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

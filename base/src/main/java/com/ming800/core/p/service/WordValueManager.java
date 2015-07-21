@@ -12,7 +12,7 @@ public interface WordValueManager {
 
     /**
      * 获取 字典列表
-     * @param wordValue
+     * @param group
      * @return
      */
     List listWordValueByGroup(String group);

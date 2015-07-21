@@ -30,13 +30,16 @@ public class WordValueDaoHibernate extends BaseDaoSupport<WordValue> implements 
 
     @Override
     public  List listWordValueByGroup(String group){
-        List<Object> valueList = new ArrayList<Object>();
-        String  hql = "SELECT * FROM WordValue d where d.status != 0  ";
-        if(group != null &&!"".equals(group)){
-             hql += " and d.group = ?";
-            valueList.add(group);
-        }
-          return xdoDao.getObjectList(hql,valueList);
+
+        Session session = this.getSession();
+        Query query = session.createQuery("SELECT d FROM WordValue d WHERE d.group = :group and d.status != 0  order by d.id ")
+                .setString("group", group);
+        return query.list();
+
+      /*  Object [] objects = new  Object[]{group};
+        String  hql = "SELECT * FROM WordValue d where d.status != 0  and d.group = :group";
+
+          return xdoDao.getObjectList(hql,objects);*/
     }
 
    /* @Override
