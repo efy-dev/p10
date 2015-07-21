@@ -20,6 +20,23 @@
         <param-value>60000</param-value>
     </context-param>
 
+    <!--&lt;!&ndash; Spring提供的避免Hibernate懒加载异常的过滤器-->
+<!--让Session在请求解释完成之后再关闭，从而避免懒加载异常 &ndash;&gt;-->
+    <!--<filter>-->
+        <!--<filter-name>openSessionInViewFilter</filter-name>-->
+        <!--<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>openSessionInViewFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--&lt;!&ndash; 需要添加spring-web.jar包，否则用发生错误信息 &ndash;&gt;-->
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
+    <!--</listener>-->
+
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -28,10 +45,19 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!-- 需要添加spring-web.jar包，否则用发生错误信息 -->
-    <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-    </listener>
+
+
+    <filter>
+        <filter-name>lazyLoadingFilter</filter-name>
+        <filter-class>
+            org.springframework.orm.hibernate4.support.OpenSessionInViewFilter
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>lazyLoadingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!--    <filter>
             <filter-name>filterChainProxy</filter-name>
@@ -52,6 +78,9 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+
+
 
     <!-- 定义DispatcherServlet -->
     <servlet>
