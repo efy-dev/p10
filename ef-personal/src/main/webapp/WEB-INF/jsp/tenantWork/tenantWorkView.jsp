@@ -60,50 +60,5 @@
   </div>
 </div>
 <!--其他内容-->
-<div id="footer">
-  <ul class="guild">
-    <li><a href="#"><img src="images/i/fybk.jpg"></a></li>
-    <li><a href="#"><img src="images/i/efeiyi.jpg"></a></li>
-    <li><a href="#"><img src="images/i/cpb.jpg"></a></li>
-    <li><a href="#"><img src="images/i/gl.jpg"></a></li>
-  </ul>
-  <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-<!--分析-->
-<div class="floating_ck">
-  <dl>
-    <dt></dt>
-    <dd class="return">
-      <span onClick="gotoTop();return false;"></span>
-    </dd>
-    <dd class="qrcord">
-      <span ></span>
-      <div class="floating_left floating_ewm floating_left-1">
-        <i><img src="images/images/img6_03.jpg"></i>
-      </div>
-    </dd>
-    <dd class="quote">
-      <span>分享</span>
-      <div class="floating_left">
-        <a href="#" class="float-a"><img src="images/i/wx.gif"></a>
-        <a href="#" class="float-a"><img src="images/i/wqq.gif"></a>
-        <a href="#" class="float-a"><img src="images/i/kj.gif"></a>
-        <a href="#" class="float-a"><img src="images/i/xl.gif"></a>
-        <a href="#" class="float-a"><img src="images/i/qq.gif"></a>
-      </div>
-    </dd>
-
-
-  </dl>
-</div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="js/amazeui.min.js"></script>
 </body>
 </html>

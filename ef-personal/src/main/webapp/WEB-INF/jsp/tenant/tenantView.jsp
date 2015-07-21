@@ -38,36 +38,6 @@
         <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
     </dl>
 </div>
-<div id="footer">
-    <ul class="guild">
-        <li><a href="#"><img src="/scripts/assets/images/i/fybk.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/efeiyi.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/cpb.jpg"></a></li>
-        <li><a href="#"><img src="/scripts/assets/images/i/gl.jpg"></a></li>
-    </ul>
-    <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-<!--分析-->
-<div class="floating_ck">
-    <dl>
-        <dt></dt>
-        <dd class="return">
-            <span onClick="gotoTop();return false;"></span>
-        </dd>
-        <dd class="qrcord">
-            <span></span>
-            <div class="floating_left floating_ewm">
-                <i></i>
-            </div>
-        </dd>
-        <dd class="quote">
-            <span>分享</span>
-            <div class="floating_left"><a href="#">分享</a></div>
-        </dd>
-
-
-    </dl>
-</div>
 <!--内容-->
 
 </body>

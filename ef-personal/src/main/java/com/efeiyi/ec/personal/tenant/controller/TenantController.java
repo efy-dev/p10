@@ -6,6 +6,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +28,15 @@ public class TenantController extends BaseController {
 
     /**
      * 获取某传承人的详情页
-     * @param modelMap
+     * @param model
      * @return
      */
-    @RequestMapping({"/getTenant/{tenantId}"})
-    public ModelAndView getTenant(HttpServletRequest request ,  @PathVariable String tenantId , ModelMap modelMap)throws Exception{
+    @RequestMapping({"/{tenantId}"})
+    public ModelAndView getTenant(HttpServletRequest request ,  @PathVariable String tenantId , Model model)throws Exception{
 
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
-        modelMap.addAttribute("entity", tenant);
-        return new ModelAndView("/tenant/tenantView", modelMap);
+        model.addAttribute("entity", tenant);
+        return new ModelAndView("/tenant/tenantView");
     }
 
     /**

@@ -12,12 +12,12 @@
     <script src="../scripts/assets/js/jquery.jslides.js"></script>
     <script src="../scripts/assets/js/amazeui.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $.post("", { tenantId: ""},
-                function(data){
-                    process(data);
-                }, "text");
-        })
+//        $(document).ready(function(){
+//            $.post("", { tenantId: ""},
+//                function(data){
+//                    process(data);
+//                }, "text");
+//        })
     </script>
     <sitemesh:write property='head'/>
 </head>
@@ -36,8 +36,8 @@
     <ul class="nav-centent">
         <li><a href="${pageContext.request.contextPath}/tenant/getTenant/{tenantId}"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantIntroduction/tenantIntroductionList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantProduct/tenantProductList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantInfo/tenantInfoList.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWork/tenantWorkList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantInfo/tenantInfoList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantWork/getTenantWorkShop.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
     </ul>
 </div>

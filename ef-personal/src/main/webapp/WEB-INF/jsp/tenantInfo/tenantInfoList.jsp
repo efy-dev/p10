@@ -3,14 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2015/7/17
-  Time: 15:53
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -100,7 +92,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <span><a href="#">详情</a></span>
+                        <span><a href="<c:url value="/tenantInfo/getTenantInfo.do?tenantNewsId=1"/>">详情</a></span>
                     </div>
                 </div>
                 <div class="alllist-border"></div>
@@ -116,36 +108,5 @@
                          value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
 </ming800:pcPageList>
 <!--其他内容-->
-<div id="footer">
-    <ul class="guild">
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
-    </ul>
-    <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-<!--分析-->
-<div class="floating_ck">
-    <dl>
-        <dt></dt>
-        <dd class="return">
-            <span onClick="gotoTop();return false;"></span>
-        </dd>
-        <dd class="qrcord">
-            <span></span>
-            <div class="floating_left floating_ewm">
-                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/> "></i>
-            </div>
-        </dd>
-        <dd class="quote">
-            <span>分享</span>
-            <div class="floating_left"><a href="#">分享</a></div>
-        </dd>
-
-
-    </dl>
-</div>
-
 </body>
 </html>

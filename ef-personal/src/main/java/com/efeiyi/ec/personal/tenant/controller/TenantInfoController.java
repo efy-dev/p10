@@ -1,5 +1,6 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
+import com.efeiyi.ec.tenant.model.TenantNews;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class TenantInfoController {
     private BaseManager baseManager;
 
     /**
-     * 传承人资讯
+     * 传承人资讯列表
      * @param request
      * @param model
      * @return
@@ -38,12 +39,25 @@ public class TenantInfoController {
 //            queryParamMap.put("type",type);
 //            queryHql.append(" and t.type =:type ");
 //        }
-
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
         xQuery.addRequestParamToModel(model,request);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
        return "/tenantInfo/tenantInfoList";
+    }
+
+    /**
+     * 获取传承人资讯
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("/getTenantInfo.do")
+    public  String getTenantInfo(HttpServletRequest request,Model model){
+        String  tenantNewsId = request.getParameter("tenantNewsId");
+        TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantNewsId);
+        model.addAttribute("tenantNews",tenantNews);
+        return "/tenantInfo/tenantInfoView";
     }
 }

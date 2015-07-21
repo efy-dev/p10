@@ -130,7 +130,7 @@ function gotoTop(acceleration,stime) {
        window.setTimeout(run, stime);
    }
 }
-/**文本字数限制**/
+//wenzi
 function text()
 {
 	document.getElementById('txta1').onkeydown = function()
@@ -139,4 +139,4 @@ function text()
       event.returnValue = false;
 }
 }
-/**1**/
+//1
