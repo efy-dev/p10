@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Administrator on 2015/7/21.
  */
-public class TenantIntroductionFormHandler implements DoHandler {
+public class TenantWorkHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {

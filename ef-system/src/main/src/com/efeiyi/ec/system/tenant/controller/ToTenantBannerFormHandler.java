@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Administrator on 2015/7/20.
  */
-public class ToTenantBannerFormHandler implements DoHandler{
+public class ToTenantBannerFormHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        modelMap.put("tenant_id",request.getParameter("tenantId"));
+        if (request.getParameter("tenantId") != null) {
+            modelMap.put("tenant_id", request.getParameter("tenantId"));
+        }
         return modelMap;
     }
 }

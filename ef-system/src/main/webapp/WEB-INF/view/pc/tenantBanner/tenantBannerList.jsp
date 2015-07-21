@@ -17,7 +17,6 @@
 <%--</c:forEach>--%>
 <%--</div>--%>
 <%--<table class="am-table am-table-bordered">--%>
-<div class="am-u-md-12">
 <%--<thead>--%>
     <%--<tr>--%>
         <%--<th>传承人轮播图</th>--%>
@@ -74,7 +73,6 @@
 
 
 <%--</table>--%>
-</div>
 
 <script>
 
