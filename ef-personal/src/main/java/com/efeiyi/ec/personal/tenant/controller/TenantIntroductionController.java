@@ -79,15 +79,6 @@ public class TenantIntroductionController {
                 }
                 model.addAttribute("list3", list3);
             }
-            if ("yi-shu-nian-biao".equals(tenantIntroduction.getTitle())){
-                List list4 = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list4.add(tenantAttachment);
-                    }
-                }
-                model.addAttribute("list4", list4);
-            }
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
