@@ -15,6 +15,7 @@ public class TenantIntroduction {
     private Tenant tenant;
     private String type;
     private String title;
+    private String status;
     private List<TenantAttachment> attachmentList;
 
 
@@ -55,6 +56,15 @@ public class TenantIntroduction {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "introduction")
