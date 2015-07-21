@@ -154,10 +154,9 @@ a{ text-decoration:none;}
 .buttom-zx{overflow:hidden;}
 .buttom-zx-tr{height:46px;}
 /*咨询详情页*/
-h5{width:627px;height:97px; line-height:97px;}
-h5 a:link,h5 a:visited{color:#242424;font-size:20px; font-family:"微软雅黑"; font-weight:300;outline:none;}
-h5 a:hover{color:red;outline:none;}
-#page-column{padding:0 75px;width:629px; border:1px solid #908E8E; overflow:hidden; margin-bottom:225px}
+h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-family:"微软雅黑"; font-weight:300;}
+#page-column-1{padding:0 75px;width:629px; border:1px solid #908E8E; overflow:hidden; margin:0 auto 225px;}
+.page-column-1-q{margin:0 auto;}
 .p{ color:#999; font-size:12px; font-family:"宋体";background:url(../images/logo18.jpg) repeat-x 0 bottom;}
 .column-text-page{color:#333; font-size:12px; font-family:"宋体"; line-height:24px;}
 /*按钮1*/
@@ -230,11 +229,12 @@ h5 a:hover{color:red;outline:none;}
 .center-buttom-1{width:210px;height:10px;float:left;}
 .content-border{width:620px; overflow:hidden; border-left:1px solid #6D6D6D; border-right:1px solid #6D6D6D; border-top:1px solid #6D6D6D;}
 .right-content{padding:10px 15px 46px 31px;width:620px;}
-.right-content-img{width:416px;height:596px;margin:0 35px 75px;}
+.right-content-img{width:416px;height:596px;margin:50px 70px 75px;}
 .right-border{height:2px;width:620px; border-bottom:1px solid #6d6d6d;}
 .right-content-p{font-szie:12px; font-family:"宋体";color:#242424;overflow:hidden; line-height:22px;}
 /*工作坊*/
 .video-or-img{width:503px;height:321px;}
+.video-or-img img{width:503px;height:321px;}
 .content-img{width:503px; text-align:center; overflow:hidden;}
 .content-text-gzf{width:503px; overflow:hidden;color:#333; font-size:12px; font-family:"宋体"}
 /*传承人总页*/
@@ -243,13 +243,13 @@ h5 a:hover{color:red;outline:none;}
 .img-mutual-img{padding:27px 0 0 25px;width:223px;height:322px;}
 .img-mutual-img a{width:200px;height:322px; display:block;}
 .img-mutual-jump{margin:22px 0 0 151px;padding-left:15px;display:block; background:url(../images/images/bs.gif) no-repeat 0 center}
-#img-br{background:rgba(60,96,140,0.6);width:198px;height:295px; position:absolute;top:27px;left:25px;display:none;display:block;}
-#img-ff{width:198px;height:85px; position:absolute;top:25px;left:25px; display:none;}
+#img-br{background:rgba(60,96,140,0.6);width:198px;height:295px; position:absolute;top:27px;left:25px;display:none;}
+#img-ff{width:198px;height:322px; position:absolute;top:25px;left:25px; display:block;zindex:-9999;}
 .img-ff-f{width:198px;height:85px; background:#fff; display:block;margin-top:212px;}
 .img-psab{ position:absolute;top:20px;left:0px;top:210px;}
-#img-mutual-text{width:170px;height:294px; position:absolute;top:215px;left:17px;color:#fff;}
+#img-mutual-text{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
 #img-mutual-text h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text p{width:165px;height:35px; line-height:25px;}
-#img-mutual-text1{width:170px;height:294px; position:absolute;top:215px;left:17px;color:#000;}
+#img-mutual-text1{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#000;}
 #img-mutual-text1 h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text1 p{width:165px;height:35px; line-height:25px;}
