@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/tenantWork")
-public class TenantProductController {
+public class TenantWorkController {
 
     @Autowired
     private BaseManager baseManager;
@@ -49,13 +50,12 @@ public class TenantProductController {
      * @param modelMap
      * @return
      */
-    @RequestMapping("/getProduct.do")
-    public ModelAndView getProduct(HttpServletRequest request ,ModelMap modelMap){
-        String productId = request.getParameter("productId");
-        String queryHql = "from ProductDescription p where p.product.id = :productId";
-        String queryHql1 = "from ProductPicture pr where pr.product.id = :productId";
+    @RequestMapping("/{tenantWorkId}")
+    public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
+        String queryHql = "from ProductDescription p where p.product.id = :tenantWorkId";
+        String queryHql1 = "from ProductPicture pr where pr.product.id = :tenantWorkId";
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("productId", productId);
+        queryParamMap.put("tenantWorkId", tenantWorkId);
         //Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
         ProductDescription productDescription = (ProductDescription) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);

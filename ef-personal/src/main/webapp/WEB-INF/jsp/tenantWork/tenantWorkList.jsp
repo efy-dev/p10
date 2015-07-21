@@ -78,25 +78,25 @@
     </div>
   </div>
   <div class="center-right">
-    <c:forEach items="${tenantWorkList}" var="product" varStatus="vs">
+    <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="vs">
       <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
         <div class="works-container">
-          <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+          <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </c:if>
        <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
-         <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+         <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
        </c:if>
       <c:if test="${ vs.index%3==2}">
-          <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img-1"></a>
+          <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img-1"></a>
     </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
       <div class="works-container">
-        <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+        <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
-      <a href="<c:url value="/tenantProduct/getProduct.do?productId=${product.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+      <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
         </div>
       </c:if>
       </c:forEach>

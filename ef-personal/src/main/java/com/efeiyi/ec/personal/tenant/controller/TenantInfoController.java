@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,14 +50,13 @@ public class TenantInfoController {
 
     /**
      * 获取传承人资讯
-     * @param request
      * @param model
      * @return
      */
-    @RequestMapping("/getTenantInfo.do")
-    public  String getTenantInfo(HttpServletRequest request,Model model){
-        String  tenantNewsId = request.getParameter("tenantNewsId");
-        TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantNewsId);
+    @RequestMapping("/{tenantInfoId}")
+    public  String getTenantInfo(@PathVariable String tenantInfoId,Model model){
+        /*String  tenantNewsId = request.getParameter("tenantNewsId");*/
+        TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
         model.addAttribute("tenantNews",tenantNews);
         return "/tenantInfo/tenantInfoView";
     }
