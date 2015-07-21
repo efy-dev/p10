@@ -31,7 +31,7 @@ public class TenantInfoController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantInfoList.do")
+    @RequestMapping("/listTenantInfo.do")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
 
 //       if("0".equals(type)) {
