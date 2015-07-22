@@ -3,6 +3,7 @@ package com.efeiyi.ec.project.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +21,11 @@ public class Project {
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
     private Project fatherProject;//父id
+//    private String fatherProjectId;
     private Category category;//类别
     private Date createDateTime;//忽略
-    private List<Project> subProjectList;
-    private List<ProjectTag> projectTagList;
+    private List<Project> subProjectList;//子项目
+    private List<ProjectTag> projectTagList;//项目标签
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -46,7 +48,7 @@ public class Project {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "father_project_id")
+    @JoinColumn(name = "father_project_id")
     public  Project getFatherProject(){
         return  fatherProject;
     }
@@ -110,7 +112,7 @@ public class Project {
           this.type=type;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     public  List<ProjectTag> getProjectTagList(){
         return  projectTagList;
     }
@@ -118,12 +120,18 @@ public class Project {
          this.projectTagList = projectTagList;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
     public  List<Project> getSubProjectList(){
         return  subProjectList;
     }
     public  void  setSubProjectList(List<Project> subProjectList){
         this.subProjectList = subProjectList;
     }
+
+//    @Column(name="father_project_id")
+//    public String getFatherProjectId(){return  fatherProjectId;}
+//    public void  setFatherProjectId(String fatherProjectId){
+//          this.fatherProjectId = fatherProjectId;
+//    }
 }
 
