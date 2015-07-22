@@ -29,9 +29,6 @@ public class TenantWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
-    private List<ProductTenantCatalog> productTenantCatalogList;
-
-
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -108,15 +105,6 @@ public class TenantWork {
 
     public void setProductPictureList(List<ProductPicture> productPictureList) {
         this.productPictureList = productPictureList;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "product")
-    public List<ProductTenantCatalog> getProductTenantCatalogList() {
-        return productTenantCatalogList;
-    }
-
-    public void setProductTenantCatalogList(List<ProductTenantCatalog> productTenantCatalogList) {
-        this.productTenantCatalogList = productTenantCatalogList;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
