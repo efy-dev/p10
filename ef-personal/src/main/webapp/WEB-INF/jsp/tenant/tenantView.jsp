@@ -17,10 +17,10 @@
         <h1>${entity.fullName}</h1>
         <p>${entity.title}</p>
         <dl class="tab-dl">
-            <dt><a href="#"><img src="/scripts/assets/images/img5.jpg"></a></dt>
+            <dt><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}"><img src="/scripts/assets/images/img5.jpg"></a></dt>
             <dd>${entity.brief}</dd>
         </dl>
-        <span><a href="#">了解详细</a></span>
+        <span><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}">了解详细</a></span>
     </div>
 </div>
 

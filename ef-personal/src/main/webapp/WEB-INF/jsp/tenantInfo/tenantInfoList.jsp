@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="page-nav">
-    <p><a href="#">首页</a><span>资讯</span></p>
+    <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>资讯</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯内容-->

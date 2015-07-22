@@ -13,7 +13,7 @@
 <body>
 <!--简介-->
 <div id="page-nav">
-    <p><a href="#">首页</a><span>简介</span></p>
+    <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>简介</span></p>
 </div>
 <div class="border-nav"></div>
 <!--简介内容-->

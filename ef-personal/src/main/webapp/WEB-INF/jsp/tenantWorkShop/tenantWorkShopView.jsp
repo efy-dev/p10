@@ -7,7 +7,7 @@
 <!--工作坊-->
 <body>
 <div id="page-nav">
-  <p><a href="#">首页</a><span>工作坊</span></p>
+  <p><a href="${pageContext.request.contextPath}/tenant/${tenantId}">首页</a><span>工作坊</span></p>
 </div>
 <div class="border-nav"></div>
 <div id="center--1">

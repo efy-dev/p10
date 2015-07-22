@@ -12,7 +12,7 @@
 
 <!--作品-->
 <div id="page-nav">
-  <p><a href="#">首页</a><span>作品</span></p>
+  <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>作品</span></p>
 </div>
 <div class="border-nav"></div>
 <!--作品内容-->

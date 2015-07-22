@@ -3,6 +3,7 @@ package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,13 @@ public class TenantWorkController {
      */
     @RequestMapping("/listTenantWork.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-
+        String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(23,conditions.length());
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("plistTenantWork_default",request);
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
+        model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
 
         return "/tenantWork/tenantWorkList";
@@ -65,4 +69,6 @@ public class TenantWorkController {
 
     }
 
+/*    @RequestMapping()
+    public ModelAndView list*/
 }

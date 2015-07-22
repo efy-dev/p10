@@ -1,5 +1,6 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantNews;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -33,15 +34,12 @@ public class TenantInfoController {
      */
     @RequestMapping("/listTenantInfo.do")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
-
-//       if("0".equals(type)) {
-//            queryHql.append("");
-//        }else if("1".equals(type)|| "2".equals(type) ||"3".equals(type)){
-//            queryParamMap.put("type",type);
-//            queryHql.append(" and t.type =:type ");
-//        }
+        String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(23,conditions.length());
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
         xQuery.addRequestParamToModel(model,request);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        model.addAttribute("tenant", tenant);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
