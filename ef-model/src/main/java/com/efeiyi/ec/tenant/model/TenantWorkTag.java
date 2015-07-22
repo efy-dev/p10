@@ -27,7 +27,7 @@ public class TenantWorkTag {
         this.id = id;
     }
 
-    @JoinColumn(name = "tenant_work_id")
+    @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY)
     public TenantWork getTenantWork() {
         return tenantWork;

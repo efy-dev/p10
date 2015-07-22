@@ -19,6 +19,7 @@ public class TenantNews {
     private String content;
     private String type;
     private Tenant tenant;
+    private String status;
     private String dataSource; //来源
 
     @Id
@@ -86,6 +87,15 @@ public class TenantNews {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Column(name = "data_source")
