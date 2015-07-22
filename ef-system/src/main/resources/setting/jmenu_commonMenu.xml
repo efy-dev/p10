@@ -87,6 +87,13 @@
         <jnode url="/basic/xm.do?qm=plistProjectNews_default"  access="admin,manager" text_zh_CN="资讯">
             <match url="plistProjectNews_default"/>
         </jnode>
+
+            <jnode url="/basic/xm.do?qm=plistProjectCategory_default"  access="admin,manager" text_zh_CN="类别管理">
+                <match url="plistProjectCategory_default"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目管理">
+                <match url="plistProject_default"/>
+            </jnode>
     </jnode>
 
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
@@ -98,6 +105,7 @@
                 <match url="plistRole_default"/>
             </jnode>
         </jnode>
+
     </jnode>
 </jmenu>
 
