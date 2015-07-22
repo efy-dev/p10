@@ -7,6 +7,11 @@
 <html>
 <head>
     <title>资讯</title>
+<script type="text/javascript">
+    function redirect(){
+
+    }
+</script>
 </head>
 <body>
 <div id="page-nav">
@@ -16,87 +21,9 @@
 <!--资讯内容-->
 <div id="center--1">
     <div class="center-buttom">
-        <h1>当前标签</h1>
-        <div class="buttom-zx">
-            <%--<div class="buttom-zx-tr">--%>
-                <ul class="buttom-zx-td-1">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">全部</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-1">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">全部</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-1">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">全部电风扇地方</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-1">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">全部</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <%--<ul class="buttom-zx-td-2">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">视频</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>--%>
-            <%--</div>--%>
-            <%--<div class="buttom-zx-tr-2">
-                <ul class="buttom-zx-td-3">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">动态更新</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-2">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">流行观点</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-            </div>
-            <div class="buttom-zx-tr-2">
-                <ul class="buttom-zx-td-4">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">动态更新</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-            </div>--%>
-        </div>
+        <c:forEach items="${tagList}" var="tag" >
+            <a href="javascript:void(0)" onclick="redirect();"><button class="button">${tag.value}</button></a>
+        </c:forEach>
     </div>
     <div class="center-right">
         <C:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
