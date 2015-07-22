@@ -3,6 +3,7 @@ package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.ProductTenantCatalogValue;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -39,13 +40,17 @@ public class TenantWorkController {
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(23,conditions.length());
+        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
+        String queryHql = "from ProductTenantCatalogValue p where p.tenant.id = :tenantId";
+        queryParamMap.put("tenantId", tenantId);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("plistTenantWork_default",request);
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
+        List productTenantCatalogValueList = baseManager.listObject(queryHql, queryParamMap);
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
-
+        model.addAttribute("productTenantCatalogValueList",productTenantCatalogValueList);
         return "/tenantWork/tenantWorkList";
 
     }
@@ -68,7 +73,4 @@ public class TenantWorkController {
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
-
-/*    @RequestMapping()
-    public ModelAndView list*/
 }
