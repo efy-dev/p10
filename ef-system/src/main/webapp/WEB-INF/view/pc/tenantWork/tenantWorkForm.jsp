@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -9,6 +10,7 @@
 <html>
 <head>
     <title></title>
+    <script src="/scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -28,10 +30,11 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+            <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
                 <input type="hidden" value="saveOrUpdateTenantWork" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
+                <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&id=${tenantId}">
 
                 <div class="am-form-group">
                     <label for="name" class="am-u-sm-3 am-form-label">名称</label>
@@ -40,6 +43,26 @@
                         <input type="text" id="name" name="name" placeholder="名称" value="${object.name}">
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="price" class="am-u-sm-3 am-form-label">价格</label>
+
+                    <div class="am-u-sm-9">
+                        <input type="text" id="price" name="price" placeholder="名称" value="${object.price.intValue()}">
+                        <%--<small>输入你要保存的类型</small>--%>
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
+                    <label for="productDescription" class="am-u-sm-3 am-form-label">介绍</label>
+
+                    <div class="am-u-sm-9">
+                        <textarea id="productDescription" name="productDescription" class="ckeditor" placeholder="介绍"
+                                  value="${object.productDescription.content}">${object.productDescription.content}</textarea>
+                    </div>
+                    <br>
                 </div>
 
 
@@ -62,5 +85,24 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    function getTenantWorkTag(){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantAttachment"/>',
+            cache: false,
+            dataType: "json",
+            data: {id: divId},
+            success: function (data) {
+                $("#" + divId).remove();
+            }
+        });
+    }
+
+</script>
+
 </body>
 </html>

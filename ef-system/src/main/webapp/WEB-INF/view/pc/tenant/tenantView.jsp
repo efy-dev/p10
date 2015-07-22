@@ -81,7 +81,7 @@
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=formTenantWork&tenantId=${object.id}"/>"><span
-                        class="am-icon-plus"></span>新增作品</a>
+                        class="am-icon-plus"></span>新建作品</a>
             </div>
         </div>
     </div>
