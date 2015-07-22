@@ -8,8 +8,16 @@
 <html class="no-js">
 <head></head>
 <body>
-<!--内容-->
-
+<%--<script>
+  $.ajax({
+    type: "POST",
+    url: "some.php",
+    data: "name=John&location=Boston",
+    success: function(msg){
+      alert( "Data Saved: " + msg );
+    }
+  });
+</script>--%>
 <!--作品-->
 <div id="page-nav">
   <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>作品</span></p>

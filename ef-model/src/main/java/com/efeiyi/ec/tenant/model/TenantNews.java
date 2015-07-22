@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -20,6 +21,7 @@ public class TenantNews {
     private Tenant tenant;
     private String status;
     private String dataSource; //来源
+    private List<TenantNewsTag> tenantNewsTagList ;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -95,5 +97,14 @@ public class TenantNews {
 
     public void setDataSource(String dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Column(name="tenant_news_tag_list")
+    public List<TenantNewsTag> getTenantNewsTagList() {
+        return tenantNewsTagList;
+    }
+
+    public void setTenantNewsTagList(List<TenantNewsTag> tenantNewsTagList) {
+        this.tenantNewsTagList = tenantNewsTagList;
     }
 }
