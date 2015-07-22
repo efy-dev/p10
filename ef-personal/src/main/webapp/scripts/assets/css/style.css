@@ -31,11 +31,11 @@ a:hover{color:#0b3775;}
 .nav-centent li{float:left;padding-left:51px;}
 .nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;outline:none;}
 .nav-centent li a:hover{color:#ff2120;outline:none;}
-#banner1{position:relative;width:1000px;margin:0 auto;}
+#banner1{position:relative;width:100%;margin:0 auto;}
 /*banner*/
-#banner{width:100%;height:351px;margin-bottom:37px;}
+#banner{width:100%;height:351px;margin-bottom:37px; position:relative;}
 /*tab*/
-#tab{width:228px;height:343px;background:#fff;position:absolute;left:45px;z-index:9999}
+#tab{width:228px;height:343px;background:#fff;position:absolute;left:40px;z-index:9999}
 #tab h1{font-size:18px; font-weight:normal;padding:12px 0 0 17px;margin-bottom:9px;}
 #tab p{font-size:12px;color:#333;display:block;padding-left:17px;height:22px;}
 .tab-dl{width:228px;height:224px;padding-left:17px;}
@@ -155,7 +155,7 @@ a{ text-decoration:none;}
 .buttom-zx-tr{height:46px;}
 /*咨询详情页*/
 h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-family:"微软雅黑"; font-weight:300;}
-#page-column-1{padding:0 75px;width:629px; border:1px solid #908E8E; overflow:hidden; margin:0 auto 225px;}
+#page-column-1{padding:0 75px;width:629px; overflow:hidden; margin:0 auto 225px;}
 .page-column-1-q{margin:0 auto;}
 .p{ color:#999; font-size:12px; font-family:"宋体";background:url(../images/logo18.jpg) repeat-x 0 bottom;}
 .column-text-page{color:#333; font-size:12px; font-family:"宋体"; line-height:24px;}
@@ -229,18 +229,49 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .works-img-1{width:155px;height:225px; float:left;}
 /*作品详情*/
 .center-buttom-1{width:210px;height:10px;float:left;}
-.content-border{width:620px; overflow:hidden; border-left:1px solid #6D6D6D; border-right:1px solid #6D6D6D; border-top:1px solid #6D6D6D;}
+.content-border{width:620px; overflow:hidden;}
 .right-content{padding:10px 15px 46px 31px;width:620px;}
 .right-content-img{width:416px;height:596px;margin:50px 70px 75px;}
-.right-border{height:2px;width:620px; border-bottom:1px solid #6d6d6d;}
+.right-border{height:2px;width:620px;}
 .right-content-p{font-szie:12px; font-family:"宋体";color:#242424;overflow:hidden; line-height:22px;}
 /*工作坊*/
 .video-or-img{width:503px;height:321px;}
 .video-or-img img{width:503px;height:321px;}
+.video-or-img video{width:503px;height:321px;}
 .content-img{width:503px; text-align:center; overflow:hidden;}
 .content-text-gzf{width:503px; overflow:hidden;color:#333; font-size:12px; font-family:"宋体"}
 /*传承人总页*/
+#page-header{width:1000px;height:116px;margin:0 auto;}
+.page-header-left{height:116px;width:200px;float:left;}
+.page-header-left p{color:#999;font-size:12px; font-family:"微软雅黑"; display:block;margin-top:17px;}
+.page-header-right{height:116px;width:200px;float:right; background:url(../images/images/ruzhurexian.gif) no-repeat bottom;}
+.page-header-logo{width:117px;height:45px;margin-top:34px;}
+.page-header-logo img{width:117px;height:45px;}
+.page-header-logo a{outline:none}
+/*banne*/
+*{ margin:0; padding:0; list-style:none;}
+#divSmallBox{overflow:hidden;*display:inline;*zoom:1;width:10px;height:10px;margin:0 5px;border-radius:10px;background:#ffffff;}
+#playBox{ width:1000px; height:560px; margin:20px auto;  position:relative; overflow:hidden;}
+#playBox .oUlplay { width:99999px; position:absolute; left:0; top:0;}
+#playBox .oUlplay li{ float:left;}
+#playBox .pre{ cursor:pointer; width:45px; height:45px; background:url(../images/l.png) no-repeat; position:absolute; top:190px; left:10px; z-index:10;}
+#playBox .next{ cursor:pointer; width:45px; height:45px; background:url(../images/r.png) no-repeat; position:absolute; top:190px; right:10px; z-index:10;}
+#playBox .smalltitle {width:1000px; height:10px; position:absolute; bottom:15px; z-index:10}
+#playBox .smalltitle ul{ width:125px; margin:0 auto;}
+#playBox .smalltitle ul li{ width:10px; height:10px; margin:0 5px; border-radius:10px; background:#ffffff; float:left; overflow:hidden;*display:inline;*zoom:1;}
+#playBox .smalltitle .thistitle{ background:rgba(255,255,255,0.1);border:.5px solid #FFF;}
+/*传统技艺*/
+#page-section{width:870px;overflow:hidden; margin:0 auto;}
+.page-section-text{height:160px;width:870px; text-align:center; line-height:160px;}
+.page-section-text img{width:136px;height:27px;}
+.page-section-text a{outline:none}
+.page-section-figure{width:870px; }
 /*传承人主页图片交互效果*/
+.img-mutual{width:250px;height:386px;border:1px solid #000;margin:0 auto;padding:28px 0 0 25px;}
+.box{width:198px;height:295px;position: relative;}
+.BG{width:198px;height:295px;position: absolute;top: 0;background: rgba(60,96,140,0.3);}
+.txt{width: 198px;height: 100px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}
+/*传承人主页图片交互效2果*/
 .img-mutual{width:250px;height:386px;border:1px solid #000;margin:0 auto; position:relative;}
 .img-mutual-img{padding:27px 0 0 25px;width:223px;height:322px;}
 .img-mutual-img a{width:200px;height:322px; display:block;}
@@ -252,6 +283,6 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #img-mutual-text{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
 #img-mutual-text h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text p{width:165px;height:35px; line-height:25px;}
-#img-mutual-text1{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#000;}
+#img-mutual-text1{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
 #img-mutual-text1 h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text1 p{width:165px;height:35px; line-height:25px;}

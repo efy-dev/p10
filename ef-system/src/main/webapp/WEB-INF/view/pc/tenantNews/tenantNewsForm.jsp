@@ -33,15 +33,6 @@
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
 
-                <%--<div class="am-form-group">--%>
-                <%--<label for="type" class="am-u-sm-3 am-form-label">类型 / Type</label>--%>
-
-                <%--<div class="am-u-sm-9">--%>
-                <%--<input type="text" id="type" name="type" placeholder="类型 / Type" value="${object.type}">--%>
-                <%--&lt;%&ndash;<small>输入你要保存的类型</small>&ndash;%&gt;--%>
-                <%--</div>--%>
-                <%--</div>--%>
-
                 <div class="am-form-group">
                     <label for="title" class="am-u-sm-3 am-form-label">标题</label>
 
@@ -62,9 +53,13 @@
                     <br>
                 </div>
 
+                <div id="tagGroup">
+
+                </div>
+
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-push-3">
-                        <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+                        <button type="submit" class="am-btn am-btn-primary">保存</button>
                     </div>
                 </div>
             </form>
@@ -84,7 +79,7 @@
             cache: false,
             dataType: "json",
             success: function (data) {
-                $("form").append(generateTagSelect(data));
+                $("#tagGroup").append(generateTagSelect(data));
             }
         });
     }
