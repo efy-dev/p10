@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -18,9 +19,11 @@ public class Project {
     private String status;//状态
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
-    private String fatherProjectId;//父id
+    private Project fatherProject;//父id
     private Category category;//类别
     private Date createDateTime;//忽略
+    private List<Project> subProjectList;
+    private List<ProjectTag> projectTagList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -42,13 +45,14 @@ public class Project {
         this.serial = serial;
     }
 
-    @Column(name="father_project_id")
-    public  String getFatherProjectId(){
-        return  fatherProjectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "father_project_id")
+    public  Project getFatherProject(){
+        return  fatherProject;
     }
 
-    public void  setFatherProjectId(String fatherProjectId){
-        this.fatherProjectId = fatherProjectId;
+    public void  setFatherProject(Project fatherProject){
+        this.fatherProject = fatherProject;
     }
 
     @Column(name="name")
@@ -105,4 +109,21 @@ public class Project {
     public  void  setType(String type){
           this.type=type;
     }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    public  List<ProjectTag> getProjectTagList(){
+        return  projectTagList;
+    }
+    public  void  setProjectTagList(List<ProjectTag> projectTagList){
+         this.projectTagList = projectTagList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    public  List<Project> getSubProjectList(){
+        return  subProjectList;
+    }
+    public  void  setSubProjectList(List<Project> subProjectList){
+        this.subProjectList = subProjectList;
+    }
 }
+
