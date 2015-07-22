@@ -77,5 +77,21 @@
             </does>
         </entity>
 
+
+        <entity name="ProjectTag" label="ProjectTag"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.P">
+        <does>
+        <do name="plistProjectTag" access="" label="projectTag列表"
+            result="/projectTag/projectTagPList">
+            <query name="default" label="默认" type="auto" orderBy="value:desc">
+                <condition name="id" defaultValue="0" operation="ne" />
+            </query>
+        </do>
+            <do name="formProjectTag" label="保存ProjectProperty" access="" result="/projectTag/projectTagForm"/>
+            <do name="saveOrUpdateProjectTag" label="保存ProjectTag" access="" result="/projectTag/projectTagSaveSuccess"/>
+            <do name="removeProjectTag" label="删除ProjectTag" access="" result="json"/>
+        </does>
+        </entity>
     </entities>
 </module>

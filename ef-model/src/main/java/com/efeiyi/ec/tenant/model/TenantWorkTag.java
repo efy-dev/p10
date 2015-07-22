@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/6/26.
  */
 @Entity
-@Table(name = "product")
+@Table(name = "tenant_work_tag")
 public class TenantWorkTag {
     private String id;
     private TenantWork tenantWork;
@@ -28,6 +28,7 @@ public class TenantWorkTag {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_work_id")
     public TenantWork getTenantWork() {
         return tenantWork;
     }
@@ -37,6 +38,7 @@ public class TenantWorkTag {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_tag_id")
     public ProjectTag getProjectTag() {
         return projectTag;
     }

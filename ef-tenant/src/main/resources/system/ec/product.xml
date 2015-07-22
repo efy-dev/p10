@@ -20,6 +20,7 @@
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
+
                 <do name="formIndex" access="" label="安全退出" result="/index">
                 </do>
                 <do name="viewProduct" label="商品详情" access="" result="/product/productView" />
@@ -60,5 +61,22 @@
 
             </does>
         </entity>
+
+        <entity name="ProductList" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductTenantCatalogValue">
+            <does>
+              <do name="productTenantCatalogValue" access="" label="分类管理"
+                result="/productTenantCatalog/productTenantCatalogPList">
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="id" defaultValue="0" operation="ne"/>
+                    <condition name="status" defaultValue="1" operation="eq"/>
+                </query>
+              </do>
+                <do name="formProductTenantCatalogValue" label="类别编辑" access="" result="/productTenantCatalog/productTenantCatalogForm" />
+                <do name="removeProductTenantCatalogValue" label="删除产品描述" access="" result="json"/>
+            </does>
+        </entity>
+
     </entities>
 </module>

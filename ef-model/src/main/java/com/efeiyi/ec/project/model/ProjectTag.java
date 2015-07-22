@@ -3,21 +3,18 @@ package com.efeiyi.ec.project.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
- * Created by Administrator on 2015/6/24.
- * 非遗项目管理
+ * Created by Administrator on 2015/7/22.
+ * 项目标签
  */
 @Entity
-@Table(name="project_tag")
+@Table(name = "project_tag")
 public class ProjectTag {
     private String id;
+    private Project project;//项目
+    private String value;//项目标签
     private String order;
-    private Project project;
-    private String value;
-
-
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -29,6 +26,15 @@ public class ProjectTag {
         this.id = id;
     }
 
+    @Column(name = "value")
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Column(name = "order")
     public String getOrder() {
         return order;
@@ -38,7 +44,8 @@ public class ProjectTag {
         this.order = order;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name="project_id")
     public Project getProject() {
         return project;
     }
@@ -47,12 +54,6 @@ public class ProjectTag {
         this.project = project;
     }
 
-    @Column(name = "value")
-    public String getValue() {
-        return value;
-    }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+
 }
