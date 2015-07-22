@@ -4,7 +4,9 @@ import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Category;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectTag;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,6 +31,7 @@ public class TenantWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
+    private List<ProjectTag> projectTagList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

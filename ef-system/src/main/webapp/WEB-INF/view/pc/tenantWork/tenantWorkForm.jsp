@@ -34,7 +34,6 @@
                 <input type="hidden" value="saveOrUpdateTenantWork" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
-                <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&id=${tenantId}">
 
                 <div class="am-form-group">
                     <label for="name" class="am-u-sm-3 am-form-label">名称</label>
@@ -75,10 +74,13 @@
                     </div>
                 </div>
 
+                <div id="tagGroup">
+
+                </div>
 
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-push-3">
-                        <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+                        <button type="submit" class="am-btn am-btn-primary">保存</button>
                     </div>
                 </div>
             </form>
@@ -89,18 +91,30 @@
 
 <script>
 
-    function getTenantWorkTag(){
+    function getTenantProjectTag(){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeTenantAttachment"/>',
+            url: '<c:url value="/basic/xmj.do?qm=listProjectTag_default&conditions=project.id:${projectId}"/>',
             cache: false,
             dataType: "json",
-            data: {id: divId},
             success: function (data) {
-                $("#" + divId).remove();
+                $("#tagGroup").append(generateTagSelect(data));
             }
         });
     }
+
+    function generateTagSelect(data){
+        var html = "    <div class=\"am-form-group\"><label  class=\"am-u-sm-3 am-form-label\">作品标签</label><div class=\"am-u-sm-9\">"
+        for (var i = 0 ; i<data.length ; i++){
+            html += "<label class=\"am-checkbox-inline\"><input type=\"checkbox\" name=\"tag"+i+"\" value=\""+data[i].id+"\" > "+data[i].value+"</label>"
+        }
+        html += "</div></div>"
+        return html;
+    }
+
+    $().ready(function(){
+        getTenantProjectTag();
+    });
 
 </script>
 

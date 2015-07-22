@@ -108,6 +108,13 @@
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人工作坊</h2>
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=formTenantWorkShop&tenantId=${object.id}"/>"><span
+                        class="am-icon-plus"></span>新建工作坊</a>
+            </div>
+        </div>
     </div>
 
     <div class="am-u-md-12">
