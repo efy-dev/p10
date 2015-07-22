@@ -160,48 +160,50 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .p{ color:#999; font-size:12px; font-family:"宋体";background:url(../images/logo18.jpg) repeat-x 0 bottom;}
 .column-text-page{color:#333; font-size:12px; font-family:"宋体"; line-height:24px;}
 /*按钮1*/
-.buttom-zx-td-1{width:91px;height:46px; text-align:center; line-height:46px; float:left;}
+.buttom-zx-td-1{width:100%;height:46px; text-align:center; line-height:46px; float:left;}
 .center-right{width:620px; overflow:hidden;float:left;}
 .buttom-zx-td-left{width:2px;height:45px; background:url(../images/logo11.jpg) repeat-y;float:left;}
-.buttom-zx-td-border-1{width:87px;height:2px;background:url(../images/logo12.jpg) repeat-x;}
-.buttom-zx-td-center{width:87px;height:45px; float:left;}
-.buttom-zx-td-center-1{width:87px;height:41px; line-height:41px; text-align:center;color:#cc9900;}
+.buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
+.buttom-zx-td-center{width:100%;height:45px; float:left;}
+.buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:87px;height:41px; display:block;outline:none;}
 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-border-2{width:87px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
 /*按钮2*/
-.buttom-zx-td-2{width:101px;height:46px; text-align:center; line-height:46px; float:left;margin-left:7px;}
+.buttom-zx-td-2{width:100%;height:46px; text-align:center; line-height:46px; float:left;margin-left:7px;}
 .buttom-zx-td-2 .buttom-zx-td-left{width:2px;height:45px; background:url(../images/logo11.jpg) repeat-y;float:left;}
-.buttom-zx-td-2 .buttom-zx-td-border-1{width:97px;height:2px;background:url(../images/logo12.jpg) repeat-x;}
-.buttom-zx-td-2 .buttom-zx-td-center{width:97px;height:45px; float:left;}
-.buttom-zx-td-2 .buttom-zx-td-center-1{width:97px;height:41px; line-height:41px; text-align:center;color:#cc9900;}
+.buttom-zx-td-2 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
+.buttom-zx-td-2 .buttom-zx-td-center{width:100%;height:45px; float:left;}
+.buttom-zx-td-2 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
 .buttom-zx-td-2 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
 .buttom-zx-td-2 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-2 .buttom-zx-td-border-2{width:97px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-2 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
 /*按钮3*/
-.buttom-zx-tr-2{height:46px; margin-top:11px}
+.buttom-zx-tr-2{height:100%; margin-top:11px}
 .buttom-zx-td-3{width:101px;height:46px; text-align:center; line-height:46px; float:left;}
 .buttom-zx-td-3 .buttom-zx-td-left{width:2px;height:45px; background:url(../images/logo11.jpg) repeat-y;float:left;}
-.buttom-zx-td-3 .buttom-zx-td-border-1{width:97px;height:2px;background:url(../images/logo12.jpg) repeat-x;}
-.buttom-zx-td-3 .buttom-zx-td-center{width:97px;height:45px; float:left;}
-.buttom-zx-td-3 .buttom-zx-td-center-1{width:97px;height:41px; line-height:41px; text-align:center;color:#cc9900;}
+.buttom-zx-td-3 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
+.buttom-zx-td-3 .buttom-zx-td-center{width:100%;height:45px; float:left;}
+.buttom-zx-td-3 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
 .buttom-zx-td-3 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
 .buttom-zx-td-3 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-3 .buttom-zx-td-border-2{width:97px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-3 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
 /*按钮4*/
-.buttom-zx-tr-2{height:46px; margin-top:11px}
+.buttom-zx-tr-2{height:100%; margin-top:11px}
 .buttom-zx-td-4{width:135px;height:46px; text-align:center; line-height:46px; float:left;}
 .buttom-zx-td-4 .buttom-zx-td-left{width:2px;height:45px; background:url(../images/logo11.jpg) repeat-y;float:left;}
-.buttom-zx-td-4 .buttom-zx-td-border-1{width:131px;height:2px;background:url(../images/logo12.jpg) repeat-x;}
-.buttom-zx-td-4 .buttom-zx-td-center{width:131px;height:45px; float:left;}
-.buttom-zx-td-4 .buttom-zx-td-center-1{width:131px;height:41px; line-height:41px; text-align:center;color:#cc9900;}
+.buttom-zx-td-4 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
+.buttom-zx-td-4 .buttom-zx-td-center{width:100%;height:45px; float:left;}
+.buttom-zx-td-4 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
 .buttom-zx-td-4 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:131px;height:41px; display:block;outline:none；}
 .buttom-zx-td-4 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-4 .buttom-zx-td-border-2{width:131px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-4 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
+.button{border:1px solid #CC9900;height:45px;font-size:14px;padding:0 26px;background-color:#fff;margin:2px;font-family:宋体;color:#CC9900;}
+.button:active{background-color:#CC9900;color:#fff;margin:2px;padding:0 26px;}
 /*列表内容*/
 .alllist{width:580px;overflow:hidden;margin-left:37px;}
 .alllist-border{ background:url(../images/logo15.jpg) repeat-x;width:580px;height:1px; margin-top:4px;}
@@ -235,7 +237,6 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 /*工作坊*/
 .video-or-img{width:503px;height:321px;}
 .video-or-img img{width:503px;height:321px;}
-.video-or-img video{width: 503px;height: 321px;}
 .content-img{width:503px; text-align:center; overflow:hidden;}
 .content-text-gzf{width:503px; overflow:hidden;color:#333; font-size:12px; font-family:"宋体"}
 /*传承人总页*/

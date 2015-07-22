@@ -18,64 +18,9 @@
 <!--作品内容-->
 <div id="center--1">
   <div class="center-buttom">
-    <h1>当前标签</h1>
-    <div class="buttom-zx">
-      <div class="buttom-zx-tr">
-        <ul class="buttom-zx-td-1">
-          <li class="buttom-zx-td-left"></li>
-          <li class="buttom-zx-td-center">
-            <div class="buttom-zx-td-border-1"></div>
-            <div class="buttom-zx-td-center-1"><a href="#">2015</a></div>
-            <div class="buttom-zx-td-border-2"></div>
-          </li>
-          <li class="buttom-zx-td-right"></li>
-        </ul>
-        <ul class="buttom-zx-td-2">
-          <li class="buttom-zx-td-left"></li>
-          <li class="buttom-zx-td-center">
-            <div class="buttom-zx-td-border-1"></div>
-            <div class="buttom-zx-td-center-1"><a href="#">代表作</a></div>
-            <div class="buttom-zx-td-border-2"></div>
-          </li>
-          <li class="buttom-zx-td-right"></li>
-        </ul>
-      </div>
-      <div class="buttom-zx-tr-2">
-        <ul class="buttom-zx-td-3">
-          <li class="buttom-zx-td-left"></li>
-          <li class="buttom-zx-td-center">
-            <div class="buttom-zx-td-border-1"></div>
-            <div class="buttom-zx-td-center-1"><a href="#">人物版画</a></div>
-            <div class="buttom-zx-td-border-2"></div>
-          </li>
-          <li class="buttom-zx-td-right"></li>
-        </ul>
-        <ul class="buttom-zx-td-2">
-          <li class="buttom-zx-td-left"></li>
-          <li class="buttom-zx-td-center">
-            <div class="buttom-zx-td-border-1"></div>
-            <div class="buttom-zx-td-center-1"><a href="#">大师画像</a></div>
-            <div class="buttom-zx-td-border-2"></div>
-          </li>
-          <li class="buttom-zx-td-right">
-
-          </li>
-        </ul>
-      </div>
-      <div class="buttom-zx-tr-2">
-        <ul class="buttom-zx-td-4">
-          <li class="buttom-zx-td-left"></li>
-          <li class="buttom-zx-td-center">
-            <div class="buttom-zx-td-border-1"></div>
-            <div class="buttom-zx-td-center-1"><a href="#">知名获奖作品</a></div>
-            <div class="buttom-zx-td-border-2"></div>
-          </li>
-          <li class="buttom-zx-td-right">
-
-          </li>
-        </ul>
-      </div>
-    </div>
+    <C:forEach items="${productTenantCatalogValueList}" var="productTenantCatalogValue">
+      <a href="#"><button class="button">${productTenantCatalogValue.value}</button></a>
+    </C:forEach>
   </div>
   <div class="center-right">
     <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="vs">
