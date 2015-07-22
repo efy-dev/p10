@@ -11,7 +11,7 @@ public class ManageController {
 
     @RequestMapping({"main.do"})
     public String main(){
-        return "/pc/main";
+        return "/main";
     }
 
 }

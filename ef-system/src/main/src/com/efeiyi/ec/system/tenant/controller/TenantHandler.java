@@ -25,7 +25,7 @@ public class TenantHandler implements MultipartHandler{
     @Override
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
         String url = "photo/"+identify+".jpg";
         boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("favicon"), "tenant", url);

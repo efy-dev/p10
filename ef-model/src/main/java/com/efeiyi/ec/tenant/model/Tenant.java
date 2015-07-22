@@ -159,6 +159,7 @@ public class Tenant implements Serializable {
         this.presentAddress = presentAddress;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="origin_province_id")
     public AddressProvince getOriginProvince() {

@@ -13,14 +13,14 @@
         <entity name="tenantInfo" label="传承人资讯"  model="com.efeiyi.ec.tenant.model.TenantNews">
             <does>
                 <do name="plistTenantInfo" access="" label="传承人资讯列表">
-                    <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
 
                     </query>
                 </do>
             </does>
         </entity>
-        <entity name="TenantIntroduction" label="简介列表"  model="com.efeiyi.ec.tenant.model.TenantIntroduction">
+        <entity name="TenantIntroduction" label="简介"  model="com.efeiyi.ec.tenant.model.TenantIntroduction">
             <does>
                 <do name="listTenantIntroduction" access="" label="简介列表">
                     <query name="default" label="默认" type="auto">
@@ -29,11 +29,20 @@
                 </do>
             </does>
         </entity>
-        <entity name="TenantAttachment" label="附件列表"  model="com.efeiyi.ec.tenant.model.TenantAttachment">
+        <entity name="TenantAttachment" label="商品列表"  model="com.efeiyi.ec.tenant.model.TenantAttachment">
             <does>
                 <do name="listAttachment" access="" label="附件列表">
                     <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="introduction.tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="introduction.tenant.id" defaultValue=""  operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="tenantWork" label="传承人作品"  model="com.efeiyi.ec.tenant.model.TenantWork">
+            <does>
+                <do name="plistTenantWork" access="" label="传承人作品">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
             </does>

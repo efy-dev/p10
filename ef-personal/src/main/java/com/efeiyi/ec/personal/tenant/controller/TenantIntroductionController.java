@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,33 +29,23 @@ public class TenantIntroductionController {
     private BaseManager baseManager;
 
     /**
-     * 获取传承人简介
-     * @param introductionId
+     * 获取传承人简介(列表)
+     * @param request
      * @param model
      * @return
      */
-    @RequestMapping("/getTenantIntroduction.do")
-    public ModelAndView getTenantIntroduction(String introductionId ,ModelMap model){
-        TenantIntroduction introduction = (TenantIntroduction) baseManager.getObject(TenantIntroduction.class.getName(),introductionId);
-        model.addAttribute("entity",introduction);
-        return new ModelAndView("/tenantIntroduction/tenantIntroductionView",model);
-    }
-
-    /**
-     * 获取传承人简介(列表)
-     * @param request
-     * @param modelMap
-     * @return
-     */
-    @RequestMapping("/tenantIntroductionList.do")
-    public ModelAndView listTenantIntroduction( ModelMap modelMap, HttpServletRequest request ) throws Exception{
-        String tenantId = request.getParameter("tenantId");
+    @RequestMapping("/listTenantIntroduction.do")
+    public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
+        String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(23,conditions.length());
         String queryHql = "from Tenant t left join fetch t.originProvince p where t.id = :tenantId";
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenantId);
         Tenant tenant = (Tenant) baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
         XQuery xQuery = new XQuery("listTenantIntroduction_default",request);
+        xQuery.addRequestParamToModel(model,request);
         XQuery xQuery1 = new XQuery("listAttachment_default",request);
+        xQuery1.addRequestParamToModel(model,request);
         List<TenantIntroduction> list = baseManager.listObject(xQuery);
         List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
         for (TenantIntroduction tenantIntroduction:list){
@@ -65,7 +56,7 @@ public class TenantIntroductionController {
                         list2.add(tenantAttachment);
                     }
                 }
-                modelMap.addAttribute("list2", list2);
+                model.addAttribute("list2", list2);
             }
             if ("chu-ban-zhu-zuo".equals(tenantIntroduction.getTitle())){
                 List list3 = new ArrayList();
@@ -74,21 +65,12 @@ public class TenantIntroductionController {
                         list3.add(tenantAttachment);
                     }
                 }
-                modelMap.addAttribute("list3", list3);
-            }
-            if ("yi-shu-nian-biao".equals(tenantIntroduction.getTitle())){
-                List list4 = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list4.add(tenantAttachment);
-                    }
-                }
-                modelMap.addAttribute("list4", list4);
+                model.addAttribute("list3", list3);
             }
         }
-        modelMap.addAttribute("tenant",tenant);
-        modelMap.addAttribute("list",list);
-        return new ModelAndView( "/tenantIntroduction/tenantIntroductionList",modelMap);
+        model.addAttribute("tenant",tenant);
+        model.addAttribute("list",list);
+        return "/tenantIntroduction/tenantIntroductionList";
     }
 
 }

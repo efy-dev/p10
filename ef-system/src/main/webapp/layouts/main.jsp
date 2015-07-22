@@ -41,7 +41,7 @@
 <%----%>
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"></jsp:include>
-<div class="admin-content">
+<div class="admin-content" style="height: auto;">
 <sitemesh:write property='body'/>
 </div>
 

@@ -13,10 +13,8 @@ public class WordValue {
 
     private String id;
     private  String value;
-
     private String group;
-    private Integer theStatus;
-
+    private Integer status;
 
 
     @Id
@@ -49,12 +47,15 @@ public class WordValue {
     }
 
     @Column(name="status")
-    public Integer getTheStatus() {
-        return theStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setTheStatus(Integer theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
+
+
+
 
 }

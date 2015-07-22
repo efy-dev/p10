@@ -24,7 +24,7 @@
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
                 <td>操作</td>
-                <td>字典代码</td>
+                <td>字典组</td>
                 <td>字典名称</td>
             </tr>
 
@@ -33,8 +33,7 @@
                     <td width="20%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
-
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                <button style="margin-left: 35%;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>

@@ -13,7 +13,7 @@
 <body>
 <!--简介-->
 <div id="page-nav">
-    <p><a href="#">首页</a><span>简介</span></p>
+    <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>简介</span></p>
 </div>
 <div class="border-nav"></div>
 <!--简介内容-->
@@ -108,50 +108,15 @@
         <div id="yi-shu-nian-biao">
             <h1>艺术年表</h1>
             <div class="text-line">
-               ${list4.get(0).path}
+                <c:forEach items="${list}" var="introduction">
+                    <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
+                        ${introduction.content}
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
     </div>
 </div>
 <!--其他内容-->
-<div id="footer">
-    <ul class="guild">
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/>"></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/>"></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/>"></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/>"></a></li>
-    </ul>
-    <div class="efeiyi-url">Copyright ? <a href="#">www.efeiyi.com</a>2015</div>
-</div>
-<!--分析-->
-<div class="floating_ck">
-    <dl>
-        <dt></dt>
-        <dd class="return">
-            <span onClick="gotoTop();return false;"></span>
-        </dd>
-        <dd class="qrcord">
-            <span></span>
-            <div class="floating_left floating_ewm">
-                <i></i>
-            </div>
-        </dd>
-        <dd class="quote">
-            <span>分享</span>
-            <div class="floating_left"><a href="#">分享</a></div>
-        </dd>
-
-
-    </dl>
-</div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="js/amazeui.min.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -8,28 +9,28 @@
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%--<html>--%>
 <%--<head>--%>
-    <%--<title></title>--%>
+<%--<title></title>--%>
 <%--</head>--%>
 <%--<body>--%>
 <%--<div class="am-g">--%>
-    <%--<div class="am-u-md-12">--%>
+<%--<div class="am-u-md-12">--%>
 
-        <%--<table class="am-table am-table-bordered">--%>
-            <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th>测试数据</th>--%>
-            <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%--<tr>--%>
-                <%--<td class="am-primary am-u-md-3">类型</td>--%>
-                <%--<td class="am-u-md-3">${object.type}</td>--%>
-                <%--<td class="am-primary am-u-md-3">简介</td>--%>
-                <%--<td class="am-u-md-3">${object.content}</td>--%>
-            <%--</tr>--%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</div>--%>
+<%--<table class="am-table am-table-bordered">--%>
+<%--<thead>--%>
+<%--<tr>--%>
+<%--<th>测试数据</th>--%>
+<%--</tr>--%>
+<%--</thead>--%>
+<%--<tbody>--%>
+<%--<tr>--%>
+<%--<td class="am-primary am-u-md-3">类型</td>--%>
+<%--<td class="am-u-md-3">${object.type}</td>--%>
+<%--<td class="am-primary am-u-md-3">简介</td>--%>
+<%--<td class="am-u-md-3">${object.content}</td>--%>
+<%--</tr>--%>
+<%--</tbody>--%>
+<%--</table>--%>
+<%--</div>--%>
 <%--</div>--%>
 <%--</body>--%>
 <%--</html>--%>
@@ -46,6 +47,7 @@
 <html>
 <head>
     <title></title>
+    <script src="/scripts/ckeditor/ckeditor.js"></script>
     <style>
     </style>
 </head>
@@ -54,28 +56,103 @@
 
 <div class="am-g">
     <div class="am-u-md-12">
+        <h2>详细信息</h2>
         <table class="am-table am-table-bordered">
-            <thead>
-            <tr>
-                <th>测试数据</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">类型</td>
-                <td class="am-u-md-3">${object.type}</td>
-                <td class="am-primary am-u-md-3">简介</td>
-                <td class="am-u-md-3">Asdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff大苏打三大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</td>
-            </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">key</td>
-                <td class="am-u-md-3">value</td>
-                <td class="am-primary am-u-md-3">key</td>
-                <td class="am-u-md-3">卡拉集散地反抗了的加速卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡</td>
+                <td class="am-primary am-u-md-3">标题</td>
+                <td class="am-u-md-3">${object.title}</td>
             </tr>
             </tbody>
         </table>
+        <div class="am-u-md-6">
+            <h3>内容</h3>
+            <textarea style="width:100%" id="content" class="ckeditor" readonly>${object.content}</textarea>
+        </div>
     </div>
 </div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>附件</h2>
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">操作</th>
+                <th class="table-title">连接</th>
+                <th class="table-title">内容</th>
+
+
+            </tr>
+            </thead>
+            <tbody id="attachmentTbody">
+
+            <c:forEach items="${object.attachmentList}" var="attachment">
+                <tr id="${attachment.id}">
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                   onclick="removeAttachment('${attachment.id}')"><span
+                                        class="am-icon-trash-o"></span> 删除
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="am-hide-sm-only">${attachment.url}</td>
+                    <td class="am-hide-sm-only"><img
+                            src="<c:url value="http://tenant.efeiyi.com/${attachment.url}@!tenant-manage-banner"/>"
+                            alt=""/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="am-u-md-12">
+        <h2>新建附件</h2>
+
+        <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+
+            <input type="hidden" value="saveOrUpdateTenantAttachment" name="qm">
+            <input type="hidden" value="${object.id}" name="introductionId">
+            <input type="hidden" value="redirect:/basic/xm.do?qm=viewTenantIntroduction&id=${object.id}"
+                   name="resultPage">
+
+            <div class="am-form-group">
+                <label for="attachmentFile" class="am-u-sm-3 am-form-label">附件</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="attachmentFile" name="attachmentFile" placeholder="附件">
+                    <%--<small>选择你要保存的轮播图</small>--%>
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-push-3">
+                    <button type="submit" class="am-btn am-btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<script>
+
+    function removeAttachment(divId) {
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantAttachment"/>',
+            cache: false,
+            dataType: "json",
+            data: {id: divId},
+            success: function (data) {
+                $("#" + divId).remove();
+            }
+        });
+    }
+
+</script>
+
 </body>
 </html>
