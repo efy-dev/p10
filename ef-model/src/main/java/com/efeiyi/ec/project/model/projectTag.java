@@ -15,8 +15,6 @@ public class projectTag {
     private Project project;//项目
     private String value;//项目标签
     private String order;
-    private String  status; //状态
-
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -33,7 +31,7 @@ public class projectTag {
         return value;
     }
 
-    public void setValue(String name) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -56,13 +54,6 @@ public class projectTag {
         this.project = project;
     }
 
-    @Column(name="status")
-    public String getStatus(){
-       return  status;
-    }
 
-    public  void setStatus(String status){
-        this.status = status;
-    }
 
 }
