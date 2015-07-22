@@ -85,12 +85,12 @@
                 <input type="hidden" name="tenant.id" value="${tenantId}">
 
                 <%--<div class="am-form-group">--%>
-                    <%--<label for="type" class="am-u-sm-3 am-form-label">类型 / Type</label>--%>
+                <%--<label for="type" class="am-u-sm-3 am-form-label">类型 / Type</label>--%>
 
-                    <%--<div class="am-u-sm-9">--%>
-                        <%--<input type="text" id="type" name="type" placeholder="类型 / Type" value="${object.type}">--%>
-                        <%--&lt;%&ndash;<small>输入你要保存的类型</small>&ndash;%&gt;--%>
-                    <%--</div>--%>
+                <%--<div class="am-u-sm-9">--%>
+                <%--<input type="text" id="type" name="type" placeholder="类型 / Type" value="${object.type}">--%>
+                <%--&lt;%&ndash;<small>输入你要保存的类型</small>&ndash;%&gt;--%>
+                <%--</div>--%>
                 <%--</div>--%>
 
                 <div class="am-form-group">
@@ -104,10 +104,13 @@
 
 
                 <div class="am-form-group">
-                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-                <div class="am-u-sm-9">
-                <textarea id="content" name="content" class="ckeditor"  placeholder="输入简介" value="${object.content}">${object.content}</textarea>
-                </div><br>
+                    <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
+
+                    <div class="am-u-sm-9">
+                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
+                                  value="${object.content}">${object.content}</textarea>
+                    </div>
+                    <br>
                 </div>
 
                 <div class="am-form-group">

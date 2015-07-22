@@ -19,15 +19,15 @@ import java.util.List;
 public class TenantWork {
     private String id;
     private String name;
-    private String serial;
-    private String picture_url;
+    private String serial;  //随机生成
+    private String picture_url; //作品封面？
     private Tenant tenant;
     private Category category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
     private ProductDescription productDescription;
     private String status;
-    private Project project;
+    private Project project;  //类别
     private Date createDateTime;
 
 

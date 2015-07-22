@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "product_description")
 public class ProductDescription {
     private String id;
-    private String content;
+    private String content; //无格式文本
     private Product product;
 
     @Id
