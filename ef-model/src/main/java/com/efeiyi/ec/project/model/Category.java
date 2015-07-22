@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 /**
  * Created by Administrator on 2015/5/28.
+ *
+ * 此表作废
  */
 @Entity
 @Table(name = "project_category")

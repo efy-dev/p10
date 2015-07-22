@@ -17,6 +17,7 @@ public class Project {
     private String name;//项目名称
     private String status;//状态
     private String level;//级别
+    private String type; //类别 1.美术 2.技艺
     private String fatherProjectId;//父id
     private Category category;//类别
     private Date createDateTime;//忽略
@@ -94,5 +95,14 @@ public class Project {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+
+    @Column(name="type")
+    public  String getType(){
+        return  type;
+    }
+
+    public  void  setType(String type){
+          this.type=type;
     }
 }
