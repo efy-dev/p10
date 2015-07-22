@@ -2,6 +2,7 @@ package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.ProductTenantCatalog;
 import com.efeiyi.ec.project.model.Category;
 import com.efeiyi.ec.project.model.Project;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,6 +30,8 @@ public class TenantWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
+    private List<ProductTenantCatalog> productTenantCatalogList;
+
 
 
     @Id
@@ -106,6 +109,15 @@ public class TenantWork {
 
     public void setProductPictureList(List<ProductPicture> productPictureList) {
         this.productPictureList = productPictureList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "product")
+    public List<ProductTenantCatalog> getProductTenantCatalogList() {
+        return productTenantCatalogList;
+    }
+
+    public void setProductTenantCatalogList(List<ProductTenantCatalog> productTenantCatalogList) {
+        this.productTenantCatalogList = productTenantCatalogList;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
