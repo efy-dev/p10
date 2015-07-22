@@ -2,7 +2,6 @@ package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
-import com.efeiyi.ec.product.model.ProductTenantCatalog;
 import com.efeiyi.ec.project.model.Category;
 import com.efeiyi.ec.project.model.Project;
 import org.hibernate.annotations.GenericGenerator;

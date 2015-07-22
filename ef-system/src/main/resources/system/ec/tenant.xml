@@ -106,6 +106,7 @@
                 </do>
 
                 <do name="formTenantWorkShop" label="保存工作坊页" access="" result="/tenantWorkShop/tenantWorkShopForm"/>
+                <do name="viewTenantWorkShop" label="查看工作坊" access="" result="/tenantWorkShop/tenantWorkShopIncludeView"/>
                 <do name="saveOrUpdateTenantWorkShop" label="保存工作坊著作" access="" result="/tenantWorkShop/tenantWorkShopSaveSuccess">
                 </do>
                 <do name="removeTenantWorkShop" label="删除工作坊著作" access="" result="json"/>
@@ -217,20 +218,56 @@
                     </query>
                 </do>
 
-                <do name="formTenantNews" label="保存大师新闻页" access="" result="/tenantNews/tenantNewsForm"/>
-                <do name="saveOrUpdateTenantNews" label="保存大师新闻" access="" result="/tenantNews/tenantNewsSaveSuccess">
+                <do name="formTenantNews" label="保存大师新闻页" access="" result="/tenantNews/tenantNewsForm" execute="com.efeiyi.ec.system.tenant.controller.TenantNewsFormHandler"/>
+                <do name="saveOrUpdateTenantNews" label="保存大师新闻" access="" result="/tenantNews/tenantNewsSaveSuccess" execute="com.efeiyi.ec.system.tenant.controller.TenantNewsHandler">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1"
+                                   inputType="default"></field>
+                            <field name="dataSource" label="来源" defaultValue="manager"
+                                   inputType="default"></field>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"></field>
+                        </fields>
+                    </page>
                 </do>
                 <do name="removeTenantNews" label="删除大师新闻" access="" result="json"/>
-                <do name="listTenantNews" label="传承人新闻列表" access="" result="/tenantNews/tenantNewsList">
+
+                <do name="viewTenantNews" label="查看大师新闻" access="" result="/tenantNews/tenantNewsView"/>
+
+                <do name="listTenantNews" label="传承人新闻列表" access="" result="/tenantNews/tenantNewsIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
-                        <condition label="传承人新闻id" name="id" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                    <query name="include" label="嵌入" type="auto" orderBy="id:desc">
+                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
+                        <condition label="传承人id" name="tenant.id" operation="eq"/>
                         <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
                     </query>
                 </do>
 
             </does>
         </entity>
+
+
+        <entity name="WordValue" label="传承人新闻列表"
+                basic="simple" others=""
+                model="com.ming800.core.p.model.WordValue">
+            <does>
+                <do name="listWordValue" label="传承人新闻标签列表" access="" result="/tenantNews/tenantNewsIncludeList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
+                        <condition label="状态" name="group" defaultValue="1" operation="eq"/>
+                        <!--<condition label="产品序列" name="serial" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+
         <entity name="TenantWork" label="传承人产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWork">
@@ -243,6 +280,10 @@
                     result="/tenantWork/tenantWorkPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+
+                    <query name="byProject" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" operation="eq"/>
                     </query>
                 </do>
 
@@ -259,7 +300,7 @@
                 <do name="removeTenantWork" label="删除大师产品" access="" result="json"/>
                 <do name="listTenantWork" label="大师著作产品" access="" result="/tenantWork/tenantWorkIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="产品id" name="id" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>
 
                     <query name="include" label="嵌入" type="auto" orderBy="id:desc">
@@ -270,6 +311,28 @@
 
             </does>
         </entity>
+
+
+        <entity name="TenantProject" label="传承人作品展示图片"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantProject">
+            <does>
+                <do name="saveOrUpdateTenantProject" label="保存图片" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkPictureHandler">
+                </do>
+                <do name="removeTenantProject" label="删除图片" access="" result="json"/>
+                <do name="listTenantProject" label="大师著作产品" access="" result="/tenantWork/tenantWorkProjectIncludeList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+
+                    <query name="include" label="嵌入" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="传承人Id" name="tenant.id" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
 
         <entity name="ProductPicture" label="传承人作品展示图片"
                 basic="simple" others=""

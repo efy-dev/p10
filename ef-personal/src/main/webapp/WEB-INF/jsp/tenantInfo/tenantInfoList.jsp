@@ -42,7 +42,7 @@
                                     ${fn:substring(tenantInfo.content,0 ,60 ) }......
                                 </c:when>
                                 <c:otherwise>
-                                    ${tenantinfo.content}
+                                    ${tenantInfo.content}
                                 </c:otherwise>
                             </c:choose>
                         </p>
