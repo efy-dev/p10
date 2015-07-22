@@ -18,6 +18,7 @@ public class TenantWorkShop {
     private String videoPath;
     private Date createDateTime;
     private String shopIntroduction;
+    private String status;
 
 
     @Id
@@ -75,6 +76,15 @@ public class TenantWorkShop {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Column(name="shop_introduction")
