@@ -23,6 +23,7 @@ public class PurchaseOrder {
     private Tenant tenant;
     private User user;
     private Date createDatetime;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -44,8 +45,7 @@ public class PurchaseOrder {
         this.serial = serial;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "label_batch_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
     public List<LabelBatch> getLabelBatchList() {
         return labelBatchList;
     }
@@ -81,6 +81,15 @@ public class PurchaseOrder {
 
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
