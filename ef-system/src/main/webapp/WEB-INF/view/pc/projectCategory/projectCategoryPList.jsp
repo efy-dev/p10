@@ -20,35 +20,33 @@
 <body>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
-
-        <td width="74%">项目名称</td>
-        <td width="">项目编号</td>
+        <td width="74%">类别名称</td>
+        <td width="">类别编号</td>
     </tr>
 
+    <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="project">
         <tr style="text-align: left">
 
             <td width="10%">
-                <c:if test="${project.level == 1}">
-                    <a href="/basic/xm.do?qm=plistProject_default&conditions=fatherProjectId:${project.id};level:2" >
-                      ${project.name}
+                <c:if test="${projectCategory.level == 1}">
+                    <a href="/basic/xm.do?qm=plistProjectCategory_default&conditions=fatherProjectId:${projectCategory.id};level:2" >
+                      ${projectCategory.name}
                     </a>
                 </c:if>
-                <c:if test="${project.level == 2}">
-                    <a href="/basic/xm.do?qm=plistProject_default&conditions=fatherProjectId:${project.id};level:3" >
-                      ${project.name}
+                <c:if test="${projectCategory.level == 2}">
+                    <a href="/basic/xm.do?qm=plistProjectCategory_default&conditions=fatherProjectId:${projectCategory.id};level:3" >
+                      ${projectCategory.name}
                     </a>
                 </c:if>
-                <c:if test="${project.level == 3}">
-                    <a href="#" >${project.name}</a>
+                <c:if test="${projectCategory.level == 3}">
+                    <a href="#" >${projectCategory.name}</a>
                 </c:if>
             </td>
             <td>
-                ${project.serial}
+                ${projectCategory.serial}
             </td>
         </tr>
-
     </c:forEach>
 </table>
 <div style="clear: both">

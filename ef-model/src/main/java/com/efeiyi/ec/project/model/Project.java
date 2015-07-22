@@ -7,17 +7,19 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/24.
+ * 非遗项目管理
  */
 @Entity
 @Table(name="project")
 public class Project {
     private String id;
-    private String serial;
-    private String name;
-    private String status;
-    private String level;
-    private Category category;
-    private Date createDateTime;
+    private String serial;//项目编号
+    private String name;//项目名称
+    private String status;//状态
+    private String level;//级别
+    private String fatherProjectId;//父id
+    private Category category;//类别
+    private Date createDateTime;//忽略
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -37,6 +39,15 @@ public class Project {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    @Column(name="father_project_id")
+    public  String getFatherProjectId(){
+        return  fatherProjectId;
+    }
+
+    public void  setFatherProjectId(String fatherProjectId){
+        this.fatherProjectId = fatherProjectId;
     }
 
     @Column(name="name")
