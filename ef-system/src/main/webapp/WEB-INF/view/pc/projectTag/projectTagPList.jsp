@@ -18,8 +18,12 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
+<div style="text-align: left" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目标签" />
+</div>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
-    <tr style="text-align: left">
+    <tr style="text-align: center">
+        <td width="20%">操作</td>
         <td width="20%">项目名称</td>
         <td width="">项目编号</td>
         <td width="">标签名称</td>

@@ -21,11 +21,10 @@
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr style="text-align: center">
         <td>操作</td>
+        <td>订单号</td>
         <td>购买物品</td>
-        <td>时间</td>
-        <td>用户姓名</td>
-        <td>支付方式</td>
-        <td>用户地址</td>
+        <td>收货人</td>
+        <td>下单时间</td>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
@@ -39,13 +38,15 @@
                 </div>
             </td>
             <td width="20%">${purchaseOrder.serial}</td>
-            <td width="10%">${purchaseOrder.createDatetime}</td>
+            <td width="20%">
+            <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
+                <span style="margin-left: 2px;"><a href="#"> ${purchaseOrderProduct.product.name}</a></span>
+            </c:forEach>
+            </td>
             <td width="10%">${purchaseOrder.user.name}</td>
             <td width="10%">
-                <c:if test="${purchaseOrder.payWay==1}">支付宝支付</c:if>
-                <c:if test="${purchaseOrder.payWay==2}">微信支付</c:if>
+                <fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
             </td>
-            <td width="20%">${purchaseOrder.consumerAddress.details}</td>
         </tr>
     </c:forEach>
 </table>

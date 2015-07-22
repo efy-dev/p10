@@ -35,17 +35,14 @@ public class WordValueController {
     private WordValueManager wordValueManager;
 
     @RequestMapping("/listWordValue.do")
-    public ModelAndView listWordValueByGroup(ModelMap modelMap) throws  Exception{
-        List<WordValue> wordValues  = wordValueManager.listWordValueByGroup("1");
+    public ModelAndView listWordValueByGroup(ModelMap modelMap,String group) throws  Exception{
+        List<WordValue> wordValues  = wordValueManager.listWordValueByGroup(group);
         modelMap.put("wv",wordValues);
-        return  new ModelAndView("/");
+        return  new ModelAndView("/wordValue/wordValuePList");
     }
-
     @RequestMapping("/test.do")
    public List test(){
        List list = wordValueManager.listWordValueByGroup("1");
        return  list;
    }
-
-
 }
