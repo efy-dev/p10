@@ -1,19 +1,24 @@
-package com.efeiyi.pal.product.model;
+package com.efeiyi.ec.product.model;
 
+import com.efeiyi.ec.project.model.Category;
+import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Created by Administrator on 2015/7/15.
+ * Created by Administrator on 2015/5/28.
  */
-
 @Entity
-@Table(name = "product_property_value")
-public class ProductPropertyValue {
-
+@Table(name = "product_tenant_catalog_value")
+public class ProductTenantCatalogValue {
     private String id;
-    private ProductSeriesPropertyName productSeriesPropertyName;
+    private Tenant tenant;
     private String value;
     private String status;
 
@@ -29,13 +34,14 @@ public class ProductPropertyValue {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_series_property_name_id")
-    public ProductSeriesPropertyName getProductSeriesPropertyName() {
-        return productSeriesPropertyName;
+    @JoinColumn(name = "tenant_id")
+    @JsonIgnore
+    private Tenant getTenant() {
+        return tenant;
     }
 
-    public void setProductSeriesPropertyName(ProductSeriesPropertyName productSeriesPropertyName) {
-        this.productSeriesPropertyName = productSeriesPropertyName;
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Column(name = "value")
@@ -47,7 +53,9 @@ public class ProductPropertyValue {
         this.value = value;
     }
 
-    @Column(name = "status")
+
+
+    @Column(name="status")
     public String getStatus() {
         return status;
     }
@@ -55,5 +63,6 @@ public class ProductPropertyValue {
     public void setStatus(String status) {
         this.status = status;
     }
+
 
 }

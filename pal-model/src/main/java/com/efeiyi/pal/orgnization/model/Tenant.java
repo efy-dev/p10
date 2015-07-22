@@ -18,6 +18,7 @@ public class Tenant {
     private AddressProvince province;
     private AddressDistrict address;
     private String type;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -68,6 +69,15 @@ public class Tenant {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
