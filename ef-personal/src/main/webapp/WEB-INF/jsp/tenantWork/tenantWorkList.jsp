@@ -8,16 +8,6 @@
 <html class="no-js">
 <head></head>
 <body>
-<%--<script>
-  $.ajax({
-    type: "POST",
-    url: "some.php",
-    data: "name=John&location=Boston",
-    success: function(msg){
-      alert( "Data Saved: " + msg );
-    }
-  });
-</script>--%>
 <!--作品-->
 <div id="page-nav">
   <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>作品</span></p>
@@ -57,7 +47,7 @@
 
   </div>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="/tenantWork/tenantWorkList.do">
+<ming800:pcPageList bean="${pageEntity}" url="/tenantWork/listTenantWork.do">
   <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
