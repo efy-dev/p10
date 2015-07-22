@@ -17,7 +17,6 @@ public class TenantNews {
     private Date createDateTime;
     private User creator;
     private String content;
-    private String type;
     private Tenant tenant;
     private String status;
     private String dataSource; //来源
@@ -68,15 +67,6 @@ public class TenantNews {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    @Column(name="type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "project_tag")
-public class projectTag {
+public class ProjectTag {
     private String id;
     private Project project;//项目
     private String value;//项目标签

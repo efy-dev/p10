@@ -24,26 +24,26 @@
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
                 <td>操作</td>
-                <td>产品名称</td>
+                <td>作品号</td>
+                <td>作品名称</td>
                 <td>图片地址</td>
                 <td>价格</td>
-                <td>系列</td>
             </tr>
 
           <c:forEach items="${requestScope.pageInfo.list}" var="product">
                 <tr style="text-align: center">
                     <td width="20%">
                         <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
+                                <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${product.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
                     </td>
+                    <td width="20%">${product.serial}</td>
                     <td width="20%"><a href="/basic/xm.do?qm=viewProduct&id=${product.id}"> ${product.name}</a></td>
                     <td width="20%">${product.picture_url}</td>
                     <td width="20%">${product.price}</td>
-                    <td width="20%">${product.serial}</td>
                 </tr>
             </c:forEach>
         </table>
