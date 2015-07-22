@@ -99,7 +99,7 @@ public class TenantNews {
         this.dataSource = dataSource;
     }
 
-    @Column(name="tenant_news_tag_list")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantNews")
     public List<TenantNewsTag> getTenantNewsTagList() {
         return tenantNewsTagList;
     }
