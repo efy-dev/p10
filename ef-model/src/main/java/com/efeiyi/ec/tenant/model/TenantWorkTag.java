@@ -1,16 +1,9 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductPicture;
-import com.efeiyi.ec.project.model.Category;
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectTag;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/26.
