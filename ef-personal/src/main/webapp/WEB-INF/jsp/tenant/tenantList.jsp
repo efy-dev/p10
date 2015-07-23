@@ -40,15 +40,13 @@
         <div class="img-mutual">
             <div class="box">
                 <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                <div id="img-mutual-text1">
+                <div id="BG" class="BG"></div>
+                <p id="txt" class="txt">
+                <div class="img-mutual-text1">
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
-
                 </p>
-
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -57,15 +55,13 @@
         <div class="img-mutual">
             <div class="box">
                 <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                <div class="BG"></div>
+                <div  class="BG"></div>
                 <p class="txt">
-                <div id="img-mutual-text1">
+                <div class="img-mutual-text1">
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
-
                 </p>
-
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -74,15 +70,13 @@
         <div class="img-mutual">
             <div class="box">
                 <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                <div id="img-mutual-text1">
+                <div  class="BG"></div>
+                <p  class="txt">
+                <div class="img-mutual-text1">
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
-
                 </p>
-
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -90,22 +84,35 @@
     </div>
 </div>
 <div class="page-border"></div>
-<div id="page-section">
+<div class="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif"/>"></a></div>
     <div class="page-section-figure">
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
                 <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                <div id="img-mutual-text1">
+                <div  class="BG"></div>
+                <p  class="txt">
+                <div class="img-mutual-text1">
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
-
                 </p>
-
+            </div>
+            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
+        </div>
+        <!--一个人物-->
+        <!--一个人物-->
+        <div class="img-mutual">
+            <div class="box">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <div  class="BG"></div>
+                <p  class="txt">
+                <div class="img-mutual-text1">
+                    <h1>林怀民</h1>
+                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
+                </div>
+                </p>
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -116,30 +123,11 @@
                 <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
                 <div class="BG"></div>
                 <p class="txt">
-                <div id="img-mutual-text1">
+                <div class="img-mutual-text1">
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
-
                 </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                <div id="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
-                </div>
-
-                </p>
-
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
