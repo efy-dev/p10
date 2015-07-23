@@ -7,20 +7,22 @@
 <div id="banner1">
     <div id="full-screen-slider">
         <ul id="slides">
-            <li style="background:url(/scripts/assets/images/img4.jpg) no-repeat center top"><a href="#" ></a></li>
-            <li style="background:url(/scripts/assets/images/img4.jpg) no-repeat center top"><a href="#" ></a></li>
-            <li style="background:url(/scripts/assets/images/img4.jpg) no-repeat center top"><a href="#" ></a></li>
-            <li style="background:url(/scripts/assets/images/img4.jpg) no-repeat center top"><a href="#" ></a></li>
+            <li style="background:url(<c:url value="/scripts/assets/images/1920.jpg"/>) no-repeat center top"><a href="#" ></a></li>
+            <li style="background:url(<c:url value="/scripts/assets/images/1920.jpg"/>) no-repeat center top"><a href="#" ></a></li>
+            <li style="background:url(<c:url value="/scripts/assets/images/1920.jpg"/>) no-repeat center top"><a href="#" ></a></li>
+            <li style="background:url(<c:url value="/scripts/assets/images/1920.jpg"/>) no-repeat center top"><a href="#" ></a></li>
         </ul>
     </div>
-    <div id="tab">
-        <h1>${entity.fullName}</h1>
-        <p>${entity.title}</p>
-        <dl class="tab-dl">
-            <dt><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}"><img src="/scripts/assets/images/img5.jpg"></a></dt>
-            <dd>${entity.brief}</dd>
-        </dl>
-        <span><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}">了解详细</a></span>
+    <div class="banner-rq">
+        <div id="tab">
+            <h1>${entity.fullName}</h1>
+            <p>${entity.title}</p>
+            <dl class="tab-dl">
+                <dt><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></a></dt>
+                <dd>${entity.brief}</dd>
+            </dl>
+            <span><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}">了解详细</a></span>
+        </div>
     </div>
 </div>
 
