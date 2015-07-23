@@ -58,8 +58,8 @@
                 <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
                 <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                        <condition label="状态" name="tenant.id"  operation="eq"/>
                     </query>
                 </do>
 
@@ -159,6 +159,14 @@
                 model="com.efeiyi.ec.tenant.model.TenantIntroduction">
             <fields>
                 <field name="id" label="传承人简介id" inputType="text"/>
+                <field name="type" label="简介类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="基本信息" value="1"/>
+                        <item label="大师荣誉" value="2"/>
+                        <item label="出版著作" value="3"/>
+                        <item label="艺术年表" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistTenantIntroduction" access="" label="传承人简介分页列表"
@@ -212,6 +220,14 @@
                     </page>
                 </do>
                 <do name="removeTenantAttachment" label="删除附件" access="" result="json"/>
+
+                <do name="listTenantAttachment" label="传承人附件列表" access="" result="/tenantIntroduction/tenantAttachmentIncludeList">
+                    <query name="include" label="嵌入" type="auto" orderBy="id:desc">
+                        <condition label="简介Id" name="introduction.id" operation="eq"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
             </does>
         </entity>
 
@@ -327,9 +343,15 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantProject">
             <does>
-                <do name="saveOrUpdateTenantProject" label="保存图片" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkPictureHandler">
+                <do name="saveOrUpdateTenantProject" label="保存图片" access="">
+                    <!--<page>-->
+                        <!--<fields>-->
+                            <!--<field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"-->
+                                   <!--inputType="default"></field>-->
+                        <!--</fields>-->
+                    <!--</page>-->
                 </do>
-                <do name="removeTenantProject" label="删除图片" access="" result="json"/>
+                <do name="removeTenantProject" label="删除项目" access="" result="json"/>
                 <do name="listTenantProject" label="大师著作产品" access="" result="/tenantWork/tenantWorkProjectIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
