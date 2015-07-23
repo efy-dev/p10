@@ -27,18 +27,14 @@
 </div>
 
 <div id="center">
-    <dl class="center-1">
-        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWorkList.get(0).id}"><img src="<c:url value="/scripts/assets/images/img1.gif"/>"></a></dt>
-        <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
-    </dl>
-    <dl class="center-2">
-        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWorkList.get(1).id}"><img src="<c:url value="/scripts/assets/images/img2.gif"/>"></a></dt>
-        <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
-    </dl>
-    <dl class="center-3">
-        <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWorkList.get(2).id}"><img src="<c:url value="/scripts/assets/images/img3.gif"/>"></a></dt>
-        <dd class="center-1-dd"><span><a href="#">大师作品</a></span><span><a href="#">木版水印</a></span><span><a href="#">2015</a></span></dd>
-    </dl>
+    <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="work" begin="0" end="2">
+        <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
+            <dl class="center-${work.index + 1}">
+                <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWork.id}"><img src="<c:url value="/scripts/assets/images/img1.gif"/>"></a></dt>
+                <dd class="center-1-dd"><span><a href="javascript:void(0);">大师作品</a></span><span><a href="javascript:void(0);">木版水印</a></span><span><a href="javascript:void(0);">2015</a></span></dd>
+            </dl>
+        </c:if>
+    </c:forEach>
 </div>
 <!--内容-->
 
