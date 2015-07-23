@@ -22,7 +22,7 @@
     <tbody>
 
     <c:forEach items="${objectList}" var="tenantWorkShop">
-        <tr>
+        <tr id="${tenantWorkShop.id}">
             <td>
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
@@ -31,7 +31,7 @@
                                 class="am-icon-pencil-square-o"></span> 编辑
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                           href="<c:url value="/basic/xm.do?qm=removeTenantWorkShop&id=${tenantWorkShop.id}"/>"><span
+                           onclick="removeTenantWorkShop('${tenantWorkShop.id}')"><span
                                 class="am-icon-trash-o"></span> 删除
                         </a>
                     </div>
@@ -40,8 +40,7 @@
             <td class="am-hide-sm-only"><a
                     href="<c:url value="/basic/xm.do?qm=viewTenantWorkShop&id=${tenantWorkShop.id}"/>">${tenantWorkShop.name}</a>
             </td>
-            <td class="am-hide-sm-only"><fmt:formatDate value="${tenantWorkShop.createDateTime}"
-                                                        pattern="yyyy-MM-dd HH:mm"/></td>
+            <td class="am-hide-sm-only">${tenantWorkShop.createDateTime}</td>
             <td class="am-hide-sm-only"><img
                     src="<c:url value="http://tenant.efeiyi.com/${tenantWorkShop.picture_url}@!tenant-manage-banner"/>"
                     alt=""/></td>
@@ -49,4 +48,22 @@
     </c:forEach>
     </tbody>
 </table>
+
+
+<script>
+
+    function removeTenantWorkShop(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantWorkShop"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+
+</script>
 

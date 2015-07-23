@@ -22,10 +22,12 @@
     <link rel="icon" type="image/png" href="<c:url value='/base_resource/p/assets/i/favicon.png'/>"/>
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/base_resource/p/assets/i/app-icon72x72@2x.png'/>"/>
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="<c:url value='/base_resource/p/assets/css/amazeui.min.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/base_resource/p/scripts/assets/css/admin.css'/>"/>
-    <script src="<c:url value='/base_resource/p/scripts/jquery-1.8.0.min.js'/>"></script>
-    <script src="<c:url value='/base_resource/p/assets/js/amazeui.min.js'/>"></script>
+    <script src="<c:url value='/base_resource/p/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script src="<c:url value='http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js'/>"></script>
+    <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
+    <script src="<c:url value='//cdn.ckeditor.com/4.5.1/standard/ckeditor.js'/>"></script>
     <sitemesh:write property='head'/>
     <style>
         .efy-active {
