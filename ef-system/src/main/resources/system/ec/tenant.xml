@@ -344,12 +344,12 @@
                 model="com.efeiyi.ec.tenant.model.TenantProject">
             <does>
                 <do name="saveOrUpdateTenantProject" label="保存图片" access="">
-                    <page>
-                        <fields>
-                            <field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
-                        </fields>
-                    </page>
+                    <!--<page>-->
+                        <!--<fields>-->
+                            <!--<field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"-->
+                                   <!--inputType="default"></field>-->
+                        <!--</fields>-->
+                    <!--</page>-->
                 </do>
                 <do name="removeTenantProject" label="删除项目" access="" result="json"/>
                 <do name="listTenantProject" label="大师著作产品" access="" result="/tenantWork/tenantWorkProjectIncludeList">

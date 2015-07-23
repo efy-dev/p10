@@ -11,26 +11,42 @@
     <title></title>
 </head>
 <body>
-<form class="am-form am-form-horizontal" action="/j_spring_security_check" method="post">
-  <div class="am-form-group">
-    <label for="username" class="am-u-sm-2 am-form-label">电子邮件</label>
-    <div class="am-u-sm-10">
-      <input type="text" name="username" id="username" placeholder="输入你的电子邮件">
-    </div>
-  </div>
 
-  <div class="am-form-group">
-    <label for="password" class="am-u-sm-2 am-form-label">密码</label>
-    <div class="am-u-sm-10">
-      <input type="password" name="password" id="password" placeholder="设置一个密码吧">
-    </div>
-  </div>
 
-  <div class="am-form-group">
-    <div class="am-u-sm-10 am-u-sm-offset-2">
-      <button type="submit" class="am-btn am-btn-default">登录</button>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="am-g am-g-fixed">
+    <div class="am-u-md-7" style="box-shadow: 0px 0px 2px #626262;">
+        <h2>e飞蚁 后台系统登录</h2>
+        <form class="am-form am-form-horizontal" action="/j_spring_security_check" method="post">
+            <div class="am-form-group">
+                <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
+
+                <div class="am-u-sm-10">
+                    <input type="text" name="username" id="username" placeholder="输入用户名">
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <label for="password" class="am-u-sm-2 am-form-label">密码</label>
+
+                <div class="am-u-sm-10">
+                    <input type="password" name="password" id="password" placeholder="输入密码">
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <div class="am-u-sm-10 am-u-sm-offset-2">
+                    <button type="submit" class="am-btn am-btn-default">登录</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
-</form>
+</div>
 </body>
 </html>
