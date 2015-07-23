@@ -36,8 +36,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        MyUser bigUser = AuthorizationUtil.getMyUser();
-        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("ming20022009")) {
+//        MyUser bigUser = AuthorizationUtil.getMyUser();
+//        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("ming20022009")) {
 //            SystemLog systemLog = new SystemLog();
 //            WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) authentication.getDetails();
 //            String ip = webAuthenticationDetails.getRemoteAddress();
@@ -48,7 +48,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //
 //            systemLog.setTheType(PConst.SYSTEM_LOG_THE_TYPE_LOGIN);
 //            baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
-        }
+//        }
 //        bigUser.setLastLoginDatetime(new Date());
 //        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
         System.out.println("登录成功");

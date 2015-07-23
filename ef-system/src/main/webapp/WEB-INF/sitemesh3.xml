@@ -3,4 +3,6 @@
     <!--<mapping path="/*" decorator="/layouts/main.jsp"/>-->
     <mapping path="/basic/**" decorator="/layouts/main.jsp"/>
     <mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>
+    <mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>
+
 </sitemesh>

@@ -11,6 +11,14 @@
             <fields>
                 <field name="id" label="传承人" inputType="text"/>
                 <field name="name" label="传承人名字" inputType="text"/>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistTenant" access="" label="传承人分页列表"
@@ -344,12 +352,12 @@
                 model="com.efeiyi.ec.tenant.model.TenantProject">
             <does>
                 <do name="saveOrUpdateTenantProject" label="保存图片" access="">
-                    <page>
-                        <fields>
-                            <field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
-                        </fields>
-                    </page>
+                    <!--<page>-->
+                        <!--<fields>-->
+                            <!--<field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"-->
+                                   <!--inputType="default"></field>-->
+                        <!--</fields>-->
+                    <!--</page>-->
                 </do>
                 <do name="removeTenantProject" label="删除项目" access="" result="json"/>
                 <do name="listTenantProject" label="大师著作产品" access="" result="/tenantWork/tenantWorkProjectIncludeList">

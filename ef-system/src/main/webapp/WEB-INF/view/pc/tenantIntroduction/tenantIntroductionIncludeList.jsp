@@ -23,7 +23,7 @@
             <tbody>
 
             <c:forEach items="${objectList}" var="tenantIntroduction">
-                <tr>
+                <tr id="${tenantIntroduction.id}">
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
@@ -32,7 +32,7 @@
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </a>
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                   href="<c:url value="/basic/xm.do?qm=removeTenantIntroduction&id=${tenantIntroduction.id}"/>"><span
+                                   onclick="removeTenantIntorduction('${tenantIntroduction.id}')"><span
                                         class="am-icon-trash-o"></span> 删除
                                 </a>
                             </div>
@@ -49,3 +49,18 @@
         </table>
     </div>
 </div>
+
+<script>
+    function removeTenantIntorduction(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantIntroduction"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+</script>
