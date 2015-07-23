@@ -35,7 +35,7 @@ public class TenantInfoController {
     @RequestMapping("/listTenantInfo.do")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
         String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(23,conditions.length());
+        String tenantId = conditions.substring(10,conditions.length());
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
         xQuery.addRequestParamToModel(model,request);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
