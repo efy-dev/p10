@@ -21,4 +21,6 @@ public interface AliOssUploadManager {
 
     Long calculateFileSize(String bucketName, List<String[]> keysList);
 
+    List listObjectByPath(String bucket,String path);
+
 }

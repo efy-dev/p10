@@ -14,7 +14,7 @@
       <tr>
         <th class="table-set">操作</th>
         <th class="table-title">名称</th>
-        <th class="table-title">级别</th>
+        <th class="table-title">状态</th>
         <th class="table-title">创建时间</th>
 
       </tr>
@@ -22,18 +22,22 @@
       <tbody>
 
       <c:forEach items="${objectList}" var="tenantProject">
-        <tr>
+        <tr id="${tenantProject.id}">
           <td>
             <div class="am-btn-toolbar">
               <div class="am-btn-group am-btn-group-xs">
                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=plistTenantWork_byProject&conditions=project.id:${tenantProject.project.id}&projectId=${tenantProject.project.id}&tenantId=${tenantProject.tenant.id}"/>"><span
                         class="am-icon-trash-o"></span> 查看作品
                 </a>
+                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                   onclick="removeTenantProject('${tenantProject.id}')"><span
+                        class="am-icon-trash-o"></span> 删除
+                </a>
               </div>
             </div>
           </td>
           <td class="am-hide-sm-only">${tenantProject.project.name}</td>
-          <td class="am-hide-sm-only">${tenantProject.project.level}</td>
+          <td class="am-hide-sm-only">${tenantProject.status}</td>
           <td class="am-hide-sm-only">${tenantProject.project.createDateTime}</td>
         </tr>
       </c:forEach>
@@ -41,3 +45,19 @@
     </table>
   </div>
 </div>
+<script>
+
+  function removeTenantProject(divId){
+    $.ajax({
+      type: "get",
+      url: '<c:url value="/basic/xmj.do?qm=removeTenantProject"/>',
+      cache: false,
+      dataType: "json",
+      data:{id:divId},
+      success: function (data) {
+        $("#"+divId).remove();
+      }
+    });
+  }
+
+</script>

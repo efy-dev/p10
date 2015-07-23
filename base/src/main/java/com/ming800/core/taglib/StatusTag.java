@@ -163,7 +163,7 @@ public class StatusTag extends TagSupport {
         }
 
         htmlTagBuffer.append(">");
-        htmlTagBuffer.append("<option value=\"\">请选择</option>");
+//        htmlTagBuffer.append("<option value=\"\">请选择</option>");
         for (int i = 0; i < statusType.getStatusTypeItemList().size(); i++) {
             StatusTypeItem statusTypeItem = statusType.getStatusTypeItemList().get(i);
             htmlTagBuffer.append("<option value=\"")

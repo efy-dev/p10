@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.tenant.controller;
 
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantBanner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -39,9 +40,10 @@ public class TenantBannerHandler implements MultipartHandler{
 
 //        Tenant tenant = new Tenant();
 //        tenant.setId(request.getParameter("tenant_id"));
-        paramMap.put("tenant.id",request.getParameter("tenant_id"));
+        paramMap.put("tenant.id",request.getParameter("tenant.id"));
 
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
+
 
         modelMap.put("object",object);
 
