@@ -38,6 +38,7 @@ public class Tenant implements Serializable {
     private Date createDateTime;
 
 
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
