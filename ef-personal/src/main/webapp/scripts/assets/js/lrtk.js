@@ -1,4 +1,4 @@
-
+// 
 function getStyle(obj,name)
 {
 	if(obj.currentStyle)

@@ -6,7 +6,7 @@
 <body>
 <div id="page-header">
     <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="#"><img src="<c:url value="/scripts/assets/images/logo.gif"/>"></a></h6>
+        <h6 class="page-header-logo"><a href="#"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
         <p>中国非遗电商平台-传承人官网</p>
     </div>
     <div class="page-header-right"></div>
@@ -28,12 +28,12 @@
     </ul>
 </div>
 <div id="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif"/>"></a></div>
+    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
     <div class="page-section-figure">
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div id="BG" class="BG"></div>
                 <p id="txt" class="txt">
                 <div class="img-mutual-text1">
@@ -50,7 +50,7 @@
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div  class="BG"></div>
                 <p class="txt">
                 <div class="img-mutual-text1">
@@ -67,7 +67,7 @@
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div  class="BG"></div>
                 <p  class="txt">
                 <div class="img-mutual-text1">
@@ -85,12 +85,12 @@
 </div>
 <div class="page-border"></div>
 <div  class="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif"/>"></a></div>
+    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
     <div class="page-section-figure">
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div  class="BG"></div>
                 <p  class="txt">
                 <div class="img-mutual-text1">
@@ -107,7 +107,7 @@
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div  class="BG"></div>
                 <p  class="txt">
                 <div class="img-mutual-text1">
@@ -124,7 +124,7 @@
         <!--一个人物-->
         <div class="img-mutual">
             <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
                 <div class="BG"></div>
                 <p class="txt">
                 <div class="img-mutual-text1">
@@ -217,17 +217,17 @@
         <dd class="qrcord">
             <span ></span>
             <div class="floating_left floating_ewm floating_left-1">
-                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/>"></i>
+                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg" />"></i>
             </div>
         </dd>
         <dd class="quote">
             <span>分享</span>
             <div class="floating_left">
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wx.gif"/>"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wqq.gif"/>"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/kj.gif"/>"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/xl.gif"/>"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif"/>"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wx.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wqq.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/kj.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/xl.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif" />"></a>
             </div>
         </dd>
 
