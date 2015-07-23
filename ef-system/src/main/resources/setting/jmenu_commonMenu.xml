@@ -8,6 +8,9 @@
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
                 <match url="plistPurchaseOrderPayment_default"/>
             </jnode>
+            <jnode url=""  access="admin,manager" text_zh_CN="发货记录">
+                <match url=""/>
+            </jnode>
         </jnode>
         <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="最新商品列表">
