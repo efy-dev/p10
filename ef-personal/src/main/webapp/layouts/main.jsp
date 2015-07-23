@@ -63,17 +63,21 @@
             <span onClick="gotoTop();return false;"></span>
         </dd>
         <dd class="qrcord">
-            <span></span>
-            <div class="floating_left floating_ewm">
-                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg"/> "></i>
+            <span ></span>
+            <div class="floating_left floating_ewm floating_left-1">
+                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg" />"></i>
             </div>
         </dd>
         <dd class="quote">
             <span>分享</span>
-            <div class="floating_left"><a href="#">分享</a></div>
+            <div class="floating_left">
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wx.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wqq.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/kj.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/xl.gif" />"></a>
+                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif" />"></a>
+            </div>
         </dd>
-
-
     </dl>
 </div>
 </body>
