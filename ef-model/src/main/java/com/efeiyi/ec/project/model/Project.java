@@ -21,7 +21,6 @@ public class Project {
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
     private Project fatherProject;//父id
-//    private String fatherProjectId;
     private Category category;//类别
     private Date createDateTime;//忽略
     private List<Project> subProjectList;//子项目
