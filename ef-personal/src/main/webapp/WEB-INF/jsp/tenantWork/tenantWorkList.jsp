@@ -44,7 +44,7 @@
       </c:if>
       </c:forEach>
     <!--页码-->
-
+${tenantProjectList.get(0).project.projectTagList.get(0).value}
   </div>
 </div>
 <ming800:pcPageList bean="${pageEntity}" url="/tenantWork/listTenantWork.do">

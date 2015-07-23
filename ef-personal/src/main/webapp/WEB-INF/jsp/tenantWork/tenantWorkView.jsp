@@ -14,9 +14,9 @@
   <div class="center-right">
     <div class="content-border">
       <dl class="right-content">
-        <dt class="right-content-img"><img src="<c:url value="${productPicture.pictureUrl}"/>"></dt>
+        <dt class="right-content-img"><img src="<c:url value="${product.picture_url}"/>"></dt>
         <dd class="right-content-p">
-          ${productDescription.content}
+          ${product.productDescription.content}
         </dd>
       </dl>
       <div class="right-border"></div>
