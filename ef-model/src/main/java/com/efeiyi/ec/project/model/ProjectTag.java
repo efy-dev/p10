@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name="project_tag")
 public class ProjectTag {
     private String id;
-    private String order;
+    private String sort;
     private Project project;
     private String value;
 
@@ -30,13 +30,13 @@ public class ProjectTag {
         this.id = id;
     }
 
-    @Column(name = "order")
-    public String getOrder() {
-        return order;
+    @Column(name = "sort")
+    public String getSort() {
+        return sort;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
     @JsonIgnore

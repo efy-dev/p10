@@ -94,9 +94,6 @@
             <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目管理">
                 <match url="plistProject_default"/>
             </jnode>
-        <jnode url="/basic/xm.do?qm=plistProjectTag_default"  access="admin,manager" text_zh_CN="项目标签管理">
-            <match url="plistProjectTag_default"/>
-        </jnode>
     </jnode>
 
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->

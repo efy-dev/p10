@@ -11,6 +11,7 @@
     <script src="../scripts/assets/js/jquery.min.js"></script>
     <script src="../scripts/assets/js/jquery.jslides.js"></script>
     <script src="../scripts/assets/js/amazeui.min.js"></script>
+    <script src="../scripts/assets/js/demo.js"></script>
     <script type="text/javascript">
 //        $(document).ready(function(){
 //            $.post("", { tenantId: ""},

@@ -52,7 +52,7 @@ public class TenantController extends BaseController {
      */
     @RequestMapping("/tenantList")
     public ModelAndView listTenant(HttpServletRequest request , ModelMap modelMap)throws Exception{
-        XQuery xQuery = new XQuery("listTenant_default",request);
+        XQuery xQuery = new XQuery("listTenantRecommended_default",request);
         List list = baseManager.listObject(xQuery);
         modelMap.addAttribute("list",list);
         return new ModelAndView("/tenant/tenantList",modelMap);

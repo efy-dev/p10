@@ -22,20 +22,8 @@
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProjectTag">
         <input type="hidden" name="id" value="${object.id}">
-        <div class="am-form-group">
-            <label name="project.name" for="project.name" class="am-u-sm-3 am-form-label">项目名称</label>
-            <div class="am-u-sm-9">
-                <input type="text" name="project.name" id="project.name" placeholder="项目名称" value="${object.project.name}">
-                <small>必填项*</small>
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="project.serial" for="project.serial" class="am-u-sm-3 am-form-label">项目编号</label>
-            <div class="am-u-sm-9">
-                <input type="text" name="project.serial" id="project.serial" placeholder="项目编号" value="${object.project.name}">
-                <small>必填项*</small>
-            </div>
-        </div>
+        <input type="hidden" name="project.id" value="${projectId}">
+        <input type="hidden" name="sort" value="${object.sort}">
         <div class="am-form-group">
             <label name="value" for="value" class="am-u-sm-3 am-form-label">标签名称</label>
             <div class="am-u-sm-9">
