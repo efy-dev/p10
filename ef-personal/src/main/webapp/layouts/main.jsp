@@ -42,6 +42,8 @@
     </ul>
 </div>
 <sitemesh:write property='body'/>
+<br />
+<br />
 <div id="footer">
     <ul class="guild">
         <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
