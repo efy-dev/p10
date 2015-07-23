@@ -1,3 +1,5 @@
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -105,6 +107,15 @@
 
 
                 <div class="am-form-group">
+                    <label for="title" class="am-u-sm-3 am-form-label">类型</label>
+
+                    <div class="am-u-sm-9">
+                        <ming800:status name="type" dataType="TenantIntroduction.type" type="select"/>
+                    </div>
+                </div>
+
+
+                <div class="am-form-group">
                     <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
 
                     <div class="am-u-sm-9">
@@ -122,6 +133,115 @@
             </form>
         </div>
     </div>
+
+
+    <c:if test="${!empty object}">
+
+        <div class="am-g">
+            <c:if test="${!empty object.id}">
+
+                <div class="am-u-md-12">
+                    <h2>可用附件</h2>
+
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a type="button" class="am-btn am-btn-default"
+                               href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${object.id}"/>"><span
+                                    class="am-icon-plus"></span>新建附件</a>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+
+            <div class="am-u-md-12">
+                <jsp:include flush="true"
+                             page="/basic/xm.do?qm=listTenantAttachment_include&conditions=introduction.id:${object.id}"/>
+            </div>
+        </div>
+
+
+    </c:if>
+
+    <%--<div class="am-g">--%>
+    <%--<div class="am-u-sm-12">--%>
+    <%--<h2>可用图片列表</h2>--%>
+    <%--<table class="am-table am-table-striped am-table-hover table-main">--%>
+    <%--<thead>--%>
+    <%--<tr>--%>
+    <%--<th class="table-title">路径</th>--%>
+    <%--<th class="table-title">预览</th>--%>
+
+    <%--</tr>--%>
+    <%--</thead>--%>
+    <%--<tbody id="usefulImage">--%>
+    <%--<tr>--%>
+    <%--<td class="am-hide-sm-only"></td>--%>
+    <%--<td class="am-hide-sm-only"><img src="@!tenant-manage-banner" alt=""/></td>--%>
+    <%--</tr>--%>
+    <%--</tbody>--%>
+    <%--</table>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+
+
+    <%--<div class="am-g">--%>
+    <%--<div class="am-u-md-12">--%>
+    <%--<form action="/tenantIntroduction/imageUpload.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">--%>
+
+    <%--<input type="hidden" name="id" value="${object.id}">--%>
+    <%--<input type="hidden" name="tenant.id" value="${tenantId}">--%>
+
+    <%--<div class="am-form-group">--%>
+    <%--<label for="title" class="am-u-sm-3 am-form-label">类型</label>--%>
+
+    <%--<div class="am-u-sm-9">--%>
+    <%--<ming800:status name="type" dataType="TenantIntroduction.type" type="select"/>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="am-form-group">--%>
+    <%--<label for="imageUrl" class="am-u-sm-3 am-form-label">上传介绍图片</label>--%>
+
+    <%--<div class="am-u-sm-9">--%>
+    <%--<input type="file" id="imageUrl" name="imageUrl" placeholder="上传介绍图片">--%>
+    <%--</div>--%>
+    <%--</div>--%>
+
+
+    <%--<div class="am-form-group">--%>
+    <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
+    <%--<button type="submit" class="am-btn am-btn-primary">保存</button>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</form>--%>
+    <%--</div>--%>
+
+    <%--</div>--%>
+
+
 </div>
+
+<%--<script>--%>
+
+<%--function getUsefulImage(){--%>
+<%--$.ajax({--%>
+<%--type: "get",--%>
+<%--url: '<c:url value="/tenantIntroduction/imageList.do"/>',--%>
+<%--cache: false,--%>
+<%--dataType: "json",--%>
+<%--success: function (data) {--%>
+<%--var out = ""--%>
+<%--for(var i = 0;i<data.length;i++){--%>
+<%--out+="<tr>" +--%>
+<%--"<td class=\"am-hide-sm-only\">"+data[i]+"</td>" +--%>
+<%--"<td class=\"am-hide-sm-only\"><img src=\""+data[i]+"@!tenant-manage-banner\"/></td>" +--%>
+<%--"</tr>";--%>
+<%--}--%>
+<%--$("#usefulImage").append(out)--%>
+<%--}--%>
+<%--});--%>
+<%--}--%>
+
+<%--</script>--%>
+
 </body>
 </html>

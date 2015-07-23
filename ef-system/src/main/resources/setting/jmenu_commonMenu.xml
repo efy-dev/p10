@@ -58,12 +58,18 @@
                 <match url="plistTenantWork_default"/>
                 <match url="viewTenantWork"/>
                 <match url="formTenantWork"/>
+                <match url="plistTenantWork_byProject"/>
+                <match url="listProject_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistTenantNews_default" id="tenantNewsManager"  access="admin,manager" text_zh_CN="传承人资讯管理">
                 <match url="plistTenantNews_default"/>
+                <match url="formTenantNews"/>
+                <match url="viewTenantNews"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistTenantWorkShop_default" id="tenantWorkShopManager" access="admin,manager" text_zh_CN="传承人工作坊管理">
                 <match url="plistTenantWorkShop_default"/>
+                <match url="formTenantWorkShop"/>
+                <match url="viewTenantWorkShop"/>
             </jnode>
         </jnode>
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">

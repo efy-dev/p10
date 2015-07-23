@@ -1,6 +1,6 @@
 <sitemesh>
     <mapping path="/main.do" decorator="/layouts/main.jsp"/>
-    <mapping path="/*" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/*" decorator="/layouts/main.jsp"/>-->
     <mapping path="/basic/**" decorator="/layouts/main.jsp"/>
     <mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>
 </sitemesh>

@@ -43,5 +43,12 @@
         </c:if>
       </c:forEach>
     </ul>
+    <div class="am-panel am-panel-default admin-sidebar-panel">
+      <div class="am-panel-bd">
+        <p><span class="am-icon-bookmark"></span> 公告</p>
+        <p>暂无公告</p>
+      </div>
+    </div>
+
   </div>
 </div>
