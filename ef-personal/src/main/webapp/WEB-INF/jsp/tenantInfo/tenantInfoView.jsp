@@ -7,7 +7,7 @@
 <!--内容-->
 <!--资讯详情-->
 <div id="page-nav">
-  <p><a href="#">首页</a><span>资讯</span></p>
+  <p><a href="${pageContext.request.contextPath}/tenant/${tenantNews.tenant.id}">首页</a><span id="zpxq-1"><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:${tenantNews.tenant.id}">资讯</a></span><span>${tenantNews.title}</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯详情页内容-->

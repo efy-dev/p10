@@ -17,7 +17,7 @@ public class ProjectTag {
     private String sort;
     private Project project;
     private String value;
-
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -57,5 +57,14 @@ public class ProjectTag {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Column(name="status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

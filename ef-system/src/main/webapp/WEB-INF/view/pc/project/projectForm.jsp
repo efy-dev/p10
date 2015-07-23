@@ -21,12 +21,14 @@
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProject">
         <input type="hidden" name="id" value="${object.id}">
+        <input type="hidden" name="status" value="1" />
+        <input type="hidden" name="fatherProject.id" value="${fatherId}">
         <c:choose>
-            <c:when test="${object.level == 1}">
-                <input type="hidden" name="fatherProject.id" value="">
+            <c:when test="${ empty object.level }">
+                <input type="hidden" name="level" value="1" />
             </c:when>
             <c:otherwise>
-                <input type="hidden" name="fatherProject.id" value="${fatherId}">
+                <input type="hidden" name="level" value="${object.level}">
             </c:otherwise>
         </c:choose>
         <div class="am-form-group">

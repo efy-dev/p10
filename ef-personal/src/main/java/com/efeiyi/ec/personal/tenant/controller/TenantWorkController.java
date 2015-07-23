@@ -1,6 +1,7 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
 
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.tenant.model.Tenant;
@@ -38,7 +39,7 @@ public class TenantWorkController {
     @RequestMapping("/listTenantWork.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(23,conditions.length());
+        String tenantId = conditions.substring(10,conditions.length());
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId", tenantId);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
@@ -61,9 +62,10 @@ public class TenantWorkController {
         String queryHql1 = "from ProductPicture pr where pr.product.id = :tenantWorkId";
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantWorkId", tenantWorkId);
-        //Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
+        Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         ProductDescription productDescription = (ProductDescription) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);
+        modelMap.addAttribute("product", product);
         modelMap.addAttribute("productDescription",productDescription);
         modelMap.addAttribute("productPicture", productPicture);
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);

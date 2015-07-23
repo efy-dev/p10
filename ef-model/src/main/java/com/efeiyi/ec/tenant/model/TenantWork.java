@@ -2,8 +2,8 @@ package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
-import com.efeiyi.ec.project.model.Category;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectTag;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -24,7 +24,7 @@ public class TenantWork {
     private String serial;  //随机生成
     private String picture_url; //作品封面？
     private Tenant tenant;
-    private Category category;
+    private ProjectCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
     private ProductDescription productDescription;
@@ -74,11 +74,11 @@ public class TenantWork {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    public Category getCategory() {
+    public ProjectCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(ProjectCategory category) {
         this.category = category;
     }
 

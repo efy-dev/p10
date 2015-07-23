@@ -60,13 +60,13 @@
             <does>
                 <do name="plistProjectProperty" access="" label="projectProperty列表"
                     result="/projectProperty/projectPropertyPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
                 <do name="removeProjectProperty" label="删除ProjectProperty" access="" result="json"/>
-                <do name="formProjectProperty" label="保存ProjectProperty" access=""
+                <do name="formProjectProperty" label="保存ProjectProperty" access="" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
                     result="/projectProperty/projectPropertyForm"/>
                 <do name="saveOrUpdateProjectProperty" label="保存ProjectProperty" access=""
                     result="/projectProperty/projectPropertySaveSuccess"/>
@@ -77,6 +77,30 @@
                     </query>
                 </do>
 
+            </does>
+        </entity>
+
+        <entity name="ProjectPropertyValue" label="ProjectPropertyValue"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectPropertyValue">
+            <does>
+                <do name="plistProjectPropertyValue" access="" label="projectPropertyValue列表"
+                    result="/projectPropertyValue/projectPropertyValuePList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeProjectPropertyValue" label="删除ProjectPropertyValue" access="" result="json"/>
+                <do name="formProjectPropertyValue" label="保存ProjectPropertyValue" access=""
+                    result="/projectPropertyValue/projectPropertyValueForm"/>
+                <do name="saveOrUpdateProjectPropertyValue" label="保存ProjectPropertyValue" access=""
+                    result="/projectPropertyValue/projectPropertyValueSaveSuccess"/>
+                <do name="listProjectPropertyValue" label="ProjectPropertyValue列表" access=""
+                    result="/projectPropertyValue/projectPropertyValueList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
             </does>
         </entity>
 

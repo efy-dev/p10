@@ -3,6 +3,7 @@ package com.efeiyi.ec.project.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -11,17 +12,20 @@ import javax.persistence.*;
 @Table(name="project_property")
 public class ProjectProperty {
     private String id;
-    private String name;
-    private Category category;
+    private String name;//属性
+    private Project project;//项目
+    private String sort;//排序
+    private String status;//状态
+    private List<ProjectPropertyValue> projectPropertyValueList;//属性值
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id")
-    public Category getCategory() {
-        return category;
+    @JoinColumn(name="project_id")
+    public Project getProject() {
+        return project;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Column(name="name")
@@ -33,6 +37,24 @@ public class ProjectProperty {
         this.name = name;
     }
 
+    @Column(name="sort")
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    @Column(name="status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -42,5 +64,14 @@ public class ProjectProperty {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "projectProperty")
+    public List<ProjectPropertyValue> getProjectPropertyValueList() {
+        return projectPropertyValueList;
+    }
+
+    public void setProjectPropertyValueList(List<ProjectPropertyValue> projectPropertyValueList) {
+        this.projectPropertyValueList = projectPropertyValueList;
     }
 }
