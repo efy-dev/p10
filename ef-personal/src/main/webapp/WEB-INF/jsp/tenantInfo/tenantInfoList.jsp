@@ -35,7 +35,7 @@
                         <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
                     </div>
                     <div class="alllist-xq">
-                        <h1><a href="#">${tenantInfo.title}</a></h1>
+                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">${tenantInfo.title}</a></h1>
                         <p>
                             <c:choose>
                                 <c:when test="${fn:length(tenantInfo.content)  > 60}">

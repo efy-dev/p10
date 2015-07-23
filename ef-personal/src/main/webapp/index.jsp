@@ -4,7 +4,7 @@
 <head>
     <script type="text/javascript" >
         function forward(){
-            window.location.href="/tenant/1";
+            window.location.href="/tenant/tenantList";
         }
     </script>
 </head>

@@ -5,16 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.commons.io.IOUtils;
 
-@WebServlet(urlPatterns = "/base_resource/p/*", asyncSupported = true)
-public class ResourceFilter extends HttpServlet {
+@WebFilter(urlPatterns = "/*", asyncSupported = true)
+public class ResourceFilter implements Filter{
 
     /**
      * @Fields serialVersionUID : 111111111111111l
@@ -23,35 +22,71 @@ public class ResourceFilter extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static Logger logger = Logger.getLogger(ResourceFilter.class);
 
-    public static void init2() {
+
+
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        // HttpServletRequest request = (HttpServletRequest) req;
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse)response;
         String url = req.getRequestURI();
-        if (url.startsWith("/base_resource/p/")) {
+        String fileType = url.substring(url.lastIndexOf(".")+1);
+        PrintWriter pw=null ;
+        if (url.startsWith("/base_resource/p/")||url.contains("/base_resource/p/")) {
 
             InputStream in = this.getClass().getClassLoader()
-                    .getResourceAsStream(url.substring("/base_resource/p/".length()));
+                    .getResourceAsStream(url.substring((url.indexOf("base_resource/p/"))).substring("base_resource/p/".length()));
             if (in == null) {
-                logger.info(url.substring("/base_resource/p/".length()) + " is not exists");
-                resp.setContentType("text/javascript;charset=utf-8");
-                PrintWriter pw = resp.getWriter();
-                pw.println("can not find this js file");
+                logger.info(url.substring((url.indexOf("base_resource/p/"))).substring("base_resource/p/".length()) + " is not exists");
+                resp.setContentType("text/html;charset=utf-8");
+                pw = resp.getWriter();
+                pw.println("can not find this file");
             } else {
+
                 try {
-                    IOUtils.copy(in, resp.getOutputStream());
+
+                    switch (fileType){
+                        case "css" :
+                            resp.setContentType("text/css;charset=utf-8");break;
+                        case "js" :
+                            resp.setContentType("text/javascript;charset=utf-8");break;
+                        case "html" :
+                            resp.setContentType("text/html;charset=utf-8");break;
+                        default:break;
+
+                    }
+//                    pw = resp.getWriter();
+//                    byte b[] = new byte[2048];
+//
+//                    while((in.read(b))!=-1){
+//                        pw.write();
+//                    }
+//                    pw.flush();
+
+                    pw = resp.getWriter();
+                    byte b[] = new byte[1024*1024];
+                    int len = 0;
+                    int temp=0;          //所有读取的内容都使用temp接收
+                    while((temp=in.read())!=-1){    //当没有读取完时，继续读取
+                        b[len]=(byte)temp;
+                        len++;
+                    }
+
+                    pw.write(new String(b,0,len));
+                    pw.flush();
+
                 } finally {
-                    IOUtils.closeQuietly(in);
+                    in.close();
+                    pw.close();
                 }
             }
         }
-    }
-
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
-        doGet(req, resp);
+        chain.doFilter(req,resp);
     }
 
     public void destroy() {

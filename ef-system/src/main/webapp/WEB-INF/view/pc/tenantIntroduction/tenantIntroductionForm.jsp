@@ -83,6 +83,7 @@
                 <input type="hidden" value="saveOrUpdateTenantIntroduction" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
+                <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&id=${tenantId}">
 
                 <%--<div class="am-form-group">--%>
                 <%--<label for="type" class="am-u-sm-3 am-form-label">类型 / Type</label>--%>

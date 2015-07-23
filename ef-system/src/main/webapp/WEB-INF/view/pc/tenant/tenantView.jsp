@@ -3,7 +3,6 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/ckeditor/ckeditor.js"></script>
     <style>
     </style>
 </head>
@@ -30,8 +29,6 @@
             </tbody>
         </table>
     </div>
-
-
 </div>
 
 
@@ -119,7 +116,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=viewTenantWorkShop&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantWorkShop_default&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 

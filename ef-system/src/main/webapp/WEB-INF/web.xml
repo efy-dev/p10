@@ -8,7 +8,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext-*.xml</param-value>
+        <param-value>classpath*:config/applicationContext-*.xml,WEB-INF/applicationContext-*.xml</param-value>
     </context-param>
 
     <context-param>
@@ -92,7 +92,7 @@
                 将使用classpath:/lei-dispatcher-servlet.xml加载上下文
             -->
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring-servlet.xml</param-value>
+            <param-value>WEB-INF/spring-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
