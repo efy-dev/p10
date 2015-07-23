@@ -63,7 +63,7 @@ a:hover{color:#0b3775;}
 body{margin:0;}
 dl,dd,dt{margin:0;padding:0;}
 a{ text-decoration:none;}
-.floating_ck{position:fixed;right:0%;top:54%;}
+.floating_ck{position:fixed;right:0%;top:54%; z-index:9999;}
 @media only screen and (max-width:1200px){
 	.floating_ck{position:none;display:none}
 	
@@ -229,7 +229,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .works-img-1{width:155px;height:225px; float:left;}
 /*作品详情*/
 .center-buttom-1{width:210px;height:10px;float:left;}
-.content-border{width:620px; overflow:hidden;}
+.content-border{width:620px; overflow:hidden;height:519px;}
 .right-content{padding:10px 15px 46px 31px;width:620px;}
 .right-content-img{width:416px;height:596px;margin:50px 70px 75px;}
 .right-border{height:2px;width:620px;}
@@ -262,6 +262,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #playBox .smalltitle .thistitle{ background:rgba(255,255,255,0.1);border:.5px solid #FFF;}
 /*传统技艺*/
 #page-section{width:870px;overflow:hidden; margin:0 auto;}
+.page-section{width:870px;overflow:hidden; margin:0 auto;}
 .page-section-text{height:160px;width:870px; text-align:center; line-height:160px;}
 .page-section-text img{width:136px;height:27px;}
 .page-section-text a{outline:none}
@@ -283,7 +284,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #img-mutual-text{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
 #img-mutual-text h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text p{width:165px;height:35px; line-height:25px;}
-#img-mutual-text1{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
+.img-mutual-text1{width:170px;height:79px; position:absolute;top:215px;left:17px;color:#fff;}
 #img-mutual-text1 h1{width:160px;height:26px;padding-left:120px;}
 #img-mutual-text1 p{width:165px;height:35px; line-height:25px;}
 /*传承人分线*/
