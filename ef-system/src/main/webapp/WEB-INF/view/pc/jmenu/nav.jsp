@@ -17,7 +17,7 @@
   <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <c:forEach items="${jmenu.children.get(0).children}" var="jnode">
-        <li><a class="${jnode.jnodeMatch('am-active',currentJnode!=null?currentJnode:"")}" href="${jnode.url}">${jnode.text_zh_CN}</a></li>
+        <li><a class="${jnode.jnodeMatch('am-active',currentJnode!=null?currentJnode:"")}" href="<c:url value="${jnode.url}"/>">${jnode.text_zh_CN}</a></li>
       </c:forEach>
     </ul>
   </div>

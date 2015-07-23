@@ -26,7 +26,7 @@
           <li>
               <%--<c:if test="${jnode.contain(requestScope.qm)&& jnode.getRootFather.id==jmenuNode.id}">--%>
             <a class="${jmenuNode.jnodeMatch('efy-active',jnode)}"
-               href="${jmenuNode.url}"><h3>${jmenuNode.text_zh_CN}</h3></a>
+               href="<c:url value="${jmenuNode.url}"/>"><h3>${jmenuNode.text_zh_CN}</h3></a>
               <%--</c:if>--%>
               <%--<c:if test="${!jnode.contain(requestScope.qm)|| jnode.getRootFather.id!=jmenuNode.id}">--%>
               <%--<a href="http://<%=request.getServerName()+':'+request.getServerPort()%>/main.do${jmenuNode.url}">${jmenuNode.text_zh_CN}</a>--%>

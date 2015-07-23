@@ -7,7 +7,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext-*.xml</param-value>
+        <param-value>classpath*:config/applicationContext-*.xml,/WEB-INF/applicationContext-*.xml</param-value>
     </context-param>
 
     <!-- SpringSecurity 核心过滤器配置 -->
@@ -40,6 +40,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -47,6 +48,7 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
+
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

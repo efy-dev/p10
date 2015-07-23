@@ -18,25 +18,54 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
-    <tr>
-        <td>purchaseOrder——id</td>
-        <td>serial</td>
-    </tr>
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+        </div>
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-set">操作</th>
+                    <th class="table-title">订单号</th>
+                    <th class="table-title">支付类型</th>
+                    <th class="table-title">收货地址</th>
+                    <th class="table-title">下单人</th>
+                    <th class="table-title">创建日期</th>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
-        <tr>
-            <td>${purchaseOrder.id}</td>
-            <td>${purchaseOrder.serial}</td>
-        </tr>
-    </c:forEach>
-</table>
-<div style="clear: both">
-    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
-        <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
-        <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-    </ming800:pcPageList>
+                </tr>
+                </thead>
+                <tbody>
+
+                <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
+                    <tr>
+                        <td>
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="<c:url value="/basic/xm.do?qm=removePurchaseOrder&id=${purchaseOrder.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 删除
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}"/>">${purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only">${purchaseOrder.payWay}</td>
+                        <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
+                        <td class="am-hide-sm-only">${purchaseOrder.user.name}</td>
+                        <td class="am-hide-sm-only">${purchaseOrder.createDatetime}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="clear: both">
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+            <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+        </ming800:pcPageList>
+    </div>
 </div>
-
 </body>
 </html>
