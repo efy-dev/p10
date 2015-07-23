@@ -45,6 +45,8 @@ public class TenantIntroductionController {
         xQuery1.addRequestParamToModel(model,request);
         List<TenantIntroduction> list = baseManager.listObject(xQuery);
         List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
+
+
         for (TenantIntroduction tenantIntroduction:list){
             if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
                 List list2 = new ArrayList();
@@ -67,7 +69,7 @@ public class TenantIntroductionController {
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
-        return "/tenantIntroduction/tenantIntroductionList";
+        return "/pc/tenantIntroduction/tenantIntroductionList";
     }
 
 }
