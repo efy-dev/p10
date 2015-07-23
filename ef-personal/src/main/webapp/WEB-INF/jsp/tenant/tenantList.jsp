@@ -6,31 +6,25 @@
 <body>
 <div id="page-header">
     <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="#"><img src="images/logo.gif"></a></h6>
+        <h6 class="page-header-logo"><a href="#"><img src="<c:url value="/scripts/assets/images/logo.gif"/>"></a></h6>
         <p>中国非遗电商平台-传承人官网</p>
     </div>
     <div class="page-header-right"></div>
 </div>
-<div id="playBox">
-    <div class="pre"></div>
-    <div class="next"></div>
-    <div class="smalltitle">
-        <ul>
-            <li class="thistitle"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-    <ul class="oUlplay">
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg"/>"/></a></li>
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg" />"></a></li>
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg"/>"></a></li>
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg" />"></a></li>
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg" />"></a></li>
-        <li><a href="#" target="_blank"><img src="<c:url value="/scripts/assets/images/大首页2-(2)_03.jpg" />"></a></li>
+<div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
+    <ul class="am-slides">
+        <li>
+            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+        </li>
+        <li>
+            <img src="http://s.amazeui.org/media/i/demos/bing-2.jpg">
+        </li>
+        <li>
+            <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
+        </li>
+        <li>
+            <img src="http://s.amazeui.org/media/i/demos/bing-4.jpg">
+        </li>
     </ul>
 </div>
 <div id="page-section">
@@ -46,7 +40,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -61,7 +57,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -76,7 +74,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -84,7 +84,7 @@
     </div>
 </div>
 <div class="page-border"></div>
-<div class="page-section">
+<div  class="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif"/>"></a></div>
     <div class="page-section-figure">
         <!--一个人物-->
@@ -97,7 +97,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -112,7 +114,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -127,7 +131,9 @@
                     <h1>林怀民</h1>
                     <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
                 </div>
+
                 </p>
+
             </div>
             <span class="img-mutual-jump"><a href="#">深入了解</a></span>
         </div>
@@ -135,7 +141,72 @@
     </div>
 </div>
 <div class="page-border-solid"></div>
-<div class="page-footer"></div>
+<div class="page-footer">
+    <dl class="page-footer-dl">
+        <dt>正品保障</dt>
+        <dd>
+            <p><a href="#">诚品宝</a></p>
+            <p><a href="#">防伪溯源</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl">
+        <dt>新手指南</dt>
+        <dd>
+            <p><a href="#">导购演示</a></p>
+            <p><a href="#">常见问题</a></p>
+            <p><a href="#">免费注册</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl">
+        <dt>支付方式</dt>
+        <dd>
+            <p><a href="#">支付宝</a></p>
+            <p><a href="#">微信</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl">
+        <dt>物流配送</dt>
+        <dd>
+            <p><a href="#">验货签收</a></p>
+            <p><a href="#">物流查询</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl">
+        <dt>售货服务</dt>
+        <dd>
+            <p><a href="#">退换货政策</a></p>
+            <p><a href="#">退换货流程</a></p>
+            <p><a href="#">微信</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl">
+        <dt>正品保障</dt>
+        <dd>
+            <p><a href="#">商家入驻指南</a></p>
+            <p><a href="#">商家帮助</a></p>
+        </dd>
+    </dl>
+    <dl class="page-footer-dl" id="page-footer-dl">
+        <dt id="page-wx-tp"></dt>
+        <dd>
+
+        </dd>
+    </dl>
+</div>
+<div class="page-bg-text">
+    <p>
+        <a class="am-btn am-btn-link page-a-text">关于我们</a>
+        <a class="am-btn am-btn-link page-a-text">商家入驻</a>
+        <a class="am-btn am-btn-link page-a-text">诚聘英才</a>
+        <a class="am-btn am-btn-link page-a-text">帮助中心</a>
+        <a class="am-btn am-btn-link page-a-text">法律声明</a>
+        <a class="am-btn am-btn-link page-a-text">国家非遗博览园</a>
+        <a class="am-btn am-btn-link page-a-text">国际非遗博览会</a>
+        <a class="am-btn am-btn-link page-a-text">国际非遗峰会</a>
+    </p>
+</div>
+<h4 id="page-footer-head">Copyright(c) 2015-2020 efeiyi.com All Rights Reserved</h4>
+<h4 id="page-footer-head-1">京ICP备15032511号-1</h4>
 <!--分析-->
 <div class="floating_ck">
     <dl>
@@ -159,6 +230,8 @@
                 <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif"/>"></a>
             </div>
         </dd>
+
+
     </dl>
 </div>
 </body>
