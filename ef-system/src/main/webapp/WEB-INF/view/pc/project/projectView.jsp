@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">父类别</td>
-                <td class="am-u-md-3">${object.category.name}</td>
+                <td class="am-u-md-3">${object.projectCategory.name}</td>
                 <td class="am-primary am-u-md-3">父项目</td>
                 <td class="am-u-md-3">${object.fatherProject.name}</td>
             </tr>
@@ -77,15 +77,61 @@
                 <c:forEach var="projectTag" items="${object.projectTagList}" varStatus="status">
                      <span class="am-badge am-badge-secondary" style="margin-left: 10px;width:85px;height: 28px;line-height: 2;margin-top: 10px;margin-bottom: 10px;background-color:rgb(102,102,102);">${projectTag.value}
                      </span>
+                    <span style="margin-right: 2px;">
                      <a href="#" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&id=${projectTag.id}&projectId=${object.id}"/>'" >编辑</a>
                      <a href="#"  onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectTag?id=${projectTag.id}"/>'" >删除</a>
-
+                    </span>
                 </c:forEach>
 
         </div>
     </div>
 
-
+    <div style="text-align: left;margin-left: 10px;" >
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
+    </div>
+    <div class="am-u-md-6" style="width:100%; " >
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">项目属性<span class="am-icon-chevron-down am-fr" ></span></div>
+            <div id="collapse-panel-3" class="am-in">
+                <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+                    <tbody>
+                    <tr>
+                        <th>操作</th>
+                        <th>项目属性名称</th>
+                        <th>项目属性值</th>
+                    </tr>
+                    <c:forEach var="projectProperty" items="${object.projectPropertyList}" >
+                        <tr>
+                            <td width="20%">
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                                        <button   onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&id=${projectProperty.id}&projectId=${object.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductProperty&id=${projectProperty.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">${projectProperty.name}</a>
+                            </td>
+                            <td>
+                                <span class="am-badge am-badge-secondary" style="margin-left: 10px;width:85px;height: 28px;line-height: 2;margin-top: 10px;margin-bottom: 10px;background-color:rgb(102,102,102);">+
+                                 </span>
+                                <c:forEach var="projectPropertyValue" items="${projectProperty.projectPropertyValueList}" varStatus="status">
+                                      <span class="am-badge am-badge-secondary" style="margin-left: 10px;width:85px;height: 28px;line-height: 2;margin-top: 10px;margin-bottom: 10px;background-color:rgb(102,102,102);">${projectPropertyValue.value}
+                                      </span>
+                                    <span style="margin-left: 2px;">
+                                 <!--      <a href="#" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectPropertyValue&id=${projectPropertyValue.id}&projectPropertyId=${projectProperty.id}"/>'" >编辑</a>
+                                        <a href="#"  onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectPropertyValue?id=${projectPropertyValue.id}"/>'" >删除</a> -->
+                                    </span>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   </div>
 
 
 

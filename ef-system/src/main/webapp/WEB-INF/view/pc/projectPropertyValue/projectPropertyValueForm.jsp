@@ -11,22 +11,21 @@
     <title></title>
 </head>
 <body>
-<div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑项目属性</strong> / <small>New/Edit ProjectProperty</small></div>
+<<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑项目属性值</strong> / <small>New/Edit ProjectTag</small></div>
 </div>
 <hr/>
 
 <div class="am-g">
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateProjectProperty">
+        <input type="hidden" name="qm" value="saveOrUpdateProjectTag">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="project.id" value="${projectId}">
         <input type="hidden" name="sort" value="${object.sort}">
-        <input type="hidden" name="status" value="${object.status}"/>
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">项目属性名称</label>
+            <label name="value" for="value" class="am-u-sm-3 am-form-label">标签名称</label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="项目属性名称" value="${object.name}">
+                <input type="text" name="value" id="value" placeholder="标签名称" value="${object.value}">
                 <small>必填项*</small>
             </div>
         </div>

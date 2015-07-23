@@ -21,10 +21,11 @@ public class Project {
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
     private Project fatherProject;//父id
-    private Category category;//类别
+    private ProjectCategory projectCategory;//类别
     private Date createDateTime;//忽略
     private List<Project> subProjectList;//子项目
     private List<ProjectTag> projectTagList;//项目标签
+    private  List<ProjectProperty> projectPropertyList;//项目属性
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -85,12 +86,12 @@ public class Project {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
-    public Category getCategory() {
-        return category;
+    public ProjectCategory getProjectCategory() {
+        return projectCategory;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setProjectCategory(ProjectCategory projectCategory) {
+        this.projectCategory = projectCategory;
     }
 
     @Column(name="create_datetime")
@@ -127,7 +128,16 @@ public class Project {
         this.subProjectList = subProjectList;
     }
 
-//    @Column(name="father_project_id")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    public List<ProjectProperty> getProjectPropertyList() {
+        return projectPropertyList;
+    }
+
+    public void setProjectPropertyList(List<ProjectProperty> projectPropertyList) {
+        this.projectPropertyList = projectPropertyList;
+    }
+
+    //    @Column(name="father_project_id")
 //    public String getFatherProjectId(){return  fatherProjectId;}
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;

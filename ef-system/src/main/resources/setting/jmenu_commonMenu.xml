@@ -88,25 +88,32 @@
             <match url="plistProjectNews_default"/>
         </jnode>
 
-            <jnode url="/basic/xm.do?qm=plistProjectCategory_default"  access="admin,manager" text_zh_CN="类别管理">
-                <match url="plistProjectCategory_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目管理">
-                <match url="plistProject_default"/>
-            </jnode>
+
     </jnode>
+
+    <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理"><!--系统管理-->
+    <jnode url="" id="CategoryManager"  access="admin" state="closed" text_zh_CN="类别管理">
+        <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目列表">
+            <match url="plistProject_default"/>
+        </jnode>
+        <jnode url="/basic/xm.do?qm=plistProjectCategory_default"  access="admin,manager" text_zh_CN="类别列表">
+            <match url="plistProjectCategory_default"/>
+        </jnode>
+    </jnode>
+    </jnode>
+
 
     <jnode id="systemManager" url="/main.do?jnodeId=systemManager" text_zh_CN="系统管理"><!--系统管理-->
-        <jnode url="" id="userManager"  access="admin" state="closed" text_zh_CN="用户管理">
-            <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户列表">
-                <match url="plistUser_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistRole_default"  access="admin,manager" text_zh_CN="角色管理">
-                <match url="plistRole_default"/>
-            </jnode>
+    <jnode url="" id="userManager"  access="admin" state="closed" text_zh_CN="用户管理">
+        <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户列表">
+            <match url="plistUser_default"/>
         </jnode>
-
+        <jnode url="/basic/xm.do?qm=plistRole_default"  access="admin,manager" text_zh_CN="角色管理">
+            <match url="plistRole_default"/>
+        </jnode>
     </jnode>
+
+</jnode>
 </jmenu>
 
 

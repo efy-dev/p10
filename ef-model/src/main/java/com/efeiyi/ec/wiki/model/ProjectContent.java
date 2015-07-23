@@ -1,6 +1,6 @@
 package com.efeiyi.ec.wiki.model;
 
-import com.efeiyi.ec.project.model.Category;
+import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,7 +15,7 @@ import java.util.Date;
 public class ProjectContent {
     private String id;
     private String content;
-    private Category category;
+    private ProjectCategory category;
     private Tenant creator;
     private Date createDatetime;
 
@@ -41,11 +41,11 @@ public class ProjectContent {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
-    public Category getCategory() {
+    public ProjectCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(ProjectCategory category) {
         this.category = category;
     }
 
