@@ -1,10 +1,7 @@
 package com.ming800.core.p.service.impl;
 
 import com.aliyun.openservices.oss.OSSClient;
-import com.aliyun.openservices.oss.model.CannedAccessControlList;
-import com.aliyun.openservices.oss.model.OSSObject;
-import com.aliyun.openservices.oss.model.ObjectMetadata;
-import com.aliyun.openservices.oss.model.PutObjectResult;
+import com.aliyun.openservices.oss.model.*;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +27,7 @@ public class AliOssUploadManagerImpl implements AliOssUploadManager {
 
     @Override
     public Boolean uploadFile(MultipartFile multipartFile, String bucketName, String uploadName) throws IOException {
-        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com",accessKeyId, accessKeySecret);
+        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com", accessKeyId, accessKeySecret);
 
         // 获取Bucket的存在信息
         boolean exists = client.doesBucketExist(bucketName);
@@ -87,5 +84,20 @@ public class AliOssUploadManagerImpl implements AliOssUploadManager {
         }
 
         return fileSize;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List listObjectByPath(String bucket, String path) {
+
+        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com", accessKeyId, accessKeySecret);
+
+        ListObjectsRequest listObjectsRequest = new ListObjectsRequest(bucket);
+
+        // 递归列出fun目录下的所有文件
+        listObjectsRequest.setPrefix(path);
+
+        ObjectListing listing = client.listObjects(listObjectsRequest);
+
+        return listing.getCommonPrefixes();
     }
 }

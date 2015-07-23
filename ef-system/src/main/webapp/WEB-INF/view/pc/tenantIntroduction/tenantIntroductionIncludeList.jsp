@@ -15,7 +15,8 @@
             <tr>
                 <th class="table-set">操作</th>
                 <th class="table-title">类型</th>
-                <th class="table-title">姓名</th>
+                <th class="table-title">标题</th>
+                <th class="table-title">传承人姓名</th>
 
             </tr>
             </thead>
@@ -37,10 +38,11 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">${tenantIntroduction.type}</td>
                     <td class="am-hide-sm-only"><a
-                            href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">${tenantIntroduction.tenant.name}</a>
+                            href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">${tenantIntroduction.title}</a>
                     </td>
+                    <td class="am-hide-sm-only">${tenantIntroduction.tenant.name}</td>
+                    <td class="am-hide-sm-only">${tenantIntroduction.type}</td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -15,14 +15,14 @@
     <http pattern="/js/*.js" security="none"/>
     <!--<http auto-config="true">-->
     <!--<intercept-url pattern="/app.jsp" access="ROLE_SERVICE"/>-->
-    <!--&lt;!&ndash;<intercept-url pattern="/**" access="ROLE_ADMIN"/>&ndash;&gt;-->
+    <!--<intercept-url pattern="/**" access="ROLE_ADMIN"/>-->
     <!--</http>-->
-
 
     <http realm="Contacts Realm" use-expressions="true">
         <csrf disabled="true"/>
-        <!--<intercept-url pattern="/**" access="isAuthenticated()"/>-->
-        <!--<anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>-->
+        <intercept-url pattern="/pc/login.do" access="anonymous"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
         <form-login login-page="/pc/login.do" login-processing-url="/j_spring_security_check"
                     authentication-success-handler-ref="loginSuccessHandler"
                     authentication-failure-handler-ref="loginFailureHandler"/>

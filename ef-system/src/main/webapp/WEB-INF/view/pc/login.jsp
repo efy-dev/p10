@@ -27,18 +27,8 @@
   </div>
 
   <div class="am-form-group">
-    <div class="am-u-sm-offset-2 am-u-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> 记住十万年
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="am-form-group">
     <div class="am-u-sm-10 am-u-sm-offset-2">
-      <button type="submit" class="am-btn am-btn-default">提交登入</button>
+      <button type="submit" class="am-btn am-btn-default">登录</button>
     </div>
   </div>
 </form>
