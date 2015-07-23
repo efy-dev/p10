@@ -6,7 +6,7 @@
 <body>
 <!--作品详情-->
 <div id="page-nav">
-  <p><a href="#">首页</a><span>作品</span></p>
+  <p><a href="${pageContext.request.contextPath}/tenant/${product.tenant.id}">首页</a><span id="zpxq-1"><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=tenant.id:${product.tenant.id}">作品</a></span><span>${product.name}</span></p>
 </div>
 <div class="border-nav"></div>
 <div id="center--1">

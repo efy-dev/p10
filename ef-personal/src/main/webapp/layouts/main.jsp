@@ -38,8 +38,8 @@
     <ul class="nav-centent">
         <li><a href="${pageContext.request.contextPath}/tenant/1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantWorkShop/1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
     </ul>
 </div>
