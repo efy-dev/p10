@@ -3,21 +3,29 @@ package com.efeiyi.ec.project.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
+ * 非遗项目管理
  */
 @Entity
 @Table(name="project")
 public class Project {
     private String id;
-    private String serial;
-    private String name;
-    private String status;
-    private String level;
-    private Category category;
-    private Date createDateTime;
+    private String serial;//项目编号
+    private String name;//项目名称
+    private String status;//状态
+    private String level;//级别
+    private String type; //类别 1.美术 2.技艺
+    private Project fatherProject;//父id
+//    private String fatherProjectId;
+    private Category category;//类别
+    private Date createDateTime;//忽略
+    private List<Project> subProjectList;//子项目
+    private List<ProjectTag> projectTagList;//项目标签
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -37,6 +45,16 @@ public class Project {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "father_project_id")
+    public  Project getFatherProject(){
+        return  fatherProject;
+    }
+
+    public void  setFatherProject(Project fatherProject){
+        this.fatherProject = fatherProject;
     }
 
     @Column(name="name")
@@ -84,4 +102,36 @@ public class Project {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
+
+    @Column(name="type")
+    public  String getType(){
+        return  type;
+    }
+
+    public  void  setType(String type){
+          this.type=type;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    public  List<ProjectTag> getProjectTagList(){
+        return  projectTagList;
+    }
+    public  void  setProjectTagList(List<ProjectTag> projectTagList){
+         this.projectTagList = projectTagList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
+    public  List<Project> getSubProjectList(){
+        return  subProjectList;
+    }
+    public  void  setSubProjectList(List<Project> subProjectList){
+        this.subProjectList = subProjectList;
+    }
+
+//    @Column(name="father_project_id")
+//    public String getFatherProjectId(){return  fatherProjectId;}
+//    public void  setFatherProjectId(String fatherProjectId){
+//          this.fatherProjectId = fatherProjectId;
+//    }
 }
+

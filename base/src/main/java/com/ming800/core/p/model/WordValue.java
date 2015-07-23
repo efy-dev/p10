@@ -14,7 +14,7 @@ public class WordValue {
     private String id;
     private  String value;
     private String group;
-    private Integer status;
+    private String status;
 
 
     @Id
@@ -47,11 +47,11 @@ public class WordValue {
     }
 
     @Column(name="status")
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

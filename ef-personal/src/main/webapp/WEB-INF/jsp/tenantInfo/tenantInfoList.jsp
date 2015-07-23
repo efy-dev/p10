@@ -7,69 +7,23 @@
 <html>
 <head>
     <title>资讯</title>
+<script type="text/javascript">
+    function redirect(){
+
+    }
+</script>
 </head>
 <body>
 <div id="page-nav">
-    <p><a href="#">首页</a><span>资讯</span></p>
+    <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>资讯</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯内容-->
 <div id="center--1">
     <div class="center-buttom">
-        <h1>当前标签</h1>
-        <div class="buttom-zx">
-            <div class="buttom-zx-tr">
-                <ul class="buttom-zx-td-1">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">全部</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-2">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">视频</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-            </div>
-            <div class="buttom-zx-tr-2">
-                <ul class="buttom-zx-td-3">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">动态更新</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-                <ul class="buttom-zx-td-2">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">流行观点</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-            </div>
-            <div class="buttom-zx-tr-2">
-                <ul class="buttom-zx-td-4">
-                    <li class="buttom-zx-td-left"></li>
-                    <li class="buttom-zx-td-center">
-                        <div class="buttom-zx-td-border-1"></div>
-                        <div class="buttom-zx-td-center-1"><a href="#">动态更新</a></div>
-                        <div class="buttom-zx-td-border-2"></div>
-                    </li>
-                    <li class="buttom-zx-td-right"></li>
-                </ul>
-            </div>
-        </div>
+        <c:forEach items="${tagList}" var="tag" >
+            <a href="javascript:void(0)" onclick="redirect();"><button class="button">${tag.value}</button></a>
+        </c:forEach>
     </div>
     <div class="center-right">
         <C:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
@@ -88,11 +42,11 @@
                                     ${fn:substring(tenantInfo.content,0 ,60 ) }......
                                 </c:when>
                                 <c:otherwise>
-                                    ${tenantinfo.content}
+                                    ${tenantInfo.content}
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <span><a href="<c:url value="/tenantInfo/getTenantInfo.do?tenantNewsId=1"/>">详情</a></span>
+                        <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">详情</a></span>
                     </div>
                 </div>
                 <div class="alllist-border"></div>
@@ -100,7 +54,7 @@
         </C:forEach>
     </div>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="/tenantInfo/tenantInfoList.do">
+<ming800:pcPageList bean="${pageEntity}" url="/tenantInfo/listTenantInfo.do">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

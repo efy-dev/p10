@@ -42,7 +42,7 @@ public class PurchaseOrder {
         this.serial = serial;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
     public List<PurchaseOrderProduct> getPurchaseOrderProductList() {
         return purchaseOrderProductList;
     }

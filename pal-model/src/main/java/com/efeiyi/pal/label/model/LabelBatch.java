@@ -2,6 +2,7 @@ package com.efeiyi.pal.label.model;
 
 import com.efeiyi.pal.orgnization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.pal.purchase.model.PurchaseOrder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,6 +23,8 @@ public class LabelBatch {
     private Date createDate;
     private Product product;
     private Tenant tenant;
+    private PurchaseOrder purchaseOrder;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -88,6 +91,25 @@ public class LabelBatch {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_order_id")
+    public PurchaseOrder getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

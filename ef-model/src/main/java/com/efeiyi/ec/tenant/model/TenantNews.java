@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -17,9 +18,10 @@ public class TenantNews {
     private Date createDateTime;
     private User creator;
     private String content;
-    private String type;
     private Tenant tenant;
+    private String status;
     private String dataSource; //来源
+    private List<TenantNewsTag> tenantNewsTagList ;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -69,15 +71,6 @@ public class TenantNews {
         this.content = content;
     }
 
-    @Column(name="type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
@@ -88,6 +81,15 @@ public class TenantNews {
         this.tenant = tenant;
     }
 
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Column(name = "data_source")
     public String getDataSource() {
         return dataSource;
@@ -95,5 +97,14 @@ public class TenantNews {
 
     public void setDataSource(String dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantNews")
+    public List<TenantNewsTag> getTenantNewsTagList() {
+        return tenantNewsTagList;
+    }
+
+    public void setTenantNewsTagList(List<TenantNewsTag> tenantNewsTagList) {
+        this.tenantNewsTagList = tenantNewsTagList;
     }
 }

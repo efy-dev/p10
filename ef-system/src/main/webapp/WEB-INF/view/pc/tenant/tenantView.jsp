@@ -3,6 +3,7 @@
 <html>
 <head>
     <title></title>
+    <script src="/scripts/ckeditor/ckeditor.js"></script>
     <style>
     </style>
 </head>
@@ -11,12 +12,8 @@
 
 <div class="am-g">
     <div class="am-u-md-12">
+        <h2>详细信息</h2>
         <table class="am-table am-table-bordered">
-            <thead>
-            <tr>
-                <th>测试数据</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">名字</td>
@@ -36,18 +33,96 @@
 
 
 </div>
+
+
 <div class="am-g">
-    <div class="am-u-sm-12 am-u-md-6">
+
+    <div class="am-u-md-12">
+    <h2>轮播图</h2>
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
-                <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenantBanner&tenantId=${object.id}"/>"><span class="am-icon-plus"></span> 新增轮播图</a>
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=formTenantBanner&tenantId=${object.id}"/>"><span
+                        class="am-icon-plus"></span> 新建轮播图</a>
             </div>
         </div>
     </div>
 
     <div class="am-u-md-12">
-<jsp:include flush="true" page="/basic/xm.do?qm=listTenantBanner_default&conditions=tenant.id:${object.id};theStatus:1"/>
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantBanner_default&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
+
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>传承人介绍</h2>
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=formTenantIntroduction&tenantId=${object.id}"/>"><span
+                        class="am-icon-plus"></span> 新建传承人介绍</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantIntroduction_include&conditions=tenant.id:${object.id}"/>
+    </div>
+</div>
+
+
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>传承人的项目</h2>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantProject_include&conditions=tenant.id:${object.id}"/>
+    </div>
+</div>
+
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>传承人的资讯</h2>
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=formTenantNews&tenantId=${object.id}"/>"><span
+                        class="am-icon-plus"></span>新建资讯</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantNews_include&conditions=tenant.id:${object.id}"/>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>传承人工作坊</h2>
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=formTenantWorkShop&tenantId=${object.id}"/>"><span
+                        class="am-icon-plus"></span>新建工作坊</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=viewTenantWorkShop&conditions=tenant.id:${object.id}"/>
+    </div>
+</div>
+
+
 </body>
 </html>

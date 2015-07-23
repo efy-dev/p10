@@ -1,6 +1,5 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -159,6 +158,7 @@ public class Tenant implements Serializable {
         this.presentAddress = presentAddress;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="origin_province_id")
     public AddressProvince getOriginProvince() {

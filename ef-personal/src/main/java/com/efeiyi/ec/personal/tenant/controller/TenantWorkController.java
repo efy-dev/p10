@@ -3,12 +3,14 @@ package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/tenantWork")
-public class TenantProductController {
+public class TenantWorkController {
 
     @Autowired
     private BaseManager baseManager;
@@ -33,14 +35,18 @@ public class TenantProductController {
      * @param model
      * @return
      */
-    @RequestMapping("/tenantWorkList.do")
+    @RequestMapping("/listTenantWork.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-
+        String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(23,conditions.length());
+        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("tenantId", tenantId);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("plistTenantWork_default",request);
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
+        model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
-
         return "/tenantWork/tenantWorkList";
 
     }
@@ -49,13 +55,12 @@ public class TenantProductController {
      * @param modelMap
      * @return
      */
-    @RequestMapping("/getProduct.do")
-    public ModelAndView getProduct(HttpServletRequest request ,ModelMap modelMap){
-        String productId = request.getParameter("productId");
-        String queryHql = "from ProductDescription p where p.product.id = :productId";
-        String queryHql1 = "from ProductPicture pr where pr.product.id = :productId";
+    @RequestMapping("/{tenantWorkId}")
+    public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
+        String queryHql = "from ProductDescription p where p.product.id = :tenantWorkId";
+        String queryHql1 = "from ProductPicture pr where pr.product.id = :tenantWorkId";
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("productId", productId);
+        queryParamMap.put("tenantWorkId", tenantWorkId);
         //Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
         ProductDescription productDescription = (ProductDescription) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);
@@ -64,5 +69,4 @@ public class TenantProductController {
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
-
 }

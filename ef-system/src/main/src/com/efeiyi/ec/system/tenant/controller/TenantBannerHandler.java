@@ -35,11 +35,11 @@ public class TenantBannerHandler implements MultipartHandler{
         HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("imageUrl",url);
         paramMap.put("group","tenant");
-        paramMap.put("theStatus","1");
+        paramMap.put("status","1");
 
-        Tenant tenant = new Tenant();
-        tenant.setId(request.getParameter("tenant_id"));
-        paramMap.put("tenant",tenant);
+//        Tenant tenant = new Tenant();
+//        tenant.setId(request.getParameter("tenant_id"));
+        paramMap.put("tenant.id",request.getParameter("tenant_id"));
 
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
 

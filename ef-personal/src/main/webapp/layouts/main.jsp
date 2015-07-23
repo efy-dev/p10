@@ -34,14 +34,16 @@
 <div id="nav">
     <h1><a href="#"><img src="<c:url value="/scripts/assets/images/logo2.gif"/>"></a></h1>
     <ul class="nav-centent">
-        <li><a href="${pageContext.request.contextPath}/tenant/getTenant/{tenantId}"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/tenantIntroductionList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWork/tenantWorkList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantInfo/tenantInfoList.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWork/getTenantWorkShop.do?tenantId=1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWorkShop/1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
     </ul>
 </div>
 <sitemesh:write property='body'/>
+<br />
+<br />
 <div id="footer">
     <ul class="guild">
         <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>

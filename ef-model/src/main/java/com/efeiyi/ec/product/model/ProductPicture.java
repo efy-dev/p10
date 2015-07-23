@@ -13,6 +13,7 @@ public class ProductPicture {
     private String id;
     private Product product;
     private String pictureUrl;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -42,5 +43,14 @@ public class ProductPicture {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

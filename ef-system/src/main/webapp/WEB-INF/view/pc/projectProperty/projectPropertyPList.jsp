@@ -20,13 +20,11 @@
 <body>
 <table>
     <tr>
-        <td>projectProperty——id</td>
         <td>projectProperty——name</td>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="projectProperty">
         <tr>
-            <td>${projectProperty.id}</td>
             <td>${projectProperty.name}</td>
         </tr>
     </c:forEach>

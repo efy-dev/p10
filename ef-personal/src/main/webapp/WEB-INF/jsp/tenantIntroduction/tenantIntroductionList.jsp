@@ -13,7 +13,7 @@
 <body>
 <!--简介-->
 <div id="page-nav">
-    <p><a href="#">首页</a><span>简介</span></p>
+    <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>简介</span></p>
 </div>
 <div class="border-nav"></div>
 <!--简介内容-->
@@ -108,7 +108,11 @@
         <div id="yi-shu-nian-biao">
             <h1>艺术年表</h1>
             <div class="text-line">
-               ${list4.get(0).path}
+                <c:forEach items="${list}" var="introduction">
+                    <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
+                        ${introduction.content}
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
     </div>

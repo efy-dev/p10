@@ -15,6 +15,7 @@ public class AddressProvince implements Serializable {
 
     private String id;
     private String name;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -55,6 +56,15 @@ public class AddressProvince implements Serializable {
 
     public int hashCode() {
         return (id != null ? id.hashCode() : 0);
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

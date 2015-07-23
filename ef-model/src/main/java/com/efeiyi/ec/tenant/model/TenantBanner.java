@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/7/20.
  */
 @Entity
-@Table(name="tenant_banner")
+@Table(name = "tenant_banner")
 public class TenantBanner {
 
     private String id;
@@ -17,7 +17,7 @@ public class TenantBanner {
     private Integer bannerOrder;
     private String imageUrl;
     private String directUrl;
-    private String theStatus;
+    private String status;
     private Tenant tenant;
 
     @Id
@@ -31,7 +31,7 @@ public class TenantBanner {
         this.id = id;
     }
 
-    @Column(name="title")
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -39,7 +39,8 @@ public class TenantBanner {
     public void setTitle(String title) {
         this.title = title;
     }
-    @Column(name="banner_order")
+
+    @Column(name = "banner_order")
     public Integer getBannerOrder() {
         return bannerOrder;
     }
@@ -48,7 +49,7 @@ public class TenantBanner {
         this.bannerOrder = bannerOrder;
     }
 
-    @Column(name="image_url")
+    @Column(name = "image_url")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -57,7 +58,7 @@ public class TenantBanner {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name="direct_url")
+    @Column(name = "direct_url")
     public String getDirectUrl() {
         return directUrl;
     }
@@ -65,7 +66,8 @@ public class TenantBanner {
     public void setDirectUrl(String directUrl) {
         this.directUrl = directUrl;
     }
-    @Column(name="group_id")
+
+    @Column(name = "group_id")
     public String getGroup() {
         return group;
     }
@@ -74,14 +76,15 @@ public class TenantBanner {
         this.group = group;
     }
 
-    @Column(name="the_status")
-    public String getTheStatus() {
-        return theStatus;
+    @Column(name = "the_status")
+    public String getStatus() {
+        return status;
     }
 
-    public void setTheStatus(String theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")

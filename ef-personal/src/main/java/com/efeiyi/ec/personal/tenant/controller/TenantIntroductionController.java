@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,25 +29,12 @@ public class TenantIntroductionController {
     private BaseManager baseManager;
 
     /**
-     * 获取传承人简介
-     * @param introductionId
-     * @param model
-     * @return
-     */
-    @RequestMapping("/getTenantIntroduction.do")
-    public ModelAndView getTenantIntroduction(String introductionId ,ModelMap model){
-        TenantIntroduction introduction = (TenantIntroduction) baseManager.getObject(TenantIntroduction.class.getName(),introductionId);
-        model.addAttribute("entity",introduction);
-        return new ModelAndView("/tenantIntroduction/tenantIntroductionView",model);
-    }
-
-    /**
      * 获取传承人简介(列表)
      * @param request
      * @param model
      * @return
      */
-    @RequestMapping("/tenantIntroductionList.do")
+    @RequestMapping("/listTenantIntroduction.do")
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
         String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(23,conditions.length());
@@ -78,15 +66,6 @@ public class TenantIntroductionController {
                     }
                 }
                 model.addAttribute("list3", list3);
-            }
-            if ("yi-shu-nian-biao".equals(tenantIntroduction.getTitle())){
-                List list4 = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list4.add(tenantAttachment);
-                    }
-                }
-                model.addAttribute("list4", list4);
             }
         }
         model.addAttribute("tenant",tenant);

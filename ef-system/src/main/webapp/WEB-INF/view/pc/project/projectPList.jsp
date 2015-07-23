@@ -18,17 +18,37 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table>
-    <tr>
-        <td>project——id</td>
-        <td>project——name</td>
+<table class="am-table am-table-bordered am-table-radius am-table-striped" >
+    <tr style="text-align: left">
+
+        <td width="74%">项目名称</td>
+        <td width="">项目编号</td>
     </tr>
 
+
     <c:forEach items="${requestScope.pageInfo.list}" var="project">
-        <tr>
-            <td>${project.id}</td>
-            <td>${project.name}</td>
+        <tr style="text-align: left">
+
+            <td width="10%">
+                <c:if test="${project.level == 1}">
+                    <a href="/basic/xm.do?qm=plistProject_default&conditions=fatherProjectId:${project.id};level:2" >
+                      ${project.name}
+                    </a>
+                </c:if>
+                <c:if test="${project.level == 2}">
+                    <a href="/basic/xm.do?qm=plistProject_default&conditions=fatherProjectId:${project.id};level:3" >
+                      ${project.name}
+                    </a>
+                </c:if>
+                <c:if test="${project.level == 3}">
+                    <a href="#" >${project.name}</a>
+                </c:if>
+            </td>
+            <td>
+                ${project.serial}
+            </td>
         </tr>
+
     </c:forEach>
 </table>
 <div style="clear: both">
