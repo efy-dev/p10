@@ -12,12 +12,22 @@
     <url>http://maven.apache.org</url>
     <dependencies>
 
+
+        <dependency>
+            <groupId>com.efeiyi.ec</groupId>
+            <artifactId>base_resource</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.efeiyi.ec</groupId>
             <artifactId>base</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+
 
         <dependency>
             <groupId>com.efeiyi.ec</groupId>

@@ -79,9 +79,9 @@ public class BannerControllerTest {
         response = new MockHttpServletResponse();
         request.setCharacterEncoding("UTF-8");
         //bannerController = new BannerController();
-        baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
-        bannerController = (BannerController)applicationContext.getBean("bannerController");
-        documentController = (DocumentController)applicationContext.getBean("documentController");
+       //baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
+        //bannerController = (BannerController)applicationContext.getBean("bannerController");
+        //documentController = (DocumentController)applicationContext.getBean("documentController");
     }
     @Test
     public void demo1() {
@@ -120,6 +120,20 @@ public class BannerControllerTest {
 
         documentController.getDocByGroupId(request);
 
+    }
+    @Test
+    public void demo4()throws  Exception{
+
+     String url ="/base_resource/p/assets/i/favicon.png";
+
+        System.out.println(url.substring(url.indexOf("base_resource/p/")).substring("base_resource/p/".length()));
+        System.out.println(url.lastIndexOf("base_resource/p/"));
+        System.out.println(url.substring((url.indexOf("base_resource/p/"))).substring("base_resource/p/".length())) ;
+        String fileType=url.substring("admin.css".indexOf("."));
+        System.out.println("admin.css".indexOf("."));
+
+        String fileName = url.substring(url.lastIndexOf(".")+1);
+        System.out.print(fileName);
     }
     @After
     public  void setUpAfter() throws Exception {

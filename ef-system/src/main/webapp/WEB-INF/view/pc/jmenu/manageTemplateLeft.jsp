@@ -20,7 +20,7 @@
               <c:forEach items="${childJnode.children}" var="childchildJnode">
                 <li>
                     <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
-                  <a href="${childchildJnode.url}"
+                  <a href="<c:url value="${childchildJnode.url}"/>"
                      class="am-cf ${childchildJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}">${childchildJnode.text_zh_CN}</a>
                     <%--</c:if>--%>
                     <%--<c:if test="${empty requestScope.qm || !childchildJnode.contain(requestScope.qm)}">--%>
@@ -38,24 +38,10 @@
           <%--</c:if>--%>
           <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
 
-          <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="${childJnode.url}"></span> ${childJnode.text_zh_CN}</a></li>
+          <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="<c:url value="${childJnode.url}"/>"></span> ${childJnode.text_zh_CN}</a></li>
           <%--</c:if>--%>
         </c:if>
       </c:forEach>
     </ul>
-    <div class="am-panel am-panel-default admin-sidebar-panel">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-bookmark"></span> 公告</p>
-
-        <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
-      </div>
-    </div>
-    <div class="am-panel am-panel-default admin-sidebar-panel">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-tag"></span> wiki</p>
-
-        <p>Welcome to the Amaze UI wiki!</p>
-      </div>
-    </div>
   </div>
 </div>
