@@ -38,10 +38,7 @@ public class TenantIntroductionController {
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
         String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(23,conditions.length());
-        String queryHql = "from Tenant t left join fetch t.originProvince p where t.id = :tenantId";
-        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("tenantId",tenantId);
-        Tenant tenant = (Tenant) baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("listTenantIntroduction_default",request);
         xQuery.addRequestParamToModel(model,request);
         XQuery xQuery1 = new XQuery("listAttachment_default",request);

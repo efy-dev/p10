@@ -5,6 +5,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,17 @@ public class TenantWorkController {
         String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(10,conditions.length());
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("tenantId", tenantId);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("plistTenantWork_default",request);
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
+
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
+        XQuery xQuery1 = new XQuery("listProject_default",request);
+        List<TenantProject> tenantProjectList = baseManager.listObject(xQuery1);
+        model.addAttribute("tenantProjectList", tenantProjectList);
+
         return "/tenantWork/tenantWorkList";
 
     }
@@ -58,16 +63,8 @@ public class TenantWorkController {
      */
     @RequestMapping("/{tenantWorkId}")
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
-        String queryHql = "from ProductDescription p where p.product.id = :tenantWorkId";
-        String queryHql1 = "from ProductPicture pr where pr.product.id = :tenantWorkId";
-        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("tenantWorkId", tenantWorkId);
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
-        ProductDescription productDescription = (ProductDescription) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
-        ProductPicture productPicture = (ProductPicture) baseManager.getUniqueObjectByConditions(queryHql1, queryParamMap);
         modelMap.addAttribute("product", product);
-        modelMap.addAttribute("productDescription",productDescription);
-        modelMap.addAttribute("productPicture", productPicture);
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
