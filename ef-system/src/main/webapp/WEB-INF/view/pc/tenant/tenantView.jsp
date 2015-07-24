@@ -48,7 +48,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="${pageContext.request.contextPath}/basic/xm.do?qm=listTenantProject_include&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantProject_include&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 
@@ -70,7 +70,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="${pageContext.request.contextPath}/basic/xm.do?qm=listTenantBanner_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantBanner_default&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 
@@ -89,7 +89,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="${pageContext.request.contextPath}/basic/xm.do?qm=listTenantIntroduction_include&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantIntroduction_include&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 
@@ -111,7 +111,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="${pageContext.request.contextPath}/basic/xm.do?qm=listTenantNews_include&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantNews_include&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 
@@ -129,7 +129,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="${pageContext.request.contextPath}/basic/xm.do?qm=listTenantWorkShop_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantWorkShop_default&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title></title>
@@ -23,7 +24,7 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+            <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
                 <input type="hidden" value="saveOrUpdateTenant" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
 

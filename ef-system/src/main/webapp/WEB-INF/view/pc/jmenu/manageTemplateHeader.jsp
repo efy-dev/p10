@@ -55,7 +55,7 @@
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
 
-            <li class="am-hide-sm-only"><a href="/j_spring_security_logout" id="admin-fullscreen"><span
+            <li class="am-hide-sm-only"><a href="<c:url value="/j_spring_security_logout"/>" id="admin-fullscreen"><span
                     class="am-icon-power-off"></span> <span class="admin-fullText">退出系统</span></a></li>
 
             <%
