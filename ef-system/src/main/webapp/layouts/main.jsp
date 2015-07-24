@@ -39,12 +39,12 @@
 <body>
 
 <jsp:include flush="true"
-             page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
+             page="${pageContext.request.contextPath}/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 
 <div class="am-cf admin-main">
 <%----%>
     <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
+                 page="${pageContext.request.contextPath}/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
 <div class="admin-content" style="height: auto;">
 <sitemesh:write property='body'/>
 </div>
