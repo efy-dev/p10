@@ -64,6 +64,7 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .message-text-p{ font-size:12px; font-family:"微软雅黑";color:#777; line-height:33px;margin:0;}
 .message-text span{height:25px;}
 .message-text span a{width:56px;height:25px; line-height:25px;float:right;color:#0072bb;font-size:12px; text-align:center;padding-left:20px; background:url(../images/logo8.gif) no-repeat 10px center;}
+.an-mg-top{margin-top:5px;}
 /*工作仿*/
 .video-img-or{width:297px;height:193px;margin:0 auto;padding-top:30px;}
 .video-img-or video{width:297px;height:163px;}
@@ -71,3 +72,6 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .video-img-text{width:297px; overflow:hidden;margin:0 auto;padding-top:16px;font-size:12px; font-family:"Microsoft YaHei,Microsoft JhengHei,SimSun,SimHei";color:#9CA7AB;}
 /*聚首*/
 .gather-am-1{border:0;height:93px;padding:1em 0;}
+.am-slider-a1 .am-control-nav li a:link, .am-slider-a1 .am-control-nav li a:hover{background-color:#9FA1A0;}
+.am-slider-a1 .am-control-nav li a.am-active{background-color:#fff;}
+.am-ing-bg-color{background-color:#F1F5F8;}
