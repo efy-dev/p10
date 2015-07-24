@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class MainController extends BaseController {
+public class JmenuController extends BaseController {
 
     @RequestMapping({"/getXPage.do"})
     public String getXPage(HttpServletRequest request,HttpServletResponse response){
