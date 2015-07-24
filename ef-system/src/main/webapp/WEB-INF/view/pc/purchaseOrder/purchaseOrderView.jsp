@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -106,9 +107,10 @@
                     <td class="am-u-md-3">${purchaseOrderPayment.payWay}</td>
                     <td class="am-primary am-u-md-3">支付者姓名</td>
                     <td class="am-u-md-3">${purchaseOrderPayment.user.name}</td>
-                    <td class="am-primary am-u-md-3">支付时间</td>
-                    <%--<td class="am-u-md-3"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>--%>
-                    <td class="am-u-md-3">${purchaseOrderPayment.createDateTime}</td>
+                </tr>
+                <tr>
+                    <td class="am-primary am-u-md-3" >支付时间</td>
+                    <td class="am-u-md-3" colspan="3"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                 </tr>
                 <c:if test="${!stat.last}">
                     <tr><td colspan="4"></td></tr>
@@ -133,7 +135,7 @@
                     <td class="am-primary am-u-md-3">配送地址</td>
                     <td class="am-u-md-3">${purchaseOrderDelivery.consumerAddress.details}</td>
                     <td class="am-primary am-u-md-3">配送时间</td>
-                    <td class="am-u-md-3">${purchaseOrderDelivery.createDateTime}</td>
+                    <td class="am-u-md-3"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                 </tr>
                 <c:if test="${!stat.last}">
                     <tr><td colspan="4"></td></tr>

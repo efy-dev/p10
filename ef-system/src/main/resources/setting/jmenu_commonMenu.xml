@@ -16,8 +16,11 @@
             <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="最新商品列表">
                 <match url="plistProduct_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="推荐商品管理">
-                <match url="plistProduct_default"/>
+            <jnode url="/basic/xm.do?qm=plistProductRecommended_default"  access="admin,manager" text_zh_CN="推荐商品管理">
+                <match url="plistProductRecommended_default"/>
+                <match url="viewProduct"/>
+                <match url="removeProductRecommended"/>
+                <match url="viewTenant"/>
             </jnode>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">

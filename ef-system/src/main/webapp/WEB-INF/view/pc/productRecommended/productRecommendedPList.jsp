@@ -6,10 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <html>
@@ -18,6 +16,13 @@
 </head>
 <body>
 <div class="admin-content">
+    <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <%--<a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formProductRecommended"/>"><span class="am-icon-plus"></span> 新建</a>--%>
+            </div>
+        </div>
+    </div>
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
         </div>
@@ -26,10 +31,11 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
-                    <th class="table-title">支付订单</th>
-                    <th class="table-title">支付方式</th>
-                    <th class="table-title">支付用户</th>
-                    <th class="table-title">支付时间</th>
+                    <th class="table-title">产品名称</th>
+                    <th class="table-title">产品价格</th>
+                    <th class="table-title">产品分类</th>
+                    <th class="table-title">所属商家</th>
+                    <th class="table-title">产品图片</th>
 
                 </tr>
                 </thead>
@@ -37,22 +43,23 @@
 
 
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderPayment">
+                <c:forEach items="${requestScope.pageInfo.list}" var="productRecommended">
                     <tr>
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeProductRecommended&id=${purchaseOrderPayment.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=removeProductRecommended&id=${productRecommended.id}"/>"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
-                        <td class="am-hide-sm-only">${purchaseOrderPayment.payWay}</td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewUser&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
-                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${productRecommended.product.id}'/>">${productRecommended.product.name}</a></td>
+                        <td class="am-hide-sm-only">${productRecommended.product.price}</td>
+                        <td class="am-hide-sm-only">${productRecommended.product.category.name}</td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${productRecommended.tenant.id}'/>">${productRecommended.tenant.name}</a></td>
+                        <td class="am-hide-sm-only"><img src="${productRecommended.product.picture_url}" alt="推荐产品图片"></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -66,6 +73,5 @@
         </ming800:pcPageList>
     </div>
 </div>
-
 </body>
 </html>
