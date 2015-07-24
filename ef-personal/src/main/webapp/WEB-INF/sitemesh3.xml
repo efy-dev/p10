@@ -1,3 +1,4 @@
 <sitemesh>
+    <mapping path="/tenant/tenantList" decorator="/layouts/empty.jsp"/>
     <mapping path="/*" decorator="/layouts/main.jsp"/>
 </sitemesh>

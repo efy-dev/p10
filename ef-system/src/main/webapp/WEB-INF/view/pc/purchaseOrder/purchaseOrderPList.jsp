@@ -6,16 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
 <div class="admin-content">
@@ -28,6 +25,7 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">订单号</th>
+                    <th class="table-title">产品</th>
                     <th class="table-title">支付类型</th>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
@@ -36,6 +34,8 @@
                 </tr>
                 </thead>
                 <tbody>
+
+
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
                     <tr>
@@ -49,11 +49,17 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}"/>">${purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only">
+                            <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
+                                <span style="margin-left: 10px;"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.product.id}'/>">${purchaseProduct.product.name}</a></span>
+                            </c:forEach>
+
+                        </td>
                         <td class="am-hide-sm-only">${purchaseOrder.payWay}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.name}</td>
-                        <td class="am-hide-sm-only">${purchaseOrder.createDatetime}</td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

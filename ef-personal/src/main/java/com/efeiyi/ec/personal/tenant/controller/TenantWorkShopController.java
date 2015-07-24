@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 
 /**
@@ -35,9 +34,8 @@ public class TenantWorkShopController {
         String queryHql = "from TenantWorkShop t where t.tenant.id = :tenantId";
         queryParamMap.put("tenantId",tenantId);
         TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
-        model.addAttribute("tenantId", tenantId);
         model.addAttribute("productWorkShop", productWorkShop);
-        return new ModelAndView("/tenantWorkShop/tenantWorkShopView");
+        return new ModelAndView("/pc/tenantWorkShop/tenantWorkShopView");
     }
 
 

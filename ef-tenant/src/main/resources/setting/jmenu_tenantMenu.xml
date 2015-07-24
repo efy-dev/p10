@@ -4,6 +4,10 @@
         <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default" state="closed" extend="" access="" text_zh_CN="订单管理">
                 <match url="plistPurchaseOrder_default"/>
+                <match url="viewPurchaseOrder"/>
+                <match url="removePurchaseOrder"/>
+                <match url="formPurchaseOrder"/>
+                <match url="saveOrUpdatePurchaseOrder"/>
             </jnode>
             <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
                 <match url=""/>
@@ -15,6 +19,10 @@
         <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistProduct_default" state=""  extend="" access="" text_zh_CN="商品列表">
                 <match url="plistProduct_default"/>
+                <match url="viewProduct"/>
+                <match url="removeProduct"/>
+                <match url="formProduct"/>
+                <match url="saveOrUpdateProduct"/>
             </jnode>
             <jnode id="" url=""  state="" access="" text_zh_CN="商品模板">
                 <match url=""/>
@@ -56,6 +64,10 @@
         <jnode id="wordValueManager" url="" text_zh_CN="字典管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistWordValue_default" state="" extend="" access="" text_zh_CN="字典列表">
                 <match url="plistWordValue_default"/>
+                <match url="viewWordValue"/>
+                <match url="removeWordValue"/>
+                <match url="formWordValue"/>
+                <match url="saveOrUpdateWordValue"/>
             </jnode>
 
         </jnode>

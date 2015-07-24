@@ -25,7 +25,7 @@ public class TenantAttachmentHandler implements MultipartHandler {
     @Override
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
-        String introductionId = request.getParameter("type");
+        String introductionId = request.getParameter("introductionId");
         MultipartFile multipartFile = multipartRequest.getFile("attachmentFile");
         String url = "attachment/" + introductionId + "/" + multipartFile.getOriginalFilename();
         aliOssUploadManager.uploadFile(multipartFile, "tenant", url);

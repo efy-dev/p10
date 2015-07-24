@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">${attachment.url}</td>
+                    <td class="am-hide-sm-only">http://tenant.efeiyi.com/${attachment.url}</td>
                     <td class="am-hide-sm-only"><img
                             src="<c:url value="http://tenant.efeiyi.com/${attachment.url}@!tenant-manage-banner"/>"
                             alt=""/></td>
@@ -115,6 +115,7 @@
 
             <input type="hidden" value="saveOrUpdateTenantAttachment" name="qm">
             <input type="hidden" value="${object.id}" name="introductionId">
+            <input type="hidden" value="${object.id}" name="introduction.id">
             <input type="hidden" value="redirect:/basic/xm.do?qm=viewTenantIntroduction&id=${object.id}"
                    name="resultPage">
 

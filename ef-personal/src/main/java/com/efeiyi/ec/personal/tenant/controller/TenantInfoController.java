@@ -7,13 +7,9 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -43,13 +39,11 @@ public class TenantInfoController {
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
-        String queryHql = "from WordValue w where w.group = :group";
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("group","1");
-        List list = baseManager.listObject(queryHql,queryParamMap);
+        XQuery xQuery1 = new XQuery("listWordValue_default",request);
+        List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
 
-       return "/tenantInfo/tenantInfoList";
+       return "/pc/tenantInfo/tenantInfoList";
     }
 
     /**
@@ -62,6 +56,6 @@ public class TenantInfoController {
         /*String  tenantNewsId = request.getParameter("tenantNewsId");*/
         TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
         model.addAttribute("tenantNews",tenantNews);
-        return "/tenantInfo/tenantInfoView";
+        return "/pc/tenantInfo/tenantInfoView";
     }
 }

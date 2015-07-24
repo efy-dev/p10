@@ -27,6 +27,7 @@ a:hover{color:#0b3775;}
 /*导航样式*/
 #nav{width:960px;height:150px;margin:0 auto 58px;}
 #nav h1{width:140px;height:140px;margin-left:39px;float:left;}
+#nav h1 img{width:140px;height:140px;}
 .nav-centent{width:500px;height:14px;float:left;padding:135px 0 0 63px;}
 .nav-centent li{float:left;padding-left:51px;}
 .nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;outline:none;}
@@ -66,8 +67,8 @@ a{ text-decoration:none;}
 .floating_ck{position:fixed;right:0%;top:54%; z-index:9999;}
 @media only screen and (max-width:1200px){
 	.floating_ck{position:none;display:none}
-	
-	}
+
+}
 .floating_cl{position:fixed;left:25%;top:54%;}
 .floating_ck dl dd{position:relative;background-color:#fff;border:solid 1px #000;text-align:center;background-repeat:no-repeat;background-position:center 50%;cursor:pointer;}
 .floating_ck dl dd:hover{background-color:#fff;border:solid 1px #000;}
@@ -92,7 +93,7 @@ a{ text-decoration:none;}
 /*简介头*/
 #page-nav{width:960px;height:17px;;margin:0 auto;padding-left:60px;}
 #page-nav span{width:60px;height:17px;padding-left:15px;background:url(../images/logo6.jpg) no-repeat 5px 5px;}
-#page-nav p{display:block;width:160px;height:12px;}
+#page-nav p{display:block;width:100%;height:12px;}
 #page-nav a:link,#page-nav a:visited{color:#CDCDCD;}
 #page-nav a:hover{color:#0b3775;}
 .border-nav{width:100%;height:1px;background:url(../images/logo9.jpg) repeat-x;}
@@ -149,7 +150,7 @@ a{ text-decoration:none;}
 .buttom-text p a:hover{color:#ff2120}
 /*咨询页*/
 #center--1{width:960px;margin:0  auto; padding:21px 0 0 35px; overflow:hidden;}
-.center-buttom{width:210px; overflow:hidden; float:left;height:600px;}
+.center-buttom{width:210px; overflow:hidden; float:left;}
 .center-buttom h1{width:101px;height:27px;color:#CCC; font-size:12px; font-family:"宋体"}
 .buttom-zx{overflow:hidden;}
 .buttom-zx-tr{height:46px;}
@@ -167,7 +168,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
 .buttom-zx-td-center{width:100%;height:45px; float:left;}
 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
-.buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:87px;height:41px; display:block;outline:none;}
+.buttom-zx-td-center-1 a:link,.buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:87px;height:41px; display:block;outline:none;}
 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-border-2{width:87px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
@@ -177,7 +178,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .buttom-zx-td-2 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
 .buttom-zx-td-2 .buttom-zx-td-center{width:100%;height:45px; float:left;}
 .buttom-zx-td-2 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
-.buttom-zx-td-2 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
+.buttom-zx-td-2 .buttom-zx-td-center-1 a:link,.buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
 .buttom-zx-td-2 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-2 .buttom-zx-td-border-2{width:97px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-2 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
@@ -188,7 +189,7 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .buttom-zx-td-3 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
 .buttom-zx-td-3 .buttom-zx-td-center{width:100%;height:45px; float:left;}
 .buttom-zx-td-3 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
-.buttom-zx-td-3 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
+.buttom-zx-td-3 .buttom-zx-td-center-1 a:link,.buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:97px;height:41px; display:block;outline:none；}
 .buttom-zx-td-3 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-3 .buttom-zx-td-border-2{width:97px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-3 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
@@ -199,11 +200,12 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .buttom-zx-td-4 .buttom-zx-td-border-1{width:100%;height:2px;background:url(../images/logo12.jpg) repeat-x;}
 .buttom-zx-td-4 .buttom-zx-td-center{width:100%;height:45px; float:left;}
 .buttom-zx-td-4 .buttom-zx-td-center-1{width:100%;height:41px; line-height:41px; text-align:center;color:#cc9900;}
-.buttom-zx-td-4 .buttom-zx-td-center-1 a:link,buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:131px;height:41px; display:block;outline:none；}
+.buttom-zx-td-4 .buttom-zx-td-center-1 a:link,.buttom-zx-td-center-1 a:visited{font-size:14px;font-family:"宋体";color:#cc9900;background:#fff;width:131px;height:41px; display:block;outline:none；}
 .buttom-zx-td-4 .buttom-zx-td-center-1 a:hover{color:#FFF;background-color:#cc9900;}
 .buttom-zx-td-4 .buttom-zx-td-border-2{width:131px;height:2px;background:url(../images/logo13.jpg) repeat-x;}
 .buttom-zx-td-4 .buttom-zx-td-right{width:2px;height:45px; background:url(../images/logo14.jpg) repeat-y; float:left;}
 .button{border:1px solid #CC9900;height:45px;font-size:14px;padding:0 26px;background-color:#fff;margin:2px;font-family:宋体;color:#CC9900;}
+.button a:link,.butto{font-family:宋体;color:#CC9900;}
 .button:active{background-color:#CC9900;color:#fff;margin:2px;padding:0 26px;}
 /*列表内容*/
 .alllist{width:580px;overflow:hidden;margin-left:37px;}
@@ -228,6 +230,8 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .grid-item--width2 { width:400px; }
 .works-img{width:155px;height:225px;margin-right:20px; float:left;}
 .works-img-1{width:155px;height:225px; float:left;}
+.center-buttom-1-or{width:100%; overflow:hidden; margin-bottom:23px;}
+.center-buttom-1-or h1{width:101px;height:27px;color:#C90; font-size:12px; font-family:"宋体"}
 /*作品详情*/
 .center-buttom-1{width:210px;height:10px;float:left;}
 .content-border{width:620px; overflow:hidden;height:519px;}
@@ -258,16 +262,16 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #page-section{width:870px;overflow:hidden; margin:0 auto;}
 .page-section{width:870px;overflow:hidden; margin:0 auto;}
 .page-section-text{height:160px;width:870px; text-align:center; line-height:160px;}
-.page-section-text img{width:136px;height:27px;}
+.page-section-text img{width:136px;height:27px;margin-top:65px;}
 .page-section-text a{outline:none}
 .page-section-figure{width:870px;margin-bottom:50px;height:385px;}
 /*传承人主页图片交互效果*/
-.img-mutual{width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left;}
+.img-mutual{max-width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
 .box{width:198px;height:295px;position: relative;}
 .BG{width:198px;height:295px;position: absolute;top: 0;background: rgba(60,96,140,0.3);}
 .txt{width: 198px;height: 100px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}
 /*传承人主页图片交互效2果*/
-.img-mutual{width:250px;height:386px;border:1px solid #000;position:relative;}
+.img-mutual{height:386px;border:1px solid #000;position:relative;}
 .img-mutual-img{padding:27px 0 0 25px;width:223px;height:322px;}
 .img-mutual-img a{width:200px;height:322px; display:block;}
 .img-mutual-jump{margin:22px 0 0 135px;padding-left:15px;display:block; background:url(../images/images/bs.gif) no-repeat 0 center}
@@ -296,4 +300,3 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .page-a-text{color:#000;font-size:12px;text-decoration:none;}
 #page-footer-head{height:45px;margin:0 auto; line-height:45px; font-family:"Arial"; text-align:center;}
 #page-footer-head-1{ font-family:"宋体";font-size:12px; color:#666;height:21px;text-align:center;}
-.page-section-text img{margin-top:68px;}

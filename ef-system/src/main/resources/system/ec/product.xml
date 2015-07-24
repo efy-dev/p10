@@ -5,7 +5,7 @@
 <module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
 
     <entities>
-        <entity name="ProductList" label="产品列表"
+        <entity name="Product" label="产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Product">
             <fields>
@@ -52,7 +52,7 @@
 
             </does>
         </entity>
-        <entity name="ProductDescriptionList" label="产品描述列表"
+        <entity name="ProductDescription" label="产品描述列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.ProductDescription">
             <fields>

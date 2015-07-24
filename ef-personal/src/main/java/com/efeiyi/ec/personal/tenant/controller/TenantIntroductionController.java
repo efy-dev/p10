@@ -8,14 +8,10 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -38,16 +34,15 @@ public class TenantIntroductionController {
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
         String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(23,conditions.length());
-        String queryHql = "from Tenant t left join fetch t.originProvince p where t.id = :tenantId";
-        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("tenantId",tenantId);
-        Tenant tenant = (Tenant) baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("listTenantIntroduction_default",request);
         xQuery.addRequestParamToModel(model,request);
         XQuery xQuery1 = new XQuery("listAttachment_default",request);
         xQuery1.addRequestParamToModel(model,request);
         List<TenantIntroduction> list = baseManager.listObject(xQuery);
         List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
+
+
         for (TenantIntroduction tenantIntroduction:list){
             if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
                 List list2 = new ArrayList();
@@ -70,7 +65,7 @@ public class TenantIntroductionController {
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
-        return "/tenantIntroduction/tenantIntroductionList";
+        return "/pc/tenantIntroduction/tenantIntroductionList";
     }
 
 }

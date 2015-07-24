@@ -11,6 +11,14 @@
             <fields>
                 <field name="id" label="传承人" inputType="text"/>
                 <field name="name" label="传承人名字" inputType="text"/>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistTenant" access="" label="传承人分页列表"

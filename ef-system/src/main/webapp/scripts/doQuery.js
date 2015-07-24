@@ -83,13 +83,13 @@ function generateValue(divId) {
 }
 
 
-function generateCondition(divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
+function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
 
     queryConditionArray = new Array();
 
     $.ajax({
         type: "post",
-        url: '/do/listCondition.do',
+        url: url,
         cache: false,
         data: {qm: queryModel + '_' + divId},
         dataType: "json",

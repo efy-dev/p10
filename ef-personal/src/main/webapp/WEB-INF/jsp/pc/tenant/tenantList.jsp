@@ -30,114 +30,46 @@
 <div id="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
     <div class="page-section-figure">
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div id="BG" class="BG"></div>
-                <p id="txt" class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
+        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
+            <c:if test="${recommended.projectType == 1}">
+                <div class="img-mutual am-u-sm-4" style="float:left;">
+                    <div class="box">
+                        <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                        <div class="BG"></div>
+                        <p class="txt">
+                        <div class="img-mutual-text1">
+                            <h1>${recommended.tenant.fullName}</h1>
+                            <p>${recommended.tenant.brief}</p>
+                        </div>
+                        </p>
+                    </div>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
                 </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div  class="BG"></div>
-                <p class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
-                </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div  class="BG"></div>
-                <p  class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
-                </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
+            </c:if>
+        </c:forEach>
     </div>
 </div>
 <div class="page-border"></div>
 <div  class="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
     <div class="page-section-figure">
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div  class="BG"></div>
-                <p  class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
+        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
+            <c:if test="${recommended.projectType == 2}">
+                <div class="img-mutual am-u-sm-4" style="float:left;">
+                    <div class="box">
+                        <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
+                        <div class="BG"></div>
+                        <p class="txt">
+                        <div class="img-mutual-text1">
+                            <h1>${recommended.tenant.fullName}</h1>
+                            <p>${recommended.tenant.brief}</p>
+                        </div>
+                        </p>
+                    </div>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
                 </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div  class="BG"></div>
-                <p  class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
-                </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
-        <!--一个人物-->
-        <div class="img-mutual">
-            <div class="box">
-                <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg" />" alt="">
-                <div class="BG"></div>
-                <p class="txt">
-                <div class="img-mutual-text1">
-                    <h1>林怀民</h1>
-                    <p>《时代》杂志亚洲版评选2005年度“亚洲英雄人物”</p>
-                </div>
-
-                </p>
-
-            </div>
-            <span class="img-mutual-jump"><a href="#">深入了解</a></span>
-        </div>
-        <!--一个人物-->
+            </c:if>
+        </c:forEach>
     </div>
 </div>
 <div class="page-border-solid"></div>

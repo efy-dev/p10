@@ -5,50 +5,7 @@
 <module name="purchase" label="purchase" version="" package="com.efeiyi.ec.purchase" path="">
 
     <entities>
-        <entity name="cart" label="cart"
-                basic="simple" others=""
-                model="com.efeiyi.ec.purchase.model.Cart">
-            <does>
-                <do name="plistCart" access="" label="cart列表"
-                    result="/cart/cartPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
-                    </query>
-                </do>
 
-                <do name="removeCart" label="删除cart" access="" result="json"/>
-                <do name="formCart" label="保存cart" access="" result="/cart/cartForm"></do>
-                <do name="saveOrUpdateCart" label="保存cart" access="" result="/cart/cartSaveSuccess"></do>
-                <do name="listCart" label="cart列表" access="" result="/cart/cartList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-
-            </does>
-        </entity>
-        <entity name="cartProduct" label="cartProduct"
-                basic="simple" others=""
-                model="com.efeiyi.ec.purchase.model.CartProduct">
-            <does>
-                <do name="plistCartProduct" access="" label="cartProduct列表"
-                    result="/cartProduct/cartProductPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
-                    </query>
-                </do>
-
-                <do name="removeCartProduct" label="删除cartProduct" access="" result="json"/>
-                <do name="formCartProduct" label="保存cartProduct" access="" result="/cartProduct/cartProductForm"></do>
-                <do name="saveOrUpdateCartProduct" label="保存cartProduct" access="" result="/cartProduct/cartProductSaveSuccess"></do>
-                <do name="listCartProduct" label="cartProduct列表" access="" result="/cartProduct/cartProductList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="主键" name="id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-
-            </does>
-        </entity>
         <entity name="purchaseOrder" label="purchaseOrder"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrder">

@@ -38,9 +38,27 @@
             </does>
         </entity>
         <entity name="tenantWork" label="传承人作品"  model="com.efeiyi.ec.tenant.model.TenantWork">
+        <does>
+            <do name="plistTenantWork" access="" label="传承人作品">
+                <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <condition name="tenant.id" defaultValue="" operation="eq"/>
+                </query>
+            </do>
+        </does>
+        </entity>
+        <entity name="wordValue" label="标签"  model="com.ming800.core.p.model.WordValue">
             <does>
-                <do name="plistTenantWork" access="" label="传承人作品">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                <do name="listWordValue" access="" label="标签">
+                    <query name="default" label="默认" type="auto">
+                        <condition name="group" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="tenantProject" label="类别"  model="com.efeiyi.ec.tenant.model.TenantProject">
+            <does>
+                <do name="listProject" access="" label="类别">
+                    <query name="default" label="默认" type="auto">
                         <condition name="tenant.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
