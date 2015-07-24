@@ -32,6 +32,14 @@
         <entity name="Project" label="Project"
                 basic="simple" others=""
                 model="com.efeiyi.ec.project.model.Project">
+            <fields>
+            <field name="type" label="项目类型" inputType="text">
+                <statusType fieldName="type">
+                    <item label="技艺" value="1"/>
+                    <item label="美术" value="2"/>
+                </statusType>
+            </field>
+            </fields>
             <does>
                 <do name="plistProject" access="" label="project列表"
                     result="/project/projectPList">
