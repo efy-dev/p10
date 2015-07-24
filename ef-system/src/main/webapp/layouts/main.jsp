@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>--%>
+<%String path = request.getContextPath();%>
 <html class="no-js">
 <head>
     <title>首页</title>
@@ -19,12 +20,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/base_resource/p/assets/i/favicon.png'/>"/>
-    <link rel="apple-touch-icon-precomposed" href="<c:url value='/base_resource/p/assets/i/app-icon72x72@2x.png'/>"/>
+    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>"/>
+    <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>"/>
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/base_resource/p/scripts/assets/css/admin.css'/>"/>
-    <script src="<c:url value='/base_resource/p/scripts/jquery-1.11.1.min.js'/>"></script>
+    <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
+    <script src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js'/>"></script>
     <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
     <script src="<c:url value='//cdn.ckeditor.com/4.5.1/standard/ckeditor.js'/>"></script>
@@ -36,6 +37,7 @@
     </style>
 </head>
 <body>
+
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
 

@@ -11,11 +11,7 @@
     <title></title>
 </head>
 <body>
-<form action="/basic/xm.do" method="post">
-    <input type="hidden" value="saveOrUpdateDocument" name="qm">
-    name：<input type="text" name="name" id="name">
-    <input type="submit" value="保存">
-</form>
+
 
 <div class="admin-content">
     <div class="am-g">
@@ -36,10 +32,10 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="documentContent" class="am-u-sm-3 am-form-label">内容 / Content</label>
+                    <label  class="am-u-sm-3 am-form-label">内容 / Content</label>
                     <div class="am-u-sm-9">
-                        <input type="text" id="documentContent" name="documentContent" placeholder="内容 / Content" value="${object.documentContent.content}">
-                        <small>输入你要保存的内容</small>
+                            <textarea id="sampleContent" name="sampleContent" class="ckeditor"
+                                      placeholder="输入内容">${object.sampleContent}</textarea>
                     </div>
                 </div>
 

@@ -13,20 +13,31 @@
 
 <html>
 <head>
-    <script src="<c:url value="/scripts/jquery-1.11.1.min.js"/>"></script>
     <title></title>
 </head>
 <body>
-<table>
-  <tr>
-    <td>user-id</td>
-    <td>username</td>
+<div style="text-align: left" >
+  <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建用户" />
+</div>
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+  <tr style="text-align: center">
+    <td>操作</td>
+    <td>用户名</td>
+    <td>真实姓名</td>
   </tr>
 
   <c:forEach items="${requestScope.pageInfo.list}" var="user">
-    <tr>
-      <td>${user.id}</td>
-      <td>${user.username}</td>
+    <tr style="text-align: center">
+      <td width="20%">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
+            <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeUser&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+          </div>
+        </div>
+      </td>
+      <td width="20%">${user.username}</td>
+      <td width="20%">${user.name}</td>
     </tr>
   </c:forEach>
 </table>
@@ -34,6 +45,7 @@
   <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
     <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
     <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+    <ming800:pcPageParam name="menuId" value="${requestScope.menuId}"/>
   </ming800:pcPageList>
 </div>
 </body>

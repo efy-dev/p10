@@ -24,7 +24,7 @@
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
         <c:choose>
-            <c:when test="${ empty object.level }">
+            <c:when test="${ empty object.level } && ${empty fatherId}">
                 <input type="hidden" name="level" value="1" />
             </c:when>
             <c:otherwise>

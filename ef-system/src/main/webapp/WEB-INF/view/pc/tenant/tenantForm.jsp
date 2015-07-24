@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -36,10 +37,10 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="level" class="am-u-sm-3 am-form-label">等级 / Level</label>
+                    <label  class="am-u-sm-3 am-form-label">等级 / Level</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="level" name="level" placeholder="等级 / Level" value="${object.level}">
+                        <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}"  type="select"/>
                         <small>输入你要保存的等级</small>
                     </div>
                 </div>

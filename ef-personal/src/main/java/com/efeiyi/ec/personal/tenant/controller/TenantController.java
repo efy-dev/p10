@@ -1,6 +1,7 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantRecommended;
 import com.efeiyi.ec.tenant.model.TenantWork;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
@@ -42,7 +43,7 @@ public class TenantController extends BaseController {
         List list = baseManager.listObject(queryHql,queryParamMap);
         model.addAttribute("tenantWorkList",list);
         model.addAttribute("entity", tenant);
-        return new ModelAndView("/tenant/tenantView");
+        return new ModelAndView("/pc/tenant/tenantView");
     }
 
     /**
@@ -54,8 +55,8 @@ public class TenantController extends BaseController {
     public ModelAndView listTenant(HttpServletRequest request , ModelMap modelMap)throws Exception{
         XQuery xQuery = new XQuery("listTenantRecommended_default",request);
         List list = baseManager.listObject(xQuery);
-        modelMap.addAttribute("list",list);
-        return new ModelAndView("/tenant/tenantList",modelMap);
+        modelMap.addAttribute("recommendedList",list);
+        return new ModelAndView("/pc/tenant/tenantList",modelMap);
     }
 
 

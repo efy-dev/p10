@@ -15,14 +15,15 @@
             <tr>
                 <th class="table-set">操作</th>
                 <th class="table-title">类型</th>
-                <th class="table-title">姓名</th>
+                <th class="table-title">标题</th>
+                <th class="table-title">传承人姓名</th>
 
             </tr>
             </thead>
             <tbody>
 
             <c:forEach items="${objectList}" var="tenantIntroduction">
-                <tr>
+                <tr id="${tenantIntroduction.id}">
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
@@ -31,19 +32,35 @@
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </a>
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                   href="<c:url value="/basic/xm.do?qm=removeTenantIntroduction&id=${tenantIntroduction.id}"/>"><span
+                                   onclick="removeTenantIntorduction('${tenantIntroduction.id}')"><span
                                         class="am-icon-trash-o"></span> 删除
                                 </a>
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">${tenantIntroduction.type}</td>
                     <td class="am-hide-sm-only"><a
-                            href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">${tenantIntroduction.tenant.name}</a>
+                            href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">${tenantIntroduction.title}</a>
                     </td>
+                    <td class="am-hide-sm-only">${tenantIntroduction.tenant.name}</td>
+                    <td class="am-hide-sm-only">${tenantIntroduction.type}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    function removeTenantIntorduction(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantIntroduction"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+</script>

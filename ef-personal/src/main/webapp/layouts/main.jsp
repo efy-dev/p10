@@ -26,7 +26,7 @@
 <body>
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
-    <div class="printing">国家级非物质文化遗产传承人<span>  [<a href="#">木板水印</a>]</span></div>
+    <div class="printing">${entity.title}<span>  [<a href="#">木板水印</a>]</span></div>
     <ul class="register">
         <li class="register-page"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz1.gif"/>"></a></li>
         <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>
@@ -34,7 +34,7 @@
     </ul>
 </div>
 <div id="nav">
-    <h1><a href="#"><img src="<c:url value="/scripts/assets/images/logo2.gif"/>"></a></h1>
+    <h1><a href="#"><img src="<c:url value="${entity.favicon}"/>"></a></h1>
     <ul class="nav-centent">
         <li><a href="${pageContext.request.contextPath}/tenant/1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>

@@ -43,13 +43,11 @@ public class TenantInfoController {
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
-        String queryHql = "from WordValue w where w.group = :group";
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("group","1");
-        List list = baseManager.listObject(queryHql,queryParamMap);
+        XQuery xQuery1 = new XQuery("listWordValue_default",request);
+        List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
 
-       return "/tenantInfo/tenantInfoList";
+       return "/pc/tenantInfo/tenantInfoList";
     }
 
     /**
@@ -62,6 +60,6 @@ public class TenantInfoController {
         /*String  tenantNewsId = request.getParameter("tenantNewsId");*/
         TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
         model.addAttribute("tenantNews",tenantNews);
-        return "/tenantInfo/tenantInfoView";
+        return "/pc/tenantInfo/tenantInfoView";
     }
 }
