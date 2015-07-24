@@ -15,83 +15,82 @@
 <body>
 
 
-<div class="admin-content">
-    <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人作品</strong> /
-            <%--<small>Tenant introduction</small>--%>
-        </div>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人作品</strong> /
+        <%--<small>Tenant introduction</small>--%>
+    </div>
+</div>
+
+<hr/>
+
+<div class="am-g">
+
+    <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8"><%--少了这个div就出错--%>
     </div>
 
-    <hr/>
+    <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
+              enctype="multipart/form-data">
+            <input type="hidden" value="saveOrUpdateTenantWork" name="qm">
+            <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="tenant.id" value="${tenantId}">
 
-    <div class="am-g">
+            <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">名称</label>
 
-        <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8"><%--少了这个div就出错--%>
-        </div>
-
-        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
-                <input type="hidden" value="saveOrUpdateTenantWork" name="qm">
-                <input type="hidden" name="id" value="${object.id}">
-                <input type="hidden" name="tenant.id" value="${tenantId}">
-
-                <div class="am-form-group">
-                    <label for="name" class="am-u-sm-3 am-form-label">名称</label>
-
-                    <div class="am-u-sm-9">
-                        <input type="text" id="name" name="name" placeholder="名称" value="${object.name}">
-                        <%--<small>输入你要保存的类型</small>--%>
-                    </div>
+                <div class="am-u-sm-9">
+                    <input type="text" id="name" name="name" placeholder="名称" value="${object.name}">
+                    <%--<small>输入你要保存的类型</small>--%>
                 </div>
+            </div>
 
-                <div class="am-form-group">
-                    <label for="price" class="am-u-sm-3 am-form-label">价格</label>
+            <div class="am-form-group">
+                <label for="price" class="am-u-sm-3 am-form-label">价格</label>
 
-                    <div class="am-u-sm-9">
-                        <input type="text" id="price" name="price" placeholder="名称" value="${object.price.intValue()}">
-                        <%--<small>输入你要保存的类型</small>--%>
-                    </div>
+                <div class="am-u-sm-9">
+                    <input type="text" id="price" name="price" placeholder="名称" value="${object.price.intValue()}">
+                    <%--<small>输入你要保存的类型</small>--%>
                 </div>
+            </div>
 
 
-                <div class="am-form-group">
-                    <label for="productDescription" class="am-u-sm-3 am-form-label">介绍</label>
+            <div class="am-form-group">
+                <label for="productDescription" class="am-u-sm-3 am-form-label">介绍</label>
 
-                    <div class="am-u-sm-9">
+                <div class="am-u-sm-9">
                         <textarea id="productDescription" name="productDescription" class="ckeditor" placeholder="介绍"
                                   value="${object.productDescription.content}">${object.productDescription.content}</textarea>
-                    </div>
-                    <br>
                 </div>
+                <br>
+            </div>
 
 
-                <div class="am-form-group">
-                    <label for="picurl" class="am-u-sm-3 am-form-label">图片</label>
+            <div class="am-form-group">
+                <label for="picurl" class="am-u-sm-3 am-form-label">图片</label>
 
-                    <div class="am-u-sm-9">
-                        <input type="file" id="picurl" name="picurl" placeholder="附件">
-                        <%--<small>选择你要保存的轮播图</small>--%>
-                    </div>
+                <div class="am-u-sm-9">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件">
+                    <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
+            </div>
 
-                <div id="tagGroup">
+            <div id="tagGroup">
 
+            </div>
+
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-push-3">
+                    <button type="submit" class="am-btn am-btn-primary">保存</button>
                 </div>
-
-                <div class="am-form-group">
-                    <div class="am-u-sm-9 am-u-sm-push-3">
-                        <button type="submit" class="am-btn am-btn-primary">保存</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
 
 <script>
 
-    function getTenantProjectTag(){
+    function getTenantProjectTag() {
         $.ajax({
             type: "get",
             url: '<c:url value="/basic/xmj.do?qm=listProjectTag_default&conditions=project.id:${projectId}"/>',
@@ -103,16 +102,16 @@
         });
     }
 
-    function generateTagSelect(data){
+    function generateTagSelect(data) {
         var html = "    <div class=\"am-form-group\"><label  class=\"am-u-sm-3 am-form-label\">作品标签</label><div class=\"am-u-sm-9\">"
-        for (var i = 0 ; i<data.length ; i++){
-            html += "<label class=\"am-checkbox-inline\"><input type=\"checkbox\" name=\"tag"+i+"\" value=\""+data[i].id+"\" > "+data[i].value+"</label>"
+        for (var i = 0; i < data.length; i++) {
+            html += "<label class=\"am-checkbox-inline\"><input type=\"checkbox\" name=\"tag" + i + "\" value=\"" + data[i].id + "\" > " + data[i].value + "</label>"
         }
         html += "</div></div>"
         return html;
     }
 
-    $().ready(function(){
+    $().ready(function () {
         getTenantProjectTag();
     });
 

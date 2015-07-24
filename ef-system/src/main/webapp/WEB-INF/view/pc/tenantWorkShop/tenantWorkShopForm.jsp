@@ -13,7 +13,6 @@
     <script src="/scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-<div class="admin-content">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人工作坊</strong> /
             <%--<small>Tenant introduction</small>--%>
@@ -94,6 +93,5 @@
             </form>
         </div>
     </div>
-</div>
 </body>
 </html>
