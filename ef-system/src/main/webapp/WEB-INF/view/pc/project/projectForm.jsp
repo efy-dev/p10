@@ -23,14 +23,13 @@
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
-        <c:choose>
-            <c:when test="${ empty object.level } && ${empty fatherId}">
-                <input type="hidden" name="level" value="1" />
-            </c:when>
-            <c:otherwise>
-                <input type="hidden" name="level" value="${object.level}">
-            </c:otherwise>
-        </c:choose>
+        <c:if test="${empty fatherId}">
+            <input type="hidden" name="level" value="1" />
+        </c:if>
+        <c:if test="${not empty fatherId}">
+            <input type="hidden" name="level" value="${object.level}" />
+        </c:if>
+
         <div class="am-form-group">
             <label name="name" for="user-name" class="am-u-sm-3 am-form-label">项目名称</label>
             <div class="am-u-sm-9">
