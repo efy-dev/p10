@@ -64,10 +64,7 @@
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
-                    <select id="sex" name="sex" data-am-selected="{btnSize: 'sm'}" value="${object.sex}">
-                        <option value="0">男</option>
-                        <option value="1">女</option>
-                    </select>
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select" />
                 </div>
             </div>
 

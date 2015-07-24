@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -17,20 +18,44 @@
             <tr>
                 <td class="am-primary am-u-md-3">名字</td>
                 <td class="am-u-md-3">${object.name}</td>
-                <td class="am-primary am-u-md-3">头衔</td>
-                <td class="am-u-md-3">${object.title}</td>
+                <td class="am-primary am-u-md-3">中文名字</td>
+                <td class="am-u-md-3">${object.fullName}</td>
+            </tr><tr>
+                <td class="am-primary am-u-md-3">性别</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="normal" />
+                </td>
+                <td class="am-primary am-u-md-3">出生月</td>
+                <td class="am-u-md-3">${object.birthday}</td>
+
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">籍贯</td>
+                <td class="am-u-md-3">${object.provinceName}</td>
+                <td class="am-primary am-u-md-3">现居地</td>
+                <td class="am-u-md-3">${object.presentAddress}</td>
+
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">头衔</td>
+                <td class="am-u-md-3">${object.title}</td>
                 <td class="am-primary am-u-md-3">等级</td>
-                <td class="am-u-md-3">${object.level}</td>
-                <td class="am-primary am-u-md-3">简介</td>
-                <td class="am-u-md-3">${object.brief}</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
+                </td>
             </tr>
             </tbody>
         </table>
+
+    </div>
+    <label for="user-intro"  class="am-u-sm-3 am-form-label">简介 / Intro</label>
+    <div class="am-u-sm-9">
+        <textarea class="" style="width: 100%;" cols="" rows="5" id="user-intro" placeholder="输入个人简介">${object.brief}</textarea>
     </div>
 </div>
+<div class="am-form-group">
 
+</div>
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人的项目</h2>

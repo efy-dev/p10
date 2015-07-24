@@ -25,17 +25,15 @@
         <input type="hidden" name="fatherCategory.id" value="${fatherCategoryId}">
         <input type="hidden" name="level" value="${level}" />
         <div class="am-form-group">
-            <label name="name" for="user-name" class="am-u-sm-3 am-form-label">类别名称</label>
+            <label name="name" for="user-name" class="am-u-sm-3 am-form-label">类别名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}">
-                <small>必填项*</small>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">类别编号</label>
+            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">类别编号 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
-                <small>必填项*</small>
             </div>
         </div>
         <div class="am-form-group">

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -31,17 +32,21 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="name" for="user-name" class="am-u-sm-3 am-form-label">项目名称</label>
+            <label name="name" for="user-name" class="am-u-sm-3 am-form-label">项目名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}">
-                <small>必填项*</small>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">项目编号</label>
+            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">项目编号 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
-                <small>必填项*</small>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="type" for="type" class="am-u-sm-3 am-form-label">项目类型 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>
             </div>
         </div>
         <div class="am-form-group">

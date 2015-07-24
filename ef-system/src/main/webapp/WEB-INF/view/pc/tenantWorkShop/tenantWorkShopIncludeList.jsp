@@ -14,8 +14,8 @@
     <tr>
         <th class="table-set">操作</th>
         <th class="table-title">名称</th>
-        <th class="table-title">创建时间</th>
         <th class="table-title">封面</th>
+        <th class="table-title">创建时间</th>
 
     </tr>
     </thead>
@@ -40,10 +40,10 @@
             <td class="am-hide-sm-only"><a
                     href="<c:url value="/basic/xm.do?qm=viewTenantWorkShop&id=${tenantWorkShop.id}"/>">${tenantWorkShop.name}</a>
             </td>
-            <td class="am-hide-sm-only">${tenantWorkShop.createDateTime}</td>
             <td class="am-hide-sm-only"><img
                     src="<c:url value="http://tenant.efeiyi.com/${tenantWorkShop.picture_url}@!tenant-manage-banner"/>"
                     alt=""/></td>
+            <td class="am-hide-sm-only">${tenantWorkShop.createDateTime}</td>
         </tr>
     </c:forEach>
     </tbody>
