@@ -87,13 +87,20 @@
                 </div>
             </div>
 
-
             <div class="am-form-group">
-                <label for="brief" class="am-u-sm-3 am-form-label">简介 / Intro</label>
+                <label for="brief" class="am-u-sm-3 am-form-label">短简介 / brief</label>
 
                 <div class="am-u-sm-9">
-                            <textarea id="brief" name="brief" class="ckeditor"
-                                      placeholder="输入简介">${object.brief}</textarea>
+                    <input type="text" id="brief" name="brief" placeholder="短简介 / brief" value="${object.brief}">
+                    <small>输入短简介，字数30以内</small>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
+
+                <div class="am-u-sm-9">
+                            <textarea id="content" name="content" class="ckeditor"
+                                      placeholder="输入简介">${object.content}</textarea>
                 </div>
             </div>
 
