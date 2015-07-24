@@ -48,9 +48,9 @@
         </table>
 
     </div>
-    <label for="user-intro"  class="am-u-sm-3 am-form-label">简介 / Intro</label>
+    <label   class="am-u-sm-3 am-form-label">简介 / Intro</label>
     <div class="am-u-sm-9">
-        <textarea class="" style="width: 100%;" cols="" rows="5" id="user-intro" placeholder="输入个人简介">${object.brief}</textarea>
+        ${object.content}
     </div>
 </div>
 <div class="am-form-group">

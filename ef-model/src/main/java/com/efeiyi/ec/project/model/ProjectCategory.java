@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class ProjectCategory {
     private String id;
     private String name;//类别
-    private String fatherCategoryId;//父id
+    private ProjectCategory fatherCategory;//父id
     private String serial;//类别号
     private String status;//状态
     private String level;//级别
@@ -39,13 +39,6 @@ public class ProjectCategory {
         this.name = name;
     }
 
-    @Column(name="fathercategory_id")
-    public String getFatherCategoryId() {
-        return fatherCategoryId;
-    }
-    public void setFatherCategoryId(String fatherCategoryId) {
-        this.fatherCategoryId = fatherCategoryId;
-    }
 
     @Column(name="serial")
     public String getSerial() {
@@ -81,6 +74,16 @@ public class ProjectCategory {
 
     public  void  setType(String type){
        this.type = type;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="fathercategory_id")
+    public ProjectCategory getFatherCategory() {
+        return fatherCategory;
+    }
+
+    public void setFatherCategory(ProjectCategory fatherCategory) {
+        this.fatherCategory = fatherCategory;
     }
 }
 

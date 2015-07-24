@@ -86,7 +86,7 @@
             <!--</jnode>-->
         </jnode>
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="传承人轮播图">
+            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="首页轮播图">
                 <match url="plistBanner_tenant"/>
                 <match url="formBanner"/>
                 <match url="removeBanner"/>

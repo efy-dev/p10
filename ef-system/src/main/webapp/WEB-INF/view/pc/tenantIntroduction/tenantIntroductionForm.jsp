@@ -66,7 +66,6 @@
 <%--</form>--%>
 <%--</div>--%>
 <%--</div>--%>
-<div class="admin-content">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人简介</strong> /
             <small>Tenant introduction</small>
@@ -216,9 +215,6 @@
     <%--</div>--%>
 
     <%--</div>--%>
-
-
-</div>
 
 <%--<script>--%>
 

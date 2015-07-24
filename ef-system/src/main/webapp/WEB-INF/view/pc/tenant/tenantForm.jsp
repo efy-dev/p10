@@ -58,7 +58,13 @@
                     </div>
                 </div>
             </div>
+            <div class="am-form-group">
+                <label for="provinceName" class="am-u-sm-3 am-form-label">籍贯 / ProvinceName</label>
 
+                <div class="am-u-sm-9">
+                    <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName" value="${object.provinceName}">
+                </div>
+            </div>
 
             <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
@@ -87,13 +93,23 @@
                 </div>
             </div>
 
+            <div class="am-form-group">
+                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / brief</label>
+                <div class="am-u-sm-9">
+                    <textarea class="" cols="6" name="brief" rows="5" id="user-intro" placeholder="输入短简介">
+                        ${object.brief}
+                    </textarea>
+                    <small>输入短简介，字数30以内</small>
+                </div>
+            </div>
+
 
             <div class="am-form-group">
-                <label for="brief" class="am-u-sm-3 am-form-label">简介 / Intro</label>
+                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
 
                 <div class="am-u-sm-9">
-                            <textarea id="brief" name="brief" class="ckeditor"
-                                      placeholder="输入简介">${object.brief}</textarea>
+                            <textarea id="content" name="content" class="ckeditor"
+                                      placeholder="输入简介">${object.content}</textarea>
                 </div>
             </div>
 
