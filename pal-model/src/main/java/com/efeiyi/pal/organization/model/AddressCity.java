@@ -1,4 +1,4 @@
-package com.efeiyi.pal.orgnization.model;
+package com.efeiyi.pal.organization.model;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,8 +1,8 @@
 package com.efeiyi.pal.purchase.model;
 
 import com.efeiyi.pal.label.model.LabelBatch;
-import com.efeiyi.pal.orgnization.model.Tenant;
-import com.efeiyi.pal.orgnization.model.User;
+import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -36,7 +36,7 @@ public class PurchaseOrder {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "serial")
     public String getSerial() {
         return serial;
     }
