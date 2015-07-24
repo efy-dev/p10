@@ -102,7 +102,7 @@ a{ text-decoration:none;}
 .column-left{width:250px;height:2300px;float:left; margin-top:22px;}
 .column-right{width:503px;float:left;}
 .column-right h1{font-size:14px;line-height:69px;height:69px; font-family:"楷体"; font-weight: bold;; color:#dcbb69;}
-.page-img{padding:25px;height:220px;width:274px;}
+.page-img{padding:25px;height:200px;width:274px;}
 /*简介表格*/
 .table-bg{ width:508px;height:268px;border:1px solid #000;}
 .tr1{width:501px;height:3px;border-bottom:1px solid #000;}
@@ -144,7 +144,7 @@ a{ text-decoration:none;}
 .text-padding{padding-top:35px;}
 .text-line{font-size:12px; font-family:"宋体"; color:#666; line-height:20px;}
 /*按钮*/
-.buttom-text{padding-left:73px;margin-top:50px;}
+.buttom-text{padding-left:73px;}
 .buttom-text p{width:70px;height:38px;text-align:center;}
 .buttom-text p a:link,.buttom-text p a:visited{color:#666; font-family:"楷体";font-size:12px; text-decoration:none;}
 .buttom-text p a:hover{color:#ff2120}

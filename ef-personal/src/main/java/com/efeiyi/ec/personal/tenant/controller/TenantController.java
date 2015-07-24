@@ -40,7 +40,7 @@ public class TenantController extends BaseController {
         List list = baseManager.listObject(queryHql,queryParamMap);
         model.addAttribute("tenantWorkList",list);
         model.addAttribute("entity", tenant);
-        return new ModelAndView("/wap/tenant/tenantView");
+        return new ModelAndView("/pc/tenant/tenantView");
     }
 
     /**
@@ -53,7 +53,7 @@ public class TenantController extends BaseController {
         XQuery xQuery = new XQuery("listTenantRecommended_default",request);
         List list = baseManager.listObject(xQuery);
         modelMap.addAttribute("recommendedList",list);
-        return new ModelAndView("/wap/tenant/tenantList",modelMap);
+        return new ModelAndView("/pc/tenant/tenantList",modelMap);
     }
 
 

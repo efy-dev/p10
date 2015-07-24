@@ -55,7 +55,7 @@
         </C:forEach>
     </div>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="/tenantInfo/listTenantInfo.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
