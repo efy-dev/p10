@@ -33,6 +33,7 @@ public class Tenant implements Serializable {
     private String level; //等级
     private String content; // 简介(长)
     private String presentAddress; //现居地
+    private String backgroundUrl;
     private AddressProvince originProvince; //籍贯（省）
     private Integer theStatus;         // 正常，删除，停止，隐藏
     private Date createDateTime;
@@ -168,5 +169,14 @@ public class Tenant implements Serializable {
 
     public void setOriginProvince(AddressProvince originProvince) {
         this.originProvince = originProvince;
+    }
+
+    @Column(name = "background_url")
+    public String getBackgroundUrl() {
+        return backgroundUrl;
+    }
+
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 }

@@ -80,6 +80,15 @@
                     </div>
                 </div>
 
+                <div class="am-form-group">
+                    <label for="background" class="am-u-sm-3 am-form-label">背景图片</label>
+
+                    <div class="am-u-sm-9">
+                        <input type="file" id="background" name="background" placeholder="背景图片"
+                               value="${object.favicon}">
+                    </div>
+                </div>
+
 
                 <div class="am-form-group">
                     <label for="brief" class="am-u-sm-3 am-form-label">简介 / Intro</label>
