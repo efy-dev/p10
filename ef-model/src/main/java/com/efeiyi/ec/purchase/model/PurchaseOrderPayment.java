@@ -15,7 +15,7 @@ public class PurchaseOrderPayment {
     private String id;
     private PurchaseOrder purchaseOrder;
     private Date createDateTime;
-    private String payWay;
+    private String payWay;//支付宝 银行卡
     private User user;
 
     @Id

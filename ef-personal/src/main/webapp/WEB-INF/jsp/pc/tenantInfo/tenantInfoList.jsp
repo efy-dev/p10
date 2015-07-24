@@ -8,9 +8,6 @@
 <head>
     <title>资讯</title>
 <script type="text/javascript">
-    function redirect(){
-
-    }
 </script>
 </head>
 <body>
@@ -22,7 +19,7 @@
 <div id="center--1">
     <div class="center-buttom">
         <c:forEach items="${tagList}" var="tag" >
-            <a href="javascript:void(0)" onclick="redirect();"><button class="button">${tag.value}</button></a>
+            <a href="javascript:void(0)"><button class="button">${tag.value}</button></a>
         </c:forEach>
     </div>
     <div class="center-right">
@@ -35,7 +32,11 @@
                         <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
                     </div>
                     <div class="alllist-xq">
-                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">${tenantInfo.title}</a></h1>
+                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">
+                            <c:forEach items="${tenantInfo.tenantNewsTagList}" var="tenantNewsTag">
+                                [${tenantNewsTag.wordValue.value}]
+                            </c:forEach>
+                            ${tenantInfo.title}</a></h1>
                         <p>
                             <c:choose>
                                 <c:when test="${fn:length(tenantInfo.content)  > 60}">

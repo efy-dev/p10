@@ -16,9 +16,17 @@
 <!--作品内容-->
 <div id="center--1">
   <div class="center-buttom">
-    <C:forEach items="${productTenantCatalogValueList}" var="productTenantCatalogValue">
+<%--    <C:forEach items="${productTenantCatalogValueList}" var="productTenantCatalogValue">
       <a href="#"><button class="button">${productTenantCatalogValue.value}</button></a>
-    </C:forEach>
+    </C:forEach>--%>
+    <c:forEach items="${tenantProjectList}" var="tenantProject">
+      <div class="center-buttom-1-or">
+        <h1>${tenantProject.project.name}</h1>
+        <c:forEach items="${tenantProject.project.projectTagList}" var="projectTag">
+          <a href="#"><button class="button">${projectTag.value}</button></a>
+        </c:forEach>
+      </div>
+    </c:forEach>
   </div>
   <div class="center-right">
     <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="vs">

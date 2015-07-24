@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">${attachment.url}</td>
+                    <td class="am-hide-sm-only">http://tenant.efeiyi.com/${attachment.url}</td>
                     <td class="am-hide-sm-only"><img
                             src="<c:url value="http://tenant.efeiyi.com/${attachment.url}@!tenant-manage-banner"/>"
                             alt=""/></td>
@@ -111,10 +111,11 @@
     <div class="am-u-md-12">
         <h2>新建附件</h2>
 
-        <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+        <form action="<c:url value="/basic/xmm.do"/>"method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
 
             <input type="hidden" value="saveOrUpdateTenantAttachment" name="qm">
             <input type="hidden" value="${object.id}" name="introductionId">
+            <input type="hidden" value="${object.id}" name="introduction.id">
             <input type="hidden" value="redirect:/basic/xm.do?qm=viewTenantIntroduction&id=${object.id}"
                    name="resultPage">
 

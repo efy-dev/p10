@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="Label" label="标签" version="" package="com.efeiyi.pal.label.model" path="">
+
+    <entities>
+        <entity name="PCLabelBatch" label="标签批次列表"  model="com.efeiyi.pal.label.model.LabelBatch">
+            <does>
+
+                <do name="plistLabelBatch" access="" label="标签批次分页列表" result="/labelBatch/labelBatchPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="listLabelBatch" access="" label="标签列表" result="/labelBatch/labelBatchList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formLabelBatch" label="标签批次" access="" result="/labelBatch/labelBatchForm"/>
+                <do name="viewLabelBatch" label="查看标签批次详情页" access="" result="/labelBatch/labelBatchView"/>
+                <do name="removeLabelBatch" label="删除标签批次" access="" result="json"/>
+                <do name="saveOrUpdateLabelBatch" label="新建或更新标签批次" access="" result="redirect:/basic/xm.do?qm=plistLabelBatch_default"
+                    execute="com.efeiyi.pal.system.label.controller.LabelBatchHandler">
+                    <page>
+                        <fields>
+                            <field name="createDate" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>
+                        </fields>
+                    </page>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="PCLabel" label="标签列表"  model="com.efeiyi.pal.label.model.Label">
+            <does>
+
+                <do name="plistLabel" access="" label="标签分页列表" result="/label/labelPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="labelBatch.id" defaultValue="001" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="listLabel" access="" label="标签列表" result="/label/labelList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+    </entities>
+
+</module>

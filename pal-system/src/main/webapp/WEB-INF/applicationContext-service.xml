@@ -20,7 +20,7 @@
     <!--</task:scheduled-tasks>-->
     <context:annotation-config/>
     <context:component-scan base-package="com.ming800"/>
-    <context:component-scan base-package="com.efeiyi.ec"/>
+    <context:component-scan base-package="com.efeiyi"/>
 
     <!-- 定义切面 -->
     <aop:config>

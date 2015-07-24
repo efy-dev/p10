@@ -29,13 +29,14 @@ public class TenantHandler implements MultipartHandler{
         String identify = sdf.format(new Date());
         String url = "photo/"+identify+".jpg";
         boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("favicon"), "tenant", url);
-
-        //±£´æ¶ÔÏó start
+        boolean result2 = aliOssUploadManager.uploadFile(multipartRequest.getFile("background"), "tenant", "background/"+multipartRequest.getFile("background").getOriginalFilename());
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ start
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
         HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("favicon",url);
+        paramMap.put("backgroundUrl","background/"+multipartRequest.getFile("background").getOriginalFilename());
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
-        //±£´æ¶ÔÏó end
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ end
         modelMap.put("object",object);
 
         return modelMap;

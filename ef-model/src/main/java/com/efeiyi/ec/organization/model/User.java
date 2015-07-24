@@ -84,10 +84,13 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result;
-        if (username != null) {
-            result += username.hashCode();
+        int result = 0;
+        if(id!=null) {
+            result  = id.hashCode();
+            result = 31 * result;
+            if (username != null) {
+                result += username.hashCode();
+            }
         }
         return result;
     }

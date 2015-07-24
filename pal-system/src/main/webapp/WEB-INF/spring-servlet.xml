@@ -57,7 +57,6 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.**.**.**.**.controller"/>
 
-
     <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
         <property name="basename" value="spring-view"/>
     </bean>

@@ -11,6 +11,8 @@
     <title></title>
 </head>
 <body>
-<h1>hello!!</h1>
+<div align="center">
+    <h1>欢迎使用成品宝后台管理系统</h1>
+</div>
 </body>
 </html>

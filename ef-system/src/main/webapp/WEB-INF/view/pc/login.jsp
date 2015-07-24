@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -23,7 +24,7 @@
 <div class="am-g am-g-fixed" style="max-width: 550px;">
     <div class="am-u-md-12" style="box-shadow: 0px 0px 2px #626262;">
         <div class="am-u-md-12" style="text-align: center ;"><h2 style=" margin-top: 1.6rem;">e飞蚁 后台系统登录</h2></div>
-        <form class="am-form am-form-horizontal" action="/j_spring_security_check" method="post">
+        <form class="am-form am-form-horizontal" action="<c:url value="/j_spring_security_check"/>" method="post">
             <div class="am-form-group">
                 <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
 

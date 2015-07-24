@@ -15,7 +15,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
@@ -41,7 +40,7 @@
             </td>
             <td width="10%">
                 <c:if test="${project.level == 1}">
-                    <a href="/basic/xm.do?qm=viewProject&id=${project.id}" >
+                    <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${project.id}"/>" >
                       ${project.name}
                     </a>
                 </c:if>

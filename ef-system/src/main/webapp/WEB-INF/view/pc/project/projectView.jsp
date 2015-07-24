@@ -25,9 +25,17 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">父类别</td>
-                <td class="am-u-md-3">${object.projectCategory.name}</td>
+                <td class="am-u-md-3">
+                    <c:if test="${not empty object.projectCategory.id}">
+                       ${object.projectCategory.name}
+                    </c:if>
+                </td>
                 <td class="am-primary am-u-md-3">父项目</td>
-                <td class="am-u-md-3">${object.fatherProject.name}</td>
+                <td class="am-u-md-3">
+                    <c:if test="${not empty object.fatherProject.id}">
+                       ${object.fatherProject.name}
+                    </c:if>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -59,7 +67,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="/basic/xm.do?qm=viewProject&id=${subProject.id}">${subProject.name}</a>
+                        <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${subProject.id}"/>">${subProject.name}</a>
                     </td>
                     <td>${subProject.serial}</td>
                 </tr>

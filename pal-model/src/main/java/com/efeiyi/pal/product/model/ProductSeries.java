@@ -1,6 +1,6 @@
 package com.efeiyi.pal.product.model;
 
-import com.efeiyi.pal.orgnization.model.Tenant;
+import com.efeiyi.pal.organization.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

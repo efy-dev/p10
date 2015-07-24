@@ -86,7 +86,7 @@
     <div class="am-u-md-12">
         <h2>新建作品图片</h2>
 
-        <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+        <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
 
             <input type="hidden" value="saveOrUpdateProductPicture" name="qm">
             <input type="hidden" value="${object.id}" name="tenantWorkId">

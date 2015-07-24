@@ -1,6 +1,6 @@
 package com.efeiyi.pal.label.model;
 
-import com.efeiyi.pal.orgnization.model.Tenant;
+import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.pal.purchase.model.PurchaseOrder;
 import org.hibernate.annotations.GenericGenerator;

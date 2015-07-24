@@ -17,6 +17,8 @@ public class PurchaseOrder {
     private String id;
     private String serial;
     private List<PurchaseOrderProduct> purchaseOrderProductList;
+    private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;
+    private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;
     private String payWay;
     private Consumer user;
@@ -87,5 +89,24 @@ public class PurchaseOrder {
 
     public void setConsumerAddress(ConsumerAddress consumerAddress) {
         this.consumerAddress = consumerAddress;
+    }
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    public List<PurchaseOrderDelivery> getPurchaseOrderDeliveryList() {
+        return purchaseOrderDeliveryList;
+    }
+
+    public void setPurchaseOrderDeliveryList(List<PurchaseOrderDelivery> purchaseOrderDeliveryList) {
+        this.purchaseOrderDeliveryList = purchaseOrderDeliveryList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    public List<PurchaseOrderPayment> getPurchaseOrderPaymentList() {
+        return purchaseOrderPaymentList;
+    }
+
+    public void setPurchaseOrderPaymentList(List<PurchaseOrderPayment> purchaseOrderPaymentList) {
+        this.purchaseOrderPaymentList = purchaseOrderPaymentList;
     }
 }

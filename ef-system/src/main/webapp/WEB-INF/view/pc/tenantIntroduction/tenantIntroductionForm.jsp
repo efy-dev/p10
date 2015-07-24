@@ -81,7 +81,7 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">
+            <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal">
                 <input type="hidden" value="saveOrUpdateTenantIntroduction" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">

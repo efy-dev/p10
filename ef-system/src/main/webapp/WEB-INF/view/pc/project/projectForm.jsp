@@ -18,13 +18,13 @@
 <hr/>
 
 <div class="am-g">
-    <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
+    <form action="<c:url value="/basic/xm.do"/>" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProject">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
         <c:choose>
-            <c:when test="${ empty object.level }">
+            <c:when test="${ empty object.level } && ${empty fatherId}">
                 <input type="hidden" name="level" value="1" />
             </c:when>
             <c:otherwise>
