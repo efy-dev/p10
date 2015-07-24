@@ -8,9 +8,6 @@
 <head>
     <title>资讯</title>
 <script type="text/javascript">
-    function redirect(){
-
-    }
 </script>
 </head>
 <body>
@@ -22,7 +19,7 @@
 <div id="center--1">
     <div class="center-buttom">
         <c:forEach items="${tagList}" var="tag" >
-            <a href="javascript:void(0)" onclick="redirect();"><button class="button">${tag.value}</button></a>
+            <a href="javascript:void(0)"><button class="button">${tag.value}</button></a>
         </c:forEach>
     </div>
     <div class="center-right">
