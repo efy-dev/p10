@@ -26,7 +26,7 @@ public class TenantRecommended implements Serializable {
     private String id;
     private Tenant tenant;
     private String projectType;
-    private Integer order;
+    private Integer sort;
 
 
     @Id
@@ -59,12 +59,12 @@ public class TenantRecommended implements Serializable {
         this.projectType = projectType;
     }
 
-    @Column(name = "order")
-    public Integer getOrder() {
-        return order;
+    @Column(name = "sort")
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }
