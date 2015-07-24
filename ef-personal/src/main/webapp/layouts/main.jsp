@@ -13,9 +13,6 @@
     <script src="../scripts/assets/js/amazeui.min.js"></script>
     <script src="../scripts/assets/js/demo.js"></script>
     <script src="../scripts/assets/js/jquery.js"></script>
-    <!–[if IE]>
-    <script src=”http://html5shiv.googlecode.com/svn/trunk/html5.js”></script>
-    <![endif]–>
     <sitemesh:write property='head'/>
 </head>
 <body>
@@ -24,18 +21,18 @@
     <div class="printing">${entity.title}<span>  [<a href="#">木板水印</a>]</span></div>
     <ul class="register">
         <li class="register-page"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz1.gif"/>"></a></li>
-        <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>
-        <li class="register-right"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz3.gif"/>"></a></li>
+       <%-- <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>
+        <li class="register-right"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz3.gif"/>"></a></li>--%>
     </ul>
 </div>
 <div id="nav">
     <h1><a href="#"><img src="http://tenant.efeiyi.com/photo/2015-07-20%2014%3A41%3A29.jpg@!tenant-manage-banner"></a></h1>
     <ul class="nav-centent">
-        <li><a href="${pageContext.request.contextPath}/tenant/1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zp.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-zx.gif"/>"></a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWorkShop/1"><img src="<c:url value="/scripts/assets/images/i/nav-gzf.gif"/>"></a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/1">首页</a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1">简介</a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=tenant.id:1">作品</a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:1">资讯</a></li>
+        <li><a href="${pageContext.request.contextPath}/tenantWorkShop/1">工作坊</a></li>
     </ul>
 </div>
 <sitemesh:write property='body'/>

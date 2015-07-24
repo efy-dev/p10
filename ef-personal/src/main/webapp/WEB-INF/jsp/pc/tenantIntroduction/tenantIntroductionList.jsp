@@ -18,9 +18,9 @@
 <div class="border-nav"></div>
 <!--简介内容-->
 <div id="page-column">
-    <div class="column-left " style=" position:relative">
+    <div class="column-left" style="">
         <div class="page-img"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></div>
-        <div class="buttom-text floating_cl">
+        <div class="buttom-text">
             <p><a href="#ji-ben-xin-xi">基本信息</a></p>
 
             <p><a href="#da-shi-rong-yu">大师荣誉</a></p>
