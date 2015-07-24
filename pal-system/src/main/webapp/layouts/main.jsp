@@ -34,10 +34,14 @@
   </style>
 </head>
 <body>
-<jsp:include flush="true" page="/getMenu.do?jmenuId=webMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}
-"/>
+<%--<jsp:include flush="true"--%>
+             <%--page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>--%>
+
 <div class="am-cf admin-main">
- <jsp:include flush="true" page=""/>
+  <jsp:include flush="true"
+               page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
+  <%----%>
+  <%----%>
   <div class="admin-content">
     <sitemesh:write property='body'/>
   </div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="Orgnization" label="组织" version="" package="com.efeiyi.pal.orgnization.model" path="">
+
+    <entities>
+        <entity name="PCTenant" label="传承人"  model="com.efeiyi.pal.organization.model.Tenant">
+            <does>
+                <do name="listTenant" access="" label="传承人列表" result="/tenant/tenantList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistTenant" access="" label="传承人分页列表" result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formTenant" label="商户信息" access="" result="/tenant/tenantForm"/>
+                <do name="viewTenant" label="商户信息详情页" access="" result="/tenant/tenantView"/>
+                <do name="removeTenant" label="删除商户信息" access="" result="json"/>
+                <do name="saveOrUpdateTenant" label="新建或更新商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"
+                    execute="com.efeiyi.pal.system.organization.controller.TenantHandler">
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCUser" label="用户"  model="com.efeiyi.pal.organization.model.User">
+            <does>
+                <do name="listUser" access="" label="用户列表" result="/user/userList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistUser" access="" label="用户分页列表" result="/user/userPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formUser" label="用户信息" access="" result="/user/userForm"/>
+                <do name="viewUser" label="用户信息详情页" access="" result="/user/userView"/>
+                <do name="removeUser" label="删除用户信息" access="" result="json"/>
+                <do name="saveOrUpdateUser" label="新建或更新用户信息" access="" result="redirect:/basic/xm.do?qm=plistUser_default"
+                    execute="com.efeiyi.pal.system.organization.controller.UserHandler">
+                </do>
+            </does>
+        </entity>
+    </entities>
+</module>
