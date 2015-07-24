@@ -35,8 +35,8 @@
             <fields>
             <field name="type" label="项目类型" inputType="text">
                 <statusType fieldName="type">
-                    <item label="技艺" value="1"/>
-                    <item label="美术" value="2"/>
+                    <item label="非遗技艺" value="1"/>
+                    <item label="非遗美术" value="2"/>
                 </statusType>
             </field>
             </fields>
