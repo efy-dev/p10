@@ -23,7 +23,7 @@
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="project.id" value="${projectId}">
         <input type="hidden" name="sort" value="${object.sort}">
-        <input type="hidden" name="status" value="${object.status}"/>
+        <input type="hidden" name="status" value="1">
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">项目属性名称</label>
             <div class="am-u-sm-9">

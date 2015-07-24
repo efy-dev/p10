@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.persistence.criteria.Fetch;
@@ -67,6 +68,7 @@ public class Project {
     }
 
     @Column(name="status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
@@ -113,6 +115,7 @@ public class Project {
     }
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    @Where(clause = "status=1")
     public  List<ProjectTag> getProjectTagList(){
         return  projectTagList;
     }
@@ -121,6 +124,7 @@ public class Project {
     }
 
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
+    @Where(clause = "status=1")
     public  List<Project> getSubProjectList(){
         return  subProjectList;
     }
@@ -129,6 +133,7 @@ public class Project {
     }
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    @Where(clause = "status=1")
     public List<ProjectProperty> getProjectPropertyList() {
         return projectPropertyList;
     }

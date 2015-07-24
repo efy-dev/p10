@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -50,6 +51,7 @@ public class ProjectCategory {
     }
 
     @Column(name="status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
