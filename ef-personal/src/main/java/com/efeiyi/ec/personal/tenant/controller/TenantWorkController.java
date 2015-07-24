@@ -2,8 +2,6 @@ package com.efeiyi.ec.personal.tenant.controller;
 
 
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
