@@ -1,4 +1,4 @@
-
+<!DocType html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -13,14 +13,9 @@
     <script src="../scripts/assets/js/amazeui.min.js"></script>
     <script src="../scripts/assets/js/demo.js"></script>
     <script src="../scripts/assets/js/jquery.js"></script>
-    <script type="text/javascript">
-//        $(document).ready(function(){
-//            $.post("", { tenantId: ""},
-//                function(data){
-//                    process(data);
-//                }, "text");
-//        })
-    </script>
+    <!–[if IE]>
+    <script src=”http://html5shiv.googlecode.com/svn/trunk/html5.js”></script>
+    <![endif]–>
     <sitemesh:write property='head'/>
 </head>
 <body>
@@ -34,7 +29,7 @@
     </ul>
 </div>
 <div id="nav">
-    <h1><a href="#"><img src="<c:url value="${entity.favicon}"/>"></a></h1>
+    <h1><a href="#"><img src="http://tenant.efeiyi.com/photo/2015-07-20%2014%3A41%3A29.jpg@!tenant-manage-banner"></a></h1>
     <ul class="nav-centent">
         <li><a href="${pageContext.request.contextPath}/tenant/1"><img src="<c:url value="/scripts/assets/images/i/nav-sy.gif"/>"></a></li>
         <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1"><img src="<c:url value="/scripts/assets/images/i/nav-jj.gif"/>"></a></li>
@@ -53,7 +48,7 @@
         <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
         <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
     </ul>
-    <div class="efeiyi-url">Copyright © <a href="#">www.efeiyi.com</a>2015</div>
+    <div class="efeiyi-url">©2015 efeiyi.com</div>
 </div>
 <!--分析-->
 <div class="floating_ck">
