@@ -27,4 +27,14 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
     }
 
 
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        request.setCharacterEncoding("utf-8");
+
+        return true;
+    }
+
+
 }
