@@ -24,17 +24,15 @@
         <input type="hidden" name="qm" value="saveOrUpdateUser">
         <input type="hidden" name="id" value="${object.id}">
         <div class="am-form-group">
-            <label name="username" for="user-name" class="am-u-sm-3 am-form-label">用户名</label>
+            <label name="username" for="user-name" class="am-u-sm-3 am-form-label">用户名 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="username" id="user-name" placeholder="用户名" value="${object.username}">
-                <small>必填项*</small>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">真实姓名</label>
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">真实姓名 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="name" placeholder="真实姓名" value="${object.name}">
-                <small>必填项*</small>
             </div>
         </div>
         <div class="am-form-group">

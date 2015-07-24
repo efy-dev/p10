@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span> 新增</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span>新建传承人</a>
                 </div>
             </div>
         </div>
@@ -35,8 +35,6 @@
                     <th class="table-title">头衔</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
-                    <th class="table-title">简介</th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -59,9 +57,12 @@
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
                         <td class="am-hide-sm-only">${tenant.title}</td>
-                        <td class="am-hide-sm-only">${tenant.sex}</td>
-                        <td class="am-hide-sm-only">${tenant.level}</td>
-                        <td class="am-hide-sm-only">${tenant.brief}</td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${tenant.sex}" type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="level" dataType="Tenant.level" checkedValue="${tenant.level}" type="normal" />
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
