@@ -19,7 +19,12 @@
 </head>
 <body>
 <div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectCategory"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建类别" />
+    <c:if test="${empty level}">
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=1"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建类别" />
+    </c:if>
+    <c:if test="${not empty level}">
+         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${level}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建类别" />
+    </c:if>
 </div>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
@@ -34,13 +39,13 @@
             <td width="20%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
-                        <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectCategory&id=${projectCategory.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                        <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectCategory&id=${projectCategory.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                     </div>
                 </div>
             </td>
             <td width="10%">
-                    <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>" >
+                    <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>" >
                       ${projectCategory.name}
                     </a>
             </td>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -17,7 +18,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
+    <form action="<c:url value="/basic/xm.do"/>" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProjectTag">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="project.id" value="${projectId}">
