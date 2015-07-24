@@ -23,14 +23,7 @@
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherCategory.id" value="${fatherCategoryId}">
-        <c:choose>
-            <c:when test="${ empty object.level } && ${empty fatherCategoryId}">
-                <input type="hidden" name="level" value="1" />
-            </c:when>
-            <c:otherwise>
-                <input type="hidden" name="level" value="${object.fatherCategory.level+1}">
-            </c:otherwise>
-        </c:choose>
+        <input type="hidden" name="level" value="${level}" />
         <div class="am-form-group">
             <label name="name" for="user-name" class="am-u-sm-3 am-form-label">类别名称</label>
             <div class="am-u-sm-9">
