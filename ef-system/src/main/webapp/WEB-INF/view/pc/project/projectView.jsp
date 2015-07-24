@@ -67,7 +67,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="/basic/xm.do?qm=viewProject&id=${subProject.id}">${subProject.name}</a>
+                        <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${subProject.id}"/>">${subProject.name}</a>
                     </td>
                     <td>${subProject.serial}</td>
                 </tr>
