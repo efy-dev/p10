@@ -35,6 +35,8 @@
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="tenant.id" value="${tenantId}">
             <input type="hidden" name="project.id" value="${projectId}">
+            <input type="hidden" name="resultPage"
+                    value="redirect:/basic/xm.do?qm=plistTenantWork_byProject&conditions=project.id:${projectId}&projectId=${projectId}&tenantId=${tenantId}"/>
 
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">名称</label>
@@ -45,14 +47,7 @@
                 </div>
             </div>
 
-            <div class="am-form-group">
-                <label for="price" class="am-u-sm-3 am-form-label">价格</label>
 
-                <div class="am-u-sm-9">
-                    <input type="text" id="price" name="price" placeholder="名称" value="${object.price.intValue()}">
-                    <%--<small>输入你要保存的类型</small>--%>
-                </div>
-            </div>
 
 
             <div class="am-form-group">

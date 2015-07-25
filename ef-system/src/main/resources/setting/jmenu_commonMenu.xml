@@ -60,6 +60,7 @@
                 <match url="listProject_default"/>
                 <match url="formTenantNews"/>
                 <match url="viewTenantNews"/>
+                <match url="saveOrUpdateTenantWork"/>
             </jnode>
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
                 <!--<match url="plistTenantIntroduction_default"/>-->
@@ -88,6 +89,7 @@
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
             <jnode url="/basic/xm.do?groupId=master.homePage&amp;qm=plistBanner_master.homePage"  access="admin,manager"  text_zh_CN="首页轮播图">
                 <match url="plistBanner_tenant"/>
+                <match url="plistBanner_master.homePage"/>
                 <match url="formBanner"/>
                 <match url="removeBanner"/>
             </jnode>

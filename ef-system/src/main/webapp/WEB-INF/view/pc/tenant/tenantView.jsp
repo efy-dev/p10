@@ -37,48 +37,37 @@
                 <td class="am-u-md-3">${object.presentAddress}</td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">头衔</td>
-                <td class="am-u-md-3">${object.title}</td>
                 <td class="am-primary am-u-md-3">等级</td>
                 <td class="am-u-md-3">
                     <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
+                </td> <td class="am-primary am-u-md-3">等级</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
                 </td>
+
             </tr>
             </tbody>
         </table>
 
     </div>
-   
+
     <div class="am-u-md-6">
-
         <label class="am-u-sm-12 am-form-label">头像</label>
-
         <div class="am-u-sm-12">
             <img src="http://tenant.efeiyi.com/${object.favicon}@!tenant-manage-banner">
         </div>
     </div>
     
     <div class="am-u-md-6">
-
         <label class="am-u-sm-12 am-form-label">背景</label>
-
         <div class="am-u-sm-12">
             <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-banner">
         </div>
     </div>
-</div>
-<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-    <div class="am-form-group">
-        <label   class="am-u-sm-3 am-form-label">短简介 / Brief</label>
-        <div >
-            ${object.brief}
-        </div>
-    </div>
-    <div class="am-form-group">
-        <label   class="am-u-sm-3 am-form-label">长简介 / Intro</label>
-        <div >
-            ${object.content}
-        </div>
+
+    <label   class="am-u-sm-3 am-form-label">短简介 / Brief</label>
+    <div>
+        ${object.brief}
     </div>
 </div>
 

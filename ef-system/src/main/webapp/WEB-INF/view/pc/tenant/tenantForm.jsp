@@ -79,13 +79,6 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="title" class="am-u-sm-3 am-form-label">头衔/ Title</label>
-
-                <div class="am-u-sm-9">
-                    <input type="text" id="title" name="title" placeholder="头衔/ Title" value="${object.title}">
-                </div>
-            </div>
-            <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
@@ -117,16 +110,6 @@
                     <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
                         ${object.brief}
                     </textarea>
-                </div>
-            </div>
-
-
-            <div class="am-form-group">
-                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-
-                <div class="am-u-sm-9">
-                            <textarea id="content" name="content" class="ckeditor"
-                                      placeholder="输入简介">${object.content}</textarea>
                 </div>
             </div>
 

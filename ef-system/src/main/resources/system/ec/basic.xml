@@ -14,20 +14,25 @@
                      result="/banner/bannerPList" >
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq" />
                     </query>
                     <query name="tenant" label="传承人轮播图" type="auto" orderBy="id:desc">
                       <condition name="group" defaultValue="tenant" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq" />
                     </query>
 
                     <query name="master.homePage" label="首页轮播图" type="auto" orderBy="id:desc">
                         <condition name="group" defaultValue="master.homePage" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq" />
                     </query>
                 </do>
 
                 <do name="removeBanner" label="删除banner" access="" result="json"/>
                 <do name="formBanner" label="保存banner" access=""
-                       execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"  result="/banner/bannerForm"/>
-                <do name="saveOrUpdateBanner" label="保存banner" access="" result="/banner/bannerSaveSuccess"/>
+                       execute="com.efeiyi.ec.system.basic.controller.ToBasicBannerFormHandler"  result="/banner/bannerForm"/>
+                <do name="saveOrUpdateBanner" label="保存banner" access=""
+                    execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
+                    />
                 <do name="listBanner" label="banner列表" access="" result="/banner/bannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
