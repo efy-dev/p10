@@ -26,22 +26,27 @@ public class TenantWorkShopHandler implements MultipartHandler {
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
         String tenantId = request.getParameter("tenant.id");
-
-        MultipartFile multipartFile = multipartRequest.getFile("picture_url");
-        String url = "work/"+tenantId+"/" + multipartFile.getOriginalFilename();
-        aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
-
-        MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
-        String url1 = "work/"+tenantId+"/" + multipartFile1.getOriginalFilename();
-        aliOssUploadManager.uploadFile(multipartFile1, "tenant", url1);
-
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
-        paramMap.put("picture_url", url);
-        paramMap.put("videoPath", url1);
+
+        MultipartFile multipartFile = multipartRequest.getFile("picture_url");
+        if (!multipartFile.getOriginalFilename().equals("")) {
+            String url = "work/" + tenantId + "/" + multipartFile.getOriginalFilename();
+            aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
+            paramMap.put("picture_url", url);
+        }
+
+
+        MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
+        if (!multipartFile.getOriginalFilename().equals("")) {
+            String url1 = "work/" + tenantId + "/" + multipartFile1.getOriginalFilename();
+            aliOssUploadManager.uploadFile(multipartFile1, "tenant", url1);
+            paramMap.put("videoPath", url1);
+        }
+
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        modelMap.put("object",object);
+        modelMap.put("object", object);
 
         return modelMap;
     }

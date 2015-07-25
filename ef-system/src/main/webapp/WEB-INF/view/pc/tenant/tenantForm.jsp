@@ -54,7 +54,7 @@
                     <div class="am-form-group am-form-icon">
                         <i class="am-icon-calendar"></i>
                         <input type="text" id="birthday" name="birthday" class="am-form-field am-input-sm"
-                               placeholder="出生日期" value="${object.birthday}" data-am-datepicker readonly/>
+                               placeholder="出生日期" value="${object.birthday}" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" readonly/>
                     </div>
                 </div>
             </div>

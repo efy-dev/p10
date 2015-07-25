@@ -35,11 +35,15 @@ public class TenantWorkFormHandler implements MultipartHandler {
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         String introductionId = request.getParameter("tenant.id");
         MultipartFile multipartFile = multipartRequest.getFile("picurl");
-        String url = "work/"+introductionId+"/" + multipartFile.getOriginalFilename();
-        aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
+
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
-        paramMap.put("picture_url", url);
+        if (multipartFile.getOriginalFilename() != null && !multipartFile.getOriginalFilename().equals("")) {
+            String url = "work/" + introductionId + "/" + multipartFile.getOriginalFilename();
+            aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
+            paramMap.put("picture_url", url);
+
+        }
         paramMap.put("tenant.id", introductionId);
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
 
@@ -48,15 +52,14 @@ public class TenantWorkFormHandler implements MultipartHandler {
         ProductDescription productDescription = new ProductDescription();
         productDescription.setContent(introductionContent);
         Product product = new Product();
-        product.setId(((TenantWork)object).getId());
+        product.setId(((TenantWork) object).getId());
         productDescription.setProduct(product);
 
-        baseManager.saveOrUpdate(ProductDescription.class.getName(),productDescription);
+        baseManager.saveOrUpdate(ProductDescription.class.getName(), productDescription);
 
-        ((TenantWork)object).setProductDescription(productDescription);
+        ((TenantWork) object).setProductDescription(productDescription);
 
-        baseManager.saveOrUpdate(TenantWork.class.getName(),object);
-
+        baseManager.saveOrUpdate(TenantWork.class.getName(), object);
 
 
         List<String> tagValueList = new ArrayList<>();
@@ -73,13 +76,13 @@ public class TenantWorkFormHandler implements MultipartHandler {
 
         if (tagValueList.size() > 0) {
             for (String tagId : tagValueList) {
-                ProjectTag projectTag= new ProjectTag();
+                ProjectTag projectTag = new ProjectTag();
                 projectTag.setId(tagId);
                 TenantWorkTag tenantWorkTag = new TenantWorkTag();
                 tenantWorkTag.setProjectTag(projectTag);
-                tenantWorkTag.setTenantWork((TenantWork)object);
+                tenantWorkTag.setTenantWork((TenantWork) object);
                 tenantWorkTag.setStatus("1");
-                baseManager.saveOrUpdate(TenantWorkTag.class.getName(),tenantWorkTag);
+                baseManager.saveOrUpdate(TenantWorkTag.class.getName(), tenantWorkTag);
             }
 
         }
