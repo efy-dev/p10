@@ -27,12 +27,12 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
-
+            <input type="hidden" name="status" value="1"/>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}">
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -40,7 +40,7 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"
-                           value="${object.fullName}">
+                           value="${object.fullName}" required>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName"
-                           value="${object.provinceName}">
+                           value="${object.provinceName}" required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -82,17 +82,10 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="title" class="am-u-sm-3 am-form-label">头衔/ Title</label>
-
-                <div class="am-u-sm-9">
-                    <input type="text" id="title" name="title" placeholder="头衔/ Title" value="${object.title}">
-                </div>
-            </div>
-            <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
-                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select"/>
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select" required="true"/>
                 </div>
             </div>
 
@@ -136,20 +129,9 @@
             <div class="am-form-group">
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
 
-                <div class="am-u-sm-9">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
-                        ${object.brief}
-                    </textarea>
-                </div>
-            </div>
-
-
-            <div class="am-form-group">
-                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-
-                <div class="am-u-sm-9">
-                            <textarea id="content" name="content" class="ckeditor"
-                                      placeholder="输入简介">${object.content}</textarea>
+                <div class="am-u-sm-9" style="text-align: left;">
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>
+                    <small>输入短简介,限30字以内</small>
                 </div>
             </div>
 

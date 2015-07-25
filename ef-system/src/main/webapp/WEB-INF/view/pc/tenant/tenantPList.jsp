@@ -31,8 +31,8 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
-                    <th class="table-title">姓名</th>
-                    <th class="table-title">头衔</th>
+                    <th class="table-title">中文姓名</th>
+                    <th class="table-title">姓名拼音</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
                 </tr>
@@ -40,7 +40,7 @@
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="tenant">
-                    <tr>
+                    <tr id="${tenant.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -49,14 +49,14 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeTenant&id=${tenant.id}"/>"><span
+                                      onclick="removeTenant('${tenant.id}')" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                 </div>
                             </div>
                         </td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.fullName}</a></td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
-                        <td class="am-hide-sm-only">${tenant.title}</td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${tenant.sex}" type="normal"/>
                         </td>
@@ -77,5 +77,22 @@
         </ming800:pcPageList>
     </div>
 </div>
+
+<script>
+
+    function removeTenant(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenant"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

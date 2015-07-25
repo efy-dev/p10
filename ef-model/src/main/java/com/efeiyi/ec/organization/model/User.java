@@ -17,12 +17,11 @@ public class User {
     private String id;
     private String username;
     private String name;
-    private Integer theStatus;
     private String pictureUrl;
     private String cityId;
     private String password;
     private Role role;
-
+    private String status;
     @JsonIgnore
     @Column(name = "password")
     public String getPassword() {
@@ -97,12 +96,12 @@ public class User {
 
     @JsonIgnore
     @Column(name = "thestatus")
-    public Integer getTheStatus() {
-        return theStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTheStatus(Integer theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -114,4 +113,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
 }

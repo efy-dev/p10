@@ -48,13 +48,7 @@ public class TenantIntroductionController extends BaseTenantController {
 
         for (TenantIntroduction tenantIntroduction:list){
             if ("ji-ben-xin-xi".equals(tenantIntroduction.getTitle())){
-                List jbxxList = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        jbxxList.add(tenantAttachment);
-                    }
-                }
-                model.addAttribute("jbxxList", jbxxList);
+                model.addAttribute("jbxxIntroduction", tenantIntroduction);
             }
             if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
                 List dsryList = new ArrayList();

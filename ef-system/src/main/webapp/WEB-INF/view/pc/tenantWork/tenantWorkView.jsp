@@ -34,8 +34,6 @@
             <tr>
                 <td class="am-primary am-u-md-3">名称</td>
                 <td class="am-u-md-3">${object.name}</td>
-                <td class="am-primary am-u-md-3">价格</td>
-                <td class="am-u-md-3">${object.price}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">序列号</td>
