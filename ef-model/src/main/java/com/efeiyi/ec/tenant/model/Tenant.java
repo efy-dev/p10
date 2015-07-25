@@ -4,7 +4,6 @@ import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class Tenant implements Serializable {
     private String title; // 头衔/称号
     private String favicon; //网站头像
     private String sex; //性别
-    private Date birthday; //出生年月
+    private String birthday; //出生年月
     private String level; //等级
     private String content; // 简介(长)
     private String presentAddress; //现居地
@@ -61,12 +60,11 @@ public class Tenant implements Serializable {
         this.name = name;
     }
 
-
-    @Column(name = "status")
+   @Column(name="status")
     public String getStatus() {
-        return status;
-    }
-
+       return status;
+   }
+  
     public void setStatus(String status) {
         this.status = status;
     }
@@ -136,11 +134,11 @@ public class Tenant implements Serializable {
     }
 
     @Column(name = "birthday")
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

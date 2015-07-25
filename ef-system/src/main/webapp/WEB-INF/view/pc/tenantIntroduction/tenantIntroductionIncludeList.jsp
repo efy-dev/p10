@@ -14,7 +14,6 @@
             <thead>
             <tr>
                 <th class="table-set">操作</th>
-                <th class="table-title">标题</th>
                 <th class="table-title">类型</th>
             </tr>
             </thead>
@@ -26,6 +25,7 @@
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                   href="<c:url value="/basic/xm.do?qm=formTenantIntroduction&tenantId=${tenantIntroduction.tenant.id}&id=${tenantIntroduction.id}"/>"><span
                                    href="<c:url value="/basic/xm.do?qm=formTenantIntroduction&id=${tenantIntroduction.id}&tenantId=${tenantIntroduction.tenant.id}"/>"><span
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </a>
@@ -36,12 +36,11 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only"><a
-                            href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">${tenantIntroduction.title}</a>
-                    </td>
 
                     <td class="am-hide-sm-only">
-                      <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${tenantIntroduction.type}" type="normal" />
+                    <a href="<c:url value="/basic/xm.do?qm=viewTenantIntroduction&id=${tenantIntroduction.id}"/>">
+                        <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${tenantIntroduction.type}" type="normal" />
+                    </a>
                    </td>
                 </tr>
             </c:forEach>

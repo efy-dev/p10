@@ -86,7 +86,7 @@
             <!--</jnode>-->
         </jnode>
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="首页轮播图">
+            <jnode url="/basic/xm.do?groupId=master.homePage&amp;qm=plistBanner_master.homePage"  access="admin,manager"  text_zh_CN="首页轮播图">
                 <match url="plistBanner_tenant"/>
                 <match url="formBanner"/>
                 <match url="removeBanner"/>
@@ -99,7 +99,6 @@
                 <match url="formDocument"/>
                 <match url="saveOrUpdateDocument"/>
                 <match url="listDocument_default"/>
-
             </jnode>
         </jnode>
     </jnode>
@@ -116,7 +115,7 @@
     </jnode>
 
     <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理"><!--系统管理-->
-    <jnode url="" id="CategoryManager"  access="admin" state="closed" text_zh_CN="类别管理">
+    <jnode url="" id="CategoryManager"  access="admin" state="closed" text_zh_CN="非遗项目与类别">
         <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目列表">
             <match url="plistProject_default"/>
             <match url="viewProject"/>
@@ -161,8 +160,18 @@
         <jnode url="/basic/xm.do?qm=plistRole_default"  access="admin,manager" text_zh_CN="角色管理">
             <match url="plistRole_default"/>
         </jnode>
-    </jnode>
 
+    </jnode>
+        <jnode id="wordValueManager" url="" access="admin" text_zh_CN="字典管理"><!--系统管理-->
+            <jnode id="" url="/basic/xm.do?qm=plistWordValue_default" state="" extend="" access="" text_zh_CN="字典列表">
+                <match url="plistWordValue_default"/>
+                <match url="viewWordValue"/>
+                <match url="removeWordValue"/>
+                <match url="formWordValue"/>
+                <match url="saveOrUpdateWordValue"/>
+            </jnode>
+
+        </jnode>
 </jnode>
 </jmenu>
 

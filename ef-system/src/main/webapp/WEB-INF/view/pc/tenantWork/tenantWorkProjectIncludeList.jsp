@@ -14,7 +14,6 @@
       <tr>
         <th class="table-set">操作</th>
         <th class="table-title">名称</th>
-        <th class="table-title">状态</th>
         <th class="table-title">创建时间</th>
 
       </tr>
@@ -37,7 +36,6 @@
             </div>
           </td>
           <td class="am-hide-sm-only">${tenantProject.project.name}</td>
-          <td class="am-hide-sm-only">${tenantProject.status}</td>
           <td class="am-hide-sm-only">${tenantProject.project.createDateTime}</td>
         </tr>
       </c:forEach>

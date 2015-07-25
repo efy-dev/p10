@@ -41,7 +41,7 @@
 
         <div class="am-u-md-6">
             <h3>封面</h3>
-            <img src="http://tenant.efeiyi.com/${object.picture_url}">
+            <img src="http://tenant.efeiyi.com/${object.picture_url}@!tenant-manage-work-view">
         </div>
 
     </div>
@@ -76,7 +76,7 @@
                     </td>
                     <td class="am-hide-sm-only">${productPicture.pictureUrl}</td>
                     <td class="am-hide-sm-only"><img
-                            src="<c:url value="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-banner"/>"
+                            src="<c:url value="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-work-view"/>"
                             alt=""/></td>
                 </tr>
             </c:forEach>
