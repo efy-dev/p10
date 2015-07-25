@@ -40,7 +40,7 @@
     </div>
     <div class="am-u-md-6">
       <h3>视频</h3>
-      <embed src="http://tenant.efeiyi.com/${object.videoPath}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="250" height="100"></embed>
+      <video src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.videoPath}" controls="controls"  width="500" height="250"></video>
     </div>
 
 
