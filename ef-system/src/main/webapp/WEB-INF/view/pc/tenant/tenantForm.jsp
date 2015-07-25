@@ -32,7 +32,7 @@
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}">
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -40,7 +40,7 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"
-                           value="${object.fullName}">
+                           value="${object.fullName}" required>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
 
                 <div class="am-u-sm-9">
                     <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName"
-                           value="${object.provinceName}">
+                           value="${object.provinceName}" required>
                 </div>
             </div>
             <div class="am-form-group">
@@ -85,7 +85,7 @@
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
-                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select"/>
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select" required="true"/>
                 </div>
             </div>
 

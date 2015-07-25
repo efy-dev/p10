@@ -71,10 +71,10 @@
         </div>
         <div data-tab-panel-1 class="am-tab-panel am-ing-bg-color ">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-                am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
+                am-avg-md-2 am-avg-lg-4 am-gallery-overlay">
                 <c:forEach items="${list}" var="tenantProject" varStatus="rec">
                     <c:if test="${tenantProject.project.type == 2}">
-                        <li style="width:50%;" class="am-u-end  am-u-sm-6">
+                        <li class=" am-u-sm-6 am-u-end ">
                             <div class="am-gallery-item">
                                 <a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>" class="">
                                     <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>

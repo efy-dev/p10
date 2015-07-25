@@ -99,7 +99,7 @@
                     <label for="title" class="am-u-sm-3 am-form-label">标题</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="title" name="title" placeholder="标题" value="${object.title}">
+                        <input type="text" id="title" name="title" placeholder="标题" value="${object.title}" required>
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <label for="title" class="am-u-sm-3 am-form-label">类型</label>
 
                     <div class="am-u-sm-9">
-                        <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${object.type}" type="select"/>
+                        <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${object.type}" type="select" required="true"/>
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@
 
                     <div class="am-u-sm-9">
                         <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
-                                  value="${object.content}">${object.content}</textarea>
+                                  value="${object.content}" required>${object.content}</textarea>
                     </div>
                     <br>
                 </div>
