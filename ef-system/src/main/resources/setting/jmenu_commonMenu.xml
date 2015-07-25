@@ -5,7 +5,7 @@
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
                 <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_defaultsjdfk"  access="admin,manager" text_zh_CN="支付记录">
                 <match url="plistPurchaseOrderPayment_default"/>
             </jnode>
             <jnode url=""  access="admin,manager" text_zh_CN="发货记录">

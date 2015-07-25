@@ -20,10 +20,11 @@
                 <td class="am-u-md-3">${object.name}</td>
                 <td class="am-primary am-u-md-3">中文名字</td>
                 <td class="am-u-md-3">${object.fullName}</td>
-            </tr><tr>
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">性别</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="normal" />
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="normal"/>
                 </td>
                 <td class="am-primary am-u-md-3">出生月</td>
                 <td class="am-u-md-3">${object.birthday}</td>
@@ -41,16 +42,44 @@
                 <td class="am-u-md-3">${object.title}</td>
                 <td class="am-primary am-u-md-3">等级</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
+                    <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal"/>
                 </td>
             </tr>
             </tbody>
         </table>
 
     </div>
-    <label   class="am-u-sm-3 am-form-label">简介 / Intro</label>
-    <div class="am-u-sm-9">
-        ${object.content}
+    <div class="am-u-md-6">
+
+        <label class="am-u-sm-12 am-form-label">简介</label>
+
+        <div class="am-u-sm-12">
+            ${object.content}
+        </div>
+    </div>
+    <div class="am-u-md-6">
+
+        <label class="am-u-sm-12 am-form-label">头像</label>
+
+        <div class="am-u-sm-12">
+            <img src="http://tenant.efeiyi.com/${object.favicon}@!tenant-manage-banner">
+        </div>
+    </div>
+    <div class="am-u-md-6">
+
+        <label class="am-u-sm-12 am-form-label">短简介</label>
+
+        <div class="am-u-sm-12">
+            ${object.brief}
+        </div>
+    </div>
+    <div class="am-u-md-6">
+
+        <label class="am-u-sm-12 am-form-label">背景</label>
+
+        <div class="am-u-sm-12">
+            <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-banner">
+        </div>
     </div>
 </div>
 <div class="am-form-group">
@@ -59,6 +88,7 @@
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人的项目</h2>
+
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
@@ -78,12 +108,11 @@
 </div>
 
 
-
-
 <div class="am-g">
 
     <div class="am-u-md-12">
-    <h2>轮播图</h2>
+        <h2>轮播图</h2>
+
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
@@ -103,6 +132,7 @@
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人介绍</h2>
+
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
@@ -114,17 +144,15 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listTenantIntroduction_include&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantIntroduction_include&conditions=tenant.id:${object.id}&tenant.id=${object.id}"/>
     </div>
 </div>
-
-
-
 
 
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人的资讯</h2>
+
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
@@ -136,13 +164,14 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listTenantNews_include&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantNews_include&conditions=tenant.id:${object.id}&tenantId=${object.id}"/>
     </div>
 </div>
 
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人工作坊</h2>
+
         <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs">
                 <a type="button" class="am-btn am-btn-default"
@@ -154,7 +183,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listTenantWorkShop_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantWorkShop_default&conditions=tenant.id:${object.id}&tenantId=${object.id}"/>
     </div>
 </div>
 
