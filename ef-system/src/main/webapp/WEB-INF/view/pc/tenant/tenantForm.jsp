@@ -129,10 +129,8 @@
             <div class="am-form-group">
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
 
-                <div class="am-u-sm-9">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">
-                        ${object.brief}
-                    </textarea>
+                <div class="am-u-sm-9" style="text-align: left;">
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>
                     <small>输入短简介,限30字以内</small>
                 </div>
             </div>
