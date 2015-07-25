@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--输入内容-->
+<head>
+</head>
+<body>
 <section id="intro-content">
   <div class="intro-text-1">${tenant.content}</div>
 </section>

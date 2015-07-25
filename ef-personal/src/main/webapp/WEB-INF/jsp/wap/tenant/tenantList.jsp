@@ -50,41 +50,43 @@
     </ul>
     <div class="am-tabs-bd">
         <div data-tab-panel-0 class="am-tab-panel am-active am-ing-bg-color">
-            <!--neirong1-->
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-                <!--开始-->
-                <!--请复制代码-->
-                <li style="width:50%;" class="am-u-end am-u-sm-6">
-                    <div class="am-gallery-item">
-                        <a href="#" class="">
-                            <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"
-                                    />
-                            <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                <p>王金龙</p>
-                                <p>爱的传承人</p>
-                            </h3>
-                        </a>
-                    </div>
-                </li>
+                am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
+                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
+                    <c:if test="${tenantProject.project.type == 1}">
+                        <li style="width:50%;" class="am-u-sm-6 am-u-end">
+                            <div class="am-gallery-item">
+                                <a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>" class="">
+                                    <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
+                                    <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
+                                        <p>${tenantProject.tenant.fullName}</p>
+                                        <p>${tenantProject.tenant.brief}</p>
+                                    </h3>
+                                </a>
+                            </div>
+                        </li>
+                    </c:if>
+                </c:forEach>
             </ul>
         </div>
         <div data-tab-panel-1 class="am-tab-panel am-ing-bg-color ">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-                <!--开始-->
-                <!--请复制代码-->
-                <li style="width:50%;" class="am-u-end am-u-sm-6">
-                    <div class="am-gallery-item">
-                        <a href="#" class="">
-                            <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
-                            <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                <p>王金龙</p>
-                                <p>爱的传承人</p>
-                            </h3>
-                        </a>
-                    </div>
-                </li>
+                am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
+                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
+                    <c:if test="${tenantProject.project.type == 2}">
+                        <li style="width:50%;" class="am-u-end  am-u-sm-6">
+                            <div class="am-gallery-item">
+                                <a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>" class="">
+                                    <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
+                                    <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
+                                        <p>王金龙</p>
+                                        <p>爱的传承人</p>
+                                    </h3>
+                                </a>
+                            </div>
+                        </li>
+                    </c:if>
+                </c:forEach>
             </ul>
         </div>
     </div>
