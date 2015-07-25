@@ -21,7 +21,7 @@
     <%
     if(HttpUtil.isPhone(request)){
     %>
-<%@include file="mobileFooter.jsp"%>
+<%@include file="mobileHeader.jsp"%>
     <%
     }else{
     %>
