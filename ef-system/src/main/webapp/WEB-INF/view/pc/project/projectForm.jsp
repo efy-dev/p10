@@ -24,6 +24,8 @@
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
+        <input type="hidden" name="projectCategory.id" value="${object.projectCategory.id}">
+
         <c:if test="${empty fatherId}">
             <input type="hidden" name="level" value="1" />
         </c:if>
