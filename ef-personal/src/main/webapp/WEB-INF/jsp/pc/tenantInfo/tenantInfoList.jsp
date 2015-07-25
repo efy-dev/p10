@@ -32,7 +32,7 @@
                         <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
                     </div>
                     <div class="alllist-xq">
-                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">
+                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">
                             <c:forEach items="${tenantInfo.tenantNewsTagList}" var="tenantNewsTag">
                                 [${tenantNewsTag.wordValue.value}]
                             </c:forEach>
@@ -47,7 +47,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>">详情</a></span>
+                        <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">详情</a></span>
                     </div>
                 </div>
                 <div class="alllist-border"></div>

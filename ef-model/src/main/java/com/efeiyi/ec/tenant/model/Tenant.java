@@ -29,7 +29,7 @@ public class Tenant implements Serializable {
     private String title; // 头衔/称号
     private String favicon; //网站头像
     private String sex; //性别
-    private String birthday; //出生年月
+    private Date birthday; //出生年月
     private String level; //等级
     private String content; // 简介(长)
     private String presentAddress; //现居地
@@ -135,11 +135,11 @@ public class Tenant implements Serializable {
     }
 
     @Column(name = "birthday")
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

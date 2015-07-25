@@ -28,7 +28,8 @@ public class TenantController extends BaseController {
 
     /**
      * 获取某传承人的详情页
-     * @param model
+     * @param
+     *
      * @return
      */
     @RequestMapping({"/{tenantId}"})
@@ -45,15 +46,22 @@ public class TenantController extends BaseController {
 
     /**
      * 获取所有传承人
-     * @param modelMap
+     * @param model
      * @return
      */
-    @RequestMapping("/tenantList")
+    /*@RequestMapping("/tenantList")
     public ModelAndView listTenant(HttpServletRequest request , ModelMap modelMap)throws Exception{
         XQuery xQuery = new XQuery("listTenantRecommended_default",request);
         List list = baseManager.listObject(xQuery);
         modelMap.addAttribute("recommendedList",list);
         return new ModelAndView("/pc/tenant/tenantList",modelMap);
+    }*/
+    @RequestMapping("/tenantList")
+    public String listTenant(HttpServletRequest request,Model model)throws Exception{
+        XQuery xQuery = new XQuery("listTenantProject_default",request);
+        List list = baseManager.listObject(xQuery);
+        model.addAttribute("list",list);
+        return "/pc/tenant/tenantList";
     }
 
 

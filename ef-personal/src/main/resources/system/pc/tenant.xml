@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module name="Tenant" label="ch" version="" package="com.efeiyi.ec.tenant" path="">
     <entities>
-        <entity name="tenantRecommended" label="传承人"  model="com.efeiyi.ec.tenant.model.TenantRecommended">
+        <!--<entity name="tenantRecommended" label="传承人"  model="com.efeiyi.ec.tenant.model.TenantRecommended">
             <does>
                 <do name="listTenantRecommended" access="" label="传承人列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="" defaultValue="" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>-->
+        <entity name="tenantProject" label="传承人"  model="com.efeiyi.ec.tenant.model.TenantProject">
+                    <does>
+                        <do name="listTenantProject" access="" label="传承人列表">
+                            <query name="default" label="默认" type="auto" orderBy="id:desc">
+                                <condition name="" defaultValue="" operation="eq"/>
+                            </query>
+                        </do>
+                    </does>
+                </entity>
+        <entity name="Tenant" label="传承人列表" model="com.efeiyi.ec.tenant.model.Tenant">
+            <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistTenant" access="" label="传承人分页列表"
+                    result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
             </does>

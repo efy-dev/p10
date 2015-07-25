@@ -31,20 +31,20 @@
 <div id="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
     <div class="page-section-figure">
-        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
-            <c:if test="${recommended.projectType == 1}">
+        <c:forEach items="${list}" var="tenantProject" varStatus="rec">
+            <c:if test="${tenantProject.project.type == 1}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
                         <div class="BG"></div>
                         <p class="txt">
                         <div class="img-mutual-text1">
-                            <h1>${recommended.tenant.fullName}</h1>
-                            <p>${recommended.tenant.brief}</p>
+                            <h1>${tenantProject.tenant.fullName}</h1>
+                            <p>${tenantProject.tenant.brief}</p>
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>
@@ -54,20 +54,20 @@
 <div  class="page-section">
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
     <div class="page-section-figure">
-        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
-            <c:if test="${recommended.projectType == 2}">
+        <c:forEach items="${list}" var="tenantProject" varStatus="rec">
+            <c:if test="${tenantProject.project.type == 2}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
                         <div class="BG"></div>
                         <p class="txt">
                         <div class="img-mutual-text1">
-                            <h1>${recommended.tenant.fullName}</h1>
-                            <p>${recommended.tenant.brief}</p>
+                            <h1>${tenantProject.tenant.fullName}</h1>
+                            <p>${tenantProject.tenant.brief}</p>
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>

@@ -18,10 +18,10 @@
             <h1>${entity.fullName}</h1>
             <p>${entity.title}</p>
             <dl class="tab-dl">
-                <dt><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></a></dt>
+                <dt><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}" target="_blank"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></a></dt>
                 <dd>${entity.brief}</dd>
             </dl>
-            <span><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}">了解详细</a></span>
+            <span><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${entity.id}" target="_blank">了解详细</a></span>
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
     <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="work" begin="0" end="2">
         <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
             <dl class="center-${work.index + 1}">
-                <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWork.id}"><img src="<c:url value="/scripts/assets/images/img1.gif"/>"></a></dt>
+                <dt class="center-1-dt"><a href="${pageContext.request.contextPath}/tenantWork/${tenantWork.id}" target="_blank"><img src="<c:url value="/scripts/assets/images/img1.gif"/>"></a></dt>
                 <dd class="center-1-dd"><span><a href="javascript:void(0);">大师作品</a></span><span><a href="javascript:void(0);">木版水印</a></span><span><a href="javascript:void(0);">2015</a></span></dd>
             </dl>
         </c:if>
