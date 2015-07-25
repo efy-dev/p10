@@ -3,7 +3,7 @@
 <html>
 <head>
 </head>
-<body style="overflow:-Scroll;overflow-x:hidden" >
+<body>
 <div id="banner1">
     <div id="full-screen-slider">
         <ul id="slides">
