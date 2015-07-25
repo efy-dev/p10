@@ -37,6 +37,7 @@ public class Tenant implements Serializable {
     private String provinceName;//籍贯
     private AddressProvince originProvince; //籍贯（省）
     private String status;         // 正常，删除，停止，隐藏
+    private String logoUrl;
     private Date createDateTime;
 
 
@@ -187,5 +188,14 @@ public class Tenant implements Serializable {
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
+    }
+
+    @Column(name = "logo_url")
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

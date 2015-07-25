@@ -31,7 +31,7 @@ public class TenantWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
-    private List<ProjectTag> projectTagList;
+//    private List<ProjectTag> projectTagList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
