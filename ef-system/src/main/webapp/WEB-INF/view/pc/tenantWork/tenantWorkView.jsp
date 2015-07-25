@@ -15,6 +15,18 @@
 </head>
 <body>
 <div class="am-g">
+
+    <div class="am-u-md-12">
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=viewTenant&id=${object.tenant.id}"/>"><span
+                        class="am-icon-plus"></span>返回大师页面</a>
+            </div>
+        </div>
+    </div>
+
     <div class="am-u-md-12">
         <h2>作品详细信息</h2>
         <table class="am-table am-table-bordered">
@@ -39,7 +51,7 @@
 
         <div class="am-u-md-6">
             <h3>封面</h3>
-            <img src="http://tenant.efeiyi.com/${object.picture_url}">
+            <img src="http://tenant.efeiyi.com/${object.picture_url}@!tenant-manage-work-view">
         </div>
 
     </div>
@@ -74,7 +86,7 @@
                     </td>
                     <td class="am-hide-sm-only">${productPicture.pictureUrl}</td>
                     <td class="am-hide-sm-only"><img
-                            src="<c:url value="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-banner"/>"
+                            src="<c:url value="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-work-view"/>"
                             alt=""/></td>
                 </tr>
             </c:forEach>

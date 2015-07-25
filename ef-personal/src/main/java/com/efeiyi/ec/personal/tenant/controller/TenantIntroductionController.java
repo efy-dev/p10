@@ -85,7 +85,7 @@ public class TenantIntroductionController {
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
-        return "/pc/tenantIntroduction/tenantIntroductionList";
+        return "/tenantIntroduction/tenantIntroductionList";
     }
 
 }

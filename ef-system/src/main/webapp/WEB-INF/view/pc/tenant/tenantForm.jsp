@@ -39,7 +39,8 @@
                 <label for="fullName" class="am-u-sm-3 am-form-label">中文姓名 / FullName</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName" value="${object.fullName}">
+                    <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"
+                           value="${object.fullName}">
                 </div>
             </div>
 
@@ -60,7 +61,7 @@
                     <div class="am-form-group am-form-icon">
                         <i class="am-icon-calendar"></i>
                         <input type="text" id="birthday" name="birthday" class="am-form-field am-input-sm"
-                               placeholder="出生日期" value="${object.birthday}" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" readonly/>
+                               placeholder="出生日期" value="${object.birthday}">
                     </div>
                 </div>
             </div>
@@ -68,21 +69,23 @@
                 <label for="provinceName" class="am-u-sm-3 am-form-label">籍贯 / ProvinceName</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName" value="${object.provinceName}">
+                    <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName"
+                           value="${object.provinceName}">
                 </div>
             </div>
             <div class="am-form-group">
                 <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地/ PresentAddress</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="presentAddress" name="presentAddress" placeholder="现居地/ PresentAddress" value="${object.presentAddress}">
+                    <input type="text" id="presentAddress" name="presentAddress" placeholder="现居地/ PresentAddress"
+                           value="${object.presentAddress}">
                 </div>
             </div>
             <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
-                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select" />
+                    <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select"/>
                 </div>
             </div>
 
@@ -93,6 +96,9 @@
                     <input type="file" id="favicon" name="favicon" placeholder="头像 / Favicon"
                            value="${object.favicon}">
                 </div>
+                <c:if test="${!empty object.favicon}">
+                    <img src="http://tenant.efeiyi.com/${object.favicon}@!tenant-manage-photo">
+                </c:if>
             </div>
 
             <div class="am-form-group">
@@ -100,12 +106,29 @@
 
                 <div class="am-u-sm-9">
                     <input type="file" id="background" name="background" placeholder="背景图片"
-                           value="${object.favicon}">
+                           value="${object.backgroundUrl}">
                 </div>
+                <c:if test="${!empty object.backgroundUrl}">
+                    <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-photo">
+                </c:if>
+            </div>
+
+
+            <div class="am-form-group">
+                <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="logo" name="logo" placeholder="Logo"
+                           value="${object.logoUrl}">
+                </div>
+                <c:if test="${!empty object.logoUrl}">
+                    <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-photo">
+                </c:if>
             </div>
 
             <div class="am-form-group">
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
+
                 <div class="am-u-sm-9">
                     <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
                         ${object.brief}

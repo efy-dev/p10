@@ -43,7 +43,7 @@ public class TenantInfoController {
         List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
 
-       return "/pc/tenantInfo/tenantInfoList";
+       return "/tenantInfo/tenantInfoList";
     }
 
     /**
@@ -56,6 +56,6 @@ public class TenantInfoController {
         /*String  tenantNewsId = request.getParameter("tenantNewsId");*/
         TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
         model.addAttribute("tenantNews",tenantNews);
-        return "/pc/tenantInfo/tenantInfoView";
+        return "/tenantInfo/tenantInfoView";
     }
 }

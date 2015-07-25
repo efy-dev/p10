@@ -38,7 +38,7 @@ public class TenantWorkShopHandler implements MultipartHandler {
 
 
         MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
-        if (!multipartFile.getOriginalFilename().equals("")) {
+        if (!multipartFile1.getOriginalFilename().equals("")) {
             String url1 = "work/" + tenantId + "/" + multipartFile1.getOriginalFilename();
             aliOssUploadManager.uploadFile(multipartFile1, "tenant", url1);
             paramMap.put("videoPath", url1);

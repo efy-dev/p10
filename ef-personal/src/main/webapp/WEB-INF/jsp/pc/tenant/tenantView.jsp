@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 </head>
@@ -18,7 +19,16 @@
             <p></p>
             <dl class="tab-dl">
                 <dt><a href="${pageContext.request.contextPath}/introduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${tenant.id}" target="_blank"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></a></dt>
-                <dd>${tenant.brief}</dd>
+                <dd>
+                    <c:choose>
+                        <c:when test="${fn:length(tenant.brief)  > 30}">
+                            ${fn:substring(tenant.brief,0 ,30 ) }......
+                        </c:when>
+                        <c:otherwise>
+                            ${tenant.brief}
+                        </c:otherwise>
+                    </c:choose>
+                </dd>
             </dl>
             <span><a href="${pageContext.request.contextPath}/introduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${tenant.id}" target="_blank">了解详细</a></span>
         </div>

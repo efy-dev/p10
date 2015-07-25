@@ -35,7 +35,7 @@ public class TenantWorkShopController {
         queryParamMap.put("tenantId",tenantId);
         TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
         model.addAttribute("productWorkShop", productWorkShop);
-        return new ModelAndView("/pc/tenantWorkShop/tenantWorkShopView");
+        return new ModelAndView("/tenantWorkShop/tenantWorkShopView");
     }
 
 

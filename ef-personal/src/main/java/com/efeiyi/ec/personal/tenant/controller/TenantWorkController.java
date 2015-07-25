@@ -51,7 +51,7 @@ public class TenantWorkController {
         List<TenantProject> tenantProjectList = baseManager.listObject(xQuery1);
         model.addAttribute("tenantProjectList", tenantProjectList);
 
-        return "/pc/tenantWork/tenantWorkList";
+        return "/tenantWork/tenantWorkList";
 
     }
     /**
@@ -63,7 +63,7 @@ public class TenantWorkController {
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         modelMap.addAttribute("product", product);
-        return new ModelAndView("/pc/tenantWork/tenantWorkView",modelMap);
+        return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
 }

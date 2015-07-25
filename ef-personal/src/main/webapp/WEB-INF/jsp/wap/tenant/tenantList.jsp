@@ -1,18 +1,29 @@
-<!DocType html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
 <head>
 </head>
-<body>
-<div id="page-header">
-    <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="#"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
-        <p>中国非遗电商平台-传承人官网</p>
+<body style="background-color:#F1F5F8;">
+<header data-am-widget="footer" class="am-footer am-footer-default gather-am-1" data-am-footer="{  }"  style="background-color:#fff;">
+    <div class="am-footer-switch">
+        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}"><a href="#"><img src="<c:url value="/scripts/assets/wap/images/logo.gif"/>" width="61" height="23"></a></span>
     </div>
-    <div class="page-header-right"></div>
+    <div class="am-footer-miscs ">
+        <p>中国非遗电商平台·传承人官网</p>
+    </div>
+</header>
+<div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd am-modal-footer-hd">
+            <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin "
+               data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <span class="am-switch-mode-owner"></span>
+            <span class="am-switch-mode-slogan">中国非遗电商平台·传承人官网</span>
+        </div>
+    </div>
 </div>
-<div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
+<div data-am-widget="slider" class="am-slider am-slider-a1"  data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
         <li>
             <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
@@ -28,144 +39,55 @@
         </li>
     </ul>
 </div>
-<div id="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
-    <div class="page-section-figure">
-        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
-            <c:if test="${recommended.projectType == 1}">
-                <div class="img-mutual am-u-sm-4" style="float:left;">
-                    <div class="box">
-                        <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                        <div class="BG"></div>
-                        <p class="txt">
-                        <div class="img-mutual-text1">
-                            <h1>${recommended.tenant.fullName}</h1>
-                            <p>${recommended.tenant.brief}</p>
-                        </div>
-                        </p>
+<div data-am-widget="tabs" class="am-tabs am-tabs-default">
+    <ul class="am-tabs-nav am-cf am-ing-bg-color">
+        <li class="am-active">
+            <a href="[data-tab-panel-0]">传统技艺</a>
+        </li>
+        <li class="">
+            <a href="[data-tab-panel-1]">传统美术</a>
+        </li>
+    </ul>
+    <div class="am-tabs-bd">
+        <div data-tab-panel-0 class="am-tab-panel am-active am-ing-bg-color">
+            <!--neirong1-->
+            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
+                <!--开始-->
+                <!--请复制代码-->
+                <li style="width:50%;" class="am-u-end am-u-sm-6">
+                    <div class="am-gallery-item">
+                        <a href="#" class="">
+                            <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"
+                                    />
+                            <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
+                                <p>王金龙</p>
+                                <p>爱的传承人</p>
+                            </h3>
+                        </a>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
-                </div>
-            </c:if>
-        </c:forEach>
-    </div>
-</div>
-<div class="page-border"></div>
-<div  class="page-section">
-    <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
-    <div class="page-section-figure">
-        <c:forEach items="${recommendedList}" var="recommended" varStatus="rec">
-            <c:if test="${recommended.projectType == 2}">
-                <div class="img-mutual am-u-sm-4" style="float:left;">
-                    <div class="box">
-                        <img src="<c:url value="/scripts/assets/images/images/tx1_03.jpg"/>" alt="">
-                        <div class="BG"></div>
-                        <p class="txt">
-                        <div class="img-mutual-text1">
-                            <h1>${recommended.tenant.fullName}</h1>
-                            <p>${recommended.tenant.brief}</p>
-                        </div>
-                        </p>
+                </li>
+            </ul>
+        </div>
+        <div data-tab-panel-1 class="am-tab-panel am-ing-bg-color ">
+            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
+                <!--开始-->
+                <!--请复制代码-->
+                <li style="width:50%;" class="am-u-end am-u-sm-6">
+                    <div class="am-gallery-item">
+                        <a href="#" class="">
+                            <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
+                            <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
+                                <p>王金龙</p>
+                                <p>爱的传承人</p>
+                            </h3>
+                        </a>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${recommended.tenant.id}"/>">深入了解</a></span>
-                </div>
-            </c:if>
-        </c:forEach>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="page-border-solid"></div>
-<div class="page-footer">
-    <dl class="page-footer-dl">
-        <dt>正品保障</dt>
-        <dd>
-            <p><a href="#">诚品宝</a></p>
-            <p><a href="#">防伪溯源</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl">
-        <dt>新手指南</dt>
-        <dd>
-            <p><a href="#">导购演示</a></p>
-            <p><a href="#">常见问题</a></p>
-            <p><a href="#">免费注册</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl">
-        <dt>支付方式</dt>
-        <dd>
-            <p><a href="#">支付宝</a></p>
-            <p><a href="#">微信</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl">
-        <dt>物流配送</dt>
-        <dd>
-            <p><a href="#">验货签收</a></p>
-            <p><a href="#">物流查询</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl">
-        <dt>售货服务</dt>
-        <dd>
-            <p><a href="#">退换货政策</a></p>
-            <p><a href="#">退换货流程</a></p>
-            <p><a href="#">微信</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl">
-        <dt>正品保障</dt>
-        <dd>
-            <p><a href="#">商家入驻指南</a></p>
-            <p><a href="#">商家帮助</a></p>
-        </dd>
-    </dl>
-    <dl class="page-footer-dl" id="page-footer-dl">
-        <dt id="page-wx-tp"></dt>
-        <dd>
-
-        </dd>
-    </dl>
-</div>
-<div class="page-bg-text">
-    <p>
-        <a class="am-btn am-btn-link page-a-text">关于我们</a>
-        <a class="am-btn am-btn-link page-a-text">商家入驻</a>
-        <a class="am-btn am-btn-link page-a-text">诚聘英才</a>
-        <a class="am-btn am-btn-link page-a-text">帮助中心</a>
-        <a class="am-btn am-btn-link page-a-text">法律声明</a>
-        <a class="am-btn am-btn-link page-a-text">国家非遗博览园</a>
-        <a class="am-btn am-btn-link page-a-text">国际非遗博览会</a>
-        <a class="am-btn am-btn-link page-a-text">国际非遗峰会</a>
-    </p>
-</div>
-<h4 id="page-footer-head">Copyright(c) 2015-2020 efeiyi.com All Rights Reserved</h4>
-<h4 id="page-footer-head-1">京ICP备15032511号-1</h4>
-<!--分析-->
-<div class="floating_ck">
-    <dl>
-        <dt></dt>
-        <dd class="return">
-            <span onClick="gotoTop();return false;"></span>
-        </dd>
-        <dd class="qrcord">
-            <span ></span>
-            <div class="floating_left floating_ewm floating_left-1">
-                <i><img src="<c:url value="/scripts/assets/images/images/img6_03.jpg" />"></i>
-            </div>
-        </dd>
-        <dd class="quote">
-            <span>分享</span>
-            <div class="floating_left">
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wx.gif" />"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/wqq.gif" />"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/kj.gif" />"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/xl.gif" />"></a>
-                <a href="#" class="float-a"><img src="<c:url value="/scripts/assets/images/i/qq.gif" />"></a>
-            </div>
-        </dd>
-
-
-    </dl>
 </div>
 </body>
 </html>

@@ -21,14 +21,14 @@
     </bean>
 
 
-<!--    <mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.ming800.core.filter.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.personal.tenant.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 
 
     <bean id="multipartResolver"
