@@ -64,26 +64,15 @@
             <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-banner">
         </div>
     </div>
-    
-
-
-    <div class="am-u-md-6">
-
-        <label class="am-u-sm-12 am-form-label">Logo</label>
-
-        <div class="am-u-sm-12">
-            <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-banner">
-        </div>
-    </div>
-
 </div>
-<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-    <div class="am-form-group">
-        <label   class="am-u-sm-3 am-form-label">短简介 / Brief</label>
-        <div >
-            ${object.brief}
-        </div>
-    </div>
+<label class="am-u-sm-12 am-form-label">Logo</label>
+
+<div class="am-u-sm-12">
+    <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-banner">
+</div>
+<label   class="am-u-sm-3 am-form-label">短简介 / Brief</label>
+<div >
+    ${object.brief}
 </div>
 
 <div class="am-g">
