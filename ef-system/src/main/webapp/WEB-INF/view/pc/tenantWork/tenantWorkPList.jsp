@@ -75,7 +75,6 @@
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formTenantWork&tenantId=${tenantWork.tenant.id}&id=${tenantWork.id}"/>"><span
                                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formTenantWork&id=${tenantWork.id}&tenantId=${tenantWork.tenant.id}&projectId=${tenantWork.project.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
