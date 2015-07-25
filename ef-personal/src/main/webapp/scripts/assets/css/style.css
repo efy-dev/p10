@@ -56,7 +56,7 @@ a:hover{color:#0b3775;}
 /*尾*/
 #footer{width:960px;height:45px;margin:0 auto;}
 .guild{width:635px;height:20px;padding-left:290px;}
-.guild li{width:80px;padding-left:45px;float:left;height:30px;}
+.guild li{width:84px;padding-left:45px;float:left;height:30px;}
 .efeiyi-url{width:212px;height:10px;margin-left:434px;color:#999;}
 .efeiyi-url a:link,.efeiyi-url a:visited{color:#999;}
 #footer ul li a{outline:none}

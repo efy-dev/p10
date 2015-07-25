@@ -22,10 +22,10 @@
                 <dd>
                     <c:choose>
                         <c:when test="${fn:length(tenant.brief)  > 30}">
-                            ${fn:substring(tenant.brief,0 ,30 ) }......
+                        <a href="${pageContext.request.contextPath}/introduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${tenant.id}" target="_blank">${fn:substring(tenant.brief,0 ,30 ) }......</a>
                         </c:when>
                         <c:otherwise>
-                            ${tenant.brief}
+                        <a href="${pageContext.request.contextPath}/introduction/listTenantIntroduction.do?conditions=introduction.tenant.id:${tenant.id}" target="_blank">${tenant.brief}</a>
                         </c:otherwise>
                     </c:choose>
                 </dd>

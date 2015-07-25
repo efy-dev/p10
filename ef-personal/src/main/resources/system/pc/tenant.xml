@@ -14,7 +14,7 @@
                     <does>
                         <do name="listTenantProject" access="" label="传承人列表">
                             <query name="default" label="默认" type="auto" orderBy="id:desc">
-                                <condition name="" defaultValue="" operation="eq"/>
+                                <condition name="tenant.id" defaultValue="1" operation="eq"/>
                             </query>
                         </do>
                     </does>
@@ -40,7 +40,7 @@
                 <do name="plistTenant" access="" label="传承人分页列表"
                     result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -49,7 +49,7 @@
             <does>
                 <do name="plistTenantInfo" access="" label="传承人资讯列表">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="tenant.id" defaultValue="" operation="eq"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -58,7 +58,7 @@
             <does>
                 <do name="listTenantIntroduction" access="" label="简介列表">
                     <query name="default" label="默认" type="auto">
-                        <condition name="" defaultValue="" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -67,7 +67,8 @@
             <does>
                 <do name="listAttachment" access="" label="附件列表">
                     <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="introduction.tenant.id" defaultValue=""  operation="eq"/>
+                        <condition name="introduction.tenant.id" defaultValue="1" operation="eq"/>
+                        <!--<condition name="tenant.id" defaultValue="1" operation="eq"/>-->
                     </query>
                 </do>
             </does>
@@ -76,7 +77,7 @@
         <does>
             <do name="plistTenantWork" access="" label="传承人作品">
                 <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                    <condition name="tenant.id" defaultValue="" operation="eq"/>
+                    <condition name="tenant.id" defaultValue="1" operation="eq"/>
                 </query>
             </do>
         </does>
@@ -94,7 +95,16 @@
             <does>
                 <do name="listProject" access="" label="类别">
                     <query name="default" label="默认" type="auto">
-                        <condition name="tenant.id" defaultValue="" operation="eq"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="tenantWorkShop" label="工作坊"  model="com.efeiyi.ec.tenant.model.TenantWorkShop">
+            <does>
+                <do name="listTenantWorkShop" access="" label="工作坊">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>

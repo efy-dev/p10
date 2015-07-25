@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/introduction")
-public class TenantIntroductionController {
+public class TenantIntroductionController extends BaseTenantController {
 
     @Autowired
     private BaseManager baseManager;
@@ -31,13 +31,14 @@ public class TenantIntroductionController {
      * @param model
      * @return
      */
-    @RequestMapping("/{tenantId}")
-    public String listTenantIntroduction(@PathVariable String tenantId, Model model, HttpServletRequest request ) throws Exception{
+    @RequestMapping("/intro")
+    public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
+        Tenant tenant = getTenantfromDomain(request);
         //拼写查询参数(conditions)
-        String conditions = "introduction.tenant.id:"+tenantId;
+        String conditions = "introduction.tenant.id:"+tenant.getId();
 
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         XQuery xQuery = new XQuery("listTenantIntroduction_default",conditions,null,null);
+        xQuery.put("tenant_id",tenant.getId());
         xQuery.addRequestParamToModel(model,request);
         XQuery xQuery1 = new XQuery("listAttachment_default",conditions,null,null);
         xQuery1.addRequestParamToModel(model,request);

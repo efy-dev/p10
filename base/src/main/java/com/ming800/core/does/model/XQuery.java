@@ -168,22 +168,22 @@ public class XQuery {
     }
 
     //更新查询参数
-    public void updateQueryParam(String key, Object value) {
-        if (queryParamMap.get(key) != null) {
+    public void put(String key, Object value) {
+//        if (queryParamMap.get(key) != null) {
             queryParamMap.put(key, value);
-        } else {
-            throw new RuntimeException("参数不存在!");
-        }
+//        } else {
+//            throw new RuntimeException("参数不存在!");
+//        }
     }
 
     //添加查询参数
-    public void addQueryParam(String key, Object value) {
-        if (queryParamMap.get(key) == null) {
-            queryParamMap.put(key, value);
-        } else {
-            throw new RuntimeException("参数已经存在!");
-        }
-    }
+//    public void addQueryParam(String key, Object value) {
+//        if (queryParamMap.get(key) == null) {
+//            queryParamMap.put(key, value);
+//        } else {
+//            throw new RuntimeException("参数已经存在!");
+//        }
+//    }
 
     //分页专用，将当前的查询条件返回给客户端
     public void addRequestParamToModel(Model model, HttpServletRequest request) {

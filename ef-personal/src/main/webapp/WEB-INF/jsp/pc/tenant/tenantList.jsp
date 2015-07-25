@@ -44,7 +44,7 @@
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/ten"/>">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>
@@ -67,7 +67,7 @@
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="<c:url value="/tenant/ten"/>">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>

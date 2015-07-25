@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/info")
-public class TenantInfoController {
+public class TenantInfoController extends BaseTenantController {
 
     @Autowired
     private BaseManager baseManager;
@@ -30,16 +30,16 @@ public class TenantInfoController {
      */
     @RequestMapping("/listTenantInfo.do")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
-        String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(10,conditions.length());
+        Tenant tenant = super.getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
+        xQuery.put("tenant.id", tenant.getId());
         xQuery.addRequestParamToModel(model,request);
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         model.addAttribute("tenant", tenant);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
         XQuery xQuery1 = new XQuery("listWordValue_default",request);
+        xQuery1.put("tenant_id", tenant.getId());
         List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
 
@@ -52,8 +52,7 @@ public class TenantInfoController {
      * @return
      */
     @RequestMapping("/{tenantInfoId}")
-    public  String getTenantInfo(@PathVariable String tenantInfoId,Model model){
-        /*String  tenantNewsId = request.getParameter("tenantNewsId");*/
+    public  String getTenantInfo(@PathVariable String tenantInfoId, HttpServletRequest request , Model model) throws Exception {
         TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
         model.addAttribute("tenantNews",tenantNews);
         return "/tenantInfo/tenantInfoView";

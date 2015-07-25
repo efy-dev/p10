@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/tenant")
-public class TenantController extends BaseController {
+public class TenantController extends BaseTenantController {
 
     @Autowired
     BaseManager baseManager;
@@ -32,12 +32,12 @@ public class TenantController extends BaseController {
      *
      * @return
      */
-    @RequestMapping({"/{tenantId}"})
-    public ModelAndView getTenant(HttpServletRequest request ,  @PathVariable String tenantId , Model model)throws Exception{
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+    @RequestMapping({"/ten"})
+    public ModelAndView getTenant(HttpServletRequest request  , Model model)throws Exception{
+        Tenant tenant = getTenantfromDomain(request);
         String queryHql = "from TenantWork t where t.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("tenantId",tenantId);
+        queryParamMap.put("tenantId",tenant.getId());
         List list = baseManager.listObject(queryHql,queryParamMap);
         model.addAttribute("tenantWorkList",list);
         model.addAttribute("tenant", tenant);
@@ -58,7 +58,9 @@ public class TenantController extends BaseController {
     }*/
     @RequestMapping("/tenantList")
     public String listTenant(HttpServletRequest request,Model model)throws Exception{
+        Tenant tenant = getTenantfromDomain(request);
         XQuery xQuery = new XQuery("listTenantProject_default",request);
+        xQuery.put("tenant_id",tenant.getId());
         List list = baseManager.listObject(xQuery);
         model.addAttribute("list",list);
         return "/tenant/tenantList";

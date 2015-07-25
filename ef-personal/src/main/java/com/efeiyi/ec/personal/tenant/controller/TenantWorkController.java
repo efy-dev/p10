@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/work")
-public class TenantWorkController {
+public class TenantWorkController extends BaseTenantController {
 
     @Autowired
     private BaseManager baseManager;
@@ -37,17 +37,19 @@ public class TenantWorkController {
      */
     @RequestMapping("/listTenantWork.do")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-        String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(10,conditions.length());
+        /*String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(10,conditions.length());*/
+        Tenant tenant = getTenantfromDomain(request);
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        XQuery xQuery = new XQuery("plistTenantWork_default",conditions,request.getParameter("sort"),request);
+        XQuery xQuery = new XQuery("plistTenantWork_default",tenant.getId(),request.getParameter("sort"),request);
+        xQuery.put("tenant_id",tenant.getId());
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
 
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
         XQuery xQuery1 = new XQuery("listProject_default",request);
+        xQuery1.put("tenant_id",tenant.getId());
         List<TenantProject> tenantProjectList = baseManager.listObject(xQuery1);
         model.addAttribute("tenantProjectList", tenantProjectList);
 
