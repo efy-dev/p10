@@ -56,6 +56,18 @@
 <%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
 
 <div class="am-g">
+
+    <div class="am-u-md-12">
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=viewTenant&id=${object.tenant.id}"/>"><span
+                        class="am-icon-plus"></span>返回大师页面</a>
+            </div>
+        </div>
+    </div>
+
     <div class="am-u-md-12">
         <h2>详细信息</h2>
         <table class="am-table am-table-bordered">

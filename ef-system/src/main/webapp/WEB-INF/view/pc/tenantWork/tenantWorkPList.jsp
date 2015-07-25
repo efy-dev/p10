@@ -50,6 +50,9 @@
                 <a type="button" class="am-btn am-btn-default"
                    href="<c:url value="/basic/xm.do?qm=formTenantWork&tenantId=${tenantId}&projectId=${projectId}"/>"><span
                         class="am-icon-plus"></span>新建作品</a>
+                <a type="button" class="am-btn am-btn-default"
+                   href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenantId}"/>"><span
+                        class="am-icon-plus"></span>返回大师页面</a>
             </div>
         </div>
     </div>

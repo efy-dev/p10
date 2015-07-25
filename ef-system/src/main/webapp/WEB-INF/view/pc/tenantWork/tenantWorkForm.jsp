@@ -35,7 +35,7 @@
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="tenant.id" value="${tenantId}">
             <input type="hidden" name="project.id" value="${projectId}">
-            <input type="hidden" name="resultPage" value="${projectId}">
+            <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&id=${tenantId}">
 
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">名称</label>
