@@ -38,6 +38,11 @@
       <h3>工作坊封面</h3>
       <img src="http://tenant.efeiyi.com/${object.picture_url}">
     </div>
+    <div class="am-u-md-6">
+      <h3>视频</h3>
+      <embed src="http://tenant.efeiyi.com/${object.videoPath}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="250" height="100"></embed>
+    </div>
+
 
   </div>
 </div>

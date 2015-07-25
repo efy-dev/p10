@@ -37,7 +37,7 @@
                     <label for="name" class="am-u-sm-3 am-form-label">名称</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="name" name="name" placeholder="名称" value="${object.name}">
+                        <input type="text" id="name" name="name" placeholder="名称" value="${object.name}" required>
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <label for="shopIntroduction" class="am-u-sm-3 am-form-label">介绍</label>
 
                     <div class="am-u-sm-9">
-                        <textarea id="shopIntroduction" name="shopIntroduction" class="ckeditor" placeholder="介绍"
+                        <textarea id="shopIntroduction" name="shopIntroduction" class="ckeditor" placeholder="介绍" required
                                   value="${object.shopIntroduction}">${object.shopIntroduction}</textarea>
                     </div>
                     <br>
@@ -77,7 +77,7 @@
 
                     <div class="am-u-sm-9">
                         <input type="file" id="videoPath" name="videoPath" placeholder="video">
-                        <%--<small>选择你要保存的轮播图</small>--%>
+                        <small>选择你要保存的视频</small>
                     </div>
                 </div>
 
