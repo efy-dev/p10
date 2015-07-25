@@ -20,7 +20,7 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
             if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
                 mav.setViewName("/pc" + mav.getViewName());
             } else {
-                mav.setViewName("/wep" + mav.getViewName());
+                mav.setViewName("/wap" + mav.getViewName());
             }
         }
         response.setHeader("X-Frame-Options","");
