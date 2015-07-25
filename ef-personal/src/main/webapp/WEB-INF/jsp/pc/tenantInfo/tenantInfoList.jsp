@@ -22,8 +22,9 @@
             <a href="javascript:void(0)"><button class="button">${tag.value}</button></a>
         </c:forEach>
     </div>
+    <c:if test="${tenantInfoList != null && tenantInfoList.size() > 0}">
     <div class="center-right">
-        <C:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
+        <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
             <div class="alllist">
                 <div class="alllist-content">
                     <div class="alllist-time">
@@ -52,10 +53,11 @@
                 </div>
                 <div class="alllist-border"></div>
             </div>
-        </C:forEach>
+        </c:forEach>
     </div>
+    </c:if>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/listTenantInfo.do">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/tenantWork")
+@RequestMapping("/work")
 public class TenantWorkController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class TenantWorkController {
         String tenantId = conditions.substring(10,conditions.length());
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        XQuery xQuery = new XQuery("plistTenantWork_default",request);
+        XQuery xQuery = new XQuery("plistTenantWork_default",conditions,request.getParameter("sort"),request);
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
 

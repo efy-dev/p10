@@ -8,6 +8,7 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by AC丶man on 2015/7/17.
  */
 @Controller
-@RequestMapping("/tenantIntroduction")
+@RequestMapping("/introduction")
 public class TenantIntroductionController {
 
     @Autowired
@@ -30,37 +31,56 @@ public class TenantIntroductionController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantIntroduction.do")
-    public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
-        String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(23,conditions.length());
+    @RequestMapping("/{tenantId}")
+    public String listTenantIntroduction(@PathVariable String tenantId, Model model, HttpServletRequest request ) throws Exception{
+        //拼写查询参数(conditions)
+        String conditions = "introduction.tenant.id:"+tenantId;
+
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        XQuery xQuery = new XQuery("listTenantIntroduction_default",request);
+        XQuery xQuery = new XQuery("listTenantIntroduction_default",conditions,null,null);
         xQuery.addRequestParamToModel(model,request);
-        XQuery xQuery1 = new XQuery("listAttachment_default",request);
+        XQuery xQuery1 = new XQuery("listAttachment_default",conditions,null,null);
         xQuery1.addRequestParamToModel(model,request);
         List<TenantIntroduction> list = baseManager.listObject(xQuery);
         List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
 
 
         for (TenantIntroduction tenantIntroduction:list){
-            if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
-                List list2 = new ArrayList();
+            if ("ji-ben-xin-xi".equals(tenantIntroduction.getTitle())){
+                List jbxxList = new ArrayList();
                 for (TenantAttachment tenantAttachment:list1){
                     if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list2.add(tenantAttachment);
+                        jbxxList.add(tenantAttachment);
                     }
                 }
-                model.addAttribute("list2", list2);
+                model.addAttribute("jbxxList", jbxxList);
+            }
+            if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
+                List dsryList = new ArrayList();
+                for (TenantAttachment tenantAttachment:list1){
+                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
+                        dsryList.add(tenantAttachment);
+                    }
+                }
+                model.addAttribute("dsryList", dsryList);
             }
             if ("chu-ban-zhu-zuo".equals(tenantIntroduction.getTitle())){
-                List list3 = new ArrayList();
+                List cbzzList = new ArrayList();
                 for (TenantAttachment tenantAttachment:list1){
                     if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list3.add(tenantAttachment);
+                        cbzzList.add(tenantAttachment);
                     }
                 }
-                model.addAttribute("list3", list3);
+                model.addAttribute("cbzzList", cbzzList);
+            }
+            if ("yi-shu-nian-biao".equals(tenantIntroduction.getTitle())){
+                List ysnbList = new ArrayList();
+                for (TenantAttachment tenantAttachment:list1){
+                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
+                        ysnbList.add(tenantAttachment);
+                    }
+                }
+                model.addAttribute("ysnbList", ysnbList);
             }
         }
         model.addAttribute("tenant",tenant);

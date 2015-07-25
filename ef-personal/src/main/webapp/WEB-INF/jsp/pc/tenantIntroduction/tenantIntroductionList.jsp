@@ -39,27 +39,27 @@
                     <td height="3" colspan="4" style="height:3px"></td>
                 </tr>
                 <tr class="tr2">
-                    <td colspan="4">
-                        <input type="text" class="column-tex1" maxlength="6">
+                    <td colspan="4" align="center">
+                        ${tenant.fullName}
                     </td>
                 </tr>
                 <tr class="tr3">
                     <td height="47" width="80"  class="td-1 td-s">性别</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"><ming800:status name='sex' dataType='Tenant.sex' checkedValue='${tenant.sex}' type='normal'/></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.sex' checkedValue='${tenant.sex}' type='normal'/></td>
                     <td height="47" width="80" class="td-1 td-s">出生年月</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"><fmt:formatDate value="${tenant.birthday}" pattern="yyyy/MM" /></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><fmt:formatDate value="${tenant.birthday}" pattern="yyyy/MM" /></td>
                 </tr>
                 <tr class="tr4">
                     <td height="47" width="80"  class="td-1 td-s">籍贯</td>
-                    <td height="47" width="173" style="border-right:1px solid #000">${tenant.originProvince.name}</td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.originProvince.name}</td>
                     <td height="47" width="80" class="td-1 td-s">现居地</td>
-                    <td height="47" width="173" style="border-right:1px solid #000">${tenant.presentAddress}</td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.presentAddress}</td>
                 </tr>
                 <tr class="tr5">
                     <td height="47" width="80"  class="td-1 td-s">代表作品</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"></td>
                     <td height="47" width="80" class="td-1 td-s">级别</td>
-                    <td height="47" width="173" style="border-right:1px solid #000"><ming800:status name='sex' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/></td>
                 </tr>
                 <tr class="tr6">
                     <td colspan="4"></td>
@@ -67,56 +67,64 @@
                 </tbody>
             </table>
             <div class="column-text-p">
-                ${tenant.content}
+                <c:forEach items="${jbxxList}" var="jbxx">
+
+                </c:forEach>
             </div>
         </div>
-        <div id="da-shi-rong-yu">
-            <h1>大师荣誉</h1>
-            <div class="img-pictures-show">
-                <c:forEach items="${list2}" varStatus="ln" var="pic">
-                    <c:if test="${list2.size()-1 != ln.index && ln.index%2 == 0}">
-                        <div class="one-img-pictures">
+        <c:if test="${dsryList != null && dsryList.size() > 0}">
+            <div id="da-shi-rong-yu">
+                <h1>大师荣誉</h1>
+                <div class="img-pictures-show">
+                    <c:forEach items="${dsryList}" varStatus="ln" var="pic">
+                        <c:if test="${dsryList.size()-1 != ln.index && ln.index%2 == 0}">
+                            <div class="one-img-pictures">
                             <dl class="one-img-dl-l">
                                 <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
                                 <dd>${pic.title}1988中国工艺美术大师</dd>
                             </dl>
-                    </c:if>
-                    <c:if test="${ln.index%2 == 1}">
+                        </c:if>
+                        <c:if test="${ln.index%2 == 1}">
                             <dl class="one-img-dl-r">
                                 <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
                                 <dd>${pic.title}1988中国工艺美术大师</dd>
                             </dl>
-                        </div>
-                    </c:if>
-                    <c:if test="${list2.size()-1 == ln.index && ln.index%2 == 0}">
-                        <div class="one-img-pictures">
-                            <dl class="one-img-dl-l">
-                                <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
-                                <dd>${pic.title}1988中国工艺美术大师</dd>
-                            </dl>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                            </div>
+                        </c:if>
+                        <c:if test="${dsryList.size()-1 == ln.index && ln.index%2 == 0}">
+                            <div class="one-img-pictures">
+                                <dl class="one-img-dl-l">
+                                    <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
+                                    <dd>${pic.title}1988中国工艺美术大师</dd>
+                                </dl>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
             </div>
-        </div>
-        <div id="chu-ban-zhu-zuo">
-            <h1>出版著作</h1>
-            <ul>
-                <c:forEach items="${list3}" var="list3">
-                    <li><img src="<c:url value="/scripts/assets/images/img7.jpg"/>"></li>
-                </c:forEach>
-            </ul>
-        </div>
-        <div id="yi-shu-nian-biao">
-            <h1>艺术年表</h1>
-            <div class="text-line">
-                <c:forEach items="${list}" var="introduction">
-                    <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
-                        ${introduction.content}
-                    </c:if>
-                </c:forEach>
+        </c:if>
+        <c:if test="${cbzzList != null && cbzzList.size() > 0}">
+            <div id="chu-ban-zhu-zuo">
+                <h1>出版著作</h1>
+                <ul>
+                    <c:forEach items="${cbzzList}" var="list3">
+                        <li><img src="<c:url value="/scripts/assets/images/img7.jpg"/>"></li>
+                    </c:forEach>
+                </ul>
             </div>
-        </div>
+        </c:if>
+        <c:if test="${ysnbList != null && ysnbList.size() > 0}">
+            <div id="yi-shu-nian-biao">
+                <h1>艺术年表</h1>
+                <div class="text-line">
+                    <c:forEach items="${ysnbList}" var="introduction">
+                        <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
+                            ${introduction.content}
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
     </div>
 </div>
 <!--其他内容-->

@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class XQuery {
 
+
     private String hql;  //全部的查询语句
     private String headHql; //查询语句的头部 例如：select s from
     private String sortHql; //查询语句的 排序部分 例如  order by s.createDatetime;
@@ -50,6 +51,31 @@ public class XQuery {
         //判断是否有排序参数
         if (request.getParameter("sort") != null) {
             this.setSortHql(fetchOrderStr(tempDoQuery, request.getParameter("sort")));
+        } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
+            this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
+        }
+
+        //补全查询语句
+        if (sortHql != null) {
+            this.setHql(this.getHql() + sortHql);
+        }
+    }
+
+    //只能用于List操作
+    public XQuery(String doQueryName, String conditions , String sort, HttpServletRequest request) throws Exception {
+        Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        //判断是否是分页查询
+
+        if (request!=null) {
+            this.setPageEntity(XDoUtil.getPageEntity(request));
+        }
+
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(doQueryName.split("_")[1]);
+        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery,conditions, this);
+
+        //判断是否有排序参数
+        if (sort != null && !"".equals(sort)) {
+            this.setSortHql(fetchOrderStr(tempDoQuery, sort));
         } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
             this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
         }

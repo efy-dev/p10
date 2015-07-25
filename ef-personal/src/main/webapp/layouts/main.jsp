@@ -18,7 +18,7 @@
 <body>
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
-    <div class="printing">${entity.title}<span>  [<a href="#">木板水印</a>]</span></div>
+    <div class="printing">${tenant.title}<span>  [<a href="#">木板水印</a>]</span></div>
     <ul class="register">
         <li class="register-page"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz1.gif"/>"></a></li>
        <%-- <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>
@@ -28,11 +28,11 @@
 <div id="nav">
     <h1><a href="#"><img src="http://tenant.efeiyi.com/photo/2015-07-20%2014%3A41%3A29.jpg@!tenant-manage-banner"></a></h1>
     <ul class="nav-centent">
-        <li><a href="${pageContext.request.contextPath}/tenant/1">首页</a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantIntroduction/listTenantIntroduction.do?conditions=introduction.tenant.id:1">简介</a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWork/listTenantWork.do?conditions=tenant.id:1">作品</a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:1">资讯</a></li>
-        <li><a href="${pageContext.request.contextPath}/tenantWorkShop/1">工作坊</a></li>
+        <li><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a></li>
+        <li><a href="${pageContext.request.contextPath}/introduction/${tenant.id}">简介</a></li>
+        <li><a href="${pageContext.request.contextPath}/work/listTenantWork.do?conditions=tenant.id:${tenant.id}">作品</a></li>
+        <li><a href="${pageContext.request.contextPath}/info/listTenantInfo.do?conditions=tenant.id:${tenant.id}">资讯</a></li>
+        <li><a href="${pageContext.request.contextPath}/workShop/${tenant.id}">工作坊</a></li>
     </ul>
 </div>
 <sitemesh:write property='body'/>
@@ -46,6 +46,7 @@
         <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
     </ul>
     <div class="efeiyi-url">©2015 efeiyi.com</div>
+
 </div>
 <!--分析-->
 <div class="floating_ck">

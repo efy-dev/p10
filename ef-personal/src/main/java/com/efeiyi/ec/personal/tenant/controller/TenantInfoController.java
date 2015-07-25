@@ -16,7 +16,7 @@ import java.util.List;
  * Created by AC丶man on 2015/7/17.
  */
 @Controller
-@RequestMapping("/tenantInfo")
+@RequestMapping("/info")
 public class TenantInfoController {
 
     @Autowired

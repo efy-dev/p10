@@ -40,7 +40,7 @@ public class TenantController extends BaseController {
         queryParamMap.put("tenantId",tenantId);
         List list = baseManager.listObject(queryHql,queryParamMap);
         model.addAttribute("tenantWorkList",list);
-        model.addAttribute("entity", tenant);
+        model.addAttribute("tenant", tenant);
         return new ModelAndView("/pc/tenant/tenantView");
     }
 

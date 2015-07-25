@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
  */
 
 @Controller
-@RequestMapping("/tenantWorkShop")
+@RequestMapping("/workShop")
 public class TenantWorkShopController {
 
     @Autowired

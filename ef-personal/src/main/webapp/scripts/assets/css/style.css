@@ -26,28 +26,28 @@ a:hover{color:#0b3775;}
 .register-right a{width:25px;height:11px;pdding-left:10px;outline:none;}
 /*导航样式*/
 #nav{width:960px;height:150px;margin:0 auto 58px;}
-#nav h1{width:140px;height:140px;margin-left:39px;float:left;}
-#nav h1 img{width:140px;height:140px;}
+#nav h1{width:105px;height:105px;margin-left:39px;float:left;margin-top:28px;}
+#nav h1 img{width:105px;height:105px;}
 .nav-centent{width:500px;height:14px;float:left;padding:135px 0 0 63px;}
 .nav-centent li{float:left;padding-left:51px;}
 .nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;outline:none;}
 .nav-centent li a:hover{color:#ff2120;outline:none;}
-#banner1{position:relative;width:100%;margin:0 auto;}
+#banner1{position:relative;width:100%;margin:0 auto;min-width:1000px;}
 /*banner*/
 #banner{width:100%;height:351px;margin-bottom:37px; position:relative;}
 /*tab*/
-#tab{width:228px;height:343px;background:#fff;position:absolute;left:40px;z-index:9999}
+#tab{width:215px;height:262px;background:#fff;position:absolute;left:32px;z-index:9999}
 #tab h1{font-size:18px; font-weight:normal;padding:12px 0 0 17px;margin-bottom:9px;}
-#tab p{font-size:12px;color:#333;display:block;padding-left:17px;height:22px;}
-.tab-dl{width:228px;height:224px;padding-left:17px;}
+#tab p{font-size:12px;color:#333;display:block;padding-left:17px;height:25px;}
+.tab-dl{width:228px;height:208px;padding-left:17px;}
 .tab-dl dt{width:184px;height:126px;}
 .tab-dl dd{width:178px;height:119px;font-size:12px;color:#999;}
 #tab span{background:url(../images/logo3.gif) no-repeat 139px 7px;;width:201px;height:18px;padding-left:149px; display:block;font-size:12px;}
 /*内容*/
 #center{width:960px;height:301px;margin:0 auto;}
-.center-1{width:225px;height:260px;margin-left:80px;float:left;}
+.center-1{width:225px;height:260px;margin-left:54px;float:left;}
 .center-2{width:225px;height:260px;margin-left:90px;float:left;}
-.center-3{width:225px;height:260px;margin-left:90px;float:left;}
+.center-3{width:225px;height:339px;margin-left:90px;float:left;}
 .center-1-dt{width:225px;height:154px;}
 .center-1-dd{width:225px;height:105px;padding:15px 0 0 12px;}
 .center-1-dd span{padding-left:12px;}
@@ -56,8 +56,8 @@ a:hover{color:#0b3775;}
 /*尾*/
 #footer{width:960px;height:45px;margin:0 auto;}
 .guild{width:635px;height:20px;padding-left:290px;}
-.guild li{width:85px;padding-left:45px;float:left;height:30px;}
-.efeiyi-url{width:212px;height:10px;margin-left:437px;color:#999;}
+.guild li{width:80px;padding-left:45px;float:left;height:30px;}
+.efeiyi-url{width:212px;height:10px;margin-left:434px;color:#999;}
 .efeiyi-url a:link,.efeiyi-url a:visited{color:#999;}
 #footer ul li a{outline:none}
 /*分享*/
@@ -99,7 +99,7 @@ a{ text-decoration:none;}
 .border-nav{width:100%;height:1px;background:url(../images/logo9.jpg) repeat-x;}
 /*简介内容*/
 #page-column{width:960px;margin:0 auto;padding-left:35px;}
-.column-left{width:250px;height:2300px;float:left; margin-top:22px;}
+.column-left{width:250px; overflow: hidden; float:left; margin-top:22px;}
 .column-right{width:503px;float:left;}
 .column-right h1{font-size:14px;line-height:69px;height:69px; font-family:"楷体"; font-weight: bold;; color:#dcbb69;}
 .page-img{padding:25px;height:200px;width:274px;}
