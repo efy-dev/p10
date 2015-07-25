@@ -1,6 +1,7 @@
 package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class Banner {
     private Integer bannerOrder;
     private String imageUrl;
     private String directUrl;
-    private String theStatus;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,11 +76,12 @@ public class Banner {
     }
 
     @Column(name="the_status")
-    public String getTheStatus() {
-        return theStatus;
+    @Where(clause = "status=1")
+    public String getStatus() {
+        return status;
     }
 
-    public void setTheStatus(String theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

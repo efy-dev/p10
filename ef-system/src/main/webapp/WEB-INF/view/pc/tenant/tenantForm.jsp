@@ -27,7 +27,7 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
-
+            <input type="hidden" name="status" value="1"/>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
@@ -82,13 +82,6 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="title" class="am-u-sm-3 am-form-label">头衔/ Title</label>
-
-                <div class="am-u-sm-9">
-                    <input type="text" id="title" name="title" placeholder="头衔/ Title" value="${object.title}">
-                </div>
-            </div>
-            <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
                 <div class="am-u-sm-9">
@@ -137,19 +130,10 @@
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
 
                 <div class="am-u-sm-9">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">
                         ${object.brief}
                     </textarea>
-                </div>
-            </div>
-
-
-            <div class="am-form-group">
-                <label for="content" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-
-                <div class="am-u-sm-9">
-                            <textarea id="content" name="content" class="ckeditor"
-                                      placeholder="输入简介">${object.content}</textarea>
+                    <small>输入短简介,限30字以内</small>
                 </div>
             </div>
 

@@ -13,16 +13,18 @@
                     result="/wordValue/wordValuePList">
                     <query name="default" label="默认" type="auto" orderBy="group:asc">
                         <condition name="id" defaultValue="0" operation="ne" />
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
                 <do name="viewWordValue" label="列表详情" result="/wordValue/wordValueView">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+
                     </query>
                 </do>
-                <do name="removeWordValue" label="删除" access="" result="json"/>
+                <do name="removeWordValue" label="删除" access="" result="redirect:/basic/xm.do?qm=plistWordValue_default"/>
                 <do name="formWordValue" label="编辑" access="" result="/wordValue/wordValueForm" />
-                <do name="saveOrUpdateWordValue" label="保存" access="" result="/wordValue/wordValueSaveSuccess" />
+                <do name="saveOrUpdateWordValue" label="保存" access="" result="redirect:/basic/xm.do?qm=plistWordValue_default" />
                 <do name="listWordValue" label="wordValue列表" access="" result="/wordValue/wordValueList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="0" operation="ne"/>

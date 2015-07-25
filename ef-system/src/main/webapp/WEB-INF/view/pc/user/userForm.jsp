@@ -23,6 +23,7 @@
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateUser">
         <input type="hidden" name="id" value="${object.id}">
+        <input type="hidden" name="status" value="1">
         <div class="am-form-group">
             <label name="username" for="user-name" class="am-u-sm-3 am-form-label">用户名 <small>*</small></label>
             <div class="am-u-sm-9">
