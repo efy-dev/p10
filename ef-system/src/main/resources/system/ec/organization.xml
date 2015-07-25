@@ -255,13 +255,14 @@
                 <do name="plistUser" access="" label="用户列表"
                     result="/user/userPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"></condition>
+                        <condition name="id" defaultValue="0" operation="ne" />
+                        <condition name="status" defaultValue="1" operation="eq" />
                     </query>
                 </do>
 
                 <do name="removeUser" label="删除用户" access="" result="json"/>
-                <do name="formUser" label="保存用户" access="" result="/user/userForm"></do>
-                <do name="saveOrUpdateUser" label="保存用户" access="" result="/user/userSaveSuccess"></do>
+                <do name="formUser" label="保存用户" access="" result="/user/userForm"/>
+                <do name="saveOrUpdateUser" label="保存用户" access="" result="redirect:/basic/xm.do?qm=plistUser_default"/>
                 <do name="listUser" label="用户列表" access="" result="/user/userList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>

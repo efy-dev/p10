@@ -56,7 +56,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.fullName}</a></td>
-                        <td class="am-hide-sm-only">${tenant.name}</td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${tenant.sex}" type="normal"/>
                         </td>

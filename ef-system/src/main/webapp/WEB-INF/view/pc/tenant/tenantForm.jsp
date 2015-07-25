@@ -27,7 +27,7 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
-
+            <input type="hidden" name="status" value="1"/>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
@@ -130,9 +130,10 @@
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
 
                 <div class="am-u-sm-9">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">
                         ${object.brief}
                     </textarea>
+                    <small>输入短简介,限30字以内</small>
                 </div>
             </div>
 

@@ -40,9 +40,9 @@
                 <td class="am-primary am-u-md-3">等级</td>
                 <td class="am-u-md-3">
                     <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
-                </td> <td class="am-primary am-u-md-3">等级</td>
-                <td class="am-u-md-3">
-                    <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="normal" />
+               </td>
+                <td class="am-primary am-u-md-3" style="padding: 0rem"> </td>
+                <td class="am-u-md-3" style="padding: 0rem">
                 </td>
 
             </tr>
