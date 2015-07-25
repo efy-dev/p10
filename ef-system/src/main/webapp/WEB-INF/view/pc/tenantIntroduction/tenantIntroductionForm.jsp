@@ -109,7 +109,7 @@
                     <label for="title" class="am-u-sm-3 am-form-label">类型</label>
 
                     <div class="am-u-sm-9">
-                        <ming800:status name="type" dataType="TenantIntroduction.type" type="select"/>
+                        <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${object.type}" type="select"/>
                     </div>
                 </div>
 

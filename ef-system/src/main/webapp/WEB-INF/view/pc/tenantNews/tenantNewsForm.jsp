@@ -44,7 +44,7 @@
 
 
                 <div class="am-form-group">
-                    <label for="content" class="am-u-sm-3 am-form-label">咨询内容</label>
+                    <label for="content" class="am-u-sm-3 am-form-label">资讯内容</label>
 
                     <div class="am-u-sm-9">
                         <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"

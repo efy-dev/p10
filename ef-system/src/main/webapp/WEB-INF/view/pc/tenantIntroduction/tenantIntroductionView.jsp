@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -60,8 +61,10 @@
         <table class="am-table am-table-bordered">
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">标题</td>
-                <td class="am-u-md-3">${object.title}</td>
+                <td class="am-primary">类型</td>
+                <td >
+                    <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${object.type}" type="normal" />
+                </td>
             </tr>
             </tbody>
         </table>

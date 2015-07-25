@@ -29,11 +29,17 @@
             <input type="hidden" name="id" value="${object.id}">
 
             <div class="am-form-group">
-                <label for="name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
+                <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名 / Name" value="${object.name}">
-                    <small>输入你要保存的名字</small>
+                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}">
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="fullName" class="am-u-sm-3 am-form-label">中文姓名 / FullName</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName" value="${object.fullName}">
                 </div>
             </div>
 
@@ -42,7 +48,7 @@
 
                 <div class="am-u-sm-9">
                     <ming800:status name="level" dataType="Tenant.level" checkedValue="${object.level}" type="select"/>
-                    <small>输入你要保存的等级</small>
+
                 </div>
             </div>
 
@@ -65,7 +71,20 @@
                     <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName" value="${object.provinceName}">
                 </div>
             </div>
+            <div class="am-form-group">
+                <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地/ PresentAddress</label>
 
+                <div class="am-u-sm-9">
+                    <input type="text" id="presentAddress" name="presentAddress" placeholder="现居地/ PresentAddress" value="${object.presentAddress}">
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="title" class="am-u-sm-3 am-form-label">头衔/ Title</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="title" name="title" placeholder="头衔/ Title" value="${object.title}">
+                </div>
+            </div>
             <div class="am-form-group">
                 <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
 
@@ -80,7 +99,6 @@
                 <div class="am-u-sm-9">
                     <input type="file" id="favicon" name="favicon" placeholder="头像 / Favicon"
                            value="${object.favicon}">
-                    <small>输入你要保存的头像</small>
                 </div>
             </div>
 
@@ -94,12 +112,11 @@
             </div>
 
             <div class="am-form-group">
-                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / brief</label>
+                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
                 <div class="am-u-sm-9">
-                    <textarea class="" cols="6" name="brief" rows="5" id="user-intro" placeholder="输入短简介">
+                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介">
                         ${object.brief}
                     </textarea>
-                    <small>输入短简介，字数30以内</small>
                 </div>
             </div>
 

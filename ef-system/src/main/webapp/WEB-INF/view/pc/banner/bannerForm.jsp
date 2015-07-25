@@ -21,6 +21,7 @@
             <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">
                 <input type="hidden" value="saveOrUpdateBanner" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
+                <input type="hidden" name="group" value="${groupId}">
                 <div class="am-form-group">
                     <label for="title" class="am-u-sm-3 am-form-label">标题 / Title</label>
                     <div class="am-u-sm-9">
@@ -28,7 +29,14 @@
                         <small>输入你要保存的标题</small>
                     </div>
                 </div>
+                <div class="am-form-group">
+                    <label for="imageUrl" class="am-u-sm-3 am-form-label">轮播图 / Banner</label>
 
+                    <div class="am-u-sm-9">
+                        <input type="file" id="imageUrl" name="imageUrl" placeholder="轮播图 / Banner">
+                        <small>选择你要保存的轮播图</small>
+                    </div>
+                </div>
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-push-3">
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
