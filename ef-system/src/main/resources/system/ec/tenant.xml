@@ -401,14 +401,6 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWorkTag">
             <does>
-                <do name="saveOrUpdateProductPicture" label="保存图片" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkPictureHandler">
-                    <page>
-                        <fields>
-                            <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
-                        </fields>
-                    </page>
-                </do>
                 <do name="removeProductPicture" label="删除图片" access="" result="json"/>
 
                 <do name="listTenantWorkTag" label="大师著作产品" access="" result="json">

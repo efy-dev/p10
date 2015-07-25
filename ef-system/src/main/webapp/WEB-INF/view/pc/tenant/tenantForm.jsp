@@ -60,7 +60,7 @@
                     <div class="am-form-group am-form-icon">
                         <i class="am-icon-calendar"></i>
                         <input type="text" id="birthday" name="birthday" class="am-form-field am-input-sm"
-                               placeholder="出生日期" value="${object.birthday}" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" readonly/>
+                               placeholder="出生日期" value="${object.birthday}" >
                     </div>
                 </div>
             </div>
@@ -108,6 +108,16 @@
                 <div class="am-u-sm-9">
                     <input type="file" id="background" name="background" placeholder="背景图片"
                            value="${object.favicon}">
+                </div>
+            </div>
+
+
+            <div class="am-form-group">
+                <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="logo" name="logo" placeholder="Logo"
+                           value="${object.logoUrl}">
                 </div>
             </div>
 
