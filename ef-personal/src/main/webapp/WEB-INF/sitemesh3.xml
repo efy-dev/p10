@@ -1,6 +1,6 @@
 <sitemesh>
-    <mapping path="/pc/tenant/tenantList" decorator="/layouts/empty.jsp"/>
-    <mapping path="/wap/tenant/tenantList" decorator="/layouts/footer.jsp"/>
-    <mapping path="/pc/*" decorator="/layouts/main.jsp"/>
-    <mapping path="/wap/*" decorator="/layouts/mobile.jsp"/>
+    <mapping path="/tenant/tenantList" decorator="/layouts/empty.jsp"/>
+    <!--<mapping path="/wap/tenant/tenantList" decorator="/layouts/footer.jsp"/>-->
+    <mapping path="/*" decorator="/layouts/main.jsp"/>
+    <!--<mapping path="/wap/*" decorator="/layouts/mobile.jsp"/>-->
 </sitemesh>
