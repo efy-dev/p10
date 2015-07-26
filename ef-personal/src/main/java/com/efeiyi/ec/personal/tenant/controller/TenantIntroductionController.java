@@ -69,9 +69,7 @@ public class TenantIntroductionController extends BaseTenantController {
                 model.addAttribute("cbzzList", cbzzList);
             }
             if ("4".equals(tenantIntroduction.getType())){
-                List ysnbList = new ArrayList();
-                ysnbList.add(tenantIntroduction);
-                model.addAttribute("ysnbList", ysnbList);
+                model.addAttribute("tenantIntroduction", tenantIntroduction);
             }
         }
         model.addAttribute("tenant",tenant);

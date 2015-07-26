@@ -113,15 +113,11 @@
                 </ul>
             </div>
         </c:if>
-        <c:if test="${ysnbList != null && ysnbList.size() > 0}">
+        <c:if test="${tenantIntroduction != null}">
             <div id="yi-shu-nian-biao">
                 <h1>艺术年表</h1>
                 <div class="text-line">
-                    <c:forEach items="${ysnbList}" var="introduction">
-                        <c:if test="${'yi-shu-nian-biao'.equals(introduction.title)}">
-                            ${introduction.content}
-                        </c:if>
-                    </c:forEach>
+                    ${tenantIntroduction.content}
                 </div>
             </div>
         </c:if>
