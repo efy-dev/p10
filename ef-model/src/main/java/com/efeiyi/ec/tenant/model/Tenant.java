@@ -1,12 +1,15 @@
 package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -39,7 +42,31 @@ public class Tenant implements Serializable {
     private String status;         // 正常，删除，停止，隐藏
     private String logoUrl;
     private Date createDateTime;
+    private List<TenantProject> tenantProjectList;
+    private String projectName ;
+    private String levelName;
 
+
+    @Transient
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantProject> getTenantProjectList() {
+        return tenantProjectList;
+    }
+
+    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+        this.tenantProjectList = tenantProjectList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -61,11 +88,11 @@ public class Tenant implements Serializable {
         this.name = name;
     }
 
-   @Column(name="status")
+    @Column(name = "status")
     public String getStatus() {
-       return status;
-   }
-  
+        return status;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }

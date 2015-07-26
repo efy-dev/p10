@@ -35,7 +35,7 @@ public class TenantWorkController extends BaseTenantController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantWork.do")
+    @RequestMapping("/listTenantWork")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         /*String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(10,conditions.length());*/

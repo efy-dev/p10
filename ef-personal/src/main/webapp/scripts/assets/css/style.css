@@ -12,7 +12,7 @@ a:hover{color:#0b3775;}
 .Font-type-size-18{font-size:18px;color:#000;}
 /*首页-内容样式*/
 /*头部样式*/
-#header{margin:0 auto 55px; width:960px;height:35px;padding:17px 0 0 15px;}
+#header{margin:0 auto 13px; width:960px;height:35px;padding:17px 0 0 15px;}
 #header h1{width:16px;height:15px;margin:0;float:left;}
 .logov{width:16px;height:15px;}
 .printing{width:230px;float:left;height:15px;padding-left:6px;}
@@ -47,7 +47,7 @@ a:hover{color:#0b3775;}
 #center{width:960px;height:301px;margin:0 auto;}
 .center-1{width:225px;height:260px;margin-left:54px;float:left;}
 .center-2{width:225px;height:260px;margin-left:90px;float:left;}
-.center-3{width:225px;height:339px;margin-left:90px;float:left;}
+.center-3{width:225px;height:280px;margin-left:90px;float:left;}
 .center-1-dt{width:225px;height:154px;}
 .center-1-dd{width:225px;height:105px;padding:15px 0 0 12px;}
 .center-1-dd span{padding-left:12px;}

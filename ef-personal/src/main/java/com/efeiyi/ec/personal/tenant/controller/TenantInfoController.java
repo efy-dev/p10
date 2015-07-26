@@ -28,18 +28,17 @@ public class TenantInfoController extends BaseTenantController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantInfo.do")
+    @RequestMapping("/listTenantInfo")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
         Tenant tenant = super.getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
-        xQuery.put("tenant.id", tenant.getId());
+        xQuery.put("tenant_id", tenant.getId());
         xQuery.addRequestParamToModel(model,request);
         model.addAttribute("tenant", tenant);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
         XQuery xQuery1 = new XQuery("listWordValue_default",request);
-        xQuery1.put("tenant_id", tenant.getId());
         List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
 

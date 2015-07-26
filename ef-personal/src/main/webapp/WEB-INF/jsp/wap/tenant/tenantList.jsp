@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix=".efeiyi.com" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 </head>
@@ -26,16 +27,16 @@
 <div data-am-widget="slider" class="am-slider am-slider-a1"  data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-1.jpg"/>">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-2.jpg">
+            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-2.jpg"/>">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
+            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-3.jpg"/>">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-4.jpg">
+            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-4.jpg"/>">
         </li>
     </ul>
 </div>
@@ -56,11 +57,11 @@
                     <c:if test="${tenantProject.project.type == 1}">
                         <li style="width:50%;" class="am-u-sm-6 am-u-end">
                             <div class="am-gallery-item">
-                                <a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>" class="">
-                                    <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
+                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
                                         <p>${tenantProject.tenant.fullName}</p>
-                                        <p>${tenantProject.tenant.brief}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
                                     </h3>
                                 </a>
                             </div>
@@ -76,11 +77,11 @@
                     <c:if test="${tenantProject.project.type == 2}">
                         <li class=" am-u-sm-6 am-u-end ">
                             <div class="am-gallery-item">
-                                <a href="<c:url value="/tenant/${tenantProject.tenant.id}"/>" class="">
-                                    <img src="<c:url value="/scripts/assets/wap/images/images/logo4_0333_03.jpg"/>" alt="远方 有一个地方 那里种有我们的梦想"/>
+                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                        <p>王金龙</p>
-                                        <p>爱的传承人</p>
+                                        <p>${tenantProject.tenant.fullName}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
                                     </h3>
                                 </a>
                             </div>

@@ -7,8 +7,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head></head>
+<body>
 <!--输入内容-->
-<div class="am-g am-color-000">
+<%--<div class="am-g am-color-000">
     <c:if test="${tenantProjectList.size() > 1}">
 
     <c:forEach items="${tenantProjectList}" var="tenantProject">
@@ -23,15 +24,17 @@
         </c:forEach>
     </c:if>
 
-</div>
+</div>--%>
 <!--1-->
 <c:forEach items="${tenantWorkList}" var="tenantWork">
 <section class="vessel">
 
     <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
-        <img src="http://s.amazeui.org/media/i/demos/pure-1.jpg?imageView2/0/w/640"
-             data-rel="http://s.amazeui.org/media/i/demos/pure-1.jpg"
-                />
+        <a href="/work/${tenantWork.id}">
+
+        <img src="http://tenant.efeiyi.com/${tenantWork.picture_url}">
+
+        </a>
         <figcaption class="am-figure-capition-btm intro-text-2">${tenantWork.productDescription.content} </figcaption>
     </figure>
 </section>

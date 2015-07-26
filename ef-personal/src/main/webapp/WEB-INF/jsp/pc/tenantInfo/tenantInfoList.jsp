@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="page-nav">
-    <p><a href="<c:url value="/tenant/ten"/>">首页</a><span>资讯</span></p>
+    <p><a href="<c:url value="/"/>">首页</a><span>资讯</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯内容-->
@@ -39,14 +39,14 @@
                             </c:forEach>
                             ${tenantInfo.title}</a></h1>
                         <p>
-                            <c:choose>
+                            <%--<c:choose>
                                 <c:when test="${fn:length(tenantInfo.content)  > 60}">
                                     ${fn:substring(tenantInfo.content,0 ,60 ) }......
                                 </c:when>
                                 <c:otherwise>
                                     ${tenantInfo.content}
                                 </c:otherwise>
-                            </c:choose>
+                            </c:choose>--%>
                         </p>
                         <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">详情</a></span>
                     </div>
