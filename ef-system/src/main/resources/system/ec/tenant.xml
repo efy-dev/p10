@@ -42,6 +42,7 @@
                     <page>
                         <fields>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>
+                            <field name="stauts" label="创建时间" defaultValue="1" inputType="default"></field>
                         </fields>
                     </page>
                 </do>
