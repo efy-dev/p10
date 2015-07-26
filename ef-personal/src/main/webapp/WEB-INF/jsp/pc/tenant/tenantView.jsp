@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 </head>
@@ -51,8 +52,8 @@
             <dl class="center-${work.index + 1}">
                 <dt class="center-1-dt"><a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img
                         src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work"></a></dt>
-                <dd class="center-1-dd"><span><a href="javascript:void(0);">大师作品</a></span><span><a
-                        href="javascript:void(0);">木版水印</a></span><span><a href="javascript:void(0);">2015</a></span>
+                <dd class="center-1-dd"><span><a href="javascript:void(0);">${tenantWork.name}</a></span>
+                    <span><a href="javascript:void(0);">${tenantWork.project.name}</a></span>
                 </dd>
             </dl>
         </c:if>
