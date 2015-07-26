@@ -1,5 +1,5 @@
 <sitemesh>
-    <mapping path="/tenant/tenantList" decorator="/layouts/empty.jsp"/>
+    <mapping path="/index" decorator="/layouts/empty.jsp"/>
     <mapping path="/" decorator="/layouts/empty.jsp"/>
 
     <mapping path="/info/list**" decorator="/layouts/main.jsp"/>

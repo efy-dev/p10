@@ -21,7 +21,6 @@ import java.util.List;
  * Created by AC丶man on 2015/6/29.
  */
 @Controller
-@RequestMapping("/tenant")
 public class TenantController extends BaseTenantController {
 
     @Autowired
@@ -33,9 +32,12 @@ public class TenantController extends BaseTenantController {
      *
      * @return
      */
-    @RequestMapping("/ten")
+    @RequestMapping("/home.do")
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         Tenant tenant = getTenantfromDomain(request);
+        if (tenant==null){
+            return new ModelAndView("redirect:/index");
+        }
         String queryHql = "from TenantWork t where t.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenant.getId());
@@ -45,27 +47,7 @@ public class TenantController extends BaseTenantController {
         return new ModelAndView("/tenant/tenantView");
     }
 
-    /**
-     * 获取所有传承人
-     * @param model
-     * @return
-     */
-    /*@RequestMapping("/tenantList")
-    public ModelAndView listTenant(HttpServletRequest request , ModelMap modelMap)throws Exception{
-        XQuery xQuery = new XQuery("listTenantRecommended_default",request);
-        List list = baseManager.listObject(xQuery);
-        modelMap.addAttribute("recommendedList",list);
-        return new ModelAndView("/pc/tenant/tenantList",modelMap);
-    }*/
-    @RequestMapping("/tenantList")
-    public String listTenant(HttpServletRequest request,Model model)throws Exception{
-        /*Tenant tenant = getTenantfromDomain(request);*/
-        XQuery xQuery = new XQuery("listTenantProject_default",request);
-        /*xQuery.put("tenant_id",tenant.getId());*/
-        List list = baseManager.listObject(xQuery);
-        model.addAttribute("list",list);
-        return "/tenant/tenantList";
-    }
+
 
     @ResponseBody
     @RequestMapping("/getTenant.do")

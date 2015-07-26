@@ -18,7 +18,7 @@
         </a>
     </h1>
     <ul class="nav-centent">
-        <li><a href="<c:url value="/tenant/ten"/>">首页</a></li>
+        <li><a href="<c:url value="/"/>">首页</a></li>
         <li><a href="<c:url value="/introduction/intro"/>">简介</a></li>
         <li><a href="<c:url value="/work/listTenantWork"/>">作品</a></li>
         <li><a href="<c:url value="/info/listTenantInfo"/>">资讯</a></li>
@@ -28,7 +28,7 @@
 <script>
         $.ajax({
             type: "get",
-            url: '<c:url value="/tenant/getTenant.do"/>',
+            url: '<c:url value="/getTenant.do"/>',
             cache: false,
             dataType: "json",
             success: function (data) {
