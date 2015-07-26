@@ -21,7 +21,6 @@ import java.util.List;
  * Created by AC丶man on 2015/6/29.
  */
 @Controller
-@RequestMapping("/tenant")
 public class TenantController extends BaseTenantController {
 
     @Autowired

@@ -15,7 +15,7 @@
 <body>
 <!--简介-->
 <div id="page-nav">
-    <p><a href="${pageContext.request.contextPath}/tenant/ten">首页</a><span>简介</span></p>
+    <p><a href="<c:url value="/ten"/>">首页</a><span>简介</span></p>
 </div>
 <div class="border-nav"></div>
 <!--简介内容-->
