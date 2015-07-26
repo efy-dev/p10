@@ -22,7 +22,7 @@ public class TenantWork {
     private String id;
     private String name;
     private String serial;  //随机生成
-    private String picture_url; //作品封面？
+    private String pictureUrl; //作品封面？
     private Tenant tenant;
     private ProjectCategory category;
     private BigDecimal price;
@@ -31,6 +31,8 @@ public class TenantWork {
     private String status;
     private Project project;  //类别
     private Date createDateTime;
+    private  List<TenantWorkRecommended> tenantWorkRecommendedList;//推荐
+// /   private  TenantWorkRecommended recommended;//推荐作品
 //    private List<ProjectTag> projectTagList;
 
     @Id
@@ -83,13 +85,14 @@ public class TenantWork {
     }
 
     @Column(name = "picture_url")
-    public String getPicture_url() {
-        return picture_url;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPicture_url(String picture_url) {
-        this.picture_url = picture_url;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
+
 
     @Column(name = "price")
     public BigDecimal getPrice() {
@@ -147,4 +150,15 @@ public class TenantWork {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "tenantWork")
+    @Where(clause = "status=1")
+    public List<TenantWorkRecommended> getTenantWorkRecommendedList() {
+        return tenantWorkRecommendedList;
+    }
+
+    public void setTenantWorkRecommendedList(List<TenantWorkRecommended> tenantWorkRecommendedList) {
+        this.tenantWorkRecommendedList = tenantWorkRecommendedList;
+    }
+
 }

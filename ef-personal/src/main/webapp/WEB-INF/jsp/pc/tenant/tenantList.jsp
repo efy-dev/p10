@@ -76,10 +76,10 @@
                             <p>
                                 <c:choose>
                                     <c:when test="${fn:length(tenantProject.tenant.brief)  > 25}">
-                                        <a href="${pageContext.request.contextPath}/" target="_blank">${fn:substring(tenantProject.tenant.brief,0 ,25 ) }......</a>
+                                        <a href="${pageContext.request.contextPath}/" class="img-mutual-text1-a" target="_blank">${fn:substring(tenantProject.tenant.brief,0 ,25 ) }......</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${pageContext.request.contextPath}/" target="_blank">${tenantProject.tenant.brief}</a>
+                                        <a href="${pageContext.request.contextPath}/" class="img-mutual-text1-a" target="_blank">${tenantProject.tenant.brief}</a>
                                     </c:otherwise>
                                 </c:choose>
                             </p>
