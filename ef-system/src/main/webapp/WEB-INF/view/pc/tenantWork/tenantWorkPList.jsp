@@ -120,7 +120,7 @@
                                ${tenantWork.tenant.fullName}
                             </td>
                             <td class="am-hide-sm-only">
-                                <a href="http://tenant.efeiyi.com/${tenantWork.pictureUrl}">
+                                <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${tenantWork.pictureUrl}">
                                   <img  width="10%"  src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-manage-banner" >
                                 </a>
                             </td>

@@ -5,5 +5,5 @@
     <mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>
     <mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>
     <mapping path="/" decorator="/layouts/iframe.jsp"/>
-
+    <mapping path="/imgView.jsp*" exclue="true" />
 </sitemesh>

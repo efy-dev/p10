@@ -19,7 +19,8 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-
-   <img src="http://tenant.efeiyi.com/${object.pictureUrl}">
+    <div align="center">
+       <img src="${imgUrl}">
+    </div>
 </body>
 </html>
