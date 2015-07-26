@@ -15,6 +15,7 @@ public class TenantWorkRecommended implements Serializable {
     private String id;
     private Tenant tenant;
     private Project project;
+    private TenantWork tenantWork;
     private String status;
 
     @Id
@@ -55,5 +56,15 @@ public class TenantWorkRecommended implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_work_id")
+    public TenantWork getTenantWork() {
+        return tenantWork;
+    }
+
+    public void setTenantWork(TenantWork tenantWork) {
+        this.tenantWork = tenantWork;
     }
 }

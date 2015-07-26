@@ -1,4 +1,3 @@
-<%@ page import="java.util.HashMap" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -67,7 +66,7 @@
                         <th class="table-set">操作</th>
                         <th class="table-title">名字</th>
                         <th class="table-title">作者</th>
-                        <th class="table-title">作品封面</th>
+                        <th class="table-title">作品图</th>
 
                     </tr>
                     </thead>
@@ -84,46 +83,25 @@
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeTenantWork('${tenantWork.id}')" href="#"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </a>
-                                            <c:if test="${empty tenantWork.tenantWorkRecommendedList}">
-                                               <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                  href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantWorkRecommended&project.id=${projectId}&status=1&tenant.id=${tenantId}&tenantWork.id=${tenantWork.id}&resultPage=redirect:/basic/xm.do?qm=plistTenantWork_byProject%26conditions=project.id:${projectId}%26projectId=${projectId}%26tenantId=${tenantId}"/>">
-                                                   <span class="am-icon-heart"> </span>推荐
-                                               </a>
-                                            </c:if>
-                                            <c:if test="${not empty tenantWork.tenantWorkRecommendedList}">
-                                                <c:forEach var="re" items="${tenantWork.tenantWorkRecommendedList}">
-                                                    <c:if test="${re.tenantWork.id == tenantWork.id}">
-                                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                           href="#"  onclick="removeTenantWorkRecommended(this,'${re.id}')">
-                                                            <span class="am-icon-heart">取消推荐 </span>
-                                                        </a>
-                                                    </c:if>
-                                                </c:forEach>
-
-                                            </c:if>
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="
+                                        <c:url value="/basic/xm.do?qm=saveOrUpdateTenantWorkRecommended&project.id=${projectId}&tenant.id=${tenantId}&tenantWork.id=${tenantWork.id}
+                                        &resultPage=/basic/xm.do?qm=plistTenantWork_byProject&conditions=project.id:${projectId}&projectId=${projectId}&tenantId=${tenantId}"/>
+                                        "><span
+                                                class="am-icon-heart"></span> 推荐
+                                        </a>
                                     </div>
                                 </div>
                             </td>
-                            <td class="am-hide-sm-only">
-                                 <a href="<c:url value="/basic/xm.do?qm=viewTenantWork&id=${tenantWork.id}"/>">
-                                    ${tenantWork.name}
-                                 </a>
-                                  <a style="margin-left: 10px;color: red;" >
-                                    <c:forEach var="re" items="${tenantWork.tenantWorkRecommendedList}">
-                                        <c:if test="${re.tenantWork.id == tenantWork.id}" >
-                                           <span class="am-icon-heart" id="${re.id}"> 推荐</span>
-                                        </c:if>
-                                    </c:forEach>
-                                </a>
-                            </td>
+                            <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewTenantWork&id=${tenantWork.id}"/>">${tenantWork.name}</a></td>
                             <td class="am-hide-sm-only">
                                ${tenantWork.tenant.fullName}
-                            </td>
-                            <td class="am-hide-sm-only">
-                                <a href="http://tenant.efeiyi.com/${tenantWork.pictureUrl}">
-                                  <img  width="10%"  src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-manage-banner" >
+                                <a>
+                                    <c:if test="${not empty tenantWork.tenantWorkRecommendedList}">
+                                       推荐
+                                    </c:if>
                                 </a>
                             </td>
+                            <td class="am-hide-sm-only">${tenantWork.productDescription.content}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -138,21 +116,7 @@
         </ming800:pcPageList>
     </div>
 </div>
-<script type="text/javascript">
-
-    function removeTenantWorkRecommended(divId){
-
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeTenantWorkRecommended"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:divId},
-            success: function (data) {
-              location.reload();
-            }
-        });
-    }
+<script>
 
     function removeTenantWork(divId){
         $.ajax({

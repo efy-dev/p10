@@ -50,31 +50,32 @@
         </table>
 
     </div>
-
-    <div class="am-u-md-6">
-        <label class="am-u-sm-12 am-form-label">头像</label>
-        <div class="am-u-sm-12">
+    <div class="am-u-md-4" >
+       <label class="am-form-label">Logo</label>
+       <div class="" >
+         <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-banner">
+       </div>
+    </div>
+    <div class="am-u-md-4">
+        <label class="am-form-label">头像</label>
+        <div class="">
             <img src="http://tenant.efeiyi.com/${object.favicon}@!tenant-manage-banner">
         </div>
     </div>
     
-    <div class="am-u-md-6">
-        <label class="am-u-sm-12 am-form-label">背景</label>
-        <div class="am-u-sm-12">
+    <div class="am-u-md-4">
+        <label class="am-form-label">背景</label>
+        <div class="">
             <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-banner">
         </div>
     </div>
 </div>
-<label class="am-u-sm-12 am-form-label">Logo</label>
-
-<div class="am-u-sm-12">
-    <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-banner">
-</div>
+<div class="am-u-md-12">
 <label   class="am-u-sm-3 am-form-label">短简介 / Brief</label>
 <div >
     ${object.brief}
 </div>
-
+</div>
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人的项目</h2>
