@@ -3,9 +3,11 @@
 <!--1-->
 <section class="vessel">
     <c:if test="${workShop != null}">
-        <div class="video-img-or">
-            <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
-        </div>
+        <c:if test="${workShop.videoPath} != null">
+            <div class="video-img-or">
+                <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
+            </div>
+        </c:if>
         <div class="video-img-text">
                 ${workShop.shopIntroduction}
         </div>
