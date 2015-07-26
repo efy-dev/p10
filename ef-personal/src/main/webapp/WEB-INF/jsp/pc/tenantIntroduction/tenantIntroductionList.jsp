@@ -107,7 +107,7 @@
             <div id="chu-ban-zhu-zuo">
                 <h1>出版著作</h1>
                 <ul>
-                    <c:forEach items="${cbzzList}" var="list3">
+                    <c:forEach items="${cbzzList}" var="pic">
                         <li><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></li>
                     </c:forEach>
                 </ul>
