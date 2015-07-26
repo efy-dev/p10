@@ -44,10 +44,10 @@
                                 <p>
                                     <c:choose>
                                         <c:when test="${fn:length(tenantProject.tenant.brief)  > 25}">
-                                            <a href="${pageContext.request.contextPath}/introduction/intro" target="_blank">${fn:substring(tenantProject.tenant.brief,0 ,25 ) }......</a>
+                                            <a href="${pageContext.request.contextPath}/" target="_blank">${fn:substring(tenantProject.tenant.brief,0 ,25 ) }......</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${pageContext.request.contextPath}/introduction/intro" target="_blank">${tenantProject.tenant.brief}</a>
+                                            <a href="${pageContext.request.contextPath}/" target="_blank">${tenantProject.tenant.brief}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </p>
@@ -73,8 +73,16 @@
                         <p class="txt">
                         <div class="img-mutual-text1">
                             <h1>${tenantProject.tenant.fullName}</h1>
-
-                            <p>${tenantProject.tenant.brief}</p>
+                            <p>
+                                <c:choose>
+                                    <c:when test="${fn:length(tenantProject.tenant.brief)  > 25}">
+                                        <a href="${pageContext.request.contextPath}/" target="_blank">${fn:substring(tenantProject.tenant.brief,0 ,25 ) }......</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${pageContext.request.contextPath}/" target="_blank">${tenantProject.tenant.brief}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </p>
                         </div>
                         </p>
                     </div>
