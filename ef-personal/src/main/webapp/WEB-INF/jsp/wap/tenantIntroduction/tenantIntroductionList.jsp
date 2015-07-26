@@ -65,7 +65,9 @@
       </div>
       <div
               data-tab-panel-2 class="am-tab-panel ">
-          ${ysnbList.content}
+          <c:if test="${tenantIntroduction} != null">
+              ${tenantIntroduction.content}
+          </c:if>
       </div>
     </div>
   </div>
