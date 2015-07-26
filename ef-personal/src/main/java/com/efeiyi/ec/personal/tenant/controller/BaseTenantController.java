@@ -37,8 +37,9 @@ public class BaseTenantController extends BaseController {
         String subDommainName = (String)request.getAttribute("domainName");
         if(!"master".equalsIgnoreCase(subDommainName)){
             LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-            String queryHql ="from Tenant t where t.name=:name";
+            String queryHql ="from Tenant t where t.name=:name and t.status=:status";
             map.put("name",subDommainName);
+            map.put("status","1");
             tenantTemp =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
             List<TenantProject> projects = tenantTemp.getTenantProjectList();
             tenantTemp.setProjectName(mainTenantProject(projects));
