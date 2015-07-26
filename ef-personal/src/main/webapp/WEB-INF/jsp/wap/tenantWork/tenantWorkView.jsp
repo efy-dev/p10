@@ -9,14 +9,14 @@
 <head></head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
-  <div class="work-details-i"><a href="#"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
+  <div class="work-details-i"><a href="<c:url value="/work/listTenantWork"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
 </header>
+<h1>${product.name}</h1>
 <section class="work-text-h1">
-  <h1></h1>
   <p>
-    <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg" class="am-img-responsive am-img-tp-hi" alt=""/>
+    <img src="http://tenant.efeiyi.com/${product.picture_url}"/>
 
-    <span></span>
+    <span>${product.productDescription.content}</span>
   </p>
 </section>
 </body>

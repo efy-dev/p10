@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .am-xu-nav p a{color:#fff; font-size:12px;width:19%;height:36px; float:left;text-align:center; background:url(../images/logo5.jpg) no-repeat 0% 5px;}
 #p-a{background:none;}
 .p-a{background:none;position:relative;}
-.am-img-thumbnail{padding:3px;border:#B5B5B3;background-color:#B5B5B3;}
+.am-img-thumbnail{padding:0px;border:#B5B5B3;background-color:rgba(0,0,0,0.2);}
 #am-bd-1{height:1px; border-bottom:1px solid #fff;margin:30px 16px 0 16px}
 #am-bd-2{margin:0 auto;height:36px;margin-top:30px;}
 .am-bd-2{margin:0 auto;height:31px;}

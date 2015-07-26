@@ -5,14 +5,12 @@
 <head>
 </head>
 <body>
-<section id="intro-content">
-  <div class="intro-text-1">
-      <c:forEach items="${jbxxList}" var="jbxx">
-          ${jbxxIntroduction.content}
-      </c:forEach>
+<div class="am-u-sm-12" id="intro-content1">
+  <div class="intro-text-1" style="height: auto">
+      ${jbxxIntroduction.content}
   </div>
-</section>
-<aside id="am-bg-q2">
+</div>
+<div class="am-u-sm-12" id="am-bg-q21">
   <div data-am-widget="tabs" class="am-tabs am-tabs-default">
     <ul class="am-tabs-nav am-cf">
       <li class="am-active">
@@ -34,7 +32,7 @@
             <li>
               <div class="am-gallery-item">
                 <a href="#" class="">
-                  <img src="<c:url value="${dsry.url}"/>"
+                  <img src="http://tenant.efeiyi.com/${dsry.url}"
                           />
                   <div class="am-gallery-desc">
                     ${dsry.title}
@@ -54,7 +52,7 @@
             <li>
               <div class="am-gallery-item">
                 <a href="#" class="">
-                  <img src="<c:url value="${cbzz.url}"/>"
+                  <img src="http://tenant.efeiyi.com/${cbzz.url}"
                           />
                   <div class="am-gallery-desc">
                       ${cbzz.title}
@@ -68,11 +66,11 @@
       <div
               data-tab-panel-2 class="am-tab-panel ">
         <c:forEach items="${ysnbList}" var="ysnb">
-          ${ysnb.title}
+          ${ysnb.content}
         </c:forEach>
       </div>
     </div>
   </div>
-</aside>
+</div>
 </body>
 </html>

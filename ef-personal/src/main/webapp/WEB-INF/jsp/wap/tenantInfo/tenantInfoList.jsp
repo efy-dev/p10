@@ -26,19 +26,18 @@
         <p id="message-text-p">
             <fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy-MM-dd"/>
         </p>
-        <p> <c:choose>
-            <c:when test="${fn:length(tenantInfo.content)  > 60}">
-                ${fn:substring(tenantInfo.content,0 ,60 ) }......
-            </c:when>
-            <c:otherwise>
-                ${tenantInfo.content}
-            </c:otherwise>
-        </c:choose>
-        </p>
+        <%--<p> <c:choose>--%>
+            <%--<c:when test="${fn:length(tenantInfo.content)  > 60}">--%>
+                <%--${fn:substring(tenantInfo.content,0 ,60 ) }......--%>
+            <%--</c:when>--%>
+            <%--<c:otherwise>--%>
+                <%--${tenantInfo.content}--%>
+            <%--</c:otherwise>--%>
+        <%--</c:choose>--%>
+        <%--</p>--%>
         <span><a href="<c:url value="/info/${tenantInfo.id}"/>">详情</a></span>
     </div>
     </c:forEach>
-    <!--2-->
 </section>
 </body>
 </html>
