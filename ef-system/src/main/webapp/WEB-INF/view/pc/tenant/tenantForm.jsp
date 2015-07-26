@@ -27,7 +27,7 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
-            <input type="hidden" name="status" value="1"/>
+            <%--<input type="hidden" name="status" value="1"/>--%>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
 
