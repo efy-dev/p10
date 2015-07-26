@@ -1,6 +1,8 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 
 /**
@@ -37,7 +40,32 @@ public class BaseTenantController extends BaseController {
             String queryHql ="from Tenant t where t.name=:name";
             map.put("name",subDommainName);
             tenantTemp =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
+            List<TenantProject> projects = tenantTemp.getTenantProjectList();
+            tenantTemp.setProjectName(mainTenantProject(projects));
         }
       return tenantTemp;
+    }
+
+
+    public String mainTenantProject(List<TenantProject> tenantProjects) {
+
+        TenantProject tenantProject = null;
+
+        if (tenantProjects != null && tenantProjects.size() > 0) {
+
+            for (TenantProject tenantProjectTemp : tenantProjects) {
+                if (tenantProjectTemp.getStatus().equals("1")) {
+                    tenantProject = tenantProjectTemp;
+                }
+            }
+            if (tenantProject == null) {
+                tenantProject = tenantProjects.get(0);
+            }
+
+            return tenantProject.getProject().getName();
+        } else {
+
+            return "";
+        }
     }
 }
