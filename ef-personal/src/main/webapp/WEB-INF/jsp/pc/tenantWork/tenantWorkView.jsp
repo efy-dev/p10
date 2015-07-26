@@ -14,7 +14,7 @@
   <div class="center-right">
     <div class="content-border">
       <dl class="right-content">
-        <dt class="right-content-img"><img src="<c:url value="${product.picture_url}"/>"></dt>
+        <dt class="right-content-img"><img src="http://tenant.efeiyi.com/${product.picture_url}@!tenant-pc-work-view"></dt>
         <dd class="right-content-p">
           ${product.productDescription.content}
         </dd>
