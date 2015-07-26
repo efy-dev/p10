@@ -65,9 +65,9 @@
       </div>
       <div
               data-tab-panel-2 class="am-tab-panel ">
-        <c:forEach items="${ysnbList}" var="ysnb">
-          ${ysnb.content}
-        </c:forEach>
+          <c:if test="${tenantIntroduction} != null">
+              ${tenantIntroduction.content}
+          </c:if>
       </div>
     </div>
   </div>
