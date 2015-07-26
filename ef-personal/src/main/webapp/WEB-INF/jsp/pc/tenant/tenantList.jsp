@@ -78,7 +78,7 @@
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}/ten">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>

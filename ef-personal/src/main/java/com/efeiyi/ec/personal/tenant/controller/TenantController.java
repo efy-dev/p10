@@ -32,9 +32,12 @@ public class TenantController extends BaseTenantController {
      *
      * @return
      */
-    @RequestMapping("/ten")
+    @RequestMapping("/home.do")
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         Tenant tenant = getTenantfromDomain(request);
+        if (tenant==null){
+            return new ModelAndView("redirect:/index");
+        }
         String queryHql = "from TenantWork t where t.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenant.getId());
