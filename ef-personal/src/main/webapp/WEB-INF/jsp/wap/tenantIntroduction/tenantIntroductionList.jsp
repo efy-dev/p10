@@ -65,9 +65,7 @@
       </div>
       <div
               data-tab-panel-2 class="am-tab-panel ">
-        <c:forEach items="${ysnbList}" var="ysnb">
-          ${ysnb.content}
-        </c:forEach>
+          ${ysnbList.content}
       </div>
     </div>
   </div>
