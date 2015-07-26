@@ -39,14 +39,14 @@
                             </c:forEach>
                             ${tenantInfo.title}</a></h1>
                         <p>
-                            <c:choose>
+                            <%--<c:choose>
                                 <c:when test="${fn:length(tenantInfo.content)  > 60}">
                                     ${fn:substring(tenantInfo.content,0 ,60 ) }......
                                 </c:when>
                                 <c:otherwise>
                                     ${tenantInfo.content}
                                 </c:otherwise>
-                            </c:choose>
+                            </c:choose>--%>
                         </p>
                         <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">详情</a></span>
                     </div>
