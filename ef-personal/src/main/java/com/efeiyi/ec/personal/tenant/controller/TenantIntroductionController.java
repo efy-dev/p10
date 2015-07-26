@@ -47,10 +47,10 @@ public class TenantIntroductionController extends BaseTenantController {
 
 
         for (TenantIntroduction tenantIntroduction:list){
-            if ("ji-ben-xin-xi".equals(tenantIntroduction.getTitle())){
+            if ("1".equals(tenantIntroduction.getType())){
                 model.addAttribute("jbxxIntroduction", tenantIntroduction);
             }
-            if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
+            if ("2".equals(tenantIntroduction.getType())){
                 List dsryList = new ArrayList();
                 for (TenantAttachment tenantAttachment:list1){
                     if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
@@ -59,7 +59,7 @@ public class TenantIntroductionController extends BaseTenantController {
                 }
                 model.addAttribute("dsryList", dsryList);
             }
-            if ("chu-ban-zhu-zuo".equals(tenantIntroduction.getTitle())){
+            if ("3".equals(tenantIntroduction.getType())){
                 List cbzzList = new ArrayList();
                 for (TenantAttachment tenantAttachment:list1){
                     if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
@@ -68,13 +68,9 @@ public class TenantIntroductionController extends BaseTenantController {
                 }
                 model.addAttribute("cbzzList", cbzzList);
             }
-            if ("yi-shu-nian-biao".equals(tenantIntroduction.getTitle())){
+            if ("4".equals(tenantIntroduction.getType())){
                 List ysnbList = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        ysnbList.add(tenantAttachment);
-                    }
-                }
+                ysnbList.add(tenantIntroduction);
                 model.addAttribute("ysnbList", ysnbList);
             }
         }

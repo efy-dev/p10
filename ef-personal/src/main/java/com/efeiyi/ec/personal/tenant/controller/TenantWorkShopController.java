@@ -43,6 +43,7 @@ public class TenantWorkShopController extends BaseTenantController {
         XQuery xQuery = new XQuery("listTenantWorkShop_default",request);
         xQuery.put("tenant_id", tenant.getId());
         List list = baseManager.listObject(xQuery);
+        model.addAttribute("tenant", tenant);
         model.addAttribute("workShopList",list);
 
         return new ModelAndView("/tenantWorkShop/tenantWorkShopView");

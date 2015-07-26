@@ -9,7 +9,7 @@
 <head></head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
-    <div class="work-details-i"><a href="#"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
+    <div class="work-details-i"><a href="<c:url value="/info/listTenantInfo"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
 </header>
 <section class="work-text-h2">
     <div class="message-text2">
@@ -21,7 +21,7 @@
         <hr data-am-widget="divider" style="margin-top:0;" class="am-divider am-divider-dashed" />
     </div>
     <p class="am-p-p">
-        <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg" class="am-img-responsive"  style="height:201px; margin-bottom:16px;" alt=""/>
+        <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg" class="am-img-responsive"  style="height:201px; margin-bottom:16px;"/>
     <span>
         ${tenantNews.content}
     </span>

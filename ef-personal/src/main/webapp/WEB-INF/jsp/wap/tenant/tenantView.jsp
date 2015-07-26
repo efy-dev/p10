@@ -14,15 +14,14 @@
             <c:forEach items="${tenantWorkList}" var="tenantWork">
             <li>
                 <div class="am-gallery-item">
-                    <a href="#" class="">
-                        <img src="images/logo4_06_07.jpg"/>
+                    <a href="/work/${tenantWork.id}" class="">
+                        <img src="http://tenant.efeiyi.com/${tenantWork.picture_url}"/>
                         <h3 class="am-gallery-title">${tenantWork.name}创作于<fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy" />年</h3>
                         <div class="am-gallery-desc"><fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy-MM-dd" /></div>
                     </a>
                 </div>
             </li>
             </c:forEach>
-
         </ul>
     </strong>
 </section>
