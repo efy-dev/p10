@@ -4,7 +4,7 @@
 <head>
 </head>
 <body>
-<jsp:forward page="/tenant/tenantList"/>
+<jsp:forward page="/index"/>
 <!--内容-->
 <%--<div id="header">
     <a href="<c:url value="/tenant/tenantList"/>">传承人首页</a>
