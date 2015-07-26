@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="am-u-sm-12" id="intro-content1">
-  <div class="intro-text-1" style="height: auto">
+  <div class="intro-text-1" style="height: auto;padding-top: 14px">
       ${jbxxIntroduction.content}
   </div>
 </div>
@@ -14,7 +14,7 @@
   <div data-am-widget="tabs" class="am-tabs am-tabs-default">
     <ul class="am-tabs-nav am-cf">
       <li class="am-active">
-        <a href="[data-tab-panel-0]">大师荣耀</a>
+        <a href="[data-tab-panel-0]">大师荣誉</a>
       </li>
       <li class="">
         <a href="[data-tab-panel-1]">出版著作</a>
