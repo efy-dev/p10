@@ -34,18 +34,15 @@ public class TenantWorkShopController extends BaseTenantController {
      */
     @RequestMapping("/work")
     public ModelAndView getTenantWorkShop(HttpServletRequest request, Model model) throws Exception {
-        /*LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        String queryHql = "from TenantWorkShop t where t.tenant.id = :tenantId";
-        queryParamMap.put("tenantId",tenantId);
-        TenantWorkShop productWorkShop = (TenantWorkShop) baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
-        model.addAttribute("productWorkShop", productWorkShop);*/
         Tenant tenant = super.getTenantfromDomain(request);
         XQuery xQuery = new XQuery("listTenantWorkShop_default",request);
         xQuery.put("tenant_id", tenant.getId());
         List list = baseManager.listObject(xQuery);
+        if (list != null && list.size() > 0){
+            TenantWorkShop workShop = (TenantWorkShop) list.get(0);
+            model.addAttribute("workShop",workShop);
+       }
         model.addAttribute("tenant", tenant);
-        model.addAttribute("workShopList",list);
-
         return new ModelAndView("/tenantWorkShop/tenantWorkShopView");
     }
 
