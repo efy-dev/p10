@@ -12,8 +12,9 @@
     </ul>
 </div>
 <div id="nav">
-    <h1><a href="#">
-            <img id="img-br" src="">
+    <h1>
+        <a href="#">
+            <img id="favicon" src="">
         </a>
     </h1>
     <ul class="nav-centent">
@@ -31,7 +32,8 @@
             cache: false,
             dataType: "json",
             success: function (data) {
-                $("#img-br").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
+                console.log(data);
+                $("#favicon").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
             }
         });
 </script>
