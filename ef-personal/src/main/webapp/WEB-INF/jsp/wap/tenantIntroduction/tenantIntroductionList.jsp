@@ -43,9 +43,7 @@
           </c:forEach>
         </ul>
       </div>
-      <div
-
-              .0 class="am-tab-panel ">
+      <div data-tab-panel-1 class="am-tab-panel ">
         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3
   am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
           <c:forEach items="${cbzzList}" var="cbzz">
@@ -63,8 +61,7 @@
           </c:forEach>
         </ul>
       </div>
-      <div
-              data-tab-panel-2 class="am-tab-panel ">
+      <div data-tab-panel-2 class="am-tab-panel ">
           <c:if test="${tenantIntroduction != null} ">
               ${tenantIntroduction.content}
           </c:if>
