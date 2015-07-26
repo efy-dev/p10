@@ -2,14 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--1-->
 <section class="vessel">
-    <c:forEach items="${workShopList}" var="workshop">
+    <c:if test="${workShop != null}">
         <div class="video-img-or">
-            <video src="<c:url value="${workshop.videoPath}"/>" controls="controls"></video>
+            <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
         </div>
         <div class="video-img-text">
-                ${workshop.shopIntroduction}
+                ${workShop.shopIntroduction}
         </div>
-    </c:forEach>
+    </c:if>
 </section>
 <%--<div data-am-widget="map" class="am-map am-map-default" data-name="工作室"
      data-address="国家图书馆" data-longitude="" data-latitude=""
