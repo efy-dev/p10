@@ -15,7 +15,7 @@
             <li>
                 <div class="am-gallery-item">
                     <a href="/work/${tenantWork.id}" class="">
-                        <img src="http://tenant.efeiyi.com/${tenantWork.picture_url}"/>
+                        <img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}"/>
                         <h3 class="am-gallery-title">${tenantWork.name}创作于<fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy" />年</h3>
                         <div class="am-gallery-desc"><fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy-MM-dd" /></div>
                     </a>

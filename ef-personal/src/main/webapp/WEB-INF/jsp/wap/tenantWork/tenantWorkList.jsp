@@ -32,7 +32,7 @@
     <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
         <a href="/work/${tenantWork.id}">
 
-        <img src="http://tenant.efeiyi.com/${tenantWork.picture_url}">
+        <img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}">
 
         </a>
         <figcaption class="am-figure-capition-btm intro-text-2">${tenantWork.productDescription.content} </figcaption>

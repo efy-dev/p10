@@ -57,7 +57,7 @@
         <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
             <dl class="center-${work.index + 1}">
                 <dt class="center-1-dt"><a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img
-                        src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work"></a></dt>
+                        src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work"></a></dt>
                 <dd class="center-1-dd" style="text-align:center;">
                     <span><a href="javascript:void(0);">${tenantWork.name}</a></span>
                 </dd>

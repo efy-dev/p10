@@ -32,22 +32,22 @@
     <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="vs">
       <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
         <div class="works-container">
-          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work" class="works-img"></a>
+          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </c:if>
        <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
-         <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work" class="works-img"></a>
+         <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
        </c:if>
       <c:if test="${ vs.index%3==2}">
-          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work" class="works-img-1"></a>
+          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img-1"></a>
     </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
       <div class="works-container">
-        <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work" class="works-img"></a>
+        <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
-      <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.picture_url}@!tenant-pc-work" class="works-img"></a>
+      <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </div>
       </c:if>
       </c:forEach>

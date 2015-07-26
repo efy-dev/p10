@@ -19,7 +19,7 @@
                 </div>
               </c:if>
                 <div class="content-img">
-                  <img src="<c:url value="${workShop.picture_url}"/>">
+                  <img src="<c:url value="${workShop.pictureUrl}"/>">
                 </div>
                 <div class="content-text-gzf">
                   ${workShop.shopIntroduction}
