@@ -44,29 +44,29 @@ public class Tenant implements Serializable {
     private Date createDateTime;
     private List<TenantProject> tenantProjectList;
 
-    public TenantProject getMainTenantProject() {
-
-        TenantProject tenantProject = null;
-
-        List<TenantProject> tenantProjects = this.getTenantProjectList();
-        if (tenantProjects != null && tenantProjects.size() > 0) {
-
-            for (TenantProject tenantProjectTemp : tenantProjects) {
-                if (tenantProjectTemp.getStatus().equals("1")) {
-                    tenantProject = tenantProjectTemp;
-                }
-            }
-            if (tenantProject == null) {
-                tenantProject = tenantProjects.get(0);
-            }
-        } else {
-            tenantProject = new TenantProject();
-            Project project = new Project();
-            project.setName("");
-            tenantProject.setProject(project);
-        }
-        return tenantProject;
-    }
+//    public TenantProject mainTenantProject() {
+//
+//        TenantProject tenantProject = null;
+//
+//        List<TenantProject> tenantProjects = this.getTenantProjectList();
+//        if (tenantProjects != null && tenantProjects.size() > 0) {
+//
+//            for (TenantProject tenantProjectTemp : tenantProjects) {
+//                if (tenantProjectTemp.getStatus().equals("1")) {
+//                    tenantProject = tenantProjectTemp;
+//                }
+//            }
+//            if (tenantProject == null) {
+//                tenantProject = tenantProjects.get(0);
+//            }
+//        } else {
+//            tenantProject = new TenantProject();
+//            Project project = new Project();
+//            project.setName("");
+//            tenantProject.setProject(project);
+//        }
+//        return tenantProject;
+//    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantProject> getTenantProjectList() {
