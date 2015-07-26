@@ -10,7 +10,7 @@
 <body>
 <!--作品-->
 <div id="page-nav">
-  <p><a href="<c:url value="/ten"/>">首页</a><span>作品</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span>作品</span></p>
 </div>
 <div class="border-nav"></div>
 <!--作品内容-->

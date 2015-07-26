@@ -7,7 +7,7 @@
 <!--工作坊-->
 <body>
 <div id="page-nav">
-  <p><a href="<c:url value="/ten"/>">首页</a><span>工作坊</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span>工作坊</span></p>
 </div>
 <div class="border-nav"></div>
 <c:if test="${productWorkShop != null}">
