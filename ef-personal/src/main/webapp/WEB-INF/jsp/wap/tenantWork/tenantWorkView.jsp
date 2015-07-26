@@ -15,7 +15,7 @@
   <h1>${product.name}</h1>
   <p>
     <c:forEach items="${product.productPictureList}" var="productPicture">
-      <img src="http://tenant.efeiyi.com/${productPicture.pictureUrl}"/>
+      <div class="am-u-sm-12"><img src="http://tenant.efeiyi.com/${productPicture.pictureUrl}"/></div>
     </c:forEach>
     <span>${product.productDescription.content}</span>
   </p>

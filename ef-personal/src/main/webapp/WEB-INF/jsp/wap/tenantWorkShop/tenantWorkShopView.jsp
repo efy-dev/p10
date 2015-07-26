@@ -4,7 +4,7 @@
 <section class="vessel">
     <c:forEach items="${workShopList}" var="workshop">
         <div class="video-img-or">
-            <video src="<c:url value="${workshop.videoPath}"/>" controls="controls"></video>
+            <video src="tenant.img-cn-beijing.aliyuncs.com${workshop.videoPath}" controls="controls"></video>
         </div>
         <div class="video-img-text">
                 ${workshop.shopIntroduction}
