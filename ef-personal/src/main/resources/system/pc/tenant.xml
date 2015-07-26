@@ -14,7 +14,7 @@
                     <does>
                         <do name="listTenantProject" access="" label="传承人列表">
                             <query name="default" label="默认" type="auto" orderBy="id:desc">
-                                <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                                <condition name="id" defaultValue="0" operation="ne"/>
                             </query>
                         </do>
                     </does>
@@ -37,10 +37,9 @@
                 </field>
             </fields>
             <does>
-                <do name="plistTenant" access="" label="传承人分页列表"
-                    result="/tenant/tenantPList">
+                <do name="listTenant" access="" label="传承人分页列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="" defaultValue="" operation="eq"/>
                     </query>
                 </do>
             </does>

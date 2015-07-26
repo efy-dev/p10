@@ -12,12 +12,26 @@
     </ul>
 </div>
 <div id="nav">
-    <h1><a href="#"><img src="http://tenant.efeiyi.com/photo/2015-07-20%2014%3A41%3A29.jpg@!tenant-manage-banner"></a></h1>
+    <h1><a href="#">
+            <img id="img-br" src="">
+        </a>
+    </h1>
     <ul class="nav-centent">
-        <li><a href="${pageContext.request.contextPath}/tenant/ten">首页</a></li>
-        <li><a href="${pageContext.request.contextPath}/introduction/intro">简介</a></li>
-        <li><a href="${pageContext.request.contextPath}/work/listTenantWork">作品</a></li>
-        <li><a href="${pageContext.request.contextPath}/info/listTenantInfo">资讯</a></li>
-        <li><a href="${pageContext.request.contextPath}/workShop/work">工作坊</a></li>
+        <li><a href="<c:url value="/tenant/ten"/>">首页</a></li>
+        <li><a href="<c:url value="/introduction/intro"/>">简介</a></li>
+        <li><a href="<c:url value="/work/listTenantWork"/>">作品</a></li>
+        <li><a href="<c:url value="/info/listTenantInfo"/>">资讯</a></li>
+        <li><a href="<c:url value="/workShop/work"/>">工作坊</a></li>
     </ul>
 </div>
+<script>
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/tenant/getTenant.do"/>',
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                $("#img-br").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
+            }
+        });
+</script>

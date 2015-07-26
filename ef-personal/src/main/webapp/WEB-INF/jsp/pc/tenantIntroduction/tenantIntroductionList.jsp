@@ -21,7 +21,7 @@
 <!--简介内容-->
 <div id="page-column">
     <div class="column-left" style="">
-        <div class="page-img"><img src="<c:url value="/scripts/assets/images/img5.jpg"/>"></div>
+        <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
         <div class="buttom-text">
             <p><a href="#ji-ben-xin-xi">基本信息</a></p>
 
@@ -80,13 +80,13 @@
                         <c:if test="${dsryList.size()-1 != ln.index && ln.index%2 == 0}">
                             <div class="one-img-pictures">
                             <dl class="one-img-dl-l">
-                                <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
+                                <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
                                 <dd>${pic.title}1988中国工艺美术大师</dd>
                             </dl>
                         </c:if>
                         <c:if test="${ln.index%2 == 1}">
                             <dl class="one-img-dl-r">
-                                <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
+                                <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"/></dt>
                                 <dd>${pic.title}1988中国工艺美术大师</dd>
                             </dl>
                             </div>
@@ -94,7 +94,7 @@
                         <c:if test="${dsryList.size()-1 == ln.index && ln.index%2 == 0}">
                             <div class="one-img-pictures">
                                 <dl class="one-img-dl-l">
-                                    <dt><img src="<c:url value="/scripts/assets/images/img6.jpg"/>"></dt>
+                                    <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
                                     <dd>${pic.title}1988中国工艺美术大师</dd>
                                 </dl>
                             </div>
@@ -108,7 +108,7 @@
                 <h1>出版著作</h1>
                 <ul>
                     <c:forEach items="${cbzzList}" var="list3">
-                        <li><img src="<c:url value="/scripts/assets/images/img7.jpg"/>"></li>
+                        <li><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></li>
                     </c:forEach>
                 </ul>
             </div>

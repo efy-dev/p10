@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,8 @@ public class TenantController extends BaseTenantController {
      *
      * @return
      */
-    @RequestMapping({"/ten"})
-    public ModelAndView getTenant(HttpServletRequest request  , Model model)throws Exception{
+    @RequestMapping("/ten")
+    public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         Tenant tenant = getTenantfromDomain(request);
         String queryHql = "from TenantWork t where t.tenant.id = :tenantId";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
@@ -58,14 +59,19 @@ public class TenantController extends BaseTenantController {
     }*/
     @RequestMapping("/tenantList")
     public String listTenant(HttpServletRequest request,Model model)throws Exception{
-        Tenant tenant = getTenantfromDomain(request);
+        /*Tenant tenant = getTenantfromDomain(request);*/
         XQuery xQuery = new XQuery("listTenantProject_default",request);
-        xQuery.put("tenant_id",tenant.getId());
+        /*xQuery.put("tenant_id",tenant.getId());*/
         List list = baseManager.listObject(xQuery);
         model.addAttribute("list",list);
         return "/tenant/tenantList";
     }
 
+    @ResponseBody
+    @RequestMapping("/getTenant.do")
+    public Object getTenant(HttpServletRequest request) throws Exception{
+        return getTenantfromDomain(request);
+    }
 
 
 }

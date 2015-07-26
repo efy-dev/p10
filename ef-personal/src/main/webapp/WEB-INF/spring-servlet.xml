@@ -7,8 +7,8 @@
 				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-<!--    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
+   <!-- <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/m8/**" location="/m8/"/>
     <mvc:resources mapping="/theme/**" location="/theme/"/>-->
 
