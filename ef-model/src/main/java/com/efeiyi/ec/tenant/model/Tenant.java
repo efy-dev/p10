@@ -43,31 +43,20 @@ public class Tenant implements Serializable {
     private String logoUrl;
     private Date createDateTime;
     private List<TenantProject> tenantProjectList;
+    private String projectName ;
 
-//    public TenantProject mainTenantProject() {
-//
-//        TenantProject tenantProject = null;
-//
-//        List<TenantProject> tenantProjects = this.getTenantProjectList();
-//        if (tenantProjects != null && tenantProjects.size() > 0) {
-//
-//            for (TenantProject tenantProjectTemp : tenantProjects) {
-//                if (tenantProjectTemp.getStatus().equals("1")) {
-//                    tenantProject = tenantProjectTemp;
-//                }
-//            }
-//            if (tenantProject == null) {
-//                tenantProject = tenantProjects.get(0);
-//            }
-//        } else {
-//            tenantProject = new TenantProject();
-//            Project project = new Project();
-//            project.setName("");
-//            tenantProject.setProject(project);
-//        }
-//        return tenantProject;
-//    }
+    @Transient
+    public String getProjectName() {
+        return projectName;
+    }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     public List<TenantProject> getTenantProjectList() {
         return tenantProjectList;
