@@ -44,6 +44,8 @@ public class Tenant implements Serializable {
     private Date createDateTime;
     private List<TenantProject> tenantProjectList;
     private String projectName ;
+    private String levelName;
+
 
     @Transient
     public String getProjectName() {
