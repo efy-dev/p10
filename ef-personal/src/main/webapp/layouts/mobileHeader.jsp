@@ -16,9 +16,9 @@
 </header>
 <div class="am-border-1"></div>
 <nav id="am-nav-1">
-    <div class="am-bg-tp "><img src="http://tenant.efeiyi.com/${tenant.backgroundUrl}"></div>
+    <div class="am-bg-tp " style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background)"></div>
     <div class="am-xu-nav">
-        <img src="http://tenant.efeiyi.com/${tenant.favicon}" alt="传承人" class="am-img-thumbnail am-circle">
+        <div style="background:url(http://tenant.efeiyi.com/${tenant.favicon}@!tenant-mobile-view-icon)" alt="传承人" class="am-img-thumbnail am-circle"></div>
         <p id="am-mg-14">${tenant.fullName}</p>
         <p>木板水印</p>
         <p >${tenant.title}<img src="<c:url value="/scripts/assets/wap/images/logo2.gif"/>" class="am-page-img"></p>
