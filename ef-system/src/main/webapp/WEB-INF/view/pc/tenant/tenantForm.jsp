@@ -29,14 +29,14 @@
             <input type="hidden" name="id" value="${object.id}">
             <%--<input type="hidden" name="status" value="1"/>--%>
             <div class="am-form-group">
-                <label for="name" class="am-u-sm-3 am-form-label">姓名拼音 / NamePinYi</label>
+                <label for="name" class="am-u-sm-3 am-form-label">姓名拼音</label>
 
                 <div class="am-u-sm-9">
                     <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="fullName" class="am-u-sm-3 am-form-label">中文姓名 / FullName</label>
+                <label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>
 
                 <div class="am-u-sm-9">
                     <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"
@@ -55,7 +55,7 @@
 
 
             <div class="am-form-group">
-                <label for="birthday" class="am-u-sm-3 am-form-label">出生日期 / Birthday</label>
+                <label for="birthday" class="am-u-sm-3 am-form-label">出生日期</label>
 
                 <div class="am-u-sm-9">
                     <div class="am-form-group am-form-icon">
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="provinceName" class="am-u-sm-3 am-form-label">籍贯 / ProvinceName</label>
+                <label for="provinceName" class="am-u-sm-3 am-form-label">籍贯</label>
 
                 <div class="am-u-sm-9">
                     <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName"
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地/ PresentAddress</label>
+                <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地</label>
 
                 <div class="am-u-sm-9">
                     <input type="text" id="presentAddress" name="presentAddress" placeholder="现居地/ PresentAddress"
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="sex" class="am-u-sm-3 am-form-label">性别 / Sex</label>
+                <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
 
                 <div class="am-u-sm-9">
                     <ming800:status name="sex" dataType="Tenant.sex" checkedValue="${object.sex}" type="select" required="true"/>
@@ -90,7 +90,7 @@
             </div>
 
             <div class="am-form-group">
-                <label for="favicon" class="am-u-sm-3 am-form-label">头像 / Favicon</label>
+                <label for="favicon" class="am-u-sm-3 am-form-label">头像(传承人列表页面的封面)</label>
 
                 <div class="am-u-sm-9">
                     <input type="file" id="favicon" name="favicon" placeholder="头像 / Favicon"
@@ -102,7 +102,7 @@
             </div>
 
             <div class="am-form-group">
-                <label for="background" class="am-u-sm-3 am-form-label">背景图片</label>
+                <label for="background" class="am-u-sm-3 am-form-label">背景图片(移动网站背景图片)</label>
 
                 <div class="am-u-sm-9">
                     <input type="file" id="background" name="background" placeholder="背景图片"
@@ -127,7 +127,7 @@
             </div>
 
             <div class="am-form-group">
-                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介 / Brief</label>
+                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>
 
                 <div class="am-u-sm-9" style="text-align: left;">
                     <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>

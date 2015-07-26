@@ -1,10 +1,11 @@
 <!DocType html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
-    <div class="printing">${tenant.title}<span>  [<a href="#">木板水印</a>]</span></div>
+    <div class="printing"><ming800:status name="level" dataType="Tenant.level" checkedValue="${tenant.level}" type="normal"/>非物质文化遗产传承人<span>  [<a href="#">${tenant.getMainTenantProject().getProject().name}</a>]</span></div>
     <ul class="register">
         <li class="register-page"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz1.gif"/>"></a></li>
        <%-- <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>

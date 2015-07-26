@@ -30,13 +30,14 @@ public class BaseTenantController extends BaseController {
 
 
     public Tenant getTenantfromDomain(HttpServletRequest request)throws Exception{
+        Tenant tenantTemp = null;
         String subDommainName = (String)request.getAttribute("domainName");
         if(!"master".equalsIgnoreCase(subDommainName)){
             LinkedHashMap<String,Object> map = new LinkedHashMap<>();
             String queryHql ="from Tenant t where t.name=:name";
             map.put("name",subDommainName);
-            tenant =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
+            tenantTemp =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
         }
-      return tenant;
+      return tenantTemp;
     }
 }

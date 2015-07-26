@@ -42,6 +42,9 @@ public class TenantController extends BaseTenantController {
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenant.getId());
         List list = baseManager.listObject(queryHql,queryParamMap);
+        XQuery xQuery = new XQuery("listTenantBanner_default",request);
+        xQuery.put("tenant_id",tenant.getId());
+        model.addAttribute("bannerList",baseManager.listObject(xQuery));
         model.addAttribute("tenantWorkList",list);
         model.addAttribute("tenant", tenant);
         return new ModelAndView("/tenant/tenantView");
