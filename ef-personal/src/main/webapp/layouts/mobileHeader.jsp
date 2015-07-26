@@ -22,6 +22,6 @@
         <p id="am-mg-14">${tenant.fullName}</p>
         <p>木板水印</p>
         <p >${tenant.title}<img src="<c:url value="/scripts/assets/wap/images/logo2.gif"/>" class="am-page-img"></p>
-        <p id="am-bd-2"><a href="<c:url value="/tenant/ten"/>" class="p-a" id="p-a">首页<span class="am-bd-2"></span></a><a href="<c:url value="/introduction/intro"/>" class="p-a">简介<span class="am-bd-2"></span></a><a href="<c:url value="/work/listTenantWork"/>" class="p-a">作品<span class="am-bd-2"></span></a><a href="<c:url value="/info/listTenantInfo"/>" class="p-a">资讯<span  class="am-bd-2"></span></a><a href="<c:url value="/workShop/work"/>" class="p-a">工作坊</a></p>
+        <p id="am-bd-2"><a href="<c:url value="/"/>" class="p-a" id="p-a">首页<span class="am-bd-2"></span></a><a href="<c:url value="/introduction/intro"/>" class="p-a">简介<span class="am-bd-2"></span></a><a href="<c:url value="/work/listTenantWork"/>" class="p-a">作品<span class="am-bd-2"></span></a><a href="<c:url value="/info/listTenantInfo"/>" class="p-a">资讯<span  class="am-bd-2"></span></a><a href="<c:url value="/workShop/work"/>" class="p-a">工作坊</a></p>
     </div>
 </nav>

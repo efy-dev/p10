@@ -9,13 +9,14 @@
 <head></head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
-  <div class="work-details-i"><a href="<c:url value="/work/listTenantWork"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
+  <div class="work-details-i"><a href="javascript:history.go(-1)"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
 </header>
-<h1>${product.name}</h1>
 <section class="work-text-h1">
+  <h1>${product.name}</h1>
   <p>
-    <img src="http://tenant.efeiyi.com/${product.picture_url}"/>
-
+    <c:forEach items="${product.productPictureList}" var="productPicture">
+      <img src="http://tenant.efeiyi.com/${productPicture.pictureUrl}"/>
+    </c:forEach>
     <span>${product.productDescription.content}</span>
   </p>
 </section>

@@ -8,12 +8,12 @@
 <html class="no-js">
 <head></head>
 <body>
-<!--输入内容-->
+<!--输入内容--><%--
 <div class="am-g am-color-000 ">
     <c:forEach items="${tagList}" var="tag">
     <div class="am-u-sm-4 an-mg-top am-u-end"><button type="button" class="am-btn am-btn-default">${tag.value}</button></div>
     </c:forEach>
-</div>
+</div>--%>
 <!--1-->
 <section class="vessel">
 <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
@@ -36,6 +36,7 @@
         <%--</c:choose>--%>
         <%--</p>--%>
         <span><a href="<c:url value="/info/${tenantInfo.id}"/>">详情</a></span>
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
     </div>
     </c:forEach>
 </section>

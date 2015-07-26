@@ -21,7 +21,7 @@
         <hr data-am-widget="divider" style="margin-top:0;" class="am-divider am-divider-dashed" />
     </div>
     <p class="am-p-p">
-        <img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg" class="am-img-responsive"  style="height:201px; margin-bottom:16px;"/>
+      <%--  <img src="http://tenant.efeiyi.com/${tenantNews.}" class="am-img-responsive"  style="height:201px; margin-bottom:16px;"/>--%>
     <span>
         ${tenantNews.content}
     </span>

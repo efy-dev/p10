@@ -9,7 +9,7 @@
 <head></head>
 <body>
 <!--输入内容-->
-<div class="am-g am-color-000">
+<%--<div class="am-g am-color-000">
     <c:if test="${tenantProjectList.size() > 1}">
 
     <c:forEach items="${tenantProjectList}" var="tenantProject">
@@ -24,7 +24,7 @@
         </c:forEach>
     </c:if>
 
-</div>
+</div>--%>
 <!--1-->
 <c:forEach items="${tenantWorkList}" var="tenantWork">
 <section class="vessel">

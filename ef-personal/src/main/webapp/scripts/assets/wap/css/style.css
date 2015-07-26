@@ -57,7 +57,7 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .am-figure-default figcaption{ margin:0; padding-bottom:15px;}
 .am-figure-default{margin:0 10px; overflow:hidden;}
 .intro-text-1{padding:0 3%; font-family:"微软雅黑"; font-size:12px;overflow:hidden;}
-.message-text{width:100%;padding:23px 3% 0 3%;height:170px;margin-bottom:10px;}
+.message-text{width:100%;padding:23px 3% 0 3%;overflow:hidden;margin-bottom:10px;}
 .message-text h1{font-size:14px; font-family:"微软雅黑";color:#000;}
 .message-text p{color:#7c8692;font-size:12px; font-family:"Microsoft YaHei,Microsoft JhengHei,SimSun,SimHei";line-height:20px;}
 #message-text-p{ font-size:12px; font-family:"微软雅黑";color:#777; line-height:33px;margin:0;}
