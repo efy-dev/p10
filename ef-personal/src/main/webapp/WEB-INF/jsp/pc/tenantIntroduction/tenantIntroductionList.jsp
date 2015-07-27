@@ -67,9 +67,9 @@
                 </tbody>
             </table>
             <div class="column-text-p">
-                <c:forEach items="${jbxxList}" var="jbxx">
-
-                </c:forEach>
+                <c:if test="${jbxxIntroduction != null}">
+                    ${jbxxIntroduction.content}
+                </c:if>
             </div>
         </div>
         <c:if test="${dsryList != null && dsryList.size() > 0}">
