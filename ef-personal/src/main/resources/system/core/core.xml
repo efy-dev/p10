@@ -191,7 +191,7 @@
                        orderby="desc"/>
                 <field name="theDatetime2" label="结束时间" value="${CURRENT_DATE}" inputType="date" dataType="datetime"/>
 
-                <field name="tenant.id" name2="tenant.name" label="机构" value="${MY_BRANCH}" inputType="default"
+                <field name="master.id" name2="master.name" label="机构" value="${MY_BRANCH}" inputType="default"
                        reference="Branch"/>
             </fields>
             <does>
@@ -199,14 +199,14 @@
                     label="自定义条件列表"
                     result="/core/does/doDbList">
                     <query name="default" label="自定义条件列表" orderBy="theDatetime:desc">
-                        <condition label="机构" name="tenant.id" inputType="default" defaultValue="${MY_BRANCH}"
+                        <condition label="机构" name="master.id" inputType="default" defaultValue="${MY_BRANCH}"
                                    operation="eq"/>
                     </query>
                 </do>
                 <do name="listDoDb"
                     result="json">
                     <query name="default" label="自定义条件列表" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" inputType="default" defaultValue="${MY_BRANCH}"
+                        <condition label="机构" name="master.id" inputType="default" defaultValue="${MY_BRANCH}"
                                    operation="eq"/>
                     </query>
                 </do>
@@ -361,8 +361,8 @@
                                    dataType="date"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="theDateTime:desc">
-                        <condition label="学校标识" name="tenant.name" inputType="text" operation="likes"/>
-                        <condition label="学校名称" name="tenant.schoolName" inputType="text" operation="likes"/>
+                        <condition label="学校标识" name="master.name" inputType="text" operation="likes"/>
+                        <condition label="学校名称" name="master.schoolName" inputType="text" operation="likes"/>
                         <condition label="ip" name="ip" inputType="text" operation="ne"/>
                     </query>
                     <query name="advance" label="分类查询" orderBy="theDateTime:desc">
@@ -381,15 +381,15 @@
                     label="学校系统日志"
                     result="/core/p/systemAllLogList">
                     <query name="default" type="auto" label="默认" orderBy="theDateTime:desc">
-                        <condition label="机构" name="tenant.id" inputType="default" operation="in"/>
+                        <condition label="机构" name="master.id" inputType="default" operation="in"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="theDateTime:desc">
-                        <condition label="机构" name="tenant.id" inputType="default" operation="in"/>
+                        <condition label="机构" name="master.id" inputType="default" operation="in"/>
                         <condition label="用户" name="user.id" defaultValue="${MY_USER}" inputType="dialog_pop" key="user"
                                    operation="in"/>
                     </query>
                     <query name="advance" label="分类查询" orderBy="theDateTime:desc">
-                        <condition label="机构" name="tenant.id" inputType="default" operation="in"/>
+                        <condition label="机构" name="master.id" inputType="default" operation="in"/>
                         <condition label="开始时间" name="theDateTime" defaultValue="${FIRST_DAY_OF_MONTH}" inputType="date"
                                    operation="ge"
                                    dataType="datetime"/>

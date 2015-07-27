@@ -26,11 +26,11 @@ public class HomeController {
      */
     @RequestMapping("/index")
     public String index(HttpServletRequest request,Model model)throws Exception{
-        /*Tenant tenant = getTenantfromDomain(request);*/
+        /*Master master = getTenantfromDomain(request);*/
         XQuery xQuery = new XQuery("listTenantProject_default",request);
-        /*xQuery.put("tenant_id",tenant.getId());*/
+        /*xQuery.put("tenant_id",master.getId());*/
         List list = baseManager.listObject(xQuery);
         model.addAttribute("list",list);
-        return "/tenant/tenantList";
+        return "/master/tenantList";
     }
 }

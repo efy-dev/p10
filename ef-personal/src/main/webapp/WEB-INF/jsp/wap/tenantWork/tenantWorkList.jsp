@@ -10,15 +10,15 @@
 <body>
 <!--输入内容-->
 <%--<div class="am-g am-color-000">
-    <c:if test="${tenantProjectList.size() > 1}">
+    <c:if test="${masterProjectList.size() > 1}">
 
-    <c:forEach items="${tenantProjectList}" var="tenantProject">
-    <div class="am-u-sm-4 an-mg-top am-u-end"><button type="button" class="am-btn am-btn-default"> ${tenantProject.project.name} </button></div>
+    <c:forEach items="${masterProjectList}" var="masterProject">
+    <div class="am-u-sm-4 an-mg-top am-u-end"><button type="button" class="am-btn am-btn-default"> ${masterProject.project.name} </button></div>
     </c:forEach>
     </c:if>
-    <c:if test="${tenantProjectList.size() == 1}">
-    <c:forEach items="${tenantProjectList}" var="tenantProject">
-        <c:forEach items="${tenantProject.project.projectTagList}" var="projectTag">
+    <c:if test="${masterProjectList.size() == 1}">
+    <c:forEach items="${masterProjectList}" var="masterProject">
+        <c:forEach items="${masterProject.project.projectTagList}" var="projectTag">
         <div class="am-u-sm-4 an-mg-top am-u-end"><button type="button" class="am-btn am-btn-default"> ${projectTag.value} </button></div>
        </c:forEach>
         </c:forEach>
@@ -26,16 +26,16 @@
 
 </div>--%>
 <!--1-->
-<c:forEach items="${tenantWorkList}" var="tenantWork">
+<c:forEach items="${tenantWorkList}" var="masterWork">
 <section class="vessel">
 
     <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
-        <a href="/work/${tenantWork.id}">
+        <a href="/work/${masterWork.id}">
 
-        <img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}">
+        <img src="http://master.efeiyi.com/${masterWork.pictureUrl}">
 
         </a>
-        <figcaption class="am-figure-capition-btm intro-text-2">${tenantWork.productDescription.content} </figcaption>
+        <figcaption class="am-figure-capition-btm intro-text-2">${masterWork.productDescription.content} </figcaption>
     </figure>
 </section>
 </c:forEach>

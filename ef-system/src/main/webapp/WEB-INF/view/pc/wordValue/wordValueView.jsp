@@ -24,7 +24,7 @@
     <div class="am-form-group">
       <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label"></label>
       <div class="am-u-sm-9">
-        <input type="text" name="tenantName" id="tenantName" placeholder="字典代码" value="${object.tenant.fullName}" readonly="readonly">
+        <input type="text" name="tenantName" id="tenantName" placeholder="字典代码" value="${object.master.fullName}" readonly="readonly">
         <!-- <small>必填项*</small>-->
       </div>
     </div>

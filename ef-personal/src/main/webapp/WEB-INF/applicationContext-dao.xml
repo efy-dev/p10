@@ -37,10 +37,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <!--userDao用于spring security-->
-    <bean id="userDao" class="com.efeiyi.ec.personal.tenant.dao.hibernate.UserDaoHibernate">
+    <bean id="userDao" class="com.efeiyi.ec.personal.master.dao.hibernate.UserDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <bean id="userManager" class="com.efeiyi.ec.personal.tenant.service.impl.UserManagerImpl">
+    <bean id="userManager" class="com.efeiyi.ec.personal.master.service.impl.UserManagerImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
 </beans>

@@ -26,13 +26,13 @@
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.ec.personal.tenant.interceptor.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.personal.master.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.ec.personal.tenant.interceptor.BaseTenantInterceptor"/>
+            <bean class="com.efeiyi.ec.personal.master.interceptor.BaseTenantInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

@@ -2,7 +2,7 @@ package com.efeiyi.ec.system.organization.service;
 
 
 
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.User;
 
 import java.util.List;
@@ -15,13 +15,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface BranchManager {
-    void saveOrUpdate(Tenant branch);
+    void saveOrUpdate(Master branch);
 
-    Tenant getBranch(String branchId);
+    Master getBranch(String branchId);
 
-    Tenant getBranchByName(String name) throws Exception;
+    Master getBranchByName(String name) throws Exception;
 
-    List<Tenant> listBranch();
+    List<Master> listBranch();
 
 
     User checkUsername(String username);

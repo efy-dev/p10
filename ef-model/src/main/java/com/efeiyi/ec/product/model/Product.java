@@ -1,7 +1,7 @@
 package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,7 +21,7 @@ public class Product {
     private String name;
     private String serial;
     private String picture_url;
-    private Tenant tenant;
+    private Master master;
     private ProjectCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
@@ -63,12 +63,12 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     @JsonIgnore
-    public Tenant getTenant() {
-        return tenant;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setMaster(Master master) {
+        this.master = master;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

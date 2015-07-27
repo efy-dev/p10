@@ -23,7 +23,7 @@
             <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">
                 <input type="hidden" value="saveOrUpdateDocument" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
-                <input type="hidden" name="group" value="tenant">
+                <input type="hidden" name="group" value="master">
 
                 <div class="am-form-group">
                     <label for="title" class="am-u-sm-3 am-form-label">标题 / Title</label>

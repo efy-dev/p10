@@ -19,8 +19,8 @@
 <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
     <div class="message-text">
         <h1>
-            <c:forEach items="${tenantInfo.tenantNewsTagList}" var="tenantNewsTag">
-                [${tenantNewsTag.wordValue.value}]
+            <c:forEach items="${tenantInfo.masterNewsTagList}" var="masterNewsTag">
+                [${masterNewsTag.wordValue.value}]
             </c:forEach>
                 ${tenantInfo.title} </h1>
         <p id="message-text-p">

@@ -1,7 +1,7 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantNews;
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterNews;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,11 @@ public class TenantInfoController extends BaseTenantController {
      */
     @RequestMapping("/listTenantInfo")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
-        Tenant tenant = super.getTenantfromDomain(request);
+        Master master = super.getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistTenantInfo_default",request);
-        xQuery.put("tenant_id", tenant.getId());
+        xQuery.put("tenant_id", master.getId());
         xQuery.addRequestParamToModel(model,request);
-        model.addAttribute("tenant", tenant);
+        model.addAttribute("tenant", master);
         List tenantInfoList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenantInfoList",tenantInfoList);
 
@@ -52,8 +52,8 @@ public class TenantInfoController extends BaseTenantController {
      */
     @RequestMapping("/{tenantInfoId}")
     public  String getTenantInfo(@PathVariable String tenantInfoId, HttpServletRequest request , Model model) throws Exception {
-        TenantNews tenantNews = (TenantNews) baseManager.getObject(TenantNews.class.getName(),tenantInfoId);
-        model.addAttribute("tenantNews",tenantNews);
+        MasterNews masterNews = (MasterNews) baseManager.getObject(MasterNews.class.getName(),tenantInfoId);
+        model.addAttribute("tenantNews", masterNews);
         return "/tenantInfo/tenantInfoView";
     }
 }

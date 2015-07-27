@@ -38,15 +38,15 @@
             <td>级别</td>
         </tr>
 
-        <c:forEach items="${requestScope.pageInfo.list}" var="tenant">
+        <c:forEach items="${requestScope.pageInfo.list}" var="master">
             <tr>
                 <td>
                     <input type="button" value="修改" onclick="updateTenant(this)"/>
-                    <input type="hidden" value="${tenant.id}"/>
+                    <input type="hidden" value="${master.id}"/>
                     <input type="button" value="删除"/>
                 </td>
-                <td><a href="/basic/xm.do?qm=viewTenant&id=${tenant.id}">${tenant.name}</a></td>
-                <td>${tenant.type}</td>
+                <td><a href="/basic/xm.do?qm=viewTenant&id=${master.id}">${master.name}</a></td>
+                <td>${master.type}</td>
             </tr>
         </c:forEach>
     </table>
