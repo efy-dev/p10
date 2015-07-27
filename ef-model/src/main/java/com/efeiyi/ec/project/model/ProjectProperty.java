@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -47,6 +48,7 @@ public class ProjectProperty {
     }
 
     @Column(name="status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }

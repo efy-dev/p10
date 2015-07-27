@@ -23,8 +23,8 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/tenantWork")
-public class TenantWorkController {
+@RequestMapping("/work")
+public class TenantWorkController extends BaseTenantController {
 
     @Autowired
     private BaseManager baseManager;
@@ -35,23 +35,25 @@ public class TenantWorkController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantWork.do")
+    @RequestMapping("/listTenantWork")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-        String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(10,conditions.length());
+        /*String conditions = request.getParameter("conditions");
+        String tenantId = conditions.substring(10,conditions.length());*/
+        Tenant tenant = getTenantfromDomain(request);
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        XQuery xQuery = new XQuery("plistTenantWork_default",request);
+        XQuery xQuery = new XQuery("plistTenantWork_default",tenant.getId(),request.getParameter("sort"),request);
+        xQuery.put("tenant_id",tenant.getId());
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
 
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",tenantWorkList);
         XQuery xQuery1 = new XQuery("listProject_default",request);
+        xQuery1.put("tenant_id",tenant.getId());
         List<TenantProject> tenantProjectList = baseManager.listObject(xQuery1);
         model.addAttribute("tenantProjectList", tenantProjectList);
 
-        return "/pc/tenantWork/tenantWorkList";
+        return "/tenantWork/tenantWorkList";
 
     }
     /**
@@ -63,7 +65,7 @@ public class TenantWorkController {
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         modelMap.addAttribute("product", product);
-        return new ModelAndView("/pc/tenantWork/tenantWorkView",modelMap);
+        return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }
 }

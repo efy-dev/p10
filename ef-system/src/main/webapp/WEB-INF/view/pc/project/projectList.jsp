@@ -17,47 +17,45 @@
     <title></title>
 </head>
 <body>
-<div class="admin-content">
-    <div class="am-g">
-        <div class="am-u-sm-12">
-            <table class="am-table am-table-striped am-table-hover table-main">
-                <thead>
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">操作</th>
+                <th class="table-title">项目名称</th>
+                <th class="table-title">项目编号</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach items="${objectList}" var="project">
                 <tr>
-                    <th class="table-set">操作</th>
-                    <th class="table-title">项目名称</th>
-                    <th class="table-title">项目编号</th>
-
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach items="${objectList}" var="project">
-                    <tr>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <c:if test="${!empty master}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                           href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=1&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
-                                                class="am-icon-pencil-square-o"></span> 新建为传承人主项目
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${empty master}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                           href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=2&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
-                                                class="am-icon-pencil-square-o"></span> 新建为传承人项目
-                                        </a>
-                                    </c:if>
-                                </div>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <c:if test="${!empty master}">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=1&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
+                                            class="am-icon-pencil-square-o"></span> 新建为传承人主项目
+                                    </a>
+                                </c:if>
+                                <c:if test="${empty master}">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=2&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
+                                            class="am-icon-pencil-square-o"></span> 新建为传承人项目
+                                    </a>
+                                </c:if>
                             </div>
-                        </td>
-                        <td class="am-hide-sm-only">${project.name}</td>
-                        <td class="am-hide-sm-only">${project.serial}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
+                        </div>
+                    </td>
+                    <td class="am-hide-sm-only">${project.name}</td>
+                    <td class="am-hide-sm-only">${project.serial}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

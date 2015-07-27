@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class XQuery {
 
+
     private String hql;  //全部的查询语句
     private String headHql; //查询语句的头部 例如：select s from
     private String sortHql; //查询语句的 排序部分 例如  order by s.createDatetime;
@@ -50,6 +51,31 @@ public class XQuery {
         //判断是否有排序参数
         if (request.getParameter("sort") != null) {
             this.setSortHql(fetchOrderStr(tempDoQuery, request.getParameter("sort")));
+        } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
+            this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
+        }
+
+        //补全查询语句
+        if (sortHql != null) {
+            this.setHql(this.getHql() + sortHql);
+        }
+    }
+
+    //只能用于List操作
+    public XQuery(String doQueryName, String conditions , String sort, HttpServletRequest request) throws Exception {
+        Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        //判断是否是分页查询
+
+        if (request!=null) {
+            this.setPageEntity(XDoUtil.getPageEntity(request));
+        }
+
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(doQueryName.split("_")[1]);
+        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery,conditions, this);
+
+        //判断是否有排序参数
+        if (sort != null && !"".equals(sort)) {
+            this.setSortHql(fetchOrderStr(tempDoQuery, sort));
         } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
             this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
         }
@@ -142,22 +168,22 @@ public class XQuery {
     }
 
     //更新查询参数
-    public void updateQueryParam(String key, Object value) {
-        if (queryParamMap.get(key) != null) {
+    public void put(String key, Object value) {
+//        if (queryParamMap.get(key) != null) {
             queryParamMap.put(key, value);
-        } else {
-            throw new RuntimeException("参数不存在!");
-        }
+//        } else {
+//            throw new RuntimeException("参数不存在!");
+//        }
     }
 
     //添加查询参数
-    public void addQueryParam(String key, Object value) {
-        if (queryParamMap.get(key) == null) {
-            queryParamMap.put(key, value);
-        } else {
-            throw new RuntimeException("参数已经存在!");
-        }
-    }
+//    public void addQueryParam(String key, Object value) {
+//        if (queryParamMap.get(key) == null) {
+//            queryParamMap.put(key, value);
+//        } else {
+//            throw new RuntimeException("参数已经存在!");
+//        }
+//    }
 
     //分页专用，将当前的查询条件返回给客户端
     public void addRequestParamToModel(Model model, HttpServletRequest request) {

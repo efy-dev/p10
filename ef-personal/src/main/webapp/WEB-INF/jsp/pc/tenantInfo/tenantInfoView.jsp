@@ -8,7 +8,7 @@
 <!--内容-->
 <!--资讯详情-->
 <div id="page-nav">
-  <p><a href="${pageContext.request.contextPath}/tenant/${tenantNews.tenant.id}">首页</a><span id="zpxq-1"><a href="${pageContext.request.contextPath}/tenantInfo/listTenantInfo.do?conditions=tenant.id:${tenantNews.tenant.id}">资讯</a></span><span>${tenantNews.title}</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/info/listTenantInfo.do"/> ">资讯</a></span><span>${tenantNews.title}</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯详情页内容-->

@@ -7,8 +7,8 @@
 				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-<!--    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/scripts/**" location="/scripts/"/>
+   <!-- <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/m8/**" location="/m8/"/>
     <mvc:resources mapping="/theme/**" location="/theme/"/>-->
 
@@ -21,14 +21,20 @@
     </bean>
 
 
-<!--    <mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <mvc:mapping path="/**"/>
             <mvc:mapping path="**"/>
-            <bean class="com.ming800.core.filter.DriverInterceptor"/>
+            <bean class="com.efeiyi.ec.personal.tenant.interceptor.DriverInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <mvc:mapping path="/**"/>
+            <mvc:mapping path="**"/>
+            <bean class="com.efeiyi.ec.personal.tenant.interceptor.BaseTenantInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <bean id="multipartResolver"

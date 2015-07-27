@@ -10,7 +10,7 @@
 <body>
 <!--作品-->
 <div id="page-nav">
-  <p><a href="${pageContext.request.contextPath}/tenant/${tenant.id}">首页</a><span>作品</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span>作品</span></p>
 </div>
 <div class="border-nav"></div>
 <!--作品内容-->
@@ -32,29 +32,29 @@
     <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="vs">
       <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
         <div class="works-container">
-          <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </c:if>
        <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
-         <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+         <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
        </c:if>
       <c:if test="${ vs.index%3==2}">
-          <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img-1"></a>
+          <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img-1"></a>
     </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
       <div class="works-container">
-        <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+        <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </div>
       </c:if>
       <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
-      <a href="<c:url value="/tenantWork/${tenantWork.id}"/>"><img src="<c:url value="/scripts/assets/images/img10.jpg"/>" class="works-img"></a>
+      <a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
         </div>
       </c:if>
       </c:forEach>
     <!--页码-->
   </div>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="/tenantWork/listTenantWork.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/work/listTenantWork.do">
   <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

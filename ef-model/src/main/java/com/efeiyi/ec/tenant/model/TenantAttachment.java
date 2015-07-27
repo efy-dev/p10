@@ -15,6 +15,7 @@ public class TenantAttachment {
     private String url;
     private TenantIntroduction introduction;
     private String status;
+    private String title;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -54,5 +55,14 @@ public class TenantAttachment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

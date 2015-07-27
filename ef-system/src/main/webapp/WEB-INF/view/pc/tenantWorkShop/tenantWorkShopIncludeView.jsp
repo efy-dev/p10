@@ -36,8 +36,13 @@
 
     <div class="am-u-md-6">
       <h3>工作坊封面</h3>
-      <img src="http://tenant.efeiyi.com/${object.picture_url}">
+      <img src="http://tenant.efeiyi.com/${object.picture_url}@!tenant-manage-work-view">
     </div>
+    <div class="am-u-md-6">
+      <h3>视频</h3>
+      <video src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.videoPath}" controls="controls"  width="500" height="250"></video>
+    </div>
+
 
   </div>
 </div>

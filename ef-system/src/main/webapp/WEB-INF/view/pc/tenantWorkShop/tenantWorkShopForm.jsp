@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -12,7 +13,6 @@
     <script src="/scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-<div class="admin-content">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人工作坊</strong> /
             <%--<small>Tenant introduction</small>--%>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="/basic/xmm.do" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+            <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
                 <input type="hidden" value="saveOrUpdateTenantWorkShop" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
@@ -37,7 +37,7 @@
                     <label for="name" class="am-u-sm-3 am-form-label">名称</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="name" name="name" placeholder="名称" value="${object.name}">
+                        <input type="text" id="name" name="name" placeholder="名称" value="${object.name}" required>
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <label for="shopIntroduction" class="am-u-sm-3 am-form-label">介绍</label>
 
                     <div class="am-u-sm-9">
-                        <textarea id="shopIntroduction" name="shopIntroduction" class="ckeditor" placeholder="介绍"
+                        <textarea id="shopIntroduction" name="shopIntroduction" class="ckeditor" placeholder="介绍" required
                                   value="${object.shopIntroduction}">${object.shopIntroduction}</textarea>
                     </div>
                     <br>
@@ -77,7 +77,7 @@
 
                     <div class="am-u-sm-9">
                         <input type="file" id="videoPath" name="videoPath" placeholder="video">
-                        <%--<small>选择你要保存的轮播图</small>--%>
+                        <small>选择你要保存的视频</small>
                     </div>
                 </div>
 
@@ -93,6 +93,5 @@
             </form>
         </div>
     </div>
-</div>
 </body>
 </html>

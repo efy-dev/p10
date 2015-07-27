@@ -1,12 +1,15 @@
 package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -34,11 +37,36 @@ public class Tenant implements Serializable {
     private String content; // 简介(长)
     private String presentAddress; //现居地
     private String backgroundUrl;
+    private String provinceName;//籍贯
     private AddressProvince originProvince; //籍贯（省）
-    private Integer theStatus;         // 正常，删除，停止，隐藏
+    private String status;         // 正常，删除，停止，隐藏
+    private String logoUrl;
     private Date createDateTime;
+    private List<TenantProject> tenantProjectList;
+    private String projectName ;
+    private String levelName;
 
 
+    @Transient
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantProject> getTenantProjectList() {
+        return tenantProjectList;
+    }
+
+    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+        this.tenantProjectList = tenantProjectList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -60,14 +88,13 @@ public class Tenant implements Serializable {
         this.name = name;
     }
 
-
-    @Column(name = "the_status")
-    public Integer getTheStatus() {
-        return theStatus;
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
     }
 
-    public void setTheStatus(Integer theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 
@@ -79,7 +106,8 @@ public class Tenant implements Serializable {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
-    @Column(name="full_name")
+
+    @Column(name = "full_name")
     public String getFullName() {
         return fullName;
     }
@@ -162,7 +190,7 @@ public class Tenant implements Serializable {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="origin_province_id")
+    @JoinColumn(name = "origin_province_id")
     public AddressProvince getOriginProvince() {
         return originProvince;
     }
@@ -178,5 +206,23 @@ public class Tenant implements Serializable {
 
     public void setBackgroundUrl(String backgroundUrl) {
         this.backgroundUrl = backgroundUrl;
+    }
+
+    @Column(name = "province_name")
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    @Column(name = "logo_url")
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

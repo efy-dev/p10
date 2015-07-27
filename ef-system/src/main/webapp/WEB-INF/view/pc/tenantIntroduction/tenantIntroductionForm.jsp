@@ -66,7 +66,6 @@
 <%--</form>--%>
 <%--</div>--%>
 <%--</div>--%>
-<div class="admin-content">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人简介</strong> /
             <small>Tenant introduction</small>
@@ -81,7 +80,7 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-            <form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">
+            <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal">
                 <input type="hidden" value="saveOrUpdateTenantIntroduction" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="tenant.id" value="${tenantId}">
@@ -100,7 +99,7 @@
                     <label for="title" class="am-u-sm-3 am-form-label">标题</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="title" name="title" placeholder="标题" value="${object.title}">
+                        <input type="text" id="title" name="title" placeholder="标题" value="${object.title}" required>
                         <%--<small>输入你要保存的类型</small>--%>
                     </div>
                 </div>
@@ -110,7 +109,7 @@
                     <label for="title" class="am-u-sm-3 am-form-label">类型</label>
 
                     <div class="am-u-sm-9">
-                        <ming800:status name="type" dataType="TenantIntroduction.type" type="select"/>
+                        <ming800:status name="type" dataType="TenantIntroduction.type" checkedValue="${object.type}" type="select" required="true"/>
                     </div>
                 </div>
 
@@ -120,7 +119,7 @@
 
                     <div class="am-u-sm-9">
                         <textarea id="content" name="content" class="ckeditor" placeholder="输入简介"
-                                  value="${object.content}">${object.content}</textarea>
+                                  value="${object.content}" required>${object.content}</textarea>
                     </div>
                     <br>
                 </div>
@@ -216,9 +215,6 @@
     <%--</div>--%>
 
     <%--</div>--%>
-
-
-</div>
 
 <%--<script>--%>
 

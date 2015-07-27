@@ -20,34 +20,40 @@
 <body>
 <div class="admin-content">
     <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupId=${groupId}"/>"><span class="am-icon-plus"></span>新建轮播图</a>
+                </div>
+            </div>
+        </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
+                    <th class="table-title">图片</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
-                    <tr>
+                    <tr id="${banner.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formBanner&id=${banner.id}"/>"><span
-                                            class="am-icon-pencil-square-o"></span> 编辑
-                                    </a>
+
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeBanner&id=${banner.id}"/>"><span
+                                      onclick="removeBanner('${banner.id}')" href="#"/><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                 </div>
                             </div>
                         </td>
                         <td class="am-hide-sm-only">${banner.title}</td>
+                        <td class="am-hide-sm-only"><img src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -61,6 +67,22 @@
         </ming800:pcPageList>
     </div>
 </div>
+<script>
+
+    function removeBanner(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeBanner"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+
+</script>
 
 </body>
 </html>

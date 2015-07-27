@@ -5,19 +5,23 @@
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
                 <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"  access="admin,manager" text_zh_CN="支付记录">
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_defaultsjdfk"  access="admin,manager" text_zh_CN="支付记录">
                 <match url="plistPurchaseOrderPayment_default"/>
             </jnode>
-            <jnode url=""  access="admin,manager" text_zh_CN="发货记录">
-                <match url=""/>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"  access="admin,manager" text_zh_CN="发货记录">
+                <match url="plistPurchaseOrderDelivery"/>
+                <match url="plistPurchaseOrder"/>
             </jnode>
         </jnode>
         <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="最新商品列表">
                 <match url="plistProduct_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="推荐商品管理">
-                <match url="plistProduct_default"/>
+            <jnode url="/basic/xm.do?qm=plistProductRecommended_default"  access="admin,manager" text_zh_CN="推荐商品管理">
+                <match url="plistProductRecommended_default"/>
+                <match url="viewProduct"/>
+                <match url="removeProductRecommended"/>
+                <match url="viewTenant"/>
             </jnode>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
@@ -37,8 +41,9 @@
             <jnode url="/basic/xm.do?qm=plistBanner_default"  access="admin,manager" text_zh_CN="电商网站轮播图">
                 <match url="plistBanner_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_default"  access="admin,manager" text_zh_CN="电商网站文档">
-                <match url="plistDocument_default"/>
+            <jnode url="/basic/xm.do?qm=plistDocument_tenant"  access="admin,manager" text_zh_CN="电商网站文档">
+                <match url="plistDocument_tenant"/>
+                <match url="viewDocument"/>
             </jnode>
         </jnode>
     </jnode>
@@ -60,6 +65,7 @@
                 <match url="listProject_default"/>
                 <match url="formTenantNews"/>
                 <match url="viewTenantNews"/>
+                <match url="saveOrUpdateTenantWork"/>
             </jnode>
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
                 <!--<match url="plistTenantIntroduction_default"/>-->
@@ -86,8 +92,9 @@
             <!--</jnode>-->
         </jnode>
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager"  text_zh_CN="传承人轮播图">
+            <jnode url="/basic/xm.do?groupId=master.homePage&amp;qm=plistBanner_master.homePage"  access="admin,manager"  text_zh_CN="首页轮播图">
                 <match url="plistBanner_tenant"/>
+                <match url="plistBanner_master.homePage"/>
                 <match url="formBanner"/>
                 <match url="removeBanner"/>
             </jnode>
@@ -95,6 +102,10 @@
                 <match url="plistDocument_tenant"/>
                 <match url="formDocument_tenant"/>
                 <match url="removeDocument_tenant"/>
+                <match url="removeDocument"/>
+                <match url="formDocument"/>
+                <match url="saveOrUpdateDocument"/>
+                <match url="listDocument_default"/>
             </jnode>
         </jnode>
     </jnode>
@@ -111,12 +122,34 @@
     </jnode>
 
     <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理"><!--系统管理-->
-    <jnode url="" id="CategoryManager"  access="admin" state="closed" text_zh_CN="类别管理">
+    <jnode url="" id="CategoryManager"  access="admin" state="closed" text_zh_CN="非遗项目与类别">
         <jnode url="/basic/xm.do?qm=plistProject_default"  access="admin,manager" text_zh_CN="项目列表">
             <match url="plistProject_default"/>
+            <match url="viewProject"/>
+            <match url="removeProject"/>
+            <match url="formProject"/>
+            <match url="saveOrUpdateProject"/>
+            <match url="plistProject_default"/>
+
+            <match url="plistProjectProperty_default"/>
+            <match url="removeProjectProperty"/>
+            <match url="formProjectProperty"/>
+            <match url="saveOrUpdateProjectProperty"/>
+            <match url="listProjectProperty_default"/>
+
+            <match url="plistProjectTag_default"/>
+            <match url="removeProjectTag"/>
+            <match url="formProjectTag"/>
+            <match url="saveOrUpdateProjectTag"/>
+            <match url="listProjectTag_default"/>
         </jnode>
         <jnode url="/basic/xm.do?qm=plistProjectCategory_default"  access="admin,manager" text_zh_CN="类别列表">
             <match url="plistProjectCategory_default"/>
+            <match url="removeProjectCategory"/>
+            <match url="formProjectCategory"/>
+            <match url="saveOrUpdateProjectCategory"/>
+            <match url="listProjectCategory_default"/>
+
         </jnode>
     </jnode>
     </jnode>
@@ -126,12 +159,26 @@
     <jnode url="" id="userManager"  access="admin" state="closed" text_zh_CN="用户管理">
         <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户列表">
             <match url="plistUser_default"/>
+            <match url="removeUser"/>
+            <match url="formUser"/>
+            <match url="saveOrUpdateUser"/>
+            <match url="listUser_default"/>
         </jnode>
         <jnode url="/basic/xm.do?qm=plistRole_default"  access="admin,manager" text_zh_CN="角色管理">
             <match url="plistRole_default"/>
         </jnode>
-    </jnode>
 
+    </jnode>
+        <jnode id="wordValueManager" url="" access="admin" text_zh_CN="字典管理"><!--系统管理-->
+            <jnode id="" url="/basic/xm.do?qm=plistWordValue_default" state="" extend="" access="" text_zh_CN="字典列表">
+                <match url="plistWordValue_default"/>
+                <match url="viewWordValue"/>
+                <match url="removeWordValue"/>
+                <match url="formWordValue"/>
+                <match url="saveOrUpdateWordValue"/>
+            </jnode>
+
+        </jnode>
 </jnode>
 </jmenu>
 

@@ -17,7 +17,7 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2015/7/20.
  */
-public class TenantHandler implements MultipartHandler{
+public class TenantHandler implements MultipartHandler {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
@@ -27,17 +27,30 @@ public class TenantHandler implements MultipartHandler{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "photo/"+identify+".jpg";
-        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("favicon"), "tenant", url);
-        boolean result2 = aliOssUploadManager.uploadFile(multipartRequest.getFile("background"), "tenant", "background/"+multipartRequest.getFile("background").getOriginalFilename());
+        String url = "photo/" + identify + ".jpg";
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
+        HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
+
+        if (!multipartRequest.getFile("favicon").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("favicon"), "tenant", url);
+            paramMap.put("favicon", url);
+        }
+
+        if (!multipartRequest.getFile("background").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("background"), "tenant", "background/" + multipartRequest.getFile("background").getOriginalFilename());
+            paramMap.put("backgroundUrl", "background/" + multipartRequest.getFile("background").getOriginalFilename());
+
+        }
+
+        if (!multipartRequest.getFile("logo").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "tenant", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+        }
+
         //������� start
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
-        HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
-        paramMap.put("favicon",url);
-        paramMap.put("backgroundUrl","background/"+multipartRequest.getFile("background").getOriginalFilename());
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         //������� end
-        modelMap.put("object",object);
+        modelMap.put("object", object);
 
         return modelMap;
     }

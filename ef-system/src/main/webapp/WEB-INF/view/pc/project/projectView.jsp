@@ -62,12 +62,12 @@
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                                 <button   onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&id=${subProject.id}&fatherId=${object.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${subProject.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProject&id=${subProject.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <a href="/basic/xm.do?qm=viewProject&id=${subProject.id}">${subProject.name}</a>
+                        <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${subProject.id}"/>">${subProject.name}</a>
                     </td>
                     <td>${subProject.serial}</td>
                 </tr>
@@ -87,7 +87,7 @@
                      </span>
                     <span style="margin-right: 2px;">
                      <a href="#" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&id=${projectTag.id}&projectId=${object.id}"/>'" >编辑</a>
-                     <a href="#"  onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectTag?id=${projectTag.id}"/>'" >删除</a>
+                     <a href="#"  onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectTag&id=${projectTag.id}"/>'" >删除</a>
                     </span>
                 </c:forEach>
 
@@ -114,7 +114,7 @@
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                                         <button   onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&id=${projectProperty.id}&projectId=${object.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductProperty&id=${projectProperty.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProjectProperty&id=${projectProperty.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                                     </div>
                                 </div>
                             </td>

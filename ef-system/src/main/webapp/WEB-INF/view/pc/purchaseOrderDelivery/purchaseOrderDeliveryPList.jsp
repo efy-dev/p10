@@ -18,25 +18,38 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table>
-    <tr>
-        <td>purchaseOrderDelivery——id</td>
-        <td>user_address_id</td>
-    </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderDelivery">
-        <tr>
-            <td>${purchaseOrderDelivery.id}</td>
-            <td>${purchaseOrderDelivery.consumerAddress.id}</td>
-        </tr>
-    </c:forEach>
-</table>
-<div style="clear: both">
-    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
-        <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
-        <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-    </ming800:pcPageList>
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+        </div>
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-title">订单号</th>
+                    <th class="table-title">发送日期</th>
+                    <th class="table-title">发送地址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderDelivery">
+                    <tr>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                        <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="clear: both">
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+            <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+        </ming800:pcPageList>
+    </div>
 </div>
-
 </body>
 </html>

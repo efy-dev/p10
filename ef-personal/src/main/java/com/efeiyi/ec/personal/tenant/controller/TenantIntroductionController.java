@@ -8,6 +8,7 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,8 @@ import java.util.List;
  * Created by AC丶man on 2015/7/17.
  */
 @Controller
-@RequestMapping("/tenantIntroduction")
-public class TenantIntroductionController {
+@RequestMapping("/introduction")
+public class TenantIntroductionController extends BaseTenantController {
 
     @Autowired
     private BaseManager baseManager;
@@ -30,42 +31,50 @@ public class TenantIntroductionController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantIntroduction.do")
+    @RequestMapping("/intro")
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
-        String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(23,conditions.length());
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        XQuery xQuery = new XQuery("listTenantIntroduction_default",request);
+        Tenant tenant = getTenantfromDomain(request);
+        //拼写查询参数(conditions)
+        String conditions = "introduction.tenant.id:"+tenant.getId();
+
+        XQuery xQuery = new XQuery("listTenantIntroduction_default",conditions,null,null);
+        xQuery.put("tenant_id",tenant.getId());
         xQuery.addRequestParamToModel(model,request);
-        XQuery xQuery1 = new XQuery("listAttachment_default",request);
+        XQuery xQuery1 = new XQuery("listAttachment_default",conditions,null,null);
         xQuery1.addRequestParamToModel(model,request);
         List<TenantIntroduction> list = baseManager.listObject(xQuery);
         List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
 
 
         for (TenantIntroduction tenantIntroduction:list){
-            if ("da-shi-rong-yu".equals(tenantIntroduction.getTitle())){
-                List list2 = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list2.add(tenantAttachment);
-                    }
-                }
-                model.addAttribute("list2", list2);
+            if ("1".equals(tenantIntroduction.getType())){
+                model.addAttribute("jbxxIntroduction", tenantIntroduction);
             }
-            if ("chu-ban-zhu-zuo".equals(tenantIntroduction.getTitle())){
-                List list3 = new ArrayList();
+            if ("2".equals(tenantIntroduction.getType())){
+                List dsryList = new ArrayList();
                 for (TenantAttachment tenantAttachment:list1){
                     if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        list3.add(tenantAttachment);
+                        dsryList.add(tenantAttachment);
                     }
                 }
-                model.addAttribute("list3", list3);
+                model.addAttribute("dsryList", dsryList);
+            }
+            if ("3".equals(tenantIntroduction.getType())){
+                List cbzzList = new ArrayList();
+                for (TenantAttachment tenantAttachment:list1){
+                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
+                        cbzzList.add(tenantAttachment);
+                    }
+                }
+                model.addAttribute("cbzzList", cbzzList);
+            }
+            if ("4".equals(tenantIntroduction.getType())){
+                model.addAttribute("tenantIntroduction", tenantIntroduction);
             }
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
-        return "/pc/tenantIntroduction/tenantIntroductionList";
+        return "/tenantIntroduction/tenantIntroductionList";
     }
 
 }

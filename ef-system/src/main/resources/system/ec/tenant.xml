@@ -11,6 +11,12 @@
             <fields>
                 <field name="id" label="传承人" inputType="text"/>
                 <field name="name" label="传承人名字" inputType="text"/>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
                 <field name="level" label="等级" inputType="text">
                     <statusType fieldName="level">
                         <item label="国家级" value="1"/>
@@ -25,6 +31,7 @@
                     result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
@@ -35,6 +42,7 @@
                     <page>
                         <fields>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>
+                            <field name="stauts" label="创建时间" defaultValue="1" inputType="default"></field>
                         </fields>
                     </page>
                 </do>
@@ -318,12 +326,15 @@
 
                     <query name="byProject" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
+
+                <do name="viewTenantWorkImg" label="查看传承人产品页" access="" result="/tenantWork/imgView"/>
                 <do name="formTenantWork" label="保存传承人产品页" access="" result="/tenantWork/tenantWorkForm" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkHandler"/>
                 <do name="viewTenantWork" label="查看传承人产品页" access="" result="/tenantWork/tenantWorkView"/>
-                <do name="saveOrUpdateTenantWork" label="保存传承人产品" access="" result="/tenantWork/tenantWorkSaveSuccess" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkFormHandler">
+                <do name="saveOrUpdateTenantWork" label="保存传承人产品" access="" result="redirect:/basic/xm.do?qm=plistTenantWork_byProject" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkFormHandler">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
@@ -345,6 +356,32 @@
 
             </does>
         </entity>
+
+        <entity name="TenantWorkRecommended" label="传承人产品推荐"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantWorkRecommended">
+            <does>
+                <do name="plistTenantWorkRecommended" access="" label="传承人产品推荐列表"
+                    result="/tenantWorkRecommended/tenantWorkRecommendedPList" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formTenantWorkRecommended" label="保存传承人推荐产品页" access="" result="/tenantWorkRecommended/tenantWorkRecommendedForm" />
+                <do name="viewTenantWork" label="查看传承人推荐产品页" access="" result="/tenantWork/tenantWorkView"/>
+                <do name="saveOrUpdateTenantWorkRecommended" label="保存传承人推荐产品" access="" result="redirect:/basic/xm.do?qm=plistTenantWorkRecommended" >
+                </do>
+                <do name="removeTenantWorkRecommended" label="删除大师推荐产品" access="" result="json"/>
+                <do name="listTenantWorkRecommended" label="大师著作推荐产品" access="" result="/tenantWorkRecommended/tenantWorkRecommendedList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
 
 
         <entity name="TenantProject" label="传承人作品展示图片"
@@ -395,14 +432,6 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.TenantWorkTag">
             <does>
-                <do name="saveOrUpdateProductPicture" label="保存图片" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantWorkPictureHandler">
-                    <page>
-                        <fields>
-                            <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
-                        </fields>
-                    </page>
-                </do>
                 <do name="removeProductPicture" label="删除图片" access="" result="json"/>
 
                 <do name="listTenantWorkTag" label="大师著作产品" access="" result="json">

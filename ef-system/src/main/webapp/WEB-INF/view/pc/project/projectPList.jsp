@@ -18,7 +18,7 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&fatherId=${fatherId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目" />
 </div>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
@@ -34,13 +34,13 @@
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                         <button   onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&id=${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProject&id=${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                     </div>
                 </div>
             </td>
             <td width="10%">
                 <c:if test="${project.level == 1}">
-                    <a href="/basic/xm.do?qm=viewProject&id=${project.id}" >
+                    <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${project.id}"/>" >
                       ${project.name}
                     </a>
                 </c:if>
@@ -53,7 +53,8 @@
     </c:forEach>
 </table>
 <div style="clear: both">
-    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+    <c:url value="/basic/xm.do" var="url"/>
+    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
