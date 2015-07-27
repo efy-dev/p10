@@ -6,9 +6,11 @@
 </head>
 <body>
 <div class="am-u-sm-12" id="intro-content1">
-  <div class="intro-text-1" style="height: auto;padding-top: 14px">
-      ${jbxxIntroduction.content}
-  </div>
+    <c:if test="${jbxxIntroduction != null}">
+        <div class="intro-text-1" style="height: auto;padding-top: 14px">
+                ${jbxxIntroduction.content}
+        </div>
+    </c:if>
 </div>
 <div class="am-u-sm-12" id="am-bg-q21">
   <div data-am-widget="tabs" class="am-tabs am-tabs-default">
