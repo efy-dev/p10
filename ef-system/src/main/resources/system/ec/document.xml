@@ -20,9 +20,9 @@
                 </do>
 
                 <do name="removeDocument" label="删除document" access="" result="json"/>
-                <do name="formDocument" label="保存document" access="" result="/document/documentForm">
-                </do>
-                <do name="saveOrUpdateDocument" label="保存Document" access="" result="/document/documentSaveSuccess"/>
+                <do name="formDocument" label="保存document" access="" result="/document/documentForm"/>
+                <do name="viewDocument" label="保存document" access="" result="/document/documentView"/>
+                <do name="saveOrUpdateDocument" label="保存Document" access="" result="redirect:/basic/xm.do?qm=plistDocument_tenant"/>
                 <do name="listDocument" label="document列表" access="" result="/document/documentList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>

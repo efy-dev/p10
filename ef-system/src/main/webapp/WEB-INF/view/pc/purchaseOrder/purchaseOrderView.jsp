@@ -56,65 +56,54 @@
     </div>
 </div>
 <div class="am-g">
-    <div class="am-u-md-12">
-        <table class="am-table am-table-bordered">
+    <div class="am-u-sm-12 am-u-md-6">
+        <h4>订单产品数据</h4>
+    </div>
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th>订单产品数据</th>
+                <th class="table-title">产品名字</th>
+                <th class="table-title">购买个数</th>
+                <th class="table-title">产品编号</th>
+                <th class="table-title">产品单价</th>
+                <th class="table-title">产品图片</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
+                <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-primary am-u-md-3">产品名字</td>
-                    <td class="am-u-md-3">${purchaseOrderProduct.product.name}</td>
-                    <td class="am-primary am-u-md-3">购买个数</td>
-                    <td class="am-u-md-3">${purchaseOrderProduct.purchaseAmount}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.name}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.serial}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.price}</td>
+                    <td class="am-hide-sm-only"><img src="${purchaseOrderProduct.product.picture_url}" alt="产品图片"></td>
                 </tr>
-                <tr>
-                    <td class="am-primary am-u-md-3">产品编号</td>
-                    <td class="am-u-md-3">${purchaseOrderProduct.product.serial}</td>
-                    <td class="am-primary am-u-md-3">产品单价</td>
-                    <td class="am-u-md-3">${purchaseOrderProduct.product.price}</td>
-                </tr>
-                <tr>
-                    <td class="am-primary am-u-md-3">产品描述</td>
-                    <td class="am-u-md-3">${purchaseOrderProduct.product.productDescription.content}</td>
-                    <td class="am-primary am-u-md-3">产品图片</td>
-                    <td class="am-u-md-3"><img src="${purchaseOrderProduct.product.picture_url}" alt="产品图片"></td>
-                </tr>
-                <c:if test="${!stat.last}">
-                    <tr><td colspan="4"></td></tr>
-                </c:if>
-            </c:forEach>
+                </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
 
 <div class="am-g">
-    <div class="am-u-md-12">
-        <table class="am-table am-table-bordered">
+    <div class="am-u-sm-12 am-u-md-6">
+        <h4>支付记录</h4>
+    </div>
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th>支付记录</th>
+                <th class="table-title">支付方式</th>
+                <th class="table-title">支付者姓名</th>
+                <th class="table-title">支付时间</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
                 <tr>
-                    <td class="am-primary am-u-md-3">支付方式</td>
-                    <td class="am-u-md-3">${purchaseOrderPayment.payWay}</td>
-                    <td class="am-primary am-u-md-3">支付者姓名</td>
-                    <td class="am-u-md-3">${purchaseOrderPayment.user.name}</td>
-                </tr>
-                <tr>
-                    <td class="am-primary am-u-md-3" >支付时间</td>
-                    <td class="am-u-md-3" colspan="3"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
-                </tr>
-                <c:if test="${!stat.last}">
-                    <tr><td colspan="4"></td></tr>
-                </c:if>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.payWay}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
             </c:forEach>
             </tbody>
         </table>
@@ -122,39 +111,26 @@
 </div>
 
 <div class="am-g">
-    <div class="am-u-md-12">
-        <table class="am-table am-table-bordered">
+    <div class="am-u-sm-12 am-u-md-6">
+        <h4>发货记录</h4>
+    </div>
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th>配送记录</th>
+                <th class="table-title">配送地址</th>
+                <th class="table-title">配送时间</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
-                <tr>
-                    <td class="am-primary am-u-md-3">配送地址</td>
-                    <td class="am-u-md-3">${purchaseOrderDelivery.consumerAddress.details}</td>
-                    <td class="am-primary am-u-md-3">配送时间</td>
-                    <td class="am-u-md-3"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
-                </tr>
-                <c:if test="${!stat.last}">
-                    <tr><td colspan="4"></td></tr>
-                </c:if>
-            </c:forEach>
+            <tr>
+                <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                <td class="am-hide-sm-only">${purchaseOrderDelivery.createDateTime}</td>
+                </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
-
-<%--<div class="am-g">--%>
-    <%--<div class="am-u-md-12">--%>
-        <%--<h2>支付记录</h2>--%>
-    <%--</div>--%>
-
-    <%--<div class="am-u-md-12">--%>
-        <%--<jsp:include flush="true"--%>
-                     <%--page="/basic/xm.do?qm=viewPurchaseOrderPayment&id=${object.id}"/>--%>
-    <%--</div>--%>
-<%--</div>--%>
 </body>
 </html>

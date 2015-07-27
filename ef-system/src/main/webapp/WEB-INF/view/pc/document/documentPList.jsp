@@ -20,6 +20,13 @@
 <body>
 <div class="admin-content">
     <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument"/>"><span class="am-icon-plus"></span>新建文档</a>
+                </div>
+            </div>
+        </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
@@ -51,7 +58,7 @@
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewDocument&id=${document.id}"/>">${document.title}</a></td>
                         <td class="am-hide-sm-only">${document.name}</td>
-                        <td class="am-hide-sm-only">${document.theDatetime}</td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${document.theDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
