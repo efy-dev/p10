@@ -94,7 +94,7 @@
                                                 <c:forEach var="re" items="${tenantWork.tenantWorkRecommendedList}">
                                                     <c:if test="${re.tenantWork.id == tenantWork.id}">
                                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                           href="#"  onclick="removeTenantWorkRecommended(this,'${re.id}')">
+                                                           href="#"  onclick="removeTenantWorkRecommended('${re.id}')">
                                                             <span class="am-icon-heart">取消推荐 </span>
                                                         </a>
                                                     </c:if>
