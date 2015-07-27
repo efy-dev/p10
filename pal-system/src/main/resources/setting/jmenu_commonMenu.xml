@@ -5,21 +5,46 @@
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="业务管理">
             <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin" text_zh_CN="券批次列表">
                 <match url="plistLabelBatch_default"/>
+                <match url="listLabelBatch_default"/>
+                <match url="formLabelBatch"/>
+                <match url="viewLabelBatch"/>
+                <match url="removeLabelBatch"/>
+                <match url="saveOrUpdateLabelBatch"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="商品管理">
                 <match url="plistProduct_default"/>
+                <match url="listProduct_default"/>
+                <match url="formProduct"/>
+                <match url="viewProduct"/>
+                <match url="removeProduct"/>
+                <match url="saveOrUpdateProduct"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductSeries_default"  access="admin,manager" text_zh_CN="商品系列管理">
                 <match url="plistProductSeries_default"/>
+                <match url="listProductSeries_default"/>
+                <match url="formProductSeries"/>
+                <match url="viewProductSeries"/>
+                <match url="removeProductSeries"/>
+                <match url="saveOrUpdateProductSeries"/>
             </jnode>
         </jnode>
 
         <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="系统管理">
             <jnode url="/basic/xm.do?qm=plistTenant_default" access="admin" text_zh_CN="商户管理">
                 <match url="plistTenant_default"/>
+                <match url="listTenant_default"/>
+                <match url="formTenant"/>
+                <match url="viewTenant"/>
+                <match url="removeTenant"/>
+                <match url="saveOrUpdateTenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">
                 <match url="plistUser_default"/>
+                <match url="listUser_default"/>
+                <match url="formUser"/>
+                <match url="viewUser"/>
+                <match url="removeUser"/>
+                <match url="saveOrUpdateUser"/>
             </jnode>
         </jnode>
     </jnode>
