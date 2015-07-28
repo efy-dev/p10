@@ -1,10 +1,10 @@
-package com.efeiyi.ec.personal.tenant.service.impl;
+package com.efeiyi.ec.personal.master.service.impl;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.OrganizationConst;
-import com.efeiyi.ec.personal.tenant.dao.UserDao;
-import com.efeiyi.ec.personal.tenant.service.UserManager;
+import com.efeiyi.ec.personal.master.dao.UserDao;
+import com.efeiyi.ec.personal.master.service.UserManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.util.StringUtil;

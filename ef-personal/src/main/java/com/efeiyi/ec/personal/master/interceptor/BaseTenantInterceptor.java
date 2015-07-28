@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.tenant.interceptor;
+package com.efeiyi.ec.personal.master.interceptor;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
