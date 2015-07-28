@@ -60,12 +60,22 @@
                 <br>
             </div>
 
-
             <div class="am-form-group">
-                <label for="picurl" class="am-u-sm-3 am-form-label">图片</label>
+
+                <label for="img" class="am-u-sm-3 am-form-label">原图片</label>
 
                 <div class="am-u-sm-9">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件">
+                    <img id="img" src="http://tenant.efeiyi.com/${object.pictureUrl}@!tenant-manage-banner" />
+                    <%--<small>选择你要保存的轮播图</small>--%>
+                </div>
+            </div>
+
+            <div class="am-form-group">
+
+                <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="${object.pictureUrl}">
                     <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
             </div>

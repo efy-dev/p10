@@ -24,7 +24,7 @@
           <td>
             <div class="am-btn-toolbar">
               <div class="am-btn-group am-btn-group-xs">
-                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${masterProject.project.id}&projectId=${masterProject.project.id}&masterId=${masterProject.master.id}"/>"><span
+                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${masterProject.project.id};master.id:${masterProject.master.id}&projectId=${masterProject.project.id}&masterId=${masterProject.master.id}"/>"><span
                         class="am-icon-trash-o"></span> 查看作品
                 </a>
                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"

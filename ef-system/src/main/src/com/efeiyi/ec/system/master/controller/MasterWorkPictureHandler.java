@@ -33,7 +33,7 @@ public class MasterWorkPictureHandler implements MultipartHandler {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("pictureUrl", url);
-        paramMap.put("product.id", masterWorkId);
+        paramMap.put("masterWork.id", masterWorkId);
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         modelMap.put("object", object);
 

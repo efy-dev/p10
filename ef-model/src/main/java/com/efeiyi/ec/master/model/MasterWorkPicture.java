@@ -1,7 +1,6 @@
-package com.efeiyi.ec.product.model;
+package com.efeiyi.ec.master.model;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -12,11 +11,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "product_picture")
-public class ProductPicture {
+public class MasterWorkPicture {
     private String id;
     private String pictureUrl;
     private String status;
-    private Product product;
+    private MasterWork masterWork;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -29,16 +28,16 @@ public class ProductPicture {
         this.id = id;
     }
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
+    public MasterWork getMasterWork() {
+        return masterWork;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setMasterWork(MasterWork masterWork) {
+        this.masterWork = masterWork;
     }
+
 
     @Column(name = "picture_url")
     public String getPictureUrl() {
@@ -50,7 +49,6 @@ public class ProductPicture {
     }
 
     @Column(name = "status")
-    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
