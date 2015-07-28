@@ -11,12 +11,12 @@
         <ul id="slides">
             <c:if test="${!empty bannerList}">
                 <c:forEach items="${bannerList}" var="banner">
-                    <li style="background:url(http://master.efeiyi.com/${banner.imageUrl}) no-repeat center top;width:100%;height:266px;">
+                    <li style="background:url(http://tenant.efeiyi.com/${banner.imageUrl}) no-repeat center top;width:100%;height:266px;">
                         <a href="#"></a></li>
                 </c:forEach>
             </c:if>
             <c:if test="${empty bannerList}">
-                    <li style="background:url(http://master.efeiyi.com/banner/20150725150117.jpg) no-repeat center top;width:100%;height:266px;">
+                    <li style="background:url(http://tenant.efeiyi.com/banner/20150725150117.jpg) no-repeat center top;width:100%;height:266px;">
                         <a href="#"></a></li>
             </c:if>
         </ul>
@@ -26,29 +26,29 @@
             <p></p>
             <dl class="tab-dl">
                 <dt>
-                    <c:if test="${master.favicon == null}">
+                    <c:if test="${tenant.favicon == null}">
                         <a href="<c:url value="/introduction/intro"/>" target="_blank">
-                            <img src="http://master.efeiyi.com/${master.favicon}@!master-pc-favicon"></a>
+                            <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></a>
                     </c:if>
-                    <c:if test="${master.favicon != null}">
+                    <c:if test="${tenant.favicon != null}">
                         <a href="<c:url value="/introduction/intro"/>" target="_blank">
-                            <img src="http://master.efeiyi.com/${master.favicon}@!master-pc-favicon"></a>
+                            <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></a>
                     </c:if>
                 </dt>
                 <dd>
                     <c:choose>
-                        <c:when test="${fn:length(master.brief)  > 30}">
-                            <a href="${pageContext.request.contextPath}/introduction/intro"
-                               target="_blank">${fn:substring(master.brief,0 ,30 ) }......</a>
+                        <c:when test="${fn:length(tenant.brief)  > 30}">
+                            <a href="<c:url value="/introduction/intro"/>"
+                               target="_blank">${fn:substring(tenant.brief,0 ,30 ) }......</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/introduction/intro"
-                               target="_blank">${master.brief}</a>
+                            <a href="<c:url value="/introduction/intro"/>"
+                               target="_blank">${tenant.brief}</a>
                         </c:otherwise>
                     </c:choose>
                 </dd>
             </dl>
-            <span><a href="${pageContext.request.contextPath}/introduction/intro" target="_blank">了解详细</a></span>
+            <span><a href="<c:url value="/introduction/intro"/>" target="_blank">了解详细</a></span>
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@
         <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
             <dl class="center-${work.index + 1}">
                 <dt class="center-1-dt"><a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img
-                        src="http://master.efeiyi.com/${masterWork.pictureUrl}@!master-pc-work"></a></dt>
+                        src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work-index"></a></dt>
                 <dd class="center-1-dd" style="text-align:center;">
                     <span><a href="javascript:void(0);">${masterWork.name}</a></span>
                 </dd>

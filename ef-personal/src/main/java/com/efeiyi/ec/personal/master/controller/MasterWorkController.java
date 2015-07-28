@@ -1,9 +1,9 @@
-package com.efeiyi.ec.personal.tenant.controller;
+package com.efeiyi.ec.personal.master.controller;
 
 
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterProject;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/work")
-public class TenantWorkController extends BaseTenantController {
+public class MasterWorkController extends BaseMasterController {
 
     @Autowired
     private BaseManager baseManager;
@@ -35,24 +34,15 @@ public class TenantWorkController extends BaseTenantController {
      * @param model
      * @return
      */
-    @RequestMapping("/listTenantWork")
+    @RequestMapping("/listMasterWork")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
-        /*String conditions = request.getParameter("conditions");
-        String tenantId = conditions.substring(10,conditions.length());*/
-        Master master = getTenantfromDomain(request);
-        LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        XQuery xQuery = new XQuery("plistTenantWork_default", master.getId(),request.getParameter("sort"),request);
-        xQuery.put("tenant_id", master.getId());
+        Tenant tenant = getTenantfromDomain(request);
+        XQuery xQuery = new XQuery("plistMasterWork_default",tenant.getId(),request.getParameter("sort"),request);
+        xQuery.put("master_id",tenant.getId());
         xQuery.addRequestParamToModel(model, request);
-        List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
-
-        model.addAttribute("tenant", master);
-        model.addAttribute("tenantWorkList",tenantWorkList);
-        XQuery xQuery1 = new XQuery("listProject_default",request);
-        xQuery1.put("tenant_id", master.getId());
-        List<MasterProject> masterProjectList = baseManager.listObject(xQuery1);
-        model.addAttribute("tenantProjectList", masterProjectList);
-
+        List WorkList = baseManager.listPageInfo(xQuery).getList();
+        model.addAttribute("tenant", tenant);
+        model.addAttribute("tenantWorkList",WorkList);
         return "/tenantWork/tenantWorkList";
 
     }

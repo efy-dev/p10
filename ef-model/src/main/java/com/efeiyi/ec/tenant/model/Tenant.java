@@ -1,6 +1,5 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -42,7 +41,7 @@ public class Tenant implements Serializable {
     private String status;         // 正常，删除，停止，隐藏
     private String logoUrl;
     private Date createDateTime;
-    private List<MasterProject> masterProjectList;
+    private List<TenantProject> tenantProjectList;
     private String projectName ;
     private String levelName;
 
@@ -59,13 +58,13 @@ public class Tenant implements Serializable {
 
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "master")
-    public List<MasterProject> getMasterProjectList() {
-        return masterProjectList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantProject> getTenantProjectList() {
+        return tenantProjectList;
     }
 
-    public void setMasterProjectList(List<MasterProject> masterProjectList) {
-        this.masterProjectList = masterProjectList;
+    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+        this.tenantProjectList = tenantProjectList;
     }
 
     @Id
