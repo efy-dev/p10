@@ -26,13 +26,15 @@ public class MasterAttachmentHandler implements MultipartHandler {
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
         String introductionId = request.getParameter("introductionId");
+        String masterNewsId = request.getParameter("masterNewsId");
         MultipartFile multipartFile = multipartRequest.getFile("attachmentFile");
-        String url = "attachment/" + introductionId + "/" + multipartFile.getOriginalFilename();
+        String url = "attachment/" +masterNewsId+introductionId + "/" + multipartFile.getOriginalFilename();
         aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("url", url);
         paramMap.put("introduction.id", introductionId);
+        paramMap.put("masterNews.id", masterNewsId);
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         modelMap.put("object", object);
 

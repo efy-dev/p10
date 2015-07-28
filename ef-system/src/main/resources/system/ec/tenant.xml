@@ -235,6 +235,7 @@
                         </fields>
                     </page>
                 </do>
+
                 <do name="removeMasterAttachment" label="删除附件" access="" result="json"/>
 
                 <do name="listMasterAttachment" label="传承人附件列表" access="" result="/masterIntroduction/masterAttachmentIncludeList">
@@ -326,6 +327,7 @@
 
                     <query name="byProject" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" operation="eq"/>
+                        <condition name="master.id" operation="eq" />
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
@@ -333,7 +335,7 @@
 
                 <do name="viewMasterWorkImg" label="查看传承人产品页" access="" result="/masterWork/imgView"/>
                 <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
-                <do name="viewMasterWork" label="查看传承人产品页" access="" result="/masterWork/masterWorkView"/>
+                <do name="viewMasterWork" label="查看传承人产品页" access="" result="/masterWork/masterWorkView"  />
                 <do name="saveOrUpdateMasterWork" label="保存传承人产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWork_byProject" execute="com.efeiyi.ec.system.master.controller.MasterWorkFormHandler">
                     <page>
                         <fields>
@@ -369,7 +371,7 @@
                 </do>
 
                 <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access="" result="/masterWorkRecommended/masterWorkRecommendedForm" />
-                <do name="viewMasterWork" label="查看传承人推荐产品页" access="" result="/masterWork/masterWorkView"/>
+
                 <do name="saveOrUpdateMasterWorkRecommended" label="保存传承人推荐产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWorkRecommended" >
                 </do>
                 <do name="removeMasterWorkRecommended" label="删除大师推荐产品" access="" result="json"/>
@@ -413,9 +415,9 @@
 
         <entity name="ProductPicture" label="传承人作品展示图片"
                 basic="simple" others=""
-                model="com.efeiyi.ec.product.model.ProductPicture">
+                model="com.efeiyi.ec.master.model.MasterWorkPicture">
             <does>
-                <do name="saveOrUpdateProductPicture" label="保存图片" access="" execute="com.efeiyi.ec.system.master.controller.MasterWorkPictureHandler">
+                <do name="saveOrUpdateMasterWorkPicture" label="保存图片" access="" execute="com.efeiyi.ec.system.master.controller.MasterWorkPictureHandler">
                     <!--<page>-->
                         <!--<fields>-->
                             <!--<field name="status" label="状态" defaultValue="1"-->
@@ -423,7 +425,7 @@
                         <!--</fields>-->
                     <!--</page>-->
                 </do>
-                <do name="removeProductPicture" label="删除图片" access="" result="json"/>
+                <do name="removeMasterWorkPicture" label="删除图片" access="" result="json"/>
             </does>
         </entity>
 

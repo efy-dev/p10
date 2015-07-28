@@ -2,6 +2,7 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -109,6 +110,7 @@ public class MasterNews {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterNews")
+    @Where(clause = "status=1")
     public List<MasterAttachment> getMasterAttachmentList() {
         return masterAttachmentList;
     }
