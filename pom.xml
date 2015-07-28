@@ -17,7 +17,7 @@
         <module>ef-personal</module>
         <module>base_resource</module>
         <module>pal-system</module>
-        <module>ef-tenant</module>
+        <module>ef-master</module>
         <module>pal-model</module>
     </modules>
 

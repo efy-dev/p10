@@ -36,7 +36,7 @@ public class BasicBannerFormHandler implements MultipartHandler{
         paramMap.put("group",request.getParameter("groupId"));
         paramMap.put("status","1");
 
-//        Tenant tenant = new Tenant();
+//        Master tenant = new Master();
 //        tenant.setId(request.getParameter("tenant_id"));
         paramMap.put("tenant.id",request.getParameter("tenant.id"));
 

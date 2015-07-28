@@ -1,14 +1,13 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantAttachment;
-import com.efeiyi.ec.tenant.model.TenantIntroduction;
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterAttachment;
+import com.efeiyi.ec.master.model.MasterIntroduction;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,48 +32,48 @@ public class TenantIntroductionController extends BaseTenantController {
      */
     @RequestMapping("/intro")
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
-        Tenant tenant = getTenantfromDomain(request);
+        Master master = getTenantfromDomain(request);
         //拼写查询参数(conditions)
-        String conditions = "introduction.tenant.id:"+tenant.getId();
+        String conditions = "introduction.master.id:"+ master.getId();
 
         XQuery xQuery = new XQuery("listTenantIntroduction_default",conditions,null,null);
-        xQuery.put("tenant_id",tenant.getId());
+        xQuery.put("tenant_id", master.getId());
         xQuery.addRequestParamToModel(model,request);
         XQuery xQuery1 = new XQuery("listAttachment_default",conditions,null,null);
         xQuery1.addRequestParamToModel(model,request);
-        List<TenantIntroduction> list = baseManager.listObject(xQuery);
-        List<TenantAttachment> list1 = baseManager.listObject(xQuery1);
+        List<MasterIntroduction> list = baseManager.listObject(xQuery);
+        List<MasterAttachment> list1 = baseManager.listObject(xQuery1);
 
 
-        for (TenantIntroduction tenantIntroduction:list){
-            if ("1".equals(tenantIntroduction.getType())){
-                model.addAttribute("jbxxIntroduction", tenantIntroduction);
+        for (MasterIntroduction masterIntroduction :list){
+            if ("1".equals(masterIntroduction.getType())){
+                model.addAttribute("jbxxIntroduction", masterIntroduction);
             }
-            if ("2".equals(tenantIntroduction.getType())){
+            if ("2".equals(masterIntroduction.getType())){
                 List dsryList = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        dsryList.add(tenantAttachment);
+                for (MasterAttachment masterAttachment :list1){
+                    if ((masterAttachment.getIntroduction().getId()).equals(masterIntroduction.getId())){
+                        dsryList.add(masterAttachment);
                     }
                 }
                 model.addAttribute("dsryList", dsryList);
             }
-            if ("3".equals(tenantIntroduction.getType())){
+            if ("3".equals(masterIntroduction.getType())){
                 List cbzzList = new ArrayList();
-                for (TenantAttachment tenantAttachment:list1){
-                    if ((tenantAttachment.getIntroduction().getId()).equals(tenantIntroduction.getId())){
-                        cbzzList.add(tenantAttachment);
+                for (MasterAttachment masterAttachment :list1){
+                    if ((masterAttachment.getIntroduction().getId()).equals(masterIntroduction.getId())){
+                        cbzzList.add(masterAttachment);
                     }
                 }
                 model.addAttribute("cbzzList", cbzzList);
             }
-            if ("4".equals(tenantIntroduction.getType())){
-                model.addAttribute("tenantIntroduction", tenantIntroduction);
+            if ("4".equals(masterIntroduction.getType())){
+                model.addAttribute("tenantIntroduction", masterIntroduction);
             }
         }
-        model.addAttribute("tenant",tenant);
+        model.addAttribute("tenant", master);
         model.addAttribute("list",list);
-        return "/tenantIntroduction/tenantIntroductionList";
+        return "/masterIntroduction/tenantIntroductionList";
     }
 
 }

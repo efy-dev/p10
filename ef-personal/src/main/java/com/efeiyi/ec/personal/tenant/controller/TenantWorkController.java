@@ -2,8 +2,8 @@ package com.efeiyi.ec.personal.tenant.controller;
 
 
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantProject;
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,19 +39,19 @@ public class TenantWorkController extends BaseTenantController {
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         /*String conditions = request.getParameter("conditions");
         String tenantId = conditions.substring(10,conditions.length());*/
-        Tenant tenant = getTenantfromDomain(request);
+        Master master = getTenantfromDomain(request);
         LinkedHashMap<String,Object> queryParamMap = new LinkedHashMap<>();
-        XQuery xQuery = new XQuery("plistTenantWork_default",tenant.getId(),request.getParameter("sort"),request);
-        xQuery.put("tenant_id",tenant.getId());
+        XQuery xQuery = new XQuery("plistTenantWork_default", master.getId(),request.getParameter("sort"),request);
+        xQuery.put("tenant_id", master.getId());
         xQuery.addRequestParamToModel(model, request);
         List tenantWorkList = baseManager.listPageInfo(xQuery).getList();
 
-        model.addAttribute("tenant", tenant);
+        model.addAttribute("tenant", master);
         model.addAttribute("tenantWorkList",tenantWorkList);
         XQuery xQuery1 = new XQuery("listProject_default",request);
-        xQuery1.put("tenant_id",tenant.getId());
-        List<TenantProject> tenantProjectList = baseManager.listObject(xQuery1);
-        model.addAttribute("tenantProjectList", tenantProjectList);
+        xQuery1.put("tenant_id", master.getId());
+        List<MasterProject> masterProjectList = baseManager.listObject(xQuery1);
+        model.addAttribute("tenantProjectList", masterProjectList);
 
         return "/tenantWork/tenantWorkList";
 

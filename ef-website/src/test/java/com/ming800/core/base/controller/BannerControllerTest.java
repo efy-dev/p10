@@ -8,6 +8,7 @@ import com.ming800.core.p.controller.WordValueController;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.DESEncryptUtil;
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.After;
@@ -70,11 +71,11 @@ public class BannerControllerTest {
     @SuppressWarnings("SuppressWarnings")
     @Before
     public void init() {
-          logger.info("加载spring配置开始 ............");
-	      /* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); */
-        /*ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
+         /* logger.info("加载spring配置开始 ............");
+	      *//* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); *//*
+        *//*ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
                 "src/main/webapp//WEB-INF/applicationContext-*.xml",
-                "src/main/webapp//WEB-INF/spring-servlet.xml"});*/
+                "src/main/webapp//WEB-INF/spring-servlet.xml"});*//*
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{
                 "classpath*:config/applicationContext-*.xml",
                 "classpath*:config/spring-servlet.xml"});
@@ -89,7 +90,7 @@ public class BannerControllerTest {
         documentController = (DocumentController)applicationContext.getBean("documentController");
 
 
-        wordValueController = (WordValueController)applicationContext.getBean("wordValueController");
+        wordValueController = (WordValueController)applicationContext.getBean("wordValueController");*/
     }
     @Test
     public void demo1() {
@@ -138,7 +139,21 @@ public class BannerControllerTest {
     public static void setUpAfterClass() throws Exception {
 
     }
+    @Test
+    public  void test() throws Exception {
+        String key = "i am key,let me encrypt you! 1234haha";
+        String src = "efyadmin123";
 
+        System.out.println("密钥:" + key);
+        System.out.println("明文:" + src);
+
+        String strEnc = DESEncryptUtil.encrypt(src, key);
+        System.out.println("加密�?,密文:" + strEnc);
+
+        String strDes = DESEncryptUtil.decrypt(strEnc, key);
+        System.out.println("解密�?,明文:" + strDes);
+
+    }
 
     @Test
     public void demoZZC(){

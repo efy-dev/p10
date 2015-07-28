@@ -6,9 +6,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ef-tenant</artifactId>
+    <artifactId>ef-master</artifactId>
     <packaging>war</packaging>
-    <name>ef-tenant Maven Webapp</name>
+    <name>ef-master Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -32,6 +32,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>ef-tenant</finalName>
+        <finalName>ef-master</finalName>
     </build>
 </project>

@@ -1,14 +1,13 @@
 package com.efeiyi.ec.system.tenant.controller;
 
-import com.efeiyi.ec.tenant.model.TenantNews;
-import com.efeiyi.ec.tenant.model.TenantNewsTag;
+import com.efeiyi.ec.master.model.MasterNews;
+import com.efeiyi.ec.master.model.MasterNewsTag;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.WordValue;
-import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
@@ -51,11 +50,11 @@ public class TenantNewsHandler implements DoHandler {
             for (String tagId : tagValueList) {
                 WordValue wordValueTemp = new WordValue();
                 wordValueTemp.setId(tagId);
-                TenantNewsTag tenantNewsTag = new TenantNewsTag();
-                tenantNewsTag.setWordValue(wordValueTemp);
-                tenantNewsTag.setTenantNews((TenantNews)object);
-                tenantNewsTag.setStatus("1");
-                baseManager.saveOrUpdate(TenantNewsTag.class.getName(),tenantNewsTag);
+                MasterNewsTag masterNewsTag = new MasterNewsTag();
+                masterNewsTag.setWordValue(wordValueTemp);
+                masterNewsTag.setMasterNews((MasterNews) object);
+                masterNewsTag.setStatus("1");
+                baseManager.saveOrUpdate(MasterNewsTag.class.getName(), masterNewsTag);
             }
 
         }

@@ -1,13 +1,10 @@
 package com.efeiyi.ec.personal.tenant.controller;
 
-import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantProject;
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -21,49 +18,49 @@ import java.util.List;
 public class BaseTenantController extends BaseController {
     @Autowired
     BaseManager baseManager;
-    protected Tenant tenant;
+    protected Master master;
 
-    public Tenant getTenant() {
-        return tenant;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setMaster(Master master) {
+        this.master = master;
     }
 
 
-    public Tenant getTenantfromDomain(HttpServletRequest request)throws Exception{
-        Tenant tenantTemp = null;
+    public Master getTenantfromDomain(HttpServletRequest request)throws Exception{
+        Master masterTemp = null;
         String subDommainName = (String)request.getAttribute("domainName");
         if(!"master".equalsIgnoreCase(subDommainName)){
             LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-            String queryHql ="from Tenant t where t.name=:name and t.status=:status";
+            String queryHql ="from Master t where t.name=:name and t.status=:status";
             map.put("name",subDommainName);
             map.put("status","1");
-            tenantTemp =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
-            List<TenantProject> projects = tenantTemp.getTenantProjectList();
-            tenantTemp.setProjectName(mainTenantProject(projects));
+            masterTemp =(Master) baseManager.getUniqueObjectByConditions(queryHql,map);
+            List<MasterProject> projects = masterTemp.getMasterProjectList();
+            masterTemp.setProjectName(mainTenantProject(projects));
         }
-      return tenantTemp;
+      return masterTemp;
     }
 
 
-    public String mainTenantProject(List<TenantProject> tenantProjects) {
+    public String mainTenantProject(List<MasterProject> masterProjects) {
 
-        TenantProject tenantProject = null;
+        MasterProject masterProject = null;
 
-        if (tenantProjects != null && tenantProjects.size() > 0) {
+        if (masterProjects != null && masterProjects.size() > 0) {
 
-            for (TenantProject tenantProjectTemp : tenantProjects) {
-                if (tenantProjectTemp.getStatus().equals("1")) {
-                    tenantProject = tenantProjectTemp;
+            for (MasterProject masterProjectTemp : masterProjects) {
+                if (masterProjectTemp.getStatus().equals("1")) {
+                    masterProject = masterProjectTemp;
                 }
             }
-            if (tenantProject == null) {
-                tenantProject = tenantProjects.get(0);
+            if (masterProject == null) {
+                masterProject = masterProjects.get(0);
             }
 
-            return tenantProject.getProject().getName();
+            return masterProject.getProject().getName();
         } else {
 
             return "";

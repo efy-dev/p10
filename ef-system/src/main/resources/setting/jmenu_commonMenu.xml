@@ -50,7 +50,7 @@
 
     <jnode id="ttManager" url="/main.do?jnodeId=ttManager" text_zh_CN="传承人网站管理"><!--系统管理-->
         <jnode url="" id="tenantManager" access="admin,manager" state="closed"  text_zh_CN="传承人管理">
-            <jnode url="/basic/xm.do?qm=plistTenant_default" id="tenantList" access="admin" text_zh_CN="传承人列表">
+            <jnode url="/basic/xm.do?qm=plistTenant_default" id="masterList" access="admin" text_zh_CN="传承人列表">
                 <match url="plistTenant_default"/>
                 <match url="formTenant"/>
                 <match url="removeTenant"/>

@@ -1,15 +1,15 @@
 package com.efeiyi.ec.system.tenant.controller;
 
+import com.efeiyi.ec.master.model.MasterWork;
+import com.efeiyi.ec.master.model.MasterWorkTag;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectTag;
 import com.efeiyi.ec.tenant.model.*;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.does.service.MultipartHandler;
-import com.ming800.core.p.model.WordValue;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
@@ -52,14 +52,14 @@ public class TenantWorkFormHandler implements MultipartHandler {
         ProductDescription productDescription = new ProductDescription();
         productDescription.setContent(introductionContent);
         Product product = new Product();
-        product.setId(((TenantWork) object).getId());
+        product.setId(((MasterWork) object).getId());
         productDescription.setProduct(product);
 
         baseManager.saveOrUpdate(ProductDescription.class.getName(), productDescription);
 
-        ((TenantWork) object).setProductDescription(productDescription);
+        ((MasterWork) object).setProductDescription(productDescription);
 
-        baseManager.saveOrUpdate(TenantWork.class.getName(), object);
+        baseManager.saveOrUpdate(MasterWork.class.getName(), object);
 
 
         List<String> tagValueList = new ArrayList<>();
@@ -78,11 +78,11 @@ public class TenantWorkFormHandler implements MultipartHandler {
             for (String tagId : tagValueList) {
                 ProjectTag projectTag = new ProjectTag();
                 projectTag.setId(tagId);
-                TenantWorkTag tenantWorkTag = new TenantWorkTag();
-                tenantWorkTag.setProjectTag(projectTag);
-                tenantWorkTag.setTenantWork((TenantWork) object);
-                tenantWorkTag.setStatus("1");
-                baseManager.saveOrUpdate(TenantWorkTag.class.getName(), tenantWorkTag);
+                MasterWorkTag masterWorkTag = new MasterWorkTag();
+                masterWorkTag.setProjectTag(projectTag);
+                masterWorkTag.setMasterWork((MasterWork) object);
+                masterWorkTag.setStatus("1");
+                baseManager.saveOrUpdate(MasterWorkTag.class.getName(), masterWorkTag);
             }
 
         }

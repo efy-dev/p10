@@ -22,7 +22,7 @@
     <div class="am-form-group">
       <label name="tenantName"  class="am-u-sm-3 am-form-label">传承人</label>
       <div class="am-u-sm-9">
-        <div style="margin-top: 9px;"> ${object.tenant.name}</div>
+        <div style="margin-top: 9px;"> ${object.master.name}</div>
         <!-- <small>必填项*</small>-->
       </div>
     </div>

@@ -34,8 +34,8 @@
                     </div>
                     <div class="alllist-xq">
                         <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">
-                            <c:forEach items="${tenantInfo.tenantNewsTagList}" var="tenantNewsTag">
-                                [${tenantNewsTag.wordValue.value}]
+                            <c:forEach items="${tenantInfo.masterNewsTagList}" var="masterNewsTag">
+                                [${masterNewsTag.wordValue.value}]
                             </c:forEach>
                             ${tenantInfo.title}</a></h1>
                         <p>

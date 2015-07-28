@@ -46,7 +46,7 @@
         </tr>
         <tr>
             <td>大师姓名：</td>
-            <td>${object.tenant.name}</td>
+            <td>${object.master.name}</td>
         </tr>
         <tr>
             <td>订单序列号：</td>

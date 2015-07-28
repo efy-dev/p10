@@ -16,12 +16,12 @@
 </header>
 <div class="am-border-1"></div>
 <nav id="am-nav-1">
-    <div class="am-bg-tp " style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background)"></div>
+    <div class="am-bg-tp " style="background:url(http://master.efeiyi.com/${master.backgroundUrl}@!master-mobile-view-background)"></div>
     <div class="am-xu-nav">
-        <div style="background:url(http://tenant.efeiyi.com/${tenant.favicon}@!tenant-mobile-view-icon)" alt="传承人" class="am-img-thumbnail am-circle"></div>
-        <p id="am-mg-14">${tenant.fullName}</p>
+        <div style="background:url(http://master.efeiyi.com/${master.favicon}@!master-mobile-view-icon)" alt="传承人" class="am-img-thumbnail am-circle"></div>
+        <p id="am-mg-14">${master.fullName}</p>
         <p id="projectName">木板水印</p>
-        <p ><span id="levelName">${tenant.title}</span><img src="<c:url value="/scripts/assets/wap/images/logo2.gif"/>" class="am-page-img"></p>
+        <p ><span id="levelName">${master.title}</span><img src="<c:url value="/scripts/assets/wap/images/logo2.gif"/>" class="am-page-img"></p>
         <p id="am-bd-2"><a href="<c:url value="/"/>" class="p-a" id="p-a">首页<span class="am-bd-2"></span></a><a href="<c:url value="/introduction/intro"/>" class="p-a">简介<span class="am-bd-2"></span></a><a href="<c:url value="/work/listTenantWork"/>" class="p-a">作品<span class="am-bd-2"></span></a><a href="<c:url value="/info/listTenantInfo"/>" class="p-a">资讯<span  class="am-bd-2"></span></a><a href="<c:url value="/workShop/work"/>" class="p-a">工作坊</a></p>
     </div>
 </nav>
@@ -34,7 +34,7 @@
         dataType: "json",
         success: function (data) {
             console.log(data);
-            $("#favicon").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
+            $("#favicon").attr("src","http://master.efeiyi.com/"+data.logoUrl+"@!master-manage-banner")
                 $("#projectName").html(data.projectName);
             var levelName = "";
             if(data.level=="1"){

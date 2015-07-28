@@ -1,7 +1,6 @@
 package com.efeiyi.ec.product.model;
 
-import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "product_recommended")
 public class ProductRecommended {
     private String id;
-    private Tenant tenant;
+    private Master master;
     private Product product;
     private String order;
 
@@ -31,12 +30,12 @@ public class ProductRecommended {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setMaster(Master master) {
+        this.master = master;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

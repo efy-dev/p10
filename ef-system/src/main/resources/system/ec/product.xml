@@ -14,7 +14,7 @@
                 <field name="price" label="产品价格" inputType="text"/>
                 <field name="picture_url" label="产品图片链接" inputType="text"/>
                 <field name="createDatetime" label="创建时间" inputType="date"/>
-                <field name="tenant.id" label="用户" inputType="dialog_pop"/>
+                <field name="master.id" label="用户" inputType="dialog_pop"/>
 
             </fields>
             <does>
@@ -24,7 +24,7 @@
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="name" defaultValue="0" operation="ne"/>
                         <condition name="createDatetime" operation="ne" dateType="datetime"/>
-                        <condition name="tenant.id" operation="eq" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>
+                        <condition name="master.id" operation="eq" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>
                     </query>
 
                 </do>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<module name="tenant" label="系统-机构管理" version="" package="com.efeiyi.ec.organization" path="">
+<module name="master" label="系统-机构管理" version="" package="com.efeiyi.ec.organization" path="">
     <properties>
         <property name="appID" label="appID" type="text"/>
         <property name="appsecret" label="appsecret" type="text"/>
@@ -43,7 +43,7 @@
                 <!-- 学校管理 -->
                 <do name="plistBranch"
                     label="学校信息"
-                    result="/organization/tenant/tenantList">
+                    result="/organization/master/masterList">
                     <query name="default" type="auto" label="默认" orderBy="createDate:desc">
                         <condition label="状态" name="theStatus" defaultValue="0" inputType="default" operation="ne"
                                    dataType="int"/>
@@ -57,7 +57,7 @@
                 </do>
                 <do name="plistBranchDialog" type="dialog"
                     label="学校信息"
-                    result="/organization/tenant/branchListDialog">
+                    result="/organization/master/branchListDialog">
                     <query name="dialog" type="auto" label="默认" orderBy="createDate:desc">
                         <condition label="状态" name="theStatus" defaultValue="1,2,3" inputType="default" operation="in"
                                    dataType="int"/>
@@ -65,11 +65,11 @@
                 </do>
 
                 <do name="formBranch"
-                    result="/organization/tenant/branchForm"/>
+                    result="/organization/master/branchForm"/>
                 <do name="formCoreBranch"
-                    result="/organization/tenant/branchCoreForm"/>
+                    result="/organization/master/branchCoreForm"/>
                 <do name="viewBranch"
-                    result="/organization/tenant/branchView"/>
+                    result="/organization/master/branchView"/>
             </does>
         </entity>
 
@@ -79,7 +79,7 @@
             <fields>
                 <field name="name" label="名称" inputType="text"/>
                 <field name="content" label="内容" inputType="text"/>
-                <field name="tenant.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
+                <field name="master.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
                 <field name="theType" label="类型" inputType="radio_status">
                     <statusType fieldName="theType" required="true">
                         <item label="收费合同" value="unPayChargeOrder"/>
@@ -100,7 +100,7 @@
                 <do name="plistPrintTemplateSetting" type="setting" label="打印模版"
                     result="/oa/info/printTemplate/printTemplateList">
                     <query name="default" label="打印模板列表" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                 </do>

@@ -53,15 +53,15 @@
         <div data-tab-panel-0 class="am-tab-panel am-active am-ing-bg-color">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
-                    <c:if test="${tenantProject.project.type == 1}">
+                <c:forEach items="${list}" var="masterProject" varStatus="rec">
+                    <c:if test="${masterProject.project.type == 1}">
                         <li style="width:50%;" class="am-u-sm-6 am-u-end">
                             <div class="am-gallery-item">
-                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
-                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
+                                <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                        <p>${tenantProject.tenant.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
+                                        <p>${masterProject.master.fullName}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${masterProject.master.brief}</p>
                                     </h3>
                                 </a>
                             </div>
@@ -73,15 +73,15 @@
         <div data-tab-panel-1 class="am-tab-panel am-ing-bg-color ">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-2 am-avg-lg-4 am-gallery-overlay">
-                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
-                    <c:if test="${tenantProject.project.type == 2}">
+                <c:forEach items="${list}" var="masterProject" varStatus="rec">
+                    <c:if test="${masterProject.project.type == 2}">
                         <li class=" am-u-sm-6 am-u-end ">
                             <div class="am-gallery-item">
-                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
-                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
+                                <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                        <p>${tenantProject.tenant.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
+                                        <p>${masterProject.master.fullName}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${masterProject.master.brief}</p>
                                     </h3>
                                 </a>
                             </div>
