@@ -34,6 +34,8 @@
             <tr>
                 <td class="am-primary am-u-md-3">名称</td>
                 <td class="am-u-md-3">${object.name}</td>
+                <td class="am-primary am-u-md-3" style="padding: 0rem"> </td>
+                <td class="am-u-md-3" style="padding: 0rem"> </td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">序列号</td>
@@ -51,7 +53,7 @@
 
         <div class="am-u-md-6">
             <h3>封面</h3>
-            <img src="http://master.efeiyi.com/${object.picture_url}@!master-manage-work-view">
+            <img src="http://tenant.efeiyi.com/${object.pictureUrl}@!tenant-manage-work-view">
         </div>
 
     </div>
@@ -72,21 +74,21 @@
             </thead>
             <tbody id="attachmentTbody">
 
-            <c:forEach items="${object.productPictureList}" var="productPicture">
-                <tr id="${productPicture.id}">
+            <c:forEach items="${object.masterWorkPictureList}" var="masterWorkPicture">
+                <tr id="${masterWorkPicture.id}">
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                   onclick="removeAttachment('${productPicture.id}')"><span
+                                   onclick="removeAttachment('${masterWorkPicture.id}')"><span
                                         class="am-icon-trash-o"></span> 删除
                                 </a>
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">${productPicture.pictureUrl}</td>
-                    <td class="am-hide-sm-only"><img
-                            src="<c:url value="http://master.efeiyi.com/${productPicture.pictureUrl}@!master-manage-work-view"/>"
+                    <td class="am-hide-sm-only">${masterWorkPicture.pictureUrl}</td>
+                    <td class="am-hide-sm-only"><img width="10%"
+                            src="<c:url value="http://tenant.efeiyi.com/${masterWorkPicture.pictureUrl}@!tenant-manage-work-view"/>"
                             alt=""/></td>
                 </tr>
             </c:forEach>
@@ -97,8 +99,8 @@
         <h2>新建作品图片</h2>
 
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
-
-            <input type="hidden" value="saveOrUpdateProductPicture" name="qm">
+            <input type="hidden" value="1" name="status" />
+            <input type="hidden" value="saveOrUpdateMasterWorkPicture" name="qm">
             <input type="hidden" value="${object.id}" name="masterWorkId">
             <input type="hidden" value="${object.master.id}" name="master.id">
             <input type="hidden" value="redirect:/basic/xm.do?qm=viewMasterWork&id=${object.id}"
@@ -128,7 +130,7 @@
     function removeAttachment(divId) {
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMasterAttachment"/>',
+            url: '<c:url value="/basic/xmj.do?qm=removeMasterWorkPicture"/>',
             cache: false,
             dataType: "json",
             data: {id: divId},

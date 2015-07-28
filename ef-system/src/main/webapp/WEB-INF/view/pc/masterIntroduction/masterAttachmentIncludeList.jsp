@@ -19,8 +19,8 @@
 
   <c:forEach items="${objectList}" var="masterAttachment">
     <tr>
-      <td class="am-hide-sm-only">http://master.efeiyi.com/${masterAttachment.url}</td>
-      <td class="am-hide-sm-only"><img src="http://master.efeiyi.com/${masterAttachment.url}@!master-manage-banner"></td>
+      <td class="am-hide-sm-only">http://tenant.efeiyi.com/${masterAttachment.url}</td>
+      <td class="am-hide-sm-only"><img src="http://tenant.efeiyi.com/${masterAttachment.url}@!tenant-manage-banner"></td>
     </tr>
   </c:forEach>
   </tbody>

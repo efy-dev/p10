@@ -25,7 +25,7 @@ public class MasterWork {
     private Master master;
     private ProjectCategory category;
     private BigDecimal price;
-    private List<ProductPicture> productPictureList;
+    private List<MasterWorkPicture> masterWorkPictureList;
     private ProductDescription productDescription;
     private String status;
     private Project project;  //类别
@@ -102,14 +102,15 @@ public class MasterWork {
         this.price = price;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    public List<ProductPicture> getProductPictureList() {
-        return productPictureList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterWork")
+    @Where(clause = "status=1")
+    public List<MasterWorkPicture> getMasterWorkPictureList() {
+        return masterWorkPictureList;
     }
 
 
-    public void setProductPictureList(List<ProductPicture> productPictureList) {
-        this.productPictureList = productPictureList;
+    public void setMasterWorkPictureList(List<MasterWorkPicture> masterWorkPictureList) {
+        this.masterWorkPictureList = masterWorkPictureList;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -41,7 +41,7 @@ public class MasterWorkFormHandler implements MultipartHandler {
         if (multipartFile.getOriginalFilename() != null && !multipartFile.getOriginalFilename().equals("")) {
             String url = "work/" + introductionId + "/" + multipartFile.getOriginalFilename();
             aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
-            paramMap.put("picture_url", url);
+            paramMap.put("pictureUrl", url);
 
         }
         paramMap.put("master.id", introductionId);

@@ -15,7 +15,7 @@
 <body>
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人资讯</strong>
-            <small>Master introduction</small>
+            <small>Master News</small>
         </div>
     </div>
 
@@ -56,17 +56,61 @@
                 <div id="tagGroup">
 
                 </div>
-
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-push-3">
                         <button type="submit" class="am-btn am-btn-primary">保存</button>
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
+    <c:if test="${not empty object.id}">
+        <div class="am-u-md-12">
+            <h2>可用附件</h2>
 
-<script>
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default"
+                       href="<c:url value="/basic/xm.do?qm=viewMasterNews&id=${object.id}"/>"><span
+                            class="am-icon-plus"></span>新建附件</a>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-12">
+                <h2>附件</h2>
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-title">链接</th>
+                        <th class="table-title">内容</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody id="attachmentTbody">
+
+                    <c:forEach items="${object.masterAttachmentList}" var="masterAttachment">
+                        <tr id="${masterAttachment.id}">
+                            <td class="am-hide-sm-only">http://tenant.efeiyi.com/${masterAttachment.url}</td>
+                            <td class="am-hide-sm-only">
+                                <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterAttachment.url}">
+                                    <img width="18%"
+                                         src="<c:url value="http://tenant.efeiyi.com/${masterAttachment.url}@!tenant-manage-banner"/>"
+                                         alt=""/>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </c:if>
+
+
+    <script>
 
 
 
@@ -95,7 +139,18 @@
     $().ready(function(){
         getTagList();
     });
-
+    function removeAttachment(divId) {
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeMasterAttachment"/>',
+            cache: false,
+            dataType: "json",
+            data: {id: divId},
+            success: function (data) {
+                $("#" + divId).remove();
+            }
+        });
+    }
 </script>
 
 </body>

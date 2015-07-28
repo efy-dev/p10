@@ -105,7 +105,7 @@
                                 </div>
                             </td>
                             <td class="am-hide-sm-only">
-                                 <a href="<c:url value="/basic/xm.do?qm=viewMasterWork&id=${masterWork.id}"/>">
+                                 <a href="<c:url value="/basic/xm.do?qm=viewMasterWork&id=${masterWork.id}&masterId=${masterId}"/>">
                                     ${masterWork.name}
                                  </a>
                                   <a style="margin-left: 10px;color: red;" >
@@ -120,8 +120,8 @@
                                ${masterWork.master.fullName}
                             </td>
                             <td class="am-hide-sm-only">
-                                <a href="/Img/imgUrl.do?imgUrl=http://master.efeiyi.com/${masterWork.pictureUrl}">
-                                  <img  width="10%"  src="http://master.efeiyi.com/${masterWork.pictureUrl}@!master-manage-banner" >
+                                <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterWork.pictureUrl}">
+                                  <img  width="10%"  src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-manage-banner" >
                                 </a>
                             </td>
                         </tr>

@@ -114,10 +114,14 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">http://master.efeiyi.com/${attachment.url}</td>
-                    <td class="am-hide-sm-only"><img
-                            src="<c:url value="http://master.efeiyi.com/${attachment.url}@!master-manage-banner"/>"
-                            alt=""/></td>
+                    <td class="am-hide-sm-only">http://tenant.efeiyi.com/${attachment.url}</td>
+                    <td class="am-hide-sm-only">
+                        <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${attachment.url}">
+                        <img width="18%"
+                            src="<c:url value="http://tenant.efeiyi.com/${attachment.url}@!tenant-manage-banner"/>"
+                            alt=""/>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -127,12 +131,22 @@
         <h2>新建附件</h2>
 
         <form action="<c:url value="/basic/xmm.do"/>"method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
-
+            <input type="hidden" name="status" value="1"  />
+            <input type="hidden" value="" name="masterNewsId">
             <input type="hidden" value="saveOrUpdateMasterAttachment" name="qm">
             <input type="hidden" value="${object.id}" name="introductionId">
             <input type="hidden" value="${object.id}" name="introduction.id">
             <input type="hidden" value="redirect:/basic/xm.do?qm=viewMasterIntroduction&id=${object.id}"
                    name="resultPage">
+
+            <div class="am-form-group">
+                <label for="title" class="am-u-sm-3 am-form-label">标题</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="title" name="title" placeholder="标题" >
+                    <%--<small>选择你要保存的轮播图</small>--%>
+                </div>
+            </div>
 
             <div class="am-form-group">
                 <label for="attachmentFile" class="am-u-sm-3 am-form-label">附件</label>
