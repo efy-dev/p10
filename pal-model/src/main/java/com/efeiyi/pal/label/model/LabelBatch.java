@@ -19,7 +19,7 @@ public class LabelBatch {
     private String id;
     private String setting;
     private String start;
-    private String amount;
+    private Integer amount;
     private Date createDate;
     private Product product;
     private Tenant tenant;
@@ -56,11 +56,11 @@ public class LabelBatch {
     }
 
     @Column(name = "amount")
-    public String getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
