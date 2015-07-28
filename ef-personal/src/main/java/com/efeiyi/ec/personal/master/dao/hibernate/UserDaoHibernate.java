@@ -1,9 +1,9 @@
-package com.efeiyi.ec.personal.tenant.dao.hibernate;
+package com.efeiyi.ec.personal.master.dao.hibernate;
 
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.personal.tenant.dao.UserDao;
+import com.efeiyi.ec.personal.master.dao.UserDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
 import org.hibernate.Query;
 import org.hibernate.Session;

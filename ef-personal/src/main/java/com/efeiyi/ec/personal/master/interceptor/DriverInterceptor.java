@@ -1,4 +1,4 @@
-package com.efeiyi.ec.personal.tenant.interceptor;
+package com.efeiyi.ec.personal.master.interceptor;
 
 import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
