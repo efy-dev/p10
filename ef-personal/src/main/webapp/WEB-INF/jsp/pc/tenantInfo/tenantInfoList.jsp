@@ -18,12 +18,12 @@
 <!--资讯内容-->
 <div id="center--1">
     <div class="center-buttom">
-        <c:forEach items="${tagList}" var="tag" >
+        <%--<c:forEach items="${tagList}" var="tag" >
             <a href="javascript:void(0)"><button class="button">${tag.value}</button></a>
-        </c:forEach>
+        </c:forEach>--%>
     </div>
     <c:if test="${tenantInfoList != null && tenantInfoList.size() > 0}">
-    <div class="center-right">
+    <div class="center-right" style="margin-right: 95px; float: right;">
         <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
             <div class="alllist">
                 <div class="alllist-content">
@@ -33,7 +33,7 @@
                         <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
                     </div>
                     <div class="alllist-xq">
-                        <h1><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">
+                        <h1><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">
                             <c:forEach items="${tenantInfo.masterNewsTagList}" var="masterNewsTag">
                                 [${masterNewsTag.wordValue.value}]
                             </c:forEach>
@@ -48,7 +48,7 @@
                                 </c:otherwise>
                             </c:choose>--%>
                         </p>
-                        <span><a href="<c:url value="/tenantInfo/${tenantInfo.id}"/>" target="_blank">详情</a></span>
+                        <span><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">详情</a></span>
                     </div>
                 </div>
                 <div class="alllist-border"></div>
@@ -57,7 +57,7 @@
     </div>
     </c:if>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/listTenantInfo.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/listMasterInfo.do">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

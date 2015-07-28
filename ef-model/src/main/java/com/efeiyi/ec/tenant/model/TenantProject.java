@@ -1,6 +1,5 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.project.model.Project;
 import org.hibernate.annotations.GenericGenerator;
 

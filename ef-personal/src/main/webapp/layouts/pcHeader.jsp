@@ -22,8 +22,8 @@
     <ul class="nav-centent">
         <li><a href="<c:url value="/"/>">首页</a></li>
         <li><a href="<c:url value="/introduction/intro"/>">简介</a></li>
-        <li><a href="<c:url value="/work/listTenantWork"/>">作品</a></li>
-        <li><a href="<c:url value="/info/listTenantInfo"/>">资讯</a></li>
+        <li><a href="<c:url value="/work/listMasterWork"/>">作品</a></li>
+        <li><a href="<c:url value="/info/listMasterInfo"/>">资讯</a></li>
         <li><a href="<c:url value="/workShop/work"/>">工作坊</a></li>
     </ul>
 </div>
@@ -35,7 +35,7 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#favicon").attr("src","http://master.efeiyi.com/"+data.logoUrl+"@!master-manage-banner")
+                $("#favicon").attr("src","http://tenant.efeiyi.com/"+data.logoUrl+"@!tenant-manage-banner")
 //                $("#projectName").html(data.projectName);
                 var levelName = "";
                 if(data.level=="1"){
