@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "tenant_project")
 public class TenantProject implements Serializable {
     private String id;
-    private Master master;
+    private Tenant tenant;
     private Project project;
     private String status;
 
@@ -31,13 +31,16 @@ public class TenantProject implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
-    public Master getMaster() {
-        return master;
+    public Tenant getTenant() {
+        return tenant;
     }
 
-    public void setMaster(Master master) {
-        this.master = master;
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
+
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
