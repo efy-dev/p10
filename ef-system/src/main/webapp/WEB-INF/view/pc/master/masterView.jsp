@@ -44,7 +44,6 @@
                 <td class="am-primary am-u-md-3" style="padding: 0rem"> </td>
                 <td class="am-u-md-3" style="padding: 0rem">
                 </td>
-
             </tr>
             </tbody>
         </table>
