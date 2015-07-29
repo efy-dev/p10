@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td>大师姓名：</td>
-            <td>${object.master.name}</td>
+            <td>${object.tenant.name}</td>
         </tr>
     </table>
 </div>
