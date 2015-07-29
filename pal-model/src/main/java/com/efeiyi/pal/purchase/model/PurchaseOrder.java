@@ -3,6 +3,7 @@ package com.efeiyi.pal.purchase.model;
 import com.efeiyi.pal.label.model.LabelBatch;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -54,6 +55,7 @@ public class PurchaseOrder {
         this.labelBatchList = labelBatchList;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
@@ -64,6 +66,7 @@ public class PurchaseOrder {
         this.tenant = tenant;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User getUser() {

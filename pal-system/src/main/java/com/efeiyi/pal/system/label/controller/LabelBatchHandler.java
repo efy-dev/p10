@@ -58,7 +58,8 @@ public class LabelBatchHandler implements DoHandler {
 
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+//        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        PurchaseOrder purchaseOrder = null;
 
         labelBatch.setProduct(product);
         labelBatch.setTenant(tenant);

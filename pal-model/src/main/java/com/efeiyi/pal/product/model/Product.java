@@ -1,6 +1,7 @@
 package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -50,6 +51,7 @@ public class Product {
         this.serial = serial;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
     public ProductSeries getProductSeries() {
@@ -60,6 +62,7 @@ public class Product {
         this.productSeries = productSeries;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
