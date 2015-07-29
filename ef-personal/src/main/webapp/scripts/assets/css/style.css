@@ -121,7 +121,7 @@ a{ text-decoration:none;}
 .tr-q{font-size:12px; font-family:"宋体";color:#666;}
 .column-tex1{width:100px;height:14px;padding-left:12px;}
 .column-tex2{width:70px;height:14px;padding-left:12px;font-size:14px; font-family:"Microsoft YaHei";color:#666;}
-.column-text-p{width:494px;height:96px;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
+.column-text-p{width:494px;height:auto;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
 /*简介大师荣誉*/
 #da-shi-rong-yu{width:501px;overflow:hidden;}
 #da-shi-rong-yu h1{height:113px;padding-top:73px;line-height:0;}
