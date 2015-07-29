@@ -15,6 +15,19 @@
 <html>
 <head>
     <title></title>
+    <script>
+        function removePurchaseOrderPayment(orderPaymentId){
+            jQuery.ajax({
+                type:"GET",
+                url:'<c:url value="/basic/xmj.do?qm=removePurchaseOrderPayment"/>',
+                data:{id:orderPaymentId},
+                dataType:"json",
+                success:function(data){
+                    $("#"+orderPaymentId).remove();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -26,6 +39,7 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
+                    <th class="table-title">支付记录编号</th>
                     <th class="table-title">支付订单</th>
                     <th class="table-title">支付方式</th>
                     <th class="table-title">支付用户</th>
@@ -38,19 +52,28 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderPayment">
-                    <tr>
+                    <tr id="${purchaseOrderPayment.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeProductRecommended&id=${purchaseOrderPayment.id}"/>"><span
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removePurchaseOrderPayment('${purchaseOrderPayment.id}')"><span
                                             class="am-icon-trash-o"></span> 删除
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
-                        <td class="am-hide-sm-only">${purchaseOrderPayment.payWay}</td>
+                        <td class="am-hide-sm-only">
+                            <c:choose>
+                                <c:when test="${purchaseOrderPayment.payWay == 1}">
+                                    支付宝
+                                </c:when>
+                                <c:when test="${purchaseOrderPayment.payWay == 2}">
+                                    网银支付
+                                </c:when>
+                            </c:choose>
+                        </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>

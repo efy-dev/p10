@@ -14,7 +14,7 @@ public class ProductRecommended {
     private String id;
     private Master master;
     private Product product;
-    private String order;
+    private String sort;
 
 
     @Id
@@ -48,12 +48,12 @@ public class ProductRecommended {
         this.product = product;
     }
 
-    @Column(name = "order")
-    public String getOrder() {
-        return order;
+    @Column(name = "sort")
+    public String getSort() {
+        return sort;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 }

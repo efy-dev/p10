@@ -57,10 +57,16 @@
                     result="/purchaseOrder/purchaseOrderPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="consumer" label="默认" type="auto" orderBy="id:desc">
+                    <query name="consumer" label="用户查找" type="auto" orderBy="id:desc">
                         <condition name="user.id" operation="eq"/>
                     </query>
+                    <query name="first" label="查询一" type="auto" orderBy="id:desc">
+                        <condition name="serial" operation="eq" label="订单号" inputType="text"/>
+                        <condition name="createDatetime" operation="eq" label="创建时间" inputType="date"/>
+                    </query>
+
                 </do>
 
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
@@ -82,14 +88,15 @@
                 <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
-                <do name="removePurchaseOrderDelivery" label="删除purchaseOrderDelivery" access="" result="json"/>
-                <do name="formPurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"/>
-                <do name="saveOrUpdatePurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"/>
-                <do name="listPurchaseOrderDelivery" label="purchaseOrderDelivery列表" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryList">
+                <do name="removePurchaseOrderDelivery" label="删除发货记录" access="" result="json"/>
+                <do name="formPurchaseOrderDelivery" label="保存发货记录" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"/>
+                <do name="viewPurchaseOrderDelivery" label="查看发货记录" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryView"/>
+                <do name="saveOrUpdatePurchaseOrderDelivery" label="保存发货记录" access="" result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"/>
+                <do name="listPurchaseOrderDelivery" label="发货记录列表" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
@@ -101,17 +108,18 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderPayment">
             <does>
-                <do name="plistPurchaseOrderPayment" access="" label="购买订单"
+                <do name="plistPurchaseOrderPayment" access="" label="支付记录分页查询"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
-                <do name="removePurchaseOrderPayment" label="删除purchaseOrderPayment" access="" result="json"/>
-                <do name="formPurchaseOrderPayment" label="保存purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
-                <do name="saveOrUpdatePurchaseOrderPayment" label="保存purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"/>
-                <do name="listPurchaseOrderPayment" label="购买purchaseOrderPayment" access="" result="/purchaseOrderPayment/purchaseOrderPaymentList">
+                <do name="removePurchaseOrderPayment" label="删除支付记录" access="" result="json"/>
+                <do name="formPurchaseOrderPayment" label="保存支付记录" access="" result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
+                <do name="viewPurchaseOrderPayment" label="查看支付记录" access="" result="/purchaseOrderPayment/purchaseOrderPaymentView"/>
+                <do name="saveOrUpdatePurchaseOrderPayment" label="保存支付记录" access="" result="/purchaseOrderPayment/purchaseOrderPaymentSaveSuccess"/>
+                <do name="listPurchaseOrderPayment" label="支付记录列表" access="" result="/purchaseOrderPayment/purchaseOrderPaymentList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
