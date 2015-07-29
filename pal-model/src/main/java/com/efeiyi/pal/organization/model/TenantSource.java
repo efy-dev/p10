@@ -1,22 +1,22 @@
 package com.efeiyi.pal.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 /**
- * Created by Administrator on 2015/7/16.
+ * Created by Administrator on 2015/7/29.
  */
 
 @Entity
-@Table(name = "organization_user")
-public class User {
+@Table(name = "organization_tenant_source")
+public class TenantSource {
 
     private String id;
-    private String name;
-    private String password;
     private Tenant tenant;
-    private String status;
+    private String name;
+    private String region;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -29,24 +29,7 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
@@ -57,13 +40,22 @@ public class User {
         this.tenant = tenant;
     }
 
-    @Column(name = "status")
-    public String getStatus() {
-        return status;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "region")
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
 }
