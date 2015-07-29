@@ -1,22 +1,97 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2015/7/28
-  Time: 17:08
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title id="title_attr"></title>
-<script>
-    $.ajax({
-        type: "post",
-        url: '<c:url value="/getTenant.do"/>',
-        cache: false,
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            $("#title_attr").val(data.fullName);
-        }
-    });
-</script>
+<profiles>
+    <profile>
+        <id>dev</id>
+        <properties>
+            <db-driver>com.mysql.jdbc.Driver<-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==<-password>
+                    <db-url>jdbc:mysql://192.168.1.57/efy<-url>
+                        <db-username>root<-username>
+                            <db-level>DEBUG<-level>
+                                <dbpath>/tmp/logs/<path>
+        </properties>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+    </profile>
+    <profile>
+        <id>local</id>
+        <properties>
+            <db-driver>com.mysql.jdbc.Driver<-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==<-password>
+                    <db-url>jdbc:mysql://192.168.1.57/efc<-url>
+                        <db-username>root<-username>
+                            <db-level>DEBUG<-level>
+                                <dbpath>/tmp/logs/<path>
+        </properties>
+        <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation>
+    </profile>
+    <profile>
+        <id>release</id>
+        <properties>
+            <db-driver>com.mysql.jdbc.Driver<-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==<-password>
+                    <db-url>jdbc:mysql://192.168.1.57/efc<-url>
+                        <db-username>root<-username>
+                            <db-level>DEBUG<-level>
+                                <dbpath>/tmp/logs/<path>
+        </properties>
+        <activation>
+            <activeByDefault>false</activeByDefault>
+        </activation>
+    </profile>
+</profiles>
+<build>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3<ersion>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>utf8</encoding>
+                </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>WEB-INFb</outputDirectory>
+                        <overWriteReleases>false</overWriteReleases>
+                        <overWriteSnapshots>false</overWriteSnapshots>
+                        <overWriteIfNewer>true</overWriteIfNewer>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.3<ersion>
+                <configuration>
+                    <packagingExcludes>WEB-INFb/*.jar</packagingExcludes>
+                </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <excludes>
+                    <exclude>**/*Test.java</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+    </plugins>
+    <ild>
