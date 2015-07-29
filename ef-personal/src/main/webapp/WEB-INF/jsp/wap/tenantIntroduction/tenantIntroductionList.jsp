@@ -64,9 +64,7 @@
         </ul>
       </div>
       <div data-tab-panel-2 class="am-tab-panel ">
-          <c:if test="${tenantIntroduction != null} ">
-              ${tenantIntroduction.content}
-          </c:if>
+              ${masterIntroduction.content}
       </div>
     </div>
   </div>

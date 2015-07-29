@@ -11,13 +11,12 @@
     <strong>
         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
   am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-            <c:forEach items="${tenantWorkList}" var="tenantWork">
+            <c:forEach items="${tenantWorkList}" var="masterWork">
             <li>
                 <div class="am-gallery-item">
-                    <a href="/work/${tenantWork.id}" class="">
-                        <img src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}"/>
-                        <h3 class="am-gallery-title">${tenantWork.name}创作于<fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy" />年</h3>
-                        <div class="am-gallery-desc"><fmt:formatDate value="${tenantWork.createDateTime}" pattern="yyyy-MM-dd" /></div>
+                    <a href="/work/${masterWork.id}" class="">
+                        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}"/>
+                        <h3 class="am-gallery-title">${masterWork.name}</h3>
                     </a>
                 </div>
             </li>
