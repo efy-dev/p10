@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class Master implements Serializable {
     private String logoUrl;
     private Date createDateTime;
     private List<MasterProject> masterProjectList;
+    private List<MasterRecommended> masterRecommendedList;//推荐
     private String projectName ;
     private String levelName;
 
@@ -223,5 +225,15 @@ public class Master implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "master")
+    @Where(clause = "status=1")
+    public List<MasterRecommended> getMasterRecommendedList() {
+        return masterRecommendedList;
+    }
+
+    public void setMasterRecommendedList(List<MasterRecommended> masterRecommendedList) {
+        this.masterRecommendedList = masterRecommendedList;
     }
 }

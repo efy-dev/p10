@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/resources/ckeditor/ckeditor.js"></script>
+    <script src="/scripts/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -59,23 +59,13 @@
                 </div>
                 <br>
             </div>
-          <c:if test="${not empty object.id}">
-            <div class="am-form-group">
 
-                <label for="img" class="am-u-sm-3 am-form-label">原图片</label>
+
+            <div class="am-form-group">
+                <label for="picurl" class="am-u-sm-3 am-form-label">图片</label>
 
                 <div class="am-u-sm-9">
-                    <img id="img" src="http://tenant.efeiyi.com/${object.pictureUrl}@!tenant-manage-banner" />
-                    <%--<small>选择你要保存的轮播图</small>--%>
-                </div>
-            </div>
-         </c:if>
-            <div class="am-form-group">
-
-                <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
-
-                <div class="am-u-sm-9">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="${object.pictureUrl}">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件">
                     <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
             </div>

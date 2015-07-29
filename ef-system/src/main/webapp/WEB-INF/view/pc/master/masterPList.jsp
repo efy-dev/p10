@@ -52,16 +52,41 @@
                                       onclick="removeMaster('${master.id}')" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
+                                    <c:if test="${empty master.masterRecommendedList}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=saveOrUpdateMasterRecommended&status=1&master.id=${master.id}&sort=1&resultPage=redirect:/basic/xm.do?qm=plistMaster_default%26conditions=status:1"/>">
+                                            <span class="am-icon-heart"> </span>推荐
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${not empty master.masterRecommendedList}">
+                                        <c:forEach var="re" items="${master.masterRecommendedList}">
+                                            <c:if test="${re.master.id == master.id}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="#"  onclick="removeMasterRecommended('${re.id}')">
+                                                    <span class="am-icon-heart">取消推荐 </span>
+                                                </a>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </c:if>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">${master.fullName}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">
+                          ${master.fullName}</a>
+                            <c:forEach var="re" items="${master.masterRecommendedList}">
+                                <c:if test="${re.master.id == master.id}" >
+                                    <span class="am-icon-heart" id="${re.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                </c:if>
+                            </c:forEach>
+                        </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">${master.name}</a></td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Master.sex" checkedValue="${master.sex}" type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="level" dataType="Master.level" checkedValue="${master.level}" type="normal" />
+
                         </td>
                     </tr>
                 </c:forEach>
@@ -79,6 +104,20 @@
 </div>
 
 <script>
+
+    function removeMasterRecommended(divId){
+
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeMasterRecommended"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                location.reload();
+            }
+        });
+    }
 
     function removeMaster(divId){
         $.ajax({

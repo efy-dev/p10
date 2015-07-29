@@ -14,7 +14,7 @@ public class Role implements Serializable {
     private String basicType;
     private Integer superPermission;        //1具有超级权限  2不具有超级权限
 
-    private Integer theStatus;
+    private String status;
     private List<Permission> permissionsList;
     /*private HashMap<String,Permission> permissionMap;
     private Map<String,String> settingMap;
@@ -60,12 +60,12 @@ public class Role implements Serializable {
 
 
     @Column(name = "thestatus")
-    public Integer getTheStatus() {
-        return theStatus;
+    public String  getStatus() {
+        return status;
     }
 
-    public void setTheStatus(Integer theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "role")

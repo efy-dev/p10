@@ -16,14 +16,20 @@
     <title></title>
 </head>
 <body>
-<div style="text-align: left" >
-  <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建用户" />
+<div class="am-u-sm-12 am-u-md-6">
+  <div class="am-btn-toolbar">
+    <div class="am-btn-group am-btn-group-xs">
+      <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formUser"/>"><span class="am-icon-plus"></span>新建用户</a>
+    </div>
+  </div>
 </div>
+
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
   <tr style="text-align: center">
     <td>操作</td>
     <td>用户名</td>
     <td>真实姓名</td>
+    <td>角色</td>
   </tr>
 
   <c:forEach items="${requestScope.pageInfo.list}" var="user">
@@ -38,6 +44,8 @@
       </td>
       <td width="20%">${user.username}</td>
       <td width="20%">${user.name}</td>
+      <td width="20%">${user.role.name}
+      </td>
     </tr>
   </c:forEach>
 </table>
