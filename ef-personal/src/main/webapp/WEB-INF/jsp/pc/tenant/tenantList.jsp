@@ -16,16 +16,16 @@
 <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-2.jpg">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
         </li>
         <li>
-            <img src="http://s.amazeui.org/media/i/demos/bing-4.jpg">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
         </li>
     </ul>
 </div>

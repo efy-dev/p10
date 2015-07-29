@@ -27,26 +27,28 @@
   </div>
   <div class="center-right" style="margin-right: 95px; float: right;">
     <c:forEach items="${tenantWorkList}" var="masterWork" varStatus="vs">
-      <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
-        <div class="works-container">
+          <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3 == 0}">
+            <div class="works-container">
+              <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
+            </c:if>
+           <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
+             <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
+           </c:if>
+          <c:if test="${ vs.index%3==2}">
+              <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img-1"></a>
+        </div>
+          </c:if>
+          <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
+          <div class="works-container">
+            <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank">
+                <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img">
+            </a>
+          </div>
+          </c:if>
+          <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
           <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
-        </c:if>
-       <c:if test="${tenantWorkList.size()-1 != vs.index && vs.index%3==1}">
-         <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
-       </c:if>
-      <c:if test="${ vs.index%3==2}">
-          <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img-1"></a>
-    </div>
-      </c:if>
-      <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 0}">
-      <div class="works-container">
-        <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
-        </div>
-      </c:if>
-      <c:if test="${tenantWorkList.size()-1 == vs.index && vs.index%3 == 1}">
-      <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img"></a>
-        </div>
-      </c:if>
+            </div>
+          </c:if>
       </c:forEach>
     <!--页码-->
   </div>

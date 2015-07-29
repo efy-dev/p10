@@ -13,8 +13,22 @@
 <html>
 <head>
     <title></title>
+    <script>
+        function removePurchaseOrder(orderId){
+            jQuery.ajax({
+                type:"GET",
+                url:'<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',
+                data:{id:orderId},
+                dataType:"json",
+                success:function(data){
+                    $("#"+orderId).remove();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -38,14 +52,13 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
-                    <tr>
+                    <tr id="${purchaseOrder.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removePurchaseOrder&id=${purchaseOrder.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 删除
-                                    </a>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removePurchaseOrder('${purchaseOrder.id}')"><span
+                                            class="am-icon-trash-o">删除</span>
+                                    </button>
                                 </div>
                             </div>
                         </td>

@@ -15,11 +15,11 @@
           <div class="center-right">
               <c:if test="${workShop != null}">
                 <div class="video-or-img">
-                  <video src="http://master.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" content="content" preload="auto" controls="controls"></video>
+                  <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" content="content" preload="auto" controls="controls"></video>
                 </div>
               </c:if>
                 <div class="content-img">
-                  <img src="<c:url value="${workShop.picture_url}"/>">
+                  <img src="http://tenant.efeiyi.com/${workShop.picture_url}@!tenant-manage-work-view">
                 </div>
                 <div class="content-text-gzf">
                   ${workShop.shopIntroduction}

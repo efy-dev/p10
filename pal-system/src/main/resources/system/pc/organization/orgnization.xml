@@ -5,19 +5,19 @@
     <entities>
         <entity name="PCTenant" label="传承人"  model="com.efeiyi.pal.organization.model.Tenant">
             <does>
-                <do name="listTenant" access="" label="传承人列表" result="/master/masterList">
+                <do name="listTenant" access="" label="传承人列表" result="/tenant/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="plistTenant" access="" label="传承人分页列表" result="/master/tenantPList">
+                <do name="plistTenant" access="" label="传承人分页列表" result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
-                <do name="formTenant" label="商户信息" access="" result="/master/tenantForm"/>
-                <do name="viewTenant" label="商户信息详情页" access="" result="/master/tenantView"/>
+                <do name="formTenant" label="商户信息" access="" result="/tenant/tenantForm"/>
+                <do name="viewTenant" label="商户信息详情页" access="" result="/tenant/tenantView"/>
                 <do name="removeTenant" label="删除商户信息" access="" result="json"/>
                 <do name="saveOrUpdateTenant" label="新建或更新商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"
                     execute="com.efeiyi.pal.system.organization.controller.TenantHandler">

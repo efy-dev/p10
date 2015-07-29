@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="../scripts/assets/css/admin.css">
   <script src="<c:url value='../scripts/assets/js/jquery.min.js'/>"></script>
   <script src="<c:url value='../scripts/assets/js/amazeui.min.js'/>"></script>
+  <script src="<c:url value='../scripts/function.js'/>"></script>
   <sitemesh:write property='head'/>
   <style>
     .efy-active {

@@ -21,35 +21,35 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>集合：</td>
+            <td align="right">集合：</td>
             <td>${object.setting}</td>
         </tr>
         <tr>
-            <td>开始：</td>
+            <td align="right">开始：</td>
             <td>${object.start}</td>
         </tr>
         <tr>
-            <td>数量：</td>
+            <td align="right">数量：</td>
             <td>${object.amount}</td>
         </tr>
         <tr>
-            <td>创建时间：</td>
+            <td align="right">创建时间：</td>
             <td><fmt:formatDate value="${object.createDate}" pattern="yyyy-MM-dd"/> </td>
         </tr>
         <tr>
-            <td>状态：</td>
+            <td align="right">状态：</td>
             <td>${object.status}</td>
         </tr>
         <tr>
-            <td>商品名称：</td>
+            <td align="right">商品名称：</td>
             <td>${object.product.name}</td>
         </tr>
         <tr>
-            <td>大师姓名：</td>
-            <td>${object.master.name}</td>
+            <td align="right">商户：</td>
+            <td>${object.tenant.name}</td>
         </tr>
         <tr>
-            <td>订单序列号：</td>
+            <td align="right">订单序列号：</td>
             <td>${object.purchaseOrder.serial}</td>
         </tr>
     </table>

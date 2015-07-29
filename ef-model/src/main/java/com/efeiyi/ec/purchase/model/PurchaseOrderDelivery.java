@@ -16,6 +16,7 @@ public class PurchaseOrderDelivery {
     private PurchaseOrder purchaseOrder;
     private ConsumerAddress consumerAddress;
     private Date createDateTime;
+    private String serial;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -55,5 +56,14 @@ public class PurchaseOrderDelivery {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }

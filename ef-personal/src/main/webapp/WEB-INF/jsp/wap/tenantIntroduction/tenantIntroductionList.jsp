@@ -34,7 +34,7 @@
             <li>
               <div class="am-gallery-item">
                 <a href="#" class="">
-                  <img src="http://master.efeiyi.com/${dsry.url}"
+                  <img src="http://tenant.efeiyi.com/${dsry.url}"
                           />
                   <div class="am-gallery-desc">
                     ${dsry.title}
@@ -52,7 +52,7 @@
             <li>
               <div class="am-gallery-item">
                 <a href="#" class="">
-                  <img src="http://master.efeiyi.com/${cbzz.url}"
+                  <img src="http://tenant.efeiyi.com/${cbzz.url}"
                           />
                   <div class="am-gallery-desc">
                       ${cbzz.title}
@@ -64,9 +64,7 @@
         </ul>
       </div>
       <div data-tab-panel-2 class="am-tab-panel ">
-          <c:if test="${masterIntroduction != null} ">
               ${masterIntroduction.content}
-          </c:if>
       </div>
     </div>
   </div>
