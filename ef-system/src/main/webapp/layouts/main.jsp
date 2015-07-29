@@ -23,9 +23,9 @@
     <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>"/>
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>"/>
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="/resources/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
-    <script src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
+    <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
     <script src="/resources/assets/js/amazeui.min.js"></script>
     <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
