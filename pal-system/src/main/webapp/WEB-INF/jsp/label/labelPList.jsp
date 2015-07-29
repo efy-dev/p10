@@ -18,10 +18,17 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">标签列表</strong> / <small>LabelList</small></div>
+</div>
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr>
         <td>labelId</td>
         <td>序列号</td>
+        <td>卷批次</td>
+        <td>商品</td>
+        <td>商户</td>
+        <td>状态</td>
         <td>使用时间</td>
     </tr>
 
@@ -29,7 +36,18 @@
         <tr>
             <td>${label.id}</td>
             <td>${label.serial}</td>
-            <td><fmt:formatDate value="${label.usedDate}" pattern="yyyy-MM-dd HH:mm"/> </td>
+            <td>${label.labelBatch.setting}</td>
+            <td>${label.product.name}</td>
+            <td>${label.seller.name}</td>
+            <td>
+                <c:if test="${label.status == '0'}">
+                    <font color="red">已验证</font>
+                </c:if>
+                <c:if test="${label.status == '1'}">
+                    <font color="green">未验证</font>
+                </c:if>
+            </td>
+            <td><fmt:formatDate value="${label.usedDate}" pattern="yyyy-MM-dd HH:mm"/></td>
         </tr>
     </c:forEach>
 </table>

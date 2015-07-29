@@ -3,8 +3,8 @@
 
 var m8uDialog = $.extend({}, m8uDialog);
 
-function dialog1(url, artDialogLogId, artDialogLogName) {
-    var modalStart = "<div class=\"am-modal am-modal-no-btn\" id=\"" + artDialogLogId + artDialogLogName + "\"><div class=\"am-modal-dialog\"><div class=\"am-popup-hd\"><h4 class=\"am-popup-title\">...</h4><span data-am-modal-close class=\"am-close\">&times;</span> </div> <div class=\"am-popup-bd\"> "
+function dialog1(url, artDialogLogId, artDialogLogName, fun) {
+    var modalStart = "<div class=\"am-modal am-modal-no-btn\" id=\"" + artDialogLogId + artDialogLogName + "\"><div class=\"am-modal-dialog\"><div class=\"am-modal-hd\"><span data-am-modal-close class=\"am-close\">&times;</span> </div> <div class=\"am-modal-bd\"> "
     var modalEnd = "</div> </div> </div>";
     var modalContent = ""
     this.key = "";
@@ -20,15 +20,19 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
             dataType: "json",
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    modalContent += "<div class=\"am-u-md-4\"><a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "')\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a></div>"
+                    modalContent += "<div class=\"am-u-md-4\"><a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "' ," + fun + ")\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a></div>"
                 }
                 var out = modalStart + modalContent + modalEnd;
                 $("body").append(out)
-                $("#" + artDialogLogId + artDialogLogName).modal('open');
+                $("#" + artDialogLogId + artDialogLogName).modal({
+                    width: 400, height: 225
+                });
             }
         });
     } else {
-        $("#" + artDialogLogId + artDialogLogName).modal('open');
+        $("#" + artDialogLogId + artDialogLogName).modal({
+            width: 400, height: 225
+        });
     }
 }
 
@@ -43,21 +47,28 @@ function xdialog1(url, artDialogLogId, artDialogLogName) {
     this.required = "";
     console.log($("#" + artDialogLogId + artDialogLogName).attr("id"));
     if (typeof $("#" + artDialogLogId + artDialogLogName).attr("id") == "undefined") {
-        modalContent = "<iframe name=\"myFrame\" src=\""+url+"\"></iframe>"
+        modalContent = "<iframe name=\"myFrame\" src=\"" + url + "\"></iframe>"
         var out = modalStart + modalContent + modalEnd;
         $("body").append(out)
-        $("#" + artDialogLogId + artDialogLogName).modal('open');
+        $("#" + artDialogLogId + artDialogLogName).modal('open', {
+            width: 400, height: 225
+        });
     } else {
-        $("#" + artDialogLogId + artDialogLogName).modal('open');
+        $("#" + artDialogLogId + artDialogLogName).modal('open', {
+            width: 400, height: 225
+        });
     }
 }
 
 
-function choose(element, artDialogLogId, artDialogLogName) {
+function choose(element, artDialogLogId, artDialogLogName, fun) {
 
     $("#" + artDialogLogId).attr("value", $(element).attr("id"));
     $("#" + artDialogLogId + artDialogLogName).modal('close');
     $("#" + artDialogLogName).attr("value", $(element).attr("name"));
+    if (typeof fun == "undefined") {
+        fun('$(element).attr("id")');
+    }
 
 }
 /* ȫ�ֶ��� */
@@ -113,6 +124,10 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, fun) {
     } else if (type.indexOf('nut_category_') >= 0) {       /*ԭ�����*/
         var tempType = type.split("_")[2];
         url = '/dish/listCategory.do?printable=true&theType=' + tempType;
+    } else if (type == 'product') {       /*����*/
+        url = '/product/list/json';
+    } else if (type == 'order') {       /*����*/
+        url = '/order/list/json';
     }
 
     //dialog1.data("artDialogDocument", document);

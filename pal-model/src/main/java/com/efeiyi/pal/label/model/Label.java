@@ -74,7 +74,7 @@ public class Label {
     }
 
     @Column(name="status")
-    private String getStatus() {
+    public String getStatus() {
         return status;
     }
 

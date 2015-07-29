@@ -35,6 +35,7 @@
                 <do name="plistProductSeries" access="" label="商品系列列表分页" result="/productSeries/productSeriesPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
