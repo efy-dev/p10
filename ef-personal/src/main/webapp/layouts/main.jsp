@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+
+    <%@include file="pcTitle.jsp"%>
+    <sitemesh:write property="title"/>
     <%
         if(HttpUtil.isPhone(request)){
     %>

@@ -36,25 +36,25 @@
             <c:if test="${masterProject.project.type == 1}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
-                        <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list" alt="">
+                        <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">
                         <div class="BG"></div>
                         <p class="txt">
                             <div class="img-mutual-text1">
-                                <h1>${masterProject.master.fullName}</h1>
+                                <h1>${masterProject.tenant.fullName}</h1>
                                 <p>
                                     <c:choose>
-                                        <c:when test="${fn:length(masterProject.master.brief)  > 25}">
-                                            <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">${fn:substring(masterProject.master.brief,0 ,25 ) }......</a>
+                                        <c:when test="${fn:length(masterProject.tenant.brief)  > 25}">
+                                            <a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">${fn:substring(masterProject.tenant.brief,0 ,25 ) }......</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">${masterProject.master.brief}</a>
+                                            <a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">${masterProject.tenant.brief}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </p>
                             </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>
@@ -68,25 +68,25 @@
             <c:if test="${masterProject.project.type == 2}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
-                        <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list" alt="">
+                        <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">
                         <div class="BG"></div>
                         <p class="txt">
                         <div class="img-mutual-text1">
-                            <h1>${masterProject.master.fullName}</h1>
+                            <h1>${masterProject.tenant.fullName}</h1>
                             <p>
                                 <c:choose>
-                                    <c:when test="${fn:length(masterProject.master.brief)  > 25}">
-                                        <a href="${pageContext.request.contextPath}/" class="img-mutual-text1-a" target="_blank">${fn:substring(masterProject.master.brief,0 ,25 ) }......</a>
+                                    <c:when test="${fn:length(masterProject.tenant.brief)  > 25}">
+                                        <a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" class="img-mutual-text1-a" target="_blank">${fn:substring(masterProject.tenant.brief,0 ,25 ) }......</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${pageContext.request.contextPath}/" class="img-mutual-text1-a" target="_blank">${masterProject.master.brief}</a>
+                                        <a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" class="img-mutual-text1-a" target="_blank">${masterProject.tenant.brief}</a>
                                     </c:otherwise>
                                 </c:choose>
                             </p>
                         </div>
                         </p>
                     </div>
-                    <span class="img-mutual-jump"><a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
+                    <span class="img-mutual-jump"><a href="http://${masterProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
                 </div>
             </c:if>
         </c:forEach>

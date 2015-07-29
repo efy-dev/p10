@@ -1,13 +1,10 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -18,7 +15,7 @@ import java.util.List;
  * Created by kayson on 2015/7/25.
  *
  */
-public class BaseTenantController extends BaseController {
+public class BaseMasterController extends BaseController {
     @Autowired
     BaseManager baseManager;
     protected Tenant tenant;

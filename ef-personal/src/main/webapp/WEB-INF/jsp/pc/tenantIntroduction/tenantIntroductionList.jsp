@@ -21,7 +21,7 @@
 <!--简介内容-->
 <div id="page-column">
     <div class="column-left" style="">
-        <div class="page-img"><img src="http://master.efeiyi.com/${master.favicon}@!master-pc-favicon"></div>
+        <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
         <div class="buttom-text">
             <p><a href="#ji-ben-xin-xi">基本信息</a></p>
 
@@ -40,26 +40,26 @@
                 </tr>
                 <tr class="tr2">
                     <td colspan="4" align="center">
-                        ${master.fullName}
+                        ${tenant.fullName}
                     </td>
                 </tr>
                 <tr class="tr3">
                     <td height="47" width="80"  class="td-1 td-s">性别</td>
-                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.sex' checkedValue='${master.sex}' type='normal'/></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.sex' checkedValue='${tenant.sex}' type='normal'/></td>
                     <td height="47" width="80" class="td-1 td-s">出生年月</td>
-                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${master.birthday}</td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.birthday}</td>
                 </tr>
                 <tr class="tr4">
                     <td height="47" width="80"  class="td-1 td-s">籍贯</td>
-                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${master.originProvince.name}</td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.originProvince.name}</td>
                     <td height="47" width="80" class="td-1 td-s">现居地</td>
-                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${master.presentAddress}</td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.presentAddress}</td>
                 </tr>
                 <tr class="tr5">
                     <td height="47" width="80"  class="td-1 td-s">代表作品</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center"></td>
                     <td height="47" width="80" class="td-1 td-s">级别</td>
-                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.level' checkedValue='${master.level}' type='normal'/></td>
+                    <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/></td>
                 </tr>
                 <tr class="tr6">
                     <td colspan="4"></td>
@@ -80,22 +80,22 @@
                         <c:if test="${dsryList.size()-1 != ln.index && ln.index%2 == 0}">
                             <div class="one-img-pictures">
                             <dl class="one-img-dl-l">
-                                <dt><img src="http://master.efeiyi.com/${pic.url}@!master-pc-intro"></dt>
-                                <dd>${pic.title}1988中国工艺美术大师</dd>
+                                <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
+                                <dd>${pic.title}</dd>
                             </dl>
                         </c:if>
                         <c:if test="${ln.index%2 == 1}">
                             <dl class="one-img-dl-r">
-                                <dt><img src="http://master.efeiyi.com/${pic.url}@!master-pc-intro"/></dt>
-                                <dd>${pic.title}1988中国工艺美术大师</dd>
+                                <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"/></dt>
+                                <dd>${pic.title}</dd>
                             </dl>
                             </div>
                         </c:if>
                         <c:if test="${dsryList.size()-1 == ln.index && ln.index%2 == 0}">
                             <div class="one-img-pictures">
                                 <dl class="one-img-dl-l">
-                                    <dt><img src="http://master.efeiyi.com/${pic.url}@!master-pc-intro"></dt>
-                                    <dd>${pic.title}1988中国工艺美术大师</dd>
+                                    <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
+                                    <dd>${pic.title}</dd>
                                 </dl>
                             </div>
                         </c:if>
@@ -108,7 +108,7 @@
                 <h1>出版著作</h1>
                 <ul>
                     <c:forEach items="${cbzzList}" var="pic">
-                        <li><img src="http://master.efeiyi.com/${pic.url}@!master-pc-intro"></li>
+                        <li><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></li>
                     </c:forEach>
                 </ul>
             </div>
