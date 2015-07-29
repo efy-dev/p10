@@ -3197,3 +3197,9 @@ ALTER TABLE `order_purchase_order`
 
 ALTER TABLE `core_p_document`
 	ADD COLUMN `publish_date` date NULL AFTER `sample_content`;
+
+
+----------------------------------------
+--2015-07-29  tenant表中id为ichlden40000it9z吴建华对应的tenantproject表中id为iciff1x20000c8e4的status从1设置为0
+----------------------------------------
+UPDATE tenant_project SET `status` = '0' where id = 'iciff1x20000c8e4'
