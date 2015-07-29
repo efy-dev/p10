@@ -17,7 +17,6 @@
         <module>ef-personal</module>
         <module>base_resource</module>
         <module>pal-system</module>
-        <module>ef-master</module>
         <module>pal-model</module>
     </modules>
 
@@ -351,7 +350,50 @@
             <version>0.9.2.1</version>
         </dependency>
     </dependencies>
-
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
+                <db-url>jdbc:mysql://192.168.1.57/efy</db-url>
+                <db-username>root</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
+                <db-url>jdbc:mysql://192.168.1.57/efc</db-url>
+                <db-username>root</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
+                <db-url>jdbc:mysql://192.168.1.57/efy</db-url>
+                <db-username>root</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -365,10 +407,37 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>WEB-INF/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
                     <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*Test.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
