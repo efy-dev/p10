@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "orgnization_tenant")
+@Table(name = "organization_tenant")
 public class Tenant {
 
     private String id;
@@ -19,6 +19,7 @@ public class Tenant {
     private AddressDistrict address;
     private String type;
     private String status;
+    private String masterName;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -78,6 +79,15 @@ public class Tenant {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "master_name")
+    public String getMasterName() {
+        return masterName;
+    }
+
+    public void setMasterName(String masterName) {
+        this.masterName = masterName;
     }
 
 }
