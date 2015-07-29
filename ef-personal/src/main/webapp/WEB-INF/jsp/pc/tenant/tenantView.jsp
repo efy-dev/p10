@@ -38,28 +38,28 @@
                 <dd>
                     <c:choose>
                         <c:when test="${fn:length(tenant.brief)  > 30}">
-                            <a href="${pageContext.request.contextPath}/introduction/intro"
+                            <a href="<c:url value="/introduction/intro"/>"
                                target="_blank">${fn:substring(tenant.brief,0 ,30 ) }......</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/introduction/intro"
+                            <a href="<c:url value="/introduction/intro"/>"
                                target="_blank">${tenant.brief}</a>
                         </c:otherwise>
                     </c:choose>
                 </dd>
             </dl>
-            <span><a href="${pageContext.request.contextPath}/introduction/intro" target="_blank">了解详细</a></span>
+            <span><a href="<c:url value="/introduction/intro"/>" target="_blank">了解详细</a></span>
         </div>
     </div>
 </div>
 <div id="center">
-    <c:forEach items="${tenantWorkList}" var="tenantWork" varStatus="work" begin="0" end="2">
+    <c:forEach items="${tenantWorkList}" var="masterWork" varStatus="work" begin="0" end="2">
         <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
             <dl class="center-${work.index + 1}">
-                <dt class="center-1-dt"><a href="<c:url value="/work/${tenantWork.id}"/>" target="_blank"><img
-                        src="http://tenant.efeiyi.com/${tenantWork.pictureUrl}@!tenant-pc-work"></a></dt>
+                <dt class="center-1-dt"><a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img
+                        src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work-index"></a></dt>
                 <dd class="center-1-dd" style="text-align:center;">
-                    <span><a href="javascript:void(0);">${tenantWork.name}</a></span>
+                    <span><a href="javascript:void(0);">${masterWork.name}</a></span>
                 </dd>
             </dl>
         </c:if>

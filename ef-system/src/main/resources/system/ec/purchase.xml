@@ -58,6 +58,9 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
+                    <query name="consumer" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" operation="eq"/>
+                    </query>
                 </do>
 
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
@@ -101,7 +104,7 @@
                 <do name="plistPurchaseOrderPayment" access="" label="购买订单"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 

@@ -23,11 +23,11 @@
         <td>type</td>
     </tr>
 
-    <c:forEach items="${objectList}" var="tenant">
+    <c:forEach items="${objectList}" var="master">
         <tr>
-            <td>${tenant.id}</td>
-            <td>${tenant.name}</td>
-            <td>${tenant.type}</td>
+            <td>${master.id}</td>
+            <td>${master.name}</td>
+            <td>${master.type}</td>
         </tr>
     </c:forEach>
 </table>

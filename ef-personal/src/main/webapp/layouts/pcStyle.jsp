@@ -7,4 +7,4 @@
 <script src="<c:url value="/scripts/assets/js/jquery.jslides.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/demo.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/jquery.js"/>"></script>
+<%--<script src="<c:url value="/scripts/assets/js/jquery.js"/>"></script>--%>

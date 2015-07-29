@@ -1,9 +1,8 @@
 package com.efeiyi.ec.organization.model;
 
-import com.efeiyi.ec.tenant.model.Tenant;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**

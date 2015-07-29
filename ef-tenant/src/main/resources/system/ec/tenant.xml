@@ -2,29 +2,29 @@
 
 
 <!--用户-->
-<module name="tenant" label="系统-传承人" version="" package="com.efeiyi.ec.tenant" path="">
+<module name="master" label="系统-传承人" version="" package="com.efeiyi.ec.master" path="">
 
     <entities>
         <entity name="TenantList" label="传承人列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.Tenant">
+                model="com.efeiyi.ec.master.model.Master">
             <fields>
                 <field name="id" label="传承人" inputType="text"/>
                 <field name="name" label="传承人名字" inputType="text"/>
             </fields>
             <does>
                 <do name="plistTenant" access="" label="传承人分页列表"
-                    result="/tenant/tenantPList">
+                    result="/master/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="name" defaultValue="ten1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"></do>
-                <do name="saveOrUpdateTenant" label="保存大师" access="" result="/tenant/tenantSaveSuccess">
+                <do name="formTenant" label="保存大师页" access="" result="/master/tenantForm"></do>
+                <do name="saveOrUpdateTenant" label="保存大师" access="" result="/master/tenantSaveSuccess">
                 </do>
                 <do name="removeTenant" label="删除大师" access="" result="json"/>
-                <do name="listTenant" label="传承人列表" access="" result="/tenant/tenantList">
+                <do name="listTenant" label="传承人列表" access="" result="/master/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
                         <condition label="产品名称" name="name" defaultValue="1" operation="eq"/>
@@ -36,7 +36,7 @@
         </entity>
         <entity name="TenantWorkList" label="传承人工作坊列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantWorkShop">
+                model="com.efeiyi.ec.master.model.TenantWorkShop">
             <fields>
                 <field name="id" label="传承人工作坊id" inputType="text"/>
                 <field name="name" label="传承人工作坊名字" inputType="text"/>
@@ -63,7 +63,7 @@
         </entity>
         <entity name="TenantHonorList" label="传承人殊荣列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantHonor">
+                model="com.efeiyi.ec.master.model.TenantHonor">
             <fields>
                 <field name="id" label="传承人殊荣id" inputType="text"/>
                 <field name="memo" label="传承人殊荣memo" inputType="text"/>
@@ -90,24 +90,24 @@
         </entity>
         <entity name="TenantIntroductionList" label="传承人简介列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantIntroduction">
+                model="com.efeiyi.ec.master.model.TenantIntroduction">
             <fields>
                 <field name="id" label="传承人简介id" inputType="text"/>
                 <field name="content" label="传承人简介内容" inputType="text"/>
             </fields>
             <does>
                 <do name="plistTenantIntroduction" access="" label="传承人简介分页列表"
-                    result="/tenantIntroduction/tenantIntroductionPList">
+                    result="/masterIntroduction/tenantIntroductionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="formTenantIntroduction" label="保存大师简介页" access="" result="/tenantIntroduction/tenantIntroductionForm"></do>
-                <do name="saveOrUpdateTenantIntroduction" label="保存大师简介" access="" result="/tenantIntroduction/tenantIntroductionSaveSuccess">
+                <do name="formTenantIntroduction" label="保存大师简介页" access="" result="/masterIntroduction/tenantIntroductionForm"></do>
+                <do name="saveOrUpdateTenantIntroduction" label="保存大师简介" access="" result="/masterIntroduction/tenantIntroductionSaveSuccess">
                 </do>
                 <do name="removeTenantIntroduction" label="删除大师简介" access="" result="json"/>
-                <do name="listTenantIntroduction" label="传承人简介列表" access="" result="/tenantIntroduction/tenantIntroductionList">
+                <do name="listTenantIntroduction" label="传承人简介列表" access="" result="/masterIntroduction/tenantIntroductionList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
                         <condition label="传承人简介id" name="id" defaultValue="1" operation="eq"/>
@@ -119,20 +119,20 @@
         </entity>
         <entity name="TenantNewsList" label="传承人新闻列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantNews">
+                model="com.efeiyi.ec.master.model.TenantNews">
             <does>
                 <do name="plistTenantNews" access="" label="传承人新闻分页列表"
-                    result="/tenantNews/tenantNewsPList">
+                    result="/masterNews/tenantNewsPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"></condition>
+                        <condition name="master.id" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="formTenantNews" label="保存大师新闻页" access="" result="/tenantNews/tenantNewsForm"></do>
-                <do name="saveOrUpdateTenantNews" label="保存大师新闻" access="" result="/tenantNews/tenantNewsSaveSuccess">
+                <do name="formTenantNews" label="保存大师新闻页" access="" result="/masterNews/tenantNewsForm"></do>
+                <do name="saveOrUpdateTenantNews" label="保存大师新闻" access="" result="/masterNews/tenantNewsSaveSuccess">
                 </do>
                 <do name="removeTenantNews" label="删除大师新闻" access="" result="json"/>
-                <do name="listTenantNews" label="传承人新闻列表" access="" result="/tenantNews/tenantNewsList">
+                <do name="listTenantNews" label="传承人新闻列表" access="" result="/masterNews/tenantNewsList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
                         <condition label="传承人新闻id" name="id" defaultValue="0" operation="ne"/>
@@ -144,7 +144,7 @@
         </entity>
         <entity name="TenantProductList" label="传承人产品列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantProduct">
+                model="com.efeiyi.ec.master.model.TenantProduct">
             <fields>
                 <field name="id" label="传承人产品id" inputType="text"/>
                 <field name="name" label="传承人产品名字" inputType="text"/>
@@ -171,24 +171,24 @@
         </entity>
         <entity name="TenantWorkList" label="传承人著作列表"
                 basic="simple" others=""
-                model="com.efeiyi.ec.tenant.model.TenantWork">
+                model="com.efeiyi.ec.master.model.TenantWork">
             <fields>
                 <field name="id" label="传承人著作id" inputType="text"/>
                 <field name="name" label="传承人著作名字" inputType="text"/>
             </fields>
             <does>
                 <do name="plistTenantWork" access="" label="传承人著作分页列表"
-                    result="/tenantWork/tenantWorkPList">
+                    result="/masterWork/tenantWorkPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"></condition>
                     </query>
                 </do>
 
-                <do name="formTenantWork" label="保存大师著作页" access="" result="/tenantWork/tenantWorkForm"></do>
-                <do name="saveOrUpdateTenantWork" label="保存大师著作" access="" result="/tenantWork/tenantWorkSaveSuccess">
+                <do name="formTenantWork" label="保存大师著作页" access="" result="/masterWork/tenantWorkForm"></do>
+                <do name="saveOrUpdateTenantWork" label="保存大师著作" access="" result="/masterWork/tenantWorkSaveSuccess">
                 </do>
                 <do name="removeTenantWork" label="删除大师著作" access="" result="json"/>
-                <do name="listTenantWork" label="大师著作列表" access="" result="/tenantWork/tenantWorkList">
+                <do name="listTenantWork" label="大师著作列表" access="" result="/masterWork/tenantWorkList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="著作id" name="id" defaultValue="1" operation="eq"/>
                     </query>

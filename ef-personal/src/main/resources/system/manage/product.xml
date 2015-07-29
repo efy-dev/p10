@@ -14,7 +14,7 @@
                 <field name="name" label="订单类型" inputType="select_status" key="Product.ptype"/>
                 <field name="serial" label="订单类型" inputType="select_status" key="Product.ptype"/>
                 <field name="picture_url" label="订单类型" inputType="select_status" key="Product.picture_url"/>
-                <field name="tenant" label="订单类型" inputType="select_status" key="Product.tenant"/>
+                <field name="master" label="订单类型" inputType="select_status" key="Product.master"/>
                 <field name="category" label="订单类型" inputType="select_status" key="Product.category"/>
                 <field name="price" label="支付状态" inputType="select_status" key="PurchaseOrder.price"/>
                 <field name="processStatus" label="进程状态" inputType="select_status" key="PurchaseOrder.processStatus"/>

@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td>大师：</td>
-                <td><input type="text" name="tenant.id" id="tenant.id" value="${object.tenant.id}"></td>
+                <td><input type="text" name="master.id" id="master.id" value="${object.master.id}"></td>
             </tr>
             <tr>
                 <td>订单：</td>

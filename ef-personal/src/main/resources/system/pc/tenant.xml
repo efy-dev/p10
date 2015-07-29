@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module name="Tenant" label="ch" version="" package="com.efeiyi.ec.tenant" path="">
+<module name="Tenant" label="ch" version="" package="com.efeiyi.ec.master" path="">
     <entities>
-        <!--<entity name="tenantRecommended" label="传承人"  model="com.efeiyi.ec.tenant.model.TenantRecommended">
+        <!--<entity name="tenantRecommended" label="传承人"  model="com.efeiyi.ec.master.model.MasterRecommended">
             <does>
                 <do name="listTenantRecommended" access="" label="传承人列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -19,7 +19,7 @@
                         </do>
                     </does>
                 </entity>
-        <entity name="Tenant" label="传承人列表" model="com.efeiyi.ec.tenant.model.Tenant">
+        <entity name="Tenant" label="传承人列表" model="com.efeiyi.ec.master.model.Master">
             <fields>
                 <field name="sex" label="性别" inputType="text">
                     <statusType fieldName="sex">
@@ -44,50 +44,48 @@
                 </do>
             </does>
         </entity>
-        <entity name="tenantInfo" label="传承人资讯"  model="com.efeiyi.ec.tenant.model.TenantNews">
+        <entity name="masterInfo" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterNews">
             <does>
-                <do name="plistTenantInfo" access="" label="传承人资讯列表">
+                <do name="plistMasterNews" access="" label="传承人资讯列表">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
         </entity>
-
-        <entity name="TenantBanner" label="传承人资讯"  model="com.efeiyi.ec.tenant.model.TenantBanner">
+        <entity name="masterBanner" label="传承人资讯"  model="com.efeiyi.ec.master.model.MasterBanner">
             <does>
-                <do name="listTenantBanner" access="" label="传承人轮播图">
+                <do name="listMasterBanner" access="" label="传承人轮播图">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
         </entity>
 
-        <entity name="TenantIntroduction" label="简介"  model="com.efeiyi.ec.tenant.model.TenantIntroduction">
+        <entity name="masterIntroduction" label="简介"  model="com.efeiyi.ec.master.model.MasterIntroduction">
             <does>
-                <do name="listTenantIntroduction" access="" label="简介列表">
+                <do name="listMasterIntroduction" access="" label="简介列表">
                     <query name="default" label="默认" type="auto">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
         </entity>
-        <entity name="TenantAttachment" label="商品列表"  model="com.efeiyi.ec.tenant.model.TenantAttachment">
+        <entity name="masterAttachment" label="商品列表"  model="com.efeiyi.ec.master.model.MasterAttachment">
             <does>
-                <do name="listAttachment" access="" label="附件列表">
+                <do name="listMasterAttachment" access="" label="附件列表">
                     <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="introduction.tenant.id" defaultValue="1" operation="eq"/>
-                        <!--<condition name="tenant.id" defaultValue="1" operation="eq"/>-->
+                        <condition name="introduction.master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
         </entity>
-        <entity name="tenantWork" label="传承人作品"  model="com.efeiyi.ec.tenant.model.TenantWork">
+        <entity name="masterWork" label="传承人作品"  model="com.efeiyi.ec.master.model.MasterWork">
         <does>
-            <do name="plistTenantWork" access="" label="传承人作品">
+            <do name="plistMasterWork" access="" label="传承人作品">
                 <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                    <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    <condition name="master.id" defaultValue="1" operation="eq"/>
                 </query>
             </do>
         </does>
@@ -101,7 +99,7 @@
                 </do>
             </does>
         </entity>
-        <entity name="tenantProject" label="类别"  model="com.efeiyi.ec.tenant.model.TenantProject">
+        <entity name="tenantProject" label="类别"  model="com.efeiyi.ec.Tenant.model.TenantProject">
             <does>
                 <do name="listProject" access="" label="类别">
                     <query name="default" label="默认" type="auto">
@@ -110,11 +108,11 @@
                 </do>
             </does>
         </entity>
-        <entity name="tenantWorkShop" label="工作坊"  model="com.efeiyi.ec.tenant.model.TenantWorkShop">
+        <entity name="masterWorkShop" label="工作坊"  model="com.efeiyi.ec.master.model.MasterWorkShop">
             <does>
-                <do name="listTenantWorkShop" access="" label="工作坊">
+                <do name="listMasterWorkShop" access="" label="工作坊">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>

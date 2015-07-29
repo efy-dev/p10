@@ -1,7 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.organization.model.AddressProvince;
-import com.efeiyi.ec.project.model.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;

@@ -38,6 +38,9 @@ public class TenantProject implements Serializable {
         this.tenant = tenant;
     }
 
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     public Project getProject() {

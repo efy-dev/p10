@@ -1,8 +1,9 @@
 package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.project.model.ProjectCategory;
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 

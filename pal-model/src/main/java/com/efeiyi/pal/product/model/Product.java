@@ -17,6 +17,7 @@ public class Product {
     private String id;
     private String name;
     private String serial;
+    private ProductSeries productSeries;
     private Tenant tenant;
     private String status;
 
@@ -47,6 +48,16 @@ public class Product {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_series_id")
+    public ProductSeries getProductSeries() {
+        return productSeries;
+    }
+
+    public void setProductSeries(ProductSeries productSeries) {
+        this.productSeries = productSeries;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

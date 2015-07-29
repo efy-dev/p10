@@ -111,7 +111,7 @@
                     <page>
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -172,12 +172,12 @@
                     <query type="auto" name="default" label="默认" orderBy="id:asc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="like" inputType="text"/>
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
@@ -205,12 +205,12 @@
                     <query type="auto" name="default" label="默认" orderBy="id:asc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="like" inputType="text"/>
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
@@ -237,7 +237,7 @@
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
                             <field name="user" defaultValue="${MY_USER}"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -273,7 +273,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                         <condition label="菜名" name="name" defaultValue="" operation="eq" inputType="text"/>
                     </query>
@@ -293,7 +293,7 @@
                     <query name="dialog" label="按名称查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                         <condition label="菜名" name="name" defaultValue="" operation="likes" inputType="text"/>
                     </query>
@@ -313,13 +313,13 @@
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                         <condition label="菜名" name="name" defaultValue="" operation="likes" inputType="text"/>
                     </query>
@@ -353,7 +353,7 @@
                         <fields>
                             <field name="createDatetime" defaultValue="${CURRENT_DATE}"/>
                             <field name="user" defaultValue="${MY_USER}"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
                         </fields>
                     </page>
@@ -528,7 +528,7 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="customerCateringPlan.tenant.id" defaultValue="${MY_BRANCH}"
+                        <condition label="机构" name="customerCateringPlan.master.id" defaultValue="${MY_BRANCH}"
                                    operation="eq" inputType="default"/>
                     </query>
                     <page>
@@ -590,7 +590,7 @@
                                    dataType="int"/>
                         <condition label="第几顿饭" name="meal.quantifier" defaultValue="" operation="eq"
                                    inputType="default" dataType="int"/>
-                        <condition label="机构" name="meal.customerCateringPlan.tenant.id" defaultValue="${MY_BRANCH}"
+                        <condition label="机构" name="meal.customerCateringPlan.master.id" defaultValue="${MY_BRANCH}"
                                    operation="eq" inputType="default"/>
                         <condition label="计划" name="meal.customerCateringPlan.id" defaultValue="" operation="eq"
                                    inputType="default"/>
@@ -805,7 +805,7 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <page>
@@ -825,13 +825,13 @@
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                         <condition label="姓名/名称" name="name" defaultValue="" operation="eq" inputType="text"/>
                     </query>
@@ -893,7 +893,7 @@
                 <!--result="redirect:/basic/xm.do?qm=plistCustomer_default">-->
                 <!--<page>-->
                 <!--<fields>-->
-                <!--<field name="tenant" defaultValue="${MY_BRANCH}" />-->
+                <!--<field name="master" defaultValue="${MY_BRANCH}" />-->
                 <!--<field name="theStatus" defaultValue="1" dataType="int" />-->
                 <!--</fields>-->
                 <!--</page>-->
@@ -1006,7 +1006,7 @@
                             <field name="createDatetime" defaultValue="${CURRENT_DATE}"/>
                             <field name="user" defaultValue="${MY_USER}"/>
                             <field name="client" defaultValue="${MY_USER}"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
                         </fields>
                     </page>
@@ -1055,7 +1055,7 @@
                             <field name="createDatetime" defaultValue="${CURRENT_DATE}"/>
                             <field name="user" defaultValue="${MY_USER}"/>
                             <field name="client" defaultValue="${MY_USER}"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
                         </fields>
                     </page>
@@ -1110,7 +1110,7 @@
                             result="xpage">
                             <query type="auto" name="default" label="默认" orderBy="id:desc">
                                 <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="机构" name="customer.tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
+                                <condition label="机构" name="customer.master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
                                 <condition label="客户" name="customer.id" defaultValue="" operation="eq" inputType="default" />
                             </query>
                             <page>
@@ -1127,7 +1127,7 @@
                             result="xpage">
                             <query type="auto" name="default" label="默认" orderBy="id:desc">
                                 <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="机构" name="customer.tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
+                                <condition label="机构" name="customer.master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
                             </query>
                             <page>
                                 <commands type="command">
@@ -1459,7 +1459,7 @@
                                    dataType="int"/>
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <page>
@@ -1497,7 +1497,7 @@
                             <field name="createDatetime" defaultValue="${CURRENT_DATE}" dataType="datetime"/>
                             <field name="client" defaultValue="${MY_USER}"/>
                             <field name="user" defaultValue="${MY_USER}"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -1611,7 +1611,7 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
                                    inputType="default"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
@@ -1620,7 +1620,7 @@
                         <condition label="名称" name="name" defaultValue="" operation="eq" inputType="text"/>
                         <condition label="类型" name="theType" defaultValue="" operation="eq" inputType="select_status"
                                    key="Reference.theType" dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
                                    inputType="default"/>
                     </query>
                     <page>
@@ -1644,7 +1644,7 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
@@ -1653,7 +1653,7 @@
                         <condition label="名称" name="name" defaultValue="" operation="eq" inputType="text"/>
                         <condition label="类型" name="theType" defaultValue="" operation="eq" inputType="select_status"
                                    key="Reference.theType" dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                 </do>
@@ -1664,13 +1664,13 @@
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
                                    inputType="default"/>
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="dr96hx5wv6zk3zpx" operation="eq"
                                    inputType="default"/>
                         <condition label="名称" name="name" defaultValue="" operation="likes" inputType="text"/>
                     </query>
@@ -1709,7 +1709,7 @@
                     <page>
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -1750,7 +1750,7 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <fields>
@@ -1767,12 +1767,12 @@
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="likes" inputType="text"/>
                     </query>
                     <page>
@@ -1804,7 +1804,7 @@
                     <page>
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -1898,7 +1898,7 @@
                                    dataType="int"/>
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        &lt;!&ndash;<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
+                        &lt;!&ndash;<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
                     </query>
                     <page>
                         <fields>
@@ -1916,7 +1916,7 @@
                     <query name="default" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        &lt;!&ndash;<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
+                        &lt;!&ndash;<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />&ndash;&gt;
                     </query>
                     <page>
                         <commands type="command">
@@ -1950,7 +1950,7 @@
                     <page>
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -1991,7 +1991,7 @@
                     <query name="dialog" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <fields>
@@ -2009,7 +2009,7 @@
                     <query name="default" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
+                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <commands type="command">
@@ -2042,7 +2042,7 @@
                     <page>
                         <fields>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                         </fields>
                     </page>
                 </do>
@@ -2198,7 +2198,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="objectId" label="附件主键" defaultValue="" operation="eq" inputType="default"/>
                         <condition name="objectType" label="附件类型" defaultValue="" operation="eq" inputType="default"/>
-                        <condition name="tenant.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition name="master.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"/>
                     </query>
                     <page>

@@ -1,7 +1,7 @@
 package com.efeiyi.ec.organization.model;
 
 
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,7 +24,7 @@ public class BigUser {
     protected Integer theStatus;      // 0假删  1用户/人员      2人员     3用户
     protected Integer workStatus;      //   -1  离职   1  正常
 
-    protected Tenant branch;
+    protected Master branch;
     protected String pictureUrl;
     protected Role role;
     /*    protected String roleType;//角色类型  摄影师 经纪人 化妆师  管理员  修片师*/
@@ -207,11 +207,11 @@ public class BigUser {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id")
-    public Tenant getBranch() {
+    public Master getBranch() {
         return branch;
     }
 
-    public void setBranch(Tenant branch) {
+    public void setBranch(Master branch) {
         this.branch = branch;
     }
 

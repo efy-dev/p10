@@ -5,7 +5,7 @@
     <c:if test="${workShop != null}">
         <c:if test="${workShop.videoPath} != null">
             <div class="video-img-or">
-                <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
+                <video src="http://master.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
             </div>
         </c:if>
         <div class="video-img-text">

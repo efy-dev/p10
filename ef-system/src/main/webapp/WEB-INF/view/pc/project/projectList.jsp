@@ -37,13 +37,13 @@
                             <div class="am-btn-group am-btn-group-xs">
                                 <c:if test="${!empty master}">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=1&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateMasterProject&master.id=${masterId}&project.id=${project.id}&status=1&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewMaster%26id%3D${masterId}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 新建为传承人主项目
                                     </a>
                                 </c:if>
                                 <c:if test="${empty master}">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateTenantProject&tenant.id=${tenantId}&project.id=${project.id}&status=2&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewTenant%26id%3D${tenantId}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=saveOrUpdateMasterProject&master.id=${masterId}&project.id=${project.id}&status=2&resultPage=redirect:%2Fbasic%2Fxm.do%3Fqm%3DviewMaster%26id%3D${masterId}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 新建为传承人项目
                                     </a>
                                 </c:if>

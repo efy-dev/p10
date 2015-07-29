@@ -16,8 +16,8 @@
                         <condition name="id" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
-                    <query name="tenant" label="传承人轮播图" type="auto" orderBy="id:desc">
-                      <condition name="group" defaultValue="tenant" operation="eq"/>
+                    <query name="master" label="传承人轮播图" type="auto" orderBy="id:desc">
+                      <condition name="group" defaultValue="master" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
 

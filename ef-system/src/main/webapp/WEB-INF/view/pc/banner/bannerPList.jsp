@@ -18,11 +18,15 @@
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formBanner&groupId=${groupId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建首页轮播图" />
-</div>
 <div class="admin-content">
     <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupId=${groupId}"/>"><span class="am-icon-plus"></span>新建轮播图</a>
+                </div>
+            </div>
+        </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
@@ -49,7 +53,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only">${banner.title}</td>
-                        <td class="am-hide-sm-only"><img src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
+                        <td class="am-hide-sm-only"><img src="<c:url value="http://master.efeiyi.com/${banner.imageUrl}@!master-manage-banner"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

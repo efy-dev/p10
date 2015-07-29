@@ -81,13 +81,13 @@
                             <div class="one-img-pictures">
                             <dl class="one-img-dl-l">
                                 <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
-                                <dd>${pic.title}1988中国工艺美术大师</dd>
+                                <dd>${pic.title}</dd>
                             </dl>
                         </c:if>
                         <c:if test="${ln.index%2 == 1}">
                             <dl class="one-img-dl-r">
                                 <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"/></dt>
-                                <dd>${pic.title}1988中国工艺美术大师</dd>
+                                <dd>${pic.title}</dd>
                             </dl>
                             </div>
                         </c:if>
@@ -95,7 +95,7 @@
                             <div class="one-img-pictures">
                                 <dl class="one-img-dl-l">
                                     <dt><img src="http://tenant.efeiyi.com/${pic.url}@!tenant-pc-intro"></dt>
-                                    <dd>${pic.title}1988中国工艺美术大师</dd>
+                                    <dd>${pic.title}</dd>
                                 </dl>
                             </div>
                         </c:if>
@@ -113,11 +113,11 @@
                 </ul>
             </div>
         </c:if>
-        <c:if test="${tenantIntroduction != null}">
+        <c:if test="${masterIntroduction != null}">
             <div id="yi-shu-nian-biao">
                 <h1>艺术年表</h1>
                 <div class="text-line">
-                    ${tenantIntroduction.content}
+                    ${masterIntroduction.content}
                 </div>
             </div>
         </c:if>

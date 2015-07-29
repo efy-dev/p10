@@ -14,14 +14,14 @@
                 <field name="label" label="学校名称" inputType="text"/>
                 <field name="value" label="" inputType="text"/>
                 <field name="module" label="" inputType="text"/>
-                <field name="tenant.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
+                <field name="master.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
             </fields>
             <does>
                 <do name="plistBranchConfigProperty"
                     label="组织机构配置"
-                    result="/organization/tenant/branchConfigPropertyList"><!--用户查询-->
+                    result="/organization/master/branchConfigPropertyList"><!--用户查询-->
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="校区" name="tenant.id" defaultValue="${MY_BRANCH}" operation="in"/>
+                        <condition label="校区" name="master.id" defaultValue="${MY_BRANCH}" operation="in"/>
                     </query>
                 </do>
                 <do name="deleteBranchConfigProperty"
@@ -36,7 +36,7 @@
                 <field name="username" label="名称" inputType="text"/>
                 <field name="name" label="别名" inputType="text"/>
                 <field name="password" label="密码" inputType="text"/>
-                <field name="tenant.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
+                <field name="master.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
                 <field name="teachArea.id" label="校区" inputType="dialog_pop" key="teachArea" reference="TeachArea"/>
                 <field name="department.id" label="校区" inputType="dialog_pop" key="teachArea" reference="TeachArea"/>
                 <field name="student.id" label="学生" inputType="dialog_pop" key="student" reference="Student"/>
@@ -207,7 +207,7 @@
                     label="用户信息"
                     result="/organization/user/bigUserByBranchList"><!--用户查询-->
                     <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" inputType="default"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" inputType="default"
                                    operation="in"/>
                         <condition label="状态" name="theStatus" defaultValue="0" inputType="default" operation="ne"
                                    dataType="int"/>
@@ -276,7 +276,7 @@
                     label="用户"
                     result="json"><!--用户查询-->
                     <query name="default" label="默认" type="auto" orderBy="createDatetime:desc">
-                        <condition label="机构" name="teachArea.tenant.id" defaultValue="${MY_BRANCH}" inputType="default"
+                        <condition label="机构" name="teachArea.master.id" defaultValue="${MY_BRANCH}" inputType="default"
                                    operation="in"/>
                         <condition label="状态" name="theStatus" defaultValue="" inputType="default" operation="in"
                                    dataType="int"/>
@@ -347,7 +347,7 @@
                         <fields>
                             <field name="workStatus" defaultValue="1" dataType="int"/>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                             <field name="teachArea" defaultValue="${MY_TEACH_AREA}"/>
                         </fields>
                     </page>
@@ -369,7 +369,7 @@
                         <condition label="用户名" name="username" defaultValue="" operation="eq" inputType="text"/>
                         <condition label="邮箱" name="email" defaultValue="" operation="eq" inputType="text"/>
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" dataType="int"/>
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="in"/>
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="in"/>
                     </query>
                 </do>
 
@@ -381,7 +381,7 @@
                 model="com.efeiyi.ec.organization.model.Role">
             <fields>
                 <field name="name" label="名称" inputType="text"/>
-                <field name="tenant.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
+                <field name="master.id" label="机构" inputType="dialog_do" key="" reference="Branch"/>
                 <field name="superPermission" label="超级权限" inputType="radio_status"
                        key="superPermission" gtype="status">
                     <statusType fieldName="superPermission">
@@ -418,7 +418,7 @@
                     label="权限信息"
                     result="/organization/user/roleList">
                     <query name="default" label="权限组列表" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" operation="eq"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq"
                                    inputType="default"
                                 />
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" dataType="int"/>
@@ -431,7 +431,7 @@
                     label="权限信息"
                     result="xpage"><!--/xedu/market/registerTypeListDialog-->
                     <query name="dialog" type="auto" label="角色" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" inputType="default"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" inputType="default"
                                    operation="in"
                                 />
                         <condition label="状态" name="theStatus" defaultValue="0" operation="ne" inputType="default"
@@ -450,7 +450,7 @@
                     label="权限信息"
                     result="xpage">
                     <query name="dialog" type="auto" label="角色" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" inputType="default"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" inputType="default"
                                    operation="in"
                                 />
                         <condition label="状态" name="theStatus" defaultValue="0" operation="ne" inputType="default"
@@ -471,7 +471,7 @@
                     label="权限信息"
                     result="xpage">
                     <query name="dialog" type="auto" label="角色" orderBy="id:desc">
-                        <condition label="机构" name="tenant.id" defaultValue="${MY_BRANCH}" inputType="default"
+                        <condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" inputType="default"
                                    operation="in"
                                 />
                         <condition label="状态" name="theStatus" defaultValue="0" operation="ne" inputType="default"
@@ -494,7 +494,7 @@
                     result="redirect:/basic/xm.do?qm=plistRole_default">
                     <page>
                         <fields>
-                            <field name="tenant" defaultValue="${MY_BRANCH}"/>
+                            <field name="master" defaultValue="${MY_BRANCH}"/>
                             <field name="theStatus" defaultValue="1" dataType="int"/>
                         </fields>
                     </page>
@@ -508,7 +508,7 @@
                 model="com.yuepaila.basic.model.CityShotType">
             <fields>
                 <field name="name" label="名称" inputType="dialog_pop"/>
-                <field name="tenant.id" label="机构" inputType="dialog_do" reference="Branch"/>
+                <field name="master.id" label="机构" inputType="dialog_do" reference="Branch"/>
                 <field name="address" label="地址" inputType="text"/>
                 <field name="phone" label="电话" inputType="text"/>
                 <field name="allChildrenTeachAreaIds" label="子校区" inputType="text"/>
@@ -531,7 +531,7 @@
                     label="列出机构下所有校区"
                     result="json">
                     <query name="default" type="auto" label="默认">
-                        <condition name="tenant.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"/>
+                        <condition name="master.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"/>
                         <condition name="theStatus" label="状态" defaultValue="1" operation="in" dataType="int"/>
                         <condition name="theType" label="类型" defaultValue="1,3" operation="in" dataType="int"/>
                     </query>
@@ -551,7 +551,7 @@
                     label="所有校区"
                     result="json">
                     <query name="default" type="auto" label="默认">
-                        <condition name="tenant.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"/>
+                        <condition name="master.id" label="机构" defaultValue="${MY_BRANCH}" operation="eq"/>
                         <condition name="theStatus" label="状态" defaultValue="1" operation="in" dataType="int"/>
                         <condition name="theType" label="类型" defaultValue="1,3" operation="in" dataType="int"/>
                     </query>
