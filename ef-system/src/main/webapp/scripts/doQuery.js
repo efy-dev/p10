@@ -137,6 +137,51 @@ function addSelectAndRadios(conditions) {
     }
 }
 
+
+function addOptions(tempId, url, defaultValue, data, inputType, required) {
+    jQuery.ajax({
+        type: 'GET',
+        cache: false,
+        contentType: 'application/json',
+        url: m8u.projectName() + url,
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+            var tagStr = "";
+            for (var i = 0; i < data.length; i++) {
+
+                if (inputType == "select_dictionary" || inputType == "select_status") {
+                    var option = document.createElement("option");
+                    option.value = data[i].id;
+                    option.text = data[i].text;
+                    if (defaultValue != "" && defaultValue == data[i].id) {
+                        option.selected = "selected";
+                    }
+                    document.getElementById(tempId).options.add(option);
+                } else {
+                    tagStr += "<input type='radio' name=\"" + tempId + "Name" + "\" value=\"" + data[i].id + "\" ";
+                    if (defaultValue != "" && defaultValue == data[i].id) {
+                        tagStr += " checked=\"checked\"";
+                    }
+
+                    if (i == 0 && required == "true") {
+                        tagStr += " class=\"radioValidate\"";
+                    }
+
+                    tagStr += " />" + data[i].text + "&nbsp;";
+                }
+
+            }
+
+            if (inputType == "radio_dictionary" || inputType == "radio_status") {
+                $("#" + tempId).append(tagStr);
+            }
+        }
+    });
+}
+
+
+
 function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
     var tagStr = "<div class=\"queryDiv inline-block\">";
     tagStr += "<form class='am-form-inline' id=\"form\" action=\"/basic/xm.do?qm=" + queryModel + "_" + divId + "\" method=\"post\">";

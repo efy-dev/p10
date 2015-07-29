@@ -13,7 +13,7 @@ public class ProjectListHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        modelMap.put("tenantId",request.getParameter("tenantId"));
+        modelMap.put("masterId",request.getParameter("masterId"));
         modelMap.put("master",request.getParameter("master"));
 
         return modelMap;

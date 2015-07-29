@@ -2,6 +2,7 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2015/6/24.
  */
 @Entity
-@Table(name="master_news")
+@Table(name="tenant_news")
 public class MasterNews {
     private String id;
     private String title;
@@ -109,6 +110,7 @@ public class MasterNews {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterNews")
+    @Where(clause = "status=1")
     public List<MasterAttachment> getMasterAttachmentList() {
         return masterAttachmentList;
     }

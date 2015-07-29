@@ -1,6 +1,9 @@
 package com.efeiyi.ec.product.model;
 
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterWork;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,9 +14,9 @@ import javax.persistence.*;
 @Table(name = "product_picture")
 public class ProductPicture {
     private String id;
-    private Product product;
     private String pictureUrl;
     private String status;
+    private Product product;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -25,6 +28,7 @@ public class ProductPicture {
     public void setId(String id) {
         this.id = id;
     }
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -46,6 +50,7 @@ public class ProductPicture {
     }
 
     @Column(name = "status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
