@@ -1,2 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-版权信息 a
+
+<footer>
+    页尾占位
+</footer>
