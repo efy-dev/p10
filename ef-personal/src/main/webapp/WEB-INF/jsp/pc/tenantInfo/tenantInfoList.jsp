@@ -57,7 +57,7 @@
     </div>
     </c:if>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/listMasterInfo.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

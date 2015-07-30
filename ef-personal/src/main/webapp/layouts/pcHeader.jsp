@@ -22,8 +22,8 @@
     <ul class="nav-centent">
         <li><a href="<c:url value="/"/>">首页</a></li>
         <li><a href="<c:url value="/introduction/intro"/>">简介</a></li>
-        <li><a href="<c:url value="/work/listMasterWork"/>">作品</a></li>
-        <li><a href="<c:url value="/info/listMasterInfo"/>">资讯</a></li>
+        <li><a href="<c:url value="/work/list"/>">作品</a></li>
+        <li><a href="<c:url value="/info/list"/>">资讯</a></li>
         <li><a href="<c:url value="/workShop/work"/>">工作坊</a></li>
     </ul>
 </div>
