@@ -8,7 +8,7 @@
 
 
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
-    <mvc:resources mapping="/resources/**" location="/resources/*"/>
+    <mvc:resources mapping="/resources/" location="/resources/**"/>
    <!-- <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/m8/**" location="/m8/"/>
     <mvc:resources mapping="/theme/**" location="/theme/"/>-->
