@@ -3197,3 +3197,14 @@ ALTER TABLE `order_purchase_order`
 
 ALTER TABLE `core_p_document`
 	ADD COLUMN `publish_date` date NULL AFTER `sample_content`;
+	------------------------------------------------
+	-----2015-07-30 修改efc数据库 表字段status not null
+	----------------------------------------------
+alter table basic_banner modify the_status VARCHAR(1) not null;
+alter table basic_document modify status INT(11) not null;
+
+alter table basic_word_value modify status varchar(20) not null;
+---UPDATE basic_word_value SET `status`='1' WHERE id='iccromiv00007v3r'
+
+ALTER table master_recommended modify status varchar(255) not null;
+ALTER table purchase_order_payment modify status varchar(4) not null;
