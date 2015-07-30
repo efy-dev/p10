@@ -13,9 +13,18 @@
 
 
 
-
-<table class="" width="80%" style="font-size: small;margin-left: 20%;border-bottom: 1px;">
-
+<div class="am-g">
+    <div class="am-u-sm-12">
+<table class="am-table am-table-striped am-table-hover table-main">
+       <thead>
+               <tr>
+                   <th class="table-set">操作</th>
+                   <th class="table-title">名称</th>
+                   <th class="table-title">作者</th>
+                   <th class="table-title">封面</th>
+               </tr>
+      </thead>
+      <tbody>
 
                     <c:forEach items="${objectList}" var="masterWorkRecommended">
                         <tr id="${masterWorkRecommended.id}">
@@ -47,8 +56,10 @@
                             </td>
                         </tr>
                     </c:forEach>
-
-                </table>
+       </tbody>
+</table>
+    </div>
+</div>
 
 <script type="text/javascript">
 

@@ -2,6 +2,7 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.project.model.Project;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,6 +61,7 @@ public class MasterWorkRecommended implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_work_id")
+    @Where(clause = "status = 1")
     public MasterWork getMasterWork() {
         return masterWork;
     }
