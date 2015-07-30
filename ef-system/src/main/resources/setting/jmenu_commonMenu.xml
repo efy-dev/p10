@@ -54,22 +54,26 @@
 
     <jnode id="ttManager" url="/main.do?jnodeId=ttManager" text_zh_CN="传承人网站管理"><!--系统管理-->
         <jnode url="" id="tenantManager" access="admin,manager" state="closed"  text_zh_CN="传承人管理">
-            <jnode url="/basic/xm.do?qm=plistTenant_default" id="masterList" access="admin" text_zh_CN="传承人列表">
-                <match url="plistTenant_default"/>
-                <match url="formTenant"/>
-                <match url="removeTenant"/>
-                <match url="viewTenant"/>
-                <match url="formTenantWorkShop"/>
-                <match url="viewTenantWorkShop"/>
-                <match url="formTenantIntroduction"/>
-                <match url="viewTenantIntroduction"/>
-                <match url="viewTenantWork"/>
-                <match url="formTenantWork"/>
-                <match url="plistTenantWork_byProject"/>
+            <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin" text_zh_CN="传承人列表">
+                <match url="plistMaster_default"/>
+                <match url="formMaster"/>
+                <match url="removeMaster"/>
+                <match url="viewMaster"/>
+                <match url="formMasterWorkShop"/>
+                <match url="viewMasterWorkShop"/>
+                <match url="formMasterIntroduction"/>
+                <match url="viewMasterIntroduction"/>
+                <match url="viewMasterWork"/>
+                <match url="formMasterWork"/>
+                <match url="plistMasterWork_byProject"/>
                 <match url="listProject_default"/>
-                <match url="formTenantNews"/>
-                <match url="viewTenantNews"/>
-                <match url="saveOrUpdateTenantWork"/>
+                <match url="formMasterNews"/>
+                <match url="viewMasterNews"/>
+                <match url="saveOrUpdateMasterWork"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistMasterRecommended_default"  access="admin,manager" text_zh_CN="传承人推荐">
+                <match url="plistMasterRecommended_default"/>
+                <match url="viewDocument"/>
             </jnode>
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
                 <!--<match url="plistTenantIntroduction_default"/>-->

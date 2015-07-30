@@ -24,6 +24,7 @@ public class MasterRecommended implements Serializable {
     private Master master;
     private String projectType;
     private Integer sort;
+    private String status;
 
 
     @Id
@@ -63,5 +64,14 @@ public class MasterRecommended implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
