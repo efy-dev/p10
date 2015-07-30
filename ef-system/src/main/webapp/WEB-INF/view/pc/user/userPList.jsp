@@ -14,13 +14,72 @@
 <html>
 <head>
     <title></title>
+
 </head>
 <body>
-<div class="am-u-sm-12 am-u-md-6">
-  <div class="am-btn-toolbar">
+
+
+<div id="doc-tab-demo-1" class="am-tabs" data-am-tabs="{noSwipe: 1}">
+  <ul class="am-tabs-nav am-nav am-nav-tabs">
+    <li class="am-active">
+      <a href="javascript: void(0)">基本查询</a>
+    </li>
+    <li class="">
+      <a href="javascript: void(0)">特殊查询</a>
+    </li>
+    <li class="">
+      <a href="javascript: void(0)">其他查询</a>
+    </li>
+  </ul>
+  <div class="am-tabs-bd">
+    <div id="default" class="am-tab-panel am-active am-in">
+      <div class="queryDiv inline-block">
+        <div class="am-form-group">
+            <span>
+               用户名:
+                 <input id="username" name="username" class="" type="text" value="" size="15">
+            </span>
+            <span>
+              真实姓名:
+                 <input id="name"  class="" type="text" value="" name="name" size="15">
+            </span>
+            <span class="am-btn-group am-btn-group-xs">
+                 <a type="button" class="am-btn am-btn-default" href="#>" onclick="searchUser('basic')" ><span class="am-icon-search"></span>查询</a>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div id="consumer" class="am-tab-panel">
+      <div class="queryDiv inline-block">
+        <div class="am-form-group">
+            <span>
+              角色:
+                <input id="" class="" type="text" value="" name="id" size="15">
+            </span>
+            <span class="am-btn-group am-btn-group-xs">
+                <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formUser"/>"><span class="am-icon-search">查询</span></a>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div id="first" class="am-tab-panel">
+      <div class="queryDiv inline-block">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="am-u-sm-12 am-u-md-6" style="margin-bottom: 5px;margin-top: 2px;">
+  <div class="am-btn-toolbar" style="width: 230%">
     <div class="am-btn-group am-btn-group-xs">
       <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formUser"/>"><span class="am-icon-plus"></span>新建用户</a>
     </div>
+
   </div>
 </div>
 
@@ -58,6 +117,8 @@
 </div>
 <script>
 
+
+
   function removeUser(divId){
     $.ajax({
       type: "get",
@@ -70,6 +131,22 @@
       }
     });
   }
+
+          function searchUser(searchType){
+            var  searchUrl = "";
+            if(searchType == "basic"){
+              var username = $("input[name='username']").val();
+              var name = $("input[name='name']").val();
+              searchUrl = "/basic/xm.do?qm=plistUser_default&conditions=status:1";
+              if(username != ""){
+                searchUrl += ";username:"+username;
+              }
+              if(name != ""){
+                searchUrl += ";name:"+name;
+              }
+              window.location.href = "<c:url var="searchUrl" value="${searchUrl}" />";
+            }
+          }
 
 </script>
 </body>

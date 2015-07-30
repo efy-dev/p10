@@ -95,7 +95,16 @@
                      page="/basic/xm.do?qm=listMasterProject_include&conditions=master.id:${object.id}"/>
     </div>
 </div>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>推荐作品</h2>
+    </div>
 
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listMasterWorkRecommended_include&conditions=master.id:${object.id}"/>
+    </div>
+</div>
 
 <div class="am-g">
 

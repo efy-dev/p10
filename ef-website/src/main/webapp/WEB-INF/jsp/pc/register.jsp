@@ -190,14 +190,11 @@
     var isVerification = false;
 
     //验证用户名
-    function usernameConfirm(userType) {
+    function usernameConfirm(user) {
         var reg = /^1[3578][0-9]{9}$/;
         var username
-        if (userType == "user") {
-            username = $("#username").val();
-        } else {
-            username = $("#photographerUsername").val();
-        }
+        username = $("#username").val();
+
         if (reg.test(username)) {
             $("#usernameConfirmWarning").hide();
             return true;
@@ -286,7 +283,7 @@
     }
 
     function sendVerificationCode(phone) {
-        jQuery.ajax({
+        $.ajax({
             type: 'get',
             async: false,
             url: '<c:url value="/pc/verification/send.do"/>',
@@ -349,9 +346,9 @@
 
         $("#verificationButton").click(function () {
             if ($("#username").val() != "") {
-                if (usernameConfirm("user")) {
+                if (true) {
                     sendVerificationCode($("#username").val())
-                    time($("#verificationButton"));
+                   time($("#verificationButton"));
                 }
             }
         });
