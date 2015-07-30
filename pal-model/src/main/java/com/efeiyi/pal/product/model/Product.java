@@ -1,10 +1,13 @@
 package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.organization.model.TenantCertification;
+import com.efeiyi.pal.organization.model.TenantSource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -21,6 +24,9 @@ public class Product {
     private ProductSeries productSeries;
     private Tenant tenant;
     private String status;
+    private Date madeYear;
+    private TenantSource tenantSource;
+    private TenantCertification tenantCertification;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -80,6 +86,37 @@ public class Product {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "made_year")
+    public Date getMadeYear() {
+        return madeYear;
+    }
+
+    public void setMadeYear(Date madeYear) {
+        this.madeYear = madeYear;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_source_id")
+    public TenantSource getTenantSource() {
+        return tenantSource;
+    }
+
+    public void setTenantSource(TenantSource tenantSource) {
+        this.tenantSource = tenantSource;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_certification_id")
+    public TenantCertification getTenantCertification() {
+        return tenantCertification;
+    }
+
+    public void setTenantCertification(TenantCertification tenantCertification) {
+        this.tenantCertification = tenantCertification;
     }
 
 }
