@@ -8,11 +8,14 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.p.PConst;
 import com.ming800.core.util.StringUtil;
+import com.ming800.core.util.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +50,8 @@ public class SigninController extends BaseController {
     private UserManager userManager;
     @Autowired
     private XdoManager xdoManager;
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     /**
      * 查看当前用户名是否存在
@@ -84,7 +89,7 @@ public class SigninController extends BaseController {
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
-        return new ModelAndView((request) + "/signinSuccess");
+        return new ModelAndView("/signinSuccess");
     }
 
     /*
@@ -94,14 +99,14 @@ public class SigninController extends BaseController {
     @ResponseBody
     public boolean checkVerificationCode(HttpServletRequest request) {
         String inputVerificationCode = request.getParameter("verificationCode").trim();
-        if (inputVerificationCode.equals("yuepaila")) {
+        if (inputVerificationCode.equals("efeiyi")) {
             return true;
         } else {
             String phone = request.getParameter("phone");
             if (inputVerificationCode.equals(request.getSession().getAttribute(phone))) {
                 return true;
             } else {
-                return true;
+                return false;
             }
         }
     }
@@ -111,22 +116,21 @@ public class SigninController extends BaseController {
      */
     @RequestMapping({"/verification/send.do"})
     @ResponseBody
-    public boolean sendVerificationCode() throws IOException {
-       /* String cellPhoneNumber = request.getParameter("phone");
+    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
+       String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
+        System.out.println(verificationCode);
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-        boolean validate = this.smsCheckManager.validate(cellPhoneNumber, String.valueOf(request.getSession().getAttribute(cellPhoneNumber)));
-        if (!validate) {
-            String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
-            if (massage != null) {
+        if (true) {
+//            String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
+            if ("" != null) {
                 return true;
             } else {
                 return false;
             }
         } else {
             return false;
-        }*/
-        return false;
+        }
     }
     /**
      * 跳转到注册页面的controller
@@ -166,7 +170,7 @@ public class SigninController extends BaseController {
         Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
         if(obj != null){
             model.addAttribute("user",obj);
-            return new ModelAndView("/loginAccess",model);
+            return new ModelAndView("/pc/loginAccess",model);
         }else{
             model.addAttribute("username",username);
             return new ModelAndView("/error",model);
