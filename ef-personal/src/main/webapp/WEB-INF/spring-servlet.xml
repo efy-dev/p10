@@ -8,6 +8,7 @@
 
 
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/*"/>
    <!-- <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/m8/**" location="/m8/"/>
     <mvc:resources mapping="/theme/**" location="/theme/"/>-->
@@ -15,7 +16,7 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/resources.properties</value>
+                <value>classpath*:config/resources.properties</value>
             </list>
         </property>
     </bean>
