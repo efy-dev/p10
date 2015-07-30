@@ -15,8 +15,10 @@ public class PurchaseOrderPayment {
     private String id;
     private PurchaseOrder purchaseOrder;
     private Date createDateTime;
-    private String payWay;//支付宝 银行卡
+    private String payWay;//1支付宝 2银行卡
     private User user;
+    private String serial;//支付记录编号
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -65,5 +67,23 @@ public class PurchaseOrderPayment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

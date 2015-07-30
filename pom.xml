@@ -398,8 +398,8 @@
     <build>
         <resources>
             <resource>
-            <directory>src/main/resources/</directory>
-            <filtering>true</filtering>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>
@@ -412,7 +412,24 @@
                     <encoding>utf8</encoding>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>WEB-INF/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>

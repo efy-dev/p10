@@ -23,6 +23,7 @@ public class PurchaseOrder {
     private String payWay;
     private Consumer user;
     private ConsumerAddress consumerAddress;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -108,5 +109,14 @@ public class PurchaseOrder {
 
     public void setPurchaseOrderPaymentList(List<PurchaseOrderPayment> purchaseOrderPaymentList) {
         this.purchaseOrderPaymentList = purchaseOrderPaymentList;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
