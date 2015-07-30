@@ -54,7 +54,7 @@
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
                 <c:forEach items="${list}" var="tenantProject" varStatus="rec">
-                    <c:if test="${tenantProject.project.type == 1}">
+                    <c:if test="${'1'.equals(tenantProject.project.type)}">
                         <li style="width:50%;" class="am-u-sm-6 am-u-end">
                             <div class="am-gallery-item">
                                 <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
@@ -74,7 +74,7 @@
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-2 am-avg-lg-4 am-gallery-overlay">
                 <c:forEach items="${list}" var="tenantProject" varStatus="rec">
-                    <c:if test="${masterProject.project.type == 2}">
+                    <c:if test="${'2'.equals(tenantProject.project.type)}">
                         <li class=" am-u-sm-6 am-u-end ">
                             <div class="am-gallery-item">
                                 <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
