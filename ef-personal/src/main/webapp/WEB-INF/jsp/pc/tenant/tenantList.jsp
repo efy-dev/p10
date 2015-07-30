@@ -33,7 +33,7 @@
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
     <div class="page-section-figure">
         <c:forEach items="${list}" var="masterProject" varStatus="rec">
-            <c:if test="${masterProject.project.type == 1}">
+            <c:if test="${'1'.equals(masterProject.project.type)}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">
@@ -65,7 +65,7 @@
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
     <div class="page-section-figure">
         <c:forEach items="${list}" var="masterProject" varStatus="rec">
-            <c:if test="${masterProject.project.type == 2}">
+            <c:if test="${'2'.equals(masterProject.project.type)}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">

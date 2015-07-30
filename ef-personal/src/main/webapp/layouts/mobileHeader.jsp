@@ -16,7 +16,7 @@
 </header>
 <div class="am-border-1"></div>
 <nav id="am-nav-1">
-    <div class="am-bg-tp " style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background)"></div>
+    <div class="am-bg-tp " style="background:url(http://tenant.efeiyi.com/${tenant.backgroundUrl}@!tenant-mobile-view-background);background-size: 100% 100%;"></div>
     <div class="am-xu-nav">
         <div style="background:url(http://tenant.efeiyi.com/${tenant.favicon}@!tenant-mobile-view-icon)" alt="传承人" class="am-img-thumbnail am-circle"></div>
         <p id="am-mg-14">${tenant.fullName}</p>
