@@ -5,6 +5,7 @@ import com.efeiyi.ec.organization.model.Consumer;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,15 +16,16 @@ import java.util.List;
 @Table(name = "purchase_order")
 public class PurchaseOrder {
     private String id;
-    private String serial;
+    private String serial;          //订单号
     private List<PurchaseOrderProduct> purchaseOrderProductList;
     private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;
     private List<PurchaseOrderPayment> purchaseOrderPaymentList;
-    private Date createDatetime;
-    private String payWay;
+    private Date createDatetime;       //下单时间
     private Consumer user;
-    private ConsumerAddress consumerAddress;
+    private ConsumerAddress consumerAddress;  //收获地址
     private String status;
+    private BigDecimal total;  //订单总价
+    private String orderStatus; //订单状态
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -61,15 +63,6 @@ public class PurchaseOrder {
 
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
-    }
-
-    @Column(name = "payway")
-    public String getPayWay() {
-        return payWay;
-    }
-
-    public void setPayWay(String payWay) {
-        this.payWay = payWay;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -118,5 +111,14 @@ public class PurchaseOrder {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "total")
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }

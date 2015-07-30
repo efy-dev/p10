@@ -24,7 +24,6 @@ public interface BaseManager {
 
     Object getObject(String model, String id);
 
-    @Deprecated
     void saveOrUpdate(String model, Object object);
 
     @Deprecated
