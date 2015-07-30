@@ -66,15 +66,13 @@ dl,dd,dt{margin:0;padding:0;}
 a{ text-decoration:none;}
 .floating_ck{position:fixed;right:0%;top:54%; z-index:9999;}
 @media only screen and (max-width:1200px){
-	.floating_ck{position:none;display:none}
-	
-	}
+.floating_ck{display:none}
+}
 .floating_cl{position:fixed;left:25%;top:54%;}
 .floating_ck dl dd{position:relative;background-color:#fff;border:solid 1px #000;text-align:center;background-repeat:no-repeat;background-position:center 50%;cursor:pointer;}
 .floating_ck dl dd:hover{background-color:#fff;border:solid 1px #000;}
 .floating_ck dl dd:hover .floating_left{display:block;}
-.consult,.words{background-image:url(images/icon0701/zxicon.png);}
-.quote{background-image:url(images/icon0701/kficon.png);width:45px;height:45px;}
+.quote{width:45px;height:45px;}
 .quote span{ text-align:center;}
 .qrcord{background:url(../images/logo4.gif) 0 20px;width:45px;height:45px; margin-bottom:2px;line-height:45px;}
 .return{background-image:url(../images/logo5.gif);width:45px;height:25px; margin-bottom:12px;}
@@ -109,9 +107,9 @@ a{ text-decoration:none;}
 .tr1 td{height:3px;}
 .tr2{width:501px;height:57px; border-bottom:1px solid #000;}
 .tr3{height:47px; border-bottom:1px solid #000;}
-.tr3 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
+/*.tr3 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
 .tr4 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
-.tr5 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}
+.tr5 .td-1{ background:url(../images/logo7.jpg) repeat-y 78px 0px;}*/
 .tr4{height:47px; border-bottom:1px solid #000;}
 .tr5{height:103px; border-bottom:1px solid #000;}
 .tr6{height:3px;}
@@ -225,7 +223,6 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .page-number a:link,.page-number a:visited{color:#999;font-size:12px;padding:0 6px;outline:none;}
 .page-number a:hover{color:#ff2120;}
 /*瀑布流*/
-/*.works-container{height:255px;width:541px;padding-left:36px;}*/
 .grid-item { width:200px; }
 .grid-item--width2 { width:400px; }
 .works-img{width:225px;height:184px;margin-left:20px; float:left;}
@@ -303,19 +300,3 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #page-footer-head-1{ font-family:"宋体";font-size:12px; color:#666;height:21px;text-align:center;}
 .a:link,.a:visited{color:#fff;}
 .works-container a p{ font-size:12px;color:#242424;width:225px; text-align:center;}
-
-
-
-
-
-
-
-
-
-
-
-/*.works-container {background: #000;height: 200px;margin-left:-20px;}
-
-#center--1 {background:#f00}*/
-
-

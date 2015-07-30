@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2015/6/24.
  */
 @Entity
-@Table(name="master_news")
+@Table(name="tenant_news")
 public class MasterNews {
     private String id;
     private String title;
