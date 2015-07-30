@@ -6,7 +6,7 @@
 
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
-    <div class="printing" style="width: 280px" id="tenantLevel">非物质文化遗产传承人<span>  [<a href="#" id="projectName">${master.getProjectName()}</a>]</span></div>
+    <div class="printing" style="width: 350px" id="tenantLevel">非物质文化遗产传承人<span>  [<a href="#" id="projectName">${master.getProjectName()}</a>]</span></div>
     <ul class="register">
         <li class="register-page"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz1.gif"/>"></a></li>
        <%-- <li class="register-left"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2.gif"/>"></a></li>

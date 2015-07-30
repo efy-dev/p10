@@ -63,9 +63,11 @@
           </c:forEach>
         </ul>
       </div>
+        <c:if test="${masterIntroduction != null}">
       <div data-tab-panel-2 class="am-tab-panel ">
               ${masterIntroduction.content}
       </div>
+        </c:if>
     </div>
   </div>
 </div>

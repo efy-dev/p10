@@ -35,7 +35,7 @@ public class TenantController extends BaseMasterController {
         if (tenant==null){
             return new ModelAndView("redirect:/index");
         }
-        String queryHql = "from MasterWork t where t.master.id = :tenantId";
+        String queryHql = "from MasterWork t where t.master.id = :tenantId and t.status !='0'";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("tenantId",tenant.getId());
         List list = baseManager.listObject(queryHql,queryParamMap);

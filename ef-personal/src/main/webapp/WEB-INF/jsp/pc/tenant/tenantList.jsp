@@ -160,7 +160,7 @@
 <h4 id="page-footer-head">Copyright(c) 2015-2020 efeiyi.com All Rights Reserved</h4>
 <h4 id="page-footer-head-1">京ICP备15032511号-1</h4>
 <!--分析-->
-<div class="floating_ck">
+<%--<div class="floating_ck">
     <dl>
         <dt></dt>
         <dd class="return">
@@ -185,6 +185,6 @@
 
 
     </dl>
-</div>
+</div>--%>
 </body>
 </html>
