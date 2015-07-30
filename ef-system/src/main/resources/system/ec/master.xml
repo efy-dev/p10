@@ -368,6 +368,7 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
+
                 </do>
 
                 <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access="" result="/masterWorkRecommended/masterWorkRecommendedForm" />
@@ -375,7 +376,38 @@
                 <do name="saveOrUpdateMasterWorkRecommended" label="保存传承人推荐产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWorkRecommended" >
                 </do>
                 <do name="removeMasterWorkRecommended" label="删除大师推荐产品" access="" result="json"/>
-                <do name="listMasterWorkRecommended" label="大师著作推荐产品" access="" result="/masterWorkRecommended/masterWorkRecommendedList">
+                <do name="listMasterWorkRecommended" label="大师著作推荐产品" access="" result="/masterWork/masterWorkRecommendedIncludeList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="include" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="project.id" operation="eq"/>
+                        <condition name="master.id"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="MasterRecommended" label="传承人产品推荐"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.MasterRecommended">
+            <does>
+                <do name="plistMasterRecommended" access="" label="传承人推荐列表"
+                    result="/masterRecommended/masterRecommendedPList" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formMasterRecommended" label="保存传承人推荐页" access="" result="/masterRecommended/masterRecommendedForm" />
+
+                <do name="saveOrUpdateMasterRecommended" label="保存传承人推荐" access="" result="redirect:/basic/xm.do?qm=plistMasterRecommended" >
+                </do>
+                <do name="removeMasterRecommended" label="删除大师推荐" access="" result="json"/>
+                <do name="listMasterRecommended" label="大师著作推荐" access="" result="/masterRecommended/masterRecommendedList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>

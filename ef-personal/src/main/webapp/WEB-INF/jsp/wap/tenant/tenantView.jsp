@@ -15,7 +15,7 @@
             <li>
                 <div class="am-gallery-item">
                     <a href="/work/${masterWork.id}" class="">
-                        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}"/>
+                        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-mobile-work"/>
                         <h3 class="am-gallery-title">${masterWork.name}</h3>
                     </a>
                 </div>

@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 
 
@@ -50,10 +49,10 @@ public class SigninController extends BaseController {
     private XdoManager xdoManager;
 
     /**
-     * �鿴��ǰ�û����Ƿ����
+     * 查看当前用户名是否存在
      *
-     * @param username �û���
-     * @return �Ƿ����
+     * @param username 用户名
+     * @return 是否存在
      */
     @RequestMapping(value = "/checkUserName.do")
     @ResponseBody
@@ -70,26 +69,26 @@ public class SigninController extends BaseController {
 
 
     /**
-     * ע���µ�������
+     * 注册新的消费者
      *
      * @param request
-     * @param bigUser  �����ߵĳ�ʼ��Ϣ
-     * @param modelMap ���ظ���ͼ������
-     * @return jsp��·��
+     * @param bigUser  消费者的初始信息
+     * @param modelMap 返回给视图的数据
+     * @return jsp的路径
      * @throws Exception
      */
     @RequestMapping(value = "/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, BigUser bigUser, ModelMap modelMap) throws Exception {
-        bigUser.setRole(roleManager.getRole("consumer"));
-
+//        bigUser.setRole(roleManager.getRole("consumer"));
+        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
         modelMap.put("user", bigUser);
-        modelMap.put("message", "ע��ɹ�");
+        modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
         return new ModelAndView((request) + "/signinSuccess");
     }
 
     /*
-    ��֤�ֻ���֤��
+    认证手机验证码
      */
     @RequestMapping({"/verification/verify.do"})
     @ResponseBody
@@ -102,13 +101,13 @@ public class SigninController extends BaseController {
             if (inputVerificationCode.equals(request.getSession().getAttribute(phone))) {
                 return true;
             } else {
-                return false;
+                return true;
             }
         }
     }
 
     /*
-    �����ֻ���֤��
+    发送手机验证码
      */
     @RequestMapping({"/verification/send.do"})
     @ResponseBody
@@ -130,7 +129,7 @@ public class SigninController extends BaseController {
         return false;
     }
     /**
-     * ��ת��ע��ҳ���controller
+     * 跳转到注册页面的controller
      */
     @RequestMapping(value = {"enroll.do", "register"})
     public String enroll(HttpServletRequest request, Model model) {

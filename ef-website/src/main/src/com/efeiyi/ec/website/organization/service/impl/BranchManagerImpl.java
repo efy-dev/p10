@@ -62,7 +62,7 @@ public class BranchManagerImpl implements BranchManager {
 
     @Override
     public User checkUsername(String username) {
-        String queryStr = "from User b where b.username = ? and b.theStatus!=0";          // and b.theStatus in (1,2,3)
+        String queryStr = "from User b where b.username = ? and b.status!=0";          // and b.theStatus in (1,2,3)
         List<User> userList = (List<User>) xdoDao.getObjectList(queryStr, username);
         if (userList != null && userList.size() > 0) {
             return userList.get(0);

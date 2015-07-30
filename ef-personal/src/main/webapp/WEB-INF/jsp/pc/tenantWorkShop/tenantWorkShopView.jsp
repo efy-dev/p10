@@ -15,7 +15,7 @@
           <div class="center-right">
               <c:if test="${workShop != null}">
                 <div class="video-or-img">
-                  <video src="http://tenant.img-cn-beijing.aliyuncs.com/${workShop.videoPath}" content="content" preload="auto" controls="controls"></video>
+                  <video src="http://ef-video.oss-cn-beijing.aliyuncs.com/${workShop.videoPath}" content="content" preload="auto" controls="controls"></video>
                 </div>
               </c:if>
                 <div class="content-img">

@@ -27,16 +27,16 @@
 <div data-am-widget="slider" class="am-slider am-slider-a1"  data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
         <li>
-            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-1.jpg"/>">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%A7%9A%E6%83%A0%E8%8A%AC%281%29.jpg">
         </li>
         <li>
-            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-2.jpg"/>">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E5%BC%A0%E5%90%8C%E7%A6%84%281%29.jpg">
         </li>
         <li>
-            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-3.jpg"/>">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E6%9C%B1%E7%82%B3%E4%BB%81%282%29.jpg">
         </li>
         <li>
-            <img src="<c:url value="http://s.amazeui.org/media/i/demos/bing-4.jpg"/>">
+            <img src="http://tenant.oss-cn-beijing.aliyuncs.com/index_banner/%E9%AD%8F%E7%AB%8B%E4%B8%ADbanner%281%29.jpg">
         </li>
     </ul>
 </div>
@@ -53,15 +53,15 @@
         <div data-tab-panel-0 class="am-tab-panel am-active am-ing-bg-color">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-                <c:forEach items="${list}" var="masterProject" varStatus="rec">
-                    <c:if test="${masterProject.project.type == 1}">
+                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
+                    <c:if test="${tenantProject.project.type == 1}">
                         <li style="width:50%;" class="am-u-sm-6 am-u-end">
                             <div class="am-gallery-item">
-                                <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
-                                    <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list"/>
+                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                        <p>${masterProject.master.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${masterProject.master.brief}</p>
+                                        <p>${tenantProject.tenant.fullName}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
                                     </h3>
                                 </a>
                             </div>
@@ -73,15 +73,15 @@
         <div data-tab-panel-1 class="am-tab-panel am-ing-bg-color ">
             <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
                 am-avg-md-2 am-avg-lg-4 am-gallery-overlay">
-                <c:forEach items="${list}" var="masterProject" varStatus="rec">
+                <c:forEach items="${list}" var="tenantProject" varStatus="rec">
                     <c:if test="${masterProject.project.type == 2}">
                         <li class=" am-u-sm-6 am-u-end ">
                             <div class="am-gallery-item">
-                                <a href="http://${masterProject.master.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
-                                    <img src="http://master.efeiyi.com/${masterProject.master.favicon}@!master-pc-master-list"/>
+                                <a href="http://${tenantProject.tenant.name}.efeiyi.com:${pageContext.request.serverPort}/${pageContext.request.contextPath}" class="">
+                                    <img src="http://tenant.efeiyi.com/${tenantProject.tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
-                                        <p>${masterProject.master.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${masterProject.master.brief}</p>
+                                        <p>${tenantProject.tenant.fullName}</p>
+                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenantProject.tenant.brief}</p>
                                     </h3>
                                 </a>
                             </div>

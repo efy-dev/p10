@@ -47,6 +47,9 @@ public class XdoController {
     @Autowired
     private XdoSupportManager xdoSupportManager;
 
+
+
+
     @RequestMapping("/xm.do")
     public ModelAndView xm(HttpServletRequest request, ModelMap modelMap) throws Exception {
         String menuId = request.getParameter("menuId");
@@ -262,6 +265,11 @@ public class XdoController {
         }
 
         return new ModelAndView(resultPage);
+    }
+
+    @RequestMapping({"/xmi.do"})
+    public String xmi(HttpServletRequest request){
+        return "forward:/basic/xm.do?qm="+request.getParameter("qm")+"&conditions="+request.getParameter("conditions");
     }
 
 

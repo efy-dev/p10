@@ -44,21 +44,21 @@
                     </td>
                 </tr>
                 <tr class="tr3">
-                    <td height="47" width="80"  class="td-1 td-s">性别</td>
+                    <td height="47" width="80"  class="td-1 td-s" style="border-right:1px #000 dotted;">性别</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.sex' checkedValue='${tenant.sex}' type='normal'/></td>
-                    <td height="47" width="80" class="td-1 td-s">出生年月</td>
+                    <td height="47" width="80" class="td-1 td-s" style="border-right:1px #000 dotted;">出生年月</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.birthday}</td>
                 </tr>
                 <tr class="tr4">
-                    <td height="47" width="80"  class="td-1 td-s">籍贯</td>
+                    <td height="47" width="80"  class="td-1 td-s" style="border-right:1px #000 dotted;">籍贯</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.originProvince.name}</td>
-                    <td height="47" width="80" class="td-1 td-s">现居地</td>
+                    <td height="47" width="80" class="td-1 td-s" style="border-right:1px #000 dotted;">现居地</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center">${tenant.presentAddress}</td>
                 </tr>
                 <tr class="tr5">
-                    <td height="47" width="80"  class="td-1 td-s">代表作品</td>
+                    <td height="47" width="80"  class="td-1 td-s" style="border-right:1px #000 dotted;">代表作品</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center"></td>
-                    <td height="47" width="80" class="td-1 td-s">级别</td>
+                    <td height="47" width="80" class="td-1 td-s" style="border-right:1px #000 dotted;">级别</td>
                     <td height="47" width="173" style="border-right:1px solid #000" align="center"><ming800:status name='sex' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/></td>
                 </tr>
                 <tr class="tr6">

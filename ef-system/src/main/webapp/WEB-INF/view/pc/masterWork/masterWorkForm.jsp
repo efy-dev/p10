@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/ckeditor/ckeditor.js"></script>
+    <script src="/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -59,7 +59,7 @@
                 </div>
                 <br>
             </div>
-
+          <c:if test="${not empty object.id}">
             <div class="am-form-group">
 
                 <label for="img" class="am-u-sm-3 am-form-label">原图片</label>
@@ -69,7 +69,7 @@
                     <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
             </div>
-
+         </c:if>
             <div class="am-form-group">
 
                 <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>

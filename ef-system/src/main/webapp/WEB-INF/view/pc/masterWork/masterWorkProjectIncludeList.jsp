@@ -36,6 +36,13 @@
           </td>
           <td class="am-hide-sm-only">${masterProject.project.name}</td>
         </tr>
+        <tr>
+          <td colspan="2" style="text-align: center" >
+            <jsp:include flush="true"
+                         page="/basic/xm.do?qm=listMasterWorkRecommended_include&conditions=master.id:${masterProject.master.id};project.id:${masterProject.project.id}"/>
+          </td>
+
+        </tr>
       </c:forEach>
       </tbody>
     </table>

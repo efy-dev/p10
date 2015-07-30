@@ -15,29 +15,66 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/alert.js'/>"></script>
 </head>
 <body>
-<table >
-    <tr>
-        <td>role-id</td>
-        <td>name</td>
+<div class="am-u-sm-12 am-u-md-6">
+    <div class="am-btn-toolbar">
+        <div class="am-btn-group am-btn-group-xs">
+            <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formRole"/>"><span class="am-icon-plus"></span>新建角色</a>
+        </div>
+    </div>
+</div>
+
+<table class="am-table am-table-bordered am-table-radius am-table-striped">
+    <tr style="text-align: center">
+        <td>操作</td>
+        <td>角色名称</td>
+        <td>角色类型</td>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="role">
-        <tr>
-            <td>${role.id}</td>
-            <td>${role.name}</td>
+        <tr style="text-align: center" id="${role.id}">
+            <td width="20%">
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
+                        <a  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formRole&id=${role.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit">编辑</span> </a>
+                        <button onclick="showConfirm('提示','是否删除',function(){
+                              removeRole('${role.id}');
+                        })" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    </div>
+                </div>
+            </td>
+            <td width="20%">${role.name}</td>
+            <td width="20%">
+                <ming800:status name="basicType" dataType="Role.basicType" checkedValue="${role.basicType}" type="normal" />
+            </td>
+
         </tr>
     </c:forEach>
-
-
 </table>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+        <ming800:pcPageParam name="menuId" value="${requestScope.menuId}"/>
     </ming800:pcPageList>
 </div>
+<script>
+
+    function removeRole(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeRole"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

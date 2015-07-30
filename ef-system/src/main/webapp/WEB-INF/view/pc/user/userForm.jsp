@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑用户</strong> / <small>New/Edit Product</small></div>
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑用户</strong> / <small>New/Edit User</small></div>
 </div>
 <hr/>
 
@@ -37,6 +37,17 @@
             </div>
         </div>
         <div class="am-form-group">
+            <label name="role.id"  class="am-u-sm-3 am-form-label">角色 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <select name="role.id" id="role.id" class="selectValidate" >
+                  <c:forEach items="${roleList}" var="role" >
+                    <option value="${role.id}">${role.name}</option>
+                  </c:forEach>
+                </select>
+
+            </div>
+        </div>
+        <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
@@ -46,6 +57,8 @@
 <!-- content end -->
 <hr/>
 
-
+<script>
+    $("select option[value='${object.role.id}']").attr("selected","selected");
+</script>
 </body>
 </html>
