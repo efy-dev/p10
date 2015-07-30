@@ -33,7 +33,7 @@
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-5.gif" />"></a></div>
     <div class="page-section-figure">
         <c:forEach items="${list}" var="masterProject" varStatus="rec">
-            <c:if test="${masterProject.project.type == 1}">
+            <c:if test="${'1'.equals(masterProject.project.type)}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">
@@ -65,7 +65,7 @@
     <div class="page-section-text"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz2-6.gif" />"></a></div>
     <div class="page-section-figure">
         <c:forEach items="${list}" var="masterProject" varStatus="rec">
-            <c:if test="${masterProject.project.type == 2}">
+            <c:if test="${'2'.equals(masterProject.project.type)}">
                 <div class="img-mutual am-u-sm-4" style="float:left;">
                     <div class="box">
                         <img src="http://tenant.efeiyi.com/${masterProject.tenant.favicon}@!tenant-pc-tenant-list" alt="">
@@ -160,7 +160,7 @@
 <h4 id="page-footer-head">Copyright(c) 2015-2020 efeiyi.com All Rights Reserved</h4>
 <h4 id="page-footer-head-1">京ICP备15032511号-1</h4>
 <!--分析-->
-<div class="floating_ck">
+<%--<div class="floating_ck">
     <dl>
         <dt></dt>
         <dd class="return">
@@ -185,6 +185,6 @@
 
 
     </dl>
-</div>
+</div>--%>
 </body>
 </html>

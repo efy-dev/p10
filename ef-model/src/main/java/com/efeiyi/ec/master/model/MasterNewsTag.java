@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/6/26.
  */
 @Entity
-@Table(name = "master_news_tag")
+@Table(name = "tenant_news_tag")
 public class MasterNewsTag {
     private String id;
     private MasterNews masterNews;

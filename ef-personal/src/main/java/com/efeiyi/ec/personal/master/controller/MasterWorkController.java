@@ -34,7 +34,7 @@ public class MasterWorkController extends BaseMasterController {
      * @param model
      * @return
      */
-    @RequestMapping("/listMasterWork")
+    @RequestMapping("/list")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         Tenant tenant = getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistMasterWork_default",tenant.getId(),request.getParameter("sort"),request);

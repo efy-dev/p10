@@ -14,7 +14,7 @@
   <script type="text/javascript" >
     function orderView(o){
       var orderId = $(o).next().val();
-      window.location.href="/purchaseOrder/getOrder.do?id="+orderId;
+      window.location.href="/order.xml/getOrder.do?id="+orderId;
     }
   </script>
 </head>
