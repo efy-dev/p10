@@ -241,7 +241,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
                 tagStr += " <input  type=\"text\"";
                 if (queryConditionArray[i].inputType == "date") {
                     datatimeIdArray.push(tempId);
-                    tagStr += " class=\"am-form-field\" readonly size=\"14\"";
+                    tagStr += " class=\"am-form-field\" data-am-datepicker readonly size=\"14\"";
                 } else {
                     tagStr += " class=\"am-form-field\" size=\"15\"";
                 }
