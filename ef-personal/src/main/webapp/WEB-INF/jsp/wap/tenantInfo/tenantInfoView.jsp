@@ -9,7 +9,7 @@
 <head></head>
 <body style="background-color:#F1F5F8">
 <header class="work-details">
-    <div class="work-details-i"><a href="<c:url value="/info/listMasterInfo"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
+    <div class="work-details-i"><a href="<c:url value="/info/list"/>"><img src="<c:url value="/scripts/assets/wap/images/logo10.gif"/>"></a></div>
 </header>
 <section class="work-text-h2">
     <div class="message-text2">

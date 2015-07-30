@@ -28,7 +28,7 @@ public class MasterInfoController extends BaseMasterController {
      * @param model
      * @return
      */
-    @RequestMapping("/listMasterInfo")
+    @RequestMapping("/list")
     public String listTenantInfo(HttpServletRequest request,Model model) throws Exception {
         Tenant tenant = super.getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistMasterNews_default",request);

@@ -6,7 +6,7 @@
 <body>
 <!--作品详情-->
 <div id="page-nav">
-  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/work/listMasterWork.do"/>">作品</a></span><span>${product.name}</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/work/list"/>">作品</a></span><span>${product.name}</span></p>
 </div>
 <div class="border-nav"></div>
 <div id="center--1">
