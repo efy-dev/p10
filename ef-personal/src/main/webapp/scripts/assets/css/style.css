@@ -133,7 +133,8 @@ a{ text-decoration:none;}
 #chu-ban-zhu-zuo{width:501px;overflow:hidden;}
 #chu-ban-zhu-zuo h1{height:113px;padding-top:73px;line-height:0;}
 #chu-ban-zhu-zuo ul{width:501px;height:195px;}
-#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}
+/*#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}*/
+#chu-ban-zhu-zuo ul li{width:auto;height:195px;padding-right:33px;float:left;}
 /*艺术年表*/
 #yi-shu-nian-biao{width:501px;overflow:hidden; margin-bottom:190px;}
 #yi-shu-nian-biao h1{height:113px;padding-top:73px;line-height:0}
