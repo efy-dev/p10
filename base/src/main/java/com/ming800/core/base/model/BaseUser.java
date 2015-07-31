@@ -22,6 +22,13 @@ public class BaseUser implements Serializable ,UserDetails{
     private BaseTenant baseTenant;
     private String password;
 
+    private String role;
+
+    private boolean enabled;               //是否可用
+    private boolean accountExpired;       //账号过期
+    private boolean accountLocked;        //账号锁定
+    private boolean credentialsExpired;  //证书过期
+
 
 
     @Id
@@ -102,5 +109,43 @@ public class BaseUser implements Serializable ,UserDetails{
     @Transient
     public boolean isEnabled() {
         return false;
+    }
+
+
+    @Transient
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isAccountExpired() {
+        return accountExpired;
+    }
+
+    public void setAccountExpired(boolean accountExpired) {
+        this.accountExpired = accountExpired;
+    }
+
+    public boolean isAccountLocked() {
+        return accountLocked;
+    }
+
+    public void setAccountLocked(boolean accountLocked) {
+        this.accountLocked = accountLocked;
+    }
+
+    public boolean isCredentialsExpired() {
+        return credentialsExpired;
+    }
+
+    public void setCredentialsExpired(boolean credentialsExpired) {
+        this.credentialsExpired = credentialsExpired;
     }
 }
