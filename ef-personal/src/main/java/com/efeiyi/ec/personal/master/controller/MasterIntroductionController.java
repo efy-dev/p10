@@ -73,6 +73,7 @@ public class MasterIntroductionController extends BaseMasterController {
         }
         model.addAttribute("tenant",tenant);
         model.addAttribute("list",list);
+        model.addAttribute("pageMsg","2");
         return "/tenantIntroduction/tenantIntroductionList";
     }
 

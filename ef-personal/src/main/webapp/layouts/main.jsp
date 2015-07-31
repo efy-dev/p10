@@ -4,21 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <script src="<c:url value="/resources/jquery/jquery-1.11.1.min.js"/>"></script>
-    <script>
-        $.ajax({
-            type: "post",
-            url: '<c:url value="/getTenant.do"/>',
-            cache: false,
-            dataType: "json",
-            success: function (data) {
-                var title = "";
-                title = title + data.fullName + "-----" + $("#titleValue").val();
-                console.log(data);
-                document.getElementById("pages").innerHTML = title;
-            }
-        });
-    </script>
     <title id="pages">
         <sitemesh:write property="title"/>
     </title>
@@ -36,19 +21,18 @@
     <sitemesh:write property='head'/>
 </head>
 <body>
-<input type="hidden" id="titleValue"/>
-    <%
-    if(HttpUtil.isPhone(request)){
+<%
+        if(HttpUtil.isPhone(request)){
     %>
-<%@include file="mobileHeader.jsp"%>
+    <%@include file="mobileHeader.jsp"%>
     <%
     }else{
     %>
-<%@include file="pcHeader.jsp"%>
+    <%@include file="pcHeader.jsp"%>
     <%
         }
     %>
-<sitemesh:write property='body'/>
+    <sitemesh:write property='body'/>
     <%
         if(HttpUtil.isPhone(request)){
     %>
