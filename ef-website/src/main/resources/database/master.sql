@@ -16,3 +16,13 @@ ADD COLUMN `orderStatus`  char(255) NULL AFTER `total`;
 ALTER TABLE `purchase_order_payment`
 ADD COLUMN `paymentAmount`  decimal NULL AFTER `status`;
 
+CREATE TABLE `NewTable` (
+  `id`  char(16) NOT NULL ,
+  `product_id`  char(16) NULL ,
+  `user_id`  char(16) NULL ,
+  `status`  char(8) NULL ,
+  PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `product_favorite`
+ADD COLUMN `create_datetime`  datetime NULL AFTER `status`;
