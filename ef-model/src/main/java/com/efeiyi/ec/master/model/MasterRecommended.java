@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "tenant_recommended")
+@Table(name = "master_recommended")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MasterRecommended implements Serializable {
 

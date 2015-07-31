@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/7/20.
  */
 @Entity
-@Table(name = "tenant_banner")
+@Table(name = "master_banner")
 public class MasterBanner {
 
     private String id;
