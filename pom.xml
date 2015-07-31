@@ -18,6 +18,7 @@
         <module>base_resource</module>
         <module>pal-system</module>
         <module>pal-model</module>
+        <module>ef-wiki</module>
     </modules>
 
     <repositories>
