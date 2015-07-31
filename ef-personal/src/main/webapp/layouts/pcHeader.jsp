@@ -54,9 +54,7 @@
                 $("#tenantLevel").html(levelName+'非物质文化遗产传承人<span>  [<a href="#" id="projectName">'+data.projectName+'</a>]</span>');
             }
         });
-    var titleValue = "";
     function setMenu(o){
-        titleValue += $(o).html();
-        alert(titleValue);
+        $("#titleValue").val($(o).html());
     }
 </script>

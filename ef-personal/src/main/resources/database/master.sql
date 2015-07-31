@@ -3198,3 +3198,11 @@ ALTER TABLE `order_purchase_order`
 ALTER TABLE `core_p_document`
 	ADD COLUMN `publish_date` date NULL AFTER `sample_content`;
 
+
+------------------------------------------------
+
+------2015-7-31   执行
+--给master_recommended表添加status字段--
+-------------------------------------------------
+
+ALTER TABLE efy.master_recommended ADD status VARCHAR(2) NOT NULL;
