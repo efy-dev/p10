@@ -133,7 +133,8 @@ a{ text-decoration:none;}
 #chu-ban-zhu-zuo{width:501px;overflow:hidden;}
 #chu-ban-zhu-zuo h1{height:113px;padding-top:73px;line-height:0;}
 #chu-ban-zhu-zuo ul{width:501px;height:195px;}
-#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}
+/*#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}*/
+#chu-ban-zhu-zuo ul li{width:auto;height:195px;padding-right:33px;float:left;}
 /*艺术年表*/
 #yi-shu-nian-biao{width:501px;overflow:hidden; margin-bottom:190px;}
 #yi-shu-nian-biao h1{height:113px;padding-top:73px;line-height:0}
@@ -264,10 +265,15 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .page-section-text a{outline:none}
 .page-section-figure{width:870px;margin-bottom:50px;height:385px;}
 /*传承人主页图片交互效果*/
-.img-mutual{max-width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
+.img-mutual {max-width:250px;height:386px;border:1px solid #000;padding:28px 0 0 25px;margin-right:40px; float:left; margin-bottom:50px;}
 .box{width:198px;height:295px;position: relative;}
 .BG{width:198px;height:295px;position: absolute;top: 0;background: rgba(60,96,140,0.3);}
 .txt{width: 198px;height: 100px;position: absolute;bottom: 0;color:#fff;background:url(../images/images/tx12.gif) bottom;}
+.img-mutual h1 {text-align: right;}
+.img-mutual .img-mutual-text1 a {color:#fff}
+.img-mutual .active .txt {background:#fff;}
+.img-mutual .active h1, .img-mutual .active a {color:#000;}
+
 /*传承人主页图片交互效2果*/
 .img-mutual{height:386px;border:1px solid #000;position:relative;}
 .img-mutual-img{padding:27px 0 0 25px;width:223px;height:322px;}

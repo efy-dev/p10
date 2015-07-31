@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by Administrator on 2015/6/24.
  */
 @Entity
-@Table(name="tenant_honor")
+@Table(name="master_honor")
 public class MasterHonor {
     private String id;
     private String memo;

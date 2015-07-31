@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Created by Administrator on 2015/7/17.
  */
 @Entity
-@Table(name = "tenant_work_recommended")
+@Table(name = "master_work_recommended")
 public class MasterWorkRecommended implements Serializable {
     private String id;
     private Master master;
