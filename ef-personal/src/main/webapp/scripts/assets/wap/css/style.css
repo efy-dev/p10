@@ -82,6 +82,8 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .work-text-h1{ overflow:hidden;width:100%;}
 .work-text-h1 h1{height:37px; font-size:14px;color:#000; line-height:37px; text-align:center; font-family:"Microsoft YaHei,Microsoft JhengHei,SimSun,SimHei";}
 .work-text-h1 p{margin:0 4%; overflow:hidden;color:#7c8692; font-size:12px;line-height:19px;}
+.am-u-sm-12 {text-align: center;padding:10px;}
+.am-u-sm-12 img{width:100%;}
 .am-img-tp-hi{height:198px; margin-bottom:18px;}
 /*咨询详情*/
 .work-text-h2{height:87px;width:100%;line-height:87px;padding-left:4%;padding-right:4%;}

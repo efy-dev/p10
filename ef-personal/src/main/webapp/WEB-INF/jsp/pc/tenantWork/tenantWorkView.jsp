@@ -14,7 +14,14 @@
   <div class="center-right">
     <div class="content-border">
       <dl class="right-content">
-        <dt class="right-content-img"><img src="http://tenant.efeiyi.com/${product.picture_url}@!tenant-pc-work-view"></dt>
+        <c:if test="${product.productPictureList.size() > 0}">
+          <c:forEach items="${product.productPictureList}" var="productPicture">
+            <dt class="right-content-img"><img src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-pc-work-view"></dt>
+          </c:forEach>
+        </c:if>
+        <c:if test="${product.productPictureList.size() == 0}">
+          <dt class="right-content-img"><img src="http://tenant.efeiyi.com/${product.picture_url}@!tenant-pc-work-view"></dt>
+        </c:if>
         <dd class="right-content-p">
           ${product.productDescription.content}
         </dd>
