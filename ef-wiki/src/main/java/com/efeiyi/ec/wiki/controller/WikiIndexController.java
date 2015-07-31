@@ -24,7 +24,7 @@ public class WikiIndexController extends BaseController {
     BaseManager baseManager;
 
     /**
-     * 非遗百科首页展示
+     * feiyi indexShow
      * @param
      *
      * @return
@@ -33,7 +33,7 @@ public class WikiIndexController extends BaseController {
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         logger.info("weiki  for efeiyi index begin...");
         model.addAttribute("bannerList",getWikiBannerList(request));
-        model.addAttribute("projectList",getFeiyiProjectList(request));
+       // model.addAttribute("projectList",getFeiyiProjectList(request));
         logger.info("weiki for efeiyi index end...");
         return new ModelAndView("/wiki/showIndex");
 

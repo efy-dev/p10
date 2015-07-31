@@ -7,22 +7,10 @@
     <title id="page-title">
         <sitemesh:write property="title"/>
     </title>
-<script>
-    $.ajax({
-        type: "post",
-        url: '<c:url value="/getTenant.do"/>',
-        cache: false,
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            $("#page-title").html(data.fullName);
-        }
-    });
-</script>
+
     <%
         if(HttpUtil.isPhone(request)){
     %>
-    <%@include file="mobileStyle.jsp"%>
     <%
     }else{
     %>
@@ -36,7 +24,6 @@
     <%
     if(HttpUtil.isPhone(request)){
     %>
-<%@include file="mobileHeader.jsp"%>
     <%
     }else{
     %>
@@ -48,7 +35,6 @@
     <%
         if(HttpUtil.isPhone(request)){
     %>
-    <%@include file="mobileFooter.jsp"%>
     <%
     }else{
     %>
