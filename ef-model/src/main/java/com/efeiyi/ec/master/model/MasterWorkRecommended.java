@@ -60,7 +60,7 @@ public class MasterWorkRecommended implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_work_id")
+    @JoinColumn(name = "master_work_id")
     @Where(clause = "status = 1")
     public MasterWork getMasterWork() {
         return masterWork;

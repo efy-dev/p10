@@ -1,6 +1,7 @@
 package com.efeiyi.ec.organization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ming800.core.base.model.BaseUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ import java.util.*;
  */
 @Entity
 @Table(name = "organization_user")
-public class MyUser implements Serializable, UserDetails {
+public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     private String id;
     private String username;

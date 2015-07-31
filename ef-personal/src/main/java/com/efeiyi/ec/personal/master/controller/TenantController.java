@@ -44,6 +44,7 @@ public class TenantController extends BaseMasterController {
         model.addAttribute("bannerList",baseManager.listObject(xQuery));
         model.addAttribute("tenantWorkList",list);
         model.addAttribute("tenant", tenant);
+        model.addAttribute("pageMsg","1");
         return new ModelAndView("/tenant/tenantView");
     }
 

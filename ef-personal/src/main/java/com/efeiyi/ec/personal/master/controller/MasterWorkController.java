@@ -43,6 +43,7 @@ public class MasterWorkController extends BaseMasterController {
         List WorkList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",WorkList);
+        model.addAttribute("pageMsg","3");
         return "/tenantWork/tenantWorkList";
 
     }
@@ -55,6 +56,7 @@ public class MasterWorkController extends BaseMasterController {
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         modelMap.addAttribute("product", product);
+        modelMap.addAttribute("pageMsg","3");
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }

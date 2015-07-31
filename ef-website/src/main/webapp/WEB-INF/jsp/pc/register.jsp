@@ -44,6 +44,10 @@
 
 
     </script>
+
+    <script type="application/javascript" src="<c:url value="/resources/plugins/parsley/parsley.min.js"/>"/>
+    <script type="application/javascript" src="<c:url value="/resources/plugins/parsley/parsley.remote.min.js"/>"/>
+
     <script>
         $(document).ready(function () {
             $('#btnPanel').on('click', function (event) {
