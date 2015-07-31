@@ -37,7 +37,7 @@
 
 
     <build>
-        <finalName>ef-website</finalName>
+        <finalName>ef-wiki</finalName>
     </build>
 
     <properties>
