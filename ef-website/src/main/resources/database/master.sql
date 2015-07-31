@@ -26,3 +26,11 @@ CREATE TABLE `NewTable` (
 
 ALTER TABLE `product_favorite`
 ADD COLUMN `create_datetime`  datetime NULL AFTER `status`;
+
+
+ALTER TABLE `organization_consumer_address`
+ADD COLUMN `address_district_id`  char(16) NULL AFTER `email`;
+
+ALTER TABLE `organization_consumer_address`
+ADD COLUMN `consumer_id`  char(16) NULL AFTER `address_district_id`;
+
