@@ -7,7 +7,6 @@
   <%
     if(HttpUtil.isPhone(request)){
   %>
-  <%@include file="mobileStyle.jsp"%>
   <%
   }else{
   %>

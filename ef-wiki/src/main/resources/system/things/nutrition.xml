@@ -27,10 +27,6 @@
                     </statusType>
                 </field>
 
-                <!--<field name="category.id" label="类别" inputType="select_dictionary" key="ingredient_category" >-->
-                <!--<dictDefination sid="ingredient_category">-->
-                <!--</dictDefination>-->
-                <!--</field>-->
                 <field name="absorbCategory.id" label="食物摄入类别" inputType="select_dictionary"
                        key="ingredient_absorb_category">
                     <dictDefination sid="ingredient_absorb_category">
@@ -51,7 +47,6 @@
                     </dictDefination>
                 </field>
 
-                <!--ingredientList 列表使用    model中没有这个字段  -->
                 <field name="allFieldName" label="数据来源"
                        inputType="select_status" key="Ingredient.allFieldName">
                     <statusType fieldName="allFieldName">
@@ -60,7 +55,6 @@
                         <item value="carbohydrate" label="碳水化合物"/>
                         <item value="energy" label="能量"/>
                         <item value="dietaryFiber" label="膳食纤维"/>
-                        <!--<item value="ash" label="灰分" />-->
                         <item value="cholesterol" label="胆固醇"/>
                         <item value="va" label="维生素A"/>
                         <item value="vc" label="维生素C"/>
@@ -70,7 +64,6 @@
                         <item value="ve" label="维生素E"/>
                         <item value="thiamine" label="硫胺素"/>
                         <item value="riboflavin" label="核黄素"/>
-                        <!--<item value="carotene" label="胡罗卜素" />-->
                         <item value="folvite" label="叶酸"/>
                         <item value="niacin" label="烟酸"/>
 
@@ -103,8 +96,6 @@
                     </query>
                 </do>
 
-                <!--<do name="viewIngredient"
-                    result="/material/nutrition/ingredient/ingredientView"/>-->
                 <do name="saveOrUpdateIngredient"
                     execute="com.ming800.material.nutrition.controller.IngredientSaveHandler"
                     result="redirect:/basic/xm.do?qm=plistIngredient_default">
@@ -172,19 +163,16 @@
                     <query type="auto" name="default" label="默认" orderBy="id:asc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="like" inputType="text"/>
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
                         <condition label="类别" name="category.id" defaultValue="" operation="eq" inputType="default"/>
-                        <!--<condition label="名称" name="name" defaultValue="" operation="likes" inputType="text" />-->
                     </query>
                     <page>
                         <fields>
@@ -205,19 +193,16 @@
                     <query type="auto" name="default" label="默认" orderBy="id:asc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="like" inputType="text"/>
                     </query>
                     <query name="advance" label="分类查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
                         <condition label="类别" name="category.id" defaultValue="" operation="eq" inputType="default"/>
-                        <!--<condition label="名称" name="name" defaultValue="" operation="likes" inputType="text" />-->
                     </query>
                 </do>
 
@@ -340,10 +325,7 @@
                     result="/material/nutrition/dish/dishForm"/>
                 <do name="viewDish"
                     result="/material/nutrition/dish/dishView">
-                    <!--<page type="related"
-                          label="原料信息"
-                          url="/basic/xm.do?qm=plistDishIngredientByDish_default&amp;conditions=dish.id:">
-                    </page>-->
+
                 </do>
 
                 <do name="saveOrUpdateDish"
@@ -372,35 +354,6 @@
             </fields>
             <does>
 
-                <!--<do name="plistDishIngredientByDish"
-                    label="全部菜信息"
-                    result="xpagerelated">
-                    <query type="auto" name="default" label="默认" orderBy="id:desc">
-                        <condition label="菜" name="dish.id" defaultValue="" operation="eq" inputType="default" />
-                        <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                    </query>
-                    <page>
-                        <commands type="command">
-                            <command name="new" label="添加原料" type="add" url="/basic/xm.do?resultType=dish&amp;qm=formDishIngredient"/>
-                        </commands>
-                        <commands type="operation">
-                            <command name="edit" label="修改"
-                                     url="/basic/xm.do?resultType=dish&amp;qm=formDishIngredient&amp;id=${id}"/>
-                            <command name="remove" label="删除"
-                                     url="/basic/xm.do?qm=removeDishIngredientByDish&amp;id=${id}"/>
-                        </commands>
-                        <fields>
-                            <field name="id" label="主键" inputType="default" />
-                            <field name="smallIngredient.name" label="原料名称" url="/basic/xm.do?qm=viewIngredient&amp;id=${smallIngredient.id}"/>
-                            <field name="smallIngredient.edible" label="食部(%)" align="right" />
-                            <field name="smallIngredient.energy" label="能量(kcal)" align="right" />
-                            <field name="smallIngredient.protein" label="蛋白质(g)" align="right" />
-                            <field name="smallIngredient.fat" label="脂肪(g)" align="right" />
-                            <field name="smallIngredient.carbohydrate" label="碳水化合物(g)" align="right" />
-                            <field name="amount" label="重量(g)" align="right" />
-                        </fields>
-                    </page>
-                </do>-->
 
                 <do name="formDishIngredient"
                     result="/material/nutrition/dish/dishIngredientForm"/>
@@ -668,8 +621,7 @@
                                      url="/basic/xm.do?resultType=meal&amp;type=ingredient&amp;qm=formMealDish"/>
                         </commands>
                         <commands type="operation">
-                            <!--<command name="edit" label="修改"
-                                     url="/basic/xm.do?resultType=meal&amp;qm=formMealDish&amp;id=${id}"/>-->
+
                             <command name="remove" label="删除"
                                      url="/basic/xm.do?qm=removeMealDishByMeal&amp;id=${id}"/>
                         </commands>
@@ -835,26 +787,7 @@
                                    inputType="default"/>
                         <condition label="姓名/名称" name="name" defaultValue="" operation="eq" inputType="text"/>
                     </query>
-                    <!--<page>-->
-                    <!--<commands type="command">-->
-                    <!--<command name="new" label="新建客户档案" type="add" url="/basic/xm.do?qm=formCustomer"/>-->
-                    <!--</commands>-->
-                    <!--<commands type="operation">-->
-                    <!--<command name="edit" label="修改"-->
-                    <!--url="/basic/xm.do?qm=formCustomer&amp;id=${id}"/>-->
-                    <!--</commands>-->
-                    <!--<commands type="batch">-->
-                    <!--<command name="batchRemove" label="批量删除" type="remove"-->
-                    <!--url="batchRemoveCustomer" />-->
-                    <!--</commands>-->
-                    <!--<fields>-->
-                    <!--<field name="id" label="主键" inputType="default" />-->
-                    <!--<field name="name" label="姓名" url="/basic/xm.do?qm=viewCustomer&amp;id=${id}"/>-->
-                    <!--<field name="serial" label="编号" />-->
-                    <!--<field name="theType" label="类型" dataType="status" key="Customer.theType" />-->
-                    <!--<field name="memo" label="备注" />-->
-                    <!--</fields>-->
-                    <!--</page>-->
+
                 </do>
                 <do name="plistMyCustomer"
                     label="我的客户档案"
@@ -874,30 +807,6 @@
                     </query>
                 </do>
 
-                <!--<do name="formCustomer"
-                    result="/material/nutrition/customer/customerForm"/>
-                <do name="viewCustomer"
-                    result="/material/nutrition/customer/customerView">
-                    <page type="related"
-                          label="评估信息"
-                          url="/basic/xm.do?qm=plistAssessmentByCustomer_default&amp;conditions=customer.id:">
-                    </page>
-                    <page type="related"
-                          label="新建套餐"
-                          url="/basic/xm.do?qm=plistCustomerCateringPlanByCustomer_default&amp;conditions=theType:2;customer.id:">
-                    </page>
-                </do>-->
-
-                <!--<do name="saveOrUpdateCustomer"-->
-                <!--execute="com.ming800.material.nutrition.controller.CustomerSaveHandler"-->
-                <!--result="redirect:/basic/xm.do?qm=plistCustomer_default">-->
-                <!--<page>-->
-                <!--<fields>-->
-                <!--<field name="master" defaultValue="${MY_BRANCH}" />-->
-                <!--<field name="theStatus" defaultValue="1" dataType="int" />-->
-                <!--</fields>-->
-                <!--</page>-->
-                <!--</do>-->
 
                 <do name="removeCustomer"
                     result="json"/>
@@ -984,10 +893,7 @@
                 </do>
                 <do name="viewCustomerPersonInfo"
                     result="/material/nutrition/customer/customerPersonInfoView">
-                    <!--<page type="related"
-                          label="评估记录"
-                          url="/basic/xm.do?qm=plistAssessmentByCustomer_default&amp;conditions=customer.id:">
-                    </page>-->
+
                     <page type="related"
                           label="评估记录"
                           url="/basic/xm.do?qm=listCustomerCateringPlanByCustomer_default&amp;theType=assessment&amp;conditions=theType:3;customer.id:">
@@ -1033,10 +939,7 @@
                 </do>
                 <do name="viewCustomerPeopleInfo"
                     result="/material/nutrition/customer/customerPeopleInfoView">
-                    <!--<page type="related"
-                          label="评估记录"
-                          url="/basic/xm.do?qm=plistAssessmentByCustomer_default&amp;conditions=customer.id:">
-                    </page>-->
+
                     <page type="related"
                           label="评估记录"
                           url="/basic/xm.do?qm=listCustomerCateringPlanByCustomer_default&amp;theType=assessment&amp;conditions=theType:3;customer.id:">
@@ -1066,243 +969,7 @@
 
         </entity>
 
-        <!--        <entity name="Assessment"
-                        label="客户评估" basic="new,vm,va,em,ea,dm,da" others=""
-                        model="com.ming800.material.nutrition.model.Assessment">
-                    <fields>
-                        <field name="theStatus" label="状态" dataType="int"
-                               inputType="select_status" key="Ingredient.theStatus" >
-                            <statusType fieldName="theStatus">
-                                <item label="删除" value="0" />
-                                <item label="正常" value="1" />
-                            </statusType>
-                        </field>
 
-                    </fields>
-                    <does>
-
-                        <do name="plistAssessmentByCustomer"
-                            label="客户评估记录"
-                            result="xpagerelated">
-                            <query type="auto" name="default" label="默认" orderBy="id:desc">
-                                <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="客户" name="customer.id" defaultValue="" operation="eq" inputType="default" />
-                            </query>
-                            <page>
-                                <commands type="command">
-                                    <command name="new" label="评估" type="add" url="/basic/xm.do?resultType=customer&amp;qm=formAssessment"/>
-                                </commands>
-                                <commands type="operation">
-                                    <command name="edit" label="修改"
-                                             url="/basic/xm.do?resultType=customer&amp;qm=formAssessment&amp;id=${id}"/>
-                                    <command name="remove" label="删除"
-                                             url="/basic/xm.do?qm=removeAssessmentByCustomer&amp;id=${id}"/>
-                                </commands>
-                                <fields>
-                                    <field name="id" label="主键" inputType="default" />
-                                    <field name="createDatetime" label="创建时间" dataType="datetime" url="/basic/xm.do?resultType=customer&amp;qm=viewAssessment&amp;id=${id}"/>
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="plistAssessmentDialog" type="dialog"
-                            label="评估信息"
-                            result="xpage">
-                            <query type="auto" name="default" label="默认" orderBy="id:desc">
-                                <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="机构" name="customer.master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
-                                <condition label="客户" name="customer.id" defaultValue="" operation="eq" inputType="default" />
-                            </query>
-                            <page>
-                                <fields>
-                                    <field name="id" label="主键" inputType="default" />
-                                    <field name="customer.name" label="客户" />
-                                    <field name="createDatetime" label="创建时间" dataType="datetime" />
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="plistAssessment"
-                            label="评估信息"
-                            result="xpage">
-                            <query type="auto" name="default" label="默认" orderBy="id:desc">
-                                <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="机构" name="customer.master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />
-                            </query>
-                            <page>
-                                <commands type="command">
-                                    <command name="new" label="新建评估" type="add" url="/basic/xm.do?qm=formAssessment"/>
-                                </commands>
-                                <commands type="operation">
-                                    <command name="edit" label="修改"
-                                             url="/basic/xm.do?qm=formAssessment&amp;id=${id}"/>
-                                    <command name="remove" label="删除"
-                                             url="/basic/xm.do?qm=removeAssessmentByCustomer&amp;id=${id}"/>
-                                </commands>
-                                <fields>
-                                    <field name="id" label="主键" inputType="default" />
-                                    <field name="customer.name" label="客户" url="/basic/xm.do?qm=viewAssessment&amp;id=${id}" />
-                                    <field name="createDatetime" label="创建时间" dataType="datetime" />
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="formAssessment"
-                            result="/material/nutrition/customer/assessmentForm"/>
-                        <do name="viewAssessment"
-                            result="/material/nutrition/customer/assessmentView">
-                            <page type="related"
-                                  label="饮食记录"
-                                  url="/basic/xm.do?qm=plistAssessmentIngredientByAssessment_default&amp;conditions=assessment.id:">
-                            </page>
-                        </do>
-
-                        <do name="saveOrUpdateAssessment"
-                            result="redirect:/basic/xm.do?qm=viewAssessment&amp;id=${id}">
-                            <page>
-                                <fields>
-                                    <field name="createDatetime" defaultValue="${CURRENT_DATE}" />
-                                    <field name="theStatus" defaultValue="1" dataType="int" />
-                                </fields>
-                            </page>
-                        </do>
-
-
-                        <do name="removeAssessmentByCustomer"
-                            result="redirect:/basic/xm.do?qm=plistCustomer_default" />
-                        <do name="batchRemoveCustomer"
-                            result="json">
-                            <page>
-                                <fields>
-                                    <field label="状态" name="theStatus" defaultValue="0" dataType="int"/>
-                                </fields>
-                            </page>
-                        </do>
-
-                    </does>
-                </entity>
-
-                <entity name="AssessmentIngredient"
-                        label="饮食记录" basic="new,vm,va,em,ea,dm,da" others=""
-                        model="com.ming800.material.nutrition.model.AssessmentIngredient">
-                    <fields>
-                        <field name="theStatus" label="状态" dataType="int"
-                               inputType="select_status" key="Ingredient.theStatus" >
-                            <statusType fieldName="theStatus">
-                                <item label="删除" value="0" />
-                                <item label="正常" value="1" />
-                            </statusType>
-                        </field>
-
-                    </fields>
-                    <does>
-
-                        <do name="plistAssessmentIngredientByAssessment"
-                            label="饮食信息"
-                            result="xpagerelated">
-                            <query type="auto" name="default" label="默认" orderBy="id:desc">
-                                <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="客户" name="assessment.id" defaultValue="" operation="eq" inputType="default" />
-                            </query>
-                            <page>
-                                <commands type="command">
-                                    <command name="new" label="新建饮食信息" type="add" url="/basic/xm.do?resultType=assessment&amp;qm=formAssessmentIngredient"/>
-                                </commands>
-                                <commands type="operation">
-                                    <command name="edit" label="修改"
-                                             url="/basic/xm.do?resultType=assessment&amp;qm=formAssessmentIngredient&amp;id=${id}"/>
-                                    <command name="remove" label="删除"
-                                             url="/basic/xm.do?qm=removeAssessmentIngredientByAssessment&amp;id=${id}"/>
-                                </commands>
-                                <fields>
-                                    <field name="id" label="主键" inputType="default" />
-                                    <field name="ingredient.name" label="原料" url="/basic/xm.do?resultType=assessment&amp;qm=viewAssessmentIngredient&amp;id=${id}"/>
-                                    <field name="amount" label="重量(g)" align="right" />
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="formAssessmentIngredient"
-                            result="/material/nutrition/customer/assessmentIngredientForm"/>
-                        <do name="viewAssessmentIngredient"
-                            result="/material/nutrition/customer/assessmentIngredientView">
-                        </do>
-
-                        <do name="saveOrUpdateAssessmentIngredient"
-                            result="redirect:/basic/xm.do?qm=viewAssessmentIngredient&amp;id=${id}">
-                            <page>
-                                <fields>
-                                    <field name="theStatus" defaultValue="1" dataType="int" />
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="removeAssessmentIngredientByAssessment"
-                            result="redirect:/basic/xm.do?qm=viewAssessment&amp;id=${assessment.id}" />
-
-                    </does>
-                </entity>
-
-                <entity name="AssessmentResult"
-                        label="评估结果" basic="new,vm,va,em,ea,dm,da" others=""
-                        model="com.ming800.material.nutrition.model.AssessmentResult">
-                    <fields>
-                        <field name="theStatus" label="状态" dataType="int"
-                               inputType="select_status" key="Ingredient.theStatus" >
-                            <statusType fieldName="theStatus">
-                                <item label="删除" value="0" />
-                                <item label="正常" value="1" />
-                            </statusType>
-                        </field>
-
-                    </fields>
-                    <does>
-
-                        <do name="plistAssessmentResultByAssessment"
-                            label="评估结果"
-                            result="xpagerelated">
-                            <query type="auto" name="default" label="默认" orderBy="id:desc">
-                                <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default" dataType="int" />
-                                <condition label="评估信息" name="assessment.id" defaultValue="" operation="eq" inputType="default" />
-                            </query>
-                            <page>
-                                <commands type="command">
-                                    <command name="new" label="新建饮食信息" type="add" url="/basic/xm.do?resultType=assessment&amp;qm=formAssessmentResult"/>
-                                </commands>
-                                <commands type="operation">
-                                    <command name="edit" label="修改"
-                                             url="/basic/xm.do?resultType=assessment&amp;qm=formAssessmentResult&amp;id=${id}"/>
-                                    <command name="remove" label="删除"
-                                             url="/basic/xm.do?qm=removeAssessmentResultByAssessment&amp;id=${id}"/>
-                                </commands>
-                                <fields>
-                                    <field name="id" label="主键" inputType="default" />
-                                    <field name="content" label="内容" url="/basic/xm.do?resultType=assessment&amp;qm=viewAssessmentResult&amp;id=${id}"/>
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="formAssessmentResult"
-                            result="/material/nutrition/customer/assessmentResultForm"/>
-                        <do name="viewAssessmentResult"
-                            result="/material/nutrition/customer/assessmentResultView">
-                        </do>
-
-                        <do name="saveOrUpdateAssessmentResult"
-                            execute="com.ming800.material.nutrition.controller.AssessmentResultSaveHandler"
-                            result="redirect:/basic/xm.do?qm=viewAssessmentResult&amp;id=${id}">
-                            <page>
-                                <fields>
-                                    <field name="theStatus" defaultValue="1" dataType="int" />
-                                </fields>
-                            </page>
-                        </do>
-
-                        <do name="removeAssessmentResultByAssessment"
-                            result="redirect:/basic/xm.do?qm=viewAssessment&amp;id=${assessment.id}" />
-
-                    </does>
-                </entity>-->
 
         <entity name="AssessmentCustomerCateringPlan"
                 label="评估" basic="new,vm,va,em,ea,dm,da" others=""
@@ -1399,7 +1066,6 @@
                 <do name="removeMealCustomerCateringPlan"
                     result="redirect:/basic/xm.do?qm=plistMealCustomerCateringPlan_default"/>
 
-                <!--评估   |    配餐-->
                 <do name="listCustomerCateringPlanByCustomer"
                     label="配餐记录"
                     result="/material/nutrition/customer/customerPlanByCustomerList">
@@ -1548,7 +1214,6 @@
                         <item label="轻度" value="1"/>
                         <item label="中度" value="2"/>
                         <item label="重度" value="3"/>
-                        <!--<item label="重度" value="4" />-->
                     </statusType>
                 </field>
 
@@ -1750,7 +1415,6 @@
                     <query type="auto" name="dialog" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <fields>
@@ -1767,12 +1431,10 @@
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <query name="basic" label="快速查找" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                         <condition label="名称" name="name" defaultValue="" operation="likes" inputType="text"/>
                     </query>
                     <page>
@@ -1898,7 +1560,6 @@
                                    dataType="int"/>
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <fields>
@@ -1916,7 +1577,6 @@
                     <query name="default" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <commands type="command">
@@ -1991,7 +1651,6 @@
                     <query name="dialog" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <fields>
@@ -2009,7 +1668,6 @@
                     <query name="default" type="auto" label="默认" orderBy="id:desc">
                         <condition label="状态" name="theStatus" defaultValue="1" operation="eq" inputType="default"
                                    dataType="int"/>
-                        <!--<condition label="机构" name="master.id" defaultValue="${MY_BRANCH}" operation="eq" inputType="default" />-->
                     </query>
                     <page>
                         <commands type="command">
@@ -2249,14 +1907,7 @@
                         <condition label="状态" name="id" defaultValue="" operation="ne" inputType="default"/>
 
                     </query>
-                    <!--  <page>
-                          <fields>
-                              <field name="id" label="主键" inputType="default" />
-                              <field name="name" label="名称" />
-                              <field name="spell" label="简拼" />
-                              <field name="season" label="季节" dataType="status" key="Dish.season" />
-                          </fields>
-                      </page>-->
+
                 </do>
 
             </does>
@@ -2280,14 +1931,7 @@
                         <condition label="状态" name="id" defaultValue="" operation="ne" inputType="default"/>
 
                     </query>
-                    <!--  <page>
-                          <fields>
-                              <field name="id" label="主键" inputType="default" />
-                              <field name="name" label="名称" />
-                              <field name="spell" label="简拼" />
-                              <field name="season" label="季节" dataType="status" key="Dish.season" />
-                          </fields>
-                      </page>-->
+
                 </do>
 
             </does>
