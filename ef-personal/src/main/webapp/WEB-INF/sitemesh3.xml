@@ -1,7 +1,10 @@
 <sitemesh>
     <mapping path="/index" decorator="/layouts/empty.jsp"/>
     <mapping path="/" decorator="/layouts/empty.jsp"/>
-    <mapping path="/list" decorator="/layouts/main.jsp"/>
-    <mapping path="/list/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
+
+    <mapping path="/info/list**" decorator="/layouts/main.jsp"/>
+    <mapping path="/info/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
+    <mapping path="/work/list**" decorator="/layouts/main.jsp"/>
+    <mapping path="/work/**" decorator="/layouts/templateWithoutNavAndFooter.jsp"/>
     <mapping path="/**/**" decorator="/layouts/main.jsp"/>
 </sitemesh>
