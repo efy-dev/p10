@@ -20,11 +20,11 @@
         </a>
     </h1>
     <ul class="nav-centent">
-        <li><a href="<c:url value="/"/>">首页</a></li>
-        <li><a href="<c:url value="/introduction/intro"/>">简介</a></li>
-        <li><a href="<c:url value="/work/list"/>">作品</a></li>
-        <li><a href="<c:url value="/info/list"/>">资讯</a></li>
-        <li><a href="<c:url value="/workShop/work"/>">工作坊</a></li>
+        <li><a href="<c:url value="/"/>" onclick="setMenu(this);">首页</a></li>
+        <li><a href="<c:url value="/introduction/intro"/>" onclick="setMenu(this);">简介</a></li>
+        <li><a href="<c:url value="/work/list"/>" onclick="setMenu(this);">作品</a></li>
+        <li><a href="<c:url value="/info/list"/>" onclick="setMenu(this);">资讯</a></li>
+        <li><a href="<c:url value="/workShop/work"/>" onclick="setMenu(this);">工作坊</a></li>
     </ul>
 </div>
 <script>
@@ -54,4 +54,9 @@
                 $("#tenantLevel").html(levelName+'非物质文化遗产传承人<span>  [<a href="#" id="projectName">'+data.projectName+'</a>]</span>');
             }
         });
+    var titleValue = "";
+    function setMenu(o){
+        titleValue += $(o).html();
+        alert(titleValue);
+    }
 </script>
