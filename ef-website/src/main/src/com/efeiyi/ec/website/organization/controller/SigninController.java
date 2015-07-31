@@ -13,7 +13,6 @@ import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
-import com.ming800.core.p.PConst;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 
@@ -85,6 +85,19 @@ public class SigninController extends BaseController {
     @RequestMapping(value = "/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, BigUser bigUser, ModelMap modelMap) throws Exception {
 //        bigUser.setRole(roleManager.getRole("consumer"));
+        bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
+        /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
+        if (bigUser.getTheStatus() == null) {
+            bigUser.setTheStatus(1);
+        }
+        bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
+        bigUser.setAccountExpired(false);
+        bigUser.setAccountLocked(false);
+        bigUser.setCredentialsExpired(false);
+
+        /*bigUser.setRoleType("user");             //system,    admin,    user*/
+        bigUser.setCreateDatetime(new Date());
+
         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
@@ -145,7 +158,7 @@ public class SigninController extends BaseController {
     }
 
     /**
-     * ��ת����¼ҳ���controller
+     * 判断注册还是登陆
      */
     @RequestMapping("/forward.do")
     public String forward(String result){
@@ -154,40 +167,27 @@ public class SigninController extends BaseController {
         }else if("1".equals(result)){
             return "/login";
         }else {
-            return "/error";
+            return "/pc/error";
         }
     }
 
     @RequestMapping(value ="/login.do")
     public ModelAndView login(HttpServletRequest request,ModelMap model) {
         String username = request.getParameter("username");
-        String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA1");
+       String pword = request.getParameter("password");
+       String password = StringUtil.encodePassword(pword,"SHA1");
         String queryHql = "from BigUser b where b.username =:username and b.password =:password";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username",username);
-        queryParamMap.put("password",password);
+      queryParamMap.put("password",password);
         Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
         if(obj != null){
             model.addAttribute("user",obj);
-            return new ModelAndView("/pc/loginAccess",model);
+            return new ModelAndView("/loginAccess",model);
         }else{
             model.addAttribute("username",username);
             return new ModelAndView("/error",model);
         }
-    }
-
-    @RequestMapping("/register.do")
-    public ModelAndView register(HttpServletRequest request , ModelMap model) throws Exception {
-        String username = request.getParameter("username");
-        String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA1");
-        BigUser user = new BigUser();
-        user.setUsername(username);
-        user.setPassword(password);
-        userManager.saveOrUpdateBigUser(user);
-        model.addAttribute("user",user);
-        return new ModelAndView("/loginform",model);
     }
 
 }

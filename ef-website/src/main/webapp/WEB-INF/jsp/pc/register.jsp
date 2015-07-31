@@ -91,6 +91,10 @@
                                 <div class="controls">
                                     <label for="username">手机号</label>
                                     <input type="text" id="username" name="username"
+                                           data-parsley-pattern="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$"
+                                           data-parsley-error-message="请输入正确的手机号"
+                                           data-parsley-trigger="change"
+                                           data-parsley-required-message="请输入您的手机号"
                                            placeholder="请输入您的手机号"
                                            required/>
 
@@ -190,8 +194,8 @@
     var isVerification = false;
 
     //验证用户名
-    function usernameConfirm(user) {
-        var reg = /^1[3578][0-9]{9}$/;
+    function usernameConfirm() {
+        var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
         var username
         username = $("#username").val();
 
@@ -317,7 +321,6 @@
                 phone: phone
             },
             success: function (data) {
-               alert(data);
                 if (data) {
                     if (userType == "user") {
                         isVerification = true;
@@ -362,19 +365,20 @@
             if (isVerification && bool) {
 //                if ($("#userRole").val() == "consumer") {
                 $("#consumerSubmit").click();
-                alert(111);
 //                } else if ($("#userRole").val() == "photographer") {
 //                    $("#bigUser").attr("action", "/pc/saveEnrollPhotographer.do");
 //                    $("#consumerSubmit").click();
 //                }
             } else if (!isVerification) {
-                alert(2222)
                 $("#consumerVerificationCodeCheck").css("display", "block");
             }
         });
 
 
         $("#username").blur(function () {
+
+
+
             if ($("#verification").val() != "") {
                 checkVerificationCode($("#username").val(), $("#verification").val(), "user");
             }

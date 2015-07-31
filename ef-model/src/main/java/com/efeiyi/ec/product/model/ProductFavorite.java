@@ -34,7 +34,7 @@ public class ProductFavorite {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "product_id")
+    @JoinColumn(name = "product_id")
     public Product getProduct() {
         return product;
     }
