@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by AC丶man on 2015/7/17.
  */
 @Entity
-@Table(name = "tenant_attachment")
+@Table(name = "master_attachment")
 public class MasterAttachment {
 
     private String id ;

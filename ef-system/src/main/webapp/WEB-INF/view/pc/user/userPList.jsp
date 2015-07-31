@@ -137,14 +137,14 @@
             if(searchType == "basic"){
               var username = $("input[name='username']").val();
               var name = $("input[name='name']").val();
-              searchUrl = "/basic/xm.do?qm=plistUser_default&conditions=status:1";
+              searchUrl = "";
               if(username != ""){
                 searchUrl += ";username:"+username;
               }
               if(name != ""){
                 searchUrl += ";name:"+name;
               }
-              window.location.href = "<c:url var="searchUrl" value="${searchUrl}" />";
+              window.location.href = "<c:url var="searchUrl" value="/basic/xm.do?qm=plistUser_default&conditions=status:1" />";
             }
           }
 
