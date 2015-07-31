@@ -4,5 +4,5 @@ $(function(){
     },function(){
         $(this).removeClass('active');
     })
-})
+});
 
