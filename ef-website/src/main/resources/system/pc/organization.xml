@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module name="character" label="主要角色" version="" package="com.yuepaila" path="">
+<module name="organization" label="主要角色" version="" package="com" path="">
 
     <entities>
 
         <entity name="AddressProvince" label="省列表" model="com.efeiyi.ec.organization.model.AddressProvince">
             <does>
                 <do name="listAddressProvince" access="" label="订单列表">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="abcde" operation="ne"/>
                     </query>
                 </do>
@@ -16,7 +16,7 @@
         <entity name="AddressCity" label="城市列表" model="com.efeiyi.ec.organization.model.AddressCity">
             <does>
                 <do name="listAddressCity" access="" label="订单列表">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="abcde" operation="ne"/>
                         <condition name="addressProvince.id" operation="eq"/>
                     </query>
@@ -27,7 +27,7 @@
         <entity name="AddressDistrict" label="区列表" model="com.efeiyi.ec.organization.model.AddressDistrict">
             <does>
                 <do name="listAddressDistrict" access="" label="订单列表">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="abcde" operation="ne"/>
                         <condition name="addressCity.id" operation="eq"/>
                     </query>
@@ -35,6 +35,15 @@
             </does>
         </entity>
 
+        <entity name="ConsumerAddress" label="区列表" model="com.efeiyi.ec.organization.model.ConsumerAddress">
+            <does>
+                <do name="listConsumerAddress" access="" label="订单列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
 
     </entities>
 

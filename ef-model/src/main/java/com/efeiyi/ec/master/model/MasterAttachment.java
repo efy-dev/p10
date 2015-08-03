@@ -39,7 +39,7 @@ public class MasterAttachment {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_introduction_id")
+    @JoinColumn(name = "master_introduction_id")
     public MasterIntroduction getIntroduction() {
         return introduction;
     }
@@ -68,7 +68,7 @@ public class MasterAttachment {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_news_id")
+    @JoinColumn(name = "master_news_id")
     public MasterNews getMasterNews() {
         return masterNews;
     }

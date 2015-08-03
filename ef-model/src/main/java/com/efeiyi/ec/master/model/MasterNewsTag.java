@@ -27,7 +27,7 @@ public class MasterNewsTag {
         this.id = id;
     }
 
-    @JoinColumn(name = "tenant_news_id")
+    @JoinColumn(name = "master_news_id")
     @ManyToOne(fetch = FetchType.LAZY)
     public MasterNews getMasterNews() {
         return masterNews;

@@ -15,23 +15,11 @@
 <div class="am-g am-g-fixed" style="text-align: center;margin-bottom: 150px;margin-top: 150px">
 
     <div><span style="padding-right: 4px;color: #8cc5fb;font-size: 16px;">${user.username}</span>注册成功注册成功</div>
-    <%--<div><span id="time" style="padding-right: 4px;color: #8cc5fb;font-size: 34px;font-weight: bold;">5</span>秒后跳转到登录页面--%>
+    <div><span id="time" style="padding-right: 4px;color: #8cc5fb;font-size: 34px;font-weight: bold;">5</span>秒后跳转到登录页面
     </div>
 
 </div>
 <script>
-
-    //    var time = 5000
-    //    function forwardTimeOut(timeout) {
-    //        if (timeout > 0 && timeout <= time) {
-    //            $("#time").html(timeout);
-    //            setTimeout(forwardTimeOut(timeout - 1000), 1000)
-    //        } else {
-    ////            window.location.href="/pc/login.do";
-    //        }
-    //    }
-
-
     var wait = 5;//时间
     function time() {//o为按钮的对象，p为可选，这里是60秒过后，提示文字的改变
         if (wait == 0) {
