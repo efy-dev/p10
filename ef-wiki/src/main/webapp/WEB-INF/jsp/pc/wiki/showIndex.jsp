@@ -22,6 +22,12 @@
       </c:if>
     </ul>
   </div>
+  <div>
+    <span><h3>非遗项目</h3></span>
+    <div>
+
+    </div>
+  </div>
   </div>
 <div id="right-panel">
 

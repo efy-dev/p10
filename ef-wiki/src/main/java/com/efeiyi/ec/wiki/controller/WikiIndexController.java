@@ -33,9 +33,13 @@ public class WikiIndexController extends BaseController {
     @RequestMapping("/home.do")
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         logger.info("weiki  for efeiyi index begin...");
+
         model.addAttribute("bannerList",getWikiBannerList(request));
         model.addAttribute("projectList",getFeiyiProjectList(request));
-        model.addAttribute("recommendProjectList",getRecommendProjectList(request));
+        model.addAttribute("recommendProjectList",getRecommendProjectList());
+        model.addAttribute("recommendTenantList",getRecommendTenantList());
+        model.addAttribute("getWondenfulVideosList",getWondenfulVideosList());
+
         logger.info("weiki for efeiyi index end...");
         return new ModelAndView("/wiki/showIndex");
 
@@ -70,40 +74,34 @@ public class WikiIndexController extends BaseController {
      * @throws Exception
      */
     public  List getWondenfulProjectList(HttpServletRequest request)throws Exception{
-
         return null;
     }
 
     /**
      * 推荐项目
-     * @param request is HttpServletRequest
      * @return recommendProjectList
      * @throws Exception
      */
-    public  List getRecommendProjectList(HttpServletRequest request)throws Exception{
+    public  List getRecommendProjectList()throws Exception{
         return objectRecommendedManager.getRecommendedList("ProjectRecommended");
     }
 
     /**
      * 传承人推荐
-     * @param request is HttpServletRequest
      * @return recommendTenantList
      * @throws Exception
      */
-    public  List getRecommendTenantList(HttpServletRequest request)throws Exception{
-
-        return null;
+    public  List getRecommendTenantList()throws Exception{
+        return objectRecommendedManager.getRecommendedList("masterRecommended");
     }
 
     /**
      * 精彩视频
-     * @param request is HttpServletRequest
      * @return wondenfulVideosList
      * @throws Exception
      */
-    public  List getWondenfulVideosList(HttpServletRequest request)throws Exception{
-
-        return null;
+    public  List getWondenfulVideosList()throws Exception{
+        return objectRecommendedManager.getRecommendedList("WondenfulVideo");
     }
 
 }
