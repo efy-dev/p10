@@ -41,7 +41,7 @@ public class MasterInfoController extends BaseMasterController {
         XQuery xQuery1 = new XQuery("listWordValue_default",request);
         List list = baseManager.listObject(xQuery1);
         model.addAttribute("tagList",list);
-
+        model.addAttribute("pageMsg","4");
        return "/tenantInfo/tenantInfoList";
     }
 
@@ -54,6 +54,7 @@ public class MasterInfoController extends BaseMasterController {
     public  String getTenantInfo(@PathVariable String tenantInfoId, HttpServletRequest request , Model model) throws Exception {
         MasterNews masterNews = (MasterNews) baseManager.getObject(MasterNews.class.getName(),tenantInfoId);
         model.addAttribute("masterNews",masterNews);
+        model.addAttribute("pageMsg","4");
         return "/tenantInfo/tenantInfoView";
     }
 }

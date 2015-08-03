@@ -12,11 +12,13 @@ import javax.persistence.*;
 public class ConsumerAddress {
     private String id;
     private AddressProvince province;
+    private AddressDistrict district;
     private AddressCity city;
     private String details;
     private String post;
     private String phone;
     private String email;
+    private Consumer consumer;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -83,5 +85,24 @@ public class ConsumerAddress {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Column(name = "address_district_id")
+    public AddressDistrict getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(AddressDistrict district) {
+        this.district = district;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "consumer_id")
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
 }

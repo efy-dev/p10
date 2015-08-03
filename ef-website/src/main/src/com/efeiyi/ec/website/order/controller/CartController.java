@@ -1,7 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.ming800.core.base.service.BaseManager;
@@ -30,7 +29,7 @@ public class CartController {
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         model.addAttribute("cart", list.get(0));
-        return "/purchaseOrder/cartView";
+        return "/purchaseOrder/purchaseOrderList";
     }
 
 

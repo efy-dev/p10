@@ -31,6 +31,7 @@ public class HomeController {
         /*xQuery.put("tenant_id",tenant.getId());*/
         List list = baseManager.listObject(xQuery);
         model.addAttribute("list",list);
+        model.addAttribute("pageMsg","0");
         return "/tenant/tenantList";
     }
 }
