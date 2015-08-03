@@ -72,10 +72,11 @@ public class CommonManagerImpl implements CommonManager {
                        String group = node.selectSingleNode("@group").getText();
                        String note = node.selectSingleNode("@note").getText();
                        String recommendedModel = node.selectSingleNode("@recommendedModel").getText();
-
+                       String amount = node.selectSingleNode("@amount").getText();
                        CommonRecommended recommended = new CommonRecommended();
                        recommended.setGroup(group);
                        recommended.setNote(note);
+                       recommended.setAmount(amount);
                        recommended.setRecommendedModel(recommendedModel);
                        map.put(group,recommended);
                    }

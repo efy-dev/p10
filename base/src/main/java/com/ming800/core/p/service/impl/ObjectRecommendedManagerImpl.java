@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -43,8 +44,14 @@ public class ObjectRecommendedManagerImpl implements ObjectRecommendedManager {
     public  List getRecommendedList(String group) throws Exception {
         CommonRecommended recommended = commonManager.getRecommended(group);//获取xml文件对象
     //    Object object = xdoDao.getObject(recommended.getRecommendedModel(),recommended.getGroup());
-        String hql = "from ObjectRecommended where 1=1 and group = ?";
-        List<ObjectRecommended> objectRecommendedList =xdoDao.getObjectList(hql,new Object[]{group});//获取Object推荐集合
+        String hql = "from ObjectRecommended where 1=1 and group = ? ";
+        List<ObjectRecommended> objectRecommendedList = null;
+        if(recommended.getAmount()!=null){
+            objectRecommendedList = xdoDao.getObjectListByLimit(hql,0,Integer.parseInt(recommended.getAmount()),new Object[]{group});//获取Object推荐集合(limit)
+        }else{
+            objectRecommendedList = xdoDao.getObjectList(hql,new Object[]{group});//获取Object推荐集合
+        }
+
         List objectList = new ArrayList();
         for(ObjectRecommended objectRecommended : objectRecommendedList){//获取对象集合
             Object o = xdoDao.getObject(recommended.getRecommendedModel(),objectRecommended.getRecommendId());

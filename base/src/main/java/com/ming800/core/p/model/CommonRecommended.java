@@ -19,8 +19,9 @@ import java.io.Serializable;
 public class CommonRecommended implements Serializable {
 
     private String id;
-    private String  group;
-    private String recommendedModel;
+    private String  group;//群组
+    private String recommendedModel;//实体类路径
+    private String amount;//推荐数量
 
     private  String note;
 
@@ -54,5 +55,13 @@ public class CommonRecommended implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }
