@@ -2,8 +2,11 @@ package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -18,6 +21,17 @@ public class ProductSeries {
     private String serial;
     private Tenant tenant;
     private String status;
+    private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
+
+    @OneToMany(mappedBy = "productSeries")
+    @Where(clause = "status='1'")
+    public List<ProductSeriesPropertyName> getProductSeriesPropertyNameList() {
+        return productSeriesPropertyNameList;
+    }
+
+    public void setProductSeriesPropertyNameList(List<ProductSeriesPropertyName> productSeriesPropertyName) {
+        this.productSeriesPropertyNameList = productSeriesPropertyName;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

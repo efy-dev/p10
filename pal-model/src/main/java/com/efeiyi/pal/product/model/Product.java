@@ -5,6 +5,7 @@ import com.efeiyi.pal.organization.model.TenantCertification;
 import com.efeiyi.pal.organization.model.TenantSource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class Product {
     private Date madeYear;
     private TenantSource tenantSource;
     private TenantCertification tenantCertification;
+    private String imgUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -60,6 +62,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
+    @Where(clause = "status='1'")
     public ProductSeries getProductSeries() {
         return productSeries;
     }
@@ -119,4 +122,12 @@ public class Product {
         this.tenantCertification = tenantCertification;
     }
 
+    @Column(name = "img_url")
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }
