@@ -69,7 +69,7 @@
             </thead>
             <tbody id="attachmentTbody">
 
-            <c:forEach items="${object.masterAttachmentList}" var="masterAttachment">
+            <c:forEach items="${object.masterIntroductionAttachmentList}" var="masterAttachment">
                 <tr id="${masterAttachment.id}">
                     <td>
                         <div class="am-btn-toolbar">
