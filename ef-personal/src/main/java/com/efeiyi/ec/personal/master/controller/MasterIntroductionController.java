@@ -1,6 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.master.model.MasterAttachment;
+import com.efeiyi.ec.master.model.MasterIntroductionAttachment;
 import com.efeiyi.ec.master.model.MasterIntroduction;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
@@ -39,10 +39,10 @@ public class MasterIntroductionController extends BaseMasterController {
         XQuery xQuery = new XQuery("listMasterIntroduction_default",conditions,null,null);
         xQuery.put("master_id",tenant.getId());
         xQuery.addRequestParamToModel(model,request);
-        XQuery xQuery1 = new XQuery("listMasterAttachment_default",conditions,null,null);
+        XQuery xQuery1 = new XQuery("listMasterIntroductionAttachment_default",conditions,null,null);
         xQuery1.addRequestParamToModel(model,request);
         List<MasterIntroduction> list = baseManager.listObject(xQuery);
-        List<MasterAttachment> list1 = baseManager.listObject(xQuery1);
+        List<MasterIntroductionAttachment> list1 = baseManager.listObject(xQuery1);
 
 
         for (MasterIntroduction masterIntroduction:list){
@@ -51,7 +51,7 @@ public class MasterIntroductionController extends BaseMasterController {
             }
             if ("2".equals(masterIntroduction.getType())){
                 List dsryList = new ArrayList();
-                for (MasterAttachment attachment:list1){
+                for (MasterIntroductionAttachment attachment:list1){
                     if ((attachment.getIntroduction().getId()).equals(masterIntroduction.getId())){
                         dsryList.add(attachment);
                     }
@@ -60,7 +60,7 @@ public class MasterIntroductionController extends BaseMasterController {
             }
             if ("3".equals(masterIntroduction.getType())){
                 List cbzzList = new ArrayList();
-                for (MasterAttachment attachment:list1){
+                for (MasterIntroductionAttachment attachment:list1){
                     if ((attachment.getIntroduction().getId()).equals(masterIntroduction.getId())){
                         cbzzList.add(attachment);
                     }
