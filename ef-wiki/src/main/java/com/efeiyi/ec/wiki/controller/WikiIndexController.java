@@ -38,7 +38,8 @@ public class WikiIndexController extends BaseController {
         model.addAttribute("projectList",getFeiyiProjectList(request));
         model.addAttribute("recommendProjectList",getRecommendProjectList());
         model.addAttribute("recommendTenantList",getRecommendTenantList());
-        model.addAttribute("getWondenfulVideosList",getWondenfulVideosList());
+        model.addAttribute("wondenfulProjectList",getWondenfulProjectList());
+        model.addAttribute("wondenfulVideosList",getWondenfulVideosList());
 
         logger.info("weiki for efeiyi index end...");
         return new ModelAndView("/wiki/showIndex");
@@ -69,12 +70,11 @@ public class WikiIndexController extends BaseController {
 
     /**
      * 精彩非遗项目
-     * @param request is HttpServletRequest
      * @return wondenfulProjectList
      * @throws Exception
      */
-    public  List getWondenfulProjectList(HttpServletRequest request)throws Exception{
-        return null;
+    public  List getWondenfulProjectList()throws Exception{
+        return objectRecommendedManager.getRecommendedList("WondenfulProject");
     }
 
     /**
