@@ -18,7 +18,7 @@
   <hr>
   <div class="am-g" style="margin-top: 100px">
     <div class="am-u-md-4" style="margin-top: 55px;">
-      <form class="am-form" method="post" id="loginForm" action="<c:url value="/pc/login.do" />">
+      <form class="am-form" method="post" id="loginForm" action="<c:url value="/j_spring_security_check" />">
         <%--<input type="hidden" name="dispatcher" value=""/>--%>
         <%--<input type="hidden" name="requestType" value="pc"/>--%>
         <div class="am-form-group">

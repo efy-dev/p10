@@ -42,6 +42,7 @@ public class MasterWorkShopController extends BaseMasterController {
             model.addAttribute("workShop",workShop);
        }
         model.addAttribute("tenant", tenant);
+        model.addAttribute("pageMsg","5");
         return new ModelAndView("/tenantWorkShop/tenantWorkShopView");
     }
 

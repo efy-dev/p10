@@ -48,7 +48,7 @@
         <entity name="Cart" label="商品列表" model="com.efeiyi.ec.purchase.model.Cart">
             <does>
                 <do name="listCart" access="" label="订单列表">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                 </do>

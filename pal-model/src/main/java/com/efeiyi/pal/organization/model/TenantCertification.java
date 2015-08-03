@@ -20,6 +20,7 @@ public class TenantCertification {
     private String org;
     private Date theDate;
     private String level;
+    private String imgUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -79,4 +80,12 @@ public class TenantCertification {
         this.level = level;
     }
 
+    @Column(name = "img_url")
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 }

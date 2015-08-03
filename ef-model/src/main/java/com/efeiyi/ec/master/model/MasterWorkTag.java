@@ -28,7 +28,7 @@ public class MasterWorkTag {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_work_id")
+    @JoinColumn(name = "master_work_id")
     public MasterWork getMasterWork() {
         return masterWork;
     }
