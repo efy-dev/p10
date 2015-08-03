@@ -22,10 +22,10 @@
     <td>传承人产品名字</td>
   </tr>
 
-  <c:forEach items="${objectList}" var="masterProduct">
+  <c:forEach items="${objectList}" var="masterRecommended">
     <tr>
-      <td>${masterProduct.id}</td>
-      <td>${masterProduct.name}</td>
+      <td>${masterRecommended.id}</td>
+      <td>${masterRecommended.fullName}</td>
     </tr>
   </c:forEach>
 

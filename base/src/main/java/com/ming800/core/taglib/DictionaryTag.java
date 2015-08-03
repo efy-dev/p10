@@ -1,16 +1,12 @@
 package com.ming800.core.taglib;
 
-import com.ming800.core.p.model.Dictionary;
-import com.ming800.core.p.model.DictionaryData;
-import com.ming800.core.p.service.DictionaryDataManager;
-import com.ming800.core.does.service.ModuleManager;
-import com.ming800.core.util.ApplicationContextUtil;
+
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.util.List;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -96,7 +92,7 @@ public class DictionaryTag extends TagSupport {
 
     @Override
     public int doStartTag() {
-        this.getHtmlTag();
+   //     this.getHtmlTag();
         return SKIP_BODY;   //忽略对body的处理
     }
 
@@ -110,7 +106,7 @@ public class DictionaryTag extends TagSupport {
         }
         return EVAL_PAGE; //继续处理页面内容
     }
-
+  /*
     private void getHtmlTag() {
         if (type == null) {
             htmlTag = this.getSelectTag();
@@ -129,9 +125,9 @@ public class DictionaryTag extends TagSupport {
         }
     }
 
-    public String getSelectTag() {
-        DictionaryDataManager dictionaryDataManager = (DictionaryDataManager) ApplicationContextUtil.getApplicationContext().getBean("dictionaryDataManagerImpl");
-        List<DictionaryData> dictionaryDataList = dictionaryDataManager.getDictionaryDataList(this.dataType);
+ public String getSelectTag() {
+     //   DictionaryDataManager dictionaryDataManager = (DictionaryDataManager) ApplicationContextUtil.getApplicationContext().getBean("dictionaryDataManagerImpl");
+     //   List<DictionaryData> dictionaryDataList = dictionaryDataManager.getDictionaryDataList(this.dataType);
 
         ModuleManager moduleManager = (ModuleManager) ApplicationContextUtil.getApplicationContext().getBean("moduleManagerImpl");
         if (moduleManager.fetchXentity(entity) == null) {
@@ -141,9 +137,9 @@ public class DictionaryTag extends TagSupport {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
-        Dictionary dictionary = (Dictionary) moduleManager.fetchXentity(entity).getFieldMap().get(name);
+     //   Dictionary dictionary = (Dictionary) moduleManager.fetchXentity(entity).getFieldMap().get(name);
 
-        if (dictionary != null && (required == null || required.equals(""))) {
+  //      if (dictionary != null && (required == null || required.equals(""))) {
             required = dictionary.getRequired();
         }
 
@@ -211,5 +207,5 @@ public class DictionaryTag extends TagSupport {
             htmlTagBuffer.append(" />").append(dictionaryData.getData()).append("&nbsp");
         }
         return htmlTagBuffer.toString();
-    }
+    }*/
 }
