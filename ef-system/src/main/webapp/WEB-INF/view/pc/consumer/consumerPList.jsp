@@ -19,13 +19,6 @@
 </head>
 <body>
 <div class="admin-content">
-    <div class="am-u-sm-12 am-u-md-6">
-        <div class="am-btn-toolbar">
-            <div class="am-btn-group am-btn-group-xs">
-                <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formConsumer"/>"><span class="am-icon-plus"></span> 新建</a>
-            </div>
-        </div>
-    </div>
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
         </div>
@@ -43,9 +36,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
-
-
                 <c:forEach items="${requestScope.pageInfo.list}" var="consumer">
                     <tr>
                         <td>
