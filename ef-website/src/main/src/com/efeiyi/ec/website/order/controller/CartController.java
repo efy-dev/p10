@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,15 +37,29 @@ public class CartController {
     @RequestMapping({"/cart/addProduct.do"})
     @ResponseBody
     public boolean addProduct(HttpServletRequest request) throws Exception {
-        String productId = request.getParameter("productId");
+        String productId = request.getParameter("id");
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         Product product = new Product();
         product.setId(productId);
+
+
+        Cart cart = (Cart) list.get(0);
+
+
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProduct(product);
-        Cart cart = (Cart) list.get(0);
-        cart.getCartProductList().add(cartProduct);
+        cartProduct.setCart(cart);
+        cartProduct.setStatus("1");
+       // cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
+        baseManager.saveOrUpdate(CartProduct.class.getName(),cartProduct);
+
+        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
+        xQuery.put("cart_id",cart.getId());
+        List<Object> list1 = baseManager.listObject(xQuery1);
+        list1.add(cartProduct);
+
+        cart.setCartProductList((List)list1);
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return true;
     }

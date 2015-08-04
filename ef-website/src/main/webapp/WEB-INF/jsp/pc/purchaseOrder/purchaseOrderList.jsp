@@ -20,29 +20,18 @@
 </head>
 <body>
   <table border="1">
+
     <tr>
-      <th>id</th>
-      <th>serial</th>
-      <th>create_datetime</th>
-      <th>payWay</th>
-      <th>user_id</th>
-      <th>user_address_id</th>
-      <th>详细信息</th>
+      <td>${cart.id}</td>
     </tr>
-    <c:forEach items="${list}" var="order">
-      <tr>
-        <td>${order.id}</td>
-        <td>${order.serial}</td>
-        <td>${order.createDatetime}</td>
-        <td>${order.payWay}</td>
-        <td>${order.user.id}</td>
-        <td>${order.consumerAddress.id}</td>
-        <td>
-          <input type="button" value="查看" onclick="orderView(this);">
-          <input type="hidden" value="${order.id}">
-        </td>
-      </tr>
-    </c:forEach>
+      <c:forEach items="${cart.cartProductList}" var="list">
+        <tr>
+          <td>
+        ${list.id}
+          </td>
+        </tr>
+      </c:forEach>
+
   </table>
 </body>
 </html>

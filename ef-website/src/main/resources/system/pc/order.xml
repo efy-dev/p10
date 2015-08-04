@@ -57,6 +57,18 @@
 
 
 
+        <entity name="CartProduct" label="商品列表" model="com.efeiyi.ec.purchase.model.CartProduct">
+            <does>
+                <do name="listCartProduct" access="" label="订单列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="cart.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+
 
 
     </entities>
