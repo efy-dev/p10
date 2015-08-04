@@ -72,13 +72,17 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">
-                          ${master.fullName}</a>
-                            <c:forEach var="recommended" items="${master.masterRecommendedList}">
+                        <td class="am-hide-sm-only">
+                            <a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">
+                              ${master.fullName}
+                            </a>
+                              <c:forEach var="recommended" items="${master.masterRecommendedList}">
                                 <c:if test="${recommended.master.id == master.id}" >
-                                   <a href="#" onclick="updateSort('${recommended.id}','${recommended.sort}')" > <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span></a>
+                                    <a href="#" recommendedSort="${recommended.sort}" recommendedId="${recommended.id}" onclick="updateSort(this)" >
+                                      <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                    </a>
                                 </c:if>
-                            </c:forEach>
+                              </c:forEach>
                         </td>
 
                         <td class="am-hide-sm-only">
@@ -130,7 +134,9 @@
                 $(obj).attr("recommend","0");
                 $(obj).attr("reId",data);
                 $(obj).find("span").text("取消推荐");
-                $("table tr[id='"+masterId+"'] td:eq(1)").append("<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>");
+                $("table tr[id='"+masterId+"'] td:eq(1) a").append("<a onclick=\"updateSort(this)\" recommendedSort="+sort+" recommendedId="+data+" >" +
+                        "<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>" +
+                        "</a>");
             }
         });
     }
@@ -148,12 +154,14 @@
                 $(obj).attr("recommend","1");
                 $(obj).attr("reId","");
                 $(obj).find("span").text("推荐");
-                $("table tr[id='"+masterId+"'] td:eq(1) span").remove();
+                $("table tr[id='"+masterId+"'] td:eq(1) a:eq(1) ").remove();
             }
         });
     }
 
-    function updateSort(recommendedId,recommendedSort){
+    function updateSort(obj){
+        var recommendedSort = $(obj).attr("recommendedSort");
+        var recommendedId = $(obj).attr("recommendedId");
         var sort=prompt("输入排序号",recommendedSort);
         if(sort)
         {
@@ -164,6 +172,7 @@
                 dataType: "json",
                 data:{id:recommendedId,sort:sort},
                 success: function (data) {
+                    $(obj).attr("recommendedSort",sort);
                   alert("修改成功!");
                 }
             });
