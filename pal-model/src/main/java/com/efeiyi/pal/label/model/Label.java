@@ -24,6 +24,7 @@ public class Label {
     private String status;
     private Date firstCheckDateTime;
     private Date lastCheckDateTime;
+    private int checkCount;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -102,4 +103,14 @@ public class Label {
     public void setLastCheckDateTime(Date lastCheckDateTime) {
         this.lastCheckDateTime = lastCheckDateTime;
     }
+
+    @Column(name = "checked_count")
+    public int getCheckCount() {
+        return checkCount;
+    }
+
+    public void setCheckCount(int checkCount) {
+        this.checkCount = checkCount;
+    }
+
 }
