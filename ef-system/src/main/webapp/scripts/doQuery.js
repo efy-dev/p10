@@ -17,15 +17,16 @@ function generateValue(divId) {
 
     var defaultConditionsValue = document.getElementById("defaultConditions"+divId).value;
     var tempArray = queryConditionArrayMap[divId];
-    for (var i = 0; i < tempArray.length; i++) {
+    for (var i = 0,j = 1; i < tempArray.length; i++) {
         var propertyName = tempArray[i].propertyName;
         if (tempArray[i].inputType != "default") {
             var tempId = propertyName.replace(/\./g, "_");
 
             var tempIdValue = "";
             if (tempArray[i].inputType == 'date') {
-                tempIdValue = $("#" + tempId).val();
+                tempIdValue = $("#" + tempId+j).val();
                 if (tempId.indexOf("2") <= 0) {
+                    j++;
                     var tempObject2 = $("#" + tempId + "2");
                     if (tempObject2.val() != undefined) {
                         var tempId2Value = tempObject2.val();
@@ -191,6 +192,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
     var datatimeIdArray = new Array();
 
     tagStr += " <input type=\"hidden\" id=\"defaultConditions"+divId+"\" name=\"defaultConditions\" value=\"" + conditions + "\"/> ";
+    var j=0;
     for (var i = 0; i < queryConditionArray.length; i++) {
         if (queryConditionArray[i].inputType != "default") {
             var tempId = queryConditionArray[i].propertyName.replace(/\./g, "_");
@@ -240,6 +242,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
             } else {
                 tagStr += " <input  type=\"text\"";
                 if (queryConditionArray[i].inputType == "date") {
+                    j++
                     datatimeIdArray.push(tempId);
                     tagStr += " class=\"am-form-field\" data-am-datepicker readonly size=\"14\"";
                 } else {
@@ -250,9 +253,15 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
                     tagStr += " required";
                 }
 
-                tagStr += " id=\"" + tempId + "\"" +
-                    " name=\"" + queryConditionArray[i].propertyName + "\"" +
-                    " value=\"" + thePropertyValue + "\"/>";
+                if (queryConditionArray[i].inputType == "date"){
+                    tagStr += " id=\"" + tempId + j +"\"" +
+                        " name=\"" + queryConditionArray[i].propertyName + "\"" +
+                        " value=\"" + thePropertyValue + "\"/>";
+                }else {
+                    tagStr += " id=\"" + tempId  +"\"" +
+                        " name=\"" + queryConditionArray[i].propertyName + "\"" +
+                        " value=\"" + thePropertyValue + "\"/>";
+                }
 
                 if (queryConditionArray[i].inputType == "date" && queryConditionArray[i].propertyName.indexOf("2") > 0) {
 
@@ -294,7 +303,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
 
 
     for (var did = 0; did < datatimeIdArray.length; did++) {
-        $('#' + datatimeIdArray[did]).datepicker();
+        $('#' + datatimeIdArray[did]+(did+1)).datepicker();
     }
 
 //

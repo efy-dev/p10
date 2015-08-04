@@ -121,8 +121,8 @@ a{ text-decoration:none;}
 .column-text-p{width:494px;height:96px;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
 /*简介大师荣誉*/
 #da-shi-rong-yu{width:501px;overflow:hidden;}
-#da-shi-rong-yu h1{height:113px;padding-top:73px;line-height:0;}
-.img-pictures-show{width:501px;;overflow:hidden;}
+#da-shi-rong-yu h1{height:113px;padding-top:155px;line-height:0;}
+.img-pictures-show{width:501px;;overflow:hidden;padding-top: 50px;}
 .one-img-dl-l{width:219px;height:167px;float:left;}
 .one-img-dl-l dt{width:195px;height:133px;}
 .one-img-dl-l dd{color:#999;font-size:12px; text-align:center;}

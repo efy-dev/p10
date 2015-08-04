@@ -54,7 +54,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (savedRequest != null) {
             response.sendRedirect(savedRequest.getRedirectUrl());
         } else {
-            response.sendRedirect(request.getContextPath() + "/main.do");
+            response.sendRedirect(request.getContextPath() + "/pc/forward.do");
         }
     }
 }

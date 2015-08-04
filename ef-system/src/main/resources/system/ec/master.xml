@@ -225,7 +225,7 @@
 
         <entity name="MasterAttachment" label="传承人介绍附件"
                 basic="simple" others=""
-                model="com.efeiyi.ec.master.model.MasterAttachment">
+                model="com.efeiyi.ec.master.model.MasterIntroductionAttachment">
             <does>
                 <do name="saveOrUpdateMasterAttachment" label="保存附件" access="" execute="com.efeiyi.ec.system.master.controller.MasterAttachmentHandler">
                     <page>

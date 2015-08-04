@@ -6,6 +6,7 @@ package com.efeiyi.ec.website.organization.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
@@ -102,6 +103,12 @@ public class SigninController extends BaseController {
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
+        //注册时给新用户初始化一个购物车
+        User user = new User();
+        user.setId(bigUser.getId());
+        Cart cart=new Cart();
+        cart.setUser(user);
+        baseManager.saveOrUpdate(Cart.class.getName(),cart);
         return new ModelAndView("/signinSuccess");
     }
 
@@ -167,7 +174,7 @@ public class SigninController extends BaseController {
         }else if("1".equals(result)){
             return "/login";
         }else {
-            return "/pc/error";
+            return "/loginAccess";
         }
     }
 

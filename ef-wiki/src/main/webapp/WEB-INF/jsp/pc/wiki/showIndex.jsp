@@ -7,20 +7,30 @@
     <title>非遗百科</title>
 </head>
 <body>
-<div id="banner1">
+<div id="center-panel">
   <div id="full-screen-slider">
     <ul id="slides">
       <c:if test="${!empty bannerList}">
         <c:forEach items="${bannerList}" var="banner">
-          <li style="background:url(http://tenant.efeiyi.com/${banner.imageUrl}) no-repeat center top;width:100%;height:266px;">
+          <li style="background:url(http://tenant.efeiyi.com/${banner.imageUrl}) no-repeat center top;width:80%;height:266px;">
             <a href="#"></a></li>
         </c:forEach>
       </c:if>
       <c:if test="${empty bannerList}">
-        <li style="background:url(http://tenant.efeiyi.com/banner/20150725150117.jpg) no-repeat center top;width:100%;height:266px;">
+        <li style="background:url(http://tenant.efeiyi.com/banner/20150725150117.jpg) no-repeat center top;width:80%;height:266px;">
           <a href="#"></a></li>
       </c:if>
     </ul>
   </div>
+  <div>
+    <span><h3>非遗项目</h3></span>
+    <div>
+
+    </div>
+  </div>
+  </div>
+<div id="right-panel">
+
+</div>
 </body>
 </html>

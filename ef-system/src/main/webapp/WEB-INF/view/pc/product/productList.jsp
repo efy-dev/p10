@@ -9,46 +9,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<script type="text/javascript" src="<c:url value='/scripts/assets/js/amazeui.js'/>"/>--%>
-<link href="/script/assets/css/amazeui.css">
-<html>
-<head>
-    <title>产品列表</title>
-</head>
-<body>
-  <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
-    <tr>
-      <td>产品id</td>
-      <td>产品名称</td>
-      <td>图片地址</td>
-      <td>价格</td>
-      <td>系列</td>
-    </tr>
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+        </div>
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-title">产品名称</th>
+                    <th class="table-title">产品编号</th>
+                    <th class="table-title">产品价格</th>
+                    <th class="table-title">图片</th>
 
-      <c:forEach items="${objectList}" var="product">
-    <tr>
-        <td>${product.id}</td>
-        <td>${product.name}</td>
-        <td>${product.picture_url}</td>
-        <td>${product.price}</td>
-        <td>${product.serial}</td>
-    </tr>
-      </c:forEach>
-    <%--<c:forEach items="${objectList}" var="product">--%>
-      <%--<tr>--%>
-        <%--<td><c:out value="${product.id}"></c:out></td>--%>
-        <%--<td><c:out value="${product.name}"></c:out></td>--%>
-        <%--<td><c:out value="${product.picture_url}"></c:out></td>--%>
-        <%--<td><c:out value="${product.category}"></c:out></td>--%>
-        <%--<td><c:out value="${product.price}"></c:out></td>--%>
-      <%--</tr>--%>
-    <%--</c:forEach>--%>
-
-    <%--<c:forEach items="${objectList}" var="product">--%>
-
-        <%--${product.name}--%>
-    <%--</c:forEach>--%>
-
-  </table>
-</body>
-</html>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${objectList}" var="product" end="4">
+                    <tr id="${product.id}">
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a>
+                        </td>
+                        <td class="am-hide-sm-only">${product.serial}</td>
+                        <td class="am-hide-sm-only">${product.price}</td>
+                        <td class="am-hide-sm-only"><img src="${product.picture_url}" alt="图片地址"></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
