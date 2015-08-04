@@ -12,9 +12,9 @@
         <table class="am-table am-table-bordered">
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">姓名拼音</td>
+                <td class="am-primary am-u-md-3">商家名字拼音</td>
                 <td class="am-u-md-3">${object.name}</td>
-                <td class="am-primary am-u-md-3">中文名字</td>
+                <td class="am-primary am-u-md-3">商家中文名字</td>
                 <td class="am-u-md-3">${object.fullName}</td>
             </tr>
             <tr>

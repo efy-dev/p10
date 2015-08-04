@@ -45,8 +45,8 @@
         </jnode>
 
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_default"  access="admin,manager" text_zh_CN="电商网站轮播图">
-                <match url="plistBanner_default"/>
+            <jnode url="/basic/xm.do?qm=plistBanner_tenant"  access="admin,manager" text_zh_CN="电商网站轮播图">
+                <match url="plistBanner_tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistDocument_tenant"  access="admin,manager" text_zh_CN="电商网站文档">
                 <match url="plistDocument_tenant"/>

@@ -20,7 +20,7 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
-                <td class="am-u-md-3">${object.serial}</td>
+                <td class="am-u-md-3">${ object.serial}</td>
                 <td class="am-primary am-u-md-3">支付方式</td>
                 <td class="am-u-md-3">
                     <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment">
