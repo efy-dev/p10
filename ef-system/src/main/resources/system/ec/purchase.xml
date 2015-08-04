@@ -55,7 +55,6 @@
                 model="com.efeiyi.ec.purchase.model.PurchaseOrder">
             <fields>
                 <field name="createDatetime" inputType="date" dataType="date">
-
                 </field>
             </fields>
             <does>
@@ -68,7 +67,7 @@
                     <query name="consumer" label="查找" type="auto" orderBy="id:desc">
                         <condition name="user.username" operation="eq" label="用户名"/>
                     </query>
-                    <query name="first" label="查寻" type="auto" orderBy="id:desc">
+                    <query name="search" label="查寻" type="auto" orderBy="id:desc">
                         <condition name="serial" operation="eq" label="订单号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
@@ -98,6 +97,10 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
+                    <query name="search" label="查寻" type="auto" orderBy="id:desc">
+                        <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
+                    </query>
                 </do>
 
                 <do name="removePurchaseOrderDelivery" label="删除发货记录" access="" result="json"/>
@@ -124,6 +127,10 @@
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="search" label="查寻" type="auto" orderBy="id:desc">
+                        <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
