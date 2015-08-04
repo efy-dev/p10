@@ -1,5 +1,6 @@
 package com.efeiyi.pal.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class ProductPropertyValue {
     private ProductSeriesPropertyName productSeriesPropertyName;
     private String value;
     private String status;
+    private Product product;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -28,6 +30,7 @@ public class ProductPropertyValue {
         this.id = id;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_property_name_id")
     public ProductSeriesPropertyName getProductSeriesPropertyName() {
@@ -54,6 +57,17 @@ public class ProductPropertyValue {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 }

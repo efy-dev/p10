@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -27,6 +28,7 @@ public class Product {
     private Date madeYear;
     private TenantSource tenantSource;
     private TenantCertification tenantCertification;
+    private List<ProductPropertyValue> productPropertyValueList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -117,6 +119,15 @@ public class Product {
 
     public void setTenantCertification(TenantCertification tenantCertification) {
         this.tenantCertification = tenantCertification;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public List<ProductPropertyValue> getProductPropertyValueList() {
+        return productPropertyValueList;
+    }
+
+    public void setProductPropertyValueList(List<ProductPropertyValue> productPropertyValueList) {
+        this.productPropertyValueList = productPropertyValueList;
     }
 
 }

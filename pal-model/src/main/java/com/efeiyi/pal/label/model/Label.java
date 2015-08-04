@@ -21,7 +21,8 @@ public class Label {
     private Product product;
     private Tenant seller;
     private String status;
-    private Date usedDate;
+    private Date firstCheckDateTime;
+    private Date lastCheckDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -82,13 +83,21 @@ public class Label {
         this.status = status;
     }
 
-    @Column(name = "used_date")
-    public Date getUsedDate() {
-        return usedDate;
+    @Column(name = "first_check_datetime")
+    public Date getFirstCheckDateTime() {
+        return firstCheckDateTime;
     }
 
-    public void setUsedDate(Date usedDate) {
-        this.usedDate = usedDate;
+    public void setFirstCheckDateTime(Date firstCheckDateTime) {
+        this.firstCheckDateTime = firstCheckDateTime;
     }
 
+    @Column(name = "last_check_datetime")
+    public Date getLastCheckDateTime() {
+        return lastCheckDateTime;
+    }
+
+    public void setLastCheckDateTime(Date lastCheckDateTime) {
+        this.lastCheckDateTime = lastCheckDateTime;
+    }
 }
