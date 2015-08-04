@@ -3,6 +3,7 @@ package com.efeiyi.pal.label.model;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -56,6 +57,7 @@ public class Label {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @Where(clause = "status='1'")
     public Product getProduct() {
         return product;
     }

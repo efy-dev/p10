@@ -29,6 +29,7 @@ public class Product {
     private TenantSource tenantSource;
     private TenantCertification tenantCertification;
     private List<ProductPropertyValue> productPropertyValueList;
+    private String imgUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -62,6 +63,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
+    @Where(clause = "status='1'")
     public ProductSeries getProductSeries() {
         return productSeries;
     }
@@ -130,4 +132,13 @@ public class Product {
         this.productPropertyValueList = productPropertyValueList;
     }
 
+    @Column(name = "img_url")
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+    
 }

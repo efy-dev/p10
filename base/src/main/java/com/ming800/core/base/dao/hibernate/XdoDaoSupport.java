@@ -128,6 +128,7 @@ public class XdoDaoSupport implements XdoDao {
         return query.list();
     }
 
+
     @Override
     public List<Object> getObjectList(String hql, LinkedHashMap<String, Object> params, Integer limit, Integer offset) {
         Query query = getSession().createQuery(hql);

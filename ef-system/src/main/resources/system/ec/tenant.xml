@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--用户-->
+<module name="tenant" label="系统-商家" version="" package="com.efeiyi.ec.tenant" path="">
+
+    <entities>
+        <entity name="Tenant" label="商家列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.Tenant">
+            <does>
+                <do name="plistTenant" access="" label="商家分页列表"
+                    result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="formTenant" label="保存商家" access="" result="/tenant/tenantForm"/>
+                <do name="viewTenant" label="查看商家" access="" result="/tenant/tenantView"/>
+                <do name="saveOrUpdateTenant" label="保存商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
+                    <page>
+                        <fields>
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+                <do name="removeTenant" label="删除商家" access="" result="json"/>
+                <do name="listTenant" label="商家列表" access="" result="/tenant/tenantList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="0" peration="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="TenantBanner" label="商家轮播图列表"
+                basic="simple" others=""
+                model="com.ming800.core.p.model">
+            <does>
+                <do name="plistTenantBanner" access="" label="商家轮播图分页列表"
+                    result="/tenantBanner/tenantBannerPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="efec" operation="eq"/>
+                    </query>
+                </do>
+
+
+                <do name="formTenantBanner" label="保存传承人轮播图" access="" result="/tenantBanner/tenantBannerForm" execute="com.efeiyi.ec.system.tenant.controller.ToTenantBannerFormHandler"/>
+                <do name="viewTenantBanner" label="查看传承人轮播图" access="" result="/tenantBanner/tenantBannerView"/>
+                <do name="saveOrUpdateTenantBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.tenant.controller.TenantBannerHandler">
+                </do>
+                <do name="removeTenantBanner" label="删除传承人轮播图" access="" result="json"/>
+                <do name="listTenantBanner" label="传承人轮播图列表" access="" result="/tenantBanner/tenantBannerList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                        <condition label="状态" name="tenant.id"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+    </entities>
+</module>

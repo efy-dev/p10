@@ -1,9 +1,7 @@
 package com.ming800.core.does.service.impl;
 
 import com.ming800.core.does.model.*;
-import com.ming800.core.p.model.Dictionary;
 import com.ming800.core.does.service.ModuleManager;
-import com.ming800.core.p.service.impl.AttachmentManagerImpl;
 import org.apache.log4j.Logger;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -382,29 +380,7 @@ public class ModuleManagerImpl implements ModuleManager {
                 /*dictionaryField*/
                 List<Node> dictionaryNodeList = fieldNode.selectNodes("dictDefination");
                 if (dictionaryNodeList.size() > 0) {
-                    Dictionary dictionary = createDictionaryField(dictionaryNodeList);
 
-                    dictionary.setName(name);
-                    dictionary.setLabel(label);
-                    dictionary.setInputType(inputType);
-                    dictionary.setKey(key);
-
-                    dictionary.setName2(name2);
-                    dictionary.setValue(value);
-                    dictionary.setDataType(dataType);
-
-                    dictionary.setGtype(gtype);
-                    dictionary.setGvalue(gvalue);
-
-                    dictionary.setOrderby(orderby);
-                    dictionary.setViewType(viewType);
-                    dictionary.setFormType(formType);
-
-                    dictionary.setFieldType("dictionary");
-
-                    dictionary.setReference(reference);
-
-                    fieldMap.put(dictionary.getName(), dictionary);
 
                 }
 
@@ -471,37 +447,6 @@ public class ModuleManagerImpl implements ModuleManager {
         return fieldMap;
     }
 
-    private static Dictionary createDictionaryField(List<Node> dictionaryNodeList) {
-
-        Dictionary dictionaryField = new Dictionary();
-
-        if (dictionaryNodeList != null && dictionaryNodeList.size() > 0) {
-            for (Node dictionaryNode : dictionaryNodeList) {
-                String sid = dictionaryNode.selectSingleNode("@sid").getText();
-                /*String name = dictionaryNode.selectSingleNode("@name").getText();
-                String type = dictionaryNode.selectSingleNode("@type").getText();
-                String detail = dictionaryNode.selectSingleNode("@detail").getText();*/
-
-                String required = dictionaryNode.selectSingleNode("@required") == null ? "" : dictionaryNode.selectSingleNode("@required").getText();
-
-                String[] definedValues = null;
-                int i = 0;
-                List<Node> definedValueList = dictionaryNode.selectNodes("/dictData");
-                for (Node definedValue : definedValueList) {
-                    if (definedValue != null) {
-                        definedValues[i] = definedValue.selectSingleNode("@value").getText();
-                    }
-                    i++;
-                }
-
-                dictionaryField.setSid(sid);
-                dictionaryField.setRequired(required);
-                dictionaryField.setDefinedNationValue(definedValues);
-            }
-        }
-
-        return dictionaryField;
-    }
 
     private static StatusTypeField createStatusTypeField(List<Node> statusTypeNodeList) {
         StatusTypeField statusTypeField = new StatusTypeField();

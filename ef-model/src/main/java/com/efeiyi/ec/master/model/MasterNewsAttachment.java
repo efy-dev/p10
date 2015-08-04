@@ -8,8 +8,8 @@ import javax.persistence.*;
  * Created by AC丶man on 2015/7/17.
  */
 @Entity
-@Table(name = "master_attachment")
-public class MasterAttachment {
+@Table(name = "master_news_attachment")
+public class MasterNewsAttachment {
 
     private String id ;
     private String url;

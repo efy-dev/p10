@@ -33,7 +33,7 @@ public class ProductController {
         XQuery xQuery = new XQuery("listProduct_default",request);
         List productList = baseManager.listObject(xQuery);
         model.addAttribute("productList",productList);
-        return  new ModelAndView("/pc/product/productList",model);
+        return  new ModelAndView("/product/productList",model);
     }
 
 
@@ -43,7 +43,7 @@ public class ProductController {
         xQuery.addRequestParamToModel(model,request);
         List productList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("productList",productList);
-        return "/pc/product/productpList";
+        return "/product/productpList";
     }
 
     @RequestMapping(value = "/getProduct.do")
@@ -51,7 +51,7 @@ public class ProductController {
         String id = request.getParameter("id");
         Product product = (Product) baseManager.getObject(Product.class.getName(), id);
         model.addAttribute("product", product);
-        return "/pc/product/productView";
+        return "/product/productView";
     }
 
 

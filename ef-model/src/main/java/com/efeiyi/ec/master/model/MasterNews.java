@@ -23,7 +23,7 @@ public class MasterNews {
     private String status;
     private String dataSource; //来源
     private List<MasterNewsTag> masterNewsTagList;
-    private List<MasterAttachment> masterAttachmentList;//附件
+    private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -111,11 +111,11 @@ public class MasterNews {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterNews")
     @Where(clause = "status=1")
-    public List<MasterAttachment> getMasterAttachmentList() {
-        return masterAttachmentList;
+    public List<MasterIntroductionAttachment> getMasterIntroductionAttachmentList() {
+        return masterIntroductionAttachmentList;
     }
 
-    public void setMasterAttachmentList(List<MasterAttachment> masterAttachmentList) {
-        this.masterAttachmentList = masterAttachmentList;
+    public void setMasterIntroductionAttachmentList(List<MasterIntroductionAttachment> masterIntroductionAttachmentList) {
+        this.masterIntroductionAttachmentList = masterIntroductionAttachmentList;
     }
 }

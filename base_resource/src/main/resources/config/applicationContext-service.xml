@@ -46,6 +46,10 @@
     <bean id="jmenuManagerImpl" class="com.ming800.core.p.service.impl.JmenuManagerImpl" init-method="initMenu"
           scope="singleton"/>
 
+    <bean id="moduleManagerImpl" class="com.ming800.core.does.service.impl.ModuleManagerImpl" init-method="readXmlFiles"
+          scope="singleton"/>
+
+
     <!--<bean id="cityShotTypeManagerImpl" class="com.yuepaila.basic.service.impl.CityManagerImpl" init-method="initCities" scope="singleton"/>-->
 <!--    <bean id="versionManagerImpl" class="com.ming800.core.p.service.impl.VersionManagerImpl" init-method="loadVersion"
           scope="singleton"/>-->
@@ -57,8 +61,10 @@
 
 <!--    <bean id="typeXmlManagerImpl" class="com.ming800.core.does.service.impl.TypeXmlManagerImpl"
           init-method="readXmlFiles" scope="singleton"/>-->
-    <bean id="moduleManagerImpl" class="com.ming800.core.does.service.impl.ModuleManagerImpl" init-method="readXmlFiles"
+    <bean id="commonManagerImpl" class="com.ming800.core.p.service.impl.CommonManagerImpl" init-method="initCommon"
           scope="singleton"/>
+
+
 <!--    <bean id="checkTaskManagerImpl" class="com.ming800.core.develop.service.impl.CheckTaskManagerImpl"
           init-method="initCheckTask" scope="singleton"/>
 

@@ -29,15 +29,18 @@
                 <match url="plistProductRecommended_default"/>
                 <match url="viewProduct"/>
                 <match url="removeProductRecommended"/>
-                <match url="viewTenant"/>
+                <!--<match url="viewTenant"/>-->
             </jnode>
         </jnode>
         <jnode url="" id="tenantManager"  access="admin" state="closed" text_zh_CN="商家管理">
-            <jnode url="/basic/xm.do?qm=plistBusiness_default"  access="admin,manager" text_zh_CN="商家列表">
-                <match url="plistBusiness_default"/>
+            <jnode url="/basic/xm.do?qm=plistTenant_default"  access="admin,manager" text_zh_CN="商家列表">
+                <match url="plistTenant_default"/>
+                <match url="viewTenant"/>
+                <match url="formTenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default"  access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="plistProfessional_default"/>
+                <match url="viewProfessional"/>
             </jnode>
         </jnode>
 
@@ -71,10 +74,14 @@
                 <match url="viewMasterNews"/>
                 <match url="saveOrUpdateMasterWork"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistMasterRecommended_default"  access="admin,manager" text_zh_CN="传承人推荐">
+          <jnode url="/basic/xm.do?qm=plistMasterRecommended_default"  access="admin,manager" text_zh_CN="传承人推荐">
                 <match url="plistMasterRecommended_default"/>
                 <match url="viewDocument"/>
             </jnode>
+            <!--     <jnode url="/Recommended/masterRecommended.do"  access="admin,manager" text_zh_CN="传承人推荐">
+
+
+               </jnode>-->
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
                 <!--<match url="plistTenantIntroduction_default"/>-->
                 <!--<match url="removeTenantIntroduction"/>-->

@@ -21,16 +21,7 @@
     <sitemesh:write property='head'/>
 </head>
 <body>
-    <%
-    if(HttpUtil.isPhone(request)){
-    %>
-    <%
-    }else{
-    %>
-<%@include file="pcHeader.jsp"%>
-    <%
-        }
-    %>
+
 <sitemesh:write property='body'/>
     <%
         if(HttpUtil.isPhone(request)){

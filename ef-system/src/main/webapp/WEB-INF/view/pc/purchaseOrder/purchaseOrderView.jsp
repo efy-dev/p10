@@ -22,7 +22,15 @@
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3">${object.serial}</td>
                 <td class="am-primary am-u-md-3">支付方式</td>
-                <td class="am-u-md-3">${object.payWay}</td>
+                <td class="am-u-md-3">
+                    <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment">
+                                <span style="margin-left: 10px;">
+                                <c:choose>
+                                    <c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>
+                                    <c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>
+                                </c:choose></span>
+                    </c:forEach>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -71,7 +79,7 @@
             </tr>
             </thead>
             <tbody>
-                <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
+            <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.product.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
@@ -79,7 +87,7 @@
                     <td class="am-hide-sm-only">${purchaseOrderProduct.product.price}</td>
                     <td class="am-hide-sm-only"><img src="${purchaseOrderProduct.product.picture_url}" alt="产品图片"></td>
                 </tr>
-                </c:forEach>
+            </c:forEach>
             </tbody>
         </table>
     </div>
@@ -100,11 +108,19 @@
             </thead>
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
-                <tr>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.payWay}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
-            </c:forEach>
+            <tr>
+                <td class="am-hide-sm-only">
+                    <c:choose>
+                        <c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>
+                        <c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>
+                    </c:choose>
+                </td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
+                <td class="am-hide-sm-only">
+                    <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
+                                    pattern="yyyy-mm-dd"></fmt:formatDate>
+                </td>
+                </c:forEach>
             </tbody>
         </table>
     </div>
@@ -126,7 +142,10 @@
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
             <tr>
                 <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
-                <td class="am-hide-sm-only">${purchaseOrderDelivery.createDateTime}</td>
+                <td class="am-hide-sm-only">
+                    <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
+                                    pattern="yyyy-mm-dd"></fmt:formatDate>
+                </td>
                 </c:forEach>
             </tbody>
         </table>

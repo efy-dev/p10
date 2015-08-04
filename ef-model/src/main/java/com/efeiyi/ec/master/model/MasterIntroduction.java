@@ -18,7 +18,7 @@ public class MasterIntroduction {
     private String title;
     private String status;
     private String content;
-    private List<MasterAttachment> attachmentList;
+    private List<MasterIntroductionAttachment> attachmentList;
 
 
     @Id
@@ -80,11 +80,11 @@ public class MasterIntroduction {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "introduction")
     @Where( clause = "status=1")
-    public List<MasterAttachment> getAttachmentList() {
+    public List<MasterIntroductionAttachment> getAttachmentList() {
         return attachmentList;
     }
 
-    public void setAttachmentList(List<MasterAttachment> attachmentList) {
+    public void setAttachmentList(List<MasterIntroductionAttachment> attachmentList) {
         this.attachmentList = attachmentList;
     }
 }

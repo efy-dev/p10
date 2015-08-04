@@ -28,9 +28,12 @@
                     authentication-failure-handler-ref="loginFailureHandler"/>
         <logout invalidate-session="true" logout-url="/j_spring_security_logout"
                 success-handler-ref="loginOutSuccessHandler"/>
-
+        <remember-me user-service-ref="userManager" />
     </http>
+
+    <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.website.organization.LoginSuccessHandler"/>
     <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
+    <b:bean id="loginFailureHandler" class="com.efeiyi.ec.website.organization.LoginFailureHandler"/>
 
     <!--<authentication-manager>-->
     <!--<authentication-provider>-->
@@ -40,7 +43,7 @@
     <!--</authentication-provider>-->
     <!--</authentication-manager>-->
 
-    <authentication-manager>
+    <authentication-manager erase-credentials="false">
         <authentication-provider user-service-ref="userManager">
             <password-encoder hash="sha"/>
         </authentication-provider>

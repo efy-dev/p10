@@ -17,7 +17,8 @@ ${user.id}-----
 ${user.username}
 <form action="">
     <a href="<c:url value="/product/product/plist.do"/>">商品列表</a>
-    <a href="<c:url value="/cart/view"/> ">个人中心</a>
+    <a href="<c:url value="/cart/view"/> ">购物车</a>
+    <a href="<c:url value="/order/list"/>">订单详情</a>
 </form>
 
 </body>

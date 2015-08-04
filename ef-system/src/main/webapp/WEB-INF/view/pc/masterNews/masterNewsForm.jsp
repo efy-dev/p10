@@ -91,7 +91,7 @@
                     </thead>
                     <tbody id="attachmentTbody">
 
-                    <c:forEach items="${object.masterAttachmentList}" var="masterAttachment">
+                    <c:forEach items="${object.masterIntroductionAttachmentList}" var="masterAttachment">
                         <tr id="${masterAttachment.id}">
                             <td class="am-hide-sm-only">http://tenant.efeiyi.com/${masterAttachment.url}</td>
                             <td class="am-hide-sm-only">
