@@ -6,9 +6,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>资讯</title>
-<script type="text/javascript">
-</script>
 </head>
 <body>
 <div id="page-nav">
@@ -57,7 +54,7 @@
     </div>
     </c:if>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/listMasterInfo.do">
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
     <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
     <ming800:pcPageParam name="conditions"
                          value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

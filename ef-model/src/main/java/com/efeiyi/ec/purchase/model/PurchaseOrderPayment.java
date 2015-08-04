@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ public class PurchaseOrderPayment {
     private String id;
     private PurchaseOrder purchaseOrder;
     private Date createDateTime;
+    private BigDecimal paymentAmount; //支付金额
     private String payWay;//1支付宝 2银行卡
     private User user;
     private String serial;//支付记录编号
@@ -67,6 +69,15 @@ public class PurchaseOrderPayment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "payment_amount")
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
     @Column(name = "serial")

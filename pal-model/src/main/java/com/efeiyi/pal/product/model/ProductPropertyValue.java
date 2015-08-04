@@ -1,6 +1,7 @@
 package com.efeiyi.pal.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -28,8 +29,8 @@ public class ProductPropertyValue {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_series_property_name_id")
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "productPropertyValue")
+    @Where(clause = "status='1'")
     public ProductSeriesPropertyName getProductSeriesPropertyName() {
         return productSeriesPropertyName;
     }

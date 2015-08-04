@@ -6,13 +6,16 @@ package com.efeiyi.ec.website.organization.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.util.StringUtil;
+import com.ming800.core.util.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 
@@ -47,6 +51,8 @@ public class SigninController extends BaseController {
     private UserManager userManager;
     @Autowired
     private XdoManager xdoManager;
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     /**
      * 查看当前用户名是否存在
@@ -80,11 +86,30 @@ public class SigninController extends BaseController {
     @RequestMapping(value = "/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, BigUser bigUser, ModelMap modelMap) throws Exception {
 //        bigUser.setRole(roleManager.getRole("consumer"));
+        bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
+        /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
+        if (bigUser.getTheStatus() == null) {
+            bigUser.setTheStatus(1);
+        }
+        bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
+        bigUser.setAccountExpired(false);
+        bigUser.setAccountLocked(false);
+        bigUser.setCredentialsExpired(false);
+
+        /*bigUser.setRoleType("user");             //system,    admin,    user*/
+        bigUser.setCreateDatetime(new Date());
+
         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
-        return new ModelAndView((request) + "/signinSuccess");
+        //注册时给新用户初始化一个购物车
+        User user = new User();
+        user.setId(bigUser.getId());
+        Cart cart=new Cart();
+        cart.setUser(user);
+        baseManager.saveOrUpdate(Cart.class.getName(),cart);
+        return new ModelAndView("/signinSuccess");
     }
 
     /*
@@ -94,14 +119,14 @@ public class SigninController extends BaseController {
     @ResponseBody
     public boolean checkVerificationCode(HttpServletRequest request) {
         String inputVerificationCode = request.getParameter("verificationCode").trim();
-        if (inputVerificationCode.equals("yuepaila")) {
+        if (inputVerificationCode.equals("efeiyi")) {
             return true;
         } else {
             String phone = request.getParameter("phone");
             if (inputVerificationCode.equals(request.getSession().getAttribute(phone))) {
                 return true;
             } else {
-                return true;
+                return false;
             }
         }
     }
@@ -111,22 +136,21 @@ public class SigninController extends BaseController {
      */
     @RequestMapping({"/verification/send.do"})
     @ResponseBody
-    public boolean sendVerificationCode() throws IOException {
-       /* String cellPhoneNumber = request.getParameter("phone");
+    public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
+       String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
+        System.out.println(verificationCode);
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-        boolean validate = this.smsCheckManager.validate(cellPhoneNumber, String.valueOf(request.getSession().getAttribute(cellPhoneNumber)));
-        if (!validate) {
-            String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
-            if (massage != null) {
+        if (true) {
+//            String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
+            if ("" != null) {
                 return true;
             } else {
                 return false;
             }
         } else {
             return false;
-        }*/
-        return false;
+        }
     }
     /**
      * 跳转到注册页面的controller
@@ -141,7 +165,7 @@ public class SigninController extends BaseController {
     }
 
     /**
-     * ��ת����¼ҳ���controller
+     * 判断注册还是登陆
      */
     @RequestMapping("/forward.do")
     public String forward(String result){
@@ -150,19 +174,19 @@ public class SigninController extends BaseController {
         }else if("1".equals(result)){
             return "/login";
         }else {
-            return "/error";
+            return "/loginAccess";
         }
     }
 
     @RequestMapping(value ="/login.do")
     public ModelAndView login(HttpServletRequest request,ModelMap model) {
         String username = request.getParameter("username");
-        String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA1");
+       String pword = request.getParameter("password");
+       String password = StringUtil.encodePassword(pword,"SHA1");
         String queryHql = "from BigUser b where b.username =:username and b.password =:password";
         LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username",username);
-        queryParamMap.put("password",password);
+      queryParamMap.put("password",password);
         Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
         if(obj != null){
             model.addAttribute("user",obj);
@@ -171,19 +195,6 @@ public class SigninController extends BaseController {
             model.addAttribute("username",username);
             return new ModelAndView("/error",model);
         }
-    }
-
-    @RequestMapping("/register.do")
-    public ModelAndView register(HttpServletRequest request , ModelMap model) throws Exception {
-        String username = request.getParameter("username");
-        String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword,"SHA1");
-        BigUser user = new BigUser();
-        user.setUsername(username);
-        user.setPassword(password);
-        userManager.saveOrUpdateBigUser(user);
-        model.addAttribute("user",user);
-        return new ModelAndView("/loginform",model);
     }
 
 }

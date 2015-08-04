@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/ckeditor/ckeditor.js"></script>
+    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
     <div class="am-cf am-padding">
@@ -91,7 +91,7 @@
                     </thead>
                     <tbody id="attachmentTbody">
 
-                    <c:forEach items="${object.masterAttachmentList}" var="masterAttachment">
+                    <c:forEach items="${object.masterIntroductionAttachmentList}" var="masterAttachment">
                         <tr id="${masterAttachment.id}">
                             <td class="am-hide-sm-only">http://tenant.efeiyi.com/${masterAttachment.url}</td>
                             <td class="am-hide-sm-only">

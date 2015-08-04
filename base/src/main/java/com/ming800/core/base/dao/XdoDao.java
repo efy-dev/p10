@@ -25,6 +25,9 @@ public interface XdoDao {
     Object getObject(String modelType, String id);
 
     List getObjectList(String queryHql, LinkedHashMap<String, Object> queryParamMap);
+    /** limit zzc*/
+     List getObjectListByLimit(String queryHql,Integer firstResult,Integer maxResult,Object... params);
+
 
     List getObjectList(String queryHql, Object... params);
 

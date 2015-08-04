@@ -25,6 +25,7 @@ public class MasterWork {
     private Master master;
     private ProjectCategory category;
     private BigDecimal price;
+    private Integer sort; //传承人主页推荐的三个作品
     private List<MasterWorkPicture> masterWorkPictureList;
     private ProductDescription productDescription;
     private String status;
@@ -53,6 +54,16 @@ public class MasterWork {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Column(name = "sort")
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
 
     @Column(name = "serial")
     public String getSerial() {

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
-    <script src="/resources/assets/js/amazeui.min.js"></script>
+    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
-    <script src="/resources/ckeditor/ckeditor.js"></script>
+    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
     <sitemesh:write property='head'/>
     <style>
         .efy-active {

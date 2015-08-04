@@ -8,7 +8,7 @@
 <!--内容-->
 <!--资讯详情-->
 <div id="page-nav">
-  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/info/listMasterInfo.do"/> ">资讯</a></span><span>${masterNews.title}</span></p>
+  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/info/list"/> ">资讯</a></span><span>${masterNews.title}</span></p>
 </div>
 <div class="border-nav"></div>
 <!--资讯详情页内容-->

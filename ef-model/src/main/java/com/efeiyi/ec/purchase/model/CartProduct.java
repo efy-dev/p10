@@ -4,6 +4,7 @@ import com.efeiyi.ec.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 
 /**
  * Created by Administrator on 2015/6/15.
@@ -15,6 +16,7 @@ public class CartProduct {
     private Cart cart;
     private Product product;
     private Integer amount;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -28,7 +30,7 @@ public class CartProduct {
     }
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     public Cart getCart() {
         return cart;
@@ -55,5 +57,14 @@ public class CartProduct {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

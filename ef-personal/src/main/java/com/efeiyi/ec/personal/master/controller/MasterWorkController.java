@@ -34,7 +34,7 @@ public class MasterWorkController extends BaseMasterController {
      * @param model
      * @return
      */
-    @RequestMapping("/listMasterWork")
+    @RequestMapping("/list")
     public String listTenantProduct(HttpServletRequest request ,Model model) throws Exception {
         Tenant tenant = getTenantfromDomain(request);
         XQuery xQuery = new XQuery("plistMasterWork_default",tenant.getId(),request.getParameter("sort"),request);
@@ -43,6 +43,7 @@ public class MasterWorkController extends BaseMasterController {
         List WorkList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("tenant", tenant);
         model.addAttribute("tenantWorkList",WorkList);
+        model.addAttribute("pageMsg","3");
         return "/tenantWork/tenantWorkList";
 
     }
@@ -55,6 +56,7 @@ public class MasterWorkController extends BaseMasterController {
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         modelMap.addAttribute("product", product);
+        modelMap.addAttribute("pageMsg","3");
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }

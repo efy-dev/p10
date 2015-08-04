@@ -14,9 +14,14 @@
 <section class="work-text-h1">
   <h1>${product.name}</h1>
   <p>
-    <c:forEach items="${product.productPictureList}" var="productPicture">
-      <div class="am-u-sm-12"><img src="http://master.efeiyi.com/${productPicture.pictureUrl}"/></div>
-    </c:forEach>
+    <c:if test="${product.productPictureList.size() > 0}">
+      <c:forEach items="${product.productPictureList}" var="productPicture">
+        <div class="am-u-sm-12"><img src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-mobile-work"/></div>
+      </c:forEach>
+    </c:if>
+    <c:if test="${product.productPictureList.size() == 0}">
+        <div class="am-u-sm-12"><img src="http://tenant.efeiyi.com/${product.picture_url}@!tenant-mobile-work"/></div>
+    </c:if>
     <span>${product.productDescription.content}</span>
   </p>
 </section>

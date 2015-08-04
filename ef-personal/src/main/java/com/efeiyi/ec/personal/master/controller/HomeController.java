@@ -1,13 +1,11 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,7 +15,7 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private BaseManager baseManager;
+    private ObjectRecommendedManager recommendedManager;
 
     /**
      * 获取所有传承人
@@ -25,12 +23,15 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/index")
-    public String index(HttpServletRequest request,Model model)throws Exception{
-        /*Tenant tenant = getTenantfromDomain(request);*/
-        XQuery xQuery = new XQuery("listTenantProject_default",request);
-        /*xQuery.put("tenant_id",tenant.getId());*/
+    public String index(Model model)throws Exception{
+       /* XQuery xQuery = new XQuery("listTenantProject_default",request);
         List list = baseManager.listObject(xQuery);
         model.addAttribute("list",list);
+        model.addAttribute("pageMsg","0");*/
+        List skillList = recommendedManager.getRecommendedList("masterSkillRecommended");
+        List artList = recommendedManager.getRecommendedList("masterArtRecommended");
+        model.addAttribute("skillList",skillList);
+        model.addAttribute("artList",artList);
         return "/tenant/tenantList";
     }
 }

@@ -7,7 +7,6 @@ import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.model.Page;
 import com.ming800.core.does.service.DoManager;
-import com.ming800.core.p.service.DictionaryDataManager;
 import com.ming800.core.does.service.ModuleManager;
 import com.ming800.core.taglib.PageEntity;
 
@@ -34,8 +33,8 @@ public class XdoManagerImpl implements XdoManager {
     private DoManager doManager;
     @Autowired
     private ModuleManager moduleManager;
-    @Autowired
-    private DictionaryDataManager dictionaryDataManager;
+   // @Autowired
+  //  private DictionaryDataManager dictionaryDataManager;
 /*    @Autowired
     private PermissionManager permissionManager;*/
 

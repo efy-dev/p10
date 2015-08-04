@@ -298,7 +298,7 @@
                     result="/manage/order/purchaseOrderView" access="view">
                     <page type="related"
                           label="支付信息"
-                          url="/basic/xm.do?qm=plistPurchaseOrderPaymentByPurchaseOrder_default&amp;conditions=purchaseOrder.id:">
+                          url="/basic/xm.do?qm=plistPurchaseOrderPaymentByPurchaseOrder_default&amp;conditions=order.xml.id:">
                     </page>
 
                 </do>
@@ -331,7 +331,7 @@
                 label="支付记录" basic="new,delete,edit,view" others=""
                 model="com.yuepaila.order.model.PurchaseOrderPayment">
             <fields>
-                <field name="purchaseOrder.id" label="订单" inputType="dialog_do" key="PurchaseOrderPayment.purchaseOrder"
+                <field name="order.xml.id" label="订单" inputType="dialog_do" key="PurchaseOrderPayment.order.xml"
                        reference="PurchaseOrder"/>
                 <field name="payed" label="支付金额" inputType="text" dataType="BigDecimal"/>
                 <field name="gateway" label="支付方式" inputType="select_status" dataType="int"
@@ -357,14 +357,14 @@
                         <condition name="id" inputType="default" defaultValue="" operation="ne"/>
                     </query>
                     <query name="basic" label="快速查询" orderBy="id:desc">
-                        <condition name="purchaseOrder.serial" label="订单号" defaultValue="" inputType="text" operation="likes"></condition>
+                        <condition name="order.xml.serial" label="订单号" defaultValue="" inputType="text" operation="likes"></condition>
                     </query>
                 </do>
                 <do name="plistPurchaseOrderPaymentByPurchaseOrder"
                     label="支付信息"
                     result="xpagerelated" access="view">
                     <query type="auto" name="default" label="默认" orderBy="id:desc">
-                        <condition label="订单" name="purchaseOrder.id" defaultValue="" operation="eq"
+                        <condition label="订单" name="order.xml.id" defaultValue="" operation="eq"
                                    inputType="default"/>
                     </query>
 
@@ -392,8 +392,8 @@
             <fields>
                 <field name="photoFrameProvider.id" label="供应商" inputType="dialog_do"
                        key="PurchaseOrderDelivery.photoFrameProvider" reference="PhotoFrameProvider"/>
-                <field name="purchaseOrder.id" label="订单" inputType="dialog_do"
-                       key="PurchaseOrderDelivery.purchaseOrder" reference="PurchaseOrder"/>
+                <field name="order.xml.id" label="订单" inputType="dialog_do"
+                       key="PurchaseOrderDelivery.order.xml" reference="PurchaseOrder"/>
                 <field name="sendTime" label="发送时间" inputType="text" dataType="datetime"/>
             </fields>
             <does>
@@ -413,7 +413,7 @@
                 label="评价信息" basic="new,delete,edit,view" others=""
                 model="com.yuepaila.order.model.PurchaseOrderComment">
             <fields>
-                <field name="purchaseOrder.id" label="订单" inputType="dialog_do" key="PurchaseOrderComment.purchaseOrder"
+                <field name="order.xml.id" label="订单" inputType="dialog_do" key="PurchaseOrderComment.order.xml"
                        reference="PurchaseOrder"/>
                 <field name="createDatetime" label="评价时间" inputType="text" dataType="datetime"/>
                 <field name="user.id" label="用户" inputType="dialog_do" key="PurchaseOrderComment.user"
@@ -440,7 +440,7 @@
                 <do name="plistDresserPurchaseOrderComment" label="化妆师评价"
                     result="/manage/order/purchaseOrderCommentList" access="view">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="purchaseOrder.dresser.id" label="化妆师" defaultValue="${MY_USER}"
+                        <condition name="order.xml.dresser.id" label="化妆师" defaultValue="${MY_USER}"
                                    operation="eq"></condition>
                     </query>
                 </do>

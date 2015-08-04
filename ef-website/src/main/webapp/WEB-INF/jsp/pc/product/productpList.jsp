@@ -20,6 +20,11 @@
       window.location.href="/product/getProduct.do?id="+pid;
 
     }
+    function shop(o){
+      var pid =$(o).next().val();
+      window.location.href="/cart/addProduct.do?id="+pid;
+    }
+
   </script>
 </head>
 <body>
@@ -31,20 +36,28 @@
       <td width="40"><input type="checkbox" name="ctlbox" value="1"/></td>
       <td>商品名称</td>
       <td>查看详情</td>
+      <td>加入购物车</td>
     </tr>
     <c:forEach items="${productList}" var="product" >
       <tr>
         <td><input type="checkbox"  value="1"/></td>
         <td><input type="text" name="productName" value="${product.name}"/></td>
-        <td><input type="button" value="浏览" onclick="find(this);">
-          <input type="hidden" id="productId" value="${product.id}"></td>
+        <td>
+          <input type="button" value="浏览" onclick="find(this);">
+          <input type="hidden" id="productId" value="${product.id}">
+        </td>
+
+        <td>
+          <input type="button" value="购买" onclick="shop(this);">
+          <input type="hidden" id="id" value="${product.id}">
+        </td>
       </tr>
     </c:forEach>
   </table>
 </form>
 
 
-<ming800:pcPageList bean="${pageEntity}" url="/product/plist.do">
+<ming800:pcPageList bean="${pageEntity}" url="/product/product/plist.do">
   <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>

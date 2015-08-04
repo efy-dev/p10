@@ -32,7 +32,7 @@
     <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
         <a href="/work/${masterWork.id}">
 
-        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}">
+        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-mobile-work">
 
         </a>
         <figcaption class="am-figure-capition-btm intro-text-2">${masterWork.name} </figcaption>
