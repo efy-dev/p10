@@ -21,9 +21,9 @@ import java.io.Serializable;
 public class ObjectRecommended implements Serializable {
 
     private String id;
-    private String  group;
+    private String  groupName;
     private String recommendId;
-    private String sort;
+    private Integer sort;
     private String status;
 
 
@@ -38,13 +38,13 @@ public class ObjectRecommended implements Serializable {
         this.id = id;
     }
 
-    @Column(name="group")
-    public String getGroup() {
-        return group;
+    @Column(name="group_name")
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Column(name="recommend_id")
@@ -56,12 +56,12 @@ public class ObjectRecommended implements Serializable {
         this.recommendId = recommendId;
     }
 
-    @Column(name="sort")
-    public String getSort() {
+    @Column(name = "sort")
+    public Integer getSort() {
         return sort;
     }
 
-    public void setSort(String sort) {
+    public void setSort(Integer sort) {
         this.sort = sort;
     }
 

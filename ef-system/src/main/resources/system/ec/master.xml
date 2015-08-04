@@ -396,7 +396,7 @@
             <does>
                 <do name="plistMasterRecommended" access="" label="传承人推荐列表"
                     result="/masterRecommended/masterRecommendedPList" >
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="master.status" defaultValue="1" operation="eq"/>

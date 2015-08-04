@@ -1,14 +1,17 @@
 package com.efeiyi.ec.system.master.controller;
 
+import com.efeiyi.ec.master.model.MasterRecommended;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
+import com.ming800.core.p.model.ObjectRecommended;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,5 +57,32 @@ public class RecommendedController {
           modelMap.put("objectList",objectRecommendedManager.getRecommendedList("masterRecommended"));
           return  new ModelAndView("/masterRecommended/masterRecommendedList");
     }
+
+    @RequestMapping("/saveObjectRecommended.do")
+    @ResponseBody
+    public String saveObjectRecommended(ObjectRecommended objectRecommended){
+
+        try{
+            objectRecommendedManager.saveObjectRecommend(objectRecommended);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return  objectRecommended.getId();
+    }
+    @RequestMapping("/updateSort.do")
+    @ResponseBody
+    public String updateSort(ObjectRecommended objectRecommended){
+
+        try{
+            objectRecommendedManager.updateSort(objectRecommended);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return  objectRecommended.getId();
+    }
+
+
 
 }

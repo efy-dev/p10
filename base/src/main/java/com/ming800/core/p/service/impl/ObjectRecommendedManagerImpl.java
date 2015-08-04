@@ -1,26 +1,11 @@
 package com.ming800.core.p.service.impl;
-
-
 import com.ming800.core.base.dao.XdoDao;
-import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.dao.RecommendedDao;
 import com.ming800.core.p.model.CommonRecommended;
-import com.ming800.core.p.model.Jmenu;
-import com.ming800.core.p.model.Jnode;
 import com.ming800.core.p.model.ObjectRecommended;
 import com.ming800.core.p.service.CommonManager;
-import com.ming800.core.p.service.JmenuManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
-import com.ming800.core.util.ApplicationContextUtil;
-import org.apache.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
-import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -39,25 +24,36 @@ public class ObjectRecommendedManagerImpl implements ObjectRecommendedManager {
     private CommonManager commonManager;
 
     @Autowired
+    private RecommendedDao recommendedDao;
+    @Autowired
     private XdoDao xdoDao;
 
     public  List getRecommendedList(String group) throws Exception {
         CommonRecommended recommended = commonManager.getRecommended(group);//获取xml文件对象
-    //    Object object = xdoDao.getObject(recommended.getRecommendedModel(),recommended.getGroup());
-        String hql = "from ObjectRecommended where 1=1 and group = ? ";
+        String hql = "from ObjectRecommended where 1=1 and status = 1 and groupName = ? order by sort ";
         List<ObjectRecommended> objectRecommendedList = null;
         if(recommended.getAmount()!=null){
-            objectRecommendedList = xdoDao.getObjectListByLimit(hql,0,Integer.parseInt(recommended.getAmount()),new Object[]{group});//获取Object推荐集合(limit)
+            objectRecommendedList = recommendedDao.getObjectListByLimit(hql,0,Integer.parseInt(recommended.getAmount()),new Object[]{group});//获取Object推荐集合(limit)
         }else{
             objectRecommendedList = xdoDao.getObjectList(hql,new Object[]{group});//获取Object推荐集合
         }
-
         List objectList = new ArrayList();
         for(ObjectRecommended objectRecommended : objectRecommendedList){//获取对象集合
             Object o = xdoDao.getObject(recommended.getRecommendedModel(),objectRecommended.getRecommendId());
-            objectList.add(xdoDao.getObject(recommended.getRecommendedModel(),objectRecommended.getRecommendId()));
-            System.out.print(o);
+            objectList.add(o);
         }
         return  objectList;
     }
+
+    @Override
+    public void saveObjectRecommend(ObjectRecommended objectRecommended) {
+          recommendedDao.saveObjectRecommend(objectRecommended);
+      //  xdoDao.saveOrUpdateObject(objectRecommended);
+    }
+
+    @Override
+    public Integer updateSort(ObjectRecommended objectRecommended){
+        return  recommendedDao.updateSort(objectRecommended);
+    }
+
 }

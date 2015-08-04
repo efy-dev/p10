@@ -1,20 +1,14 @@
 package com.ming800.core.p.controller;
 
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.WordValue;
-import com.ming800.core.p.service.DictionaryDataManager;
 import com.ming800.core.p.service.WordValueManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.

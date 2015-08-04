@@ -32,7 +32,6 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">中文姓名</th>
-                    <th class="table-title">姓名拼音</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
                 </tr>
@@ -56,7 +55,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.fullName}</a></td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.name}</a></td>
+
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Master.sex" checkedValue="${masterRecommended.master.sex}" type="normal"/>
                         </td>

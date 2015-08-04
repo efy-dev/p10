@@ -1,5 +1,7 @@
 package com.ming800.core.p.service;
 
+import com.ming800.core.p.model.ObjectRecommended;
+
 import java.util.List;
 
 /**
@@ -23,5 +25,22 @@ public interface ObjectRecommendedManager {
      * @return
      * @throws Exception
      */
-    public List getRecommendedList(String group) throws Exception;
+    List getRecommendedList(String group) throws Exception;
+
+    /**
+     * 保存推荐对象
+     * @param objectRecommended
+     */
+    void saveObjectRecommend(ObjectRecommended objectRecommended);
+
+
+    /**
+     * 更新排序
+     * @param objectRecommended
+     * @return
+     */
+    Integer updateSort(ObjectRecommended objectRecommended);
+
+
+
 }

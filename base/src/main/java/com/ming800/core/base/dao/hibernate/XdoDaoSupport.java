@@ -128,15 +128,6 @@ public class XdoDaoSupport implements XdoDao {
         return query.list();
     }
 
-    @Override
-    public  List getObjectListByLimit(String queryHql,Integer firstResult,Integer maxResult,Object... params){
-        Query query = this.getSession().createQuery(queryHql);
-        query = setParameters(query, params);
-        query.setFirstResult(firstResult);
-        query.setMaxResults(maxResult);
-        return  query.list();
-
-    }
 
     @Override
     public List<Object> getObjectList(String hql, LinkedHashMap<String, Object> params, Integer limit, Integer offset) {
