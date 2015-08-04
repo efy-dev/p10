@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,29 +39,60 @@ public class CartController {
         String productId = request.getParameter("id");
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
-        Product product = new Product();
-        product.setId(productId);
-
-
+        boolean ne = false;
+        boolean ab = false;
         Cart cart = (Cart) list.get(0);
+        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
+        xQuery1.put("cart_id", cart.getId());
+        List<Object> list1 = baseManager.listObject(xQuery1);
 
+        if (list1.size()>0) {
+            for (Object cartProductTemp : list1) {
+                CartProduct cartProduct = (CartProduct)cartProductTemp;
+                if (productId.equals(cartProduct.getProduct().getId())) {
+                    if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
+                        cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
+                    } else {
+                        cartProduct.setAmount(cartProduct.getAmount() + 1);
+                    }
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
-        CartProduct cartProduct = new CartProduct();
-        cartProduct.setProduct(product);
-        cartProduct.setCart(cart);
-        cartProduct.setStatus("1");
-       // cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
-        baseManager.saveOrUpdate(CartProduct.class.getName(),cartProduct);
+                    ab = true;
+                    ne = true;
 
+                }
+            }
+        }
+        if (!ne) {
+            Product product = new Product();
+            product.setId(productId);
+            CartProduct cartProduct = new CartProduct();
+            cartProduct.setProduct(product);
+            cartProduct.setCart(cart);
+            cartProduct.setStatus("1");
+            if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
+                cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
+            } else {
+                cartProduct.setAmount(1);
+            }
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+            ab = true;
+        }
+        return ab;
+    }
+
+/*
         XQuery xQuery1 = new XQuery("listCartProduct_default", request);
         xQuery.put("cart_id",cart.getId());
+
         List<Object> list1 = baseManager.listObject(xQuery1);
+
         list1.add(cartProduct);
 
         cart.setCartProductList((List)list1);
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        return true;
-    }
+        return true;*/
+
 
 
     @RequestMapping({"/cart/removeProduct.do"})
