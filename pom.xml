@@ -360,21 +360,7 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>dev</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>local</id>
+            <id>ec-develop</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
@@ -384,11 +370,11 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
         <profile>
-            <id>release</id>
+            <id>ec-test</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
@@ -401,25 +387,8 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
-
-
         <profile>
-            <id>release2</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>efeiyi</id>
+            <id>ec-release</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>sl7BbVfIumw5V/irhnO9FA==</db-password>
@@ -429,10 +398,37 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
-
+        <profile>
+            <id>pal-test</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>z5MurSDMqew5V/irhnO9FA==</db-password>
+                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/pal_test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-username>pal</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>pal-dev</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
+                <db-url>jdbc:mysql://192.168.1.57/pal?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-username>root</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
     </profiles>
 
     <build>

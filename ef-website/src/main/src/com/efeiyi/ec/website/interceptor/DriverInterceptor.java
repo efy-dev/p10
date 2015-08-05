@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DriverInterceptor extends HandlerInterceptorAdapter {
 
     public void postHandle(HttpServletRequest request,
-                           HttpServletResponse response, Object o, ModelAndView mav)
+                            HttpServletResponse response, Object o, ModelAndView mav)
             throws Exception {
         if (mav != null && mav.getViewName() != null && !mav.getViewName().startsWith("redirect") && !mav.getViewName().startsWith("forward")) {
 
