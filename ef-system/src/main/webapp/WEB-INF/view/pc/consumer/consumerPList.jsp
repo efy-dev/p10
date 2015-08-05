@@ -63,8 +63,9 @@
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${consumer.id}'/>">${consumer.username}</a></td>
                         <td class="am-hide-sm-only">${consumer.phone}</td>
                         <td class="am-hide-sm-only">
-                            <c:if test="${consumer.sex == 1}">男</c:if>
-                            <c:if test="${consumer.sex == 0}">女</c:if>
+                                <ming800:status name="sex" dataType="consumer.sex"
+                                                checkedValue="${consumer.sex}"
+                                                type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">${consumer.deposit}</td>
                         <td class="am-hide-sm-only">${consumer.score}</td>

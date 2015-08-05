@@ -110,10 +110,13 @@
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
             <tr>
                 <td class="am-hide-sm-only">
-                    <c:choose>
-                        <c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>
-                        <c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>
-                    </c:choose>
+                    <%--<c:choose>--%>
+                        <%--<c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>--%>
+                        <%--<c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>--%>
+                    <%--</c:choose>--%>
+                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                        checkedValue="${purchaseOrderPayment.payWay}"
+                                        type="normal"/>
                 </td>
                 <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
                 <td class="am-hide-sm-only">
