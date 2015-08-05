@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="basic_banner")
+@Table(name="base_banner")
 public class Banner {
     private String id;
     private String group;
@@ -66,7 +66,7 @@ public class Banner {
     public void setDirectUrl(String directUrl) {
         this.directUrl = directUrl;
     }
-    @Column(name="group_id")
+    @Column(name="group_name")
     public String getGroup() {
         return group;
     }

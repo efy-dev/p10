@@ -18,12 +18,14 @@
 
 <div class="am-g">
     <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateWordValue">
-      <input type="hidden" name="id" value="${object.id}">
+        <input type="hidden" name="qm" value="saveOrUpdateTag">
+        <input type="hidden" name="id" value="${object.id}">
+        <input type="hidden" name="status" value="1" />
+        <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistTag_default" />
       <div class="am-form-group">
-        <label name="group" for="group" class="am-u-sm-3 am-form-label">字典组</label>
+        <label name="group" for="groupName" class="am-u-sm-3 am-form-label">字典组</label>
         <div class="am-u-sm-9">
-          <input type="text" name="group" id="group" placeholder="字典组" value="${object.group}">
+          <input type="text" name="groupName" id="groupName" placeholder="字典组" value="${object.groupName}">
           <small>必填项*</small>
         </div>
       </div>

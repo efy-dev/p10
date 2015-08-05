@@ -28,18 +28,18 @@
                 <td>字典名称</td>
             </tr>
 
-          <c:forEach items="${requestScope.pageInfo.list}" var="wordValue">
+          <c:forEach items="${requestScope.pageInfo.list}" var="tag">
                 <tr style="text-align: center">
                     <td width="20%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
-                                <button style="margin-left: 35%;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeWordValue&id=${wordValue.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                <button style="margin-left: 35%;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTag&id=${tag.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeTag&id=${tag.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
                     </td>
-                    <td width="20%">${wordValue.group}</td>
-                    <td width="20%">${wordValue.value}</td>
+                    <td width="20%">${tag.groupName}</td>
+                    <td width="20%">${tag.value}</td>
                 </tr>
             </c:forEach>
         </table>

@@ -7,7 +7,7 @@ import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.does.service.DoManager;
-import com.ming800.core.p.model.WordValue;
+import com.ming800.core.p.model.Tag;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
@@ -48,7 +48,7 @@ public class MasterNewsHandler implements DoHandler {
 
         if (tagValueList.size() > 0) {
             for (String tagId : tagValueList) {
-                WordValue wordValueTemp = new WordValue();
+                Tag wordValueTemp = new Tag();
                 wordValueTemp.setId(tagId);
                 MasterNewsTag masterNewsTag = new MasterNewsTag();
                 masterNewsTag.setWordValue(wordValueTemp);

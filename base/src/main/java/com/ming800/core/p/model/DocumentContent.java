@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "basic_document_content")
+@Table(name = "base_document_content")
 public class DocumentContent {
     private String id;
     private Document document;

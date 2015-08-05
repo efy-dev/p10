@@ -21,8 +21,8 @@
             <form action="/basic/xmm.do" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
                 <input type="hidden" value="saveOrUpdateBanner" name="qm">
                 <input type="hidden" name="id" value="${object.id}">
-                <input type="hidden" name="groupId" value="${groupId}">
-                <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistBanner_${groupId}&groupId=${groupId}">
+                <input type="hidden" name="groupName" value="${groupName}">
+                <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistBanner_${groupName}&groupId=${groupName}">
                 <div class="am-form-group">
                     <label for="title" class="am-u-sm-3 am-form-label">标题 / Title</label>
                     <div class="am-u-sm-9">

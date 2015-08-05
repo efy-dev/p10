@@ -8,12 +8,12 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "basic_word_value")
-public class WordValue {
+@Table(name = "tag")
+public class Tag {
 
     private String id;
     private  String value;
-    private String group;
+    private String groupName;
     private String status;
 
 
@@ -36,14 +36,13 @@ public class WordValue {
         this.value = value;
     }
 
-
-    @Column(name = "group_id")
-    public String getGroup() {
-        return group;
+    @Column(name = "group_name")
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Column(name="status")

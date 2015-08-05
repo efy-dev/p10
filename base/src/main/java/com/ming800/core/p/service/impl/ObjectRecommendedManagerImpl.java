@@ -56,4 +56,9 @@ public class ObjectRecommendedManagerImpl implements ObjectRecommendedManager {
         return  recommendedDao.updateSort(objectRecommended);
     }
 
+    @Override
+   public void  deleteObjectRecommend(ObjectRecommended objectRecommended){
+      recommendedDao.deleteObjectRecommend(objectRecommended);
+   }
+
 }

@@ -47,7 +47,7 @@
                                  </a>
                             </td>
                             <td class="am-hide-sm-only">
-                               ${masterWorkRecommended.masterWork.master.fullName}
+                               ${masterWorkRecommended.master.fullName}
                             </td>
                             <td class="am-hide-sm-only">
                                 <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${masterWorkRecommended.masterWork.pictureUrl}">

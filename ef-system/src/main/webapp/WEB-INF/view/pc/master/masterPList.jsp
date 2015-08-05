@@ -53,22 +53,28 @@
                                     </a>
                                     <c:if test="${empty master.masterRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           onclick="masterRecommended(this,'${master.id}')"
-                                           href="#" recommend="1" recommendedId = "" >
+                                           onclick="recommended(this,1)"
+                                           href="#" recommend="1" recommendedId = "${master.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
+
+
                                     </c:if>
                                     <c:if test="${not empty master.masterRecommendedList}">
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
                                             <c:if test="${recommended.master.id == master.id}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#"  onclick="masterRecommended(this,'${master.id}')" recommendedId="${recommended.id}" recommend="0">
+                                                   href="#"  onclick="recommended(this,1)" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
                                                     <span class="am-icon-heart" >取消推荐 </span>
                                                 </a>
                                             </c:if>
                                         </c:forEach>
 
                                     </c:if>
+                                       <span style="display: none;float: left;padding-left: 10px;">
+                                                <input type="text" name="sort" style="width: 35px;" value="" />
+                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'masterRecommended',1)" style="padding: 0px 10px 5px 10px" > 保存</a>
+                                       </span>
                                 </div>
                             </div>
                         </td>
@@ -76,17 +82,16 @@
                             <a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${master.id}"/>">
                               ${master.fullName}
                             </a>
-                              <c:forEach var="recommended" items="${master.masterRecommendedList}">
+                            <c:forEach var="recommended" items="${master.masterRecommendedList}">
                                 <c:if test="${recommended.master.id == master.id}" >
-                                    <a href="#" recommendedSort="${recommended.sort}" recommendedId="${recommended.id}" onclick="updateSort(this)" >
-                                      <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
-                                    </a>
+                                    <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
                                 </c:if>
-                              </c:forEach>
+                            </c:forEach>
                         </td>
 
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Master.sex" checkedValue="${master.sex}" type="normal"/>
+
                         </td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="level" dataType="Master.level" checkedValue="${master.level}" type="normal" />
@@ -109,75 +114,69 @@
 
 <script>
 
-    function masterRecommended(obj,masterId){
-
-        //推荐  recommend 为1时 推荐
+    /**
+     * 推荐 取消推荐 切换
+     * @param obj
+     * @param td 推荐标示位于哪一列
+     */
+    function recommended(obj,td){
+        //推荐  recommend 为1时 推荐  显示出排序文本框
         if($(obj).attr("recommend")=="1"){
-            var sort=prompt("输入排序号","1");
-            if(sort)
-            {
-               saveMasterRecommended(obj,masterId,sort);
-            }
+            $(obj).next("span").css({"display":"block"});
         }
-        //0 时 取消推荐
         if($(obj).attr("recommend")=="0"){
-            removeMasterRecommended(obj,masterId);
+            var id = $(obj).attr("id"); //推荐对象id
+            deleteRecommended(obj,id,td);
         }
     }
 
-    function saveMasterRecommended(obj,masterId,sort){
+    /**
+     *  删除推荐对象  切换用的删除方法不直接调用
+     * @param obj
+     * @param id
+     */
+    function deleteRecommended(obj,id,td){
+        var  recommendedId = $(obj).attr("recommendedId");
+        $.ajax({
+            type:"get",
+            url:'<c:url value="/Recommended/deleteObjectRecommended.do" />',
+            data:{id:id},
+            success:function(data){
+                $(obj).attr("recommend","1");
+                $(obj).attr("id","");
+                $(obj).find("span").text("推荐");
+                $("table tr[id='"+recommendedId+"'] td:eq("+td+") span ").remove();
+            }
+        });
+    }
+
+
+    /**
+     *保存推荐对象
+     * @param obj
+     * @param groupName 组名
+     * @param td 推荐标示所在列
+     */
+    function saveRecommended(obj,groupName,td){
+        var recommendId = $(obj).parent().prev("a").attr("recommendedId");
+        var sort = $(obj).prev().val();
         $.ajax({
             type:"get",
             url:'<c:url value="/Recommended/saveObjectRecommended.do" />',
-            data:{groupName:"masterRecommended",recommendId:masterId,status:"1",sort:sort},
+            dataType:"json",
+            data:{groupName:groupName,recommendId:recommendId,status:"1",sort:sort},
             success:function(data){
-                $(obj).attr("recommend","0");
-                $(obj).attr("reId",data);
-                $(obj).find("span").text("取消推荐");
-                $("table tr[id='"+masterId+"'] td:eq(1) a").append("<a onclick=\"updateSort(this)\" recommendedSort="+sort+" recommendedId="+data+" >" +
-                        "<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>" +
-                        "</a>");
+                $(obj).parent("span").css({"display":"none"});
+                $(obj).parent("span").find("input").val("");
+                $(obj).parent().prev("a").attr("recommend","0");
+                $(obj).parent().prev("a").attr("id",data);
+                $(obj).parent().prev("a").find("span").text("取消推荐");
+                $("table tr[id='"+recommendId+"'] td:eq("+td+")").append("<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>");
             }
         });
     }
 
 
-    function removeMasterRecommended(obj,masterId){
-        var recommendedId = $(obj).attr("recommendedId");
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMasterRecommended"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:recommendedId},
-            success: function (data) {
-                $(obj).attr("recommend","1");
-                $(obj).attr("reId","");
-                $(obj).find("span").text("推荐");
-                $("table tr[id='"+masterId+"'] td:eq(1) a:eq(1) ").remove();
-            }
-        });
-    }
-
-    function updateSort(obj){
-        var recommendedSort = $(obj).attr("recommendedSort");
-        var recommendedId = $(obj).attr("recommendedId");
-        var sort=prompt("输入排序号",recommendedSort);
-        if(sort)
-        {
-            $.ajax({
-                type: "get",
-                url: '<c:url value="/Recommended/updateSort.do"/>',
-                cache: false,
-                dataType: "json",
-                data:{id:recommendedId,sort:sort},
-                success: function (data) {
-                    $(obj).attr("recommendedSort",sort);
-                  alert("修改成功!");
-                }
-            });
-        }
-    }
 
     function removeMaster(divId){
         $.ajax({

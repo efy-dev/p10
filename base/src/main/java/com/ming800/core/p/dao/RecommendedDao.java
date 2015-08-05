@@ -28,5 +28,11 @@ public interface RecommendedDao {
      */
     Integer  updateSort(ObjectRecommended objectRecommended);
 
+    /**
+     * 删除推荐对象
+     * @param objectRecommended
+     */
+    void  deleteObjectRecommend(ObjectRecommended objectRecommended);
+
 
 }

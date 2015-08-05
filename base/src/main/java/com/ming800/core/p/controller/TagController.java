@@ -1,8 +1,8 @@
 package com.ming800.core.p.controller;
 
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.p.model.WordValue;
-import com.ming800.core.p.service.WordValueManager;
+import com.ming800.core.p.model.Tag;
+import com.ming800.core.p.service.TagManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,24 +19,24 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/WordValue")
-public class WordValueController {
+public class TagController {
 
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(WordValueController.class);
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TagController.class);
     @Autowired
     private BaseManager baseManager;
 
     @Autowired
-    private WordValueManager wordValueManager;
+    private TagManager tagManager;
 
     @RequestMapping("/listWordValue.do")
     public ModelAndView listWordValueByGroup(ModelMap modelMap,String group) throws  Exception{
-        List<WordValue> wordValues  = wordValueManager.listWordValueByGroup(group);
+        List<Tag> wordValues  = tagManager.listWordValueByGroup(group);
         modelMap.put("wv",wordValues);
         return  new ModelAndView("/wordValue/wordValuePList");
     }
     @RequestMapping("/test.do")
    public List test(){
-       List list = wordValueManager.listWordValueByGroup("1");
+       List list = tagManager.listWordValueByGroup("1");
        return  list;
    }
 }

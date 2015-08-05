@@ -31,6 +31,14 @@ public class RecommendedDaoHibernate implements RecommendedDao {
         return sessionFactory.getCurrentSession();
     }
 
+    /**
+     * 获取推荐列表
+     * @param queryHql
+     * @param firstResult
+     * @param maxResult
+     * @param params
+     * @return
+     */
 
     @Override
     public  List getObjectListByLimit(String queryHql,Integer firstResult,Integer maxResult,Object... params){
@@ -76,9 +84,15 @@ public class RecommendedDaoHibernate implements RecommendedDao {
         Query query =  this.getSession().createQuery(hql)
                 .setInteger("sort", objectRecommended.getSort())
                 .setString("id", objectRecommended.getId());
-
-
         return    query.executeUpdate();
+    }
+
+    @Override
+    public void  deleteObjectRecommend(ObjectRecommended objectRecommended){
+       String hql = "delete from ObjectRecommended where  id = :id";
+        Query query = this.getSession().createQuery(hql)
+                .setString("id", objectRecommended.getId());
+        query.executeUpdate();
     }
 
 }

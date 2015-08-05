@@ -2,12 +2,12 @@ package com.ming800.core.p.service;
 
 import java.util.List;
 
-public interface WordValueManager {
+public interface TagManager {
 
     /**
      * 获取 字典列表
-     * @param group
+     * @param groupName
      * @return
      */
-    List listWordValueByGroup(String group);
+    List listWordValueByGroup(String groupName);
 }

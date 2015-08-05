@@ -1,6 +1,6 @@
 package com.ming800.core.p.service.impl;
-import com.ming800.core.p.dao.WordValueDao;
-import com.ming800.core.p.service.WordValueManager;
+import com.ming800.core.p.dao.TagDao;
+import com.ming800.core.p.service.TagManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,18 +14,18 @@ import java.util.List;
  */
 
 @Service
-public class WordValueManagerImpl implements WordValueManager {
+public class TagManagerImpl implements TagManager {
 
 
     @Autowired
-    private WordValueDao  wordValueDao;
+    private TagDao wordValueDao;
 
 
 
     @Override
-    public  List listWordValueByGroup(String group){
+    public  List listWordValueByGroup(String groupName){
 
-        return  wordValueDao.listWordValueByGroup(group);
+        return  wordValueDao.listWordValueByGroup(groupName);
     }
 
 }

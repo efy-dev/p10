@@ -107,7 +107,7 @@
             <!--</jnode>-->
         </jnode>
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?groupId=master.homePage&amp;qm=plistBanner_master.homePage"  access="admin,manager"  text_zh_CN="首页轮播图">
+            <jnode url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"  access="admin,manager"  text_zh_CN="首页轮播图">
                 <match url="plistBanner_tenant"/>
                 <match url="plistBanner_master.homePage"/>
                 <match url="formBanner"/>
@@ -184,13 +184,13 @@
         </jnode>
 
     </jnode>
-        <jnode id="wordValueManager" url="" access="admin" text_zh_CN="字典管理"><!--系统管理-->
-            <jnode id="" url="/basic/xm.do?qm=plistWordValue_default" state="" extend="" access="" text_zh_CN="字典列表">
-                <match url="plistWordValue_default"/>
-                <match url="viewWordValue"/>
-                <match url="removeWordValue"/>
-                <match url="formWordValue"/>
-                <match url="saveOrUpdateWordValue"/>
+        <jnode id="tagManager" url="" access="admin" text_zh_CN="字典管理"><!--系统管理-->
+            <jnode id="" url="/basic/xm.do?qm=plistTag_default" state="" extend="" access="" text_zh_CN="字典列表">
+                <match url="plistTag_default"/>
+                <match url="viewTag"/>
+                <match url="removeTag"/>
+                <match url="formTag"/>
+                <match url="saveOrUpdateTag"/>
             </jnode>
 
         </jnode>

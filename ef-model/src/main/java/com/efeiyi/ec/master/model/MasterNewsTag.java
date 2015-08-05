@@ -1,6 +1,6 @@
 package com.efeiyi.ec.master.model;
 
-import com.ming800.core.p.model.WordValue;
+import com.ming800.core.p.model.Tag;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class MasterNewsTag {
     private String id;
     private MasterNews masterNews;
-    private WordValue wordValue;
+    private Tag wordValue;
     private String status;
 
     @Id
@@ -39,11 +39,11 @@ public class MasterNewsTag {
 
     @JoinColumn(name = "base_word_value_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    public WordValue getWordValue() {
+    public Tag getWordValue() {
         return wordValue;
     }
 
-    public void setWordValue(WordValue wordValue) {
+    public void setWordValue(Tag wordValue) {
         this.wordValue = wordValue;
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "basic_document_attachment")
+@Table(name = "base_document_attachment")
 public class DocumentAttachment {
     private String id;
     private String storeType;  // database,  disk,  cloud

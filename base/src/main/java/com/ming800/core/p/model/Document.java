@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "basic_document")
+@Table(name = "base_document")
 public class Document {
 
     private String id;
@@ -101,7 +101,7 @@ public class Document {
         this.documentOrder = documentOrder;
     }
 
-    @Column(name = "group_id")
+    @Column(name = "group_name")
     public String getGroup() {
         return group;
     }

@@ -13,7 +13,7 @@ public class BasicBannerListHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        modelMap.put("groupId" , request.getParameter("groupId"));
+        modelMap.put("groupName" , request.getParameter("groupName"));
 
         return modelMap;
     }

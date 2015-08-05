@@ -31,6 +31,7 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
+                    <th class="table-title">排序</th>
                     <th class="table-title">中文姓名</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
@@ -48,11 +49,16 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="removeMasterRecommended('${masterRecommended.id}')" href="#"><span
+                                       onclick="deleteObjectRecommended('${masterRecommended.id}')" href="#"><span
                                             class="am-icon-trash-o"></span> 取消推荐
                                     </a>
                                 </div>
                             </div>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <a href="#" onclick="toUpdateSort(this)" sort="${masterRecommended.sort}" id="${masterRecommended.id}">
+                              ${masterRecommended.sort}
+                            </a>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.fullName}</a></td>
 
@@ -79,18 +85,53 @@
 
 <script>
 
-    function removeMasterRecommended(divId){
+
+    /**
+     * 跳转更新序号
+     * @param obj
+     */
+    function toUpdateSort(obj){
+        var sort = $(obj).attr("sort");
+        var id = $(obj).attr("id");
+        $(obj).parent().html("<input id="+id+" onblur=\"updateSort(this)\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
+    }
+
+    /**
+     * 更新序号
+     * @param obj
+     */
+    function updateSort(obj){
+        var sort = $(obj).val();
+        var id = $(obj).attr("id");
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMasterRecommended"/>',
+            url: '<c:url value="/Recommended/updateSort.do"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data:{id:id,sort:sort},
             success: function (data) {
-                $("#"+divId).remove();
+                $(obj).parent().html("<a onclick=\"toUpdateSort(this)\" sort="+sort+" id="+id+">"+sort+"</a>");
             }
         });
     }
+
+    /***
+     * 删除推荐对象  可直接调用
+     */
+    function deleteObjectRecommended(id){
+        $.ajax({
+            type:"get",
+            url:'<c:url value="/Recommended/deleteObjectRecommended.do" />',
+            data:{id:id},
+            success:function(data){
+
+                $("table tr[id='"+id+"']").remove();
+            }
+        });
+    }
+
+
+
 
 </script>
 </body>

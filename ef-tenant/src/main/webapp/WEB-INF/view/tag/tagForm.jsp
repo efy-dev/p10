@@ -23,7 +23,7 @@
       <div class="am-form-group">
         <label name="group" for="group" class="am-u-sm-3 am-form-label">字典组</label>
         <div class="am-u-sm-9">
-          <input type="text" name="group" id="group" placeholder="字典组" value="${object.group}">
+          <input type="text" name="group" id="group" placeholder="字典组" value="${object.groupName}">
           <small>必填项*</small>
         </div>
       </div>

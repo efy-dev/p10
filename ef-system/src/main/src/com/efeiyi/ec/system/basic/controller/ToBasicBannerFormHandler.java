@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ToBasicBannerFormHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        if (request.getParameter("groupId") != null) {
-            modelMap.put("groupId", request.getParameter("groupId"));
+        if (request.getParameter("groupName") != null) {
+            modelMap.put("groupName", request.getParameter("groupName"));
         }
         return modelMap;
     }

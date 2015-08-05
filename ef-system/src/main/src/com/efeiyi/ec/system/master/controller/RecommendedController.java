@@ -32,6 +32,8 @@ public class RecommendedController {
     @Autowired
     private ObjectRecommendedManager objectRecommendedManager;
 
+
+
     /**
      * 通过模块ID获取相关模块的轮播图（状态为可用）的所有对象
      */
@@ -68,6 +70,7 @@ public class RecommendedController {
 
             e.printStackTrace();
         }
+        System.out.print(objectRecommended.getId());
         return  objectRecommended.getId();
     }
     @RequestMapping("/updateSort.do")
@@ -80,6 +83,20 @@ public class RecommendedController {
 
             e.printStackTrace();
         }
+        return  objectRecommended.getId();
+    }
+    @RequestMapping("/deleteObjectRecommended.do")
+    @ResponseBody
+    public String deleteObjectRecommend(ObjectRecommended objectRecommended){
+
+        try {
+
+            objectRecommendedManager.deleteObjectRecommend(objectRecommended);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return  objectRecommended.getId();
     }
 

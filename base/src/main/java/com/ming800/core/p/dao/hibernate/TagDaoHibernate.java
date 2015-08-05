@@ -2,8 +2,8 @@ package com.ming800.core.p.dao.hibernate;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
-import com.ming800.core.p.dao.WordValueDao;
-import com.ming800.core.p.model.WordValue;
+import com.ming800.core.p.dao.TagDao;
+import com.ming800.core.p.model.Tag;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +18,21 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public class WordValueDaoHibernate extends BaseDaoSupport<WordValue> implements WordValueDao {
+public class TagDaoHibernate extends BaseDaoSupport<Tag> implements TagDao {
 
     @Autowired
     private XdoDao xdoDao;
 
     @Override
-    public  List listWordValueByGroup(String group){
+    public  List listWordValueByGroup(String groupName){
 
         Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM WordValue d WHERE d.group = :group and d.status != 0  order by d.id ")
-                .setString("group", group);
+        Query query = session.createQuery("SELECT d FROM Tag d WHERE d.groupName = :group and d.status = 1  order by d.id ")
+                .setString("group", groupName);
         return query.list();
 
       /*  Object [] objects = new  Object[]{group};
-        String  hql = "SELECT * FROM WordValue d where d.status != 0  and d.group = :group";
+        String  hql = "SELECT * FROM Tag d where d.status != 0  and d.group = :group";
 
           return xdoDao.getObjectList(hql,objects);*/
     }
