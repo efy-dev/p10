@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "tag")
+@Table(name = "base_tag")
 public class Tag {
 
     private String id;
