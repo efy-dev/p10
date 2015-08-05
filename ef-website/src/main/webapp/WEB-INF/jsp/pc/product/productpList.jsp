@@ -14,17 +14,14 @@
   <title></title>
   <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
   <script>
-
     function find(o){
       var pid = $(o).next().val();
       window.location.href="/product/getProduct.do?id="+pid;
-
     }
     function shop(o){
       var pid =$(o).next().val();
       window.location.href="/cart/addProduct.do?id="+pid;
     }
-
   </script>
 </head>
 <body>

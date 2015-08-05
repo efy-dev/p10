@@ -38,6 +38,5 @@ public class ProjectController extends BaseController {
         Project project = (Project) this.baseManager.getObject(Project.class.getName(), id);
         model.addAttribute("project",project);
         return "/pc/project/projectView";
-
     }
 }
