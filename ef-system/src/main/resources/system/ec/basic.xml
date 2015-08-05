@@ -25,6 +25,11 @@
                         <condition name="group" defaultValue="master.homePage" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
+                    <query name="tenant" label="电商网站轮播图" type="auto" orderBy="id:desc">
+                        <condition name="group" defaultValue="tenant" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq" />
+                    </query>
+
                 </do>
 
                 <do name="removeBanner" label="删除banner" access="" result="json"/>

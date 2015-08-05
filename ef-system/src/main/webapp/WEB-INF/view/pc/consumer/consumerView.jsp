@@ -15,11 +15,8 @@
             <tr>
                 <td class="am-primary am-u-md-3">用户名</td>
                 <td class="am-u-md-3">${object.username}</td>
-                <td class="am-primary am-u-md-3">性别</td>
-                <td class="am-u-md-3">
-                    <c:if test="${object.sex == 1}">男</c:if>
-                    <c:if test="${object.sex == 0}">女</c:if>
-                </td>
+                <td class="am-primary am-u-md-3">编号</td>
+                <td class="am-u-md-3">${object.serial}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">电话</td>
