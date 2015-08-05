@@ -50,7 +50,8 @@ public class ProductModel {
         this.price = price;
     }
 
-    @Column(name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     public Product getProduct() {
         return product;
     }
