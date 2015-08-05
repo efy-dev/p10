@@ -3,6 +3,7 @@ package com.efeiyi.ec.product.model;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,7 +31,8 @@ public class Product {
     private String status;
     private Project project;
     private Date createDateTime;
-
+//    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
+//    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -151,4 +153,5 @@ public class Product {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
+
 }
