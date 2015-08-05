@@ -121,4 +121,13 @@ public class PurchaseOrder {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
+    @Column(name = "order_status")
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 }

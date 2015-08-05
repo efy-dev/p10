@@ -14,6 +14,7 @@ import java.util.Date;
 @Table(name = "purchase_order_payment")
 public class PurchaseOrderPayment {
     private String id;
+    private String  transactionNumber; //交易号
     private PurchaseOrder purchaseOrder;
     private Date createDateTime;
     private BigDecimal paymentAmount; //支付金额
@@ -96,5 +97,14 @@ public class PurchaseOrderPayment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "transaction_number")
+    public String getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
     }
 }
