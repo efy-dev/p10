@@ -19,6 +19,7 @@ public class ConsumerAddress {
     private String phone;
     private String email;
     private Consumer consumer;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -104,5 +105,14 @@ public class ConsumerAddress {
 
     public void setConsumer(Consumer consumer) {
         this.consumer = consumer;
+    }
+
+    @Column(name="status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
