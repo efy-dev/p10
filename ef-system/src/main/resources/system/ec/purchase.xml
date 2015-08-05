@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="purchase" label="purchase" version="" package="com.efeiyi.ec.purchase" path="">
 
     <entities>

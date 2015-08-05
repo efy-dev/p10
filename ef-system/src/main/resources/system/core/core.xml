@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--系统核心-->
+
 <module name="core" label="系统核心" version="" package="com.ming800.core" path="">
 
 

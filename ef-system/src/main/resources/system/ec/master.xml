@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="master" label="系统-传承人" version="" package="com.efeiyi.ec.master" path="">
 
     <entities>

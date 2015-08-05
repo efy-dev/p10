@@ -51,7 +51,6 @@
                     </dictDefination>
                 </field>
 
-                <!--ingredientList 列表使用    model中没有这个字段  -->
                 <field name="allFieldName" label="数据来源"
                        inputType="select_status" key="Ingredient.allFieldName">
                     <statusType fieldName="allFieldName">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="tenant" label="系统-商家" version="" package="com.efeiyi.ec.tenant" path="">
 
     <entities>

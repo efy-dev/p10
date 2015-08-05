@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="document" label="document" version="" package="com.ming800.core.p.model" path="">
 
     <entities>
