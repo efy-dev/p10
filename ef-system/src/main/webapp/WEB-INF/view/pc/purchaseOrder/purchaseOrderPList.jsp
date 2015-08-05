@@ -75,10 +75,9 @@
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
                                 <span style="margin-left: 10px;">
-                                <c:choose>
-                                    <c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>
-                                    <c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>
-                                </c:choose></span>
+                                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                                    checkedValue="${purchaseOrderPayment.payWay}"
+                                                    type="normal"/>
                             </c:forEach>
                         </td>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>

@@ -66,14 +66,9 @@
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
                         <td class="am-hide-sm-only">
-                            <c:choose>
-                                <c:when test="${purchaseOrderPayment.payWay == 1}">
-                                    支付宝
-                                </c:when>
-                                <c:when test="${purchaseOrderPayment.payWay == 2}">
-                                    网银支付
-                                </c:when>
-                            </c:choose>
+                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                                checkedValue="${purchaseOrderPayment.payWay}"
+                                                type="normal"/>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>

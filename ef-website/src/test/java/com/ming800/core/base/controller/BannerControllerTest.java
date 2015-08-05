@@ -1,10 +1,9 @@
 package com.ming800.core.base.controller;
 
 
-import com.ming800.core.base.service.impl.BaseManagerImpl;
 import com.ming800.core.p.controller.BannerController;
 import com.ming800.core.p.controller.DocumentController;
-import com.ming800.core.p.controller.WordValueController;
+import com.ming800.core.p.controller.TagController;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -20,9 +19,6 @@ import javax.annotation.Resource;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -58,7 +54,7 @@ public class BannerControllerTest {
      DocumentController documentController;
 
     @Resource
-    WordValueController wordValueController;
+    TagController wordValueController;
 
      ModelMap  map ;
      @Autowired

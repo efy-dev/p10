@@ -38,6 +38,34 @@
     </dependencies>
     <build>
         <finalName>ef-personal</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory> ${basedir}/WEB-INF/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <packagingExcludes>${project.build.directory}/ef-personal/*</packagingExcludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
     </build>
     <properties>
         <java.version>1.8</java.version>
