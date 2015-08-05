@@ -15,6 +15,20 @@
 <head>
     <title></title>
     <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script>
+        function removeTenant(divId){
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/basic/xmj.do?qm=removeTenant"/>',
+                cache: false,
+                dataType: "json",
+                data:{id:divId},
+                success: function (data) {
+                    $("#"+divId).remove();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -22,7 +36,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=plistMaster_default%26conditions=status:1"/>"><span class="am-icon-plus"></span>新建推荐传承人</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span>新建商家</a>
                 </div>
             </div>
         </div>
@@ -32,35 +46,32 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">中文姓名</th>
-                    <th class="table-title">性别</th>
-                    <th class="table-title">等级</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="masterRecommended">
-                    <tr id="${masterRecommended.id}">
+                <c:forEach items="${requestScope.pageInfo.list}" var="tenant">
+                    <tr id="${tenant.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formMaster&id=${masterRecommended.master.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formTenant&id=${tenant.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="removeMasterRecommended('${masterRecommended.id}')" href="#"><span
-                                            class="am-icon-trash-o"></span> 取消推荐
+                                       onclick="removeTenant('${tenant.id}')" href="#"><span
+                                            class="am-icon-trash-o"></span>删除
+                                    </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                    href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&conditions=tenant.id:${tenant.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.fullName}</a></td>
-
                         <td class="am-hide-sm-only">
-                            <ming800:status name="sex" dataType="Master.sex" checkedValue="${masterRecommended.master.sex}" type="normal"/>
-                        </td>
-                        <td class="am-hide-sm-only">
-                            <ming800:status name="level" dataType="Master.level" checkedValue="${masterRecommended.master.level}" type="normal" />
+                            <a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -76,22 +87,5 @@
         </ming800:pcPageList>
     </div>
 </div>
-
-<script>
-
-    function removeMasterRecommended(divId){
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMasterRecommended"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:divId},
-            success: function (data) {
-                $("#"+divId).remove();
-            }
-        });
-    }
-
-</script>
 </body>
 </html>

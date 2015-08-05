@@ -9,6 +9,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -28,6 +29,7 @@ public class Product {
     private Date madeYear;
     private TenantSource tenantSource;
     private TenantCertification tenantCertification;
+    private List<ProductPropertyValue> productPropertyValueList;
     private String imgUrl;
 
     @Id
@@ -122,6 +124,15 @@ public class Product {
         this.tenantCertification = tenantCertification;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public List<ProductPropertyValue> getProductPropertyValueList() {
+        return productPropertyValueList;
+    }
+
+    public void setProductPropertyValueList(List<ProductPropertyValue> productPropertyValueList) {
+        this.productPropertyValueList = productPropertyValueList;
+    }
+
     @Column(name = "img_url")
     public String getImgUrl() {
         return imgUrl;
@@ -130,4 +141,5 @@ public class Product {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+    
 }

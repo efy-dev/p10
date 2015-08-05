@@ -14,14 +14,14 @@
 <head>
     <title></title>
     <script>
-        function removePurchaseOrder(orderId){
+        function removePurchaseOrder(orderId) {
             jQuery.ajax({
-                type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',
-                data:{id:orderId},
-                dataType:"json",
-                success:function(data){
-                    $("#"+orderId).remove();
+                type: "GET",
+                url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',
+                data: {id: orderId},
+                dataType: "json",
+                success: function (data) {
+                    $("#" + orderId).remove();
                 }
             });
         }
@@ -50,29 +50,41 @@
                 <tbody>
 
 
-
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
                     <tr id="${purchaseOrder.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removePurchaseOrder('${purchaseOrder.id}')"><span
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                            onclick="removePurchaseOrder('${purchaseOrder.id}')"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                        </td>
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
-                                <span style="margin-left: 10px;"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.product.id}'/>">${purchaseProduct.product.name}</a></span>
+                                <span style="margin-left: 10px;"><a
+                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.product.id}'/>">${purchaseProduct.product.name}</a></span>
                             </c:forEach>
 
                         </td>
-                        <td class="am-hide-sm-only">${purchaseOrder.payWay}</td>
+                        <td class="am-hide-sm-only">
+                            <c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
+                                <span style="margin-left: 10px;">
+                                <c:choose>
+                                    <c:when test="${purchaseOrderPayment.payWay == 1}">支付宝</c:when>
+                                    <c:when test="${purchaseOrderPayment.payWay == 2}">银行卡</c:when>
+                                </c:choose></span>
+                            </c:forEach>
+                        </td>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.name}</td>
-                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
+                                                                    pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

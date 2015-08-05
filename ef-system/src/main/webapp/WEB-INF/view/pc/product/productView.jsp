@@ -33,7 +33,7 @@
                 <td class="am-primary am-u-md-3">产品描述</td>
                 <td class="am-u-md-3">${object.productDescription.content}</td>
                 <td class="am-primary am-u-md-3">产品图片</td>
-                <td class="am-u-md-3">${object.picture_url}</td>
+                <td class="am-u-md-3"><img src="${object.picture_url}" alt="产品图片"></td>
             </tr>
             </tbody>
         </table>

@@ -4,6 +4,7 @@ import com.efeiyi.ec.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 
 /**
  * Created by Administrator on 2015/6/15.
@@ -29,7 +30,7 @@ public class CartProduct {
     }
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     public Cart getCart() {
         return cart;

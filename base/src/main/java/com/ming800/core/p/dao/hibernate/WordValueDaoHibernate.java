@@ -2,18 +2,13 @@ package com.ming800.core.p.dao.hibernate;
 
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
-import com.ming800.core.p.dao.DictionaryDao;
 import com.ming800.core.p.dao.WordValueDao;
-import com.ming800.core.p.model.DictionaryData;
 import com.ming800.core.p.model.WordValue;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.

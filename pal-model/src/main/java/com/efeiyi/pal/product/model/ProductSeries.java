@@ -1,12 +1,11 @@
 package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -22,16 +21,6 @@ public class ProductSeries {
     private Tenant tenant;
     private String status;
     private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
-
-    @OneToMany(mappedBy = "productSeries")
-    @Where(clause = "status='1'")
-    public List<ProductSeriesPropertyName> getProductSeriesPropertyNameList() {
-        return productSeriesPropertyNameList;
-    }
-
-    public void setProductSeriesPropertyNameList(List<ProductSeriesPropertyName> productSeriesPropertyName) {
-        this.productSeriesPropertyNameList = productSeriesPropertyName;
-    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -62,6 +51,7 @@ public class ProductSeries {
         this.serial = serial;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
@@ -79,6 +69,16 @@ public class ProductSeries {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productSeries")
+    public List<ProductSeriesPropertyName> getProductSeriesPropertyNameList() {
+        return productSeriesPropertyNameList;
+    }
+
+    public void setProductSeriesPropertyNameList(List<ProductSeriesPropertyName> productSeriesPropertyNameList) {
+        this.productSeriesPropertyNameList = productSeriesPropertyNameList;
     }
 
 }

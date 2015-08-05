@@ -30,7 +30,7 @@ public class Cart {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "cart")
     public List<CartProduct> getCartProductList() {
         return cartProductList;
     }

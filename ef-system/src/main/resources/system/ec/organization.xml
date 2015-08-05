@@ -12,13 +12,13 @@
                 <do name="plistAddressCity" access="" label="市列表"
                     result="/addressCity/addressCityPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeAddressCity" label="删除addressCity" access="" result="json"/>
-                <do name="formAddressCity" label="保存addressCity" access="" result="/addressCity/addressCityForm"></do>
-                <do name="saveOrUpdateAddressCity" label="保存addressCity" access="" result="/addressCity/addressCitySaveSuccess"></do>
+                <do name="formAddressCity" label="保存addressCity" access="" result="/addressCity/addressCityForm"/>
+                <do name="saveOrUpdateAddressCity" label="保存addressCity" access="" result="/addressCity/addressCitySaveSuccess"/>
                 <do name="listAddressCity" label="addressCity列表" access="" result="/addressCity/addressCityList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="banner主键" name="id" defaultValue="1" operation="eq"/>
@@ -34,13 +34,13 @@
                 <do name="plistAddressDistrict" access="" label="菜单列表"
                     result="/addressDistrict/addressDistrictPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeAddressDistrict" label="删除菜单" access="" result="json"/>
-                <do name="formAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictForm"></do>
-                <do name="saveOrUpdateAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictSaveSuccess"></do>
+                <do name="formAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictForm"/>
+                <do name="saveOrUpdateAddressDistrict" label="保存菜单" access="" result="/addressDistrict/addressDistrictSaveSuccess"/>
                 <do name="listAddressDistrict" label="菜单列表" access="" result="/addressDistrict/addressDistrictList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="菜单主键" name="id" defaultValue="1" operation="eq"/>
@@ -56,13 +56,13 @@
                 <do name="plistAddressProvince" access="" label="省列表"
                     result="/addressProvince/addressProvincePList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeAddressProvince" label="删除省" access="" result="json"/>
-                <do name="formAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceForm"></do>
-                <do name="saveOrUpdateAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceSaveSuccess"></do>
+                <do name="formAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceForm"/>
+                <do name="saveOrUpdateAddressProvince" label="保存省" access="" result="/addressProvince/addressProvinceSaveSuccess"/>
                 <do name="listAddressProvince" label="省列表" access="" result="/addressProvince/addressProvinceList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -78,13 +78,13 @@
                 <do name="plistBigUser" access="" label="用户列表"
                     result="/bigUser/bigUserPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeBigUser" label="删除省" access="" result="json"/>
-                <do name="formBigUser" label="保存省" access="" result="/bigUser/bigUserForm"></do>
-                <do name="saveOrUpdateBigUser" label="保存省" access="" result="/bigUser/bigUserSaveSuccess"></do>
+                <do name="formBigUser" label="保存省" access="" result="/bigUser/bigUserForm"/>
+                <do name="saveOrUpdateBigUser" label="保存省" access="" result="/bigUser/bigUserSaveSuccess"/>
                 <do name="listBigUser" label="省列表" access="" result="/bigUser/bigUserList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -100,14 +100,23 @@
             <do name="plistConsumer" access="" label="消费者列表"
                 result="/consumer/consumerPList">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
-                    <condition name="id" defaultValue="0" operation="ne"></condition>
+
+
+                    <condition name="id" defaultValue="0" operation="ne"/>
                 </query>
             </do>
 
             <do name="removeConsumer" label="删除消费者" access="" result="json"/>
             <do name="viewConsumer" label="查看消费者" access="" result="/consumer/consumerView"/>
             <do name="formConsumer" label="保存消费者" access="" result="/consumer/consumerForm"/>
-            <do name="saveOrUpdateConsumer" label="保存消费者" access="" result="/consumer/consumerPList"/>
+            <do name="saveOrUpdateConsumer" label="保存消费者" access="" result="/consumer/consumerPList">
+                <page>
+                    <fields>
+                        <field name="thestatus" label="状态" defaultValue="1"
+                               inputType="default" />
+                    </fields>
+                </page>
+            </do>
             <do name="listConsumer" label="消费者列表" access="" result="/consumer/consumerList">
                 <query name="default" label="默认" type="auto" orderBy="id:desc">
                     <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -123,13 +132,13 @@
                 <do name="plistConsumerAddress" access="" label="消费者地址列表"
                     result="/consumerAddress/consumerAddressPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeConsumerAddress" label="删除消费者地址" access="" result="json"/>
-                <do name="formConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressForm"></do>
-                <do name="saveOrUpdateConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressSaveSuccess"></do>
+                <do name="formConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressForm"/>
+                <do name="saveOrUpdateConsumerAddress" label="保存消费者地址" access="" result="/consumerAddress/consumerAddressSaveSuccess"/>
                 <do name="listConsumerAddress" label="消费者地址列表" access="" result="/consumerAddress/consumerAddressList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -145,13 +154,13 @@
                 <do name="plistManager" access="" label="管理员列表"
                     result="/manager/managerPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeManager" label="删除管理员" access="" result="json"/>
-                <do name="formManager" label="保存管理员" access="" result="/manager/managerForm"></do>
-                <do name="saveOrUpdateManager" label="保存管理员" access="" result="/manager/managerSaveSuccess"></do>
+                <do name="formManager" label="保存管理员" access="" result="/manager/managerForm"/>
+                <do name="saveOrUpdateManager" label="保存管理员" access="" result="/manager/managerSaveSuccess"/>
                 <do name="listManager" label="管理员列表" access="" result="/manager/managerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -167,13 +176,13 @@
                 <do name="plistMyUser" access="" label="用户列表"
                     result="/myUser/myUserPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removeMyUser" label="删除用户" access="" result="json"/>
-                <do name="formMyUser" label="保存用户" access="" result="/myUser/myUserForm"></do>
-                <do name="saveOrUpdateMyUser" label="保存用户" access="" result="/myUser/myUserSaveSuccess"></do>
+                <do name="formMyUser" label="保存用户" access="" result="/myUser/myUserForm"/>
+                <do name="saveOrUpdateMyUser" label="保存用户" access="" result="/myUser/myUserSaveSuccess"/>
                 <do name="listMyUser" label="用户列表" access="" result="/myUser/myUserList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -189,13 +198,13 @@
                 <do name="plistPermission" access="" label="权限列表"
                     result="/permission/permissionPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
                 <do name="removePermission" label="删除用户" access="" result="json"/>
-                <do name="formPermission" label="保存用户" access="" result="/permission/permissionForm"></do>
-                <do name="saveOrUpdatePermission" label="保存用户" access="" result="/permission/permissionSaveSuccess"></do>
+                <do name="formPermission" label="保存用户" access="" result="/permission/permissionForm"/>
+                <do name="saveOrUpdatePermission" label="保存用户" access="" result="/permission/permissionSaveSuccess"/>
                 <do name="listPermission" label="用户列表" access="" result="/permission/permissionList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
@@ -204,20 +213,21 @@
 
             </does>
         </entity>
-        <entity name="Professional" label="Professional"
+        <entity name="Professional" label="商家用户"
                 basic="simple" others=""
                 model="com.efeiyi.ec.organization.model.Professional">
             <does>
-                <do name="plistProfessional" access="" label="Professional列表"
+                <do name="plistProfessional" access="" label="商家用户列表"
                     result="/professional/professionalPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="1" operation="eq"></condition>
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
 
-                <do name="removeProfessional" label="删除Professional" access="" result="json"/>
-                <do name="formProfessional" label="保存Professional" access="" result="/professional/professionalForm"></do>
-                <do name="saveOrUpdateProfessional" label="保存Professional" access="" result="/professional/professionalSaveSuccess"></do>
+                <do name="removeProfessional" label="删除商家用户" access="" result="json"/>
+                <do name="formProfessional" label="保存商家用户" access="" result="/professional/professionalForm"/>
+                <do name="viewProfessional" label="查看商家用户" access="" result="/professional/professionalView"/>
+                <do name="saveOrUpdateProfessional" label="保存商家用户" access="" result="redirect:/basic/xm.do?qm=plistProfessional_default"/>
                 <do name="listProfessional" label="Professional列表" access="" result="/professional/professionalList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="1" operation="eq"/>
