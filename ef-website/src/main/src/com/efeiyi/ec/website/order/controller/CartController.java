@@ -81,20 +81,6 @@ public class CartController {
         return ab;
     }
 
-/*
-        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
-        xQuery.put("cart_id",cart.getId());
-
-        List<Object> list1 = baseManager.listObject(xQuery1);
-
-        list1.add(cartProduct);
-
-        cart.setCartProductList((List)list1);
-        baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        return true;*/
-
-
-
     @RequestMapping({"/cart/removeProduct.do"})
     @ResponseBody
     public boolean removeProduct(HttpServletRequest request) throws Exception {
