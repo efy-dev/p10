@@ -96,6 +96,14 @@
         <entity name="consumer" label="消费者"
                          basic="simple" others=""
                          model="com.efeiyi.ec.organization.model.Consumer">
+            <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
         <does>
             <do name="plistConsumer" access="" label="消费者列表"
                 result="/consumer/consumerPList">
