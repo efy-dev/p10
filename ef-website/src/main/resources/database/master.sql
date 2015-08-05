@@ -33,4 +33,10 @@ ADD COLUMN `address_district_id`  char(16) NULL AFTER `email`;
 
 ALTER TABLE `organization_consumer_address`
 ADD COLUMN `consumer_id`  char(16) NULL AFTER `address_district_id`;
+2015-8-5 efc
+ALTER TABLE `organization_consumer_address`
+ADD COLUMN `status`  varchar(2) NULL AFTER `consumer_id`;
+
+ALTER TABLE `purchase_order_payment`
+ADD COLUMN `transaction_number`  varchar(16) NULL AFTER `transaction_number`;
 

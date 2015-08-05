@@ -5,6 +5,7 @@ package com.efeiyi.ec.website.organization.controller;
  */
 
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.service.BranchManager;
@@ -84,7 +85,7 @@ public class SigninController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/saveEnrollUser.do")
-    public ModelAndView saveEnrollUser(HttpServletRequest request, BigUser bigUser, ModelMap modelMap) throws Exception {
+    public ModelAndView saveEnrollUser(HttpServletRequest request, Consumer bigUser, ModelMap modelMap) throws Exception {
 //        bigUser.setRole(roleManager.getRole("consumer"));
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
         /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
