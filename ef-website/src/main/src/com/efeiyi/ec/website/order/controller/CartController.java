@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.ming800.core.base.service.BaseManager;
@@ -29,7 +30,7 @@ public class CartController {
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         model.addAttribute("cart", list.get(0));
-        return "/purchaseOrder/purchaseOrderList";
+        return "/purchaseOrder/cartView";
     }
 
 
@@ -49,7 +50,7 @@ public class CartController {
         if (list1.size()>0) {
             for (Object cartProductTemp : list1) {
                 CartProduct cartProduct = (CartProduct)cartProductTemp;
-                if (productId.equals(cartProduct.getProduct().getId())) {
+                if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
                     } else {
@@ -64,10 +65,10 @@ public class CartController {
             }
         }
         if (!ne) {
-            Product product = new Product();
+            ProductModel product = new ProductModel();
             product.setId(productId);
             CartProduct cartProduct = new CartProduct();
-            cartProduct.setProduct(product);
+            cartProduct.setProductModel(product);
             cartProduct.setCart(cart);
             cartProduct.setStatus("1");
             if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {

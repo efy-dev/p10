@@ -23,8 +23,8 @@ import java.util.Date;
 @Service
 public class PaymentManagerImpl implements PaymentManager {
 
-//    @Autowired
-//    private BaseManager baseManager;
+    @Autowired
+    private BaseManager baseManager;
 
     @Override
     public String alipay(PurchaseOrder purchaseOrder, Float paymentAmount) {
@@ -54,26 +54,26 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public void alipayCallback(String purchaseOrderPaymentId, String transactionNumber) {
-//        //更新支付记录的交易号
-//        PurchaseOrderPayment purchaseOrderPayment = (PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentId);
-//        purchaseOrderPayment.setTransactionNumber(transactionNumber);
-//        //@TODO 修改订单状态
-//        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        //更新支付记录的交易号
+        PurchaseOrderPayment purchaseOrderPayment = (PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentId);
+        purchaseOrderPayment.setTransactionNumber(transactionNumber);
+        //@TODO 修改订单状态
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
     }
 
 
     @Override
     public String wxpay(PurchaseOrder purchaseOrder, Float paymentAmount,String openid) {
 
-//        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
-//        purchaseOrderPayment.setStatus("1");
-//        purchaseOrderPayment.setCreateDateTime(new Date());
-//        purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
-//        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
-//        purchaseOrderPayment.setPayWay("1");
-//        User user = new User();
-//        user.setId(AuthorizationUtil.getMyUser().getId());
-//        purchaseOrderPayment.setUser(user);
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("1");
+        User user = new User();
+        user.setId(AuthorizationUtil.getMyUser().getId());
+        purchaseOrderPayment.setUser(user);
 
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
 

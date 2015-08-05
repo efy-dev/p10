@@ -1,6 +1,7 @@
 package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 public class PurchaseOrderProduct {
     private String id;
     private PurchaseOrder purchaseOrder;
-    private Product product;
+    private ProductModel productModel;
     private Integer purchaseAmount;
     private BigDecimal purchasePrice;
 
@@ -41,13 +42,14 @@ public class PurchaseOrderProduct {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
+    public ProductModel getProductModel() {
+        return productModel;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
+
 
     @Column(name = "purchase_amount")
     public Integer getPurchaseAmount() {

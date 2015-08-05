@@ -1,6 +1,7 @@
 package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import javax.persistence.criteria.Fetch;
 public class CartProduct {
     private String id;
     private Cart cart;
-    private Product product;
+    private ProductModel productModel;
     private Integer amount;
     private String status;
 
@@ -40,15 +41,17 @@ public class CartProduct {
         this.cart = cart;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
-    public Product getProduct() {
-        return product;
+    public ProductModel getProductModel() {
+        return productModel;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
+
+
 
     @Column(name="amount")
     public Integer getAmount() {

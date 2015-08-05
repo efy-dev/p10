@@ -3,11 +3,16 @@ package com.efeiyi.ec.website.order.controller;
 import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -77,60 +83,60 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(@PathVariable String orderId,Model model){
+    public String viewPurchaseOrder(@PathVariable String orderId, Model model) {
 
-        Object order = baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        model.addAttribute("order",order);
+        Object order = baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", order);
 
         return "/purchaseOrder/orderView";
 
     }
 
     @RequestMapping({"/pay/test"})
-    public String payTest(Model model ,HttpServletRequest request){
+    public String payTest(Model model, HttpServletRequest request) {
         String openid = request.getParameter("openid");
-        paymentManager.wxpay(null,null,openid);
+        paymentManager.wxpay(null, null, openid);
         return "/order/testPayment";
     }
 
     @RequestMapping({"/pay/weixin"})
-    public String wxPay(HttpServletRequest request) throws Exception{
+    public String wxPay(HttpServletRequest request) throws Exception {
         String orderId = request.getParameter("orderId");
         String redirect_uri = "http://";
-        redirect_uri = redirect_uri+"?orderId="+orderId;
+        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + APPID+
+                "appid=" + APPID +
                 "&redirect_uri=" +
-                URLEncoder.encode(redirect_uri, "UTF-8")+
+                URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-        return "redirect:"+url;
+        return "redirect:" + url;
     }
 
     @RequestMapping({"/pay/wxParam.do"})
-    public String getWxOpenId(HttpServletRequest request ,Model model) throws Exception{
+    public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
         String orderId = request.getParameter("orderId");
         //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
-        System.out.println("1、网页授权code值："+code);
-        String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APPID+"&secret="+APPSECRET+"&code="+code+"&grant_type=authorization_code";
-        String result = getHttpResponse(urlForOpenId,null);
-        System.out.println("2、获取openid时的响应结果为："+result);
+        System.out.println("1、网页授权code值：" + code);
+        String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+        String result = getHttpResponse(urlForOpenId, null);
+        System.out.println("2、获取openid时的响应结果为：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
-        if(jsonObject.containsKey("errcode")){
-            throw new RuntimeException("获取openId异常："+result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("获取openId异常：" + result);
         }
         String openid = jsonObject.getString("openid");
-        paymentManager.wxpay(null,null,openid);
-        model.addAttribute("jsonObject",paymentManager.wxpay(null,null,openid));
+        paymentManager.wxpay(null, null, openid);
+        model.addAttribute("jsonObject", paymentManager.wxpay(null, null, openid));
         return "/order/testPayment";
     }
 
-    public static String getHttpResponse(String urlStr,String requestStr) throws Exception{
+    public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
         URL url = new URL(urlStr);
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         //PrintWriter writer =null;
-        if(requestStr!=null && !requestStr.equals("")){
+        if (requestStr != null && !requestStr.equals("")) {
             connection.setDoOutput(true);
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(requestStr.getBytes("UTF-8"));
@@ -141,11 +147,54 @@ public class PurchaseOrderController extends BaseController {
         }
         Scanner scanner = new Scanner(connection.getInputStream());
         StringBuilder responseStr = new StringBuilder();
-        while (scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             responseStr.append(scanner.nextLine());
         }
 
         return responseStr.toString();
+    }
+
+    /**
+     * 生成订单
+     *
+     * @return
+     */
+    @RequestMapping({"/saveOrUpdateOrder.do"})
+    public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
+        BigDecimal total_fee = new BigDecimal(0);
+        String cartId = request.getParameter("cartId");
+        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
+        Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
+        xSaveOrUpdate.getParamMap().put("consumerAddress_id", consumerAddressId);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+
+        List<CartProduct> cartProductList = cart.getCartProductList();
+        for (CartProduct cartProductTemp : cartProductList) {
+            total_fee.add(new BigDecimal(cartProductTemp.getProductModel().getPrice().intValue() * cartProductTemp.getAmount()));
+            PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+            purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
+            purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
+            purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
+            purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+            baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        }
+
+        purchaseOrder.setTotal(total_fee);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
+    }
+
+    @RequestMapping({"/choosePayment/{orderId}"})
+    public String choosePayment(@PathVariable String orderId, HttpServletRequest request, Model model) {
+
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
+
+        return "/purchaseOrder/choosePayment";
     }
 
 
