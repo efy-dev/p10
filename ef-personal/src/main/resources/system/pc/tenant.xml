@@ -96,11 +96,11 @@
             </do>
         </does>
         </entity>
-        <entity name="wordValue" label="标签"  model="com.ming800.core.p.model.WordValue">
+        <entity name="wordValue" label="标签"  model="com.ming800.core.p.model.Tag">
             <does>
                 <do name="listWordValue" access="" label="标签">
                     <query name="default" label="默认" type="auto">
-                        <condition name="group" defaultValue="1" operation="eq"/>
+                        <condition name="groupName" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
