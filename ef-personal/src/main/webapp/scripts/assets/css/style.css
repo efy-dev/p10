@@ -12,7 +12,7 @@ a:hover{color:#0b3775;}
 .Font-type-size-18{font-size:18px;color:#000;}
 /*首页-内容样式*/
 /*头部样式*/
-#header{margin:0 auto 55px; width:960px;height:35px;padding:17px 0 0 15px;}
+#header{margin:0 auto 30px; width:960px;height:35px;padding:17px 0 0 15px;}
 #header h1{width:16px;height:15px;margin:0;float:left;}
 .logov{width:16px;height:15px;}
 .printing{width:230px;float:left;height:15px;padding-left:6px;}
@@ -32,7 +32,7 @@ a:hover{color:#0b3775;}
 .nav-centent li{float:left;padding-left:51px;}
 .nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;outline:none;}
 .nav-centent li a:hover{color:#ff2120;outline:none;}
-#banner1{position:relative;width:100%;margin:0 auto;min-width:1000px;}
+#banner1{position:relative;width:100%;margin:0 auto;min-width:1000px;height:320px;}
 /*banner*/
 #banner{width:100%;height:351px;margin-bottom:37px; position:relative;}
 /*tab*/
