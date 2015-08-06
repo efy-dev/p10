@@ -1,4 +1,5 @@
 package com.ming800.core.p.service.impl;
+import antlr.StringUtils;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.dao.RecommendedDao;
 import com.ming800.core.p.model.CommonRecommended;
@@ -61,4 +62,12 @@ public class ObjectRecommendedManagerImpl implements ObjectRecommendedManager {
       recommendedDao.deleteObjectRecommend(objectRecommended);
    }
 
+
+
+    @Override
+    public void deleteObjectRecommendByRecommendId(String recommendId) {
+            if(!"".equals(recommendId) && recommendId != null){
+                recommendedDao.deleteObjectRecommendByRecommendId(recommendId);
+            }
+    }
 }
