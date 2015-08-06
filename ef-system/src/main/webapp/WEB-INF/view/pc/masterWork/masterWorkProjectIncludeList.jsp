@@ -50,7 +50,7 @@
       url: '<c:url value="/basic/xmj.do?qm=removeMasterProject"/>',
       cache: false,
       dataType: "json",
-      data:{id:divId},
+      data:{id:divId,projectId:divId},
       success: function (data) {
         $("#"+divId).remove();
       }

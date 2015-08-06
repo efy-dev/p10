@@ -160,7 +160,7 @@
             url: '<c:url value="/basic/xmj.do?qm=removeMasterWork"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data:{id:divId,masterWorkId:divId},
             success: function (data) {
                 $("#"+divId).remove();
             }
