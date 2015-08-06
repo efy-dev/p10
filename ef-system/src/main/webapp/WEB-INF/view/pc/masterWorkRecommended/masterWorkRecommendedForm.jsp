@@ -16,8 +16,8 @@
 
 
 <div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人推荐作品</strong> /
-        <small>MasterWork Recommended</small>
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人作品</strong> /
+        <small>Master Work</small>
     </div>
 </div>
 
@@ -36,7 +36,7 @@
             <input type="hidden" name="master.id" value="${masterId}">
             <input type="hidden" name="project.id" value="${projectId}">
             <input type="hidden" name="resultPage"
-                    value="redirect:/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${projectId}&projectId=${projectId}&masterId=${masterId}"/>
+                    value="redirect:/basic/xm.do?qm=viewMaster&id=${masterId}"/>
 
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">名称</label>
@@ -59,13 +59,23 @@
                 </div>
                 <br>
             </div>
-
-
+          <c:if test="${not empty object.id}">
             <div class="am-form-group">
-                <label for="picurl" class="am-u-sm-3 am-form-label">图片</label>
+
+                <label for="img" class="am-u-sm-3 am-form-label">原图片</label>
 
                 <div class="am-u-sm-9">
-                    <input type="file" id="picurl" name="picurl" placeholder="附件">
+                    <img id="img" src="http://tenant.efeiyi.com/${object.pictureUrl}@!tenant-manage-banner" />
+                    <%--<small>选择你要保存的轮播图</small>--%>
+                </div>
+            </div>
+         </c:if>
+            <div class="am-form-group">
+
+                <label for="picurl" class="am-u-sm-3 am-form-label">新图片</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="picurl" name="picurl" placeholder="附件" value="${object.pictureUrl}">
                     <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
             </div>

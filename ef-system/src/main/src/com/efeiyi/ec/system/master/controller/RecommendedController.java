@@ -1,6 +1,8 @@
 package com.efeiyi.ec.system.master.controller;
 
 import com.efeiyi.ec.master.model.MasterRecommended;
+import com.efeiyi.ec.master.model.MasterWorkRecommended;
+import com.efeiyi.ec.system.master.service.MasterWorkRecommendedManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
@@ -30,7 +32,9 @@ public class RecommendedController {
     private BaseManager baseManager;
 
     @Autowired
-    private ObjectRecommendedManager objectRecommendedManager;
+    private ObjectRecommendedManager objectRecommendedManager;//一般推荐
+
+    private MasterWorkRecommendedManager masterWorkRecommendedManager;//作品推荐
 
 
 
@@ -100,6 +104,38 @@ public class RecommendedController {
         return  objectRecommended.getId();
     }
 
+    /***
+     * 作品推荐相关
+     */
+
+    @RequestMapping("/saveMasterWorkRecommended.do")
+    @ResponseBody
+    public String saveMasterWorkRecommended(MasterWorkRecommended masterWorkRecommended){
+
+        try{
+            masterWorkRecommendedManager.saveMasterWorkRecommend(masterWorkRecommended);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return  masterWorkRecommended.getId();
+    }
+
+
+    @RequestMapping("/deleteMasterWorkRecommended.do")
+    @ResponseBody
+    public String deleteMasterWorkRecommended(MasterWorkRecommended masterWorkRecommended){
+
+        try {
+
+            masterWorkRecommendedManager.deleteMasterWorkRecommend(masterWorkRecommended);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  masterWorkRecommended.getId();
+    }
 
 
 }

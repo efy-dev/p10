@@ -17,9 +17,6 @@
     <c:forEach items="${addressList}" var="address" >
       <tr>
         <td><input type="text" name="productName" value="${address.phone}"/></td>
-        <td><input type="text" name="productName" value="${address.phone}"/></td>
-        <td><input type="text" name="productName" value="${address.phone}"/></td>
-        <td><input type="text" name="productName" value="${address.phone}"/></td>
       </tr>
     </c:forEach>
   </table>

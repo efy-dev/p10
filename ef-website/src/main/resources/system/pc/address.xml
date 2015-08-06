@@ -10,6 +10,13 @@
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                 </do>
+                <do name="saveOrUpdateAddress"  access="" label="保存配送地址">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
             </does>
         </entity>
     </entities>

@@ -41,7 +41,7 @@
                     href="<c:url value="/basic/xm.do?qm=viewMasterNews&id=${masterNews.id}"/>">${masterNews.title}</a>
             </td>
             <td class="am-hide-sm-only">${!empty masterNews.creator ?masterNews.creator.name:""}</td>
-            <td class="am-hide-sm-only"><fmt:formatDate value="${masterNews.createDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+            <td class="am-hide-sm-only"><fmt:formatDate value="${masterNews.createDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
         </tr>
     </c:forEach>
     </tbody>
