@@ -95,4 +95,11 @@ public class RecommendedDaoHibernate implements RecommendedDao {
         query.executeUpdate();
     }
 
+    @Override
+    public void deleteObjectRecommendByRecommendId(String recommendId){
+       String hql = "delete from ObjectRecommended where recommendId = :recommendId";
+        Query query = this.getSession().createQuery(hql)
+                .setString("recommendId",recommendId);
+        query.executeUpdate();
+    }
 }

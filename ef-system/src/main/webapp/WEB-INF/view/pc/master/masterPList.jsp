@@ -184,7 +184,7 @@
             url: '<c:url value="/basic/xmj.do?qm=removeMaster"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data:{id:divId,recommendId:divId},
             success: function (data) {
                 $("#"+divId).remove();
             }
