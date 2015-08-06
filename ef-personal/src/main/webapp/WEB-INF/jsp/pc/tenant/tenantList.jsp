@@ -8,7 +8,7 @@
 <body>
 <div id="page-header">
     <div class="page-header-left">
-        <h6 class="page-header-logo"><a href="#"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
+        <h6 class="page-header-logo"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
         <p>中国非遗电商平台-传承人官网</p>
     </div>
     <div class="page-header-right"></div>
