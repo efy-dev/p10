@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="wiki" label="系统-百科内容" version="" package="com.efeiyi.ec.wiki" path="">
 
     <entities>

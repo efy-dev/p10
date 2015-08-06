@@ -40,7 +40,7 @@
                 <field name="serial" label="编号" inputType="text"/>
             </fields>
             <does>
-                <!-- 学校管理 -->
+
                 <do name="plistBranch"
                     label="学校信息"
                     result="/organization/master/masterList">
