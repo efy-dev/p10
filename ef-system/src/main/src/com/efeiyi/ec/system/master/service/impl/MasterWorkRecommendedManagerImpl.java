@@ -30,22 +30,30 @@ public class MasterWorkRecommendedManagerImpl implements MasterWorkRecommendedMa
 
 
     @Override
-    public void deleteMasterWorkRecommendByMasterWork(String masterWorkId) {
+    public String deleteMasterWorkRecommendByMasterWork(String masterWorkId) {
         masterWorkRecommendedDao.deleteMasterWorkRecommendByMasterWork(masterWorkId);
+        return  masterWorkId;
     }
 
     @Override
-    public void deleteMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended) {
+    public String deleteMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended) {
         masterWorkRecommendedDao.deleteMasterWorkRecommend(masterWorkRecommended);
+        return  masterWorkRecommended.getId();
     }
 
     @Override
-    public void deleteMasterWorkRecommendByProject(String projectId) {
-         masterWorkRecommendedDao.deleteMasterWorkRecommendByProject(projectId);
+    public List deleteMasterWorkRecommendByProject(String projectId) {
+
+        return  masterWorkRecommendedDao.deleteMasterWorkRecommendByProject(projectId);
     }
 
     @Override
-    public void deleteMasterWorkRecommendByMaster(String masterId) {
-        masterWorkRecommendedDao.deleteMasterWorkRecommendByMaster(masterId);
+    public List deleteMasterWorkRecommendByMaster(String masterId) {
+       return masterWorkRecommendedDao.deleteMasterWorkRecommendByMaster(masterId);
+    }
+
+    @Override
+    public void saveMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended) {
+        masterWorkRecommendedDao.saveMasterWorkRecommend(masterWorkRecommended);
     }
 }

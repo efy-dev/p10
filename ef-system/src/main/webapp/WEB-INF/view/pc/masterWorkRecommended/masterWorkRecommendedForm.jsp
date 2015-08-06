@@ -36,7 +36,7 @@
             <input type="hidden" name="master.id" value="${masterId}">
             <input type="hidden" name="project.id" value="${projectId}">
             <input type="hidden" name="resultPage"
-                    value="redirect:/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${projectId};master.id:${masterId}&projectId=${projectId}&masterId=${masterId}"/>
+                    value="redirect:/basic/xm.do?qm=viewMaster&id=${masterId}"/>
 
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">名称</label>

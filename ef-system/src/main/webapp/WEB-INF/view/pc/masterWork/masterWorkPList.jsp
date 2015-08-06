@@ -86,7 +86,7 @@
                                         </a>
                                             <c:if test="${empty masterWork.masterWorkRecommendedList}">
                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                  href="<c:url value="/basic/xm.do?qm=saveOrUpdateMasterWorkRecommended&project.id=${projectId}&status=1&master.id=${masterId}&masterWork.id=${masterWork.id}&resultPage=redirect:/basic/xm.do?qm=plistMasterWork_byProject%26conditions=project.id:${projectId}%26projectId=${projectId}%26masterId=${masterId}"/>">
+                                                  href="<c:url value="/basic/xm.do?qm=saveOrUpdateMasterWorkRecommended&project.id=${projectId}&status=1&master.id=${masterId}&masterWork.id=${masterWork.id}&resultPage=redirect:/basic/xm.do?qm=plistMasterWork_byProject%26conditions=project.id:${projectId};master.id=${masterId}%26projectId=${projectId}%26masterId=${masterId}"/>">
                                                    <span class="am-icon-heart"> </span>推荐
                                                </a>
                                             </c:if>
@@ -139,6 +139,18 @@
     </div>
 </div>
 <script type="text/javascript">
+
+    function deleteMasterRecommended(id){
+        $.ajax({
+            type:"get",
+            url:'<c:url value="/Recommended/deleteMasterWorkRecommended.do" />',
+            data:{id:id},
+            success:function(data){
+
+              location.reload();
+            }
+        });
+    }
 
     function removeMasterWorkRecommended(divId){
 

@@ -68,14 +68,15 @@ public class MasterWorkRecommendedDaoHibernate implements MasterWorkRecommendedD
     }
 */
     /***
-     * 保存推荐对象
-     * @param objectRecommended
+     * 保存作品推荐
+     * @param masterWorkRecommended
      */
-/*    public void saveObjectRecommend(ObjectRecommended objectRecommended){
+    @Override
+    public void saveMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended){
 
-        this.getSession().saveOrUpdate(objectRecommended);
+        this.getSession().saveOrUpdate(masterWorkRecommended);
     }
-*/
+
     /**
      * 更新排序字段
      * @param objectRecommended
@@ -93,36 +94,41 @@ public class MasterWorkRecommendedDaoHibernate implements MasterWorkRecommendedD
 */
 
 
+
     @Override
-    public void  deleteMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended){
+    public String   deleteMasterWorkRecommend(MasterWorkRecommended masterWorkRecommended){
        String hql = "delete from MasterWorkRecommended where  id = :id";
         Query query = this.getSession().createQuery(hql)
                 .setString("id", masterWorkRecommended.getId());
         query.executeUpdate();
+        return  masterWorkRecommended.getId();
     }
 
     @Override
-    public void deleteMasterWorkRecommendByMasterWork(String masterWorkId){
+    public String deleteMasterWorkRecommendByMasterWork(String masterWorkId){
        String hql = "delete from MasterWorkRecommended where masterWork.id = :masterWorkId";
         Query query = this.getSession().createQuery(hql)
                 .setString("masterWorkId",masterWorkId);
         query.executeUpdate();
+        return  masterWorkId;
     }
 
     @Override
-    public void deleteMasterWorkRecommendByProject(String projectId){
+    public List deleteMasterWorkRecommendByProject(String projectId){
       List list =  xdoDao.getObjectList("from MasterWorkRecommended where project.id = ?", new Object[]{projectId});
         for( Object o: list){
             deleteMasterWorkRecommend((MasterWorkRecommended)o);
         }
+        return  list;
     }
 
     @Override
-    public void deleteMasterWorkRecommendByMaster(String masterId){
+    public List deleteMasterWorkRecommendByMaster(String masterId){
         List list =  xdoDao.getObjectList("from MasterWorkRecommended where master.id = ?", new Object[]{masterId});
         for( Object o: list){
             deleteMasterWorkRecommend((MasterWorkRecommended)o);
         }
+        return  list;
     }
 
 }

@@ -335,6 +335,7 @@
 
                 <do name="viewMasterWorkImg" label="查看传承人产品页" access="" result="/masterWork/imgView"/>
                 <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
+                <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access="" result="/masterWorkRecommended/masterWorkRecommendedForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler" />
                 <do name="viewMasterWork" label="查看传承人产品页" access="" result="/masterWork/masterWorkView"  />
                 <do name="saveOrUpdateMasterWork" label="保存传承人产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWork_byProject" execute="com.efeiyi.ec.system.master.controller.MasterWorkFormHandler">
                     <page>
@@ -371,7 +372,7 @@
 
                 </do>
 
-                <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access="" result="/masterWorkRecommended/masterWorkRecommendedForm" />
+
 
                 <do name="saveOrUpdateMasterWorkRecommended" label="保存传承人推荐产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWorkRecommended" >
                 </do>
