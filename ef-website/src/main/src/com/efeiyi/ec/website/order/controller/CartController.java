@@ -30,7 +30,7 @@ public class CartController {
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         model.addAttribute("cart", list.get(0));
-        return "/purchaseOrder/cartView";
+        return "/purchaseOrder/purchaseOrderList";
     }
 
 

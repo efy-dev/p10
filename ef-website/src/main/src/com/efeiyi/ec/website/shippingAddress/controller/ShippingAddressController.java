@@ -1,12 +1,15 @@
 package com.efeiyi.ec.website.shippingAddress.controller;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,10 +20,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/address")
 public class ShippingAddressController {
+
     @Autowired
     private BaseManager baseManager;
     /**
-     * ²éÑ¯¸ÃÓÃ»§ËùÓÐµÄÊÕ»õµØÖ·
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·
      */
     @RequestMapping({"/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
@@ -32,26 +36,30 @@ public class ShippingAddressController {
     }
 
     /**
-     * Ôö¼Ó£¬±à¼­ÊÕ»õµØÖ·
+     * ï¿½ï¿½ï¿½Ó£ï¿½ï¿½à¼­ï¿½Õ»ï¿½ï¿½ï¿½Ö·
      * @param request
      * @return
      */
     @RequestMapping({"/addAddress"})
-    public boolean addAddress(HttpServletRequest request){
-        String addressId=request.getParameter("addressId");
-        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        baseManager.saveOrUpdate(ConsumerAddress.class.getName(),consumerAddress);
+    @ResponseBody
+    public boolean addAddress(HttpServletRequest request)throws Exception{
+
+        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateAddress",request);
+        xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+
         return true;
 
     }
 
     /**
-     * É¾³ýÊÕ»õµØÖ·
+     * É¾ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·
      * @param request
      * @return
      */
     @RequestMapping({"/removeAddress"})
-    public boolean deleteAddress(HttpServletRequest request){
+    @ResponseBody
+    public boolean removeAddress(HttpServletRequest request)throws Exception{
         String addressId=request.getParameter("addressId");
         baseManager.remove(ConsumerAddress.class.getName(),addressId);
         return true;
