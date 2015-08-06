@@ -27,7 +27,7 @@
       <c:forEach items="${cart.cartProductList}" var="list">
         <tr>
           <td>
-        ${list.id}
+        ${list.productModel.product.name}
           </td>
         </tr>
       </c:forEach>
