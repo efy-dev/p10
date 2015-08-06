@@ -68,7 +68,7 @@
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <span style="margin-left: 10px;"><a
-                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.product.id}'/>">${purchaseProduct.product.name}</a></span>
+                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.productModel.product.id}'/>">${purchaseProduct.productModel.product.name}</a></span>
                             </c:forEach>
 
                         </td>
@@ -81,7 +81,7 @@
                             </c:forEach>
                         </td>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
-                        <td class="am-hide-sm-only">${purchaseOrder.user.name}</td>
+                        <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
                                                                     pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
