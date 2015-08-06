@@ -13,7 +13,7 @@ a:hover{color:#0b3775;}
 /*首页-内容样式*/
 /*头部样式*/
 #header{margin:0 auto 30px; width:960px;height:35px;padding:17px 0 0 15px;}
-#header h1{width:16px;height:15px;margin:0;float:left;}
+#header h1{width:16px;height:15px;margin:0;float:left;font-size: 12px;}
 .logov{width:16px;height:15px;}
 .printing{width:230px;float:left;height:15px;padding-left:6px;font-size:12px;}
 .printing span{padding-left:9px;}
