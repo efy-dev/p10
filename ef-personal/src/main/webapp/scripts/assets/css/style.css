@@ -15,7 +15,7 @@ a:hover{color:#0b3775;}
 #header{margin:0 auto 30px; width:960px;height:35px;padding:17px 0 0 15px;}
 #header h1{width:16px;height:15px;margin:0;float:left;}
 .logov{width:16px;height:15px;}
-.printing{width:230px;float:left;height:15px;padding-left:6px;}
+.printing{width:230px;float:left;height:15px;padding-left:6px;font-size:12px;}
 .printing span{padding-left:9px;}
 .printing span a:link,.printing span a:visited{color:#CD6703;outline:none;}
 .printing span a:hover{color:#0b3775;outline:none;}
@@ -39,7 +39,7 @@ a:hover{color:#0b3775;}
 #tab{width:215px;height:262px;background:#fff;position:absolute;left:32px;z-index:9999}
 #tab h1{font-size:18px; font-weight:normal;padding:12px 0 0 17px;margin-bottom:9px;}
 #tab p{font-size:12px;color:#333;display:block;padding-left:17px;height:25px;}
-.tab-dl{width:228px;height:208px;padding-left:17px;}
+.tab-dl{width:228px;height:193px;padding-left:17px;}
 .tab-dl dt{width:184px;height:126px;}
 .tab-dl dd{width:178px;height:119px;font-size:12px;color:#999;}
 #tab span{background:url(../images/logo3.gif) no-repeat 139px 7px;;width:201px;height:18px;padding-left:149px; display:block;font-size:12px;}
