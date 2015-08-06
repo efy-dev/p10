@@ -86,7 +86,7 @@ h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{margin:0;padding:0; list-style:none;}
 .am-u-sm-12 img{width:100%;}
 .am-img-tp-hi{height:198px; margin-bottom:18px;}
 /*咨询详情*/
-.work-text-h2{height:87px;width:100%;line-height:87px;padding-left:4%;padding-right:4%;}
+.work-text-h2{height:87px;width:100%;line-height:30px;padding-left:4%;padding-right:4%;}
 .message-text2{ overflow:hidden;width:100%;padding-left:4%;padding-right:4%;}
 .message-text2 h1{ font-size:14px; font-family:"宋体"; color:#000;height:53px;line-height:16px;padding-top:17px;}
 .message-text-p2{color:#6e6e6e; font-size:10px;line-height:22px;height:22px;}
