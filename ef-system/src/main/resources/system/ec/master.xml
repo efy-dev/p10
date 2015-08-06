@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
+
 <module name="master" label="系统-传承人" version="" package="com.efeiyi.ec.master" path="">
 
     <entities>
@@ -46,7 +46,7 @@
                         </fields>
                     </page>
                 </do>
-                <do name="removeMaster" label="删除大师" access="" result="json"/>
+                <do name="removeMaster" label="删除大师" access="" result="json" execute="com.efeiyi.ec.system.master.controller.DeleteMasterRecommendedHandler"/>
                 <do name="listMaster" label="传承人列表" access="" result="/master/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="0" peration="ne"/>

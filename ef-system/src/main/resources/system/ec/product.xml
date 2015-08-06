@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
 <module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
 
     <entities>

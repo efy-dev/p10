@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
 <module name="other" label="其他权限" version="" package="com.ming800.core" path="">
 
     <entities>

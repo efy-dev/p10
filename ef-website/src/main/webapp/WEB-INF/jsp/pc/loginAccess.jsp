@@ -20,6 +20,7 @@ ${user.username}
     <a href="<c:url value="/cart/view"/> ">购物车</a>
     <a href="<c:url value="/order/list"/>">订单详情</a>
     <a href="<c:url value="/address/list"/>">收货地址</a>
+    <a href="<c:url value="/order/list.do"/>">我的订单</a>
 </form>
 
 </body>
