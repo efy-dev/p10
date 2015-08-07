@@ -61,4 +61,47 @@ function saveRecommended(obj,groupName,td,saveUrl){
 }
 
 
-/**********************作品推荐有关****************/
+/**********************推荐列表有关****************/
+/**
+ * 跳转更新序号
+ * @param obj
+ */
+function toUpdateSort(obj,updateUrl){
+    var sort = $(obj).attr("sort");
+    var id = $(obj).attr("id");
+    $(obj).parent().html("<input id="+id+" onblur=\"updateSort(this,'"+updateUrl+"')\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
+}
+
+/**
+ * 更新序号
+ * @param obj
+ */
+function updateSort(obj,updateUrl){
+    var sort = $(obj).val();
+    var id = $(obj).attr("id");
+    $.ajax({
+        type: "get",
+        url: updateUrl,
+        cache: false,
+        dataType: "json",
+        data:{id:id,sort:sort},
+        success: function (data) {
+            $(obj).parent().html("<a onclick=\"toUpdateSort(this,'"+updateUrl+"')\" sort="+sort+" id="+id+">"+sort+"</a>");
+        }
+    });
+}
+
+/***
+ * 删除推荐对象  可直接调用
+ */
+function deleteObjectRecommended(id,delteUrl){
+    $.ajax({
+        type:"get",
+        url:delteUrl,
+        data:{id:id},
+        success:function(data){
+
+            $("table tr[id='"+id+"']").remove();
+        }
+    });
+}
