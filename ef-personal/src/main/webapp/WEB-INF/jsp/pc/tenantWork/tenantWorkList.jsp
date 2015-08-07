@@ -42,7 +42,7 @@
            </c:if>
           <c:if test="${ vs.index%3==2}">
               <a href="<c:url value="/work/${masterWork.id}"/>" target="_blank" class="works-img">
-                  <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img-1">
+                  <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work" class="works-img">
                   <p>${masterWork.name}</p>
               </a>
         </div>

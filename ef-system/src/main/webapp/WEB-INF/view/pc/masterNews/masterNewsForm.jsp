@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人资讯</strong>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人资讯</strong>/
             <small>Master News</small>
         </div>
     </div>

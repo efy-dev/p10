@@ -28,7 +28,7 @@
                         class="am-icon-trash-o"></span> 查看作品
                 </a>
                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                   onclick="removeMasterProject('${masterProject.id}')"><span
+                   onclick="removeMasterProject('${masterProject.id}','${masterProject.project.id}')"><span
                         class="am-icon-trash-o"></span> 删除
                 </a>
               </div>
@@ -44,15 +44,18 @@
 </div>
 <script>
 
-  function removeMasterProject(divId){
+  function removeMasterProject(divId,projectId){
     $.ajax({
       type: "get",
       url: '<c:url value="/basic/xmj.do?qm=removeMasterProject"/>',
       cache: false,
       dataType: "json",
-      data:{id:divId},
+      data:{id:divId,projectId:projectId},
       success: function (data) {
         $("#"+divId).remove();
+        $("tr[name='"+projectId+"']").each(function(){
+             $(this).remove();
+        });
       }
     });
   }
