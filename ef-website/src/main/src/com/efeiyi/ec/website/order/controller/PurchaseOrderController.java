@@ -1,6 +1,11 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import cn.beecloud.BCPay;
+import cn.beecloud.BCPayResult;
+import cn.beecloud.BeeCloud;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PaymentManager;
@@ -36,31 +41,31 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
-    //Î¢ĞÅ¹«ÖÚºÅÉí·İµÄÎ¨Ò»±êÊ¶¡£ÉóºËÍ¨¹ıºó£¬ÔÚÎ¢ĞÅ·¢ËÍµÄÓÊ¼şÖĞ²é¿´
+    //å¾®ä¿¡å…¬ä¼—å·èº«ä»½çš„å”¯ä¸€æ ‡è¯†ã€‚å®¡æ ¸é€šè¿‡åï¼Œåœ¨å¾®ä¿¡å‘é€çš„é‚®ä»¶ä¸­æŸ¥çœ‹
     public static final String APPID = "wx7f6aa253b75466dd";
-    //ÊÜÀíÉÌID£¬Éí·İ±êÊ¶
+    //å—ç†å•†IDï¼Œèº«ä»½æ ‡è¯†
     public static final String MCHID = "1231228502";
-    //ÉÌ»§Ö§¸¶ÃÜÔ¿Key¡£ÉóºËÍ¨¹ıºó£¬ÔÚÎ¢ĞÅ·¢ËÍµÄÓÊ¼şÖĞ²é¿´
+    //å•†æˆ·æ”¯ä»˜å¯†é’¥Keyã€‚å®¡æ ¸é€šè¿‡åï¼Œåœ¨å¾®ä¿¡å‘é€çš„é‚®ä»¶ä¸­æŸ¥çœ‹
     public static final String KEY = "nvkijrk4e7s2ndi3vf4amvqlysu7f1pa";
-    //JSAPI½Ó¿ÚÖĞ»ñÈ¡openid£¬ÉóºËºóÔÚ¹«ÖÚÆ½Ì¨¿ªÆô¿ª·¢Ä£Ê½ºó¿É²é¿´
+    //JSAPIæ¥å£ä¸­è·å–openidï¼Œå®¡æ ¸ååœ¨å…¬ä¼—å¹³å°å¼€å¯å¼€å‘æ¨¡å¼åå¯æŸ¥çœ‹
     public static final String APPSECRET = "04928de13ab23dca159d235ba6dc19ea";
 
-    //´ÓÎ¢ĞÅ·şÎñÆ÷»ñÈ¡code£¬²¢Ìø×ªµ½´Ëuri
+    //ä»å¾®ä¿¡æœåŠ¡å™¨è·å–codeï¼Œå¹¶è·³è½¬åˆ°æ­¤uri
     public static final String REDIRECT_URI = "http://beijing.yuepaila.com/pc/pay/wxPreparePayParams.do";
     //TODO http://weixin.yuepaila.com:8001/pc/pay/wxPreparePayParams.do
 
-    //=======¡¾Ö¤ÊéÂ·¾¶ÉèÖÃ¡¿=====================================
-    //Ö¤ÊéÂ·¾¶,×¢ÒâÓ¦¸ÃÌîĞ´¾ø¶ÔÂ·¾¶
+    //=======ã€è¯ä¹¦è·¯å¾„è®¾ç½®ã€‘=====================================
+    //è¯ä¹¦è·¯å¾„,æ³¨æ„åº”è¯¥å¡«å†™ç»å¯¹è·¯å¾„
     /*public static final String SSLCERT_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_cert.pem";
     public static final String SSLKEY_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_key.pem";*/
 
-    //=======¡¾Òì²½Í¨ÖªurlÉèÖÃ¡¿===================================
-    //Òì²½Í¨Öªurl£¬ÉÌ»§¸ù¾İÊµ¼Ê¿ª·¢¹ı³ÌÉè¶¨
+    //=======ã€å¼‚æ­¥é€šçŸ¥urlè®¾ç½®ã€‘===================================
+    //å¼‚æ­¥é€šçŸ¥urlï¼Œå•†æˆ·æ ¹æ®å®é™…å¼€å‘è¿‡ç¨‹è®¾å®š
     public static final String NOTIFY_URL = "http://beijing.yuepaila.com/pc/pay/wxRecordPayment.do";
     //TODO http://weixin.yuepaila.com:8001/pc/pay/wxRecordPayment.do
 
-    //=======¡¾curl³¬Ê±ÉèÖÃ¡¿===================================
-    //±¾Àı³ÌÍ¨¹ıcurlÊ¹ÓÃHTTP POST·½·¨£¬´Ë´¦¿ÉĞŞ¸ÄÆä³¬Ê±Ê±¼ä£¬Ä¬ÈÏÎª30Ãë
+    //=======ã€curlè¶…æ—¶è®¾ç½®ã€‘===================================
+    //æœ¬ä¾‹ç¨‹é€šè¿‡curlä½¿ç”¨HTTP POSTæ–¹æ³•ï¼Œæ­¤å¤„å¯ä¿®æ”¹å…¶è¶…æ—¶æ—¶é—´ï¼Œé»˜è®¤ä¸º30ç§’
     public static final int CURL_TIMEOUT = 30;
 
 
@@ -78,10 +83,10 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(@PathVariable String orderId,Model model){
+    public String viewPurchaseOrder(@PathVariable String orderId, Model model) {
 
-        Object order = baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        model.addAttribute("order",order);
+        Object order = baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", order);
 
         return "/purchaseOrder/orderView";
 
@@ -99,7 +104,7 @@ public class PurchaseOrderController extends BaseController {
         String orderId = request.getParameter("orderId");
         String redirect_uri = "http://";
         redirect_uri = redirect_uri + "?orderId=" + orderId;
-        //scope ²ÎÊıÊÓ¸÷×ÔĞèÇó¶ø¶¨£¬ÕâÀïÓÃscope=snsapi_base ²»µ¯³öÊÚÈ¨Ò³ÃæÖ±½ÓÊÚÈ¨Ä¿µÄÖ»»ñÈ¡Í³Ò»Ö§¸¶½Ó¿ÚµÄopenid
+        //scope å‚æ•°è§†å„è‡ªéœ€æ±‚è€Œå®šï¼Œè¿™é‡Œç”¨scope=snsapi_base ä¸å¼¹å‡ºæˆæƒé¡µé¢ç›´æ¥æˆæƒç›®çš„åªè·å–ç»Ÿä¸€æ”¯ä»˜æ¥å£çš„openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + APPID +
                 "&redirect_uri=" +
@@ -111,15 +116,15 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/pay/wxParam.do"})
     public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
         String orderId = request.getParameter("orderId");
-        //1¡¢ÍøÒ³ÊÚÈ¨ºó»ñÈ¡´«µİµÄcode£¬ÓÃÓÚ»ñÈ¡openId
+        //1ã€ç½‘é¡µæˆæƒåè·å–ä¼ é€’çš„codeï¼Œç”¨äºè·å–openId
         String code = request.getParameter("code");
-        System.out.println("1¡¢ÍøÒ³ÊÚÈ¨codeÖµ£º" + code);
+        System.out.println("1ã€ç½‘é¡µæˆæƒcodeå€¼ï¼š" + code);
         String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
         String result = getHttpResponse(urlForOpenId, null);
-        System.out.println("2¡¢»ñÈ¡openidÊ±µÄÏìÓ¦½á¹ûÎª£º" + result);
+        System.out.println("2ã€è·å–openidæ—¶çš„å“åº”ç»“æœä¸ºï¼š" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("»ñÈ¡openIdÒì³££º" + result);
+            throw new RuntimeException("è·å–openIdå¼‚å¸¸ï¼š" + result);
         }
         String openid = jsonObject.getString("openid");
         paymentManager.wxpay(null, null, openid);
@@ -150,7 +155,7 @@ public class PurchaseOrderController extends BaseController {
     }
 
     /**
-     * Éú³É¶©µ¥
+     * ç”Ÿæˆè®¢å•
      *
      * @return
      */
@@ -158,7 +163,7 @@ public class PurchaseOrderController extends BaseController {
     public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
         BigDecimal total_fee = new BigDecimal(0);
         String cartId = request.getParameter("cartId");
-        String consumerAddressId = request.getParameter("addressId"); //»ñÈ¡ÊÕ»õµØÖ·µÄid
+        String consumerAddressId = request.getParameter("addressId"); //è·å–æ”¶è´§åœ°å€çš„id
         Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
 
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);

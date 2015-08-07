@@ -2,19 +2,26 @@ package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Path;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -37,13 +44,46 @@ public class ProductController {
     }
 
 
-    @RequestMapping("/product/plist.do")
-    public String plistProduct(HttpServletRequest request, Model model) throws Exception{
-        XQuery xQuery = new XQuery("plistProduct_default",request);
+    @RequestMapping({"/{productId}"})
+    public String viewProduct(@PathVariable String productId, HttpServletRequest request ,Model model){
+        ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),productId);
+        model.addAttribute("productModel",productModel);
+        return "/product/productView";
+    }
+
+    @RequestMapping("/list/{category}")
+    public String plistProduct(@PathVariable String category ,HttpServletRequest request, Model model) throws Exception{
+
+        String conditions = request.getParameter("conditions");
+        List<String> conditionItem = Arrays.asList(conditions.split(";"));
+        HashMap<String,String> conditionMap = new HashMap<>();
+        for (String conditionTemp :conditionItem){
+            String[] tempList = conditionTemp.split(":");
+            conditionMap.put(tempList[0],tempList[1]);
+        }
+
+        XQuery xQuery = new XQuery("plistProductModel_default",request);
+        xQuery.put("product_category_id", category);
+
+        int k = 0;
+        String qStr = "";
+        for (String pid : conditionMap.keySet()){
+            qStr+="  (pv.projectProperty.id=:pid"+k+" and pv.projectPropertyValue.id=:pvid"+k+") or ";
+            xQuery.put("pid"+k,pid);
+            xQuery.put("pvid"+k,conditionMap.get(pid));
+            k++;
+        }
+
+        qStr = " and ("+qStr.substring(0,qStr.lastIndexOf("or"))+") ";
+
+        xQuery.setHeadHql(xQuery.getHeadHql() + " inner join s.productPropertyValueList pv ");
+        xQuery.setQueryHql(xQuery.getQueryHql() + qStr);
+        xQuery.updateHql();
         xQuery.addRequestParamToModel(model,request);
         List productList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("productList",productList);
-        return "/product/productpList";
+        request.setAttribute("conditions",conditions);
+        return "/product/productModelList";
     }
 
     @RequestMapping(value = "/getProduct.do")
