@@ -13,6 +13,7 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 <div class="admin-content">
@@ -31,6 +32,7 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
+                    <th class="table-title">排序</th>
                     <th class="table-title">产品名称</th>
                     <th class="table-title">产品价格</th>
                     <th class="table-title">产品分类</th>
@@ -44,7 +46,7 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="productRecommended">
-                    <tr>
+                    <tr id="${productRecommended.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -52,13 +54,22 @@
                                        href="<c:url value="/basic/xm.do?qm=removeProductRecommended&id=${productRecommended.id}"/>"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       onclick="deleteObjectRecommended('${productRecommended.id}','<c:url value="/Recommended/deleteObjectRecommended.do" />')" href="#"><span
+                                            class="am-icon-trash-o"></span> 取消推荐
+                                    </a>
                                 </div>
                             </div>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <a href="#" onclick="toUpdateSort(this,'<c:url value="/Recommended/updateSort.do"/>')" sort="${productRecommended.sort}" id="${productRecommended.id}">
+                                    ${productRecommended.sort}
+                            </a>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${productRecommended.product.id}'/>">${productRecommended.product.name}</a></td>
                         <td class="am-hide-sm-only">${productRecommended.product.price}</td>
                         <td class="am-hide-sm-only">${productRecommended.product.category.name}</td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${productRecommended.master.id}'/>">${productRecommended.master.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${productRecommended.product.tenant.id}'/>">${productRecommended.product.tenant.name}</a></td>
                         <td class="am-hide-sm-only"><img src="${productRecommended.product.picture_url}" alt="推荐产品图片"></td>
                     </tr>
                 </c:forEach>
