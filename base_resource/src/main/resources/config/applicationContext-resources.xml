@@ -13,7 +13,7 @@
     <bean id="efyServiceManagerPropertyConfigurer" class="com.ming800.core.util.BssPropertiesConfigure">
         <property name="locations">
             <list>
-                <value>classpath*:config/resources.properties</value>
+                <value>classpath*:resources.properties</value>
             </list>
         </property>
         <property name="key" value="i am key,let me encrypt you! 1234haha"/>
