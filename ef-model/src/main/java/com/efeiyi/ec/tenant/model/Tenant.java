@@ -3,6 +3,7 @@ package com.efeiyi.ec.tenant.model;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ming800.core.p.model.ObjectRecommended;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -44,6 +45,8 @@ public class Tenant implements Serializable {
     private List<TenantProject> tenantProjectList;
     private String projectName ;
     private String levelName;
+    private List<TenantRecommended> tenantRecommendedList;
+
 
 
     @Transient
@@ -223,5 +226,14 @@ public class Tenant implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant", cascade = CascadeType.ALL)
+    public List<TenantRecommended> getTenantRecommendedList() {
+        return tenantRecommendedList;
+    }
+
+    public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
+        this.tenantRecommendedList = tenantRecommendedList;
     }
 }
