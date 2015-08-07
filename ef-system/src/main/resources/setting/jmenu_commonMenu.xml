@@ -74,14 +74,13 @@
                 <match url="viewMasterNews"/>
                 <match url="saveOrUpdateMasterWork"/>
             </jnode>
-          <jnode url="/basic/xm.do?qm=plistMasterRecommended_default"  access="admin,manager" text_zh_CN="传承人推荐">
+         <jnode url="/basic/xm.do?qm=plistMasterRecommended_default"  access="admin,manager" text_zh_CN="传承人推荐">
                 <match url="plistMasterRecommended_default"/>
                 <match url="viewDocument"/>
             </jnode>
-            <!--     <jnode url="/Recommended/masterRecommended.do"  access="admin,manager" text_zh_CN="传承人推荐">
-
-
-               </jnode>-->
+          <!--     <jnode url="/Recommended/listRecommended.do?qm=recommened&amp;groupName=masterRecommended&amp;resultPage=masterRecommended/masterRecommendedList"  access="admin,manager" text_zh_CN="传承人推荐">
+                      <match url="recommened" />
+               </jnode> -->
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
                 <!--<match url="plistTenantIntroduction_default"/>-->
                 <!--<match url="removeTenantIntroduction"/>-->
