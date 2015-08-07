@@ -81,11 +81,11 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.name}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.serial}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.product.price}</td>
-                    <td class="am-hide-sm-only"><img src="${purchaseOrderProduct.product.picture_url}" alt="产品图片"></td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>
+                    <td class="am-hide-sm-only"><img src="${purchaseOrderProduct.productModel.product.picture_url}" alt="产品图片"></td>
                 </tr>
             </c:forEach>
             </tbody>

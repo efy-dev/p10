@@ -94,7 +94,7 @@
                                                 <c:forEach var="re" items="${masterWork.masterWorkRecommendedList}">
                                                     <c:if test="${re.masterWork.id == masterWork.id}">
                                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                           href="#"  onclick="removeMasterWorkRecommended('${re.id}')">
+                                                           href="#"  onclick="deleteMasterRecommended('${re.id}')">
                                                             <span class="am-icon-heart">取消推荐 </span>
                                                         </a>
                                                     </c:if>
@@ -143,7 +143,7 @@
     function deleteMasterRecommended(id){
         $.ajax({
             type:"get",
-            url:'<c:url value="/Recommended/deleteMasterWorkRecommended.do" />',
+            url:'<c:url value="/MasterRecommended/deleteMasterWorkRecommended.do" />',
             data:{id:id},
             success:function(data){
 
