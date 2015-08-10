@@ -51,14 +51,14 @@ public class TenantHandler implements DoHandler {
      * @return
      */
     private Tenant getRelationAttributeObject(Tenant tenant, HttpServletRequest request){
-        String provinceId = request.getParameter("province.id");
-        String addressId = request.getParameter("address.id");
-
-        AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
-        AddressDistrict address = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), addressId);
-
-        tenant.setProvince(province);
-        tenant.setAddress(address);
+//        String provinceId = request.getParameter("province.id");
+//        String addressId = request.getParameter("address.id");
+//
+//        AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
+//        AddressDistrict address = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), addressId);
+//
+//        tenant.setProvince(province);
+//        tenant.setAddress(address);
         return tenant;
     }
 

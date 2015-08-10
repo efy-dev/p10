@@ -15,38 +15,51 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript" >
         function updateTenant(o){
             var tenantId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=formTenant&id="+tenantId;
-        }
-        function addTenant(){
-            window.location.href="/basic/xm.do?qm=formTenant";
+            window.location.href="/basic/xm.do?qm=&id="+tenantId;
         }
     </script>
 </head>
-<body>
-<div class="am-panel am-panel-default admin-sidebar-panel">
-    <a href="javascript:addTenant()">新建</a>
+<body style="height: auto">
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           value="新建商户" />
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
-        <tr>
+        <tr style="text-align:left">
             <td>操作</td>
-            <td>姓名</td>
+            <td>商户名称</td>
+            <td>大师姓名</td>
             <td>级别</td>
+            <td>地址</td>
         </tr>
 
-        <c:forEach items="${requestScope.pageInfo.list}" var="master">
+        <c:forEach items="${requestScope.pageInfo.list}" var="tenant">
             <tr>
                 <td>
-                    <input type="button" value="修改" onclick="updateTenant(this)"/>
-                    <input type="hidden" value="${master.id}"/>
-                    <input type="button" value="删除"/>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&id=${tenant.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                                <span class="am-icon-edit"></span> 编辑
+                            </button>
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeTenant&id=${tenant.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                                <span class="am-icon-trash-o"></span> 删除
+                            </button>
+                        </div>
+                    </div>
                 </td>
-                <td><a href="/basic/xm.do?qm=viewTenant&id=${master.id}">${master.name}</a></td>
-                <td>${master.type}</td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
+                <td>${tenant.masterName}</td>
+                <td><ming800:status name="type" dataType="PCTenant.type" checkedValue="${tenant.type}" type="normal" /></td>
+                <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
             </tr>
         </c:forEach>
     </table>

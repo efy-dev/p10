@@ -18,22 +18,22 @@
             <tr>
 
                 <td class="am-primary am-u-md-3">名字</td>
-                <td class="am-u-md-3">${object.product.name}</td>
+                <td class="am-u-md-3">${object.productModel.product.name}</td>
                 <td class="am-primary am-u-md-3">编号</td>
-                <td class="am-u-md-3">${object.product.serial}</td>
+                <td class="am-u-md-3">${object.productModel.product.serial}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">价格</td>
-                <td class="am-u-md-3">${object.product.price}</td>
+                <td class="am-u-md-3">${object.productModel.product.price}</td>
                 <td class="am-primary am-u-md-3">分类</td>
-                <td class="am-u-md-3">${object.product.category.name}</td>
+                <td class="am-u-md-3">${object.productModel.product.category.name}</td>
             </tr>
 
             <tr>
                 <td class="am-primary am-u-md-3">图片</td>
-                <td class="am-u-md-3"><img src="${object.product.picture_url}" alt="产品图片"></td>
+                <td class="am-u-md-3"><img src="${object.productModel.product.picture_url}" alt="产品图片"></td>
                 <td class="am-primary am-u-md-3">描述</td>
-                <td class="am-u-md-3">${object.product.productDescription.content}</td>
+                <td class="am-u-md-3">${object.productModel.product.productDescription.content}</td>
             </tr>
             </tbody>
         </table>

@@ -14,7 +14,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 <div class="admin-content">
@@ -53,7 +53,7 @@
                                     </a>
                                     <c:if test="${empty master.masterRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           onclick="recommended(this,1)"
+                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
                                            href="#" recommend="1" recommendedId = "${master.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
@@ -64,7 +64,7 @@
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
                                             <c:if test="${recommended.master.id == master.id}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#"  onclick="recommended(this,1)" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
+                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
                                                     <span class="am-icon-heart" >取消推荐 </span>
                                                 </a>
                                             </c:if>
@@ -73,7 +73,7 @@
                                     </c:if>
                                        <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
-                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'masterRecommended',1)" style="padding: 0px 10px 5px 10px" > 保存</a>
+                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'masterRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
                                        </span>
                                 </div>
                             </div>
@@ -113,68 +113,6 @@
 </div>
 
 <script>
-
-    /**
-     * 推荐 取消推荐 切换
-     * @param obj
-     * @param td 推荐标示位于哪一列
-     */
-    function recommended(obj,td){
-        //推荐  recommend 为1时 推荐  显示出排序文本框
-        if($(obj).attr("recommend")=="1"){
-            $(obj).next("span").css({"display":"block"});
-        }
-        if($(obj).attr("recommend")=="0"){
-            var id = $(obj).attr("id"); //推荐对象id
-            deleteRecommended(obj,id,td);
-        }
-    }
-
-    /**
-     *  删除推荐对象  切换用的删除方法不直接调用
-     * @param obj
-     * @param id
-     */
-    function deleteRecommended(obj,id,td){
-        var  recommendedId = $(obj).attr("recommendedId");
-        $.ajax({
-            type:"get",
-            url:'<c:url value="/Recommended/deleteObjectRecommended.do" />',
-            data:{id:id},
-            success:function(data){
-                $(obj).attr("recommend","1");
-                $(obj).attr("id","");
-                $(obj).find("span").text("推荐");
-                $("table tr[id='"+recommendedId+"'] td:eq("+td+") span ").remove();
-            }
-        });
-    }
-
-
-    /**
-     *保存推荐对象
-     * @param obj
-     * @param groupName 组名
-     * @param td 推荐标示所在列
-     */
-    function saveRecommended(obj,groupName,td){
-        var recommendId = $(obj).parent().prev("a").attr("recommendedId");
-        var sort = $(obj).prev().val();
-        $.ajax({
-            type:"get",
-            url:'<c:url value="/Recommended/saveObjectRecommended.do" />',
-            dataType:"json",
-            data:{groupName:groupName,recommendId:recommendId,status:"1",sort:sort},
-            success:function(data){
-                $(obj).parent("span").css({"display":"none"});
-                $(obj).parent("span").find("input").val("");
-                $(obj).parent().prev("a").attr("recommend","0");
-                $(obj).parent().prev("a").attr("id",data);
-                $(obj).parent().prev("a").find("span").text("取消推荐");
-                $("table tr[id='"+recommendId+"'] td:eq("+td+")").append("<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>");
-            }
-        });
-    }
 
 
 

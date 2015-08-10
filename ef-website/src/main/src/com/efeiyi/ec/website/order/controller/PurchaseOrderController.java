@@ -28,7 +28,8 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -71,10 +72,35 @@ public class PurchaseOrderController extends BaseController {
     public static final int CURL_TIMEOUT = 30;
 
 
-    @RequestMapping({"/list"})
+    @RequestMapping({"/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
-
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default", request);
+        String orderStatus = request.getParameter("id");
+        XQuery xQuery = null;
+        int  c = 0;
+        if (orderStatus == null) {
+            xQuery = new XQuery("plistPurchaseOrder_default", request);
+        } else {
+            c = Integer.parseInt(orderStatus);
+        }
+        switch (c) {
+            case 1:
+                xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                break;
+            case 5:
+                xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                break;
+            case 9:
+                xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                break;
+            case 13:
+                xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                break;
+            case 17:
+                xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                break;
+            default:
+                xQuery = new XQuery("plistPurchaseOrder_default", request);
+        }
         xQuery.addRequestParamToModel(model, request);
 
         List<Object> list = baseManager.listPageInfo(xQuery).getList();

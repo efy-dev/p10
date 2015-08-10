@@ -14,7 +14,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 <div class="admin-content">
@@ -49,14 +49,14 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="deleteObjectRecommended('${masterRecommended.id}')" href="#"><span
+                                       onclick="deleteObjectRecommended('${masterRecommended.id}','<c:url value="/Recommended/deleteObjectRecommended.do" />')" href="#"><span
                                             class="am-icon-trash-o"></span> 取消推荐
                                     </a>
                                 </div>
                             </div>
                         </td>
                         <td class="am-hide-sm-only">
-                            <a href="#" onclick="toUpdateSort(this)" sort="${masterRecommended.sort}" id="${masterRecommended.id}">
+                            <a href="#" onclick="toUpdateSort(this,'<c:url value="/Recommended/updateSort.do"/>')" sort="${masterRecommended.sort}" id="${masterRecommended.id}">
                               ${masterRecommended.sort}
                             </a>
                         </td>
@@ -86,49 +86,7 @@
 <script>
 
 
-    /**
-     * 跳转更新序号
-     * @param obj
-     */
-    function toUpdateSort(obj){
-        var sort = $(obj).attr("sort");
-        var id = $(obj).attr("id");
-        $(obj).parent().html("<input id="+id+" onblur=\"updateSort(this)\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
-    }
 
-    /**
-     * 更新序号
-     * @param obj
-     */
-    function updateSort(obj){
-        var sort = $(obj).val();
-        var id = $(obj).attr("id");
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/Recommended/updateSort.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:id,sort:sort},
-            success: function (data) {
-                $(obj).parent().html("<a onclick=\"toUpdateSort(this)\" sort="+sort+" id="+id+">"+sort+"</a>");
-            }
-        });
-    }
-
-    /***
-     * 删除推荐对象  可直接调用
-     */
-    function deleteObjectRecommended(id){
-        $.ajax({
-            type:"get",
-            url:'<c:url value="/Recommended/deleteObjectRecommended.do" />',
-            data:{id:id},
-            success:function(data){
-
-                $("table tr[id='"+id+"']").remove();
-            }
-        });
-    }
 
 
 

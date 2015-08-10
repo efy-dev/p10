@@ -17,7 +17,7 @@
 
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人作品</strong> /
-        <small>Master Work</small>
+        <small>Master Works</small>
     </div>
 </div>
 

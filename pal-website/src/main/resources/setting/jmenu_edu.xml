@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jmenu id="webMenu">
-    <jnode id="tenantMain" url="/master/masterList.do" text_zh_CN="首页"/>
-    <jnode id="masterIntroduction" url="/master/getTenantIntroduction.do?tenantId=1" text_zh_CN="简介"/>
-    <jnode id="tenantProduct" url="/master/tenantProductList.do?tenantId=1" text_zh_CN="作品"/>
-    <jnode id="masterNews" url="/master/masterNews.do?tenantId=1" text_zh_CN="资讯"/>
-    <jnode id="tenantWorkShop" url="/master/tenantWorkShopList.do?tenantId=1" text_zh_CN="工作坊"/>
-</jmenu>
