@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PaymentManager;
@@ -21,7 +22,9 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -32,8 +35,8 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
 
-  /*  @Autowired
-    private PaymentManager paymentManager;*/
+    @Autowired
+    private PaymentManager paymentManager;
 
 
     //΢�Ź��ں���ݵ�Ψһ��ʶ�����ͨ������΢�ŷ��͵��ʼ��в鿴
@@ -63,36 +66,80 @@ public class PurchaseOrderController extends BaseController {
     //������ͨ��curlʹ��HTTP POST�������˴����޸��䳬ʱʱ�䣬Ĭ��Ϊ30��
     public static final int CURL_TIMEOUT = 30;
 
+    /*
+    * 我的订单
+    * */
 
-    @RequestMapping({"/list"})
+    @RequestMapping({"/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
-
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default", request);
+        String orderStatus = request.getParameter("id");
+        XQuery xQuery = null;
+        int  c = 0;
+        if (orderStatus == null) {
+            xQuery = new XQuery("plistPurchaseOrder_default", request);
+        } else {
+            c = Integer.parseInt(orderStatus);
+        }
+        switch (c) {
+            case 1:
+                xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                break;
+            case 5:
+                xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                break;
+            case 9:
+                xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                break;
+            case 13:
+                xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                break;
+            case 17:
+                xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                break;
+            default:
+                xQuery = new XQuery("plistPurchaseOrder_default", request);
+        }
         xQuery.addRequestParamToModel(model, request);
-
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-
         return "/purchaseOrder/orderList";
 
     }
-
+    /*
+    * 查看订单详情
+    * */
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(@PathVariable String orderId,Model model){
-
-        Object order = baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+    public String viewPurchaseOrder(HttpServletRequest request,Model model){
+        String orderId = request.getParameter("id");
+        PurchaseOrder order = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         model.addAttribute("order",order);
-
         return "/purchaseOrder/orderView";
-
     }
-
     @RequestMapping({"/pay/test"})
     public String payTest(Model model, HttpServletRequest request) {
         String openid = request.getParameter("openid");
-        //paymentManager.wxpay(null, null, openid);
+        paymentManager.wxpay(null, null, openid);
         return "/order/testPayment";
     }
+
+    /*
+    * 支付方式
+    * */
+    @RequestMapping({"/choosePayment/order.do"})
+    public String choosePayment(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("id");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
+        return "/purchaseOrder/choosePayment";
+    }
+
+    /*@RequestMapping({""})
+    public String choosePayment1(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("id");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
+        return "/purchaseOrder/choosePayment";
+    }*/
 
     @RequestMapping({"/pay/weixin"})
     public String wxPay(HttpServletRequest request) throws Exception {
@@ -122,8 +169,8 @@ public class PurchaseOrderController extends BaseController {
             throw new RuntimeException("��ȡopenId�쳣��" + result);
         }
         String openid = jsonObject.getString("openid");
-       /* paymentManager.wxpay(null, null, openid);
-        model.addAttribute("jsonObject", paymentManager.wxpay(null, null, openid));*/
+        paymentManager.wxpay(null, null, openid);
+        model.addAttribute("jsonObject", paymentManager.wxpay(null, null, openid));
         return "/order/testPayment";
     }
 
@@ -154,13 +201,12 @@ public class PurchaseOrderController extends BaseController {
      *
      * @return
      */
-  /*  @RequestMapping({"/saveOrUpdateOrder.do"})
+    @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
         BigDecimal total_fee = new BigDecimal(0);
         String cartId = request.getParameter("cartId");
         String consumerAddressId = request.getParameter("addressId"); //��ȡ�ջ���ַ��id
         Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
         xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
         xSaveOrUpdate.getParamMap().put("consumerAddress_id", consumerAddressId);
@@ -179,18 +225,10 @@ public class PurchaseOrderController extends BaseController {
 
         purchaseOrder.setTotal(total_fee);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();
     }
-*/
-    @RequestMapping({"/choosePayment/{orderId}"})
-    public String choosePayment(@PathVariable String orderId, HttpServletRequest request, Model model) {
 
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        model.addAttribute("order", purchaseOrder);
 
-        return "/purchaseOrder/choosePayment";
-    }
 
 
 }
