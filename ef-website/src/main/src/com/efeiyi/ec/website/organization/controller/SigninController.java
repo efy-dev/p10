@@ -104,17 +104,17 @@ public class SigninController extends BaseController {
         /*bigUser.setRoleType("user");             //system,    admin,    user*/
         bigUser.setCreateDatetime(new Date());
 
-        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
         //注册时给新用户初始化一个购物车
         User user = new User();
         user.setId(bigUser.getId());
-        Cart cart=new Cart();
+        Cart cart = new Cart();
         cart.setUser(user);
         cart.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(Cart.class.getName(),cart);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return new ModelAndView("/signinSuccess");
     }
 
@@ -143,7 +143,7 @@ public class SigninController extends BaseController {
     @RequestMapping({"/pc/verification/send.do"})
     @ResponseBody
     public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
-       String cellPhoneNumber = request.getParameter("phone");
+        String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         System.out.println(verificationCode);
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
@@ -158,6 +158,7 @@ public class SigninController extends BaseController {
             return false;
         }
     }
+
     /**
      * 跳转到注册页面的controller
      */
@@ -174,37 +175,37 @@ public class SigninController extends BaseController {
      * 判断注册还是登陆
      */
     @RequestMapping("/pc/forward.do")
-    public String forward(String result){
-        if("2".equals(result)){
+    public String forward(String result) {
+        if ("2".equals(result)) {
             return "/register";
-        }else if("1".equals(result)){
+        } else if ("1".equals(result)) {
             return "/login";
-        }else {
+        } else {
             return "/loginAccess";
         }
     }
 
-    @RequestMapping(value ="/pc/login.do")
-    public ModelAndView login(HttpServletRequest request,ModelMap model) {
+    @RequestMapping(value = "/pc/login.do")
+    public ModelAndView login(HttpServletRequest request, ModelMap model) {
         String username = request.getParameter("username");
-       String pword = request.getParameter("password");
-       String password = StringUtil.encodePassword(pword,"SHA1");
+        String pword = request.getParameter("password");
+        String password = StringUtil.encodePassword(pword, "SHA1");
         String queryHql = "from BigUser b where b.username =:username and b.password =:password";
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username",username);
-      queryParamMap.put("password",password);
-        Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
-        if(obj != null){
-            model.addAttribute("user",obj);
-            return new ModelAndView("/loginAccess",model);
-        }else{
-            model.addAttribute("username",username);
-            return new ModelAndView("/error",model);
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username", username);
+        queryParamMap.put("password", password);
+        Object obj = baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
+        if (obj != null) {
+            model.addAttribute("user", obj);
+            return new ModelAndView("/loginAccess", model);
+        } else {
+            model.addAttribute("username", username);
+            return new ModelAndView("/error", model);
         }
     }
 
     @RequestMapping({"/wx/register"})
-    public String wxRegister(){
+    public String wxRegister() {
         return "/wxRegister";
     }
 
@@ -232,7 +233,7 @@ public class SigninController extends BaseController {
             System.out.println("1、 page code value：" + code);
             String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + PurchaseOrderController.APPID + "&secret=" + PurchaseOrderController.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code,result);
+            request.getSession().setAttribute(code, result);
         }
         System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
@@ -240,7 +241,7 @@ public class SigninController extends BaseController {
             throw new RuntimeException("get openId error：" + result);
         }
         String unionid = jsonObject.getString("unionid");
-        model.addAttribute("unionid",unionid);
+        model.addAttribute("unionid", unionid);
         return "/wxRegister";
     }
 }
