@@ -15,49 +15,84 @@
     <title></title>
 </head>
 <body>
-<c:if test="${empty object || object.id == null || object.id==''}">
-    <div align="center">
-        <h3>新建商户</h3>
-    </div>
-</c:if>
-<c:if test="${!empty object && object.id != null && object.id != '' }">
-    <div align="center">
-        <h3>修改商户信息</h3>
-    </div>
-</c:if>
-<div align="center">
-    <form action="/basic/xm.do" method="post">
-        <table>
-            <tr>
-                <td colspan="2"><input type="hidden" name="id" id="id" value="${object.id}"></td>
-            </tr>
-            <tr>
-                <td>大师姓名：</td>
-                <td><input type="text" name="name" id="name" value="${object.name}"></td>
-            </tr>
-            <tr>
-                <td>大师级别：</td>
-                <td><input type="text" name="type" id="type" value="${object.type}"></td>
-            </tr>
-            <tr>
-                <td>状态：</td>
-                <td><input type="text" name="status" id="status" value="${object.status}"></td>
-            </tr>
-            <tr>
-                <td>省份：</td>
-                <td><input type="text" name="province.id" id="province.id" value="${object.province.id}"></td>
-            </tr>
-            <tr>
-                <td>街道：</td>
-                <td><input type="text" name="address.id" id="address.id" value="${object.address.id}"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="hidden" value="saveOrUpdateTenant" name="qm"></td>
-            </tr>
-            <tr>
-                <td align="center" colspan="2"><input type="submit" value="保存"></td>
-            </tr>
-        </table>
+<div class="am-cf am-padding">
+    <c:if test="${empty object || object.id == null || object.id==''}">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">新建商户</strong> / <small>New Tenant</small>
+        </div>
+    </c:if>
+    <c:if test="${!empty object && object.id != null && object.id != '' }">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">编辑商户信息</strong> / <small>Edit Tenant</small>
+        </div>
+    </c:if>
+</div>
+<hr/>
+
+<div class="am-g">
+    <form action="<c:url value='/basic/xm.do'/>" method="post" class="am-form am-form-horizontal">
+        <input type="hidden" name="qm" value="saveOrUpdateTenant">
+        <input type="hidden" name="id" value="${object.id}">
+        <c:if test="${empty object || object.id == null || object.id==''}">
+            <input type="hidden" name="status" value="1" />
+        </c:if>
+        <c:if test="${!empty object && object.id != null && object.id != '' }">
+            <input type="hidden" name="status" value="${object.status}" />
+        </c:if>
+
+        <div class="am-form-group">
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="masterName" for="masterName" class="am-u-sm-3 am-form-label">大师姓名 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="masterName" id="masterName" placeholder="大师姓名" value="${object.masterName}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="type" for="type" class="am-u-sm-3 am-form-label">级别 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <ming800:status name="type" dataType="PCTenant.type" checkedValue="${object.type}" type="select" />
+            </div>
+        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="province.id" for="province.id" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input type="text" name="province.id" id="province.id" placeholder="所在省" value="${object.province}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="am-form-group">--%>
+        <%--<label name="address.id" for="address.id" class="am-u-sm-3 am-form-label">街道 <small>*</small></label>--%>
+        <%--<div class="am-u-sm-9">--%>
+        <%--<input type="text" name="address.id" id="address.id" placeholder="详细地址" value="${object.address.id}">--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <div class="am-form-group">
+            <label name="province" for="province" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="province" id="province" placeholder="所在省" value="${object.province}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="city" for="city" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="city" id="city" placeholder="所在市" value="${object.city}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="address" for="address" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="address" id="address" placeholder="所在区/县" value="${object.address}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+            </div>
+        </div>
     </form>
 </div>
 </body>

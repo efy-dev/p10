@@ -14,7 +14,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
@@ -24,9 +24,9 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
-            <td>卷批次</td>
-            <td>商品</td>
-            <td>商户</td>
+            <td>标签批次</td>
+            <td>商品名称</td>
+            <td>商户名称</td>
             <td>开始</td>
             <td>数量</td>
             <td>状态</td>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="/basic/xm.do?qm=viewLabelBatch&id=${labelBatch.id}">${labelBatch.setting}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
                 <td>${labelBatch.product.name}</td>
                 <td>${labelBatch.tenant.name}</td>
                 <td>${labelBatch.start}</td>
