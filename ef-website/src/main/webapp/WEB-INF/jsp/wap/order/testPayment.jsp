@@ -13,8 +13,59 @@
 </head>
 <body>
 <%--${redirect}--%>
-<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7f6aa253b75466dd&redirect_uri=http%3A%2F%2Fwww.efeiyi.com&response_type=code&scope=snsapi_base&state=123#wechat_redirect"> 微信支付</a>
-<script type="text/javascript" src="<c:url value="/scripts/wxjsapi.js"/>"></script>
-<script>callpay("${jsonObject}");</script>
+<a onclick=""> 微信支付</a>
+
+<div>
+    <h2>调试部分</h2>
+
+    <div id="testContent"></div>
+</div>
+
+
+<script>
+    function jsApiCall() {
+        alert("${appId}");
+        alert("${timeStamp}");
+        alert("${pk}");
+        alert("${paySign}");
+        alert("${signType}");
+        alert("${nonceStr}");
+        WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                {
+                    "appId": "${appId}",     //公众号名称，由商户传入
+                    "timeStamp": "${timeStamp}",         //时间戳，自1970年以来的秒数
+                    "nonceStr": "${nonceStr}", //随机串
+                    "package": "${pk}",
+                    "signType": "${signType}",         //微信签名方式：
+                    "paySign": "${paySign}"//微信签名
+                },
+                function (res) {
+//                    alert(res.err_code + res.err.desc + res.err_msg);
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
+                        window.location.href = "/";
+                    }
+                    else {
+                            window.location.href = "/";
+                    }
+                }
+        );
+    }
+
+    function callpay() {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        } else {
+            jsApiCall();
+        }
+    }
+</script>
+<script>callpay();</script>
+
 </body>
 </html>

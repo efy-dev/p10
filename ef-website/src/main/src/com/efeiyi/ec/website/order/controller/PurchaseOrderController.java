@@ -13,7 +13,9 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,67 +94,54 @@ public class PurchaseOrderController extends BaseController {
 
     }
 
-    @RequestMapping({"/pay/test"})
-    public String payTest(Model model, HttpServletRequest request) {
-        String openid = request.getParameter("openid");
-        paymentManager.wxpay(null, null, openid);
-        return "/order/testPayment";
-    }
 
     @RequestMapping({"/pay/weixin"})
     public String wxPay(HttpServletRequest request) throws Exception {
         String orderId = request.getParameter("orderId");
-        String redirect_uri = "http://";
-        redirect_uri = redirect_uri + "?orderId=" + orderId;
+        //@TODO 添加订单数据部分
+        String redirect_uri = "http://master4.efeiyi.com/ef-website/order/pay/wxParam.do";
+//        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + APPID +
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
         return "redirect:" + url;
     }
 
     @RequestMapping({"/pay/wxParam.do"})
     public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
         String orderId = request.getParameter("orderId");
+        String result = "";
         //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
-        System.out.println("1、网页授权code值：" + code);
-        String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-        String result = getHttpResponse(urlForOpenId, null);
-        System.out.println("2、获取openid时的响应结果为：" + result);
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+
+            System.out.println("1、 page code value：" + code);
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code,result);
+        }
+        System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("获取openId异常：" + result);
+            throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
-        paymentManager.wxpay(null, null, openid);
-        model.addAttribute("jsonObject", paymentManager.wxpay(null, null, openid));
+        JSONObject jsonStr = (JSONObject)paymentManager.wxpay(null, null, openid);
+        model.addAttribute("appId",jsonStr.getString("appId"));
+        model.addAttribute("timeStamp",jsonStr.getString("timeStamp"));
+        model.addAttribute("pk",jsonStr.getString("package"));
+        model.addAttribute("paySign",jsonStr.getString("paySign"));
+        model.addAttribute("signType",jsonStr.getString("signType"));
+        model.addAttribute("nonceStr",jsonStr.getString("nonceStr"));
         return "/order/testPayment";
     }
 
-    public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
-        URL url = new URL(urlStr);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        //PrintWriter writer =null;
-        if (requestStr != null && !requestStr.equals("")) {
-            connection.setDoOutput(true);
-            OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(requestStr.getBytes("UTF-8"));
-            outputStream.flush();
-            /*writer = new PrintWriter(connection.getOutputStream());
-            writer.println(requestStr);
-            writer.flush();*/
-        }
-        Scanner scanner = new Scanner(connection.getInputStream());
-        StringBuilder responseStr = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            responseStr.append(scanner.nextLine());
-        }
-
-        return responseStr.toString();
-    }
 
     /**
      * 生成订单
@@ -166,7 +155,7 @@ public class PurchaseOrderController extends BaseController {
         String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
         Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
 
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdat  ePurchaseOrder", request);
         xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
         xSaveOrUpdate.getParamMap().put("consumerAddress_id", consumerAddressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
