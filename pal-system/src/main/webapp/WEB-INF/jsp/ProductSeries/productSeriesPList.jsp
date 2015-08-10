@@ -15,7 +15,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript" >
         function updateProductSeries(o){
             var productSeriesId = $(o).next().val();
@@ -26,27 +26,37 @@
         }
     </script>
 </head>
-<body>
-<div class="am-panel am-panel-default admin-sidebar-panel">
-    <a href="javascript:addProductSeries()">新建</a>
+<body style="height: auto">
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           value="新建商品系列" />
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
-            <td>名称</td>
+            <td>系列名称</td>
             <td>序列号</td>
+            <td>商户名称</td>
         </tr>
 
         <c:forEach items="${requestScope.pageInfo.list}" var="productSeries">
-            <tr>
+            <tr style="text-align: left">
                 <td>
-                    <input type="button" value="修改" onclick="updateProductSeries(this)"/>
-                    <input type="hidden" value="${productSeries.id}"/>
-                    <input type="button" value="删除"/>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&id=${productSeries.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductSeries&id=${productSeries.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        </div>
+                    </div>
                 </td>
-                <td><a href="/basic/xm.do?qm=viewProductSeries&id=${productSeries.id}">${productSeries.name}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&id=${productSeries.id}"/>">${productSeries.name}</a></td>
                 <td>${productSeries.serial}</td>
+                <td>${productSeries.tenant.name}</td>
             </tr>
         </c:forEach>
     </table>
