@@ -89,6 +89,50 @@
 
             </does>
         </entity>
+        <entity name="coupon" label="优惠券"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.Coupon">
+            <fields>
+                <field name="status" label="优惠券状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="未使用" value="0"/>
+                        <item label="已使用" value="1"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistCoupon" access="" label="优惠券列表"
+                    result="/coupon/couponPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" label="id"/>
+                    </query>
+                </do>
+
+                <do name="removeCoupon" label="删除优惠券" access="" result="json"/>
+                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView"/>
+                <do name="formCoupon" label="保存优惠券" access="" result="/coupon/couponForm"/>
+                <do name="saveOrUpdateCoupon" label="保存优惠券" access=""
+                    result="/purchaseOrder/purchaseOrderSaveSuccess"/>
+            </does>
+        </entity>
+        <entity name="couponBatch" label="优惠券批次"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.CouponBatch">
+            <does>
+                <do name="plistCouponBatch" access="" label="优惠券批次列表"
+                    result="/couponBatch/couponBatchPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" label="id"/>
+                    </query>
+                </do>
+
+                <do name="removeCouponBatch" label="删除优惠券" access="" result="json"/>
+                <do name="viewCouponBatch" label="查看优惠券" access="" result="/couponBatch/couponBatchView"/>
+                <do name="formCouponBatch" label="保存优惠券" access="" result="/couponBatch/couponBatchForm"/>
+                <do name="saveOrUpdateCouponBatch" label="保存优惠券" access=""
+                    result="/purchaseOrder/purchaseOrderSaveSuccess"/>
+            </does>
+        </entity>
         <entity name="purchaseOrderDelivery" label="purchaseOrderDelivery"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderDelivery">
