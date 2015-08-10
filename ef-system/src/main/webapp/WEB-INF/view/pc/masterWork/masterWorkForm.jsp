@@ -17,7 +17,7 @@
 
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人作品</strong> /
-        <%--<small>Master introduction</small>--%>
+        <small>Master Works</small>
     </div>
 </div>
 
@@ -36,7 +36,7 @@
             <input type="hidden" name="master.id" value="${masterId}">
             <input type="hidden" name="project.id" value="${projectId}">
             <input type="hidden" name="resultPage"
-                    value="redirect:/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${projectId}&projectId=${projectId}&masterId=${masterId}"/>
+                    value="redirect:/basic/xm.do?qm=plistMasterWork_byProject&conditions=project.id:${projectId};master.id:${masterId}&projectId=${projectId}&masterId=${masterId}"/>
 
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">名称</label>

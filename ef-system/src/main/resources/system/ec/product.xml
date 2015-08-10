@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!--用户-->
 <module name="product" label="系统-产品" version="" package="com.efeiyi.ec.system.product" path="">
 
     <entities>
@@ -64,7 +63,8 @@
                 <do name="plistProductRecommended" access="" label="推荐产品分页列表"
                     result="/productRecommended/productRecommendedPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="group" defaultValue="productRecommended" operation="eq"/>
                     </query>
                 </do>
 

@@ -34,5 +34,12 @@ public interface RecommendedDao {
      */
     void  deleteObjectRecommend(ObjectRecommended objectRecommended);
 
+    /**
+     * 根据推荐对象id删除删除推荐对象
+     * 在推荐状态下直接删除推荐对象时调用
+     * @param recommendId
+     */
+    void deleteObjectRecommendByRecommendId(String recommendId);
+
 
 }

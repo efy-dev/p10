@@ -7,7 +7,7 @@
     </wordValues>
     <!-- 轮播图 -->
     <banners>
-        <banner   group="master.index" note="传承人首页轮播图" />
+        <banner group="master.index" note="传承人首页轮播图" />
     </banners>
     <!-- 文档 -->
     <documents>
@@ -15,7 +15,6 @@
     </documents>
     <!-- 推荐 -->
     <recommends>
-        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="1" />
-        <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="5" />
+        <recommend group="productRecommended" recommendedModel="com.efeiyi.ec.product.model.Product" note="商品推荐" amount="5" />
     </recommends>
 </common>

@@ -1,20 +1,21 @@
 package com.efeiyi.ec.product.model;
 
-import com.efeiyi.ec.master.model.Master;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/7/23.
  */
 @Entity
-@Table(name = "product_recommended")
-public class ProductRecommended {
+@Table(name = "base_recommended")
+public class ProductRecommended implements Serializable{
     private String id;
-    private Master master;
     private Product product;
     private String sort;
+    private String status;
+    private String group;
 
 
     @Id
@@ -29,17 +30,7 @@ public class ProductRecommended {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Master getMaster() {
-        return master;
-    }
-
-    public void setMaster(Master master) {
-        this.master = master;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "recommend_id")
     public Product getProduct() {
         return product;
     }
@@ -55,5 +46,23 @@ public class ProductRecommended {
 
     public void setSort(String sort) {
         this.sort = sort;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Column(name = "group_name")
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

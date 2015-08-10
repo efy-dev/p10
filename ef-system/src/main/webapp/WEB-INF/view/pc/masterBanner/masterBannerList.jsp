@@ -63,7 +63,7 @@
                     </div>
                 </td>
                 <td class="am-hide-sm-only">${masterBanner.title}</td>
-                <td class="am-hide-sm-only"><img src="<c:url value="http://master.efeiyi.com/${masterBanner.imageUrl}@!master-manage-banner"/>" alt=""/></td>
+                <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://tenant.efeiyi.com/${masterBanner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
             </tr>
         </c:forEach>
         </tbody>

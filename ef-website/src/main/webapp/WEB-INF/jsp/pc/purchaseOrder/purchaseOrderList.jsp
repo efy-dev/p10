@@ -12,13 +12,9 @@
   <title></title>
   <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
   <script type="text/javascript" >
-    function add(o){
-      var cartProductId = $(o).next().val();
-      window.location.href="/cart/addProductCount?cartProductId="+cartProductId;
-    }
-    function cut(o){
-      var cartProductId = $(o).next().val();
-      window.location.href="/cart/subtractProductCount?cartProductId="+cartProductId;
+    function orderView(o){
+      var orderId = $(o).next().val();
+      window.location.href="/order.xml/getOrder.do?id="+orderId;
     }
   </script>
 </head>
@@ -31,20 +27,8 @@
       <c:forEach items="${cart.cartProductList}" var="list">
         <tr>
           <td>
-        ${list.product.name}
+        ${list.productModel.product.name}
           </td>
-          <td>
-            <input type="button" value="-1" onclick="cut(this);">
-            <input type="hidden" id="cd" value="${list.id}">
-          </td>
-          <td>
-              ${list.amount}
-          </td>
-          <td>
-            <input type="button" value="+1" onclick="add(this);">
-            <input type="hidden" id="ad" value="${list.id}">
-          </td>
-
         </tr>
       </c:forEach>
 

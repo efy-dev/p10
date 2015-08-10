@@ -27,7 +27,7 @@
       <tbody>
 
                     <c:forEach items="${objectList}" var="masterWorkRecommended">
-                        <tr id="${masterWorkRecommended.id}">
+                        <tr id="${masterWorkRecommended.id}" name="${masterWorkRecommended.project.id}">
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
@@ -35,7 +35,7 @@
                                            onclick="removeMasterWorkRecommended11('${masterWorkRecommended.id}')" href="#"><span
                                                 class="am-icon-heart" style="color: red;" ></span> 取消推荐
                                         </a>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWork&id=${masterWorkRecommended.masterWork.id}&masterId=${masterWorkRecommended.masterWork.master.id}&projectId=${masterWorkRecommended.masterWork.project.id}"/>"><span
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<c:url value="/basic/xm.do?qm=formMasterWorkRecommended&id=${masterWorkRecommended.masterWork.id}&masterId=${masterWorkRecommended.masterWork.master.id}&projectId=${masterWorkRecommended.masterWork.project.id}"/>"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </a>
                                     </div>

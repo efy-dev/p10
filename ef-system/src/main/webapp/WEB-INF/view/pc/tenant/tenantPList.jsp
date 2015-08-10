@@ -14,7 +14,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
     <script>
         function removeTenant(divId){
             $.ajax({
@@ -67,11 +67,40 @@
                                     href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&conditions=tenant.id:${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
+                                    <c:if test="${empty tenant.tenantRecommendedList}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
+                                           href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
+                                            <span class="am-icon-heart"> 推荐</span>
+                                        </a>
+
+
+                                    </c:if>
+                                    <c:if test="${not empty tenant.tenantRecommendedList}">
+                                        <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
+                                            <c:if test="${recommended.tenant.id == tenant.id}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${tenant.id}"  id="${recommended.id}" recommend="0">
+                                                    <span class="am-icon-heart" >取消推荐 </span>
+                                                </a>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </c:if>
+                                    <span style="display: none;float: left;padding-left: 10px;">
+                                                <input type="text" name="sort" style="width: 35px;" value="" />
+                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'tenantRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
+                                       </span>
                                 </div>
                             </div>
                         </td>
                         <td class="am-hide-sm-only">
                             <a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a>
+                            <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
+                                <c:if test="${recommended.tenant.id == tenant.id}" >
+                                    <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                </c:if>
+                            </c:forEach>
                         </td>
                     </tr>
                 </c:forEach>

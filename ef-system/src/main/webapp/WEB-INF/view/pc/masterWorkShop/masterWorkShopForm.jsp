@@ -15,7 +15,7 @@
 <body>
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">传承人工作坊</strong> /
-            <%--<small>Master introduction</small>--%>
+            <small>Master WorkShop</small>
         </div>
     </div>
 

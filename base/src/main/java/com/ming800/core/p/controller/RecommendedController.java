@@ -1,9 +1,5 @@
-package com.efeiyi.ec.system.master.controller;
-
-import com.efeiyi.ec.master.model.MasterRecommended;
+package com.ming800.core.p.controller;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
-import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.model.ObjectRecommended;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.apache.log4j.Logger;
@@ -15,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
 
 /**
  * Created by kayson_yang on 2015/7/13.
@@ -30,34 +26,23 @@ public class RecommendedController {
     private BaseManager baseManager;
 
     @Autowired
-    private ObjectRecommendedManager objectRecommendedManager;
+    private ObjectRecommendedManager objectRecommendedManager;//一般推荐
+
+  //  private MasterWorkRecommendedManager masterWorkRecommendedManager;//作品推荐
 
 
-
-    /**
-     * 通过模块ID获取相关模块的轮播图（状态为可用）的所有对象
-     */
-    @SuppressWarnings("unchecked")
-    @RequestMapping("/ba.do")
-    public List<Banner> getBannerByGroupId(HttpServletRequest request)throws Exception{
-        logger.debug("getBannerByGroupId begin ...");
-        XQuery xQuery = new XQuery("listPCBanner_default",request);
-        List<Banner> banners = baseManager.listObject(xQuery);
-        logger.debug("getBannerByGroupId end ...");
-        return banners;
-        //return new ModelAndView("/test/index",model);
-    }
 
     /***
-     * 大师推荐
+     * 推荐列表
      * @param modelMap
      * @return
      * @throws Exception
      */
-    @RequestMapping("/masterRecommended.do")
-    public ModelAndView getListRecommended(ModelMap modelMap) throws Exception {
-          modelMap.put("objectList",objectRecommendedManager.getRecommendedList("masterRecommended"));
-          return  new ModelAndView("/masterRecommended/masterRecommendedList");
+    @RequestMapping("/listRecommended.do")
+    public ModelAndView getListRecommended(ModelMap modelMap,String groupName,String resultPage,HttpServletRequest request) throws Exception {
+        request.setAttribute("qm",request.getParameter("qm"));
+        modelMap.put("objectList",objectRecommendedManager.getRecommendedList(groupName));
+        return  new ModelAndView("/"+resultPage);
     }
 
     @RequestMapping("/saveObjectRecommended.do")
