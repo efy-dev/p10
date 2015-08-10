@@ -17,6 +17,8 @@ public class TenantSource {
     private Tenant tenant;
     private String name;
     private String region;
+    private String imgUrl;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -56,6 +58,24 @@ public class TenantSource {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Column(name = "img_url")
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

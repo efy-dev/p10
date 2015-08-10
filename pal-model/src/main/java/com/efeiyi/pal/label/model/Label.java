@@ -1,12 +1,15 @@
 package com.efeiyi.pal.label.model;
 
+import com.efeiyi.pal.check.model.LabelCheckRecord;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/16.
@@ -25,6 +28,7 @@ public class Label {
     private Date firstCheckDateTime;
     private Date lastCheckDateTime;
     private int checkCount;
+    private List<LabelCheckRecord> labelCheckRecordList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -111,6 +115,16 @@ public class Label {
 
     public void setCheckCount(int checkCount) {
         this.checkCount = checkCount;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "label")
+    public List<LabelCheckRecord> getLabelCheckRecordList() {
+        return labelCheckRecordList;
+    }
+
+    public void setLabelCheckRecordList(List<LabelCheckRecord> labelCheckRecordList) {
+        this.labelCheckRecordList = labelCheckRecordList;
     }
 
 }
