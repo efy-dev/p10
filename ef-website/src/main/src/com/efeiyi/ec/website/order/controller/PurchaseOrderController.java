@@ -24,7 +24,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Scanner;
-
+import java.lang.*;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -35,7 +35,7 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
 
-    @Autowired
+   // @Autowired
     private PaymentManager paymentManager;
 
 
@@ -132,14 +132,17 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/choosePayment";
     }
-
-    /*@RequestMapping({""})
-    public String choosePayment1(HttpServletRequest request, Model model) {
+   /*
+   * 取消订单
+   * */
+    @RequestMapping({"/cancelOrder/order.do"})
+    public String cancelOrder(HttpServletRequest request, Model model) {
         String orderId = request.getParameter("id");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
         model.addAttribute("order", purchaseOrder);
-        return "/purchaseOrder/choosePayment";
-    }*/
+        return "/purchaseOrder/orderList";
+    }
 
     @RequestMapping({"/pay/weixin"})
     public String wxPay(HttpServletRequest request) throws Exception {
