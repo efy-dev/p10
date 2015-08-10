@@ -44,6 +44,10 @@
                         <condition name="labelBatch.id" defaultValue="" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
+                    <query name="all" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
                 </do>
 
                 <do name="listLabel" access="" label="标签列表" result="/label/labelList">
@@ -53,6 +57,7 @@
                     </query>
                 </do>
 
+                <do name="viewLabel" label="查看标签详情" access="" result="/label/labelView"/>
                 <!--<do name="saveOrUpdateLabel" label="新建或更新标签" access="" result="redirect:/basic/xm.do?qm=plistLabel_default"-->
                     <!--execute="com.efeiyi.pal.system.label.controller.LabelHandler">-->
                 <!--</do>-->

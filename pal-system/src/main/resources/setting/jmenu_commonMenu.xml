@@ -2,8 +2,24 @@
 <jmenu id="commonMenu">
 
     <jnode id="palManager" url="/main.do?jnodeId=palManager" text_zh_CN="成品宝管理">
-        <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="卷管理">
-            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin" text_zh_CN="券批次列表">
+        <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="查询管理">
+            <jnode url="/basic/xm.do?qm=plistLabelCheckRecord_default"  access="admin,manager" text_zh_CN="防伪查询记录">
+                <match url="plistLabelCheckRecord_default"/>
+                <match url="listLabelCheckRecord_default"/>
+            </jnode>
+        </jnode>
+
+        <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="标签管理">
+            <jnode url="/basic/xm.do?qm=plistLabel_all" access="admin" text_zh_CN="标签管理">
+                <!--<match url="plistLabel_default"/>-->
+                <match url="listLabel_default"/>
+                <!--<match url="formLabelBatch"/>-->
+                <match url="viewLabel"/>
+                <!--<match url="removeLabelBatch"/>-->
+                <!--<match url="saveOrUpdateLabelBatch"/>-->
+                <match url="plistLabel_all"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin" text_zh_CN="标签批次管理">
                 <match url="plistLabelBatch_default"/>
                 <match url="listLabelBatch_default"/>
                 <match url="formLabelBatch"/>
@@ -11,10 +27,6 @@
                 <match url="removeLabelBatch"/>
                 <match url="saveOrUpdateLabelBatch"/>
                 <match url="plistLabel_default"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistLabelCheckRecord_default"  access="admin,manager" text_zh_CN="防伪查询记录">
-                <match url="plistLabelCheckRecord_default"/>
-                <match url="listLabelCheckRecord_default"/>
             </jnode>
         </jnode>
 
@@ -45,6 +57,7 @@
                 <match url="viewTenant"/>
                 <match url="removeTenant"/>
                 <match url="saveOrUpdateTenant"/>
+                <!--<match url="formTenantSource"/>-->
             </jnode>
             <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">
                 <match url="plistUser_default"/>

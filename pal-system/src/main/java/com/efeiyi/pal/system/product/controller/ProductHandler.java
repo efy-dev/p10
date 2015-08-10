@@ -2,6 +2,7 @@ package com.efeiyi.pal.system.product.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.pal.product.model.ProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -50,9 +51,22 @@ public class ProductHandler implements DoHandler {
      * @return
      */
     private Product getRelationAttributeObject(Product product, HttpServletRequest request){
-        String tenantId = request.getParameter("tenant.id");
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        ProductSeries productSeries = null;
+        Tenant tenant = null;
+
+        String productSeriesId = request.getParameter("productSeries.id");
+        if (productSeriesId != null && !productSeriesId.trim().equals("")){
+            productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
+        }
+
+        if (productSeries != null){
+            tenant = productSeries.getTenant();
+        }
+
+//        String tenantId = request.getParameter("tenant.id");
+//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         product.setTenant(tenant);
+        product.setProductSeries(productSeries);
         return product;
     }
 
