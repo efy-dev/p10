@@ -1,6 +1,9 @@
 package com.ming800.core.p.service;
 
+import com.ming800.core.p.model.CommonBanner;
+import com.ming800.core.p.model.CommonDocument;
 import com.ming800.core.p.model.CommonRecommended;
+import com.ming800.core.p.model.CommonTag;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,6 +26,30 @@ public interface CommonManager {
      * @return
      * @throws Exception
      */
-    public CommonRecommended getRecommended(String group) throws Exception;
+     CommonRecommended getRecommended(String group) throws Exception;
+
+    /**
+     * 字典
+     * @param group
+     * @return
+     * @throws Exception
+     */
+    CommonTag getTag(String group) throws  Exception;
+
+    /**
+     * 轮播图
+     * @param group
+     * @return
+     * @throws Exception
+     */
+    CommonBanner getBanner(String group) throws  Exception;
+
+    /**
+     * 文档
+     * @param group
+     * @return
+     * @throws Exception
+     */
+    CommonDocument getDocument(String group) throws  Exception;
 
 }

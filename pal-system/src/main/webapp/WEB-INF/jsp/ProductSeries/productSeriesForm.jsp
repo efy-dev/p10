@@ -15,45 +15,75 @@
     <title></title>
 </head>
 <body>
-<c:if test="${empty object || object.id == null || object.id==''}">
-    <div align="center">
-        <h3>新建商品系列</h3>
-    </div>
-</c:if>
-<c:if test="${!empty object && object.id != null && object.id != '' }">
-    <div align="center">
-        <h3>修改商品系列信息</h3>
-    </div>
-</c:if>
-<div align="center">
-    <form action="/basic/xm.do" method="post">
-        <table>
-            <tr>
-                <td colspan="2"><input type="hidden" name="id" id="id" value="${object.id}"></td>
-            </tr>
-            <tr>
-                <td>商品系列名称：</td>
-                <td><input type="text" name="name" id="name" value="${object.name}"></td>
-            </tr>
-            <tr>
-                <td>序列号：</td>
-                <td><input type="text" name="serial" id="serial" value="${object.serial}"></td>
-            </tr>
-            <tr>
-                <td>大师：</td>
-                <td><input type="text" name="master.id" id="master.id" value="${object.master.id}"></td>
-            </tr>
-            <tr>
-                <td>状态：</td>
-                <td><input type="text" name="status" id="status" value="${object.status}"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="hidden" value="saveOrUpdateProductSeries" name="qm"></td>
-            </tr>
-            <tr>
-                <td align="center" colspan="2"><input type="submit" value="保存"></td>
-            </tr>
-        </table>
+<div class="am-cf am-padding">
+    <c:if test="${empty object || object.id == null || object.id==''}">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">新建商品系列</strong> / <small>New ProductSeries</small>
+        </div>
+    </c:if>
+    <c:if test="${!empty object && object.id != null && object.id != '' }">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">编辑商品系列</strong> / <small>Edit ProductSeries</small>
+        </div>
+    </c:if>
+</div>
+<hr/>
+
+<div class="am-g">
+    <%--<form action="/basic/xm.do" method="post" class="am-form am-form-horizontal">--%>
+    <form action="<c:url value='/productSeries/saveProductSeriesAndNext.do'/>" method="post" class="am-form am-form-horizontal">
+        <input type="hidden" name="qm" value="saveOrUpdateProductSeries">
+        <input type="hidden" name="id" value="${object.id}">
+        <c:if test="${empty object || object.id == null || object.id==''}">
+            <input type="hidden" name="status" value="1" />
+        </c:if>
+        <c:if test="${!empty object && object.id != null && object.id != '' }">
+            <input type="hidden" name="status" value="${object.status}" />
+        </c:if>
+
+        <div class="am-form-group">
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">商品系列 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="name" id="name" placeholder="商品系列名称" value="${object.name}" required>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <%--<input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${object.tenant.id}">--%>
+                <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>
+                <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
+            </div>
+        </div>
+
+        <%--<div class="am-form-group">--%>
+            <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
+                <%--<input type="submit" class="am-btn am-btn-primary" value="保存"/>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%--<div style="text-align: left;margin-left: 10px;" >--%>
+            <%--<input onclick="window.location.href='<c:url value="/productSeries/saveProductSeries.do"/>'"--%>
+                   <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+                   <%--style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"--%>
+                   <%--value="下一步" />--%>
+        <%--</div>--%>
+
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <%--<input type="submit" class="am-btn am-btn-primary" value="保存"/>--%>
+                <input type="submit" class="am-btn am-btn-default am-btn-xs"
+                       style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+                       value="下一步" />
+            </div>
+        </div>
+
     </form>
 </div>
 </body>

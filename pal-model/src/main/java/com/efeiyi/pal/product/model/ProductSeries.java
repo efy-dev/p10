@@ -3,6 +3,7 @@ package com.efeiyi.pal.product.model;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -73,6 +74,7 @@ public class ProductSeries {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productSeries")
+    @Where(clause = "status = '1'")
     public List<ProductSeriesPropertyName> getProductSeriesPropertyNameList() {
         return productSeriesPropertyNameList;
     }

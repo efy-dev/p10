@@ -15,9 +15,12 @@
     <title></title>
 </head>
 <body>
-<div align="center" am-panel am-panel-default admin-sidebar-panel>
-    <h1>商品${object.name}详细信息</h1>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">商品${object.name}详细信息</strong> / <small>Product Information</small>
+    </div>
 </div>
+
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -29,14 +32,97 @@
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td>状态：</td>
-            <td>${object.status}</td>
+            <td>制作时间：</td>
+            <td><fmt:formatDate value="${object.madeYear}" pattern="yyyy-MM-dd"/></td>
+        </tr>
+        <tr>
+            <td>所属系列：</td>
+            <td>${object.productSeries.name}</td>
+        </tr>
+        <tr>
+            <td>商户名称：</td>
+            <td>${object.tenant.name}</td>
         </tr>
         <tr>
             <td>大师姓名：</td>
-            <td>${object.tenant.name}</td>
+            <td>${object.tenant.masterName}</td>
         </tr>
     </table>
 </div>
+
+<c:if test="${!empty object.productPropertyValueList}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">商品${object.name}的系列属性列表</strong> / <small>Product PropertyNameList</small>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr>
+                <td>系列属性名</td>
+                <td>商品属性值</td>
+            </tr>
+            <c:forEach items="${object.productPropertyValueList}" var="productPropertyValue">
+                <tr>
+                    <td>${productPropertyValue.productSeriesPropertyName.name}</td>
+                    <td>${productPropertyValue.value}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</c:if>
+
+<c:if test="${!empty object.tenantSource}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">商品${object.name}的溯源信息</strong> / <small>ProductSource Information</small>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr style="text-align:left">
+                <td>参与人</td>
+                <td>制作工艺</td>
+                <td>创作地区</td>
+                <td>溯源图片</td>
+            </tr>
+            <tr>
+                <td>${object.tenantSource.tenant.masterName}</td>
+                <td>${object.tenantSource.name}</td>
+                <td>${object.tenantSource.region}</td>
+                <td>${object.tenantSource.imgUrl}</td>
+            </tr>
+        </table>
+    </div>
+</c:if>
+
+<c:if test="${!empty object.tenantCertification}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">商品${object.name}的认证信息</strong> / <small>ProductCertification Information</small>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr style="text-align:left">
+                <td>认证证书</td>
+                <td>认证机构</td>
+                <td>认证时间</td>
+                <td>认证结果</td>
+                <td>证书图片</td>
+            </tr>
+            <tr>
+                <td>${object.tenantCertification.name}</td>
+                <td>${object.tenantCertification.org}</td>
+                <td><fmt:formatDate value="${object.tenantCertification.theDate}" pattern="yyyy年MM月"/></td>
+                <td>
+                    <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantCertification.level}" type="normal" />
+                </td>
+                <td>${object.tenantCertification.imgUrl}</td>
+            </tr>
+        </table>
+    </div>
+</c:if>
+
 </body>
 </html>

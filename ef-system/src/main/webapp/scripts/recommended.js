@@ -3,14 +3,14 @@
  * @param obj
  * @param td 推荐标示位于哪一列
  */
-function recommended(obj,td,delterUrl){
+function recommended(obj,td,deleteUrl){
     //推荐  recommend 为1时 推荐  显示出排序文本框
     if($(obj).attr("recommend")=="1"){
         $(obj).next("span").css({"display":"block"});
     }
     if($(obj).attr("recommend")=="0"){
         var id = $(obj).attr("id"); //推荐对象id
-        deleteRecommended(obj,id,td,delterUrl);
+        deleteRecommended(obj,id,td,deleteUrl);
     }
 }
 

@@ -15,9 +15,12 @@
     <title></title>
 </head>
 <body>
-<div align="center" am-panel am-panel-default admin-sidebar-panel>
-    <h1>商品系列${object.name}详细信息</h1>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">商品系列${object.name}详细信息</strong> / <small>ProductSeries Information</small>
+    </div>
 </div>
+
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -33,10 +36,35 @@
             <td>${object.status}</td>
         </tr>
         <tr>
-            <td>大师姓名：</td>
-            <td>${object.master.name}</td>
+            <td>商户名称：</td>
+            <td>${object.tenant.name}</td>
         </tr>
     </table>
 </div>
+
+<c:if test="${!empty object.productSeriesPropertyNameList}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">商品系列${object.name}的系列属性名列表</strong> / <small>ProductSeries PropertyNameList</small>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr>
+                <td>编号</td>
+                <td>属性名</td>
+            </tr>
+            <% int i = 1;%>
+            <c:forEach items="${object.productSeriesPropertyNameList}" var="productSeriesPropertyName">
+                <tr>
+                    <td><%=i %>、</td>
+                    <td>${productSeriesPropertyName.name}</td>
+                </tr>
+                <% i += 1;%>
+            </c:forEach>
+        </table>
+    </div>
+</c:if>
+
 </body>
 </html>

@@ -15,38 +15,42 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateProduct(o){
-            var productId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=formProduct&id="+productId;
-        }
-        function addProduct(){
-            window.location.href="/basic/xm.do?qm=formProduct";
-        }
-    </script>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
-<body>
-<div class="am-panel am-panel-default admin-sidebar-panel">
-    <a href="javascript:addProduct()">新建</a>
+<body style="height: auto">
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct"/>'" type="button"
+           class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
-            <td>名称</td>
+            <td>商品名称</td>
             <td>序列号</td>
+            <td>所属系列</td>
+            <td>所属商户</td>
+            <td>制作完成时间</td>
         </tr>
 
         <c:forEach items="${requestScope.pageInfo.list}" var="product">
             <tr>
                 <td>
-                    <input type="button" value="修改" onclick="updateProduct(this)"/>
-                    <input type="hidden" value="${product.id}">
-                    <input type="button" value="删除"/>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${product.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        </div>
+                    </div>
                 </td>
-                <td><a href="/basic/xm.do?qm=viewProduct&id=${product.id}">${product.name}</a></td>
+                <td><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a></td>
                 <td>${product.serial}</td>
+                <td>${product.productSeries.name}</td>
+                <td>${product.tenant.name}</td>
+                <td><fmt:formatDate value="${product.madeYear}" pattern="yyyy-MM-dd"/></td>
             </tr>
         </c:forEach>
     </table>

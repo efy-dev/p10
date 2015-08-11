@@ -15,42 +15,40 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateUser(o){
-            var userId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=formUser&id="+userId;
-        }
-        function addUser(){
-            window.location.href="/basic/xm.do?qm=formUser";
-        }
-    </script>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
-<body>
-<div class="am-panel am-panel-default admin-sidebar-panel">
-    <a href="javascript:addUser()">新建</a>
+<body style="height: auto">
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建用户" />
 </div>
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
-    <tr>
-        <td>操作</td>
-        <td>userId</td>
-        <td>姓名</td>
-        <td>状态</td>
-    </tr>
-
-    <c:forEach items="${requestScope.pageInfo.list}" var="user">
-        <tr>
-            <td>
-                <input type="button" value="修改" onclick="updateUser(this)"/>
-                <input type="hidden" value="${user.id}"/>
-                <input type="button" value="删除"/>
-            </td>
-            <td>${user.id}</td>
-            <td><a href="/basic/xm.do?qm=viewUser&id=${user.id}">${user.name}</a></td>
-            <td>${user.status}</td>
+<div>
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
+        <tr style="text-align:left">
+            <td>操作</td>
+            <td>姓名</td>
+            <td>商户名称</td>
+            <td>状态</td>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${requestScope.pageInfo.list}" var="user">
+            <tr>
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&id=${user.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeUser&id=${user.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        </div>
+                    </div>
+                </td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewUser&id=${user.id}"/>">${user.name}</a></td>
+                <td>${user.tenant.name}</td>
+                <td>${user.status}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
