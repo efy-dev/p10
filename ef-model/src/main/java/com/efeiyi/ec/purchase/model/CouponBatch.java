@@ -14,10 +14,12 @@ import java.util.List;
 public class CouponBatch {
     private String id;
     private String name;
-    private Double amount;
+    private Integer amount;
     private Date startDate;//生效日期
     private Date endDate;//失效日期
     private List<Coupon> couponList;
+    private Double price;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -40,12 +42,21 @@ public class CouponBatch {
     }
 
     @Column(name = "amount")
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Column(name = "price")
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Column(name = "start_date")
@@ -73,5 +84,14 @@ public class CouponBatch {
 
     public void setCouponList(List<Coupon> couponList) {
         this.couponList = couponList;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

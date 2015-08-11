@@ -15,9 +15,13 @@
       var pid = $(o).next().val();
       window.location=("/order/list.do?id="+pid);
     }
+/*    function cancelOrder(o){
+        var pid = $(o).next().val();
+        window.location=("/order/list.do?id="+pid);
+    }*/
+
   </script>
 </head>
-
 <body>
 
 <h1>商品列表</h1>
@@ -34,19 +38,19 @@
       </td>
     <td>
       <input type="button" value="待收货" onclick="func(this);">
-      <input type="hidden" id="noReceipt" value="2">
+      <input type="hidden" id="noReceipt" value="5">
     </td>
     <td>
       <input type="button" value="未评价" onclick="func(this);">
-      <input type="hidden" id="noComment" value="3">
+      <input type="hidden" id="noComment" value="9">
       </td>
     <td>
       <input type="button" value="已完成" onclick="func(this);">
-      <input type="hidden" id="finish" value="4">
+      <input type="hidden" id="finish" value="13">
     </td>
     <td>
       <input type="button" value="已取消" onclick="func(this);">
-      <input type="hidden" id="cancel" value="5">
+      <input type="hidden" id="cancel" value="17">
     </td>
   </tr>
     <tr>
@@ -61,29 +65,35 @@
 
     <c:forEach items="${orderList}" var="list">
     <tr>
+      <p>
+          ${list.serial}
+      </p>
+      <c:forEach items="${list.purchaseOrderProductList}" var="productList">
       <td>
-          ${list.id}
+          ${productList.productModel.product.name}
       </td>
       <td>
-          ${list.id}
+          ${productList.productModel.product.price}
       </td>
       <td>
-          ${list.id}
+          ${productList.purchaseAmount}
       </td>
       <td>
-        ${list.id}
+          ${productList.purchasePrice}
       </td>
       <td>
-          ${list.id}
+          ${list.createDatetime}
       </td>
       <td>
-          ${list.id}
-      </td>
-      <td>
-          ${list.id}
+          ${list.orderStatus}
       </td>
     </tr>
+      </c:forEach>
     </c:forEach>
-    </table>
+    <p>
+      <input type="button" value="取消订单" onclick="func(this);">
+      <input type="hidden" id="cancelOrder" value="10002">
+    </p>
+  </table>
 </body>
 </html>

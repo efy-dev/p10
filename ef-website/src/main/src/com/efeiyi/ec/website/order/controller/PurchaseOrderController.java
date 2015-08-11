@@ -70,8 +70,10 @@ public class PurchaseOrderController extends BaseController {
     //=======【curl超时设置】===================================
     //本例程通过curl使用HTTP POST方法，此处可修改其超时时间，默认为30秒
     public static final int CURL_TIMEOUT = 30;
-
-
+    /*
+    * 订单状态查询
+    *
+    * */
     @RequestMapping({"/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("id");
@@ -102,25 +104,42 @@ public class PurchaseOrderController extends BaseController {
                 xQuery = new XQuery("plistPurchaseOrder_default", request);
         }
         xQuery.addRequestParamToModel(model, request);
-
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-
         return "/purchaseOrder/orderList";
 
     }
-
+    /*
+    * 查看订单详情
+    * */
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(@PathVariable String orderId, Model model) {
-
-        Object order = baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        model.addAttribute("order", order);
-
+    public String viewPurchaseOrder(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("orderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/orderView";
-
     }
-
-
+    /*
+    * 取消订单
+    * */
+    @RequestMapping({"/cancelOrder/{orderId}"})
+    public String cancelPurchaseOrder(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("orderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
+        model.addAttribute("order", purchaseOrder);
+        return "/purchaseOrder/orderList";
+    }
+    /*
+    * 付款
+    * */
+    @RequestMapping({"/payOrder/{orderId}"})
+    public String payPurchaseOrder(HttpServletRequest request, Model model) {
+        String orderId = request.getParameter("orderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
+        return "/purchaseOrder/orderList";
+    }
     @RequestMapping({"/pay/weixin"})
     public String wxPay(HttpServletRequest request) throws Exception {
         String orderId = request.getParameter("orderId");
@@ -133,7 +152,6 @@ public class PurchaseOrderController extends BaseController {
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-
         return "redirect:" + url;
     }
 
