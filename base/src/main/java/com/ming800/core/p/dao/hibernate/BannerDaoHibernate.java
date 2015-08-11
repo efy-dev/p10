@@ -1,9 +1,9 @@
 package com.ming800.core.p.dao.hibernate;
 
-import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
+import com.ming800.core.p.dao.BannerDao;
 import com.ming800.core.p.dao.TagDao;
-import com.ming800.core.p.model.ObjectRecommended;
+import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.model.Tag;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -21,8 +22,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public class TagDaoHibernate  implements TagDao {
-
+public class BannerDaoHibernate  implements BannerDao {
 
     @Autowired
     @Qualifier("sessionFactory")
@@ -34,10 +34,10 @@ public class TagDaoHibernate  implements TagDao {
     }
 
     @Override
-    public  List getTagList(String groupName){
+    public  List getBannerList(String groupName){
 
         Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM Tag d WHERE d.groupName = :group and d.status = '1'  order by d.id ")
+        Query query = session.createQuery("SELECT d FROM Banner d WHERE d.group = :group and d.status = '1'  order by d.id ")
                 .setString("group", groupName);
         return query.list();
 
@@ -48,29 +48,29 @@ public class TagDaoHibernate  implements TagDao {
     }
 
     /***
-     * 保存字典
-     * @param tag
+     * 保存轮播图
+     * @param banner
      */
     @Override
-    public void saveTag(Tag tag){
+    public void saveBanner(Banner banner){
 
-        this.getSession().saveOrUpdate(tag);
+        this.getSession().saveOrUpdate(banner);
     }
 
 
     @Override
-    public void  deleteTag(Tag tag){
-        String hql = "delete from Tag where  id = :id";
+    public void  deleteBanner(Banner banner){
+        String hql = "delete from Banner where  id = :id";
         Query query = this.getSession().createQuery(hql)
-                .setString("id", tag.getId());
+                .setString("id", banner.getId());
         query.executeUpdate();
     }
 
     @Override
-    public void  removeTag(Tag tag){
-        String hql = "update Tag set status = '0' where  id = :id";
+    public void  removeBanner(Banner banner){
+        String hql = "update Banner set status = '0' where  id = :id";
         Query query = this.getSession().createQuery(hql)
-                .setString("id", tag.getId());
+                .setString("id", banner.getId());
         query.executeUpdate();
     }
 }
