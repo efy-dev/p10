@@ -15,9 +15,13 @@
       var pid = $(o).next().val();
       window.location=("/order/list.do?id="+pid);
     }
+/*    function cancelOrder(o){
+        var pid = $(o).next().val();
+        window.location=("/order/list.do?id="+pid);
+    }*/
+
   </script>
 </head>
-
 <body>
 
 <h1>商品列表</h1>
@@ -61,29 +65,35 @@
 
     <c:forEach items="${orderList}" var="list">
     <tr>
+      <p>
+          ${list.serial}
+      </p>
+      <c:forEach items="${list.purchaseOrderProductList}" var="productList">
       <td>
-          ${list.id}
+          ${productList.productModel.product.name}
       </td>
       <td>
-          ${list.id}
+          ${productList.productModel.product.price}
       </td>
       <td>
-          ${list.id}
+          ${productList.purchaseAmount}
       </td>
       <td>
-        ${list.id}
+          ${productList.purchasePrice}
       </td>
       <td>
-          ${list.id}
+          ${list.createDatetime}
       </td>
       <td>
-          ${list.id}
-      </td>
-      <td>
-          ${list.id}
+          ${list.orderStatus}
       </td>
     </tr>
+      </c:forEach>
     </c:forEach>
-    </table>
+    <p>
+      <input type="button" value="取消订单" onclick="func(this);">
+      <input type="hidden" id="cancelOrder" value="10002">
+    </p>
+  </table>
 </body>
 </html>

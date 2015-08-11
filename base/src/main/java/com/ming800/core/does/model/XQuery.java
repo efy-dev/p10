@@ -65,7 +65,6 @@ public class XQuery {
     public XQuery(String doQueryName, String conditions , String sort, HttpServletRequest request) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
         //判断是否是分页查询
-
         if (request!=null) {
             this.setPageEntity(XDoUtil.getPageEntity(request));
         }
@@ -381,15 +380,12 @@ public class XQuery {
         } else {
             sb.append("select s from ");
         }
-
         sb.append(queryModel);
         sb.append(" s ");
         if (tempQueryHql != null && !tempQueryHql.equals("")) {
             sb.append(doQuery.getQueryHql()).append(" ");
         }
-
         return sb.toString();
-
     }
 
 

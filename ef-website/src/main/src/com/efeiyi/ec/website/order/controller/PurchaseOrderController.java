@@ -152,7 +152,6 @@ public class PurchaseOrderController extends BaseController {
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-
         return "redirect:" + url;
     }
 

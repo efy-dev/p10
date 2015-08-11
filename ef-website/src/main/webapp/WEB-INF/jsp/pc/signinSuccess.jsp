@@ -17,7 +17,6 @@
     <div><span style="padding-right: 4px;color: #8cc5fb;font-size: 16px;">${user.username}</span>注册成功注册成功</div>
     <div><span id="time" style="padding-right: 4px;color: #8cc5fb;font-size: 34px;font-weight: bold;">5</span>秒后跳转到登录页面
     </div>
-
 </div>
 <script>
     var wait = 5;//时间
