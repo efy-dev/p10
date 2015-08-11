@@ -11,5 +11,5 @@ public interface PaymentManager {
 
     void alipayCallback(String purchaseOrderPaymentId,String transactionNumber);
 
-    String wxpay(PurchaseOrder purchaseOrder, Float paymentAmount,String openid);
+    Object wxpay(PurchaseOrder purchaseOrder, Float paymentAmount,String openid);
 }

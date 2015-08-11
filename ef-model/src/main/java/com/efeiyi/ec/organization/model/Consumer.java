@@ -10,11 +10,12 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "organization_consumer")
-public class Consumer extends BigUser{
+public class Consumer extends BigUser {
     private BigDecimal deposit;
     private Integer score;
+    private String unionid;
 
-    @Column(name="deposit")
+    @Column(name = "deposit")
     public BigDecimal getDeposit() {
         return deposit;
     }
@@ -23,12 +24,21 @@ public class Consumer extends BigUser{
         this.deposit = deposit;
     }
 
-    @Column(name="score")
+    @Column(name = "score")
     public Integer getScore() {
         return score;
     }
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    @Column(name = "unionid")
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
     }
 }

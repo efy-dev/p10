@@ -35,7 +35,7 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
 
-   // @Autowired
+    @Autowired
     private PaymentManager paymentManager;
 
 

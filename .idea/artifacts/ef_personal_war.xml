@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ef-personal:war">
+    <output-path>$PROJECT_DIR$/ef-personal/target</output-path>
+    <root id="archive" name="ef-personal.war">
+      <element id="artifact" artifact-name="ef-personal:war exploded" />
+    </root>
+  </artifact>
+</component>

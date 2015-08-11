@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ef-master:war">
+    <output-path>$PROJECT_DIR$/ef-tenant/target</output-path>
+    <root id="archive" name="ef-master.war">
+      <element id="artifact" artifact-name="ef-master:war exploded" />
+    </root>
+  </artifact>
+</component>
