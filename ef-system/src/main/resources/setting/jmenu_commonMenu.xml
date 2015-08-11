@@ -21,6 +21,16 @@
                 <match url="viewConsumer"/>
             </jnode>
         </jnode>
+        <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
+            <jnode url="/basic/xm.do?qm=plistCoupon_default" access="admin,manager" text_zh_CN="优惠券列表">
+                <match url="plistCoupon_default"/>
+                <match url="viewCouponBatch"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistCouponBatch_default" access="admin,manager" text_zh_CN="优惠券批次">
+                <match url="plistCouponBatch_default"/>
+                <match url="viewCouponBatch"/>
+            </jnode>
+        </jnode>
 
     </jnode>
     <jnode id="efecProductAndTenant" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
