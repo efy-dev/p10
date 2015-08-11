@@ -6,12 +6,17 @@
 <head>
 </head>
 <body>
-<div id="page-header">
+<%--<div id="page-header">
     <div class="page-header-left">
         <h6 class="page-header-logo"><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/logo.gif" />"></a></h6>
         <p>中国非遗电商平台-传承人官网</p>
     </div>
     <div class="page-header-right"></div>
+</div>--%>
+<div  class="header-search">
+    <h1><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>
+    <div class="header-aifeiyi"></div>
+    <div class="header-sj"></div>
 </div>
 <div data-am-widget="slider" class="am-slider am-slider-a1 am-banner-q1" data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
@@ -42,7 +47,7 @@
                         <h1>${tenant.fullName}</h1>
                         <p>
                             <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                    ${tenant.fullName}-${tenant.projectName}-<ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人
+                                <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -67,7 +72,7 @@
                         <h1>${tenant.fullName}</h1>
                         <p>
                             <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                    ${tenant.fullName}-${tenant.projectName}-<ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人
+                                    <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -79,7 +84,7 @@
     </div>
 </div>
 <div class="page-border-solid"></div>
-<div class="page-footer">
+<%--<div class="page-footer">
     <dl class="page-footer-dl">
         <dt>正品保障</dt>
         <dd>
@@ -144,7 +149,45 @@
     </p>
 </div>
 <h4 id="page-footer-head">Copyright(c) 2015-2020 efeiyi.com All Rights Reserved</h4>
-<h4 id="page-footer-head-1">京ICP备15032511号-1</h4>
+<h4 id="page-footer-head-1">京ICP备15032511号-1</h4>--%>
+<div class="footer">
+    <ul class="hd">
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">友情链接：</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">永新华韵集团</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">联合国教科文组织</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化部</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化部非物质文化遗产保护司</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国非物质文化遗产保护中心</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国非物质文化遗产保护协会</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">故宫博物院</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">国家文物局</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化网</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化产业网</a></li>
+    </ul>
+    <ul class="imgbg">
+        <li class="li-img1"></li>
+        <li class="span"></li>
+        <li class="li-img2"><a href="http://192.168.1.57/ef-www/main/do7" ></a></li>
+        <li class="span"></li>
+        <li class="li-img3"></li>
+    </ul>
+    <div class="footer-bottom">
+        <ul class="correlation">
+            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/aboutUs">关于我们</a></li>
+            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/contactUs">联系我们</a></li>
+            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/welcome">诚聘英才</a></li>
+            <li><a href="#">意见反馈</a></li>
+            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/helpCenter">帮助中心</a></li>
+            <li><a href="#">诚信保证</a></li>
+        </ul>
+        <p>Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
+        <p>永新华韵旗下网站：e飞蚁 传承人官网 诚品宝 集团官网</p>
+        <div class="Keeponrecord">
+            <span class="Keeponrecord-l"></span>
+            <span class="Keeponrecord-r"></span>
+        </div>
+    </div>
+</div>
 <!--分析-->
 <%--<div class="floating_ck">
     <dl>
