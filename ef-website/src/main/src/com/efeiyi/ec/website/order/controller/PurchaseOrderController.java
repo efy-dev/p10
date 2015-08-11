@@ -1,6 +1,11 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import cn.beecloud.BCPay;
+import cn.beecloud.BCPayResult;
+import cn.beecloud.BeeCloud;
+import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PaymentManager;
@@ -8,7 +13,9 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +28,8 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -32,42 +40,67 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
 
-  /*  @Autowired
-    private PaymentManager paymentManager;*/
+    @Autowired
+    private PaymentManager paymentManager;
 
 
-    //΢�Ź��ں���ݵ�Ψһ��ʶ�����ͨ������΢�ŷ��͵��ʼ��в鿴
+    //微信公众号身份的唯一标识。审核通过后，在微信发送的邮件中查看
     public static final String APPID = "wx7f6aa253b75466dd";
-    //������ID����ݱ�ʶ
+    //受理商ID，身份标识
     public static final String MCHID = "1231228502";
-    //�̻�֧����ԿKey�����ͨ������΢�ŷ��͵��ʼ��в鿴
+    //商户支付密钥Key。审核通过后，在微信发送的邮件中查看
     public static final String KEY = "nvkijrk4e7s2ndi3vf4amvqlysu7f1pa";
-    //JSAPI�ӿ��л�ȡopenid����˺��ڹ���ƽ̨��������ģʽ��ɲ鿴
+    //JSAPI接口中获取openid，审核后在公众平台开启开发模式后可查看
     public static final String APPSECRET = "04928de13ab23dca159d235ba6dc19ea";
 
-    //��΢�ŷ�������ȡcode������ת����uri
+    //从微信服务器获取code，并跳转到此uri
     public static final String REDIRECT_URI = "http://beijing.yuepaila.com/pc/pay/wxPreparePayParams.do";
     //TODO http://weixin.yuepaila.com:8001/pc/pay/wxPreparePayParams.do
 
-    //=======��֤��·�����á�=====================================
-    //֤��·��,ע��Ӧ����д����·��
+    //=======【证书路径设置】=====================================
+    //证书路径,注意应该填写绝对路径
     /*public static final String SSLCERT_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_cert.pem";
     public static final String SSLKEY_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_key.pem";*/
 
-    //=======���첽֪ͨurl���á�===================================
-    //�첽֪ͨurl���̻�����ʵ�ʿ��������趨
+    //=======【异步通知url设置】===================================
+    //异步通知url，商户根据实际开发过程设定
     public static final String NOTIFY_URL = "http://beijing.yuepaila.com/pc/pay/wxRecordPayment.do";
     //TODO http://weixin.yuepaila.com:8001/pc/pay/wxRecordPayment.do
 
-    //=======��curl��ʱ���á�===================================
-    //������ͨ��curlʹ��HTTP POST�������˴����޸��䳬ʱʱ�䣬Ĭ��Ϊ30��
+    //=======【curl超时设置】===================================
+    //本例程通过curl使用HTTP POST方法，此处可修改其超时时间，默认为30秒
     public static final int CURL_TIMEOUT = 30;
 
 
-    @RequestMapping({"/list"})
+    @RequestMapping({"/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
-
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default", request);
+        String orderStatus = request.getParameter("id");
+        XQuery xQuery = null;
+        int  c = 0;
+        if (orderStatus == null) {
+            xQuery = new XQuery("plistPurchaseOrder_default", request);
+        } else {
+            c = Integer.parseInt(orderStatus);
+        }
+        switch (c) {
+            case 1:
+                xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                break;
+            case 5:
+                xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                break;
+            case 9:
+                xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                break;
+            case 13:
+                xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                break;
+            case 17:
+                xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                break;
+            default:
+                xQuery = new XQuery("plistPurchaseOrder_default", request);
+        }
         xQuery.addRequestParamToModel(model, request);
 
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
@@ -78,90 +111,77 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(@PathVariable String orderId,Model model){
+    public String viewPurchaseOrder(@PathVariable String orderId, Model model) {
 
-        Object order = baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        model.addAttribute("order",order);
+        Object order = baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", order);
 
         return "/purchaseOrder/orderView";
 
     }
 
-    @RequestMapping({"/pay/test"})
-    public String payTest(Model model, HttpServletRequest request) {
-        String openid = request.getParameter("openid");
-        //paymentManager.wxpay(null, null, openid);
-        return "/order/testPayment";
-    }
 
     @RequestMapping({"/pay/weixin"})
     public String wxPay(HttpServletRequest request) throws Exception {
         String orderId = request.getParameter("orderId");
-        String redirect_uri = "http://";
-        redirect_uri = redirect_uri + "?orderId=" + orderId;
-        //scope �����Ӹ������������������scope=snsapi_base ��������Ȩҳ��ֱ����ȨĿ��ֻ��ȡͳһ֧���ӿڵ�openid
+        //@TODO 添加订单数据部分
+        String redirect_uri = "http://master4.efeiyi.com/ef-website/order/pay/wxParam.do";
+//        redirect_uri = redirect_uri + "?orderId=" + orderId;
+        //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + APPID +
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
         return "redirect:" + url;
     }
 
     @RequestMapping({"/pay/wxParam.do"})
     public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
         String orderId = request.getParameter("orderId");
-        //1����ҳ��Ȩ���ȡ���ݵ�code�����ڻ�ȡopenId
+        String result = "";
+        //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
-        System.out.println("1����ҳ��Ȩcodeֵ��" + code);
-        String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
-        String result = getHttpResponse(urlForOpenId, null);
-        System.out.println("2����ȡopenidʱ����Ӧ���Ϊ��" + result);
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+
+            System.out.println("1、 page code value：" + code);
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code,result);
+        }
+        System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
         if (jsonObject.containsKey("errcode")) {
-            throw new RuntimeException("��ȡopenId�쳣��" + result);
+            throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
-       /* paymentManager.wxpay(null, null, openid);
-        model.addAttribute("jsonObject", paymentManager.wxpay(null, null, openid));*/
+        JSONObject jsonStr = (JSONObject)paymentManager.wxpay(null, null, openid);
+        model.addAttribute("appId",jsonStr.getString("appId"));
+        model.addAttribute("timeStamp",jsonStr.getString("timeStamp"));
+        model.addAttribute("pk",jsonStr.getString("package"));
+        model.addAttribute("paySign",jsonStr.getString("paySign"));
+        model.addAttribute("signType",jsonStr.getString("signType"));
+        model.addAttribute("nonceStr",jsonStr.getString("nonceStr"));
         return "/order/testPayment";
     }
 
-    public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
-        URL url = new URL(urlStr);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        //PrintWriter writer =null;
-        if (requestStr != null && !requestStr.equals("")) {
-            connection.setDoOutput(true);
-            OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(requestStr.getBytes("UTF-8"));
-            outputStream.flush();
-            /*writer = new PrintWriter(connection.getOutputStream());
-            writer.println(requestStr);
-            writer.flush();*/
-        }
-        Scanner scanner = new Scanner(connection.getInputStream());
-        StringBuilder responseStr = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            responseStr.append(scanner.nextLine());
-        }
-
-        return responseStr.toString();
-    }
 
     /**
-     * ���ɶ���
+     * 生成订单
      *
      * @return
      */
-  /*  @RequestMapping({"/saveOrUpdateOrder.do"})
+    @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
         BigDecimal total_fee = new BigDecimal(0);
         String cartId = request.getParameter("cartId");
-        String consumerAddressId = request.getParameter("addressId"); //��ȡ�ջ���ַ��id
+        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
         Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
 
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdat  ePurchaseOrder", request);
         xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
         xSaveOrUpdate.getParamMap().put("consumerAddress_id", consumerAddressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
@@ -182,7 +202,7 @@ public class PurchaseOrderController extends BaseController {
 
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();
     }
-*/
+
     @RequestMapping({"/choosePayment/{orderId}"})
     public String choosePayment(@PathVariable String orderId, HttpServletRequest request, Model model) {
 

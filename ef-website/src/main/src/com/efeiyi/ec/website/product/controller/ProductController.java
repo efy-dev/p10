@@ -53,7 +53,7 @@ public class ProductController {
 
     @RequestMapping("/list/{category}")
     public String plistProduct(@PathVariable String category ,HttpServletRequest request, Model model) throws Exception{
-
+        //前端传一组key：value过来，格式
         String conditions = request.getParameter("conditions");
         List<String> conditionItem = Arrays.asList(conditions.split(";"));
         HashMap<String,String> conditionMap = new HashMap<>();

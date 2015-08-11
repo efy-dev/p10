@@ -9,12 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+  <title></title>
 </head>
 <body>
 <%--${redirect}--%>
-
+<a onclick=""> 微信支付</a>
 <script type="text/javascript" src="<c:url value="/scripts/wxjsapi.js"/>"></script>
-<script>callpay("${jsonObject}");</script>
+
+<div>
+  <h2>调试部分</h2>
+  <div id="testContent"></div>
+</div>
+
+<script>callpay(${jsonObject});</script>
 </body>
 </html>
