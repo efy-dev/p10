@@ -3,10 +3,13 @@ package com.ming800.core.p.controller;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.model.Banner;
+import com.ming800.core.p.service.BannerManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,6 +26,8 @@ public class BannerController {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private BannerManager bannerManager;
 
 
     /**
@@ -38,5 +43,65 @@ public class BannerController {
         return banners;
         //return new ModelAndView("/test/index",model);
     }
+
+    /**
+     * 保存
+     * @param banner
+     * @return
+     */
+    @RequestMapping("/saveBanner.do")
+    @ResponseBody
+    public String saveBanner(Banner banner){
+
+        try{
+            bannerManager.saveBanner(banner);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        System.out.print(banner.getId());
+        return  banner.getId();
+    }
+
+    /**
+     * 真删
+     * @param banner
+     * @return
+     */
+    @RequestMapping("/deleteBanner.do")
+    @ResponseBody
+    public String deleteBanner(Banner banner){
+
+        try {
+
+            bannerManager.deleteBanner(banner);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  banner.getId();
+    }
+
+    /**
+     * 假删
+     * @param banner
+     * @return
+     */
+    @RequestMapping("/removeBanner.do")
+    @ResponseBody
+    public String removeBanner(Banner banner){
+
+        try {
+
+            bannerManager.removeBanner(banner);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  banner.getId();
+    }
+
 
 }
