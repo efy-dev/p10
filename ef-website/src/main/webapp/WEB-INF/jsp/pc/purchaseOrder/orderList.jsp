@@ -34,19 +34,19 @@
       </td>
     <td>
       <input type="button" value="待收货" onclick="func(this);">
-      <input type="hidden" id="noReceipt" value="2">
+      <input type="hidden" id="noReceipt" value="5">
     </td>
     <td>
       <input type="button" value="未评价" onclick="func(this);">
-      <input type="hidden" id="noComment" value="3">
+      <input type="hidden" id="noComment" value="9">
       </td>
     <td>
       <input type="button" value="已完成" onclick="func(this);">
-      <input type="hidden" id="finish" value="4">
+      <input type="hidden" id="finish" value="13">
     </td>
     <td>
       <input type="button" value="已取消" onclick="func(this);">
-      <input type="hidden" id="cancel" value="5">
+      <input type="hidden" id="cancel" value="17">
     </td>
   </tr>
     <tr>

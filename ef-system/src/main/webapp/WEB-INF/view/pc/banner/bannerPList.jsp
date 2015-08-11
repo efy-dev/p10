@@ -15,7 +15,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+
 </head>
 <body>
 <div class="admin-content">
@@ -53,7 +53,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only">${banner.title}</td>
-                        <td class="am-hide-sm-only"><img src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
+                        <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
