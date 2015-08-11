@@ -35,19 +35,21 @@ public class CommonManagerImpl implements CommonManager {
     private static void initCommon() throws Exception {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Logger logger = Logger.getLogger(CommonManagerImpl.class);
-        Resource xmlFiles;
-        if (resolver.getResource(MENU_STANDARD) != null) {
-            xmlFiles = resolver.getResource(MENU_STANDARD);
+        Resource  xmlFiles = resolver.getResource(MENU_STANDARD);
+        try {
+            logger.info("开始解析文件：" + xmlFiles.getURL());
             if (xmlFiles != null) {
-
-                logger.info("开始解析文件：" + xmlFiles.getURL());
                 getCommonBannerByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonDocumentByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
 
             }
+        }catch (Exception e){
+              e.printStackTrace();
         }
+
+
     }
 
     /**
@@ -165,7 +167,6 @@ public class CommonManagerImpl implements CommonManager {
         return  commonTag;
     }
 
-    @Override
     public CommonDocument getDocument(String group) throws  Exception{
         CommonDocument commonDocument = null;
         commonDocument = commonDocumentMap.get(group);
@@ -175,7 +176,6 @@ public class CommonManagerImpl implements CommonManager {
         return  commonDocument;
     }
 
-    @Override
     public CommonBanner getBanner(String group) throws  Exception{
         CommonBanner commonBanner = null;
         commonBanner = commonBannerMap.get(group);
