@@ -21,7 +21,7 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td align="right">集合：</td>
+            <td align="right">标签批次：</td>
             <td>${object.setting}</td>
         </tr>
         <tr>
@@ -38,7 +38,17 @@
         </tr>
         <tr>
             <td align="right">状态：</td>
-            <td>${object.status}</td>
+            <td>
+                <c:if test="${object.status == '0'}">
+                    已删除
+                </c:if>
+                <c:if test="${object.status == '1'}">
+                    <font color="green">待生成</font>
+                </c:if>
+                <c:if test="${object.status == '2'}">
+                    <font color="#a52a2a">已生成</font>
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td align="right">商品名称：</td>

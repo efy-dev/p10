@@ -41,13 +41,15 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="tenant.id" for="tenant.id" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
+            <label name="tenant.idName" for="tenant.idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <c:if test="${empty object || object.id == null || object.id==''}">
-                    <input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${tenant.id}" readonly>
+                    <input type="text" name="tenant.idName" id="tenant.idName" placeholder="商户名称" value="${tenant.name}" readonly>
+                    <input type="hidden" name="tenant.id" value="${tenant.id}" readonly>
                 </c:if>
                 <c:if test="${!empty object && object.id != null && object.id != '' }">
-                    <input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${object.tenant.id}" readonly>
+                    <input type="text" name="tenant.idName" id="tenant.idName" placeholder="商户名称" value="${object.tenant.name}" readonly>
+                    <input type="hidden" name="tenant.id" value="${object.tenant.id}" readonly>
                 </c:if>
             </div>
         </div>
@@ -60,13 +62,13 @@
         <div class="am-form-group">
             <label name="org" for="org" class="am-u-sm-3 am-form-label">认证机构 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="org" id="org" placeholder="认证机构" value="${object.region}">
+                <input type="text" name="org" id="org" placeholder="认证机构" value="${object.org}">
             </div>
         </div>
         <div class="am-form-group">
             <label name="theDate" for="theDate" class="am-u-sm-3 am-form-label">认证时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}">
-                <input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间" value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM'/>" readonly required/>
+                <input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间" value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>" readonly required/>
                 <span class="am-input-group-btn am-datepicker-add-on">
                     <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
                 </span>
@@ -75,7 +77,7 @@
         <div class="am-form-group">
             <label name="level" for="level" class="am-u-sm-3 am-form-label">认证结果 <small>*</small></label>
             <div class="am-u-sm-9">
-                <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.PCTenantCertification}" type="select" />
+                <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.level}" type="select" />
             </div>
         </div>
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div align="center">
-    <h1>欢迎使用成品宝后台管理系统</h1>
+    <h1><font color="#1e90ff">欢迎使用成品宝后台管理系统</font></h1>
 </div>
 </body>
 </html>
