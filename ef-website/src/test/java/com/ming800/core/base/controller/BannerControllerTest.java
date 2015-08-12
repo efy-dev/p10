@@ -153,7 +153,7 @@ public class BannerControllerTest {
 
     @Test
     public void demoZZC(){
-        wordValueController.test();
+//        wordValueController.test();
     }
 
 }

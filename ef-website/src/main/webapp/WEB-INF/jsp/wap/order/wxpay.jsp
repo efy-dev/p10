@@ -43,9 +43,11 @@
                 function (res) {
 //                    alert(res.err_code + res.err.desc + res.err_msg);
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
-                        window.location.href = "/";
+                        //跳转到查看支付是否成功
+                        window.location.href = "<c:url value="/"/>";
                     }
                     else {
+
                             window.location.href = "/";
                     }
                 }
