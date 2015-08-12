@@ -9,6 +9,7 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.order.controller.PurchaseOrderController;
+import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
@@ -166,7 +167,7 @@ public class SigninController extends BaseController {
         if (source != null) {
             model.addAttribute("source", source);
         }
-        return "/signin";
+        return "/register" ;
     }
 
     /**
@@ -194,7 +195,7 @@ public class SigninController extends BaseController {
     public String wxPay(HttpServletRequest request) throws Exception {
         String redirect_uri = "http://master4.efeiyi.com/ef-website/wx/bind";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + PurchaseOrderController.APPID +
+                "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
@@ -212,7 +213,7 @@ public class SigninController extends BaseController {
         } else {
 
             System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + PurchaseOrderController.APPID + "&secret=" + PurchaseOrderController.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
             request.getSession().setAttribute(code, result);
         }

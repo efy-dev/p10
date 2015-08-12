@@ -7,7 +7,6 @@ import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
-import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Path;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -94,17 +91,29 @@ public class ProductController {
         return "/product/productView";
     }
 
-
+    /**
+     * 产品收藏
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
     public boolean addProductFavorite(HttpServletRequest request) throws Exception{
+        String productId =request.getParameter("productId");
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
         xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
+        xSaveOrUpdate.getParamMap().put("product_id", productId);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return true;
     }
 
-
+    /**
+     * 删除收藏产品
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/removeProductFavorite.do"})
     @ResponseBody
     public boolean removeProductFavorite(HttpServletRequest request) throws Exception{
@@ -112,6 +121,12 @@ public class ProductController {
         return true;
     }
 
+    /**
+     * 查看收藏产品
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/favorite/list"})
     public List<Object> listProductFavorite(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("plistProductFavorite_default",request);

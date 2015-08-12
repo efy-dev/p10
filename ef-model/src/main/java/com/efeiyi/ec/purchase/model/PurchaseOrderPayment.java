@@ -18,7 +18,7 @@ public class PurchaseOrderPayment {
     private PurchaseOrder purchaseOrder;
     private Date createDateTime;
     private BigDecimal paymentAmount; //支付金额
-    private String payWay;//1支付宝 2银行卡
+    private String payWay;//1支付宝 2银行卡 3微信
     private User user;
     private String serial;//支付记录编号
     private String status;
