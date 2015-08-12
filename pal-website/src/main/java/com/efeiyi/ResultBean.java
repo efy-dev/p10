@@ -9,6 +9,8 @@ public class ResultBean{
     private String logo;
     private String msg;
     private int authenticity;
+    private boolean isTimeLimited = false;
+    private int timeLimit;
 
     public String getLogo() {
         return logo;
@@ -32,5 +34,17 @@ public class ResultBean{
 
     public void setAuthenticity(int authenticity) {
         this.authenticity = authenticity;
+    }
+
+    public boolean getIsTimeLimited() {
+        return isTimeLimited;
+    }
+
+    public void setIsTimeLimited(boolean isTimeLimited) {
+        this.isTimeLimited = isTimeLimited;
+    }
+
+    public int getTimeLimit() {
+        return PalConst.getInstance().timeLimit;
     }
 }

@@ -36,29 +36,29 @@
 <h1>基本信息</h1>
 
 <div class="item item2">
-<c:if  test="${result.authenticity != -1}"><a class="img" href=""><img src="${product.imgUrl}" width="395" height="500"/></a></c:if>
+<c:if  test="${result.authenticity != -1}"><a class="img" href="<c:url value='${product.imgUrl}'/>"><img src="<c:url value='${product.imgUrl}'/>" width="395" height="500"/></a></c:if>
 <ul>
 <li class="title">
 <strong>${result.msg}</strong>
 </li>
 <c:if test="${result.authenticity != -1}">
-<a href="" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>
+<a href="#" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>
     <li><span>证书编号: ${product.tenantCertification.name}</span></li>
     <li>名称: ${product.name}</li>
     <li>作者: ${product.productSeries.tenant.name}</li>
     <li>创作年代: <fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></li>
-    <li>认证时间: 2015年5月</li>
+    <li>认证时间: <fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></li>
     <li>类别: ${product.productSeries.name}</li>
     <c:forEach items="${product.productSeries.productSeriesPropertyNameList}" var="propertyName"  varStatus="status">
         <c:forEach items="${product.productPropertyValueList}" var="propertyValue" begin="${status.index}" end="${status.index}">
             <li >${propertyName.name}:${propertyValue.value}</li>
         </c:forEach>
     </c:forEach>
-    </ul>
-    </div>
 </c:if>
+</ul>
+</div>
     <!--//End-->
-        <%--<c:if test="${result.authenticity == 1}">--%>
+<c:if test="${result.authenticity == 1}">
     <div class="item-info">
     <h2>认证信息</h2>
 
@@ -72,16 +72,19 @@
     <tr>
     <td>非遗传承人证书</td>
     <td>国家级非遗传承人</td>
+        <%--<td><a href="/viewCertification.do?productId=${product.id}" title="">查看证书</a></td>--%>
     <td><a href="${product.tenantCertification.imgUrl}" title="${product.tenantCertification.name}">查看证书</a></td>
     </tr>
     <tr>
     <td>传承项目认证</td>
     <td>国家级非物质文化遗产项目</td>
+        <%--<td><a href="/viewCertification.do?productId=${product.id}" title="">查看证书</a></td>--%>
     <td><a href="${product.tenantCertification.imgUrl}" title="${product.tenantCertification.name}">查看证书</a></td>
     </tr>
     <tr>
     <td>其他获奖证书</td>
     <td>中国工艺美术大师</td>
+        <%--<td><a href="/viewCertification.do?productId=${product.id}" title="">查看证书</a></td>--%>
     <td><a href="${product.tenantCertification.imgUrl}" title="${product.tenantCertification.name}">查看证书</a></td>
     </tr>
     </table>
@@ -119,7 +122,7 @@
     <!--//End--溯源信息-->
     </div>
     </div>
-<%--</c:if>--%>
+</c:if>
 
     <!--<![endif]-->
 <!--[if lte IE 8 ]>
@@ -153,6 +156,27 @@
             return false;
         })
     })
+
+    <c:if test="${result.isTimeLimited}">
+    window.onload = function(){
+        setTimeout("autoClose()", ${result.timeLimit});
+    }
+
+    function autoClose(){
+        var userAgent = navigator.userAgent;
+        alert(userAgent);
+        if (userAgent.indexOf("Firefox") != -1
+                || userAgent.indexOf("Chrome") != -1) {
+            var href = window.location.href;
+//            window.open(href,"_self","");
+//            window.close();
+        } else {
+            window.opener = null;
+            window.open("", "_self");
+            window.close();
+        }
+    }
+    </c:if>
 </script>
 </body>
 </html>

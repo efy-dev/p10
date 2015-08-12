@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>移动端详情页真伪-伪</title>
+  <title>移动端详情-溯源信息终</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -30,44 +30,42 @@
 </head>
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
-  <h1 class="am-header-title">诚品宝-非遗商品防伪溯源系统</h1>
+  <div class="am-header-left am-header-nav"> <a href="" class="" title="返回上一步"></a> </div>
+  <h1 class="am-header-title">溯源信息</h1>
+  <div class="am-header-right am-header-nav">购买</div>
+  <!--  <em class="line"></em>-->
 </header>
 <!--//End--header-->
-<article class="eslite">
-  <div class="am-paragraph-default">
-    <c:if test="${result.authenticity != -1}">
-    <div class="imglogo"><img src="<c:url value='${product.imgUrl}'/>"/></div>
-    </c:if>
-    <div class="tips">${result.msg}</div>
+<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+  <ul class="am-slides">
+    <li><img src="<c:url value='${product.tenantSource.imgUrl}'/>"></li>
+    <%--<li><img src="upload/exp3.jpg"></li>--%>
+    <%--<li><img src="upload/exp3.jpg"></li>--%>
+    <%--<li><img src="upload/exp3.jpg"></li>--%>
+    <%--<li><img src="upload/exp3.jpg"></li>--%>
+  </ul>
+</div>
+<!--//End--轮播图-->
+<div data-am-widget="list_news" class="am-list-news am-list-news-default cuslist">
+  <!--列表标题-->
+  <div class="am-list-news-bd">
+    <ul class="am-list">
+      <li class="am-g am-list-item-dated">
+        <strong class="am-list-info">创作地区:</strong>
+        <span class="am-list-info2">${product.tenantSource.region}</span>
+      </li>
+      <li class="am-g am-list-item-dated">
+        <strong class="am-list-info">制作工艺:</strong>
+        <span class="am-list-info2">${product.tenantSource.name}</span>
+      </li>
+      <li class="am-g am-list-item-dated">
+        <strong class="am-list-info">参  与  人:</strong>
+        <span class="am-list-info2">${product.productSeries.tenant.name}</span>
+      </li>
+    </ul>
   </div>
-  <!--//End-->
-<c:if test="${result.authenticity != -1}">
-  <div class="am-paragraph-default">
-    <div class="title">${product.name}</div>
-    <div class="infolist">
-      <ul>
-        <li><strong>传承项目：</strong><p>${product.productSeries.name}</p></li>
-        <li><strong>制  作  人：</strong><p>${product.productSeries.tenant.name}</p></li>
-        <li><strong>创作时间：</strong><p><fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></p></li>
-      </ul>
-    </div>
-  </div>
-  <!--//End-->
+</div>
 
-  <div class="am-paragraph-default">
-    <div class="infoitem">
-      <ul>
-        <li><a href="<c:url value='/viewCertificate.do?id=${product.id}'/>">认证信息</a></li>
-        <li><a href="<c:url value='/viewProduct.do?id=${product.id}'/>">商品信息</a></li>
-        <li><a href="<c:url value='/viewSource.do?id=${product.id}'/>">溯源信息</a></li>
-        <li><a href="#">DNA鉴定信息</a></li>
-      </ul>
-    </div>
-  </div>
-  <!--//End-->
-  <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default" href="###">立即购买</a></div>
-  </c:if>
-</article>
 
 <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>

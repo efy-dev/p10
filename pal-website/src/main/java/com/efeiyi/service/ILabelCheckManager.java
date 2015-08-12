@@ -4,6 +4,9 @@ import com.efeiyi.pal.label.model.Label;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
 /**
  * Created by Administrator on 2015/8/7.
  */
@@ -15,5 +18,5 @@ public interface ILabelCheckManager {
 
      ModelMap updateRecord(ModelMap model, Label label) throws Exception ;
 
-     void saveOrUpdate(String name,Object obj);
+     String treatWeiXinMsg(HttpServletRequest request,String inXml)  throws IOException;
 }

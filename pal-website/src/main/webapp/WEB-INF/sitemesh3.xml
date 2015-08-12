@@ -1,4 +1,7 @@
 <sitemesh>
     <mapping path="/index.jsp" decorator="/layouts/decorator.jsp"/>
     <mapping path="/checkLabel.do" decorator="/layouts/decorator.jsp"/>
+    <excludes>
+    <pattern>/wap/*</pattern>
+    </excludes>
 </sitemesh>

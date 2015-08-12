@@ -1,6 +1,7 @@
 package com.efeiyi.controller;
 
 import com.efeiyi.PalConst;
+import com.efeiyi.WeiXinMessageDigest;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.service.ILabelCheckManager;
 import org.dom4j.Document;
@@ -30,50 +31,33 @@ public class LabelWeiXin extends HttpServlet {
     ILabelCheckManager iLabelCheckService;
 
     @Override
-    @RequestMapping(value = "/contact.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/contact.do", method = RequestMethod.POST)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String signature = request.getParameter("signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
 
-        InputStream is = request.getInputStream();
-        byte [] b = new byte[request.getContentLength()];
-        is.read(b);
-        String inXml = new String(b);
-        System.out.println(new Date(System.currentTimeMillis()) + "--inXml:\n" + inXml + "\n");
-
-
-        Document document = null;
-        try {
-            document = DocumentHelper.parseText(inXml);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-            throw new IOException(e.getMessage());
-        }
-        Element root = document.getRootElement();
-        String serial = root.element("EventKey").getText();
-        String event = root.element("Event").getText();
-        System.out.println("Event=\'"+event+"\'");
-        if(PalConst.getInstance().weiXinSubscribeEvent.equals(event)){
-            serial = serial.substring(8).trim();
-        }
-        System.out.println("serial=\'"+serial+"\'");
-
-        Label label = iLabelCheckService.getUniqueLabel(serial);
-        String url =  request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/checkLabel.do?serial="+serial;
-        String outXml = "";
-        String toUserName = root.element("ToUserName").getText();
-        String fromUserName = root.element("FromUserName").getText();
+        System.out.println("signature:" + signature);
+        System.out.println("timestamp:"+timestamp);
+        System.out.println("nonce:"+nonce);
+        System.out.println("echostr:" + request.getParameter("echostr"));
 
 
-        if(label != null)
-        {
-            String content = "查询的序列号对应商品是：" + label.getProduct().getName();
-            outXml =iLabelCheckService.constructWeiXinMsg(fromUserName, toUserName, content, url);
+        //验证签名
+        if(WeiXinMessageDigest.getInstance().validate(signature,timestamp,nonce)) {
+
+            InputStream is = request.getInputStream();
+            byte[] b = new byte[request.getContentLength()];
+            is.read(b);
+            String inXml = new String(b);
+            System.out.println(new Date(System.currentTimeMillis()) + "--inXml:\n" + inXml + "\n");
+
+            String outXml = iLabelCheckService.treatWeiXinMsg(request, inXml);
+
+            PrintWriter pw = response.getWriter();
+            pw.write(outXml);
         }else{
-            outXml = iLabelCheckService.constructWeiXinMsg(fromUserName, toUserName, "查询的序列号不存在", url);
+            response.getWriter().write("");
         }
-
-        System.out.println(new Date(System.currentTimeMillis()) + "--outXml:\n" + outXml + "\n");
-        PrintWriter pw = response.getWriter();
-        pw.write(outXml);
-
     }
 }
