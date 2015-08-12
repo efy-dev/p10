@@ -2,25 +2,24 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/8/3
-  Time: 11:32
+  Date: 2015/8/12
+  Time: 17:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-  <title></title>
+    <script src="<c:url value="/resources/jquery/jquery.qrcode.min.js"/>"></script>
+    <title></title>
 </head>
 <body>
-<%--${redirect}--%>
-<a onclick=""> 微信支付</a>
-<script type="text/javascript" src="<c:url value="/scripts/wxjsapi.js"/>"></script>
-
-<div>
-  <h2>调试部分</h2>
-  <div id="testContent"></div>
-</div>
-
-<script>callpay(${jsonObject});</script>
+  <div id="native"></div>
+<script>
+  $('#native').qrcode({
+    render: "div",
+    text: "${codeUrl}"
+  });
+</script>
 </body>
 </html>

@@ -215,6 +215,15 @@ public class PurchaseOrderController extends BaseController {
         return "/order/wxpay";
     }
 
+    @RequestMapping({"/pay/weixin/native/{orderId}"})
+    public String wxPayNative(@PathVariable String orderId,Model model){
+        PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        String codeUrl = paymentManager.wxNativePay(purchaseOrder,purchaseOrder.getTotal().floatValue());
+        model.addAttribute("order",purchaseOrder);
+        model.addAttribute("codeUrl",codeUrl);
+        return "/order/wxNative";
+    }
+
 
     /**
      * 生成订单
