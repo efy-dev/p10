@@ -57,7 +57,7 @@ a:hover{color:#0b3775;}
 #footer{width:960px;height:45px;margin:0 auto 50px;}
 .guild{width:748px;height:20px;padding-left:290px;}
 .guild li{width:97px;padding-left:45px;float:left;height:30px;}
-.efeiyi-url{width:212px;height:10px;margin-left:434px;color:#999;padding-left: 19px;}
+.efeiyi-url{width:212px;margin-left:434px;color:#999;padding-left: 19px;margin-bottom:40px;}
 .efeiyi-url a:link,.efeiyi-url a:visited{color:#999;}
 #footer ul li a{outline:none}
 /*分享*/
@@ -118,10 +118,10 @@ a{ text-decoration:none;}
 .tr-q{font-size:12px; font-family:"宋体";color:#666;}
 .column-tex1{width:100px;height:14px;padding-left:12px;}
 .column-tex2{width:70px;height:14px;padding-left:12px;font-size:14px; font-family:"Microsoft YaHei";color:#666;}
-.column-text-p{width:494px;height:96px;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
+.column-text-p{width:494px;font-size:12px; font-family:"宋体";color:#666; margin-top:80px;}
 /*简介大师荣誉*/
 #da-shi-rong-yu{width:501px;overflow:hidden;}
-#da-shi-rong-yu h1{height:113px;padding-top:155px;line-height:0;}
+#da-shi-rong-yu h1{}
 .img-pictures-show{width:501px;;overflow:hidden;padding-top: 50px;}
 .one-img-dl-l{width:219px;height:167px;float:left;}
 .one-img-dl-l dt{width:195px;height:133px;}
@@ -136,7 +136,7 @@ a{ text-decoration:none;}
 /*#chu-ban-zhu-zuo ul li{width:162px;height:195px;padding-left:33px;float:left;}*/
 #chu-ban-zhu-zuo ul li{width:auto;height:195px;padding-right:33px;float:left;}
 /*艺术年表*/
-#yi-shu-nian-biao{width:501px;overflow:hidden; margin-bottom:190px;}
+#yi-shu-nian-biao{width:501px;overflow:hidden;}
 #yi-shu-nian-biao h1{height:113px;padding-top:73px;line-height:0}
 .year-container{width:502px; overflow:hidden;}
 .text-size-color{font-size:12px;color:#666;font-family:"宋体"; line-height:22px;}
