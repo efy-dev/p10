@@ -28,7 +28,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     private String password;
 
     /*   private Integer theType;           // 基础岗位  11前台  12出纳     21教师，22助教*/
-    private Integer theStatus;      // 0假删  1用户/人员      2人员     3用户
+    private Integer status;      // 0假删  1用户/人员      2人员     3用户
 
 
 //    private TeachArea teachArea;
@@ -138,17 +138,16 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
         this.theType = theType;
     }*/
 
-    @Column(name = "thestatus")
-    public Integer getTheStatus() {
-        return theStatus;
+    @Column(name = "status")
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setTheStatus(Integer theStatus) {
-        this.theStatus = theStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-
-//    @ManyToOne(fetch = FetchType.EAGER)
+    //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "teach_area_id")
 //    public TeachArea getTeachArea() {
 //        return teachArea;

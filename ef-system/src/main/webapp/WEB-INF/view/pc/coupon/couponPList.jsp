@@ -40,6 +40,7 @@
                         <thead>
                         <tr>
                             <th class="table-set">操作</th>
+                            <th class="table-title">优惠券编号</th>
                             <th class="table-title">优惠券批次</th>
                             <th class="table-title">优惠券状态</th>
                         </tr>
@@ -57,11 +58,13 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td class="am-hide-sm-only">${coupon.serial}</td>
                                 <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a></td>
                                 <td class="am-hide-sm-only">
-                                <ming800:status name="status" dataType="coupon.status"
+                                    <ming800:status name="status" dataType="coupon.status"
                                                 checkedValue="${coupon.status}"
                                                 type="normal"/>
+
                                 </td>
                             </tr>
                         </c:forEach>

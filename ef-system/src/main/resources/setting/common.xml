@@ -2,9 +2,9 @@
 
 <common>
 
-    <wordValues>
+    <tag>
         <wordValue group=""  note=""/>
-    </wordValues>
+    </tag>
 
     <banners>
         <banner   group="master.index" note="传承人首页轮播图" />

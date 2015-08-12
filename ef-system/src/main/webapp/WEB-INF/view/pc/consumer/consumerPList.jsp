@@ -15,7 +15,19 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+    <script>
+        function removeConsumer(consumerId){
+            jQuery.ajax({
+                type:"GET",
+                url:'<c:url value="/basic/xmj.do?qm=removeConsumer"/>',
+                data:{id:consumerId},
+                dataType:"json",
+                success:function(data){
+                    $("#"+consumerId).remove();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -37,7 +49,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${requestScope.pageInfo.list}" var="consumer">
-                    <tr>
+                    <tr id="${consumer.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -47,10 +59,9 @@
                                     </a>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeConsumer&id=${consumer.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 删除
-                                    </a>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeConsumer('${consumer.id}')"><span
+                                            class="am-icon-trash-o">删除</span>
+                                    </button>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"

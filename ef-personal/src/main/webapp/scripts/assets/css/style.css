@@ -12,7 +12,7 @@ a:hover{color:#0b3775;}
 .Font-type-size-18{font-size:18px;color:#000;}
 /*首页-内容样式*/
 /*头部样式*/
-#header{margin:0 auto 30px; width:960px;height:35px;padding:17px 0 0 15px;}
+#header{margin:0 auto; width:960px;height:35px;padding:17px 0 0 15px;}
 #header h1{width:16px;height:15px;margin:0;float:left;font-size: 12px;}
 .logov{width:16px;height:15px;}
 .printing{width:230px;float:left;height:15px;padding-left:6px;font-size:12px;}
@@ -25,10 +25,10 @@ a:hover{color:#0b3775;}
 .register-left a{width:25px;height:10px;margin-left:38px;outline:none;}
 .register-right a{width:25px;height:11px;pdding-left:10px;outline:none;}
 /*导航样式*/
-#nav{width:960px;height:150px;margin:0 auto 58px;}
+#nav{width:960px;height:110px;margin:0 auto 58px;}
 #nav h1{width:105px;height:105px;margin-left:39px;float:left;margin-top:28px;}
 #nav h1 img{width:105px;height:105px;}
-.nav-centent{width:500px;height:14px;float:left;padding:135px 0 0 63px;}
+.nav-centent{width:500px;height:14px;float:left;padding:120px 0 0 63px;}
 .nav-centent li{float:left;padding-left:51px;}
 .nav-centent li a:link,.nav-centent li a:visited{color:#000;font-size:14px; font-family:"楷体"; font-weight:300;outline:none;}
 .nav-centent li a:hover{color:#ff2120;outline:none;}
@@ -44,7 +44,7 @@ a:hover{color:#0b3775;}
 .tab-dl dd{width:178px;height:119px;font-size:12px;color:#999;}
 #tab span{background:url(../images/logo3.gif) no-repeat 139px 7px;;width:201px;height:18px;padding-left:149px; display:block;font-size:12px;}
 /*内容*/
-#center{width:960px;height:301px;margin:0 auto;}
+#center{width:960px;height:301px;margin:20px auto;}
 .center-1{width:225px;height:260px;margin-left:54px;float:left;}
 .center-2{width:225px;height:260px;margin-left:90px;float:left;}
 .center-3{width:225px;height:339px;margin-left:90px;float:left;}
@@ -305,3 +305,36 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 #page-footer-head{height:45px;margin:0 auto; line-height:45px; font-family:"Arial"; text-align:center;}
 #page-footer-head-1{ font-family:"宋体";font-size:12px; color:#666;height:21px;text-align:center;}
 .a:link,.a:visited{color:#fff;}
+/*--//End--*/
+#full-screen-slider {height:348px}
+
+/* -- 临时页面头样式--*/
+/*--//header--*/
+.header-search{width:1000px;margin:0 auto;height:168px;}
+.header-search h1{width:126px;height:49px;padding-top:60px;float: left;}
+.header-aifeiyi{width:204px;height:97px;background: url("../images/images/header1.png")no-repeat 50px 72px;float: left;padding:60px 0 0 50px;}
+.header-sj{width:320px;height:90px;background: url("../images/images/header1.png")no-repeat -154px 72px;float: right;padding-top: 50px;}
+/*--//End--*/
+
+/*-- 临时页面尾样式 --*/
+.footer{width:100%;height:434px;float: left;padding-top:43px;border-top:1px #000 solid}
+.footer .hd{max-width:1000px;margin:0 auto 56px;height:50px;width:100%;}
+.footer .hd li{padding-left: 14px;width: auto;}
+.footer .hd li a{font-size:12px;color:#666;font-family: "宋体";}
+.footer-bottom{width:100%;background-color:#eee;height: 177px; }
+.imgbg{margin:0 auto 56px;height:75px;width: 1000px;}
+.imgbg li{float:left;}
+.imgbg .li-img1{width: 290px;height:62px;background: url("../images/images/header1.png") 0px -24px;margin-left: 100px;}
+.imgbg .span{margin:0 25px;background: url("../images/images/header1.png") 332px -95px;width:2px;height:58px;display: block;float:left;}
+.imgbg .li-img2,.imgbg .li-img2 a{width:206px;height:66px;background: url("../images/images/header1.png") 211px -18px;float:left;}
+.imgbg .li-img3{width:144px;height:71px;background: url("../images/images/header1.png") 505px -89px;}
+.footer-bottom p{line-height: 24px;text-align: center;font-size:12px;color:#666;font-family: "宋体";}
+.correlation{height:59px;margin:0 auto;width:660px;}
+.correlation li{width:110px;height:59px;float:left;line-height: 59px;}
+.correlation li a{font-size: 12px;color:#333;font-family: "宋体";}
+.Keeponrecord{width:267px;height:32px;margin: 0 auto;padding-top: 18px;}
+.Keeponrecord-l{width: 103px;height:32px;float: left;background: url("../images/images/header1.png") 304px -89px;}
+.Keeponrecord-r{width: 103px;height:32px;float: right;background: url("../images/images/header1.png") 304px -124px;}
+/*--//End--*/
+.am-gallery-overlay .am-gallery-title {height:66px;padding:5px;overflow: hidden}
+.am-gallery-overlay .am-gallery-title p {width:100%;float:left;height:18px;line-height:18px;overflow: hidden}

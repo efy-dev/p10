@@ -1,5 +1,9 @@
 package com.ming800.core.p.service.impl;
 import com.ming800.core.p.dao.TagDao;
+import com.ming800.core.p.model.CommonTag;
+import com.ming800.core.p.model.ObjectRecommended;
+import com.ming800.core.p.model.Tag;
+import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.p.service.TagManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +22,36 @@ public class TagManagerImpl implements TagManager {
 
 
     @Autowired
-    private TagDao wordValueDao;
+    private TagDao tagDao;
 
+    @Autowired
+    private CommonManager commonManager;
 
 
     @Override
-    public  List listWordValueByGroup(String groupName){
+    public  List getTagList(String groupName) throws Exception{
 
-        return  wordValueDao.listWordValueByGroup(groupName);
+        CommonTag commonTag =commonManager.getTag(groupName);
+
+        return  tagDao.getTagList(commonTag.getGroup());
+    }
+
+    @Override
+    public void saveTag(Tag tag) {
+        tagDao.saveTag(tag);
+        //  xdoDao.saveOrUpdateObject(objectRecommended);
+    }
+
+    @Override
+    public void deleteTag(Tag tag) {
+        tagDao.deleteTag(tag);
+        //  xdoDao.saveOrUpdateObject(objectRecommended);
+    }
+
+    @Override
+    public void removeTag(Tag tag) {
+        tagDao.removeTag(tag);
+        //  xdoDao.saveOrUpdateObject(objectRecommended);
     }
 
 }

@@ -3,10 +3,12 @@ package com.ming800.core.p.controller;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.DocumentManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -22,6 +24,9 @@ public class DocumentController {
     private static Logger logger = Logger.getLogger(BannerController.class);
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private DocumentManager documentManager;
     /**
      *根据group_id查询获取相关document
      */
@@ -35,4 +40,64 @@ public class DocumentController {
         return docs;
         //return new ModelAndView("/",model);
     }
+
+    /**
+     * 保存
+     * @param document
+     * @return
+     */
+    @RequestMapping("/saveDocument.do")
+    @ResponseBody
+    public String saveDocument(Document document){
+
+        try{
+            documentManager.saveDocument(document);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        System.out.print(document.getId());
+        return  document.getId();
+    }
+
+    /**
+     * 真删
+     * @param document
+     * @return
+     */
+    @RequestMapping("/deleteDocument.do")
+    @ResponseBody
+    public String deleteDocument(Document document){
+
+        try {
+
+            documentManager.deleteDocument(document);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  document.getId();
+    }
+
+    /**
+     * 假删
+     * @param document
+     * @return
+     */
+    @RequestMapping("/removeDocument.do")
+    @ResponseBody
+    public String removeDocument(Document document){
+
+        try {
+
+            documentManager.removeDocument(document);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  document.getId();
+    }
+
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "coupon")
 public class Coupon {
     private String id;
+    private String serial;
     private CouponBatch couponBatch;//批次
     private String status;
 
@@ -42,5 +43,14 @@ public class Coupon {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }

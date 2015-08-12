@@ -41,6 +41,7 @@
                         <tr>
                             <th class="table-set">操作</th>
                             <th class="table-title">优惠券批次名</th>
+                            <th class="table-title">优惠券金额</th>
                             <th class="table-title">数量</th>
                             <th class="table-title">生效日期</th>
                             <th class="table-title">失效日期</th>
@@ -59,7 +60,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="am-hide-sm-only">${couponBatch.name}</td>
+                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&id=${couponBatch.id}'/>">${couponBatch.name}</a></td>
+                                <td class="am-hide-sm-only">${couponBatch.price}</td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
                                 <td class="am-hide-sm-only">
                                 <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm"/>
