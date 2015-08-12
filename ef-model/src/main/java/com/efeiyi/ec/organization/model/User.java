@@ -95,7 +95,7 @@ public class User {
     }
 
     @JsonIgnore
-    @Column(name = "thestatus")
+    @Column(name = "status")
     public String getStatus() {
         return status;
     }

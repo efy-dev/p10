@@ -49,14 +49,14 @@
                 <do name="plistProductFavorite" access="" label="收藏商品列表分页">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="user.id" defaultValue="${MY_USER}"/>
+                        <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                 </do>
                 <do name="saveOrUpdateProductFavorite" access="" label="保存收藏商品">
                     <page>
                         <fields>
-                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
+                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
                         </fields>
                     </page>
                 </do>
