@@ -254,8 +254,8 @@ h5{width:627px;height:97px; line-height:97px;color:#242424;font-size:20px; font-
 .page-header-logo a{outline:none}
 /*banne*/
 .am-banner-q1{margin:0 auto;max-width:1000px;}
-.am-slider-a1 .am-control-nav li a:hover{ background:rgba(255,255,255,0.00);border:1px solid #fff;}
-.am-slider-a1 .am-control-nav li a.am-active{background:#fff;}
+.am-slider-a1 .am-control-nav li a:hover{background: #fff;}
+.am-slider-a1 .am-control-nav li a.am-active{border:1px solid #fff;background:rgba(255,255,255,0.00);}
 .am-slider-a1 .am-control-nav li a{background:#fff;}
 /*传统技艺*/
 #page-section{width:870px;overflow:hidden; margin:0 auto;}
