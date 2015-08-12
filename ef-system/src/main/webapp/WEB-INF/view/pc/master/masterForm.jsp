@@ -11,7 +11,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/resources/plugins/ckeditor/ckeditor.js"></script>
+    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
 

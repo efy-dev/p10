@@ -1,6 +1,10 @@
 package com.ming800.core.util;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 /**
  * Created by Administrator on 2015/1/28.
@@ -32,6 +36,29 @@ public class HttpUtil {
         }else {
             return false;
         }
+    }
+
+
+    public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
+        URL url = new URL(urlStr);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        //PrintWriter writer =null;
+        if (requestStr != null && !requestStr.equals("")) {
+            connection.setDoOutput(true);
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(requestStr.getBytes("UTF-8"));
+            outputStream.flush();
+            /*writer = new PrintWriter(connection.getOutputStream());
+            writer.println(requestStr);
+            writer.flush();*/
+        }
+        Scanner scanner = new Scanner(connection.getInputStream());
+        StringBuilder responseStr = new StringBuilder();
+        while (scanner.hasNextLine()) {
+            responseStr.append(scanner.nextLine());
+        }
+
+        return responseStr.toString();
     }
 
 }

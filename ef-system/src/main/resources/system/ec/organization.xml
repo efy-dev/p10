@@ -281,6 +281,14 @@
         <entity name="User" label="用户"
                 basic="simple" others=""
                 model="com.efeiyi.ec.organization.model.User">
+            <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistUser" access="" label="用户列表"
                     result="/user/userPList">

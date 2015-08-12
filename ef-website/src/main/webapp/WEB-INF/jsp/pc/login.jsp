@@ -20,7 +20,7 @@
     <div class="am-u-md-4" style="margin-top: 55px;">
       <form class="am-form" method="post" id="loginForm" action="<c:url value="/j_spring_security_check" />">
         <%--<input type="hidden" name="dispatcher" value=""/>--%>
-        <%--<input type="hidden" name="requestType" value="pc"/>--%>
+        <%--<input type="hidden" name="." value="pc"/>--%>
         <div class="am-form-group">
           <label for="username">用户</label>
           <input type="text" id="username" name="username" value="${enrollUsername}"/>
@@ -30,9 +30,9 @@
           <input type="password" class="form-control" id="password" name="password"
                  value="${j_password}"/>
         </div>
-        <div class="message">${message}</div>
-        <input id="login" type="submit" class="am-btn am-btn-default form-btn" value="登录"/>
-        <%--<div style="text-align: right"><a class="ypl-a" href="/pc/forget.do">密码忘了？</a></div>--%>
+          <div class="message">${message}</div>
+          <input id="login" type="submit" class="am-btn am-btn-default form-btn" value="登录"/>
+          <%--<div style="text-align: right"><a class="ypl-a" href="/pc/forget.do">密码忘了？</a></div>--%>
       </form>
     </div>
   </div>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix=".efeiyi.com" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 </head>
@@ -61,7 +62,8 @@
                                     <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
                                         <p>${tenant.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenant.brief}</p>
+                                        <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                        <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>传承人</p>
                                     </h3>
                                 </a>
                             </div>
@@ -81,7 +83,8 @@
                                     <img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-tenant-list"/>
                                     <h3 class="am-gallery-title am-text-color-1" style="line-height:15px; font-weight:400;">
                                         <p>${tenant.fullName}</p>
-                                        <p style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:120px;">${tenant.brief}</p>
+                                        <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                        <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>传承人</p>
                                     </h3>
                                 </a>
                             </div>

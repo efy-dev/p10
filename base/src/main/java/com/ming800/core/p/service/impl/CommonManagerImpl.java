@@ -1,10 +1,8 @@
 package com.ming800.core.p.service.impl;
 
 
-import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.*;
 import com.ming800.core.p.service.CommonManager;
-import com.ming800.core.p.service.JmenuManager;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -31,22 +29,27 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonBanner>  commonBannerMap = new HashMap<>();
     private static HashMap<String, CommonDocument> commonDocumentMap = new HashMap<>();
     private static HashMap<String, CommonRecommended>  commonRecommendedMap = new HashMap<>();
-    private static HashMap<String, CommonWordValue>    commonWordValueMap = new HashMap<>();
+    private static HashMap<String, CommonTag>    commonTagMap = new HashMap<>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Logger logger = Logger.getLogger(CommonManagerImpl.class);
         Resource  xmlFiles = resolver.getResource(MENU_STANDARD);
-        if (xmlFiles != null) {
-
-                logger.info("开始解析文件：" + xmlFiles.getURL());
+        try {
+            logger.info("开始解析文件：" + xmlFiles.getURL());
+            if (xmlFiles != null) {
                 getCommonBannerByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonDocumentByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
-                getCommonWordValueByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+                getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
 
+            }
+        }catch (Exception e){
+              e.printStackTrace();
         }
+
+
     }
 
     /**
@@ -55,7 +58,7 @@ public class CommonManagerImpl implements CommonManager {
      * @return
      */
     private  static  HashMap getCommonBannerByGroup(Document infoDocument) {
-        List<Node> bannerNodeList = infoDocument.selectNodes("common/recommends/banner");   //轮播图
+        List<Node> bannerNodeList = infoDocument.selectNodes("common/banners/banner");   //轮播图
         if(bannerNodeList!=null){
             for(Node node : bannerNodeList){
                 String group = node.selectSingleNode("@group").getText();
@@ -75,7 +78,7 @@ public class CommonManagerImpl implements CommonManager {
      * @return
      */
     private  static  HashMap getCommonDocumentByGroup(Document infoDocument) {
-        List<Node> documentNodeList = infoDocument.selectNodes("common/recommends/document");
+        List<Node> documentNodeList = infoDocument.selectNodes("common/documents/document");
         //文档
         if(documentNodeList!=null){
             for(Node node : documentNodeList){
@@ -98,21 +101,21 @@ public class CommonManagerImpl implements CommonManager {
      * @param infoDocument
      * @return
      */
-    private  static  HashMap getCommonWordValueByGroup(Document infoDocument) {
-        List<Node> wordValueNodeList = infoDocument.selectNodes("common/recommends/wordValue");
+    private  static  HashMap getCommonTagByGroup(Document infoDocument) {
+        List<Node> wordValueNodeList = infoDocument.selectNodes("common/tags/tag");
         //字典
         if(wordValueNodeList!=null){
             for(Node node : wordValueNodeList){
                 String group = node.selectSingleNode("@group").getText();
                 String note = node.selectSingleNode("@note").getText();
-                CommonWordValue wordValue = new CommonWordValue();
+                CommonTag wordValue = new CommonTag();
                 wordValue.setGroup(group);
                 wordValue.setNote(note);
 
-                commonWordValueMap.put(group,wordValue);
+                commonTagMap.put(group,wordValue);
             }
         }
-        return  commonWordValueMap;
+        return  commonTagMap;
     }
 
 
@@ -153,6 +156,35 @@ public class CommonManagerImpl implements CommonManager {
          }
          return commonRecommended;
      }
+
+    @Override
+    public CommonTag getTag(String group) throws  Exception{
+        CommonTag commonTag = null;
+        commonTag = commonTagMap.get(group);
+        if(commonTag == null){
+             throw  new Exception("commonTag is null");
+        }
+        return  commonTag;
+    }
+
+    public CommonDocument getDocument(String group) throws  Exception{
+        CommonDocument commonDocument = null;
+        commonDocument = commonDocumentMap.get(group);
+        if(commonDocument == null){
+            throw  new Exception("commonDocument is null");
+        }
+        return  commonDocument;
+    }
+
+    public CommonBanner getBanner(String group) throws  Exception{
+        CommonBanner commonBanner = null;
+        commonBanner = commonBannerMap.get(group);
+        if(commonBanner == null){
+            throw  new Exception("commonBanner is null");
+        }
+        return  commonBanner;
+    }
+
 
 
 }

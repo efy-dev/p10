@@ -27,7 +27,7 @@ public class AddressController {
     }
 
     @RequestMapping({"/address/listCity.do"})
-    public List<Object> listAddressCity(HttpServletRequest request) throws  Exception{
+         public List<Object> listAddressCity(HttpServletRequest request) throws  Exception{
         XQuery xQuery = new XQuery("listAddressCity_default" , request);
         xQuery.put("addressProvince_id",request.getParameter("provinceId"));
         List<Object> objectList = baseManager.listObject(xQuery);
@@ -40,7 +40,6 @@ public class AddressController {
         XQuery xQuery = new XQuery("listAddressDistrict_default",request);
         xQuery.put("addressCity_id",request.getParameter("cityId"));
         List<Object> objectList = baseManager.listObject(xQuery);
-
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("city_id",request.getParameter("addrCityId"));
         baseManager.saveOrUpdate(xSaveOrUpdate);

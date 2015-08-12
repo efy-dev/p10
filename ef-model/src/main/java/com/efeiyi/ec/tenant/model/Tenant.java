@@ -228,6 +228,7 @@ public class Tenant implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant", cascade = CascadeType.ALL)
     public List<TenantRecommended> getTenantRecommendedList() {
         return tenantRecommendedList;

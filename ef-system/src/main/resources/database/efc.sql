@@ -69,4 +69,34 @@ CREATE TABLE `master_introduction_attachment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 //master_attachment ---> master_news_attachment
+
+---------------------------------------------------
+------2015/8/11 修改user表thestatus成status 创建表coupon 和couponBatch
+---------------------------------------------------
+ALTER TABLE organization_user CHANGE COLUMN thestatus status SMALLINT(2);
+
+
+DROP TABLE IF EXISTS `coupon`;
+CREATE TABLE `coupon` (
+  `id` varchar(16) NOT NULL,
+  `coupon_batch_id` varchar(16) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `serial` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `coupon_batch`;
+CREATE TABLE `coupon_batch` (
+  `id` varchar(16) NOT NULL,
+  `name` varchar(16) DEFAULT NULL,
+  `amount` int(5) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `price` double(5,0) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

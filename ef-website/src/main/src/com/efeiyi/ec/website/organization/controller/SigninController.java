@@ -8,6 +8,7 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.website.order.controller.PurchaseOrderController;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
@@ -15,8 +16,10 @@ import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 
 /**
@@ -40,7 +43,6 @@ import java.util.LinkedHashMap;
  */
 
 @Controller
-@RequestMapping({"/pc"})
 public class SigninController extends BaseController {
     @Autowired
     private RoleManager roleManager;
@@ -61,7 +63,7 @@ public class SigninController extends BaseController {
      * @param username 用户名
      * @return 是否存在
      */
-    @RequestMapping(value = "/checkUserName.do")
+    @RequestMapping(value = "/pc/checkUserName.do")
     @ResponseBody
     public Boolean checkUserName(String username) {
 
@@ -84,13 +86,13 @@ public class SigninController extends BaseController {
      * @return jsp的路径
      * @throws Exception
      */
-    @RequestMapping(value = "/saveEnrollUser.do")
+    @RequestMapping(value = "/pc/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, Consumer bigUser, ModelMap modelMap) throws Exception {
 //        bigUser.setRole(roleManager.getRole("consumer"));
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
         /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
-        if (bigUser.getTheStatus() == null) {
-            bigUser.setTheStatus(1);
+        if (bigUser.getStatus() == null) {
+            bigUser.setStatus(1);
         }
         bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
         bigUser.setAccountExpired(false);
@@ -100,24 +102,24 @@ public class SigninController extends BaseController {
         /*bigUser.setRoleType("user");             //system,    admin,    user*/
         bigUser.setCreateDatetime(new Date());
 
-        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
         //注册时给新用户初始化一个购物车
         User user = new User();
         user.setId(bigUser.getId());
-        Cart cart=new Cart();
+        Cart cart = new Cart();
         cart.setUser(user);
         cart.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(Cart.class.getName(),cart);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return new ModelAndView("/signinSuccess");
     }
 
     /*
     认证手机验证码
      */
-    @RequestMapping({"/verification/verify.do"})
+    @RequestMapping({"/pc/verification/verify.do"})
     @ResponseBody
     public boolean checkVerificationCode(HttpServletRequest request) {
         String inputVerificationCode = request.getParameter("verificationCode").trim();
@@ -136,10 +138,10 @@ public class SigninController extends BaseController {
     /*
     发送手机验证码
      */
-    @RequestMapping({"/verification/send.do"})
+    @RequestMapping({"/pc/verification/send.do"})
     @ResponseBody
     public boolean sendVerificationCode(HttpServletRequest request) throws IOException {
-       String cellPhoneNumber = request.getParameter("phone");
+        String cellPhoneNumber = request.getParameter("phone");
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         System.out.println(verificationCode);
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
@@ -154,10 +156,11 @@ public class SigninController extends BaseController {
             return false;
         }
     }
+
     /**
      * 跳转到注册页面的controller
      */
-    @RequestMapping(value = {"enroll.do", "register"})
+    @RequestMapping(value = {"/pc/enroll.do", "/pc/register"})
     public String enroll(HttpServletRequest request, Model model) {
         String source = request.getParameter("source");
         if (source != null) {
@@ -169,35 +172,58 @@ public class SigninController extends BaseController {
     /**
      * 判断注册还是登陆
      */
-    @RequestMapping("/forward.do")
-    public String forward(String result){
-        if("2".equals(result)){
+    @RequestMapping("/pc/forward.do")
+    public String forward(String result) {
+        if ("2".equals(result)) {
             return "/register";
-        }else if("1".equals(result)){
+        } else if ("1".equals(result)) {
             return "/login";
-        }else {
+        } else {
             return "/loginAccess";
         }
     }
 
-    @RequestMapping(value ="/login.do")
-    public ModelAndView login(HttpServletRequest request,ModelMap model) {
-        String username = request.getParameter("username");
-       String pword = request.getParameter("password");
-       String password = StringUtil.encodePassword(pword,"SHA1");
-        String queryHql = "from BigUser b where b.username =:username and b.password =:password";
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username",username);
-      queryParamMap.put("password",password);
-        Object obj = baseManager.getUniqueObjectByConditions(queryHql,queryParamMap);
-        if(obj != null){
-            model.addAttribute("user",obj);
-            return new ModelAndView("/loginAccess",model);
-        }else{
-            model.addAttribute("username",username);
-            return new ModelAndView("/error",model);
-        }
+
+
+    @RequestMapping({"/wx/register"})
+    public String wxRegister() {
+        return "/wxRegister";
     }
 
+    @RequestMapping({"/wx/userInfo"})
+    public String wxPay(HttpServletRequest request) throws Exception {
+        String redirect_uri = "http://master4.efeiyi.com/ef-website/wx/bind";
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+                "appid=" + PurchaseOrderController.APPID +
+                "&redirect_uri=" +
+                URLEncoder.encode(redirect_uri, "UTF-8") +
+                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
+        return "redirect:" + url;
+    }
+
+    @RequestMapping({"/wx/bind"})
+    public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
+        String result = "";
+        //1、网页授权后获取传递的code，用于获取openId
+        String code = request.getParameter("code");
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+
+            System.out.println("1、 page code value：" + code);
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + PurchaseOrderController.APPID + "&secret=" + PurchaseOrderController.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code, result);
+        }
+        System.out.println("2、get openid result：" + result);
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("get openId error：" + result);
+        }
+        String unionid = jsonObject.getString("unionid");
+        model.addAttribute("unionid", unionid);
+        return "/wxRegister";
+    }
 }
 

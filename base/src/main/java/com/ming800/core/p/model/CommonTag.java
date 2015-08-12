@@ -15,7 +15,7 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 
-public class CommonWordValue implements Serializable {
+public class CommonTag implements Serializable {
 
 
     private String  group;
