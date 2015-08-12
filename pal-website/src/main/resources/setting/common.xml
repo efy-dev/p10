@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<common>
+
+    <wordValues>
+        <wordValue group=""  note=""/>
+    </wordValues>
+
+    <banners>
+        <banner   group="master.index" note="传承人首页轮播图" />
+    </banners>
+
+    <documents>
+        <document group="" template=".jsp" note="" />
+    </documents>
+
+    <recommends>
+        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="10" />
+        <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="5" />
+    </recommends>
+</common>

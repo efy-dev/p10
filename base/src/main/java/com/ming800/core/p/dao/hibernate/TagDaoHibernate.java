@@ -3,10 +3,13 @@ package com.ming800.core.p.dao.hibernate;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
 import com.ming800.core.p.dao.TagDao;
+import com.ming800.core.p.model.ObjectRecommended;
 import com.ming800.core.p.model.Tag;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -18,16 +21,23 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public class TagDaoHibernate extends BaseDaoSupport<Tag> implements TagDao {
+public class TagDaoHibernate  implements TagDao {
+
 
     @Autowired
-    private XdoDao xdoDao;
+    @Qualifier("sessionFactory")
+    private SessionFactory sessionFactory;
+
+    public Session getSession() {
+//        sessionFactory
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
-    public  List listWordValueByGroup(String groupName){
+    public  List getTagList(String groupName){
 
         Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM Tag d WHERE d.groupName = :group and d.status = 1  order by d.id ")
+        Query query = session.createQuery("SELECT d FROM Tag d WHERE d.groupName = :group and d.status = '1'  order by d.id ")
                 .setString("group", groupName);
         return query.list();
 
@@ -37,55 +47,30 @@ public class TagDaoHibernate extends BaseDaoSupport<Tag> implements TagDao {
           return xdoDao.getObjectList(hql,objects);*/
     }
 
-   /* @Override
-    public List<DictionaryData> getDictionaryDataListById(Integer branchId, String sid) {
-        Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM DictionaryData d WHERE d.branch.id = :branchId and d.dictionaryId = :sid and d.theStatus = 0 order by d.id ")
-                .setInteger("branchId", branchId)
-                .setString("sid", sid);
-        return query.list();
+    /***
+     * 保存字典
+     * @param tag
+     */
+    @Override
+    public void saveTag(Tag tag){
+
+        this.getSession().saveOrUpdate(tag);
+    }
+
+
+    @Override
+    public void  deleteTag(Tag tag){
+        String hql = "delete from Tag where  id = :id";
+        Query query = this.getSession().createQuery(hql)
+                .setString("id", tag.getId());
+        query.executeUpdate();
     }
 
     @Override
-    public DictionaryData getDictionaryData(Integer branchId, Integer id) {
-        Session session = this.getSession();
-        DictionaryData dictionaryData = (DictionaryData) session.get(DictionaryData.class, id);
-        return dictionaryData.getTheStatus() == 0 ? dictionaryData : null;
-      /*  if(this.super.getObjectList("SELECT d FROM DictionaryData d WHERE d.branchId ="+branchId+" and d.id ="+id+" and d.status = 0")!=null){
-            return (DictionaryData)this.super.getObjectList("FROM DictionaryData d WHERE d.branchId ="+branchId+" and d.id ="+id+" and d.status = 0").get(0);
-        }else{
-            return null;
-        }
+    public void  removeTag(Tag tag){
+        String hql = "update Tag set status = '0' where  id = :id";
+        Query query = this.getSession().createQuery(hql)
+                .setString("id", tag.getId());
+        query.executeUpdate();
     }
-
-   /* @Override
-    public PageInfo getDictionaryDataList(Integer branchId,String sid, PageEntity pageEntity) {
-        Session session = this.getSession();
-        Query listQuery = session.createQuery("SELECT d FROM DictionaryData d WHERE d.branchId = :branchId and d.definationName = :sid and d.status = 0")
-                .setInteger("branchId",branchId)
-                .setString("sid",sid);
-        Query countQuery = session.createQuery("SELECT COUNT(d.id) FROM DictionaryData d WHERE d.branchId = :branchId and d.definationName = :sid and d.status = 0")
-                .setInteger("branchId",branchId)
-                .setString("sid",sid);
-        return this.getPageInfo(listQuery,countQuery,pageEntity);
-    }*/
-/*
-    @Override
-    public void saveOrUpdateDictionaryData(DictionaryData dictData) {
-        super.saveOrUpdateObject(dictData);//To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public List<DictionaryData> getDictDefinationList(String sid) {
-        Query query = this.getSession().createQuery("FROM DictionaryData d  where d.dictionaryId='" + sid + "'");
-        return query.list();
-    }
-
-    public void saveOrUpdateData(DictionaryData dictionaryData) {
-        super.saveOrUpdateObject(dictionaryData);
-    }
-
-    public void updateDictionaryData(DictionaryData dictionaryData) {
-        super.updateObject(dictionaryData);
-
-    }*/
 }

@@ -35,13 +35,14 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
         purchaseOrderPayment.setPayWay("1");
-        User user = new User();
-        user.setId(AuthorizationUtil.getMyUser().getId());
+        String userid  = AuthorizationUtil.getMyUser().getId();
+        User user = (User)baseManager.getObject(User.class.getName(),userid);
         purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
 
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
 
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, purchaseOrder.getTotal().intValue()*100, purchaseOrder.getSerial(), "非遗产品", null, "http://www.efeiyi.com", null, null, null);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, purchaseOrder.getTotal().intValue(), purchaseOrderPayment.getId(), "非遗产品", null, "http://www.efeiyi.com", null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             System.out.println(bcPayResult.getHtml());
             return bcPayResult.getHtml();
@@ -53,12 +54,19 @@ public class PaymentManagerImpl implements PaymentManager {
     }
 
     @Override
-    public void alipayCallback(String purchaseOrderPaymentId, String transactionNumber) {
+    public void payCallback(String purchaseOrderPaymentId, String transactionNumber) {
+
         //更新支付记录的交易号
         PurchaseOrderPayment purchaseOrderPayment = (PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentId);
         purchaseOrderPayment.setTransactionNumber(transactionNumber);
         //@TODO 修改订单状态
+        PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderPayment.getPurchaseOrder().getId());
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        System.out.println("=============================================");
+        System.out.println(purchaseOrderPayment.getTransactionNumber());
+        System.out.println("=============================================");
     }
 
 
@@ -68,17 +76,18 @@ public class PaymentManagerImpl implements PaymentManager {
         PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
         purchaseOrderPayment.setStatus("1");
         purchaseOrderPayment.setCreateDateTime(new Date());
-        purchaseOrderPayment.setPaymentAmount(new BigDecimal(0));
+        purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
-        purchaseOrderPayment.setPayWay("1");
-        User user = new User();
-        user.setId(AuthorizationUtil.getMyUser().getId());
+        purchaseOrderPayment.setPayWay("3");
+        String userid  = AuthorizationUtil.getMyUser().getId();
+        User user = (User)baseManager.getObject(User.class.getName(),userid);
         purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
 
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
 
 //        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue() * 100, purchaseOrder.getSerial(), "非遗产品", null, "http://www.efeiyi.com", null, null, null);
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, 1, System.currentTimeMillis()+"", "非遗产品", null, "http://www.efeiyi.com", openid, null, null);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue(), purchaseOrderPayment.getId()+"", "非遗产品", null, null, openid, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
 //            System.out.println(bcPayResult.getWxJSAPIMap());
             JSONObject jsonObject = JSONObject.fromObject(bcPayResult.getWxJSAPIMap());
@@ -87,6 +96,34 @@ public class PaymentManagerImpl implements PaymentManager {
             //handle the error message as you wish！
             System.out.println(bcPayResult.getErrMsg());
             return null;
+        }
+    }
+
+    @Override
+    public String wxNativePay(PurchaseOrder purchaseOrder, Float paymentAmount) {
+
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("3");
+        String userid  = AuthorizationUtil.getMyUser().getId();
+        User user = (User)baseManager.getObject(User.class.getName(),userid);
+        purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+
+        BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
+
+//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue() * 100, purchaseOrder.getSerial(), "非遗产品", null, "http://www.efeiyi.com", null, null, null);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_NATIVE, purchaseOrder.getTotal().intValue(), purchaseOrderPayment.getId()+"", "非遗产品", null, null, null, null, null);
+        if (bcPayResult.getType().ordinal() == 0) {
+//            System.out.println(bcPayResult.getWxJSAPIMap());
+            String codeUrl = bcPayResult.getCodeUrl();
+            return codeUrl;
+        } else {
+            //handle the error message as you wish！
+            return bcPayResult.getErrMsg();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
+import com.efeiyi.ec.master.model.Master;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

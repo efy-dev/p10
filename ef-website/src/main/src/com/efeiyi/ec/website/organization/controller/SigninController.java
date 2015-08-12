@@ -8,8 +8,8 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.order.controller.PurchaseOrderController;
+import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 
 /**
@@ -93,8 +92,8 @@ public class SigninController extends BaseController {
 //        bigUser.setRole(roleManager.getRole("consumer"));
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
         /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
-        if (bigUser.getTheStatus() == null) {
-            bigUser.setTheStatus(1);
+        if (bigUser.getStatus() == null) {
+            bigUser.setStatus(1);
         }
         bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
         bigUser.setAccountExpired(false);
@@ -168,7 +167,7 @@ public class SigninController extends BaseController {
         if (source != null) {
             model.addAttribute("source", source);
         }
-        return "/signin";
+        return "/register" ;
     }
 
     /**
@@ -185,24 +184,7 @@ public class SigninController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/pc/login.do")
-    public ModelAndView login(HttpServletRequest request, ModelMap model) {
-        String username = request.getParameter("username");
-        String pword = request.getParameter("password");
-        String password = StringUtil.encodePassword(pword, "SHA1");
-        String queryHql = "from BigUser b where b.username =:username and b.password =:password";
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username", username);
-        queryParamMap.put("password", password);
-        Object obj = baseManager.getUniqueObjectByConditions(queryHql, queryParamMap);
-        if (obj != null) {
-            model.addAttribute("user", obj);
-            return new ModelAndView("/loginAccess", model);
-        } else {
-            model.addAttribute("username", username);
-            return new ModelAndView("/error", model);
-        }
-    }
+
 
     @RequestMapping({"/wx/register"})
     public String wxRegister() {
@@ -213,7 +195,7 @@ public class SigninController extends BaseController {
     public String wxPay(HttpServletRequest request) throws Exception {
         String redirect_uri = "http://master4.efeiyi.com/ef-website/wx/bind";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + PurchaseOrderController.APPID +
+                "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
@@ -231,7 +213,7 @@ public class SigninController extends BaseController {
         } else {
 
             System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + PurchaseOrderController.APPID + "&secret=" + PurchaseOrderController.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
             request.getSession().setAttribute(code, result);
         }

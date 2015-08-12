@@ -9,6 +9,7 @@ import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PaymentManager;
+import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -21,13 +22,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.OutputStream;
+import java.io.*;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,33 +47,6 @@ public class PurchaseOrderController extends BaseController {
     @Autowired
     private PaymentManager paymentManager;
 
-
-    //微信公众号身份的唯一标识。审核通过后，在微信发送的邮件中查看
-    public static final String APPID = "wx7f6aa253b75466dd";
-    //受理商ID，身份标识
-    public static final String MCHID = "1231228502";
-    //商户支付密钥Key。审核通过后，在微信发送的邮件中查看
-    public static final String KEY = "nvkijrk4e7s2ndi3vf4amvqlysu7f1pa";
-    //JSAPI接口中获取openid，审核后在公众平台开启开发模式后可查看
-    public static final String APPSECRET = "04928de13ab23dca159d235ba6dc19ea";
-
-    //从微信服务器获取code，并跳转到此uri
-    public static final String REDIRECT_URI = "http://beijing.yuepaila.com/pc/pay/wxPreparePayParams.do";
-    //TODO http://weixin.yuepaila.com:8001/pc/pay/wxPreparePayParams.do
-
-    //=======【证书路径设置】=====================================
-    //证书路径,注意应该填写绝对路径
-    /*public static final String SSLCERT_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_cert.pem";
-    public static final String SSLKEY_PATH = "/xxx/xxx/xxxx/WxPayPubHelper/cacert/apiclient_key.pem";*/
-
-    //=======【异步通知url设置】===================================
-    //异步通知url，商户根据实际开发过程设定
-    public static final String NOTIFY_URL = "http://beijing.yuepaila.com/pc/pay/wxRecordPayment.do";
-    //TODO http://weixin.yuepaila.com:8001/pc/pay/wxRecordPayment.do
-
-    //=======【curl超时设置】===================================
-    //本例程通过curl使用HTTP POST方法，此处可修改其超时时间，默认为30秒
-    public static final int CURL_TIMEOUT = 30;
     /*
     * 订单状态查询
     *
@@ -78,7 +55,7 @@ public class PurchaseOrderController extends BaseController {
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("id");
         XQuery xQuery = null;
-        int  c = 0;
+        int c = 0;
         if (orderStatus == null) {
             xQuery = new XQuery("plistPurchaseOrder_default", request);
         } else {
@@ -109,6 +86,7 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/orderList";
 
     }
+
     /*
     * 查看订单详情
     * */
@@ -119,6 +97,55 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/orderView";
     }
+
+    @RequestMapping({"/pay/alipay/{orderId}"})
+    public String aliPay(HttpServletRequest request, Model model, @PathVariable String orderId) {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        String resultHtml = paymentManager.alipay(purchaseOrder, purchaseOrder.getTotal().floatValue());
+        model.addAttribute("resultHtml", resultHtml);
+        return "/order/alipay";
+    }
+
+    @RequestMapping({"/pay/alipay/callback"})
+    @ResponseBody
+    public String aliPayCallback(HttpServletRequest request) throws IOException {
+        //获得返回参数
+        ServletInputStream servletInputStream = request.getInputStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(servletInputStream, "UTF-8");
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String resultJson = bufferedReader.readLine();
+
+
+        String transactionNumber = "";
+        String purchaseOrderPaymentId = "";
+        System.out.println(resultJson);
+        JSONObject jsonObject = JSONObject.fromObject(resultJson);
+
+        //@TODO 判断支付是否成功
+        String isTradeSuccess = jsonObject.getString("tradeSuccess");
+
+        //只有支付成功的时候才会保存支付记录
+        if ("true".equals(isTradeSuccess)) {
+            JSONObject messageDetailJson = jsonObject.getJSONObject("messageDetail");
+            String channelType = jsonObject.getString("channelType");
+            if (channelType.equals("WX")) {
+                transactionNumber = messageDetailJson.getString("transaction_id");
+                purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
+
+            } else if (channelType.equals("ALI")) {
+                transactionNumber = messageDetailJson.getString("trade_no");
+                purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
+            }
+            System.out.println("transactionNumber : " + transactionNumber);
+            System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
+            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
+
+        }
+        return "success";
+    }
+
+
+
     /*
     * 取消订单
     * */
@@ -130,6 +157,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/orderList";
     }
+
     /*
     * 付款
     * */
@@ -140,15 +168,15 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/orderList";
     }
-    @RequestMapping({"/pay/weixin"})
-    public String wxPay(HttpServletRequest request) throws Exception {
-        String orderId = request.getParameter("orderId");
+
+    @RequestMapping({"/pay/weixin/{orderId}"})
+    public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
-        String redirect_uri = "http://master4.efeiyi.com/ef-website/order/pay/wxParam.do";
+        String redirect_uri = "http://master4.efeiyi.com/ef-website/order/pay/wxParam/" + orderId;
 //        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-                "appid=" + APPID +
+                "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
                 URLEncoder.encode(redirect_uri, "UTF-8") +
                 "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
@@ -156,10 +184,10 @@ public class PurchaseOrderController extends BaseController {
         return "redirect:" + url;
     }
 
-    @RequestMapping({"/pay/wxParam.do"})
-    public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
-        String orderId = request.getParameter("orderId");
-        String result = "";
+    @RequestMapping({"/pay/wxParam/{orderId}"})
+    public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        String result;
         //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
         if (request.getSession().getAttribute(code) != null) {
@@ -167,9 +195,9 @@ public class PurchaseOrderController extends BaseController {
         } else {
 
             System.out.println("1、 page code value：" + code);
-            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
             result = HttpUtil.getHttpResponse(urlForOpenId, null);
-            request.getSession().setAttribute(code,result);
+            request.getSession().setAttribute(code, result);
         }
         System.out.println("2、get openid result：" + result);
         JSONObject jsonObject = JSONObject.fromObject(result);
@@ -177,14 +205,14 @@ public class PurchaseOrderController extends BaseController {
             throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
-        JSONObject jsonStr = (JSONObject)paymentManager.wxpay(null, null, openid);
-        model.addAttribute("appId",jsonStr.getString("appId"));
-        model.addAttribute("timeStamp",jsonStr.getString("timeStamp"));
-        model.addAttribute("pk",jsonStr.getString("package"));
-        model.addAttribute("paySign",jsonStr.getString("paySign"));
-        model.addAttribute("signType",jsonStr.getString("signType"));
-        model.addAttribute("nonceStr",jsonStr.getString("nonceStr"));
-        return "/order/testPayment";
+        JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrder, purchaseOrder.getTotal().floatValue(), openid);
+        model.addAttribute("appId", jsonStr.getString("appId"));
+        model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
+        model.addAttribute("pk", jsonStr.getString("package"));
+        model.addAttribute("paySign", jsonStr.getString("paySign"));
+        model.addAttribute("signType", jsonStr.getString("signType"));
+        model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
+        return "/order/wxpay";
     }
 
 
@@ -195,6 +223,8 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
+
+
         BigDecimal total_fee = new BigDecimal(0);
         String cartId = request.getParameter("cartId");
         String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
@@ -219,6 +249,12 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setTotal(total_fee);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
+        String payment = request.getParameter("payment");
+        if (payment.equals("1")) {//支付宝
+            return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
+        } else if (payment.equals("3")) { //微信
+            return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+        }
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();
     }
 

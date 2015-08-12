@@ -55,7 +55,7 @@
     </tag>
 
     <tag>
-        <description>type:normal ,select , radio</description>
+        <description>type:normal,select,radio</description>
         <name>status</name>
         <tag-class>com.ming800.core.taglib.StatusTag</tag-class>
         <body-content>empty</body-content>

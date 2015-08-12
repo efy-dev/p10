@@ -27,18 +27,14 @@
 </div>--%>
 <!--1-->
 <c:forEach items="${tenantWorkList}" var="masterWork">
-<section class="vessel">
-
-    <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
-        <a href="/work/${masterWork.id}">
-
-        <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-mobile-work">
-
-        </a>
-        <figcaption class="am-figure-capition-btm intro-text-2">${masterWork.name} </figcaption>
-    </figure>
-</section>
+    <section class="vessel">
+        <figure data-am-widget="figure" class="am am-figure am-figure-default  am-color-000">
+            <a href="<c:url value='/work/${masterWork.id}'/>">
+                <img src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-mobile-work">
+            </a>
+            <figcaption class="am-figure-capition-btm intro-text-2">${masterWork.name} </figcaption>
+        </figure>
+    </section>
 </c:forEach>
-
 </body>
 </html>
