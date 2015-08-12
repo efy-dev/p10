@@ -16,6 +16,10 @@
       var pid = $(o).next().val();
       window.location=("/product/getProduct.do?id="+pid);
     }
+    function ctrl(o){
+      var pid = $(o).next().val();
+      window.location=("/product/addProductFavorite.do?productId="+pid);
+    }
   </script>
 </head>
 <body>
@@ -26,14 +30,14 @@
       <td width="40"><input type="checkbox" name="ctlbox" value="1"/></td>
       <td>商品名称</td>
       <td>查看详情</td>
-      <td>商品id</td>
+      <td>收藏产品</td>
     </tr>
     <c:forEach items="${productList}" var="product" >
       <tr>
         <td><input type="checkbox"  value="1"/></td>
         <td><input type="text" name="productName" value="${product.name}"/></td>
         <td><input type="button" value="浏览" onclick="find(this);"><input type="hidden" id="productId" value="${product.id}"></td>
-        <td><input type="text" name="productId" value="${product.id}"/></td>
+        <td><input type="button" value="收藏" onclick="ctrl(this);"><input type="hidden" id="Id" value="${product.id}"></td>
       </tr>
     </c:forEach>
   </table>

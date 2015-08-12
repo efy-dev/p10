@@ -7,20 +7,25 @@
     <display-name>Archetype Created Web Application</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:config/applicationContext-*.xml,WEB-INF/applicationContext-*.xml</param-value>
+        <param-value>classpath*:config/applicationContext-*.xml,/WEB-INF/applicationContext-*.xml</param-value>
     </context-param>
 
-    <!-- SpringSecurity 核心过滤器配置 -->
-   <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
+    <!-- SpringSecurity 鏍稿績杩囨护鍣ㄩ厤缃� -->
+    <!--<filter>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
 
-    <!--sitemesh3 配置-->
+    <!--sitemesh3 閰嶇疆-->
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
     </filter>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--鎳掑姞杞介厤缃�-->
     <filter>
         <filter-name>lazyLoadingFilter</filter-name>
         <filter-class>
@@ -31,11 +36,7 @@
         <filter-name>lazyLoadingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!--编码配置-->
+    <!--缂栫爜閰嶇疆-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>
@@ -50,10 +51,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-    <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -62,21 +60,12 @@
         <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
 
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <jsp-config>
-        <!--增加自定义标签 -->
-        <taglib>
-            <!-- 确定标签库的URI-->
-            <taglib-uri>http://java.ming800.com/taglib</taglib-uri>
-            <!-- 确定标签库定义文件的位置 -->
-            <taglib-location>/WEB-INF/taglib/ming800.tld</taglib-location>
-        </taglib>
-    </jsp-config>
-
-    <!-- 定义DispatcherServlet -->
+    <!-- 瀹氫箟DispatcherServlet -->
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -87,13 +76,15 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- 拦截匹配的请求，这里所有请求采用名字为dispatcher的DispatcherServlet处理 -->
+    <!-- 鎷︽埅鍖归厤鐨勮姹傦紝杩欓噷鎵�鏈夎姹傞噰鐢ㄥ悕瀛椾负dispatcher鐨凞ispatcherServlet澶勭悊 -->
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
-        <!--<url-pattern>*.do</url-pattern>-->
+        <url-pattern>*.do</url-pattern>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

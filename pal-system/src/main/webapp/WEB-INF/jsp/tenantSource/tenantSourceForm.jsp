@@ -41,13 +41,15 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="tenant.id" for="tenant.id" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
+            <label name="tenant.idName" for="tenant.idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <c:if test="${empty object || object.id == null || object.id==''}">
-                    <input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${tenant.id}" readonly>
+                    <input type="text" name="tenant.idName" id="tenant.idName" placeholder="商户名称" value="${tenant.name}" readonly>
+                    <input type="hidden" name="tenant.id" value="${tenant.id}" readonly>
                 </c:if>
                 <c:if test="${!empty object && object.id != null && object.id != '' }">
-                    <input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${object.tenant.id}" readonly>
+                    <input type="text" name="tenant.idName" id="tenant.idName" placeholder="商户名称" value="${object.tenant.name}" readonly>
+                    <input type="hidden" name="tenant.id" value="${object.tenant.id}" readonly>
                 </c:if>
             </div>
         </div>
