@@ -18,7 +18,7 @@ public class CouponBatch {
     private Date startDate;//生效日期
     private Date endDate;//失效日期
     private List<Coupon> couponList;
-    private Double price;
+    private Float price;
     private String status;
 
     @Id
@@ -51,11 +51,11 @@ public class CouponBatch {
     }
 
     @Column(name = "price")
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
