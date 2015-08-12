@@ -4,10 +4,13 @@ import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
 import com.efeiyi.pal.organization.model.TenantSource;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,8 @@ public class TenantCertificationController {
     @Autowired
     private BaseManager baseManager;
 
+    private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
+
     @RequestMapping("/newTenantCertification.do")
     public ModelAndView newTenantSource(ModelMap modelMap, HttpServletRequest request) throws Exception{
         String tenantId = request.getParameter("tenantId");
@@ -40,7 +45,7 @@ public class TenantCertificationController {
     }
 
     @RequestMapping("/saveTenantCertification.do")
-    public ModelAndView saveTenantCertification(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView saveTenantCertification(ModelMap modelMap, MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
         TenantCertification tenantCertification = new TenantCertification();
 
         String tenantCertificationId = request.getParameter("id");
@@ -51,8 +56,9 @@ public class TenantCertificationController {
         }
 
         tenantCertification = setTenantCertificationBaseProperty(tenantCertification, request);
-
         tenantCertification = getRelationAttributeObject(tenantCertification, request);
+        tenantCertification = upLoadImg(multipartRequest, tenantCertification);
+
         baseManager.saveOrUpdate(tenantCertification.getClass().getName(), tenantCertification);
 
         String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id="+tenantCertification.getTenant().getId();
@@ -107,6 +113,28 @@ public class TenantCertificationController {
         String tenantId = request.getParameter("tenant.id");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         tenantCertification.setTenant(tenant);
+
+        return tenantCertification;
+    }
+
+    /**
+     * 上传证书图片
+     * @param multipartRequest
+     * @param tenantCertification
+     * @return
+     * @throws Exception
+     */
+    private TenantCertification upLoadImg(MultipartRequest multipartRequest, TenantCertification tenantCertification) throws Exception{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "tenantCertification/" + identify + ".jpg";
+
+        if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
+//            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+//            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
+            tenantCertification.setImgUrl(url);
+        }
 
         return tenantCertification;
     }

@@ -18,6 +18,7 @@
                 <!--<match url="removeLabelBatch"/>-->
                 <!--<match url="saveOrUpdateLabelBatch"/>-->
                 <match url="plistLabel_all"/>
+                <match url="plistLabel_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin" text_zh_CN="标签批次管理">
                 <match url="plistLabelBatch_default"/>
@@ -26,7 +27,6 @@
                 <match url="viewLabelBatch"/>
                 <match url="removeLabelBatch"/>
                 <match url="saveOrUpdateLabelBatch"/>
-                <match url="plistLabel_default"/>
             </jnode>
         </jnode>
 

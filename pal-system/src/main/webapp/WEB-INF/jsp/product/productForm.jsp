@@ -49,7 +49,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/product/saveProductAndNext.do'/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/product/saveProductAndNext.do'/>" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProduct">
         <input type="hidden" name="id" value="${object.id}">
         <c:if test="${empty object || object.id == null || object.id==''}">
@@ -93,8 +93,8 @@
             <div class="am-u-sm-9">
                 <input id="productSource_idName" placeholder="溯源信息"
                        onclick="openProductSourceOrCertification('productSource_id','productSource_idName','source');"
-                       value="${product.tenantSource.name}" required>
-                <input type="hidden" id="productSource_id"  name="tenantSource.id" value="${product.tenantSource.id}">
+                       value="${object.tenantSource.name}" required>
+                <input type="hidden" id="productSource_id"  name="tenantSource.id" value="${object.tenantSource.id}">
             </div>
         </div>
         <div class="am-form-group">
@@ -102,37 +102,21 @@
             <div class="am-u-sm-9">
                 <input id="productCertification_idName" placeholder="认证信息"
                        onclick="openProductSourceOrCertification('productCertification_id','productCertification_idName','certification');"
-                       value="${product.tenantCertification.name}" required>
-                <input type="hidden" id="productCertification_id"  name="tenantCertification.id" value="${product.tenantCertification.id}">
+                       value="${object.tenantCertification.name}" required>
+                <input type="hidden" id="productCertification_id"  name="tenantCertification.id" value="${object.tenantCertification.id}">
             </div>
         </div>
 
-        <%--<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd', viewMode: 'years'}">--%>
-            <%--<input type="text" class="am-form-field" placeholder="日历组件" readonly>--%>
-            <%--<span class="am-input-group-btn am-datepicker-add-on">--%>
-                <%--<button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>--%>
-            <%--</span>--%>
-        <%--</div>--%>
-
-        <%--<div class="am-form-group">--%>
-            <%--<label for="logo" class="am-u-sm-3 am-form-label">Logo</label>--%>
-
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input type="file" id="logo" name="logo" placeholder="Logo"--%>
-                       <%--value="${object.logoUrl}">--%>
-            <%--</div>--%>
-            <%--<c:if test="${!empty object.logoUrl}">--%>
-                <%--<img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-photo">--%>
-            <%--</c:if>--%>
-        <%--</div>--%>
-
-        <%--<div class="am-form-group">--%>
-            <%--<label for="doc-ipt-file-1" class="am-u-sm-3 am-form-label">商品Logo <small>*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input type="file" id="doc-ipt-file-1">--%>
-                <%--<p class="am-form-help">请选择要上传的文件...</p>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+        <div class="am-form-group">
+            <label for="logo" class="am-u-sm-3 am-form-label">商品Logo <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="file" id="logo" name="logo" placeholder="商品LogoLogo"
+                       value="${object.imgUrl}">
+            </div>
+            <c:if test="${!empty object.imgUrl}">
+                <img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">
+            </c:if>
+        </div>
 
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">

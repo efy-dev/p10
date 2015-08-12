@@ -3,13 +3,18 @@ package com.efeiyi.pal.system.organization.controller;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantSource;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/6.
@@ -21,6 +26,8 @@ public class TenantSourceController {
 
     @Autowired
     private BaseManager baseManager;
+
+    private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/newTenantSource.do")
     public ModelAndView newTenantSource(ModelMap modelMap, HttpServletRequest request) throws Exception{
@@ -36,7 +43,7 @@ public class TenantSourceController {
     }
 
     @RequestMapping("/saveTenantSource.do")
-    public ModelAndView saveTenantSource(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView saveTenantSource(ModelMap modelMap, MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
         TenantSource tenantSource = new TenantSource();
 
         String tenantSourceId = request.getParameter("id");
@@ -47,8 +54,9 @@ public class TenantSourceController {
         }
 
         tenantSource = setTenantSourceBaseProperty(tenantSource, request);
-
         tenantSource = getRelationAttributeObject(tenantSource, request);
+        tenantSource = upLoadImg(multipartRequest, tenantSource);
+
         baseManager.saveOrUpdate(tenantSource.getClass().getName(), tenantSource);
 
         String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id="+tenantSource.getTenant().getId();
@@ -97,6 +105,28 @@ public class TenantSourceController {
         String tenantId = request.getParameter("tenant.id");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         tenantSource.setTenant(tenant);
+
+        return tenantSource;
+    }
+
+    /**
+     * 上传溯源图片
+     * @param multipartRequest
+     * @param tenantSource
+     * @return
+     * @throws Exception
+     */
+    private TenantSource upLoadImg(MultipartRequest multipartRequest, TenantSource tenantSource) throws Exception{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "tenantSource/" + identify + ".jpg";
+
+        if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
+//            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+//            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
+            tenantSource.setImgUrl(url);
+        }
 
         return tenantSource;
     }
