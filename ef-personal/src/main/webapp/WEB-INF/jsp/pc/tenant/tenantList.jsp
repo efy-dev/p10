@@ -14,7 +14,7 @@
     <div class="page-header-right"></div>
 </div>--%>
 <div  class="header-search">
-    <h1><a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>
+    <h1><a href="#"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>
     <div class="header-aifeiyi"></div>
     <div class="header-sj"></div>
 </div>
@@ -53,7 +53,11 @@
                     </div>
                     </p>
                 </div>
-                <span class="img-mutual-jump"><a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
+                <span class="img-mutual-jump">
+                <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                    <a href="#">
+                        深入了解
+                    </a></span>
             </div>
         </c:forEach>
     </div>
@@ -78,7 +82,11 @@
                     </div>
                     </p>
                 </div>
-                <span class="img-mutual-jump"><a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">深入了解</a></span>
+                <span class="img-mutual-jump">
+                    <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                    <a href="#">
+                        深入了解
+                    </a></span>
             </div>
         </c:forEach>
     </div>
@@ -167,17 +175,17 @@
     <ul class="imgbg">
         <li class="li-img1"></li>
         <li class="span"></li>
-        <li class="li-img2"><a href="http://192.168.1.57/ef-www/main/do7" ></a></li>
+        <li class="li-img2"><a href="http://www.efeiyi.com/ef-www/main/do7" ></a></li>
         <li class="span"></li>
         <li class="li-img3"></li>
     </ul>
     <div class="footer-bottom">
         <ul class="correlation">
-            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/aboutUs">关于我们</a></li>
-            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/contactUs">联系我们</a></li>
-            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/welcome">诚聘英才</a></li>
+            <li><a target="_blank" href="http://www.efeiyi.com/main/aboutUs">关于我们</a></li>
+            <li><a target="_blank" href="http://www.efeiyi.com/main/contactUs">联系我们</a></li>
+            <li><a target="_blank" href="http://www.efeiyi.com/main/welcome">诚聘英才</a></li>
             <li><a href="#">意见反馈</a></li>
-            <li><a target="_blank" href="http://192.168.1.57/ef-www/main/helpCenter">帮助中心</a></li>
+            <li><a target="_blank" href="http://www.efeiyi.com/main/helpCenter">帮助中心</a></li>
             <li><a href="#">诚信保证</a></li>
         </ul>
         <p>Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>

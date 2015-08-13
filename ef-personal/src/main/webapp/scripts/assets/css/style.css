@@ -54,10 +54,10 @@ a:hover{color:#0b3775;}
 .center-1-dd a:link,.center-1-dd a:visited{color:#999;font-size:12px;}
 .center-1-dd a:hover{color:#0b3775;}
 /*尾*/
-#footer{width:960px;height:45px;margin:0 auto 50px;}
-.guild{width:748px;height:20px;padding-left:290px;}
-.guild li{width:97px;padding-left:45px;float:left;height:30px;}
-.efeiyi-url{width:212px;margin-left:434px;color:#999;padding-left: 19px;margin-bottom:40px;}
+#footer{width:960px;height:45px;margin:0 auto 50px;text-align: center}
+.guild{width:100%;float: left;}
+.guild a{display: inline-block;height:30px;margin:10px 20px;}
+.efeiyi-url{width:100%;color:#999;margin-bottom:40px;float: left;}
 .efeiyi-url a:link,.efeiyi-url a:visited{color:#999;}
 #footer ul li a{outline:none}
 /*分享*/
