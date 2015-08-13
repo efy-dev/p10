@@ -56,12 +56,12 @@ public class LabelBatchHandler implements DoHandler {
         String tenantId = request.getParameter("tenant.id");
         String purchaseOrderId = request.getParameter("purchaseOrder.id");
 
-//        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 //        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
 
-        Product product = null;
-        Tenant tenant = null;
+//        Product product = null;
+//        Tenant tenant = null;
         PurchaseOrder purchaseOrder = null;
 
         labelBatch.setProduct(product);

@@ -28,14 +28,6 @@
             <td>${object.name}</td>
         </tr>
         <tr>
-            <td>大师姓名：</td>
-            <td>${object.masterName}</td>
-        </tr>
-        <tr>
-            <td>级别：</td>
-            <td><ming800:status name="type" dataType="PCTenant.type" checkedValue="${object.type}" type="normal" /></td>
-        </tr>
-        <tr>
             <td>地址：</td>
             <td>${object.province}&nbsp;${object.city}&nbsp;${object.address}</td>
         </tr>
@@ -84,11 +76,10 @@
                             </div>
                         </div>
                     </td>
-                    <td>${tenantSource.tenant.masterName}</td>
+                    <td></td>
                     <td>${tenantSource.name}</td>
                     <td>${tenantSource.region}</td>
                     <td>
-                    <%--${tenantSource.imgUrl}--%>
                         <c:if test="${!empty tenantSource.imgUrl}">
                             <img src="http://pal.efeiyi.com/${tenantSource.imgUrl}@!pal-img-list"/>
                         </c:if>
@@ -139,7 +130,6 @@
                         <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${tenantCertification.level}" type="normal" />
                     </td>
                     <td>
-                    <%--${tenantCertification.imgUrl}--%>
                         <c:if test="${!empty tenantCertification.imgUrl}">
                             <img src="http://pal.efeiyi.com/${tenantCertification.imgUrl}@!pal-img-list"/>
                         </c:if>

@@ -25,12 +25,14 @@ public class Product {
     private String serial;
     private ProductSeries productSeries;
     private Tenant tenant;
+    private String masterName;
     private String status;
     private Date madeYear;
     private TenantSource tenantSource;
     private TenantCertification tenantCertification;
     private List<ProductPropertyValue> productPropertyValueList;
     private String imgUrl;
+    private String shoppingUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -82,6 +84,15 @@ public class Product {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    @Column(name = "master_name")
+    public String getMasterName() {
+        return masterName;
+    }
+
+    public void setMasterName(String masterName) {
+        this.masterName = masterName;
     }
 
     @Column(name = "status")
@@ -141,5 +152,14 @@ public class Product {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-    
+
+    @Column(name = "shopping_url")
+    public String getShoppingUrl() {
+        return shoppingUrl;
+    }
+
+    public void setShoppingUrl(String shoppingUrl) {
+        this.shoppingUrl = shoppingUrl;
+    }
+
 }
