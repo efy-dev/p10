@@ -21,6 +21,7 @@ public class Label {
 
     private String id;
     private String serial;
+    private String code;
     private LabelBatch labelBatch;
     private Product product;
     private Tenant seller;
@@ -48,6 +49,15 @@ public class Label {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

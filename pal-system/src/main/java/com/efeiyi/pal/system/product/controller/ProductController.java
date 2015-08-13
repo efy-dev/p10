@@ -114,15 +114,19 @@ public class ProductController {
      */
     private Product setProductBaseProperty(Product product, HttpServletRequest request) throws ParseException {
         String name = request.getParameter("name");
+        String masterName = request.getParameter("masterName");
         String serial = request.getParameter("serial");
         String status = request.getParameter("status");
+        String shoppingUrl = request.getParameter("shoppingUrl");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" );
         Date date = sdf.parse(request.getParameter("madeYear"));
 
         product.setName(name);
+        product.setMasterName(masterName);
         product.setSerial(serial);
         product.setStatus(status);
+        product.setShoppingUrl(shoppingUrl);
         product.setMadeYear(date);
 
         return product;

@@ -20,6 +20,7 @@ public class CouponBatch {
     private List<Coupon> couponList;
     private Float price;
     private String status;
+    private Integer isCreatedCoupon;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -93,5 +94,14 @@ public class CouponBatch {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "is_created_coupon")
+    public Integer getIsCreatedCoupon() {
+        return isCreatedCoupon;
+    }
+
+    public void setIsCreatedCoupon(Integer isCreatedCoupon) {
+        this.isCreatedCoupon = isCreatedCoupon;
     }
 }

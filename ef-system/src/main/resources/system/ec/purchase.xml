@@ -62,8 +62,7 @@
                 <do name="plistPurchaseOrder" access="" label="购买订单"
                     result="/purchaseOrder/purchaseOrderPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne" label="id"/>
-                        <condition name="status" defaultValue="1" operation="eq" label="状态"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                     </query>
                     <query name="consumer" label="查找" type="auto" orderBy="id:desc">
                         <condition name="user.username" operation="eq" label="用户名"/>
@@ -105,6 +104,9 @@
                     result="/coupon/couponPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="优惠券状态"/>
+                    </query>
+                    <query name="couponBatch" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="couponBatch.id" operation="eq" label="优惠券批次id"/>
                     </query>
                 </do>
 

@@ -1,7 +1,5 @@
 package com.efeiyi.pal.system.organization.controller;
 
-import com.efeiyi.pal.organization.model.AddressDistrict;
-import com.efeiyi.pal.organization.model.AddressProvince;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;

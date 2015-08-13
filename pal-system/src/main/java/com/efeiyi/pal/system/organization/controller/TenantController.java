@@ -62,17 +62,13 @@ public class TenantController {
      */
     private Tenant setTenantBaseProperty(Tenant tenant, HttpServletRequest request) {
         String name = request.getParameter("name");
-        String masterName = request.getParameter("masterName");
         String status = request.getParameter("status");
-        String type = request.getParameter("type");
         String province = request.getParameter("province");
         String city = request.getParameter("city");
         String address = request.getParameter("address");
 
         tenant.setName(name);
-        tenant.setMasterName(masterName);
         tenant.setStatus(status);
-        tenant.setType(type);
         tenant.setProvince(province);
         tenant.setCity(city);
         tenant.setAddress(address);

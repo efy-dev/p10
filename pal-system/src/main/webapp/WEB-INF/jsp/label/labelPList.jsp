@@ -19,49 +19,58 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">标签列表</strong> / <small>LabelList</small></div>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">标签列表</strong>
+    </div>
 </div>
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
-    <tr>
-        <td>操作</td>
-        <td>序列号</td>
-        <td>标签批次</td>
-        <td>商品</td>
-        <td>商户</td>
-        <td>状态</td>
-        <td>第一次查询时间</td>
-        <td>最近一次查询时间</td>
-        <td>查询次数</td>
-    </tr>
+<div>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="label">
+</div>
+<div>
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>
-                <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_default&conditions=label.id:${label.id}"/>'"
-                                class="am-btn am-btn-default am-btn-xs">查询记录</button>
-                    </div>
-                </div>
-            </td>
-            <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${label.id}'/>">${label.serial}</a></td>
-            <td>${label.labelBatch.setting}</td>
-            <td>${label.product.name}</td>
-            <td>${label.seller.name}</td>
-            <td>
-                <c:if test="${label.status == '2'}">
-                    <font color="red">已验证</font>
-                </c:if>
-                <c:if test="${label.status == '1'}">
-                    <font color="green">未验证</font>
-                </c:if>
-            </td>
-            <td><fmt:formatDate value="${label.firstCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-            <td><fmt:formatDate value="${label.lastCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-            <td>${label.checkCount} 次</td>
+            <td>操作</td>
+            <td>序列号</td>
+            <td>防伪码</td>
+            <td>标签批次</td>
+            <td>商品</td>
+            <td>商户</td>
+            <td>状态</td>
+            <td>第一次查询时间</td>
+            <td>最近一次查询时间</td>
+            <td>查询次数</td>
         </tr>
-    </c:forEach>
-</table>
+
+        <c:forEach items="${requestScope.pageInfo.list}" var="label">
+            <tr>
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_default&conditions=label.id:${label.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs">查询记录</button>
+                        </div>
+                    </div>
+                </td>
+                <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${label.id}'/>">${label.serial}</a></td>
+                <td>${label.code}</td>
+                <td>${label.labelBatch.setting}</td>
+                <td>${label.product.name}</td>
+                <td>${label.seller.name}</td>
+                <td>
+                    <c:if test="${label.status == '2'}">
+                        <font color="red">已验证</font>
+                    </c:if>
+                    <c:if test="${label.status == '1'}">
+                        <font color="green">未验证</font>
+                    </c:if>
+                </td>
+                <td><fmt:formatDate value="${label.firstCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                <td><fmt:formatDate value="${label.lastCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                <td>${label.checkCount} 次</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
