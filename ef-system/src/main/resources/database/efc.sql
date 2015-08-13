@@ -98,5 +98,6 @@ CREATE TABLE `coupon_batch` (
   `end_date` datetime DEFAULT NULL,
   `price` float(5,0) DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL,
+  `is_created_coupon` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
