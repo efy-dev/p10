@@ -5,7 +5,7 @@
 <div id="footer">
     <div class="guild">
         <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
-        <a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
+        <a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
         <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
         <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
     </div>
