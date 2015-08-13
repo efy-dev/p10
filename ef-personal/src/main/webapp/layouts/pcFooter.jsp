@@ -3,12 +3,12 @@
 <br />
 <br />
 <div id="footer">
-    <ul class="guild">
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a></li>
-        <li><a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a></li>
-    </ul>
+    <div class="guild">
+        <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
+        <a href="#"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
+        <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
+        <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
+    </div>
     <div class="efeiyi-url">©2015 efeiyi.com</div>
 </div>
 <!--分析-->
