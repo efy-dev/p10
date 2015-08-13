@@ -100,3 +100,8 @@ CREATE TABLE `coupon_batch` (
   `status` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/********20150813******/
+ALTER TABLE `master_news`
+DROP COLUMN `brief`,
+ADD COLUMN `brief`  varchar(255) NULL AFTER `content`;
