@@ -41,21 +41,9 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="masterName" for="masterName" class="am-u-sm-3 am-form-label">大师姓名 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input type="text" name="masterName" id="masterName" placeholder="大师姓名" value="${object.masterName}">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="type" for="type" class="am-u-sm-3 am-form-label">级别 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <ming800:status name="type" dataType="PCTenant.type" checkedValue="${object.type}" type="select" />
+                <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}" required>
             </div>
         </div>
         <%--<div class="am-form-group">--%>

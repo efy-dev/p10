@@ -17,7 +17,7 @@
 <body>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">商户${object.name}详细信息</strong> / <small>Tenant Information</small>
+        <strong class="am-text-primary am-text-lg">商户${object.name}详细信息</strong>
     </div>
 </div>
 
@@ -26,14 +26,6 @@
         <tr>
             <td>商户名称：</td>
             <td>${object.name}</td>
-        </tr>
-        <tr>
-            <td>大师姓名：</td>
-            <td>${object.masterName}</td>
-        </tr>
-        <tr>
-            <td>级别：</td>
-            <td><ming800:status name="type" dataType="PCTenant.type" checkedValue="${object.type}" type="normal" /></td>
         </tr>
         <tr>
             <td>地址：</td>
@@ -55,7 +47,7 @@
 <c:if test="${!empty object.tenantSourceList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">溯源信息</strong> / <small>TenantSource Information</small>
+            <strong class="am-text-primary am-text-lg">溯源信息</strong>
         </div>
     </div>
     <div>
@@ -84,10 +76,14 @@
                             </div>
                         </div>
                     </td>
-                    <td>${tenantSource.tenant.masterName}</td>
+                    <td></td>
                     <td>${tenantSource.name}</td>
                     <td>${tenantSource.region}</td>
-                    <td>${tenantSource.imgUrl}</td>
+                    <td>
+                        <c:if test="${!empty tenantSource.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${tenantSource.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -97,7 +93,7 @@
 <c:if test="${!empty object.tenantCertificationList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">认证信息</strong> / <small>TenantCertification Information</small>
+            <strong class="am-text-primary am-text-lg">认证信息</strong>
         </div>
     </div>
     <div>
@@ -133,7 +129,11 @@
                     <td>
                         <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${tenantCertification.level}" type="normal" />
                     </td>
-                    <td>${tenantCertification.imgUrl}</td>
+                    <td>
+                        <c:if test="${!empty tenantCertification.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${tenantCertification.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

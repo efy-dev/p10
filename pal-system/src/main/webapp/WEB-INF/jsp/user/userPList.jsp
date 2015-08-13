@@ -43,7 +43,14 @@
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewUser&id=${user.id}"/>">${user.name}</a></td>
                 <td>${user.tenant.name}</td>
-                <td>${user.status}</td>
+                <td>
+                    <c:if test="${user.status == '0'}">
+                        <font color="#a52a2a">不正常</font>
+                    </c:if>
+                    <c:if test="${user.status == '1'}">
+                        <font color="green">正常</font>
+                    </c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>

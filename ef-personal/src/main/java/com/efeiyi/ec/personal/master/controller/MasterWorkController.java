@@ -56,7 +56,7 @@ public class MasterWorkController extends BaseMasterController {
     public ModelAndView getProduct(HttpServletRequest request,@PathVariable String tenantWorkId,ModelMap modelMap){
         Product product = (Product)baseManager.getObject(Product.class.getName(), tenantWorkId);
         modelMap.addAttribute("product", product);
-        modelMap.addAttribute("pageMsg","3");
+        modelMap.addAttribute("pageMsg","6");
         return new ModelAndView("/tenantWork/tenantWorkView",modelMap);
 
     }

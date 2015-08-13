@@ -30,10 +30,15 @@
     </script>
 </head>
 <body>
-        <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+        <%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
         <div class="admin-content">
             <div class="am-g">
                 <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formCouponBatch"/>"><span class="am-icon-plus"></span>新建优惠券批次</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="am-u-sm-12">
                     <table class="am-table am-table-striped am-table-hover table-main">
@@ -57,6 +62,10 @@
                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeCouponBatch('${couponBatch.id}')"><span
                                                     class="am-icon-trash-o">删除</span>
                                             </button>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span
+                                                    class="am-icon-trash-o"></span> 编辑
+                                            </a>
                                         </div>
                                     </div>
                                 </td>

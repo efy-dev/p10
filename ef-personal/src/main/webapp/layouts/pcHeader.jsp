@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
-
+<title id="pages"></title>
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
     <div class="printing" style="width: 350px" id="tenantLevel">非物质文化遗产传承人<span>  [<a href="#" id="projectName">${master.getProjectName()}</a>]</span></div>
     <ul class="register">
         <li class="register-left"><a href="http://www.efeiyi.com" target="_blank">e飞蚁首页</a></li>
-        <li class="register-page"><a href="<c:url value='/index'/>" target="_blank">传承人官网</a></li>
+        <li class="register-page"><a href="http://master.efeiyi.com/index" target="_blank">传承人官网</a></li>
     <%-- <li class="register-right"><a href="#"><img src="<c:url value="/scripts/assets/images/i/wz3.gif"/>"></a></li>--%>
     </ul>
 </div>
@@ -28,12 +28,6 @@
     </ul>
 </div>
 <script>
-    /*function setVal(o){
-        var value = $(o).html();
-       $(o).next().val(value);
-        $("#pages").html(master + "的个人" + value);
-    }
-    var master = "";*/
     $.ajax({
         type: "post",
         url: '<c:url value="/getTenant.do"/>',
@@ -64,13 +58,19 @@
                 msg += "简介";
             }
             if(${pageMsg == 3}){
-                msg += "作品";
+                msg += "作品列表";
             }
             if(${pageMsg == 4}){
-                msg += "资讯";
+                msg += "资讯列表";
             }
             if(${pageMsg == 5}){
                 msg += "工作坊";
+            }
+            if(${pageMsg == 6}){
+                msg += "作品详情";
+            }
+            if(${pageMsg == 7}){
+                msg += "资讯详情";
             }
             $("#pages").html(data.fullName + "的个人" + msg);
         }

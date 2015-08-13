@@ -138,7 +138,13 @@
                 <do name="viewCouponBatch" label="查看优惠券" access="" result="/couponBatch/couponBatchView"/>
                 <do name="formCouponBatch" label="保存优惠券" access="" result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券" access=""
-                    result="/purchaseOrder/purchaseOrderSaveSuccess"/>
+                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default">
+                    <page>
+                        <fields>
+                            <field name="status" label="状态" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
             </does>
         </entity>
         <entity name="purchaseOrderDelivery" label="purchaseOrderDelivery"

@@ -35,16 +35,7 @@
                                 [${masterNewsTag.wordValue.value}]
                             </c:forEach>
                             ${tenantInfo.title}</a></h1>
-                        <p>
-                            <%--<c:choose>
-                                <c:when test="${fn:length(tenantInfo.content)  > 60}">
-                                    ${fn:substring(tenantInfo.content,0 ,60 ) }......
-                                </c:when>
-                                <c:otherwise>
-                                    ${tenantInfo.content}
-                                </c:otherwise>
-                            </c:choose>--%>
-                        </p>
+                        <p>${tenantInfo.brief}</p>
                         <span><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">详情</a></span>
                     </div>
                 </div>
