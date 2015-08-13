@@ -42,12 +42,19 @@
                     </div>
                 </div>
 
+                <div class="am-form-group">
+                    <label for="brief" class="am-u-sm-3 am-form-label">简介</label>
+                    <div class="am-u-sm-9">
+                        <textarea id="brief" name="brief" placeholder="请输入简介" required
+                                  value="${object.brief}">${object.brief}</textarea>
+                    </div>
+                </div>
 
                 <div class="am-form-group">
                     <label for="content" class="am-u-sm-3 am-form-label">资讯内容</label>
 
                     <div class="am-u-sm-9">
-                        <textarea id="content" name="content" class="ckeditor" placeholder="输入简介" required
+                        <textarea id="content" name="content" class="ckeditor" placeholder="请输入资讯内容" required
                                   value="${object.content}">${object.content}</textarea>
                     </div>
                     <br>
