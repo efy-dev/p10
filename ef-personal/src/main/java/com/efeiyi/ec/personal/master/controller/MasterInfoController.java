@@ -54,7 +54,7 @@ public class MasterInfoController extends BaseMasterController {
     public  String getTenantInfo(@PathVariable String tenantInfoId, HttpServletRequest request , Model model) throws Exception {
         MasterNews masterNews = (MasterNews) baseManager.getObject(MasterNews.class.getName(),tenantInfoId);
         model.addAttribute("masterNews",masterNews);
-        model.addAttribute("pageMsg","4");
+        model.addAttribute("pageMsg","7");
         return "/tenantInfo/tenantInfoView";
     }
 }

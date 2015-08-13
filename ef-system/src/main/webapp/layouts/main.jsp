@@ -25,13 +25,12 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
-    <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+    <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
 
     <sitemesh:write property='head'/>
     <style>
-
 
         .efy-active {
             background-color: #9a9a9a;

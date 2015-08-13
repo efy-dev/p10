@@ -35,6 +35,7 @@
             <%--</c:otherwise>--%>
         <%--</c:choose>--%>
         <%--</p>--%>
+        <p>${tenantInfo.brief}</p>
         <span><a href="<c:url value="/info/${tenantInfo.id}"/>">详情</a></span>
         <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>
     </div>

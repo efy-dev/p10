@@ -19,6 +19,7 @@ public class MasterNews {
     private Date createDateTime;
     private User creator;
     private String content;
+    private  String brief; //简介
     private Master master;
     private String status;
     private String dataSource; //来源
@@ -80,6 +81,15 @@ public class MasterNews {
 
     public void setMaster(Master master) {
         this.master = master;
+    }
+
+    @Column(name = "brief")
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 
     @Column(name = "status")

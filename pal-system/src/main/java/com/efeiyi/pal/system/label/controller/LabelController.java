@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -43,12 +45,17 @@ public class LabelController {
         }
 
         Integer flag = labelBatch.getAmount();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        String identify = sdf.format(new Date());
+        String serialAfter = labelBatch.getProduct().getName() + "_" + identify + "_";
 
         for (int i=0; i<flag; i++){
-            String serial = RandomStringUtils.randomNumeric(10);
+            String code = RandomStringUtils.randomNumeric(10);
+            String serial = serialAfter + String.valueOf(i + 1);
 
             Label label = new Label();
             label.setSerial(serial);
+            label.setCode(code);
             label.setLabelBatch(labelBatch);
             label.setProduct(labelBatch.getProduct());
             label.setSeller(labelBatch.getTenant());

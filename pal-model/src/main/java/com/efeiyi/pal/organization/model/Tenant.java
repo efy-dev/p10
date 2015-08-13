@@ -22,9 +22,7 @@ public class Tenant {
     private String province;
     private String city;
     private String address;
-    private String type;
     private String status;
-    private String masterName;
     private List<TenantSource> tenantSourceList;
     private List<TenantCertification> tenantCertificationList;
 
@@ -97,15 +95,6 @@ public class Tenant {
         this.address = address;
     }
 
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Column(name = "status")
     public String getStatus() {
         return status;
@@ -113,15 +102,6 @@ public class Tenant {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Column(name = "master_name")
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
     }
 
     @JsonIgnore

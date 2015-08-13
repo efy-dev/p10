@@ -3206,3 +3206,7 @@ ALTER TABLE `core_p_document`
 -------------------------------------------------
 
 ALTER TABLE efy.master_recommended ADD status VARCHAR(2) NOT NULL;
+
+//20150813
+ALTER TABLE `master_news`
+ADD COLUMN `brief`  varchar(255) NULL AFTER `status`;

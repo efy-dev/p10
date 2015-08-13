@@ -17,6 +17,7 @@ import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
@@ -76,7 +77,23 @@ public class SigninController extends BaseController {
 
         return false;
     }
+    /**
+     * 密码修改
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/pc/updatePassWord.do"})
+    @ResponseBody
+    public boolean updatePassword(HttpServletRequest request) throws Exception {
+        String contion = request.getParameter("password");
+        String password= StringUtil.encodePassword(contion, "SHA");
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("updatePassword",request);
+        xSaveOrUpdate.getParamMap().put("password",password);
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+        return true;
 
+    }
 
     /**
      * 注册新的消费者
