@@ -30,7 +30,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/tenantCertification/saveTenantCertification.do'/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/tenantCertification/saveTenantCertification.do'/>" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateTenantSource">
         <input type="hidden" name="id" value="${object.id}">
         <c:if test="${empty object || object.id == null || object.id==''}">
@@ -82,11 +82,14 @@
         </div>
 
         <div class="am-form-group">
-            <label for="doc-ipt-file-1" class="am-u-sm-3 am-form-label">证书图片 <small>*</small></label>
+            <label for="img" class="am-u-sm-3 am-form-label">证书图片 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="file" id="doc-ipt-file-1">
-                <p class="am-form-help">请选择要上传的文件...</p>
+                <input type="file" id="img" name="img" placeholder="证书图片"
+                       value="${object.imgUrl}">
             </div>
+            <c:if test="${!empty object.imgUrl}">
+                <img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">
+            </c:if>
         </div>
 
         <div class="am-form-group">

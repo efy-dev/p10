@@ -17,7 +17,7 @@
 <body>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">商户${object.name}详细信息</strong> / <small>Tenant Information</small>
+        <strong class="am-text-primary am-text-lg">商户${object.name}详细信息</strong>
     </div>
 </div>
 
@@ -55,7 +55,7 @@
 <c:if test="${!empty object.tenantSourceList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">溯源信息</strong> / <small>TenantSource Information</small>
+            <strong class="am-text-primary am-text-lg">溯源信息</strong>
         </div>
     </div>
     <div>
@@ -87,7 +87,12 @@
                     <td>${tenantSource.tenant.masterName}</td>
                     <td>${tenantSource.name}</td>
                     <td>${tenantSource.region}</td>
-                    <td>${tenantSource.imgUrl}</td>
+                    <td>
+                    <%--${tenantSource.imgUrl}--%>
+                        <c:if test="${!empty tenantSource.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${tenantSource.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -97,7 +102,7 @@
 <c:if test="${!empty object.tenantCertificationList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">认证信息</strong> / <small>TenantCertification Information</small>
+            <strong class="am-text-primary am-text-lg">认证信息</strong>
         </div>
     </div>
     <div>
@@ -133,7 +138,12 @@
                     <td>
                         <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${tenantCertification.level}" type="normal" />
                     </td>
-                    <td>${tenantCertification.imgUrl}</td>
+                    <td>
+                    <%--${tenantCertification.imgUrl}--%>
+                        <c:if test="${!empty tenantCertification.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${tenantCertification.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

@@ -44,11 +44,11 @@
 
                             <c:if test="${labelBatch.status == '1'}">
                                 <button onclick="window.location.href='<c:url value="/Label/saveLabelList.do?labelBatchId=${labelBatch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs"><font color="green">生成标签</font></button>
+                                        class="am-btn am-btn-default am-btn-xs"><font color="green">生成标签列表</font></button>
                             </c:if>
                             <c:if test="${labelBatch.status == '2'}">
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabel_default&conditions=labelBatch.id:${labelBatch.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs"><font color="#a52a2a">查看标签</font></button>
+                                        class="am-btn am-btn-default am-btn-xs"><font color="#a52a2a">查看标签列表</font></button>
                             </c:if>
 
                         </div>

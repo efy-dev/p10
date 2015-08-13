@@ -17,7 +17,7 @@
 <body>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">商品${object.name}详细信息</strong> / <small>Product Information</small>
+        <strong class="am-text-primary am-text-lg">商品${object.name}详细信息</strong>
     </div>
 </div>
 
@@ -53,7 +53,7 @@
 <c:if test="${!empty object.productPropertyValueList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">商品${object.name}的系列属性列表</strong> / <small>Product PropertyNameList</small>
+            <strong class="am-text-primary am-text-lg">商品${object.name}的系列属性列表</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -75,7 +75,7 @@
 <c:if test="${!empty object.tenantSource}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">商品${object.name}的溯源信息</strong> / <small>ProductSource Information</small>
+            <strong class="am-text-primary am-text-lg">商品${object.name}的溯源信息</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -90,7 +90,12 @@
                 <td>${object.tenantSource.tenant.masterName}</td>
                 <td>${object.tenantSource.name}</td>
                 <td>${object.tenantSource.region}</td>
-                <td>${object.tenantSource.imgUrl}</td>
+                <td>
+                <%--${object.tenantSource.imgUrl}--%>
+                    <c:if test="${!empty object.tenantSource.imgUrl}">
+                        <img src="http://pal.efeiyi.com/${object.tenantSource.imgUrl}@!pal-img-list"/>
+                    </c:if>
+                </td>
             </tr>
         </table>
     </div>
@@ -99,7 +104,7 @@
 <c:if test="${!empty object.tenantCertification}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">商品${object.name}的认证信息</strong> / <small>ProductCertification Information</small>
+            <strong class="am-text-primary am-text-lg">商品${object.name}的认证信息</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -118,7 +123,12 @@
                 <td>
                     <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantCertification.level}" type="normal" />
                 </td>
-                <td>${object.tenantCertification.imgUrl}</td>
+                <td>
+                <%--${object.tenantCertification.imgUrl}--%>
+                    <c:if test="${!empty object.tenantCertification.imgUrl}">
+                        <img src="http://pal.efeiyi.com/${object.tenantCertification.imgUrl}@!pal-img-list">
+                    </c:if>
+                </td>
             </tr>
         </table>
     </div>
