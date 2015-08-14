@@ -88,7 +88,6 @@ CREATE TABLE `coupon` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 DROP TABLE IF EXISTS `coupon_batch`;
 CREATE TABLE `coupon_batch` (
   `id` varchar(16) NOT NULL,
@@ -98,6 +97,8 @@ CREATE TABLE `coupon_batch` (
   `end_date` datetime DEFAULT NULL,
   `price` float(5,0) DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL,
+  `is_created_coupon` smallint(1) DEFAULT NULL,
+  `price_limit` float DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -105,3 +106,7 @@ CREATE TABLE `coupon_batch` (
 ALTER TABLE `master_news`
 DROP COLUMN `brief`,
 ADD COLUMN `brief`  varchar(255) NULL AFTER `content`;
+
+
+
+alter TABLE purchase_order_delivery add COLUMN status SMALLINT(1)

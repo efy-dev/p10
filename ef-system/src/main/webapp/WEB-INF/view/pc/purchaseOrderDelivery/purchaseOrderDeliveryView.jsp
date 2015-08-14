@@ -27,7 +27,7 @@
 </div>
 <div class="am-g">
     <div class="am-u-md-12">
-        <h2>商家产品信息</h2>
+        <th>商家产品信息</th>
         <jsp:include flush="true"
                      page="/basic/xm.do?qm=listProduct_tenant&conditions=tenant.id:${object.id}"/>
     </div>

@@ -42,9 +42,9 @@
                     <page>
                         <fields>
                             <field name="status" label="是否删除状态" defaultValue="1"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="createDatetime" label="是否删除状态" defaultValue="${CURRENT_DATETIME }"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
@@ -63,13 +63,13 @@
                     <page>
                         <fields>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="user.id" label="用户" defaultValue="${MY_USER}"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="orderStatus" label="订单状态" defaultValue="1"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>

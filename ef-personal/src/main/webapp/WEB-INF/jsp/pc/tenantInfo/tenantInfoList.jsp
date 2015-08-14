@@ -8,50 +8,64 @@
 <head>
 </head>
 <body>
-<div id="page-nav">
-    <p><a href="<c:url value="/"/>">首页</a><span>资讯</span></p>
+<div class="wh">
+    <div class="hd">
+        <div id="page-nav">
+            <p><a href="<c:url value="/"/>">首页</a><span>资讯</span></p>
+        </div>
+    </div>
 </div>
-<div class="border-nav"></div>
 <!--资讯内容-->
-<div id="center--1">
-    <div class="center-buttom">
-        <%--<c:forEach items="${tagList}" var="tag" >
-            <a href="javascript:void(0)"><button class="button">${tag.value}</button></a>
-        </c:forEach>--%>
-    </div>
-    <c:if test="${tenantInfoList != null && tenantInfoList.size() > 0}">
-    <div class="center-right" style="margin-right: 95px; float: right;">
-        <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
-            <div class="alllist">
-                <div class="alllist-content">
-                    <div class="alllist-time">
-                        <h1><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="dd/MM" />
-                        </h1>
-                        <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
-                    </div>
-                    <div class="alllist-xq">
-                        <h1><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">
-                            <c:forEach items="${tenantInfo.masterNewsTagList}" var="masterNewsTag">
-                                [${masterNewsTag.wordValue.value}]
-                            </c:forEach>
-                            ${tenantInfo.title}</a></h1>
-                        <p>${tenantInfo.brief}</p>
-                        <span><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">详情</a></span>
-                    </div>
-                </div>
-                <div class="alllist-border"></div>
+<div class="wh">
+    <div class="hd">
+        <div id="page-column">
+            <div class="column-left" style="">
+                <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
             </div>
-        </c:forEach>
+            <div id="center--1">
+                <c:if test="${tenantInfoList != null && tenantInfoList.size() > 0}">
+                    <div class="center-right">
+                        <c:forEach items="${tenantInfoList}" var="tenantInfo" varStatus="vs">
+                            <div class="alllist">
+                                <div class="alllist-content">
+                                    <div class="alllist-time">
+                                        <h1><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="dd/MM" />
+                                        </h1>
+                                        <p><fmt:formatDate value="${tenantInfo.createDateTime}" pattern="yyyy" /></p>
+                                    </div>
+                                    <div class="alllist-xq">
+                                        <h1><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">
+                                            <c:forEach items="${tenantInfo.masterNewsTagList}" var="masterNewsTag">
+                                                [${masterNewsTag.wordValue.value}]
+                                            </c:forEach>
+                                                ${tenantInfo.title}</a></h1>
+                                        <p>${tenantInfo.brief}</p>
+                                        <span><a href="<c:url value="/info/${tenantInfo.id}"/>" target="_blank">详情</a></span>
+                                    </div>
+                                </div>
+                                <div class="alllist-border"></div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:if>
+            </div>
+        </div>
     </div>
-    </c:if>
 </div>
-<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
-    <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
-    <ming800:pcPageParam name="conditions"
-                         value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-    <ming800:pcPageParam name="sort"
-                         value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
-</ming800:pcPageList>
+
+
+
+
+
+<div class="wh">
+    <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
+        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+        <ming800:pcPageParam name="conditions"
+                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+        <ming800:pcPageParam name="sort"
+                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+    </ming800:pcPageList>
+</div>
 <!--其他内容-->
 </body>
 </html>

@@ -2,14 +2,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <br />
 <br />
-<div id="footer">
-    <div class="guild">
-        <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
-        <a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
-        <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
-        <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
+<div class="wh">
+    <div id="footer">
+        <div class="guild">
+            <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
+            <a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
+            <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
+            <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
+        </div>
+        <div class="efeiyi-url">©2015 efeiyi.com</div>
     </div>
-    <div class="efeiyi-url">©2015 efeiyi.com</div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <!--分析-->
 <%--<div class="floating_ck">--%>

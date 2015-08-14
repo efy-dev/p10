@@ -13,7 +13,7 @@ public class Coupon {
     private String id;
     private String serial;
     private CouponBatch couponBatch;//批次
-    private String status;
+    private String status;//1未使用 2已使用
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

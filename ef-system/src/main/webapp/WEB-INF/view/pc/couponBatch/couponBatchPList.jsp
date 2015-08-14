@@ -27,6 +27,19 @@
                 }
             });
         }
+
+        function createCoupon(obj,url,couponBatchId,amount){
+            $.ajax({
+                type:"GET",
+                url:url,
+                data:{id:couponBatchId,amount:amount},
+                success:function(data){
+                    $(obj).find("span").text("查看优惠券");
+                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
+                    $(obj).attr("onclick","");
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -47,6 +60,7 @@
                             <th class="table-set">操作</th>
                             <th class="table-title">优惠券批次名</th>
                             <th class="table-title">优惠券金额</th>
+                            <th class="table-title">使用限制金额</th>
                             <th class="table-title">数量</th>
                             <th class="table-title">生效日期</th>
                             <th class="table-title">失效日期</th>
@@ -64,13 +78,26 @@
                                             </button>
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span
-                                                    class="am-icon-trash-o"></span> 编辑
+                                                    class="am-icon-trash-o">编辑</span>
                                             </a>
+
+                                            <c:if test="${couponBatch.isCreatedCoupon == 1}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="#" onclick="createCoupon(this,'<c:url value="/couponBatch/createCoupon.do"/>','${couponBatch.id}','${couponBatch.amount}')"><span
+                                                        class="am-icon-trash-o">创建优惠券</span>
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${couponBatch.isCreatedCoupon == 2}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
+                                                </a>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&id=${couponBatch.id}'/>">${couponBatch.name}</a></td>
                                 <td class="am-hide-sm-only">${couponBatch.price}</td>
+                                <td class="am-hide-sm-only">${couponBatch.priceLimit}</td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
                                 <td class="am-hide-sm-only">
                                 <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm"/>

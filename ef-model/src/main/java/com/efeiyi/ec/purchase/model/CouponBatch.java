@@ -14,12 +14,14 @@ import java.util.List;
 public class CouponBatch {
     private String id;
     private String name;
-    private Integer amount;
+    private Integer amount;//生成优惠券数量
     private Date startDate;//生效日期
     private Date endDate;//失效日期
     private List<Coupon> couponList;
-    private Float price;
-    private String status;
+    private Float price;//优惠价格
+    private String status;//批次装填
+    private Integer isCreatedCoupon;//是否创建了优惠券
+    private Float priceLimit;//使用限制价格 比如满100用
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -93,5 +95,23 @@ public class CouponBatch {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "is_created_coupon")
+    public Integer getIsCreatedCoupon() {
+        return isCreatedCoupon;
+    }
+
+    public void setIsCreatedCoupon(Integer isCreatedCoupon) {
+        this.isCreatedCoupon = isCreatedCoupon;
+    }
+
+    @Column(name = "price_limit")
+    public Float getPriceLimit() {
+        return priceLimit;
+    }
+
+    public void setPriceLimit(Float priceLimit) {
+        this.priceLimit = priceLimit;
     }
 }
