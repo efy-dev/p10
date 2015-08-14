@@ -83,6 +83,7 @@ public class Label {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @Where(clause = "status='1'")
     public Tenant getSeller() {
         return seller;
     }

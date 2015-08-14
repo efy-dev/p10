@@ -18,12 +18,10 @@ public class LabelBatch {
 
     private String id;
     private String setting;
-    private String start;
     private Integer amount;
     private Date createDate;
-    private Product product;
-    private Tenant tenant;
-    private PurchaseOrder purchaseOrder;
+//    private Product product;
+//    private Tenant tenant;
     private String status;
 
     @Id
@@ -46,15 +44,6 @@ public class LabelBatch {
         this.setting = setting;
     }
 
-    @Column(name = "start")
-    public String getStart() {
-        return start;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
     @Column(name = "amount")
     public Integer getAmount() {
         return amount;
@@ -73,35 +62,25 @@ public class LabelBatch {
         this.createDate = createDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_order_id")
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "product_id")
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tenant_id")
+//    public Tenant getTenant() {
+//        return tenant;
+//    }
+//
+//    public void setTenant(Tenant tenant) {
+//        this.tenant = tenant;
+//    }
 
     @Column(name = "status")
     public String getStatus() {
