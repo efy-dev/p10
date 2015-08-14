@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-<c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+<c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>${pageContext.request.queryString}
 <jsp:include flush="true" page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/jmenu/nav&match=${match} "></jsp:include>
 </body>
 </html>
