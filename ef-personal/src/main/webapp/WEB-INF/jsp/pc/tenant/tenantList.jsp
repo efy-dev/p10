@@ -192,7 +192,7 @@
             <li><a target="_blank" href="http://www.efeiyi.com/main/helpCenter">帮助中心</a></li>
             <li><a href="#">诚信保证</a></li>
         </ul>
-        <p>Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
+        <p>Copyright© 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
         <p>永新华韵旗下网站：e飞蚁 传承人官网 诚品宝 集团官网</p>
         <div class="Keeponrecord">
             <span class="Keeponrecord-l"></span>
