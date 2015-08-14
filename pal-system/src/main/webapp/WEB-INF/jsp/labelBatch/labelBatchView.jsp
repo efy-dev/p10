@@ -15,18 +15,16 @@
     <title></title>
 </head>
 <body>
-<div align="center" am-panel am-panel-default admin-sidebar-panel>
-    <h1>标签批次${object.setting}详情</h1>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">标签批次${object.setting}详情</strong>
+    </div>
 </div>
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td align="right">标签批次：</td>
             <td>${object.setting}</td>
-        </tr>
-        <tr>
-            <td align="right">开始：</td>
-            <td>${object.start}</td>
         </tr>
         <tr>
             <td align="right">数量：</td>
@@ -50,18 +48,14 @@
                 </c:if>
             </td>
         </tr>
-        <tr>
-            <td align="right">商品名称：</td>
-            <td>${object.product.name}</td>
-        </tr>
-        <tr>
-            <td align="right">商户：</td>
-            <td>${object.tenant.name}</td>
-        </tr>
-        <tr>
-            <td align="right">订单序列号：</td>
-            <td>${object.purchaseOrder.serial}</td>
-        </tr>
+        <%--<tr>--%>
+            <%--<td align="right">商品名称：</td>--%>
+            <%--<td>${object.product.name}</td>--%>
+        <%--</tr>--%>
+        <%--<tr>--%>
+            <%--<td align="right">商户：</td>--%>
+            <%--<td>${object.tenant.name}</td>--%>
+        <%--</tr>--%>
     </table>
 </div>
 </body>
