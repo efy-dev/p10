@@ -3210,3 +3210,9 @@ ALTER TABLE efy.master_recommended ADD status VARCHAR(2) NOT NULL;
 //20150813
 ALTER TABLE `master_news`
 ADD COLUMN `brief`  varchar(255) NULL AFTER `status`;
+
+-----20150814---
+-----添加brief字段到云服务器(efc)------
+ALTER TABLE `master_news`
+ADD COLUMN `brief` varchar(255) CHARACTER SET utf8 NULL;
+-----------------------------------------------------------
