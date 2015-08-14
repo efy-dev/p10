@@ -87,7 +87,7 @@ public class SigninController extends BaseController {
     public boolean updatePassword(HttpServletRequest request) throws Exception {
         String contion = request.getParameter("password");
         String password= StringUtil.encodePassword(contion, "SHA");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("updatePassword",request);
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
         xSaveOrUpdate.getParamMap().put("password",password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return true;
