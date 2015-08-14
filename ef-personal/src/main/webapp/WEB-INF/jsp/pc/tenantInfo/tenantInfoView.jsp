@@ -7,10 +7,14 @@
 <body>
 <!--内容-->
 <!--资讯详情-->
-<div id="page-nav">
-  <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/info/list"/> ">资讯</a></span><span>${masterNews.title}</span></p>
+<div class="wh">
+    <div class="hd">
+        <div id="page-nav">
+            <p><a href="<c:url value="/"/>">首页</a><span id="zpxq-1"><a href="<c:url value="/info/list"/> ">资讯</a></span><span>${masterNews.title}</span></p>
+        </div>
+    </div>
 </div>
-<div class="border-nav"></div>
+
 <!--资讯详情页内容-->
 <div style="width:100%;height:23px;"></div>
 <div id="page-column-1">

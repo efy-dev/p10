@@ -2,14 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <br />
 <br />
-<div id="footer">
-    <div class="guild">
-        <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
-        <a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
-        <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
-        <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
+<div class="wh">
+    <div id="footer">
+        <div class="guild">
+            <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
+            <a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
+            <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
+            <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
+        </div>
+        <div class="efeiyi-url">©2015 efeiyi.com</div>
     </div>
-    <div class="efeiyi-url">©2015 efeiyi.com</div>
 </div>
 <!--分析-->
 <%--<div class="floating_ck">--%>
