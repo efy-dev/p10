@@ -60,30 +60,31 @@ public class PurchaseOrderController extends BaseController {
             xQuery = new XQuery("plistPurchaseOrder_default", request);
         } else {
             c = Integer.parseInt(orderStatus);
+            switch (c) {
+                case 1:
+                    xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                    break;
+                case 5:
+                    xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                    break;
+                case 9:
+                    xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                    break;
+                case 13:
+                    xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                    break;
+                case 17:
+                    xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                    break;
+                default:
+                    xQuery = new XQuery("plistPurchaseOrder_default", request);
         }
-        switch (c) {
-            case 1:
-                xQuery = new XQuery("plistPurchaseOrder_default1", request);
-                break;
-            case 5:
-                xQuery = new XQuery("plistPurchaseOrder_default5", request);
-                break;
-            case 9:
-                xQuery = new XQuery("plistPurchaseOrder_default9", request);
-                break;
-            case 13:
-                xQuery = new XQuery("plistPurchaseOrder_default13", request);
-                break;
-            case 17:
-                xQuery = new XQuery("plistPurchaseOrder_default17", request);
-                break;
-            default:
-                xQuery = new XQuery("plistPurchaseOrder_default", request);
+
         }
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-        return "/purchaseOrder/orderList";
+        return "/purchaseOrder/purchaseOrderList";
 
     }
 

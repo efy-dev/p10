@@ -8,7 +8,6 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.website.order.controller.PurchaseOrderController;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
