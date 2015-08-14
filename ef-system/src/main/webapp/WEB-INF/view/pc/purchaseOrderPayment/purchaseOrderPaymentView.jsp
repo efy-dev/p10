@@ -50,7 +50,7 @@
             <table class="am-table am-table-bordered">
                 <thead>
                 <tr>
-                    <th>订单数据</th>
+                    <th>订单</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,28 +66,6 @@
                                                 type="normal"/>
                                 </span>
                         </c:forEach>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="am-g">
-        <div class="am-u-md-12">
-            <table class="am-table am-table-bordered">
-                <thead>
-                <tr>
-                    <th>支付用户数据</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="am-primary am-u-md-3">用户名</td>
-                    <td class="am-u-md-3">${object.user.username}</td>
-                    <td class="am-primary am-u-md-3">角色</td>
-                    <td class="am-u-md-3">
-                        ${object.user.role.name}
                     </td>
                 </tr>
                 </tbody>
