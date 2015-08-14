@@ -118,15 +118,7 @@ a:hover { color: #f00; text-decoration:underline;}
 .shop-sort .link2 dd {background:#fff;width:128px;float:left;margin-top:0;border:1px #000 solid;box-sizing: content-box}
 .shop-sort .link2 dd a {width:104px; margin:0 12px;float:left; color: #000;box-sizing: content-box;border-bottom: 1px #b3b3b3 solid}
 .shop-sort .link2 dd a:last-child {border-bottom: 0}
-
-
-
-
-
-
-
-
-
+/*--End--shop-sort--*/
 .login-wrap {width:920px;margin:70px 180px;float: left; font-size: 12px;}
 .login-wrap .banner {float: left;}
 .login-form {width: 300px;padding:34px;border: 1px #ccc solid;float: right;box-sizing: content-box}
@@ -150,7 +142,9 @@ a:hover { color: #f00; text-decoration:underline;}
 .login-form .am-form .forgetpwd:hover { color: #f00;}
 .login-form .msg-tips {position: absolute; top:34px; left: 0;}
 .login-form .msg-tips span { color: #f00;}
-.login-form .msg-tips span a{color: #003366}
+.login-form .msg-tips span a{color: #036}
+.login-form .am-btn {background:#fff; width: 100%; color: #000;border:1px #000 solid; font-family: FangSong; font-size: 16px; margin-top:-20px;}
+.login-form .am-btn:hover {background:#000; color: #fff;}
 /*--//End--login-form--*/
 
 

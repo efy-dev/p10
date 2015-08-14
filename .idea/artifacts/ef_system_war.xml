@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ef-system:war">
-    <output-path>$PROJECT_DIR$/ef-system/target</output-path>
-    <root id="archive" name="ef-system.war">
-      <element id="artifact" artifact-name="ef-system:war exploded" />
-    </root>
-  </artifact>
-</component>

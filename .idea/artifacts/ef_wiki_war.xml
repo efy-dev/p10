@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ef-wiki:war">
-    <output-path>$PROJECT_DIR$/ef-wiki/target</output-path>
-    <root id="archive" name="ef-wiki.war">
-      <element id="artifact" artifact-name="ef-wiki:war exploded" />
-    </root>
-  </artifact>
-</component>
