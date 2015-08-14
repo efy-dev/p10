@@ -20,4 +20,9 @@
             <span class="am-switch-mode-slogan">中国非遗电商平台·传承人官网</span>
         </div>
     </div>
+    <%@ include file="cs.jsp" %>
+    <% CS cs = new CS(1255887869);cs.setHttpServlet(request,response);
+        String imgurl = cs.trackPageView();%>
+    <img src="<%= imgurl %>" width="0" height="0"  />
+
 </div>

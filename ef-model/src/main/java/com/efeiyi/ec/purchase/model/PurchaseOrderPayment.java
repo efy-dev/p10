@@ -21,7 +21,7 @@ public class PurchaseOrderPayment {
     private String payWay;//1支付宝 2银行卡 3微信
     private User user;
     private String serial;//支付记录编号
-    private String status;
+    private String status;//1支付成功  2支付失败 3 待支付
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
