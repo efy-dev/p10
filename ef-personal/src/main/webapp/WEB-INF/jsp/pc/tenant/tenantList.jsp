@@ -179,7 +179,7 @@
     <ul class="imgbg">
         <li class="li-img1"></li>
         <li class="span"></li>
-        <li class="li-img2"><a href="http://www.efeiyi.com/ef-www/main/do7" ></a></li>
+        <li class="li-img2"><a href="http://www.efeiyi.com/ef-www/main/do7" target="_blank"></a></li>
         <li class="span"></li>
         <li class="li-img3"></li>
     </ul>
