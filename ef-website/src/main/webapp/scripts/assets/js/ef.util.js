@@ -11,6 +11,9 @@
  * @param requestType 请求类型 （get post）
  */
 function ajaxRequest(url, data, success, error,requestType) {
+    if(typeof requestType == "undefined"){
+
+    }
     $.ajax({
         type: requestType,
         url: url,
