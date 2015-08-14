@@ -46,8 +46,10 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
+                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                            <a href="#">
+                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -75,8 +77,10 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                    <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
+                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                            <a href="#">
+                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -195,6 +199,7 @@
             <span class="Keeponrecord-r"></span>
         </div>
     </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <!--分析-->
 <%--<div class="floating_ck">
