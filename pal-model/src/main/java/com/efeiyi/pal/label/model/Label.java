@@ -2,7 +2,7 @@ package com.efeiyi.pal.label.model;
 
 import com.efeiyi.pal.check.model.LabelCheckRecord;
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.pal.purchase.model.PurchaseOrderLabel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -23,13 +23,13 @@ public class Label {
     private String serial;
     private String code;
     private LabelBatch labelBatch;
-    private Product product;
     private Tenant seller;
     private String status;
     private Date firstCheckDateTime;
     private Date lastCheckDateTime;
     private int checkCount;
     private List<LabelCheckRecord> labelCheckRecordList;
+    private PurchaseOrderLabel purchaseOrderLabel;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -68,17 +68,6 @@ public class Label {
 
     public void setLabelBatch(LabelBatch labelBatch) {
         this.labelBatch = labelBatch;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    @Where(clause = "status='1'")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -136,6 +125,16 @@ public class Label {
 
     public void setLabelCheckRecordList(List<LabelCheckRecord> labelCheckRecordList) {
         this.labelCheckRecordList = labelCheckRecordList;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_order_label_id")
+    public PurchaseOrderLabel getPurchaseOrderLabel() {
+        return purchaseOrderLabel;
+    }
+
+    public void setPurchaseOrderLabel(PurchaseOrderLabel purchaseOrderLabel) {
+        this.purchaseOrderLabel = purchaseOrderLabel;
     }
 
 }

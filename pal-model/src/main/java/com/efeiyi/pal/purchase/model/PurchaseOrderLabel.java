@@ -1,6 +1,6 @@
 package com.efeiyi.pal.purchase.model;
 
-import com.efeiyi.pal.label.model.LabelBatch;
+import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,12 +10,13 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "purchase_order_label_batch")
-public class PurchaseOrderLabelBatch {
+@Table(name = "purchase_order_label")
+public class PurchaseOrderLabel {
 
     private String id;
     private PurchaseOrder purchaseOrder;
-    private LabelBatch labelBatch;
+    private Product product;
+    private Integer amount;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -39,13 +40,22 @@ public class PurchaseOrderLabelBatch {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "label_batch_id")
-    public LabelBatch getLabelBatch() {
-        return labelBatch;
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
     }
 
-    public void setLabelBatch(LabelBatch labelBatch) {
-        this.labelBatch = labelBatch;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Column(name = "amount")
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
 }
