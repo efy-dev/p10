@@ -114,7 +114,7 @@ public class Jnode {
         boolean flag = false;
         if (matchList != null && matchList.size() > 0 && match != null && !"".equals(match)) {
             for (String matchTemp : matchList) {
-                if (match.trim().startsWith(matchTemp.trim())) {
+                if (!matchTemp.trim().equals("")&match.trim().startsWith(matchTemp.trim())) {
                     flag = true;
                 }
 //                else if(match.trim()) {

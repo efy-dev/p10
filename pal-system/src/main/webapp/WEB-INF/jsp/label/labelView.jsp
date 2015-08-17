@@ -37,11 +37,19 @@
         </tr>
         <tr>
             <td align="right">所属商品：</td>
-            <td>${object.product.name}</td>
+            <td>
+                <c:if test="${!empty object.product && object.product != ''}">
+                    ${object.product.name}
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td align="right">商户名称：</td>
-            <td>${object.seller.name}</td>
+            <td>
+                <c:if test="${!empty object.seller && object.seller != ''}">
+                    ${object.seller.name}
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td align="right">第一次查询时间：</td>

@@ -3,31 +3,35 @@
     <jnode id="efecOrderAndConsumer" url="/main.do?jnodeId=efecOrderAndConsumer" text_zh_CN="订单与消费者">
         <jnode url="" id="orderManager" access="admin,manager" state="closed" text_zh_CN="订单管理">
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin" text_zh_CN="订单列表">
-                <match url="plistPurchaseOrder_default"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_default"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=order"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProduct=order"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="支付记录">
-                <match url="plistPurchaseOrderPayment_default"/>
-                <match url="viewPurchaseOrderPayment"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewPaymentOrder=order"/>
+                <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="plistPurchaseOrderDelivery_default"/>
-                <match url="viewPurchaseOrder"/>
-                <match url="viewPurchaseOrderDelivery"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderDelivery&amp;viwe=view"/>
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="消费者管理">
             <jnode url="/basic/xm.do?qm=plistConsumer_default" access="admin,manager" text_zh_CN="消费者列表">
-                <match url="plistConsumer_default"/>
-                <match url="viewConsumer"/>
+                <match url="/basic/xm.do?qm=plistConsumer_default"/>
+                <match url="/basic/xm.do?qm=formConsumer&amp;view=consumer"/>
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
             <jnode url="/basic/xm.do?qm=plistCoupon_default" access="admin,manager" text_zh_CN="优惠券列表">
-                <match url="plistCoupon_default"/>
+                <match url="/basic/xm.do?qm=plistCoupon_default"/>
                 <match url="viewCouponBatch"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default" access="admin,manager" text_zh_CN="优惠券批次">
-                <match url="plistCouponBatch_default"/>
+                <match url="/basic/xm.do?qm=plistCouponBatch_default"/>
                 <match url="viewCouponBatch"/>
             </jnode>
         </jnode>

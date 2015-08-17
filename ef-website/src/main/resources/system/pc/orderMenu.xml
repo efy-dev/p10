@@ -5,32 +5,32 @@
             <jnode url="/basic/xm.do?" access="admin" text_zh_CN="我的订单">
                 <match url="plistPurchaseOrder_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="我的评价">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="我的评价">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="我的咨询">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="我的咨询">
                 <match url="plistPurchaseOrderDelivery_default"/>
                 <match url="viewPurchaseOrder"/>
                 <match url="viewPurchaseOrderDelivery"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="我的收藏">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="我的收藏">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="系统消息">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="系统消息">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="账号安全">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="账号安全">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="收货地址">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="收货地址">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="退换货管理">
+            <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="退换货管理">
                 <match url="plistPurchaseOrderPayment_default"/>
                 <match url="viewPurchaseOrderPayment"/>
             </jnode>
