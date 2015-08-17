@@ -90,7 +90,7 @@
             <td width="130">待付款</td>
             <td width="139">
               <p><a href="#">付款</a></p>
-              <p><a href="/order/view/{100000000001}">查看</a></p>
+              <p><a href="/order/view/100000000001">查看</a></p>
               <p><a href="#">取消订单</a></p>
             </td>
           </tr>

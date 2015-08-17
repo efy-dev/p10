@@ -46,9 +46,9 @@
         <dl class="orderid-mashup">
           <dt class="orderid">订单</dt>
           <dd class="od-id">
-            <p >订单号: <span>1234567890</span></p>
-            <p>订单金额：<span>189.00元</span></p>
-            <p>订单状态：<span>已发货</span></p>
+            <p >订单号: <span>${order.serial}</span></p>
+            <p>订单金额：<span>${order.total}</span></p>
+            <p>订单状态：<span>${order.orderStatus}</span></p>
           </dd>
         </dl>
         <dl class="orderid-mashup bd-top">
@@ -92,10 +92,10 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
-            <p >配送地址：<span>北京市西城区</span></p>
-            <p>收货地址：<span>北京市朝阳区酒仙桥东路电子城科技园A2西侧</span></p>
-            <p>收货人姓名：<span>温群英</span></p>
-            <p>联系电话：<span>15110008479</span></p>
+            <p >配送地址：<span>${order.consumerAddress}</span></p>
+            <p>收货地址：<span>${order.consumerAddress}</span></p>
+            <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
+            <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>
 
           </dd>
         </dl>
