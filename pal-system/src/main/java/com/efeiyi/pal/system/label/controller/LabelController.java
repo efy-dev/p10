@@ -45,20 +45,17 @@ public class LabelController {
         }
 
         Integer flag = labelBatch.getAmount();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-        String identify = sdf.format(new Date());
-        String serialAfter = labelBatch.getProduct().getName() + "_" + identify + "_";
 
         for (int i=0; i<flag; i++){
             String code = RandomStringUtils.randomNumeric(10);
-            String serial = serialAfter + String.valueOf(i + 1);
+            String serial = String.valueOf(i + 1);
 
             Label label = new Label();
             label.setSerial(serial);
             label.setCode(code);
             label.setLabelBatch(labelBatch);
-            label.setProduct(labelBatch.getProduct());
-            label.setSeller(labelBatch.getTenant());
+            label.setProduct(null);
+            label.setSeller(null);
             label.setStatus("1");
 
             baseManager.saveOrUpdate(label.getClass().getName(), label);

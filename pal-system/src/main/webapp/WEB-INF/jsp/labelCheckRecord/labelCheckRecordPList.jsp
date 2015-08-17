@@ -26,6 +26,7 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>标签序列号</td>
+            <td>标签防伪码</td>
             <td>标签批次</td>
             <td>商品名称</td>
             <td>商户名称</td>
@@ -36,6 +37,7 @@
         <c:forEach items="${requestScope.pageInfo.list}" var="record">
             <tr>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${record.label.id}'/>">${record.label.serial}</a></td>
+                <td>${record.label.code}</td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabelBatch&id=${record.label.labelBatch.id}'/>">${record.label.labelBatch.setting}</a></td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${record.product.id}'/>">${record.product.name}</a></td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${record.product.tenant.id}'/>">${record.product.tenant.name}</a></td>

@@ -67,71 +67,30 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="start" for="start" class="am-u-sm-3 am-form-label">开始 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input type="text" name="start" id="start" placeholder="开始" value="${object.start}">
-            </div>
-        </div>
-        <div class="am-form-group">
             <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="amount" id="amount" placeholder="数量" value="${object.amount}" required>
             </div>
         </div>
-        <div class="am-form-group">
-            <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>
-                <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
-            </div>
-        </div>
-
-        <div class="am-form-group">
-            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input id="product_idName" placeholder="商品名称" onclick="openProduct('product_id', 'product_idName', 'product2')" required>
-                <input type="hidden" id="product_id"  name="product.id">
-            </div>
-        </div>
-
-        <div class="am-form-group">
-            <label name="purchaseOrder.id" for="purchaseOrder.id" class="am-u-sm-3 am-form-label">订单 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input type="text" name="purchaseOrder.id" id="purchaseOrder.id" placeholder="订单" value="${object.purchaseOrder.id}">
-                <%--<ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>--%>
-            </div>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>--%>
+                <%--<input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="product_idName" placeholder="商品名称" onclick="openProduct('product_id', 'product_idName', 'product2')" required>--%>
+                <%--<input type="hidden" id="product_id"  name="product.id">--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
-
-        <%--<table>--%>
-            <%----%>
-            <%--<tr>--%>
-                <%--<td>商户：</td>--%>
-                <%--&lt;%&ndash;<td><input type="text" name="tenant.id" id="tenant.id" value="${object.tenant.id}"></td>&ndash;%&gt;--%>
-                <%--<td>--%>
-                    <%--<select name="tenant.id" id="tenant.id">--%>
-                        <%--<c:forEach items="${tenantList}" var="tenant">--%>
-                            <%--<c:if test="${tenant.id.equals(object.tenant.id)}">--%>
-                                <%--<option value="${tenant.id}" selected="selected">${tenant.name}</option>--%>
-                            <%--</c:if>--%>
-                            <%--<c:if test="${!tenant.id.equals(object.product.id)}">--%>
-                                <%--<option value="${tenant.id}">${tenant.name}</option>--%>
-                            <%--</c:if>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-
-            <%--</td>--%>
-            <%--<tr>--%>
-                <%--<td>订单：</td>--%>
-                <%--<td><input type="text" name="purchaseOrder.id" id="purchaseOrder.id" value="${object.purchaseOrder.id}" /></td>--%>
-            <%--</tr>--%>
-        <%--</table>--%>
     </form>
 </div>
 </body>

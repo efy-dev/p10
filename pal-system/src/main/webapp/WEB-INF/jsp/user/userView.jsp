@@ -29,11 +29,18 @@
         </tr>
         <tr>
             <td>用户密码：</td>
-            <td>${object.password}</td>
+            <td>**** **** **** ****</td>
         </tr>
         <tr>
             <td>状态：</td>
-            <td>${object.status}</td>
+            <td>
+                <c:if test="${object.status == '0'}">
+                    <font color="red">已删除</font>
+                </c:if>
+                <c:if test="${object.status == '1'}">
+                    <font color="green">正常</font>
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td>商户名称：</td>
