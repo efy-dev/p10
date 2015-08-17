@@ -54,7 +54,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formConsumer&id=${consumer.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formConsumer&view=consumer&id=${consumer.id}"/>"><span
                                             class="am-icon-trash-o"></span> 编辑
                                     </a>
                                 </div>
