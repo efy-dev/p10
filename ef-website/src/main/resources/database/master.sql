@@ -1,5 +1,5 @@
 
-#---------------未执行----------------
+#---------------已经执行----------------
 ALTER TABLE `purchase_cart_product`
 ADD COLUMN `status`  char(8) NULL AFTER `product_id`;
 
@@ -38,7 +38,6 @@ ALTER TABLE `organization_consumer_address`
 ADD COLUMN `status`  varchar(2) NULL AFTER `consumer_id`;
 
 
-#-------------------------------未执行----------------------------------
 
 CREATE TABLE `product_property_value` (
   `id`  char(16) NOT NULL ,
@@ -66,3 +65,6 @@ ALTER TABLE `organization_consumer`
 ADD COLUMN `unionid`  char(64) NULL AFTER `id`;
 
 
+#-------------------------------未执行----------------------------------
+ALTER TABLE `purchase_order`
+ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;

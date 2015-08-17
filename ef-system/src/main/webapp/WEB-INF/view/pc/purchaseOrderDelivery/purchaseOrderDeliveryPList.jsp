@@ -29,6 +29,7 @@
                 <tr>
                     <th class="table-title">发货记录编号</th>
                     <th class="table-title">订单号</th>
+                    <th class="table-title">发货状态</th>
                     <th class="table-title">发送日期</th>
                     <th class="table-title">发送地址</th>
                 </tr>
@@ -36,10 +37,20 @@
                 <tbody>
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderDelivery">
                     <tr>
-                        <%--<td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a></td>--%>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a></td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a></td>
-                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                            <%--<td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a></td>--%>
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a>
+                        </td>
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
+                        </td>
+                        <td>
+                            <ming800:status name="status" dataType="purchaseOrderDelivery.status"
+                                            checkedValue="${purchaseOrderDelivery.status}"
+                                            type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
+                                                                    type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                         <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}</td>
                     </tr>
                 </c:forEach>

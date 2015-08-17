@@ -94,6 +94,11 @@
             </ul>
         </div>
     </div>
+    <%@ include file="/layouts/cs.jsp" %>
+    <%CS cs = new CS(1255887869);cs.setHttpServlet(request,response);
+        String imgurl = cs.trackPageView();%>
+    <img src="<%= imgurl %>" width="0" height="0"  />
+
 </div>
 </body>
 </html>

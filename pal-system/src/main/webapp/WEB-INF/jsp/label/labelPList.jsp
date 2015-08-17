@@ -16,6 +16,25 @@
 <head>
     <title></title>
     <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript">
+        function checkSerial(){
+            var serial = document.getElementById("checkSerial").value;
+            var reg = new RegExp("^[1-9]\\d*$");
+            var qm = document.getElementById("qm").value;
+            var conditions = document.getElementById("conditions").value;
+            if(serial != null && serial.trim() != "" && reg.test(serial) && serial<=100000){
+//                alert("序列号");
+                window.location.href = "/basic/xm.do?qm="+qm+"Serial&conditions="+conditions+";serial:"+serial;
+            }else{
+                alert("请输入大于零小于十万的数字序列号");
+//                window.location.href = "/basic/xm.do?qm="+qm+"&conditions="+conditions;
+                <%--"<c:url value='/basic/xm.do'>" +--%>
+                <%--"<c:param name='qm' value=''></c:param>" +--%>
+                <%--"<c:param name='conditions' value=''></c:param>" +--%>
+                <%--"</c:url>";--%>
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -24,7 +43,20 @@
     </div>
 </div>
 <div>
-
+    <div class="am-form-group" align="left">
+        <label name="checkSerial" for="checkSerial" class="am-u-sm-3 am-form-label" style="width: auto">序列号:</label>
+        <div class="am-u-sm-9" align="left" style="width: auto">
+            <input type="text" name="checkSerial" id="checkSerial" placeholder="请出入查询序列号" value="${checkSerial}">
+        </div>
+        <div style="margin-left: 10px;width: auto" align="left">
+            <input type="hidden" id="qm" value="${requestScope.qm}"/>
+            <input type="hidden"  id="conditions" value="${requestScope.conditions}"/>
+            <input onclick="checkSerial();"
+                   type="button" class="am-btn am-btn-default am-btn-xs"
+                   style="margin-bottom: 6px;width: 100px;margin-left:2px;height: 30px;"
+                   value="查询" />
+        </div>
+    </div>
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
@@ -54,14 +86,25 @@
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${label.id}'/>">${label.serial}</a></td>
                 <td>${label.code}</td>
                 <td>${label.labelBatch.setting}</td>
-                <td>${label.product.name}</td>
-                <td>${label.seller.name}</td>
+                <td>
+                    <c:if test="${label.product != null && not empty label.product}">
+                        ${label.product.name}
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${label.seller != null && !empty label.seller}">
+                        ${label.seller.name}
+                    </c:if>
+                </td>
                 <td>
                     <c:if test="${label.status == '2'}">
-                        <font color="red">已验证</font>
+                        <font color="blue">已分配</font>
                     </c:if>
                     <c:if test="${label.status == '1'}">
-                        <font color="green">未验证</font>
+                        <font color="green">未分配</font>
+                    </c:if>
+                    <c:if test="${label.status == '9'}">
+                        <font color="red">已查询</font>
                     </c:if>
                 </td>
                 <td><fmt:formatDate value="${label.firstCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
@@ -70,13 +113,14 @@
             </tr>
         </c:forEach>
     </table>
-</div>
-<div style="clear: both">
-    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
-        <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
-        <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-    </ming800:pcPageList>
-</div>
 
+    <div style="clear: both">
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+            <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+        </ming800:pcPageList>
+    </div>
+
+</div>
 </body>
 </html>

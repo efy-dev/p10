@@ -14,7 +14,7 @@
         <table class="am-table am-table-bordered">
             <thead>
             <tr>
-                <th>订单数据</th>
+                <th>订单</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
         <table class="am-table am-table-bordered">
             <thead>
             <tr>
-                <th>下单人数据</th>
+                <th>下单人</th>
             </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
 </div>
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
-        <h4>订单产品数据</h4>
+        <h4>订单商品列表</h4>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -75,17 +75,15 @@
                 <th class="table-title">购买个数</th>
                 <th class="table-title">产品编号</th>
                 <th class="table-title">产品单价</th>
-                <th class="table-title">产品图片</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.name}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.name}<img width="20px" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-banner" alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>
-                    <td class="am-hide-sm-only"><img src="${purchaseOrderProduct.productModel.product.picture_url}" alt="产品图片"></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -102,6 +100,7 @@
             <thead>
             <tr>
                 <th class="table-title">支付方式</th>
+                <th class="table-title">支付状态</th>
                 <th class="table-title">支付者姓名</th>
                 <th class="table-title">支付时间</th>
             </tr>
@@ -113,6 +112,11 @@
                         <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
                                         checkedValue="${purchaseOrderPayment.payWay}"
                                         type="normal"/>
+                </td>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="status" dataType="purchaseOrderPayment.status"
+                                    checkedValue="${purchaseOrderPayment.status}"
+                                    type="normal"/>
                 </td>
                 <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
                 <td class="am-hide-sm-only">
@@ -134,6 +138,7 @@
             <thead>
             <tr>
                 <th class="table-title">配送地址</th>
+                <th class="table-title">配送状态</th>
                 <th class="table-title">配送时间</th>
             </tr>
             </thead>
@@ -141,6 +146,11 @@
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
             <tr>
                 <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="status" dataType="purchaseOrderDelivery.status"
+                                    checkedValue="${purchaseOrderDelivery.status}"
+                                    type="normal"/>
+                </td>
                 <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                     pattern="yyyy-mm-dd"/>

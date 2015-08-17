@@ -95,7 +95,7 @@
                 <field name="status" label="优惠券状态" inputType="text">
                     <statusType fieldName="status">
                         <item label="未使用" value="1"/>
-                        <item label="已使用" value="0"/>
+                        <item label="已使用" value="2"/>
                     </statusType>
                 </field>
             </fields>
@@ -152,6 +152,15 @@
         <entity name="purchaseOrderDelivery" label="purchaseOrderDelivery"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderDelivery">
+
+            <fields>
+                <field name="status" label="发货状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="已发货" value="1"/>
+                        <item label="未发货" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">

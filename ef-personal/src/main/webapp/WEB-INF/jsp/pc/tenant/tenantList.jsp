@@ -46,8 +46,10 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
+                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                            <a href="#">
+                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -75,8 +77,10 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                    <p>[${tenant.masterProjectList[0].project.name}]</p><p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
+                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
+                            <a href="#">
+                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
                     </div>
@@ -175,7 +179,7 @@
     <ul class="imgbg">
         <li class="li-img1"></li>
         <li class="span"></li>
-        <li class="li-img2"><a href="http://www.efeiyi.com/ef-www/main/do7" ></a></li>
+        <li class="li-img2"><a href="http://www.efeiyi.com/ef-www/main/do7" target="_blank"></a></li>
         <li class="span"></li>
         <li class="li-img3"></li>
     </ul>
@@ -188,13 +192,14 @@
             <li><a target="_blank" href="http://www.efeiyi.com/main/helpCenter">帮助中心</a></li>
             <li><a href="#">诚信保证</a></li>
         </ul>
-        <p>Copyright ? 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
+        <p>Copyright© 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
         <p>永新华韵旗下网站：e飞蚁 传承人官网 诚品宝 集团官网</p>
         <div class="Keeponrecord">
             <span class="Keeponrecord-l"></span>
             <span class="Keeponrecord-r"></span>
         </div>
     </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255887869'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1255887869' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <!--分析-->
 <%--<div class="floating_ck">

@@ -43,6 +43,7 @@
                     <th class="table-title">支付记录编号</th>
                     <th class="table-title">支付订单</th>
                     <th class="table-title">支付方式</th>
+                    <th class="table-title">支付状态</th>
                     <th class="table-title">支付用户</th>
                     <th class="table-title">支付时间</th>
 
@@ -69,6 +70,11 @@
                                 <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
                                                 checkedValue="${purchaseOrderPayment.payWay}"
                                                 type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="status" dataType="purchaseOrderPayment.status"
+                                            checkedValue="${purchaseOrderPayment.status}"
+                                            type="normal"/>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>

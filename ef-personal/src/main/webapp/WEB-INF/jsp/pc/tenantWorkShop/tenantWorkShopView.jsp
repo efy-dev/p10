@@ -22,7 +22,7 @@
             </div>
             <div id="center--1">
                 <div class="center-right">
-                    <c:if test="${workShop != null}">
+                    <c:if test="${workShop.videoPath != null}">
                         <div class="video-or-img">
                             <video src="http://ef-video.oss-cn-beijing.aliyuncs.com/${workShop.videoPath}" content="content" preload="auto" controls="controls"></video>
                         </div>
