@@ -69,6 +69,13 @@
                 <match url="plistDocument_tenant"/>
                 <match url="viewDocument"/>
             </jnode>
+
+            <jnode url="/basic/xm.do?qm=plistProjectCategory_tenant" access="admin,manager" text_zh_CN="首页推荐类别">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistProduct_index" access="admin,manager" text_zh_CN="首页推荐产品">
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistTenant_index" access="admin,manager" text_zh_CN="首页推荐传承人">
+            </jnode>
         </jnode>
     </jnode>
 

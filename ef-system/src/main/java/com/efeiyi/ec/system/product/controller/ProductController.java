@@ -2,6 +2,7 @@ package com.efeiyi.ec.system.product.controller;
 
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.system.product.service.ProductManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
@@ -27,6 +28,9 @@ import java.util.List;
 public class ProductController extends BaseController {
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private ProductManager productManager;
 
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
@@ -57,6 +61,24 @@ public class ProductController extends BaseController {
     @RequestMapping({"/test/upload/file.do"})
     public boolean uploadFile(MultipartFile multipartFile, MultipartRequest request) throws Exception {
         return aliOssUploadManager.uploadFile(request.getFile("test"), "ef-video", "testfile");
+    }
+
+    @RequestMapping("/recommendedProduct.do")
+    public String recommendedProduct(HttpServletRequest request){
+        String id = request.getParameter("id");
+
+        String categoryId = request.getParameter("categoryId");
+
+        Product product = (Product) baseManager.getObject(Product.class.getName(),id);
+        int maxValue = productManager.getMaxRecommendedIndex(categoryId);
+
+        product.setRecommendedIndex(maxValue + 1);
+
+        baseManager.saveOrUpdate(Product.class.getName(),product);
+
+        return "redirect:/basic/xm.do?qm=plistProduct_index";
+
+
     }
 
 
