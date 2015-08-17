@@ -92,11 +92,10 @@ public class PurchaseOrderController extends BaseController {
     * 查看订单详情
     * */
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(HttpServletRequest request, Model model) {
-        String orderId = request.getParameter("orderId");
+    public String viewPurchaseOrder(Model model,@PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        return "/purchaseOrder/orderView";
+        return "/purchaseOrder/purchaseOrderView";
     }
 
     @RequestMapping({"/pay/alipay/{orderId}"})
