@@ -64,8 +64,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&view=view&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewPaymentOrder=order&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
                         <td class="am-hide-sm-only">
                                 <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
                                                 checkedValue="${purchaseOrderPayment.payWay}"
@@ -76,7 +76,7 @@
                                             checkedValue="${purchaseOrderPayment.status}"
                                             type="normal"/>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&viewPaymentConsumer=payment&id=${purchaseOrderPayment.user.id}'/>">${purchaseOrderPayment.user.name}</a></td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
