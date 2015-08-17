@@ -110,3 +110,5 @@ ADD COLUMN `brief`  varchar(255) NULL AFTER `content`;
 
 
 alter TABLE purchase_order_delivery add COLUMN status SMALLINT(1)
+
+alter TABLE product add COLUMN recommended_index INTEGER(5);
