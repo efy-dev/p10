@@ -54,7 +54,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=formConsumer&view=consumer&id=${consumer.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formConsumer&id=${consumer.id}"/>"><span
                                             class="am-icon-trash-o"></span> 编辑
                                     </a>
                                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&id=${consumer.id}'/>">${consumer.username}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewConsumer&viewConsumer=consumer&id=${consumer.id}'/>">${consumer.username}</a></td>
                         <td class="am-hide-sm-only">${consumer.phone}</td>
                         <td class="am-hide-sm-only">
                                 <ming800:status name="sex" dataType="consumer.sex"
