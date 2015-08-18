@@ -74,7 +74,7 @@
                     </li>
                     <li>
                       <label></label>
-                      <input type="button" onclick="addAddress();" class="dj-btn" value="保存收货人信息">
+                      <input type="submit" class="dj-btn" value="保存收货人信息">
                     </li>
                   </ul>
                 </form>
@@ -206,7 +206,7 @@
                                 </li>
                                 <li>
                                   <label></label>
-                                  <input type="button" class="dj-btn" value="保存收货人信息">
+                                  <input type="submit" class="dj-btn" value="保存收货人信息">
                                 </li>
                               </ul>
                             </form>
@@ -265,9 +265,6 @@ $(window).scroll(function(){
     })
   })
 
-  $.post("address/addAddress",{},function(data){
-
-  })
 </script>
 
 
