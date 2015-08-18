@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.base.controller;
 
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectCategory;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
@@ -50,7 +51,21 @@ public class HomeController {
         List<Object> masterList =  objectRecommendedManager.getRecommendedList("masterRecommended");
         model.addAttribute("masterList",masterList);
         return "/home";
+    }
 
+    @RequestMapping({"/productCategory.do"})
+    public String listProductCategory(HttpServletRequest request ,Model model) throws Exception{
+        HashMap<String,List> projectMap = new HashMap<>();
+        XQuery xQuery = new XQuery("listProjectCategory_default",request);
+        List<Object> categoryList = baseManager.listObject(xQuery);
+        for (Object category : categoryList){
+            XQuery projectQuery = new XQuery("listProject_default",request);
+            projectQuery.put("projectCategory_id",((ProjectCategory)category).getId());
+            projectMap.put(((ProjectCategory)category).getId(),baseManager.listObject(projectQuery));
+        }
+        model.addAttribute("categoryList",categoryList);
+        model.addAttribute("projectMap",projectMap);
+        return "/common/productCategory";
     }
 
 }
