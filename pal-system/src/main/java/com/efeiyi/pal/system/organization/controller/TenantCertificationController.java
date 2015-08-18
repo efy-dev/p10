@@ -80,7 +80,7 @@ public class TenantCertificationController {
     }
 
     /**
-     * 获取tenantSource的Form表单基本数据
+     * 获取tenantCertification的Form表单基本数据
      * @param tenantCertification
      * @param request
      * @return

@@ -4,6 +4,7 @@ import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -88,6 +89,7 @@ public class PurchaseOrder {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+    @Where(clause = "status='1'")
     public List<PurchaseOrderLabel> getPurchaseOrderLabelList() {
         return purchaseOrderLabelList;
     }
@@ -98,6 +100,7 @@ public class PurchaseOrder {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+    @Where(clause = "status='1'")
     public List<PurchaseOrderPayment> getPurchaseOrderPaymentList() {
         return purchaseOrderPaymentList;
     }
