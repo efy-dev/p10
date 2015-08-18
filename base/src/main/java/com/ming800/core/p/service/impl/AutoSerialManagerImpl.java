@@ -66,8 +66,8 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     private void makeSerials(String group) throws Exception{
         CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
-        //String queryStr = "select max(serial) from AutoSerial where group = :group order by serial desc";
-        String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
+        //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
+        String queryStr = "select max(serial) from AutoSerial where groupName= :groupName";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("groupName", group);
         Long autoSerial = autoSerialDao.getAutoSerial(queryStr, queryParamMap);
@@ -87,7 +87,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             step = Integer.parseInt(commonSerial.getStep());
         }
         Long begin= Long.parseLong(makeChar(length));
-        if (autoSerial==null){
+        if (autoSerial==null || autoSerial==0){
             for (int i=1;i<=size;i++){
                 AutoSerial autoserial = new AutoSerial();
                 autoserial.setSerial(begin+i*step);
