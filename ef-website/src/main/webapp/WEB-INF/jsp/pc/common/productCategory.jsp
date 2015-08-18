@@ -14,7 +14,7 @@
         <ul>
             <li class="title">${category.name}</li>
             <c:forEach items="${projectMap.get(category.id)}" var="project">
-                <li><a href="" target="_blank" title="">${project.name}</a></li>
+                <li><a href="<c:url value="/product/list/${project.id}"/>" target="_blank" title="">${project.name}</a></li>
             </c:forEach>
             <%--<li><a href="" target="_blank" title="">景泰蓝</a></li>--%>
             <%--<li><a href="" target="_blank" title="">景德镇</a></li>--%>
