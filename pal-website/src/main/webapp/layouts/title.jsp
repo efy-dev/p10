@@ -38,7 +38,7 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
 
     <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/pc.css'/>">
 </head>
 <body>
 <div class="topbar">

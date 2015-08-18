@@ -47,7 +47,7 @@
     <div class="infolist">
       <ul>
         <li><strong>传承项目：</strong><p>${product.productSeries.name}</p></li>
-        <li><strong>制  作  人：</strong><p>${product.productSeries.tenant.name}</p></li>
+        <li><strong>制  作  人：</strong><p>${product.tenant.name}</p></li>
         <li><strong>创作时间：</strong><p><fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></p></li>
       </ul>
     </div>
