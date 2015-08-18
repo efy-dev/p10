@@ -105,3 +105,37 @@ CREATE TABLE `coupon_batch` (
 ALTER TABLE `master_news`
 DROP COLUMN `brief`,
 ADD COLUMN `brief`  varchar(255) NULL AFTER `content`;
+
+
+/*******20150818**************/
+
+
+ALTER TABLE tenant RENAME TO master
+
+
+CREATE TABLE `tenant` (
+`id`  char(16) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+;
+ALTER TABLE `product`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `picture_url`;
+
+ALTER TABLE `master_work_shop`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `name`;
+
+ALTER TABLE `master_news`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `user_id`;
+
+ALTER TABLE `master_introduction`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`;
+
+ALTER TABLE `master_work_recommended`
+CHANGE COLUMN `tenant_id` `master_id`  varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`;
+
+ALTER TABLE tenant_project RENAME TO master_project
+
+ALTER TABLE `master_project`
+CHANGE COLUMN `tenant_id` `master_id`  varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`;
+
+

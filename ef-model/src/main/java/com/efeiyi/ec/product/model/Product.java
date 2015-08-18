@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +24,7 @@ public class Product {
     private String name;
     private String serial;
     private String picture_url;
-    private Tenant tenant;
+    private Master master;
     private ProjectCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
@@ -64,15 +65,17 @@ public class Product {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "master_id")
     @JsonIgnore
-    public Tenant getTenant() {
-        return tenant;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setMaster(Master master) {
+        this.master = master;
     }
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -104,6 +107,7 @@ public class Product {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @Where(clause = "status=1")
     @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;
