@@ -1,9 +1,12 @@
 package com.efeiyi.pal.purchase.model;
 
+import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/16.
@@ -17,6 +20,8 @@ public class PurchaseOrderLabel {
     private PurchaseOrder purchaseOrder;
     private Product product;
     private Integer amount;
+    private String status;
+    private List<Label> labelList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -56,6 +61,25 @@ public class PurchaseOrderLabel {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrderLabel")
+    @Where(clause = "status != '1'")
+    public List<Label> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<Label> labelList) {
+        this.labelList = labelList;
     }
 
 }

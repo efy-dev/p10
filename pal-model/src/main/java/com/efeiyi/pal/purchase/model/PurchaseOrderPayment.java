@@ -1,7 +1,5 @@
 package com.efeiyi.pal.purchase.model;
 
-import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.organization.model.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,10 +15,9 @@ public class PurchaseOrderPayment {
 
     private String id;
     private PurchaseOrder purchaseOrder;
-    private String payway;
-    private Tenant tenant;
-    private User user;
+    private String payWay;
     private Date createDatetime;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -44,32 +41,12 @@ public class PurchaseOrderPayment {
     }
 
     @Column(name = "payway")
-    public String getPayway() {
-        return payway;
+    public String getPayWay() {
+        return payWay;
     }
 
-    public void setPayway(String payway) {
-        this.payway = payway;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setPayWay(String payWay) {
+        this.payWay = payWay;
     }
 
     @Column(name = "create_datetime")
@@ -79,6 +56,15 @@ public class PurchaseOrderPayment {
 
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
