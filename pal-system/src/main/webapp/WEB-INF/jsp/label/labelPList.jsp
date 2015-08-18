@@ -87,8 +87,10 @@
                 <td>${label.code}</td>
                 <td>${label.labelBatch.setting}</td>
                 <td>
-                    <c:if test="${label.product != null && not empty label.product}">
-                        ${label.product.name}
+                    <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
+                        <c:if test="${label.purchaseOrderLabel.product != null && not empty label.purchaseOrderLabel.product}">
+                            ${label.purchaseOrderLabel.product.name}
+                        </c:if>
                     </c:if>
                 </td>
                 <td>

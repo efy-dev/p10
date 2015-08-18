@@ -8,6 +8,7 @@
     <!-- 轮播图 -->
     <banners>
         <banner group="master.index" note="传承人首页轮播图" />
+        <banner group="ec.home.banner" note="电商轮播图" />
     </banners>
     <!-- 文档 -->
     <documents>
@@ -16,5 +17,8 @@
     <!-- 推荐 -->
     <recommends>
         <recommend group="productRecommended" recommendedModel="com.efeiyi.ec.product.model.Product" note="商品推荐" amount="5" />
+        <recommend group="projectRecommended" recommendedModel="com.efeiyi.ec.project.model.Project" note="推荐分类" amount="5" />
+        <recommend group="productModelRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
+        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
     </recommends>
 </common>

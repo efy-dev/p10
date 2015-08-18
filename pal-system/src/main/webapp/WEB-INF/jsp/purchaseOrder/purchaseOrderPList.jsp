@@ -15,22 +15,56 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
-<body>
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
-    <tr>
-        <td>purchaseOrder——id</td>
-        <td>序列号</td>
-    </tr>
-
-    <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder">
+<body style="height: auto">
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           value="新建订单" />
+</div>
+<div>
+    <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>${purchaseOrder.id}</td>
-            <td>${purchaseOrder.serial}</td>
+            <td>操作</td>
+            <td>订单编号</td>
+            <td>商户名称</td>
+            <td>用户</td>
+            <td>状态</td>
+            <td>创建时间</td>
         </tr>
-    </c:forEach>
-</table>
+
+        <c:forEach items="${requestScope.pageInfo.list}" var="order">
+            <tr style="text-align: left">
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&id=${order.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&id=${order.id}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        </div>
+                    </div>
+                </td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${order.id}"/>">${order.serial}</a></td>
+                <td>${order.tenant.name}</td>
+                <td>${order.user.name}</td>
+                <td>
+                    <c:if test="${order.status == '1'}">
+                        <font color="green">未支付</font>
+                    </c:if>
+                    <c:if test="${order.status == '2'}">
+                        <font color="blue">已支付</font>
+                    </c:if>
+                    <c:if test="${order.status == '9'}">
+                        <font color="red">已发货</font>
+                    </c:if>
+                </td>
+                <td><fmt:formatDate value="${order.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>

@@ -54,7 +54,7 @@ public class LabelController {
             label.setSerial(serial);
             label.setCode(code);
             label.setLabelBatch(labelBatch);
-            label.setProduct(null);
+            label.setPurchaseOrderLabel(null);
             label.setSeller(null);
             label.setStatus("1");
 
