@@ -30,10 +30,10 @@ public class LabelDaoHibernate implements LabelDao {
     @Override
     public Integer getMinSerial() {
         String hql = "SELECT MIN(serial) FROM Label WHERE status = :status";
-        Query query = this.getSession().createQuery(hql).setString("status", "1");
-        List<Object> list= query.list();
+        Query query = this.getSession().createSQLQuery(hql).setString("status", "1");
+        List<Integer> list= query.list();
         if (list != null && list.size() >0){
-            return Integer.parseInt((String) list.get(0));
+            return list.get(0);
         }
         return null;
     }

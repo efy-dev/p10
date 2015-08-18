@@ -130,6 +130,7 @@ public class Tenant {
         this.tenantCertificationList = tenantCertificationList;
     }
 
+    @JsonIgnore
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "tenant_product_series", joinColumns = {@JoinColumn(name = "tenant_id")},
                                                 inverseJoinColumns = {@JoinColumn(name = "product_series_id")})
