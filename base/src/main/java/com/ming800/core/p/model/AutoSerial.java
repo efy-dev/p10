@@ -16,9 +16,9 @@ import javax.persistence.*;
 public class AutoSerial {
 
     private String id;
-    private String serial;
+    private Long serial;
     private String model;
-
+    private String group;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -32,11 +32,11 @@ public class AutoSerial {
     }
 
     @Column(name = "serial")
-    public String getSerial() {
+    public Long getSerial() {
         return serial;
     }
 
-    public void setSerial(String serial) {
+    public void setSerial(Long serial) {
         this.serial = serial;
     }
 
@@ -48,6 +48,8 @@ public class AutoSerial {
     public void setModel(String model) {
         this.model = model;
     }
+    @Column(name = "groupName")
+    public String getGroup() {return group;}
 
-
+    public void setGroup(String group) {this.group = group;}
 }

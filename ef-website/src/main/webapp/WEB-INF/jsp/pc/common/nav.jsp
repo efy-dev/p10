@@ -10,9 +10,9 @@
 <div class="topbar wh">
     <div class="hd">
         <ul class="ul-item">
-            <li><a href="" title="商家入驻">商家入驻</a></li>
+            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
             <li><a href="" title="手机e飞蚁">手机e飞蚁</a></li>
-            <li><a href="" title="请登录">请登录</a></li>
+            <li><a href="<c:url value="/login"/>" title="请登录">请登录</a></li>
             <li><a href="" title="快速注册">快速注册</a></li>
             <li class="cart">
                 <a href="" title="购物车"><i class="icon"></i>购物车</a>

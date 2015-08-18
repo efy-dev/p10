@@ -33,7 +33,7 @@ public class MasterIntroduction {
     }
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "master_id")
     public Master getMaster() {
         return master;
     }
