@@ -19,11 +19,11 @@ import java.util.List;
 @Repository
 public class AutoSerialDaoHibernate extends BaseDaoSupport<AutoSerial> implements AutoSerialDao {
     public Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap){
-        Query query = this.getSession().createSQLQuery(queryStr).setString("groupName", queryParamMap.get("groupName").toString());
-        Long serial=null;
-        List list = query.list();
-        if(list.size()>=1){
-            serial=Long.parseLong(list.get(0).toString());
+        Query query = this.getSession().createQuery(queryStr).setString("groupName", queryParamMap.get("groupName").toString());
+        long serial=0;
+        List<Long> list = query.list();
+        if(list.size()>=1 && list.get(0)!=null){
+            serial=list.get(0);
         }
         return serial;
     }
