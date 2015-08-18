@@ -48,6 +48,7 @@ public class ShippingAddressController {
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
+
         return true;
 
     }
