@@ -110,8 +110,6 @@ a:hover { color: #f00; text-decoration:underline;}
 .category .list-pro .ul-item li p {text-align: right;color: #000;padding-right:20px;}
 .category .list-pro .ul-item li .name {font-size:16px; font-weight: bolder;}
 .category .list-pro .ul-item li .price {font-size:12px;}
-.category .am-pagination { margin: 100px 0;}
-.category .am-pagination>li.am-active a {background: #000;border: 1px #000 solid;}
 /*--//End--*/
 .shop-header { padding: 15px 0;}
 .shop-header .logo {float: left;}
@@ -160,6 +158,13 @@ a:hover { color: #f00; text-decoration:underline;}
 .explosion .shop-sort .link1 li a { color: #000; font-weight: bold;}
 .explosion .shop-sort .link1 li a:hover {background:#000; color: #fff;}
 /*--End--explosion--*/
+.pages .am-pagination>li {color: #000;}
+.pages .am-pagination>li a,.pages .am-pagination>li a:hover {background:none;border:0;border-bottom:1px #3f3f3f solid; padding:0; color: #000; cursor: pointer;}
+.pages .am-pagination>li.am-active a {border-bottom: 0}
+.pages .am-pagination>li a:hover { color: #f00;}
+.pages .am-pagination>li.default { }
+.pages .am-pagination { margin: 100px 0; float: right;}
+/*--End--pages--*/
 .login-wrap {width:920px;margin:70px 180px;float: left; font-size: 12px;}
 .login-wrap .banner {float: left;}
 .login-form {width: 300px;padding:34px;border: 1px #ccc solid;float: right;box-sizing: content-box}
