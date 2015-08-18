@@ -29,42 +29,12 @@
   <link type="text/css" rel="stylesheet" href="../../../../scripts/assets/css/my-efeiyi2.css">
   <link type="text/css" rel="stylesheet" href="../../../../scripts/assets/css/app.css">
 </head>
+
 <body>
-<div class="hd">
-  <div class="header wh">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="商品分类">商品分类</a></li>
-        <li><a href="" title="传承人">传承人</a></li>
-        <li><a href="" title="展览">展览</a></li>
-        <li><a href="" title="资讯">资讯</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+
 <!-- //End--header-->
 <!--content-->
-<div class="my-order">
-  <div class="order-nav">
-    <div class="layout-nav">
-      <div class="order">
-        <span><img src="../../../../scripts/assets/images/img-tx.png"></span>
-        <p>151******79</p>
-      </div>
-      <ul class="layout-li">
-        <li ><a href="#" class="liul">我的订单</a></li>
-        <li class="aborder"><a href="#">我的评价</a></li>
-        <li><a href="#">我的咨询</a></li>
-        <li><a href="#">我的收藏</a></li>
-        <li><a href="#">系统消息</a></li>
-        <li class="aborder"><a href="#">个人信息</a></li>
-        <li><a href="#">账号安全</a></li>
-        <li><a href="#">收货地址</a></li>
-        <li class="aborder"><a href="#">退换货管理</a></li>
-      </ul>
-    </div>
+
     <div class="layout-col">
       <div class="mt wh1">
         <div class="extra-l">
@@ -120,7 +90,7 @@
             <td width="130">待付款</td>
             <td width="139">
               <p><a href="#">付款</a></p>
-              <p><a href="#">查看</a></p>
+              <p><a href="/order/view/100000000001">查看</a></p>
               <p><a href="#">取消订单</a></p>
             </td>
           </tr>
@@ -258,48 +228,7 @@
         </table>
       </div>
     </div>
-  </div>
 </div>
-<!--content-->
-<div class="footer wh">
-  <div class="service wh">
-    <div class="icon phone"></div>
-    <div class="line"></div>
-    <div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>
-    <div class="line"></div>
-    <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
-    <div class="line"></div>
-    <div class="icon wechat"></div>
-  </div>
-  <div class="links wh">
-    <a href="" target="_blank" title="关于我们">关于我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="联系我们">联系我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="意见反馈">意见反馈</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="帮助中心">帮助中心</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚信保障">诚信保障</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
-  </div>
-  <div class="copyright wh">
-    <div class="phone">
-      <strong>商家入住热线</strong>
-      <em>400-876-8766</em>
-    </div>
-    <div class="frlinks">
-      <span>友情链接：</span>
-      <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-      <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-      <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-    </div>
-    <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-  </div>
 </div>
 <!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -312,13 +241,7 @@
 <![endif]-->
 <script src="../../../../scripts/assets/js/amazeui.min.js"></script>
 <script src="../../../../scripts/assets/js/system.js"></script>
-<!--<script type="text/javascript">
-$(window).scroll(function(){
-	if($(this).scrollTop()>100){
-		$('.slider-menu ul').css({'position':'fixed'})
-	}
-})
-</script>-->
+
 
 
 
