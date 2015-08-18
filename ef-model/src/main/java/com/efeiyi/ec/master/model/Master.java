@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "tenant")
+@Table(name = "master")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Master implements Serializable {
 

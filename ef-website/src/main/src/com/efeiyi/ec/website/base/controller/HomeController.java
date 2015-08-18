@@ -30,13 +30,13 @@ public class HomeController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping
+    @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request,Model model) throws Exception{
         List<Object> projectList =  objectRecommendedManager.getRecommendedList("projectRecommended");
         HashMap<String,List> map = new HashMap<>();
         for (Object object : projectList){
-            XQuery xQuery = new XQuery("listProduct_recommend",request);
-            xQuery.put("project_id",((Project)object).getId());
+            XQuery xQuery = new XQuery("listProductModel_recommend",request);
+            xQuery.put("product_project_id",((Project)object).getId());
             map.put(((Project) object).getId(), baseManager.listObject(xQuery));
         }
         model.addAttribute("recommendMap",map);
