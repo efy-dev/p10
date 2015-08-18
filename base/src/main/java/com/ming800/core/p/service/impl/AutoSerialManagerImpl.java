@@ -106,7 +106,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         }
 
     }
-    public String makeChar(int num){
+    private String makeChar(int num){
         StringBuilder chars = new StringBuilder("1");
          for (int z=1;z<=num-1;z++){
             chars.append(0);
