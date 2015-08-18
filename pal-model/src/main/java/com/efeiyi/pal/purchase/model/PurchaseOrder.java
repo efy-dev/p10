@@ -1,10 +1,10 @@
 package com.efeiyi.pal.purchase.model;
 
-import com.efeiyi.pal.label.model.LabelBatch;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,11 +20,12 @@ public class PurchaseOrder {
 
     private String id;
     private String serial;
-    private List<LabelBatch> labelBatchList;
     private Tenant tenant;
     private User user;
     private Date createDatetime;
     private String status;
+    private List<PurchaseOrderLabel> purchaseOrderLabelList;
+    private List<PurchaseOrderPayment> purchaseOrderPaymentList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -44,15 +45,6 @@ public class PurchaseOrder {
 
     public void setSerial(String serial) {
         this.serial = serial;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
-    public List<LabelBatch> getLabelBatchList() {
-        return labelBatchList;
-    }
-
-    public void setLabelBatchList(List<LabelBatch> labelBatchList) {
-        this.labelBatchList = labelBatchList;
     }
 
     @JsonIgnore
@@ -93,6 +85,28 @@ public class PurchaseOrder {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+    @Where(clause = "status='1'")
+    public List<PurchaseOrderLabel> getPurchaseOrderLabelList() {
+        return purchaseOrderLabelList;
+    }
+
+    public void setPurchaseOrderLabelList(List<PurchaseOrderLabel> purchaseOrderLabelList) {
+        this.purchaseOrderLabelList = purchaseOrderLabelList;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+    @Where(clause = "status='1'")
+    public List<PurchaseOrderPayment> getPurchaseOrderPaymentList() {
+        return purchaseOrderPaymentList;
+    }
+
+    public void setPurchaseOrderPaymentList(List<PurchaseOrderPayment> purchaseOrderPaymentList) {
+        this.purchaseOrderPaymentList = purchaseOrderPaymentList;
     }
 
 }

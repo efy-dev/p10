@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -45,13 +47,15 @@ public class LabelController {
         Integer flag = labelBatch.getAmount();
 
         for (int i=0; i<flag; i++){
-            String serial = RandomStringUtils.randomNumeric(10);
+            String code = RandomStringUtils.randomNumeric(10);
+            String serial = String.valueOf(i + 1);
 
             Label label = new Label();
             label.setSerial(serial);
+            label.setCode(code);
             label.setLabelBatch(labelBatch);
-            label.setProduct(labelBatch.getProduct());
-            label.setSeller(labelBatch.getTenant());
+            label.setPurchaseOrderLabel(null);
+            label.setSeller(null);
             label.setStatus("1");
 
             baseManager.saveOrUpdate(label.getClass().getName(), label);

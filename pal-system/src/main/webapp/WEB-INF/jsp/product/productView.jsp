@@ -44,8 +44,12 @@
             <td>${object.tenant.name}</td>
         </tr>
         <tr>
-            <td>大师姓名：</td>
-            <td>${object.tenant.masterName}</td>
+            <td>制作大师：</td>
+            <td>${object.masterName}</td>
+        </tr>
+        <tr>
+            <td>购买链接：</td>
+            <td>${object.shoppingUrl}</td>
         </tr>
     </table>
 </div>
@@ -87,7 +91,7 @@
                 <td>溯源图片</td>
             </tr>
             <tr>
-                <td>${object.tenantSource.tenant.masterName}</td>
+                <td>${object.masterName}</td>
                 <td>${object.tenantSource.name}</td>
                 <td>${object.tenantSource.region}</td>
                 <td>

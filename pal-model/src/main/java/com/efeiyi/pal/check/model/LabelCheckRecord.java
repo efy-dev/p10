@@ -19,6 +19,7 @@ public class LabelCheckRecord {
     private Label label;
     private Product product;
     private String IP;
+    private String IPAddress;
     private Date createDatetime;
 
     @Id
@@ -59,6 +60,15 @@ public class LabelCheckRecord {
 
     public void setIP(String IP) {
         this.IP = IP;
+    }
+
+    @Column(name = "IP_Address")
+    public String getIPAddress() {
+        return IPAddress;
+    }
+
+    public void setIPAddress(String IPAddress) {
+        this.IPAddress = IPAddress;
     }
 
     @Column(name = "create_datetime")

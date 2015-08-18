@@ -32,6 +32,7 @@ public class PurchaseOrder {
     private ConsumerAddress consumerAddress;  //收获地址
     private String status;
     private BigDecimal total;  //订单总价
+    private BigDecimal originalPrice; //订单原价
     private String orderStatus; //订单状态
 
     @Id
@@ -136,5 +137,14 @@ public class PurchaseOrder {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    @Column(name = "original_price")
+    public BigDecimal getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(BigDecimal originalPrice) {
+        this.originalPrice = originalPrice;
     }
 }

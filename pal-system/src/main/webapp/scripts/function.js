@@ -106,7 +106,7 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, conditi
         url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=studentTraining';
     } else if (type == 'student') {   /*ѧԱ*/
         url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=student';
-    } else if (type == 'tenant') {     /*�û�*/
+    } else if (type == 'tenant') {     /*所有商户*/
         url = '/tenant/list/json';
     } else if (type == 'multiUser') {
         url = '/organization/formMultiUserDialog.do?printable=true&theStatus=3';
@@ -131,18 +131,20 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, conditi
     } else if (type.indexOf('nut_category_') >= 0) {       /*ԭ�����*/
         var tempType = type.split("_")[2];
         url = '/dish/listCategory.do?printable=true&theType=' + tempType;
-    } else if (type == 'product') {       /*商品*/
+    } else if (type == 'product') {       /*所有商品*/
         url = '/product/list/json';
-    } else if (type == 'order') {       /*����*/
+    } else if (type == 'order') {       /*订单*/
         url = '/order/list/json';
-    } else if (type == 'productSeries') {       /*商品系列*/
+    } else if (type == 'productSeries') {       /*所有商品系列*/
         url = '/productSeries/list/json';
     } else if (type == 'source') {       /*商品溯源信息*/
         url = '/tenantSource/list/json?conditions=tenant.id:'+condition;
     } else if (type == 'certification') {       /*商品认证信息*/
         url = '/tenantCertification/list/json?conditions=tenant.id:'+condition;
-    }  else if (type == 'product2') {       /*商户的所有商品*/
+    } else if (type == 'product2') {       /*商户的所有商品*/
         url = '/product2/list/json?conditions=tenant.id:'+condition;
+    } else if (type == 'user') {       /*所有用户*/
+        url = '/user/list/json';
     }
 
     /*dialog1.data("artDialogDocument", document);

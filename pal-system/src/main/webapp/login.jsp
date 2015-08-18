@@ -47,7 +47,7 @@
                 if (error != null && error.trim().equals("true")){
             %>
             <div class="message" align="center">
-                <small>用户名或密码不正确 / UserName or password is Incorrect</small>
+                <small>用户名或密码不正确</small>
             </div>
             <%
                 }

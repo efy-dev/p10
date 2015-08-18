@@ -63,12 +63,12 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=order&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
                         </td>
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <span style="margin-left: 10px;"><a
-                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&id=${purchaseProduct.productModel.product.id}'/>">${purchaseProduct.productModel.product.name}</a></span>
+                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProduct=order&id=${purchaseProduct.productModel.product.id}'/>">${purchaseProduct.productModel.product.name}</a></span>
                             </c:forEach>
 
                         </td>

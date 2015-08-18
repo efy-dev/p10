@@ -24,28 +24,25 @@
                 <input type="hidden" name="id" value="${object.id}">
 
                 <div class="am-form-group">
-                    <label for="deposit" class="am-u-sm-3 am-form-label">账户余额 / Deposit</label>
+                    <label for="deposit" class="am-u-sm-3 am-form-label">账户余额</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="deposit" name="deposit" placeholder="账户余额 / Deposit" value="${object.deposit}">
-                        <small>输入你要保存的名字</small>
+                        <input type="text" id="deposit" name="deposit" placeholder="账户余额" value="${object.deposit}">
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label for="score" class="am-u-sm-3 am-form-label">积分 / Score</label>
+                    <label for="score" class="am-u-sm-3 am-form-label">积分</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="score" name="score" placeholder="积分 / Score" value="${object.score}">
-                        <small>输入你要保存的名字</small>
+                        <input type="text" id="score" name="score" placeholder="积分" value="${object.score}">
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label for="username" class="am-u-sm-3 am-form-label">名字 / UserName</label>
+                    <label for="username" class="am-u-sm-3 am-form-label">名字</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="username" name="username" placeholder="名字 / UserName" value="${object.username}">
-                        <small>输入你要保存的名字</small>
+                        <input type="text" id="username" name="username" placeholder="名字" value="${object.username}">
                     </div>
                 </div>
                 <div class="am-form-group">

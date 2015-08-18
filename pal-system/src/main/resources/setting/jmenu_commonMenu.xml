@@ -4,13 +4,25 @@
     <jnode id="palManager" url="/main.do?jnodeId=palManager" text_zh_CN="成品宝管理">
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="查询管理">
             <jnode url="/basic/xm.do?qm=plistLabelCheckRecord_default"  access="admin,manager" text_zh_CN="防伪查询记录">
-                <match url="plistLabelCheckRecord_default"/>
-                <match url="listLabelCheckRecord_default"/>
+                <match url="/basic/xm.do?qm=plistLabelCheckRecord_default"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;jmenu=2"/>
+                <match url="/basic/xm.do?qm=viewLabelBatch&amp;jmenu=2"/>
+                <match url="/basic/xm.do?qm=listLabelCheckRecord_default"/>
             </jnode>
         </jnode>
 
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="标签管理">
-            <jnode url="/basic/xm.do?qm=plistLabel_all" access="admin" text_zh_CN="标签管理">
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin,manager" text_zh_CN="订单管理">
+                <match url="plistPurchaseOrder_default"/>
+                <match url="listPurchaseOrder_default"/>
+                <!--<match url="formLabelBatch"/>-->
+                <!--<match url="viewLabel"/>-->
+                <!--<match url="removeLabelBatch"/>-->
+                <!--<match url="saveOrUpdateLabelBatch"/>-->
+                <!--<match url="plistLabel_all"/>-->
+                <!--<match url="plistLabel_default"/>-->
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistLabel_all" access="admin,manager" text_zh_CN="标签管理">
                 <!--<match url="plistLabel_default"/>-->
                 <match url="listLabel_default"/>
                 <!--<match url="formLabelBatch"/>-->
@@ -20,7 +32,7 @@
                 <match url="plistLabel_all"/>
                 <match url="plistLabel_default"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin" text_zh_CN="标签批次管理">
+            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin,manager" text_zh_CN="标签批次管理">
                 <match url="plistLabelBatch_default"/>
                 <match url="listLabelBatch_default"/>
                 <match url="formLabelBatch"/>

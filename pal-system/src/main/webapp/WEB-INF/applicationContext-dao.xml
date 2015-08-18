@@ -39,6 +39,9 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="labelServiceManagerImpl" class="com.efeiyi.pal.system.order.service.impl.LabelServiceManagerImpl"/>
+    <bean id="labelDaoHibernate" class="com.efeiyi.pal.system.order.dao.hibernate.LabelDaoHibernate"/>
+
     <!--userDao用于spring security-->
     <bean id="userDao" class="com.efeiyi.pal.system.organization.dao.hibernate.UserDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>

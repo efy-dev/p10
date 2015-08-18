@@ -28,6 +28,7 @@
         <tr>
             <td>操作</td>
             <td>商品名称</td>
+            <td>制作大师</td>
             <td>序列号</td>
             <td>所属系列</td>
             <td>所属商户</td>
@@ -47,6 +48,7 @@
                     </div>
                 </td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a></td>
+                <td>${product.masterName}</td>
                 <td>${product.serial}</td>
                 <td>${product.productSeries.name}</td>
                 <td>${product.tenant.name}</td>

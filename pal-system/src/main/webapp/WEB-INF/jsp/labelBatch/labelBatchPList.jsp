@@ -25,9 +25,8 @@
         <tr style="text-align:left">
             <td>操作</td>
             <td>标签批次</td>
-            <td>商品名称</td>
-            <td>商户名称</td>
-            <td>开始</td>
+            <%--<td>商品名称</td>--%>
+            <%--<td>商户名称</td>--%>
             <td>数量</td>
             <td>状态</td>
             <td>创建日期</td>
@@ -55,9 +54,8 @@
                     </div>
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
-                <td>${labelBatch.product.name}</td>
-                <td>${labelBatch.tenant.name}</td>
-                <td>${labelBatch.start}</td>
+                <%--<td>${labelBatch.product.name}</td>--%>
+                <%--<td>${labelBatch.tenant.name}</td>--%>
                 <td align="right">${labelBatch.amount}</td>
                 <td>
                     <c:if test="${labelBatch.status == '0'}">

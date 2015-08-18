@@ -1,11 +1,13 @@
 package com.efeiyi.pal.organization.model;
 
+import com.efeiyi.pal.product.model.ProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/16.
@@ -22,11 +24,11 @@ public class Tenant {
     private String province;
     private String city;
     private String address;
-    private String type;
     private String status;
-    private String masterName;
     private List<TenantSource> tenantSourceList;
     private List<TenantCertification> tenantCertificationList;
+
+    private Set<ProductSeries> productSeriesSet;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -97,15 +99,6 @@ public class Tenant {
         this.address = address;
     }
 
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Column(name = "status")
     public String getStatus() {
         return status;
@@ -113,15 +106,6 @@ public class Tenant {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Column(name = "master_name")
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
     }
 
     @JsonIgnore
@@ -144,6 +128,17 @@ public class Tenant {
 
     public void setTenantCertificationList(List<TenantCertification> tenantCertificationList) {
         this.tenantCertificationList = tenantCertificationList;
+    }
+
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "tenant_product_series", joinColumns = {@JoinColumn(name = "tenant_id")},
+                                                inverseJoinColumns = {@JoinColumn(name = "product_series_id")})
+    public Set<ProductSeries> getProductSeriesSet() {
+        return productSeriesSet;
+    }
+
+    public void setProductSeriesSet(Set<ProductSeries> productSeriesSet) {
+        this.productSeriesSet = productSeriesSet;
     }
 
 }

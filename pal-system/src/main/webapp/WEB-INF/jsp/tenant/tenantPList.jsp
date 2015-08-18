@@ -35,8 +35,6 @@
         <tr style="text-align:left">
             <td>操作</td>
             <td>商户名称</td>
-            <td>大师姓名</td>
-            <td>级别</td>
             <td>地址</td>
         </tr>
 
@@ -57,8 +55,6 @@
                     </div>
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
-                <td>${tenant.masterName}</td>
-                <td><ming800:status name="type" dataType="PCTenant.type" checkedValue="${tenant.type}" type="normal" /></td>
                 <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
             </tr>
         </c:forEach>

@@ -370,6 +370,20 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>ec-develop2</id>
+            <properties>
+                <db-driver>com.mysql.jdbc.Driver</db-driver>
+                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
+                <db-url>jdbc:mysql://192.168.1.57/dev-efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-username>root</db-username>
+                <db-level>DEBUG</db-level>
+                <dbpath>/tmp/logs/</dbpath>
+            </properties>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
@@ -384,7 +398,7 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
         <profile>

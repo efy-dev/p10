@@ -52,18 +52,20 @@
         </div>
     </div>
 </div>
-<div id="center">
-    <c:forEach items="${tenantWorkList}" var="masterWork" varStatus="work" begin="0" end="2">
-        <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
-            <dl class="center-${work.index + 1}">
-                <dt class="center-1-dt"><a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img
-                        src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work-index"></a></dt>
-                <dd class="center-1-dd" style="text-align:center;">
-                    <span><a href="javascript:void(0);">${masterWork.name}</a></span>
-                </dd>
-            </dl>
-        </c:if>
-    </c:forEach>
+<div class="wh" id="center">
+    <div class="hd">
+        <c:forEach items="${tenantWorkList}" var="masterWork" varStatus="work" begin="0" end="2">
+            <c:if test="${tenantWorkList != null && tenantWorkList.size() > 0}">
+                <dl class="center-${work.index + 1}">
+                    <dt class="center-1-dt"><a href="<c:url value="/work/${masterWork.id}"/>" target="_blank"><img
+                            src="http://tenant.efeiyi.com/${masterWork.pictureUrl}@!tenant-pc-work-index"></a></dt>
+                    <dd class="center-1-dd" style="text-align:center;">
+                        <span><a href="javascript:void(0);">${masterWork.name}</a></span>
+                    </dd>
+                </dl>
+            </c:if>
+        </c:forEach>
+    </div>
 </div>
 <!--内容-->
 

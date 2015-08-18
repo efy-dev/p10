@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>--%>
 <%String path = request.getContextPath();%>
 <html class="no-js">
@@ -25,8 +26,8 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
-    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
 
     <sitemesh:write property='head'/>
@@ -40,12 +41,12 @@
 <body>
 
 <jsp:include flush="true"
-             page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope.qm}"/>
+             page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
 <div class="am-cf admin-main">
 <%----%>
     <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
+                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 <div class="admin-content" style="height: auto;">
 <sitemesh:write property='body'/>
 </div>

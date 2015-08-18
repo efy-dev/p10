@@ -48,14 +48,14 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th class="table-title">优惠券id</th>
+                <th class="table-title">优惠券编号</th>
                 <th class="table-title">优惠券状态</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${object.couponList}" var="coupon" varStatus="stat">
             <tr>
-                <td class="am-hide-sm-only">${coupon.id}</td>
+                <td class="am-hide-sm-only">${coupon.serial}</td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="coupon.status"
                                     checkedValue="${coupon.status}"

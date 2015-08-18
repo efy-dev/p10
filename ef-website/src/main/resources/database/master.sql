@@ -1,5 +1,5 @@
 
-#---------------未执行----------------
+#---------------已经执行----------------
 ALTER TABLE `purchase_cart_product`
 ADD COLUMN `status`  char(8) NULL AFTER `product_id`;
 
@@ -38,7 +38,6 @@ ALTER TABLE `organization_consumer_address`
 ADD COLUMN `status`  varchar(2) NULL AFTER `consumer_id`;
 
 
-#-------------------------------未执行----------------------------------
 
 CREATE TABLE `product_property_value` (
   `id`  char(16) NOT NULL ,
@@ -65,4 +64,40 @@ ADD COLUMN `transaction_number`  varchar(16) NULL AFTER `transaction_number`;
 ALTER TABLE `organization_consumer`
 ADD COLUMN `unionid`  char(64) NULL AFTER `id`;
 
+
+#-------------------------------未执行----------------------------------
+ALTER TABLE `purchase_order`
+ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;
+
+CREATE TABLE `master` (
+  `id` char(16) NOT NULL DEFAULT '',
+  `name` varchar(16) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `origin_province_id` char(16) DEFAULT NULL,
+  `create_datetime` datetime DEFAULT NULL,
+  `full_name` varchar(16) DEFAULT NULL,
+  `brief` varchar(255) DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `favicon` varchar(64) DEFAULT NULL,
+  `sex` varchar(20) DEFAULT NULL,
+  `present_address` varchar(64) DEFAULT NULL,
+  `level` varchar(64) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `background_url` varchar(255) DEFAULT NULL,
+  `province_name` varchar(255) DEFAULT NULL,
+  `birthday` varchar(32) DEFAULT NULL,
+  `logo_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tenant_master` (
+  `id`  char(16) NOT NULL ,
+  `tenant_id`  char(16) NULL ,
+  `master_id`  char(16) NULL ,
+  `status`  char(4) NULL ,
+  PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `product_model`
+ADD COLUMN `recommend_index`  int(11) NULL AFTER `status`;
 

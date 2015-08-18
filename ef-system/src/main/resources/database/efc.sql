@@ -98,6 +98,8 @@ CREATE TABLE `coupon_batch` (
   `end_date` datetime DEFAULT NULL,
   `price` float(5,0) DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL,
+  `is_created_coupon` smallint(1) DEFAULT NULL,
+  `price_limit` float DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -139,3 +141,9 @@ ALTER TABLE `master_project`
 CHANGE COLUMN `tenant_id` `master_id`  varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`;
 
 
+
+
+
+alter TABLE purchase_order_delivery add COLUMN status SMALLINT(1)
+
+alter TABLE product add COLUMN recommended_index INTEGER(5);

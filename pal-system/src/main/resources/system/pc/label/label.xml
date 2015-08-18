@@ -48,6 +48,22 @@
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
+                    <query name="defaultSerial" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="labelBatch.id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="serial" defaultValue="" operation="eq"/>
+                    </query>
+                    <query name="allSerial" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="serial" defaultValue="" operation="eq"/>
+                    </query>
+                    <query name="orderLabel" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="purchaseOrderLabel.id" defaultValue="" operation="eq"/>
+                    </query>
                 </do>
 
                 <do name="listLabel" access="" label="标签列表" result="/label/labelList">
