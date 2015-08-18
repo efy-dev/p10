@@ -19,8 +19,7 @@ public class ConsumerAddress {
     private String phone;
     private String email;
     private Consumer consumer;
-    private String status;
-
+    private String status;   //1 正常的 2 默认的
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")

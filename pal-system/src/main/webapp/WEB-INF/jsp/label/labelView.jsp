@@ -46,9 +46,14 @@
         <tr>
             <td align="right">商户名称：</td>
             <td>
-                <c:if test="${!empty object.seller && object.seller != ''}">
-                    ${object.seller.name}
+                <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
+                    <c:if test="${label.purchaseOrderLabel.product != null && not empty label.purchaseOrderLabel.product}">
+                        ${label.purchaseOrderLabel.product.name}
+                    </c:if>
                 </c:if>
+                <%--<c:if test="${!empty object.seller && object.seller != ''}">--%>
+                    <%--${object.seller.name}--%>
+                <%--</c:if>--%>
             </td>
         </tr>
         <tr>

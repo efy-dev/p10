@@ -22,14 +22,28 @@ a:hover { color: #f00; text-decoration:underline;}
 .topbar .ul-item li.cart .icon {background-position:0 -50px;width:17px;height:13px; float: left; margin-top:8px; margin-right:10px;}
 .topbar .ul-item li.cart .tips {background: #900;height:16px;height:14px\9;padding:2px 8px; -webkit-border-radius:6px;position: absolute;top:3px; left:122px;color:#fff;font-size:10px;-webkit-transform:scale(0.8);-moz-transform:scale(0.8);transform:scale(0.8)}
 .topbar li.cart .tips em {height:12px;float:left; margin-top:-3px; margin-left:-1px; font-family:simsun;}
+.topbar .ul-item li.cart:hover {background:#fff}
+.topbar .ul-item li.cart a:hover {background:none; color: #000;}
+.topbar .ul-item li.cart a:hover .icon { background-position:0 -63px;}
+.am-sticky-placeholder {background:#000;width:100%;float: left;}
 /*--//End--topbar--*/
-.header {padding:15px 0;border-bottom: 3px #000 solid}
+.header {border-bottom: 3px #000 solid}
+.header .logo {padding:15px 0; float: left;}
 .header .logo a {background-position: 0 0; width:307px; height: 50px;float: left;}
-.header .nav ul {float: right; margin-right:154px;}
-.header .nav li {float: left; line-height:50px;}
-.header .nav li a {font-size:12px; color: #000; padding: 0 30px; font-weight: bolder;font-family:FangSong;}
+.header .nav ul {float: right;margin-top:15px;margin-right:154px;}
+.header .nav li {float: left; line-height:68px;position: relative;}
+.header .nav li a {font-size:12px; color: #000; padding:0 30px; font-weight: bolder;font-family:FangSong; position: relative; z-index: 5;}
 .header .nav li a:hover { color:#f00;text-decoration: underline}
 .header .nav li a.cur {color:#f00}
+.header .nav li .bgbor {border: 1px #fff solid;border-bottom:none;background:#fff;width:112px; height:49px; position: absolute;top:16px; left:0; z-index:4;}
+.header .nav li.hover>.bgbor a:hover {color:#000;text-decoration:none;}
+.header .nav li.hover .bgbor {border: 1px #000 solid;border-bottom:none;height:55px;}
+.header .nav-links {width:1166px;padding:36px 56px 30px 56px;border:1px #000 solid;position:absolute;top:70px;left:-750px;box-sizing:content-box;background: #fff;z-index:3; display: none;}
+.header .nav-links ul {width:106px;float: left;margin:0;}
+.header .nav-links li {width:100%;line-height:24px;float: left;font-family:FangSong;font-size:12px;}
+.header .nav-links li a {width:100%;float: left;padding:0;}
+.header .nav-links li a:hover { color: #f00;;}
+.header .nav-links .title {border-bottom:1px #b2b2b2 solid; color:#999; padding-bottom:5px; margin-bottom: 5px;}
 /*--//End--header--*/
 .focus {height:481px; position: relative;}
 .focus .slider-main { position: absolute; top: 0; left: 0; z-index: 1;}
@@ -78,7 +92,7 @@ a:hover { color: #f00; text-decoration:underline;}
 .breadcrumb .am-breadcrumb { margin:7px 0; padding:0;}
 .breadcrumb .am-breadcrumb > li + li:before { content: ">\00a0"; color: #000; font-size: 12px; }
 /*--//End--breadcrumb--*/
-.category .explain {width:100%;padding-top:30px;float:left;position:relative; background: #f2f2f2;}
+.category .explain {width:100%;float:left;position:relative; background: #f2f2f2;}
 .category .explain .title {width:100px;float: left;margin-left:160px}
 .category .explain .title p {line-height:30px;margin-bottom:30px;}
 .category .explain .title p .zh {width:30px;font-family:"SimSun";font-size:12px;color:#666;float:left}
@@ -89,13 +103,13 @@ a:hover { color: #f00; text-decoration:underline;}
 /*--//End--explain--*/
 .category .list-pro {width:100%; float: left; overflow: hidden;}
 .category .list-pro .ul-item { width:1308px;float: left;overflow: hidden;}
-.category .list-pro .ul-item li {width:300px;float: left; padding-top:46px; padding-bottom:45px;border-bottom: 1px #cdcdcd solid; margin-right:27px;}
-.category .list-pro .ul-item li img { float: left; margin-bottom:16px;}
+.category .list-pro .ul-item li {width:300px;float: left; margin-top:46px;padding-bottom:45px;border-bottom: 1px #cdcdcd solid; margin-right:27px; position: relative;}
+.category .list-pro .ul-item li .tips {height:17px;line-height:17px; padding:0 5px;position: absolute;top:6px; left:0; z-index:2;background:#f00; font-family: SimSun; font-size:12px; color: #fff;}
+.category .list-pro .ul-item li .tips .icon {background-position:-128px -50px;width:5px; height:17px;position: absolute;top:0; right:-5px;}
+.category .list-pro .ul-item li img { float: left; margin-bottom:16px; position: relative; z-index: 1;}
 .category .list-pro .ul-item li p {text-align: right;color: #000;padding-right:20px;}
 .category .list-pro .ul-item li .name {font-size:16px; font-weight: bolder;}
 .category .list-pro .ul-item li .price {font-size:12px;}
-.category .am-pagination { margin: 100px 0;}
-.category .am-pagination>li.am-active a {background: #000;border: 1px #000 solid;}
 /*--//End--*/
 .shop-header { padding: 15px 0;}
 .shop-header .logo {float: left;}
@@ -113,12 +127,14 @@ a:hover { color: #f00; text-decoration:underline;}
 .shop-sort .link1 li a {height:38px;line-height: 38px;color: #fff;font-family: FangSong; padding: 0 37px;}
 .shop-sort .link1 li a:hover {background:#fff;color: #000; text-decoration: none; }
 .shop-sort .link1 li.active a {background:#fff;color: #000;}
-.shop-sort .link2 {width:130px;text-align:center;float:right;}
-.shop-sort .link2 dt {width:130px;text-align:center;font-size:12px; color: #fff; float: left;cursor: pointer;}
-.shop-sort .link2 dt.active {background:#fff; color: #000;}
+.shop-sort .link2 {width:130px;text-align:center;float:right; margin-top:3px;}
+.shop-sort .link2 dt {width:130px;height:41px;text-align:center;font-size:12px;background:#fff; color: #000;float: left;cursor: pointer; font-family: FangSong;}
+.shop-sort .link2 dt .icon {background-position:-32px -60px; width:14px; height:8px; display: inline-block; position: relative; top:1px; margin-left:17px;}
+.shop-sort .link2 dt.active .icon { background-position:-18px -60px;}
 .shop-sort .link2 dd {background:#fff;width:128px;float:left;margin-top:0;border:1px #000 solid;box-sizing: content-box}
-.shop-sort .link2 dd a {width:104px; margin:0 12px;float:left; color: #000;box-sizing: content-box;border-bottom: 1px #b3b3b3 solid}
+.shop-sort .link2 dd a {width:104px; margin:0 12px;float:left; color: #000;box-sizing: content-box;border-bottom: 1px #b3b3b3 solid; color: #999; font-family: FangSong; font-weight:bold;}
 .shop-sort .link2 dd a:last-child {border-bottom: 0}
+.shop-sort .link2 dd a.active {color:#000}
 /*--End--shop-sort--*/
 .explosion .details {margin-top:27px;}
 .explosion .details .img,.explosion .details .info {float: left;}
@@ -142,6 +158,13 @@ a:hover { color: #f00; text-decoration:underline;}
 .explosion .shop-sort .link1 li a { color: #000; font-weight: bold;}
 .explosion .shop-sort .link1 li a:hover {background:#000; color: #fff;}
 /*--End--explosion--*/
+.pages .am-pagination>li {color: #000;}
+.pages .am-pagination>li a,.pages .am-pagination>li a:hover {background:none;border:0;border-bottom:1px #3f3f3f solid; padding:0; color: #000; cursor: pointer;}
+.pages .am-pagination>li.am-active a {border-bottom: 0}
+.pages .am-pagination>li a:hover { color: #f00;}
+.pages .am-pagination>li.default { }
+.pages .am-pagination { margin: 100px 0; float: right;}
+/*--End--pages--*/
 .login-wrap {width:920px;margin:70px 180px;float: left; font-size: 12px;}
 .login-wrap .banner {float: left;}
 .login-form {width: 300px;padding:34px;border: 1px #ccc solid;float: right;box-sizing: content-box}
@@ -172,12 +195,6 @@ a:hover { color: #f00; text-decoration:underline;}
 .login-form .coagent h5 {width:100%;color: #666; font-weight: normal; float: left; margin-bottom:15px;}
 .login-form .coagent .wechat { background-position: -102px -50px; width:26px; height:22px; float: left;}
 /*--//End--login-form--*/
-
-
-
-
-
-
 .footer { border-top:3px #000 solid;font-size:12px;}
 .footer .icon {background: url(../images/footer-icon.png) no-repeat; display: inline-block;}
 .footer .service { padding:20px 0;text-align: center}
