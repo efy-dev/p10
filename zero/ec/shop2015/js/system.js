@@ -37,7 +37,7 @@ $(function(){
     //排序
     (function(){
         $('.shop-sort .link2 dt').click(function(){
-            $(this).toggleClass('active').siblings('dd').slideToggle('fast');
+            $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
         })
     })();
 

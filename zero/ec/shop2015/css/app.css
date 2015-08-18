@@ -123,12 +123,14 @@ a:hover { color: #f00; text-decoration:underline;}
 .shop-sort .link1 li a {height:38px;line-height: 38px;color: #fff;font-family: FangSong; padding: 0 37px;}
 .shop-sort .link1 li a:hover {background:#fff;color: #000; text-decoration: none; }
 .shop-sort .link1 li.active a {background:#fff;color: #000;}
-.shop-sort .link2 {width:130px;text-align:center;float:right;}
-.shop-sort .link2 dt {width:130px;text-align:center;font-size:12px; color: #fff; float: left;cursor: pointer;}
-.shop-sort .link2 dt.active {background:#fff; color: #000;}
+.shop-sort .link2 {width:130px;text-align:center;float:right; margin-top:3px;}
+.shop-sort .link2 dt {width:130px;height:41px;text-align:center;font-size:12px;background:#fff; color: #000;float: left;cursor: pointer; font-family: FangSong; position: relative;}
+.shop-sort .link2 dt .icon {background-position:-32px -60px; width:14px; height:8px; position: absolute;right:20px; top:50%; margin-top:-5px;}
+.shop-sort .link2 dt.active .icon { background-position:-18px -60px;}
 .shop-sort .link2 dd {background:#fff;width:128px;float:left;margin-top:0;border:1px #000 solid;box-sizing: content-box}
-.shop-sort .link2 dd a {width:104px; margin:0 12px;float:left; color: #000;box-sizing: content-box;border-bottom: 1px #b3b3b3 solid}
+.shop-sort .link2 dd a {width:104px; margin:0 12px;float:left; color: #000;box-sizing: content-box;border-bottom: 1px #b3b3b3 solid; color: #999; font-family: FangSong; font-weight:bold;}
 .shop-sort .link2 dd a:last-child {border-bottom: 0}
+.shop-sort .link2 dd a.active {color:#000}
 /*--End--shop-sort--*/
 .explosion .details {margin-top:27px;}
 .explosion .details .img,.explosion .details .info {float: left;}
