@@ -5,7 +5,7 @@
            text_zh_CN="首页">
         <match url="/index.jsp"/>
     </jnode>
-    <jnode url="/product/test/nav/2" id="organization" access="admin,manager" state="closed"
+    <jnode url="/product/test/nav/2" id="productCategory" access="admin,manager" state="closed"
            text_zh_CN="商品分类"/>
     <jnode url="/product/test/nav/3" id="organization" access="admin,manager" state="closed"
            text_zh_CN="传承人"/>

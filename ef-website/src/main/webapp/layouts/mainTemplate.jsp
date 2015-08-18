@@ -33,6 +33,9 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/amazeui.min.css"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/app.css"/>">
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
+    <!--<![endif]-->
     <script src="<c:url value='/resources/js/alert.js'/>"></script>
     <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
     <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
@@ -45,7 +48,15 @@
                  page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
         <sitemesh:write property='body'/>
+    
+    <%@include file="footer.jsp"%>
 
+    <!--[if lte IE 8 ]>
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
+    <![endif]-->
+    <script src="<c:url value="/resources/js/system.js"/>"></script>
 </body>
 
 </html>

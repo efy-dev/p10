@@ -154,6 +154,7 @@ border: 1px solid #000;text-decoration: none}
     padding:5px 13px;}
 .my-order .clase{width: 15px;height:15px;position: absolute;top:15px;right:20px;cursor: pointer;transition: all 0.5s;background: url("../images/efeiyi-icon.png") no-repeat;}
 .my-order .sh-bg{position: fixed;background: #000;opacity: 0.6;z-index: -1;right: 0;top:0;left: 0;bottom: 0;}
+.my-order .active-pop{text-align: start}
 /*用户信息*/
 .my-order .efeiyi-userinfo{width: 853px;border: 1px solid #ccc;overflow: hidden;padding-bottom: 27px;}
 .my-order .userinfo-portrait{height:177px;}
