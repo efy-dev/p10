@@ -8,5 +8,7 @@ package com.ming800.core.p.service;
  * To change this template use File | Settings | File Templates.
  */
 public interface AutoSerialManager {
-    String nextAutoSerial(String model);
+   // String nextAutoSerial(String model);
+    Long nextSerial(String group)throws Exception;
+
 }
