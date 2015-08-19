@@ -39,7 +39,7 @@ public class BaseMasterController extends BaseController {
             map.put("status","1");
             tenantTemp =(Tenant) baseManager.getUniqueObjectByConditions(queryHql,map);
             List<TenantProject> projects = tenantTemp.getTenantProjectList();
-            tenantTemp.setProjectName(mainTenantProject(projects));
+            //tenantTemp.setProjectName(mainTenantProject(projects));
         }
       return tenantTemp;
     }

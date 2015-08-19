@@ -6,6 +6,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,13 +18,14 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/7/30.
  */
-@RestController
+@Controller
 public class AddressController {
 
     @Autowired
     private BaseManager baseManager;
 
     @RequestMapping({"/address/listProvince.do"})
+    @ResponseBody
     public List<Object> listAddressProvince(HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> objectList = baseManager.listObject(xQuery);
@@ -31,7 +33,8 @@ public class AddressController {
     }
 
     @RequestMapping({"/address/listCity.do"})
-         public List<Object> listAddressCity(HttpServletRequest request) throws  Exception{
+    @ResponseBody
+    public List<Object> listAddressCity(HttpServletRequest request) throws  Exception{
         XQuery xQuery = new XQuery("listAddressCity_default" , request);
         xQuery.put("addressProvince_id",request.getParameter("provinceId"));
         List<Object> objectList = baseManager.listObject(xQuery);
@@ -40,6 +43,7 @@ public class AddressController {
 
 
     @RequestMapping({"/address/listDistrict"})
+    @ResponseBody
     public List<Object> listAddressDistrict(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listAddressDistrict_default",request);
         xQuery.put("addressCity_id",request.getParameter("cityId"));
@@ -53,22 +57,22 @@ public class AddressController {
 
     @RequestMapping({"/address/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery = new XQuery("pListAddress_default",request);
+
+        XQuery xQuery = new XQuery("plistAddress_default",request);
         xQuery.addRequestParamToModel(model,request);
         List addressList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("addressList",addressList);
-        return "/shippingAddress";
+        return "/addressList";
     }
 
 
-    @RequestMapping({"/addAddress.do"})
+    @RequestMapping({"addAddress.do"})
     public String  addAddress(HttpServletRequest request)throws Exception{
-
         XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        return "redirect/address/list";
+        return "redirect:/address/list";
 
     }
 
@@ -79,6 +83,17 @@ public class AddressController {
         String addressId=request.getParameter("addressId");
         baseManager.remove(ConsumerAddress.class.getName(),addressId);
         return true;
+
+    }
+    @RequestMapping({"defaultAddress.do"})
+    @ResponseBody
+    public boolean  defaultAddress(HttpServletRequest request)throws Exception{
+        String hql = "update organization_consumer_address set status = '1'";
+        baseManager.executeSql(null,hql,null);
+        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateAddress",request);
+        xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+        return  true;
 
     }
 

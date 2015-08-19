@@ -27,23 +27,23 @@
                 <i class="clase" title="关闭"></i>
               </div>
               <div class="m-form">
-                <form id="address" name="address" action="" method="post">
+                <form action="/addAddress.do" method="post" >
                   <ul>
                     <li>
                       <label>收货人：</label>
-                      <input type="text">
+                      <input type="text" name="consignee">
                       <span>请您填写收货人姓名</span>
                     </li>
                     <li>
                       <label>所在地区：</label>
                       <form>
-                        <select name="cars" class="cars">
+                        <select name="province" class="cars">
                           <option value="请选择">请选择</option>
                           <option value="saab">Saab</option>
                           <option value="fiat">Fiat</option>
                           <option value="audi">Audi</option>
                         </select>
-                        <select name="cars" class="car1">
+                        <select name="city" class="car1">
                           <option value="请选择">请选择</option>
                           <option value="saab">Saab</option>
                           <option value="fiat">Fiat</option>
@@ -56,17 +56,12 @@
                     </li>
                     <li>
                       <label>详细地址：</label>
-                      <input type="text">
+                      <input type="text" name="details">
                       <span>请您填写详细地址</span>
                     </li>
                     <li>
                       <label>手机号码：</label>
-                      <input type="text">
-                    </li>
-                    <li>
-                      <label>邮箱：</label>
-                      <input type="text">
-                      <span>请您填写邮箱</span>
+                      <input type="text" name="phone">
                     </li>
                     <li>
                       <label></label>
@@ -85,22 +80,18 @@
         </div>
       </div>
       <!-- //End--mt-->
-      <c:forEach items="addressList" var="address" varStatus="as">
+      <c:forEach items="${addressList}" var="address" varStatus="as">
       <div class="title wh1">
         <table class="address">
           <tr class="yes-border">
             <td colspan="6">
-              <%--<span class="ae-black">地址${as.index+1}</span>--%>
-                <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
-
+              <span class="ae-black">地址${as.index+1}</span>
             </td>
           </tr>
           <tr>
             <td   width="76"  style="text-align: right;"><span>收货人：</span></td>
             <td   width="600">
-              <%--<span>${address.consumer.name}</span>--%>
-                <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
-
+              <span>${address.consignee}</span>
             </td>
             <td width="188"  class="ae-rg1">
               <div class="ae-rg">
@@ -124,9 +115,7 @@
           <tr>
             <td   width="76"  style="text-align: right;"><span>详细地址：</span></td>
             <td   width="600">
-              <%--<span>${address.details}</span>--%>
-              <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
-
+              <span>${address.details}</span>
             </td>
             <td width="188"  class="ae-rg1">
               <div class="ae-rg">
@@ -137,7 +126,7 @@
           <tr>
             <td   width="76"  style="text-align: right;"><span>手机号码：</span></td>
             <td   width="600">
-              <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
+              <span>${address.phone}</span>
             </td>
             <td width="188"  class="ae-rg1">
               <div class="ae-rg">
@@ -145,27 +134,36 @@
               </div>
             </td>
           </tr>
+
           <tr>
-            <td   width="76"  style="text-align: right;"></td>
-            <td   width="600">
+            <td  width="76"  style="text-align: right;"></td>
+            <td  width="600">
             </td>
             <td width="188"  class="ae-rg1">
               <div class="ae-rg">
-                <span><span class="text-a"><a href="#">设为默认</a></span></span>
-                <span><span class="text-a"><a id="hideDiv" href="">编辑</a>
+                <c:if test="${address.status == 2}">
+                  <span><span class="text-a"><a href="#" onclick="df('${address.id}')">默认地址</a></span></span>
+
+                </c:if>
+                <c:if test="${address.status != 2}">
+                  <span><span class="text-a"><a href="#" onclick="df('${address.id}')">设为默认</a></span></span>
+
+                </c:if>
+                <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
                       <div class="active-pop" style="display: none">
                         <div class="pop-up">
                           <div class="pop-h">编辑收货人信息
                             <i class="clase" title="关闭"></i>
                           </div>
                           <div class="m-form">
-                            <form>
+                            <form action="/addAddress.do" method="post">
                               <ul>
                                 <li>
                                   <label>收货人：</label>
-                                  <input type="text">
+                                  <input type="text" name="consignee" value="${address.consignee}">
                                   <span>请您填写收货人姓名</span>
                                 </li>
+                                <input type="hidden" name="id" value="${address.id}" >
                                 <li>
                                   <label>所在地区：</label>
                                   <form>
@@ -188,17 +186,12 @@
                                 </li>
                                 <li>
                                   <label>详细地址：</label>
-                                  <input type="text">
+                                  <input type="text" name="details" value="${address.details}" >
                                   <span>请您填写详细地址</span>
                                 </li>
                                 <li>
                                   <label>手机号码：</label>
-                                  <input type="text">
-                                </li>
-                                <li>
-                                  <label>邮箱：</label>
-                                  <input type="text">
-                                  <span>请您填写邮箱</span>
+                                  <input type="text" name="phone" value="${address.phone}">
                                 </li>
                                 <li>
                                   <label></label>
@@ -256,7 +249,7 @@ $(window).scroll(function(){
     })
   })
   $(function(){
-    $("#hideDiv").click(function(){
+    $(".hideDiv").click(function(){
       $(this).siblings('.active-pop').show();
       $('.my-order .clase, .my-order .sh-bg').click(function(){
         $(this).parents('.active-pop').hide();
@@ -264,6 +257,26 @@ $(window).scroll(function(){
       return false;
     })
   })
+  function df(id) {
+    alert("....");
+    $.ajax({
+      type: 'get',
+      async: false,
+      url: '<c:url value="/defaultAddress.do"/>',
+      dataType: 'json',
+      data: {
+        status:2,
+        id:id
+
+      },
+      success: function (data) {
+         if(data == true){
+           window.history.go(0);
+         }
+      },
+
+    });
+  }
 
 </script>
 

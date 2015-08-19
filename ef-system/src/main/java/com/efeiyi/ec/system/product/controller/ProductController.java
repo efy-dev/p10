@@ -2,7 +2,9 @@ package com.efeiyi.ec.system.product.controller;
 
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.system.product.service.ProductModelManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
@@ -30,7 +32,7 @@ public class ProductController extends BaseController {
     private BaseManager baseManager;
 
     @Autowired
-    private ProductManager productManager;
+    private ProductModelManager productModelManager;
 
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
@@ -63,20 +65,20 @@ public class ProductController extends BaseController {
         return aliOssUploadManager.uploadFile(request.getFile("test"), "ef-video", "testfile");
     }
 
-    @RequestMapping("/recommendedProduct.do")
+    @RequestMapping("/recommendedProductModel.do")
     public String recommendedProduct(HttpServletRequest request){
         String id = request.getParameter("id");
 
         String categoryId = request.getParameter("categoryId");
 
-        Product product = (Product) baseManager.getObject(Product.class.getName(),id);
-        int maxValue = productManager.getMaxRecommendedIndex(categoryId);
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
+        int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
-        product.setRecommendedIndex(maxValue + 1);
+        productModel.setRecommendIndex(maxValue + 1);
 
-        baseManager.saveOrUpdate(Product.class.getName(),product);
+        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 
-        return "redirect:/basic/xm.do?qm=plistProduct_index";
+        return "redirect:/basic/xm.do?qm=plistProductModel_index";
 
 
     }
