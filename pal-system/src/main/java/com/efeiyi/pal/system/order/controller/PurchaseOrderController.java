@@ -79,12 +79,15 @@ public class PurchaseOrderController {
      * @param purchaseOrder
      * @param labelList
      */
-    private PurchaseOrder distributeLabelList(PurchaseOrder purchaseOrder, List<Label> labelList){
+    private PurchaseOrder distributeLabelList(PurchaseOrder purchaseOrder, List<Label> labelList) throws Exception {
         List<PurchaseOrderLabel> POLList = purchaseOrder.getPurchaseOrderLabelList();
         int flag = 0;
         for (int j=0; j<POLList.size(); j++){
             PurchaseOrderLabel pol = POLList.get(j);
             for (int i=0; i<pol.getAmount(); i++){
+                if ((i+flag) >= labelList.size()){
+                    throw new Exception("标签库标签数量不足，请联系系统管理员，申请新标签！");
+                }
                 Label label = labelList.get(i+flag);
                 label.setPurchaseOrderLabel(pol);
                 label.setSeller(purchaseOrder.getTenant());

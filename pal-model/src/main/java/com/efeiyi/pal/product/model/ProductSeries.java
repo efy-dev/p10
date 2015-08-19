@@ -7,6 +7,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -19,9 +20,10 @@ public class ProductSeries {
     private String id;
     private String name;
     private String serial;
-    private Tenant tenant;
     private String status;
     private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
+
+    private Set<Tenant> tenantSet;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -52,17 +54,6 @@ public class ProductSeries {
         this.serial = serial;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
-
     @Column(name = "status")
     public String getStatus() {
         return status;
@@ -81,6 +72,16 @@ public class ProductSeries {
 
     public void setProductSeriesPropertyNameList(List<ProductSeriesPropertyName> productSeriesPropertyNameList) {
         this.productSeriesPropertyNameList = productSeriesPropertyNameList;
+    }
+
+    @JsonIgnore
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy="productSeriesSet")
+    public Set<Tenant> getTenantSet() {
+        return tenantSet;
+    }
+
+    public void setTenantSet(Set<Tenant> tenantSet) {
+        this.tenantSet = tenantSet;
     }
 
 }

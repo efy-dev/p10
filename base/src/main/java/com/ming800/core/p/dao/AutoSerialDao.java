@@ -3,6 +3,8 @@ package com.ming800.core.p.dao;
 import com.ming800.core.base.dao.BaseDao;
 import com.ming800.core.p.model.AutoSerial;
 
+import java.util.LinkedHashMap;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -11,4 +13,5 @@ import com.ming800.core.p.model.AutoSerial;
  * To change this template use File | Settings | File Templates.
  */
 public interface AutoSerialDao extends BaseDao<AutoSerial> {
+    Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap);
 }

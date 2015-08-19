@@ -1,8 +1,6 @@
 package com.efeiyi.pal.system.base.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.organization.model.User;
-import com.efeiyi.pal.product.model.ProductSeries;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,19 +87,6 @@ public class DialogController {
         XQuery xQuery = new XQuery("listProductSeries_default", request);
         List<Object> list = this.baseManager.listObject(xQuery);
         return list;
-    }
-
-    /**
-     * 获取商品系列中的商户Id
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping({"/productSeries/tenant/json"})
-    public String oneTenantByProductSeries(HttpServletRequest request) throws Exception{
-        String productSeriesId = request.getParameter("productSeriesId");
-        ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
-        return productSeries.getTenant().getId();
     }
 
     /**

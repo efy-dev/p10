@@ -1,11 +1,13 @@
 package com.efeiyi.pal.organization.model;
 
+import com.efeiyi.pal.product.model.ProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/16.
@@ -25,6 +27,8 @@ public class Tenant {
     private String status;
     private List<TenantSource> tenantSourceList;
     private List<TenantCertification> tenantCertificationList;
+
+    private Set<ProductSeries> productSeriesSet;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -124,6 +128,18 @@ public class Tenant {
 
     public void setTenantCertificationList(List<TenantCertification> tenantCertificationList) {
         this.tenantCertificationList = tenantCertificationList;
+    }
+
+    @JsonIgnore
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "tenant_product_series", joinColumns = {@JoinColumn(name = "tenant_id")},
+                                                inverseJoinColumns = {@JoinColumn(name = "product_series_id")})
+    public Set<ProductSeries> getProductSeriesSet() {
+        return productSeriesSet;
+    }
+
+    public void setProductSeriesSet(Set<ProductSeries> productSeriesSet) {
+        this.productSeriesSet = productSeriesSet;
     }
 
 }

@@ -40,7 +40,7 @@
     <div class="box-hd wh">
         <div class="title wh"><h3>品牌故事</h3></div>
         <div class="banner">
-            <a href="" target="_blank"><img src="shop2015/upload/banner.jpg" width="1280" height="400" alt=""/></a>
+            <a href="" target="_blank"><img src="/scripts/images/banner.jpg" width="1280" height="400" alt=""/></a>
         </div>
     </div>
     <!-- //End--品牌故事-->
@@ -57,7 +57,7 @@
                         <c:if test="${status.index%2==0}">
                             <c:set var="style" value="odd"/>
                         </c:if>
-                        <li class="${style}"><a href="" target="_blank"
+                        <li class="${style}"><a href="<c:url value="/product/hot/${product.id}"/>" target="_blank"
                                                 title="${product.product.name}"><strong>${product.product.name}</strong><span
                                 class="price"><em>￥</em><font>${product.price}</font></span><img class="imgfilter"
                                                                                                  src="${product.product.picture_url}"

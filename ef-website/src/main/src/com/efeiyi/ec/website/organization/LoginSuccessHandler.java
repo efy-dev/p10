@@ -47,14 +47,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //            baseManager.saveOrUpdate(systemLog.getClass().getName(), systemLog);
 //        }
 //        bigUser.setLastLoginDatetime(new Date());
-        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
-        System.out.println("登录成功");
+//        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
         if (savedRequest != null) {
             response.sendRedirect(savedRequest.getRedirectUrl());
         } else {
-            response.sendRedirect(request.getContextPath() + "/pc/forward.do");
+            response.sendRedirect(request.getContextPath() + "/");
         }
     }
 }

@@ -48,7 +48,7 @@ public class LabelController {
 
         for (int i=0; i<flag; i++){
             String code = RandomStringUtils.randomNumeric(10);
-            String serial = String.valueOf(i + 1);
+            Integer serial = i + 1;
 
             Label label = new Label();
             label.setSerial(serial);

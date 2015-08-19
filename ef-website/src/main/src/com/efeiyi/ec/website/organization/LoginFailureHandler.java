@@ -53,10 +53,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 //
 //        }
         if (request.getParameter("requestType") != null && request.getParameter("requestType").equals("pc")) {
-            response.sendRedirect(request.getContextPath() + "pc/login?error=true");
+            response.sendRedirect(request.getContextPath() + "/login?error=true");
 //            response.sendRedirect(request.getContextPath() + "/index.do?error=true");
         } else {
-            response.sendRedirect(request.getContextPath() + "/index.do?error=true");
+            response.sendRedirect(request.getContextPath() + "/login?error=true");
         }
     }
 }
