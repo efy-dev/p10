@@ -1,17 +1,14 @@
 package com.efeiyi.pal.system.label.controller;
 
-import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.label.model.LabelBatch;
+import com.efeiyi.pal.system.label.labelService.LabelBuildService;
 import com.ming800.core.base.service.BaseManager;
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -20,6 +17,9 @@ import java.util.Date;
 @Controller
 @RequestMapping("/Label")
 public class LabelController {
+
+    @Autowired
+    private LabelBuildService labelBuildService;
 
     @Autowired
     private BaseManager baseManager;
@@ -44,22 +44,25 @@ public class LabelController {
             throw new Exception("Id为" + labelBatchId + "的标签批次不存在!");
         }
 
-        Integer flag = labelBatch.getAmount();
-
-        for (int i=0; i<flag; i++){
-            String code = RandomStringUtils.randomNumeric(10);
-            Integer serial = i + 1;
-
-            Label label = new Label();
-            label.setSerial(serial);
-            label.setCode(code);
-            label.setLabelBatch(labelBatch);
-            label.setPurchaseOrderLabel(null);
-            label.setSeller(null);
-            label.setStatus("1");
-
-            baseManager.saveOrUpdate(label.getClass().getName(), label);
-        }
+        labelBuildService.buildLabelSetByLabelBatch(labelBatch);
+//        System.out.println("begin:"+System.currentTimeMillis());
+//        Integer flag = labelBatch.getAmount();
+//
+//        for (int i=0; i<flag; i++){
+//            String code = RandomStringUtils.randomNumeric(10);
+//            Integer serial = i + 1;
+//
+//            Label label = new Label();
+//            label.setSerial(serial);
+//            label.setCode(code);
+//            label.setLabelBatch(labelBatch);
+//            label.setPurchaseOrderLabel(null);
+//            label.setSeller(null);
+//            label.setStatus("1");
+//
+//            baseManager.saveOrUpdate(label.getClass().getName(), label);
+//        }
+//        System.out.println("end:"+System.currentTimeMillis());
         labelBatch.setStatus("2");
         baseManager.saveOrUpdate(labelBatch.getClass().getName(), labelBatch);
 
