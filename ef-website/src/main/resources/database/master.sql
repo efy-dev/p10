@@ -113,4 +113,7 @@ ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
 # ADD COLUMN `name`  varchar(255) NULL AFTER `recommend_index`;
 
 
+ALTER TABLE `purchase_cart_product`
+ADD COLUMN `is_choose`  char(4) NULL AFTER `status`;
+
 

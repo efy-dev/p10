@@ -97,7 +97,7 @@
                         </td>
                         <td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>
                         <td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>
-                        <td width="332">已选择一件商品，总计（免运费）<span class="moneycl">144444444444</span>元</td>
+                        <td width="332">已选择一件商品，总计（免运费）<span class="moneycl" id="totalPrice">144444444444</span>元</td>
                         <td width="147"><a href="#" class="btn-settle">结算</a></td>
                     </tr>
                 </table>
@@ -141,6 +141,31 @@
         }
         ajaxRequest("<c:url value="/cart/subtractProductCount.do"/>",param,success,function(){},"post")
     }
+
+    function chooseItem(cartProductId){
+        var param = {
+            cartProductId:cartProductId
+        };
+        var success = function(data){
+            console.log(data);
+            //@TODO 更新总价格
+            $("#totalPrice").attr("value",data["totalPrice"]);
+        }
+        ajaxRequest("<c:url value="/cart/chooseProduct.do"/>",param,success,function(){},"post")
+    }
+
+    function cancelChooseItem(cartProductId){
+        var param = {
+            cartProductId:cartProductId
+        };
+        var success = function(data){
+            console.log(data);
+            //@TODO 更新总价格
+            $("#totalPrice").attr("value",data["totalPrice"]);
+        }
+        ajaxRequest("<c:url value="/cart/cancelChooseProduct.do"/>",param,success,function(){},"post")
+    }
+
 
 </script>
 </body>
