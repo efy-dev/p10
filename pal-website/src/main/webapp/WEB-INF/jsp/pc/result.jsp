@@ -35,7 +35,7 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/pc.css'/>">
 </head>
 <body>
@@ -111,21 +111,6 @@
                     </c:if>
                 </table>
             </div>
-
-            <!--<ul>
-                <li class="title">
-                    <strong>该商品为第一次查询，为正品！该商品为第一次查询，为正品！该商品为第一次查询，为正品！</strong>
-                    <a href="" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>
-                </li>
-                <li><span>证书编号: 140522398541258</span></li>
-                <li>名称: 安格尔-公爵夫人像</li>
-                <li>作者: 姚惠芬</li>
-                <li>创作年代: 2006</li>
-                <li>认证时间: 2015年5月</li>
-                <li>尺寸: 100*128cm</li>
-                <li>类别: 苏绣</li>
-                <li>重量: 1236.12g</li>
-            </ul>-->
         </div>
         <!--//End-->
         <c:if test="${result.authenticity == 1}">
@@ -202,11 +187,11 @@
 </div>
 <!--//End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
-<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
+<%--<script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>--%>
+<%--<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <%--<script src="<c:url value='/resources/assets/js/cpbjs.js'/>"></script>--%>
 <script>
     $(document).ready(function () {
@@ -245,10 +230,8 @@
     })
 
     <c:if test="${result.authenticity != -1}">
-    <%--var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";--%>
-    var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
-//    window.onload = function () {
-//        alert("ajax");
+    var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";
+//    var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
         $.ajax({
             type: "get",
             url: url,
@@ -259,14 +242,11 @@
             success: jsonpCallback,
             error: jsonpCallback2,
         });
-//    }
     function jsonpCallback(data) {
-//        alert("success");
         var ipAddressDiv = document.getElementById("ipAddress");
         if (data.status == 0) {
             var text = data.address.split("|");
             ipAddressDiv.innerHTML = "上次验证地点：" + text[0] + " " + text[1] + " " + text[2];
-//            alert(ipAddressDiv.innerHTML);
         }else{
             ipAddressDiv.innerHTML = "上次验证地点：未知";
         }

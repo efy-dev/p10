@@ -3,7 +3,6 @@ package com.efeiyi.ec.product.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class ProductModel implements Serializable{
         this.amount = amount;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "productModel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPropertyValue> getProductPropertyValueList() {
         return productPropertyValueList;
     }

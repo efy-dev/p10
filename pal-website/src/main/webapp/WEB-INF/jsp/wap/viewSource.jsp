@@ -26,7 +26,7 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
+  <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
 </head>
 <body class="bgf7">
@@ -40,10 +40,6 @@
 <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
   <ul class="am-slides">
     <li><img src="<%=imgBasePath%>${product.tenantSource.imgUrl}"></li>
-    <%--<li><img src="upload/exp3.jpg"></li>--%>
-    <%--<li><img src="upload/exp3.jpg"></li>--%>
-    <%--<li><img src="upload/exp3.jpg"></li>--%>
-    <%--<li><img src="upload/exp3.jpg"></li>--%>
   </ul>
 </div>
 <!--//End--轮播图-->
@@ -66,10 +62,8 @@
     </ul>
   </div>
 </div>
-
-
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
+<script src="<c:url value='/js/amazeui.min.js'/>"></script>
 <script type="text/javascript">
   $(function() {
     $('.am-slider-manual').flexslider({

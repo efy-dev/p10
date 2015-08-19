@@ -27,7 +27,7 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
+  <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
 </head>
 <body class="bgf7">
@@ -41,10 +41,6 @@
 <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
   <ul class="am-slides">
     <li><img src="<%=imgBasePath%>${product.tenantCertification.imgUrl}"></li>
-    <%--<li><img src="<c:url value='/resources/upload/search-exp1.jpg'/>"></li>--%>
-    <%--<li><img src="<c:url value='/resources/upload/search-exp1.jpg'/>"></li>--%>
-    <%--<li><img src="<c:url value='/resources/upload/search-exp1.jpg'/>"></li>--%>
-    <%--<li><img src="<c:url value='/resources/upload/search-exp1.jpg'/>"></li>--%>
   </ul>
 </div>
 <!--//End--轮播图-->
@@ -71,21 +67,8 @@
     </ul>
   </div>
 </div>
-
-
-
-<!--<div class="rzinfo">
-	<ul>
-		<li><strong>证书证书:</strong><p>国家级非物质文化遗产项目（苏绣）代表性传承人</p></li>
-		<li><strong>认证机构:</strong><p>文化部.非物质文化遗产司认证中心</p></li>
-		<li><strong>认证时间:</strong><p>2012年12月</p></li>
-		<li><strong>认证结果:</strong><p>国家级非遗名录项目</p></li>
-	</ul>
-</div>-->
-
-
-<script src="js/jquery.min.js"></script>
-<script src="js/amazeui.min.js"></script>
+<%--<script src="js/jquery.min.js"></script>--%>
+<script src="<c:url value='/js/amazeui.min.js'/>"></script>
 <script type="text/javascript">
   $(function() {
     $('.am-slider-manual').flexslider({
