@@ -4,6 +4,7 @@ import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class CouponBatchController extends BaseController {
 
     @Autowired
     private BaseManager baseManager;
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
     @RequestMapping("/createCoupon.do")
     @ResponseBody
@@ -41,7 +44,7 @@ public class CouponBatchController extends BaseController {
     }
 
     @RequestMapping("/saveAndCreateCoupon.do")
-    public String saveAndCreateCoupon(HttpServletRequest request){
+    public String saveAndCreateCoupon(HttpServletRequest request) throws Exception {
 
         CouponBatch couponBatch = new CouponBatch();
         couponBatch.setName(request.getParameter("name"));
@@ -67,8 +70,9 @@ public class CouponBatchController extends BaseController {
             coupon = new Coupon();
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);
-            String serial = RandomStringUtils.randomNumeric(10);
-            coupon.setSerial(serial);
+//            String serial = RandomStringUtils.randomNumeric(10);
+            Long serial = autoSerialManager.nextSerial("systemAutoSerial");
+            coupon.setSerial(serial+"");
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
         return "redirect:/basic/xm.do?qm=plistCouponBatch_default";

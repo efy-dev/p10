@@ -20,6 +20,7 @@ public class ConsumerAddress {
     private String email;
     private Consumer consumer;
     private String status;   //1 正常的 2 默认的
+    private  String consignee;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -113,5 +114,14 @@ public class ConsumerAddress {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "consignee")
+    public String getConsignee() {
+        return consignee;
+    }
+
+    public void setConsignee(String consignee) {
+        this.consignee = consignee;
     }
 }

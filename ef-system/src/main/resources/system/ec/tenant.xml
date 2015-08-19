@@ -12,7 +12,6 @@
                 <do name="plistTenant" access="" label="商家分页列表"
                     result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
