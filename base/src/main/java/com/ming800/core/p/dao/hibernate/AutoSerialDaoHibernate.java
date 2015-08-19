@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,7 +19,6 @@ import java.util.List;
 public class AutoSerialDaoHibernate extends BaseDaoSupport<AutoSerial> implements AutoSerialDao {
     public Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap){
         Query query = this.getSession().createQuery(queryStr).setString("groupName", queryParamMap.get("groupName").toString());
-        Long serial= (Long) query.uniqueResult();
-        return serial;
+        return (Long) query.uniqueResult();
     }
 }
