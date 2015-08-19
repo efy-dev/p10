@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/6/25
-  Time: 14:20
+  Date: 2015/8/19
+  Time: 14:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -39,7 +39,6 @@
             <td>操作</td>
             <td>系列名称</td>
             <td>序列号</td>
-            <td>商户名称</td>
         </tr>
 
         <c:forEach items="${requestScope.pageInfo.list}" var="productSeries">
@@ -56,7 +55,6 @@
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&id=${productSeries.id}"/>">${productSeries.name}</a></td>
                 <td>${productSeries.serial}</td>
-                <td>${productSeries.tenant.name}</td>
             </tr>
         </c:forEach>
     </table>
