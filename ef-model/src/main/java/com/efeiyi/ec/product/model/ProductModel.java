@@ -3,6 +3,7 @@ package com.efeiyi.ec.product.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product_model")
-public class ProductModel implements Serializable{
+public class ProductModel implements Serializable {
 
     private String id ;
     private String serial; // 产品编号
@@ -20,9 +21,9 @@ public class ProductModel implements Serializable{
     private Integer amount; //库存
     private List<ProductPropertyValue> productPropertyValueList; //属性值
     private String status;
-    private Integer recommendIndex;
+  //  private Integer recommendIndex;
 
-    @Column(name = "recommend_index")
+  /*  @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;
     }
@@ -30,7 +31,7 @@ public class ProductModel implements Serializable{
     public void setRecommendIndex(Integer recommendIndex) {
         this.recommendIndex = recommendIndex;
     }
-
+*/
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")

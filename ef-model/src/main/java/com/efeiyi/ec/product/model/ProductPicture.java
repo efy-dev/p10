@@ -15,8 +15,9 @@ import javax.persistence.*;
 public class ProductPicture {
     private String id;
     private String pictureUrl;
-    private String status;
+    private String status;//2: 主图片 3:详情页的图片
     private Product product;
+ //   private Integer sort;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -50,7 +51,7 @@ public class ProductPicture {
     }
 
     @Column(name = "status")
-    @Where(clause = "status=1")
+    @Where(clause = "status!=0")
     public String getStatus() {
         return status;
     }
@@ -58,4 +59,6 @@ public class ProductPicture {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 }
