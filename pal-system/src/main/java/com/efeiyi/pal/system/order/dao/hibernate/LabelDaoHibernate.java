@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,13 +39,12 @@ public class LabelDaoHibernate implements LabelDao {
 
     @Override
     public List<Label> getLabelListByMinSerialAndSumProduct(Integer minSerial, Integer sumProduct) {
-        List<Label> list = new ArrayList<Label>();
         String hql = "From Label WHERE status = :status AND serial BETWEEN :minSerial AND :maxSerial";
         Query query = this.getSession().createQuery(hql)
                 .setString("status", "1")
                 .setInteger("minSerial", minSerial)
                 .setInteger("maxSerial", (minSerial + sumProduct - 1));
-        list = query.list();
+        List<Label> list = query.list();
         return list;
     }
 

@@ -10,6 +10,7 @@
  <!--   <bean id="multiDataSource" class="com.ming800.core.base.model.MultiDataSource">
         <property name="dateSource" ref="dataSource"/>
     </bean>-->
+    <context:component-scan base-package="com.efeiyi.pal"/>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -41,6 +42,8 @@
     </bean>
     <bean id="labelServiceManagerImpl" class="com.efeiyi.pal.system.order.service.impl.LabelServiceManagerImpl"/>
     <bean id="labelDaoHibernate" class="com.efeiyi.pal.system.order.dao.hibernate.LabelDaoHibernate"/>
+
+
 
     <!--userDao用于spring security-->
     <bean id="userDao" class="com.efeiyi.pal.system.organization.dao.hibernate.UserDaoHibernate">
