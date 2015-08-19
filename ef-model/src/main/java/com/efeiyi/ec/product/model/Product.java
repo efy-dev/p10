@@ -32,6 +32,7 @@ public class Product {
     private String status;
     private Project project;
     private Date createDateTime;
+    private Tenant tenant;
 //    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
@@ -166,5 +167,14 @@ public class Product {
 
     public void setRecommendedIndex(Integer recommendedIndex) {
         this.recommendedIndex = recommendedIndex;
+    }
+
+    @Column(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }
