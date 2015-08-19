@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable{
     private String id;
     private String name;
     private String serial;
@@ -169,7 +170,8 @@ public class Product {
         this.recommendedIndex = recommendedIndex;
     }
 
-    @Column(name = "tenant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
     }
