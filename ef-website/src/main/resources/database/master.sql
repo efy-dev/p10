@@ -108,6 +108,9 @@ ALTER TABLE `organization_consumer_address`
 DROP COLUMN `consignee`,
 ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
 
+#
+# ALTER TABLE `product_model`
+# ADD COLUMN `name`  varchar(255) NULL AFTER `recommend_index`;
 
 
 

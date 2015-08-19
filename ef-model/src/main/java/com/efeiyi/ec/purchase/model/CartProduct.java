@@ -2,17 +2,19 @@ package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.persistence.criteria.Fetch;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/6/15.
  */
 @Entity
 @Table(name="purchase_cart_product")
-public class CartProduct {
+public class CartProduct implements Serializable {
     private String id;
     private Cart cart;
     private ProductModel productModel;
@@ -31,6 +33,7 @@ public class CartProduct {
     }
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     public Cart getCart() {
@@ -41,6 +44,7 @@ public class CartProduct {
         this.cart = cart;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
     public ProductModel getProductModel() {
