@@ -2,7 +2,6 @@ package com.efeiyi.pal.system.organization.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
-import com.efeiyi.pal.organization.model.TenantSource;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -14,7 +13,6 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -130,8 +128,6 @@ public class TenantCertificationController {
         String url = "tenantCertification/" + identify + ".jpg";
 
         if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
-//            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
-//            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
             tenantCertification.setImgUrl(url);
         }

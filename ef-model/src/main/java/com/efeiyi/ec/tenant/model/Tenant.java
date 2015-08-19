@@ -31,6 +31,7 @@ public class Tenant extends BigUser implements Serializable {
     private String logoUrl;
     private Date createDateTime;
     private List<TenantProject> tenantProjectList;
+    private List<TenantRecommended> tenantRecommendedList;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
@@ -85,4 +86,13 @@ public class Tenant extends BigUser implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant", cascade = CascadeType.ALL)
+    public List<TenantRecommended> getTenantRecommendedList() {
+        return tenantRecommendedList;
+    }
+
+    public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
+        this.tenantRecommendedList = tenantRecommendedList;
+    }
 }

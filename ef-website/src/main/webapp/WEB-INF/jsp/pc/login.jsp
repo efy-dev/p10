@@ -48,7 +48,7 @@
                         <h1>会员登录</h1>
                         <span class="link">
                             <a href="">没有账号? </a>
-                            <a class="reg" href="">注册</a>
+                            <a class="reg" href="<c:url value="/register"/>">注册</a>
                         </span>
                     </div>
                     <div class="am-form-group">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="am-form-group">
                         <%--<label><input class="checkbox" type="checkbox"/>自动登录</label>--%>
-                        <a class="forgetpwd" href="" title="忘记密码">忘记密码？</a>
+                        <a class="forgetpwd" href="<c:url value="/register"/>" title="忘记密码">忘记密码？</a>
                     </div>
                     <button class="am-btn am-btn-secondary" type="submit">登 录</button>
                     <%--<div class="coagent wh">--%>

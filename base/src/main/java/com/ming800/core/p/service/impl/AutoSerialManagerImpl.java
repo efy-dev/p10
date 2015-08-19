@@ -55,16 +55,18 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     }*/
 
     public Long nextSerial(String group) throws Exception {
+        //为提高效率，没有严格区分序列号分组，默认不初始化序列号
         if (updateSerials.empty()){
             makeSerials( group);
         }
         AutoSerial autoserial = updateSerials.pop();
         Long serial = autoserial.getSerial();
-     return serial;
+       return serial;
     }
 
     private void makeSerials(String group) throws Exception{
-        CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
+        CommonSerial commonSerial =null;
+//                commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
         //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
         String queryStr = "select max(serial) from AutoSerial where groupName= :groupName";
@@ -98,7 +100,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         }else{
             for (int i=1;i<=size;i++){
                 AutoSerial autoserial = new AutoSerial();
-                autoserial.setSerial(autoSerial+begin+i*step);
+                autoserial.setSerial(autoSerial+i*step);
                 autoserial.setGroup(group);
                 autoSerialDao.saveOrUpdateObject(autoserial);
                 updateSerials.push(autoserial);

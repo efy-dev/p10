@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/7/22.
@@ -11,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "project_category")
-public class ProjectCategory {
+public class ProjectCategory implements Serializable{
     private String id;
     private String name;//类别
     private ProjectCategory fatherCategory;//父id

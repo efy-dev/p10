@@ -1,9 +1,6 @@
 package com.efeiyi.pal.system.label.controller;
 
 import com.efeiyi.pal.label.model.LabelBatch;
-import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.product.model.Product;
-import com.efeiyi.pal.purchase.model.PurchaseOrder;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;

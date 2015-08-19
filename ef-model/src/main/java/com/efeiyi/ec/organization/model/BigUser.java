@@ -21,7 +21,7 @@ public class BigUser {
     protected String cardNumber;  //卡号
 
 
-    protected Integer status;      // 0假删  1用户/人员      2人员     3用户
+    protected String status;      // 0假删  1用户/人员      2人员     3用户
     protected Integer workStatus;      //   -1  离职   1  正常
 
     protected Master branch;
@@ -185,13 +185,12 @@ public class BigUser {
         this.email = email;
     }
 
-
     @Column(name = "status")
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
