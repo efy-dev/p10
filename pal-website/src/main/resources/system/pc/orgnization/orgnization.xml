@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="Orgnization" label="组织" version="" package="com.efeiyi.pal.orgnization.model" path="">
+
+    <entities>
+        <entity name="PCTenant" label="商户"  model="com.efeiyi.pal.organization.model.Tenant">
+            <does>
+                <do name="listTenant" access="" label="商户列表" result="/tenant/masterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistTenant" access="" label="商户分页列表" result="/tenant/tenantPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formTenant" label="商户信息" access="" result="/tenant/tenantForm"/>
+                <do name="viewTenant" label="商户信息详情页" access="" result="/tenant/tenantView"/>
+                <do name="removeTenant" label="删除商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
+                <do name="saveOrUpdateTenant" label="新建或更新商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"
+                    execute="com.efeiyi.pal.system.organization.controller.TenantHandler">
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCUser" label="用户"  model="com.efeiyi.pal.organization.model.User">
+            <does>
+                <do name="listUser" access="" label="用户列表" result="/user/userList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistUser" access="" label="用户分页列表" result="/user/userPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formUser" label="用户信息" access="" result="/user/userForm"/>
+                <do name="viewUser" label="用户信息详情页" access="" result="/user/userView"/>
+                <do name="removeUser" label="删除用户信息" access="" result="redirect:/basic/xm.do?qm=plistUser_default"/>
+                <do name="saveOrUpdateUser" label="新建或更新用户信息" access="" result="redirect:/basic/xm.do?qm=plistUser_default"
+                    execute="com.efeiyi.pal.system.organization.controller.UserHandler">
+                </do>
+            </does>
+        </entity>
+
+        <entity name="PCTenantSource" label="溯源信息"  model="com.efeiyi.pal.organization.model.TenantSource">
+            <does>
+                <do name="listTenantSource" access="" label="溯源信息列表" result="/tenantSource/tenantSourceList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistTenantSource" access="" label="溯源信息分页列表" result="/tenantSource/tenantSourcePList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formTenantSource" label="溯源信息" access="" result="/tenantSource/tenantSourceForm"/>
+                <!--<do name="viewTenantSource" label="溯源信息详情页" access="" result="/tenantSource/tenantSourceView"/>-->
+                <!--<do name="removeTenantSource" label="删除溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"/>-->
+                <!--<do name="saveOrUpdateTenantSource" label="新建或更新溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"-->
+                    <!--execute="com.efeiyi.pal.system.organization.controller.UserHandler">-->
+                <!--</do>-->
+            </does>
+        </entity>
+
+        <entity name="PCTenantCertification" label="认证信息"  model="com.efeiyi.pal.organization.model.TenantCertification">
+            <fields>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级非遗名录项目" value="1"/>
+                        <item label="省级非遗名录项目" value="2"/>
+                        <item label="市级非遗名录项目" value="3"/>
+                        <item label="县级非遗名录项目" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="listTenantCertification" access="" label="认证信息列表" result="/tenantCertification/tenantCertificationList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="plistTenantCertification" access="" label="认证信息分页列表" result="/tenantCertification/tenantCertificationPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formTenantCertification" label="认证信息" access="" result="/tenantCertification/tenantCertificationForm"/>
+                <!--<do name="viewTenantSource" label="溯源信息详情页" access="" result="/tenantSource/tenantSourceView"/>-->
+                <!--<do name="removeTenantSource" label="删除溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"/>-->
+                <!--<do name="saveOrUpdateTenantSource" label="新建或更新溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"-->
+                <!--execute="com.efeiyi.pal.system.organization.controller.UserHandler">-->
+                <!--</do>-->
+            </does>
+        </entity>
+    </entities>
+</module>

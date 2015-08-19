@@ -26,7 +26,7 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
+  <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
 </head>
 <body class="bgf7">
@@ -71,7 +71,7 @@
 </article>
 
 <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+<script src="<c:url value='/js/amazeui.min.js'/>"></script>
 <script type="text/javascript">
   $(function() {
     $('.am-slider-manual').flexslider({
@@ -79,10 +79,8 @@
     });
   });
   <c:if test="${result.authenticity != -1}">
-  <%--var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";--%>
-  var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
-  //    window.onload = function () {
-  //        alert("ajax");
+  var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";
+//  var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
   $.ajax({
     type: "get",
     url: url,
@@ -93,7 +91,6 @@
     success: jsonpCallback,
     error: jsonpCallback2,
   });
-  //    }
   function jsonpCallback(data) {
 //        alert("success");
     var ipAddressDiv = document.getElementById("ipAddress");
