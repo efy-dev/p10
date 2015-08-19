@@ -3,7 +3,10 @@ package com.ming800.core.p.dao.hibernate;
 import com.ming800.core.base.dao.hibernate.BaseDaoSupport;
 import com.ming800.core.p.dao.AutoSerialDao;
 import com.ming800.core.p.model.AutoSerial;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,5 +17,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AutoSerialDaoHibernate extends BaseDaoSupport<AutoSerial> implements AutoSerialDao {
-
+    public Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap){
+        Query query = this.getSession().createQuery(queryStr).setString("groupName", queryParamMap.get("groupName").toString());
+        return (Long) query.uniqueResult();
+    }
 }

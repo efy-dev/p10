@@ -74,6 +74,7 @@ public class ProductSeries {
         this.productSeriesPropertyNameList = productSeriesPropertyNameList;
     }
 
+    @JsonIgnore
     @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy="productSeriesSet")
     public Set<Tenant> getTenantSet() {
         return tenantSet;

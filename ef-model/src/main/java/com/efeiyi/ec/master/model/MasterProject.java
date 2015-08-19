@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by Administrator on 2015/7/17.
  */
 @Entity
-@Table(name = "tenant_project")
+@Table(name = "master_project")
 public class MasterProject implements Serializable {
     private String id;
     private Master master;
@@ -29,7 +29,7 @@ public class MasterProject implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "master_id")
     public Master getMaster() {
         return master;
     }

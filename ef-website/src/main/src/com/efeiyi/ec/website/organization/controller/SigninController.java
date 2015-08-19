@@ -200,6 +200,15 @@ public class SigninController extends BaseController {
         }
     }
 
+    @RequestMapping({"/login"})
+    public String login(HttpServletRequest request ,Model model){
+        String error = request.getParameter("error");
+        if (error!=null){
+            model.addAttribute("error","true");
+        }
+        return "/login";
+    }
+
 
 
     @RequestMapping({"/wx/register"})

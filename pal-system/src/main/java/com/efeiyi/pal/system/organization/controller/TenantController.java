@@ -3,6 +3,7 @@ package com.efeiyi.pal.system.organization.controller;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
 import com.efeiyi.pal.organization.model.TenantSource;
+import com.efeiyi.pal.product.model.ProductSeries;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,62 @@ public class TenantController {
 
         String resultPage = "/productPropertyValue/productPropertyValueListForm";
 
+        return new ModelAndView(resultPage);
+    }
+
+    @RequestMapping("/selectProductSeries.do")
+    public ModelAndView selectProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+        String tenantId = request.getParameter("tenantId");
+        if (tenantId == null || tenantId.trim().equals("")) {
+            throw new Exception("商户id不能为空!");
+        }
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        String message = "请不要选择已存在的商品系列!";
+
+        modelMap.put("tenant", tenant);
+        modelMap.put("message", message);
+        String resultPage = "/tenant/tenantProductSeriesForm";
+        return new ModelAndView(resultPage);
+    }
+
+    @RequestMapping("/saveTenantProductSeries.do")
+    public ModelAndView saveTenantProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+        String tenantId = request.getParameter("tenant.id");
+        String productSeriesId = request.getParameter("productSeries.id");
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
+
+        if (!tenant.getProductSeriesSet().contains(productSeries)){
+            tenant.getProductSeriesSet().add(productSeries);
+            baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
+
+            modelMap.put("object", tenant);
+            String resultPage = "/tenant/tenantView";
+            return new ModelAndView(resultPage);
+        } else {
+            String message = "该商品系列已存在!请重新选择";
+
+            modelMap.put("tenant", tenant);
+            modelMap.put("message", message);
+            String resultPage = "/tenant/tenantProductSeriesForm";
+            return new ModelAndView(resultPage);
+        }
+
+
+    }
+
+    @RequestMapping("/delTenantProductSeries.do")
+    public ModelAndView delTenantProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+        String tenantId = request.getParameter("tenantId");
+        String productSeriesId = request.getParameter("productSeriesId");
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
+
+        tenant.getProductSeriesSet().remove(productSeries);
+        baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
+
+        modelMap.put("object", tenant);
+        String resultPage = "/tenant/tenantView";
         return new ModelAndView(resultPage);
     }
 

@@ -3,11 +3,16 @@ package com.ming800.core.p.service.impl;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.dao.AutoSerialDao;
 import com.ming800.core.p.model.AutoSerial;
+import com.ming800.core.p.model.CommonSerial;
 import com.ming800.core.p.service.AutoSerialManager;
+import com.ming800.core.p.service.CommonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +26,10 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     @Autowired
     private AutoSerialDao autoSerialDao;
 
-    public String nextAutoSerial(String model) {
+    @Autowired
+    private CommonManager commonManager;
+    protected  static Stack<AutoSerial> updateSerials = new Stack<AutoSerial>();
+ /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
         String queryStr = "from AutoSerial where model = :model and branch.id = :branchId order by serial desc";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
@@ -44,9 +52,68 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             serial = "0" + serial;
         }
         return serial;
+    }*/
+
+    public Long nextSerial(String group) throws Exception {
+        //为提高效率，没有严格区分序列号分组，默认不初始化序列号
+        if (updateSerials.empty()){
+            makeSerials( group);
+        }
+        AutoSerial autoserial = updateSerials.pop();
+        Long serial = autoserial.getSerial();
+       return serial;
     }
 
+    private void makeSerials(String group) throws Exception{
+        CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
+        //从数据库中获取初始值，如果为空，默认从1开始
+        //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
+        String queryStr = "select max(serial) from AutoSerial where groupName= :groupName";
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("groupName", group);
+        Long autoSerial = autoSerialDao.getAutoSerial(queryStr, queryParamMap);
 
+        //默认一次生成10个序列号
+        int size =10;
+
+        if(commonSerial.getCacheSize()!=null || commonSerial.getCacheSize()!=""){
+            size = Integer.parseInt(commonSerial.getCacheSize());
+        }
+        int length = 8;
+        if(commonSerial.getLength()!=null || commonSerial.getLength()!=""){
+            length = Integer.parseInt(commonSerial.getLength());
+        }
+        int step = 1;
+        if (commonSerial.getStep()!=null || commonSerial.getStep()!=""){
+            step = Integer.parseInt(commonSerial.getStep());
+        }
+        Long begin= Long.parseLong(makeChar(length));
+        if (autoSerial==null || autoSerial==0){
+            for (int i=1;i<=size;i++){
+                AutoSerial autoserial = new AutoSerial();
+                autoserial.setSerial(begin+i*step);
+                autoserial.setGroup(group);
+                autoSerialDao.saveOrUpdateObject(autoserial);
+                updateSerials.push(autoserial);
+            }
+        }else{
+            for (int i=1;i<=size;i++){
+                AutoSerial autoserial = new AutoSerial();
+                autoserial.setSerial(autoSerial+i*step);
+                autoserial.setGroup(group);
+                autoSerialDao.saveOrUpdateObject(autoserial);
+                updateSerials.push(autoserial);
+            }
+        }
+
+    }
+    private String makeChar(int num){
+        StringBuilder chars = new StringBuilder("1");
+         for (int z=1;z<=num-1;z++){
+            chars.append(0);
+         }
+        return chars.toString();
+    }
     /*@Override
     public String getName(String model,String branchId){
         return model+"N"+this.nextAutoSerial(model,branchId);

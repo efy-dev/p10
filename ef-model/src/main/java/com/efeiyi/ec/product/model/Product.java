@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +24,7 @@ public class Product {
     private String name;
     private String serial;
     private String picture_url;
-    private Tenant tenant;
+    private Master master;
     private ProjectCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
@@ -31,6 +32,7 @@ public class Product {
     private String status;
     private Project project;
     private Date createDateTime;
+    private Tenant tenant;
 //    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
@@ -65,15 +67,17 @@ public class Product {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "master_id")
     @JsonIgnore
-    public Tenant getTenant() {
-        return tenant;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setMaster(Master master) {
+        this.master = master;
     }
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -105,6 +109,7 @@ public class Product {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @Where(clause = "status=1")
     @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;
@@ -162,5 +167,14 @@ public class Product {
 
     public void setRecommendedIndex(Integer recommendedIndex) {
         this.recommendedIndex = recommendedIndex;
+    }
+
+    @Column(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }

@@ -101,3 +101,8 @@ CREATE TABLE `tenant_master` (
 ALTER TABLE `product_model`
 ADD COLUMN `recommend_index`  int(11) NULL AFTER `status`;
 
+ALTER TABLE `product`
+ADD COLUMN `master_id`  char(16) NULL AFTER `recommended_index`;
+
+
+

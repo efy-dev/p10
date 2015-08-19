@@ -1,6 +1,5 @@
 package com.efeiyi.pal.system.product.controller;
 
-import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
@@ -37,23 +36,8 @@ public class ProductSeriesHandler implements DoHandler {
         Do tempDo = (Do) modelMap.get("tempDo");
         productSeries = (ProductSeries) XDoUtil.processSaveOrUpdateTempObject(tempDo, productSeries, productSeries.getClass(), request, type, xdoDao);
 
-        productSeries = getRelationAttributeObject(productSeries, request);
-
         modelMap.put("object", productSeries);
         return modelMap;
-    }
-
-    /**
-     * 获取关联属性的对象
-     * @param productSeries
-     * @param request
-     * @return
-     */
-    private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request){
-        String tenantId = request.getParameter("tenant.id");
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        productSeries.setTenant(tenant);
-        return productSeries;
     }
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -68,15 +69,16 @@ public class ProductSeriesController {
      * @return
      */
     private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request, String type){
-        String tenantId = request.getParameter("tenant.id");
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+//        String tenantId = request.getParameter("tenant.id");
+//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 
         if (type.equals("new")){
             List<ProductSeriesPropertyName> productSeriesPropertyNameList = new ArrayList();
             productSeries.setProductSeriesPropertyNameList(productSeriesPropertyNameList);
+            productSeries.setTenantSet(new HashSet<Tenant>());
         }
 
-        productSeries.setTenant(tenant);
+//        productSeries.setTenant(tenant);
 
         return productSeries;
     }

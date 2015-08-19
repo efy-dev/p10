@@ -28,8 +28,8 @@ public class Product {
     private String masterName;
     private String status;
     private Date madeYear;
-    private TenantSource tenantSource;
-    private TenantCertification tenantCertification;
+//    private TenantSource tenantSource;
+//    private TenantCertification tenantCertification;
     private List<ProductPropertyValue> productPropertyValueList;
     private String imgUrl;
     private String shoppingUrl;
@@ -113,27 +113,27 @@ public class Product {
         this.madeYear = madeYear;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_source_id")
-    public TenantSource getTenantSource() {
-        return tenantSource;
-    }
-
-    public void setTenantSource(TenantSource tenantSource) {
-        this.tenantSource = tenantSource;
-    }
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_certification_id")
-    public TenantCertification getTenantCertification() {
-        return tenantCertification;
-    }
-
-    public void setTenantCertification(TenantCertification tenantCertification) {
-        this.tenantCertification = tenantCertification;
-    }
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tenant_source_id")
+//    public TenantSource getTenantSource() {
+//        return tenantSource;
+//    }
+//
+//    public void setTenantSource(TenantSource tenantSource) {
+//        this.tenantSource = tenantSource;
+//    }
+//
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tenant_certification_id")
+//    public TenantCertification getTenantCertification() {
+//        return tenantCertification;
+//    }
+//
+//    public void setTenantCertification(TenantCertification tenantCertification) {
+//        this.tenantCertification = tenantCertification;
+//    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     public List<ProductPropertyValue> getProductPropertyValueList() {

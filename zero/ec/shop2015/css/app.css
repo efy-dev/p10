@@ -187,7 +187,7 @@ a:hover { color: #f00; text-decoration:underline;}
 .login-form .am-form .forgetpwd { float: right; color: #036;}
 .login-form .am-form .forgetpwd:hover { color: #f00;}
 .login-form .msg-tips {position: absolute; top:34px; left: 0;}
-.login-form .msg-tips span { color: #f00;}
+.login-form .msg-tips .msg { color: #f00; font-size: 10px;transform: scale(0.3);}
 .login-form .msg-tips span a{color: #036}
 .login-form .am-btn {background:#fff; width: 100%; color: #000;border:1px #000 solid; font-family: FangSong; font-size: 16px; margin-top:-20px;}
 .login-form .am-btn:hover {background:#000; color: #fff;}
