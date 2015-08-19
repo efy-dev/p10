@@ -70,7 +70,8 @@
                 <match url="viewDocument"/>
             </jnode>
 
-            <jnode url="/basic/xm.do?qm=plistProjectCategory_tenant" access="admin,manager" text_zh_CN="首页推荐类别">
+            <jnode url="/basic/xm.do?qm=plistProjectCategory_index" access="admin,manager" text_zh_CN="首页推荐类别">
+                <match url="/basic/xm.do?qm=plistProjectCategory_index"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=recommend"/>
