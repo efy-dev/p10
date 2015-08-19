@@ -39,6 +39,28 @@ $(function(){
             $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
         })
     })();
+    //商品详情页
+    (function(){
+        var simgLi=$('.preview .slider-img li');
+        var BimgLi=$('.preview .slider-main li');
+        var index=0;
+        simgLi.click(function(){
+            index=$(this).index();
+            BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
+            $(this).addClass('active').siblings('li').removeClass('active');
+        });
+        //固定导航
+        $(window).scroll(function(){
+            var d=$(document).scrollTop();
+            if(d>900){
+                $('.tab-wrap').css({'position':'fixed','top':'0'})
+            }else{
+                $('.tab-wrap').css({'position':'','top':''})
+            }
+        });
+        $('.product-intro .detail .part:last').css({'border':'0'});
+
+    })();
 })
 
 $(function(){
