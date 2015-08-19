@@ -1,10 +1,13 @@
 package com.efeiyi.ec.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ming800.core.p.model.ObjectRecommended;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/22.
@@ -20,6 +23,8 @@ public class ProjectCategory implements Serializable{
     private String status;//状态
     private String level;//级别
     private String type;//1.美术,2.技艺
+
+    private List<ProjectCategoryRecommended> projectCategoryRecommendeds;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -87,6 +92,16 @@ public class ProjectCategory implements Serializable{
 
     public void setFatherCategory(ProjectCategory fatherCategory) {
         this.fatherCategory = fatherCategory;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectCategory", cascade = CascadeType.ALL)
+    public List<ProjectCategoryRecommended> getProjectCategoryRecommendeds() {
+        return projectCategoryRecommendeds;
+    }
+
+    public void setProjectCategoryRecommendeds(List<ProjectCategoryRecommended> projectCategoryRecommendeds) {
+        this.projectCategoryRecommendeds = projectCategoryRecommendeds;
     }
 }
 
