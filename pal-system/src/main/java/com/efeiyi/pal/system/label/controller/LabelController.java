@@ -44,25 +44,8 @@ public class LabelController {
             throw new Exception("Id为" + labelBatchId + "的标签批次不存在!");
         }
 
-        labelBuildService.buildLabelSetByLabelBatch(labelBatch);
-//        System.out.println("begin:"+System.currentTimeMillis());
-//        Integer flag = labelBatch.getAmount();
-//
-//        for (int i=0; i<flag; i++){
-//            String code = RandomStringUtils.randomNumeric(10);
-//            Integer serial = i + 1;
-//
-//            Label label = new Label();
-//            label.setSerial(serial);
-//            label.setCode(code);
-//            label.setLabelBatch(labelBatch);
-//            label.setPurchaseOrderLabel(null);
-//            label.setSeller(null);
-//            label.setStatus("1");
-//
-//            baseManager.saveOrUpdate(label.getClass().getName(), label);
-//        }
-//        System.out.println("end:"+System.currentTimeMillis());
+        labelBuildService.buildLabelSetByLabelBatch(labelBatch);//批量生成防伪标签
+
         labelBatch.setStatus("2");
         baseManager.saveOrUpdate(labelBatch.getClass().getName(), labelBatch);
 

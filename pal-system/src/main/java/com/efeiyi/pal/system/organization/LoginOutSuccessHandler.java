@@ -11,20 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by hean on 2014/8/4.
+ * 处理退出系统
  */
-public class LoginOutSuccessHandler extends
-        SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
-
+public class LoginOutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
-    public void onLogoutSuccess
-            (HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    public void onLogoutSuccess (HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-
-
         response.sendRedirect(request.getContextPath() + "/login.jsp");
         super.onLogoutSuccess(request, response, authentication);
     }
+
 }
 

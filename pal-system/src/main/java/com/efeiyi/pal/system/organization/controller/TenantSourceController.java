@@ -47,9 +47,7 @@ public class TenantSourceController {
         TenantSource tenantSource = new TenantSource();
 
         String tenantSourceId = request.getParameter("id");
-        String type = "new";
         if (tenantSourceId != null && !tenantSourceId.equals("")) {
-            type = "edit";
             tenantSource = (TenantSource) baseManager.getObject(TenantSource.class.getName(), tenantSourceId);
         }
 
@@ -122,8 +120,6 @@ public class TenantSourceController {
         String url = "tenantSource/" + identify + ".jpg";
 
         if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
-//            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
-//            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
             tenantSource.setImgUrl(url);
         }
