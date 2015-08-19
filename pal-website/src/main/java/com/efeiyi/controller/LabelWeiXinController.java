@@ -10,6 +10,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +27,7 @@ import java.util.Date;
  * Created by Administrator on 2015/8/6.
  */
 @Controller
-public class LabelWeiXin extends HttpServlet {
+public class LabelWeiXinController extends HttpServlet {
     @Autowired
     ILabelCheckManager iLabelCheckService;
 
@@ -42,6 +43,10 @@ public class LabelWeiXin extends HttpServlet {
         System.out.println("nonce:"+nonce);
         System.out.println("echostr:" + request.getParameter("echostr"));
 
+        if(signature == null || timestamp == null || nonce == null){
+            response.getWriter().write("");
+            return;
+        }
 
         //验证签名
         if(WeiXinMessageDigest.getInstance().validate(signature,timestamp,nonce)) {

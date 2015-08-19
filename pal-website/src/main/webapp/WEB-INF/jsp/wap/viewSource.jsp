@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@include file="/layouts/public.jsp"%>
 <html class="no-js">
 <head>
   <meta charset="utf-8">
@@ -30,7 +31,7 @@
 </head>
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
-  <div class="am-header-left am-header-nav"> <a href="" class="" title="返回上一步"></a> </div>
+  <div class="am-header-left am-header-nav"> <a href="javascript:history.back()" class="" title="返回上一步">返回</a> </div>
   <h1 class="am-header-title">溯源信息</h1>
   <div class="am-header-right am-header-nav">购买</div>
   <!--  <em class="line"></em>-->
@@ -38,7 +39,7 @@
 <!--//End--header-->
 <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
   <ul class="am-slides">
-    <li><img src="<c:url value='${product.tenantSource.imgUrl}'/>"></li>
+    <li><img src="<%=imgBasePath%>${product.tenantSource.imgUrl}"></li>
     <%--<li><img src="upload/exp3.jpg"></li>--%>
     <%--<li><img src="upload/exp3.jpg"></li>--%>
     <%--<li><img src="upload/exp3.jpg"></li>--%>
@@ -60,7 +61,7 @@
       </li>
       <li class="am-g am-list-item-dated">
         <strong class="am-list-info">参  与  人:</strong>
-        <span class="am-list-info2">${product.productSeries.tenant.name}</span>
+        <span class="am-list-info2">${product.tenant.name}</span>
       </li>
     </ul>
   </div>

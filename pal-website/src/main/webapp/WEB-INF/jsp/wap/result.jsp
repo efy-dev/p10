@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@include file="/layouts/public.jsp"%>
 <html class="no-js">
 <head>
   <meta charset="utf-8">
@@ -36,7 +37,7 @@
 <article class="eslite">
   <div class="am-paragraph-default">
     <c:if test="${result.authenticity != -1}">
-    <div class="imglogo"><img src="<c:url value='${product.imgUrl}'/>"/></div>
+    <div class="imglogo"><img src="<%=imgBasePath%><c:url value='${product.imgUrl}'/>"/></div>
     </c:if>
     <div class="tips">${result.msg}</div>
   </div>
@@ -60,7 +61,7 @@
         <li><a href="<c:url value='/viewCertificate.do?id=${product.id}'/>">认证信息</a></li>
         <li><a href="<c:url value='/viewProduct.do?id=${product.id}'/>">商品信息</a></li>
         <li><a href="<c:url value='/viewSource.do?id=${product.id}'/>">溯源信息</a></li>
-        <li><a href="#">DNA鉴定信息</a></li>
+        <%--<li><a href="#">DNA鉴定信息</a></li>--%>
       </ul>
     </div>
   </div>
@@ -77,6 +78,60 @@
       // options
     });
   });
+  <c:if test="${result.authenticity != -1}">
+  <%--var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";--%>
+  var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
+  //    window.onload = function () {
+  //        alert("ajax");
+  $.ajax({
+    type: "get",
+    url: url,
+    cache: false,
+    dataType: "jsonp",
+    jsonp: "callback",
+    jsonpCallback: "jsonpCallback",
+    success: jsonpCallback,
+    error: jsonpCallback2,
+  });
+  //    }
+  function jsonpCallback(data) {
+//        alert("success");
+    var ipAddressDiv = document.getElementById("ipAddress");
+    if (data.status == 0) {
+      var text = data.address.split("|");
+      ipAddressDiv.innerHTML = "上次验证地点：" + text[0] + " " + text[1] + " " + text[2];
+//            alert(ipAddressDiv.innerHTML);
+    }else{
+      ipAddressDiv.innerHTML = "上次验证地点：未知";
+    }
+  }
+  function jsonpCallback2(error) {
+    alert("failed");
+    var ipAddressDiv = document.getElementById("ipAddress");
+    ipAddressDiv.innerText = error;
+  }
+  </c:if>
+
+  <c:if test="${result.isTimeLimited}">
+  window.onload = function () {
+    setTimeout("autoClose()", ${result.timeLimit});
+  }
+
+  function autoClose() {
+    var userAgent = navigator.userAgent;
+//        alert(userAgent);
+    if (userAgent.indexOf("Firefox") != -1
+            || userAgent.indexOf("Chrome") != -1) {
+      location.href = "<c:url value='/'/>";
+//            window.open(href,"_self","");
+//            window.close();
+    } else {
+      window.opener = null;
+      window.open("", "_self");
+      window.close();
+    }
+  }
+  </c:if>
 </script>
 </body>
 </html>
