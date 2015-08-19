@@ -1,6 +1,7 @@
 package com.efeiyi.pal.system.organization.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.product.model.ProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -11,6 +12,7 @@ import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 
 /**
  * Created by Administrator on 2015/7/23.
@@ -36,7 +38,7 @@ public class TenantHandler implements DoHandler {
         Do tempDo = (Do) modelMap.get("tempDo");
         tenant = (Tenant) XDoUtil.processSaveOrUpdateTempObject(tempDo, tenant, tenant.getClass(), request, type, xdoDao);
 
-        tenant = getRelationAttributeObject(tenant, request);
+        tenant = getRelationAttributeObject(tenant, request, type);
 
         modelMap.put("object", tenant);
         return modelMap;
@@ -46,9 +48,10 @@ public class TenantHandler implements DoHandler {
      * 获取关联属性的对象
      * @param tenant
      * @param request
+     * @param type
      * @return
      */
-    private Tenant getRelationAttributeObject(Tenant tenant, HttpServletRequest request){
+    private Tenant getRelationAttributeObject(Tenant tenant, HttpServletRequest request, String type){
 //        String provinceId = request.getParameter("province.id");
 //        String addressId = request.getParameter("address.id");
 //
@@ -57,6 +60,11 @@ public class TenantHandler implements DoHandler {
 //
 //        tenant.setProvince(province);
 //        tenant.setAddress(address);
+
+        if (type.equals("new")){
+            tenant.setProductSeriesSet(new HashSet<ProductSeries>());
+        }
+
         return tenant;
     }
 

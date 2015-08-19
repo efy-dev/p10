@@ -80,12 +80,13 @@ public class ProductController {
     private Product getRelationAttributeObject(Product product, HttpServletRequest request, String type){
         String productSeriesId = request.getParameter("productSeries.id");
         ProductSeries newProductSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
-        Tenant tenant = newProductSeries.getTenant();
+        String tenantId = request.getParameter("tenant.id");
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 
-        String tenantSourceId = request.getParameter("tenantSource.id");
-        String tenantCertificationId = request.getParameter("tenantCertification.id");
-        TenantSource tenantSource = (TenantSource) baseManager.getObject(TenantSource.class.getName(), tenantSourceId);
-        TenantCertification tenantCertification = (TenantCertification) baseManager.getObject(TenantCertification.class.getName(), tenantCertificationId);
+//        String tenantSourceId = request.getParameter("tenantSource.id");
+//        String tenantCertificationId = request.getParameter("tenantCertification.id");
+//        TenantSource tenantSource = (TenantSource) baseManager.getObject(TenantSource.class.getName(), tenantSourceId);
+//        TenantCertification tenantCertification = (TenantCertification) baseManager.getObject(TenantCertification.class.getName(), tenantCertificationId);
 
         if (type.equals("new")){
             List<ProductPropertyValue> productPropertyValueList = new ArrayList();
@@ -100,8 +101,8 @@ public class ProductController {
 
         product.setProductSeries(newProductSeries);
         product.setTenant(tenant);
-        product.setTenantSource(tenantSource);
-        product.setTenantCertification(tenantCertification);
+//        product.setTenantSource(tenantSource);
+//        product.setTenantCertification(tenantCertification);
 
         return product;
     }

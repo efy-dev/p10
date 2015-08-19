@@ -15,20 +15,11 @@
     <title></title>
     <script type="text/javascript">
         function openProductSourceOrCertification(id, name, type){
-            var productSeriesId = document.getElementById("productSeries_id").value;
-            if(productSeriesId == null || productSeriesId == ""){
-                alert("请选择商品所属系列!");
+            var tenantId = document.getElementById("tenant_id").value;
+            if(tenantId == null || tenantId == ""){
+                alert("请选择商户!");
             }else {
-                var url = "/productSeries/tenant/json?productSeriesId=" + productSeriesId;
-                $.ajax({
-                    type: "post",
-                    url: url,
-                    cache: false,
-                    dataType: "json",
-                    success: function (data) {
-                        m8uDialog.openDialog(id, name, type, data);
-                    }
-                });
+                m8uDialog.openDialog(id, name, type, tenantId);
             }
         }
     </script>
@@ -71,12 +62,14 @@
                 <input type="text" name="masterName" id="masterName" placeholder="制作大师" value="${object.masterName}">
             </div>
         </div>
+
         <div class="am-form-group">
             <label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>
             </div>
         </div>
+
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">所属系列 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
@@ -84,6 +77,15 @@
                 <input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">
             </div>
         </div>
+
+        <div class="am-form-group">
+            <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>
+            <div class="am-u-sm-9">
+                <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>
+                <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
+            </div>
+        </div>
+
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small style="color: red">*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
@@ -94,24 +96,24 @@
             </div>
         </div>
 
-        <div class="am-form-group">
-            <label name="productSource_id" for="productSource_idName" class="am-u-sm-3 am-form-label">溯源信息 <small style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <input id="productSource_idName" placeholder="溯源信息"
-                       onclick="openProductSourceOrCertification('productSource_id','productSource_idName','source');"
-                       value="${object.tenantSource.name}" required>
-                <input type="hidden" id="productSource_id"  name="tenantSource.id" value="${object.tenantSource.id}">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="productCertification_id" for="productCertification_idName" class="am-u-sm-3 am-form-label">认证信息 <small style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <input id="productCertification_idName" placeholder="认证信息"
-                       onclick="openProductSourceOrCertification('productCertification_id','productCertification_idName','certification');"
-                       value="${object.tenantCertification.name}" required>
-                <input type="hidden" id="productCertification_id"  name="tenantCertification.id" value="${object.tenantCertification.id}">
-            </div>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="productSource_id" for="productSource_idName" class="am-u-sm-3 am-form-label">溯源信息 <small style="color: red">*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="productSource_idName" placeholder="溯源信息"--%>
+                       <%--onclick="openProductSourceOrCertification('productSource_id','productSource_idName','source');"--%>
+                       <%--value="${object.tenantSource.name}" required>--%>
+                <%--<input type="hidden" id="productSource_id"  name="tenantSource.id" value="${object.tenantSource.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="productCertification_id" for="productCertification_idName" class="am-u-sm-3 am-form-label">认证信息 <small style="color: red">*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="productCertification_idName" placeholder="认证信息"--%>
+                       <%--onclick="openProductSourceOrCertification('productCertification_id','productCertification_idName','certification');"--%>
+                       <%--value="${object.tenantCertification.name}" required>--%>
+                <%--<input type="hidden" id="productCertification_id"  name="tenantCertification.id" value="${object.tenantCertification.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <label name="shoppingUrl" for="shoppingUrl" class="am-u-sm-3 am-form-label">购买链接 <small style="color: red">*</small></label>

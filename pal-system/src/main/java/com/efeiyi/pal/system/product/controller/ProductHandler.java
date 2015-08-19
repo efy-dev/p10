@@ -59,8 +59,9 @@ public class ProductHandler implements DoHandler {
             productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
         }
 
-        if (productSeries != null){
-            tenant = productSeries.getTenant();
+        String tenantId = request.getParameter("tenant.id");
+        if (tenantId != null && !tenantId.trim().equals("")){
+            tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         }
 
 //        String tenantId = request.getParameter("tenant.id");
