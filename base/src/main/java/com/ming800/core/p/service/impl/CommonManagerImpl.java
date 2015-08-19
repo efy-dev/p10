@@ -30,7 +30,7 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonDocument> commonDocumentMap = new HashMap<>();
     private static HashMap<String, CommonRecommended>  commonRecommendedMap = new HashMap<>();
     private static HashMap<String, CommonTag>    commonTagMap = new HashMap<>();
-    private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
+//    private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -44,7 +44,7 @@ public class CommonManagerImpl implements CommonManager {
                 getCommonDocumentByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
-                getAutoSerialByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+//                getAutoSerialByGroup(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -150,36 +150,36 @@ public class CommonManagerImpl implements CommonManager {
 
     /**
      * 解析自动获取序列号
-     * @param  infoDocument is a Document
+//     * @param  infoDocument is a Document
      * @return autoSerialMap
      */
-    private  static  HashMap getAutoSerialByGroup(Document infoDocument){
-        if(infoDocument!=null){
-            //begin
-            List<Node> autoSerialNodeList = infoDocument.selectNodes("common/autoserials/autoserial");
-            if(autoSerialNodeList!=null){
-                for(Node node : autoSerialNodeList){
-                    String group = node.selectSingleNode("@group").getText();
-                    String note = node.selectSingleNode("@note").getText();
-                    String autoserialModel = node.selectSingleNode("@autoserialModel").getText();
-                    String prefix = node.selectSingleNode("@prefix").getText();
-                    String length = node.selectSingleNode("@length").getText();
-                    String cacheSize = node.selectSingleNode("@cacheSize").getText();
-                    String step = node.selectSingleNode("@step").getText();
-                    CommonSerial commonSerial = new CommonSerial();
-                    commonSerial.setGroup(group);
-                    commonSerial.setNote(note);
-                    commonSerial.setAutoserialModel(autoserialModel);
-                    commonSerial.setCacheSize(cacheSize);
-                    commonSerial.setLength(length);
-                    commonSerial.setStep(step);
-                    autoSerialMap.put(group,commonSerial);
-                }
-            }
-        }
-        return  autoSerialMap;
-
-    }
+//    private  static  HashMap getAutoSerialByGroup(Document infoDocument){
+//        if(infoDocument!=null){
+//            //begin
+//            List<Node> autoSerialNodeList = infoDocument.selectNodes("common/autoserials/autoserial");
+//            if(autoSerialNodeList!=null){
+//                for(Node node : autoSerialNodeList){
+//                    String group = node.selectSingleNode("@group").getText();
+//                    String note = node.selectSingleNode("@note").getText();
+//                    String autoserialModel = node.selectSingleNode("@autoserialModel").getText();
+//                    String prefix = node.selectSingleNode("@prefix").getText();
+//                    String length = node.selectSingleNode("@length").getText();
+//                    String cacheSize = node.selectSingleNode("@cacheSize").getText();
+//                    String step = node.selectSingleNode("@step").getText();
+//                    CommonSerial commonSerial = new CommonSerial();
+//                    commonSerial.setGroup(group);
+//                    commonSerial.setNote(note);
+//                    commonSerial.setAutoserialModel(autoserialModel);
+//                    commonSerial.setCacheSize(cacheSize);
+//                    commonSerial.setLength(length);
+//                    commonSerial.setStep(step);
+//                    autoSerialMap.put(group,commonSerial);
+//                }
+//            }
+//        }
+//        return  autoSerialMap;
+//
+//    }
 
     @Override
      public   CommonRecommended getRecommended(String group) throws Exception {
@@ -220,14 +220,14 @@ public class CommonManagerImpl implements CommonManager {
         return  commonBanner;
     }
 
-    @Override
-    public CommonSerial getAutoSerial(String group) throws  Exception{
-        CommonSerial conmmonSerial ;
-        conmmonSerial = autoSerialMap.get(group);
-        if(conmmonSerial == null){
-            throw  new Exception("conmmonSerial is null");
-        }
-        return  conmmonSerial;
-    }
+//    @Override
+//    public CommonSerial getAutoSerial(String group) throws  Exception{
+//        CommonSerial conmmonSerial ;
+//        conmmonSerial = autoSerialMap.get(group);
+//        if(conmmonSerial == null){
+//            throw  new Exception("conmmonSerial is null");
+//        }
+//        return  conmmonSerial;
+//    }
 
 }

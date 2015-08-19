@@ -55,5 +55,5 @@ public interface CommonManager {
      * @return commonSerial
      * @throws Exception
      */
-    CommonSerial getAutoSerial(String group) throws  Exception;
+//    CommonSerial getAutoSerial(String group) throws  Exception;
 }
