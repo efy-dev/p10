@@ -42,23 +42,22 @@
         <strong class="am-text-primary am-text-lg">标签列表</strong>
     </div>
 </div>
-<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
-<%--<div>--%>
-    <%--<div class="am-form-group" align="left">--%>
-        <%--<label name="checkSerial" for="checkSerial" class="am-u-sm-3 am-form-label" style="width: auto">序列号:</label>--%>
-        <%--<div class="am-u-sm-9" align="left" style="width: auto">--%>
-            <%--<input type="text" name="checkSerial" id="checkSerial" placeholder="请出入查询序列号" value="${checkSerial}">--%>
-        <%--</div>--%>
-        <%--<div style="margin-left: 10px;width: auto" align="left">--%>
-            <%--<input type="hidden" id="qm" value="${requestScope.qm}"/>--%>
-            <%--<input type="hidden"  id="conditions" value="${requestScope.conditions}"/>--%>
-            <%--<input onclick="checkSerial();"--%>
-                   <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-                   <%--style="margin-bottom: 6px;width: 100px;margin-left:2px;height: 30px;"--%>
-                   <%--value="查询" />--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div>
+    <div class="am-form-group" align="left">
+        <label name="checkSerial" for="checkSerial" class="am-u-sm-3 am-form-label" style="width: auto">序列号:</label>
+        <div class="am-u-sm-9" align="left" style="width: auto">
+            <input type="text" name="checkSerial" id="checkSerial" placeholder="请出入查询序列号" value="${checkSerial}">
+        </div>
+        <div style="margin-left: 10px;width: auto" align="left">
+            <input type="hidden" id="qm" value="${requestScope.qm}"/>
+            <input type="hidden"  id="conditions" value="${requestScope.conditions}"/>
+            <input onclick="checkSerial();"
+                   type="button" class="am-btn am-btn-default am-btn-xs"
+                   style="margin-bottom: 6px;width: 100px;margin-left:2px;height: 30px;"
+                   value="查询" />
+        </div>
+    </div>
+</div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
