@@ -17,6 +17,7 @@ a:hover { color: #f00; text-decoration:underline;}
 .topbar {height: 31px; background: #000;}
 .topbar .ul-item { float: right;}
 .topbar .ul-item li { float: left;}
+.topbar .ul-item li strong {line-height: 31px; float: left;font-size: 12px;color: #fff;font-family:FangSong}
 .topbar .ul-item li a { line-height: 31px; font-size: 12px; color: #fff;font-family:FangSong; padding: 0 20px; float: left;}
 .topbar .ul-item li a:hover { background: #333;text-decoration: none;}
 .topbar .ul-item li.cart {padding: 0 38px; background: #333; position: relative;}
