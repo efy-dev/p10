@@ -72,12 +72,15 @@
 
             <jnode url="/basic/xm.do?qm=plistProjectCategory_index" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistProjectCategory_index"/>
+                <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=recommend"/>
                 <match url="/basic/xm.do?qm=plistProductModel_index"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistTenant_index" access="admin,manager" text_zh_CN="首页推荐传承人">
+            <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
+                <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>
+                <match url="/basic/xm.do?qm=plistEcMaster_index"/>
             </jnode>
         </jnode>
     </jnode>
