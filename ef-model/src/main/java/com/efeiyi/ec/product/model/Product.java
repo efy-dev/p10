@@ -179,4 +179,6 @@ public class Product implements Serializable{
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
+
+
 }

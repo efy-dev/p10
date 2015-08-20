@@ -217,7 +217,7 @@ public class Master implements Serializable {
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
     }
-
+@JsonIgnore
     @Column(name = "logo_url")
     public String getLogoUrl() {
         return logoUrl;
@@ -227,6 +227,7 @@ public class Master implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "master")
     @Where(clause = "status=1")
     public List<MasterRecommended> getMasterRecommendedList() {
