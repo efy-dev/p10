@@ -61,8 +61,8 @@ public class PCPageList extends TagSupport {
      */
     private String getPagesUrl(int index, int pageCount, StringBuilder pageHref) {
         StringBuilder content = new StringBuilder();
-        content.append("<ul class=\"am-pagination am-pagination-centered\">");
-        content.append(getPrePage(index, pageHref));
+        content.append("<ul class=\"am-pagination am-pagination-centered pages-new\">");
+        //content.append(getPrePage(index, pageHref));
         if (pageCount <= DISPLAY_PAGES) {//总页数小于指定页数，则展示所有分页
             content.append(getDisplayPages(index, 1, pageCount, pageHref));
         } else {
@@ -137,9 +137,9 @@ public class PCPageList extends TagSupport {
     private String getNextPage(int index, int pageCount, StringBuilder pageHref) {
         int nextIndex = index + 1;
         if (nextIndex > pageCount) {
-            return "<li class=\"am-disabled bigRound\"><a href=\"#\">&raquo;</a></li>";
+            return "<li class=\"am-disabled bigRound\"><a href=\"#\">最后一页</a></li>";
         } else {
-            return new StringBuilder("<li class=\"bigRound\"><a href=\"").append(pageHref).append(nextIndex).append("\">&raquo;</a></li>").toString();
+            return new StringBuilder("<li class=\"bigRound\"><a href=\"").append(pageHref).append(nextIndex).append("\">最后一页</a></li>").toString();
         }
     }
 
