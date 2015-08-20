@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.product.controller;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -33,7 +34,7 @@ public class ProductController {
 
     @RequestMapping(value = "/productList.do")
     public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
-        String id= request.getParameter("id");
+        String id = request.getParameter("id");
         XQuery xQuery = new XQuery("listProduct_default",request);
         List productList = baseManager.listObject(xQuery);
         model.addAttribute("productList",productList);
@@ -48,38 +49,22 @@ public class ProductController {
         return "/product/productView";
     }
 
-    @RequestMapping("/list/{category}")
-    public String plistProduct(@PathVariable String category ,HttpServletRequest request, Model model) throws Exception{
-        //前端传一组key：value过来，格式
-        String conditions = request.getParameter("conditions");
-        List<String> conditionItem = Arrays.asList(conditions.split(";"));
-        HashMap<String,String> conditionMap = new HashMap<>();
-        for (String conditionTemp :conditionItem){
-            String[] tempList = conditionTemp.split(":");
-            conditionMap.put(tempList[0],tempList[1]);
-        }
-
+    @RequestMapping("/list/{projectId}")
+    public String plistProduct(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception{
+        //前端传递projectId
         XQuery xQuery = new XQuery("plistProductModel_default",request);
-        xQuery.put("product_category_id", category);
-
-        int k = 0;
-        String qStr = "";
-        for (String pid : conditionMap.keySet()){
-            qStr+="  (pv.projectProperty.id=:pid"+k+" and pv.projectPropertyValue.id=:pvid"+k+") or ";
-            xQuery.put("pid"+k,pid);
-            xQuery.put("pvid"+k,conditionMap.get(pid));
-            k++;
-        }
-
-        qStr = " and ("+qStr.substring(0,qStr.lastIndexOf("or"))+") ";
-
-        xQuery.setHeadHql(xQuery.getHeadHql() + " inner join s.productPropertyValueList pv ");
-        xQuery.setQueryHql(xQuery.getQueryHql() + qStr);
-        xQuery.updateHql();
+        xQuery.put("product_category_id", projectId);
         xQuery.addRequestParamToModel(model,request);
-        List productList = baseManager.listPageInfo(xQuery).getList();
-        model.addAttribute("productList",productList);
-        request.setAttribute("conditions",conditions);
+        List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
+        Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
+        String proName = project.getName();
+        String[] str = new String[16];
+        for(int i = 0;i<proName.length();i++){
+            str[i] = String.valueOf(proName.charAt(i));
+        }
+        model.addAttribute("proName",str);
+        model.addAttribute("project",project);
+        model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
     }
 
@@ -107,7 +92,16 @@ public class ProductController {
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return true;
     }
-
+    /**
+     * 爆款推荐
+     * @param request
+     * @throws Exception
+     */@RequestMapping({"/hot/{productModelId}"})
+    public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        model.addAttribute("productModel", productModel);
+        return "/product/recommendationList";
+    }
     /**
      * 删除收藏产品
      * @param request

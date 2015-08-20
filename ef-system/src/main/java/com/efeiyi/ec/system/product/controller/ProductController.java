@@ -74,7 +74,7 @@ public class ProductController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
         int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
-        productModel.setRecommendIndex(maxValue + 1);
+      //  productModel.setRecommendIndex(maxValue + 1);
 
         baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 

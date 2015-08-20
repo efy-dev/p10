@@ -147,3 +147,13 @@ CHANGE COLUMN `tenant_id` `master_id`  varchar(16) CHARACTER SET utf8 COLLATE ut
 alter TABLE purchase_order_delivery add COLUMN status SMALLINT(1)
 
 alter TABLE product add COLUMN recommended_index INTEGER(5);
+/////20150820
+ALTER TABLE `master_banner`
+CHANGE COLUMN `tenant_id` `master_id`  varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `the_status`;
+
+ALTER TABLE `master_honor`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `memo`;
+
+ALTER TABLE `master_recommended`
+CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `id`;
+

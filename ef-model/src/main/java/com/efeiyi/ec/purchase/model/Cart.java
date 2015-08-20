@@ -1,9 +1,12 @@
 package com.efeiyi.ec.purchase.model;
 
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import java.util.List;
 public class Cart {
     private String id;
     private List<CartProduct> cartProductList;
+    private BigDecimal totalPrice;
     private Date createDatetime;
     private User user;
 
@@ -48,6 +52,7 @@ public class Cart {
         this.createDatetime = createDatetime;
     }
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User getUser() {
@@ -56,5 +61,14 @@ public class Cart {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "total_price")
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

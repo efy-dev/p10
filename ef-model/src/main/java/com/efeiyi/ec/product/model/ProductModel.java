@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product_model")
-public class ProductModel implements Serializable{
+public class ProductModel implements Serializable {
 
     private String id ;
     private String serial; // 产品编号
@@ -23,7 +23,7 @@ public class ProductModel implements Serializable{
     private String status;
     private Integer recommendIndex;
 
-    @Column(name = "recommend_index")
+   @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;
     }
@@ -80,7 +80,7 @@ public class ProductModel implements Serializable{
         this.amount = amount;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "productModel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPropertyValue> getProductPropertyValueList() {
         return productPropertyValueList;
     }

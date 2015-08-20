@@ -20,7 +20,7 @@
               <c:forEach items="${childJnode.children}" var="childchildJnode">
                 <li>
                     <%--<c:if test="${!empty requestScope.qm && childchildJnode.contain(requestScope.qm)}">--%>
-                  <a href="${childchildJnode.url}"
+                  <a href="<c:url value="${childchildJnode.url}" />"
                      class="am-cf ${childchildJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}">${childchildJnode.text_zh_CN}</a>
                     <%--</c:if>--%>
                     <%--<c:if test="${empty requestScope.qm || !childchildJnode.contain(requestScope.qm)}">--%>

@@ -10,7 +10,7 @@
  * @param error   请求失败的回调
  * @param requestType 请求类型 （get post）
  */
-function ajaxRequest(url, data, success, error,requestType) {
+function ajaxRequest(url, param, success, error,requestType) {
     if(typeof requestType == "undefined"){
 
     }
@@ -19,8 +19,8 @@ function ajaxRequest(url, data, success, error,requestType) {
         url: url,
         cache: false,
         dataType: "json",
-        data: data,
-        success: success(data),
-        error: error(data)
+        data: param,
+        success: success,
+        error: error
     });
 }
