@@ -64,26 +64,21 @@
                 </c:if>
                 </c:forEach>
                 <!--页码-->
+                <div class="pages wh">
+                    <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/work/list">
+                        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+                        <ming800:pcPageParam name="conditions"
+                                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+                        <ming800:pcPageParam name="sort"
+                                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+                    </ming800:pcPageList>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!--其他内容-->
-
-
-
-
 </div>
-<div class="wh">
-    <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/work/list">
-        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
-        <ming800:pcPageParam name="conditions"
-                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-        <ming800:pcPageParam name="sort"
-                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
-    </ming800:pcPageList>
-</div>
-
 <!--其他内容-->
 </body>
 </html>
