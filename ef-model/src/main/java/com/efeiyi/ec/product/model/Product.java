@@ -171,7 +171,7 @@ public class Product implements Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "master_id")
     public Tenant getTenant() {
         return tenant;
     }
