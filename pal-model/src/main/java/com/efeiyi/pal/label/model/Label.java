@@ -20,7 +20,7 @@ import java.util.List;
 public class Label {
 
     private String id;
-    private Integer serial;
+    private Long serial;
     private String code;
     private LabelBatch labelBatch;
     private Tenant seller;
@@ -33,6 +33,7 @@ public class Label {
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
+//    @GenericGenerator(name = "id", strategy = "uuid")
     @GeneratedValue(generator = "id")
     public String getId() {
         return id;
@@ -43,11 +44,11 @@ public class Label {
     }
 
     @Column(name = "serial")
-    public Integer getSerial() {
+    public Long getSerial() {
         return serial;
     }
 
-    public void setSerial(Integer serial) {
+    public void setSerial(Long serial) {
         this.serial = serial;
     }
 
