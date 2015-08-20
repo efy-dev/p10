@@ -13,5 +13,5 @@ import java.util.LinkedHashMap;
  * To change this template use File | Settings | File Templates.
  */
 public interface AutoSerialDao extends BaseDao<AutoSerial> {
-    Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap);
+    AutoSerial getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap);
 }
