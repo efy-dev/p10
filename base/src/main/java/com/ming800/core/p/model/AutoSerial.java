@@ -17,7 +17,6 @@ public class AutoSerial {
 
     private String id;
     private Long serial;
-    private String model;
     private String group;
 
     @Id
@@ -40,14 +39,6 @@ public class AutoSerial {
         this.serial = serial;
     }
 
-    @Column(name = "model")
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
     @Column(name = "groupName")
     public String getGroup() {return group;}
 
