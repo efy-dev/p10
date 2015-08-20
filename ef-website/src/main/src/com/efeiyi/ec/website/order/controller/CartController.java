@@ -128,11 +128,10 @@ public class CartController {
     }
 
     @RequestMapping({"/cart/removeProduct.do"})
-    @ResponseBody
-    public boolean removeProduct(HttpServletRequest request) throws Exception {
+    public String removeProduct(HttpServletRequest request) throws Exception {
         String cartProductId = request.getParameter("cartProductId");
         baseManager.remove(CartProduct.class.getName(), cartProductId);
-        return true;
+        return "redirect:/cart/view";
     }
 
 
@@ -145,12 +144,14 @@ public class CartController {
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
         Cart cart = cartProduct.getCart();
-        BigDecimal totalPrice = new BigDecimal(0);
+        float totalPrice = 0;
         for (CartProduct cartProductTemp : cart.getCartProductList()) {
-            if (cartProductTemp.getIsChoose().equals("1")) ;
-            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
         }
-        cart.setTotalPrice(totalPrice);
+        cart.setTotalPrice(new BigDecimal(totalPrice));
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
 
         return cartProduct;
@@ -167,18 +168,22 @@ public class CartController {
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
         Cart cart = cartProduct.getCart();
-        BigDecimal totalPrice = new BigDecimal(0);
+        float totalPrice = 0;
         for (CartProduct cartProductTemp : cart.getCartProductList()) {
-            if (cartProductTemp.getIsChoose().equals("1")) ;
-            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
         }
-        cart.setTotalPrice(totalPrice);
+        cart.setTotalPrice(new BigDecimal(totalPrice));
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
 
         return cartProduct;
     }
 
     @RequestMapping({"/cart/chooseProduct.do"})
+    @ResponseBody
     public Object chooseProduct(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
@@ -186,19 +191,23 @@ public class CartController {
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
         Cart cart = cartProduct.getCart();
-        BigDecimal totalPrice = new BigDecimal(0);
+        float totalPrice = 0;
         for (CartProduct cartProductTemp : cart.getCartProductList()) {
-            if (cartProductTemp.getIsChoose().equals("1")) ;
-            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
         }
-        cart.setTotalPrice(totalPrice);
+        cart.setTotalPrice(new BigDecimal(totalPrice));
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
 
         return cart;
 
     }
 
     @RequestMapping("/cart/cancelChooseProduct.do")
+    @ResponseBody
     public Object cancelChooseProduct(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
@@ -206,15 +215,104 @@ public class CartController {
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
         Cart cart = cartProduct.getCart();
-        BigDecimal totalPrice = new BigDecimal(0);
+        float totalPrice = 0;
         for (CartProduct cartProductTemp : cart.getCartProductList()) {
-            if (cartProductTemp.getIsChoose().equals("1")) ;
-            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
         }
-        cart.setTotalPrice(totalPrice);
+        cart.setTotalPrice(new BigDecimal(totalPrice));
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
 
         return cart;
+    }
+
+    @RequestMapping("/cart/chooseTenant.do")
+    @ResponseBody
+    public String chooseTenant(HttpServletRequest request) {
+        String tenantId = request.getParameter("tenantId");
+        String cartId = request.getParameter("cartId");
+        Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+        List<CartProduct> cartProductList = cart.getCartProductList();
+        for (CartProduct cartProductTemp : cartProductList) {
+            if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                cartProductTemp.setIsChoose("1");
+                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+            }
+        }
+
+        float totalPrice = 0;
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
+        }
+        cart.setTotalPrice(new BigDecimal(totalPrice));
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+        return result;
+    }
+
+
+    @RequestMapping("/cart/cancelChooseTenant.do")
+    @ResponseBody
+    public String cancelChooseTenant(HttpServletRequest request) {
+        String tenantId = request.getParameter("tenantId");
+        String cartId = request.getParameter("cartId");
+        Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+        List<CartProduct> cartProductList = cart.getCartProductList();
+        for (CartProduct cartProductTemp : cartProductList) {
+            if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                cartProductTemp.setIsChoose("0");
+                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+            }
+        }
+
+        float totalPrice = 0;
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
+        }
+        cart.setTotalPrice(new BigDecimal(totalPrice));
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+        return result;
+    }
+
+
+    @RequestMapping({"/cart/chooseAll.do"})
+    @ResponseBody
+    public String chooseAll(HttpServletRequest request) {
+        String cartId = request.getParameter("cartId");
+        String chooseType = request.getParameter("chooseType");
+        Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+        List<CartProduct> cartProductList = cart.getCartProductList();
+
+        for (CartProduct cartProductTemp : cartProductList) {
+            if (chooseType.equals("1")) {
+                cartProductTemp.setIsChoose("1");
+            }else {
+                 cartProductTemp.setIsChoose("0");
+            }
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+        }
+
+        float totalPrice = 0;
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
+        }
+        cart.setTotalPrice(new BigDecimal(totalPrice));
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+        return result;
+
     }
 
 

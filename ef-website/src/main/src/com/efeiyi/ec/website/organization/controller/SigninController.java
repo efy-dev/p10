@@ -109,7 +109,7 @@ public class SigninController extends BaseController {
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
         /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
         if (bigUser.getStatus() == null) {
-            bigUser.setStatus(1);
+            bigUser.setStatus("1");
         }
         bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
         bigUser.setAccountExpired(false);
