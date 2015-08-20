@@ -1,5 +1,7 @@
 package com.efeiyi.ec.project.model;
 
+import com.efeiyi.ec.product.model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -27,6 +29,19 @@ public class Project {
     private List<Project> subProjectList;//子项目
     private List<ProjectTag> projectTagList;//项目标签
     private  List<ProjectProperty> projectPropertyList;//项目属性
+    private String description;// project描述
+
+    private List<Product> productList;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -85,7 +100,14 @@ public class Project {
     public void setLevel(String level) {
         this.level = level;
     }
+    @Column(name="description")
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     public ProjectCategory getProjectCategory() {
@@ -111,7 +133,7 @@ public class Project {
     }
 
     public  void  setType(String type){
-          this.type=type;
+        this.type=type;
     }
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
@@ -120,7 +142,7 @@ public class Project {
         return  projectTagList;
     }
     public  void  setProjectTagList(List<ProjectTag> projectTagList){
-         this.projectTagList = projectTagList;
+        this.projectTagList = projectTagList;
     }
 
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
