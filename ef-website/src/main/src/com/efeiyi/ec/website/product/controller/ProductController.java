@@ -94,11 +94,13 @@ public class ProductController {
     }
     /**
      * 爆款推荐
-     * @param request
-     * @throws Exception
-     */@RequestMapping({"/hot/{productModelId}"})
+     */
+    @RequestMapping({"/hot/{productModelId}"})
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        String  projectId = productModel.getProduct().getProject().getId();
+        Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
+        model.addAttribute("productList", project.getProductList());
         model.addAttribute("productModel", productModel);
         return "/product/recommendationList";
 }
