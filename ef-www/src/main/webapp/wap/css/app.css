@@ -1,0 +1,55 @@
+/* Write your styles */
+ul {list-style:none;}
+/*--//--*/
+body {max-width:640px;margin: 0 auto;}
+.header {width:100%;height:62px;border-bottom:1px #000 solid;position:relative;float: left;}
+.header .logo {background:url(../images/logo.png);background-size:157px auto;width:157px;height:32px;position: absolute;top:50%;margin-top:-16px;left:20px;}
+.header .phone {background:url(../images/phone.png);background-size:101px auto;width:101px;height:19px;position: absolute;top:50%;margin-top:-9px;right:20px;}
+/*--//End--*/
+.am-slider-a4 {width:100%;float: left;margin-bottom:0;padding:7px 0;border-bottom:1px #000 solid;box-shadow: none;}
+.am-slider-a4 .am-control-nav {bottom:20px;}
+.am-slider-a4 .am-control-nav li a {-webkit-border-radius:0;background:#fff;}
+.am-slider-a4 .am-control-nav li a.active {background:#c90;}
+/*--//End--*/
+h2.title {width:100%;float: left;text-align: center;font-weight:normal;padding-top:30px;font-size: 2.4rem;margin-top:0;}
+.passperson {width:100%;padding-bottom:40px;border-bottom:1px #000 solid;float: left;}
+.passperson .list-pep {width:100%;float:left;padding:0 10px;box-shadow: none;}
+.passperson .list-pep ul {width:100%;float:left;padding-left: 0;}
+.passperson .list-pep .item {width:49%;padding-bottom:20px;float: left;border:1px #000 solid;margin-left:1%;}
+.passperson .list-pep .item img {width:100%;border-bottom:1px #000 solid;float: left;}
+.passperson .list-pep .item .info {height:88px;padding:0 5px;float: left;overflow: hidden;}
+.passperson .list-pep .item .info p {width:100%;line-height:20px;font-size:0.8rem;float: left;margin: 0;color:#000;}
+.passperson .list-pep .item .info strong {width:100%;line-height:28px;font-size:1.2rem;float: left;text-align:right;color:#000;}
+.passperson .am-control-nav {bottom:-15px;margin-left:-10px;}
+/*--//End--*/
+.product {width:100%;float: left;position: relative;}
+.product .list-pep {width:100%;padding:0 10px;float: left;}
+.product .list-pep ul {width:100%;float:left;padding-left: 0;margin-bottom:40px;position:relative;}
+.product .list-pep li {width:49%;float: left;margin-bottom:15px;border:1px #000 solid;}
+.product .list-pep .tbar {height:33px;line-height:33px;font-size:1.2rem;text-align: center;padding-bottom:0;}
+.product .list-pep .item img {width:100%;border-bottom:1px #000 solid;float: left;}
+.product .list-pep .item .info {width:100%;padding:0 10px;float: left;}
+.product .list-pep .item .info strong {width:100%;font-size:1.2rem;float: left;padding:8px 0 20px 0;text-align:right;color:#000;font-weight:normal;}
+.product .list-pep .dot {background:url(../images/dot.png) repeat;width:100%;position: absolute;top:0;left:0;}
+/*--//End--*/
+footer {width:100%;float: left;position:relative;padding:54px 0;border-top:1px #333 solid;}
+footer .logo {background:url(../images/foot-logo.png);background-size:212px auto;width:212px;height:48px;position: absolute;top:50%;margin-top:-24px;left:50%;margin-left:-106px;}
+/*--//End--*/
+.overlay {width:55%;padding:10px;position:absolute;top:320px;left:50%;margin-left:-27%;background:#fff;box-shadow:0 0 30px  rgba(0, 0, 0, 0.8);}
+.overlay .box-bd {width:100%;float: left;border:1px #000 solid;padding:20px 0;}
+.overlay .tbar {width:100%;float: left;margin-bottom:22px;}
+.overlay .tbar p {text-align: center;margin:0;font-size: 0.9rem;}
+.overlay .wechat {width:100%;float: left; text-align: center;}
+.overlay .wechat i {width:100%;float: left;}
+.overlay .wechat .icon1 {width:110px;height: 123px;display: inline-block;}
+.overlay .wechat .img {width:100%;float: left;text-align: center;}
+.overlay .wechat .img img {width:70%;display: inline;}
+.overlay .wechat .icon2:before {content:"";background: url(../images/icon2.png) no-repeat 0 0;background-size:118px auto;width:118px;height: 196px;display: inline-block;margin-top:20px;margin-left:-6px;}
+/*--//End--*/
+@media (max-width: 320px){
+	.passperson .list-pep .item .info {height:108px;}
+	.product .list-pep .item img {height:146px;}
+}
+@media (min-width:375px) {
+	.product .list-pep .item img {height:173px;}
+}

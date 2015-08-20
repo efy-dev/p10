@@ -374,7 +374,7 @@
             </activation>
         </profile>
         <profile>
-            <id>ec-develop2</id>
+            <id>dev-efc</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
