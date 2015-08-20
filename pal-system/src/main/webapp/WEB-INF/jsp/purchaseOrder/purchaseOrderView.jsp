@@ -13,6 +13,18 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript">
+        function showDiv(){
+            var pf=document.getElementById("productForm");
+            pf.setAttribute("style","display");
+        }
+//        function hideDiv(){
+//            var f = document.getElementById("selectProduct");
+////            var pf=document.getElementById("productForm");
+////            pf.setAttribute("style","display:none");
+//            f.submit();
+//        }
+    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -47,6 +59,20 @@
                 <c:if test="${object.status == '9'}">
                     <font color="red">已发货</font>
                 </c:if>
+                <c:if test="${object.status != '9'}">
+                    <c:if test="${not empty object.purchaseOrderLabelList}">
+                        <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
+                               type="button" class="am-btn am-btn-default am-btn-xs"
+                               style="width: 80px;margin-left:4px;height: 30px;"
+                               value="支付" />
+                    </c:if>
+                    <c:if test="${not empty object.purchaseOrderPaymentList}">
+                        <input onclick="window.location.href='<c:url value="/order/deliverGoods.do?orderId=${object.id}"/>'"
+                               type="button" class="am-btn am-btn-default am-btn-xs"
+                               style="width: 80px;margin-left:4px;height: 30px;"
+                               value="发货" />
+                    </c:if>
+                </c:if>
             </td>
         </tr>
         <tr>
@@ -58,23 +84,52 @@
 
 <div style="text-align: left;margin-left: 10px;" >
     <c:if test="${object.status != '9'}">
-        <input onclick="window.location.href='<c:url value="/purchaseOrderLabel/newPurchaseOrderLabel.do?orderId=${object.id}"/>'"
+        <input onclick="showDiv()"
                type="button" class="am-btn am-btn-default am-btn-xs"
                style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
                value="选择商品" />
-        <c:if test="${not empty object.purchaseOrderLabelList}">
-            <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
-                   type="button" class="am-btn am-btn-default am-btn-xs"
-                   style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-                   value="支付" />
-        </c:if>
-        <c:if test="${not empty object.purchaseOrderPaymentList}">
-            <input onclick="window.location.href='<c:url value="/order/deliverGoods.do?orderId=${object.id}"/>'"
-                   type="button" class="am-btn am-btn-default am-btn-xs"
-                   style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-                   value="发货" />
-        </c:if>
     </c:if>
+    <%--<c:if test="${object.status != '9'}">--%>
+        <%--<input onclick="window.location.href='<c:url value="/purchaseOrderLabel/newPurchaseOrderLabel.do?orderId=${object.id}"/>'"--%>
+               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+               <%--style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"--%>
+               <%--value="选择商品" />--%>
+    <%--</c:if>--%>
+</div>
+
+<div class="am-g" id="productForm" style="display:none">
+    <form id="selectProduct" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
+        <input type="hidden" name="id">
+        <input type="hidden" name="status" value="1" />
+        <input type="hidden" name="purchaseOrder.id" value="${object.id}">
+
+        <div class="am-form-group" style="child-align: left">
+            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small style="color: red">*</small></label>
+            <div class="am-u-sm-9" style="margin-left: 0px">
+                <input id="product_idName" placeholder="商品名称"
+                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}')" required>
+                <input type="hidden" id="product_id"  name="product.id" >
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <label name="amount" for="amount" class="am-u-sm-3 am-form-label"  style="width: auto">数量 <small style="color: red">*</small></label>
+            <div class="am-u-sm-9" style="margin-left: 0px">
+                <input type="number" name="amount" id="amount" placeholder="数量" required style="width: auto">
+            </div>
+        </div>
+
+        <%--<div class="am-form-group">--%>
+            <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
+                <%--<input type="button" class="am-btn am-btn-primary" onclick="hideDiv()" value="保存"/>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+            </div>
+        </div>
+    </form>
 </div>
 
 <c:if test="${not empty object.purchaseOrderLabelList}">
@@ -159,7 +214,9 @@
                         </td>
                     </c:if>
                     <td>${pop.purchaseOrder.serial}</td>
-                    <td>${pop.payWay}</td>
+                    <td>
+                        <ming800:status name="payWay" dataType="PCPurchaseOrderPayment.payWay" checkedValue="${pop.payWay}" type="normal" />
+                    </td>
                     <td><fmt:formatDate value="${pop.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 </tr>
             </c:forEach>

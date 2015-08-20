@@ -8,6 +8,6 @@ import com.efeiyi.pal.label.model.LabelBatch;
 
 public interface LabelBuildService {
 
-    void buildLabelSetByLabelBatch(LabelBatch labelBatch);
+    void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception;
 
 }

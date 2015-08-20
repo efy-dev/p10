@@ -81,18 +81,22 @@ public class TenantController {
             tenant.getProductSeriesSet().add(productSeries);
             baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
 
-            modelMap.put("object", tenant);
-            String resultPage = "/tenant/tenantView";
-            return new ModelAndView(resultPage);
-        } else {
-            String message = "该商品系列已存在!请重新选择";
-
-            modelMap.put("tenant", tenant);
-            modelMap.put("message", message);
-            String resultPage = "/tenant/tenantProductSeriesForm";
-            return new ModelAndView(resultPage);
+//            modelMap.put("object", tenant);
+//            String resultPage = "/tenant/tenantView";
+//            return new ModelAndView(resultPage);
         }
+//        else {
+//            String message = "该商品系列已存在!请重新选择";
+//
+//            modelMap.put("tenant", tenant);
+//            modelMap.put("message", message);
+//            String resultPage = "/tenant/tenantProductSeriesForm";
+//            return new ModelAndView(resultPage);
+//        }
 
+        modelMap.put("object", tenant);
+        String resultPage = "/tenant/tenantView";
+        return new ModelAndView(resultPage);
 
     }
 
