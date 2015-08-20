@@ -44,11 +44,37 @@ $(function(){
         var simgLi=$('.preview .slider-img li');
         var BimgLi=$('.preview .slider-main li');
         var index=0;
-        simgLi.click(function(){
+        var timer=null;
+        var iSpeed=3000;
+        simgLi.mousedown(function(){
+            clearInterval(timer);
             index=$(this).index();
             BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
             $(this).addClass('active').siblings('li').removeClass('active');
         });
+        simgLi.mouseup(function(){
+            timer=setInterval(autoRun,iSpeed);
+        })
+        timer=setInterval(autoRun,iSpeed);
+        //自动轮播
+        function autoRun(){
+            index++;
+            if(index>simgLi.length-1){
+                index=0;
+            }
+            BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
+            simgLi.eq(index).addClass('active').siblings('li').removeClass('active');
+        }
+        //收藏
+        $('.preview .collect .icon').hover(function(){
+            $(this).siblings('.hover').show();
+
+        },function(){
+            $(this).siblings('.hover').hide();
+        });
+        $('.preview .collect .icon').click(function(){
+            $(this).siblings('.active').show();
+        })
         //固定导航
         $(window).scroll(function(){
             var d=$(document).scrollTop();
@@ -59,6 +85,25 @@ $(function(){
             }
         });
         $('.product-intro .detail .part:last').css({'border':'0'});
+
+
+        $('.tab-items li a').click(function(){
+            var pos=$(this).attr('id');
+            $("html,body").animate({scrollTop: pos}, 1000);
+        })
+
+        //function goto(elements) {
+        //    var pos = 0;
+        //    if (elements !== "") {
+        //        // 定义将要去的描点位置
+        //        pos = $(elements).offset().top;
+        //    }
+        //    $("html,body").animate({scrollTop: pos-20}, 1000);
+        //}
+
+
+
+
 
     })();
 })
