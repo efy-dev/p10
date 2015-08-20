@@ -21,9 +21,9 @@ public class ProductModel implements Serializable {
     private Integer amount; //库存
     private List<ProductPropertyValue> productPropertyValueList; //属性值
     private String status;
-    private Integer recommendIndex;
+  //  private Integer recommendIndex;
 
-    @Column(name = "recommend_index")
+  /*  @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;
     }
@@ -31,7 +31,7 @@ public class ProductModel implements Serializable {
     public void setRecommendIndex(Integer recommendIndex) {
         this.recommendIndex = recommendIndex;
     }
-
+*/
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")

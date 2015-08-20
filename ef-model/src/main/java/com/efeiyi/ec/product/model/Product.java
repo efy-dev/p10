@@ -110,7 +110,7 @@ public class Product implements Serializable{
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    @Where(clause = "status=1")
+    @Where(clause = "status!=0")
     @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;

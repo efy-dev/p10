@@ -25,8 +25,9 @@
                 </do>
                 <do name="viewProduct" label="商品详情" access="" result="/product/productView" />
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
-                <do name="formProduct" label="保存产品页" access="" result="/product/productForm" />
-                <do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess" />
+                <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.formProductHandler" />
+                <do name="saveOrUpdateProduct" label="保存产品" access=""
+                     result="/product/productSaveSuccess"  execute="com.efeiyi.ec.system.product.controller.productHandler"  />
                 <do name="listProduct" label="产品列表" access="" result="/product/productList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1" operation="eq"/>-->
@@ -77,6 +78,30 @@
                 <do name="removeProductTenantCatalogValue" label="删除产品描述" access="" result="json"/>
             </does>
         </entity>
+
+        <entity name="ProductPicture" label="产品图片"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.ProductPicture">
+            <does>
+                <do name="plistProductPicture" access="" label="产品图片分页列表"
+                    result="/productPicture/productPicturePList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="content" defaultValue="1" operation="eq" />
+                    </query>
+                </do>
+                <do name="removeProductPicture" label="删除产品图片" access="" result="json"/>
+                <do name="formProductPicture" label="保存产品描述页" access="" result="/productPicture/productPicturenForm" />
+                <do name="saveOrUpdateProductPicture" label="保存产品描述" access="" result="/productPicture/productPictureSaveSuccess"
+                    execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
+                <do name="listProductPicture" label="产品描述列表" access="" result="/productPicture/productPictureList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
 
     </entities>
 </module>

@@ -20,6 +20,7 @@ public class CartProduct implements Serializable {
     private ProductModel productModel;
     private Integer amount;
     private String status;
+    private String isChoose;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -73,5 +74,14 @@ public class CartProduct implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "is_choose")
+    public String getIsChoose() {
+        return isChoose;
+    }
+
+    public void setIsChoose(String isChoose) {
+        this.isChoose = isChoose;
     }
 }
