@@ -71,8 +71,8 @@ public class CouponBatchController extends BaseController {
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);
 //            String serial = RandomStringUtils.randomNumeric(10);
-            Long serial = autoSerialManager.nextSerial("systemAutoSerial");
-            coupon.setSerial(serial+"");
+            String serial = autoSerialManager.nextSerial("systemAutoSerial");
+            coupon.setSerial(serial);
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
         return "redirect:/basic/xm.do?qm=plistCouponBatch_default";
