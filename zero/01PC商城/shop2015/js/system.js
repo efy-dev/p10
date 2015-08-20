@@ -97,8 +97,15 @@ $(function(){
             return false;
         })
     })();
-})
-
-$(function(){
-
+    //注册--协议
+    (function(){
+        $('#protocol').click(function(){
+            $('.thickframe').show();
+            return false;
+        })
+        $('#closeBox,.btnt .btn-img').click(function(){
+            $('.thickframe').hide();
+            return false;
+        })
+    })();
 })

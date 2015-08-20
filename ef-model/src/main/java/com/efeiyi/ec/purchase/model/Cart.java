@@ -3,7 +3,9 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="purchase_cart")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Cart {
     private String id;
     private List<CartProduct> cartProductList;
@@ -34,7 +37,9 @@ public class Cart {
         this.id = id;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "cart")
+    @Where(clause = " status=1 ")
     public List<CartProduct> getCartProductList() {
         return cartProductList;
     }

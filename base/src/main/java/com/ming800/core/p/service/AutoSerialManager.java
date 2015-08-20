@@ -9,6 +9,6 @@ package com.ming800.core.p.service;
  */
 public interface AutoSerialManager {
    // String nextAutoSerial(String model);
-    Long nextSerial(String group)throws Exception;
+    String nextSerial(String group)throws Exception;
 
 }
