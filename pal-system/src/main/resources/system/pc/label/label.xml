@@ -39,27 +39,27 @@
             <does>
 
                 <do name="plistLabel" access="" label="标签分页列表" result="/label/labelPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="labelBatch.id" defaultValue="" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
-                    <query name="all" label="默认" type="auto" orderBy="id:desc">
+                    <query name="all" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
-                    <query name="defaultSerial" label="默认" type="auto" orderBy="id:desc">
+                    <query name="defaultSerial" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="labelBatch.id" defaultValue="" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="serial" defaultValue="" operation="eq"/>
                     </query>
-                    <query name="allSerial" label="默认" type="auto" orderBy="id:desc">
+                    <query name="allSerial" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="serial" defaultValue="" operation="eq"/>
                     </query>
-                    <query name="orderLabel" label="默认" type="auto" orderBy="id:desc">
+                    <query name="orderLabel" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="purchaseOrderLabel.id" defaultValue="" operation="eq"/>

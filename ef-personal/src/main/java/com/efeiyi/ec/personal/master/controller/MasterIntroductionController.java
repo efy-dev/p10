@@ -1,8 +1,8 @@
 package com.efeiyi.ec.personal.master.controller;
 
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterIntroductionAttachment;
 import com.efeiyi.ec.master.model.MasterIntroduction;
-import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class MasterIntroductionController extends BaseMasterController {
      */
     @RequestMapping("/intro")
     public String listTenantIntroduction( Model model, HttpServletRequest request ) throws Exception{
-        Tenant tenant = getTenantfromDomain(request);
+        Master tenant = getMasterfromDomain(request);
         //拼写查询参数(conditions)
         String conditions = "introduction.master.id:"+tenant.getId();
 

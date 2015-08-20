@@ -18,100 +18,115 @@
     <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
-<div style="text-align: left">
-    <c:if test="${empty level}">
-        <input onclick="window.location.href='<c:url
-                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=1"/>'"
-               type="button" class="am-btn am-btn-default am-btn-xs"
-               style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建类别"/>
-    </c:if>
-    <c:if test="${not empty level}">
-        <input onclick="window.location.href='<c:url
-                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${level}"/>'"
-               type="button" class="am-btn am-btn-default am-btn-xs"
-               style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建类别"/>
-    </c:if>
-</div>
-<div class="am-u-sm-12">
-<table class="am-table am-table-bordered am-table-radius am-table-striped">
-    <tr style="text-align: left">
-        <td>操作</td>
-        <td width="">类别名称</td>
-        <td width="">类别编号</td>
-    </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+        </div>
+        <div class="am-u-sm-12">
 
-        <tr id="${projectCategory.id}">
-            <td width="20%">
-                <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;">
-                        <button style="margin-left: 70px;" onclick="window.location.href='<c:url
-                                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
-                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                class="am-icon-edit"></span> 编辑
-                        </button>
-                        <button onclick="window.location.href='<c:url
-                                value="/basic/xm.do?qm=removeProjectCategory&id=${projectCategory.id}"/>'"
-                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                class="am-icon-trash-o"></span> 删除
-                        </button>
-                        <c:if test="${empty projectCategory.projectCategoryRecommendeds}">
-                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                               onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do"/>')"
-                               href="#" recommend="1" recommendedId="${projectCategory.id}" id="">
-                                <span class="am-icon-heart"> 推荐</span>
-                            </a>
+            <div>
+                <c:if test="${empty level}">
+                    <input onclick="window.location.href='<c:url
+                            value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=1"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+                           value="新建类别"/>
+                </c:if>
+                <c:if test="${not empty level}">
+                    <input onclick="window.location.href='<c:url
+                            value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${level}"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+                           value="新建类别"/>
+                </c:if>
+            </div>
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-bordered am-table-radius am-table-striped">
+                    <tr>
+                        <td>操作</td>
+                        <td>类别名称</td>
+                        <td>类别编号</td>
+                    </tr>
+
+                    <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
+
+                        <tr id="${projectCategory.id}">
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;">
+                                        <button style="margin-left: 70px;" onclick="window.location.href='<c:url
+                                                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
+                                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                                class="am-icon-edit"></span> 编辑
+                                        </button>
+                                        <button onclick="window.location.href='<c:url
+                                                value="/basic/xm.do?qm=removeProjectCategory&id=${projectCategory.id}"/>'"
+                                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                class="am-icon-trash-o"></span> 删除
+                                        </button>
+                                        <c:if test="${empty projectCategory.projectCategoryRecommendeds}">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                               onclick="recommended(this,1,'<c:url
+                                                       value="/Recommended/deleteObjectRecommended.do"/>')"
+                                               href="#" recommend="1" recommendedId="${projectCategory.id}" id="">
+                                                <span class="am-icon-heart"> 推荐</span>
+                                            </a>
 
 
-                        </c:if>
-                        <c:if test="${not empty projectCategory.projectCategoryRecommendeds}">
-                            <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">
-                                <c:if test="${recommended.projectCategory.id == projectCategory.id}">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="#" onclick="recommended(this,1,'<c:url
-                                            value="/Recommended/deleteObjectRecommended.do"/>')"
-                                       recommendedId="${projectCategory.id}" id="${recommended.id}" recommend="0">
-                                        <span class="am-icon-heart">取消推荐 </span>
-                                    </a>
-                                </c:if>
-                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${not empty projectCategory.projectCategoryRecommendeds}">
+                                            <c:forEach var="recommended"
+                                                       items="${projectCategory.projectCategoryRecommendeds}">
+                                                <c:if test="${recommended.projectCategory.id == projectCategory.id}">
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="recommended(this,1,'<c:url
+                                                            value="/Recommended/deleteObjectRecommended.do"/>')"
+                                                       recommendedId="${projectCategory.id}" id="${recommended.id}"
+                                                       recommend="0">
+                                                        <span class="am-icon-heart">取消推荐 </span>
+                                                    </a>
+                                                </c:if>
+                                            </c:forEach>
 
-                        </c:if>
+                                        </c:if>
                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value=""/>
                                                 <a class=" am-btn-primary"
-                                                   onclick="saveRecommended(this,'projectCategoryRecommended',1,'<c:url
+                                                   onclick="saveRecommended(this,'projectRecommended',1,'<c:url
                                                            value="/Recommended/saveObjectRecommended.do"/>')"
                                                    style="padding: 0px 10px 5px 10px"> 保存</a>
                                        </span>
-                    </div>
-                </div>
-            </td>
-            <td width="10%">
-                <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
-                        ${projectCategory.name}
-                </a>
-                <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">
-                    <c:if test="${recommended.projectCategory.id == projectCategory.id}" >
-                        <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
-                    </c:if>
-                </c:forEach>
-            </td>
-            <td>
-                    ${projectCategory.serial}
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-    </div>
-<div style="clear: both">
-    <c:url value="/basic/xm.do" var="url"/>
-    <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
-        <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
-        <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-    </ming800:pcPageList>
-</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&view=plist&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
+                                        ${projectCategory.name}
+                                </a>
+                                <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">
+                                    <c:if test="${recommended.projectCategory.id == projectCategory.id}">
+                                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                    ${projectCategory.serial}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+            <div style="clear: both">
+                <c:url value="/basic/xm.do" var="url"/>
+                <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
+                    <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+                    <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+                </ming800:pcPageList>
+            </div>
 
+        </div>
+    </div>
+</div>
 </body>
 </html>

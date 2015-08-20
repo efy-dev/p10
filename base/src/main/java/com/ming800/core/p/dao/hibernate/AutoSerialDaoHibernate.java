@@ -17,8 +17,8 @@ import java.util.LinkedHashMap;
  */
 @Repository
 public class AutoSerialDaoHibernate extends BaseDaoSupport<AutoSerial> implements AutoSerialDao {
-    public Long getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap){
+    public AutoSerial getAutoSerial(String queryStr, LinkedHashMap<String, Object> queryParamMap){
         Query query = this.getSession().createQuery(queryStr).setString("groupName", queryParamMap.get("groupName").toString());
-        return (Long) query.uniqueResult();
+        return (AutoSerial) query.uniqueResult();
     }
 }
