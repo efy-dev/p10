@@ -28,7 +28,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
 
     @Autowired
     private CommonManager commonManager;
-    protected  static Stack<AutoSerial> updateSerials = new Stack<AutoSerial>();
+    protected  static Stack<Long> updateSerials = new Stack<Long>();
  /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
         String queryStr = "from AutoSerial where model = :model and branch.id = :branchId order by serial desc";
@@ -59,20 +59,17 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         if (updateSerials.empty()){
             makeSerials( group);
         }
-        AutoSerial autoserial = updateSerials.pop();
-        Long serial = autoserial.getSerial();
-       return serial;
+       return updateSerials.pop();
     }
 
     private void makeSerials(String group) throws Exception{
-        CommonSerial commonSerial =null;
-//                commonManager.getAutoSerial(group);//获取xml配置对象
+        CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
         //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
-        String queryStr = "select max(serial) from AutoSerial where groupName= :groupName";
+        String queryStr = "from AutoSerial where groupName= :groupName";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("groupName", group);
-        Long autoSerial = autoSerialDao.getAutoSerial(queryStr, queryParamMap);
+        AutoSerial autoSerial = autoSerialDao.getAutoSerial(queryStr, queryParamMap);
 
         //默认一次生成10个序列号
         int size =10;
@@ -89,21 +86,25 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             step = Integer.parseInt(commonSerial.getStep());
         }
         Long begin= Long.parseLong(makeChar(length));
-        if (autoSerial==null || autoSerial==0){
+        if (autoSerial==null){
             for (int i=1;i<=size;i++){
-                AutoSerial autoserial = new AutoSerial();
-                autoserial.setSerial(begin+i*step);
-                autoserial.setGroup(group);
-                autoSerialDao.saveOrUpdateObject(autoserial);
-                updateSerials.push(autoserial);
+                Long serial= begin+i*step;
+                if(i==size){
+                    autoSerial = new AutoSerial();
+                    autoSerial.setGroup(group);
+                    autoSerial.setSerial(serial);
+                    autoSerialDao.saveOrUpdateObject(autoSerial);
+                }
+                updateSerials.push(serial);
             }
         }else{
             for (int i=1;i<=size;i++){
-                AutoSerial autoserial = new AutoSerial();
-                autoserial.setSerial(autoSerial+i*step);
-                autoserial.setGroup(group);
-                autoSerialDao.saveOrUpdateObject(autoserial);
-                updateSerials.push(autoserial);
+                Long serial = autoSerial.getSerial()+i*step;
+                if (i==size){
+                    autoSerial.setSerial(serial);
+                    autoSerialDao.saveOrUpdateObject(autoSerial);
+                }
+                updateSerials.push(serial);
             }
         }
 

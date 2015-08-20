@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <common>
-    <!-- 推荐 -->
-    <!--<recommends>-->
-        <!--<recommend group="masterSkillRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="技艺大师推荐" amount="12"/>-->
-        <!--<recommend group="masterArtRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="美术大师推荐" amount="9" />-->
-        <!--<recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="3" />-->
-    <!--</recommends>-->
+    <autoserials>
+        <autoserial group="palLabelSerial" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="500" step="1" />
+    </autoserials>
 </common>

@@ -13,6 +13,12 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript">
+        function showDiv(){
+            var psf=document.getElementById("selectPS");
+            psf.setAttribute("style","display");
+        }
+    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -35,10 +41,34 @@
 </div>
 
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/tenant/selectProductSeries.do?tenantId=${object.id}"/>'"
+    <input onclick="showDiv()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
            value="选择商品系列"/>
+    <%--<input onclick="window.location.href='<c:url value="/tenant/selectProductSeries.do?tenantId=${object.id}"/>'"--%>
+           <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+           <%--style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"--%>
+           <%--value="选择商品系列"/>--%>
+</div>
+
+<div class="am-g" id="selectPS" style="display:none">
+    <form action="<c:url value='/tenant/saveTenantProductSeries.do'/>" method="post" class="am-form am-form-horizontal">
+        <input type="hidden" name="tenant.id" value="${object.id}">
+
+        <div class="am-form-group">
+            <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">商品系列 <small style="color: red">*</small></label>
+            <div class="am-u-sm-9">
+                <input id="productSeries_idName" placeholder="商品系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" required>
+                <input type="hidden" id="productSeries_id"  name="productSeries.id">
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+            </div>
+        </div>
+    </form>
 </div>
 
 <c:if test="${!empty object.productSeriesSet}">
