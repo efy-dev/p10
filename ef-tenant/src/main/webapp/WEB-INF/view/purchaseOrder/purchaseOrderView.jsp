@@ -8,78 +8,178 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
 </head>
 <body>
-<div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单详情</strong> / <small>Order Details</small></div>
-</div>
 <hr/>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>订单信息</h2>
+        <table class="am-table am-table-bordered">
+            <tbody>
+            <tr>
+                <td class="am-primary am-u-md-3">订单号</td>
+                <td class="am-u-md-3">${object.serial}</td>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3">
+                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">收货人</td>
+                <td class="am-u-md-3">
+                    ${object.user.name}
+                </td>
+                <td class="am-primary am-u-md-3">收货地址</td>
+                <td class="am-u-md-3">${object.consumerAddress.details}</td>
+
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">总计（元）</td>
+                <td class="am-u-md-3">${object.total}</td>
+                <td class="am-primary am-u-md-3">交易状态</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${object.orderStatus}" type="normal"  />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="am-g">
-    <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="">
-        <div class="am-form-group">
-            <label name="serial" class="am-u-sm-3 am-form-label">订单号</label>
-            <div class="am-u-sm-9">
-                <div style="margin-top: 9px;">${object.serial}</div>
-                <!--<small>必填项*</small>-->
-            </div>
-        </div>
-        <div class="am-form-group">
-        <label name="createDatetime" class="am-u-sm-3 am-form-label">下单时间</label>
-        <div class="am-u-sm-9">
-            <div style="margin-top: 9px;">
-             <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
-            </div>
-            <!-- <small>必填项*</small>-->
-        </div>
+    <div class="am-u-md-12">
+        <h2>支付信息</h2>
     </div>
-        <div class="am-form-group">
-            <label name="createDatetime" class="am-u-sm-3 am-form-label">购买物品</label>
-            <div class="am-u-sm-9">
-                <div style="margin-top: 9px;">
-                <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct">
-                    <span style="margin-left: 5px;">${purchaseOrderProduct.product.name}</span>
-                </c:forEach>
-                </div>
-                <!-- <small>必填项*</small>-->
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="userName"  class="am-u-sm-3 am-form-label">收货人</label>
-            <div class="am-u-sm-9">
-                <div style="margin-top: 9px;">${object.user.name}</div>
-                <!-- <small>必填项*</small>-->
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="payWay"  class="am-u-sm-3 am-form-label">支付方式</label>
-            <div class="am-u-sm-9">
-                <c:if test="${object.payWay==1}">
-                    <div style="margin-top: 9px;">支付宝支付</div>
-                </c:if>
-                <c:if test="${object.payWay==2}">
-                <div style="margin-top: 9px;">微信支付</div>
-                </c:if>
-                <!-- <small>必填项*</small>-->
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="userAddress" class="am-u-sm-3 am-form-label">用户地址</label>
-            <div class="am-u-sm-9" >
-               <div style="margin-top: 9px;">${object.consumerAddress.details}</div>
-                <!-- <small>必填项*</small>-->
-            </div>
-        </div>
-       <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="button" onclick="window.location.href='/basic/xm.do?qm=plistPurchaseOrder_default'" class="am-btn am-btn-primary" value="返回"/>
-            </div>
-        </div>
-    </form>
+
+    <div class="am-u-md-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">支付号</th>
+                <th class="table-title">支付时间</th>
+                <th class="table-title">支付金额(元)</th>
+                <th class="table-title">支付方式</th>
+                <th class="table-title">支付人</th>
+                <th class="table-title">支付记录编号</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment">
+                <tr>
+                    <td class="am-hide-sm-only">
+                        ${purchaseOrderPayment.transactionNumber}
+                    </td>
+                    <td class="am-hide-sm-only">
+                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                    </td>
+                    <td class="am-hide-sm-only">
+                            ${purchaseOrderPayment.paymentAmount}
+                    </td>
+                    <td class="am-hide-sm-only">
+                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay" checkedValue="${purchaseOrderPayment.payWay}" type="normal"  />
+                    </td>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.serial}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>订单分配</h2>
+    </div>
+
+    <div class="am-u-md-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">时间</th>
+                <th class="table-title">地址</th>
+                <th class="table-title">处理人</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery">
+                <tr>
+                    <td class="am-hide-sm-only">
+                        <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                    </td>
+                    <td class="am-hide-sm-only">
+                            ${purchaseOrderDelivery.consumerAddress.details}
+                    </td>
+                    <td class="am-hide-sm-only">
+                            ${purchaseOrderDelivery.consumerAddress.consumer.name}
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>商品清单</h2>
+    </div>
+    <div class="am-u-md-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-set">图片</th>
+                <th class="table-title">商品编号</th>
+                <th class="table-title">商品名称</th>
+                <th class="table-title">单价(元)</th>
+                <th class="table-title">数量</th>
+                <th class="table-title">实付款</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach var="purchaseOrderProduct" items="${object.purchaseOrderProductList}" >
+                <tr>
+                    <td>
+                        <img width="30px;" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo" alt="商品图片">
+                    </td>
+                    <td>
+                        <a href="#">
+                                ${purchaseOrderProduct.productModel.serial}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                                ${purchaseOrderProduct.productModel.product.name}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                                ${purchaseOrderProduct.productModel.price}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                                ${purchaseOrderProduct.purchaseAmount}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                                ${purchaseOrderProduct.purchasePrice}
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- content end -->
 <hr/>

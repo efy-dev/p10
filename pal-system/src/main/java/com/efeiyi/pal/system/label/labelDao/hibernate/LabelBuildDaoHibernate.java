@@ -3,6 +3,7 @@ package com.efeiyi.pal.system.label.labelDao.hibernate;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.label.model.LabelBatch;
 import com.efeiyi.pal.system.label.labelDao.LabelBuildDao;
+import com.ming800.core.p.service.AutoSerialManager;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.CacheMode;
 import org.hibernate.Session;
@@ -23,20 +24,23 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
     @Qualifier("sessionFactory")
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
+
     public Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
     @Override
-    public void buildLabelSetByLabelBatch(LabelBatch labelBatch) {
+    public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception{
         Session session = getSession();//使用同一个session
         session.setCacheMode(CacheMode.IGNORE);//关闭与二级缓存的交互
-        Transaction tx = session.beginTransaction();
+        //Transaction tx = session.beginTransaction();
         Integer flag = labelBatch.getAmount();
 
         for (int i = 1; i <= flag; i++) {
             String code = RandomStringUtils.randomNumeric(10);
-            Integer serial = i;
+            Long serial = autoSerialManager.nextSerial("palLabelSerial");
             Label label = new Label();
             label.setSerial(serial);
             label.setCode(code);
@@ -50,7 +54,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
                 session.clear();
             }
         }
-        tx.commit();
+       // tx.commit();
     }
 
 }

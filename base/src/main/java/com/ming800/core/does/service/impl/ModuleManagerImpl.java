@@ -8,6 +8,7 @@ import org.dom4j.io.SAXReader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.*;
@@ -20,7 +21,7 @@ import java.util.*;
  * Time: 下午2:35
  * To change this template use File | Settings | File Templates.
  */
-
+@Service
 public class ModuleManagerImpl implements ModuleManager {
 
     private static Map<String, Module> modulesMap = new HashMap<>();

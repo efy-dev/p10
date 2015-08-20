@@ -6,7 +6,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ef-master</artifactId>
+    <artifactId>ef-tenant</artifactId>
     <packaging>war</packaging>
     <name>ef-master Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -16,6 +16,13 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.efeiyi.ec</groupId>
+            <artifactId>base_resource</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.efeiyi.ec</groupId>
@@ -31,7 +38,35 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>ef-master</finalName>
-    </build>
+
+        <build>
+            <finalName>ef-tenant</finalName>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/WEB-INF/lib</outputDirectory>
+                                <overWriteReleases>false</overWriteReleases>
+                                <overWriteSnapshots>false</overWriteSnapshots>
+                                <overWriteIfNewer>true</overWriteIfNewer>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <packagingExcludes>${project.build.directory}/ef-tenant/*</packagingExcludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
 </project>

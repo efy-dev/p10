@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,11 +49,11 @@ public class CartController {
 
         for (Tenant tenantTemp : tenantListTemp) {
             boolean isContain = false;
-            for (Tenant tenant: tenantList){
-                if (tenant.getId().equals(tenantTemp.getId())){
+            for (Tenant tenant : tenantList) {
+                if (tenant.getId().equals(tenantTemp.getId())) {
                     isContain = true;
                     break;
-                }else {
+                } else {
                     isContain = false;
                 }
             }
@@ -63,12 +64,12 @@ public class CartController {
 
         for (Tenant tenant : tenantList) {
             List<Object> productList = new ArrayList<>();
-            for (CartProduct cartProduct : cartProductList){
-                if (cartProduct.getProductModel().getProduct().getTenant().getId().equals(tenant.getId())){
+            for (CartProduct cartProduct : cartProductList) {
+                if (cartProduct.getProductModel().getProduct().getTenant().getId().equals(tenant.getId())) {
                     productList.add(cartProduct);
                 }
             }
-            productMap.put(tenant.getId(),productList);
+            productMap.put(tenant.getId(), productList);
         }
 
         model.addAttribute("tenantList", tenantList);
@@ -142,6 +143,16 @@ public class CartController {
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
         cartProduct.setAmount(cartProduct.getAmount() + 1);
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
         return cartProduct;
     }
 
@@ -154,7 +165,56 @@ public class CartController {
             cartProduct.setAmount(cartProduct.getAmount() - 1);
         }
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
         return cartProduct;
+    }
+
+    @RequestMapping({"/cart/chooseProduct.do"})
+    public Object chooseProduct(HttpServletRequest request) {
+        String cartProductId = request.getParameter("cartProductId");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        cartProduct.setIsChoose("1"); //1代表选中
+        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cart;
+
+    }
+
+    @RequestMapping("/cart/cancelChooseProduct.do")
+    public Object cancelChooseProduct(HttpServletRequest request) {
+        String cartProductId = request.getParameter("cartProductId");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        cartProduct.setIsChoose("0"); //0代表取消选中
+        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cart;
     }
 
 

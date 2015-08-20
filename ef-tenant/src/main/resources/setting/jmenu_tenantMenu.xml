@@ -61,16 +61,7 @@
             </jnode>
         </jnode>
 
-        <jnode id="wordValueManager" url="" text_zh_CN="字典管理"><!--系统管理-->
-            <jnode id="" url="/basic/xm.do?qm=plistWordValue_default" state="" extend="" access="" text_zh_CN="字典列表">
-                <match url="plistWordValue_default"/>
-                <match url="viewWordValue"/>
-                <match url="removeWordValue"/>
-                <match url="formWordValue"/>
-                <match url="saveOrUpdateWordValue"/>
-            </jnode>
 
-        </jnode>
     </jnode>
 </jmenu>
 

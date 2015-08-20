@@ -27,10 +27,10 @@ public class LabelDaoHibernate implements LabelDao {
     }
 
     @Override
-    public Integer getMinSerial() {
+    public Long getMinSerial() {
         String hql = "SELECT MIN(serial) FROM Label WHERE status = :status";
-        Query query = this.getSession().createSQLQuery(hql).setString("status", "1");
-        List<Integer> list= query.list();
+        Query query = this.getSession().createQuery(hql).setString("status", "1");
+        List<Long> list= query.list();
         if (list != null && list.size() >0){
             return list.get(0);
         }
@@ -38,12 +38,12 @@ public class LabelDaoHibernate implements LabelDao {
     }
 
     @Override
-    public List<Label> getLabelListByMinSerialAndSumProduct(Integer minSerial, Integer sumProduct) {
+    public List<Label> getLabelListByMinSerialAndSumProduct(Long minSerial, Integer sumProduct) {
         String hql = "From Label WHERE status = :status AND serial BETWEEN :minSerial AND :maxSerial";
         Query query = this.getSession().createQuery(hql)
                 .setString("status", "1")
-                .setInteger("minSerial", minSerial)
-                .setInteger("maxSerial", (minSerial + sumProduct - 1));
+                .setLong("minSerial", minSerial)
+                .setLong("maxSerial", (minSerial + sumProduct - 1));
         List<Label> list = query.list();
         return list;
     }
