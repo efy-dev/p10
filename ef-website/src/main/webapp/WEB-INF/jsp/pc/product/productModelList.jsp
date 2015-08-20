@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -51,8 +52,7 @@
       <p class="wh"><span class="zh">yan</span><span class="cn">${proName[1]}</span></p>
       <p class="wh"><span class="zh">yan</span><span class="cn">${proName[1]}</span></p>
     </div>
-    <div class="info">${project.description}</div>
-    <a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>
+    <div class="info">${project.description}></div>
   </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
@@ -88,14 +88,7 @@
   </c:if>
 
   <!-- //End--list-pro-->
-  <div class="page wh">
-    <ul class="am-pagination am-pagination-centered">
-      <li class="bigRound"><a href="">«</a></li>
-      <li><a href="">1</a></li>
-      <li class="am-active"><a href="#">2</a></li>
-      <li class="am-disabled bigRound"><a href="#">»</a></li>
-    </ul>
-  </div>
+
   <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
