@@ -1,3 +1,5 @@
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- //End--header-->
 <div class="hd shop">
@@ -46,134 +48,39 @@
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
-        <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
-          </a>
-        </li>
+        <c:forEach items="${productList}" var="product">
+          <li>
+            <a href="" target="_blank" title="">
+              <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
+              <p class="wh name">${product.name}</p>
+              <p class="wh price">￥1500000</p>
+            </a>
+          </li>
+        </c:forEach>
       </ul>
-
     </div>
     <!-- //End--list-pro-->
-    <div class="page wh">
+   <%-- <div class="page wh">
       <ul class="am-pagination am-pagination-centered">
         <li class="bigRound"><a href="">«</a></li>
         <li><a href="">1</a></li>
         <li class="am-active"><a href="#">2</a></li>
         <li class="am-disabled bigRound"><a href="#">»</a></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--page-->
+    <div class="page wh">
+      <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/listProduct">
+        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+        <ming800:pcPageParam name="conditions"
+                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+        <ming800:pcPageParam name="sort"
+                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+      </ming800:pcPageList>
+    </div>
   </div>
   <!-- //End---->
-
 </div>
+
 </body>
 </html>
