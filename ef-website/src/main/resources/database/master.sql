@@ -66,6 +66,8 @@ ADD COLUMN `unionid`  char(64) NULL AFTER `id`;
 
 
 #-------------------------------未执行----------------------------------
+ALTER TABLE `purchase_order`
+ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;
 
 CREATE TABLE `master` (
   `id` char(16) NOT NULL DEFAULT '',
@@ -116,6 +118,11 @@ ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
 
 ALTER TABLE `purchase_cart_product`
 ADD COLUMN `is_choose`  char(4) NULL AFTER `status`;
+
+ALTER TABLE `purchase_cart`
+ADD COLUMN `total_price`  decimal NULL AFTER `user_id`;
+
+
 
 ALTER TABLE `purchase_order_delivery`
 	ADD COLUMN `serial` varchar(16) NULL AFTER `status`;

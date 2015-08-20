@@ -23,6 +23,7 @@ public class Project {
     private String type; //类别 1.美术 2.技艺
     private Project fatherProject;//父id
     private ProjectCategory projectCategory;//类别
+    private String description ;
     private Date createDateTime;//忽略
     private List<Project> subProjectList;//子项目
     private List<ProjectTag> projectTagList;//项目标签
@@ -140,6 +141,15 @@ public class Project {
 
     public void setProjectPropertyList(List<ProjectProperty> projectPropertyList) {
         this.projectPropertyList = projectPropertyList;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     //    @Column(name="father_project_id")

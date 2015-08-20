@@ -34,7 +34,6 @@ public class CartProduct implements Serializable {
     }
 
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     public Cart getCart() {
@@ -45,7 +44,6 @@ public class CartProduct implements Serializable {
         this.cart = cart;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
     public ProductModel getProductModel() {
