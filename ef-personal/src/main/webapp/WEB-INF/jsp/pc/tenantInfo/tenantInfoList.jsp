@@ -47,24 +47,19 @@
                             </div>
                         </c:forEach>
                     </div>
+                    <div class="pages wh">
+                        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
+                            <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
+                            <ming800:pcPageParam name="conditions"
+                                                 value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+                            <ming800:pcPageParam name="sort"
+                                                 value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+                        </ming800:pcPageList>
+                    </div>
                 </c:if>
             </div>
         </div>
     </div>
-</div>
-
-
-
-
-
-<div class="wh">
-    <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/info/list">
-        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
-        <ming800:pcPageParam name="conditions"
-                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-        <ming800:pcPageParam name="sort"
-                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
-    </ming800:pcPageList>
 </div>
 <!--其他内容-->
 </body>
