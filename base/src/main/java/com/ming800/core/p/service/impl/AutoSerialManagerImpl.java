@@ -9,10 +9,7 @@ import com.ming800.core.p.service.CommonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,6 +26,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     @Autowired
     private CommonManager commonManager;
     protected  static Stack<Long> updateSerials = new Stack<Long>();
+    protected static Map<String,Stack> map = new HashMap<String,Stack>();
  /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
         String queryStr = "from AutoSerial where model = :model and branch.id = :branchId order by serial desc";
@@ -54,12 +52,17 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         return serial;
     }*/
 
-    public Long nextSerial(String group) throws Exception {
-        //为提高效率，没有严格区分序列号分组，默认不初始化序列号
-        if (updateSerials.empty()){
-            makeSerials( group);
-        }
-       return updateSerials.pop();
+    public String nextSerial(String group) throws Exception {
+       if(map.get(group) != null){
+           updateSerials = map.get(group);
+           if (updateSerials.empty()){
+               makeSerials( group);
+           }
+       }else{
+           makeSerials( group);
+       }
+
+       return updateSerials.pop().toString();
     }
 
     private void makeSerials(String group) throws Exception{
@@ -97,6 +100,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                 }
                 updateSerials.push(serial);
             }
+            map.put(group,updateSerials);
         }else{
             for (int i=1;i<=size;i++){
                 Long serial = autoSerial.getSerial()+i*step;
@@ -106,6 +110,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                 }
                 updateSerials.push(serial);
             }
+            map.put(group,updateSerials);
         }
 
     }

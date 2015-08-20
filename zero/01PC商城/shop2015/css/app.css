@@ -172,12 +172,17 @@ a:hover { color: #f00; text-decoration:underline;}
 .product-intro .am-breadcrumb li a { color:#999;font-family: simsun;}
 .product-intro .am-breadcrumb>li+li:before { content: ">";color:#000;}
 .product-intro .itemInfo {margin-top: 20px;background:#fff;}
-.product-intro .itemInfo .preview { float: left;}
+.product-intro .itemInfo .preview { float: left; position: relative;}
 .product-intro .itemInfo .preview .slider-img {width:60px; float: left; margin-top: 60px;}
 .product-intro .itemInfo .preview .slider-img li { margin-bottom:6px; cursor: pointer;}
 .product-intro .itemInfo .preview .slider-img li img {border:2px #ccc solid}
 .product-intro .itemInfo .preview .slider-img li.active img { border:2px #000 solid;}
 .product-intro .itemInfo .preview .slider-main {width:900px; height:800px; float: left; margin:0 28px; background:#f6f6f6; overflow: hidden;}
+
+.product-intro .itemInfo .preview .collect {width:36px;position: absolute;top:16px; right:40px}
+.product-intro .itemInfo .preview .collect .icon {background: url(../images/icon.png) no-repeat -244px -50px;width:32px; height:28px; float: left; margin-left:2px;margin-bottom:5px; cursor: pointer;}
+.product-intro .itemInfo .preview .collect span {width:36px; font-size:12px; float: left;text-align: center; display: none;}
+
 .product-intro .itemInfo .itme-ext {width:238px; float: left;}
 .product-intro .itemInfo .itme-ext .name { font-size:12px; margin-top: 15px; margin-bottom:25px;}
 .product-intro .itemInfo .itme-ext .name strong { font-size: 20px; font-weight: bold;}
@@ -219,8 +224,8 @@ a:hover { color: #f00; text-decoration:underline;}
 .product-intro .tab-wrap .tab-items li .icon { background-position:-133px -50px;width:10px; height:20px; display: inline-block; position: relative;top:5px; margin-left:10px;}
 .product-intro .tab-wrap .btns { float: right;}
 .product-intro .tab-wrap .btns .append {background:#000;color: #fff;padding:0 74px; height:42px; float: right;}
-.product-intro .tab-wrap .btns .append .icon { background-position: -143px -50px;width:21px; height:16px;top:3px; margin-left:0; margin-right:5px;}
-.product-intro .tab-wrap .btns .buy {padding:0 48px;float: right;}
+.product-intro .tab-wrap .btns .append .icon { background-position: -143px -50px;width:21px; height:16px; position: relative;top:3px; margin-left:0; margin-right:5px; display: inline-block;}
+.product-intro .tab-wrap .btns .buy {height:42px;padding:0 48px;float: right;}
 .product-intro .tab-wrap .btns .buy:hover {background:#000; color: #fff;}
 .product-intro .am-sticky-placeholder {background: none}
 .product-intro .detail { padding-bottom:70px; position: relative;}
