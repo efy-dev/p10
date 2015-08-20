@@ -44,7 +44,12 @@ public class M8idGenerator implements IdentifierGenerator, Configurable {
 
 
         Double numIds = Math.random();
-        String numIds3 = numIds.toString().substring(2, 14);
+        String numIds2 = numIds.toString();
+        numIds2 = numIds2.substring(numIds2.indexOf(".")+1,numIds2.length()-1);
+        if (numIds2.length()<=17){
+            numIds2 = fillWithZero(numIds2,17);
+        }
+        String numIds3 = numIds2.substring(1, 15);
         String numId = Long.toString(Long.parseLong(numIds3), 36);
 
         StringBuilder stringBuilder = new StringBuilder(16);

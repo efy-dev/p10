@@ -44,11 +44,42 @@ $(function(){
         var simgLi=$('.preview .slider-img li');
         var BimgLi=$('.preview .slider-main li');
         var index=0;
-        simgLi.click(function(){
+        var timer=null;
+        var iSpeed=3000;
+        simgLi.mousedown(function(){
+            clearInterval(timer);
             index=$(this).index();
             BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
             $(this).addClass('active').siblings('li').removeClass('active');
         });
+        simgLi.mouseup(function(){
+            timer=setInterval(autoRun,iSpeed);
+        })
+        timer=setInterval(autoRun,iSpeed);
+        //自动轮播
+        function autoRun(){
+            index++;
+            if(index>simgLi.length-1){
+                index=0;
+            }
+            BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
+            simgLi.eq(index).addClass('active').siblings('li').removeClass('active');
+        }
+        //收藏
+        var $add=$('.preview .collect .icon');
+        var $hover=$add.siblings('.hover');
+        var $active=$add.siblings('.active');
+        $add.hover(function(){
+            if($active.is(':hidden')){
+                $hover.show();
+            }else{
+                $hover.hide();
+            }
+        });
+        $add.click(function(){
+            $hover.hide();
+            $active.show();
+        })
         //固定导航
         $(window).scroll(function(){
             var d=$(document).scrollTop();
@@ -59,7 +90,12 @@ $(function(){
             }
         });
         $('.product-intro .detail .part:last').css({'border':'0'});
-
+        //描点
+        $('.tab-items li a').click(function(){
+            var pos=$($(this).attr('href')).offset().top;
+            $("html,body").animate({scrollTop:pos-75},500);
+            return false;
+        })
     })();
 })
 
