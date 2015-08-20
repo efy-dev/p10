@@ -66,14 +66,19 @@ $(function(){
             simgLi.eq(index).addClass('active').siblings('li').removeClass('active');
         }
         //收藏
-        $('.preview .collect .icon').hover(function(){
-            $(this).siblings('.hover').show();
-
-        },function(){
-            $(this).siblings('.hover').hide();
+        var $add=$('.preview .collect .icon');
+        var $hover=$add.siblings('.hover');
+        var $active=$add.siblings('.active');
+        $add.hover(function(){
+            if($active.is(':hidden')){
+                $hover.show();
+            }else{
+                $hover.hide();
+            }
         });
-        $('.preview .collect .icon').click(function(){
-            $(this).siblings('.active').show();
+        $add.click(function(){
+            $hover.hide();
+            $active.show();
         })
         //固定导航
         $(window).scroll(function(){
@@ -85,26 +90,12 @@ $(function(){
             }
         });
         $('.product-intro .detail .part:last').css({'border':'0'});
-
-
+        //描点
         $('.tab-items li a').click(function(){
-            var pos=$(this).attr('id');
-            $("html,body").animate({scrollTop: pos}, 1000);
+            var pos=$($(this).attr('href')).offset().top;
+            $("html,body").animate({scrollTop:pos-75},500);
+            return false;
         })
-
-        //function goto(elements) {
-        //    var pos = 0;
-        //    if (elements !== "") {
-        //        // 定义将要去的描点位置
-        //        pos = $(elements).offset().top;
-        //    }
-        //    $("html,body").animate({scrollTop: pos-20}, 1000);
-        //}
-
-
-
-
-
     })();
 })
 
