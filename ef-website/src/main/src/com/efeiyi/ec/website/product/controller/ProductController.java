@@ -35,7 +35,7 @@ public class ProductController {
     @RequestMapping(value = "/productList.do")
     public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
         String id = request.getParameter("id");
-        XQuery xQuery = new XQuery("listProduct_default",request);
+        XQuery xQuery = new XQuery("plistProduct_default",request);
         List productList = baseManager.listObject(xQuery);
         model.addAttribute("productList",productList);
         return  new ModelAndView("/product/productList",model);
@@ -101,7 +101,7 @@ public class ProductController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         model.addAttribute("productModel", productModel);
         return "/product/recommendationList";
-    }
+}
     /**
      * 删除收藏产品
      * @param request
