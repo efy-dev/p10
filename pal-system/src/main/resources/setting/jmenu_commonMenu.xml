@@ -13,10 +13,10 @@
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin,manager" text_zh_CN="订单管理">
                 <match url="plistPurchaseOrder_default"/>
                 <match url="listPurchaseOrder_default"/>
-                <!--<match url="formLabelBatch"/>-->
-                <!--<match url="viewLabel"/>-->
-                <!--<match url="removeLabelBatch"/>-->
-                <!--<match url="saveOrUpdateLabelBatch"/>-->
+                <match url="formPurchaseOrder"/>
+                <match url="viewPurchaseOrder"/>
+                <match url="removePurchaseOrder"/>
+                <match url="saveOrUpdatePurchaseOrder"/>
                 <!--<match url="plistLabel_all"/>-->
                 <!--<match url="plistLabel_default"/>-->
             </jnode>

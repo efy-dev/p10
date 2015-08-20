@@ -69,7 +69,7 @@ public class PurchaseOrderController {
      * @return
      */
     private List<Label> getLabelListBySumProduct(Integer sumProduct){
-        Integer minSerial = labelServiceManager.getMinSerial();
+        Long minSerial = labelServiceManager.getMinSerial();
         List<Label> list = labelServiceManager.getLabelListByMinSerialAndSumProduct(minSerial, sumProduct);
         return list;
     }

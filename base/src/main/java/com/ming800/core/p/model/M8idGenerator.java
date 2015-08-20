@@ -44,15 +44,15 @@ public class M8idGenerator implements IdentifierGenerator, Configurable {
 
 
         Double numIds = Math.random();
-        String numIds3 = numIds.toString().substring(2, 8);
+        String numIds3 = numIds.toString().substring(2, 11);//取integer最大长度-1，确保不会溢出
         String numId = Integer.toString(Integer.parseInt(numIds3), 36);
 
-        StringBuilder stringBuilder = new StringBuilder(16);
+        StringBuilder stringBuilder = new StringBuilder(18);
 
         stringBuilder
                 //.append(fillWithZero(branchId, 4))
                 .append(fillWithZero(dateId, 8))
-                .append(fillWithZero(numId, 8));
+                .append(fillWithZero(numId, 10));
 
         return stringBuilder.toString();
 

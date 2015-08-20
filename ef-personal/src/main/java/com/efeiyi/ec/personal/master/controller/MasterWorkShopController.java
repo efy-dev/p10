@@ -33,7 +33,7 @@ public class MasterWorkShopController extends BaseMasterController {
      */
     @RequestMapping("/work")
     public ModelAndView getTenantWorkShop(HttpServletRequest request, Model model) throws Exception {
-        Tenant tenant = super.getTenantfromDomain(request);
+        Master tenant = super.getMasterfromDomain(request);
         XQuery xQuery = new XQuery("listMasterWorkShop_default",request);
         xQuery.put("master_id", tenant.getId());
         List list = baseManager.listObject(xQuery);

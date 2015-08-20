@@ -1,6 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.master.model.Master;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class TenantController extends BaseMasterController {
      */
     @RequestMapping("/home.do")
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
-        Tenant tenant = getTenantfromDomain(request);
+        Master tenant = getMasterfromDomain(request);
         if (tenant==null){
             return new ModelAndView("redirect:/index");
         }
@@ -53,7 +53,7 @@ public class TenantController extends BaseMasterController {
     @ResponseBody
     @RequestMapping("/getTenant.do")
     public Object getTenant(HttpServletRequest request) throws Exception{
-        return getTenantfromDomain(request);
+        return getMasterfromDomain(request);
     }
 
 
