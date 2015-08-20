@@ -38,22 +38,19 @@
         <tr>
             <td align="right">所属商品：</td>
             <td>
-                <c:if test="${!empty object.product && object.product != ''}">
-                    ${object.product.name}
+                <c:if test="${object.purchaseOrderLabel != null && not empty object.purchaseOrderLabel}">
+                    <c:if test="${object.purchaseOrderLabel.product != null && not empty object.purchaseOrderLabel.product}">
+                        ${object.purchaseOrderLabel.product.name}
+                    </c:if>
                 </c:if>
             </td>
         </tr>
         <tr>
             <td align="right">商户名称：</td>
             <td>
-                <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
-                    <c:if test="${label.purchaseOrderLabel.product != null && not empty label.purchaseOrderLabel.product}">
-                        ${label.purchaseOrderLabel.product.name}
-                    </c:if>
+                <c:if test="${!empty object.seller && object.seller != ''}">
+                    ${object.seller.name}
                 </c:if>
-                <%--<c:if test="${!empty object.seller && object.seller != ''}">--%>
-                    <%--${object.seller.name}--%>
-                <%--</c:if>--%>
             </td>
         </tr>
         <tr>
@@ -79,10 +76,13 @@
             <td align="right">状态：</td>
             <td>
                 <c:if test="${object.status == '2'}">
-                    <font color="red">已验证</font>
+                    <font color="blue">已分配</font>
                 </c:if>
                 <c:if test="${object.status == '1'}">
-                    <font color="green">未验证</font>
+                    <font color="green">未分配</font>
+                </c:if>
+                <c:if test="${object.status == '9'}">
+                    <font color="red">已查询</font>
                 </c:if>
             </td>
         </tr>

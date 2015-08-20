@@ -17,7 +17,7 @@ public class LabelBuildServiceImpl implements LabelBuildService {
     private LabelBuildDao labelBuildDao;
 
     @Override
-    public void buildLabelSetByLabelBatch(LabelBatch labelBatch) {
+    public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception {
         labelBuildDao.buildLabelSetByLabelBatch(labelBatch);
     }
 
