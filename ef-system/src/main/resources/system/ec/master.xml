@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-
 <module name="master" label="系统-传承人" version="" package="com.efeiyi.ec.master" path="">
 
     <entities>
@@ -38,15 +37,19 @@
 
                 <do name="formMaster" label="保存大师页" access="" result="/master/masterForm"/>
                 <do name="viewMaster" label="查看大师页" access="" result="/master/masterView"/>
-                <do name="saveOrUpdateMaster" label="保存大师" access="" result="redirect:/basic/xm.do?qm=plistMaster_default" execute="com.efeiyi.ec.system.master.controller.MasterHandler">
+                <do name="saveOrUpdateMaster" label="保存大师" access=""
+                    result="redirect:/basic/xm.do?qm=plistMaster_default"
+                    execute="com.efeiyi.ec.system.master.controller.MasterHandler">
                     <page>
                         <fields>
-                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>
-                            <field name="status" label="创建时间" defaultValue="1" inputType="default" />
+                            <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
+                                   inputType="default"></field>
+                            <field name="status" label="创建时间" defaultValue="1" inputType="default"/>
                         </fields>
                     </page>
                 </do>
-                <do name="removeMaster" label="删除大师" access="" result="json" execute="com.efeiyi.ec.system.master.controller.DeleteMasterRecommendedHandler"/>
+                <do name="removeMaster" label="删除大师" access="" result="json"
+                    execute="com.efeiyi.ec.system.master.controller.DeleteMasterRecommendedHandler"/>
                 <do name="listMaster" label="传承人列表" access="" result="/master/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="主键" name="id" defaultValue="0" peration="ne"/>
@@ -55,6 +58,41 @@
 
             </does>
         </entity>
+
+        <entity name="EcMaster" label="首页推荐传承人列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.Master">
+            <fields>
+                <field name="id" label="传承人" inputType="text"/>
+                <field name="name" label="传承人名字" inputType="text"/>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+                <field name="level" label="等级" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistEcMaster" access="" label="传承人分页列表"
+                    result="/ecMaster/ecMasterPList">
+                    <query name="index" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="viewEcMaster" label="查看大师页" access="" result="/ecMaster/ecMasterView"/>
+            </does>
+        </entity>
+
         <entity name="MasterBanner" label="传承人轮播图列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterBanner">
@@ -67,15 +105,17 @@
                 </do>
 
 
-                <do name="formMasterBanner" label="保存传承人轮播图" access="" result="/masterBanner/masterBannerForm" execute="com.efeiyi.ec.system.master.controller.ToMasterBannerFormHandler"/>
+                <do name="formMasterBanner" label="保存传承人轮播图" access="" result="/masterBanner/masterBannerForm"
+                    execute="com.efeiyi.ec.system.master.controller.ToMasterBannerFormHandler"/>
                 <do name="viewMasterBanner" label="查看传承人轮播图" access="" result="/masterBanner/masterBannerView"/>
-                <do name="saveOrUpdateMasterBanner" label="保存传承人轮播图" access="" execute="com.efeiyi.ec.system.master.controller.MasterBannerHandler">
+                <do name="saveOrUpdateMasterBanner" label="保存传承人轮播图" access=""
+                    execute="com.efeiyi.ec.system.master.controller.MasterBannerHandler">
                 </do>
                 <do name="removeMasterBanner" label="删除传承人轮播图" access="" result="json"/>
                 <do name="listMasterBanner" label="传承人轮播图列表" access="" result="/masterBanner/masterBannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="状态" name="master.id"  operation="eq"/>
+                        <condition label="状态" name="master.id" operation="eq"/>
                     </query>
                 </do>
 
@@ -121,9 +161,13 @@
                     </query>
                 </do>
 
-                <do name="formMasterWorkShop" label="保存工作坊页" access="" result="/masterWorkShop/masterWorkShopForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkShopFormHandler"/>
-                <do name="viewMasterWorkShop" label="查看工作坊" access="" result="/masterWorkShop/masterWorkShopIncludeView"/>
-                <do name="saveOrUpdateMasterWorkShop" label="保存工作坊著作" access="" result="/masterWorkShop/masterWorkShopSaveSuccess" execute="com.efeiyi.ec.system.master.controller.MasterWorkShopHandler">
+                <do name="formMasterWorkShop" label="保存工作坊页" access="" result="/masterWorkShop/masterWorkShopForm"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkShopFormHandler"/>
+                <do name="viewMasterWorkShop" label="查看工作坊" access=""
+                    result="/masterWorkShop/masterWorkShopIncludeView"/>
+                <do name="saveOrUpdateMasterWorkShop" label="保存工作坊著作" access=""
+                    result="/masterWorkShop/masterWorkShopSaveSuccess"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkShopHandler">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
@@ -134,7 +178,8 @@
                     </page>
                 </do>
                 <do name="removeMasterWorkShop" label="删除工作坊著作" access="" result="json"/>
-                <do name="listMasterWorkShop" label="大师工作坊列表" access="" result="/masterWorkShop/masterWorkShopIncludeList">
+                <do name="listMasterWorkShop" label="大师工作坊列表" access=""
+                    result="/masterWorkShop/masterWorkShopIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                         <condition label="传承人" name="master.id" operation="eq"/>
@@ -159,7 +204,8 @@
                 </do>
 
                 <do name="formMasterHonor" label="保存大师殊荣页" access="" result="/masterHonor/masterHonorForm"/>
-                <do name="saveOrUpdateMasterHonor" label="保存大师殊荣" access="" result="/masterHonor/masterHonorSaveSuccess">
+                <do name="saveOrUpdateMasterHonor" label="保存大师殊荣" access=""
+                    result="/masterHonor/masterHonorSaveSuccess">
                 </do>
                 <do name="removeMasterHonor" label="删除大师殊荣" access="" result="json"/>
                 <do name="listMasterHonor" label="传承人列表" access="" result="/masterHonor/masterHonorList">
@@ -193,18 +239,23 @@
 
 
                 </do>
-                <do name="formMasterIntroduction" label="保存大师简介页" access="" result="/masterIntroduction/masterIntroductionForm" execute="com.efeiyi.ec.system.master.controller.MasterIntroductionFormHandler"/>
-                <do name="viewMasterIntroduction" label="查看大师简介页" access="" result="/masterIntroduction/masterIntroductionView"/>
-                <do name="saveOrUpdateMasterIntroduction" label="保存大师简介" access="" result="redirect:/basic/xm.do?qm=plistMasterIntroduction_default">
+                <do name="formMasterIntroduction" label="保存大师简介页" access=""
+                    result="/masterIntroduction/masterIntroductionForm"
+                    execute="com.efeiyi.ec.system.master.controller.MasterIntroductionFormHandler"/>
+                <do name="viewMasterIntroduction" label="查看大师简介页" access=""
+                    result="/masterIntroduction/masterIntroductionView"/>
+                <do name="saveOrUpdateMasterIntroduction" label="保存大师简介" access=""
+                    result="redirect:/basic/xm.do?qm=plistMasterIntroduction_default">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default" />
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
                 <do name="removeMasterIntroduction" label="删除大师简介" access="" result="json"/>
-                <do name="listMasterIntroduction" label="传承人简介列表" access="" result="/masterIntroduction/masterIntroductionIncludeList">
+                <do name="listMasterIntroduction" label="传承人简介列表" access=""
+                    result="/masterIntroduction/masterIntroductionIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition label="产品主键" name="id" defaultValue="1"o peration="eq"/>-->
                         <!--<condition label="传承人简介id" name="id" defaultValue="0" operation="ne"/>-->
@@ -227,18 +278,20 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterIntroductionAttachment">
             <does>
-                <do name="saveOrUpdateMasterAttachment" label="保存附件" access="" execute="com.efeiyi.ec.system.master.controller.MasterAttachmentHandler">
+                <do name="saveOrUpdateMasterAttachment" label="保存附件" access=""
+                    execute="com.efeiyi.ec.system.master.controller.MasterAttachmentHandler">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default" />
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
 
                 <do name="removeMasterAttachment" label="删除附件" access="" result="json"/>
 
-                <do name="listMasterAttachment" label="传承人附件列表" access="" result="/masterIntroduction/masterAttachmentIncludeList">
+                <do name="listMasterAttachment" label="传承人附件列表" access=""
+                    result="/masterIntroduction/masterAttachmentIncludeList">
                     <query name="include" label="嵌入" type="auto" orderBy="id:desc">
                         <condition label="简介Id" name="introduction.id" operation="eq"/>
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
@@ -260,16 +313,18 @@
                     </query>
                 </do>
 
-                <do name="formMasterNews" label="保存大师新闻页" access="" result="/masterNews/masterNewsForm" execute="com.efeiyi.ec.system.master.controller.MasterNewsFormHandler"/>
-                <do name="saveOrUpdateMasterNews" label="保存大师新闻" access="" result="/masterNews/masterNewsSaveSuccess" execute="com.efeiyi.ec.system.master.controller.MasterNewsHandler">
+                <do name="formMasterNews" label="保存大师新闻页" access="" result="/masterNews/masterNewsForm"
+                    execute="com.efeiyi.ec.system.master.controller.MasterNewsFormHandler"/>
+                <do name="saveOrUpdateMasterNews" label="保存大师新闻" access="" result="/masterNews/masterNewsSaveSuccess"
+                    execute="com.efeiyi.ec.system.master.controller.MasterNewsHandler">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
-                                   inputType="default" />
+                                   inputType="default"/>
                             <field name="dataSource" label="来源" defaultValue="manager"
-                                   inputType="default" />
+                                   inputType="default"/>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default" />
+                                   inputType="default"/>
                         </fields>
                     </page>
                 </do>
@@ -310,7 +365,6 @@
         </entity>
 
 
-
         <entity name="MasterWork" label="传承人产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterWork">
@@ -320,24 +374,30 @@
             </fields>
             <does>
                 <do name="plistMasterWork" access="" label="传承人产品分页列表"
-                    result="/masterWork/masterWorkPList" execute="com.efeiyi.ec.system.master.controller.MasterWorkPListHandler">
+                    result="/masterWork/masterWorkPList"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkPListHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
 
                     <query name="byProject" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" operation="eq"/>
-                        <condition name="master.id" operation="eq" />
+                        <condition name="master.id" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
 
                 <do name="viewMasterWorkImg" label="查看传承人产品页" access="" result="/masterWork/imgView"/>
-                <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
-                <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access="" result="/masterWorkRecommended/masterWorkRecommendedForm" execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler" />
-                <do name="viewMasterWork" label="查看传承人产品页" access="" result="/masterWork/masterWorkView"  />
-                <do name="saveOrUpdateMasterWork" label="保存传承人产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWork_byProject" execute="com.efeiyi.ec.system.master.controller.MasterWorkFormHandler">
+                <do name="formMasterWork" label="保存传承人产品页" access="" result="/masterWork/masterWorkForm"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
+                <do name="formMasterWorkRecommended" label="保存传承人推荐产品页" access=""
+                    result="/masterWorkRecommended/masterWorkRecommendedForm"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkHandler"/>
+                <do name="viewMasterWork" label="查看传承人产品页" access="" result="/masterWork/masterWorkView"/>
+                <do name="saveOrUpdateMasterWork" label="保存传承人产品" access=""
+                    result="redirect:/basic/xm.do?qm=plistMasterWork_byProject"
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkFormHandler">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
@@ -345,7 +405,8 @@
                         </fields>
                     </page>
                 </do>
-                <do name="removeMasterWork" label="删除大师产品" access="" result="json" execute="com.efeiyi.ec.system.master.controller.DeleteMasterWorkRecommendedHandler"/>
+                <do name="removeMasterWork" label="删除大师产品" access="" result="json"
+                    execute="com.efeiyi.ec.system.master.controller.DeleteMasterWorkRecommendedHandler"/>
                 <do name="listMasterWork" label="大师著作产品" access="" result="/masterWork/masterWorkIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
@@ -365,7 +426,7 @@
                 model="com.efeiyi.ec.master.model.MasterWorkRecommended">
             <does>
                 <do name="plistMasterWorkRecommended" access="" label="传承人产品推荐列表"
-                    result="/masterWorkRecommended/masterWorkRecommendedPList" >
+                    result="/masterWorkRecommended/masterWorkRecommendedPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
@@ -373,11 +434,12 @@
                 </do>
 
 
-
-                <do name="saveOrUpdateMasterWorkRecommended" label="保存传承人推荐产品" access="" result="redirect:/basic/xm.do?qm=plistMasterWorkRecommended" >
+                <do name="saveOrUpdateMasterWorkRecommended" label="保存传承人推荐产品" access=""
+                    result="redirect:/basic/xm.do?qm=plistMasterWorkRecommended">
                 </do>
                 <do name="removeMasterWorkRecommended" label="删除大师推荐产品" access="" result="json"/>
-                <do name="listMasterWorkRecommended" label="大师著作推荐产品" access="" result="/masterWork/masterWorkRecommendedIncludeList">
+                <do name="listMasterWorkRecommended" label="大师著作推荐产品" access=""
+                    result="/masterWork/masterWorkRecommendedIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>
@@ -385,7 +447,7 @@
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="project.id" operation="eq"/>
-                        <condition name="master.id"  operation="eq"/>
+                        <condition name="master.id" operation="eq"/>
                     </query>
                 </do>
 
@@ -396,7 +458,7 @@
                 model="com.efeiyi.ec.master.model.MasterRecommended">
             <does>
                 <do name="plistMasterRecommended" access="" label="传承人推荐列表"
-                    result="/masterRecommended/masterRecommendedPList" >
+                    result="/masterRecommended/masterRecommendedPList">
                     <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
@@ -404,12 +466,15 @@
                     </query>
                 </do>
 
-                <do name="formMasterRecommended" label="保存传承人推荐页" access="" result="/masterRecommended/masterRecommendedForm" />
+                <do name="formMasterRecommended" label="保存传承人推荐页" access=""
+                    result="/masterRecommended/masterRecommendedForm"/>
 
-                <do name="saveOrUpdateMasterRecommended" label="保存传承人推荐" access="" result="redirect:/basic/xm.do?qm=plistMasterRecommended" >
+                <do name="saveOrUpdateMasterRecommended" label="保存传承人推荐" access=""
+                    result="redirect:/basic/xm.do?qm=plistMasterRecommended">
                 </do>
                 <do name="removeMasterRecommended" label="删除大师推荐" access="" result="json"/>
-                <do name="listMasterRecommended" label="大师著作推荐" access="" result="/masterRecommended/masterRecommendedList">
+                <do name="listMasterRecommended" label="大师著作推荐" access=""
+                    result="/masterRecommended/masterRecommendedList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>
@@ -419,20 +484,20 @@
         </entity>
 
 
-
         <entity name="MasterProject" label="传承人作品展示图片"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterProject">
             <does>
                 <do name="saveOrUpdateMasterProject" label="保存图片" access="">
                     <!--<page>-->
-                        <!--<fields>-->
-                            <!--<field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"-->
-                                   <!--inputType="default"></field>-->
-                        <!--</fields>-->
+                    <!--<fields>-->
+                    <!--<field name="createDateTime" label="状态" defaultValue="${CURRENT_DATETIME}"-->
+                    <!--inputType="default"></field>-->
+                    <!--</fields>-->
                     <!--</page>-->
                 </do>
-                <do name="removeMasterProject" label="删除项目" access="" result="json" execute="com.efeiyi.ec.system.master.controller.DeleteMasterWorkRecommendedHandler"/>
+                <do name="removeMasterProject" label="删除项目" access="" result="json"
+                    execute="com.efeiyi.ec.system.master.controller.DeleteMasterWorkRecommendedHandler"/>
                 <do name="listMasterProject" label="大师著作产品" access="" result="/masterWork/masterWorkProjectIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="1" operation="eq"/>
@@ -451,12 +516,13 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterWorkPicture">
             <does>
-                <do name="saveOrUpdateMasterWorkPicture" label="保存图片" access="" execute="com.efeiyi.ec.system.master.controller.MasterWorkPictureHandler">
+                <do name="saveOrUpdateMasterWorkPicture" label="保存图片" access=""
+                    execute="com.efeiyi.ec.system.master.controller.MasterWorkPictureHandler">
                     <!--<page>-->
-                        <!--<fields>-->
-                            <!--<field name="status" label="状态" defaultValue="1"-->
-                                   <!--inputType="default"></field>-->
-                        <!--</fields>-->
+                    <!--<fields>-->
+                    <!--<field name="status" label="状态" defaultValue="1"-->
+                    <!--inputType="default"></field>-->
+                    <!--</fields>-->
                     <!--</page>-->
                 </do>
                 <do name="removeMasterWorkPicture" label="删除图片" access="" result="json"/>
@@ -479,7 +545,6 @@
 
             </does>
         </entity>
-
 
 
     </entities>
