@@ -76,7 +76,7 @@
               <%--<img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.product.pictureUrl}@!tenant-mobile-work" alt=""/>--%>
               <img  class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt=""/>
               <p class="wh name">${productModel.product.name}</p>
-              <p class="wh price">${productModel.product.price}</p>
+              <p class="wh price">${productModel.price}</p>
             </a>
           </li>
           </c:forEach>
@@ -87,7 +87,14 @@
 
   </c:if>
 
-  <!-- //End--list-pro-->
+ <div class="page wh">
+      <ming800:pcPageList bean="${pageEntity}" url="/product/list/${project.id}">
+      <%--<ming800:pcPageParam name="projectId"--%>
+                           <%--value="${project.id}"/>--%>
+      <ming800:pcPageParam name="sort"
+                           value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+      </ming800:pcPageList>
+  </div>
 
   <!-- //End--footer-->
 </div>
