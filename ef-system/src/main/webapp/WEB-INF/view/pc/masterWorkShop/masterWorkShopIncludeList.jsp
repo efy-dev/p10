@@ -40,8 +40,8 @@
             <td class="am-hide-sm-only"><a
                     href="<c:url value="/basic/xm.do?qm=viewMasterWorkShop&id=${masterWorkShop.id}"/>">${masterWorkShop.name}</a>
             </td>
-            <td class="am-hide-sm-only"><img
-                    src="<c:url value="http://master.efeiyi.com/${masterWorkShop.picture_url}@!master-manage-banner"/>"
+            <td class="am-hide-sm-only"><img width="10%"
+                    src="<c:url value="http://tenant.efeiyi.com/${masterWorkShop.picture_url}@!tenant-manage-banner"/>"
                     alt=""/></td>
             <td class="am-hide-sm-only">${masterWorkShop.createDateTime}</td>
         </tr>
