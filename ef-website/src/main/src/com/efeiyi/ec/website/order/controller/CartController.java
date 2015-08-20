@@ -4,6 +4,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,10 +31,51 @@ public class CartController {
 
     @RequestMapping({"/cart/view"})
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
+        //已经登录的情况
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
+        Cart cart = (Cart) list.get(0);
+        List<Tenant> tenantListTemp = new ArrayList<>();
+        List<Tenant> tenantList = new ArrayList<>();
+        List<CartProduct> cartProductList = cart.getCartProductList();
+        HashMap<String, List> productMap = new HashMap<>();
+        for (CartProduct cartProduct : cartProductList) {
+//            Tenant tenant = cartProduct.getProductModel().getProduct().getTenant();
+            ProductModel productModel = cartProduct.getProductModel();
+            Product product = productModel.getProduct();
+            Tenant tenant = product.getTenant();
+            tenantListTemp.add(tenant);
+        }
+
+        for (Tenant tenantTemp : tenantListTemp) {
+            boolean isContain = false;
+            for (Tenant tenant : tenantList) {
+                if (tenant.getId().equals(tenantTemp.getId())) {
+                    isContain = true;
+                    break;
+                } else {
+                    isContain = false;
+                }
+            }
+            if (!isContain) {
+                tenantList.add(tenantTemp);
+            }
+        }
+
+        for (Tenant tenant : tenantList) {
+            List<Object> productList = new ArrayList<>();
+            for (CartProduct cartProduct : cartProductList) {
+                if (cartProduct.getProductModel().getProduct().getTenant().getId().equals(tenant.getId())) {
+                    productList.add(cartProduct);
+                }
+            }
+            productMap.put(tenant.getId(), productList);
+        }
+
+        model.addAttribute("tenantList", tenantList);
+        model.addAttribute("productMap", productMap);
         model.addAttribute("cart", list.get(0));
-        return "/purchaseOrder/purchaseOrderList";
+        return "/purchaseOrder/cart";
     }
 
 
@@ -47,9 +92,9 @@ public class CartController {
         xQuery1.put("cart_id", cart.getId());
         List<Object> list1 = baseManager.listObject(xQuery1);
 
-        if (list1.size()>0) {
+        if (list1.size() > 0) {
             for (Object cartProductTemp : list1) {
-                CartProduct cartProduct = (CartProduct)cartProductTemp;
+                CartProduct cartProduct = (CartProduct) cartProductTemp;
                 if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
@@ -91,26 +136,85 @@ public class CartController {
     }
 
 
-    @RequestMapping({"/cart/addProductCount"})
+    @RequestMapping({"/cart/addProductCount.do"})
     @ResponseBody
-    public boolean addProductCount(HttpServletRequest request) {
+    public Object addProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
         cartProduct.setAmount(cartProduct.getAmount() + 1);
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-        return true;
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cartProduct;
     }
 
-    @RequestMapping({"/cart/subtractProductCount"})
+    @RequestMapping({"/cart/subtractProductCount.do"})
     @ResponseBody
-    public boolean subtractProductCount(HttpServletRequest request) {
+    public Object subtractProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
         if (cartProduct.getAmount() > 0) {
             cartProduct.setAmount(cartProduct.getAmount() - 1);
         }
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-        return true;
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cartProduct;
+    }
+
+    @RequestMapping({"/cart/chooseProduct.do"})
+    public Object chooseProduct(HttpServletRequest request) {
+        String cartProductId = request.getParameter("cartProductId");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        cartProduct.setIsChoose("1"); //1代表选中
+        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cart;
+
+    }
+
+    @RequestMapping("/cart/cancelChooseProduct.do")
+    public Object cancelChooseProduct(HttpServletRequest request) {
+        String cartProductId = request.getParameter("cartProductId");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        cartProduct.setIsChoose("0"); //0代表取消选中
+        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+        Cart cart = cartProduct.getCart();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose().equals("1")) ;
+            totalPrice.add(new BigDecimal(cartProduct.getProductModel().getPrice().floatValue() * cartProduct.getAmount()));
+        }
+        cart.setTotalPrice(totalPrice);
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cart;
     }
 
 

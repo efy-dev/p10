@@ -2,7 +2,7 @@
   <!--sitemesh  <mapping path="/main.do" decorator="/layouts/mainTemplate.jsp"/>-->
     <!--&lt;!&ndash;<mapping path="/*" decorator="/layouts/mainTemplate.jsp"/>&ndash;&gt;-->
   <mapping path="/order/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-  <mapping path="/address/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/address/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
 
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
 

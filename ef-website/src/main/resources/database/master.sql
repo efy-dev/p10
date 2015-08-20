@@ -101,3 +101,19 @@ CREATE TABLE `tenant_master` (
 ALTER TABLE `product_model`
 ADD COLUMN `recommend_index`  int(11) NULL AFTER `status`;
 
+ALTER TABLE `product`
+ADD COLUMN `master_id`  char(16) NULL AFTER `recommended_index`;
+
+ALTER TABLE `organization_consumer_address`
+DROP COLUMN `consignee`,
+ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
+
+#
+# ALTER TABLE `product_model`
+# ADD COLUMN `name`  varchar(255) NULL AFTER `recommend_index`;
+
+
+ALTER TABLE `purchase_cart_product`
+ADD COLUMN `is_choose`  char(4) NULL AFTER `status`;
+
+

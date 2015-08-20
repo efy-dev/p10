@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable{
     private String id;
     private String name;
     private String serial;
@@ -32,6 +33,7 @@ public class Product {
     private String status;
     private Project project;
     private Date createDateTime;
+    private Tenant tenant;
 //    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
@@ -108,7 +110,7 @@ public class Product {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    @Where(clause = "status=1")
+    @Where(clause = "status!=0")
     @JsonIgnore
     public List<ProductPicture> getProductPictureList() {
         return productPictureList;
@@ -166,5 +168,15 @@ public class Product {
 
     public void setRecommendedIndex(Integer recommendedIndex) {
         this.recommendedIndex = recommendedIndex;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }

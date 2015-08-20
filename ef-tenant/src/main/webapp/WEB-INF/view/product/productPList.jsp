@@ -14,7 +14,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
 
@@ -41,14 +40,15 @@
                         </div>
                     </td>
                     <td width="20%">${product.serial}</td>
-                    <td width="20%"><a href="/basic/xm.do?qm=viewProduct&id=${product.id}"> ${product.name}</a></td>
+                    <td width="20%"><a href="<c:url value="/basic/xm.do?qm=viewProduct&id=${product.id}"/>"> ${product.name}</a></td>
                     <td width="20%">${product.picture_url}</td>
                     <td width="20%">${product.price}</td>
                 </tr>
             </c:forEach>
         </table>
         <div style="clear: both">
-            <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+            <c:url value="/basic/xm.do" var="url"/>
+            <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
                 <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
                 <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
                 <ming800:pcPageParam name="menuId" value="${requestScope.menuId}"/>

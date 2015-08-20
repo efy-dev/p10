@@ -1,8 +1,14 @@
 package com.efeiyi.service;
 
 import com.efeiyi.pal.label.model.Label;
+import com.efeiyi.pal.product.model.Product;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/7.
@@ -11,9 +17,13 @@ public interface ILabelCheckManager {
 
      Label getUniqueLabel(String labelId);
 
-     String constructWeiXinMsg(String toUserName, String fromUserName, String content,String url);
+     Product getUniqueProduct(String productId);
 
-     ModelMap updateRecord(ModelMap model, Label label) throws Exception ;
+     String constructWeiXinMsg(Label label ,String toUserName, String fromUserName, String content, String url);
 
-     void saveOrUpdate(String name,Object obj);
+     void updateRecord(ModelMap model, Label label, boolean pcMark) throws ServletException ;
+
+     String treatWeiXinMsg(HttpServletRequest request, String inXml)  throws ServletException,IOException;
+
+     void addLabelCheckRecord(ModelMap model,Label label,Date date);
 }
