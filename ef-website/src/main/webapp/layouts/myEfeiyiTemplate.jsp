@@ -54,7 +54,7 @@
         <p>151******79</p>
       </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
-        <jsp:include flush="true" page="/getMenu.do?jmenuId=orderMenu&jnodeId=orderManager&resultPage=/purchaseOrderTemplate&match=${match} "/>
+        <jsp:include flush="true" page="/getMenu.do?jmenuId=orderMenu&jnodeId=orderManager&resultPage=/purchaseOrder/purchaseOrderTemplate&match=${match} "/>
 
     </div>
 

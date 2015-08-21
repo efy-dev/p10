@@ -40,9 +40,9 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
 
         for (int i = 1; i <= flag; i++) {
             String code = RandomStringUtils.randomNumeric(10);
-            Long serial = autoSerialManager.nextSerial("palLabelSerial");
+            //Long serial = autoSerialManager.nextSerial("palLabelSerial");
             Label label = new Label();
-            label.setSerial(serial);
+            //label.setSerial(serial);
             label.setCode(code);
             label.setLabelBatch(labelBatch);
             label.setPurchaseOrderLabel(null);

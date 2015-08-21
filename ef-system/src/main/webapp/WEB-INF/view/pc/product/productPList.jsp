@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a></td>
+                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=product&id=${product.id}'/>">${product.name}</a></td>
                                 <td class="am-hide-sm-only">${product.serial}</td>
                                 <td class="am-hide-sm-only">${product.price}</td>
                             </tr>

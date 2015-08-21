@@ -43,7 +43,7 @@
                         <fields>
                             <field name="status" label="是否删除状态" defaultValue="0"
                                    inputType="default"/>
-                            <field name="createDatetime" label="是否删除状态" defaultValue="${CURRENT_DATETIME }"
+                            <field name="createDatetime" label="是否删除状态" defaultValue="${CURRENT_DATETIME}"
                                    inputType="default"/>
                         </fields>
                     </page>

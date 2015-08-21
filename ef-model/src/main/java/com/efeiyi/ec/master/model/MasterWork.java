@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Administrator on 2015/6/26.
  */
 @Entity
-@Table(name = "product")
+@Table(name = "master_work")
 public class MasterWork {
     private String id;
     private String name;

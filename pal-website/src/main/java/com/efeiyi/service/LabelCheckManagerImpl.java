@@ -130,7 +130,6 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 //        String serial = "1234567890";
         System.out.println("serial=\'" + serial + "\'");
 
-        Label label = getUniqueLabel(serial);
 
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/checkLabel.do?serial=" + serial;
         String toUserName = root.element("ToUserName").getText();
@@ -140,13 +139,19 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 //        String fromUserName = "bbb";
 
         ModelMap model = new ModelMap();
+        Label label = getUniqueLabel(serial);
+
+        System.out.println("标签存在？" + (label != null));
         if (label != null) {
+
+            PalConst.getInstance().labelCache.put(label.getCode(), label.getCode());//扫二维码计入全局
+            model.addAttribute(PalConst.getInstance().ip, request.getRemoteHost());//记录ip
+
             updateRecord(model, label, true);
             System.out.println("标签已查次数：" + label.getCheckCount());
-            String content = constructWeiXinPushContent(label,model);
+            String content = constructWeiXinPushContent(model);
+            System.out.println("content:" + content);
             outXml = constructWeiXinMsg(label,fromUserName, toUserName, content, url);
-
-            PalConst.getInstance().labelCache.put(label.getCode(),label.getCode());//扫二维码计入全局
 
         } else {
             outXml = constructWeiXinMsg(label,fromUserName, toUserName, PalConst.getInstance().fakeBean.getMsg(), url);
@@ -177,7 +182,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         }
         System.out.println("标签已查次数：" + label.getCheckCount());
         //如果首次查
-        if (label.getStatus().equals(PalConst.getInstance().unusedStatus)) {
+        if (label.getCheckCount() == 1) {
 
             label.setStatus(PalConst.getInstance().usedStatus);
             label.setFirstCheckDateTime(date);
@@ -247,6 +252,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         String msg = PalConst.getInstance().recheckFakeBean.getMsg().
                 replaceAll("#N#", Integer.toString(label.getCheckCount())).
                 replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
+        System.out.println("getRecheckRecordMsg：" + msg);
         return msg;
     }
 
@@ -260,6 +266,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         String msg = PalConst.getInstance().weixinRecheckMsg.
                 replaceAll("#N#", Integer.toString(label.getCheckCount())).
                 replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
+        System.out.println("getWeixinRecheckRecordMsg：" + msg);
         return msg;
     }
 
@@ -310,10 +317,9 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 
     /**
      * 组装通过微信公众号推送用户的消息
-     * @param label
      * @return
      */
-    private String constructWeiXinPushContent(Label label,ModelMap model){
+    private String constructWeiXinPushContent(ModelMap model){
 
         CheckResultBean checkResultBean = (CheckResultBean)model.get(PalConst.getInstance().resultLabel);
 //        return PalConst.getInstance().trueMsg + "\n\n商品：" + label.getPurchaseOrderLabel().getProduct().getName() + "\n\n作者：" + label.getPurchaseOrderLabel().getProduct().getTenant().getName();

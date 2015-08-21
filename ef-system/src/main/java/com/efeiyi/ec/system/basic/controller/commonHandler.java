@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Administrator on 2015/7/22.
  */
-public class BasicBannerListHandler implements DoHandler {
+public class commonHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {

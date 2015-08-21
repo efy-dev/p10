@@ -11,7 +11,7 @@
     <strong>
         <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
   am-avg-md-3 am-avg-lg-4 am-gallery-overlay">
-            <c:forEach items="${tenantWorkList}" var="masterWork">
+            <c:forEach items="${tenantWorkList}" begin="0" end="2" var="masterWork">
             <li>
                 <div class="am-gallery-item">
                     <a href="/work/${masterWork.id}" class="">

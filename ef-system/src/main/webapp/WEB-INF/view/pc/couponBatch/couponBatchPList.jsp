@@ -89,7 +89,7 @@
                                             </c:if>
                                             <c:if test="${couponBatch.isCreatedCoupon == 2}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
+                                                   href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
                                                 </a>
                                             </c:if>
                                         </div>

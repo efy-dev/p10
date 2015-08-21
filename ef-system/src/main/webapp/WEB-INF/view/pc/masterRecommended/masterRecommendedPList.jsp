@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=plistMaster_default%26conditions=status:1"/>"><span class="am-icon-plus"></span>新建推荐传承人</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=plistMaster_default&list=master&conditions=status:1"/>"><span class="am-icon-plus"></span>新建推荐传承人</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formMaster&id=${masterRecommended.master.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formMaster&from=recommendMaster&id=${masterRecommended.master.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -60,7 +60,7 @@
                               ${masterRecommended.sort}
                             </a>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.fullName}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewMaster&view=recommendMaster&id=${masterRecommended.master.id}"/>">${masterRecommended.master.fullName}</a></td>
 
                         <td class="am-hide-sm-only">
                             <ming800:status name="sex" dataType="Master.sex" checkedValue="${masterRecommended.master.sex}" type="normal"/>
