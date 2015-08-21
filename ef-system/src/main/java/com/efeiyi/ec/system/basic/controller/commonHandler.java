@@ -14,6 +14,7 @@ public class commonHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         modelMap.put("groupName" , request.getParameter("groupName"));
+        modelMap.put("view" , request.getParameter("view"));
 
         return modelMap;
     }

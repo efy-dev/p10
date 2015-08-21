@@ -59,7 +59,7 @@
                                     </div>
                                 </td>
                                 <td class="am-hide-sm-only">${coupon.serial}</td>
-                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=coupon&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a></td>
+                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a></td>
                                 <td class="am-hide-sm-only">
                                     <ming800:status name="status" dataType="coupon.status"
                                                 checkedValue="${coupon.status}"

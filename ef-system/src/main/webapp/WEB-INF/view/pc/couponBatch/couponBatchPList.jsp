@@ -89,13 +89,13 @@
                                             </c:if>
                                             <c:if test="${couponBatch.isCreatedCoupon == 2}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
+                                                   href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&view=${view}&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
                                                 </a>
                                             </c:if>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&id=${couponBatch.id}'/>">${couponBatch.name}</a></td>
+                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${couponBatch.id}'/>">${couponBatch.name}</a></td>
                                 <td class="am-hide-sm-only">${couponBatch.price}</td>
                                 <td class="am-hide-sm-only">${couponBatch.priceLimit}</td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
