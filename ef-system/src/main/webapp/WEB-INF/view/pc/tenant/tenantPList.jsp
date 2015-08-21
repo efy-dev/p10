@@ -60,7 +60,7 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="removeTenant('${tenant.id}')" href="#"><span
+                                       onclick="showConfirm('提示','是否删除',function(){removeTenant('${tenant.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span>删除
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"

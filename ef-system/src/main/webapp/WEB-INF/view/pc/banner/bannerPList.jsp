@@ -46,7 +46,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
 
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                      onclick="removeBanner('${banner.id}')" href="#"/><span
+                                      onclick="showConfirm('提示','是否删除',function(){removeBanner('${banner.id}')})" href="#"/><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                 </div>

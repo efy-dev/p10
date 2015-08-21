@@ -56,7 +56,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                            onclick="removePurchaseOrder('${purchaseOrder.id}')"><span
+                                            onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>

@@ -59,7 +59,7 @@
                                     </a>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeConsumer('${consumer.id}')"><span
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeConsumer('${consumer.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>
