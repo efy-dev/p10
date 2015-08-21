@@ -133,6 +133,9 @@ ADD COLUMN `tenant_id`  char(16) NULL AFTER `original_price`;
 ALTER TABLE `purchase_order`
 ADD COLUMN `father_purchase_order_id`  char(16) NULL AFTER `tenant_id`;
 
+ALTER TABLE `purchase_order`
+ADD COLUMN `message`  varchar(128) NULL AFTER `father_purchase_order_id`;
+
 
 
 

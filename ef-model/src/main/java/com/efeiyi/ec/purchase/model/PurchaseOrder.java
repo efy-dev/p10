@@ -39,6 +39,16 @@ public class PurchaseOrder {
     private List<PurchaseOrder> subPurchaseOrder;
     private PurchaseOrder fatherPurchaseOrder;
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信
+    private String message; //买家留言
+
+    @Column(name = "message")
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "fatherPurchaseOrder")
     public List<PurchaseOrder> getSubPurchaseOrder() {

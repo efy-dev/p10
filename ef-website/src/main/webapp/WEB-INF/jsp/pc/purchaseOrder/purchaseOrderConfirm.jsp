@@ -10,6 +10,7 @@
 <html>
 <head>
     <title></title>
+    <link href="<c:url value="/scripts/assets/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
 <div class="wr wh">
@@ -27,7 +28,7 @@
                          <i class="clase" title="关闭"></i>
                      </div>
                      <div class="m-form">
-                         <form>
+                         <form id="newAddress">
                              <ul>
                                  <li>
                                      <label>收货人：</label>
@@ -99,11 +100,16 @@
 
                 <div class="page-default">
             <span>
-                <div class="default-text default-active">
-                    <strong>${address.consignee} ${address.province.name}</strong>
-                    <i class="triangle" style="display: block"></i>
-                    </a>
-                </div>
+                <c:if test="${address.status=='2'}">
+                <div id="${address.id}" class="default-text default-active">
+                    </c:if>
+                    <c:if test="${address.status=='1'}">
+                    <div class="default-text">
+                        </c:if>
+                        <strong>${address.consignee} ${address.province.name}</strong>
+                            <%--<i class="triangle" style="display: block"></i>--%>
+                        </a>
+                    </div>
             </span>
                     <span>${address.consignee}</span>
                     <span>${address.province.name}</span>
@@ -180,7 +186,7 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" type="text" value="限45个字" maxlength="45">
+                    <input id="${tenant.id}Message" name="message" type="text" value="限45个字" maxlength="45">
                     <span>0/45</span>
                 </div>
             </div>
@@ -200,7 +206,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a href="#" onclick="submitOrder()">提交订单</a> </span>
+                <span><a href="#" onclick="submitOrder('${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>
@@ -215,17 +221,60 @@
     function zhifubao(element) {
         $(element).attr("class", "alipay wechat-active");
         $("#weixin").attr("class", "alipay");
+        $("#weixin").find("i").remove();
+        $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "1";
     }
 
     function weixin(element) {
         $(element).attr("class", "alipay wechat-active");
         $("#zhifubao").attr("class", "alipay");
+        $("#zhifubao").find("i").remove();
+        $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "3";
     }
-    function submitOrder() {
-        var url = ""
+    function submitOrder(orderId) {
+        var messageObject = new Object();
+        var addressId = $(".default-active").attr("id");
+        $("input[name=message]").each(function () {
+            messageObject[$(this).attr("id")] = $(this).val();
+        })
+        var message = "";
+        for (var key in messageObject) {
+            message += key + ":" + messageObject[key] + ";"
+        }
+        message = encodeURIComponent(message);
+        console.log(message);
+        var url = "/confirm/" + orderId + "?payment=" + payment + "&address=" + addressId + "&" + message;
     }
+
+
+    $(function () {
+        $('.clearing-site span a').click(function () {
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function () {
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+    })
+
+    function newAddress(it ) {
+        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
+        return out;
+    }
+
+    function submitNewAddress() {
+        var param = $("#newAddress").serialize();
+        var success = function (data) {
+            $("#totalPrice").html(data["totalPrice"]);
+        }
+        ajaxRequest("<c:url value="/cart/chooseProduct.do"/>", param, success, function () {
+        }, "post")
+    }
+
+
+
 </script>
 </body>
 </html>
