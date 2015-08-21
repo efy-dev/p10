@@ -62,7 +62,7 @@ public class AddressController {
         xQuery.addRequestParamToModel(model,request);
         List addressList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("addressList",addressList);
-        return "/addressList";
+        return "/purchaseOrder/addressList";
     }
 
     @RequestMapping({"/address/jsonList.do"})

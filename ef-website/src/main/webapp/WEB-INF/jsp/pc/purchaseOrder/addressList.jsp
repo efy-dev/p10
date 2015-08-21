@@ -10,7 +10,7 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>个人中心</title>
-  <script src="/resources/jquery/jquery-1.11.1.min.js"></script>
+  <script src="/META-INF/resources/resources/jquery/jquery-1.11.1.min.js"></script>
   <script type="text/javascript"></script>
 </head>
 <body>

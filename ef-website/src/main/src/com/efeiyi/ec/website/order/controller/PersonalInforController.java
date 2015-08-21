@@ -34,7 +34,7 @@ public class PersonalInforController {
        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
-        return "/personalInfoView";
+        return "/purchaseOrder/personalInfoView";
     }
     /**
      * 密码修改
@@ -59,7 +59,7 @@ public class PersonalInforController {
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
-        return "/securityAccount";
+        return "/purchaseOrder/securityAccount";
     }
 
     /**
