@@ -1,5 +1,6 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class AddressCity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id")
+    @JsonIgnore
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }

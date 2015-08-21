@@ -139,7 +139,7 @@ public class PCPageList extends TagSupport {
         if (nextIndex > pageCount) {
             return "<li class=\"am-disabled bigRound\"><a href=\"#\">最后一页</a></li>";
         } else {
-            return new StringBuilder("<li class=\"bigRound\"><a href=\"").append(pageHref).append(nextIndex).append("\">最后一页</a></li>").toString();
+            return new StringBuilder("<li class=\"bigRound\"><a href=\"").append(pageHref).append(pageCount).append("\">最后一页</a></li>").toString();
         }
     }
 

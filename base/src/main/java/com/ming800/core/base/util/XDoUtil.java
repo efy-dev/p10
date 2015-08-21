@@ -44,6 +44,23 @@ public class XDoUtil {
         return pageEntity;
     }
 
+    public static PageEntity getPageEntity(HttpServletRequest request,Integer psize) {
+        String index = request.getParameter(PageEntity.PARAM_NAME_PAGEINDEX);
+        String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);
+        PageEntity pageEntity = new PageEntity();
+        //默认页数索引
+        pageEntity.setIndex(1);
+        //默认每页显示数量
+        pageEntity.setSize(psize);
+        if (index != null && !"".equals(index)) {
+            pageEntity.setIndex(Integer.parseInt(index));
+        }
+        if (size != null && !"".equals(size)) {
+            pageEntity.setSize(Integer.parseInt(size));
+        }
+        return pageEntity;
+    }
+
 
     /**
      * 获得设完值的对象

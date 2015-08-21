@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&id=${professional.id}'/>">${professional.id}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.id}</a></td>
                         <td class="am-hide-sm-only">${professional.temp}</td>
                     </tr>
                 </c:forEach>

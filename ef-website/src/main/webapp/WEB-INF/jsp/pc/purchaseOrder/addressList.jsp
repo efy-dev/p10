@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html class="no-js">
 <head>
@@ -9,8 +10,11 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>个人中心</title>
+  <script src="/META-INF/resources/resources/jquery/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript"></script>
 </head>
 <body>
+
 <!-- //End--header-->
 <!--content-->
 
@@ -37,17 +41,9 @@
                     <li>
                       <label>所在地区：</label>
                       <form>
-                        <select name="province" class="cars">
-                          <option value="请选择">请选择</option>
-                          <option value="saab">Saab</option>
-                          <option value="fiat">Fiat</option>
-                          <option value="audi">Audi</option>
+                        <select id="provinceVal" class="cars" onclick="province(this);">
                         </select>
-                        <select name="city" class="car1">
-                          <option value="请选择">请选择</option>
-                          <option value="saab">Saab</option>
-                          <option value="fiat">Fiat</option>
-                          <option value="audi">Audi</option>
+                        <select id="cityVal" class="car1" onclick="city(this);">
                         </select>
                         <span>请您填写所在地区</span>
                       </form>
@@ -102,7 +98,6 @@
           <tr>
             <td   width="76"  style="text-align: right;"><span>所在地区：</span></td>
             <td   width="600">
-              <%--<span>${address.province.name}${address.city.name}</span>--%>
                 <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
 
             </td>
@@ -219,25 +214,11 @@
     </div>
   </div>
 </div>
-<!--content-->
-<!-- //End--footer-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/scripts/assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
+
 <script src="/scripts/assets/js/amazeui.min.js"></script>
 <script src="/scripts/assets/js/system.js"></script>
-<!--<script type="text/javascript">
-$(window).scroll(function(){
-	if($(this).scrollTop()>100){
-		$('.slider-menu ul').css({'position':'fixed'})
-	}
-})
-</script>-->
+
 <script>
   $(function(){
     $("#add").click(function(){
@@ -247,7 +228,7 @@ $(window).scroll(function(){
       })
       return false;
     })
-  })
+  });
   $(function(){
     $(".hideDiv").click(function(){
       $(this).siblings('.active-pop').show();
@@ -256,11 +237,10 @@ $(window).scroll(function(){
       })
       return false;
     })
-  })
+  });
   function df(id) {
-    alert("....");
     $.ajax({
-      type: 'get',
+      type: 'post',
       async: false,
       url: '<c:url value="/defaultAddress.do"/>',
       dataType: 'json',
@@ -271,12 +251,64 @@ $(window).scroll(function(){
       },
       success: function (data) {
          if(data == true){
-           window.history.go(0);
+           window.location.reload();
          }
       },
 
     });
   }
+
+
+  function city(obj){
+    var pid = $("#provinceVal").val();
+    var v = $(obj).val();
+     $("#cityVal").empty();
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/address/listCity.do"/>',
+      dataType: 'json',
+      data:{
+        provinceId:pid
+      },
+      success: function (data) {
+        var obj = eval(data);
+        var rowHtml = "";
+        rowHtml += "<option value='请选择'>请选择</option>";
+        for(var i = 0;i<obj.length;i++){
+          rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+        }
+        $("#cityVal").append(rowHtml);
+        $("#cityVal option[value='"+v+"']").attr("selected","selected");
+
+      },
+    });
+  }
+  function province(obj){
+    var v = $(obj).val();
+    $("#provinceVal").empty();
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/address/listProvince.do"/>',
+      dataType: 'json',
+      success: function (data) {
+          var obj = eval(data);
+        var rowHtml = "";
+        rowHtml += "<option value='请选择'>请选择</option>";
+        for(var i = 0;i<obj.length;i++){
+
+            rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+
+
+        }
+        $("#provinceVal").append(rowHtml);
+        $("#provinceVal option[value='"+v+"']").attr("selected","selected");
+      },
+
+    });
+  }
+
 
 </script>
 
