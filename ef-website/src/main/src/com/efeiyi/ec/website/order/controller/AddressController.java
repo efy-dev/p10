@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Administrator on 2015/7/30.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class AddressController {
 
     @Autowired
@@ -62,7 +63,7 @@ public class AddressController {
         xQuery.addRequestParamToModel(model,request);
         List addressList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("addressList",addressList);
-        return "/addressList";
+        return "/purchaseOrder/addressList";
     }
 
     @RequestMapping({"/address/jsonList.do"})

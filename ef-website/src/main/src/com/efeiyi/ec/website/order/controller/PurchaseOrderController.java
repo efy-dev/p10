@@ -3,6 +3,7 @@ package com.efeiyi.ec.website.order.controller;
 import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -40,7 +41,7 @@ import java.util.*;
  * Created by Administrator on 2015/6/25.
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/myEfeiyi/order")
 public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
@@ -287,7 +288,8 @@ public class PurchaseOrderController extends BaseController {
                 XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
                 xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
-                purchaseOrder.setFatherPurchaseOrder(purchaseOrder);
+                purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
+                purchaseOrderTemp.setTenant(tenantTemp);
                 for (CartProduct cartProductTemp : cartProductList) {
                     if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId())) {
                         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
@@ -298,7 +300,10 @@ public class PurchaseOrderController extends BaseController {
                         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
                     }
                 }
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
             }
+        } else {
+            purchaseOrder.setTenant(tenantList.get(0));
         }
 
         for (Tenant tenant : tenantList) {
@@ -322,13 +327,6 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
 
-//        String payment = request.getParameter("payment");
-//        if (payment.equals("1")) {//支付宝
-//            return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
-//        } else if (payment.equals("3")) { //微信
-//            return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
-//        }
-//        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
@@ -336,14 +334,35 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/confirm/{orderId}"})
     public String orderConfirm(@PathVariable String orderId, HttpServletRequest request) {
         String payment = request.getParameter("payment");
-        String isWeiXin = request.getParameter("isWeiXin");
+        String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
+        String addressId = request.getParameter("address");
+        String message = request.getParameter("message");
+
+        //买家留言
+        HashMap<String, String> messageMap = new HashMap<>();
+
+        for (String messageTemp : message.split(";")) {
+            if (messageTemp != null && !messageTemp.equals("")) {
+                messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+            }
+        }
+
+
+        ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
+        purchaseOrder.setConsumerAddress(consumerAddress);
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
-        for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
-            purchaseOrderTemp.setStatus("1");
-            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+        if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
+            for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
+                purchaseOrderTemp.setStatus("1");
+                purchaseOrderTemp.setConsumerAddress(consumerAddress);
+                purchaseOrderTemp.setMessage(messageMap.get(purchaseOrderTemp.getTenant().getId() + "Message"));
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+            }
+        } else {
+            purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         if (payment.equals("1")) {//支付宝

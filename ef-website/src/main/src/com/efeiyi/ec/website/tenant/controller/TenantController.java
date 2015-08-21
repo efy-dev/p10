@@ -27,6 +27,6 @@ public class TenantController {
         xQuery.addRequestParamToModel(model,request);
         PageInfo pageInfo =baseManager.listPageInfo(xQuery);
         model.addAttribute("productList", pageInfo.getList());
-        return "/tenant/productList";
+        return "/tenant/productPList";
     }
 }

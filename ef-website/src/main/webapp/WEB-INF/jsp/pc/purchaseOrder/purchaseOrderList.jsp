@@ -74,7 +74,7 @@
             <td width="130">${order.orderStatus}</td>
             <td width="139">
               <p><a href="#">付款</a></p>
-              <p><a href="/order/view/${order.id}">查看</a></p>
+              <p><a href="/myEfeiyi/order/view/${order.id}">查看</a></p>
               <p><a href="#">取消订单</a></p>
             </td>
           </tr>
