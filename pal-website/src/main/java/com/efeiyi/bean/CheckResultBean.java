@@ -1,11 +1,11 @@
-package com.efeiyi;
+package com.efeiyi.bean;
 
-import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.util.PalConst;
 
 /**
  * Created by Administrator on 2015/7/29.
  */
-public class ResultBean{
+public class CheckResultBean {
     private String logo;
     private String msg;
     private int authenticity;

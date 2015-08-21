@@ -1,6 +1,8 @@
 package com.efeiyi.ec.website.tenant.controller;
 
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.Page;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,10 @@ public class TenantController {
 
     @RequestMapping({"/tenant/listProduct"})
     public String listProduct(HttpServletRequest request,Model model) throws Exception {
-        XQuery xQuery = new XQuery("plistProduct_default", request);
+        XQuery xQuery = new XQuery("plistProduct_default", request,20);
         xQuery.addRequestParamToModel(model,request);
-        List productList =baseManager.listObject(xQuery);
-        model.addAttribute("productList", productList);
+        PageInfo pageInfo =baseManager.listPageInfo(xQuery);
+        model.addAttribute("productList", pageInfo.getList());
         return "/tenant/productList";
     }
 }

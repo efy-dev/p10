@@ -41,7 +41,7 @@
                 <do name="saveOrUpdatePurchaseOrder" access="" label="订单列表">
                     <page>
                         <fields>
-                            <field name="status" label="是否删除状态" defaultValue="1"
+                            <field name="status" label="是否删除状态" defaultValue="0"
                                    inputType="default"/>
                             <field name="createDatetime" label="是否删除状态" defaultValue="${CURRENT_DATETIME }"
                                    inputType="default"/>

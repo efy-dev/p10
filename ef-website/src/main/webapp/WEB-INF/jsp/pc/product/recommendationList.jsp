@@ -58,28 +58,31 @@
     </ul>
   </div>
   <!-- //End--shop-sort-->
+<c:if test="${productList.size()>0}">
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
+        <c:forEach items="${productList}" var="product" varStatus="rec">
         <li>
           <a href="" target="_blank" title="">
             <img class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
+            <p class="wh name">${product.name}</p>
+            <p class="wh price">${product.price}</p>
           </a>
         </li>
+        </c:forEach>
       </ul>
-
     </div>
+    </c:if>
     <!-- //End--list-pro-->
-    <div class="page wh">
+<%--    <div class="page wh">
       <ul class="am-pagination am-pagination-centered">
         <li class="bigRound"><a href="">«</a></li>
         <li><a href="">1</a></li>
         <li class="am-active"><a href="#">2</a></li>
         <li class="am-disabled bigRound"><a href="#">»</a></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--page-->
   </div>
   <!-- //End---->

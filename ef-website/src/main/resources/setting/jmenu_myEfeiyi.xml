@@ -2,18 +2,17 @@
 <jmenu id="orderMenu">
 
     <jnode url="" id="orderManager" access="admin,manager" state="closed" text_zh_CN="用户订单">
-        <jnode url="/basic/xm.do?" access="admin" text_zh_CN="我的订单">
+        <jnode url="/order/list.do" access="admin" text_zh_CN="我的订单">
             <match url="plistPurchaseOrder_default"/>
         </jnode>
-        <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="我的收藏">
+        <jnode url="/order/list.do" access="admin,manager" text_zh_CN="我的收藏">
             <match url="plistPurchaseOrderPayment_default"/>
             <match url="viewPurchaseOrderPayment"/>
         </jnode>
-        <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="系统消息">
-            <match url="plistPurchaseOrderPayment_default"/>
-            <match url="viewPurchaseOrderPayment"/>
+        <jnode url="/personalInfo.do" access="admin,manager" text_zh_CN="个人信息">
+
         </jnode>
-        <jnode url="/basic/xm.do?" access="admin,manager" text_zh_CN="账号安全">
+        <jnode url="/getPassword.do" access="admin,manager" text_zh_CN="账号安全">
             <match url="plistPurchaseOrderPayment_default"/>
             <match url="viewPurchaseOrderPayment"/>
         </jnode>
