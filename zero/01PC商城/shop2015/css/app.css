@@ -178,11 +178,9 @@ a:hover { color: #f00; text-decoration:underline;}
 .product-intro .itemInfo .preview .slider-img li img {border:2px #ccc solid}
 .product-intro .itemInfo .preview .slider-img li.active img { border:2px #000 solid;}
 .product-intro .itemInfo .preview .slider-main {width:900px; height:800px; float: left; margin:0 28px; background:#f6f6f6; overflow: hidden;}
-
 .product-intro .itemInfo .preview .collect {width:36px;position: absolute;top:16px; right:40px}
 .product-intro .itemInfo .preview .collect .icon {background: url(../images/icon.png) no-repeat -244px -50px;width:32px; height:28px; float: left; margin-left:2px;margin-bottom:5px; cursor: pointer;}
 .product-intro .itemInfo .preview .collect span {width:36px; font-size:12px; float: left;text-align: center; display: none;}
-
 .product-intro .itemInfo .itme-ext {width:238px; float: left;}
 .product-intro .itemInfo .itme-ext .name { font-size:12px; margin-top: 15px; margin-bottom:25px;}
 .product-intro .itemInfo .itme-ext .name strong { font-size: 20px; font-weight: bold;}
@@ -204,7 +202,6 @@ a:hover { color: #f00; text-decoration:underline;}
 .product-intro .itemInfo .jiathis_style .jtico_tqq { background-position:-21px 0;width:22px;}
 .product-intro .itemInfo .jiathis_style .jtico_tsina { background-position:-43px 0;}
 .product-intro .itemInfo .jiathis_style .jtico_cqq { background-position:-65px 0;width:22px;}
-
 .product-intro .tab-wrap {width:1280px;height:44px; line-height:44px;margin-top:33px; padding-left:170px; position: relative;border:1px #000 solid; background:#fff; z-index:999;}
 .product-intro .tab-wrap .jiathis_style {background:#7f7f7f; height:44px; float: left; padding:0 13px; position: absolute;top:-1px; left:-1px; border-right:1px #000 solid;}
 .product-intro .tab-wrap .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat; width:21px; height:21px!important; margin-left:5px; margin-top:10px;}
@@ -254,6 +251,24 @@ a:hover { color: #f00; text-decoration:underline;}
 .product-intro .online-ask .btn:hover {text-decoration: none;background:#fff;color:#000}
 .product-intro .online-ask .btn:hover .icon { background-position:-211px -50px;}
 /*--End--product-intro--*/
+.goods-rec {}
+.goods-rec-hd {width:1000px;padding:100px 140px;box-sizing: content-box;border-bottom: 2px #000 solid}
+.goods-rec-hd .title {width:32px;float: left;position: relative;}
+.goods-rec-hd .title strong {line-height: 26px;padding:15px 0;font-family:FangSong;font-style: italic; font-weight:bold;font-size:24px; float: left;}
+.goods-rec-hd .title .icon {width:8px; height:25px; position: absolute;}
+.goods-rec-hd .title .icon-l { background-position:-291px -50px; top:0; left:0;}
+.goods-rec-hd .title .icon-r { background-position:-299px -50px; bottom:0; right:0;}
+.goods-rec-hd .info {width:610px;float: left; margin-top:100px;}
+.goods-rec-hd .info p { line-height:24px;font-family: SimSun; font-size: 12px;}
+.goods-rec-hd .info li {width:100%; float: left; margin-bottom:30px;}
+.goods-rec-hd .imgv {width:270px; overflow: hidden; display: inline-block;}
+.goods-rec-hd-left .info { margin-left:38px; margin-right:50px;}
+.goods-rec-hd-right .title {float: right;}
+.goods-rec-hd-right .info {float: right;margin-right:38px; margin-left:50px;}
+.goods-rec .category .ul-item {margin-bottom:220px;}
+.goods-rec .category .ul-item li { margin-top:100px;}
+
+/*--End--product-intro--*/
 .login-wrap {width:920px;margin:70px 180px;float: left; font-size: 12px;}
 .login-wrap .banner {float: left;}
 .login-form {width: 300px;padding:34px;border: 1px #ccc solid;float: right;box-sizing: content-box}
@@ -286,7 +301,6 @@ a:hover { color: #f00; text-decoration:underline;}
 .login-form .coagent { margin-top:20px;}
 .login-form .coagent h5 {width:100%;color: #666; font-weight: normal; float: left; margin-bottom:15px;}
 .login-form .coagent .wechat { background-position: -102px -50px; width:26px; height:22px; float: left;}
-
 .thickframe { position: fixed; top: 0; left: 0; z-index: 100; width: 100%; height: 100%; border: 0; display: none;}
 .thickframe .thickdiv { position: fixed; top: 0; left: 0; z-index: 101; width: 100%; height: 100%; background: #000; border: 0; filter: alpha(opacity =60); opacity: .6; }
 .thickframe .thickbox { width: 1000px; height: 500px; position: fixed; top: 50%; margin-top: -250px; left: 50%; margin-left: -500px; z-index: 102; overflow: hidden; padding: 0; border: 4px solid rgba(0, 0, 0, 0.1); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background: #fff; }
@@ -299,8 +313,6 @@ a:hover { color: #f00; text-decoration:underline;}
 .thickframe .thickcon .btnt{width:322px;margin:20px auto 0;}
 .thickframe .thickcon .btnt .btn-img{width:322px;height:34px;line-heiht:34px;background:#e4393c;color:#FFF; -moz-border-radius:3px; -webkit-border-radius:3px;border-radius:3px;font-family:"微软雅黑";font-size:16px;font-weight:800;}
 .thickframe .thickclose:link {display: block;position: absolute;z-index: 100000;top: 7px;right: 12px;overflow: hidden;width: 15px;height: 15px;background-position:-276px -50px;font-size: 0;line-height: 100px;}
-
-
 /*--//End--login-form--*/
 .footer { border-top:3px #000 solid;font-size:12px;}
 .footer .icon {background: url(../images/footer-icon.png) no-repeat; display: inline-block;}
@@ -313,8 +325,7 @@ a:hover { color: #f00; text-decoration:underline;}
 .footer .service .wechat {background-position: 0 -154px; width:73px; height:53px;}
 .footer .service .line {width: 2px; height: 42px; display: inline-block; margin: 0 30px; background: #c1c1c1;}
 .footer .links {background:#000;height:16px;line-height:16px;text-align: center;padding: 15px 0;}
-.footer .links a { margin: 0 10px; display: inline-block;box-sizing: content-box;color:#fff;
-    font-family:FangSong;}
+.footer .links a { margin: 0 10px; display: inline-block;box-sizing: content-box;color:#fff;font-family:FangSong;}
 .footer .links a.line {width:1px;height:10px;background: #b3b3b3; top: 2px; position: relative;}
 .footer .links a:hover { color: #f00;text-decoration: underline}
 .footer .copyright {background: #000; padding:15px 0;text-align:center}

@@ -40,6 +40,8 @@
                 <do name="plistConsumerAddress" access="" label="收货地址列表">
                     <query name="default" label="默认" type="auto" orderBy="status:desc">
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+
                     </query>
                 </do>
 

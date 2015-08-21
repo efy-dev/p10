@@ -1,1 +1,217 @@
 /*****************未同步sql***********************/
+
+DROP TABLE IF EXISTS `master_work`;
+CREATE TABLE `master_work` (
+  `id` char(16) NOT NULL DEFAULT '',
+  `name` varchar(32) DEFAULT NULL,
+  `serial` varchar(32) DEFAULT NULL,
+  `picture_url` varchar(128) DEFAULT NULL,
+  `tenant_id` char(16) DEFAULT NULL,
+  `category_id` char(16) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `product_description_id` char(16) DEFAULT NULL,
+  `status` varchar(1) NOT NULL,
+  `project_id` char(16) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `modify_date` datetime DEFAULT NULL COMMENT '添加创建时间和修改时间',
+  `create_datetime` datetime DEFAULT NULL,
+  `sort` int(16) DEFAULT NULL,
+  `recommended_index` int(5) DEFAULT NULL,
+  `master_id` char(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of master_work
+-- ----------------------------
+INSERT INTO `master_work` VALUES ('001', '青花瓷', '12', 'background/favicon.png', '1', '001', '1000', '1', '1', '001', '2015-07-03 14:55:44', '2015-08-17 17:34:38', null, null, '91', '100001');
+INSERT INTO `master_work` VALUES ('002', '青铜器', '13', 'background/favicon.png', '1', '001', '10000', 'icii8mhq00009vvg', '1', '001', '2015-08-18 17:34:30', '2015-08-17 17:34:34', null, null, '92', null);
+INSERT INTO `master_work` VALUES ('003', '刺绣', '', '', 'id02jtsd0000c5t1', '001', '3', '100000000008', '1', '001', '2015-08-06 16:33:18', '2015-08-06 16:34:11', '2015-08-06 16:34:23', null, '30', null);
+INSERT INTO `master_work` VALUES ('100000000009', '青铜器', null, 'background/favicon.png', '1', '001', '555', null, '1', '001', '2015-07-02 14:56:41', null, null, null, '93', null);
+INSERT INTO `master_work` VALUES ('100002', '2', null, 'background/favicon.png', '1', '001', '452', null, '0', '001', null, null, null, null, '50', null);
+INSERT INTO `master_work` VALUES ('13', '2', null, 'background/favicon.png', '1', '001', '288', null, '1', '001', null, null, null, null, '60', null);
+INSERT INTO `master_work` VALUES ('14', '2', null, null, '1', '001', '388', null, '0', '002', null, null, null, null, '70', null);
+INSERT INTO `master_work` VALUES ('15', '2', null, 'background/favicon.png', '1', '001', '388', null, '0', '002', null, null, null, null, '80', null);
+INSERT INTO `master_work` VALUES ('16', '2', null, null, '1', '001', '588', null, '0', '002', null, null, null, null, '90', null);
+INSERT INTO `master_work` VALUES ('17', '2', null, null, '1', '001', '699', null, '0', '006', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('18', '2', null, null, '1', '001', '1000', null, '0', '008', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('19', '2', null, null, '1', '001', '599', null, '0', '009', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('2', '2', '2', '2', '2', '001', '2', '2', '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('20', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('21', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('22', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('23', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('24', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('4', '2', null, null, '1', '001', null, null, '0', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('5', '2', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('6', '2', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('7', '2', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('dfg', '2', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('dv', '2', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibsqmoof0000ip3s', '12345678', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibu4n4ue0000gz6h', '哈哈哈', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibu9prre00009msf', '哈哈哈', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibu9q2r700004q73', '哈哈哈', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibucelbd0000ksn0', '哈哈哈', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibucn4530000kwk9', 'jhlkhhk', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibudctls00007zn6', 'qwedsa', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibvj2jdg000079hu', 'hahaha', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibvj4xtw0000ei4k', '哈哈哈哈', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ibvjzslc00009gg7', 'hahaha', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic78ayqi0000dfqz', '111', null, null, '1', '001', '111', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic78enkv0000962p', 'zzc', null, null, '1', '001', '123', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic7kk2tj000008md', '123', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic7lcyea00005rnt', '111', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic7ljm180000c240', '111', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ic7ll3pe0000b3fa', '111', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icbwl0dm00007r84', '1', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icbwmbuq0000jyn1', '1', null, null, '1', '001', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ice4dp8e00005f12', '123', null, null, 'icbneztn000049jb', '001', '123', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ice4p8360000kxix', '123123', null, 'work/icbneztn000049jb/img2.png', 'icbneztn000049jb', '001', '123123', 'ice4pkw60000chsa', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ice4ukrp00006zzn', '123123', null, 'work/icbneztn000049jb/img2.png', 'icbneztn000049jb', '001', '13123', 'ice4ukrs0000e4vj', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ice4zr0d000002x3', '123123', null, 'work/icbneztn000049jb/img2.png', 'icbneztn000049jb', '001', '123123', 'ice4zr0r00006qlb', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ice7gns10000267w', '123123', null, 'work/icbneztn000049jb/QQ图片20150721115521.png', 'icbneztn000049jb', '001', '123123', 'ice7gns20000atsb', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icfj2chu00005j4b', '123123123', null, 'work//img2.png', '1', '001', null, 'icfj2cid00001wy6', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icfjbgri000060za', '123123', null, 'work/icbneztn000049jb/img2.png', 'icbneztn000049jb', '001', null, 'icfjbgs40000e9oe', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icfjfl6700001p2m', '123123', null, 'work/icbneztn000049jb/img2.png', 'icbneztn000049jb', '001', null, 'icfjfl6900006tcc', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icimw12k00008pzc', '123123', null, 'work/1/', '1', '001', '123123', 'icintqg600008n32', '1', 'ichkz9tj0000685c', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icis4akz00006kbc', 'dadadd', null, null, '1', '001', '22', 'icis4al600002t8z', '1', '2', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icis8h3p0000b0df', '123', null, 'work/1/QQ图片20150721115521.png', '1', '001', '123123', 'icis8h3v0000blly', '1', 'ichkz9tj0000685c', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icisf6c700004z0n', 'ddss', null, 'background/favicon.png', '1', '001', '11', 'icisf6cg0000k1aq', '1', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icisg2ho0000eayg', 'dd', null, null, '1', '001', '22', 'icitq3hi0000b1sq', '1', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icisk66w00008cfp', 'ddss', null, 'background/favicon.png', '1', '001', '2', 'icisk66x0000618p', '1', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icislpy4000005o0', 'ddss', null, 'background/favicon.png', '1', '001', '2', 'icislpy400005rl8', '1', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icisr9xc0000gzue', 'fdfd', null, null, '1', '001', '33', 'icisr9xd0000h0kk', '1', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icisue2x0000jl2g', 'ss', null, 'background/favicon.png', '1', '001', '1', 'icisue3300000d41', '1', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icittmo900004kwr', 'dadadd', null, null, '1', '001', null, 'icittmoa0000ae4y', '0', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icitx5x100002egr', 'aaag', null, null, '1', '001', null, 'iciz8jsq000088s2', '0', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iciu0dg90000cbpy', 'zzz', null, null, '1', '001', null, 'iciu0t570000kag8', '0', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iciv13f90000eyno', 'sf', null, null, '1', '001', null, 'iciv13fg0000dicz', '0', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icivhgaj0000bsni', 'ffffdddddddddddddd', null, null, '1', '001', null, 'icivhw7p00009uta', '0', 'ichk98ii0000b77k', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iciz9e2k0000gezn', '测试作品', null, 'background/favicon.png', '1', '001', null, 'iciz9e2l000097h3', '0', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icjzs6oc0000jh7x', '123', null, 'work/1/QQ图片20150721115521.png', '1', '001', '1231', 'icimv2le0000eg67', '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('ickb5lj60000e78f', 's', null, 'background/favicon.png', '1', '001', null, 'ickb5lj60000340j', '0', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icmqgysk0000aw46', '西游记', null, 'work/icmpc22600003fhj/233389.jpg', 'icmpc22600003fhj', '001', null, 'icmynuj30000jqsz', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icqzvows0000h6a3', 'tttt', null, 'work/icmpc22600003fhj/233389.jpg', 'icmpc22600003fhj', '001', null, 'icqzvowt0000jja6', '4', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icwzr0530000de', 'gg', null, null, '1', '001', '44', 'icisx4fb0000kn6r', '0', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icwzr0530000dei1', '电商测试项目', null, null, 'icmpc22600003fhj', 'ibx1qaz200009cp2', null, null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icwzr0530000deiw', 'ssss', null, 'work/icmpc22600003fhj/233389.jpg', 'icmpc22600003fhj', '001', null, 'icqzwd750000copu', '0', 'ichk6qsi0000frl6', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczmdn8j0000fey5', 'ds', null, null, 'icmpc22600003fhj', '001', null, 'iczmdn8j0000csgt', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczseq8e000066u1', 'yy', null, null, 'icmpc22600003fhj', '001', null, 'iczseq8f0000lbz1', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('icztrk8z0000f3tb', 'gf', null, 'work/icmpc22600003fhj/233389.jpg', 'icmpc22600003fhj', '001', null, 'icztrk9a00008nox', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczvqmey0000g29k', 'eess', null, null, 'iciyn39o0000cykr', '001', null, 'iczwfj6h0000azki', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczvxy8y0000dyrm', 'ww', null, null, 'iciyn39o0000cykr', '001', null, 'iczvxy940000bnol', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczwg6yo0000hrzu', 's', null, null, 'iciyn39o0000cykr', '001', null, 'iczwg6yp0000ld74', '0', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('iczxoocb0000bjz5', 'ee', null, null, 'iciyn39o0000cykr', '001', null, 'iczxoocc00002dt7', '1', 'icinve5e0000bw6a', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id0358ie00006f2s', '普哦吧的的的', null, null, 'id02jtsd0000c5t1', '001', null, 'id037a6l00000xir', '0', 'icfy2sao0000adyk', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id03bty40000h0tb', '滴滴顺风车', null, null, 'id02jtsd0000c5t1', '001', null, 'id03e81r00007932', '0', 'icfy2sao0000adyk', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id17yjc40000khw9', '22', null, 'product/20150812164422.jpg', 'iciyn39o0000cykr', '001', null, 'id17yjcc00000t4l', '0', 'icjzs6oc0000jh7x', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id17yydj000099k4', '毛笔', null, 'product/20150816164421.jpg', 'iciyn39o0000cykr', '001', '1000', 'id17yydk0000h48l', '1', 'ichky55b00000ubs', null, null, null, null, null, '100001');
+INSERT INTO `master_work` VALUES ('id17zvcc0000deyp', '微软', null, 'product/20150816164422.jpg', 'iciyn39o0000cykr', '001', '888', 'id17zvcd0000doqj', '1', 'ichky55b00000ubs', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id180bup00006kax', '百度', null, 'product/20150817164421.jpg', 'iciyn39o0000cykr', '001', '25000', 'id180bup0000jmnf', '1', 'ichky55b00000ubs', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id18z5z200008d82', '水瓶', null, 'product/20150817164423.jpg', 'iciyn39o0000cykr', '001', '1000', 'id18z5z900002s9e', '1', 'ichky55b00000ubs', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('id1facnc00000jyb', '金山', null, 'product/20150817164423.jpg', 'id02jtsd0000c5t1', '001', '999', 'id1fasly0000himg', '1', 'ichky55b00000ubs', null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idjj6myc0000ewsn', 'hot summer', null, 'work/20150817164424.jpg', null, null, null, 'idjj6myd0000dsiq', '1', 'ichk98ii0000b77k', null, null, null, null, null, 'idjixy3x000085yn');
+INSERT INTO `master_work` VALUES ('idjzvdrd2vdon8jg', 'ss', 'ss', null, null, null, '1', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idjzz35b19768lo1', 'ddddddddddd', 'dd', null, null, null, '22', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idkz861r5ehhcnue', '    金箍棒', '0000001', null, 'icmpc22600003fhj', null, '11', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idkzan7r26y1hlvq', '青龙偃月刀', '000002', null, 'icmpc22600003fhj', null, '11', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idkzc7g33cfesw37', '青釭剑', '000003', null, 'icmpc22600003fhj', null, '11', null, '1', null, null, null, null, null, null, null);
+INSERT INTO `master_work` VALUES ('idl22t9h189v5r96', '6', '6', null, null, null, '6', null, '1', null, null, null, null, null, null, null);
+
+
+DROP TABLE IF EXISTS `master_work_picture`;
+CREATE TABLE `master_work_picture` (
+  `id` char(16) NOT NULL DEFAULT '',
+  `product_id` char(16) NOT NULL,
+  `picture_url` varchar(128) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of master_work_picture
+-- ----------------------------
+INSERT INTO `master_work_picture` VALUES ('1', '1', '/scripts/assets/images/img14.jpg', '1');
+INSERT INTO `master_work_picture` VALUES ('ice75jnh0000gc1e', 'ice4zr0d000002x3', 'work/icbneztn000049jb/ice4zr0d000002x3/img2.png', '1');
+INSERT INTO `master_work_picture` VALUES ('ice774hg00006i1c', 'ice4zr0d000002x3', 'work/icbneztn000049jb/ice4zr0d000002x3/img2.png', '1');
+INSERT INTO `master_work_picture` VALUES ('ice77d7v000092d5', 'ice4zr0d000002x3', 'work/icbneztn000049jb/ice4zr0d000002x3/QQ图片20150716112636.png', '1');
+INSERT INTO `master_work_picture` VALUES ('icms7dox000077mk', 'icmqgysk0000aw46', 'work/icmpc22600003fhj/icmqgysk0000aw46/233389.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('icmynewg0000gjsn', 'icmqgysk0000aw46', 'work/icmpc22600003fhj/icmqgysk0000aw46/233389.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('icmyoa53000009y0', 'icmqgysk0000aw46', 'work/icmpc22600003fhj/icmqgysk0000aw46/233389.jpg', '1');
+INSERT INTO `master_work_picture` VALUES ('iczw24sy000041kz', 'iczvqmey0000g29k', 'work/iciyn39o0000cykr/iczvqmey0000g29k/', '0');
+INSERT INTO `master_work_picture` VALUES ('iczw29v000000nsw', 'iczvqmey0000g29k', 'work/iciyn39o0000cykr/iczvqmey0000g29k/', '0');
+INSERT INTO `master_work_picture` VALUES ('ididy4iq0000d5vk', 'id1facnc00000jyb', 'product/3f0047d7848d572518527ec093a55c4420150819141542.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idie6wwx00002g4p', 'id1facnc00000jyb', 'product/3f0047d7848d572518527ec093a55c4420150819142232.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idie93gn0000ex5t', 'id1facnc00000jyb', 'product/3f0047d7848d572518527ec093a55c4420150819142414.jpg', '1');
+INSERT INTO `master_work_picture` VALUES ('idigavkf00008hfv', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819152104.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigbnrf0000jsuq', 'id17zvcc0000deyp', 'product/026f64c1b254766e7a5e7b101011ae8c20150819152211.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigbzrv0000fjg4', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819152215.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idighsgj00000hc9', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819152658.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idighuid0000l0xm', 'id17zvcc0000deyp', 'product/026f64c1b254766e7a5e7b101011ae8c20150819152701.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idighyfw00002vdy', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819152702.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigi4ze00002g31', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819152711.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigt4lz00001m04', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819153544.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigtbiw0000eye0', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819153556.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigzwom0000aeja', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819154104.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idigzwvb00007tfg', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819154104.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idih8jfp0000g9qj', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819154746.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idih8js7000077y7', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819154747.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idih8kfy00009zyy', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819154747.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiibmt500007xdf', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819161810.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiibn0a0000ccuy', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819161811.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiibn67000028n4', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819161811.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiieb350000jtpt', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819162015.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiiecaa0000kizg', 'id17zvcc0000deyp', 'product/026f64c1b254766e7a5e7b101011ae8c20150819162016.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiieesb0000cth6', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819162017.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiief0200004yaq', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819162020.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiipnh700006f1j', 'id17zvcc0000deyp', 'product/bd670fb0b27d02ab1e891aa1b50da71720150819162901.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiiprxz00002ovk', 'id17zvcc0000deyp', 'product/7ade3e9f755d338c31472b3dde0231e020150819162909.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiipzrs0000b5mn', 'id17zvcc0000deyp', 'product/026f64c1b254766e7a5e7b101011ae8c20150819162917.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idiiqdwm0000eihe', 'id17zvcc0000deyp', 'product/43acca4c3305b4e976acad640a044c8120150819162935.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idij0gsx00001d70', 'id17zvcc0000deyp', 'product/43acca4c3305b4e976acad640a044c8120150819163729.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idij0jiy0000bpwh', 'id17zvcc0000deyp', 'product/148b1463b1976d15a531e7607cee231720150819163733.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idik3pb800000euh', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819170756.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idik5gzp0000cdd8', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819170919.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idim1nh000007psk', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819180223.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idim3cd60000ecm5', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819180342.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idim3cjv0000ejrh', 'id17zvcc0000deyp', 'product/7ade3e9f755d338c31472b3dde0231e020150819180342.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idim3cqs00000uu1', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819180343.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimc2li0000kotu', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819181029.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimc30g0000ffcl', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819181030.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimevnk000040eo', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819181240.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimevvq0000e7su', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819181241.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimew900000bs79', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819181241.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimh2kh000049ti', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819181423.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimh2rk0000i8wd', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819181423.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimh2xm00005ahp', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819181423.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimior3000087as', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819181538.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimiox400009dre', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819181538.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimip250000eryj', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819181539.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimmftg00005n23', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819181833.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimmfyl00003eci', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819181833.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimop230000640c', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819182018.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimoppf0000capa', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819182019.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimsviy00001f4a', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819182333.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimwn1r00003rb4', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819182625.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idimydwv0000342m', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819182748.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idin1ccy0000kfi3', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819183008.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idin3f470000279t', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819183145.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idin3rfm0000epec', 'id17zvcc0000deyp', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150819183201.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idin437a000082b8', 'id17zvcc0000deyp', 'product/1213965148102714_file20150819183215.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idio7quh0000auf6', 'id17zvcc0000deyp', 'product/3f0047d7848d572518527ec093a55c4420150819190307.jpg', '2');
+INSERT INTO `master_work_picture` VALUES ('idjj75pl00004qu3', 'idjj6myc0000ewsn', 'work/idjixy3x000085yn/idjj6myc0000ewsn/798b00b003ea71f1c7bbdebeb1f1d7e9.jpg', '1');
+INSERT INTO `master_work_picture` VALUES ('idkzdvajbl5twzby', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821095119.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkze20uou4xff8o', 'idkzc7g33cfesw37', 'product/026f64c1b254766e7a5e7b101011ae8c20150821095129.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkze28x27u2u9r3', 'idkzc7g33cfesw37', 'product/1213965148102714_file20150821095130.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkze8933f2t9jtp', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821095137.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzsgbr47wril2y', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821100241.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzsgs01txt6bj1', 'idkzc7g33cfesw37', 'product/026f64c1b254766e7a5e7b101011ae8c20150821100241.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzsh6j7pd2fjip', 'idkzc7g33cfesw37', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150821100242.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzshm57sadxhbc', 'idkzc7g33cfesw37', 'product/1213965148102714_file20150821100242.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzsokk6rffaajt', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821100252.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzsp0lx6m06qhf', 'idkzc7g33cfesw37', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150821100252.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idkzspfx2lwxvcu3', 'idkzc7g33cfesw37', 'product/1213965148102714_file20150821100253.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idl2ca962fijcydk', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821111405.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idl2cafdgcyo4uqb', 'idkzc7g33cfesw37', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150821111406.jpg', '0');
+INSERT INTO `master_work_picture` VALUES ('idl2calf3hdns2pi', 'idkzc7g33cfesw37', 'product/1213965148102714_file20150821111406.jpg', '0');
