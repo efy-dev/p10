@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <link href="/scripts/assets/css/efeiyi-shoppingcart.css" type="text/css " rel="stylesheet">
+    <link href="<c:url value="/scripts/assets/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
 <%--<div class="oss">--%>

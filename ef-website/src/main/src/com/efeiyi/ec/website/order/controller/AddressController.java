@@ -58,11 +58,21 @@ public class AddressController {
     @RequestMapping({"/address/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistAddress_default",request);
+        XQuery xQuery = new XQuery("plistConsumerAddress_default",request);
         xQuery.addRequestParamToModel(model,request);
         List addressList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("addressList",addressList);
         return "/addressList";
+    }
+
+    @RequestMapping({"/address/jsonList.do"})
+    public List listAddressJson(HttpServletRequest request,Model model) throws Exception {
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default",request);
+        xQuery.addRequestParamToModel(model,request);
+        List addressList = baseManager.listPageInfo(xQuery).getList();
+
+        return addressList;
     }
 
 

@@ -4,10 +4,13 @@ import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.ming800.core.base.controller.BaseController;
@@ -31,9 +34,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -78,7 +79,7 @@ public class PurchaseOrderController extends BaseController {
                     break;
                 default:
                     xQuery = new XQuery("plistPurchaseOrder_default", request);
-        }
+            }
 
         }
         xQuery.addRequestParamToModel(model, request);
@@ -92,7 +93,7 @@ public class PurchaseOrderController extends BaseController {
     * 查看订单详情
     * */
     @RequestMapping({"/view/{orderId}"})
-    public String viewPurchaseOrder(Model model,@PathVariable String orderId) {
+    public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
         return "/purchaseOrder/purchaseOrderView";
@@ -143,7 +144,6 @@ public class PurchaseOrderController extends BaseController {
         }
         return "success";
     }
-
 
 
     /*
@@ -216,11 +216,11 @@ public class PurchaseOrderController extends BaseController {
     }
 
     @RequestMapping({"/pay/weixin/native/{orderId}"})
-    public String wxPayNative(@PathVariable String orderId,Model model){
-        PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        String codeUrl = paymentManager.wxNativePay(purchaseOrder,purchaseOrder.getTotal().floatValue());
-        model.addAttribute("order",purchaseOrder);
-        model.addAttribute("codeUrl",codeUrl);
+    public String wxPayNative(@PathVariable String orderId, Model model) {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        String codeUrl = paymentManager.wxNativePay(purchaseOrder, purchaseOrder.getTotal().floatValue());
+        model.addAttribute("order", purchaseOrder);
+        model.addAttribute("codeUrl", codeUrl);
         return "/order/wxNative";
     }
 
@@ -231,41 +231,134 @@ public class PurchaseOrderController extends BaseController {
      * @return
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
-    public String saveOrUpdateOrder(HttpServletRequest request) throws Exception {
-
-
-        BigDecimal total_fee = new BigDecimal(0);
+    public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         String cartId = request.getParameter("cartId");
-        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
+
+//        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
         Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
 
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdat  ePurchaseOrder", request);
+        //得到店铺的信息
+        List<Tenant> tenantListTemp = new ArrayList<>();
+        List<Tenant> tenantList = new ArrayList<>();
+        List<CartProduct> cartProductList = cart.getCartProductList();
+        HashMap<String, List> productMap = new HashMap<>();
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
         xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
-        xSaveOrUpdate.getParamMap().put("consumerAddress_id", consumerAddressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        List<CartProduct> cartProductList = cart.getCartProductList();
         for (CartProduct cartProductTemp : cartProductList) {
-            total_fee.add(new BigDecimal(cartProductTemp.getProductModel().getPrice().intValue() * cartProductTemp.getAmount()));
             PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
             purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
             purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
             purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
             purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
             baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+            ProductModel productModel = cartProductTemp.getProductModel();
+            Product product = productModel.getProduct();
+            Tenant tenant = product.getTenant();
+            tenantListTemp.add(tenant);
         }
 
-        purchaseOrder.setTotal(total_fee);
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        for (Tenant tenantTemp : tenantListTemp) {
+            boolean isContain = false;
+            for (Tenant tenant : tenantList) {
+                if (tenant.getId().equals(tenantTemp.getId())) {
+                    isContain = true;
+                    break;
+                } else {
+                    isContain = false;
+                }
+            }
+            if (!isContain) {
+                tenantList.add(tenantTemp);
+            }
+        }
 
+        model.addAttribute("tenantList", tenantList);
+
+        purchaseOrder.setTotal(cart.getTotalPrice());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder); //生成父订单
+
+        //拆分订单
+        if (tenantList.size() > 1) {
+            for (Tenant tenantTemp : tenantList) {
+                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+                xSaveOrUpdate.getParamMap().put("serial", System.currentTimeMillis() + "");
+                PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
+                purchaseOrder.setFatherPurchaseOrder(purchaseOrder);
+                for (CartProduct cartProductTemp : cartProductList) {
+                    if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId())) {
+                        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+                        purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
+                        purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
+                        purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
+                        purchaseOrderProduct.setPurchaseOrder(purchaseOrderTemp);
+                        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+                    }
+                }
+            }
+        }
+
+        for (Tenant tenant : tenantList) {
+            List<Object> productList = new ArrayList<>();
+            for (CartProduct cartProduct : cartProductList) {
+                if (cartProduct.getProductModel().getProduct().getTenant().getId().equals(tenant.getId())) {
+                    productList.add(cartProduct);
+                }
+            }
+            productMap.put(tenant.getId(), productList);
+        }
+
+        model.addAttribute("productMap", productMap);
+        model.addAttribute("cart", cart);
+
+        //收货地址
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listPageInfo(xQuery).getList();
+
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+
+//        String payment = request.getParameter("payment");
+//        if (payment.equals("1")) {//支付宝
+//            return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
+//        } else if (payment.equals("3")) { //微信
+//            return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+//        }
+//        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+
+    @RequestMapping({"/confirm/{orderId}"})
+    public String orderConfirm(@PathVariable String orderId, HttpServletRequest request) {
         String payment = request.getParameter("payment");
+        String isWeiXin = request.getParameter("isWeiXin");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        purchaseOrder.setStatus("1");
+        purchaseOrder.setPayWay(payment);
+        List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
+        for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
+            purchaseOrderTemp.setStatus("1");
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+        }
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
         } else if (payment.equals("3")) { //微信
-            return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+            if (isWeiXin != null) {
+                return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+            } else {
+                return "/pay/weixin/native/" + purchaseOrder.getId();
+            }
         }
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();
+
     }
+
 
     @RequestMapping({"/choosePayment/{orderId}"})
     public String choosePayment(@PathVariable String orderId, HttpServletRequest request, Model model) {
