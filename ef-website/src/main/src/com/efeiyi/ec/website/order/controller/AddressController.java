@@ -98,7 +98,7 @@ public class AddressController {
     @RequestMapping({"defaultAddress.do"})
     @ResponseBody
     public boolean  defaultAddress(HttpServletRequest request)throws Exception{
-        String hql = "update organization_consumer_address set status = '1'";
+        String hql = "update organization_consumer_address set status = '1'where status<>0";
         baseManager.executeSql(null,hql,null);
         XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
