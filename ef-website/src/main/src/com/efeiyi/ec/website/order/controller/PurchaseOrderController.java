@@ -42,7 +42,7 @@ import java.util.*;
  * Created by Administrator on 2015/6/25.
  */
 @Controller
-@RequestMapping("/myEfeiyi/order")
+@RequestMapping("/order")
 public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
@@ -54,7 +54,7 @@ public class PurchaseOrderController extends BaseController {
     * 订单状态查询
     *
     * */
-    @RequestMapping({"/list.do"})
+    @RequestMapping({"/myEfeiyi/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("id");
         XQuery xQuery = null;
@@ -94,7 +94,7 @@ public class PurchaseOrderController extends BaseController {
     /*
     * 查看订单详情
     * */
-    @RequestMapping({"/view/{orderId}"})
+    @RequestMapping({"/myEfeiyi/view/{orderId}"})
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
