@@ -1,7 +1,7 @@
 package com.efeiyi.service;
 
-import com.efeiyi.PalConst;
-import com.efeiyi.ResultBean;
+import com.efeiyi.util.PalConst;
+import com.efeiyi.bean.CheckResultBean;
 import com.efeiyi.dao.IPalDao;
 import com.efeiyi.pal.check.model.LabelCheckRecord;
 import com.efeiyi.pal.label.model.Label;
@@ -9,11 +9,7 @@ import com.efeiyi.pal.product.model.Product;
 import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.*;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -21,7 +17,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -37,19 +32,6 @@ import java.util.LinkedHashMap;
 @EnableTransactionManagement
 public class LabelCheckManagerImpl  implements ILabelCheckManager {
 
-//    @Autowired
-//    @Qualifier("sessionFactory")
-//    private SessionFactory sessionFactory;
-//
-//    public Session getSession() {
-//        return sessionFactory.getCurrentSession();
-//    }
-//
-//    @Resource
-//    public void setSessionFactory0(SessionFactory sessionFactory) {
-//        super.setSessionFactory(sessionFactory);
-//    }
-
     @Autowired
     private IPalDao palDao;
 
@@ -62,22 +44,43 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 
         LinkedHashMap<String, Object> queryParaMap = new LinkedHashMap<>();
         queryParaMap.put(PalConst.getInstance().checkLabelParam1, labelId);
-//        return (Label) baseManager.getUniqueObjectByConditions(PalConst.getInstance().checkLabel, queryParaMap);
-//        Query listQuery = this.getSession().createQuery(PalConst.getInstance().checkLabel);
         Query listQuery = palDao.createQuery(PalConst.getInstance().checkLabel);
         listQuery = setQueryParams(listQuery, queryParaMap);
         return (Label)listQuery.uniqueResult();
     }
 
+    /**
+     * 查询唯一商品
+     * @param productId
+     * @return
+     */
     @Override
     public Product getUniqueProduct(String productId) {
 
         LinkedHashMap<String, Object> queryLabParaMap = new LinkedHashMap<>();
         queryLabParaMap.put(PalConst.getInstance().productId, productId);
-//        Query listQuery = this.getSession().createQuery(PalConst.getInstance().viewProduct);
         Query listQuery = palDao.createQuery(PalConst.getInstance().viewProduct);
         listQuery = setQueryParams(listQuery, queryLabParaMap);
         return (Product)listQuery.uniqueResult();
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @Override
+    public ModelMap getProductModel(HttpServletRequest request) {
+
+        ModelMap model = new ModelMap();
+
+        String productId = request.getParameter(PalConst.getInstance().productId);
+        LinkedHashMap<String, Object> queryLabParaMap = new LinkedHashMap<>();
+        queryLabParaMap.put(PalConst.getInstance().productId, productId);
+
+        Product product = getUniqueProduct(productId);
+        model.addAttribute(PalConst.getInstance().resultProduct, product);
+        return model;
     }
 
     protected Query setQueryParams(Query query, LinkedHashMap<String, Object> queryParamMap) {
@@ -96,6 +99,14 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         return query;
     }
 
+    /**
+     * 处理微信公众号发来的请求
+     * @param request 请求
+     * @param inXml post的xml
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public String treatWeiXinMsg(HttpServletRequest request,String inXml) throws ServletException,IOException {
         Document document = null;
@@ -120,23 +131,28 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         System.out.println("serial=\'" + serial + "\'");
 
         Label label = getUniqueLabel(serial);
-        ModelMap model = new ModelMap();
-        updateRecord(model, label, true);
 
-        System.out.println("标签已查次数："+label.getCheckCount());
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/checkLabel.do?serial=" + serial;
         String toUserName = root.element("ToUserName").getText();
         String fromUserName = root.element("FromUserName").getText();
 
+//        String toUserName = "aaa";
+//        String fromUserName = "bbb";
 
+        ModelMap model = new ModelMap();
         if (label != null) {
-            String content = constructWeiXinPushContent(label);
+            updateRecord(model, label, true);
+            System.out.println("标签已查次数：" + label.getCheckCount());
+            String content = constructWeiXinPushContent(label,model);
             outXml = constructWeiXinMsg(label,fromUserName, toUserName, content, url);
+
+            PalConst.getInstance().labelCache.put(label.getCode(),label.getCode());//扫二维码计入全局
+
         } else {
-            outXml = constructWeiXinMsg(label,fromUserName, toUserName, PalConst.getInstance().weiXinFakeMsg, url);
+            outXml = constructWeiXinMsg(label,fromUserName, toUserName, PalConst.getInstance().fakeBean.getMsg(), url);
         }
 
-        System.out.println(new Date(System.currentTimeMillis()) + "--outXml:\n" + outXml + "\n");
+        System.out.println("\n\n" + new Date(System.currentTimeMillis()) + "--outXml:\n" + outXml + "\n\n");
         return outXml;
 //        return "";
     }
@@ -173,7 +189,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 
             Long timeDiffer = date.getTime() - label.getFirstCheckDateTime().getTime();
 
-            ResultBean recheckBean = new ResultBean();
+            CheckResultBean recheckBean = new CheckResultBean();
             try {
                 //只有24小时内查询次数为2才显示真
                 if (timeDiffer < PalConst.getInstance().timeIncrement && label.getCheckCount() == 2) {
@@ -188,7 +204,12 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
             }catch(Exception e){
                 throw new ServletException(e.getMessage());
             }
-            String msg = getRecheckRecordMsg(label);
+            String msg = "";
+            if(PalConst.getInstance().labelCache.get(label.getCode()) != null) {
+                msg = getWeixinRecheckRecordMsg(label);
+            }else{
+                msg = getRecheckRecordMsg(label);
+            }
             recheckBean.setMsg(msg);
             model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
         }
@@ -201,7 +222,6 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
 
         //更新标签状态
         label.setLastCheckDateTime(date);
-//         getSession().saveOrUpdate(label.getClass().getName(), label);
         palDao.saveOrUpdate(label.getClass().getName(), label);
 
     }
@@ -213,8 +233,6 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         checkRecord.setIP((String) model.get(PalConst.getInstance().ip));
         checkRecord.setLabel(label);
         checkRecord.setProduct(label.getPurchaseOrderLabel().getProduct());
-//        checkRecord.setIPAddress(getIpAddress(checkRecord.getIP()));
-//        getSession().saveOrUpdate(checkRecord.getClass().getName(), checkRecord);
         palDao.saveOrUpdate(checkRecord.getClass().getName(), checkRecord);
     }
 
@@ -226,10 +244,20 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
      * @throws Exception
      */
     private String getRecheckRecordMsg(Label label) {
-
-//        String ip =  label.getLabelCheckRecordList().get(0).getIPAddress();
-
         String msg = PalConst.getInstance().recheckFakeBean.getMsg().
+                replaceAll("#N#", Integer.toString(label.getCheckCount())).
+                replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
+        return msg;
+    }
+
+    /**
+     * 组装微信公众平台真伪消息的时间、地点和验证次数
+     * @param label
+     * @return
+     * @throws Exception
+     */
+    private String getWeixinRecheckRecordMsg(Label label) {
+        String msg = PalConst.getInstance().weixinRecheckMsg.
                 replaceAll("#N#", Integer.toString(label.getCheckCount())).
                 replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
         return msg;
@@ -272,7 +300,9 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         Element item = root.addElement("Articles").addElement("item");
         item.addElement("Title").add(DocumentHelper.createCDATA("诚品宝"));
         item.addElement("Description").add(DocumentHelper.createCDATA(content));
-        item.addElement("PicUrl").add(DocumentHelper.createCDATA(PalConst.getInstance().uploadImgBaseUrl + label.getPurchaseOrderLabel().getProduct().getImgUrl()));
+        if(label != null) {
+            item.addElement("PicUrl").add(DocumentHelper.createCDATA(PalConst.getInstance().uploadImgBaseUrl + label.getPurchaseOrderLabel().getProduct().getImgUrl()));
+        }
         item.addElement("Url").add(DocumentHelper.createCDATA(url));
         root.addElement("FuncFlag").setText("1");
         return document.asXML();
@@ -283,9 +313,11 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
      * @param label
      * @return
      */
-    private String constructWeiXinPushContent(Label label){
+    private String constructWeiXinPushContent(Label label,ModelMap model){
 
-        return PalConst.getInstance().trueMsg + "\n\n商品：" + label.getPurchaseOrderLabel().getProduct().getName() + "\n\n作者：" + label.getPurchaseOrderLabel().getProduct().getTenant().getName();
+        CheckResultBean checkResultBean = (CheckResultBean)model.get(PalConst.getInstance().resultLabel);
+//        return PalConst.getInstance().trueMsg + "\n\n商品：" + label.getPurchaseOrderLabel().getProduct().getName() + "\n\n作者：" + label.getPurchaseOrderLabel().getProduct().getTenant().getName();
+        return checkResultBean.getMsg();
     }
 
     /**

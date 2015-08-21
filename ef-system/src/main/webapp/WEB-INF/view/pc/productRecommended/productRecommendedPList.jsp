@@ -66,10 +66,10 @@
                                     ${productRecommended.sort}
                             </a>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${productRecommended.product.id}'/>">${productRecommended.product.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=recommend&id=${productRecommended.product.id}'/>">${productRecommended.product.name}</a></td>
                         <td class="am-hide-sm-only">${productRecommended.product.price}</td>
                         <td class="am-hide-sm-only">${productRecommended.product.category.name}</td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${productRecommended.product.tenant.id}'/>">${productRecommended.product.tenant.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewTenant&view=recommend&id=${productRecommended.product.tenant.id}'/>">${productRecommended.product.tenant.name}</a></td>
                         <td class="am-hide-sm-only"><img src="${productRecommended.product.picture_url}" alt="推荐产品图片"></td>
                     </tr>
                 </c:forEach>

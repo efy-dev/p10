@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <link href="/scripts/assets/css/efeiyi-shoppingcart.css" type="text/css " rel="stylesheet">
+    <link href="<c:url value="/scripts/assets/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
 <%--<div class="oss">--%>
@@ -122,7 +122,7 @@
                             <%--<td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>--%>
                             <%--<td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>--%>
                         <td width="332">总计（免运费）<span class="moneycl" id="totalPrice">${cart.totalPrice}</span>元</td>
-                        <td width="147"><a href="#" class="btn-settle">结算</a></td>
+                        <td width="147"><a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/> " class="btn-settle">结算</a></td>
                     </tr>
                 </table>
             </div>

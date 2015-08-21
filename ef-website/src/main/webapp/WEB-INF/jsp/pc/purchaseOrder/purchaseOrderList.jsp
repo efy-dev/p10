@@ -47,169 +47,45 @@
         </table>
       </div>
       <!-- //End--title-->
+      <c:forEach items="${orderList}" var="order">
       <div class="list-pro wh1">
         <table>
           <tr>
             <th colspan="6">
-              <span>2015-08-02 18:29:30</span>
-              <span>订单号：<strong>1234567890</strong></span>
+              <span>${order.createDatetime}</span>
+              <span>订单号：<strong>${order.serial}</strong></span>
               <span>瓷器之都</span>
             </th>
           </tr>
+        <c:forEach items="${order.purchaseOrderProductList}" var="op">
           <tr>
             <td width="237" >
               <div class="cols1">
                 <img src="../../../../scripts/assets/images/img-tx2.png" alt=""/>
                 <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
+                  <p><a href="#">${op.productModel.product.name}</a></p>
+                  <p><a href="#">${op.productModel.product.project.type}</a></p>
                 </div>
               </div>
             </td>
-            <td width="174">￥189.00</td>
+            <td width="174">￥${order.total}</td>
             <td width="107">x<span>1</span></td>
             <td width="100">在线支付</td>
-            <td width="130">待付款</td>
+            <td width="130">${order.orderStatus}</td>
             <td width="139">
               <p><a href="#">付款</a></p>
-              <p><a href="/order/view/100000000001">查看</a></p>
+              <p><a href="/order/view/${order.id}">查看</a></p>
               <p><a href="#">取消订单</a></p>
             </td>
           </tr>
-          <tr>
-            <td width="237" >
-              <div class="cols1">
-                <img src="../../../../scripts/assets/images/img-tx2.png" alt=""/>
-                <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
-                </div>
-              </div>
-            </td>
-            <td width="174">￥189.00</td>
-            <td width="107">x<span>1</span></td>
-            <td width="100">在线支付</td>
-            <td width="130">待付款</td>
-            <td width="139">
-              <p><a href="#">付款</a></p>
-              <p><a href="#">查看</a></p>
-              <p><a href="#">取消订单</a></p>
-            </td>
-          </tr>
+        </c:forEach>
         </table>
       </div>
+        </c:forEach>
       <!-- //End--two-->
-      <div class="list-pro wh1">
-        <table>
-          <tr>
-            <th colspan="6">
-              <span>2015-08-02 18:29:30</span>
-              <span>订单号：<strong>1234567890</strong></span>
-              <span>瓷器之都</span>
-            </th>
-          </tr>
-          <tr>
-            <td width="237" >
-              <div class="cols1">
-                <img src="<c:url value="../../../../scripts/assets/images/img-tx2.png"/>" alt=""/>
-                <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
-                </div>
-              </div>
-            </td>
-            <td width="174">￥189.00</td>
-            <td width="107">x<span>1</span></td>
-            <td width="100">在线支付</td>
-            <td width="130" rowspan='2' style="border-left:1px solid #ccc;">
-              <p><a href="#">待收货</a></p>
-              <p><a href="#">订单跟踪</a></p>
-            </td>
-            <td width="139" rowspan='2' style="border-left:1px solid #ccc;">
-              <p><a href="#">查看</a></p>
-              <p><a href="#">再次购买</a></p>
-            </td>
-          </tr>
-          <tr>
-            <td width="237" >
-              <div class="cols1">
-                <img src="../../../../scripts/assets/images/img-tx2.png" alt=""/>
-                <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
-                </div>
-              </div>
-            </td>
-            <td width="174">￥189.00</td>
-            <td width="107">x<span>1</span></td>
-            <td width="100">在线支付</td>
-          </tr>
-        </table>
-      </div>
+      <div class="list-pro wh1"></div>
       <!-- //End--3-->
-      <div class="list-pro wh1">
-        <table>
-          <tr>
-            <th colspan="6">
-              <span>2015-08-02 18:29:30</span>
-              <span>订单号：<strong>1234567890</strong></span>
-              <span>瓷器之都</span>
-            </th>
-          </tr>
-          <tr>
-            <td width="237" >
-              <div class="cols1">
-                <img src="../../../../scripts/assets/images/img-tx2.png" alt=""/>
-                <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
-                </div>
-              </div>
-            </td>
-            <td width="174">￥189.00</td>
-            <td width="107">x<span>1</span></td>
-            <td width="100">在线支付</td>
-            <td width="130">
-              <P>已完成</P>
-              <P ><a>未评价</a></P>
-            </td>
-            <td width="139">
-              <p><a href="#">查看</a></p>
-              <p><a href="#">删除</a></p>
-              <p><a href="#">追加评价</a></p>
-            </td>
-          </tr>
-          <tr>
-            <td width="237" >
-              <div class="cols1">
-                <img src="../../../../scripts/assets/images/img-tx2.png" alt=""/>
-                <div class="info">
-                  <p><a href="#">瓷器</a></p>
-                  <p><a href="#">商品名称</a></p>
-
-                </div>
-              </div>
-            </td>
-            <td width="174">￥189.00</td>
-            <td width="107">x<span>1</span></td>
-            <td width="100">在线支付</td>
-            <td width="130">
-              <P>已完成</P>
-              <P>已评价</P>
-            </td>
-            <td width="139">
-              <p><a href="#">查看</a></p>
-              <p><a href="#">删除</a></p>
-              <p><a href="#">追加评价</a></p>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <div class="list-pro wh1"></div>
     </div>
 </div>
 </div>

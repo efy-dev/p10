@@ -54,7 +54,7 @@
     </div>
   </div>
   <!--//End-->
-
+<c:if test="${result.authenticity == 1}">
   <div class="am-paragraph-default">
     <div class="infoitem">
       <ul>
@@ -67,6 +67,7 @@
   </div>
   <!--//End-->
   <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default" href="###">立即购买</a></div>
+  </c:if>
   </c:if>
 </article>
 

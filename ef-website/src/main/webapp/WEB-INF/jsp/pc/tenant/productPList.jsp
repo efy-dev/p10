@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- //End--header-->
+<body>
 <div class="hd shop">
   <div class="shop-header wh">
     <div class="hd">
@@ -58,6 +59,14 @@
           </li>
         </c:forEach>
       </ul>
+      <div class="page wh">
+        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/listProduct">
+          <ming800:pcPageParam name="conditions"
+                               value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+          <ming800:pcPageParam name="sort"
+                               value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+        </ming800:pcPageList>
+      </div>
     </div>
     <!-- //End--list-pro-->
    <%-- <div class="page wh">
@@ -69,16 +78,8 @@
       </ul>
     </div>--%>
     <!-- //End--page-->
-    <div class="page wh">
-      <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/listProduct">
-        <%--<ming800:page-param2 name="qm" value="${requestScope.qm}"/>--%>
-        <ming800:pcPageParam name="conditions"
-                             value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-        <ming800:pcPageParam name="sort"
-                             value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
-      </ming800:pcPageList>
-    </div>
   </div>
+
   <!-- //End---->
 </div>
 

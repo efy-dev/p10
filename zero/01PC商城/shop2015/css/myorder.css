@@ -63,7 +63,8 @@ a:hover{text-decoration: underline}
 .my-order .title table {width:851px;border:1px #ccc solid}
 .my-order .title table th {line-height:40px;text-align: center;font-size: 12px;color:#666;font-family: "宋体";font-weight: normal}
 .my-order .list-pro {margin-top:7px;}
-.my-order .list-pro table {width:851px}
+.my-order .list-pro-table {width:851px;}
+.my-order .list-pro-table .item tr {border: 0; border-bottom:1px solid #ccc;}
 .my-order .list-pro table tr {width:851px;border:1px solid #ccc;color:#666;font-size: 12px;font-weight:normal;}
 .my-order .list-pro table tr strong{color: #000}
 .my-order .list-pro th span {  float: left;margin-left:23px;line-height: 27px;}
@@ -81,7 +82,7 @@ a:hover{text-decoration: underline}
 .my-order .mt-null p{font-size: 12px;color:#000;font-family: "宋体";text-align: center}
 .my-order .mt-null ul{margin-top:30px;}
 .my-order .mt-null ul li a{width: 129px;height: 36px;color: #000;font-family: "仿体";text-align: center;display: block;line-height: 36px;font-size: 14px;
-border: 1px solid #000;text-decoration: none}
+    border: 1px solid #000;text-decoration: none}
 .my-order .mt-null ul li a:hover{transition:all 0.5s;background-color: #000;color:#fff;}
 .my-order .efeiyi{float: left}
 .my-order .collect{float: right}
@@ -139,9 +140,9 @@ border: 1px solid #000;text-decoration: none}
 .my-order .yes-border{border: 1px solid #ccc;}
 /*表单弹出*/
 .my-order .pop-up{width:696px;border: 1px solid #000;background-color: #fff;position: fixed;left:50%;top:50%;z-index: 9999;
-margin-top: -290px;margin-left:-286px;}
+    margin-top: -290px;margin-left:-286px;}
 .my-order .pop-h{padding-left: 20px;font-size: 14px;color:#000;font-family: "Microsoft YaHei";line-height: 44px;border-bottom:1px solid #000;
-background: #fff;}
+    background: #fff;}
 .my-order .m-form{padding:15px 37px 0;background: #fff;}
 .my-order .m-form li{height:44px;line-height: 44px;}
 .my-order .m-form li input{border:1px solid #000;padding: 3px;color:#000;font-size: 12px;font-family: "宋体";}
@@ -155,7 +156,7 @@ background: #fff;}
 .my-order .m-form li .dj-btn{width: 163px;height:25px;border:1px solid #000;background: #fff;color:#000;font-size: 12px;font-family: "宋体";}
 .my-order .m-form li .dj-btn:hover{background: #000;color:#fff;transition: all 0.5s;}
 .my-order .m-form li span{width:145px;height: 25px;border:1px solid #fe0000;color:#fe0000;font-size: 12px;font-family: "宋体";line-height: 25px;
-padding:5px 13px;}
+    padding:5px 13px;}
 .my-order .clase{width: 15px;height:15px;position: absolute;top:15px;right:20px;cursor: pointer;transition: all 0.5s;background: url("../images/efeiyi-icon.png") no-repeat;}
 .my-order .sh-bg{position: fixed;background: #000;opacity: 0.6;z-index: -1;right: 0;top:0;left: 0;bottom: 0;}
 /*用户信息*/
@@ -197,6 +198,39 @@ padding:5px 13px;}
 .my-order .password li .dj-btn{width: 116px;height:34px;border:1px solid #000;background: #fff;color:#000;font-size: 12px;font-family: "宋体";}
 .my-order .password li .dj-btn:hover{background: #000;color:#fff;transition: all 0.5s;}
 .my-order .password .active-d{color: #ff0000;}
+/*我的收藏*/
+.my-favorite .my-goods{width: 851px;float: right;border:1px solid #ccc;height: 47px;line-height: 47px;}
+.my-favorite .my-goods .favorite-category{padding-left: 50px;}
+.my-favorite .my-goods .favorite-category li{float: left;padding-right: 90px;}
+.my-favorite .my-goods .favorite-category li a{font-size: 14px;color: #ccc;font-family: "Microsoft YaHei";}
+.my-favorite .my-goods .favorite-category li .fav-active{color: #000;}
+.my-favorite .fav-mg{margin-top: -1px;}
+.my-favorite .my-screen{padding-left: 50px;}
+.my-favorite .my-screen dt{float: left}
+.my-favorite .my-screen dd{float: left;margin-top:0}
+.my-favorite .my-screen dd ul li{float: left}
+.my-favorite .my-screen dd a{font-size: 14px;margin-left: 20px;color: #ff0000}
+.my-favorite .my-screen span{width: 101px;font-size: 14px;font-weight: 100}
+.my-favorite .my-screen a{font-size: 14px;font-weight: 100}
+.my-favorite .goods-list{width: 851px;float: right;border:1px solid #ccc;overflow: hidden;margin-top: 30px;}
+.my-favorite .goods-list .list-filtrate{height: 44px;line-height: 44px;}
+.my-favorite .goods-list .list-filtrate li{padding-left: 18px;font-size: 14px;color: #000;font-family: "Microsoft YaHei";float: left}
+.my-favorite .goods-list .list-filtrate li a{font-size: 14px;color: #000;font-family: "Microsoft YaHei";}
+.my-favorite .goods-list .list-number{padding: 50px;overflow: hidden;width: 100%;}
+.my-favorite .goods-list .list-number .single{float: left;}
+.my-favorite .goods-list .list-number li .list-img{width: 150px;height: 150px;}
+.my-favorite .goods-list .list-number li dd{width: 150px;}
+.my-favorite .goods-list .list-number li dd .list-title{overflow: hidden}
+.my-favorite .goods-list .list-number li dd .list-title dt{width: 28px;float: left}
+.my-favorite .goods-list .list-number li dd .list-title dd{width: 122px;float: left;overflow: hidden;font-size: 12px;font-family: "宋体";color: #666;}
+.my-favorite .list-cost{text-align: right;color: #000;height: 35px;line-height: 35px;}
+.my-favorite .list-cost span{color: #ff0000}
+.my-favorite .list-option a{color: #0e3976;font-size: 12px;}
+.my-favorite .option-left{float: left}
+.my-favorite .option-right{float: right}
+.my-favorite .bd-bt{border-bottom: 1px solid #ccc;}
+.my-favorite .bd-tp{border-top:1px solid #ccc; }
+.my-favorite .list-title-text{overflow: hidden}
 /*******************购物车************************/
 a {outline:none;cursor:pointer}
 a:hover{text-decoration: underline}

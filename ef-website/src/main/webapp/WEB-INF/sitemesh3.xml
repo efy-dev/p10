@@ -3,6 +3,8 @@
     <!--&lt;!&ndash;<mapping path="/*" decorator="/layouts/mainTemplate.jsp"/>&ndash;&gt;-->
   <mapping path="/order/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/address/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/personalInfo.do" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/getPassword.do" decorator="/layouts/myEfeiyiTemplate.jsp"/>
 
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
 
