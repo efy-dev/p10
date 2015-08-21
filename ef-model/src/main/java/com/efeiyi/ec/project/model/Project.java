@@ -164,6 +164,8 @@ public class Project {
         this.projectPropertyList = projectPropertyList;
     }
 
+
+
     //    @Column(name="father_project_id")
 //    public String getFatherProjectId(){return  fatherProjectId;}
 //    public void  setFatherProjectId(String fatherProjectId){

@@ -74,7 +74,7 @@
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
             <%--<p >配送地址：<span>${order.consumerAddress}</span></p>--%>
-            <p>收货地址：<span>${order.consumerAddress.}</span></p>
+            <p>收货地址：<span>${order.consumerAddress}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
             <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>
 
