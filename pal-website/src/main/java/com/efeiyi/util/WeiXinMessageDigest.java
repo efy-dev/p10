@@ -1,4 +1,4 @@
-package com.efeiyi;
+package com.efeiyi.util;
 
 import java.security.MessageDigest;
 import java.util.Arrays;

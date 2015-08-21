@@ -26,4 +26,6 @@ public interface ILabelCheckManager {
      String treatWeiXinMsg(HttpServletRequest request, String inXml)  throws ServletException,IOException;
 
      void addLabelCheckRecord(ModelMap model,Label label,Date date);
+
+     ModelMap getProductModel(HttpServletRequest request);
 }
