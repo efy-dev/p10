@@ -27,7 +27,12 @@
       <div class="am-form-group">
         <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
         <div class="am-u-sm-9">
-          <input type="text" name="serial" id="serial" placeholder="商品编号" value="${object.serial}">
+          <c:if test="${empty object.serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}"  >
+          </c:if>
+          <c:if test="${not empty object.serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}"  >
+          </c:if>
           <!--<small>必填项*</small>-->
         </div>
       </div>

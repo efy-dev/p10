@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<common>
+
+    <tag>
+        <wordValue group=""  note=""/>
+    </tag>
+
+    <banners>
+        <banner   group="master.index" note="传承人首页轮播图" />
+    </banners>
+
+    <documents>
+        <document group="" template=".jsp" note="" />
+    </documents>
+
+    <recommends>
+        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="10" />
+        <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="5" />
+    </recommends>
+    <autoserials>
+        <autoserial group="purchaseOrderDelivery" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
+        <autoserial group="product" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
+    </autoserials>
+</common>
