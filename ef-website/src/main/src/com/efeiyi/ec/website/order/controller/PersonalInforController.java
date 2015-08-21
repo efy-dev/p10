@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Administrator on 2015/8/19.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class PersonalInforController {
     @Autowired
     private BaseManager baseManager;

@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Administrator on 2015/7/30.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class AddressController {
 
     @Autowired

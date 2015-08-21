@@ -162,17 +162,10 @@
                                 <li>
                                   <label>所在地区：</label>
                                   <form>
-                                    <select name="cars" class="cars">
-                                      <option value="请选择">请选择</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="fiat">Fiat</option>
-                                      <option value="audi">Audi</option>
+                                    <select id="provinces" class="cars" onclick="province(this);">
                                     </select>
-                                    <select name="cars" class="car1">
-                                      <option value="请选择">请选择</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="fiat">Fiat</option>
-                                      <option value="audi">Audi</option>
+                                    <select id="citys" class="car1" onclick="city(this);">
+
                                     </select>
                                     <span>请您填写所在地区</span>
                                   </form>
@@ -242,7 +235,7 @@
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/defaultAddress.do"/>',
+      url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
       dataType: 'json',
       data: {
         status:2,
@@ -258,6 +251,9 @@
     });
   }
 
+  function s(){
+    alert("dd");
+  }
 
   function city(obj){
     var pid = $("#provinceVal").val();
@@ -266,7 +262,7 @@
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/address/listCity.do"/>',
+      url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
       dataType: 'json',
       data:{
         provinceId:pid
@@ -286,11 +282,12 @@
   }
   function province(obj){
     var v = $(obj).val();
-    $("#provinceVal").empty();
+//    $("#provinceVal").empty();
+    alert(11111);
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/address/listProvince.do"/>',
+      url: '<c:url value="/myEfeiyi/addAddress.do"/>',
       dataType: 'json',
       success: function (data) {
           var obj = eval(data);

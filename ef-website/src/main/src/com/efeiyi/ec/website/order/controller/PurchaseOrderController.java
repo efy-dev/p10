@@ -41,7 +41,7 @@ import java.util.*;
  * Created by Administrator on 2015/6/25.
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/myEfeiyi/order")
 public class PurchaseOrderController extends BaseController {
     @Autowired
     private BaseManager baseManager;
