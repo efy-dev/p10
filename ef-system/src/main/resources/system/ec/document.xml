@@ -10,7 +10,9 @@
                 model="com.ming800.core.p.model.Document">
             <does>
                 <do name="plistDocument" access="" label="Document列表"
-                    result="/document/documentPList">
+                    result="/document/documentPList"
+                    execute="com.efeiyi.ec.system.basic.controller.BasicBannerListHandler"
+                        >
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>

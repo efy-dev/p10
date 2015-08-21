@@ -23,7 +23,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&view=ec&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建轮播图</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建轮播图</a>
                 </div>
             </div>
         </div>
