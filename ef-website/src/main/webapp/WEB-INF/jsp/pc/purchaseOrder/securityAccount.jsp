@@ -76,13 +76,9 @@
       }
 
     });
-
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
-      alert(pwd);
-      window.location.href="/updatePassword.do?id=${user.id}&pwd="+pwd;
-
-      <%--$.post("/updatePassword.do",{id:${user.id},pwd:pwd},function(data){})--%>
+      window.location.href="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="+pwd;
     }
 
 
@@ -94,7 +90,7 @@
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/checkPassword.do"/>',
+      url: '<c:url value="/myEfeiyi/checkPassword.do"/>',
       dataType: 'json',
       data:{
         password:newPassword

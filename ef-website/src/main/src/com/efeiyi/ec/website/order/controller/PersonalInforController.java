@@ -26,7 +26,7 @@ public class PersonalInforController {
         XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        return "redirect:/personalInfo.do";
+        return "redirect:/myEfeiyi/personalInfo.do";
 
     }
     @RequestMapping({"personalInfo.do"})
@@ -50,7 +50,7 @@ public class PersonalInforController {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
         xSaveOrUpdate.getParamMap().put("password",password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
-        return "redirect:/getPassword.do";
+        return "redirect:/myEfeiyi/getPassword.do";
 
     }
     @RequestMapping({"getPassword.do"})
