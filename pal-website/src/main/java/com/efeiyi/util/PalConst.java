@@ -1,13 +1,12 @@
-package com.efeiyi;
+package com.efeiyi.util;
 
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import com.efeiyi.bean.CheckResultBean;
 
-import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -15,10 +14,10 @@ import java.text.SimpleDateFormat;
  */
 public class PalConst {
 
-    public ResultBean trueBean;
-    public ResultBean fakeBean;
-    public ResultBean recheckTrueBean;
-    public ResultBean recheckFakeBean;
+    public CheckResultBean trueBean;
+    public CheckResultBean fakeBean;
+    public CheckResultBean recheckTrueBean;
+    public CheckResultBean recheckFakeBean;
 
     private static PalConst instance;
 
@@ -40,7 +39,9 @@ public class PalConst {
     public String trueMsg = "恭喜您，您查询的商品是正品";              //查询为未使用的序列号返回消息
     public String usedStatus = "9";                                   //查询为已使用的序列号状态
     public String fakeMsg = "您查询的防伪码无效，注意防伪，谨防假冒";       //码不存在，或已失效，或未激活返回消息
-public String recheckMsg = "<div>第#N#次验证</div><div>上次验证时间#TIME#</div><div id=\"ipAddress\"></div><div>若这是您购买后首次验证，请注意伪造风险，感谢您的支持！</div>";//第N次查询返回消息
+    public String recheckMsg = "<div>第#N#次验证</div><div>上次验证时间#TIME#</div><div id=\"ipAddress\"></div><div>若这是您购买后首次验证，请注意伪造风险，感谢您的支持！</div>";//第N次查询返回消息
+    public String weixinRecheckMsg = "第#N#次验证\n上次验证时间#TIME#\n若这是您购买后首次验证，请注意伪造风险，感谢您的支持！";//第N次查询返回消息
+
     public String fakeLogo = "resources/upload/fake-logo.jpg";        //查为伪的logo
     public String trueLogo = "resources/upload/true-logo.jpg";        //查为真的logo
     public String uploadImgBaseUrl = "http://pal.efeiyi.com/";
@@ -64,14 +65,14 @@ public String recheckMsg = "<div>第#N#次验证</div><div>上次验证时间#TI
     public DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
     public String baiduApiUrl = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
 
-
+    public Map<String,String> labelCache = new HashMap<String,String>();
 
 
     private PalConst(){
-        trueBean = new ResultBean();
-        fakeBean = new ResultBean();
-        recheckTrueBean = new ResultBean();
-        recheckFakeBean = new ResultBean();
+        trueBean = new CheckResultBean();
+        fakeBean = new CheckResultBean();
+        recheckTrueBean = new CheckResultBean();
+        recheckFakeBean = new CheckResultBean();
         trueBean.setLogo(trueLogo);
         trueBean.setMsg(trueMsg);
         trueBean.setAuthenticity(_true);

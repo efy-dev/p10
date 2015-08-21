@@ -1,16 +1,9 @@
 package com.efeiyi.controller;
 
-import com.efeiyi.PalConst;
-import com.efeiyi.WeiXinMessageDigest;
-import com.efeiyi.pal.label.model.Label;
+import com.efeiyi.util.WeiXinMessageDigest;
 import com.efeiyi.service.ILabelCheckManager;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,6 +24,7 @@ public class LabelWeiXinController extends HttpServlet {
     @Autowired
     ILabelCheckManager iLabelCheckService;
 
+
     @Override
     @RequestMapping(value = "/contact.do", method = RequestMethod.POST)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +35,7 @@ public class LabelWeiXinController extends HttpServlet {
         System.out.println("signature:" + signature);
         System.out.println("timestamp:"+timestamp);
         System.out.println("nonce:"+nonce);
-        System.out.println("echostr:" + request.getParameter("echostr"));
+//        System.out.println("echostr:" + request.getParameter("echostr"));
 
         if(signature == null || timestamp == null || nonce == null){
             response.getWriter().write("");
@@ -55,7 +49,7 @@ public class LabelWeiXinController extends HttpServlet {
             byte[] b = new byte[request.getContentLength()];
             is.read(b);
             String inXml = new String(b);
-            System.out.println(new Date(System.currentTimeMillis()) + "--inXml:\n" + inXml + "\n");
+            System.out.println("\n\n" + new Date(System.currentTimeMillis()) + "--inXml:\n" + inXml + "\n");
 
             String outXml = iLabelCheckService.treatWeiXinMsg(request, inXml);
 

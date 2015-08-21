@@ -217,7 +217,7 @@ public class Master implements Serializable {
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
     }
-@JsonIgnore
+
     @Column(name = "logo_url")
     public String getLogoUrl() {
         return logoUrl;

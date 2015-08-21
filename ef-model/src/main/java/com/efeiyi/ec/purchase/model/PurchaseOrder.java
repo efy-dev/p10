@@ -2,6 +2,7 @@ package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -34,6 +35,39 @@ public class PurchaseOrder {
     private BigDecimal total;  //订单总价
     private BigDecimal originalPrice; //订单原价
     private String orderStatus; //订单状态
+    private Tenant tenant;
+    private List<PurchaseOrder> subPurchaseOrder;
+    private PurchaseOrder fatherPurchaseOrder;
+    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "fatherPurchaseOrder")
+    public List<PurchaseOrder> getSubPurchaseOrder() {
+        return subPurchaseOrder;
+    }
+
+    public void setSubPurchaseOrder(List<PurchaseOrder> subPurchaseOrder) {
+        this.subPurchaseOrder = subPurchaseOrder;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "father_purchase_order_id")
+    public PurchaseOrder getFatherPurchaseOrder() {
+        return fatherPurchaseOrder;
+    }
+
+    public void setFatherPurchaseOrder(PurchaseOrder fatherPurchaseOrder) {
+        this.fatherPurchaseOrder = fatherPurchaseOrder;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -146,5 +180,14 @@ public class PurchaseOrder {
 
     public void setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
+    }
+
+    @Column(name = "")
+    public String getPayWay() {
+        return payWay;
+    }
+
+    public void setPayWay(String payWay) {
+        this.payWay = payWay;
     }
 }
