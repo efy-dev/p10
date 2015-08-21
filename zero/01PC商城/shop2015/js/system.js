@@ -108,4 +108,10 @@ $(function(){
             return false;
         })
     })();
+    //我的订单
+    (function(){
+        $('#orderNum .item:last tr').css({'border':'0'});
+    })();
+
+
 })

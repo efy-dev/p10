@@ -127,3 +127,13 @@ ADD COLUMN `total_price`  decimal NULL AFTER `user_id`;
 ALTER TABLE `purchase_order_delivery`
 	ADD COLUMN `serial` varchar(16) NULL AFTER `status`;
 
+ALTER TABLE `purchase_order`
+ADD COLUMN `tenant_id`  char(16) NULL AFTER `original_price`;
+
+ALTER TABLE `purchase_order`
+ADD COLUMN `father_purchase_order_id`  char(16) NULL AFTER `tenant_id`;
+
+
+
+
+

@@ -1,31 +1,31 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>个人中心</title>
-    <!-- Set render engine for 360 browser -->
-    <meta name="renderer" content="webkit">
-    <!-- No Baidu Siteapp-->
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="ico" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-    <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="../shop2015/css/myorder.css?v=20150831">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>个人中心</title>
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+<!-- No Baidu Siteapp-->
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="ico" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+<meta name="msapplication-TileColor" content="#0e90d2">
+<link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
+<link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
+<link type="text/css" rel="stylesheet" href="../shop2015/css/myorder.css?v=20150831">
 </head>
 <body>
 <div class="hd">
@@ -125,8 +125,8 @@
                 </table>
             </div>
             <!-- //End--two-->
-            <div class="list-pro wh1">
-                <table>
+            <div class="list-pro wh1" id="orderNum">
+                <table class="list-pro-table">
                     <tr>
                         <th colspan="6">
                             <span>2015-08-02 18:29:30</span>
@@ -134,43 +134,129 @@
                             <span>瓷器之都</span>
                         </th>
                     </tr>
-                    <tr>
-                        <td width="237" >
-                            <div class="cols1">
-                                <img src="../shop2015/upload/img-tx2.png" alt=""/>
-                                <div class="info">
-                                    <p><a href="#">瓷器</a></p>
-                                    <p><a href="#">商品名称</a></p>
+                    <!--<tr>-->
+                        <!--<td width="237" >-->
+                            <!--<div class="cols1">-->
+                                <!--<img src="../shop2015/upload/img-tx2.png" alt=""/>-->
+                                <!--<div class="info">-->
+                                    <!--<p><a href="#">瓷器</a></p>-->
+                                    <!--<p><a href="#">商品名称</a></p>-->
 
-                                </div>
-                            </div>
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</td>-->
+                        <!--<td width="174">￥189.00</td>-->
+                        <!--<td width="107">x<span>1</span></td>-->
+                        <!--<td width="100">在线支付</td>-->
+                        <!--<td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">-->
+                            <!--<p><a href="#">待收货</a></p>-->
+                            <!--<p><a href="#">订单跟踪</a></p>-->
+                        <!--</td>-->
+                        <!--<td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;">-->
+                            <!--<p><a href="#">查看</a></p>-->
+                            <!--<p><a href="#">再次购买</a></p>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    <tr>
+                        <td width="618">
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
+                            <table class="item">
+                                <td width="237">
+                                    <div class="cols1">
+                                        <img src="../shop2015/upload/img-tx2.png" alt="">
+                                        <div class="info">
+                                            <p><a href="#">瓷器</a></p>
+                                            <p><a href="#">商品名称</a></p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="174">￥189.00</td>
+                                <td width="107">x<span>1</span></td>
+                                <td width="100">在线支付</td>
+                            </table>
                         </td>
-                        <td width="174">￥189.00</td>
-                        <td width="107">x<span>1</span></td>
-                        <td width="100">在线支付</td>
-                        <td width="130" rowspan='2' style="border-left:1px solid #ccc;">
+                        <td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">
                             <p><a href="#">待收货</a></p>
                             <p><a href="#">订单跟踪</a></p>
                         </td>
-                        <td width="139" rowspan='2' style="border-left:1px solid #ccc;">
+                        <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                             <p><a href="#">查看</a></p>
                             <p><a href="#">再次购买</a></p>
                         </td>
-                    </tr>
-                    <tr>
-                        <td width="237" >
-                            <div class="cols1">
-                                <img src="../shop2015/upload/img-tx2.png" alt=""/>
-                                <div class="info">
-                                    <p><a href="#">瓷器</a></p>
-                                    <p><a href="#">商品名称</a></p>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td width="174">￥189.00</td>
-                        <td width="107">x<span>1</span></td>
-                        <td width="100">在线支付</td>
                     </tr>
                 </table>
             </div>
@@ -236,9 +322,15 @@
             </div>
             </div>
         </div>
-</div>
-        <!--content-->
-        <div class="footer wh">
+    </div>
+
+<style>
+
+</style>
+
+
+<!--content-->
+<div class="footer wh">
             <div class="service wh">
                 <div class="icon phone"></div>
                 <div class="line"></div>
@@ -278,9 +370,6 @@
                 <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
             </div>
         </div>
-<script>
-
-</script>
 <!-- //End--footer-->
 
 

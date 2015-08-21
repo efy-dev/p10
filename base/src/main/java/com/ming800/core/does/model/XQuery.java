@@ -61,6 +61,29 @@ public class XQuery {
         }
     }
 
+    public XQuery(String doQueryName, HttpServletRequest request,Integer psize) throws Exception {
+        Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
+        //判断是否是分页查询
+        if (doQueryName.startsWith("plist")) {
+            this.setPageEntity(XDoUtil.getPageEntity(request,psize));
+        }
+
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(doQueryName.split("_")[1]);
+        generateQueryString(tempDo.getXentity().getModel(), tempDoQuery, request.getParameter("conditions"), this);
+
+        //判断是否有排序参数
+        if (request.getParameter("sort") != null) {
+            this.setSortHql(fetchOrderStr(tempDoQuery, request.getParameter("sort")));
+        } else if (tempDoQuery.getOrderBy() != null && tempDoQuery.getOrderBy() != "") {
+            this.setSortHql(fetchOrderStr(tempDoQuery, tempDoQuery.getOrderBy()));
+        }
+
+        //补全查询语句
+        if (sortHql != null) {
+            this.setHql(this.getHql() + sortHql);
+        }
+    }
+
     //只能用于List操作
     public XQuery(String doQueryName, String conditions , String sort, HttpServletRequest request) throws Exception {
         Do tempDo = doManager.getDoByQueryModel(doQueryName.split("_")[0]);
