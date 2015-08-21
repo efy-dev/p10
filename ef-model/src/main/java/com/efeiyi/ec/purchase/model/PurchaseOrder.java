@@ -49,7 +49,7 @@ public class PurchaseOrder {
         this.subPurchaseOrder = subPurchaseOrder;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_purchase_order_id")
     public PurchaseOrder getFatherPurchaseOrder() {
         return fatherPurchaseOrder;
