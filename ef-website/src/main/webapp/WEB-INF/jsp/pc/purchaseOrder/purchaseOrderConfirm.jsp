@@ -32,24 +32,18 @@
                              <ul>
                                  <li>
                                      <label>收货人：</label>
-                                     <input type="text">
+                                     <input type="text" name="consignee">
                                      <span>请您填写收货人姓名</span>
                                  </li>
                                  <li>
                                      <label>所在地区：</label>
 
                                      <form>
-                                         <select name="cars" class="cars">
+                                         <select class="cars" id="province" name="province.id" onchange="provinceChange(this)">
                                              <option value="请选择">请选择</option>
-                                             <option value="saab">Saab</option>
-                                             <option value="fiat">Fiat</option>
-                                             <option value="audi">Audi</option>
                                          </select>
-                                         <select name="cars" class="car1">
+                                         <select class="car1" id="city" name="city.id">
                                              <option value="请选择">请选择</option>
-                                             <option value="saab">Saab</option>
-                                             <option value="fiat">Fiat</option>
-                                             <option value="audi">Audi</option>
                                          </select>
                                          <%--<select name="cars" class="car2">--%>
                                          <%--<option value="请选择">请选择</option>--%>
@@ -64,19 +58,19 @@
                                  </li>
                                  <li>
                                      <label>详细地址：</label>
-                                     <input type="text">
+                                     <input type="text" name="details">
                                      <span>请您填写详细地址</span>
                                  </li>
                                  <li>
                                      <label>手机号码：</label>
-                                     <input type="text">
-                                     <label>固定号码：</label>
-                                     <input type="text">
+                                     <input type="text" name="phone">
+                                     <%--<label>固定号码：</label>--%>
+                                     <%--<input type="text">--%>
                                      <span>请您填写电话号码</span>
                                  </li>
                                  <li>
                                      <label>邮箱：</label>
-                                     <input type="text">
+                                     <input type="text" name="email">
                                      <span>请您填写邮箱</span>
                                  </li>
                                  <li>
@@ -85,7 +79,7 @@
                                  </li>
                                  <li>
                                      <label></label>
-                                     <input type="button" class="dj-btn" value="保存收货人信息">
+                                     <input type="button" class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息">
                                  </li>
                              </ul>
                          </form>
@@ -95,16 +89,16 @@
              </div>
         </span>
         </div>
-        <div class="page-clearing">
+        <div class="page-clearing" id="address">
             <c:forEach items="${addressList}" var="address">
 
                 <div class="page-default">
             <span>
                 <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text default-active">
+                <div id="${address.id}" class="default-text default-active" name="addressItem" onchange="chooseAddress(this)">
                     </c:if>
                     <c:if test="${address.status=='1'}">
-                    <div class="default-text">
+                    <div class="default-text" name="addressItem" onchange="chooseAddress(this)">
                         </c:if>
                         <strong>${address.consignee} ${address.province.name}</strong>
                             <%--<i class="triangle" style="display: block"></i>--%>
@@ -257,7 +251,30 @@
             })
             return false;
         })
+
+        //网页加载的时候把城市的数据取回来
+        ajaxRequest("<c:url value="/address/listProvince.do"/>", {}, function(data){
+            var out = '<option value="">请选择</option>';
+            for(var i = 0; i<data.length ; i++){
+                out+= '<option value="'+data[i]["id"]+'">'+data[i]["name"]+'</option>';
+            }
+            $("#province").html(out);
+        }, function () {
+        }, "post")
+
     })
+
+    function provinceChange(element){
+        var provinceId = $(element).val();
+        ajaxRequest("<c:url value="/address/listCity.do"/>", {provinceId:provinceId}, function(data){
+            var out = '<option value="">请选择</option>';
+            for(var i = 0; i<data.length ; i++){
+                out+= '<option value="'+data[i]["id"]+'">'+data[i]["name"]+'</option>';
+            }
+            $("#city").html(out);
+        }, function () {
+        }, "post")
+    }
 
     function newAddress(it ) {
         var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
@@ -267,10 +284,19 @@
     function submitNewAddress() {
         var param = $("#newAddress").serialize();
         var success = function (data) {
-            $("#totalPrice").html(data["totalPrice"]);
+            console.log(data)
+            var html = newAddress(data);
+            $("#address").append(html);
+            $(".active-pop").hide();
         }
-        ajaxRequest("<c:url value="/cart/chooseProduct.do"/>", param, success, function () {
+        ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
         }, "post")
+    }
+
+    function chooseAddress(element){
+        $("div[name=addressItem]").each(function(){
+            $(this).attr("class","default-text");
+        })
     }
 
 

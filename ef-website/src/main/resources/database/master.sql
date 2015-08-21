@@ -136,6 +136,12 @@ ADD COLUMN `father_purchase_order_id`  char(16) NULL AFTER `tenant_id`;
 ALTER TABLE `purchase_order`
 ADD COLUMN `message`  varchar(128) NULL AFTER `father_purchase_order_id`;
 
+ALTER TABLE `organization_consumer_address`
+MODIFY COLUMN `details`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `address_city_id`,
+MODIFY COLUMN `email`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `phone`;
+
+
+
 
 
 

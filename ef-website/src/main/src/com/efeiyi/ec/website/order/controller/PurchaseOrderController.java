@@ -14,6 +14,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -365,6 +366,9 @@ public class PurchaseOrderController extends BaseController {
             purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        //@TODO 清除购物车
+
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
         } else if (payment.equals("3")) { //微信
@@ -386,6 +390,15 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
 
         return "/purchaseOrder/choosePayment";
+    }
+
+    @RequestMapping({"/addAddress.do"})
+    @ResponseBody
+    public Object  addAddressJson(HttpServletRequest request)throws Exception{
+        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
+        xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
+        return object;
     }
 
 
