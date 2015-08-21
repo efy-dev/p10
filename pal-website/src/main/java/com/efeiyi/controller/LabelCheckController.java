@@ -33,7 +33,6 @@ public class LabelCheckController {
         ModelMap model = new ModelMap();
         String serial = request.getParameter(PalConst.getInstance().checkLabelParam1);
         Label label = iLabelCheckService.getUniqueLabel(serial);
-//        Boolean pcMark = request.getAttribute("pcMark") == null ? false : true;
 
         // label不存在
         if (label == null) {
