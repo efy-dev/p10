@@ -1,20 +1,27 @@
 package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.organization.model.TenantSource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
+
+import java.util.List;
 
 import javax.persistence.*;
 
 /**
  * Created by Administrator on 2015/8/22.
  */
+@Entity
+@Table(name = "tenant_product_series")
 public class TenantProductSeries {
 
     private String id;
     private Tenant tenant;
     private ProductSeries productSeries;
     private String status;
+    private List<TenantSource> tenantSourceList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -58,4 +65,14 @@ public class TenantProductSeries {
         this.status = status;
     }
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantProductSeries")
+    @Where(clause = "status = '1'")
+    public List<TenantSource> getTenantSourceList() {
+        return tenantSourceList;
+    }
+
+    public void setTenantSourceList(List<TenantSource> tenantSourceList) {
+        this.tenantSourceList = tenantSourceList;
+    }
 }

@@ -1,5 +1,6 @@
 package com.efeiyi.pal.organization.model;
 
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,7 +15,8 @@ import javax.persistence.*;
 public class TenantSource {
 
     private String id;
-    private Tenant tenant;
+//    private Tenant tenant;
+    private TenantProductSeries tenantProductSeries;
     private String name;
     private String region;
     private String imgUrl;
@@ -31,16 +33,16 @@ public class TenantSource {
         this.id = id;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tenant_id")
+//    public Tenant getTenant() {
+//        return tenant;
+//    }
+//
+//    public void setTenant(Tenant tenant) {
+//        this.tenant = tenant;
+//    }
 
     @Column(name = "name")
     public String getName() {
@@ -78,4 +80,14 @@ public class TenantSource {
         this.status = status;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_product_series_id")
+    @JsonIgnore
+    public TenantProductSeries getTenantProductSeries() {
+        return tenantProductSeries;
+    }
+
+    public void setTenantProductSeries(TenantProductSeries tenantProductSeries) {
+        this.tenantProductSeries = tenantProductSeries;
+    }
 }

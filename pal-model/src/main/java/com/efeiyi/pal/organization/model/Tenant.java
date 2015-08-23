@@ -26,7 +26,7 @@ public class Tenant {
     private String city;
     private String address;
     private String status;
-    private List<TenantSource> tenantSourceList;
+//    private List<TenantSource> tenantSourceList;
     private List<TenantCertification> tenantCertificationList;
 
     private List<TenantProductSeries> tenantProductSeriesList;
@@ -109,16 +109,16 @@ public class Tenant {
         this.status = status;
     }
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-    @Where(clause = "status='1'")
-    public List<TenantSource> getTenantSourceList() {
-        return tenantSourceList;
-    }
-
-    public void setTenantSourceList(List<TenantSource> tenantSourceList) {
-        this.tenantSourceList = tenantSourceList;
-    }
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+//    @Where(clause = "status='1'")
+//    public List<TenantSource> getTenantSourceList() {
+//        return tenantSourceList;
+//    }
+//
+//    public void setTenantSourceList(List<TenantSource> tenantSourceList) {
+//        this.tenantSourceList = tenantSourceList;
+//    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
