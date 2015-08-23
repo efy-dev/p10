@@ -2,16 +2,18 @@ package com.efeiyi.pal.organization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/29.
  */
 
 @Entity
-@Table(name = "organization_tenant_certification")
+@Table(name = "tenant_certification")
 public class TenantCertification {
 
     private String id;
@@ -20,8 +22,9 @@ public class TenantCertification {
     private String org;
     private Date theDate;
     private String level;
-    private String imgUrl;
+//    private String imgUrl;
     private String status;
+    private List<TenantCertificationImg> imgList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -81,14 +84,14 @@ public class TenantCertification {
         this.level = level;
     }
 
-    @Column(name = "img_url")
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
+//    @Column(name = "img_url")
+//    public String getImgUrl() {
+//        return imgUrl;
+//    }
+//
+//    public void setImgUrl(String imgUrl) {
+//        this.imgUrl = imgUrl;
+//    }
 
     @Column(name = "status")
     public String getStatus() {
@@ -97,6 +100,17 @@ public class TenantCertification {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantCertification")
+    @Where(clause = "status='1'")
+    public List<TenantCertificationImg> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<TenantCertificationImg> imgList) {
+        this.imgList = imgList;
     }
 
 }
