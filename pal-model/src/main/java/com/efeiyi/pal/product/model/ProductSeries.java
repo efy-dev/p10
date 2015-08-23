@@ -23,7 +23,7 @@ public class ProductSeries {
     private String status;
     private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
 
-    private Set<Tenant> tenantSet;
+    private List<TenantProductSeries> tenantProductSeriesList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,13 +75,14 @@ public class ProductSeries {
     }
 
     @JsonIgnore
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy="productSeriesSet")
-    public Set<Tenant> getTenantSet() {
-        return tenantSet;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productSeries")
+    @Where(clause = "status = '1'")
+    public List<TenantProductSeries> getTenantProductSeriesList() {
+        return tenantProductSeriesList;
     }
 
-    public void setTenantSet(Set<Tenant> tenantSet) {
-        this.tenantSet = tenantSet;
+    public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
+        this.tenantProductSeriesList = tenantProductSeriesList;
     }
 
 }
