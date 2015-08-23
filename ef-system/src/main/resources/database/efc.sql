@@ -157,3 +157,24 @@ CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_
 ALTER TABLE `master_recommended`
 CHANGE COLUMN `tenant_id` `master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `id`;
 
+
+ALTER TABLE `product`
+ADD COLUMN `recommended_index`  int(5) NULL AFTER `sort`;
+
+ALTER TABLE `product`
+ADD COLUMN `tenant_id`  char(16) NULL AFTER `recommended_index`;
+
+CREATE TABLE `product_model` (
+	`recommend_index` int(11) NULL,
+	`status` char(4) NULL,
+	`amount` char(8) NULL,
+	`product_id` char(16) NULL,
+	`price` decimal(10) NULL,
+	`serial` char(32) NULL,
+	`id` char(16) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+
+

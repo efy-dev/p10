@@ -45,7 +45,7 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
-                    <th class="table-title">中文姓名</th>
+                    <th class="table-title">商家名称</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,11 +60,11 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="removeTenant('${tenant.id}')" href="#"><span
+                                       onclick="showConfirm('提示','是否删除',function(){removeTenant('${tenant.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span>删除
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                    href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&conditions=tenant.id:${tenant.id}"/>"><span
+                                    href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
                                     <c:if test="${empty tenant.tenantRecommendedList}">
@@ -95,7 +95,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only">
-                            <a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a>
+                            <a href="<c:url value="/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenant.id}"/>">${tenant.name}</a>
                             <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
                                 <c:if test="${recommended.tenant.id == tenant.id}" >
                                     <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>

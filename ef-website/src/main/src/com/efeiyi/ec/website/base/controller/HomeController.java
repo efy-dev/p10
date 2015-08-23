@@ -57,6 +57,8 @@ public class HomeController {
     public String listProductCategory(HttpServletRequest request ,Model model) throws Exception{
         HashMap<String,List> projectMap = new HashMap<>();
         XQuery xQuery = new XQuery("listProjectCategory_default",request);
+        xQuery.setSortHql("");
+        xQuery.updateHql();
         List<Object> categoryList = baseManager.listObject(xQuery);
         for (Object category : categoryList){
             XQuery projectQuery = new XQuery("listProject_default",request);

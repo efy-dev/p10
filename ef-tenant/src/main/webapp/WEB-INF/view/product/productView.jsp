@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="am-form-group">
-    <label name="name" class="am-u-sm-3 am-form-label">商品图片</label>
+    <label name="name" class="am-u-sm-3 am-form-label">商品详情图片</label>
     <div class="am-u-sm-9" id="picture1">
       <c:if test="${!empty object.productPictureList}">
         <c:forEach var="productPicture" items="${object.productPictureList}" >
@@ -273,7 +273,6 @@
 
 
   function removePicture(obj,divId){
-    alert("dd");
     $.ajax({
       type: "get",
       url: '<c:url value="/basic/xmj.do?qm=removeProductPicture"/>',

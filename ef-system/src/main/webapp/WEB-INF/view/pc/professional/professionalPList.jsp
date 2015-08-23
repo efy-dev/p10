@@ -49,13 +49,13 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeProfessional('${professional.id}')"><span
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProfessional('${professional.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&id=${professional.id}'/>">${professional.id}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.id}</a></td>
                         <td class="am-hide-sm-only">${professional.temp}</td>
                     </tr>
                 </c:forEach>

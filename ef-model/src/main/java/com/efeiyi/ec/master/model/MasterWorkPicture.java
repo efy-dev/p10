@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/5/28.
  */
 @Entity
-@Table(name = "product_picture")
+@Table(name = "master_work_picture")
 public class MasterWorkPicture {
     private String id;
     private String pictureUrl;

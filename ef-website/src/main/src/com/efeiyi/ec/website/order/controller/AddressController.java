@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Administrator on 2015/7/30.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class AddressController {
 
     @Autowired
@@ -58,39 +59,48 @@ public class AddressController {
     @RequestMapping({"/address/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistAddress_default",request);
+        XQuery xQuery = new XQuery("plistConsumerAddress_default",request);
         xQuery.addRequestParamToModel(model,request);
         List addressList = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("addressList",addressList);
-        return "/addressList";
+        return "/purchaseOrder/addressList";
+    }
+
+    @RequestMapping({"/address/jsonList.do"})
+    public List listAddressJson(HttpServletRequest request,Model model) throws Exception {
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default",request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listPageInfo(xQuery).getList();
+
+        return addressList;
     }
 
 
     @RequestMapping({"addAddress.do"})
     public String  addAddress(HttpServletRequest request)throws Exception{
-        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateAddress",request);
+        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        return "redirect:/address/list";
+        return "redirect:/myEfeiyi/address/list";
 
     }
 
 
-    @RequestMapping({"/removeAddress"})
-    @ResponseBody
-    public boolean removeAddress(HttpServletRequest request)throws Exception{
+    @RequestMapping({"/removeAddress.do"})
+    public String removeAddress(HttpServletRequest request)throws Exception{
         String addressId=request.getParameter("addressId");
         baseManager.remove(ConsumerAddress.class.getName(),addressId);
-        return true;
+        return "redirect:/myEfeiyi/address/list";
 
     }
     @RequestMapping({"defaultAddress.do"})
     @ResponseBody
     public boolean  defaultAddress(HttpServletRequest request)throws Exception{
-        String hql = "update organization_consumer_address set status = '1'";
+        String hql = "update organization_consumer_address set status = '1'where status<>0";
         baseManager.executeSql(null,hql,null);
-        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateAddress",request);
+        XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return  true;

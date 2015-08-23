@@ -90,6 +90,9 @@ CREATE TABLE `master` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `purchase_order`
+ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;
+
 CREATE TABLE `tenant_master` (
   `id`  char(16) NOT NULL ,
   `tenant_id`  char(16) NULL ,
@@ -115,5 +118,31 @@ ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
 
 ALTER TABLE `purchase_cart_product`
 ADD COLUMN `is_choose`  char(4) NULL AFTER `status`;
+
+ALTER TABLE `purchase_cart`
+ADD COLUMN `total_price`  decimal NULL AFTER `user_id`;
+
+
+
+ALTER TABLE `purchase_order_delivery`
+	ADD COLUMN `serial` varchar(16) NULL AFTER `status`;
+
+ALTER TABLE `purchase_order`
+ADD COLUMN `tenant_id`  char(16) NULL AFTER `original_price`;
+
+ALTER TABLE `purchase_order`
+ADD COLUMN `father_purchase_order_id`  char(16) NULL AFTER `tenant_id`;
+
+ALTER TABLE `purchase_order`
+ADD COLUMN `message`  varchar(128) NULL AFTER `father_purchase_order_id`;
+
+ALTER TABLE `organization_consumer_address`
+MODIFY COLUMN `details`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `address_city_id`,
+MODIFY COLUMN `email`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `phone`;
+
+
+
+
+
 
 

@@ -52,14 +52,14 @@
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeCoupon('${coupon.id}')"><span
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeCoupon('${coupon.id}')})"><span
                                                     class="am-icon-trash-o">删除</span>
                                             </button>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="am-hide-sm-only">${coupon.serial}</td>
-                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a></td>
+                                <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a></td>
                                 <td class="am-hide-sm-only">
                                     <ming800:status name="status" dataType="coupon.status"
                                                 checkedValue="${coupon.status}"

@@ -34,6 +34,12 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link type="text/css" rel="stylesheet" href="css/amazeui.min.css?v=20150831">
   <link type="text/css" rel="stylesheet" href="css/app.css?v=20150831">
+  <script>
+    function ctrl(o){
+      var pid = $(o).next().val();
+      window.location=("/product/cart/addProduct.do?productId="+pid);
+    }
+  </script>
 </head>
 <body>
 <!-- //End--topbar-->
@@ -46,7 +52,7 @@
       <div class="item p-text">${productModel.product.master.content}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
-        <a class="cart" href="" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" onclick="ctrl(this);" value = "001" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy" href="" title="立即购买">立即购买</a>
       </div>
     </div>
@@ -58,28 +64,31 @@
     </ul>
   </div>
   <!-- //End--shop-sort-->
+<c:if test="${productList.size()>0}">
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
+        <c:forEach items="${productList}" var="product" varStatus="rec">
         <li>
           <a href="" target="_blank" title="">
             <img class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt="">
-            <p class="wh name">太极八卦砚</p>
-            <p class="wh price">￥1500000</p>
+            <p class="wh name">${product.name}</p>
+            <p class="wh price">${product.price}</p>
           </a>
         </li>
+        </c:forEach>
       </ul>
-
     </div>
+    </c:if>
     <!-- //End--list-pro-->
-    <div class="page wh">
+<%--    <div class="page wh">
       <ul class="am-pagination am-pagination-centered">
         <li class="bigRound"><a href="">«</a></li>
         <li><a href="">1</a></li>
         <li class="am-active"><a href="#">2</a></li>
         <li class="am-disabled bigRound"><a href="#">»</a></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--page-->
   </div>
   <!-- //End---->

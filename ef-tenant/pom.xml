@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ef-tenant</artifactId>
     <packaging>war</packaging>
-    <name>ef-master Maven Webapp</name>
+    <name>ef-tenant Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

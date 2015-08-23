@@ -23,11 +23,16 @@
         <input type="hidden" name="qm" value="saveOrUpdateProduct" />
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistProduct_default"/>
-        <input type="hidden" name="status" value="2">
+        <input type="hidden" name="status" value="1">
       <div class="am-form-group">
         <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
         <div class="am-u-sm-9">
-          <input type="text" name="serial" id="serial" placeholder="商品编号" value="${object.serial}">
+          <c:if test="${empty object.serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}"  >
+          </c:if>
+          <c:if test="${not empty object.serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}"  >
+          </c:if>
           <!--<small>必填项*</small>-->
         </div>
       </div>
@@ -66,30 +71,7 @@
 <!-- content end -->
 <hr/>
 
-<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
-<script>
-  $(function(){
 
-  });
-
-
-
-  function removePicture(divId){
-    $.ajax({
-      type: "get",
-      url: '<c:url value="/basic/xmj.do?qm=removeProductPicture"/>',
-      cache: false,
-      dataType: "json",
-      data:{id:divId,recommendId:divId},
-      success: function (data) {
-        $("#"+divId).remove();
-        $("img[name='"+divId+"']").remove();
-      }
-    });
-  }
-
-
-</script>
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.does.service.MultipartHandler;
 import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.hibernate.envers.Audited;
 import org.springframework.ui.ModelMap;
@@ -24,12 +25,14 @@ public class formProductHandler implements DoHandler {
     @Audited
     private  BaseManager baseManager;
 
+
+    private AutoSerialManager autoSerialManager = (AutoSerialManager) ApplicationContextUtil.getApplicationContext().getBean("autoSerialManagerImpl");
+
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-
-
         modelMap.put("masterId" , request.getParameter("masterId"));
+        modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
 
         return modelMap;
     }

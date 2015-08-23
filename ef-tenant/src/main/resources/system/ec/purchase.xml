@@ -28,6 +28,10 @@
                         <condition name="id" defaultValue="0" operation="ne" />
                      <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
+                    <query name="serial" label="订单号" type="auto" orderBy="serial:asc">
+                        <condition name="serial"  operation="eq" label="订单号" />
+                        <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
+                    </query>
                 </do>
                 <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView" />
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>

@@ -76,23 +76,7 @@ public class SigninController extends BaseController {
 
         return false;
     }
-    /**
-     * 密码修改
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping({"/pc/updatePassWord.do"})
-    @ResponseBody
-    public boolean updatePassword(HttpServletRequest request) throws Exception {
-        String contion = request.getParameter("password");
-        String password= StringUtil.encodePassword(contion, "SHA");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
-        xSaveOrUpdate.getParamMap().put("password",password);
-        baseManager.saveOrUpdate(xSaveOrUpdate);
-        return true;
 
-    }
 
     /**
      * 注册新的消费者
@@ -109,7 +93,7 @@ public class SigninController extends BaseController {
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
         /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
         if (bigUser.getStatus() == null) {
-            bigUser.setStatus(1);
+            bigUser.setStatus("1");
         }
         bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
         bigUser.setAccountExpired(false);

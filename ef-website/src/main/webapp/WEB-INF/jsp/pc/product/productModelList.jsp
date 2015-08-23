@@ -41,26 +41,25 @@
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
       <li><a href="#">首页</a></li>
-      <li class="am-active">歙砚</li>
+      <li class="am-active">${proName}</li>
     </ol>
   </div>
   <!-- //End--breadcrumb-->
   <div class="explain">
     <div class="title">
-      <p class="wh"><span class="zh">she</span><span class="cn">${proName[0]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${proName[1]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${proName[1]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${proName[1]}</span></p>
+      <p class="wh"><span class="zh">she</span><span class="cn">${strProjectName[0]}</span></p>
+      <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
+      <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
     </div>
-    <div class="info">${project.description}></div>
+    <div class="info">${project.description}</div>
   </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
     <ul class="link1">
-      <li class="active"><a href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=0&pageEntity.index=1"/>" title="价  格">价  格</a></li>
-      <li><a href="" title="销  售">销  售</a></li>
+      <li class="active"><a href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
+     <%-- <li><a href="" title="销  售">销  售</a></li>
       <li><a href="" title="新  品">新  品</a></li>
-      <li><a href="" title="人  气">人  气</a></li>
+      <li><a href="" title="人  气">人  气</a></li>--%>
     </ul>
   </div>
   <!-- //End--shop-sort-->

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.basic.controller;
+package com.efeiyi.ec.system.product.controller;
 
 import com.ming800.core.does.service.DoHandler;
 import org.springframework.ui.ModelMap;
@@ -6,14 +6,18 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Administrator on 2015/7/22.
+ * Created by Administrator on 2015/7/21.
  */
-public class BasicBannerListHandler implements DoHandler {
+public class formProductHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        modelMap.put("groupName" , request.getParameter("groupName"));
+        if (request.getParameter("tenantId") != null) {
+            modelMap.put("tenantId", request.getParameter("tenantId"));
+        }
+
+
 
         return modelMap;
     }

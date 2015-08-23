@@ -53,7 +53,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                            onclick="removeProductModel('${productModel.id}')"><span
+                                            onclick="showConfirm('提示','是否删除',function(){removeProductModel('${productModel.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -64,7 +64,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewProduct&view=recommend&view=recommend&id=${productModel.product.id}'/>">${productModel.product.name}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewProduct&view=index&id=${productModel.product.id}'/>">${productModel.product.name}</a>
                         </td>
                         <td class="am-hide-sm-only">${productModel.product.serial}</td>
                         <td class="am-hide-sm-only">${productModel.product.price}</td>

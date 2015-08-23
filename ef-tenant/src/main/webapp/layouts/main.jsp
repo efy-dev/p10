@@ -24,7 +24,7 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>">
-    <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+    <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <decorator:head/>
     <style>
@@ -40,7 +40,7 @@
     <%----%>
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=tenantMenu&resultPage=/jmenu/tenantManage&match=${requestScope.qm}"></jsp:include>
-    <div class="admin-content">
+    <div class="admin-content" style="height: auto;">
         <sitemesh:write property='body'/>
     </div>
 

@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument"/>"><span class="am-icon-plus"></span>新建文档</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建文档</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formDocument&id=${document.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}&id=${document.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewDocument&id=${document.id}"/>">${document.title}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
                         <td class="am-hide-sm-only">${document.name}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${document.theDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>

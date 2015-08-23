@@ -1,5 +1,7 @@
 package com.efeiyi.ec.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product_model")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProductModel implements Serializable {
 
     private String id ;
@@ -61,6 +64,7 @@ public class ProductModel implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public Product getProduct() {
@@ -80,6 +84,7 @@ public class ProductModel implements Serializable {
         this.amount = amount;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPropertyValue> getProductPropertyValueList() {
         return productPropertyValueList;

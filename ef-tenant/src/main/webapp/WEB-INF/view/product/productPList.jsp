@@ -25,7 +25,6 @@
                 <td>操作</td>
                 <td>作品号</td>
                 <td>作品名称</td>
-                <td>图片地址</td>
                 <td>价格</td>
             </tr>
 
@@ -41,7 +40,6 @@
                     </td>
                     <td width="20%">${product.serial}</td>
                     <td width="20%"><a href="<c:url value="/basic/xm.do?qm=viewProduct&id=${product.id}"/>"> ${product.name}</a></td>
-                    <td width="20%">${product.picture_url}</td>
                     <td width="20%">${product.price}</td>
                 </tr>
             </c:forEach>
