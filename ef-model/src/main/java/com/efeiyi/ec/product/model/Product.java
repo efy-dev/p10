@@ -37,6 +37,16 @@ public class Product implements Serializable{
 //    private List<ProjectProperty> projectPropertyList;//项目属性 可以使用project获得
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
+    private List<ProductModel> productModelList;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    public List<ProductModel> getProductModelList() {
+        return productModelList;
+    }
+    public void setProductModelList(List<ProductModel> productModelList) {
+        this.productModelList = productModelList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

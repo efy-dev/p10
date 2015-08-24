@@ -7,7 +7,7 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="shop2015/upload/shop-1.jpg" alt=""/></div>
+        <div class="img"><img src="<c:url value="/scripts/assets/upload/shop-1.jpg"/>" alt=""/></div>
             <span class="des">
                 <p><h1>杨柳青年画</h1></p>
               <p><font>天津</font><font>杨柳青</font><font>国家级传承人霍庆有</font></p>
@@ -23,7 +23,7 @@
   <!-- //End--shop-header-->
   <div class="focus wh">
     <ul class="slider-main">
-      <li style="display: block;"><img src="shop2015/upload/master-1.jpg" width="1280" height="481" alt=""/></li>
+      <li style="display: block;"><img src="<c:url value="/scripts/assets/upload/master-1.jpg"/>" width="1280" height="481" alt=""/></li>
     </ul>
   </div>
   <!-- //End--focus-->
@@ -37,10 +37,10 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="" title="价格从高到低">价格从高到低</a>
-        <a href="" title="价格从低到高">价格从低到高</a>
+        <a href="<c:url value="/tenant/view?sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
+        <a href="<c:url value="/tenant/view?sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
-        <a href="" title="新品">新品</a>
+        <a href="<c:url value="/tenant/view?sort=desc:createDateTime"/>" title="新品">新品</a>
         <a href="" title="人气">人气</a>
       </dd>
     </dl>
@@ -52,15 +52,15 @@
         <c:forEach items="${productList}" var="product">
           <li>
             <a href="" target="_blank" title="">
-              <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
+              <img class="imgfilter" src="${product.picture_url}" alt="">
               <p class="wh name">${product.name}</p>
-              <p class="wh price">￥1500000</p>
+              <p class="wh price">${product.price}</p>
             </a>
           </li>
         </c:forEach>
       </ul>
       <div class="page wh">
-        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/listProduct">
+        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/view">
           <ming800:pcPageParam name="conditions"
                                value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
           <ming800:pcPageParam name="sort"
@@ -68,20 +68,7 @@
         </ming800:pcPageList>
       </div>
     </div>
-    <!-- //End--list-pro-->
-   <%-- <div class="page wh">
-      <ul class="am-pagination am-pagination-centered">
-        <li class="bigRound"><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li class="am-active"><a href="#">2</a></li>
-        <li class="am-disabled bigRound"><a href="#">»</a></li>
-      </ul>
-    </div>--%>
-    <!-- //End--page-->
   </div>
-
-  <!-- //End---->
 </div>
-
 </body>
 </html>
