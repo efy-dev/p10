@@ -34,6 +34,12 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link type="text/css" rel="stylesheet" href="css/amazeui.min.css?v=20150831">
   <link type="text/css" rel="stylesheet" href="css/app.css?v=20150831">
+  <script>
+    function ctrl(o){
+      var pid = $(o).next().val();
+      window.location=("/product/cart/addProduct.do?productId="+pid);
+    }
+  </script>
 </head>
 <body>
 <!-- //End--topbar-->
@@ -46,7 +52,7 @@
       <div class="item p-text">${productModel.product.master.content}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
-        <a class="cart" href="/product/cart/${productModel.id}" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" href="/cart/addProduct.do?id=${productModel.id}" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy" href="" title="立即购买">立即购买</a>
       </div>
     </div>

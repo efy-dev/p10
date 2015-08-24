@@ -13,14 +13,20 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript">
+        function showDiv(){
+            var psf=document.getElementById("uploadProductImg");
+            psf.setAttribute("style","display");
+        }
+    </script>
 </head>
-<body>
+<body style="height: auto">
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">商品${object.name}详细信息</strong>
     </div>
 </div>
-
+<%-- 商品基本属性 --%>
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -67,10 +73,66 @@
     </table>
 </div>
 
+<%-- 商品图片 上传 --%>
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="showDiv()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           value="上传商品图片"/>
+</div>
+
+<div class="am-g" id="uploadProductImg" style="display:none">
+    <form action="<c:url value='/productImg/saveProductImg.do'/>" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
+        <input type="hidden" name="productId" value="${object.id}">
+        <div class="am-form-group">
+            <label for="Img" class="am-u-sm-3 am-form-label">商品图片 <small style="color: red">*</small></label>
+            <div class="am-u-sm-9">
+                <input type="file" id="Img" name="Img" required>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%-- 商品图片 展示 --%>
+<c:if test="${!empty object.imgList}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">商品图片</strong>/<small>小图展示</small>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tbody>
+            <tr>
+                <c:forEach items="${object.imgList}" var="Img">
+                    <td>
+                        <img src="http://pal.efeiyi.com/${Img.imgUrl}@!pal-img-list"/>
+                    </td>
+                </c:forEach>
+            </tr>
+            <tr>
+                <c:forEach items="${object.imgList}" var="Img2">
+                    <td>
+                        <button onclick="window.location.href='<c:url value="/productImg/removeProductImg.do?productId=${object.id}&ImgId=${Img2.id}"/>'"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    </td>
+                </c:forEach>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</c:if>
+
+<%-- 商品所属商品系列的 系列属性列表 --%>
 <c:if test="${!empty object.productPropertyValueList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">商品${object.name}的系列属性列表</strong>
+            <strong class="am-text-primary am-text-lg">系列属性列表</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -89,6 +151,7 @@
     </div>
 </c:if>
 
+<%-- 商品溯源信息 --%>
 <c:if test="${!empty object.tenantProductSeries}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -113,16 +176,13 @@
                             <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
                         </c:if>
                     </c:forEach>
-                <%--${object.tenantSource.imgUrl}--%>
-                    <%--<c:if test="${!empty object.tenantSource.imgUrl}">--%>
-                        <%--<img src="http://pal.efeiyi.com/${object.tenantSource.imgUrl}@!pal-img-list"/>--%>
-                    <%--</c:if>--%>
                 </td>
             </tr>
         </table>
     </div>
 </c:if>
 
+<%-- 商品认证信息 --%>
 <c:if test="${!empty object.tenantCertification}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">

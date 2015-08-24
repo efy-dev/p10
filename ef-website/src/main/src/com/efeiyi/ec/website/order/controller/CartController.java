@@ -117,13 +117,13 @@ public class CartController {
         boolean ne = false;
         boolean ab = false;
 
-        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
-        xQuery1.put("cart_id", cart.getId());
-        List<Object> list1 = baseManager.listObject(xQuery1);
+//        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
+//        xQuery1.put("cart_id", cart.getId());
+        List<CartProduct> list1 = cart.getCartProductList();
 
         if (list1.size() > 0) {
-            for (Object cartProductTemp : list1) {
-                CartProduct cartProduct = (CartProduct) cartProductTemp;
+            for (CartProduct cartProductTemp : list1) {
+                CartProduct cartProduct = cartProductTemp;
                 if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
@@ -145,6 +145,7 @@ public class CartController {
             cartProduct.setProductModel(product);
             cartProduct.setCart(cart);
             cartProduct.setStatus("1");
+            cartProduct.setIsChoose("0");
             if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                 cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
             } else {
@@ -169,8 +170,35 @@ public class CartController {
     public Object addProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        cartProduct.setAmount(cartProduct.getAmount() + 1);
-        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+        if (cartProduct.getAmount() < cartProduct.getProductModel().getAmount()) {
+            cartProduct.setAmount(cartProduct.getAmount() + 1);
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+        }
+
+        Cart cart = cartProduct.getCart();
+        float totalPrice = 0;
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                totalPrice += price;
+            }
+        }
+        cart.setTotalPrice(new BigDecimal(totalPrice));
+        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+
+        return cartProduct;
+    }
+
+    @RequestMapping({"/cart/changeProductCount.do"})
+    @ResponseBody
+    public Object changeProductCount(HttpServletRequest request) {
+        String cartProductId = request.getParameter("cartProductId");
+        String productAmount = request.getParameter("amount");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        if (Integer.parseInt(productAmount)>=cartProduct.getProductModel().getAmount()){
+            cartProduct.setAmount(cartProduct.getProductModel().getAmount());
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+        }
 
         Cart cart = cartProduct.getCart();
         float totalPrice = 0;
@@ -191,10 +219,10 @@ public class CartController {
     public Object subtractProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        if (cartProduct.getAmount() > 0) {
+        if (cartProduct.getAmount() > 1) {
             cartProduct.setAmount(cartProduct.getAmount() - 1);
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
         }
-        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
         Cart cart = cartProduct.getCart();
         float totalPrice = 0;

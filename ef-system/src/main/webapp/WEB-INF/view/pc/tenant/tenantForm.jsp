@@ -34,26 +34,26 @@
                     <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
                 </div>
             </div>
-            <div class="am-form-group">
-                <label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>
+            <%--<div class="am-form-group">--%>
+                <%--<label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>--%>
 
-                <div class="am-u-sm-9">
-                    <input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"
-                           value="${object.fullName}" required>
-                </div>
-            </div>
+                <%--<div class="am-u-sm-9">--%>
+                    <%--<input type="text" id="fullName" name="fullName" placeholder="中文姓名 / FullName"--%>
+                           <%--value="${object.fullName}" required>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <div class="am-form-group">
-                <label for="background" class="am-u-sm-3 am-form-label">背景图片(移动网站背景图片)</label>
+            <%--<div class="am-form-group">--%>
+                <%--<label for="background" class="am-u-sm-3 am-form-label">背景图片(移动网站背景图片)</label>--%>
 
-                <div class="am-u-sm-9">
-                    <input type="file" id="background" name="background" placeholder="背景图片"
-                           value="${object.backgroundUrl}">
-                </div>
-                <c:if test="${!empty object.backgroundUrl}">
-                    <img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-photo">
-                </c:if>
-            </div>
+                <%--<div class="am-u-sm-9">--%>
+                    <%--<input type="file" id="background" name="background" placeholder="背景图片"--%>
+                           <%--value="${object.backgroundUrl}">--%>
+                <%--</div>--%>
+                <%--<c:if test="${!empty object.backgroundUrl}">--%>
+                    <%--<img src="http://tenant.efeiyi.com/${object.backgroundUrl}@!tenant-manage-photo">--%>
+                <%--</c:if>--%>
+            <%--</div>--%>
 
 
             <div class="am-form-group">
@@ -68,14 +68,14 @@
                 </c:if>
             </div>
 
-            <div class="am-form-group">
-                <label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>
+            <%--<div class="am-form-group">--%>
+                <%--<label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>--%>
 
-                <div class="am-u-sm-9" style="text-align: left;">
-                    <textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>
-                    <small>输入短简介,限30字以内</small>
-                </div>
-            </div>
+                <%--<div class="am-u-sm-9" style="text-align: left;">--%>
+                    <%--<textarea class="" cols="6" name="brief" rows="2" id="user-intro" placeholder="输入短简介,限30字以内">${object.brief}</textarea>--%>
+                    <%--<small>输入短简介,限30字以内</small>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">

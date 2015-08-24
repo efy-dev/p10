@@ -15,7 +15,7 @@
                 <td class="am-primary am-u-md-3">商家名字</td>
                 <td class="am-u-md-3">${object.name}</td>
                 <td class="am-primary am-u-md-3">图标</td>
-                <td class="am-u-md-3" colspan="3">${object.logoUrl}</td>
+                <td class="am-u-md-3" colspan="3"><img width="20px" src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-banner" alt="产品图片"></td>
             </tr>
             </tbody>
         </table>

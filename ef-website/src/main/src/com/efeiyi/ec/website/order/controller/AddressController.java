@@ -57,9 +57,8 @@ public class AddressController {
     @RequestMapping({"/address/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistConsumerAddress_default",request);
-        xQuery.addRequestParamToModel(model,request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        XQuery xQuery = new XQuery("ListConsumerAddress_default",request);
+        List addressList=baseManager.listObject(xQuery);
         model.addAttribute("addressList",addressList);
         return "/purchaseOrder/addressList";
     }

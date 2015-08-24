@@ -31,7 +31,7 @@
                 <i class="clase" title="关闭"></i>
               </div>
               <div class="m-form">
-                <form action="/myEfeiyi/addAddress.do" method="post" >
+                <form action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post" >
                   <ul>
                     <li>
                       <label>收货人：</label>
@@ -145,7 +145,7 @@
 
                 </c:if>
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
-                <span><span class="text-a"><a href="/myEfeiyi/removeAddress.do?addressId=${address.id}">删除</a></span></span>
+                <span><span class="text-a"><a href="<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>">删除</a></span></span>
 
                       <div class="active-pop" style="display: none">
                         <div class="pop-up">
@@ -153,7 +153,7 @@
                             <i class="clase" title="关闭"></i>
                           </div>
                           <div class="m-form">
-                            <form action="/myEfeiyi/addAddress.do" method="post">
+                            <form action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post">
                               <ul>
                                 <li>
                                   <label>收货人：</label>
@@ -208,10 +208,10 @@
     </div>
   </div>
 </div>
-<script src="/scripts/assets/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
 
-<script src="/scripts/assets/js/amazeui.min.js"></script>
-<script src="/scripts/assets/js/system.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
 
 <script>
   $(function(){

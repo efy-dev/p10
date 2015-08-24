@@ -1,7 +1,5 @@
 package com.efeiyi.pal.system.base.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.ming800.core.base.service.BaseManager;
@@ -104,19 +102,6 @@ public class DialogController {
         String tenantId = request.getParameter("tenantId");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         return tenant.getId();
-    }
-
-    /**
-     * 获取一个商户的所有溯源信息
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping({"/tenantSource/list/json"})
-    public List<Object> listTenantSource(HttpServletRequest request) throws Exception{
-        XQuery xQuery = new XQuery("listTenantSource_default", request);
-        List<Object> list = this.baseManager.listObject(xQuery);
-        return list;
     }
 
     /**
