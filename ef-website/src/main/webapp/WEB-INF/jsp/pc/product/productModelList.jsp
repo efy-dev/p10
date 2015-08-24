@@ -56,7 +56,7 @@
   <div class="shop-sort wh">
       <ul class="link1">
           <li class="active"><a
-                  href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=desc:id&pageEntity.index=1"/>"
+                  href="<c:url value="/product/list/${project.id}?pageEntity.size=9&sort=desc:price&pageEntity.index=1"/>"
                   title="价  格">价 格</a></li>
           <%-- <li><a href="" title="销  售">销  售</a></li>
            <li><a href="" title="新  品">新  品</a></li>
@@ -71,8 +71,7 @@
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
             <a href="" target="_blank" title="">
-              <img  class="imgfilter" src="http://tenant.efeiyi.com/photo/20150728100546.jpg@!tenant-pc-tenant-list<%--http://pro.efeiyi.com/${productModel.product.pictureUrl}@!product-model--%>" alt=""/>
-<%--              <img  class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt=""/>--%>
+              <img  class="imgfilter" <c:url value="http://tenant.efeiyi.com/photo/20150728100546.jpg@!tenant-pc-tenant-list"/> alt=""/>
               <p class="wh name">${productModel.product.name}</p>
               <p class="wh price">${productModel.price}</p>
             </a>
@@ -85,8 +84,6 @@
 
  <div class="page wh">
       <ming800:pcPageList bean="${pageEntity}" url="/product/list/${project.id}">
-      <%--<ming800:pcPageParam name="projectId"--%>
-                           <%--value="${project.id}"/>--%>
       <ming800:pcPageParam name="sort"
                            value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
       </ming800:pcPageList>
@@ -95,14 +92,15 @@
   <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="scripts/assets/js/jquery.min.js"></script>
+<script href="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
+<script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
-<script src="scripts/assets/js/amazeui.min.js"></script>
-<script src="scripts/assets/js/system.js"></script>
+
+<script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
 </body>
 </html>
