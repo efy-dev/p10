@@ -12,6 +12,11 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import sun.misc.BASE64Encoder;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Base64;
 
 /**
  * Created by Administrator on 2015/8/19.
@@ -35,14 +40,26 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
     public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception{
         Session session = getSession();//使用同一个session
         session.setCacheMode(CacheMode.IGNORE);//关闭与二级缓存的交互
-        //Transaction tx = session.beginTransaction();
         Integer flag = labelBatch.getAmount();
-
+//        long begin = System.currentTimeMillis();
         for (int i = 1; i <= flag; i++) {
-            String code = RandomStringUtils.randomNumeric(10);
+//            String code = RandomStringUtils.randomNumeric(2);
+//            BASE64Encoder base64en = new BASE64Encoder();
+//            String code = ((Long)(System.currentTimeMillis() + i)).toString();\
+            String code = RandomStringUtils.randomNumeric(16);
+            long code1 = 0;
+            try {
+                code1 = Long.parseLong(code);
+            }catch (RuntimeException e){
+                e.printStackTrace();
+            }
+                code = Long.toString(code1,36);
+//            Long serial = autoSerialManager.nextSerial("palLabelSerial");
+            String serial = autoSerialManager.nextSerial("palLabelSerial");
+//            String code = RandomStringUtils.randomNumeric(10);
             //Long serial = autoSerialManager.nextSerial("palLabelSerial");
             Label label = new Label();
-            //label.setSerial(serial);
+            label.setSerial(serial);
             label.setCode(code);
             label.setLabelBatch(labelBatch);
             label.setPurchaseOrderLabel(null);
@@ -54,7 +71,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
                 session.clear();
             }
         }
-       // tx.commit();
+//        System.out.print(System.currentTimeMillis()-begin);
     }
 
 }

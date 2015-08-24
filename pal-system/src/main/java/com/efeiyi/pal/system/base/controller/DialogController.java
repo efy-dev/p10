@@ -1,6 +1,9 @@
 package com.efeiyi.pal.system.base.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -139,6 +143,74 @@ public class DialogController {
         XQuery xQuery = new XQuery("listUser_default", request);
         List<Object> list = this.baseManager.listObject(xQuery);
         return list;
+    }
+
+    /**
+     * 商户为空时商户系列中所有系列
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/seriesByTenantNull/list/json"})
+    public List<Object> jsonListProductSeriesByTenantNull(HttpServletRequest request) throws Exception{
+        XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
+        List<Object> list = this.baseManager.listObject(xQuery);
+        List<Object> newList = new ArrayList<>();
+        for(Object o:list){
+            newList.add(((TenantProductSeries) o).getProductSeries());
+        }
+        return newList;
+    }
+
+    /**
+     * 商户系列中某个商户包含的所有系列
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/seriesByTenant/list/json"})
+    public List<Object> jsonListProductSeriesByTenant(HttpServletRequest request) throws Exception{
+        XQuery xQuery = new XQuery("listTenantProductSeries_productSeriesByTenant", request);
+        List<Object> list = this.baseManager.listObject(xQuery);
+        List<Object> newList = new ArrayList<>();
+        for(Object o:list){
+            newList.add(((TenantProductSeries) o).getProductSeries());
+        }
+        return newList;
+    }
+
+    /**
+     * 系列为空时商户系列中所有商户
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/TenantBySeriesNull/list/json"})
+    public List<Object> jsonListTenantByProductSeriesNull(HttpServletRequest request) throws Exception{
+        XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
+        List<Object> list = this.baseManager.listObject(xQuery);
+        List<Object> newList = new ArrayList<>();
+        for(Object o:list){
+            newList.add(((TenantProductSeries) o).getTenant());
+        }
+        return newList;
+    }
+
+    /**
+     * 商户系列中某个系列包含的所有商户
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/TenantBySeries/list/json"})
+    public List<Object> jsonListTenantByProductSeries(HttpServletRequest request) throws Exception{
+        XQuery xQuery = new XQuery("listTenantProductSeries_tenantByProductSeries", request);
+        List<Object> list = this.baseManager.listObject(xQuery);
+        List<Object> newList = new ArrayList<>();
+        for(Object o:list){
+            newList.add(((TenantProductSeries) o).getTenant());
+        }
+        return newList;
     }
 
 }

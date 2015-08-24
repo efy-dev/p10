@@ -25,7 +25,8 @@
                 </do>
 
                 <do name="formProduct" label="商品" access="" result="/product/productForm"/>
-                <do name="viewProduct" label="查看商品详情页" access="" result="/product/productView"/>
+                <do name="viewProduct" label="查看商品详情页" access="" result="/product/productView"
+                    execute="com.efeiyi.pal.system.product.controller.ProductViewLabelHandler"/>
                 <do name="removeProduct" label="删除商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"/>
                 <do name="saveOrUpdateProduct" label="新建或更新商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"
                     execute="com.efeiyi.pal.system.product.controller.ProductHandler">

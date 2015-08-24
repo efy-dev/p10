@@ -38,10 +38,23 @@
     </table>
 </div>
 
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/productSeriesPropertyName/newPropertyNameList.do?productSeriesId=${object.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="添加/编辑--属性"/>
+    <c:if test="${not empty object.tenantProductSeriesList}">
+        <input onclick="window.location.href='<c:url value=""/>'"
+               type="button" class="am-btn am-btn-default am-btn-xs"
+               style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+               value="添加/编辑--溯源信息"/>
+    </c:if>
+</div>
+
 <c:if test="${!empty object.productSeriesPropertyNameList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">商品系列${object.name}的系列属性名列表</strong> / <small>ProductSeries PropertyNameList</small>
+            <strong class="am-text-primary am-text-lg">${object.name}的系列属性名列表</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -62,23 +75,40 @@
     </div>
 </c:if>
 
-<c:if test="${!empty object.tenantSet}">
+<c:if test="${not empty object.tenantProductSeriesList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">包含商品系列的商户</strong>
+            <strong class="am-text-primary am-text-lg">商户系列</strong>/<small>溯源信息</small>
         </div>
     </div>
     <div>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align:left">
+                <td>操作</td>
                 <td>商户名称</td>
-                <td>地址</td>
+                <td>商户地址</td>
+                <td>制作工艺</td>
+                <td>创作地域</td>
+                <td>溯源图片</td>
             </tr>
 
-            <c:forEach items="${object.tenantSet}" var="tenant">
+            <c:forEach items="${object.tenantProductSeriesList}" var="tenantProductSeries">
                 <tr style="text-align: left">
-                    <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
-                    <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
+                    <td>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenantProductSeries&id=${tenantProductSeries.id}"/>'"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑溯源信息</button>
+                    </td>
+                    <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenantProductSeries.tenant.id}"/>">${tenantProductSeries.tenant.name}</a></td>
+                    <td>${tenantProductSeries.tenant.province}&nbsp;${tenantProductSeries.tenant.city}&nbsp;${tenantProductSeries.tenant.address}</td>
+                    <td>${tenantProductSeries.craft}</td>
+                    <td>${tenantProductSeries.region}</td>
+                    <td>
+                        <c:forEach items="${tenantProductSeries.imgList}" var="img">
+                            <c:if test="${not empty img.imgUrl}">
+                                <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
+                            </c:if>
+                        </c:forEach>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

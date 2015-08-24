@@ -54,10 +54,10 @@ public class PurchaseOrderHandler implements DoHandler {
      */
     private PurchaseOrder getRelationAttributeObject(PurchaseOrder purchaseOrder, HttpServletRequest request, String type){
         String tenantId = request.getParameter("tenant.id");
-        String userId = request.getParameter("user.id");
+//        String userId = request.getParameter("user.id");
 
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        User user = (User) baseManager.getObject(User.class.getName(), userId);
+//        User user = (User) baseManager.getObject(User.class.getName(), userId);
 
         if (type.equals("new")){
             List<PurchaseOrderLabel> purchaseOrderLabelList = new ArrayList();
@@ -67,7 +67,7 @@ public class PurchaseOrderHandler implements DoHandler {
         }
 
         purchaseOrder.setTenant(tenant);
-        purchaseOrder.setUser(user);
+        purchaseOrder.setUser(null);
 
         return purchaseOrder;
     }

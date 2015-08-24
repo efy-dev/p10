@@ -23,12 +23,29 @@ public class ProductSeriesPropertyNameController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping("/savePropertyNameList.do")
-    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    @RequestMapping("/newPropertyNameList.do")
+    public ModelAndView newProductSeriesPropertyNameList(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
-        request.setCharacterEncoding("utf-8");
+        String productSeriesId = request.getParameter("productSeriesId");
+        if (productSeriesId == null || productSeriesId.trim().equals("")) {
+            throw new Exception("productSeriesId不能为空");
+        }
+
+        ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
+//        int count = Integer.parseInt(request.getParameter("count"));
+//        String resultPage = savePropertyNameList(request, count, productSeries, productSeriesId);
+
+        modelMap.put("productSeries", productSeries);
+        modelMap.put("PSPNListSize", productSeries.getProductSeriesPropertyNameList().size());
+//        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
+
+        String resultPage = "/productSeriesPropertyName/productSeriesPropertyNameListForm";
+
+        return new ModelAndView(resultPage);
+    }
+
+    @RequestMapping("/savePropertyNameList.do")
+    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request) throws Exception {
 
         String productSeriesId = request.getParameter("productSeries.id");
         if (productSeriesId == null || productSeriesId.equals("")) {

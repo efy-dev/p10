@@ -25,7 +25,12 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>商品名称：</td>
-            <td>${object.name}</td>
+            <td>
+                ${object.name}
+                <c:if test="${!empty object.logo}">
+                    <img src="http://pal.efeiyi.com/${object.logo}@!pal-img-list">
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td>序列号：</td>
@@ -51,6 +56,14 @@
             <td>购买链接：</td>
             <td>${object.shoppingUrl}</td>
         </tr>
+        <c:if test="${tag == 'true'}">
+        <tr>
+            <td>防伪标签：</td>
+            <td>
+                <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.id:${object.id}"/>">查看标签</a>
+            </td>
+        </tr>
+        </c:if>
     </table>
 </div>
 
@@ -76,67 +89,73 @@
     </div>
 </c:if>
 
-<%--<c:if test="${!empty object.tenantSource}">--%>
-    <%--<div class="am-cf am-padding">--%>
-        <%--<div class="am-fl am-cf">--%>
-            <%--<strong class="am-text-primary am-text-lg">商品${object.name}的溯源信息</strong>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-    <%--<div am-panel am-panel-default admin-sidebar-panel>--%>
-        <%--<table class="am-table am-table-bordered am-table-radius am-table-striped">--%>
-            <%--<tr style="text-align:left">--%>
-                <%--<td>参与人</td>--%>
-                <%--<td>制作工艺</td>--%>
-                <%--<td>创作地区</td>--%>
-                <%--<td>溯源图片</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td>${object.masterName}</td>--%>
-                <%--<td>${object.tenantSource.name}</td>--%>
-                <%--<td>${object.tenantSource.region}</td>--%>
-                <%--<td>--%>
-                <%--&lt;%&ndash;${object.tenantSource.imgUrl}&ndash;%&gt;--%>
+<c:if test="${!empty object.tenantProductSeries}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">溯源信息</strong>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr style="text-align:left">
+                <td>参与人</td>
+                <td>制作工艺</td>
+                <td>创作地区</td>
+                <td>溯源图片</td>
+            </tr>
+            <tr>
+                <td>${object.masterName}</td>
+                <td>${object.tenantProductSeries.craft}</td>
+                <td>${object.tenantProductSeries.region}</td>
+                <td>
+                    <c:forEach items="${object.tenantProductSeries.imgList}" var="img">
+                        <c:if test="${not empty img.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </c:forEach>
+                <%--${object.tenantSource.imgUrl}--%>
                     <%--<c:if test="${!empty object.tenantSource.imgUrl}">--%>
                         <%--<img src="http://pal.efeiyi.com/${object.tenantSource.imgUrl}@!pal-img-list"/>--%>
                     <%--</c:if>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-        <%--</table>--%>
-    <%--</div>--%>
-<%--</c:if>--%>
+                </td>
+            </tr>
+        </table>
+    </div>
+</c:if>
 
-<%--<c:if test="${!empty object.tenantCertification}">--%>
-    <%--<div class="am-cf am-padding">--%>
-        <%--<div class="am-fl am-cf">--%>
-            <%--<strong class="am-text-primary am-text-lg">商品${object.name}的认证信息</strong>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-    <%--<div am-panel am-panel-default admin-sidebar-panel>--%>
-        <%--<table class="am-table am-table-bordered am-table-radius am-table-striped">--%>
-            <%--<tr style="text-align:left">--%>
-                <%--<td>认证证书</td>--%>
-                <%--<td>认证机构</td>--%>
-                <%--<td>认证时间</td>--%>
-                <%--<td>认证结果</td>--%>
-                <%--<td>证书图片</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td>${object.tenantCertification.name}</td>--%>
-                <%--<td>${object.tenantCertification.org}</td>--%>
-                <%--<td><fmt:formatDate value="${object.tenantCertification.theDate}" pattern="yyyy年MM月"/></td>--%>
-                <%--<td>--%>
-                    <%--<ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantCertification.level}" type="normal" />--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                <%--&lt;%&ndash;${object.tenantCertification.imgUrl}&ndash;%&gt;--%>
-                    <%--<c:if test="${!empty object.tenantCertification.imgUrl}">--%>
-                        <%--<img src="http://pal.efeiyi.com/${object.tenantCertification.imgUrl}@!pal-img-list">--%>
-                    <%--</c:if>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-        <%--</table>--%>
-    <%--</div>--%>
-<%--</c:if>--%>
+<c:if test="${!empty object.tenantCertification}">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">认证信息</strong>
+        </div>
+    </div>
+    <div am-panel am-panel-default admin-sidebar-panel>
+        <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <tr style="text-align:left">
+                <td>认证证书</td>
+                <td>认证机构</td>
+                <td>认证时间</td>
+                <td>认证结果</td>
+                <td>证书图片</td>
+            </tr>
+            <tr>
+                <td>${object.tenantCertification.name}</td>
+                <td>${object.tenantCertification.org}</td>
+                <td><fmt:formatDate value="${object.tenantCertification.theDate}" pattern="yyyy年MM月"/></td>
+                <td>
+                    <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantCertification.level}" type="normal" />
+                </td>
+                <td>
+                    <c:forEach items="${object.tenantCertification.imgList}" var="tenantCertificationImg">
+                        <c:if test="${not empty tenantCertificationImg.imgUrl}">
+                            <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
+                        </c:if>
+                    </c:forEach>
+                </td>
+            </tr>
+        </table>
+    </div>
+</c:if>
 
 </body>
 </html>
