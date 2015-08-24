@@ -3,7 +3,6 @@ a:hover{text-decoration: underline}
 /*--reset--*/
 .wh1 {width:100%;float: left;margin-bottom: 27px;}
 /*//End--commmon*/
-.hd{overflow: hidden}
 .my-order .order-nav{width: 1000px;height: auto;margin: 0 auto;overflow: hidden;margin: 62px auto 150px;}
 .my-order .order-nav .layout-nav{float: left;width: 110px;height: auto;padding:20px 14px 25px;border: 1px solid #ccc;}
 .my-order .order-nav .layout-nav .order{height:auto;}
@@ -286,12 +285,7 @@ a:hover{text-decoration: underline}
 .my-favorite .sign-right{width: 12px;height: 23px;background: url("../images/efeiyi-gwc.png") no-repeat -74px -13px; position: absolute;right:53px;top:55px;cursor: pointer;}
 /*我的店铺*/
 /*******************购物车************************/
-a {outline:none;cursor:pointer}
-a:hover{text-decoration: underline}
-/*--reset--*/
-.wh1 {width:100%;float: left;margin-bottom: 27px;}
-/*//End--commmon*/
-.hd{overflow: hidden}
+
 /*购物车页面*/
 .efeiyi-cart{margin: 70px auto 0;overflow: hidden;min-height: 580px;}
 .efeiyi-cart .title table {width:1000px;margin: 0 auto;}

@@ -195,7 +195,7 @@
 
 <div class="hd login">
     <div class="login-wrap">
-        <div class="banner"><img src="/scripts/images/login-1.jpg" alt=""/></div>
+        <div class="banner"><img src="<c:url value="/scripts/images/login-1.jpg"/>" alt=""/></div>
         <div class="login-form reg-form">
             <form class="am-form" data-parsley-validate id="bigUser" name="bigUser"
                   action="<c:url value="/pc/saveEnrollUser.do"/>" method="post"
