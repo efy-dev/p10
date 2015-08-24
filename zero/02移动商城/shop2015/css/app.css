@@ -1,0 +1,33 @@
+.icon {background:url(../images/icon.png) no-repeat;background-size:152px auto;}
+
+
+
+
+
+.custom .am-header {background:#fff;border-bottom:3px #000 solid;border-top:3px #000 solid;}
+.custom .am-header .logo a { background-position: 0 0;width:152px; height:27px; position: absolute;top:50%; margin-top:-13px; left:21px;}
+.custom .am-header .icon-cart { background-position:0 -27px;width:34px; height:24px; float: left; margin-top:8px;margin-right:9px; position: relative;}
+.custom .am-header .icon-user { background-position:-35px -27px;width:23px; height:24px; float: left; margin-top:8px}
+.custom .am-header .icon-cart em { line-height:12px; font-size:6px;position: absolute;top:0; left: 0; color: #fff;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
