@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.event.TreeModelListener;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +63,8 @@ public class ProductController {
         for(int i = 0;i<proName.length();i++){
             str[i] = String.valueOf(proName.charAt(i));
         }
-        model.addAttribute("proName",str);
+        model.addAttribute("proName",proName);
+        model.addAttribute("strProjectName",str);
         model.addAttribute("project",project);
         model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
@@ -98,9 +100,9 @@ public class ProductController {
     @RequestMapping({"/hot/{productModelId}"})
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        String  projectId = productModel.getProduct().getProject().getId();
-        Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
-        model.addAttribute("productList", project.getProductList());
+        /*String  projectId = productModel.getProduct().getProject().getId();*/
+        List<ProductModel> productModelList  = productModel.getProduct().getProductModelList();
+        model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
         return "/product/recommendationList";
 }
@@ -130,7 +132,16 @@ public class ProductController {
         return objectList;
     }
 
+    /**商品详情
+     * @param request
+     * @return
+     * @throws Exception
+     */
 
-
-
+    @RequestMapping({"/category/{productModelId}"})
+    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model){
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        model.addAttribute("productModel", productModel);
+        return "/product/productDetails";
+    }
 }
