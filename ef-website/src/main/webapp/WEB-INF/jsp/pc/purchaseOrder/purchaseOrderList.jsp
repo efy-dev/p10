@@ -1,7 +1,3 @@
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -57,13 +53,13 @@
         <tr>
           <th colspan="6">
             <span>${order.createDatetime}</span>
-            <span>订单号：<strong>${order.serial}</strong></span>
+            <span>订单号：<strong>${subOrder.serial}</strong></span>
             <span>瓷器之都</span>
           </th>
         </tr>
         <tr>
           <td width="618">
-            <c:forEach items="${subOrder.purchaseOrderProductList}" var="op">
+            <c:forEach  items="${subOrder.purchaseOrderProductList}" var="op">
               <table class="item">
                 <td width="237">
                   <div class="cols1">
