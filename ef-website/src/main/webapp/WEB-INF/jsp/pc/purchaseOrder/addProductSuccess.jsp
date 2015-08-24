@@ -10,20 +10,21 @@
 <html>
 <head>
     <title></title>
+    <link href="<c:url value="/scripts/assets/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
 <div class="wr wh">
-  <div class="success">
-    <div class="success-shop">
-      <p>添加购物车成功</p>
+    <div class="success">
+        <div class="success-shop">
+            <p>添加购物车成功</p>
 
-      <p>
-        <a href="<c:url value="/cart/view"/> ">去购物车结算</a>
-        <a href="<c:url value="/"/> ">继续购物</a>
-      </p>
+            <p>
+                <a href="<c:url value="/cart/view"/> ">去购物车结算</a>
+                <a href="<c:url value="/"/> ">继续购物</a>
+            </p>
+        </div>
+
     </div>
-
-  </div>
 </div>
 </body>
 </html>

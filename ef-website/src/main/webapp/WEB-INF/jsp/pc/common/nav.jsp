@@ -32,7 +32,7 @@
             %>
             <li class="cart">
                 <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em>0</em></span>
+                <span class="tips"><em id="cartAmount">0</em></span>
             </li>
         </ul>
     </div>
@@ -60,3 +60,13 @@
         </div>
     </div>
 </div>
+<script>
+
+    $().ready(function () {
+        var success = function(data){
+            $("#cartAmount").html(data);
+        }
+        ajaxRequest("<c:url value="/cart/cartAmount.do"/>",{},success,function(){},"post");
+    });
+
+</script>
