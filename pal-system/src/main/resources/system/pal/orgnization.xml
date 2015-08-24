@@ -103,7 +103,7 @@
                 </do>
 
                 <do name="formTenantCertification" label="认证信息" access="" result="/tenantCertification/tenantCertificationForm"/>
-                <!--<do name="viewTenantSource" label="溯源信息详情页" access="" result="/tenantSource/tenantSourceView"/>-->
+                <do name="viewTenantCertification" label="认证信息详情页" access="" result="/tenantCertification/tenantCertificationView"/>
                 <!--<do name="removeTenantSource" label="删除溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"/>-->
                 <!--<do name="saveOrUpdateTenantSource" label="新建或更新溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"-->
                 <!--execute="com.efeiyi.pal.system.organization.controller.UserHandler">-->
