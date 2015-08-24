@@ -1,5 +1,9 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -41,7 +45,7 @@
             </dl>
         </div>
         <div class="userinfo-datum">
-            <form action="/updatePersonalInfo.do" method="post">
+            <form action="/myEfeiyi/updatePersonalInfo.do" method="post">
                 <ul>
                     <li>
                         <label>昵称：</label>
@@ -54,23 +58,23 @@
                     <li>
                         <label>性别：</label>
                         <c:if test="${user.sex==1}">
-                        <input type="radio" class="userinfo-box" value="1" name="性别" checked>男
+                        <input type="radio" class="userinfo-box" value="1" name="sex" checked>男
                         </c:if>
                         <c:if test="${user.sex !=1}">
-                            <input type="radio" class="userinfo-box" value="1" name="性别" >男
+                            <input type="radio" class="userinfo-box" value="1" name="sex" >男
                         </c:if>
                       <c:if test="${user.sex == 2}">
-                        <input type="radio" class="userinfo-box" value="2" name="性别" checked>女
+                        <input type="radio" class="userinfo-box" value="2" name="sex" checked>女
                       </c:if>
                         <c:if test="${user.sex != 2}">
-                            <input type="radio" class="userinfo-box" value="2" name="性别" >女
+                            <input type="radio" class="userinfo-box" value="2" name="sex" >女
                         </c:if>
                     </li>
                     <li>
                         <label class="act1">生日：</label>
                         <!--amazeui-->
-                        <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'dd-mm-yyyy'}">
-                            <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="${user.birthDate}">
+                        <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                            <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" />">
       <span class="am-input-group-btn am-datepicker-add-on">
         <button class="am-btn am-btn-default actt" type="button"><span class="am-icon-calendar-1 "></span></button>
       </span>

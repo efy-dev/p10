@@ -58,7 +58,7 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removePurchaseOrderPayment('${purchaseOrderPayment.id}')"><span
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removePurchaseOrderPayment('${purchaseOrderPayment.id}')})"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </button>
                                 </div>
@@ -85,7 +85,8 @@
         </div>
     </div>
     <div style="clear: both">
-        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+        <c:url value="/basic/xm.do" var="url"/>
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>

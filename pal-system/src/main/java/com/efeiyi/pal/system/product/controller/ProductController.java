@@ -2,15 +2,18 @@ package com.efeiyi.pal.system.product.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
-import com.efeiyi.pal.organization.model.TenantSource;
 import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.pal.product.model.ProductPropertyValue;
 import com.efeiyi.pal.product.model.ProductSeries;
+import com.efeiyi.pal.product.model.TenantProductSeries;
+import com.efeiyi.pal.system.product.service.ProductServiceManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,10 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
+
+    private ProductServiceManager productServiceManager = (ProductServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productServiceManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
     private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
@@ -83,10 +90,12 @@ public class ProductController {
         String tenantId = request.getParameter("tenant.id");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 
-//        String tenantSourceId = request.getParameter("tenantSource.id");
-//        String tenantCertificationId = request.getParameter("tenantCertification.id");
-//        TenantSource tenantSource = (TenantSource) baseManager.getObject(TenantSource.class.getName(), tenantSourceId);
-//        TenantCertification tenantCertification = (TenantCertification) baseManager.getObject(TenantCertification.class.getName(), tenantCertificationId);
+        TenantProductSeries tenantProductSeries = (TenantProductSeries) productServiceManager.getTenantProductSeriesByTenantAndProductSeries(tenant, newProductSeries);
+        if (tenantProductSeries != null ){
+            TenantCertification tenantCertification = tenantProductSeries.getTenantCertification();
+            product.setTenantCertification(tenantCertification);
+            product.setTenantProductSeries(tenantProductSeries);
+        }
 
         if (type.equals("new")){
             List<ProductPropertyValue> productPropertyValueList = new ArrayList();
@@ -101,8 +110,6 @@ public class ProductController {
 
         product.setProductSeries(newProductSeries);
         product.setTenant(tenant);
-//        product.setTenantSource(tenantSource);
-//        product.setTenantCertification(tenantCertification);
 
         return product;
     }
@@ -113,15 +120,17 @@ public class ProductController {
      * @param request
      * @return
      */
-    private Product setProductBaseProperty(Product product, HttpServletRequest request) throws ParseException {
+    private Product setProductBaseProperty(Product product, HttpServletRequest request) throws Exception {
         String name = request.getParameter("name");
         String masterName = request.getParameter("masterName");
-        String serial = request.getParameter("serial");
+//        String serial = request.getParameter("serial");
         String status = request.getParameter("status");
         String shoppingUrl = request.getParameter("shoppingUrl");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" );
         Date date = sdf.parse(request.getParameter("madeYear"));
+
+        String serial = autoSerialManager.nextSerial("serial");//序列号自动生成
 
         product.setName(name);
         product.setMasterName(masterName);
@@ -163,7 +172,7 @@ public class ProductController {
 //            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
 //            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", url);
-            product.setImgUrl(url);
+            product.setLogo(url);
         }
 
         return product;

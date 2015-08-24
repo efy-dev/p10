@@ -20,8 +20,6 @@ public class LabelBatch {
     private String setting;
     private Integer amount;
     private Date createDate;
-//    private Product product;
-//    private Tenant tenant;
     private String status;
 
     @Id
@@ -61,26 +59,6 @@ public class LabelBatch {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_id")
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "tenant_id")
-//    public Tenant getTenant() {
-//        return tenant;
-//    }
-//
-//    public void setTenant(Tenant tenant) {
-//        this.tenant = tenant;
-//    }
 
     @Column(name = "status")
     public String getStatus() {

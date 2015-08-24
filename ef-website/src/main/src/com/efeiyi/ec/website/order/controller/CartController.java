@@ -1,10 +1,12 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,22 @@ public class CartController {
     @RequestMapping({"/cart/view"})
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
         //已经登录的情况
-        XQuery xQuery = new XQuery("listCart_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        Cart cart = (Cart) list.get(0);
+        Cart cart = null;
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        if (currentUser.getId() != null) {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            cart = (Cart) list.get(0);
+        } else {
+            if (request.getSession().getAttribute("cart") != null) {
+                cart = (Cart) request.getSession().getAttribute("cart");
+            } else {
+                cart = new Cart();
+                cart.setCartProductList(new ArrayList<CartProduct>());
+                request.getSession().setAttribute("cart", cart);
+            }
+        }
+
         List<Tenant> tenantListTemp = new ArrayList<>();
         List<Tenant> tenantList = new ArrayList<>();
         List<CartProduct> cartProductList = cart.getCartProductList();
@@ -74,20 +89,34 @@ public class CartController {
 
         model.addAttribute("tenantList", tenantList);
         model.addAttribute("productMap", productMap);
-        model.addAttribute("cart", list.get(0));
+        model.addAttribute("cart", cart);
         return "/purchaseOrder/cart";
     }
 
 
     @RequestMapping({"/cart/addProduct.do"})
-    @ResponseBody
-    public boolean addProduct(HttpServletRequest request) throws Exception {
+    public String addProduct(HttpServletRequest request) throws Exception {
         String productId = request.getParameter("id");
-        XQuery xQuery = new XQuery("listCart_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
+        // 需要判断用户是否登录
+        Cart cart = null;
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        if (currentUser.getId() != null) {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            cart = (Cart) list.get(0);
+        } else {
+            Object cartTemp = request.getSession().getAttribute("cart");
+            if (cartTemp != null) {
+                cart = (Cart) cartTemp;
+            } else {
+                cart = new Cart();
+                cart.setCartProductList(new ArrayList<CartProduct>());
+            }
+        }
+
         boolean ne = false;
         boolean ab = false;
-        Cart cart = (Cart) list.get(0);
+
         XQuery xQuery1 = new XQuery("listCartProduct_default", request);
         xQuery1.put("cart_id", cart.getId());
         List<Object> list1 = baseManager.listObject(xQuery1);
@@ -124,7 +153,7 @@ public class CartController {
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             ab = true;
         }
-        return ab;
+        return "/purchaseOrder/addProductSuccess";
     }
 
     @RequestMapping({"/cart/removeProduct.do"})
@@ -295,8 +324,8 @@ public class CartController {
         for (CartProduct cartProductTemp : cartProductList) {
             if (chooseType.equals("1")) {
                 cartProductTemp.setIsChoose("1");
-            }else {
-                 cartProductTemp.setIsChoose("0");
+            } else {
+                cartProductTemp.setIsChoose("0");
             }
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
         }

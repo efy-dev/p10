@@ -15,7 +15,7 @@
             <li><a href="<c:url value="/login"/>" title="请登录">请登录</a></li>
             <li><a href="<c:url value="/register"/>" title="快速注册">快速注册</a></li>
             <li class="cart">
-                <a href="" title="购物车"><i class="icon"></i>购物车</a>
+                <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
                 <span class="tips"><em>0</em></span>
             </li>
         </ul>
@@ -29,7 +29,8 @@
             <ul>
                 <c:forEach items="${jnode.children}" var="child">
                     <li>
-                        <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>" title="${child.text_zh_CN}">${child.text_zh_CN}</a>
+                        <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"
+                           title="${child.text_zh_CN}">${child.text_zh_CN}</a>
                         <c:if test="${child.getState().equals('productCategory')}">
                             <jsp:include page="/productCategory.do" flush="true"/>
                         </c:if>

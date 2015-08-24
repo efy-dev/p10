@@ -20,7 +20,7 @@ import java.util.List;
 public class Label {
 
     private String id;
-    private Long serial;
+    private String serial;
     private String code;
     private LabelBatch labelBatch;
     private Tenant seller;
@@ -44,11 +44,11 @@ public class Label {
     }
 
     @Column(name = "serial")
-    public Long getSerial() {
+    public String getSerial() {
         return serial;
     }
 
-    public void setSerial(Long serial) {
+    public void setSerial(String serial) {
         this.serial = serial;
     }
 

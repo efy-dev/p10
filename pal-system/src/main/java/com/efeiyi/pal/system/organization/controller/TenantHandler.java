@@ -2,6 +2,7 @@ package com.efeiyi.pal.system.organization.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -12,6 +13,7 @@ import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -61,9 +63,10 @@ public class TenantHandler implements DoHandler {
 //        tenant.setProvince(province);
 //        tenant.setAddress(address);
 
-        if (type.equals("new")){
-            tenant.setProductSeriesSet(new HashSet<ProductSeries>());
-        }
+//        if (type.equals("new")){
+////            tenant.setProductSeriesSet(new HashSet<ProductSeries>());
+//            tenant.setTenantProductSeriesList(new ArrayList<TenantProductSeries>());
+//        }
 
         return tenant;
     }

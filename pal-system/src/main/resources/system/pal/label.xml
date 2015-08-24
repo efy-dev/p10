@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="Label" label="标签" version="" package="com.efeiyi.pal.label.model" path="">
+
+    <entities>
+        <entity name="PCLabelBatch" label="标签批次列表"  model="com.efeiyi.pal.label.model.LabelBatch">
+            <does>
+
+                <do name="plistLabelBatch" access="" label="标签批次分页列表" result="/labelBatch/labelBatchPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+
+                <do name="listLabelBatch" access="" label="标签批次列表" result="/labelBatch/labelBatchList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="formLabelBatch" label="标签批次" access="" result="/labelBatch/labelBatchForm"/>
+                <do name="viewLabelBatch" label="查看标签批次详情页" access="" result="/labelBatch/labelBatchView"/>
+                <do name="removeLabelBatch" label="删除标签批次" access="" result="redirect:/basic/xm.do?qm=plistLabelBatch_default"/>
+                <do name="saveOrUpdateLabelBatch" label="新建或更新标签批次" access="" result="redirect:/basic/xm.do?qm=plistLabelBatch_default"
+                    execute="com.efeiyi.pal.system.label.controller.LabelBatchHandler">
+                    <page>
+                        <fields>
+                            <field name="createDate" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
+                        </fields>
+                    </page>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="PCLabel" label="标签列表"  model="com.efeiyi.pal.label.model.Label">
+            <fields>
+                <field name="status" label="状态" inputType="select">
+                    <statusType fieldName="status">
+                        <item label="未分配" value="1"/>
+                        <item label="已分配" value="2"/>
+                        <item label="已查询" value="9"/>
+                    </statusType>
+                </field>
+            </fields>
+
+            <does>
+                <do name="plistLabel" access="" label="标签分页列表" result="/label/labelPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:asc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="serial" label="查找" type="auto" orderBy="serial:asc">
+                        <condition name="serial" operation="eq" label="序列号"/>
+                    </query>
+                    <query name="batchLabel" label="同批次标签查询" type="auto" orderBy="serial:asc">
+                        <condition name="labelBatch.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                    </query>
+                    <query name="productLabel" label="商品标签" type="auto" orderBy="serial:asc">
+                        <condition name="purchaseOrderLabel.product.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                    </query>
+                    <!--<query name="allSerial" label="默认" type="auto" orderBy="serial:asc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="serial" defaultValue="" operation="eq"/>-->
+                    <!--</query>-->
+                    <query name="orderLabel" label="订单标签查询" type="auto" orderBy="serial:asc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="purchaseOrderLabel.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                    </query>
+                </do>
+
+                <do name="listLabel" access="" label="标签列表" result="/label/labelList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+
+                <do name="viewLabel" label="查看标签详情" access="" result="/label/labelView"/>
+                <!--<do name="saveOrUpdateLabel" label="新建或更新标签" access="" result="redirect:/basic/xm.do?qm=plistLabel_default"-->
+                    <!--execute="com.efeiyi.pal.system.label.controller.LabelHandler">-->
+                <!--</do>-->
+
+            </does>
+        </entity>
+    </entities>
+
+</module>

@@ -81,16 +81,16 @@
             </div>
         </div>
 
-        <div class="am-form-group">
-            <label for="img" class="am-u-sm-3 am-form-label">证书图片 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input type="file" id="img" name="img" placeholder="证书图片"
-                       value="${object.imgUrl}">
-            </div>
-            <c:if test="${!empty object.imgUrl}">
-                <img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">
-            </c:if>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label for="img" class="am-u-sm-3 am-form-label">证书图片 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input type="file" id="img" name="img" placeholder="证书图片"--%>
+                       <%--value="${object.imgUrl}">--%>
+            <%--</div>--%>
+            <%--<c:if test="${!empty object.imgUrl}">--%>
+                <%--<img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">--%>
+            <%--</c:if>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
