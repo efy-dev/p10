@@ -40,7 +40,7 @@ public class Product implements Serializable{
     private List<ProductModel> productModelList;
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_id")
     public List<ProductModel> getProductModelList() {
         return productModelList;
     }
