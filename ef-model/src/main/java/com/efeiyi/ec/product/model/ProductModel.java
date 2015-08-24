@@ -25,7 +25,7 @@ public class ProductModel implements Serializable {
     private List<ProductPropertyValue> productPropertyValueList; //属性值
     private String status;
     private Integer recommendIndex;
-
+    private String name;
    @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;
@@ -100,5 +100,14 @@ public class ProductModel implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
