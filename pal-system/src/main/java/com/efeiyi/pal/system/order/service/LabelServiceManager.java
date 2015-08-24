@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface LabelServiceManager {
 
-    Long getMinSerial();
+    String getMinSerial();
 
-    List<Label> getLabelListByMinSerialAndSumProduct(Long minSerial, Integer sumProduct);
+    List<Label> getLabelListByMinSerialAndSumProduct(String minSerial, Integer sumProduct);
 
 }

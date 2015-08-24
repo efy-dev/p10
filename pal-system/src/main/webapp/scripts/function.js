@@ -1,5 +1,3 @@
-//    ----------------------------------m8u �ռ亯��������չ
-
 
 var m8uDialog = $.extend({}, m8uDialog);
 
@@ -43,6 +41,45 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
     }
 }
 
+function dialog2(url, artDialogLogId, artDialogLogName) {
+    var modalStart = "<div class=\"am-modal am-modal-no-btn\" id=\"" + artDialogLogId + artDialogLogName + "\">" +
+        "<div class=\"am-modal-dialog\">" +
+        "<div class=\"am-modal-hd\">" +
+        "<span data-am-modal-close class=\"am-close\">&times;</span>" +
+        "</div>" +
+        "<div class=\"am-modal-bd\"> ";
+    var modalEnd = "</div> </div> </div>";
+    var modalContent = "";
+    this.key = "";
+    this.dataType = "";
+    this.required = "";
+    console.log($("#" + artDialogLogId + artDialogLogName).attr("id"));
+
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                modalContent += "<div class=\"am-u-md-4\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "')\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a>" +
+                    "</div>";
+            }
+            var out = modalStart + modalContent + modalEnd;
+            if (typeof $("#" + artDialogLogId + artDialogLogName).attr("id") != "undefined") {
+                var modalDiv = document.getElementById(artDialogLogId + artDialogLogName);
+                modalDiv.parentNode.removeChild(modalDiv);
+            }
+            $("body").append(out);
+            $("#" + artDialogLogId + artDialogLogName).modal({
+                width: 400, height: 225
+            });
+        }
+    });
+
+}
+
 
 function xdialog1(url, artDialogLogId, artDialogLogName) {
     //暂时使用iframe的方式实现 在模态窗口中嵌入iframe
@@ -73,13 +110,8 @@ function choose(element, artDialogLogId, artDialogLogName) {
     $("#" + artDialogLogId).attr("value", $(element).attr("id"));
     $("#" + artDialogLogId + artDialogLogName).modal('close');
     $("#" + artDialogLogName).attr("value", $(element).attr("name"));
-    //if (typeof fun != "undefined") {
-    //    fun($(element).attr("id"));
-    //}
 
 }
-/* ȫ�ֶ��� */
-
 
 /**
  * ��������
@@ -145,13 +177,27 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, conditi
         url = '/product2/list/json?conditions=tenant.id:'+condition;
     } else if (type == 'user') {       /*所有用户*/
         url = '/user/list/json';
+    } else if (type == 'seriesByTenantNull'){/*商户为空时商户系列中所有系列*/
+        url = '/seriesByTenantNull/list/json';
+    } else if (type == 'seriesByTenant'){/*商户系列中某个商户包含的所有系列*/
+        url = '/seriesByTenant/list/json?conditions=tenant.id:'+condition;
+    } else if (type == 'TenantBySeriesNull'){/*系列为空时商户系列中所有商户*/
+        url = '/TenantBySeriesNull/list/json';
+    } else if (type == 'TenantBySeries'){/*商户系列中某个系列包含的所有商户*/
+        url = '/TenantBySeries/list/json?conditions=productSeries.id:'+condition;
     }
 
     /*dialog1.data("artDialogDocument", document);
     dialog1.data("artDialogLogId", artDialogLogId);
     dialog1.data("artDialogLogName", artDialogLogName);*/
     //console.log(typeof dialog1.open)
-    dialog1(url, artDialogLogId, artDialogLogName);
+
+    if(type == "seriesByTenantNull" || type == "seriesByTenant" || type == "TenantBySeriesNull" || type == "TenantBySeries"){
+        dialog2(url, artDialogLogId, artDialogLogName);
+    } else {
+        dialog1(url, artDialogLogId, artDialogLogName);
+    }
+
     /*var callback = function () {                  // �ص�����
         if (fun != null) {
             fun();
@@ -177,8 +223,6 @@ m8uDialog.openXDialog = function (artDialogLogId, artDialogLogName, queryModel, 
     //$.dialog.data("callback", callback);
 }
 
-
-//------------------У��----------------------
 
 var idObj = "";
 var nameObj = "";
@@ -220,14 +264,12 @@ function getChildrenCity(teachAreaId, teachAreaName) {
         }
     }
 
-
     allCityAreaIds = city.id + ",";
     if (city.cityList != null && city.cityList.length > 0) {
         for (var j = 0; j < city.cityList.length; j++) {
             getChildrenCity(city.cityList[j].id);
         }
     }
-
 
     allCityAreaIds = allCityAreaIds.substring(0, allCityAreaIds.length - 1);
     idObj.val(allCityAreaIds);
@@ -302,7 +344,7 @@ function listCity(idObjId, nameObjId, params) {
     jQuery.ajax({
         type: 'post',
         dataType: 'json',
-        url: '/pc/city/listCityByJson.do',
+        url: '/pal/city/listCityByJson.do',
         data: {
             isFather: options.isFather
         },
@@ -340,9 +382,6 @@ function listCity(idObjId, nameObjId, params) {
 function closeWindow() {
     $("#teachAreaChoose").remove();
 }
-
-
-//------------------У��----------------------
 
 var categoryIdObj = "";
 var categoryNameObj = "";

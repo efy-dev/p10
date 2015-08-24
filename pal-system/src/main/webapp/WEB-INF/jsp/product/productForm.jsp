@@ -22,6 +22,25 @@
                 m8uDialog.openDialog(id, name, type, tenantId);
             }
         }
+
+        function openTenantProductSeries(tag, id, name){
+            if(tag){//选择系列
+                var tenantId = document.getElementById("tenant_id").value;
+                if(tenantId == null || tenantId == ""){
+                    m8uDialog.openDialog(id, name, "seriesByTenantNull", null);
+                }else {
+                    m8uDialog.openDialog(id, name, "seriesByTenant", tenantId);
+                }
+            }else {//选择商户
+                var productSeriesId = document.getElementById("productSeries_id").value;
+                if(productSeriesId == null || productSeriesId == ""){
+                    m8uDialog.openDialog(id, name, "TenantBySeriesNull", null);
+                }else {
+                    m8uDialog.openDialog(id, name, "TenantBySeries", productSeriesId);
+                }
+            }
+
+        }
     </script>
 </head>
 <body>
@@ -63,17 +82,19 @@
             </div>
         </div>
 
-        <div class="am-form-group">
-            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>
-            </div>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small style="color: red">*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">所属系列 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input id="productSeries_idName" placeholder="所属系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" value="${object.productSeries.name}" required>
+                <input id="productSeries_idName" placeholder="所属系列"
+                       onclick="openTenantProductSeries(true, 'productSeries_id', 'productSeries_idName')"
+                       value="${object.productSeries.name}" required>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">
             </div>
         </div>
@@ -81,10 +102,28 @@
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>
+                <input id="tenant_idName" placeholder="商户名称"
+                       onclick="openTenantProductSeries(false, 'tenant_id', 'tenant_idName')"
+                       value="${object.tenant.name}" required>
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>
+
+        <%--<div class="am-form-group">--%>
+            <%--<label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">所属系列 <small style="color: red">*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="productSeries_idName" placeholder="所属系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" value="${object.productSeries.name}" required>--%>
+                <%--<input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%--<div class="am-form-group">--%>
+            <%--<label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>--%>
+                <%--<input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small style="color: red">*</small></label>
@@ -116,9 +155,9 @@
         <%--</div>--%>
 
         <div class="am-form-group">
-            <label name="shoppingUrl" for="shoppingUrl" class="am-u-sm-3 am-form-label">购买链接 <small style="color: red">*</small></label>
+            <label name="shoppingUrl" for="shoppingUrl" class="am-u-sm-3 am-form-label">购买链接 <small <%--style="color: red"--%>>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="shoppingUrl" id="shoppingUrl" placeholder="购买链接" value="${object.shoppingUrl}" required>
+                <input type="text" name="shoppingUrl" id="shoppingUrl" placeholder="购买链接" value="${object.shoppingUrl}" <%--required--%>>
             </div>
         </div>
 
@@ -126,10 +165,10 @@
             <label for="logo" class="am-u-sm-3 am-form-label">商品Logo <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="file" id="logo" name="logo" placeholder="商品LogoLogo"
-                       value="${object.imgUrl}">
+                       value="${object.logo}">
             </div>
-            <c:if test="${!empty object.imgUrl}">
-                <img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">
+            <c:if test="${!empty object.logo}">
+                <img src="http://pal.efeiyi.com/${object.logo}@!pal-img-form">
                 <%--<figure data-am-widget="figure" class="am am-figure am-figure-default "--%>
                         <%--data-am-figure="{  pureview: 'true' }">--%>
                     <%--<img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form"--%>
