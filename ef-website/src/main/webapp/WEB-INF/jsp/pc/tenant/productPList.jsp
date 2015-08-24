@@ -37,10 +37,10 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="/tenant/listProduct?sort=desc:price" title="价格从高到低">价格从高到低</a>
-        <a href="/tenant/listProduct?sort=asc:price" title="价格从低到高">价格从低到高</a>
+        <a href="/tenant/view?sort=desc:price" title="价格从高到低">价格从高到低</a>
+        <a href="/tenant/view?sort=asc:price" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
-        <a href="" title="新品">新品</a>
+        <a href="/tenant/view?sort=desc:createDateTime" title="新品">新品</a>
         <a href="" title="人气">人气</a>
       </dd>
     </dl>
@@ -68,36 +68,7 @@
         </ming800:pcPageList>
       </div>
     </div>
-    <!-- //End--list-pro-->
-   <%-- <div class="page wh">
-      <ul class="am-pagination am-pagination-centered">
-        <li class="bigRound"><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li class="am-active"><a href="#">2</a></li>
-        <li class="am-disabled bigRound"><a href="#">»</a></li>
-      </ul>
-    </div>--%>
-    <!-- //End--page-->
   </div>
-
-  <!-- //End---->
 </div>
-<%--<script>
-  function df() {
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/tenant/listProduct?conditions=tenant.id:1&sort=asc:id"/>',
-      dataType: 'json',
-      success: function (data) {
-          alert(data);
-//        var obj = eval(data);
-        window.location.reload();
-      },error:function(){
-          alert(111);
-      }
-    });
-  }
-</script>--%>
 </body>
 </html>
