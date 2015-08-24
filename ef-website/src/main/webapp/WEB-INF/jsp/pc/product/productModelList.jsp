@@ -49,18 +49,19 @@
     <div class="title">
       <p class="wh"><span class="zh">she</span><span class="cn">${strProjectName[0]}</span></p>
       <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
     </div>
     <div class="info">${project.description}</div>
   </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
-    <ul class="link1">
-      <li class="active"><a href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
-     <%-- <li><a href="" title="销  售">销  售</a></li>
-      <li><a href="" title="新  品">新  品</a></li>
-      <li><a href="" title="人  气">人  气</a></li>--%>
-    </ul>
+      <ul class="link1">
+          <li class="active"><a
+                  href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=desc:id&pageEntity.index=1"/>"
+                  title="价  格">价 格</a></li>
+          <%-- <li><a href="" title="销  售">销  售</a></li>
+           <li><a href="" title="新  品">新  品</a></li>
+           <li><a href="" title="人  气">人  气</a></li>--%>
+      </ul>
   </div>
   <!-- //End--shop-sort-->
 
@@ -70,8 +71,8 @@
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
             <a href="" target="_blank" title="">
-              <%--<img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.product.pictureUrl}@!tenant-mobile-work" alt=""/>--%>
-              <img  class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt=""/>
+              <img  class="imgfilter" src="http://tenant.efeiyi.com/photo/20150728100546.jpg@!tenant-pc-tenant-list<%--http://pro.efeiyi.com/${productModel.product.pictureUrl}@!product-model--%>" alt=""/>
+<%--              <img  class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt=""/>--%>
               <p class="wh name">${productModel.product.name}</p>
               <p class="wh price">${productModel.price}</p>
             </a>

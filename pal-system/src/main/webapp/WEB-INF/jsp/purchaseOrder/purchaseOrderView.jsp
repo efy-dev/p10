@@ -18,12 +18,6 @@
             var pf=document.getElementById("productForm");
             pf.setAttribute("style","display");
         }
-//        function hideDiv(){
-//            var f = document.getElementById("selectProduct");
-////            var pf=document.getElementById("productForm");
-////            pf.setAttribute("style","display:none");
-//            f.submit();
-//        }
     </script>
 </head>
 <body>
@@ -63,13 +57,13 @@
                     <c:if test="${not empty object.purchaseOrderLabelList}">
                         <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
                                type="button" class="am-btn am-btn-default am-btn-xs"
-                               style="width: 80px;margin-left:4px;height: 30px;"
+                               style="margin-left:4px;height: 30px;"
                                value="支付" />
                     </c:if>
                     <c:if test="${not empty object.purchaseOrderPaymentList}">
                         <input onclick="window.location.href='<c:url value="/order/deliverGoods.do?orderId=${object.id}"/>'"
                                type="button" class="am-btn am-btn-default am-btn-xs"
-                               style="width: 80px;margin-left:4px;height: 30px;"
+                               style="margin-left:4px;height: 30px;"
                                value="发货" />
                     </c:if>
                 </c:if>
@@ -86,15 +80,9 @@
     <c:if test="${object.status != '9'}">
         <input onclick="showDiv()"
                type="button" class="am-btn am-btn-default am-btn-xs"
-               style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+               style="margin-bottom: 6px;margin-left:2px;height: 35px;"
                value="选择商品" />
     </c:if>
-    <%--<c:if test="${object.status != '9'}">--%>
-        <%--<input onclick="window.location.href='<c:url value="/purchaseOrderLabel/newPurchaseOrderLabel.do?orderId=${object.id}"/>'"--%>
-               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-               <%--style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"--%>
-               <%--value="选择商品" />--%>
-    <%--</c:if>--%>
 </div>
 
 <div class="am-g" id="productForm" style="display:none">
@@ -119,11 +107,6 @@
             </div>
         </div>
 
-        <%--<div class="am-form-group">--%>
-            <%--<div class="am-u-sm-9 am-u-sm-push-3">--%>
-                <%--<input type="button" class="am-btn am-btn-primary" onclick="hideDiv()" value="保存"/>--%>
-            <%--</div>--%>
-        <%--</div>--%>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

@@ -99,13 +99,13 @@
             </div>
         </div>
 
-        <div class="am-form-group">
-            <label name="user_id" for="user_idName" class="am-u-sm-3 am-form-label">用户名称 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input id="user_idName" placeholder="用户名称" onclick="m8uDialog.openDialog('user_id','user_idName','user', null)" value="${object.user.name}" required>
-                <input type="hidden" id="user_id"  name="user.id" value="${object.user.id}">
-            </div>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="user_id" for="user_idName" class="am-u-sm-3 am-form-label">用户名称 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input id="user_idName" placeholder="用户名称" onclick="m8uDialog.openDialog('user_id','user_idName','user', null)" value="${object.user.name}" required>--%>
+                <%--<input type="hidden" id="user_id"  name="user.id" value="${object.user.id}">--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">

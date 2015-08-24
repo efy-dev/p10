@@ -1,13 +1,12 @@
 package com.efeiyi.pal.product.model;
 
-import com.efeiyi.pal.organization.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -15,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "product_series")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","operations","roles","menus"})
 public class ProductSeries {
 
     private String id;
@@ -23,7 +23,7 @@ public class ProductSeries {
     private String status;
     private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
 
-    private Set<Tenant> tenantSet;
+    private List<TenantProductSeries> tenantProductSeriesList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,13 +75,30 @@ public class ProductSeries {
     }
 
     @JsonIgnore
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy="productSeriesSet")
-    public Set<Tenant> getTenantSet() {
-        return tenantSet;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productSeries")
+    @Where(clause = "status = '1'")
+    public List<TenantProductSeries> getTenantProductSeriesList() {
+        return tenantProductSeriesList;
     }
 
-    public void setTenantSet(Set<Tenant> tenantSet) {
-        this.tenantSet = tenantSet;
+    public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
+        this.tenantProductSeriesList = tenantProductSeriesList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductSeries that = (ProductSeries) o;
+
+        return id.equals(that.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }

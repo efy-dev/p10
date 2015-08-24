@@ -127,10 +127,10 @@ public class TenantCertificationController {
         String identify = sdf.format(new Date());
         String url = "tenantCertification/" + identify + ".jpg";
 
-        if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
-            tenantCertification.setImgUrl(url);
-        }
+//        if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
+//            aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
+////            tenantCertification.setImgUrl(url);
+//        }
 
         return tenantCertification;
     }

@@ -15,6 +15,22 @@
 <html>
 <head>
     <title></title>
+    <script>
+
+        function removeDocument(documentId){
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/basic/xmj.do?qm=removeDocument"/>',
+                cache: false,
+                dataType: "json",
+                data:{id:documentId},
+                success: function (data) {
+                    $("#"+documentId).remove();
+                }
+            });
+        }
+
+    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -40,7 +56,7 @@
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="document">
-                    <tr>
+                    <tr id="${document.id}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -49,8 +65,8 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=removeDocument&id=${document.id}"/>"><span
-                                            class="am-icon-trash-o"></span> 删除
+                                       href="#" onclick="showConfirm('提示','是否删除',function(){removeDocument('${document.id}')})"><span
+                                            class="am-icon-trash-o">删除</span>
                                     </a>
                                 </div>
                             </div>
@@ -65,7 +81,9 @@
         </div>
     </div>
     <div style="clear: both">
-        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+        <c:url value="/basic/xm.do" var="url"/>
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
+            <ming800:pcPageParam name="groupName" value="${groupName}"/>
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>

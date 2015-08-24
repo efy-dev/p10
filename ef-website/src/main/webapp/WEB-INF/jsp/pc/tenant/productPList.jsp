@@ -37,10 +37,10 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="" title="价格从高到低">价格从高到低</a>
-        <a href="" title="价格从低到高">价格从低到高</a>
+        <a href="/tenant/view?sort=desc:price" title="价格从高到低">价格从高到低</a>
+        <a href="/tenant/view?sort=asc:price" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
-        <a href="" title="新品">新品</a>
+        <a href="/tenant/view?sort=desc:createDateTime" title="新品">新品</a>
         <a href="" title="人气">人气</a>
       </dd>
     </dl>
@@ -54,7 +54,7 @@
             <a href="" target="_blank" title="">
               <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
               <p class="wh name">${product.name}</p>
-              <p class="wh price">￥1500000</p>
+              <p class="wh price">${product.price}</p>
             </a>
           </li>
         </c:forEach>
@@ -68,20 +68,7 @@
         </ming800:pcPageList>
       </div>
     </div>
-    <!-- //End--list-pro-->
-   <%-- <div class="page wh">
-      <ul class="am-pagination am-pagination-centered">
-        <li class="bigRound"><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li class="am-active"><a href="#">2</a></li>
-        <li class="am-disabled bigRound"><a href="#">»</a></li>
-      </ul>
-    </div>--%>
-    <!-- //End--page-->
   </div>
-
-  <!-- //End---->
 </div>
-
 </body>
 </html>
