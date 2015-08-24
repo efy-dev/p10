@@ -99,6 +99,6 @@
 <script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
 <script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
-<script src="shop2015/js/system.js"></script>
+<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
 </body>
 </html>
