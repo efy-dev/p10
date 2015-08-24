@@ -222,8 +222,7 @@ public class CommonManagerImpl implements CommonManager {
 
     @Override
     public CommonSerial getAutoSerial(String group) throws  Exception{
-        CommonSerial conmmonSerial ;
-        conmmonSerial = autoSerialMap.get(group);
+        CommonSerial conmmonSerial = autoSerialMap.get(group);
         if(conmmonSerial == null){
             throw  new Exception("conmmonSerial is null");
         }
