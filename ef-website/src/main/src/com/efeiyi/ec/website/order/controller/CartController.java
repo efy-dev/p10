@@ -111,6 +111,7 @@ public class CartController {
             } else {
                 cart = new Cart();
                 cart.setCartProductList(new ArrayList<CartProduct>());
+                request.getSession().setAttribute("cart", cart);
             }
         }
 
@@ -128,13 +129,13 @@ public class CartController {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         if (cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")) < cartProduct.getProductModel().getAmount()) {
                             cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
-                        }else {
+                        } else {
                             cartProduct.setAmount(cartProduct.getProductModel().getAmount());
                         }
                     } else {
-                        if (cartProduct.getAmount() +1 < cartProduct.getProductModel().getAmount()) {
+                        if (cartProduct.getAmount() + 1 < cartProduct.getProductModel().getAmount()) {
                             cartProduct.setAmount(cartProduct.getAmount() + 1);
-                        }else {
+                        } else {
                             cartProduct.setAmount(cartProduct.getProductModel().getAmount());
                         }
                     }
@@ -151,7 +152,9 @@ public class CartController {
             product.setId(productId);
             CartProduct cartProduct = new CartProduct();
             cartProduct.setProductModel(product);
-            cartProduct.setCart(cart);
+            if (cart.getId() != null) {
+                cartProduct.setCart(cart);
+            }
             cartProduct.setStatus("1");
             cartProduct.setIsChoose("0");
             if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
