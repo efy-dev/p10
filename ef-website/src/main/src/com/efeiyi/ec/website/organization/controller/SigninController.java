@@ -44,7 +44,7 @@ import java.util.Date;
  */
 
 @Controller
-public class SigninController extends BaseController {
+public class   SigninController extends BaseController {
     @Autowired
     private RoleManager roleManager;
     @Autowired

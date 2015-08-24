@@ -1,13 +1,12 @@
 package com.efeiyi.pal.product.model;
 
-import com.efeiyi.pal.organization.model.Tenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/15.
@@ -15,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "product_series")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","operations","roles","menus"})
 public class ProductSeries {
 
     private String id;

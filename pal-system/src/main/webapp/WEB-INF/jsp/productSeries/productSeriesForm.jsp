@@ -30,7 +30,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/productSeries/saveProductSeriesAndNext.do'/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/productSeries/saveProductSeries.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateProductSeries">
         <input type="hidden" name="id" value="${object.id}">
         <c:if test="${empty object || object.id == null || object.id==''}">
@@ -47,16 +47,16 @@
             </div>
         </div>
 
-        <div class="am-form-group">
-            <label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>
-            </div>
-        </div>
+        <%--<div class="am-form-group">--%>
+            <%--<label name="serial" for="serial" class="am-u-sm-3 am-form-label">序列号 <small>*</small></label>--%>
+            <%--<div class="am-u-sm-9">--%>
+                <%--<input type="text" name="serial" id="serial" placeholder="序列号" value="${object.serial}" required>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="submit" class="am-btn am-btn-primary" value="下一页"/>
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
 

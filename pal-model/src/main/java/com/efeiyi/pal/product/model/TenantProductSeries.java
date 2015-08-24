@@ -3,6 +3,7 @@ package com.efeiyi.pal.product.model;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tenant_product_series")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","operations","roles","menus"})
 public class TenantProductSeries {
 
     private String id;

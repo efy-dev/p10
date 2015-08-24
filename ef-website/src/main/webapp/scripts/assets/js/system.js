@@ -1,140 +1,134 @@
-$(function(){	
-	//首页--轮播图效果
-	function indexAnimate(){
-	    var sliderMainLi=$('.focus .slider-main li');
-	    var sliderNav=$('.focus .slider-nav');
-	    var sliderNavLi=sliderNav.find('li');
-	    sliderNavLi.eq(0).addClass('active');
-	    var timer=null;
-	    var _index=0;
-	    sliderMainLi.eq(0).show();
-	    sliderNavLi.hover(function(){
-	        clearInterval(timer);
-	        _index=$(this).index();
-	        sliderMainLi.stop().eq($(this).index()).fadeIn().siblings().fadeOut();
-	        $(this).addClass('active').siblings().removeClass('active');
-	    },function(){
-	        timer=setInterval(autoBanner,3000);
-	    })
-	    function autoBanner(){
-	        _index++;
-	        if(_index>=4){
-	            _index=0;
-	        }
-	        sliderMainLi.stop().eq(_index).fadeIn().siblings().fadeOut();
-	        sliderNavLi.eq(_index).addClass('active').siblings().removeClass('active');
-	    }
-	    timer=setInterval(autoBanner,3000);
-	};indexAnimate();
-	//首页--传承人轮播效果
-	function passPerson(){
-	    var goodUl=$('#item2 .goods-list ul');
-	    var goodLi=$('#item2 .goods-list ul').find('li');
-	    var goodLiSize=goodLi.length;
-	    var goodLiWidth=goodUl.find('li').outerWidth(true);
-	    var goodNum=$('#item2 .goods-num li');
-	    var btnNext=$('#item2 .next');
-	    var btnPrev=$('#item2 .prev');
-	    var iSpeed=400;
-	    goodUl.css({'width':+goodLiSize*goodLiWidth+'px'});
-	    goodLi.find('.item-img').hover(function(){
-	    	$(this).addClass('active');
-	    },function(){
-	    	$(this).removeClass('active');
-	    })
-	    goodNum.hover(function(){
-	        goodUl.stop().animate({'margin-left':-$(this).index()*goodLiWidth+'px'},iSpeed)
-	        $(this).addClass('active').siblings().removeClass('active');
-	    })
-	    var _index=0;
-	    btnNext.click(function(){
-	        _index++;
-	        if(_index>=goodLiSize){
-	            _index=0;
-	        }
-	        goodUl.stop().animate({'margin-left':-_index*goodLiWidth+'px'},iSpeed);
-	        goodNum.eq(_index).addClass('active').siblings().removeClass('active');
-	    });
-	    btnPrev.click(function(){
-	        _index--;
-	        if(_index<0){
-	            _index=goodLiSize-1;
-	        }
-	        goodUl.stop().animate({'margin-left':-_index*goodLiWidth+'px'},iSpeed);
-	        goodNum.eq(_index).addClass('active').siblings().removeClass('active');
-	    });
-	};passPerson();
-	//右侧悬浮菜单
-	function sliderMenu(){
-		var topHeight=$('.topbar').outerHeight(true)+$('.logo-search').outerHeight(true)+$('.focus').outerHeight(true);
-		var sliderMenuHeight=$(document).outerHeight(true)-topHeight-$('.footer').outerHeight();
-	    $('.slider-menu').css({'height':sliderMenuHeight+'px'});
-	    $('.slider-menu .top').click(function(){
-	        $('html,body').animate({'scrollTop':0},400);
-	    });
+$(function(){
+    //导航
+    (function(){
+        $('.header .nav li').hover(function(){
+           $(this).find('.bgbor').show();
+           $(this).addClass('hover').find('.nav-links').stop().slideDown('fast');
+        },function(){
+            $(this).find('.bgbor').hide();
+            $(this).removeClass('hover').find('.nav-links').stop().slideUp('fast');
+        })
+    })();
+    //焦点图
+    (function(){
+        var $liImg=$('.focus .slider-main li');
+        var $liNav=$('.focus .slider-nav li');
+        var index=0;
+        var timer=null;
+        var iSpeed=3000;
+        $liNav.mousedown(function(){
+            clearInterval(timer);
+            index=$(this).index();
+            $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+            $(this).addClass('active').siblings('li').removeClass('active');
+        });
+        $liNav.mouseup(function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
+        function autoFocus(){
+            index++;
+            if(index>$liImg.length-1){index=0;}
+            $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+            $liNav.eq(index).addClass('active').siblings('li').removeClass('active');
+        }
+        timer=setInterval(autoFocus,iSpeed);
+    })();
+    //排序
+    (function(){
+        $('.shop-sort .link2 dt').click(function(){
+            $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
+        })
+    })();
+    //商品详情页
+    (function(){
+        var simgLi=$('.preview .slider-img li');
+        var BimgLi=$('.preview .slider-main li');
+        var index=0;
+        var timer=null;
+        var iSpeed=3000;
+        simgLi.mousedown(function(){
+            clearInterval(timer);
+            index=$(this).index();
+            BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
+            $(this).addClass('active').siblings('li').removeClass('active');
+        });
+        simgLi.mouseup(function(){
+            timer=setInterval(autoRun,iSpeed);
+        })
+        timer=setInterval(autoRun,iSpeed);
+        //自动轮播
+        function autoRun(){
+            index++;
+            if(index>simgLi.length-1){
+                index=0;
+            }
+            BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
+            simgLi.eq(index).addClass('active').siblings('li').removeClass('active');
+        }
+        //收藏
+        var $add=$('.preview .collect .icon');
+        var $hover=$add.siblings('.hover');
+        var $active=$add.siblings('.active');
+        $add.hover(function(){
+            if($active.is(':hidden')){
+                $hover.show();
+            }else{
+                $hover.hide();
+            }
+        });
+        $add.click(function(){
+            $hover.hide();
+            $active.show();
+        })
+        //固定导航
+        $(window).scroll(function(){
+            var d=$(document).scrollTop();
+            if(d>900){
+                $('.tab-wrap').css({'position':'fixed','top':'0'})
+            }else{
+                $('.tab-wrap').css({'position':'','top':''})
+            }
+        });
+        $('.product-intro .detail .part:last').css({'border':'0'});
+        //描点
+        $('.tab-items li a').click(function(){
+            var pos=$($(this).attr('href')).offset().top;
+            $("html,body").animate({scrollTop:pos-75},500);
+            return false;
+        })
+    })();
+    //注册--协议
+    (function(){
+        $('#protocol').click(function(){
+            $('.thickframe').show();
+            return false;
+        })
+        $('#closeBox,.btnt .btn-img').click(function(){
+            $('.thickframe').hide();
+            return false;
+        })
+    })();
+    //我的订单
+    (function(){
+        $('#orderNum .item:last tr').css({'border':'0'});
+        $('.clearing-site span a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+        $('.clearing-site span a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+    })();
 
-		var arr = [0];//把sectit对应的几个位置标示出来
-		$('.iscroll').each(function(){
-			var offsettop = $(this).offset().top;
-			//火狐有半个像素的情况，故取整
-			arr.push(parseInt(offsettop));
-		});
-		
-		$(window).scroll(function(){
-			var d = parseInt($(document).scrollTop());
-			for(var i = 0 ; i < arr.length ; i ++){
-				if(arr[i]>=d){
-					break;
-				}
-			}
-			//给ul加fixed属性
-			if(d>topHeight+46){
-				$('.slider-menu ul').css({'position':'fixed','top':'0'});
-			}else if(d<topHeight){
-				$('.slider-menu ul').css({'position':'absolute','top':'46px'});
-			}
-			//判断offsetTop值  来加class="cur"
-			$('.slider-menu li').each(function(){
-				var i = $(this).index();
-				if(d>=arr[i]){
-					$('.slider-menu li').eq(i-1).addClass('cur').siblings('li').removeClass('cur');
-				}
-			})
-		});
-		$('.slider-menu .item').click(function(){
-			var i = $(this).index()+1;
-			$('html,body').animate({'scrollTop' : arr[i]+'px'},300);
-		});
-	};sliderMenu();
-	//首页----产品展示
-    $('.pro-lists .item').hover(function(){
-        $(this).addClass('active');
-    },function(){
-        $(this).removeClass('active');
-    });
-	//品类首页新----
-    $('.list-pro-item .item').hover(function(){
-        $(this).addClass('active');
-    },function(){
-        $(this).removeClass('active');
-    });
+
+
 
 
 })
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-

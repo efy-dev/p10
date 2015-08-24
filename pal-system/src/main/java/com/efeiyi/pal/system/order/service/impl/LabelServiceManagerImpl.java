@@ -21,12 +21,12 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
     private LabelDao labelDao;
 
     @Override
-    public Long getMinSerial() {
+    public String getMinSerial() {
         return labelDao.getMinSerial();
     }
 
     @Override
-    public List<Label> getLabelListByMinSerialAndSumProduct(Long minSerial, Integer sumProduct) {
+    public List<Label> getLabelListByMinSerialAndSumProduct(String minSerial, Integer sumProduct) {
         return labelDao.getLabelListByMinSerialAndSumProduct(minSerial, sumProduct);
     }
 

@@ -47,7 +47,12 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a></td>
+                <td>
+                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a>
+                    <c:if test="${!empty product.logo}">
+                        <img src="http://pal.efeiyi.com/${product.logo}@!pal-img-list">
+                    </c:if>
+                </td>
                 <td>${product.masterName}</td>
                 <td>${product.serial}</td>
                 <td>${product.productSeries.name}</td>

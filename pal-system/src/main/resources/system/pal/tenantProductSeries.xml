@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="TenantProductSeries" label="商户系列溯源信息" version="" package="com.efeiyi.pal.product.model" path="">
+    <entities>
+        <entity name="PCTenantProductSeries" label="商户系列溯源信息"  model="com.efeiyi.pal.product.model.TenantProductSeries">
+            <does>
+                <do name="listTenantProductSeries" access="" label="商户系列溯源信息列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="productSeriesByTenant" label="根据商户查找" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="" operation="eq"/>
+                    </query>
+                    <query name="tenantByProductSeries" label="根据系列查找" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="productSeries.id" defaultValue="" operation="eq"/>
+                    </query>
+                </do>
+                <!--<do name="plistTenantProductSeries" access="" label="商户系列溯源信息分页列表" result="">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
+                        <!--&lt;!&ndash;<condition name="tenant.id" defaultValue="" operation="eq"/>&ndash;&gt;-->
+                    <!--</query>-->
+                <!--</do>-->
+
+                <do name="formTenantProductSeries" label="商户系列溯源信息" access="" result="/tenantProductSeries/tenantProductSeriesForm"/>
+                <!--<do name="viewProduct" label="查看商品详情页" access="" result="/product/productView"-->
+                    <!--execute="com.efeiyi.pal.system.product.controller.ProductViewLabelHandler"/>-->
+                <!--<do name="removeProduct" label="删除商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"/>-->
+                <!--<do name="saveOrUpdateTenantProductSeries" label="新建或更新商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"-->
+                    <!--execute="com.efeiyi.pal.system.product.controller.ProductHandler">-->
+                <!--</do>-->
+            </does>
+        </entity>
+    </entities>
+</module>
