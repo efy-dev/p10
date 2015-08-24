@@ -1,6 +1,7 @@
 package com.efeiyi.pal.product.model;
 
 import com.efeiyi.pal.organization.model.Tenant;
+import com.efeiyi.pal.organization.model.TenantCertification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -26,11 +27,12 @@ public class Product {
     private String masterName;
     private String status;
     private Date madeYear;
-//    private TenantCertification tenantCertification;
+    private TenantCertification tenantCertification;
     private List<ProductPropertyValue> productPropertyValueList;
     private String logo;
     private String shoppingUrl;
     private List<ProductImg> imgList;
+    private TenantProductSeries tenantProductSeries;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -111,16 +113,16 @@ public class Product {
         this.madeYear = madeYear;
     }
 
-//    @JsonIgnore
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "tenant_certification_id")
-//    public TenantCertification getTenantCertification() {
-//        return tenantCertification;
-//    }
-//
-//    public void setTenantCertification(TenantCertification tenantCertification) {
-//        this.tenantCertification = tenantCertification;
-//    }
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_certification_id")
+    public TenantCertification getTenantCertification() {
+        return tenantCertification;
+    }
+
+    public void setTenantCertification(TenantCertification tenantCertification) {
+        this.tenantCertification = tenantCertification;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
@@ -160,6 +162,17 @@ public class Product {
 
     public void setImgList(List<ProductImg> imgList) {
         this.imgList = imgList;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_product_series_id")
+    public TenantProductSeries getTenantProductSeries() {
+        return tenantProductSeries;
+    }
+
+    public void setTenantProductSeries(TenantProductSeries tenantProductSeries) {
+        this.tenantProductSeries = tenantProductSeries;
     }
 
 }

@@ -45,7 +45,7 @@ public class PurchaseOrderController {
         purchaseOrder = distributeLabelList(purchaseOrder, labelList);
 
         modelMap.put("object", purchaseOrder);
-        String resultPage = "/purchaseOrder/purchaseOrderView";
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id=" + purchaseOrder.getId();
         return new ModelAndView(resultPage);
     }
 
@@ -69,7 +69,7 @@ public class PurchaseOrderController {
      * @return
      */
     private List<Label> getLabelListBySumProduct(Integer sumProduct){
-        Long minSerial = labelServiceManager.getMinSerial();
+        String minSerial = labelServiceManager.getMinSerial();
         List<Label> list = labelServiceManager.getLabelListByMinSerialAndSumProduct(minSerial, sumProduct);
         return list;
     }

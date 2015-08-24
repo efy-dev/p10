@@ -2,6 +2,7 @@ package com.efeiyi.pal.organization.model;
 
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "organization_tenant")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","operations","roles","menus"})
 public class Tenant {
 
     private String id;
