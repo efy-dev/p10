@@ -54,8 +54,6 @@ public class ProductController {
             type = "edit";
             product = (Product) baseManager.getObject(Product.class.getName(), productId);
         }
-//        Do tempDo = (Do) modelMap.get("tempDo");
-//        productSeries = (ProductSeries) XDoUtil.processSaveOrUpdateTempObject(tempDo, productSeries, productSeries.getClass(), request, type, xdoDao);
 
         product = setProductBaseProperty(product, request);
 
@@ -64,13 +62,10 @@ public class ProductController {
 
         baseManager.saveOrUpdate(product.getClass().getName(), product);
 
-//        productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeries.getId());
-
         modelMap.put("product", product);
         modelMap.put("PPVList", product.getProductPropertyValueList());
         modelMap.put("PSPNList", product.getProductSeries().getProductSeriesPropertyNameList());
         modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
-//        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
 
         String resultPage = "/productPropertyValue/productPropertyValueListForm";
 

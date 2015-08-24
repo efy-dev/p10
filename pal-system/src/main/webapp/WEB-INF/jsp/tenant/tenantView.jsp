@@ -170,6 +170,7 @@
                 <td>认证时间</td>
                 <td>认证结果</td>
                 <td>证书图片</td>
+                <td>编辑图片</td>
             </tr>
 
             <c:forEach items="${object.tenantCertificationList}" var="tenantCertification">
@@ -200,6 +201,16 @@
                                 <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
                             </c:if>
                         </c:forEach>
+                    </td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantCertification&id=${tenantCertification.id}"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                                    <span class="am-icon-edit"></span> 编辑图片
+                                </button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </c:forEach>
