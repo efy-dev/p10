@@ -20,15 +20,15 @@
                 <!--<match url="plistLabel_all"/>-->
                 <!--<match url="plistLabel_default"/>-->
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistLabel_all" access="admin,manager" text_zh_CN="标签管理">
-                <!--<match url="plistLabel_default"/>-->
+            <jnode url="/basic/xm.do?qm=plistLabel_default" access="admin,manager" text_zh_CN="标签管理">
+                <match url="plistLabel_default"/>
                 <match url="listLabel_default"/>
                 <!--<match url="formLabelBatch"/>-->
                 <match url="viewLabel"/>
                 <!--<match url="removeLabelBatch"/>-->
                 <!--<match url="saveOrUpdateLabelBatch"/>-->
-                <match url="plistLabel_all"/>
-                <match url="plistLabel_default"/>
+                <!--<match url="plistLabel_all"/>-->
+                <!--<match url="plistLabel_default"/>-->
             </jnode>
             <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin,manager" text_zh_CN="标签批次管理">
                 <match url="plistLabelBatch_default"/>
@@ -43,13 +43,13 @@
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="商品管理">
                 <match url="plistProduct_default"/>
-                <match url="listProduct_default"/>
-                <match url="formProduct"/>
-                <match url="viewProduct"/>
-                <match url="removeProduct"/>
-                <match url="saveOrUpdateProduct"/>
+                <!--<match url="listProduct_default"/>-->
+                <!--<match url="formProduct"/>-->
+                <!--<match url="viewProduct"/>-->
+                <!--<match url="removeProduct"/>-->
+                <!--<match url="saveOrUpdateProduct"/>-->
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistProductSeries_default"  access="admin,manager" text_zh_CN="商品系列管理">
+            <jnode url="/basic/xm.do?qm=plistProductSeries_default"  access="admin,manager" text_zh_CN="非遗项目">
                 <match url="plistProductSeries_default"/>
                 <match url="listProductSeries_default"/>
                 <match url="formProductSeries"/>

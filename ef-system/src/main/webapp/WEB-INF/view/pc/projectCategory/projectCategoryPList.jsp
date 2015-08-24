@@ -54,8 +54,8 @@
                         <tr id="${projectCategory.id}">
                             <td>
                                 <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;">
-                                        <button style="margin-left: 70px;" onclick="window.location.href='<c:url
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button onclick="window.location.href='<c:url
                                                 value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
                                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                                 class="am-icon-edit"></span> 编辑

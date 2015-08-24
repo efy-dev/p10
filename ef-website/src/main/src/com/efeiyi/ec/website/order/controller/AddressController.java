@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -19,6 +17,7 @@ import java.util.List;
  * Created by Administrator on 2015/7/30.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class AddressController {
 
     @Autowired
@@ -82,23 +81,22 @@ public class AddressController {
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        return "redirect:/address/list";
+        return "redirect:/myEfeiyi/address/list";
 
     }
 
 
-    @RequestMapping({"/removeAddress"})
-    @ResponseBody
-    public boolean removeAddress(HttpServletRequest request)throws Exception{
+    @RequestMapping({"/removeAddress.do"})
+    public String removeAddress(HttpServletRequest request)throws Exception{
         String addressId=request.getParameter("addressId");
         baseManager.remove(ConsumerAddress.class.getName(),addressId);
-        return true;
+        return "redirect:/myEfeiyi/address/list";
 
     }
     @RequestMapping({"defaultAddress.do"})
     @ResponseBody
     public boolean  defaultAddress(HttpServletRequest request)throws Exception{
-        String hql = "update organization_consumer_address set status = '1'";
+        String hql = "update organization_consumer_address set status = '1'where status<>0";
         baseManager.executeSql(null,hql,null);
         XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());

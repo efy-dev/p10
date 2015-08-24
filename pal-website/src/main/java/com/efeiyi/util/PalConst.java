@@ -35,7 +35,7 @@ public class PalConst {
     public String resultLabel = "result";                                //标签验真伪返回的bean
     public String resultProduct = "product";                                //标签验真伪返回的product
 
-    public String unusedStatus = "1";                                 //查询为未使用的序列号状态
+    public String unusedStatus = "2";                                 //查询为未使用的序列号状态
     public String trueMsg = "恭喜您，您查询的商品是正品";              //查询为未使用的序列号返回消息
     public String usedStatus = "9";                                   //查询为已使用的序列号状态
     public String fakeMsg = "您查询的防伪码无效，注意防伪，谨防假冒";       //码不存在，或已失效，或未激活返回消息

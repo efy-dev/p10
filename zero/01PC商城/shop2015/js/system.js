@@ -111,7 +111,24 @@ $(function(){
     //我的订单
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
+        $('.clearing-site span a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+        $('.clearing-site span a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.clase, .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
     })();
+
+
+
 
 
 })

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Administrator on 2015/8/19.
  */
 @Controller
+@RequestMapping("/myEfeiyi")
 public class PersonalInforController {
     @Autowired
     private BaseManager baseManager;
@@ -25,7 +26,7 @@ public class PersonalInforController {
         XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
-        return "redirect:/personalInfo.do";
+        return "redirect:/myEfeiyi/personalInfo.do";
 
     }
     @RequestMapping({"personalInfo.do"})
@@ -49,7 +50,7 @@ public class PersonalInforController {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
         xSaveOrUpdate.getParamMap().put("password",password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
-        return "redirect:/getPassword.do";
+        return "redirect:/myEfeiyi/getPassword.do";
 
     }
     @RequestMapping({"getPassword.do"})

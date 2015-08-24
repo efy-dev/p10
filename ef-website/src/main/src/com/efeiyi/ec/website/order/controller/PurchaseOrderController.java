@@ -1,9 +1,5 @@
 package com.efeiyi.ec.website.order.controller;
 
-import cn.beecloud.BCPay;
-import cn.beecloud.BCPayResult;
-import cn.beecloud.BeeCloud;
-import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -14,13 +10,13 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONObject;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -53,7 +46,7 @@ public class PurchaseOrderController extends BaseController {
     * 订单状态查询
     *
     * */
-    @RequestMapping({"/list.do"})
+    @RequestMapping({"/myEfeiyi/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("id");
         XQuery xQuery = null;
@@ -93,7 +86,7 @@ public class PurchaseOrderController extends BaseController {
     /*
     * 查看订单详情
     * */
-    @RequestMapping({"/view/{orderId}"})
+    @RequestMapping({"/myEfeiyi/view/{orderId}"})
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
@@ -234,9 +227,24 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         String cartId = request.getParameter("cartId");
+        Cart cart = null;
+        if (cartId == null) {
+            cart = (Cart) request.getSession().getAttribute("cart");
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            cart.setId(((Cart) list.get(0)).getId());
+            baseManager.saveOrUpdate(Cart.class.getName(),cart);
+            if (cart.getCartProductList()!=null && cart.getCartProductList().size()>0){
+                for (CartProduct cartProduct : cart.getCartProductList()){
+                    cartProduct.setCart(cart);
+                    baseManager.saveOrUpdate(CartProduct.class.getName(),cartProduct);
+                }
+            }
+        } else {
+            cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+        }
 
 //        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
-        Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
 
         //得到店铺的信息
         List<Tenant> tenantListTemp = new ArrayList<>();
@@ -304,6 +312,7 @@ public class PurchaseOrderController extends BaseController {
             }
         } else {
             purchaseOrder.setTenant(tenantList.get(0));
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
 
         for (Tenant tenant : tenantList) {
@@ -365,13 +374,16 @@ public class PurchaseOrderController extends BaseController {
             purchaseOrder.setMessage(messageMap.get(purchaseOrder.getTenant().getId() + "Message"));
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        //@TODO 清除购物车
+
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
                 return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
             } else {
-                return "/pay/weixin/native/" + purchaseOrder.getId();
+                return "redirect:/order/pay/weixin/native/" + purchaseOrder.getId();
             }
         }
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();
@@ -386,6 +398,22 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("order", purchaseOrder);
 
         return "/purchaseOrder/choosePayment";
+    }
+
+    @RequestMapping({"/addAddress.do"})
+    @ResponseBody
+    public Object addAddressJson(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+        xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
+        return object;
+    }
+
+    @RequestMapping({"/paysuccess/{orderId}"})
+    public String paySuccess(@PathVariable String orderId, Model model) {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder);
+        return "/purchaseOrder/paySuccess";
     }
 
 

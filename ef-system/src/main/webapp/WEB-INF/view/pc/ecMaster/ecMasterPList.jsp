@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formMaster"/>"><span class="am-icon-plus"></span>新建传承人</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend"/>"><span class="am-icon-plus"></span>新建传承人</a>
                 </div>
             </div>
         </div>
@@ -44,11 +44,11 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=ec&id=${master.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend&id=${master.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                      onclick="removeMaster('${master.id}')" href="#"><span
+                                      onclick="showConfirm('提示','是否删除',function(){removeMaster('${master.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     <c:if test="${empty master.masterRecommendedList}">

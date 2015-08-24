@@ -31,7 +31,7 @@
                 <i class="clase" title="关闭"></i>
               </div>
               <div class="m-form">
-                <form action="/addAddress.do" method="post" >
+                <form action="/myEfeiyi/addAddress.do" method="post" >
                   <ul>
                     <li>
                       <label>收货人：</label>
@@ -41,9 +41,9 @@
                     <li>
                       <label>所在地区：</label>
                       <form>
-                        <select id="provinceVal" class="cars" onclick="province(this);">
+                        <select id="provinceVal" class="cars" name="province.id"  onclick="province(this);">
                         </select>
-                        <select id="cityVal" class="car1" onclick="city(this);">
+                        <select id="cityVal" class="car1" name="city.id" onclick="city(this);">
                         </select>
                         <span>请您填写所在地区</span>
                       </form>
@@ -98,7 +98,7 @@
           <tr>
             <td   width="76"  style="text-align: right;"><span>所在地区：</span></td>
             <td   width="600">
-                <span>您对“苏绣《安格尔—公爵夫人像》”的商品评价已成功发布。</span>
+                <span>${address.province.name} ${address.city.name}</span>
 
             </td>
             <td width="188"  class="ae-rg1">
@@ -132,9 +132,9 @@
 
           <tr>
             <td  width="76"  style="text-align: right;"></td>
-            <td  width="600">
+            <td  width="500">
             </td>
-            <td width="188"  class="ae-rg1">
+            <td width="300"  class="ae-rg1">
               <div class="ae-rg">
                 <c:if test="${address.status == 2}">
                   <span><span class="text-a"><a href="#" onclick="df('${address.id}')">默认地址</a></span></span>
@@ -145,13 +145,15 @@
 
                 </c:if>
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
+                <span><span class="text-a"><a href="/myEfeiyi/removeAddress.do?addressId=${address.id}">删除</a></span></span>
+
                       <div class="active-pop" style="display: none">
                         <div class="pop-up">
                           <div class="pop-h">编辑收货人信息
                             <i class="clase" title="关闭"></i>
                           </div>
                           <div class="m-form">
-                            <form action="/addAddress.do" method="post">
+                            <form action="/myEfeiyi/addAddress.do" method="post">
                               <ul>
                                 <li>
                                   <label>收货人：</label>
@@ -162,22 +164,14 @@
                                 <li>
                                   <label>所在地区：</label>
                                   <form>
-                                    <select name="cars" class="cars">
-                                      <option value="请选择">请选择</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="fiat">Fiat</option>
-                                      <option value="audi">Audi</option>
+                                    <select id="provinces${as.index}"  name="province.id" class="cars" onclick="ps(this,${as.index})">
+                                      <option value="${address.province.id}" selected="selected">${address.province.name}</option>
                                     </select>
-                                    <select name="cars" class="car1">
-                                      <option value="请选择">请选择</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="fiat">Fiat</option>
-                                      <option value="audi">Audi</option>
+                                    <select id="citys${as.index}" name="city.id" class="car1" onclick="cs(this,${as.index})">
+                                      <option value="${address.city.id}" selected="selected">${address.city.name}</option>
                                     </select>
                                     <span>请您填写所在地区</span>
                                   </form>
-
-
                                 </li>
                                 <li>
                                   <label>详细地址：</label>
@@ -242,7 +236,7 @@
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/defaultAddress.do"/>',
+      url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
       dataType: 'json',
       data: {
         status:2,
@@ -257,8 +251,6 @@
 
     });
   }
-
-
   function city(obj){
     var pid = $("#provinceVal").val();
     var v = $(obj).val();
@@ -266,7 +258,7 @@
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/address/listCity.do"/>',
+      url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
       dataType: 'json',
       data:{
         provinceId:pid
@@ -286,11 +278,11 @@
   }
   function province(obj){
     var v = $(obj).val();
-    $("#provinceVal").empty();
+   $("#provinceVal").empty();
     $.ajax({
       type: 'post',
       async: false,
-      url: '<c:url value="/address/listProvince.do"/>',
+      url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
       dataType: 'json',
       success: function (data) {
           var obj = eval(data);
@@ -309,6 +301,52 @@
     });
   }
 
+  function cs(obj,o){
+    var pid = $("#provinces"+o).val();
+    var v = $(obj).val();
+    $("#citys"+o).empty();
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/myEfeiyi/address/listCity.do"/>',
+      dataType: 'json',
+      data:{
+        provinceId:pid
+      },
+      success: function (data) {
+        var obj = eval(data);
+        var rowHtml = "";
+        rowHtml += "<option value='请选择'>请选择</option>";
+        for(var i = 0;i<obj.length;i++){
+          rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+        }
+        $("#citys"+o).append(rowHtml);
+        $("#citys"+o+" option[value='"+v+"']").attr("selected","selected");
+
+      },
+    });
+  }
+  function ps(obj,o){
+    var v = $(obj).val();
+    $("#provinces"+o).empty();
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
+      dataType: 'json',
+      success: function (data) {
+        var obj = eval(data);
+        var rowHtml = "";
+        rowHtml += "<option value='请选择'>请选择</option>";
+        for(var i = 0;i<obj.length;i++){
+          rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+        }
+        $("#provinces"+o).append(rowHtml);
+        $("#provinces"+o+" option[value='"+v+"']").attr("selected","selected");
+      },
+
+    });
+  }
 
 </script>
 

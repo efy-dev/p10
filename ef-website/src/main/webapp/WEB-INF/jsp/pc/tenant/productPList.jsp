@@ -37,8 +37,8 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="" title="价格从高到低">价格从高到低</a>
-        <a href="" title="价格从低到高">价格从低到高</a>
+        <a href="/tenant/listProduct?sort=desc:price" title="价格从高到低">价格从高到低</a>
+        <a href="/tenant/listProduct?sort=asc:price" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
         <a href="" title="新品">新品</a>
         <a href="" title="人气">人气</a>
@@ -54,7 +54,7 @@
             <a href="" target="_blank" title="">
               <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
               <p class="wh name">${product.name}</p>
-              <p class="wh price">￥1500000</p>
+              <p class="wh price">${product.price}</p>
             </a>
           </li>
         </c:forEach>
@@ -82,6 +82,22 @@
 
   <!-- //End---->
 </div>
-
+<%--<script>
+  function df() {
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/tenant/listProduct?conditions=tenant.id:1&sort=asc:id"/>',
+      dataType: 'json',
+      success: function (data) {
+          alert(data);
+//        var obj = eval(data);
+        window.location.reload();
+      },error:function(){
+          alert(111);
+      }
+    });
+  }
+</script>--%>
 </body>
 </html>

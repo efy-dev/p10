@@ -28,15 +28,15 @@
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
-            <jnode url="/basic/xm.do?qm=plistCoupon_default" access="admin,manager" text_zh_CN="优惠券列表">
-                <match url="/basic/xm.do?qm=plistCoupon_default"/>
-                <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
-            </jnode>
-            <jnode url="/basic/xm.do?qm=plistCouponBatch_default" access="admin,manager" text_zh_CN="优惠券批次">
-                <match url="/basic/xm.do?qm=plistCouponBatch_default"/>
+            <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=couponBatch" access="admin,manager" text_zh_CN="优惠券批次">
+                <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=couponBatch"/>
                 <match url="/basic/xm.do?qm=formCouponBatch"/>
-                <match url="/basic/xm.do?qm=viewCouponBatch"/>
                 <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=couponBatch"/>
+                <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=couponBatch"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon" access="admin,manager" text_zh_CN="优惠券列表">
+                <match url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon"/>
+                <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
             </jnode>
         </jnode>
 
@@ -69,25 +69,26 @@
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
             <jnode url="/basic/xm.do?qm=plistBanner_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站轮播图">
                 <match url="/basic/xm.do?qm=plistBanner_tenant"/>
-                <match url="/basic/xm.do?qm=formBanner&amp;view=ec"/>
+                <match url="/basic/xm.do?qm=formBanner&amp;groupName=tenant"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_tenant" access="admin,manager" text_zh_CN="电商网站文档">
-                <match url="/basic/xm.do?qm=plistDocument_tenant"/>
-                <match url="/basic/xm.do?qm=formDocument&amp;view=document"/>
-                <match url="/basic/xm.do?qm=viewDocument&amp;view=document"/>
+            <jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站文档">
+                <match url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant"/>
+                <match url="/basic/xm.do?qm=formDocument&amp;groupName=tenant"/>
+                <match url="/basic/xm.do?qm=viewDocument&amp;groupName=tenant"/>
             </jnode>
 
             <jnode url="/basic/xm.do?qm=plistProjectCategory_index" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistProjectCategory_index"/>
                 <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
+                <match url="/basic/xm.do?qm=formProjectCategory"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
-                <match url="/basic/xm.do?qm=viewProduct&amp;view=recommend"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
                 <match url="/basic/xm.do?qm=plistProductModel_index"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
                 <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>
-                <match url="/basic/xm.do?qm=formMaster&amp;form=ec"/>
+                <match url="/basic/xm.do?qm=formMaster&amp;form=recommend"/>
                 <match url="/basic/xm.do?qm=plistEcMaster_index"/>
             </jnode>
         </jnode>
@@ -121,7 +122,6 @@
                 <match url="/basic/xm.do?qm=plistMaster_default&amp;list=master"/>
                 <match url="/basic/xm.do?qm=formMaster&amp;from=recommendMaster"/>
                 <match url="/basic/xm.do?qm=viewMaster&amp;view=recommendMaster"/>
-                <match url="/basic/xm.do?qm=viewDocument"/>
             </jnode>
           <!--     <jnode url="/Recommended/listRecommended.do?qm=recommened&amp;groupName=masterRecommended&amp;resultPage=masterRecommended/masterRecommendedList"  access="admin,manager" text_zh_CN="传承人推荐">
                       <match url="recommened" />
@@ -153,19 +153,13 @@
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
             <jnode url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"
                    access="admin,manager" text_zh_CN="首页轮播图">
-                <match url="/basic/xm.do?qm=plistBanner_tenant"/>
                 <match url="/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"/>
-                <match url="/basic/xm.do?qm=formBanner"/>
-                <match url="/basic/xm.do?qm=removeBanner"/>
+                <match url="/basic/xm.do?qm=formBanner&amp;groupName=master.homePage"/>
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_tenant" access="admin,manager" text_zh_CN="传承人网站文档">
-                <match url="/basic/xm.do?qm=plistDocument_tenant"/>
-                <match url="/basic/xm.do?qm=formDocument_tenant"/>
-                <match url="/basic/xm.do?qm=removeDocument_tenant"/>
-                <match url="/basic/xm.do?qm=removeDocument"/>
-                <match url="/basic/xm.do?qm=formDocument"/>
-                <match url="/basic/xm.do?qm=saveOrUpdateDocument"/>
-                <match url="/basic/xm.do?qm=listDocument_default"/>
+            <jnode url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master" access="admin,manager" text_zh_CN="传承人网站文档">
+                <match url="/basic/xm.do?qm=plistDocument_master&amp;groupName=master"/>
+                <match url="/basic/xm.do?qm=viewDocument&amp;groupName=master"/>
+                <match url="/basic/xm.do?qm=formDocument&amp;groupName=master"/>
             </jnode>
         </jnode>
     </jnode>
