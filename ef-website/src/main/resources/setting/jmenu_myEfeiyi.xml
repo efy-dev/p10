@@ -2,7 +2,7 @@
 <jmenu id="orderMenu">
 
     <jnode url="" id="orderManager" access="admin,manager" state="closed" text_zh_CN="用户订单">
-        <jnode url="/myEfeiyi/order/list.do" access="admin" text_zh_CN="我的订单">
+        <jnode url="/order/myEfeiyi/list.do" access="admin" text_zh_CN="我的订单">
             <match url="plistPurchaseOrder_default"/>
         </jnode>
         <jnode url="/myEfeiyi/order/list.do" access="admin,manager" text_zh_CN="我的收藏">

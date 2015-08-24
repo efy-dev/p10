@@ -24,7 +24,7 @@ public class TenantController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping({"/tenant/listProduct"})
+    @RequestMapping({"/tenant/view"})
     public String listProduct(HttpServletRequest request,Model model) throws Exception {
          XQuery xQuery = new XQuery("plistProduct_default", request,20);
         String conditions = request.getParameter("conditions");
