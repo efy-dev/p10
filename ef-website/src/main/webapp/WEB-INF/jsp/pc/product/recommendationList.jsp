@@ -34,12 +34,6 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link type="text/css" rel="stylesheet" href="css/amazeui.min.css?v=20150831">
   <link type="text/css" rel="stylesheet" href="css/app.css?v=20150831">
-  <script>
-    function ctrl(o){
-      var pid = $(o).next().val();
-      window.location=("/product/cart/addProduct.do?productId="+pid);
-    }
-  </script>
 </head>
 <body>
 <!-- //End--topbar-->
@@ -47,12 +41,12 @@
   <div class="details wh">
     <div class="img"><a href="" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>
     <div class="info">
-      <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
+      <h1>${productModel.product.master.fullName}.${productModel.name}</h1>
       <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
       <div class="item p-text">${productModel.product.master.content}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
-        <a class="cart" onclick="ctrl(this);" value = "001" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" href="/product/cart/${productModel.id}" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy" href="" title="立即购买">立即购买</a>
       </div>
     </div>
@@ -64,16 +58,16 @@
     </ul>
   </div>
   <!-- //End--shop-sort-->
-<c:if test="${productList.size()>0}">
+<c:if test="${productModelList.size()>0}">
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productList}" var="product" varStatus="rec">
+        <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
-          <a href="/product/hot/${product.id}" target="_blank" title="">
+          <a href="/product/hot/${productModel.id}" target="_blank" title="">
             <img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.picture_url}@!tenant-pc-tenant-list" alt="">
-            <p class="wh name">${product.name}</p>
-            <p class="wh price">${product.price}</p>
+            <p class="wh name">${productModel.name}</p>
+            <p class="wh price">${productModel.price}</p>
           </a>
         </li>
         </c:forEach>
