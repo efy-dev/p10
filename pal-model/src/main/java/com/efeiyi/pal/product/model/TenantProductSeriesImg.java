@@ -1,4 +1,4 @@
-package com.efeiyi.pal.organization.model;
+package com.efeiyi.pal.product.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -6,18 +6,17 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 /**
- * Created by Administrator on 2015/7/29.
+ * Created by Administrator on 2015/8/23.
  */
 
 @Entity
-@Table(name = "organization_tenant_source")
-public class TenantSource {
+@Table(name = "tenant_product_series_img")
+public class TenantProductSeriesImg {
 
     private String id;
-    private Tenant tenant;
-    private String name;
-    private String region;
+    private TenantProductSeries tenantProductSeries;
     private String imgUrl;
+    private int sort;
     private String status;
 
     @Id
@@ -33,31 +32,13 @@ public class TenantSource {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
+    @JoinColumn(name = "tenant_product_series_id")
+    public TenantProductSeries getTenantProductSeries() {
+        return tenantProductSeries;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(name = "region")
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
+    public void setTenantProductSeries(TenantProductSeries tenantProductSeries) {
+        this.tenantProductSeries = tenantProductSeries;
     }
 
     @Column(name = "img_url")
@@ -67,6 +48,15 @@ public class TenantSource {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    @Column(name = "sort")
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     @Column(name = "status")

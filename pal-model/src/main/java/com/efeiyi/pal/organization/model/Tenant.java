@@ -1,13 +1,12 @@
 package com.efeiyi.pal.organization.model;
 
-import com.efeiyi.pal.product.model.ProductSeries;
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/16.
@@ -25,10 +24,8 @@ public class Tenant {
     private String city;
     private String address;
     private String status;
-    private List<TenantSource> tenantSourceList;
     private List<TenantCertification> tenantCertificationList;
-
-    private Set<ProductSeries> productSeriesSet;
+    private List<TenantProductSeries> tenantProductSeriesList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -111,17 +108,6 @@ public class Tenant {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
     @Where(clause = "status='1'")
-    public List<TenantSource> getTenantSourceList() {
-        return tenantSourceList;
-    }
-
-    public void setTenantSourceList(List<TenantSource> tenantSourceList) {
-        this.tenantSourceList = tenantSourceList;
-    }
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-    @Where(clause = "status='1'")
     public List<TenantCertification> getTenantCertificationList() {
         return tenantCertificationList;
     }
@@ -131,15 +117,30 @@ public class Tenant {
     }
 
     @JsonIgnore
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "tenant_product_series", joinColumns = {@JoinColumn(name = "tenant_id")},
-                                                inverseJoinColumns = {@JoinColumn(name = "product_series_id")})
-    public Set<ProductSeries> getProductSeriesSet() {
-        return productSeriesSet;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    @Where(clause = "status='1'")
+    public List<TenantProductSeries> getTenantProductSeriesList() {
+        return tenantProductSeriesList;
     }
 
-    public void setProductSeriesSet(Set<ProductSeries> productSeriesSet) {
-        this.productSeriesSet = productSeriesSet;
+    public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
+        this.tenantProductSeriesList = tenantProductSeriesList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tenant tenant = (Tenant) o;
+
+        return id.equals(tenant.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }
