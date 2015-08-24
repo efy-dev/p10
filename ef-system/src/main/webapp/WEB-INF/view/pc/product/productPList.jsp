@@ -63,10 +63,10 @@
                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})"><span
                                                     class="am-icon-trash-o">删除</span>
                                             </button>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               href="<c:url value="/product/recommendedProduct.do?id=${product.id}&categoryId=${product.category.id}"/>"><span
-                                                    class="am-icon-trash-o">推荐</span>
-                                            </a>
+                                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                               <%--href="<c:url value="/product/recommendedProduct.do?id=${product.id}&categoryId=${product.category.id}"/>"><span--%>
+                                                    <%--class="am-icon-trash-o">推荐</span>--%>
+                                            <%--</a>--%>
                                         </div>
                                     </div>
                                 </td>
