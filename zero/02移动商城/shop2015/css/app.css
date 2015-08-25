@@ -83,17 +83,25 @@ input[type="checkbox"] {border-radius:0;}
 .shop-cart .cart-list li.first .info .title {height:16px; font-size: 14px;}
 .shop-cart .cart-list li.first .info .txt { color: #f00;}
 .shop-cart .cart-list li.first .info .arrow-right:before { position: absolute; top:2px;right:0;}
-.shop-cart .cart-list-no {padding:20px;box-sizing:border-box;text-align: center}
-.shop-cart .cart-list-no .prompt-txt { padding:37px 0 33px 0;border:1px #000 solid; font-size:1.2rem;}
+.shop-cart .cart-list-no {padding:20px;box-sizing:border-box;}
+.shop-cart .cart-list-no .prompt-txt {text-align: center;padding:37px 0 33px 0;border:1px #000 solid; font-size:1.2rem;}
 .shop-cart .cart-list-no .prompt-txt .icon {background-position: -73px -27px; width:27px; height: 19px; display: inline-block;}
 .shop-cart .cart-list-no .prompt-txt p:first-child { margin-bottom:20px;}
 
+.shop-cart .cart-list-no .pro-rec {font-size:12px; font-weight: normal;}
+.shop-cart .cart-list-no .pro-rec h2 { margin:20px 0 10px 0;}
+.shop-cart .cart-list-no .pro-rec .ul-list li {width:48%;float: left; margin-bottom:10px;font-size: 14px;}
+.shop-cart .cart-list-no .pro-rec .ul-list li img {width:100%;}
+.shop-cart .cart-list-no .pro-rec .ul-list li p {width:100%; float: left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.shop-cart .cart-list-no .pro-rec .ul-list li .price { color: #f00;}
+.shop-cart .cart-list-no .pro-rec .ul-list li .price em { font-size: 12px;}
+.shop-cart .cart-list-no .pro-rec .ul-list li:nth-child(2n) { float: right;}
 
 
-/*--//End--*/
+    /*--//End--*/
 .payment-total-bar {height:40px; line-height:40px; background: #dedede; position: fixed;bottom: 0; padding-left:40px;box-sizing: border-box}
 .payment-total-bar .checkbox { position: absolute;top:50%; margin-top:-6px;left:20px;}
-.payment-total-bar .txt { float: left; font-size: 10px;color:#000}
+.payment-total-bar .txt {float: left; font-size: 10px;color:#000}
 .payment-total-bar .btn-right {background: #000;color: #fff;padding:0 10px;height:40px;float: right; font-size: 1.4rem;}
 
 
