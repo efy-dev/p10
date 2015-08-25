@@ -1,9 +1,12 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.event.TreeModelListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +104,6 @@ public class ProductController {
     @RequestMapping({"/hot/{productModelId}"})
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        /*String  projectId = productModel.getProduct().getProject().getId();*/
         List<ProductModel> productModelList  = productModel.getProduct().getProductModelList();
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
@@ -143,5 +146,69 @@ public class ProductController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         model.addAttribute("productModel", productModel);
         return "/product/productDetails";
+    }
+    /*
+    *
+    * 添加到购物车
+    * */
+    @RequestMapping({"/cart/{productModelId}"})
+    public String addProduct(@PathVariable String productModelId,HttpServletRequest request) throws Exception {
+        // 需要判断用户是否登录
+        Cart cart = null;
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        if (currentUser.getId() != null) {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            cart = (Cart) list.get(0);
+        } else {
+            Object cartTemp = request.getSession().getAttribute("cart");
+            if (cartTemp != null) {
+                cart = (Cart) cartTemp;
+            } else {
+                cart = new Cart();
+                cart.setCartProductList(new ArrayList<CartProduct>());
+            }
+        }
+
+        boolean ne = false;
+        boolean ab = false;
+
+        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
+        xQuery1.put("cart_id", cart.getId());
+        List<Object> list1 = baseManager.listObject(xQuery1);
+
+        if (list1.size() > 0) {
+            for (Object cartProductTemp : list1) {
+                CartProduct cartProduct = (CartProduct) cartProductTemp;
+                if (productModelId.equals(cartProduct.getProductModel().getId())) {
+                    if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
+                        cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
+                    } else {
+                        cartProduct.setAmount(cartProduct.getAmount() + 1);
+                    }
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+
+                    ab = true;
+                    ne = true;
+
+                }
+            }
+        }
+        if (!ne) {
+            ProductModel product = new ProductModel();
+            product.setId(productModelId);
+            CartProduct cartProduct = new CartProduct();
+            cartProduct.setProductModel(product);
+            cartProduct.setCart(cart);
+            cartProduct.setStatus("1");
+            if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
+                cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
+            } else {
+                cartProduct.setAmount(1);
+            }
+            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
+            ab = true;
+        }
+        return "/purchaseOrder/addProductSuccess";
     }
 }

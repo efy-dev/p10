@@ -155,7 +155,7 @@
                             <tr>
                                 <td width="542">
                                     <div class="cols1 page-pdl">
-                                        <img src="../我的购物车/u/img-tx2.png" alt=""/>
+                                        <img src="${product.productModel.product.picture_url}" alt=""/>
 
                                         <div class="info">
                                             <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -237,11 +237,14 @@
         for (var key in messageObject) {
             message += key + ":" + messageObject[key] + ";"
         }
-//        message = encodeURIComponent(message);
-        console.log(message);
-        var url = "<c:url value="/order/confirm/"/>";
-        url+= orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-        window.location.href =  url;
+
+        if(consumerAddress==""){
+            showAlert("提示","请选择一个收货地址！");
+        }else{
+            var url = "<c:url value="/order/confirm/"/>";
+            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+            window.location.href = url;
+        }
     }
 
 

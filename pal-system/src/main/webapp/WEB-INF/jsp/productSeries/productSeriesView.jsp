@@ -33,7 +33,10 @@
         </tr>
         <tr>
             <td>状态：</td>
-            <td>${object.status}</td>
+            <td>
+                <ming800:status name="status" dataType="PCProductSeries.status"
+                                checkedValue="${object.status}" type="normal"/>
+            </td>
         </tr>
     </table>
 </div>
@@ -43,12 +46,6 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="添加/编辑--属性"/>
-    <c:if test="${not empty object.tenantProductSeriesList}">
-        <input onclick="window.location.href='<c:url value=""/>'"
-               type="button" class="am-btn am-btn-default am-btn-xs"
-               style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-               value="添加/编辑--溯源信息"/>
-    </c:if>
 </div>
 
 <c:if test="${!empty object.productSeriesPropertyNameList}">
@@ -90,6 +87,7 @@
                 <td>制作工艺</td>
                 <td>创作地域</td>
                 <td>溯源图片</td>
+                <td>编辑溯源图片</td>
             </tr>
 
             <c:forEach items="${object.tenantProductSeriesList}" var="tenantProductSeries">
@@ -108,6 +106,10 @@
                                 <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
                             </c:if>
                         </c:forEach>
+                    </td>
+                    <td>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantProductSeries&id=${tenantProductSeries.id}"/>'"
+                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑溯源图片</button>
                     </td>
                 </tr>
             </c:forEach>

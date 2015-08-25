@@ -7,7 +7,7 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="shop2015/upload/shop-1.jpg" alt=""/></div>
+        <div class="img"><img src="<c:url value="/scripts/assets/upload/shop-1.jpg"/>" alt=""/></div>
             <span class="des">
                 <p><h1>杨柳青年画</h1></p>
               <p><font>天津</font><font>杨柳青</font><font>国家级传承人霍庆有</font></p>
@@ -23,7 +23,7 @@
   <!-- //End--shop-header-->
   <div class="focus wh">
     <ul class="slider-main">
-      <li style="display: block;"><img src="shop2015/upload/master-1.jpg" width="1280" height="481" alt=""/></li>
+      <li style="display: block;"><img src="<c:url value="/scripts/assets/upload/master-1.jpg"/>" width="1280" height="481" alt=""/></li>
     </ul>
   </div>
   <!-- //End--focus-->
@@ -37,10 +37,10 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="/tenant/view?sort=desc:price" title="价格从高到低">价格从高到低</a>
-        <a href="/tenant/view?sort=asc:price" title="价格从低到高">价格从低到高</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
-        <a href="/tenant/view?sort=desc:createDateTime" title="新品">新品</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=desc:createDateTime"/>" title="新品">新品</a>
         <a href="" title="人气">人气</a>
       </dd>
     </dl>
@@ -49,18 +49,18 @@
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${productModelList}" var="productModel">
           <li>
             <a href="" target="_blank" title="">
-              <img class="imgfilter" src="shop2015/upload/category-1.jpg" alt="">
-              <p class="wh name">${product.name}</p>
-              <p class="wh price">${product.price}</p>
+              <img class="imgfilter" src="<c:url value="${productModel.product.picture_url}"/>" alt="">
+              <p class="wh name">${productModel.name}</p>
+              <p class="wh price">${productModel.price}</p>
             </a>
           </li>
         </c:forEach>
       </ul>
       <div class="page wh">
-        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/listProduct">
+        <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/tenant/view">
           <ming800:pcPageParam name="conditions"
                                value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
           <ming800:pcPageParam name="sort"

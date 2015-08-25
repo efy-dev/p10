@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -58,7 +59,7 @@
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">商品系列 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input id="productSeries_idName" placeholder="商品系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" required>
+                <input id="productSeries_idName" placeholder="商品系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null,'<%=path%>')" required>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id">
             </div>
         </div>
@@ -170,6 +171,7 @@
                 <td>认证时间</td>
                 <td>认证结果</td>
                 <td>证书图片</td>
+                <td>编辑图片</td>
             </tr>
 
             <c:forEach items="${object.tenantCertificationList}" var="tenantCertification">
@@ -200,6 +202,16 @@
                                 <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
                             </c:if>
                         </c:forEach>
+                    </td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantCertification&id=${tenantCertification.id}"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                                    <span class="am-icon-edit"></span> 编辑图片
+                                </button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </c:forEach>

@@ -15,7 +15,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/META-INF/resources/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript">
         function checkSerial(){
             var serial = document.getElementById("checkSerial").value;
@@ -100,15 +100,7 @@
                     </c:if>
                 </td>
                 <td>
-                    <c:if test="${label.status == '2'}">
-                        <font color="blue">已分配</font>
-                    </c:if>
-                    <c:if test="${label.status == '1'}">
-                        <font color="green">未分配</font>
-                    </c:if>
-                    <c:if test="${label.status == '9'}">
-                        <font color="red">已查询</font>
-                    </c:if>
+                    <ming800:status name="status" dataType="PCLabel.status" checkedValue="${label.status}" type="normal"/>
                 </td>
                 <td><fmt:formatDate value="${label.firstCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
                 <td><fmt:formatDate value="${label.lastCheckDateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
