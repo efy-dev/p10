@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -27,7 +28,7 @@
                     cache: false,
                     dataType: "json",
                     success: function (data) {
-                        m8uDialog.openDialog(id, name, type, data);
+                        m8uDialog.openDialog(id, name, type, data,'<%=path%>');
                     }
                 });
             }
