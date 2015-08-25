@@ -111,6 +111,7 @@ public class CartController {
             } else {
                 cart = new Cart();
                 cart.setCartProductList(new ArrayList<CartProduct>());
+                request.getSession().setAttribute("cart", cart);
             }
         }
 
@@ -126,9 +127,17 @@ public class CartController {
                 CartProduct cartProduct = cartProductTemp;
                 if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
-                        cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
+                        if (cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")) < cartProduct.getProductModel().getAmount()) {
+                            cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
+                        } else {
+                            cartProduct.setAmount(cartProduct.getProductModel().getAmount());
+                        }
                     } else {
-                        cartProduct.setAmount(cartProduct.getAmount() + 1);
+                        if (cartProduct.getAmount() + 1 < cartProduct.getProductModel().getAmount()) {
+                            cartProduct.setAmount(cartProduct.getAmount() + 1);
+                        } else {
+                            cartProduct.setAmount(cartProduct.getProductModel().getAmount());
+                        }
                     }
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
 
@@ -143,7 +152,9 @@ public class CartController {
             product.setId(productId);
             CartProduct cartProduct = new CartProduct();
             cartProduct.setProductModel(product);
-            cartProduct.setCart(cart);
+            if (cart.getId() != null) {
+                cartProduct.setCart(cart);
+            }
             cartProduct.setStatus("1");
             cartProduct.setIsChoose("0");
             if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
@@ -195,7 +206,7 @@ public class CartController {
         String cartProductId = request.getParameter("cartProductId");
         String productAmount = request.getParameter("amount");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        if (Integer.parseInt(productAmount)>=cartProduct.getProductModel().getAmount()){
+        if (Integer.parseInt(productAmount) >= cartProduct.getProductModel().getAmount()) {
             cartProduct.setAmount(cartProduct.getProductModel().getAmount());
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
         }
@@ -370,6 +381,30 @@ public class CartController {
         String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
         return result;
 
+    }
+
+    @RequestMapping({"/cart/cartAmount.do"})
+    @ResponseBody
+    public String getCartAmount(HttpServletRequest request) throws Exception {
+        MyUser user = AuthorizationUtil.getMyUser();
+        Cart cart = null;
+        if (user.getId() != null) {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            cart = (Cart) list.get(0);
+        } else {
+            if (request.getSession().getAttribute("cart") != null) {
+                cart = (Cart) request.getSession().getAttribute("cart");
+            } else {
+                cart = new Cart();
+            }
+        }
+
+        if (cart.getCartProductList() == null || cart.getCartProductList().size() == 0) {
+            return "0";
+        } else {
+            return cart.getCartProductList().size() + "";
+        }
     }
 
 

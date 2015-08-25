@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -52,12 +53,12 @@
             <div class="am-u-sm-9">
                 <c:if test="${empty object || object.id == null || object.id==''}">
                     <input id="product_idName" placeholder="商品名称"
-                           onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${purchaseOrder.tenant.id}')" required>
+                           onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${purchaseOrder.tenant.id}','<%=path%>')" required>
                     <input type="hidden" id="product_id"  name="product.id" >
                 </c:if>
                 <c:if test="${!empty object && object.id != null && object.id != '' }">
                     <input id="product_idName" placeholder="商品名称"
-                           onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.purchaseOrder.tenant.id}')" value="${object.product.name}" required>
+                           onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.purchaseOrder.tenant.id}','<%=path%>')" value="${object.product.name}" required>
                     <input type="hidden" id="product_id"  name="product.id" value="${object.product.id}">
                 </c:if>
             </div>

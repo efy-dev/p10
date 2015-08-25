@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -9,6 +10,12 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>个人中心</title>
+  <script>
+    function func(o){
+      var status = $(o).next().val();
+      window.location.href="<c:url value="/order/myEfeiyi/list.do?"/>"+status;
+    }
+  </script>
 </head>
 <body>
 <!-- //End--header-->
@@ -17,16 +24,12 @@
 <div class="mt wh1">
   <div class="extra-l">
     <strong>我的订单</strong>
-    <a href="#">待付款(<span>3</span>)</a>
-    <a href="#">待收货</a>
-    <a href="#">待评价</a>
-    <a href="#">已完成</a>
-    <a href="#">订单回收站</a>
+    <a href="#" onclick="func(1)">待付款</a>
+    <a href="#" onclick="func(5)">待收货</a>
+    <a href="#" onclick="func(13)">已完成</a>
+    <a href="#" onclick="func(17)">订单回收站</a>
   </div>
-  <div class="extra-r">
-    <a href="">合并</a>
-    <a href="">付款</a>
-  </div>
+
 </div>
 <!-- //End--mt-->
 <div class="title wh1">
@@ -54,7 +57,7 @@
           <th colspan="6">
             <span>${order.createDatetime}</span>
             <span>订单号：<strong>${subOrder.serial}</strong></span>
-            <span>瓷器之都</span>
+            <span>${subOrder.tenant.name}</span>
           </th>
         </tr>
         <tr>
@@ -63,7 +66,7 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="../shop2015/upload/img-tx2.png" alt="">
+                    <img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">
                     <div class="info">
                       <p><a href="#">${op.productModel.product.category.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>
@@ -71,19 +74,37 @@
                   </div>
                 </td>
                 <td width="174">￥${subOrder.total}</td>
-                <td width="107">x<span>1</span></td>
-                <td width="100">${subOrder.payWay}</td>
+                <td width="107">x<span>${op.purchaseAmount}</span></td>
+                <td width="100">
+                  <p>￥${subOrder.total * op.purchaseAmount}</p>
+                  ${order.payWay}
+                </td>
               </table>
             </c:forEach>
           </td>
           <td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">
-            <p><a href="#">待收货</a></p>
-            <p><a href="#">订单跟踪</a></p>
+            <p>
+              <a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${subOrder.orderStatus}" type="normal"/></a>
+            </p>
           </td>
+          <c:if test="${subOrder.orderStatus == 1}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="#">查看</a></p>
-            <p><a href="#">再次购买</a></p>
+            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
+            <p><a href="#">付款</a></p>
+            <p><a href="#">取消订单</a></p>
           </td>
+          </c:if>
+          <c:if test="${subOrder.orderStatus == 5}">
+          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
+          </td>
+          </c:if>
+          <c:if test="${subOrder.orderStatus == 13}">
+          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
+            <p><a href="#">删除</a></p>
+          </td>
+          </c:if>
         </tr>
       </table>
     </c:forEach>
@@ -94,7 +115,7 @@
         <th colspan="6">
           <span>${order.createDatetime}</span>
           <span>订单号：<strong>${order.serial}</strong></span>
-          <span>瓷器之都</span>
+          <span>${order.tenant.name}</span>
         </th>
       </tr>
       <tr>
@@ -103,7 +124,7 @@
             <table class="item">
               <td width="237">
                 <div class="cols1">
-                  <img src="../shop2015/upload/img-tx2.png" alt="">
+                  <img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">
                   <div class="info">
                     <p><a href="#">${op.productModel.product.category.name}</a></p>
                     <p><a href="#">${op.productModel.product.name}</a></p>
@@ -111,19 +132,37 @@
                 </div>
               </td>
               <td width="174">￥${order.total}</td>
-              <td width="107">x<span>1</span></td>
-              <td width="100">${order.payWay}</td>
+              <td width="107">x<span>${op.purchaseAmount}</span></td>
+              <td width="100">
+                <p>￥${order.total * op.purchaseAmount}</p>
+                ${order.payWay}
+              </td>
             </table>
           </c:forEach>
         </td>
         <td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">
-          <p><a href="#">待收货</a></p>
-          <p><a href="#">订单跟踪</a></p>
+          <p>
+            <a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></a>
+          </p>
         </td>
-        <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-          <p><a href="#">查看</a></p>
-          <p><a href="#">再次购买</a></p>
-        </td>
+        <c:if test="${order.orderStatus == 1}">
+          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+            <p><a href="#">付款</a></p>
+            <p><a href="#">取消订单</a></p>
+          </td>
+        </c:if>
+        <c:if test="${order.orderStatus == 5}">
+          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+          </td>
+        </c:if>
+        <c:if test="${order.orderStatus == 13}">
+          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+            <p><a href="#">删除</a></p>
+          </td>
+        </c:if>
       </tr>
     </table>
   </c:if>
@@ -142,14 +181,14 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/assets/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="/scripts/assets/js/amazeui.min.js"></script>
-<script src="/scripts/assets/js/system.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
 </body>
 </html>

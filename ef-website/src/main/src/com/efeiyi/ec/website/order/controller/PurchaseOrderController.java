@@ -48,7 +48,7 @@ public class PurchaseOrderController extends BaseController {
     * */
     @RequestMapping({"/myEfeiyi/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
-        String orderStatus = request.getParameter("id");
+        String orderStatus = request.getParameter("status");
         XQuery xQuery = null;
         int c = 0;
         if (orderStatus == null) {
@@ -157,6 +157,15 @@ public class PurchaseOrderController extends BaseController {
         return "/purchaseOrder/orderList";
     }
 
+    /**
+     * 订单删除
+     */
+    @RequestMapping({"/deleteOrder/{orderId}"})
+    public String deleteOrder(HttpServletRequest request){
+        String  orderId = request.getParameter("orderId");
+        baseManager.remove(PurchaseOrder.class.getName(),orderId);
+        return null;
+    }
     /*
     * 付款
     * */

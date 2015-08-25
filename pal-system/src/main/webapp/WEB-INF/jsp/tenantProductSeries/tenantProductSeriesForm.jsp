@@ -10,6 +10,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
+
 <html>
 <head>
   <title></title>
@@ -19,7 +21,7 @@
       if(tenantId == null || tenantId == ""){
         alert("请确定商户是否存在!");
       }else {
-        m8uDialog.openDialog(id, name, type, tenantId);
+        m8uDialog.openDialog(id, name, type, tenantId,'<%=path%>');
       }
     }
   </script>
