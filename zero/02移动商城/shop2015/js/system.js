@@ -6,10 +6,9 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-            $(this).parents('li').slideUp('fast',function(){
-                $(this).remove();
-            });
+           $('.alert-delete').fadeIn('fast');
         })
+
     })();
 
 })
