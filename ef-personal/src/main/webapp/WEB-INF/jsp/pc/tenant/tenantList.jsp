@@ -164,17 +164,17 @@
 <h4 id="page-footer-head-1">京ICP备15032511号-1</h4>--%>
 <div class="footer">
     <ul class="hd">
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">友情链接：</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">永新华韵集团</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">联合国教科文组织</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化部</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化部非物质文化遗产保护司</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国非物质文化遗产保护中心</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国非物质文化遗产保护协会</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">故宫博物院</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">国家文物局</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化网</a></li>
-        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="#">中国文化产业网</a></li>
+        <li class="am-u-sm-2 am-u-end">友情链接：</li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.ich-park.com/">永新华韵集团</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.bjunesco.gov.cn/unesco/index/index.aspx">联合国教科文组织</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.mcprc.gov.cn/">中国文化部</a></li>
+        <li class="am-u-sm-2 am-u-end">中国文化部非物质文化遗产保护司</li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://govinfo.nlc.gov.cn/gtfz/xxgk/gwyzcbm/whb/201206/t20120620_2212933.html?classid=428">中国非物质文化遗产保护中心</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.chinaih.com.cn/">中国非物质文化遗产保护协会</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.dpm.org.cn/index1024768.html">故宫博物院</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.sach.gov.cn/">国家文物局</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.chinaculture.org/">中国文化网</a></li>
+        <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.cnci.gov.cn/">中国文化产业网</a></li>
     </ul>
     <ul class="imgbg">
         <li class="li-img1"></li>
@@ -188,9 +188,9 @@
             <li><a target="_blank" href="http://www.efeiyi.com/main/aboutUs">关于我们</a></li>
             <li><a target="_blank" href="http://www.efeiyi.com/main/contactUs">联系我们</a></li>
             <li><a target="_blank" href="http://www.efeiyi.com/main/welcome">诚聘英才</a></li>
-            <li><a href="#">意见反馈</a></li>
+            <li>意见反馈</li>
+            <li>诚信保证</li>
             <li><a target="_blank" href="http://www.efeiyi.com/main/helpCenter">帮助中心</a></li>
-            <li><a href="#">诚信保证</a></li>
         </ul>
         <p>Copyright© 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>
         <p>永新华韵旗下网站：e飞蚁 传承人官网 诚品宝 集团官网</p>
