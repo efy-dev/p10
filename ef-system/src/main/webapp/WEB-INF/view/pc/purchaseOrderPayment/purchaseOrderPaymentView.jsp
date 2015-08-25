@@ -39,38 +39,51 @@
                 <td class="am-primary am-u-md-3">支付用户</td>
                 <td class="am-u-md-3">${object.user.username}</td>
                 <td class="am-primary am-u-md-3">支付时间</td>
-                <td class="am-u-md-3"><fmt:formatDate value="${object.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                <td class="am-u-md-3"><fmt:formatDate value="${object.createDateTime}" type="both"
+                                                      pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="am-g">
-        <div class="am-u-md-12">
-            <table class="am-table am-table-bordered">
-                <thead>
-                <tr>
-                    <th>订单</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="am-primary am-u-md-3">订单号</td>
-                    <td class="am-u-md-3">${object.purchaseOrder.serial}</td>
-                    <td class="am-primary am-u-md-3">支付方式</td>
-                    <td class="am-u-md-3">
-                        <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
+</div>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>订单信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="am-primary am-u-md-3">订单号</td>
+                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
+                <td class="am-primary am-u-md-3">支付方式</td>
+                <td class="am-u-md-3">
+                    <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
                                 <span style="margin-left: 10px;">
                                 <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
                                                 checkedValue="${purchaseOrderPayment.payWay}"
                                                 type="normal"/>
                                 </span>
-                        </c:forEach>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单总价</td>
+                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-primary am-u-md-3">订单原价</td>
+                <td class="am-u-md-3">${object.purchaseOrder.originalPrice}</td>
+            </tr>
+
+            <tr>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3"><fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/> </td>
+                <td class="am-primary am-u-md-3">收货地址</td>
+                <td class="am-u-md-3">${object.purchaseOrder.consumerAddress.details}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
