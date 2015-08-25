@@ -1,0 +1,23 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding:0;border:0;list-style:none;font-family:"Microsoft YaHei"}
+strong,b,em {font-weight:normal;font-style: normal;}
+img {border:0}
+ul,dl{list-style:none}
+/*0202个人中心 myorder*/
+.myorder{padding: 0 19px;width: 100%;}
+.myorder .order-head{padding:20px 0;overflow: hidden;}
+.myorder .order-head dt{float: left;}
+.myorder .order-head dd{font-size:0.9rem;float: left;padding-left: 30px;}
+.myorder .myfunction{overflow: hidden;}
+.myorder  .marctive{margin:0;}
+.myorder .myfunction ul{padding:20px 0;width: 100%;}
+.myorder .myfunction ul li{text-align: center;font-size: 0.9rem;color: #000;float: left;width: 33.3333%;}
+.myorder .myfunction  button{background-color:#fff; border:1px solid  #ccc;padding:7px 15px;}
+.myorder .order-list{width: 100%;border:1px solid #ccc;margin:18px 0;overflow: hidden;}
+.myorder .list-topic{width: 100%;border-bottom:1px solid #ccc;overflow: hidden;}
+.myorder .list-topic h2{float: left;font-size: 1.2rem;padding-left: 0.8rem;}
+.myorder .list-topic span{float:right;font-size: 1.2rem;padding-right: 1.8rem;position: relative;}
+.myorder .list-topic .jt-bg{background: url("../shop2015/images/myorder.fw.png") no-repeat ;position: absolute;width: 7px;height: 13px;right: 9rem;}
+.myorder .list-topic span a{font-size: 1.2rem;color: #000;}
+/*.myorder .myfunction  button:active{background-color:#000;color: #fff; }*/
+/*0202个人中心*/
