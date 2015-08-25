@@ -54,18 +54,20 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">商品信息</dt>
           <dd class="od-id">
+            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
             <table class="item-bg">
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="/scripts/assets/images/img-tx2.png"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="<c:url value="/scripts/assets/images/img-tx2.png"/>"></a></li>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9">【包快递】韩国正品三重仿伪BB霜 Lohashill遮瑕裸妆BB霜50ML </td>
-                <td class="commodity_quantity  amount">x<span>100</span></td>
-                <td class="commodity_price  price8">￥189.00</td>
+                <td class="commodity_price_unit1  price9">${op.productModel.product.category.name}</td>
+                <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
+                <td class="commodity_price  price8">￥${order.total * op.purchaseAmount}</td>
               </tr>
             </table>
+            </c:forEach>
           </dd>
         </dl>
         <dl class="orderid-mashup bd-top">

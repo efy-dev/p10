@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.organization.model.MyUser" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -55,7 +56,6 @@
       </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
         <jsp:include flush="true" page="/getMenu.do?jmenuId=orderMenu&jnodeId=orderManager&resultPage=/purchaseOrder/purchaseOrderTemplate&match=${match} "/>
-
     </div>
 
 

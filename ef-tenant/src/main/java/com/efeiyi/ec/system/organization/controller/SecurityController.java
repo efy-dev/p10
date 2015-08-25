@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.organization.controller;
 import com.efeiyi.ec.organization.model.MyUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,8 +17,8 @@ public class SecurityController {
 
 
     @RequestMapping({"/login.do"})
-    public String login(HttpServletRequest request){
-
+    public String login(HttpServletRequest request,Model model){
+        model.addAttribute("username",request.getParameter("username"));
         return "/login";
 
     }
