@@ -26,7 +26,17 @@ public class ProductModel implements Serializable {
     private String status;
     private Integer recommendIndex;
     private String name;
-   @Column(name = "recommend_index")
+    private String productModel_url;
+
+    @Column(name = "product_model_url")
+    public String getProductModel_url() {
+        return productModel_url;
+    }
+
+    public void setProductModel_url(String productModel_url) {
+        this.productModel_url = productModel_url;
+    }
+    @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;
     }
