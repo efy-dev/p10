@@ -39,7 +39,8 @@
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>
+    <div class="img"><a href="" target="_blank" title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.product.master.fullName}.${productModel.name}</h1>
       <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
@@ -65,7 +66,7 @@
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
           <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
-            <img class="imgfilter" <%--src="http://tenant.efeiyi.com/${productModel.product.picture_url}@!tenant-pc-tenant-list"--%> alt="">
+            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
             <p class="wh name">${productModel.name}</p>
             <p class="wh price">${productModel.price}</p>
           </a>
