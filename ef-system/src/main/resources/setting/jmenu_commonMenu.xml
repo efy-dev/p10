@@ -6,17 +6,20 @@
                 <match url="/basic/xm.do?qm=plistPurchaseOrder_default"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=order"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProduct=order"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=orderProduct"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="支付记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewPaymentOrder=order"/>
                 <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;param=orderPayment"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
                 <match url= "/basic/xm.do?qm=viewPurchaseOrderDelivery&amp;viwe=view"/>
+                <match url= "/basic/xm.do?qm=viewProduct&amp;param=delivery"/>
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="消费者管理">

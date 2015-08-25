@@ -13,20 +13,12 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/META-INF/resources/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty product.productPropertyValueList}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建商品属性</strong> / <small>New ProductPropertyValue</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty product.productPropertyValueList}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑商品属性</strong> / <small>Edit ProductPropertyValue</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">商品的非遗项目属性</strong>
+    </div>
 </div>
 
 <div class="am-g">

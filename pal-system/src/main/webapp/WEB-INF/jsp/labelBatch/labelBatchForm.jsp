@@ -14,39 +14,12 @@
 <html>
 <head>
     <title></title>
-    <%--<script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>--%>
-    <script type="text/javascript">
-        function openProduct(id, name, type){
-            var tenantId = document.getElementById("tenant_id").value;
-            if(tenantId == null || tenantId == ""){
-                alert("请先选择商户!");
-            }else {
-                var url = "/tenant/one/json?tenantId=" + tenantId;
-                $.ajax({
-                    type: "post",
-                    url: url,
-                    cache: false,
-                    dataType: "json",
-                    success: function (data) {
-                        m8uDialog.openDialog(id, name, type, data,'<%=path%>');
-                    }
-                });
-            }
-        }
-    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建标签批次</strong> / <small>New LabelBatch</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑标签批次</strong> / <small>Edit LabelBatch</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">标签批次信息</strong>
+    </div>
 </div>
 <hr/>
 
@@ -73,20 +46,6 @@
                 <input type="number" name="amount" id="amount" placeholder="数量" value="${object.amount}" required>
             </div>
         </div>
-        <%--<div class="am-form-group">--%>
-            <%--<label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null)" value="${object.tenant.name}" required>--%>
-                <%--<input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="am-form-group">--%>
-            <%--<label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input id="product_idName" placeholder="商品名称" onclick="openProduct('product_id', 'product_idName', 'product2')" required>--%>
-                <%--<input type="hidden" id="product_id"  name="product.id">--%>
-            <%--</div>--%>
-        <%--</div>--%>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

@@ -15,7 +15,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/png" href="/assets/i/favicon.png">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="ico" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -27,9 +27,9 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="/scripts/assets/css/amazeui.min.css">
-  <link type="text/css" rel="stylesheet" href="/scripts/assets/css/myorder.css">
-  <link type="text/css" rel="stylesheet" href="/scripts/assets/css/app.css">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/amazeui.min.css"/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/myorder.css"/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/app.css"/>">
 </head>
 <body>
 <div class="hd">
@@ -50,7 +50,7 @@
   <div class="order-nav">
     <div class="layout-nav">
       <div class="order">
-        <span><img src="/scripts/assets/images/img-tx.png"></span>
+        <span><img src="<c:url value="/scripts/assets/images/img-tx.png"/>"></span>
         <p>151******79</p>
       </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>

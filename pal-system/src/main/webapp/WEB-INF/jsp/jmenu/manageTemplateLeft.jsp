@@ -39,33 +39,5 @@
         <p>暂无</p>
       </div>
     </div>
-    <div class="am-panel am-panel-default admin-sidebar-panel" style="opacity: 0">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-tag"></span> wiki</p>
-
-        <p>Welcome to the Amaze UI wiki!</p>
-      </div>
-    </div>
-    <div class="am-panel am-panel-default admin-sidebar-panel" style="opacity: 0">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-tag"></span> wiki</p>
-
-        <p>Welcome to the Amaze UI wiki!</p>
-      </div>
-    </div>
-    <div class="am-panel am-panel-default admin-sidebar-panel" style="opacity: 0">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-tag"></span> wiki</p>
-
-        <p>Welcome to the Amaze UI wiki!</p>
-      </div>
-    </div>
-    <div class="am-panel am-panel-default admin-sidebar-panel" style="opacity: 0">
-      <div class="am-panel-bd">
-        <p><span class="am-icon-tag"></span> wiki</p>
-
-        <p>Welcome to the Amaze UI wiki!</p>
-      </div>
-    </div>
   </div>
 </div>
