@@ -72,7 +72,6 @@
         <ul class="ul-item">
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-
             <a href="<c:url value="/product/category/${productModel.id}"/>" target="_blank" title="">
               <img  class="imgfilter" <c:url value="http://tenant.efeiyi.com/photo/20150728100546.jpg@!tenant-pc-tenant-list"/> alt=""/>
               <p class="wh name">${productModel.product.name}</p>
