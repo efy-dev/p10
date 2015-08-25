@@ -23,7 +23,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&bucket=tenant&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建轮播图</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi"/>"><span class="am-icon-plus"></span>新建轮播图</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only">${banner.title}</td>
-                        <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
+                        <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
