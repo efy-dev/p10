@@ -13,6 +13,11 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>个人中心</title>
+  <script>
+    function func(o){
+      window.location.href="<c:url value="/order/myEfeiyi/list.do?status="/>"+o;
+    }
+  </script>
 </head>
 <body>
 
@@ -23,11 +28,10 @@
   <div class="mt wh1">
     <div class="extra-l">
       <strong>我的订单</strong>
-      <a href="#">待付款(<span>3</span>)</a>
-      <a href="#">待收货</a>
-      <a href="#">待评价</a>
-      <a href="#">已完成</a>
-      <a href="#">订单回收站</a>
+      <a href="#" onclick="func(1)">待付款</a>
+      <a href="#" onclick="func(5)">待收货</a>
+      <a href="#" onclick="func(13)">已完成</a>
+      <a href="#" onclick="func(17)">订单回收站</a>
     </div>
     <div class="extra-r">
       <a href="">合并</a>
