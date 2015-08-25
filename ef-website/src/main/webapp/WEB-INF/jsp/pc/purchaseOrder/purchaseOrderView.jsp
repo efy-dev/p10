@@ -19,9 +19,7 @@
       <div class="mt wh1">
         <div class="extra-l">
           <strong>订单信息</strong>
-
         </div>
-
       </div>
       <div class="orderinfo">
         <dl class="orderid-mashup">

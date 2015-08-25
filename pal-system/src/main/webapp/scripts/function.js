@@ -120,76 +120,102 @@ function choose(element, artDialogLogId, artDialogLogName) {
  * param type ����
  * param fun                  �ص�����������ѡ��ʱ������
  */
-m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, condition) {
-    var url = "";
-    if (type == 'clazzInstance') {  /*�༶*/
-        url = '/clazzInstance/formClazzInstanceDialog.do?printable=true';
-    } else if (type == 'multiClazzInstance') {
-        url = '/clazzInstance/formClazzInstanceDialog.do?printable=true&dispatcher=multi';
-    } else if (type == 'course') {  /*�γ�*/
-        url = '/course/formCourseDialog.do?printable=true';
-    } else if (type == 'multiCourse') {
-        url = '/course/formMultiCourseDialog.do?printable=true';
-    } else if (type == 'clazz') {  /*���*/
-        url = '/course/formClazzDialog.do?printable=true';
-    } else if (type == 'bigClazz') {  /*����*/
-        url = '/course/formBigClazzDialog.do?printable=true';
-    } else if (type == 'studentTraining') {   /*ѧԱ*/
-        url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=studentTraining';
-    } else if (type == 'student') {   /*ѧԱ*/
-        url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=student';
-    } else if (type == 'tenant') {     /*所有商户*/
-        url = '/tenant/list/json';
-    } else if (type == 'multiUser') {
-        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=3';
-    } else if (type == 'staff') {    /*Ա��*/
-        url = '/organization/formUserDialog.do?printable=true&theStatus=2';
-    } else if (type == 'multiStaff') {
-        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=2';
-    } else if (type == 'userAndStaff') {   /*�û���Ա��*/
-        url = '/organization/formUserDialog.do?printable=true&theStatus=1';
-    } else if (type == 'multiUserAndStaff') {
-        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=1';
-    } else if (type == 'teachBook') {  /*�̲�*/
-        url = '/teachBook/formTeachBookDialog.do?printable=true';
-    } else if (type == 'things') {       /*��Ʒ*/
-        url = '/category/formCategoryDialog.do?printable=true&theType=5';
-    } else if (type == 'books') {       /*ͼ��*/
-        url = '/category/formBooksDialog.do?printable=true&theType=6';
-    } else if (type == 'department') {       /*����*/
-        url = '/organization/formDepartmentDialog.do?printable=true';
-    } else if (type == 'relation') {       /*����*/
-        url = '/relation/formRelation.do?printable=true';
-    } else if (type.indexOf('nut_category_') >= 0) {       /*ԭ�����*/
-        var tempType = type.split("_")[2];
-        url = '/dish/listCategory.do?printable=true&theType=' + tempType;
-    } else if (type == 'product') {       /*所有商品*/
-        url = '/product/list/json';
-    } else if (type == 'order') {       /*订单*/
-        url = '/order/list/json';
-    } else if (type == 'productSeries') {       /*所有商品系列*/
-        url = '/productSeries/list/json';
-    } else if (type == 'source') {       /*商品溯源信息*/
-        url = '/tenantSource/list/json?conditions=tenant.id:'+condition;
-    } else if (type == 'certification') {       /*商品认证信息*/
-        url = '/tenantCertification/list/json?conditions=tenant.id:'+condition;
-    } else if (type == 'product2') {       /*商户的所有商品*/
-        url = '/product2/list/json?conditions=tenant.id:'+condition;
-    } else if (type == 'user') {       /*所有用户*/
-        url = '/user/list/json';
-    } else if (type == 'seriesByTenantNull'){/*商户为空时商户系列中所有系列*/
-        url = '/seriesByTenantNull/list/json';
-    } else if (type == 'seriesByTenant'){/*商户系列中某个商户包含的所有系列*/
-        url = '/seriesByTenant/list/json?conditions=tenant.id:'+condition;
-    } else if (type == 'TenantBySeriesNull'){/*系列为空时商户系列中所有商户*/
-        url = '/TenantBySeriesNull/list/json';
-    } else if (type == 'TenantBySeries'){/*商户系列中某个系列包含的所有商户*/
-        url = '/TenantBySeries/list/json?conditions=productSeries.id:'+condition;
-    }
+//m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, condition) {
+//    var url = "";
+//    if (type == 'clazzInstance') {  /*�༶*/
+//        url = '/clazzInstance/formClazzInstanceDialog.do?printable=true';
+//    } else if (type == 'multiClazzInstance') {
+//        url = '/clazzInstance/formClazzInstanceDialog.do?printable=true&dispatcher=multi';
+//    } else if (type == 'course') {  /*�γ�*/
+//        url = '/course/formCourseDialog.do?printable=true';
+//    } else if (type == 'multiCourse') {
+//        url = '/course/formMultiCourseDialog.do?printable=true';
+//    } else if (type == 'clazz') {  /*���*/
+//        url = '/course/formClazzDialog.do?printable=true';
+//    } else if (type == 'bigClazz') {  /*����*/
+//        url = '/course/formBigClazzDialog.do?printable=true';
+//    } else if (type == 'studentTraining') {   /*ѧԱ*/
+//        url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=studentTraining';
+//    } else if (type == 'student') {   /*ѧԱ*/
+//        url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=student';
+//    } else if (type == 'tenant') {     /*所有商户*/
+//        url = '/tenant/list/json';
+//    } else if (type == 'multiUser') {
+//        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=3';
+//    } else if (type == 'staff') {    /*Ա��*/
+//        url = '/organization/formUserDialog.do?printable=true&theStatus=2';
+//    } else if (type == 'multiStaff') {
+//        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=2';
+//    } else if (type == 'userAndStaff') {   /*�û���Ա��*/
+//        url = '/organization/formUserDialog.do?printable=true&theStatus=1';
+//    } else if (type == 'multiUserAndStaff') {
+//        url = '/organization/formMultiUserDialog.do?printable=true&theStatus=1';
+//    } else if (type == 'teachBook') {  /*�̲�*/
+//        url = '/teachBook/formTeachBookDialog.do?printable=true';
+//    } else if (type == 'things') {       /*��Ʒ*/
+//        url = '/category/formCategoryDialog.do?printable=true&theType=5';
+//    } else if (type == 'books') {       /*ͼ��*/
+//        url = '/category/formBooksDialog.do?printable=true&theType=6';
+//    } else if (type == 'department') {       /*����*/
+//        url = '/organization/formDepartmentDialog.do?printable=true';
+//    } else if (type == 'relation') {       /*����*/
+//        url = '/relation/formRelation.do?printable=true';
+//    } else if (type.indexOf('nut_category_') >= 0) {       /*ԭ�����*/
+//        var tempType = type.split("_")[2];
+//        url = '/dish/listCategory.do?printable=true&theType=' + tempType;
+//    } else if (type == 'product') {       /*所有商品*/
+//        url = '/product/list/json';
+//    } else if (type == 'order') {       /*订单*/
+//        url = '/order/list/json';
+//    } else if (type == 'productSeries') {       /*所有商品系列*/
+//        url = '/productSeries/list/json';
+//    } else if (type == 'source') {       /*商品溯源信息*/
+//        url = '/tenantSource/list/json?conditions=tenant.id:'+condition;
+//    } else if (type == 'certification') {       /*商品认证信息*/
+//        url = '/tenantCertification/list/json?conditions=tenant.id:'+condition;
+//    } else if (type == 'product2') {       /*商户的所有商品*/
+//        url = '/product2/list/json?conditions=tenant.id:'+condition;
+//    } else if (type == 'user') {       /*所有用户*/
+//        url = '/user/list/json';
+//    } else if (type == 'seriesByTenantNull'){/*商户为空时商户系列中所有系列*/
+//        url = '/seriesByTenantNull/list/json';
+//    } else if (type == 'seriesByTenant'){/*商户系列中某个商户包含的所有系列*/
+//        url = '/seriesByTenant/list/json?conditions=tenant.id:'+condition;
+//    } else if (type == 'TenantBySeriesNull'){/*系列为空时商户系列中所有商户*/
+//        url = '/TenantBySeriesNull/list/json';
+//    } else if (type == 'TenantBySeries'){/*商户系列中某个系列包含的所有商户*/
+//        url = '/TenantBySeries/list/json?conditions=productSeries.id:'+condition;
+//    }
 
-    /*dialog1.data("artDialogDocument", document);
-    dialog1.data("artDialogLogId", artDialogLogId);
-    dialog1.data("artDialogLogName", artDialogLogName);*/
+    m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, condition,basePath) {
+        var url = basePath;
+        if (type == 'tenant') {     /*所有商户*/
+            url = url + '/tenant/list/json';
+        } else if (type == 'product') {       /*所有商品*/
+            url = url + '/product/list/json';
+        } else if (type == 'order') {       /*订单*/
+            url = url + '/order/list/json';
+        } else if (type == 'productSeries') {       /*所有商品系列*/
+            url = url + '/productSeries/list/json';
+        } else if (type == 'certification') {       /*商品认证信息*/
+            url = url + '/tenantCertification/list/json?conditions=tenant.id:'+condition;
+        } else if (type == 'product2') {       /*商户的所有商品*/
+            url = url + '/product2/list/json?conditions=tenant.id:'+condition;
+        } else if (type == 'user') {       /*所有用户*/
+            url = url + '/user/list/json';
+        } else if (type == 'seriesByTenantNull'){/*商户为空时商户系列中所有系列*/
+            url = url + '/seriesByTenantNull/list/json';
+        } else if (type == 'seriesByTenant'){/*商户系列中某个商户包含的所有系列*/
+            url = url + '/seriesByTenant/list/json?conditions=tenant.id:'+condition;
+        } else if (type == 'TenantBySeriesNull'){/*系列为空时商户系列中所有商户*/
+            url = url + '/TenantBySeriesNull/list/json';
+        } else if (type == 'TenantBySeries'){/*商户系列中某个系列包含的所有商户*/
+            url = url + '/TenantBySeries/list/json?conditions=productSeries.id:'+condition;
+        }
+
+        /*dialog1.data("artDialogDocument", document);
+        dialog1.data("artDialogLogId", artDialogLogId);
+        dialog1.data("artDialogLogName", artDialogLogName);*/
     //console.log(typeof dialog1.open)
 
     if(type == "seriesByTenantNull" || type == "seriesByTenant" || type == "TenantBySeriesNull" || type == "TenantBySeries"){

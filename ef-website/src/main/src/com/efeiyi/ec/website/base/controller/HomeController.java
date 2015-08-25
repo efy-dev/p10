@@ -63,6 +63,8 @@ public class HomeController {
         for (Object category : categoryList){
             XQuery projectQuery = new XQuery("listProject_default",request);
             projectQuery.put("projectCategory_id",((ProjectCategory)category).getId());
+            projectQuery.setSortHql("");
+            projectQuery.updateHql();
             projectMap.put(((ProjectCategory)category).getId(),baseManager.listObject(projectQuery));
         }
         model.addAttribute("categoryList",categoryList);
