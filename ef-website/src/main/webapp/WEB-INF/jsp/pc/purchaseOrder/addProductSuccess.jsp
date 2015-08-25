@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2015/8/24
-  Time: 10:21
+  Time: 15:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,11 +16,11 @@
 <div class="wr wh">
     <div class="success">
         <div class="success-shop">
-            <p>您已成功付款<span> ￥${order.total}</span></p>
+            <p>添加购物车成功</p>
 
             <p>
-                <a href="<c:url value="/cart/view"/> ">返回购物车</a>
-                <a href="<c:url value="/"/> ">首页</a>
+                <a href="<c:url value="/cart/view"/> ">去购物车结算</a>
+                <a href="<c:url value="/"/> ">继续购物</a>
             </p>
         </div>
 
