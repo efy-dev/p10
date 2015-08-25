@@ -18,9 +18,7 @@
                 </do>
                 <do name="plistProduct" access="" label="商品列表分页" result="/product/productPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
-                        <!--<condition name="tenant.id" defaultValue="" operation="eq"/>-->
                     </query>
                 </do>
 
@@ -28,9 +26,6 @@
                 <do name="viewProduct" label="查看商品详情页" access="" result="/product/productView"
                     execute="com.efeiyi.pal.system.product.controller.ProductViewLabelHandler"/>
                 <do name="removeProduct" label="删除商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"/>
-                <do name="saveOrUpdateProduct" label="新建或更新商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"
-                    execute="com.efeiyi.pal.system.product.controller.ProductHandler">
-                </do>
             </does>
         </entity>
 

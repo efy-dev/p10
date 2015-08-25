@@ -14,16 +14,22 @@
 <head>
     <title></title>
     <script type="text/javascript">
+        var flg =true;
         function showDiv(){
-            var psf=document.getElementById("uploadProductImg");
-            psf.setAttribute("style","display");
+            var pf=document.getElementById("uploadProductImg");
+            if(flg){
+                pf.setAttribute("style","display");
+            }else{
+                pf.setAttribute("style","display:none");
+            }
+            flg = !flg;
         }
     </script>
 </head>
 <body style="height: auto">
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">商品${object.name}详细信息</strong>
+        <strong class="am-text-primary am-text-lg">商品详细信息</strong>
     </div>
 </div>
 <%-- 商品基本属性 --%>
@@ -39,7 +45,7 @@
             </td>
         </tr>
         <tr>
-            <td>序列号：</td>
+            <td>商品编号：</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
@@ -47,7 +53,7 @@
             <td><fmt:formatDate value="${object.madeYear}" pattern="yyyy-MM-dd"/></td>
         </tr>
         <tr>
-            <td>所属系列：</td>
+            <td>非遗项目：</td>
             <td>${object.productSeries.name}</td>
         </tr>
         <tr>
@@ -75,9 +81,13 @@
 
 <%-- 商品图片 上传 --%>
 <div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/product/editProductSeriesProperty.do?productId=${object.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="非遗项目属性"/>
     <input onclick="showDiv()"
            type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           style="margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="上传商品图片"/>
 </div>
 
@@ -132,13 +142,13 @@
 <c:if test="${!empty object.productPropertyValueList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">系列属性列表</strong>
+            <strong class="am-text-primary am-text-lg">非遗项目属性列表</strong>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <td>系列属性名</td>
+                <td>项目属性名</td>
                 <td>商品属性值</td>
             </tr>
             <c:forEach items="${object.productPropertyValueList}" var="productPropertyValue">
@@ -183,7 +193,7 @@
 </c:if>
 
 <%-- 商品认证信息 --%>
-<c:if test="${!empty object.tenantCertification}">
+<c:if test="${!empty object.tenantProductSeries.tenantCertification}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
             <strong class="am-text-primary am-text-lg">认证信息</strong>
@@ -199,14 +209,14 @@
                 <td>证书图片</td>
             </tr>
             <tr>
-                <td>${object.tenantCertification.name}</td>
-                <td>${object.tenantCertification.org}</td>
-                <td><fmt:formatDate value="${object.tenantCertification.theDate}" pattern="yyyy年MM月"/></td>
+                <td>${object.tenantProductSeries.tenantCertification.name}</td>
+                <td>${object.tenantProductSeries.tenantCertification.org}</td>
+                <td><fmt:formatDate value="${object.tenantProductSeries.tenantCertification.theDate}" pattern="yyyy年MM月"/></td>
                 <td>
-                    <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantCertification.level}" type="normal" />
+                    <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.tenantProductSeries.tenantCertification.level}" type="normal" />
                 </td>
                 <td>
-                    <c:forEach items="${object.tenantCertification.imgList}" var="tenantCertificationImg">
+                    <c:forEach items="${object.tenantProductSeries.tenantCertification.imgList}" var="tenantCertificationImg">
                         <c:if test="${not empty tenantCertificationImg.imgUrl}">
                             <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
                         </c:if>

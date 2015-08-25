@@ -16,16 +16,9 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建用户</strong> / <small>New User</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑用户信息</strong> / <small>Edit User</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">用户信息</strong>
+    </div>
 </div>
 <hr/>
 

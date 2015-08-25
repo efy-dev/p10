@@ -80,6 +80,7 @@
             <fields>
                 <field name="level" label="等级" inputType="text">
                     <statusType fieldName="level">
+                        <item label="" value=""/>
                         <item label="国家级非遗名录项目" value="1"/>
                         <item label="省级非遗名录项目" value="2"/>
                         <item label="市级非遗名录项目" value="3"/>

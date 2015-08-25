@@ -13,7 +13,6 @@
 <html>
 <head>
     <title></title>
-    <%--<script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>--%>
     <script type="text/javascript">
         function openProduct(id, name, type){
             var tenantId = document.getElementById("tenant_id").value;
@@ -36,16 +35,9 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建标签批次</strong> / <small>New LabelBatch</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑标签批次</strong> / <small>Edit LabelBatch</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">标签批次</strong> / <small>Edit LabelBatch</small>
+    </div>
 </div>
 <hr/>
 

@@ -14,9 +14,15 @@
 <head>
     <title></title>
     <script type="text/javascript">
-        function showDiv() {
-            var psf = document.getElementById("uploadSourceImg");
-            psf.setAttribute("style", "display");
+        var flg =true;
+        function showDiv(){
+            var pf=document.getElementById("uploadSourceImg");
+            if(flg){
+                pf.setAttribute("style","display");
+            }else{
+                pf.setAttribute("style","display:none");
+            }
+            flg = !flg;
         }
     </script>
 </head>
