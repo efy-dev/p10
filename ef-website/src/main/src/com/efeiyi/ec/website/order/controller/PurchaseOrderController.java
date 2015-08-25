@@ -146,25 +146,23 @@ public class PurchaseOrderController extends BaseController {
 
 
     /*
-    * 取消订单
-    * */
+  * 取消订单
+  * */
     @RequestMapping({"/cancelOrder/{orderId}"})
-    public String cancelPurchaseOrder(HttpServletRequest request, Model model) {
-        String orderId = request.getParameter("orderId");
+    public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
-        model.addAttribute("order", purchaseOrder);
-        return "/purchaseOrder/orderList";
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        return "redirect:/order/myEfeiyi/list.do";
     }
 
     /**
      * 订单删除
      */
     @RequestMapping({"/deleteOrder/{orderId}"})
-    public String deleteOrder(HttpServletRequest request){
-        String  orderId = request.getParameter("orderId");
+    public String deleteOrder(@PathVariable String orderId){
         baseManager.remove(PurchaseOrder.class.getName(),orderId);
-        return null;
+        return "redirect:/order/myEfeiyi/list.do";
     }
     /*
     * 付款
