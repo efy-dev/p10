@@ -26,12 +26,13 @@ public class TenantController {
 
     @RequestMapping({"/tenant/view"})
     public String listProduct(HttpServletRequest request,Model model) throws Exception {
-         XQuery xQuery = new XQuery("plistProduct_default", request,20);
+         XQuery xQuery = new XQuery("plistProductModel_default1", request,20);
         String conditions = request.getParameter("conditions");
-        String sort = request.getParameter("sort");
+        String tenantId = conditions.substring(18,conditions.length());
         xQuery.addRequestParamToModel(model,request);
         PageInfo pageInfo =baseManager.listPageInfo(xQuery);
-        model.addAttribute("productList", pageInfo.getList());
+        model.addAttribute("productModelList", pageInfo.getList());
+        model.addAttribute("tenantId",tenantId);
         return "/tenant/productPList";
     }
 

@@ -37,10 +37,10 @@
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>
       <dd style="display:none;">
-        <a href="<c:url value="/tenant/view?sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
-        <a href="<c:url value="/tenant/view?sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=desc:price"/>" title="价格从高到低">价格从高到低</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=asc:price"/>" title="价格从低到高">价格从低到高</a>
         <a href="" title="销量">销量</a>
-        <a href="<c:url value="/tenant/view?sort=desc:createDateTime"/>" title="新品">新品</a>
+        <a href="<c:url value="/tenant/view?conditions=product.tenant.id:${tenantId}&sort=desc:createDateTime"/>" title="新品">新品</a>
         <a href="" title="人气">人气</a>
       </dd>
     </dl>
@@ -49,12 +49,12 @@
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${productModelList}" var="productModel">
           <li>
             <a href="" target="_blank" title="">
-              <img class="imgfilter" src="${product.picture_url}" alt="">
-              <p class="wh name">${product.name}</p>
-              <p class="wh price">${product.price}</p>
+              <img class="imgfilter" src="<c:url value="${productModel.product.picture_url}"/>" alt="">
+              <p class="wh name">${productModel.name}</p>
+              <p class="wh price">${productModel.price}</p>
             </a>
           </li>
         </c:forEach>

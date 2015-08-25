@@ -47,6 +47,10 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="product.category.id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="default1" label="商鋪首頁默认" type="auto" orderBy="id:asc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="product.tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
