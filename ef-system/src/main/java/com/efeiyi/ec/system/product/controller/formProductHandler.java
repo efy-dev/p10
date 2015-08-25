@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.product.controller;
 
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoHandler;
 import org.springframework.ui.ModelMap;
 
@@ -16,6 +17,8 @@ public class formProductHandler implements DoHandler {
         if (request.getParameter("tenantId") != null) {
             modelMap.put("tenantId", request.getParameter("tenantId"));
         }
+
+
 
 
 

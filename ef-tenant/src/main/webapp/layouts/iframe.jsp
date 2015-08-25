@@ -26,7 +26,6 @@
   <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
   <script src="<c:url value='http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js'/>"></script>
   <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
-  <script src="<c:url value='//cdn.ckeditor.com/4.5.1/standard/ckeditor.js'/>"></script>
   <sitemesh:write property='head'/>
   <style>
     .efy-active {

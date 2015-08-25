@@ -2,7 +2,9 @@ package com.efeiyi.ec.system.organization.controller;
 
 import com.efeiyi.ec.organization.model.Permission;
 import com.efeiyi.ec.organization.model.Role;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.controller.BaseController;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Module;
 import com.ming800.core.does.service.ModuleManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,10 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/sign")
-public class SIgnController extends BaseController {
+@RequestMapping("/Register")
+public class TenantController extends BaseController {
 
-    /**
-     * 判断注册还是登陆
-     * 跳转注册页面
-     */
-    @RequestMapping("/toRegister.do")
-    public String forward(String result) {
 
-            return "/register";
-    }
+
 
 }
