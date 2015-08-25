@@ -25,15 +25,6 @@
             return true;
         }
 
-        function openProductSourceOrCertification(id, name, type){
-            var tenantId = document.getElementById("tenant_id").value;
-            if(tenantId == null || tenantId == ""){
-                alert("请选择商户!");
-            }else {
-                m8uDialog.openDialog(id, name, type, tenantId,'<%=path%>');
-            }
-        }
-
         function openTenantProductSeries(tag, id, name){
             if(tag){//选择系列
                 var tenantId = document.getElementById("tenant_id").value;

@@ -15,16 +15,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/META-INF/resources/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateProductSeries(o){
-            var productSeriesId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=formProductSeries&id="+productSeriesId;
-        }
-        function addProductSeries(){
-            window.location.href="/basic/xm.do?qm=formProductSeries";
-        }
-    </script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >

@@ -50,7 +50,6 @@
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <%--<input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${object.tenant.id}">--%>
                 <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')" value="${object.tenant.name}">
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
@@ -63,6 +62,5 @@
     </form>
 </div>
 
-<%--<div class="am-dimmer" data-am-dimmer="" style="display: none;"></div>--%>
 </body>
 </html>

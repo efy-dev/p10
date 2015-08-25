@@ -15,13 +15,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateTenant(o){
-            var tenantId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=&id="+tenantId;
-        }
-    </script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >

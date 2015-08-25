@@ -18,7 +18,7 @@
 <body>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">选择商品</strong>
+        <strong class="am-text-primary am-text-lg">订单商品选择</strong>
     </div>
 </div>
 <hr/>
