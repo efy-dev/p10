@@ -13,7 +13,9 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript">
+
         function addNewNode(){
             var count = document.getElementById("count").value;
             var size = parseInt(count);

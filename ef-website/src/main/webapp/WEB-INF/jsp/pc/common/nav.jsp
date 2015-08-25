@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -12,11 +13,26 @@
         <ul class="ul-item">
             <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
             <li><a href="" title="手机e飞蚁">手机e飞蚁</a></li>
+            <%
+                if (AuthorizationUtil.getMyUser().getId() != null) {
+            %>
+            <li><a href="<c:url value="/order/myEfeiyi/list.do"/>" title="个人中心">个人中心</a></li>
+            <li><a href="<c:url value="/j_spring_security_logout"/>" title="退出">退出</a></li>
+            <%
+                }
+            %>
+
+            <%
+                if (AuthorizationUtil.getMyUser().getId() == null) {
+            %>
             <li><a href="<c:url value="/login"/>" title="请登录">请登录</a></li>
             <li><a href="<c:url value="/register"/>" title="快速注册">快速注册</a></li>
+            <%
+                }
+            %>
             <li class="cart">
                 <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em>0</em></span>
+                <span class="tips"><em id="cartAmount">0</em></span>
             </li>
         </ul>
     </div>
@@ -44,3 +60,13 @@
         </div>
     </div>
 </div>
+<script>
+
+    $().ready(function () {
+        var success = function(data){
+            $("#cartAmount").html(data);
+        }
+        ajaxRequest("<c:url value="/cart/cartAmount.do"/>",{},success,function(){},"post");
+    });
+
+</script>

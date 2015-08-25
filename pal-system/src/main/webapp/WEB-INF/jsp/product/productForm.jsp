@@ -10,6 +10,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
+
 <html>
 <head>
     <title></title>
@@ -28,7 +30,7 @@
             if(tenantId == null || tenantId == ""){
                 alert("请选择商户!");
             }else {
-                m8uDialog.openDialog(id, name, type, tenantId);
+                m8uDialog.openDialog(id, name, type, tenantId,'<%=path%>');
             }
         }
 
@@ -36,16 +38,16 @@
             if(tag){//选择系列
                 var tenantId = document.getElementById("tenant_id").value;
                 if(tenantId == null || tenantId == ""){
-                    m8uDialog.openDialog(id, name, "seriesByTenantNull", null);
+                    m8uDialog.openDialog(id, name, "seriesByTenantNull", null,'<%=path%>');
                 }else {
-                    m8uDialog.openDialog(id, name, "seriesByTenant", tenantId);
+                    m8uDialog.openDialog(id, name, "seriesByTenant", tenantId,'<%=path%>');
                 }
             }else {//选择商户
                 var productSeriesId = document.getElementById("productSeries_id").value;
                 if(productSeriesId == null || productSeriesId == ""){
-                    m8uDialog.openDialog(id, name, "TenantBySeriesNull", null);
+                    m8uDialog.openDialog(id, name, "TenantBySeriesNull", null,'<%=path%>');
                 }else {
-                    m8uDialog.openDialog(id, name, "TenantBySeries", productSeriesId);
+                    m8uDialog.openDialog(id, name, "TenantBySeries", productSeriesId,'<%=path%>');
                 }
             }
 

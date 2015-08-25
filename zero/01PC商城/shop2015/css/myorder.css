@@ -1,5 +1,18 @@
 a {outline:none;cursor:pointer}
 a:hover{text-decoration: underline}
+/*各页面头部*/
+.myod-logo{width: 158px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat;float:left;}
+/*购物车*/
+.myod-text{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat 0  -50px;float:left; }
+/*收银台*/
+.myod-text1{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -2px  -100px;float:left; }
+/*支付成功*/
+.myod-text2{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -144px  -100px;float:left; }
+/*结算*/
+.myod-text3{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -144px  -51px;float:left; }
+/*我的e非遗*/
+.myod-text4{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -158px  0px;float:left; }
+/*各页面头部*/
 /*--reset--*/
 .wh1 {width:100%;float: left;margin-bottom: 27px;}
 /*//End--commmon*/

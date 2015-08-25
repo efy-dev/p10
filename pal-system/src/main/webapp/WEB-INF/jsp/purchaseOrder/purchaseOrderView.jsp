@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -95,7 +96,7 @@
             <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small style="color: red">*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
                 <input id="product_idName" placeholder="商品名称"
-                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}')" required>
+                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')" required>
                 <input type="hidden" id="product_id"  name="product.id" >
             </div>
         </div>
