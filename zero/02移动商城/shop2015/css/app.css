@@ -83,11 +83,13 @@ input[type="checkbox"] {border-radius:0;}
 .shop-cart .cart-list li.first .info .title {height:16px; font-size: 14px;}
 .shop-cart .cart-list li.first .info .txt { color: #f00;}
 .shop-cart .cart-list li.first .info .arrow-right:before { position: absolute; top:2px;right:0;}
-
 .shop-cart .cart-list-no {padding:20px;box-sizing:border-box;text-align: center}
 .shop-cart .cart-list-no .prompt-txt { padding:37px 0 33px 0;border:1px #000 solid; font-size:1.2rem;}
 .shop-cart .cart-list-no .prompt-txt .icon {background-position: -73px -27px; width:27px; height: 19px; display: inline-block;}
 .shop-cart .cart-list-no .prompt-txt p:first-child { margin-bottom:20px;}
+
+
+
 /*--//End--*/
 .payment-total-bar {height:40px; line-height:40px; background: #dedede; position: fixed;bottom: 0; padding-left:40px;box-sizing: border-box}
 .payment-total-bar .checkbox { position: absolute;top:50%; margin-top:-6px;left:20px;}
