@@ -5,9 +5,9 @@
 <div class="wh">
     <div id="footer">
         <div class="guild">
-            <a href="#"><img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> "></a>
+            <img src="<c:url value="/scripts/assets/images/i/fybk.jpg"/> ">
             <a href="http://www.efeiyi.com" target="_blank"><img src="<c:url value="/scripts/assets/images/i/efeiyi.jpg"/> "></a>
-            <a href="#"><img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> "></a>
+            <img src="<c:url value="/scripts/assets/images/i/cpb.jpg"/> ">
             <%--<a href="#"><img src="<c:url value="/scripts/assets/images/i/gl.jpg"/> "></a>--%>
         </div>
         <div class="efeiyi-url">©2015 efeiyi.com</div>
