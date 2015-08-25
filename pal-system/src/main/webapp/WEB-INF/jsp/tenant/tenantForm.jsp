@@ -16,16 +16,9 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建商户</strong> / <small>New Tenant</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑商户信息</strong> / <small>Edit Tenant</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">商户信息</strong>
+    </div>
 </div>
 <hr/>
 

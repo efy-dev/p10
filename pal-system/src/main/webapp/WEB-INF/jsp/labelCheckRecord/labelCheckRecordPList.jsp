@@ -14,8 +14,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/META-INF/resources/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-
 </head>
 <body style="height: auto">
 <div class="am-cf am-padding">

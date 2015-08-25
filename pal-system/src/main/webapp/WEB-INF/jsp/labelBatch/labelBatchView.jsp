@@ -15,6 +15,25 @@
     <title></title>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+<c:if test="${object.status != '2'}">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch&id=${object.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="编辑"/>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${object.id}"/>'"--%>
+    <input onclick=""
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="删除" />
+</c:if>
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">标签批次${object.setting}详情</strong>
@@ -37,25 +56,9 @@
         <tr>
             <td align="right">状态：</td>
             <td>
-                <c:if test="${object.status == '0'}">
-                    已删除
-                </c:if>
-                <c:if test="${object.status == '1'}">
-                    <font color="green">待生成</font>
-                </c:if>
-                <c:if test="${object.status == '2'}">
-                    <font color="#a52a2a">已生成</font>
-                </c:if>
+                <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${object.status}" type="normal"/>
             </td>
         </tr>
-        <%--<tr>--%>
-            <%--<td align="right">商品名称：</td>--%>
-            <%--<td>${object.product.name}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td align="right">商户：</td>--%>
-            <%--<td>${object.tenant.name}</td>--%>
-        <%--</tr>--%>
     </table>
 </div>
 </body>

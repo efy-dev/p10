@@ -15,9 +15,15 @@
 <head>
     <title></title>
     <script type="text/javascript">
+        var flg =true;
         function showDiv(){
             var pf=document.getElementById("productForm");
-            pf.setAttribute("style","display");
+            if(flg){
+                pf.setAttribute("style","display");
+            }else{
+                pf.setAttribute("style","display:none");
+            }
+            flg = !flg;
         }
     </script>
 </head>
@@ -38,22 +44,16 @@
             <td>商户名称：</td>
             <td>${object.tenant.name}</td>
         </tr>
-        <tr>
-            <td>用户：</td>
-            <td>${object.user.name}</td>
-        </tr>
+        <%-- 二期添加 --%>
+        <%--<tr>--%>
+            <%--<td>用户：</td>--%>
+            <%--<td>${object.user.name}</td>--%>
+        <%--</tr>--%>
         <tr>
             <td>状态：</td>
             <td>
-                <c:if test="${object.status == '1'}">
-                    <font color="green">未支付</font>
-                </c:if>
-                <c:if test="${object.status == '2'}">
-                    <font color="blue">已支付</font>
-                </c:if>
-                <c:if test="${object.status == '9'}">
-                    <font color="red">已发货</font>
-                </c:if>
+                <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${object.status}" type="normal" />
+
                 <c:if test="${object.status != '9'}">
                     <c:if test="${not empty object.purchaseOrderLabelList}">
                         <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
