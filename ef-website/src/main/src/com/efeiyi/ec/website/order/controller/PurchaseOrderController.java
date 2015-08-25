@@ -79,9 +79,9 @@ public class PurchaseOrderController extends BaseController {
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-        if(list !=null &&list.size()>0){
+        if (list != null && list.size() > 0) {
             return "/purchaseOrder/purchaseOrderList";
-        }else {
+        } else {
             return "/purchaseOrder/emptyOrdersView";
         }
 
@@ -247,18 +247,17 @@ public class PurchaseOrderController extends BaseController {
             XQuery xQuery = new XQuery("listCart_default", request);
             List<Object> list = baseManager.listObject(xQuery);
             cart.setId(((Cart) list.get(0)).getId());
-            baseManager.saveOrUpdate(Cart.class.getName(),cart);
-            if (cart.getCartProductList()!=null && cart.getCartProductList().size()>0){
-                for (CartProduct cartProduct : cart.getCartProductList()){
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+            if (cart.getCartProductList() != null && cart.getCartProductList().size() > 0) {
+                for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(cart);
-                    baseManager.saveOrUpdate(CartProduct.class.getName(),cartProduct);
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
                 }
             }
         } else {
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
         }
 
-//        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
 
         //得到店铺的信息
         List<Tenant> tenantListTemp = new ArrayList<>();
