@@ -71,10 +71,10 @@
                     </div>
                   </div>
                 </td>
-                <td width="174">￥${order.total}</td>
+                <td width="174">￥${op.purchasePrice}</td>
                 <td width="107">x<span>${op.purchaseAmount}</span></td>
                 <td width="100">
-                  <p>￥${order.total * op.purchaseAmount}</p>
+                  <p>￥${op.purchasePrice * op.purchaseAmount}</p>
                   <a href="#"><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/></a>
                 </td>
               </table>
