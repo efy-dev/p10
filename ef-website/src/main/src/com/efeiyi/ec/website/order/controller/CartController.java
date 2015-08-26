@@ -180,6 +180,29 @@ public class CartController {
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             ab = true;
         }
+
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            float totalPrice = 0;
+            for (CartProduct cartProductTemp : cart.getCartProductList()) {
+                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    totalPrice += price;
+                }
+            }
+            cart.setTotalPrice(new BigDecimal(totalPrice));
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        } else {
+            float totalPrice = 0;
+            for (CartProduct cartProductTemp : cart.getCartProductList()) {
+                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
+                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    totalPrice += price;
+                }
+            }
+            cart.setTotalPrice(new BigDecimal(totalPrice));
+        }
+
         return "/purchaseOrder/addProductSuccess";
     }
 
@@ -199,6 +222,40 @@ public class CartController {
                 }
             }
         }
+
+        CartProduct cartProduct = (CartProduct)baseManager.getObject(CartProduct.class.getName(),request.getParameter("cartProductId"));
+
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            Cart cart = cartProduct.getCart();
+            float totalPrice = 0;
+            for (CartProduct cartProductTemp : cart.getCartProductList()) {
+                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    totalPrice += price;
+                }
+            }
+            cart.setTotalPrice(new BigDecimal(totalPrice));
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        } else {
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            for (CartProduct cartProductTemp : cart.getCartProductList()) {
+                if (cartProductTemp.getId().equals(cartProduct.getId())) {
+                    cartProductTemp.setAmount(cartProduct.getAmount());
+                }
+            }
+            float totalPrice = 0;
+            for (CartProduct cartProductTemp : cart.getCartProductList()) {
+                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
+                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    totalPrice += price;
+                }
+            }
+            cart.setTotalPrice(new BigDecimal(totalPrice));
+            cartProduct.setCart(cart);
+        }
+
+
         return "redirect:/cart/view";
     }
 
