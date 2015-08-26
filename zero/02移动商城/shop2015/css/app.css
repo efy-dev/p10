@@ -3,8 +3,9 @@ strong,b,em {font-weight:normal;font-style:normal;}
 img {border:0}
 ul,dl{list-style:none}
 /*--//End--reset*/
+body {color: #000}
 input[type="text"],input[type="password"],input[type="button"]{-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0;}
-input[type="checkbox"] {border-radius:0;}
+input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .icon {background:url(../images/icon.png) no-repeat;background-size:152px auto;}
 .bd {width:100%; float:left;}
 .arrow-right:before,
@@ -15,7 +16,7 @@ input[type="checkbox"] {border-radius:0;}
     body {width:640px; margin:0 auto;}
 }
 /*--//End--common*/
-.custom-header {background:#fff;height:55px;border-bottom:3px #000 solid;border-top:3px #000 solid; position:relative; z-index:20;}
+.custom-header {background:#fff;height:55px; position:relative; z-index:20;border-bottom:2px #000 solid;border-top:0;}
 .custom-header .logo a {background-position:0 0;width:152px; height:27px; position:absolute;top:50%; margin-top:-13px; left:21px;}
 .custom-header .icon-cart {background-position:0 -27px;width:34px; height:24px; float:left; margin-top:8px;margin-right:9px; position:relative;}
 .custom-header .icon-user {background-position:-35px -27px;width:25px;height:24px;float:left; margin-top:8px}
@@ -24,11 +25,12 @@ input[type="checkbox"] {border-radius:0;}
 .custom-header .chevron-left:before {content:'';width:12px;height:12px;border-left:1px solid #000;border-top:1px solid #000;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);display:inline-block; margin-left:10px;}
 .custom-header .chevron-right i.line {width:16px;padding:5px 0;border-top:1px #000 solid;border-bottom:1px #000 solid; display:inline-block; margin-right:10px;}
 .custom-header .chevron-right i.line:before {content:'';width:16px;height:1px;background:#000; float:left;}
-.custom-header .menu-list {width:100px;line-height:34px;text-align:center;border:1px #000 solid; position:absolute;top:49px; right:15px; background:#fff; display:none;}
+.custom-header .menu-list {width:100px;line-height:34px;text-align:center;border:1px #000 solid; position:absolute;top:53px; right:15px; background:#fff; display:none;}
 .custom-header .menu-list ul {border-right:1px #000 solid;border-bottom:1px #000 solid;}
 .custom-header .menu-list li a {width:100%;font-size:1.4rem; color:#000;float:left;border-bottom:1px #000 solid; border-right:1px #000 solid;}
 .custom-header .menu-list li.active a {background:#333; color:#fff}
 .custom-header .menu-list:before {content:'';width:2px; height:2px;background:#fff;position:absolute;bottom:-1px; left:-1px;}
+.index-header {border-bottom:3px #000 solid;border-top:3px #000 solid;}
 /*--//End--*/
 .custom .am-slider {box-shadow:none}
 .custom .am-control-nav li a {background:#cecece;box-shadow:none;}
@@ -56,7 +58,7 @@ input[type="checkbox"] {border-radius:0;}
 .box-hd .ul-index-list li .price strong {font-weight:normal;}
 /*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative;}
-.shop-cart .cart-list {padding:0 20px 50px 20px;box-sizing:border-box;}
+.shop-cart .cart-list {padding:0 20px;box-sizing:border-box;}
 .shop-cart .cart-list li {margin-top:25px;}
 .shop-cart .cart-list li .checkbox {position:absolute;top:50%; margin-top:-6px;left:0;}
 .shop-cart .cart-list li .img {width:55px; height:55px; position:absolute;top:0; left:20px;}
@@ -90,10 +92,10 @@ input[type="checkbox"] {border-radius:0;}
 .shop-cart .cart-list-no .pro-rec .ul-list li:nth-child(2n) {float:right;}
 .shop-cart .cart-btn {width:100%;line-height:35px;background:#000; color:#fff;border:0;float:left; text-align: center;}
 /*--//End--*/
-.payment-total-bar {height:40px; line-height:40px; background:#dedede; position:fixed; left:0;bottom:0; padding-left:40px;box-sizing:border-box}
-.payment-total-bar .checkbox {position:absolute;top:50%; margin-top:-6px;left:20px;}
+.payment-total-bar {height:40px; line-height:40px; background:#dedede; position:fixed;left:0;bottom:0; padding-left:20px;box-sizing:border-box}
+.payment-total-bar .checkbox { float: left;margin-top:11px; margin-right:5px;line-height:40px;}
 .payment-total-bar .txt {float:left; font-size:10px;color:#000}
-.payment-total-bar .btn-right {background:#000;color:#fff;padding:0 10px;height:40px;float:right; font-size:1.4rem;}
+.payment-total-bar .btn-right {background:#000;color:#fff;padding:0 15px;height:40px;float:right; font-size:1.4rem;}
 /*--//End--*/
 .cart-address {padding:20px;}
 .cart-address .am-form {border:1px #ccc solid;padding:10px;box-sizing:border-box}
@@ -132,6 +134,37 @@ input[type="checkbox"] {border-radius:0;}
 .cart-pay .ul-list li .icon-zfb {background-position:0 -84px;}
 .cart-pay .ul-list li .icon-wechat {background-position:-40px -84px;}
 /*--//End--*/
+.cart-order .order-address {padding:25px 20px;border-bottom:2px #000 solid; position: relative; font-size: 12px;}
+.cart-order .order-address p {width:100%; float: left; padding-right:20px;box-sizing: border-box;}
+.cart-order .order-address .title span { float: left; margin-right:10px;}
+.cart-order .order-address .arrow-right:before { position: absolute; top: 50%; margin-top: -6px;right:20px;}
+.order-list { padding:20px 20px 0 20px;}
+.order-list .title { font-size: 14px; border-bottom: 1px solid #000; padding:5px 0;}
+.order-list .ul-list li {margin-top: 25px;}
+.order-list .ul-list li .img {width:55px; height:55px; position:absolute;top:0; left:5px;}
+.order-list .ul-list li .info {font-size:12px;box-sizing:border-box; padding-left:70px; padding-right:5px;}
+.order-list .ul-list li .info p {float:left;}
+.order-list .ul-list li .info .text {width:100%;height:32px; line-height:16px;overflow:hidden; margin-bottom:4px;}
+.order-list .ul-list li .info .price {height:20px; line-height:22px;color:#f00; font-size:14px;position:relative;display:inline-block; overflow:hidden;}
+.order-list .ul-list li .num {line-height:11px;position:absolute;bottom:2px;right:0;}
+.order-list .ul-list li .num .iocn-x {width:11px;height:11px; float: left; margin-right:-3px;position:relative;}
+.order-list .ul-list li .num .iocn-x:before,
+.order-list .ul-list li .num .iocn-x:after {content: ''; background: #000; position: absolute;-webkit-transform:rotate(45deg)}
+.order-list .ul-list li .num .iocn-x:before { width:1px;height:11px;top:0;left:0;}
+.order-list .ul-list li .num .iocn-x:after {width:11px;height:1px;top:5px;left:-5px;}
+.order-list .ul-list li .num strong { margin-right:5px;}
+.order-list .ask {padding:0 5px; margin-top:25px;}
+.order-list .ask textarea {width:100%; padding:5px;font-size:10px;}
+.order-total {border-top: 2px solid #000; margin-top: 25px; padding:20px;}
+.order-total p {width:100%; line-height:26px;float: left; font-size: 12px; position: relative;}
+.order-total p strong { float: left;}
+.order-total p span {float: right; padding-right:10px;color: #f00;}
+.order-total p .arrow-right:before {width:8px; height: 8px;position: absolute;top:50%; margin-top:-4px;right:0;}
+.order-total p .grey { color: #dedede;}
+
+
+
+
 .alert-delete {width:100%;height:100%; padding:20px;box-sizing:border-box}
 .alert-delete .content {background:#fff;width:90%;border:1px #999 solid;box-sizing:border-box; position:fixed;top:50%; margin-top:-82px;left:5%; z-index:23;}
 .alert-delete .content .title {padding:0 13px;line-height:30px;font-size:14px;border-bottom:1px #999 solid;background:#fff;}
