@@ -20,7 +20,6 @@ import java.util.*;
 public class XDoUtil {
 
 
-
     /**
      * 解析请求参数中的分页信息，返回PageEntity对象
      *
@@ -44,7 +43,7 @@ public class XDoUtil {
         return pageEntity;
     }
 
-    public static PageEntity getPageEntity(HttpServletRequest request,Integer psize) {
+    public static PageEntity getPageEntity(HttpServletRequest request, Integer psize) {
         String index = request.getParameter(PageEntity.PARAM_NAME_PAGEINDEX);
         String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);
         PageEntity pageEntity = new PageEntity();
@@ -248,84 +247,86 @@ public class XDoUtil {
         java.lang.reflect.Field[] fields = objectClass.getDeclaredFields();
         String content = "";
         for (java.lang.reflect.Field field : fields) {
-            field.setAccessible(true);
+            if (!Modifier.isStatic(field.getModifiers())) {
 
-            //如果当前字段是id就跳过
-            if (field.getName().equals("id")) {
-                continue;
-            }
+                field.setAccessible(true);
 
-            Object objectValue = null;
-            //判断该属性不是简单类行
-            if (field.getType().getName().startsWith("com.ming800") || field.getType().getName().startsWith("com.efeiyi.ec")) { //处理实体属性
-                Object fieldValue = paramMap.get(field.getName() + ".id");
-                if (fieldValue == null) {//异步请求时，使用property_id来发送关联实体的id
-                    fieldValue = paramMap.get(field.getName() + "_id");
+                //如果当前字段是id就跳过
+                if (field.getName().equals("id")) {
+                    continue;
                 }
-                Class simpleName = Class.forName(field.getType().getName());
+
+                Object objectValue = null;
+                //判断该属性不是简单类行
+                if (field.getType().getName().startsWith("com.ming800") || field.getType().getName().startsWith("com.efeiyi.ec")) { //处理实体属性
+                    Object fieldValue = paramMap.get(field.getName() + ".id");
+                    if (fieldValue == null) {//异步请求时，使用property_id来发送关联实体的id
+                        fieldValue = paramMap.get(field.getName() + "_id");
+                    }
+                    Class simpleName = Class.forName(field.getType().getName());
 //                Object objectIdValue = null;
-                Object objectNameValue = null;
-                if (fieldValue != null && !fieldValue.equals("")) {
-                    objectValue = xdoDao.getObject(Class.forName(field.getType().getName()).getName(), fieldValue.toString());
-                    objectNameValue = fetchIdValueByClassType(simpleName, objectValue);//获取对象的指定字段值
-                }
-
-                if (type.equals("edit")) {
-
-                    Object tempObjectValue = SystemValueUtil.generateTempObjectValue(object, field.getName().split("\\."));
-                    Object tempObjectIdValue = SystemValueUtil.generateTempObjectValue(object, (field.getName() + ".id").split("\\."));
-                    Object tempObjectNameValue = null;
-                    if (tempObjectValue != null) {
-                        tempObjectNameValue = fetchIdValueByClassType(simpleName, tempObjectValue);
+                    Object objectNameValue = null;
+                    if (fieldValue != null && !fieldValue.equals("")) {
+                        objectValue = xdoDao.getObject(Class.forName(field.getType().getName()).getName(), fieldValue.toString());
+                        objectNameValue = fetchIdValueByClassType(simpleName, objectValue);//获取对象的指定字段值
                     }
 
-                    if (fieldValue != null && (tempObjectIdValue == null || !tempObjectIdValue.toString().equals(fieldValue))) {
-                        if (tempDo != null) {
-                            content += field.getName() + ".id:" + tempObjectNameValue + " => " + objectNameValue == null ? "" : objectNameValue + "<br/>";
+                    if (type.equals("edit")) {
+
+                        Object tempObjectValue = SystemValueUtil.generateTempObjectValue(object, field.getName().split("\\."));
+                        Object tempObjectIdValue = SystemValueUtil.generateTempObjectValue(object, (field.getName() + ".id").split("\\."));
+                        Object tempObjectNameValue = null;
+                        if (tempObjectValue != null) {
+                            tempObjectNameValue = fetchIdValueByClassType(simpleName, tempObjectValue);
                         }
-                    } else {
-                        continue;
-                    }
-                }
-            } else {                //
-                Object fieldValue = paramMap.get(field.getName());
-                if (fieldValue != null) {
 
-                    if (field.getType().equals(String.class)) {
-                        objectValue = SystemValueUtil.transformSpecialSymbol(fieldValue.toString());
-                    } else if (field.getType().equals(Integer.class) && !fieldValue.equals("")) {
-                        objectValue = Integer.parseInt(fieldValue.toString());
-                    } else if (field.getType().equals(Date.class) && !fieldValue.equals("")) {
-                        objectValue = DateUtil.parseAllDate(fieldValue.toString());
-                    } else if (field.getType().equals(Float.class) && !fieldValue.equals("")) {
-                        objectValue = Float.parseFloat(fieldValue.toString());
-                    } else if (field.getType().equals(BigDecimal.class) && !fieldValue.equals("")) {
-                        objectValue = new BigDecimal(fieldValue.toString());
-                    } else if (field.getType().equals(Byte.class) && !fieldValue.equals("")) {
-                        objectValue = Byte.parseByte(fieldValue.toString());
-                    } else if (field.getType().equals(Boolean.class) && !fieldValue.equals("")) {
-                        objectValue = Boolean.parseBoolean(fieldValue.toString());
+                        if (fieldValue != null && (tempObjectIdValue == null || !tempObjectIdValue.toString().equals(fieldValue))) {
+                            if (tempDo != null) {
+                                content += field.getName() + ".id:" + tempObjectNameValue + " => " + objectNameValue == null ? "" : objectNameValue + "<br/>";
+                            }
+                        } else {
+                            continue;
+                        }
                     }
+                } else {                //
+                    Object fieldValue = paramMap.get(field.getName());
+                    if (fieldValue != null) {
+
+                        if (field.getType().equals(String.class)) {
+                            objectValue = SystemValueUtil.transformSpecialSymbol(fieldValue.toString());
+                        } else if (field.getType().equals(Integer.class) && !fieldValue.equals("")) {
+                            objectValue = Integer.parseInt(fieldValue.toString());
+                        } else if (field.getType().equals(Date.class) && !fieldValue.equals("")) {
+                            objectValue = DateUtil.parseAllDate(fieldValue.toString());
+                        } else if (field.getType().equals(Float.class) && !fieldValue.equals("")) {
+                            objectValue = Float.parseFloat(fieldValue.toString());
+                        } else if (field.getType().equals(BigDecimal.class) && !fieldValue.equals("")) {
+                            objectValue = new BigDecimal(fieldValue.toString());
+                        } else if (field.getType().equals(Byte.class) && !fieldValue.equals("")) {
+                            objectValue = Byte.parseByte(fieldValue.toString());
+                        } else if (field.getType().equals(Boolean.class) && !fieldValue.equals("")) {
+                            objectValue = Boolean.parseBoolean(fieldValue.toString());
+                        }
                   /*   else {
                         objectValue = SystemValueUtil.transformSpecialSymbol(fieldValue);
 //                        objectValue = fieldValue;
                     }*/
-                }
+                    }
 
                 /*修改的时候判断属性值是否和上次相等，相等的话，不进行修改，进入下一次循环*/
                 /*暂时不考虑   子表的情况*/
-                if (type.equals("edit")) {
-                    if (!SystemValueUtil.isEqual(field.getName(), objectValue, object)) {
+                    if (type.equals("edit")) {
+                        if (!SystemValueUtil.isEqual(field.getName(), objectValue, object)) {
                         /*continue;
                     } else {*/
-                        if (tempDo != null) {
-                            content += field.getName() + ":" + ReflectUtil.invokeGetterMethod(object, field.getName()) + " => " + fieldValue + "<br/>";
+                            if (tempDo != null) {
+                                content += field.getName() + ":" + ReflectUtil.invokeGetterMethod(object, field.getName()) + " => " + fieldValue + "<br/>";
+                            }
+                        } else {
+                            continue;
                         }
-                    } else {
-                        continue;
                     }
                 }
-            }
 
 //            if (type.equals("new") && objectValue == null) {              //fieldValue注解  赋默认值
 //                boolean hasAnnotation = field.isAnnotationPresent(FieldValue.class);
@@ -340,7 +341,8 @@ public class XDoUtil {
 //                }
 //            }
 
-            field.set(object, objectValue);
+                field.set(object, objectValue);
+            }
         }
 
         /*如果tempObject1有父类，读取*/

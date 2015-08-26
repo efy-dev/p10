@@ -38,7 +38,7 @@ public class TenantProductSeriesController {
         baseManager.saveOrUpdate(TenantProductSeries.class.getName(), tenantProductSeries);
 
         modelMap.put("object", tenantProductSeries.getProductSeries());
-        String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&id=" + tenantProductSeries.getProductSeries().getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + tenantProductSeries.getProductSeries().getId();
 
         return new ModelAndView(resultPage, modelMap);
     }

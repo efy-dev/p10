@@ -18,7 +18,7 @@
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct"/>'" type="button"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&product=product"/>'" type="button"
            class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
 </div>
@@ -39,7 +39,7 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&product=product&id=${product.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                             <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${product.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
@@ -47,7 +47,7 @@
                     </div>
                 </td>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.name}</a>
                     <c:if test="${!empty product.logo}">
                         <img src="http://pal.efeiyi.com/${product.logo}@!pal-img-list">
                     </c:if>

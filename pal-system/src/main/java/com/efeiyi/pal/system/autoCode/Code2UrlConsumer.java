@@ -131,10 +131,10 @@ public class Code2UrlConsumer implements Runnable {
         method.setEntity(stringEntity);
         String url = "";
         try {
-//            response = httpClient.execute(method);
-//            String s = EntityUtils.toString(response.getEntity());
-//            url = (String) JSONObject.parseObject(s).get("url");
-            url = "*******************";
+            response = httpClient.execute(method);
+            String s = EntityUtils.toString(response.getEntity());
+            url = (String) JSONObject.parseObject(s).get("url");
+//            url = "*******************";
 //            Thread.currentThread().sleep(500);
             if (url == null) {
                 url = getTicketUrl(code);

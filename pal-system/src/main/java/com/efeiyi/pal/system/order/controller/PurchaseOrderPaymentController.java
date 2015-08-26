@@ -24,7 +24,7 @@ public class PurchaseOrderPaymentController {
     private BaseManager baseManager;
 
     @RequestMapping("/newPurchaseOrderPayment.do")
-    public ModelAndView newPurchaseOrderLabel(ModelMap modelMap, HttpServletRequest request) throws Exception{
+    public ModelAndView newPurchaseOrderPayment(ModelMap modelMap, HttpServletRequest request) throws Exception{
         String orderId = request.getParameter("orderId");
         if (orderId == null || orderId.trim().equals("")) {
             throw new Exception("商户id不能为空!");
@@ -52,7 +52,7 @@ public class PurchaseOrderPaymentController {
 
         baseManager.saveOrUpdate(purchaseOrderPayment.getClass().getName(), purchaseOrderPayment);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id="+purchaseOrderPayment.getPurchaseOrder().getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id="+purchaseOrderPayment.getPurchaseOrder().getId();
         return new ModelAndView(resultPage);
     }
 
@@ -71,7 +71,7 @@ public class PurchaseOrderPaymentController {
             baseManager.saveOrUpdate(purchaseOrder.getClass().getName(), purchaseOrder);
         }
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id="+purchaseOrderorderPayment.getPurchaseOrder().getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id="+purchaseOrderorderPayment.getPurchaseOrder().getId();
         return new ModelAndView(resultPage);
     }
 

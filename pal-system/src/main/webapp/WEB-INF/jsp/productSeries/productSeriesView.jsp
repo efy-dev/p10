@@ -17,7 +17,7 @@
 <body>
 
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&id=${object.id}"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&ps=ps&id=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="编辑"/>
@@ -115,7 +115,7 @@
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantProductSeries&id=${tenantProductSeries.id}"/>'"
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑图片</button>
                     </td>
-                    <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenantProductSeries.tenant.id}"/>">${tenantProductSeries.tenant.name}</a></td>
+                    <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&ps=ps&id=${tenantProductSeries.tenant.id}"/>">${tenantProductSeries.tenant.name}</a></td>
                     <td>${tenantProductSeries.tenant.province}&nbsp;${tenantProductSeries.tenant.city}&nbsp;${tenantProductSeries.tenant.address}</td>
                     <td>${tenantProductSeries.craft}</td>
                     <td>${tenantProductSeries.region}</td>

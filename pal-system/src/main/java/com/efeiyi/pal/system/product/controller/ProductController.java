@@ -39,7 +39,7 @@ public class ProductController {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/saveProduct.do")
-    public ModelAndView saveProductSeries(ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+    public ModelAndView saveProduct(ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         Product product = new Product();
 
         String productId = request.getParameter("id");
@@ -61,7 +61,7 @@ public class ProductController {
         modelMap.put("PSPNList", product.getProductSeries().getProductSeriesPropertyNameList());
         modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&id=" + product.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&product=product&id=" + product.getId();
 
         return new ModelAndView(resultPage);
     }

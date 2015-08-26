@@ -18,7 +18,7 @@
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&tenant=tenant"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
            value="新建商户" />
@@ -36,7 +36,7 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&id=${tenant.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&tenant=tenant&id=${tenant.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                 <span class="am-icon-edit"></span> 编辑
                             </button>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&tenant=tenant&id=${tenant.id}"/>">${tenant.name}</a></td>
                 <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
             </tr>
         </c:forEach>

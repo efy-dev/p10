@@ -56,7 +56,7 @@
 
                 <c:if test="${object.status == '1' || object.status == '2'}">
                     <c:if test="${not empty object.purchaseOrderLabelList}">
-                        <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
+                        <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?order=payment&orderId=${object.id}"/>'"
                                type="button" class="am-btn am-btn-default am-btn-xs"
                                style="margin-left:4px;height: 30px;"
                                value="支付" />
@@ -88,7 +88,7 @@
 </div>
 
 <div style="text-align: left;margin-left: 10px;" >
-    <c:if test="${object.status != '9'}">
+    <c:if test="${object.status == '1' || object.status == '2'}">
         <input onclick="showDiv()"
                type="button" class="am-btn am-btn-default am-btn-xs"
                style="margin-bottom: 6px;margin-left:2px;height: 35px;"
@@ -148,7 +148,7 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                                    <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderLabel&id=${pol.id}"/>'"
+                                    <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderLabel&order=orderLabel&id=${pol.id}"/>'"
                                             class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                         <span class="am-icon-edit"></span> 编辑
                                     </button>
@@ -164,7 +164,7 @@
                     <td>${pol.product.name}</td>
                     <td>${pol.amount}
                         <c:if test="${not empty pol.labelList}">
-                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&conditions=purchaseOrderLabel.id:${pol.id}'/>">查看分配标签</a>
+                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.id:${pol.id}'/>">查看分配标签</a>
                         </c:if>
                     </td>
                 </tr>
@@ -195,7 +195,7 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                                    <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderPayment&id=${pop.id}"/>'"
+                                    <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderPayment&order=payment&id=${pop.id}"/>'"
                                             class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                         <span class="am-icon-edit"></span> 编辑
                                     </button>

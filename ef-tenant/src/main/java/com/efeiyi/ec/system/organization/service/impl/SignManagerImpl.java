@@ -44,31 +44,45 @@ public class SignManagerImpl implements SignManager {
     ///**zhu商家注册
     @Override
     public  void  tenantRegister(Tenant tenant,String tenantType){
-        tenant.setStatus("1");
-        tenant.setEnabled(true);
-        tenant.setAccountExpired(false);
-        tenant.setAccountLocked(false);
-        tenant.setCredentialsExpired(false);
+
         tenant.setPassword(StringUtil.encodePassword(tenant.getPassword(), "SHA"));
         baseDao.saveOrUpdateObject(Tenant.class.getName(), tenant);
-//        if(tenantType.equals("11")){
-//            EnterpriseTenant enterpriseTenant = new EnterpriseTenant();
-//            enterpriseTenant.setPassword(tenant.getPassword());
-//            enterpriseTenant.setUsername(tenant.getUsername());
-//            baseDao.saveOrUpdateObject(Tenant.class.getName(), enterpriseTenant);
-//        }
-//        if(tenantType.equals("12")){
-//            PrivateTenant privateTenant = new PrivateTenant();
-//            privateTenant.setPassword(tenant.getPassword());
-//            privateTenant.setUsername(tenant.getUsername());
-//            baseDao.saveOrUpdateObject(Tenant.class.getName(), privateTenant);
-//        }
-//        if(tenantType.equals("13")){
-//            PersonalTenant personalTenant = new  PersonalTenant();
-//            personalTenant.setPassword(tenant.getPassword());
-//            personalTenant.setUsername(tenant.getUsername());
-//            baseDao.saveOrUpdateObject(Tenant.class.getName(), personalTenant);
-//        }
+        if(tenantType.equals("11")){
+            EnterpriseTenant enterpriseTenant = new EnterpriseTenant();
+            enterpriseTenant.setPassword(tenant.getPassword());
+            enterpriseTenant.setUsername(tenant.getUsername());
+            enterpriseTenant.setStatus("1");
+            enterpriseTenant.setEnabled(true);
+            enterpriseTenant.setAccountExpired(false);
+            enterpriseTenant.setAccountLocked(false);
+            enterpriseTenant.setCredentialsExpired(false);
+            enterpriseTenant.setTenantType("11");
+            baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), enterpriseTenant);
+        }
+        if(tenantType.equals("12")){
+            PrivateTenant privateTenant = new PrivateTenant();
+            privateTenant.setPassword(tenant.getPassword());
+            privateTenant.setUsername(tenant.getUsername());
+            privateTenant.setStatus("1");
+            privateTenant.setEnabled(true);
+            privateTenant.setAccountExpired(false);
+            privateTenant.setAccountLocked(false);
+            privateTenant.setCredentialsExpired(false);
+            privateTenant.setTenantType("12");
+            baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), privateTenant);
+        }
+        if(tenantType.equals("13")){
+            PersonalTenant personalTenant = new  PersonalTenant();
+            personalTenant.setPassword(tenant.getPassword());
+            personalTenant.setUsername(tenant.getUsername());
+            personalTenant.setStatus("1");
+            personalTenant.setEnabled(true);
+            personalTenant.setAccountExpired(false);
+            personalTenant.setAccountLocked(false);
+            personalTenant.setCredentialsExpired(false);
+            personalTenant.setTenantType("13");
+            baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), personalTenant);
+        }
     }
 
     //验证用户唯一

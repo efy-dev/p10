@@ -52,7 +52,7 @@ public class PurchaseOrderController {
 
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id=" + purchaseOrder.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
         return new ModelAndView(resultPage);
     }
 
@@ -76,7 +76,7 @@ public class PurchaseOrderController {
         purchaseOrder = distributeLabelList(purchaseOrder, getLabelListBySumProduct(sumProduct), sumProduct);
 
         modelMap.put("object", purchaseOrder);
-        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id=" + purchaseOrder.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
 //        System.out.println(" ************ ");
 //        System.out.println(System.currentTimeMillis() - begin);
 //        System.out.println(" ************ ");
@@ -104,7 +104,7 @@ public class PurchaseOrderController {
         purchaseOrder = activateOrCancelLabelList(purchaseOrder, labels, type);
 
         modelMap.put("object", purchaseOrder);
-        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&id=" + purchaseOrder.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
 //        System.out.println(" ************ ");
 //        System.out.println(System.currentTimeMillis() - begin);
 //        System.out.println(" ************ ");

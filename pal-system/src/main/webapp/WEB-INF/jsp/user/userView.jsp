@@ -17,7 +17,7 @@
 <body>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">用户${object.name}详细信息</strong> / <small>User Information</small>
+        <strong class="am-text-primary am-text-lg">用户${object.name}详细信息</strong>
     </div>
 </div>
 

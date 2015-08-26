@@ -1,5 +1,6 @@
 package com.efeiyi.pal.system.tenantProductSeries.controller;
 
+import com.efeiyi.pal.product.model.ProductImg;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeriesImg;
 import com.ming800.core.base.service.BaseManager;
@@ -7,12 +8,14 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/24.
@@ -26,7 +29,7 @@ public class TenantProductSeriesImgController {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/saveTenantProductSeriesImg.do")
-    public ModelAndView saveTenantProductSeriesImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
+    public String saveTenantProductSeriesImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
 
         TenantProductSeriesImg tenantProductSeriesImg = new TenantProductSeriesImg();
 
@@ -37,12 +40,21 @@ public class TenantProductSeriesImgController {
         TenantProductSeries tenantProductSeries = (TenantProductSeries)baseManager.getObject(TenantProductSeries.class.getName(), tenantProductSeriesId);
         tenantProductSeriesImg.setTenantProductSeries(tenantProductSeries);
         tenantProductSeriesImg.setStatus("1");
-        tenantProductSeriesImg = upLoadImg(multipartRequest, tenantProductSeriesImg);
-        baseManager.saveOrUpdate(TenantProductSeriesImg.class.getName(), tenantProductSeriesImg);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenantProductSeries&id=" + tenantProductSeries.getId();
-
-        return new ModelAndView(resultPage);
+        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "" ;
+        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            url = "tenantSource/" + identify + ".jpg";
+            aliOssUploadManager.uploadFile(mf, "315pal", url);
+            tenantProductSeriesImg.setImgUrl(url);
+            baseManager.saveOrUpdate(TenantProductSeriesImg.class.getName(), tenantProductSeriesImg);
+        }
+        System.out.print(url);
+        return url;
     }
 
     @RequestMapping("/removeTenantProductSeriesImg.do")

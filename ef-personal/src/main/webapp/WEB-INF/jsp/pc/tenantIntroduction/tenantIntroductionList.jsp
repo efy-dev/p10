@@ -21,10 +21,15 @@
                 <div class="page-img"><img src="http://tenant.efeiyi.com/${tenant.favicon}@!tenant-pc-favicon"></div>
                 <div class="buttom-text">
                     <p><a href="#ji-ben-xin-xi">基本信息</a></p>
-
-                    <p><a href="#da-shi-rong-yu">大师荣誉</a></p>
-                    <p><a href="#chu-ban-zhu-zuo">出版著作</a></p>
-                    <p><a href="#yi-shu-nian-biao">艺术年表</a></p>
+                    <c:if test="${dsryList != null && dsryList.size() > 0}">
+                        <p><a href="#da-shi-rong-yu">大师荣誉</a></p>
+                    </c:if>
+                    <c:if test="${cbzzList != null && cbzzList.size() > 0}">
+                        <p><a href="#chu-ban-zhu-zuo">出版著作</a></p>
+                    </c:if>
+                    <c:if test="${masterIntroduction != null}">
+                        <p><a href="#yi-shu-nian-biao">艺术年表</a></p>
+                    </c:if>
                 </div>
             </div>
             <div class="column-right">

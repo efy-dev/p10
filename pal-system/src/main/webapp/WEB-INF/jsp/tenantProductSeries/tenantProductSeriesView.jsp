@@ -13,23 +13,19 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript">
-        var flg =true;
-        function showDiv(){
-            var pf=document.getElementById("uploadSourceImg");
-            if(flg){
-                pf.setAttribute("style","display");
-            }else{
-                pf.setAttribute("style","display:none");
-            }
-            flg = !flg;
-        }
-    </script>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">商户系列溯源信息详情</strong>
+        <strong class="am-text-primary am-text-lg">上传溯源图片</strong>
     </div>
 </div>
 
@@ -70,23 +66,10 @@
            value="上传溯源图片"/>
 </div>
 
-<div class="am-g" id="uploadSourceImg" style="display:none">
-    <form action="<c:url value='/tenantProductSeriesImg/saveTenantProductSeriesImg.do'/>" method="post"
-          enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <input type="hidden" name="tenantProductSeriesId" value="${object.id}">
-
-        <div class="am-form-group">
-            <label for="Img" class="am-u-sm-3 am-form-label">溯源图片<small style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <input type="file" id="Img" name="Img" required>
-            </div>
-        </div>
-        <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
-            </div>
-        </div>
-    </form>
+<div id="uploadSourceImg" style="display:none">
+        <input  id="btn_upload" />
+        <input type="button" class="am-btn am-btn-default am-btn-xs am-hide-sm-only" value="保存"
+               onclick="javascript:$('#btn_upload').uploadify('upload', '*');"/>
 </div>
 
 <%-- 溯源图片 展示 --%>
@@ -121,6 +104,44 @@
         </table>
     </div>
 </c:if>
-
+<link rel="stylesheet" href="<c:url value='/scripts/upload/uploadify.css'/>"/>
+<script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
+<script type="text/javascript">
+    var flg =true;
+    function showDiv(){
+        var pf=document.getElementById("uploadSourceImg");
+        if(flg){
+            pf.setAttribute("style","display");
+        }else{
+            pf.setAttribute("style","display:none");
+        }
+        flg = !flg;
+    }
+    $(function () {
+        $('#btn_upload').uploadify({
+            uploader: '<c:url value="/tenantProductSeriesImg/saveTenantProductSeriesImg.do"/>;jsessionid=<%=request.getSession().getId()%>',            // 服务器处理地址
+            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
+            buttonText: "选择溯源图片",                 //按钮文字
+            buttonClass: "am-btn am-btn-primary",         //按钮样式
+            buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子
+            height: 34,                             //按钮高度true
+            width: 140,                              //按钮宽度
+            auto: false,                          //自动上传
+            multi: true,                            //多个文件上传
+            scriptDate: {'status': '3'},
+            checkExisting: true,                    //检查文件重复
+            successTimeout: 1000000,                 //超时
+            fileSizeLimit: '2MB',
+            removeTimeout: 1,                        //移除时间
+            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeDesc: "请选择图片文件",           //文件说明
+            formData: {"tenantProductSeriesId": "${object.id}"}, //提交给服务器端的参数
+            onQueueComplete: function (queueData) {
+                window.location.href = "<c:url value='/basic/xm.do?qm=viewTenantProductSeries&id=${object.id}'/>";
+            }
+        });
+        $("#btn_upload-button").css({"padding": "0em 0em", "text-align": "center"});
+    });
+</script>
 </body>
 </html>

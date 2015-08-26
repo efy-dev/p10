@@ -219,3 +219,29 @@ INSERT INTO `master_work_picture` VALUES ('idl2calf3hdns2pi', 'idkzc7g33cfesw37'
 
 ALTER TABLE `tenant`
 ADD COLUMN `tenantType`  varchar(2) NULL AFTER `logo_url`;
+
+
+CREATE TABLE `tenant_enterprise` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+CREATE TABLE `tenant_private` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+CREATE TABLE `tenant_personal` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+
+----------------------------------------------
+--2015-8-26 曹廷杰 修改优惠券和优惠券批次 表名 未执行
+--------------------------------------
+ALTER TABLE coupon RENAME TO purchase_coupon;
+ALTER TABLE coupon_batch RENAME TO purchase_coupon_batch;
