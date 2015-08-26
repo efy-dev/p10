@@ -28,6 +28,23 @@
     </script>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&id=${object.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="编辑"/>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeTenant&id=${object.id}"/>'"--%>
+    <input onclick=""
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="删除" />
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">商户详细信息</strong>
@@ -50,11 +67,11 @@
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="showDiv()"
            type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="选择非遗项目"/>
     <input onclick="window.location.href='<c:url value="/tenantCertification/newTenantCertification.do?tenantId=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="新建认证信息" />
 </div>
 
@@ -65,8 +82,7 @@
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">非遗项目 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input id="productSeries_idName" placeholder="非遗项目" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" required>
-                <input id="productSeries_idName" placeholder="商品系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null,'<%=path%>')" required>
+                <input id="productSeries_idName" placeholder="非遗项目" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null,'<%=path%>')" required>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id">
             </div>
         </div>
@@ -111,58 +127,6 @@
     </div>
 </c:if>
 
-<%--<div style="text-align: left;margin-left: 10px;" >--%>
-    <%--<input onclick="window.location.href='<c:url value="/tenantSource/newTenantSource.do?tenantId=${object.id}"/>'"--%>
-           <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-           <%--style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"--%>
-           <%--value="新建溯源信息" />--%>
-<%--</div>--%>
-<%--<c:if test="${!empty object.tenantSourceList}">--%>
-    <%--<div class="am-cf am-padding">--%>
-        <%--<div class="am-fl am-cf">--%>
-            <%--<strong class="am-text-primary am-text-lg">溯源信息</strong>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-    <%--<div>--%>
-        <%--<table class="am-table am-table-bordered am-table-radius am-table-striped">--%>
-            <%--<tr style="text-align:left">--%>
-                <%--<td>操作</td>--%>
-                <%--<td>参与人</td>--%>
-                <%--<td>制作工艺</td>--%>
-                <%--<td>创作地区</td>--%>
-                <%--<td>溯源图片</td>--%>
-            <%--</tr>--%>
-
-            <%--<c:forEach items="${object.tenantSourceList}" var="tenantSource">--%>
-                <%--<tr>--%>
-                    <%--<td>--%>
-                        <%--<div class="am-btn-toolbar">--%>
-                            <%--<div class="am-btn-group am-btn-group-xs" style="width: 100%;" >--%>
-                                <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenantSource&id=${tenantSource.id}"/>'"--%>
-                                        <%--class="am-btn am-btn-default am-btn-xs am-hide-sm-only">--%>
-                                    <%--<span class="am-icon-edit"></span> 编辑--%>
-                                <%--</button>--%>
-                                <%--<button onclick="window.location.href='<c:url value="/tenantSource/removeTenantSource.do?tenantSourceId=${tenantSource.id}"/>'"--%>
-                                        <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">--%>
-                                    <%--<span class="am-icon-trash-o"></span> 删除--%>
-                                <%--</button>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</td>--%>
-                    <%--<td></td>--%>
-                    <%--<td>${tenantSource.name}</td>--%>
-                    <%--<td>${tenantSource.region}</td>--%>
-                    <%--<td>--%>
-                        <%--<c:if test="${!empty tenantSource.imgUrl}">--%>
-                            <%--<img src="http://pal.efeiyi.com/${tenantSource.imgUrl}@!pal-img-list"/>--%>
-                        <%--</c:if>--%>
-                    <%--</td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-        <%--</table>--%>
-    <%--</div>--%>
-<%--</c:if>--%>
-
 <c:if test="${!empty object.tenantCertificationList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -195,7 +159,7 @@
                                 </button>
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantCertification&id=${tenantCertification.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                    <span class="am-icon-edit"></span> 编辑图片
+                                    <%--<span class="am-icon-edit"></span> --%>编辑图片
                                 </button>
                             </div>
                         </div>

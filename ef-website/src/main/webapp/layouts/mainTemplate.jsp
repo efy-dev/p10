@@ -18,7 +18,7 @@
         }
     %>
 </head>
-<body>
+<body <sitemesh:write property='body.class'/>>
 
 <%
     if(HttpUtil.isPhone(request)){

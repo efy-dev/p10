@@ -36,11 +36,11 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>商品系列序列号：</td>
+            <td>非遗项目编号：</td>
             <td>${object.productSeries.serial}</td>
         </tr>
         <tr>
-            <td>商品系列名称：</td>
+            <td>非遗项目名称：</td>
             <td>${object.productSeries.name}</td>
         </tr>
         <tr>

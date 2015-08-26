@@ -109,7 +109,7 @@ public class ProductController extends BaseController {
             String fileName = mf.getOriginalFilename();//获取原文件名
             url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
             try {
-                aliOssUploadManager.uploadFile(mf, "tenant", url);
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
                 productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);

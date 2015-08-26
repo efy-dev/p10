@@ -11,12 +11,12 @@
         <ul id="slides">
             <c:if test="${!empty bannerList}">
                 <c:forEach items="${bannerList}" var="banner">
-                    <li style="background:url(http://tenant.efeiyi.com/${banner.imageUrl}) no-repeat center top;width:100%;height:320px;">
+                    <li style="background:url(http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-pc-banner) no-repeat center top;width:100%;height:320px;">
                         <a href="#"></a></li>
                 </c:forEach>
             </c:if>
             <c:if test="${empty bannerList}">
-                    <li style="background:url(http://tenant.efeiyi.com/banner/20150725150117.jpg) no-repeat center top;width:100%;height:320px;">
+                    <li style="background:url(http://tenant.efeiyi.com/banner/20150725150117.jpg@!tenant-pc-banner) no-repeat center top;width:100%;height:320px;">
                         <a href="#"></a></li>
             </c:if>
         </ul>

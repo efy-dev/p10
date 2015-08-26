@@ -10,6 +10,8 @@
                     <statusType fieldName="status">
                         <item label="未支付" value="1"/>
                         <item label="已支付" value="2"/>
+                        <item label="已收货" value="3"/>
+                        <item label="已作废" value="4"/>
                         <item label="已发货" value="9"/>
                     </statusType>
                 </field>
@@ -60,8 +62,9 @@
 
         <entity name="PCPurchaseOrderPayment" label="订单支付"  model="com.efeiyi.pal.purchase.model.PurchaseOrderPayment">
             <fields>
-                <field name="payWay" label="支付方式" inputType="text">
+                <field name="payWay" label="支付方式" inputType="select">
                     <statusType fieldName="level">
+                        <item label="" value=""/>
                         <item label="支付宝" value="1"/>
                         <item label="网银" value="2"/>
                         <item label="现金" value="3"/>

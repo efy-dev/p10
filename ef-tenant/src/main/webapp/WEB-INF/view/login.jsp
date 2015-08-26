@@ -29,7 +29,7 @@
                 <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
 
                 <div class="am-u-sm-10">
-                    <input type="text" name="username" id="username" placeholder="输入用户名">
+                    <input type="text" name="username" id="username" value="${username}" placeholder="输入用户名">
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
             <div class="am-form-group">
                 <div class="am-u-sm-10 am-u-sm-offset-2">
                     <span>
-                        <button type="button" onclick="window.location.href='<c:url value="/sign/toRegister.do"/>'" class="am-btn am-btn-default">注册</button>
+                        <button type="button" onclick="window.location.href='<c:url value="/sign/toRegister.do"/>'" class="am-btn am-btn-default">商家注册</button>
                     </span>
                     <span>
                         <button type="submit" class="am-btn am-btn-default">登录</button>

@@ -2,7 +2,6 @@ package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.master.model.Master;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
