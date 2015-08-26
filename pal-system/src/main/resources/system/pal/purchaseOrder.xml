@@ -10,6 +10,8 @@
                     <statusType fieldName="status">
                         <item label="未支付" value="1"/>
                         <item label="已支付" value="2"/>
+                        <item label="已收货" value="3"/>
+                        <item label="已作废" value="4"/>
                         <item label="已发货" value="9"/>
                     </statusType>
                 </field>

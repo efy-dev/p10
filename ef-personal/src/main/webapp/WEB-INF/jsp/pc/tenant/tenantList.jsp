@@ -14,7 +14,7 @@
     <div class="page-header-right"></div>
 </div>--%>
 <div  class="header-search">
-    <h1><a href="#"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>
+    <h1><a href="http://www.efeiyi.com"><img src="<c:url value="/scripts/assets/images/images/logo.png"/>"></a></h1>
     <div class="header-aifeiyi"></div>
     <div class="header-sj"></div>
 </div>
@@ -46,8 +46,7 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
-                            <a href="#">
+                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
                                 <p>[${tenant.masterProjectList[0].project.name}]</p>
                                 <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
@@ -56,8 +55,7 @@
                     </p>
                 </div>
                 <span class="img-mutual-jump">
-                <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
-                    <a href="#">
+                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
                         深入了解
                     </a></span>
             </div>
@@ -77,8 +75,7 @@
                     <div class="img-mutual-text1">
                         <h1>${tenant.fullName}</h1>
                         <p>
-                            <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
-                            <a href="#">
+                            <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
                                 <p>[${tenant.masterProjectList[0].project.name}]</p>
                                 <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
@@ -87,8 +84,7 @@
                     </p>
                 </div>
                 <span class="img-mutual-jump">
-                    <%--<a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">--%>
-                    <a href="#">
+                    <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
                         深入了解
                     </a></span>
             </div>

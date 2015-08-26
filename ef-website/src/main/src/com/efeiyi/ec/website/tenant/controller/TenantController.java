@@ -4,6 +4,7 @@ import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Page;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.AutoSerialManager;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

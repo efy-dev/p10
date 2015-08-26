@@ -34,7 +34,7 @@ public class PurchaseOrderPayment {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "purchase_order_id")
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;

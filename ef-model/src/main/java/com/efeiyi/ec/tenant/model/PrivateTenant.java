@@ -18,11 +18,11 @@ import java.io.Serializable;
  *
  * 个体
  */
-
-@Entity
-@DiscriminatorValue(value = "12")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class PrivateTenant extends Tenant implements Serializable {
-
-
-}
+//
+//@Entity
+//@DiscriminatorValue(value = "12")
+//@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+//public class PrivateTenant extends Tenant implements Serializable {
+//
+//
+//}
