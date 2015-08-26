@@ -171,7 +171,7 @@ a:hover{text-decoration: underline}
 .my-order .editor a{font-family: "宋体";color:#fff;line-height: 24px;font-weight: normal;}
 .my-order .userinfo-datum{margin: 0 26px;padding-top: 46px;}
 .my-order .userinfo-datum li{font-family: "宋体";color:#666;font-size: 12px;font-weight: normal;line-height: 54px;height: 54px;}
-.my-order .userinfo-datum li label{width: 60px;text-align: right;font-weight: 100}
+.my-order .userinfo-datum li label{width: 82px;text-align: right;font-weight: 100}
 .my-order .userinfo-tex{width: 124px;height: 37px;border: 1px solid #ccc;padding: 10px 11px;font-family: "宋体";color:#000;font-size: 12px;}
 .my-order .userinfo-tex:active,.my-order .userinfo-tex:hover{border: 1px solid #000;}
 .my-order .userinfo-box{widht:11px;height:11px;line-height: 11px;}

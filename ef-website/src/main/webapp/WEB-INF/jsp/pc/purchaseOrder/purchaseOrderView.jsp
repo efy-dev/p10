@@ -60,7 +60,7 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="<c:url value="/scripts/assets/images/img-tx2.png"/>"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="<c:url value="${op.productModel.product.picture_url}"/>"></a></li>
                   </ul>
                 </td>
                 <td class="commodity_price_unit1  price9">${op.productModel.product.category.name}</td>
@@ -75,7 +75,7 @@
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
             <%--<p >配送地址：<span>${order.consumerAddress}</span></p>--%>
-            <p>收货地址：<span>${order.consumerAddress}</span></p>
+            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
             <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>
 
@@ -107,12 +107,5 @@
 <![endif]-->
 <script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
-<!--<script type="text/javascript">
-$(window).scroll(function(){
-    if($(this).scrollTop()>100){
-        $('.slider-menu ul').css({'position':'fixed'})
-    }
-})
-</script>-->
 </body>
 </html>
