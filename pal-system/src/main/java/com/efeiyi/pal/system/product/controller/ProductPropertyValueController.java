@@ -85,6 +85,6 @@ public class ProductPropertyValueController {
             propertyValue.getValue();
         }
 
-        return "redirect:/basic/xm.do?qm=viewProduct&id="+ product.getId();
+        return "redirect:/basic/xm.do?qm=viewProduct&product=product&id="+ product.getId();
     }
 }

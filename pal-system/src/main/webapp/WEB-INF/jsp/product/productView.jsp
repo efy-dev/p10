@@ -221,6 +221,7 @@
         </table>
     </div>
 </c:if>
+
 <script type="text/javascript">
     var flg =true;
     function showDiv(){
@@ -252,7 +253,7 @@
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: {"productId": "${object.id}"}, //提交给服务器端的参数
             onQueueComplete: function (queueData) {
-                window.location.href = "/basic/xm.do?qm=viewProduct&id=${object.id}";
+                window.location.href = "<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${object.id}'/>";
             }
         });
         $("#btn_upload-button").css({"padding": "0em 0em", "text-align": "center"});

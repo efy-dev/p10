@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&id=${productSeries.id}"/>">${productSeries.name}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&ps=ps&ps=ps&id=${productSeries.id}"/>">${productSeries.name}</a></td>
                 <td>${productSeries.serial}</td>
             </tr>
         </c:forEach>
