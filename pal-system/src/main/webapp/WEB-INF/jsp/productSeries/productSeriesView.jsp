@@ -17,7 +17,7 @@
 <body>
 
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&id=${object.id}"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&ps=ps&id=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="编辑"/>

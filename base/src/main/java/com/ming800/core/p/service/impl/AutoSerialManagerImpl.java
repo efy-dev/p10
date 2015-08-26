@@ -9,6 +9,7 @@ import com.ming800.core.p.service.CommonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -27,6 +28,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     private CommonManager commonManager;
     protected  static Stack<Long> updateSerials = new Stack<Long>();
     protected static Map<String,Stack> map = new HashMap<String,Stack>();
+    String prefix;
  /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
         String queryStr = "from AutoSerial where model = :model and branch.id = :branchId order by serial desc";
@@ -88,6 +90,10 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         if (commonSerial.getStep()!=null || commonSerial.getStep()!=""){
             step = Integer.parseInt(commonSerial.getStep());
         }
+
+        if(commonSerial.getPrefix()!=null && !"".equalsIgnoreCase(commonSerial.getPrefix())){
+            prefix = commonSerial.getPrefix();
+        }
         Long begin= Long.parseLong(makeChar(length));
         if (autoSerial==null){
             for (int i=1;i<=size;i++){
@@ -115,10 +121,35 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
 
     }
     private String makeChar(int num){
-        StringBuilder chars = new StringBuilder("1");
-         for (int z=1;z<=num-1;z++){
-            chars.append(0);
-         }
+        StringBuilder chars = new StringBuilder();
+        Date now = new Date();
+        int fg=0;
+        if(prefix!=null && !"".equals(prefix)){
+            if (prefix.equalsIgnoreCase("yyyymmdd")){
+                SimpleDateFormat myFmt1=new SimpleDateFormat("yyyyMMdd");
+                chars.append(myFmt1.format(now));
+                fg = myFmt1.format(now).length();
+            }else if(prefix.equalsIgnoreCase("yymm")){
+                SimpleDateFormat myFmt1=new SimpleDateFormat("yyMM");
+                chars.append(myFmt1.format(now));
+                fg = myFmt1.format(now).length();
+            }else if(prefix.equalsIgnoreCase("yyyymmddhhmmss")){
+                SimpleDateFormat myFmt1=new SimpleDateFormat("yyyyMMddHHmmss");
+                chars.append(myFmt1.format(now));
+                fg = myFmt1.format(now).length();
+            }
+
+            for (int k=1;k<=num-fg;k++){
+                chars.append(0);
+            }
+        }else{
+            chars.append("1");
+            for (int z=1;z<=num-1;z++){
+                chars.append(0);
+            }
+        }
+
+
         return chars.toString();
     }
     /*@Override

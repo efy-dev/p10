@@ -80,8 +80,8 @@
       <div class="des">
         <ul>
           <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${productModel.name}</span></li>
-          <li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>1200×350×7000</span></li>
-          <li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>
+          <%--<li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span></span></li>--%>
+          <%--<li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>--%>
           <li><strong>制作方式：</strong><span>手工</span></li>
           <li><strong>所属项目：</strong><span>平遥推光漆器</span></li>
           <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
@@ -196,7 +196,7 @@
           </div>
           <div class="img"><img src="../shop2015/upload/details-2.jpg" alt=""/></div>
           <div class="txt">
-           ${productModel.product.master.ProductDescription}
+           ${productModel.product.master.name}
           </div>
         </div>
       </div>

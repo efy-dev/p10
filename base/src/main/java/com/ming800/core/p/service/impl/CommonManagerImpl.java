@@ -170,6 +170,7 @@ public class CommonManagerImpl implements CommonManager {
                     commonSerial.setGroup(group);
                     commonSerial.setNote(note);
                     commonSerial.setAutoserialModel(autoserialModel);
+                    commonSerial.setPrefix(prefix);
                     commonSerial.setCacheSize(cacheSize);
                     commonSerial.setLength(length);
                     commonSerial.setStep(step);

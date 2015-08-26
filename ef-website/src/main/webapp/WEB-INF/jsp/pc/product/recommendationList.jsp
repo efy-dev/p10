@@ -39,7 +39,8 @@
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>
+    <div class="img"><a href="" target="_blank" title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.product.master.fullName}.${productModel.name}</h1>
       <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
@@ -47,7 +48,7 @@
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
         <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
-        <a class="buy" href="" title="立即购买">立即购买</a>
+        <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>"} title="立即购买">立即购买</a>
       </div>
     </div>
   </div>
@@ -65,9 +66,9 @@
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
           <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
-            <img class="imgfilter" <%--src="http://tenant.efeiyi.com/${productModel.product.picture_url}@!tenant-pc-tenant-list"--%> alt="">
+            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
             <p class="wh name">${productModel.name}</p>
-            <p class="wh price">${productModel.price}</p>
+            <p class="wh price">￥${productModel.price}</p>
           </a>
         </li>
         </c:forEach>
