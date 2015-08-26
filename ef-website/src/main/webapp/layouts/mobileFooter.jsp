@@ -10,7 +10,6 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/wap/assets/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
