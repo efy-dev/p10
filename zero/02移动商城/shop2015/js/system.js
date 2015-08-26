@@ -1,6 +1,7 @@
 $(function(){
     //头部无logoA
     $('#menu').click(function(){
+        $(this).find('.line').toggleClass('active');
         $('.menu-list').slideToggle('fast');
     });
     //购物车

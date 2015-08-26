@@ -25,6 +25,8 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .custom-header .chevron-left:before {content:'';width:12px;height:12px;border-left:1px solid #000;border-top:1px solid #000;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);display:inline-block; margin-left:10px;}
 .custom-header .chevron-right i.line {width:16px;padding:5px 0;border-top:1px #000 solid;border-bottom:1px #000 solid; display:inline-block; margin-right:10px;}
 .custom-header .chevron-right i.line:before {content:'';width:16px;height:1px;background:#000; float:left;}
+.custom-header .chevron-right i.active {border-top:1px #ccc solid;border-bottom:1px #ccc solid;}
+.custom-header .chevron-right i.active:before { background: #ccc;}
 .custom-header .menu-list {width:100px;line-height:34px;text-align:center;border:1px #000 solid; position:absolute;top:53px; right:15px; background:#fff; display:none;}
 .custom-header .menu-list ul {border-right:1px #000 solid;border-bottom:1px #000 solid;}
 .custom-header .menu-list li a {width:100%;font-size:1.4rem; color:#000;float:left;border-bottom:1px #000 solid; border-right:1px #000 solid;}
@@ -48,6 +50,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 /*--//End--toolbar*/
 .box-hd .title {width:100%;padding:20px 0;font-size:18px;text-align:center;float:left;}
 .box-hd .title strong {width:20px;line-height:20px;display:inline-block; font-weight:normal; font-style:italic;}
+.box-hd .title2 strong {width:100%; padding:20px 0;text-align: center; float: left; font-size:16px;}
 .box-hd .ul-index-list {width:100%; float:left;}
 .box-hd .ul-index-list li {width:100%;float:left; margin-bottom:1px;}
 .box-hd .ul-index-list li img {width:100%;}
