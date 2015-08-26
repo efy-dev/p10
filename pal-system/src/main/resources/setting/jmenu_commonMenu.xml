@@ -4,78 +4,81 @@
     <jnode id="palManager" url="/main.do?jnodeId=palManager" text_zh_CN="成品宝管理">
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="查询管理">
             <jnode url="/basic/xm.do?qm=plistLabelCheckRecord_default"  access="admin,manager" text_zh_CN="防伪查询记录">
-                <match url="plistLabelCheckRecord_default"/>
-                <match url="listLabelCheckRecord_default"/>
+                <match url="/basic/xm.do?qm=plistLabelCheckRecord_default"/>
+                <match url="/basic/xm.do?qm=viewLabel&amp;record=record"/>
+                <match url="/basic/xm.do?qm=viewLabelBatch&amp;record=record"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;record=record"/>
+                <match url="/basic/xm.do?qm=viewTenant&amp;record=record"/>
             </jnode>
         </jnode>
 
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="标签管理">
+
             <jnode url="/basic/xm.do?qm=plistPurchaseOrder_default" access="admin,manager" text_zh_CN="订单管理">
-                <match url="plistPurchaseOrder_default"/>
-                <match url="listPurchaseOrder_default"/>
-                <match url="formPurchaseOrder"/>
-                <match url="viewPurchaseOrder"/>
-                <match url="removePurchaseOrder"/>
-                <match url="saveOrUpdatePurchaseOrder"/>
-                <!--<match url="plistLabel_all"/>-->
-                <!--<match url="plistLabel_default"/>-->
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_default"/>
+                <match url="redirect:/basic/xm.do?qm=plistPurchaseOrder_default"/>
+                <match url="/basic/xm.do?qm=formPurchaseOrder&amp;order=order"/>
+                <match url="/basic/xm.do?qm=removePurchaseOrder&amp;order=remove"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;order=view"/>
+                <match url="redirect:/basic/xm.do?qm=viewPurchaseOrder&amp;order=view"/>
+                <match url="/purchaseOrderPayment/newPurchaseOrderPayment.do?order=payment"/>
+                <match url="/basic/xm.do?qm=formPurchaseOrderLabel&amp;order=orderLabel"/>
+                <match url="/basic/xm.do?qm=formPurchaseOrderPayment&amp;order=payment"/>
+                <match url="/basic/xm.do?qm=plistLabel_orderLabel"/>
             </jnode>
+
             <jnode url="/basic/xm.do?qm=plistLabel_default" access="admin,manager" text_zh_CN="标签管理">
-                <match url="plistLabel_default"/>
-                <match url="listLabel_default"/>
-                <!--<match url="formLabelBatch"/>-->
-                <match url="viewLabel"/>
-                <!--<match url="removeLabelBatch"/>-->
-                <!--<match url="saveOrUpdateLabelBatch"/>-->
-                <!--<match url="plistLabel_all"/>-->
-                <!--<match url="plistLabel_default"/>-->
+                <match url="/basic/xm.do?qm=plistLabel_default"/>
+                <match url="/basic/xm.do?qm=plistLabelCheckRecord_label"/>
+                <match url="/basic/xm.do?qm=viewLabel&amp;label=view"/>
             </jnode>
+
             <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin,manager" text_zh_CN="标签批次管理">
-                <match url="plistLabelBatch_default"/>
-                <match url="listLabelBatch_default"/>
-                <match url="formLabelBatch"/>
-                <match url="viewLabelBatch"/>
-                <match url="removeLabelBatch"/>
-                <match url="saveOrUpdateLabelBatch"/>
+                <match url="/basic/xm.do?qm=plistLabelBatch_default"/>
+                <match url="/basic/xm.do?qm=formLabelBatch"/>
+                <match url="/basic/xm.do?qm=viewLabelBatch&amp;view=view"/>
+                <match url="/basic/xm.do?qm=plistLabel_batchLabel"/>
             </jnode>
         </jnode>
 
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="商品管理">
-                <match url="plistProduct_default"/>
-                <!--<match url="listProduct_default"/>-->
-                <!--<match url="formProduct"/>-->
-                <!--<match url="viewProduct"/>-->
-                <!--<match url="removeProduct"/>-->
-                <!--<match url="saveOrUpdateProduct"/>-->
+                <match url="/basic/xm.do?qm=plistProduct_default"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;product=product"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;product=product"/>
+                <match url="/basic/xm.do?qm=plistLabel_productLabel"/>
+                <match url="/product/editProductSeriesProperty.do"/>
             </jnode>
+
             <jnode url="/basic/xm.do?qm=plistProductSeries_default"  access="admin,manager" text_zh_CN="非遗项目">
-                <match url="plistProductSeries_default"/>
-                <match url="listProductSeries_default"/>
-                <match url="formProductSeries"/>
-                <match url="viewProductSeries"/>
-                <match url="removeProductSeries"/>
-                <match url="saveOrUpdateProductSeries"/>
+                <match url="/basic/xm.do?qm=plistProductSeries_default"/>
+                <match url="/basic/xm.do?qm=formProductSeries&amp;ps=ps"/>
+                <match url="/basic/xm.do?qm=viewProductSeries&amp;ps=ps"/>
+                <match url="/productSeriesPropertyName/newPropertyNameList.do"/>
+                <match url="/basic/xm.do?qm=formTenantProductSeries"/>
+                <match url="/basic/xm.do?qm=viewTenantProductSeries"/>
+                <match url="/basic/xm.do?qm=viewTenant&amp;ps=ps"/>
             </jnode>
         </jnode>
 
         <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="系统管理">
             <jnode url="/basic/xm.do?qm=plistTenant_default" access="admin" text_zh_CN="商户管理">
-                <match url="plistTenant_default"/>
-                <match url="listTenant_default"/>
-                <match url="formTenant"/>
-                <match url="viewTenant"/>
-                <match url="removeTenant"/>
-                <match url="saveOrUpdateTenant"/>
-                <!--<match url="formTenantSource"/>-->
+                <match url="/basic/xm.do?qm=plistTenant_default"/>
+                <match url="/basic/xm.do?qm=formTenant&amp;tenant=tenant"/>
+                <match url="/basic/xm.do?qm=viewTenant&amp;tenant=tenant"/>
+                <match url="/tenantCertification/newTenantCertification.do"/>
+                <match url="/basic/xm.do?qm=viewProductSeries&amp;tenant=tenant"/>
+                <match url="/basic/xm.do?qm=formTenantCertification"/>
+                <match url="/basic/xm.do?qm=viewTenantCertification"/>
             </jnode>
+
             <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">
-                <match url="plistUser_default"/>
-                <match url="listUser_default"/>
-                <match url="formUser"/>
-                <match url="viewUser"/>
-                <match url="removeUser"/>
-                <match url="saveOrUpdateUser"/>
+                <match url="/basic/xm.do?qm=plistUser_default"/>
+                <!--<match url="listUser_default"/>-->
+                <match url="/basic/xm.do?qm=formUser"/>
+                <match url="/basic/xm.do?qm=viewUser&amp;user=user"/>
+                <!--<match url="removeUser"/>-->
+                <!--<match url="saveOrUpdateUser"/>-->
             </jnode>
         </jnode>
     </jnode>

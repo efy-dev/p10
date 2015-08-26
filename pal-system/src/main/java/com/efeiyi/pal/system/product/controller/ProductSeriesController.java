@@ -57,7 +57,7 @@ public class ProductSeriesController {
 //        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
 
 //        String resultPage = "/productSeriesPropertyName/productSeriesPropertyNameListForm";
-        String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&id=" + productSeries.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
         return new ModelAndView(resultPage, modelMap);
     }
 

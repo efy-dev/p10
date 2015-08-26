@@ -19,10 +19,10 @@ import java.io.Serializable;
  * 企业商家
  */
 
-//@Entity
-//@DiscriminatorValue(value="11")
-//@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-//public class EnterpriseTenant extends Tenant implements Serializable {
-//
-//
-//}
+@Entity
+@Table(name = "tenant_enterprise")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class EnterpriseTenant extends Tenant implements Serializable {
+
+
+}

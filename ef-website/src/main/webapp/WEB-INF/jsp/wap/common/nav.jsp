@@ -12,11 +12,11 @@
 </head>
 <body>
 <c:if test="${sign != null and sign == '000'}">
-  <header class="am-header custom-header">
+  <header class="am-header custom-header index-header">
     <div class="logo"><a class="icon" href="" title="e飞蚁"></a></div>
     <!-- //End--logo-->
     <div class="am-header-right am-header-nav">
-      <a href="#cart-link" class="icon icon-cart"><span><em>19</em></span></a>
+      <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em id="cartAmount">0</em></span></a>
       <a href="#user-link" class="icon icon-user"></a>
     </div>
   </header>
@@ -24,5 +24,15 @@
 <c:if test="${sign == null}">
 
 </c:if>
+<script>
+
+  $().ready(function () {
+    var success = function(data){
+      $("#cartAmount").html(data);
+    }
+    ajaxRequest("<c:url value="/cart/cartAmount.do"/>",{},success,function(){},"post");
+  });
+
+</script>
 </body>
 </html>

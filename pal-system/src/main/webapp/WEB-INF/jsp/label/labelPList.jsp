@@ -43,12 +43,12 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_default&conditions=label.id:${label.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${label.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs">查询记录</button>
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${label.id}'/>">${label.serial}</a></td>
+                <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&label=view&id=${label.id}'/>">${label.serial}</a></td>
                 <td>${label.code}</td>
                 <td>${label.labelBatch.setting}</td>
                 <td>
@@ -74,7 +74,8 @@
     </table>
 
     <div style="clear: both">
-        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+        <c:url value="/basic/xm.do" var="url" />
+        <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>

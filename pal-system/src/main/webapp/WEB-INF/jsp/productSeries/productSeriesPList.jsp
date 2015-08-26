@@ -18,7 +18,7 @@
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&ps=ps"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
            value="新建非遗项目" />
@@ -36,14 +36,14 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&id=${productSeries.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&ps=ps&id=${productSeries.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                             <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductSeries&id=${productSeries.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&id=${productSeries.id}"/>">${productSeries.name}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&ps=ps&ps=ps&id=${productSeries.id}"/>">${productSeries.name}</a></td>
                 <td>${productSeries.serial}</td>
             </tr>
         </c:forEach>
