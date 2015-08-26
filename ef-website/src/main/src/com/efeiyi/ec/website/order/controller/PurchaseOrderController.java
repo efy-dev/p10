@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -357,6 +358,7 @@ public class PurchaseOrderController extends BaseController {
                     cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());
                 }
             }
+            request.getSession().removeAttribute("cart");
             cart = (Cart) baseManager.getObject(Cart.class.getName(), realCart.getId());
         } else {
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
@@ -498,6 +500,8 @@ public class PurchaseOrderController extends BaseController {
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         Cart realCart = (Cart) list.get(0);
+        realCart.setTotalPrice(new BigDecimal(0));
+        baseManager.saveOrUpdate(Cart.class.getName(),realCart);
         for (CartProduct cartProductTemp : realCart.getCartProductList()) {
             baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
         }
