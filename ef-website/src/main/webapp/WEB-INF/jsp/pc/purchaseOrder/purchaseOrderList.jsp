@@ -12,8 +12,7 @@
   <title>个人中心</title>
   <script>
     function func(o){
-      var status = $(o).next().val();
-      window.location.href="<c:url value="/order/myEfeiyi/list.do?"/>"+status;
+      window.location.href="<c:url value="/order/myEfeiyi/list.do?status="/>"+o;
     }
   </script>
 </head>
@@ -50,19 +49,18 @@
 </div>
 <div class="list-pro wh1" id="orderNum">
 <c:forEach items="${orderList}" var="order">
-  <c:if test="${order.subPurchaseOrder !=null && order.subPurchaseOrder.size() >0}">
-    <c:forEach  items="${order.subPurchaseOrder}" var="subOrder">
+  <c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() == 0}">
       <table class="list-pro-table">
         <tr>
           <th colspan="6">
             <span>${order.createDatetime}</span>
-            <span>订单号：<strong>${subOrder.serial}</strong></span>
-            <span>${subOrder.tenant.name}</span>
+            <span>订单号：<strong>${order.serial}</strong></span>
+            <span>${order.tenant.name}</span>
           </th>
         </tr>
         <tr>
           <td width="618">
-            <c:forEach  items="${subOrder.purchaseOrderProductList}" var="op">
+            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
               <table class="item">
                 <td width="237">
                   <div class="cols1">
@@ -73,102 +71,50 @@
                     </div>
                   </div>
                 </td>
-                <td width="174">￥${subOrder.total}</td>
+                <td width="174">￥${order.total}</td>
                 <td width="107">x<span>${op.purchaseAmount}</span></td>
                 <td width="100">
-                  <p>￥${subOrder.total * op.purchaseAmount}</p>
-                  ${order.payWay}
+                  <p>￥${order.total * op.purchaseAmount}</p>
+                  <a href="#"><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/></a>
                 </td>
               </table>
             </c:forEach>
           </td>
           <td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">
             <p>
-              <a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${subOrder.orderStatus}" type="normal"/></a>
+              <a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></a>
             </p>
           </td>
-          <c:if test="${subOrder.orderStatus == 1}">
+          <c:if test="${order.orderStatus == 1}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
-            <p><a href="#">付款</a></p>
-            <p><a href="#">取消订单</a></p>
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+            <p><a href="<c:url value=""/>">付款</a></p>
+            <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">取消订单</a></p>
           </td>
           </c:if>
-          <c:if test="${subOrder.orderStatus == 5}">
+          <c:if test="${order.orderStatus == 5}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
           </td>
           </c:if>
-          <c:if test="${subOrder.orderStatus == 13}">
+          <c:if test="${order.orderStatus == 13}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${subOrder.id}"/>">查看</a></p>
-            <p><a href="#">删除</a></p>
+            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+            <p><a href="<c:url value="/order/deleteOrder/${order.id}"/>">删除</a></p>
           </td>
+          </c:if>
+          <c:if test="${order.orderStatus == 17}">
+            <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+              <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+            </td>
           </c:if>
         </tr>
       </table>
-    </c:forEach>
-  </c:if>
-  <c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() == 0}">
-    <table class="list-pro-table">
-      <tr>
-        <th colspan="6">
-          <span>${order.createDatetime}</span>
-          <span>订单号：<strong>${order.serial}</strong></span>
-          <span>${order.tenant.name}</span>
-        </th>
-      </tr>
-      <tr>
-        <td width="618">
-          <c:forEach items="${order.purchaseOrderProductList}" var="op">
-            <table class="item">
-              <td width="237">
-                <div class="cols1">
-                  <img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">
-                  <div class="info">
-                    <p><a href="#">${op.productModel.product.category.name}</a></p>
-                    <p><a href="#">${op.productModel.product.name}</a></p>
-                  </div>
-                </div>
-              </td>
-              <td width="174">￥${order.total}</td>
-              <td width="107">x<span>${op.purchaseAmount}</span></td>
-              <td width="100">
-                <p>￥${order.total * op.purchaseAmount}</p>
-                ${order.payWay}
-              </td>
-            </table>
-          </c:forEach>
-        </td>
-        <td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">
-          <p>
-            <a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></a>
-          </p>
-        </td>
-        <c:if test="${order.orderStatus == 1}">
-          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-            <p><a href="#">付款</a></p>
-            <p><a href="#">取消订单</a></p>
-          </td>
-        </c:if>
-        <c:if test="${order.orderStatus == 5}">
-          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-          </td>
-        </c:if>
-        <c:if test="${order.orderStatus == 13}">
-          <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
-            <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-            <p><a href="#">删除</a></p>
-          </td>
-        </c:if>
-      </tr>
-    </table>
   </c:if>
 </c:forEach>
 </div>
 </div>
+
 </div>
 
 <style>
@@ -190,5 +136,11 @@
 <![endif]-->
 <script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/order/myEfeiyi/list.do">
+  <ming800:pcPageParam name="conditions"
+                       value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
+  <ming800:pcPageParam name="sort"
+                       value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+</ming800:pcPageList>
 </body>
 </html>

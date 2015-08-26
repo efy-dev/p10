@@ -18,16 +18,9 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建用户</strong> / <small>New User</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑用户信息</strong> / <small>Edit User</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">用户信息</strong>
+    </div>
 </div>
 <hr/>
 
@@ -57,7 +50,6 @@
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <%--<input type="text" name="tenant.id" id="tenant.id" placeholder="商户名称" value="${object.tenant.id}">--%>
                 <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')" value="${object.tenant.name}">
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
@@ -70,6 +62,5 @@
     </form>
 </div>
 
-<%--<div class="am-dimmer" data-am-dimmer="" style="display: none;"></div>--%>
 </body>
 </html>

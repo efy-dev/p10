@@ -33,7 +33,7 @@
         <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 
         <div style="text-align: left" >
-            <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
+            <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&form=newProduct&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
         </div>
         <div class="admin-content">
             <div class="am-g">

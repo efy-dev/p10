@@ -1,11 +1,8 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ming800.core.p.model.ObjectRecommended;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,12 +20,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "tenant")
+@DiscriminatorColumn(name = "tenant_type",discriminatorType = DiscriminatorType.STRING)
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Tenant extends BigUser implements Serializable {
 
     private String name;//名称标识
     private String content; // 简介(长)
     private String logoUrl;
+    private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
     private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
@@ -73,10 +72,6 @@ public class Tenant extends BigUser implements Serializable {
         this.content = content;
     }
 
-
-
-
-
     @Column(name = "logo_url")
     public String getLogoUrl() {
         return logoUrl;
@@ -94,5 +89,14 @@ public class Tenant extends BigUser implements Serializable {
 
     public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
         this.tenantRecommendedList = tenantRecommendedList;
+    }
+
+    @Column(name = "tenant_type")
+    public String getTenantType() {
+        return tenantType;
+    }
+
+    public void setTenantType(String tenantType) {
+        this.tenantType = tenantType;
     }
 }

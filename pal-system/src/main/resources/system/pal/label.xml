@@ -4,8 +4,16 @@
 
     <entities>
         <entity name="PCLabelBatch" label="标签批次列表"  model="com.efeiyi.pal.label.model.LabelBatch">
+            <fields>
+                <field name="status" label="状态" inputType="select">
+                    <statusType fieldName="status">
+                        <item label="已删除" value="0"/>
+                        <item label="待生成" value="1"/>
+                        <item label="已生成" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
-
                 <do name="plistLabelBatch" access="" label="标签批次分页列表" result="/labelBatch/labelBatchPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
@@ -31,7 +39,6 @@
                         </fields>
                     </page>
                 </do>
-
             </does>
         </entity>
 
@@ -41,6 +48,8 @@
                     <statusType fieldName="status">
                         <item label="未分配" value="1"/>
                         <item label="已分配" value="2"/>
+                        <item label="已激活" value="3"/>
+                        <item label="已作废" value="4"/>
                         <item label="已查询" value="9"/>
                     </statusType>
                 </field>
@@ -48,7 +57,7 @@
 
             <does>
                 <do name="plistLabel" access="" label="标签分页列表" result="/label/labelPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:asc">
+                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="serial" label="查找" type="auto" orderBy="serial:asc">

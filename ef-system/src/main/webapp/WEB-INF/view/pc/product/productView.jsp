@@ -48,7 +48,7 @@
                         <c:if test="${productPicture.status == '2'}">
                             <dl style="margin-top: 6px; float: left" id="${productPicture.id}" >
                                 <dt>
-                                    <img width="80%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="商品主图片" />
+                                    <img width="80%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model" alt="商品主图片" />
                                 </dt>
                                 <dd>
                                     <a  href="#" onclick="removePicture(this,'${productPicture.id}')">删除</a>
@@ -71,7 +71,7 @@
                         <c:if test="${productPicture.status == '3'}">
                             <dl style="margin-top: 6px; float: left" id="${productPicture.id}">
                                 <dt>
-                                    <img width="80%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="商品主图片" />
+                                    <img width="80%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model" alt="商品主图片" />
                                 </dt>
                                 <dd>
                                     <a  href="#" onclick="removePicture(this,'${productPicture.id}')">删除</a>
@@ -137,10 +137,10 @@
                                             </a>
                                         </td>
                                         <td class="am-text-center">
-                                            http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo
+                                            http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model
                                         </td>
                                         <td class="am-text-center">
-                                            <img style="margin-left:2px;" width="18%;" src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" />
+                                            <img style="margin-left:2px;" width="18%;" src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model" />
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -181,7 +181,7 @@
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
-                var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!tenant-manage-photo";
+                var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 ///图片信息
                 var tr = '<tr id = "'+pictureId+'">' +
                         ' <td class="am-text-center">  ' +
@@ -234,7 +234,7 @@
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
-                var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!tenant-manage-photo";
+                var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 var tr = '<tr id = "'+pictureId+'">' +
                         ' <td class="am-text-center">  ' +
                         '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removePicture(this,\''+pictureId+'\')"  href="#">' +

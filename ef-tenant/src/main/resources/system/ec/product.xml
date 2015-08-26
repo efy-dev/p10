@@ -18,6 +18,7 @@
                     result="/product/productPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                 </do>
 

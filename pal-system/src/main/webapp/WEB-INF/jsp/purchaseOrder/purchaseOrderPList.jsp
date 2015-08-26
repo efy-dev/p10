@@ -29,7 +29,7 @@
             <td>操作</td>
             <td>订单编号</td>
             <td>商户名称</td>
-            <td>用户</td>
+            <%--<td>用户</td>--%>
             <td>状态</td>
             <td>创建时间</td>
         </tr>
@@ -48,17 +48,9 @@
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${order.id}"/>">${order.serial}</a></td>
                 <td>${order.tenant.name}</td>
-                <td>${order.user.name}</td>
+                <%--<td>${order.user.name}</td>--%>
                 <td>
-                    <c:if test="${order.status == '1'}">
-                        <font color="green">未支付</font>
-                    </c:if>
-                    <c:if test="${order.status == '2'}">
-                        <font color="blue">已支付</font>
-                    </c:if>
-                    <c:if test="${order.status == '9'}">
-                        <font color="red">已发货</font>
-                    </c:if>
+                    <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${order.status}" type="normal" />
                 </td>
                 <td><fmt:formatDate value="${order.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
