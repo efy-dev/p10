@@ -7,12 +7,15 @@ import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/24.
@@ -26,7 +29,7 @@ public class TenantCertificationImgController {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/saveCertificationImg.do")
-    public ModelAndView saveCertificationImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
+    public String saveCertificationImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
 
         TenantCertificationImg certificationImg = new TenantCertificationImg();
 
@@ -37,12 +40,23 @@ public class TenantCertificationImgController {
         TenantCertification tenantCertification = (TenantCertification)baseManager.getObject(TenantCertification.class.getName(), certificationId);
         certificationImg.setTenantCertification(tenantCertification);
         certificationImg.setStatus("1");
-        certificationImg = upLoadImg(multipartRequest, certificationImg);
-        baseManager.saveOrUpdate(TenantCertificationImg.class.getName(), certificationImg);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenantCertification&id=" + tenantCertification.getId();
+        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "" ;
+        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            url = "tenantCertification/" + identify + ".jpg";
+            aliOssUploadManager.uploadFile(mf, "315pal", url);
+            certificationImg.setImgUrl(url);
+            baseManager.saveOrUpdate(TenantCertificationImg.class.getName(), certificationImg);
 
-        return new ModelAndView(resultPage);
+        }
+        System.out.print(url);
+        return url;
     }
 
     @RequestMapping("/removeCertificationImg.do")

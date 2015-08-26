@@ -65,8 +65,7 @@
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">非遗项目 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
-                <input id="productSeries_idName" placeholder="非遗项目" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null)" required>
-                <input id="productSeries_idName" placeholder="商品系列" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null,'<%=path%>')" required>
+                <input id="productSeries_idName" placeholder="非遗项目" onclick="m8uDialog.openDialog('productSeries_id','productSeries_idName','productSeries', null,'<%=path%>')" required>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id">
             </div>
         </div>
