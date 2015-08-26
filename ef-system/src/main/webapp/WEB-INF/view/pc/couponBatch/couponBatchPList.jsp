@@ -35,7 +35,7 @@
                 data:{id:couponBatchId,amount:amount},
                 success:function(data){
                     $(obj).find("span").text("查看优惠券");
-                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
+                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
                     $(obj).attr("onclick","");
                 }
             });

@@ -240,3 +240,8 @@ CREATE TABLE `tenant_personal` (
 
 
 
+----------------------------------------------
+--2015-8-26 曹廷杰 修改优惠券和优惠券批次 表名 未执行
+--------------------------------------
+ALTER TABLE coupon RENAME TO purchase_coupon;
+ALTER TABLE coupon_batch RENAME TO purchase_coupon_batch;

@@ -64,7 +64,7 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">
+                    <img src="<c:url value="${op.productModel.product.picture_url}"/>" alt="">
                     <div class="info">
                       <p><a href="#">${op.productModel.product.category.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>
@@ -88,7 +88,7 @@
           <c:if test="${order.orderStatus == 1}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
             <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-            <p><a href="<c:url value=""/>">付款</a></p>
+            <p><a href="<c:url value="/order/pay/${order.id}"/>">付款</a></p>
             <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">取消订单</a></p>
           </td>
           </c:if>
