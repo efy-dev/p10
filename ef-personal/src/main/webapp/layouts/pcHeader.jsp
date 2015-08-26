@@ -6,7 +6,7 @@
 <title id="pages"></title>
 <div id="header">
     <h1><img src="<c:url value="/scripts/assets/images/logo1.gif"/>" alt="vlogo" class="logov"></h1>
-    <div class="printing" style="width: 350px" id="tenantLevel">非物质文化遗产传承人<span>  [<a href="#" id="projectName">${master.getProjectName()}</a>]</span></div>
+    <div class="printing" style="width: 350px" id="tenantLevel">非物质文化遗产传承人<span>  [${master.getProjectName()}]</span></div>
     <ul class="register">
         <li class="register-left"><a href="http://www.efeiyi.com" target="_blank">e飞蚁首页</a></li>
         <li class="register-page"><a href="http://master.efeiyi.com/index" target="_blank">传承人官网</a></li>
@@ -49,7 +49,7 @@
             if(data.level=="4"){
                 levelName = "县级";
             }
-            $("#tenantLevel").html(levelName+'非物质文化遗产传承人<span>  [<a href="#" id="projectName">'+data.projectName+'</a>]</span>');
+            $("#tenantLevel").html(levelName+'非物质文化遗产传承人<span>  ['+data.projectName+']</span>');
             var msg = "";
             if(${pageMsg == 1}){
                 msg += "首页";
