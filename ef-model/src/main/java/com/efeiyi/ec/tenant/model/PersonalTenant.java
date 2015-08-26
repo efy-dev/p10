@@ -20,10 +20,10 @@ import java.util.List;
  *
  * 个人
  */
-@Entity
-@DiscriminatorValue(value = "13")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class PersonalTenant extends Tenant implements Serializable {
-
-
-}
+//@Entity
+//@DiscriminatorValue(value = "13")
+//@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+//public class PersonalTenant extends Tenant implements Serializable {
+//
+//
+//}
