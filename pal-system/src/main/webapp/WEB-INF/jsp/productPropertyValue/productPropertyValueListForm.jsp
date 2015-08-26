@@ -27,11 +27,12 @@
         <input type="hidden" name="product.id" value="${product.id}"/>
         <input type="hidden" name="count" id="count" value="${PSPNListSize}">
         <div  id="pNameForm">
-            <% int i = 1;%>
+            <% int i = 1; %>
             <c:forEach items="${PSPNList}" var="productSeriesPropertyName">
+                <%int tag = 0;%>
                 <input type="hidden" name="propertyNameId<%=i %>" value="${productSeriesPropertyName.id}">
                 <div class="am-form-group">
-                    <label name="value<%=i %>" for="value<%=i %>" class="am-u-sm-3 am-form-label">${productSeriesPropertyName.name} <small style="color: red">*</small></label>
+                    <label name="value<%=i %>" for="value<%=i %>" class="am-u-sm-3 am-form-label">${productSeriesPropertyName.name} <small>*</small></label>
                     <div class="am-u-sm-9">
 
                         <c:if test="${empty PPVList}">
@@ -40,10 +41,19 @@
                         </c:if>
                         <c:forEach items="${PPVList}" var="productPropertyValue">
                             <c:if test="${ productPropertyValue.productSeriesPropertyName.id == productSeriesPropertyName.id}">
+                                <% tag = 1; %>
                                 <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>" value="${productPropertyValue.id}">
                                 <input type="text" name="value<%=i %>" id="value<%=i %>" value="${productPropertyValue.value}" required>
                             </c:if>
                         </c:forEach>
+                        <%
+                            if (tag == 0){
+                        %>
+                            <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>">
+                            <input type="text" name="value<%=i %>" id="value<%=i %>" placeholder="属性值" required>
+                        <%
+                            }
+                        %>
 
                     </div>
                 </div>

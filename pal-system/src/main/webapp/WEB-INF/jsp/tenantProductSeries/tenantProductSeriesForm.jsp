@@ -47,8 +47,7 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="productSeriesName" for="productSeriesName" class="am-u-sm-3 am-form-label">非遗项目名称
-                <small style="color: red">*</small>
+            <label name="productSeriesName" for="productSeriesName" class="am-u-sm-3 am-form-label">非遗项目名称<small>*</small>
             </label>
 
             <div class="am-u-sm-9">
@@ -59,8 +58,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label">商户名称
-                <small style="color: red">*</small>
+            <label name="tenantName" for="tenantName" class="am-u-sm-3 am-form-label">商户名称<small>*</small>
             </label>
 
             <div class="am-u-sm-9">
@@ -71,8 +69,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="craft" for="craft" class="am-u-sm-3 am-form-label">制作工艺
-                <small style="color: red">*</small>
+            <label name="craft" for="craft" class="am-u-sm-3 am-form-label">制作工艺<small>*</small>
             </label>
 
             <div class="am-u-sm-9">
@@ -81,8 +78,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="region" for="region" class="am-u-sm-3 am-form-label">创作地域
-                <small style="color: red">*</small>
+            <label name="region" for="region" class="am-u-sm-3 am-form-label">创作地域<small>*</small>
             </label>
 
             <div class="am-u-sm-9">
@@ -91,8 +87,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="tenantCertification_id" for="tenantCertification_idName" class="am-u-sm-3 am-form-label">认证信息
-                <small style="color: red">*</small>
+            <label name="tenantCertification_id" for="tenantCertification_idName" class="am-u-sm-3 am-form-label">认证信息<small>*</small>
             </label>
 
             <div class="am-u-sm-9">

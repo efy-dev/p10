@@ -1,14 +1,9 @@
 package com.efeiyi.pal.system.product.controller;
 
-import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.ProductSeriesPropertyName;
 import com.efeiyi.pal.product.model.TenantProductSeries;
-import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
-import com.ming800.core.base.util.XDoUtil;
-import com.ming800.core.does.model.Do;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -34,8 +28,6 @@ public class ProductSeriesController {
     private AutoSerialManager autoSerialManager;
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
-    private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
-    private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
     @RequestMapping("/saveProductSeries.do")
     public ModelAndView saveProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
@@ -53,10 +45,6 @@ public class ProductSeriesController {
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);
 
         modelMap.put("productSeries", productSeries);
-//        modelMap.put("PSPNListSize", productSeries.getProductSeriesPropertyNameList().size());
-//        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
-
-//        String resultPage = "/productSeriesPropertyName/productSeriesPropertyNameListForm";
         String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
         return new ModelAndView(resultPage, modelMap);
     }
@@ -68,18 +56,15 @@ public class ProductSeriesController {
      * @param type
      * @return
      */
-    private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request, String type){
-//        String tenantId = request.getParameter("tenant.id");
-//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+    private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request, String type) throws Exception {
 
         if (type.equals("new")){
             List<ProductSeriesPropertyName> productSeriesPropertyNameList = new ArrayList();
             productSeries.setProductSeriesPropertyNameList(productSeriesPropertyNameList);
-//            productSeries.setTenantSet(new HashSet<Tenant>());
             productSeries.setTenantProductSeriesList(new ArrayList<TenantProductSeries>());
+            String serial = autoSerialManager.nextSerial("serial");
+            productSeries.setSerial(serial);
         }
-
-//        productSeries.setTenant(tenant);
 
         return productSeries;
     }
@@ -90,15 +75,11 @@ public class ProductSeriesController {
      * @param request
      * @return
      */
-    private ProductSeries setProductSeriesProperty(ProductSeries productSeries, HttpServletRequest request) throws Exception{
+    private ProductSeries setProductSeriesProperty(ProductSeries productSeries, HttpServletRequest request) {
         String name = request.getParameter("name");
-//        String serial = request.getParameter("serial");
         String status = request.getParameter("status");
 
-        String serial = autoSerialManager.nextSerial("serial");
-
         productSeries.setName(name);
-        productSeries.setSerial(serial);
         productSeries.setStatus(status);
 
         return productSeries;

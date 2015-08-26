@@ -34,7 +34,7 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}" required>
             </div>

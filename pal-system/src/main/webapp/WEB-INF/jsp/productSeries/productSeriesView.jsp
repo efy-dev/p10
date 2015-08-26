@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -26,7 +27,7 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -42,15 +43,15 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>非遗项目名称：</td>
+            <td>非遗项目名称</td>
             <td>${object.name}</td>
         </tr>
         <tr>
-            <td>非遗项目编号：</td>
+            <td>非遗项目编号</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td>状态：</td>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCProductSeries.status"
                                 checkedValue="${object.status}" type="normal"/>
@@ -122,7 +123,7 @@
                     <td>
                         <c:forEach items="${tenantProductSeries.imgList}" var="img">
                             <c:if test="${not empty img.imgUrl}">
-                                <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
+                                <img src="<%=imgBasePath %>${img.imgUrl}<%=imgListCss %>"/>
                             </c:if>
                         </c:forEach>
                     </td>

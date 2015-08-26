@@ -43,19 +43,19 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td align="right">序列号：</td>
+            <td>序列号</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td align="right">防伪码：</td>
+            <td>防伪码</td>
             <td>${object.code}</td>
         </tr>
         <tr>
-            <td align="right">所属批次：</td>
+            <td>所属批次</td>
             <td>${object.labelBatch.setting}</td>
         </tr>
         <tr>
-            <td align="right">所属商品：</td>
+            <td>所属商品</td>
             <td>
                 <c:if test="${object.purchaseOrderLabel != null && not empty object.purchaseOrderLabel}">
                     <c:if test="${object.purchaseOrderLabel.product != null && not empty object.purchaseOrderLabel.product}">
@@ -65,7 +65,7 @@
             </td>
         </tr>
         <tr>
-            <td align="right">商户名称：</td>
+            <td>商户名称</td>
             <td>
                 <c:if test="${!empty object.seller && object.seller != ''}">
                     ${object.seller.name}
@@ -73,15 +73,15 @@
             </td>
         </tr>
         <tr>
-            <td align="right">第一次查询时间：</td>
+            <td>第一次查询时间</td>
             <td><fmt:formatDate value="${object.firstCheckDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
         </tr>
         <tr>
-            <td align="right">最近一次查询时间：</td>
+            <td>最近一次查询时间</td>
             <td><fmt:formatDate value="${object.lastCheckDateTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
         </tr>
         <tr>
-            <td align="right">查询次数：</td>
+            <td>查询次数</td>
             <td>
                 <c:if test="${object.checkCount != '0' || object.checkCount != 0 }">
                     <a href="<c:url value='/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${object.id}'/>">${object.checkCount}次</a>
@@ -92,7 +92,7 @@
             </td>
         </tr>
         <tr>
-            <td align="right">状态：</td>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCLabel.status" checkedValue="${object.status}" type="normal"/>
             </td>

@@ -42,19 +42,19 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td align="right">标签批次：</td>
+            <td>标签批次</td>
             <td>${object.setting}</td>
         </tr>
         <tr>
-            <td align="right">数量：</td>
+            <td>数量</td>
             <td>${object.amount}</td>
         </tr>
         <tr>
-            <td align="right">创建时间：</td>
+            <td>创建时间</td>
             <td><fmt:formatDate value="${object.createDate}" pattern="yyyy-MM-dd"/> </td>
         </tr>
         <tr>
-            <td align="right">状态：</td>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${object.status}" type="normal"/>
             </td>

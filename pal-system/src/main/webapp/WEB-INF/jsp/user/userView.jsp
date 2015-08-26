@@ -24,15 +24,15 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>用户姓名：</td>
+            <td>用户姓名</td>
             <td>${object.name}</td>
         </tr>
         <tr>
-            <td>用户密码：</td>
+            <td>用户密码</td>
             <td>**** **** **** ****</td>
         </tr>
         <tr>
-            <td>状态：</td>
+            <td>状态</td>
             <td>
                 <c:if test="${object.status == '0'}">
                     <font color="red">已删除</font>
@@ -43,7 +43,7 @@
             </td>
         </tr>
         <tr>
-            <td>商户名称：</td>
+            <td>商户名称</td>
             <td>${object.tenant.name}</td>
         </tr>
     </table>

@@ -33,7 +33,7 @@
                 <match url="/basic/xm.do?qm=viewLabel&amp;label=view"/>
             </jnode>
 
-            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin,manager" text_zh_CN="标签批次管理">
+            <jnode url="/basic/xm.do?qm=plistLabelBatch_default" access="admin,manager" text_zh_CN="生成标签">
                 <match url="/basic/xm.do?qm=plistLabelBatch_default"/>
                 <match url="/basic/xm.do?qm=formLabelBatch"/>
                 <match url="/basic/xm.do?qm=viewLabelBatch&amp;view=view"/>

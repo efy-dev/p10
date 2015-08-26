@@ -54,11 +54,11 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>商户名称：</td>
+            <td>商户名称</td>
             <td>${object.name}</td>
         </tr>
         <tr>
-            <td>地址：</td>
+            <td>商户地址</td>
             <td>${object.province}&nbsp;${object.city}&nbsp;${object.address}</td>
         </tr>
     </table>
@@ -173,7 +173,7 @@
                     <td>
                         <c:forEach items="${tenantCertification.imgList}" var="tenantCertificationImg">
                             <c:if test="${not empty tenantCertificationImg.imgUrl}">
-                                <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
+                                <img src="<%=imgBasePath %>${tenantCertificationImg.imgUrl}<%=imgListCss %>"/>
                             </c:if>
                         </c:forEach>
                     </td>

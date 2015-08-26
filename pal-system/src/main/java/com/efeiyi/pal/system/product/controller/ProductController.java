@@ -57,12 +57,7 @@ public class ProductController {
         baseManager.saveOrUpdate(product.getClass().getName(), product);
 
         modelMap.put("product", product);
-        modelMap.put("PPVList", product.getProductPropertyValueList());
-        modelMap.put("PSPNList", product.getProductSeries().getProductSeriesPropertyNameList());
-        modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
-
         String resultPage = "redirect:/basic/xm.do?qm=viewProduct&product=product&id=" + product.getId();
-
         return new ModelAndView(resultPage);
     }
 
@@ -81,7 +76,6 @@ public class ProductController {
         modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
 
         String resultPage = "/productPropertyValue/productPropertyValueListForm";
-
         return new ModelAndView(resultPage);
     }
 
@@ -92,7 +86,7 @@ public class ProductController {
      * @param type
      * @return
      */
-    private Product getRelationAttributeObject(Product product, HttpServletRequest request, String type){
+    private Product getRelationAttributeObject(Product product, HttpServletRequest request, String type) throws Exception {
         String productSeriesId = request.getParameter("productSeries.id");
         ProductSeries newProductSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
         String tenantId = request.getParameter("tenant.id");
@@ -104,6 +98,8 @@ public class ProductController {
         if (type.equals("new")){
             List<ProductPropertyValue> productPropertyValueList = new ArrayList();
             product.setProductPropertyValueList(productPropertyValueList);
+            String serial = autoSerialManager.nextSerial("serial");//序列号自动生成
+            product.setSerial(serial);
         }
         if (type.equals("edit")){
             ProductSeries oldProductSeries = product.getProductSeries();
@@ -127,18 +123,14 @@ public class ProductController {
     private Product setProductBaseProperty(Product product, HttpServletRequest request) throws Exception {
         String name = request.getParameter("name");
         String masterName = request.getParameter("masterName");
-//        String serial = request.getParameter("serial");
         String status = request.getParameter("status");
         String shoppingUrl = request.getParameter("shoppingUrl");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" );
         Date date = sdf.parse(request.getParameter("madeYear"));
 
-        String serial = autoSerialManager.nextSerial("serial");//序列号自动生成
-
         product.setName(name);
         product.setMasterName(masterName);
-        product.setSerial(serial);
         product.setStatus(status);
         product.setShoppingUrl(shoppingUrl);
         product.setMadeYear(date);
