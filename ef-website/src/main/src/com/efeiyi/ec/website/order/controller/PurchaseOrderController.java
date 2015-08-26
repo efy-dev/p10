@@ -18,6 +18,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -290,6 +291,48 @@ public class PurchaseOrderController extends BaseController {
         return "/order/wxNative";
     }
 
+    @RequestMapping({"/easyBuy/{productModelId}"})
+    public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
+        CartProduct cartProduct = new CartProduct();
+        cartProduct.setProductModel(productModel);
+        cartProduct.setAmount(1);
+        cartProduct.setIsChoose("1");
+        cartProduct.setStatus("1");
+        List<CartProduct> cartProductList = new ArrayList<>();
+        cartProductList.add(cartProduct);
+        Map<String, List> productMap = new HashMap<>();
+        productMap.put(productModel.getProduct().getTenant().getId(), cartProductList);
+        model.addAttribute("productMap", productMap);
+        Cart cart = new Cart();
+        cart.setTotalPrice(productModel.getPrice());
+        model.addAttribute("cart", cart);
+        List<Tenant> tenantList = new ArrayList<>();
+        tenantList.add(productModel.getProduct().getTenant());
+        model.addAttribute("tenantList", tenantList);
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setProductModel(productModel);
+        purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
+        purchaseOrderProduct.setPurchaseAmount(productModel.getAmount());
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listPageInfo(xQuery).getList();
+
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+
+        return "/purchaseOrder/purchaseOrderConfirm" ;
+    }
+
 
     /**
      * 生成订单
@@ -318,8 +361,6 @@ public class PurchaseOrderController extends BaseController {
         } else {
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
         }
-
-
         //得到店铺的信息
         List<Tenant> tenantListTemp = new ArrayList<>();
         List<Tenant> tenantList = new ArrayList<>();
@@ -362,7 +403,6 @@ public class PurchaseOrderController extends BaseController {
         }
 
         model.addAttribute("tenantList", tenantList);
-
         purchaseOrder.setTotal(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder); //生成父订单
 
