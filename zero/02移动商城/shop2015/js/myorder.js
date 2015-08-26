@@ -9,7 +9,9 @@ window.onload = function()
             event.returnValue = false;
     }
 }
-гд(function(){
-
+$(function(){
+    $('.discount .employ a').click(function(){
+        $(this).addClass('yhq-active').siblings().removeClass('yhq-active');
+    })
 })
 
