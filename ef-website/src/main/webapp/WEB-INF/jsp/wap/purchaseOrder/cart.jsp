@@ -63,18 +63,13 @@
               <div class="bd info">
                 <p class="title">${product.productModel.product.name}</p>
                 <p class="info-opt">
-                  <c:if test="${product.amount>1}">
                     <a class="sub" href="#" onclick="subtractProduct('${product.id}')" title="减"></a>
-                  </c:if>
-                  <c:if test="${product.amount<=1}">
-                    <a class="sub" href="#" title="减"></a>
-                  </c:if>
                   <input id="${product.id}Amount" class="ipt-txt" type="text"
                          value="${product.amount}" onblur="changeProduct('${product.id}',this)" onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)"/>
                   <a class="add" href="#" onclick="addProduct('${product.id}')" title="加"></a>
                 </p>
-                <p class="info-price"><em>￥</em><span class="moneycl" id="totalPrice">${(product.productModel.price.intValue())*product.amount}</span></p>
-                <a href="#icon-delete" class="icon icon-delete"></a>
+                <p class="info-price"><em>￥</em><span class="moneycl" id="${product.id}Price">${(product.productModel.price.intValue())*product.amount}</span></p>
+                <a href="<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>" class="icon icon-delete"></a>
               </div>
             </li>
           </c:forEach>
@@ -83,9 +78,9 @@
     </div>
     <!-- //End--cart-list-->
     <div class="bd payment-total-bar">
-      <input type="checkbox" class="checkbox"/>
-      <span class="txt">${cart.totalPrice}</span>
-      <a href="#btn-right" class="btn-right">结算<em>（4）</em></a>
+      <input type="checkbox" class="checkbox" onclick="chooseAll(this,'${cart.id}')"/>
+      <span class="txt" id="totalPrice">${cart.totalPrice}</span>
+      <a href="#btn-right" class="btn-right">结算<em>（${cart.cartProductList.size()}）</em></a>
     </div>
 
   </article>
@@ -168,14 +163,14 @@
     }, "post")
   }
 
-  function changeProduct(cartProductId,element) {
+  function changeProduct(cartProductId, element) {
     var param = {
       cartProductId: cartProductId,
-      amount:$(element).val()
+      amount: $(element).val()
     };
     var success = function (data) {
       console.log(data);
-      $("#" + cartProductId + "Amount").val( data["amount"]);
+      $("#" + cartProductId + "Amount").val(data["amount"]);
       $("#totalPrice").html(data["cart"]["totalPrice"]);
       $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
 
@@ -277,7 +272,7 @@
   }
 
 
-  function chooseAll(element,cartId) {
+  function chooseAll(element, cartId) {
     var chooseType = "1";
     if (element.checked == true) {
       chooseType = "1";
@@ -287,12 +282,12 @@
 
     var param = {
       cartId: cartId,
-      chooseType:chooseType
+      chooseType: chooseType
     };
     var success = function (data) {
       data = JSON.parse(data);
       $("input").each(function () {
-        if (data["chooseType"]== "1") {
+        if (data["chooseType"] == "1") {
           this.checked = true;
         } else {
           this.checked = false;
