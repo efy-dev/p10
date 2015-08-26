@@ -23,7 +23,8 @@
             <table>
                 <tr class="bd-gwc">
                     <td width="144">
-                        <label class="active-box"><input onclick="chooseAll(this,'${cart.id}')" type="checkbox" class="middle-active" value="全部"></label>
+                        <label class="active-box"><input onclick="chooseAll(this,'${cart.id}')" type="checkbox"
+                                                         class="middle-active" value="全部"></label>
                         <label>全部</label>
                     </td>
                     <td width="377">商品名称</td>
@@ -85,14 +86,15 @@
                                 <div class="control-pd">
                                     <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
-                                           value="${product.amount}" onblur="changeProduct('${product.id}',this)" onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)" >
-                                    <c:if test="${product.amount>1}">
-                                        <a href="#" class="cart-btn-right"
-                                           onclick="subtractProduct('${product.id}')">-</a>
-                                    </c:if>
-                                    <c:if test="${product.amount<=1}">
-                                        <a href="#" class="cart-btn-right">-</a>
-                                    </c:if>
+                                           value="${product.amount}" onblur="changeProduct('${product.id}',this)"
+                                           onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)">
+                                        <%--<c:if test="${product.amount>1}">--%>
+                                    <a href="#" class="cart-btn-right"
+                                       onclick="subtractProduct('${product.id}')">-</a>
+                                        <%--</c:if>--%>
+                                        <%--<c:if test="${product.amount<=1}">--%>
+                                        <%--<a href="#" class="cart-btn-right">-</a>--%>
+                                        <%--</c:if>--%>
 
                                 </div>
                                     <%--<div class="control-cl">商家存货仅剩200件</div>--%>
@@ -116,13 +118,15 @@
                 <table>
                     <tr class="bd-gwc settle-hd">
                         <td width="100">
-                            <label class="active-box"><input onclick="chooseAll(this,'${cart.id}')" type="checkbox" class="middle-active" value="全部"></label>
+                            <label class="active-box"><input onclick="chooseAll(this,'${cart.id}')" type="checkbox"
+                                                             class="middle-active" value="全部"></label>
                             <label>全部</label>
                         </td>
                             <%--<td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>--%>
                             <%--<td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>--%>
                         <td width="332">总计（免运费）<span class="moneycl" id="totalPrice">${cart.totalPrice}</span>元</td>
-                        <td width="147"><a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/> " class="btn-settle">结算</a></td>
+                        <td width="147"><a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/> "
+                                           class="btn-settle">结算</a></td>
                     </tr>
                 </table>
             </div>
@@ -160,14 +164,14 @@
         }, "post")
     }
 
-    function changeProduct(cartProductId,element) {
+    function changeProduct(cartProductId, element) {
         var param = {
             cartProductId: cartProductId,
-            amount:$(element).val()
+            amount: $(element).val()
         };
         var success = function (data) {
             console.log(data);
-            $("#" + cartProductId + "Amount").val( data["amount"]);
+            $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
 
@@ -269,7 +273,7 @@
     }
 
 
-    function chooseAll(element,cartId) {
+    function chooseAll(element, cartId) {
         var chooseType = "1";
         if (element.checked == true) {
             chooseType = "1";
@@ -279,12 +283,12 @@
 
         var param = {
             cartId: cartId,
-            chooseType:chooseType
+            chooseType: chooseType
         };
         var success = function (data) {
             data = JSON.parse(data);
             $("input").each(function () {
-                if (data["chooseType"]== "1") {
+                if (data["chooseType"] == "1") {
                     this.checked = true;
                 } else {
                     this.checked = false;

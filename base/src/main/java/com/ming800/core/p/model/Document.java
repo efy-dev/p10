@@ -20,7 +20,7 @@ public class Document {
     private Date theDatetime;
     private Integer documentOrder;
     private String group;
-    private Integer status;
+    private String status;
     private String sampleContent;
     private Date publishDate;
     private List<DocumentAttachment> documentAttachmentList;
@@ -111,13 +111,16 @@ public class Document {
     }
 
     @Column(name="status")
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
+
+
+
 
     @Column(name= "sample_content")
     public String getSampleContent() {
