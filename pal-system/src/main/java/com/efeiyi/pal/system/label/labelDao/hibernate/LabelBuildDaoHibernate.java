@@ -90,18 +90,6 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
 
 //        long begin = System.currentTimeMillis();
         for (int i = 1; i <= flag;) {
-//            String code = RandomStringUtils.randomNumeric(2);
-//            BASE64Encoder base64en = new BASE64Encoder();
-//            String code = ((Long)(System.currentTimeMillis() + i)).toString();\
-//            String code = RandomStringUtils.randomNumeric(16);
-//            long code1 = 0;
-//            try {
-//                code1 = Long.parseLong(code);
-//            }catch (RuntimeException e){
-//                e.printStackTrace();
-//            }
-//            code = Long.toString(code1,36);
-//            Long serial = autoSerialManager.nextSerial("palLabelSerial");
             String code = RandomStringUtils.randomNumeric(18);
             code = Long.toString(Long.parseLong(code), 36);
             if (code.length() != 12) {
@@ -110,8 +98,6 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
             Code2UrlConsumer.codeList.add(code);
             i++;
             String serial = autoSerialManager.nextSerial("palLabelSerial");
-//            String code = RandomStringUtils.randomNumeric(10);
-            //Long serial = autoSerialManager.nextSerial("palLabelSerial");
             Label label = new Label();
             label.setSerial(serial);
             label.setCode(code);
@@ -120,9 +106,11 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
             label.setSeller(null);
             label.setStatus("1");
             session.saveOrUpdate(label);
-            if (i % 50 == 0) {
+            count++;
+            if (count == 500) {
                 session.flush();
                 session.clear();
+                count = 0;
             }
         }
 

@@ -18,7 +18,7 @@
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder"/>'"
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
            value="新建订单" />
@@ -39,14 +39,14 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&id=${order.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${order.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&id=${order.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${order.id}"/>">${order.serial}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&order=view&id=${order.id}"/>">${order.serial}</a></td>
                 <td>${order.tenant.name}</td>
                 <%--<td>${order.user.name}</td>--%>
                 <td>

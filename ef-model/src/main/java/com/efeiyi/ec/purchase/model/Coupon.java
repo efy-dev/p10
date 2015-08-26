@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/8/10.
  */
 @Entity
-@Table(name = "coupon")
+@Table(name = "purchase_coupon")
 public class Coupon {
     private String id;
     private String serial;

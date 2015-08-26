@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
                 <td align="right">${labelBatch.amount}</td>
                 <td>
                     <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>

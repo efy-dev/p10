@@ -50,6 +50,7 @@ public class HomeController {
         //传承人
         List<Object> masterList =  objectRecommendedManager.getRecommendedList("masterRecommended");
         model.addAttribute("masterList",masterList);
+        model.addAttribute("sign","000");
         return "/home";
     }
 

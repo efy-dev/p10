@@ -59,12 +59,12 @@ public class TenantCertificationController {
 
         baseManager.saveOrUpdate(tenantCertification.getClass().getName(), tenantCertification);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id="+tenantCertification.getTenant().getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id="+tenantCertification.getTenant().getId();
         return new ModelAndView(resultPage);
     }
 
     @RequestMapping("/removeTenantCertification.do")
-    public ModelAndView removeTenantSource(ModelMap modelMap, HttpServletRequest request) throws Exception{
+    public ModelAndView removeTenantCertification(ModelMap modelMap, HttpServletRequest request) throws Exception{
         String tenantCertificationId = request.getParameter("tenantCertificationId");
         if (tenantCertificationId == null || tenantCertificationId.trim().equals("")) {
             throw new Exception("认证信息id不能为空!");
@@ -73,7 +73,7 @@ public class TenantCertificationController {
         tenantCertification.setStatus("0");
         baseManager.saveOrUpdate(tenantCertification.getClass().getName(), tenantCertification);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id="+tenantCertification.getTenant().getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id="+tenantCertification.getTenant().getId();
         return new ModelAndView(resultPage);
     }
 

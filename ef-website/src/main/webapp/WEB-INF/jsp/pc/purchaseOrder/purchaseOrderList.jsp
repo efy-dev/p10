@@ -64,18 +64,18 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">
+                    <img src="<c:url value="${op.productModel.product.picture_url}"/>" alt="">
                     <div class="info">
                       <p><a href="#">${op.productModel.product.category.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>
                     </div>
                   </div>
                 </td>
-                <td width="174">￥${order.total}</td>
+                <td width="174">￥${op.purchasePrice}</td>
                 <td width="107">x<span>${op.purchaseAmount}</span></td>
                 <td width="100">
-                  <p>￥${order.total * op.purchaseAmount}</p>
-                  ${order.payWay}
+                  <p>￥${op.purchasePrice * op.purchaseAmount}</p>
+                  <a href="#"><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/></a>
                 </td>
               </table>
             </c:forEach>
@@ -88,7 +88,7 @@
           <c:if test="${order.orderStatus == 1}">
           <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
             <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-            <p><a href="<c:url value=""/>">付款</a></p>
+            <p><a href="<c:url value="/order/pay/${order.id}"/>">付款</a></p>
             <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">取消订单</a></p>
           </td>
           </c:if>
@@ -111,63 +111,6 @@
         </tr>
       </table>
   </c:if>
-  <%--<c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() == 0}">--%>
-    <%--<table class="list-pro-table">--%>
-      <%--<tr>--%>
-        <%--<th colspan="6">--%>
-          <%--<span>${order.createDatetime}</span>--%>
-          <%--<span>订单号：<strong>${order.serial}</strong></span>--%>
-          <%--<span>${order.tenant.name}</span>--%>
-        <%--</th>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<td width="618">--%>
-          <%--<c:forEach items="${order.purchaseOrderProductList}" var="op">--%>
-            <%--<table class="item">--%>
-              <%--<td width="237">--%>
-                <%--<div class="cols1">--%>
-                  <%--<img src="<c:url value="/scripts/assets/images/img-tx2.png"/>" alt="">--%>
-                  <%--<div class="info">--%>
-                    <%--<p><a href="#">${op.productModel.product.category.name}</a></p>--%>
-                    <%--<p><a href="#">${op.productModel.product.name}</a></p>--%>
-                  <%--</div>--%>
-                <%--</div>--%>
-              <%--</td>--%>
-              <%--<td width="174">￥${order.total}</td>--%>
-              <%--<td width="107">x<span>${op.purchaseAmount}</span></td>--%>
-              <%--<td width="100">--%>
-                <%--<p>￥${order.total * op.purchaseAmount}</p>--%>
-                <%--${order.payWay}--%>
-              <%--</td>--%>
-            <%--</table>--%>
-          <%--</c:forEach>--%>
-        <%--</td>--%>
-        <%--<td class="rowspan" width="130" rowspan='2' style="border-left:1px solid #ccc;">--%>
-          <%--<p>--%>
-            <%--<a href="#"><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></a>--%>
-          <%--</p>--%>
-        <%--</td>--%>
-        <%--<c:if test="${order.orderStatus == 1}">--%>
-          <%--<td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">--%>
-            <%--<p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>--%>
-            <%--<p><a href="#">付款</a></p>--%>
-            <%--<p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">取消订单</a></p>--%>
-          <%--</td>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${order.orderStatus == 5}">--%>
-          <%--<td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">--%>
-            <%--<p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>--%>
-          <%--</td>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${order.orderStatus == 13}">--%>
-          <%--<td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">--%>
-            <%--<p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>--%>
-            <%--<p><a href="<c:url value="/order/deleteOrder/${order.id}"/>">删除</a></p>--%>
-          <%--</td>--%>
-        <%--</c:if>--%>
-      <%--</tr>--%>
-    <%--</table>--%>
-  <%--</c:if>--%>
 </c:forEach>
 </div>
 </div>

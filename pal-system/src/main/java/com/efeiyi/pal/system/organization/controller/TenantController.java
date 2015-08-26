@@ -120,7 +120,7 @@ public class TenantController {
 
 //        modelMap.put("object", tenant);
 //        String resultPage = "/tenant/tenantView";
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id=" + tenant.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
         return new ModelAndView(resultPage);
 
     }
@@ -141,7 +141,7 @@ public class TenantController {
 
         modelMap.put("object", tenant);
 //        String resultPage = "/tenant/tenantView";
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&id=" + tenant.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
         return new ModelAndView(resultPage);
     }
 

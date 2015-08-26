@@ -45,7 +45,7 @@
             </dl>
         </div>
         <div class="userinfo-datum">
-            <form action="/myEfeiyi/updatePersonalInfo.do" method="post">
+            <form id="personalInfo" action="<c:url value="/myEfeiyi/updatePersonalInfo.do"/>" method="post">
                 <ul>
                     <li>
                         <label>昵称：</label>
@@ -106,6 +106,7 @@
 <![endif]-->
 <script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.validate.js"/>"></script>
 
 
 <script>
@@ -121,6 +122,15 @@
 
         });
     }
+    $().ready(function() {
+        $("#personalInfo").validate({
+            rules: {
+                name2: "required",
+                name: "required",
+                birthDate: "required",
+            },
+        });
+    });
 </script>
 </body>
 </html>

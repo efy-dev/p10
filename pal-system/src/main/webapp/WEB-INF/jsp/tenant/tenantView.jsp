@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     </td>
-                    <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&id=${tenantProductSeries.productSeries.id}"/>">${tenantProductSeries.productSeries.name}</a></td>
+                    <td><a href="<c:url value="/basic/xm.do?qm=viewProductSeries&tenant=tenant&id=${tenantProductSeries.productSeries.id}"/>">${tenantProductSeries.productSeries.name}</a></td>
                     <td>${tenantProductSeries.productSeries.serial}</td>
                 </tr>
             </c:forEach>

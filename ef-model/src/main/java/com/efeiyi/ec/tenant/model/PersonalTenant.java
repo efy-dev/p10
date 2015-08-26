@@ -21,7 +21,7 @@ import java.util.List;
  * 个人
  */
 @Entity
-@DiscriminatorValue(value = "13")
+@Table(name = "tenant_personal")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class PersonalTenant extends Tenant implements Serializable {
 
