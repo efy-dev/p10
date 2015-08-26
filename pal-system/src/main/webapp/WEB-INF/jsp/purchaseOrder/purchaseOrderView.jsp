@@ -10,13 +10,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
     <script type="text/javascript">
+        var flg =true;
         function showDiv(){
             var pf=document.getElementById("productForm");
-            pf.setAttribute("style","display");
+            if(flg){
+                pf.setAttribute("style","display");
+            }else{
+                pf.setAttribute("style","display:none");
+            }
+            flg = !flg;
         }
     </script>
 </head>
@@ -37,23 +44,17 @@
             <td>商户名称：</td>
             <td>${object.tenant.name}</td>
         </tr>
-        <tr>
-            <td>用户：</td>
-            <td>${object.user.name}</td>
-        </tr>
+        <%-- 二期添加 --%>
+        <%--<tr>--%>
+            <%--<td>用户：</td>--%>
+            <%--<td>${object.user.name}</td>--%>
+        <%--</tr>--%>
         <tr>
             <td>状态：</td>
             <td>
-                <c:if test="${object.status == '1'}">
-                    <font color="green">未支付</font>
-                </c:if>
-                <c:if test="${object.status == '2'}">
-                    <font color="blue">已支付</font>
-                </c:if>
-                <c:if test="${object.status == '9'}">
-                    <font color="red">已发货</font>
-                </c:if>
-                <c:if test="${object.status != '9'}">
+                <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${object.status}" type="normal" />
+
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <c:if test="${not empty object.purchaseOrderLabelList}">
                         <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
                                type="button" class="am-btn am-btn-default am-btn-xs"
@@ -66,6 +67,16 @@
                                style="margin-left:4px;height: 30px;"
                                value="发货" />
                     </c:if>
+                </c:if>
+                <c:if test="${object.status == '9' && object.status != '4' && object.status != '3'}">
+                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=A"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-left:4px;height: 30px;"
+                           value="激活标签" />
+                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=C"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-left:4px;height: 30px;"
+                           value="作废标签" />
                 </c:if>
             </td>
         </tr>
@@ -95,7 +106,7 @@
             <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small style="color: red">*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
                 <input id="product_idName" placeholder="商品名称"
-                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}')" required>
+                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')" required>
                 <input type="hidden" id="product_id"  name="product.id" >
             </div>
         </div>

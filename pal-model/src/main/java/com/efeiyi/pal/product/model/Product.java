@@ -27,7 +27,6 @@ public class Product {
     private String masterName;
     private String status;
     private Date madeYear;
-    private TenantCertification tenantCertification;
     private List<ProductPropertyValue> productPropertyValueList;
     private String logo;
     private String shoppingUrl;
@@ -111,17 +110,6 @@ public class Product {
 
     public void setMadeYear(Date madeYear) {
         this.madeYear = madeYear;
-    }
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_certification_id")
-    public TenantCertification getTenantCertification() {
-        return tenantCertification;
-    }
-
-    public void setTenantCertification(TenantCertification tenantCertification) {
-        this.tenantCertification = tenantCertification;
     }
 
     @JsonIgnore

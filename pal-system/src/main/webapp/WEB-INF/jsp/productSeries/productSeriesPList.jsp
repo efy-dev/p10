@@ -15,30 +15,20 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateProductSeries(o){
-            var productSeriesId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=formProductSeries&id="+productSeriesId;
-        }
-        function addProductSeries(){
-            window.location.href="/basic/xm.do?qm=formProductSeries";
-        }
-    </script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-           value="新建商品系列" />
+           value="新建非遗项目" />
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
-            <td>系列名称</td>
-            <td>序列号</td>
+            <td>非遗项目名称</td>
+            <td>非遗项目编号</td>
         </tr>
 
         <c:forEach items="${requestScope.pageInfo.list}" var="productSeries">

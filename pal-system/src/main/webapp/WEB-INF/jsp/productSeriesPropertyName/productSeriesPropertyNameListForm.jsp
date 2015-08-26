@@ -13,9 +13,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript">
-
         function addNewNode(){
             var count = document.getElementById("count").value;
             var size = parseInt(count);
@@ -36,7 +34,6 @@
                                     "style='margin-bottom: 6px;margin-left:2px;height: 35px;'"+
                                     "value='删除' />"+
                         "</div>";
-//            document.getElementById("pNameForm").innerHTML += html;
             newDiv.innerHTML = html;
             newDiv.id = "divPP"+i;
             document.getElementById("pNameForm").appendChild(nameIdDiv);
@@ -51,10 +48,8 @@
         }
 
         function deleteNode(val){
-//            alert(val);
             var count = document.getElementById("count").value;
             var size = parseInt(count);
-
 
             if(val instanceof HTMLElement){
                 val.parentNode.removeChild(val);
@@ -62,29 +57,14 @@
                 var delDiv = document.getElementById(val);
                 delDiv.parentNode.removeChild(delDiv);
             }
-
-//            size = size - 1;
-//            if(size == 0){
-//                document.getElementById("pNameForm").innerHTML = "";
-////                size = i;
-////                document.getElementById("count").value =  size;
-//            }
-//            document.getElementById("count").value =  size;
         }
     </script>
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty productSeries.productSeriesPropertyNameList}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建商品系列属性名</strong> / <small>&nbsp;&nbsp;&nbsp;${productSeries.name}</small>
-        </div>
-    </c:if>
-    <c:if test="${!empty productSeries.productSeriesPropertyNameList}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑商品系列属性名</strong> / <small>&nbsp;&nbsp;&nbsp;${productSeries.name}</small>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">非遗项目-属性名</strong> / <small>&nbsp;&nbsp;&nbsp;${productSeries.name}</small>
+    </div>
 </div>
 <div style="text-align: left;margin-left: 10px;" >
     <input onclick="addNewNode();"

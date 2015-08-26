@@ -4,6 +4,19 @@
 
     <entities>
         <entity name="PCPurchaseOrder" label="订单列表"  model="com.efeiyi.pal.purchase.model.PurchaseOrder">
+
+            <fields>
+                <field name="status" label="状态" inputType="select">
+                    <statusType fieldName="status">
+                        <item label="未支付" value="1"/>
+                        <item label="已支付" value="2"/>
+                        <item label="已收货" value="3"/>
+                        <item label="已作废" value="4"/>
+                        <item label="已发货" value="9"/>
+                    </statusType>
+                </field>
+            </fields>
+
             <does>
                 <do name="plistPurchaseOrder" access="" label="订单分页列表" result="/purchaseOrder/purchaseOrderPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -22,14 +35,6 @@
                 <do name="formPurchaseOrder" label="标签订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
                 <do name="viewPurchaseOrder" label="查看标签订单详情页" access="" result="/purchaseOrder/purchaseOrderView"/>
                 <do name="removePurchaseOrder" label="删除标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrder_default"/>
-                <do name="saveOrUpdatePurchaseOrder" label="新建或更新标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrder_default"
-                    execute="com.efeiyi.pal.system.order.controller.PurchaseOrderHandler">
-                    <page>
-                        <fields>
-                            <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
-                        </fields>
-                    </page>
-                </do>
 
             </does>
         </entity>
@@ -50,24 +55,16 @@
                 <!--</do>-->
 
                 <do name="formPurchaseOrderLabel" label="订单商品" access="" result="/purchaseOrderLabel/purchaseOrderLabelForm"/>
-                <!--<do name="viewPurchaseOrderLabel" label="查看标签批次详情页" access="" result="/purchaseOrderLabel/purchaseOrderLabelView"/>-->
-                <!--<do name="removePurchaseOrderLabel" label="删除标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrderLabel_default"/>-->
-                <!--<do name="saveOrUpdatePurchaseOrderLabel" label="新建或更新标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrderLabel_default"-->
-                    <!--execute="com.efeiyi.pal.system.order.controller.PurchaseOrderHandler">-->
-                    <!--<page>-->
-                        <!--<fields>-->
-                            <!--<field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>-->
-                        <!--</fields>-->
-                    <!--</page>-->
-                <!--</do>-->
+
 
             </does>
         </entity>
 
         <entity name="PCPurchaseOrderPayment" label="订单支付"  model="com.efeiyi.pal.purchase.model.PurchaseOrderPayment">
             <fields>
-                <field name="payWay" label="支付方式" inputType="text">
+                <field name="payWay" label="支付方式" inputType="select">
                     <statusType fieldName="level">
+                        <item label="" value=""/>
                         <item label="支付宝" value="1"/>
                         <item label="网银" value="2"/>
                         <item label="现金" value="3"/>
@@ -89,16 +86,6 @@
                 <!--</do>-->
 
                 <do name="formPurchaseOrderPayment" label="订单支付" access="" result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
-                <!--<do name="viewPurchaseOrderLabel" label="查看标签批次详情页" access="" result="/purchaseOrderLabel/purchaseOrderLabelView"/>-->
-                <!--<do name="removePurchaseOrderLabel" label="删除标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrderLabel_default"/>-->
-                <!--<do name="saveOrUpdatePurchaseOrderLabel" label="新建或更新标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrderLabel_default"-->
-                <!--execute="com.efeiyi.pal.system.order.controller.PurchaseOrderHandler">-->
-                <!--<page>-->
-                <!--<fields>-->
-                <!--<field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"></field>-->
-                <!--</fields>-->
-                <!--</page>-->
-                <!--</do>-->
 
             </does>
         </entity>

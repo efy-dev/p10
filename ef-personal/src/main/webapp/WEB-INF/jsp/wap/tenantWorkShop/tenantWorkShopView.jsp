@@ -2,16 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--1-->
 <section class="vessel">
-    <c:if test="${workShop != null}">
-        <c:if test="${workShop.videoPath} != null">
-            <div class="video-img-or">
-                <video src="http://ef-video.oss-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
-            </div>
-        </c:if>
-        <div class="video-img-text">
-                ${workShop.shopIntroduction}
+    <c:if test="${workShop.videoPath != null}">
+        <div class="video-img-or">
+            <video src="http://ef-video.oss-cn-beijing.aliyuncs.com/${workShop.videoPath}" controls="controls"></video>
         </div>
     </c:if>
+    <div class="video-img-text">
+            ${workShop.shopIntroduction}
+    </div>
 </section>
 <%--<div data-am-widget="map" class="am-map am-map-default" data-name="工作室"
      data-address="国家图书馆" data-longitude="" data-latitude=""

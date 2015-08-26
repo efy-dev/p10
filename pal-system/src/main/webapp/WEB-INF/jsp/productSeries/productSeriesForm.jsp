@@ -16,16 +16,9 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-    <c:if test="${empty object || object.id == null || object.id==''}">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">新建商品系列</strong>
-        </div>
-    </c:if>
-    <c:if test="${!empty object && object.id != null && object.id != '' }">
-        <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">编辑商品系列</strong>
-        </div>
-    </c:if>
+    <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">非遗项目信息</strong>
+    </div>
 </div>
 <hr/>
 
@@ -41,9 +34,9 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">商品系列 <small>*</small></label>
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">非遗项目名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="商品系列名称" value="${object.name}" required>
+                <input type="text" name="name" id="name" placeholder="非遗项目名称" value="${object.name}" required>
             </div>
         </div>
 

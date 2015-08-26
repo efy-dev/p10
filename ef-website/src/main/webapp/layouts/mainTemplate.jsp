@@ -42,7 +42,7 @@
     <%--<script src="<c:url value='/base_resource/p/scripts/ckeditor/ckeditor.js'/>" charset="GB2312"></script>--%>
     <sitemesh:write property='head'/>
 </head>
-<body>
+<body <sitemesh:write property='body.class'/>>
 
 <%--导航--%>
 <jsp:include flush="true"

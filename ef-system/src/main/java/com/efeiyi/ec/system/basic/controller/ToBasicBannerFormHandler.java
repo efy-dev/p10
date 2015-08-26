@@ -13,6 +13,7 @@ public class ToBasicBannerFormHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
         if (request.getParameter("groupName") != null) {
             modelMap.put("groupName", request.getParameter("groupName"));
+            modelMap.put("bucket", request.getParameter("bucket"));
         }
         return modelMap;
     }
