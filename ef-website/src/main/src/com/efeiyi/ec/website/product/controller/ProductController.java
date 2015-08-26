@@ -146,8 +146,8 @@ public class ProductController {
         for(int i=0;i<productModelList.size();i++){
             ProductModel productModelTemp = productModelList.get(i);
             List<ProductPropertyValue> productPropertyValueList = productModelTemp.getProductPropertyValueList();
-        }
-        for(ProductModel pm:productModelList){
+
+
 
         }
         model.addAttribute("productModel", productModel);
