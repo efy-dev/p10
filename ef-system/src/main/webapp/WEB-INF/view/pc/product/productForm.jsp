@@ -23,7 +23,7 @@
     <input type="hidden" name="qm" value="saveOrUpdateProduct" />
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="tenant.id" value="${tenantId}">
-    <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistProduct_tenant&conditions=tenant.id:${tenantId} "/>
+    <%--<input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistProduct_tenant&conditions=tenant.id:${tenantId} "/>--%>
     <input type="hidden" name="status" value="1">
     <div class="am-form-group">
       <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>

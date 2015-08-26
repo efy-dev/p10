@@ -1,6 +1,7 @@
 package com.efeiyi.pal.system.order.service;
 
 import com.efeiyi.pal.label.model.Label;
+import com.efeiyi.pal.purchase.model.PurchaseOrder;
 
 import java.util.List;
 
@@ -9,8 +10,12 @@ import java.util.List;
  */
 public interface LabelServiceManager {
 
-    String getMinSerial();
+    List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct);
 
-    List<Label> getLabelListByMinSerialAndSumProduct(String minSerial, Integer sumProduct);
+    void distributeLabelList(PurchaseOrder purchaseOrder, List<Label> labelList);
+
+    List<Label> getLabelListByOrder(PurchaseOrder purchaseOrder);
+
+    void activateOrCancelLabelList(String status, List<Label> labels);
 
 }

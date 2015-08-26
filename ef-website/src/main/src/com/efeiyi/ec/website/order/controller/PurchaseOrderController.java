@@ -79,9 +79,9 @@ public class PurchaseOrderController extends BaseController {
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-        if(list !=null &&list.size()>0){
+        if (list != null && list.size() > 0) {
             return "/purchaseOrder/purchaseOrderList";
-        }else {
+        } else {
             return "/purchaseOrder/emptyOrdersView";
         }
 
@@ -146,25 +146,23 @@ public class PurchaseOrderController extends BaseController {
 
 
     /*
-    * 取消订单
-    * */
+  * 取消订单
+  * */
     @RequestMapping({"/cancelOrder/{orderId}"})
-    public String cancelPurchaseOrder(HttpServletRequest request, Model model) {
-        String orderId = request.getParameter("orderId");
+    public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
-        model.addAttribute("order", purchaseOrder);
-        return "/purchaseOrder/orderList";
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        return "redirect:/order/myEfeiyi/list.do";
     }
 
     /**
      * 订单删除
      */
     @RequestMapping({"/deleteOrder/{orderId}"})
-    public String deleteOrder(HttpServletRequest request){
-        String  orderId = request.getParameter("orderId");
+    public String deleteOrder(@PathVariable String orderId){
         baseManager.remove(PurchaseOrder.class.getName(),orderId);
-        return null;
+        return "redirect:/order/myEfeiyi/list.do";
     }
     /*
     * 付款
@@ -247,18 +245,17 @@ public class PurchaseOrderController extends BaseController {
             XQuery xQuery = new XQuery("listCart_default", request);
             List<Object> list = baseManager.listObject(xQuery);
             cart.setId(((Cart) list.get(0)).getId());
-            baseManager.saveOrUpdate(Cart.class.getName(),cart);
-            if (cart.getCartProductList()!=null && cart.getCartProductList().size()>0){
-                for (CartProduct cartProduct : cart.getCartProductList()){
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+            if (cart.getCartProductList() != null && cart.getCartProductList().size() > 0) {
+                for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(cart);
-                    baseManager.saveOrUpdate(CartProduct.class.getName(),cartProduct);
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
                 }
             }
         } else {
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
         }
 
-//        String consumerAddressId = request.getParameter("addressId"); //获取收货地址的id
 
         //得到店铺的信息
         List<Tenant> tenantListTemp = new ArrayList<>();

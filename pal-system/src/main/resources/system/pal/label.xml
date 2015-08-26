@@ -48,6 +48,8 @@
                     <statusType fieldName="status">
                         <item label="未分配" value="1"/>
                         <item label="已分配" value="2"/>
+                        <item label="已激活" value="3"/>
+                        <item label="已作废" value="4"/>
                         <item label="已查询" value="9"/>
                     </statusType>
                 </field>

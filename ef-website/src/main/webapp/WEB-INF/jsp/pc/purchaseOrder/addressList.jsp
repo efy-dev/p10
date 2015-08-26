@@ -47,8 +47,6 @@
                         </select>
                         <span>请您填写所在地区</span>
                       </form>
-
-
                     </li>
                     <li>
                       <label>详细地址：</label>
@@ -148,7 +146,7 @@
                 <span><span class="text-a"><a href="<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>">删除</a></span></span>
 
                       <div class="active-pop" style="display: none">
-                        <div class="pop-up">
+                        <div class="pop-up  ae-lf">
                           <div class="pop-h">编辑收货人信息
                             <i class="clase" title="关闭"></i>
                           </div>
@@ -217,6 +215,7 @@
   $(function(){
     $("#add").click(function(){
       $(this).siblings('.active-pop').show();
+      province();
       $('.my-order .clase, .my-order .sh-bg').click(function(){
         $(this).parents('.active-pop').hide();
       })
@@ -276,30 +275,33 @@
       },
     });
   }
-  function province(obj){
-    var v = $(obj).val();
-   $("#provinceVal").empty();
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
-      dataType: 'json',
-      success: function (data) {
-          var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for(var i = 0;i<obj.length;i++){
 
-            rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+          function province(obj){
+            var v = $(obj).val();
+            $("#provinceVal").empty();
+            $.ajax({
+              type: 'post',
+              async: false,
+              url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
+              dataType: 'json',
+              success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择</option>";
+                for(var i = 0;i<obj.length;i++){
+
+                  rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
 
 
-        }
-        $("#provinceVal").append(rowHtml);
-        $("#provinceVal option[value='"+v+"']").attr("selected","selected");
-      },
+                }
+                $("#provinceVal").append(rowHtml);
+                $("#provinceVal option[value='"+v+"']").attr("selected","selected");
+                city(v);
+              },
 
-    });
-  }
+            });
+          }
+
 
   function cs(obj,o){
     var pid = $("#provinces"+o).val();
