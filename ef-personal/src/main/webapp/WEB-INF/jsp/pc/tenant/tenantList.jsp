@@ -160,11 +160,11 @@
 <h4 id="page-footer-head-1">京ICP备15032511号-1</h4>--%>
 <div class="footer">
     <ul class="hd">
-        <li class="am-u-sm-2 am-u-end">友情链接：</li>
+        <li class="am-u-sm-2 am-u-end"><strong>友情链接：</strong></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.ich-park.com/">永新华韵集团</a></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.bjunesco.gov.cn/unesco/index/index.aspx">联合国教科文组织</a></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.mcprc.gov.cn/">中国文化部</a></li>
-        <li class="am-u-sm-2 am-u-end">中国文化部非物质文化遗产保护司</li>
+        <li class="am-u-sm-2 am-u-end"><span class="span">中国文化部非物质文化遗产保护司</span></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://govinfo.nlc.gov.cn/gtfz/xxgk/gwyzcbm/whb/201206/t20120620_2212933.html?classid=428">中国非物质文化遗产保护中心</a></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.chinaih.com.cn/">中国非物质文化遗产保护协会</a></li>
         <li class="am-u-sm-2 am-u-end"><a target="_blank" href="http://www.dpm.org.cn/index1024768.html">故宫博物院</a></li>

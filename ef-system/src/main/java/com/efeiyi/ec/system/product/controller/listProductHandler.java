@@ -24,8 +24,8 @@ public class listProductHandler implements DoHandler {
             modelMap.put("tenantId", request.getParameter("tenantId"));
         }
 
-        XQuery xQuery = new XQuery();
-        List list =  baseManager.listObject(xQuery);
+//        XQuery xQuery = new XQuery();
+//        List list =  baseManager.listObject(xQuery);
 
         return modelMap;
     }

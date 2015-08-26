@@ -1,23 +1,94 @@
 @charset "utf-8";
-body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding:0;border:0;list-style:none;font-family:"Microsoft YaHei"}
+body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding:0;font-family:"Microsoft YaHei"}
 strong,b,em {font-weight:normal;font-style: normal;}
 img {border:0}
 ul,dl{list-style:none}
+/*--//End--reset*/
 /*0202个人中心 myorder*/
+@media (min-width: 510px) {
+    body{width: 640px;margin:0 auto}
+}
 .myorder{padding: 0 19px;width: 100%;}
-.myorder .order-head{padding:20px 0;overflow: hidden;}
-.myorder .order-head dt{float: left;}
+.myorder .order-head{padding:20px 0;overflow: hidden;height: auto}
+.myorder .order-head dt{float: left;width: 17%;height: 17%;}
 .myorder .order-head dd{font-size:0.9rem;float: left;padding-left: 30px;}
 .myorder .myfunction{overflow: hidden;}
 .myorder  .marctive{margin:0;}
-.myorder .myfunction ul{padding:20px 0;width: 100%;}
+.myorder .myfunction ul{padding:20px 1rem;width: 100%;overflow: hidden;height: auto}
 .myorder .myfunction ul li{text-align: center;font-size: 0.9rem;color: #000;float: left;width: 33.3333%;}
-.myorder .myfunction  button{background-color:#fff; border:1px solid  #ccc;padding:7px 15px;}
-.myorder .order-list{width: 100%;border:1px solid #ccc;margin:18px 0;overflow: hidden;}
-.myorder .list-topic{width: 100%;border-bottom:1px solid #ccc;overflow: hidden;}
-.myorder .list-topic h2{float: left;font-size: 1.2rem;padding-left: 0.8rem;}
+.myorder .myfunction  a{background-color:#fff; border:1px solid  #ccc;padding:7px 15px;float:left;color: #000;margin: 0 auto;}
+.myorder .myfunction  a:hover{background: #000;color: #fff;}
+.myorder .myfunction  button p{color:#000;text-align: center;}
+.myorder .order-list{width: 100%;border:1px solid #ccc;margin:18px 0;overflow: hidden;height: auto}
+.myorder .list-topic{width: 100%;border-bottom:1px solid #ccc;overflow: hidden;padding: 10px 0;height: auto}
+.myorder .list-topic h2{float: left;font-size: 1.2rem;padding-left: 0.8rem;font-weight: 100;}
 .myorder .list-topic span{float:right;font-size: 1.2rem;padding-right: 1.8rem;position: relative;}
-.myorder .list-topic .jt-bg{background: url("../shop2015/images/myorder.fw.png") no-repeat ;position: absolute;width: 7px;height: 13px;right: 9rem;}
+.myorder .list-topic .jt-bg{background: url("../images/myorder.fw.png") no-repeat ;position: absolute;width: 7px;height: 13px;right: .8rem;top:18%;}
 .myorder .list-topic span a{font-size: 1.2rem;color: #000;}
-/*.myorder .myfunction  button:active{background-color:#000;color: #fff; }*/
+.myorder .list-pege{padding: 0 7px;margin-bottom: 15px;}
+.myorder .list-pege ul{width: 100%;padding-top: 16px;overflow: hidden;height: auto}
+.myorder .list-pege ul li img{width:100%;}
+.myorder .jp-pd{padding:18px 0;}
+.myorder .jp-pd-l{padding-left:.4rem;padding-right:.4rem;text-align: right}
+.myorder .jp-pd-r{padding:0;text-align:left}
+.myorder .jp-pd li{font-size: 1rem;color:#ff0000;padding-top: 18px;}
+.myorder .jp-pd li a{padding:11px 27px;border: 1px solid #000;color:#000;transition: all 0.5s;}
+.myorder .jp-pd li a:hover{background: #000;color: #fff;}
+.myorder .Extras{border:1px solid #ccc;width: 100%;overflow: hidden;height: auto;padding:11px 8px;margin-bottom: 20px;}
+.myorder .Extras h2{float: left;font-size: 1rem;font-weight: 100}
+.myorder .Extras span{float: right;}
+/*左三角*/
+.myorder .Extras span .icon-sj{
+    width: 12px;
+    height: 12px;
+    margin-top: 3px;
+    border-right:1px solid #000;
+    border-bottom: 1px solid #000 ;
+    float: left;
+    transfrom:rotate(-45deg);/*deg:度；旋转的属性*/
+    -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/
+    -ms-transfrom:rotate(-45deg);/*ie浏览器*/
+    -o-transfrom:rotate(-45deg);/*欧鹏浏览器*/
+    -moz-transform:rotate(-45deg);/*火狐浏览器*/
+}
+.myorder .aq-btn{width: 100%;border: 1px solid #000;margin-bottom: 80px;}
+.myorder .aq-btn a{display: block;padding: 12px 0;width: 100%;text-align: center;font-size: 1rem;color: #000;transition: all 0.5s}
+.myorder .aq-btn a:hover{color:#fff;background: #000;}
 /*0202个人中心*/
+/*020201订单详情-未付款line-item*/
+.line-item{padding: 0 19px;width: 100%;}
+.line-item .address{width: 100%;border: 1px solid #ccc;padding: 10px;overflow: hidden;height: auto;margin-top: 2rem}
+.line-item .address p{font-size: 1rem;padding-top: 5px;}
+.line-item .address span{padding-right: 13px;}
+.line-item .order-content{width: 100%;overflow: hidden;margin-top: 2rem}
+.line-item .order-header{width: 100%;border:1px solid #ccc;padding:1.2rem 1rem;}
+.line-item .order-header p{font-size: 1rem;color:#000;}
+.line-item .order-js-list{width: 100%;border:1px solid #ccc;margin-top:-1px;height: auto;padding:0  .9rem;}
+.line-item .order-js-list h1{padding:1.25rem 0;font-size: 1rem;color:#000;font-weight: 100}
+.line-item .item-act{padding:0 0.3rem 0 0.3rem;}
+.line-item .item-acr{margin-bottom: 1rem}
+.line-item .item-rmb{color:#ff0000;position: relative;}
+.line-item .item-rmb span{position: absolute;right: 0;color: #000}
+.line-item .btn-payment{width: 100%;border: 1px solid #ccc;height: auto;display: block;margin:2rem 0 6rem 0;}
+.line-item .btn-payment a{padding: 0.6rem 0.9rem;display: block;color: #000;font-size: 1rem;}
+.line-item .btn-payment a:hover{transition: all 0.5s;background: #000;color: #fff;}
+.line-item .btn-payment a span{position: relative;width: 100%;display: block}
+.line-item .btn-payment a span .sp-active{position: absolute;right: 0}
+/*020201订单详情-未付款*/
+/*020201订单详情-已付款*/
+.line-item .express-address{padding: 0 0.9rem;height: auto;width: 100%;overflow: hidden}
+.line-item .an-address{height: 90px;display: block;}
+.line-item .an-address p{font-size: 1rem;color:#000;text-align: center}
+.line-item .address-time{float: left;width: 30%;margin-right:15px;}
+.line-item .address-logo{width: 10%;float: left;position: relative;margin: 0 0.5rem;height: auto}
+.line-item .address-page{width: 34%;float: left;margin-left: 34px;}
+.line-item .dot{width: 9px;height: 9px;background: url("../images/myorder.fw.png") no-repeat -8px -2px;position: absolute;display: block;top:5px;left:-1px; }
+.line-item .dot-j{width: 12px;height: 13px;background: url("../images/myorder.fw.png") no-repeat -7px -14px;position: absolute;display: block;top:5px;left:-2px; }
+.line-item .rectangle{width: 5px;height: 70px;background: url("../images/myorder.fw.png") no-repeat 0px -13px;position: absolute;display: block;top:20px;left:1px; }
+/*020201订单详情-已完成*/
+/*020202优惠券*/
+.discount{width: 100%;padding:0 19px;}
+.discount .employ{padding: 2rem 0;float:left;width: 100%;}
+.discount .employ a{padding: 4px 30px;display: block;font-size: 1rem;border: 1px solid #ccc;text-align: center;color: #000;}
+.discount .employ li  .yhq-active{border: 1px solid  #000;}
+/*020202优惠券*/

@@ -6,7 +6,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>020106编辑收货地址</title>
+<title>020106支付页面</title>
 <!-- Set render engine for 360 browser -->
 <meta name="renderer" content="webkit">
 <!-- No Baidu Siteapp-->
@@ -32,7 +32,7 @@
         <a href="#chevron-left" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
-    <h1 class="am-header-title">编辑收货地址</h1>
+    <h1 class="am-header-title">选择支付方式</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav">
         <a href="#chevron-right" class="chevron-right" id="menu">
@@ -52,51 +52,13 @@
 </header>
 <!--//End--header-->
 <article class="bd shop-cart">
-    <div class="bd cart-address">
-        <form action="" class="am-form">
-            <div class="am-form-group">
-                <label for="doc-vld-name-1">收 货 人</label>
-                <input type="text" id="doc-vld-name-1" maxlength="3" placeholder="阿斯阿斯达啊" class="am-form-field" required="">
-            </div>
-            <div class="am-form-group">
-                <label for="doc-vld-name-1">手 机 号</label>
-                <input type="text" id="doc-vld-name-1" maxlength="3" placeholder="13693545645" class="am-form-field" required="">
-            </div>
-            <div class="am-form-group">
-                <label for="doc-vld-name-1">所 在 地 址</label>
-                <p class="arrow-down">
-                    <select>
-                        <option value="a">北京市</option>
-                        <option value="b">上海市</option>
-                        <option value="o">河北省</option>
-                    </select>
-                </p>
-                <p class="arrow-down">
-                    <select>
-                        <option value="a">朝阳区</option>
-                        <option value="b">东城区</option>
-                        <option value="o">昌平区</option>
-                    </select>
-                </p>
-                <p class="arrow-down">
-                    <select>
-                        <option value="a">天通苑</option>
-                        <option value="b">酒仙桥</option>
-                        <option value="o">国贸</option>
-                    </select>
-                </p>
-            </div>
-            <div class="am-form-group">
-                <label for="doc-vld-name-1"><span>具 体 地 址</span></label>
-                <textarea name="" id="" cols="20" rows="4"></textarea>
-            </div>
-        </form>
-        <div class="checkbox-btn">
-            <p class="bd"><input type="checkbox" class="checkbox"/><strong>设为默认地址</strong><span>(注：每次下单时都使用该地址)</span></p>
-            <p class="bd"><a href="#保存信息" class="cart-btn" title="保存信息">保存信息</a></p>
-        </div>
+    <div class="bd cart-pay">
+        <ul class="ul-list">
+            <li><a href="#支付宝" title="支付宝"><i class="icon icon-zfb"></i>支 付 宝</a></li>
+            <li><a href="#微信支付" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>
+        </ul>
     </div>
-    <!-- //End--cart-list-no-->
+    <!-- //End--cart-pay-->
 </article>
 
 

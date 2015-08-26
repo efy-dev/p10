@@ -44,7 +44,7 @@
         <jnode url="" id="orderManager" access="admin,manager" state="closed"  text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default"  access="admin,manager" text_zh_CN="商品管理">
                 <match url="/basic/xm.do?qm=plistProduct_default"/>
-                <match url="/basic/xm.do?qm=formProduct"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;product=product"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;product=product"/>
                 <match url="/basic/xm.do?qm=plistLabel_productLabel"/>
                 <match url="/product/editProductSeriesProperty.do"/>
@@ -52,7 +52,7 @@
 
             <jnode url="/basic/xm.do?qm=plistProductSeries_default"  access="admin,manager" text_zh_CN="非遗项目">
                 <match url="/basic/xm.do?qm=plistProductSeries_default"/>
-                <match url="/basic/xm.do?qm=formProductSeries"/>
+                <match url="/basic/xm.do?qm=formProductSeries&amp;ps=ps"/>
                 <match url="/basic/xm.do?qm=viewProductSeries&amp;ps=ps"/>
                 <match url="/productSeriesPropertyName/newPropertyNameList.do"/>
                 <match url="/basic/xm.do?qm=formTenantProductSeries"/>
@@ -64,7 +64,7 @@
         <jnode url="" id="productManager" access="admin,manager" state="closed"  text_zh_CN="系统管理">
             <jnode url="/basic/xm.do?qm=plistTenant_default" access="admin" text_zh_CN="商户管理">
                 <match url="/basic/xm.do?qm=plistTenant_default"/>
-                <match url="/basic/xm.do?qm=formTenant"/>
+                <match url="/basic/xm.do?qm=formTenant&amp;tenant=tenant"/>
                 <match url="/basic/xm.do?qm=viewTenant&amp;tenant=tenant"/>
                 <match url="/tenantCertification/newTenantCertification.do"/>
                 <match url="/basic/xm.do?qm=viewProductSeries&amp;tenant=tenant"/>
