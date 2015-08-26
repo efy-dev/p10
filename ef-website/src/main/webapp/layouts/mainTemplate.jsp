@@ -19,7 +19,7 @@
     %>
     <sitemesh:write property='head'/>
 </head>
-<body>
+<body <sitemesh:write property='body.class'/>
 
 <%
     if(HttpUtil.isPhone(request)){
@@ -39,7 +39,6 @@
     }
 %>
 
-<div class="wh" style="">
     <%
         if(HttpUtil.isPhone(request)){
     %>
@@ -47,11 +46,13 @@
     <%
     }else{
     %>
-    <sitemesh:write property='body'/>
+    <div class="wh">
+        <sitemesh:write property='body'/>
+    </div>
     <%
         }
     %>
-</div>
+
     <%
         if(HttpUtil.isPhone(request)){
     %>
