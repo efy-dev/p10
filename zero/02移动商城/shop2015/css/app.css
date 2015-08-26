@@ -16,7 +16,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     body {width:640px; margin:0 auto;}
 }
 /*--//End--common*/
-.custom-header {background:#fff;height:55px;border-bottom:3px #000 solid;border-top:3px #000 solid; position:relative; z-index:20;}
+.custom-header {background:#fff;height:55px; position:relative; z-index:20;border-bottom:2px #000 solid;border-top:0;}
 .custom-header .logo a {background-position:0 0;width:152px; height:27px; position:absolute;top:50%; margin-top:-13px; left:21px;}
 .custom-header .icon-cart {background-position:0 -27px;width:34px; height:24px; float:left; margin-top:8px;margin-right:9px; position:relative;}
 .custom-header .icon-user {background-position:-35px -27px;width:25px;height:24px;float:left; margin-top:8px}
@@ -25,11 +25,12 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .custom-header .chevron-left:before {content:'';width:12px;height:12px;border-left:1px solid #000;border-top:1px solid #000;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);display:inline-block; margin-left:10px;}
 .custom-header .chevron-right i.line {width:16px;padding:5px 0;border-top:1px #000 solid;border-bottom:1px #000 solid; display:inline-block; margin-right:10px;}
 .custom-header .chevron-right i.line:before {content:'';width:16px;height:1px;background:#000; float:left;}
-.custom-header .menu-list {width:100px;line-height:34px;text-align:center;border:1px #000 solid; position:absolute;top:49px; right:15px; background:#fff; display:none;}
+.custom-header .menu-list {width:100px;line-height:34px;text-align:center;border:1px #000 solid; position:absolute;top:53px; right:15px; background:#fff; display:none;}
 .custom-header .menu-list ul {border-right:1px #000 solid;border-bottom:1px #000 solid;}
 .custom-header .menu-list li a {width:100%;font-size:1.4rem; color:#000;float:left;border-bottom:1px #000 solid; border-right:1px #000 solid;}
 .custom-header .menu-list li.active a {background:#333; color:#fff}
 .custom-header .menu-list:before {content:'';width:2px; height:2px;background:#fff;position:absolute;bottom:-1px; left:-1px;}
+.index-header {border-bottom:3px #000 solid;border-top:3px #000 solid;}
 /*--//End--*/
 .custom .am-slider {box-shadow:none}
 .custom .am-control-nav li a {background:#cecece;box-shadow:none;}
@@ -154,8 +155,6 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .order-list .ul-list li .num strong { margin-right:5px;}
 .order-list .ask {padding:0 5px; margin-top:25px;}
 .order-list .ask textarea {width:100%; padding:5px;font-size:10px;}
-
-
 .order-total {border-top: 2px solid #000; margin-top: 25px; padding:20px;}
 .order-total p {width:100%; line-height:26px;float: left; font-size: 12px; position: relative;}
 .order-total p strong { float: left;}
