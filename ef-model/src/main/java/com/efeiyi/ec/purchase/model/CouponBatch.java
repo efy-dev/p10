@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Administrator on 2015/8/10.
  */
 @Entity
-@Table(name = "coupon_batch")
+@Table(name = "purchase_coupon_batch")
 public class CouponBatch {
     private String id;
     private String name;

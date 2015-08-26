@@ -20,7 +20,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tenant")
-@DiscriminatorColumn(name = "tenant_type",discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Tenant extends BigUser implements Serializable {
 
