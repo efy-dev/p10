@@ -1,6 +1,7 @@
 package com.efeiyi.pal.system.order.dao;
 
 import com.efeiyi.pal.label.model.Label;
+import com.efeiyi.pal.purchase.model.PurchaseOrder;
 
 import java.util.List;
 
@@ -9,8 +10,10 @@ import java.util.List;
  */
 public interface LabelDao {
 
-    String getMinSerial();
+    List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct);
 
-    List<Label> getLabelListByMinSerialAndSumProduct(String minSerial, Integer sumProduct);
+    void saveOrUpdate(String modelType, Object object);
+
+    List<Label> getLabelListByOrder(PurchaseOrder purchaseOrder);
 
 }
