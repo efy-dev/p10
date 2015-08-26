@@ -44,7 +44,7 @@
                  page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope.qm}"/>
 
     <div class="admin-content" style="height: auto">
-    <%--<div class="admin-content" style="overflow-y: auto">--%>
+    <%--<div class="admin-content" style="overflow-y: scroll">--%>
         <sitemesh:write property='body'/>
     </div>
 

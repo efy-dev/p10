@@ -13,9 +13,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script type="text/javascript">
-
         function addNewNode(){
             var count = document.getElementById("count").value;
             var size = parseInt(count);
@@ -59,14 +57,6 @@
                 var delDiv = document.getElementById(val);
                 delDiv.parentNode.removeChild(delDiv);
             }
-
-//            size = size - 1;
-//            if(size == 0){
-//                document.getElementById("pNameForm").innerHTML = "";
-////                size = i;
-////                document.getElementById("count").value =  size;
-//            }
-//            document.getElementById("count").value =  size;
         }
     </script>
 </head>

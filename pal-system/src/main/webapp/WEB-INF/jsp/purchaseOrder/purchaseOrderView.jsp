@@ -54,7 +54,7 @@
             <td>
                 <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${object.status}" type="normal" />
 
-                <c:if test="${object.status != '9'}">
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <c:if test="${not empty object.purchaseOrderLabelList}">
                         <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?orderId=${object.id}"/>'"
                                type="button" class="am-btn am-btn-default am-btn-xs"
@@ -67,6 +67,16 @@
                                style="margin-left:4px;height: 30px;"
                                value="发货" />
                     </c:if>
+                </c:if>
+                <c:if test="${object.status == '9' && object.status != '4' && object.status != '3'}">
+                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=A"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-left:4px;height: 30px;"
+                           value="激活标签" />
+                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=C"/>'"
+                           type="button" class="am-btn am-btn-default am-btn-xs"
+                           style="margin-left:4px;height: 30px;"
+                           value="作废标签" />
                 </c:if>
             </td>
         </tr>

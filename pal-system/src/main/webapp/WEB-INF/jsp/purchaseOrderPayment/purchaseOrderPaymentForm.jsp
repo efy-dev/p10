@@ -13,6 +13,17 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript">
+        function formOnSubmit(){
+            var payWayDiv = document.getElementById("payWayDiv");
+            var payWay = payWayDiv.firstElementChild.value;
+            if(payWay == null || payWay == ""){
+                alert("请选择支付方式");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -23,7 +34,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/purchaseOrderPayment/savePurchaseOrderPayment.do'/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/purchaseOrderPayment/savePurchaseOrderPayment.do'/>" onsubmit="return formOnSubmit()" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateTenantSource">
         <input type="hidden" name="id" value="${object.id}">
         <c:if test="${empty object || object.id == null || object.id==''}">
@@ -56,8 +67,8 @@
 
         <div class="am-form-group">
             <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small  style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <ming800:status name="payWay" dataType="PCPurchaseOrderPayment.payWay" checkedValue="${object.payWay}" type="select" />
+            <div class="am-u-sm-9" id="payWayDiv">
+                <ming800:status name="payWay" dataType="PCPurchaseOrderPayment.payWay" checkedValue="${object.payWay}" type="select"/>
             </div>
         </div>
 

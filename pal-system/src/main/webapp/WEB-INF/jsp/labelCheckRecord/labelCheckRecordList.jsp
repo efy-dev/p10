@@ -12,7 +12,6 @@
 
 <html>
 <head>
-    <script src="<c:url value="/META-INF/resources/resources/jquery/jquery-1.11.1.min.js"/>"></script>
     <title></title>
 </head>
 <body>

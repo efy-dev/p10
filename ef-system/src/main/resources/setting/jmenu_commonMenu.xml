@@ -49,6 +49,7 @@
             <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="最新商品列表">
                 <match url="/basic/xm.do?qm=plistProduct_default"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=product"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;form=newProduct"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">
                 <match url="/basic/xm.do?qm=plistProductRecommended_default"/>
@@ -62,6 +63,7 @@
                 <match url="/basic/xm.do?qm=formTenant"/>
                 <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=tenant"/>
                 <match url="/basic/xm.do?qm=viewTenant&amp;view=tenantList"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;param=tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="/basic/xm.do?qm=plistProfessional_default"/>
@@ -70,8 +72,8 @@
         </jnode>
 
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistBanner_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站轮播图">
-                <match url="/basic/xm.do?qm=plistBanner_tenant"/>
+            <jnode url="/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站轮播图">
+                <match url="/basic/xm.do?qm=plistEcBanner_tenant"/>
                 <match url="/basic/xm.do?qm=formBanner&amp;groupName=tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站文档">

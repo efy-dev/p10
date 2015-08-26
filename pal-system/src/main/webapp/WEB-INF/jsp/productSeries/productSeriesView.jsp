@@ -15,6 +15,24 @@
     <title></title>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&id=${object.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="编辑"/>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductSeries&id=${object.id}"/>'"--%>
+    <input onclick=""
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="删除" />
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">非遗项目详细信息</strong>
