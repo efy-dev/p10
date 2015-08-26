@@ -15,13 +15,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-    <script type="text/javascript" >
-        function updateTenant(o){
-            var tenantId = $(o).next().val();
-            window.location.href="/basic/xm.do?qm=&id="+tenantId;
-        }
-    </script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
@@ -54,7 +47,7 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&id=${tenant.id}"/>">${tenant.name}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&tenant=tenant&id=${tenant.id}"/>">${tenant.name}</a></td>
                 <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
             </tr>
         </c:forEach>

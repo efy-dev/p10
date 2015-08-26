@@ -15,7 +15,7 @@
                 <td class="am-primary am-u-md-3">商家名字</td>
                 <td class="am-u-md-3">${object.name}</td>
                 <td class="am-primary am-u-md-3">图标</td>
-                <td class="am-u-md-3" colspan="3">${object.logoUrl}</td>
+                <td class="am-u-md-3" colspan="3"><img width="80px" src="http://pro.efeiyi.com/${object.logoUrl}@!product-model" alt="产品图片"></td>
             </tr>
             </tbody>
         </table>
@@ -27,7 +27,7 @@
     <div class="am-u-md-12">
         <h2>商家产品信息</h2>
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listProduct_tenant&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantProduct_tenant&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
 </body>

@@ -215,3 +215,33 @@ INSERT INTO `master_work_picture` VALUES ('idkzspfx2lwxvcu3', 'idkzc7g33cfesw37'
 INSERT INTO `master_work_picture` VALUES ('idl2ca962fijcydk', 'idkzc7g33cfesw37', 'product/3f0047d7848d572518527ec093a55c4420150821111405.jpg', '0');
 INSERT INTO `master_work_picture` VALUES ('idl2cafdgcyo4uqb', 'idkzc7g33cfesw37', 'product/798b00b003ea71f1c7bbdebeb1f1d7e920150821111406.jpg', '0');
 INSERT INTO `master_work_picture` VALUES ('idl2calf3hdns2pi', 'idkzc7g33cfesw37', 'product/1213965148102714_file20150821111406.jpg', '0');
+
+
+ALTER TABLE `tenant`
+ADD COLUMN `tenantType`  varchar(2) NULL AFTER `logo_url`;
+
+
+CREATE TABLE `tenant_enterprise` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+CREATE TABLE `tenant_private` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+CREATE TABLE `tenant_personal` (
+`id`  char(16) NOT NULL
+)
+;
+
+
+
+----------------------------------------------
+--2015-8-26 曹廷杰 修改优惠券和优惠券批次 表名 未执行
+--------------------------------------
+ALTER TABLE coupon RENAME TO purchase_coupon;
+ALTER TABLE coupon_batch RENAME TO purchase_coupon_batch;

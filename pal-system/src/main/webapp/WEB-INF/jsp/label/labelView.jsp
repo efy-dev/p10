@@ -15,6 +15,25 @@
     <title></title>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <%--<c:if test="${object.status != '2'}">--%>
+        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch&id=${object.id}"/>'"--%>
+               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+               <%--style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
+               <%--value="编辑"/>--%>
+        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${object.id}"/>'"--%>
+        <%--<input onclick=""--%>
+               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
+               <%--style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
+               <%--value="删除" />--%>
+    <%--</c:if>--%>
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">标签详情</strong>
@@ -65,7 +84,7 @@
             <td align="right">查询次数：</td>
             <td>
                 <c:if test="${object.checkCount != '0' || object.checkCount != 0 }">
-                    <a href="<c:url value='/basic/xm.do?qm=plistLabelCheckRecord_default&conditions=label.id:${object.id}'/>">${object.checkCount}次</a>
+                    <a href="<c:url value='/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${object.id}'/>">${object.checkCount}次</a>
                 </c:if>
                 <c:if test="${object.checkCount == '0' || object.checkCount == 0 }">
                     ${object.checkCount}次
@@ -75,15 +94,7 @@
         <tr>
             <td align="right">状态：</td>
             <td>
-                <c:if test="${object.status == '2'}">
-                    <font color="blue">已分配</font>
-                </c:if>
-                <c:if test="${object.status == '1'}">
-                    <font color="green">未分配</font>
-                </c:if>
-                <c:if test="${object.status == '9'}">
-                    <font color="red">已查询</font>
-                </c:if>
+                <ming800:status name="status" dataType="PCLabel.status" checkedValue="${object.status}" type="normal"/>
             </td>
         </tr>
     </table>

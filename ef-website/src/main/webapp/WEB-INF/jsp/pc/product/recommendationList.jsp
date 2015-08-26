@@ -20,39 +20,33 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="css/amazeui.min.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="css/app.css?v=20150831">
-  <script>
-    function ctrl(o){
-      var pid = $(o).next().val();
-      window.location=("/product/cart/addProduct.do?productId="+pid);
-    }
-  </script>
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/amazeui.min.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/app.css?v=20150831'/>">
 </head>
 <body>
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="" target="_blank" title=""><img class="imgfilter" src="/scripts/assets/upload/category-1.jpg" width="500" height="350"/></a></div>
+    <div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>
     <div class="info">
-      <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
-      <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="/scripts/assets/upload/category-1.jpg" width="286" height="206" alt=""/></a></div>
+      <h1>${productModel.product.master.fullName}.${productModel.name}</h1>
+      <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
       <div class="item p-text">${productModel.product.master.content}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
-        <a class="cart" onclick="ctrl(this);" value = "001" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy" href="" title="立即购买">立即购买</a>
       </div>
     </div>
@@ -64,16 +58,16 @@
     </ul>
   </div>
   <!-- //End--shop-sort-->
-<c:if test="${productList.size()>0}">
+<c:if test="${productModelList.size()>0}">
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productList}" var="product" varStatus="rec">
+        <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
-          <a href="" target="_blank" title="">
-            <img class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt="">
-            <p class="wh name">${product.name}</p>
-            <p class="wh price">${product.price}</p>
+          <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
+            <img class="imgfilter" <%--src="http://tenant.efeiyi.com/${productModel.product.picture_url}@!tenant-pc-tenant-list"--%> alt="">
+            <p class="wh name">${productModel.name}</p>
+            <p class="wh price">${productModel.price}</p>
           </a>
         </li>
         </c:forEach>
@@ -97,14 +91,14 @@
 <!-- //End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="shop2015/js/jquery.min.js"></script>
+<script href="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
+<script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
-<script src="shop2015/js/amazeui.min.js"></script>
-<script src="shop2015/js/system.js"></script>
+<script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
 </body>
 </html>

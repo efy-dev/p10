@@ -35,7 +35,7 @@
                 data:{id:couponBatchId,amount:amount},
                 success:function(data){
                     $(obj).find("span").text("查看优惠券");
-                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
+                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
                     $(obj).attr("onclick","");
                 }
             });
@@ -112,7 +112,9 @@
                 </div>
             </div>
             <div style="clear: both">
-                <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
+                <c:url value="/basic/xm.do" var="url"/>
+                <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
+                    <ming800:pcPageParam name="view" value="${view}"/>
                     <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
                     <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
                 </ming800:pcPageList>

@@ -29,7 +29,7 @@
             <dl>
                 <dt>
                 <div class="userinfo-figure">
-                    <img src="/scripts/assets/images/yonghm.jpg">
+                    <img src="<c:url value="/scripts/assets/images/yonghm.jpg"/>">
                 </div>
                 <div class="editor">
                     <a href="#">编辑头像</a>
@@ -45,7 +45,7 @@
             </dl>
         </div>
         <div class="userinfo-datum">
-            <form action="/myEfeiyi/updatePersonalInfo.do" method="post">
+            <form id="personalInfo" action="<c:url value="/myEfeiyi/updatePersonalInfo.do"/>" method="post">
                 <ul>
                     <li>
                         <label>昵称：</label>
@@ -97,15 +97,16 @@
 <!--content-->
 <!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/assets/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="/scripts/assets/js/amazeui.min.js"></script>
-<script src="/scripts/assets/js/system.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.validate.js"/>"></script>
 
 
 <script>
@@ -121,6 +122,15 @@
 
         });
     }
+    $().ready(function() {
+        $("#personalInfo").validate({
+            rules: {
+                name2: "required",
+                name: "required",
+                birthDate: "required",
+            },
+        });
+    });
 </script>
 </body>
 </html>

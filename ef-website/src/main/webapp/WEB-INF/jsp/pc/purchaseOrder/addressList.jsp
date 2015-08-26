@@ -31,12 +31,11 @@
                 <i class="clase" title="关闭"></i>
               </div>
               <div class="m-form">
-                <form action="/myEfeiyi/addAddress.do" method="post" >
+                <form id="addAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post" >
                   <ul>
                     <li>
                       <label>收货人：</label>
                       <input type="text" name="consignee">
-                      <span>请您填写收货人姓名</span>
                     </li>
                     <li>
                       <label>所在地区：</label>
@@ -45,15 +44,11 @@
                         </select>
                         <select id="cityVal" class="car1" name="city.id" onclick="city(this);">
                         </select>
-                        <span>请您填写所在地区</span>
                       </form>
-
-
                     </li>
                     <li>
                       <label>详细地址：</label>
                       <input type="text" name="details">
-                      <span>请您填写详细地址</span>
                     </li>
                     <li>
                       <label>手机号码：</label>
@@ -145,20 +140,19 @@
 
                 </c:if>
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
-                <span><span class="text-a"><a href="/myEfeiyi/removeAddress.do?addressId=${address.id}">删除</a></span></span>
+                <span><span class="text-a"><a href="<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>">删除</a></span></span>
 
                       <div class="active-pop" style="display: none">
-                        <div class="pop-up">
+                        <div class="pop-up  ae-lf">
                           <div class="pop-h">编辑收货人信息
                             <i class="clase" title="关闭"></i>
                           </div>
                           <div class="m-form">
-                            <form action="/myEfeiyi/addAddress.do" method="post">
+                            <form id="updateAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post">
                               <ul>
                                 <li>
                                   <label>收货人：</label>
                                   <input type="text" name="consignee" value="${address.consignee}">
-                                  <span>请您填写收货人姓名</span>
                                 </li>
                                 <input type="hidden" name="id" value="${address.id}" >
                                 <li>
@@ -170,13 +164,11 @@
                                     <select id="citys${as.index}" name="city.id" class="car1" onclick="cs(this,${as.index})">
                                       <option value="${address.city.id}" selected="selected">${address.city.name}</option>
                                     </select>
-                                    <span>请您填写所在地区</span>
                                   </form>
                                 </li>
                                 <li>
                                   <label>详细地址：</label>
                                   <input type="text" name="details" value="${address.details}" >
-                                  <span>请您填写详细地址</span>
                                 </li>
                                 <li>
                                   <label>手机号码：</label>
@@ -208,15 +200,17 @@
     </div>
   </div>
 </div>
-<script src="/scripts/assets/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
 
-<script src="/scripts/assets/js/amazeui.min.js"></script>
-<script src="/scripts/assets/js/system.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.validate.js"/>"></script>
 
 <script>
   $(function(){
     $("#add").click(function(){
       $(this).siblings('.active-pop').show();
+      province();
       $('.my-order .clase, .my-order .sh-bg').click(function(){
         $(this).parents('.active-pop').hide();
       })
@@ -276,30 +270,33 @@
       },
     });
   }
-  function province(obj){
-    var v = $(obj).val();
-   $("#provinceVal").empty();
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
-      dataType: 'json',
-      success: function (data) {
-          var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for(var i = 0;i<obj.length;i++){
 
-            rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+          function province(obj){
+            var v = $(obj).val();
+            $("#provinceVal").empty();
+            $.ajax({
+              type: 'post',
+              async: false,
+              url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
+              dataType: 'json',
+              success: function (data) {
+                var obj = eval(data);
+                var rowHtml = "";
+                rowHtml += "<option value='请选择'>请选择</option>";
+                for(var i = 0;i<obj.length;i++){
+
+                  rowHtml += "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
 
 
-        }
-        $("#provinceVal").append(rowHtml);
-        $("#provinceVal option[value='"+v+"']").attr("selected","selected");
-      },
+                }
+                $("#provinceVal").append(rowHtml);
+                $("#provinceVal option[value='"+v+"']").attr("selected","selected");
+                city(v);
+              },
 
-    });
-  }
+            });
+          }
+
 
   function cs(obj,o){
     var pid = $("#provinces"+o).val();
@@ -348,6 +345,26 @@
     });
   }
 
+
+
+  $().ready(function() {
+    $("#addAddress").validate({
+      rules: {
+        consignee: "required",
+        details: "required",
+        name: "required",
+        phone: "required",
+      },
+    });
+    $("#updateAddress").validate({
+      rules: {
+        consignee: "required",
+        details: "required",
+        name: "required",
+        phone: "required",
+      },
+    });
+  });
 </script>
 
 

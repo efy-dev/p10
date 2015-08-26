@@ -26,12 +26,8 @@
                 <!--</do>-->
 
                 <do name="formTenantProductSeries" label="商户系列溯源信息" access="" result="/tenantProductSeries/tenantProductSeriesForm"/>
-                <!--<do name="viewProduct" label="查看商品详情页" access="" result="/product/productView"-->
-                    <!--execute="com.efeiyi.pal.system.product.controller.ProductViewLabelHandler"/>-->
+                <do name="viewTenantProductSeries" label="商户系列溯源信息详情页" access="" result="/tenantProductSeries/tenantProductSeriesView"/>
                 <!--<do name="removeProduct" label="删除商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"/>-->
-                <!--<do name="saveOrUpdateTenantProductSeries" label="新建或更新商品" access="" result="redirect:/basic/xm.do?qm=plistProduct_default"-->
-                    <!--execute="com.efeiyi.pal.system.product.controller.ProductHandler">-->
-                <!--</do>-->
             </does>
         </entity>
     </entities>

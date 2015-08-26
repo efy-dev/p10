@@ -31,14 +31,8 @@ public class TenantHandler implements MultipartHandler {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
 
-        if (!multipartRequest.getFile("background").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("background"), "tenant", "background/" + multipartRequest.getFile("background").getOriginalFilename());
-            paramMap.put("backgroundUrl", "background/" + multipartRequest.getFile("background").getOriginalFilename());
-
-        }
-
         if (!multipartRequest.getFile("logo").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "tenant", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "ec-efeiyi", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
         }
 

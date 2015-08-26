@@ -40,7 +40,7 @@
 
 <div class="hd login">
     <div class="login-wrap">
-        <div class="banner"><img src="/scripts/images/login-1.jpg" alt=""/></div>
+        <div class="banner"><img src="<c:url value="/scripts/images/login-1.jpg"/>" alt=""/></div>
         <div class="login-form">
             <form action="<c:url value="/j_spring_security_check" />" method="post" id="loginForm" class="am-form">
                 <fieldset>

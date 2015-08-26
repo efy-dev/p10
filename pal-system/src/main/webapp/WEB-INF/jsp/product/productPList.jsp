@@ -15,7 +15,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
@@ -29,8 +28,8 @@
             <td>操作</td>
             <td>商品名称</td>
             <td>制作大师</td>
-            <td>序列号</td>
-            <td>所属系列</td>
+            <td>商品编号</td>
+            <td>非遗项目</td>
             <td>所属商户</td>
             <td>制作完成时间</td>
         </tr>
@@ -48,7 +47,7 @@
                     </div>
                 </td>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${product.id}'/>">${product.name}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.name}</a>
                     <c:if test="${!empty product.logo}">
                         <img src="http://pal.efeiyi.com/${product.logo}@!pal-img-list">
                     </c:if>

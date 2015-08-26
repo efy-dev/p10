@@ -65,7 +65,8 @@
 </div>
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
-        <h4>订单商品列表</h4>
+        <%--<div class="am-panel-hd"><strong>订单商品列表</strong></div>--%>
+            <h4>订单商品列表</h4>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -80,7 +81,7 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.name}<img width="20px" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-banner" alt="产品图片"></td>
+                    <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=orderProduct&id=${purchaseOrderProduct.productModel.product.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img width="20px" src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model" alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>

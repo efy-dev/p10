@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -59,9 +57,8 @@ public class AddressController {
     @RequestMapping({"/address/list"})
     public String listAddress(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistConsumerAddress_default",request);
-        xQuery.addRequestParamToModel(model,request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        XQuery xQuery = new XQuery("ListConsumerAddress_default",request);
+        List addressList=baseManager.listObject(xQuery);
         model.addAttribute("addressList",addressList);
         return "/purchaseOrder/addressList";
     }

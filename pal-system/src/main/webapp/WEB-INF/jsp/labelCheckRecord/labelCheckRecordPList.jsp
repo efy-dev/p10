@@ -14,8 +14,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
-
 </head>
 <body style="height: auto">
 <div class="am-cf am-padding">
@@ -23,6 +21,7 @@
         <strong class="am-text-primary am-text-lg">标签防伪查询记录</strong>
     </div>
 </div>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="am-g">
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -39,17 +38,17 @@
         <c:forEach items="${requestScope.pageInfo.list}" var="record" varStatus="x">
             <tr>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewLabel&id=${record.label.id}'/>">${record.label.serial}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewLabel&record=record&id=${record.label.id}'/>">${record.label.serial}</a>
                 </td>
                 <td>${record.label.code}</td>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewLabelBatch&id=${record.label.labelBatch.id}'/>">${record.label.labelBatch.setting}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewLabelBatch&record=record&id=${record.label.labelBatch.id}'/>">${record.label.labelBatch.setting}</a>
                 </td>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&id=${record.product.id}'/>">${record.product.name}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&record=record&id=${record.product.id}'/>">${record.product.name}</a>
                 </td>
                 <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewTenant&id=${record.product.tenant.id}'/>">${record.product.tenant.name}</a>
+                    <a href="<c:url value='/basic/xm.do?qm=viewTenant&record=record&id=${record.product.tenant.id}'/>">${record.product.tenant.name}</a>
                 </td>
                 <td>
                     <div id="ip${x.index}" name="IP">${record.IP}</div>
@@ -65,6 +64,7 @@
 <div style="clear: both">
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="/basic/xm.do">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+        <ming800:pcPageParam name="record" value="${record}"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>

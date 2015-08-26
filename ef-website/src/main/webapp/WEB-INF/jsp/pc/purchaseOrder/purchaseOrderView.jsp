@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -19,9 +20,7 @@
       <div class="mt wh1">
         <div class="extra-l">
           <strong>订单信息</strong>
-
         </div>
-
       </div>
       <div class="orderinfo">
         <dl class="orderid-mashup">
@@ -29,7 +28,7 @@
           <dd class="od-id">
             <p >订单号: <span>${order.serial}</span></p>
             <p>订单金额：<span>${order.total}</span></p>
-            <p>订单状态：<span>${order.orderStatus}</span></p>
+            <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
           </dd>
         </dl>
         <dl class="orderid-mashup bd-top">
@@ -56,25 +55,27 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">商品信息</dt>
           <dd class="od-id">
+            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
             <table class="item-bg">
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="/scripts/assets/images/img-tx2.png"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="<c:url value="${op.productModel.product.picture_url}"/>"></a></li>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9">【包快递】韩国正品三重仿伪BB霜 Lohashill遮瑕裸妆BB霜50ML </td>
-                <td class="commodity_quantity  amount">x<span>100</span></td>
-                <td class="commodity_price  price8">￥189.00</td>
+                <td class="commodity_price_unit1  price9">${op.productModel.product.category.name}</td>
+                <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
+                <td class="commodity_price  price8">￥${order.total * op.purchaseAmount}</td>
               </tr>
             </table>
+            </c:forEach>
           </dd>
         </dl>
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
             <%--<p >配送地址：<span>${order.consumerAddress}</span></p>--%>
-            <p>收货地址：<span>${order.consumerAddress}</span></p>
+            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
             <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>
 
@@ -83,8 +84,7 @@
         <dl class="orderid-mashup bd-top item-list5">
           <dt class="orderid">支付及配送方式</dt>
           <dd class="od-id">
-            <p >支付方式：<span>支付宝</span></p>
-            <p>支付备注：<span>想强调的话</span></p>
+            <p >支付方式：<span><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/></span></p>
             <p>配送方式：<span>普通快递</span></p>
             <p>运费：<span>免运费</span></p>
           </dd>
@@ -98,21 +98,14 @@
 <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/assets/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="/scripts/assets/js/amazeui.min.js"></script>
-<script src="/scripts/assets/js/system.js"></script>
-<!--<script type="text/javascript">
-$(window).scroll(function(){
-    if($(this).scrollTop()>100){
-        $('.slider-menu ul').css({'position':'fixed'})
-    }
-})
-</script>-->
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
 </body>
 </html>

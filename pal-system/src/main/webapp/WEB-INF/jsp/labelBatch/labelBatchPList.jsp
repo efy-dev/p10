@@ -14,19 +14,19 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body style="height: auto">
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建标签批次" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="新建标签批次" />
 </div>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
             <td>标签批次</td>
-            <%--<td>商品名称</td>--%>
-            <%--<td>商户名称</td>--%>
             <td>数量</td>
             <td>状态</td>
             <td>创建日期</td>
@@ -55,20 +55,10 @@
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
-                <%--<td>${labelBatch.product.name}</td>--%>
-                <%--<td>${labelBatch.tenant.name}</td>--%>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
                 <td align="right">${labelBatch.amount}</td>
                 <td>
-                    <c:if test="${labelBatch.status == '0'}">
-                        已删除
-                    </c:if>
-                    <c:if test="${labelBatch.status == '1'}">
-                        <font color="green">待生成</font>
-                    </c:if>
-                    <c:if test="${labelBatch.status == '2'}">
-                        <font color="#a52a2a">已生成</font>
-                    </c:if>
+                    <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>
                 </td>
                 <td><fmt:formatDate value="${labelBatch.createDate}" pattern="yyyy-MM-dd HH:mm"/> </td>
             </tr>

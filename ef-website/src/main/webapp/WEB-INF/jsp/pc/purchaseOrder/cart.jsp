@@ -68,7 +68,7 @@
                             </td>
                             <td width="437">
                                 <div class="cols1">
-                                    <img src="u/img-tx2.png" alt=""/>
+                                    <img src="${product.productModel.product.picture_url}" alt=""/>
 
                                     <div class="info">
                                         <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -85,7 +85,7 @@
                                 <div class="control-pd">
                                     <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
-                                           value="${product.amount}">
+                                           value="${product.amount}" onblur="changeProduct('${product.id}',this)" onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)" >
                                     <c:if test="${product.amount>1}">
                                         <a href="#" class="cart-btn-right"
                                            onclick="subtractProduct('${product.id}')">-</a>
@@ -136,7 +136,7 @@
                 <span class="bg-cart"></span>
 
                 <p>您的购物车还是空空的，去看看心仪的商品吧~</p>
-                <span><a href="#">去购物</a></span>
+                <span><a href="<c:url value="/"/> ">去购物</a></span>
             </div>
 
         </div>
@@ -150,12 +150,29 @@
         };
         var success = function (data) {
             console.log(data);
-            $("#" + cartProductId + "Amount").attr("value", data["amount"]);
+            console.log($("#" + cartProductId + "Amount"));
+            $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
 
         }
         ajaxRequest("<c:url value="/cart/addProductCount.do"/>", param, success, function () {
+        }, "post")
+    }
+
+    function changeProduct(cartProductId,element) {
+        var param = {
+            cartProductId: cartProductId,
+            amount:$(element).val()
+        };
+        var success = function (data) {
+            console.log(data);
+            $("#" + cartProductId + "Amount").val( data["amount"]);
+            $("#totalPrice").html(data["cart"]["totalPrice"]);
+            $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+
+        }
+        ajaxRequest("<c:url value="/cart/changeProductCount.do"/>", param, success, function () {
         }, "post")
     }
 
@@ -165,7 +182,7 @@
         };
         var success = function (data) {
             console.log(data);
-            $("#" + cartProductId + "Amount").attr("value", data["amount"]);
+            $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
         }

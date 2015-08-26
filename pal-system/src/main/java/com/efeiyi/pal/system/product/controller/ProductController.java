@@ -1,15 +1,12 @@
 package com.efeiyi.pal.system.product.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.organization.model.TenantCertification;
 import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.pal.product.model.ProductPropertyValue;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.efeiyi.pal.system.product.service.ProductServiceManager;
-import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -21,7 +18,6 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,12 +36,10 @@ public class ProductController {
 
     private ProductServiceManager productServiceManager = (ProductServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productServiceManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
-    private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
-    private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
-    @RequestMapping("/saveProductAndNext.do")
-    public ModelAndView saveProductSeries(ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+    @RequestMapping("/saveProduct.do")
+    public ModelAndView saveProduct(ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         Product product = new Product();
 
         String productId = request.getParameter("id");
@@ -54,8 +48,6 @@ public class ProductController {
             type = "edit";
             product = (Product) baseManager.getObject(Product.class.getName(), productId);
         }
-//        Do tempDo = (Do) modelMap.get("tempDo");
-//        productSeries = (ProductSeries) XDoUtil.processSaveOrUpdateTempObject(tempDo, productSeries, productSeries.getClass(), request, type, xdoDao);
 
         product = setProductBaseProperty(product, request);
 
@@ -64,13 +56,29 @@ public class ProductController {
 
         baseManager.saveOrUpdate(product.getClass().getName(), product);
 
-//        productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeries.getId());
+        modelMap.put("product", product);
+        modelMap.put("PPVList", product.getProductPropertyValueList());
+        modelMap.put("PSPNList", product.getProductSeries().getProductSeriesPropertyNameList());
+        modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
+
+        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&product=product&id=" + product.getId();
+
+        return new ModelAndView(resultPage);
+    }
+
+    @RequestMapping("/editProductSeriesProperty.do")
+    public ModelAndView editProductSeriesProperty(ModelMap modelMap, HttpServletRequest request) throws Exception {
+
+        String productId = request.getParameter("productId");
+        if (productId == null || productId.equals("")) {
+            throw new Exception("class com.efeiyi.pal.system.product.controller.ProductController editProductSeriesProperty method: productId id null ");
+        }
+        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
 
         modelMap.put("product", product);
         modelMap.put("PPVList", product.getProductPropertyValueList());
         modelMap.put("PSPNList", product.getProductSeries().getProductSeriesPropertyNameList());
         modelMap.put("PSPNListSize", product.getProductSeries().getProductSeriesPropertyNameList().size());
-//        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
 
         String resultPage = "/productPropertyValue/productPropertyValueListForm";
 
@@ -91,11 +99,7 @@ public class ProductController {
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 
         TenantProductSeries tenantProductSeries = (TenantProductSeries) productServiceManager.getTenantProductSeriesByTenantAndProductSeries(tenant, newProductSeries);
-        if (tenantProductSeries != null ){
-            TenantCertification tenantCertification = tenantProductSeries.getTenantCertification();
-            product.setTenantCertification(tenantCertification);
-            product.setTenantProductSeries(tenantProductSeries);
-        }
+        product.setTenantProductSeries(tenantProductSeries);
 
         if (type.equals("new")){
             List<ProductPropertyValue> productPropertyValueList = new ArrayList();
@@ -169,8 +173,6 @@ public class ProductController {
         String url = "product/" + identify + ".jpg";
 
         if (!multipartRequest.getFile("logo").getOriginalFilename().equals("")) {
-//            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", "product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
-//            product.setImgUrl("product/logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "315pal", url);
             product.setLogo(url);
         }

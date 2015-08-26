@@ -98,7 +98,7 @@ public class ProductSeriesPropertyNameController {
             propertyName.getName();
         }
 
-        return "redirect:/basic/xm.do?qm=viewProductSeries&id="+ productSeries.getId();
+        return "redirect:/basic/xm.do?qm=viewProductSeries&ps=ps&id="+ productSeries.getId();
     }
 
 }

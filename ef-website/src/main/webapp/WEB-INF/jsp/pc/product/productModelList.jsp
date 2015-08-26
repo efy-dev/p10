@@ -45,22 +45,25 @@
     </ol>
   </div>
   <!-- //End--breadcrumb-->
-  <div class="explain">
-    <div class="title">
-      <p class="wh"><span class="zh">she</span><span class="cn">${strProjectName[0]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
-      <p class="wh"><span class="zh">yan</span><span class="cn">${strProjectName[1]}</span></p>
+    <div class="explain">
+        <img src="<c:url value='/scripts/assets/upload/t-banner.jpg'/>" alt=""/>
+        <!--<div class="title">-->
+        <!--<p class="wh"><span class="zh">she</span><span class="cn">歙</span></p>-->
+        <!--<p class="wh"><span class="zh">yan</span><span class="cn">砚</span></p>-->
+        <!--</div>-->
+        <!--<div class="info">歙砚，全称歙州砚，中国四大名砚之一，与甘肃洮砚、广东端砚齐名。产于安徽黄山山脉与天目山、白际山之间的歙州，包括歙县、休宁、祁门、黟县、婺源等县。歙石的产地以婺源与歙县交界处的龙尾山（罗纹山）下溪涧为最优，所以歙砚又称龙尾砚，而龙尾山则是大部分存世歙砚珍品的石料出产地。除此之外，歙县、休宁县、祁门县亦产歙砚。</div>-->
+        <!--<a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>-->
     </div>
-    <div class="info">${project.description}</div>
-  </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
-    <ul class="link1">
-      <li class="active"><a href="<c:url value="/product/list/${project.id}?pageEntity.size=6&sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
-     <%-- <li><a href="" title="销  售">销  售</a></li>
-      <li><a href="" title="新  品">新  品</a></li>
-      <li><a href="" title="人  气">人  气</a></li>--%>
-    </ul>
+      <ul class="link1">
+          <li class="active"><a
+                  href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>"
+                  title="价  格">价 格</a></li>
+          <%-- <li><a href="" title="销  售">销  售</a></li>
+           <li><a href="" title="新  品">新  品</a></li>
+           <li><a href="" title="人  气">人  气</a></li>--%>
+      </ul>
   </div>
   <!-- //End--shop-sort-->
 
@@ -69,9 +72,8 @@
         <ul class="ul-item">
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-            <a href="" target="_blank" title="">
-              <%--<img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.product.pictureUrl}@!tenant-mobile-work" alt=""/>--%>
-              <img  class="imgfilter" src="/scripts/assets/upload/category-1.jpg" alt=""/>
+            <a href="<c:url value="/product/category/${productModel.id}"/>" target="_blank" title="">
+              <img  class="imgfilter" <c:url value="http://tenant.efeiyi.com/photo/20150728100546.jpg@!tenant-pc-tenant-list"/> alt=""/>
               <p class="wh name">${productModel.product.name}</p>
               <p class="wh price">${productModel.price}</p>
             </a>
@@ -84,8 +86,6 @@
 
  <div class="page wh">
       <ming800:pcPageList bean="${pageEntity}" url="/product/list/${project.id}">
-      <%--<ming800:pcPageParam name="projectId"--%>
-                           <%--value="${project.id}"/>--%>
       <ming800:pcPageParam name="sort"
                            value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
       </ming800:pcPageList>
@@ -94,14 +94,15 @@
   <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="scripts/assets/js/jquery.min.js"></script>
+<script href="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
+<script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
-<script src="scripts/assets/js/amazeui.min.js"></script>
-<script src="scripts/assets/js/system.js"></script>
+
+<script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
+<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
 </body>
 </html>

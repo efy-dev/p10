@@ -1,6 +1,7 @@
 package com.efeiyi.pal.system.order.dao.hibernate;
 
 import com.efeiyi.pal.label.model.Label;
+import com.efeiyi.pal.purchase.model.PurchaseOrder;
 import com.efeiyi.pal.system.order.dao.LabelDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,26 +28,28 @@ public class LabelDaoHibernate implements LabelDao {
     }
 
     @Override
-    public String getMinSerial() {
-        String hql = "SELECT MIN(serial) FROM Label WHERE status = :status";
-        Query query = this.getSession().createQuery(hql).setString("status", "1");
-        List<String> list= query.list();
-        if (list != null && list.size() >0){
-            return list.get(0);
-        }
-        return null;
-    }
-
-    @Override
-    public List<Label> getLabelListByMinSerialAndSumProduct(String minSerial, Integer sumProduct) {
-        String hql = "From Label WHERE status = :status order by serial";/*AND serial BETWEEN :minSerial AND :maxSerial*/
+    public List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct) {
+        String hql = "From Label WHERE status = :status order by serial";
         Query query = this.getSession().createQuery(hql)
                 .setString("status", "1");
-//                .setLong("minSerial", minSerial)
-//                .setLong("maxSerial", (minSerial + sumProduct - 1));
         query.setMaxResults(sumProduct);
         List<Label> list = query.list();
         return list;
+    }
+
+    @Override
+    public void saveOrUpdate(String modelType, Object object) {
+        getSession().saveOrUpdate(modelType, object);
+    }
+
+    @Override
+    public List<Label> getLabelListByOrder(PurchaseOrder purchaseOrder) {
+        String hql = "FROM Label WHERE status =:status AND purchaseOrderLabel in (:purchaseOrderLabelList)";
+        Query query = this.getSession().createQuery(hql)
+                .setString("status", "2")
+                .setParameterList("purchaseOrderLabelList", purchaseOrder.getPurchaseOrderLabelList().toArray());
+        List<Label> labelList = query.list();
+        return labelList;
     }
 
 }

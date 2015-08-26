@@ -95,10 +95,10 @@
                 <div class="page-default">
             <span>
                 <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text default-active" name="addressItem" onchange="chooseAddress(this)">
+                <div id="${address.id}" class="default-text default-active" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
                     </c:if>
                     <c:if test="${address.status=='1'}">
-                    <div class="default-text" name="addressItem" onchange="chooseAddress(this)">
+                    <div class="default-text" name="addressItem" onclick="chooseAddress(this,'${address.id}')">
                         </c:if>
                         <strong>${address.consignee} ${address.province.name}</strong>
                             <%--<i class="triangle" style="display: block"></i>--%>
@@ -155,7 +155,7 @@
                             <tr>
                                 <td width="542">
                                     <div class="cols1 page-pdl">
-                                        <img src="../我的购物车/u/img-tx2.png" alt=""/>
+                                        <img src="${product.productModel.product.picture_url}" alt=""/>
 
                                         <div class="info">
                                             <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -200,7 +200,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a href="#" onclick="submitOrder('${purchaseOrder.id}')">提交订单</a> </span>
+                <span><a  onclick="submitOrder('${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>
@@ -211,6 +211,7 @@
 <script>
 
     var payment = "1";
+    var consumerAddress = "";
 
     function zhifubao(element) {
         $(element).attr("class", "alipay wechat-active");
@@ -229,7 +230,6 @@
     }
     function submitOrder(orderId) {
         var messageObject = new Object();
-        var addressId = $(".default-active").attr("id");
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
@@ -237,9 +237,14 @@
         for (var key in messageObject) {
             message += key + ":" + messageObject[key] + ";"
         }
-        message = encodeURIComponent(message);
-        console.log(message);
-        var url = "/confirm/" + orderId + "?payment=" + payment + "&address=" + addressId + "&" + message;
+
+        if(consumerAddress==""){
+            showAlert("提示","请选择一个收货地址！");
+        }else{
+            var url = "<c:url value="/order/confirm/"/>";
+            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+            window.location.href = url;
+        }
     }
 
 
@@ -253,7 +258,7 @@
         })
 
         //网页加载的时候把城市的数据取回来
-        ajaxRequest("<c:url value="/address/listProvince.do"/>", {}, function(data){
+        ajaxRequest("<c:url value="/myEfeiyi/address/listProvince.do"/>", {}, function(data){
             var out = '<option value="">请选择</option>';
             for(var i = 0; i<data.length ; i++){
                 out+= '<option value="'+data[i]["id"]+'">'+data[i]["name"]+'</option>';
@@ -266,7 +271,7 @@
 
     function provinceChange(element){
         var provinceId = $(element).val();
-        ajaxRequest("<c:url value="/address/listCity.do"/>", {provinceId:provinceId}, function(data){
+        ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>", {provinceId:provinceId}, function(data){
             var out = '<option value="">请选择</option>';
             for(var i = 0; i<data.length ; i++){
                 out+= '<option value="'+data[i]["id"]+'">'+data[i]["name"]+'</option>';
@@ -277,7 +282,7 @@
     }
 
     function newAddress(it ) {
-        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
+        var out = ' <div class="page-default"> <span> <div id="' + (it.id) + '" class="default-text" name="addressItem" onclick="chooseAddress(this,\''+it.id+'\')"> <strong>' + (it.consignee) + ' ' + (it.province.name) + '</strong> </a> </div> </span> <span>' + (it.consignee) + '</span> <span>' + (it.province.name) + '</span> <span>' + (it.city.name) + '</span> <span>' + (it.details) + '</span> <span>' + (it.phone) + '</span> </div>';
         return out;
     }
 
@@ -293,10 +298,12 @@
         }, "post")
     }
 
-    function chooseAddress(element){
+    function chooseAddress(element,addressId){
+        consumerAddress = addressId
         $("div[name=addressItem]").each(function(){
             $(this).attr("class","default-text");
         })
+        $(element).attr("class","default-text default-active")
     }
 
 
