@@ -1,5 +1,7 @@
 package com.efeiyi.pal.system.product.controller;
 
+import com.efeiyi.pal.organization.model.TenantCertification;
+import com.efeiyi.pal.organization.model.TenantCertificationImg;
 import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.pal.product.model.ProductImg;
 import com.ming800.core.base.service.BaseManager;
@@ -8,12 +10,14 @@ import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/24.
@@ -27,7 +31,7 @@ public class ProductImgController {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/saveProductImg.do")
-    public ModelAndView saveProductImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
+    public String saveProductImg(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception{
 
         ProductImg productImg = new ProductImg();
 
@@ -38,12 +42,21 @@ public class ProductImgController {
         Product product = (Product)baseManager.getObject(Product.class.getName(), productId);
         productImg.setProduct(product);
         productImg.setStatus("1");
-        productImg = upLoadImg(multipartRequest, productImg);
-        baseManager.saveOrUpdate(ProductImg.class.getName(), productImg);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&id=" + product.getId();
-
-        return new ModelAndView(resultPage);
+        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "" ;
+        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            url = "product/" + identify + ".jpg";
+            aliOssUploadManager.uploadFile(mf, "315pal", url);
+            productImg.setImgUrl(url);
+            baseManager.saveOrUpdate(ProductImg.class.getName(), productImg);
+        }
+        System.out.print(url);
+        return url;
     }
 
     @RequestMapping("/removeProductImg.do")

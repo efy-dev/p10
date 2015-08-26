@@ -13,18 +13,8 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript">
-        var flg =true;
-        function showDiv(){
-            var pf=document.getElementById("uploadCertificationImg");
-            if(flg){
-                pf.setAttribute("style","display");
-            }else{
-                pf.setAttribute("style","display:none");
-            }
-            flg = !flg;
-        }
-    </script>
+    <link rel="stylesheet" href="<c:url value='/scripts/upload/uploadify.css'/>"/>
+    <script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -66,35 +56,22 @@
 </div>
 
 <%-- 认证图片 上传 --%>
-<div style="text-align: left;margin-left: 10px;">
-    <input onclick="showDiv()"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-           value="上传认证图片"/>
-</div>
-
-<div class="am-g" id="uploadCertificationImg" style="display:none">
-    <form action="<c:url value='/certificationImg/saveCertificationImg.do'/>" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <input type="hidden" name="certificationId" value="${object.id}">
-        <div class="am-form-group">
-            <label for="Img" class="am-u-sm-3 am-form-label">认证图片 <small style="color: red">*</small></label>
-            <div class="am-u-sm-9">
-                <input type="file" id="Img" name="Img" required>
-            </div>
-        </div>
-        <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
-            </div>
-        </div>
-    </form>
-</div>
+<table style="border: none;width: 50%" align="center" >
+    <td>
+        <input class="am-btn am-btn-primary" id="btn_upload"/></td>
+    <td>
+        <input type="button" class="am-btn am-btn-primary" value="保存"
+               onclick="javascript:$('#btn_upload').uploadify('upload', '*');"/>
+    </td>
+    </tr>
+</table>
 
 <%-- 认证图片 展示 --%>
 <c:if test="${!empty object.imgList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">认证图片</strong>/<small>小图展示</small>
+            <strong class="am-text-primary am-text-lg">认证图片</strong>/
+            <small>小图展示</small>
         </div>
     </div>
     <div am-panel am-panel-default admin-sidebar-panel>
@@ -106,19 +83,61 @@
                         <img src="http://pal.efeiyi.com/${Img.imgUrl}@!pal-img-list"/>
                     </td>
                 </c:forEach>
+                <div id="pic"></div>
             </tr>
             <tr>
                 <c:forEach items="${object.imgList}" var="Img2">
                     <td>
-                        <button onclick="window.location.href='<c:url value="/certificationImg/removeCertificationImg.do?certificationId=${object.id}&ImgId=${Img2.id}"/>'"
-                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                        <button onclick="window.location.href='<c:url
+                                value="/certificationImg/removeCertificationImg.do?certificationId=${object.id}&ImgId=${Img2.id}"/>'"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                class="am-icon-trash-o"></span> 删除
+                        </button>
                     </td>
                 </c:forEach>
+                <div id="remove"></div>
             </tr>
             </tbody>
         </table>
     </div>
 </c:if>
+<script type="text/javascript">
+    var flg = true;
+    function showDiv() {
+        var pf = document.getElementById("uploadCertificationImg");
+        if (flg) {
+            pf.setAttribute("style", "display");
+        } else {
+            pf.setAttribute("style", "display:none");
+        }
+        flg = !flg;
+    }
 
+    $(function () {
+        $('#btn_upload').uploadify({
+            uploader: '<c:url value="/certificationImg/saveCertificationImg.do"/>;jsessionid=<%=request.getSession().getId()%>',            // 服务器处理地址
+            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
+            buttonText: "选择认证图片",                 //按钮文字
+            buttonClass: "am-btn  am-btn-primary",         //按钮样式
+            buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子
+            height: 34,                             //按钮高度true
+            width: 140,                              //按钮宽度
+            auto: false,                          //自动上传
+            multi: true,                            //多个文件上传
+            scriptDate: {'status': '3'},
+            checkExisting: true,                    //检查文件重复
+            successTimeout: 1000000,                 //超时
+            fileSizeLimit: '2MB',
+            removeTimeout: 1,                        //移除时间
+            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeDesc: "请选择图片文件",           //文件说明
+            formData: {"certificationId": "${object.id}"}, //提交给服务器端的参数
+            onQueueComplete: function (queueData) {
+                window.location.href = "/basic/xm.do?qm=viewTenantCertification&id=${object.id}";
+            }
+        });
+        $("#btn_upload-button").css({"padding": "0em 0em", "text-align": "center"});
+    });
+</script>
 </body>
 </html>
