@@ -17,9 +17,17 @@
     <script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.history.back()"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">认证详情</strong>
+        <strong class="am-text-primary am-text-lg">上传认证图片</strong>
     </div>
 </div>
 
@@ -133,7 +141,7 @@
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: {"certificationId": "${object.id}"}, //提交给服务器端的参数
             onQueueComplete: function (queueData) {
-                window.location.href = "/basic/xm.do?qm=viewTenantCertification&id=${object.id}";
+                window.location.href = "<c:url value='/basic/xm.do?qm=viewTenantCertification&id=${object.id}'/>";
             }
         });
         $("#btn_upload-button").css({"padding": "0em 0em", "text-align": "center"});

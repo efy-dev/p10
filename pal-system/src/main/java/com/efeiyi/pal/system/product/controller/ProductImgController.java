@@ -74,7 +74,7 @@ public class ProductImgController {
         productImg.setStatus("0");
         baseManager.saveOrUpdate(ProductImg.class.getName(), productImg);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&id=" + product.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewProduct&product=product&id=" + product.getId();
 
         return new ModelAndView(resultPage);
     }

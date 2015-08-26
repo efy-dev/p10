@@ -84,7 +84,7 @@
             <td align="right">查询次数：</td>
             <td>
                 <c:if test="${object.checkCount != '0' || object.checkCount != 0 }">
-                    <a href="<c:url value='/basic/xm.do?qm=plistLabelCheckRecord_default&conditions=label.id:${object.id}'/>">${object.checkCount}次</a>
+                    <a href="<c:url value='/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${object.id}'/>">${object.checkCount}次</a>
                 </c:if>
                 <c:if test="${object.checkCount == '0' || object.checkCount == 0 }">
                     ${object.checkCount}次

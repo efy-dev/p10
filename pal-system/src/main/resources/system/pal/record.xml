@@ -7,8 +7,12 @@
             <does>
                 <do name="plistLabelCheckRecord" access="" label="防伪查询记录分页列表" result="/labelCheckRecord/labelCheckRecordPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="label.id" defaultValue="" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="label" label="标签记录" type="auto" orderBy="id:desc">
+                        <condition name="label.id" defaultValue="" operation="eq" label="标签id" inputType="text"/>
+                        <!--<condition name="label.id" defaultValue="" operation="eq" inputType="default"/>-->
+                        <!--<condition name="label.serial" defaultValue="" operation="eq" label="标签序列号" inputType="text"/>-->
                     </query>
                 </do>
 
