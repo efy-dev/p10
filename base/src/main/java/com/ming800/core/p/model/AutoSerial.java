@@ -12,7 +12,7 @@ import javax.persistence.*;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "core_p_auto_serial")
+@Table(name = "base_auto_serial")
 public class AutoSerial {
 
     private String id;
