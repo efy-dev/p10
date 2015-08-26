@@ -48,7 +48,7 @@
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
         <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
-        <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>"}/>" title="立即购买">立即购买</a>
+        <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>"} title="立即购买">立即购买</a>
       </div>
     </div>
   </div>
