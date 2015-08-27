@@ -37,7 +37,8 @@ $(function(){
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
-        }
+        };
+
     })();
 
 

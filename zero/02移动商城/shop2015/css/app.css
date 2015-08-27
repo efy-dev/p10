@@ -2,11 +2,6 @@ body,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,img,input,a,p,strong,em,i{margin:0;padding
 strong,b,em {font-weight:normal;font-style:normal;}
 img {border:0}
 ul,dl{list-style:none}
-ul {-webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px;}
 /*--//End--reset*/
 body {color: #000}
 input[type="text"],input[type="password"],input[type="button"]{-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0;}
@@ -19,7 +14,6 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .arrow-right:before {border-top:1px solid #000;}
 .arrow-down:before {border-bottom:1px solid #000;}
 .arrow-up:before {border-top:1px solid #000;-webkit-transform:rotate(-45deg);}
-
 
 @media (min-width:520px) {
     body {width:640px; margin:0 auto;}
@@ -93,6 +87,39 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-format {padding:0 20px; line-height:28px; border-top: 1px solid #000; border-bottom: 1px solid #000; font-size: 14px;}
 .details .des-format .btn-format { color: #000; position: relative;}
 .details .des-format .btn-format .arrow-right:before { position: absolute;top:50%; margin-top:-6px; right: 0;}
+/*--//End--*/
+.dialog-des-format {background: #fff; padding:20px; padding-bottom:40px;-webkit-transform: translateY(110%);text-align: left;}
+.dialog-des-format .dl-des {height:110px;padding-left:145px;position: relative; border-bottom: 1px solid #ccc;}
+.dialog-des-format .dl-des dt {position: absolute;top:-40px; left:0; border: 1px solid #000;}
+.dialog-des-format .dl-des dd {width:100%; float: left; font-size: 12px;}
+.dialog-des-format .ul-nav {border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-left: -15px;}
+.dialog-des-format .ul-nav li { float: left;margin-top:15px; margin-left: 15px;}
+.dialog-des-format .ul-nav a { padding:0 20px; line-height: 30px;font-size: 12px; color:#000;border:1px #ccc solid; display: inline-block;}
+.dialog-des-format .ul-amount {font-size: 12px; padding:15px 0;}
+.dialog-des-format .ul-amount li {width:100%;float: left;}
+.dialog-des-format .ul-amount li:first-child { margin-bottom:10px;}
+.dialog-des-format .ul-amount a {width:35px;height:30px;border:1px #000 solid; float:left; position:relative;}
+.dialog-des-format .ul-amount a.no-btn {color:#ccc}
+.dialog-des-format .ul-amount a:before {content:'';width:12px;height:1px;position:absolute;top:50%;left:50%; margin-left:-6px;background:#000;}
+.dialog-des-format .ul-amount a.add:after {content:'';width:1px;height:13px;position:absolute;top:50%; margin-top:-6px;left:50%; margin-left:-1px;background:#000;}
+.dialog-des-format .ul-amount .ipt-txt {width:45px;height:30px; padding:0 5px;text-align:center;line-height:20px;float:left; border:0;border-bottom:1px #000 solid; border-top:1px #000 solid;}
+.dialog-des-format .btn-cart {background: #000; line-height:35px; text-align: center;color: #fff; position:absolute; bottom:0; left:0; font-size: 14px;}
+.dialog-des-format .btn-cart-no:before { background:#999}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--//End--*/
 .details .des-content {font-size: 12px;}
 .details .des-content .title { padding:20px;font-size: 16px;}
 .details .des-content .ul-text { padding:0 20px;color: #666; line-height:22px;}
@@ -113,10 +140,9 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-content .peo-info li span {color:#c60}
 .details .des-content .peo-info li img { width:100%;}
 .details .des-content .peo-info li.text { margin:10px 0;}
-
 .details-total-bar {height:42px; line-height:42px; background:#fff; position:fixed;left:0;bottom:0;box-sizing:border-box; border-top:2px solid #000; border-bottom:2px solid #000;}
 .details-total-bar a {font-size:14px;color:#000; float: left;border-right:1px #000 solid; text-align: center;}
-c a:last-child { border-right: 0;}
+.details-total-bar a:last-child { border-right: 0;}
 .details-total-bar .btn-default {width:15%;}
 .details-total-bar .btn-cart {background: #000;width:40%;color: #fff;}
 .details-total-bar .btn-cart .icon { background-position:-110px -27px;width:19px; height:13px; display: inline-block; margin-right:3px; position: relative;top:1px;}
