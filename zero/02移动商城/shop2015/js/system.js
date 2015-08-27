@@ -20,6 +20,18 @@ $(function(){
         }
     })();
 
+    //020102分类导航
+    (function(){
+        $('.box-hd .ul-index-list>li .item').click(function(){
+            $(this).find('.arrow-down').toggleClass('arrow-up');
+
+            $(this).parents('.ul-index-list').siblings('.ul-nav-list').slideToggle('fast');
+
+            return false;
+        })
+    })();
+
+
 
 
 
