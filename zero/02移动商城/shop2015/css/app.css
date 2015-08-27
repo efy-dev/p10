@@ -70,9 +70,6 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .box-hd .ul-index-list>li .price strong {font-weight:normal;}
 .box-hd .ul-index-list>li a .arrow-down:before { position: absolute; left:50%; margin-left:-6px;bottom:10px;border-bottom: 1px solid #fff;border-right: 1px solid #fff;transition:all 0.3s;}
 .box-hd .ul-index-list>li a .arrow-up:before {transform:rotate(-135deg);border-top:0}
-
-
-
 .box-hd .ul-nav-list {width:100%;float: left;}
 .box-hd .ul-nav-list li {width:33%;height:40px;line-height:40px;text-align: center; border-bottom: 1px solid #000; float: left;overflow: hidden;}
 .box-hd .ul-nav-list li a {width:100%; float: left;color: #000; font-size: 14px;}
@@ -86,6 +83,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-title .icon {width:20px;height:20px; display: inline-block; margin-top: 5px;}
 .details .des-title .icon-share { background-position: -80px -84px}
 .details .des-title .icon-addfav { background-position: -80px -104px}
+.details .des-title .addfav-end .icon-addfav { background-position: -100px -104px;}
 .details .des-title p {width:100%; line-height:16px; float: left; margin-top: -2px;;}
 .details .des-price {padding: 20px;}
 .details .des-price .p-price { font-size: 14px;}
@@ -108,7 +106,6 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-content .ul-img img {width:100%;}
 .details .des-content .ul-img .text { padding: 20px;color:#666}
 .details .des-content .ul-img .img-title { padding:10px 20px;}
-
 .details .des-content .peo-info { padding:20px;}
 .details .des-content .peo-info ul { padding:15px 20px;border:3px #999 solid; font-size: 12px;}
 .details .des-content .peo-info li {width:100%; float: left;}
@@ -116,7 +113,15 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-content .peo-info li span {color:#c60}
 .details .des-content .peo-info li img { width:100%;}
 .details .des-content .peo-info li.text { margin:10px 0;}
-    /*--//End--*/
+
+.details-total-bar {height:42px; line-height:42px; background:#fff; position:fixed;left:0;bottom:0;box-sizing:border-box; border-top:2px solid #000; border-bottom:2px solid #000;}
+.details-total-bar a {font-size:14px;color:#000; float: left;border-right:1px #000 solid; text-align: center;}
+c a:last-child { border-right: 0;}
+.details-total-bar .btn-default {width:15%;}
+.details-total-bar .btn-cart {background: #000;width:40%;color: #fff;}
+.details-total-bar .btn-cart .icon { background-position:-110px -27px;width:19px; height:13px; display: inline-block; margin-right:3px; position: relative;top:1px;}
+.details-total-bar .btn-buy { width:30%;}
+/*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative;}
 .shop-cart .cart-list {padding:0 20px;box-sizing:border-box;}
 .shop-cart .cart-list li {margin-top:25px;}
