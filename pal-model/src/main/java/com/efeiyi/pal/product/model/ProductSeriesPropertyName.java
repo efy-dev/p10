@@ -17,18 +17,6 @@ public class ProductSeriesPropertyName {
     private ProductSeries productSeries;
     private String name;
     private String status;
-    private ProductPropertyValue productPropertyValue;
-
-    @OneToOne
-    @JoinColumn(name="id")
-    @Where(clause = "status='1'")
-    public ProductPropertyValue getProductPropertyValue() {
-        return productPropertyValue;
-    }
-
-    public void setProductPropertyValue(ProductPropertyValue productPropertyValue) {
-        this.productPropertyValue = productPropertyValue;
-    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

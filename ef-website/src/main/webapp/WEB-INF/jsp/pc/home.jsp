@@ -23,7 +23,7 @@
                 <c:if test="${status.index!=0}">
                     <li>
                 </c:if>
-                <img src="${banner.imageUrl}" width="1280" height="481" alt=""/></li>
+                <img src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481" alt=""/></li>
             </c:forEach>
             <%--<li><img src="shop2015/upload/focus2.jpg" width="1280" height="481" alt=""/></li>--%>
             <%--<li><img src="shop2015/upload/focus3.jpg" width="1280" height="481" alt=""/></li>--%>
@@ -31,9 +31,9 @@
         </ul>
         <ul class="slider-nav">
             <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <c:forEach items="${bannerList}" var="banner"  begin="1">
+                <li></li>
+            </c:forEach>
         </ul>
     </div>
     <!-- //End--topbar-->
@@ -50,7 +50,7 @@
             <div class="title wh"><h3>陶冶烧造</h3></div>
             <div class="list-pro">
                 <ul class="ul-item">
-                    <c:forEach items="${recommendMap.get(project.id)}" var="product" varStatus="status">
+                    <c:forEach items="${recommendMap.get(project.id)}" var="product" varStatus="status" begin="0" end="3">
                         <c:if test="${status.index%2==1}">
                             <c:set var="style" value="even"/>
                         </c:if>
@@ -60,7 +60,7 @@
                         <li class="${style}"><a href="<c:url value="/product/hot/${product.id}"/>" target="_blank"
                                                 title="${product.product.name}"><strong>${product.product.name}</strong><span
                                 class="price"><em>￥</em><font>${product.price}</font></span><img class="imgfilter"
-                                                                                                 src="${product.product.picture_url}"
+                                                                                                 src="http://pro.efeiyi.com/${product.productModel_url}@!home-product"
                                                                                                  alt=""/></a></li>
                     </c:forEach>
                 </ul>
@@ -75,7 +75,7 @@
             <ul class="ul-item">
                 <c:forEach items="${masterList}" var="master">
                     <li>
-                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com${favicon}"
+                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com${master.favicon}"
                                                         alt=""/></a>
 
                         <p><strong>${master.name}</strong></p>

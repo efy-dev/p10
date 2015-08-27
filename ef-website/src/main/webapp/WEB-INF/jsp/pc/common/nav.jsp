@@ -12,7 +12,7 @@
     <div class="hd">
         <ul class="ul-item">
             <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
-            <li><a href="" title="手机e飞蚁">手机e飞蚁</a></li>
+            <li><a href="/" title="手机e飞蚁">手机e飞蚁</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>

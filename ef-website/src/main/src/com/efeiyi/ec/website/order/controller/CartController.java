@@ -223,7 +223,7 @@ public class CartController {
             }
         }
 
-        CartProduct cartProduct = (CartProduct)baseManager.getObject(CartProduct.class.getName(),request.getParameter("cartProductId"));
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), request.getParameter("cartProductId"));
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
             Cart cart = cartProduct.getCart();
@@ -428,6 +428,15 @@ public class CartController {
                     totalPrice += price;
                 }
             }
+
+            List<CartProduct> cartProductList = cart.getCartProductList();
+            for (CartProduct cartProductTemp : cartProductList) {
+                if (cartProductTemp.getId().equals(cartProductId)) {
+                    cartProductTemp.setIsChoose("1");
+//                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                }
+            }
+
             cart.setTotalPrice(new BigDecimal(totalPrice));
         }
 
@@ -470,6 +479,15 @@ public class CartController {
                     totalPrice += price;
                 }
             }
+
+            List<CartProduct> cartProductList = cart.getCartProductList();
+            for (CartProduct cartProductTemp : cartProductList) {
+                if (cartProductTemp.getId().equals(cartProductId)) {
+                    cartProductTemp.setIsChoose("0");
+//                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                }
+            }
+
             cart.setTotalPrice(new BigDecimal(totalPrice));
         }
         return cart;
@@ -665,6 +683,30 @@ public class CartController {
         } else {
             return cart.getCartProductList().size() + "";
         }
+    }
+
+    @RequestMapping({"/cart/cartCheck.do"})
+    @ResponseBody
+    public boolean cartCheck(HttpServletRequest request) {
+        Cart cart = null;
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            String cartId = request.getParameter("cartId");
+            cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
+        }else {
+            cart = (Cart)request.getSession().getAttribute("cart");
+        }
+        Integer cartAmount = 0;
+        for (CartProduct cartProduct : cart.getCartProductList()) {
+            if (cartProduct.getIsChoose().equals("1")) {
+                cartAmount++;
+            }
+        }
+        if (cartAmount > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 
