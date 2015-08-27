@@ -80,16 +80,16 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
     public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception{
         Session session = getSession();//使用同一个session
         session.setCacheMode(CacheMode.IGNORE);//关闭与二级缓存的交互
-        Integer flag = labelBatch.getAmount();
+        Integer num = labelBatch.getAmount();
         int count = 0;
-        for (int x = 0; x < 10; x++) {
-            new Thread(new Code2UrlConsumer()).start();
+        Url2FileConsumer url2FileConsumer = new Url2FileConsumer(num,labelBatch.getId());
+        for (int x = 0; x < 100; x++) {
+            new Thread(new Code2UrlConsumer(url2FileConsumer)).start();
         }
-        Url2FileConsumer url2FileConsumer = new Url2FileConsumer(flag);
         new Thread(url2FileConsumer).start();
 
 //        long begin = System.currentTimeMillis();
-        for (int i = 1; i <= flag;) {
+        for (int i = 1; i <= num;) {
             String code = RandomStringUtils.randomNumeric(18);
             code = Long.toString(Long.parseLong(code), 36);
             if (code.length() != 12) {
@@ -114,7 +114,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
             }
         }
 
-        url2FileConsumer.setGeneratorIsEnd(true);
+        url2FileConsumer.setGeneratorEnd(true);
         synchronized (Code2UrlConsumer.codeList) {
             Code2UrlConsumer.codeList.notifyAll();
         }
