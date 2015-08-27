@@ -50,7 +50,7 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="tenant.idName" for="tenant.idName" class="am-u-sm-3 am-form-label">商户名称 <small style="color: red">*</small></label>
+            <label name="tenant.idName" for="tenant.idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <c:if test="${empty object || object.id == null || object.id==''}">
                     <input type="text" name="tenant.idName" id="tenant.idName" placeholder="商户名称" value="${tenant.name}" readonly>
@@ -63,19 +63,19 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">认证证书 <small style="color: red">*</small></label>
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">认证证书 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="name" placeholder="认证证书" value="${object.name}" required>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="org" for="org" class="am-u-sm-3 am-form-label">认证机构 <small style="color: red">*</small></label>
+            <label name="org" for="org" class="am-u-sm-3 am-form-label">认证机构 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="org" id="org" placeholder="认证机构" value="${object.org}" required>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="theDate" for="theDate" class="am-u-sm-3 am-form-label">认证时间 <small style="color: red">*</small></label>
+            <label name="theDate" for="theDate" class="am-u-sm-3 am-form-label">认证时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}">
                 <input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间"
                        value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>" required readonly/>
@@ -85,22 +85,11 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label for="level" class="am-u-sm-3 am-form-label">认证结果 <small style="color: red">*</small></label>
+            <label for="level" class="am-u-sm-3 am-form-label">认证结果 <small>*</small></label>
             <div class="am-u-sm-9" id="PLevel">
                 <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.level}" type="select"/>
             </div>
         </div>
-
-        <%--<div class="am-form-group">--%>
-            <%--<label for="img" class="am-u-sm-3 am-form-label">证书图片 <small>*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input type="file" id="img" name="img" placeholder="证书图片"--%>
-                       <%--value="${object.imgUrl}">--%>
-            <%--</div>--%>
-            <%--<c:if test="${!empty object.imgUrl}">--%>
-                <%--<img src="http://pal.efeiyi.com/${object.imgUrl}@!pal-img-form">--%>
-            <%--</c:if>--%>
-        <%--</div>--%>
 
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">

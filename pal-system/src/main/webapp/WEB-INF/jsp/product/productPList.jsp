@@ -11,7 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-
+<%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -49,7 +49,7 @@
                 <td>
                     <a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.name}</a>
                     <c:if test="${!empty product.logo}">
-                        <img src="http://pal.efeiyi.com/${product.logo}@!pal-img-list">
+                        <img src="<%=imgBasePath %>${product.logo}<%=imgListCss %>">
                     </c:if>
                 </td>
                 <td>${product.masterName}</td>

@@ -1,9 +1,12 @@
 package com.efeiyi.pal.system.autoCode;
 
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,26 +16,49 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Url2FileConsumer implements Runnable {
 
     public static Map<String, String> codeUrlMap = new ConcurrentHashMap<>();
-    private  boolean generatorIsEnd = false;
-    public static boolean outputIsEnd = false;
+    private  boolean generatorEnd = false;
     private int count=0;
+    private boolean start = false;
+    private String labelBatchId;
 
-    public boolean isGeneratorIsEnd() {
-        return generatorIsEnd;
+    public boolean isGeneratorEnd() {
+        return generatorEnd;
     }
 
-    public void setGeneratorIsEnd(boolean generatorIsEnd) {
-        this.generatorIsEnd = generatorIsEnd;
+    public int getCount() {
+        return count;
     }
 
-    public Url2FileConsumer(int count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
+    public boolean isStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
+    public void setGeneratorEnd(boolean generatorEnd) {
+        this.generatorEnd = generatorEnd;
+    }
+
+    public Url2FileConsumer(int count,String labelBatchId) {
+        this.count = count;
+        this.labelBatchId = labelBatchId;
+    }
+
     public void run() {
+        BufferedWriter bw = null;
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("d:/abc.txt")));
-            long start = System.currentTimeMillis();
+            File file = new File(labelBatchId + ".txt.tmp");
+//            if(!file.exists()) {
+//                file.mkdirs();
+//            }
+            bw = new BufferedWriter(new FileWriter(file));
+            long startTime = System.currentTimeMillis();
             while (true) {
 
                 if (codeUrlMap.size() < count) {
@@ -44,7 +70,7 @@ public class Url2FileConsumer implements Runnable {
                     Thread.currentThread().sleep(3000);
                 } else {
                     System.out.println("当前：" + codeUrlMap.size());
-                    Url2FileConsumer.outputIsEnd = true;
+                    this.start = true;
                     synchronized (Code2UrlConsumer.codeList) {
                         Code2UrlConsumer.codeList.notifyAll();
                     }
@@ -56,9 +82,18 @@ public class Url2FileConsumer implements Runnable {
                 }
             }
             bw.flush();
-            System.out.println("输出用时：" + (System.currentTimeMillis() - start));
+            FileUtils.copyFile(file,new File(labelBatchId + ".txt"));
+            System.out.println("输出用时：" + (System.currentTimeMillis() - startTime));
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            if(bw != null){
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

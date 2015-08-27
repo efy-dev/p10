@@ -70,13 +70,17 @@ $(function(){
         var $hover=$add.siblings('.hover');
         var $active=$add.siblings('.active');
         $add.hover(function(){
+            $(this).addClass('icon-active');
             if($active.is(':hidden')){
                 $hover.show();
             }else{
                 $hover.hide();
             }
+        },function(){
+            $(this).removeClass('icon-active');
         });
         $add.click(function(){
+            $(this).addClass('icon-active2');
             $hover.hide();
             $active.show();
         })

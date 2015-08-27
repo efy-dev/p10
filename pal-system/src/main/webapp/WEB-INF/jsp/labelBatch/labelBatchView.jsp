@@ -28,7 +28,7 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
 </c:if>
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -42,19 +42,19 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td align="right">标签批次：</td>
+            <td>标签批次</td>
             <td>${object.setting}</td>
         </tr>
         <tr>
-            <td align="right">数量：</td>
+            <td>数量</td>
             <td>${object.amount}</td>
         </tr>
         <tr>
-            <td align="right">创建时间：</td>
+            <td>创建时间</td>
             <td><fmt:formatDate value="${object.createDate}" pattern="yyyy-MM-dd"/> </td>
         </tr>
         <tr>
-            <td align="right">状态：</td>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${object.status}" type="normal"/>
             </td>

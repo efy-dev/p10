@@ -20,6 +20,7 @@
         <module>pal-system</module>
         <module>pal-model</module>
         <module>ef-wiki</module>
+        <module>pal-website</module>
     </modules>
 
     <repositories>

@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -17,7 +18,7 @@
 <body>
 
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -32,19 +33,19 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>非遗项目编号：</td>
+            <td>非遗项目编号</td>
             <td>${object.productSeries.serial}</td>
         </tr>
         <tr>
-            <td>非遗项目名称：</td>
+            <td>非遗项目名称</td>
             <td>${object.productSeries.name}</td>
         </tr>
         <tr>
-            <td>商户名称：</td>
+            <td>商户名称</td>
             <td>${object.tenant.name}</td>
         </tr>
         <tr>
-            <td>商户地址：</td>
+            <td>商户地址</td>
             <td>${object.tenant.province}&nbsp;${object.tenant.city}&nbsp;${object.tenant.address}</td>
         </tr>
         <tr>
@@ -85,7 +86,7 @@
             <tr>
                 <c:forEach items="${object.imgList}" var="Img">
                     <td>
-                        <img src="http://pal.efeiyi.com/${Img.imgUrl}@!pal-img-list"/>
+                        <img src="<%=imgBasePath %>${Img.imgUrl}<%=imgListCss %>"/>
                     </td>
                 </c:forEach>
             </tr>

@@ -45,7 +45,7 @@
         </c:if>
 
         <div class="am-form-group">
-            <label name="purchaseOrder.idName" for="purchaseOrder.idName" class="am-u-sm-3 am-form-label">订单编号 <small style="color: red">*</small></label>
+            <label name="purchaseOrder.idName" for="purchaseOrder.idName" class="am-u-sm-3 am-form-label">订单编号 <small>*</small></label>
             <div class="am-u-sm-9">
                 <c:if test="${empty object || object.id == null || object.id==''}">
                     <input type="text" name="purchaseOrder.idName" id="purchaseOrder.idName" placeholder="订单编号" value="${purchaseOrder.serial}" readonly>
@@ -58,15 +58,8 @@
             </div>
         </div>
 
-        <%--<div class="am-form-group">--%>
-            <%--<label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small style="color: red">*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input type="text" name="payWay" id="payWay" placeholder="支付方式" value="${object.payWay}" required>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
         <div class="am-form-group">
-            <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small  style="color: red">*</small></label>
+            <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small>*</small></label>
             <div class="am-u-sm-9" id="payWayDiv">
                 <ming800:status name="payWay" dataType="PCPurchaseOrderPayment.payWay" checkedValue="${object.payWay}" type="select"/>
             </div>

@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -26,7 +27,7 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -42,15 +43,15 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>非遗项目名称：</td>
+            <td>非遗项目名称</td>
             <td>${object.name}</td>
         </tr>
         <tr>
-            <td>非遗项目编号：</td>
+            <td>非遗项目编号</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td>状态：</td>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCProductSeries.status"
                                 checkedValue="${object.status}" type="normal"/>
@@ -93,7 +94,7 @@
 <c:if test="${not empty object.tenantProductSeriesList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
-            <strong class="am-text-primary am-text-lg">相关商户</strong>/<small style="color: #0088ff">溯源信息</small>
+            <strong class="am-text-primary am-text-lg">相关商户&nbsp;</strong>/<small style="color: #0088ff">&nbsp;溯源、认证信息</small>
         </div>
     </div>
     <div>
@@ -101,10 +102,12 @@
             <tr style="text-align:left">
                 <td>操作</td>
                 <td>商户名称</td>
-                <td>商户地址</td>
                 <td>制作工艺</td>
                 <td>创作地域</td>
                 <td>溯源图片</td>
+                <td>认证证书</td>
+                <td>认证级别</td>
+                <td>认证图片</td>
             </tr>
 
             <c:forEach items="${object.tenantProductSeriesList}" var="tenantProductSeries">
@@ -116,13 +119,24 @@
                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑图片</button>
                     </td>
                     <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&ps=ps&id=${tenantProductSeries.tenant.id}"/>">${tenantProductSeries.tenant.name}</a></td>
-                    <td>${tenantProductSeries.tenant.province}&nbsp;${tenantProductSeries.tenant.city}&nbsp;${tenantProductSeries.tenant.address}</td>
                     <td>${tenantProductSeries.craft}</td>
                     <td>${tenantProductSeries.region}</td>
                     <td>
-                        <c:forEach items="${tenantProductSeries.imgList}" var="img">
+                        <c:forEach items="${tenantProductSeries.imgList}" var="img" begin="0" end="0">
                             <c:if test="${not empty img.imgUrl}">
-                                <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
+                                <img src="<%=imgBasePath %>${img.imgUrl}<%=imgListCss %>"/>
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                    <td>${tenantProductSeries.tenantCertification.name}</td>
+                    <td>
+                        <ming800:status name="level" dataType="PCTenantCertification.level"
+                                        checkedValue="${tenantProductSeries.tenantCertification.level}" type="normal" />
+                    </td>
+                    <td>
+                        <c:forEach items="${tenantProductSeries.tenantCertification.imgList}" var="tenantCertificationImg" begin="0" end="0">
+                            <c:if test="${not empty tenantCertificationImg.imgUrl}">
+                                <img src="<%=imgBasePath %>${tenantCertificationImg.imgUrl}<%=imgListCss %>"/>
                             </c:if>
                         </c:forEach>
                     </td>

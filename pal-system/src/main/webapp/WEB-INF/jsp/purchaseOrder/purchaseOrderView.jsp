@@ -28,6 +28,23 @@
     </script>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${order.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="编辑"/>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
+    <input onclick=""
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="删除" />
+    <input onclick="location.replace(document.referrer)"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">订单编号为${object.serial}的订单信息</strong>
@@ -37,11 +54,11 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>订单编号：</td>
+            <td>订单编号</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td>商户名称：</td>
+            <td>商户名称</td>
             <td>${object.tenant.name}</td>
         </tr>
         <%-- 二期添加 --%>
@@ -50,7 +67,11 @@
             <%--<td>${object.user.name}</td>--%>
         <%--</tr>--%>
         <tr>
-            <td>状态：</td>
+            <td>创建时间</td>
+            <td><fmt:formatDate value="${object.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+        </tr>
+        <tr>
+            <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${object.status}" type="normal" />
 
@@ -80,10 +101,6 @@
                 </c:if>
             </td>
         </tr>
-        <tr>
-            <td>创建时间：</td>
-            <td><fmt:formatDate value="${object.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-        </tr>
     </table>
 </div>
 
@@ -103,7 +120,7 @@
         <input type="hidden" name="purchaseOrder.id" value="${object.id}">
 
         <div class="am-form-group" style="child-align: left">
-            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small style="color: red">*</small></label>
+            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
                 <input id="product_idName" placeholder="商品名称"
                        onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')" required>
@@ -112,9 +129,9 @@
         </div>
 
         <div class="am-form-group">
-            <label name="amount" for="amount" class="am-u-sm-3 am-form-label"  style="width: auto">数量 <small style="color: red">*</small></label>
+            <label name="amount" for="amount" class="am-u-sm-3 am-form-label"  style="width: auto">数量 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
-                <input type="number" name="amount" id="amount" placeholder="数量" required style="width: auto">
+                <input type="number" name="amount" id="amount" placeholder="数量" required style="width: auto" aria-required="true">
             </div>
         </div>
 
@@ -135,7 +152,7 @@
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <c:if test="${object.status != '9'}">
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <td>操作</td>
                 </c:if>
                 <td>订单编号</td>
@@ -144,7 +161,7 @@
             </tr>
             <c:forEach items="${object.purchaseOrderLabelList}" var="pol">
                 <tr>
-                    <c:if test="${object.status != '9'}">
+                    <c:if test="${object.status == '1' || object.status == '2'}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
@@ -182,7 +199,7 @@
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <c:if test="${object.status != '9'}">
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <td>操作</td>
                 </c:if>
                 <td>订单编号</td>
@@ -191,7 +208,7 @@
             </tr>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="pop">
                 <tr>
-                    <c:if test="${object.status != '9'}">
+                    <c:if test="${object.status == '1' || object.status == '2'}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >

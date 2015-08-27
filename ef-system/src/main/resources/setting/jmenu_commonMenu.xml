@@ -72,9 +72,9 @@
         </jnode>
 
         <jnode id="contentManager" url="/main.do?jnodeId=contentManager" text_zh_CN="内容管理">
-            <jnode url="/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站轮播图">
+            <jnode url="/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=ec.home.banner" access="admin,manager" text_zh_CN="电商网站轮播图">
                 <match url="/basic/xm.do?qm=plistEcBanner_tenant"/>
-                <match url="/basic/xm.do?qm=formBanner&amp;groupName=tenant"/>
+                <match url="/basic/xm.do?qm=formBanner&amp;groupName=ec.home.banner"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站文档">
                 <match url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant"/>

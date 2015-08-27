@@ -22,39 +22,34 @@ public class Code2UrlConsumer implements Runnable {
 
     HttpClient httpclient = new HttpClient();
     DefaultHttpClient httpClient = new DefaultHttpClient();
-    static String accessToken;
+    static transient String accessToken;
     HttpPost method;
     JSONObject jsonObject = new JSONObject();
     HttpResponse response;
     StringEntity stringEntity;
+    private Url2FileConsumer url2FileConsumer;
+
     public static ConcurrentLinkedQueue<String> codeList = new ConcurrentLinkedQueue<>();
 
-//    public static void main(String[] arg) throws IOException {
-//
-//        for (int x = 0; x < 100; x++) {
-//            new Thread(new Code2UrlConsumer()).start();
-//        }
-//        new Thread(new Code2UrlProducer()).start();
-//        new Thread(new Url2FileConsumer()).start();
-//    }
-
+    public Code2UrlConsumer(Url2FileConsumer url2FileConsumer) {
+        this.url2FileConsumer = url2FileConsumer;
+    }
 
     public void run() {
 
-        Code2UrlConsumer consumer = new Code2UrlConsumer();
 
         if (Code2UrlConsumer.accessToken == null) {
             synchronized (Code2UrlConsumer.codeList) {
                 if (Code2UrlConsumer.accessToken == null) {
-                    Code2UrlConsumer.accessToken = consumer.getAccessToken();
+                    Code2UrlConsumer.accessToken = getAccessToken();
                 }
             }
         }
-        consumer.method = new HttpPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + accessToken);
-        consumer.prepareJsonObject();
+        method = new HttpPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + accessToken);
+        prepareJsonObject();
 
         while (true) {
-            if (Url2FileConsumer.outputIsEnd) {
+            if (url2FileConsumer.isStart()) {
                 System.out.println(Thread.currentThread().getId() + ":退出");
                 break;
             }
@@ -62,9 +57,10 @@ public class Code2UrlConsumer implements Runnable {
                 String code = Code2UrlConsumer.codeList.remove();
                 String url = "";
                 try {
-                    url = consumer.getTicketUrl(code);
+                    url = getTicketUrl(code);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+                    return;
                 }
                 Url2FileConsumer.codeUrlMap.put(code, url);
 //                synchronized (Url2FileConsumer.codeUrlMap) {
@@ -120,7 +116,13 @@ public class Code2UrlConsumer implements Runnable {
         stringEntity.setContentType("application/json");
         method.setEntity(stringEntity);
         response = httpClient.execute(method);
-        return (String) JSONObject.parseObject(EntityUtils.toString(response.getEntity())).get("ticket");
+        String json = EntityUtils.toString(response.getEntity());
+        String ticket = (String)JSONObject.parseObject(json).get("ticket");
+        if(ticket == null){
+            Code2UrlConsumer.accessToken = getAccessToken();
+            ticket = getTicket(code);
+        }
+        return ticket;
     }
 
     private String getTicketUrl(String code) throws UnsupportedEncodingException {
@@ -132,10 +134,9 @@ public class Code2UrlConsumer implements Runnable {
         String url = "";
         try {
             response = httpClient.execute(method);
-            String s = EntityUtils.toString(response.getEntity());
-            url = (String) JSONObject.parseObject(s).get("url");
+            String json = EntityUtils.toString(response.getEntity());
+            url = (String) JSONObject.parseObject(json).get("url");
 //            url = "*******************";
-//            Thread.currentThread().sleep(500);
             if (url == null) {
                 url = getTicketUrl(code);
             }

@@ -21,9 +21,7 @@
                 <do name="formTenant" label="商户信息" access="" result="/tenant/tenantForm"/>
                 <do name="viewTenant" label="商户信息详情页" access="" result="/tenant/tenantView"/>
                 <do name="removeTenant" label="删除商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
-                <do name="saveOrUpdateTenant" label="新建或更新商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"
-                    execute="com.efeiyi.pal.system.organization.controller.TenantHandler">
-                </do>
+
             </does>
         </entity>
 
@@ -50,31 +48,6 @@
                 </do>
             </does>
         </entity>
-
-        <!--<entity name="PCTenantSource" label="溯源信息"  model="com.efeiyi.pal.organization.model">-->
-            <!--<does>-->
-                <!--<do name="listTenantSource" access="" label="溯源信息列表" result="/tenantSource/tenantSourceList">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                        <!--<condition name="tenant.id" defaultValue="" operation="eq"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-                <!--<do name="plistTenantSource" access="" label="溯源信息分页列表" result="/tenantSource/tenantSourcePList">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-
-                <!--<do name="formTenantSource" label="溯源信息" access="" result="/tenantSource/tenantSourceForm"/>-->
-                <!--&lt;!&ndash;<do name="viewTenantSource" label="溯源信息详情页" access="" result="/tenantSource/tenantSourceView"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<do name="removeTenantSource" label="删除溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<do name="saveOrUpdateTenantSource" label="新建或更新溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"&ndash;&gt;-->
-                    <!--&lt;!&ndash;execute="com.efeiyi.pal.system.organization.controller.UserHandler">&ndash;&gt;-->
-                <!--&lt;!&ndash;</do>&ndash;&gt;-->
-            <!--</does>-->
-        <!--</entity>-->
 
         <entity name="PCTenantCertification" label="认证信息"  model="com.efeiyi.pal.organization.model.TenantCertification">
             <fields>
@@ -105,10 +78,6 @@
 
                 <do name="formTenantCertification" label="认证信息" access="" result="/tenantCertification/tenantCertificationForm"/>
                 <do name="viewTenantCertification" label="认证信息详情页" access="" result="/tenantCertification/tenantCertificationView"/>
-                <!--<do name="removeTenantSource" label="删除溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"/>-->
-                <!--<do name="saveOrUpdateTenantSource" label="新建或更新溯源信息" access="" result="redirect:/basic/xm.do?qm=plistTenantSource_default"-->
-                <!--execute="com.efeiyi.pal.system.organization.controller.UserHandler">-->
-                <!--</do>-->
             </does>
         </entity>
     </entities>
