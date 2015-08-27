@@ -80,7 +80,8 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         model.addAttribute(PalConst.getInstance().resultProduct, product);
 
         Date date = new Date();
-        if (label.getCheckCount() == 1) {
+        //如果首次查
+        if (label.getCheckCount() == 1 && label.getStatus().equals(PalConst.getInstance().usedStatus)) {
             model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
         }
         //如果非首次查
@@ -211,7 +212,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         }
         System.out.println("标签已查次数：" + label.getCheckCount());
         //如果首次查
-        if (label.getCheckCount() == 1) {
+        if (label.getCheckCount() == 1 && label.getStatus().equals(PalConst.getInstance().unusedStatus)) {
 
             label.setStatus(PalConst.getInstance().usedStatus);
             label.setFirstCheckDateTime(date);

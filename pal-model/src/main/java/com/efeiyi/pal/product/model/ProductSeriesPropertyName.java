@@ -1,6 +1,8 @@
 package com.efeiyi.pal.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -22,6 +24,7 @@ public class ProductSeriesPropertyName {
     @OneToOne
     @JoinColumn(name="id")
     @Where(clause = "status='1'")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductPropertyValue getProductPropertyValue() {
         return productPropertyValue;
     }
@@ -44,6 +47,7 @@ public class ProductSeriesPropertyName {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
     @Where(clause = "status='1'")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductSeries getProductSeries() {
         return productSeries;
     }
