@@ -4,12 +4,6 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>个人中心</title>
   <script>
     function func(o){
       window.location.href="<c:url value="/order/myEfeiyi/list.do?status="/>"+o;

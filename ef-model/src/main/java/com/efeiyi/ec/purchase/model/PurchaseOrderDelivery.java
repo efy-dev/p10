@@ -18,6 +18,7 @@ public class PurchaseOrderDelivery {
     private Date createDateTime;
     private String serial;
     private String status; // 1已发货 2未发货
+    private String logisticsCompany;//物流公司
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -76,4 +77,14 @@ public class PurchaseOrderDelivery {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Column(name= "logistics_company")
+    public String getLogisticsCompany() {
+        return logisticsCompany;
+    }
+
+    public void setLogisticsCompany(String logisticsCompany) {
+        this.logisticsCompany = logisticsCompany;
+    }
+
 }

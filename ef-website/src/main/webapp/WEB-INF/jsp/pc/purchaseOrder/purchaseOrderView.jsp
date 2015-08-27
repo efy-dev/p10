@@ -39,15 +39,7 @@
             <p>运单号码：<span>0987654321</span></p>
             <ul class="strong-1">
               <li class="strong">物流跟踪：</li>
-              <li class="strong">
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-                <p><span class="active2">2015-08-01</span><span>17:32:19</span><span>北京西城区圆通物流公司</span><span>已收件</span></p>
-
+              <li class="strong" id="wl">
               </li>
             </ul>
           </dd>
@@ -107,5 +99,24 @@
 <![endif]-->
 <script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<script>
+  $(document).ready(function(){
+    $.ajax({
+     type:'post',
+      async:'false',
+      url:'<c:url value="http://api.kuaidi100.com/api?id=f8e96a50d49ef863&com=guotongkuaidi&nu=2577435025&show=0&muti=1&order=desc"/>',
+      dataType:'jsonp',
+      success: function(data){
+        var rowHtml = "";
+        var obj = data.data;
+        for(var i = 0; i< obj.length;i++){
+            rowHtml+="<p><span class='active2'>"+obj[i].time +"</span><span>"+obj[i].context+"</span></p>";
+        }
+        $("#wl").append(rowHtml);
+    },
+    });
+
+  })
+</script>
 </body>
 </html>
