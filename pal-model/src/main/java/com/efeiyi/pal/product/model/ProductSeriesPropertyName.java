@@ -24,7 +24,6 @@ public class ProductSeriesPropertyName {
     @OneToOne
     @JoinColumn(name="id")
     @Where(clause = "status='1'")
-    @NotFound(action= NotFoundAction.IGNORE)
     public ProductPropertyValue getProductPropertyValue() {
         return productPropertyValue;
     }

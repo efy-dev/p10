@@ -30,6 +30,7 @@
             <td>数量</td>
             <td>状态</td>
             <td>创建日期</td>
+            <td>下载标签文本</td>
         </tr>
         <c:forEach items="${requestScope.pageInfo.list}" var="labelBatch">
             <tr style="text-align: left">

@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.basic.controller;
+package com.efeiyi.ec.system.project.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
@@ -15,37 +15,33 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2015/7/20.
+ * Created by Administrator on 2015/7/16.
  */
-public class BasicBannerFormHandler implements MultipartHandler{
+public class ProjectFormHandler implements MultipartHandler {
+
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
-
 
     @Override
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "banner/"+identify+"_"+request.getParameter("groupName")+".jpg";
-        String bucket = request.getParameter("bucket");
-        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("imageUrl"), bucket, url);
+        String url = "photo/" + identify + ".jpg";
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
+        HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
 
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
-        HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
-        paramMap.put("imageUrl",url);
-        paramMap.put("group",request.getParameter("groupName"));
-        paramMap.put("status","1");
+        if (!multipartRequest.getFile("picture_url").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url"), "ec-efeiyi", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
+            paramMap.put("picture_url", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
+        }
 
-//        Master tenant = new Master();
-//        tenant.setId(request.getParameter("tenant_id"));
-        //paramMap.put("tenant.id",request.getParameter("tenant.id"));
-
+        //������� start
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
+        //������� end
+        modelMap.put("object", object);
 
-
-        modelMap.put("object",object);
-
+        modelMap.put("fatherId",request.getParameter("fatherId"));
         return modelMap;
     }
 }

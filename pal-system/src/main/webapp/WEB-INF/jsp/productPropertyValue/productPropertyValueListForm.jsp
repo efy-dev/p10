@@ -39,22 +39,23 @@
                             <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>">
                             <input type="text" name="value<%=i %>" id="value<%=i %>" placeholder="属性值" required>
                         </c:if>
-                        <c:forEach items="${PPVList}" var="productPropertyValue">
-                            <c:if test="${ productPropertyValue.productSeriesPropertyName.id == productSeriesPropertyName.id}">
-                                <% tag = 1; %>
-                                <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>" value="${productPropertyValue.id}">
-                                <input type="text" name="value<%=i %>" id="value<%=i %>" value="${productPropertyValue.value}" required>
-                            </c:if>
-                        </c:forEach>
-                        <%
-                            if (tag == 0){
-                        %>
+                        <c:if test="${not empty PPVList}">
+                            <c:forEach items="${PPVList}" var="productPropertyValue">
+                                <c:if test="${ productPropertyValue.productSeriesPropertyName.id == productSeriesPropertyName.id}">
+                                    <% tag = 1; %>
+                                    <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>" value="${productPropertyValue.id}">
+                                    <input type="text" name="value<%=i %>" id="value<%=i %>" value="${productPropertyValue.value}" required>
+                                </c:if>
+                            </c:forEach>
+                            <%
+                                if (tag == 0){
+                            %>
                             <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>">
                             <input type="text" name="value<%=i %>" id="value<%=i %>" placeholder="属性值" required>
-                        <%
-                            }
-                        %>
-
+                            <%
+                                }
+                            %>
+                        </c:if>
                     </div>
                 </div>
                 <% i += 1;%>

@@ -2,7 +2,9 @@ package com.efeiyi.pal.system.product.controller;
 
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.ProductSeriesPropertyName;
+import com.efeiyi.pal.system.product.service.ProductSeriesServiceManager;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Administrator on 2015/7/31.
+ *
  */
 
 @Controller
@@ -23,6 +26,8 @@ public class ProductSeriesPropertyNameController {
     @Autowired
     private BaseManager baseManager;
 
+    private ProductSeriesServiceManager productSeriesServiceManager = (ProductSeriesServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productSeriesServiceManagerImpl");
+
     @RequestMapping("/newPropertyNameList.do")
     public ModelAndView newProductSeriesPropertyNameList(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
@@ -30,14 +35,10 @@ public class ProductSeriesPropertyNameController {
         if (productSeriesId == null || productSeriesId.trim().equals("")) {
             throw new Exception("productSeriesId不能为空");
         }
-
         ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
-//        int count = Integer.parseInt(request.getParameter("count"));
-//        String resultPage = savePropertyNameList(request, count, productSeries, productSeriesId);
 
         modelMap.put("productSeries", productSeries);
         modelMap.put("PSPNListSize", productSeries.getProductSeriesPropertyNameList().size());
-//        String resultPage = "redirect:/basic/xm.do?qm=formProductSeriesPropertyName&conditions=productSeries.id:" + productSeries.getId();
 
         String resultPage = "/productSeriesPropertyName/productSeriesPropertyNameListForm";
 
@@ -46,6 +47,8 @@ public class ProductSeriesPropertyNameController {
 
     @RequestMapping("/savePropertyNameList.do")
     public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request) throws Exception {
+
+        request.setCharacterEncoding("utf-8");
 
         String productSeriesId = request.getParameter("productSeries.id");
         if (productSeriesId == null || productSeriesId.equals("")) {
@@ -82,10 +85,11 @@ public class ProductSeriesPropertyNameController {
                 propertyName = (ProductSeriesPropertyName) baseManager.getObject(ProductSeriesPropertyName.class.getName(), propertyNameId);
             }
 
-            String name = request.getParameter("name"+i);
+            String name = new String (request.getParameter("name"+i).getBytes("utf-8"), "utf-8");
 
             if (name == null || name.equals("")){
                 if (propertyNameId != null && !propertyNameId.trim().equals("")){
+                    productSeriesServiceManager.deleteProductPropertyValueByPropertyName(propertyName);
                     baseManager.delete(propertyName.getClass().getName(), propertyName.getId());
                 }
                 continue;

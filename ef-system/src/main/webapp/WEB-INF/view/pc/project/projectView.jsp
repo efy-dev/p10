@@ -37,6 +37,12 @@
                     </c:if>
                 </td>
             </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">项目图片</td>
+                <td class="am-u-md-3">
+                    <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
