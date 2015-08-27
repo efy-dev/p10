@@ -32,6 +32,18 @@
                     </c:forEach>
                 </td>
             </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单状态</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                    checkedValue="${object.orderStatus}"
+                                    type="normal"/>
+                </td>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3">
+                    <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

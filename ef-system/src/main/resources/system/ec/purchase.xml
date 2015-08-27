@@ -57,6 +57,16 @@
                 <field name="createDatetime" inputType="date" dataType="date">
                 </field>
 
+                <field name="orderStatus" label="订单状态" inputType="text">
+                    <statusType fieldName="orderStatus">
+                        <item label="等待付款" value="1"/>
+                        <item label="等待收货" value="5"/>
+                        <item label="未评价" value="9"/>
+                        <item label="已完成" value="13"/>
+                        <item label="已取消" value="17"/>
+                    </statusType>
+                </field>
+
             </fields>
             <does>
                 <do name="plistPurchaseOrder" access="" label="购买订单"
