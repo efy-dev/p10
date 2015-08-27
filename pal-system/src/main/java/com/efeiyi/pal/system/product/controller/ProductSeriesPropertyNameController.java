@@ -46,8 +46,10 @@ public class ProductSeriesPropertyNameController {
     }
 
     @RequestMapping("/savePropertyNameList.do")
-    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request) throws Exception {
+    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
         String productSeriesId = request.getParameter("productSeries.id");
@@ -85,7 +87,7 @@ public class ProductSeriesPropertyNameController {
                 propertyName = (ProductSeriesPropertyName) baseManager.getObject(ProductSeriesPropertyName.class.getName(), propertyNameId);
             }
 
-            String name = new String (request.getParameter("name"+i).getBytes("utf-8"), "utf-8");
+            String name =request.getParameter("name"+i);
 
             if (name == null || name.equals("")){
                 if (propertyNameId != null && !propertyNameId.trim().equals("")){
@@ -94,8 +96,9 @@ public class ProductSeriesPropertyNameController {
                 }
                 continue;
             }
+            String newName = new String (name.getBytes("utf-8"), "utf-8");
             propertyName.setProductSeries(productSeries);
-            propertyName.setName(name);
+            propertyName.setName(newName);
             propertyName.setStatus("1");
 
             baseManager.saveOrUpdate(propertyName.getClass().getName(), propertyName);

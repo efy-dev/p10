@@ -18,7 +18,7 @@
 <body>
 
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="location.replace(document.referrer)"
+    <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />

@@ -75,10 +75,10 @@ public class ProductPropertyValueController {
             if (value == null || value.equals("")){
                 continue;
             }
-
+            String newValue = new String (value.getBytes("utf-8"), "utf-8");
             propertyValue.setProduct(product);
             propertyValue.setProductSeriesPropertyName(propertyName);
-            propertyValue.setValue(value);
+            propertyValue.setValue(newValue);
             propertyValue.setStatus("1");
 
             baseManager.saveOrUpdate(propertyValue.getClass().getName(), propertyValue);
