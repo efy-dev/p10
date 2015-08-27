@@ -3,6 +3,8 @@ package com.efeiyi.pal.purchase.model;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -36,6 +38,7 @@ public class PurchaseOrderLabel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;
     }
@@ -46,6 +49,7 @@ public class PurchaseOrderLabel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Product getProduct() {
         return product;
     }

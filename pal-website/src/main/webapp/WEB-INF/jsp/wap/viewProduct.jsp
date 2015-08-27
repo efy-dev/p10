@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>移动端详情-商品信息终</title>
+    <title>移动端详情-商品信息</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -32,7 +32,7 @@
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
     <div class="am-header-left am-header-nav"><a href="javascript:history.back()" class="" title="返回上一步">返回</a></div>
-    <h1 class="am-header-title">商品信息终</h1>
+    <h1 class="am-header-title">商品信息</h1>
 
     <div class="am-header-right am-header-nav"><a href="${product.shoppingUrl}">购买</a></div>
     <!--  <em class="line"></em>-->

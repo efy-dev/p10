@@ -1,6 +1,8 @@
 package com.efeiyi.pal.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -17,6 +19,18 @@ public class ProductSeriesPropertyName {
     private ProductSeries productSeries;
     private String name;
     private String status;
+    private ProductPropertyValue productPropertyValue;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    @Where(clause = "status='1'")
+    public ProductPropertyValue getProductPropertyValue() {
+        return productPropertyValue;
+    }
+
+    public void setProductPropertyValue(ProductPropertyValue productPropertyValue) {
+        this.productPropertyValue = productPropertyValue;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -32,6 +46,7 @@ public class ProductSeriesPropertyName {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
     @Where(clause = "status='1'")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductSeries getProductSeries() {
         return productSeries;
     }

@@ -4,6 +4,8 @@ import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -66,6 +68,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
     @Where(clause = "status='1'")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductSeries getProductSeries() {
         return productSeries;
     }
@@ -77,6 +80,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Tenant getTenant() {
         return tenant;
     }
@@ -155,6 +159,7 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_product_series_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public TenantProductSeries getTenantProductSeries() {
         return tenantProductSeries;
     }

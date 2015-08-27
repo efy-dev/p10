@@ -102,6 +102,8 @@ public class PurchaseOrderController extends BaseController {
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
+        PurchaseOrderDelivery purchaseOrderDelivery= (PurchaseOrderDelivery) baseManager.getObject(PurchaseOrderDelivery.class.getName(),orderId);
+        model.addAttribute("purchaseOrderDelivery", purchaseOrderDelivery);
         return "/purchaseOrder/purchaseOrderView";
     }
 

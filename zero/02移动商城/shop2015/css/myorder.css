@@ -29,18 +29,18 @@ ul,dl{list-style:none}
 .myorder .list-topic span a{font-size: 1.2rem;color: #000;}
 .myorder .list-pege{padding: 0 7px;margin-bottom: 15px;}
 .myorder .list-pege ul{width: 100%;padding-top: 16px;overflow: hidden;height: auto}
+.myorder .list-pege ul li{margin-bottom:.8rem}
 .myorder .list-pege ul li img{width:100%;}
 .myorder .jp-pd{padding:18px 0;}
 .myorder .jp-pd-l{padding-left:.4rem;padding-right:.4rem;text-align: right}
 .myorder .jp-pd-r{padding:0;text-align:left}
 .myorder .jp-pd li{font-size: 1rem;color:#ff0000;padding-top: 18px;}
-.myorder .jp-pd li a{padding:11px 27px;border: 1px solid #000;color:#000;transition: all 0.5s;}
+.myorder .jp-pd li a{padding:11px 15px;border: 1px solid #000;color:#000;transition: all 0.5s;}
 .myorder .jp-pd li a:hover{background: #000;color: #fff;}
 .myorder .Extras{border:1px solid #ccc;width: 100%;overflow: hidden;height: auto;padding:11px 8px;margin-bottom: 20px;}
-.myorder .Extras h2{float: left;font-size: 1rem;font-weight: 100}
-.myorder .Extras span{float: right;}
+.myorder .Extras a{float: left;width: 100%;font-size: 1rem;font-weight: 100;position: relative;color: #000;}
 /*左三角*/
-.myorder .Extras span .icon-sj{
+.myorder .Extras  .icon-sj{
     width: 12px;
     height: 12px;
     margin-top: 3px;
@@ -52,6 +52,8 @@ ul,dl{list-style:none}
     -ms-transfrom:rotate(-45deg);/*ie浏览器*/
     -o-transfrom:rotate(-45deg);/*欧鹏浏览器*/
     -moz-transform:rotate(-45deg);/*火狐浏览器*/
+    position: absolute;
+    right: 1rem;
 }
 .myorder .aq-btn{width: 100%;border: 1px solid #000;margin-bottom: 80px;}
 .myorder .aq-btn a{display: block;padding: 12px 0;width: 100%;text-align: center;font-size: 1rem;color: #000;transition: all 0.5s}
@@ -202,5 +204,23 @@ ul,dl{list-style:none}
 .shipping-address .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
 .shipping-address .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
 .shipping-address .edit-info a:hover{color: #fff;background-color: #000;}
+.shipping-address .default{padding:1rem 0;float: left;width: 100%}
+.shipping-address .default p{font-size: 1rem;color: #000;}
+.shipping-address .default p input{vertical-align:text-bottom;}
+.shipping-address .default p span{color: #ccc;}
 /*amazeui.org*/
 /*020207编辑收货地址*/
+/*020207管理收货地址*/
+.manage{width: 100%;float: left;padding: 0 0.9rem;}
+.manage .manage-list{margin-top: 2rem;width: 100%;float: left}
+.manage .list-one{padding: 0 0.7rem;width: 100%;float: left;border: 1px solid #ccc;margin-bottom: 2rem;}
+.manage .head-list{width: 100%;float: left;padding: 1.2rem 0;border-bottom: 1px solid #ccc;font-size: 1rem}
+.manage .head-list strong{font-weight: 100;}
+.manage .head-list span{padding-left: 1rem}
+.manage .content-list{padding: 1.2rem 0;width: 100%;float: left;font-size: 1rem}
+.manage .botton-list{width: 40%;float: right;padding-bottom: 1rem}
+.manage .botton-list a{font-size: 1rem;float: right;padding-left: 2rem;}
+.manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
+.manage .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
+.manage .edit-info a:hover{color: #fff;background-color: #000;}
+/*02021511000847907管理收货地址*/

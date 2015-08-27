@@ -140,6 +140,9 @@ ALTER TABLE `organization_consumer_address`
 MODIFY COLUMN `details`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `address_city_id`,
 MODIFY COLUMN `email`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `phone`;
 
+ALTER TABLE `purchase_order_delivery`
+ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
+
 
 
 

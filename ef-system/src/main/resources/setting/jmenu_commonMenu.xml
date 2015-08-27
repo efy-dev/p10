@@ -31,15 +31,15 @@
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
-            <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=couponBatch" access="admin,manager" text_zh_CN="优惠券批次">
-                <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=couponBatch"/>
-                <match url="/basic/xm.do?qm=formCouponBatch"/>
-                <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=couponBatch"/>
-                <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=couponBatch"/>
-            </jnode>
             <jnode url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon" access="admin,manager" text_zh_CN="优惠券列表">
                 <match url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon"/>
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,manager" text_zh_CN="优惠券批次">
+                <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>
+                <match url="/basic/xm.do?qm=formCouponBatch"/>
+                <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=Batch"/>
+                <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
             </jnode>
         </jnode>
 
