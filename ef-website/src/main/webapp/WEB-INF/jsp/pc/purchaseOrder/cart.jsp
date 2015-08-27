@@ -104,7 +104,9 @@
                             </td>
                             <td width="111">
                     <span>
-                    <p><a href="<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>">删除</a></p>
+                    <p><a onclick="showAlert('提示','是否确认删除',function(){
+                        window.location.href = '<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>';
+                    })">删除</a></p>
                     <%--<p><a href="#">移到我的收藏</a></p>--%>
                     </span>
                             </td>
@@ -125,7 +127,7 @@
                             <%--<td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>--%>
                             <%--<td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>--%>
                         <td width="332">总计（免运费）<span class="moneycl" id="totalPrice">${cart.totalPrice}</span>元</td>
-                        <td width="147"><a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/> "
+                        <td width="147"><a onclick="submit()"
                                            class="btn-settle">结算</a></td>
                     </tr>
                 </table>
@@ -147,6 +149,21 @@
     </div>
 </c:if>
 <script>
+
+    function submit(){
+
+        var param = {cartId:'${cart.id}'}
+
+        var success = function(data){
+            if(data){
+                window.location.href = "<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>"
+            }else{
+                showAlert("提示","请选中一件商品!");
+            }
+        }
+        ajaxRequest("<c:url value="/cart/cartCheck.do"/>", param, success, function () {
+        }, "post")
+    }
 
     function addProduct(cartProductId) {
         var param = {
