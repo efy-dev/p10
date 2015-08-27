@@ -34,13 +34,12 @@ ul,dl{list-style:none}
 .myorder .jp-pd-l{padding-left:.4rem;padding-right:.4rem;text-align: right}
 .myorder .jp-pd-r{padding:0;text-align:left}
 .myorder .jp-pd li{font-size: 1rem;color:#ff0000;padding-top: 18px;}
-.myorder .jp-pd li a{padding:11px 27px;border: 1px solid #000;color:#000;transition: all 0.5s;}
+.myorder .jp-pd li a{padding:11px 15px;border: 1px solid #000;color:#000;transition: all 0.5s;}
 .myorder .jp-pd li a:hover{background: #000;color: #fff;}
 .myorder .Extras{border:1px solid #ccc;width: 100%;overflow: hidden;height: auto;padding:11px 8px;margin-bottom: 20px;}
-.myorder .Extras h2{float: left;font-size: 1rem;font-weight: 100}
-.myorder .Extras span{float: right;}
+.myorder .Extras a{float: left;width: 100%;font-size: 1rem;font-weight: 100;position: relative;color: #000;}
 /*左三角*/
-.myorder .Extras span .icon-sj{
+.myorder .Extras  .icon-sj{
     width: 12px;
     height: 12px;
     margin-top: 3px;
@@ -52,6 +51,8 @@ ul,dl{list-style:none}
     -ms-transfrom:rotate(-45deg);/*ie浏览器*/
     -o-transfrom:rotate(-45deg);/*欧鹏浏览器*/
     -moz-transform:rotate(-45deg);/*火狐浏览器*/
+    position: absolute;
+    right: 1rem;
 }
 .myorder .aq-btn{width: 100%;border: 1px solid #000;margin-bottom: 80px;}
 .myorder .aq-btn a{display: block;padding: 12px 0;width: 100%;text-align: center;font-size: 1rem;color: #000;transition: all 0.5s}
