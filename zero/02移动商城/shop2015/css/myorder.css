@@ -212,4 +212,15 @@ ul,dl{list-style:none}
 /*020207编辑收货地址*/
 /*020207管理收货地址*/
 .manage{width: 100%;float: left;padding: 0 0.9rem;}
-/*020207管理收货地址*/
+.manage .manage-list{margin-top: 2rem;width: 100%;float: left}
+.manage .list-one{padding: 0 0.7rem;width: 100%;float: left;border: 1px solid #ccc;margin-bottom: 2rem;}
+.manage .head-list{width: 100%;float: left;padding: 1.2rem 0;border-bottom: 1px solid #ccc;font-size: 1rem}
+.manage .head-list strong{font-weight: 100;}
+.manage .head-list span{padding-left: 1rem}
+.manage .content-list{padding: 1.2rem 0;width: 100%;float: left;font-size: 1rem}
+.manage .botton-list{width: 40%;float: right;padding-bottom: 1rem}
+.manage .botton-list a{font-size: 1rem;float: right;padding-left: 2rem;}
+.manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
+.manage .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
+.manage .edit-info a:hover{color: #fff;background-color: #000;}
+/*02021511000847907管理收货地址*/
