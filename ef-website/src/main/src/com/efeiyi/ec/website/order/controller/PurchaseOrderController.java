@@ -96,6 +96,19 @@ public class PurchaseOrderController extends BaseController {
     }
 
     /*
+ *手机端个人中心(订单查询)
+ *
+ */
+    @RequestMapping({"/myMobileEfeiyi/list.do"})
+    public String listPruchaseOrderForMobile(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("plistPurchaseOrder_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List<Object> list = baseManager.listPageInfo(xQuery).getList();
+        model.addAttribute("orderList", list);
+        return "purchaseOrder/purchase";
+    }
+
+    /*
     * 查看订单详情
     * */
     @RequestMapping({"/myEfeiyi/view/{orderId}"})

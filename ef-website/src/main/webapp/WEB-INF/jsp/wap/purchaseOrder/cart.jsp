@@ -80,7 +80,7 @@
     <div class="bd payment-total-bar">
       <input type="checkbox" class="checkbox" onclick="chooseAll(this,'${cart.id}')"/>
       <span class="txt" id="totalPrice">${cart.totalPrice}</span>
-      <a href="#btn-right" class="btn-right">结算<em>（${cart.cartProductList.size()}）</em></a>
+      <a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>" class="btn-right">结算<em>（${cart.cartProductList.size()}）</em></a>
     </div>
 
   </article>
