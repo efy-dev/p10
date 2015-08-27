@@ -2,6 +2,8 @@ package com.efeiyi.pal.product.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -33,6 +35,7 @@ public class TenantProductSeriesImg {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_product_series_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public TenantProductSeries getTenantProductSeries() {
         return tenantProductSeries;
     }

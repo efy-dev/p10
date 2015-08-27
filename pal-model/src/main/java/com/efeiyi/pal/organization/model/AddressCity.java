@@ -1,6 +1,8 @@
 package com.efeiyi.pal.organization.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,6 +42,7 @@ public class AddressCity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }

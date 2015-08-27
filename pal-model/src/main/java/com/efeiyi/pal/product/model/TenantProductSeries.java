@@ -5,6 +5,8 @@ import com.efeiyi.pal.organization.model.TenantCertification;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -42,6 +44,7 @@ public class TenantProductSeries {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Tenant getTenant() {
         return tenant;
     }
@@ -53,6 +56,7 @@ public class TenantProductSeries {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductSeries getProductSeries() {
         return productSeries;
     }
@@ -102,6 +106,7 @@ public class TenantProductSeries {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_certification_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public TenantCertification getTenantCertification() {
         return tenantCertification;
     }

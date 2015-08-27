@@ -1,6 +1,8 @@
 package com.efeiyi.pal.purchase.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,6 +34,7 @@ public class PurchaseOrderPayment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public PurchaseOrder getPurchaseOrder() {
         return purchaseOrder;
     }

@@ -3,6 +3,8 @@ package com.efeiyi.pal.check.model;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.product.model.Product;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,6 +36,7 @@ public class LabelCheckRecord {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "label_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Label getLabel() {
         return label;
     }
@@ -44,6 +47,7 @@ public class LabelCheckRecord {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Product getProduct() {
         return product;
     }
