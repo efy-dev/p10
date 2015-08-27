@@ -70,16 +70,45 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
      * @return
      */
     @Override
-    public ModelMap getProductModel(HttpServletRequest request) {
+    public ModelMap getProductModel(HttpServletRequest request) throws ServletException{
 
         ModelMap model = new ModelMap();
 
-        String productId = request.getParameter(PalConst.getInstance().productId);
-        LinkedHashMap<String, Object> queryLabParaMap = new LinkedHashMap<>();
-        queryLabParaMap.put(PalConst.getInstance().productId, productId);
-
-        Product product = getUniqueProduct(productId);
+        String code = request.getParameter(PalConst.getInstance().code);
+        Label label = getUniqueLabel(code);
+        Product product = label.getPurchaseOrderLabel().getProduct();
         model.addAttribute(PalConst.getInstance().resultProduct, product);
+
+        Date date = new Date();
+        if (label.getCheckCount() == 1) {
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
+        }
+        //如果非首次查
+        else if (label.getStatus().equals(PalConst.getInstance().usedStatus)) {
+
+            Long timeDiffer = date.getTime() - label.getFirstCheckDateTime().getTime();
+
+            CheckResultBean recheckBean = new CheckResultBean();
+            try {
+                //只有24小时内查询次数为2才显示真
+                if (timeDiffer < PalConst.getInstance().timeIncrement && label.getCheckCount() == 2) {
+                    BeanUtils.copyProperties(recheckBean, PalConst.getInstance().recheckTrueBean);
+                }
+                //否则一律不显示真伪
+                else {
+                    BeanUtils.copyProperties(recheckBean, PalConst.getInstance().recheckFakeBean);
+                    recheckBean.setAuthenticity(PalConst.getInstance()._null);
+                }
+            }catch(Exception e){
+                throw new ServletException(e.getMessage());
+            }
+            model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
+        }
+        //如果其他状态码无效
+        else {
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
+        }
+
         return model;
     }
 
@@ -308,7 +337,7 @@ public class LabelCheckManagerImpl  implements ILabelCheckManager {
         item.addElement("Title").add(DocumentHelper.createCDATA("诚品宝"));
         item.addElement("Description").add(DocumentHelper.createCDATA(content));
         if(label != null) {
-            item.addElement("PicUrl").add(DocumentHelper.createCDATA(PalConst.getInstance().uploadImgBaseUrl + label.getPurchaseOrderLabel().getProduct().getImgUrl()));
+            item.addElement("PicUrl").add(DocumentHelper.createCDATA(PalConst.getInstance().uploadImgBaseUrl + label.getPurchaseOrderLabel().getProduct().getLogo()));
         }
         item.addElement("Url").add(DocumentHelper.createCDATA(url));
         root.addElement("FuncFlag").setText("1");

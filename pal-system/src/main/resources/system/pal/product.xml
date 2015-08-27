@@ -55,9 +55,7 @@
                 <do name="formProductSeries" label="商品系列" access="" result="/productSeries/productSeriesForm"/>
                 <do name="viewProductSeries" label="查看商品系列详情页" access="" result="/productSeries/productSeriesView"/>
                 <do name="removeProductSeries" label="删除商品系列" access="" result="redirect:/basic/xm.do?qm=plistProductSeries_default"/>
-                <do name="saveOrUpdateProductSeries" label="新建或更新商品系列" access="" result="redirect:/basic/xm.do?qm=plistProductSeries_default"
-                    execute="com.efeiyi.pal.system.product.controller.ProductSeriesHandler">
-                </do>
+
             </does>
         </entity>
 
@@ -78,9 +76,7 @@
                 <do name="formProductSeriesPropertyName" label="商品系列属性名" access="" result="/productSeriesPropertyName/productSeriesPropertyNameForm"/>
                 <do name="viewProductSeriesPropertyName" label="查看商品系列属性名详情页" access="" result="/productSeriesPropertyName/productSeriesPropertyNameView"/>
                 <do name="removeProductSeriesPropertyName" label="删除商品系列属性名" access="" result="redirect:/basic/xm.do?qm=plistProductSeriesPropertyName_default"/>
-                <!--<do name="saveOrUpdateProductSeriesPropertyName" label="新建或更新商品系列属性名" access="" result="redirect:/basic/xm.do?qm=plistProductSeriesPropertyName_default"-->
-                    <!--execute="com.efeiyi.pal.system.product.controller.ProductSeriesHandler">-->
-                <!--</do>-->
+
             </does>
         </entity>
     </entities>

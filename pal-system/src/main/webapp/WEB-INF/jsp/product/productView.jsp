@@ -10,6 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -28,7 +29,7 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -43,41 +44,41 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>商品名称：</td>
+            <td>商品名称</td>
             <td>
                 ${object.name}
                 <c:if test="${!empty object.logo}">
-                    <img src="http://pal.efeiyi.com/${object.logo}@!pal-img-list">
+                    <img src="<%=imgBasePath %>${object.logo}<%=imgListCss %>">
                 </c:if>
             </td>
         </tr>
         <tr>
-            <td>商品编号：</td>
+            <td>商品编号</td>
             <td>${object.serial}</td>
         </tr>
         <tr>
-            <td>制作时间：</td>
+            <td>制作时间</td>
             <td><fmt:formatDate value="${object.madeYear}" pattern="yyyy-MM-dd"/></td>
         </tr>
         <tr>
-            <td>非遗项目：</td>
+            <td>非遗项目</td>
             <td>${object.productSeries.name}</td>
         </tr>
         <tr>
-            <td>商户名称：</td>
+            <td>商户名称</td>
             <td>${object.tenant.name}</td>
         </tr>
         <tr>
-            <td>制作大师：</td>
+            <td>制作大师</td>
             <td>${object.masterName}</td>
         </tr>
         <tr>
-            <td>购买链接：</td>
+            <td>购买链接</td>
             <td>${object.shoppingUrl}</td>
         </tr>
         <c:if test="${tag == 'true'}">
         <tr>
-            <td>防伪标签：</td>
+            <td>防伪标签</td>
             <td>
                 <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.id:${object.id}"/>">查看标签</a>
             </td>
@@ -116,7 +117,7 @@
             <tr>
                 <c:forEach items="${object.imgList}" var="Img">
                     <td>
-                        <img src="http://pal.efeiyi.com/${Img.imgUrl}@!pal-img-list"/>
+                        <img src="<%=imgBasePath %>${Img.imgUrl}<%=imgListCss %>"/>
                     </td>
                 </c:forEach>
             </tr>
@@ -178,7 +179,7 @@
                 <td>
                     <c:forEach items="${object.tenantProductSeries.imgList}" var="img">
                         <c:if test="${not empty img.imgUrl}">
-                            <img src="http://pal.efeiyi.com/${img.imgUrl}@!pal-img-list"/>
+                            <img src="<%=imgBasePath %>${img.imgUrl}<%=imgListCss %>"/>
                         </c:if>
                     </c:forEach>
                 </td>
@@ -213,7 +214,7 @@
                 <td>
                     <c:forEach items="${object.tenantProductSeries.tenantCertification.imgList}" var="tenantCertificationImg">
                         <c:if test="${not empty tenantCertificationImg.imgUrl}">
-                            <img src="http://pal.efeiyi.com/${tenantCertificationImg.imgUrl}@!pal-img-list"/>
+                            <img src="<%=imgBasePath %>${tenantCertificationImg.imgUrl}<%=imgListCss %>"/>
                         </c:if>
                     </c:forEach>
                 </td>

@@ -61,6 +61,9 @@
                     <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>
                 </td>
                 <td><fmt:formatDate value="${labelBatch.createDate}" pattern="yyyy-MM-dd HH:mm"/> </td>
+                <td><c:if test="${labelBatch.status == '2'}">
+                    <a href="<c:url value='/Label/downLabelTxt.do?labelBatchId=${labelBatch.id}'/>">下载标签文本</a>
+                </c:if> </td>
             </tr>
         </c:forEach>
     </table>

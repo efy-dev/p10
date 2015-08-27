@@ -31,8 +31,8 @@ public class LabelCheckController {
     public ModelAndView checkLabelWap(HttpServletRequest request) throws Exception {
 
         ModelMap model = new ModelMap();
-        String serial = request.getParameter(PalConst.getInstance().checkLabelParam1);
-        Label label = iLabelCheckService.getUniqueLabel(serial);
+        String code = request.getParameter(PalConst.getInstance().checkLabelParam1);
+        Label label = iLabelCheckService.getUniqueLabel(code);
 
         // label不存在
         if (label == null) {
@@ -43,13 +43,14 @@ public class LabelCheckController {
             model.addAttribute(PalConst.getInstance().ip, request.getRemoteHost());
 
             //请求来自pc
-            if (PalConst.getInstance().labelCache.remove(serial) == null) {
+            if (PalConst.getInstance().labelCache.remove(code) == null) {
                 System.out.println("未扫二维码");
                 iLabelCheckService.updateRecord(model, label,true);
             }else{
                 System.out.println("已扫二维码");
                 iLabelCheckService.updateRecord(model, label,false);
             }
+            model.addAttribute(PalConst.getInstance().code,code);
         }
         return new ModelAndView(PalConst.getInstance().resultView, model);
     }

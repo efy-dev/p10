@@ -136,3 +136,13 @@ $(function(){
 
 
 })
+//收货地址
+$(function(){
+    $('.my-order .extra-r>a').click(function(){
+        $(this).siblings('.active-pop').show();
+        $('.my-order .clase, .my-order .sh-bg').click(function(){
+            $(this).parents('.active-pop').hide();
+        })
+        return false;
+    })
+})
