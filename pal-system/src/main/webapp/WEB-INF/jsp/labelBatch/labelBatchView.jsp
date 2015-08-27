@@ -28,7 +28,7 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
 </c:if>
-    <input onclick="window.history.back()"
+    <input onclick="location.replace(document.referrer)"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
