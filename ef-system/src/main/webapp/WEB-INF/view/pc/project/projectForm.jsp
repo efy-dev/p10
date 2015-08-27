@@ -21,7 +21,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value="/basic/xm.do"/>"  class="am-form am-form-horizontal">
+    <form action="<c:url value="/basic/xmm.do"/>"  class="am-form am-form-horizontal" method="post" enctype="multipart/form-data">
         <input type="hidden" name="qm" value="saveOrUpdateProject">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
@@ -53,6 +53,19 @@
                 <ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>
             </div>
         </div>
+
+        <div class="am-form-group">
+            <label for="picture_url" class="am-u-sm-3 am-form-label">项目图片</label>
+
+            <div class="am-u-sm-9">
+                <input type="file" id="picture_url" name="picture_url" placeholder="picture_url"
+                       value="${object.picture_url}">
+            </div>
+            <c:if test="${!empty object.picture_url}">
+                <img src="http://pro.efeiyi.com/${object.picture_url}@!product-model">
+            </c:if>
+        </div>
+
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
