@@ -60,6 +60,11 @@ public class AddressController {
         XQuery xQuery = new XQuery("ListConsumerAddress_default",request);
         List addressList=baseManager.listObject(xQuery);
         model.addAttribute("addressList",addressList);
+
+        xQuery = new XQuery("listAddressProvince_default", request);
+        List<Object> objectList = baseManager.listObject(xQuery);
+        model.addAttribute("province",objectList);
+
         return "/purchaseOrder/addressList";
     }
 

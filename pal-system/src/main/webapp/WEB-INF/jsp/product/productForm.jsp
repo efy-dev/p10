@@ -80,7 +80,7 @@
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">非遗项目 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input id="productSeries_idName" placeholder="非遗项目"
+                <input type="text" id="productSeries_idName" placeholder="非遗项目"
                        onclick="openTenantProductSeries(true, 'productSeries_id', 'productSeries_idName')"
                        value="${object.productSeries.name}" required>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">
@@ -90,7 +90,7 @@
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input id="tenant_idName" placeholder="商户名称"
+                <input type="text" id="tenant_idName" placeholder="商户名称"
                        onclick="openTenantProductSeries(false, 'tenant_id', 'tenant_idName')"
                        value="${object.tenant.name}" required>
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
@@ -100,7 +100,7 @@
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-                <input type="text" name="madeYear" id="madeYear" class="am-form-field" placeholder="制作时间" value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required/>
+                <input type="datetime" name="madeYear" id="madeYear" class="am-form-field" placeholder="制作时间" value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required/>
                 <span class="am-input-group-btn am-datepicker-add-on">
                     <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
                 </span>

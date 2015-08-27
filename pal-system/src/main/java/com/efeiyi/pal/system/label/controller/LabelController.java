@@ -40,7 +40,7 @@ public class LabelController {
         return new ModelAndView(resultPage);
     }
 
-    private String labelListSave(LabelBatch labelBatch, String labelBatchId) throws Exception {
+    private String labelListSave(LabelBatch labelBatch, String labelBatchId) throws Exception{
 
         if (labelBatch == null) {
             throw new Exception("Id为" + labelBatchId + "的标签批次不存在!");

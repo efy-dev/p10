@@ -58,13 +58,6 @@
             </div>
         </div>
 
-        <%--<div class="am-form-group">--%>
-            <%--<label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small style="color: red">*</small></label>--%>
-            <%--<div class="am-u-sm-9">--%>
-                <%--<input type="text" name="payWay" id="payWay" placeholder="支付方式" value="${object.payWay}" required>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
         <div class="am-form-group">
             <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small>*</small></label>
             <div class="am-u-sm-9" id="payWayDiv">

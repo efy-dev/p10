@@ -28,6 +28,23 @@
     </script>
 </head>
 <body>
+
+<div style="text-align: left;margin-left: 10px;">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${order.id}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="编辑"/>
+    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
+    <input onclick=""
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="删除" />
+    <input onclick="location.replace(document.referrer)"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+           value="返回" />
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">订单编号为${object.serial}的订单信息</strong>
@@ -135,7 +152,7 @@
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <c:if test="${object.status != '9'}">
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <td>操作</td>
                 </c:if>
                 <td>订单编号</td>
@@ -144,7 +161,7 @@
             </tr>
             <c:forEach items="${object.purchaseOrderLabelList}" var="pol">
                 <tr>
-                    <c:if test="${object.status != '9'}">
+                    <c:if test="${object.status == '1' || object.status == '2'}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
@@ -182,7 +199,7 @@
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <c:if test="${object.status != '9'}">
+                <c:if test="${object.status == '1' || object.status == '2'}">
                     <td>操作</td>
                 </c:if>
                 <td>订单编号</td>
@@ -191,7 +208,7 @@
             </tr>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="pop">
                 <tr>
-                    <c:if test="${object.status != '9'}">
+                    <c:if test="${object.status == '1' || object.status == '2'}">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
