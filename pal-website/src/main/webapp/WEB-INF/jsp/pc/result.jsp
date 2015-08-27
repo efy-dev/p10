@@ -47,7 +47,8 @@
         <form id="form" method="get" action="<c:url value='/checkLabelPc.do'/>">
             <div class="title"><a class="active">真伪查询</a><span class="line"></span><a>非遗搜</a></div>
             <label for="">
-                <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入名称查询,如:”苏绣”"/>
+                <%--<input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入名称查询,如:”苏绣”"/>--%>
+                    <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入12位防伪码"/>
                 <input class="btn" type="submit" value="查 询"/>
             </label>
         </form>

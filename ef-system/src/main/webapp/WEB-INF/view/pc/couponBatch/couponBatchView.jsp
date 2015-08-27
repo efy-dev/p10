@@ -50,6 +50,7 @@
             <tr>
                 <th class="table-title">优惠券编号</th>
                 <th class="table-title">优惠券状态</th>
+                <th class="table-title">使用价格限制</th>
             </tr>
             </thead>
             <tbody>
@@ -61,6 +62,8 @@
                                     checkedValue="${coupon.status}"
                                     type="normal"/>
                 </td>
+
+                <td class="am-hide-sm-only">${coupon.couponBatch.priceLimit}</td>
                 </c:forEach>
             </tbody>
         </table>

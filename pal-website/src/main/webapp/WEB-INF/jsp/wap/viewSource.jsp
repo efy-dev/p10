@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>移动端详情-溯源信息终</title>
+    <title>移动端详情-溯源信息</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -40,11 +40,11 @@
 <!--//End--header-->
 <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
     <ul class="am-slides">
-        <c:forEach items="${product.tenant.tenantProductSeriesList}" var="sources">
-            <c:forEach items="${sources.imgList}" var="img">
+        <%--<c:forEach items="${product.tenant.tenantProductSeriesList}" var="sources">--%>
+            <c:forEach items="${product.tenantProductSeries.imgList}" var="img">
             <li><img src="<%=imgBasePath%><c:url value='${img.imgUrl}@!'/><%=picForm%>"></li>
             </c:forEach>
-        </c:forEach>
+        <%--</c:forEach>--%>
     </ul>
 </div>
 <!--//End--轮播图-->
@@ -52,20 +52,20 @@
     <!--列表标题-->
     <div class="am-list-news-bd">
         <ul class="am-list">
-<c:forEach items="${product.tenant.tenantProductSeriesList}" var="sources">
+<%--<c:forEach items="${product.tenantProductSeries.tenantProductSeriesList}" var="sources">--%>
             <li class="am-g am-list-item-dated">
                 <strong class="am-list-info">创作地区:</strong>
-                <span class="am-list-info2">${sources.region}</span>
+                <span class="am-list-info2">${product.tenantProductSeries.region}</span>
             </li>
             <li class="am-g am-list-item-dated">
                 <strong class="am-list-info">制作工艺:</strong>
-                <span class="am-list-info2">${sources.craft}</span>
+                <span class="am-list-info2">${product.tenantProductSeries.craft}</span>
             </li>
             <li class="am-g am-list-item-dated">
                 <strong class="am-list-info">参 与 人:</strong>
                 <span class="am-list-info2">${product.masterName}</span>
             </li>
-    </c:forEach>
+    <%--</c:forEach>--%>
         </ul>
     </div>
 </div>

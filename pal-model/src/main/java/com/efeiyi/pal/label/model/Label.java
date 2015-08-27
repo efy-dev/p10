@@ -5,6 +5,8 @@ import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.purchase.model.PurchaseOrderLabel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -63,6 +65,7 @@ public class Label {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "label_batch_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public LabelBatch getLabelBatch() {
         return labelBatch;
     }
@@ -74,6 +77,7 @@ public class Label {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     @Where(clause = "status='1'")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Tenant getSeller() {
         return seller;
     }
@@ -130,6 +134,7 @@ public class Label {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_label_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public PurchaseOrderLabel getPurchaseOrderLabel() {
         return purchaseOrderLabel;
     }

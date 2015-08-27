@@ -2,6 +2,8 @@ package com.efeiyi.pal.product.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -33,6 +35,7 @@ public class ProductPropertyValue {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_series_property_name_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public ProductSeriesPropertyName getProductSeriesPropertyName() {
         return productSeriesPropertyName;
     }
@@ -62,6 +65,7 @@ public class ProductPropertyValue {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public Product getProduct() {
         return product;
     }

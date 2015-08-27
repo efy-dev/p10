@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>移动端详情页真伪-伪</title>
+    <title>移动端详情页真伪</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -50,7 +50,7 @@
                     <li><strong>非遗项目：</strong>
 
                         <p>${product.productSeries.name}</p></li>
-                    <li><strong>商户民称：</strong>
+                    <li><strong>商户名称：</strong>
 
                         <p>${product.tenant.name}</p></li>
                     <li><strong>创作年代：</strong>

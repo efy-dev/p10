@@ -2,6 +2,8 @@ package com.efeiyi.pal.organization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -33,6 +35,7 @@ public class TenantCertificationImg {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_certification_id")
+    @NotFound(action= NotFoundAction.IGNORE)
     public TenantCertification getTenantCertification() {
         return tenantCertification;
     }
