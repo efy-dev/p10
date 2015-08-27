@@ -27,5 +27,5 @@ public interface ILabelCheckManager {
 
      void addLabelCheckRecord(ModelMap model,Label label,Date date);
 
-     ModelMap getProductModel(HttpServletRequest request);
+     ModelMap getProductModel(HttpServletRequest request) throws ServletException;
 }
