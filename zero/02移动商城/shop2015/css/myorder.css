@@ -224,8 +224,8 @@ ul,dl{list-style:none}
 .manage .botton-list{width: 40%;float: right;padding-bottom: 1rem}
 .manage .botton-list a{font-size: 1rem;float: right;padding-left: 2rem;}
 .manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
-.manage .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
-.manage .edit-info .a:hover{color: #fff;background-color: #000;}
+.manage .edit-info  a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.manage .edit-info  a:hover{color: #fff;background-color: #000;}
 /*02021511000847907管理收货地址*/
 /*020209注册*/
 .enroll{width: 100%;float: left;padding: 0 0.9rem;}
