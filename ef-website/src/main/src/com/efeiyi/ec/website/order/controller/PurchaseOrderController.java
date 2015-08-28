@@ -332,6 +332,10 @@ public class PurchaseOrderController extends BaseController {
         xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
 
+        purchaseOrder.setTenant(tenantList.get(0));
+        purchaseOrder.setTotal(cart.getTotalPrice());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
         purchaseOrderProduct.setProductModel(productModel);
