@@ -8,6 +8,7 @@ input[type="text"],input[type="password"],input[type="button"]{-webkit-appearanc
 input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .icon {background:url(../images/icon.png) no-repeat;background-size:152px auto;}
 .bd {width:100%; float:left;}
+.red {color:#f00}
 .arrow-up:before,
 .arrow-right:before,
 .arrow-down:before {content:'';width:12px;height:12px;border-right:1px solid #000;-webkit-transform:rotate(45deg);display:inline-block;margin-left:10px;}
@@ -150,13 +151,8 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details-shop .s-info .ul-list li strong { position: absolute;top:0;left: 0}
 .details-shop .s-info .ul-list li span {width:100%; float: left;}
 .details-shop-des .list-class { padding:0;}
-.details-shop-des .list-class h3 { padding:20px; font-size: 12px;}
-.details-shop-des .list-class .ul-list li { margin-top: 0; margin-bottom: 20px;}
+.details-shop-des .list-class h3 {padding:0 20px 20px; font-size: 12px;}
 .details-shop-slider { margin-top: 20px;}
-
-
-
-
 .alert-red-top {width:100%;position:absolute;top:55px;left:0; padding:0 20px;}
 .alert-red-top .red-text {background: #f00;width:100%;line-height: 20px; text-align: center;color:#fff;font-size: 12px; float: left;}
 /*--//End--*/
@@ -165,12 +161,12 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .all-list-class .ul-list a {width:90px;line-height: 54px; text-align: center;font-size:14px; color: #000; border: 1px solid #000;float:left; margin:0 0 5px 5px;}
 .all-list-class .ul-list li.active a { background: #000; color: #fff;}
 .list-class { padding:20px 0;}
-.list-class .ul-list-nav {display: flex;}
+.list-class .ul-list-nav {display: flex; margin-bottom:20px;}
 .list-class .ul-list-nav li {flex: 1;}
 .list-class .ul-list-nav li a {width:100%; line-height: 40px;text-align: center; color:#000; float: left; font-size: 15px; border-top: 1px solid #000; border-bottom: 1px solid #000;}
 .list-class .ul-list-nav li:nth-child(2) a{ border-left: 1px solid #000; border-right: 1px solid #000;}
 .list-class .ul-list { padding:0 20px;}
-.list-class .ul-list li {width:48%; margin-top:20px;padding-bottom:10px;font-size:14px; float: left; border-bottom: 1px solid #cdcdcd;}
+.list-class .ul-list li {width:48%; margin-bottom:20px;padding-bottom:10px;font-size:14px; float: left; border-bottom: 1px solid #cdcdcd;}
 .list-class .ul-list li img {width:100%;}
 .list-class .ul-list li p {width:100%; float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .list-class .ul-list li p.name { padding-top:10px; padding-bottom:5px;}
@@ -178,6 +174,9 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .list-class .ul-list li:nth-child(2n) {float:right;}
 .list-class .ul-list li:last-child,
 .list-class .ul-list li:nth-last-child(2){border-bottom: 0}
+.list-class .ul-list-img { float: left;margin-top:-20px;}
+.list-class .ul-list-img img {width:100%;}
+.list-class .ul-list-img p { width:100%; padding:25px 20px; font-size: 12px;}
 /*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative;}
 .shop-cart .cart-list {padding:0 20px;box-sizing:border-box;}
