@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
@@ -37,18 +36,11 @@
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
-    <form id="certificationForm" action="<c:url value='/tenantCertification/saveTenantCertification.do'/>" onsubmit="return formSubmit()" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateTenantSource">
+    <form id="certificationForm" action="<c:url value='/tenantCertification/saveTenantCertification.do'/>"
+          onsubmit="return formSubmit()" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
-        <c:if test="${empty object || object.id == null || object.id==''}">
-            <input type="hidden" name="status" value="1" />
-        </c:if>
-        <c:if test="${!empty object && object.id != null && object.id != '' }">
-            <input type="hidden" name="status" value="${object.status}" />
-        </c:if>
-
+        <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
             <label name="tenant.idName" for="tenant.idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
@@ -80,7 +72,7 @@
                 <input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间"
                        value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>" required readonly/>
                 <span class="am-input-group-btn am-datepicker-add-on">
-                    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+                    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button>
                 </span>
             </div>
         </div>
@@ -90,7 +82,6 @@
                 <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.level}" type="select"/>
             </div>
         </div>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

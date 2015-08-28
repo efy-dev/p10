@@ -7,9 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -23,7 +20,6 @@
 
 <div class="am-g">
     <form action="<c:url value='/productPropertyValue/saveProductPropertyValueList.do'/>" method="get" class="am-form am-form-horizontal" >
-        <input type="hidden" name="qm" value="saveOrUpdateProductPropertyValue">
         <input type="hidden" name="product.id" value="${product.id}"/>
         <input type="hidden" name="count" id="count" value="${PSPNListSize}">
         <div  id="pNameForm">
@@ -47,14 +43,10 @@
                                     <input type="text" name="value<%=i %>" id="value<%=i %>" value="${productPropertyValue.value}" required>
                                 </c:if>
                             </c:forEach>
-                            <%
-                                if (tag == 0){
-                            %>
-                            <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>">
-                            <input type="text" name="value<%=i %>" id="value<%=i %>" placeholder="属性值" required>
-                            <%
-                                }
-                            %>
+                            <% if (tag == 0){ %>
+                                <input type="hidden" name="propertyValueId<%=i %>" id="propertyValueId<%=i %>">
+                                <input type="text" name="value<%=i %>" id="value<%=i %>" placeholder="属性值" required>
+                            <% } %>
                         </c:if>
                     </div>
                 </div>

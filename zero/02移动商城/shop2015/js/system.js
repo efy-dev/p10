@@ -30,14 +30,15 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        $('.details .des-title .addfav').click(function(){
+        $('.addfav').click(function(){
             $(this).addClass('addfav-end').find('p').html('已收藏');
             return false;
         });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
-        }
+        };
+
     })();
 
 

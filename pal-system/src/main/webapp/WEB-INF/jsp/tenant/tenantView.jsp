@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
 <html>
@@ -28,7 +27,6 @@
     </script>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenant&tenant=tenant&id=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
@@ -44,13 +42,11 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">商户详细信息</strong>
     </div>
 </div>
-
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -63,7 +59,6 @@
         </tr>
     </table>
 </div>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="showDiv()"
            type="button" class="am-btn am-btn-default am-btn-xs"
@@ -74,11 +69,9 @@
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="新建认证信息" />
 </div>
-
 <div class="am-g" id="selectPS" style="display:none">
     <form action="<c:url value='/tenant/saveTenantProductSeries.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="tenant.id" value="${object.id}">
-
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">非遗项目 <small style="color: red">*</small></label>
             <div class="am-u-sm-9">
@@ -86,7 +79,6 @@
                 <input type="hidden" id="productSeries_id"  name="productSeries.id">
             </div>
         </div>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
@@ -94,7 +86,6 @@
         </div>
     </form>
 </div>
-
 <c:if test="${not empty object.tenantProductSeriesList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -108,7 +99,6 @@
                 <td>非遗项目名称</td>
                 <td>非遗项目编号</td>
             </tr>
-
             <c:forEach items="${object.tenantProductSeriesList}" var="tenantProductSeries">
                 <tr style="text-align: left">
                     <td>
@@ -126,7 +116,6 @@
         </table>
     </div>
 </c:if>
-
 <c:if test="${!empty object.tenantCertificationList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -143,7 +132,6 @@
                 <td>认证结果</td>
                 <td>证书图片</td>
             </tr>
-
             <c:forEach items="${object.tenantCertificationList}" var="tenantCertification">
                 <tr>
                     <td>
@@ -151,16 +139,12 @@
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formTenantCertification&id=${tenantCertification.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                    <span class="am-icon-edit"></span> 编辑
-                                </button>
+                                    <span class="am-icon-edit"></span>编辑</button>
                                 <button onclick="window.location.href='<c:url value="/tenantCertification/removeTenantCertification.do?tenantCertificationId=${tenantCertification.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                    <span class="am-icon-trash-o"></span> 删除
-                                </button>
+                                    <span class="am-icon-trash-o"></span>删除</button>
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewTenantCertification&id=${tenantCertification.id}"/>'"
-                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                    <%--<span class="am-icon-edit"></span> --%>编辑图片
-                                </button>
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">编辑图片</button>
                             </div>
                         </div>
                     </td>
@@ -182,6 +166,5 @@
         </table>
     </div>
 </c:if>
-
 </body>
 </html>

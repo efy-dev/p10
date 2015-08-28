@@ -27,4 +27,5 @@
 <!--<![endif]-->
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/assets/css/amazeui.min.css?v=20150831"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/assets/css/app.css?v=20150831"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/assets/css/myorder.css?v=20150831"/>">
 <script src="<c:url value="/scripts/assets/js/ef.util.js"/>"></script>

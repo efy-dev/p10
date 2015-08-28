@@ -15,7 +15,7 @@
   </div>
   <!--//End--am-slider-->
   <div class="toolbar">
-    <a class="item asso" href="#asso">
+    <a class="item asso" href="#">
       <span><i class="icon"></i></span>
       <span>分类</span>
     </a>

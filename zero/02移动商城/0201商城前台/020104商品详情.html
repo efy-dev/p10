@@ -67,13 +67,12 @@
         </div>
         <!-- //End--des-price-->
         <div class="bd des-format">
-            <a class="bd btn-format" href="#选择规格" title="选择规格">选择规格<i class="arrow-right"></i></a>
+            <a data-am-modal="{target: '#my-actions'}" class="bd btn-format" title="选择规格">选择规格<i class="arrow-right"></i></a>
         </div>
         <!-- //End--des-format-->
         <div class="des-content">
             <div class="bd title">详情</div>
             <div class="bd">
-
                 <ul class="bd ul-text">
                     <li class="small-title">【产品参数】</li>
                     <li><span>品&nbsp;&nbsp;&nbsp;&nbsp;名：</span><span>《安格尔—公爵夫人肖像》</span></li>
@@ -139,13 +138,10 @@
                         <li class="text">yaohuifen.efeiyi.com</li>
                     </ul>
                 </div>
-
-
             </div>
             <!-- //End--box-des-->
         </div>
-
-
+        <!-- //End--des-format-->
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
@@ -154,8 +150,37 @@
         <a class="btn-cart" href="#放入购物车" title="放入购物车"><i class="icon"></i>放入购物车</a>
         <a class="btn-buy" href="#立即购买" title="立即购买">立即购买</a>
     </div>
-
 </article>
+
+<!--Start--选择规格弹出框-->
+<div class="am-modal-actions dialog-des-format" id="my-actions">
+    <div class="bd ">
+        <dl class="bd dl-des">
+            <dt><img src="../shop2015/upload/detail-exp1.jpg" width="130" alt=""/></dt>
+            <dd>价格：6000——8000</dd>
+            <dd>库存：10件</dd>
+            <dd>规格</dd>
+        </dl>
+        <ul class="bd ul-nav">
+            <li><a href="#规格1">规格1</a></li>
+            <li><a href="#规格2">规格2</a></li>
+            <li><a href="#规格1">规格1</a></li>
+            <li><a href="#规格2">规格2</a></li>
+        </ul>
+        <ul class="bd ul-amount">
+            <li>购买数量</li>
+            <li>
+                <a class="sub btn-cart-no" href="#减"></a>
+                <input class="ipt-txt" type="text" value="1"/>
+                <a class="add" href="#加"></a>
+            </li>
+        </ul>
+        <a href="#btn-cart" class="bd btn-cart">加 入 购 物 车</a>
+    </div>
+</div>
+<!--//End--Start--选择规格弹出框-->
+
+
 <div class="login-reg">
     <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
     <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>

@@ -7,9 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
 <html>
 <head>
@@ -27,12 +24,7 @@
     <form action="<c:url value='/basic/xm.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateLabelBatch">
         <input type="hidden" name="id" value="${object.id}">
-        <c:if test="${empty object || object.id == null || object.id==''}">
-            <input type="hidden" name="status" value="1" />
-        </c:if>
-        <c:if test="${!empty object && object.id != null && object.id != '' }">
-            <input type="hidden" name="status" value="${object.status}" />
-        </c:if>
+        <input type="hidden" name="status" value="${object.status}" />
 
         <div class="am-form-group">
             <label name="setting" for="setting" class="am-u-sm-3 am-form-label">标签批次 <small>*</small></label>

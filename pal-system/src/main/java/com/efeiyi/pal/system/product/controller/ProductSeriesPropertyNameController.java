@@ -32,7 +32,7 @@ public class ProductSeriesPropertyNameController {
     public ModelAndView newProductSeriesPropertyNameList(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         String productSeriesId = request.getParameter("productSeriesId");
-        if (productSeriesId == null || productSeriesId.trim().equals("")) {
+        if (productSeriesId == null || "".equals(productSeriesId.trim())) {
             throw new Exception("productSeriesId不能为空");
         }
         ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
@@ -46,12 +46,14 @@ public class ProductSeriesPropertyNameController {
     }
 
     @RequestMapping("/savePropertyNameList.do")
-    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request) throws Exception {
+    public ModelAndView saveProductSeriesPropertyNameList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
         String productSeriesId = request.getParameter("productSeries.id");
-        if (productSeriesId == null || productSeriesId.equals("")) {
+        if (productSeriesId == null || "".equals(productSeriesId)) {
             throw new Exception("productSeriesId不能为空");
         }
 
@@ -85,17 +87,18 @@ public class ProductSeriesPropertyNameController {
                 propertyName = (ProductSeriesPropertyName) baseManager.getObject(ProductSeriesPropertyName.class.getName(), propertyNameId);
             }
 
-            String name = new String (request.getParameter("name"+i).getBytes("utf-8"), "utf-8");
+            String name =request.getParameter("name"+i);
 
-            if (name == null || name.equals("")){
+            if (name == null || "".equals(name)){
                 if (propertyNameId != null && !propertyNameId.trim().equals("")){
                     productSeriesServiceManager.deleteProductPropertyValueByPropertyName(propertyName);
                     baseManager.delete(propertyName.getClass().getName(), propertyName.getId());
                 }
                 continue;
             }
+            String newName = new String (name.getBytes("utf-8"), "utf-8");
             propertyName.setProductSeries(productSeries);
-            propertyName.setName(name);
+            propertyName.setName(newName);
             propertyName.setStatus("1");
 
             baseManager.saveOrUpdate(propertyName.getClass().getName(), propertyName);

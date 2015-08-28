@@ -8,8 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
 <html>
 <head>
@@ -40,7 +38,6 @@
                     m8uDialog.openDialog(id, name, "TenantBySeries", productSeriesId,'<%=path%>');
                 }
             }
-
         }
     </script>
 </head>
@@ -54,14 +51,8 @@
 
 <div class="am-g">
     <form action="<c:url value='/product/saveProduct.do'/>" onsubmit="return formOnSubmit()" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateProduct">
         <input type="hidden" name="id" value="${object.id}">
-        <c:if test="${empty object || object.id == null || object.id==''}">
-            <input type="hidden" name="status" value="1" />
-        </c:if>
-        <c:if test="${!empty object && object.id != null && object.id != '' }">
-            <input type="hidden" name="status" value="${object.status}" />
-        </c:if>
+        <input type="hidden" name="status" value="${object.status}" />
 
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
@@ -100,7 +91,8 @@
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-                <input type="datetime" name="madeYear" id="madeYear" class="am-form-field" placeholder="制作时间" value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required/>
+                <input type="datetime" name="madeYear" id="madeYear" class="am-form-field" placeholder="制作时间"
+                       value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required/>
                 <span class="am-input-group-btn am-datepicker-add-on">
                     <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
                 </span>
@@ -110,7 +102,7 @@
         <div class="am-form-group">
             <label name="shoppingUrl" for="shoppingUrl" class="am-u-sm-3 am-form-label">购买链接 <small>&nbsp;&nbsp;</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="shoppingUrl" id="shoppingUrl" placeholder="购买链接" value="${object.shoppingUrl}" <%--required--%>>
+                <input type="text" name="shoppingUrl" id="shoppingUrl" placeholder="购买链接" value="${object.shoppingUrl}">
             </div>
         </div>
 

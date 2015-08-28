@@ -6,12 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-
 <html>
 <head>
     <title></title>
@@ -29,11 +26,9 @@
             <td>操作</td>
             <td>订单编号</td>
             <td>商户名称</td>
-            <%--<td>用户</td>--%>
             <td>状态</td>
             <td>创建时间</td>
         </tr>
-
         <c:forEach items="${requestScope.pageInfo.list}" var="order">
             <tr style="text-align: left">
                 <td>
@@ -48,7 +43,6 @@
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&order=view&id=${order.id}"/>">${order.serial}</a></td>
                 <td>${order.tenant.name}</td>
-                <%--<td>${order.user.name}</td>--%>
                 <td>
                     <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${order.status}" type="normal" />
                 </td>
@@ -63,6 +57,5 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
-
 </body>
 </html>
