@@ -95,7 +95,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
             if (code.length() != 12) {
                continue;
             }
-            Code2UrlConsumer.codeList.add(code);
+            url2FileConsumer.getCodeList().add(code);
             i++;
             String serial = autoSerialManager.nextSerial("palLabelSerial");
             Label label = new Label();
@@ -115,8 +115,8 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
         }
 
         url2FileConsumer.setGeneratorEnd(true);
-        synchronized (Code2UrlConsumer.codeList) {
-            Code2UrlConsumer.codeList.notifyAll();
+        synchronized (url2FileConsumer.getCodeList()) {
+            url2FileConsumer.getCodeList().notifyAll();
         }
 //        System.out.print(System.currentTimeMillis()-begin);
     }
