@@ -19,7 +19,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     body {width:640px; margin:0 auto;}
 }
 /*--//End--common*/
-.custom-header {background:#fff;height:55px; position:relative; z-index:20;border-bottom:2px #000 solid;border-top:0;}
+.custom-header {background:#fff;height:55px; position:relative; z-index:101;border-bottom:2px #000 solid;border-top:0;}
 .custom-header .logo a {background-position:0 0;width:152px; height:27px; position:absolute;top:50%; margin-top:-13px; left:21px;}
 .custom-header .icon-cart {background-position:0 -27px;width:34px; height:24px; float:left; margin-top:8px;margin-right:9px; position:relative;}
 .custom-header .icon-user {background-position:-35px -27px;width:25px;height:24px;float:left; margin-top:8px}
@@ -105,20 +105,6 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .dialog-des-format .ul-amount .ipt-txt {width:45px;height:30px; padding:0 5px;text-align:center;line-height:20px;float:left; border:0;border-bottom:1px #000 solid; border-top:1px #000 solid;}
 .dialog-des-format .btn-cart {background: #000; line-height:35px; text-align: center;color: #fff; position:absolute; bottom:0; left:0; font-size: 14px;}
 .dialog-des-format .btn-cart-no:before { background:#999}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*--//End--*/
 .details .des-content {font-size: 12px;}
 .details .des-content .title { padding:20px;font-size: 16px;}
@@ -147,6 +133,11 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details-total-bar .btn-cart {background: #000;width:40%;color: #fff;}
 .details-total-bar .btn-cart .icon { background-position:-110px -27px;width:19px; height:13px; display: inline-block; margin-right:3px; position: relative;top:1px;}
 .details-total-bar .btn-buy { width:30%;}
+/*--//End--*/
+.all-list-class { padding: 20px;}
+.all-list-class .ul-list a {width:90px;line-height: 54px; text-align: center;font-size:14px; color: #000; border: 1px solid #000;float:left; margin-bottom:5px;}
+.all-list-class .ul-list li:nth-child(3n-1) a {margin-left:5px; margin-right:5px;}
+.all-list-class .ul-list li.active a { background: #000; color: #fff;}
 /*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative;}
 .shop-cart .cart-list {padding:0 20px;box-sizing:border-box;}
