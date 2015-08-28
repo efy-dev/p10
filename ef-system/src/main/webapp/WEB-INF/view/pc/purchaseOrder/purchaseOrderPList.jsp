@@ -59,6 +59,20 @@
                                             onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
+
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" onclick="updateOrderStatus(this,'${purchaseOrder.id}')">
+                            <span class="am-icon-pencil-square-o">
+                                <c:if test="${purchaseOrder.orderStatus==1}">
+                                    立即发货
+                                </c:if>
+                                <c:if test="${purchaseOrder.orderStatus!=1 and purchaseOrder.orderStatus!=17}">
+                                    已发货
+                                </c:if>
+                                 <c:if test="${ purchaseOrder.orderStatus==17}">
+                                     无法发货
+                                 </c:if>
+                            </span>
+                                    </a>
                                 </div>
                             </div>
                         </td>
@@ -85,6 +99,7 @@
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
                                                                     pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
+
                 </c:forEach>
                 </tbody>
             </table>
@@ -98,5 +113,29 @@
         </ming800:pcPageList>
     </div>
 </div>
+
+<script type="text/javascript">
+    function updateOrderStatus(obj,id){
+        var temp = $(obj).find("span").text().trim()
+        var orderStatus = "5";
+        if(temp=="立即发货"){
+            $.ajax({
+                type:"get",
+                data:{id:id,orderStatus:orderStatus},
+                url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
+                success:function(data){
+                    $(obj).find("span").text("已发货");
+                }
+            });
+        }else if(temp == "无法发货"){
+
+            alert("无法发货!")
+        }else{
+            alert("已经发货!")
+        }
+
+
+    }
+</script>
 </body>
 </html>

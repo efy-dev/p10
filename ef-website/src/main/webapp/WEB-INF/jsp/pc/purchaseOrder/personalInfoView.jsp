@@ -29,7 +29,7 @@
             <dl>
                 <dt>
                 <div class="userinfo-figure">
-                    <img src="<c:url value="/scripts/assets/images/yonghm.jpg"/>">
+                    <img src="<c:url value="/scripts/images/yonghm.jpg"/>">
                 </div>
                 <div class="editor">
                     <a href="#">编辑头像</a>

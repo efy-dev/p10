@@ -9,6 +9,10 @@
                 <match url="formPurchaseOrder"/>
                 <match url="saveOrUpdatePurchaseOrder"/>
             </jnode>
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" state="closed" extend="" access="" text_zh_CN="发货记录管理">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
+            </jnode>
             <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
                 <match url=""/>
             </jnode>

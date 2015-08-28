@@ -7,13 +7,13 @@
             <does>
                 <do name="listTenant" access="" label="商户列表" result="/tenant/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistTenant" access="" label="商户分页列表" result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
@@ -29,13 +29,13 @@
             <does>
                 <do name="listUser" access="" label="用户列表" result="/user/userList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistUser" access="" label="用户分页列表" result="/user/userPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
@@ -64,14 +64,14 @@
             <does>
                 <do name="listTenantCertification" access="" label="认证信息列表" result="/tenantCertification/tenantCertificationList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="tenant.id" defaultValue="" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistTenantCertification" access="" label="认证信息分页列表" result="/tenantCertification/tenantCertificationPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>

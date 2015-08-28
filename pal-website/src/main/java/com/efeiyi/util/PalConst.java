@@ -18,6 +18,7 @@ public class PalConst {
     public CheckResultBean fakeBean;
     public CheckResultBean recheckTrueBean;
     public CheckResultBean recheckFakeBean;
+    public CheckResultBean wrongBean;
 
     private static PalConst instance;
 
@@ -42,11 +43,12 @@ public class PalConst {
     public String fakeMsg = "您查询的防伪码无效，注意防伪，谨防假冒";       //码不存在，或已失效，或未激活返回消息
     public String recheckMsg = "<div>第#N#次验证</div><div>上次验证时间#TIME#</div><div id=\"ipAddress\"></div><div>若这是您购买后首次验证，请注意伪造风险，感谢您的支持！</div>";//第N次查询返回消息
     public String weixinRecheckMsg = "第#N#次验证\n上次验证时间#TIME#\n若这是您购买后首次验证，请注意伪造风险，感谢您的支持！";//第N次查询返回消息
+    public String wrongMsg = "您查询的防伪码无效，注意防伪，谨防假冒...";
 
     public String fakeLogo = "resources/upload/fake-logo.jpg";        //查为伪的logo
     public String trueLogo = "resources/upload/true-logo.jpg";        //查为真的logo
     public String uploadImgBaseUrl = "http://pal.efeiyi.com/";
-    public int _true = 1,_false = -1,_null = 0;   //查询真伪结果, 1真 -1伪 0不显示
+    public int _true = 1, _false = -1,_null = 0;   //查询真伪结果, 1真 -1伪 0不显示
 
 
     public String ip = "ip";                                            //访问的IP
@@ -74,6 +76,7 @@ public class PalConst {
         fakeBean = new CheckResultBean();
         recheckTrueBean = new CheckResultBean();
         recheckFakeBean = new CheckResultBean();
+        wrongBean = new CheckResultBean();
         trueBean.setLogo(trueLogo);
         trueBean.setMsg(trueMsg);
         trueBean.setAuthenticity(_true);
@@ -90,6 +93,8 @@ public class PalConst {
         recheckFakeBean.setMsg(recheckMsg);
         recheckFakeBean.setAuthenticity(_true);
         recheckFakeBean.setIsTimeLimited(isNotTimeLimited);
+        wrongBean.setAuthenticity(_false);
+        wrongBean.setMsg(wrongMsg);
     }
     public static PalConst getInstance(){
 

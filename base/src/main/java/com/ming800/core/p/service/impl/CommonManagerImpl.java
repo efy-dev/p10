@@ -41,10 +41,10 @@ public class CommonManagerImpl implements CommonManager {
             logger.info("开始解析文件：" + xmlFiles.getURL());
             if (xmlFiles != null) {
                 getCommonBannerByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+                getAutoSerialByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonDocumentByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
-                getAutoSerialByGroup(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -138,7 +138,7 @@ public class CommonManagerImpl implements CommonManager {
                        CommonRecommended recommended = new CommonRecommended();
                        recommended.setGroup(group);
                        recommended.setNote(note);
-                       recommended.setAmount(amount);
+                       recommended.setAmount((amount != null && !"".equals(amount))?amount:"5");
                        recommended.setRecommendedModel(recommendedModel);
                        commonRecommendedMap.put(group,recommended);
                    }
