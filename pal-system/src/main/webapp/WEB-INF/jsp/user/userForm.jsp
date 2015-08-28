@@ -7,11 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
-
 <html>
 <head>
     <title></title>
@@ -23,7 +19,6 @@
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
     <form action="<c:url value='/basic/xm.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateUser">
@@ -34,7 +29,6 @@
         <c:if test="${!empty object && object.id != null && object.id != '' }">
             <input type="hidden" name="status" value="${object.status}" />
         </c:if>
-
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">用户姓名 <small>*</small></label>
             <div class="am-u-sm-9">
@@ -61,6 +55,5 @@
         </div>
     </form>
 </div>
-
 </body>
 </html>

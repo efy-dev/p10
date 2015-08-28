@@ -37,7 +37,7 @@
           <c:set var="user" >
             <%= AuthorizationUtil.getMyUser().getUsername()%>
           </c:set>
-          <span><img src="<c:url value="/scripts/assets/images/img-tx.png"/>"></span>
+          <span><img src="<c:url value="/scripts/images/img-tx.png"/>"></span>
           <p>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
         </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>

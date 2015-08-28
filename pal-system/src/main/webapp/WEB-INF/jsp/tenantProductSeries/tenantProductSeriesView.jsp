@@ -7,29 +7,23 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">上传溯源图片</strong>
     </div>
 </div>
-
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -58,22 +52,15 @@
         </tr>
     </table>
 </div>
-
-<%-- 溯源图片 上传 --%>
-<div style="text-align: left;margin-left: 10px;">
-    <input onclick="showDiv()"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-           value="上传溯源图片"/>
-</div>
-
-<div id="uploadSourceImg" style="display:none">
-        <input  id="btn_upload" />
-        <input type="button" class="am-btn am-btn-default am-btn-xs am-hide-sm-only" value="保存"
+<table style="border: none;width: 50%" align="center" >
+    <td>
+        <input class="am-btn am-btn-primary" id="btn_upload"/></td>
+    <td>
+        <input type="button" class="am-btn am-btn-primary" value="保存"
                onclick="javascript:$('#btn_upload').uploadify('upload', '*');"/>
-</div>
-
-<%-- 溯源图片 展示 --%>
+    </td>
+    </tr>
+</table>
 <c:if test="${!empty object.imgList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -108,16 +95,6 @@
 <link rel="stylesheet" href="<c:url value='/scripts/upload/uploadify.css'/>"/>
 <script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
 <script type="text/javascript">
-    var flg =true;
-    function showDiv(){
-        var pf=document.getElementById("uploadSourceImg");
-        if(flg){
-            pf.setAttribute("style","display");
-        }else{
-            pf.setAttribute("style","display:none");
-        }
-        flg = !flg;
-    }
     $(function () {
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/tenantProductSeriesImg/saveTenantProductSeriesImg.do"/>;jsessionid=<%=request.getSession().getId()%>',            // 服务器处理地址

@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ include file="/layouts/public.jsp" %>
 <html>
@@ -16,7 +14,6 @@
     <title></title>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProductSeries&ps=ps&id=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
@@ -32,14 +29,11 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">非遗项目详细信息</strong>
     </div>
 </div>
-
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -59,15 +53,13 @@
         </tr>
     </table>
 </div>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/productSeriesPropertyName/newPropertyNameList.do?productSeriesId=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="添加/编辑--属性"/>
 </div>
-
-<c:if test="${!empty object.productSeriesPropertyNameList}">
+<c:if test="${not empty object.productSeriesPropertyNameList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
             <strong class="am-text-primary am-text-lg">属性名列表</strong>
@@ -90,7 +82,6 @@
         </table>
     </div>
 </c:if>
-
 <c:if test="${not empty object.tenantProductSeriesList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -109,7 +100,6 @@
                 <td>认证级别</td>
                 <td>认证图片</td>
             </tr>
-
             <c:forEach items="${object.tenantProductSeriesList}" var="tenantProductSeries">
                 <tr style="text-align: left">
                     <td>
@@ -145,6 +135,5 @@
         </table>
     </div>
 </c:if>
-
 </body>
 </html>

@@ -29,7 +29,7 @@ public class Code2UrlConsumer implements Runnable {
     StringEntity stringEntity;
     private Url2FileConsumer url2FileConsumer;
 
-    public static ConcurrentLinkedQueue<String> codeList = new ConcurrentLinkedQueue<>();
+
 
     public Code2UrlConsumer(Url2FileConsumer url2FileConsumer) {
         this.url2FileConsumer = url2FileConsumer;
@@ -39,7 +39,7 @@ public class Code2UrlConsumer implements Runnable {
 
 
         if (Code2UrlConsumer.accessToken == null) {
-            synchronized (Code2UrlConsumer.codeList) {
+            synchronized (url2FileConsumer.getCodeList()) {
                 if (Code2UrlConsumer.accessToken == null) {
                     Code2UrlConsumer.accessToken = getAccessToken();
                 }
@@ -53,8 +53,8 @@ public class Code2UrlConsumer implements Runnable {
                 System.out.println(Thread.currentThread().getId() + ":退出");
                 break;
             }
-            if (Code2UrlConsumer.codeList.size() > 0) {
-                String code = Code2UrlConsumer.codeList.remove();
+            if (url2FileConsumer.getCodeList().size() > 0) {
+                String code = url2FileConsumer.getCodeList().remove();
                 String url = "";
                 try {
                     url = getTicketUrl(code);
@@ -62,7 +62,7 @@ public class Code2UrlConsumer implements Runnable {
                     e.printStackTrace();
                     return;
                 }
-                Url2FileConsumer.codeUrlMap.put(code, url);
+                url2FileConsumer.getCodeUrlMap().put(code, url);
 //                synchronized (Url2FileConsumer.codeUrlMap) {
 //                    Url2FileConsumer.codeUrlMap.notifyAll();
 //                }
@@ -71,9 +71,9 @@ public class Code2UrlConsumer implements Runnable {
 //                    consumer.getPic(ticket, consumer.filePath + code + ".jpg");
             } else {
                 try {
-                    synchronized (Code2UrlConsumer.codeList) {
-                        Code2UrlConsumer.codeList.notifyAll();
-                        Code2UrlConsumer.codeList.wait();
+                    synchronized (url2FileConsumer.getCodeList()) {
+                        url2FileConsumer.getCodeList().notifyAll();
+                        url2FileConsumer.getCodeList().wait();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

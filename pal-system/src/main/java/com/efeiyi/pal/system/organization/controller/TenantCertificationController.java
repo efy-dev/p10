@@ -43,7 +43,7 @@ public class TenantCertificationController {
     }
 
     @RequestMapping("/saveTenantCertification.do")
-    public ModelAndView saveTenantCertification(ModelMap modelMap, MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
+    public ModelAndView saveTenantCertification(MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
         TenantCertification tenantCertification = new TenantCertification();
 
         String tenantCertificationId = request.getParameter("id");
@@ -52,10 +52,8 @@ public class TenantCertificationController {
             type = "edit";
             tenantCertification = (TenantCertification) baseManager.getObject(TenantCertification.class.getName(), tenantCertificationId);
         }
-
-        tenantCertification = setTenantCertificationBaseProperty(tenantCertification, request);
+        tenantCertification = setTenantCertificationBaseProperty(tenantCertification, request, type);
         tenantCertification = getRelationAttributeObject(tenantCertification, request);
-        tenantCertification = upLoadImg(multipartRequest, tenantCertification);
 
         baseManager.saveOrUpdate(tenantCertification.getClass().getName(), tenantCertification);
 
@@ -81,9 +79,10 @@ public class TenantCertificationController {
      * 获取tenantCertification的Form表单基本数据
      * @param tenantCertification
      * @param request
+     * @param type
      * @return
      */
-    private TenantCertification setTenantCertificationBaseProperty(TenantCertification tenantCertification, HttpServletRequest request) throws Exception {
+    private TenantCertification setTenantCertificationBaseProperty(TenantCertification tenantCertification, HttpServletRequest request, String type) throws Exception {
         String name = request.getParameter("name");
         String org = request.getParameter("org");
         String status = request.getParameter("status");
@@ -97,6 +96,9 @@ public class TenantCertificationController {
         tenantCertification.setTheDate(date);
         tenantCertification.setLevel(level);
         tenantCertification.setStatus(status);
+        if ("new".equals(type)){
+            tenantCertification.setStatus("1");
+        }
 
         return tenantCertification;
     }
@@ -111,26 +113,6 @@ public class TenantCertificationController {
         String tenantId = request.getParameter("tenant.id");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         tenantCertification.setTenant(tenant);
-
-        return tenantCertification;
-    }
-
-    /**
-     * 上传证书图片
-     * @param multipartRequest
-     * @param tenantCertification
-     * @return
-     * @throws Exception
-     */
-    private TenantCertification upLoadImg(MultipartRequest multipartRequest, TenantCertification tenantCertification) throws Exception{
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String identify = sdf.format(new Date());
-        String url = "tenantCertification/" + identify + ".jpg";
-
-//        if (!multipartRequest.getFile("img").getOriginalFilename().equals("")) {
-//            aliOssUploadManager.uploadFile(multipartRequest.getFile("img"), "315pal", url);
-////            tenantCertification.setImgUrl(url);
-//        }
 
         return tenantCertification;
     }

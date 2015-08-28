@@ -48,15 +48,12 @@ public class ProductController {
             type = "edit";
             product = (Product) baseManager.getObject(Product.class.getName(), productId);
         }
-
         product = setProductBaseProperty(product, request);
-
         product = getRelationAttributeObject(product, request, type);
         product = upLoadLogo(multipartRequest, product);
 
         baseManager.saveOrUpdate(product.getClass().getName(), product);
 
-        modelMap.put("product", product);
         String resultPage = "redirect:/basic/xm.do?qm=viewProduct&product=product&id=" + product.getId();
         return new ModelAndView(resultPage);
     }
@@ -100,12 +97,15 @@ public class ProductController {
             product.setProductPropertyValueList(productPropertyValueList);
             String serial = autoSerialManager.nextSerial("serial");//序列号自动生成
             product.setSerial(serial);
+            product.setStatus("1");
         }
         if (type.equals("edit")){
             ProductSeries oldProductSeries = product.getProductSeries();
             if (!oldProductSeries.equals(newProductSeries)){
                 deleteRelatedAttributes(product);
             }
+            String status = request.getParameter("status");
+            product.setStatus(status);
         }
 
         product.setProductSeries(newProductSeries);
@@ -123,7 +123,6 @@ public class ProductController {
     private Product setProductBaseProperty(Product product, HttpServletRequest request) throws Exception {
         String name = request.getParameter("name");
         String masterName = request.getParameter("masterName");
-        String status = request.getParameter("status");
         String shoppingUrl = request.getParameter("shoppingUrl");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" );
@@ -131,7 +130,6 @@ public class ProductController {
 
         product.setName(name);
         product.setMasterName(masterName);
-        product.setStatus(status);
         product.setShoppingUrl(shoppingUrl);
         product.setMadeYear(date);
 

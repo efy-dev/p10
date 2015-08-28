@@ -6,10 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ include file="/layouts/public.jsp" %>
 <html>
@@ -48,7 +46,7 @@
                 </td>
                 <td>
                     <a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.name}</a>
-                    <c:if test="${!empty product.logo}">
+                    <c:if test="${not empty product.logo}">
                         <img src="<%=imgBasePath %>${product.logo}<%=imgListCss %>">
                     </c:if>
                 </td>

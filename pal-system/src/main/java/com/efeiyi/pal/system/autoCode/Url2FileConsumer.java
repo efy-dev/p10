@@ -9,17 +9,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by Administrator on 2015/8/24.
  */
 public class Url2FileConsumer implements Runnable {
 
-    public static Map<String, String> codeUrlMap = new ConcurrentHashMap<>();
+    private Map<String, String> codeUrlMap = new ConcurrentHashMap<>();
+    private ConcurrentLinkedQueue<String> codeList = new ConcurrentLinkedQueue<>();
     private  boolean generatorEnd = false;
     private int count=0;
     private boolean start = false;
     private String labelBatchId;
+
+    public Map<String, String> getCodeUrlMap() {
+        return codeUrlMap;
+    }
+
+    public void setCodeUrlMap(Map<String, String> codeUrlMap) {
+        this.codeUrlMap = codeUrlMap;
+    }
 
     public boolean isGeneratorEnd() {
         return generatorEnd;
@@ -63,16 +73,16 @@ public class Url2FileConsumer implements Runnable {
 
                 if (codeUrlMap.size() < count) {
                     System.out.println("当前codeUrlMap：" + codeUrlMap.size());
-                    System.out.println("当前codeList：" + Code2UrlConsumer.codeList.size());
-                    synchronized (Code2UrlConsumer.codeList){
-                        Code2UrlConsumer.codeList.notifyAll();
+                    System.out.println("当前codeList：" + codeList.size());
+                    synchronized (codeList){
+                        codeList.notifyAll();
                     }
                     Thread.currentThread().sleep(3000);
                 } else {
                     System.out.println("当前：" + codeUrlMap.size());
                     this.start = true;
-                    synchronized (Code2UrlConsumer.codeList) {
-                        Code2UrlConsumer.codeList.notifyAll();
+                    synchronized (codeList) {
+                        codeList.notifyAll();
                     }
                     for (Map.Entry<String, String> entry : codeUrlMap.entrySet()) {
                         bw.write(entry.getKey() + ":" + entry.getValue() + "\n");
@@ -95,5 +105,13 @@ public class Url2FileConsumer implements Runnable {
                 }
             }
         }
+    }
+
+    public ConcurrentLinkedQueue<String> getCodeList() {
+        return codeList;
+    }
+
+    public void setCodeList(ConcurrentLinkedQueue<String> codeList) {
+        this.codeList = codeList;
     }
 }

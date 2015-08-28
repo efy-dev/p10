@@ -71,11 +71,11 @@
                         <td colspan="2">
                             <div class="result-title">
                                 <strong id="msg">${result.msg}</strong>
-                                <c:if test="${result.authenticity != -1}">
                                     <%--<a href="" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>--%>
                             </div>
                         </td>
                     </tr>
+                    <c:if test="${result.authenticity != -1}">
                     <tr>
                         <td>认证证书</td>
                         <c:forEach items="${product.tenant.tenantCertificationList}" var="certification" begin="0"

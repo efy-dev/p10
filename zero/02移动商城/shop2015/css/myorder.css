@@ -27,6 +27,9 @@ ul,dl{list-style:none}
 .myorder .list-topic span{float:right;font-size: 1.2rem;padding-right: 1.8rem;position: relative;}
 .myorder .list-topic .jt-bg{background: url("../images/myorder.fw.png") no-repeat ;position: absolute;width: 7px;height: 13px;right: .8rem;top:18%;}
 .myorder .list-topic span a{font-size: 1.2rem;color: #000;}
+.myorder .list-pege .state{width: 100%;float: left;text-align: right;font-size: 1rem;padding: .5rem 0;}
+.myorder .list-pege .state .clo-1{color: #ccc;}
+.myorder .list-pege .state .clo-2{color: #ff0000}
 .myorder .list-pege{padding: 0 7px;margin-bottom: 15px;}
 .myorder .list-pege ul{width: 100%;padding-top: 16px;overflow: hidden;height: auto}
 .myorder .list-pege ul li{margin-bottom:.8rem}
@@ -224,3 +227,8 @@ ul,dl{list-style:none}
 .manage .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
 .manage .edit-info a:hover{color: #fff;background-color: #000;}
 /*02021511000847907管理收货地址*/
+/*020209注册*/
+.enroll{width: 100%;float: left;padding: 0 0.9rem;}
+.enroll .start{margin-top: 2rem;width: 100%;float: left;}
+.enroll .start
+/*020209注册*/

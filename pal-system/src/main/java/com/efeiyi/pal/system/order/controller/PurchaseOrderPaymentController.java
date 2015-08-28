@@ -90,6 +90,7 @@ public class PurchaseOrderPaymentController {
         purchaseOrderPayment.setStatus(status);
         if (type.equals("new")){
             purchaseOrderPayment.setCreateDatetime(new Date());
+            purchaseOrderPayment.setStatus("1");
         }
 
         return purchaseOrderPayment;

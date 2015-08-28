@@ -11,14 +11,6 @@
                     </query>
                     <query name="label" label="标签记录" type="auto" orderBy="id:desc">
                         <condition name="label.id" defaultValue="" operation="eq" label="标签id" inputType="text"/>
-                        <!--<condition name="label.id" defaultValue="" operation="eq" inputType="default"/>-->
-                        <!--<condition name="label.serial" defaultValue="" operation="eq" label="标签序列号" inputType="text"/>-->
-                    </query>
-                </do>
-
-                <do name="listLabelCheckRecord" access="" label="防伪查询记录列表" result="/labelCheckRecord/labelCheckRecordList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
             </does>

@@ -8,7 +8,6 @@ import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +29,7 @@ public class ProductSeriesController {
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
     @RequestMapping("/saveProductSeries.do")
-    public ModelAndView saveProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView saveProductSeries(HttpServletRequest request) throws Exception {
         ProductSeries productSeries = new ProductSeries();
 
         String productSeriesId = request.getParameter("id");
@@ -44,9 +43,8 @@ public class ProductSeriesController {
         productSeries = getRelationAttributeObject(productSeries, request, type);
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);
 
-        modelMap.put("productSeries", productSeries);
         String resultPage = "redirect:/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
-        return new ModelAndView(resultPage, modelMap);
+        return new ModelAndView(resultPage);
     }
 
     /**
@@ -58,15 +56,19 @@ public class ProductSeriesController {
      */
     private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request, String type) throws Exception {
 
-        if (type.equals("new")){
+        if ("new".equals(type)){
             List<ProductSeriesPropertyName> productSeriesPropertyNameList = new ArrayList();
             productSeries.setProductSeriesPropertyNameList(productSeriesPropertyNameList);
             productSeries.setTenantProductSeriesList(new ArrayList<TenantProductSeries>());
             String serial = autoSerialManager.nextSerial("serial");
             productSeries.setSerial(serial);
+            productSeries.setStatus("1");
+        }else {
+            String status = request.getParameter("status");
+            productSeries.setStatus(status);
         }
-
         return productSeries;
+
     }
 
     /**
@@ -77,10 +79,7 @@ public class ProductSeriesController {
      */
     private ProductSeries setProductSeriesProperty(ProductSeries productSeries, HttpServletRequest request) {
         String name = request.getParameter("name");
-        String status = request.getParameter("status");
-
         productSeries.setName(name);
-        productSeries.setStatus(status);
 
         return productSeries;
     }

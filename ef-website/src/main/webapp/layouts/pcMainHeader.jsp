@@ -18,9 +18,9 @@
 <!-- Tile icon for Win8 (144x144 + tile color) -->
 <meta name="msapplication-TileImage" content="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
 <meta name="msapplication-TileColor" content="#0e90d2">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/amazeui.min.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/app.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/assets/css/myorder.css"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/app.css"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/myorder.css"/>">
 
 <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -28,4 +28,4 @@
 <!--<![endif]-->
 <script src="<c:url value='/resources/js/alert.js'/>"></script>
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/ef.util.js"/>"></script>
+<script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
