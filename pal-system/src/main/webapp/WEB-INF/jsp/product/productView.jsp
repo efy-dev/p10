@@ -17,7 +17,6 @@
     <script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&product=product&id=${object.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
@@ -33,7 +32,6 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">商品详细信息</strong>
@@ -85,7 +83,6 @@
         </c:if>
     </table>
 </div>
-
 <%-- 商品图片 上传 --%>
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/product/editProductSeriesProperty.do?productId=${object.id}"/>'"
@@ -97,7 +94,6 @@
            style="margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="上传商品图片"/>
 </div>
-
 <div id="uploadProductImg" style="display:none;text-align: left;margin-left: 10px;">
         <input  id="btn_upload" style="margin-bottom: 6px;margin-left:2px;height: 35px;" />
         <input type="button" class="am-btn am-btn-primary" style="margin-bottom: 6px;margin-left:2px;height: 35px;" value="保存"
@@ -132,7 +128,6 @@
         </table>
     </div>
 </c:if>
-
 <%-- 商品所属商品系列的 系列属性列表 --%>
 <c:if test="${!empty object.productPropertyValueList}">
     <div class="am-cf am-padding">
@@ -155,7 +150,6 @@
         </table>
     </div>
 </c:if>
-
 <%-- 商品溯源信息 --%>
 <c:if test="${!empty object.tenantProductSeries}">
     <div class="am-cf am-padding">
@@ -186,7 +180,6 @@
         </table>
     </div>
 </c:if>
-
 <%-- 商品认证信息 --%>
 <c:if test="${!empty object.tenantProductSeries.tenantCertification}">
     <div class="am-cf am-padding">
@@ -221,7 +214,6 @@
         </table>
     </div>
 </c:if>
-
 <script type="text/javascript">
     var flg =true;
     function showDiv(){

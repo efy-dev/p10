@@ -7,11 +7,11 @@
             <does>
                 <do name="listProduct" access="" label="商品列表" result="/product/productList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="tenant" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="tenant.id" defaultValue="" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -41,13 +41,13 @@
             <does>
                 <do name="listProductSeries" access="" label="商品系列列表" result="/productSeries/productSeriesList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistProductSeries" access="" label="商品系列列表分页" result="/productSeries/productSeriesPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
@@ -63,12 +63,13 @@
             <does>
                 <do name="listProductSeriesPropertyName" access="" label="商品系列属性名列表" result="/productSeriesPropertyName/productSeriesPropertyNameList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistProductSeriesPropertyName" access="" label="商品系列属性名列表分页" result="/productSeriesPropertyName/productSeriesPropertyNamePList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>

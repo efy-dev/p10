@@ -16,14 +16,14 @@
             <does>
                 <do name="plistLabelBatch" access="" label="标签批次分页列表" result="/labelBatch/labelBatchPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne" inputType="default"/>-->
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                 </do>
 
                 <do name="listLabelBatch" access="" label="标签批次列表" result="/labelBatch/labelBatchList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
@@ -87,7 +87,7 @@
 
                 <do name="listLabel" access="" label="标签列表" result="/label/labelList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
