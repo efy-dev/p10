@@ -12,7 +12,7 @@
     <div class="hd">
         <ul class="ul-item">
             <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
-            <li><a href="/" title="手机e飞蚁">手机e飞蚁</a></li>
+            <li><a href="" title="手机e飞蚁">手机e飞蚁</a></li>
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
@@ -40,7 +40,7 @@
 <!-- //End--topbar-->
 <div class="header wh">
     <div class="hd">
-        <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
+        <div class="logo"><a class="icon" href="<c:url value="/"/>" target="_blank" title="e飞蚁-爱非遗"></a></div>
         <div class="nav">
             <ul>
                 <c:forEach items="${jnode.children}" var="child">
