@@ -6,12 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-
 <html>
 <head>
     <title></title>
@@ -28,7 +25,7 @@
         <tr>
             <td>操作</td>
             <td>序列号</td>
-            <%--<td>防伪码</td>--%>
+            <td>防伪码</td>
             <td>标签批次</td>
             <td>商品</td>
             <td>商户</td>
@@ -49,7 +46,7 @@
                     </div>
                 </td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&label=view&id=${label.id}'/>">${label.serial}</a></td>
-                <%--<td>${label.code}</td>--%>
+                <td>${label.code}</td>
                 <td>${label.labelBatch.setting}</td>
                 <td>
                     <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
@@ -72,7 +69,6 @@
             </tr>
         </c:forEach>
     </table>
-
     <div style="clear: both">
         <c:url value="/basic/xm.do" var="url" />
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
@@ -80,7 +76,6 @@
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>
     </div>
-
 </div>
 </body>
 </html>

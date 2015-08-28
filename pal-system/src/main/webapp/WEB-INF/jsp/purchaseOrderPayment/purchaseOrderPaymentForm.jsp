@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
@@ -32,18 +30,10 @@
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
     <form action="<c:url value='/purchaseOrderPayment/savePurchaseOrderPayment.do'/>" onsubmit="return formOnSubmit()" method="post" class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateTenantSource">
         <input type="hidden" name="id" value="${object.id}">
-        <c:if test="${empty object || object.id == null || object.id==''}">
-            <input type="hidden" name="status" value="1" />
-        </c:if>
-        <c:if test="${!empty object && object.id != null && object.id != '' }">
-            <input type="hidden" name="status" value="${object.status}" />
-        </c:if>
-
+        <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
             <label name="purchaseOrder.idName" for="purchaseOrder.idName" class="am-u-sm-3 am-form-label">订单编号 <small>*</small></label>
             <div class="am-u-sm-9">
@@ -51,20 +41,18 @@
                     <input type="text" name="purchaseOrder.idName" id="purchaseOrder.idName" placeholder="订单编号" value="${purchaseOrder.serial}" readonly>
                     <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.id}" readonly>
                 </c:if>
-                <c:if test="${!empty object && object.id != null && object.id != '' }">
+                <c:if test="${not empty object && object.id != null && object.id != '' }">
                     <input type="text" name="purchaseOrder.idName" id="purchaseOrder.idName" placeholder="订单编号" value="${object.purchaseOrder.serial}" readonly>
                     <input type="hidden" name="purchaseOrder.id" value="${object.purchaseOrder.id}" readonly>
                 </c:if>
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="payWay" for="payWay" class="am-u-sm-3 am-form-label">支付方式 <small>*</small></label>
             <div class="am-u-sm-9" id="payWayDiv">
                 <ming800:status name="payWay" dataType="PCPurchaseOrderPayment.payWay" checkedValue="${object.payWay}" type="select"/>
             </div>
         </div>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>

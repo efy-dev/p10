@@ -6,7 +6,6 @@ import com.efeiyi.pal.purchase.model.PurchaseOrderLabel;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,11 +27,12 @@ public class PurchaseOrderLabelController {
         PurchaseOrderLabel purchaseOrderLabel = new PurchaseOrderLabel();
 
         String orderLabelId = request.getParameter("id");
+        String type = "new";
         if (orderLabelId != null && !orderLabelId.equals("")) {
+            type = "edit";
             purchaseOrderLabel = (PurchaseOrderLabel) baseManager.getObject(PurchaseOrderLabel.class.getName(), orderLabelId);
         }
-
-        purchaseOrderLabel = setPurchaseOrderLabelBaseProperty(purchaseOrderLabel, request);
+        purchaseOrderLabel = setPurchaseOrderLabelBaseProperty(purchaseOrderLabel, request, type);
         purchaseOrderLabel = getRelationAttributeObject(purchaseOrderLabel, request);
 
         baseManager.saveOrUpdate(purchaseOrderLabel.getClass().getName(), purchaseOrderLabel);
@@ -59,15 +59,18 @@ public class PurchaseOrderLabelController {
      * 获取purchaseOrderLabel的Form表单基本数据
      * @param purchaseOrderLabel
      * @param request
+     * @param type
      * @return
      */
-    private PurchaseOrderLabel setPurchaseOrderLabelBaseProperty(PurchaseOrderLabel purchaseOrderLabel, HttpServletRequest request) throws Exception {
+    private PurchaseOrderLabel setPurchaseOrderLabelBaseProperty(PurchaseOrderLabel purchaseOrderLabel, HttpServletRequest request, String type) throws Exception {
         String amount = request.getParameter("amount");
-        String status = request.getParameter("status");
-
         purchaseOrderLabel.setAmount(Integer.valueOf(amount));
-        purchaseOrderLabel.setStatus(status);
-
+        if ("new".equals(type)) {
+            purchaseOrderLabel.setStatus("1");
+        }else {
+            String status = request.getParameter("status");
+            purchaseOrderLabel.setStatus(status);
+        }
         return purchaseOrderLabel;
     }
 

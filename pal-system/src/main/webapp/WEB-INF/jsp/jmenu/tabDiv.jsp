@@ -7,29 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ include file="/common/taglibs.jsp" %>--%>
 <script type="text/javascript" src="<c:url value="/scripts/doQuery.js?m=2.4"/>"></script>
 <script type="text/javascript" src="<c:url value="/scripts/function.js?m=2.4"/>"></script>
-<%--<script type="text/javascript" src="<c:url value="/scripts/m8u/jquery.m8u2.min.js"/>"></script>--%>
-
-
-<%--<div id="tabsQuery">--%>
-<%--<c:forEach items="${requestScope.doQueryList}" var="doQuery">--%>
-<%--<c:set var="queryModel" value="${requestScope.tempDo.name}_${doQuery.name}"/>--%>
-<%--<c:set var="doQueryStr" value="${pageScope.doQueryStr}${doQuery.name},${doQuery.label},${doQuery.type};"/>--%>
-<%--<div id="${doQuery.name}" title="${doQuery.label}"--%>
-<%--<c:if test="${doQuery.label == requestScope.tabTitle}">selected="true"</c:if>--%>
-<%-->--%>
-<%--</div>--%>
-<%--</c:forEach>--%>
-<%--<input type="hidden" id="doQueryStr" value="${pageScope.doQueryStr}"/>--%>
-<%--</div>--%>
-
-<%--<script type="text/javascript">--%>
-<%--selectTabs('${requestScope.tempDo.name}', '${requestScope.tempDo.label}', '${requestScope.conditions}', '${requestScope.tabTitle}', '${requestScope.tempDo.xentity.model}', $("#doQueryStr").val());--%>
-<%--</script>--%>
-
-
 <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
     <ul class="am-tabs-nav am-nav am-nav-tabs">
         <c:forEach items="${doQueryList}" var="doQuery">
@@ -41,7 +20,6 @@
             </c:if>
         </c:forEach>
     </ul>
-
     <div class="am-tabs-bd">
         <c:forEach items="${doQueryList}" var="doQuery">
             <c:if test="${tabTitle==doQuery.label}">
@@ -56,16 +34,8 @@
     </div>
 </div>
 <br/>
-<%--<button type="button" class="am-btn am-btn-primary js-append-tab">插入 Tab</button>--%>
 <script>
-
     <c:forEach items="${doQueryList}" var="doQuery">
     generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}')
     </c:forEach>
-
 </script>
-
-
-
-
-

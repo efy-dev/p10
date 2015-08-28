@@ -33,8 +33,7 @@ public class TenantController {
             type = "edit";
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), labelBatchId);
         }
-        tenant = setTenantBaseProperty(tenant, request);
-        tenant = getRelationAttributeObject(tenant, request, type);
+        tenant = setTenantBaseProperty(tenant, request, type);
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
 
         modelMap.put("object", tenant);
@@ -43,7 +42,7 @@ public class TenantController {
     }
 
     @RequestMapping("/saveTenantProductSeries.do")
-    public ModelAndView saveTenantProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView saveTenantProductSeries(HttpServletRequest request) throws Exception {
         String tenantId = request.getParameter("tenant.id");
         String productSeriesId = request.getParameter("productSeries.id");
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
@@ -63,7 +62,7 @@ public class TenantController {
     }
 
     @RequestMapping("/delTenantProductSeries.do")
-    public ModelAndView delTenantProductSeries(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView delTenantProductSeries(HttpServletRequest request) throws Exception {
         String tenantProductSeriesId = request.getParameter("tenantProductSeriesId");
         TenantProductSeries tenantProductSeries = (TenantProductSeries) baseManager.getObject(TenantProductSeries.class.getName(), tenantProductSeriesId);
         String tenantId = request.getParameter("tenantId");
@@ -72,7 +71,6 @@ public class TenantController {
         tenantProductSeries.setStatus("0");
         baseManager.saveOrUpdate(TenantProductSeries.class.getName(), tenantProductSeries);
 
-        modelMap.put("object", tenant);
         String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
         return new ModelAndView(resultPage);
     }
@@ -81,9 +79,10 @@ public class TenantController {
      * 获取tenant的Form表单基本数据
      * @param tenant
      * @param request
+     * @param type
      * @return
      */
-    private Tenant setTenantBaseProperty(Tenant tenant, HttpServletRequest request) {
+    private Tenant setTenantBaseProperty(Tenant tenant, HttpServletRequest request, String type) {
         String name = request.getParameter("name");
         String status = request.getParameter("status");
         String province = request.getParameter("province");
@@ -91,35 +90,14 @@ public class TenantController {
         String address = request.getParameter("address");
 
         tenant.setName(name);
-        tenant.setStatus(status);
         tenant.setProvince(province);
         tenant.setCity(city);
         tenant.setAddress(address);
+        tenant.setStatus(status);
+        if ("new".equals(type)){
+            tenant.setStatus("1");
+        }
 
-        return tenant;
-    }
-
-    /**
-     * 获取关联属性的对象
-     * @param tenant
-     * @param request
-     * @return
-     */
-    private Tenant getRelationAttributeObject(Tenant tenant, HttpServletRequest request, String type){
-//        String provinceId = request.getParameter("province.id");
-//        String addressId = request.getParameter("address.id");
-//
-//        AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
-//        AddressDistrict address = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), addressId);
-//
-//        tenant.setProvince(province);
-//        tenant.setAddress(address);
-//        if (type.equals("new")){
-//            List<TenantCertification> tenantCertificationList = new ArrayList<>();
-//            List<TenantProductSeries> tenantProductSeriesList = new ArrayList<>();
-//            tenant.setTenantCertificationList(tenantCertificationList);
-//            tenant.setTenantProductSeriesList(tenantProductSeriesList);
-//        }
         return tenant;
     }
 
