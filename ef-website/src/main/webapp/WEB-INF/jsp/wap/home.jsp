@@ -14,7 +14,7 @@
   </div>
   <!--//End--am-slider-->
   <div class="toolbar">
-    <a class="item asso" href="#">
+    <a class="item asso" href="<c:url value="/productCategory.do"/> ">
       <span><i class="icon"></i></span>
       <span>分类</span>
     </a>
