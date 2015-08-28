@@ -7,11 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
-
 <html>
 <head>
     <title></title>
@@ -33,19 +30,10 @@
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
-    <form action="<c:url value='/TenantProductSeries/saveTenantProductSeries.do'/>" method="post"
-          class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateTenantProductSeries">
+    <form action="<c:url value='/TenantProductSeries/saveTenantProductSeries.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
-        <c:if test="${empty object || object.id == null || object.id==''}">
-            <input type="hidden" name="status" value="1"/>
-        </c:if>
-        <c:if test="${!empty object && object.id != null && object.id != '' }">
-            <input type="hidden" name="status" value="${object.status}"/>
-        </c:if>
-
+        <input type="hidden" name="status" value="${object.status}"/>
         <div class="am-form-group">
             <label name="productSeriesName" for="productSeriesName" class="am-u-sm-3 am-form-label">非遗项目名称<small>*</small></label>
             <div class="am-u-sm-9">
@@ -62,21 +50,18 @@
                 <input type="hidden" id="tenant.id" name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="craft" for="craft" class="am-u-sm-3 am-form-label">制作工艺<small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="craft" id="craft" placeholder="制作工艺" value="${object.craft}" required>
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="region" for="region" class="am-u-sm-3 am-form-label">创作地域<small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="region" id="region" placeholder="创作地域" value="${object.region}" required>
             </div>
         </div>
-
         <c:if test="${(object.tenant.tenantCertificationList) != null && fn:length(object.tenant.tenantCertificationList) == 1}">
             <c:forEach items="${object.tenant.tenantCertificationList}" var="tcf" begin="0" end="0">
                 <div class="am-form-group">
@@ -109,15 +94,12 @@
                     <%--</div>--%>
                 <%--</div>--%>
         <%--</c:if>--%>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
-
     </form>
 </div>
 </body>
 </html>
-

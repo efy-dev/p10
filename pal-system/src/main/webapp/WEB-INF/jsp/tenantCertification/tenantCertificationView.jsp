@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ include file="/layouts/public.jsp" %>
 <html>
@@ -18,20 +17,17 @@
     <script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">上传认证图片</strong>
     </div>
 </div>
-
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -57,14 +53,11 @@
         <tr>
             <td>认证结果</td>
             <td>
-                <ming800:status name="level" dataType="PCTenantCertification.level"
-                                checkedValue="${object.level}" type="normal"/>
+                <ming800:status name="level" dataType="PCTenantCertification.level" checkedValue="${object.level}" type="normal"/>
             </td>
         </tr>
     </table>
 </div>
-
-<%-- 认证图片 上传 --%>
 <table style="border: none;width: 50%" align="center" >
     <td>
         <input class="am-btn am-btn-primary" id="btn_upload"/></td>
@@ -74,8 +67,6 @@
     </td>
     </tr>
 </table>
-
-<%-- 认证图片 展示 --%>
 <c:if test="${!empty object.imgList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -111,17 +102,6 @@
     </div>
 </c:if>
 <script type="text/javascript">
-    var flg = true;
-    function showDiv() {
-        var pf = document.getElementById("uploadCertificationImg");
-        if (flg) {
-            pf.setAttribute("style", "display");
-        } else {
-            pf.setAttribute("style", "display:none");
-        }
-        flg = !flg;
-    }
-
     $(function () {
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/certificationImg/saveCertificationImg.do"/>;jsessionid=<%=request.getSession().getId()%>',            // 服务器处理地址

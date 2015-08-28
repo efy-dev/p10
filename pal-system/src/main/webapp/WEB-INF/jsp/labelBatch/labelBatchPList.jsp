@@ -8,9 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-
 <html>
 <head>
     <title></title>
@@ -37,7 +35,7 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <c:if test="${labelBatch.status != '2'}">
+                            <c:if test="${labelBatch.status == '1'}">
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch&id=${labelBatch.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${labelBatch.id}"/>'"
@@ -52,12 +50,11 @@
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabel_batchLabel&conditions=labelBatch.id:${labelBatch.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs"><font color="#a52a2a">查看标签列表</font></button>
                             </c:if>
-
                         </div>
                     </div>
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
-                <td align="right">${labelBatch.amount}</td>
+                <td>${labelBatch.amount}</td>
                 <td>
                     <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>
                 </td>

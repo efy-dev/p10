@@ -29,43 +29,19 @@ public class LabelBatchHandler implements DoHandler {
 
         String labelBatchId = request.getParameter("id");
         String type = "new";
-        if (labelBatchId != null && !labelBatchId.equals("")) {
+        if (labelBatchId != null && !"".equals(labelBatchId)) {
             type = "edit";
             labelBatch = (LabelBatch) baseManager.getObject(LabelBatch.class.getName(), labelBatchId);
         }
         Do tempDo = (Do) modelMap.get("tempDo");
         labelBatch = (LabelBatch) XDoUtil.processSaveOrUpdateTempObject(tempDo, labelBatch, labelBatch.getClass(), request, type, xdoDao);
 
-        labelBatch = getRelationAttributeObject(labelBatch, request);
+        if ("new".equals(type)){
+            labelBatch.setStatus("1");
+        }
 
         modelMap.put("object", labelBatch);
         return modelMap;
-    }
-
-    /**
-     * 获取关联属性的对象
-     * @param labelBatch
-     * @param request
-     * @return
-     */
-    private LabelBatch getRelationAttributeObject(LabelBatch labelBatch, HttpServletRequest request){
-//        String productId = request.getParameter("product.id");
-//        String tenantId = request.getParameter("tenant.id");
-//        String purchaseOrderId = request.getParameter("purchaseOrder.id");
-
-//        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-//        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-//        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-
-//        Product product = null;
-//        Tenant tenant = null;
-//        PurchaseOrder purchaseOrder = null;
-
-//        labelBatch.setProduct(product);
-//        labelBatch.setTenant(tenant);
-//        labelBatch.setPurchaseOrder(purchaseOrder);
-
-        return labelBatch;
     }
 
 }

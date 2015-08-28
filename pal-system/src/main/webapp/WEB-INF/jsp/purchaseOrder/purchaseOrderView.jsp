@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
 <html>
@@ -28,7 +27,6 @@
     </script>
 </head>
 <body>
-
 <div style="text-align: left;margin-left: 10px;">
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${order.id}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
@@ -44,13 +42,11 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">订单编号为${object.serial}的订单信息</strong>
+        <strong class="am-text-primary am-text-lg">订单详情</strong>
     </div>
 </div>
-
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -61,11 +57,6 @@
             <td>商户名称</td>
             <td>${object.tenant.name}</td>
         </tr>
-        <%-- 二期添加 --%>
-        <%--<tr>--%>
-            <%--<td>用户：</td>--%>
-            <%--<td>${object.user.name}</td>--%>
-        <%--</tr>--%>
         <tr>
             <td>创建时间</td>
             <td><fmt:formatDate value="${object.createDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -74,7 +65,6 @@
             <td>状态</td>
             <td>
                 <ming800:status name="status" dataType="PCPurchaseOrder.status" checkedValue="${object.status}" type="normal" />
-
                 <c:if test="${object.status == '1' || object.status == '2'}">
                     <c:if test="${not empty object.purchaseOrderLabelList}">
                         <input onclick="window.location.href='<c:url value="/purchaseOrderPayment/newPurchaseOrderPayment.do?order=payment&orderId=${object.id}"/>'"
@@ -103,7 +93,6 @@
         </tr>
     </table>
 </div>
-
 <div style="text-align: left;margin-left: 10px;" >
     <c:if test="${object.status == '1' || object.status == '2'}">
         <input onclick="showDiv()"
@@ -112,13 +101,11 @@
                value="选择商品" />
     </c:if>
 </div>
-
 <div class="am-g" id="productForm" style="display:none">
     <form id="selectProduct" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="purchaseOrder.id" value="${object.id}">
-
         <div class="am-form-group" style="child-align: left">
             <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
@@ -127,14 +114,12 @@
                 <input type="hidden" id="product_id"  name="product.id" >
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="amount" for="amount" class="am-u-sm-3 am-form-label"  style="width: auto">数量 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
                 <input type="number" name="amount" id="amount" placeholder="数量" required style="width: auto" aria-required="true">
             </div>
         </div>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
@@ -142,7 +127,6 @@
         </div>
     </form>
 </div>
-
 <c:if test="${not empty object.purchaseOrderLabelList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
@@ -234,6 +218,5 @@
         </table>
     </div>
 </c:if>
-
 </body>
 </html>

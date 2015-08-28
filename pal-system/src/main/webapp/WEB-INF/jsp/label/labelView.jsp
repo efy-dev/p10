@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
@@ -17,18 +16,7 @@
 <body>
 
 <div style="text-align: left;margin-left: 10px;">
-    <%--<c:if test="${object.status != '2'}">--%>
-        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch&id=${object.id}"/>'"--%>
-               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-               <%--style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
-               <%--value="编辑"/>--%>
-        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${object.id}"/>'"--%>
-        <%--<input onclick=""--%>
-               <%--type="button" class="am-btn am-btn-default am-btn-xs"--%>
-               <%--style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"--%>
-               <%--value="删除" />--%>
-    <%--</c:if>--%>
-    <input onclick="location.replace(document.referrer)"
+    <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
@@ -57,10 +45,8 @@
         <tr>
             <td>所属商品</td>
             <td>
-                <c:if test="${object.purchaseOrderLabel != null && not empty object.purchaseOrderLabel}">
-                    <c:if test="${object.purchaseOrderLabel.product != null && not empty object.purchaseOrderLabel.product}">
-                        ${object.purchaseOrderLabel.product.name}
-                    </c:if>
+                <c:if test="${not empty object.purchaseOrderLabel && not empty object.purchaseOrderLabel.product}">
+                    ${object.purchaseOrderLabel.product.name}
                 </c:if>
             </td>
         </tr>

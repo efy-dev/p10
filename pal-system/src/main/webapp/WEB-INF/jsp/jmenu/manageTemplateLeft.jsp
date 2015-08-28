@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -7,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- sidebar start -->
 <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
   <div class="am-offcanvas-bar admin-offcanvas-bar">
@@ -28,14 +28,12 @@
         </c:if>
         <c:if test="${empty childJnode.children}">
           <li><a class="${childJnode.jnodeMatch('efy-active',currentJnode!=null?currentJnode:"")}" href="<c:url value='${childJnode.url}'/>"> ${childJnode.text_zh_CN}</a></li>
-          <%--</c:if>--%>
         </c:if>
       </c:forEach>
     </ul>
     <div class="am-panel am-panel-default admin-sidebar-panel" style="opacity: 0"><%-- opacity: 0 完全透明 --%>
       <div class="am-panel-bd">
         <p><span class="am-icon-bookmark"></span> 公告</p>
-
         <p>暂无</p>
       </div>
     </div>
