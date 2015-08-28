@@ -23,27 +23,26 @@
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3">${object.serial}</td>
-                <td class="am-primary am-u-md-3">下单时间</td>
-                <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
-                </td>
-            </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">收货人</td>
-                <td class="am-u-md-3">
-                    ${object.user.name}
-                </td>
-                <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3">${object.consumerAddress.details}</td>
-
-            </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">总计（元）</td>
-                <td class="am-u-md-3">${object.total}</td>
                 <td class="am-primary am-u-md-3">交易状态</td>
                 <td class="am-u-md-3">
                     <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${object.orderStatus}" type="normal"  />
                 </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">总计（元）</td>
+                <td class="am-u-md-3">${object.total}</td>
+                <td class="am-primary am-u-md-3">收货人</td>
+                <td class="am-u-md-3">
+                    ${object.user.name}
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3">
+                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                </td>
+                <td class="am-primary am-u-md-3">收货地址</td>
+                <td class="am-u-md-3">${object.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>
@@ -60,11 +59,11 @@
             <thead>
             <tr>
                 <th class="table-set">支付号</th>
-                <th class="table-title">支付时间</th>
+                <th class="table-title">支付记录编号</th>
                 <th class="table-title">支付金额(元)</th>
                 <th class="table-title">支付方式</th>
                 <th class="table-title">支付人</th>
-                <th class="table-title">支付记录编号</th>
+                <th class="table-title">支付时间</th>
             </tr>
             </thead>
             <tbody>
@@ -74,9 +73,7 @@
                     <td class="am-hide-sm-only">
                         ${purchaseOrderPayment.transactionNumber}
                     </td>
-                    <td class="am-hide-sm-only">
-                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
-                    </td>
+                    <td class="am-hide-sm-only">${purchaseOrderPayment.serial}</td>
                     <td class="am-hide-sm-only">
                             ${purchaseOrderPayment.paymentAmount}
                     </td>
@@ -84,7 +81,9 @@
                         <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay" checkedValue="${purchaseOrderPayment.payWay}" type="normal"  />
                     </td>
                     <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.serial}</td>
+                    <td class="am-hide-sm-only">
+                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -94,7 +93,7 @@
 
 <div class="am-g">
     <div class="am-u-md-12">
-        <h2>订单分配</h2>
+        <h2>发货记录</h2>
     </div>
 
     <div class="am-u-md-12">
