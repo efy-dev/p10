@@ -78,18 +78,15 @@
   </div>
   <!--个人信息-->
   <div class="Extras">
-    <h2>个人信息</h2>
-    <span><a href="/myEfeiyi/personalInfo.do"><i class="icon-sj"></i></a></span>
+    <a href="/myEfeiyi/personalInfo.do"> 个人信息<i class="icon-sj"></i></a>
   </div>
   <!--地址管理-->
   <div class="Extras">
-    <h2>地址管理</h2>
-    <span><a href="/myEfeiyi/address/list"><i class="icon-sj"></i></a></span>
+    <a href="/myEfeiyi/address/list"> 地址信息<i class="icon-sj"></i></a>
   </div>
   <!--修改密码-->
   <div class="Extras">
-    <h2>修改密码</h2>
-    <span><a href="/myEfeiyi/getPassword.do"><i class="icon-sj"></i></a></span>
+    <a href="/myEfeiyi/getPassword.do"> 修改密码<i class="icon-sj"></i></a>
   </div>
   <!--安全退出-->
   <div class="aq-btn"><a href="/j_spring_security_logout">安全退出</a> </div>

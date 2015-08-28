@@ -7,10 +7,9 @@
 <article class="custom">
   <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
     <ul class="am-slides">
-      <li><img src="<c:url value="/scripts/wap/assets/upload/am-control-nav-1.jpg"/>"></li>
-      <li><img src="<c:url value="/scripts/wap/assets/upload/am-control-nav-1.jpg"/>"></li>
-      <li><img src="<c:url value="/scripts/wap/assets/upload/am-control-nav-1.jpg"/>"></li>
-      <li><img src="<c:url value="/scripts/wap/assets/upload/am-control-nav-1.jpg"/>"></li>
+      <c:forEach items="${bannerList}" var="banner">
+        <li><img src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner"/>"></li>
+      </c:forEach>
     </ul>
   </div>
   <!--//End--am-slider-->
@@ -35,146 +34,24 @@
     </ul>
   </div>
   <!--//End--铜的故事-->
-  <div class="box-hd">
-    <div class="title"><strong>陶冶烧造</strong></div>
-    <ul class="ul-index-list">
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-2-1.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-2-2.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-2-3.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-2-4.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!--//End--陶冶烧造-->
-  <div class="box-hd">
-    <div class="title"><strong>金石錾锻</strong></div>
-    <ul class="ul-index-list">
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-3-1.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-3-2.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-3-3.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-3-4.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!--//End--金石錾锻-->
-  <div class="box-hd">
-    <div class="title"><strong>传统美术</strong></div>
-    <ul class="ul-index-list">
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-4-1.jpg"/>" alt=""/>
-          <em class="name">木板年画</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-4-2.jpg"/>" alt=""/>
-          <em class="name">八仙过海</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-4-3.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-4-4.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!--//End--传统美术-->
-  <div class="box-hd">
-    <div class="title"><strong>名品佳酿</strong></div>
-    <ul class="ul-index-list">
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-5-1.jpg"/>" alt=""/>
-          <em class="name">木板年画</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-5-2.jpg"/>" alt=""/>
-          <em class="name">八仙过海</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-5-3.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-      <li>
-        <a href="" title="">
-          <img src="<c:url value="/scripts/wap/assets/upload/box-hd-5-4.jpg"/>" alt=""/>
-          <em class="name">景德镇</em>
-          <span class="price"><i>￥</i><strong>18999</strong></span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <c:forEach items="${projectList}" var="project">
+    <div class="box-hd">
+      <div class="title"><strong>${project.name}</strong></div>
+      <ul class="ul-index-list">
+        <c:forEach items="${recommendMap.get(project.id)}" var="product" varStatus="status" begin="0" end="3">
+          <li>
+            <a href="<c:url value="/product/hot/${product.id}"/>" title="">
+              <img src="<c:url value="http://pro.efeiyi.com/${product.productModel_url}@!home-product"/>" alt=""/>
+              <em class="name">${product.product.name}</em>
+              <span class="price"><i>￥</i><strong>${product.price}</strong></span>
+            </a>
+          </li>
+        </c:forEach>
+      </ul>
+    </div>
+  </c:forEach>
   <!--//End--名品佳酿-->
-  <div class="login-reg">
-    <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-  </div>
+
 </article>
 </body>
 </html>
