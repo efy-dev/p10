@@ -30,7 +30,7 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        $('.details .des-title .addfav').click(function(){
+        $('.addfav').click(function(){
             $(this).addClass('addfav-end').find('p').html('已收藏');
             return false;
         });
