@@ -48,26 +48,22 @@
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
     <form action="<c:url value='/product/saveProduct.do'/>" onsubmit="return formOnSubmit()" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
-
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}" required>
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="masterName" for="masterName" class="am-u-sm-3 am-form-label">制作大师 <small>&nbsp;&nbsp;</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="masterName" id="masterName" placeholder="制作大师" value="${object.masterName}">
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="productSeries_id" for="productSeries_idName" class="am-u-sm-3 am-form-label">非遗项目 <small>*</small></label>
             <div class="am-u-sm-9">
@@ -77,7 +73,6 @@
                 <input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
@@ -87,7 +82,6 @@
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
@@ -98,14 +92,12 @@
                 </span>
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="shoppingUrl" for="shoppingUrl" class="am-u-sm-3 am-form-label">购买链接 <small>&nbsp;&nbsp;</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="shoppingUrl" id="shoppingUrl" placeholder="购买链接" value="${object.shoppingUrl}">
             </div>
         </div>
-
         <div class="am-form-group">
             <label for="logo" class="am-u-sm-3 am-form-label">商品Logo <small>&nbsp;&nbsp;</small></label>
             <div class="am-u-sm-9">
@@ -121,7 +113,6 @@
                 </c:if>
             </div>
         </div>
-
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
@@ -129,6 +120,5 @@
         </div>
     </form>
 </div>
-
 </body>
 </html>

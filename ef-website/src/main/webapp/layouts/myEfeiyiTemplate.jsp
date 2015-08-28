@@ -24,6 +24,7 @@
   if(HttpUtil.isPhone(request)){
 %>
 <sitemesh:write property='body'/>
+<%@include file="mobileFooter.jsp" %>
 <%
 }else{
 %>
