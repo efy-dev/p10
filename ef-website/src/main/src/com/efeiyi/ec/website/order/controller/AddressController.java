@@ -68,6 +68,18 @@ public class AddressController {
         return "/purchaseOrder/addressList";
     }
 
+    @RequestMapping({"/address/{}"})
+    public String Address(HttpServletRequest request,Model model) throws Exception {
+        String addressId = request.getParameter("addressId");
+        if (addressId.equals("")||addressId == null){
+            return "/purchaseOrder/addAddress";
+        }else {
+            ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(),addressId);
+            model.addAttribute("address",consumerAddress);
+            return "/purchaseOrder/updateAddress";
+        }
+    }
+
     @RequestMapping({"/address/jsonList.do"})
     public List listAddressJson(HttpServletRequest request,Model model) throws Exception {
 

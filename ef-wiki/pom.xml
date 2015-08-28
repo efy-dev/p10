@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ef-wiki</artifactId>
     <packaging>war</packaging>
-    <name>web1 Maven Webapp</name>
+    <name>ef-wiki</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>

@@ -32,9 +32,6 @@ $(function(){
         //收藏
         $('.addfav').click(function(){
             $(this).addClass('addfav-end').find('p').html('已收藏');
-            $('.alert-red-top').slideDown(100,function(){
-                setTimeout('$(".alert-red-top").slideUp(50)',3000)
-            });
             return false;
         });
         //加入购物车悬浮层

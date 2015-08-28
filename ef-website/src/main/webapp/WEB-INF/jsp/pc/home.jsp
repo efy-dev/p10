@@ -47,7 +47,7 @@
 
     <c:forEach items="${projectList}" var="project">
         <div class="box-hd wh">
-            <div class="title wh"><h3>陶冶烧造</h3></div>
+            <div class="title wh"><h3> ${project.name}</h3></div>
             <div class="list-pro">
                 <ul class="ul-item">
                     <c:forEach items="${recommendMap.get(project.id)}" var="product" varStatus="status" begin="0" end="3">
