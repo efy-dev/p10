@@ -6,6 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -22,8 +23,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tenant_private")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class PrivateTenant extends Tenant implements Serializable {
-
-
+public class PrivateTenant extends BigTenant implements Serializable {
 
 }

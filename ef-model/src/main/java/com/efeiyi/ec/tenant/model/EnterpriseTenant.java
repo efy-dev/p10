@@ -22,7 +22,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tenant_enterprise")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class EnterpriseTenant extends Tenant implements Serializable {
-
+public class EnterpriseTenant extends BigTenant implements Serializable {
 
 }
