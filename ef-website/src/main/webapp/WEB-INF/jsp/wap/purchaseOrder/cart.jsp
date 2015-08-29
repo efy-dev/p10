@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>020106购物车</title>
+    <title>购物车</title>
 </head>
 <body>
 <header class="am-header custom-header">

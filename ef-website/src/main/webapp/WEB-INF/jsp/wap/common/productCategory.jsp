@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>分类导航</title>
 </head>
 <body>
 <article class="custom">
@@ -32,7 +32,7 @@
 
     <c:forEach items="${categoryList}" var="category">
         <div class="box-hd">
-            <div class="title2"><strong>陶冶烧造</strong></div>
+            <div class="title2"><strong>${category.name}</strong></div>
             <ul class="ul-index-list">
                 <li>
                     <a class="item" href="javascript;" title=""><i class="arrow-down"></i><img

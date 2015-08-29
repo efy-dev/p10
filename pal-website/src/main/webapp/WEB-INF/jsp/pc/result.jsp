@@ -42,13 +42,14 @@
 <div class="search-list">
     <div class="search-home">
         <div class="logo">
-            <h1><a href="<c:url value='<%=basePath%>'/>"><img src="<c:url value='/resources/images/logo.png'/>" width="160" height="72"/></a></h1>
+            <h1><a href="<c:url value='<%=basePath%>'/>"><img src="<c:url value='/resources/images/logo.png'/>"
+                                                              width="160" height="72"/></a></h1>
         </div>
         <form id="form" method="get" action="<c:url value='/checkLabelPc.do'/>">
             <div class="title"><a class="active">真伪查询</a><span class="line"></span><a>非遗搜</a></div>
             <label for="">
                 <%--<input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入名称查询,如:”苏绣”"/>--%>
-                    <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入12位防伪码"/>
+                <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入12位防伪码"/>
                 <input class="btn" type="submit" value="查 询"/>
             </label>
         </form>
@@ -71,39 +72,40 @@
                         <td colspan="2">
                             <div class="result-title">
                                 <strong id="msg">${result.msg}</strong>
-                                    <%--<a href="" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>--%>
+                                <%--<a href="" title="奖励您100积分，点击领取。">奖励您100积分，点击领取。</a>--%>
                             </div>
                         </td>
                     </tr>
                     <c:if test="${result.authenticity != -1}">
-                    <tr>
-                        <td>认证证书</td>
-                        <c:forEach items="${product.tenant.tenantCertificationList}" var="certification" begin="0"
-                                   end="0">
-                            <td>${certification.name}</td>
-                        </c:forEach>
-                    </tr>
-                    <tr>
-                        <td>商品名称</td>
-                        <td>${product.name}</td>
-                    </tr>
-                    <tr>
-                        <td>商户名称</td>
-                        <td>${product.tenant.name}</td>
-                    </tr>
-                    <tr>
-                        <td>创作年代</td>
-                        <td><fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></td>
-                    </tr>
-                    <tr>
-                        <td>认证时间</td>
-                        <td><fmt:formatDate value="${product.tenantProductSeries.tenantCertification.theDate}"
-                                            pattern="yyyy年MM月"/></td>
-                    </tr>
-                    <tr>
-                        <td>非遗项目</td>
-                        <td>${product.productSeries.name}</td>
-                    </tr>
+                        <c:if test="${ not emptyproduct.tenantProductSeries.tenantCertification}">
+                            <tr>
+                                <td>认证证书</td>
+                                <td>${product.tenantProductSeries.tenantCertification.name}</td>
+                            </tr>
+                        </c:if>
+                        <tr>
+                            <td>商品名称</td>
+                            <td>${product.name}</td>
+                        </tr>
+                        <tr>
+                            <td>商户名称</td>
+                            <td>${product.tenant.name}</td>
+                        </tr>
+                        <tr>
+                            <td>创作年代</td>
+                            <td><fmt:formatDate value="${product.madeYear}" pattern="yyyy年MM月"/></td>
+                        </tr>
+                        <c:if test="${not empty product.tenantProductSeries.tenantCertification}">
+                            <tr>
+                                <td>认证时间</td>
+                                <td><fmt:formatDate value="${product.tenantProductSeries.tenantCertification.theDate}"
+                                                    pattern="yyyy年MM月"/></td>
+                            </tr>
+                        </c:if>
+                        <tr>
+                            <td>非遗项目</td>
+                            <td>${product.productSeries.name}</td>
+                        </tr>
                     </c:if>
                 </table>
             </div>

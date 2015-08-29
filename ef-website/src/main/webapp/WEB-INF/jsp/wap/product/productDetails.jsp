@@ -10,6 +10,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
+    <title>商品详情</title>
 </head>
 <body>
 
