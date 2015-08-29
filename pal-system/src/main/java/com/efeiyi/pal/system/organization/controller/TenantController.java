@@ -3,7 +3,9 @@ package com.efeiyi.pal.system.organization.controller;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
+import com.efeiyi.pal.system.product.service.ProductSeriesServiceManager;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +24,8 @@ public class TenantController {
 
     @Autowired
     private BaseManager baseManager;
+    private ProductSeriesServiceManager productSeriesServiceManager = (ProductSeriesServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productSeriesServiceManagerImpl");
+
 
     @RequestMapping("/saveTenant.do")
     public ModelAndView saveTenant(ModelMap modelMap, HttpServletRequest request) throws Exception {
@@ -65,13 +69,10 @@ public class TenantController {
     public ModelAndView delTenantProductSeries(HttpServletRequest request) throws Exception {
         String tenantProductSeriesId = request.getParameter("tenantProductSeriesId");
         TenantProductSeries tenantProductSeries = (TenantProductSeries) baseManager.getObject(TenantProductSeries.class.getName(), tenantProductSeriesId);
-        String tenantId = request.getParameter("tenantId");
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
 
-        tenantProductSeries.setStatus("0");
-        baseManager.saveOrUpdate(TenantProductSeries.class.getName(), tenantProductSeries);
+        productSeriesServiceManager.removeTenantProductSeries(tenantProductSeries);
 
-        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
+        String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenantProductSeries.getTenant().getId();
         return new ModelAndView(resultPage);
     }
 

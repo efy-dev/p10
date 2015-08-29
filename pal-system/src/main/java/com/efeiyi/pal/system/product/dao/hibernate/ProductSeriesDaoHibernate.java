@@ -1,6 +1,7 @@
 package com.efeiyi.pal.system.product.dao.hibernate;
 
 import com.efeiyi.pal.product.model.ProductSeriesPropertyName;
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.efeiyi.pal.system.product.dao.ProductSeriesDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -31,6 +32,11 @@ public class ProductSeriesDaoHibernate implements ProductSeriesDao {
         Query query = session.createQuery(hql).setParameter("propertyName", propertyName);
         Integer count = query.executeUpdate();
         return count;
+    }
+
+    @Override
+    public void saveOrUpdate(String modelType, Object object) {
+        getSession().saveOrUpdate(modelType, object);
     }
 
 }
