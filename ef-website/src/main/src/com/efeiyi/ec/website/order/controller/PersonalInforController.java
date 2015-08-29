@@ -37,6 +37,15 @@ public class PersonalInforController {
         modelMap.addAttribute("user", user);
         return "/purchaseOrder/personalInfoView";
     }
+
+    @RequestMapping({"personalInfoOfMobile.do"})
+    public String getPersonalInfoOfMobile(ModelMap modelMap){
+        String id = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+
+        modelMap.addAttribute("user", user);
+        return "/purchaseOrder/updateUser";
+    }
     /**
      * 密码修改
      * @param request

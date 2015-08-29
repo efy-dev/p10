@@ -28,18 +28,17 @@ public class ProductModel implements Serializable {
     private String name;
     private String productModel_url;
     private String marketPrice;
-    private ProductDescription productDescription;
+    private ProductModelDescription productModelDescription;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
-    public ProductDescription getProductDescription() {
-        return productDescription;
+    public ProductModelDescription getProductModelDescription() {
+        return productModelDescription;
     }
 
-    public void setProductDescription(ProductDescription productDescription) {
-        this.productDescription = productDescription;
+    public void setProductModelDescription(ProductModelDescription productModelDescription) {
+        this.productModelDescription = productModelDescription;
     }
-
 
     @Column(name = "market_price")
     public String getMarketPrice() {
