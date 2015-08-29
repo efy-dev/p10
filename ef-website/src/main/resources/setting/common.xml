@@ -17,7 +17,7 @@
     <!-- 推荐 -->
     <recommends>
         <recommend group="productRecommended" recommendedModel="com.efeiyi.ec.product.model.Product" note="商品推荐" amount="5" />
-        <recommend group="projectRecommended" recommendedModel="com.efeiyi.ec.project.model.Project" note="推荐分类" amount="5" />
+        <recommend group="categoryRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="推荐分类" amount="5" />
         <recommend group="productModelRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
         <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.product.model.ProductModel" note="推荐分类" amount="5" />
     </recommends>

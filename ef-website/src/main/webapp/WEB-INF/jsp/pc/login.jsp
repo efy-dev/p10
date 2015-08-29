@@ -69,7 +69,7 @@
                     </div>
                     <div class="am-form-group">
                         <%--<label><input class="checkbox" type="checkbox"/>自动登录</label>--%>
-                        <a class="forgetpwd" href="<c:url value="/register"/>" title="忘记密码">忘记密码？</a>
+                        <a class="forgetpwd" href="<c:url value="/forgetPwd"/>" title="忘记密码">忘记密码？</a>
                     </div>
                     <button class="am-btn am-btn-secondary" type="submit">登 录</button>
                     <%--<div class="coagent wh">--%>

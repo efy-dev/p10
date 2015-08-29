@@ -47,7 +47,6 @@ public class Master implements Serializable {
     private String projectName ;
     private String levelName;
 
-
     @Transient
     public String getProjectName() {
         return projectName;

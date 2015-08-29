@@ -39,7 +39,7 @@
                     <tr>
                             <%--<td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a></td>--%>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&viwe=view&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a>
                         </td>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>

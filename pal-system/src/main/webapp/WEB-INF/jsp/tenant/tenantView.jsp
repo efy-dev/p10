@@ -104,7 +104,7 @@
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                                <button onclick="window.location.href='<c:url value="/tenant/delTenantProductSeries.do?tenantId=${object.id}&tenantProductSeriesId=${tenantProductSeries.id}"/>'"
+                                <button onclick="window.location.href='<c:url value="/tenant/delTenantProductSeries.do?tenantProductSeriesId=${tenantProductSeries.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>

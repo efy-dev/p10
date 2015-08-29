@@ -29,6 +29,7 @@
             <input type="hidden" name="tenant.id" value="${tenantId}">
             <input type="hidden" name="resultPage" value="0" />
             <input type="hidden" name="step" value="product">
+            <input type="hidden" name="productDescription.id" value="${object.productDescription.id}">
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
@@ -65,7 +66,7 @@
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
-                   <input type="radio" name="status" value="1" checked="checked"/>
+                   <input type="radio" name="status" value="1" />
                      收藏品
                  </span>
                  <span style="margin-left: 10px;">
@@ -121,6 +122,7 @@
 
                     <div class="am-u-sm-9">
                         <div style="margin-top: 9px;">
+                            <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
                             <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
                         </div>
                         <!-- <small>必填项*</small>-->
@@ -244,6 +246,8 @@
             var pro = $("div[id='" + masterId + "']");
             $(pro).css({"display": "block"});
             $("input[name='project.id']:first", pro).attr("checked", true);
+            $("input[name='status']:first").attr("checked",true);
+
 //        var projectId = $("input[name='project.id']:checked").val();
 //        $("div[id='" + projectId + "']").css({"display": "block"});
         }else{
@@ -252,7 +256,10 @@
             var pro = $("div[id='" + masterId + "']");
             $(pro).css({"display": "block"});
             $("input[name='project.id'][value='"+proId+"']", pro).attr("checked", true);
+            var status = '${object.status}';
+            $("input[name='status'][value='"+status+"']").attr("checked",true);
         }
+
     });
 
     function toSubmit(result){

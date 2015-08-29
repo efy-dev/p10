@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2015/7/29.
@@ -136,15 +138,25 @@ public class DialogController {
      * @return
      * @throws Exception
      */
+//    @RequestMapping({"/seriesByTenantNull/list/json"})
+//    public List<Object> jsonListProductSeriesByTenantNull(HttpServletRequest request) throws Exception{
+//        XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
+//        List<Object> list = this.baseManager.listObject(xQuery);
+//        List<Object> newList = new ArrayList<>();
+//        for(Object o:list){
+//            newList.add(((TenantProductSeries) o).getProductSeries());
+//        }
+//        return newList;
+//    }
     @RequestMapping({"/seriesByTenantNull/list/json"})
-    public List<Object> jsonListProductSeriesByTenantNull(HttpServletRequest request) throws Exception{
+    public Set<Object> jsonListProductSeriesByTenantNull(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
         List<Object> list = this.baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getProductSeries());
         }
-        return newList;
+        return new HashSet<>(newList);
     }
 
     /**
@@ -170,15 +182,25 @@ public class DialogController {
      * @return
      * @throws Exception
      */
+//    @RequestMapping({"/TenantBySeriesNull/list/json"})
+//    public List<Object> jsonListTenantByProductSeriesNull(HttpServletRequest request) throws Exception{
+//        XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
+//        List<Object> list = this.baseManager.listObject(xQuery);
+//        List<Object> newList = new ArrayList<>();
+//        for(Object o:list){
+//            newList.add(((TenantProductSeries) o).getTenant());
+//        }
+//        return newList;
+//    }
     @RequestMapping({"/TenantBySeriesNull/list/json"})
-    public List<Object> jsonListTenantByProductSeriesNull(HttpServletRequest request) throws Exception{
+    public Set<Object> jsonListTenantByProductSeriesNull(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
         List<Object> list = this.baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getTenant());
         }
-        return newList;
+        return new HashSet<>(newList);
     }
 
     /**

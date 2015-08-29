@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>商品列表</title>
 </head>
 <body>
 <artice class="custom">
@@ -23,7 +23,7 @@
         <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-                    <a  href="<c:url value="/product/${productModel.id}"/>" target="_blank">
+                    <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
 
                         <li>
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
