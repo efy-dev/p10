@@ -62,8 +62,11 @@ public class Url2FileConsumer implements Runnable {
 
     public void run() {
         BufferedWriter bw = null;
+        String path = this.getClass().getClassLoader().getResource("/").getPath();
+        File clazzDir = new File(path);
+        String webInfPath = clazzDir.getParent() + "/file/";
         try {
-            File file = new File(labelBatchId + ".txt.tmp");
+            File file = new File(webInfPath + labelBatchId + ".txt.tmp");
 //            if(!file.exists()) {
 //                file.mkdirs();
 //            }
@@ -92,7 +95,7 @@ public class Url2FileConsumer implements Runnable {
                 }
             }
             bw.flush();
-            FileUtils.copyFile(file,new File(labelBatchId + ".txt"));
+            FileUtils.copyFile(file,new File(webInfPath + labelBatchId + ".txt"));
             System.out.println("输出用时：" + (System.currentTimeMillis() - startTime));
         } catch (Exception e) {
             e.printStackTrace();
