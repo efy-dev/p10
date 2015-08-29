@@ -5,10 +5,9 @@ import com.efeiyi.pal.organization.model.TenantCertificationImg;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +20,7 @@ import java.util.Map;
  * Created by Administrator on 2015/8/24.
  */
 
-@Controller
+@RestController
 @RequestMapping("/certificationImg")
 public class TenantCertificationImgController {
 

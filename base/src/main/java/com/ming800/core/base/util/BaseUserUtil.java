@@ -27,6 +27,9 @@ public class BaseUserUtil {
                 public String getId() {
                     return null;
                 }
+                public BaseTenant getBigTenant(){
+                    return null;
+                }
             };
             return myUser;
         }

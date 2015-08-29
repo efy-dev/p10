@@ -20,7 +20,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "tenant")
-@Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Tenant extends BigUser implements Serializable {
 

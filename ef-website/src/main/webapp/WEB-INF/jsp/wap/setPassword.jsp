@@ -17,11 +17,11 @@
           <ul>
             <li>
               <label>新密码</label>
-              <input id="np" type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">
+              <input name="np" type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">
             </li>
             <li>
               <label>重复密码</label>
-              <input id="pwd" type="password" class="txt" placeholder="请再次输入密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
+              <input name="pwd" type="password" class="txt" placeholder="请再次输入密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
               <span class="active-d span2"></span>
             </li>
           </ul>
