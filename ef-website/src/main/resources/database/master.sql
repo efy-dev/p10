@@ -151,6 +151,14 @@ ADD COLUMN `picture_url`  varchar(255) NULL AFTER `type`;
 ALTER TABLE `product_model`
 ADD COLUMN `product_description_id`  char(16) NULL AFTER `name`;
 
+CREATE TABLE `product_model_description` (
+  `id`  char(16) NOT NULL ,
+  `content`  text NULL ,
+  `product_model_id`  char(16) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+
 
 
 

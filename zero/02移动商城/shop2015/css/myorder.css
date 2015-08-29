@@ -231,13 +231,13 @@ ul,dl{list-style:none}
 .enroll{width: 100%;float: left;padding: 0 0.9rem;}
 .enroll .start{margin: 2rem 0;width: 100%;float: left;}
 .enroll .start .login{float: left;width: 100%;border: 1px solid #ccc;}
-.enroll .start .login ul{width: 100%;float: left;padding: 0 0.9rem}
-.enroll .start .login ul li{width: 100%;float: left;margin-bottom: 1.2rem;}
-.enroll .start .login ul li label{padding: 0.8rem 0;font-size: 1rem;width: 100%;float: left}
-.enroll .start .login ul li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;width: 100%;float: left}
-.enroll .start .login ul li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;}
-.enroll .start .login ul li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: left;color:#000;}
-.enroll .start .login ul li .tet1{width: 100%;float: left;}
+.enroll .start .login .page{width: 100%;float: left;padding: 0 0.9rem}
+.enroll .start .login .page li{width: 100%;float: left;margin-bottom: 1.2rem;}
+.enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1rem;width: 100%;float: left}
+.enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;width: 100%;float: left}
+.enroll .start .login .page li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: left;color:#000;}
+.enroll .start .login .page li .tet1{width: 100%;float: left;}
 .enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
 .enroll .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
 .enroll .edit-info .a:hover{color: #fff;background-color: #000;}

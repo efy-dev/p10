@@ -65,21 +65,17 @@
       <div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>
       <div class="slider-img">
         <ul>
-          <li class="active"><img href="<c:url value='/scripts/upload/pep-1.jpg'/>" width="60" height="60" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-2.jpg'/>" width="60" height="60" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-3.jpg'/>" width="60" height="60" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-4.jpg'/>" width="60" height="60" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-5.jpg'/>" width="60" height="60" alt=""/></li>
+        <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
+        </c:forEach>
         </ul>
       </div>
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-          <li><img href="<c:url value='/scripts/upload/pep-1.jpg'/>" width="800" height="700" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-2.jpg'/>" width="800" height="700" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-3.jpg'/>" width="800" height="700" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-4.jpg'/>" width="800" height="700" alt=""/></li>
-          <li><img href="<c:url value='/scripts/upload/pep-5.jpg'/>" width="800" height="700" alt=""/></li>
+          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="800" height="700" alt=""/></li>
+          </c:forEach>
         </ul>
       </div>
       <!-- //End--slider-main-->
@@ -169,101 +165,97 @@
   </div>
   <!-- //End-->
   <div class="wh detail" id="detail">
-    <div class="wh title"><h3>商品详情</h3></div>
-    <div class="wh part">
-      <div class="wh spe1">
-        <h4>非遗风貌</h4>
-        <ul>
-          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${product.name}</span></li>
-          <li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>1200×350×7000</span></li>
-          <li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>
-          <li><strong>制作方式：</strong><span>手工</span></li>
-          <%--<li><strong>所属项目：</strong><span>平遥推光漆器</span></li>--%>
-          <%--<li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>--%>
-          <li><strong>传&nbsp;承&nbsp;人：</strong><span>${product.master.fullName}（${product.master.title}）</span></li>
-          <%--<li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>--%>
-        </ul>
-      </div>
-      <!-- //End--spe1-->
-
-      <!-- //End--spe2-->
-      <div class="wh spe3">
-        <h4>非遗雅韵</h4>
+    ${product.productDescription.content}
+    <%--<div class="wh title"><h3>商品详情</h3></div>--%>
+    <%--<div class="wh part">--%>
+      <%--<div class="wh spe1">--%>
+        <%--<h4>非遗风貌</h4>--%>
         <%--<ul>--%>
-          <%--<li>--%>
-            <%--<span><img src="/scripts/upload/details-1.jpg" alt=""/></span>--%>
-            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
-          <%--</li>--%>
-          <%--<li>--%>
-            <%--<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>--%>
-            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
-          <%--</li>--%>
-          <%--<li>--%>
-            <%--<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>--%>
-            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
-          <%--</li>--%>
+          <%--<li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${product.name}</span></li>--%>
+          <%--<li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>1200×350×7000</span></li>--%>
+          <%--<li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>--%>
+          <%--<li><strong>制作方式：</strong><span>手工</span></li>--%>
+          <%--&lt;%&ndash;<li><strong>所属项目：</strong><span>平遥推光漆器</span></li>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;<li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>&ndash;%&gt;--%>
+          <%--<li><strong>传&nbsp;承&nbsp;人：</strong><span>${product.master.fullName}（${product.master.title}）</span></li>--%>
+          <%--&lt;%&ndash;<li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>&ndash;%&gt;--%>
         <%--</ul>--%>
-        ${productModel.productDiscription.content}
-      </div>
-      <!-- //End--spe3-->
-    </div>
-    <!-- //End--spe-->
-    <div class="wh part">
-      <div class="feeling" id="feeling">
-        <div class="title"><h3>大师感悟</h3></div>
-        <div class="info">
-          <div class="tbar">
-            <p><i class="icon"></i>省级非物质文化遗产传承人<span class="red">[如胶似漆]</span></p>
-          </div>
-          <div class="img"><img src="../shop2015/upload/details-2.jpg" alt=""/></div>
-          <div class="txt">
-            <p>李雅明, 女，山西省平遥人。平遥推光漆器省级传承人。</p>
-            <p>从1989年从事漆艺绘画至今26年。</p>
-            <p>期间在晋中市榆次纺校进修并成立了自己的绘画工作室。后师从中国工艺美术大师薛生金，画技有了很大的提高。</p>
-            <p>作品题材充满了浓郁的中国古典风格特色：整体装饰的情味和耐人寻味的细节产生了栩栩如生的艺术效果。</p>
-            <p>近年来作品多次在本地区比赛、画展中入选、获奖。现为山西省工艺美术协会会员。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //End-->
-    <div class="wh part">
-      <div class="wh spe4">
-        <h4>非遗珍材</h4>
-        <ul>
-          <li><p>平遥推光漆器的魅力不仅仅在于精雕细琢，用料也颇有讲究。平遥推光漆器使用的是在黄土高原广泛分布着的漆树刮掉树皮后流出来的一种天然漆料－－大漆。</p></li>
-        </ul>
-      </div>
-      <div class="wh spe4">
-        <h4>制非遗</h4>
-        <ul>
-          <li><p>木胎—灰胎—漆工—画工—镶嵌
-            漆工车间的工序是非常细致和复杂的。每一件漆艺品"髹漆"是最关键的工序，在灰胎上每刷一道漆，都要先用水砂纸蘸水擦拭，擦拭毕，再用手反复推擦，直到手感光滑，再进行刷漆，每件产品一般上五道到八道漆，每上完一道漆干后需打磨--再上漆--再打磨，最后出光。
-            出好光是每件产品质量优劣的关键。推光漆工艺，从底漆到面漆，每髹饰一道大漆都有不同的工艺要求。
-            平遥推光漆最后一道面漆工序是用手掌推磨抛光的，通常的做法是先用细砂纸把漆面打磨光滑，接下来要用优质椴木烧制的木炭块细细蘸水打磨增加漆面的黑度，再用头发蘸油打磨，最后用手掌蘸上特制的细砖灰（用水将砖灰反复过滤）和麻油推光。
-            漆面要达到光亮如镜的效果，推磨次数愈多出的光愈亮，以后会越擦越亮，适于长期摆放。</p></li>
-        </ul>
-      </div>
-      <div class="wh spe4">
-        <h4>制非遗</h4>
-        <ul>
-          <li><p>防晒防熏
-            收藏漆器应注意避免阳光曝晒、烟熏。
-            防干防湿
-            避免忽干忽湿、温度忽高忽低，最好把漆器放在温度和湿度比较恒定的房间中。空气过于干燥，漆器容易发生断裂；湿度过大，则易出现变形和脱漆。
-            防霉
-            收藏时特别注意不要把漆器放得离地太近，也不要放在铺设海绵的地上。因为地上湿气大，海绵的吸水力又比较强，离地太近或久置于海绵上，易使漆器发霉脱漆。
-            防擦撞
-            移动漆器时要轻拿轻放，不要与坚硬、锐利的物体碰撞或摩擦，避免剧烈震动。漆器年代越久远，胎质越易变得疏松，稍不注意就会损坏。要远离盐、碱等对漆器有一定损害的东西。
-            防尘
-            漆器上有灰尘积淀，可用鸡毛掸和柔软的毛刷轻轻清理，或用棉纱布擦拭。如果漆器表面沾上污垢，可用洗涤剂清洗或用棉纱布蘸上少许食用油轻轻擦拭。</p></li>
-        </ul>
-      </div>
-    </div>
-    <!-- //End-->
-    <div class="online-ask">
-      <a href="" class="btn"><i class="icon"></i>在线咨询</a>
-    </div>
+      <%--</div>--%>
+      <%--<!-- //End--spe1-->--%>
+
+      <%--<!-- //End--spe2-->--%>
+      <%--<div class="wh spe3">--%>
+        <%--<h4>非遗雅韵</h4>--%>
+        <%--&lt;%&ndash;<ul>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;<li>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<span><img src="/scripts/upload/details-1.jpg" alt=""/></span>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;<li>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;<li>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>&ndash;%&gt;--%>
+          <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
+       <%----%>
+      <%--</div>--%>
+      <%--<!-- //End--spe3-->--%>
+    <%--</div>--%>
+    <%--<!-- //End--spe-->--%>
+    <%--<div class="wh part">--%>
+      <%--<div class="feeling" id="feeling">--%>
+        <%--<div class="title"><h3>大师感悟</h3></div>--%>
+        <%--<div class="info">--%>
+          <%--<div class="tbar">--%>
+            <%--<p><i class="icon"></i>${product.master.title}<span class="red">[如胶似漆]</span></p>--%>
+          <%--</div>--%>
+          <%--<div class="img"><img src="../shop2015/upload/details-2.jpg" alt=""/></div>--%>
+          <%--<div class="txt"--%>
+          <%--</div>--%>
+        <%--</div>--%>
+      <%--</div>--%>
+    <%--</div>--%>
+    <%--<!-- //End-->--%>
+    <%--<div class="wh part">--%>
+      <%--<div class="wh spe4">--%>
+        <%--<h4>非遗珍材</h4>--%>
+        <%--<ul>--%>
+          <%--<li><p>平遥推光漆器的魅力不仅仅在于精雕细琢，用料也颇有讲究。平遥推光漆器使用的是在黄土高原广泛分布着的漆树刮掉树皮后流出来的一种天然漆料－－大漆。</p></li>--%>
+        <%--</ul>--%>
+      <%--</div>--%>
+      <%--<div class="wh spe4">--%>
+        <%--<h4>制非遗</h4>--%>
+        <%--<ul>--%>
+          <%--<li><p>木胎—灰胎—漆工—画工—镶嵌--%>
+            <%--漆工车间的工序是非常细致和复杂的。每一件漆艺品"髹漆"是最关键的工序，在灰胎上每刷一道漆，都要先用水砂纸蘸水擦拭，擦拭毕，再用手反复推擦，直到手感光滑，再进行刷漆，每件产品一般上五道到八道漆，每上完一道漆干后需打磨--再上漆--再打磨，最后出光。--%>
+            <%--出好光是每件产品质量优劣的关键。推光漆工艺，从底漆到面漆，每髹饰一道大漆都有不同的工艺要求。--%>
+            <%--平遥推光漆最后一道面漆工序是用手掌推磨抛光的，通常的做法是先用细砂纸把漆面打磨光滑，接下来要用优质椴木烧制的木炭块细细蘸水打磨增加漆面的黑度，再用头发蘸油打磨，最后用手掌蘸上特制的细砖灰（用水将砖灰反复过滤）和麻油推光。--%>
+            <%--漆面要达到光亮如镜的效果，推磨次数愈多出的光愈亮，以后会越擦越亮，适于长期摆放。</p></li>--%>
+        <%--</ul>--%>
+      <%--</div>--%>
+      <%--<div class="wh spe4">--%>
+        <%--<h4>制非遗</h4>--%>
+        <%--<ul>--%>
+          <%--<li><p>防晒防熏--%>
+            <%--收藏漆器应注意避免阳光曝晒、烟熏。--%>
+            <%--防干防湿--%>
+            <%--避免忽干忽湿、温度忽高忽低，最好把漆器放在温度和湿度比较恒定的房间中。空气过于干燥，漆器容易发生断裂；湿度过大，则易出现变形和脱漆。--%>
+            <%--防霉--%>
+            <%--收藏时特别注意不要把漆器放得离地太近，也不要放在铺设海绵的地上。因为地上湿气大，海绵的吸水力又比较强，离地太近或久置于海绵上，易使漆器发霉脱漆。--%>
+            <%--防擦撞--%>
+            <%--移动漆器时要轻拿轻放，不要与坚硬、锐利的物体碰撞或摩擦，避免剧烈震动。漆器年代越久远，胎质越易变得疏松，稍不注意就会损坏。要远离盐、碱等对漆器有一定损害的东西。--%>
+            <%--防尘--%>
+            <%--漆器上有灰尘积淀，可用鸡毛掸和柔软的毛刷轻轻清理，或用棉纱布擦拭。如果漆器表面沾上污垢，可用洗涤剂清洗或用棉纱布蘸上少许食用油轻轻擦拭。</p></li>--%>
+        <%--</ul>--%>
+      <%--</div>--%>
+    <%--</div>--%>
+    <%--<!-- //End-->--%>
+    <%--<div class="online-ask">--%>
+      <%--<a href="" class="btn"><i class="icon"></i>在线咨询</a>--%>
+    <%--</div>--%>
   </div>
 
 </div>

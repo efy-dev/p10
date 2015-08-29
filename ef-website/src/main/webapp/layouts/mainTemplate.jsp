@@ -5,6 +5,7 @@
 <%--<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>--%>
 <html>
 <head>
+    <title><sitemesh:write property='title'/></title>
     <%
         if (HttpUtil.isPhone(request)) {
     %>

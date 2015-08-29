@@ -97,6 +97,9 @@ a:hover{text-decoration: underline}
     border: 1px solid #000;text-decoration: none}
 .my-order .mt-null ul li a:hover{transition:all 0.5s;background-color: #000;color:#fff;}
 .my-order .efeiyi{float: left}
+/*样式*/
+/*.my-order .efeiyi{float: left;margin-left: 76px;}*/
+/*样式*/
 .my-order .collect{float: right}
 /*--查看订单收获信息--*/
 .my-order .filter-bar-1{width:854px;}
@@ -188,7 +191,7 @@ a:hover{text-decoration: underline}
 .my-order .userinfo-tex{width: 124px;height: 37px;border: 1px solid #ccc;padding: 10px 11px;font-family: "宋体";color:#000;font-size: 12px;}
 .my-order .userinfo-tex:active,.my-order .userinfo-tex:hover{border: 1px solid #000;}
 .my-order .userinfo-box{widht:11px;height:11px;line-height: 11px;}
-.my-order .am-input-group{width: 215px;height: 37px;}
+.my-order .am-input-group{width: 215px;height: 37px;display: table;}
 .my-order .act1{float: left;height:38px;margin: 0}
 .my-order .am-btn{float: left;display: block;background: #fff;}
 .my-order .am-input-group .am-form-field{background: #fff;font-size: 12px;font-family: "宋体"; }

@@ -3,9 +3,6 @@ package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterWork;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
