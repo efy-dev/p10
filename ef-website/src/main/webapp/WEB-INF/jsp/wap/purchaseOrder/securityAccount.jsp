@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,27 +14,29 @@
           <ul class="page">
             <li>
               <label>旧密码</label>
-              <input type="text" class="txt" placeholder="请输入旧密码" maxlength="11">
+              <input type="password" class="txt" placeholder="请输入旧密码" maxlength="11" onblur="checkPassword(this);">
+              <span class="active-d active-cl-si"></span>
             </li>
             <li>
               <label>设置密码</label>
-              <input type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">
+              <input type="password" name="np" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">
             </li>
             <li>
               <label>重复密码</label>
-              <input type="password" class="txt" placeholder="请再次输入密码">
+              <input type="password" name="pwd" class="txt" placeholder="请再次输入密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
+              <span class="active-d active-cl-si"></span>
             </li>
           </ul>
         </div>
         <div class="edit-info">
-          <input type="button" value="确认修改" class="a">
+          <input type="button" value="确认修改" class="a" onclick="okChange()">
         </div>
       </div>
     </form>
     <!--状态-->
-    <div class="imparity" style="display: block;">
+    <%--<div class="imparity" style="display: block;">
       <span>两次密码输入不一致</span>
-    </div>
+    </div>--%>
     <!--状态-->
   </div>
 </div>
