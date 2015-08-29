@@ -44,15 +44,17 @@
             <div class="am-form-group">
                 <div class="am-u-sm-10 am-u-sm-offset-2">
                     <span>
-                        <button type="button" onclick="window.location.href='<c:url value="/sign/toRegister.do"/>'" class="am-btn am-btn-default">商家注册</button>
-                    </span>
-                    <span>
                         <button type="submit" class="am-btn am-btn-default">登录</button>
                     </span>
                 </div>
             </div>
         </form>
     </div>
+
+          <span style="margin-left: 550px;">
+             <a class="am-u-sm-3" href="<c:url value="/sign/toRegister.do"/>"  style="text-decoration: underline;float: right;margin-top: 10px;">商家注册</a>
+          </span>
+
 </div>
 </body>
 </html>

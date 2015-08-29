@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.organization.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +25,9 @@ public class SecurityController {
     }
 
     @RequestMapping({"/main.do"})
-    public String main(){
-
+    public String main(Model model,HttpServletRequest request){
+        System.out.print(request.getParameter("TENANT"));
+       model.addAttribute("TENANT",request.getParameter("TENANT"));
         return "/main";
     }
 

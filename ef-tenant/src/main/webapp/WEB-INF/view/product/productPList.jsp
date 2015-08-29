@@ -23,19 +23,19 @@
      </div>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr style="text-align: center">
-                <td>操作</td>
-                <td>作品号</td>
-                <td>作品名称</td>
-                <td>价格</td>
+                <td width="25%">操作</td>
+                <td width="20%">作品号</td>
+                <td width="20%">作品名称</td>
+                <td width="20%">价格</td>
             </tr>
 
           <c:forEach items="${requestScope.pageInfo.list}" var="product">
-                <tr style="text-align: center">
+                <tr style="text-align: center" id="${product.id}">
                     <td width="20%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>">
-                                        修改信息
+                                        修改基本信息
                                 </a>
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&id=${product.id}"/>">
                                         修改描述
@@ -45,6 +45,9 @@
                                 </a>
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">
                                         修改图片
+                                </a>
+                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="removeMaster('${product.id}')">
+                                         删除
                                 </a>
                             </div>
                         </div>
@@ -63,5 +66,20 @@
                 <ming800:pcPageParam name="menuId" value="${requestScope.menuId}"/>
             </ming800:pcPageList>
         </div>
+
+<script>
+    function removeMaster(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+</script>
 </body>
 </html>
