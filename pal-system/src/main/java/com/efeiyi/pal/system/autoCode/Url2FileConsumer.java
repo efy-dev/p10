@@ -65,6 +65,10 @@ public class Url2FileConsumer implements Runnable {
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         File clazzDir = new File(path);
         String webInfPath = clazzDir.getParent() + "/file/";
+        File parent = new File(webInfPath);
+        if(!parent.exists()){
+            parent.mkdirs();
+        }
         try {
             File file = new File(webInfPath + labelBatchId + ".txt.tmp");
 //            if(!file.exists()) {
