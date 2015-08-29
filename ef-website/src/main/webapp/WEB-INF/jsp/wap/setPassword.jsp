@@ -14,7 +14,7 @@
     <form>
       <div class="start">
         <div class="login">
-          <ul>
+          <ul class="page">
             <li>
               <label>新密码</label>
               <input name="np" type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">

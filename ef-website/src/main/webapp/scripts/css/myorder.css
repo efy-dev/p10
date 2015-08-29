@@ -96,9 +96,9 @@ a:hover{text-decoration: underline}
 .my-order .mt-null ul li a{width: 129px;height: 36px;color: #000;font-family: "仿体";text-align: center;display: block;line-height: 36px;font-size: 14px;
     border: 1px solid #000;text-decoration: none}
 .my-order .mt-null ul li a:hover{transition:all 0.5s;background-color: #000;color:#fff;}
-/*.my-order .efeiyi{float: left}*/
+.my-order .efeiyi{float: left}
 /*样式*/
-.my-order .efeiyi{float: left;margin-left: 76px;}
+/*.my-order .efeiyi{float: left;margin-left: 76px;}*/
 /*样式*/
 .my-order .collect{float: right}
 /*--查看订单收获信息--*/
