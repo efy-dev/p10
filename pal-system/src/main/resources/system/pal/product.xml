@@ -56,6 +56,7 @@
                 <do name="viewProductSeries" label="查看商品系列详情页" access="" result="/productSeries/productSeriesView"/>
                 <do name="removeProductSeries" label="删除商品系列" access="" result="redirect:/basic/xm.do?qm=plistProductSeries_default"
                     execute="com.efeiyi.pal.system.product.controller.ProductSeriesRemoveHandler"/>
+                <do name="saveOrUpdateProductSeries" label="新建或更新商品系列" access=""/>
 
             </does>
         </entity>
