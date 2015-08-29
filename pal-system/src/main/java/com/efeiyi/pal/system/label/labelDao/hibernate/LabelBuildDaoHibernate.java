@@ -70,7 +70,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
                 count = 0;
             }
         }
-
+        session.flush();
         url2FileConsumer.setGeneratorEnd(true);
         synchronized (url2FileConsumer.getCodeList()) {
             url2FileConsumer.getCodeList().notifyAll();

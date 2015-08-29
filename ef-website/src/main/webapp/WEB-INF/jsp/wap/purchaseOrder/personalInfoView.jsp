@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>0202个人中心</title>
+    <title>个人中心</title>
 </head>
 <body>
 <header class="am-header custom-header">

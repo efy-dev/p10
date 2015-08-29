@@ -1,5 +1,6 @@
 package com.efeiyi.ec.organization.model;
 
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ming800.core.base.model.BaseUser;
 import org.hibernate.annotations.GenericGenerator;
@@ -49,7 +50,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
 
     private String tempPageUrl;
-
+    private BigTenant bigTenant;
     private Map<String, String> settingMap;
 
     private Integer utype; //总部用户，分公司用户
@@ -81,6 +82,16 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
         this.role = role;
     }
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public BigTenant getBigTenant() {
+        return bigTenant;
+    }
+
+    public void setBigTenant(BigTenant bigTenant) {
+        this.bigTenant = bigTenant;
+    }
 
     @Column(name = "type")
     public Integer getUtype() {

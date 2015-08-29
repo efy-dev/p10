@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.organization.controller;
 
+import com.efeiyi.ec.organization.model.Professional;
 import com.efeiyi.ec.system.organization.service.SignManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.controller.BaseController;
@@ -37,7 +38,7 @@ public class SIgnController extends BaseController {
     }
 
     @RequestMapping("/Register.do")
-    public String Register(Tenant tenant,Model model,String tenantType){
+    public String Register(Professional tenant,Model model,String tenantType){
         try {
             model.addAttribute("username",tenant.getUsername());
             signManager.tenantRegister(tenant,tenantType);

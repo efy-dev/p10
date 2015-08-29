@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>020106订单页</title>
+  <title>确认订单</title>
 </head>
 <body>
 <header class="am-header custom-header">
