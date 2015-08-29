@@ -114,11 +114,12 @@
                           <th class="am-text-center" width="20%">属性</th>
                           <th class="am-text-center" width="20%">库存</th>
                           <th class="am-text-center" width="20%">价格(元)</th>
+                          <th class="am-text-center" width="20%">图片</th>
                       </tr>
                       <c:forEach var="model" items="${object.productModelList}">
                           <tr>
                               <td align="center">
-                                  ${object.name}
+                                  ${model.name}
                               </td>
                               <td class="am-text-center">
                                   <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
@@ -132,6 +133,11 @@
                               </td>
                               <td align="center">
                                   ${model.price}
+                              </td>
+                              <td align="center">
+                                  <c:if test="${not empty model.productModel_url}">
+                                      <img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />
+                                  </c:if>
                               </td>
                           </tr>
                       </c:forEach>
@@ -197,35 +203,35 @@
           </div>
       </div>
 
-      <div class="am-u-md-13">
-          <div class="am-panel am-panel-default">
-              <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">
-                  <%--<a style="margin-bottom: 2px;color: red;" id="btn_upload1"></a>--%>
-                  <strong>  商品模型图片</strong>
-                  <span class="am-icon-chevron-down am-fr" ></span></div>
-              <div id="collapse-panel-4" class="am-in">
-                  <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="productModelPicture">
-                      <tbody>
-                      <tr>
-                          <th>商品名称</th>
-                          <th>图片</th>
-                      </tr>
-                      <c:forEach var="productModel" items="${object.productModelList}" varStatus="status">
-                          <tr>
-                              <td valign="middle">${productModel.name}</td>
-                              <td >
-                                  <c:if test="${not empty productModel.productModel_url}">
-                                      <img width="10%"  name=""  src="http://tenant.efeiyi.com/${productModel.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />
-                                  </c:if>
-                              </td>
-                          </tr>
-                      </c:forEach>
+      <%--<div class="am-u-md-13">--%>
+          <%--<div class="am-panel am-panel-default">--%>
+              <%--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">--%>
+                  <%--&lt;%&ndash;<a style="margin-bottom: 2px;color: red;" id="btn_upload1"></a>&ndash;%&gt;--%>
+                  <%--<strong>  商品模型图片</strong>--%>
+                  <%--<span class="am-icon-chevron-down am-fr" ></span></div>--%>
+              <%--<div id="collapse-panel-4" class="am-in">--%>
+                  <%--<table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="productModelPicture">--%>
+                      <%--<tbody>--%>
+                      <%--<tr>--%>
+                          <%--<th>商品名称</th>--%>
+                          <%--<th>图片</th>--%>
+                      <%--</tr>--%>
+                      <%--<c:forEach var="productModel" items="${object.productModelList}" varStatus="status">--%>
+                          <%--<tr>--%>
+                              <%--<td valign="middle">${productModel.name}</td>--%>
+                              <%--<td >--%>
+                                  <%--<c:if test="${not empty productModel.productModel_url}">--%>
+                                      <%--<img width="10%"  name=""  src="http://tenant.efeiyi.com/${productModel.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
+                                  <%--</c:if>--%>
+                              <%--</td>--%>
+                          <%--</tr>--%>
+                      <%--</c:forEach>--%>
 
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
+                      <%--</tbody>--%>
+                  <%--</table>--%>
+              <%--</div>--%>
+          <%--</div>--%>
+      <%--</div>--%>
 
       <div class="am-form-group">
           <div class="am-u-sm-9 am-u-sm-push-3">

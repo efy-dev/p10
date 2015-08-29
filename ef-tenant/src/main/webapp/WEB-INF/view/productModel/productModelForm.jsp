@@ -123,7 +123,7 @@
                                         </a>
                                    </td>
                                     <td align="center">
-                                        <input type="text" name="modelName" style="width: 100%;height: 30px;" value="${object.name}"/>
+                                        <input type="text" name="modelName" style="width: 100%;height: 30px;" value="${model.name}"/>
                                     </td>
                                     <td class="am-text-center">
                                         <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
