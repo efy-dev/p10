@@ -20,7 +20,7 @@
 
                 <do name="removeProjectCategory" label="删除category" access="" result="redirect:/basic/xm.do?qm=plistProjectCategory_default"/>
                 <do name="formProjectCategory" label="保存category" access="" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler" result="/projectCategory/projectCategoryForm"/>
-                <do name="saveOrUpdateProjectCategory" label="保存category" access="" result="redirect:/basic/xm.do?qm=plistProjectCategory_default"/>
+                <do name="saveOrUpdateProjectCategory" label="保存category" access="" result="redirect:/basic/xm.do?qm=plistProjectCategory_default" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryFormHandler"/>
                 <do name="listProjectCategory" label="category列表" access="" result="/projectCategory/projectCategoryList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="category主键" name="id" defaultValue="1" operation="eq"/>

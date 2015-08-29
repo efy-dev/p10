@@ -143,6 +143,14 @@ MODIFY COLUMN `email`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NU
 ALTER TABLE `purchase_order_delivery`
 ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
 
+ALTER TABLE `project_category`
+ADD COLUMN `picture_url`  varchar(255) NULL AFTER `type`;
+
+
+
+ALTER TABLE `product_model`
+ADD COLUMN `product_description_id`  char(16) NULL AFTER `name`;
+
 
 
 

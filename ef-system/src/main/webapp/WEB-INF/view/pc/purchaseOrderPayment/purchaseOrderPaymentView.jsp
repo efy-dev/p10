@@ -57,7 +57,7 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
-                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
+                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&viewIdentify=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
                 <td class="am-primary am-u-md-3">支付方式</td>
                 <td class="am-u-md-3">
                     <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">

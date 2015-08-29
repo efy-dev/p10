@@ -58,7 +58,9 @@ public class LabelController {
     public void downloadLabelTxt(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         String labelBatchId = request.getParameter("labelBatchId");
-        String fileName = labelBatchId + ".txt";
+        String path = this.getClass().getClassLoader().getResource("/").getPath();
+        File clazzDir = new File(path);
+        String fileName = clazzDir.getParent() + "/file/" + labelBatchId + ".txt";
         File file = new File(fileName);
 //        response.setContentType("application/force-download");
         response.addHeader("Content-Disposition", "attachment; filename=" + fileName);

@@ -14,7 +14,7 @@
   </div>
   <!--//End--am-slider-->
   <div class="toolbar">
-    <a class="item asso" href="#">
+    <a class="item asso" href="<c:url value="/productCategory.do"/> ">
       <span><i class="icon"></i></span>
       <span>分类</span>
     </a>
@@ -30,7 +30,7 @@
   <!--//End--toolbar-->
   <div class="box-hd">
     <ul class="ul-index-list">
-      <li><a href="" title=""><img src="<c:url value="/scripts/wap/assets/upload/box-hd-1.jpg"/>" alt=""/></a></li>
+      <li><a href="" title=""><img src="<c:url value="/scripts/wap/upload/box-hd-1.jpg"/>" alt=""/></a></li>
     </ul>
   </div>
   <!--//End--铜的故事-->

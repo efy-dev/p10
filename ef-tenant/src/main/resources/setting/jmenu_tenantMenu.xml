@@ -9,6 +9,10 @@
                 <match url="formPurchaseOrder"/>
                 <match url="saveOrUpdatePurchaseOrder"/>
             </jnode>
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" state="closed" extend="" access="" text_zh_CN="发货记录管理">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
+            </jnode>
             <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
                 <match url=""/>
             </jnode>
@@ -17,12 +21,15 @@
             </jnode>
         </jnode>
         <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->
-            <jnode id="" url="/basic/xm.do?qm=plistProduct_default" state=""  extend="" access="" text_zh_CN="商品列表">
-                <match url="plistProduct_default"/>
-                <match url="viewProduct"/>
-                <match url="removeProduct"/>
-                <match url="formProduct"/>
-                <match url="saveOrUpdateProduct"/>
+            <jnode id="" url="/basic/xm.do?qm=plistProduct_default&amp;view=product" state=""  extend="" access="" text_zh_CN="商品列表">
+                <match url="/basic/xm.do?qm=plistProduct_default&amp;view=product"/>
+                <match url="/basic/xm.do?qm=formProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_Description"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel"/>
+                <match url="/basic/xm.do?qm=formProduct_Picture"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=product"/>
+                <match url="/product/saveNewProduct.do"/>
+
             </jnode>
             <jnode id="" url=""  state="" access="" text_zh_CN="商品模板">
                 <match url=""/>

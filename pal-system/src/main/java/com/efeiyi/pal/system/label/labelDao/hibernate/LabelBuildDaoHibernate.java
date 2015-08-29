@@ -26,6 +26,7 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
     private SessionFactory sessionFactory;
 
     @Autowired
+    @Qualifier("autoSerialManager")
     private AutoSerialManager autoSerialManager;
 
     public Session getSession() {

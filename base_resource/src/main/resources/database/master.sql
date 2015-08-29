@@ -245,3 +245,8 @@ CREATE TABLE `tenant_personal` (
 --------------------------------------
 ALTER TABLE coupon RENAME TO purchase_coupon;
 ALTER TABLE coupon_batch RENAME TO purchase_coupon_batch;
+----------------------------------------------
+--2015-8-27 杨洪全 暂时增加一个物流公司的字段 可能要改为实体类、
+ALTER TABLE `purchase_order_delivery`
+ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
+-------------------------------------------------------------------

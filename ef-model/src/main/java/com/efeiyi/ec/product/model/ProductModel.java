@@ -17,16 +17,38 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProductModel implements Serializable {
 
-    private String id ;
+    private String id;
     private String serial; // 产品编号
-    private BigDecimal price ;//产品价格
-    private Product product ;//产品种类
+    private BigDecimal price;//产品价格
+    private Product product;//产品种类
     private Integer amount; //库存
     private List<ProductPropertyValue> productPropertyValueList; //属性值
     private String status;
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
+    private String marketPrice;
+    private ProductDescription productDescription;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_description_id")
+    public ProductDescription getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(ProductDescription productDescription) {
+        this.productDescription = productDescription;
+    }
+
+
+    @Column(name = "market_price")
+    public String getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(String marketPrice) {
+        this.marketPrice = marketPrice;
+    }
 
     @Column(name = "product_model_url")
     public String getProductModel_url() {
@@ -36,6 +58,7 @@ public class ProductModel implements Serializable {
     public void setProductModel_url(String productModel_url) {
         this.productModel_url = productModel_url;
     }
+
     @Column(name = "recommend_index")
     public Integer getRecommendIndex() {
         return recommendIndex;

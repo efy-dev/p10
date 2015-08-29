@@ -22,14 +22,14 @@
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
 
-    <tr style="text-align: center">
+    <tr>
         <th>操作</th>
-        <th>下单时间</th>
         <th>订单号</th>
-        <th>收货人</th>
-        <th>总计(元)</th>
-        <!--<th>ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" type="select" /> </th> -->
         <th>订单状态</th>
+        <th>总计(元)</th>
+        <th>收货人</th>
+        <!--<th>ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" type="select" /> </th> -->
+        <th>下单时间</th>
     </tr>
 
     <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrder" varStatus="status">
@@ -38,7 +38,7 @@
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;"
-                           href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}"/>"><span
+                           href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&view=delivery&id=${purchaseOrder.id}"/>"><span
                                 class="am-icon-pencil-square-o">订单详情</span>
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" onclick="updateOrderStatus(this,'${purchaseOrder.id}')">
@@ -57,22 +57,23 @@
                     </div>
                 </div>
             </td>
-            <td width="20%">
-                 <fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
-            </td>
+
             <td>
                 <a  href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}"/>">
                  ${purchaseOrder.serial}
                 </a>
             </td>
-            <td width="10%">
-              ${purchaseOrder.user.name}
+            <td width="10%" id="${purchaseOrder.id}">
+                <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal" />
             </td>
             <td width="10%">
                     ${purchaseOrder.total}
             </td>
-            <td width="10%" id="${purchaseOrder.id}">
-                <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal" />
+            <td width="10%">
+              ${purchaseOrder.user.name}
+            </td>
+            <td width="20%">
+                <fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
             </td>
         </tr>
         <tr id="collapse-panel-${status.index}" class="am-collapse">

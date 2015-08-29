@@ -8,6 +8,7 @@ input[type="text"],input[type="password"],input[type="button"]{-webkit-appearanc
 input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .icon {background:url(../images/icon.png) no-repeat;background-size:152px auto;}
 .bd {width:100%; float:left;}
+.red {color:#f00}
 .arrow-up:before,
 .arrow-right:before,
 .arrow-down:before {content:'';width:12px;height:12px;border-right:1px solid #000;-webkit-transform:rotate(45deg);display:inline-block;margin-left:10px;}
@@ -139,20 +140,68 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details-shop .s-part .txt {padding:20px 40px 20px 0}
 .details-shop .s-part .txt p {width:100%;text-overflow: ellipsis;white-space: nowrap; overflow: hidden; float: left;}
 .details-shop .s-part .txt p:last-child { font-size:12px;}
-.details-shop .s-part .addfav {width:36px;line-height:14px;position: absolute;top:50%; margin-top:-18px; right:0; text-align: center; color: #000; font-size: 1rem;}
-.details-shop .s-part .addfav .icon-addfav { display: inline-block;}
+.details-shop .s-part2 { padding-left:70px; border-bottom:0}
+.details-shop .s-part2 img {width:60px; height: 45px; border: 1px solid #ccc;margin-top:-23px;}
+.details-shop .s-part2 .txt { padding:0 40px 0 0;}
+.details-shop .s-part2 .txt p {line-height:23px;font-size: 12px;}
+.details-shop .addfav {width:36px;line-height:14px;position: absolute;top:50%; margin-top:-18px; right:0; text-align: center; color: #000; font-size: 1rem;}
+.details-shop .addfav .icon-addfav { display: inline-block;}
 .details-shop .s-info {padding:20px 0; line-height:24px;font-size: 12px;}
 .details-shop .s-info .ul-list li {width:100%; float: left; position: relative; padding-left:60px;}
 .details-shop .s-info .ul-list li strong { position: absolute;top:0;left: 0}
 .details-shop .s-info .ul-list li span {width:100%; float: left;}
-
-
-
-    /*--//End--*/
+.details-shop-des .list-class { padding:0;}
+.details-shop-des .list-class h3 {padding:0 20px 20px; font-size: 12px;}
+.details-shop-slider { margin-top: 20px;}
+.alert-red-top {width:100%;position:absolute;top:55px;left:0; padding:0 20px;}
+.alert-red-top .red-text {background: #f00;width:100%;line-height: 20px; text-align: center;color:#fff;font-size: 12px; float: left;}
+/*--//End--*/
 .all-list-class { padding: 20px;}
-.all-list-class .ul-list a {width:90px;line-height: 54px; text-align: center;font-size:14px; color: #000; border: 1px solid #000;float:left; margin-bottom:5px;}
-.all-list-class .ul-list li:nth-child(3n-1) a {margin-left:5px; margin-right:5px;}
+.all-list-class .ul-list {margin-left: -5px;}
+.all-list-class .ul-list a {width:90px;line-height: 54px; text-align: center;font-size:14px; color: #000; border: 1px solid #000;float:left; margin:0 0 5px 5px;}
 .all-list-class .ul-list li.active a { background: #000; color: #fff;}
+.list-class { padding:20px 0;}
+.list-class .ul-list-nav {display: flex; margin-bottom:20px;}
+.list-class .ul-list-nav li {flex: 1;}
+.list-class .ul-list-nav li a {width:100%; line-height: 40px;text-align: center; color:#000; float: left; font-size: 15px; border-top: 1px solid #000; border-bottom: 1px solid #000;}
+.list-class .ul-list-nav li:nth-child(2) a{ border-left: 1px solid #000; border-right: 1px solid #000;}
+.list-class .ul-nav-slice3 { padding:10px 20px; display: flex;}
+.list-class .ul-nav-slice3 li { flex: 1;}
+.list-class .ul-nav-slice3 li a {width:100%; line-height:40px;color:#000;font-size:14px; text-align:center; float: left; border: 1px solid #000;}
+.list-class .ul-nav-slice3 li:nth-child(2) a { border-left:0; border-right: 0;}
+.list-class .ul-nav-slice3 li.active a { background: #000; color: #fff;}
+.list-class .ul-list { padding:0 20px;}
+.list-class .ul-list li {width:48%; margin-bottom:20px;padding-bottom:10px;font-size:14px; float: left; border-bottom: 1px solid #cdcdcd;}
+.list-class .ul-list li img {width:100%;}
+.list-class .ul-list li p {width:100%; float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.list-class .ul-list li p.name { padding-top:10px; padding-bottom:5px;}
+.list-class .ul-list li .price em {font-size:12px;}
+.list-class .ul-list li:nth-child(2n) {float:right;}
+.list-class .ul-list li:last-child,
+.list-class .ul-list li:nth-last-child(2){border-bottom: 0; padding-bottom:0; margin-bottom: 0;}
+.list-class .ul-list-img { float: left;margin-top:-20px;}
+.list-class .ul-list-img img {width:100%;}
+.list-class .ul-list-img p { width:100%; padding:25px 20px; font-size: 12px;}
+.list-ad1 { margin-bottom:25px;}
+.list-ad1 img {width:100%;}
+/*--//End--*/
+.pro-rec-area { padding-bottom:20px; border-bottom: 1px solid #ccc;}
+.pro-rec-area .list-ad1 { margin-bottom: 0;}
+.pro-rec-area .pep-info { padding: 20px; position: relative;}
+.pro-rec-area .pep-info .txt {font-size:14px;padding-right:90px;}
+.pro-rec-area .pep-info .txt p {width:100%; float: left; border-right: 1px solid #ccc; padding-right:7px;}
+.pro-rec-area .pep-info .txt-price {color:#f00;}
+.pro-rec-area .pep-info .txt-name { padding-bottom:10px;}
+.pro-rec-area .pep-info .txt-name strong { font-weight: bold;}
+.pro-rec-area .pep-info .txt-des { font-size:1rem;}
+.pro-rec-area .pep-info .img { width:75px; position:absolute;top:20px; right:20px;}
+.pro-rec-area .pep-info .img img { width:100%;}
+.pro-rec-area .pep-info .img span { width:100%; float: left;}
+.pro-rec-area .pep-info .img span a {color:#036; font-size: 12px; position: relative;}
+.pro-rec-area .pep-info .img span .arrow-right:before {width:8px;height:8px;position: absolute;top:50%; margin-top:-4px;right:-8px;}
+.pro-rec-area .btns { padding:0 20px;}
+.pro-rec-area .btns a {width:46%; text-align: center;line-height:35px;color:#000; border: 1px solid #000;float: left;}
+.pro-rec-area .btns a:last-child { float: right;}
 /*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative;}
 .shop-cart .cart-list {padding:0 20px;box-sizing:border-box;}
@@ -272,6 +321,8 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 /*--//End--*/
 .login-reg {width:100%;text-align:center;float:left; padding:50px 0;border-bottom:1px #ccc solid}
 .login-reg a {width:40%;line-height:42px;border:1px #000 solid;text-align:center;display:inline-block; margin:0 6px; color:#000;}
+.login-reg .logined a {width:auto; line-height:auto; border: 0;}
+
 /*--//End--*/
 .footer .info {margin:50px 0;text-align:center}
 .footer .info .icon {background-position:0 0; width:68px; height:26px; display:inline-block;}
