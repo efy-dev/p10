@@ -72,13 +72,13 @@
       </div>
       <ul class="botton-list">
         <li><a href="/myEfeiyi/removeAddress.do?addressId=${address.id}">删除</a></li>
-        <li><a href="/myEfeiyi/addAddress.do/${address.id}">编辑</a></li>
+        <li><a href="/myEfeiyi/addAddressOfMobile.do?addressId=idr6sdi23iws3j9c">编辑</a></li>
       </ul>
     </div>
     <!--一个地址-->
   </div>
   <div class="edit-info">
-    <a href="/myEfeiyi/addAddress.do/">新增地址</a>
+    <a href="/myEfeiyi/addAddressOfMobile.do?addressId=null">新增地址</a>
   </div>
 </div>
 </body>

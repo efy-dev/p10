@@ -8,7 +8,7 @@
 <div class="myorder">
   <div class="order-head">
     <dl>
-      <dt><img src="<c:url value="/scripts/wap/assets/upload/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></dt>
+      <dt><img src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></dt>
       <dd>
         <p>15110008479</p>
       </dd>
