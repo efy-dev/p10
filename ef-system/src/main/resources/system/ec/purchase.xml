@@ -86,7 +86,7 @@
                 </do>
 
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
-                <do name="viewPurchaseOrder" label="查看购买订单" access="" result="/purchaseOrder/purchaseOrderView"/>
+                <do name="viewPurchaseOrder" label="查看购买订单" access="" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
                 <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
                 <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access=""
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>

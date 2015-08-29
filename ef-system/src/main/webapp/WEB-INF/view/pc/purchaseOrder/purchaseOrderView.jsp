@@ -93,7 +93,7 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=orderProduct&id=${purchaseOrderProduct.productModel.product.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img width="20px" src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model" alt="产品图片"></td>
+                    <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&viewIdentify=${viewIdentify}&id=${purchaseOrderProduct.productModel.product.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img width="20px" src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model" alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>
