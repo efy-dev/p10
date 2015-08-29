@@ -93,7 +93,7 @@
           <th colspan="6">
             <span>${order.createDatetime}</span>
             <span>订单号：<strong>${order.serial}</strong></span>
-            <%--<span>${order.tenant.name}</span>--%>
+            <span>${order.tenant.name}</span>
           </th>
         </tr>
         <tr>
