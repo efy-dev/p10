@@ -2,14 +2,12 @@ package com.efeiyi.ec.system.organization.service.impl;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.Professional;
 import com.efeiyi.ec.system.organization.OrganizationConst;
 import com.efeiyi.ec.system.organization.dao.UserDao;
 import com.efeiyi.ec.system.organization.service.SignManager;
 import com.efeiyi.ec.system.organization.service.UserManager;
-import com.efeiyi.ec.tenant.model.EnterpriseTenant;
-import com.efeiyi.ec.tenant.model.PersonalTenant;
-import com.efeiyi.ec.tenant.model.PrivateTenant;
-import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.*;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.taglib.PageEntity;
@@ -43,46 +41,55 @@ public class SignManagerImpl implements SignManager {
     private UserDao userDao;
     ///**zhu商家注册
     @Override
-    public  void  tenantRegister(Tenant tenant,String tenantType){
-
-        tenant.setPassword(StringUtil.encodePassword(tenant.getPassword(), "SHA"));
-        baseDao.saveOrUpdateObject(Tenant.class.getName(), tenant);
+    public  void  tenantRegister(Professional professional,String tenantType){
+        BigTenant tenant = null;
+        professional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
+        professional.setStatus("1");
+        professional.setEnabled(true);
+        professional.setAccountExpired(false);
+        professional.setAccountLocked(false);
+        professional.setCredentialsExpired(false);
+        //  baseDao.saveOrUpdateObject(Tenant.class.getName(), tenant);
         if(tenantType.equals("11")){
-            EnterpriseTenant enterpriseTenant = new EnterpriseTenant();
-            enterpriseTenant.setPassword(tenant.getPassword());
-            enterpriseTenant.setUsername(tenant.getUsername());
-            enterpriseTenant.setStatus("1");
-            enterpriseTenant.setEnabled(true);
-            enterpriseTenant.setAccountExpired(false);
-            enterpriseTenant.setAccountLocked(false);
-            enterpriseTenant.setCredentialsExpired(false);
-            enterpriseTenant.setTenantType("11");
-            baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), enterpriseTenant);
+            tenant = new EnterpriseTenant();
+//            tenant.setPassword(tenant.getPassword());
+//            tenant.setUsername(tenant.getUsername());
+//            enterpriseTenant.setStatus("1");
+//            enterpriseTenant.setEnabled(true);
+//            enterpriseTenant.setAccountExpired(false);
+//            enterpriseTenant.setAccountLocked(false);
+//            enterpriseTenant.setCredentialsExpired(false);
+            tenant.setTenantType("11");
+            baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), tenant);
         }
         if(tenantType.equals("12")){
-            PrivateTenant privateTenant = new PrivateTenant();
-            privateTenant.setPassword(tenant.getPassword());
-            privateTenant.setUsername(tenant.getUsername());
-            privateTenant.setStatus("1");
-            privateTenant.setEnabled(true);
-            privateTenant.setAccountExpired(false);
-            privateTenant.setAccountLocked(false);
-            privateTenant.setCredentialsExpired(false);
-            privateTenant.setTenantType("12");
-            baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), privateTenant);
+            tenant = new PrivateTenant();
+//            privateTenant.setPassword(tenant.getPassword());
+//            privateTenant.setUsername(tenant.getUsername());
+//            privateTenant.setStatus("1");
+//            privateTenant.setEnabled(true);
+//            privateTenant.setAccountExpired(false);
+//            privateTenant.setAccountLocked(false);
+//            privateTenant.setCredentialsExpired(false);
+            tenant.setTenantType("12");
+            baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), tenant);
         }
         if(tenantType.equals("13")){
-            PersonalTenant personalTenant = new  PersonalTenant();
-            personalTenant.setPassword(tenant.getPassword());
-            personalTenant.setUsername(tenant.getUsername());
-            personalTenant.setStatus("1");
-            personalTenant.setEnabled(true);
-            personalTenant.setAccountExpired(false);
-            personalTenant.setAccountLocked(false);
-            personalTenant.setCredentialsExpired(false);
-            personalTenant.setTenantType("13");
-            baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), personalTenant);
+            tenant = new  PersonalTenant();
+//            personalTenant.setPassword(tenant.getPassword());
+//            personalTenant.setUsername(tenant.getUsername());
+//            personalTenant.setStatus("1");
+//            personalTenant.setEnabled(true);
+//            personalTenant.setAccountExpired(false);
+//            personalTenant.setAccountLocked(false);
+//            personalTenant.setCredentialsExpired(false);
+            tenant.setTenantType("13");
+            baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), tenant);
         }
+
+        professional.setBigTenant(tenant);
+        baseDao.saveOrUpdateObject(Professional.class.getName(),professional);
+
     }
 
     //验证用户唯一

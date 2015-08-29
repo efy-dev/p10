@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.organization.service;
 
+import com.efeiyi.ec.organization.model.Professional;
 import com.efeiyi.ec.tenant.model.Tenant;
 
 /**
@@ -11,7 +12,7 @@ import com.efeiyi.ec.tenant.model.Tenant;
  */
 public interface SignManager {
 
-    void  tenantRegister(Tenant tenant,String tenantType);
+    void  tenantRegister(Professional professional,String tenantType);
     boolean checkUsername(String username);
 
     
