@@ -321,6 +321,9 @@ a:hover { color: #f00; text-decoration:underline;}
 .body-detail { overflow: visible;}
 }
 
+@media (max-height:720px){
+    .login-wrap {height:564px;}
+}
 
 .section {width: 100%;height: 100%;position: relative;float: left;}
 .section .wrap {width:1280px;height:100%; margin: 0 auto; position: relative;}
@@ -454,7 +457,6 @@ a,
 .footer .copyright .frlinks a:hover,
 .shop-sort .link2 dd a:hover{ color: #f00;text-decoration: underline}
 /*--//End--transition*/
-
 
 
 
