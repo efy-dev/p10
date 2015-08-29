@@ -1,36 +1,40 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
-<head>
-  <script type="application/javascript" src="<c:url value="/resources/plugins/parsley/parsley.min.js"/>"></script>
-  <script type="application/javascript" src="<c:url value="/resources/plugins/parsley/parsley.remote.min.js"/>"></script>
-</head>
+<head></head>
 <body>
-<div class="dentification">
-  <div class="short">
-    <form>
-      <ul>
-        <li>
-          <label>输入您的手机号</label>
-          <input id="phone" class="txt" type="text" placeholder="手机号">
-          <span class="active-d span1" id="error"></span>
-        </li>
-        <li>
-          <label>手机验证码</label>
-          <input class="txt1" id="code" type="text" placeholder="短信验证码">
-          <span class="span-lest1"><a id="verificationButton" >获取短信效验码</a></span>
-        </li>
-        <li>
-          <label></label>
-          <span class="span-lest2" ><a onclick=checkVerificationCode($("#phone").val(),$("#code").val())>提交</a></span>
-          <span class="active-d span1" id="auth"></span>
-        </li>
-      </ul>
-    </form>
-  </div>
+<!--//End--header-->
+<div class="enroll">
+  <form>
+    <div class="start">
+      <div class="login">
+        <ul>
+          <li>
+            <label>手机号</label>
+            <input id="phone" type="text" class="txt" placeholder="已验证过的手机号码" maxlength="11">
+            <span class="active-d span1" id="error"></span>
+          </li>
+          <li>
+            <label>验证码</label>
+            <div class="tet1">
+              <input id="code" type="text" class="txt1 am-u-sm-7 am-u-end" placeholder="短信验证码，请注意查收">
+              <span class="am-u-sm-5 am-u-end"><a id="verificationButton">获取验证码</a></span>
+            </div>
+          </li>
+          <li><span class="active-d span1" id="auth" style="font-size:1rem;"></span></li>
+        </ul>
+      </div>
+      <div class="edit-info">
+        <input type="button" value="保存信息" class="a" onclick=checkVerificationCode($("#phone").val(),$("#code").val())>
+      </div>
+    </div>
+  </form>
 </div>
-<!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -41,6 +45,7 @@
 <![endif]-->
 <script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/system.js"/>"></script>
+
 <script>
   var wait = 60;//时间
   function time(o, p) {//o为按钮的对象，p为可选，这里是60秒过后，提示文字的改变
@@ -151,7 +156,6 @@
           window.location.href="/setPwd?username="+$("#phone").val();
         }else{
           $("#auth").text("您发送的验证码不正确");
-
         }
       },
       error: function () {

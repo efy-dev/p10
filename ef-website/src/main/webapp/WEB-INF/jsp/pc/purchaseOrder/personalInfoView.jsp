@@ -102,11 +102,11 @@
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
+<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/jquery.validate.js"/>"></script>
+<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 
 
 <script>

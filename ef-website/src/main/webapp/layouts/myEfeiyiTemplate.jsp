@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
+    <title><sitemesh:write property='title'/></title>
     <%
       if(HttpUtil.isPhone(request)){
     %>
