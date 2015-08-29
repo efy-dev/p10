@@ -164,6 +164,7 @@
               </tr>
             </c:forEach>
             <c:forEach var="productModel" items="${object.productModelList}">
+              <c:if test="${not empty productModel.productModel_url }">
               <tr name="${productModel.id}">
                 <td>
                   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="removeModelPicture(this,'${productModel.id}')"  href="#">
@@ -175,6 +176,7 @@
                   <img width="18%"  name=""  src="http://tenant.efeiyi.com/${productModel.productModel_url}@!tenant-manage-photo" alt="" />
                 </td>
               </tr>
+              </c:if>
             </c:forEach>
 
           </table>
