@@ -8,6 +8,7 @@ import com.ming800.core.does.model.XSaveOrUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
@@ -68,9 +69,12 @@ public class AddressController {
         return "/purchaseOrder/addressList";
     }
 
-    @RequestMapping({"/address/{}"})
+    @RequestMapping({"/addAddressOfMobile.do"})
     public String Address(HttpServletRequest request,Model model) throws Exception {
         String addressId = request.getParameter("addressId");
+        XQuery xQuery = new XQuery("listAddressProvince_default", request);
+        List<Object> objectList = baseManager.listObject(xQuery);
+        model.addAttribute("province",objectList);
         if (addressId.equals("")||addressId == null){
             return "/purchaseOrder/addAddress";
         }else {

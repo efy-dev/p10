@@ -80,4 +80,7 @@
     <bean id="userLoginManager" class="com.efeiyi.pal.system.organization.service.UserLoginManager">
         <property name="userLoginDao" ref="userDao"/>
     </bean>
+
+    <bean id="autoSerialManager" class="com.efeiyi.pal.system.label.labelService.impl.AutoSerialManagerImpl">
+    </bean>
 </beans>

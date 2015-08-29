@@ -30,7 +30,8 @@ public class TenantMaster {
         this.id = id;
     }
 
-    @Column(name = "tenant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
         return tenant;
     }
@@ -38,8 +39,8 @@ public class TenantMaster {
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
-
-    @Column(name = "master_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "master_id")
     public Master getMaster() {
         return master;
     }
