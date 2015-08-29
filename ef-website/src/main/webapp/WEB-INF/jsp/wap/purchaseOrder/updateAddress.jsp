@@ -5,41 +5,19 @@
     <title>编辑收货地址</title>
 </head>
 <body>
-<header class="am-header custom-header">
-  <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
-  </div>
-  <!-- //End--chevron-left-->
-  <h1 class="am-header-title">编辑收货地址</h1>
-  <!-- //End--title-->
-  <div class="am-header-right am-header-nav">
-    <a href="#chevron-right" class="chevron-right" id="menu">
-      <i class="line"></i>
-    </a>
-  </div>
-  <!-- //End--chevron-left-->
-  <div class="menu-list">
-    <ul class="bd">
-      <li><a href="" title="首页">首页</a></li>
-      <li><a href="" title="分类">分&nbsp;类</a></li>
-      <li class="active"><a href="" title="购物车">购&nbsp;物&nbsp;车</a></li>
-      <li><a href="" title="传承人">传承人</a></li>
-      <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
-    </ul>
-  </div>
-</header>
 <!--//End--header-->
 <div class="shipping-address">
   <div class="address">
-    <form action="<c:url value="/myEfeiyi/addAddress.do"/>">
+    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>">
       <ul>
         <li>
+          <input name="id" type="hidden" value="${address.id}">
           <label>收货人</label>
           <input type="text" class="txt" name="consignee" value="${address.consignee}">
         </li>
         <li>
           <label>手机号</label>
-          <input type="text" class="txt" value="${address.phone}" size="11" maxlength="11">
+          <input type="text" class="txt" name="phone" value="${address.phone}" size="11" maxlength="11">
         </li>
         <li>
           <label>所在地区</label>
@@ -54,18 +32,18 @@
         </li>
         <li>
           <label>具体地址</label>
-          <textarea id="doc-vld-ta-2" minlength="10" maxlength="100" class="text-act">${address.details}</textarea>
+          <textarea name="details" id="doc-vld-ta-2" minlength="10" maxlength="100" class="text-act">${address.details}</textarea>
         </li>
       </ul>
       <div class="default">
           <p>
-            <input type="checkbox">
+            <input type="checkbox" id="checkbox" onclick="putVal(this);" name="checkbox" value="">
             <strong>设为默认地址</strong>
             <span>（注：每次下单时都使用该地址）</span>
           </p>
       </div>
       <div class="edit-info">
-        <input type="submit" class="dj-btn" value="保存信息"></input>
+        <input type="submit" class="dj-btn" value="保存信息">
       </div>
     </form>
   </div>
@@ -73,6 +51,14 @@
 </div>
 <script>
 
+  function putVal(o){
+    var ele = document.getElementById("checkbox");
+      if(ele.checked){
+        $(o).val("1");
+      }else{
+        $(o).val("0");
+      }
+  }
   $(function () {
     $("#add").click(function () {
       $(this).siblings('.active-pop').show();
