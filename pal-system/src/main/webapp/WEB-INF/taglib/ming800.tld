@@ -329,7 +329,7 @@
     <tag>
         <description>pc:pagination</description>
         <name>pcPageList</name>
-        <tag-class>com.ming800.core.taglib.PCPageList</tag-class>
+        <tag-class>com.efeiyi.pal.system.taglib.PCPageList</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <description>request name space</description>

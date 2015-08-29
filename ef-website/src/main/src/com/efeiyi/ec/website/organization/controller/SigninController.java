@@ -118,7 +118,7 @@ public class   SigninController extends BaseController {
         cart.setUser(user);
         cart.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        return new ModelAndView("/signinSuccess");
+        return new ModelAndView("redirect:/login");
     }
 
     /*
