@@ -16,7 +16,9 @@ import com.efeiyi.ec.website.organization.service.UserManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import com.ming800.core.p.PConst;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
@@ -33,6 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 
 /**
@@ -146,17 +150,14 @@ public class   SigninController extends BaseController {
         String verificationCode = VerificationCodeGenerator.createVerificationCode();
         System.out.println(verificationCode);
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
-        if (true) {
-//            String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
-            if ("" != null) {
+        String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
+        if (massage != null) {
                 return true;
             } else {
                 return false;
             }
-        } else {
-            return false;
         }
-    }
+
 
     /**
      * 跳转到注册页面的controller
@@ -202,6 +203,23 @@ public class   SigninController extends BaseController {
         return "/register";
     }
 
+    @RequestMapping({"/forgetPwd"})
+    public String forgetPwd(HttpServletRequest request ){
+
+        return "/forgetPassword";
+
+    }
+    @RequestMapping({"/setPwd"})
+    public String setPwd(HttpServletRequest request,Model model ) throws Exception {
+       String username=request.getParameter("username");
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username",username);
+        String hql="from BigUser s where s.username=:username";
+        BigUser biguser = (BigUser) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
+         model.addAttribute("user",biguser);
+        return "/setPassword";
+
+    }
 
 
     @RequestMapping({"/wx/register"})

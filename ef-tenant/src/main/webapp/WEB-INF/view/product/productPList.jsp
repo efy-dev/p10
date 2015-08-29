@@ -50,7 +50,7 @@
                         </div>
                     </td>
                     <td width="20%">${product.serial}</td>
-                    <td width="20%"><a href="<c:url value="/basic/xm.do?qm=viewProduct&id=${product.id}"/>"> ${product.name}</a></td>
+                    <td width="20%"><a href="<c:url value="/basic/xm.do?qm=viewProduct&view=${view}&id=${product.id}"/>"> ${product.name}</a></td>
                     <td width="20%">${product.price}</td>
                 </tr>
             </c:forEach>

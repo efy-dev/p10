@@ -1,5 +1,6 @@
 package com.efeiyi.pal.organization.model;
 
+import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +29,7 @@ public class Tenant {
     private String status;
     private List<TenantCertification> tenantCertificationList;
     private List<TenantProductSeries> tenantProductSeriesList;
+    private List<Product> productList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -127,6 +129,17 @@ public class Tenant {
 
     public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
         this.tenantProductSeriesList = tenantProductSeriesList;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    @Where(clause = "status='1'")
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override

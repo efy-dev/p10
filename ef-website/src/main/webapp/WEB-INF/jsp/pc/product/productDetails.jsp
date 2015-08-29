@@ -5,12 +5,25 @@
   Time: 11:01
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <!doctype html>
 <html class="no-js">
 <head>
+  <script>
+    function show(o){
+      var price = $(o).next().val();
+      var marketPrice = $(o).next().next().val();
+      var id = $(o).next().next().next().val();
+      $("#price").text(price);
+      $("#marketPrice").text("市场价：￥"+marketPrice);
+      // window.location.href="<c:url value="/cart/addProduct.do?id="/>"+id;
+//    return /cart/addProduct.do?id;
+    }
+  </script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
@@ -21,20 +34,20 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+  <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/amazeui.min.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/app.css?v=20150831'/>">
 </head>
 <body>
 <!-- //End--header-->
@@ -52,21 +65,21 @@
       <div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>
       <div class="slider-img">
         <ul>
-          <li class="active"><img src="../shop2015/upload/pep-1.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-2.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-3.jpg" width="60" height="60" alt=""/></li>
-          <li><img src  ="../shop2015/upload/pep-4.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-5.jpg" width="60" height="60" alt=""/></li>
+          <li class="active"><img href="<c:url value='/scripts/upload/pep-1.jpg'/>" width="60" height="60" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-2.jpg'/>" width="60" height="60" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-3.jpg'/>" width="60" height="60" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-4.jpg'/>" width="60" height="60" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-5.jpg'/>" width="60" height="60" alt=""/></li>
         </ul>
       </div>
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-          <li><img src="../shop2015/upload/pep-1.jpg" width="800" height="700" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-2.jpg" width="800" height="700" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-3.jpg" width="800" height="700" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-4.jpg" width="800" height="700" alt=""/></li>
-          <li><img src="../shop2015/upload/pep-5.jpg" width="800" height="700" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-1.jpg'/>" width="800" height="700" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-2.jpg'/>" width="800" height="700" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-3.jpg'/>" width="800" height="700" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-4.jpg'/>" width="800" height="700" alt=""/></li>
+          <li><img href="<c:url value='/scripts/upload/pep-5.jpg'/>" width="800" height="700" alt=""/></li>
         </ul>
       </div>
       <!-- //End--slider-main-->
@@ -81,18 +94,21 @@
       <div class="des">
         <ul class="ul-list">
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-            <li class="active"><a href="#">
+            <li class=""><a onclick="show(this)">
               <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
                 ${productPropertyValue.projectPropertyValue.value}
               </c:forEach>
-                ${product.name}</a></li>
+                ${product.name}</a>
+              <input type="hidden" value="${productModel.price}">
+              <input type="hidden" value="${productModel.marketPrice}">
+            </li>
           </c:forEach>
         </ul>
       </div>
       <!-- //End-->
       <div class="amount">
         <div class="ipt">
-          <input class="txt" type="text" value="999"/><em class="ge">个</em>
+          <input class="txt" type="text" value="1"/><em class="ge">个</em>
         </div>
         <div class="btns">
           <a href="#btn-add" class="btn-add" title="加">+</a>
@@ -102,12 +118,12 @@
       <!-- //End-->
       <div class="price">
         <div class="p-text">飞蚁价：</div>
-        <div class="p-price"><em>￥</em><span>7000</span></div>
-        <div class="m-price">市场价：￥8999</div>
+        <div class="p-price" ><em>￥</em><span id="price"></span></div>
+        <div class="m-price" id="marketPrice"></div>
       </div>
       <!-- //End-->
       <div class="choose-btns">
-        <a class="btn btn-append" href="" title="放入购物车">放入购物车</a>
+        <a class="btn btn-append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
         <a class="btn btn-buy" href="" title="立即购买">立即购买</a>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
@@ -158,41 +174,36 @@
       <div class="wh spe1">
         <h4>非遗风貌</h4>
         <ul>
-          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>开柜</span></li>
+          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${product.name}</span></li>
           <li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>1200×350×7000</span></li>
           <li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>
           <li><strong>制作方式：</strong><span>手工</span></li>
-          <li><strong>所属项目：</strong><span>平遥推光漆器</span></li>
-          <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
-          <li><strong>传&nbsp;承&nbsp;人：</strong><span>李雅明（省级）</span></li>
-          <li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>
+          <%--<li><strong>所属项目：</strong><span>平遥推光漆器</span></li>--%>
+          <%--<li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>--%>
+          <li><strong>传&nbsp;承&nbsp;人：</strong><span>${product.master.fullName}（${product.master.title}）</span></li>
+          <%--<li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>--%>
         </ul>
       </div>
       <!-- //End--spe1-->
-      <div class="wh spe2">
-        <h4>非遗承袭</h4>
-        <ul>
-          <li><p>推光漆器是一种工艺性质的高级油漆器具，山西平遥汉族传统手工技艺之一，以手掌推出光泽而得名。山西著名工艺品平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。2006年5月20日，该技艺经国务院批准列入第一批国家级非物质文化遗产名录。</p></li>
-          <li><p>在晋中，有一俗语可谓家喻户晓："平遥古城三件宝，漆器牛肉长山药"。在古城三件宝中，漆器列为首。平遥古城地处黄土高原。公元前2000年前，新石器时代，这里覆盖有大量树木。有一种叫漆树的树种分布甚广。先民们便用漆树的浆汁涂抹食器，以图光亮、好看、耐用。另外，由于漆器具有自动变黑的特征，它也被用来作为文字记号。3700年前，禹造祭器，髹以漆液，墨染其外，先染其内，证明当时已使用矿物质颜料调制朱色漆饰。</p></li>
-        </ul>
-      </div>
+
       <!-- //End--spe2-->
       <div class="wh spe3">
         <h4>非遗雅韵</h4>
-        <ul>
-          <li>
-            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
-            <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
-          </li>
-          <li>
-            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
-            <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
-          </li>
-          <li>
-            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
-            <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
-          </li>
-        </ul>
+        <%--<ul>--%>
+          <%--<li>--%>
+            <%--<span><img src="/scripts/upload/details-1.jpg" alt=""/></span>--%>
+            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
+          <%--</li>--%>
+          <%--<li>--%>
+            <%--<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>--%>
+            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
+          <%--</li>--%>
+          <%--<li>--%>
+            <%--<span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>--%>
+            <%--<p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>--%>
+          <%--</li>--%>
+        <%--</ul>--%>
+        ${productModel.productDiscription.content}
       </div>
       <!-- //End--spe3-->
     </div>
@@ -270,15 +281,6 @@
 <script src="../shop2015/js/amazeui.min.js"></script>
 <script src="../shop2015/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-
-<script>
-  function show(o){
-
-  }
-</script>
-
-
-
 </body>
 </html>
 

@@ -24,6 +24,7 @@ public class ProductSeries {
     private List<ProductSeriesPropertyName> productSeriesPropertyNameList;
 
     private List<TenantProductSeries> tenantProductSeriesList;
+    private List<Product> productList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -83,6 +84,16 @@ public class ProductSeries {
 
     public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
         this.tenantProductSeriesList = tenantProductSeriesList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productSeries")
+    @Where(clause = "status = '1'")
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override
