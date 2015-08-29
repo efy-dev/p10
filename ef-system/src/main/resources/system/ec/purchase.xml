@@ -197,7 +197,7 @@
                 <do name="formPurchaseOrderDelivery" label="保存发货记录" access=""
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"/>
                 <do name="viewPurchaseOrderDelivery" label="查看发货记录" access=""
-                    result="/purchaseOrderDelivery/purchaseOrderDeliveryView"/>
+                    result="/purchaseOrderDelivery/purchaseOrderDeliveryView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderViewProductHandler"/>
                 <do name="saveOrUpdatePurchaseOrderDelivery" label="保存发货记录" access=""
                     result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"/>
                 <do name="listPurchaseOrderDelivery" label="发货记录列表" access=""

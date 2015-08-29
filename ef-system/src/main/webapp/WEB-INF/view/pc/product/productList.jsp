@@ -27,7 +27,7 @@
                 <c:forEach items="${objectList}" var="product" end="4">
                     <tr id="${product.id}">
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewProduct&param=delivery&id=${product.id}'/>">${product.name}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewProduct&viewIdentify=${viewIdentify}&param=delivery&id=${product.id}'/>">${product.name}</a>
                             <img width="20px" src="http://pro.efeiyi.com/${product.picture_url}@!product-model" alt="产品图片">
                         </td>
                         <td class="am-hide-sm-only">${product.serial}</td>
