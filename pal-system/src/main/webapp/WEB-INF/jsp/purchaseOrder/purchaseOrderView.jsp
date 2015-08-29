@@ -173,7 +173,6 @@
         </table>
     </div>
 </c:if>
-
 <c:if test="${not empty object.purchaseOrderPaymentList}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">

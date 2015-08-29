@@ -18,6 +18,8 @@
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
+    <meta http-equiv="cache-control" content="must-revalidate">
+    <meta http-equiv="expires" content="-1">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">

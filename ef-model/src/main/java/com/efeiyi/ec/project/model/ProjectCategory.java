@@ -23,6 +23,7 @@ public class ProjectCategory implements Serializable{
     private String status;//状态
     private String level;//级别
     private String type;//1.美术,2.技艺
+    private String pictureUrl;
 
     private List<ProjectCategoryRecommended> projectCategoryRecommendeds;
 
@@ -102,6 +103,15 @@ public class ProjectCategory implements Serializable{
 
     public void setProjectCategoryRecommendeds(List<ProjectCategoryRecommended> projectCategoryRecommendeds) {
         this.projectCategoryRecommendeds = projectCategoryRecommendeds;
+    }
+
+    @Column(name = "picture_url")
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }
 
