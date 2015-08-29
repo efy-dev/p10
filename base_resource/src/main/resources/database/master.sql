@@ -250,3 +250,57 @@ ALTER TABLE coupon_batch RENAME TO purchase_coupon_batch;
 ALTER TABLE `purchase_order_delivery`
 ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
 -------------------------------------------------------------------
+--2015-8-29 赵志崇 修改tenant表字段 未执行
+ALTER TABLE `tenant`
+DROP COLUMN `origin_province_id`,
+DROP COLUMN `create_datetime`,
+DROP COLUMN `full_name`,
+DROP COLUMN `brief`,
+DROP COLUMN `title`,
+DROP COLUMN `favicon`,
+DROP COLUMN `sex`,
+DROP COLUMN `present_address`,
+DROP COLUMN `level`,
+DROP COLUMN `background_url`,
+DROP COLUMN `birthday`,
+ADD COLUMN `identity`  char(18) NULL AFTER `tenant_type`,
+ADD COLUMN `front_photo`  varchar(255) NULL AFTER `identity`,
+ADD COLUMN `versoPhoto`  varchar(255) NULL AFTER `front_photo`,
+ADD COLUMN `address_province_id`  varchar(255) NULL AFTER `versoPhoto`,
+ADD COLUMN `operator_name`  varchar(25) NULL AFTER `address_province_id`,
+ADD COLUMN `in_date_begin`  datetime NULL AFTER `operator_name`,
+ADD COLUMN `in_date_end`  datetime NULL AFTER `in_date_begin`,
+ADD COLUMN `business_scope`  varchar(255) NULL AFTER `in_date_end`,
+ADD COLUMN `business_license`  varchar(255) NULL AFTER `business_scope`,
+ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`,
+ADD COLUMN `registered_assets`  varchar(255) NULL AFTER `tax_registration_attachment`,
+ADD COLUMN `organization_attachment`  varchar(255) NULL AFTER `registered_assets`,
+ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`;
+
+-------------------------------------------------------------------------------------------
+--2015-8-29 赵志崇 tenant_enterprise 未执行
+ALTER TABLE `tenant_enterprise`
+ADD COLUMN `registered_assets`  varchar(255) NULL AFTER `id`,
+ADD COLUMN `organization_attachment`  varchar(255) NULL AFTER `registered_assets`,
+ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`;
+
+-------------------------------------------------------------------------------------------
+--2015-8-29 赵志崇 tenant_enterprise 未执行
+
+ALTER TABLE `tenant_personal`
+ADD COLUMN `identity`  char(18) NULL AFTER `id`,
+ADD COLUMN `front_photo_url`  varchar(255) NULL AFTER `identity`,
+ADD COLUMN `verso_photo_url`  varchar(255) NULL AFTER `front_photo_url`,
+ADD COLUMN `address_province_id`  char(16) NULL AFTER `verso_photo_url`;
+
+
+ALTER TABLE `tenant_private`
+ADD COLUMN `operator_name`  varchar(255) NULL AFTER `id`,
+ADD COLUMN `in_date_begin`  datetime NULL AFTER `operator_name`,
+ADD COLUMN `in_date_end`  datetime NULL AFTER `in_date_begin`,
+ADD COLUMN `business_scope`  varchar(255) NULL AFTER `in_date_end`,
+ADD COLUMN `business_license`  varchar(255) NULL AFTER `business_scope`,
+ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`;
+
+
+-------------------------------------------------------------------------------------------

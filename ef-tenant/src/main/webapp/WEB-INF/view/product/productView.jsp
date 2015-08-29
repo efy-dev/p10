@@ -26,6 +26,12 @@
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="resultPage" value="0" />
         <input type="hidden" name="step" value="view">
+      <fieldset>
+          <legend>
+              <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${object.id}"/>">
+                  修改基本信息
+              </a>
+          </legend>
       <div class="am-form-group">
           <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
@@ -88,7 +94,13 @@
               </div>
           </div>
       </c:if>
-
+      </fieldset>
+        <fieldset>
+            <legend>
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&id=${object.id}"/>">
+                    修改商品描述
+                </a>
+            </legend>
       <div class="am-form-group" >
           <label class="am-u-sm-3 am-form-label">商品描述</label>
           <div class="am-u-sm-9" style="margin-top: 10px;">
@@ -100,7 +112,13 @@
           <br>
       </div>
 
-
+       </fieldset>
+        <fieldset>
+            <legend>
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&id=${object.id}"/>">
+                    修改属性
+                </a>
+            </legend>
       <div class="am-u-md-9" style="margin-left: 19%;">
           <div class="am-panel am-panel-default">
               <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品模型<span
@@ -146,7 +164,13 @@
               </div>
           </div>
       </div>
-
+</fieldset>
+<fieldset>
+    <legend>
+        <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">
+            修改图片
+        </a>
+    </legend>
 
       <div class="am-u-md-13">
           <div class="am-panel am-panel-default">
@@ -202,7 +226,7 @@
               </div>
           </div>
       </div>
-
+</fieldset>
       <%--<div class="am-u-md-13">--%>
           <%--<div class="am-panel am-panel-default">--%>
               <%--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">--%>

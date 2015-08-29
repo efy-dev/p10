@@ -144,4 +144,8 @@ public class ProductManagerImpl implements ProductManager {
     }
 
 
+    public void removeProduct(String id){
+
+    }
+
 }
