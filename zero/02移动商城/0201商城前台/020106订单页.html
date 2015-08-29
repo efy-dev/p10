@@ -54,9 +54,11 @@
 <article class="bd shop-cart">
     <div class="bd cart-order">
         <div class="bd order-address">
-            <p class="title"><span>葛海波</span><span>18910204811</span></p>
-            <p class="txt">北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
-            <a href="#arrow-right" class="arrow-right"></a>
+            <a href="#btn-edit-addres" class="btn-edit-addres">
+                <p class="title"><span>葛海波</span><span>18910204811</span></p>
+                <p class="txt">北京市朝阳区酒仙桥东路9号电子城科技园A2西侧6层</p>
+                <a href="#arrow-right" class="arrow-right"></a>
+            </a>
         </div>
         <div class="bd order-list">
             <div class="title">朱炳仁铜雕艺术珍品</div>
@@ -125,7 +127,48 @@
     </div>
 </article>
 
-<div class="alert-delete" style="display:none;">
+
+<!--Start--弹出地址-->
+<div id="order-address" class="alert-delete" style="display:none;">
+    <div class="bd cart-address">
+        <div class="bd list-adress">
+            <ul class="ul-list">
+                <li>
+                    <p class="bd title">葛海波  18910204811</p>
+                    <p class="bd des">北京市朝阳区酒仙桥东路9号电子城科酒仙桥东路9号电子城科技园A2西侧6层</p>
+                    <p class="bd btns">
+                        <a href="#编辑" class="edit-btn" title="编辑">编辑</a>
+                        <a href="#删除" class="edit-dete" title="删除">删除</a>
+                    </p>
+                </li>
+                <li>
+                    <p class="bd title">葛海波  18910204811</p>
+                    <p class="bd des">北京市朝阳区酒仙桥东路9号电子城科酒仙桥东路9号电子城科技园A2西侧6层</p>
+                    <p class="bd btns">
+                        <a href="#编辑" class="edit-btn" title="编辑">编辑</a>
+                        <a href="#删除" class="edit-dete" title="删除">删除</a>
+                    </p>
+                </li>
+                <li>
+                    <p class="bd title">葛海波  18910204811</p>
+                    <p class="bd des">北京市朝阳区酒仙桥东路9号电子城科酒仙桥东路9号电子城科技园A2西侧6层</p>
+                    <p class="bd btns">
+                        <a href="#编辑" class="edit-btn" title="编辑">编辑</a>
+                        <a href="#删除" class="edit-dete" title="删除">删除</a>
+                    </p>
+                </li>
+            </ul>
+            <div class="bd">
+                <a href="#新增地址" class="cart-btn" title="新增地址">新增地址</a>
+            </div>
+        </div>
+    </div>
+    <div class="overbg"></div>
+</div>
+<!--//End--弹出地址-->
+
+<!--Start--弹出地址-->
+<div id="order-total" class="alert-delete" style="display:none;">
     <div class="bd cart-coupons">
         <div class="title">
             <h2>优惠券</h2>
@@ -164,6 +207,10 @@
     </div>
     <div class="overbg"></div>
 </div>
+<!--//End--弹出地址-->
+
+
+
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="../shop2015/js/jquery.min.js"></script>
 <!--<![endif]-->
