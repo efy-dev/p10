@@ -42,7 +42,7 @@
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&viwe=view&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a>
                         </td>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
                         </td>
                         <td>
                             <ming800:status name="status" dataType="purchaseOrderDelivery.status"
