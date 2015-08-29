@@ -1,5 +1,6 @@
 package com.efeiyi.pal.organization.model;
 
+import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
@@ -27,6 +28,8 @@ public class TenantCertification {
 //    private String imgUrl;
     private String status;
     private List<TenantCertificationImg> imgList;
+
+    private List<TenantProductSeries> tenantProductSeriesList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -114,6 +117,17 @@ public class TenantCertification {
 
     public void setImgList(List<TenantCertificationImg> imgList) {
         this.imgList = imgList;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantCertification")
+    @Where(clause = "status='1'")
+    public List<TenantProductSeries> getTenantProductSeriesList() {
+        return tenantProductSeriesList;
+    }
+
+    public void setTenantProductSeriesList(List<TenantProductSeries> tenantProductSeriesList) {
+        this.tenantProductSeriesList = tenantProductSeriesList;
     }
 
 }

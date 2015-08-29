@@ -29,6 +29,7 @@ public class TenantProductSeries {
     private String region;
     private List<TenantProductSeriesImg> imgList;
     private TenantCertification tenantCertification;
+    private List<Product> productList;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -113,6 +114,17 @@ public class TenantProductSeries {
 
     public void setTenantCertification(TenantCertification tenantCertification) {
         this.tenantCertification = tenantCertification;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenantProductSeries")
+    @Where(clause = "status='1'")
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override

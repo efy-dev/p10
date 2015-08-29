@@ -14,28 +14,32 @@
   </style>
 </head>
 <body>
-<div class="am-g am-g-fixed">
-  <hr>
-  <div class="am-g" style="margin-top: 100px">
-    <div class="am-u-md-4" style="margin-top: 55px;">
-      <form class="am-form" method="post" id="loginForm" action="<c:url value="/j_spring_security_check" />">
-        <%--<input type="hidden" name="dispatcher" value=""/>--%>
-        <%--<input type="hidden" name="." value="pc"/>--%>
-        <div class="am-form-group">
-          <label for="username">用户</label>
-          <input type="text" id="username" name="username" value="${enrollUsername}"/>
-        </div>
-        <div class="am-form-group">
-          <label for="password">密码</label>
-          <input type="password" class="form-control" id="password" name="password"
-                 value="${j_password}"/>
-        </div>
-          <div class="message">${message}</div>
-          <input id="login" type="submit" class="am-btn am-btn-default form-btn" value="登录"/>
-          <%--<div style="text-align: right"><a class="ypl-a" href="/pc/forget.do">密码忘了？</a></div>--%>
-      </form>
+<div class="enroll">
+  <form action="<c:url value="/j_spring_security_check" />" method="post">
+    <div class="start">
+      <div class="login">
+
+        <ul>
+          <li>
+            <label>手机号</label>
+            <input type="text" name="username" class="txt" placeholder="已验证过的手机号码" maxlength="11" required>
+          </li>
+          <li>
+            <label>密码</label>
+            <input type="password" name="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合" required>
+          </li>
+        </ul>
+
+      </div>
+      <div class="telnet">
+        <%--<a href="#" class="telnet1">微&nbsp信&nbsp登&nbsp录</a>--%>
+        <a href="#" class="telnet2">忘&nbsp记&nbsp密&nbsp码</a>
+      </div>
+      <div class="edit-info">
+        <input type="submit" value="登录" class="a">
+      </div>
     </div>
-  </div>
+  </form>
 </div>
 </body>
 </html>
