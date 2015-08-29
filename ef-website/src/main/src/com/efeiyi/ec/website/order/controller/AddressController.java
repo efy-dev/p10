@@ -75,7 +75,7 @@ public class AddressController {
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> objectList = baseManager.listObject(xQuery);
         model.addAttribute("province",objectList);
-        if (addressId.equals("")||addressId == null){
+        if (addressId.equals("null")){
             return "/purchaseOrder/addAddress";
         }else {
             ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(),addressId);
@@ -102,6 +102,26 @@ public class AddressController {
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
         return "redirect:/myEfeiyi/address/list";
+
+    }
+
+    @RequestMapping({"addAddressOfMob.do"})
+    public String  addAddressOfMobile(HttpServletRequest request)throws Exception{
+        if("1".equals(request.getParameter("checkbox"))){
+            String hql = "update organization_consumer_address set status = '1'where status<>0";
+            baseManager.executeSql(null,hql,null);
+            XSaveOrUpdate  xSaveOrUpdate1 =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
+            xSaveOrUpdate1.getParamMap().put("status","2");
+            xSaveOrUpdate1.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+            baseManager.saveOrUpdate(xSaveOrUpdate1);
+            return "redirect:/myEfeiyi/address/list";
+        }else{
+            XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
+            xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+            return "redirect:/myEfeiyi/address/list";
+        }
+
 
     }
 
