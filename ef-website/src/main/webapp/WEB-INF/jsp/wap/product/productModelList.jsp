@@ -23,10 +23,10 @@
         <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-                    <a  href="<c:url value="/product/${productModel.id}"/>" target="_blank">
+                    <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
 
                         <li>
-                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
+                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
                             <p class="name">${productModel.name}</p>
 

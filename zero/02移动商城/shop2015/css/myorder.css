@@ -247,4 +247,8 @@ ul,dl{list-style:none}
 .enroll .telnet .telnet1{float: left}
 .enroll .telnet .telnet2{float: right}
 /*020209登录*/
-
+/*020208修改密码*/
+.change{width: 100%;float: left;position: relative;}
+.change .imparity{width: 100%;position: absolute;text-align: center;top:25%;padding: 0 12px;left: 0}
+.change .imparity span{font-size: 1rem;color: #fff;background-color: #333;float: left;padding:.5rem 0;width: 100%}
+/*020208修改密码*/

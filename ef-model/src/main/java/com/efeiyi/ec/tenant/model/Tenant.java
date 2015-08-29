@@ -29,18 +29,18 @@ public class Tenant extends BigUser implements Serializable {
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
-    private List<TenantProject> tenantProjectList;
+ //   private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-    public List<TenantProject> getTenantProjectList() {
-        return tenantProjectList;
-    }
-
-    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
-        this.tenantProjectList = tenantProjectList;
-    }
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+//    public List<TenantProject> getTenantProjectList() {
+//        return tenantProjectList;
+//    }
+//
+//    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+//        this.tenantProjectList = tenantProjectList;
+//    }
 
     @Column(name = "name")
     public String getName() {

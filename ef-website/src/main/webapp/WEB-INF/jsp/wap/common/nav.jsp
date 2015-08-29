@@ -24,6 +24,33 @@
 </c:if>
 <c:if test="${sign == null}">
 
+    <header class="am-header custom-header">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:history.go(-1)" class="chevron-left"></a>
+        </div>
+        <!-- //End--chevron-left-->
+        <h1 class="am-header-title" id="title">分类</h1>
+        <!-- //End--title-->
+        <div class="am-header-right am-header-nav">
+            <a href="#chevron-right" class="chevron-right" id="menu">
+                <i class="line"></i>
+            </a>
+        </div>
+        <!-- //End--chevron-left-->
+        <div class="menu-list">
+            <ul class="bd">
+                <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                <li><a href="<c:url value="/order/myEfeiyi/list.do"/> " title="个人中心">个人中心</a></li>
+                <li><a href="<c:url value="/productCategory.do"/> " title="分类">分类</a></li>
+                <li><a href="" title="传承人">传承人</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        $("#title").html($("title").html())
+    </script>
+
 </c:if>
 <script>
 
