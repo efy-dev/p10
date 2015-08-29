@@ -220,7 +220,7 @@ public class DialogController {
             tenant.setStatus("1");
         }
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
-        String resultPage = "/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
+        String resultPage = request.getContextPath()+"/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
 
         return resultPage;
     }
@@ -243,7 +243,7 @@ public class DialogController {
         }
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);
 
-        String resultPage = "/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
+        String resultPage = request.getContextPath()+"/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
         return resultPage;
     }
 
