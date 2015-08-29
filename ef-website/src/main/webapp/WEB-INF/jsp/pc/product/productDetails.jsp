@@ -1,11 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/8/24
-  Time: 9:14
+  Date: 2015/8/29
+  Time: 11:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!doctype html>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -14,7 +16,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>商品详情页</title>
+  <title>010104商品详情</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -31,11 +33,10 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="/scripts/assets/css/amazeui.min.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="/scripts/css/app.css?v=20150831">
+  <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
+  <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
 </head>
 <body>
-<!-- //End--topbar-->
 <!-- //End--header-->
 <div class="hd product-intro">
   <div class="wh">
@@ -51,21 +52,21 @@
       <div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>
       <div class="slider-img">
         <ul>
-          <li class="active"><img src="/scripts/assets/upload/pep-1.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-2.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-3.jpg" width="60" height="60" alt=""/></li>
-          <li><img src  ="/scripts/assets/upload/pep-4.jpg" width="60" height="60" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-5.jpg" width="60" height="60" alt=""/></li>
+          <li class="active"><img src="../shop2015/upload/pep-1.jpg" width="60" height="60" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-2.jpg" width="60" height="60" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-3.jpg" width="60" height="60" alt=""/></li>
+          <li><img src  ="../shop2015/upload/pep-4.jpg" width="60" height="60" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-5.jpg" width="60" height="60" alt=""/></li>
         </ul>
       </div>
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-          <li><img src="/scripts/assets/upload/pep-1.jpg" width="900" height="800" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-2.jpg" width="900" height="800" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-3.jpg" width="900" height="800" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-4.jpg" width="900" height="800" alt=""/></li>
-          <li><img src="/scripts/assets/upload/pep-5.jpg" width="900" height="800" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-1.jpg" width="800" height="700" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-2.jpg" width="800" height="700" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-3.jpg" width="800" height="700" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-4.jpg" width="800" height="700" alt=""/></li>
+          <li><img src="../shop2015/upload/pep-5.jpg" width="800" height="700" alt=""/></li>
         </ul>
       </div>
       <!-- //End--slider-main-->
@@ -73,27 +74,36 @@
     <!-- //End--des-focus-->
     <div class="itme-ext">
       <div class="name">
-        <p>${productModel.product.master.fullName}</p>
-        <p><strong>${productModel.product.name}</strong></p>
+        <p>${product.master.fullName}</p>
+        <p><strong>${product.name}</strong></p>
       </div>
       <!-- //End-->
       <div class="des">
-        <ul>
-          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${productModel.name}</span></li>
-          <%--<li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span></span></li>--%>
-          <%--<li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>--%>
-          <li><strong>制作方式：</strong><span>手工</span></li>
-          <li><strong>所属项目：</strong><span>平遥推光漆器</span></li>
-          <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
-          <li><strong>传&nbsp;承&nbsp;人：</strong><span>${productModel.product.master.fullName}（${productModel.product.master.title}）</span></li>
-          <li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>
+        <ul class="ul-list">
+          <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
+            <li class="active"><a href="#">
+              <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                ${productPropertyValue.projectPropertyValue.value}
+              </c:forEach>
+                ${product.name}</a></li>
+          </c:forEach>
         </ul>
+      </div>
+      <!-- //End-->
+      <div class="amount">
+        <div class="ipt">
+          <input class="txt" type="text" value="999"/><em class="ge">个</em>
+        </div>
+        <div class="btns">
+          <a href="#btn-add" class="btn-add" title="加">+</a>
+          <a href="#btn-sub" class="btn-sub" title="减">-</a>
+        </div>
       </div>
       <!-- //End-->
       <div class="price">
         <div class="p-text">飞蚁价：</div>
-        <div class="p-price"><em>￥</em><span>${productModel.price}</span></div>
-        <div class="m-price">市场价：￥${productModel.price}</div>
+        <div class="p-price"><em>￥</em><span>7000</span></div>
+        <div class="m-price">市场价：￥8999</div>
       </div>
       <!-- //End-->
       <div class="choose-btns">
@@ -154,7 +164,7 @@
           <li><strong>制作方式：</strong><span>手工</span></li>
           <li><strong>所属项目：</strong><span>平遥推光漆器</span></li>
           <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
-          <li><strong>传&nbsp;承&nbsp;人：</strong><span>${productModel.product.master.fullName}（${productModel.product.master.title}）</span></li>
+          <li><strong>传&nbsp;承&nbsp;人：</strong><span>李雅明（省级）</span></li>
           <li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>
         </ul>
       </div>
@@ -162,8 +172,8 @@
       <div class="wh spe2">
         <h4>非遗承袭</h4>
         <ul>
-          <li>${productModel.product.productDescription.content}</li>
-          <%--<li><p>在晋中，有一俗语可谓家喻户晓："平遥古城三件宝，漆器牛肉长山药"。在古城三件宝中，漆器列为首。平遥古城地处黄土高原。公元前2000年前，新石器时代，这里覆盖有大量树木。有一种叫漆树的树种分布甚广。先民们便用漆树的浆汁涂抹食器，以图光亮、好看、耐用。另外，由于漆器具有自动变黑的特征，它也被用来作为文字记号。3700年前，禹造祭器，髹以漆液，墨染其外，先染其内，证明当时已使用矿物质颜料调制朱色漆饰。</p></li>--%>
+          <li><p>推光漆器是一种工艺性质的高级油漆器具，山西平遥汉族传统手工技艺之一，以手掌推出光泽而得名。山西著名工艺品平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。2006年5月20日，该技艺经国务院批准列入第一批国家级非物质文化遗产名录。</p></li>
+          <li><p>在晋中，有一俗语可谓家喻户晓："平遥古城三件宝，漆器牛肉长山药"。在古城三件宝中，漆器列为首。平遥古城地处黄土高原。公元前2000年前，新石器时代，这里覆盖有大量树木。有一种叫漆树的树种分布甚广。先民们便用漆树的浆汁涂抹食器，以图光亮、好看、耐用。另外，由于漆器具有自动变黑的特征，它也被用来作为文字记号。3700年前，禹造祭器，髹以漆液，墨染其外，先染其内，证明当时已使用矿物质颜料调制朱色漆饰。</p></li>
         </ul>
       </div>
       <!-- //End--spe2-->
@@ -171,15 +181,15 @@
         <h4>非遗雅韵</h4>
         <ul>
           <li>
-            <span><img src="/scripts/assets/upload/details-1.jpg" alt=""/></span>
+            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
             <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
           </li>
           <li>
-            <span><img src="/scripts/assets/upload/details-1.jpg" alt=""/></span>
+            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
             <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
           </li>
           <li>
-            <span><img src="/scripts/assets/upload/details-1.jpg" alt=""/></span>
+            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
             <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
           </li>
         </ul>
@@ -196,7 +206,11 @@
           </div>
           <div class="img"><img src="../shop2015/upload/details-2.jpg" alt=""/></div>
           <div class="txt">
-           ${productModel.product.master.name}
+            <p>李雅明, 女，山西省平遥人。平遥推光漆器省级传承人。</p>
+            <p>从1989年从事漆艺绘画至今26年。</p>
+            <p>期间在晋中市榆次纺校进修并成立了自己的绘画工作室。后师从中国工艺美术大师薛生金，画技有了很大的提高。</p>
+            <p>作品题材充满了浓郁的中国古典风格特色：整体装饰的情味和耐人寻味的细节产生了栩栩如生的艺术效果。</p>
+            <p>近年来作品多次在本地区比赛、画展中入选、获奖。现为山西省工艺美术协会会员。</p>
           </div>
         </div>
       </div>
@@ -256,5 +270,23 @@
 <script src="../shop2015/js/amazeui.min.js"></script>
 <script src="../shop2015/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+
+<script>
+  function show(o){
+
+  }
+</script>
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
