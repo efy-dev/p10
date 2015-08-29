@@ -23,7 +23,9 @@
 <hr/>
 
 <div class="am-g">
-  <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
+        <input type="hidden" name="resultPage" value="0" />
+        <input type="hidden" name="step" value="view">
       <div class="am-form-group">
           <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
@@ -51,10 +53,10 @@
           <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
 
           <div class="am-u-sm-9" style="margin-top: 10px;">
-                     <c:if test="${object.status==1}">
+                     <c:if test="${object.status=='1'}">
                          收藏品
                      </c:if>
-                        <c:if test="${object.status==1}">
+                        <c:if test="${object.status=='2'}">
                             精品
                         </c:if>
               <!--<small>必填项*</small>-->
@@ -90,7 +92,10 @@
       <div class="am-form-group" >
           <label class="am-u-sm-3 am-form-label">商品描述</label>
           <div class="am-u-sm-9" style="margin-top: 10px;">
-                            ${object.productDescription.content}
+                            <textarea id="productDescription" name="content" class="ckeditor"
+                                      placeholder="商品描述" required disabled="disabled">
+                                ${object.productDescription.content}
+                            </textarea>
           </div>
           <br>
       </div>
@@ -128,7 +133,7 @@
                               <td align="center">
                                   ${model.price}
                               </td>
-                          </tr>;
+                          </tr>
                       </c:forEach>
                       </tbody>
                   </table>
@@ -190,12 +195,7 @@
                   </c:if>
               </div>
           </div>
-
-
       </div>
-
-
-
 
       <div class="am-u-md-13">
           <div class="am-panel am-panel-default">
@@ -212,7 +212,6 @@
                       </tr>
                       <c:forEach var="productModel" items="${object.productModelList}" varStatus="status">
                           <tr>
-
                               <td valign="middle">${productModel.name}</td>
                               <td >
                                   <c:if test="${not empty productModel.productModel_url}">
@@ -228,13 +227,26 @@
           </div>
       </div>
 
+      <div class="am-form-group">
+          <div class="am-u-sm-9 am-u-sm-push-3">
 
+                    <span style="padding: 10px;">
+                       <input type="button"  onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default')" class="am-btn am-btn-primary" value="返回商品列表"/>
+                    </span>
+          </div>
+      </div>
   </form>
 </div>
 <!-- content end -->
 <hr/>
-<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
-
+<script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
+<script>
+    //提交
+    function toSubmit(result){
+        $("input[name='resultPage']").val(result);
+        $("form").submit();
+    }
+</script>
 
 </body>
 </html>
