@@ -54,9 +54,6 @@
           <li class="active"><a
                   href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>"
                   title="价  格">价 格</a></li>
-          <%-- <li><a href="" title="销  售">销  售</a></li>
-           <li><a href="" title="新  品">新  品</a></li>
-           <li><a href="" title="人  气">人  气</a></li>--%>
       </ul>
   </div>
   <!-- //End--shop-sort-->
@@ -66,9 +63,13 @@
         <ul class="ul-item">
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-            <a href="<c:url value="/product/${productModel.id}"/>" target="_blank" title="">
+            <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
               <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
-              <p class="wh name">${productModel.name}</p>
+                <p class="wh name">${productModel.product.name}
+                <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                ${productPropertyValue.projectPropertyValue.value}
+                </c:forEach>
+                </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
           </li>

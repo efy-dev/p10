@@ -54,10 +54,10 @@
                 <match url="/basic/xm.do?qm=plistProductSeries_default"/>
                 <match url="/basic/xm.do?qm=formProductSeries&amp;ps=ps"/>
                 <match url="/basic/xm.do?qm=viewProductSeries&amp;ps=ps"/>
+                <match url="/basic/xm.do?qm=viewProductSeries&amp;tenant=tenant"/>
                 <match url="/productSeriesPropertyName/newPropertyNameList.do"/>
                 <match url="/basic/xm.do?qm=formTenantProductSeries"/>
                 <match url="/basic/xm.do?qm=viewTenantProductSeries"/>
-                <match url="/basic/xm.do?qm=viewTenant&amp;ps=ps"/>
             </jnode>
         </jnode>
 
@@ -67,9 +67,9 @@
                 <match url="/basic/xm.do?qm=formTenant&amp;tenant=tenant"/>
                 <match url="/basic/xm.do?qm=viewTenant&amp;tenant=tenant"/>
                 <match url="/tenantCertification/newTenantCertification.do"/>
-                <match url="/basic/xm.do?qm=viewProductSeries&amp;tenant=tenant"/>
                 <match url="/basic/xm.do?qm=formTenantCertification"/>
                 <match url="/basic/xm.do?qm=viewTenantCertification"/>
+                <match url="/basic/xm.do?qm=viewTenant&amp;ps=ps"/>
             </jnode>
 
             <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">

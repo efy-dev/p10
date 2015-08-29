@@ -49,6 +49,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
             purchaseOrderDelivery.setPurchaseOrder(purchaseOrder);
             purchaseOrderDelivery.setCreateDateTime(new Date());
             purchaseOrderDelivery.setSerial(serial);
+            purchaseOrderDelivery.setLogisticsCompany("Ë³·ç¿ìµÝ");
             MyUser user = AuthorizationUtil.getMyUser();
             System.out.println(user.getFullName());
             //purchaseOrderDelivery.setConsumerAddress();

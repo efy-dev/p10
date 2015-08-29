@@ -40,7 +40,7 @@ public class formProductHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
-        modelMap.put("tenantId",AuthorizationUtil.getMyUser().getId());
+        modelMap.put("tenantId",AuthorizationUtil.getMyUser().getBigTenant().getId());
         XQuery xQuery = new XQuery("listTenantMaster_default",request);
         List<TenantMaster> list = baseManager.listObject(xQuery);//大师
         Map<String,List> projectMap = new HashMap<>();

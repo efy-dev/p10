@@ -22,7 +22,7 @@
                     result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.plistProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
                     </query>
                     <query name="serial" label="作品号" type="auto" orderBy="serial:asc">
                         <condition name="serial"  operation="eq" label="作品号" />
