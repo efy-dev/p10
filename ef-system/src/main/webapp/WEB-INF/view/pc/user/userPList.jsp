@@ -77,7 +77,7 @@
 <div class="am-u-sm-12 am-u-md-6" style="margin-bottom: 5px;margin-top: 2px;">
   <div class="am-btn-toolbar" style="width: 230%">
     <div class="am-btn-group am-btn-group-xs">
-      <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formUser"/>"><span class="am-icon-plus"></span>新建用户</a>
+      <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formUser&formParam=user"/>"><span class="am-icon-plus"></span>新建用户</a>
     </div>
 
   </div>
@@ -96,7 +96,7 @@
       <td width="20%">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
-            <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+            <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&formParam=user&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
             <button onclick="removeUser('${user.id}')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
           </div>
         </div>
