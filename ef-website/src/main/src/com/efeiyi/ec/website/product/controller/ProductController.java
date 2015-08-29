@@ -1,11 +1,14 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductPropertyValue;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectProperty;
+import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.event.TreeModelListener;
 import java.util.*;
 
 /**
@@ -34,7 +36,8 @@ public class ProductController {
 
     @Autowired
     private BaseManager baseManager;
-
+    //@Autowired
+    //private List<ProductModel> productModelListTmp;
     @RequestMapping(value = "/productList.do")
     public ModelAndView listProduct(HttpServletRequest request, ModelMap model) throws Exception{
         String id = request.getParameter("id");
@@ -134,23 +137,14 @@ public class ProductController {
      * @return
      * @throws Exception
      */
-
-  @RequestMapping({"/{productModelId}"})
-    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model){
+    @RequestMapping({"productModel/{productModelId}"})
+    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        List<ProductPropertyValue> productPropertyValueList1 = productModel.getProductPropertyValueList();
-        List<ProductModel> productModelList = productModel.getProduct().getProductModelList();
-        HashMap<String,List<ProductPropertyValue>> map = new HashMap<String,List<ProductPropertyValue>>();
-        //属性和所有属性可能值
-        HashMap<String,List<String>> stringListHashMap = new HashMap<String,List<String>>();
-        for(int i=0;i<productModelList.size();i++){
-            ProductModel productModelTemp = productModelList.get(i);
-            List<ProductPropertyValue> productPropertyValueList = productModelTemp.getProductPropertyValueList();
-
-
-
-        }
+        Product product = productModel.getProduct();
+        List<ProductModel> productModelListTmp = product.getProductModelList();
+        model.addAttribute("productModelList", productModelListTmp);
         model.addAttribute("productModel", productModel);
+        model.addAttribute("product", product);
         return "/product/productDetails";
     }
 }

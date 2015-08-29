@@ -77,7 +77,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=order&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=order&viewIdentify=orderProduct&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
                         </td>
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">

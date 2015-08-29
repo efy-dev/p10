@@ -26,7 +26,7 @@
                     <a  href="<c:url value="/product/${productModel.id}"/>" target="_blank">
 
                         <li>
-                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
+                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
                             <p class="name">${productModel.name}</p>
 
