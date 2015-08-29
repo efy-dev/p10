@@ -21,13 +21,13 @@
             </jnode>
         </jnode>
         <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->
-            <jnode id="" url="/basic/xm.do?qm=plistProduct_default" state=""  extend="" access="" text_zh_CN="商品列表">
-                <match url="/basic/xm.do?qm=plistProduct_default"/>
+            <jnode id="" url="/basic/xm.do?qm=plistProduct_default&amp;view=product" state=""  extend="" access="" text_zh_CN="商品列表">
+                <match url="/basic/xm.do?qm=plistProduct_default&amp;view=product"/>
                 <match url="/basic/xm.do?qm=formProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_Description"/>
                 <match url="/basic/xm.do?qm=formProduct_ProductModel"/>
                 <match url="/basic/xm.do?qm=formProduct_Picture"/>
-                <match url="/basic/xm.do?qm=viewProduct"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=product"/>
                 <match url="/product/saveNewProduct.do"/>
 
             </jnode>
