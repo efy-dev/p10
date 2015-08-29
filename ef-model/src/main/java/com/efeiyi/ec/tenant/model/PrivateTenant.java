@@ -1,10 +1,8 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
