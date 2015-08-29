@@ -54,7 +54,9 @@
         <div class="des-content">
             <div class="bd title">详情</div>
             <div class="bd">
-                ${productModel.product.productDescription.content}
+                <c:if test="${!empty productModel.productDescription}">
+                    ${productModel.productDescription.content}
+                </c:if>
                 <%----%>
                 <%----%>
                 <%--<ul class="bd ul-text">--%>
@@ -140,17 +142,20 @@
 <div class="am-modal-actions dialog-des-format" id="my-actions">
     <div class="bd ">
         <dl class="bd dl-des">
-            <dt><img src="../shop2015/upload/detail-exp1.jpg" width="130" alt=""/></dt>
+            <dt><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-icon" width="130" alt=""/>
+            </dt>
             <dd>价格：6000——8000</dd>
             <%--<dd>库存：10件</dd>--%>
             <dd>规格</dd>
         </dl>
         <ul class="bd ul-nav">
             <c:forEach items="${productModel.product.productModelList}" var="pm">
-                <li><a href="<c:url var="/product/${pm.id}"/> ">${pm.product.name} <c:forEach
+                <li><a href="<c:url value="/product/productModel/${pm.id}"/> ">
+                        ${pm.product.name} <c:forEach
                         items="${pm.productPropertyValueList}" var="pv">
                     ${pv.projectPropertyValue.value}
-                </c:forEach> </a></li>
+                </c:forEach>
+                </a></li>
             </c:forEach>
             <%--<li><a href="#规格2">规格2</a></li>--%>
             <%--<li><a href="#规格1">规格1</a></li>--%>
@@ -164,7 +169,7 @@
         <%--<a class="add" href="#加"></a>--%>
         <%--</li>--%>
         <%--</ul>--%>
-        <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>"class="bd btn-cart">加 入 购 物 车</a>
+        <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
     </div>
 </div>
 
