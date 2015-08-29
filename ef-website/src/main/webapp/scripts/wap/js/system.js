@@ -32,13 +32,36 @@ $(function(){
         //收藏
         $('.addfav').click(function(){
             $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
             return false;
         });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+    })();
+    //订单
+    (function(){
+        $('.btn-coupons').click(function(){
+            $('body,document').css('overflow','hidden');
+            $('#order-total').show().css({'top':($('.order-total').position().top-120)+'px'});
+            $('.cart-btn').click(function(){
+                $(this).parents('.alert-delete').hide();
+                $('body,document').css('overflow','visible');
+            })
+        });
 
+        $('.btn-edit-addres').click(function(){
+            $('body,document').css('overflow','hidden');
+            $('#order-address').show();
+            $('.cart-btn').click(function(){
+                $(this).parents('#order-address').hide();
+                $('body,document').css('overflow','visible');
+            })
+            return false;
+        })
     })();
 
 
