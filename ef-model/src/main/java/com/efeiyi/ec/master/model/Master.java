@@ -46,15 +46,6 @@ public class Master implements Serializable {
     private List<MasterRecommended> masterRecommendedList;//推荐
     private String projectName ;
     private String levelName;
-    private String masterIntroductionId;
-    @Column(name = "master_introduction_id")
-    public String getMasterIntroductionId() {
-        return masterIntroductionId;
-    }
-
-    public void setMasterIntroductionId(String masterIntroductionId) {
-        this.masterIntroductionId = masterIntroductionId;
-    }
 
     @Transient
     public String getProjectName() {
