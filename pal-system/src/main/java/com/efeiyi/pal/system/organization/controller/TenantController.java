@@ -31,11 +31,11 @@ public class TenantController {
     public ModelAndView saveTenant(ModelMap modelMap, HttpServletRequest request) throws Exception {
         Tenant tenant = new Tenant();
 
-        String labelBatchId = request.getParameter("id");
+        String tenantId = request.getParameter("id");
         String type = "new";
-        if (labelBatchId != null && !labelBatchId.equals("")) {
+        if (tenantId != null && !"".equals(tenantId.trim())) {
             type = "edit";
-            tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), labelBatchId);
+            tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         }
         tenant = setTenantBaseProperty(tenant, request, type);
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
