@@ -21,13 +21,11 @@ public class TenantTypeController {
 
 	@RequestMapping("/sendTenantTypePage.do")
 	public String sendTenantTypePage(){
-		MyUser user = AuthorizationUtil.getMyUser();
-		BigUser user1 = user.getBigUser();
-		String id = user1.getBigTenant().getId();
-		BigTenant bigTenant = (BigTenant) baseManager.getObject(BigTenant.class.getName(),id);
-		if("11".equals(bigTenant.getTenantType())){
+		String id = AuthorizationUtil.getMyUser().getBigTenant().getId();
+		BigTenant big = (BigTenant) baseManager.getObject(BigTenant.class.getName(),id);
+		if("11".equals(big.getTenantType())){
 			return "/tenantType/enterpriseTenant";
-		}else if("12".equals(bigTenant.getTenantType())){
+		}else if("12".equals(big.getTenantType())){
 			return "/tenantType/privateTenant";
 		}else{
 			return "/tenantType/personalTenant";
