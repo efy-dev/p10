@@ -2,6 +2,7 @@ package com.efeiyi.pal.system.organization.controller;
 
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
+import com.efeiyi.pal.system.product.service.ProductSeriesServiceManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -28,6 +29,7 @@ public class TenantCertificationController {
     private BaseManager baseManager;
 
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
+    private ProductSeriesServiceManager productSeriesServiceManager = (ProductSeriesServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productSeriesServiceManagerImpl");
 
     @RequestMapping("/newTenantCertification.do")
     public ModelAndView newTenantSource(ModelMap modelMap, HttpServletRequest request) throws Exception{
@@ -68,8 +70,7 @@ public class TenantCertificationController {
             throw new Exception("认证信息id不能为空!");
         }
         TenantCertification tenantCertification = (TenantCertification) baseManager.getObject(TenantCertification.class.getName(), tenantCertificationId);
-        tenantCertification.setStatus("0");
-        baseManager.saveOrUpdate(tenantCertification.getClass().getName(), tenantCertification);
+        productSeriesServiceManager.removeTenantCertification(tenantCertification);
 
         String resultPage = "redirect:/basic/xm.do?qm=viewTenant&tenant=tenant&id="+tenantCertification.getTenant().getId();
         return new ModelAndView(resultPage);

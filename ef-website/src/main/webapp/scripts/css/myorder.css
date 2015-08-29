@@ -1,5 +1,18 @@
 a {outline:none;cursor:pointer}
 a:hover{text-decoration: underline}
+/*各页面头部*/
+.myod-logo{width: 158px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat;float:left;}
+/*购物车*/
+.myod-text{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat 0  -50px;float:left; }
+/*收银台*/
+.myod-text1{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -2px  -100px;float:left; }
+/*支付成功*/
+.myod-text2{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -144px  -100px;float:left; }
+/*结算*/
+.myod-text3{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -144px  -51px;float:left; }
+/*我的e非遗*/
+.myod-text4{width:127px;height: 51px;background: url("../images/myorder-head.jpg") no-repeat -158px  0px;float:left; }
+/*各页面头部*/
 /*--reset--*/
 .wh1 {width:100%;float: left;margin-bottom: 27px;}
 /*//End--commmon*/
@@ -171,7 +184,7 @@ a:hover{text-decoration: underline}
 .my-order .editor a{font-family: "宋体";color:#fff;line-height: 24px;font-weight: normal;}
 .my-order .userinfo-datum{margin: 0 26px;padding-top: 46px;}
 .my-order .userinfo-datum li{font-family: "宋体";color:#666;font-size: 12px;font-weight: normal;line-height: 54px;height: 54px;}
-.my-order .userinfo-datum li label{width: 82px;text-align: right;font-weight: 100}
+.my-order .userinfo-datum li label{width: 60px;text-align: right;font-weight: 100}
 .my-order .userinfo-tex{width: 124px;height: 37px;border: 1px solid #ccc;padding: 10px 11px;font-family: "宋体";color:#000;font-size: 12px;}
 .my-order .userinfo-tex:active,.my-order .userinfo-tex:hover{border: 1px solid #000;}
 .my-order .userinfo-box{widht:11px;height:11px;line-height: 11px;}
@@ -410,4 +423,29 @@ a:hover{text-decoration: underline}
 .success-shop p{font-size: 16px;height: 43px;}
 .success-shop p span{color:#ff0000}
 .success-shop p a{color:#f1961a;margin:0 20px 53px;font-size: 12px;font-family: "宋体";text-decoration:underline}
-
+/*找回密码*/
+.dentification{width: 100%;min-height: 550px;float: left}
+.dentification .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
+.dentification .short ul{width: 100%;}
+.dentification .short ul li{margin-bottom: 20px;width: 100%;}
+.dentification .short ul li label{padding-right: 15px;text-align:right;width: 108px;font-size: 12px;font-family: "宋体";font-weight: 100;}
+.dentification .short ul li .txt{border: 1px solid #ccc;padding:12px 13px;font-size: 12px;font-family: "宋体";font-weight: 100;width: 305px;}
+.dentification .short ul li .txt1{border: 1px solid #ccc;padding:12px 13px;font-size: 12px;font-family: "宋体";font-weight: 100;width: 155px;margin-right:15px; }
+.dentification .short ul li .span-lest1 a{padding: 11px 22px;border: 1px solid #ccc;font-size: 12px;text-decoration: none  }
+.dentification .short ul li .span-lest1 a:hover{background: #000;color: #fff;}
+.dentification .short ul li .span-lest2 a{padding: 10px 36px;border: 1px solid #ccc;font-size: 12px;text-decoration: none  }
+.dentification .short ul li .span-lest2 a:hover{background: #000;color: #fff;}
+.dentification .short ul li .span1{padding-left: 12px;font-size:12px;font-family: "宋体";}
+/*找回密码*/
+/*设置新密码*/
+.new{width: 100%;min-height: 550px;float: left}
+.new .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
+.new .short ul{width: 100%;}
+.new .short ul li{margin-bottom: 20px;width: 100%;}
+.new .short ul li label{padding-right: 15px;text-align:right;width: 108px;font-size: 12px;font-family: "宋体";font-weight: 100;}
+.new .short ul li .txt{border: 1px solid #ccc;padding:12px 13px;font-size: 12px;font-family: "宋体";font-weight: 100;width: 305px;}
+.new .short ul li .txt1{border: 1px solid #ccc;padding:12px 13px;font-size: 12px;font-family: "宋体";font-weight: 100;width: 155px;margin-right:15px; }
+.new .short ul li .span-lest2 a{padding: 10px 121px;border: 1px solid #ccc;font-size: 12px;text-decoration: none }
+.new .short ul li .span-lest2 a:hover{background: #000;color: #fff;}
+.new .short ul li .span2{padding-left: 12px;font-size:12px;font-family: "宋体";}
+/*设置新密码*/

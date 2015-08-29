@@ -35,8 +35,8 @@
           <dt class="orderid">物流信息</dt>
           <dd class="od-id">
             <p >物流方式：<span>普通快递</span></p>
-            <p>物流公司：<span>圆通快递</span></p>
-            <p>运单号码：<span>0987654321</span></p>
+            <p>物流公司：<span>${purchaseOrderDelivery.serial}</span></p>
+            <p>运单号码：<span>${purchaseOrderDelivery.logisticsCompany}</span></p>
             <ul class="strong-1">
               <li class="strong">物流跟踪：</li>
               <li class="strong" id="wl">
@@ -66,7 +66,6 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
-            <%--<p >配送地址：<span>${order.consumerAddress}</span></p>--%>
             <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
             <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>

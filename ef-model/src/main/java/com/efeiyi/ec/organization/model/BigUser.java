@@ -2,6 +2,7 @@ package com.efeiyi.ec.organization.model;
 
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -54,7 +55,7 @@ public class BigUser {
 
     protected String cityId;//已开通城市（若addressCityId不在已开通城市时，此字段置空）
     protected String cityName;
-
+    protected BigTenant bigTenant;
     protected String provinceId;
     protected String addressCityId;
     protected String provinceName;
@@ -201,6 +202,17 @@ public class BigUser {
 
     public void setWorkStatus(Integer workStatus) {
         this.workStatus = workStatus;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public BigTenant getBigTenant() {
+        return bigTenant;
+    }
+
+    public void setBigTenant(BigTenant bigTenant) {
+        this.bigTenant = bigTenant;
     }
 
     @JsonIgnore

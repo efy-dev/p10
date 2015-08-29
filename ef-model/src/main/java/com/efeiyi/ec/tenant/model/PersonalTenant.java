@@ -1,5 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
+import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,7 +24,6 @@ import java.util.List;
 @Entity
 @Table(name = "tenant_personal")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class PersonalTenant extends Tenant implements Serializable {
-
+public class PersonalTenant extends BigTenant implements Serializable {
 
 }

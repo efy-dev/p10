@@ -158,8 +158,8 @@ ul,dl{list-style:none}
 .personal-material .personal-list ul li{padding:1.3rem 0;float: left;width: 100%;color: #000;font-size:1rem;border-bottom: 1px solid #ccc; margin-bottom: -1px;}
 .personal-material .personal-list ul li span{padding-left: 0.5rem;}
 .personal-material .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
-.personal-material .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
-.personal-material .edit-info a:hover{color: #fff;background-color: #000;}
+.personal-material .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.personal-material .edit-info .a:hover{color: #fff;background-color: #000;}
 /*020206个人信息*/
 /*020206个人信息编辑页面*/
 .edit-personal{width: 100%;float: left;}
@@ -185,9 +185,9 @@ ul,dl{list-style:none}
     -o-transfrom:rotate(45deg);/*欧鹏浏览器*/
     -moz-transform:rotate(45deg);/*火狐浏览器*/
 }
-.edit-personal .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
-.edit-personal .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
-.edit-personal .edit-info a:hover{color: #fff;background-color: #000;}
+.edit-personal .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.edit-personal .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.edit-personal .edit-info .a:hover{color: #fff;background-color: #000;}
 /*amazeui.org*/
 .edit-personal .am-input-group-btn>.am-btn{background-color: #fff;}
 /*amazeui.org*/
@@ -204,9 +204,9 @@ ul,dl{list-style:none}
 .shipping-address .am-selected{width: 100%;margin-bottom: 1.2rem}
 .shipping-address .am-selected-btn{border:1px solid #ccc;font-size: 1rem;color: #000;padding: 1.2rem 0.9rem}
 .shipping-address .text-act{width: 100%;font-size: 1rem}
-.shipping-address .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
-.shipping-address .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
-.shipping-address .edit-info a:hover{color: #fff;background-color: #000;}
+.shipping-address .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.shipping-address .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.shipping-address .edit-info .a:hover{color: #fff;background-color: #000;}
 .shipping-address .default{padding:1rem 0;float: left;width: 100%}
 .shipping-address .default p{font-size: 1rem;color: #000;}
 .shipping-address .default p input{vertical-align:text-bottom;}
@@ -223,12 +223,32 @@ ul,dl{list-style:none}
 .manage .content-list{padding: 1.2rem 0;width: 100%;float: left;font-size: 1rem}
 .manage .botton-list{width: 40%;float: right;padding-bottom: 1rem}
 .manage .botton-list a{font-size: 1rem;float: right;padding-left: 2rem;}
-.manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem;margin-bottom: 7rem}
-.manage .edit-info a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;}
-.manage .edit-info a:hover{color: #fff;background-color: #000;}
+.manage .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.manage .edit-info  a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.manage .edit-info  a:hover{color: #fff;background-color: #000;}
 /*02021511000847907管理收货地址*/
 /*020209注册*/
 .enroll{width: 100%;float: left;padding: 0 0.9rem;}
-.enroll .start{margin-top: 2rem;width: 100%;float: left;}
-.enroll .start
+.enroll .start{margin: 2rem 0;width: 100%;float: left;}
+.enroll .start .login{float: left;width: 100%;border: 1px solid #ccc;}
+.enroll .start .login .page{width: 100%;float: left;padding: 0 0.9rem}
+.enroll .start .login .page li{width: 100%;float: left;margin-bottom: 1.2rem;}
+.enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1rem;width: 100%;float: left}
+.enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;width: 100%;float: left}
+.enroll .start .login .page li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: left;color:#000;}
+.enroll .start .login .page li .tet1{width: 100%;float: left;}
+.enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
+.enroll .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
+.enroll .edit-info .a:hover{color: #fff;background-color: #000;}
 /*020209注册*/
+/*020209登录*/
+.enroll .telnet a{font-size: 1rem;padding-top: 1rem;color:#003366}
+.enroll .telnet .telnet1{float: left}
+.enroll .telnet .telnet2{float: right}
+/*020209登录*/
+/*020208修改密码*/
+.change{width: 100%;float: left;position: relative;}
+.change .imparity{width: 100%;position: absolute;text-align: center;top:25%;padding: 0 12px;left: 0}
+.change .imparity span{font-size: 1rem;color: #fff;background-color: #333;float: left;padding:.5rem 0;width: 100%}
+/*020208修改密码*/
