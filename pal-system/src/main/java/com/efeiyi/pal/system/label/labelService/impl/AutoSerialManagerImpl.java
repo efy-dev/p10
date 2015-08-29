@@ -9,36 +9,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by Administrator on 2015/8/28.
  */
-public class AutoSerialManagerImpl implements AutoSerialManager {
+public class AutoSerialManagerImpl extends com.ming800.core.p.service.impl.AutoSerialManagerImpl {
     @Autowired
     private AutoSerialDao autoSerialDao;
 
     @Autowired
     private CommonManager commonManager;
-    protected  static Queue<Long> updateSerials = new LinkedList<Long>();
-    protected static Map<String,Queue> map = new HashMap<String,Queue>();
+    //    protected Queue<Long> updateSerials;
+    protected static Map<String, Queue> map = new HashMap<String, Queue>();
     String prefix;
 
 
     @Override
     public String nextSerial(String group) throws Exception {
-        if(map.get(group) != null){
-            updateSerials = map.get(group);
-            if (updateSerials.size() == 0){
-                makeSerials( group);
+//        if(map.get(group) != null){
+//            updateSerials = map.get(group);
+//            if (updateSerials.size() == 0){
+//                makeSerials( group);
+//            }
+//        }else{
+//            updateSerials = new ConcurrentLinkedQueue<Long>();
+//            makeSerials( group);
+//        }
+        Queue<Long> updateSerials = map.get(group);
+        if (updateSerials == null || updateSerials.size() == 0) {
+            synchronized (group) {
+                if (map.get(group) == null) {
+                    map.put(group, new ConcurrentLinkedQueue<Long>());
+                }
             }
-        }else{
-            makeSerials( group);
+            updateSerials = makeSerials(group);
         }
 
         return updateSerials.poll().toString();
     }
 
-    private void makeSerials(String group) throws Exception{
+    private Queue<Long> makeSerials(String group) throws Exception {
         CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
         //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
@@ -48,28 +59,29 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
         AutoSerial autoSerial = autoSerialDao.getAutoSerial(queryStr, queryParamMap);
 
         //默认一次生成10个序列号
-        int size =10;
+        int size = 10;
 
-        if(commonSerial.getCacheSize()!=null || commonSerial.getCacheSize()!=""){
+        if (commonSerial.getCacheSize() != null || commonSerial.getCacheSize() != "") {
             size = Integer.parseInt(commonSerial.getCacheSize());
         }
         int length = 8;
-        if(commonSerial.getLength()!=null || commonSerial.getLength()!=""){
+        if (commonSerial.getLength() != null || commonSerial.getLength() != "") {
             length = Integer.parseInt(commonSerial.getLength());
         }
         int step = 1;
-        if (commonSerial.getStep()!=null || commonSerial.getStep()!=""){
+        if (commonSerial.getStep() != null || commonSerial.getStep() != "") {
             step = Integer.parseInt(commonSerial.getStep());
         }
 
-        if(commonSerial.getPrefix()!=null && !"".equalsIgnoreCase(commonSerial.getPrefix())){
+        if (commonSerial.getPrefix() != null && !"".equalsIgnoreCase(commonSerial.getPrefix())) {
             prefix = commonSerial.getPrefix();
         }
-        Long begin= Long.parseLong(makeChar(length));
-        if (autoSerial==null){
-            for (int i=1;i<=size;i++){
-                Long serial= begin+i*step;
-                if(i==size){
+        Long begin = Long.parseLong(makeChar(length));
+        Queue<Long> updateSerials = map.get(group);
+        if (autoSerial == null) {
+            for (int i = 1; i <= size; i++) {
+                Long serial = begin + i * step;
+                if (i == size) {
                     autoSerial = new AutoSerial();
                     autoSerial.setGroup(group);
                     autoSerial.setSerial(serial);
@@ -77,45 +89,46 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                 }
                 updateSerials.offer(serial);
             }
-            map.put(group,updateSerials);
-        }else{
-            for (int i=1;i<=size;i++){
-                Long serial = autoSerial.getSerial()+i*step;
-                if (i==size){
+//            map.put(group,updateSerials);
+        } else {
+            for (int i = 1; i <= size; i++) {
+                Long serial = autoSerial.getSerial() + i * step;
+                if (i == size) {
                     autoSerial.setSerial(serial);
                     autoSerialDao.saveOrUpdateObject(autoSerial);
                 }
                 updateSerials.offer(serial);
             }
-            map.put(group,updateSerials);
+//            map.put(group,updateSerials);
         }
-
+        return updateSerials;
     }
-    private String makeChar(int num){
+
+    private String makeChar(int num) {
         StringBuilder chars = new StringBuilder();
         Date now = new Date();
-        int fg=0;
-        if(prefix!=null && !"".equals(prefix)){
-            if (prefix.equalsIgnoreCase("yyyymmdd")){
-                SimpleDateFormat myFmt1=new SimpleDateFormat("yyyyMMdd");
+        int fg = 0;
+        if (prefix != null && !"".equals(prefix)) {
+            if (prefix.equalsIgnoreCase("yyyymmdd")) {
+                SimpleDateFormat myFmt1 = new SimpleDateFormat("yyyyMMdd");
                 chars.append(myFmt1.format(now));
                 fg = myFmt1.format(now).length();
-            }else if(prefix.equalsIgnoreCase("yymm")){
-                SimpleDateFormat myFmt1=new SimpleDateFormat("yyMM");
+            } else if (prefix.equalsIgnoreCase("yymm")) {
+                SimpleDateFormat myFmt1 = new SimpleDateFormat("yyMM");
                 chars.append(myFmt1.format(now));
                 fg = myFmt1.format(now).length();
-            }else if(prefix.equalsIgnoreCase("yyyymmddhhmmss")){
-                SimpleDateFormat myFmt1=new SimpleDateFormat("yyyyMMddHHmmss");
+            } else if (prefix.equalsIgnoreCase("yyyymmddhhmmss")) {
+                SimpleDateFormat myFmt1 = new SimpleDateFormat("yyyyMMddHHmmss");
                 chars.append(myFmt1.format(now));
                 fg = myFmt1.format(now).length();
             }
 
-            for (int k=1;k<=num-fg;k++){
+            for (int k = 1; k <= num - fg; k++) {
                 chars.append(0);
             }
-        }else{
+        } else {
             chars.append("1");
-            for (int z=1;z<=num-1;z++){
+            for (int z = 1; z <= num - 1; z++) {
                 chars.append(0);
             }
         }
