@@ -148,6 +148,9 @@ ADD COLUMN `picture_url`  varchar(255) NULL AFTER `type`;
 
 
 
+ALTER TABLE `product_model`
+ADD COLUMN `product_description_id`  char(16) NULL AFTER `name`;
+
 
 
 

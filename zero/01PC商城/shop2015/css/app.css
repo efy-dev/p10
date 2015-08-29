@@ -121,8 +121,10 @@ a:hover { color: #f00; text-decoration:underline;}
 .category .list-pro .ul-item li {width:300px;float: left; margin-top:46px;padding-bottom:45px;border-bottom: 1px #cdcdcd solid; margin-right:27px; position: relative;}
 .category .list-pro .ul-item li .tips {height:17px;line-height:17px; padding:0 5px;position: absolute;top:6px; left:0; z-index:2;background:#f00; font-family: SimSun; font-size:12px; color: #fff;}
 .category .list-pro .ul-item li .tips .icon {background-position:-128px -50px;width:5px; height:17px;position: absolute;top:0; right:-5px;}
-.category .list-pro .ul-item li .icon-chengpin { background-position:-34px -96px; width:21px;height:20px; position: absolute;top:4px; right:4px; z-index:4;}
-
+.category .list-pro .ul-item li .icon-r {position: absolute;top:4px; right:4px; z-index:4;}
+.category .list-pro .ul-item li .icon-r .icon {width:21px;height:20px; float: left; margin-left:5px;}
+.category .list-pro .ul-item li .icon-chengpin { background-position:-34px -96px;}
+.category .list-pro .ul-item li .icon-hand { background-position:-56px -96px;}
 .category .list-pro .ul-item li img { float: left; margin-bottom:16px; position: relative; z-index: 1;}
 .category .list-pro .ul-item li p {text-align: right;color: #000;padding-right:20px;}
 .category .list-pro .ul-item li .name {font-size:16px; font-weight: bolder; height:25px;}

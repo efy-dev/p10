@@ -7,6 +7,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.ming800.core.base.controller.BaseController;
@@ -168,7 +169,6 @@ public class ProductController extends BaseController {
                                  ProductPicture productPicture,ProductModelBean productModelBean,
                                  HttpServletRequest request,
                                  String resultPage,Model model,String step)  {
-
 
       if("product".equals(step)){
 

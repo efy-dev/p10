@@ -9,6 +9,7 @@ import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,32 +38,48 @@ public class ProductManagerImpl implements ProductManager {
     public Product saveProductDescription(ProductDescription productDescription){
 
         Product productTemp = (Product)xdoDao.getObject(Product.class.getName(),productDescription.getProduct().getId());
-        if("".equals(productDescription.getId())){
+
             try {
-                productDescription.setId(null);
-                xdoDao.saveOrUpdateObject(ProductDescription.class.getName(), productDescription);
-                productTemp.setProductDescription(productDescription);
-                xdoDao.saveOrUpdateObject(Product.class.getName(), productTemp);
+                if("".equals(productDescription.getId())){
+                    productDescription.setId(null);
+                    productDescription.setProduct(productTemp);
+                    xdoDao.saveOrUpdateObject(ProductDescription.class.getName(), productDescription);
+                    productTemp.setProductDescription(productDescription);
+                    xdoDao.saveOrUpdateObject(Product.class.getName(), productTemp);
+                }else {
+                    xdoDao.saveOrUpdateObject(ProductDescription.class.getName(), productDescription);
+                }
+
+
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }
+
         return  productTemp;
     }
 
     @Override
     public Product saveProduct(Product product) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
         if("".equals(product.getId())){
-            try {
                 product.setId(null);
                 product.setCreateDateTime(sdf.parse(sdf.format(new Date())));
 
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         }
-        xdoDao.saveOrUpdateObject(Product.class.getName(),product);
+            System.out.print("".equals(product.getProductDescription().getId()));
+            if("".equals(product.getProductDescription().getId())){
+                product.setProductDescription(null);
+            }else {
+                product.setProductDescription((ProductDescription)xdoDao.getObject(ProductDescription.class.getName(),product.getProductDescription().getId()));
+            }
+
+            xdoDao.saveOrUpdateObject(Product.class.getName(),product);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         return product;
     }
 
