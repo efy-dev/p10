@@ -41,7 +41,17 @@ $(function(){
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
-
+    })();
+    //订单
+    (function(){
+        $('.btn-coupons').click(function(){
+            $('body,document').css('overflow','hidden');
+            $('.alert-delete').show().css({'top':($('.order-total').position().top-120)+'px'});
+            $('.cart-btn').click(function(){
+                $(this).parents('.alert-delete').hide();
+                $('body,document').css('overflow','visible');
+            })
+        })
     })();
 
 
