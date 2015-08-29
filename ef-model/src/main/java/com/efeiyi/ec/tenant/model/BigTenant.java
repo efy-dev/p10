@@ -31,23 +31,17 @@ public class BigTenant implements Serializable {
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
+    private String status;
     //个人信息
     private String identity; // 身份证号
-    private String frontPhoto;//正面照片
-    private String versoPhoto;//反面照片
+    private String frontPhotoUrl;//正面照片
+    private String versoPhotoUrl;//反面照片
     protected AddressProvince addressProvince; //所在地
     //个体信息
-    private String operatorName;//经营者姓名//法定代表人姓名
-    private Date indateBegin;//营业执照有效期开始时间;
-    private Date indateEnd; // 营业执照有效期结束时间;
-    private String businessScope;//经营范围
-    private String businessLicense;//营业执照
-    private String taxRegistrationAttachment;//税务登记附件
+
     //公司信息
-    private String registeredAssets;
-    private String organizationAttachment;//组织机构附件
-    private String bankAttachment;//银行开户附件
- //   private List<TenantProject> tenantProjectList;
+
+    //   private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
 
 //    @JsonIgnore
@@ -80,18 +74,6 @@ public class BigTenant implements Serializable {
         this.name = name;
     }
 
-
-
-    @Column(name = "create_datetime")
-    public Date getCreateDateTime() {
-        return createDateTime;
-    }
-
-    public void setCreateDateTime(Date createDateTime) {
-        this.createDateTime = createDateTime;
-    }
-
-
     @Column(name = "content")
     public String getContent() {
         return content;
@@ -110,16 +92,6 @@ public class BigTenant implements Serializable {
         this.logoUrl = logoUrl;
     }
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant", cascade = CascadeType.ALL)
-    public List<TenantRecommended> getTenantRecommendedList() {
-        return tenantRecommendedList;
-    }
-
-    public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
-        this.tenantRecommendedList = tenantRecommendedList;
-    }
-
     @Column(name = "tenant_type")
     public String getTenantType() {
         return tenantType;
@@ -127,6 +99,24 @@ public class BigTenant implements Serializable {
 
     public void setTenantType(String tenantType) {
         this.tenantType = tenantType;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Column(name = "identity")
@@ -138,26 +128,26 @@ public class BigTenant implements Serializable {
         this.identity = identity;
     }
 
-    @Column(name = "front_photo")
-    public String getFrontPhoto() {
-        return frontPhoto;
+    @Column(name = "front_photo_url")
+    public String getFrontPhotoUrl() {
+        return frontPhotoUrl;
     }
 
-    public void setFrontPhoto(String frontPhoto) {
-        this.frontPhoto = frontPhoto;
+    public void setFrontPhotoUrl(String frontPhotoUrl) {
+        this.frontPhotoUrl = frontPhotoUrl;
     }
 
-    @Column(name = "verso_photo")
-    public String getVersoPhoto() {
-        return versoPhoto;
+    @Column(name = "verso_photo_url")
+    public String getVersoPhotoUrl() {
+        return versoPhotoUrl;
     }
 
-    public void setVersoPhoto(String versoPhoto) {
-        this.versoPhoto = versoPhoto;
+    public void setVersoPhotoUrl(String versoPhotoUrl) {
+        this.versoPhotoUrl = versoPhotoUrl;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_province_id", updatable = false, insertable = false)
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }
@@ -166,84 +156,13 @@ public class BigTenant implements Serializable {
         this.addressProvince = addressProvince;
     }
 
-    @Column(name = "operator_name")
-    public String getOperatorName() {
-        return operatorName;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant", cascade = CascadeType.ALL)
+    public List<TenantRecommended> getTenantRecommendedList() {
+        return tenantRecommendedList;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName;
-    }
-
-    @Column(name = "indate_begin")
-    public Date getIndateBegin() {
-        return indateBegin;
-    }
-
-    public void setIndateBegin(Date indateBegin) {
-        this.indateBegin = indateBegin;
-    }
-
-    @Column(name = "indate_end")
-    public Date getIndateEnd() {
-        return indateEnd;
-    }
-
-    public void setIndateEnd(Date indateEnd) {
-        this.indateEnd = indateEnd;
-    }
-
-    @Column(name = "business_scope")
-    public String getBusinessScope() {
-        return businessScope;
-    }
-
-    public void setBusinessScope(String businessScope) {
-        this.businessScope = businessScope;
-    }
-
-    @Column(name = "business_license")
-    public String getBusinessLicense() {
-        return businessLicense;
-    }
-
-    public void setBusinessLicense(String businessLicense) {
-        this.businessLicense = businessLicense;
-    }
-
-    @Column(name = "tax_registration_attachment")
-    public String getTaxRegistrationAttachment() {
-        return taxRegistrationAttachment;
-    }
-
-    public void setTaxRegistrationAttachment(String taxRegistrationAttachment) {
-        this.taxRegistrationAttachment = taxRegistrationAttachment;
-    }
-
-    @Column(name = "registered_assets")
-    public String getRegisteredAssets() {
-        return registeredAssets;
-    }
-
-    public void setRegisteredAssets(String registeredAssets) {
-        this.registeredAssets = registeredAssets;
-    }
-
-    @Column(name = "organization_attachment")
-    public String getOrganizationAttachment() {
-        return organizationAttachment;
-    }
-
-    public void setOrganizationAttachment(String organizationAttachment) {
-        this.organizationAttachment = organizationAttachment;
-    }
-
-    @Column(name = "bank_attachment")
-    public String getBankAttachment() {
-        return bankAttachment;
-    }
-
-    public void setBankAttachment(String bankAttachment) {
-        this.bankAttachment = bankAttachment;
+    public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
+        this.tenantRecommendedList = tenantRecommendedList;
     }
 }

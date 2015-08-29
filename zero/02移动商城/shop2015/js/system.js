@@ -41,7 +41,27 @@ $(function(){
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+    })();
+    //订单
+    (function(){
+        $('.btn-coupons').click(function(){
+            $('body,document').css('overflow','hidden');
+            $('#order-total').show().css({'top':($('.order-total').position().top-120)+'px'});
+            $('.cart-btn').click(function(){
+                $(this).parents('.alert-delete').hide();
+                $('body,document').css('overflow','visible');
+            })
+        });
 
+        $('.btn-edit-addres').click(function(){
+            $('body,document').css('overflow','hidden');
+            $('#order-address').show();
+            $('.cart-btn').click(function(){
+                $(this).parents('#order-address').hide();
+                $('body,document').css('overflow','visible');
+            })
+            return false;
+        })
     })();
 
 

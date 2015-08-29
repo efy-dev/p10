@@ -13,6 +13,51 @@
 <body>
 <!-- //End--header-->
 <!--content-->
+<c:if test="${empty orderList}">
+  <div class="layout-col">
+    <div class="mt wh1">
+      <div class="extra-l">
+        <strong>我的订单</strong>
+        <a href="#" onclick="func(1)">待付款</a>
+        <a href="#" onclick="func(5)">待收货</a>
+        <a href="#" onclick="func(13)">已完成</a>
+        <a href="#" onclick="func(17)">订单回收站</a>
+      </div>
+      <div class="extra-r">
+        <a href="">合并</a>
+        <a href="">付款</a>
+      </div>
+    </div>
+    <!-- //End--mt-->
+    <div class="title wh1">
+      <table>
+        <tr>
+          <th width="237">商品名称</th>
+          <th width="174">单价</th>
+          <th width="107">数量</th>
+          <th width="100">总计</th>
+          <th width="130">交易状态</th>
+          <th width="139">操作</th>
+        </tr>
+        <tr style="border-top: 1px solid #ccc">
+          <td colspan="6">
+            <div class="mt-null">
+              <p>目前还没有订单，现在开启您的购物之旅吧！</p>
+              <ul>
+                <li class="efeiyi"><a href="/">e飞蚁首页</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- //End--title-->
+  </div>
+  </div>
+  </div>
+
+</c:if>
+<c:if test="${!empty orderList}">
 <div class="layout-col">
 <div class="mt wh1">
   <div class="extra-l">
@@ -24,7 +69,6 @@
   </div>
 
 </div>
-<!-- //End--mt-->
 <div class="title wh1">
   <table>
     <tr>
@@ -49,7 +93,7 @@
           <th colspan="6">
             <span>${order.createDatetime}</span>
             <span>订单号：<strong>${order.serial}</strong></span>
-            <span>${order.tenant.name}</span>
+            <%--<span>${order.tenant.name}</span>--%>
           </th>
         </tr>
         <tr>
@@ -116,25 +160,28 @@
 </style>
 
 
-<!--content-->
-<!-- //End--footer-->
-
-
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/assets/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/assets/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
 <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/order/myEfeiyi/list.do">
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
   <ming800:pcPageParam name="sort"
                        value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
 </ming800:pcPageList>
+</c:if>
+
+
+<!--content-->
+<!-- //End--footer-->
+
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
+<![endif]-->
+<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
 </body>
 </html>
