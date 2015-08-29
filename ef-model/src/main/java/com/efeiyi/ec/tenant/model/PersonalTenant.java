@@ -26,4 +26,15 @@ import java.util.List;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class PersonalTenant extends BigTenant implements Serializable {
 
+	private String identityPhotoUrl;//手持身份证照片;
+
+
+	@Column(name = "identity_photo_url")
+	public String getIdentityPhotoUrl() {
+		return identityPhotoUrl;
+	}
+
+	public void setIdentityPhotoUrl(String identityPhotoUrl) {
+		this.identityPhotoUrl = identityPhotoUrl;
+	}
 }
