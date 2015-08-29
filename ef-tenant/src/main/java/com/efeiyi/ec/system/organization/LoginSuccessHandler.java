@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.organization;
 
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;
@@ -52,7 +53,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //        bigUser.setLastLoginDatetime(new Date());
 //        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
         System.out.println("登录成功");
-        response.sendRedirect(request.getContextPath() + "/main.do");
+        MyUser user = (MyUser)authentication.getPrincipal();
+        response.sendRedirect(request.getContextPath() + "/main.do?TENANT="+user.getBigTenant().getId());
 //        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
 //        if (savedRequest != null) {
 //            response.sendRedirect(savedRequest.getRedirectUrl());

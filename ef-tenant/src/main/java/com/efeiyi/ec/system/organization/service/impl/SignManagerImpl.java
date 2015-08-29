@@ -50,8 +50,10 @@ public class SignManagerImpl implements SignManager {
         professional.setAccountLocked(false);
         professional.setCredentialsExpired(false);
         //  baseDao.saveOrUpdateObject(Tenant.class.getName(), tenant);
-        if(tenantType.equals("11")){
-            tenant = new EnterpriseTenant();
+        try {
+
+            if(tenantType.equals("11")){
+                tenant = new EnterpriseTenant();
 //            tenant.setPassword(tenant.getPassword());
 //            tenant.setUsername(tenant.getUsername());
 //            enterpriseTenant.setStatus("1");
@@ -59,11 +61,11 @@ public class SignManagerImpl implements SignManager {
 //            enterpriseTenant.setAccountExpired(false);
 //            enterpriseTenant.setAccountLocked(false);
 //            enterpriseTenant.setCredentialsExpired(false);
-            tenant.setTenantType("11");
-            baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), tenant);
-        }
-        if(tenantType.equals("12")){
-            tenant = new PrivateTenant();
+                tenant.setTenantType("11");
+                baseDao.saveOrUpdateObject(EnterpriseTenant.class.getName(), tenant);
+            }
+            if(tenantType.equals("12")){
+                tenant = new PrivateTenant();
 //            privateTenant.setPassword(tenant.getPassword());
 //            privateTenant.setUsername(tenant.getUsername());
 //            privateTenant.setStatus("1");
@@ -71,11 +73,11 @@ public class SignManagerImpl implements SignManager {
 //            privateTenant.setAccountExpired(false);
 //            privateTenant.setAccountLocked(false);
 //            privateTenant.setCredentialsExpired(false);
-            tenant.setTenantType("12");
-            baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), tenant);
-        }
-        if(tenantType.equals("13")){
-            tenant = new  PersonalTenant();
+                tenant.setTenantType("12");
+                baseDao.saveOrUpdateObject(PrivateTenant.class.getName(), tenant);
+            }
+            if(tenantType.equals("13")){
+                tenant = new  PersonalTenant();
 //            personalTenant.setPassword(tenant.getPassword());
 //            personalTenant.setUsername(tenant.getUsername());
 //            personalTenant.setStatus("1");
@@ -83,12 +85,18 @@ public class SignManagerImpl implements SignManager {
 //            personalTenant.setAccountExpired(false);
 //            personalTenant.setAccountLocked(false);
 //            personalTenant.setCredentialsExpired(false);
-            tenant.setTenantType("13");
-            baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), tenant);
+                tenant.setTenantType("13");
+                baseDao.saveOrUpdateObject(PersonalTenant.class.getName(), tenant);
+            }
+
+            professional.setBigTenant(tenant);
+
+            baseDao.saveOrUpdateObject(Professional.class.getName(),professional);
+
+        }catch (Exception e){
+              e.printStackTrace();
         }
 
-        professional.setBigTenant(tenant);
-        baseDao.saveOrUpdateObject(Professional.class.getName(),professional);
 
     }
 

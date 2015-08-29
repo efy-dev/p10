@@ -12,6 +12,8 @@ import javax.persistence.Table;
 public class Professional extends BigUser{
     private String temp;
 
+
+
     @Column(name="temp")
     public String getTemp() {
         return temp;

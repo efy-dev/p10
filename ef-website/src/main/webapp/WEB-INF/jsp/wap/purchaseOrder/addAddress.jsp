@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>编辑收货地址</title>
+    <title>新增收货地址</title>
 </head>
 <body>
 
