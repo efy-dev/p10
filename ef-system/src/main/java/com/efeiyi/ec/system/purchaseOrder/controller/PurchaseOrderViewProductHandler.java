@@ -16,6 +16,9 @@ public class PurchaseOrderViewProductHandler implements DoHandler {
         if (request.getParameter("viewIdentify") != null) {
             modelMap.put("viewIdentify", request.getParameter("viewIdentify"));
         }
+        if (request.getParameter("viewProductModel") != null) {
+            modelMap.put("viewProductModel", request.getParameter("viewProductModel"));
+        }
         return modelMap;
     }
 }
