@@ -15,7 +15,9 @@ import java.util.Collection;
 public interface BaseUser{
 
 
-    public String getId();
+    String getId();
+
+    BaseTenant getBigTenant();
 
 
 }

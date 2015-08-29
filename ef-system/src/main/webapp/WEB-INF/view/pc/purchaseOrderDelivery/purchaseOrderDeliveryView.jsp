@@ -38,6 +38,52 @@
         </table>
     </div>
 </div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>订单</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="am-primary am-u-md-3">订单号</td>
+                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
+                <td class="am-primary am-u-md-3">支付方式</td>
+                <td class="am-u-md-3">
+                    <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
+                                <span style="margin-left: 10px;">
+                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                                checkedValue="${purchaseOrderPayment.payWay}"
+                                                type="normal"/>
+                                </span>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单状态</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                    checkedValue="${object.purchaseOrder.orderStatus}"
+                                    type="normal"/>
+                </td>
+                <td class="am-primary am-u-md-3">下单人</td>
+                <td class="am-hide-sm-only">${object.purchaseOrder.user.username}</td>
+
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3" colspan="3">
+                    <fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="am-g">
     <div class="am-u-md-12">
         <th>商家产品信息</th>

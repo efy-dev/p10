@@ -17,6 +17,6 @@
   <title></title>
 </head>
 <body>
-  欢迎${MY_USER}进入管理后台
+  欢迎${TENANT}进入管理后台
 </body>
 </html>
