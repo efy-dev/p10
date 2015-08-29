@@ -86,13 +86,7 @@ public class PurchaseOrderController extends BaseController {
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("orderList", list);
-        if (list != null && list.size() > 0) {
-            return "/purchaseOrder/purchaseOrderList";
-        } else {
-            return "/purchaseOrder/emptyOrdersView";
-        }
-
-
+        return "/purchaseOrder/purchaseOrderList";
     }
 
     /*
