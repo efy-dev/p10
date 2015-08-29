@@ -31,6 +31,8 @@ public class EnterpriseTenant extends BigTenant implements Serializable {
 	private String businessScope;//经营范围
 	private String organizationAttachment;//组织机构附件
 	private String bankAttachment;//银行开户附件
+	private String businessLicense;//营业执照
+	private String taxRegistrationAttachment;//税务登记附件
 
 
 	@Column(name = "legal_name")
@@ -76,5 +78,23 @@ public class EnterpriseTenant extends BigTenant implements Serializable {
 
 	public void setBankAttachment(String bankAttachment) {
 		this.bankAttachment = bankAttachment;
+	}
+
+	@Column(name="business_license")
+	public String getBusinessLicense() {
+		return businessLicense;
+	}
+
+	public void setBusinessLicense(String businessLicense) {
+		this.businessLicense = businessLicense;
+	}
+
+	@Column(name = "tax_registration_attachment")
+	public String getTaxRegistrationAttachment() {
+		return taxRegistrationAttachment;
+	}
+
+	public void setTaxRegistrationAttachment(String taxRegistrationAttachment) {
+		this.taxRegistrationAttachment = taxRegistrationAttachment;
 	}
 }
