@@ -27,6 +27,15 @@ public class ProductModel implements Serializable {
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
+    private String marketPrice;
+    @Column(name = "market_price")
+    public String getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(String marketPrice) {
+        this.marketPrice = marketPrice;
+    }
 
     @Column(name = "product_model_url")
     public String getProductModel_url() {

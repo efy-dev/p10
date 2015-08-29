@@ -65,7 +65,7 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderPayment&view=view&id=${purchaseOrderPayment.id}'/>">${purchaseOrderPayment.serial}</a></td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewPaymentOrder=order&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewPaymentOrder=order&viewIdentify=orderPayment&id=${purchaseOrderPayment.purchaseOrder.id}'/>">${purchaseOrderPayment.purchaseOrder.serial}</a></td>
                         <td class="am-hide-sm-only">
                                 <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
                                                 checkedValue="${purchaseOrderPayment.payWay}"
