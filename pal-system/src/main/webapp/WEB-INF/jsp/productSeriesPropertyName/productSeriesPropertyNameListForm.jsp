@@ -66,7 +66,6 @@
            value="新增" />
 </div>
 <hr/>
-
 <div class="am-g">
     <form action="<c:url value='/productSeriesPropertyName/savePropertyNameList.do'/>" method="get" class="am-form am-form-horizontal" >
         <input type="hidden" name="qm" value="saveOrUpdateProductSeriesPropertyName">

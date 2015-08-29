@@ -1,4 +1,23 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div class="login-reg">
+  <%
+    if (AuthorizationUtil.getMyUser().getId() != null) {
+  %>
+
+  <%
+    }
+  %>
+
+  <%
+    if (AuthorizationUtil.getMyUser().getId() == null) {
+  %>
+  <a href="<c:url value="/login"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+  <a href="<c:url value="/register"/>" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+  <%
+    }
+  %>
+</div>
 <footer class="bd footer">
   <div class="bd info">
     <a class="icon"></a>

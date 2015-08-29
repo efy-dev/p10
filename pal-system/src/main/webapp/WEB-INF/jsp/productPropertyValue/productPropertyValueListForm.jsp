@@ -17,7 +17,6 @@
         <strong class="am-text-primary am-text-lg">商品的非遗项目属性</strong>
     </div>
 </div>
-
 <div class="am-g">
     <form action="<c:url value='/productPropertyValue/saveProductPropertyValueList.do'/>" method="get" class="am-form am-form-horizontal" >
         <input type="hidden" name="product.id" value="${product.id}"/>

@@ -47,6 +47,7 @@
                         <td>操作</td>
                         <td>类别名称</td>
                         <td>类别编号</td>
+                        <td>类别图片</td>
                     </tr>
 
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
@@ -112,6 +113,9 @@
                             </td>
                             <td>
                                     ${projectCategory.serial}
+                            </td>
+                            <td>
+                                <img src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
                             </td>
                         </tr>
                     </c:forEach>

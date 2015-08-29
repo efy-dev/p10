@@ -26,6 +26,6 @@
 <script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
+<link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
 <script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
