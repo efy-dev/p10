@@ -174,14 +174,14 @@
       <div class="wh spe1">
         <h4>非遗风貌</h4>
         <ul>
-          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>开柜</span></li>
+          <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>${product.name}</span></li>
           <li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>1200×350×7000</span></li>
           <li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span></span></li>
           <li><strong>制作方式：</strong><span>手工</span></li>
-          <li><strong>所属项目：</strong><span>平遥推光漆器</span></li>
-          <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
-          <li><strong>传&nbsp;承&nbsp;人：</strong><span>李雅明（省级）</span></li>
-          <li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>
+          <%--<li><strong>所属项目：</strong><span>平遥推光漆器</span></li>--%>
+          <%--<li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>--%>
+          <li><strong>传&nbsp;承&nbsp;人：</strong><span>${product.master.fullName}（${product.master.title}）</span></li>
+          <%--<li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>个人收藏</span><span>家居装饰</span><span>商务礼品</span><span>祝寿礼品</span><span>家居装饰</span></li>--%>
         </ul>
       </div>
       <!-- //End--spe1-->
@@ -197,7 +197,7 @@
         <h4>非遗雅韵</h4>
         <ul>
           <li>
-            <span><img src="../shop2015/upload/details-1.jpg" alt=""/></span>
+            <span><img src="/scripts/upload/details-1.jpg" alt=""/></span>
             <p>平遥推光漆器外观古朴雅致、闪光发亮，绘饰金碧辉煌，手感细腻滑润，耐热防潮，经久耐用，诚为漆器中之精品。</p>
           </li>
           <li>
