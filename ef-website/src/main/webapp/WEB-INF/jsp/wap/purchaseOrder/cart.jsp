@@ -8,7 +8,7 @@
 <body>
 <header class="am-header custom-header">
   <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
+    <a href="/home.do" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
   <h1 class="am-header-title">购物车</h1>
@@ -109,32 +109,32 @@
         <h2>精品推荐</h2>
         <ul class="ul-list">
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
           <li>
-            <img src="<c:url value="/scripts/wap/assets/upload/cart-exp-1.jpg"/>" alt=""/>
+            <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
             <p class="name">这是商品这是商品</p>
             <p class="price"><em>￥</em><span>2000</span></p>
           </li>
