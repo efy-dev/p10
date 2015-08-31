@@ -10,6 +10,7 @@ import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -34,6 +35,8 @@ public class DialogController {
     private BaseManager baseManager;
     @Autowired
     private DoManager doManager;
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
     private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
@@ -239,6 +242,8 @@ public class DialogController {
         Do tempDo = doManager.getDoByQueryModel(qm);
         productSeries = (ProductSeries) XDoUtil.processSaveOrUpdateTempObject(tempDo, productSeries, productSeries.getClass(), request, type, xdoDao);
         if ("new".equals(type)){
+            String serial = autoSerialManager.nextSerial("serial");
+            productSeries.setSerial(serial);
             productSeries.setStatus("1");
         }
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);
