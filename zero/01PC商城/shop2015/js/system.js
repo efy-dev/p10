@@ -146,3 +146,10 @@ $(function(){
         return false;
     })
 })
+//订单信息
+$(function(){
+    $('#act-q').click(function(){
+        $(this).siblings('.list-express').slideToggle();
+
+    })
+})
