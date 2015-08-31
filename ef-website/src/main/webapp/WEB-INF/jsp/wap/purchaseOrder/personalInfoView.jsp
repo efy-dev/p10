@@ -17,7 +17,14 @@
         <ul>
           <li>用户名 :<span>${user.username}</span></li>
           <li>昵称 :<span>${user.name2}</span></li>
-          <li>性别 :<span>${user.sex}</span></li>
+          <li>性别 :<span>
+          <c:if test="${user.sex == '1'}">
+            男
+          </c:if>
+          <c:if test="${user.sex == '2'}">
+            女
+          </c:if>
+          </span></li>
           <li>出生日期 :<span>${user.birthDate}</span></li>
         </ul>
       </form>

@@ -61,10 +61,21 @@
   <c:if test="${productModelList.size()>0}">
       <div class="list-pro">
         <ul class="ul-item">
+            <%! int i=0 ;%>
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
             <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
-              <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+               <% if(i==0){%>
+                <span class="tips">精品<em class="icon"></em></span>
+                    <span class="icon-r">
+                        <i class="icon icon-chengpin"></i>
+                        <i class="icon icon-hand"></i>
+                    </span>
+                <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                <% i++;%>
+                <%}else{%>
+                <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                <%}%>
                 <p class="wh name">${productModel.product.name}
                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
                 ${productPropertyValue.projectPropertyValue.value}

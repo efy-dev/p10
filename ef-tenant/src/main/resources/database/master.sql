@@ -3197,3 +3197,16 @@ ALTER TABLE `order_purchase_order`
 
 ALTER TABLE `core_p_document`
 	ADD COLUMN `publish_date` date NULL AFTER `sample_content`;
+
+	-------------------20150829------------------
+	ALTER TABLE `tenant_enterprise`
+ADD COLUMN `business_license`  varchar(255) NULL AFTER `bank_attachment`,
+ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`;
+
+------------------------------20150831----------
+操作tenant表
+ALTER TABLE `tenant`
+ADD COLUMN `address_city_id`  char(16) NULL AFTER `create_datetime`;
+
+ALTER TABLE `tenant`
+MODIFY COLUMN `address_province_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `verso_photo_url`;
