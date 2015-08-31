@@ -1,5 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
+import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,7 +38,8 @@ public class BigTenant implements Serializable,BaseTenant {
     private String identity; // 身份证号
     private String frontPhotoUrl;//正面照片
     private String versoPhotoUrl;//反面照片
-    protected AddressProvince addressProvince; //所在地
+    protected AddressProvince addressProvince; //省
+    protected AddressCity addressCity;//城市
     //个体信息
 
     //公司信息
@@ -165,5 +167,15 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setTenantRecommendedList(List<TenantRecommended> tenantRecommendedList) {
         this.tenantRecommendedList = tenantRecommendedList;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_city_id", updatable = false, insertable = false)
+    public AddressCity getAddressCity() {
+        return addressCity;
+    }
+
+    public void setAddressCity(AddressCity addressCity) {
+        this.addressCity = addressCity;
     }
 }

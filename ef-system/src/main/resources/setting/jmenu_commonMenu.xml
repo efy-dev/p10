@@ -89,7 +89,7 @@
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
-                <match url="/basic/xm.do?qm=formProjectCategory"/>
+                <match url="/basic/xm.do?qm=formProjectCategory&amp;param=tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
@@ -187,11 +187,9 @@
     <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目列表">
-                <match url="plistProject_default"/>
+                <match url="/basic/xm.do?qm=plistProject_default"/>
                 <match url="viewProject"/>
-                <match url="removeProject"/>
-                <match url="formProject"/>
-                <match url="saveOrUpdateProject"/>
+                <match url="/basic/xm.do?qm=formProject&amp;param=formProject"/>
                 <match url="plistProject_default"/>
 
                 <match url="plistProjectProperty_default"/>
@@ -207,12 +205,10 @@
                 <match url="listProjectTag_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProjectCategory_default" access="admin,manager" text_zh_CN="类别列表">
-                <match url="plistProjectCategory_default"/>
-                <match url="removeProjectCategory"/>
-                <match url="formProjectCategory"/>
-                <match url="saveOrUpdateProjectCategory"/>
+                <match url="/basic/xm.do?qm=plistProjectCategory_default"/>
+                <match url="/basic/xm.do?qm=formProjectCategory&amp;param=JiChu"/>
                 <match url="listProjectCategory_default"/>
-
+                <match url="/basic/xm.do?qm=viewProject"/>
             </jnode>
         </jnode>
     </jnode>
