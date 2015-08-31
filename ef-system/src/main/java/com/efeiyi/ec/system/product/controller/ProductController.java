@@ -1,16 +1,21 @@
 package com.efeiyi.ec.system.product.controller;
 
 
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +47,10 @@ public class ProductController extends BaseController {
 
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
+
+    @Autowired
+    private ProductManager productManager;
+
 
     @RequestMapping("/listProduct.do")
     public ModelAndView getProductList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
@@ -146,6 +155,76 @@ public class ProductController extends BaseController {
         return "";
 
     }
+
+    /**获取项目 masterId*/
+    @RequestMapping("/getProjectList.do")
+    @ResponseBody
+    public List<MasterProject> getProjectByMasterId(String masterId,HttpServletRequest request) {
+
+        List<MasterProject> list = null;
+        try {
+            XQuery xQuery = new XQuery("listMasterProject_default",request);
+            xQuery.put("master_id",masterId);
+            list = baseManager.listObject(xQuery);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    @RequestMapping("/saveNewProduct.do")
+    public String saveNewProduct(Product product,ProductDescription productDescription,
+                                 ProductPicture productPicture,ProductModelBean productModelBean,
+                                 HttpServletRequest request,
+                                 String resultPage,Model model,String step)  {
+
+        if("product".equals(step)){
+
+            model.addAttribute("object",productManager.saveProduct(product));
+
+        }else if("description".equals(step)){
+
+            model.addAttribute("object",productManager.saveProductDescription(productDescription));
+
+        }else  if("model".equals(step)){
+            try {
+                model.addAttribute("object",productManager.saveProductModel(productModelBean));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else if("picture".equals(step)){
+            Product productTemp = (Product)baseManager.getObject(Product.class.getName(),request.getParameter("productId"));
+            model.addAttribute("object",productTemp);
+        }
+
+        return resultPage;
+    }
+
+    @RequestMapping("/deletePicture.do")
+    @ResponseBody
+    public String deletePicture(String id){
+        try {
+            baseManager.delete(ProductPicture.class.getName(),id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
+
+    @RequestMapping("/updatePicture.do")
+    @ResponseBody
+    public String updateModelPicture(String id,String status){
+        try {
+            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+            productPicture.setStatus(status);
+            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
+
 
 
 }

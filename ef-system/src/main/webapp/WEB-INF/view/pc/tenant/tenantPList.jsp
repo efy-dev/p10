@@ -46,6 +46,7 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">商家名称</th>
+                    <th class="table-title">商家类型</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,6 +102,17 @@
                                     <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
                                 </c:if>
                             </c:forEach>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${tenant.tenantType == '11'}">
+                                  企业
+                            </c:if>
+                            <c:if test="${tenant.tenantType == '12'}">
+                                个体
+                            </c:if>
+                            <c:if test="${tenant.tenantType == '13'}">
+                                个人
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>

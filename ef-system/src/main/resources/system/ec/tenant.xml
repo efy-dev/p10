@@ -60,5 +60,55 @@
 
             </does>
         </entity>
+
+
+        <entity name="TenantMaster" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantMaster">
+            <does>
+                <do name="plistTenantMaster" access="" label="商家大师分页列表"
+                    result="/tenantMaster/tenantMasterPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formTenantMaster" label="保存商家大师" access="" result="/tenantMaster/tenantMasterForm"/>
+                <do name="saveOrUpdateTenantMaster" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                </do>
+                <do name="removeTenantMaster" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantMaster" label="大师商家大师" access="" result="/tenantMaster/tenantMasterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="${MY_TENANT}"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
+        <entity name="TenantProject" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantProject">
+            <does>
+                <do name="plistTenantProject" access="" label="商家大师分页列表"
+                    result="/tenantProject/tenantProjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formTenantProject" label="保存商家大师" access="" result="/tenantMaster/tenantMasterForm"/>
+                <do name="saveOrUpdateTenantProejct" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                </do>
+                <do name="removeTenantProject" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantProject" label="大师商家大师" access="" result="/tenantMaster/tenantMasterList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="${MY_TENANT}"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>

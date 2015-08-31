@@ -46,7 +46,7 @@
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">
                                         修改图片
                                 </a>
-                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="removeMaster('${product.id}')">
+                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="removeProduct('${product.id}')">
                                          删除
                                 </a>
                             </div>
@@ -68,7 +68,7 @@
         </div>
 
 <script>
-    function removeMaster(divId){
+    function removeProduct(divId){
         $.ajax({
             type: "get",
             url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',

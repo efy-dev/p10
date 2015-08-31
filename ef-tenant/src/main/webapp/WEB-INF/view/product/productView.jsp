@@ -167,96 +167,118 @@
 </fieldset>
 <fieldset>
     <legend>
-        <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">
-            修改图片
-        </a>
+        <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">--%>
+            <%--修改图片--%>
+        <%--</a>--%>
+            <a id="btn_upload"></a>
     </legend>
 
       <div class="am-u-md-13">
           <div class="am-panel am-panel-default">
               <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
-                  <strong> 主商品图片</strong>
+                  <strong> 商品图片</strong>
                   <span class="am-icon-chevron-down am-fr"></span></div>
               <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1" style="height: auto;overflow: hidden">
                   <a style="margin-bottom: 2px;color: red;" id="btn_upload2"></a>
+                  <ul style="width: 100%"  style="list-style:none">
                   <c:if test="${!empty object.productPictureList}">
-                      <ul style="width: 100%"  style="list-style:none">
                           <c:forEach var="productPicture" items="${object.productPictureList}">
-                              <c:if test="${productPicture.status == '2'}">
+
                                   <li style="float: left;margin-right: 10px;"  name="${productPicture.id}">
                                       <dl style="margin-top: 6px;">
                                           <dt style="width: 80%">
                                               <img width="100%" name=""
                                                    src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo"
-                                                   alt="商品主图片"/>
+                                                   alt="商品图片"/>
                                           </dt>
+
+                                          <dd style="width: 80%;text-align: center;" >
+                                              <c:choose>
+                                                  <c:when test="${productPicture.status == '2'}">
+                                                      <a href="#"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                      <a href="#" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>
+                                                  </c:otherwise>
+                                              </c:choose>
+                                              <a href="#" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
+                                          </dd>
                                       </dl>
                                   </li>
-                              </c:if>
                           </c:forEach>
-                      </ul>
                   </c:if>
+                  </ul>
               </div>
           </div>
       </div>
 
 
-      <div class="am-u-md-13">
-          <div class="am-panel am-panel-default">
-              <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
-                  <strong> 商品详情图片</strong>
-                  <span class="am-icon-chevron-down am-fr" ></span></div>
-              <div id="collapse-panel-3" class="am-panel-bd am-collapse am-in" style="height: auto;overflow: hidden">
-                  <a  style="margin-bottom: 2px;color: red;" id="btn_upload"></a>
-                  <c:if test="${!empty object.productPictureList}">
-                      <ul style="width: 100%"  style="list-style:none">
-                          <c:forEach var="productPicture" items="${object.productPictureList}" >
-                              <c:if test="${productPicture.status == '3'}">
-                                  <li style="float: left;margin-right: 10px;"  name="${productPicture.id}">
-                                      <dl style="margin-top: 6px;">
-                                          <dt style="width: 80%">
-                                              <img width="100%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="商品主图片" />
-                                          </dt>
-                                      </dl>
-                                  </li>
-                              </c:if>
-                          </c:forEach>
-                      </ul>
-                  </c:if>
-              </div>
-          </div>
-      </div>
-</fieldset>
       <%--<div class="am-u-md-13">--%>
           <%--<div class="am-panel am-panel-default">--%>
-              <%--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">--%>
-                  <%--&lt;%&ndash;<a style="margin-bottom: 2px;color: red;" id="btn_upload1"></a>&ndash;%&gt;--%>
-                  <%--<strong>  商品模型图片</strong>--%>
+              <%--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">--%>
+                  <%--<strong> 商品详情图片</strong>--%>
                   <%--<span class="am-icon-chevron-down am-fr" ></span></div>--%>
-              <%--<div id="collapse-panel-4" class="am-in">--%>
-                  <%--<table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="productModelPicture">--%>
-                      <%--<tbody>--%>
-                      <%--<tr>--%>
-                          <%--<th>商品名称</th>--%>
-                          <%--<th>图片</th>--%>
-                      <%--</tr>--%>
-                      <%--<c:forEach var="productModel" items="${object.productModelList}" varStatus="status">--%>
-                          <%--<tr>--%>
-                              <%--<td valign="middle">${productModel.name}</td>--%>
-                              <%--<td >--%>
-                                  <%--<c:if test="${not empty productModel.productModel_url}">--%>
-                                      <%--<img width="10%"  name=""  src="http://tenant.efeiyi.com/${productModel.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
-                                  <%--</c:if>--%>
-                              <%--</td>--%>
-                          <%--</tr>--%>
-                      <%--</c:forEach>--%>
-
-                      <%--</tbody>--%>
-                  <%--</table>--%>
+              <%--<div id="collapse-panel-3" class="am-panel-bd am-collapse am-in" style="height: auto;overflow: hidden">--%>
+                  <%--<a  style="margin-bottom: 2px;color: red;" id="btn_upload"></a>--%>
+                  <%--<c:if test="${!empty object.productPictureList}">--%>
+                      <%--<ul style="width: 100%"  style="list-style:none">--%>
+                          <%--<c:forEach var="productPicture" items="${object.productPictureList}" >--%>
+                              <%--<c:if test="${productPicture.status == '3'}">--%>
+                                  <%--<li style="float: left;margin-right: 10px;"  name="${productPicture.id}">--%>
+                                      <%--<dl style="margin-top: 6px;">--%>
+                                          <%--<dt style="width: 80%">--%>
+                                              <%--<img width="100%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="商品主图片" />--%>
+                                          <%--</dt>--%>
+                                      <%--</dl>--%>
+                                  <%--</li>--%>
+                              <%--</c:if>--%>
+                          <%--</c:forEach>--%>
+                      <%--</ul>--%>
+                  <%--</c:if>--%>
               <%--</div>--%>
           <%--</div>--%>
       <%--</div>--%>
+</fieldset>
 
+        <fieldset>
+            <legend>
+                <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">--%>
+                <%--修改图片--%>
+                <%--</a>--%>
+               图片地址
+            </legend>
+        <div class="am-u-md-13">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-4'}">
+                    <strong>图片地址</strong>
+                    <span class="am-icon-chevron-down am-fr" ></span></div>
+                <div id="collapse-panel-4" class="am-in">
+                    <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="picUrl">
+
+                        <tr>
+                            <th>操作</th>
+                            <th>图片地址</th>
+                            <th>图片</th>
+                        </tr>
+                        <c:forEach var="productPicture" items="${object.productPictureList}">
+                            <tr name="${productPicture.id}">
+                                <td>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,'${productPicture.id}')"  href="#">
+                                        <span class="am-icon-trash-o"></span> 删除
+                                    </a>
+                                </td>
+                                <td>http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo</td>
+                                <td>
+                                    <img width="18%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="" />
+                                </td>
+                            </tr>
+                        </c:forEach>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+</fieldset>
       <div class="am-form-group">
           <div class="am-u-sm-9 am-u-sm-push-3">
 
@@ -270,11 +292,117 @@
 <!-- content end -->
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
+<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
 <script>
+
+    $(function(){
+        $('#btn_upload').uploadify({
+            uploader: '<c:url value="/product/uploadify.do?productId=${object.id}"/>',            // 服务器处理地址
+            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
+            buttonText: "上传商品图片",                 //按钮文字
+            buttonClass:"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式
+            buttonCursor:"hand",                    //鼠标指针悬停在按钮上的样子
+            height: 34,                             //按钮高度
+            width:140,                              //按钮宽度
+            auto : true,                          //自动上传
+            multi:true,                            //多个文件上传
+            scriptDate:{'status':'3'},
+            checkExisting:true,                    //检查文件重复
+            successTimeout:1000000,                 //超时
+            fileSizeLimit:'2MB',
+            removeTimeout:1,                        //移除时间
+            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeDesc: "请选择图片文件",           //文件说明
+            formData: { "imgType": "normal" }, //提交给服务器端的参数
+            onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
+                data = data.substring(1,data.length-1)
+                var pictureId = data.split(":")[0].trim();
+                var  imgUrl = data.split(":")[1];
+                var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!tenant-manage-photo";
+                ///图片信息
+                var tr = '<tr name = "'+pictureId+'">' +
+                        ' <td>  ' +
+                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="#">' +
+                        '       <span class="am-icon-trash-o"></span> 删除 ' +
+                        '   </a>' +
+                        ' </td>' +
+                        ' <td>' +url+
+                        ' </td>' +
+                        ' <td>' +
+                        '   <img style="margin-left:2px;" width="18%;" src="'+url+'">' +
+                        ' </td>' +
+                        '</tr>';
+                ///显示图片
+                var img ='<li style="float: left;margin-right: 10px;" name="'+pictureId+'">'+
+                        '<dl style="margin-top: 6px;" >'+
+                        '  <dt  style="width: 80%">'+
+                        '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '  </dt>'+
+                        '  <dd style="width: 80%;text-align:center" >'+
+                        '   </a>'+
+                        '<a href="#" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '   <a href="#" onclick="deletePicture(this,\''+pictureId+'\')">'+
+                        ' 删除'+
+                        '</dd>'+
+                        '</dl>'+
+                        '</li>';
+
+                $("#collapse-panel-1 ul").append(img);
+                $("#picUrl").append(tr);
+            }
+        });
+        $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
+    });
+
+
     //提交
     function toSubmit(result){
         $("input[name='resultPage']").val(result);
         $("form").submit();
+    }
+
+
+    function updatePictureStatus(id,status){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/updatePicture.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:id.trim(),status:status},
+            success: function (data) {
+                if(status == '2'){
+
+                   var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
+                                   '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+                                   ' 删除'+
+                                   '</a>'
+                           ;
+                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                }
+                if(status == '1'){
+                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+                            ' 删除'+
+                            '</a>';
+                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                }
+            }
+        });
+    }
+
+
+    function deletePicture(obj,divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/deletePicture.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId.trim()},
+            success: function (data) {
+                $("#picUrl tr[name='" + divId + "']").remove();
+                $("#collapse-panel-1 li[name='" + divId + "']").remove();
+            }
+        });
     }
 </script>
 
