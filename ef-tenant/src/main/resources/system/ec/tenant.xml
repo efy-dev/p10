@@ -228,6 +228,30 @@
 
             </does>
         </entity>
+        <entity name="EnterpriseTenant" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.EnterpriseTenant">
+            <does>
+                <do name="saveOrUpdateEnterpriseTenant" label="保存商家大师" access="" execute="com.efeiyi.ec.system.organization.controller.TenantTypeHandler" result="/tenantType/enterpriseTenant"/>
+
+            </does>
+        </entity>
+        <entity name="EnterpriseTenant" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.PersonalTenant">
+            <does>
+                <do name="saveOrUpdatePersonalTenant" label="保存商家大师" access="" execute="com.efeiyi.ec.system.organization.controller.TenantTypeHandler" result="/tenantType/personalTenant"/>
+
+            </does>
+        </entity>
+        <entity name="EnterpriseTenant" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.PrivateTenant">
+            <does>
+                <do name="saveOrUpdatePrivateTenant" label="保存商家大师" access="" execute="com.efeiyi.ec.system.organization.controller.TenantTypeHandler" result="/tenantType/privateTenant"/>
+
+            </does>
+        </entity>
 
     </entities>
 </module>

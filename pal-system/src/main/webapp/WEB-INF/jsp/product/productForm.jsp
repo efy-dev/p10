@@ -13,15 +13,6 @@
 <head>
     <title></title>
     <script type="text/javascript">
-        function formOnSubmit(){
-            var madeYear = document.getElementById("madeYear").value;
-            if(madeYear == null || madeYear == ""){
-                alert("请选择时间!");
-                return false;
-            }
-            return true;
-        }
-
         function openTenantProductSeries(tag, id, name){
             if(tag){//选择系列
                 var tenantId = document.getElementById("tenant_id").value;
@@ -49,13 +40,14 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form action="<c:url value='/product/saveProduct.do'/>" onsubmit="return formOnSubmit()" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
+    <form id="productForm" action="<c:url value='/product/saveProduct.do'/>" onsubmit="return afterSubmitForm('productForm')"
+          method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}" required>
+                <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}" required="true">
             </div>
         </div>
         <div class="am-form-group">
@@ -69,7 +61,7 @@
             <div class="am-u-sm-9">
                 <input type="text" id="productSeries_idName" placeholder="非遗项目"
                        onclick="openTenantProductSeries(true, 'productSeries_id', 'productSeries_idName')"
-                       value="${object.productSeries.name}" required>
+                       value="${object.productSeries.name}" required="true" readonly>
                 <input type="hidden" id="productSeries_id"  name="productSeries.id" value="${object.productSeries.id}">
             </div>
         </div>
@@ -78,7 +70,7 @@
             <div class="am-u-sm-9">
                 <input type="text" id="tenant_idName" placeholder="商户名称"
                        onclick="openTenantProductSeries(false, 'tenant_id', 'tenant_idName')"
-                       value="${object.tenant.name}" required>
+                       value="${object.tenant.name}" required="true" readonly>
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>
@@ -86,7 +78,7 @@
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small>*</small></label>
             <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
                 <input type="datetime" name="madeYear" id="madeYear" class="am-form-field" placeholder="制作时间"
-                       value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required/>
+                       value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required="true"/>
                 <span class="am-input-group-btn am-datepicker-add-on">
                     <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
                 </span>
