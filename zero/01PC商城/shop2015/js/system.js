@@ -99,7 +99,12 @@ $(function(){
             var pos=$($(this).attr('href')).offset().top;
             $("html,body").animate({scrollTop:pos-75},500);
             return false;
+        });
+        //规格选中
+        $('.itemInfo .ul-list li').click(function(){
+            $(this).addClass('active');
         })
+
     })();
     //注册--协议
     (function(){
