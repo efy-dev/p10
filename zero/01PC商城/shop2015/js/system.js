@@ -130,19 +130,23 @@ $(function(){
             return false;
         })
     })();
-
-
-
-
-
-})
-//收货地址
-$(function(){
-    $('.my-order .extra-r>a').click(function(){
-        $(this).siblings('.active-pop').show();
-        $('.my-order .clase, .my-order .sh-bg').click(function(){
-            $(this).parents('.active-pop').hide();
+    //收货地址
+    (function(){
+        $('.my-order .extra-r>a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.my-order .clase, .my-order .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
         })
-        return false;
-    })
+    })();
+    //商品搜索
+    (function(){
+        $('.nav-item .title').click(function(){
+            $(this).find('.icon').toggleClass('icon-active');
+            $(this).siblings('.ul-list').stop().slideToggle(200);
+            $(this).parents('.nav-item').find('.ul-list')
+        })
+    })();
+
 })
