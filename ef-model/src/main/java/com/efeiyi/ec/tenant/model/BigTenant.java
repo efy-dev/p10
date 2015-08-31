@@ -29,6 +29,7 @@ public class BigTenant implements Serializable,BaseTenant {
 
     private String id;
     private String name;//名称标识
+    private String fullName;
     private String content; // 简介(长)
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
@@ -75,6 +76,15 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "full_name")
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Column(name = "content")

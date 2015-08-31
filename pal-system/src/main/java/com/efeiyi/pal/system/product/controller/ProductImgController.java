@@ -42,12 +42,12 @@ public class ProductImgController {
 
         Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String identify = sdf.format(new Date());
         String url = "" ;
         for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
             //上传文件
-            MultipartFile mf = entry.getValue();
+            String identify = sdf.format(new Date());
             url = "product/" + identify + ".jpg";
+            MultipartFile mf = entry.getValue();
             aliOssUploadManager.uploadFile(mf, "315pal", url);
             productImg.setImgUrl(url);
             baseManager.saveOrUpdate(ProductImg.class.getName(), productImg);
