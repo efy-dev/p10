@@ -18,11 +18,11 @@
           <ul>
             <li>
               <label>用户名</label>
-              <input type="text" value="${user.username}">
+              <input type="text" name="username" value="${user.username}">
             </li>
             <li>
               <label>昵称</label>
-              <input type="text" value="${user.name2}">
+              <input type="text" name="name2" value="${user.name2}">
             </li>
             <li>
               <ul class="sex">
@@ -30,28 +30,28 @@
               <c:if test="${user.sex==1}">
                 <li class="sex1">
                   <label class=" sex2">
-                    <input type="radio" name="radio10" value="male" class="sex2" checked> 男
+                    <input type="radio" name="sex" value="1" class="sex2" checked> 男
                   </label>
                 </li>
               </c:if>
               <c:if test="${user.sex !=1}">
                 <li class="sex1">
                   <label class=" sex2">
-                    <input type="radio" name="radio10" value="male" class="sex2"> 男
+                    <input type="radio" name="sex" value="1" class="sex2"> 男
                   </label>
                 </li>
               </c:if>
               <c:if test="${user.sex == 2}">
                 <li  class="sex1 ot-amg">
                   <label class=" sex2">
-                    <input type="radio" name="radio10" value="female"  class="sex2" checked> 女
+                    <input type="radio" name="sex" value="2"  class="sex2" checked> 女
                   </label>
                 </li>
               </c:if>
               <c:if test="${user.sex != 2}">
                 <li  class="sex1 ot-amg">
                   <label class=" sex2">
-                    <input type="radio" name="radio10" value="female"  class="sex2"> 女
+                    <input type="radio" name="sex" value="2"  class="sex2"> 女
                   </label>
                 </li>
               </c:if>
