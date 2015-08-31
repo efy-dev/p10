@@ -1,16 +1,10 @@
 package com.efeiyi.ec.website.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.project.model.ProjectProperty;
-import com.efeiyi.ec.project.model.ProjectPropertyValue;
-import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -62,11 +56,21 @@ public class ProductController {
         xQuery.put("product_category_id", projectId);
         xQuery.addRequestParamToModel(model,request);
         List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
+        ProductModel productModel = (ProductModel)productModelList.get(0);
+        Product product = productModel.getProduct();
+        List<ProductPicture> list = product.getProductPictureList();
+        List<String> stringList = new ArrayList<String>();
+        for(ProductPicture picture:list){
+            if("2".equals(picture.getStatus())){
+                stringList.add(picture.getPictureUrl());
+            }
+        }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
         model.addAttribute("productModelList",productModelList);
+        model.addAttribute("mainPicture",stringList.get(0));
         return "/product/productModelList";
     }
 
@@ -147,4 +151,5 @@ public class ProductController {
         model.addAttribute("product", product);
         return "/product/productDetails";
     }
+
 }

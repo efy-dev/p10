@@ -38,10 +38,10 @@ public class SIgnController extends BaseController {
     }
 
     @RequestMapping("/Register.do")
-    public String Register(Professional tenant,Model model,String tenantType){
+    public String Register(Professional professional,Model model,String tenantType){
         try {
-            model.addAttribute("username",tenant.getUsername());
-            signManager.tenantRegister(tenant,tenantType);
+            model.addAttribute("username",professional.getUsername());
+            signManager.tenantRegister(professional,tenantType);
         }catch (Exception e){
             e.printStackTrace();
             System.out.print("注册失败!");

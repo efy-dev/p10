@@ -13,7 +13,7 @@
   <form>
     <div class="start">
       <div class="login">
-        <ul>
+        <ul class="page">
           <li>
             <label>手机号</label>
             <input id="phone" type="text" class="txt" placeholder="已验证过的手机号码" maxlength="11">

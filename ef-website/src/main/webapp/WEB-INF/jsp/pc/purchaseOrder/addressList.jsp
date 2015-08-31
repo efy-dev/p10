@@ -129,12 +129,12 @@
                         <div class="ae-rg">
                             <c:if test="${address.status == 2}">
                                 <span><span class="text-a"><a href="#"
-                                                              onclick="df('${address.id}')">默认地址</a></span></span>
+                                                              onclick="df('${address.id}','${address.consumer.id}')">默认地址</a></span></span>
 
                             </c:if>
                             <c:if test="${address.status != 2}">
                                 <span><span class="text-a"><a href="#"
-                                                              onclick="df('${address.id}')">设为默认</a></span></span>
+                                                              onclick="df('${address.id}','${address.consumer.id}')">设为默认</a></span></span>
 
                             </c:if>
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
@@ -230,7 +230,7 @@
             return false;
         });
     });
-    function df(id) {
+    function df(addressId,consumerId) {
         $.ajax({
             type: 'post',
             async: false,
@@ -238,7 +238,8 @@
             dataType: 'json',
             data: {
                 status: 2,
-                id: id
+                id: addressId,
+                consumerId:consumerId,
 
             },
             success: function (data) {

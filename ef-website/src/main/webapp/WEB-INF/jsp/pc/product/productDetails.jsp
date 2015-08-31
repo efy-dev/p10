@@ -19,8 +19,6 @@
       var id = $(o).next().next().next().val();
       $("#price").text(price);
       $("#marketPrice").text("市场价：￥"+marketPrice);
-      // window.location.href="<c:url value="/cart/addProduct.do?id="/>"+id;
-//    return /cart/addProduct.do?id;
     }
   </script>
 
@@ -89,28 +87,34 @@
       <!-- //End-->
       <div class="des">
         <ul class="ul-list">
-          <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-            <li class=""><a onclick="show(this)">
-              <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                ${productPropertyValue.projectPropertyValue.value}
-              </c:forEach>
-                ${product.name}</a>
-              <input type="hidden" value="${productModel.price}">
-              <input type="hidden" value="${productModel.marketPrice}">
-            </li>
+          <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
+            <c:if test="${productModel.id == productModelTmp.id}">
+              <li class="active">
+            </c:if>
+            <c:if test="${productModel.id != productModelTmp.id}">
+              <li class="">
+            </c:if>
+            <a onclick="show(this)">
+                <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                  ${productPropertyValue.projectPropertyValue.value}
+                </c:forEach>
+                  ${product.name}</a>
+                <input type="hidden" value="${productModelTmp.price}">
+                <input type="hidden" value="${productModelTmp.marketPrice}">
+              </li>
           </c:forEach>
         </ul>
       </div>
       <!-- //End-->
-      <div class="amount">
-        <div class="ipt">
-          <input class="txt" type="text" value="1"/><em class="ge">个</em>
-        </div>
-        <div class="btns">
-          <a href="#btn-add" class="btn-add" title="加">+</a>
-          <a href="#btn-sub" class="btn-sub" title="减">-</a>
-        </div>
-      </div>
+      <%--<div class="amount">--%>
+        <%--<div class="ipt">--%>
+          <%--<input class="txt" type="text" value="1"/><em class="ge">个</em>--%>
+        <%--</div>--%>
+        <%--<div class="btns">--%>
+          <%--<a href="#btn-add" class="btn-add" title="加">+</a>--%>
+          <%--<a href="#btn-sub" class="btn-sub" title="减">-</a>--%>
+        <%--</div>--%>
+      <%--</div>--%>
       <!-- //End-->
       <div class="price">
         <div class="p-text">飞蚁价：</div>
@@ -149,23 +153,22 @@
       <!-- JiaThis Button END -->
       <div class="tab-items">
         <ul>
-          <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
-          <li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>
-          <li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
-          <li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>
-          <li><a href="#" title="同店精品">同 店 精 品</a></li>
+          <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+          <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="同店精品">同 店 精 品</a></li>--%>
         </ul>
       </div>
       <!-- //End-->
-      <div class="btns">
-        <a class="buy" href="" title="立即购买">立 即 购 买</a>
-        <a class="append" href="" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
-      </div>
+      <%--<div class="btns">--%>
+        <%--<a class="buy" href="" title="立即购买">立 即 购 买</a>--%>
+        <%--<a class="append" href="" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>--%>
+      <%--</div>--%>
     </div>
   </div>
   <!-- //End-->
-  <div class="wh detail" id="detail">
-    ${product.productDescription.content}
+    ${productModel.productModelDescription.content}
     <%--<div class="wh title"><h3>商品详情</h3></div>--%>
     <%--<div class="wh part">--%>
       <%--<div class="wh spe1">--%>
@@ -256,7 +259,7 @@
     <%--<div class="online-ask">--%>
       <%--<a href="" class="btn"><i class="icon"></i>在线咨询</a>--%>
     <%--</div>--%>
-  </div>
+
 
 </div>
 <!-- //End--footer-->

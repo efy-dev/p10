@@ -21,7 +21,7 @@ public class User {
     private String cityId;
     private String password;
     private Role role;
-    private Integer status;
+    private String status;
     @JsonIgnore
     @Column(name = "password")
     public String getPassword() {
@@ -95,11 +95,11 @@ public class User {
     }
 
     @Column(name = "status")
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

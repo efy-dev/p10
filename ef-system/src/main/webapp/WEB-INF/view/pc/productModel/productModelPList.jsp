@@ -43,6 +43,8 @@
                     <th class="table-title">产品名称</th>
                     <th class="table-title">产品编号</th>
                     <th class="table-title">产品价格</th>
+                    <th class="table-title">项目</th>
+                    <th class="table-title">项目类别</th>
                     <th class="table-title">图片</th>
                 </tr>
                 </thead>
@@ -68,6 +70,8 @@
                         </td>
                         <td class="am-hide-sm-only">${productModel.product.serial}</td>
                         <td class="am-hide-sm-only">${productModel.product.price}</td>
+                        <td class="am-hide-sm-only">${productModel.product.project.name}</td>
+                        <td class="am-hide-sm-only">${productModel.product.category.name}</td>
                         <td class="am-hide-sm-only"><img src="${productModel.product.picture_url}" alt="图片地址"></td>
                     </tr>
                 </c:forEach>

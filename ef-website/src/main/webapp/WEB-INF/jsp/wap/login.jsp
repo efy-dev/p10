@@ -19,7 +19,7 @@
     <div class="start">
       <div class="login">
 
-        <ul>
+        <ul class="page">
           <li>
             <label>手机号</label>
             <input type="text" name="username" class="txt" placeholder="已验证过的手机号码" maxlength="11" required>
@@ -33,7 +33,7 @@
       </div>
       <div class="telnet">
         <%--<a href="#" class="telnet1">微&nbsp信&nbsp登&nbsp录</a>--%>
-        <a href="#" class="telnet2">忘&nbsp记&nbsp密&nbsp码</a>
+        <a href="<c:url value="/forgetPwd"/>" class="telnet2">忘&nbsp记&nbsp密&nbsp码</a>
       </div>
       <div class="edit-info">
         <input type="submit" value="登录" class="a">

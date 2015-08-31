@@ -93,7 +93,7 @@
           <th colspan="6">
             <span>${order.createDatetime}</span>
             <span>订单号：<strong>${order.serial}</strong></span>
-            <%--<span>${order.tenant.name}</span>--%>
+            <span>${order.tenant.name}</span>
           </th>
         </tr>
         <tr>
@@ -181,7 +181,7 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="<c:url value="/scripts/assets/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/assets/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/js/system.js"/>"></script>
 </body>
 </html>

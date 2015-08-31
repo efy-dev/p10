@@ -205,4 +205,16 @@ public class ProductController extends BaseController {
         return  id;
     }
 
+    @RequestMapping("/removeProduct.do")
+    @ResponseBody
+    public String removeProduct(String id){
+
+        try {
+
+        }catch (Exception e){
+
+        }
+        return  "";
+    }
+
 }

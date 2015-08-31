@@ -4,6 +4,7 @@ import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ming800.core.base.model.BaseTenant;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ import java.util.List;
 @Table(name = "tenant")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class BigTenant implements Serializable {
+public class BigTenant implements Serializable,BaseTenant {
 
     private String id;
     private String name;//名称标识
