@@ -40,7 +40,7 @@
             </td>
             <td width="10%">
                 <c:if test="${project.level == 1}">
-                    <a href="<c:url value="/basic/xm.do?qm=viewProject&id=${project.id}"/>" >
+                    <a href="<c:url value="/basic/xm.do?qm=viewProject&param=project&id=${project.id}"/>" >
                       ${project.name}
                     </a>
                 </c:if>

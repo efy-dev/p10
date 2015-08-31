@@ -83,7 +83,7 @@
         <%--</div>--%>
     <%--</div>--%>
     <div style="text-align: left;" >
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建标签" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建标签" />
     </div>
     <div class="am-panel am-panel-default">
         <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">项目标签<span class="am-icon-chevron-down am-fr" ></span></div>
