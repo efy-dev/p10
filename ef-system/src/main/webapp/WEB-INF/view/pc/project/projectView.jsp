@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">项目图片</td>
-                <td class="am-u-md-3">
+                <td class="am-u-md-3" colspan="3">
                     <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
                 </td>
             </tr>
@@ -48,7 +48,7 @@
     </div>
 </div>
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&fatherId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建子项目" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=project&fatherId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建子项目" />
 </div>
 <div class="am-u-md-6" style="width:100%; " >
     <div class="am-panel am-panel-default">
@@ -83,7 +83,7 @@
         </div>
     </div>
     <div style="text-align: left;" >
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建标签" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectTag&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建标签" />
     </div>
     <div class="am-panel am-panel-default">
         <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">项目标签<span class="am-icon-chevron-down am-fr" ></span></div>
@@ -101,7 +101,7 @@
     </div>
 
     <div style="text-align: left;margin-left: 10px;" >
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
     </div>
     <div class="am-u-md-6" style="width:100%; " >
         <div class="am-panel am-panel-default">
