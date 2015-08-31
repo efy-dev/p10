@@ -28,7 +28,7 @@
             <div>
                 <c:if test="${empty level}">
                     <input onclick="window.location.href='<c:url
-                            value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=1"/>'"
+                            value="/basic/xm.do?qm=formProjectCategory&param=JiChu&fatherCategoryId=${fatherCategoryId}&level=1"/>'"
                            type="button" class="am-btn am-btn-default am-btn-xs"
                            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
                            value="新建类别"/>
@@ -57,7 +57,7 @@
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button onclick="window.location.href='<c:url
-                                                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
+                                                value="/basic/xm.do?qm=formProjectCategory&param=JiChu&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
                                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                                 class="am-icon-edit"></span> 编辑
                                         </button>
