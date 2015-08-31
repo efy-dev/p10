@@ -33,33 +33,33 @@ public class TenantTypeHandler implements MultipartHandler {
 
 		if("13".equals(type)){
 			if (!multipartRequest.getFile("identityPhotoUrl").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("identityPhotoUrl"), "tenantType", multipartRequest.getFile("identityPhotoUrl").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("identityPhotoUrl"), "tenant", multipartRequest.getFile("identityPhotoUrl").getOriginalFilename());
 				paramMap.put("identityPhotoUrl", multipartRequest.getFile("identityPhotoUrl").getOriginalFilename());
 			}
 		}else if("12".equals(type)){
 			if (!multipartRequest.getFile("businessLicense").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("businessLicense"), "tenantType", multipartRequest.getFile("businessLicense").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("businessLicense"), "tenant", multipartRequest.getFile("businessLicense").getOriginalFilename());
 				paramMap.put("businessLicense", multipartRequest.getFile("businessLicense").getOriginalFilename());
 			}
 			if (!multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("taxRegistrationAttachment"), "tenantType", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("taxRegistrationAttachment"), "tenant", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
 				paramMap.put("taxRegistrationAttachment", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
 			}
 		}else if("11".equals(type)){
 			if (!multipartRequest.getFile("businessLicense").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("businessLicense"), "tenantType", multipartRequest.getFile("businessLicense").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("businessLicense"), "tenant", multipartRequest.getFile("businessLicense").getOriginalFilename());
 				paramMap.put("businessLicense", multipartRequest.getFile("businessLicense").getOriginalFilename());
 			}
 			if (!multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("taxRegistrationAttachment"), "tenantType", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("taxRegistrationAttachment"), "tenant", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
 				paramMap.put("taxRegistrationAttachment", multipartRequest.getFile("taxRegistrationAttachment").getOriginalFilename());
 			}
 			if (!multipartRequest.getFile("organizationAttachment").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("organizationAttachment"), "tenantType", multipartRequest.getFile("organizationAttachment").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("organizationAttachment"), "tenant", multipartRequest.getFile("organizationAttachment").getOriginalFilename());
 				paramMap.put("organizationAttachment", multipartRequest.getFile("organizationAttachment").getOriginalFilename());
 			}
 			if (!multipartRequest.getFile("bankAttachment").getOriginalFilename().equals("")) {
-				aliOssUploadManager.uploadFile(multipartRequest.getFile("bankAttachment"), "tenantType", multipartRequest.getFile("bankAttachment").getOriginalFilename());
+				aliOssUploadManager.uploadFile(multipartRequest.getFile("bankAttachment"), "tenant", multipartRequest.getFile("bankAttachment").getOriginalFilename());
 				paramMap.put("bankAttachment", multipartRequest.getFile("bankAttachment").getOriginalFilename());
 			}
 		}
