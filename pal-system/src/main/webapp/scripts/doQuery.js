@@ -15,7 +15,7 @@ function generateValue(divId) {
 
     var conditionsValue = "";
 
-    var defaultConditionsValue = document.getElementById("defaultConditions"+divId).value;
+    var defaultConditionsValue = document.getElementById("inputConditions"+divId).value;
     var tempArray = queryConditionArrayMap[divId];
     for (var i = 0,j = 1; i < tempArray.length; i++) {
         var propertyName = tempArray[i].propertyName;
@@ -45,7 +45,7 @@ function generateValue(divId) {
                     tempIdValue = tempIdObject.val();
                 }
             } else {
-                tempIdValue = document.getElementById(tempId).value;
+                tempIdValue = document.getElementById("inputConditions"+divId).value;
                 //tempIdValue =  $("#"+tempId).val();
                 //alert($("#"+tempId).val());
                 //alert($("#"+tempId).attr("id"));
@@ -262,7 +262,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
                         " value=\"" + thePropertyValue + "\"/>";
                 }else {
                     //tagStr += " id=\"" + tempId  +"\"" +
-                    tagStr += " id='" + tempId  +"'" +
+                    tagStr += " id='inputConditions" + divId  +"'" +
                         " name=\"" + queryConditionArray[i].propertyName + "\"" +
                         " value=\"" + thePropertyValue + "\"/>";
                 }
