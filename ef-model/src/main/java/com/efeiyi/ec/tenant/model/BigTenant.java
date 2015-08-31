@@ -162,7 +162,7 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_province_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_province_id")
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }
@@ -182,7 +182,7 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_city_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_city_id")
     public AddressCity getAddressCity() {
         return addressCity;
     }
