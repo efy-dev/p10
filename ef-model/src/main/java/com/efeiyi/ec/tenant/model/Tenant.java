@@ -3,6 +3,7 @@ package com.efeiyi.ec.tenant.model;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,26 +22,50 @@ import java.util.List;
 @Entity
 @Table(name = "tenant")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Tenant extends BigUser implements Serializable {
+public class Tenant implements Serializable {
 
+    private String id;
     private String name;//名称标识
     private String content; // 简介(长)
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
- //   private List<TenantProject> tenantProjectList;
+    private String status;
+    private List<TenantMaster> tenantMasterList;
+    private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
 
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-//    public List<TenantProject> getTenantProjectList() {
-//        return tenantProjectList;
-//    }
-//
-//    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
-//        this.tenantProjectList = tenantProjectList;
-//    }
+    @Id
+    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
+    @GeneratedValue(generator = "id")
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantProject> getTenantProjectList() {
+        return tenantProjectList;
+    }
+
+    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+        this.tenantProjectList = tenantProjectList;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantMaster> getTenantMasterList() {
+        return tenantMasterList;
+    }
+
+    public void setTenantMasterList(List<TenantMaster> tenantMasterList) {
+        this.tenantMasterList = tenantMasterList;
+    }
     @Column(name = "name")
     public String getName() {
         return name;
@@ -97,5 +122,14 @@ public class Tenant extends BigUser implements Serializable {
 
     public void setTenantType(String tenantType) {
         this.tenantType = tenantType;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

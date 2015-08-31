@@ -3210,3 +3210,12 @@ ADD COLUMN `address_city_id`  char(16) NULL AFTER `create_datetime`;
 
 ALTER TABLE `tenant`
 MODIFY COLUMN `address_province_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `verso_photo_url`;
+
+ALTER TABLE `tenant`
+ADD COLUMN `username`  varchar(64) NULL AFTER `address_city_id`;
+
+ALTER TABLE `tenant`
+CHANGE COLUMN `username` `full_name`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `address_city_id`;
+
+ALTER TABLE `tenant`
+DROP COLUMN `full_name`;

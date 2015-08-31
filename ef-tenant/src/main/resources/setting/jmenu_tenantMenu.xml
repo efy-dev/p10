@@ -31,15 +31,15 @@
                 <match url="/product/saveNewProduct.do"/>
 
             </jnode>
-            <jnode id="" url=""  state="" access="" text_zh_CN="商品模板">
-                <match url=""/>
-            </jnode>
+            <!--<jnode id="" url=""  state="" access="" text_zh_CN="商品模板">-->
+                <!--<match url=""/>-->
+            <!--</jnode>-->
             <jnode id="" url="/basic/xm.do?qm=productTenantCatalogValue_default"  state="" access="" text_zh_CN="分类管理">
                 <match url="productTenantCatalogValue_default"/>
             </jnode>
-            <jnode id="" url=""  state="" access="" text_zh_CN="橱窗推荐">
-                <match url=""/>
-            </jnode>
+            <!--<jnode id="" url=""  state="" access="" text_zh_CN="橱窗推荐">-->
+                <!--<match url=""/>-->
+            <!--</jnode>-->
         </jnode>
        <!-- <jnode id="storeManager" url="" text_zh_CN="店铺管理">
             <jnode id="" url="" state=""  extend="" access="" text_zh_CN="信息统计">

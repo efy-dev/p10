@@ -88,8 +88,8 @@
 
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
-                <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
-                <match url="/basic/xm.do?qm=formProjectCategory&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
+                <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
@@ -188,26 +188,17 @@
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目列表">
                 <match url="/basic/xm.do?qm=plistProject_default"/>
-                <match url="viewProject"/>
+                <match url="/basic/xm.do?qm=viewProject"/>
+                <match url="/basic/xm.do?qm=viewProject&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProject&amp;param=formProject"/>
-                <match url="plistProject_default"/>
-
-                <match url="plistProjectProperty_default"/>
-                <match url="removeProjectProperty"/>
-                <match url="formProjectProperty"/>
-                <match url="saveOrUpdateProjectProperty"/>
-                <match url="listProjectProperty_default"/>
-
-                <match url="plistProjectTag_default"/>
-                <match url="removeProjectTag"/>
-                <match url="formProjectTag"/>
-                <match url="saveOrUpdateProjectTag"/>
-                <match url="listProjectTag_default"/>
+                <match url="/basic/xm.do?qm=formProject&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectTag&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectProperty&amp;param=project"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProjectCategory_default" access="admin,manager" text_zh_CN="类别列表">
                 <match url="/basic/xm.do?qm=plistProjectCategory_default"/>
+                <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=formProjectCategory&amp;param=JiChu"/>
-                <match url="listProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=viewProject"/>
             </jnode>
         </jnode>
@@ -219,6 +210,7 @@
             <jnode url="/basic/xm.do?qm=plistUser_default" access="admin,manager" text_zh_CN="用户列表">
                 <match url="/basic/xm.do?qm=plistUser_default"/>
                 <match url="/basic/xm.do?qm=formUser&amp;formParam=user"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin,manager" text_zh_CN="角色管理">
                 <match url="/basic/xm.do?qm=plistRole_default"/>
@@ -231,7 +223,6 @@
                 <match url="/basic/xm.do?qm=plistTag_default"/>
                 <match url="/basic/xm.do?qm=formTag"/>
             </jnode>
-
         </jnode>
     </jnode>
 </jmenu>
