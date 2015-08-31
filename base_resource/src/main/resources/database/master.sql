@@ -1,4 +1,4 @@
-/*****************未同步sql***********************/
+/*****************已同步sql***********************/
 
 DROP TABLE IF EXISTS `master_work`;
 CREATE TABLE `master_work` (
@@ -218,7 +218,7 @@ INSERT INTO `master_work_picture` VALUES ('idl2calf3hdns2pi', 'idkzc7g33cfesw37'
 
 
 ALTER TABLE `tenant`
-ADD COLUMN `tenantType`  varchar(2) NULL AFTER `logo_url`;
+ADD COLUMN `tenant_type`  varchar(2) NULL AFTER `logo_url`;
 
 
 CREATE TABLE `tenant_enterprise` (
@@ -253,7 +253,6 @@ ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
 --2015-8-29 赵志崇 修改tenant表字段 未执行
 ALTER TABLE `tenant`
 DROP COLUMN `origin_province_id`,
-DROP COLUMN `create_datetime`,
 DROP COLUMN `full_name`,
 DROP COLUMN `brief`,
 DROP COLUMN `title`,
@@ -264,43 +263,72 @@ DROP COLUMN `level`,
 DROP COLUMN `background_url`,
 DROP COLUMN `birthday`,
 ADD COLUMN `identity`  char(18) NULL AFTER `tenant_type`,
-ADD COLUMN `front_photo`  varchar(255) NULL AFTER `identity`,
-ADD COLUMN `versoPhoto`  varchar(255) NULL AFTER `front_photo`,
-ADD COLUMN `address_province_id`  varchar(255) NULL AFTER `versoPhoto`,
-ADD COLUMN `operator_name`  varchar(25) NULL AFTER `address_province_id`,
-ADD COLUMN `in_date_begin`  datetime NULL AFTER `operator_name`,
-ADD COLUMN `in_date_end`  datetime NULL AFTER `in_date_begin`,
-ADD COLUMN `business_scope`  varchar(255) NULL AFTER `in_date_end`,
-ADD COLUMN `business_license`  varchar(255) NULL AFTER `business_scope`,
-ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`,
-ADD COLUMN `registered_assets`  varchar(255) NULL AFTER `tax_registration_attachment`,
-ADD COLUMN `organization_attachment`  varchar(255) NULL AFTER `registered_assets`,
-ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`;
+ADD COLUMN `front_photo_url`  varchar(255) NULL AFTER `identity`,
+ADD COLUMN `verso_photo_url`  varchar(255) NULL AFTER `front_photo_url`,
+ADD COLUMN `address_province_id`  varchar(255) NULL AFTER `verso_photo_url`;
+-- ADD COLUMN `operator_name`  varchar(25) NULL AFTER `address_province_id`,
+-- ADD COLUMN `in_date_begin`  datetime NULL AFTER `operator_name`,
+-- ADD COLUMN `in_date_end`  datetime NULL AFTER `in_date_begin`,
+-- ADD COLUMN `business_scope`  varchar(255) NULL AFTER `in_date_end`,
+-- ADD COLUMN `business_license`  varchar(255) NULL AFTER `business_scope`,
+-- ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`,
+-- ADD COLUMN `registered_assets`  varchar(255) NULL AFTER `tax_registration_attachment`,
+-- ADD COLUMN `organization_attachment`  varchar(255) NULL AFTER `registered_assets`,
+-- ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`;
 
 -------------------------------------------------------------------------------------------
 --2015-8-29 赵志崇 tenant_enterprise 未执行
 ALTER TABLE `tenant_enterprise`
 ADD COLUMN `registered_assets`  varchar(255) NULL AFTER `id`,
+ADD COLUMN `legal_name`  varchar(255) NULL AFTER `registered_assets`,
 ADD COLUMN `organization_attachment`  varchar(255) NULL AFTER `registered_assets`,
-ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`;
+ADD COLUMN `bank_attachment`  varchar(255) NULL AFTER `organization_attachment`,
+ADD COLUMN `business_license`  varchar(255) NULL AFTER `bank_attachment`,
+ADD COLUMN `business_scope`  varchar(255) NULL AFTER `bank_attachment`,
+ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`;
 
 -------------------------------------------------------------------------------------------
 --2015-8-29 赵志崇 tenant_enterprise 未执行
 
 ALTER TABLE `tenant_personal`
-ADD COLUMN `identity`  char(18) NULL AFTER `id`,
-ADD COLUMN `front_photo_url`  varchar(255) NULL AFTER `identity`,
-ADD COLUMN `verso_photo_url`  varchar(255) NULL AFTER `front_photo_url`,
-ADD COLUMN `address_province_id`  char(16) NULL AFTER `verso_photo_url`;
+ADD COLUMN `identity_photo_url`  char(18) NULL AFTER `id`;
+
 
 
 ALTER TABLE `tenant_private`
 ADD COLUMN `operator_name`  varchar(255) NULL AFTER `id`,
-ADD COLUMN `in_date_begin`  datetime NULL AFTER `operator_name`,
-ADD COLUMN `in_date_end`  datetime NULL AFTER `in_date_begin`,
-ADD COLUMN `business_scope`  varchar(255) NULL AFTER `in_date_end`,
+ADD COLUMN `indate_begin`  datetime NULL AFTER `operator_name`,
+ADD COLUMN `indate_end`  datetime NULL AFTER `indate_begin`,
+ADD COLUMN `business_scope`  varchar(255) NULL AFTER `indate_end`,
 ADD COLUMN `business_license`  varchar(255) NULL AFTER `business_scope`,
 ADD COLUMN `tax_registration_attachment`  varchar(255) NULL AFTER `business_license`;
 
 
 -------------------------------------------------------------------------------------------
+CREATE TABLE `base_auto_serial` (
+	`id` varchar(50) NOT NULL COMMENT '0',
+	`serial` bigint(10) NULL COMMENT '0',
+	`groupName` varchar(25) NULL COMMENT '0',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `core_p_auto_serial` (
+	`id` varchar(50) NOT NULL,
+	`serial` bigint(10) NULL,
+	`groupName` varchar(25) NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE `tenant_master` (
+`id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`tenant_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`master_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`status`  char(4) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+=================================================以上 已执行======================================================
+
+--------------------------------------未执行-------------------------

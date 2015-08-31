@@ -28,13 +28,14 @@
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
             <div class="am-form-group">
-                <label for="name" class="am-u-sm-3 am-form-label">姓名拼音</label>
+                <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="姓名拼音 / NamePinYi" value="${object.name}" required>
+                    <input type="text" id="name" name="name" placeholder="商家名称" value="${object.name}" required>
                 </div>
             </div>
-            <%--<div class="am-form-group">--%>
+
+        <%--<div class="am-form-group">--%>
                 <%--<label for="fullName" class="am-u-sm-3 am-form-label">中文姓名</label>--%>
 
                 <%--<div class="am-u-sm-9">--%>
@@ -76,6 +77,23 @@
                     <%--<small>输入短简介,限30字以内</small>--%>
                 <%--</div>--%>
             <%--</div>--%>
+            <div class="am-form-group">
+                <label for="logo" class="am-u-sm-3 am-form-label">类型</label>
+                <div style="margin-top: 10px;">
+                    <span style="padding: 10px;">
+                      <input type="radio" name="tenantType" value="11" />
+                        企业
+                    </span>
+                    <span style="padding: 10px;">
+                      <input type="radio" name="tenantType" value="12" />
+                        个体
+                    </span>
+                    <span style="padding: 10px;">
+                      <input type="radio" name="tenantType" value="13" />
+                        个人
+                    </span>
+                </div>
+            </div>
 
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
@@ -85,5 +103,13 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(function(){
+        var t = '${object.tenantType}';
+        $("input[name='tenantType'][value='"+t+"']").attr("checked",true);
+    });
+
+</script>
 </body>
 </html>

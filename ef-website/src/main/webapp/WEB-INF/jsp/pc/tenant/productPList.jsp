@@ -7,7 +7,7 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="<c:url value="/scripts/assets/upload/shop-1.jpg"/>" alt=""/></div>
+        <div class="img"><img src="<c:url value="/scripts/upload/shop-1.jpg"/>" alt=""/></div>
             <span class="des">
                 <p><h1>杨柳青年画</h1></p>
               <p><font>天津</font><font>杨柳青</font><font>国家级传承人霍庆有</font></p>
@@ -23,7 +23,7 @@
   <!-- //End--shop-header-->
   <div class="focus wh">
     <ul class="slider-main">
-      <li style="display: block;"><img src="<c:url value="/scripts/assets/upload/master-1.jpg"/>" width="1280" height="481" alt=""/></li>
+      <li style="display: block;"><img src="<c:url value="/scripts/upload/master-1.jpg"/>" width="1280" height="481" alt=""/></li>
     </ul>
   </div>
   <!-- //End--focus-->

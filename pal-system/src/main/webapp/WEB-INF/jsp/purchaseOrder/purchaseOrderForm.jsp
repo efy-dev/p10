@@ -20,7 +20,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form action="<c:url value='/order/savePurchaseOrder.do'/>" method="post" class="am-form am-form-horizontal">
+    <form id="purchaseOrderFrom" action="<c:url value='/order/savePurchaseOrder.do'/>" onsubmit="return afterSubmitForm('purchaseOrderFrom')" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
@@ -28,7 +28,7 @@
             <div class="am-u-sm-9">
                 <input type="text" id="tenant_idName" placeholder="商户名称"
                        onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')"
-                       value="${object.tenant.name}" required>
+                       value="${object.tenant.name}" required="true" readonly>
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>
