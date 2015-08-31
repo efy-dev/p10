@@ -19,8 +19,6 @@
       var id = $(o).next().next().next().val();
       $("#price").text(price);
       $("#marketPrice").text("市场价：￥"+marketPrice);
-      // window.location.href="<c:url value="/cart/addProduct.do?id="/>"+id;
-//    return /cart/addProduct.do?id;
     }
   </script>
 

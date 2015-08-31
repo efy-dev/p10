@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/layouts/public.jsp"%>
 <html>
 <head>
     <title></title>
@@ -51,7 +50,7 @@
         </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="button" onclick="testAjaxSubmitForm('tenantForm', '/tenant/saveTenantAjax.do', '<%= basePath%>');" class="am-btn am-btn-primary" value="保存"/>
+                <input type="button" onclick="testAjaxSubmitForm('tenantForm', '<c:url value="/tenant/saveTenantAjax.do"/>');" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
         <%--<div class="am-form-group">--%>

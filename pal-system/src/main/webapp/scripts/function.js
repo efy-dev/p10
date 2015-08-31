@@ -116,7 +116,7 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, conditi
     }
 };
 
-function testAjaxSubmitForm(formId, url, basePath) {
+function testAjaxSubmitForm(formId, url) {
     var form2 = document.getElementById(formId);
 
     var a = form2.elements.length;//所有的控件个数
@@ -138,7 +138,7 @@ function testAjaxSubmitForm(formId, url, basePath) {
         dataType: "json",
         success: function (data) {
             form2.reset();
-            window.location.href = basePath + data;
+            window.location.href = data;
         },
         error: function (message) {
             alert(message.responseText);
