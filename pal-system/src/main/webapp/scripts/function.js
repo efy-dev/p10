@@ -28,13 +28,13 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
                 var out = modalStart + modalContent + modalEnd;
                 $("body").append(out);
                 $("#" + artDialogLogId + artDialogLogName).modal({
-                    width: 400, height: 225
+                    width: 500, height: 300
                 });
             }
         });
     } else {
         $("#" + artDialogLogId + artDialogLogName).modal({
-            width: 400, height: 225
+            width: 500, height: 300
         });
     }
 }
@@ -71,7 +71,7 @@ function dialog2(url, artDialogLogId, artDialogLogName) {
             }
             $("body").append(out);
             $("#" + artDialogLogId + artDialogLogName).modal({
-                width: 400, height: 225
+                width: 500, height: 300
             });
         }
     });
@@ -117,31 +117,35 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, conditi
 };
 
 function testAjaxSubmitForm(formId, url) {
-    var form2 = document.getElementById(formId);
+    if (afterSubmitForm(formId)){
+        $.ajax({
+            type: "post",
+            url: url,
+            data: $("#" + formId).serialize(),
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                document.getElementById(formId).reset();
+                window.location.href = data;
+            },
+            error: function (message) {
+                alert(message.responseText);
+            }
+        });
+    }
+}
 
+function afterSubmitForm(formId){
+    var form2 = document.getElementById(formId);
     var a = form2.elements.length;//所有的控件个数
     for (var j=0;j<a;j++){
         if(form2.elements[j].required){
             if(form2.elements[j].value=="" || form2.elements[j].value==null){
                 alert(form2.elements[j].placeholder + "不能为空");
                 form2.elements[j].focus();
-                return;
+                return false;
             }
         }
     }
-
-    $.ajax({
-        type: "post",
-        url: url,
-        data: $("#" + formId).serialize(),
-        cache: false,
-        dataType: "json",
-        success: function (data) {
-            form2.reset();
-            window.location.href = data;
-        },
-        error: function (message) {
-            alert(message.responseText);
-        }
-    });
+    return true;
 }
