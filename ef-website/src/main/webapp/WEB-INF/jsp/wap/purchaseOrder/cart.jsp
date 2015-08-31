@@ -65,8 +65,8 @@
         <div class="bd payment-total-bar">
             <input type="checkbox" class="checkbox" onclick="chooseAll(this,'${cart.id}')"/>
             <span class="txt" id="totalPrice">${cart.totalPrice}</span>
-            <a href="<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>"
-               class="btn-right">结算<em>（${cart.cartProductList.size()}）</em></a>
+            <a onclick="submit()"
+               class="btn-right btn-settle">结算<em>（${cart.cartProductList.size()}）</em></a>
         </div>
 
     </article>
@@ -146,6 +146,20 @@
     </article>
 </c:if>
 <script>
+    function submit(){
+
+        var param = {cartId:'${cart.id}'}
+
+        var success = function(data){
+            if(data){
+                window.location.href = "<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>"
+            }else{
+               showAlert("提示","请选中一件商品!");
+            }
+        }
+        ajaxRequest("<c:url value="/cart/cartCheck.do"/>", param, success, function () {
+        }, "post")
+    }
 
     function addProduct(cartProductId) {
         var param = {

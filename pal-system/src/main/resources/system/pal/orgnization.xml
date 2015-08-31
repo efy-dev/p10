@@ -22,7 +22,7 @@
                 <do name="viewTenant" label="商户信息详情页" access="" result="/tenant/tenantView"/>
                 <do name="removeTenant" label="删除商户信息" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"
                     execute="com.efeiyi.pal.system.organization.controller.TenantRemoveHandler"/>
-
+                <do name="saveOrUpdateTenant" label="新建或更新商户信息" access=""/>
             </does>
         </entity>
 

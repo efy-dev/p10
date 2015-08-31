@@ -1,16 +1,10 @@
 package com.efeiyi.ec.website.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductFavorite;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
-import com.efeiyi.ec.project.model.ProjectProperty;
-import com.efeiyi.ec.project.model.ProjectPropertyValue;
-import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -147,4 +141,5 @@ public class ProductController {
         model.addAttribute("product", product);
         return "/product/productDetails";
     }
+
 }
