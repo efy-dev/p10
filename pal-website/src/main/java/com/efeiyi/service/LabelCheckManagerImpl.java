@@ -219,7 +219,6 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
             if (label.getCheckCount() == 1) {
                 label.setStatus(PalConst.getInstance().usedStatus);
-                label.setFirstCheckDateTime(date);
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
             } else {
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().wrongBean);
@@ -274,6 +273,10 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
         }
         //更新标签状态
         label.setLastCheckDateTime(date);
+        //更新首次查询时间
+        if(label.getCheckCount() == 1){
+            label.setFirstCheckDateTime(date);
+        }
         palDao.saveOrUpdate(label.getClass().getName(), label);
 
     }
