@@ -137,13 +137,6 @@ public class ProductController {
     public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
-        List<ProductModel> productModelListTmp = product.getProductModelList();
-        model.addAttribute("productModelList", productModelListTmp);
-        model.addAttribute("productModel", productModel);
-        model.addAttribute("product", product);
-        return "/product/productDetails";
-    }
-    private List<String> getMainPicture(Product product){
         List<ProductPicture> list = product.getProductPictureList();
         List<String> stringList = new ArrayList<String>();
         for(ProductPicture picture:list){
@@ -151,6 +144,12 @@ public class ProductController {
                 stringList.add(picture.getPictureUrl());
             }
         }
-        return stringList;
+        List<ProductModel> productModelListTmp = product.getProductModelList();
+        model.addAttribute("productModelList", productModelListTmp);
+        model.addAttribute("productModel", productModel);
+        model.addAttribute("product", product);
+        model.addAttribute("mainPicture",stringList.get(0));
+        return "/product/productDetails";
     }
+
 }
