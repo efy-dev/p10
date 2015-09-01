@@ -25,6 +25,9 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
                         "<a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "')\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a>" +
                         "</div>";
                 }
+                if(data.length == 0){
+                    modalContent = "<div style='color: red'>没有您需要的信息!</div>";
+                }
                 var out = modalStart + modalContent + modalEnd;
                 $("body").append(out);
                 $("#" + artDialogLogId + artDialogLogName).modal({
@@ -164,7 +167,7 @@ function myConfirm(url, type){
         AValue.setAttribute("style","color: red;display");
         CValue.setAttribute("style","color: red;display:none");
     }
-    if(type == "C"){
+    if(type == "C" || type == "CA"){
         DValue.setAttribute("style","color: red;display:none");
         AValue.setAttribute("style","color: red;display:none");
         CValue.setAttribute("style","color: red;display");
@@ -174,10 +177,29 @@ function myConfirm(url, type){
         //width:300,
         //height:100,
         onConfirm: function() {
-            window.location.href = url;
+            if(type == "CA"){
+                cancelOneLabel(url)
+            }else{
+                window.location.href = url;
+            }
         },
         onCancel: function() {
             alert('算求，不弄了');
+        }
+    });
+}
+
+function cancelOneLabel(url){
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            window.location.reload();
+        },
+        error: function (message) {
+            alert(message.responseText);
         }
     });
 }
