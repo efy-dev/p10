@@ -50,8 +50,10 @@
     var register = "<c:url value="/register"/> ";
 
     if (typeof WeixinJSBridge == "undefined") {
+        alert("not weixin");
         $("#signin").attr("href", register);
     } else {
+        alert("weixin");
         $("#signin").attr("href", registerWx);
     }
 </script>
