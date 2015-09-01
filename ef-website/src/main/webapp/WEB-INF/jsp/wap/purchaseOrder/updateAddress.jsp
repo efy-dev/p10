@@ -50,6 +50,14 @@
 
 </div>
 <script>
+  function putVal(o){
+    var ele = document.getElementById("checkbox");
+    if(ele.checked){
+      $(o).val("1");
+    }else{
+      $(o).val("0");
+    }
+  }
 
   $(function () {
     $("#add").click(function () {
@@ -158,7 +166,7 @@
     )
   }
 
-  function (element,provinceId,cityId,o){
+  function chooseCity(element,provinceId,cityId,o){
     $(element).val(provinceId);
     var callback = function(){
       $("#citys" + o).val(cityId);
@@ -166,7 +174,7 @@
     provinceChange(element, o,callback);
   }
 
-  ($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
+  chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
 
   $().ready(function () {
     $("#addAddress").validate({
@@ -187,5 +195,6 @@
     });
   });
 </script>
+<script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 </body>
 </html>
