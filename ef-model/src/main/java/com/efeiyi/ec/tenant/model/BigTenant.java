@@ -29,7 +29,6 @@ public class BigTenant implements Serializable,BaseTenant {
 
     private String id;
     private String name;//名称标识
-    private String fullName;
     private String content; // 简介(长)
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
@@ -44,19 +43,30 @@ public class BigTenant implements Serializable,BaseTenant {
     //个体信息
 
     //公司信息
-
-    //   private List<TenantProject> tenantProjectList;
+    private  List<TenantMaster> tenantMasterList;
+    private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
 
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
-//    public List<TenantProject> getTenantProjectList() {
-//        return tenantProjectList;
-//    }
-//
-//    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
-//        this.tenantProjectList = tenantProjectList;
-//    }
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantProject> getTenantProjectList() {
+        return tenantProjectList;
+    }
+
+    public void setTenantProjectList(List<TenantProject> tenantProjectList) {
+        this.tenantProjectList = tenantProjectList;
+    }
+
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
+    public List<TenantMaster> getTenantMasterList() {
+        return tenantMasterList;
+    }
+
+    public void setTenantMasterList(List<TenantMaster> tenantMasterList) {
+        this.tenantMasterList = tenantMasterList;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -78,14 +88,6 @@ public class BigTenant implements Serializable,BaseTenant {
         this.name = name;
     }
 
-    @Column(name = "full_name")
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     @Column(name = "content")
     public String getContent() {
@@ -160,7 +162,7 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_province_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_province_id")
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }
@@ -180,7 +182,7 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_city_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_city_id")
     public AddressCity getAddressCity() {
         return addressCity;
     }

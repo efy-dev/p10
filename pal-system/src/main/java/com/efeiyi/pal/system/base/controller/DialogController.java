@@ -5,7 +5,6 @@ import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XQuery;
@@ -16,13 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/7/29.
@@ -38,7 +33,6 @@ public class DialogController {
     @Autowired
     private AutoSerialManager autoSerialManager;
 
-    private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
     /**

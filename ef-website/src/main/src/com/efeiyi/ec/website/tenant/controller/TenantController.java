@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.tenant.controller;
 
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Page;
 import com.ming800.core.does.model.PageInfo;
@@ -35,6 +36,18 @@ public class TenantController {
         model.addAttribute("productModelList", pageInfo.getList());
         model.addAttribute("tenantId",tenantId);
         return "/tenant/productPList";
+    }
+
+    @RequestMapping({"/tenantOfMobile/view"})
+    public String listProductOfMobile(HttpServletRequest request,Model model) throws Exception {
+        XQuery xQuery = new XQuery("listProductModel_default1", request);
+        String tenantId = request.getParameter("product.tenant.id");
+        xQuery.put("product_tenant_id",tenantId);
+        List list = baseManager.listObject(xQuery);
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        model.addAttribute("productModelList", list);
+        model.addAttribute("tenant",tenant);
+        return "/tenant/productList";
     }
 
 }

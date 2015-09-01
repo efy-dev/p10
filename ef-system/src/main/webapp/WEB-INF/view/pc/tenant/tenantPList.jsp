@@ -36,7 +36,9 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span>新建商家</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formEnterpriseTenant"/>"><span class="am-icon-plus"></span>新建企业商家</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formPrivateTenant"/>"><span class="am-icon-plus"></span>新建个体商家</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formPersonalTenant"/>"><span class="am-icon-plus"></span>新建个人商家</a>
                 </div>
             </div>
         </div>
@@ -46,6 +48,7 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">商家名称</th>
+                    <th class="table-title">商家类型</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,8 +76,6 @@
                                            href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
-
-
                                     </c:if>
                                     <c:if test="${not empty tenant.tenantRecommendedList}">
                                         <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
@@ -86,6 +87,24 @@
                                             </c:if>
                                         </c:forEach>
 
+                                    </c:if>
+                                    <c:if test="${tenant.tenantType == '11'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formEnterprisesTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${tenant.tenantType == '12'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formPrivaterTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${tenant.tenantType == '13'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formPersonTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
                                     </c:if>
                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
@@ -101,6 +120,17 @@
                                     <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
                                 </c:if>
                             </c:forEach>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${tenant.tenantType == '11'}">
+                                  企业
+                            </c:if>
+                            <c:if test="${tenant.tenantType == '12'}">
+                                个体
+                            </c:if>
+                            <c:if test="${tenant.tenantType == '13'}">
+                                个人
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>

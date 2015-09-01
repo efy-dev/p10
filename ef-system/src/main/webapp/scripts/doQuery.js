@@ -256,7 +256,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
                 if (queryConditionArray[i].inputType == "date"){
                     tagStr += " id=\"" + tempId + j +"\"" +
                         " name=\"" + queryConditionArray[i].propertyName + "\"" +
-                        " value=\"" + thePropertyValue + "\"/>";
+                        " />";
                 }else {
                     tagStr += " id=\"" + tempId  +"\"" +
                         " name=\"" + queryConditionArray[i].propertyName + "\"" +
@@ -277,7 +277,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
 
         }
     }
-    tagStr += " <input id=\"search\" class=\"am-btn am-btn-default\" type=\"submit\" onclick=\"generateValue('" + divId + "');\" value=\"查找\"/> ";
+    tagStr += " <input class=\"am-btn am-btn-default\" type=\"submit\" onclick=\"generateValue('" + divId + "');\" value=\"查找\"/> ";
 
     tagStr += "</form>";
     tagStr += "</div>";
@@ -297,7 +297,10 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
         tagStr += "</div>";
     }
 
-    $("#" + divId).html(tagStr);
+    var div =  $("#" + divId);
+
+    div.append(tagStr);
+
 
     addSelectAndRadios(conditions);
 

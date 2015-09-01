@@ -33,7 +33,7 @@ ADD COLUMN `address_district_id`  char(16) NULL AFTER `email`;
 
 ALTER TABLE `organization_consumer_address`
 ADD COLUMN `consumer_id`  char(16) NULL AFTER `address_district_id`;
-2015-8-5 efc
+
 ALTER TABLE `organization_consumer_address`
 ADD COLUMN `status`  varchar(2) NULL AFTER `consumer_id`;
 
@@ -47,7 +47,7 @@ CREATE TABLE `product_property_value` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `NewTable` (
+CREATE TABLE `product_model` (
   `id`  char(16) NOT NULL ,
   `serial`  char(32) NULL ,
   `price`  decimal NULL ,
