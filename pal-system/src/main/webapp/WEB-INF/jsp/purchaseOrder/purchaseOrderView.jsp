@@ -28,20 +28,20 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${object.id}"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="编辑"/>
-    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
-    <input onclick=""
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="删除" />
+    <c:if test="${object.status == '1' || object.status == '2'}">
+        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
+        <input id="delOrder" onclick=""
+        <%--<input onclick="delConfirm('<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>')"--%>
+               type="button" class="am-btn am-btn-warning am-btn-xs"
+               style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+               value="删除" />
+    </c:if>
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
+<%--<jsp:include page="../jmenu/delConfirm.jsp"/>--%>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">订单详情</strong>

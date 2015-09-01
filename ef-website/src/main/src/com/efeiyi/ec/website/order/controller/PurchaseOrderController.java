@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -18,7 +19,6 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +31,8 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -109,9 +111,42 @@ public class PurchaseOrderController extends BaseController {
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        PurchaseOrderDelivery purchaseOrderDelivery= (PurchaseOrderDelivery) baseManager.getObject(PurchaseOrderDelivery.class.getName(),orderId);
-        model.addAttribute("purchaseOrderDelivery", purchaseOrderDelivery);
-        return "/purchaseOrder/purchaseOrderView";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("orderId",orderId);
+        String hql="from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
+        PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
+        String pd=purchaseOrderDelivery.getLogisticsCompany();
+        String serial=purchaseOrderDelivery.getSerial();
+        model.addAttribute("purchaseOrderDelivery",purchaseOrderDelivery);
+        String content = "";
+        try
+        {
+            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + "yunda" + "&nu=" + "1700173247399");
+            URLConnection con = url.openConnection();
+            con.setAllowUserInteraction(false);
+            InputStream urlStream = url.openStream();
+            byte b[] = new byte[10000];
+            int numRead = urlStream.read(b);
+            content = new String(b, 0, numRead);
+            while (numRead != -1)
+            {
+                numRead = urlStream.read(b);
+                if (numRead != -1)
+                {
+                    String newContent = new String(b, 0, numRead, "UTF-8");
+                    content += newContent;
+                }
+            }
+            urlStream.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.print(content);
+        model.addAttribute("content", content);
+
+    return "/purchaseOrder/purchaseOrderView";
     }
 
     @RequestMapping({"/pay/alipay/{orderId}"})
