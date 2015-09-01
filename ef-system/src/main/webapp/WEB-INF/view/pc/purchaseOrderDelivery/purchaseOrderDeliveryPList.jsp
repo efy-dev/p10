@@ -29,6 +29,7 @@
                 <tr>
                     <th class="table-title">发货记录编号</th>
                     <th class="table-title">订单号</th>
+                    <th class="table-title">物流公司</th>
                     <th class="table-title">发货状态</th>
                     <th class="table-title">发送日期</th>
                     <th class="table-title">发送地址</th>
@@ -44,6 +45,7 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
                         </td>
+                        <td class="am-hide-sm-only">${purchaseOrderDelivery.logisticsCompany}</td>
                         <td>
                             <ming800:status name="status" dataType="purchaseOrderDelivery.status"
                                             checkedValue="${purchaseOrderDelivery.status}"

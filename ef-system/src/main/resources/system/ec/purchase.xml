@@ -217,6 +217,7 @@
                     <statusType fieldName="payWay">
                         <item label="支付宝" value="1"/>
                         <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
                     </statusType>
                 </field>
                 <field name="status" label="支付状态" inputType="text">
