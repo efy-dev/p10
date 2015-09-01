@@ -60,9 +60,24 @@
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})"><span
-                                                    class="am-icon-trash-o">删除</span>
-                                            </button>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${product.id}"/>">
+                                                修改基本信息
+                                            </a>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&id=${product.id}"/>">
+                                                修改描述
+                                            </a>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&id=${product.id}"/>">
+                                                修改属性
+                                            </a>
+                                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">--%>
+                                                <%--修改图片--%>
+                                            <%--</a>--%>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})">
+                                                删除
+                                            </a>
+                                            <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})"><span--%>
+                                                    <%--class="am-icon-trash-o">删除</span>--%>
+                                            <%--</button>--%>
                                             <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
                                                <%--href="<c:url value="/product/recommendedProduct.do?id=${product.id}&categoryId=${product.category.id}"/>"><span--%>
                                                     <%--class="am-icon-trash-o">推荐</span>--%>
@@ -87,7 +102,21 @@
                 </ming800:pcPageList>
             </div>
         </div>
+<script>
+    function removeProduct(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
 
+</script>
 
 </body>
 </html>

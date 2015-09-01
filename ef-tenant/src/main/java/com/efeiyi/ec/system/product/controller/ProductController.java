@@ -105,7 +105,7 @@ public class ProductController extends BaseController {
                 aliOssUploadManager.uploadFile(mf, "tenant", url);
                 if(product!=null) {
                     productPicture.setPictureUrl(url);
-                    productPicture.setStatus(request.getParameter("status"));
+                    productPicture.setStatus("1");
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
                     data = productPicture.getId()+":"+url;
@@ -192,16 +192,27 @@ public class ProductController extends BaseController {
         return resultPage;
     }
 
-    @RequestMapping("/updateModelPicture.do")
+    @RequestMapping("/deletePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id){
+    public String deletePicture(String id){
          try {
-             ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),id);
-             productModel.setProductModel_url(null);
-             baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+            baseManager.delete(ProductPicture.class.getName(),id);
          }catch (Exception e){
               e.printStackTrace();
          }
+        return  id;
+    }
+
+    @RequestMapping("/updatePicture.do")
+    @ResponseBody
+    public String updateModelPicture(String id,String status){
+        try {
+            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+            productPicture.setStatus(status);
+            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return  id;
     }
 

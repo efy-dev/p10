@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/layouts/public.jsp"%>
 <script type="text/javascript" src="<c:url value="/scripts/doQuery.js?m=2.4"/>"></script>
 <script type="text/javascript" src="<c:url value="/scripts/function.js?m=2.4"/>"></script>
 <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
@@ -36,6 +37,6 @@
 <br/>
 <script>
     <c:forEach items="${doQueryList}" var="doQuery">
-    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}')
+    generateCondition('<%=basePath%>','<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}')
     </c:forEach>
 </script>

@@ -36,9 +36,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formEnterpriseTenant"/>"><span class="am-icon-plus"></span>新建企业商家</a>
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formPrivateTenant"/>"><span class="am-icon-plus"></span>新建个体商家</a>
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formPersonalTenant"/>"><span class="am-icon-plus"></span>新建个人商家</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span>新建商家</a>
                 </div>
             </div>
         </div>
@@ -76,6 +74,8 @@
                                            href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
+
+
                                     </c:if>
                                     <c:if test="${not empty tenant.tenantRecommendedList}">
                                         <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
@@ -87,24 +87,6 @@
                                             </c:if>
                                         </c:forEach>
 
-                                    </c:if>
-                                    <c:if test="${tenant.tenantType == '11'}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formEnterprisesTenant&id=${tenant.id}"/>" >
-                                            <span class="am-icon-heart">完善信息</span>
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${tenant.tenantType == '12'}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formPrivaterTenant&id=${tenant.id}"/>" >
-                                            <span class="am-icon-heart">完善信息</span>
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${tenant.tenantType == '13'}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           href="<c:url value="/basic/xm.do?qm=formPersonTenant&id=${tenant.id}"/>" >
-                                            <span class="am-icon-heart">完善信息</span>
-                                        </a>
                                     </c:if>
                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
