@@ -77,7 +77,7 @@
         <tr>
             <td>防伪标签</td>
             <td>
-                <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.id:${object.id}"/>">查看标签</a>
+                <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.serial:${object.serial}"/>">查看标签</a>
             </td>
         </tr>
         </c:if>
