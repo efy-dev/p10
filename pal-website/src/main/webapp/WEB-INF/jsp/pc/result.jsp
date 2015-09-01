@@ -111,6 +111,7 @@
             </div>
         </div>
         <!--//End-->
+            <c:if test="${result.authenticity != -1}">
         <div class="item-info">
             <h2>商品信息</h2>
 
@@ -133,7 +134,7 @@
                 </table>
             </div>
         </div>
-
+            </c:if>
         <c:if test="${result.authenticity == 1}">
         <div class="item-info">
             <h2>认证信息</h2>
