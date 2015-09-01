@@ -64,25 +64,11 @@ public class ProductController {
             product = productModel.getProduct();
             list = product.getProductPictureList();
         }
-
-        List<String> stringList = new ArrayList<String>();
-        if(list!=null&&list.size()>0){
-        for(ProductPicture picture:list){
-            if("2".equals(picture.getStatus())){
-                stringList.add(picture.getPictureUrl());
-            }
-        }
-        }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
-        String mainPictureUrl = new String();
-        if(stringList!=null&&stringList.size()>0){
-            mainPictureUrl = stringList.get(0);
-        }
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
         model.addAttribute("productModelList",productModelList);
-        model.addAttribute("mainPicture",mainPictureUrl);
         return "/product/productModelList";
     }
 
