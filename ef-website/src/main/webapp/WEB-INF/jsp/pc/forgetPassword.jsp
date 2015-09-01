@@ -83,7 +83,6 @@
 
     $("#verificationButton").click(function () {
       var userName = $("#phone").val();
-      alert(userName);
       $.ajax({
         type: 'post',
         async: false,
