@@ -51,10 +51,11 @@
       <tr>
         <th>*所在地</th>
         <td>
-          <select id="provinceVal" onchange="province(this);" name="addressProvince.id">
+          <select id="${object.id}" name="addressProvince.id" class="cars"
+                  onchange="provinceChange(this , '${object.id}')">
             <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
           </select>
-          <select id="cityVal" name="addressCity.id">
+          <select id="citys${object.id}" name="addressCity.id" class="car1">
             <option value="${object.addressCity.id}">${object.addressCity.name}</option>
           </select>
         </td>
@@ -68,60 +69,45 @@
   </form>
 </center>
 <script>
-
-  function province(obj) {
-    var v = $(obj).val();
-    $("#provinceVal").empty();
-    $.ajax({
-      type: 'post',
-      url: '<c:url value="/address/listProvince.do"/>',
-      dataType: 'json',
-      success: function (data) {
-        var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for (var i = 0; i < obj.length; i++) {
-          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-        }
-        $("#provinceVal").append(rowHtml);
-        $("#provinceVal option[value='" + v + "']").attr("selected", "selected");
-        city(v);
-      },
-    });
+  function chooseCity(element,provinceId,cityId,o){
+    $(element).val(provinceId);
+    var callback = function(){
+      $("#citys" + o).val(cityId);
+    }
+    provinceChange(element, o,callback);
   }
 
-  function city(obj) {
-    var pid = $("#provinceVal").val();
-    var v = $(obj).val();
-    $("#cityVal").empty();
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/address/listCity.do"/>',
-      dataType: 'json',
-      data: {
-        provinceId: pid
-      },
-      success: function (data) {
-        var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for (var i = 0; i < obj.length; i++) {
-          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-        }
-        $("#cityVal").append(rowHtml);
-        $("#cityVal option[value='" + v + "']").attr("selected", "selected");
+  $.post("<c:url value="/address/listProvince.do"/>",
+          function (data) {
+            var obj = eval(data);
+            var out = '<option value="">请选择</option>';
+            for (var i = 0; i < obj.length; i++) {
+              console.log(obj[i]+"----"+obj[i]);
+              out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
+            }
+            $("#${object.id}").append(out);
+            chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");
+          }
+  )
 
-      },
-    });
+  function provinceChange(element, o, callback) {
+    $("#citys" + o).empty();
+    var provinceId = $(element).val();
+    $.post("<c:url value="/address/listCity.do"/>",
+            {provinceId: provinceId},
+            function (data) {
+              var obj = eval(data);
+              var out = '<option value="">请选择</option>';
+              for (var i = 0; i < obj.length; i++) {
+                out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
+              }
+              $("#citys" + o).append(out);
+              if(typeof callback!= "undefined"){
+                callback();
+              }
+            }
+    )
   }
-
-  $().ready(function(){
-    province();
-  })
-
-
-
 </script>
 </body>
 </html>

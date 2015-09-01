@@ -23,7 +23,7 @@
 <hr/>
 
 <div class="am-g">
-
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
         <fieldset>
             <legend>
                 <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${object.id}"/>">
@@ -93,6 +93,7 @@
                 </div>
             </c:if>
         </fieldset>
+        </form>
         <fieldset>
             <legend>
                 <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
