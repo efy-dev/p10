@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.organization.controller;
+package com.efeiyi.ec.system.tenant.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;

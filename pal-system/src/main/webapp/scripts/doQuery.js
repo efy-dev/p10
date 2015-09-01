@@ -15,7 +15,7 @@ function generateValue(divId) {
 
     var conditionsValue = "";
 
-    var defaultConditionsValue = document.getElementById("defaultConditions"+divId).value;
+    var defaultConditionsValue = document.getElementById("inputConditions"+divId).value;
     var tempArray = queryConditionArrayMap[divId];
     for (var i = 0,j = 1; i < tempArray.length; i++) {
         var propertyName = tempArray[i].propertyName;
@@ -45,7 +45,7 @@ function generateValue(divId) {
                     tempIdValue = tempIdObject.val();
                 }
             } else {
-                tempIdValue = document.getElementById(tempId).value;
+                tempIdValue = document.getElementById("inputConditions"+divId).value;
                 //tempIdValue =  $("#"+tempId).val();
                 //alert($("#"+tempId).val());
                 //alert($("#"+tempId).attr("id"));
@@ -87,7 +87,7 @@ function generateValue(divId) {
 }
 
 
-function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
+function generateCondition(basePath,url,divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
 
     queryConditionArray = new Array();
 
@@ -115,7 +115,7 @@ function generateCondition(url,divId, queryModel, queryLabel, conditions, model,
                     queryConditionArrayTemp.push(queryCondition);
                 }
                 queryConditionArrayMap[divId] = queryConditionArrayTemp;
-                generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle, title);
+                generateHtml(basePath,divId, queryModel, queryLabel, conditions, model, tabTitle, title);
                 queryConditionArray = new Array();
 
             }
@@ -186,9 +186,9 @@ function addOptions(tempId, url, defaultValue, data, inputType, required) {
 
 
 
-function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
+function generateHtml(basePath,divId, queryModel, queryLabel, conditions, model, tabTitle, title) {
     var tagStr = "<div class=\"queryDiv inline-block\">";
-    tagStr += "<form class='am-form-inline' id=\"form\" action=\"/basic/xm.do?qm=" + queryModel + "_" + divId + "\" method=\"post\">";
+    tagStr += "<form class='am-form-inline' id=\"form\" action=\" " + basePath + "/basic/xm.do?qm=" + queryModel + "_" + divId + "\" method=\"post\">";
 
     tagStr += " <input type=\"hidden\" id=\"conditions"+divId+"\" name=\"conditions\"/> ";
 
@@ -262,7 +262,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
                         " value=\"" + thePropertyValue + "\"/>";
                 }else {
                     //tagStr += " id=\"" + tempId  +"\"" +
-                    tagStr += " id='" + tempId  +"'" +
+                    tagStr += " id='inputConditions" + divId  +"'" +
                         " name=\"" + queryConditionArray[i].propertyName + "\"" +
                         " value=\"" + thePropertyValue + "\"/>";
                 }
