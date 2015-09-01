@@ -54,7 +54,7 @@
 
         <div class="am-u-sm-9">
                 <span style="padding: 10px;">
-                       <c:if test="${!empty object.frontPhotoUrl}">
+                       <c:if test="${!empty object.versoPhotoUrl}">
                          <img width="7%" src="http://tenant.efeiyi.com/${object.versoPhotoUrl}@!product-model">
                        </c:if>
                 </span>
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="am-form-group">
-        <label for="identityPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版正面</label>
+        <label for="identityPhotoUrl" class="am-u-sm-3 am-form-label">*手持身份证电子版</label>
 
         <div class="am-u-sm-9">
                 <span style="padding: 10px;">
@@ -162,7 +162,7 @@
         data = data.substring(1,data.length-1)
         var pictureId = data.split(":")[0].trim();
         var  imgUrl = data.split(":")[1];
-        var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+        var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!product-model";
         ///图片信息
         var tr = '<tr name = "'+pictureId+'">' +
                 ' <td>  ' +
