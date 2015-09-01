@@ -22,72 +22,128 @@
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="type" value="12" />
     <table>
-      <tr>
-        <th>*名称</th>
-        <td>
-          <input type="text" id="name" name="name" value="${object.name}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*经营者姓名</th>
-        <td>
-          <input type="text" id="operatorName" name="operatorName" value="${object.operatorName}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*身份证号</th>
-        <td>
-          <input type="text" id="identity" name="identity" value="${object.identity}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*经营者身份证电子版</th>
-        <td>
-          <input type="file" id="frontPhotoUrl" name="frontPhotoUrl" value="${object.frontPhotoUrl}"/>
-          <input type="file" id="versoPhotoUrl" name="versoPhotoUrl" value="${object.versoPhotoUrl}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*营业执照所在地</th>
-        <td>
-          <select id="${object.id}" name="addressProvince.id" class="cars"
-                  onchange="provinceChange(this , '${object.id}')">
+      <div class="am-form-group">
+        <label for="name" class="am-u-sm-3 am-form-label">*名称</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="name" name="name" placeholder="name" value="${object.name}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="operatorName" class="am-u-sm-3 am-form-label">经营者姓名</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="operatorName" name="operatorName" placeholder="经营者姓名" value="${object.operatorName}">
+        </div>
+      </div>
+
+      <div class="am-form-group">
+        <label for="identity" class="am-u-sm-3 am-form-label">身份证号</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="identity" name="identity" placeholder="身份证号" value="${object.identity}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="frontPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版正面</label>
+
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.frontPhotoUrl}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.frontPhotoUrl}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="frontPhotoUrl" name="frontPhotoUrl" placeholder="frontPhotoUrl"
+                 value="${object.frontPhotoUrl}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="versoPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版反面</label>
+
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.frontPhotoUrl}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.versoPhotoUrl}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="versoPhotoUrl" name="versoPhotoUrl" placeholder="versoPhotoUrl"
+                 value="${object.versoPhotoUrl}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
+        <div class="am-u-sm-9" style="margin-top: 10px">
+          <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
             <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
           </select>
-          <select id="citys${object.id}" name="addressCity.id" class="car1">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>
+        <div class="am-u-sm-9" style="margin-top: 10px">
+          <select id="citys${object.id}" name="addressCity.id">
             <option value="${object.addressCity.id}">${object.addressCity.name}</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <th>*营业执照有效期</th>
-        <td>
-          <input type="text" id="indateBegin" name="indateBegin" value="${object.indateBegin}"/>至<input type="text" id="indateEnd" name="indateEnd" value="${object.indateEnd}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*经营范围</th>
-        <td>
-          <label for="businessScope"></label><textarea type="text" id="businessScope" name="businessScope" cols="3" rows="4">${object.businessScope}</textarea>
-        </td>
-      </tr>
-      <tr>
-        <th>*营业执照副本电子版</th>
-        <td>
-          <input type="file" id="businessLicense" name="businessLicense" value="${object.businessLicense}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*税务登记证电子版</th>
-        <td>
-          <input type="file" id="taxRegistrationAttachment" name="taxRegistrationAttachment" value="${object.taxRegistrationAttachment}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="submit" value="保存个体信息"/>
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="indateBegin" class="am-u-sm-3 am-form-label">*营业执照生效日期</label>
+
+        <div class="am-u-sm-9">
+          <div class="am-form-group am-form-icon">
+            <i class="am-icon-calendar"></i>
+            <input type="text" id="indateBegin" name="indateBegin" class="am-form-field am-input-sm"
+                   placeholder="生效日期" value="${object.indateBegin}" data-am-datepicker readonly>
+          </div>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="indateEnd" class="am-u-sm-3 am-form-label">营业执照失效日期</label>
+
+        <div class="am-u-sm-9">
+          <div class="am-form-group am-form-icon">
+            <i class="am-icon-calendar"></i>
+            <input type="text" id="indateEnd" name="indateEnd" class="am-form-field am-input-sm"
+                   placeholder="失效日期"  value="${object.indateEnd}" data-am-datepicker readonly>
+          </div>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="businessScope" class="am-u-sm-3 am-form-label">*经营范围</label>
+
+        <div class="am-u-sm-9">
+          <textarea type="text" id="businessScope" name="businessScope" cols="3" rows="4">${object.businessScope}</textarea>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="businessLicense" class="am-u-sm-3 am-form-label">*营业执照副本电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.businessLicense}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.businessLicense}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="businessLicense" name="businessLicense" placeholder="businessLicense"
+                 value="${object.businessLicense}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="taxRegistrationAttachment" class="am-u-sm-3 am-form-label">*税务登记证电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.taxRegistrationAttachment}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.taxRegistrationAttachment}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="taxRegistrationAttachment" name="taxRegistrationAttachment" placeholder="taxRegistrationAttachment"
+                 value="${object.taxRegistrationAttachment}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <div class="am-u-sm-9 am-u-sm-push-3">
+          <button type="submit" class="am-btn am-btn-primary">保存个体信息</button>
+        </div>
+      </div>
     </table>
   </form>
 </center>

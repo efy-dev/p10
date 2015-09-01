@@ -74,11 +74,11 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
     @Override
     public ModelMap getProductModel(HttpServletRequest request) throws ServletException {
 
-        ModelMap model = new ModelMap();
-
         String code = request.getParameter(PalConst.getInstance().code);
         Label label = getUniqueLabel(code);
         Product product = label.getPurchaseOrderLabel().getProduct();
+
+        ModelMap model = new ModelMap();
         model.addAttribute(PalConst.getInstance().resultProduct, product);
 
         Date date = new Date();
@@ -90,8 +90,8 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
         else if (label.getStatus().equals(PalConst.getInstance().usedStatus)) {
 
             Long timeDiffer = date.getTime() - label.getFirstCheckDateTime().getTime();
-
             CheckResultBean recheckBean = new CheckResultBean();
+
             try {
                 //只有24小时内查询次数为2才显示真
                 if (timeDiffer < PalConst.getInstance().timeIncrement && label.getCheckCount() == 2) {
@@ -153,7 +153,6 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
         String serial = root.element("EventKey").getText();
         String event = root.element("Event").getText();
         System.out.println("Event=\'" + event + "\'");
-        String outXml = "";
 
         if (PalConst.getInstance().weiXinSubscribeEvent.equals(event)) {
             serial = serial.substring(8).trim();
@@ -163,16 +162,15 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 //        String serial = "1234567890";
         System.out.println("serial=\'" + serial + "\'");
 
-
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/checkLabel.do?serial=" + serial;
-        String toUserName = root.element("ToUserName").getText();
-        String fromUserName = root.element("FromUserName").getText();
-
 //        String toUserName = "aaa";
 //        String fromUserName = "bbb";
 
         ModelMap model = new ModelMap();
         Label label = getUniqueLabel(serial);
+        String outXml = "";
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/checkLabel.do?serial=" + serial;
+        String toUserName = root.element("ToUserName").getText();
+        String fromUserName = root.element("FromUserName").getText();
 
         System.out.println("标签存在？" + (label != null));
         if (label != null) {
@@ -282,7 +280,6 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
                 BeanUtils.copyProperties(recheckBean, PalConst.getInstance().recheckFakeBean);
                 recheckBean.setAuthenticity(PalConst.getInstance()._null);
             }
-
         } catch (Exception e) {
             throw new ServletException(e.getMessage());
         }
@@ -297,6 +294,12 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
         return recheckBean;
     }
 
+    /**
+     * 写入查询记录
+     * @param model
+     * @param label
+     * @param date
+     */
     public void addLabelCheckRecord(ModelMap model, Label label, Date date) {
 
         LabelCheckRecord checkRecord = new LabelCheckRecord();
@@ -320,11 +323,14 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getRecheckRecordMsg(Label label) {
-        String msg = PalConst.getInstance().recheckFakeBean.getMsg().
-                replaceAll("#N#", Integer.toString(label.getCheckCount())).
-                replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
-        System.out.println("getRecheckRecordMsg：" + msg);
-        return msg;
+        if(label != null) {
+            String msg = PalConst.getInstance().recheckFakeBean.getMsg().
+                    replaceAll("#N#", Integer.toString(label.getCheckCount())).
+                    replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
+            System.out.println("getRecheckRecordMsg：" + msg);
+            return msg;
+        }
+            return null;
     }
 
     /**
@@ -335,11 +341,14 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getWeixinRecheckRecordMsg(Label label) {
-        String msg = PalConst.getInstance().weixinRecheckMsg.
-                replaceAll("#N#", Integer.toString(label.getCheckCount())).
-                replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
-        System.out.println("getWeixinRecheckRecordMsg：" + msg);
-        return msg;
+        if(label != null) {
+            String msg = PalConst.getInstance().weixinRecheckMsg.
+                    replaceAll("#N#", Integer.toString(label.getCheckCount())).
+                    replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
+            System.out.println("getWeixinRecheckRecordMsg：" + msg);
+            return msg;
+        }
+        return null;
     }
 
 
