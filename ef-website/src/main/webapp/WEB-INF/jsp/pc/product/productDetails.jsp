@@ -12,23 +12,6 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <script>
-    function show(o){
-      var price = $(o).next().val();
-      var marketPrice = $(o).next().next().val();
-      var id = $(o).next().next().next().val();
-      $("#price").text(price);
-      $("#marketPrice").text("市场价：￥"+marketPrice);
-      document.getElementById("black").setAttribute("class","");
-      document.getElementById("white"+id).setAttribute("class","active");
-      document.getElementById("modelId").setAttribute("href","/cart/addProduct.do?id="+id);
-    }
-    function f(price,marketPrice){
-      $("#price").text(price);
-      $("#marketPrice").text("市场价：￥"+marketPrice);
-    }
-  </script>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
@@ -97,24 +80,16 @@
           <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
             <c:if test="${productModel.id == productModelTmp.id}">
               <li class="active" id = "black">
-               <script>
-                 f(${productModelTmp.price},${productModelTmp.marketPrice});
-               </script>
-              <%--<input type="hidden" value="${productModelTmp.price}">--%>
-              <%--<input type="hidden" value="${productModelTmp.marketPrice}">--%>
             </c:if>
 
             <c:if test="${productModel.id != productModelTmp.id}">
               <li class="" id = "white"+productModelTmp.id>
             </c:if>
-            <a onclick="show(this)">
+            <a href="/product/productModel/${productModelTmp.id}">
                 <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
                   ${productPropertyValue.projectPropertyValue.value}
                 </c:forEach>
                   ${product.name}</a>
-            <input type="hidden" value="${productModelTmp.price}">
-            <input type="hidden" value="${productModelTmp.marketPrice}">
-            <input type="hidden" value="${productModelTmp.id}">
             </li>
 
           </c:forEach>
@@ -133,13 +108,13 @@
       <!-- //End-->
       <div class="price">
         <div class="p-text">飞蚁价：</div>
-        <div class="p-price" ><em>￥</em><span id="price"></span></div>
-        <div class="m-price" id="marketPrice"></div>
+        <div class="p-price"><em>￥</em><span>${productModel.price}</span></div>
+        <div class="m-price">市场价：￥${productModel.marketPrice}</div>
       </div>
       <!-- //End-->
       <div class="choose-btns">
         <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
-        <a class="btn btn-buy" href="" title="立即购买">立即购买</a>
+        <a class="btn btn-buy" href="order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
