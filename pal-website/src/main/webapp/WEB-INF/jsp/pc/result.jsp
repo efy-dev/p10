@@ -46,7 +46,7 @@
                                                               width="160" height="72"/></a></h1>
         </div>
         <form id="form" method="get" action="<c:url value='/checkLabelPc.do'/>">
-            <div class="title"><a class="active">真伪查询</a><span class="line"></span><a>非遗搜</a></div>
+            <div class="title"><a class="active">真伪查询</a></div>
             <label for="">
                 <%--<input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入名称查询,如:”苏绣”"/>--%>
                 <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入12位防伪码"/>
@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                     <c:if test="${result.authenticity != -1}">
-                        <c:if test="${ not emptyproduct.tenantProductSeries.tenantCertification}">
+                        <c:if test="${ not empty product.tenantProductSeries.tenantCertification}">
                             <tr>
                                 <td>认证证书</td>
                                 <td>${product.tenantProductSeries.tenantCertification.name}</td>
@@ -111,6 +111,7 @@
             </div>
         </div>
         <!--//End-->
+            <c:if test="${result.authenticity != -1}">
         <div class="item-info">
             <h2>商品信息</h2>
 
@@ -133,8 +134,8 @@
                 </table>
             </div>
         </div>
-
-        <%--<c:if test="${result.authenticity == 1}">--%>
+            </c:if>
+        <c:if test="${result.authenticity == 1}">
         <div class="item-info">
             <h2>认证信息</h2>
 
@@ -189,18 +190,18 @@
                 </table>
             </div>
         </div>
-        <%--</c:if>--%>
+        </c:if>
         <!--//End--溯源信息-->
     </div>
 </div>
 <!--//End---->
 <!--//End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
-<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <script>
     $(document).ready(function () {
         $("#serial").keydown(function (e) {

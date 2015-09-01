@@ -120,7 +120,7 @@ public class ProductController extends BaseController {
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
-                productPicture.setStatus(request.getParameter("status"));
+                productPicture.setStatus("1");
                 productPicture.setProduct(product);
                 baseManager.saveOrUpdate(ProductPicture.class.getTypeName(),productPicture);
                 data = productPicture.getId()+":"+url;
@@ -178,6 +178,10 @@ public class ProductController extends BaseController {
                                  ProductPicture productPicture,ProductModelBean productModelBean,
                                  HttpServletRequest request,
                                  String resultPage,Model model,String step)  {
+
+        model.addAttribute("view",request.getParameter("view"));
+
+
 
         if("product".equals(step)){
 

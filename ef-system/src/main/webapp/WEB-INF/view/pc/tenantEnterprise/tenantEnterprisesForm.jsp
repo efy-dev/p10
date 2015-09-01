@@ -22,141 +22,179 @@
     <input type="hidden" name="id" value="${object.id}">
     <input type="hidden" name="type" value="11" />
     <table>
-      <tr>
-        <th>*公司名称</th>
-        <td>
-          <input type="text" id="name" name="name" value="${object.name}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*法定代表人姓名</th>
-        <td>
-          <input type="text" id="legalName" name="legalName" value="${object.legalName}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*身份证号</th>
-        <td>
-          <input type="text" id="identity" name="identity" value="${object.identity}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*法人身份证电子版</th>
-        <td>
-          <input type="file" id="frontPhotoUrl" name="frontPhotoUrl" value="${object.frontPhotoUrl}"/>
-          <input type="file" id="versoPhotoUrl" name="versoPhotoUrl" value="${object.versoPhotoUrl}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*营业执照所在地</th>
-        <td>
-          <select id="provinceVal" onchange="province(this);" name="addressProvince.id">
+      <div class="am-form-group">
+        <label for="name" class="am-u-sm-3 am-form-label">*公司名称</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="name" name="name" placeholder="name" value="${object.name}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="legalName" class="am-u-sm-3 am-form-label">法定代表人姓名</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="legalName" name="legalName" placeholder="法定代表人姓名" value="${object.legalName}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="identity" class="am-u-sm-3 am-form-label">法人身份证号</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="identity" name="identity" placeholder="法人身份证号" value="${object.identity}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="frontPhotoUrl" class="am-u-sm-3 am-form-label">*法人身份证电子版正面</label>
+
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.frontPhotoUrl}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.frontPhotoUrl}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="frontPhotoUrl" name="frontPhotoUrl" placeholder="frontPhotoUrl"
+                 value="${object.frontPhotoUrl}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="versoPhotoUrl" class="am-u-sm-3 am-form-label">*法人身份证电子版反面</label>
+
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.frontPhotoUrl}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.versoPhotoUrl}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="versoPhotoUrl" name="versoPhotoUrl" placeholder="versoPhotoUrl"
+                 value="${object.versoPhotoUrl}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label name="addressProvince.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在省 <small>*</small></label>
+        <div class="am-u-sm-9" style="margin-top: 10px">
+          <select id="${object.id}" name="addressProvince.id" onchange="provinceChange(this , '${object.id}')">
             <option value="${object.addressProvince.id}">${object.addressProvince.name}</option>
           </select>
-          <select id="cityVal" name="addressCity.id">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label name="addressCity.id" for="${object.id}" class="am-u-sm-3 am-form-label">*营业执照所在市 <small>*</small></label>
+        <div class="am-u-sm-9" style="margin-top: 10px">
+          <select id="citys${object.id}" name="addressCity.id">
             <option value="${object.addressCity.id}">${object.addressCity.name}</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <th>*注册资本</th>
-        <td>
-          <input type="text" id="registeredAssets" name="registeredAssets" value="${object.registeredAssets}"/>万元
-        </td>
-      </tr>
-      <tr>
-        <th>*经营范围</th>
-        <td>
-          <label for="businessScope"></label><textarea type="text" id="businessScope" name="businessScope" cols="3" rows="4">${object.businessScope}</textarea>
-        </td>
-      </tr>
-      <tr>
-        <th>*营业执照副本电子版</th>
-        <td>
-          <input type="file" id="businessLicense" name="businessLicense" value="${object.businessLicense}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*税务登记证电子版</th>
-        <td>
-          <input type="file" id="taxRegistrationAttachment" name="taxRegistrationAttachment" value="${object.taxRegistrationAttachment}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*组织机构代码证电子版</th>
-        <td>
-          <input type="file" id="organizationAttachment" name="organizationAttachment" value="${object.organizationAttachment}"/>
-        </td>
-      </tr>
-      <tr>
-        <th>*银行开户许可证电子版</th>
-        <td>
-          <input type="file" id="bankAttachment" name="bankAttachment" value="${object.bankAttachment}"/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="submit" id="submit"  value="保存公司信息"/>
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="registeredAssets" class="am-u-sm-3 am-form-label">*注册资本</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" id="registeredAssets" name="registeredAssets" placeholder="注册资本" value="${object.registeredAssets}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="businessScope" class="am-u-sm-3 am-form-label">*经营范围</label>
+
+        <div class="am-u-sm-9">
+          <textarea type="text" id="businessScope" name="businessScope" cols="3" rows="4">${object.businessScope}</textarea>
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="businessLicense" class="am-u-sm-3 am-form-label">*营业执照副本电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.businessLicense}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.businessLicense}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="businessLicense" name="businessLicense" placeholder="businessLicense"
+                 value="${object.businessLicense}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="taxRegistrationAttachment" class="am-u-sm-3 am-form-label">*税务登记证电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.taxRegistrationAttachment}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.taxRegistrationAttachment}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="taxRegistrationAttachment" name="taxRegistrationAttachment" placeholder="taxRegistrationAttachment"
+                 value="${object.taxRegistrationAttachment}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="organizationAttachment" class="am-u-sm-3 am-form-label">*组织机构电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.organizationAttachment}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.organizationAttachment}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="organizationAttachment" name="organizationAttachment" placeholder="organizationAttachment"
+                 value="${object.organizationAttachment}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label for="bankAttachment" class="am-u-sm-3 am-form-label">*银行开户电子版</label>
+        <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.bankAttachment}">
+                         <img width="7%" src="http://tenant.efeiyi.com/${object.bankAttachment}@!product-model">
+                       </c:if>
+                </span>
+          <input type="file" id="bankAttachment" name="bankAttachment" placeholder="bankAttachment"
+                 value="${object.bankAttachment}">
+        </div>
+      </div>
+      <div class="am-form-group">
+        <div class="am-u-sm-9 am-u-sm-push-3">
+          <button type="submit" class="am-btn am-btn-primary">保存企业信息</button>
+        </div>
+      </div>
     </table>
   </form>
 </center>
 <script>
-
-  function province(obj) {
-    var v = $(obj).val();
-    $("#provinceVal").empty();
-    $.ajax({
-      type: 'post',
-      url: '<c:url value="/address/listProvince.do"/>',
-      dataType: 'json',
-      success: function (data) {
-        var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for (var i = 0; i < obj.length; i++) {
-          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-        }
-        $("#provinceVal").append(rowHtml);
-        $("#provinceVal option[value='" + v + "']").attr("selected", "selected");
-        city(v);
-      },
-    });
+  function chooseCity(element,provinceId,cityId,o){
+    $(element).val(provinceId);
+    var callback = function(){
+      $("#citys" + o).val(cityId);
+    }
+    provinceChange(element, o,callback);
   }
 
-  function city(obj) {
-    var pid = $("#provinceVal").val();
-    var v = $(obj).val();
-    $("#cityVal").empty();
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/address/listCity.do"/>',
-      dataType: 'json',
-      data: {
-        provinceId: pid
-      },
-      success: function (data) {
+    $.post("<c:url value="/address/listProvince.do"/>",
+      function (data) {
         var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
+        var out = '<option value="">请选择</option>';
         for (var i = 0; i < obj.length; i++) {
-          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
+          console.log(obj[i]+"----"+obj[i]);
+          out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
         }
-        $("#cityVal").append(rowHtml);
-        $("#cityVal option[value='" + v + "']").attr("selected", "selected");
+        $("#${object.id}").append(out);
+        chooseCity($("#${object.id}") , "${object.addressProvince.id}","${object.addressCity.id}","${object.id}");
+      }
+    )
 
-      },
-    });
+  function provinceChange(element, o, callback) {
+    $("#citys" + o).empty();
+    var provinceId = $(element).val();
+    $.post("<c:url value="/address/listCity.do"/>",
+            {provinceId: provinceId},
+            function (data) {
+              var obj = eval(data);
+              var out = '<option value="">请选择</option>';
+              for (var i = 0; i < obj.length; i++) {
+                out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
+              }
+              $("#citys" + o).append(out);
+              if(typeof callback!= "undefined"){
+                callback();
+              }
+            }
+    )
   }
-
-  $().ready(function(){
-    province();
-  })
-
-
-
 </script>
 </body>
 </html>

@@ -95,37 +95,18 @@ public class ProductManagerImpl implements ProductManager{
 
         String[] ids = productModelBean.getModelId();
         Product product = (Product)xdoDao.getObject(Product.class.getName(), productModelBean.getProductId());
-        if(ids.length>0) {
-            for (int i = 0; i < ids.length; i++) {
-                if ("".equals(ids[i])) {
-                    ProductModel productModel = new ProductModel();
-                    productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
-                    productModel.setName(productModelBean.getModelName()[i]);
-                    productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
-                    productModel.setProduct(product);
-                    productModel.setSerial(autoSerialManager.nextSerial("productModel"));
-                    productModel.setStatus("1");
-                    xdoDao.saveOrUpdateObject(productModel);
-                    String[] propertyValueIds = productModelBean.getModelProperty()[i].split(",");
-                    for (String propertyValueId : propertyValueIds) {
-                        ProjectPropertyValue projectPropertyValue = (ProjectPropertyValue) xdoDao.getObject(ProjectPropertyValue.class.getName(), propertyValueId);
-                        ProductPropertyValue productPropertyValue = new ProductPropertyValue();
-                        productPropertyValue.setProductModel(productModel);
-                        productPropertyValue.setProjectPropertyValue(projectPropertyValue);
-                        productPropertyValue.setProjectProperty(projectPropertyValue.getProjectProperty());
-                        xdoDao.saveOrUpdateObject(productPropertyValue);
-                    }
-                } else {
-                    if ("0".equals(productModelBean.getModelStatus()[i])) {
-                        xdoDao.deleteObject(ProductModel.class.getName(), ids[i]);
-                        deleteProductPropertyValue(ids[i]);
-                    } else if ("1".equals(productModelBean.getModelStatus()[i])) {
-                        ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), ids[i]);
+        if(ids != null){
+            if (ids.length > 0) {
+                for (int i = 0; i < ids.length; i++) {
+                    if ("".equals(ids[i])) {
+                        ProductModel productModel = new ProductModel();
                         productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                         productModel.setName(productModelBean.getModelName()[i]);
                         productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                        productModel.setProduct(product);
+                        productModel.setSerial(autoSerialManager.nextSerial("productModel"));
+                        productModel.setStatus("1");
                         xdoDao.saveOrUpdateObject(productModel);
-                        deleteProductPropertyValue(ids[i]);
                         String[] propertyValueIds = productModelBean.getModelProperty()[i].split(",");
                         for (String propertyValueId : propertyValueIds) {
                             ProjectPropertyValue projectPropertyValue = (ProjectPropertyValue) xdoDao.getObject(ProjectPropertyValue.class.getName(), propertyValueId);
@@ -134,6 +115,27 @@ public class ProductManagerImpl implements ProductManager{
                             productPropertyValue.setProjectPropertyValue(projectPropertyValue);
                             productPropertyValue.setProjectProperty(projectPropertyValue.getProjectProperty());
                             xdoDao.saveOrUpdateObject(productPropertyValue);
+                        }
+                    } else {
+                        if ("0".equals(productModelBean.getModelStatus()[i])) {
+                            xdoDao.deleteObject(ProductModel.class.getName(), ids[i]);
+                            deleteProductPropertyValue(ids[i]);
+                        } else if ("1".equals(productModelBean.getModelStatus()[i])) {
+                            ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), ids[i]);
+                            productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                            productModel.setName(productModelBean.getModelName()[i]);
+                            productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                            xdoDao.saveOrUpdateObject(productModel);
+                            deleteProductPropertyValue(ids[i]);
+                            String[] propertyValueIds = productModelBean.getModelProperty()[i].split(",");
+                            for (String propertyValueId : propertyValueIds) {
+                                ProjectPropertyValue projectPropertyValue = (ProjectPropertyValue) xdoDao.getObject(ProjectPropertyValue.class.getName(), propertyValueId);
+                                ProductPropertyValue productPropertyValue = new ProductPropertyValue();
+                                productPropertyValue.setProductModel(productModel);
+                                productPropertyValue.setProjectPropertyValue(projectPropertyValue);
+                                productPropertyValue.setProjectProperty(projectPropertyValue.getProjectProperty());
+                                xdoDao.saveOrUpdateObject(productPropertyValue);
+                            }
                         }
                     }
                 }

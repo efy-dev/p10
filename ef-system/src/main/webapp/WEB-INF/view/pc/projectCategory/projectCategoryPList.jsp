@@ -115,7 +115,7 @@
                                     ${projectCategory.serial}
                             </td>
                             <td>
-                                <img src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
+                                <img width="8%" src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
                             </td>
                         </tr>
                     </c:forEach>

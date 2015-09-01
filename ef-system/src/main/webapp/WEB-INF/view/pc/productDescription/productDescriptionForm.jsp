@@ -28,6 +28,7 @@
       <input type="hidden" name="id" value="${object.productDescription.id}">
       <input type="hidden" name="product.id" value="${object.id}">
       <input type="hidden" name="resultPage" value="0" />
+        <input type="hidden" name="view" value="${view}">
       <input type="hidden" name="step" value="description">
 
       <div class="am-form-group">
@@ -59,7 +60,7 @@
                        <input type="button" class="am-btn am-btn-primary" onclick="toSubmit('/productModel/productModelForm')" value="保存,并进入商品模型"/>
                     </span>
                     <span style="padding: 10px;">
-                       <input type="button" class="am-btn am-btn-primary" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default')" value="保存,并返回商品列表"/>
+                       <input type="button" class="am-btn am-btn-primary" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" value="保存,并返回商品列表"/>
                     </span>
                       <span style="padding: 10px;">
                        <input type="button" onclick="toSubmit('/product/productView')"  class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
