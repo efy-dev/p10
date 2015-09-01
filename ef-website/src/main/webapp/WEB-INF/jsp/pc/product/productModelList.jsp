@@ -40,7 +40,8 @@
 <div class="hd category">
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
-      <li><a href="#">首页</a></li>
+        <%String path = request.getContextPath();%>
+      <li><a href="<%=path%>">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
   </div>
