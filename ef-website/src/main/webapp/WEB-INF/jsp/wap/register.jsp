@@ -146,7 +146,7 @@
         <input type="hidden" name="unionid" value="${unionid}">
         <div class="start">
             <div class="login">
-                <ul>
+                <ul class="page">
                     <li>
                         <label>手机号</label>
                         <input class="txt" type="text" id="username" name="username"
