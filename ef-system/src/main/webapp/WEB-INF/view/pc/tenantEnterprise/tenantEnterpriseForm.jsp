@@ -25,7 +25,7 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
-            <input type="hidden" value="saveOrUpdatePersonalTenant" name="qm">
+            <input type="hidden" value="saveOrUpdateEnterpriseTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>

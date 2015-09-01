@@ -440,6 +440,9 @@ a:hover{text-decoration: underline}
 .dentification .short ul li .span-lest2 a:hover{background: #000;color: #fff;}
 .dentification .short ul li .span1{padding-left: 12px;font-size:12px;font-family: "宋体";}
 /*找回密码*/
+/*物流地址改代码*/
+#divbgs .divcontentbg{margin-top:13px;}
+/*物流地址改代码*/
 /*设置新密码*/
 .new{width: 100%;min-height: 550px;float: left}
 .new .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
