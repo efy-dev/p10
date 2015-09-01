@@ -114,12 +114,9 @@ public class Jnode {
         boolean flag = false;
         if (matchList != null && matchList.size() > 0 && match != null && !"".equals(match)) {
             for (String matchTemp : matchList) {
-                if (!matchTemp.trim().equals("")&match.trim().startsWith(matchTemp.trim())) {
+                if (!matchTemp.trim().equals("") & match.trim().startsWith(matchTemp.trim())) {
                     flag = true;
                 }
-//                else if(match.trim()) {
-//
-//                }
             }
         }
         return flag;
@@ -127,29 +124,28 @@ public class Jnode {
 
 
     //只匹配** a** a**b **b
-    private boolean isMatch(String configurationStr,String matchStr){
+    private boolean isMatch(String configurationStr, String matchStr) {
         boolean flag = false;
-        if (!configurationStr.contains("**")){
+        if (!configurationStr.contains("**")) {
             return flag;
-        } else
-        if (configurationStr.startsWith("**")){
+        } else if (configurationStr.startsWith("**")) {
             //通配前缀
-            String tepStr = configurationStr.substring(2,configurationStr.length());
-            if (matchStr.endsWith(tepStr)){
+            String tepStr = configurationStr.substring(2, configurationStr.length());
+            if (matchStr.endsWith(tepStr)) {
                 flag = true;
             }
-        }else if (configurationStr.endsWith("**")){
+        } else if (configurationStr.endsWith("**")) {
             //通配后缀
-            String tepStr = configurationStr.substring(0,configurationStr.length()-2);
-            if (matchStr.startsWith(tepStr)){
+            String tepStr = configurationStr.substring(0, configurationStr.length() - 2);
+            if (matchStr.startsWith(tepStr)) {
                 flag = true;
             }
-        }else {
+        } else {
             List<String> tepStrList = Arrays.asList(configurationStr.split("\\*\\*"));
             //通配中间部分
             String tepStr0 = tepStrList.get(0);
             String tepStr1 = tepStrList.get(1);
-            if (matchStr.startsWith(tepStr0)&& matchStr.endsWith(tepStr1)){
+            if (matchStr.startsWith(tepStr0) && matchStr.endsWith(tepStr1)) {
                 flag = true;
             }
         }
@@ -177,7 +173,9 @@ public class Jnode {
     }
 
     public String jnodeMatch(String style, Jnode jnode) {
+
         if (jnode != null && id.equals(jnode.getId())) {
+
             return style;
         } else return "";
     }
