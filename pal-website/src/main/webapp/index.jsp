@@ -1,9 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 
 <!DOCTYPE>
 <!--//End--topbar-->
@@ -13,7 +9,8 @@
         <p>非遗商品防伪溯源查询中心</p>
     </div>
     <form id="form" action="<c:url value='/checkLabelPc.do'/>" method="get">
-        <div class="title"><a >真伪查询</a><span class="line"></span><a>非遗搜</a></div>
+        <%--<div class="title"><a >真伪查询</a><span class="line"></span><a>非遗搜</a></div>--%>
+            <div class="title"><a >真伪查询</a></div>
         <label for="">
             <input class="txt" type="text" name="serial" id="serial" value="" />
             <input class="btn" type="submit" id="btn" value="查 询"/>
@@ -31,8 +28,8 @@
 <!--<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>-->
 <%--<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>--%>
 <%--<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>--%>
-<![endif]-->
-<script src="<c:url value='/js/amazeui.min.js'/>"></script>
+<%--<![endif]-->--%>
+<%--<script src="<c:url value='/js/amazeui.min.js'/>"></script>--%>
 <%--<script src="<c:url value='/resources/assets/js/cpbjs.js'/>"></script>--%>
 <script>
     $(document).ready(function(){

@@ -23,9 +23,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
-        <input type="hidden" name="resultPage" value="0" />
-        <input type="hidden" name="step" value="view">
+
         <fieldset>
             <legend>
                 <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${object.id}"/>">
@@ -97,18 +95,25 @@
         </fieldset>
         <fieldset>
             <legend>
-                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&id=${object.id}"/>">
-                    修改商品描述
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
+                    保存商品描述
                 </a>
             </legend>
             <div class="am-form-group" >
+                <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form1">
+                <input type="hidden" name="id" value="${object.productDescription.id}">
+                <input type="hidden" name="product.id" value="${object.id}">
+                <input type="hidden" name="resultPage" value="0" />
+                <input type="hidden" name="view" value="${view}">
+                <input type="hidden" name="step" value="description">
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                             <textarea id="productDescription" name="content" class="ckeditor"
-                                      placeholder="商品描述" required disabled="disabled">
+                                      placeholder="商品描述" required >
                                 ${object.productDescription.content}
                             </textarea>
                 </div>
+                </form>
                 <br>
             </div>
 
@@ -186,13 +191,13 @@
 
                                     <li style="float: left;margin-right: 10px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
-                                            <dt style="width: 80%">
+                                            <dt style="width: 50%">
                                                 <img width="100%" name=""
-                                                     src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo"
+                                                     src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
                                                      alt="商品图片"/>
                                             </dt>
 
-                                            <dd style="width: 80%;text-align: center;" >
+                                            <dd style="width: 50%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
                                                         <a href="#"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
@@ -269,7 +274,7 @@
                                     </td>
                                     <td>http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo</td>
                                     <td>
-                                        <img width="18%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="" />
+                                        <img width="18%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}" alt="" />
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -279,11 +284,14 @@
                 </div>
             </div>
         </fieldset>
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form2">
+        <input type="hidden" name="resultPage" value="0" />
+        <input type="hidden" name="step" value="view">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
 
                     <span style="padding: 10px;">
-                       <input type="button"  onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default')" class="am-btn am-btn-primary" value="返回商品列表"/>
+                       <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>
                     </span>
             </div>
         </div>
@@ -318,7 +326,7 @@
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
-                var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!tenant-manage-photo";
+                var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 ///图片信息
                 var tr = '<tr name = "'+pictureId+'">' +
                         ' <td>  ' +
@@ -335,10 +343,10 @@
                 ///显示图片
                 var img ='<li style="float: left;margin-right: 10px;" name="'+pictureId+'">'+
                         '<dl style="margin-top: 6px;" >'+
-                        '  <dt  style="width: 80%">'+
+                        '  <dt  style="width: 50%">'+
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
-                        '  <dd style="width: 80%;text-align:center" >'+
+                        '  <dd style="width: 50%;text-align:center" >'+
                         '   </a>'+
                         '<a href="#" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="#" onclick="deletePicture(this,\''+pictureId+'\')">'+
@@ -403,6 +411,14 @@
                 $("#collapse-panel-1 li[name='" + divId + "']").remove();
             }
         });
+    }
+
+    function toSubmit(st,result){
+        $("input[name='resultPage']").val(result);
+
+            $("#form"+st).submit();
+
+
     }
 </script>
 
