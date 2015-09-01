@@ -229,7 +229,7 @@ public class   SigninController extends BaseController {
 
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
-        String redirect_uri = "http://master4.efeiyi.com/ef-website/wx/bind";
+        String redirect_uri = "http://master4.efeiyi.com//wx/bind";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +
@@ -260,7 +260,7 @@ public class   SigninController extends BaseController {
         }
         String unionid = jsonObject.getString("unionid");
         model.addAttribute("unionid", unionid);
-        return "/wxRegister";
+        return "/register";
     }
 }
 
