@@ -107,7 +107,8 @@ public class AddressController {
     @RequestMapping({"addAddressOfMob.do"})
     public String  addAddressOfMobile(HttpServletRequest request)throws Exception{
         if("1".equals(request.getParameter("checkbox"))){
-            String hql = "update organization_consumer_address set status = '1'where status<>0";
+            String id=request.getParameter("consumerId");
+            String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='"+id+"'";
             baseManager.executeSql(null,hql,null);
             XSaveOrUpdate  xSaveOrUpdate1 =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
             xSaveOrUpdate1.getParamMap().put("status","2");
