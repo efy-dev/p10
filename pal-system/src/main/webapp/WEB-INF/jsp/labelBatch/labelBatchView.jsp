@@ -40,6 +40,10 @@
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
+            <td>标签编号</td>
+            <td>${object.serial}</td>
+        </tr>
+        <tr>
             <td>标签批次</td>
             <td>${object.setting}</td>
         </tr>
