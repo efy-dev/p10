@@ -29,7 +29,7 @@
                     authentication-failure-handler-ref="loginFailureHandler"/>
         <logout invalidate-session="true" logout-url="/j_spring_security_logout"
                 success-handler-ref="loginOutSuccessHandler"/>
-        <remember-me user-service-ref="userManager" />
+        <remember-me user-service-ref="userManager" data-source-ref="dataSource" remember-me-parameter="remember-me" token-validity-seconds="1209600"/>
     </http>
 
     <b:bean id="loginSuccessHandler" class="com.efeiyi.ec.website.organization.LoginSuccessHandler"/>
