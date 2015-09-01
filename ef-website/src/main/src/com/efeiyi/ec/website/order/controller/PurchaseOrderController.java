@@ -121,7 +121,7 @@ public class PurchaseOrderController extends BaseController {
         String content = "";
         try
         {
-            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + "yunda" + "&nu=" + "1700173247399");
+            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + pd + "&nu=" + serial);
             URLConnection con = url.openConnection();
             con.setAllowUserInteraction(false);
             InputStream urlStream = url.openStream();

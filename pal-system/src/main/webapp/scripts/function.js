@@ -149,3 +149,35 @@ function afterSubmitForm(formId){
     }
     return true;
 }
+
+function myConfirm(url, type){
+    var DValue=document.getElementById("DValue");
+    var AValue=document.getElementById("AValue");
+    var CValue=document.getElementById("CValue");
+    if(type == "D"){
+        DValue.setAttribute("style","color: red;display");
+        AValue.setAttribute("style","color: red;display:none");
+        CValue.setAttribute("style","color: red;display:none");
+    }
+    if(type == "A"){
+        DValue.setAttribute("style","color: red;display:none");
+        AValue.setAttribute("style","color: red;display");
+        CValue.setAttribute("style","color: red;display:none");
+    }
+    if(type == "C"){
+        DValue.setAttribute("style","color: red;display:none");
+        AValue.setAttribute("style","color: red;display:none");
+        CValue.setAttribute("style","color: red;display");
+    }
+
+    $('#my-confirm').modal({
+        //width:300,
+        //height:100,
+        onConfirm: function() {
+            window.location.href = url;
+        },
+        onCancel: function() {
+            alert('算求，不弄了');
+        }
+    });
+}
