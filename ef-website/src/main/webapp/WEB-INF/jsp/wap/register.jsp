@@ -101,10 +101,10 @@
                         <%--<input class="txt-yzm" type="text" id="verification" minlength="3" placeholder="验证码" required>--%>
                         <%--<a class="btn-yzm" id="verificationButton">获取验证码</a>--%>
 
-                        <%--<div class="help-block">--%>
-                            <%--<h5 id="consumerVerificationCodeCheck" style="color: red;display: none">--%>
-                                <%--手机验证码输入错误</h5>--%>
-                        <%--</div>--%>
+                        <div class="help-block">
+                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
+                                手机验证码输入错误</h5>
+                        </div>
                     <%--</div>--%>
 
                     <%--<div class="am-form-group">--%>
@@ -143,9 +143,10 @@
     <form data-parsley-validate id="bigUser" name="bigUser"
           action="<c:url value="/pc/saveEnrollUser.do"/>" method="post"
           onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+        <input type="hidden" name="unionid" value="${unionid}">
         <div class="start">
             <div class="login">
-                <ul class="page">
+                <ul>
                     <li>
                         <label>手机号</label>
                         <input class="txt" type="text" id="username" name="username"
@@ -164,10 +165,6 @@
                         <div class="tet1">
                             <input class="txt1 am-u-sm-7 am-u-end" type="text" id="verification"  placeholder="验证码" required>
                             <span class="am-u-sm-5 am-u-end"><a id="verificationButton">获取验证码</a></span>
-                        </div>
-                        <div class="help-block">
-                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
-                                手机验证码输入错误</h5>
                         </div>
                     </li>
                     <li>

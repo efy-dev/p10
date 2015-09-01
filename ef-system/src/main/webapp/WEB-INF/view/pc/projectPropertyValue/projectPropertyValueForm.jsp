@@ -19,14 +19,15 @@
 
 <div class="am-g">
     <form action="<c:url value="/basic/xm.do"/>" method="post"  class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateProjectTag">
+        <input type="hidden" name="qm" value="saveOrUpdateProjectPropertyValue">
         <input type="hidden" name="id" value="${object.id}">
-        <input type="hidden" name="project.id" value="${projectId}">
-        <input type="hidden" name="sort" value="${object.sort}">
+        <input type="hidden" name="projectProperty.id" value="${projectPropertyId}">
+        <input type="hidden" name="project.id" value="${projectPropertyId}">
+        <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewProject&param=project&id=${projectId}" />
         <div class="am-form-group">
-            <label name="value" for="value" class="am-u-sm-3 am-form-label">标签名称</label>
+            <label name="value" for="value" class="am-u-sm-3 am-form-label">属性值</label>
             <div class="am-u-sm-9">
-                <input type="text" name="value" id="value" placeholder="标签名称" value="${object.value}">
+                <input type="text" name="value" id="value" placeholder="属性值" value="${object.value}">
                 <small>必填项*</small>
             </div>
         </div>
