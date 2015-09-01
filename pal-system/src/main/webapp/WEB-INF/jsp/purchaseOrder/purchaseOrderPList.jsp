@@ -20,6 +20,7 @@
            style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
            value="新建订单" />
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -35,7 +36,7 @@
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                             <c:if test="${order.status == '1' || order.status == '2'}">
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"
+                                <button onclick="myConfirm('<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>', 'D')"
                                         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </c:if>
                         </div>
