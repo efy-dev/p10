@@ -28,6 +28,13 @@
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
             <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">商家编号</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="serial" name="serial" placeholder="商家编号" value="${object.serial}" readonly="readonly">
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>
 
                 <div class="am-u-sm-9">

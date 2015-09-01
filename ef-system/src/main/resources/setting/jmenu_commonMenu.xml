@@ -52,11 +52,13 @@
         <jnode url="" id="productManager" access="admin,manager" state="closed" text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default&amp;view=newProduct" access="admin" text_zh_CN="商品列表">
                 <match url="/basic/xm.do?qm=plistProduct_default"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_Description&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=newProduct"/>
-
+                <match url="/product/saveNewProduct.do?view=newProduct"/>
+                /product/saveNewProduct.do?view=${view}
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">
                 <match url="/basic/xm.do?qm=plistProductRecommended_default"/>
@@ -74,7 +76,10 @@
                 <match url="/basic/xm.do?qm=formProduct&amp;view=tenant"/>
                 <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=tenant"/>
                 <match url="/basic/xm.do?qm=formProduct_Description&amp;view=tenant"/>
-                <match url=" /product/saveNewProduct.do"/>
+                <match url="/basic/xm.do?qm=formEnterpriseTenant"/>
+                <match url="/basic/xm.do?qm=formPrivateTenant"/>
+                <match url="/basic/xm.do?qm=formPersonalTenant"/>
+                <match url="/product/saveNewProduct.do?view=tenant"/>
 
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">

@@ -31,6 +31,7 @@ public class Tenant implements Serializable {
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
     private String status;
+    private String serial;//商家编号
     private List<TenantMaster> tenantMasterList;
     private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
@@ -131,5 +132,14 @@ public class Tenant implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }
