@@ -38,7 +38,7 @@ public class formProductHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-
+      modelMap.put("view",request.getParameter("view"));
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
         modelMap.put("tenantId",request.getParameter("tenantId"));
         XQuery xQuery = new XQuery("listTenantMaster_default",request);

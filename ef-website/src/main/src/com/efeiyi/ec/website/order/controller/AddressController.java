@@ -136,8 +136,8 @@ public class AddressController {
     @ResponseBody
     public boolean  defaultAddress(HttpServletRequest request)throws Exception{
         String id=request.getParameter("consumerId");
-        String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='"+id+"'";
-        baseManager.executeSql(null,hql,null);
+        String sql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='"+id+"'";
+        baseManager.executeSql(null,sql,null);
         XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
         xSaveOrUpdate.getParamMap().put("consumer_id",AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);

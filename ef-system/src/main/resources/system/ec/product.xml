@@ -48,7 +48,7 @@
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.formProductHandler"/>
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
                 <do name="formProduct_ProductModel" label="保存产品页" access="" result="/productModel/productModelForm" />
-                <do name="viewProduct" label="查看产品页" access="" result="/product/productView"/>
+                <do name="viewProduct" label="查看产品页" access="" result="/product/productView" execute="com.efeiyi.ec.system.product.controller.viewProductHandler" />
                 <!--<do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess"></do>-->
                 <do name="listProduct" label="产品列表" access="" result="/product/productList">
                     <query name="tenant" label="商家产品" type="auto" orderBy="id:desc">
