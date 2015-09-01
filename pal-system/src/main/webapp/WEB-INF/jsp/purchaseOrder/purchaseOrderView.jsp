@@ -28,20 +28,42 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrder&order=order&id=${object.id}"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="编辑"/>
-    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
-    <input onclick=""
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="删除" />
+    <c:if test="${object.status == '1' || object.status == '2'}">
+        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
+        <%--<input id="delOrder" onclick=""--%>
+        <input onclick="delConfirm(url)"
+               type="button" class="am-btn am-btn-warning am-btn-xs"
+               style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
+               value="删除" />
+    </c:if>
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
+
+<button type="button" class="am-btn am-btn-warning" id="doc-confirm-toggle">
+    Confirm
+</button>
+<ul class="am-list confirm-list" id="doc-modal-list">
+    <li><a data-id="1" href="#">每个人都有一个死角， 自己走不出来，别人也闯不进去。</a><i class="am-icon-close"></i></li>
+    <li><a data-id="2" href="#">我把最深沉的秘密放在那里。</a><i class="am-icon-close"></i></li>
+    <li><a data-id="3" href="#">你不懂我，我不怪你。</a><i class="am-icon-close"></i></li>
+    <li><a data-id="4" href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a><i class="am-icon-close"></i></li>
+</ul>
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+    <div class="am-modal-dialog">
+        <%--<div class="am-modal-hd">删除确认</div>--%>
+        <div class="am-modal-bd">
+            你，确定要删除？
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">订单详情</strong>
