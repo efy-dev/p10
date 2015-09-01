@@ -132,7 +132,7 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="#进店" title="进店">进店</a>
+        <a class="btn-default" href="/tenantOfMobile/view?tenantId=${productModel.product.tenant.id}" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
         <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
                 class="icon"></i>放入购物车</a>
