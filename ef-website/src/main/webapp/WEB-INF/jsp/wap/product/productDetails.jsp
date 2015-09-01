@@ -18,7 +18,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
         <ul class="am-slides">
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
-                <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}"></li>
+                <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
             </c:forEach>
         </ul>
     </div>
