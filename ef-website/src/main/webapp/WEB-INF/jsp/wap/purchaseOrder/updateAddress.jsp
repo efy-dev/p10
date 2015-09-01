@@ -51,14 +51,6 @@
 </div>
 <script>
 
-  function putVal(o){
-    var ele = document.getElementById("checkbox");
-      if(ele.checked){
-        $(o).val("1");
-      }else{
-        $(o).val("0");
-      }
-  }
   $(function () {
     $("#add").click(function () {
       $(this).siblings('.active-pop').show();
@@ -78,7 +70,7 @@
       return false;
     });
   });
-  function df(id) {
+  function df(addressId,consumerId) {
     $.ajax({
       type: 'post',
       async: false,
@@ -86,7 +78,8 @@
       dataType: 'json',
       data: {
         status: 2,
-        id: id
+        id: addressId,
+        consumerId:consumerId,
 
       },
       success: function (data) {
@@ -165,7 +158,7 @@
     )
   }
 
-  function chooseCity(element,provinceId,cityId,o){
+  function (element,provinceId,cityId,o){
     $(element).val(provinceId);
     var callback = function(){
       $("#citys" + o).val(cityId);
@@ -173,9 +166,7 @@
     provinceChange(element, o,callback);
   }
 
-  <c:forEach items="${addressList}" var="address">
-  chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
-  </c:forEach>
+  ($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
 
   $().ready(function () {
     $("#addAddress").validate({
