@@ -34,6 +34,7 @@ public class BigTenant implements Serializable,BaseTenant {
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
     private String status;
+    private String serial;//商家编号
     //个人信息
     private String identity; // 身份证号
     private String frontPhotoUrl;//正面照片
@@ -189,5 +190,14 @@ public class BigTenant implements Serializable,BaseTenant {
 
     public void setAddressCity(AddressCity addressCity) {
         this.addressCity = addressCity;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }

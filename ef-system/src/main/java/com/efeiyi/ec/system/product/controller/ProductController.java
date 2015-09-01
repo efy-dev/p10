@@ -120,7 +120,7 @@ public class ProductController extends BaseController {
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
-                productPicture.setStatus("1");
+                productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);
                 baseManager.saveOrUpdate(ProductPicture.class.getTypeName(),productPicture);
                 data = productPicture.getId()+":"+url;

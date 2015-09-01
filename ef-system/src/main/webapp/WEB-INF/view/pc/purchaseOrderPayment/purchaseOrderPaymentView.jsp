@@ -20,10 +20,10 @@
             </thead>
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">订单号</td>
-                <td class="am-u-md-3">${object.purchaseOrder.serial}</td>
                 <td class="am-primary am-u-md-3">支付序列号</td>
                 <td class="am-u-md-3">${object.serial}</td>
+                <td class="am-primary am-u-md-3">订单号</td>
+                <td class="am-u-md-3">${object.purchaseOrder.serial}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">支付状态</td>
@@ -32,14 +32,22 @@
                                     checkedValue="${object.status}"
                                     type="normal"/>
                 </td>
-                <td class="am-primary am-u-md-3">支付金额</td>
-                <td class="am-u-md-3">${object.paymentAmount}</td>
+                <td class="am-primary am-u-md-3">支付方式</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                    checkedValue="${object.payWay}"
+                                    type="normal"/>
+                </td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">支付金额</td>
+                <td class="am-u-md-3">${object.paymentAmount}</td>
                 <td class="am-primary am-u-md-3">支付用户</td>
                 <td class="am-u-md-3">${object.user.username}</td>
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">支付时间</td>
-                <td class="am-u-md-3"><fmt:formatDate value="${object.createDateTime}" type="both"
+                <td class="am-u-md-3" colspan="3"><fmt:formatDate value="${object.createDateTime}" type="both"
                                                       pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
             </tbody>
@@ -58,29 +66,19 @@
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&viewIdentify=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
-                <td class="am-primary am-u-md-3">支付方式</td>
-                <td class="am-u-md-3">
-                    <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                checkedValue="${purchaseOrderPayment.payWay}"
-                                                type="normal"/>
-                                </span>
-                    </c:forEach>
-                </td>
-            </tr>
-            <tr>
                 <td class="am-primary am-u-md-3">订单总价</td>
                 <td class="am-u-md-3">${object.purchaseOrder.total}</td>
-                <td class="am-primary am-u-md-3">订单原价</td>
-                <td class="am-u-md-3">${object.purchaseOrder.originalPrice}</td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单总额</td>
+                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3"><fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/> </td>
             </tr>
 
             <tr>
-                <td class="am-primary am-u-md-3">下单时间</td>
-                <td class="am-u-md-3"><fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/> </td>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3">${object.purchaseOrder.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>

@@ -43,6 +43,7 @@
                     <th class="table-title">支付记录编号</th>
                     <th class="table-title">支付订单</th>
                     <th class="table-title">支付方式</th>
+                    <th class="table-title">支付金额</th>
                     <th class="table-title">支付状态</th>
                     <th class="table-title">支付用户</th>
                     <th class="table-title">支付时间</th>
@@ -71,6 +72,7 @@
                                                 checkedValue="${purchaseOrderPayment.payWay}"
                                                 type="normal"/>
                         </td>
+                        <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="status" dataType="purchaseOrderPayment.status"
                                             checkedValue="${purchaseOrderPayment.status}"

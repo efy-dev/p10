@@ -22,9 +22,10 @@
 </div>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
-        <td>操作</td>
-        <td width="74%">项目名称</td>
-        <td width="">项目编号</td>
+        <td  width="25%">操作</td>
+        <td  width="25%">项目名称</td>
+        <td  width="25%">项目编号</td>
+        <td  width="25%">项目图片</td>
     </tr>
 
 
@@ -38,15 +39,18 @@
                     </div>
                 </div>
             </td>
-            <td width="10%">
+            <td width="20%">
                 <c:if test="${project.level == 1}">
                     <a href="<c:url value="/basic/xm.do?qm=viewProject&param=project&id=${project.id}"/>" >
                       ${project.name}
                     </a>
                 </c:if>
             </td>
-            <td>
+            <td width="20%">
                 ${project.serial}
+            </td>
+            <td width="40%">
+                <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${project.picture_url}@!product-model"/>" alt=""/>
             </td>
         </tr>
 

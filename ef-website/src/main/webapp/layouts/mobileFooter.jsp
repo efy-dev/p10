@@ -45,15 +45,24 @@
 
 <script>
 
+    function isWeiXin(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
     var register = "<c:url value="/register"/> ";
 
-    if (typeof WeixinJSBridge == "undefined") {
-        alert("not weixin");
-        $("#signin").attr("href", register);
-    } else {
-        alert("weixin");
+    if (isWeiXin()) {
+//        alert("not weixin");
         $("#signin").attr("href", registerWx);
+    } else {
+//        alert("weixin");
+        $("#signin").attr("href", register);
     }
 </script>

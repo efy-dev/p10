@@ -185,7 +185,7 @@
                 <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
@@ -217,6 +217,7 @@
                     <statusType fieldName="payWay">
                         <item label="支付宝" value="1"/>
                         <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
                     </statusType>
                 </field>
                 <field name="status" label="支付状态" inputType="text">

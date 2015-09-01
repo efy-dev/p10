@@ -25,8 +25,22 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
+            <input type="hidden" name="tenantType" value="11">
             <input type="hidden" value="saveOrUpdateEnterpriseTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
+            <div class="am-form-group">
+                <label for="serial" class="am-u-sm-3 am-form-label">商家编号</label>
+
+                <div class="am-u-sm-9">
+                    <c:if test="${serial == '1'}">
+                        <input type="text" id="serial" name="serial" placeholder="自动生成" value="${object.serial}" readonly="readonly">
+                    </c:if>
+                    <c:if test="${serial != '1'}">
+                        <input type="text" id="serial" name="serial" placeholder="自动生成" value="${serial}" readonly="readonly">
+                    </c:if>
+
+                </div>
+            </div>
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>
 
@@ -45,24 +59,6 @@
                     <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-photo">
                 </c:if>
             </div>
-            <div class="am-form-group">
-                <label for="logo" class="am-u-sm-3 am-form-label">类型</label>
-                <div style="margin-top: 10px;">
-                    <span style="padding: 10px;">
-                      <input type="radio" name="tenantType" value="11" />
-                        企业
-                    </span>
-                    <span style="padding: 10px;">
-                      <input type="radio" name="tenantType" value="12" />
-                        个体
-                    </span>
-                    <span style="padding: 10px;">
-                      <input type="radio" name="tenantType" value="13" />
-                        个人
-                    </span>
-                </div>
-            </div>
-
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
                     <button type="submit" class="am-btn am-btn-primary">保存</button>
