@@ -56,21 +56,33 @@ public class ProductController {
         xQuery.put("product_category_id", projectId);
         xQuery.addRequestParamToModel(model,request);
         List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
-        ProductModel productModel = (ProductModel)productModelList.get(0);
-        Product product = productModel.getProduct();
-        List<ProductPicture> list = product.getProductPictureList();
+        ProductModel productModel = new ProductModel();
+        List<ProductPicture> list = new ArrayList<ProductPicture>();
+        Product product = new Product();
+        if(productModelList!=null&&productModelList.size()>0) {
+            productModel = (ProductModel) productModelList.get(0);
+            product = productModel.getProduct();
+            list = product.getProductPictureList();
+        }
+
         List<String> stringList = new ArrayList<String>();
+        if(list!=null&&list.size()>0){
         for(ProductPicture picture:list){
             if("2".equals(picture.getStatus())){
                 stringList.add(picture.getPictureUrl());
             }
         }
+        }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
+        String mainPictureUrl = new String();
+        if(stringList!=null&&stringList.size()>0){
+            mainPictureUrl = stringList.get(0);
+        }
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
         model.addAttribute("productModelList",productModelList);
-        model.addAttribute("mainPicture",stringList.get(0));
+        model.addAttribute("mainPicture",mainPictureUrl);
         return "/product/productModelList";
     }
 
