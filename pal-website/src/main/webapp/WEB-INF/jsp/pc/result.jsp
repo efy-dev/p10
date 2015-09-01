@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                     <c:if test="${result.authenticity != -1}">
-                        <c:if test="${ not emptyproduct.tenantProductSeries.tenantCertification}">
+                        <c:if test="${ not empty product.tenantProductSeries.tenantCertification}">
                             <tr>
                                 <td>认证证书</td>
                                 <td>${product.tenantProductSeries.tenantCertification.name}</td>
