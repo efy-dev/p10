@@ -92,7 +92,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&view=plist&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
+                                <a href="#">
                                         ${tenantCategory.value}
                                 </a>
                                 <%--<c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">--%>
