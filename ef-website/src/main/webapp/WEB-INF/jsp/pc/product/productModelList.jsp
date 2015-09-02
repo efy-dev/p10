@@ -78,13 +78,14 @@
                        <% i++;%>
                        <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                            <span class="tips">精品<em class="icon"></em></span>
-                           <img class="imgfilter"
-                                src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                           <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>
 
                 <%}else{%>
+                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
                             src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                       </a>
                        <%}%>
                 <p class="wh name">${productModel.product.name}
                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
