@@ -40,7 +40,7 @@
                     <th class="table-set">操作</th>
                     <th class="table-title">订单号</th>
                     <th class="table-title">产品</th>
-                    <th class="table-title">支付类型</th>
+                    <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
@@ -88,14 +88,14 @@
                             </c:forEach>
 
                         </td>
-                        <td class="am-hide-sm-only">
-                            <c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                    checkedValue="${purchaseOrderPayment.payWay}"
-                                                    type="normal"/>
-                            </c:forEach>
-                        </td>
+                        <%--<td class="am-hide-sm-only">--%>
+                            <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
+                                <%--<span style="margin-left: 10px;">--%>
+                                    <%--<ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"--%>
+                                                    <%--checkedValue="${purchaseOrderPayment.payWay}"--%>
+                                                    <%--type="normal"/>--%>
+                            <%--</c:forEach>--%>
+                        <%--</td>--%>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"

@@ -18,6 +18,7 @@ public class LabelBatch {
 
     private String id;
     private String setting;
+    private String serial;
     private Integer amount;
     private Date createDate;
     private String status;
@@ -31,6 +32,15 @@ public class LabelBatch {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     @Column(name = "setting")

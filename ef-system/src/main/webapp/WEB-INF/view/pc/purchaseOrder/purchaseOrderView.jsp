@@ -21,16 +21,10 @@
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3">${object.serial}</td>
-                <td class="am-primary am-u-md-3">支付方式</td>
-                <td class="am-u-md-3">
-                    <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                checkedValue="${purchaseOrderPayment.payWay}"
-                                                type="normal"/>
-                                </span>
-                    </c:forEach>
-                </td>
+
+                <td class="am-primary am-u-md-3">订单总额</td>
+                <td class="am-u-md-3">${object.total}</td>
+
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单状态</td>
@@ -78,7 +72,7 @@
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
         <%--<div class="am-panel-hd"><strong>订单商品列表</strong></div>--%>
-            <h4>订单商品列表</h4>
+            <h4>商品列表</h4>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -113,6 +107,7 @@
             <thead>
             <tr>
                 <th class="table-title">支付方式</th>
+                <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
                 <th class="table-title">支付者姓名</th>
                 <th class="table-title">支付时间</th>
@@ -126,6 +121,7 @@
                                         checkedValue="${purchaseOrderPayment.payWay}"
                                         type="normal"/>
                 </td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderPayment.status"
                                     checkedValue="${purchaseOrderPayment.status}"

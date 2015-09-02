@@ -19,9 +19,8 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="编辑"/>
-    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProductSeries&id=${object.id}"/>'"--%>
-    <input onclick=""
-           type="button" class="am-btn am-btn-default am-btn-xs"
+    <input onclick="myConfirm('<c:url value="/basic/xm.do?qm=removeProductSeries&id=${object.id}"/>', 'D')"
+           type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
     <input onclick="window.history.back()"
@@ -34,6 +33,7 @@
         <strong class="am-text-primary am-text-lg">非遗项目详细信息</strong>
     </div>
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div am-panel am-panel-default admin-sidebar-panel>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>

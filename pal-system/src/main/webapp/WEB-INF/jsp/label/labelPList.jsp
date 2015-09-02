@@ -20,6 +20,7 @@
     </div>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -42,6 +43,10 @@
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                             <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${label.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs">查询记录</button>
+                            <c:if test="${label.status != '4'}">
+                                <button onclick="myConfirm('<c:url value="/Label/cancelLabelAjax.do?id=${label.id}"/>', 'CA')"
+                                        class="am-btn am-btn-default am-btn-xs am-text-danger">作废</button>
+                            </c:if>
                         </div>
                     </div>
                 </td>

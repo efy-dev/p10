@@ -25,6 +25,9 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
                         "<a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "')\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a>" +
                         "</div>";
                 }
+                if(data.length == 0){
+                    modalContent = "<div style='color: red'>没有您需要的信息!</div>";
+                }
                 var out = modalStart + modalContent + modalEnd;
                 $("body").append(out);
                 $("#" + artDialogLogId + artDialogLogName).modal({
@@ -148,4 +151,55 @@ function afterSubmitForm(formId){
         }
     }
     return true;
+}
+
+function myConfirm(url, type){
+    var DValue=document.getElementById("DValue");
+    var AValue=document.getElementById("AValue");
+    var CValue=document.getElementById("CValue");
+    if(type == "D"){
+        DValue.setAttribute("style","color: red;display");
+        AValue.setAttribute("style","color: red;display:none");
+        CValue.setAttribute("style","color: red;display:none");
+    }
+    if(type == "A"){
+        DValue.setAttribute("style","color: red;display:none");
+        AValue.setAttribute("style","color: red;display");
+        CValue.setAttribute("style","color: red;display:none");
+    }
+    if(type == "C" || type == "CA"){
+        DValue.setAttribute("style","color: red;display:none");
+        AValue.setAttribute("style","color: red;display:none");
+        CValue.setAttribute("style","color: red;display");
+    }
+
+    $('#my-confirm').modal({
+        //width:300,
+        //height:100,
+        onConfirm: function() {
+            if(type == "CA"){
+                cancelOneLabel(url)
+            }else{
+                window.location.href = url;
+            }
+        },
+        onCancel: function() {
+            alert('算求，不弄了');
+        }
+    });
+}
+
+function cancelOneLabel(url){
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            window.location.reload();
+        },
+        error: function (message) {
+            alert(message.responseText);
+        }
+    });
 }

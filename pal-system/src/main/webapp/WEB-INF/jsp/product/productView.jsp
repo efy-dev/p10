@@ -22,9 +22,8 @@
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="编辑"/>
-    <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProduct&id=${object.id}"/>'"--%>
-    <input onclick=""
-           type="button" class="am-btn am-btn-default am-btn-xs"
+    <input onclick="myConfirm('<c:url value="/basic/xm.do?qm=removeProduct&id=${object.id}"/>', 'D')"
+           type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="删除" />
     <input onclick="window.history.back()"
@@ -32,6 +31,7 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">商品详细信息</strong>
@@ -77,7 +77,7 @@
         <tr>
             <td>防伪标签</td>
             <td>
-                <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.id:${object.id}"/>">查看标签</a>
+                <a href="<c:url value="/basic/xm.do?qm=plistLabel_productLabel&conditions=purchaseOrderLabel.product.serial:${object.serial}"/>">查看标签</a>
             </td>
         </tr>
         </c:if>

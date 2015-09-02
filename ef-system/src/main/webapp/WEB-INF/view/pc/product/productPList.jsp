@@ -64,11 +64,11 @@
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}"/>">
                                                 修改基本信息
                                             </a>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&view=${view}&id=${product.id}"/>">
-                                                修改描述
-                                            </a>
+                                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&view=${view}&id=${product.id}"/>">--%>
+                                                <%--修改描述--%>
+                                            <%--</a>--%>
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${product.id}"/>">
-                                                修改属性
+                                                修改规格
                                             </a>
                                             <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">--%>
                                                 <%--修改图片--%>

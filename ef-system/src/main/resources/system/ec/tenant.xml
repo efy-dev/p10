@@ -37,7 +37,7 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.PersonalTenant">
             <does>
-                <do name="formPersonalTenant" label="保存个人商家" access="" result="/tenantPersonal/tenantPersonalForm"/>
+                <do name="formPersonalTenant" label="保存个人商家" access="" result="/tenantPersonal/tenantPersonalForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
                 <do name="formPersonTenant" label="保存个人商家" access="" result="/tenantPersonal/tenantPersonForm"/>
                 <do name="viewPersonalTenant" label="查看个人商家" access="" result="/tenantPersonal/tenantPersonalView"/>
                 <do name="saveOrUpdatePersonalTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
@@ -57,7 +57,7 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.PrivateTenant">
             <does>
-                <do name="formPrivateTenant" label="保存个体商家" access="" result="/tenantPrivate/tenantPrivateForm"/>
+                <do name="formPrivateTenant" label="保存个体商家" access="" result="/tenantPrivate/tenantPrivateForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
                 <do name="formPrivaterTenant" label="保存个体商家" access="" result="/tenantPrivate/tenantPrivaterForm"/>
                 <do name="viewPrivateTenant" label="查看个体商家" access="" result="/tenantPrivate/tenantPrivateView"/>
                 <do name="saveOrUpdatePrivateTenant" label="保存个体商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
@@ -76,7 +76,7 @@
                 basic="simple" others=""
                 model="com.efeiyi.ec.tenant.model.EnterpriseTenant">
             <does>
-                <do name="formEnterpriseTenant" label="保存企业商家" access="" result="/tenantEnterprise/tenantEnterpriseForm"/>
+                <do name="formEnterpriseTenant" label="保存企业商家" access="" result="/tenantEnterprise/tenantEnterpriseForm" execute="com.efeiyi.ec.system.tenant.controller.formTenantHandler"/>
                 <do name="formEnterprisesTenant" label="保存企业商家" access="" result="/tenantEnterprise/tenantEnterprisesForm"/>
                 <do name="viewEnterpriseTenant" label="查看企业商家" access="" result="/tenantEnterprise/tenantEnterpriseView"/>
                 <do name="saveOrUpdateEnterpriseTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantHandler">
@@ -160,7 +160,7 @@
                 <do name="removeTenantProject" label="删除商家大师" access="" result="json"/>
                 <do name="listTenantProject" label="大师商家大师" access="" result="/tenantMaster/tenantMasterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="商家id" name="tenant.id" defaultValue="${MY_TENANT}"  operation="eq"/>
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
                     </query>
                 </do>
 

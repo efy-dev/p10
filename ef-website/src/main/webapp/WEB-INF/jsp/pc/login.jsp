@@ -68,7 +68,7 @@
                                data-foolish-msg="把 IQ 卡密码交出来！">
                     </div>
                     <div class="am-form-group">
-                        <%--<label><input class="checkbox" type="checkbox"/>自动登录</label>--%>
+                        <%--<label><input id="remember-me" name="remember-me" class="checkbox" type="checkbox"/>自动登录</label>--%>
                         <a class="forgetpwd" href="<c:url value="/forgetPwd"/>" title="忘记密码">忘记密码？</a>
                     </div>
                     <button class="am-btn am-btn-secondary" type="submit">登 录</button>
