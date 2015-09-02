@@ -379,6 +379,7 @@
                         '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
+                        '</a>'+
                         '</dd>'+
                         '</dl>'+
                         '</li>';
@@ -430,9 +431,10 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-//                        '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
-//                        '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
+                  //      '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
+                        '</a>'+
                         '</dd>'+
                         '</dl>'+
                         '</li>';
