@@ -24,7 +24,16 @@
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
-            <td>操作</td>
+            <td>
+                <div id="thDiv">
+                    操作
+                    <%--<c:if test="${not empty requestScope.pageInfo.list}">--%>
+                        <%--<button onclick="myConfirm('<c:url value="/Label/cancelLabelListAjax.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>', 'CL')"--%>
+                                <%--style="margin-right:2px;height: 30px"--%>
+                                <%--class="am-btn am-btn-default am-btn-xs am-text-danger">全部作废</button>--%>
+                    <%--</c:if>--%>
+                </div>
+            </td>
             <td>序列号</td>
             <td>防伪码</td>
             <td>标签批次</td>
