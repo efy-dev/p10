@@ -403,7 +403,7 @@
             successTimeout:1000000,                 //超时
             fileSizeLimit:'20MB',
             removeTimeout:1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeExts: "*.jpg;*.png;*",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: { "imgType": "normal" }, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
