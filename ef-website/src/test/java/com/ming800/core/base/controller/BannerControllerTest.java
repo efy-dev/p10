@@ -19,6 +19,8 @@ import javax.annotation.Resource;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -69,24 +71,26 @@ public class BannerControllerTest {
     public void init() {
          /* logger.info("加载spring配置开始 ............");
 	      *//* ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); *//*
-        *//*ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
+        */
+       /* ApplicationContext applicationContext = new FileSystemXmlApplicationContext(new String[]{
                 "src/main/webapp//WEB-INF/applicationContext-*.xml",
-                "src/main/webapp//WEB-INF/spring-servlet.xml"});*//*
+                "src/main/webapp//WEB-INF/spring-servlet.xml"});*/
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{
                 "classpath*:config/applicationContext-*.xml",
-                "classpath*:config/spring-servlet.xml"});
+                "WEB-INF/applicationContext-*.xml",
+                "WEB-INF/spring-servlet.xml"});
          logger.info("加载spring配置结束.............");
         map = new ModelMap();
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         request.setCharacterEncoding("UTF-8");
         //bannerController = new BannerController();
-        baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
+       // baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
         bannerController = (BannerController)applicationContext.getBean("bannerController");
         documentController = (DocumentController)applicationContext.getBean("documentController");
 
 
-        wordValueController = (WordValueController)applicationContext.getBean("wordValueController");*/
+        //wordValueController = (WordValueController)applicationContext.getBean("wordValueController");*/
     }
     @Test
     public void demo1() {

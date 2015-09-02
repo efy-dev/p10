@@ -6,6 +6,10 @@
 <!-- Tile icon for Win8 (144x144 + tile color) -->
 <meta name="msapplication-TileImage" content="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
 <meta name="msapplication-TileColor" content="#0e90d2">
+<meta http-equiv="Content-Type" contect="text/html";charset=utf-8">
+<%--<META HTTP-EQUIV="Pragma" CONTENT="">--%>
+<META HTTP-EQUIV="Cache-Control" CONTENT="max-age=1920600">
+
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/app.css"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/css/myorder.css"/>">

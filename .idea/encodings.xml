@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base_resource" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base_resource/src/main/resources/ApplicationResources-common_en_US.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/base_resource/src/main/resources/ApplicationResources-common_zh_CN.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/ef-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-personal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/applicationContext-ehCache.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/applicationContext-i18n.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/applicationContext-resources.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/applicationContext-service.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/ehcache.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/hibernate.cfg.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/log4j.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-system/src/main/resources/test/spring-view.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-tenant" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-website" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-website/src/main/webapp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki/src/main" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki/src/main/resources/resources.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki/src/main/resources/setting" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ef-wiki/src/main/webapp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pal-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pal-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pal-website" charset="UTF-8" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>

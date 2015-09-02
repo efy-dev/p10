@@ -42,8 +42,9 @@ public class StaticCacheFilter implements Filter {
         {
             ext = uri.substring( dot+1 );
         }
-
+        setRequestHeader(req, uri, ext);
         setResponseHeader( res, uri, ext );
+
         chain.doFilter(request, response);
 
     }
@@ -88,6 +89,29 @@ public class StaticCacheFilter implements Filter {
         }
     }
     private void setResponseHeader( HttpServletResponse response, String uri, String ext )
+    {
+        if( ext!= null && ext.length() > 0 )
+        {
+            Integer expires = (Integer)expiresMap.get(ext);
+            if( expires != null )
+            {
+                logger.info( uri + ".Expires: "+ expires.intValue());
+                if( expires.intValue() > 0 )
+                {
+                    response.setHeader("Cache-Control","max-age="+expires.intValue()); //HTTP 1.1
+                    response.setDateHeader ("Expires", new Date().getTime()*2);
+                    response.setHeader("Pragma","public");
+                }
+                else
+                {
+                    response.setHeader("Cache-Control","no-cache");
+                    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+                    response.setDateHeader("Expires", 0);
+                }
+            }
+        }
+    }
+    private void setRequestHeader( HttpServletResponse response, String uri, String ext )
     {
         if( ext!= null && ext.length() > 0 )
         {
