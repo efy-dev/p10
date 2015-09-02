@@ -12,7 +12,10 @@
                 <do name="plistTenant" access="" label="商家分页列表"
                     result="/tenant/tenantPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
+                    </query>
+                    <query name="default1" label="商家名称" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="商家名称" inputType="text"/>
                     </query>
                 </do>
                 <do name="formTenant" label="保存商家" access="" result="/tenant/tenantForm"/>

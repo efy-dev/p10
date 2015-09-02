@@ -20,6 +20,7 @@
 <div style="text-align: left;margin-left: 10px;" >
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=formProject&fatherId=${fatherId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目" />
 </div>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped" >
     <tr style="text-align: left">
         <td  width="25%">操作</td>

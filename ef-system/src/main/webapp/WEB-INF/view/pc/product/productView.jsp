@@ -330,7 +330,7 @@
     $(function(){
 
 
-            CKEDITOR.replace('content', { height: '240px', width: '552px' });
+            CKEDITOR.replace('content', { height: '440px', width: '1000px' });
 
 
         $('#btn_upload').uploadify({
