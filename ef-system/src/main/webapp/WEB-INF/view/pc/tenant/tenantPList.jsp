@@ -73,24 +73,7 @@
                                        href="<c:url value="/basic/xm.do?qm=plistTenantCategory_default&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 店铺类别
                                     </a>
-                                    <c:if test="${empty tenant.tenantRecommendedList}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
-                                           href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
-                                            <span class="am-icon-heart"> 推荐</span>
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${not empty tenant.tenantRecommendedList}">
-                                        <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
-                                            <c:if test="${recommended.tenant.id == tenant.id}">
-                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${tenant.id}"  id="${recommended.id}" recommend="0">
-                                                    <span class="am-icon-heart" >取消推荐 </span>
-                                                </a>
-                                            </c:if>
-                                        </c:forEach>
 
-                                    </c:if>
                                     <c:if test="${tenant.tenantType == '11'}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            href="<c:url value="/basic/xm.do?qm=formEnterprisesTenant&id=${tenant.id}"/>" >
@@ -109,7 +92,25 @@
                                             <span class="am-icon-heart">完善信息</span>
                                         </a>
                                     </c:if>
-                                    <span style="display: none;float: left;padding-left: 10px;">
+                                    <c:if test="${empty tenant.tenantRecommendedList}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
+                                           href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
+                                            <span class="am-icon-heart"> 推荐</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${not empty tenant.tenantRecommendedList}">
+                                        <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
+                                            <c:if test="${recommended.tenant.id == tenant.id}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${tenant.id}"  id="${recommended.id}" recommend="0">
+                                                    <span class="am-icon-heart" >取消推荐 </span>
+                                                </a>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </c:if>
+                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
                                                 <a class=" am-btn-primary" onclick="saveRecommended(this,'tenantRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
                                        </span>
