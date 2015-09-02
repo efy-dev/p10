@@ -157,29 +157,51 @@ function myConfirm(url, type){
     var DValue=document.getElementById("DValue");
     var AValue=document.getElementById("AValue");
     var CValue=document.getElementById("CValue");
+    var CAValue=document.getElementById("CAValue");
+    var CLValue=document.getElementById("CLValue");
     if(type == "D"){
-        DValue.setAttribute("style","color: red;display");
-        AValue.setAttribute("style","color: red;display:none");
-        CValue.setAttribute("style","color: red;display:none");
+        DValue.setAttribute("style","display");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
     }
     if(type == "A"){
-        DValue.setAttribute("style","color: red;display:none");
-        AValue.setAttribute("style","color: red;display");
-        CValue.setAttribute("style","color: red;display:none");
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
     }
-    if(type == "C" || type == "CA"){
-        DValue.setAttribute("style","color: red;display:none");
-        AValue.setAttribute("style","color: red;display:none");
-        CValue.setAttribute("style","color: red;display");
+    if(type == "C"){//作废一个订单下所有标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "CA"){//作废一个标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "CL"){//作废一个标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display");
     }
 
     $('#my-confirm').modal({
         //width:300,
         //height:100,
         onConfirm: function() {
-            if(type == "CA"){
-                cancelOneLabel(url)
-            }else{
+            if(type == "CA" || type == "CL"){
+                cancelLabel(url)
+            }else {
                 window.location.href = url;
             }
         },
@@ -189,7 +211,7 @@ function myConfirm(url, type){
     });
 }
 
-function cancelOneLabel(url){
+function cancelLabel(url){
     $.ajax({
         type: "post",
         url: url,

@@ -23,9 +23,6 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>">
-    <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
-    <script src="<c:url value='/scripts/function.js'/>"></script>
   <sitemesh:write property='head'/>
   <style>
     .pal-active {
