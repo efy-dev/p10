@@ -28,7 +28,7 @@
     <script src="<c:url value='/scripts/function.js'/>"></script>
   <sitemesh:write property='head'/>
   <style>
-    .efy-active {
+    .pal-active {
       background-color: #9a9a9a;
     }
   </style>
