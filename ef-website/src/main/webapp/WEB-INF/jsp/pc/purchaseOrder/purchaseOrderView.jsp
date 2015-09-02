@@ -30,6 +30,7 @@
             <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
           </dd>
         </dl>
+        <c:if test="${!empty purchaseOrderDelivery}">
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">物流信息</dt>
           <dd class="od-id">
@@ -42,6 +43,7 @@
             </div>
           </dd>
         </dl>
+        </c:if>
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">商品信息</dt>
           <dd class="od-id">
@@ -65,8 +67,8 @@
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
             <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
-            <p>收货人姓名：<span>${order.consumerAddress.consumer.name}</span></p>
-            <p>联系电话：<span>${order.consumerAddress.consumer.phone}</span></p>
+            <p>收货人姓名：<span>${order.consumerAddress.consignee}</span></p>
+            <p>联系电话：<span>${order.consumerAddress.phone}</span></p>
 
           </dd>
         </dl>
