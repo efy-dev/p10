@@ -42,7 +42,7 @@
 <div class="hd product-intro">
   <div class="wh">
     <ol class="am-breadcrumb">
-      <li><a href="#">首页</a></li>
+      <li><a href="/">首页</a></li>
       <li><a href="#">分类</a></li>
       <li class="am-active">内容</li>
     </ol>
@@ -114,7 +114,7 @@
       <!-- //End-->
       <div class="choose-btns">
         <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
-        <a class="btn btn-buy" href="order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
+        <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
