@@ -156,15 +156,15 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../shop2015/js/jquery.min.js"></script>
+<script src="/scripts/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/scripts/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
-<script src="../shop2015/js/system.js"></script>
+<script src="/scripts/js/amazeui.min.js"></script>
+<script src="/scripts/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
 </html>
