@@ -36,10 +36,10 @@
 
         <div class="am-u-sm-9">
           <c:if test="${empty object.serial}">
-            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}" disabled="disabled">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}" readonly="readonly">
           </c:if>
           <c:if test="${not empty object.serial}">
-            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}" disabled="disabled">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}" readonly="readonly">
           </c:if>
           <!--<small>必填项*</small>-->
         </div>
