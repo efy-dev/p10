@@ -169,5 +169,30 @@
 
             </does>
         </entity>
+
+
+        <entity name="TenantCategory" label="商家大师"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantCategory">
+            <does>
+                <do name="plistTenantCategory" access="" label="商家大师分页列表"
+                    result="/tenantCategory/tenantCategoryPList" execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="formTenantCategory" label="保存商家大师" access="" result="/tenantCategory/tenantCategoryForm" execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler"/>
+                <do name="saveOrUpdateTenantCategory" label="保存商家大师" access="" result="/tenantCategory/tenantCategorySaveSuccess">
+                </do>
+                <do name="removeTenantCategory" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantCategory" label="大师商家大师" access="" result="/tenantCategory/tenantCategoryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>

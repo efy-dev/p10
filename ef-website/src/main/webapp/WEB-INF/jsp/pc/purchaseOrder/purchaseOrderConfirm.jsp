@@ -154,29 +154,32 @@
                 <div class="page-Commodity">
                     <table>
                         <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                            <tr>
-                                <td width="542">
-                                    <div class="cols1 page-pdl">
-                                        <img src="${product.productModel.product.picture_url}" alt=""/>
+                            <c:if test="${product.isChoose==1}">
 
-                                        <div class="info">
-                                            <p><a href="#">${product.productModel.product.project.name}</a></p>
+                                <tr>
+                                    <td width="542">
+                                        <div class="cols1 page-pdl">
+                                            <img src="${product.productModel.product.picture_url}" alt=""/>
 
-                                            <p><a href="#">${product.productModel.product.name}
-                                                <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                           var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
-                                            </p>
+                                            <div class="info">
+                                                <p><a href="#">${product.productModel.product.project.name}</a></p>
+
+                                                <p><a href="#">${product.productModel.product.name}
+                                                    <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                               var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td width="171"><span
-                                        class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
-                                </td>
-                                <td width="137">
-                                    <span>x${product.amount}</span>
-                                </td>
-                                <td width="102"><span>有货</span></td>
-                            </tr>
+                                    </td>
+                                    <td width="171"><span
+                                            class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
+                                    </td>
+                                    <td width="137">
+                                        <span>x${product.amount}</span>
+                                    </td>
+                                    <td width="102"><span>有货</span></td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
                     </table>
                 </div>

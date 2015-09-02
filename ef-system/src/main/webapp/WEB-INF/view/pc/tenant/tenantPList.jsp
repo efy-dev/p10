@@ -69,6 +69,10 @@
                                     href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="<c:url value="/basic/xm.do?qm=plistTenantCategory_default&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 店铺类别
+                                    </a>
                                     <c:if test="${empty tenant.tenantRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"

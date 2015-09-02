@@ -30,17 +30,19 @@
         <div class="title">${tenant.name}</div>
         <ul class="ul-list">
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
-            <li>
-              <img class="img" src="${product.productModel.product.picture_url}" alt="">
-              <div class="bd info">
-                <p class="text">${product.productModel.product.name}</p>
-                <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
-                <p class="num"><i class="iocn-x"></i><strong>${product.amount}</strong></p>
-              </div>
-            </li>
+            <c:if test="${product.isChoose==1}">
+              <li>
+                <img class="img" src="${product.productModel.product.picture_url}" alt="">
+                <div class="bd info">
+                  <p class="text">${product.productModel.product.name}</p>
+                  <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
+                  <p class="num"><i class="iocn-x"></i><strong>${product.amount}</strong></p>
+                </div>
+              </li>
+            </c:if>
           </c:forEach>
         </ul>
-        <div class="bd ask"><textarea name="" id="" cols="30" rows="4" placeholder="给卖家留言"></textarea></div>
+        <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4" placeholder="给卖家留言"></textarea></div>
       </div>
     </c:forEach>
 
