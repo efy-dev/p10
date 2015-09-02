@@ -163,7 +163,7 @@
                     <td>${pol.product.name}</td>
                     <td>${pol.amount}
                         <c:if test="${not empty pol.labelList}">
-                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.id:${pol.id}'/>">查看分配标签</a>
+                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.purchaseOrder.serial:${pol.purchaseOrder.serial}'/>">查看分配标签</a>
                         </c:if>
                     </td>
                 </tr>
