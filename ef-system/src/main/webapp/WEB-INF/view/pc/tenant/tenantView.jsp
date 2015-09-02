@@ -65,7 +65,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listProfessional_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listProfessional_default&conditions=bigTenant.id:${object.id}"/>
     </div>
 </div>
 <%--<div class="am-g">--%>

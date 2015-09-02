@@ -79,6 +79,7 @@
                 <match url="/basic/xm.do?qm=formEnterpriseTenant"/>
                 <match url="/basic/xm.do?qm=formPrivateTenant"/>
                 <match url="/basic/xm.do?qm=formPersonalTenant"/>
+                <match url="  /basic/xm.do?qm=formTenant"/>
                 <match url="/product/saveNewProduct.do?view=tenant"/>
 
             </jnode>

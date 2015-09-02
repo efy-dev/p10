@@ -109,7 +109,7 @@
                 <input type="hidden" name="step" value="description">
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea id="productDescription" name="content" class="ckeditor"
+                            <textarea id="productDescription" name="content" class="ckeditor" id="content"
                                       placeholder="商品描述" required >
                                 ${object.productDescription.content}
                             </textarea>
@@ -328,6 +328,11 @@
 <script>
 
     $(function(){
+
+
+            CKEDITOR.replace('content', { height: '240px', width: '552px' });
+
+
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/product/uploadify.do?status=1&productId=${object.id}"/>',            // 服务器处理地址
             swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
