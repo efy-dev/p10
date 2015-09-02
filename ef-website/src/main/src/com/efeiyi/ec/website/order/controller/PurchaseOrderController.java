@@ -115,8 +115,12 @@ public class PurchaseOrderController extends BaseController {
         queryParamMap.put("orderId",orderId);
         String hql="from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
         PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        String pd=purchaseOrderDelivery.getLogisticsCompany();
-        String serial=purchaseOrderDelivery.getSerial();
+        String pd="null";
+        String serial="null";
+        if(purchaseOrderDelivery!=null){
+            pd=purchaseOrderDelivery.getLogisticsCompany();
+            serial=purchaseOrderDelivery.getSerial();
+        }
         model.addAttribute("purchaseOrderDelivery",purchaseOrderDelivery);
         String content = "";
         try
