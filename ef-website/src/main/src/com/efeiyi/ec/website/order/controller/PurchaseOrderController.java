@@ -391,7 +391,7 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         String cartId = request.getParameter("cartId");
-        Cart cart = null;
+        Cart cart;
         if (cartId == null || cartId.equals("")) {
             cart = (Cart) request.getSession().getAttribute("cart");
             XQuery xQuery = new XQuery("listCart_default", request);
@@ -403,7 +403,6 @@ public class PurchaseOrderController extends BaseController {
                 for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(realCart);
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-                    cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());
                 }
             }
             request.getSession().removeAttribute("cart");
