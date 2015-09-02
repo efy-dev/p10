@@ -108,7 +108,7 @@
 <!--[if lte IE 8 ]>
 <script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script href="<c:url value='/scripts/assets/amazeui.ie8polyfill.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
 
 <script href="<c:url value='/scripts/js/amazeui.min.js'/>"></script>
