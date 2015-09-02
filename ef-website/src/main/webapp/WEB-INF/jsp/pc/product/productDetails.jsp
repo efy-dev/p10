@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>010104商品详情</title>
+  <title>商品详情</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -42,7 +42,7 @@
 <div class="hd product-intro">
   <div class="wh">
     <ol class="am-breadcrumb">
-      <li><a href="#">首页</a></li>
+      <li><a href="/">首页</a></li>
       <li><a href="#">分类</a></li>
       <li class="am-active">内容</li>
     </ol>
@@ -114,7 +114,7 @@
       <!-- //End-->
       <div class="choose-btns">
         <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
-        <a class="btn btn-buy" href="order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
+        <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
@@ -156,15 +156,15 @@
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../shop2015/js/jquery.min.js"></script>
+<script src="/scripts/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/scripts/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
-<script src="../shop2015/js/system.js"></script>
+<script src="/scripts/js/amazeui.min.js"></script>
+<script src="/scripts/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
 </html>
