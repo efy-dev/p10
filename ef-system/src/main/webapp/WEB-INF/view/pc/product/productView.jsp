@@ -122,12 +122,12 @@
         <fieldset>
             <legend>
                 <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&id=${object.id}"/>">
-                    修改属性
+                    修改规格
                 </a>
             </legend>
             <div class="am-u-md-9" style="margin-left: 19%;">
                 <div class="am-panel am-panel-default">
-                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品模型<span
+                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品规格<span
                             class="am-icon-chevron-down am-fr"></span></div>
                     <div id="collapse-panel-2" class="am-in">
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
@@ -330,7 +330,7 @@
     $(function(){
 
 
-            CKEDITOR.replace('content', { height: '240px', width: '552px' });
+            CKEDITOR.replace('content', { height: '440px', width: '1000px' });
 
 
         $('#btn_upload').uploadify({
