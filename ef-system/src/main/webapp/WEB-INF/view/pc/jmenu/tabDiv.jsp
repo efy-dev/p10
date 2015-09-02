@@ -60,7 +60,7 @@
 <script>
 
     <c:forEach items="${doQueryList}" var="doQuery">
-    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}','<c:url value="/"/> ')
+    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}','<c:url value="/"/>')
     </c:forEach>
 
 </script>

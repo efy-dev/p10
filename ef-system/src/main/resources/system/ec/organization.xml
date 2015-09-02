@@ -221,7 +221,7 @@
                 <do name="saveOrUpdateProfessional" label="保存商家用户" access="" result="redirect:/basic/xm.do?qm=plistProfessional_default"/>
                 <do name="listProfessional" label="Professional列表" access="" result="/professional/professionalList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="主键" name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition label="主键" name="bigTenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
 
