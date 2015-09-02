@@ -50,10 +50,15 @@
     </jnode>
     <jnode id="efecProductAndTenant" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
         <jnode url="" id="productManager" access="admin,manager" state="closed" text_zh_CN="商品管理">
-            <jnode url="/basic/xm.do?qm=plistProduct_default" access="admin" text_zh_CN="商品列表">
+            <jnode url="/basic/xm.do?qm=plistProduct_default&amp;view=newProduct" access="admin" text_zh_CN="商品列表">
                 <match url="/basic/xm.do?qm=plistProduct_default"/>
-                <match url="/basic/xm.do?qm=viewProduct&amp;view=product"/>
-                <match url="/basic/xm.do?qm=formProduct&amp;form=newProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=newProduct"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=newProduct"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=newProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=newProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=newProduct"/>
+                <match url="/product/saveNewProduct.do?view=newProduct"/>
+                /product/saveNewProduct.do?view=${view}
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">
                 <match url="/basic/xm.do?qm=plistProductRecommended_default"/>
@@ -62,12 +67,21 @@
             </jnode>
         </jnode>
         <jnode url="" id="tenantManager" access="admin" state="closed" text_zh_CN="商家管理">
-            <jnode url="/basic/xm.do?qm=plistTenant_default" access="admin,manager" text_zh_CN="商家列表">
+            <jnode url="/basic/xm.do?qm=plistTenant_default&amp;view=tenant" access="admin,manager" text_zh_CN="商家列表">
                 <match url="/basic/xm.do?qm=plistTenant_default"/>
-                <match url="/basic/xm.do?qm=formTenant"/>
+                <match url="/basic/xm.do?qm=formTenant&amp;view=tenant"/>
                 <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=tenant"/>
                 <match url="/basic/xm.do?qm=viewTenant&amp;view=tenantList"/>
-                <match url="/basic/xm.do?qm=viewProduct&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=tenant"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=tenant"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=tenant"/>
+                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=tenant"/>
+                <match url="/basic/xm.do?qm=formEnterpriseTenant"/>
+                <match url="/basic/xm.do?qm=formPrivateTenant"/>
+                <match url="/basic/xm.do?qm=formPersonalTenant"/>
+                <match url="  /basic/xm.do?qm=formTenant"/>
+                <match url="/product/saveNewProduct.do?view=tenant"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="/basic/xm.do?qm=plistProfessional_default"/>
@@ -194,6 +208,8 @@
                 <match url="/basic/xm.do?qm=formProject&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProjectTag&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProjectProperty&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formProjectPropertyValue"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProjectCategory_default" access="admin,manager" text_zh_CN="类别列表">
                 <match url="/basic/xm.do?qm=plistProjectCategory_default"/>

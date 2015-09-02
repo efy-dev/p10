@@ -58,7 +58,7 @@ input:-moz-placeholder {color: #dadada !important;font-size:15px;font-weight:nor
 .search-result .item2 .info .btn {width:200px;height:45px;line-height:45px;text-align:center;color:#000;font-size:18px;font-family:Fangsong;border: 1px #354558 solid;float: right;margin-top:36px;transition:all 0.4s;}
 .search-result .item2 .info .btn:hover {background:#000;color: #fff;}
 .search-result .item2 .info .result-title {width:100%;padding:20px 0;float: left;text-align: center;}
-.search-result .item2 .info .result-title strong {width:100%;padding:0 10px;float:left;color:#f90;font-size: 24px;font-weight:normal;}
+.search-result .item2 .info .result-title strong {width:100%;padding:0 10px;float:left;color:#f90;font-size: 21px;font-weight:normal;}
 .search-result .item2 .info .result-title a {font-family: Fangsong;font-size:13px;color:#189aff;float: right;margin-right:60px;}
 .search-result .item-info {width:100%;float:left;padding-bottom:120px;}
 .search-result .item-info h2 {width:100%;text-align: center;font-size: 30px;font-weight: normal;float:left;margin-top:12px;margin-bottom:24px;}

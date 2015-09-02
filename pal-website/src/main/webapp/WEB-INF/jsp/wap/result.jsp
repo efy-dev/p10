@@ -60,23 +60,23 @@
             </div>
         </div>
         <!--//End-->
-        <%--<c:if test="${result.authenticity == 1}">--%>
-        <div class="am-paragraph-default">
-            <div class="infoitem">
-                <ul>
-                    <li><a href="<c:url value='/viewCertificate.do?code=${code}'/>">认证信息</a></li>
-                    <li><a href="<c:url value='/viewProduct.do?code=${code}'/>">商品信息</a></li>
-                    <li><a href="<c:url value='/viewSource.do?code=${code}'/>">溯源信息</a></li>
-                        <%--<li><a href="#">DNA鉴定信息</a></li>--%>
-                </ul>
+        <c:if test="${result.authenticity == 1}">
+            <div class="am-paragraph-default">
+                <div class="infoitem">
+                    <ul>
+                        <li><a href="<c:url value='/viewCertificate.do?code=${code}'/>">认证信息</a></li>
+                        <li><a href="<c:url value='/viewProduct.do?code=${code}'/>">商品信息</a></li>
+                        <li><a href="<c:url value='/viewSource.do?code=${code}'/>">溯源信息</a></li>
+                            <%--<li><a href="#">DNA鉴定信息</a></li>--%>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!--//End-->
-        <c:if test="${not empty product.shoppingUrl}">
-            <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default"
-                                            href="${product.shoppingUrl}">立即购买</a></div>
+            <!--//End-->
+            <c:if test="${not empty product.shoppingUrl}">
+                <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default"
+                                                href="${product.shoppingUrl}">立即购买</a></div>
+            </c:if>
         </c:if>
-        <%--</c:if>--%>
     </c:if>
 </article>
 

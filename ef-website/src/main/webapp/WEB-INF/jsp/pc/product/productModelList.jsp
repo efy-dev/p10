@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>品类首页新</title>
+  <title>品类首页</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -32,7 +32,7 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="/scripts/assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/css/amazeui.min.css'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/amazeui.min.css'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/app.css'/>">
 </head>
 <body>
@@ -40,7 +40,8 @@
 <div class="hd category">
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
-      <li><a href="#">首页</a></li>
+        <%String path = request.getContextPath();%>
+      <li><a href="/">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
   </div>
@@ -64,17 +65,19 @@
             <%! int i=0 ;%>
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-            <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                <% if(i==0){%>
+                   <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                 <span class="tips">精品<em class="icon"></em></span>
                     <span class="icon-r">
                         <i class="icon icon-chengpin"></i>
                         <i class="icon icon-hand"></i>
                     </span>
                 <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
-                <% i++;%>
-                <%}else{%>
-                <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                               <% i++;%>
+                               <%}else{%>
+                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
+                           <img class="imgfilter"
+                                src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                 <%}%>
                 <p class="wh name">${productModel.product.name}
                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
@@ -100,15 +103,15 @@
   <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script href="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
 
-<script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
-<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
+<script href="<c:url value='/scripts/js/amazeui.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/system.js'/>"></script>
 </body>
 </html>

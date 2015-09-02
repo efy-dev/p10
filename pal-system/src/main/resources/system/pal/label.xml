@@ -57,21 +57,22 @@
 
             <does>
                 <do name="plistLabel" access="" label="标签分页列表" result="/label/labelPList">
-                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
-                    </query>
+                    <!--<query name="default" label="默认" type="auto" orderBy="serial:asc">-->
+                        <!--<condition name="status" defaultValue="0" operation="ne" inputType="default"/>-->
+                    <!--</query>-->
                     <query name="serial" label="查找" type="auto" orderBy="serial:asc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="serial" operation="eq" label="序列号"/>
                     </query>
                     <query name="batchLabel" label="同批次标签查询" type="auto" orderBy="serial:asc">
-                        <condition name="labelBatch.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="labelBatch.serial" defaultValue="" operation="eq" label="标签批次号"/>
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                        <!--<condition name="serial" operation="eq" label="序列号" required="true"/>-->
                     </query>
                     <query name="productLabel" label="商品标签" type="auto" orderBy="serial:asc">
-                        <condition name="purchaseOrderLabel.product.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="purchaseOrderLabel.product.serial" defaultValue="" operation="eq" label="商品编号" />
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                        <!--<condition name="serial" operation="eq" label="序列号" required="true"/>-->
                     </query>
                     <!--<query name="allSerial" label="默认" type="auto" orderBy="serial:asc">-->
                         <!--<condition name="id" defaultValue="0" operation="ne"/>-->
@@ -80,8 +81,8 @@
                     <!--</query>-->
                     <query name="orderLabel" label="订单标签查询" type="auto" orderBy="serial:asc">
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="purchaseOrderLabel.id" defaultValue="" operation="eq" inputType="default"/>
-                        <condition name="serial" operation="eq" label="序列号" required="true"/>
+                        <condition name="purchaseOrderLabel.purchaseOrder.serial" defaultValue="" operation="eq" label="订单编号"/>
+                        <!--<condition name="serial" operation="eq" label="序列号" required="true"/>-->
                     </query>
                 </do>
 

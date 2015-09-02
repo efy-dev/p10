@@ -153,5 +153,9 @@ $(function(){
             $(this).parents('.nav-item').find('.ul-list')
         })
     })();
+    //商品详情页
+    (function(){
+
+    })();
 
 })

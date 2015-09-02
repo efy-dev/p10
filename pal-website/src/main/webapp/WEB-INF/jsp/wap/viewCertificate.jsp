@@ -53,32 +53,32 @@
     <!--列表标题-->
     <div class="am-list-news-bd">
         <ul class="am-list">
-            <c:forEach items="${product.tenant.tenantCertificationList}" var="certification">
+            <%--<c:forEach items="${product.tenant.tenantCertificationList}" var="certification">--%>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证证书:</strong>
-                    <span class="am-list-info2">${certification.name}</span>
+                    <span class="am-list-info2">${product.tenantProductSeries.tenantCertification.name}</span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证机构:</strong>
-                    <span class="am-list-info2">${certification.org}</span>
+                    <span class="am-list-info2">${product.tenantProductSeries.tenantCertification.org}</span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证时间:</strong>
-                    <span class="am-list-info2"> <fmt:formatDate value="${certification.theDate}"
+                    <span class="am-list-info2"> <fmt:formatDate value="${product.tenantProductSeries.tenantCertification.theDate}"
                                                                  pattern="yyyy年MM月"/></span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证结果:</strong>
                     <span class="am-list-info2"><ming800:status name="level" dataType="PCTenantCertification.level"
-                                                                checkedValue="${certification.level}"
+                                                                checkedValue="${product.tenantProductSeries.tenantCertification.level}"
                                                                 type="normal"/></span>
                 </li>
-            </c:forEach>
+            <%--</c:forEach>--%>
         </ul>
     </div>
 </div>
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <script type="text/javascript">
     $(function () {
         $('.am-slider-manual').flexslider({

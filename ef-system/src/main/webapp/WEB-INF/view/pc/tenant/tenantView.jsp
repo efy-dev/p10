@@ -38,71 +38,100 @@
 
     </div>
 </div>
-
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>大师信息</h2>
-
-        <div class="am-g">
-            <div class="am-u-sm-12 am-u-md-6">
-            </div>
-            <div class="am-u-sm-12">
-                <table class="am-table am-table-striped am-table-hover table-main">
-                    <thead>
-                    <tr>
-                        <th class="table-title">大师姓名</th>
-                        <th class="table-title">性别</th>
-                        <th class="table-title">等级</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${object.tenantMasterList}" var="tenantMaster" end="4">
-                        <tr id="${tenantMaster.id}">
-                            <td class="am-hide-sm-only">
-                                    ${tenantMaster.master.fullName}
-                            </td>
-                            <td class="am-hide-sm-only">${product.sex}</td>
-                            <td class="am-hide-sm-only">${product.level}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <%--<jsp:include flush="true"--%>
-                     <%--page="/basic/xm.do?qm=listTenantMaster&conditions=tenant.id:${object.id}"/>--%>
     </div>
-    <div class="am-u-md-12">
-        <h2>项目信息</h2>
-        <div class="am-g">
-            <div class="am-u-sm-12 am-u-md-6">
-            </div>
-            <div class="am-u-sm-12">
-                <table class="am-table am-table-striped am-table-hover table-main">
-                    <thead>
-                    <tr>
-                        <th width="74%">项目名称</th>
-                        <th width="">项目编号</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${object.tenantProjectList}" var="tenantProject" end="4">
-                        <tr id="${tenantProject.id}">
-                            <td class="am-hide-sm-only">
-                                    ${tenantProject.project.name}
-                            </td>
-                            <td class="am-hide-sm-only"> ${tenantProject.project.serial}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <%--<jsp:include flush="true"--%>
-                     <%--page="/basic/xm.do?qm=listTenantProject&conditions=tenant.id:${object.id}"/>--%>
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantMaster_default&conditions=tenant.id:${object.id}"/>
     </div>
 </div>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>项目信息</h2>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listTenantProject_default&conditions=tenant.id:${object.id}"/>
+    </div>
+</div>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <h2>商家用户</h2>
+    </div>
+
+    <div class="am-u-md-12">
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listProfessional_default&conditions=bigTenant.id:${object.id}"/>
+    </div>
+</div>
+<%--<div class="am-g">--%>
+    <%--<div class="am-u-md-12">--%>
+        <%--<h2>大师信息</h2>--%>
+
+        <%--<div class="am-g">--%>
+            <%--<div class="am-u-sm-12 am-u-md-6">--%>
+            <%--</div>--%>
+            <%--<div class="am-u-sm-12">--%>
+                <%--<table class="am-table am-table-striped am-table-hover table-main">--%>
+                    <%--<thead>--%>
+                    <%--<tr>--%>
+                        <%--<th class="table-title">大师姓名</th>--%>
+                        <%--<th class="table-title">性别</th>--%>
+                        <%--<th class="table-title">等级</th>--%>
+
+                    <%--</tr>--%>
+                    <%--</thead>--%>
+                    <%--<tbody>--%>
+                    <%--<c:forEach items="${object.tenantMasterList}" var="tenantMaster" end="4">--%>
+                        <%--<tr id="${tenantMaster.id}">--%>
+                            <%--<td class="am-hide-sm-only">--%>
+                                    <%--${tenantMaster.master.fullName}--%>
+                            <%--</td>--%>
+                            <%--<td class="am-hide-sm-only">${product.sex}</td>--%>
+                            <%--<td class="am-hide-sm-only">${product.level}</td>--%>
+                        <%--</tr>--%>
+                    <%--</c:forEach>--%>
+                    <%--</tbody>--%>
+                <%--</table>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--&lt;%&ndash;<jsp:include flush="true"&ndash;%&gt;--%>
+                     <%--&lt;%&ndash;page="/basic/xm.do?qm=listTenantMaster&conditions=tenant.id:${object.id}"/>&ndash;%&gt;--%>
+    <%--</div>--%>
+    <%--<div class="am-u-md-12">--%>
+        <%--<h2>项目信息</h2>--%>
+        <%--<div class="am-g">--%>
+            <%--<div class="am-u-sm-12 am-u-md-6">--%>
+            <%--</div>--%>
+            <%--<div class="am-u-sm-12">--%>
+                <%--<table class="am-table am-table-striped am-table-hover table-main">--%>
+                    <%--<thead>--%>
+                    <%--<tr>--%>
+                        <%--<th width="74%">项目名称</th>--%>
+                        <%--<th width="">项目编号</th>--%>
+
+                    <%--</tr>--%>
+                    <%--</thead>--%>
+                    <%--<tbody>--%>
+                    <%--<c:forEach items="${object.tenantProjectList}" var="tenantProject" end="4">--%>
+                        <%--<tr id="${tenantProject.id}">--%>
+                            <%--<td class="am-hide-sm-only">--%>
+                                    <%--${tenantProject.project.name}--%>
+                            <%--</td>--%>
+                            <%--<td class="am-hide-sm-only"> ${tenantProject.project.serial}</td>--%>
+                        <%--</tr>--%>
+                    <%--</c:forEach>--%>
+                    <%--</tbody>--%>
+                <%--</table>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--&lt;%&ndash;<jsp:include flush="true"&ndash;%&gt;--%>
+                     <%--&lt;%&ndash;page="/basic/xm.do?qm=listTenantProject&conditions=tenant.id:${object.id}"/>&ndash;%&gt;--%>
+    <%--</div>--%>
+<%--</div>--%>
 </body>
 </html>

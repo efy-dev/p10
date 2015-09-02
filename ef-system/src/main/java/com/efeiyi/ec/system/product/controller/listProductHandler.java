@@ -27,6 +27,8 @@ public class listProductHandler implements DoHandler {
             modelMap.put("viewIdentify", request.getParameter("viewIdentify"));
         }
 
+        modelMap.put("view",request.getParameter("view"));
+
 //        XQuery xQuery = new XQuery();
 //        List list =  baseManager.listObject(xQuery);
 

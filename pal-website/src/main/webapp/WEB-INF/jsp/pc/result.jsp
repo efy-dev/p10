@@ -46,7 +46,7 @@
                                                               width="160" height="72"/></a></h1>
         </div>
         <form id="form" method="get" action="<c:url value='/checkLabelPc.do'/>">
-            <div class="title"><a class="active">真伪查询</a><span class="line"></span><a>非遗搜</a></div>
+            <div class="title"><a class="active">真伪查询</a></div>
             <label for="">
                 <%--<input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入名称查询,如:”苏绣”"/>--%>
                 <input class="txt" type="text" name="serial" id="serial" value="" placeholder="请输入12位防伪码"/>
@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                     <c:if test="${result.authenticity != -1}">
-                        <c:if test="${ not emptyproduct.tenantProductSeries.tenantCertification}">
+                        <c:if test="${ not empty product.tenantProductSeries.tenantCertification}">
                             <tr>
                                 <td>认证证书</td>
                                 <td>${product.tenantProductSeries.tenantCertification.name}</td>
@@ -111,6 +111,7 @@
             </div>
         </div>
         <!--//End-->
+            <c:if test="${result.authenticity != -1}">
         <div class="item-info">
             <h2>商品信息</h2>
 
@@ -133,8 +134,8 @@
                 </table>
             </div>
         </div>
-
-        <%--<c:if test="${result.authenticity == 1}">--%>
+            </c:if>
+        <c:if test="${result.authenticity == 1}">
         <div class="item-info">
             <h2>认证信息</h2>
 
@@ -145,19 +146,19 @@
                         <td width="377">简介</td>
                         <td width="315">证书查看</td>
                     </tr>
-                    <c:forEach items="${product.tenant.tenantCertificationList}" var="certification">
+                    <%--<c:forEach items="${product.tenant.tenantCertificationList}" var="certification">--%>
                         <tr>
-                            <td>${certification.name}</td>
+                            <td>${product.tenantProductSeries.tenantCertification.name}</td>
                             <td><ming800:status name="level" dataType="PCTenantCertification.level"
-                                                checkedValue="${certification.level}" type="normal"/></td>
-                            <c:if test="${empty certification.imgList}">
+                                                checkedValue="${product.tenantProductSeries.tenantCertification.level}" type="normal"/></td>
+                            <c:if test="${empty product.tenantProductSeries.tenantCertification.imgList}">
                                 <td><a href="#" title="暂无信息">暂无证书</a></td>
                             </c:if>
-                            <c:forEach items="${certification.imgList}" var="img" begin="0" end="0">
-                                <td><a href="<%=imgBasePath%>${img.imgUrl}" title="${certification.name}">查看证书</a></td>
+                            <c:forEach items="${product.tenantProductSeries.tenantCertification.imgList}" var="img" begin="0" end="0">
+                                <td><a href="<%=imgBasePath%>${img.imgUrl}" title="${product.tenantProductSeries.tenantCertification.name}">查看证书</a></td>
                             </c:forEach>
                         </tr>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
                 </table>
             </div>
         </div>
@@ -189,18 +190,18 @@
                 </table>
             </div>
         </div>
-        <%--</c:if>--%>
+        </c:if>
         <!--//End--溯源信息-->
     </div>
 </div>
 <!--//End---->
 <!--//End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
-<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
-<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <script>
     $(document).ready(function () {
         $("#serial").keydown(function (e) {
