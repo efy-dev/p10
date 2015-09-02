@@ -10,6 +10,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.website.order.service.PaymentManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,10 @@ public class PaymentManagerImpl implements PaymentManager {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
+
+
     @Override
     public String alipay(PurchaseOrder purchaseOrder, Float paymentAmount) {
 
@@ -35,6 +40,11 @@ public class PaymentManagerImpl implements PaymentManager {
         purchaseOrderPayment.setPaymentAmount(new BigDecimal(paymentAmount));
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
         purchaseOrderPayment.setPayWay("1");
+        try {
+            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String userid = AuthorizationUtil.getMyUser().getId();
         User user = (User) baseManager.getObject(User.class.getName(), userid);
         purchaseOrderPayment.setUser(user);
@@ -65,9 +75,9 @@ public class PaymentManagerImpl implements PaymentManager {
 
         if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
             //同时修改子订单状态
-            for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()){
+            for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
                 purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrderTemp);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
             }
         }
 

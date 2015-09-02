@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>品类首页新</title>
+  <title>品类首页</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -41,7 +41,7 @@
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
         <%String path = request.getContextPath();%>
-      <li><a href="<%=path%>">首页</a></li>
+      <li><a href="/">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
   </div>
@@ -103,15 +103,15 @@
   <!-- //End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script href="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script href="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script href="<c:url value='http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js'/>"></script>
-<script href="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/amazeui.ie8polyfill.min.js'/>"></script>
 <![endif]-->
 
-<script href="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
-<script href="<c:url value='/scripts/assets/js/system.js'/>"></script>
+<script href="<c:url value='/scripts/js/amazeui.min.js'/>"></script>
+<script href="<c:url value='/scripts/js/system.js'/>"></script>
 </body>
 </html>

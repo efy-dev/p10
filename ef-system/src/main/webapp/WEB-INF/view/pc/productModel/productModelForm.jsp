@@ -24,11 +24,11 @@
 
     <fieldset>
         <legend class="" style="font-size: 17px">商品模型</legend>
-        <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
+        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
             <input type="hidden" name="productId" value="${object.id}">
             <input type="hidden" name="resultPage" value="0" />
             <input type="hidden" name="step" value="model">
-            <input type="hidden" name="view" value="${view}">
+
             <div class="am-form-group">
                 <label name="name" class="am-u-sm-3 am-form-label">商品名称</label>
 

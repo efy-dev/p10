@@ -1,5 +1,6 @@
 package com.efeiyi.pal.system.base.controller;
 
+import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
@@ -244,6 +245,18 @@ public class DialogController {
 
         String resultPage = request.getContextPath()+"/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
         return resultPage;
+    }
+
+    @RequestMapping("/Label/cancelLabelAjax.do")
+    public String cancelLabel(HttpServletRequest request) throws Exception {
+        String labelId = request.getParameter("id");
+        if (labelId == null || "".equals(labelId.trim())){
+            throw new Exception("标签id不能为空");
+        }
+        Label label = (Label) baseManager.getObject(Label.class.getName(), labelId);
+        label.setStatus("4");
+        baseManager.saveOrUpdate(Label.class.getName(), label);
+        return "ture";
     }
 
 }
