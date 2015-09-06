@@ -135,52 +135,12 @@
 </div>
 <!-- //End--header-->
 <div id="section1" class="section">
-    <div class="img-bg"><img src="../shop2015/upload/fine-1.jpg" alt=""/></div>
-    <div class="wrap">
-        <div class="share">
-            <!-- JiaThis Button BEGIN -->
-            <div class="jiathis_style">
-                <span class="jiathis_txt">分享到</span>
-                <a class="jiathis_button_weixin"></a>
-                <a class="jiathis_button_tqq"></a>
-                <a class="jiathis_button_cqq"></a>
-                <a class="jiathis_button_tsina"></a>
-            </div>
-            <!-- JiaThis Button END -->
-        </div>
-        <!-- //End--分享-->
-        <div class="nav">
-            <ul>
-                <li class="active"><a href="javascript:"><i class="icon icon-top"></i>概览<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
-                <li><a href="javascript:"><i class="icon icon-top"></i>详情<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
-                <li><a href="javascript:"><i class="icon icon-top"></i>鉴赏<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
-                <li><a href="javascript:"><i class="icon icon-top"></i>技艺<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
-                <li><a href="javascript:"><i class="icon icon-top"></i>保养<i class="icon icon-down"></i></a></li>
-            </ul>
-        </div>
-        <!-- //End--nav-->
-        <div class="info">
-            <div class="name">姚 惠 芬</div>
-            <div class="title">
-                <p>平遥推光漆器</p>
-                <p>国家级非物质文化遗产</p>
-            </div>
-            <div class="name-img">
-                <p>安格尔|公爵夫人肖像</p>
-            </div>
-        </div>
-        <!-- //End--基本信息-->
-        <div class="btn-add"><a href="" title="立即购买">立即购买</a></div>
-        <div class="btn-arrow-down"><a class="icon" href=""></a></div>
+    <article class="sectionWrapper">
 
-    </div>
+    </article>
 </div>
 <!--//End--概览-->
-<div class="section">
+<div id="section2" class="section">
 
 </div>
 <!--//End--鉴赏-->
@@ -206,35 +166,47 @@ $(function(){
     var dHeight=$(window).height();
 
 
-    $('.detail-fine .img-bg img').css({'width':dWidth});
-    $('.header-fine .nav .ul-list,.section').css({'height':dHeight-86});
-    $('#menu-fine').click(function(){
-        $(this).siblings('.mask').toggleClass('visible').siblings('.ul-list').stop(true,true).slideToggle(200);
-        $(this).siblings('.mask').click(function(){
-            $(this).removeClass('visible').siblings('.ul-list').stop(true,true).slideUp(200)
-        })
-    })
 
-    if($('div').hasClass('section')){
-        $('body').css({'overflow':'hidden'});
-    }
+    
 
-    $(window).resize(function(){
-        var dWidth=$(window).width();
-        $('.detail-fine .img-bg img').css({'width':dWidth});
-        if(dWidth<1024){
-            $('body').css({'overflow':'visible'});
-        }
-    })
-
-
-    //导航点击
-    $('.section .wrap .nav li').click(function(){
-        $(this).addClass('active').siblings('li').removeClass('active');
-    })
-
-
-
+//    $('.detail-fine .img-bg img').css({'width':dWidth});
+//    $('.header-fine .nav .ul-list,#section1').css({'height':dHeight-86});
+//    $('#menu-fine').click(function(){
+//        $(this).siblings('.mask').toggleClass('visible').siblings('.ul-list').stop(true,true).slideToggle(200);
+//        $(this).siblings('.mask').click(function(){
+//            $(this).removeClass('visible').siblings('.ul-list').stop(true,true).slideUp(200)
+//        })
+//    })
+//
+//    if($('div').hasClass('section')){
+//        $('body').css({'overflow':'hidden'});
+//    }
+//
+//    $(window).resize(function(){
+//        var dWidth=$(window).width();
+//        $('.detail-fine .img-bg img').css({'width':dWidth});
+//        if(dWidth<1024){
+//            $('body').css({'overflow':'visible'});
+//        }
+//    })
+//
+//
+//    //导航点击
+//    $('#section1 .item').click(function(){
+//        $(this).addClass('active').siblings('li').removeClass('active');
+//        $('#section1 .sec-details').animate({'bottom':'-100%'},100);
+//    })
+//
+//    //精品详情
+//    $('#section1 .item2').click(function(){
+//        $(this).addClass('active').siblings('li').removeClass('active');
+//        $('#section1 .sec-details').animate({'bottom':'0'},300,'linear');
+//        $('#section1 .icon-close').click(function(){
+//            $(this).parents('.sec-details').animate({'bottom':'-100%'},300,'linear');
+//        })
+//    })
+//
+//
 
 })
 </script>
