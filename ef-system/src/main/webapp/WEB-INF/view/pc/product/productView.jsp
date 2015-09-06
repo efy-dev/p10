@@ -138,7 +138,7 @@
                                 <th class="am-text-center" width="20%">属性</th>
                                 <th class="am-text-center" width="20%">库存</th>
                                 <th class="am-text-center" width="20%">价格(元)</th>
-                                <th class="am-text-center" width="20%">图片</th>
+                                <%--<th class="am-text-center" width="20%">图片</th>--%>
                             </tr>
                             <c:forEach var="model" items="${object.productModelList}">
                                 <tr>
@@ -158,11 +158,11 @@
                                     <td align="center">
                                             ${model.price}
                                     </td>
-                                    <td align="center">
-                                        <c:if test="${not empty model.productModel_url}">
-                                            <img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />
-                                        </c:if>
-                                    </td>
+                                    <%--<td align="center">--%>
+                                        <%--<c:if test="${not empty model.productModel_url}">--%>
+                                            <%--<img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
+                                        <%--</c:if>--%>
+                                    <%--</td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>
