@@ -36,7 +36,7 @@
             </td>
             <td>序列号</td>
             <td>防伪码</td>
-            <td>标签批次</td>
+            <td>标签序号</td>
             <td>商品</td>
             <td>商户</td>
             <td>状态</td>
@@ -61,7 +61,7 @@
                 </td>
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&label=view&id=${label.id}'/>">${label.serial}</a></td>
                 <td>${label.code}</td>
-                <td>${label.labelBatch.setting}</td>
+                <td>${label.labelBatch.serial}</td>
                 <td>
                     <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
                         <c:if test="${label.purchaseOrderLabel.product != null && not empty label.purchaseOrderLabel.product}">
