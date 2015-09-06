@@ -3,9 +3,6 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/ckeditor/ckeditor.js"></script>
-    <style>
-    </style>
 </head>
 <body>
 <%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
@@ -31,11 +28,16 @@
 
             <tr>
                 <td class="am-primary am-u-md-3">图片</td>
-                <td class="am-u-md-3">
+                <td class="am-u-md-3" colspan="3">
                     <img width="20px" src="http://pro.efeiyi.com/${object.productModel.product.picture_url}@!product-model" alt="产品图片">
                 </td>
+
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">描述</td>
-                <td class="am-u-md-3">${object.productModel.product.productDescription.content}</td>
+                <td class="am-u-md-3" colspan="3">
+                        ${object.productModel.product.productDescription.content}
+                </td>
             </tr>
             </tbody>
         </table>
