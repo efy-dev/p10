@@ -22,7 +22,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend"/>"><span class="am-icon-plus"></span>新建传承人</a>
+                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend&param=EcMaster"/>"><span class="am-icon-plus"></span>新建传承人</a>
                 </div>
             </div>
         </div>

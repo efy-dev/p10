@@ -138,7 +138,7 @@
                                 <th class="am-text-center" width="20%">属性</th>
                                 <th class="am-text-center" width="20%">库存</th>
                                 <th class="am-text-center" width="20%">价格(元)</th>
-                                <th class="am-text-center" width="20%">图片</th>
+                                <%--<th class="am-text-center" width="20%">图片</th>--%>
                             </tr>
                             <c:forEach var="model" items="${object.productModelList}">
                                 <tr>
@@ -158,11 +158,11 @@
                                     <td align="center">
                                             ${model.price}
                                     </td>
-                                    <td align="center">
-                                        <c:if test="${not empty model.productModel_url}">
-                                            <img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />
-                                        </c:if>
-                                    </td>
+                                    <%--<td align="center">--%>
+                                        <%--<c:if test="${not empty model.productModel_url}">--%>
+                                            <%--<img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
+                                        <%--</c:if>--%>
+                                    <%--</td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -283,12 +283,12 @@
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="picUrl">
 
                             <tr>
-                                <th>操作</th>
-                                <th>图片地址</th>
-                                <th>图片</th>
+                                <th width="20%">操作</th>
+                                <th width="60%">图片地址</th>
+                                <th width="20%">图片</th>
                             </tr>
                             <c:forEach var="productPicture" items="${object.productPictureList}">
-                                <c:if test="${productPicture.status == '3'}">
+
                                 <tr name="${productPicture.id}">
                                     <td>
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,'${productPicture.id}')"  href="javascript:void(0);">
@@ -300,7 +300,7 @@
                                         <img width="18%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}" alt="" />
                                     </td>
                                 </tr>
-                                </c:if>
+
                             </c:forEach>
 
                         </table>
@@ -357,18 +357,18 @@
                 var  imgUrl = data.split(":")[1];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 ///图片信息
-//                var tr = '<tr name = "'+pictureId+'">' +
-//                        ' <td>  ' +
-//                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="#">' +
-//                        '       <span class="am-icon-trash-o"></span> 删除 ' +
-//                        '   </a>' +
-//                        ' </td>' +
-//                        ' <td>' +url+
-//                        ' </td>' +
-//                        ' <td>' +
-//                        '   <img style="margin-left:2px;" width="18%;" src="'+url+'">' +
-//                        ' </td>' +
-//                        '</tr>';
+                var tr = '<tr name = "'+pictureId+'">' +
+                        ' <td>  ' +
+                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="javascript:void(0);">' +
+                        '       <span class="am-icon-trash-o"></span> 删除 ' +
+                        '   </a>' +
+                        ' </td>' +
+                        ' <td>' +url+
+                        ' </td>' +
+                        ' <td>' +
+                        '   <img style="margin-left:2px;" width="18%;" src="'+url+'">' +
+                        ' </td>' +
+                        '</tr>';
                 ///显示图片
                 var img ='<li style="float: left;margin-right: 10px;width:200px;" name="'+pictureId+'">'+
                         '<dl style="margin-top: 6px;" >'+
@@ -385,7 +385,7 @@
                         '</li>';
 
                 $("#collapse-panel-1 ul").append(img);
-         //       $("#picUrl").append(tr);
+                $("#picUrl").append(tr);
             }
         });
         $('#btn_upload3').uploadify({

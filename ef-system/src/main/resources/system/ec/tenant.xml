@@ -136,9 +136,12 @@
                 <do name="saveOrUpdateTenantMaster" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
                 </do>
                 <do name="removeTenantMaster" label="删除商家大师" access="" result="json"/>
-                <do name="listTenantMaster" label="大师商家大师" access="" result="/tenantMaster/tenantMasterList">
+                <do name="listTenantMaster" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.listTenantMasterHandler"
+                    result="/tenantMaster/tenantMasterList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
                     </query>
                 </do>
 
@@ -157,13 +160,16 @@
                     </query>
                 </do>
 
-                <do name="formTenantProject" label="保存商家大师" access="" result="/tenantMaster/tenantMasterForm"/>
-                <do name="saveOrUpdateTenantProejct" label="保存商家大师" access="" result="/tenantMaster/tenantMasterSaveSuccess">
+                <do name="formTenantProject" label="保存商家大师" access="" result="/tenantProject/tenantProjectForm"/>
+                <do name="saveOrUpdateTenantProject" label="保存商家大师" access="" result="/tenantProject/tenantProjectSaveSuccess">
                 </do>
                 <do name="removeTenantProject" label="删除商家大师" access="" result="json"/>
-                <do name="listTenantProject" label="大师商家大师" access="" result="/tenantMaster/tenantMasterList">
+                <do name="listTenantProject" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.listTenantMasterHandler"
+                    result="/tenantProject/tenantProjectList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                        <condition label="status" name="status" defaultValue="1"  operation="eq"/>
                     </query>
                 </do>
 
