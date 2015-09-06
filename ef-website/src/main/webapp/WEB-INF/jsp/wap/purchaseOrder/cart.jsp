@@ -66,7 +66,7 @@
             <input type="checkbox" class="checkbox" onclick="chooseAll(this,'${cart.id}')"/>
             <span class="txt" id="totalPrice">${cart.totalPrice}</span>
             <a onclick="submit()"
-               class="btn-right btn-settle">结算<em>（${cart.cartProductList.size()}）</em></a>
+               class="btn-right btn-settle">结算<em></em></a>
         </div>
 
     </article>

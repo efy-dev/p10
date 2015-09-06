@@ -89,6 +89,14 @@
                 </c:if>
             </td>
         </tr>
+        <c:if test="${orderTag == 'true'}">
+            <tr>
+                <td>查看订单标签</td>
+                <td>
+                    <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.purchaseOrder.serial:${object.serial}'/>">查看订单已分配标签</a>
+                </td>
+            </tr>
+        </c:if>
     </table>
 </div>
 <div style="text-align: left;margin-left: 10px;" >
@@ -161,11 +169,7 @@
                     </c:if>
                     <td>${pol.purchaseOrder.serial}</td>
                     <td>${pol.product.name}</td>
-                    <td>${pol.amount}
-                        <c:if test="${not empty pol.labelList}">
-                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.purchaseOrder.serial:${pol.purchaseOrder.serial}'/>">查看分配标签</a>
-                        </c:if>
-                    </td>
+                    <td>${pol.amount}</td>
                 </tr>
             </c:forEach>
         </table>

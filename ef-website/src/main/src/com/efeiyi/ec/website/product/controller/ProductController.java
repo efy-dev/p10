@@ -53,17 +53,9 @@ public class ProductController {
     public String plistProduct(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception{
         //前端传递projectId
         XQuery xQuery = new XQuery("plistProductModel_default",request);
-        xQuery.put("product_category_id", projectId);
+        xQuery.put("product_project_id", projectId);
         xQuery.addRequestParamToModel(model,request);
         List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
-        ProductModel productModel = new ProductModel();
-        List<ProductPicture> list = new ArrayList<ProductPicture>();
-        Product product = new Product();
-        if(productModelList!=null&&productModelList.size()>0) {
-            productModel = (ProductModel) productModelList.get(0);
-            product = productModel.getProduct();
-            list = product.getProductPictureList();
-        }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
         model.addAttribute("proName",proName);

@@ -47,7 +47,7 @@
   </div>
   <!-- //End--breadcrumb-->
     <div class="explain">
-        <img src="http://pro.efeiyi.com/${project.picture_url}" alt=""/>
+        <img src="http://pro.efeiyi.com/${project.picture_url}" width="1200" height="150" alt=""/>
     </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
@@ -67,18 +67,26 @@
           <li>
                <% if(i==0){%>
                    <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
-                <span class="tips">精品<em class="icon"></em></span>
-                    <span class="icon-r">
-                        <i class="icon icon-chengpin"></i>
-                        <i class="icon icon-hand"></i>
-                    </span>
-                <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                <%--<span class="tips">精品<em class="icon"></em></span>--%>
+                    <%--<span class="icon-r">--%>
+                        <%--<i class="icon icon-chengpin"></i>--%>
+                        <%--<i class="icon icon-hand"></i>--%>
+                    <%--</span>--%>
+                  <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                                <% i++;%>
-                               <%}else{%>
+                               <%}else if(i==1){%>
+                       <% i++;%>
                        <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
-                           <img class="imgfilter"
-                                src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
-                <%}%>
+                           <%--<span class="tips">精品<em class="icon"></em></span>--%>
+                           <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                       </a>
+
+                <%}else{%>
+                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
+                       <img class="imgfilter"
+                            src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                       </a>
+                       <%}%>
                 <p class="wh name">${productModel.product.name}
                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
                 ${productPropertyValue.projectPropertyValue.value}

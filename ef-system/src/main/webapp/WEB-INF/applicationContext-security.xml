@@ -20,6 +20,7 @@
 
     <http realm="Contacts Realm" use-expressions="true">
         <csrf disabled="true"/>
+
         <intercept-url pattern="/main.do" access="isAuthenticated()"/>
         <intercept-url pattern="/basic/**" access="isAuthenticated()"/>
         <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
@@ -28,7 +29,7 @@
                     authentication-failure-handler-ref="loginFailureHandler"/>
         <logout invalidate-session="true" logout-url="/j_spring_security_logout"
                 success-handler-ref="loginOutSuccessHandler"/>
-
+        <remember-me user-service-ref="userManager" data-source-ref="dataSource" token-validity-seconds="1209600" remember-me-parameter="remember-me"/>
     </http>
     <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.system.organization.LoginOutSuccessHandler"/>
 

@@ -50,7 +50,7 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>
+      <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
         <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">

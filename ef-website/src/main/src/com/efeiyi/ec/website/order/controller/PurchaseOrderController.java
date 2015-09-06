@@ -115,8 +115,12 @@ public class PurchaseOrderController extends BaseController {
         queryParamMap.put("orderId",orderId);
         String hql="from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
         PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        String pd=purchaseOrderDelivery.getLogisticsCompany();
-        String serial=purchaseOrderDelivery.getSerial();
+        String pd="null";
+        String serial="null";
+        if(purchaseOrderDelivery!=null){
+            pd=purchaseOrderDelivery.getLogisticsCompany();
+            serial=purchaseOrderDelivery.getSerial();
+        }
         model.addAttribute("purchaseOrderDelivery",purchaseOrderDelivery);
         String content = "";
         try
@@ -391,7 +395,7 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
         String cartId = request.getParameter("cartId");
-        Cart cart = null;
+        Cart cart;
         if (cartId == null || cartId.equals("")) {
             cart = (Cart) request.getSession().getAttribute("cart");
             XQuery xQuery = new XQuery("listCart_default", request);
@@ -403,7 +407,6 @@ public class PurchaseOrderController extends BaseController {
                 for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(realCart);
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-                    cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());
                 }
             }
             request.getSession().removeAttribute("cart");
