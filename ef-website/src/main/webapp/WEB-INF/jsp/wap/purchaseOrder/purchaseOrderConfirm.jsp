@@ -81,7 +81,7 @@
             <p class="bd title">${address.consignee}  ${address.phone}</p>
             <p class="bd des">${address.province.name}${address.details}</p>
             <p class="bd btns">
-              <input type="radio" name="address" id="" onclick="chooseAddress('${address.id}')">
+              <input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}')">
             </p>
           </li>
         </c:forEach>
@@ -104,19 +104,19 @@
     <!--//ENd-->
     <ul class="ul-list">
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox1">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox2">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox3">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
