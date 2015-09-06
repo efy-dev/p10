@@ -1,9 +1,11 @@
 package com.efeiyi.ec.system.product.service.impl;
 
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
@@ -77,16 +79,25 @@ public class ProductManagerImpl implements ProductManager{
             if("".equals(product.getProductDescription().getId())){
                 product.setProductDescription(null);
             }else {
-                product.setProductDescription((ProductDescription)xdoDao.getObject(ProductDescription.class.getName(),product.getProductDescription().getId()));
+                product.setProductDescription((ProductDescription) xdoDao.getObject(ProductDescription.class.getName(), product.getProductDescription().getId()));
             }
-
+            if("".equals(product.getMaster().getId())){
+                product.setMaster(null);
+            }else {
+                product.setMaster((Master) xdoDao.getObject(Master.class.getName(), product.getMaster().getId()));
+            }
+            if("".equals(product.getProject().getId())){
+                product.setProject(null);
+            }else {
+                product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
+            }
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
             e.printStackTrace();
         }
 
 
-        return (Product)xdoDao.getObject(Product.class.getName(),product.getId());
+        return product;
     }
 
 

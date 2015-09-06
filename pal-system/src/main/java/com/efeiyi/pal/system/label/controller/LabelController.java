@@ -81,7 +81,7 @@ public class LabelController {
 
         labelBatch.setStatus("2");
         baseManager.saveOrUpdate(labelBatch.getClass().getName(), labelBatch);
-        return "redirect:/basic/xm.do?qm=plistLabel_default&conditions=labelBatch.id:" + labelBatch.getId();
+        return "redirect:/basic/xm.do?qm=plistLabel_batchLabel&conditions=labelBatch.serial:" + labelBatch.getSerial();
     }
 
 }
