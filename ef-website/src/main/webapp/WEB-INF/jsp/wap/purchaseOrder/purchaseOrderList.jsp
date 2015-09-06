@@ -30,7 +30,7 @@
   <div class="order-list">
     <div class="list-topic">
       <h2>我的订单</h2>
-      <span><a href="/myMobileEfeiyi/list.do">查看全部订单<i class="jt-bg"></i></a></span>
+      <%--<span><a href="/myMobileEfeiyi/list.do">查看全部订单<i class="jt-bg"></i></a></span>--%>
     </div>
     <!--订单状态-->
     <c:forEach items="${orderList}" var="purchaseOrder">
