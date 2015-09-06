@@ -160,7 +160,7 @@
                         />
                 <do name="formCouponBatch" label="保存优惠券批次" access="" result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access=""
-                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default">
+                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1" inputType="default" />

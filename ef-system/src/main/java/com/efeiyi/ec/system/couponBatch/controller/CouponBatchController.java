@@ -75,6 +75,6 @@ public class CouponBatchController extends BaseController {
             coupon.setSerial(serial);
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
-        return "redirect:/basic/xm.do?qm=plistCouponBatch_default";
+        return "redirect:/basic/xm.do?qm=plistCouponBatch_default&view=Batch";
     }
 }
