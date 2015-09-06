@@ -16,13 +16,13 @@
   <div class="bd cart-order">
     <div class="bd order-address">
       <c:forEach items="${addressList}" var="address">
-      <c:if test="${address.status=='2'}">
-      <a href="#btn-edit-addres" class="btn-edit-addres">
-        <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
-        <p class="txt">${address.province.name}${address.details}</p>
-        <a href="#arrow-right" class="arrow-right"></a>
-      </a>
-      </c:if>
+        <c:if test="${address.status=='2'}">
+          <a href="#btn-edit-addres" class="btn-edit-addres">
+            <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
+            <p class="txt">${address.province.name}${address.details}</p>
+            <a href="#arrow-right" class="arrow-right"></a>
+          </a>
+        </c:if>
       </c:forEach>
     </div>
     <c:forEach items="${tenantList}" var="tenant">
@@ -49,9 +49,9 @@
     <!-- //End--order-list-->
     <div class="bd order-total">
       <p><strong>优惠券</strong><span class="btn-coupons">2张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
-      <p><strong>商品金额</strong><span><em>￥</em>2000</span></p>
+      <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.intValue()}</span></p>
       <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
-      <p><strong>运费</strong><span><em>￥</em>30</span></p>
+      <p><strong>运费</strong><span><em>￥</em>0</span></p>
     </div>
     <!-- //End--order-total-->
     <div class="bd cart-pay">
@@ -122,7 +122,7 @@
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox4">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
