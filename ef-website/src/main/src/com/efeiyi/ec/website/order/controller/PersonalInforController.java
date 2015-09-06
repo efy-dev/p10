@@ -61,7 +61,9 @@ public class PersonalInforController {
         xSaveOrUpdate.getParamMap().put("password",password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         HttpSession session = request.getSession();
-        session.invalidate();
+        if(session != null){
+            session.invalidate();
+        }
         return "redirect:/login";
 
     }
