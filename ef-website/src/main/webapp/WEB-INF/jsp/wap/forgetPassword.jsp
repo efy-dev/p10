@@ -23,7 +23,7 @@
             <label>验证码</label>
             <div class="tet1">
               <input id="code" type="text" class="txt1 am-u-sm-7 am-u-end" placeholder="短信验证码，请注意查收">
-              <span class="am-u-sm-5 am-u-end"><a id="verificationButton">获取验证码</a></span>
+              <span class="am-u-sm-5 am-u-end"><button  class="btn-p-1" id="verificationButton">获取验证码</button></span>
             </div>
           </li>
           <li><span class="active-d span1" id="auth" style="font-size:1rem;"></span></li>

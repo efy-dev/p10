@@ -19,7 +19,7 @@
         <li>
           <label>手机验证码</label>
           <input class="txt1" id="code" type="text" placeholder="短信验证码">
-          <span class="span-lest1"><a id="verificationButton" >获取短信效验码</a></span>
+          <span class="span-lest1"><button  id="verificationButton"  class="btn-p">获取短信效验码</button></span>
         </li>
         <li>
           <label></label>
@@ -46,11 +46,11 @@
   function time(o, p) {//o为按钮的对象，p为可选，这里是60秒过后，提示文字的改变
     if (wait == 0) {
       o.removeAttr("disabled");
-      o.html("点击获取验证码");//改变按钮中value的值
+      o.html("获取验证码");//改变按钮中value的值
       wait = 60;
     } else {
       o.attr("disabled", true);//倒计时过程中禁止点击按钮
-      o.html(wait + "秒后重新获取验证码");//改变按钮中value的值
+      o.html(wait + "秒后重试");//改变按钮中value的值
       wait--;
       setTimeout(function () {
                 time(o, p);//循环调用
@@ -82,6 +82,7 @@
   $().ready(function () {
 
     $("#verificationButton").click(function () {
+      $("#verificationButton").attr("disabled",true);
       var userName = $("#phone").val();
       $.ajax({
         type: 'post',
@@ -94,6 +95,7 @@
         success: function (data) {
           if(data == false){
             $("#error").text("您输入的用户名不正确");
+            $("#verificationButton").removeAttr("disabled");
           }else{
             $("#error").text("");
             sendVerificationCode($("#phone").val())

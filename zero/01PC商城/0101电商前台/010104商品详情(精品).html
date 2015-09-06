@@ -26,8 +26,7 @@
 <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
 <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
 </head>
-<!--<body class="body-detail">-->
-<body>
+<body class="body-detail">
 <div class="topbar wh" data-am-sticky>
     <div class="hd">
         <ul class="ul-item">
@@ -152,13 +151,9 @@
         <div class="nav">
             <ul>
                 <li class="active"><a href="javascript:"><i class="icon icon-top"></i>概览<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
                 <li><a href="javascript:"><i class="icon icon-top"></i>详情<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
                 <li><a href="javascript:"><i class="icon icon-top"></i>鉴赏<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
                 <li><a href="javascript:"><i class="icon icon-top"></i>技艺<i class="icon icon-down"></i></a></li>
-                <li class="line"></li>
                 <li><a href="javascript:"><i class="icon icon-top"></i>保养<i class="icon icon-down"></i></a></li>
             </ul>
         </div>
@@ -201,11 +196,9 @@
 $(function(){
 
 
-    //计算图片宽度+高度
+
     var dWidth=$(window).width();
     var dHeight=$(window).height();
-
-
     $('.detail-fine .img-bg img').css({'width':dWidth});
     $('.header-fine .nav .ul-list,.section').css({'height':dHeight-86});
     $('#menu-fine').click(function(){
@@ -215,32 +208,15 @@ $(function(){
         })
     })
 
-    if($('div').hasClass('section')){
-        $('body').css({'overflow':'hidden'});
-    }
-
     $(window).resize(function(){
         var dWidth=$(window).width();
         $('.detail-fine .img-bg img').css({'width':dWidth});
-        if(dWidth<1024){
-            $('body').css({'overflow':'visible'});
-        }
     })
-
-
-    //导航点击
-    $('.section .wrap .nav li').click(function(){
-        $(this).addClass('active').siblings('li').removeClass('active');
-    })
-
-
-
-
 })
 </script>
 
 
 
-<!--<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
 </html>
