@@ -62,6 +62,7 @@ public class PersonalInforController {
         baseManager.saveOrUpdate(xSaveOrUpdate);
         HttpSession session=request.getSession();
         session.invalidate();
+
         return "redirect:/login";
 
     }

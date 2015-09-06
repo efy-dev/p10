@@ -19,7 +19,7 @@
         <li>
           <label>手机验证码</label>
           <input class="txt1" id="code" type="text" placeholder="短信验证码">
-          <span class="span-lest1"><button id="verificationButton"  class="btn-p">获取短信效验码</button></span>
+          <span class="span-lest1"><button  id="verificationButton"  class="btn-p">获取短信效验码</button></span>
         </li>
         <li>
           <label></label>
