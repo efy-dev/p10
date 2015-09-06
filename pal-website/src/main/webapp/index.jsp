@@ -2,6 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE>
+<div class="topbar">
+    <div class="hd">
+        <div class="phone">
+            <span>商户合作热线: </span>
+            <strong>400-876-8766</strong>
+        </div>
+    </div>
+</div>
 <!--//End--topbar-->
 <div class="search-home">
     <div class="logo">
