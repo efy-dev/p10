@@ -25,8 +25,8 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
-            <td>标签批次</td>
             <td>标签序号</td>
+            <td>标签批次</td>
             <td>数量</td>
             <td>状态</td>
             <td>创建日期</td>

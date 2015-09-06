@@ -208,6 +208,14 @@
         <entity name="Professional" label="商家用户"
                 basic="simple" others=""
                 model="com.efeiyi.ec.organization.model.Professional">
+            <fields>
+                <field name="sex" label="性别" inputType="text">
+                    <statusType fieldName="sex">
+                        <item label="男" value="1"/>
+                        <item label="女" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistProfessional" access="" label="商家用户列表"
                     result="/professional/professionalPList">

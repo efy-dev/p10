@@ -39,8 +39,11 @@
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
-                    <th class="table-title">用户id</th>
-                    <th class="table-title">temp</th>
+                    <th class="table-title">用户名</th>
+                    <th class="table-title">电话</th>
+                    <th class="table-title">邮箱</th>
+                    <th class="table-title">性别</th>
+                    <th class="table-title">生日</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,8 +58,15 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.id}</a></td>
-                        <td class="am-hide-sm-only">${professional.temp}</td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.username}</a></td>
+                        <td class="am-hide-sm-only">${professional.phone}</td>
+                        <td class="am-hide-sm-only">${professional.email}</td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="sex" dataType="Professional.sex" checkedValue="${professional.sex}" type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <fmt:formatDate value="${professional.birthDate}" pattern="yyyy:MM:dd hh:mm"/>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -57,7 +57,9 @@
                 <td class="am-primary am-u-md-3">下单人姓名</td>
                 <td class="am-u-md-3">${object.user.name}</td>
                 <td class="am-primary am-u-md-3">性别</td>
-                <td class="am-u-md-3">${object.user.sex}</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="sex" dataType="consumer.sex" checkedValue="${object.user.sex}" type="normal"/>
+                </td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
