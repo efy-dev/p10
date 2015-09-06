@@ -1,5 +1,6 @@
 package com.efeiyi.pal.system.label.controller;
 
+import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.label.model.LabelBatch;
 import com.efeiyi.pal.system.label.labelService.LabelBuildService;
 import com.ming800.core.base.service.BaseManager;
@@ -33,25 +34,10 @@ public class LabelController {
         if (labelBatchId == null || labelBatchId.equals("")) {
             throw new Exception("labelBatchId不能为空");
         }
-
         LabelBatch labelBatch = (LabelBatch) baseManager.getObject(LabelBatch.class.getName(), labelBatchId);
         String resultPage = labelListSave(labelBatch, labelBatchId);
 
         return new ModelAndView(resultPage);
-    }
-
-    private String labelListSave(LabelBatch labelBatch, String labelBatchId) throws Exception{
-
-        if (labelBatch == null) {
-            throw new Exception("Id为" + labelBatchId + "的标签批次不存在!");
-        }
-
-        labelBuildService.buildLabelSetByLabelBatch(labelBatch);//批量生成防伪标签
-
-        labelBatch.setStatus("2");
-        baseManager.saveOrUpdate(labelBatch.getClass().getName(), labelBatch);
-
-        return "redirect:/basic/xm.do?qm=plistLabel_default&conditions=labelBatch.id:" + labelBatch.getId();
     }
 
     @RequestMapping("/downLabelTxt.do")
@@ -84,6 +70,18 @@ public class LabelController {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String labelListSave(LabelBatch labelBatch, String labelBatchId) throws Exception{
+
+        if (labelBatch == null) {
+            throw new Exception("Id为" + labelBatchId + "的标签批次不存在!");
+        }
+        labelBuildService.buildLabelSetByLabelBatch(labelBatch);//批量生成防伪标签
+
+        labelBatch.setStatus("2");
+        baseManager.saveOrUpdate(labelBatch.getClass().getName(), labelBatch);
+        return "redirect:/basic/xm.do?qm=plistLabel_default&conditions=labelBatch.id:" + labelBatch.getId();
     }
 
 }

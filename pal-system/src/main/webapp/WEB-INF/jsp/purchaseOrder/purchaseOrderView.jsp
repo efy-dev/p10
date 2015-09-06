@@ -29,10 +29,8 @@
 <body>
 <div style="text-align: left;margin-left: 10px;">
     <c:if test="${object.status == '1' || object.status == '2'}">
-        <%--<input onclick="window.location.href='<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>'"--%>
-        <input id="delOrder" onclick=""
-        <%--<input onclick="delConfirm('<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${order.id}"/>')"--%>
-               type="button" class="am-btn am-btn-warning am-btn-xs"
+        <input onclick="myConfirm('<c:url value="/basic/xm.do?qm=removePurchaseOrder&order=remove&id=${object.id}"/>', 'D')"
+               type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
                style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
                value="删除" />
     </c:if>
@@ -41,7 +39,7 @@
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="返回" />
 </div>
-<%--<jsp:include page="../jmenu/delConfirm.jsp"/>--%>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">订单详情</strong>
@@ -80,17 +78,25 @@
                     </c:if>
                 </c:if>
                 <c:if test="${object.status == '9' && object.status != '4' && object.status != '3'}">
-                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=A"/>'"
-                           type="button" class="am-btn am-btn-default am-btn-xs"
+                    <input onclick="myConfirm('<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=A"/>', 'A')"
+                           type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
                            style="margin-left:4px;height: 30px;"
                            value="激活标签" />
-                    <input onclick="window.location.href='<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=C"/>'"
-                           type="button" class="am-btn am-btn-default am-btn-xs"
+                    <input onclick="myConfirm('<c:url value="/order/activatedOrCancelLabels.do?orderId=${object.id}&type=C"/>', 'C')"
+                           type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
                            style="margin-left:4px;height: 30px;"
                            value="作废标签" />
                 </c:if>
             </td>
         </tr>
+        <c:if test="${orderTag == 'true'}">
+            <tr>
+                <td>查看订单标签</td>
+                <td>
+                    <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.purchaseOrder.serial:${object.serial}'/>">查看订单已分配标签</a>
+                </td>
+            </tr>
+        </c:if>
     </table>
 </div>
 <div style="text-align: left;margin-left: 10px;" >
@@ -163,11 +169,7 @@
                     </c:if>
                     <td>${pol.purchaseOrder.serial}</td>
                     <td>${pol.product.name}</td>
-                    <td>${pol.amount}
-                        <c:if test="${not empty pol.labelList}">
-                            <a href="<c:url value='/basic/xm.do?qm=plistLabel_orderLabel&order=labelList&conditions=purchaseOrderLabel.id:${pol.id}'/>">查看分配标签</a>
-                        </c:if>
-                    </td>
+                    <td>${pol.amount}</td>
                 </tr>
             </c:forEach>
         </table>

@@ -12,7 +12,7 @@
 <html>
 <head>
   <title></title>
-  <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
+  <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
   <script>
     function find(o){
       var pid = $(o).next().val();

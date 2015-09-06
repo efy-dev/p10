@@ -86,7 +86,7 @@ public class ProductManagerImpl implements ProductManager{
         }
 
 
-        return product;
+        return (Product)xdoDao.getObject(Product.class.getName(),product.getId());
     }
 
 

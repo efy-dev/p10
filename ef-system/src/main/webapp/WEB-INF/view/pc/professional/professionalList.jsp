@@ -10,25 +10,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--<script type="text/javascript" src="<c:url value='/scripts/assets/js/amazeui.js'/>"/>--%>
-<link href="/script/assets/css/amazeui.css">
-<html>
-<head>
-    <title>professsional列表</title>
-</head>
-<body>
-  <table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
-    <tr>
-      <td>professional-id</td>
-      <td>temp</td>
-    </tr>
 
-      <c:forEach items="${objectList}" var="professional">
-    <tr>
-        <td>${professional.id}</td>
-        <td>${professional.temp}</td>
-    </tr>
-      </c:forEach>
+  <div class="am-g">
+    <div class="am-u-sm-12 am-u-md-6">
+    </div>
+    <div class="am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+          <th width="50%">用户名</th>
+          <th width="50%">名称</th>
 
-  </table>
-</body>
-</html>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${objectList}" var="professional" end="4">
+          <tr id="${professional.id}">
+            <td class="am-hide-sm-only">
+                ${professional.username}
+            </td>
+            <td class="am-hide-sm-only"> ${professional.fullName}</td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </div>

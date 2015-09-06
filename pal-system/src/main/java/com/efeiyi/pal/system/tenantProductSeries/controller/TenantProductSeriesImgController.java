@@ -5,6 +5,7 @@ import com.efeiyi.pal.product.model.TenantProductSeriesImg;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,7 +48,7 @@ public class TenantProductSeriesImgController {
         for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
             //上传文件
             String identify = sdf.format(new Date());
-            url = "tenantSource/" + identify + ".jpg";
+            url = "tenantSource/" + RandomStringUtils.randomNumeric(10) + identify + ".jpg";
             MultipartFile mf = entry.getValue();
             aliOssUploadManager.uploadFile(mf, "315pal", url);
             tenantProductSeriesImg.setImgUrl(url);

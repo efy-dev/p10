@@ -24,22 +24,22 @@
 
   <fieldset>
     <legend class="" style="font-size: 17px">商品信息</legend>
-    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="tenant.id" value="${tenantId}">
       <input type="hidden" name="resultPage" value="0" />
       <input type="hidden" name="step" value="product">
-      <input type="hidden" name="view" value="${view}">
+      <%--<input type="hidden" name="view" value="${view}">--%>
       <input type="hidden" name="productDescription.id" value="${object.productDescription.id}">
       <div class="am-form-group">
         <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
         <div class="am-u-sm-9">
           <c:if test="${empty object.serial}">
-            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${serial}" readonly="readonly">
           </c:if>
           <c:if test="${not empty object.serial}">
-            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}">
+            <input type="text" name="serial" id="serial" placeholder="自动生成" value="${object.serial}" readonly="readonly">
           </c:if>
           <!--<small>必填项*</small>-->
         </div>
@@ -68,7 +68,7 @@
         <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="1" />
-                     收藏品
+                     普通
                  </span>
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="2"/>
@@ -145,14 +145,14 @@
       <div class="am-form-group">
         <div class="am-u-sm-9 am-u-sm-push-3">
                     <span style="padding: 10px;">
-                       <input type="button" onclick="toSubmit('/productDescription/productDescriptionForm')" class="am-btn am-btn-primary" value="保存,并进入商品描述"/>
+                       <input type="button" onclick="toSubmit('/productModel/productModelForm')" class="am-btn am-btn-primary" value="下一步"/>
                     </span>
                     <span style="padding: 10px;">
                        <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"  class="am-btn am-btn-primary" value="保存,并返回商品列表"/>
                     </span>
-                     <span style="padding: 10px;">
-                       <input type="button" onclick="toSubmit('/product/productView')"  class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
-                    </span>
+                     <%--<span style="padding: 10px;">--%>
+                       <%--<input type="button" onclick="toSubmit('/product/productView')"  class="am-btn am-btn-primary" value="保存,并查看商品详情"/>--%>
+                    <%--</span>--%>
         </div>
       </div>
     </form>
@@ -193,8 +193,24 @@
 
   function toSubmit(result){
     $("input[name='resultPage']").val(result);
-    $("form").submit();
+    if($("#name").val()==""){
+      alert("商品名称不能为空");
+    }else if($("#price").val()==""){
+      alert("商品价格不能为空!");
+//
+    }else if(!checkPrice($("#price").val())){
+        alert("商品价格必须为数字!");
+    }else{
+      $("form").submit();
+    }
+
   }
+
+  function checkPrice(value){
+    var temp=/^\d+(\.\d+)?$/;
+    return temp.test(value);
+  }
+
   //    /****属性 生成商品模型***/
   //    function projectPropertyClick(obj) {
   //

@@ -70,13 +70,17 @@ $(function(){
         var $hover=$add.siblings('.hover');
         var $active=$add.siblings('.active');
         $add.hover(function(){
+            $(this).addClass('icon-active');
             if($active.is(':hidden')){
                 $hover.show();
             }else{
                 $hover.hide();
             }
+        },function(){
+            $(this).removeClass('icon-active');
         });
         $add.click(function(){
+            $(this).addClass('icon-active2');
             $hover.hide();
             $active.show();
         })
@@ -95,7 +99,12 @@ $(function(){
             var pos=$($(this).attr('href')).offset().top;
             $("html,body").animate({scrollTop:pos-75},500);
             return false;
+        });
+        //规格选中
+        $('.itemInfo .ul-list li').click(function(){
+            $(this).addClass('active');
         })
+
     })();
     //注册--协议
     (function(){
@@ -126,9 +135,27 @@ $(function(){
             return false;
         })
     })();
+    //收货地址
+    (function(){
+        $('.my-order .extra-r>a').click(function(){
+            $(this).siblings('.active-pop').show();
+            $('.my-order .clase, .my-order .sh-bg').click(function(){
+                $(this).parents('.active-pop').hide();
+            })
+            return false;
+        })
+    })();
+    //商品搜索
+    (function(){
+        $('.nav-item .title').click(function(){
+            $(this).find('.icon').toggleClass('icon-active');
+            $(this).siblings('.ul-list').stop().slideToggle(200);
+            $(this).parents('.nav-item').find('.ul-list')
+        })
+    })();
+    //商品详情页
+    (function(){
 
-
-
-
+    })();
 
 })

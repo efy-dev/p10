@@ -18,17 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
+    <link rel="icon" type="image/png" href="<c:url value='/scripts/images/pal_icon.png'/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>">
-    <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-    <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
-    <script src="<c:url value='/scripts/function.js'/>"></script>
   <sitemesh:write property='head'/>
   <style>
-    .efy-active {
+    .pal-active {
       background-color: #9a9a9a;
     }
   </style>

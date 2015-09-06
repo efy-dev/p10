@@ -30,26 +30,28 @@
         <div class="title">${tenant.name}</div>
         <ul class="ul-list">
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
-            <li>
-              <img class="img" src="${product.productModel.product.picture_url}" alt="">
-              <div class="bd info">
-                <p class="text">${product.productModel.product.name}</p>
-                <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
-                <p class="num"><i class="iocn-x"></i><strong>${product.amount}</strong></p>
-              </div>
-            </li>
+            <c:if test="${product.isChoose==1}">
+              <li>
+                <img class="img" src="${product.productModel.product.picture_url}" alt="">
+                <div class="bd info">
+                  <p class="text">${product.productModel.product.name}</p>
+                  <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
+                  <p class="num"><i class="iocn-x"></i><strong>${product.amount}</strong></p>
+                </div>
+              </li>
+            </c:if>
           </c:forEach>
         </ul>
-        <div class="bd ask"><textarea name="" id="" cols="30" rows="4" placeholder="给卖家留言"></textarea></div>
+        <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4" placeholder="给卖家留言"></textarea></div>
       </div>
     </c:forEach>
 
     <!-- //End--order-list-->
     <div class="bd order-total">
       <p><strong>优惠券</strong><span class="btn-coupons">2张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
-      <p><strong>商品金额</strong><span><em>￥</em>2000</span></p>
+      <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.intValue()}</span></p>
       <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
-      <p><strong>运费</strong><span><em>￥</em>30</span></p>
+      <p><strong>运费</strong><span><em>￥</em>0</span></p>
     </div>
     <!-- //End--order-total-->
     <div class="bd cart-pay">
@@ -79,7 +81,7 @@
             <p class="bd title">${address.consignee}  ${address.phone}</p>
             <p class="bd des">${address.province.name}${address.details}</p>
             <p class="bd btns">
-              <input type="radio" name="address" id="" onclick="chooseAddress('${address.id}')">
+              <input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}')">
             </p>
           </li>
         </c:forEach>
@@ -102,25 +104,25 @@
     <!--//ENd-->
     <ul class="ul-list">
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox1">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox2">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox3">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
       </li>
       <li>
-        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="cbox4">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>

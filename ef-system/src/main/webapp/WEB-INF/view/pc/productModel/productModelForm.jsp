@@ -24,11 +24,11 @@
 
     <fieldset>
         <legend class="" style="font-size: 17px">商品模型</legend>
-        <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
+        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
             <input type="hidden" name="productId" value="${object.id}">
             <input type="hidden" name="resultPage" value="0" />
             <input type="hidden" name="step" value="model">
-            <input type="hidden" name="view" value="${view}">
+
             <div class="am-form-group">
                 <label name="name" class="am-u-sm-3 am-form-label">商品名称</label>
 
@@ -75,7 +75,7 @@
             </div>
 
             <div class="am-form-group">
-                <label name="masterList" class="am-u-sm-3 am-form-label">属性</label>
+                <label name="masterList" class="am-u-sm-3 am-form-label">规格</label>
 
                 <div class="am-u-sm-9" style="" id="propertyDisplay">
 
@@ -102,7 +102,7 @@
 
             <div class="am-u-md-9" style="margin-left: 19%;">
                 <div class="am-panel am-panel-default">
-                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品模型<span
+                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品规格<span
                             class="am-icon-chevron-down am-fr"></span></div>
                     <div id="collapse-panel-2" class="am-in">
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="productModel">

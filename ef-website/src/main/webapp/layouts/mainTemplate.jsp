@@ -31,9 +31,9 @@
 <%
 } else {
 %>
-<%--导航--%>
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/common/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+
 
 <%
     }

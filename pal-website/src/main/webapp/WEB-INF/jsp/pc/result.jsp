@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
+    <link rel="icon" type="image/png" href="<c:url value='/images/pal_icon.png'/>">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
@@ -146,19 +146,19 @@
                         <td width="377">简介</td>
                         <td width="315">证书查看</td>
                     </tr>
-                    <c:forEach items="${product.tenant.tenantCertificationList}" var="certification">
+                    <%--<c:forEach items="${product.tenant.tenantCertificationList}" var="certification">--%>
                         <tr>
-                            <td>${certification.name}</td>
+                            <td>${product.tenantProductSeries.tenantCertification.name}</td>
                             <td><ming800:status name="level" dataType="PCTenantCertification.level"
-                                                checkedValue="${certification.level}" type="normal"/></td>
-                            <c:if test="${empty certification.imgList}">
+                                                checkedValue="${product.tenantProductSeries.tenantCertification.level}" type="normal"/></td>
+                            <c:if test="${empty product.tenantProductSeries.tenantCertification.imgList}">
                                 <td><a href="#" title="暂无信息">暂无证书</a></td>
                             </c:if>
-                            <c:forEach items="${certification.imgList}" var="img" begin="0" end="0">
-                                <td><a href="<%=imgBasePath%>${img.imgUrl}" title="${certification.name}">查看证书</a></td>
+                            <c:forEach items="${product.tenantProductSeries.tenantCertification.imgList}" var="img" begin="0" end="0">
+                                <td><a href="<%=imgBasePath%>${img.imgUrl}" title="${product.tenantProductSeries.tenantCertification.name}">查看证书</a></td>
                             </c:forEach>
                         </tr>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
                 </table>
             </div>
         </div>

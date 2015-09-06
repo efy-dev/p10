@@ -19,16 +19,16 @@
                 <do name="plistProduct" access="" label="产品分页列表"
                     result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                         <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
                     </query>
-                    <query name="default1" label="默认1" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="name"  operation="eq" label="产品名字" inputType="text"/>
+                    <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
                     </query>
-                    <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
-                        <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0"/>
-                    </query>
+                    <!--<query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0"/>-->
+                    <!--</query>-->
 
                     <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
                         <!--<condition name="id" defaultValue="0" operation="ne"/>-->

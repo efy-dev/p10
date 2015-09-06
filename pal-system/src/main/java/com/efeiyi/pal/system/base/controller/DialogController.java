@@ -1,17 +1,22 @@
 package com.efeiyi.pal.system.base.controller;
 
+import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
+import com.efeiyi.pal.system.order.service.LabelServiceManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
+import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +36,12 @@ public class DialogController {
     @Autowired
     private DoManager doManager;
     @Autowired
+    private XdoManager xdoManager;
+    @Autowired
     private AutoSerialManager autoSerialManager;
+    @Autowired
+    @Qualifier("labelServiceManagerImpl")
+    private LabelServiceManager labelServiceManager;
 
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
@@ -198,8 +208,12 @@ public class DialogController {
         return newList;
     }
 
-
-    //测试Ajax form提交
+    /**
+     * Ajax新建或修改商户信息
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/tenant/saveTenantAjax.do")
     public String saveTenantAjax(HttpServletRequest request) throws Exception {
         Tenant tenant = new Tenant();
@@ -222,6 +236,12 @@ public class DialogController {
         return resultPage;
     }
 
+    /**
+     * Ajax新建或修改非遗项目信息
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/productSeries/saveProductSeriesAjax.do")
     public String saveProductSeries(HttpServletRequest request) throws Exception {
         ProductSeries productSeries = new ProductSeries();
@@ -246,4 +266,35 @@ public class DialogController {
         return resultPage;
     }
 
+    /**
+     * Ajax作废单个标签
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/Label/cancelLabelAjax.do")
+    public String cancelLabel(HttpServletRequest request) throws Exception {
+        String labelId = request.getParameter("id");
+        if (labelId == null || "".equals(labelId.trim())){
+            throw new Exception("标签id不能为空");
+        }
+        Label label = (Label) baseManager.getObject(Label.class.getName(), labelId);
+        label.setStatus("4");
+        baseManager.saveOrUpdate(Label.class.getName(), label);
+        return "ture";
+    }
+
+    @RequestMapping("/Label/cancelLabelListAjax.do")
+    public String cancelLabelList(HttpServletRequest request) throws Exception {
+        String qm = request.getParameter("qm");
+        String conditions = request.getParameter("conditions");
+        qm = qm.substring(1,qm.length());
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        List<Label> labelList = (List<Label>) xdoManager.list(tempDo, tempDoQuery, conditions);
+        String status = "4";
+        labelServiceManager.activateOrCancelLabelList(status, labelList);
+
+        return "true";
+    }
 }

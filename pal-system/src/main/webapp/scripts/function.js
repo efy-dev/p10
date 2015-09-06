@@ -25,6 +25,9 @@ function dialog1(url, artDialogLogId, artDialogLogName) {
                         "<a href=\"javascript:void(0);\" onclick=\"choose(this,'" + artDialogLogId + "','" + artDialogLogName + "')\" name=\"" + data[i].name + "\" id=\"" + data[i].id + "\">" + data[i].name + "</a>" +
                         "</div>";
                 }
+                if(data.length == 0){
+                    modalContent = "<div style='color: red'>没有您需要的信息!</div>";
+                }
                 var out = modalStart + modalContent + modalEnd;
                 $("body").append(out);
                 $("#" + artDialogLogId + artDialogLogName).modal({
@@ -148,4 +151,77 @@ function afterSubmitForm(formId){
         }
     }
     return true;
+}
+
+function myConfirm(url, type){
+    var DValue=document.getElementById("DValue");
+    var AValue=document.getElementById("AValue");
+    var CValue=document.getElementById("CValue");
+    var CAValue=document.getElementById("CAValue");
+    var CLValue=document.getElementById("CLValue");
+    if(type == "D"){
+        DValue.setAttribute("style","display");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "A"){
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "C"){//作废一个订单下所有标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "CA"){//作废一个标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display");
+        CLValue.setAttribute("style","display:none");
+    }
+    if(type == "CL"){//作废一个标签
+        DValue.setAttribute("style","display:none");
+        AValue.setAttribute("style","display:none");
+        CValue.setAttribute("style","display:none");
+        CAValue.setAttribute("style","display:none");
+        CLValue.setAttribute("style","display");
+    }
+
+    $('#my-confirm').modal({
+        //width:300,
+        //height:100,
+        onConfirm: function() {
+            if(type == "CA" || type == "CL"){
+                cancelLabel(url)
+            }else {
+                window.location.href = url;
+            }
+        },
+        onCancel: function() {
+            alert('算求，不弄了');
+        }
+    });
+}
+
+function cancelLabel(url){
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        dataType: "json",
+        success: function (data) {
+            window.location.reload();
+        },
+        error: function (message) {
+            alert(message.responseText);
+        }
+    });
 }
