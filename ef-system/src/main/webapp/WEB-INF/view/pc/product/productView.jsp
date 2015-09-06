@@ -295,7 +295,7 @@
                                             <span class="am-icon-trash-o"></span> 删除
                                         </a>
                                     </td>
-                                    <td>http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model</td>
+                                    <td>http://pro.efeiyi.com/${productPicture.pictureUrl}</td>
                                     <td>
                                         <img width="18%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}" alt="" />
                                     </td>
@@ -356,6 +356,7 @@
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+                var  trueUrl
                 ///图片信息
                 var tr = '<tr name = "'+pictureId+'">' +
                         ' <td>  ' +
