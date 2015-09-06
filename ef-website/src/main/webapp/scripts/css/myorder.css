@@ -439,6 +439,12 @@ a:hover{text-decoration: underline}
 .dentification .short ul li .span-lest2 a{padding: 10px 36px;border: 1px solid #ccc;font-size: 12px;text-decoration: none  }
 .dentification .short ul li .span-lest2 a:hover{background: #000;color: #fff;}
 .dentification .short ul li .span1{padding-left: 12px;font-size:12px;font-family: "宋体";}
+/*pc按钮*/
+.btn-p{padding: 11px 22px;border: 1px solid #ccc;font-size: 12px;text-decoration: none;background: #fff;transition: all 0.5s;}
+.btn-p:hover{background: #000;color: #fff;}
+/*移动按钮*/
+.btn-p-1{padding: 0.9rem 1.1rem;border: 1px solid #000;font-size: 1rem;text-decoration: none;background: #fff;transition: all 0.5s;float:left}
+.btn-p-1:hover{background: #000;color: #fff;}
 /*找回密码*/
 /*物流地址改代码*/
 #divbgs .divcontentbg{margin-top:13px;}

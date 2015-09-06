@@ -222,7 +222,7 @@
                     </div>
                     <div class="am-form-group">
                         <input class="txt-yzm" type="text" id="verification" minlength="3" placeholder="验证码" required>
-                        <a class="btn-yzm" id="verificationButton">获取验证码</a>
+                        <button class="btn-p" id="verificationButton">获取验证码</button>
 
                         <div class="help-block">
                             <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">

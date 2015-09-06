@@ -19,7 +19,7 @@
         <li>
           <label>手机验证码</label>
           <input class="txt1" id="code" type="text" placeholder="短信验证码">
-          <span class="span-lest1"><a id="verificationButton" >获取短信效验码</a></span>
+          <span class="span-lest1"><button id="verificationButton"  class="btn-p">获取短信效验码</button></span>
         </li>
         <li>
           <label></label>
@@ -82,6 +82,7 @@
   $().ready(function () {
 
     $("#verificationButton").click(function () {
+      $("#verificationButton").attr("disabled",true);
       var userName = $("#phone").val();
       $.ajax({
         type: 'post',
@@ -94,6 +95,7 @@
         success: function (data) {
           if(data == false){
             $("#error").text("您输入的用户名不正确");
+            $("#verificationButton").removeAttr("disabled");
           }else{
             $("#error").text("");
             sendVerificationCode($("#phone").val())
