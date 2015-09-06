@@ -14,7 +14,11 @@
     <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
-
+<script >
+    $(function(){
+        console.log('${param.param}');
+    })
+</script>
 <div class="am-g">
 
     <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
@@ -25,7 +29,13 @@
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xmm.do"/>" method="post" class="am-form am-form-horizontal"
               enctype="multipart/form-data">
-            <input type="hidden" value="saveOrUpdateMaster" name="qm">
+            <c:if test="${'master' == param.param}">
+                <input type="hidden" value="saveOrUpdateMaster" name="qm">
+            </c:if>
+            <c:if test="${'EcMaster' == param.param}">
+                <input type="hidden" value="saveOrUpdateEcMaster" name="qm">
+            </c:if>
+
             <input type="hidden" name="id" value="${object.id}">
             <%--<input type="hidden" name="status" value="1"/> --%>
             <div class="am-form-group">

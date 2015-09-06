@@ -115,11 +115,13 @@
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
                 <match url="/basic/xm.do?qm=plistProductModel_index"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=index"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
                 <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>
                 <match url="/basic/xm.do?qm=formMaster&amp;form=recommend"/>
                 <match url="/basic/xm.do?qm=plistEcMaster_index"/>
+                <match url="/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"/>
             </jnode>
         </jnode>
     </jnode>
@@ -128,7 +130,7 @@
         <jnode url="" id="tenantManager" access="admin,manager" state="closed" text_zh_CN="传承人管理">
             <jnode url="/basic/xm.do?qm=plistMaster_default" id="masterList" access="admin" text_zh_CN="传承人列表">
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
-                <match url="/basic/xm.do?qm=formMaster&amp;form=master"/>
+                <match url="/basic/xm.do?qm=formMaster&amp;form=master&amp;param=master"/>
                 <match url="/basic/xm.do?qm=viewMaster&amp;view=master"/>
                 <!--<match url="/basic/xm.do?qm=formMaster"/>-->
                 <!--<match url="/basic/xm.do?qm=removeMaster"/>-->
