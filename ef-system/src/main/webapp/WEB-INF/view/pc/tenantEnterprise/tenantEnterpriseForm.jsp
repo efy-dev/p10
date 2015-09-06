@@ -45,7 +45,15 @@
                 <label for="name" class="am-u-sm-3 am-form-label">商家名称</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="name" name="name" placeholder="个人商家名称" value="${object.name}" required>
+                    <input type="text" id="name" name="name" placeholder="企业商家名称" value="${object.name}" required>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">商家简介</label>
+
+                <div class="am-u-sm-9">
+                    <textarea id="content" name="content" rows="3" cols="5" placeholder="企业商家简介" required>${object.content}</textarea>
+                    <%--<input type="text" id="content" name="content" placeholder="企业商家简介" value="${object.content}" required>--%>
                 </div>
             </div>
             <div class="am-form-group">

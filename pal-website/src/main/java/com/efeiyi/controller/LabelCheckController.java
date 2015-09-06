@@ -86,5 +86,14 @@ public class LabelCheckController {
         return new ModelAndView(PalConst.getInstance().sourceView, model);
     }
 
+    @RequestMapping(value = "/aboutUs.do")
+    public ModelAndView aboutUs(ModelMap model,HttpServletRequest request) throws Exception{
+        return  new ModelAndView(PalConst.getInstance().aboutUsView,model);
+    }
+
+    @RequestMapping(value = "/userManual.do")
+    public ModelAndView userManual(ModelMap model,HttpServletRequest request) throws Exception{
+        return  new ModelAndView(PalConst.getInstance().userManualView,model);
+    }
 
 }

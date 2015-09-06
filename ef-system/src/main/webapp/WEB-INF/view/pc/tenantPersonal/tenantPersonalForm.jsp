@@ -49,6 +49,14 @@
                 </div>
             </div>
             <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">商家简介</label>
+
+                <div class="am-u-sm-9">
+                    <textarea id="content" name="content" rows="3" cols="5" placeholder="个人商家简介" required>${object.content}</textarea>
+                    <%--<input type="text" id="content" name="content" placeholder="个人商家简介" value="${object.content}" required>--%>
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>
 
                 <div class="am-u-sm-9">

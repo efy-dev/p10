@@ -42,6 +42,7 @@
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,manager" text_zh_CN="优惠券批次">
                 <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=formCouponBatch"/>
+                <!--<match url="/couponBatch/saveAndCreateCoupon.do"/>-->
                 <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
             </jnode>
@@ -79,12 +80,15 @@
                 <match url="/basic/xm.do?qm=formEnterpriseTenant"/>
                 <match url="/basic/xm.do?qm=formPrivateTenant"/>
                 <match url="/basic/xm.do?qm=formPersonalTenant"/>
+                <match url="/basic/xm.do?qm=formEnterprisesTenant"/>
+                <match url="/basic/xm.do?qm=formPrivaterTenant"/>
+                <match url="/basic/xm.do?qm=formPersonTenant"/>
                 <match url="/basic/xm.do?qm=formTenant"/>
                 <match url="/product/saveNewProduct.do?view=tenant"/>
                 <match url="/basic/xm.do?qm=formTenantCategory"/>
                 <match url="/basic/xm.do?qm=plistTenantCategory_default"/>
-
-
+                <match url="/master/toTenantMaster.do"/>
+                <match url="/product/project/toTenantProject.do"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="/basic/xm.do?qm=plistProfessional_default"/>
