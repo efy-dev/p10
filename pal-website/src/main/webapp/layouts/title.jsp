@@ -31,16 +31,8 @@
     <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/pc.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/pc.css'/>">
 </head>
 <body>
-<div class="topbar">
-    <div class="hd">
-        <div class="phone">
-            <span>商户合作热线: </span>
-            <strong>400-876-8766</strong>
-        </div>
-    </div>
-</div>
 </body>
 

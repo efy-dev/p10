@@ -47,7 +47,7 @@
   </div>
   <!-- //End--breadcrumb-->
     <div class="explain">
-        <img src="http://pro.efeiyi.com/${project.picture_url}" alt=""/>
+        <img src="http://pro.efeiyi.com/${project.picture_url}" width="1200" height="150" alt=""/>
     </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">

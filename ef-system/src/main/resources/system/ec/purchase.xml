@@ -75,7 +75,7 @@
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                     </query>
                     <query name="consumer" label="查找" type="auto" orderBy="id:desc">
-                        <condition name="user.username" operation="eq" label="用户名"/>
+                        <condition name="user.id" operation="eq" label="消费者id"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="serial" operation="eq" label="订单号" inputType="text"/>
@@ -160,7 +160,7 @@
                         />
                 <do name="formCouponBatch" label="保存优惠券批次" access="" result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access=""
-                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default">
+                    result="redirect:/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1" inputType="default" />
