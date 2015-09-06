@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<html class="no-js">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="description" content="">
+ <meta name="keywords" content="">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ <title>诚品宝-首页</title>
+ <!-- Set render engine for 360 browser -->
+ <meta name="renderer" content="webkit">
+ <!-- No Baidu Siteapp-->
+ <meta http-equiv="Cache-Control" content="no-siteapp"/>
+ <link rel="icon" type="image/png" href="assets/i/favicon.png">
+ <!-- Add to homescreen for Chrome on Android -->
+ <meta name="mobile-web-app-capable" content="yes">
+ <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+ <!-- Add to homescreen for Safari on iOS -->
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black">
+ <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+ <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+ <!-- Tile icon for Win8 (144x144 + tile color) -->
+ <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+ <meta name="msapplication-TileColor" content="#0e90d2">
+ <link rel="stylesheet" href="css/amazeui.min.css">
+ <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="topbar">
+	<div class="hd">
+		<div class="phone">
+			<span>商户合作热线: </span>
+			<strong>400-876-8766</strong>
+		</div>
+	</div>
+</div>
+<!--//End--topbar-->
+<div class="search-home">
+	<div class="logo">
+		<h1><a href="#"><img src="images/logo.png" width="150" height="68" /></a></h1>
+		<p>非遗商品防伪溯源查询中心</p>
+	</div>
+	<form id="form" action="http://192.168.1.57:80/pal-website/checkLabel.do" method="get">
+		<div class="title"><a >真伪查询</a><span class="line"></span><a>非遗搜</a></div>
+		<label for="">
+			<input class="txt" type="text" name="serial" id="serial" value="" />
+			<input class="btn" type="submit" id="btn" value="查 询"/>
+		</label>
+	</form>
+	<!--//End--form-->
+	<div class="footer">
+		<div class="hd">    
+			<a href="" title="关于诚品宝">关于诚品宝</a>
+			<a href="" title="使用前必读">使用前必读</a>
+			<a href="" title="京ICP备:15032511号-1">京ICP备:15032511号-1</a>
+		</div>
+	</div>
+	<!--//End--footer-->
+</div>
+<!--//End--search-home-->
+
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="js/amazeui.min.js"></script>
+<script src="js/cpbjs.js"></script>
+<script>
+$(document).ready(function(){
+    $("#serial").keyup(function(e){
+    	if(e.keyCode==13){
+    		$('#btn').click();
+				//$('#form').submit(); //处理事件
+			}
+    });
+    $("#btn").click(function(){
+    	$('#form').submit();
+    });
+});
+
+</script>
+
+</body>
+</html>
