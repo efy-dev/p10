@@ -48,7 +48,7 @@
                         </fields>
                     </page>
                 </do>
-                <do name="saveOrUpdatePersonTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantTypeHandler">
+                <do name="saveOrUpdatePersonTenant" label="保存个人商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default">
                 </do>
                 <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
             </does>
@@ -68,7 +68,7 @@
                         </fields>
                     </page>
                 </do>
-                <do name="saveOrUpdatePrivaterTenant" label="保存个体商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantTypeHandler"/>
+                <do name="saveOrUpdatePrivaterTenant" label="保存个体商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
                 <do name="removePersonalTenant" label="删除个体商家" access="" result="json"/>
             </does>
         </entity>
@@ -87,7 +87,7 @@
                         </fields>
                     </page>
                 </do>
-                <do name="saveOrUpdateEnterprisesTenant" label="保存企业商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default" execute="com.efeiyi.ec.system.tenant.controller.TenantTypeHandler"/>
+                <do name="saveOrUpdateEnterprisesTenant" label="保存企业商家" access="" result="redirect:/basic/xm.do?qm=plistTenant_default"/>
                 <do name="removePersonalTenant" label="删除个人商家" access="" result="json"/>
             </does>
         </entity>
