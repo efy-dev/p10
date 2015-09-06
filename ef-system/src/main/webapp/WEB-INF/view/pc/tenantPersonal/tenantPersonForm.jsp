@@ -37,7 +37,7 @@
         </div>
       </div>
     <div class="am-form-group">
-        <label for="identityPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版正面</label>
+        <label for="frontPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版正面</label>
         <fieldset>
             <legend>
                 <a id="btn_upload0"></a>
@@ -67,7 +67,7 @@
         </fieldset>
     </div>
     <div class="am-form-group">
-        <label for="identityPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版反面</label>
+        <label for="versoPhotoUrl" class="am-u-sm-3 am-form-label">*经营者身份证电子版反面</label>
         <fieldset>
             <legend>
                 <a id="btn_upload1"></a>
