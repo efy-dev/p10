@@ -12,29 +12,31 @@
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
-            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/product/project/toTenantProject.do?tenantId=${tenantId}"/>">关联项目</a>
+
         </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th width="20%">操作</th>
-                    <th width="40%">项目名称</th>
-                    <th width="40%">项目编号</th>
+                    <th width="30%">操作</th>
+                    <th width="35%">项目名称</th>
+                    <th width="35">项目编号</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${objectList}" var="tenantProject" end="4">
-                    <tr id="${tenantProject.id}">
+                <c:forEach items="${objectList}" var="masterProject" end="4">
+                    <tr id="${masterProject.id}">
                         <td>
-                          <a id="${tenantProject.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','是否删除',function(){removeTenantProject('${tenantProject.id}')})"><span
-                                class="am-icon-pencil-square-o"></span> 解除商家
-                          </a>
+                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                               onclick="showConfirm('提示','是否删除',function(){removeMasterProject('${masterProject.id}')})" href="#"><span
+                                    class="am-icon-trash-o"></span>删除
+                            </a>
                         </td>
                         <td class="am-hide-sm-only">
-                            ${tenantProject.project.name}
+                            ${masterProject.project.name}
                         </td>
-                        <td class="am-hide-sm-only"> ${tenantProject.project.serial}</td>
+                        <td class="am-hide-sm-only"> ${masterProject.project.serial}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -42,10 +44,10 @@
         </div>
     </div>
 <script>
-    function removeTenantProject(divId){
+    function removeMasterProject(divId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeTenantProject"/>',
+            url: '<c:url value="/basic/xmj.do?qm=removeMasterProject"/>',
             cache: false,
             dataType: "json",
             data:{id:divId},
