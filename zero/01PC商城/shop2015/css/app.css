@@ -27,7 +27,7 @@ a:hover {color:#f00;text-decoration:underline}
 .topbar .ul-item li.cart:hover {background:#fff}
 .topbar .ul-item li.cart a:hover {background:none;color:#000}
 .topbar .ul-item li.cart a:hover .icon {background-position:0 -63px}
-.am-sticky-placeholder {background:#000;width:100%;float:left}
+.am-sticky-placeholder {background:#000;width:100%;float:left; position: relative; z-index: 2;}
 /*--//End--topbar--*/
 .header {min-width:1200px;border-bottom:3px #000 solid;background:#fff}
 .header .logo {padding:15px 0;float:left}
@@ -405,7 +405,7 @@ a:hover {color:#f00;text-decoration:underline}
 .footer .service .platform a {width:143px;height:51px;line-height:999px;float:left;overflow:hidden}
 .footer .service .chengbao {background-position:0 -109px;width:100px;height:45px}
 .footer .service .chengbao a {width:137px;height:61px;line-height:999px;float:left;overflow:hidden}
-.footer .service .wechat {background-position:0 -154px;width:73px;height:53px}
+.footer .service .wechat {background-position:0 -155px;width:73px;height:53px;position:relative;top:5px;}
 .footer .service .line {width:2px;height:42px;display:inline-block;margin:0 30px;background:#c1c1c1}
 .footer .links {background:#000;height:16px;line-height:16px;text-align:center;padding:15px 0}
 .footer .links a {margin:0 10px;display:inline-block;box-sizing:content-box;color:#fff;font-family:FangSong}
@@ -433,12 +433,15 @@ html, body {
     height: 100%;
 }
 
-.section {    width: 100%;
+.section {width: 100%;
     min-width: 1000px;
     height: 100%;
     position: relative;
-    background: #419dea;
-    display: block;}
+    background: #ccc;
+    display: block;
+    z-index: 1;
+    overflow: hidden;
+}
 
 #section1 {
 
