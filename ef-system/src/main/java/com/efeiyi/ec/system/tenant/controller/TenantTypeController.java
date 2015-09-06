@@ -1,14 +1,11 @@
 package com.efeiyi.ec.system.tenant.controller;
 
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.tenant.model.EnterpriseTenant;
 import com.efeiyi.ec.tenant.model.PersonalTenant;
 import com.efeiyi.ec.tenant.model.PrivateTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
