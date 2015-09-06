@@ -144,7 +144,7 @@ a:hover {color:#f00;text-decoration:underline}
 .shop-header .btndes a {width:202px;height:55px;line-height:55px;text-align:center;border:1px #000 solid;float:left;margin-left:-1px;font-size:16px}
 .shop-header .btndes a:hover {background:#000;color:#fff;text-decoration:none}
 /*--//End----*/
-.shop-sort {background:#000;width:1198px;height:38px;line-height:38px;padding:3px 0;box-sizing:content-box;position:relative;z-index:2}
+.shop-sort {background:#000;width:1200px;height:38px;line-height:38px;padding:3px 0;box-sizing:content-box;position:relative;z-index:2}
 .shop-sort a {font-size:12px;float:left}
 .shop-sort .link1 {padding:0 3px}
 .shop-sort .link1 li {float:left}
