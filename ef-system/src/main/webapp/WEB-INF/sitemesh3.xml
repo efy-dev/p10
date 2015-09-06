@@ -7,5 +7,7 @@
     <mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>
     <mapping path="/" decorator="/layouts/iframe.jsp"/>
     <mapping path="/product/saveNewProduct.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/master/toTenantMaster.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/product/project/toTenantProject.do" decorator="/layouts/main.jsp"/>
     <mapping path="/imgView.jsp*" exclue="true" />
 </sitemesh>
