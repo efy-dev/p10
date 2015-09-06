@@ -42,6 +42,7 @@
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,manager" text_zh_CN="优惠券批次">
                 <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=formCouponBatch"/>
+                <!--<match url="/couponBatch/saveAndCreateCoupon.do"/>-->
                 <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
             </jnode>

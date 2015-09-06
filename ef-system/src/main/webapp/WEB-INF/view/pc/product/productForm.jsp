@@ -150,9 +150,9 @@
                     <span style="padding: 10px;">
                        <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"  class="am-btn am-btn-primary" value="保存,并返回商品列表"/>
                     </span>
-                     <span style="padding: 10px;">
-                       <input type="button" onclick="toSubmit('/product/productView')"  class="am-btn am-btn-primary" value="保存,并查看商品详情"/>
-                    </span>
+                     <%--<span style="padding: 10px;">--%>
+                       <%--<input type="button" onclick="toSubmit('/product/productView')"  class="am-btn am-btn-primary" value="保存,并查看商品详情"/>--%>
+                    <%--</span>--%>
         </div>
       </div>
     </form>

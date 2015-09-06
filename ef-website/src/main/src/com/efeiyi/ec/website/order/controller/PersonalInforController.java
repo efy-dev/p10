@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Administrator on 2015/8/19.
@@ -59,6 +60,10 @@ public class PersonalInforController {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePassword",request);
         xSaveOrUpdate.getParamMap().put("password",password);
         baseManager.saveOrUpdate(xSaveOrUpdate);
+        HttpSession session = request.getSession();
+        if(session != null){
+            session.invalidate();
+        }
         return "redirect:/login";
 
     }

@@ -25,9 +25,9 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
+            <td>商品编号</td>
             <td>商品名称</td>
             <td>制作大师</td>
-            <td>商品编号</td>
             <td>非遗项目</td>
             <td>所属商户</td>
             <td>制作完成时间</td>
@@ -44,14 +44,13 @@
                         </div>
                     </div>
                 </td>
-                <td>
-                    <a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.name}</a>
+                <td><a href="<c:url value='/basic/xm.do?qm=viewProduct&product=product&id=${product.id}'/>">${product.serial}</a></td>
+                <td>${product.name}
                     <c:if test="${not empty product.logo}">
                         <img src="<%=imgBasePath %>${product.logo}<%=imgListCss %>">
                     </c:if>
                 </td>
                 <td>${product.masterName}</td>
-                <td>${product.serial}</td>
                 <td>${product.productSeries.name}</td>
                 <td>${product.tenant.name}</td>
                 <td><fmt:formatDate value="${product.madeYear}" pattern="yyyy-MM-dd"/></td>
