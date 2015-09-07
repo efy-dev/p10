@@ -117,10 +117,15 @@
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq" label="优惠券状态"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="优惠券状态" inputType="default"/>
                     </query>
-                    <query name="couponBatch" label="默认" type="auto" orderBy="id:desc">
+                    <query name="couponBatch" label="查找" type="auto" orderBy="id:desc">
                         <condition name="couponBatch.id" operation="eq" label="优惠券批次id"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
+                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
                 </do>
 

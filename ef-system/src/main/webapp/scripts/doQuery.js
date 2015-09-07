@@ -158,7 +158,10 @@ function addOptions(tempId, url, defaultValue, data, inputType, required) {
                     if (defaultValue != "" && defaultValue == data[i].id) {
                         option.selected = "selected";
                     }
-                    document.getElementById(tempId).options.add(option);
+                    var selector = document.getElementById(tempId);
+                    var options = selector.options;
+                    options.add(option);
+                    //.options.add(option);
                 } else {
                     tagStr += "<input type='radio' name=\"" + tempId + "Name" + "\" value=\"" + data[i].id + "\" ";
                     if (defaultValue != "" && defaultValue == data[i].id) {
@@ -236,7 +239,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
 
                     tagStr += " class=\"selectValidate\"";
                 }
-                tagStr += "><option value=''>请选择</option></select></div>&nbsp;&nbsp;";
+                tagStr += "><option value=''>请选择</option></select>&nbsp;&nbsp;";
             } else if (queryConditionArray[i].inputType == "radio_status" || queryConditionArray[i].inputType == "radio_dictionary") {
                 tagStr += "&nbsp;&nbsp;<span id=\"" + tempId + "\"></span>&nbsp;&nbsp;";
             } else {
