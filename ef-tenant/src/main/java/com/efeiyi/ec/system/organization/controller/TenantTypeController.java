@@ -7,6 +7,7 @@ import com.efeiyi.ec.tenant.model.BigTenant;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,9 +21,10 @@ public class TenantTypeController {
 	BaseManager baseManager;
 
 	@RequestMapping("/sendTenantTypePage.do")
-	public String sendTenantTypePage(){
+	public String sendTenantTypePage(Model model){
 		String id = AuthorizationUtil.getMyUser().getBigTenant().getId();
 		BigTenant big = (BigTenant) baseManager.getObject(BigTenant.class.getName(),id);
+		model.addAttribute("object",big);
 		if("11".equals(big.getTenantType())){
 			return "/tenantType/enterpriseTenant";
 		}else if("12".equals(big.getTenantType())){

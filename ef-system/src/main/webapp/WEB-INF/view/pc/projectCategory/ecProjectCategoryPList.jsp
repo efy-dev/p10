@@ -40,7 +40,7 @@
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button onclick="window.location.href='<c:url
-                                                value="/basic/xm.do?qm=formProjectCategory&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
+                                                value="/basic/xm.do?qm=formProjectCategory&param=tenant&fatherCategoryId=${fatherCategoryId}&level=${projectCategory.level}&id=${projectCategory.id}"/>'"
                                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                                 class="am-icon-edit"></span> 编辑
                                         </button>
@@ -85,7 +85,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&view=plist&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
+                                <a href="<c:url value="/basic/xm.do?qm=plistEcProjectCategory_default&view=plist&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
                                         ${projectCategory.name}
                                 </a>
                                 <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">

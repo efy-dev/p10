@@ -5,23 +5,19 @@ import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/7/29.
@@ -34,8 +30,9 @@ public class DialogController {
     private BaseManager baseManager;
     @Autowired
     private DoManager doManager;
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
-    private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
     /**
@@ -239,6 +236,8 @@ public class DialogController {
         Do tempDo = doManager.getDoByQueryModel(qm);
         productSeries = (ProductSeries) XDoUtil.processSaveOrUpdateTempObject(tempDo, productSeries, productSeries.getClass(), request, type, xdoDao);
         if ("new".equals(type)){
+            String serial = autoSerialManager.nextSerial("serial");
+            productSeries.setSerial(serial);
             productSeries.setStatus("1");
         }
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);

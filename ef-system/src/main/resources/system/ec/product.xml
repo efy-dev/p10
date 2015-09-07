@@ -14,7 +14,6 @@
                 <field name="picture_url" label="产品图片链接" inputType="text"/>
                 <field name="createDatetime" label="创建时间" inputType="date"/>
                 <field name="master.id" label="用户" inputType="dialog_pop"/>
-
             </fields>
             <does>
                 <do name="plistProduct" access="" label="产品分页列表"
@@ -47,6 +46,8 @@
 
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.formProductHandler"/>
+                <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
+                <do name="formProduct_ProductModel" label="保存产品页" access="" result="/productModel/productModelForm" />
                 <do name="viewProduct" label="查看产品页" access="" result="/product/productView"/>
                 <!--<do name="saveOrUpdateProduct" label="保存产品" access="" result="/product/productSaveSuccess"></do>-->
                 <do name="listProduct" label="产品列表" access="" result="/product/productList">
