@@ -21,3 +21,4 @@
 <script src="<c:url value='/resources/js/alert.js'/>"></script>
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/ef.util.js"/>"></script>
+<script src="<c:url value="/scripts/js/myorder.js"/>"></script>
