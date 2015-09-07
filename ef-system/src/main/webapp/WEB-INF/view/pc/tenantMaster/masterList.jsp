@@ -27,7 +27,7 @@
   <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}" />
   <input type="hidden" name="tenant.id" value="${tenantId}" />
   <input type="hidden" name="master.id" value="" />
-<div class="admin-content">
+
   <div class="am-g">
     <div class="am-u-sm-12">
       <table class="am-table am-table-striped am-table-hover table-main">
@@ -40,11 +40,11 @@
         <tbody>
 
         <c:forEach items="${objectList}" var="master">
-          <tr>
+          <tr id="${master.id}">
             <td>
               <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                  <a id="${master.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);" onclick="toSubmitTenantMaster('${master.id}');"><span
+                  <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);" onclick="toSubmitTenantMaster('${master.id}');"><span
                           class="am-icon-pencil-square-o"></span> 关联商家
                   </a>
                 </div>
@@ -60,9 +60,18 @@
     </div>
   </div>
 
-</div>
+
   </form>
 <script>
+
+  $(function(){
+
+    <c:forEach var="tenantMaster" items="${tenantMasterList}">
+    var masterId = '${tenantMaster.master.id}';
+    $("#"+masterId).remove();
+    </c:forEach>
+
+  });
   function toSubmitTenantMaster(masterId){
     $("input[name='master.id']").val(masterId);
     $("#form").submit();
