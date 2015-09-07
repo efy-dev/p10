@@ -92,7 +92,7 @@ a:hover{text-decoration: underline}
 /*--空--*/
 .my-order .mt-null{width:287px;height: 80px;margin:55px 280px;}
 .my-order .mt-null p{font-size: 12px;color:#000;font-family: "宋体";text-align: center}
-.my-order .mt-null ul{margin-top:30px;margin-left: 75px;}
+.my-order .mt-null ul{margin-top:30px;}
 .my-order .mt-null ul li a{width: 129px;height: 36px;color: #000;font-family: "仿体";text-align: center;display: block;line-height: 36px;font-size: 14px;
     border: 1px solid #000;text-decoration: none}
 .my-order .mt-null ul li a:hover{transition:all 0.5s;background-color: #000;color:#fff;}
@@ -439,16 +439,7 @@ a:hover{text-decoration: underline}
 .dentification .short ul li .span-lest2 a{padding: 10px 36px;border: 1px solid #ccc;font-size: 12px;text-decoration: none  }
 .dentification .short ul li .span-lest2 a:hover{background: #000;color: #fff;}
 .dentification .short ul li .span1{padding-left: 12px;font-size:12px;font-family: "宋体";}
-/*pc按钮*/
-.btn-p{padding: 11px 22px;border: 1px solid #ccc;font-size: 12px;text-decoration: none;background: #fff;transition: all 0.5s;}
-.btn-p:hover{background: #000;color: #fff;}
-/*移动按钮*/
-.btn-p-1{padding: 0.9rem 1.1rem;border: 1px solid #000;font-size: 1rem;text-decoration: none;background: #fff;transition: all 0.5s;float:left}
-.btn-p-1:hover{background: #000;color: #fff;}
 /*找回密码*/
-/*物流地址改代码*/
-#divbgs .divcontentbg{margin-top:13px;}
-/*物流地址改代码*/
 /*设置新密码*/
 .new{width: 100%;min-height: 550px;float: left}
 .new .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
