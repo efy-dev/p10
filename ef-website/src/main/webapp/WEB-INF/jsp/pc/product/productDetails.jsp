@@ -53,9 +53,9 @@
       <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
-        <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
-        </c:forEach>
+          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+            <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
+          </c:forEach>
         </ul>
       </div>
       <!-- //End--sliderimg-->
@@ -79,11 +79,10 @@
         <ul class="ul-list">
           <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
             <c:if test="${productModel.id == productModelTmp.id}">
-              <li class="active" id = "black">
+              <li class="active">
             </c:if>
-
             <c:if test="${productModel.id != productModelTmp.id}">
-              <li class="" id = "white"+productModelTmp.id>
+              <li class="">
             </c:if>
             <a href="/product/productModel/${productModelTmp.id}">
                 <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
