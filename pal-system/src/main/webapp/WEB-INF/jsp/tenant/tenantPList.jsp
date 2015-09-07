@@ -42,7 +42,7 @@
                     </div>
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewTenant&tenant=tenant&id=${tenant.id}"/>">${tenant.name}</a></td>
-                <td>${tenant.province}&nbsp;${tenant.city}&nbsp;${tenant.address}</td>
+                <td>${tenant.province.name}&nbsp;${tenant.city.name}&nbsp;${tenant.district.name}</td>
             </tr>
         </c:forEach>
     </table>
