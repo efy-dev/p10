@@ -244,9 +244,12 @@
                 <do name="plistPurchaseOrderPayment" access="" label="支付记录分页查询"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="支付状态" inputType="select_status" key="purchaseOrderPayment.status"/>
+                        <condition name="serial" operation="eq" label="支付记录编号" inputType="text"/>
+                        <condition name="purchaseOrder.serial" operation="eq" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
