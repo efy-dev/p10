@@ -44,7 +44,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend&id=${master.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=recommend&param=EcMaster&id=${master.id}"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
