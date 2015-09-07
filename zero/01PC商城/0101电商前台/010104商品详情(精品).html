@@ -27,7 +27,7 @@
 <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
 </head>
 <body>
-<div class="topbar wh" data-am-sticky>
+<div class="topbar wh" data-am-sticky style="display: none;">
     <div class="hd">
         <ul class="ul-item">
             <li><a href="" title="请登录">请登录</a></li>
@@ -42,7 +42,7 @@
     </div>
 </div>
 <!-- //End--topbar-->
-<div class="header header-fine wh">
+<div class="header header-fine wh"  style="display: none;">
     <div class="hd">
         <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
         <div class="nav">
@@ -162,26 +162,51 @@
             </ul>
         </div>
         <!-- //End--nav-->
-        <!--<div class="info">-->
-            <!--<div class="name">姚 惠 芬</div>-->
-            <!--<div class="title">-->
-                <!--<p>平遥推光漆器</p>-->
-                <!--<p>国家级非物质文化遗产</p>-->
-            <!--</div>-->
-            <!--<div class="name-img">-->
-                <!--<p>安格尔|公爵夫人肖像</p>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; //End&#45;&#45;基本信息&ndash;&gt;-->
-        <!--<div class="btn-add"><a href="" title="立即购买">立即购买</a></div>-->
-        <!--<div class="btn-arrow-down"><a class="icon" href=""></a></div>-->
-
+        <div class="info">
+            <div class="name">姚 惠 芬</div>
+            <div class="title">
+                <p>平遥推光漆器</p>
+                <p>国家级非物质文化遗产</p>
+            </div>
+            <div class="name-img">
+                <p>安格尔|公爵夫人肖像</p>
+            </div>
+        </div>
+        <!-- //End--基本信息-->
+        <div class="btn-add"><a href="" title="立即购买">立即购买</a></div>
+        <div class="btn-arrow-down"><a class="icon" href=""></a></div>
+        <!-- //End-->
+        <div class="sec-details">
+            <i class="icon icon-close"></i>
+            <div class="part">
+                <div class="title">非遗◆风貌</div>
+                <ul class="ul-info">
+                    <li><strong>品&nbsp;&nbsp;&nbsp;&nbsp;名：</strong><span>《安格尔—公爵夫人肖像》</span></li>
+                    <li><strong>尺&nbsp;&nbsp;&nbsp;&nbsp;寸：</strong><span>100X128CM</span></li>
+                    <li><strong>材&nbsp;&nbsp;&nbsp;&nbsp;质：</strong><span>真丝底料  真丝色线</span></li>
+                    <li><strong>绣制时间：</strong><span>2006年</span></li>
+                    <li><strong>绣制工时：</strong><span>303天</span></li>
+                    <li><strong>绣制技艺：</strong><span>乱针绣</span></li>
+                    <li><strong>所属项目：</strong><span>苏绣</span></li>
+                    <li><strong>项目级别：</strong><span>国家级非物质文化遗产</span></li>
+                    <li><strong>适&nbsp;&nbsp;&nbsp;&nbsp;用：</strong><span>中国外事礼品  赠送外国友人 节庆送礼 家居装饰 个人收藏</span></li>
+                </ul>
+            </div>
+            <!-- //End--part-->
+            <div class="part">
+                <div class="title">非遗◆承袭</div>
+                <ul class="ul-txt">
+                    <li>苏绣是中国古老的手工技艺之一，早在三国时期就有了关于苏绣制作的记载，吴王孙权曾命丞相赵达之妹手绣《列国图》，有“绣万国于一锦”之说。而其风骨神韵在隋唐时期奠定，迨至宋元其枝法与特色渐趋形成，《清秘藏》叙述：“宋人之绣，针线细密，用线一、二丝，用针如发细者为之。设色精妙，光彩射目。山水分远近之趣，楼阁得深邃之体人物具瞻眺生动之情，花鸟极绰约底馋唼之态，佳者较画更胜。”明清苏绣艺术走向成熟。</li>
+                    <li>“山水能分远近之趣；楼阁具现深邃之体；人物能有瞻眺生动之情；花鸟能报绰约亲昵之态。”民国时期，社会动荡、百业萧条，苏绣发展受到重创，直至新中国成立苏绣得以复兴。</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <!--//End--概览-->
-<div class="section">
+<!--<div class="section">-->
 
-</div>
+<!--</div>-->
 <!--//End--鉴赏-->
 
 
@@ -195,36 +220,16 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script src="../shop2015/js/amazeui.min.js"></script>
+
+
+
+<script src="../shop2015js/sectionscroll.js" type="text/javascript"></script>
+<script src="../shop2015js/jquery.mousewheel.min.js" type="text/javascript"></script>
 <script src="../shop2015/js/system.js"></script>
 <script>
 $(function(){
 
 
-    //计算图片宽度+高度
-    var dWidth=$(window).width();
-    var dHeight=$(window).height();
-
-//
-//    $('.detail-fine .img-bg img').css({'width':dWidth});
-//    $('.header-fine .nav .ul-list,.section').css({'height':dHeight-86});
-//    $('#menu-fine').click(function(){
-//        $(this).siblings('.mask').toggleClass('visible').siblings('.ul-list').stop(true,true).slideToggle(200);
-//        $(this).siblings('.mask').click(function(){
-//            $(this).removeClass('visible').siblings('.ul-list').stop(true,true).slideUp(200)
-//        })
-//    })
-//
-//    if($('div').hasClass('section')){
-//        $('body').css({'overflow':'hidden'});
-//    }
-//
-//    $(window).resize(function(){
-//        var dWidth=$(window).width();
-//        $('.detail-fine .img-bg img').css({'width':dWidth});
-//        if(dWidth<1024){
-//            $('body').css({'overflow':'visible'});
-//        }
-//    })
 
 
     //导航点击

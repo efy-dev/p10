@@ -46,13 +46,6 @@
                                          <select class="car1" id="city" name="city.id">
                                              <option value="请选择">请选择</option>
                                          </select>
-                                         <%--<select name="cars" class="car2">--%>
-                                         <%--<option value="请选择">请选择</option>--%>
-                                         <%--<option value="saab">Saab</option>--%>
-                                         <%--<option value="fiat">Fiat</option>--%>
-                                         <%--<option value="audi">Audi</option>--%>
-                                         <%--</select>--%>
-                                         <span>请您填写所在地区</span>
                                      </form>
 
 
@@ -60,23 +53,10 @@
                                  <li>
                                      <label>详细地址：</label>
                                      <input type="text" name="details">
-                                     <span>请您填写详细地址</span>
                                  </li>
                                  <li>
                                      <label>手机号码：</label>
                                      <input type="text" name="phone">
-                                     <%--<label>固定号码：</label>--%>
-                                     <%--<input type="text">--%>
-                                     <span>请您填写电话号码</span>
-                                 </li>
-                                 <li>
-                                     <label>邮箱：</label>
-                                     <input type="text" name="email">
-                                     <span>请您填写邮箱</span>
-                                 </li>
-                                 <li>
-                                     <label></label>
-                                     <strong>用来接收订单提醒邮件，便于您及时了解订单情况</strong>
                                  </li>
                                  <li>
                                      <label></label>
@@ -311,6 +291,16 @@
         $(element).attr("class", "default-text default-active")
     }
 
+    $().ready(function () {
+        $("#newAddress").validate({
+            rules: {
+                consignee: "required",
+                details: "required",
+                name: "required",
+                phone: "required",
+            },
+        });
+    });
 
 </script>
 </body>
