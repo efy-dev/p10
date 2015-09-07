@@ -72,7 +72,9 @@
                         <td class="am-hide-sm-only">${productModel.product.price}</td>
                         <td class="am-hide-sm-only">${productModel.product.project.name}</td>
                         <td class="am-hide-sm-only">${productModel.product.category.name}</td>
-                        <td class="am-hide-sm-only"><img src="${productModel.product.picture_url}" alt="图片地址"></td>
+                        <td class="am-hide-sm-only">
+                            <img width="20px" src="http://pro.efeiyi.com/${productModel.product.picture_url}@!product-model" alt="产品图片">
+                         </td>
                     </tr>
                 </c:forEach>
                 </tbody>

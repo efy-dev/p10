@@ -59,7 +59,7 @@
                 <match url="/basic/xm.do?qm=formProduct_Description&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=newProduct"/>
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
-                /product/saveNewProduct.do?view=${view}
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">
                 <match url="/basic/xm.do?qm=plistProductRecommended_default"/>
@@ -116,6 +116,8 @@
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
                 <match url="/basic/xm.do?qm=plistProductModel_index"/>
                 <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=index"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=index"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=index"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
                 <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>

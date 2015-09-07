@@ -52,10 +52,6 @@
                                 </li>
                                 <li>
                                     <label></label>
-                                    <strong>用来接收订单提醒邮件，便于您及时了解订单情况</strong>
-                                </li>
-                                <li>
-                                    <label></label>
                                     <input type="submit" class="dj-btn" value="保存收货人信息">
                                 </li>
                             </ul>
@@ -176,10 +172,6 @@
                                           <li>
                                               <label>手机号码：</label>
                                               <input type="text" name="phone" value="${address.phone}">
-                                          </li>
-                                          <li>
-                                              <label></label>
-                                              <strong>用来接收订单提醒邮件，便于您及时了解订单情况</strong>
                                           </li>
                                           <li>
                                               <label></label>

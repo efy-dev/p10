@@ -117,10 +117,15 @@
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq" label="优惠券状态"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="优惠券状态" inputType="default"/>
                     </query>
-                    <query name="couponBatch" label="默认" type="auto" orderBy="id:desc">
+                    <query name="couponBatch" label="查找" type="auto" orderBy="id:desc">
                         <condition name="couponBatch.id" operation="eq" label="优惠券批次id"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
+                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
@@ -134,7 +139,6 @@
         <entity name="couponBatch" label="优惠券批次"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.CouponBatch"
-
                 >
             <fields>
                 <field name="status" label="优惠券批次状态" inputType="text">
@@ -150,7 +154,15 @@
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq" label="优惠券批次状态"/>
+                        <condition name="status" defaultValue="1" operation="eq" label="优惠券批次状态" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq" label="优惠券批次状态" inputType="default"/>
+                        <condition name="name"  operation="eq" label="优惠券批次名称"/>
+                        <condition name="price"  operation="eq" label="优惠金额" inputType="text" dataType="float"/>
+                        <condition name="priceLimit"  operation="eq" label="使用限制金额" inputType="text" dataType="float"/>
+                        <condition name="startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
+                        <condition name="endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
@@ -188,6 +200,10 @@
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="发货状态" inputType="select_status" key="purchaseOrderDelivery.status"/>
+                        <condition name="serial" operation="eq" label="发货记录编号" inputType="text"/>
+                        <condition name="purchaseOrder.serial" operation="eq" label="订单号" inputType="text"/>
+                        <condition name="logisticsCompany" operation="likes" label="物流公司" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
@@ -232,9 +248,12 @@
                 <do name="plistPurchaseOrderPayment" access="" label="支付记录分页查询"
                     result="/purchaseOrderPayment/purchaseOrderPaymentPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="支付状态" inputType="select_status" key="purchaseOrderPayment.status"/>
+                        <condition name="serial" operation="eq" label="支付记录编号" inputType="text"/>
+                        <condition name="purchaseOrder.serial" operation="eq" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
