@@ -24,24 +24,33 @@
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品详情</strong> / <small>Product Details</small></div>
 </div>
 <hr/>
-<c:if test="${not empty object.tenant}">
-    <c:set var="tenantId" value="${object.tenant.id}"/>
-</c:if>
-<c:if test="${empty object.tenant}">
-    <c:set var="tenantId" value="0"/>
-</c:if>
-<c:if test="${not empty object.master}">
-    <c:set var="masterId" value="${object.master.id}"/>
-</c:if>
-<c:if test="${empty object.master}">
-    <c:set var="masterId" value="0"/>
-</c:if>
+           <c:if test="${not empty object.tenant}">
+             <c:set var="tenantId" value="${object.tenant.id}"/>
+           </c:if>
+           <c:if test="${empty object.tenant}">
+             <c:set var="tenantId" value="0"/>
+           </c:if>
+           <c:if test="${not empty object.master}">
+             <c:set var="masterId" value="${object.master.id}"/>
+           </c:if>
+           <c:if test="${empty object.master}">
+             <c:set var="masterId" value="0"/>
+           </c:if>
 <div class="am-g">
     <fieldset>
         <legend>
-            <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="http://www2.efeiyi.com/product/productModel/${object.id}">
+            <span >
+            <select onchange="changeUrl(this)" >
+                <option value="0">请选择</option>
+                <c:forEach var="model" items="${object.productModelList}">
+                    <option value="${model.id}">${model.name}</option>
+                </c:forEach>
+            </select>
+
+            <a style="width: 10%;" id="yulan" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#">
                 生成预览
             </a>
+                </span>
         </legend>
     </fieldset>
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
@@ -305,6 +314,10 @@
 <script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
+
+    function changeUrl(obj){
+        $("#yulan").attr("href","http://www2.efeiyi.com/product/productModel/"+$(obj).val());
+    }
 
     function copyInit(obj){
 
