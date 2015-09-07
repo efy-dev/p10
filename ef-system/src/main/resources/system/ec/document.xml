@@ -13,14 +13,18 @@
                     result="/document/documentPList"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                         >
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                    <query name="default" label="默认" type="auto" orderBy="id:desc" >
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
-                    <query name="master" label="默认" type="auto" orderBy="id:desc">
-                         <condition name="group" defaultValue="master" operation="eq"/>
+                    <query name="master" label="大师" type="auto" orderBy="id:desc">
+                         <condition name="group" defaultValue="master" operation="eq" inputType="default"/>
                     </query>
                     <query name="tenant" label="电商文档" type="auto" orderBy="id:desc">
-                        <condition name="group" defaultValue="tenant" operation="eq"/>
+                        <condition name="group" defaultValue="tenant" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="title" operation="likes" label="标题" inputType="text"/>
+                        <condition name="name" operation="likes" label="名字" inputType="text"/>
                     </query>
                 </do>
 
