@@ -20,10 +20,12 @@
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;"
            value="新建标签批次" />
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr style="text-align:left">
             <td>操作</td>
+            <td>标签序号</td>
             <td>标签批次</td>
             <td>数量</td>
             <td>状态</td>
@@ -38,7 +40,7 @@
                             <c:if test="${labelBatch.status == '1'}">
                                 <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formLabelBatch&id=${labelBatch.id}"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${labelBatch.id}"/>'"
+                                <button onclick="myConfirm('<c:url value="/basic/xm.do?qm=removeLabelBatch&id=${labelBatch.id}"/>', 'D')"
                                         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             </c:if>
 
@@ -47,13 +49,14 @@
                                         class="am-btn am-btn-default am-btn-xs"><font color="green">生成标签列表</font></button>
                             </c:if>
                             <c:if test="${labelBatch.status == '2'}">
-                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabel_batchLabel&conditions=labelBatch.id:${labelBatch.id}"/>'"
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabel_batchLabel&conditions=labelBatch.serial:${labelBatch.serial}"/>'"
                                         class="am-btn am-btn-default am-btn-xs"><font color="#a52a2a">查看标签列表</font></button>
                             </c:if>
                         </div>
                     </div>
                 </td>
-                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.setting}</a></td>
+                <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.serial}</a></td>
+                <td>${labelBatch.setting}</td>
                 <td>${labelBatch.amount}</td>
                 <td>
                     <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>

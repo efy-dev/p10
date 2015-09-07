@@ -23,7 +23,7 @@
             <label>验证码</label>
             <div class="tet1">
               <input id="code" type="text" class="txt1 am-u-sm-7 am-u-end" placeholder="短信验证码，请注意查收">
-              <span class="am-u-sm-5 am-u-end"><a id="verificationButton">获取验证码</a></span>
+              <span class="am-u-sm-5 am-u-end"><button  class="btn-p-1" id="verificationButton">获取验证码</button></span>
             </div>
           </li>
           <li><span class="active-d span1" id="auth" style="font-size:1rem;"></span></li>
@@ -51,11 +51,11 @@
   function time(o, p) {//o为按钮的对象，p为可选，这里是60秒过后，提示文字的改变
     if (wait == 0) {
       o.removeAttr("disabled");
-      o.html("点击获取验证码");//改变按钮中value的值
+      o.html("获取验证码");//改变按钮中value的值
       wait = 60;
     } else {
       o.attr("disabled", true);//倒计时过程中禁止点击按钮
-      o.html(wait + "秒后重新获取验证码");//改变按钮中value的值
+      o.html(wait + "秒后重试");//改变按钮中value的值
       wait--;
       setTimeout(function () {
                 time(o, p);//循环调用

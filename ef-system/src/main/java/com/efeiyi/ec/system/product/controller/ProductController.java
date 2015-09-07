@@ -179,8 +179,18 @@ public class ProductController extends BaseController {
                                  HttpServletRequest request,
                                  String resultPage,Model model,String step)  {
 
+        model.addAttribute("view",request.getParameter("view"));
+
+
+
         if("product".equals(step)){
 
+            try {
+         Product product1 =        productManager.saveProduct(product);
+                System.out.print(product1.getMaster().getName());
+            }catch (Exception e){
+
+            }
             model.addAttribute("object",productManager.saveProduct(product));
 
         }else if("description".equals(step)){

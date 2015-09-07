@@ -1,5 +1,6 @@
 package com.efeiyi.ec.purchase.model;
 
+import com.efeiyi.ec.organization.model.Consumer;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Coupon {
     private String serial;
     private CouponBatch couponBatch;//批次
     private String status;//1未使用 2已使用
+    private Consumer consumer;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -52,5 +54,15 @@ public class Coupon {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "consumer_id")
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
 }

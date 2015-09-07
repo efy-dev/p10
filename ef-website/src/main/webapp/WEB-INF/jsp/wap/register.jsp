@@ -101,10 +101,10 @@
                         <%--<input class="txt-yzm" type="text" id="verification" minlength="3" placeholder="验证码" required>--%>
                         <%--<a class="btn-yzm" id="verificationButton">获取验证码</a>--%>
 
-                        <%--<div class="help-block">--%>
-                            <%--<h5 id="consumerVerificationCodeCheck" style="color: red;display: none">--%>
-                                <%--手机验证码输入错误</h5>--%>
-                        <%--</div>--%>
+                        <div class="help-block">
+                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
+                                手机验证码输入错误</h5>
+                        </div>
                     <%--</div>--%>
 
                     <%--<div class="am-form-group">--%>
@@ -143,6 +143,7 @@
     <form data-parsley-validate id="bigUser" name="bigUser"
           action="<c:url value="/pc/saveEnrollUser.do"/>" method="post"
           onkeypress="if(event.keyCode==13||event.which==13){return false;}">
+        <input type="hidden" name="unionid" value="${unionid}">
         <div class="start">
             <div class="login">
                 <ul class="page">
@@ -163,11 +164,7 @@
                         <label>验证码</label>
                         <div class="tet1">
                             <input class="txt1 am-u-sm-7 am-u-end" type="text" id="verification"  placeholder="验证码" required>
-                            <span class="am-u-sm-5 am-u-end"><a id="verificationButton">获取验证码</a></span>
-                        </div>
-                        <div class="help-block">
-                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
-                                手机验证码输入错误</h5>
+                            <span class="am-u-sm-5 am-u-end"><button  class="btn-p-1" id="verificationButton">获取验证码</button></span>
                         </div>
                     </li>
                     <li>
@@ -282,12 +279,12 @@
     function time(o, p) {//o为按钮的对象，p为可选，这里是60秒过后，提示文字的改变
         if (wait == 0) {
             o.removeAttr("disabled");
-            o.html("点击获取验证码");//改变按钮中value的值
+            o.html("获取验证码");//改变按钮中value的值
 //        p.html("如果您在1分钟内没有收到验证码，请检查您填写的手机号码是否正确或重新发送");
             wait = 60;
         } else {
             o.attr("disabled", true);//倒计时过程中禁止点击按钮
-            o.html(wait + "秒后重新获取验证码");//改变按钮中value的值
+            o.html(wait + "秒后重试");//改变按钮中value的值
             wait--;
             setTimeout(function () {
                         time(o, p);//循环调用

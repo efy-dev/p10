@@ -29,12 +29,12 @@ public class BigTenant implements Serializable,BaseTenant {
 
     private String id;
     private String name;//名称标识
-    private String fullName;
     private String content; // 简介(长)
     private String logoUrl;
     private String tenantType;// 11:企业 12:个体 13:个人
     private Date createDateTime;
     private String status;
+    private String serial;//商家编号
     //个人信息
     private String identity; // 身份证号
     private String frontPhotoUrl;//正面照片
@@ -89,14 +89,6 @@ public class BigTenant implements Serializable,BaseTenant {
         this.name = name;
     }
 
-    @Column(name = "full_name")
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     @Column(name = "content")
     public String getContent() {
@@ -171,7 +163,7 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_province_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_province_id")
     public AddressProvince getAddressProvince() {
         return addressProvince;
     }
@@ -191,12 +183,21 @@ public class BigTenant implements Serializable,BaseTenant {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_city_id", updatable = false, insertable = false)
+    @JoinColumn(name = "address_city_id")
     public AddressCity getAddressCity() {
         return addressCity;
     }
 
     public void setAddressCity(AddressCity addressCity) {
         this.addressCity = addressCity;
+    }
+
+    @Column(name = "serial")
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }

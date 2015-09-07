@@ -23,12 +23,10 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal">
-        <input type="hidden" name="resultPage" value="0" />
-        <input type="hidden" name="step" value="view">
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
         <fieldset>
             <legend>
-                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&id=${object.id}"/>">
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${object.id}"/>">
                     修改基本信息
                 </a>
             </legend>
@@ -95,33 +93,41 @@
                 </div>
             </c:if>
         </fieldset>
+        </form>
         <fieldset>
             <legend>
-                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&id=${object.id}"/>">
-                    修改商品描述
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
+                    保存商品描述
                 </a>
             </legend>
             <div class="am-form-group" >
+                <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form1">
+                <input type="hidden" name="id" value="${object.productDescription.id}">
+                <input type="hidden" name="product.id" value="${object.id}">
+                <input type="hidden" name="resultPage" value="0" />
+                <input type="hidden" name="view" value="${view}">
+                <input type="hidden" name="step" value="description">
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea id="productDescription" name="content" class="ckeditor"
-                                      placeholder="商品描述" required disabled="disabled">
+                            <textarea id="productDescription" name="content" class="ckeditor" id="content"
+                                      placeholder="商品描述" required >
                                 ${object.productDescription.content}
                             </textarea>
                 </div>
+                </form>
                 <br>
             </div>
 
         </fieldset>
         <fieldset>
             <legend>
-                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&id=${object.id}"/>">
-                    修改属性
+                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${object.id}"/>">
+                    修改规格
                 </a>
             </legend>
             <div class="am-u-md-9" style="margin-left: 19%;">
                 <div class="am-panel am-panel-default">
-                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品模型<span
+                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品规格<span
                             class="am-icon-chevron-down am-fr"></span></div>
                     <div id="collapse-panel-2" class="am-in">
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
@@ -132,7 +138,7 @@
                                 <th class="am-text-center" width="20%">属性</th>
                                 <th class="am-text-center" width="20%">库存</th>
                                 <th class="am-text-center" width="20%">价格(元)</th>
-                                <th class="am-text-center" width="20%">图片</th>
+                                <%--<th class="am-text-center" width="20%">图片</th>--%>
                             </tr>
                             <c:forEach var="model" items="${object.productModelList}">
                                 <tr>
@@ -152,11 +158,11 @@
                                     <td align="center">
                                             ${model.price}
                                     </td>
-                                    <td align="center">
-                                        <c:if test="${not empty model.productModel_url}">
-                                            <img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />
-                                        </c:if>
-                                    </td>
+                                    <%--<td align="center">--%>
+                                        <%--<c:if test="${not empty model.productModel_url}">--%>
+                                            <%--<img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
+                                        <%--</c:if>--%>
+                                    <%--</td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -179,65 +185,86 @@
                         <strong> 商品图片</strong>
                         <span class="am-icon-chevron-down am-fr"></span></div>
                     <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1" style="height: auto;overflow: hidden">
-                        <a style="margin-bottom: 2px;color: red;" id="btn_upload2"></a>
+                        <%--<a style="margin-bottom: 2px;color: red;" id="btn_upload2"></a>--%>
                         <ul style="width: 100%"  style="list-style:none">
                             <c:if test="${!empty object.productPictureList}">
                                 <c:forEach var="productPicture" items="${object.productPictureList}">
-
-                                    <li style="float: left;margin-right: 10px;"  name="${productPicture.id}">
+                                    <c:if test="${productPicture.status != '3'}">
+                                    <li style="float: left;margin-right: 10px;width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
-                                            <dt style="width: 80%">
+                                            <dt style="width: 100%">
                                                 <img width="100%" name=""
-                                                     src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo"
+                                                     src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
                                                      alt="商品图片"/>
                                             </dt>
 
-                                            <dd style="width: 80%;text-align: center;" >
+                                            <dd style="width: 100%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
-                                                        <a href="#"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
+                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="#" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>
+                                                        <a href="javascript:void(0);" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <a href="#" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
                                         </dl>
                                     </li>
+                                    </c:if>
                                 </c:forEach>
                             </c:if>
                         </ul>
                     </div>
                 </div>
             </div>
+</fieldset>
+    <fieldset>
+        <legend>
+            <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">--%>
+            <%--修改图片--%>
+            <%--</a>--%>
+            <a id="btn_upload3"></a>
+        </legend>
+            <div class="am-u-md-13">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
+                        <strong> 商品详情图片</strong>
+                        <span class="am-icon-chevron-down am-fr"></span></div>
+                    <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden">
 
+                        <ul style="width: 100%"  style="list-style:none">
+                            <c:if test="${!empty object.productPictureList}">
+                                <c:forEach var="productPicture" items="${object.productPictureList}">
+                                    <c:if test="${productPicture.status == '3'}">
+                                        <li style="float: left;margin-right: 10px; width: 200px;"  name="${productPicture.id}">
+                                            <dl style="margin-top: 6px;">
+                                                <dt style="width: 100%">
+                                                    <img width="100%" name=""
+                                                         src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
+                                                         alt="商品图片"/>
+                                                </dt>
 
-            <%--<div class="am-u-md-13">--%>
-            <%--<div class="am-panel am-panel-default">--%>
-            <%--<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">--%>
-            <%--<strong> 商品详情图片</strong>--%>
-            <%--<span class="am-icon-chevron-down am-fr" ></span></div>--%>
-            <%--<div id="collapse-panel-3" class="am-panel-bd am-collapse am-in" style="height: auto;overflow: hidden">--%>
-            <%--<a  style="margin-bottom: 2px;color: red;" id="btn_upload"></a>--%>
-            <%--<c:if test="${!empty object.productPictureList}">--%>
-            <%--<ul style="width: 100%"  style="list-style:none">--%>
-            <%--<c:forEach var="productPicture" items="${object.productPictureList}" >--%>
-            <%--<c:if test="${productPicture.status == '3'}">--%>
-            <%--<li style="float: left;margin-right: 10px;"  name="${productPicture.id}">--%>
-            <%--<dl style="margin-top: 6px;">--%>
-            <%--<dt style="width: 80%">--%>
-            <%--<img width="100%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="商品主图片" />--%>
-            <%--</dt>--%>
-            <%--</dl>--%>
-            <%--</li>--%>
-            <%--</c:if>--%>
-            <%--</c:forEach>--%>
-            <%--</ul>--%>
-            <%--</c:if>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <%--</div>--%>
+                                                <dd style="width: 100%;text-align: center;" >
+                                                    <%--<c:choose>--%>
+                                                        <%--<c:when test="${productPicture.status == '2'}">--%>
+                                                            <%--<a href="javascript:void(0);"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>--%>
+                                                        <%--</c:when>--%>
+                                                        <%--<c:otherwise>--%>
+                                                            <%--<a href="javascript:void(0);" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>--%>
+                                                        <%--</c:otherwise>--%>
+                                                    <%--</c:choose>--%>
+                                                    <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </fieldset>
 
         <fieldset>
@@ -256,22 +283,24 @@
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover" id="picUrl">
 
                             <tr>
-                                <th>操作</th>
-                                <th>图片地址</th>
-                                <th>图片</th>
+                                <th width="20%">操作</th>
+                                <th width="60%">图片地址</th>
+                                <th width="20%">图片</th>
                             </tr>
                             <c:forEach var="productPicture" items="${object.productPictureList}">
+
                                 <tr name="${productPicture.id}">
                                     <td>
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,'${productPicture.id}')"  href="#">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,'${productPicture.id}')"  href="javascript:void(0);">
                                             <span class="am-icon-trash-o"></span> 删除
                                         </a>
                                     </td>
-                                    <td>http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo</td>
+                                    <td>http://pro.efeiyi.com/${productPicture.pictureUrl}</td>
                                     <td>
-                                        <img width="18%"  name=""  src="http://tenant.efeiyi.com/${productPicture.pictureUrl}@!tenant-manage-photo" alt="" />
+                                        <img width="18%"  name=""  src="http://pro.efeiyi.com/${productPicture.pictureUrl}" alt="" />
                                     </td>
                                 </tr>
+
                             </c:forEach>
 
                         </table>
@@ -279,11 +308,14 @@
                 </div>
             </div>
         </fieldset>
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form2">
+        <input type="hidden" name="resultPage" value="0" />
+        <input type="hidden" name="step" value="view">
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
 
                     <span style="padding: 10px;">
-                       <input type="button"  onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default')" class="am-btn am-btn-primary" value="返回商品列表"/>
+                       <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>
                     </span>
             </div>
         </div>
@@ -296,8 +328,13 @@
 <script>
 
     $(function(){
+
+
+            CKEDITOR.replace('content', { height: '440px', width: '1000px' });
+
+
         $('#btn_upload').uploadify({
-            uploader: '<c:url value="/product/uploadify.do?productId=${object.id}"/>',            // 服务器处理地址
+            uploader: '<c:url value="/product/uploadify.do?status=1&productId=${object.id}"/>',            // 服务器处理地址
             swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
             buttonText: "上传商品图片",                 //按钮文字
             buttonClass:"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式
@@ -309,7 +346,7 @@
             scriptDate:{'status':'3'},
             checkExisting:true,                    //检查文件重复
             successTimeout:1000000,                 //超时
-            fileSizeLimit:'2MB',
+            fileSizeLimit:'20MB',
             removeTimeout:1,                        //移除时间
             fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
@@ -318,11 +355,12 @@
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
-                var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!tenant-manage-photo";
+                var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+                var  trueUrl
                 ///图片信息
                 var tr = '<tr name = "'+pictureId+'">' +
                         ' <td>  ' +
-                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="#">' +
+                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="javascript:void(0);">' +
                         '       <span class="am-icon-trash-o"></span> 删除 ' +
                         '   </a>' +
                         ' </td>' +
@@ -333,16 +371,16 @@
                         ' </td>' +
                         '</tr>';
                 ///显示图片
-                var img ='<li style="float: left;margin-right: 10px;" name="'+pictureId+'">'+
+                var img ='<li style="float: left;margin-right: 10px;width:200px;" name="'+pictureId+'">'+
                         '<dl style="margin-top: 6px;" >'+
-                        '  <dt  style="width: 80%">'+
+                        '  <dt  style="width: 100%">'+
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
-                        '  <dd style="width: 80%;text-align:center" >'+
-                        '   </a>'+
-                        '<a href="#" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
-                        '   <a href="#" onclick="deletePicture(this,\''+pictureId+'\')">'+
+                        '  <dd style="width: 100%;text-align:center" >'+
+                        '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
+                        '</a>'+
                         '</dd>'+
                         '</dl>'+
                         '</li>';
@@ -351,7 +389,63 @@
                 $("#picUrl").append(tr);
             }
         });
+        $('#btn_upload3').uploadify({
+            uploader: '<c:url value="/product/uploadify.do?status=3&productId=${object.id}"/>',            // 服务器处理地址
+            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
+            buttonText: "上传商品详情图片",                 //按钮文字
+            buttonClass:"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式
+            buttonCursor:"hand",                    //鼠标指针悬停在按钮上的样子
+            height: 34,                             //按钮高度
+            width:140,                              //按钮宽度
+            auto : true,                          //自动上传
+            multi:true,                            //多个文件上传
+            scriptDate:{'status':'3'},
+            checkExisting:true,                    //检查文件重复
+            successTimeout:1000000,                 //超时
+            fileSizeLimit:'20MB',
+            removeTimeout:1,                        //移除时间
+            fileTypeExts: "*.jpg;*.png;*",           //允许的文件类型
+            fileTypeDesc: "请选择图片文件",           //文件说明
+            formData: { "imgType": "normal" }, //提交给服务器端的参数
+            onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
+                data = data.substring(1,data.length-1)
+                var pictureId = data.split(":")[0].trim();
+                var  imgUrl = data.split(":")[1];
+                var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+                ///图片信息
+                var tr = '<tr name = "'+pictureId+'">' +
+                        ' <td>  ' +
+                        '   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deletePicture(this,\''+pictureId+'\')"  href="javascript:void(0);">' +
+                        '       <span class="am-icon-trash-o"></span> 删除 ' +
+                        '   </a>' +
+                        ' </td>' +
+                        ' <td>' +url+
+                        ' </td>' +
+                        ' <td>' +
+                        '   <img style="margin-left:2px;" width="18%;" src="'+url+'">' +
+                        ' </td>' +
+                        '</tr>';
+                ///显示图片
+                var img ='<li style="float: left;margin-right: 10px;width:200px;" name="'+pictureId+'">'+
+                        '<dl style="margin-top: 6px;" >'+
+                        '  <dt  style="width: 100%">'+
+                        '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '  </dt>'+
+                        '  <dd style="width: 100%;text-align:center" >'+
+                  //      '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
+                        ' 删除'+
+                        '</a>'+
+                        '</dd>'+
+                        '</dl>'+
+                        '</li>';
+
+                $("#collapse-panel-3 ul").append(img);
+                $("#picUrl").append(tr);
+            }
+        });
         $("#btn_upload-button").css({"padding":"0em 0em","text-align":"center"});
+        $("#btn_upload3-button").css({"padding":"0em 0em","text-align":"center"});
     });
 
 
@@ -401,8 +495,17 @@
             success: function (data) {
                 $("#picUrl tr[name='" + divId + "']").remove();
                 $("#collapse-panel-1 li[name='" + divId + "']").remove();
+                $("#collapse-panel-3 li[name='" + divId + "']").remove();
             }
         });
+    }
+
+    function toSubmit(st,result){
+        $("input[name='resultPage']").val(result);
+
+            $("#form"+st).submit();
+
+
     }
 </script>
 

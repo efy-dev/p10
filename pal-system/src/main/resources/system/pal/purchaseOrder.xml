@@ -33,7 +33,8 @@
                 </do>
 
                 <do name="formPurchaseOrder" label="标签订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
-                <do name="viewPurchaseOrder" label="查看标签订单详情页" access="" result="/purchaseOrder/purchaseOrderView"/>
+                <do name="viewPurchaseOrder" label="查看标签订单详情页" access="" result="/purchaseOrder/purchaseOrderView"
+                    execute="com.efeiyi.pal.system.order.controller.PurchaseOrderViewLabelHandler"/>
                 <do name="removePurchaseOrder" label="删除标签订单" access="" result="redirect:/basic/xm.do?qm=plistPurchaseOrder_default"/>
 
             </does>
@@ -41,22 +42,7 @@
 
         <entity name="PCPurchaseOrderLabel" label="订单商品"  model="com.efeiyi.pal.purchase.model.PurchaseOrderLabel">
             <does>
-                <!--<do name="plistPurchaseOrderLabel" access="" label="订单商品分页列表" result="/purchaseOrder/purchaseOrderPList">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-
-                <!--<do name="listPurchaseOrderLabel" access="" label="订单商品列表">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-
                 <do name="formPurchaseOrderLabel" label="订单商品" access="" result="/purchaseOrderLabel/purchaseOrderLabelForm"/>
-
-
             </does>
         </entity>
 
@@ -72,21 +58,7 @@
                 </field>
             </fields>
             <does>
-                <!--<do name="plistPurchaseOrderPayment" access="" label="订单商品分页列表" result="/purchaseOrder/purchaseOrderPList">-->
-                <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                <!--</query>-->
-                <!--</do>-->
-
-                <!--<do name="listPurchaseOrderPayment" access="" label="订单商品列表">-->
-                <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                <!--<condition name="id" defaultValue="0" operation="ne"/>-->
-                <!--</query>-->
-                <!--</do>-->
-
                 <do name="formPurchaseOrderPayment" label="订单支付" access="" result="/purchaseOrderPayment/purchaseOrderPaymentForm"/>
-
             </does>
         </entity>
     </entities>

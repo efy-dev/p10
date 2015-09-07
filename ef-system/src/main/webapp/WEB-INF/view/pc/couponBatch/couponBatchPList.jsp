@@ -43,15 +43,16 @@
     </script>
 </head>
 <body>
-        <%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
+
+<div class="am-btn-toolbar" style="margin-bottom: 10px">
+    <div class="am-btn-group am-btn-group-xs">
+        <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formCouponBatch"/>"><span class="am-icon-plus"></span>新建优惠券批次</a>
+    </div>
+</div>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
         <div class="admin-content">
             <div class="am-g">
                 <div class="am-u-sm-12 am-u-md-6">
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs">
-                            <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formCouponBatch"/>"><span class="am-icon-plus"></span>新建优惠券批次</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="am-u-sm-12">
                     <table class="am-table am-table-striped am-table-hover table-main">
@@ -114,8 +115,8 @@
             <div style="clear: both">
                 <c:url value="/basic/xm.do" var="url"/>
                 <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
-                    <ming800:pcPageParam name="view" value="${view}"/>
                     <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+                    <ming800:pcPageParam name="view" value="${view}"/>
                     <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
                 </ming800:pcPageList>
             </div>

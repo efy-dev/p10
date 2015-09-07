@@ -1,70 +1,70 @@
 
 <module name="banner" label="轮播图片" version="" package="com.yuepaila" path="">
 
-    <entities>
-        <entity name="PCBanner"
-                label="轮播图片"
-                model="com.ming800.core.p.model.Banner">
-            <does>
+<entities>
+    <entity name="PCBanner"
+            label="轮播图片"
+            model="com.ming800.core.p.model.Banner">
+        <does>
 
-                <do name="listPCBanner"
-                    label="作品列表"
-                    result="/choiceness" access="$consumer"><!--用户查询-->
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="作品" name="id" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-            </does>
-        </entity>
+            <do name="listPCBanner"
+                label="作品列表"
+                result="/choiceness" access="$consumer"><!--用户查询-->
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="作品" name="id" defaultValue="0" operation="ne"/>
+                </query>
+            </do>
+        </does>
+    </entity>
 
-        <entity name="PCDocument"
-                label="文档"
-                model="com.ming800.core.p.model.Document">
-            <does>
+    <entity name="PCDocument"
+            label="文档"
+            model="com.ming800.core.p.model.Document">
+        <does>
 
-                <do name="listPCDocument"
-                    label="作品列表"
-                    result="/choiceness" access="$consumer"><!--用户查询-->
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="作品" name="id" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-                <do name="saveOrUpdatePCDocument">
-                    <page>
-                        <fields>
-                            <field name="status" label="状态" defaultValue="1"
-                                   inputType="default"></field>
-                        </fields>
-                    </page>
-                </do>
+            <do name="listPCDocument"
+                label="作品列表"
+                result="/choiceness" access="$consumer"><!--用户查询-->
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="作品" name="id" defaultValue="0" operation="ne"/>
+                </query>
+            </do>
+            <do name="saveOrUpdatePCDocument">
+                <page>
+                    <fields>
+                        <field name="status" label="状态" defaultValue="1"
+                               inputType="default"></field>
+                    </fields>
+                </page>
+            </do>
 
-            </does>
-        </entity>
+        </does>
+    </entity>
 
-        <entity name="PCDocumentAttachment"
-                label="文档附件"
-                model="com.ming800.core.p.model.DocumentAttachment">
-            <does>
+    <entity name="PCDocumentAttachment"
+            label="文档附件"
+            model="com.ming800.core.p.model.DocumentAttachment">
+        <does>
 
-                <do name="listDocumentAttachment"
-                    label="作品列表"
-                    result="/choiceness" access="$consumer"><!--用户查询-->
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="作品" name="id" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-            </does>
-        </entity>
+            <do name="listDocumentAttachment"
+                label="作品列表"
+                result="/choiceness" access="$consumer"><!--用户查询-->
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="作品" name="id" defaultValue="0" operation="ne"/>
+                </query>
+            </do>
+        </does>
+    </entity>
 
-       <entity name="" label="字典管理" model="com.ming800.core.p.model.Tag">
-           <does>
-               <do name="listWordValue" label="字典列表" result="/">
-                  <query name="default" label="默认" type="auto" orderBy="id:desc">
-                      <condition label="主键" name="id" defaultValue="0" operation="ne" />
-                  </query>
-               </do>
-           </does>
-       </entity>
+    <entity name="" label="字典管理" model="com.ming800.core.p.model.WordValue">
+        <does>
+            <do name="listWordValue" label="字典列表" result="/">
+                <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <condition label="主键" name="id" defaultValue="0" operation="ne" />
+                </query>
+            </do>
+        </does>
+    </entity>
 
-    </entities>
+</entities>
 </module>

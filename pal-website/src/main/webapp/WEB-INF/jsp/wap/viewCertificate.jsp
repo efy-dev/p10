@@ -15,7 +15,7 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
+    <link rel="icon" type="image/png" href="<c:url value='/images/pal_icon.png'/>">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
@@ -28,7 +28,7 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/app.css'/>">
 </head>
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
@@ -53,32 +53,32 @@
     <!--列表标题-->
     <div class="am-list-news-bd">
         <ul class="am-list">
-            <c:forEach items="${product.tenant.tenantCertificationList}" var="certification">
+            <%--<c:forEach items="${product.tenant.tenantCertificationList}" var="certification">--%>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证证书:</strong>
-                    <span class="am-list-info2">${certification.name}</span>
+                    <span class="am-list-info2">${product.tenantProductSeries.tenantCertification.name}</span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证机构:</strong>
-                    <span class="am-list-info2">${certification.org}</span>
+                    <span class="am-list-info2">${product.tenantProductSeries.tenantCertification.org}</span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证时间:</strong>
-                    <span class="am-list-info2"> <fmt:formatDate value="${certification.theDate}"
+                    <span class="am-list-info2"> <fmt:formatDate value="${product.tenantProductSeries.tenantCertification.theDate}"
                                                                  pattern="yyyy年MM月"/></span>
                 </li>
                 <li class="am-g am-list-item-dated">
                     <strong class="am-list-info">认证结果:</strong>
                     <span class="am-list-info2"><ming800:status name="level" dataType="PCTenantCertification.level"
-                                                                checkedValue="${certification.level}"
+                                                                checkedValue="${product.tenantProductSeries.tenantCertification.level}"
                                                                 type="normal"/></span>
                 </li>
-            </c:forEach>
+            <%--</c:forEach>--%>
         </ul>
     </div>
 </div>
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <script type="text/javascript">
     $(function () {
         $('.am-slider-manual').flexslider({

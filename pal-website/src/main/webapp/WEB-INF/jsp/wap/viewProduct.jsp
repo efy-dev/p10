@@ -14,7 +14,7 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
+    <link rel="icon" type="image/png" href="<c:url value='/images/pal_icon.png'/>">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/app.css'/>">
 </head>
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
@@ -80,8 +80,8 @@
 </div>
 
 
-<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
-<script src="<c:url value='/js/amazeui.min.js'/>"></script>
+<%--<script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>--%>
+<%--<script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>--%>
 <script type="text/javascript">
     $(function () {
         $('.am-slider-manual').flexslider({

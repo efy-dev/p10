@@ -14,7 +14,7 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
+    <link rel="icon" type="image/png" href="<c:url value='/images/pal_icon.png'/>">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/app.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/app.css'/>">
 </head>
 <body class="bgf7">
 <header data-am-widget="header" class="am-header am-header-default">
@@ -60,23 +60,23 @@
             </div>
         </div>
         <!--//End-->
-        <%--<c:if test="${result.authenticity == 1}">--%>
-        <div class="am-paragraph-default">
-            <div class="infoitem">
-                <ul>
-                    <li><a href="<c:url value='/viewCertificate.do?code=${code}'/>">认证信息</a></li>
-                    <li><a href="<c:url value='/viewProduct.do?code=${code}'/>">商品信息</a></li>
-                    <li><a href="<c:url value='/viewSource.do?code=${code}'/>">溯源信息</a></li>
-                        <%--<li><a href="#">DNA鉴定信息</a></li>--%>
-                </ul>
+        <c:if test="${result.authenticity == 1}">
+            <div class="am-paragraph-default">
+                <div class="infoitem">
+                    <ul>
+                        <li><a href="<c:url value='/viewCertificate.do?code=${code}'/>">认证信息</a></li>
+                        <li><a href="<c:url value='/viewProduct.do?code=${code}'/>">商品信息</a></li>
+                        <li><a href="<c:url value='/viewSource.do?code=${code}'/>">溯源信息</a></li>
+                            <%--<li><a href="#">DNA鉴定信息</a></li>--%>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!--//End-->
-        <c:if test="${not empty product.shoppingUrl}">
-            <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default"
-                                            href="${product.shoppingUrl}">立即购买</a></div>
+            <!--//End-->
+            <c:if test="${not empty product.shoppingUrl}">
+                <div class="am-list-news-ft"><a class="am-list-news-more am-btn am-btn-default"
+                                                href="${product.shoppingUrl}">立即购买</a></div>
+            </c:if>
         </c:if>
-        <%--</c:if>--%>
     </c:if>
 </article>
 

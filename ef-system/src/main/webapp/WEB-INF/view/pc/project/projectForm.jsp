@@ -26,7 +26,7 @@
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
-        <input type="hidden" name="projectCategory.id" value="${object.projectCategory.id}">
+
 
         <c:if test="${empty fatherId}">
             <input type="hidden" name="level" value="1" />
@@ -48,9 +48,14 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="type" for="type" class="am-u-sm-3 am-form-label">项目类型 <small>*</small></label>
-            <div class="am-u-sm-9">
-                <ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>
+            <label name="type" for="type" class="am-u-sm-3 am-form-label">项目类别 <small>*</small></label>
+            <div class="am-u-sm-9" style="margin-top: 10px">
+                <select  name="projectCategory.id" id="type">
+                  <c:forEach var="projectCategory" items="${projectCategoryList}">
+                        <option value="${projectCategory.id}" <c:if test="${object.projectCategory.id == projectCategory.id}">selected="selected"</c:if> >${projectCategory.name}</option>
+                  </c:forEach>
+                </select>
+                <%--<ming800:status name="type" dataType="Project.type" checkedValue="${object.type}" type="select"/>--%>
             </div>
         </div>
 
@@ -58,12 +63,15 @@
             <label for="picture_url" class="am-u-sm-3 am-form-label">项目图片</label>
 
             <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.picture_url}">
+                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_url}@!product-model">
+                       </c:if>
+                </span>
                 <input type="file" id="picture_url" name="picture_url" placeholder="picture_url"
                        value="${object.picture_url}">
             </div>
-            <c:if test="${!empty object.picture_url}">
-                <img src="http://pro.efeiyi.com/${object.picture_url}@!product-model">
-            </c:if>
+
         </div>
 
         <div class="am-form-group">

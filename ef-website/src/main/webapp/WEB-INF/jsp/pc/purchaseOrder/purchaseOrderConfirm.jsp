@@ -46,13 +46,6 @@
                                          <select class="car1" id="city" name="city.id">
                                              <option value="请选择">请选择</option>
                                          </select>
-                                         <%--<select name="cars" class="car2">--%>
-                                         <%--<option value="请选择">请选择</option>--%>
-                                         <%--<option value="saab">Saab</option>--%>
-                                         <%--<option value="fiat">Fiat</option>--%>
-                                         <%--<option value="audi">Audi</option>--%>
-                                         <%--</select>--%>
-                                         <span>请您填写所在地区</span>
                                      </form>
 
 
@@ -60,27 +53,15 @@
                                  <li>
                                      <label>详细地址：</label>
                                      <input type="text" name="details">
-                                     <span>请您填写详细地址</span>
                                  </li>
                                  <li>
                                      <label>手机号码：</label>
                                      <input type="text" name="phone">
-                                     <%--<label>固定号码：</label>--%>
-                                     <%--<input type="text">--%>
-                                     <span>请您填写电话号码</span>
-                                 </li>
-                                 <li>
-                                     <label>邮箱：</label>
-                                     <input type="text" name="email">
-                                     <span>请您填写邮箱</span>
-                                 </li>
-                                 <li>
-                                     <label></label>
-                                     <strong>用来接收订单提醒邮件，便于您及时了解订单情况</strong>
                                  </li>
                                  <li>
                                      <label></label>
                                      <input type="button" class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息">
+                                     <input type="reset" style="display: none" id="reset">
                                  </li>
                              </ul>
                          </form>
@@ -96,7 +77,7 @@
                 <div class="page-default">
             <span>
                 <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text default-active" name="addressItem"
+                <div id="${address.id}" class="default-text triangle" name="addressItem"
                      onclick="chooseAddress(this,'${address.id}')">
                     </c:if>
                     <c:if test="${address.status=='1'}">
@@ -139,7 +120,7 @@
         <div class="clearing-site divtop">
             <span class="clearing-left">订货清单</span>
         <span class="clearing-right">
-            <a href="<c:url value="/cart/view"/> ">返回修改购物车</a>
+            <a class="btn-cart-add" href="<c:url value="/cart/view"/> ">返回修改购物车</a>
         </span>
         </div>
         <c:forEach items="${tenantList}" var="tenant">
@@ -154,36 +135,39 @@
                 <div class="page-Commodity">
                     <table>
                         <c:forEach items="${productMap.get(tenant.id)}" var="product">
-                            <tr>
-                                <td width="542">
-                                    <div class="cols1 page-pdl">
-                                        <img src="${product.productModel.product.picture_url}" alt=""/>
+                            <c:if test="${product.isChoose==1}">
 
-                                        <div class="info">
-                                            <p><a href="#">${product.productModel.product.project.name}</a></p>
+                                <tr>
+                                    <td width="542">
+                                        <div class="cols1 page-pdl">
+                                            <img src="${product.productModel.product.picture_url}" alt=""/>
 
-                                            <p><a href="#">${product.productModel.product.name}
-                                                <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                           var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
-                                            </p>
+                                            <div class="info">
+                                                <p><a href="#">${product.productModel.product.project.name}</a></p>
+
+                                                <p><a href="#">${product.productModel.product.name}
+                                                    <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                               var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td width="171"><span
-                                        class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
-                                </td>
-                                <td width="137">
-                                    <span>x${product.amount}</span>
-                                </td>
-                                <td width="102"><span>有货</span></td>
-                            </tr>
+                                    </td>
+                                    <td width="171"><span
+                                            class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
+                                    </td>
+                                    <td width="137">
+                                        <span>x${product.amount}</span>
+                                    </td>
+                                    <td width="102"><span>有货</span></td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
                     </table>
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" value="限45个字" maxlength="45">
-                    <span>0/45</span>
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)">
+                    <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
         </c:forEach>
@@ -214,6 +198,9 @@
 
     var payment = "1";
     var consumerAddress = "";
+    if ($(".default-active") != null) {
+        consumerAddress = $(".default-active").attr("id");
+    }
 
     function zhifubao(element) {
         $(element).attr("class", "alipay wechat-active");
@@ -221,6 +208,13 @@
         $("#weixin").find("i").remove();
         $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "1";
+    }
+
+    function updateCount(element){
+        var tenantId = $(element).attr("id");
+        var str = $(element).val();
+        var count = str.length;
+        $("#"+tenantId+"Count").html(count+"/45");
     }
 
     function weixin(element) {
@@ -295,6 +289,7 @@
             var html = newAddress(data);
             $("#address").append(html);
             $(".active-pop").hide();
+            $("#reset").click();
         }
         ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
         }, "post")
@@ -308,6 +303,16 @@
         $(element).attr("class", "default-text default-active")
     }
 
+    $().ready(function () {
+        $("#newAddress").validate({
+            rules: {
+                consignee: "required",
+                details: "required",
+                name: "required",
+                phone: "required",
+            },
+        });
+    });
 
 </script>
 </body>

@@ -1,115 +1,130 @@
-
 #---------------已经执行----------------
 ALTER TABLE `purchase_cart_product`
-ADD COLUMN `status`  char(8) NULL AFTER `product_id`;
+ADD COLUMN `status` CHAR(8) NULL
+AFTER `product_id`;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `status`  char(8) NULL AFTER `user_address_id`;
+ADD COLUMN `status` CHAR(8) NULL
+AFTER `user_address_id`;
 
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `total`  decimal NULL AFTER `status`;
+ADD COLUMN `total` DECIMAL NULL
+AFTER `status`;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `order_status`  char(255) NULL AFTER `total`;
+ADD COLUMN `order_status` CHAR(255) NULL
+AFTER `total`;
 
 ALTER TABLE `purchase_order_payment`
-ADD COLUMN `payment_amount`  decimal NULL AFTER `status`;
+ADD COLUMN `payment_amount` DECIMAL NULL
+AFTER `status`;
 
 CREATE TABLE `product_favorite` (
-  `id`  char(16) NOT NULL ,
-  `product_id`  char(16) NULL ,
-  `user_id`  char(16) NULL ,
-  `status`  char(8) NULL ,
+  `id`         CHAR(16) NOT NULL,
+  `product_id` CHAR(16) NULL,
+  `user_id`    CHAR(16) NULL,
+  `status`     CHAR(8)  NULL,
   PRIMARY KEY (`id`)
 );
 
 ALTER TABLE `product_favorite`
-ADD COLUMN `create_datetime`  datetime NULL AFTER `status`;
+ADD COLUMN `create_datetime` DATETIME NULL
+AFTER `status`;
 
 
 ALTER TABLE `organization_consumer_address`
-ADD COLUMN `address_district_id`  char(16) NULL AFTER `email`;
+ADD COLUMN `address_district_id` CHAR(16) NULL
+AFTER `email`;
 
 ALTER TABLE `organization_consumer_address`
-ADD COLUMN `consumer_id`  char(16) NULL AFTER `address_district_id`;
-2015-8-5 efc
-ALTER TABLE `organization_consumer_address`
-ADD COLUMN `status`  varchar(2) NULL AFTER `consumer_id`;
+ADD COLUMN `consumer_id` CHAR(16) NULL
+AFTER `address_district_id`;
 
+ALTER TABLE `organization_consumer_address`
+ADD COLUMN `status` VARCHAR(2) NULL
+AFTER `consumer_id`;
 
 
 CREATE TABLE `product_property_value` (
-  `id`  char(16) NOT NULL ,
-  `product_model_id`  char(16) NULL ,
-  `project_property_id`  char(16) NULL ,
-  `project_property_value_id`  char(16) NULL ,
+  `id`                        CHAR(16) NOT NULL,
+  `product_model_id`          CHAR(16) NULL,
+  `project_property_id`       CHAR(16) NULL,
+  `project_property_value_id` CHAR(16) NULL,
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `NewTable` (
-  `id`  char(16) NOT NULL ,
-  `serial`  char(32) NULL ,
-  `price`  decimal NULL ,
-  `product_id`  char(16) NULL ,
-  `amount`  int(8) NULL ,
-  `status`  char(4) NULL ,
+CREATE TABLE `product_model` (
+  `id`         CHAR(16) NOT NULL,
+  `serial`     CHAR(32) NULL,
+  `price`      DECIMAL  NULL,
+  `product_id` CHAR(16) NULL,
+  `amount`     INT(8)   NULL,
+  `status`     CHAR(4)  NULL,
   PRIMARY KEY (`id`)
 );
 
 ALTER TABLE `purchase_order_payment`
-ADD COLUMN `transaction_number`  varchar(16) NULL AFTER `transaction_number`;
+ADD COLUMN `transaction_number` VARCHAR(16) NULL
+AFTER `transaction_number`;
 
 
 ALTER TABLE `organization_consumer`
-ADD COLUMN `unionid`  char(64) NULL AFTER `id`;
+ADD COLUMN `unionid` CHAR(64) NULL
+AFTER `id`;
 
 
-#-------------------------------未执行----------------------------------
 ALTER TABLE `purchase_order`
-ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;
+ADD COLUMN `original_price` DECIMAL NULL
+AFTER `order_status`;
 
 CREATE TABLE `master` (
-  `id` char(16) NOT NULL DEFAULT '',
-  `name` varchar(16) DEFAULT NULL,
-  `status` varchar(1) DEFAULT NULL,
-  `origin_province_id` char(16) DEFAULT NULL,
-  `create_datetime` datetime DEFAULT NULL,
-  `full_name` varchar(16) DEFAULT NULL,
-  `brief` varchar(255) DEFAULT NULL,
-  `title` varchar(20) DEFAULT NULL,
-  `favicon` varchar(64) DEFAULT NULL,
-  `sex` varchar(20) DEFAULT NULL,
-  `present_address` varchar(64) DEFAULT NULL,
-  `level` varchar(64) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `background_url` varchar(255) DEFAULT NULL,
-  `province_name` varchar(255) DEFAULT NULL,
-  `birthday` varchar(32) DEFAULT NULL,
-  `logo_url` varchar(255) DEFAULT NULL,
+  `id`                 CHAR(16) NOT NULL DEFAULT '',
+  `name`               VARCHAR(16)       DEFAULT NULL,
+  `status`             VARCHAR(1)        DEFAULT NULL,
+  `origin_province_id` CHAR(16)          DEFAULT NULL,
+  `create_datetime`    DATETIME          DEFAULT NULL,
+  `full_name`          VARCHAR(16)       DEFAULT NULL,
+  `brief`              VARCHAR(255)      DEFAULT NULL,
+  `title`              VARCHAR(20)       DEFAULT NULL,
+  `favicon`            VARCHAR(64)       DEFAULT NULL,
+  `sex`                VARCHAR(20)       DEFAULT NULL,
+  `present_address`    VARCHAR(64)       DEFAULT NULL,
+  `level`              VARCHAR(64)       DEFAULT NULL,
+  `content`            VARCHAR(255)      DEFAULT NULL,
+  `background_url`     VARCHAR(255)      DEFAULT NULL,
+  `province_name`      VARCHAR(255)      DEFAULT NULL,
+  `birthday`           VARCHAR(32)       DEFAULT NULL,
+  `logo_url`           VARCHAR(255)      DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `original_price`  decimal NULL AFTER `order_status`;
+ADD COLUMN `original_price` DECIMAL NULL
+AFTER `order_status`;
 
 CREATE TABLE `tenant_master` (
-  `id`  char(16) NOT NULL ,
-  `tenant_id`  char(16) NULL ,
-  `master_id`  char(16) NULL ,
-  `status`  char(4) NULL ,
+  `id`        CHAR(16) NOT NULL,
+  `tenant_id` CHAR(16) NULL,
+  `master_id` CHAR(16) NULL,
+  `status`    CHAR(4)  NULL,
   PRIMARY KEY (`id`)
 );
 
 ALTER TABLE `product_model`
-ADD COLUMN `recommend_index`  int(11) NULL AFTER `status`;
+ADD COLUMN `recommend_index` INT(11) NULL
+AFTER `status`;
 
 ALTER TABLE `product`
-ADD COLUMN `master_id`  char(16) NULL AFTER `recommended_index`;
+ADD COLUMN `master_id` CHAR(16) NULL
+AFTER `recommended_index`;
 
 ALTER TABLE `organization_consumer_address`
 DROP COLUMN `consignee`,
-ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
+ADD COLUMN `consignee` VARCHAR(20) NOT NULL
+AFTER `status`;
 
 #
 # ALTER TABLE `product_model`
@@ -117,47 +132,81 @@ ADD COLUMN `consignee`  varchar(20) NOT NULL AFTER `status`;
 
 
 ALTER TABLE `purchase_cart_product`
-ADD COLUMN `is_choose`  char(4) NULL AFTER `status`;
+ADD COLUMN `is_choose` CHAR(4) NULL
+AFTER `status`;
 
 ALTER TABLE `purchase_cart`
-ADD COLUMN `total_price`  decimal NULL AFTER `user_id`;
-
+ADD COLUMN `total_price` DECIMAL NULL
+AFTER `user_id`;
 
 
 ALTER TABLE `purchase_order_delivery`
-	ADD COLUMN `serial` varchar(16) NULL AFTER `status`;
+ADD COLUMN `serial` VARCHAR(16) NULL
+AFTER `status`;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `tenant_id`  char(16) NULL AFTER `original_price`;
+ADD COLUMN `tenant_id` CHAR(16) NULL
+AFTER `original_price`;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `father_purchase_order_id`  char(16) NULL AFTER `tenant_id`;
+ADD COLUMN `father_purchase_order_id` CHAR(16) NULL
+AFTER `tenant_id`;
 
 ALTER TABLE `purchase_order`
-ADD COLUMN `message`  varchar(128) NULL AFTER `father_purchase_order_id`;
+ADD COLUMN `message` VARCHAR(128) NULL
+AFTER `father_purchase_order_id`;
 
 ALTER TABLE `organization_consumer_address`
-MODIFY COLUMN `details`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `address_city_id`,
-MODIFY COLUMN `email`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `phone`;
+MODIFY COLUMN `details` VARCHAR(64)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `address_city_id`,
+MODIFY COLUMN `email` VARCHAR(64)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `phone`;
 
 ALTER TABLE `purchase_order_delivery`
-ADD COLUMN `logistics_company`  varchar(64) NOT NULL AFTER `status`;
+ADD COLUMN `logistics_company` VARCHAR(64) NOT NULL
+AFTER `status`;
 
 ALTER TABLE `project_category`
-ADD COLUMN `picture_url`  varchar(255) NULL AFTER `type`;
-
+ADD COLUMN `picture_url` VARCHAR(255) NULL
+AFTER `type`;
 
 
 ALTER TABLE `product_model`
-ADD COLUMN `product_description_id`  char(16) NULL AFTER `name`;
+ADD COLUMN `product_description_id` CHAR(16) NULL
+AFTER `name`;
 
 CREATE TABLE `product_model_description` (
-  `id`  char(16) NOT NULL ,
-  `content`  text NULL ,
-  `product_model_id`  char(16) NULL ,
+  `id`               CHAR(16) NOT NULL,
+  `content`          TEXT     NULL,
+  `product_model_id` CHAR(16) NULL,
   PRIMARY KEY (`id`)
-)
-;
+);
+
+#-------------------------------未执行----------------------------------
+
+ALTER TABLE `purchase_coupon`
+MODIFY COLUMN `id` CHAR(16)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NOT NULL
+FIRST,
+MODIFY COLUMN `coupon_batch_id` CHAR(16)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `id`,
+MODIFY COLUMN `status` CHAR(1)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `coupon_batch_id`,
+MODIFY COLUMN `serial` CHAR(16)
+CHARACTER SET utf8
+COLLATE utf8_general_ci NULL DEFAULT NULL
+AFTER `status`,
+ADD COLUMN `consumer_id` CHAR(16) NULL
+AFTER `serial`;
 
 
 

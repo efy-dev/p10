@@ -33,6 +33,8 @@ public class PalConst {
     public String certificateView = "/viewCertificate";                           //wap端证书详情返回页面
     public String productView = "/viewProduct";                           //wap端证书详情返回页面
     public String sourceView = "/viewSource";                           //wap端证书详情返回页面
+    public String aboutUsView = "/aboutUs";                                //关于我们
+    public String userManualView = "/userManual";                           //使用前必读
     public String resultLabel = "result";                                //标签验真伪返回的bean
     public String resultProduct = "product";                                //标签验真伪返回的product
     public String code = "code";                                //标签验真伪返回的product

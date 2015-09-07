@@ -18,7 +18,7 @@
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
         <ul class="am-slides">
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
-                <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}"></li>
+                <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
             </c:forEach>
         </ul>
     </div>
@@ -132,7 +132,7 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="#进店" title="进店">进店</a>
+        <a class="btn-default" href="/tenantOfMobile/view?tenantId=${productModel.product.tenant.id}" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
         <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
                 class="icon"></i>放入购物车</a>
@@ -145,7 +145,7 @@
         <dl class="bd dl-des">
             <dt><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-icon" width="130" alt=""/>
             </dt>
-            <dd>价格：6000——8000</dd>
+            <dd>价格：${productModel.price}</dd>
             <%--<dd>库存：10件</dd>--%>
             <dd>规格</dd>
         </dl>

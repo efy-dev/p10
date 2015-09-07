@@ -40,7 +40,7 @@
                     <th class="table-set">操作</th>
                     <th class="table-title">订单号</th>
                     <th class="table-title">产品</th>
-                    <th class="table-title">支付类型</th>
+                    <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
@@ -82,20 +82,20 @@
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <p style="margin-left: 10px;"><a
-                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProductModel=${viewProductModel}&id=${purchaseProduct.productModel.product.id}'/>">${purchaseProduct.productModel.product.name}</a>
+                                        href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProductModel=${viewProductModel}&id=${purchaseProduct.id}'/>">${purchaseProduct.productModel.product.name}</a>
                                     <img width="20px" src="http://pro.efeiyi.com/${purchaseProduct.productModel.product.picture_url}@!product-model" alt="产品图片">
                                 </p>
                             </c:forEach>
 
                         </td>
-                        <td class="am-hide-sm-only">
-                            <c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                    checkedValue="${purchaseOrderPayment.payWay}"
-                                                    type="normal"/>
-                            </c:forEach>
-                        </td>
+                        <%--<td class="am-hide-sm-only">--%>
+                            <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
+                                <%--<span style="margin-left: 10px;">--%>
+                                    <%--<ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"--%>
+                                                    <%--checkedValue="${purchaseOrderPayment.payWay}"--%>
+                                                    <%--type="normal"/>--%>
+                            <%--</c:forEach>--%>
+                        <%--</td>--%>
                         <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
@@ -111,6 +111,8 @@
         <c:url value="/basic/xm.do" var="url"/>
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="viewIdentify" value="orderProduct"/>
+            <ming800:pcPageParam name="viewProductModel" value="order"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
         </ming800:pcPageList>
     </div>

@@ -15,7 +15,10 @@
     </documents>
     <!-- 推荐 -->
     <recommends>
-        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="1" />
+        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="5" />
         <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="5" />
+        <recommend group="WondenfulProject" recommendedModel="com.efeiyi.ec.project.model.Project" note="精彩项目推荐" amount="6" />
+        <recommend group="ProjectRecommended" recommendedModel="com.efeiyi.ec.project.model.Project" note="推荐项目" amount="6" />
+        <recommend group="WondenfulVideo" recommendedModel="com.efeiyi.ec.master.model.MasterWorkShop" note="精彩视频" amount="4" />
     </recommends>
 </common>

@@ -331,4 +331,28 @@ PRIMARY KEY (`id`)
 
 =================================================以上 已执行======================================================
 
+
+ALTER TABLE `tenant`
+ADD COLUMN `address_city_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `create_datetime`;
+
+
+ALTER TABLE `tenant`
+ADD COLUMN `serial`  varchar(32) NULL AFTER `address_city_id`;
+
+ALTER TABLE `tenant_project`
+	CHANGE COLUMN `master_id` `project_id` char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `tenant_id`;
+
+=================================================以上 已执行======================================================
 --------------------------------------未执行-------------------------
+
+CREATE TABLE `tenant_category` (
+`id`  char(16) NOT NULL ,
+`tenant_id`  char(16) NULL ,
+`value`  varchar(255) NULL ,
+`status`  varchar(2) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+ALTER TABLE `product_description`
+MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;

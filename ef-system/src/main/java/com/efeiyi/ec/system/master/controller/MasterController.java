@@ -1,10 +1,13 @@
 package com.efeiyi.ec.system.master.controller;
 
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.system.master.dao.MasterDao;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +28,9 @@ public class MasterController {
 
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private MasterDao masterDao;
 
     @RequestMapping({"/master/list/json"})
     @ResponseBody
@@ -83,6 +89,19 @@ public class MasterController {
         String type = request.getParameter("type");
         String path = "introduction/"+type+"/";
         return aliOssUploadManager.listObjectByPath("tenant",path);
+    }
+
+    @RequestMapping("/master/toTenantMaster.do")
+    public String toTenantMaster(Model model,String tenantId){
+        List<Master> masterList = null;
+        try {
+          masterList = masterDao.getMasterList(tenantId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("objectList",masterList);
+        model.addAttribute("tenantId",tenantId);
+        return "/tenantMaster/masterList";
     }
 
 }

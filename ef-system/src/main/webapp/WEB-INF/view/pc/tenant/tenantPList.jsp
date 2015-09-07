@@ -31,15 +31,16 @@
     </script>
 </head>
 <body>
+        <div style="text-align: left;margin-bottom: 10px">
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formEnterpriseTenant"/>"><span class="am-icon-plus"></span>新建企业商家</a>
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formPrivateTenant"/>"><span class="am-icon-plus"></span>新建个体商家</a>
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formPersonalTenant"/>"><span class="am-icon-plus"></span>新建个人商家</a>
+        </div>
+
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
     <div class="am-g">
-        <div class="am-u-sm-12 am-u-md-6">
-            <div class="am-btn-toolbar">
-                <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formTenant"/>"><span class="am-icon-plus"></span>新建商家</a>
-                </div>
-            </div>
-        </div>
+
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
@@ -68,14 +69,35 @@
                                     href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="<c:url value="/basic/xm.do?qm=plistTenantCategory_default&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 店铺类别
+                                    </a>
+
+                                    <c:if test="${tenant.tenantType == '11'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formEnterprisesTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${tenant.tenantType == '12'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formPrivaterTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${tenant.tenantType == '13'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="<c:url value="/basic/xm.do?qm=formPersonTenant&id=${tenant.id}"/>" >
+                                            <span class="am-icon-heart">完善信息</span>
+                                        </a>
+                                    </c:if>
                                     <c:if test="${empty tenant.tenantRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
                                            href="#" recommend="1" recommendedId = "${tenant.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
-
-
                                     </c:if>
                                     <c:if test="${not empty tenant.tenantRecommendedList}">
                                         <c:forEach var="recommended" items="${tenant.tenantRecommendedList}">
@@ -88,7 +110,7 @@
                                         </c:forEach>
 
                                     </c:if>
-                                    <span style="display: none;float: left;padding-left: 10px;">
+                                     <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
                                                 <a class=" am-btn-primary" onclick="saveRecommended(this,'tenantRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
                                        </span>
