@@ -61,6 +61,7 @@
                                  <li>
                                      <label></label>
                                      <input type="button" class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息">
+                                     <input type="reset" style="display: none" id="reset">
                                  </li>
                              </ul>
                          </form>
@@ -76,7 +77,7 @@
                 <div class="page-default">
             <span>
                 <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text default-active" name="addressItem"
+                <div id="${address.id}" class="default-text triangle" name="addressItem"
                      onclick="chooseAddress(this,'${address.id}')">
                     </c:if>
                     <c:if test="${address.status=='1'}">
@@ -119,7 +120,7 @@
         <div class="clearing-site divtop">
             <span class="clearing-left">订货清单</span>
         <span class="clearing-right">
-            <a href="<c:url value="/cart/view"/> ">返回修改购物车</a>
+            <a class="btn-cart-add" href="<c:url value="/cart/view"/> ">返回修改购物车</a>
         </span>
         </div>
         <c:forEach items="${tenantList}" var="tenant">
@@ -165,8 +166,8 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" value="限45个字" maxlength="45">
-                    <span>0/45</span>
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)">
+                    <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
         </c:forEach>
@@ -197,6 +198,9 @@
 
     var payment = "1";
     var consumerAddress = "";
+    if ($(".default-active") != null) {
+        consumerAddress = $(".default-active").attr("id");
+    }
 
     function zhifubao(element) {
         $(element).attr("class", "alipay wechat-active");
@@ -204,6 +208,13 @@
         $("#weixin").find("i").remove();
         $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "1";
+    }
+
+    function updateCount(element){
+        var tenantId = $(element).attr("id");
+        var str = $(element).val();
+        var count = str.length;
+        $("#"+tenantId+"Count").html(count+"/45");
     }
 
     function weixin(element) {
@@ -278,6 +289,7 @@
             var html = newAddress(data);
             $("#address").append(html);
             $(".active-pop").hide();
+            $("#reset").click();
         }
         ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
         }, "post")
