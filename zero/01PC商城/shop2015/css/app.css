@@ -220,7 +220,6 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .itme-ext .des .ul-list li.active {background:#000}
 .product-intro .itemInfo .itme-ext .des .ul-list li:hover a,
 .product-intro .itemInfo .itme-ext .des .ul-list li.active a {color:#fff}
-.product-intro .itemInfo .itme-ext .des .ul-list li:nth-child(even) {margin-right:0}
 .product-intro .itemInfo .itme-ext .des .ul-list li.no-active {border:1px solid #ccc}
 .product-intro .itemInfo .itme-ext .des .ul-list li.no-active a {color:#ccc}
 .product-intro .itemInfo .itme-ext .des .ul-list li.no-active:hover {background:#fff}
@@ -442,6 +441,8 @@ html, body {
     overflow: hidden;
 }
 #section1 {background: #000;}
+#section2 {background: #333;}
+
 .section .hd {height:100%;position: relative;}
 .section .nav { position: absolute;top:20px; right:20px;}
 .section .nav li {float:left}
