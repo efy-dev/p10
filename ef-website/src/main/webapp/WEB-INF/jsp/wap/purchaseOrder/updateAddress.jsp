@@ -12,6 +12,7 @@
       <ul>
         <li>
           <input name="id" type="hidden" value="${address.id}">
+          <input name="consumerId" type="hidden" value="${address.consumer.id}">
           <label>收货人</label>
           <input type="text" class="txt" name="consignee" value="${address.consignee}">
         </li>

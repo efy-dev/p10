@@ -53,9 +53,9 @@
       <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
-        <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
-        </c:forEach>
+          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+            <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
+          </c:forEach>
         </ul>
       </div>
       <!-- //End--sliderimg-->
@@ -79,11 +79,10 @@
         <ul class="ul-list">
           <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
             <c:if test="${productModel.id == productModelTmp.id}">
-              <li class="active" id = "black">
+              <li class="active">
             </c:if>
-
             <c:if test="${productModel.id != productModelTmp.id}">
-              <li class="" id = "white"+productModelTmp.id>
+              <li class="">
             </c:if>
             <a href="/product/productModel/${productModelTmp.id}">
                 <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
@@ -115,6 +114,7 @@
       <div class="choose-btns">
         <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
         <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
+
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
@@ -144,16 +144,19 @@
       <div class="tab-items">
         <ul>
           <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+          <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
+          <%--<li><a href="#" title="同店精品">同 店 精 品</a></li>--%>
         </ul>
       </div>
       <!-- //End-->
+      <div class="btns">
+        <a class="buy" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="立即购买">立 即 购 买</a>
+        <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
+      </div>
     </div>
   </div>
-  <!-- //End-->
-    ${productModel.productModelDescription.content}
-</div>
-<!-- //End--footer-->
-
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/scripts/js/jquery.min.js"></script>

@@ -1,10 +1,16 @@
 package com.efeiyi.ec.system.master.controller;
 
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.system.master.dao.MasterDao;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +31,9 @@ public class MasterController {
 
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private MasterDao masterDao;
 
     @RequestMapping({"/master/list/json"})
     @ResponseBody
@@ -83,6 +92,47 @@ public class MasterController {
         String type = request.getParameter("type");
         String path = "introduction/"+type+"/";
         return aliOssUploadManager.listObjectByPath("tenant",path);
+    }
+
+    @RequestMapping("/master/toTenantMaster.do")
+    public String toTenantMaster(Model model,String tenantId){
+        List<Master> masterList = null;
+        try {
+          masterList = masterDao.getMasterList(tenantId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("objectList",masterList);
+        model.addAttribute("tenantId",tenantId);
+        return "/tenantMaster/masterList";
+    }
+
+    @RequestMapping("/master//linkTenant.do")
+    @ResponseBody
+    public String linkTenant(String tenantId,String masterId,String tenantMasterId,String status){
+        TenantMaster tenantMaster = null;
+        try {
+            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
+            if(tenantMaster == null){
+                tenantMaster = new TenantMaster();
+                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
+                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
+                tenantMaster.setStatus("1");
+            }else {
+                if("0".equals(status)){
+                    tenantMaster.setStatus("1");
+                }
+                if("1".equals(status)){
+                    tenantMaster.setStatus("0");
+                }
+            }
+            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  tenantMaster.getId();
     }
 
 }

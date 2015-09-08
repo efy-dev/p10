@@ -12,19 +12,26 @@
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
+            <%--<a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/product/project/toTenantProject.do?tenantId=${tenantId}"/>">关联项目</a>--%>
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProject_default&tenantId=${tenantId}"/>">关联项目</a>
         </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <td width="74%">项目名称</td>
-                    <td width="">项目编号</td>
-
+                    <th width="20%">操作</th>
+                    <th width="40%">项目名称</th>
+                    <th width="40%">项目编号</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${objectList}" var="tenantProject" end="4">
                     <tr id="${tenantProject.id}">
+                        <td>
+                          <a id="${tenantProject.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','是否删除',function(){removeTenantProject('${tenantProject.id}')})"><span
+                                class="am-icon-pencil-square-o"></span> 解除商家
+                          </a>
+                        </td>
                         <td class="am-hide-sm-only">
                             ${tenantProject.project.name}
                         </td>
@@ -35,4 +42,17 @@
             </table>
         </div>
     </div>
-
+<script>
+    function removeTenantProject(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/basic/xmj.do?qm=removeTenantProject"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:divId},
+            success: function (data) {
+                $("#"+divId).remove();
+            }
+        });
+    }
+</script>

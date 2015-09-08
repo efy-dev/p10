@@ -145,7 +145,7 @@
         <dl class="bd dl-des">
             <dt><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-icon" width="130" alt=""/>
             </dt>
-            <dd>价格：6000——8000</dd>
+            <dd>价格：${productModel.price}</dd>
             <%--<dd>库存：10件</dd>--%>
             <dd>规格</dd>
         </dl>

@@ -4,6 +4,7 @@
 <html>
 <head>
     <title></title>
+
 </head>
 <body>
 <div class="am-g">
@@ -45,7 +46,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listTenantMaster_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantMaster_default&conditions=tenant.id:${object.id}&tenantId=${object.id}"/>
     </div>
 </div>
 <div class="am-g">
@@ -55,7 +56,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listTenantProject_default&conditions=tenant.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listTenantProject_default&conditions=tenant.id:${object.id}&tenantId=${object.id}"/>
     </div>
 </div>
 <div class="am-g">

@@ -503,7 +503,7 @@ public class PurchaseOrderController extends BaseController {
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        List addressList = baseManager.listObject(xQuery);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -523,7 +523,7 @@ public class PurchaseOrderController extends BaseController {
         HashMap<String, String> messageMap = new HashMap<>();
 
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")) {
+            if (messageTemp != null && !messageTemp.equals("")&& messageTemp.length()==2) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
