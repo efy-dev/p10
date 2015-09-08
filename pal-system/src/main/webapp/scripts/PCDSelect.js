@@ -6,19 +6,15 @@ var select_preHtml="<option value=''>请选择</option>";
 var temp_html = "";
 
 (function($){
-    $.fn.citySelect=function(purl, curl, durl, pid, cid, did){
+    $.fn.pcdSelect=function(purl, curl, durl, pid, cid, did){
         if(this.length<1){return;};
 
         var prov_obj=$("#province");
         var city_obj=$("#city");
         var dist_obj=$("#district");
 
-        if(cid == null || cid == ""){
-            city_obj.empty().attr("disabled",true);
-        }
-        if(did == null || did == ""){
-            dist_obj.empty().attr("disabled",true);
-        }
+        city_obj.empty().attr("disabled",true);
+        dist_obj.empty().attr("disabled",true);
 
         var initProvince=function(data){
             // 遍历赋值省份下拉列表
@@ -42,20 +38,19 @@ var temp_html = "";
             });
         };
 
+        // 赋值市级函数
         var provinceChange=function(){
-            var pid = $("#province").val();
-            var city_obj=$("#city");
-            var dist_obj=$("#district");
+            var p_id = prov_obj.val();
             dist_obj.empty().attr("disabled",true);
-            if(pid == null || pid == ""){
-                city_obj.empty().attr("disabled",true);
-            }else{
+            city_obj.empty().attr("disabled",true);
+            if(p_id != null && p_id != ""){
                 $.ajax({
                     type: 'post',
                     async: false,
-                    url: curl+pid,
+                    url: curl+p_id,
                     dataType: 'json',
                     success: function (data) {
+                        // 遍历赋值市级下拉列表
                         if(data.length==1){
                             temp_html="";
                             $.each(data,function(i,city){
@@ -85,24 +80,33 @@ var temp_html = "";
             }
         };
 
+        // 赋值地区（县）函数
         var cityChange=function(){
-            var cid = $("#city").val();
-            var dist_obj=$("#district");
-            if(cid == null || cid == ""){
-                dist_obj.empty().attr("disabled",true);
-            }else {
+            var c_id = city_obj.val();
+            dist_obj.empty().attr("disabled",true);
+            if(c_id != null && c_id != ""){
                 $.ajax({
                     type: 'post',
                     async: false,
-                    url: durl+cid,
+                    url: durl+c_id,
                     dataType: 'json',
                     success: function (data) {
-                        temp_html=select_preHtml;
-                        $.each(data,function(i,dist){
-                            temp_html+="<option value='"+dist.id+"'>"+dist.name+"</option>";
-                        });
-                        dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
-                        $("#district option[value='" + did + "']").attr("selected", "selected");
+                        // 遍历赋值市级下拉列表
+                        if(data.length==1){
+                            temp_html="";
+                            $.each(data,function(i,dist){
+                                temp_html+="<option value='"+dist.id+"'>"+dist.name+"</option>";
+                            });
+                            dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
+                            $("#district option[value='" + data[0].id + "']").attr("selected", "selected");
+                        }else {
+                            temp_html=select_preHtml;
+                            $.each(data,function(i,dist){
+                                temp_html+="<option value='"+dist.id+"'>"+dist.name+"</option>";
+                            });
+                            dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
+                            $("#district option[value='" + did + "']").attr("selected", "selected");
+                        }
                         did = "";
                     },
                     failure:function(msg){
@@ -124,14 +128,6 @@ var temp_html = "";
                 alert(msg.toString);
             }
         });
-
-        if(cid != null && cid != ""){
-            provinceChange();
-        }
-
-        if(did != null && did != ""){
-            cityChange();
-        }
 
     };
 })(jQuery);
