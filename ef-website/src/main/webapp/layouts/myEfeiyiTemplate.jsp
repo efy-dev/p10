@@ -41,7 +41,7 @@
           <c:set var="user" >
             <%= AuthorizationUtil.getMyUser().getUsername()%>
           </c:set>
-          <span><img src="<c:url value="/scripts/images/img-tx.png"/>"></span>
+           <span><img id="uploadPi" src="" width="48" height="48"></span>
           <p>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
         </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
@@ -53,6 +53,23 @@
 <%
   }
 %>
-
+<script>
+    $().ready(function() {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: "<c:url value='/myEfeiyi/getUserAvatar.do'/>",
+            dataType: 'json',
+            success: function (data) {
+                <c:if test="${data==null||data==''}">
+                $("#uploadPi").attr("src", '<c:url value="/scripts/images/img-tx.png"/>');
+                </c:if>
+                <c:if test="${data!=null||data!=''}">
+                $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
+                </c:if>
+            }
+        })
+    })
+</script>
 </body>
 </html>
