@@ -187,12 +187,7 @@ public class ProductController extends BaseController {
 
         if("product".equals(step)){
 
-            try {
-                Product product1 =        productManager.saveProduct(product);
-                System.out.print(product1.getMaster().getName());
-            }catch (Exception e){
 
-            }
             model.addAttribute("object",productManager.saveProduct(product));
 
         }else if("description".equals(step)){

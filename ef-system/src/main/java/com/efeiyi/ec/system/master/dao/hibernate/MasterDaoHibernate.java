@@ -38,7 +38,7 @@ public class MasterDaoHibernate implements MasterDao {
 
 @Override
  public List<Master> getMasterList(String tenantId){
-     String hql = "from Master where id not in (select master.id from TenantMaster where tenant.id = :tenantId and  status = '1')";
+     String hql = "from Master where status = '1' and id not in (select master.id from TenantMaster where tenant.id = :tenantId and  status = '1')";
      Query query = this.getSession().createQuery(hql)
              .setString("tenantId",tenantId);
      return  (List<Master>)query.list();

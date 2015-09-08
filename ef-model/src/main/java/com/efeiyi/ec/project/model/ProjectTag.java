@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="project_tag")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectTag {
     private String id;
     private String sort;

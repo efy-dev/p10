@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.p.model.ObjectRecommended;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "project_category")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectCategory implements Serializable{
     private String id;
     private String name;//类别
