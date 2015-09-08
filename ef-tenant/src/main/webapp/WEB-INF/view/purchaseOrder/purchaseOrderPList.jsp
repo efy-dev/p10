@@ -38,7 +38,7 @@
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%" >
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;"
-                           href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&view=delivery&id=${purchaseOrder.id}"/>"><span
+                           href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&view=${view}&id=${purchaseOrder.id}"/>"><span
                                 class="am-icon-pencil-square-o">订单详情</span>
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" onclick="updateOrderStatus(this,'${purchaseOrder.id}')">
@@ -59,7 +59,7 @@
             </td>
 
             <td>
-                <a  href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}"/>">
+                <a  href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&view=${view}&id=${purchaseOrder.id}"/>">
                  ${purchaseOrder.serial}
                 </a>
             </td>
