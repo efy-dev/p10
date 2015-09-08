@@ -35,24 +35,19 @@
         <div class="am-form-group">
             <label name="province" for="province" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="province.id" id="province">
-                </select>
-                <%--<input type="text" name="province" id="province" placeholder="所在省" value="${object.province}">--%>
+                <select name="province.id" id="province"></select>
             </div>
         </div>
         <div class="am-form-group">
             <label name="city" for="city" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="city.id" id="city">
-                </select>
-                <%--<input type="text" name="city" id="city" placeholder="所在市" value="${object.city}">--%>
+                <select name="city.id" id="city"></select>
             </div>
         </div>
         <div class="am-form-group">
             <label name="district" for="district" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
             <div class="am-u-sm-9">
                 <select name="district.id" id="district"></select>
-                <%--<input type="text" name="address" id="address" placeholder="所在区/县" value="${object.address}">--%>
             </div>
         </div>
         </div>
@@ -69,7 +64,7 @@
     </form>
     <script type="text/javascript">
         $(function(){
-            $("#pcdDiv").citySelect(
+            $("#pcdDiv").pcdSelect(
                 "<c:url value='/pal/address/provinceList.do'/>",
                 "<c:url value='/pal/address/cityListByProvince.do?conditions=addressProvince.id:'/>",
                 "<c:url value='/pal/address/districtListByCity.do?conditions=addressCity.id:'/>",
