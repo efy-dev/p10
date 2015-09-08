@@ -13,7 +13,7 @@
 <html>
 <head>
     <title></title>
-    <link href="<c:url value="/resources/upload/uploadify.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="/scripts/upload/uploadify.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <center>
@@ -152,7 +152,7 @@
     </table>
   </form>
 </center>
-<script src="<c:url value="/resources/upload/jquery.uploadify.min.js"/>"></script>
+<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
 <script>
   function chooseCity(element,provinceId,cityId,o){
     $(element).val(provinceId);
@@ -197,7 +197,7 @@
 //          var fileName = $('#btn_upload'+o).
           $('#btn_upload'+o).uploadify({
           uploader: '<c:url value="/tenant/uploadify.do?tenantId=${object.id}&dataType="/>'+dataType,            // 服务器处理地址
-          swf: '<c:url value="/resources/upload/uploadify.swf"/>',
+          swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
           buttonText: "上传图片",                 //按钮文字
           buttonClass:"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式
           buttonCursor:"hand",                    //鼠标指针悬停在按钮上的样子
