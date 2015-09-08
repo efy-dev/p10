@@ -249,10 +249,10 @@
                                             <dd style="width: 100%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
-                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
+                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>
+                                                        <a href="javascript:void(0);" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
@@ -417,7 +417,7 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -492,7 +492,7 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                            //      '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                            //      '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -520,7 +520,7 @@
     }
 
 
-    function updatePictureStatus(id,status){
+    function updatePictureStatus(obj,id,status){
         $.ajax({
             type: "get",
             url: '<c:url value="/product/updatePicture.do"/>',
@@ -530,19 +530,23 @@
             success: function (data) {
                 if(status == '2'){
 
-                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
-                                    '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
-                                    ' 删除'+
-                                    '</a>'
-                            ;
-                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','1')");
+                    $(obj).text("主图片");
+//                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
+//                                    '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+//                                    ' 删除'+
+//                                    '</a>'
+//                            ;
+//                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
                 if(status == '1'){
-                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
-                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
-                            ' 删除'+
-                            '</a>';
-                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                    $(obj).text("设为主图片");
+//                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+//                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+//                            ' 删除'+
+//                            '</a>';
+//                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
             }
         });
