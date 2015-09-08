@@ -37,22 +37,22 @@
              <c:set var="masterId" value="0"/>
            </c:if>
 <div class="am-g">
-    <fieldset>
-        <legend>
-            <span >
-            <select onchange="changeUrl(this)" >
-                <option value="0">请选择</option>
-                <c:forEach var="model" items="${object.productModelList}">
-                    <option value="${model.id}">${model.name}</option>
-                </c:forEach>
-            </select>
+    <%--<fieldset>--%>
+        <%--<legend>--%>
+            <%--<span >--%>
+            <%--&lt;%&ndash;<select onchange="changeUrl(this)" >&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<option value="0">请选择</option>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<c:forEach var="model" items="${object.productModelList}">&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<option value="${model.id}">${model.name}</option>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</select>&ndash;%&gt;--%>
 
-            <a style="width: 10%;" id="yulan" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#">
-                生成预览
-            </a>
-                </span>
-        </legend>
-    </fieldset>
+            <%--&lt;%&ndash;<a style="width: 10%;" id="yulan" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#">&ndash;%&gt;--%>
+                <%--&lt;%&ndash;生成预览&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</a>&ndash;%&gt;--%>
+                <%--</span>--%>
+        <%--</legend>--%>
+    <%--</fieldset>--%>
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
         <fieldset>
             <legend>
@@ -164,7 +164,7 @@
                            id="productModel">
                         <tbody>
                         <tr>
-                            <th class="am-text-center" width="20%">商品名称</th>
+                            <th class="am-text-center" width="20%">预览</th>
                             <th class="am-text-center" width="20%">属性</th>
                             <th class="am-text-center" width="20%">库存</th>
                             <th class="am-text-center" width="20%">价格(元)</th>
@@ -173,7 +173,9 @@
                         <c:forEach var="model" items="${object.productModelList}">
                             <tr>
                                 <td align="center">
-                                        ${model.name}
+                                    <a style="width: 10%;"  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="changeUrl('${model.id}')">
+                                        生成预览
+                                    </a>
                                 </td>
                                 <td class="am-text-center">
                                     <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
@@ -322,7 +324,9 @@
 <script>
 
     function changeUrl(obj){
-        $("#yulan").attr("href","http://www2.efeiyi.com/product/productModel/"+$(obj).val());
+        var url = "http://www2.efeiyi.com/product/productModel/"+$(obj).val();
+        window.open(url);
+
     }
 
     function copyInit(obj){
