@@ -323,8 +323,8 @@
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
 
-    function changeUrl(obj){
-        var url = "http://www2.efeiyi.com/product/productModel/"+$(obj).val();
+    function changeUrl(id){
+        var url = "http://www2.efeiyi.com/product/productModel/"+id;
         window.open(url);
 
     }
