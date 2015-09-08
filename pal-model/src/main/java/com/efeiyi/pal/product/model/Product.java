@@ -27,7 +27,7 @@ public class Product {
     private ProductSeries productSeries;
     private Tenant tenant;
     private String masterName;
-    private String status;
+    private String status;//1：商品图片 2：主图片 3：详情图片
     private Date madeYear;
     private List<ProductPropertyValue> productPropertyValueList;
     private String logo;

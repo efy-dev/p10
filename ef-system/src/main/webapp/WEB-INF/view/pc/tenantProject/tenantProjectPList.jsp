@@ -46,7 +46,7 @@
                 <tr>
                     <th class="table-set" width="20%">操作</th>
                     <th class="table-title"  width="40%">项目名称</th>
-                    <th class="table-title" width="40%">项目名称</th>
+                    <th class="table-title" width="40%">项目编号</th>
                 </tr>
                 </thead>
                 <tbody>
