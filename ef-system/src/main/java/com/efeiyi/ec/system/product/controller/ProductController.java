@@ -91,7 +91,7 @@ public class ProductController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
         int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
-        //  productModel.setRecommendIndex(maxValue + 1);
+        productModel.setRecommendIndex(maxValue + 1);
 
         baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 
@@ -187,12 +187,7 @@ public class ProductController extends BaseController {
 
         if("product".equals(step)){
 
-            try {
-                Product product1 =        productManager.saveProduct(product);
-                System.out.print(product1.getMaster().getName());
-            }catch (Exception e){
 
-            }
             model.addAttribute("object",productManager.saveProduct(product));
 
         }else if("description".equals(step)){
