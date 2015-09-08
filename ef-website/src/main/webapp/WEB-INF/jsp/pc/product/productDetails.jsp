@@ -156,6 +156,7 @@
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
       </div>
     </div>
+    ${productModel.productModelDescription.content}
   </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
