@@ -14,7 +14,7 @@
                 <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;param=orderPayment"/>
-                <match url= "/basic/xm.do?qm=viewProduct&amp;viewIdentify=orderPayment"/>
+                <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderPayment"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
@@ -59,6 +59,10 @@
                 <match url="/basic/xm.do?qm=formProduct_Description&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=newProduct"/>
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
+                <match url="/basic/xm.do?qm=plistTenantProduct_default"/>
+                <match url="/basic/xm.do?view=newProduct"/>
+                <match url="/product/saveNewProduct.do?view=newProduct"/>
+
 
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">
@@ -87,8 +91,10 @@
                 <match url="/product/saveNewProduct.do?view=tenant"/>
                 <match url="/basic/xm.do?qm=formTenantCategory"/>
                 <match url="/basic/xm.do?qm=plistTenantCategory_default"/>
-                <match url="/master/toTenantMaster.do"/>
-                <match url="/product/project/toTenantProject.do"/>
+                <match url="/basic/xm.do?qm=plistTMaster_default"/>
+                <match url="/basic/xm.do?qm=plistTProject_default"/>
+
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="/basic/xm.do?qm=plistProfessional_default"/>
@@ -116,8 +122,6 @@
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>
                 <match url="/basic/xm.do?qm=plistProductModel_index"/>
                 <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=index"/>
-                <match url="/basic/xm.do?qm=formProduct&amp;view=index"/>
-                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=index"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
                 <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>
@@ -157,9 +161,9 @@
                 <match url="/basic/xm.do?qm=formMaster&amp;from=recommendMaster"/>
                 <match url="/basic/xm.do?qm=viewMaster&amp;view=recommendMaster"/>
             </jnode>
-          <!--     <jnode url="/Recommended/listRecommended.do?qm=recommened&amp;groupName=masterRecommended&amp;resultPage=masterRecommended/masterRecommendedList"  access="admin,manager" text_zh_CN="传承人推荐">
-                      <match url="recommened" />
-               </jnode> -->
+            <!--     <jnode url="/Recommended/listRecommended.do?qm=recommened&amp;groupName=masterRecommended&amp;resultPage=masterRecommended/masterRecommendedList"  access="admin,manager" text_zh_CN="传承人推荐">
+                        <match url="recommened" />
+                 </jnode> -->
             <!--<jnode url="/basic/xm.do?qm=plistTenantIntroduction_default" id="tenantIntroductionManager" access="admin" text_zh_CN="传承人介绍管理">-->
             <!--<match url="plistTenantIntroduction_default"/>-->
             <!--<match url="removeTenantIntroduction"/>-->

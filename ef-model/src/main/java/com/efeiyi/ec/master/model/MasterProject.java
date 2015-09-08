@@ -1,6 +1,7 @@
 package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.project.model.Project;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "master_project")
-public class MasterProject implements Serializable {
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class MasterProject  {
     private String id;
     private Master master;
     private Project project;
