@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -141,5 +142,16 @@ public class ProductModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private List<String> fetchMainPicture(){
+        List<ProductPicture> list = product.getProductPictureList();
+        List<String> stringList = new ArrayList<String>();
+        for(ProductPicture picture:list){
+            if("2".equals(picture.getStatus())){
+                stringList.add(picture.getPictureUrl());
+            }
+        }
+        return stringList;
     }
 }
