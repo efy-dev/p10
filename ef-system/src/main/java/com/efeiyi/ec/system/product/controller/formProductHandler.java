@@ -5,6 +5,7 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
@@ -38,29 +39,38 @@ public class formProductHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-      modelMap.put("view",request.getParameter("view"));
+        modelMap.put("view",request.getParameter("view"));
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
         modelMap.put("tenantId",request.getParameter("tenantId"));
-        XQuery xQuery = new XQuery("listTenantMaster_default",request);
+        XQuery xQuery = new XQuery("listTenantMaster_default",request);//
         xQuery.put("tenant_id",request.getParameter("tenantId"));
-        List<TenantMaster> list = baseManager.listObject(xQuery);//大师
-        Map<String,List> projectMap = new HashMap<>();
-        Map<String,List> propertyMap = new HashMap<>();
-        for(TenantMaster tenantMaster : list){
-            xQuery = new XQuery("listMasterProject_default",request);
-            xQuery.put("master_id",tenantMaster.getMaster().getId());
-            List<MasterProject> masterProjectList = baseManager.listObject(xQuery);
-            projectMap.put(tenantMaster.getMaster().getId(),masterProjectList);//项目
-            for (MasterProject masterProject : masterProjectList){//属性
-                xQuery = new XQuery("listProjectProperty_default",request);
-                xQuery.put("project_id",masterProject.getProject().getId());
-                List<ProjectProperty> projectPropertyList = baseManager.listObject(xQuery);
-                propertyMap.put(masterProject.getProject().getId(),projectPropertyList);
-            }
-        }
-        modelMap.put("propertyMap",propertyMap);
-        modelMap.put("projectMap",projectMap);
-        modelMap.put("masterList",list);
+        List<TenantMaster> masterList = baseManager.listObject(xQuery);//大师
+        modelMap.put("masterList",masterList);
+        xQuery = new XQuery("listMasterProject_default",request);
+        xQuery.put("master_id",request.getParameter("masterId"));
+        List<MasterProject> projectList = baseManager.listObject(xQuery);//项目
+        modelMap.put("projectList",projectList);
+//        Map<String,List> projectMap = new HashMap<>();
+//        Map<String,List> propertyMap = new HashMap<>();
+//        for(TenantMaster tenantMaster : list){
+//            xQuery = new XQuery("listMasterProject_default",request);
+//            xQuery.put("master_id",tenantMaster.getMaster().getId());
+//            List<MasterProject> masterProjectList = baseManager.listObject(xQuery);
+//            projectMap.put(tenantMaster.getMaster().getId(),masterProjectList);//项目
+//            for (MasterProject masterProject : masterProjectList){//属性
+//                xQuery = new XQuery("listProjectProperty_default",request);
+//                xQuery.put("project_id",masterProject.getProject().getId());
+//                List<ProjectProperty> projectPropertyList = baseManager.listObject(xQuery);
+//                propertyMap.put(masterProject.getProject().getId(),projectPropertyList);
+//            }
+//        }
+
+//        xQuery = new XQuery("listTenant_product",request);
+//        List<Tenant> tenantList = baseManager.listObject(xQuery);
+//        modelMap.put("tenantList",tenantList);
+//        modelMap.put("propertyMap",propertyMap);
+//        modelMap.put("projectMap",projectMap);
+//        modelMap.put("masterList",list);
         return modelMap;
     }
 }

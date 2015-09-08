@@ -523,7 +523,7 @@ public class PurchaseOrderController extends BaseController {
         HashMap<String, String> messageMap = new HashMap<>();
 
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")) {
+            if (messageTemp != null && !messageTemp.equals("")&& messageTemp.length()==2) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }

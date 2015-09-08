@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<module name="Orgnization" label="组织" version="" package="com.efeiyi.pal.orgnization.model" path="">
+<module name="Orgnization" label="组织" version="" package="com.efeiyi.pal.organization.model" path="">
 
     <entities>
         <entity name="PCTenant" label="商户"  model="com.efeiyi.pal.organization.model.Tenant">

@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td>商户地址</td>
-            <td>${object.province}&nbsp;${object.city}&nbsp;${object.address}</td>
+            <td>${object.province.name}&nbsp;${object.city.name}&nbsp;${object.district.name}</td>
         </tr>
     </table>
 </div>

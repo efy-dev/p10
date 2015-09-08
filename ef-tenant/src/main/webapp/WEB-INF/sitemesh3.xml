@@ -4,6 +4,7 @@
     <mapping path="/basic/**" decorator="/layouts/main.jsp"/>
     <mapping path="/tenantType/**" decorator="/layouts/main.jsp"/>
     <mapping path="/Recommended/**" decorator="/layouts/main.jsp"/>
+    <mapping path="/Register/toChangePassword.do" decorator="/layouts/main.jsp"/>
     <mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>
     <mapping path="/login.do" decorator="/layouts/iframe.jsp"/>
     <mapping path="/ef-tenant" decorator="/layouts/main.jsp"/>

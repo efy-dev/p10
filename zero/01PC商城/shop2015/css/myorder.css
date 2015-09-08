@@ -96,9 +96,9 @@ a:hover{text-decoration: underline}
 .my-order .mt-null ul li a{width: 129px;height: 36px;color: #000;font-family: "仿体";text-align: center;display: block;line-height: 36px;font-size: 14px;
     border: 1px solid #000;text-decoration: none}
 .my-order .mt-null ul li a:hover{transition:all 0.5s;background-color: #000;color:#fff;}
-.my-order .efeiyi{float: left}
+/*.my-order .efeiyi{float: left}*/
 /*样式*/
-/*.my-order .efeiyi{float: left;margin-left: 76px;}*/
+.my-order .efeiyi{float: left;margin-left: 76px;}
 /*样式*/
 .my-order .collect{float: right}
 /*--查看订单收获信息--*/
@@ -187,7 +187,7 @@ a:hover{text-decoration: underline}
 .my-order .editor a{font-family: "宋体";color:#fff;line-height: 24px;font-weight: normal;}
 .my-order .userinfo-datum{margin: 0 26px;padding-top: 46px;}
 .my-order .userinfo-datum li{font-family: "宋体";color:#666;font-size: 12px;font-weight: normal;line-height: 54px;height: 54px;}
-.my-order .userinfo-datum li label{width: 60px;text-align: right;font-weight: 100}
+.my-order .userinfo-datum li label{width: 85px;text-align: right;font-weight: 100}
 .my-order .userinfo-tex{width: 124px;height: 37px;border: 1px solid #ccc;padding: 10px 11px;font-family: "宋体";color:#000;font-size: 12px;}
 .my-order .userinfo-tex:active,.my-order .userinfo-tex:hover{border: 1px solid #000;}
 .my-order .userinfo-box{widht:11px;height:11px;line-height: 11px;}
@@ -195,7 +195,7 @@ a:hover{text-decoration: underline}
 .my-order .act1{float: left;height:38px;margin: 0}
 .my-order .am-btn{float: left;display: block;background: #fff;}
 .my-order .am-input-group .am-form-field{background: #fff;font-size: 12px;font-family: "宋体"; }
-.my-order .am-icon-calendar-1{width: 20px;height: 20px;background: url("../images/efeiyi-icon.png") 20px}
+.my-order .am-icon-calendar-1{width: 20px;height: 20px;background: url("../images/efeiyi-icon.png") no-repeat -17px 1px;}
 .my-order .userinfo-datum li select{border: 1px solid #ccc;color:#ccc;font-size: 14px;font-family: "宋体";padding:4px 13px;}
 .my-order .userinfo-datum li select option{color:#000;font-size: 12px;font-family: "宋体";}
 .my-order .userinfo-datum li .cars{width:96px;}
@@ -568,4 +568,20 @@ a:hover{text-decoration: underline}
 .binding-phone .phone-page li label{width: 160px;text-align: right;font-size: 12px;font-family: "宋体";}
 .binding-phone .phone-page li input{width: 280px;height: 40px;padding:15px;font-size: 12px;font-family: "宋体";border: 1px solid #000}
 /*手机号绑定*/
+/*公共样式！商品推荐！精品推荐*/
+.recommend{width: 100%;float: left;margin-top: 45px;border:1px solid #ccc;}
+.recommend .topic{width: 100%;float: left;padding: 17px 20px;border-bottom: 1px solid #ccc;}
+.recommend .topic p{font-size: 14px;font-family: "宋体";color: #000;}
+.recommend .carousel{padding:24px 20px;float: left;width: 100%;}
+.recommend .carousel li{width: 100%;float: left;padding: 0 63px;position: relative}
+.recommend .carousel .car-content{float: left;margin-right:19px; width: 157px;border: 1px solid #ccc;padding:10px;}
+.recommend .carousel .car-content dt{width: 130px;height: 130px;}
+.recommend .carousel .car-content dd{font-size: 12px;color: #000;font-family: "宋体"; text-align: center}
+.recommend .carousel .car-content dd p{margin-bottom: 10px;}
+.recommend .carousel .car-content dd p strong{color: #ff0000;font-weight: 100  }
+.recommend .carousel .car-content dd p a{padding:5px 20px;color: #000;border: 1px solid #000;text-decoration: none;}
+.recommend .carousel .car-content dd p a:hover{background: #000;color: #fff;}
+.recommend .car-left{position: absolute;width:20px;height: 41px;background: url(../images/efeiyi-gwc.png) no-repeat 0 -50px;left: 0;top:35%;cursor: pointer }
+.recommend .car-right{position: absolute;width:20px;height: 41px;background: url(../images/efeiyi-gwc.png) no-repeat -21px -50px;right: 0;top:35%;cursor: pointer }
+/*公共样式*/
 

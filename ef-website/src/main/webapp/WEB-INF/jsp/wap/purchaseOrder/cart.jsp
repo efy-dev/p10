@@ -53,7 +53,8 @@
                                 <p class="info-price"><em>￥</em><span class="moneycl"
                                                                       id="${product.id}Price">${(product.productModel.price.intValue())*product.amount}</span>
                                 </p>
-                                <a href="<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>"
+                                <%--<a href="<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>"--%>
+                                <a id="remove" onclick="removeProduct('${product.id}')"
                                    class="icon icon-delete"></a>
                             </div>
                         </li>
@@ -75,8 +76,9 @@
             <div class="bd title">提示</div>
             <div class="bd info">您确定要删除？</div>
             <div class="bd btns">
-                <a class="btn-true" href="#确定" title="确定">确定</a>
-                <a class="btn-false" href="#取消" title="取消">取消</a>
+                <a class="btn-true" href="#" onclick="delProduct(this);" title="确定">确定</a>
+                <input type="hidden" id="delPro" value="">
+                <a class="btn-false" href="javascript:history.go(0)" title="取消">取消</a>
             </div>
         </div>
         <div class="overbg"></div>
@@ -145,7 +147,16 @@
         <!-- //End--cart-list-no-->
     </article>
 </c:if>
-<script>
+<script type="text/javascript">
+    function removeProduct(o){
+        var d = document.getElementsByClassName("alert-delete").style="display:block";
+        $("#delPro").val(o);
+    }
+
+    function delProduct(o){
+        var cartProductId = $(o).next().val();
+        window.location.href = "<c:url value='/cart/removeProduct.do?cartProductId='/>"+cartProductId;
+    }
     function submit(){
 
         var param = {cartId:'${cart.id}'}
