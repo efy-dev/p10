@@ -178,11 +178,19 @@
                                     </a>
                                 </td>
                                 <td class="am-text-center">
-                                    <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
+                                    <c:if test="${model.status == '1'}">
+                                        <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
                                             <span style="padding: 5px;" id="${modelProperty.projectPropertyValue.id}" value="${modelProperty.projectPropertyValue.value}">
                                                     ${modelProperty.projectPropertyValue.value}
                                             </span>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${model.status == '2'}">
+                                       ${model.customProperty}
+                                    </c:if>
+                                    <c:if test="${model.status == '3'}">
+                                        无
+                                    </c:if>
                                 </td>
                                 <td align="center">
                                         ${model.amount}
@@ -319,7 +327,7 @@
 <!-- content end -->
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
-<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
+<script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
 

@@ -356,3 +356,7 @@ PRIMARY KEY (`id`)
 
 ALTER TABLE `product_description`
 MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;
+
+//自定义属性
+ALTER TABLE `product_model`
+ADD COLUMN `custom_property`  varchar(255) NULL AFTER `product_description_id`;
