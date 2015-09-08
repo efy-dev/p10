@@ -33,14 +33,15 @@
     </script>
 </head>
 <body>
+<div class="am-btn-toolbar" style="margin-bottom: 10px">
+    <div class="am-btn-group am-btn-group-xs">
+        <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建文档</a>
+    </div>
+</div>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
-            <div class="am-btn-toolbar">
-                <div class="am-btn-group am-btn-group-xs">
-                    <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建文档</a>
-                </div>
-            </div>
         </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
@@ -50,7 +51,6 @@
                     <th class="table-title">标题</th>
                     <th class="table-title">名字</th>
                     <th class="table-title">创建时间</th>
-
                 </tr>
                 </thead>
                 <tbody>

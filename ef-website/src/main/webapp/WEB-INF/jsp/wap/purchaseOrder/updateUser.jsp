@@ -1,5 +1,8 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -59,8 +62,8 @@
             </li>
             <li>
               <label>出生日期</label>
-              <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd', viewMode: 'years'}">
-                <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="${user.birthDate}">
+              <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+                <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd"/>">
                                     <span class="am-input-group-btn am-datepicker-add-on">
                                             <button class="am-btn am-btn-default" type="button">
                                               <span class="am-icon-rq"></span>

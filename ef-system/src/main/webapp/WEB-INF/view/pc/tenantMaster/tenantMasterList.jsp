@@ -13,7 +13,7 @@
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
-            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/master/toTenantMaster.do?tenantId=${tenantId}"/>">关联大师</a>
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTMaster_default&tenantId=${tenantId}"/>">关联大师</a>
         </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">

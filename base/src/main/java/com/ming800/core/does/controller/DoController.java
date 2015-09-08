@@ -3,6 +3,7 @@ package com.ming800.core.does.controller;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.base.util.SystemValueUtil;
+import com.ming800.core.p.model.ObjectRecommended;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,6 +36,16 @@ public class DoController {
 
         String qm = request.getParameter("qm");
         modelMap.put("qm", qm);
+
+        //取出扩展参数
+        Map<String, Object> paramMap = new HashMap<>();
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            String paramName = enumeration.nextElement();
+            if (!paramName.equals("qm") && !paramName.equals("conditions") && !paramName.equals("sort"))
+                paramMap.put(paramName, request.getParameter(paramName));
+        }
+        modelMap.put("paramMap",paramMap);
 
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         modelMap.put("tempDo", tempDo);

@@ -84,7 +84,7 @@ function generateValue(divId) {
 }
 
 
-function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, baseUrl,title) {
+function generateCondition(url,divId, queryModel, queryLabel, conditions, model, tabTitle, baseUrl,param,title) {
 
     queryConditionArray = new Array();
 
@@ -112,7 +112,7 @@ function generateCondition(url,divId, queryModel, queryLabel, conditions, model,
                     queryConditionArrayTemp.push(queryCondition);
                 }
                 queryConditionArrayMap[divId] = queryConditionArrayTemp;
-                generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle,baseUrl, title);
+                generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle,baseUrl,param, title);
                 queryConditionArray = new Array();
 
             }
@@ -158,7 +158,10 @@ function addOptions(tempId, url, defaultValue, data, inputType, required) {
                     if (defaultValue != "" && defaultValue == data[i].id) {
                         option.selected = "selected";
                     }
-                    document.getElementById(tempId).options.add(option);
+                    var selector = document.getElementById(tempId);
+                    var options = selector.options;
+                    options.add(option);
+                    //.options.add(option);
                 } else {
                     tagStr += "<input type='radio' name=\"" + tempId + "Name" + "\" value=\"" + data[i].id + "\" ";
                     if (defaultValue != "" && defaultValue == data[i].id) {
@@ -183,11 +186,17 @@ function addOptions(tempId, url, defaultValue, data, inputType, required) {
 
 
 
-function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle,baseUrl, title) {
+function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle,baseUrl,param, title) {
     var tagStr = "<div class=\"queryDiv inline-block\">";
     tagStr += "<form class='am-form-inline' id=\"form\" action=\""+baseUrl+"basic/xm.do?qm=" + queryModel + "_" + divId + "\" method=\"post\">";
 
     tagStr += " <input type=\"hidden\" id=\"conditions"+divId+"\" name=\"conditions\"/> ";
+
+    for(var key in param){
+        if(typeof param[key] !="function"){
+            tagStr+=" <input type=\"hidden\" value=\""+param[key]+"\" name=\""+key+"\"/> ";
+        }
+    }
 
     var datatimeIdArray = new Array();
 
@@ -236,7 +245,7 @@ function generateHtml(divId, queryModel, queryLabel, conditions, model, tabTitle
 
                     tagStr += " class=\"selectValidate\"";
                 }
-                tagStr += "><option value=''>请选择</option></select></div>&nbsp;&nbsp;";
+                tagStr += "><option value=''>请选择</option></select>&nbsp;&nbsp;";
             } else if (queryConditionArray[i].inputType == "radio_status" || queryConditionArray[i].inputType == "radio_dictionary") {
                 tagStr += "&nbsp;&nbsp;<span id=\"" + tempId + "\"></span>&nbsp;&nbsp;";
             } else {

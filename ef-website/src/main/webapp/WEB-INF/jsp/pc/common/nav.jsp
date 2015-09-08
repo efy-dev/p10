@@ -45,9 +45,13 @@
             <ul>
                 <c:forEach items="${jnode.children}" var="child">
                     <li>
-                        <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"
-                           title="${child.text_zh_CN}">${child.text_zh_CN}</a>
+                        <c:if test="${!child.getState().equals('productCategory')}">
+                            <a class="${child.jnodeMatch("cur",currentJnode)}" href="<c:url value="${child.url}"/>"
+                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
+                        </c:if>
                         <c:if test="${child.getState().equals('productCategory')}">
+                            <a class="${child.jnodeMatch("cur",currentJnode)}"
+                               title="${child.text_zh_CN}">${child.text_zh_CN}</a>
                             <jsp:include page="/productCategory.do" flush="true"/>
                         </c:if>
                     </li>
@@ -63,10 +67,11 @@
 <script>
 
     $().ready(function () {
-        var success = function(data){
+        var success = function (data) {
             $("#cartAmount").html(data);
         }
-        ajaxRequest("<c:url value="/cart/cartAmount.do"/>",{},success,function(){},"post");
+        ajaxRequest("<c:url value="/cart/cartAmount.do"/>", {}, success, function () {
+        }, "post");
     });
 
 </script>

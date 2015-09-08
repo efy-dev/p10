@@ -9,6 +9,8 @@ import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -89,7 +91,7 @@ public class ProductController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
         int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
-      //  productModel.setRecommendIndex(maxValue + 1);
+        //  productModel.setRecommendIndex(maxValue + 1);
 
         baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 
@@ -164,7 +166,7 @@ public class ProductController extends BaseController {
         List<MasterProject> list = null;
         try {
             XQuery xQuery = new XQuery("listMasterProject_default",request);
-            xQuery.put("master_id",masterId);
+            xQuery.put("master_id", masterId);
             list = baseManager.listObject(xQuery);
         }catch (Exception e){
             e.printStackTrace();
@@ -185,12 +187,7 @@ public class ProductController extends BaseController {
 
         if("product".equals(step)){
 
-            try {
-         Product product1 =        productManager.saveProduct(product);
-                System.out.print(product1.getMaster().getName());
-            }catch (Exception e){
 
-            }
             model.addAttribute("object",productManager.saveProduct(product));
 
         }else if("description".equals(step)){
@@ -235,6 +232,43 @@ public class ProductController extends BaseController {
         return  id;
     }
 
-
+    @RequestMapping("/linkTenant.do")
+    @ResponseBody
+    public String linkTenant(String tenantId,String productId){
+        try {
+            Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+            product.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
+            baseManager.saveOrUpdate(Product.class.getName(),product);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  tenantId;
+    }
+    @RequestMapping("/changeTenant.do")
+    @ResponseBody
+    public List changeTenant(String tenantId,HttpServletRequest request){
+        List list = null;
+        try {
+            XQuery xQuery = new XQuery("listTenantMaster_default",request);
+            xQuery.put("tenant_id",tenantId);
+            list = baseManager.listObject(xQuery);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  list;
+    }
+    @RequestMapping("/changeMaster.do")
+    @ResponseBody
+    public List changeMaster(String masterId,HttpServletRequest request){
+        List list = null;
+        try {
+            XQuery xQuery = new XQuery("listMasterProject_default",request);
+            xQuery.put("master_id",masterId);
+            list = baseManager.listObject(xQuery);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  list;
+    }
 
 }
