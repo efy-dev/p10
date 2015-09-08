@@ -79,10 +79,11 @@
             <div class="am-form-group">
                 <label name="price" class="am-u-sm-3 am-form-label">商品价格</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.price}
                 </div>
             </div>
+
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
 
@@ -94,6 +95,13 @@
                         精品
                     </c:if>
                     <!--<small>必填项*</small>-->
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="price" class="am-u-sm-3 am-form-label">关联商家</label>
+
+                <div class="am-u-sm-9" style="margin-top: 10px;">
+                    ${object.tenant.name}
                 </div>
             </div>
             <div class="am-form-group">
