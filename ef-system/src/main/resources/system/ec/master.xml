@@ -102,8 +102,13 @@
                 <do name="plistEcMaster" access="" label="传承人分页列表"
                     result="/ecMaster/ecMasterPList">
                     <query name="index" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="sex" operation="eq" inputType="select_status" label="性别" key="EcMaster.sex"/>
+                        <condition name="level" operation="eq" inputType="select_status" label="等级" key="EcMaster.level"/>
+                        <condition name="fullName" operation="likes" inputType="text" label="传承人名字"/>
                     </query>
                 </do>
 
