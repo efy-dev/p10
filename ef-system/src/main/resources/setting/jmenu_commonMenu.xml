@@ -14,7 +14,7 @@
                 <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;param=orderPayment"/>
-                <match url= "/basic/xm.do?qm=viewProduct&amp;viewIdentify=orderPayment"/>
+                <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderPayment"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
