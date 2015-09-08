@@ -51,14 +51,16 @@
                                       onclick="showConfirm('提示','是否删除',function(){removeMaster('${master.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       onclick="showConfirm('提示','是否删除',function(){removeMaster('${master.id}')})" href="#"><span
+                                            class="am-icon-trash-o"></span> 查看粉丝
+                                    </a>
                                     <c:if test="${empty master.masterRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
                                            href="#" recommend="1" recommendedId = "${master.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
-
-
                                     </c:if>
                                     <c:if test="${not empty master.masterRecommendedList}">
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
