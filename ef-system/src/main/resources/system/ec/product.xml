@@ -29,6 +29,7 @@
                     </query>
                     <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
                         <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
                     </query>
 
                     <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->

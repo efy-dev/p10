@@ -19,7 +19,7 @@
 
                         <div class="bd info">
                             <div class="title">${tenant.name}</div>
-                            <div class="txt">已购满120元，已减18元</div>
+                            <div class="txt">已购满0元，已减0元</div>
                             <a href="#arrow-right" class="arrow-right"></a>
                         </div>
                     </li>
