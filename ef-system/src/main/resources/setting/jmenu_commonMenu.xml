@@ -149,6 +149,8 @@
                 <match url="/basic/xm.do?qm=viewMasterWork"/>
                 <match url="/basic/xm.do?qm=formMasterWork"/>
                 <match url="/basic/xm.do?qm=plistMasterWork_byProject"/>
+                <match url="/basic/xm.do?qm=plistMasterFollowed_default"/>
+                <match url="/basic/xm.do?qm=plistMasterMessage_default"/>
                 <match url="/basic/xm.do?qm=listProject_default"/>
                 <match url="/basic/xm.do?qm=formMasterNews"/>
                 <match url="/basic/xm.do?qm=viewMasterNews"/>
