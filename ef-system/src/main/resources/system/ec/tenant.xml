@@ -189,6 +189,10 @@
                         <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
                         <condition label="status" name="status" defaultValue="1"  operation="eq"/>
                     </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
+                        <condition label="大师" name="tenant.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
 
             </does>
