@@ -64,7 +64,7 @@
       <div class="slider-main">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"  alt=""/></li>
+            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
           </c:forEach>
         </ul>
       </div>
