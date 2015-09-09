@@ -92,7 +92,7 @@
                             <img width="30px;" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo" alt="商品图片">
                         </td>
                         <td class="am-text-center">
-                            <a href="<c:url value="/basic/xm.do?qm=viewProduct&id=${purchaseOrderProduct.productModel.product.id}"/>">
+                            <a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderProduct.id}"/>">
                                     ${purchaseOrderProduct.productModel.product.name}
                             </a>
                         </td>
