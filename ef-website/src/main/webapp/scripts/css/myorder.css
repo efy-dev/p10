@@ -100,6 +100,7 @@ a:hover{text-decoration: underline}
 /*样式*/
 /*.my-order .efeiyi{float: left;margin-left: 76px;}*/
 /*样式*/
+.login-form .msg-tips .msg{-ms-transform:none!important;}
 .my-order .collect{float: right}
 /*--查看订单收获信息--*/
 .my-order .filter-bar-1{width:854px;}
