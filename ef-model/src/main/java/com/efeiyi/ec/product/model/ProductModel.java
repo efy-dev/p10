@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,12 +23,13 @@ public class ProductModel implements Serializable {
     private Product product;//产品种类
     private Integer amount; //库存
     private List<ProductPropertyValue> productPropertyValueList; //属性值
-    private String status;
+    private String status;//1.项目属性 2.自定义属性
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
     private String marketPrice;
     private ProductModelDescription productModelDescription;
+    private String customProperty;//自定义属性值
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
@@ -144,14 +144,12 @@ public class ProductModel implements Serializable {
         this.name = name;
     }
 
-    private List<String> fetchMainPicture(){
-        List<ProductPicture> list = product.getProductPictureList();
-        List<String> stringList = new ArrayList<String>();
-        for(ProductPicture picture:list){
-            if("2".equals(picture.getStatus())){
-                stringList.add(picture.getPictureUrl());
-            }
-        }
-        return stringList;
+    @Column(name = "custom_property")
+    public String getCustomProperty() {
+        return customProperty;
+    }
+
+    public void setCustomProperty(String customProperty) {
+        this.customProperty = customProperty;
     }
 }

@@ -68,7 +68,7 @@
         <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="1" />
-                     普通
+                     收藏品
                  </span>
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="2"/>

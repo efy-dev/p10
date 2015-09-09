@@ -72,7 +72,7 @@
                     result="/productModel/productModelPList">
                     <query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendIndex:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="product.name" operation="likes" label="产品名字"/>
+                        <condition name="product.name" operation="likes" label="产品名称"/>
                         <condition name="product.serial" operation="eq" label="产品编号"/>
                         <condition name="product.project.name" operation="likes" label="项目"/>
                     </query>

@@ -111,20 +111,19 @@ public class PurchaseOrderController extends BaseController {
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("orderId",orderId);
-        String hql="from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("orderId", orderId);
+        String hql = "from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
         PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        String pd="null";
-        String serial="null";
-        if(purchaseOrderDelivery!=null){
-            pd=purchaseOrderDelivery.getLogisticsCompany();
-            serial=purchaseOrderDelivery.getSerial();
+        String pd = "null";
+        String serial = "null";
+        if (purchaseOrderDelivery != null) {
+            pd = purchaseOrderDelivery.getLogisticsCompany();
+            serial = purchaseOrderDelivery.getSerial();
         }
-        model.addAttribute("purchaseOrderDelivery",purchaseOrderDelivery);
+        model.addAttribute("purchaseOrderDelivery", purchaseOrderDelivery);
         String content = "";
-        try
-        {
+        try {
             URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + pd + "&nu=" + serial);
             URLConnection con = url.openConnection();
             con.setAllowUserInteraction(false);
@@ -132,25 +131,21 @@ public class PurchaseOrderController extends BaseController {
             byte b[] = new byte[10000];
             int numRead = urlStream.read(b);
             content = new String(b, 0, numRead);
-            while (numRead != -1)
-            {
+            while (numRead != -1) {
                 numRead = urlStream.read(b);
-                if (numRead != -1)
-                {
+                if (numRead != -1) {
                     String newContent = new String(b, 0, numRead, "UTF-8");
                     content += newContent;
                 }
             }
             urlStream.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.print(content);
         model.addAttribute("content", content);
 
-    return "/purchaseOrder/purchaseOrderView";
+        return "/purchaseOrder/purchaseOrderView";
     }
 
     @RequestMapping({"/pay/alipay/{orderId}"})
@@ -367,7 +362,7 @@ public class PurchaseOrderController extends BaseController {
 
         purchaseOrder.setTenant(tenantList.get(0));
         purchaseOrder.setTotal(cart.getTotalPrice());
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
@@ -383,7 +378,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
 
-        return "/purchaseOrder/purchaseOrderConfirm" ;
+        return "/purchaseOrder/purchaseOrderConfirm";
     }
 
 
@@ -463,8 +458,8 @@ public class PurchaseOrderController extends BaseController {
         if (tenantList.size() > 1) {
             for (Tenant tenantTemp : tenantList) {
                 XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
-                xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
-                xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+                xSaveOrUpdateTemp.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+                xSaveOrUpdateTemp.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
                 purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
                 purchaseOrderTemp.setTenant(tenantTemp);
@@ -523,7 +518,7 @@ public class PurchaseOrderController extends BaseController {
         HashMap<String, String> messageMap = new HashMap<>();
 
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")) {
+            if (messageTemp != null && !messageTemp.equals("") && messageTemp.length() == 2) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
@@ -552,9 +547,11 @@ public class PurchaseOrderController extends BaseController {
         List<Object> list = baseManager.listObject(xQuery);
         Cart realCart = (Cart) list.get(0);
         realCart.setTotalPrice(new BigDecimal(0));
-        baseManager.saveOrUpdate(Cart.class.getName(),realCart);
+        baseManager.saveOrUpdate(Cart.class.getName(), realCart);
         for (CartProduct cartProductTemp : realCart.getCartProductList()) {
-            baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+            if (cartProductTemp.getIsChoose().equals("1")) {
+                baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+            }
         }
 
 

@@ -8,8 +8,8 @@
 
 <!--//End--header-->
 <div class="shipping-address">
+  <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>">
   <div class="address">
-    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>">
       <ul>
         <li>
           <input name="id" type="hidden" value="">
@@ -30,7 +30,7 @@
         </li>
         <li>
           <label>具体地址</label>
-          <textarea name="details" id="doc-vld-ta-2" minlength="10" maxlength="100" class="text-act"></textarea>
+          <textarea name="details" id="doc-vld-ta-2-1" minlength="10" maxlength="100" class="text-act"></textarea>
         </li>
       </ul>
       <div class="default">
@@ -40,12 +40,11 @@
           <span>（注：每次下单时都使用该地址）</span>
         </p>
       </div>
-      <div class="edit-info">
-        <input type="submit" class="dj-btn" value="保存信息">
-      </div>
-    </form>
   </div>
-
+  <div class="edit-info">
+    <input type="submit" class="a" value="保存信息">
+  </div>
+  </form>
 </div>
 <script>
 

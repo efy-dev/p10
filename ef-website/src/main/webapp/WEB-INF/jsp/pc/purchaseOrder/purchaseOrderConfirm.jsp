@@ -21,7 +21,7 @@
         <div class="clearing-site">
             <span class="clearing-left">收货人信息</span>
         <span class="clearing-right">
-            <a href="#">新增收货地址</a>
+            <a href="#" class="btn-cart-add">新增收货地址</a>
              <div class="active-pop" style="display: none">
                  <div class="pop-up">
                      <div class="pop-h">编辑收货人信息
@@ -120,7 +120,7 @@
         <div class="clearing-site divtop">
             <span class="clearing-left">订货清单</span>
         <span class="clearing-right">
-            <a class="btn-cart-add" href="<c:url value="/cart/view"/> ">返回修改购物车</a>
+            <a  href="<c:url value="/cart/view"/>" onclick="window.location.href='<c:url value="/cart/view"/>'">返回修改购物车</a>
         </span>
         </div>
         <c:forEach items="${tenantList}" var="tenant">
@@ -303,16 +303,16 @@
         $(element).attr("class", "default-text default-active")
     }
 
-    $().ready(function () {
-        $("#newAddress").validate({
-            rules: {
-                consignee: "required",
-                details: "required",
-                name: "required",
-                phone: "required",
-            },
-        });
-    });
+//    $().ready(function () {
+//        $("#newAddress").validate({
+//            rules: {
+//                consignee: "required",
+//                details: "required",
+//                name: "required",
+//                phone: "required",
+//            },
+//        });
+//    });
 
 </script>
 </body>
