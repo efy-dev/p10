@@ -62,7 +62,7 @@
       <div class="slider-main">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="800" height="700" alt=""/></li>
+            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}"  alt=""/></li>
           </c:forEach>
         </ul>
       </div>
@@ -156,7 +156,7 @@
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
       </div>
     </div>
-    ${productModel.productModelDescription.content}
+    ${product.productDescription.content}
   </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
