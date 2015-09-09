@@ -74,11 +74,12 @@
       <!--订单状态为已付款-->
       <div class="order-js-list">
         <h1>
-          <p>申通快递</p>
-          <p>快递单号：<span>1234567890098</span></p>
+          <p>${purchaseOrderDelivery.logisticsCompany}</p>
+          <p>快递单号：<span>${purchaseOrderDelivery.serial}</span></p>
         </h1>
         <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
-        <div class="express-address">
+        <iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
+<%--        <div class="express-address">
           <div class="an-address">
             <div class="address-time">
               <p>2015-08-01</p>
@@ -117,13 +118,14 @@
               <p>北京西城区申通物流公司 已收件</p>
             </div>
           </div>
-        </div>
+        </div>--%>
       </div>
       <!--订单状态为已付款-->
       <!--一个商品-->
       <div class="order-js-list">
         <h1>${order.tenant.name}</h1>
         <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
+        <c:forEach items="${order.purchaseOrderProductList}" var="purchaseOrderProduct">
         <div class="am-g am-intro-bd">
           <div class="am-intro-left am-u-sm-5 item-act"><a href="#"><img class="am-u-sm-12 item-act" src="<c:url value="${purchaseOrderProduct.productModel.product.picture_url}"/>" alt="产品" /></a></div>
           <div class="am-intro-right am-u-sm-7 item-act">
@@ -131,6 +133,7 @@
             <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
           </div>
         </div>
+        </c:forEach>
         <div class="am-form-group">
           <div class="am-form-group">
             <p></p>

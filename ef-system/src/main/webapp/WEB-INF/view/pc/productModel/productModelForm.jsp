@@ -418,7 +418,7 @@
                     ' <input type="text" name="modelAmount" style="width: 23%;height: 30px;" value=""/>' +
                     '</td>' +
                     '<td align="center">' +
-                    ' <input type="text" name="modelPrice" style="width: 23%;height: 30px;" value=""/>' +
+                    ' <input type="text" name="modelPrice" style="width: 40%;height: 30px;" value=""/>' +
                     '</td>' +
                     '</tr>';
 

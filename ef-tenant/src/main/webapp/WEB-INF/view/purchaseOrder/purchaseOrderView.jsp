@@ -52,6 +52,34 @@
 
 <div class="am-g">
     <div class="am-u-md-12">
+        <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>下单人</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="am-primary am-u-md-3">下单人姓名</td>
+                <td class="am-u-md-3">${object.user.name}</td>
+                <td class="am-primary am-u-md-3">性别</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="sex" dataType="consumer.sex" checkedValue="${object.user.sex}" type="normal"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">账户余额</td>
+                <td class="am-u-md-3">${object.user.deposit}</td>
+                <td class="am-primary am-u-md-3">积分</td>
+                <td class="am-u-md-3">${object.user.score}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
         <h2>支付信息</h2>
     </div>
 

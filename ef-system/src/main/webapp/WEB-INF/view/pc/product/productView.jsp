@@ -173,6 +173,7 @@
                         <tbody>
                         <tr>
                             <th class="am-text-center" width="20%">预览</th>
+                            <th class="am-text-center" width="20%">规格名称</th>
                             <th class="am-text-center" width="20%">属性</th>
                             <th class="am-text-center" width="20%">库存</th>
                             <th class="am-text-center" width="20%">价格(元)</th>
@@ -184,6 +185,9 @@
                                     <a style="width: 10%;"  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="changeUrl('${model.id}')">
                                         生成预览
                                     </a>
+                                </td>
+                                <td class="am-text-center">
+                                       ${model.name}
                                 </td>
                                 <td class="am-text-center">
                                     <c:if test="${model.status == '1'}">
@@ -258,6 +262,16 @@
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
+
+                                                    <select onchange="setModelPic(this,'${productPicture.id}')">
+                                                        <option value="0">设置商品规格图片</option>
+                                                        <c:forEach var="productModel1" items="${object.productModelList}">
+                                                            <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+
+                                            </dd>
+                                            <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
                                             </dd>
                                         </dl>
@@ -298,6 +312,7 @@
 
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
+
                                             <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
                                             </dd>
@@ -338,6 +353,25 @@
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
+    function setModelPic(obj,pictureId){
+
+       var modelId = $(obj).val();
+
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/setModelPicture.do"/>',
+                cache: false,
+                dataType: "json",
+                data:{pictureId:pictureId.trim(),modelId:modelId},
+                success: function (data) {
+//                    $("#picUrl tr[name='" + divId + "']").remove();
+//                    $("#collapse-panel-1 li[name='" + divId + "']").remove();
+//                    $("#collapse-panel-3 li[name='" + divId + "']").remove();
+                }
+            });
+
+    }
+
 
     function changeUrl(id){
         var url = "http://www2.efeiyi.com/product/productModel/"+id;
@@ -345,6 +379,7 @@
 
     }
 
+   //复制图片地址
     function copyInit(obj){
 
         $(obj).zclip({
@@ -364,7 +399,8 @@
 
 
     }
-
+var modelIds = [];
+    var  modelNames = [];
     $(function(){
 
 
@@ -372,6 +408,12 @@
         $(".copy").each(function(){
             copyInit($(this));
         });
+
+
+        <c:forEach var="productModel1" items="${object.productModelList}">
+         modelIds.push('${productModel1.id}');
+        modelNames.push('${productModel1.name}');
+        </c:forEach>
 
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/product/uploadify.do?status=1&productId=${object.id}"/>',            // 服务器处理地址
@@ -421,6 +463,16 @@
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
+                        '</dd>'+
+                        '<dd style="width: 100%;text-align: center;" >'+
+                        '<select onchange="setModelPic(this,\''+pictureId+'\')">'+
+                        '<option value="0">'+'设置商品规格图片'+'</option>';
+                for(var n=0;n<modelIds.length;n++) {
+
+                    img +=  '<option value="'+modelIds[n]+ '">'+modelNames[n]+'</option>';
+
+                }
+                img += '      </select>'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="'+trueUrl+'">'+'复制图片地址'+'</a>'+

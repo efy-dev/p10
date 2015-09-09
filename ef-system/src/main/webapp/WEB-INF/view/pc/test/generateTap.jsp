@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -42,15 +43,16 @@
         </table>
     </div>
 </div>
-
+<%--url param target finish--%>
 <form action="/basic/xmm.do" enctype="multipart/form-data" method="post">
     <input type="hidden" name="qm" value="saveOrUpdateProduct">
+    <input type="text" data-efy-choose-input url="<c:url value="/do/saveOrUpdateChoose.do"/>" target="<c:url value="/do/generatePages.do?qm=plistProduct_default"/>" finish="<c:url value="/do/viewChoose.do"/>">
     <div class="am-form-group am-form-file">
         <i class="am-icon-cloud-upload"></i> 选择要上传的文件
         <input name="test" type="file" multiple>
     </div>
     <input type="submit" class="am-btm am-btn-default" value="提交">
 </form>
-
+<script src="<c:url value="/resources/js/choosePage.js?v=1"/> "></script>
 </body>
 </html>

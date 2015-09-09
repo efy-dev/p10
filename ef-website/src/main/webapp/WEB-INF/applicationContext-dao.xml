@@ -16,7 +16,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-                <prop key=" hibernate.query.substitutions">true 'Y', false 'N'</prop>
+                <prop key="hibernate.query.substitutions">true 'Y', false 'N'</prop>
                 <prop key="hibernate.ejb.use_class_enhancer">true</prop>
                 <!--<prop key="hibernate.cache.use_second_level_cache">false</prop>-->
                 <!--<prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>-->

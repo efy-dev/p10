@@ -97,19 +97,13 @@
                             </a>
                         </td>
                         <td class="am-text-center">
-                            <a href="#">
                                     ${purchaseOrderProduct.productModel.price}
-                            </a>
                         </td>
                         <td class="am-text-center">
-                            <a href="#">
                                     ${purchaseOrderProduct.purchaseAmount}
-                            </a>
                         </td>
                         <td class="am-text-center">
-                            <a href="#">
                                     ${purchaseOrderProduct.purchasePrice}
-                            </a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -14,7 +14,7 @@
 <!--//End--header-->
 <article class="bd shop-cart">
   <div class="bd cart-order">
-    <div class="bd order-address">
+    <div class="bd order-address" id="order-add">
       <c:forEach items="${addressList}" var="address">
         <c:if test="${address.status=='2'}">
           <a href="#btn-edit-addres" class="btn-edit-addres">
@@ -24,6 +24,13 @@
           </a>
         </c:if>
       </c:forEach>
+    </div>
+    <div class="bd order-address" id="order-add1" style="display: none">
+      <a href="#btn-edit-addres" class="btn-edit-addres">
+        <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span></p>
+        <p class="txt" id="txt">${address.province.name}${address.details}</p>
+        <a href="#arrow-right" class="arrow-right"></a>
+      </a>
     </div>
     <c:forEach items="${tenantList}" var="tenant">
       <div class="bd order-list">
@@ -57,14 +64,14 @@
     <div class="bd cart-pay">
       <div class="title">请选择支付方式</div>
       <ul class="ul-list">
-        <li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝"><i class="icon icon-zfb"></i>支 付 宝</a></li>
+        <li><a id="zhifubao" onclick="zhifubao(this)" title="支付宝" style="border: 2px solid red"><i class="icon icon-zfb"></i>支 付 宝</a></li>
         <li><a id="weixin" onclick="weixin(this)" title="微信支付"><i class="icon icon-wechat"></i>微 信 支 付</a></li>
       </ul>
     </div>
   </div>
   <!-- //End--cart-order-->
   <div class="bd payment-total-bar">
-    <span class="txt">共${purchaseOrder.purchaseOrderProductList.size()}件，总计付款${cart.totalPrice.intValue()}元</span>
+    <span class="txt">总计付款${cart.totalPrice.intValue()}元</span>
     <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
   </div>
 </article>
@@ -81,7 +88,7 @@
             <p class="bd title">${address.consignee}  ${address.phone}</p>
             <p class="bd des">${address.province.name}${address.details}</p>
             <p class="bd btns">
-              <input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}')">
+              <input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">
             </p>
           </li>
         </c:forEach>
@@ -103,7 +110,7 @@
     </div>
     <!--//ENd-->
     <ul class="ul-list">
-      <li>
+     <%-- <li>
         <input type="checkbox" name="" id="cbox1">
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
@@ -126,7 +133,7 @@
         <p>满500减50</p>
         <p>有效期：2012-09-09至2013-09-09</p>
         <p>适用范围：全网通用</p>
-      </li>
+      </li>--%>
     </ul>
 
     <div class="bd">
@@ -231,13 +238,19 @@
     }, "post")
   }
 
-  function chooseAddress(addressId) {
-    consumerAddress = addressId
+  function chooseAddress(addressId,consignee,phone,province,details) {
+    consumerAddress = addressId;
+    var conConsignee = consignee;
+    var conPhone = phone;
+    var conProvince = province;
+    var conDetails = details;
     console.log(consumerAddress);
-//    $("div[name=addressItem]").each(function () {
-//      $(this).attr("class", "default-text");
-//    })
-//    $(element).attr("class", "default-text default-active")
+    $("#order-add").attr("style","display:none");
+    $("#order-add1").attr("style","display:block");
+    $("#span1").text(conConsignee);
+    $("#span2").text(conPhone);
+    $("#txt").text(conProvince+conDetails);
+
   }
 
 
