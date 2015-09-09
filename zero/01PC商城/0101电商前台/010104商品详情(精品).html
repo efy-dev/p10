@@ -164,7 +164,7 @@
     </div>
 </div>
 <!-- //End--nav-share-->
-<div id="section1" class="section section1" style="display: block">
+<div id="section1" class="section section1">
     <div class="hd">
         <div class="img-bg"><img src="../shop2015/upload/fine-1.jpg" width="1200" alt=""/></div>
         <div class="info">
@@ -234,6 +234,12 @@
                     <li></li>
                     <li></li>
                 </ul>
+                <ul class="ul-snum">
+                    <li class="icon icon-glass"></li>
+                    <li class="t1">1</li>
+                    <li class="icon icon-line"></li>
+                    <li class="t2">7</li>
+                </ul>
             </div>
         </div>
         <!-- //End--part-left-->
@@ -287,8 +293,33 @@
     </div>
 </div>
 <!--//End--鉴赏-->
+<div id="section3" class="section section3">
+    <div class="hd">
+        <div class="img-btm"><em class="bg"></em><img src="../shop2015/upload/section3-1.jpg" alt=""/></div>
+        <div class="part-left">
+            <div class="sec-focus">
+                <video width="520" height="333" src="../shop2015/upload/video.mp4" preload controls></video>
+            </div>
+        </div>
 
+        <div class="part-right">
+            <div class="name">安格尔—公爵夫人肖像</div>
+            <div class="username">姚惠芬</div>
+            <div class="info">
+                <div class="info-tab" style="display: block;">
+                    <p>准备材料—选择底料—制作底稿—绣花线—绑线连捆线—刺绣</p>
+                </div>
+            </div>
+            <div class="btns">
+                <a class="btn-collect" href="#btn-collect" title="立即收藏">立 即 收 藏</a>
+            </div>
+        </div>
 
+        <div class="btn-arrow-down"><a class="icon" href=""></a></div>
+
+    </div>
+</div>
+<!--//End--技艺-->
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -311,8 +342,6 @@ $(function(){
 
     var wH=$(window).height();
 
-
-
     //导航点击
     $('.nav-share .nav .navli').click(function(){
         var index=$(this).index();
@@ -330,7 +359,6 @@ $(function(){
         }
         //点击详情弹出底部内容
         if(index==2){
-            timer=setInterval(autoSecFocus,1000);
             $('.nav-share .nav .btn-des1').hide().siblings('.btn-des2').show();
             $('.nav-share .nav').addClass('nav2');
         }
@@ -347,9 +375,15 @@ $(function(){
     })
 
 
+
+
+
+
+
     //section2 鉴赏
     var ulImgLi=$('#section2 .ul-img li');
     var ulNumLi=$('#section2 .ul-num li');
+    var ulSnumLi=$('#section2 .ul-snum li');
     var infoTab=$('#section2 .info-tab');
 
     ulImgLi.eq(0).show();
@@ -359,6 +393,7 @@ $(function(){
         $(this).addClass('active').siblings('li').removeClass('active');
         ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
         infoTab.eq($(this).index()).fadeIn().siblings('.info-tab').fadeOut();
+        ulSnumLi.eq(1).html($(this).index()+1);
     })
     var index=0;
 
@@ -368,13 +403,17 @@ $(function(){
             ulNumLi.eq(index).addClass('active').siblings('li').removeClass('active');
             ulImgLi.eq(index).fadeIn().siblings('li').fadeOut();
             infoTab.eq(index).fadeIn().siblings('.info-tab').fadeOut();
+            ulSnumLi.eq(1).html(index+1);
         }else{
             index=0;
             ulNumLi.eq(0).addClass('active').siblings('li').removeClass('active');
             ulImgLi.eq(0).fadeIn().siblings('li').fadeOut();
             infoTab.eq(0).fadeIn().siblings('.info-tab').fadeOut();
+            ulSnumLi.eq(1).html(index+1);
         }
     }
+
+
 
 
 

@@ -23,13 +23,16 @@
             </fields>
             <does>
                 <do name="plistPurchaseOrder" access="" label="购买订单"
-                    result="/purchaseOrder/purchaseOrderPList">
+                    result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition name="id" defaultValue="0" operation="ne" />
-                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq" />
+                        <condition name="id" defaultValue="0" operation="ne" label="订单id" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq" inputType="default"/>
                     </query>
-                    <query name="serial" label="订单号" type="auto" orderBy="serial:asc">
-                        <condition name="serial"  operation="eq" label="订单号" />
+                    <query name="serial" label="查询" type="auto" orderBy="createDatetime:desc">
+                        <condition name="orderStatus"  operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
+                        <condition name="serial"  operation="eq" label="订单号" inputType="text"/>
+                        <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>
@@ -61,8 +64,15 @@
                 <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="purchaseOrder.tenant.id" defaultValue="${MY_USER}" operation="eq" />
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="purchaseOrder.tenant.id" defaultValue="${MY_USER}" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" operation="eq" inputType="select_status" key="purchaseOrderDelivery.status" label="发货状态"/>
+                        <condition name="purchaseOrder.serial" operation="eq" inputType="text" label="订单号"/>
+                        <condition name="logisticsCompany" operation="likes" inputType="text" label="物流公司"/>
+                        <condition name="createDateTime" operation="ge" label="发货时间起" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="发货时间止" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
