@@ -14,7 +14,13 @@ public class ProductModelBean implements Serializable {
     private  String [] modelPrice;
     private  String [] modelStatus;
     private  String [] modelProperty;
+    private  String [] property;
     private  String productId;
+    private  String defaultId;
+    private  String defaultStatus;
+    private  String defaultName;
+    private  String defaultAmount;
+    private  String defaultPrice;
 
     public String getProductId() {
         return productId;
@@ -70,5 +76,54 @@ public class ProductModelBean implements Serializable {
 
     public void setModelProperty(String[] modelProperty) {
         this.modelProperty = modelProperty;
+    }
+
+
+    public String[] getProperty() {
+        return property;
+    }
+
+    public void setProperty(String[] property) {
+        this.property = property;
+    }
+
+    public String getDefaultId() {
+        return defaultId;
+    }
+
+    public void setDefaultId(String defaultId) {
+        this.defaultId = defaultId;
+    }
+
+    public String getDefaultStatus() {
+        return defaultStatus;
+    }
+
+    public void setDefaultStatus(String defaultStatus) {
+        this.defaultStatus = defaultStatus;
+    }
+
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
+    }
+
+    public String getDefaultAmount() {
+        return defaultAmount;
+    }
+
+    public void setDefaultAmount(String defaultAmount) {
+        this.defaultAmount = defaultAmount;
+    }
+
+    public String getDefaultPrice() {
+        return defaultPrice;
+    }
+
+    public void setDefaultPrice(String defaultPrice) {
+        this.defaultPrice = defaultPrice;
     }
 }

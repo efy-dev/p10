@@ -187,7 +187,7 @@ a:hover{text-decoration: underline}
 .my-order .editor a{font-family: "宋体";color:#fff;line-height: 24px;font-weight: normal;}
 .my-order .userinfo-datum{margin: 0 26px;padding-top: 46px;}
 .my-order .userinfo-datum li{font-family: "宋体";color:#666;font-size: 12px;font-weight: normal;line-height: 54px;height: 54px;}
-.my-order .userinfo-datum li label{width: 85px;text-align: right;font-weight: 100}
+.my-order .userinfo-datum li label{width: 80px;text-align: right;font-weight: 100}
 .my-order .userinfo-tex{width: 124px;height: 37px;border: 1px solid #ccc;padding: 10px 11px;font-family: "宋体";color:#000;font-size: 12px;}
 .my-order .userinfo-tex:active,.my-order .userinfo-tex:hover{border: 1px solid #000;}
 .my-order .userinfo-box{widht:11px;height:11px;line-height: 11px;}
@@ -195,7 +195,7 @@ a:hover{text-decoration: underline}
 .my-order .act1{float: left;height:38px;margin: 0}
 .my-order .am-btn{float: left;display: block;background: #fff;}
 .my-order .am-input-group .am-form-field{background: #fff;font-size: 12px;font-family: "宋体"; }
-.my-order .am-icon-calendar-1{width: 20px;height: 20px;background: url("../images/efeiyi-icon.png") no-repeat -17px 1px;}
+.my-order .am-icon-calendar-1{width: 20px;height: 20px;background: url("../images/efeiyi-icon.png") 160px 1px;}
 .my-order .userinfo-datum li select{border: 1px solid #ccc;color:#ccc;font-size: 14px;font-family: "宋体";padding:4px 13px;}
 .my-order .userinfo-datum li select option{color:#000;font-size: 12px;font-family: "宋体";}
 .my-order .userinfo-datum li .cars{width:96px;}
@@ -563,11 +563,42 @@ a:hover{text-decoration: underline}
 .binding-account  .binding-show1{padding-top: 75px!important;}
 /*账号绑定*/
 /*手机号绑定*/
-.binding-phone .phone-page{width: 851px;float: left;padding: 69px 0 0 108px;}
+.binding-phone .phone-page{width: 851px;float: left;padding: 69px 0px 141px 108px;border: 1px solid #ccc;}
 .binding-phone .phone-page li{margin-bottom: 20px;float: left;width: 100%;}
-.binding-phone .phone-page li label{width: 160px;text-align: right;font-size: 12px;font-family: "宋体";}
-.binding-phone .phone-page li input{width: 280px;height: 40px;padding:15px;font-size: 12px;font-family: "宋体";border: 1px solid #000}
+.binding-phone .phone-page li label{width: 160px;text-align: right;font-size: 12px;font-family: "宋体";font-weight: 100}
+.binding-phone .phone-page li p{padding:10px 0 0 160px;font-size: 12px;color: #11315f;}
+.binding-phone .phone-page li .phone-txt{width: 280px;height: 40px;padding:15px;font-size: 12px;font-family: "宋体";border: 1px solid #000}
+.binding-phone .phone-page li .phone-txt2:hover{background: #000;color: #fff;}
+.binding-phone .phone-page li .phone-txt2{transition: all 0.5s;margin-top: 36px;width: 280px;height: 40px;padding:15px;font-size: 12px;font-family: "宋体";border: 1px solid #000;background: #fff;}
+.binding-phone .phone-page li .text-yz{padding: 14px 25px;font-size: 12px;color:#ff9900;font-family: "宋体";border: 1px solid #000;text-decoration: none;}
+.binding-phone .phone-page li .text-yz:hover{background: #000;color: #fff;}
+.binding-phone .phone-page li .phone-txt1{width: 120px;height: 40px;padding: 15px;font-size: 12px;font-family: "宋体";border: 1px solid #000;margin-right: 20px;}
+.binding-phone .phone-page li .clq a{color:#ff9900;font-size: 12px;}
+.binding-phone .phone-page li .clq{color: #000;font-size: 12px;}
+.binding-phone  .successfully{margin: 0 auto;width: 333px!important;height: 30px;padding-left: 54px;background:url("../images/efeiyi-icon.png") no-repeat left -138px; font-size: 20px;font-weight: 500}
 /*手机号绑定*/
+/*我的订单付款*/
+.payment{width:1000px;margin: 0 auto;margin-top: 68px;padding:18px 24px;overflow:hidden;border: 1px solid #ccc;margin-bottom: 220px;}
+.payment .payment-phont{width: 100%;float: left;padding: 0 10px;}
+.payment .payment-phont dt{float: left;width: 660px;}
+.payment .payment-phont dd{float: right;width: 260px;text-align: right;padding-top:13px;}
+.payment .payment-phont dt .p1{font-size: 14px;color: #000;padding-bottom: 14px;}
+.payment .payment-phont dt .p2{font-size: 12px;color: #000;padding-bottom: 14px;}
+.payment .payment-phont dd span{font-family: "Adobe 黑体 Std";font-size: 14px;color: #000;}
+.payment .payment-phont dd span strong{color: #ff0000}
+.payment .payment-page{width: 100%;float: left;padding: 0 10px;}
+.payment .payment-page li{margin-bottom: 15px;font-size: 12px;}
+.payment .payment-page li span{margin-right: 8px;color: #999}
+.payment  .fold{float: left;width: 100%;padding:0 0 20px 10px;}
+.payment  .fold span{background: url("../images/efeiyi-icon.png") no-repeat right -117px;}
+.payment  .fold span .act-payment{color:#ff9900!important;font-size: 12px;padding-right: 10px;}
+.payment .btn-payment{border-top: 1px solid #ccc;width: 100%;float: left;padding: 40px 250px;}
+.payment .btn-payment a:hover{background-color: #000;color: #fff;}
+.payment .btn-payment .btn-payment-l{float: left;width: 172px;text-align: center}
+.payment .btn-payment .btn-payment-l a{width: 100%;height: auto;border: 1px solid #000;padding: 12px 50px;font-size: 12px;text-decoration: none}
+.payment .btn-payment .btn-payment-r{float: right;width: 172px;text-align: center}
+.payment .btn-payment .btn-payment-r a{width: 100%;height: auto;border: 1px solid #000;padding: 12px 50px;font-size: 12px;text-decoration: none}
+/*我的订单付款*/
 /*公共样式！商品推荐！精品推荐*/
 .recommend{width: 100%;float: left;margin-top: 45px;border:1px solid #ccc;}
 .recommend .topic{width: 100%;float: left;padding: 17px 20px;border-bottom: 1px solid #ccc;}
@@ -584,4 +615,44 @@ a:hover{text-decoration: underline}
 .recommend .car-left{position: absolute;width:20px;height: 41px;background: url(../images/efeiyi-gwc.png) no-repeat 0 -50px;left: 0;top:35%;cursor: pointer }
 .recommend .car-right{position: absolute;width:20px;height: 41px;background: url(../images/efeiyi-gwc.png) no-repeat -21px -50px;right: 0;top:35%;cursor: pointer }
 /*公共样式*/
-
+/*公共样式！通用弹出框*/
+.common-popup .common-put{width: 500px;height: 200px;border: 1px solid #000;position: fixed;left: 50%;top:50%;z-index: 9999;margin-top: -200px;margin-left:-317px;}
+.common-popup .cm-hint{font-size:14px;color:#000;width: 498px;height: 36px;padding:0 17px;border-bottom: 1px solid #000;line-height: 36px;position: relative;background: #fff;}
+.common-popup .x-close{width: 15px;height: 15px;position: absolute;top:11px;right: 17px;cursor: pointer;background:url(../images/efeiyi-icon.png) no-repeat }
+.common-popup .cm-pa-l{width: 53px;height: 44px;background:url(../images/efeiyi-icon.png) no-repeat 0 -185px;float: left}
+.common-popup .cm-pa-r{float: left;margin-left:40px;margin-top: 0}
+.common-popup .cm-page{width: 100%;float: left;padding:35px 60px;background: #fff;}
+.common-popup .common-bg{position: fixed;background:#000;opacity: 0.6;z-index: -1;right: 0;left: 0;bottom: 0;top: 0; }
+.common-popup .pa-r-one{font-size: 14px;color: #000;margin-bottom: 7px;float: left;width: 100%}
+.common-popup .pa-r-two{font-size: 12px;color: #666;margin-bottom: 15px;float: left;width: 100%}
+.common-popup .pa-r-3{font-size: 16px;color: #000;margin: 5px 0 20px 0;float: left;width: 100%}
+.common-popup .pa-r-1{width: 280px;}
+.common-popup .pr-r-a{padding: 7px 14px;border: 1px solid #000;float: left;font-size: 12px;margin-right: 20px;}
+.common-popup .pr-r-a:hover{text-decoration:none;background: #000;color: #fff;}
+.common-popup .cm-wz{width: 100%;padding:20px 0;}
+.common-popup .cm-wz .cm-wz-1{font-size: 16px;text-align: center;color: #000;margin-bottom: 14px;}
+.common-popup .cm-wz .cm-wz-2{font-size: 12px;color: #666;text-align: center;margin-bottom: 15px;}
+.common-popup .cm-wz .cm-wz-3{text-align: center}
+.common-popup .cp11{padding:12px 60px!important;}
+.common-popup .cp12{background: #fff;}
+.common-popup .cm-wz .cm-wz-3 a{font-size: 12px;padding:7px 14px;border: 1px solid #000;}
+.common-popup .cm-wz .cm-wz-3 a:hover{background: #000;color: #fff;text-decoration:none; }
+/*公共样式！通用弹出框*/
+/*退换货管理*/
+.management{width: 851px;height: 356px;line-height: 356px;border: 1px solid #ccc;text-align: center;float: left}
+.management p{font-size: 20px;}
+.management p .clr{color: #ff9900!important;font-size: 30px!important;font-family: "Arial";font-weight: 100}
+/*微信支付*/
+.scan-code{width: 950px;margin: 0 auto;overflow:hidden}
+.scan-code .scan-text{padding:37px 0;float: left;width: 100%;}
+.scan-code .scan-text ul{width: 100%;float: left;}
+.scan-code .scan-text ul li{width: 330px;}
+.scan-code .scan-text ul li strong{font-weight:100;color:#ff9900;font-size: 22px!important; }
+.scan-code .scan-text ul .tx1{float: left!important;text-align: left;font-size: 12px;color: #000;margin-top: 10px;}
+.scan-code .scan-text ul .tx2{float: right;text-align: right;font-size: 12px;color: #000;}
+.scan-code .scan-img-left{float: left;background: url("../images/efeiyi-wxzf.fw.png") no-repeat left top;width: 288px;height: 369px;}
+.scan-code .scan-img-right{float: right;background: url("../images/efeiyi-wxzf.fw.png") no-repeat right top;width: 352px;height: 369px;}
+.scan-code .scan-img{margin-bottom: 64px;padding:76px 148px;float:left;width: 100%;border-top:3px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px  solid #ccc; }
+/*注册修改兼容ie*/
+.login-form .msg-tips .msg{-ms-transform:none!important;}
+/*注册修改样式*/

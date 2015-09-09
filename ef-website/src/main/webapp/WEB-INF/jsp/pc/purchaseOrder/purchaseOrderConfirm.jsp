@@ -21,7 +21,7 @@
         <div class="clearing-site">
             <span class="clearing-left">收货人信息</span>
         <span class="clearing-right">
-            <a href="#">新增收货地址</a>
+            <a href="#" class="btn-cart-add">新增收货地址</a>
              <div class="active-pop" style="display: none">
                  <div class="pop-up">
                      <div class="pop-h">编辑收货人信息
@@ -77,7 +77,7 @@
                 <div class="page-default">
             <span>
                 <c:if test="${address.status=='2'}">
-                <div id="${address.id}" class="default-text triangle activeFlag" name="addressItem"
+                <div id="${address.id}" class="default-text triangle" name="addressItem"
                      onclick="chooseAddress(this,'${address.id}')">
                     </c:if>
                     <c:if test="${address.status=='1'}">
@@ -107,8 +107,9 @@
             <span class="clearing-left">支付方式</span>
         </div>
         <div class="page-clearing ">
-            <li id="zhifubao" class="alipay triangle " onclick="zhifubao(this)">
+            <li id="zhifubao" class="alipay wechat-active" onclick="zhifubao(this)">
                 <span>支 付 宝</span>
+                <i class="triangle" style="display: block"></i>
             </li>
             <li id="weixin" class="alipay " onclick="weixin(this)">
                 <span>微   信</span>
@@ -119,7 +120,7 @@
         <div class="clearing-site divtop">
             <span class="clearing-left">订货清单</span>
         <span class="clearing-right">
-            <a class="btn-cart-add" href="<c:url value="/cart/view"/> ">返回修改购物车</a>
+            <a  href="<c:url value="/cart/view"/>" onclick="window.location.href='<c:url value="/cart/view"/>'">返回修改购物车</a>
         </span>
         </div>
         <c:forEach items="${tenantList}" var="tenant">
@@ -139,7 +140,7 @@
                                 <tr>
                                     <td width="542">
                                         <div class="cols1 page-pdl">
-                                            <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
+                                            <img src="${product.productModel.product.picture_url}" alt=""/>
 
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -198,12 +199,14 @@
     var payment = "1";
     var consumerAddress = "";
     if ($(".default-active") != null) {
-        consumerAddress = $(".activeFlag").attr("id");
+        consumerAddress = $(".default-active").attr("id");
     }
 
     function zhifubao(element) {
-        $(element).attr("class", "alipay triangle");
+        $(element).attr("class", "alipay wechat-active");
         $("#weixin").attr("class", "alipay");
+        $("#weixin").find("i").remove();
+        $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "1";
     }
 
@@ -215,8 +218,10 @@
     }
 
     function weixin(element) {
-        $(element).attr("class", "alipay triangle");
+        $(element).attr("class", "alipay wechat-active");
         $("#zhifubao").attr("class", "alipay");
+        $("#zhifubao").find("i").remove();
+        $(element).append('<i class="triangle" style="display: block"></i>')
         payment = "3";
     }
     function submitOrder(orderId) {
@@ -295,19 +300,19 @@
         $("div[name=addressItem]").each(function () {
             $(this).attr("class", "default-text");
         })
-        $(element).attr("class", "default-text triangle")
+        $(element).attr("class", "default-text default-active")
     }
 
-    $().ready(function () {
-        $("#newAddress").validate({
-            rules: {
-                consignee: "required",
-                details: "required",
-                name: "required",
-                phone: "required",
-            },
-        });
-    });
+//    $().ready(function () {
+//        $("#newAddress").validate({
+//            rules: {
+//                consignee: "required",
+//                details: "required",
+//                name: "required",
+//                phone: "required",
+//            },
+//        });
+//    });
 
 </script>
 </body>

@@ -13,7 +13,7 @@
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
-            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTMaster_default&tenantId=${tenantId}"/>">关联大师</a>
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/master/toTenantMaster.do?tenantId=${tenantId}"/>">关联大师</a>
         </div>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
@@ -30,7 +30,7 @@
                 <c:forEach items="${objectList}" var="tenantMaster" end="4">
                     <tr id="${tenantMaster.id}">
                         <td>
-                            <a id="${master.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','是否删除',function(){removeTenantMaster('${tenantMaster.id}')})"><span
+                            <a id="${master.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','是否删除',function(){removeTenantMaster('${tenantMaster.tenant.id}','${tenantMaster.master.id}','${tenantMaster.id}')})"><span
                                     class="am-icon-pencil-square-o"></span> 解除商家
                             </a>
                         </td>
@@ -50,15 +50,16 @@
     </div>
 
 <script>
-    function removeTenantMaster(divId){
+    function removeTenantMaster(tenantId,masterId,tenantMasterId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeTenantMaster"/>',
+            url: '<c:url value="/master//linkTenant.do"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data:{tenantId:tenantId,masterId:masterId,tenantMasterId:tenantMasterId,status:"1"},
             success: function (data) {
-                $("#"+divId).remove();
+//                $("#"+divId).remove();
+                location.reload();
             }
         });
     }

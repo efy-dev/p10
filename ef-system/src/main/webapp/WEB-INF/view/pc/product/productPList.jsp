@@ -61,33 +61,15 @@
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <c:if test="${not empty product.tenant}">
-                                                <c:set var="tenantId" value="${product.tenant.id}"/>
-                                            </c:if>
-                                            <c:if test="${empty product.tenant}">
-                                                <c:set var="tenantId" value="0"/>
-                                            </c:if>
-                                            <c:if test="${not empty product.master}">
-                                                <c:set var="masterId" value="${product.master.id}"/>
-                                            </c:if>
-                                            <c:if test="${empty product.master}">
-                                                <c:set var="masterId" value="0"/>
-                                            </c:if>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}"/>">
                                                 修改基本信息
                                             </a>
                                             <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&view=${view}&id=${product.id}"/>">--%>
                                                 <%--修改描述--%>
                                             <%--</a>--%>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${product.id}"/>">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${product.id}"/>">
                                                 修改规格
                                             </a>
-                                            <%--<c:if test="${view == 'newProduct'}">--%>
-                                                <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=plistTenantProduct_default&productId=${product.id}&view=${view}"/>">--%>
-                                                    <%--关联商家--%>
-                                                <%--</a>--%>
-                                            <%--</c:if>--%>
-
                                             <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">--%>
                                                 <%--修改图片--%>
                                             <%--</a>--%>

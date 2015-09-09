@@ -280,7 +280,6 @@
         var obj = eval(data);
         var out = '<option value="">请选择</option>';
         for (var i = 0; i < obj.length; i++) {
-          console.log(obj[i]+"----"+obj[i]);
           out += '<option value="' + obj[i]["id"] + '">' + obj[i]["name"] + '</option>';
         }
         $("#${object.id}").append(out);
@@ -327,7 +326,6 @@
               fileTypeDesc: "请选择图片文件",           //文件说明
               formData: { "imgType": "normal" }, //提交给服务器端的参数
               onUploadSuccess: function (file, data) {   //一个文件上传成功后的响应事件处理
-                  console.log(data);
                   data = data.substring(1,data.length-1)
                   var tenantId = data.split(":")[0].trim();
                   var  imgUrl = data.split(":")[1];

@@ -1,7 +1,6 @@
 package com.efeiyi.ec.project.model;
 
 import com.efeiyi.ec.product.model.Product;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "base_recommended")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectCategoryRecommended implements Serializable{
     private String id;
     private ProjectCategory projectCategory;

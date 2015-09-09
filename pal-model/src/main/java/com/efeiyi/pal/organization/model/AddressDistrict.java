@@ -18,6 +18,7 @@ public class AddressDistrict implements Serializable {
     private String id;
     private String name;
     private AddressCity addressCity;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -41,7 +42,7 @@ public class AddressDistrict implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "opened_city_id")
     @NotFound(action= NotFoundAction.IGNORE)
     public AddressCity getAddressCity() {
         return addressCity;
@@ -49,6 +50,15 @@ public class AddressDistrict implements Serializable {
 
     public void setAddressCity(AddressCity addressCity) {
         this.addressCity = addressCity;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

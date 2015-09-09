@@ -1,10 +1,7 @@
 package com.efeiyi.ec.system.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterDao;
-import com.efeiyi.ec.tenant.model.Tenant;
-import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
@@ -105,34 +102,6 @@ public class MasterController {
         model.addAttribute("objectList",masterList);
         model.addAttribute("tenantId",tenantId);
         return "/tenantMaster/masterList";
-    }
-
-    @RequestMapping("/master//linkTenant.do")
-    @ResponseBody
-    public String linkTenant(String tenantId,String masterId,String tenantMasterId,String status){
-        TenantMaster tenantMaster = null;
-        try {
-            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
-            if(tenantMaster == null){
-                tenantMaster = new TenantMaster();
-                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
-                tenantMaster.setStatus("1");
-            }else {
-                if("0".equals(status)){
-                    tenantMaster.setStatus("1");
-                }
-                if("1".equals(status)){
-                    tenantMaster.setStatus("0");
-                }
-            }
-            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return  tenantMaster.getId();
     }
 
 }

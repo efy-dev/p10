@@ -1,3 +1,4 @@
+<!doctype html>
 <%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ page import="com.ming800.core.util.HttpUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
