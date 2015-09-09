@@ -24,8 +24,7 @@
 
   <fieldset>
     <legend class="" style="font-size: 17px">商品信息</legend>
-    <%--<form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
-      <form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="qm" value="saveOrUpdateProduct">
       <input type="hidden" name="resultPage" value="0" />

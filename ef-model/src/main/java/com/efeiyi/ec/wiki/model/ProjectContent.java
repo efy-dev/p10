@@ -1,11 +1,7 @@
 package com.efeiyi.ec.wiki.model;
 
-import com.efeiyi.ec.organization.model.AddressCity;
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,10 +18,6 @@ public class ProjectContent {
     private ProjectCategory category;
     private Master creator;
     private Date createDatetime;
-    private String type;
-    private Project project;
-    private AddressCity city;
-
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -74,24 +66,5 @@ public class ProjectContent {
 
     public void setCreateDatetime(Date createDatetime) {
         this.createDatetime = createDatetime;
-    }
-    @Column(name="type")
-    public String getType() { return type; }
-
-    public void setType(String type) { this.type = type; }
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name="project_id")
-    @JsonIgnore
-    public Project getProject() {return project;}
-
-    public void setProject(Project project) {this.project = project;}
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="city_id")
-    public AddressCity getCity() {
-        return city;
-    }
-
-    public void setCity(AddressCity city) {
-        this.city = city;
     }
 }

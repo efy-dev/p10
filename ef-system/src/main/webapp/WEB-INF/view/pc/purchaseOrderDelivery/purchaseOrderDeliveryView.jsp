@@ -84,12 +84,12 @@
     </div>
 </div>
 
-<%--<div class="am-g">--%>
-    <%--<div class="am-u-md-12">--%>
-        <%--<th>商家产品信息</th>--%>
-        <%--<jsp:include flush="true"--%>
-                     <%--page="/basic/xm.do?qm=listProduct_tenant&conditions=tenant.id:${object.purchaseOrder.tenant.id}"/>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <th>商家产品信息</th>
+        <jsp:include flush="true"
+                     page="/basic/xm.do?qm=listProduct_tenant&conditions=tenant.id:${object.purchaseOrder.tenant.id}"/>
+    </div>
+</div>
 </body>
 </html>

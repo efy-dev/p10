@@ -23,12 +23,6 @@
           <li>
             <label>手机号</label>
             <input type="text" name="username" class="txt" placeholder="已验证过的手机号码" maxlength="11" required>
-            <c:if test="${!empty error}">
-              <label class="msg-tips">
-                <span class="msg">！您输入的密码错误，请核对后再输入或<a href="<c:url value="/forgetPwd"/>">找回密码</a></span>
-                <span class="tips1">！您输入的密码错误，请核对后再输入或<a href="<c:url value="/forgetPwd"/>">找回密码</a></span>
-              </label>
-            </c:if>
           </li>
           <li>
             <label>密码</label>

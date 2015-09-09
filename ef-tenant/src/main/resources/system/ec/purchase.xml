@@ -36,7 +36,7 @@
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>
-                <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView" />
+                <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler"/>
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
                 <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
                 <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderSaveSuccess"/>
@@ -130,6 +130,8 @@
                 </do>
 
                 <do name="removePurchaseOrderProduct" label="删除购买订单" access="" result="json"/>
+                <do name="viewPurchaseOrderProduct" label="查看购买订单产品" access=""
+                    result="/purchaseOrderProduct/purchaseOrderProductView"/>
                 <do name="formPurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductForm"></do>
                 <do name="saveOrUpdatePurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductSaveSuccess"></do>
                 <do name="listPurchaseOrderProduct" label="购买订单列表" access="" result="/purchaseOrderProduct/purchaseOrderProductList">
