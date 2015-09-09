@@ -25,7 +25,8 @@
                 <td class="am-u-md-3">${object.serial}</td>
                 <td class="am-primary am-u-md-3">交易状态</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${object.orderStatus}" type="normal"  />
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                    checkedValue="${object.orderStatus}" type="normal"/>
                 </td>
             </tr>
             <tr>
@@ -39,7 +40,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
                 </td>
                 <td class="am-primary am-u-md-3">收货地址</td>
                 <td class="am-u-md-3">${object.consumerAddress.details}</td>
@@ -71,18 +72,20 @@
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment">
                 <tr>
                     <td class="am-hide-sm-only">
-                        ${purchaseOrderPayment.transactionNumber}
+                            ${purchaseOrderPayment.transactionNumber}
                     </td>
                     <td class="am-hide-sm-only">${purchaseOrderPayment.serial}</td>
                     <td class="am-hide-sm-only">
                             ${purchaseOrderPayment.paymentAmount}
                     </td>
                     <td class="am-hide-sm-only">
-                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay" checkedValue="${purchaseOrderPayment.payWay}" type="normal"  />
+                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                        checkedValue="${purchaseOrderPayment.payWay}" type="normal"/>
                     </td>
                     <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
                     <td class="am-hide-sm-only">
-                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}" type="both"
+                                        pattern="YYYY-MM-dd HH:mm"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -111,7 +114,8 @@
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery">
                 <tr>
                     <td class="am-hide-sm-only">
-                        <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm" />
+                        <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}" type="both"
+                                        pattern="YYYY-MM-dd HH:mm"/>
                     </td>
                     <td class="am-hide-sm-only">
                             ${purchaseOrderDelivery.consumerAddress.details}
@@ -136,7 +140,6 @@
             <tr>
                 <th class="table-set">图片</th>
                 <th class="table-title">商品编号</th>
-                <th class="table-title">商品名称</th>
                 <th class="table-title">单价(元)</th>
                 <th class="table-title">数量</th>
                 <th class="table-title">实付款</th>
@@ -144,35 +147,27 @@
             </thead>
             <tbody>
 
-            <c:forEach var="purchaseOrderProduct" items="${object.purchaseOrderProductList}" >
+            <c:forEach var="purchaseOrderProduct" items="${object.purchaseOrderProductList}">
                 <tr>
                     <td>
-                        <img width="30px;" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo" alt="商品图片">
-                    </td>
-                    <td>
-                        <a href="#">
-                                ${purchaseOrderProduct.productModel.serial}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#">
+                        <img width="30px;"
+                             src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo"
+                             alt="商品图片">
+                        <a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderProduct.id}"/>">
                                 ${purchaseOrderProduct.productModel.product.name}
                         </a>
                     </td>
                     <td>
-                        <a href="#">
-                                ${purchaseOrderProduct.productModel.price}
-                        </a>
+                                ${purchaseOrderProduct.productModel.serial}
                     </td>
                     <td>
-                        <a href="#">
-                                ${purchaseOrderProduct.purchaseAmount}
-                        </a>
+                            ${purchaseOrderProduct.productModel.price}
                     </td>
                     <td>
-                        <a href="#">
-                                ${purchaseOrderProduct.purchasePrice}
-                        </a>
+                            ${purchaseOrderProduct.purchaseAmount}
+                    </td>
+                    <td>
+                            ${purchaseOrderProduct.purchasePrice}
                     </td>
                 </tr>
             </c:forEach>
