@@ -433,14 +433,7 @@ html, body {
 .header-fine .mask.visible {display:block}
 .header-fine .nav-links {top:30px;left:-1138px;z-index:50;border:0;background:#fff}
 .header-fine .nav li.hover .bgbor {width:140px;border:0;border-top:1px #000 solid;top:0}
-
-
-
-#section1 {background:#000}
-#section2 {background:#000}
-#section3 {background:#ccc}
-.section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box}
-.section .hd {height:720px;position:relative;overflow:hidden}
+/*--//End--*/
 .nav-share {width:1200px;position:fixed;top:88px;left:50%;margin-left:-600px;z-index:2}
 .nav-share .share {position:absolute;top:0;left:0}
 .nav-share .jiathis_style {width:200px;position:absolute;top:15px;left:13px}
@@ -464,6 +457,12 @@ html, body {
 .nav-share .nav2 li .line {background:#000}
 .nav-share .nav2 li .icon-top {background-position:-177px -95px}
 .nav-share .nav2 li .icon-down {background-position:-177px -103px}
+/*--//ENd--*/
+.section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box;}
+.section .hd {height:720px;position:relative;overflow:hidden}
+.section .btn-arrow-down {width:32px;height:15px;position:absolute; bottom:20px;left:50%;margin-left:-16px}
+.section .btn-arrow-down .icon {background-position:-40px -68px;-webkit-animation:arrowGo 1s infinite linear;width:32px;height:15px;float:left}
+.section1 { background: #000;}
 .section1 .img-bg img {width:100%;height:720px}
 .section1 .info {position:absolute;top:50%;margin-top:-90px;right:37px;color:#fff;font-size:14px}
 .section1 .info .name {width:200px;position:absolute;top:-100px;right:0;text-align:right}
@@ -473,8 +472,6 @@ html, body {
 .section1 .btn-add {position:absolute;top:670px;right:214px}
 .section1 .btn-add a {width:212px;line-height:36px;text-align:center;color:#fff;background:#000;border:1px #fff solid;float:left;font-family:FangSong}
 .section1 .btn-add a:hover {text-decoration:none;background:#fff;color:#000}
-.section1 .btn-arrow-down {width:32px;height:15px;position:absolute;top:670px;left:50%;margin-left:-16px}
-.section1 .btn-arrow-down .icon {background-position:-40px -68px;-webkit-animation:arrowGo 1s infinite linear;width:32px;height:15px;float:left}
 .section1 .sec-details {background:#fff;width:100%;min-width:1200px;padding:20px 40px;position:absolute;bottom:-477px;left:0}
 .section1 .sec-details .icon-close {background-position:-122px -95px;width:22px;height:22px;position:absolute;top:20px;right:20px;cursor:pointer}
 .section1 .sec-details .part {width:100%;float:left;margin-bottom:20px}
@@ -486,6 +483,7 @@ html, body {
 .section1 .sec-details .ul-txt li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333}
 .section1 .sec-details .ul-txt li {width:48%;float:left;margin-right:2%}
 /*--//End--section1--*/
+.section2 { background: #000;}
 .section2 .part-left,
 .section2 .part-right {width:50%;height:100%;float:left;position:relative}
 .section2 .part-right {background:#fff;float:right}
@@ -499,22 +497,33 @@ html, body {
 .section2 .part-left .sec-focus .ul-num {position:absolute;bottom:20px;left:60px;z-index:2}
 .section2 .part-left .sec-focus .ul-num li {width:8px;height:8px;background:#9aa1b8;border-radius:4px;float:left;margin:0 7px;cursor:pointer}
 .section2 .part-left .sec-focus .ul-num li.active {background:#900}
-
-.section2 .part-right .name {width:30px; line-height:20px; font-style: italic;position: absolute;top:40px; left:30px; font-size: 18px; color: #000; font-weight: bold;}
-.section2 .part-right .username {width:30px; line-height:20px; font-style: italic;position: absolute;bottom:53px; left:30px; font-size: 18px; color: #000; font-weight: bold;}
-.section2 .part-right .info-tab {width:100%;position: absolute;top:360px; left: 0; text-align: center; display: none;}
-.section2 .part-right .info-tab p { font-size:12px; line-height: 24px; font-weight: bold;}
+.section2 .part-left .sec-focus .ul-snum {width:19px;position: absolute;bottom:20px;left:20px;z-index:2; color: #fff;}
+.section2 .part-left .sec-focus .ul-snum li { float: left;}
+.section2 .part-left .sec-focus .ul-snum .icon-glass { background-position:-191px -94px; width: 19px; height: 17px;}
+.section2 .part-left .sec-focus .ul-snum .icon-line { background-position:-34px -119px; width: 19px; height: 3px;}
+.section2 .part-left .sec-focus .ul-snum .t1 {font-size:36px;}
+.section2 .part-left .sec-focus .ul-snum .t2 { font-size: 16px; margin-left:3px;}
+.section2 .part-right .name {width:30px; line-height:20px; font-style: italic;position: absolute;top:40px; left:30px; font-size: 18px; color: #000;}
+.section2 .part-right .username {width:30px; line-height:20px; font-style: italic;position: absolute;bottom:53px; left:30px; font-size: 18px; color: #000;}
+.section2 .part-right .info-tab {width:300px;position: absolute;top:360px; left:50%; margin-left:-150px; text-align: center; display: none;}
+.section2 .part-right .info-tab p { font-size:12px; line-height: 24px;}
 .section2 .part-right .btns .btn-collect {width:212px;line-height:36px; border: 1px solid #000; text-align: center; color: #000; position: absolute;bottom:53px; left:50%; margin-left:-106px; font-family: FangSong; font-size:14px;}
 .section2 .part-right .btns .btn-collect:hover,
 .section2 .part-right .btns .btn-collect.active{ text-decoration: none; border: 1px solid #666;}
 /*--//End--section2--*/
-
-
-
-
-
-
-
+.section3 {background:#626262}
+.section3 .img-btm {width:100%; height:100%; position: absolute; top:0; left:0;}
+.section3 .img-btm em {background: url(../images/section3-bg.png) repeat;width:100%; height:100%; position:absolute;top:0; left: 0;}
+.section3 .part-left,
+.section3 .part-right {width:50%;height:100%;float:left;position:relative;}
+.section3 .part-left .sec-focus {width:520px;height:334px;position: absolute;top:50%; margin-top:-167px;left:40px;}
+.section3 .part-right .name {width:30px; line-height:20px; font-style: italic;position: absolute;top:40px; left:30px; font-size: 18px; color: #fff}
+.section3 .part-right .username {width:30px; line-height:20px; font-style: italic;position: absolute;bottom:53px; left:30px; font-size: 18px; color: #fff}
+.section3 .part-right .info-tab {width:300px;position: absolute;top:360px; left:50%; margin-left:-150px; text-align: center}
+.section3 .part-right .info-tab p {font-size:12px; line-height: 24px; color: #fff;}
+.section3 .part-right .btns .btn-collect { background:rgba(0, 0, 0, 0.8)000;width:212px;line-height:36px; border: 1px solid #fff; text-align: center; color: #fff; position: absolute;bottom:53px; left:50%; margin-left:-106px; font-family: FangSong; font-size:14px;}
+.section3 .part-right .btns .btn-collect:hover,
+.section3 .part-right .btns .btn-collect.active{ text-decoration: none; background: #fff; color: #000;}
 
 
 

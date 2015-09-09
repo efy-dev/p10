@@ -139,21 +139,23 @@
                 <match url="/basic/xm.do?qm=plistMaster_default"/>
                 <match url="/basic/xm.do?qm=formMaster&amp;form=master&amp;param=master"/>
                 <match url="/basic/xm.do?qm=viewMaster&amp;view=master"/>
-                <!--<match url="/basic/xm.do?qm=formMaster"/>-->
-                <!--<match url="/basic/xm.do?qm=removeMaster"/>-->
-                <!--<match url="/basic/xm.do?qm=/basic/xm.do?qm=viewMaster"/>-->
-                <!--<match url="/basic/xm.do?qm=formMasterWorkShop"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMasterWorkShop"/>-->
-                <!--<match url="/basic/xm.do?qm=formMasterIntroduction"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMasterIntroduction"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMasterWork"/>-->
-                <!--<match url="/basic/xm.do?qm=formMasterWork"/>-->
-                <!--<match url="/basic/xm.do?qm=plistMasterWork_byProject"/>-->
-                <!--<match url="/basic/xm.do?qm=listProject_default"/>-->
-                <!--<match url="/basic/xm.do?qm=formMasterNews"/>-->
-                <!--<match url="/basic/xm.do?qm=viewMasterNews"/>-->
-                <!--<match url="/basic/xm.do?qm=saveOrUpdateMasterWork"/>-->
-                <!--<match url="/basic/xm.do?qm=saveOrUpdateMasterProject"/>-->
+                <match url="/basic/xm.do?qm=formMaster"/>
+                <match url="/basic/xm.do?qm=removeMaster"/>
+                <match url="/basic/xm.do?qm=/basic/xm.do?qm=viewMaster"/>
+                <match url="/basic/xm.do?qm=formMasterWorkShop"/>
+                <match url="/basic/xm.do?qm=viewMasterWorkShop"/>
+                <match url="/basic/xm.do?qm=formMasterIntroduction"/>
+                <match url="/basic/xm.do?qm=viewMasterIntroduction"/>
+                <match url="/basic/xm.do?qm=viewMasterWork"/>
+                <match url="/basic/xm.do?qm=formMasterWork"/>
+                <match url="/basic/xm.do?qm=plistMasterWork_byProject"/>
+                <match url="/basic/xm.do?qm=listProject_default"/>
+                <match url="/basic/xm.do?qm=formMasterNews"/>
+                <match url="/basic/xm.do?qm=viewMasterNews"/>
+                <match url="/basic/xm.do?qm=saveOrUpdateMasterWork"/>
+                <match url="/basic/xm.do?qm=saveOrUpdateMasterProject"/>
+                <match url="/basic/xm.do?qm=viewMaster"/>
+
             </jnode>
 
             <jnode url="/basic/xm.do?qm=plistMasterRecommended_default" access="admin,manager" text_zh_CN="传承人推荐">
@@ -204,8 +206,16 @@
     </jnode>
 
     <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科网站">
-        <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
+       <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
             <match url="plistProjectContent_default"/>
+        </jnode>-->
+        <jnode url="" id="WikiCategoryManager" access="admin" state="closed" text_zh_CN="非遗百科管理">
+            <jnode url="/basic/xm.do?qm=plistProjectWiki_default" access="admin,manager" text_zh_CN="非遗百科项目列表">
+                <match url="/basic/xm.do?qm=plistProjectWiki_default"/>
+                <match url="/basic/xm.do?qm=formProjectContent"/>
+                <match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>
+            </jnode>
+
         </jnode>
         <jnode url="/basic/xm.do?qm=plistProjectNews_default" access="admin,manager" text_zh_CN="资讯">
             <match url="plistProjectNews_default"/>

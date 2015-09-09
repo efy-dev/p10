@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
-
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}&tenantId=${tenantId}"/>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -98,7 +98,7 @@
                                     ${projectCategory.serial}
                             </td>
                             <td>
-                                <img src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
+                                <img  width="10%" src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
                             </td>
                         </tr>
                     </c:forEach>

@@ -15,23 +15,61 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="<c:url value='/scripts/jquery-1.11.1.min.js'/>"></script>
 </head>
 <body>
-<table <%--class="am-table am-table-bordered am-table-striped am-table-compact"--%>>
-    <tr>
-        <td>百科内容id</td>
-        <td>百科内容</td>
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目" />
+</div>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+<table class="am-table am-table-bordered am-table-radius am-table-striped" >
+    <tr style="text-align: left">
+        <td  width="25%">操作</td>
+        <td  width="25%">项目名称</td>
+        <td  width="10%">项目类别</td>
+        <td  width="20%">日期</td>
+        <td  width="20%">城市</td>
     </tr>
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="projectContent">
-        <tr>
-            <td>${projectContent.id}</td>
-            <td>${projectContent.content}</td>
+
+    <c:forEach items="${requestScope.pageInfo.list}" var="ProjectContent">
+        <tr style="text-align: left">
+            <td>
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                        <button   onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 内容管理</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProject&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeProject&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>
+                    </div>
+                </div>
+            </td>
+            <td width="25%">
+
+                <a href="<c:url value="/basic/xm.do?qm=viewProject&param=project&id=${ProjectContent.id}"/>" >
+                        ${ProjectContent.project.name}
+                </a>
+
+            </td>
+            <td width="10%">
+
+                <c:choose>
+                    <c:when test="${ProjectContent.type == 1}">
+                        内容类型
+                    </c:when>
+                    <c:when test="${ProjectContent.type == 2}">
+                        固定类型
+                    </c:when>
+                    <c:otherwise/>
+                </c:choose>
+            </td>
+            <td width="20%">
+                    ${ProjectContent.createDatetime}
+            </td>
+            <td width="20%">
+                    ${ProjectContent.city.name}
+            </td>
         </tr>
+
     </c:forEach>
-
-
 </table>
 <div style="clear: both">
     <c:url value="/basic/xm.do" var="url"/>
@@ -40,5 +78,6 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
+
 </body>
 </html>

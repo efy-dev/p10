@@ -63,8 +63,8 @@
                 <do name="removeMaster" label="删除大师" access="" result="json"
                     execute="com.efeiyi.ec.system.master.controller.DeleteMasterRecommendedHandler"/>
                 <do name="listMaster" label="传承人列表" access="" result="/master/masterList">
-                    <query name="default" label="默认" type="auto" orderBy="id: desc">
-                        <condition label="主键" name="id" defaultValue="0" peration="ne"/>
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="主键" name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="listMaster2" label="传承人列表" access=""
@@ -583,7 +583,28 @@
 
             </does>
         </entity>
-
+        <entity name="MasterMessage" label="传承人新闻动态"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.MasterMessage">
+            <fields>
+                <field name="type" label="新闻类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="文本" value="1"/>
+                        <item label="附件" value="2"/>
+                        <item label="超链接" value="3"/>
+                        <item label="视频" value="4"/>
+                        <item label="作品" value="5"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="listMasterMessage" label="大师著作产品" access="" result="json">
+                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="新闻动态Id" name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
 
     </entities>
 </module>
