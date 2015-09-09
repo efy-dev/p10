@@ -15,9 +15,8 @@ import javax.persistence.*;
 public class ProductPicture {
     private String id;
     private String pictureUrl;
-    private String status;//1:商品图片 2: 主图片 3:详情页的图片
+    private String status;//2: 主图片 3:详情页的图片
     private Product product;
-    private ProductModel productModel;//规格商品
  //   private Integer sort;
 
     @Id
@@ -61,13 +60,5 @@ public class ProductPicture {
         this.status = status;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_model_id")
-    public ProductModel getProductModel() {
-        return productModel;
-    }
 
-    public void setProductModel(ProductModel productModel) {
-        this.productModel = productModel;
-    }
 }
