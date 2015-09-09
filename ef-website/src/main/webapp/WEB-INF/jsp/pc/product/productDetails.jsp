@@ -54,7 +54,9 @@
       <div class="slider-img">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+            <c:if test="${productPicture.status=='1'}">
             <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
+           </c:if>
           </c:forEach>
         </ul>
       </div>
