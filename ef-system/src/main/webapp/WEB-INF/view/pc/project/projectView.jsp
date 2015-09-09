@@ -42,6 +42,10 @@
                 <td class="am-u-md-3">
                     <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
                 </td>
+                <td class="am-primary am-u-md-3"></td>
+                <td class="am-u-md-3">
+
+                </td>
             </tr>
             </tbody>
         </table>

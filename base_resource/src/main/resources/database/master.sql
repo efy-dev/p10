@@ -360,3 +360,7 @@ MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NUL
 //自定义属性
 ALTER TABLE `product_model`
 ADD COLUMN `custom_property`  varchar(255) NULL AFTER `product_description_id`;
+//设置规格图片
+ALTER TABLE `product_picture`
+ADD COLUMN `product_model_id`  char(16) NULL AFTER `status`;
+
