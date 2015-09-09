@@ -5,8 +5,6 @@ import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -23,9 +21,11 @@ public class Tenant {
 
     private String id;
     private String name;
-    private AddressProvince province;
-    private AddressCity city;
-    private AddressDistrict district;
+//    private AddressProvince province;
+//    private AddressDistrict address;
+    private String province;
+    private String city;
+    private String address;
     private String status;
     private List<TenantCertification> tenantCertificationList;
     private List<TenantProductSeries> tenantProductSeriesList;
@@ -51,40 +51,53 @@ public class Tenant {
         this.name = name;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id")
-    @NotFound(action= NotFoundAction.IGNORE)
-    public AddressProvince getProvince() {
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "province_id")
+//    public AddressProvince getProvince() {
+//        return province;
+//    }
+//
+//    public void setProvince(AddressProvince province) {
+//        this.province = province;
+//    }
+//
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "district_id")
+//    public AddressDistrict getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(AddressDistrict address) {
+//        this.address = address;
+//    }
+
+    @Column(name = "province")
+    public String getProvince() {
         return province;
     }
 
-    public void setProvince(AddressProvince province) {
+    public void setProvince(String province) {
         this.province = province;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
-    @NotFound(action= NotFoundAction.IGNORE)
-    public AddressCity getCity() {
+    @Column(name = "city")
+    public String getCity() {
         return city;
     }
 
-    public void setCity(AddressCity city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id")
-    @NotFound(action= NotFoundAction.IGNORE)
-    public AddressDistrict getDistrict() {
-        return district;
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
     }
 
-    public void setDistrict(AddressDistrict district) {
-        this.district = district;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Column(name = "status")

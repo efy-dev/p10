@@ -1,8 +1,5 @@
 package com.efeiyi.pal.system.organization.controller;
 
-import com.efeiyi.pal.organization.model.AddressCity;
-import com.efeiyi.pal.organization.model.AddressDistrict;
-import com.efeiyi.pal.organization.model.AddressProvince;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
@@ -41,7 +38,6 @@ public class TenantController {
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         }
         tenant = setTenantBaseProperty(tenant, request, type);
-        tenant = getTenantRelationProperty(tenant, request);
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
 
         modelMap.put("object", tenant);
@@ -90,46 +86,17 @@ public class TenantController {
     private Tenant setTenantBaseProperty(Tenant tenant, HttpServletRequest request, String type) {
         String name = request.getParameter("name");
         String status = request.getParameter("status");
+        String province = request.getParameter("province");
+        String city = request.getParameter("city");
+        String address = request.getParameter("address");
 
         tenant.setName(name);
+        tenant.setProvince(province);
+        tenant.setCity(city);
+        tenant.setAddress(address);
         tenant.setStatus(status);
         if ("new".equals(type)){
             tenant.setStatus("1");
-        }
-
-        return tenant;
-    }
-
-    /**
-     * 获取关联对象
-     * @param tenant
-     * @param request
-     * @return
-     */
-    private Tenant getTenantRelationProperty(Tenant tenant, HttpServletRequest request){
-        String provinceId = request.getParameter("province.id");
-        String cityId = request.getParameter("city.id");
-        String districtId = request.getParameter("district.id");
-
-        if (provinceId == null || "".equals(provinceId)){
-            tenant.setProvince(null);
-        }else {
-            AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
-            tenant.setProvince(province);
-        }
-
-        if (cityId == null || "".equals(cityId)){
-            tenant.setCity(null);
-        }else {
-            AddressCity city = (AddressCity) baseManager.getObject(AddressCity.class.getName(), cityId);
-            tenant.setCity(city);
-        }
-
-        if (districtId == null || "".equals(districtId)){
-            tenant.setDistrict(null);
-        }else {
-            AddressDistrict district = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), districtId);
-            tenant.setDistrict(district);
         }
 
         return tenant;

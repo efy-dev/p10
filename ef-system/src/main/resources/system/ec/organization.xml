@@ -21,11 +21,6 @@
                         <condition name="addressProvince.id" defaultValue="123" operation="eq"/>
                     </query>
                 </do>
-                <do name="listAddressCity2" access="" label="订单列表">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="abcde" operation="ne"/>
-                    </query>
-                </do>
             </does>
         </entity>
 
@@ -229,14 +224,7 @@
                 <do name="plistProfessional" access="" label="商家用户列表"
                     result="/professional/professionalPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
-                    </query>
-                    <query name="search" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="sex" operation="eq" inputType="select_status" dataType="int" label="性别" key="Professional.sex"/>
-                        <condition name="username" operation="likes" dataType="text" label="用户名"/>
-                        <condition name="phone" operation="eq" dataType="text" label="电话"/>
-                        <condition name="email" operation="eq" dataType="text" label="邮箱"/>
-                        <condition name="birthDate" operation="eq" label="生日" inputType="date" dataType="date"/>
+                        <condition name="id" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeProfessional" label="删除商家用户" access="" result="json"/>

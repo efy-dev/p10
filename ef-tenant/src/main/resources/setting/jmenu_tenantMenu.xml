@@ -62,10 +62,10 @@
             <jnode id="" url="/tenantType/sendTenantTypePage.do" state="" extend="" access="" text_zh_CN="提交信息">
                 <match url=""/>
             </jnode>
-            <jnode id="" url="/Register/toChangePassword.do" state="" extend="" access="" text_zh_CN="修改密码">
+            <jnode id="" url="/account/accountChange.do?qm=accountChange_default" state="" extend="" access="" text_zh_CN="修改密码">
                 <match url=""/>
             </jnode>
-            <jnode id="" url="/j_spring_security_logout" state="" extend="" access="" text_zh_CN="安全退出">
+            <jnode id="" url="/basic/xm.do?qm=formIndex" state="" extend="" access="" text_zh_CN="安全退出">
                 <match url="viewIndex_default"/>
             </jnode>
         </jnode>

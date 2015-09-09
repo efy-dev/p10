@@ -4,20 +4,15 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XSaveOrUpdate;
-import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/19.
@@ -27,9 +22,6 @@ import java.util.Map;
 public class PersonalInforController {
     @Autowired
     private BaseManager baseManager;
-    @Autowired
-    private AliOssUploadManager aliOssUploadManager;
-
     @RequestMapping({"updatePersonalInfo.do"})
     public String  updatePersonalInfo(HttpServletRequest request)throws Exception{
         XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
@@ -39,9 +31,9 @@ public class PersonalInforController {
 
     }
     @RequestMapping({"personalInfo.do"})
-    public String getPersonalInfo(ModelMap modelMap){
-        String id = AuthorizationUtil.getMyUser().getId();
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+   public String getPersonalInfo(ModelMap modelMap){
+       String id = AuthorizationUtil.getMyUser().getId();
+       BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
         return "/purchaseOrder/personalInfoView";
@@ -92,7 +84,7 @@ public class PersonalInforController {
      */
     @RequestMapping({"checkPassword.do"})
     @ResponseBody
-    public boolean checkPassword(HttpServletRequest request){
+     public boolean checkPassword(HttpServletRequest request){
         String mm=request.getParameter("password");
         String password= StringUtil.encodePassword(mm, "SHA");
         String id = AuthorizationUtil.getMyUser().getId();
@@ -102,53 +94,6 @@ public class PersonalInforController {
         }else{
             return false;
         }
-    }
-
-
-
-    @RequestMapping("/uploadIcon.do")
-    @ResponseBody
-    public String uploadProductImg(HttpServletRequest request) throws Exception{
-        String data = "";
-        String id = request.getParameter("id");
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(),id);
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
-            //上传文件
-            MultipartFile mf = entry.getValue();
-            String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "user/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
-            try {
-                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-                XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
-                xSaveOrUpdate.getParamMap().put("pictureUrl",url);
-                baseManager.saveOrUpdate(xSaveOrUpdate);
-//                data = user.getId() + ":" + url;
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return url;
-    }
-
-    /**
-     * 用于模板取到用户头像
-     * @return
-     */
-    @RequestMapping("/getUserAvatar.do")
-    @ResponseBody
-    public String getUserAvatar(){
-        String id = AuthorizationUtil.getMyUser().getId();
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-       String avatar=user.getPictureUrl();
-
-            return avatar;
-
-
     }
 
 }

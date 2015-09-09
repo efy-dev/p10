@@ -1,8 +1,5 @@
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,7 +25,7 @@
             女
           </c:if>
           </span></li>
-          <li>出生日期 :<span><fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd"/></span></li>
+          <li>出生日期 :<span>${user.birthDate}</span></li>
         </ul>
       </form>
     </div>
