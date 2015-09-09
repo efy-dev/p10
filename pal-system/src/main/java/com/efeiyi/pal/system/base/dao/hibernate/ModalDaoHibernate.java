@@ -1,8 +1,6 @@
 package com.efeiyi.pal.system.base.dao.hibernate;
 
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.product.model.ProductSeries;
-import com.efeiyi.pal.product.model.TenantProductSeries;
 import com.efeiyi.pal.system.base.dao.ModalDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -1,7 +1,6 @@
 package com.efeiyi.pal.system.base.dao;
 
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.product.model.ProductSeries;
 
 import java.util.Set;
 

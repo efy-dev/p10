@@ -49,9 +49,10 @@ function dialog1(url, artDialogLogId, artDialogLogName, modalTitle,url2) {
 var selectPS=function(artDialogLogId, artDialogLogName, url){
     var name = $("#modalName").val();
     var modalContent = "";
+    var newUrl = encodeURI(url+name);
     $.ajax({
         type: "post",
-        url: url+name,
+        url: newUrl,
         cache: false,
         dataType: "json",
         success: function (data) {
@@ -146,7 +147,7 @@ function afterSubmitForm(formId){
     for (var j=0;j<a;j++){
         if(form2.elements[j].required){
             if(form2.elements[j].value=="" || form2.elements[j].value==null){
-                alert(form2.elements[j].placeholder + "不能为空");
+                alert(form2.elements[j].title + "不能为空");
                 form2.elements[j].focus();
                 return false;
             }
