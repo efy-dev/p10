@@ -143,6 +143,7 @@
              }
         });
         if(flag){
+            alert("d");
             $("#form").submit();
         }else{
             alert("所填信息有误,无法注册!");

@@ -36,7 +36,7 @@ public class ProjectDaoHibernate implements TenantProjectDao {
 
 @Override
  public List<Project> getProjectList(String tenantId){
-     String hql = "from Project where status = '1' and id not in (select project.id from TenantProject where tenant.id = :tenantId and  status = '1')";
+     String hql = "from Project where id not in (select project.id from TenantProject where tenant.id = :tenantId and  status = '1')";
      Query query = this.getSession().createQuery(hql)
              .setString("tenantId",tenantId);
      return  (List<Project>)query.list();

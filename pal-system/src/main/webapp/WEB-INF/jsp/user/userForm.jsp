@@ -32,19 +32,19 @@
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">用户姓名 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="姓名" value="${object.name}">
+                <input type="text" name="name" id="name" placeholder="姓名" value="${object.name}" required>
             </div>
         </div>
         <div class="am-form-group">
             <label name="password" for="password" class="am-u-sm-3 am-form-label">用户密码 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="password" name="password" id="password" placeholder="密码" value="${object.password}">
+                <input type="password" name="password" id="password" placeholder="密码" value="${object.password}" required>
             </div>
         </div>
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')" value="${object.tenant.name}">
+                <input type="text" id="tenant_idName" placeholder="商户名称" onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')" value="${object.tenant.name}">
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
             </div>
         </div>

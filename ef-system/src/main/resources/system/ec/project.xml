@@ -78,20 +78,6 @@
                     </query>
                 </do>
 
-                <do name="plistTProject" access="" label="project列表"
-                    execute="com.efeiyi.ec.system.project.controller.TenantProjectListHandler"
-                    result="/tenantProject/tenantProjectPList">
-                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
-                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                    </query>
-
-                    <query name="default1" label="查询" type="auto" orderBy="serial:desc">
-                        <condition name="name"  operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="serial"  operation="eq" label="项目编号" inputType="text"/>
-                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                    </query>
-                </do>
-
                 <do name="viewProject" label="查看" access="" result="/project/projectView"   />
                 <do name="removeProject" label="删除Project" access="" result="redirect:/basic/xm.do?qm=plistProject_default"/>
                 <do name="formProject" label="保存Project" access="" execute="com.efeiyi.ec.system.project.controller.ProjectHandler" result="/project/projectForm"/>
@@ -99,15 +85,6 @@
                 <do name="listProject" label="project列表" access="" result="/project/projectList" execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition label="project主键" name="status" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
-                <do name="listProject2" label="project列表" access="" result="/tenantProject/projectList" execute="com.efeiyi.ec.system.project.controller.TenantProjectListHandler">
-
-                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition label="project主键" name="status" defaultValue="1" operation="eq" inputType="default"/>
-                    </query>
-                    <query name="name" label="项目名称" type="auto" orderBy="serial:asc">
-                        <condition label="项目名称" name="name"  operation="eq" inputType="text"/>
                     </query>
                 </do>
 

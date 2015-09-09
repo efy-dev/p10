@@ -208,7 +208,6 @@ public class CartController {
 
     @RequestMapping({"/cart/removeProduct.do"})
     public String removeProduct(HttpServletRequest request) throws Exception {
-        String cartId = request.getParameter("cartProductId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
             String cartProductId = request.getParameter("cartProductId");
             baseManager.remove(CartProduct.class.getName(), cartProductId);
