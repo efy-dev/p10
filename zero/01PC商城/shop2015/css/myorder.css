@@ -656,3 +656,5 @@ a:hover{text-decoration: underline}
 /*注册修改兼容ie*/
 .login-form .msg-tips .msg{-ms-transform:none!important;}
 /*注册修改样式*/
+.reg-form .btn-p1{width: 112px;height: 36px;line-height: 36px;text-align: center;border: 1px solid #ccc;float: left;text-decoration: none;font-family: "KaiTi";background: #fff;transition: all 0.5s;}
+.reg-form .btn-p1:hover{background: #000;color: #fff;}

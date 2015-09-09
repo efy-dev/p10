@@ -113,17 +113,17 @@
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="purchaseOrder.id" value="${object.id}">
         <div class="am-form-group" style="child-align: left">
-            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label" style="width: auto">商品名称 <small>*</small></label>
+            <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
-                <input id="product_idName" placeholder="商品名称"
+                <input type="text" id="product_idName" placeholder="商品名称"
                        onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')" required>
                 <input type="hidden" id="product_id"  name="product.id" >
             </div>
         </div>
         <div class="am-form-group">
-            <label name="amount" for="amount" class="am-u-sm-3 am-form-label"  style="width: auto">数量 <small>*</small></label>
-            <div class="am-u-sm-9" style="margin-left: 0px">
-                <input type="number" name="amount" id="amount" placeholder="数量" required style="width: auto" aria-required="true">
+            <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="number" name="amount" id="amount" min="0" placeholder="数量" required>
             </div>
         </div>
         <div class="am-form-group">
