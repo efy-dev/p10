@@ -25,6 +25,83 @@
                 }
             });
         }
+
+        <%--$(function(){--%>
+            <%--$('#postSpan').on('click',function(){--%>
+                <%--var temp = $('#postSpan').text().trim()--%>
+                <%--var orderStatus = "5";--%>
+                <%--if(temp == '立即发货'){--%>
+                    <%--$('#my-prompt').modal({--%>
+                        <%--relatedTarget: this,--%>
+                        <%--onConfirm: function(e) {--%>
+
+                            <%--$.ajax({--%>
+                                <%--type:"get",--%>
+                                <%--data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial:$('#serial').val()},--%>
+                                <%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
+                                <%--success:function(data){--%>
+                                    <%--$(obj).find("span").text("已发货");--%>
+                                <%--}--%>
+                            <%--});--%>
+                        <%--},--%>
+                        <%--onCancel: function(e) {--%>
+                            <%--alert('不想说!');--%>
+                        <%--}--%>
+                    <%--});--%>
+                <%--}else if(temp == "无法发货"){--%>
+
+                    <%--alert("无法发货!")--%>
+                <%--}else{--%>
+                    <%--alert("已经发货!")--%>
+                <%--}--%>
+            <%--});--%>
+        <%--});--%>
+
+
+        function updateOrderStatusNew(obj,id){
+
+            var temp =  $(obj).find("span").text().trim();
+            var orderStatus = "5";
+            if(temp == '立即发货'){
+                $('#logisticsCompany')[0].options.length=0;
+                $('#serial').val("");
+                $.ajax({
+                    type:'get',
+                    url:"<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
+                    success:function(data){
+                        var selector = $("#logisticsCompany");
+                        data = eval('(' + data + ')');
+                        for(var key in data){
+                            selector.append('<option value="'+key+'">'+data[key]+'</option>')
+                        }
+
+                    }
+                });
+                $('#my-prompt').modal({
+                    relatedTarget: this,
+                    onConfirm: function(e) {
+                        console.log(e.data);
+                        $.ajax({
+                            type:"get",
+                            data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
+                            url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
+                            success:function(data){
+                                $(obj).find("span").text("已发货");
+                            }
+                        });
+                    },
+                    onCancel: function(e) {
+                        alert('不想说!');
+                    }
+                });
+            }else if(temp == "无法发货"){
+
+                alert("无法发货!")
+            }else{
+                alert("已经发货!")
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -33,6 +110,29 @@
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
         </div>
+
+        <%--点击立即发货的时候弹出的模态对话框--%>
+        <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+            <div class="am-modal-dialog">
+                <%--<div class="am-modal-hd">Amaze UI</div>--%>
+                <div class="am-modal-bd">
+                    <div>请填写正确的物流公司和快递单号</div>
+
+                    <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
+                    <div>
+                    物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany" style="width: 90px;display: inline-block;"></select>
+                    </div>
+                    <div>
+                    快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input" style="width: 100px;height:30px;display: inline-block;">
+                    </div>
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                </div>
+            </div>
+        </div>
+
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
@@ -60,7 +160,7 @@
                                             class="am-icon-trash-o">删除</span>
                                     </button>
 
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" onclick="updateOrderStatus(this,'${purchaseOrder.id}')">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
                                 <c:if test="${purchaseOrder.orderStatus==1}">
                                     立即发货
@@ -137,9 +237,9 @@
         }else{
             alert("已经发货!")
         }
-
-
     }
+
+
 </script>
 </body>
 </html>

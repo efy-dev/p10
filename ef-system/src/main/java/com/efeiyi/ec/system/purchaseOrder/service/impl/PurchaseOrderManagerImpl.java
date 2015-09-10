@@ -19,7 +19,7 @@ import java.util.Date;
  * Created by IntelliJ IDEA.
  * User: ming
  * Date: 12-10-15
- * Time: ÏÂÎç5:02
+ * Time: ï¿½ï¿½ï¿½ï¿½5:02
  * To change this template use File | Settings | File Templates.
  */
 
@@ -39,17 +39,17 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
 
     @Override
-    public String updateOrderStatus(PurchaseOrder purchaseOrder) {
+    public String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             purchaseOrderDao.updateOrderStatus(purchaseOrder);
-            String serial = autoSerialManager.nextSerial("purchaseOrderDelivery");
+            //String purchaseOrderDeliverySerial = autoSerialManager.nextSerial("purchaseOrderDelivery");
             PurchaseOrderDelivery purchaseOrderDelivery = new PurchaseOrderDelivery();
             purchaseOrderDelivery.setPurchaseOrder(purchaseOrder);
             purchaseOrderDelivery.setCreateDateTime(new Date());
             purchaseOrderDelivery.setSerial(serial);
-            purchaseOrderDelivery.setLogisticsCompany("Ë³·ç¿ìµÝ");
+            purchaseOrderDelivery.setLogisticsCompany(logisticsCompany);
             MyUser user = AuthorizationUtil.getMyUser();
             System.out.println(user.getFullName());
             //purchaseOrderDelivery.setConsumerAddress();

@@ -76,12 +76,17 @@
         </div>
         <div class="am-form-group">
             <label name="madeYear" for="madeYear" class="am-u-sm-3 am-form-label">制作时间 <small>*</small></label>
-            <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-                <input type="datetime" name="madeYear" id="madeYear" class="am-form-field" title="制作时间" placeholder="制作时间"
-                       value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required="true"/>
-                <span class="am-input-group-btn am-datepicker-add-on">
-                    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-                </span>
+            <%--<div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">--%>
+                <%--<input type="datetime" name="madeYear" id="madeYear" class="am-form-field" title="制作时间" placeholder="制作时间"--%>
+                       <%--value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>" readonly required="true"/>--%>
+                <%--<span class="am-input-group-btn am-datepicker-add-on">--%>
+                    <%--<button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>--%>
+                <%--</span>--%>
+            <%--</div>--%>
+            <div class="am-u-sm-9">
+                <input type="text" name="madeYear" id="madeYear" class="am-form-field"
+                       title="制作时间" placeholder="制作时间"
+                       data-am-datepicker readonly required="true"/>
             </div>
         </div>
         <div class="am-form-group">
