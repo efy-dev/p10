@@ -4,6 +4,7 @@ import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.service.DoHandler;
@@ -42,6 +43,11 @@ public class toFormProductHandler implements DoHandler {
         xQuery = new XQuery("listTenant_product",request);//商家
         List<Tenant> tenantList = baseManager.listObject(xQuery);
         modelMap.put("tenantList",tenantList);
+        xQuery = new XQuery("listTenantProject_default",request);//商家项目
+        xQuery.put("tenant_id",request.getParameter("tenantId"));
+        List<TenantProject> tenantProjectList = baseManager.listObject(xQuery);
+        modelMap.put("tenantProjectList",tenantProjectList);
+
 
         return modelMap;
     }

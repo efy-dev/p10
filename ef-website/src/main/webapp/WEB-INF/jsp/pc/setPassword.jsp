@@ -10,11 +10,11 @@
       <ul>
         <li>
           <label>设置新密码</label>
-          <input name="np" class="txt" type="text" placeholder="请输入新密码">
+          <input name="np" class="txt" type="password" placeholder="请输入新密码">
         </li>
         <li>
           <label>重复新密码</label>
-          <input name="pwd" class="txt" type="text" placeholder="请重复输入新密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
+          <input name="pwd" class="txt" type="password" placeholder="请重复输入新密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
           <span class="active-d span2"></span>
         </li>
         <li>
@@ -46,6 +46,13 @@
         return false;
       }
     });
+    var np= $(":input[name='np']").val();
+    var pwd= $(":input[name='pwd']").val();
+    if(np!="" && pwd!=""){
+      flag = true;
+    }else{
+      flag = false;
+    }
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
       window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;

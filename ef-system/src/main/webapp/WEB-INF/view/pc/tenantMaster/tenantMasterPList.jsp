@@ -31,9 +31,9 @@
     </script>
 </head>
 <body>
-        <div style="text-align: left;margin-bottom: 10px">
-            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}"/>"><span class="am-icon-plus"></span>返回</a>
-        </div>
+<div style="text-align: left;margin-bottom: 10px">
+    <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}"/>"><span class="am-icon-plus"></span>返回</a>
+</div>
 
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}&tenantId=${tenantId}"/>
 
@@ -55,9 +55,9 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                        <a  id="${master.id}" tenantMasterId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkMaster(this,'${master.id}');"><span
-                                                class="am-icon-pencil-square-o">关联商家</span>
-                                        </a>
+                                    <a  id="${master.id}" tenantMasterId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkMaster(this,'${master.id}');"><span
+                                            class="am-icon-pencil-square-o">关联商家</span>
+                                    </a>
                                 </div>
                             </div>
                         </td>
@@ -84,9 +84,9 @@
 
         <c:forEach var="tenantMaster" items="${tenantMasterList}">
         var masterId = '${tenantMaster.master.id}';
-          $("#"+masterId).attr("status","1");
-          $("#"+masterId).find("span").text("解除商家");
-          $("#"+masterId).attr("tenantMasterId",'${tenantMaster.id}')
+        $("#"+masterId).attr("status","1");
+        $("#"+masterId).find("span").text("解除商家");
+        $("#"+masterId).attr("tenantMasterId",'${tenantMaster.id}')
 
         </c:forEach>
 

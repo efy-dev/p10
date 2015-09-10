@@ -22,7 +22,7 @@ public class TenantMasterListHandler implements DoHandler {
 
         System.out.print(request.getParameter("tenantId"));
         if(request.getParameter("tenantId")!=null&&request.getParameter("tenantId")!=""){
-            XQuery xQuery = new XQuery("listTenantMaster_default",request);
+            XQuery xQuery = new XQuery("listTenantMaster_default1",request);
             xQuery.put("tenant_id",request.getParameter("tenantId"));
             List<TenantMaster> tenantMasterList = baseManager.listObject(xQuery);
             modelMap.put("tenantMasterList",tenantMasterList);

@@ -25,20 +25,19 @@
                     <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
                         <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
                         <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
-                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                     </query>
                     <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
                         <condition name="tenant.id"  operation="eq" label="商家id" defaultValue="0" inputType="default"/>
-                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                     </query>
 
                     <!--<query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendedIndex:desc">-->
-                    <!--<condition name="id" defaultValue="0" operation="ne"/>-->
+                        <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                     <!--</query>-->
                 </do>
 
-                <do name="saveOrUpdateProduct" label="保存附件"
-                    result="redirect:/basic/xm.do?qm=plistProduct_default">
+                <do name="saveOrUpdateProduct" label="保存附件" result="redirect:/basic/xm.do?qm=plistProduct_default">
                     <page>
                         <fields>
                             <field name="status" label="状态" defaultValue="1"
@@ -75,7 +74,7 @@
                     result="/productModel/productModelPList">
                     <query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendIndex:desc">
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
-                        <condition name="product.name" operation="likes" label="产品名字"/>
+                        <condition name="product.name" operation="likes" label="产品名称"/>
                         <condition name="product.serial" operation="eq" label="产品编号"/>
                         <condition name="product.project.name" operation="likes" label="项目"/>
                     </query>

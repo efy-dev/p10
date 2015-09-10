@@ -51,7 +51,7 @@
               </div>
             </td>
             <td class="am-hide-sm-only">
-                   ${master.fullName}
+                ${master.fullName}
             </td>
           </tr>
         </c:forEach>
@@ -61,7 +61,7 @@
   </div>
 
 
-  </form>
+</form>
 <script>
 
   $(function(){

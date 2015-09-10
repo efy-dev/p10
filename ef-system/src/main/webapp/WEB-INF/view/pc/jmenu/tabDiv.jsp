@@ -33,11 +33,23 @@
 <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
     <ul class="am-tabs-nav am-nav am-nav-tabs">
         <c:forEach items="${doQueryList}" var="doQuery">
-            <c:if test="${tabTitle==doQuery.label}">
-                <li class="am-active"><a href="javascript: void(0)">${doQuery.label}</a></li>
+            <c:if test="${doQuery.name=='default'}">
+                <c:if test="${tabTitle==doQuery.label}">
+                    <li class="am-active"><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>" >${doQuery.label}</a>
+                    </li>
+                </c:if>
+                <c:if test="${tabTitle!=doQuery.label}">
+                    <li><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>">${doQuery.label}</a>
+                    </li>
+                </c:if>
             </c:if>
-            <c:if test="${tabTitle!=doQuery.label}">
-                <li><a href="javascript: void(0)">${doQuery.label}</a></li>
+            <c:if test="${doQuery.name!='default'}">
+                <c:if test="${tabTitle==doQuery.label}">
+                    <li class="am-active"><a href="javascript: void(0)">${doQuery.label}</a></li>
+                </c:if>
+                <c:if test="${tabTitle!=doQuery.label}">
+                    <li><a href="javascript: void(0)">${doQuery.label}</a></li>
+                </c:if>
             </c:if>
         </c:forEach>
     </ul>
@@ -62,11 +74,13 @@
     var paramList = new Object();
 
     <c:forEach items="${paramMap}" var="item">
-        paramList['${item.key}'] = '${item.value}';
+    paramList['${item.key}'] = '${item.value}';
     </c:forEach>
 
     <c:forEach items="${doQueryList}" var="doQuery">
-    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}','<c:url value="/"/>',paramList)
+    <c:if test="${doQuery.name!='default'}">
+    generateCondition('<c:url value="/do/listCondition.do"/>', '${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}', '<c:url value="/"/>', paramList)
+    </c:if>
     </c:forEach>
 
 </script>

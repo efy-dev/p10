@@ -71,6 +71,7 @@ public class AddressController {
     @RequestMapping({"/addAddressOfMobile.do"})
     public String Address(HttpServletRequest request,Model model) throws Exception {
         String addressId = request.getParameter("addressId");
+
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> objectList = baseManager.listObject(xQuery);
         model.addAttribute("province",objectList);
@@ -107,7 +108,7 @@ public class AddressController {
     @RequestMapping({"addAddressOfMob.do"})
     public String  addAddressOfMobile(HttpServletRequest request)throws Exception{
         if("1".equals(request.getParameter("checkbox"))){
-            String id=request.getParameter("consumerId");
+            String id = AuthorizationUtil.getMyUser().getId();
             String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='"+id+"'";
             baseManager.executeSql(null,hql,null);
             XSaveOrUpdate  xSaveOrUpdate1 =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
@@ -120,6 +121,29 @@ public class AddressController {
             xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
             baseManager.saveOrUpdate(xSaveOrUpdate);
             return "redirect:/myEfeiyi/address/list";
+        }
+
+
+    }
+
+    @RequestMapping({"addAddressOfMob1.do"})
+    public String  addAddressOfMobile1(HttpServletRequest request)throws Exception{
+        if("1".equals(request.getParameter("checkbox"))){
+            String id = AuthorizationUtil.getMyUser().getId();
+            String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='"+id+"'";
+            baseManager.executeSql(null,hql,null);
+            XSaveOrUpdate  xSaveOrUpdate1 =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
+            xSaveOrUpdate1.getParamMap().put("status","2");
+            xSaveOrUpdate1.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+            baseManager.saveOrUpdate(xSaveOrUpdate1);
+            String cartId = request.getParameter("cartId");
+            return "redirect:/order/saveOrUpdateOrder.do?cartId="+cartId;
+        }else{
+            String cartId = request.getParameter("cartId");
+            XSaveOrUpdate  xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateConsumerAddress",request);
+            xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+            return "redirect:/order/saveOrUpdateOrder.do?cartId="+cartId;
         }
 
 

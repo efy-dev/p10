@@ -24,13 +24,15 @@
 
   <fieldset>
     <legend class="" style="font-size: 17px">商品信息</legend>
-    <%--<form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
-      <form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="qm" value="saveOrUpdateProduct">
       <input type="hidden" name="resultPage" value="0" />
       <input type="hidden" name="step" value="product">
         <input type="hidden" name="view" value="${view}">
+        <input type="hidden" name="tenant.id" value="">
+        <input type="hidden" name="master.id" value="">
+        <input type="hidden" name="project.id" value="">
       <%--<input type="hidden" name="view" value="${view}">--%>
       <input type="hidden" name="productDescription.id" value="${object.productDescription.id}">
       <div class="am-form-group">
@@ -70,7 +72,7 @@
         <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="1" />
-                     普通
+                     收藏品
                  </span>
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="2"/>
@@ -84,7 +86,7 @@
         <label name="serial" class="am-u-sm-3 am-form-label">关联商家</label>
 
         <div class="am-u-sm-9" style="margin-top: 10px;">
-                <select name="tenant.id" onchange="changeTenant(this)">
+                <select name="tenantCheck" onchange="changeTenant(this)">
                    <option value="0">请选择</option>
                  <c:forEach var="tenant" items="${tenantList}">
                     <option value="${tenant.id}" <c:if test="${object.tenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
@@ -101,7 +103,7 @@
         <div class="am-u-sm-9" style="margin-top: 10px;" id="master">
           <c:forEach var="tenantMaster" items="${masterList}">
             <span style="margin-left: 10px;">
-               <input type="radio" <c:if test="${tenantMaster.master.id == object.master.id }">checked="checked"</c:if> value="${tenantMaster.master.id}" onclick="changeMaster(this)" name="master.id"/>
+               <input type="radio" <c:if test="${tenantMaster.master.id == object.master.id }">checked="checked"</c:if> value="${tenantMaster.master.id}" onclick="changeMaster(this)" name="masterCheck"/>
                ${tenantMaster.master.fullName}
             </span>
           </c:forEach>
@@ -115,8 +117,8 @@
         <div class="am-u-sm-9" style="margin-top: 10px;" id="Project">
 
           <c:forEach var="masterProject" items="${projectList}">
-            <span style="margin-left: 10px;">
-               <input type="radio" <c:if test="${masterProject.project.id == object.project.id }">checked="checked"</c:if> value="${masterProject.project.id}"  name="project.id"/>
+            <span style="margin-left: 10px;" flag="0" id="${masterProject.project.id}">
+               <input type="radio" <c:if test="${masterProject.project.id == object.project.id }">checked="checked"</c:if> value="${masterProject.project.id}"  name="projectCheck"/>
                ${masterProject.project.name}
             </span>
           </c:forEach>
@@ -180,6 +182,22 @@
     if(${empty object.id}){
       var date = new Date();
     }
+
+    <c:forEach var="tenantProject" items="${tenantProjectList}">
+
+    var  pid = '${tenantProject.project.id}';
+
+            if($("#Project span[id='"+pid+"']").length==0){
+              var span = '<span style="margin-left: 10px;" flag="1" id="'+pid+'">'+
+                         '     <input type="radio" value="'+pid+'"  name="projectCheck"/>'+'${tenantProject.project.name}'+
+                         ' </span>';
+              $("#Project").append(span);
+            }else{
+              $("#Project span[id='"+pid+"']").attr("flag","1");
+            }
+    </c:forEach>
+    var projectId = '${object.project.id}';
+    $("#"+projectId+" input[value='"+projectId+"']").attr("checked",true);
   });
 
   function changeTenant(obj){
@@ -191,14 +209,30 @@
       dataType: "json",
       data:{tenantId:tenantId},
       success: function (data) {
-        var obj = eval(data);
+        alert("dd");
         $("#master").text("");
-        for(var i=0;i<obj.length;i++){
-          var span = '<span style="margin-left: 10px;">'+
-                  '     <input type="radio" value="'+obj[i].master.id+'" onclick="changeMaster(this)" name="master.id"/>'+obj[i].master.fullName+
-                  ' </span>';
-          $("#master").append(span);
-        }
+        $("#Project").text("");
+        $.each(data,function(k,v){
+            if(k=="masterList"){
+              for(var i=0;i<v.length;i++){
+                var span = '<span style="margin-left: 10px;">'+
+                        '     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+
+                        ' </span>';
+                $("#master").append(span);
+              }
+            }
+          if(k=="projectList"){
+
+            for(var i=0;i<v.length;i++){
+              var span = '<span style="margin-left: 10px;" flag="1" id="'+v[i].project.id+'">'+
+                      '     <input type="radio" value="'+v[i].project.id+'"  name="projectCheck"/>'+v[i].project.name+
+                      ' </span>';
+              $("#Project").append(span);
+            }
+          }
+        });
+
+
 
       }
     });
@@ -212,7 +246,12 @@
 //
     }else if(!checkPrice($("#price").val())){
         alert("商品价格必须为数字!");
-    }else{
+    }else if($("select[name='tenantCheck']").val()=="0"){
+          $("input[name='tenant.id']").val(null);
+    } else{
+      $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
+      $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
+      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
       $("form").submit();
     }
 
@@ -236,12 +275,16 @@
       data:{masterId:masterId},
       success: function(data) {
         var obj = eval(data);
-        $("#Project").text("");
+        $("#Project span[flag='0']").each(function(){
+              $(this).remove();
+        });
         for(var i=0;i<obj.length;i++){
-          var span = '<span style="margin-left: 10px;">'+
-                  '     <input type="radio" value="'+obj[i].project.id+'"  name="project.id"/>'+obj[i].project.name+
-                  ' </span>';
-          $("#Project").append(span);
+          if($("#Project span[id='"+obj[i].project.id+"']").length==0){
+            var span = '<span style="margin-left: 10px;">'+
+                    '     <input type="radio" value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
+                    ' </span>';
+            $("#Project").append(span);
+          }
         }
 
       }

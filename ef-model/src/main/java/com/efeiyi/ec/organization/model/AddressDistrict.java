@@ -1,5 +1,6 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -40,6 +41,7 @@ public class AddressDistrict implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "opened_city_id")
+    @JsonIgnore
     public AddressCity getAddressCity() {
         return addressCity;
     }

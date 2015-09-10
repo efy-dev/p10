@@ -2,6 +2,7 @@ package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
@@ -25,6 +27,8 @@ public class ProjectContent {
     private String type;
     private Project project;
     private AddressCity city;
+    //private List<Consumer> consumer;
+
 
 
     @Id
@@ -79,7 +83,7 @@ public class ProjectContent {
     public String getType() { return type; }
 
     public void setType(String type) { this.type = type; }
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="project_id")
     @JsonIgnore
     public Project getProject() {return project;}
@@ -94,4 +98,17 @@ public class ProjectContent {
     public void setCity(AddressCity city) {
         this.city = city;
     }
+  /*  @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "wiki_projectContent_consumer",
+            joinColumns = { @JoinColumn(name = "projectContent_id") },
+            inverseJoinColumns = { @JoinColumn(name = "consumer_id") }
+    )
+    public List<Consumer> getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(List<Consumer> consumer) {
+        this.consumer = consumer;
+    }*/
+
 }

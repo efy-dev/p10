@@ -59,8 +59,14 @@
 <%--<button type="button" class="am-btn am-btn-primary js-append-tab">插入 Tab</button>--%>
 <script>
 
+    var paramList = new Object();
+
+    <c:forEach items="${paramMap}" var="item">
+        paramList['${item.key}'] = '${item.value}';
+    </c:forEach>
+
     <c:forEach items="${doQueryList}" var="doQuery">
-    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}')
+    generateCondition('<c:url value="/do/listCondition.do"/>','${doQuery.name}', '${requestScope.tempDo.name}', '${doQuery.label}', '${requestScope.conditions}', '${requestScope.tempDo.xentity.model}', '${doQuery.label}','<c:url value="/"/>',paramList)
     </c:forEach>
 
 </script>

@@ -114,4 +114,19 @@ public class ProjectController extends BaseController {
         return  tenantProject.getId();
     }
 
+
+    @RequestMapping("/project/updateStatus.do")
+    @ResponseBody
+    public String updateStatus(String id,String status){
+        Project project = (Project)baseManager.getObject(Project.class.getName(),id);
+        try {
+             project.setStatus(status);
+            baseManager.saveOrUpdate(Project.class.getName(),project);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  status;
+    }
+
 }

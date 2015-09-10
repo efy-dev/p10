@@ -18,14 +18,14 @@
 </head>
 <body>
 <div class="am-cf am-padding">
-  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑项目</strong> | <small>New/Edit ProjectContent</small></div>
+  <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新建/编辑项目内容</strong> | <small>New/Edit ProjectContent</small></div>
 </div>
 <hr/>
 
 <div class="am-g">
   <form action="<c:url value="/basic/xmm.do"/>"  class="am-form am-form-horizontal" method="post" enctype="multipart/form-data">
     <input type="hidden" name="qm" value="saveOrUpdateProjectContent">
-   <%-- <input type="hidden" name="project.id" value="ichkt4el000064st">--%>
+    <%-- <input type="hidden" name="project.id" value="ichkt4el000064st">--%>
     <input type="hidden" id="creator.id" name="creator.id" class="creatorid" value="${projectContent.creator.id}">
     <input type="hidden" id="city.id" name="city.id" class="cityid" value="${projectContent.city.id}">
     <input type="hidden" id="createDatetime" name="createDatetime" value="${createDatetime}">

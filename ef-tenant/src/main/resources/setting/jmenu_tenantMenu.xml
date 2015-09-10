@@ -2,16 +2,15 @@
 <jmenu id="tenantMenu">
     <jnode id="" url="" text_zh_CN="">
         <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
-            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default" state="closed" extend="" access="" text_zh_CN="订单管理">
-                <match url="plistPurchaseOrder_default"/>
-                <match url="viewPurchaseOrder"/>
-                <match url="removePurchaseOrder"/>
-                <match url="formPurchaseOrder"/>
-                <match url="saveOrUpdatePurchaseOrder"/>
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order" state="closed" extend="" access="" text_zh_CN="订单管理">
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=order"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=order"/>
             </jnode>
-            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" state="closed" extend="" access="" text_zh_CN="发货记录管理">
-                <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>
+            <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default&amp;view=delivery" state="closed" extend="" access="" text_zh_CN="发货记录管理">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=delivery"/>
             </jnode>
             <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
                 <match url=""/>

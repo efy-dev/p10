@@ -1,3 +1,4 @@
+<!doctype html>
 <%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ page import="com.ming800.core.util.HttpUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -61,12 +62,11 @@
             url: "<c:url value='/myEfeiyi/getUserAvatar.do'/>",
             dataType: 'json',
             success: function (data) {
-                <c:if test="${data==null||data==''}">
-                $("#uploadPi").attr("src", '<c:url value="/scripts/images/img-tx.png"/>');
-                </c:if>
-                <c:if test="${data!=null||data!=''}">
-                $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
-                </c:if>
+                if("" == data || null == data){
+                    $("#uploadPi").attr("src", "<c:url value='/scripts/images/img-tx.png'/>");
+                }else if("" != data || null != data){
+                    $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
+                }
             }
         })
     })

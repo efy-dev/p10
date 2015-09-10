@@ -23,17 +23,20 @@
             </fields>
             <does>
                 <do name="plistPurchaseOrder" access="" label="购买订单"
-                    result="/purchaseOrder/purchaseOrderPList">
+                    result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition name="id" defaultValue="0" operation="ne" />
-                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq" />
+                        <condition name="id" defaultValue="0" operation="ne" label="订单id" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq" inputType="default"/>
                     </query>
-                    <query name="serial" label="订单号" type="auto" orderBy="serial:asc">
-                        <condition name="serial"  operation="eq" label="订单号" />
+                    <query name="search" label="查询" type="auto" orderBy="createDatetime:desc">
+                        <condition name="orderStatus"  operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
+                        <condition name="serial"  operation="eq" label="订单号" inputType="text"/>
+                        <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
+                        <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>
-                <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView" />
+                <do name="viewPurchaseOrder" label="查看订单详情" access="" result="/purchaseOrder/purchaseOrderView" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler"/>
                 <do name="removePurchaseOrder" label="删除购买订单" access="" result="json"/>
                 <do name="formPurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderForm"/>
                 <do name="saveOrUpdatePurchaseOrder" label="保存购买订单" access="" result="/purchaseOrder/purchaseOrderSaveSuccess"/>
@@ -61,8 +64,15 @@
                 <do name="plistPurchaseOrderDelivery" access="" label="purchaseOrderDelivery分页列表"
                     result="/purchaseOrderDelivery/purchaseOrderDeliveryPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="purchaseOrder.tenant.id" defaultValue="${MY_USER}" operation="eq" />
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="purchaseOrder.tenant.id" defaultValue="${MY_USER}" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="search" label="查询" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" operation="eq" inputType="select_status" key="purchaseOrderDelivery.status" label="发货状态"/>
+                        <condition name="purchaseOrder.serial" operation="eq" inputType="text" label="订单号"/>
+                        <condition name="logisticsCompany" operation="likes" inputType="text" label="物流公司"/>
+                        <condition name="createDateTime" operation="ge" label="发货时间起" inputType="date" dataType="date"/>
+                        <condition name="createDateTime" operation="le" label="发货时间止" inputType="date" dataType="date"/>
                     </query>
                 </do>
 
@@ -120,6 +130,8 @@
                 </do>
 
                 <do name="removePurchaseOrderProduct" label="删除购买订单" access="" result="json"/>
+                <do name="viewPurchaseOrderProduct" label="查看购买订单产品" access=""
+                    result="/purchaseOrderProduct/purchaseOrderProductView"/>
                 <do name="formPurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductForm"></do>
                 <do name="saveOrUpdatePurchaseOrderProduct" label="保存购买订单" access="" result="/purchaseOrderProduct/purchaseOrderProductSaveSuccess"></do>
                 <do name="listPurchaseOrderProduct" label="购买订单列表" access="" result="/purchaseOrderProduct/purchaseOrderProductList">

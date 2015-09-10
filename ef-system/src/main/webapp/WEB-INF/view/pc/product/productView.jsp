@@ -63,14 +63,14 @@
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.serial}
                 </div>
             </div>
             <div class="am-form-group">
                 <label name="name" class="am-u-sm-3 am-form-label">商品名称</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.name}
                     <!--<small>必填项*</small>-->
                 </div>
@@ -79,10 +79,11 @@
             <div class="am-form-group">
                 <label name="price" class="am-u-sm-3 am-form-label">商品价格</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.price}
                 </div>
             </div>
+
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
 
@@ -94,6 +95,13 @@
                         精品
                     </c:if>
                     <!--<small>必填项*</small>-->
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="price" class="am-u-sm-3 am-form-label">关联商家</label>
+
+                <div class="am-u-sm-9" style="margin-top: 10px;">
+                    ${object.tenant.name}
                 </div>
             </div>
             <div class="am-form-group">
@@ -165,6 +173,7 @@
                         <tbody>
                         <tr>
                             <th class="am-text-center" width="20%">预览</th>
+                            <th class="am-text-center" width="20%">规格名称</th>
                             <th class="am-text-center" width="20%">属性</th>
                             <th class="am-text-center" width="20%">库存</th>
                             <th class="am-text-center" width="20%">价格(元)</th>
@@ -178,11 +187,22 @@
                                     </a>
                                 </td>
                                 <td class="am-text-center">
-                                    <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
+                                       ${model.name}
+                                </td>
+                                <td class="am-text-center">
+                                    <c:if test="${model.status == '1'}">
+                                        <c:forEach var="modelProperty" items="${model.productPropertyValueList}">
                                             <span style="padding: 5px;" id="${modelProperty.projectPropertyValue.id}" value="${modelProperty.projectPropertyValue.value}">
                                                     ${modelProperty.projectPropertyValue.value}
                                             </span>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${model.status == '2'}">
+                                       ${model.customProperty}
+                                    </c:if>
+                                    <c:if test="${model.status == '3'}">
+                                        无
+                                    </c:if>
                                 </td>
                                 <td align="center">
                                         ${model.amount}
@@ -233,13 +253,23 @@
                                             <dd style="width: 100%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
-                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus('${productPicture.id}','1')">主图片</a>
+                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="updatePictureStatus('${productPicture.id}','2')">设为主图片</a>
+                                                        <a href="javascript:void(0);" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
+                                            </dd>
+                                            <dd style="width: 100%;text-align: center;" >
+
+                                                    <select onchange="setModelPic(this,'${productPicture.id}')">
+                                                        <option value="0">设置商品规格图片</option>
+                                                        <c:forEach var="productModel1" items="${object.productModelList}">
+                                                            <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
+                                                        </c:forEach>
+                                                    </select>
+
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
@@ -282,6 +312,7 @@
 
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
+
                                             <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
                                             </dd>
@@ -319,9 +350,28 @@
 <!-- content end -->
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
-<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
+<script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
+    function setModelPic(obj,pictureId){
+
+       var modelId = $(obj).val();
+
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/setModelPicture.do"/>',
+                cache: false,
+                dataType: "json",
+                data:{pictureId:pictureId.trim(),modelId:modelId},
+                success: function (data) {
+//                    $("#picUrl tr[name='" + divId + "']").remove();
+//                    $("#collapse-panel-1 li[name='" + divId + "']").remove();
+//                    $("#collapse-panel-3 li[name='" + divId + "']").remove();
+                }
+            });
+
+    }
+
 
     function changeUrl(id){
         var url = "http://www2.efeiyi.com/product/productModel/"+id;
@@ -329,6 +379,7 @@
 
     }
 
+   //复制图片地址
     function copyInit(obj){
 
         $(obj).zclip({
@@ -348,7 +399,8 @@
 
 
     }
-
+var modelIds = [];
+    var  modelNames = [];
     $(function(){
 
 
@@ -356,6 +408,12 @@
         $(".copy").each(function(){
             copyInit($(this));
         });
+
+
+        <c:forEach var="productModel1" items="${object.productModelList}">
+         modelIds.push('${productModel1.id}');
+        modelNames.push('${productModel1.name}');
+        </c:forEach>
 
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/product/uploadify.do?status=1&productId=${object.id}"/>',            // 服务器处理地址
@@ -401,10 +459,20 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
+                        '</dd>'+
+                        '<dd style="width: 100%;text-align: center;" >'+
+                        '<select onchange="setModelPic(this,\''+pictureId+'\')">'+
+                        '<option value="0">'+'设置商品规格图片'+'</option>';
+                for(var n=0;n<modelIds.length;n++) {
+
+                    img +=  '<option value="'+modelIds[n]+ '">'+modelNames[n]+'</option>';
+
+                }
+                img += '      </select>'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="'+trueUrl+'">'+'复制图片地址'+'</a>'+
@@ -476,7 +544,7 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                            //      '<a href="javascript:void(0);" onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                            //      '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -504,7 +572,7 @@
     }
 
 
-    function updatePictureStatus(id,status){
+    function updatePictureStatus(obj,id,status){
         $.ajax({
             type: "get",
             url: '<c:url value="/product/updatePicture.do"/>',
@@ -514,19 +582,23 @@
             success: function (data) {
                 if(status == '2'){
 
-                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
-                                    '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
-                                    ' 删除'+
-                                    '</a>'
-                            ;
-                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','1')");
+                    $(obj).text("主图片");
+//                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
+//                                    '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+//                                    ' 删除'+
+//                                    '</a>'
+//                            ;
+//                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
                 if(status == '1'){
-                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
-                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
-                            ' 删除'+
-                            '</a>';
-                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                    $(obj).text("设为主图片");
+//                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+//                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
+//                            ' 删除'+
+//                            '</a>';
+//                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
             }
         });
