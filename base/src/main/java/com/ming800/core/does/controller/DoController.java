@@ -1,11 +1,9 @@
 package com.ming800.core.does.controller;
 
-import com.ming800.core.base.model.BaseChoose;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.base.util.SystemValueUtil;
-import com.ming800.core.p.model.ObjectRecommended;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -62,14 +60,14 @@ public class DoController {
         return new ModelAndView("/jmenu/tabDiv");
     }
 
-
-    @RequestMapping("/saveOrUpdateChoose.do")
-    @ResponseBody
-    public Object saveOrUpdateChoose() {
-        BaseChoose baseChoose = new BaseChoose();
-        baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
-        return baseChoose;
-    }
+//
+//    @RequestMapping("/saveOrUpdateChoose.do")
+//    @ResponseBody
+//    public Object saveOrUpdateChoose() {
+//        BaseChoose baseChoose = new BaseChoose();
+//        baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
+//        return baseChoose;
+//    }
 
     @RequestMapping("/generatePages.do")
     public String generatePages(HttpServletRequest request) throws Exception {
@@ -84,31 +82,31 @@ public class DoController {
         return "forward:/" + redirectUrl;
     }
 
-    @RequestMapping("/chooseItem.do")
-    @ResponseBody
-    public boolean chooseItem(HttpServletRequest request) {
-        try {
-            String param = request.getParameter("param");
-            if (param != null && !param.equals("")) {
-                String chooseId = param.split(":")[0];
-                String modelId = param.split(":")[1];
-                BaseChoose baseChoose = (BaseChoose) baseManager.getObject(BaseChoose.class.getName(), chooseId);
-                baseChoose.setModelId(modelId);
-                baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    @RequestMapping("/chooseItem.do")
+//    @ResponseBody
+//    public boolean chooseItem(HttpServletRequest request) {
+//        try {
+//            String param = request.getParameter("param");
+//            if (param != null && !param.equals("")) {
+//                String chooseId = param.split(":")[0];
+//                String modelId = param.split(":")[1];
+//                BaseChoose baseChoose = (BaseChoose) baseManager.getObject(BaseChoose.class.getName(), chooseId);
+//                baseChoose.setModelId(modelId);
+//                baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
+//            }
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
-    @RequestMapping({"/viewChoose.do"})
-    @ResponseBody
-    public Object viewBaseChoose(HttpServletRequest request){
-        String chooseId = request.getParameter("chooseId");
-        BaseChoose baseChoose = (BaseChoose)baseManager.getObject(BaseChoose.class.getName(),chooseId);
-        return baseChoose;
-    }
+//    @RequestMapping({"/viewChoose.do"})
+//    @ResponseBody
+//    public Object viewBaseChoose(HttpServletRequest request){
+//        String chooseId = request.getParameter("chooseId");
+//        BaseChoose baseChoose = (BaseChoose)baseManager.getObject(BaseChoose.class.getName(),chooseId);
+//        return baseChoose;
+//    }
 
     /*jsp页面根据配置文件basic_do.xml生成  tabs*/
     @RequestMapping("/listCondition.do")
