@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="am-g">
-    <form action="<c:url value='/productPropertyValue/saveProductPropertyValueList.do'/>" method="get" class="am-form am-form-horizontal" >
+    <form action="<c:url value='/productPropertyValue/saveProductPropertyValueList.do'/>" method="post" class="am-form am-form-horizontal" >
         <input type="hidden" name="product.id" value="${product.id}"/>
         <input type="hidden" name="count" id="count" value="${PSPNListSize}">
         <div  id="pNameForm">
