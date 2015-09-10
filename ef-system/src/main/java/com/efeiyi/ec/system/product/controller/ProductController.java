@@ -30,10 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/18.
@@ -251,16 +248,24 @@ public class ProductController extends BaseController {
     }
     @RequestMapping("/changeTenant.do")
     @ResponseBody
-    public List changeTenant(String tenantId,HttpServletRequest request){
-        List list = null;
+    public Map changeTenant(String tenantId,HttpServletRequest request){
+        Map<String,List> map = new HashMap<>();
+        List masterList = null;
+        List projectList = null;
         try {
             XQuery xQuery = new XQuery("listTenantMaster_default",request);
             xQuery.put("tenant_id",tenantId);
-            list = baseManager.listObject(xQuery);
+            masterList = baseManager.listObject(xQuery);
+            map.put("masterList",masterList);
+            xQuery = new XQuery("listTenantProject_default",request);
+            xQuery.put("tenant_id",tenantId);
+            projectList = baseManager.listObject(xQuery);
+            map.put("projectList",projectList);
+
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  list;
+        return  map;
     }
     @RequestMapping("/changeMaster.do")
     @ResponseBody
@@ -276,4 +281,22 @@ public class ProductController extends BaseController {
         return  list;
     }
 
+    @RequestMapping("/setModelPicture.do")
+    @ResponseBody
+    public String setModelPicture(String modelId,String pictureId,HttpServletRequest request){
+
+        ProductPicture productPicture = null;
+        try {
+             productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),pictureId);
+            if ("0".equals(modelId)) {
+                productPicture.setProductModel(null);
+            }else {
+                productPicture.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId));
+            }
+            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  pictureId;
+    }
 }

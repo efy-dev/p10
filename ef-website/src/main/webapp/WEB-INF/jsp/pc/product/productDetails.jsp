@@ -54,9 +54,7 @@
       <div class="slider-img">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <c:if test="${productPicture.status=='1'}">
             <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
-           </c:if>
           </c:forEach>
         </ul>
       </div>
@@ -64,7 +62,7 @@
       <div class="slider-main">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
+            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="800" height="700" alt=""/></li>
           </c:forEach>
         </ul>
       </div>
@@ -158,7 +156,6 @@
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
       </div>
     </div>
-    ${product.productDescription.content}
   </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->

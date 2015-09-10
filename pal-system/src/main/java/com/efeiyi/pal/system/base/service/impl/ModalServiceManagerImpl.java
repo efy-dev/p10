@@ -1,7 +1,6 @@
 package com.efeiyi.pal.system.base.service.impl;
 
 import com.efeiyi.pal.organization.model.Tenant;
-import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.system.base.dao.ModalDao;
 import com.efeiyi.pal.system.base.service.ModalServiceManager;
 import org.springframework.beans.factory.annotation.Autowired;

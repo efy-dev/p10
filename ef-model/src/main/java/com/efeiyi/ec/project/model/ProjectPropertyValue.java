@@ -1,5 +1,6 @@
 package com.efeiyi.ec.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="project_property_value")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectPropertyValue {
     private String id;
     private String value;
