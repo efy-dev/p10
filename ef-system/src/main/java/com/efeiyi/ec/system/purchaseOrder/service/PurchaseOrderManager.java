@@ -6,16 +6,14 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
  * Created by IntelliJ IDEA.
  * User: ming
  * Date: 12-10-15
- * Time: ����5:01
+ * Time: ����5:01
  * To change this template use File | Settings | File Templates.
  */
 public interface PurchaseOrderManager {
 
     /**
-     * �ı䶩��״̬
-     * @param purchaseOrder
-     * @return
-     */
-    String updateOrderStatus(PurchaseOrder purchaseOrder);
+     * 后台订单发货使用
+     * 记录该订单的物流公司和物流单号*/
+    String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany);
 
 }
