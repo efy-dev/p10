@@ -58,7 +58,7 @@ public class Master implements Serializable {
 
 
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "master")
     public List<MasterProject> getMasterProjectList() {
         return masterProjectList;

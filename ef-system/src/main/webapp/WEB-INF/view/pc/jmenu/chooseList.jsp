@@ -33,7 +33,10 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" url="<c:url value="/do/chooseItem.do"/> " data-efy-choose-btn param="${pageContext.request.getParameter("chooseId")}:${obj.id}"><span
+                                    <button id="${obj.id}" name="${obj.name}"
+                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                            url="<c:url value="/do/chooseItem.do"/> " data-efy-choose-btn
+                                            param="${pageContext.request.getParameter("chooseId")}:${obj.id}"><span
                                             class="am-icon-trash-o">选中</span>
                                     </button>
                                 </div>
@@ -48,7 +51,7 @@
         </div>
     </div>
     <div style="clear: both">
-        <c:url value="/basic/xm.do" var="url"/>
+        <c:url value="/do/generatePages.do" var="url"/>
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="chooseId" value="${pageContext.request.getParameter('chooseId')}"/>
@@ -57,5 +60,31 @@
         </ming800:pcPageList>
     </div>
 </div>
+<a id="initIframe" onclick="initIframe(this)"></a>
+<script>
+
+    var parentInputId = "";
+
+    function init(divid) {
+        parentInputId = divid;
+    }
+
+    function initIframe(element) {
+        init($(element).attr("name"));
+    }
+
+    $().ready(function () {
+
+        window.parent.iframeInit();
+
+        $("[data-efy-choose-btn]").each(function () {
+//            alert("test");
+            $(this).click(function () {
+//                console.log("test");
+                window.parent.pChoosed(parentInputId, $(this).attr("id"), $(this).attr("name"))
+            });
+        });
+    });
+</script>
 </body>
 </html>

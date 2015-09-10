@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/PCDSelect.js"></script>
+    <script src="<c:url value='/scripts/PCDSelect.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">

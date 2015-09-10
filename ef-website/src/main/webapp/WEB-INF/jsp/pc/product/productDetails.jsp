@@ -54,7 +54,10 @@
       <div class="slider-img">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60" alt=""/></li>
+            <c:if test="${productPicture.status=='1'}">
+              <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
+                                      alt=""/></li>
+            </c:if>
           </c:forEach>
         </ul>
       </div>
@@ -62,7 +65,9 @@
       <div class="slider-main">
         <ul>
           <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="800" height="700" alt=""/></li>
+            <c:if test="${productPicture.status=='1'}">
+            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
+            </c:if>
           </c:forEach>
         </ul>
       </div>

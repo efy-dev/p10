@@ -80,17 +80,17 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping("/recommendedProductModel.do")
-    public String recommendedProduct(HttpServletRequest request){
+    public String recommendedProduct(HttpServletRequest request) {
         String id = request.getParameter("id");
 
         String categoryId = request.getParameter("categoryId");
 
-        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
         int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
         //  productModel.setRecommendIndex(maxValue + 1);
 
-        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
 
         return "redirect:/basic/xm.do?qm=plistProductModel_index";
 
@@ -100,30 +100,37 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/uploadify.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
         String productId = request.getParameter("productId");
-        Product product = (Product)baseManager.getObject(Product.class.getTypeName(),productId);
+        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
                 productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);
-                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(),productPicture);
-                data = productPicture.getId()+":"+url;
-            }catch (Exception e){
+                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                data = productPicture.getId() + ":" + url;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -136,36 +143,38 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/getImg.do")
     @ResponseBody
-    public String getImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String getImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url;
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            url = "product/" + fileName.substring(0, fileName.indexOf(".jpg")) + identify + ".jpg";
             aliOssUploadManager.uploadFile(mf, "tenant", url);
         }
         return "";
 
     }
 
-    /**获取项目 masterId*/
+    /**
+     * 获取项目 masterId
+     */
     @RequestMapping("/getProjectList.do")
     @ResponseBody
-    public List<MasterProject> getProjectByMasterId(String masterId,HttpServletRequest request) {
+    public List<MasterProject> getProjectByMasterId(String masterId, HttpServletRequest request) {
 
         List<MasterProject> list = null;
         try {
-            XQuery xQuery = new XQuery("listMasterProject_default",request);
+            XQuery xQuery = new XQuery("listMasterProject_default", request);
             xQuery.put("master_id", masterId);
             list = baseManager.listObject(xQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -173,38 +182,48 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping("/saveNewProduct.do")
-    public String saveNewProduct(Product product,ProductDescription productDescription,
-                                 ProductPicture productPicture,ProductModelBean productModelBean,
+    public String saveNewProduct(Product product, ProductDescription productDescription,
+                                 ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
-                                 String resultPage,Model model,String step)  {
+                                 String resultPage, Model model, String step) {
 
-        model.addAttribute("view",request.getParameter("view"));
+        model.addAttribute("view", request.getParameter("view"));
 
 
+        if ("product".equals(step)) {
 
-        if("product".equals(step)){
-
-            try {
-                Product product1 =        productManager.saveProduct(product);
-                System.out.print(product1.getMaster().getName());
-            }catch (Exception e){
-
+//            try {
+//                Product product1 =        productManager.saveProduct(product);
+//                System.out.print(product1.getMaster().getName());
+//            }catch (Exception e){
+//
+//            }
+            Product temProduct = productManager.saveProduct(product);
+            //  model.addAttribute("object",productManager.saveProduct(product));
+            //  &tenantId=${tenantId}&masterId=${masterId}&id=
+            String tenantId = "0";
+            String masterId = "0";
+            if (temProduct.getTenant() != null) {
+                tenantId = temProduct.getTenant().getId();
             }
-            model.addAttribute("object",productManager.saveProduct(product));
+            if (temProduct.getMaster() != null) {
+                masterId = temProduct.getMaster().getId();
+            }
+            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
 
-        }else if("description".equals(step)){
+        } else if ("description".equals(step)) {
 
-            model.addAttribute("object",productManager.saveProductDescription(productDescription));
+            model.addAttribute("object", productManager.saveProductDescription(productDescription));
 
-        }else  if("model".equals(step)){
+        } else if ("model".equals(step)) {
             try {
-                model.addAttribute("object",productManager.saveProductModel(productModelBean));
-            }catch (Exception e){
+                model.addAttribute("object", productManager.saveProductModel(productModelBean));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if("picture".equals(step)){
-            Product productTemp = (Product)baseManager.getObject(Product.class.getName(),request.getParameter("productId"));
-            model.addAttribute("object",productTemp);
+        } else if ("picture".equals(step)) {
+            Product productTemp = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("productId"));
+            model.addAttribute("object", productTemp);
         }
 
         return resultPage;
@@ -212,91 +231,93 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/deletePicture.do")
     @ResponseBody
-    public String deletePicture(String id){
+    public String deletePicture(String id) {
         try {
-            baseManager.delete(ProductPicture.class.getName(),id);
-        }catch (Exception e){
+            baseManager.delete(ProductPicture.class.getName(), id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
 
     @RequestMapping("/updatePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id,String status){
+    public String updateModelPicture(String id, String status) {
         try {
-            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
-            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
-        }catch (Exception e){
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
 
     @RequestMapping("/linkTenant.do")
     @ResponseBody
-    public String linkTenant(String tenantId,String productId){
+    public String linkTenant(String tenantId, String productId) {
         try {
-            Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
-            product.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-            baseManager.saveOrUpdate(Product.class.getName(),product);
-        }catch (Exception e){
+            Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+            product.setTenant((Tenant) baseManager.getObject(Tenant.class.getName(), tenantId));
+            baseManager.saveOrUpdate(Product.class.getName(), product);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  tenantId;
+        return tenantId;
     }
+
     @RequestMapping("/changeTenant.do")
     @ResponseBody
-    public Map changeTenant(String tenantId,HttpServletRequest request){
-        Map<String,List> map = new HashMap<>();
+    public Map changeTenant(String tenantId, HttpServletRequest request) {
+        Map<String, List> map = new HashMap<>();
         List masterList = null;
         List projectList = null;
         try {
-            XQuery xQuery = new XQuery("listTenantMaster_default",request);
-            xQuery.put("tenant_id",tenantId);
+            XQuery xQuery = new XQuery("listTenantMaster_default", request);
+            xQuery.put("tenant_id", tenantId);
             masterList = baseManager.listObject(xQuery);
-            map.put("masterList",masterList);
-            xQuery = new XQuery("listTenantProject_default",request);
-            xQuery.put("tenant_id",tenantId);
+            map.put("masterList", masterList);
+            xQuery = new XQuery("listTenantProject_default", request);
+            xQuery.put("tenant_id", tenantId);
             projectList = baseManager.listObject(xQuery);
-            map.put("projectList",projectList);
+            map.put("projectList", projectList);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  map;
+        return map;
     }
+
     @RequestMapping("/changeMaster.do")
     @ResponseBody
-    public List changeMaster(String masterId,HttpServletRequest request){
+    public List changeMaster(String masterId, HttpServletRequest request) {
         List list = null;
         try {
-            XQuery xQuery = new XQuery("listMasterProject_default",request);
-            xQuery.put("master_id",masterId);
+            XQuery xQuery = new XQuery("listMasterProject_default", request);
+            xQuery.put("master_id", masterId);
             list = baseManager.listObject(xQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  list;
+        return list;
     }
 
     @RequestMapping("/setModelPicture.do")
     @ResponseBody
-    public String setModelPicture(String modelId,String pictureId,HttpServletRequest request){
+    public String setModelPicture(String modelId, String pictureId, HttpServletRequest request) {
 
         ProductPicture productPicture = null;
         try {
-             productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),pictureId);
+            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
             if ("0".equals(modelId)) {
                 productPicture.setProductModel(null);
-            }else {
+            } else {
                 productPicture.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId));
             }
-            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
-        }catch (Exception e){
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  pictureId;
+        return pictureId;
     }
 }

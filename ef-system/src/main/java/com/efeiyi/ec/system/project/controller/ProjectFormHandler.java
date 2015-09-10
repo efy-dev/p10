@@ -40,7 +40,9 @@ public class ProjectFormHandler implements MultipartHandler {
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         //������� end
         modelMap.put("object", object);
-
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createDatetime = sdf2.format(new Date());
+        modelMap.put("createDateTime",createDatetime);
         modelMap.put("fatherId",request.getParameter("fatherId"));
         return modelMap;
     }

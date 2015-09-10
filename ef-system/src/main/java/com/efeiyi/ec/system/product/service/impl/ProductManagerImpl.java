@@ -10,6 +10,7 @@ import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,8 @@ public class ProductManagerImpl implements ProductManager{
                 product.setId(null);
                 product.setCreateDateTime(sdf.parse(sdf.format(new Date())));
 
+            }else {
+                product.setProductModelList(xdoDao.getObjectList("from ProductModel where status!='0' and product.id=?",new Object[]{product.getId()}));
             }
             System.out.print("".equals(product.getProductDescription().getId()));
             if("".equals(product.getProductDescription().getId())){
@@ -91,6 +94,11 @@ public class ProductManagerImpl implements ProductManager{
             }else {
                 product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
             }
+            if ("".equals(product.getTenant().getId())){
+                product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
+            }
+
+
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
             e.printStackTrace();
@@ -173,9 +181,13 @@ public class ProductManagerImpl implements ProductManager{
         }
         if ("".equals(productModelBean.getDefaultId())) {
             ProductModel productModel = new ProductModel();
-            productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            }
             productModel.setName(productModelBean.getDefaultName());
-            productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            }
             productModel.setProduct(product);
             productModel.setSerial(autoSerialManager.nextSerial("productModel"));
             productModel.setStatus(productModelBean.getDefaultStatus());
