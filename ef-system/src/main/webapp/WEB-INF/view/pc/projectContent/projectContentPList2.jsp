@@ -31,7 +31,7 @@
     </tr>
 
 
-    <c:forEach items="${requestScope.pageInfo.list}" var="ProjectContent">
+    <c:forEach items="${requestScope.projectContentList}" var="ProjectContent">
         <tr style="text-align: left">
             <td>
                 <div class="am-btn-toolbar">

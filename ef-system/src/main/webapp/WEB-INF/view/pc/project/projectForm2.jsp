@@ -13,7 +13,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/PCDSelect.js"></script>
+    <script src="<c:url value='/scripts/PCDSelect.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -23,11 +23,11 @@
 
 <div class="am-g">
     <form action="<c:url value="/basic/xmm.do"/>"  class="am-form am-form-horizontal" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="qm" value="saveOrUpdateProject">
+        <input type="hidden" name="qm" value="saveOrUpdateProject2">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="fatherProject.id" value="${fatherId}">
-
+        <input type="hidden" id="createDateTime" name="createDateTime" value="${createDateTime}">
 
         <c:if test="${empty fatherId}">
             <input type="hidden" name="level" value="1" />

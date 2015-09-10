@@ -1,25 +1,27 @@
-package com.efeiyi.ec.master.model;
+package com.efeiyi.ec.project.model;
 
-import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * Created by Administrator on 2015/7/17.
+ * Created by Administrator on 2015/9/9.
  *
  */
 @Entity
-@Table(name = "master_project")
+@Table(name="projectFollowed")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class MasterProject  {
+public class ProjectFollowed implements Serializable {
     private String id;
-    private Master master;
     private Project project;
+    private Consumer user;
     private String status;
-
+    private Date createDatetime;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -30,17 +32,6 @@ public class MasterProject  {
     public void setId(String id) {
         this.id = id;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "master_id")
-    public Master getMaster() {
-        return master;
-    }
-
-    public void setMaster(Master master) {
-        this.master = master;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     public Project getProject() {
@@ -50,13 +41,30 @@ public class MasterProject  {
     public void setProject(Project project) {
         this.project = project;
     }
-
     @Column(name="status")
+    @Where(clause = "status=1")
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "consumer_id")
+    public Consumer getUser() {
+        return user;
+    }
+
+    public void setUser(Consumer user) {
+        this.user = user;
+    }
+    @Column(name="createDatetime")
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 }
