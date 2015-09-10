@@ -27,7 +27,7 @@
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">非遗项目名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="非遗项目名称" value="${object.name}" required="true">
+                <input type="text" name="name" id="name" placeholder="非遗项目名称" value="${object.name}" title="非遗项目名称" required="true">
             </div>
         </div>
         <div class="am-form-group">

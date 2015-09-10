@@ -164,6 +164,8 @@ public class Project {
         this.subProjectList = subProjectList;
     }
     @JsonIgnore
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public List<ProjectProperty> getProjectPropertyList() {

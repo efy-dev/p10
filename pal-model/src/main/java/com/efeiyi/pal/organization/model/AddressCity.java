@@ -18,7 +18,6 @@ public class AddressCity implements Serializable {
     private String id;
     private String name;
     private AddressProvince addressProvince;
-    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -49,15 +48,6 @@ public class AddressCity implements Serializable {
 
     public void setAddressProvince(AddressProvince addressProvince) {
         this.addressProvince = addressProvince;
-    }
-
-    @Column(name = "status")
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
 }

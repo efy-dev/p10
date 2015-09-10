@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -110,7 +111,7 @@ public class DialogController {
             throw new Exception("无法获取商户Id");
         }
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name.trim(), tenant, "Product");
+        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name, tenant, "Product");
         return set;
     }
 

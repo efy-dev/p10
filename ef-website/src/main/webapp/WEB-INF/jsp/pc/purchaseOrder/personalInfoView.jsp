@@ -29,10 +29,15 @@
             <dl>
                 <dt>
                 <div class="userinfo-figure">
-                    <img src="<c:url value="/scripts/images/yonghm.jpg"/>">
+                <c:if test="${empty user.pictureUrl}">
+                    <img id="uploadPic" src="<c:url value="/scripts/images/yonghm.jpg"/>">
+                </c:if>
+                <c:if test="${!empty user.pictureUrl}">
+                    <img id="uploadPic" style="width:100%;height:100%" src="http://pro.efeiyi.com/${user.pictureUrl}@!info-user-pic">
+                </c:if>
                 </div>
                 <div class="editor">
-                    <a href="#">编辑头像</a>
+                    <a id="file" href="#">编辑头像</a>
                 </div>
                 </dt>
                 <dd>
@@ -107,6 +112,8 @@
 <script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/system.js"/>"></script>
 <script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
+<script src="<c:url value="/scripts/js/jquery.uploadify.min.js"/>"></script>
+
 
 
 <script>
@@ -131,6 +138,27 @@
             },
         });
     });
+
+    function addPhotoDynamic(photoUrl){
+        $("#uploadPic").attr("src","http://pro.efeiyi.com/"+photoUrl+"@!info-user-pic");
+    }
+
+    $(function () {
+        //头像上传，使用 uploadify 插件。
+        $("#file").uploadify({
+            width: 120,
+            height: 30,
+            dataType: 'json',
+            swf: '<c:url value="/scripts/js/uploadify.swf"/>',
+            uploader: '<c:url value="/myEfeiyi/uploadIcon.do?id=${user.id}"/>',
+            'onUploadSuccess':function(file, data, response){
+                $('#' + file.id).find('.data').html(' 上传完毕');
+                var jsonResult = eval(data);
+                addPhotoDynamic(jsonResult);
+            },
+        });
+    });
+
 </script>
 </body>
 </html>

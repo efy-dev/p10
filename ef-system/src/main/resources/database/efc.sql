@@ -177,4 +177,13 @@ CREATE TABLE `product_model` (
 
 
 
+CREATE TABLE `core_base_choose` (
+`id`  char(16) NOT NULL ,
+`model_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+
+
 
