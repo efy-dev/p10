@@ -8,7 +8,7 @@
 <!--//End--header-->
 <div class="shipping-address">
   <div class="address">
-    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>">
+    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post">
       <ul>
         <li>
           <input name="id" type="hidden" value="${address.id}">
