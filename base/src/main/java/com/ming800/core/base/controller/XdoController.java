@@ -48,8 +48,6 @@ public class XdoController {
     private XdoSupportManager xdoSupportManager;
 
 
-
-
     @RequestMapping("/xm.do")
     public ModelAndView xm(HttpServletRequest request, ModelMap modelMap) throws Exception {
         String menuId = request.getParameter("menuId");
@@ -75,7 +73,12 @@ public class XdoController {
             DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
             modelMap.put("tempDo", tempDo);
             modelMap.put("doQueryList", tempDo.getDoQueryList());
-            resultPage = tempDo.getResult();
+            String export = request.getParameter("resultPage");
+            if (export != null && !"".equals(export)) {
+                resultPage = export;
+            } else {
+                resultPage = tempDo.getResult();
+            }
 
             /*判断是否自定义了  xpage*/
   /*          List<Page> tempPageList = new ArrayList<>();
@@ -268,10 +271,9 @@ public class XdoController {
     }
 
     @RequestMapping({"/xmi.do"})
-    public String xmi(HttpServletRequest request){
-        return "forward:/basic/xm.do?qm="+request.getParameter("qm")+"&conditions="+request.getParameter("conditions");
+    public String xmi(HttpServletRequest request) {
+        return "forward:/basic/xm.do?qm=" + request.getParameter("qm") + "&conditions=" + request.getParameter("conditions");
     }
-
 
 
     @RequestMapping("/xmm.do")   //多附件的情况
@@ -314,7 +316,6 @@ public class XdoController {
 
         return new ModelAndView(tempResultPage);
     }
-
 
 
     /*返回json*/

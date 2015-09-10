@@ -63,8 +63,6 @@
                 <match url="/basic/xm.do?qm=plistTenantProduct_default"/>
                 <match url="/basic/xm.do?view=newProduct"/>
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
-                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=newProduct"/>
-
 
 
             </jnode>
@@ -215,14 +213,17 @@
                 <match url="/basic/xm.do?qm=formProjectContent"/>
                 <match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>
                 <match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>
+                <match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>
+                <match url="/basic/xm.do?qm=plistMasterWork_byProject2"/>
             </jnode>
 
         </jnode>
         <jnode url="/basic/xm.do?qm=plistProjectNews_default" access="admin,manager" text_zh_CN="资讯">
             <match url="plistProjectNews_default"/>
         </jnode>
-    </jnode>
 
+
+    </jnode>
 
     <jnode id="baseManager" url="/main.do?jnodeId=baseManager" text_zh_CN="基础管理">
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
@@ -268,3 +269,9 @@
         </jnode>
     </jnode>
 </jmenu>
+
+
+
+
+
+

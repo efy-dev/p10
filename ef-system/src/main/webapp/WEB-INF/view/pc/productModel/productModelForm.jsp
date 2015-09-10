@@ -51,7 +51,7 @@
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                     <c:if test="${object.status=='1'}">
-                        收藏品
+                        普通
                     </c:if>
                     <c:if test="${object.status=='2'}">
                         精品
@@ -254,7 +254,7 @@
                      </c:if>
                         <c:if test="${view == 'tenant'}">
                             <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"
+                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成"/>
                         </c:if>
                     </span>

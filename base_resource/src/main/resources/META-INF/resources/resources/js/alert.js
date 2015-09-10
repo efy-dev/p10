@@ -123,3 +123,7 @@ function getChooseConfirmDiv(){//动态添加确认框内容到当前页面
         "</div>"+
         "</div>");
 }
+
+function showIframe(iframeHtml){
+
+}

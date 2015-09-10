@@ -13,6 +13,7 @@
 <html>
 <head>
     <title></title>
+    <script src="/scripts/PCDSelect.js"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -47,6 +48,26 @@
                 <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
             </div>
         </div>
+        <div id="pcdDiv">
+            <div class="am-form-group">
+                <label name="province" for="province" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="province.id" id="province"></select>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="city" for="city" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="city.id" id="city"></select>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="district" for="district" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="district.id" id="district"></select>
+                </div>
+            </div>
+            </div>
         <div class="am-form-group">
             <label name="type" for="type" class="am-u-sm-3 am-form-label">项目类别 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">
@@ -83,5 +104,18 @@
 </div>
 <!-- content end -->
 <hr/>
+
+<script type="text/javascript">
+    $(function(){
+        $("#pcdDiv").pcdSelect(
+                "<c:url value='/pj/address/provinceList.do'/>",
+                "<c:url value='/pj/address/cityListByProvince.do?conditions=addressProvince.id:'/>",
+                "<c:url value='/pj/address/districtListByCity.do?conditions=addressCity.id:'/>",
+                "${object.addressDistrict.city.province.id}",
+                "${object.addressDistrict.city.id}",
+                "${object.addressDistrict.id}"
+        )
+    });
+</script>
 </body>
 </html>
