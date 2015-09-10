@@ -2,6 +2,7 @@ package com.efeiyi.ec.project.model;
 
 import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="project")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Project {
     private String id;
     private String serial;//项目编号
@@ -143,7 +145,7 @@ public class Project {
     public  void  setType(String type){
         this.type=type;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public  List<ProjectTag> getProjectTagList(){
@@ -152,7 +154,7 @@ public class Project {
     public  void  setProjectTagList(List<ProjectTag> projectTagList){
         this.projectTagList = projectTagList;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
     @Where(clause = "status=1")
     public  List<Project> getSubProjectList(){
@@ -161,7 +163,7 @@ public class Project {
     public  void  setSubProjectList(List<Project> subProjectList){
         this.subProjectList = subProjectList;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public List<ProjectProperty> getProjectPropertyList() {
