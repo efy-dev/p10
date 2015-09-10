@@ -71,7 +71,7 @@
                     execute="com.efeiyi.ec.system.master.controller.TenantMasterListHandler"
                     result="/tenantMaster/masterList">
                     <query name="default" label="默认" type="auto" orderBy="id: desc">
-                        <condition label="主键" name="id" defaultValue="0" peration="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -422,6 +422,10 @@
                         <condition name="master.id" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="byProject2" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
 
 
@@ -537,16 +541,23 @@
                     execute="com.efeiyi.ec.system.master.controller.DeleteMasterWorkRecommendedHandler"/>
                 <do name="listMasterProject" label="大师著作产品" access="" result="/masterWork/masterWorkProjectIncludeList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
                         <condition label="大师" name="master.id" defaultValue="1" operation="eq"/>
-                        <condition label="项目" name="project.status" operation="ne" defaultValue="0"/>
                     </query>
-
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="大师" name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
                     <query name="include" label="嵌入" type="auto" orderBy="id:desc">
                         <condition label="状态" name="status" defaultValue="0" operation="ne"/>
                         <condition label="传承人Id" name="master.id" operation="eq"/>
-                        <condition label="项目" name="project.status" operation="ne" defaultValue="0"/>
                     </query>
+                </do>
+                <do name="listMasterProject2Master" label="大师著作产品" access="" result="/masterProject/masterProjectList2">
+
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
+
                 </do>
             </does>
         </entity>
@@ -585,6 +596,7 @@
 
             </does>
         </entity>
+
         <entity name="MasterMessage" label="传承人新闻动态"
                 basic="simple" others=""
                 model="com.efeiyi.ec.master.model.MasterMessage">

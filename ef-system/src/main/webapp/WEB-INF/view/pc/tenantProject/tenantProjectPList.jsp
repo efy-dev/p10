@@ -88,8 +88,11 @@
 
         <c:forEach var="tenantProject" items="${tenantProjectList}">
         var projectId = '${tenantProject.project.id}';
-        $("#"+projectId).attr("status","1");
-        $("#"+projectId).find("span").text("解除商家");
+        if(${tenantProject.status == '1'}){
+            $("#"+projectId).attr("status","1");
+            $("#"+projectId).find("span").text("解除商家");
+        }
+
         $("#"+projectId).attr("tenantProjectId",'${tenantProject.id}')
 
         </c:forEach>
@@ -99,28 +102,39 @@
         var tenantId = $("input[name='tenantId']").val();
         var tenantProjectId = $(obj).attr("tenantProjectId");
         var status = $(obj).attr("status");
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/product/project/linkTenant.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{tenantId:tenantId,projectId:projectId,tenantProjectId:tenantProjectId,status:status},
-            success: function (data) {
-                if(status == '0'){
-                    $(obj).attr("status","1");
-                    $(obj).find("span").text("解除商家");
-                    $(obj).attr("tenantProjectId",data)
-                }else{
-                    $(obj).attr("status","0");
-                    $(obj).find("span").text("关联商家");
-                    $(obj).attr("tenantProjectId",data)
-                }
+        if(status=="1"){
+            var r=confirm("解除关联同时会删除商品与项目的关联，请谨慎操作；如确实要解除，请在商品管理页重新关联项目。")
+            if (r==true)
+            {
+                $.ajax({
+                    type: "get",
+                    url: '<c:url value="/product/project/linkTenant.do"/>',
+                    cache: false,
+                    dataType: "json",
+                    data:{tenantId:tenantId,projectId:projectId,tenantProjectId:tenantProjectId,status:status},
+                    success: function (data) {
+                        if(status == '0'){
+                            $(obj).attr("status","1");
+                            $(obj).find("span").text("解除商家");
+                            $(obj).attr("tenantProjectId",data)
+                        }else{
+                            $(obj).attr("status","0");
+                            $(obj).find("span").text("关联商家");
+                            $(obj).attr("tenantProjectId",data)
+                        }
 //                $("a[status='1'] span").text("关联商家");
 //                $("a[status='1']").attr("status",'0');
 //                $(obj).find("span").text("解除商家");
 //                $(obj).attr("status",'1');
+                    }
+                });
             }
-        });
+            else
+            {
+               // document.write("You pressed Cancel!")
+            }
+        }
+
     }
 </script>
 </body>

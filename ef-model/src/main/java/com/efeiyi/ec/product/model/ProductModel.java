@@ -30,6 +30,16 @@ public class ProductModel implements Serializable {
     private String marketPrice;
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
+    private List<ProductPicture>  productPictureList;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "productModel")
+    public List<ProductPicture> getProductPictureList() {
+        return productPictureList;
+    }
+
+    public void setProductPictureList(List<ProductPicture> productPictureList) {
+        this.productPictureList = productPictureList;
+    }
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")

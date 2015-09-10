@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.master.service.impl;
 import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.master.model.MasterWorkRecommended;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterWorkRecommendedDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
 import com.efeiyi.ec.system.master.service.MasterWorkRecommendedManager;
@@ -44,22 +45,22 @@ public class MasterManagerImpl implements MasterManager {
                     tenantMaster.setStatus("1");
                 }
                 if("1".equals(status)){
+                    List<Product> productList = xdoDao.getObjectList("from Product where tenant.id=? and master.id=?",new Object[]{tenantId,masterId} );
+                    for(Product product:productList){
+                        product.setMaster(null);
+                        xdoDao.saveOrUpdateObject(product);
+                    }
                     tenantMaster.setStatus("0");
                 }
             }
             xdoDao.saveOrUpdateObject(TenantMaster.class.getName(), tenantMaster);
             List<MasterProject> masterProjectList =  xdoDao.getObjectList("from MasterProject where status = '1'and project.status!='0' and master.id = ?",new Object[]{masterId});
-//            XQuery xQuery = new XQuery("listMasterProject_default",request);
-//            xQuery.put("master_id",masterId);
-//            List<MasterProject> masterProjectList = baseManager.listObject(xQuery);
+
             Tenant tenant = (Tenant)xdoDao.getObject(Tenant.class.getName(),tenantId);
             if(masterProjectList!=null){
                 for (MasterProject masterProject :masterProjectList){
                     TenantProject tenantProject = null;
-//                    xQuery = new XQuery("listTenantProject_default2",request);
-//                    xQuery.put("tenant_id",tenantId);
-//                    xQuery.put("project_id",masterProject.getProject().getId());
-//                    List<TenantProject> mp = baseManager.listObject(xQuery);
+
                     List<TenantProject> mp = xdoDao.getObjectList("from TenantProject where tenant.id=? and project.id=?",new Object[]{tenantId,masterProject.getProject().getId()});
                     if(mp.size()!=0){
                         tenantProject = mp.get(0);
@@ -67,6 +68,11 @@ public class MasterManagerImpl implements MasterManager {
                             tenantProject.setStatus("1");
                         }
                         if("1".equals(status)) {
+                            List<Product> productList = xdoDao.getObjectList("from Product where tenant.id=? and project.id=?",new Object[]{tenantId,tenantProject.getProject().getId()} );
+                            for(Product product:productList){
+                                product.setProject(null);
+                                xdoDao.saveOrUpdateObject(product);
+                            }
                             tenantProject.setStatus("0");
                         }
                     }else{

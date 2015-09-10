@@ -84,8 +84,11 @@
 
         <c:forEach var="tenantMaster" items="${tenantMasterList}">
         var masterId = '${tenantMaster.master.id}';
-        $("#"+masterId).attr("status","1");
-        $("#"+masterId).find("span").text("解除商家");
+        if(${tenantMaster.status == '1'}){
+            $("#"+masterId).attr("status","1");
+            $("#"+masterId).find("span").text("解除商家");
+        }
+
         $("#"+masterId).attr("tenantMasterId",'${tenantMaster.id}')
 
         </c:forEach>

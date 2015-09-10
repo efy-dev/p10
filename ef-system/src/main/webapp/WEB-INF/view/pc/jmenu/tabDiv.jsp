@@ -35,11 +35,21 @@
         <c:forEach items="${doQueryList}" var="doQuery">
             <c:if test="${doQuery.name=='default'}">
                 <c:if test="${tabTitle==doQuery.label}">
-                    <li class="am-active"><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>" >${doQuery.label}</a>
+                    <li class="am-active" id="${doQuery.name}"><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>" >${doQuery.label}</a>
+                        <script>
+                            $('#${doQuery.name}').find('a').on('opened.tabs.amui', function(e) {
+                                window.location.href= "<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>";
+                            })
+                        </script>
                     </li>
                 </c:if>
                 <c:if test="${tabTitle!=doQuery.label}">
-                    <li><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>">${doQuery.label}</a>
+                    <li id="${doQuery.name}"><a href="<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>">${doQuery.label}</a>
+                        <script>
+                            $('#${doQuery.name}').find('a').on('opened.tabs.amui', function(e) {
+                               window.location.href= "<c:url value="/basic/xm.do?qm=${requestScope.tempDo.name}_default"/>";
+                            })
+                        </script>
                     </li>
                 </c:if>
             </c:if>
@@ -58,6 +68,7 @@
         <c:forEach items="${doQueryList}" var="doQuery">
             <c:if test="${tabTitle==doQuery.label}">
                 <div class="am-tab-panel am-active" id="${doQuery.name}">
+
                 </div>
             </c:if>
             <c:if test="${tabTitle!=doQuery.label}">

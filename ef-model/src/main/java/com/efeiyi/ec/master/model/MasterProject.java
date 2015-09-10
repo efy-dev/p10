@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/7/17.
+ *
  */
 @Entity
 @Table(name = "master_project")
