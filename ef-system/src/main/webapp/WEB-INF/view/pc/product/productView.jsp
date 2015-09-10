@@ -89,7 +89,7 @@
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                     <c:if test="${object.status=='1'}">
-                        收藏品
+                        普通
                     </c:if>
                     <c:if test="${object.status=='2'}">
                         精品
@@ -263,7 +263,7 @@
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
 
-                                                    <select onchange="setModelPic(this,'${productPicture.id}')">
+                                                    <select style="width: 85%;" onchange="setModelPic(this,'${productPicture.id}')">
                                                         <option value="0">设置商品规格图片</option>
                                                         <c:forEach var="productModel1" items="${object.productModelList}">
                                                             <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
@@ -465,7 +465,7 @@ var modelIds = [];
                         '</a>'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
-                        '<select onchange="setModelPic(this,\''+pictureId+'\')">'+
+                        '<select style="width: 85%;" onchange="setModelPic(this,\''+pictureId+'\')">'+
                         '<option value="0">'+'设置商品规格图片'+'</option>';
                 for(var n=0;n<modelIds.length;n++) {
 
