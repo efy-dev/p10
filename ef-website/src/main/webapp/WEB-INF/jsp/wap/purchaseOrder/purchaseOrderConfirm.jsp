@@ -8,7 +8,8 @@
     .paymentActive{
       border: 2px red;
     }
-    .acd{display: none}
+    .acd{background: #fff!important;color: #000!important;border:1px solid #000!important;}
+    .acn{background: #000!important;color: #fff!important;}
   </style>
 </head>
 <body>
@@ -86,7 +87,7 @@
       <ul class="ul-list">
         <c:forEach items="${addressList}" var="address">
 
-          <li class="cart-btn" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">
+          <li class="cart-btn acd" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">
             <p class="bd title">${address.consignee}  ${address.phone}</p>
             <p class="bd des">${address.province.name}${address.details}</p>
             <p class="bd btns">
