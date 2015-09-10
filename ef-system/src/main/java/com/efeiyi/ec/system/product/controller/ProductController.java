@@ -115,7 +115,14 @@ public class ProductController extends BaseController {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/" + fileName.substring(0, fileName.indexOf(".jpg")) + identify + ".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
