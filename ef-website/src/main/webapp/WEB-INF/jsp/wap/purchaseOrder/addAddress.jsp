@@ -14,7 +14,7 @@
         <li>
           <input name="id" type="hidden" value="">
           <label>收货人</label>
-          <input type="text" class="txt" name="consignee" value="">
+          <input type="text" class="txt" name="consignee" value="" required>
         </li>
         <li>
           <label>手机号</label>
@@ -30,7 +30,7 @@
         </li>
         <li>
           <label>具体地址</label>
-          <textarea name="details" id="doc-vld-ta-2-1" minlength="10" maxlength="100" class="text-act"></textarea>
+          <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
         </li>
       </ul>
       <div class="default">
