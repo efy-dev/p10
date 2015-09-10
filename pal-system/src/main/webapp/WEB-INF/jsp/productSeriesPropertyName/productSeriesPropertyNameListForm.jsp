@@ -67,7 +67,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form action="<c:url value='/productSeriesPropertyName/savePropertyNameList.do'/>" method="get" class="am-form am-form-horizontal" >
+    <form action="<c:url value='/productSeriesPropertyName/savePropertyNameList.do'/>" method="post" class="am-form am-form-horizontal" >
         <input type="hidden" name="qm" value="saveOrUpdateProductSeriesPropertyName">
         <input type="hidden" name="productSeries.id" value="${productSeries.id}"/>
         <input type="hidden" name="count" id="count" value="${PSPNListSize}">
