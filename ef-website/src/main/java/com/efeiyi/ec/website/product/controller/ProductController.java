@@ -54,7 +54,7 @@ public class ProductController {
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null||productModelList.size()>0){
+        if(productModelList!=null&&productModelList.size()>0){
             for(ProductModel productModel:productModelList){
                 StringBuilder s = new StringBuilder();
                 s.append(productModel.getProduct().getName());
