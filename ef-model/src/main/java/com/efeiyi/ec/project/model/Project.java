@@ -163,7 +163,6 @@ public class Project {
     public  void  setSubProjectList(List<Project> subProjectList){
         this.subProjectList = subProjectList;
     }
-    @JsonIgnore
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
