@@ -102,7 +102,7 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="<c:url value="${op.productModel.product.picture_url}"/>" alt="">
+                    <img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt="">
                     <div class="info">
                       <p><a href="#">${op.productModel.product.category.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>

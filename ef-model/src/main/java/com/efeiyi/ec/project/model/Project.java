@@ -145,7 +145,7 @@ public class Project {
     public  void  setType(String type){
         this.type=type;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public  List<ProjectTag> getProjectTagList(){
@@ -154,7 +154,7 @@ public class Project {
     public  void  setProjectTagList(List<ProjectTag> projectTagList){
         this.projectTagList = projectTagList;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
     @Where(clause = "status=1")
     public  List<Project> getSubProjectList(){
