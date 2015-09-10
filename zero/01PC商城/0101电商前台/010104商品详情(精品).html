@@ -504,6 +504,9 @@
     $(function(){
         //精品详情
         (function(){
+            if($('div').hasClass('section')){
+                $('body,html').css({'width':'100%','height':'100%'});
+            }
             //导航点击
             $('.nav-share .nav .navli').click(function(){
                 var index=$(this).index();

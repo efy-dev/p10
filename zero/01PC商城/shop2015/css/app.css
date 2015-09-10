@@ -415,11 +415,6 @@ a,
 .footer .copyright .frlinks a:hover,
 .shop-sort .link2 dd a:hover{color:#f00;text-decoration:underline}
 /*--//End--transition*/
-html, body {
-    width:100%;
-    height:100%;
-
-}
 .topbar-fine {position:fixed;top:0;left:0;z-index:50}
 .header-fine {position:fixed;top:31px;left:0;height:57px;z-index:5}
 .header-fine .logo {padding:10px 0}
