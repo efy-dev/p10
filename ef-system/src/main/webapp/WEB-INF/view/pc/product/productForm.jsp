@@ -25,14 +25,15 @@
   <fieldset>
     <legend class="" style="font-size: 17px">商品信息</legend>
     <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">
+    <%--<form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="qm" value="saveOrUpdateProduct">
       <input type="hidden" name="resultPage" value="0" />
       <input type="hidden" name="step" value="product">
-        <input type="hidden" name="view" value="${view}">
-        <input type="hidden" name="tenant.id" value="">
-        <input type="hidden" name="master.id" value="">
-        <input type="hidden" name="project.id" value="">
+      <input type="hidden" name="view" value="${view}">
+      <input type="hidden" name="tenant.id" value="">
+      <input type="hidden" name="master.id" value="">
+      <input type="hidden" name="project.id" value="">
       <%--<input type="hidden" name="view" value="${view}">--%>
       <input type="hidden" name="productDescription.id" value="${object.productDescription.id}">
       <div class="am-form-group">
@@ -58,7 +59,7 @@
       </div>
 
       <div class="am-form-group">
-        <label name="price" class="am-u-sm-3 am-form-label">商品价格</label>
+        <label name="price" class="am-u-sm-3 am-form-label">市场价格</label>
 
         <div class="am-u-sm-9">
           <input type="text" name="price" id="price" value="${object.price}">
@@ -72,7 +73,7 @@
         <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="1" />
-                     收藏品
+                     普通
                  </span>
                  <span style="margin-left: 10px;">
                    <input type="radio" name="status" value="2"/>
@@ -86,12 +87,12 @@
         <label name="serial" class="am-u-sm-3 am-form-label">关联商家</label>
 
         <div class="am-u-sm-9" style="margin-top: 10px;">
-                <select name="tenantCheck" onchange="changeTenant(this)">
-                   <option value="0">请选择</option>
-                 <c:forEach var="tenant" items="${tenantList}">
-                    <option value="${tenant.id}" <c:if test="${object.tenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
-                 </c:forEach>
-                </select>
+          <select name="tenantCheck" onchange="changeTenant(this)">
+            <option value="0">请选择</option>
+            <c:forEach var="tenant" items="${tenantList}">
+              <option value="${tenant.id}" <c:if test="${object.tenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
+            </c:forEach>
+          </select>
           <!--<small>必填项*</small>-->
         </div>
       </div>
@@ -140,7 +141,6 @@
         </div>
       </c:if>
 
-
       <div class="am-form-group">
         <div class="am-u-sm-9 am-u-sm-push-3">
                     <span style="padding: 10px;">
@@ -152,12 +152,23 @@
                         <%--</c:if>--%>
                     </span>
                     <span style="padding: 10px;">
-                      <c:if test="${view == 'newProduct'}">
-                        <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"  class="am-btn am-btn-primary" value="保存"/>
-                      </c:if>
-                      <c:if test="${view == 'tenant'}">
-                        <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"  class="am-btn am-btn-primary" value="保存"/>
-                      </c:if>
+
+
+                      <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct&view=${view}')"  class="am-btn am-btn-primary" value="保存"/>
+
+
+                         <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct_ProductModel&view=${view}')"  class="am-btn am-btn-primary" value="下一步"/>
+
+                      <%--<c:if test="${empty object.id}">--%>
+                        <%--<input readonly="readonly" type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${object.id}')"  class="am-btn am-btn-primary" value="下一步"/>--%>
+                      <%--</c:if>--%>
+
+                       <%--<c:if test="${view == 'newProduct'}">--%>
+                         <%--<input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"  class="am-btn am-btn-primary" value="保存"/>--%>
+                       <%--</c:if>--%>
+                      <%--<c:if test="${view == 'tenant'}">--%>
+                        <%--<input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"  class="am-btn am-btn-primary" value="返回列表"/>--%>
+                      <%--</c:if>--%>
                     </span>
 
         </div>
@@ -187,14 +198,14 @@
 
     var  pid = '${tenantProject.project.id}';
 
-            if($("#Project span[id='"+pid+"']").length==0){
-              var span = '<span style="margin-left: 10px;" flag="1" id="'+pid+'">'+
-                         '     <input type="radio" value="'+pid+'"  name="projectCheck"/>'+'${tenantProject.project.name}'+
-                         ' </span>';
-              $("#Project").append(span);
-            }else{
-              $("#Project span[id='"+pid+"']").attr("flag","1");
-            }
+    if($("#Project span[id='"+pid+"']").length==0){
+      var span = '<span style="margin-left: 10px;" flag="1" id="'+pid+'">'+
+              '     <input type="radio" value="'+pid+'"  name="projectCheck"/>'+'${tenantProject.project.name}'+
+              ' </span>';
+      $("#Project").append(span);
+    }else{
+      $("#Project span[id='"+pid+"']").attr("flag","1");
+    }
     </c:forEach>
     var projectId = '${object.project.id}';
     $("#"+projectId+" input[value='"+projectId+"']").attr("checked",true);
@@ -209,18 +220,17 @@
       dataType: "json",
       data:{tenantId:tenantId},
       success: function (data) {
-        alert("dd");
         $("#master").text("");
         $("#Project").text("");
         $.each(data,function(k,v){
-            if(k=="masterList"){
-              for(var i=0;i<v.length;i++){
-                var span = '<span style="margin-left: 10px;">'+
-                        '     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+
-                        ' </span>';
-                $("#master").append(span);
-              }
+          if(k=="masterList"){
+            for(var i=0;i<v.length;i++){
+              var span = '<span style="margin-left: 10px;">'+
+                      '     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+
+                      ' </span>';
+              $("#master").append(span);
             }
+          }
           if(k=="projectList"){
 
             for(var i=0;i<v.length;i++){
@@ -245,9 +255,9 @@
       alert("商品价格不能为空!");
 //
     }else if(!checkPrice($("#price").val())){
-        alert("商品价格必须为数字!");
+      alert("商品价格必须为数字!");
     }else if($("select[name='tenantCheck']").val()=="0"){
-          $("input[name='tenant.id']").val(null);
+      $("input[name='tenant.id']").val("");
     } else{
       $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
       $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
@@ -276,7 +286,7 @@
       success: function(data) {
         var obj = eval(data);
         $("#Project span[flag='0']").each(function(){
-              $(this).remove();
+          $(this).remove();
         });
         for(var i=0;i<obj.length;i++){
           if($("#Project span[id='"+obj[i].project.id+"']").length==0){
