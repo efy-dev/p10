@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.product.model.ProductModel" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -40,7 +41,6 @@
 <div class="hd category">
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
-        <%String path = request.getContextPath();%>
       <li><a href="/">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
@@ -72,7 +72,7 @@
                         <%--<i class="icon icon-chengpin"></i>--%>
                         <%--<i class="icon icon-hand"></i>--%>
                     <%--</span>--%>
-                  <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                  <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>
                                <% i++;%>
                                <%}else if(i==1){%>
                        <% i++;%>
@@ -87,10 +87,8 @@
                             src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>
                        <%}%>
-                <p class="wh name">${productModel.product.name}
-                <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                ${productPropertyValue.projectPropertyValue.value}
-                </c:forEach>
+                <p class="wh name">
+                    ${map.get(productModel)}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>

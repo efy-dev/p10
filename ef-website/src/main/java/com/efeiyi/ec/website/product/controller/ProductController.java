@@ -1,9 +1,6 @@
 package com.efeiyi.ec.website.product.controller;
 
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductFavorite;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -55,11 +52,27 @@ public class ProductController {
         XQuery xQuery = new XQuery("plistProductModel_default",request);
         xQuery.put("product_project_id", projectId);
         xQuery.addRequestParamToModel(model,request);
-        List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
+        List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
+        Map<ProductModel,String> map = new HashMap<>();
+        if(productModelList!=null||productModelList.size()>0){
+            for(ProductModel productModel:productModelList){
+                StringBuilder s = new StringBuilder();
+                s.append(productModel.getProduct().getName());
+                for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
+                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                }
+                if(s.length()>14){
+                    s = new StringBuilder(s.substring(0,14));
+                    s.append("...");
+                }
+                map.put(productModel,s.toString());
+            }
+        }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
+        model.addAttribute("map",map);
         model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
     }
