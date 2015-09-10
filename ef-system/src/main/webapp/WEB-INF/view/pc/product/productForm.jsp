@@ -209,6 +209,7 @@
       dataType: "json",
       data:{tenantId:tenantId},
       success: function (data) {
+        alert("dd");
         $("#master").text("");
         $("#Project").text("");
         $.each(data,function(k,v){

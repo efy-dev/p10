@@ -63,6 +63,8 @@
                 <match url="/basic/xm.do?qm=plistTenantProduct_default"/>
                 <match url="/basic/xm.do?view=newProduct"/>
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=newProduct"/>
+
 
 
             </jnode>

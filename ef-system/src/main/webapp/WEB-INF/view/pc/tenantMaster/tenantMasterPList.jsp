@@ -44,29 +44,25 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set" width="20%">操作</th>
-                    <th class="table-title"  width="40%">项目名称</th>
-                    <th class="table-title" width="40%">项目编号</th>
+                    <th class="table-set">操作</th>
+                    <th class="table-title">大师名称</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="project">
+                <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr >
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a  id="${project.id}" tenantProjectId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkProject(this,'${project.id}');"><span
+                                    <a  id="${master.id}" tenantMasterId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkMaster(this,'${master.id}');"><span
                                             class="am-icon-pencil-square-o">关联商家</span>
                                     </a>
                                 </div>
                             </div>
                         </td>
                         <td class="am-hide-sm-only">
-                                ${project.name}
-                        </td>
-                        <td class="am-hide-sm-only">
-                                ${project.serial}
+                                ${master.fullName}
                         </td>
                     </tr>
                 </c:forEach>
@@ -86,34 +82,34 @@
 <script>
     $(function(){
 
-        <c:forEach var="tenantProject" items="${tenantProjectList}">
-        var projectId = '${tenantProject.project.id}';
-        $("#"+projectId).attr("status","1");
-        $("#"+projectId).find("span").text("解除商家");
-        $("#"+projectId).attr("tenantProjectId",'${tenantProject.id}')
+        <c:forEach var="tenantMaster" items="${tenantMasterList}">
+        var masterId = '${tenantMaster.master.id}';
+        $("#"+masterId).attr("status","1");
+        $("#"+masterId).find("span").text("解除商家");
+        $("#"+masterId).attr("tenantMasterId",'${tenantMaster.id}')
 
         </c:forEach>
 
     });
-    function linkProject(obj,projectId){
+    function linkMaster(obj,masterId){
         var tenantId = $("input[name='tenantId']").val();
-        var tenantProjectId = $(obj).attr("tenantProjectId");
+        var tenantMasterId = $(obj).attr("tenantMasterId");
         var status = $(obj).attr("status");
         $.ajax({
             type: "get",
-            url: '<c:url value="/product/project/linkTenant.do"/>',
+            url: '<c:url value="/master//linkTenant.do"/>',
             cache: false,
             dataType: "json",
-            data:{tenantId:tenantId,projectId:projectId,tenantProjectId:tenantProjectId,status:status},
+            data:{tenantId:tenantId,masterId:masterId,tenantMasterId:tenantMasterId,status:status},
             success: function (data) {
                 if(status == '0'){
                     $(obj).attr("status","1");
                     $(obj).find("span").text("解除商家");
-                    $(obj).attr("tenantProjectId",data)
+                    $(obj).attr("tenantMasterId",data)
                 }else{
                     $(obj).attr("status","0");
                     $(obj).find("span").text("关联商家");
-                    $(obj).attr("tenantProjectId",data)
+                    $(obj).attr("tenantMasterId",data)
                 }
 //                $("a[status='1'] span").text("关联商家");
 //                $("a[status='1']").attr("status",'0');
