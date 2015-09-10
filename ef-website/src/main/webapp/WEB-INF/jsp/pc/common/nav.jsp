@@ -17,7 +17,7 @@
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
             <li><a href="<c:url value="/order/myEfeiyi/list.do"/>" title="个人中心">个人中心</a></li>
-            <li><a href="<c:url value="/j_spring_security_logout"/>" title="退出">退出</a></li>
+            <li><a href="http://192.168.1.57/cas/logout" title="退出">退出</a></li>
             <%
                 }
             %>
@@ -25,7 +25,7 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() == null) {
             %>
-            <li><a href="<c:url value="/login"/>" title="请登录">请登录</a></li>
+            <li><a href="<c:url value="/sso.do"/>" title="请登录">请登录</a></li>
             <li><a href="<c:url value="/register"/>" title="快速注册">快速注册</a></li>
             <%
                 }
