@@ -81,7 +81,7 @@ public class DoController {
 
         String redirectUrl = "/basic/xm.do?qm=" + qm + "&chooseId=" + chooseId + "&resultPage=/jmenu/chooseList";
 
-        return "redirec:/" + redirectUrl;
+        return "forward:/" + redirectUrl;
     }
 
     @RequestMapping("/chooseItem.do")

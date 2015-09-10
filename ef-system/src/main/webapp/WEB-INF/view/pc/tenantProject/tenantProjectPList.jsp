@@ -31,9 +31,9 @@
     </script>
 </head>
 <body>
-        <div style="text-align: left;margin-bottom: 10px">
-            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}"/>"><span class="am-icon-plus"></span>返回</a>
-        </div>
+<div style="text-align: left;margin-bottom: 10px">
+    <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=viewTenant&view=tenantList&id=${tenantId}"/>"><span class="am-icon-plus"></span>返回</a>
+</div>
 
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}&tenantId=${tenantId}"/>
 
@@ -56,9 +56,9 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                        <a  id="${project.id}" tenantProjectId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkProject(this,'${project.id}');"><span
-                                                class="am-icon-pencil-square-o">关联商家</span>
-                                        </a>
+                                    <a  id="${project.id}" tenantProjectId="0" class="am-btn am-btn-default am-btn-xs am-text-secondary" status="0" href="javascript:void(0);" onclick="linkProject(this,'${project.id}');"><span
+                                            class="am-icon-pencil-square-o">关联商家</span>
+                                    </a>
                                 </div>
                             </div>
                         </td>
@@ -88,9 +88,9 @@
 
         <c:forEach var="tenantProject" items="${tenantProjectList}">
         var projectId = '${tenantProject.project.id}';
-          $("#"+projectId).attr("status","1");
-          $("#"+projectId).find("span").text("解除商家");
-          $("#"+projectId).attr("tenantProjectId",'${tenantProject.id}')
+        $("#"+projectId).attr("status","1");
+        $("#"+projectId).find("span").text("解除商家");
+        $("#"+projectId).attr("tenantProjectId",'${tenantProject.id}')
 
         </c:forEach>
 

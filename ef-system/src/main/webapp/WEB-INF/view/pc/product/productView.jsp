@@ -63,14 +63,14 @@
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.serial}
                 </div>
             </div>
             <div class="am-form-group">
                 <label name="name" class="am-u-sm-3 am-form-label">商品名称</label>
 
-                <div class="am-u-sm-9">
+                <div class="am-u-sm-9" style="margin-top: 10px;">
                     ${object.name}
                     <!--<small>必填项*</small>-->
                 </div>
