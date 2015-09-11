@@ -142,7 +142,117 @@ $(function(){
     })();
     //商品详情页
     (function(){
+        //给html和body加style
 
+        //点击
+        var index=0;
+        var iSpeed=300;
+        var nav=$('.nav-share .nav');
+        var navLi=nav.find('.navli');
+        var secOneLeft=$('.section1 .sec-left');
+        var bodyHtml=$('body');
+        var wH=bodyHtml.height();  //计算浏览器的高度
+        //如果页面刷新则页面滚动到最顶部
+        if(bodyHtml.not(".scroll")){
+            bodyHtml.animate({'scrollTop':0},100);
+        }
+        navLi.click(function(){
+
+            index=$(this).index();
+            bodyHtml.addClass('scroll');
+            bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
+            nav.removeClass('nav3');
+            $(this).addClass('active').siblings('li').removeClass('active');
+            //详情
+            if(index==1){
+                secOneLeft.animate({'margin-left':'0'},iSpeed);
+            }
+            //鉴赏
+            if(index==2){
+                nav.addClass('nav2');
+            }
+            if(index!=2){
+                nav.removeClass('nav2');
+            }
+        })
+        //section1----详情
+        $('.section1 .icon-close').click(function(){
+            secOneLeft.animate({'margin-left':'-100%'},iSpeed);
+        })
+        //section2 鉴赏
+        sectionFocus();
+        function sectionFocus(){
+            var ulImgLi=$('.section2 .ul-img li');
+            var ulNumLi=$('.section2 .ul-num li');
+            var ulSnumLi=$('.section2 .ul-snum li');
+            var infoTab=$('.section2 .info-tab');
+
+            ulImgLi.eq(0).show();
+            infoTab.eq(0).show();
+
+            ulNumLi.click(function(){
+                $(this).addClass('active').siblings('li').removeClass('active');
+                ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
+                infoTab.eq($(this).index()).fadeIn().siblings('.info-tab').fadeOut();
+                ulSnumLi.eq(1).html($(this).index()+1);
+            })
+        }
+        //点击立即收藏
+        $('.section .btns-collect').click(function(){
+            var section5Part1=$('.section5 .part1');
+            var section5Part2=$('.section5 .part2');
+            nav.addClass('nav3');
+            bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
+            //相关收藏
+            section5Part1.find('.related-collect').click(function(){
+                section5Part1.animate({'left':'-100%'},iSpeed);
+                section5Part2.animate({'left':'0'},iSpeed);
+                return false;
+            });
+            section5Part2.find('.related-collect').click(function(){
+                section5Part1.animate({'left':'0'},iSpeed);
+                section5Part2.animate({'left':'100%'},iSpeed);
+                return false;
+            });
+            return false;
+        });
+
+        //商品详情页--鼠标滚轮
+        var Time=new Date();
+        $(document).mousewheel(function(ev,dir){
+            //dir 判断鼠标滚动的方向   向下为  负数   向上为正数
+            if(new Date()-Time>500){
+                Time=new Date();
+                if(dir<0){
+                    index++;
+                    //index%=5;
+                    if(index>4){
+                        index=4;
+                    }
+                }else{
+                    index--;
+                    if(index<0){
+                        index=0;
+                    }
+                }
+                //详情
+                if(index==1){
+                    secOneLeft.animate({'margin-left':'0'},iSpeed);
+                }
+                //鉴赏
+                if(index==2){
+                    nav.addClass('nav2');
+                }
+                if(index!=2){
+                    nav.removeClass('nav2');
+                }
+
+                nav.removeClass('nav3');
+
+                navLi.eq(index).addClass('active').siblings().removeClass('active');
+                $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
+            }
+
+        })
     })();
-
 })

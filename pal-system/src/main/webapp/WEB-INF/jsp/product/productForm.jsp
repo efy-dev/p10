@@ -86,6 +86,7 @@
             <div class="am-u-sm-9">
                 <input type="text" name="madeYear" id="madeYear" class="am-form-field"
                        title="制作时间" placeholder="制作时间"
+                       value="<fmt:formatDate value='${object.madeYear}'  pattern='yyyy-MM-dd'/>"
                        data-am-datepicker readonly required="true"/>
             </div>
         </div>
