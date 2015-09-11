@@ -156,8 +156,9 @@ $(function(){
         if(bodyHtml.not(".scroll")){
             bodyHtml.animate({'scrollTop':0},100);
         }
+        //立即收藏
+        btnsCollect();
         navLi.click(function(){
-
             index=$(this).index();
             bodyHtml.addClass('scroll');
             bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
@@ -174,6 +175,8 @@ $(function(){
             if(index!=2){
                 nav.removeClass('nav2');
             }
+            //收藏
+            btnsCollect();
         })
         //section1----详情
         $('.section1 .icon-close').click(function(){
@@ -198,24 +201,26 @@ $(function(){
             })
         }
         //点击立即收藏
-        $('.section .btns-collect').click(function(){
-            var section5Part1=$('.section5 .part1');
-            var section5Part2=$('.section5 .part2');
-            nav.addClass('nav3');
-            bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
-            //相关收藏
-            section5Part1.find('.related-collect').click(function(){
-                section5Part1.animate({'left':'-100%'},iSpeed);
-                section5Part2.animate({'left':'0'},iSpeed);
+        function btnsCollect(){
+            $('.section .btns-collect').click(function(){
+                var section5Part1=$('.section5 .part1');
+                var section5Part2=$('.section5 .part2');
+                nav.addClass('nav3');
+                bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
+                //相关收藏
+                section5Part1.find('.related-collect').click(function(){
+                    section5Part1.animate({'left':'-100%'},iSpeed);
+                    section5Part2.animate({'left':'0'},iSpeed);
+                    return false;
+                });
+                section5Part2.find('.related-collect').click(function(){
+                    section5Part1.animate({'left':'0'},iSpeed);
+                    section5Part2.animate({'left':'100%'},iSpeed);
+                    return false;
+                });
                 return false;
             });
-            section5Part2.find('.related-collect').click(function(){
-                section5Part1.animate({'left':'0'},iSpeed);
-                section5Part2.animate({'left':'100%'},iSpeed);
-                return false;
-            });
-            return false;
-        });
+        }
 
         //商品详情页--鼠标滚轮
         var Time=new Date();

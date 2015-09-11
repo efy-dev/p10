@@ -487,8 +487,9 @@ a,
 .section0 .sec-right .name2 {position:absolute;top:50%;margin-top:-90px;right:310px}
 .section0 .sec-right .name2 p {width:50px;line-height:36px;float:right;font-size:24px;font-style:italic}
 /*--//End--section0--*/
-.section1 {width:100%;height:100%;float: left;position: relative;}
+.section1 {width:100%;height:100%;float: left;position: relative; overflow: hidden;}
 .section1 .icon-close {background-position:-122px -95px;width:22px;height:22px;position:absolute;top:20px;right:20px;cursor:pointer}
+.section1 .mask {background:url(../images/section1-bg.png) repeat;width:100%;height:100%; position: absolute;top:0; left: 0; z-index: 1;}
 .section1 .sec-left {background: #fff;}
 .section1 .sec-left .part {width:494px;float:left; margin:40px 70px 0 36px;}
 .section1 .sec-left .part .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
@@ -557,8 +558,8 @@ a,
 .section5 .part1 .sec-right-box .des-part strong {line-height:18px;font-size:12px;font-family:SimSun;color:#666}
 .section5 .part1 .sec-right-box .price {width:100%;float:left;margin-top:28px;margin-bottom:57px;color:#666}
 .section5 .part1 .sec-right-box .price .p-text {font-size:12px;font-family:simsun}
-.section5 .part1 .sec-right-box .price .p-price {font-size:14px;color:#000}
-.section5 .part1 .sec-right-box .price .p-price span {font-size:30px}
+.section5 .part1 .sec-right-box .price .p-price {font-size:14px;color:#000;font-family:Times New Roman; font-weight: bold;}
+.section5 .part1 .sec-right-box .price .p-price span {font-size:30px; }
 .section5 .part1 .sec-right-box .price .m-price {font-size:12px}
 .section5 .part1 .choose-btns .btn {width:210px;line-height:36px;text-align:center;border:1px #000 solid;float:left;margin-right:5px;font-family:FangSong;font-size:14px}
 .section5 .part1 .choose-btns .btn:hover,.section5 .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
