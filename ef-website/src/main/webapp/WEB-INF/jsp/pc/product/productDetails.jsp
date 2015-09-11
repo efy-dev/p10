@@ -53,7 +53,11 @@
       <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
-          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+          <c:if test="${productPicture.status=='2'}">
+          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
+                                  alt=""/></li>
+          </c:if>
+          <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
               <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
                                       alt=""/></li>
@@ -64,7 +68,10 @@
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+         <c:if test="${productPicture.status=='2'}">
+          <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
+         </c:if>
+          <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
             <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
             </c:if>
@@ -161,7 +168,15 @@
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
       </div>
     </div>
-    ${product.productDescription.content}
+  </div>
+  <div class="wh detail" id="detail">
+    <div class="wh title"><h3>商品详情</h3></div>
+      <div class="wh part">
+      ${product.productDescription.content}
+    </div>
+    <div class="online-ask">
+      <a href="" class="btn"><i class="icon"></i>在线咨询</a>
+    </div>
   </div>
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
