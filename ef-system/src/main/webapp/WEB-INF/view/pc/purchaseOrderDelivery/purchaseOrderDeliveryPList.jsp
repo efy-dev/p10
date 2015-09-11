@@ -44,7 +44,11 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
                         </td>
-                        <td class="am-hide-sm-only">${purchaseOrderDelivery.logisticsCompany}</td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                                            checkedValue="${purchaseOrderDelivery.logisticsCompany}"
+                                            type="normal"/>
+                        </td>
                         <td>
                             <ming800:status name="status" dataType="purchaseOrderDelivery.status"
                                             checkedValue="${purchaseOrderDelivery.status}"

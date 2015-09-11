@@ -149,9 +149,21 @@ public class ProductController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
         List<ProductModel> productModelListTmp = product.getProductModelList();
+        List<ProductPicture> productPictures = product.getProductPictureList();
+        ProductPicture productPicture = new ProductPicture();
+        if (productPictures != null && productPictures.size() > 0) {
+            for (ProductPicture p : productPictures) {
+                    if("2".equals(p.getStatus())){
+                        productPicture = p;
+                        break;
+                    }
+            }
+        }
         model.addAttribute("productModelList", productModelListTmp);
         model.addAttribute("productModel", productModel);
         model.addAttribute("product", product);
+        model.addAttribute("productPicture",productPicture);
+        model.addAttribute("productPictures",productPictures);
         return "/product/productDetails";
     }
 

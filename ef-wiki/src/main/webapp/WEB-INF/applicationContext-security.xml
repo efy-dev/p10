@@ -42,7 +42,7 @@
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <b:property name="service"  value="http://192.168.1.60:8080/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://localhost:8082/j_spring_cas_security_check"/>
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
@@ -73,7 +73,7 @@
         </b:property>
         <b:property name="key" value="an_id_for_this_auth_provider_only"/>
     </b:bean>
-    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
+    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.wiki.organization.LoginOutSuccessHandler"/>
     <!-- 注销客户端 -->
     <b:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
 
@@ -81,7 +81,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://192.168.1.57/cas/logout" />
+                value="http://192.168.1.57/cas/logout?service=http://www2.efeiyi.com" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
