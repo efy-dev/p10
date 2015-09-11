@@ -444,7 +444,7 @@ a:hover{text-decoration: underline}
 /*找回密码*/
 /*设置新密码*/
 .new{width: 100%;min-height: 550px;float: left}
-.new .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
+.new .short{width: 630px;margin: 0 auto;margin-top: 161px;height: 180px;}
 .new .short ul{width: 100%;}
 .new .short ul li{margin-bottom: 20px;width: 100%;}
 .new .short ul li label{padding-right: 15px;text-align:right;width: 108px;font-size: 12px;font-family: "宋体";font-weight: 100;}
