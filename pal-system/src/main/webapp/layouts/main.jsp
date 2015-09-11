@@ -22,8 +22,8 @@
     <link rel="icon" type="image/png" href="<c:url value='/scripts/images/pal_icon.png'/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/assets/css/amazeui.min.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/assets/css/admin.css'/>"/>
     <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
     <script src="<c:url value='/resources/assets/js/amazeui.min.js'/>"></script>
     <script src="<c:url value='/scripts/function.js'/>"></script>
@@ -35,7 +35,7 @@
         }
     </style>
 </head>
-<body>
+<body style="overflow-y: hidden;height: 100%">
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
@@ -44,8 +44,8 @@
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
-    <div class="admin-content" style="height: auto">
-    <%--<div class="admin-content" style="overflow-y: scroll">--%>
+    <%--<div class="admin-content" style="height: auto">--%>
+    <div class="admin-content" style="overflow-y: auto;height: 95%">
         <sitemesh:write property='body'/>
     </div>
 

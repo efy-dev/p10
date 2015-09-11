@@ -10,48 +10,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript">
-        function addNewNode(){
-            var count = document.getElementById("count").value;
-            var size = parseInt(count);
-            var i = size;
-            i += 1;
-            var nameIdDiv = document.createElement("div");
-            nameIdDiv.innerHTML = "<input type='hidden' name='propertyNameId"+i+"'>";
-            var newDiv = document.createElement("div");
-            var html = "<div class='am-form-group' style='child-align: left'>"+
-                            "<label name='name' for='name"+i+"' class='am-u-sm-3 am-form-label' style='width: auto'>"+i+"、</label>"+
-                            "<div class='am-u-sm-9' style='margin-left: 0px'>"+
-                                "<input style='margin-left: 10px' type='text' name='name"+i+"' id='name"+i+"' placeholder='属性名' required>"+
-                            "</div>"+
-                        "</div>"+
-                        "<div style='text-align: left;margin-left: 10px;'>"+
-                            "<input onclick='deleteNode(\"divPP" + i +"\");'"+
-                                    "type='button' class='am-btn am-btn-default am-btn-xs'"+
-                                    "style='margin-bottom: 6px;margin-left:2px;height: 35px;'"+
-                                    "value='删除' />"+
-                        "</div>";
-            newDiv.innerHTML = html;
-            newDiv.id = "divPP"+i;
-            document.getElementById("pNameForm").appendChild(nameIdDiv);
-            document.getElementById("pNameForm").appendChild(newDiv);
-            if(size == 0){
-                size = i;
-                document.getElementById("count").value =  size;
-            }else {
-                document.getElementById("count").value =  size + 1;
-            }
-        }
-
-        function deleteNode(val){
-            if(val instanceof HTMLElement){
-                val.parentNode.removeChild(val);
-            }else {
-                var delDiv = document.getElementById(val);
-                delDiv.parentNode.removeChild(delDiv);
-            }
-        }
-    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -85,7 +43,7 @@
                         </div>
                         <div style="text-align: left;margin-left: 10px;">
                             <input onclick="deleteNode('divPP<%=i %>');"
-                                   type="button" class="am-btn am-btn-default am-btn-xs"
+                                   type="button" class="am-btn am-btn-default am-btn-xs am-text-danger"
                                    style="margin-bottom: 6px;margin-left:2px;height: 35px;"
                                    value="删除" />
                         </div>

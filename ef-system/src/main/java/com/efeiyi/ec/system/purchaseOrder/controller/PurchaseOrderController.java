@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Administrator on 2015/6/18.
  */
@@ -22,18 +24,20 @@ public class PurchaseOrderController extends BaseController {
     private  PurchaseOrderManager purchaseOrderManager;
 
     /**
-     * ·¢»õ
+     * ï¿½ï¿½ï¿½ï¿½
      * ,PurchaseOrderDelivery purchaseOrderDelivery,Authentication authentication
      * @param purchaseOrder
      * @return
      */
     @RequestMapping("/updateOrderStatus.do")
     @ResponseBody
-    public String updateOrderStatus(PurchaseOrder purchaseOrder){
+    public String updateOrderStatus(PurchaseOrder purchaseOrder,HttpServletRequest request){
 
+        String logisticsCompany = request.getParameter("logisticsCompany");
+        String serial = request.getParameter("serial");
         String id = "";
         try {
-          id = purchaseOrderManager.updateOrderStatus(purchaseOrder);
+          id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -15,12 +15,14 @@ public class ProductModelBean implements Serializable {
     private  String [] modelStatus;
     private  String [] modelProperty;
     private  String [] property;
+    private  String [] marketPrice;
     private  String productId;
     private  String defaultId;
     private  String defaultStatus;
     private  String defaultName;
     private  String defaultAmount;
     private  String defaultPrice;
+    private  String defaultMarketPrice;
 
     public String getProductId() {
         return productId;
@@ -125,5 +127,21 @@ public class ProductModelBean implements Serializable {
 
     public void setDefaultPrice(String defaultPrice) {
         this.defaultPrice = defaultPrice;
+    }
+
+    public String getDefaultMarketPrice() {
+        return defaultMarketPrice;
+    }
+
+    public void setDefaultMarketPrice(String defaultMarketPrice) {
+        this.defaultMarketPrice = defaultMarketPrice;
+    }
+
+    public String[] getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(String[] marketPrice) {
+        this.marketPrice = marketPrice;
     }
 }

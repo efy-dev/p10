@@ -2,6 +2,8 @@ package com.ming800.core.p.service;
 
 import com.ming800.core.p.model.*;
 
+import java.util.HashMap;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ming
@@ -56,4 +58,8 @@ public interface CommonManager {
      * @throws Exception
      */
     CommonSerial getAutoSerial(String group) throws  Exception;
+
+    /**
+     * 获取配置文件中的快递公司列表*/
+    HashMap getLogisticsCompany() throws Exception;
 }
