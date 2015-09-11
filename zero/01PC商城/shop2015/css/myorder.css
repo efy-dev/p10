@@ -705,14 +705,15 @@ a:hover{text-decoration: underline}
 /*500错误信息*/
 /*404错误信息*/
 .four{width: 925px;margin: 0px auto 0;padding: 65px 0;position: relative;overflow: hidden;padding-top: 187px;}
-.four .four-1{width:557px;float: left;height:150px;background: url('../images/efeiyicuowu.png') no-repeat left -247px; margin-left: 246px;}
+.four .four-1{width:557px;float: left;height:150px;background: url('../images/efeiyicuowu.png') no-repeat left -247px; margin-left: 160px;}
 .four .four-2{width: 100%;float: left;text-align: center;font-size: 24px;color: #000;}
 .four .four-3{width: 100%;height: 37px;line-height: 37px;text-align: center;position: relative;float:left;margin-top:44px;}
 .four .four-3-left{width: 14px;height: 14px;position: absolute;left: 200px;top: 0;background: url('../images/efeiyicuowu.png') no-repeat -421px -7px; }
 .four .four-3-right{width: 14px;height: 14px;position: absolute;right: 200px;top: 22px;background: url('../images/efeiyicuowu.png') no-repeat -438px -7px; }
-.four .five-4{width: 473px;height: 321px;background: url('../images/efeiyicuowu.png') no-repeat left -417px;position: absolute;right: -16px;top: 0;}
+.max-four .five-4{width: 473px;height: 321px;background: url('../images/efeiyicuowu.png') no-repeat left -417px;float: left}
 .max-four{position: relative;}
 .max-four .a-btn{padding:20px 98px;background: #fff;color: #000;border: 1px solid #000;font-size: 14px;}
 .max-four .a-btn:hover{background: #000;color: #fff;}
-.max-four .logo-four{width: 158px;height: 191px;position: fixed;margin-top: -285px;right: 0;top: 50%;background: url('../images/efeiyicuowu.png') no-repeat right -405px;}
+.max-four .five-max{position: fixed;right: 0;top:0}
+.max-four .logo-four{width: 158px;height: 191px;background: url('../images/efeiyicuowu.png') no-repeat right -405px;float: right;margin-top: 234px;}
 /*404错误信息*/

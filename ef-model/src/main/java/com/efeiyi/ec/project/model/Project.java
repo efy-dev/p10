@@ -39,7 +39,7 @@ public class Project {
     private List<Product> productList;
     private List<ProjectContent> projectContents;
     private List<ProjectFollowed> projectFolloweds;
-    private AddressDistrict district;
+    private AddressDistrict addressDistrict;
 
     @Column(name="picture_url")
     public String getPicture_url() {
@@ -208,11 +208,11 @@ public class Project {
     @JoinColumn(name="district_id")
 
     public AddressDistrict getAddressDistrict() {
-        return district;
+        return addressDistrict;
     }
 
-    public void setAddressDistrict(AddressDistrict district) {
-        this.district = district;
+    public void setAddressDistrict(AddressDistrict addressDistrict) {
+        this.addressDistrict = addressDistrict;
     }
 }
 
