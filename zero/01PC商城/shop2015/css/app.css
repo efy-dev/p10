@@ -260,7 +260,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .am-sticky-placeholder {background:none}
 .product-intro .detail {padding-bottom:70px;position:relative}
 .product-intro .detail .title {text-align:center;padding:30px 0}
-.product-intro .detail .title h3 {width:20px;line-height:30px;font-family:FangSong;font-style:italic;display:inline-block;font-size:24px;font-weight:normal}
+.product-intro .detail .title h3 {width:20px;line-height:34px;font-family:FangSong;font-style:italic;display:inline-block;font-size:24px;font-weight:bold}
 .product-intro .detail .part {width:1000px;padding:0 100px;font-family:simsun;font-size:12px;color:#666;float:left;box-sizing:content-box;border-bottom:1px #b2b2b2 solid}
 .product-intro .detail .part p,.product-intro .detail .part li,.product-intro .detail .part h4,.product-intro .detail .part span,.product-intro .detail .part strong{font-family:simsun}
 .product-intro .detail .part h4 {width:100%;float:left;margin-bottom:36px;font-weight:normal}
@@ -421,13 +421,17 @@ a,
 .header-fine .logo a {background:url(../images/logo2.png);width:225px;height:37px;float:left}
 .header-fine .nav {height:57px;float:right;position:relative}
 .header-fine .nav .nav-icon {background-position:0 -78px;width:28px;height:15px;position:absolute;bottom:13px;right:40px}
-.header-fine .nav .ul-list {width:140px;padding-top:40px;position:absolute;top:55px;right:0;margin:0;background:#fff;z-index:2;display:block}
-.header-fine .nav .ul-list li {width:100%;line-height:30px;float:left}
-.header-fine .nav .ul-list li a {float:right}
-.header-fine .mask {background:rgba(0, 0, 0, 0.6);position:fixed;top:86px;left:0;bottom:0;right:0;z-index:1;display:none}
-.header-fine .mask.visible {display:block}
+
+
 .header-fine .nav-links {top:30px;left:-1138px;z-index:50;border:0;background:#fff}
 .header-fine .nav li.hover .bgbor {width:140px;border:0;border-top:1px #000 solid;top:0}
+/*--//End--*/
+#menu-fine-list {width:100%;height:100%; position: absolute; z-index:10; background:rgba(0, 0, 0, 0.5); display: none;}
+#menu-fine-list .nav .ul-list {width:140px;padding-top:40px;position:absolute;top:55px;right:0;margin:0;background:#fff;z-index:2;display:block}
+#menu-fine-list .nav .ul-list li {width:100%;line-height:30px;float:left}
+#menu-fine-list .nav .ul-list li a {float:right}
+#menu-fine-list .mask {background:rgba(0, 0, 0, 0.6);position:fixed;top:86px;left:0;bottom:0;right:0;z-index:1;display:none}
+#menu-fine-list .mask.visible {display:block}
 /*--//End--*/
 .nav-share {width:1200px;position:fixed;top:88px;left:50%;margin-left:-600px;z-index:2}
 .nav-share .share {position:absolute;top:0;left:0}
@@ -485,7 +489,7 @@ a,
 .section0 .sec-right .title p {width:12px;line-height:18px;float:right;margin-left:5px;font-size:12px;font-style:italic}
 .section0 .sec-right .name {width:200px;text-align:right;position:absolute;left:auto;right:40px;top:50%; margin-top:-10px;color:#fff}
 .section0 .sec-right .name2 {position:absolute;top:50%;margin-top:-90px;right:310px}
-.section0 .sec-right .name2 p {width:50px;line-height:36px;float:right;font-size:24px;font-style:italic}
+.section0 .sec-right .name2 p {width: 34px;line-height: 29px;float: right;font-size: 24px;font-style: italic;height:202px; overflow: hidden;}
 /*--//End--section0--*/
 .section1 {width:100%;height:100%;float: left;position: relative; overflow: hidden;}
 .section1 .icon-close {background-position:-122px -95px;width:22px;height:22px;position:absolute;top:20px;right:20px;cursor:pointer}
