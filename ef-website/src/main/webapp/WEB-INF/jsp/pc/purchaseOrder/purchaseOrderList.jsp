@@ -5,6 +5,7 @@
 <html class="no-js">
 <head>
   <script>
+
     function func(o){
       window.location.href="<c:url value="/order/myEfeiyi/list.do?status="/>"+o;
     }
@@ -163,8 +164,8 @@
 <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/order/myEfeiyi/list.do">
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-  <ming800:pcPageParam name="sort"
-                       value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+ <ming800:pcPageParam name="status"
+                       value='<%=request.getParameter("status")!=null ? request.getParameter("status") : ""%>'/>
 </ming800:pcPageList>
 </c:if>
 
