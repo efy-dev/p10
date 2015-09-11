@@ -5,8 +5,20 @@
 <html>
 <head>
     <title></title>
-    <style>
-    </style>
+    <script>
+        function editPurchaseOrderDelivery(purchaseOrderDeliveryId,logisticsCompany,serial){
+
+            $.ajax(function(){
+                <%--type: "GET",--%>
+                <%--url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',--%>
+                <%--data: {id: orderId},--%>
+                <%--dataType: "json",--%>
+                <%--success: function (data) {--%>
+                    <%--$("#" + orderId).remove();--%>
+                <%--}--%>
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="am-g">
@@ -148,6 +160,7 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
+                <th class="table-title">操作</th>
                 <th class="table-title">物流单号</th>
                 <th class="table-title">配送状态</th>
                 <th class="table-title">物流公司</th>
@@ -158,6 +171,18 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
             <tr>
+
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                    onclick="editPurchaseOrderDelivery('${purchaseOrderDelivery.id}','${purchaseOrderDelivery.logisticsCompany}','${purchaseOrderDelivery.serial}')"><span
+                                    class="am-icon-trash-o">编辑</span>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+
                 <td class="am-hide-sm-only">${purchaseOrderDelivery.serial}</td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderDelivery.status"
