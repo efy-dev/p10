@@ -433,8 +433,8 @@ a,
 .nav-share .share {position:absolute;top:0;left:0}
 .nav-share .jiathis_style {width:200px;position:absolute;top:15px;left:13px}
 .nav-share .jiathis_style .jiathis_txt {font-family:simsun;color:#666;float:left;font-size:12px;color:#fff}
-.nav-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;opacity:0.4;filter:alpha(opacity=40);-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s;float:left}
-.nav-share .jiathis_style .jtico:hover {opacity:1;filter:alpha(opacity=100)}
+.nav-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s;float:left}
+.nav-share .jiathis_style .jtico:hover {opacity:0.5;filter:alpha(opacity=50);}
 .nav-share .jiathis_style .jtico_weixin {background-position:0 -21px}
 .nav-share .jiathis_style .jtico_tqq {background-position:-21px -21px;width:22px}
 .nav-share .jiathis_style .jtico_tsina {background-position:-43px -21px}
@@ -475,12 +475,9 @@ a,
 .section .btns {width:100%;height:38px;position:absolute;bottom:53px;right:0;z-index:3}
 .section .btns-link {width:212px;line-height:36px;text-align:center;font-family:FangSong;font-size:14px;position:absolute;bottom:0;left:50%;margin-left:-106px}
 .section .btns-link:hover {text-decoration:none}
-
 .section .btns-collect {color:#fff;background:#000;border:1px #fff solid}
 .section .btns-collect:hover,
 .section .btns-collect.active{border:1px solid #fff;background:#fff;color:#000}
-
-
 /*--------*/
 .section0 {width:100%;height:100%;float:left;position: relative;overflow: hidden;}
 .section0 .sec-right {z-index:2;color:#fff}
@@ -490,8 +487,9 @@ a,
 .section0 .sec-right .name2 {position:absolute;top:50%;margin-top:-90px;right:310px}
 .section0 .sec-right .name2 p {width:50px;line-height:36px;float:right;font-size:24px;font-style:italic}
 /*--//End--section0--*/
-.section1 {width:100%;height:100%;float: left;position: relative;}
+.section1 {width:100%;height:100%;float: left;position: relative; overflow: hidden;}
 .section1 .icon-close {background-position:-122px -95px;width:22px;height:22px;position:absolute;top:20px;right:20px;cursor:pointer}
+.section1 .mask {background:url(../images/section1-bg.png) repeat;width:100%;height:100%; position: absolute;top:0; left: 0; z-index: 1;}
 .section1 .sec-left {background: #fff;}
 .section1 .sec-left .part {width:494px;float:left; margin:40px 70px 0 36px;}
 .section1 .sec-left .part .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
@@ -560,14 +558,12 @@ a,
 .section5 .part1 .sec-right-box .des-part strong {line-height:18px;font-size:12px;font-family:SimSun;color:#666}
 .section5 .part1 .sec-right-box .price {width:100%;float:left;margin-top:28px;margin-bottom:57px;color:#666}
 .section5 .part1 .sec-right-box .price .p-text {font-size:12px;font-family:simsun}
-.section5 .part1 .sec-right-box .price .p-price {font-size:14px;color:#000}
-.section5 .part1 .sec-right-box .price .p-price span {font-size:30px}
+.section5 .part1 .sec-right-box .price .p-price {font-size:14px;color:#000;font-family:Times New Roman; font-weight: bold;}
+.section5 .part1 .sec-right-box .price .p-price span {font-size:30px; }
 .section5 .part1 .sec-right-box .price .m-price {font-size:12px}
 .section5 .part1 .choose-btns .btn {width:210px;line-height:36px;text-align:center;border:1px #000 solid;float:left;margin-right:5px;font-family:FangSong;font-size:14px}
 .section5 .part1 .choose-btns .btn:hover,.section5 .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
 .section5 .part1 .related-collect {background-position:0 -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-34px;right:10px}
-
-
 .section5 .part2 { left:100%;}
 .section5 .part2 .title {width:100%;text-align:center;float:left;margin-top:80px;margin-bottom:40px}
 .section5 .part2 .title strong {width:30px;line-height:30px;font-size:24px;font-style:italic;display:inline-block}
@@ -579,11 +575,6 @@ a,
 .section5 .part2 .sec-items li .name {font-size:14px;height:25px}
 .section5 .part2 .sec-items li .price {font-size:12px;height:20px}
 .section5 .part2 .related-collect {background-position:-49px -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-120px;left:50px}
-
-
-
-
-
 
 
 
