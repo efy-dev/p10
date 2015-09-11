@@ -564,8 +564,6 @@ a,
 .section5 .part1 .choose-btns .btn {width:210px;line-height:36px;text-align:center;border:1px #000 solid;float:left;margin-right:5px;font-family:FangSong;font-size:14px}
 .section5 .part1 .choose-btns .btn:hover,.section5 .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
 .section5 .part1 .related-collect {background-position:0 -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-34px;right:10px}
-
-
 .section5 .part2 { left:100%;}
 .section5 .part2 .title {width:100%;text-align:center;float:left;margin-top:80px;margin-bottom:40px}
 .section5 .part2 .title strong {width:30px;line-height:30px;font-size:24px;font-style:italic;display:inline-block}

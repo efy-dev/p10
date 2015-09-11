@@ -142,8 +142,6 @@ $(function(){
     })();
     //商品详情页
     (function(){
-        //给html和body加style
-
         //点击
         var index=0;
         var iSpeed=300;
@@ -164,6 +162,13 @@ $(function(){
             bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
             nav.removeClass('nav3');
             $(this).addClass('active').siblings('li').removeClass('active');
+            //分享
+            if(index==0){
+                $('.nav-share .share').show();
+            }
+            if(index!=0){
+                $('.nav-share .share').hide();
+            }
             //详情
             if(index==1){
                 secOneLeft.animate({'margin-left':'0'},iSpeed);
@@ -239,6 +244,13 @@ $(function(){
                     if(index<0){
                         index=0;
                     }
+                }
+                //分享
+                if(index==0){
+                    $('.nav-share .share').show();
+                }
+                if(index!=0){
+                    $('.nav-share .share').hide();
                 }
                 //详情
                 if(index==1){
