@@ -34,5 +34,11 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
+    <!--userDao用于spring security-->
+    <bean id="userDao" class="com.efeiyi.ec.wiki.organization.dao.hibernate.UserDaoHibernate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="userManager" class="com.efeiyi.ec.wiki.organization.service.imp.UserManagerImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
 </beans>
