@@ -50,21 +50,21 @@
         </div>
         <div id="pcdDiv">
             <div class="am-form-group">
-                <label name="province" for="province" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
+                <label name="province" for="addressProvince.id" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
                 <div class="am-u-sm-9">
-                    <select name="province.id" id="province"></select>
+                    <select name="addressProvince.id" class="addressProvince" id="addressProvince.id"></select>
                 </div>
             </div>
             <div class="am-form-group">
-                <label name="city" for="city" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
+                <label name="city" for="addressCity.id" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
                 <div class="am-u-sm-9">
-                    <select name="city.id" id="city"></select>
+                    <select name="addressCity.id" class="addressCity" id="addressCity.id"></select>
                 </div>
             </div>
             <div class="am-form-group">
-                <label name="district" for="district" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
+                <label name="addressDistrict" for="addressDistrict.id" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
                 <div class="am-u-sm-9">
-                    <select name="district.id" id="district"></select>
+                    <select name="addressDistrict.id" class="addressDistrict" id="addressDistrict.id"></select>
                 </div>
             </div>
             </div>
@@ -111,8 +111,8 @@
                 "<c:url value='/pj/address/provinceList.do'/>",
                 "<c:url value='/pj/address/cityListByProvince.do?conditions=addressProvince.id:'/>",
                 "<c:url value='/pj/address/districtListByCity.do?conditions=addressCity.id:'/>",
-                "${object.addressDistrict.city.province.id}",
-                "${object.addressDistrict.city.id}",
+                "${object.addressDistrict.addressCity.addressProvince.id}",
+                "${object.addressDistrict.addressCity.id}",
                 "${object.addressDistrict.id}"
         )
     });
