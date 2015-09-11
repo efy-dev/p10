@@ -27,9 +27,9 @@
                 <do name="plistEcProjectCategory" access="" label="ProjectCategory列表"
                     result="/projectCategory/ecProjectCategoryPList" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="fatherCategory.id" defaultValue="" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="level" defaultValue="1" operation="eq"/>
+                        <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
                     <query name="default1" label="类别查询" type="auto" orderBy="id:desc">
                         <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
@@ -216,13 +216,13 @@
                 <do name="removeMasterProject" label="删除MasterProject" access="" result="json"/>
                 <do name="formMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectForm"/>
                 <do name="saveOrUpdateMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectSaveSuccess"/>
-                <do name="listMasterProject" label="MasterProject列表" access="" result="/masterProject/masterProjectList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="master.id" defaultValue="1" operation="eq"/>
-                    </query>
-                </do>
+                <!--<do name="listMasterProject" label="MasterProject列表" access="" result="/masterProject/masterProjectList">-->
+                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="id" defaultValue="" operation="eq"/>-->
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                        <!--<condition name="master.id" defaultValue="1" operation="eq"/>-->
+                    <!--</query>-->
+                <!--</do>-->
 
             </does>
         </entity>
