@@ -27,7 +27,7 @@ public class ProductModel implements Serializable {
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
-    private String marketPrice;
+    private BigDecimal marketPrice;
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private List<ProductPicture>  productPictureList;
@@ -52,11 +52,11 @@ public class ProductModel implements Serializable {
     }
 
     @Column(name = "market_price")
-    public String getMarketPrice() {
+    public BigDecimal getMarketPrice() {
         return marketPrice;
     }
 
-    public void setMarketPrice(String marketPrice) {
+    public void setMarketPrice(BigDecimal marketPrice) {
         this.marketPrice = marketPrice;
     }
 

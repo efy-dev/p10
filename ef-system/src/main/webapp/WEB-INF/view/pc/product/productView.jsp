@@ -172,11 +172,12 @@
                            id="productModel">
                         <tbody>
                         <tr>
-                            <th class="am-text-center" width="20%">预览</th>
-                            <th class="am-text-center" width="20%">规格名称</th>
-                            <th class="am-text-center" width="20%">属性</th>
-                            <th class="am-text-center" width="20%">库存</th>
-                            <th class="am-text-center" width="20%">价格(元)</th>
+                            <th class="am-text-center" width="15%">预览</th>
+                            <th class="am-text-center" width="15%">规格名称</th>
+                            <th class="am-text-center" width="15%">属性</th>
+                            <th class="am-text-center" width="15%">库存</th>
+                            <th class="am-text-center" width="15%">价格(元)</th>
+                            <th class="am-text-center" width="15%">市场价格(元)</th>
                             <%--<th class="am-text-center" width="20%">图片</th>--%>
                         </tr>
                         <c:forEach var="model" items="${object.productModelList}">
@@ -209,6 +210,9 @@
                                 </td>
                                 <td align="center">
                                         ${model.price}
+                                </td>
+                                <td align="center">
+                                        ${model.marketPrice}
                                 </td>
                                     <%--<td align="center">--%>
                                     <%--<c:if test="${not empty model.productModel_url}">--%>

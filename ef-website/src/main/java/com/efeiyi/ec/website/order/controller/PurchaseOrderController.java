@@ -58,30 +58,31 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/myEfeiyi/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("status");
+        model.addAttribute("status",orderStatus);
         XQuery xQuery = null;
         int c = 0;
         if (orderStatus == null) {
-            xQuery = new XQuery("plistPurchaseOrder_default", request);
+            xQuery = new XQuery("plistPurchaseOrder_default", request,10);
         } else {
             c = Integer.parseInt(orderStatus);
             switch (c) {
                 case 1:
-                    xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default1", request,10);
                     break;
                 case 5:
-                    xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default5", request,10);
                     break;
                 case 9:
-                    xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default9", request,10);
                     break;
                 case 13:
-                    xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default13", request,10);
                     break;
                 case 17:
-                    xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default17", request,10);
                     break;
                 default:
-                    xQuery = new XQuery("plistPurchaseOrder_default", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default", request,10);
             }
 
         }
@@ -368,12 +369,14 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
         purchaseOrderProduct.setProductModel(productModel);
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
-        purchaseOrderProduct.setPurchaseAmount(productModel.getAmount());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        productModel.setAmount(productModel.getAmount()-1);
+        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        List addressList = baseManager.listObject(xQuery);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -428,6 +431,7 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
                 purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
                 Product product = productModel.getProduct();
                 Tenant tenant = product.getTenant();
@@ -524,11 +528,16 @@ public class PurchaseOrderController extends BaseController {
         }
 
 
+
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
         purchaseOrder.setConsumerAddress(consumerAddress);
+        for (PurchaseOrderProduct purchaseOrderProduct :purchaseOrder.getPurchaseOrderProductList()){
+            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount()-purchaseOrderProduct.getPurchaseAmount());
+            baseManager.saveOrUpdate(ProductModel.class.getName(),purchaseOrderProduct.getProductModel());
+        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {

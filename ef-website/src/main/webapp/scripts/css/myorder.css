@@ -444,7 +444,7 @@ a:hover{text-decoration: underline}
 /*找回密码*/
 /*设置新密码*/
 .new{width: 100%;min-height: 550px;float: left}
-.new .short{width: 568px;margin: 0 auto;margin-top: 161px;height: 180px;}
+.new .short{width: 630px;margin: 0 auto;margin-top: 161px;height: 180px;}
 .new .short ul{width: 100%;}
 .new .short ul li{margin-bottom: 20px;width: 100%;}
 .new .short ul li label{padding-right: 15px;text-align:right;width: 108px;font-size: 12px;font-family: "宋体";font-weight: 100;}
@@ -658,3 +658,20 @@ a:hover{text-decoration: underline}
 /*注册修改样式*/
 .reg-form .btn-p1{width: 112px;height: 36px;line-height: 36px;text-align: center;border: 1px solid #ccc;float: left;text-decoration: none;font-family: "KaiTi";background: #fff;transition: all 0.5s;}
 .reg-form .btn-p1:hover{background: #000;color: #fff;}
+/*我的卡券套用amazeui样式修改 my-kj*/
+.my-kj .am-tabs-default .am-tabs-nav a{font-size: 14px!important;color:#999!important;text-decoration: none;background: #fff;border: 1px solid #ccc;outline: none; }
+.my-kj .am-tabs-default .am-tabs-nav>.am-active a{font-size: 14px!important;color:#fff!important;text-decoration: none;background: #000;border: 1px solid #000;}
+.my-kj .am-tabs-bd{top:30px;border-top: 1px solid #ccc;border: 1px solid #ccc;float: left}
+.my-kj .am-tabs-bd .am-tab-panel{padding: 0 23px;}
+/*我的卡券自写样式*/
+.my-ds{position: relative!important;left:50%!important;overflow: visible!important;display: inline-block!important;margin-left: -500px!important;}
+.my-kj{float: left;width: 100%}
+.my-kj .serial-list-page{width: 100%;float: left;}
+.my-kj .serial-list-page .list-hd{padding-top:26px;font-size: 14px;float: left;width: 100%;color: #000;}
+.my-kj .serial-list-page .list-zq{width: 100%;float: left;}
+.my-kj .serial-list-page .list-zq .serial-list{width: 100%;float: left;border-bottom: 1px solid #ccc;margin-bottom: -1px;padding:26px 0 38px 0;}
+.my-kj .serial-list-page .list-zq .serial-list .list1{width: 208px;margin-right:98px;float: left;margin-left: 14px;}
+.my-kj .serial-list-page .list-zq .serial-list .list1 img{width: 100%}
+.my-kj .serial-list-page .list-zq .serial-list .list2{width: 300px;padding:45px 0;float: left;padding-left: 27px;background: url('../images/efeiyi-gwc.png') no-repeat -67px -58px;}
+.my-kj .serial-list-page .list-zq .serial-list .list3{width: 161px;text-align: center;float: left;padding:20px 0;}
+.my-kj .serial-list-page .list-zq .serial-list .list3 a{font-size: 12px;color:#003366;}

@@ -29,6 +29,9 @@ public class ProductModelDaoHibernate implements ProductModelDao {
     public int getMaxRecommendedIndex(String categoryId) {
         String hql = "select max(p.recommendIndex) from ProductModel p where p.product.category.id=?";
         Integer maxValue = (Integer) this.getSession().createQuery(hql).setParameter(0,categoryId).uniqueResult();
+        if(maxValue == null){
+            return 0;
+        }
         return maxValue;
     }
 }

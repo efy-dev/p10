@@ -364,3 +364,12 @@ ADD COLUMN `custom_property`  varchar(255) NULL AFTER `product_description_id`;
 ALTER TABLE `product_picture`
 ADD COLUMN `product_model_id`  char(16) NULL AFTER `status`;
 
+ALTER TABLE `project`
+	ADD COLUMN `district_id` char(16) NULL AFTER `description`;
+=================================================以上 已执行======================================================
+--------------------------------------未执行-------------------------
+ALTER TABLE `wiki_project_content`
+	ADD COLUMN `type` varchar(5) NULL AFTER `create_datetime`,
+	ADD COLUMN `project_id` char(16) NOT NULL AFTER `type`,
+	ADD COLUMN `city_id` char(16) NULL AFTER `project_id`;
+

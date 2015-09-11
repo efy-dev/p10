@@ -53,7 +53,11 @@
       <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
-          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+          <c:if test="${productPicture.status=='2'}">
+          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
+                                  alt=""/></li>
+          </c:if>
+          <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
               <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
                                       alt=""/></li>
@@ -64,7 +68,10 @@
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-          <c:forEach items="${product.productPictureList}" var="productPicture" varStatus="rec">
+         <c:if test="${productPicture.status=='2'}">
+          <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
+         </c:if>
+          <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
             <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
             </c:if>
@@ -102,7 +109,7 @@
       <!-- //End-->
       <%--<div class="amount">--%>
         <%--<div class="ipt">--%>
-          <%--<input class="txt" type="text" value="1"/><em class="ge">个</em>--%>
+          <%--<input class="txt" type="text" value=${productModel.amount}/><em class="ge">个</em>--%>
         <%--</div>--%>
         <%--<div class="btns">--%>
           <%--<a href="#btn-add" class="btn-add" title="加">+</a>--%>
@@ -116,10 +123,15 @@
         <div class="m-price">市场价：￥${productModel.marketPrice}</div>
       </div>
       <!-- //End-->
-      <div class="choose-btns">
-        <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
-        <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
 
+      <div class="choose-btns">
+         <c:if test="${productModel.amount == 0}">
+         <a id ="modelId" class="btn btn-append"  title="缺货">缺货</a>
+         </c:if>
+        <c:if test="${productModel.amount != 0}">
+          <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
+          <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买" disabled="disabled" >立即购买</a>
+        </c:if>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
@@ -157,12 +169,23 @@
       </div>
       <!-- //End-->
       <div class="btns">
+     <c:if test="${productModel.amount != 0}">
         <a class="buy" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="立即购买">立 即 购 买</a>
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
+     </c:if>
       </div>
     </div>
   </div>
-
+  <div class="wh detail" id="detail">
+    <div class="wh title"><h3>商品详情</h3></div>
+      <div class="wh part">
+      ${product.productDescription.content}
+    </div>
+    <div class="online-ask">
+      <a href="" class="btn"><i class="icon"></i>在线咨询</a>
+    </div>
+  </div>
+</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/scripts/js/jquery.min.js"></script>
 <!--<![endif]-->
@@ -174,6 +197,7 @@
 <script src="/scripts/js/amazeui.min.js"></script>
 <script src="/scripts/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+
 </body>
 </html>
 

@@ -148,25 +148,33 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th class="table-title">配送地址</th>
+                <th class="table-title">物流单号</th>
                 <th class="table-title">配送状态</th>
+                <th class="table-title">物流公司</th>
                 <th class="table-title">配送时间</th>
+                <th class="table-title">配送地址</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
             <tr>
-                <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                <td class="am-hide-sm-only">${purchaseOrderDelivery.serial}</td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderDelivery.status"
                                     checkedValue="${purchaseOrderDelivery.status}"
                                     type="normal"/>
                 </td>
                 <td class="am-hide-sm-only">
+                    <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                                    checkedValue="${purchaseOrderDelivery.logisticsCompany}"
+                                    type="normal"/>
+                </td>
+                <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                     pattern="yyyy-mm-dd"/>
                 </td>
-                </c:forEach>
+                <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+            </c:forEach>
             </tbody>
         </table>
     </div>

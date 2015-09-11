@@ -215,6 +215,7 @@
                 <match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>
                 <match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>
                 <match url="/basic/xm.do?qm=plistMasterWork_byProject2"/>
+                <match url="/basic/xm.do?qm=plistProjectFollowed_default3"/>
             </jnode>
 
         </jnode>
