@@ -142,7 +142,7 @@ $(function(){
     })();
     //商品详情页
     (function(){
-        //导航点击
+        //点击
         var index=0;
         var iSpeed=300;
         var nav=$('.nav-share .nav');
@@ -214,6 +214,43 @@ $(function(){
             return false;
         })
 
-    })();
+        var Time=new Date();
 
+        //商品详情页--鼠标滚轮
+        $(document).mousewheel(function(ev,dir){
+            //dir 判断鼠标滚动的方向   向下为  负数   向上为正数
+            if(new Date()-Time>500){
+                Time=new Date();
+                if(dir<0){
+                    index++;
+                    //index%=5;
+                    if(index>4){
+                        index=4;
+                    }
+                }else{
+                    index--;
+                    if(index<0){
+                        index=0;
+                    }
+                }
+                //详情
+                if(index==1){
+                    secOneLeft.animate({'margin-left':'0'},iSpeed);
+                }
+                //鉴赏
+                if(index==2){
+                    nav.addClass('nav2');
+                }
+                if(index!=2){
+                    nav.removeClass('nav2');
+                }
+
+                nav.removeClass('nav3');
+
+                navLi.eq(index).addClass('active').siblings().removeClass('active');
+                $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
+            }
+
+        })
+    })();
 })
