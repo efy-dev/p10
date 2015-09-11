@@ -161,8 +161,9 @@
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
       </div>
     </div>
+    ${product.productDescription.content}
   </div>
-
+</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/scripts/js/jquery.min.js"></script>
 <!--<![endif]-->
@@ -174,6 +175,7 @@
 <script src="/scripts/js/amazeui.min.js"></script>
 <script src="/scripts/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+
 </body>
 </html>
 
