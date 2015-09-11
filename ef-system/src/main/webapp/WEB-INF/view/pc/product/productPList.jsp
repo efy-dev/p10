@@ -94,6 +94,11 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})">
                                         删除
                                     </a>
+                                    <c:if test="${empty product.project}">
+                                      <small style="color: red;margin-left: 2px;">
+                                          (未关联项目)
+                                      </small>
+                                    </c:if>
                                         <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})"><span--%>
                                         <%--class="am-icon-trash-o">删除</span>--%>
                                         <%--</button>--%>

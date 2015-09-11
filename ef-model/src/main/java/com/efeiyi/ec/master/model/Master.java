@@ -46,6 +46,15 @@ public class Master implements Serializable {
     private List<MasterRecommended> masterRecommendedList;//推荐
     private String projectName ;
     private String levelName;
+    private String masterSpeech;
+    @Column(name = "master_speech")
+    public String getMasterSpeech() {
+        return masterSpeech;
+    }
+
+    public void setMasterSpeech(String masterSpeech) {
+        this.masterSpeech = masterSpeech;
+    }
 
     @Transient
     public String getProjectName() {

@@ -89,7 +89,7 @@
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                     <c:if test="${object.status=='1'}">
-                        收藏品
+                        普通
                     </c:if>
                     <c:if test="${object.status=='2'}">
                         精品
@@ -172,11 +172,12 @@
                            id="productModel">
                         <tbody>
                         <tr>
-                            <th class="am-text-center" width="20%">预览</th>
-                            <th class="am-text-center" width="20%">规格名称</th>
-                            <th class="am-text-center" width="20%">属性</th>
-                            <th class="am-text-center" width="20%">库存</th>
-                            <th class="am-text-center" width="20%">价格(元)</th>
+                            <th class="am-text-center" width="15%">预览</th>
+                            <th class="am-text-center" width="15%">规格名称</th>
+                            <th class="am-text-center" width="15%">属性</th>
+                            <th class="am-text-center" width="15%">库存</th>
+                            <th class="am-text-center" width="15%">价格(元)</th>
+                            <th class="am-text-center" width="15%">市场价格(元)</th>
                             <%--<th class="am-text-center" width="20%">图片</th>--%>
                         </tr>
                         <c:forEach var="model" items="${object.productModelList}">
@@ -209,6 +210,9 @@
                                 </td>
                                 <td align="center">
                                         ${model.price}
+                                </td>
+                                <td align="center">
+                                        ${model.marketPrice}
                                 </td>
                                     <%--<td align="center">--%>
                                     <%--<c:if test="${not empty model.productModel_url}">--%>
@@ -263,7 +267,7 @@
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
 
-                                                    <select onchange="setModelPic(this,'${productPicture.id}')">
+                                                    <select style="width: 85%;" onchange="setModelPic(this,'${productPicture.id}')">
                                                         <option value="0">设置商品规格图片</option>
                                                         <c:forEach var="productModel1" items="${object.productModelList}">
                                                             <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
@@ -465,7 +469,7 @@ var modelIds = [];
                         '</a>'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
-                        '<select onchange="setModelPic(this,\''+pictureId+'\')">'+
+                        '<select style="width: 85%;" onchange="setModelPic(this,\''+pictureId+'\')">'+
                         '<option value="0">'+'设置商品规格图片'+'</option>';
                 for(var n=0;n<modelIds.length;n++) {
 

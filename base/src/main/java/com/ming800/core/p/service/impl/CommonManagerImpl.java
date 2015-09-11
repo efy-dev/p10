@@ -31,6 +31,7 @@ public class CommonManagerImpl implements CommonManager {
     private static HashMap<String, CommonRecommended>  commonRecommendedMap = new HashMap<>();
     private static HashMap<String, CommonTag>    commonTagMap = new HashMap<>();
     private static HashMap<String, CommonSerial> autoSerialMap = new HashMap<>();
+    private static HashMap<String, String> logisticsCompanyMap = new HashMap<>();
    // private static int jmenuId = 1;
 
     private static void initCommon() throws Exception {
@@ -45,6 +46,7 @@ public class CommonManagerImpl implements CommonManager {
                 getCommonDocumentByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonRecommendedByGroup(new SAXReader().read(xmlFiles.getInputStream()));
                 getCommonTagByGroup(new SAXReader().read(xmlFiles.getInputStream()));
+                getLogisticsCompany(new SAXReader().read(xmlFiles.getInputStream()));
             }
         }catch (Exception e){
              // e.printStackTrace();
@@ -182,6 +184,28 @@ public class CommonManagerImpl implements CommonManager {
 
     }
 
+    /**
+     * 解析快递公司配置文件*/
+    private static HashMap getLogisticsCompany(Document infoDocument){
+        if(infoDocument!=null){
+            List<Node> autoSerialNodeList = infoDocument.selectNodes("common/logisticsCompanys/logisticsCompany");
+            if(autoSerialNodeList!=null){
+                for(Node node : autoSerialNodeList){
+                    String memo = node.selectSingleNode("@memo").getText();
+                    String name = node.selectSingleNode("@name").getText();
+                    logisticsCompanyMap.put(memo,name);
+                }
+            }
+        }
+        return logisticsCompanyMap;
+    }
+
+    /**
+     * 获取快递公司列表*/
+    public HashMap getLogisticsCompany() throws Exception{
+        return logisticsCompanyMap;
+    }
+
     @Override
      public   CommonRecommended getRecommended(String group) throws Exception {
          CommonRecommended commonRecommended = null;
@@ -229,5 +253,7 @@ public class CommonManagerImpl implements CommonManager {
         }
         return  conmmonSerial;
     }
+
+
 
 }

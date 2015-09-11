@@ -51,7 +51,7 @@
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
                     <c:if test="${object.status=='1'}">
-                        收藏品
+                        普通
                     </c:if>
                     <c:if test="${object.status=='2'}">
                         精品
@@ -117,11 +117,12 @@
                         <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover"
                                id="productModel">
                             <tr>
-                                <th class="am-text-center" width="20%">操作</th>
-                                <th class="am-text-center" width="20%">商品名称</th>
-                                <th class="am-text-center" width="20%">属性</th>
-                                <th class="am-text-center" width="20%">库存</th>
-                                <th class="am-text-center" width="20%">价格(元)</th>
+                                <th class="am-text-center" width="15%">操作</th>
+                                <th class="am-text-center" width="15%">商品名称</th>
+                                <th class="am-text-center" width="15%">属性</th>
+                                <th class="am-text-center" width="15%">库存</th>
+                                <th class="am-text-center" width="15%">价格(元)</th>
+                                <th class="am-text-center" width="15%">市场价格(元)</th>
                             </tr>
                             <c:set var="iscontain" value="false" />
                             <c:forEach var="item" items="${object.productModelList}">
@@ -147,11 +148,15 @@
                                         无
                                     </td>
                                     <td align="center">
-                                        <input type="text" name="defaultAmount" style="width: 23%;height: 30px;"
+                                        <input type="text" name="defaultAmount" style="width: 50%;height: 30px;"
                                                value=""/>
                                     </td>
                                     <td align="center">
-                                        <input type="text" name="defaultPrice" style="width: 40%;height: 30px;"
+                                        <input type="text" name="defaultPrice" style="width: 50%;height: 30px;"
+                                               value=""/>
+                                    </td>
+                                    <td align="center">
+                                        <input type="text" name="defaultMarketPrice" style="width: 50%;height: 30px;"
                                                value=""/>
                                     </td>
                                 </tr>
@@ -176,12 +181,16 @@
                                                 无
                                             </td>
                                             <td align="center">
-                                                <input type="text" name="defaultAmount" style="width: 23%;height: 30px;"
+                                                <input type="text" name="defaultAmount" style="width: 50%;height: 30px;"
                                                        value="${model.amount}"/>
                                             </td>
                                             <td align="center">
-                                                <input type="text" name="defaultPrice" style="width: 40%;height: 30px;"
+                                                <input type="text" name="defaultPrice" style="width: 50%;height: 30px;"
                                                        value="${model.price}"/>
+                                            </td>
+                                            <td align="center">
+                                                <input type="text" name="defaultMarketPrice" style="width: 50%;height: 30px;"
+                                                       value="${model.marketPrice}"/>
                                             </td>
                                         </tr>
                                     </c:if>
@@ -222,12 +231,16 @@
                                             <input type="hidden" value="" name="modelProperty"/>
                                         </td>
                                         <td align="center">
-                                            <input type="text" name="modelAmount" style="width: 23%;height: 30px;"
+                                            <input type="text" name="modelAmount" style="width: 50%;height: 30px;"
                                                    value="${model.amount}"/>
                                         </td>
                                         <td align="center">
-                                            <input type="text" name="modelPrice" style="width: 40%;height: 30px;"
+                                            <input type="text" name="modelPrice" style="width: 50%;height: 30px;"
                                                    value="${model.price}"/>
+                                        </td>
+                                        <td align="center">
+                                            <input type="text" name="marketPrice" style="width: 50%;height: 30px;"
+                                                   value="${model.marketPrice}"/>
                                         </td>
                                         </tr>
                                     </c:if>
@@ -254,7 +267,7 @@
                      </c:if>
                         <c:if test="${view == 'tenant'}">
                             <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${tenantId}&tenantId=${tenantId}')"
+                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成"/>
                         </c:if>
                     </span>
@@ -308,10 +321,13 @@
                 '<input type="hidden" value="" name="modelProperty" />' +
                 '</td>' +
                 '<td align="center">' +
-                ' <input type="text" name="modelAmount" style="width: 23%;height: 30px;" value=""/>' +
+                ' <input type="text" name="modelAmount" style="width: 50%;height: 30px;" value=""/>' +
                 '</td>' +
                 '<td align="center">' +
-                ' <input type="text" name="modelPrice" style="width: 40%;height: 30px;" value=""/>' +
+                ' <input type="text" name="modelPrice" style="width: 50%;height: 30px;" value=""/>' +
+                '</td>' +
+                '<td align="center">' +
+                ' <input type="text" name="marketPrice" style="width: 50%;height: 30px;" value=""/>' +
                 '</td>' +
                 '</tr>';
         $("#productModel").append(tr);
@@ -415,10 +431,13 @@
             tr += '<input type="hidden" value="' + ids + '" name="modelProperty" />';
             tr += '</td>' +
                     '<td align="center">' +
-                    ' <input type="text" name="modelAmount" style="width: 23%;height: 30px;" value=""/>' +
+                    ' <input type="text" name="modelAmount" style="width: 50%;height: 30px;" value=""/>' +
                     '</td>' +
                     '<td align="center">' +
-                    ' <input type="text" name="modelPrice" style="width: 40%;height: 30px;" value=""/>' +
+                    ' <input type="text" name="modelPrice" style="width: 50%;height: 30px;" value=""/>' +
+                    '</td>' +
+                    '<td align="center">' +
+                    ' <input type="text" name="marketPrice" style="width: 50%;height: 30px;" value=""/>' +
                     '</td>' +
                     '</tr>';
 

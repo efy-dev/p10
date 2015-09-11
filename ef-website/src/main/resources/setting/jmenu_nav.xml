@@ -5,13 +5,13 @@
            text_zh_CN="首页">
         <match url="/index.jsp"/>
     </jnode>
-    <jnode url="" id="productCategory" access="admin,manager" state="productCategory"
+    <jnode url="#" id="productCategory" access="admin,manager" state="productCategory"
            text_zh_CN="商品分类"/>
-    <jnode url="" id="organization" access="admin,manager" state="closed"
+    <jnode url="#" id="organization" access="admin,manager" state="closed"
            text_zh_CN="传承人"/>
-    <jnode url="" id="organization" access="admin,manager" state="closed"
+    <jnode url="#" id="organization" access="admin,manager" state="closed"
            text_zh_CN="展览"/>
-    <jnode url="" id="organization" access="admin,manager" state="closed"
+    <jnode url="#" id="organization" access="admin,manager" state="closed"
            text_zh_CN="资讯"/>
 </jnode>
 </jmenu>
