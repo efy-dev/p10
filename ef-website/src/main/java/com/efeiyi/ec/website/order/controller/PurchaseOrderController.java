@@ -368,12 +368,14 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
         purchaseOrderProduct.setProductModel(productModel);
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
-        purchaseOrderProduct.setPurchaseAmount(productModel.getAmount());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        productModel.setAmount(productModel.getAmount()-1);
+        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
 
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        List addressList = baseManager.listObject(xQuery);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
@@ -428,6 +430,7 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
                 purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
                 Product product = productModel.getProduct();
                 Tenant tenant = product.getTenant();
@@ -524,11 +527,16 @@ public class PurchaseOrderController extends BaseController {
         }
 
 
+
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
         purchaseOrder.setConsumerAddress(consumerAddress);
+        for (PurchaseOrderProduct purchaseOrderProduct :purchaseOrder.getPurchaseOrderProductList()){
+            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount()-purchaseOrderProduct.getPurchaseAmount());
+            baseManager.saveOrUpdate(ProductModel.class.getName(),purchaseOrderProduct.getProductModel());
+        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
