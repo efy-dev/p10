@@ -148,18 +148,27 @@ $(function(){
         var nav=$('.nav-share .nav');
         var navLi=nav.find('.navli');
         var secOneLeft=$('.section1 .sec-left');
-        var bodyHtml=$('body,html');
+        var bodyHtml=$('body');
         var wH=bodyHtml.height();  //计算浏览器的高度
         //如果页面刷新则页面滚动到最顶部
         if(bodyHtml.not(".scroll")){
             bodyHtml.animate({'scrollTop':0},100);
         }
+        //立即收藏
+        btnsCollect();
         navLi.click(function(){
             index=$(this).index();
             bodyHtml.addClass('scroll');
             bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
             nav.removeClass('nav3');
             $(this).addClass('active').siblings('li').removeClass('active');
+            //分享
+            if(index==0){
+                $('.nav-share .share').show();
+            }
+            if(index!=0){
+                $('.nav-share .share').hide();
+            }
             //详情
             if(index==1){
                 secOneLeft.animate({'margin-left':'0'},iSpeed);
@@ -171,6 +180,8 @@ $(function(){
             if(index!=2){
                 nav.removeClass('nav2');
             }
+            //收藏
+            btnsCollect();
         })
         //section1----详情
         $('.section1 .icon-close').click(function(){
@@ -195,28 +206,29 @@ $(function(){
             })
         }
         //点击立即收藏
-        $('.section .btns-collect').click(function(){
-            var section5Part1=$('.section5 .part1');
-            var section5Part2=$('.section5 .part2');
-            nav.addClass('nav3');
-            bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
-            //相关收藏
-            section5Part1.find('.related-collect').click(function(){
-                section5Part1.animate({'left':'-100%'},iSpeed);
-                section5Part2.animate({'left':'0'},iSpeed);
+        function btnsCollect(){
+            $('.section .btns-collect').click(function(){
+                var section5Part1=$('.section5 .part1');
+                var section5Part2=$('.section5 .part2');
+                nav.addClass('nav3');
+                bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
+                //相关收藏
+                section5Part1.find('.related-collect').click(function(){
+                    section5Part1.animate({'left':'-100%'},iSpeed);
+                    section5Part2.animate({'left':'0'},iSpeed);
+                    return false;
+                });
+                section5Part2.find('.related-collect').click(function(){
+                    section5Part1.animate({'left':'0'},iSpeed);
+                    section5Part2.animate({'left':'100%'},iSpeed);
+                    return false;
+                });
                 return false;
             });
-            section5Part2.find('.related-collect').click(function(){
-                section5Part1.animate({'left':'0'},iSpeed);
-                section5Part2.animate({'left':'100%'},iSpeed);
-                return false;
-            });
-            return false;
-        })
-
-        var Time=new Date();
+        }
 
         //商品详情页--鼠标滚轮
+        var Time=new Date();
         $(document).mousewheel(function(ev,dir){
             //dir 判断鼠标滚动的方向   向下为  负数   向上为正数
             if(new Date()-Time>500){
@@ -232,6 +244,13 @@ $(function(){
                     if(index<0){
                         index=0;
                     }
+                }
+                //分享
+                if(index==0){
+                    $('.nav-share .share').show();
+                }
+                if(index!=0){
+                    $('.nav-share .share').hide();
                 }
                 //详情
                 if(index==1){
