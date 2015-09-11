@@ -56,7 +56,7 @@
             <div class="bd title">详情</div>
             <div class="bd">
                 <c:if test="${!empty productModel.productModelDescription}">
-                    ${productModel.productModelDescription.content}
+                    ${product.productDescription.content}
                 </c:if>
                 <%----%>
                 <%----%>

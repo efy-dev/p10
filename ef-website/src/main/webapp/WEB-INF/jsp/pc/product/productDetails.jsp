@@ -109,7 +109,7 @@
       <!-- //End-->
       <%--<div class="amount">--%>
         <%--<div class="ipt">--%>
-          <%--<input class="txt" type="text" value="1"/><em class="ge">个</em>--%>
+          <%--<input class="txt" type="text" value=${productModel.amount}/><em class="ge">个</em>--%>
         <%--</div>--%>
         <%--<div class="btns">--%>
           <%--<a href="#btn-add" class="btn-add" title="加">+</a>--%>
@@ -123,10 +123,15 @@
         <div class="m-price">市场价：￥${productModel.marketPrice}</div>
       </div>
       <!-- //End-->
-      <div class="choose-btns">
-        <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>
-        <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立即购买</a>
 
+      <div class="choose-btns">
+         <c:if test="${productModel.amount == 0}">
+         <a id ="modelId" class="btn btn-append"  title="缺货">缺货</a>
+         </c:if>
+        <c:if test="${productModel.amount != 0}">
+          <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
+          <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买" disabled="disabled" >立即购买</a>
+        </c:if>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
           <span class="jiathis_txt">分享到</span>
@@ -164,8 +169,10 @@
       </div>
       <!-- //End-->
       <div class="btns">
+     <c:if test="${productModel.amount != 0}">
         <a class="buy" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="立即购买">立 即 购 买</a>
         <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
+     </c:if>
       </div>
     </div>
   </div>
