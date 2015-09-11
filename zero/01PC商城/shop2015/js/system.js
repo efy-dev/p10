@@ -142,19 +142,22 @@ $(function(){
     })();
     //商品详情页
     (function(){
+        //给html和body加style
+
         //点击
         var index=0;
         var iSpeed=300;
         var nav=$('.nav-share .nav');
         var navLi=nav.find('.navli');
         var secOneLeft=$('.section1 .sec-left');
-        var bodyHtml=$('body,html');
+        var bodyHtml=$('body');
         var wH=bodyHtml.height();  //计算浏览器的高度
         //如果页面刷新则页面滚动到最顶部
         if(bodyHtml.not(".scroll")){
             bodyHtml.animate({'scrollTop':0},100);
         }
         navLi.click(function(){
+
             index=$(this).index();
             bodyHtml.addClass('scroll');
             bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
@@ -212,11 +215,10 @@ $(function(){
                 return false;
             });
             return false;
-        })
-
-        var Time=new Date();
+        });
 
         //商品详情页--鼠标滚轮
+        var Time=new Date();
         $(document).mousewheel(function(ev,dir){
             //dir 判断鼠标滚动的方向   向下为  负数   向上为正数
             if(new Date()-Time>500){
