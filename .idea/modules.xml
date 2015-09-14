@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base_resource/base_resource.iml" filepath="$PROJECT_DIR$/base_resource/base_resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-model/ef-model.iml" filepath="$PROJECT_DIR$/ef-model/ef-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-personal/ef-personal.iml" filepath="$PROJECT_DIR$/ef-personal/ef-personal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-system/ef-system.iml" filepath="$PROJECT_DIR$/ef-system/ef-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-tenant/ef-tenant.iml" filepath="$PROJECT_DIR$/ef-tenant/ef-tenant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-website/ef-website.iml" filepath="$PROJECT_DIR$/ef-website/ef-website.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ef-wiki/ef-wiki.iml" filepath="$PROJECT_DIR$/ef-wiki/ef-wiki.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p10.iml" filepath="$PROJECT_DIR$/p10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pal-model/pal-model.iml" filepath="$PROJECT_DIR$/pal-model/pal-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pal-system/pal-system.iml" filepath="$PROJECT_DIR$/pal-system/pal-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pal-website/pal-website.iml" filepath="$PROJECT_DIR$/pal-website/pal-website.iml" />
+    </modules>
+  </component>
+</project>
