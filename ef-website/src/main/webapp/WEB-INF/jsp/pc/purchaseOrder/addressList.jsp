@@ -25,7 +25,7 @@
                         <i class="clase" title="关闭"></i>
                     </div>
                     <div class="m-form">
-                        <form id="addAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post">
+                        <form id="addAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post" accept-charset="utf-8">
                             <ul>
                                 <li>
                                     <label>收货人：</label>
@@ -143,7 +143,7 @@
                                   <i class="clase" title="关闭"></i>
                               </div>
                               <div class="m-form">
-                                  <form id="updateAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>"
+                                  <form class="aaa" id="updateAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>"
                                         method="post">
                                       <ul>
                                           <li>
@@ -331,14 +331,23 @@
                 phone: "required",
             },
         });
-        $("#updateAddress").validate({
-            rules: {
-                consignee: "required",
-                details: "required",
-                name: "required",
-                phone: "required",
-            },
+
+        $(".aaa").each( function(){
+            $(this).validate({
+                rules: {
+                    consignee: "required",
+                    details: "required",
+                    name: "required",
+                    phone: "required",
+                },
+            });
+
         });
+
+
+
+
+
     });
 </script>
 
