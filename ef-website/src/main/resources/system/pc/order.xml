@@ -72,6 +72,39 @@
             </does>
         </entity>
 
+        <entity name="Coupon" label="商品列表" model="com.efeiyi.ec.purchase.model.Coupon">
+            <!--<fields>-->
+                <!--<field name="orderStatus" label="订单状态" inputType="text">-->
+                    <!--<statusType fieldName="orderStatus">-->
+                        <!--<item label="等待付款" value="1"/>-->
+                        <!--<item label="等待收货" value="5"/>-->
+                        <!--<item label="已完成" value="13"/>-->
+                        <!--<item label="订单已取消" value="17"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
+                <!--<field name="payWay" label="支付方式" inputType="text">-->
+                    <!--<statusType fieldName="payWay">-->
+                        <!--<item label="支付宝" value="1"/>-->
+                        <!--<item label="银行卡" value="2"/>-->
+                        <!--<item label="微信" value="3"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
+            <!--</fields>-->
+            <does>
+                <do name="listCoupon" access="" label="优惠券列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                    </query>
+                    <query name="byorder" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="CouponBatch.priceLimit" defaultValue="1" operation="ge"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
         <entity name="PurchaseOrderPayment" label="商品列表" model="com.efeiyi.ec.purchase.model.PurchaseOrderPayment">
             <does>
                 <do name="plistPurchaseOrderPayment" access="" label="订单列表">
