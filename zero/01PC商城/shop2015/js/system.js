@@ -154,24 +154,24 @@ $(function(){
         $('#menu-fine .nav-icon').click(function(){
             $(this).hide().siblings('a').show();
             menuFineList.css({'opacity':'1','z-index':'6'});
-            ulList.slideDown();
+            ulList.stop(true,true).slideDown(200);
             //
             menuFineList.find('.active').hover(function(){
-                navLinks.animate({'right':'0'},300);
+                navLinks.stop(true).animate({'right':'0'},300);
             },function(){
                 navLinks.stop(true).animate({'right':-navLinksWidth+'px'},300);
             });
 
             menuFineList.find('.mask').click(function(){
                 $('#menu-fine .nav-icon-active').hide().siblings('a').show();
-                menuFineList.stop(true,true).animate({'opacity':'0','z-index':'0'});
-                ulList.slideUp();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
             })
 
             $('#menu-fine .nav-icon-active').click(function(){
                 $(this).hide().siblings('a').show();
-                menuFineList.stop(true,true).animate({'opacity':'0','z-index':'0'});
-                ulList.slideUp();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
             })
 
 
@@ -271,7 +271,6 @@ $(function(){
                 Time=new Date();
                 if(dir<0){
                     index++;
-                    //index%=5;
                     if(index>4){
                         index=4;
                     }
