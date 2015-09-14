@@ -211,6 +211,9 @@ AFTER `serial`;
 
 
 
+ALTER TABLE `purchase_order`
+ADD COLUMN `coupon_id`  char(16) NULL AFTER `message`;
+
 
 
 
