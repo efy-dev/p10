@@ -420,18 +420,27 @@ a,
 .header-fine .logo {padding:10px 0}
 .header-fine .logo a {background:url(../images/logo2.png);width:225px;height:37px;float:left}
 .header-fine .nav {height:57px;float:right;position:relative}
-.header-fine .nav .nav-icon {background-position:0 -78px;width:28px;height:15px;position:absolute;bottom:13px;right:40px}
-
-
+.header-fine .nav .icon {background-position:0 -78px;width:28px;height:15px;position:absolute;bottom:13px;right:40px}
+.header-fine .nav .nav-icon-active {width:48px; right:20px;}
+.header-fine .nav .nav-icon-active .icon {background-position:-212px -95px;width:5px; height: 15px; position: absolute; top:0; right:0;}
 .header-fine .nav-links {top:30px;left:-1138px;z-index:50;border:0;background:#fff}
 .header-fine .nav li.hover .bgbor {width:140px;border:0;border-top:1px #000 solid;top:0}
 /*--//End--*/
-#menu-fine-list {width:100%;height:100%; position: absolute; z-index:10; background:rgba(0, 0, 0, 0.5); display: none;}
-#menu-fine-list .nav .ul-list {width:140px;padding-top:40px;position:absolute;top:55px;right:0;margin:0;background:#fff;z-index:2;display:block}
-#menu-fine-list .nav .ul-list li {width:100%;line-height:30px;float:left}
-#menu-fine-list .nav .ul-list li a {float:right}
-#menu-fine-list .mask {background:rgba(0, 0, 0, 0.6);position:fixed;top:86px;left:0;bottom:0;right:0;z-index:1;display:none}
-#menu-fine-list .mask.visible {display:block}
+#menu-fine {}
+#menu-fine-list {width:100%;height:100%;position: fixed;top:86px; left: 0; opacity:0; z-index:0;overflow: hidden;}
+#menu-fine-list .hd {height:100%;position: relative;overflow: hidden;}
+#menu-fine-list a {float:right; font-family:FangSong; font-size: 12px;}
+#menu-fine-list .ul-list {width:140px;height:100%;padding-top:40px;position:absolute;top:0; right: 0;margin:0;background:#fff; z-index: 2;}
+#menu-fine-list .ul-list li {width:100%;line-height:30px;float:left;box-sizing: content-box}
+#menu-fine-list .ul-list li a {padding-right:40px;}
+#menu-fine-list .ul-list li.active { border-top: 1px solid #fff;}
+#menu-fine-list .ul-list li.active:hover {border-top:1px solid #000}
+#menu-fine-list .nav-links {padding:37px 198px 30px 53px;position: absolute;top:100px;right:0;z-index:50;border:0;background:#fff;}
+#menu-fine-list .nav-links ul { width:100px;float:left;}
+#menu-fine-list .nav-links li {width:100%;float: left}
+#menu-fine-list .nav-links li.title { padding-bottom: 15px; margin-bottom: 15px;font-family: FangSong; color: #999; font-size: 12px; border-bottom: 1px solid #ccc}
+#menu-fine-list .nav-links li a { float: left; line-height:30px;}
+#menu-fine-list .mask {width:100%;height:100%; position: absolute;top:0; left:0; z-index: 1; background:rgba(0, 0, 0, 0.6);}
 /*--//End--*/
 .nav-share {width:1200px;position:fixed;top:88px;left:50%;margin-left:-600px;z-index:2}
 .nav-share .share {position:absolute;top:0;left:0}
@@ -459,7 +468,7 @@ a,
 .nav-share .nav3 a {color:#000}
 .nav-share .nav3 li .line {background:#000}
 /*--//ENd--*/
-.section {width:100%;min-width:1200px;height:100%;min-height:720px;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box;}
+.section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box;}
 .section .hd {height:100%;position:relative;}
 .section .img-bg {width:100%;height:100%;position:absolute;top:0;left:0;z-index:0;overflow:hidden}
 .section .img-bg img {height:100%;position:absolute;top:0;left:50%;margin-left:-640px;}

@@ -143,7 +143,37 @@ $(function(){
     //商品详情页
     (function(){
         //导航事件
-        $('#menu-fine').click(function(){
+
+        var menuFineList=$('#menu-fine-list');
+        var ulList=menuFineList.find('.ul-list');
+        var navLinks=menuFineList.find('.nav-links');
+        var navLinksWidth=(navLinks.find('ul').width()*navLinks.find('ul').length)+251; //计算二级菜单宽度
+        navLinks.css({'width':navLinksWidth+'px','right':-navLinksWidth+'px'});
+        ulList.hide();
+        //alert(navLinksWidth)
+        $('#menu-fine .nav-icon').click(function(){
+            $(this).hide().siblings('a').show();
+            menuFineList.css({'opacity':'1','z-index':'6'});
+            ulList.stop(true,true).slideDown(200);
+            //
+            menuFineList.find('.active').hover(function(){
+                navLinks.stop(true).animate({'right':'0'},300);
+            },function(){
+                navLinks.stop(true).animate({'right':-navLinksWidth+'px'},300);
+            });
+
+            menuFineList.find('.mask').click(function(){
+                $('#menu-fine .nav-icon-active').hide().siblings('a').show();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
+            })
+
+            $('#menu-fine .nav-icon-active').click(function(){
+                $(this).hide().siblings('a').show();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
+            })
+
 
         })
 
@@ -241,7 +271,6 @@ $(function(){
                 Time=new Date();
                 if(dir<0){
                     index++;
-                    //index%=5;
                     if(index>4){
                         index=4;
                     }
@@ -276,6 +305,36 @@ $(function(){
                 $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
             }
 
-        })
+        });
+
+        //点击向下箭头
+        //$('.section0 .btn-arrow-down').click(function(){
+        //    bodyHtml.animate({'scrollTop':1*(wH-88)},iSpeed);
+        //    if(new Date()-Time>500){
+        //        Time=new Date();
+        //        if(dir<0){
+        //            index++;
+        //            //index%=5;
+        //            if(index>4){
+        //                index=4;
+        //            }
+        //        }else{
+        //            index--;
+        //            if(index<0){
+        //                index=0;
+        //            }
+        //        }
+        //
+        //
+        //        navLi.eq(index).addClass('active').siblings().removeClass('active');
+        //        $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
+        //    }
+        //
+        //
+        //    return false;
+        //})
+
+
+
     })();
 })

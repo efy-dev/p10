@@ -25,7 +25,7 @@
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
                     <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
                         <li>
-                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
+                            <img src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}@!product-model" alt="">
 
                             <p class="wh name">${productModel.product.name}
                                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">

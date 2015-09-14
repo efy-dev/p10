@@ -224,14 +224,13 @@
                         <input class="txt-yzm" type="text" id="verification" minlength="3" placeholder="验证码" required>
                         <button  class="btn-p1" id="verificationButton">获取验证码</button>
 
-                        <div class="help-block">
-                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
+                        <div class=<h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
                                 手机验证码输入错误</h5>
                         </div>
                     </div>
 
                     <div class="am-form-group">
-                        <input type="password" id="password" name="password" data-parsley-pattern="^[a-zA-Z0-9]{5,15}$"
+                        <input type="password" id="password" name="password" data-parsley-pattern="^[a-zA-Z0-9]{6,16}$"
                                data-parsley-error-message="密码由6-16位字母或数字组成" placeholder="密码由6-16位字母或数字组成"
                                data-parsley-trigger="change" required="" data-parsley-id="6670">
                     </div>
