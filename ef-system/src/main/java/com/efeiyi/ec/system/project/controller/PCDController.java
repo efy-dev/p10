@@ -37,7 +37,7 @@ public class PCDController {
 
     @RequestMapping({"/pj/address/districtListByCity.do"})
     public List<Object> getDistrictListByCity(Model model, HttpServletRequest request) throws Exception {
-        XQuery xQuery = new XQuery("listAddressDistrict_city", request);
+        XQuery xQuery = new XQuery("listAddressDistrict2_city", request);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listObject(xQuery);
         return list;

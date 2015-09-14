@@ -214,11 +214,7 @@
                                 <td align="center">
                                         ${model.marketPrice}
                                 </td>
-                                    <%--<td align="center">--%>
-                                    <%--<c:if test="${not empty model.productModel_url}">--%>
-                                    <%--<img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
-                                    <%--</c:if>--%>
-                                    <%--</td>--%>
+
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -257,10 +253,10 @@
                                             <dd style="width: 100%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
-                                                        <a href="javascript:void(0);"  onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
+                                                        <a href="javascript:void(0);" status="2" onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="javascript:void(0);" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                        <a href="javascript:void(0);" status="1" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
@@ -463,7 +459,7 @@ var modelIds = [];
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '<a href="javascript:void(0);" status="1" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -577,16 +573,23 @@ var modelIds = [];
 
 
     function updatePictureStatus(obj,id,status){
+        var productId = $("input[name='product.id']").val();
         $.ajax({
             type: "get",
             url: '<c:url value="/product/updatePicture.do"/>',
             cache: false,
             dataType: "json",
-            data:{id:id.trim(),status:status},
+            data:{id:id.trim(),status:status,productId:productId},
             success: function (data) {
                 if(status == '2'){
+                    if($("a[status='2']").length!=0){
+                        $("a[status='2']").text("设为主图片");
+                        $("a[status='2']").attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                        $("a[status='2']").attr("status","1");
+                    }
 
                     $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','1')");
+                    $(obj).attr("status","2");
                     $(obj).text("主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
 //                                    '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+
@@ -597,6 +600,7 @@ var modelIds = [];
                 }
                 if(status == '1'){
                     $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                    $(obj).attr("status","1");
                     $(obj).text("设为主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
 //                            '   <a href="#" onclick="deletePicture(this,\''+data+'\')">'+

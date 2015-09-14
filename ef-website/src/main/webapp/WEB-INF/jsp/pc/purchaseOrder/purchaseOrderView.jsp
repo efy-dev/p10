@@ -55,7 +55,7 @@
                     <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9">${op.productModel.product.category.name}</td>
+                <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
                 <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                 <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
               </tr>
