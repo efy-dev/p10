@@ -80,7 +80,7 @@
                 $('#my-prompt').modal({
                     relatedTarget: this,
                     onConfirm: function(e) {
-                        console.log(e.data);
+                        //console.log(e.data);
                         $.ajax({
                             type:"get",
                             data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
@@ -91,7 +91,7 @@
                         });
                     },
                     onCancel: function(e) {
-                        alert('不想说!');
+                       // alert('不想说!');
                     }
                 });
             }else if(temp == "无法发货"){
