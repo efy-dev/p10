@@ -49,13 +49,6 @@
         return false;
       }
     });
-
-//    if(np!="" && pwd!=""){
-//      flag = true;
-//    }else{
-//      flag = false;
-//    }
-    alert(flag);
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
       window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
