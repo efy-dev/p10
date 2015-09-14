@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td>商户地址</td>
-            <td>${object.tenant.province}&nbsp;${object.tenant.city}&nbsp;${object.tenant.address}</td>
+            <td>${object.tenant.province.name}&nbsp;${object.tenant.city.name}&nbsp;${object.tenant.district.name}</td>
         </tr>
         <tr>
             <td>制作工艺</td>

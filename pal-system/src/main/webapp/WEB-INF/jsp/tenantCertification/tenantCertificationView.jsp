@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>商户地址</td>
-            <td>${object.tenant.province}&nbsp;${object.tenant.city}&nbsp;${object.tenant.address}</td>
+            <td>${object.tenant.province.name}&nbsp;${object.tenant.city.name}&nbsp;${object.tenant.district.name}</td>
         </tr>
         <tr>
             <td>认证证书</td>
@@ -88,8 +88,7 @@
             <tr>
                 <c:forEach items="${object.imgList}" var="Img2">
                     <td>
-                        <button onclick="window.location.href='<c:url
-                                value="/certificationImg/removeCertificationImg.do?certificationId=${object.id}&ImgId=${Img2.id}"/>'"
+                        <button onclick="window.location.href='<c:url value="/certificationImg/removeCertificationImg.do?certificationId=${object.id}&ImgId=${Img2.id}"/>'"
                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                 class="am-icon-trash-o"></span> 删除
                         </button>
