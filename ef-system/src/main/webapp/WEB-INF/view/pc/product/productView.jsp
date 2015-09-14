@@ -214,11 +214,7 @@
                                 <td align="center">
                                         ${model.marketPrice}
                                 </td>
-                                    <%--<td align="center">--%>
-                                    <%--<c:if test="${not empty model.productModel_url}">--%>
-                                    <%--<img width="30%"  name=""  src="http://tenant.efeiyi.com/${model.productModel_url}@!tenant-manage-photo" alt="商品模型图片" />--%>
-                                    <%--</c:if>--%>
-                                    <%--</td>--%>
+
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -398,7 +398,31 @@ public class XdoController {
             String fieldName = request.getParameter("fieldName");
 
             return moduleManager.listStatusTypeItem(fieldName);
-        } else {
+        }else if (qm.startsWith("plist")) {       /*分页*/
+            ModelMap modelMap = new ModelMap();
+            String conditions = request.getParameter("conditions");
+            request.setAttribute("conditions", conditions);
+
+            Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+            DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+            PageEntity pageEntity = new PageEntity();
+            String pageIndex = request.getParameter("pageEntity.index");
+            String pageSize = request.getParameter("pageEntity.size");
+            if (pageIndex != null) {
+                pageEntity.setIndex(Integer.parseInt(pageIndex));
+                pageEntity.setSize(Integer.parseInt(pageSize));
+            }
+
+            PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, conditions, pageEntity);
+            modelMap.put("pageInfo", pageInfo);
+            modelMap.put("pageEntity", pageInfo.getPageEntity());
+
+            return xdoManager.listPage(tempDo, tempDoQuery, conditions, pageEntity);
+
+
+        }
+        else {
             return null;
         }
     }

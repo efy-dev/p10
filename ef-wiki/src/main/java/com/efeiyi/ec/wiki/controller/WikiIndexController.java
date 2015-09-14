@@ -27,7 +27,7 @@ public class WikiIndexController extends WikibaseController {
      * @param request is HttpServletRequest,model
      * @return "/wiki/showIndex"
      */
-    @RequestMapping("/home.do")
+    @RequestMapping("/getTenant.do")
     public ModelAndView getTenant( HttpServletRequest request  , Model model)throws Exception{
         logger.info("weiki  for efeiyi index begin...");
 
@@ -54,5 +54,18 @@ public class WikiIndexController extends WikibaseController {
         return baseManager.listObject(xQuery);
     }
 
-
+    /**
+     * 非遗百科热门展示
+     * @param request is HttpServletRequest,model
+     * @return "/wiki/showIndex"
+     */
+    @RequestMapping("/home.do")
+    public ModelAndView getHotProjects( HttpServletRequest request  , Model model)throws Exception{
+        return new ModelAndView("/hotProjects/hotProjects");
+    }
+    @RequestMapping("/getHotProjects.do")
+    public List getHotProjects( HttpServletRequest request)throws Exception{
+        List list = getWondenfulProjectList();
+        return list;
+    }
 }

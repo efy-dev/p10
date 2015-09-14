@@ -84,7 +84,7 @@
                 <%--<%}else{%>--%>
                        <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
-                            src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>
+                            src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}@!product-hot" alt=""/>
                        </a>
                        <%--<%}%>--%>
                 <p class="wh name">
