@@ -242,8 +242,18 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/updatePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id, String status) {
+    public String updateModelPicture(String id, String status,String productId,HttpServletRequest request) {
         try {
+            if("2".equals(status)){
+              XQuery xQuery = new XQuery("listProductPicture_default2",request);
+                xQuery.put("product_id",productId);
+                List<ProductPicture> pictures = baseManager.listObject(xQuery);
+                if(pictures.size()!=0){
+                    ProductPicture picture = pictures.get(0);
+                    picture.setStatus("1");
+                    baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
+                }
+            }
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
