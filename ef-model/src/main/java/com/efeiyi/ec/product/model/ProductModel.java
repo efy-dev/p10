@@ -31,8 +31,7 @@ public class ProductModel implements Serializable {
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private ProductPicture  productPicture;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_picture_id")
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "productModel")
     public ProductPicture getProductPicture() {
         return productPicture;
     }
