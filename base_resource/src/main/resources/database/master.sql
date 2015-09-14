@@ -373,3 +373,7 @@ ALTER TABLE `wiki_project_content`
 	ADD COLUMN `project_id` char(16) NOT NULL AFTER `type`,
 	ADD COLUMN `city_id` char(16) NULL AFTER `project_id`;
 
+=================================================以上 已执行======================================================
+	ALTER TABLE `product_model`
+ADD COLUMN `product_picture_id`  char(16) NULL AFTER `custom_property`;
+
