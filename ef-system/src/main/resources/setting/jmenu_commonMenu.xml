@@ -220,6 +220,8 @@
                 <match url="/basic/xm.do?qm=plistProjectFollowed_default3"/>
                 <match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>
+                <match url="/basic/xm.do?qm=formMasterWork"/>
+                <match url="/basic/xm.do?qm=viewMaster"/>
             </jnode>
 
         </jnode>
