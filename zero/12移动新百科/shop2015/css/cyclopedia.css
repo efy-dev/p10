@@ -1,0 +1,4 @@
+@charset "utf-8";
+.dis-q1 [data-am-widget=tabs]{margin:0}
+.dis-q1 [data-am-widget=tabs] .am-tabs-nav li{border: 1px solid #000;background: #fff;}
+.dis-q1 .am-tabs-default .am-tabs-nav>.am-active a{background: #000;}
