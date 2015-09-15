@@ -76,7 +76,7 @@
             <ul class="ul-item">
                 <c:forEach items="${masterList}" var="master">
                     <li>
-                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}"
+                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}@!ef-home-master"
                                                         alt=""/></a>
 
                         <p><strong>${master.name}</strong></p>
