@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="wiki_project_content")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectContent {
     private String id;
     private String content;

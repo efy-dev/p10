@@ -53,7 +53,7 @@
     <jnode id="efecProductAndTenant" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
         <jnode url="" id="productManager" access="admin,manager" state="closed" text_zh_CN="商品管理">
             <jnode url="/basic/xm.do?qm=plistProduct_default&amp;view=newProduct" access="admin" text_zh_CN="商品列表">
-                <match url="/basic/xm.do?qm=plistProduct_default"/>
+                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=newProduct"/>
                 <match url="/basic/xm.do?qm=formProduct&amp;view=newProduct"/>
@@ -63,6 +63,7 @@
                 <match url="/basic/xm.do?qm=plistTenantProduct_default"/>
                 <match url="/basic/xm.do?view=newProduct"/>
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
+
 
 
             </jnode>
