@@ -33,7 +33,6 @@
                                  <li>
                                      <label>收货人：</label>
                                      <input type="text" name="consignee">
-                                     <span>请您填写收货人姓名</span>
                                  </li>
                                  <li>
                                      <label>所在地区：</label>
@@ -278,16 +277,24 @@
     }
 
     function submitNewAddress() {
-        var param = $("#newAddress").serialize();
-        var success = function (data) {
-            console.log(data)
-            var html = newAddress(data);
-            $("#address").append(html);
-            $(".active-pop").hide();
-            $("#reset").click();
+        var consignee=$(":input[name='consignee']").val();
+        var  phone=$(":input[name='phone']").val();
+        var details=$(":input[name='details']").val();
+        if(consignee == "" || phone == ""|| details == "" ){
+            alert("1231231")
+        }else{
+            var param = $("#newAddress").serialize();
+            var success = function (data) {
+                console.log(data)
+                var html = newAddress(data);
+                $("#address").append(html);
+                $(".active-pop").hide();
+                $("#reset").click();
+            }
+            ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
+            }, "post")
         }
-        ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
-        }, "post")
+
     }
 
     function chooseAddress(element, addressId) {
