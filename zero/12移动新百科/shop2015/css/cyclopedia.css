@@ -1,4 +1,18 @@
 @charset "utf-8";
+/*分类级别地区*/
 .dis-q1 [data-am-widget=tabs]{margin:0}
 .dis-q1 [data-am-widget=tabs] .am-tabs-nav li{border: 1px solid #000;background: #fff;}
 .dis-q1 .am-tabs-default .am-tabs-nav>.am-active a{background: #000;}
+.dis-q1 .am-tabs-bd .am-tab-panel{margin: .8rem 0 50px 0;padding: 0;}
+.dis-q1 .site{width: 100%;float: left;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;padding:0 0 .8rem 0rem;}
+.dis-q1 .menu-page{border-bottom: 1px solid #ccc;width: 100%;float: left;}
+.dis-q1 .list-site{width: 100%;float: left;padding-left: 1.6rem}
+.dis-q1 .list-site li{float: left;margin: 0  .9rem 0  0;padding: .7rem 0;}
+.dis-q1 .list-site li a{padding: 0.9rem 1.6rem;font-size: 1.2rem;border:1px solid #666;color:#666;display: inline-block;transition: all 0.5s; }
+.dis-q1 .list-site li a:hover{background: #000;color:#fff; }
+/*分类级别地区*/
+/*大首页*/
+.bk-icon{background:url(../images/bk-icon.png) no-repeat -52px 0;background-size:129px auto;width:55px;height:55px;display: inline-block}
+.bk-icon1{background:url(../images/bk-icon.png) no-repeat 9px 0;background-size:129px auto;width:55px;height:55px;display: inline-block}
+.icon2{background:url(../images/bk-icon.png) no-repeat 9px -60px;background-size:129px auto;width:55px;height:55px;display: inline-block}
+/*大首页*/
