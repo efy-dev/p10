@@ -86,9 +86,9 @@ public class ProjectCategory implements Serializable{
     public  void  setType(String type){
        this.type = type;
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fathercategory_id")
+    @JoinColumn(name="father_category_id")
     public ProjectCategory getFatherCategory() {
         return fatherCategory;
     }
