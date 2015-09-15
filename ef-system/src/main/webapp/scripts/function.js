@@ -10,7 +10,6 @@ function dialog1(url, artDialogLogId, artDialogLogName, fun) {
     this.key = "";
     this.dataType = "";
     this.required = "";
-    console.log($("#" + artDialogLogId + artDialogLogName).attr("id"));
     if (typeof $("#" + artDialogLogId + artDialogLogName).attr("id") == "undefined") {
 
         $.ajax({
@@ -101,6 +100,8 @@ m8uDialog.openDialog = function (artDialogLogId, artDialogLogName, type, fun) {
         url = '/studentTraining/formStudentTrainingDialog.do?printable=true&dispatcher=student';
     } else if (type == 'tenant') {     /*�û�*/
         url = '/tenant/list/json';
+    }else if (type == 'category') {     /*�û�*/
+        url = '/category/list/json';
     } else if (type == 'multiUser') {
         url = '/organization/formMultiUserDialog.do?printable=true&theStatus=3';
     } else if (type == 'staff') {    /*Ա��*/

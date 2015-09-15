@@ -33,7 +33,7 @@
       <ul class="ul-list">
         <c:forEach items="${productModelList}" var="productModel">
           <li>
-            <img src="<c:url value="${productModel.product.picture_url}"/>" alt="">
+            <img src="<c:url value="${productModel.productPicture.pictureUrl}"/>" alt="">
             <p class="name">${productModel.name}</p>
             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
           </li>

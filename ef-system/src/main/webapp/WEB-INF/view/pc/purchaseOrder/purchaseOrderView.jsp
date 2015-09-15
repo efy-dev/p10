@@ -57,6 +57,11 @@
                     }
                 });
         }
+
+
+        function logisticsTracking(company,serial){
+
+        }
     </script>
 </head>
 <body>
@@ -239,6 +244,12 @@
                                     onclick="editPurchaseOrderDelivery('${purchaseOrderDelivery.id}','${purchaseOrderDelivery.logisticsCompany}','${purchaseOrderDelivery.serial}')"><span
                                     class="am-icon-trash-o">编辑</span>
                             </button>
+
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                    onclick="logisticsTracking('${purchaseOrderDelivery.logisticsCompany}','${purchaseOrderDelivery.serial}')"><span
+                                    class="am-icon-trash-o">物流追踪</span>
+                            </button>
+
                         </div>
                     </div>
                 </td>
