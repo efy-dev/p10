@@ -10,7 +10,6 @@ function dialog1(url, artDialogLogId, artDialogLogName, fun) {
     this.key = "";
     this.dataType = "";
     this.required = "";
-    console.log($("#" + artDialogLogId + artDialogLogName).attr("id"));
     if (typeof $("#" + artDialogLogId + artDialogLogName).attr("id") == "undefined") {
 
         $.ajax({

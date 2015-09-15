@@ -105,6 +105,7 @@
                         <condition name="product.name" operation="likes" label="产品名称"/>
                         <condition name="product.serial" operation="eq" label="产品编号"/>
                         <condition name="product.project.name" operation="likes" label="项目"/>
+                        <condition name="product.category.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
                     </query>
                 </do>
             </does>
@@ -114,7 +115,7 @@
                 model="com.efeiyi.ec.product.model.ProductRecommended">
             <does>
                 <do name="plistProductRecommended" access="" label="推荐产品分页列表"
-                    result="/productRecommended/productRecommendedPList">
+                    result="/productRecommended/productRecommendedPList">f
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="group" defaultValue="productRecommended" operation="eq"/>
