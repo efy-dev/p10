@@ -58,14 +58,14 @@
         </div>
       </div>
 
-      <div class="am-form-group">
-        <label name="price" class="am-u-sm-3 am-form-label">市场价格</label>
+      <%--<div class="am-form-group">--%>
+        <%--<label name="price" class="am-u-sm-3 am-form-label">市场价格</label>--%>
 
-        <div class="am-u-sm-9">
-          <input type="text" name="price" id="price" value="${object.price}">
-          <!--<small>必填项*</small>-->
-        </div>
-      </div>
+        <%--<div class="am-u-sm-9">--%>
+          <%--<input type="text" name="price" id="price" value="${object.price}">--%>
+          <%--<!--<small>必填项*</small>-->--%>
+        <%--</div>--%>
+      <%--</div>--%>
 
       <div class="am-form-group">
         <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
