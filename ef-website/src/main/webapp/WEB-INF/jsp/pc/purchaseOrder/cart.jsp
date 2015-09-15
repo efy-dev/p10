@@ -69,7 +69,7 @@
                             </td>
                             <td width="437">
                                 <div class="cols1">
-                                    <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
+                                    <img src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}@!product-icon" alt=""/>
 
                                     <div class="info">
                                         <p><a href="#">${product.productModel.product.project.name}</a></p>

@@ -61,7 +61,7 @@ public class ProductPicture {
         this.status = status;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_model_id")
     public ProductModel getProductModel() {
         return productModel;

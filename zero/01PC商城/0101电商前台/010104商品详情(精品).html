@@ -49,93 +49,74 @@ body { height:100%;background:#626262}
 <div class="header header-fine wh">
     <div class="hd">
         <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-        <div class="nav">
-            <a id="menu-fine" href="javascript:" class="icon nav-icon"></a>
-            <ul class="ul-list" style="display: none;">
-                <li><a href="" title="首页">首页</a></li>
-                <li class="active">
-                    <a href="javascript;" title="商品分类">商品分类</a>
-                    <span class="bgbor" style="display: none;"></span>
-                    <div class="nav-links" style="display:none;">
-                        <ul>
-                            <li class="title">陶 冶 烧 造</li>
-                            <li><a href="" target="_blank" title="">紫砂</a></li>
-                            <li><a href="" target="_blank" title="">景泰蓝</a></li>
-                            <li><a href="" target="_blank" title="">景德镇</a></li>
-                            <li><a href="" target="_blank" title="">钧瓷</a></li>
-                            <li><a href="" target="_blank" title="">龙泉青瓷</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">木 作 编 扎</li>
-                            <li><a href="" target="_blank" title="">木雕</a></li>
-                            <li><a href="" target="_blank" title="">竹雕</a></li>
-                            <li><a href="" target="_blank" title="">风筝</a></li>
-                            <li><a href="" target="_blank" title="">空竹</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">织 染 印 绣</li>
-                            <li><a href="" target="_blank" title="">潮绣</a></li>
-                            <li><a href="" target="_blank" title="">苏绣</a></li>
-                            <li><a href="" target="_blank" title="">顾绣</a></li>
-                            <li><a href="" target="_blank" title="">沈绣</a></li>
-                            <li><a href="" target="_blank" title="">瑶族绣</a></li>
-                            <li><a href="" target="_blank" title="">京绣</a></li>
-                            <li><a href="" target="_blank" title="">云锦</a></li>
-                            <li><a href="" target="_blank" title="">蜀锦</a></li>
-                            <li><a href="" target="_blank" title="">漳缎</a></li>
-                            <li><a href="" target="_blank" title="">缂丝</a></li>
-                            <li><a href="" target="_blank" title="">蓝印花布</a></li>
-                            <li><a href="" target="_blank" title="">蜡染</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">传 统 美 术</li>
-                            <li><a href="" target="_blank" title="">唐卡</a></li>
-                            <li><a href="" target="_blank" title="">剪纸</a></li>
-                            <li><a href="" target="_blank" title="">书法篆刻</a></li>
-                            <li><a href="" target="_blank" title="">陶瓷微书</a></li>
-                            <li><a href="" target="_blank" title="">脸谱</a></li>
-                            <li><a href="" target="_blank" title="">掐丝珐琅画</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">琢 玉 成 器</li>
-                            <li><a href="" target="_blank" title="">玉雕</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">金 石 錾 锻</li>
-                            <li><a href="" target="_blank" title="">铜雕</a></li>
-                            <li><a href="" target="_blank" title="">花丝镶嵌</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">如 胶 似 膝</li>
-                            <li><a href="" target="_blank" title="">平遥漆器</a></li>
-                            <li><a href="" target="_blank" title="">北京雕漆</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">文 房 四 宝</li>
-                            <li><a href="" target="_blank" title="">端砚</a></li>
-                            <li><a href="" target="_blank" title="">歙砚</a></li>
-                            <li><a href="" target="_blank" title="">粉蜡签</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">饕 餮 美 食</li>
-                            <li><a href="" target="_blank" title="">老汤精</a></li>
-                        </ul>
-                        <ul>
-                            <li class="title">茗 品 佳 酿</li>
-                        </ul>
-                        <ul>
-                            <li class="title">医 药 养 生</li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="" title="传承人">传承人</a></li>
-                <li><a href="" title="展览">展览</a></li>
-                <li><a href="" title="资讯">资讯</a></li>
-            </ul>
-            <div class="mask"></div>
+        <div id="menu-fine" class="nav">
+            <a href="javascript:" class="icon nav-icon"></a>
+            <a href="javascript:" class="icon nav-icon-active" style="display:none"><i class="icon"></i></a>
         </div>
     </div>
 </div>
+
+<div id="menu-fine-list">
+    <div class="hd">
+        <ul class="ul-list">
+            <li><a href="" title="首页">首页</a></li>
+            <li class="active">
+                <a href="javascript;" title="商品分类">商品分类</a>
+                <div class="nav-links">
+                    <ul>
+                        <li class="title">陶冶烧造</li>
+                        <li><a href="" target="_blank" title="">紫砂</a></li>
+                        <li><a href="" target="_blank" title="">景泰蓝</a></li>
+                        <li><a href="" target="_blank" title="">景德镇</a></li>
+                        <li><a href="" target="_blank" title="">钧瓷</a></li>
+                        <li><a href="" target="_blank" title="">龙泉青瓷</a></li>
+                    </ul>
+                    <ul>
+                        <li class="title">传统美术</li>
+                        <li><a href="" target="_blank" title="">唐卡</a></li>
+                        <li><a href="" target="_blank" title="">剪纸</a></li>
+                        <li><a href="" target="_blank" title="">书法篆刻</a></li>
+                        <li><a href="" target="_blank" title="">陶瓷微书</a></li>
+                        <li><a href="" target="_blank" title="">脸谱</a></li>
+                        <li><a href="" target="_blank" title="">掐丝珐琅画</a></li>
+                    </ul>
+                    <ul>
+                        <li class="title">金石錾锻</li>
+                        <li><a href="" target="_blank" title="">铜雕</a></li>
+                        <li><a href="" target="_blank" title="">花丝镶嵌</a></li>
+                    </ul>
+                    <ul>
+                        <li class="title">如胶似膝</li>
+                        <li><a href="" target="_blank" title="">平遥漆器</a></li>
+                        <li><a href="" target="_blank" title="">北京雕漆</a></li>
+                    </ul>
+                    <ul>
+                        <li class="title">织染印绣</li>
+                        <li><a href="" target="_blank" title="">潮绣</a></li>
+                        <li><a href="" target="_blank" title="">苏绣</a></li>
+                        <li><a href="" target="_blank" title="">顾绣</a></li>
+                        <li><a href="" target="_blank" title="">沈绣</a></li>
+                        <li><a href="" target="_blank" title="">瑶族绣</a></li>
+                        <li><a href="" target="_blank" title="">京绣</a></li>
+                        <li><a href="" target="_blank" title="">云锦</a></li>
+                        <li><a href="" target="_blank" title="">蜀锦</a></li>
+                        <li><a href="" target="_blank" title="">漳缎</a></li>
+                        <li><a href="" target="_blank" title="">缂丝</a></li>
+                        <li><a href="" target="_blank" title="">蓝印花布</a></li>
+                        <li><a href="" target="_blank" title="">蜡染</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="" title="传承人">传承人</a></li>
+            <li><a href="" title="展览">展览</a></li>
+            <li><a href="" title="资讯">资讯</a></li>
+        </ul>
+
+    </div>
+    <div class="mask"></div>
+</div>
+
+
 <!-- //End--header-->
 <div class="nav-share">
     <div class="hd">
@@ -170,8 +151,8 @@ body { height:100%;background:#626262}
 <!-- //End--nav-share-->
 <div class="section">
     <div class="hd">
-        <div class="btn-arrow-down"><a class="icon" href=""></a></div>
         <div class="section0">
+            <div class="btn-arrow-down"><a class="icon" href=""></a></div>
             <div class="img-bg"><img src="../shop2015/upload/fine-1.jpg" alt=""/></div>
             <div class="sec-right">
                 <div class="sec-right-top">
@@ -182,7 +163,8 @@ body { height:100%;background:#626262}
                     <p>国家级非物质文化遗产</p>
                 </div>
                 <div class="name2">
-                    <p>安格尔|公爵夫人肖像</p>
+                    <p>安格尔像像像像</p>
+                    <p>公爵夫人肖像</p>
                 </div>
                 <div class="btns">
                     <a class="btns-link btns-collect" href="" title="立即收藏">立 即 收 藏</a>

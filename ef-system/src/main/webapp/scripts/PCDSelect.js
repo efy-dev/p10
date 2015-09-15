@@ -9,9 +9,9 @@ var temp_html = "";
     $.fn.pcdSelect=function(purl, curl, durl, pid, cid, did){
         if(this.length<1){return;};
 
-        var prov_obj=$("#province");
-        var city_obj=$("#city");
-        var dist_obj=$("#district");
+        var prov_obj=$(".addressProvince");
+        var city_obj=$(".addressCity");
+        var dist_obj=$(".addressDistrict");
 
         city_obj.empty().attr("disabled",true);
         dist_obj.empty().attr("disabled",true);
@@ -24,7 +24,7 @@ var temp_html = "";
             });
             prov_obj.html(temp_html);
             if(pid != null && pid != ""){
-                $("#province option[value='" + pid + "']").attr("selected", "selected");
+                $(".addressProvince option[value='" + pid + "']").attr("selected", "selected");
                 provinceChange();
             }
 
@@ -57,7 +57,7 @@ var temp_html = "";
                                 temp_html+="<option value='"+city.id+"'>"+city.name+"</option>";
                             });
                             city_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
-                            $("#city option[value='" + data[0].id + "']").attr("selected", "selected");
+                            $(".addressCity option[value='" + data[0].id + "']").attr("selected", "selected");
                             cityChange();
                         }else {
                             temp_html=select_preHtml;
@@ -66,7 +66,7 @@ var temp_html = "";
                             });
                             city_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
                             if(cid != null && cid != ""){
-                                $("#city option[value='" + cid + "']").attr("selected", "selected");
+                                $(".addressCity option[value='" + cid + "']").attr("selected", "selected");
                                 cityChange();
                             }
                         }
@@ -98,14 +98,14 @@ var temp_html = "";
                                 temp_html+="<option value='"+dist.id+"'>"+dist.name+"</option>";
                             });
                             dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
-                            $("#district option[value='" + data[0].id + "']").attr("selected", "selected");
+                            $(".addressDistrict option[value='" + data[0].id + "']").attr("selected", "selected");
                         }else {
                             temp_html=select_preHtml;
                             $.each(data,function(i,dist){
                                 temp_html+="<option value='"+dist.id+"'>"+dist.name+"</option>";
                             });
                             dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
-                            $("#district option[value='" + did + "']").attr("selected", "selected");
+                            $(".addressDistrict option[value='" + did + "']").attr("selected", "selected");
                         }
                         did = "";
                     },

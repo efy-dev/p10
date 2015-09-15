@@ -1,16 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<module name="PCProject" label="商品" version="" package="com.efeiyi.ec.project.model.Project" path="">
+
+
+<module name="project" label="project" version="" package="com.efeiyi.ec.project" path="">
 
     <entities>
-        <entity name="PCProject" label="商品列表"  model="com.efeiyi.ec.project.model.Project">
+        <entity name="ProjectCategory" label="Category"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectCategory">
             <does>
-                <do name="listProject" access="" label="商品列表">
-                    <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
-                        <condition name="" defaultValue="" operation="ne"/>
+                <do name="plistProjectCategory" access="" label="ProjectCategory列表"
+                    result="/projectCategory/projectCategoryPList" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="default1" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="name"  operation="eq" label="类别名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="类别编号" inputType="text"/>
+                    </query>
+                </do>
+                <do name="plistEcProjectCategory" access="" label="ProjectCategory列表"
+                    result="/projectCategory/ecProjectCategoryPList" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="fatherCategory.id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="level" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default1" label="类别查询" type="auto" orderBy="id:desc">
+                        <condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="name"  operation="eq" label="类别名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="类别编号" inputType="text"/>
                     </query>
                 </do>
 
+                <do name="removeProjectCategory" label="删除category" access="" result="redirect:/basic/xm.do?qm=plistProjectCategory_default"/>
+                <do name="formProjectCategory" label="保存category" access="" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryHandler" result="/projectCategory/projectCategoryForm"/>
+                <do name="saveOrUpdateProjectCategory" label="保存category" access="" result="redirect:/basic/xm.do?qm=plistProjectCategory_default" execute="com.efeiyi.ec.system.project.controller.ProjectCategoryFormHandler"/>
+                <do name="listProjectCategory" label="category列表" access="" result="/projectCategory/projectCategoryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="category主键" name="id" defaultValue="0" operation="ne"/>
+                        <condition label="状态" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="Project" label="Project"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.Project">
+            <fields>
+                <field name="type" label="项目类型" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="非遗技艺" value="1"/>
+                        <item label="非遗美术" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistProject" access="" label="project列表"
+                    result="/project/projectPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq" inputType="default"/>-->
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+
+                    </query>
+
+                    <query name="default1" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="项目编号" inputType="text"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="plistProject2" access="" label="project列表"
+                    result="/project/projectPList2">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+
+                    <query name="default1" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="项目编号" inputType="text"/>
+                    </query>
+                </do>
+                <do name="plistTProject" access="" label="project列表"
+                    execute="com.efeiyi.ec.system.project.controller.TenantProjectListHandler"
+                    result="/tenantProject/tenantProjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+
+                    <query name="default1" label="查询" type="auto" orderBy="serial:desc">
+                        <condition name="name"  operation="eq" label="项目名称" inputType="text"/>
+                        <condition name="serial"  operation="eq" label="项目编号" inputType="text"/>
+                        <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                </do>
+                <do name="formProjectWiki" label="保存Project" access="" execute="com.efeiyi.ec.system.project.controller.ProjectHandler" result="/project/projectForm2"/>
+                <do name="viewProject" label="查看" access="" result="/project/projectView"   />
+                <do name="removeProject" label="删除Project" access="" result="redirect:/basic/xm.do?qm=plistProject_default"/>
+                <do name="formProject" label="保存Project" access="" execute="com.efeiyi.ec.system.project.controller.ProjectHandler" result="/project/projectForm"/>
+                <do name="saveOrUpdateProject" label="保存project" access="" result="redirect:/basic/xm.do?qm=plistProject_default" execute="com.efeiyi.ec.system.project.controller.ProjectFormHandler"/>
+                <do name="saveOrUpdateProject2" label="保存project" access="" result="redirect:/basic/xm.do?qm=plistProject2_default" execute="com.efeiyi.ec.system.project.controller.ProjectFormHandler"/>
+                <do name="listProject" label="project列表" access="" result="/project/projectList" execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
+                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
+                        <condition label="project主键" name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="listProject2" label="project列表" access="" result="/tenantProject/projectList" execute="com.efeiyi.ec.system.project.controller.TenantProjectListHandler">
+
+                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
+                        <condition label="project主键" name="status" defaultValue="1" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="name" label="项目名称" type="auto" orderBy="serial:asc">
+                        <condition label="项目名称" name="name"  operation="eq" inputType="text"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+        <entity name="ProjectProperty" label="ProjectProperty"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectProperty">
+            <does>
+                <do name="plistProjectProperty" access="" label="projectProperty列表"
+                    result="/projectProperty/projectPropertyPList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="removeProjectProperty" label="删除ProjectProperty" access="" result="redirect:/basic/xm.do?qm=plistProject_default"/>
+                <do name="formProjectProperty" label="保存ProjectProperty" access="" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
+                    result="/projectProperty/projectPropertyForm"/>
+                <do name="saveOrUpdateProjectProperty" label="保存ProjectProperty" access=""
+                    result="redirect:/basic/xm.do?qm=plistProject_default"/>
+                <do name="listProjectProperty" label="ProjectProperty列表" access=""
+                    result="/projectProperty/projectPropertyList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="ProjectPropertyValue" label="ProjectPropertyValue"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectPropertyValue">
+            <does>
+                <do name="plistProjectPropertyValue" access="" label="projectPropertyValue列表"
+                    result="/projectPropertyValue/projectPropertyValuePList">
+                    <query name="default" label="默认" type="auto" orderBy="sort:asc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeProjectPropertyValue" label="删除ProjectPropertyValue" access="" result="json"/>
+                <do name="formProjectPropertyValue" label="保存ProjectPropertyValue" access=""
+                    result="/projectPropertyValue/projectPropertyValueForm" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyValueHandler"/>
+                <do name="saveOrUpdateProjectPropertyValue" label="保存ProjectPropertyValue" access=""
+                    result="/projectPropertyValue/projectPropertyValueSaveSuccess"/>
+                <do name="listProjectPropertyValue" label="ProjectPropertyValue列表" access=""
+                    result="/projectPropertyValue/projectPropertyValueList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+        <entity name="ProjectTag" label="ProjectTag"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectTag">
+            <does>
+                <do name="plistProjectTag" access="" label="projectTag列表"
+                    result="/projectTag/projectTagPList">
+                    <query name="default" label="默认" type="auto" orderBy="value:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="formProjectTag" label="保存ProjectProperty" execute="com.efeiyi.ec.system.project.controller.ProjectTagHandler" access="" result="/projectTag/projectTagForm"/>
+                <do name="saveOrUpdateProjectTag" label="保存ProjectTag" access="" result="redirect:/basic/xm.do?qm=plistProject_default"/>
+                <do name="removeProjectTag" label="删除ProjectTag" access="" result="redirect:/basic/xm.do?qm=plistProject_default"/>
+                <do name="listProjectTag" label="ProjectTag列表" access="" result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+        <entity name="MasterProject" label="MasterProject"
+                basic="simple" others=""
+                model="com.efeiyi.ec.master.model.MasterProject">
+            <does>
+                <do name="plistMasterProject" access="" label="MasterProject列表"
+                    result="/masterProject/masterProjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+                <do name="removeMasterProject" label="删除MasterProject" access="" result="json"/>
+                <do name="formMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectForm"/>
+                <do name="saveOrUpdateMasterProject" label="保存MasterProject" access="" result="/masterProject/masterProjectSaveSuccess"/>
+                <do name="listMasterProject" label="MasterProject列表" access="" result="/masterProject/masterProjectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+        <entity name="ProjectRecommended" label="ProjectRecommended"
+                basic="simple" others=""
+                model="com.efeiyi.ec.project.model.ProjectRecommended">
+            <does>
+                <do name="plistProjectRecommended" access="" label="ProjectRecommended列表"
+                    result="json">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="groupName" defaultValue="ProjectRecommended" operation="eq"/>
+                    </query>
+                </do>
             </does>
         </entity>
     </entities>

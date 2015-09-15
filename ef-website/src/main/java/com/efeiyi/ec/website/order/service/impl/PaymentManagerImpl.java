@@ -51,9 +51,9 @@ public class PaymentManagerImpl implements PaymentManager {
         baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
 
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
-
-//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, purchaseOrder.getTotal().intValue() * 100, purchaseOrderPayment.getId(), "非遗产品", null, "http://www.efeiyi.com/order/paysuccess/" + purchaseOrder.getId(), null, null, null);
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPayment.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrder.getId(), null, null, null);
+        System.out.println(purchaseOrder.getTotal().intValue());
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, purchaseOrder.getTotal().intValue() * 100, purchaseOrderPayment.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrder.getId(), null, null, null);
+//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPayment.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrder.getId(), null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             System.out.println(bcPayResult.getHtml());
             return bcPayResult.getHtml();
@@ -103,7 +103,7 @@ public class PaymentManagerImpl implements PaymentManager {
 
         BeeCloud.registerApp("130498c1-8928-433b-a01d-c26420f41818", "49fc6d9c-fd5d-4e9c-9ff6-f2d5ef1a1a3e");
 
-//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue() * 100, purchaseOrder.getSerial(), "非遗产品", null, "http://www.efeiyi.com", null, null, null);
+//        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue() * 100, purchaseOrder.getSerial(), "非遗产品", null, "http://www2.efeiyi.com", null, null, null);
         BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrder.getTotal().intValue() * 100, purchaseOrderPayment.getId() + "", "非遗产品", null, null, openid, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
 //            System.out.println(bcPayResult.getWxJSAPIMap());

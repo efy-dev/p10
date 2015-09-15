@@ -5,8 +5,59 @@
 <html>
 <head>
     <title></title>
-    <style>
-    </style>
+    <script>
+        function editPurchaseOrderDelivery(purchaseOrderDeliveryId,logisticsCompany,serial){
+            $('#logisticsCompany')[0].options.length=0;
+            $('#serial').val("");
+            $.ajax({
+                type:'get',
+                url:"<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
+                success:function(data){
+                    var selector = $("#logisticsCompany");
+                    data = eval('(' + data + ')');
+                    for(var key in data){
+                        if(logisticsCompany == key){
+                            selector.append('<option value="'+key+'" selected="true">'+data[key]+'</option>')
+                        }else{
+                            selector.append('<option value="'+key+'">'+data[key]+'</option>')
+                        }
+                    }
+
+                    $('#serial').val(serial);
+                }
+            });
+            $('#my-prompt').modal({
+                relatedTarget: this,
+                onConfirm: function(e) {
+                    //console.log(e.data);
+                    $.ajax({
+                        type:"get",
+                        data:{id:purchaseOrderDeliveryId,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
+                        url:"<c:url value="/purchaseOrderDelivery/updatePurchaseOrderDelivery.do"/>",
+                        success:function(data){
+                            //$(obj).find("span").text("已发货");
+                            alert("修改成功");
+                        }
+                    });
+                },
+                onCancel: function(e) {
+                    // alert('不想说!');
+                }
+            });
+
+
+
+                jQuery.ajax({
+                    type: "GET",
+                    url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',
+                    data: {id: orderId},
+                    dataType: "json",
+                    success: function (data) {
+                        $("#" + orderId).remove();
+                    }
+                });
+        }
+    </script>
 </head>
 <body>
 <div class="am-g">
@@ -101,6 +152,27 @@
 </div>
 
 <div class="am-g">
+    <%--点击修改的时候弹出的模态对话框--%>
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+        <div class="am-modal-dialog">
+            <%--<div class="am-modal-hd">Amaze UI</div>--%>
+            <div class="am-modal-bd">
+                <div>请填写正确的物流公司和快递单号</div>
+
+                <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
+                <div>
+                    物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany" style="width: 90px;display: inline-block;"></select>
+                </div>
+                <div>
+                    快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input" style="width: 100px;height:30px;display: inline-block;">
+                </div>
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+            </div>
+        </div>
+    </div>
     <div class="am-u-sm-12 am-u-md-6">
         <h4>支付记录</h4>
     </div>
@@ -148,6 +220,7 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
+                <th class="table-title">操作</th>
                 <th class="table-title">物流单号</th>
                 <th class="table-title">配送状态</th>
                 <th class="table-title">物流公司</th>
@@ -158,6 +231,18 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderDeliveryList}" var="purchaseOrderDelivery" varStatus="stat">
             <tr>
+
+                <td>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                    onclick="editPurchaseOrderDelivery('${purchaseOrderDelivery.id}','${purchaseOrderDelivery.logisticsCompany}','${purchaseOrderDelivery.serial}')"><span
+                                    class="am-icon-trash-o">编辑</span>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+
                 <td class="am-hide-sm-only">${purchaseOrderDelivery.serial}</td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderDelivery.status"

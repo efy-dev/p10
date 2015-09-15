@@ -14,7 +14,7 @@
 <body>
 <artice class="custom">
     <div class="bd list-class">
-        <ul class="ul-list-nav">
+        <ul class="ul-nav-slice3">
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价格">价格</a></li>
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="新品">新品</a></li>
@@ -25,7 +25,7 @@
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
                     <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
                         <li>
-                            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
+                            <img src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}@!product-model" alt="">
 
                             <p class="wh name">${productModel.product.name}
                                 <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
