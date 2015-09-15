@@ -25,9 +25,9 @@
     <tr style="text-align: left">
         <td  width="25%">操作</td>
         <td  width="25%">项目名称</td>
-        <td  width="10%">项目类别</td>
-        <td  width="20%">日期</td>
-        <td  width="20%">城市</td>
+        <td  width="25%">项目类别</td>
+        <td  width="25%">日期</td>
+
     </tr>
 
 
@@ -37,7 +37,7 @@
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&id=${ProjectContent.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑内容</button>
-                        <button onclick="window.open('http://${ProjectContent.creator.name}.efeiyi.com')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>
+                       <%-- <button onclick="window.open('http://${ProjectContent.creator.name}.efeiyi.com')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
                     </div>
                 </div>
             </td>
@@ -48,7 +48,7 @@
                 </a>
 
             </td>
-            <td width="10%">
+            <td width="25%">
 
                 <c:choose>
                     <c:when test="${ProjectContent.type == 1}">
@@ -60,12 +60,10 @@
                     <c:otherwise/>
                 </c:choose>
             </td>
-            <td width="20%">
+            <td width="25%">
                     ${ProjectContent.createDatetime}
             </td>
-            <td width="20%">
-                    ${ProjectContent.city.name}
-            </td>
+
         </tr>
 
     </c:forEach>

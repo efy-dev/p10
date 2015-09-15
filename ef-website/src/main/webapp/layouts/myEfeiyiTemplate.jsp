@@ -62,9 +62,9 @@
             url: "<c:url value='/myEfeiyi/getUserAvatar.do'/>",
             dataType: 'json',
             success: function (data) {
-                if("" == data || null == data){
+                if(data == "false" ){
                     $("#uploadPi").attr("src", "<c:url value='/scripts/images/img-tx.png'/>");
-                }else if("" != data || null != data){
+                }else if(data!=null || data!=null){
                     $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
                 }
             }

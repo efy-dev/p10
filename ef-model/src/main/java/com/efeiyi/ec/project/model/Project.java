@@ -78,7 +78,7 @@ public class Project {
     public void setSerial(String serial) {
         this.serial = serial;
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_project_id")
     public  Project getFatherProject(){

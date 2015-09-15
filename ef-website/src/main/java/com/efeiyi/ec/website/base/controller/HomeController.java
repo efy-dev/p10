@@ -37,7 +37,7 @@ public class HomeController {
         HashMap<String,List> map = new HashMap<>();
         for (Object object : projectList){
             XQuery xQuery = new XQuery("listProductModel_recommend",request);
-            xQuery.put("product_project_id",((ProjectCategory)object).getId());
+            xQuery.put("product_project_projectCategory_id",((ProjectCategory)object).getId());
             map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
         }
         model.addAttribute("recommendMap",map);

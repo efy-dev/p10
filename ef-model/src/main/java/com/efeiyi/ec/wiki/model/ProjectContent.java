@@ -28,7 +28,6 @@ public class ProjectContent {
     private Date createDatetime;
     private String type;
     private Project project;
-    private AddressCity city;
     //private List<Consumer> consumer;
 
 
@@ -91,15 +90,7 @@ public class ProjectContent {
     public Project getProject() {return project;}
 
     public void setProject(Project project) {this.project = project;}
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="city_id")
-    public AddressCity getCity() {
-        return city;
-    }
 
-    public void setCity(AddressCity city) {
-        this.city = city;
-    }
   /*  @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "wiki_projectContent_consumer",
             joinColumns = { @JoinColumn(name = "projectContent_id") },
