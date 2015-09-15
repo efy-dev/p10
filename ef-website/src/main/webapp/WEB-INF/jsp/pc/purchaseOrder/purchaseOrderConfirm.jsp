@@ -281,7 +281,6 @@
         var  phone=$(":input[name='phone']").val();
         var details=$(":input[name='details']").val();
         if(consignee == "" || phone == ""|| details == "" ){
-            alert("1231231")
         }else{
             var param = $("#newAddress").serialize();
             var success = function (data) {
