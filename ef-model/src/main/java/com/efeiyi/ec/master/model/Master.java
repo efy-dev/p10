@@ -65,9 +65,19 @@ public class Master implements Serializable {
         this.projectName = projectName;
     }
 
+    @Transient
+    public MasterProject getMainProjectName() {
+        List<MasterProject>  masterProjectList = getMasterProjectList();
+        MasterProject mainProject = null;
+        for (MasterProject project : masterProjectList){
+            if (project.getStatus().equals("1")){
+                mainProject = project;
+            }
+        }
+        return mainProject;
+    }
 
-
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "master")
     public List<MasterProject> getMasterProjectList() {
         return masterProjectList;

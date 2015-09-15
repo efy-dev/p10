@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -75,14 +76,15 @@
             <ul class="ul-item">
                 <c:forEach items="${masterList}" var="master">
                     <li>
-                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com${master.favicon}"
+                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}"
                                                         alt=""/></a>
 
                         <p><strong>${master.name}</strong></p>
 
-                        <p>[木版水印]</p>
+                        <p>[${master.getMainProjectName().getProject().getName()}]</p>
 
-                        <p>国家级传承人</p>
+                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
+                        <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
 
                         <p><a class="more" href="" target="_blank" title="更多"><i class="icon"></i>更多</a></p>
                     </li>

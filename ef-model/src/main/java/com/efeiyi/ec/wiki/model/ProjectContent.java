@@ -7,6 +7,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="wiki_project_content")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectContent {
     private String id;
     private String content;
@@ -26,7 +28,6 @@ public class ProjectContent {
     private Date createDatetime;
     private String type;
     private Project project;
-    private AddressCity city;
     //private List<Consumer> consumer;
 
 
@@ -89,15 +90,7 @@ public class ProjectContent {
     public Project getProject() {return project;}
 
     public void setProject(Project project) {this.project = project;}
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="city_id")
-    public AddressCity getCity() {
-        return city;
-    }
 
-    public void setCity(AddressCity city) {
-        this.city = city;
-    }
   /*  @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "wiki_projectContent_consumer",
             joinColumns = { @JoinColumn(name = "projectContent_id") },

@@ -44,10 +44,10 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set">操作</th>
-                    <th class="table-title">产品名称</th>
-                    <th class="table-title">产品编号</th>
-                    <th class="table-title">产品价格</th>
+                    <th class="table-set" width="33%">操作</th>
+                    <th class="table-title" width="33%">产品名称</th>
+                    <th class="table-title" width="33%">产品编号</th>
+                    <%--<th class="table-title">产品价格</th>--%>
 
 
                 </tr>
@@ -111,7 +111,7 @@
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=${view}&id=${product.id}'/>">${product.name}</a></td>
                         <td class="am-hide-sm-only">${product.serial}</td>
-                        <td class="am-hide-sm-only">${product.price}</td>
+                        <%--<td class="am-hide-sm-only">${product.price}</td>--%>
                     </tr>
                 </c:forEach>
                 </tbody>

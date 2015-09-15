@@ -27,7 +27,7 @@ public class ProductModel implements Serializable {
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
-    private BigDecimal marketPrice;
+    private BigDecimal marketPrice;//市场价格
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private ProductPicture  productPicture;

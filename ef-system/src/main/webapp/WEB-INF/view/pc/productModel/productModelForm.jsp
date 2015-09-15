@@ -38,13 +38,13 @@
                 </div>
             </div>
 
-            <div class="am-form-group">
-                <label name="price" class="am-u-sm-3 am-form-label">商品价格</label>
+            <%--<div class="am-form-group">--%>
+                <%--<label name="price" class="am-u-sm-3 am-form-label">商品价格</label>--%>
 
-                <div class="am-u-sm-9" style="margin-top: 10px;">
-                    ${object.price}
-                </div>
-            </div>
+                <%--<div class="am-u-sm-9" style="margin-top: 10px;">--%>
+                    <%--${object.price}--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
@@ -105,7 +105,7 @@
                 <span>
                      <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                         href="javascript:void(0);" onclick="addModel()">
-                         自定义属性
+                         自定义规格
                      </a>
                 </span>
             </div>

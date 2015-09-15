@@ -103,9 +103,9 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt="">
+                    <img src="http://pro.efeiyi.com/${op.productModel.productPicture.pictureUrl}@!product-icon" alt="">
                     <div class="info">
-                      <p><a href="#">${op.productModel.product.category.name}</a></p>
+                      <p><a href="#">${op.productModel.product.project.projectCategory.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>
                     </div>
                   </div>
