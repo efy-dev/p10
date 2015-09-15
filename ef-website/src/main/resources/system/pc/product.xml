@@ -37,7 +37,7 @@
                     </query>
                     <query name="recommend" label="默认" type="auto" orderBy="recommendIndex:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="product.project.id" defaultValue="1" operation="eq"/>
+                        <condition name="product.project.projectCategory.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
                 <do name="plistProductModel" access="" label="商品列表分页">
