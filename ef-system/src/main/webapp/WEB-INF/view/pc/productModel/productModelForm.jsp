@@ -105,7 +105,7 @@
                 <span>
                      <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                         href="javascript:void(0);" onclick="addModel()">
-                         自定义属性
+                         自定义规格
                      </a>
                 </span>
             </div>
