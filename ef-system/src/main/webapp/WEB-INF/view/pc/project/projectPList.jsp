@@ -105,9 +105,11 @@
                 $(obj).attr("status",data);
                 if(status=="1"){
                     $(obj).find("span").text("取消显示");
+                    $(obj).attr("status","2");
                 }
                 if(status=="2"){
                     $(obj).find("span").text("显示");
+                    $(obj).attr("status","1");
                 }
             }
         });
