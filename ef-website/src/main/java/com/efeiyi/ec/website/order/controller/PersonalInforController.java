@@ -144,7 +144,10 @@ public class PersonalInforController {
     public String getUserAvatar(){
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-       String avatar=user.getPictureUrl();
+        String avatar=user.getPictureUrl();
+        if(avatar==null||"".equals(avatar)){
+            avatar = "false";
+        }
 
             return avatar;
 

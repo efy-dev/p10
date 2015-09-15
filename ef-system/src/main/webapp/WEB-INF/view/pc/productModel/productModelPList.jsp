@@ -19,7 +19,7 @@
         function removeProductModel(productId) {
             jQuery.ajax({
                 type: "GET",
-                url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',
+                url: '<c:url value="/basic/xmj.do?qm=removeProductModel"/>',
                 data: {id: productId},
                 dataType: "json",
                 success: function (data) {
