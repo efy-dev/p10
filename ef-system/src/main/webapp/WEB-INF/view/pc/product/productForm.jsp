@@ -251,12 +251,15 @@
     $("input[name='resultPage']").val(result);
     if($("#name").val()==""){
       alert("商品名称不能为空");
-    }else if($("#price").val()==""){
-      alert("商品价格不能为空!");
-//
-    }else if(!checkPrice($("#price").val())){
-      alert("商品价格必须为数字!");
-    }else if($("select[name='tenantCheck']").val()=="0"){
+    }
+//    else if($("#price").val()==""){
+//      alert("商品价格不能为空!");
+////
+//    }
+//    else if(!checkPrice($("#price").val())){
+//      alert("商品价格必须为数字!");
+//    }
+    else if($("select[name='tenantCheck']").val()=="0"){
       $("input[name='tenant.id']").val("");
     } else{
       $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());

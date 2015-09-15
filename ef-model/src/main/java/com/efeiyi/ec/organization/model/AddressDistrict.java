@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization_address_district")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class AddressDistrict implements Serializable {
     private String id;
     private String name;
