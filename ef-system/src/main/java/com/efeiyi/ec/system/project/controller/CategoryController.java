@@ -5,6 +5,7 @@ import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,6 +21,7 @@ public class CategoryController {
 
 
     @RequestMapping({"/category/list/json"})
+    @ResponseBody
     public List<Object> listCategory(HttpServletRequest request) throws Exception{
         XQuery categoryQuery = new XQuery("listProjectCategory_json" ,request);
         List<Object> categoryList = baseManager.listObject(categoryQuery);
