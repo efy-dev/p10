@@ -25,9 +25,12 @@
 <div class="am-g">
   <form action="<c:url value="/basic/xmm.do"/>"  class="am-form am-form-horizontal" method="post" enctype="multipart/form-data">
     <input type="hidden" name="qm" value="saveOrUpdateProjectContent">
-    <%-- <input type="hidden" name="project.id" value="ichkt4el000064st">--%>
+<c:if test="${!empty projectContent.id}">
+    <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewProjectwiki&param=project&conditions=project.id:${projectContent.project.id}&id=${projectContent.project.id}">
+</c:if>
+   <%-- <input type="hidden" name="project.id" value="ichkt4el000064st">--%>
     <input type="hidden" id="creator.id" name="creator.id" class="creatorid" value="${projectContent.creator.id}">
-    <input type="hidden" id="city.id" name="city.id" class="cityid" value="${projectContent.city.id}">
+    <%--<input type="hidden" id="city.id" name="city.id" class="cityid" value="${projectContent.city.id}">--%>
     <input type="hidden" id="createDatetime" name="createDatetime" value="${createDatetime}">
     <input type="hidden" id="id" name="id"  value="${projectContent.id}">
     <div class="am-form-group">
@@ -68,12 +71,12 @@
         </select>
       </div>
     </div>
-    <div class="am-form-group">
+    <%--<div class="am-form-group">
       <label name="name" for="cityname" class="am-u-sm-3 am-form-label">城市名称 <small>*</small></label>
       <div class="am-u-sm-9">
         <input type="text" name="name" id="cityname" placeholder="城市搜索" value="${projectContent.city.name}">
       </div>
-    </div>
+    </div>--%>
     <div class="am-form-group">
       <label name="type" for="category.id" class="am-u-sm-3 am-form-label">非遗类别 <small>*</small></label>
       <div class="am-u-sm-9" style="margin-top: 10px">

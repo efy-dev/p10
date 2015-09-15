@@ -145,7 +145,7 @@
                         <condition label="项目名称" name="name" operation="eq" inputType="text"/>
                     </query>
                 </do>
-
+                <do name="viewProjectwiki" label="查看" access="" execute="com.efeiyi.ec.system.project.controller.MasterProjectHander" result="/project/projectView2"   />
             </does>
         </entity>
         <entity name="ProjectProperty" label="ProjectProperty"
@@ -174,7 +174,8 @@
                         <condition name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
+                <do name="formProjectProperty2" label="保存ProjectProperty" access="" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
+                    result="/projectProperty/projectPropertyForm2"/>
             </does>
         </entity>
 
