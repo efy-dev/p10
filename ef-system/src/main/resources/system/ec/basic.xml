@@ -12,6 +12,7 @@
                 <do name="plistEcBanner" label="电商网站轮播图列表" execute="com.efeiyi.ec.system.basic.controller.commonHandler" result="/banner/ecBannerPList">
                     <query name="tenant" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="group" defaultValue="ec.home.banner" operation="eq"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>

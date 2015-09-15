@@ -105,7 +105,7 @@
                         <condition name="product.name" operation="likes" label="产品名称"/>
                         <condition name="product.serial" operation="eq" label="产品编号"/>
                         <condition name="product.project.name" operation="likes" label="项目"/>
-                        <condition name="product.category.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
+                        <condition name="product.project.projectCategory.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
                     </query>
                 </do>
             </does>
