@@ -41,7 +41,7 @@
     <div class="box-hd wh">
         <div class="title wh"><h3>品牌故事</h3></div>
         <div class="banner">
-            <a href="" target="_blank"><img src="/scripts/images/banner.jpg" width="1280" height="400" alt=""/></a>
+            <a href="<c:url value="/subject/${subject.id}"/> " target="_blank"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400" alt=""/></a>
         </div>
     </div>
     <!-- //End--品牌故事-->
@@ -79,7 +79,7 @@
                         <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}@!ef-home-master"
                                                         alt=""/></a>
 
-                        <p><strong>${master.name}</strong></p>
+                        <p><strong>${master.fullName}</strong></p>
 
                         <p>[${master.getMainProjectName().getProject().getName()}]</p>
 

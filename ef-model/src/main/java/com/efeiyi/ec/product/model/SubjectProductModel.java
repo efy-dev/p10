@@ -1,6 +1,7 @@
-package com.efeiyi.ec.project.model;
+package com.efeiyi.ec.product.model;
 
 import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.product.model.Subject;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

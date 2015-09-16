@@ -249,4 +249,9 @@ CREATE TABLE `subject_product_model` (
 )
 ;
 
+ALTER TABLE `subject`
+ADD COLUMN `index`  int(11) NULL AFTER `status`;
+
+
+
 

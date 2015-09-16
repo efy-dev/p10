@@ -1,4 +1,4 @@
-package com.efeiyi.ec.project.model;
+package com.efeiyi.ec.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "subject_description")
-public class SubjectDiscription {
+public class SubjectDescription {
 
     private String id ;
     private String content;
