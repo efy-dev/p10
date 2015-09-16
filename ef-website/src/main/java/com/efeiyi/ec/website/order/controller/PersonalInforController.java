@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -72,6 +73,8 @@ public class PersonalInforController {
         if(session != null){
             session.invalidate();
         }
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        System.out.println(bigUser.isAccountExpired());
         return "redirect:/sso.do";
 
     }
