@@ -139,6 +139,7 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">订单号</th>
+                    <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
                     <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
@@ -178,6 +179,11 @@
                         </td>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                            checkedValue="${purchaseOrder.orderStatus}"
+                                            type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">

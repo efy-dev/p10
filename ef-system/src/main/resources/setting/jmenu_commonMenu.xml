@@ -216,12 +216,14 @@
                 <match url="/basic/xm.do?qm=formProjectWiki&amp;param=formProject"/>
                 <match url="/basic/xm.do?qm=formProjectContent&amp;param=formProjectContent"/>
                 <match url="/basic/xm.do?qm=listMasterProject2Master_default2"/>
-                <match url="/basic/xm.do?qm=plistMasterWork_byProject2"/>
-                <match url="/basic/xm.do?qm=plistProjectFollowed_default3"/>
+                <match url="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2"/>
+                <match url="/basic/xm.do?qm=plistMasterWorkwiki_byProject"/>
+                <match url="/basic/xm.do?qm=plistProjectFollowed_default"/>
                 <match url="/basic/xm.do?qm=viewProjectwiki&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProjectProperty2&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formMasterWork"/>
-                <match url="/basic/xm.do?qm=viewMaster"/>
+                <match url="/basic/xm.do?qm=formwikiMasterWork"/>
+                <match url="/basic/xm.do?qm=viewMasterwiki"/>
             </jnode>
 
         </jnode>

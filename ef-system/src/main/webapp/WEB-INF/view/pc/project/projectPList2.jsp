@@ -26,8 +26,8 @@
         <td  width="25%">操作</td>
         <td  width="25%">项目名称</td>
         <td  width="15%">项目类别</td>
-        <td  width="15%">创建日期</td>
         <td  width="20%">城市</td>
+        <td  width="15%">创建日期</td>
     </tr>
 
 
@@ -39,9 +39,9 @@
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
 
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectWiki_default3&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 内容管理</button>--%>
-                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWork_byProject2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=listMasterProject2Master_default2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
-                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default3&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
 
                     </div>
                 </div>
@@ -63,12 +63,13 @@
                        ${project.projectCategory.name}
 
             </td>
-            <td width="15%">
-                    ${project.createDateTime}
-            </td>
             <td width="20%">
-                    ${project.addressDistrict.name}
+                    ${project.addressDistrict.addressCity.name} ${project.addressDistrict.name}
             </td>
+            <td width="15%">
+                        <p><fmt:formatDate value="${project.createDateTime}" pattern="yyyy/MM/dd HH:MM:SS" /></p>
+            </td>
+
         </tr>
          <% i++;%>
     </c:forEach>

@@ -49,6 +49,28 @@
             </does>
         </entity>
 
+        <entity name="SubjectProductModel" label="商品列表"  model="com.efeiyi.ec.product.model.SubjectProductModel">
+            <does>
+                <do name="listSubjectProductModel" access="" label="商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="subject.id" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="Subject" label="商品列表"  model="com.efeiyi.ec.product.model.Subject">
+            <does>
+                <do name="listSubject" access="" label="商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="index:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <!--<condition name="subject.id" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
+            </does>
+        </entity>
+
         <entity name="ProductFavorite" label="商品列表"  model="com.efeiyi.ec.product.model.ProductFavorite">
             <does>
                 <do name="listProductFavorite" access="" label="商品列表">

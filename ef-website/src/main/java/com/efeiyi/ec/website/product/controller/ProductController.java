@@ -94,10 +94,11 @@ public class ProductController {
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
     public boolean addProductFavorite(HttpServletRequest request) throws Exception{
-        String productId =request.getParameter("productId");
+        String productModelId =request.getParameter("id");
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
         xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-        xSaveOrUpdate.getParamMap().put("product_id", productId);
+        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
+        xSaveOrUpdate.getParamMap().remove("id");
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return true;
     }

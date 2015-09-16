@@ -32,44 +32,52 @@ public class HomeController {
     private BaseManager baseManager;
 
     @RequestMapping({"/home.do"})
-    public String home(HttpServletRequest request,Model model) throws Exception{
-        List<Object> projectList =  objectRecommendedManager.getRecommendedList("categoryRecommended");
-        HashMap<String,List> map = new HashMap<>();
-        for (Object object : projectList){
-            XQuery xQuery = new XQuery("listProductModel_recommend",request);
-            xQuery.put("product_project_projectCategory_id",((ProjectCategory)object).getId());
+    public String home(HttpServletRequest request, Model model) throws Exception {
+        List<Object> projectList = objectRecommendedManager.getRecommendedList("categoryRecommended");
+        HashMap<String, List> map = new HashMap<>();
+        for (Object object : projectList) {
+            XQuery xQuery = new XQuery("listProductModel_recommend", request);
+            xQuery.put("product_project_projectCategory_id", ((ProjectCategory) object).getId());
             map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
         }
-        model.addAttribute("recommendMap",map);
-        model.addAttribute("projectList",projectList);
+        model.addAttribute("recommendMap", map);
+        model.addAttribute("projectList", projectList);
 
         //首页轮播图
         List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
-        model.addAttribute("bannerList",bannerList);
+        model.addAttribute("bannerList", bannerList);
 
         //传承人
-        List<Object> masterList =  objectRecommendedManager.getRecommendedList("masterRecommended");
-        model.addAttribute("masterList",masterList);
-        model.addAttribute("sign","000");
+        List<Object> masterList = objectRecommendedManager.getRecommendedList("masterRecommended");
+        model.addAttribute("masterList", masterList);
+        model.addAttribute("sign", "000");
+
+        //品牌故事
+        XQuery subjectQuery = new XQuery("listSubject_default", request);
+        List<Object> subjectList = baseManager.listObject(subjectQuery);
+        if (subjectList != null && subjectList.size() > 0) {
+            model.addAttribute("subject", subjectList.get(0));
+        }
+
         return "/home";
     }
 
     @RequestMapping({"/productCategory.do"})
-    public String listProductCategory(HttpServletRequest request ,Model model) throws Exception{
-        HashMap<String,List> projectMap = new HashMap<>();
-        XQuery xQuery = new XQuery("listProjectCategory_default",request);
+    public String listProductCategory(HttpServletRequest request, Model model) throws Exception {
+        HashMap<String, List> projectMap = new HashMap<>();
+        XQuery xQuery = new XQuery("listProjectCategory_default", request);
         xQuery.setSortHql("");
         xQuery.updateHql();
         List<Object> categoryList = baseManager.listObject(xQuery);
-        for (Object category : categoryList){
-            XQuery projectQuery = new XQuery("listProject_default",request);
-            projectQuery.put("projectCategory_id",((ProjectCategory)category).getId());
+        for (Object category : categoryList) {
+            XQuery projectQuery = new XQuery("listProject_default", request);
+            projectQuery.put("projectCategory_id", ((ProjectCategory) category).getId());
             projectQuery.setSortHql("");
             projectQuery.updateHql();
-            projectMap.put(((ProjectCategory)category).getId(),baseManager.listObject(projectQuery));
+            projectMap.put(((ProjectCategory) category).getId(), baseManager.listObject(projectQuery));
         }
-        model.addAttribute("categoryList",categoryList);
-        model.addAttribute("projectMap",projectMap);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("projectMap", projectMap);
         return "/common/productCategory";
     }
 

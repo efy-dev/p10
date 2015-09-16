@@ -28,6 +28,7 @@
             <td>标签序号</td>
             <td>标签批次</td>
             <td>数量</td>
+            <td>类型</td>
             <td>状态</td>
             <td>创建日期</td>
             <td>下载标签文本</td>
@@ -35,6 +36,7 @@
         <c:forEach items="${requestScope.pageInfo.list}" var="labelBatch">
             <tr style="text-align: left">
                 <td>
+                    <c:if test="${labelBatch.type == '1'}">
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                             <c:if test="${labelBatch.status == '1'}">
@@ -54,10 +56,14 @@
                             </c:if>
                         </div>
                     </div>
+                    </c:if>
                 </td>
                 <td><a href="<c:url value="/basic/xm.do?qm=viewLabelBatch&view=view&id=${labelBatch.id}"/>">${labelBatch.serial}</a></td>
                 <td>${labelBatch.setting}</td>
                 <td>${labelBatch.amount}</td>
+                <td>
+                    <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="${labelBatch.type}" type="normal"/>
+                </td>
                 <td>
                     <ming800:status name="status" dataType="PCLabelBatch.status" checkedValue="${labelBatch.status}" type="normal"/>
                 </td>
