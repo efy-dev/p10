@@ -79,7 +79,7 @@
                         <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}@!ef-home-master"
                                                         alt=""/></a>
 
-                        <p><strong>${master.fullname}</strong></p>
+                        <p><strong>${master.fullName}</strong></p>
 
                         <p>[${master.getMainProjectName().getProject().getName()}]</p>
 
