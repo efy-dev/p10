@@ -241,6 +241,9 @@ $(function(){
                 var section5Part2=$('.section5 .part2');
                 //相关收藏
                 section5Part1.find('.related-collect').click(function(){
+
+                    alert('related-collect')
+
                     section5Part1.stop(true).animate({'left':'-100%'},iSpeed);
                     section5Part2.stop(true).animate({'left':'0'},iSpeed);
                     return false;

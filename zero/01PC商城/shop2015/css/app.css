@@ -40,10 +40,10 @@ a:hover {color:#f00;text-decoration:underline}
 .header .nav li .bgbor {border:1px #fff solid;border-bottom:none;background:#fff;width:112px;height:49px;position:absolute;top:16px;left:0;z-index:4}
 .header .nav li.hover>.bgbor a:hover {color:#000;text-decoration:none}
 .header .nav li.hover .bgbor {border:1px #000 solid;border-bottom:none;height:55px}
-.header .nav-links {width:1158px;padding:30px 20px;border:1px #000 solid;position:absolute;top:70px;left:-648px;box-sizing:content-box;background:#fff;z-index:3;display:none}
-.header .nav-links ul {width:105px;float:left;margin:0}
+.header .nav-links {width:610px;padding: 33px 53px;border:1px #000 solid;position:absolute;top:70px;left:-398px;box-sizing:content-box;background:#fff;z-index:3;display:none}
+.header .nav-links ul {width:122px;float:left;margin:0}
 .header .nav-links li {width:100%;line-height:24px;float:left;font-family:FangSong;font-size:12px}
-.header .nav-links li a {width:100%;float:left;padding:0;text-decoration:underline}
+.header .nav-links li a {width:100%;float:left;padding:0;}
 .header .nav-links li a:hover {color:#f00}
 .header .nav-links .title {border-bottom:1px #b2b2b2 solid;color:#999;padding-bottom:5px;margin-bottom:5px}
 /*--//End--header--*/
@@ -223,9 +223,10 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .price {width:100%;float:left;margin-top:28px;margin-bottom:57px;color:#666}
 .product-intro .itemInfo .price .p-text {font-size:12px;font-family:simsun}
 .product-intro .itemInfo .price .p-price {font-size:14px;color:#000}
-.product-intro .itemInfo .price .p-price span {font-size:30px}
+.product-intro .itemInfo .price .p-price span {font-size:30px;
+    font-family:Times New Roman;}
 .product-intro .itemInfo .price .m-price {font-size:12px}
-.product-intro .itemInfo .choose-btns .btn {width:272px;line-height:39px;text-align:center;border:1px #000 solid;float:left;margin-bottom:13px;font-family:FangSong;font-size:14px}
+.product-intro .itemInfo .choose-btns .btn {width:100%;line-height:39px;text-align:center;border:1px #000 solid;float:left;margin-bottom:13px;font-family:FangSong;font-size:14px}
 .product-intro .itemInfo .choose-btns .btn:hover,.product-intro .itemInfo .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
 .product-intro .itemInfo .jiathis_style {width:222px;padding-top:23px;padding-bottom:37px;padding-left:50px;float:left;border-bottom:1px #000 solid;box-sizing:content-box}
 .product-intro .itemInfo .jiathis_style .jiathis_txt {font-family:simsun;color:#666}
@@ -617,25 +618,9 @@ a,
     .login-wrap {height:564px}
 }
 
-::-webkit-scrollbar {
-    width: 14px;
-    height: 14px;
-}
-
+::-webkit-scrollbar {width: 14px;height: 14px}
 ::-webkit-scrollbar-track,
-::-webkit-scrollbar-thumb {
-    border:10px solid transparent;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow:2px 2px 10px rgba(0,0,0,.1) inset;
-}
-
-::-webkit-scrollbar-thumb {
-    background-clip: content-box;
-    box-shadow: 0 0 0 10px rgba(0,0,0,.4) inset;
-}
-
-::-webkit-scrollbar-corner {
-    background: transparent;
-}
+::-webkit-scrollbar-thumb {border:10px solid transparent;  }
+::-webkit-scrollbar-track {box-shadow:2px 2px 10px rgba(0,0,0,.1) inset}
+::-webkit-scrollbar-thumb {background-clip: content-box;box-shadow: 0 0 0 10px rgba(0,0,0,.4) inset}
+::-webkit-scrollbar-corner {background: transparent}
