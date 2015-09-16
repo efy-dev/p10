@@ -86,7 +86,9 @@
 </div>
 <div class="am-u-sm-12">
     <div style="text-align: left;" >
-        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />
+        <label>项目内容</label>
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent&projectid=${object.id}&objectName=${object.name}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />
+       <%-- <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectContent&param=formProjectContent"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目内容" />--%>
     </div>
     <table class="am-table am-table-bordered am-table-radius am-table-striped" >
         <tr style="text-align: left">
@@ -149,11 +151,11 @@
         <%--</div>--%>
     <%--</div>--%>
 
-    <div style="text-align: left;" >
+   <%-- <div style="text-align: left;" >
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty2&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
-    </div>
+    </div>--%>
 
-        <div class="am-panel am-panel-default">
+  <%--      <div class="am-panel am-panel-default">
             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">项目属性<span class="am-icon-chevron-down am-fr" ></span></div>
             <div id="collapse-panel-3" class="am-in">
                 <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
@@ -203,7 +205,7 @@
 
 
 
-</div>
+</div>--%>
 <script>
 
     function removePropertyValue(obj,divId){

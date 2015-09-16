@@ -471,8 +471,8 @@ a,
 .section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box}
 .section .hd {height:100%;position:relative}
 .section .img-bg {width:1200px;height:100%;position:fixed;top:0;left:50%;margin-left:-600px;z-index:0;overflow:hidden}
-.section .img-bg img {height:100%;position:absolute;top:0;left:50%;margin-left:-50%}
-.section .btn-arrow-down {width:32px;height:15px;position:fixed;bottom:20px;left:50%;margin-left:-16px;z-index:10;cursor:pointer}
+.section .img-bg img {width:100%;height:100%;position:absolute;top:0;left:50%;margin-left:-50%}
+.section .btn-arrow-down {width:32px;height:15px;position:fixed;bottom:20px;z-index:10;cursor:pointer}
 .section .btn-arrow-down .icon {background-position:-40px -68px;;width:32px;height:15px;float:left}
 .section .collect {width:36px;position:absolute;top:13px;right:25px;z-index:3;text-align:center}
 .section .collect .icon {background-position:-145px -95px;width:32px;height:28px;display:inline-block}
@@ -491,6 +491,8 @@ a,
 .section .btns-collect {color:#fff;background:#000;border:1px #fff solid}
 .section .btns-collect:hover,
 .section .btns-collect.active{border:1px solid #fff;background:#fff;color:#000}
+.section .sec-left .part {width:100%;height:500px;position:absolute;top:50%;left:0;margin-top:-250px;overflow-x:scroll;overflow-y:hidden;}
+.section .sec-left .part .autoWidth {width:200%;float: left;}
 /*--------*/
 .section0 {width:100%;height:100%;float:left;position:relative;overflow:hidden}
 .section0 .sec-right {z-index:2;color:#fff}
@@ -502,29 +504,23 @@ a,
 /*--//End--section0--*/
 .section1 {width:100%;height:100%;float:left;position:relative;overflow:hidden}
 .section1 .mask {background:url(../images/section1-bg.png) repeat;width:100%;height:100%;position:absolute;top:0;left:0;z-index:1}
-
-.section1 .autoHeight {width:100%;height:600px;float:left;margin-top:60px;overflow-y:scroll}
-
-/*.section1 .autoHeight {width:100%;height:600px;position:absolute;top:50%;left:0;margin-top:-300px;overflow-y:scroll}*/
-
-
 .section1 .sec-left {background:#fff}
-.section1 .sec-left .part {width:494px;float:left;margin:60px 70px 0 36px}
-.section1 .sec-left .part .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
-.section1 .sec-left .part .ul-info {width:100%;padding-bottom:40px;float:left;border-bottom:1px solid #e5e5e5}
-.section1 .sec-left .part .ul-info li,
-.section1 .sec-left .part .ul-info li span,
-.section1 .sec-left .part .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333}
-.section1 .sec-left .part .ul-info li {width:100%;float:left}
-.section1 .sec-left .part .ul-info2 {border-bottom:0}
-.section1 .sec-left .part .ul-info2 li { margin-bottom:30px}
+.section1 .sec-left dl {width:494px;float:left;margin:60px 70px 0 36px;}
+.section1 .sec-left dl .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
+.section1 .sec-left dl .ul-info {width:100%;float:left}
+.section1 .sec-left dl .ul-info li,
+.section1 .sec-left dl .ul-info li span,
+.section1 .sec-left dl .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333;font-weight: normal}
+.section1 .sec-left dl .ul-info li {width:100%;float:left}
+
+
 /*--//End--section1--*/
 .section2 {width:100%;height:100%;float:left}
 .section2 .sec-left {background:#000}
 .section2 .sec-left .sec-focus {width:100%;height:100%;position:relative;float:left}
-.section2 .sec-left .sec-focus .ul-img {width:450px;height:450px;position:absolute;top:50%;left:50%;margin-top:-225px;margin-left:-225px;overflow:hidden}
+.section2 .sec-left .sec-focus .ul-img {width:500px;height:500px;position:absolute;top:50%;left:50%;margin-top:-250px;margin-left:-250px;overflow:hidden}
 .section2 .sec-left .sec-focus .ul-img li {width:100%;position:absolute;top:0;left:0;float:left;text-align:center;display:none}
-.section2 .sec-left .sec-focus .ul-img li img {width:460px}
+.section2 .sec-left .sec-focus .ul-img li img {width:100%}
 .section2 .sec-left .sec-focus .ul-num {position:absolute;bottom:20px;left:20px;z-index:2}
 .section2 .sec-left .sec-focus .ul-num li {width:18px;height:18px;line-height:18px;text-align:center;color:#fff;background:#9aa1b8;border-radius:20px;float:left;margin-right:18px;cursor:pointer;font-size:14px;font-family:Times New Roman}
 .section2 .sec-left .sec-focus .ul-num li.active {background:#900;width:32px;height:32px;line-height:32px;font-size:36px}
@@ -535,7 +531,7 @@ a,
 .section2 .sec-right {background:#fff}
 .section2 .btns-collect {color:#000;background:#fff;border:1px #000 solid}
 .section2 .btns-collect:hover,
-.section2 .btns-collect.active{border:1px solid #666;background:#fff;color:#000}
+.section2 .btns-collect.active{border:1px solid #000;background:#000;color:#fff}
 /*--//End--section2--*/
 .section3 {background:url(../images/section3-bg.png) repeat;width:100%;height:100%;float:left;position:relative}
 .section3 .sec-left .video-box {width:520px;height:334px;position:absolute;top:50%;margin-top:-167px;left:40px}
@@ -553,12 +549,29 @@ a,
 .section4 .sec-left,
 .section4 .sec-right {width:50%;height:100%;float:left;position:relative}
 .section4 .sec-left {background:#fff;padding:70px 40px;font-size:12px}
-.section4 .sec-left .title { font-family:FangSong;color:#000}
-.section4 .sec-left .des-txt li {margin-top:36px}
-.section4 .sec-left .des-txt li p {color:#999;font-family:FangSong}
+.section4 .sec-left .part {width:600px;}
+.section4 .sec-left dl {width:1200px;float:left}
+.section4 .sec-left dl .title {width:1160px;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px;margin-left:40px}
+.section4 .sec-left dl dd {width:100%;float: left;margin: 0}
+.section4 .sec-left dl dd .ul-info {width:100%;float:left}
+.section4 .sec-left dl dd .ul-info li,
+.section4 .sec-left dl dd .ul-info li p,
+.section4 .sec-left dl dd .ul-info li span,
+.section4 .sec-left dl dd .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333;font-weight: normal}
+.section4 .sec-left dl dd .ul-info li {width:560px;float:left;padding-right:30px;margin-left:40px}
+
+
+
+
+
 .section4 .btns-collect {color:#fff;background:#000;border:1px #fff solid}
 .section4 .btns-collect:hover,
 .section4 .btns-collect.active{border:1px solid #000;background:#fff;color:#000}
+
+
+
+
+
 /*--//End--section4--*/
 .section5 {width:100%;height:100%;background:#fff;float:left;position:relative;overflow:hidden}
 .section5 .part {background:#fff;width:100%;height:100%;position:absolute;top:0}
@@ -594,10 +607,35 @@ a,
 
 
 @media (max-width:1200px) {
-    .body-detail {overflow:visible}
+    .btn-arrow-down {left:584px}
+}
+@media (min-width:1200px) {
+    .btn-arrow-down {left:50%;margin-left:-16px;}
+
 }
 @media (max-height:720px){
     .login-wrap {height:564px}
 }
 
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
 
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+    border:10px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow:2px 2px 10px rgba(0,0,0,.1) inset;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: content-box;
+    box-shadow: 0 0 0 10px rgba(0,0,0,.4) inset;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}

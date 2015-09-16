@@ -29,6 +29,9 @@
 <c:if test="${!empty projectContent.id}">
     <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewProjectwiki&param=project&conditions=project.id:${projectContent.project.id}&id=${projectContent.project.id}">
 </c:if>
+    <c:if test="${empty projectContent.id}">
+      <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=viewProjectwiki&param=project&conditions=project.id:<%= request.getParameter("projectid")%>&id=<%= request.getParameter("projectid")%>">
+    </c:if>
    <%-- <input type="hidden" name="project.id" value="ichkt4el000064st">--%>
     <input type="hidden" id="creator.id" name="creator.id" class="creatorid" value="${projectContent.creator.id}">
     <%--<input type="hidden" id="city.id" name="city.id" class="cityid" value="${projectContent.city.id}">--%>
@@ -57,9 +60,9 @@
       </div>
     </div>
     <div class="am-form-group">
-      <label name="type" for="project.id" class="am-u-sm-3 am-form-label">项目名称 <small>*</small></label>
+      <label name="type" for="project.name" class="am-u-sm-3 am-form-label">项目名称 <small>*</small></label>
       <div class="am-u-sm-9" style="margin-top: 10px">
-        <select  name="project.id" id="project.id">
+        <%--<select  name="project.id" id="project.id">
           <c:forEach var="project" items="${projectList}">
             <c:if test="${!empty projectContent.project.name}">
               <option value="${projectContent.project.id}" <c:if test="${!empty projectContent.project.name}">selected="selected"</c:if> >${projectContent.project.name}</option>
@@ -69,7 +72,16 @@
             </c:if>
 
           </c:forEach>
-        </select>
+        </select>--%>
+        <c:if test="${!empty projectContent.project.name}">
+           <input type="text" name="project.name" id="project.name" placeholder="项目名称" value="${projectContent.project.name}" />
+           <input type="hidden" id="project.id" name="project.id" value="${projectContent.project.id}">
+        </c:if>
+          <c:if test="${empty projectContent.project.name}">
+            <input type="text" name="project.name" id="project.name" placeholder="项目名称" value="<%= request.getParameter("objectName")%>" />
+            <input type="hidden" id="project.id" name="project.id" value="<%= request.getParameter("projectid")%>">
+          </c:if>
+
       </div>
     </div>
     <%--<div class="am-form-group">
