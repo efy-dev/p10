@@ -22,7 +22,7 @@ AFTER `status`;
 
 CREATE TABLE `product_favorite` (
   `id`         CHAR(16) NOT NULL,
-  `product_id` CHAR(16) NULL,
+  `product_model_id` CHAR(16) NULL,
   `user_id`    CHAR(16) NULL,
   `status`     CHAR(8)  NULL,
   PRIMARY KEY (`id`)

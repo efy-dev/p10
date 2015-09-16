@@ -39,7 +39,7 @@
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
 
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectWiki_default3&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 内容管理</button>--%>
-                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWork_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
+                        <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=listMasterProject2Master_default2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
 

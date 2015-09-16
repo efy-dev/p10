@@ -9,7 +9,6 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
-<!doctype html>
 <html class="no-js">
 <head>
   <meta charset="utf-8">
@@ -50,7 +49,8 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <%--<div class="collect"><i class="icon"></i><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
+      <div class="collect">  <i class="icon"></i>  <span class="hover" id="collection" ><a onclick="getStatus('${productModel.id}')">收藏</a></span><span class="active">已收藏</span></div>
+      <%--<div class="collect" > <a onclick="province(this);" method="post"/> <i class="icon"></i></a><span class="hover">收藏</span><span class="active">已收藏</span></div>--%>
       <div class="slider-img">
         <ul>
           <c:if test="${productPicture.status=='2'}">
@@ -170,8 +170,8 @@
       <!-- //End-->
       <div class="btns">
      <c:if test="${productModel.amount != 0}">
-        <a class="buy" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="立即购买">立 即 购 买</a>
-        <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
+        <a class="buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立 即 购 买</a>
+        <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
      </c:if>
       </div>
     </div>
@@ -197,7 +197,21 @@
 <script src="/scripts/js/amazeui.min.js"></script>
 <script src="/scripts/js/system.js"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-
+<script type="text/javascript">
+  function getStatus(o) {
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
+      dataType: 'json',
+      success: function (data) {
+        if(data==true){
+          $("#collection").text("已收藏");
+        }
+      },
+    });
+  }
+</script>
 </body>
 </html>
 
