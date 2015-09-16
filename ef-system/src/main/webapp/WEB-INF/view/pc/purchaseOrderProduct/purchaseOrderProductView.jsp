@@ -23,7 +23,7 @@
                 <td class="am-primary am-u-md-3">价格</td>
                 <td class="am-u-md-3">${object.productModel.product.price}</td>
                 <td class="am-primary am-u-md-3">分类</td>
-                <td class="am-u-md-3">${object.productModel.product.category.name}</td>
+                <td class="am-u-md-3">${object.productModel.product.project.projectCategory.name}</td>
             </tr>
 
             <tr>

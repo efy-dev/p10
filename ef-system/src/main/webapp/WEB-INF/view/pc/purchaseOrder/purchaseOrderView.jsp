@@ -6,20 +6,20 @@
 <head>
     <title></title>
     <script>
-        function editPurchaseOrderDelivery(purchaseOrderDeliveryId,logisticsCompany,serial){
-            $('#logisticsCompany')[0].options.length=0;
+        function editPurchaseOrderDelivery(purchaseOrderDeliveryId, logisticsCompany, serial) {
+            $('#logisticsCompany')[0].options.length = 0;
             $('#serial').val("");
             $.ajax({
-                type:'get',
-                url:"<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
-                success:function(data){
+                type: 'get',
+                url: "<c:url value="/purchaseOrderDelivery/getLogisticsCompany.do"/>",
+                success: function (data) {
                     var selector = $("#logisticsCompany");
                     data = eval('(' + data + ')');
-                    for(var key in data){
-                        if(logisticsCompany == key){
-                            selector.append('<option value="'+key+'" selected="true">'+data[key]+'</option>')
-                        }else{
-                            selector.append('<option value="'+key+'">'+data[key]+'</option>')
+                    for (var key in data) {
+                        if (logisticsCompany == key) {
+                            selector.append('<option value="' + key + '" selected="true">' + data[key] + '</option>')
+                        } else {
+                            selector.append('<option value="' + key + '">' + data[key] + '</option>')
                         }
                     }
 
@@ -28,39 +28,52 @@
             });
             $('#my-prompt').modal({
                 relatedTarget: this,
-                onConfirm: function(e) {
+                onConfirm: function (e) {
                     //console.log(e.data);
                     $.ajax({
-                        type:"get",
-                        data:{id:purchaseOrderDeliveryId,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
-                        url:"<c:url value="/purchaseOrderDelivery/updatePurchaseOrderDelivery.do"/>",
-                        success:function(data){
+                        type: "get",
+                        data: {
+                            id: purchaseOrderDeliveryId,
+                            logisticsCompany: $('#logisticsCompany').val(),
+                            serial: e.data
+                        },//输入框的值传递到后台
+                        url: "<c:url value="/purchaseOrderDelivery/updatePurchaseOrderDelivery.do"/>",
+                        success: function (data) {
                             //$(obj).find("span").text("已发货");
                             alert("修改成功");
                         }
                     });
                 },
-                onCancel: function(e) {
+                onCancel: function (e) {
                     // alert('不想说!');
                 }
             });
 
 
-
-                jQuery.ajax({
-                    type: "GET",
-                    url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',
-                    data: {id: orderId},
-                    dataType: "json",
-                    success: function (data) {
-                        $("#" + orderId).remove();
-                    }
-                });
+            <%--jQuery.ajax({--%>
+                <%--type: "GET",--%>
+                <%--url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',--%>
+                <%--data: {id: orderId},--%>
+                <%--dataType: "json",--%>
+                <%--success: function (data) {--%>
+                    <%--$("#" + orderId).remove();--%>
+                <%--}--%>
+            <%--});--%>
         }
 
 
-        function logisticsTracking(company,serial){
-
+        function logisticsTracking(company, serial) {
+            jQuery.ajax({
+                type: "GET",
+                //url: 'http://www.kuaidi100.com/applyurl?key=f8e96a50d49ef863&com='+company+'&nu='+serial+'', 不能直接请求这个地址
+                url: '<c:url value="/purchaseOrderDelivery/logisticsTracking.do"/>',
+                data: {company:company,serial:serial},
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                    $("#kuaidi100").attr("src",data);
+                }
+            });
         }
     </script>
 </head>
@@ -130,7 +143,7 @@
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
         <%--<div class="am-panel-hd"><strong>订单商品列表</strong></div>--%>
-            <h4>商品列表</h4>
+        <h4>商品列表</h4>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -145,7 +158,11 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewIdentify=${viewIdentify}&id=${purchaseOrderProduct.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img width="20px" src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model" alt="产品图片"></td>
+                    <td class="am-hide-sm-only"><a
+                            href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewIdentify=${viewIdentify}&id=${purchaseOrderProduct.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img
+                            width="20px"
+                            src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model"
+                            alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>
@@ -166,10 +183,12 @@
 
                 <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
                 <div>
-                    物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany" style="width: 90px;display: inline-block;"></select>
+                    物流公司: <select class="am-modal-prompt-select" id="logisticsCompany" name="logisticsCompany"
+                                  style="width: 90px;display: inline-block;"></select>
                 </div>
                 <div>
-                    快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input" style="width: 100px;height:30px;display: inline-block;">
+                    快递单号:<input type="text" id="serial" name="serial" class="am-modal-prompt-input"
+                                style="width: 100px;height:30px;display: inline-block;">
                 </div>
             </div>
             <div class="am-modal-footer">
@@ -196,9 +215,9 @@
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
             <tr>
                 <td class="am-hide-sm-only">
-                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                        checkedValue="${purchaseOrderPayment.payWay}"
-                                        type="normal"/>
+                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                    checkedValue="${purchaseOrderPayment.payWay}"
+                                    type="normal"/>
                 </td>
                 <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
                 <td class="am-hide-sm-only">
@@ -270,10 +289,18 @@
                                     pattern="yyyy-mm-dd"/>
                 </td>
                 <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
-            </c:forEach>
+                </c:forEach>
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-sm-12 am-u-md-6">
+        <h4>物流记录</h4>
+    </div>
+    <iframe id="kuaidi100" name="kuaidi100" src="" width="600" height="380" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no">
+    </iframe>
 </div>
 </body>
 </html>
