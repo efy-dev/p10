@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.product.controller;
 
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.service.DoHandler;
 import com.ming800.core.p.service.AutoSerialManager;
@@ -21,6 +22,7 @@ public class plistProductHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
+        modelMap.put("tenantId", AuthorizationUtil.getMyUser().getBigTenant().getId());
        modelMap.put("view",request.getParameter("view"));
         return modelMap;
     }
