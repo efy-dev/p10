@@ -170,8 +170,8 @@
       <!-- //End-->
       <div class="btns">
      <c:if test="${productModel.amount != 0}">
-        <a class="buy" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="立即购买">立 即 购 买</a>
-        <a class="append" href="/order/easyBuy/${productModel.id}" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
+        <a class="buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立 即 购 买</a>
+        <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
      </c:if>
       </div>
     </div>
