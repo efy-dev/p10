@@ -49,6 +49,7 @@
                 <do name="saveOrUpdateProjectCategory" label="保存category" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectCategory_default"
                     execute="com.efeiyi.ec.system.project.controller.ProjectCategoryFormHandler"/>
+                <do name="viewProjectCategory" label="查看" access="" result="/projectCategory/projectCategoryView"/>
                 <do name="listProjectCategory" label="category列表" access=""
                     result="/projectCategory/projectCategoryList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -145,7 +146,7 @@
                         <condition label="项目名称" name="name" operation="eq" inputType="text"/>
                     </query>
                 </do>
-
+                <do name="viewProjectwiki" label="查看" access="" execute="com.efeiyi.ec.system.project.controller.MasterProjectHander" result="/project/projectView2"   />
             </does>
         </entity>
         <entity name="ProjectProperty" label="ProjectProperty"
@@ -174,7 +175,8 @@
                         <condition name="project.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
+                <do name="formProjectProperty2" label="保存ProjectProperty" access="" execute="com.efeiyi.ec.system.project.controller.ProjectPropertyHandler"
+                    result="/projectProperty/projectPropertyForm2"/>
             </does>
         </entity>
 

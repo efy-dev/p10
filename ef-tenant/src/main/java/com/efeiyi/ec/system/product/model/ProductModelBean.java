@@ -1,17 +1,6 @@
 package com.efeiyi.ec.system.product.model;
 
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/8/5.
@@ -25,7 +14,15 @@ public class ProductModelBean implements Serializable {
     private  String [] modelPrice;
     private  String [] modelStatus;
     private  String [] modelProperty;
+    private  String [] property;
+    private  String [] marketPrice;
     private  String productId;
+    private  String defaultId;
+    private  String defaultStatus;
+    private  String defaultName;
+    private  String defaultAmount;
+    private  String defaultPrice;
+    private  String defaultMarketPrice;
 
     public String getProductId() {
         return productId;
@@ -81,5 +78,70 @@ public class ProductModelBean implements Serializable {
 
     public void setModelProperty(String[] modelProperty) {
         this.modelProperty = modelProperty;
+    }
+
+
+    public String[] getProperty() {
+        return property;
+    }
+
+    public void setProperty(String[] property) {
+        this.property = property;
+    }
+
+    public String getDefaultId() {
+        return defaultId;
+    }
+
+    public void setDefaultId(String defaultId) {
+        this.defaultId = defaultId;
+    }
+
+    public String getDefaultStatus() {
+        return defaultStatus;
+    }
+
+    public void setDefaultStatus(String defaultStatus) {
+        this.defaultStatus = defaultStatus;
+    }
+
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
+    }
+
+    public String getDefaultAmount() {
+        return defaultAmount;
+    }
+
+    public void setDefaultAmount(String defaultAmount) {
+        this.defaultAmount = defaultAmount;
+    }
+
+    public String getDefaultPrice() {
+        return defaultPrice;
+    }
+
+    public void setDefaultPrice(String defaultPrice) {
+        this.defaultPrice = defaultPrice;
+    }
+
+    public String getDefaultMarketPrice() {
+        return defaultMarketPrice;
+    }
+
+    public void setDefaultMarketPrice(String defaultMarketPrice) {
+        this.defaultMarketPrice = defaultMarketPrice;
+    }
+
+    public String[] getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(String[] marketPrice) {
+        this.marketPrice = marketPrice;
     }
 }

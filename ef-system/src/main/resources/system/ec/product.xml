@@ -101,13 +101,16 @@
                 <do name="plistProductModel" access="" label="产品分页列表"
                     result="/productModel/productModelPList">
                     <query name="index" label="首页推荐商品列表" type="auto" orderBy="recommendIndex:desc">
+                        <condition name="status"  operation="ne" label="产品状态" defaultValue="0" inputType="default"/>
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="product.name" operation="likes" label="产品名称"/>
                         <condition name="product.serial" operation="eq" label="产品编号"/>
                         <condition name="product.project.name" operation="likes" label="项目"/>
-                        <condition name="product.category.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
+                        <condition name="product.project.projectCategory.id" operation="eq" label="分类" inputType="dialog_pop" key="category"/>
                     </query>
                 </do>
+
+                <do name="removeProductModel" label="删除产品" access="" result="json"/>
             </does>
         </entity>
         <entity name="ProductRecommended" label="推荐产品列表"

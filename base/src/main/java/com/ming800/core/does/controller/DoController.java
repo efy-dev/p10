@@ -45,7 +45,7 @@ public class DoController {
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String paramName = enumeration.nextElement();
-            if (!paramName.equals("qm") && !paramName.equals("conditions") && !paramName.equals("sort"))
+            if (!paramName.equals("qm") && !paramName.equals("conditions") && !paramName.equals("sort")&& !paramName.equals("pageEntity.index")&& !paramName.equals("pageEntity.size"))
                 paramMap.put(paramName, request.getParameter(paramName));
         }
         modelMap.put("paramMap", paramMap);

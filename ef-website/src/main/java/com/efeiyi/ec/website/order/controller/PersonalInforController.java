@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XSaveOrUpdate;
@@ -72,7 +73,9 @@ public class PersonalInforController {
         if(session != null){
             session.invalidate();
         }
-        return "redirect:/login";
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        System.out.println(bigUser.isAccountExpired());
+        return "redirect:/sso.do";
 
     }
     @RequestMapping({"getPassword.do"})
@@ -144,7 +147,10 @@ public class PersonalInforController {
     public String getUserAvatar(){
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-       String avatar=user.getPictureUrl();
+        String avatar=user.getPictureUrl();
+        if(avatar==null||"".equals(avatar)){
+            avatar = "false";
+        }
 
             return avatar;
 

@@ -99,11 +99,15 @@
 
     });
     function linkProject(obj,projectId){
+
         var tenantId = $("input[name='tenantId']").val();
         var tenantProjectId = $(obj).attr("tenantProjectId");
         var status = $(obj).attr("status");
-        if(status=="1"){
-            var r=confirm("解除关联同时会删除商品与项目的关联，请谨慎操作；如确实要解除，请在商品管理页重新关联项目。")
+         var  context = "解除关联同时会删除商品与项目的关联，请谨慎操作；如确实要解除，请在商品管理页重新关联项目。";
+        if(status=="0") {
+            context = "确认关联?";
+        }
+            var r=confirm(context)
             if (r==true)
             {
                 $.ajax({
@@ -129,11 +133,8 @@
                     }
                 });
             }
-            else
-            {
-               // document.write("You pressed Cancel!")
-            }
-        }
+
+
 
     }
 </script>

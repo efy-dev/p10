@@ -174,9 +174,6 @@ public class   SigninController extends BaseController {
         return "/register" ;
     }
 
-    /**
-     * 判断注册还是登陆
-     */
     @RequestMapping("sso.do")
     public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");

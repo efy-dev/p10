@@ -140,17 +140,15 @@ $(function(){
             $(this).parents('.nav-item').find('.ul-list')
         })
     })();
-    //商品详情页
+    //商品详情页（精品）
     (function(){
-        //导航事件
-
+        //二级导航
         var menuFineList=$('#menu-fine-list');
         var ulList=menuFineList.find('.ul-list');
         var navLinks=menuFineList.find('.nav-links');
         var navLinksWidth=(navLinks.find('ul').width()*navLinks.find('ul').length)+251; //计算二级菜单宽度
         navLinks.css({'width':navLinksWidth+'px','right':-navLinksWidth+'px'});
         ulList.hide();
-        //alert(navLinksWidth)
         $('#menu-fine .nav-icon').click(function(){
             $(this).hide().siblings('a').show();
             menuFineList.css({'opacity':'1','z-index':'6'});
@@ -161,108 +159,34 @@ $(function(){
             },function(){
                 navLinks.stop(true).animate({'right':-navLinksWidth+'px'},300);
             });
-
             menuFineList.find('.mask').click(function(){
                 $('#menu-fine .nav-icon-active').hide().siblings('a').show();
                 menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
                 ulList.stop(true).slideUp(200);
             })
-
             $('#menu-fine .nav-icon-active').click(function(){
                 $(this).hide().siblings('a').show();
                 menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
                 ulList.stop(true).slideUp(200);
             })
-
-
         })
-
-
-
-        //点击
+        //页面概览-详情-鉴赏-技艺-保养点击
         var index=0;
         var iSpeed=300;
         var nav=$('.nav-share .nav');
-        var navLi=nav.find('.navli');
-        var secOneLeft=$('.section1 .sec-left');
-        var bodyHtml=$('body');
-        var wH=bodyHtml.height();
+        var navLi=nav.find('li');//二级导航
+        var btnArrowDown=$('.section .btn-arrow-down'); //居中向下按钮
+        var bodyHtml=$('body');//页面
+        var wH=bodyHtml.height();//页面高度
         //如果页面刷新则页面滚动到最顶部
         if(bodyHtml.not(".scroll")){
             bodyHtml.animate({'scrollTop':0},100);
         }
-        //立即收藏
-        btnsCollect();
+        //悬浮导航
         navLi.click(function(){
             index=$(this).index();
-            bodyHtml.addClass('scroll');
-            bodyHtml.animate({'scrollTop':index*(wH-88)},iSpeed);
-            nav.removeClass('nav3');
-            $(this).addClass('active').siblings('li').removeClass('active');
-            //分享
-            if(index==0){
-                $('.nav-share .share').show();
-            }
-            if(index!=0){
-                $('.nav-share .share').hide();
-            }
-            //详情
-            if(index==1){
-                secOneLeft.animate({'margin-left':'0'},iSpeed);
-            }
-            //鉴赏
-            if(index==2){
-                nav.addClass('nav2');
-            }
-            if(index!=2){
-                nav.removeClass('nav2');
-            }
-            //收藏
-            btnsCollect();
+            bodyNavRun();
         })
-        //section1----详情
-        $('.section1 .icon-close').click(function(){
-            secOneLeft.animate({'margin-left':'-100%'},iSpeed);
-        })
-        //section2 鉴赏
-        sectionFocus();
-        function sectionFocus(){
-            var ulImgLi=$('.section2 .ul-img li');
-            var ulNumLi=$('.section2 .ul-num li');
-            var ulSnumLi=$('.section2 .ul-snum li');
-            var infoTab=$('.section2 .info-tab');
-
-            ulImgLi.eq(0).show();
-            infoTab.eq(0).show();
-
-            ulNumLi.click(function(){
-                $(this).addClass('active').siblings('li').removeClass('active');
-                ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
-                infoTab.eq($(this).index()).fadeIn().siblings('.info-tab').fadeOut();
-                ulSnumLi.eq(1).html($(this).index()+1);
-            })
-        }
-        //点击立即收藏
-        function btnsCollect(){
-            $('.section .btns-collect').click(function(){
-                var section5Part1=$('.section5 .part1');
-                var section5Part2=$('.section5 .part2');
-                nav.addClass('nav3');
-                bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
-                //相关收藏
-                section5Part1.find('.related-collect').click(function(){
-                    section5Part1.animate({'left':'-100%'},iSpeed);
-                    section5Part2.animate({'left':'0'},iSpeed);
-                    return false;
-                });
-                section5Part2.find('.related-collect').click(function(){
-                    section5Part1.animate({'left':'0'},iSpeed);
-                    section5Part2.animate({'left':'100%'},iSpeed);
-                    return false;
-                });
-                return false;
-            });
-        }
         //商品详情页--鼠标滚轮
         var Time=new Date();
         $(document).mousewheel(function(ev,dir){
@@ -271,8 +195,8 @@ $(function(){
                 Time=new Date();
                 if(dir<0){
                     index++;
-                    if(index>4){
-                        index=4;
+                    if(index>5){
+                        index=5;
                     }
                 }else{
                     index--;
@@ -280,61 +204,73 @@ $(function(){
                         index=0;
                     }
                 }
-                //分享
-                if(index==0){
-                    $('.nav-share .share').show();
-                }
-                if(index!=0){
-                    $('.nav-share .share').hide();
-                }
-                //详情
-                if(index==1){
-                    secOneLeft.animate({'margin-left':'0'},iSpeed);
-                }
-                //鉴赏
-                if(index==2){
-                    nav.addClass('nav2');
-                }
-                if(index!=2){
-                    nav.removeClass('nav2');
-                }
-
-                nav.removeClass('nav3');
-
-                navLi.eq(index).addClass('active').siblings().removeClass('active');
-                $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
+                bodyNavRun();
             }
-
         });
+        //点击向下图标
+        btnArrowDown.click(function(){
+            index++;
+            bodyNavRun();
+        })
+        //判断导航（概览-详情-鉴赏-技艺-保养）各个页面中的状态以及页面滚动距离
+        function bodyNavRun(){
+            bodyHtml.addClass('scroll');//刷新页面回到页面顶部
+            nav.removeClass('nav3');//相关藏品和立即购买页面：去掉悬浮导航上的class=nav3
+            if(index==2){nav.addClass('nav2');}  //悬浮导航到鉴赏部分：增加class=nav2  背景
+            if(index!=2){nav.removeClass('nav2');} //悬浮导航到鉴赏部分：去除class=nav2
+            if(index>3){btnArrowDown.fadeOut();}//到达保养页面后  向下按钮消失
+            if(index<4){btnArrowDown.fadeIn();}//离开保养页面后 向下按钮显示
+            if(index==5){nav.addClass('nav3');}
 
-        //点击向下箭头
-        //$('.section0 .btn-arrow-down').click(function(){
-        //    bodyHtml.animate({'scrollTop':1*(wH-88)},iSpeed);
-        //    if(new Date()-Time>500){
-        //        Time=new Date();
-        //        if(dir<0){
-        //            index++;
-        //            //index%=5;
-        //            if(index>4){
-        //                index=4;
-        //            }
-        //        }else{
-        //            index--;
-        //            if(index<0){
-        //                index=0;
-        //            }
-        //        }
-        //
-        //
-        //        navLi.eq(index).addClass('active').siblings().removeClass('active');
-        //        $('body').stop(true).animate({'scrollTop':index*(wH-88)+'px'},iSpeed);
-        //    }
-        //
-        //
-        //    return false;
-        //})
+            navLi.eq(index).addClass('active').siblings().removeClass('active');
+            bodyHtml.stop(true).animate({'scrollTop':index*(wH-88)},iSpeed); //页面滚动距离
+            btnsCollect();  //收藏
+            sectionFocus(); //section2 鉴赏左侧轮播图
+        }
+        btnsCollect();
+        //点击立即收藏
+        function btnsCollect(){
+            $('.btns-collect').click(function(){
+                index=5;
+                nav.addClass('nav3');
+                navLi.eq(index).addClass('active').siblings().removeClass('active');
+                bodyHtml.stop(true).animate({'scrollTop':index*(wH-88)},iSpeed); //页面滚动距离
 
+                btnArrowDown.fadeOut(); //向下按钮消失
+                var section5Part1=$('.section5 .part1');
+                var section5Part2=$('.section5 .part2');
+                //相关收藏
+                section5Part1.find('.related-collect').click(function(){
 
+                    alert('related-collect')
 
+                    section5Part1.stop(true).animate({'left':'-100%'},iSpeed);
+                    section5Part2.stop(true).animate({'left':'0'},iSpeed);
+                    return false;
+                });
+                section5Part2.find('.related-collect').click(function(){
+                    section5Part1.stop(true).animate({'left':'0'},iSpeed);
+                    section5Part2.stop(true).animate({'left':'100%'},iSpeed);
+                    return false;
+                });
+
+                return false;
+            });
+        };
+        //section2 鉴赏左侧轮播图
+        function sectionFocus(){
+            var ulImgLi=$('.section2 .ul-img li');
+            var ulNumLi=$('.section2 .ul-num li');
+            var ulSnumLi=$('.section2 .ul-snum li');
+            var infoTab=$('.section2 .info-tab');
+            //ulImgLi.eq(0).show();
+            ulNumLi.click(function(){
+                $(this).addClass('active').siblings('li').removeClass('active');
+                ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
+                infoTab.eq($(this).index()).fadeIn().siblings('.info-tab').fadeOut();
+                ulSnumLi.eq(1).html($(this).index()+1);
+            })
+        }
     })();
+
 })
