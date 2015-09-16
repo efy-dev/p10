@@ -1,4 +1,4 @@
-package com.efeiyi.ec.project.model;
+package com.efeiyi.ec.product.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,7 +14,8 @@ public class Subject {
 
     private String id ;
     private String pictureUrl;
-    private SubjectDiscription subjectDiscription;
+    private SubjectDescription subjectDescription;
+    private Integer index;
     private List<SubjectPicture> subjectPictureList;
     private String status;
 
@@ -29,6 +30,15 @@ public class Subject {
         this.id = id;
     }
 
+    @Column(name = "index")
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
     @Column(name = "picture_url")
     public String getPictureUrl() {
         return pictureUrl;
@@ -40,12 +50,12 @@ public class Subject {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_discription_id")
-    public SubjectDiscription getSubjectDiscription() {
-        return subjectDiscription;
+    public SubjectDescription getSubjectDescription() {
+        return subjectDescription;
     }
 
-    public void setSubjectDiscription(SubjectDiscription subjectDiscription) {
-        this.subjectDiscription = subjectDiscription;
+    public void setSubjectDescription(SubjectDescription subjectDescription) {
+        this.subjectDescription = subjectDescription;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
