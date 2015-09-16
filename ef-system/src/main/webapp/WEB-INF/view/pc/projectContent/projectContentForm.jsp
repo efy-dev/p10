@@ -15,6 +15,7 @@
   <title></title>
   <script src="<c:url value="/scripts/jquery.autocompleter.js"/>"></script>
   <link rel="stylesheet" href="<c:url value='/scripts/css/main2.css'/>"/>
+  <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -96,7 +97,9 @@
     <div class="am-form-group">
       <label name="type" for="content" class="am-u-sm-3 am-form-label">项目内容 <small>*</small></label>
       <div class="am-u-sm-9" style="margin-top: 10px">
-        <textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>
+        <%--<textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>--%>
+        <textarea id="content" name="content" class="ckeditor" placeholder="项目内容" required
+                value='<c:if test="${!empty projectContent.content}">${projectContent.content}</c:if>'><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>
       </div>
     </div>
 

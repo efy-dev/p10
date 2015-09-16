@@ -72,7 +72,7 @@ public class PersonalInforController {
         if(session != null){
             session.invalidate();
         }
-        return "redirect:/login";
+        return "redirect:/sso.do";
 
     }
     @RequestMapping({"getPassword.do"})
