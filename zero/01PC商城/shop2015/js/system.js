@@ -260,8 +260,7 @@ $(function(){
             var ulNumLi=$('.section2 .ul-num li');
             var ulSnumLi=$('.section2 .ul-snum li');
             var infoTab=$('.section2 .info-tab');
-            ulImgLi.eq(0).show();
-            infoTab.eq(0).show();
+            //ulImgLi.eq(0).show();
             ulNumLi.click(function(){
                 $(this).addClass('active').siblings('li').removeClass('active');
                 ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
