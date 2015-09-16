@@ -205,7 +205,7 @@
         </jnode>
     </jnode>
 
-    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科网站">
+    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科管理">
         <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
              <match url="plistProjectContent_default"/>
          </jnode>-->
