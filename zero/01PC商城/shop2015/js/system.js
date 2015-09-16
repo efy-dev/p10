@@ -218,8 +218,8 @@ $(function(){
             nav.removeClass('nav3');//相关藏品和立即购买页面：去掉悬浮导航上的class=nav3
             if(index==2){nav.addClass('nav2');}  //悬浮导航到鉴赏部分：增加class=nav2  背景
             if(index!=2){nav.removeClass('nav2');} //悬浮导航到鉴赏部分：去除class=nav2
-            if(index==4){btnArrowDown.fadeOut();}//到达保养页面后  向下按钮消失
-            if(index!=4){btnArrowDown.fadeIn();}//离开保养页面后 向下按钮显示
+            if(index>3){btnArrowDown.fadeOut();}//到达保养页面后  向下按钮消失
+            if(index<4){btnArrowDown.fadeIn();}//离开保养页面后 向下按钮显示
             if(index==5){nav.addClass('nav3');}
 
             navLi.eq(index).addClass('active').siblings().removeClass('active');
@@ -239,7 +239,6 @@ $(function(){
                 btnArrowDown.fadeOut(); //向下按钮消失
                 var section5Part1=$('.section5 .part1');
                 var section5Part2=$('.section5 .part2');
-                bodyHtml.animate({'scrollTop':5*(wH-88)},iSpeed);
                 //相关收藏
                 section5Part1.find('.related-collect').click(function(){
                     section5Part1.stop(true).animate({'left':'-100%'},iSpeed);
