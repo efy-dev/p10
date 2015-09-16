@@ -76,7 +76,7 @@
                                     </c:if>
                                        <span style="display: none;float: left;padding-left: 10px;">
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
-                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'masterRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
+                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'ec.masterRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
                                        </span>
                                 </div>
                             </div>
