@@ -225,4 +225,14 @@ public class PurchaseOrder {
     public void setPayWay(String payWay) {
         this.payWay = payWay;
     }
+
+    @Transient
+    public BigDecimal getRealPayMoney(){
+        List<PurchaseOrderPayment> purchaseOrderPaymentList  = getPurchaseOrderPaymentList();
+        BigDecimal price = new BigDecimal(0);
+        for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList){
+            price.add(purchaseOrderPaymentTemp.getPaymentAmount());
+        }
+        return price;
+    }
 }

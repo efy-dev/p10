@@ -54,15 +54,16 @@ public class CouponController {
      * @throws Exception
      */
     @RequestMapping({"/coupon/list/{orderId}"})
-    public String listCouponByOrder(HttpServletRequest request , Model model,@PathVariable String orderId) throws Exception{
+    @ResponseBody
+    public List<Object> listCouponByOrder(HttpServletRequest request , Model model,@PathVariable String orderId) throws Exception{
         PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         XQuery couponQuery = new XQuery("listCoupon_byorder", request);
-        couponQuery.put("CouponBatch_priceLimit",purchaseOrder.getTotal().floatValue());
+        couponQuery.put("couponBatch_priceLimit",purchaseOrder.getTotal().floatValue());
         List<Object> couponList = baseManager.listObject(couponQuery);
 
         model.addAttribute("couponList",couponList);
 
-        return "/purchaseOrder/usefulCouponList";
+        return couponList;
 
     }
 
