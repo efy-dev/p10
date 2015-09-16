@@ -515,6 +515,142 @@ body { height:100%;background:#626262}
 <script src="../shop2015/js/amazeui.min.js"></script>
 <script src="../shop2015/js/jquery.mousewheel.min.js" type="text/javascript"></script>
 <script src="../shop2015/js/system.js"></script>
+<script>
+$(function(){
+    //商品详情页（精品）
+    (function(){
+        //二级导航
+        var menuFineList=$('#menu-fine-list');
+        var ulList=menuFineList.find('.ul-list');
+        var navLinks=menuFineList.find('.nav-links');
+        var navLinksWidth=(navLinks.find('ul').width()*navLinks.find('ul').length)+251; //计算二级菜单宽度
+        navLinks.css({'width':navLinksWidth+'px','right':-navLinksWidth+'px'});
+        ulList.hide();
+        $('#menu-fine .nav-icon').click(function(){
+            $(this).hide().siblings('a').show();
+            menuFineList.css({'opacity':'1','z-index':'6'});
+            ulList.stop(true,true).slideDown(200);
+            //
+            menuFineList.find('.active').hover(function(){
+                navLinks.stop(true).animate({'right':'0'},300);
+            },function(){
+                navLinks.stop(true).animate({'right':-navLinksWidth+'px'},300);
+            });
+            menuFineList.find('.mask').click(function(){
+                $('#menu-fine .nav-icon-active').hide().siblings('a').show();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
+            })
+            $('#menu-fine .nav-icon-active').click(function(){
+                $(this).hide().siblings('a').show();
+                menuFineList.stop(true).animate({'opacity':'0','z-index':'0'});
+                ulList.stop(true).slideUp(200);
+            })
+        })
+        //页面概览-详情-鉴赏-技艺-保养点击
+        var index=0;
+        var iSpeed=300;
+        var nav=$('.nav-share .nav');
+        var navLi=nav.find('li');//二级导航
+        var btnArrowDown=$('.section .btn-arrow-down'); //居中向下按钮
+        var bodyHtml=$('body');//页面
+        var wH=bodyHtml.height();//页面高度
+        //如果页面刷新则页面滚动到最顶部
+        if(bodyHtml.not(".scroll")){
+            bodyHtml.animate({'scrollTop':0},100);
+        }
+        //悬浮导航
+        navLi.click(function(){
+            index=$(this).index();
+            bodyNavRun();
+        })
+        //商品详情页--鼠标滚轮
+        var Time=new Date();
+        $(document).mousewheel(function(ev,dir){
+            //dir 判断鼠标滚动的方向   向下为  负数   向上为正数
+            if(new Date()-Time>500){
+                Time=new Date();
+                if(dir<0){
+                    index++;
+                    if(index>5){
+                        index=5;
+                    }
+                }else{
+                    index--;
+                    if(index<0){
+                        index=0;
+                    }
+                }
+                bodyNavRun();
+
+            }
+        });
+        //点击向下图标
+        btnArrowDown.click(function(){
+            index++;
+            bodyNavRun();
+        })
+        //判断导航（概览-详情-鉴赏-技艺-保养）各个页面中的状态以及页面滚动距离
+        function bodyNavRun(){
+            bodyHtml.addClass('scroll');//刷新页面回到页面顶部
+            nav.removeClass('nav3');//相关藏品和立即购买页面：去掉悬浮导航上的class=nav3
+            if(index==2){nav.addClass('nav2');}  //悬浮导航到鉴赏部分：增加class=nav2  背景
+            if(index!=2){nav.removeClass('nav2');} //悬浮导航到鉴赏部分：去除class=nav2
+            if(index>3){btnArrowDown.fadeOut();}//到达保养页面后  向下按钮消失
+            if(index<4){btnArrowDown.fadeIn();}//离开保养页面后 向下按钮显示
+            if(index==5){nav.addClass('nav3');}
+            navLi.eq(index).addClass('active').siblings().removeClass('active');
+            bodyHtml.stop(true).animate({'scrollTop':index*(wH-88)},iSpeed); //页面滚动距离
+            //btnsCollect();  //点击立即收藏
+            sectionFocus(); //section2 鉴赏左侧轮播图
+            relatedCollect();//立即收藏->相关收藏
+        }
+
+
+        //立即收藏
+        $('.btns-collect').click(function(){
+            index=5;
+            nav.addClass('nav3');
+            navLi.eq(index).addClass('active').siblings().removeClass('active');
+            bodyHtml.stop(true).animate({'scrollTop':index*(wH-88)},iSpeed); //页面滚动距离
+            btnArrowDown.fadeOut(); //向下按钮消失
+            relatedCollect();//立即收藏->相关收藏
+            return false;
+        });
+        //立即收藏->相关收藏
+        function relatedCollect(){
+            var section5Part1=$('.section5 .part1');
+            var section5Part2=$('.section5 .part2');
+            //相关收藏
+            section5Part1.find('.related-collect').click(function(){
+                section5Part1.stop(true).animate({'left':'-100%'},iSpeed);
+                section5Part2.stop(true).animate({'left':'0'},iSpeed);
+                return false;
+            });
+            section5Part2.find('.related-collect').click(function(){
+                section5Part1.stop(true).animate({'left':'0'},iSpeed);
+                section5Part2.stop(true).animate({'left':'100%'},iSpeed);
+                return false;
+            });
+        }
+
+        //section2 鉴赏左侧轮播图
+        function sectionFocus(){
+            var ulImgLi=$('.section2 .ul-img li');
+            var ulNumLi=$('.section2 .ul-num li');
+            var ulSnumLi=$('.section2 .ul-snum li');
+            var infoTab=$('.section2 .info-tab');
+            //ulImgLi.eq(0).show();
+            ulNumLi.click(function(){
+                $(this).addClass('active').siblings('li').removeClass('active');
+                ulImgLi.eq($(this).index()).fadeIn().siblings('li').fadeOut();
+                infoTab.eq($(this).index()).fadeIn().siblings('.info-tab').fadeOut();
+                ulSnumLi.eq(1).html($(this).index()+1);
+            })
+        }
+    })();
+})
+</script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 </body>
 </html>
