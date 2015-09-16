@@ -26,16 +26,19 @@
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr style="text-align: left">
-        <td width="25%">操作</td>
-        <td width="25%">项目名称</td>
-        <td width="25%">项目编号</td>
-        <td width="25%">项目图片</td>
+        <td width="15%">操作</td>
+        <td width="15%">项目名称</td>
+        <td width="15%">项目编号</td>
+        <td width="15%">省</td>
+        <td width="15%">市</td>
+        <td width="15%">项目图片</td>
+
     </tr>
 
 
     <c:forEach items="${requestScope.pageInfo.list}" var="project">
         <tr style="text-align: left">
-            <td>
+            <td width="15%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                         <button onclick="window.location.href='<c:url
@@ -52,7 +55,7 @@
                         <c:if test="${project.status == '1'}">
                             <button onclick="changeStatus(this,'${project.id}')" status="2"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                    class="am-icon-trash-o">取消显示</span>
+                                    class="am-icon-trash-o">隐藏</span>
 
                             </button>
                         </c:if>
@@ -67,17 +70,23 @@
                     </div>
                 </div>
             </td>
-            <td width="20%">
+            <td width="15%">
                 <c:if test="${project.level == 1}">
                     <a href="<c:url value="/basic/xm.do?qm=viewProject&param=project&id=${project.id}"/>">
                             ${project.name}
                     </a>
                 </c:if>
             </td>
-            <td width="20%">
+            <td width="15%">
                     ${project.serial}
             </td>
-            <td width="40%">
+            <td width="15%">
+                    ${project.addressDistrict.addressCity.addressProvince.name}
+            </td>
+            <td width="15%">
+                    ${project.addressDistrict.addressCity.name}
+            </td>
+            <td width="15%">
                 <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${project.picture_url}@!product-model"/>"
                      alt=""/>
             </td>
@@ -104,7 +113,7 @@
             success: function (data) {
                 $(obj).attr("status",data);
                 if(status=="1"){
-                    $(obj).find("span").text("取消显示");
+                    $(obj).find("span").text("隐藏");
                     $(obj).attr("status","2");
                 }
                 if(status=="2"){

@@ -49,6 +49,7 @@
                 <do name="saveOrUpdateProjectCategory" label="保存category" access=""
                     result="redirect:/basic/xm.do?qm=plistProjectCategory_default"
                     execute="com.efeiyi.ec.system.project.controller.ProjectCategoryFormHandler"/>
+                <do name="viewProjectCategory" label="查看" access="" result="/projectCategory/projectCategoryView"/>
                 <do name="listProjectCategory" label="category列表" access=""
                     result="/projectCategory/projectCategoryList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">

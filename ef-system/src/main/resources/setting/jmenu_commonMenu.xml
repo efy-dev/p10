@@ -205,7 +205,7 @@
         </jnode>
     </jnode>
 
-    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科网站">
+    <jnode id="wikiManager" url="/main.do?jnodeId=wikiManager" text_zh_CN="非遗百科管理">
         <!-- <jnode url="/basic/xm.do?qm=plistProjectContent_default" access="admin,manager" text_zh_CN="内容">
              <match url="plistProjectContent_default"/>
          </jnode>-->
@@ -261,6 +261,8 @@
         <jnode url="" id="userManager" access="admin" state="closed" text_zh_CN="用户管理">
             <jnode url="/basic/xm.do?qm=plistUser_default" access="admin,manager" text_zh_CN="用户列表">
                 <match url="/basic/xm.do?qm=plistUser_default"/>
+                <match url="/basic/xm.do?qm=plistUser_default1"/>
+                <match url="/basic/xm.do?qm=plistUser_default2"/>
                 <match url="/basic/xm.do?qm=formUser&amp;formParam=user"/>
 
             </jnode>
