@@ -201,5 +201,35 @@
             </does>
         </entity>
 
+
+        <entity name="Subject" label="专题"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.Subject">
+            <does>
+                <do name="plistSubject" access="" label="专题分页列表"
+                    result="/subject/subjectPList">
+                    <query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removeSubject" label="删除产品图片" access="" result="json"/>
+                <do name="formSubject" label="保存产品描述页" access="" result="/subject/subjectForm" />
+                <do name="formSubject_Description" label="保存产品描述页" access="" result="/subject/subjectDescriptionForm" />
+                <do name="saveOrUpdateSubject" label="保存产品描述" access="" result="/subject/subjectSaveSuccess"
+                    execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
+                <do name="listSubject" label="产品描述列表" access="" result="/subject/subjectList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
+
+
     </entities>
 </module>

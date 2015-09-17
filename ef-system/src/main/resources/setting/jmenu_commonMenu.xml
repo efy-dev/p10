@@ -114,7 +114,11 @@
                 <match url="/basic/xm.do?qm=formDocument&amp;groupName=tenant"/>
                 <match url="/basic/xm.do?qm=viewDocument&amp;groupName=tenant"/>
             </jnode>
-
+            <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,manager" text_zh_CN="首页推荐专题">
+                <match url="/basic/xm.do?qm=formSubject"/>
+                <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
+                <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>

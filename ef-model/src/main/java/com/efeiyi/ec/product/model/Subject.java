@@ -1,5 +1,6 @@
 package com.efeiyi.ec.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,8 +15,9 @@ public class Subject {
 
     private String id ;
     private String pictureUrl;
+    private String name;
     private SubjectDescription subjectDescription;
-    private Integer index;
+    private Integer subjectIndex;
     private List<SubjectPicture> subjectPictureList;
     private String status;
 
@@ -30,13 +32,13 @@ public class Subject {
         this.id = id;
     }
 
-    @Column(name = "index")
-    public Integer getIndex() {
-        return index;
+    @Column(name = "subject_index")
+    public Integer getSubjectIndex() {
+        return subjectIndex;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
+    public void setSubjectIndex(Integer subjectIndex) {
+        this.subjectIndex = subjectIndex;
     }
 
     @Column(name = "picture_url")
@@ -46,6 +48,15 @@ public class Subject {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @Column(name="name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -58,6 +69,7 @@ public class Subject {
         this.subjectDescription = subjectDescription;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     public List<SubjectPicture> getSubjectPictureList() {
         return subjectPictureList;

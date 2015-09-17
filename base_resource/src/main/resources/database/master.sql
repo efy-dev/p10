@@ -376,4 +376,12 @@ ALTER TABLE `wiki_project_content`
 =================================================以上 已执行======================================================
 	ALTER TABLE `product_model`
 ADD COLUMN `product_picture_id`  char(16) NULL AFTER `custom_property`;
+=================================================以上 已执行======================================================
+ALTER TABLE `subject`
+ADD COLUMN `name`  varchar(255) NULL AFTER `index`;
 
+ALTER TABLE `subject_description`
+ADD COLUMN `subject_id`  char(16) NULL AFTER `content`;
+
+ALTER TABLE `subject`
+CHANGE COLUMN `index2` `subject_index`  int(11) NULL DEFAULT NULL AFTER `status`;

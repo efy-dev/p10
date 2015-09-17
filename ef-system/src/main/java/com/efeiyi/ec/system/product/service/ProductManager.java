@@ -2,6 +2,7 @@ package com.efeiyi.ec.system.product.service;
 
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
+import com.efeiyi.ec.product.model.Subject;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 
 /**
@@ -15,4 +16,6 @@ public interface ProductManager {
     Product saveProduct(Product product);
 
     Product saveProductModel(ProductModelBean productModelBean) throws  Exception;
+
+    Subject saveSubject(Subject subject, String[] flag,String[] spId,String[] subjectPicture);
 }
