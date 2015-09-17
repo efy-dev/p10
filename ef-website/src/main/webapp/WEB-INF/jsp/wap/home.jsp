@@ -25,7 +25,7 @@
             <span><i class="icon"></i></span>
             <span>传&nbsp;承&nbsp;人</span>
         </a>
-        <a class="item coupon" href="/coupon/list">
+        <a class="item coupon" href="#coupon">
             <span><i class="icon"></i></span>
             <span>我&nbsp;的&nbsp;卡&nbsp;券</span>
         </a>

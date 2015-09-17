@@ -74,19 +74,17 @@
     var ipDiv = document.getElementById("ip0");
     window.onload = ajax1(ipDiv);
     function ajax1(div1) {
-        if(div1!=null){
-            $.ajax({
-                type: "get",
-                url: url + div1.innerHTML,
-                contentType: "application/json; charset=utf-8",
-                cache: false,
-                dataType: "jsonp",
-                jsonp: "callback",
-                jsonpCallback: "jsonpCallback",
-                success: success1,
-                error: error1,
-            });
-        }
+        $.ajax({
+            type: "get",
+            url: url + div1.innerHTML,
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            dataType: "jsonp",
+            jsonp: "callback",
+            jsonpCallback: "jsonpCallback",
+            success: success1,
+            error: error1,
+        });
     }
     function success1(data) {
         var ipAddressDiv = document.getElementById("ipAddress" + count);

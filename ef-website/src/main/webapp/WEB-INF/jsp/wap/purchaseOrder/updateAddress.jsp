@@ -8,12 +8,13 @@
 <!--//End--header-->
 <div class="shipping-address">
   <div class="address">
-    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post">
+    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>">
       <ul>
         <li>
           <input name="id" type="hidden" value="${address.id}">
+          <input name="consumerId" type="hidden" value="${address.consumer.id}">
           <label>收货人</label>
-          <input type="text" class="txt" name="consignee" value="${address.consignee}" required>
+          <input type="text" class="txt" name="consignee" value="${address.consignee}">
         </li>
         <li>
           <label>手机号</label>
@@ -32,7 +33,7 @@
         </li>
         <li>
           <label>具体地址</label>
-          <textarea name="details" id="doc-vld-ta-2" class="text-act" required>${address.details}</textarea>
+          <textarea name="details" id="doc-vld-ta-2" minlength="10" maxlength="100" class="text-act">${address.details}</textarea>
         </li>
       </ul>
       <div class="default">

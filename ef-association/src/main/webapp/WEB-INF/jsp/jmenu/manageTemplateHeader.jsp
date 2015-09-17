@@ -20,8 +20,8 @@
       <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-left admin-header-list">
         <c:forEach items="${jmenu.children}" var="jmenuNode">
           <li>
-            <a class="${jmenuNode.jnodeMatch('pal-active',jnode)}"
-               href="<c:url value='${jmenuNode.url}'/>"><h3>${jmenuNode.text_zh_CN}</h3></a>
+            <a class="${jmenuNode.jnodeMatch('ass-active',jnode)}"
+               href="<c:url value="${jmenuNode.url}"/>"><h3>${jmenuNode.text_zh_CN}</h3></a>
           </li>
         </c:forEach>
       </ul>

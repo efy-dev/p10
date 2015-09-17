@@ -21,6 +21,9 @@
 <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
 <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
+<!--<![endif]-->
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">

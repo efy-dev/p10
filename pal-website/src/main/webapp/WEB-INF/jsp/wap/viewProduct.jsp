@@ -66,15 +66,15 @@
                                                                 pattern="yyyy年MM月"/></span>
                 </li>
             </c:forEach>
-            <%--<c:forEach items="${product.productSeries.productSeriesPropertyNameList}" var="propertyName"--%>
-                       <%--varStatus="status">--%>
-                <c:forEach items="${product.productPropertyValueList}" var="propertyValue" >
-                           <%--begin="${status.index}" end="${status.index}">--%>
+            <c:forEach items="${product.productSeries.productSeriesPropertyNameList}" var="propertyName"
+                       varStatus="status">
+                <c:forEach items="${product.productPropertyValueList}" var="propertyValue" begin="${status.index}"
+                           end="${status.index}">
                     <li class="am-g am-list-item-dated">
-                        <strong class="am-list-info">${propertyValue.productSeriesPropertyName.name}:</strong><span
+                        <strong class="am-list-info">${propertyName.name}:</strong><span
                             class="am-list-info2">${propertyValue.value}</span></li>
                 </c:forEach>
-            <%--</c:forEach>--%>
+            </c:forEach>
         </ul>
     </div>
 </div>

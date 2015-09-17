@@ -7,22 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
-    <script type="text/javascript">
-        function LabelBatchFormSubmit(){
-            var LType = document.getElementById("LType");
-            var type = LType.firstElementChild.value;
-            if(type == null || type == ""){
-                alert("请选择标签类型");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -33,7 +20,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/basic/xm.do'/>" onsubmit="return LabelBatchFormSubmit()" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/basic/xm.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateLabelBatch">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
@@ -41,19 +28,13 @@
         <div class="am-form-group">
             <label name="setting" for="setting" class="am-u-sm-3 am-form-label">标签批次 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="setting" id="setting" title="标签批次" placeholder="标签批次" value="${object.setting}" required>
+                <input type="text" name="setting" id="setting" placeholder="标签批次" value="${object.setting}" required>
             </div>
         </div>
         <div class="am-form-group">
-            <label name="amount" for="amount" class="am-u-sm-3 am-form-label">标签数量 <small>*</small></label>
+            <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="number" name="amount" id="amount" title="标签数量" min="0" placeholder="标签数量" value="${object.amount}" required>
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label for="type" class="am-u-sm-3 am-form-label">标签类型 <small>*</small></label>
-            <div class="am-u-sm-9" id="LType">
-                <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="${object.type}" type="select"/>
+                <input type="number" name="amount" id="amount" placeholder="数量" value="${object.amount}" required>
             </div>
         </div>
         <div class="am-form-group">

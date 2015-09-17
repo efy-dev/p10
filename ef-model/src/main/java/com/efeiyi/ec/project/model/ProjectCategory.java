@@ -1,6 +1,5 @@
 package com.efeiyi.ec.project.model;
 
-import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.p.model.ObjectRecommended;
@@ -88,7 +87,6 @@ public class ProjectCategory implements Serializable{
        this.type = type;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fathercategory_id")
     public ProjectCategory getFatherCategory() {

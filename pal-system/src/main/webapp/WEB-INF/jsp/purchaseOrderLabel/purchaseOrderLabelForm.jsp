@@ -43,7 +43,7 @@
         <div class="am-form-group">
             <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="number" name="amount" id="amount" min="0" placeholder="数量" value="${object.amount}" required>
+                <input type="number" name="amount" id="amount" placeholder="数量" value="${object.amount}" required>
             </div>
         </div>
         <div class="am-form-group">

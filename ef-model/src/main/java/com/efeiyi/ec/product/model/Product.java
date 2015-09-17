@@ -26,7 +26,7 @@ public class Product implements Serializable{
     private String serial;
     private String picture_url;
     private Master master;
-//    private ProjectCategory category;
+    private ProjectCategory category;
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
     private ProductDescription productDescription;
@@ -90,16 +90,16 @@ public class Product implements Serializable{
 
 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
-//    @JsonIgnore
-//    public ProjectCategory getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(ProjectCategory category) {
-//        this.category = category;
-//    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    public ProjectCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProjectCategory category) {
+        this.category = category;
+    }
 
     @Column(name = "picture_url")
     public String getPicture_url() {

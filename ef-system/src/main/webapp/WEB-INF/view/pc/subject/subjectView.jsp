@@ -76,7 +76,7 @@
 
     <div class="am-u-md-12">
         <jsp:include flush="true"
-                     page="/basic/xm.do?qm=listSubjectProduct_default&conditions=subject.id:${object.id}"/>
+                     page="/basic/xm.do?qm=listSubjectProductModel_default&conditions=subject.id:${object.id}"/>
     </div>
 </div>
 

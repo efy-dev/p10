@@ -24,7 +24,6 @@ import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -63,7 +61,6 @@ public class   SigninController extends BaseController {
     private XdoManager xdoManager;
     @Autowired
     private SmsCheckManager smsCheckManager;
-
 
     /**
      * 查看当前用户名是否存在
@@ -174,9 +171,18 @@ public class   SigninController extends BaseController {
         return "/register" ;
     }
 
-    @RequestMapping("sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/");
+    /**
+     * 判断注册还是登陆
+     */
+    @RequestMapping("/pc/forward.do")
+    public String forward(String result) {
+        if ("2".equals(result)) {
+            return "/register";
+        } else if ("1".equals(result)) {
+            return "/login";
+        } else {
+            return "/loginAccess";
+        }
     }
 
     @RequestMapping({"/login"})
