@@ -27,9 +27,19 @@ public class ProductModel implements Serializable {
     private Integer recommendIndex;
     private String name;
     private String productModel_url;
-    private String marketPrice;
+    private BigDecimal marketPrice;//市场价格
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
+    private ProductPicture  productPicture;
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "productModel")
+    public ProductPicture getProductPicture() {
+        return productPicture;
+    }
+
+    public void setProductPicture(ProductPicture productPicture) {
+        this.productPicture = productPicture;
+    }
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
@@ -42,11 +52,11 @@ public class ProductModel implements Serializable {
     }
 
     @Column(name = "market_price")
-    public String getMarketPrice() {
+    public BigDecimal getMarketPrice() {
         return marketPrice;
     }
 
-    public void setMarketPrice(String marketPrice) {
+    public void setMarketPrice(BigDecimal marketPrice) {
         this.marketPrice = marketPrice;
     }
 

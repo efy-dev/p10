@@ -124,19 +124,6 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
-                        <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
-                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
-                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
-                    </query>
-                </do>
-
-                <do name="plistConsumerCoupon" access="" label="消费者优惠券" result="/coupon/consumerCouponPList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="consumer.id" label="用户" operation="eq" inputType="default"/>
-                    </query>
-                    <query name="consumer" label="分类查询" type="auto" orderBy="id:desc">
-                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
-                        <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
                         <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>

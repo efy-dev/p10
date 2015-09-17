@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <module name="LabelCheckRecord" label="记录" version="" package="com.efeiyi.pal.check.model" path="">
-
     <entities>
         <entity name="PCLabelCheckRecord" label="防伪查询记录"  model="com.efeiyi.pal.check.model.LabelCheckRecord">
             <does>
@@ -10,12 +9,11 @@
                         <!--<condition name="id" defaultValue="0" operation="ne" inputType="default"/>-->
                     <!--</query>-->
                     <query name="label" label="标签记录" type="auto" orderBy="createDatetime:desc">
-                        <condition name="label.serial" defaultValue="" operation="eq" label="标签id" inputType="text"/>
+                        <condition name="label.serial" defaultValue="" operation="eq" label="标签序列号" inputType="text"/>
                         <!--<condition name="serial" operation="eq" label="序列号" inputType="text" required="true"/>-->
                     </query>
                 </do>
             </does>
         </entity>
     </entities>
-
 </module>

@@ -222,16 +222,15 @@
                     </div>
                     <div class="am-form-group">
                         <input class="txt-yzm" type="text" id="verification" minlength="3" placeholder="验证码" required>
-                        <button  class="btn-p" id="verificationButton">获取验证码</button>
+                        <button  class="btn-p1" id="verificationButton">获取验证码</button>
 
-                        <div class="help-block">
-                            <h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
+                        <div class=<h5 id="consumerVerificationCodeCheck" style="color: red;display: none">
                                 手机验证码输入错误</h5>
                         </div>
                     </div>
 
                     <div class="am-form-group">
-                        <input type="password" id="password" name="password" data-parsley-pattern="^[a-zA-Z0-9]{5,15}$"
+                        <input type="password" id="password" name="password" data-parsley-pattern="^[a-zA-Z0-9]{6,16}$"
                                data-parsley-error-message="密码由6-16位字母或数字组成" placeholder="密码由6-16位字母或数字组成"
                                data-parsley-trigger="change" required="" data-parsley-id="6670">
                     </div>
@@ -247,7 +246,7 @@
                         <%--</label>--%>
                     </div>
                     <div class="am-form-group">
-                        <label><input class="checkbox" type="checkbox" checked required/>我已认真阅读并同意<a id="protocol"
+                        <label><input class="checkbox" id="agreemen" type="checkbox" checked />我已认真阅读并同意<a id="protocol"
                                                                                                      class="agree"
                                                                                                      href="#"
                                                                                                      title="e飞蚁用户注册协议">《e飞蚁用户注册协议》</a></label>
@@ -754,7 +753,8 @@
 
 
         $("#consumerSignin").click(function () {
-            if (isVerification && bool) {
+            console.log($("#agreemen").attr("checked"));
+            if (isVerification && bool&&$("#agreemen").is(':checked')) {
 //                if ($("#userRole").val() == "consumer") {
                 $("#consumerSubmit").click();
 //                } else if ($("#userRole").val() == "photographer") {
@@ -763,6 +763,8 @@
 //                }
             } else if (!isVerification) {
                 $("#consumerVerificationCodeCheck").css("display", "block");
+            } else if(!$("#agreemen").is(':checked')){
+                showAlert("提示","请勾选同意注册协议");
             }
         });
 

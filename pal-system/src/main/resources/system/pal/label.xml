@@ -12,6 +12,14 @@
                         <item label="已生成" value="2"/>
                     </statusType>
                 </field>
+                <field name="type" label="类型" inputType="select">
+                    <statusType fieldName="type">
+                        <item label="" value=""/>
+                        <item label="二维码标签" value="1"/>
+                        <item label="NFC标签" value="2"/>
+                        <item label="DNA标签" value="3"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistLabelBatch" access="" label="标签批次分页列表" result="/labelBatch/labelBatchPList">

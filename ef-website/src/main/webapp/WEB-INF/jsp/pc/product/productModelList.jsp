@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.product.model.ProductModel" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -40,7 +41,6 @@
 <div class="hd category">
   <div class="breadcrumb wh">
     <ol class="am-breadcrumb">
-        <%String path = request.getContextPath();%>
       <li><a href="/">首页</a></li>
       <li class="am-active">${proName}</li>
     </ol>
@@ -62,35 +62,33 @@
   <c:if test="${productModelList.size()>0}">
       <div class="list-pro">
         <ul class="ul-item">
-            <%! int i=0 ;%>
+            <%--<%! int i=0 ;%>--%>
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-               <% if(i==0){%>
-                   <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
-                <%--<span class="tips">精品<em class="icon"></em></span>--%>
-                    <%--<span class="icon-r">--%>
-                        <%--<i class="icon icon-chengpin"></i>--%>
-                        <%--<i class="icon icon-hand"></i>--%>
-                    <%--</span>--%>
-                  <img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
-                               <% i++;%>
-                               <%}else if(i==1){%>
-                       <% i++;%>
-                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
-                           <%--<span class="tips">精品<em class="icon"></em></span>--%>
-                           <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
-                       </a>
+               <%--<% if(i==0){%>--%>
+                   <%--<a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">--%>
+                <%--&lt;%&ndash;<span class="tips">精品<em class="icon"></em></span>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<span class="icon-r">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<i class="icon icon-chengpin"></i>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<i class="icon icon-hand"></i>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</span>&ndash;%&gt;--%>
+                  <%--<img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>--%>
+                               <%--<% i++;%>--%>
+                               <%--<%}else if(i==1){%>--%>
+                       <%--<% i++;%>--%>
+                       <%--<a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">--%>
+                           <%--&lt;%&ndash;<span class="tips">精品<em class="icon"></em></span>&ndash;%&gt;--%>
+                           <%--<img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>--%>
+                       <%--</a>--%>
 
-                <%}else{%>
+                <%--<%}else{%>--%>
                        <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
-                            src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
+                            src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}@!product-hot" alt=""/>
                        </a>
-                       <%}%>
-                <p class="wh name">${productModel.product.name}
-                <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                ${productPropertyValue.projectPropertyValue.value}
-                </c:forEach>
+                       <%--<%}%>--%>
+                <p class="wh name">
+                    ${map.get(productModel)}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
