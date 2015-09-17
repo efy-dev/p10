@@ -120,7 +120,7 @@
                 <match url="/basic/xm.do?qm=formSubject"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
-                <match url="/basic/xm.do?qm=plistTProduct_default"/>
+                <match url="/basic/xm.do?qm=plistTProductModel_default"/>
                 <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">

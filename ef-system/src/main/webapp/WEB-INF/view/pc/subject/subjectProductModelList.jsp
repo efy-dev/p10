@@ -13,7 +13,7 @@
 
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
-        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProduct_default&subjectId=${object.id}"/>">关联产品</a>
+        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProductModel_default&subjectId=${object.id}"/>">关联产品</a>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -26,22 +26,24 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${objectList}" var="subjectProduct" end="4">
-                <tr id="${subjectProduct.id}">
+            <c:forEach items="${objectList}" var="subjectProductModel" end="4">
+                <c:if test="${subjectProductModel.status == '1'}">
+                <tr id="${subjectProductModel.id}">
                     <td>
-                        <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProduct('${subjectProduct.subject.id}','${subjectProduct.product.id}','${subjectProduct.id}')})"><span
+                        <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProduct('${subjectProductModel.subject.id}','${subjectProductModel.productModel.id}','${subjectProductModel.id}')})"><span
                                 class="am-icon-pencil-square-o"></span> 解除商品
                         </a>
                     </td>
                     <td class="am-hide-sm-only">
-                            ${subjectProduct.product.name}
+                            ${subjectProductModel.productModel.name}
                     </td>
                     <td class="am-hide-sm-only">
-                            ${subjectProduct.product.serial}
+                            ${subjectProductModel.productModel.serial}
 
                     </td>
 
                 </tr>
+                </c:if>
             </c:forEach>
             </tbody>
         </table>
@@ -49,13 +51,13 @@
 </div>
 
 <script>
-    function removeSubjectProduct(subjectId,productId,subjectProductId){
+    function removeSubjectProduct(subjectId,productModelId,subjectProductModelId){
         $.ajax({
             type: "get",
             url: '<c:url value="/product/linkSubject.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:"0"},
+            data:{subjectId:subjectId,productModelId:productModelId,subjectProductModelId:subjectProductModelId,status:"0"},
             success: function (data) {
                 $("#"+data).remove();
 
