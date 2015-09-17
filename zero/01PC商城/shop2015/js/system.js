@@ -140,6 +140,4 @@ $(function(){
             $(this).parents('.nav-item').find('.ul-list')
         })
     })();
-
-
 })
