@@ -36,5 +36,5 @@ public class OrganizationConst {
     public static final Integer ROLE_SUPER_PERMISSION_TRUE = 1; //具有超级权限
     public static final Integer ROLE_SUPER_PERMISSION_FALSE = 2; //不具有超级权限
 
-
+    public static final String imgBasePath = "http://master3.efeiyi.com/";
 }
