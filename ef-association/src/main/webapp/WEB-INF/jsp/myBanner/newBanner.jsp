@@ -38,8 +38,6 @@
         </c:if>
         <input value="banner" name="group"
                type="hidden"/>
-        <input value="${object.status}" name="status"
-               type="hidden"/>
         <div class="am-form-group">
             <label name="title" for="title" class="am-u-sm-3 am-form-label">标题/title
                 <small>*</small>

@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
+import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
@@ -58,30 +59,31 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/myEfeiyi/list.do"})
     public String listPruchaseOrder(HttpServletRequest request, Model model) throws Exception {
         String orderStatus = request.getParameter("status");
+        model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
         int c = 0;
         if (orderStatus == null) {
-            xQuery = new XQuery("plistPurchaseOrder_default", request);
+            xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
             c = Integer.parseInt(orderStatus);
             switch (c) {
                 case 1:
-                    xQuery = new XQuery("plistPurchaseOrder_default1", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default1", request, 10);
                     break;
                 case 5:
-                    xQuery = new XQuery("plistPurchaseOrder_default5", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default5", request, 10);
                     break;
                 case 9:
-                    xQuery = new XQuery("plistPurchaseOrder_default9", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default9", request, 10);
                     break;
                 case 13:
-                    xQuery = new XQuery("plistPurchaseOrder_default13", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default13", request, 10);
                     break;
                 case 17:
-                    xQuery = new XQuery("plistPurchaseOrder_default17", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default17", request, 10);
                     break;
                 default:
-                    xQuery = new XQuery("plistPurchaseOrder_default", request);
+                    xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
             }
 
         }
@@ -111,20 +113,19 @@ public class PurchaseOrderController extends BaseController {
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("orderId",orderId);
-        String hql="from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("orderId", orderId);
+        String hql = "from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
         PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        String pd="null";
-        String serial="null";
-        if(purchaseOrderDelivery!=null){
-            pd=purchaseOrderDelivery.getLogisticsCompany();
-            serial=purchaseOrderDelivery.getSerial();
+        String pd = "null";
+        String serial = "null";
+        if (purchaseOrderDelivery != null) {
+            pd = purchaseOrderDelivery.getLogisticsCompany();
+            serial = purchaseOrderDelivery.getSerial();
         }
-        model.addAttribute("purchaseOrderDelivery",purchaseOrderDelivery);
+        model.addAttribute("purchaseOrderDelivery", purchaseOrderDelivery);
         String content = "";
-        try
-        {
+        try {
             URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + pd + "&nu=" + serial);
             URLConnection con = url.openConnection();
             con.setAllowUserInteraction(false);
@@ -132,69 +133,35 @@ public class PurchaseOrderController extends BaseController {
             byte b[] = new byte[10000];
             int numRead = urlStream.read(b);
             content = new String(b, 0, numRead);
-            while (numRead != -1)
-            {
+            while (numRead != -1) {
                 numRead = urlStream.read(b);
-                if (numRead != -1)
-                {
+                if (numRead != -1) {
                     String newContent = new String(b, 0, numRead, "UTF-8");
                     content += newContent;
                 }
             }
             urlStream.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.print(content);
         model.addAttribute("content", content);
 
-    return "/purchaseOrder/purchaseOrderView";
+        return "/purchaseOrder/purchaseOrderView";
     }
 
     @RequestMapping({"/pay/alipay/{orderId}"})
     public String aliPay(HttpServletRequest request, Model model, @PathVariable String orderId) {
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        String resultHtml = paymentManager.alipay(purchaseOrder, purchaseOrder.getTotal().floatValue());
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        String resultHtml = paymentManager.alipay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
         model.addAttribute("resultHtml", resultHtml);
         return "/order/alipay";
     }
 
-    //
-//    {"transactionType":"PAY","retryCounter":10,"transactionFee":1,"tradeSuccess":tru
-//        e,"notifyUrl":"http://master4.efeiyi.com/ef-website/order/pay/alipay/callback","
-//        channelType":"ALI","optional":{},"messageDetail":{"bc_appid":"130498c1-8928-433b
-//            -a01d-c26420f41818_7bba2e15-90f6-4274-b56c-291302825d82","discount":"0.00","paym
-//        ent_type":"1","subject":"非遗产品","trade_no":"2015082500001000370059468325","bu
-//        yer_email":"fullclass@sohu.com","gmt_create":"2015-08-25 17:57:30","notify_type"
-//        :"trade_status_sync","quantity":"1","out_trade_no":"idr6gvdc30c2v1yt","seller_id
-//        ":"2088911195111171","notify_time":"2015-08-25 17:57:46","trade_status":"TRADE_S
-//        UCCESS","is_total_fee_adjust":"N","total_fee":"0.01","gmt_payment":"2015-08-25 1
-//        7:57:46","seller_email":"feiyipark@ich-park.com","price":"0.01","buyer_id":"2088
-//        302138690372","notify_id":"6973870d15793850425d02d63a53927942","use_coupon":"N",
-//        "sign_type":"MD5","sign":"70af79b510f7e4ca6876523029df02e6","tradeSuccess":true}
-//    ,"transactionId":"idr6gvdc30c2v1yt","sign":"9a0c2d275615c5369ada83aa18391fb8","t
-//    imestamp":1440498660000}
+
     @RequestMapping({"/pay/alipay/callback"})
     @ResponseBody
     public String aliPayCallback(HttpServletRequest request) throws IOException {
-        //获得返回参数
-//
-//        String resultJson = "{\"transactionType\":\"PAY\",\"retryCounter\":10,\"transactionFee\":1,\"tradeSuccess\":tru" +
-//                "e,\"notifyUrl\":\"http://master4.efeiyi.com/ef-website/order/pay/alipay/callback\",\"" +
-//                "channelType\":\"ALI\",\"optional\":{},\"messageDetail\":{\"bc_appid\":\"130498c1-8928-433b" +
-//                "-a01d-c26420f41818_7bba2e15-90f6-4274-b56c-291302825d82\",\"discount\":\"0.00\",\"paym" +
-//                "ent_type\":\"1\",\"subject\":\"非遗产品\",\"trade_no\":\"2015082500001000370059468325\",\"bu" +
-//                "yer_email\":\"fullclass@sohu.com\",\"gmt_create\":\"2015-08-25 17:57:30\",\"notify_type\"" +
-//                ":\"trade_status_sync\",\"quantity\":\"1\",\"out_trade_no\":\"idr6gvdc30c2v1yt\",\"seller_id" +
-//                "\":\"2088911195111171\",\"notify_time\":\"2015-08-25 17:57:46\",\"trade_status\":\"TRADE_S" +
-//                "UCCESS\",\"is_total_fee_adjust\":\"N\",\"total_fee\":\"0.01\",\"gmt_payment\":\"2015-08-25 1" +
-//                "7:57:46\",\"seller_email\":\"feiyipark@ich-park.com\",\"price\":\"0.01\",\"buyer_id\":\"2088" +
-//                "302138690372\",\"notify_id\":\"6973870d15793850425d02d63a53927942\",\"use_coupon\":\"N\"," +
-//                "\"sign_type\":\"MD5\",\"sign\":\"70af79b510f7e4ca6876523029df02e6\",\"tradeSuccess\":true}" +
-//                ",\"transactionId\":\"idr6gvdc30c2v1yt\",\"sign\":\"9a0c2d275615c5369ada83aa18391fb8\",\"t" +
-//                "imestamp\":1440498660000}";
         try {
 
 //
@@ -229,10 +196,12 @@ public class PurchaseOrderController extends BaseController {
 //            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
 
 
-                PurchaseOrderPayment purchaseOrderPayment = (PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentId);
-                purchaseOrderPayment.setTransactionNumber(transactionNumber);
+                PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentId);
+                purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                 //@TODO 修改订单状态
-                PurchaseOrder purchaseOrder = purchaseOrderPayment.getPurchaseOrder();
+                PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+
+
                 if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                     //同时修改子订单状态
                     for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
@@ -243,7 +212,7 @@ public class PurchaseOrderController extends BaseController {
 
 
                 purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
-                baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+                baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
             }
@@ -302,7 +271,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         String result;
         //1、网页授权后获取传递的code，用于获取openId
         String code = request.getParameter("code");
@@ -321,7 +290,7 @@ public class PurchaseOrderController extends BaseController {
             throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
-        JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrder, purchaseOrder.getTotal().floatValue(), openid);
+        JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue(), openid);
         model.addAttribute("appId", jsonStr.getString("appId"));
         model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
         model.addAttribute("pk", jsonStr.getString("package"));
@@ -333,9 +302,9 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/weixin/native/{orderId}"})
     public String wxPayNative(@PathVariable String orderId, Model model) {
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        String codeUrl = paymentManager.wxNativePay(purchaseOrder, purchaseOrder.getTotal().floatValue());
-        model.addAttribute("order", purchaseOrder);
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        String codeUrl = paymentManager.wxNativePay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue());
+        model.addAttribute("order", purchaseOrderPaymentDetails);
         model.addAttribute("codeUrl", codeUrl);
         return "/order/wxNative";
     }
@@ -367,23 +336,26 @@ public class PurchaseOrderController extends BaseController {
 
         purchaseOrder.setTenant(tenantList.get(0));
         purchaseOrder.setTotal(cart.getTotalPrice());
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
         purchaseOrderProduct.setProductModel(productModel);
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
-        purchaseOrderProduct.setPurchaseAmount(productModel.getAmount());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+        productModel.setAmount(productModel.getAmount() - 1);
+        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
 
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List addressList = baseManager.listPageInfo(xQuery).getList();
+        List addressList = baseManager.listObject(xQuery);
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
 
-        return "/purchaseOrder/purchaseOrderConfirm" ;
+        return "/purchaseOrder/purchaseOrderConfirm";
     }
 
 
@@ -433,6 +405,7 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
                 purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
                 Product product = productModel.getProduct();
                 Tenant tenant = product.getTenant();
@@ -457,27 +430,43 @@ public class PurchaseOrderController extends BaseController {
 
         model.addAttribute("tenantList", tenantList);
         purchaseOrder.setTotal(cart.getTotalPrice());
+        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+//        //测试部分
+//
+//        Coupon coupon = new Coupon();
+//        coupon.setId("idlany3zf4hbs5uz");
+//
+//        purchaseOrder.setCoupon(coupon);
+
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder); //生成父订单
 
         //拆分订单
         if (tenantList.size() > 1) {
             for (Tenant tenantTemp : tenantList) {
                 XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
-                xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
-                xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+                xSaveOrUpdateTemp.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+                xSaveOrUpdateTemp.getParamMap().put("user.id", null);
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
                 purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
                 purchaseOrderTemp.setTenant(tenantTemp);
+                BigDecimal bigDecimal = new BigDecimal(0);
                 for (CartProduct cartProductTemp : cartProductList) {
+
                     if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId()) && cartProductTemp.getIsChoose().equals("1")) {
                         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
                         purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
                         purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
                         purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
+                        bigDecimal.add(cartProductTemp.getProductModel().getPrice());
                         purchaseOrderProduct.setPurchaseOrder(purchaseOrderTemp);
                         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
                     }
                 }
+
+                //计算子订单的价格
+                purchaseOrderTemp.setOriginalPrice(bigDecimal);
+                purchaseOrderTemp.setTotal(bigDecimal);
+
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
             }
         } else {
@@ -519,11 +508,12 @@ public class PurchaseOrderController extends BaseController {
         String addressId = request.getParameter("address");
         String message = request.getParameter("message");
 
+
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
 
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("")&& messageTemp.length()==2) {
+            if (messageTemp != null && !messageTemp.equals("") && messageTemp.length() == 2) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
@@ -534,6 +524,10 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
         purchaseOrder.setConsumerAddress(consumerAddress);
+        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
+            baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
+        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
@@ -547,24 +541,65 @@ public class PurchaseOrderController extends BaseController {
         }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
+
+        //生成支付记录以及支付详情
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("1");
+        try {
+            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String userid = AuthorizationUtil.getMyUser().getId();
+        User user = (User) baseManager.getObject(User.class.getName(), userid);
+        purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        //支付详情
+        if (purchaseOrder.getCoupon() != null) {
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+            purchaseOrderPaymentDetails.setCoupon(coupon);
+            purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
+            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        }
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+        if (purchaseOrder.getCoupon() != null) {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+        }else {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+        }
+        purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+        baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+
         //@TODO 清除购物车
         XQuery xQuery = new XQuery("listCart_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         Cart realCart = (Cart) list.get(0);
         realCart.setTotalPrice(new BigDecimal(0));
-        baseManager.saveOrUpdate(Cart.class.getName(),realCart);
+        baseManager.saveOrUpdate(Cart.class.getName(), realCart);
         for (CartProduct cartProductTemp : realCart.getCartProductList()) {
-            baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+            if (cartProductTemp.getIsChoose().equals("1")) {
+                baseManager.remove(CartProduct.class.getName(), cartProductTemp.getId());
+            }
         }
 
 
         if (payment.equals("1")) {//支付宝
-            return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
+            return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
-                return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+                return "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
             } else {
-                return "redirect:/order/pay/weixin/native/" + purchaseOrder.getId();
+                return "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
         }
         return "redirect:/order/choosePayment/" + purchaseOrder.getId();

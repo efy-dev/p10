@@ -10,7 +10,7 @@
 <html>
 <head>
     <title></title>
-    <script src="/scripts/PCDSelect.js"></script>
+    <script src="<c:url value='/scripts/PCDSelect.js'/>"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -28,26 +28,26 @@
         <div class="am-form-group">
             <label name="name" for="name" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}" required="true">
+                <input type="text" name="name" id="name" placeholder="商户名称" value="${object.name}" title="商户名称" required="true">
             </div>
         </div>
         <div id="pcdDiv">
         <div class="am-form-group">
             <label name="province" for="province" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="province.id" id="province"></select>
+                <select name="province.id" id="province" title="省份" required="true"></select>
             </div>
         </div>
         <div class="am-form-group">
             <label name="city" for="city" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="city.id" id="city"></select>
+                <select name="city.id" id="city" title="市" required="true"></select>
             </div>
         </div>
         <div class="am-form-group">
             <label name="district" for="district" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="district.id" id="district"></select>
+                <select name="district.id" id="district" title="区县" required="true"></select>
             </div>
         </div>
         </div>

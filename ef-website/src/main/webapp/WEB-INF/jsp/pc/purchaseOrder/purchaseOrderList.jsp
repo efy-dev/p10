@@ -5,6 +5,7 @@
 <html class="no-js">
 <head>
   <script>
+
     function func(o){
       window.location.href="<c:url value="/order/myEfeiyi/list.do?status="/>"+o;
     }
@@ -87,7 +88,7 @@
 </div>
 <div class="list-pro wh1" id="orderNum">
 <c:forEach items="${orderList}" var="order">
-  <%--<c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() != 0}">--%>
+  <c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() == 0}">
       <table class="list-pro-table">
         <tr>
           <th colspan="6">
@@ -102,9 +103,9 @@
               <table class="item">
                 <td width="237">
                   <div class="cols1">
-                    <img src="<c:url value="${op.productModel.product.picture_url}"/>" alt="">
+                    <img src="http://pro.efeiyi.com/${op.productModel.productPicture.pictureUrl}@!product-icon" alt="">
                     <div class="info">
-                      <p><a href="#">${op.productModel.product.category.name}</a></p>
+                      <p><a href="#">${op.productModel.product.project.projectCategory.name}</a></p>
                       <p><a href="#">${op.productModel.product.name}</a></p>
                     </div>
                   </div>
@@ -148,7 +149,7 @@
           </c:if>
         </tr>
       </table>
-  <%--</c:if>--%>
+  </c:if>
 </c:forEach>
 </div>
 </div>
@@ -163,8 +164,8 @@
 <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/order/myEfeiyi/list.do">
   <ming800:pcPageParam name="conditions"
                        value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
-  <ming800:pcPageParam name="sort"
-                       value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+ <ming800:pcPageParam name="status"
+                       value='<%=request.getParameter("status")!=null ? request.getParameter("status") : ""%>'/>
 </ming800:pcPageList>
 </c:if>
 

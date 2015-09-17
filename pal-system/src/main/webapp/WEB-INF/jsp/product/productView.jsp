@@ -151,7 +151,7 @@
     </div>
 </c:if>
 <%-- 商品溯源信息 --%>
-<c:if test="${!empty object.tenantProductSeries}">
+<c:if test="${!empty object.tenantProductSeries.craft}">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf">
             <strong class="am-text-primary am-text-lg">溯源信息</strong>

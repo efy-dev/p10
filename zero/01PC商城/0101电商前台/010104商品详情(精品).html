@@ -569,9 +569,9 @@ $(function(){
         var bodyHtml=$('body');//页面
         var wH=bodyHtml.height();//页面高度
         //如果页面刷新则页面滚动到最顶部
-//        if(bodyHtml.not(".scroll")){
-//            bodyHtml.animate({'scrollTop':0},100);
-//        }
+        if(bodyHtml.not(".scroll")){
+            bodyHtml.animate({'scrollTop':0},100);
+        }
         //悬浮导航
         navLi.click(function(){
             index=$(this).index();

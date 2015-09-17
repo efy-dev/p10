@@ -121,16 +121,16 @@
                         <td width="345">属性名</td>
                         <td width="377">属性值</td>
                     </tr>
-                    <c:forEach items="${product.productSeries.productSeriesPropertyNameList}" var="propertyName"
-                               varStatus="status">
-                        <c:forEach items="${product.productPropertyValueList}" var="propertyValue"
-                                   begin="${status.index}" end="${status.index}">
+                    <%--<c:forEach items="${product.productSeries.productSeriesPropertyNameList}" var="propertyName"--%>
+                               <%--varStatus="status">--%>
+                        <c:forEach items="${product.productPropertyValueList}" var="propertyValue">
+                                   <%--begin="${status.index}" end="${status.index}">--%>
                             <tr>
-                                <td>${propertyName.name}</td>
+                                <td>${propertyValue.productSeriesPropertyName.name}</td>
                                 <td>${propertyValue.value}</td>
                             </tr>
                         </c:forEach>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
                 </table>
             </div>
         </div>
@@ -240,6 +240,7 @@
 
     <c:if test="${result.authenticity != -1}">
     <%--var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR&ip=" + "${ip}";--%>
+    var xx=0;
     var url = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
     $.ajax({
         type: "get",
@@ -248,7 +249,6 @@
         dataType: "jsonp",
         jsonp: "callback",
         jsonpCallback: "jsonpCallback",
-        success: jsonpCallback,
         error: jsonpCallback2,
     });
     function jsonpCallback(data) {
