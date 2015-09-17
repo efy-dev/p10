@@ -24,22 +24,22 @@
             <fields>
                 <field name="group" label="分类" inputType="text">
                     <statusType fieldName="level">
-                        <item label="非遗项目" value="1"/>
-                        <item label="非遗传承人" value="2"/>
+                        <item label="非遗项目" value="project"/>
+                        <item label="非遗传承人" value="inheritors"/>
                         <item label="协会新闻" value="orgNews"/>
                         <item label="行业新闻" value="industryNews"/>
-                        <item label="公告管理" value="4"/>
-                        <item label="协会介绍" value="5"/>
-                        <item label="协会章程" value="6"/>
-                        <item label="联系方式" value="7"/>
-                        <item label="非遗法" value="8"/>
-                        <item label="非遗保护政策" value="9"/>
-                        <item label="非遗申报指南" value="10"/>
-                        <item label="各地协会" value="11"/>
-                        <item label="会员申请指南" value="12"/>
-                        <item label="会员管理" value="13"/>
-                        <item label="在线申报管理" value="14"/>
-                        <item label="角色管理" value="15"/>
+                        <item label="公告管理" value="notice"/>
+                        <item label="协会介绍" value="orgIntro"/>
+                        <item label="协会章程" value="orgRules"/>
+                        <item label="联系方式" value="contactInfo"/>
+                        <item label="非遗法" value="law"/>
+                        <item label="非遗保护政策" value="policy"/>
+                        <item label="非遗申报指南" value="guide"/>
+                        <item label="各地协会" value="local"/>
+                        <item label="会员申请指南" value="userGuide"/>
+                        <item label="会员管理" value="userManage"/>
+                        <item label="在线申报管理" value="online"/>
+                        <item label="角色管理" value="role"/>
                     </statusType>
                 </field>
             </fields>

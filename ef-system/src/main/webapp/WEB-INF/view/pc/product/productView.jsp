@@ -262,6 +262,18 @@
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
+                                                <c:choose>
+                                                    <c:when test="${productPicture.status == '9'}">
+                                                        <a href="javascript:void(0);" status="-1" onclick="updatePictureStatus(this,'${productPicture.id}','-1')">推荐图片</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,'${productPicture.id}','9')">设为推荐图片</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+
+                                            </dd>
+                                            <dd style="width: 100%;text-align: center;" >
 
                                                     <select style="width: 85%;" onchange="setModelPic(this,'${productPicture.id}')">
                                                         <option value="0">设置商品规格图片</option>
@@ -608,6 +620,17 @@ var modelIds = [];
 //                            '</a>';
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
+                if(status == '9'){
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','-1')");
+                    $(obj).attr("status","-1");
+                    $(obj).text("推荐图片");
+                }
+                if(status == '-1'){
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','9')");
+                    $(obj).attr("status","9");
+                    $(obj).text("设为推荐图片");
+                }
+
             }
         });
     }

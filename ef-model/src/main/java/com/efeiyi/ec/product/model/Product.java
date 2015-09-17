@@ -38,6 +38,22 @@ public class Product implements Serializable{
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
     private List<ProductModel> productModelList;
+
+
+    @Transient
+    public ProductPicture getProductPicture(){
+        ProductPicture productPicture = null;
+        List<ProductPicture> productPictureList = getProductPictureList();
+        for (ProductPicture productPictureTemp : productPictureList){
+            if (productPictureTemp.getStatus().equals("9")){
+                productPicture = productPictureTemp;
+                break;
+            }
+        }
+        return productPicture;
+    }
+
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

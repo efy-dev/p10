@@ -72,7 +72,19 @@
                            value="${object.logoUrl}">
                 </div>
                 <c:if test="${!empty object.logoUrl}">
-                    <img src="http://tenant.efeiyi.com/${object.logoUrl}@!tenant-manage-photo">
+                    <img src="http://pro.efeiyi.com/${object.logoUrl}@!product-model">
+                </c:if>
+            </div>
+
+            <div class="am-form-group">
+                <label for="pictureUrl" class="am-u-sm-3 am-form-label">商家首页图片</label>
+
+                <div class="am-u-sm-9">
+                    <input type="file" id="pictureUrl" name="pictureUrl" placeholder="pictureUrl"
+                           value="${object.pictureUrl}">
+                </div>
+                <c:if test="${!empty object.pictureUrl}">
+                    <img src="http://pro.efeiyi.com/${object.pictureUrl}@!product-model">
                 </c:if>
             </div>
 

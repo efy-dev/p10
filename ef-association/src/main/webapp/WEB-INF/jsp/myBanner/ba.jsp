@@ -16,7 +16,7 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
-  <input onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&banner.group=${banner.group}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
+  <input onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&group=${group}&banner.group=${banner.group}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
          type="button" class="am-btn am-btn-default am-btn-xs"
          style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建" />
 </div>
@@ -35,7 +35,7 @@
         <td>
           <div class="am-btn-toolbar">
             <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-              <button onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
+              <button onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&group=${group}&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
                       class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
               <button onclick="myConfirm('<c:url value="/myBanner/removeBanner.do?qm=removeBanner&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>', 'D')"
                       class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>

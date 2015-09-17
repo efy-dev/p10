@@ -321,6 +321,9 @@ public class ProductController extends BaseController {
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
             }
+            if("-1".equals(status)){
+                status = "1";
+            }
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
@@ -389,7 +392,10 @@ public class ProductController extends BaseController {
             if ("0".equals(modelId)) {
                 productPicture.setProductModel(null);
             } else {
-                productPicture.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId));
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
+                productModel.setProductModel_url(productPicture.getPictureUrl());
+                baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+                productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {

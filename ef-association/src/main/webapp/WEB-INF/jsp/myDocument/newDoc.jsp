@@ -96,7 +96,7 @@
             </label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="group" dataType="announcements.group"
+                <ming800:status name="group" dataType="document.group"
                                 checkedValue="${object.group}"
                                 type="select"/>
             </div>
