@@ -195,7 +195,7 @@
 
     var payment = "1";
     var consumerAddress = "";
-    if ($(".default-active") != null) {
+    if ($(".activeFlag") != null) {
         consumerAddress = $(".activeFlag").attr("id");
     }
 
