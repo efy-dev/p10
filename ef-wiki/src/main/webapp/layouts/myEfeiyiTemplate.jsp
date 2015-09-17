@@ -28,7 +28,7 @@
 <jsp:include flush="true"
              page="/getMenu.do?jmenuId=nav&jnodeId=nav&resultPage=/common/nav&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 <sitemesh:write property='body'/>
-<%--<%@include file="mobileFooter.jsp" %>--%>
+<%@include file="mobileFooter.jsp" %>
 <%
 }else{
 %>

@@ -141,7 +141,8 @@
                     <th class="table-title">订单号</th>
                     <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
-                    <%--<th class="table-title">支付类型</th>--%>
+                    <th class="table-title">总额/实付金额</th>
+                <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
@@ -194,6 +195,9 @@
                             </c:forEach>
 
                         </td>
+
+                        <td class="am-hide-sm-only">${purchaseOrder.total} <br>
+                        ${purchaseOrder.getRealPayMoney()}</td>
                         <%--<td class="am-hide-sm-only">--%>
                             <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
                                 <%--<span style="margin-left: 10px;">--%>

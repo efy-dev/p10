@@ -5,6 +5,7 @@
   Time: 18:31
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -31,9 +32,8 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="../shop2015/css/amazeui.min.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="../shop2015/css/app.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="../shop2015/css/cyclopedia.css?v=20150831">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/app.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/cyclopedia.css?v=20150831'/>">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -76,15 +76,13 @@
         <div class="site">
           <div class="menu-page">
             <ul class="list-site">
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
+              <li>
+                <a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
+              <c:if test="${!empty ProjectCategoryList}">
+                <c:forEach var="projectcategory" items="${ProjectCategoryList}">
+                  <li><a href="#">${projectcategory.name}</a></li>
+                </c:forEach>
+              </c:if>
             </ul>
           </div>
         </div>
@@ -94,14 +92,11 @@
           <div class="menu-page">
             <ul class="list-site">
               <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
+              <li><a href="#">联合国</a></li>
+              <li><a href="#">国际级</a></li>
+              <li><a href="#">国家级</a></li>
+              <li><a href="#">省级</a></li>
+              <li><a href="#">市级</a></li>
             </ul>
           </div>
         </div>
@@ -111,14 +106,11 @@
           <div class="menu-page">
             <ul class="list-site">
               <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">全部啊啊</a></li>
-              <li><a href="#">全部啊啊</a></li>
+              <c:if test="${!empty AddressProvinceList}">
+                <c:forEach var="AddressProvince" items="${AddressProvinceList}">
+                  <li><a href="#">${AddressProvince.name}</a></li>
+                </c:forEach>
+              </c:if>
             </ul>
           </div>
         </div>
@@ -127,7 +119,7 @@
   </div>
 </div>
 <!--地区-->
-<div class="login-reg">
+<%--<div class="login-reg">
   <div class="bd logined">李先生8899，<a class="btn-exit" href="#退出">退出</a></div>
   <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
   <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
@@ -143,20 +135,18 @@
   </div>
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
-<!--//End--footer-->
+<!--//End--footer-->--%>
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../shop2015/js/jquery.min.js"></script>
+
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
 <!--自定义js--Start-->
-<script src="../shop2015/js/system.js?v=20150831"></script>
-<script src="../shop2015/js/cyclopedia.js?v=20150831"></script>
+<script src="<c:url value='/scripts/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

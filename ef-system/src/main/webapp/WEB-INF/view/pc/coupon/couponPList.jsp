@@ -42,6 +42,7 @@
                     <th class="table-set">操作</th>
                     <th class="table-title">优惠券编号</th>
                     <th class="table-title">优惠券批次</th>
+                    <th class="table-title">优惠价格</th>
                     <th class="table-title">使用限制价格</th>
                     <th class="table-title">优惠券状态</th>
                     <th class="table-title">生效日期</th>
@@ -66,6 +67,7 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a>
                         </td>
+                        <td class="am-hide-sm-only">${coupon.couponBatch.price}</td>
                         <td class="am-hide-sm-only">${coupon.couponBatch.priceLimit}</td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="status" dataType="coupon.status"
