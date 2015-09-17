@@ -46,6 +46,15 @@ public class Master implements Serializable {
     private List<MasterRecommended> masterRecommendedList;//推荐
     private String projectName ;
     private String levelName;
+    private String masterSpeech;
+    @Column(name = "master_speech")
+    public String getMasterSpeech() {
+        return masterSpeech;
+    }
+
+    public void setMasterSpeech(String masterSpeech) {
+        this.masterSpeech = masterSpeech;
+    }
 
     @Transient
     public String getProjectName() {
@@ -56,7 +65,18 @@ public class Master implements Serializable {
         this.projectName = projectName;
     }
 
-
+    @JsonIgnore
+    @Transient
+    public MasterProject getMainProjectName() {
+        List<MasterProject>  masterProjectList = getMasterProjectList();
+        MasterProject mainProject = null;
+        for (MasterProject project : masterProjectList){
+            if (project.getStatus().equals("1")){
+                mainProject = project;
+            }
+        }
+        return mainProject;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "master")

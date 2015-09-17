@@ -6,6 +6,7 @@ import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
 import com.efeiyi.ec.system.project.dao.TenantProjectDao;
+import com.efeiyi.ec.system.project.service.ProjectManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.efeiyi.ec.tenant.model.TenantProject;
@@ -28,6 +29,9 @@ import java.util.List;
 public class ProjectController extends BaseController {
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private ProjectManager projectManager;
 
     @Autowired
     private ProductModelManager productModelManager;
@@ -89,29 +93,29 @@ public class ProjectController extends BaseController {
     @RequestMapping("/project/linkTenant.do")
     @ResponseBody
     public String linkTenant(String tenantId,String projectId,String tenantProjectId,String status){
-        TenantProject tenantProject = null;
-        try {
-            tenantProject = (TenantProject)baseManager.getObject(TenantProject.class.getName(),tenantProjectId);
-            if(tenantProject == null){
-                tenantProject = new TenantProject();
-                tenantProject.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-                tenantProject.setProject((Project) baseManager.getObject(Project.class.getName(), projectId));
-                tenantProject.setStatus("1");
-            }else {
-                if("0".equals(status)){
-                    tenantProject.setStatus("1");
-                }
-                if("1".equals(status)){
-                    tenantProject.setStatus("0");
-                }
-            }
-            baseManager.saveOrUpdate(TenantProject.class.getName(),tenantProject);
+        String id = "";
+          try {
 
+         id =  projectManager.linkTenant(tenantId,projectId,tenantProjectId,status);
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+        return  id;
+    }
+
+
+    @RequestMapping("/project/updateStatus.do")
+    @ResponseBody
+    public String updateStatus(String id,String status){
+        Project project = (Project)baseManager.getObject(Project.class.getName(),id);
+        try {
+             project.setStatus(status);
+            baseManager.saveOrUpdate(Project.class.getName(),project);
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  tenantProject.getId();
+        return  status;
     }
 
 }

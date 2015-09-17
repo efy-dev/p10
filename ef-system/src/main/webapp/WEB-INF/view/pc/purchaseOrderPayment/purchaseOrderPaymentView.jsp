@@ -54,6 +54,37 @@
         </table>
     </div>
 </div>
+
+<div class="am-u-sm-12 am-u-md-6">
+    <h4>支付记录详情</h4>
+</div>
+<div class="am-u-sm-12">
+    <table class="am-table am-table-striped am-table-hover table-main">
+        <thead>
+        <tr>
+            <th class="table-title">支付方式</th>
+            <th class="table-title">支付金额</th>
+            <th class="table-title">优惠券编号</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach items="${object.purchaseOrderPaymentDetailsList}" var="purchaseOrderPaymentDetails" >
+            <tr>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
+                                    checkedValue="${purchaseOrderPaymentDetails.payWay}"
+                                    type="normal"/>
+                </td>
+                <td class="am-hide-sm-only">${purchaseOrderPaymentDetails.money}</td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+
+    </table>
+</div>
+
 <div class="am-g">
     <div class="am-u-md-12">
         <table class="am-table am-table-bordered">

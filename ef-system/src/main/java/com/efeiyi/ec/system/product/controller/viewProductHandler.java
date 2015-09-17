@@ -22,9 +22,6 @@ public class viewProductHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
         modelMap.put("view",request.getParameter("view"));
-        if(request.getParameter("tenantId")!=null){
-            modelMap.put("tenantId",request.getParameter("tenantId"));
-        }
         return modelMap;
     }
 }

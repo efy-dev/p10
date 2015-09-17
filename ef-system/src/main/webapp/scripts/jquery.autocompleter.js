@@ -4,7 +4,7 @@
  * http://github.com/ArtemFitiskin/jquery-autocompleter 
  * 
  * Copyright 2014 Artem Fitiskin; MIT Licensed 
- */
+ */ 
 
 ;(function ($, window) {
     "use strict";
@@ -32,25 +32,25 @@
         })();
 
     /**
-     * @options
-     * @param source [(string|object)] <null> "URL to the server or a local object"
-     * @param empty [boolean] <true> "Launch if value is empty"
-     * @param limit [int] <10> "Number of results to be displayed"
-     * @param customClass [array] <[]> "Array with custom classes for autocompleter element"
-     * @param cache [boolean] <true> "Save xhr data to localStorage to avoid the repetition of requests"
-     * @param focusOpen [boolean] <true> "Launch autocompleter when input gets focus"
-     * @param hint [boolean] <false> "Add hint to input with first matched label, correct styles should be installed"
-     * @param selectFirst [boolean] <false> "If set to true, first element in autocomplete list will be selected automatically, ignore if changeWhenSelect is on"
-     * @param changeWhenSelect [boolean] <true> "Allows to change input value using arrow keys navigation in autocomplete list"
-     * @param highlightMatches [boolean] <false> "This option defines <strong> tag wrap for matches in autocomplete results"
-     * @param ignoredKeyCode [array] <[]> "Array with ignorable keycodes"
-     * @param customLabel [boolean] <false> "The name of object's property which will be used as a label"
-     * @param customValue [boolean] <false> "The name of object's property which will be used as a value"
+	 * @options
+	 * @param source [(string|object)] <null> "URL to the server or a local object"
+	 * @param empty [boolean] <true> "Launch if value is empty"
+	 * @param limit [int] <10> "Number of results to be displayed"
+	 * @param customClass [array] <[]> "Array with custom classes for autocompleter element"
+	 * @param cache [boolean] <true> "Save xhr data to localStorage to avoid the repetition of requests"
+	 * @param focusOpen [boolean] <true> "Launch autocompleter when input gets focus"
+	 * @param hint [boolean] <false> "Add hint to input with first matched label, correct styles should be installed"
+	 * @param selectFirst [boolean] <false> "If set to true, first element in autocomplete list will be selected automatically, ignore if changeWhenSelect is on"
+	 * @param changeWhenSelect [boolean] <true> "Allows to change input value using arrow keys navigation in autocomplete list"
+	 * @param highlightMatches [boolean] <false> "This option defines <strong> tag wrap for matches in autocomplete results"
+	 * @param ignoredKeyCode [array] <[]> "Array with ignorable keycodes"
+	 * @param customLabel [boolean] <false> "The name of object's property which will be used as a label"
+	 * @param customValue [boolean] <false> "The name of object's property which will be used as a value"
      * @param template [(string|boolean)] <false> "Custom template for list items"
      * @param offset [(string|boolean)] <false> "Source response offset, for example: response.items.posts"
-     * @param combine [function] <$.noop> "Returns an object which extends ajax data. Useful if you want to pass some additional server options"
-     * @param callback [function] <$.noop> "Select value callback function. Arguments: value, index"
-     */
+	 * @param combine [function] <$.noop> "Returns an object which extends ajax data. Useful if you want to pass some additional server options"
+	 * @param callback [function] <$.noop> "Select value callback function. Arguments: value, index"
+	 */
     var options = {
         source: null,
         empty: true,
@@ -160,7 +160,7 @@
                     // If has selected item & open - confirm it
                     if (data.$autocompleter.hasClass("open")) {
                         data.$autocompleter.find(".autocompleter-selected")
-                            .trigger("click.autocompleter");
+                                            .trigger("click.autocompleter");
                     }
 
                     // Restore original autocomplete attr
@@ -172,9 +172,9 @@
 
                     // Remove autocompleter & unbind events
                     data.$node.off(".autocompleter")
-                        .removeClass("autocompleter-node");
+                               .removeClass("autocompleter-node");
                     data.$autocompleter.off(".autocompleter")
-                        .remove();
+                                         .remove();
                 }
             });
         }
@@ -205,26 +205,26 @@
     }
 
     /**
-     * @method private
-     * @name _build
-     * @description Builds each instance
-     * @param $node [jQuery object] "Target jQuery object"
-     * @param opts [object] <{}> "Options object"
-     */
+	 * @method private
+	 * @name _build
+	 * @description Builds each instance
+	 * @param $node [jQuery object] "Target jQuery object"
+	 * @param opts [object] <{}> "Options object"
+	 */
     function _build($node, opts) {
         if (!$node.hasClass("autocompleter-node")) {
             // Extend options
             opts = $.extend({}, opts, $node.data("autocompleter-options"));
 
             var html = '<div class="autocompleter '+opts.customClass.join(' ')+'" id="autocompleter-'+(guid+1)+'">';
-            if (opts.hint) {
-                html += '<div class="autocompleter-hint"></div>';
-            }
-            html += '<ul class="autocompleter-list"></ul>';
-            html += '</div>';
+                if (opts.hint) {
+                    html += '<div class="autocompleter-hint"></div>';
+                }
+                html += '<ul class="autocompleter-list"></ul>';
+                html += '</div>';
 
             $node.addClass("autocompleter-node")
-                .after(html);
+                 .after(html);
 
             var $autocompleter = $node.next(".autocompleter").eq(0);
 
@@ -251,14 +251,14 @@
 
             // Bind autocompleter events
             data.$autocompleter.on("mousedown.autocompleter", ".autocompleter-item", data, _select)
-                .data("autocompleter", data);
+                                .data("autocompleter", data);
 
             // Bind node events
             data.$node.on("keyup.autocompleter", data, _onKeyup)
-                .on("keydown.autocompleter", data, _onKeydownHelper)
-                .on("focus.autocompleter", data, _onFocus)
-                .on("blur.autocompleter", data, _onBlur)
-                .on("mousedown.autocompleter", data, _onMousedown);
+                      .on("keydown.autocompleter", data, _onKeydownHelper)
+                      .on("focus.autocompleter", data, _onFocus)
+                      .on("blur.autocompleter", data, _onBlur)
+                      .on("mousedown.autocompleter", data, _onMousedown);
         }
     }
 
@@ -284,14 +284,14 @@
                                     response.push(source[item]);
                                     delete source[item];
                                 }
-                                break;
+                            break;
 
                             case 1:
                                 if (source[item].label.toUpperCase().search(query) !== -1) {
                                     response.push(source[item]);
                                     delete source[item];
                                 }
-                                break;
+                            break;
                         }
                     }
                 }
@@ -348,19 +348,19 @@
                         }
                     }
                 })
-                    .done(function (response) {
-                        // Get subobject from responce
-                        if (data.offset) {
-                            response = _grab(response, data.offset);
-                        }
-                        if (data.cache) {
-                            _setCache(this.url, response);
-                        }
-                        _response(response, data);
-                    })
-                    .always(function () {
-                        data.$autocompleter.removeClass('autocompleter-ajax');
-                    });
+                .done(function (response) {
+                    // Get subobject from responce
+                    if (data.offset) {
+                        response = _grab(response, data.offset);
+                    }
+                    if (data.cache) {
+                        _setCache(this.url, response);
+                    }
+                    _response(response, data);
+                })
+                .always(function () {
+                    data.$autocompleter.removeClass('autocompleter-ajax');
+                });
             }
         }
     }
@@ -799,14 +799,14 @@
 
             // Proccess to localStorage
             try {
-                localStorage.setItem(localStorageKey, JSON.stringify(cache));
+                  localStorage.setItem(localStorageKey, JSON.stringify(cache));
             } catch (e) {
-                var code = e.code || e.number || e.message;
-                if (code === 22) {
+                  var code = e.code || e.number || e.message;
+                  if (code === 22) {
                     _deleteCache();
-                } else {
+                  } else {
                     throw(e);
-                }
+                  }
             }
         }
     }
@@ -835,7 +835,7 @@
     }
 
     /**
-     * @method private
+	 * @method private
      * @name _deleteCache
      * @description Delete all plugin cache from localStorage
      */

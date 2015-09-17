@@ -2,10 +2,7 @@ package com.efeiyi.ec.system.product.controller;
 
 
 import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
@@ -30,10 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/18.
@@ -83,17 +77,17 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping("/recommendedProductModel.do")
-    public String recommendedProduct(HttpServletRequest request){
+    public String recommendedProduct(HttpServletRequest request) {
         String id = request.getParameter("id");
 
         String categoryId = request.getParameter("categoryId");
 
-        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),id);
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), id);
         int maxValue = productModelManager.getMaxRecommendedIndex(categoryId);
 
         productModel.setRecommendIndex(maxValue + 1);
 
-        baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
 
         return "redirect:/basic/xm.do?qm=plistProductModel_index";
 
@@ -103,30 +97,37 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/uploadify.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
         String productId = request.getParameter("productId");
-        Product product = (Product)baseManager.getObject(Product.class.getTypeName(),productId);
+        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
                 productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);
-                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(),productPicture);
-                data = productPicture.getId()+":"+url;
-            }catch (Exception e){
+                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                data = productPicture.getId() + ":" + url;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -137,38 +138,92 @@ public class ProductController extends BaseController {
 
     }
 
-    @RequestMapping("/getImg.do")
+    @RequestMapping("/subjectUploadify.do")
     @ResponseBody
-    public String getImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String subjectUploadifyImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String data = "";
 
+        String subjectId = request.getParameter("subjectId");
+
+        Subject subject = null;
+        if(!"".equals(subjectId)){
+                subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
+        }
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            SubjectPicture subjectPicture = new SubjectPicture();
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            url = "subject/" + fileName.substring(0, index) + identify + ".jpg";
+            try {
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+//                if(subject != null && "2".equals(request.getParameter("status"))) {
+//                    subjectPicture.setPictureUrl(url);
+//                    subjectPicture.setSubject(subject);
+//                    baseManager.saveOrUpdate(SubjectPicture.class.getTypeName(), subjectPicture);
+//
+//                    data = subjectPicture.getId() + ":" + url;
+//                 }else {
+//                    data = url;
+//                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        System.out.print(url);
+        return url;
+
+
+    }
+
+    @RequestMapping("/getImg.do")
+    @ResponseBody
+    public String getImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url;
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            String fileName = mf.getOriginalFilename();//获取原文件名
+            url = "product/" + fileName.substring(0, fileName.indexOf(".jpg")) + identify + ".jpg";
             aliOssUploadManager.uploadFile(mf, "tenant", url);
         }
         return "";
 
     }
 
-    /**获取项目 masterId*/
+    /**
+     * 获取项目 masterId
+     */
     @RequestMapping("/getProjectList.do")
     @ResponseBody
-    public List<MasterProject> getProjectByMasterId(String masterId,HttpServletRequest request) {
+    public List<MasterProject> getProjectByMasterId(String masterId, HttpServletRequest request) {
 
         List<MasterProject> list = null;
         try {
-            XQuery xQuery = new XQuery("listMasterProject_default",request);
+            XQuery xQuery = new XQuery("listMasterProject_default", request);
             xQuery.put("master_id", masterId);
             list = baseManager.listObject(xQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -176,99 +231,209 @@ public class ProductController extends BaseController {
     }
 
     @RequestMapping("/saveNewProduct.do")
-    public String saveNewProduct(Product product,ProductDescription productDescription,
-                                 ProductPicture productPicture,ProductModelBean productModelBean,
+    public String saveNewProduct(Product product, ProductDescription productDescription,
+                                 ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
-                                 String resultPage,Model model,String step)  {
+                                 String resultPage, Model model, String step) {
 
-        model.addAttribute("view",request.getParameter("view"));
-
-
-
-        if("product".equals(step)){
+        model.addAttribute("view", request.getParameter("view"));
 
 
-            model.addAttribute("object",productManager.saveProduct(product));
+        if ("product".equals(step)) {
 
-        }else if("description".equals(step)){
+//            try {
+//                Product product1 =        productManager.saveProduct(product);
+//                System.out.print(product1.getMaster().getName());
+//            }catch (Exception e){
+//
+//            }
+            Product temProduct = productManager.saveProduct(product);
+            //  model.addAttribute("object",productManager.saveProduct(product));
+            //  &tenantId=${tenantId}&masterId=${masterId}&id=
+            String tenantId = "0";
+            String masterId = "0";
+            if (temProduct.getTenant() != null) {
+                tenantId = temProduct.getTenant().getId();
+            }
+            if (temProduct.getMaster() != null) {
+                masterId = temProduct.getMaster().getId();
+            }
+            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
 
-            model.addAttribute("object",productManager.saveProductDescription(productDescription));
+        } else if ("description".equals(step)) {
 
-        }else  if("model".equals(step)){
+            model.addAttribute("object", productManager.saveProductDescription(productDescription));
+
+        } else if ("model".equals(step)) {
             try {
-                model.addAttribute("object",productManager.saveProductModel(productModelBean));
-            }catch (Exception e){
+                model.addAttribute("object", productManager.saveProductModel(productModelBean));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if("picture".equals(step)){
-            Product productTemp = (Product)baseManager.getObject(Product.class.getName(),request.getParameter("productId"));
-            model.addAttribute("object",productTemp);
+        } else if ("picture".equals(step)) {
+            Product productTemp = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("productId"));
+            model.addAttribute("object", productTemp);
         }
+
+        return resultPage;
+    }
+
+    @RequestMapping("/saveSubject.do")
+    public String saveNewProduct(Subject subject, String[] flag,String[] spId,String[] subjectPicture,
+                                 HttpServletRequest request,
+                                 String resultPage) {
+
+                try {
+                   productManager.saveSubject(subject,flag,spId,subjectPicture);
+
+                }catch (Exception e){
+                   e.printStackTrace();
+                }
+
+
+
 
         return resultPage;
     }
 
     @RequestMapping("/deletePicture.do")
     @ResponseBody
-    public String deletePicture(String id){
+    public String deletePicture(String id) {
         try {
-            baseManager.delete(ProductPicture.class.getName(),id);
-        }catch (Exception e){
+            baseManager.delete(ProductPicture.class.getName(), id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
 
     @RequestMapping("/updatePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id,String status){
+    public String updateModelPicture(String id, String status,String productId,HttpServletRequest request) {
         try {
-            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
+            if("2".equals(status)){
+              XQuery xQuery = new XQuery("listProductPicture_default2",request);
+                xQuery.put("product_id",productId);
+                List<ProductPicture> pictures = baseManager.listObject(xQuery);
+                if(pictures.size()!=0){
+                    ProductPicture picture = pictures.get(0);
+                    picture.setStatus("1");
+                    baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
+                }
+            }
+            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
-            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
-        }catch (Exception e){
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
 
     @RequestMapping("/linkTenant.do")
     @ResponseBody
-    public String linkTenant(String tenantId,String productId){
+    public String linkTenant(String tenantId, String productId) {
         try {
-            Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
-            product.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-            baseManager.saveOrUpdate(Product.class.getName(),product);
-        }catch (Exception e){
+            Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
+            product.setTenant((Tenant) baseManager.getObject(Tenant.class.getName(), tenantId));
+            baseManager.saveOrUpdate(Product.class.getName(), product);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  tenantId;
+        return tenantId;
     }
+
     @RequestMapping("/changeTenant.do")
     @ResponseBody
-    public List changeTenant(String tenantId,HttpServletRequest request){
-        List list = null;
+    public Map changeTenant(String tenantId, HttpServletRequest request) {
+        Map<String, List> map = new HashMap<>();
+        List masterList = null;
+        List projectList = null;
         try {
-            XQuery xQuery = new XQuery("listTenantMaster_default",request);
-            xQuery.put("tenant_id",tenantId);
-            list = baseManager.listObject(xQuery);
-        }catch (Exception e){
+            XQuery xQuery = new XQuery("listTenantMaster_default", request);
+            xQuery.put("tenant_id", tenantId);
+            masterList = baseManager.listObject(xQuery);
+            map.put("masterList", masterList);
+            xQuery = new XQuery("listTenantProject_default", request);
+            xQuery.put("tenant_id", tenantId);
+            projectList = baseManager.listObject(xQuery);
+            map.put("projectList", projectList);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  list;
+        return map;
     }
+
     @RequestMapping("/changeMaster.do")
     @ResponseBody
-    public List changeMaster(String masterId,HttpServletRequest request){
+    public List changeMaster(String masterId, HttpServletRequest request) {
         List list = null;
         try {
-            XQuery xQuery = new XQuery("listMasterProject_default",request);
-            xQuery.put("master_id",masterId);
+            XQuery xQuery = new XQuery("listMasterProject_default", request);
+            xQuery.put("master_id", masterId);
             list = baseManager.listObject(xQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  list;
+        return list;
     }
+
+    @RequestMapping("/setModelPicture.do")
+    @ResponseBody
+    public String setModelPicture(String modelId, String pictureId, HttpServletRequest request) {
+
+        ProductPicture productPicture = null;
+        try {
+            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
+            if ("0".equals(modelId)) {
+                productPicture.setProductModel(null);
+            } else {
+                productPicture.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId));
+            }
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pictureId;
+    }
+
+
+    @RequestMapping("/linkSubject.do")
+    @ResponseBody
+    public String linkSubject(String subjectId, String productId,String subjectProductId,String status, HttpServletRequest request) {
+
+        try {
+            if("0".equals(status)){
+                baseManager.delete(SubjectProduct.class.getName(),subjectProductId);
+
+            }else {
+                SubjectProduct subjectProduct = new SubjectProduct();
+                subjectProduct.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProduct.setProduct((Product)baseManager.getObject(Product.class.getName(),productId));
+                baseManager.saveOrUpdate(SubjectProduct.class.getName(), subjectProduct);
+                subjectProductId = subjectProduct.getId();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectProductId;
+    }
+    @RequestMapping("/updateSubjectIndex.do")
+    @ResponseBody
+    public String updateSubjectIndex(String id, HttpServletRequest request) {
+
+
+        try {
+           Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),id);
+            subject.setSubjectIndex(subject.getSubjectIndex()+1);
+            baseManager.saveOrUpdate(Subject.class.getName(), subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 
 }

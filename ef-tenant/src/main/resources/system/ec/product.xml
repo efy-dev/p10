@@ -34,7 +34,7 @@
                 </do>
                 <do name="viewProduct" label="商品详情" access="" result="/product/productView" />
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
-                <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.formProductHandler" />
+                <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormProductHandler" />
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
                 <do name="formProduct_ProductModel" label="保存产品页" access="" result="/productModel/productModelForm" />
                 <do name="formProduct_Picture" label="保存产品页" access="" result="/productPicture/productPictureForm" />

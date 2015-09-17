@@ -177,4 +177,25 @@ CREATE TABLE `product_model` (
 
 
 
+CREATE TABLE `core_base_choose` (
+`id`  char(16) NOT NULL ,
+`model_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+DROP TABLE IF EXISTS `projectFollowed`;
+CREATE TABLE `projectFollowed` (
+  `id` char(16) NOT NULL,
+  `project_id` char(16) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `createDatetime` datetime DEFAULT NULL,
+  `consumer_id` char(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of projectFollowed
+-- ----------------------------
+INSERT INTO `projectFollowed` VALUES ('1', 'ichld4520000i9y0', '1', '2015-09-09 15:16:18', 'icwz67p000009mnr');
+
 

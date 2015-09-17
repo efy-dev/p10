@@ -124,6 +124,19 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
+                        <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
+                        <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
+                    </query>
+                </do>
+
+                <do name="plistConsumerCoupon" access="" label="消费者优惠券" result="/coupon/consumerCouponPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="consumer.id" label="用户" operation="eq" inputType="default"/>
+                    </query>
+                    <query name="consumer" label="分类查询" type="auto" orderBy="id:desc">
+                        <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
                         <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
@@ -190,6 +203,17 @@
                     <statusType fieldName="status">
                         <item label="已发货" value="1"/>
                         <item label="未发货" value="2"/>
+                    </statusType>
+                </field>
+
+                <field name="logisticsCompany" label="物流公司" inputType="text">
+                    <statusType fieldName="logisticsCompany">
+                        <item label="顺丰" value="shunfeng"/>
+                        <item label="中通" value="zhongtong"/>
+                        <item label="韵达" value="yunda"/>
+                        <item label="圆通" value="yuantong"/>
+                        <item label="国通" value="guotongkuaidi"/>
+                        <item label="申通" value="shentong"/>
                     </statusType>
                 </field>
             </fields>
@@ -274,6 +298,19 @@
                 </do>
 
             </does>
+        </entity>
+        <entity name="purchaseOrderPaymentDetails" label="purchaseOrderPaymentDetails"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails">
+            <fields>
+                <field name="payWay" label="支付方式" inputType="text">
+                    <statusType fieldName="payWay">
+                        <item label="支付宝" value="1"/>
+                        <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
         </entity>
         <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
                 basic="simple" others=""

@@ -1,15 +1,13 @@
 package com.efeiyi.ec.system.product.service.impl;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +72,8 @@ public class ProductManagerImpl implements ProductManager{
                 product.setId(null);
                 product.setCreateDateTime(sdf.parse(sdf.format(new Date())));
 
+            }else {
+                product.setProductModelList(xdoDao.getObjectList("from ProductModel where status!='0' and product.id=?",new Object[]{product.getId()}));
             }
             System.out.print("".equals(product.getProductDescription().getId()));
             if("".equals(product.getProductDescription().getId())){
@@ -91,6 +91,11 @@ public class ProductManagerImpl implements ProductManager{
             }else {
                 product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
             }
+            if ("".equals(product.getTenant().getId())){
+                product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
+            }
+
+
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
             e.printStackTrace();
@@ -112,9 +117,23 @@ public class ProductManagerImpl implements ProductManager{
                 for (int i = 0,j=0; i < ids.length; i++) {
                     if ("".equals(ids[i])) {
                         ProductModel productModel = new ProductModel();
-                        productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                         productModel.setName(productModelBean.getModelName()[i]);
-                        productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                        if(!"".equals(productModelBean.getModelAmount()[i])) {
+                            productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                        }else {
+                            productModel.setAmount(null);
+                        }
+
+                        if(!"".equals(productModelBean.getModelPrice()[i])) {
+                            productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                        }else {
+                            productModel.setPrice(null);
+                        }
+                        if(!"".equals(productModelBean.getMarketPrice()[i])) {
+                            productModel.setMarketPrice(new BigDecimal(productModelBean.getMarketPrice()[i]));
+                        }else {
+                            productModel.setMarketPrice(null);
+                        }
                         productModel.setProduct(product);
                         productModel.setSerial(autoSerialManager.nextSerial("productModel"));
                         productModel.setStatus(status[i]);
@@ -145,9 +164,25 @@ public class ProductManagerImpl implements ProductManager{
                             }
                         } else if ("1".equals(productModelBean.getModelStatus()[i])) {
                             ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), ids[i]);
-                            productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                            if(!"".equals(productModelBean.getModelAmount()[i])) {
+                                productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                            }else {
+                                productModel.setAmount(null);
+                            }
+
+                            if(!"".equals(productModelBean.getModelPrice()[i])) {
+                                productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                            }else {
+                                productModel.setPrice(null);
+                            }
+                            if(!"".equals(productModelBean.getMarketPrice()[i])) {
+                                productModel.setMarketPrice(new BigDecimal(productModelBean.getMarketPrice()[i]));
+                            }else {
+                                productModel.setMarketPrice(null);
+                            }
+                         //   productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
-                            productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                         //   productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
                             xdoDao.saveOrUpdateObject(productModel);
                             deleteProductPropertyValue(ids[i]);
                             String[] propertyValueIds = productModelBean.getModelProperty()[i].split(",");
@@ -161,9 +196,25 @@ public class ProductManagerImpl implements ProductManager{
                             }
                         }else  if("2".equals(productModelBean.getModelStatus()[i])){
                             ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), ids[i]);
-                            productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                            if(!"".equals(productModelBean.getModelAmount()[i])) {
+                                productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
+                            }else {
+                                productModel.setAmount(null);
+                            }
+
+                            if(!"".equals(productModelBean.getModelPrice()[i])) {
+                                productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                            }else {
+                                productModel.setPrice(null);
+                            }
+                            if(!"".equals(productModelBean.getMarketPrice()[i])) {
+                                productModel.setMarketPrice(new BigDecimal(productModelBean.getMarketPrice()[i]));
+                            }else {
+                                productModel.setMarketPrice(null);
+                            }
+                    //        productModel.setAmount(Integer.parseInt(productModelBean.getModelAmount()[i]));
                             productModel.setName(productModelBean.getModelName()[i]);
-                            productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
+                    //        productModel.setPrice(new BigDecimal(productModelBean.getModelPrice()[i]));
                             productModel.setCustomProperty(productModelBean.getProperty()[j++]);
                             xdoDao.saveOrUpdateObject(productModel);
                         }
@@ -173,18 +224,41 @@ public class ProductManagerImpl implements ProductManager{
         }
         if ("".equals(productModelBean.getDefaultId())) {
             ProductModel productModel = new ProductModel();
-            productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            }else {
+                productModel.setAmount(null);
+            }
             productModel.setName(productModelBean.getDefaultName());
-            productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            }else {
+                productModel.setPrice(null);
+            }
+            if(!"".equals(productModelBean.getDefaultMarketPrice())) {
+                productModel.setMarketPrice(new BigDecimal(productModelBean.getDefaultMarketPrice()));
+            }else {
+                productModel.setMarketPrice(null);
+            }
             productModel.setProduct(product);
             productModel.setSerial(autoSerialManager.nextSerial("productModel"));
             productModel.setStatus(productModelBean.getDefaultStatus());
             xdoDao.saveOrUpdateObject(productModel);
         }else {
             ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), productModelBean.getDefaultId());
-            productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            }
             productModel.setName(productModelBean.getDefaultName());
-            productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            if(!"".equals(productModelBean.getDefaultPrice())) {
+                productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
+            }
+            if(!"".equals(productModelBean.getDefaultMarketPrice())) {
+                productModel.setMarketPrice(new BigDecimal(productModelBean.getDefaultMarketPrice()));
+            }
+       //     productModel.setAmount(Integer.parseInt(productModelBean.getDefaultAmount()));
+            productModel.setName(productModelBean.getDefaultName());
+       //     productModel.setPrice(new BigDecimal(productModelBean.getDefaultPrice()));
             xdoDao.saveOrUpdateObject(productModel);
         }
 
@@ -201,5 +275,35 @@ public class ProductManagerImpl implements ProductManager{
 
     public void removeProduct(String id){
 
+    }
+
+    @Override
+    public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
+        SubjectDescription subjectDescription = subject.getSubjectDescription();
+        if("".equals(subject.getId())) {
+            subject.setId(null);
+            subjectDescription.setId(null);
+        }
+        xdoDao.saveOrUpdateObject(subjectDescription);
+        subject.setSubjectDescription(subjectDescription);
+        subject.setStatus("1");
+        subject.setSubjectIndex(1);
+        xdoDao.saveOrUpdateObject(subject);
+            for(int i=0;i<spId.length;i++){
+                if("0".equals(spId[i])){
+                    SubjectPicture subjectPicture1 = new SubjectPicture();
+                    subjectPicture1.setSubject(subject);
+                    subjectPicture1.setPictureUrl(subjectPicture[i]);
+                    xdoDao.saveOrUpdateObject(subjectPicture1);
+
+                }else {
+                    if("-1".equals(flag[i])){
+                        xdoDao.deleteObject(SubjectPicture.class.getName(),spId[i]);
+
+                    }
+                }
+            }
+
+        return subject;
     }
 }

@@ -353,3 +353,46 @@ CREATE TABLE `tenant_category` (
 PRIMARY KEY (`id`)
 )
 ;
+<<<<<<< HEAD
+=======
+
+ALTER TABLE `product_description`
+MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;
+
+//自定义属性
+ALTER TABLE `product_model`
+ADD COLUMN `custom_property`  varchar(255) NULL AFTER `product_description_id`;
+//设置规格图片
+ALTER TABLE `product_picture`
+ADD COLUMN `product_model_id`  char(16) NULL AFTER `status`;
+
+ALTER TABLE `project`
+	ADD COLUMN `district_id` char(16) NULL AFTER `description`;
+=================================================以上 已执行======================================================
+--------------------------------------未执行-------------------------
+ALTER TABLE `wiki_project_content`
+	ADD COLUMN `type` varchar(5) NULL AFTER `create_datetime`,
+	ADD COLUMN `project_id` char(16) NOT NULL AFTER `type`,
+	ADD COLUMN `city_id` char(16) NULL AFTER `project_id`;
+
+=================================================以上 已执行======================================================
+	ALTER TABLE `product_model`
+ADD COLUMN `product_picture_id`  char(16) NULL AFTER `custom_property`;
+=================================================以上 已执行======================================================
+ALTER TABLE `subject`
+ADD COLUMN `name`  varchar(255) NULL AFTER `index`;
+
+ALTER TABLE `subject_description`
+ADD COLUMN `subject_id`  char(16) NULL AFTER `content`;
+
+ALTER TABLE `subject`
+CHANGE COLUMN `index2` `subject_index`  int(11) NULL DEFAULT NULL AFTER `status`;
+
+CREATE TABLE `subject_product` (
+`id`  char(16) NOT NULL ,
+`subject_id`  char(16) NULL ,
+`product_id`  char(16) NULL
+)
+;
+
+>>>>>>> origin/master

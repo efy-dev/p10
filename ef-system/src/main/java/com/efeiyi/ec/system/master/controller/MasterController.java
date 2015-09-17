@@ -1,10 +1,13 @@
 package com.efeiyi.ec.system.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterDao;
+import com.efeiyi.ec.system.master.service.MasterManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
@@ -32,6 +35,8 @@ public class MasterController {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private MasterManager masterManager;
     @Autowired
     private MasterDao masterDao;
 
@@ -109,30 +114,68 @@ public class MasterController {
 
     @RequestMapping("/master//linkTenant.do")
     @ResponseBody
-    public String linkTenant(String tenantId,String masterId,String tenantMasterId,String status){
-        TenantMaster tenantMaster = null;
+    public String linkTenant(HttpServletRequest request, String tenantId,String masterId,String tenantMasterId,String status){
+        String id = "";
         try {
-            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
-            if(tenantMaster == null){
-                tenantMaster = new TenantMaster();
-                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
-                tenantMaster.setStatus("1");
-            }else {
-                if("0".equals(status)){
-                    tenantMaster.setStatus("1");
-                }
-                if("1".equals(status)){
-                    tenantMaster.setStatus("0");
-                }
-            }
-            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
 
-
+            id = masterManager.linkTenant(tenantId,masterId,tenantMasterId,status);
         }catch (Exception e){
-            e.printStackTrace();
+
         }
-        return  tenantMaster.getId();
+//        TenantMaster tenantMaster = null;
+//        try {
+//            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
+//            if(tenantMaster == null){
+//                tenantMaster = new TenantMaster();
+//                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
+//                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
+//                tenantMaster.setStatus("1");
+//            }else {
+//                if("0".equals(status)){
+//                    tenantMaster.setStatus("1");
+//                }
+//                if("1".equals(status)){
+//                    tenantMaster.setStatus("0");
+//                }
+//            }
+//            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
+//            XQuery xQuery = new XQuery("listMasterProject_default",request);
+//            xQuery.put("master_id",masterId);
+//            List<MasterProject> masterProjectList = baseManager.listObject(xQuery);
+//            Tenant tenant = (Tenant)baseManager.getObject(Tenant.class.getName(),tenantId);
+//            if(masterProjectList!=null){
+//                for (MasterProject masterProject :masterProjectList){
+//                    TenantProject tenantProject = null;
+//                       xQuery = new XQuery("listTenantProject_default2",request);
+//                    xQuery.put("tenant_id",tenantId);
+//                    xQuery.put("project_id",masterProject.getProject().getId());
+//                    List<TenantProject> mp = baseManager.listObject(xQuery);
+//                    if(mp.size()!=0){
+//                        tenantProject = mp.get(0);
+//                        if("0".equals(status)) {
+//                            tenantProject.setStatus("1");
+//                        }
+//                        if("1".equals(status)) {
+//                            tenantProject.setStatus("0");
+//                        }
+//                    }else{
+//                        if("0".equals(status)) {
+//                            tenantProject = new TenantProject();
+//                            tenantProject.setStatus("1");
+//                            tenantProject.setProject(masterProject.getProject());
+//                            tenantProject.setTenant(tenant);
+//                        }
+//                    }
+//                    baseManager.saveOrUpdate(TenantProject.class.getName(),tenantProject);
+//                }
+//            }
+//
+//
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        return id;
     }
 
 }

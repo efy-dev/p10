@@ -13,6 +13,7 @@
 <html>
 <head>
     <title></title>
+    <script src="<c:url value="/scripts/PCDSelect.js" />"></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -47,6 +48,26 @@
                 <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
             </div>
         </div>
+        <div id="pcdDiv">
+            <div class="am-form-group">
+                <label name="province" for="addressProvince.id" class="am-u-sm-3 am-form-label">省份 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="addressProvince.id" class="addressProvince" id="addressProvince.id"></select>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="city" for="addressCity.id" class="am-u-sm-3 am-form-label">市 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="addressCity.id" class="addressCity" id="addressCity.id"></select>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label name="addressDistrict" for="addressDistrict.id" class="am-u-sm-3 am-form-label">区/县 <small>*</small></label>
+                <div class="am-u-sm-9">
+                    <select name="addressDistrict.id" class="addressDistrict" id="addressDistrict.id"></select>
+                </div>
+            </div>
+            </div>
         <div class="am-form-group">
             <label name="type" for="type" class="am-u-sm-3 am-form-label">项目类别 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">
@@ -83,5 +104,18 @@
 </div>
 <!-- content end -->
 <hr/>
+
+<script type="text/javascript">
+    $(function(){
+        $("#pcdDiv").pcdSelect(
+                "<c:url value='/pj/address/provinceList.do'/>",
+                "<c:url value='/pj/address/cityListByProvince.do?conditions=addressProvince.id:'/>",
+                "<c:url value='/pj/address/districtListByCity.do?conditions=addressCity.id:'/>",
+                "${object.addressDistrict.addressCity.addressProvince.id}",
+                "${object.addressDistrict.addressCity.id}",
+                "${object.addressDistrict.id}"
+        )
+    });
+</script>
 </body>
 </html>

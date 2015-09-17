@@ -164,30 +164,56 @@ public class ProductController extends BaseController {
         return list;
     }
 
+<<<<<<< HEAD
     @RequestMapping("/Master.do")
     public String Master(Product product,ProductDescription productDescription,
                                  ProductPicture productPicture,ProductModelBean productModelBean,
+=======
+    @RequestMapping("/saveNewProduct.do")
+    public String saveNewProduct(Product product, ProductDescription productDescription,
+                                 ProductPicture productPicture, ProductModelBean productModelBean,
+>>>>>>> origin/master
                                  HttpServletRequest request,
-                                 String resultPage,Model model,String step)  {
+                                 String resultPage, Model model, String step) {
 
-      if("product".equals(step)){
+        model.addAttribute("view", request.getParameter("view"));
 
-          model.addAttribute("object",productManager.saveProduct(product));
 
-      }else if("description".equals(step)){
+        if ("product".equals(step)) {
 
-          model.addAttribute("object",productManager.saveProductDescription(productDescription));
+//            try {
+//                Product product1 =        productManager.saveProduct(product);
+//                System.out.print(product1.getMaster().getName());
+//            }catch (Exception e){
+//
+//            }
+            Product temProduct = productManager.saveProduct(product);
+            //  model.addAttribute("object",productManager.saveProduct(product));
+            //  &tenantId=${tenantId}&masterId=${masterId}&id=
+            String tenantId = "0";
+            String masterId = "0";
+            if (temProduct.getTenant() != null) {
+                tenantId = temProduct.getTenant().getId();
+            }
+            if (temProduct.getMaster() != null) {
+                masterId = temProduct.getMaster().getId();
+            }
+            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
 
-      }else  if("model".equals(step)){
-          try {
-              model.addAttribute("object",productManager.saveProductModel(productModelBean));
-          }catch (Exception e){
+        } else if ("description".equals(step)) {
+
+            model.addAttribute("object", productManager.saveProductDescription(productDescription));
+
+        } else if ("model".equals(step)) {
+            try {
+                model.addAttribute("object", productManager.saveProductModel(productModelBean));
+            } catch (Exception e) {
                 e.printStackTrace();
-          }
-      }else if("picture".equals(step)){
-               Product productTemp = (Product)baseManager.getObject(Product.class.getName(),request.getParameter("productId"));
-               model.addAttribute("object",productTemp);
-      }
+            }
+        } else if ("picture".equals(step)) {
+            Product productTemp = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("productId"));
+            model.addAttribute("object", productTemp);
+        }
 
         return resultPage;
     }

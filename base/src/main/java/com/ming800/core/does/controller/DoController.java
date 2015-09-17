@@ -1,9 +1,9 @@
 package com.ming800.core.does.controller;
 
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.base.util.SystemValueUtil;
-import com.ming800.core.p.model.ObjectRecommended;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +30,9 @@ public class DoController {
     @Autowired
     private DoManager doManager;
 
+    @Autowired
+    private BaseManager baseManager;
+
     /*jsp页面根据配置文件basic_do.xml生成  tabs*/
     @RequestMapping("/generateTabs.do")
     public ModelAndView generateTabs(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -42,10 +45,10 @@ public class DoController {
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String paramName = enumeration.nextElement();
-            if (!paramName.equals("qm") && !paramName.equals("conditions") && !paramName.equals("sort"))
+            if (!paramName.equals("qm") && !paramName.equals("conditions") && !paramName.equals("sort")&& !paramName.equals("pageEntity.index")&& !paramName.equals("pageEntity.size"))
                 paramMap.put(paramName, request.getParameter(paramName));
         }
-        modelMap.put("paramMap",paramMap);
+        modelMap.put("paramMap", paramMap);
 
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         modelMap.put("tempDo", tempDo);
@@ -56,6 +59,54 @@ public class DoController {
 
         return new ModelAndView("/jmenu/tabDiv");
     }
+
+//
+//    @RequestMapping("/saveOrUpdateChoose.do")
+//    @ResponseBody
+//    public Object saveOrUpdateChoose() {
+//        BaseChoose baseChoose = new BaseChoose();
+//        baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
+//        return baseChoose;
+//    }
+
+    @RequestMapping("/generatePages.do")
+    public String generatePages(HttpServletRequest request) throws Exception {
+
+        String qm = request.getParameter("qm");
+//        modelMap.put("qm", qm);
+
+        String chooseId = request.getParameter("chooseId");
+
+        String redirectUrl = "/basic/xm.do?qm=" + qm + "&chooseId=" + chooseId + "&resultPage=/jmenu/chooseList";
+
+        return "forward:/" + redirectUrl;
+    }
+
+//    @RequestMapping("/chooseItem.do")
+//    @ResponseBody
+//    public boolean chooseItem(HttpServletRequest request) {
+//        try {
+//            String param = request.getParameter("param");
+//            if (param != null && !param.equals("")) {
+//                String chooseId = param.split(":")[0];
+//                String modelId = param.split(":")[1];
+//                BaseChoose baseChoose = (BaseChoose) baseManager.getObject(BaseChoose.class.getName(), chooseId);
+//                baseChoose.setModelId(modelId);
+//                baseManager.saveOrUpdate(BaseChoose.class.getName(), baseChoose);
+//            }
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
+
+//    @RequestMapping({"/viewChoose.do"})
+//    @ResponseBody
+//    public Object viewBaseChoose(HttpServletRequest request){
+//        String chooseId = request.getParameter("chooseId");
+//        BaseChoose baseChoose = (BaseChoose)baseManager.getObject(BaseChoose.class.getName(),chooseId);
+//        return baseChoose;
+//    }
 
     /*jsp页面根据配置文件basic_do.xml生成  tabs*/
     @RequestMapping("/listCondition.do")

@@ -19,7 +19,7 @@
         function removeProductModel(productId) {
             jQuery.ajax({
                 type: "GET",
-                url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',
+                url: '<c:url value="/basic/xmj.do?qm=removeProductModel"/>',
                 data: {id: productId},
                 dataType: "json",
                 success: function (data) {
@@ -59,7 +59,7 @@
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/product/recommendedProductModel.do?id=${productModel.id}&categoryId=${productModel.product.category.id}"/>"><span
+                                       href="<c:url value="/product/recommendedProductModel.do?id=${productModel.id}&categoryId=${productModel.product.project.projectCategory.id}"/>"><span
                                             class="am-icon-trash-o">推荐</span>
                                     </a>
                                 </div>
@@ -68,10 +68,10 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewProduct&view=index&id=${productModel.product.id}'/>">${productModel.product.name}</a>
                         </td>
-                        <td class="am-hide-sm-only">${productModel.product.serial}</td>
-                        <td class="am-hide-sm-only">${productModel.product.price}</td>
+                        <td class="am-hide-sm-only">${productModel.serial}</td>
+                        <td class="am-hide-sm-only">${productModel.price}</td>
                         <td class="am-hide-sm-only">${productModel.product.project.name}</td>
-                        <td class="am-hide-sm-only">${productModel.product.category.name}</td>
+                        <td class="am-hide-sm-only">${productModel.product.project.projectCategory.name}</td>
                         <td class="am-hide-sm-only">
                             <img width="20px" src="http://pro.efeiyi.com/${productModel.product.picture_url}@!product-model" alt="产品图片">
                          </td>

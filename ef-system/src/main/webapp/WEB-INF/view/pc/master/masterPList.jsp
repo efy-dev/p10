@@ -15,6 +15,26 @@
 <head>
     <title></title>
     <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
+    <script>
+        function recommend2(obj,status,url){
+            if($(obj).attr("recommend")=="0"){
+                recommended(obj,status,url);
+            }else{
+            $('#my-prompt').modal({
+                relatedTarget: this,
+                onConfirm: function(e) {
+                    var  typeRecommended = $("#type").val();
+                    recommended(obj,status,url);
+                    $(obj).next("span").find("a").attr("onclick","saveRecommended(this,'"+typeRecommended+"',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')");
+                },
+                onCancel: function(e) {
+                    // alert('不想说!');
+                }
+            });
+        }
+        }
+
+    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -44,7 +64,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=master&id=${master.id}"/>"><span
+                                       href="<c:url value="/basic/xm.do?qm=formMaster&form=master&id=${master.id}&param=master"/>"><span
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -61,7 +81,7 @@
                                     </a>
                                     <c:if test="${empty master.masterRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
+                                           onclick="recommend2(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
                                            href="#" recommend="1" recommendedId = "${master.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
@@ -117,9 +137,33 @@
         </ming800:pcPageList>
     </div>
 </div>
+<%--点击立即发货的时候弹出的模态对话框--%>
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+    <div class="am-modal-dialog">
+        <%--<div class="am-modal-hd">Amaze UI</div>--%>
+        <div class="am-modal-bd">
+            <div>请选择大师推荐类别</div>
+
+            <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
+            <div>
+                类别:
+                <select class="am-modal-prompt-select" id="type" name="type" style="width: 90px;display: inline-block;">
+                    <option value="masterRecommended">请选择</option>
+                    <option value="masterSkillRecommended">传统技艺</option>
+                    <option value="masterArtRecommended">传统美术</option>
+                </select>
+
+            </div>
+
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+        </div>
+    </div>
+</div>
 
 <script>
-
 
 
     function removeMaster(divId){

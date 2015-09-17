@@ -14,7 +14,7 @@
         <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师推荐" amount="10" />
         <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="5" />
         <recommend group="tenantRecommended" recommendedModel="com.efeiyi.ec.tenant.model.Tenant" note="商家推荐" amount="10" />
-        <recommend group="projectRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="首页类别推荐" amount="5"/>
+        <recommend group="categoryRecommended" recommendedModel="com.efeiyi.ec.project.model.ProjectCategory" note="首页类别推荐" amount="5"/>
     </recommends>
     <autoserials>
         <autoserial group="purchaseOrderDelivery" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
@@ -22,5 +22,14 @@
         <autoserial group="product" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
         <autoserial group="productModel" autoserialModel="com.ming800.core.p.model.AutoSerial" note="自动获取序列号" prefix="" length="10" cacheSize="10" step="1" />
     </autoserials>
+
+    <logisticsCompanys>
+        <logisticsCompany memo="shunfeng" name="顺丰"/>
+        <logisticsCompany memo="zhongtong" name="中通"/>
+        <logisticsCompany memo="yunda" name="韵达"/>
+        <logisticsCompany memo="yuantong" name="圆通"/>
+        <logisticsCompany memo="guotongkuaidi" name="国通"/>
+        <logisticsCompany memo="shentong" name="申通"/>
+    </logisticsCompanys>
 
 </common>
