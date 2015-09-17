@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmenu id="commonMenu">
+<jmenu id="AssociationMenu">
 
     <jnode id="AssociationHomePage" url="/main.do?jnodeId=AssociationHomePage" text_zh_CN="首页面">
         <jnode url="/myBanner/ba.do?qm=listPCBanner_default"  access="admin,manager" text_zh_CN="顶部轮播图管理">
