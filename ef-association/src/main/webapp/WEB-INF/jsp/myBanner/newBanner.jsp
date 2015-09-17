@@ -41,19 +41,23 @@
             <label name="title" for="title" class="am-u-sm-3 am-form-label">标题/title
                 <small>*</small>
             </label>
+
             <div class="am-u-sm-9">
                 <input type="text" name="title" id="title" placeholder="title" value="${object.title}" required="true">
             </div>
         </div>
+
         <div class="am-form-group">
             <label name="bannerOrder" for="bannerOrder" class="am-u-sm-3 am-form-label">bannerOrder
                 <small>*</small>
             </label>
+
             <div class="am-u-sm-9">
                 <input type="number" name="bannerOrder" id="bannerOrder" placeholder="bannerOrder"
                        value="${object.bannerOrder}" required="true">
             </div>
         </div>
+
         <div class="am-form-group">
             <label name="directUrl" for="directUrl" class="am-u-sm-3 am-form-label">新闻/news
                 <small>&nbsp;&nbsp;</small>
@@ -62,10 +66,12 @@
                 <input type="text" name="directUrl" id="directUrl" placeholder="directUrl" value="${object.directUrl}">
             </div>
         </div>
+
         <div class="am-form-group">
             <label for="image" class="am-u-sm-3 am-form-label">轮播图/Banner
                 <small>&nbsp;&nbsp;</small>
             </label>
+
             <div class="am-u-sm-9">
                 <input type="file" id="image" name="image" placeholder="">
             </div>
