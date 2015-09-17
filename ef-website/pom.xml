@@ -18,7 +18,6 @@
             <groupId>com.efeiyi.ec</groupId>
             <artifactId>base_resource</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>

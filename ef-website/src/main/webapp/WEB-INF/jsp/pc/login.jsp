@@ -57,6 +57,7 @@
                         <c:if test="${!empty error}">
                             <label class="msg-tips">
                                 <span class="msg">！您输入的密码错误，请核对后再输入或<a href="<c:url value="/forgetPwd"/>">找回密码</a></span>
+                                <span class="tips1">！您输入的密码错误，请核对后再输入或<a href="<c:url value="/forgetPwd"/>">找回密码</a></span>
                             </label>
                         </c:if>
                     </div>

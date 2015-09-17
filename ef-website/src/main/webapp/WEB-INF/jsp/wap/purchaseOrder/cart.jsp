@@ -37,7 +37,7 @@
                                        onclick="productItem(this,'${product.id}')"
                                        value="option1">
                             </c:if>
-                            <img class="img" src="<c:url value="${product.productModel.productPicture.pictureUrl}"/>" alt=""/>
+                            <img class="img" src="<c:url value="${product.productModel.product.picture_url}"/>" alt=""/>
 
                             <div class="bd info">
                                 <p class="title">${product.productModel.product.name}</p>

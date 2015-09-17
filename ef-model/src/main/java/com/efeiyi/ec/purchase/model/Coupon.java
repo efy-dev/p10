@@ -1,18 +1,16 @@
 package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.organization.model.Consumer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/8/10.
  */
 @Entity
 @Table(name = "purchase_coupon")
-public class Coupon implements Serializable {
+public class Coupon {
     private String id;
     private String serial;
     private CouponBatch couponBatch;//批次
@@ -58,7 +56,6 @@ public class Coupon implements Serializable {
         this.serial = serial;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consumer_id")
     public Consumer getConsumer() {

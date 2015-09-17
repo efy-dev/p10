@@ -3216,3 +3216,10 @@ ADD COLUMN `brief`  varchar(255) NULL AFTER `status`;
 ALTER TABLE `master_news`
 ADD COLUMN `brief` varchar(255) CHARACTER SET utf8 NULL;
 -----------------------------------------------------------
+
+-----------20150917---------
+ALTER TABLE `master_news`
+ADD COLUMN `project_id`  char(16) NULL AFTER `status`;
+
+ALTER TABLE `dev-efc`.master_news ADD type VARCHAR(20) NOT NULL;
+-------------------------------dev-efc数据库表更新-------

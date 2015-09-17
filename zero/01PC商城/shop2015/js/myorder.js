@@ -1,5 +1,5 @@
 $(function(){
-    //ï¿½ï¿½ï¿½ï¿½
+    //µ¼º½
     //(function(){
     //    $('.header .nav li').hover(function(){
     //        $(this).find('.bgbor').show();
@@ -9,7 +9,7 @@ $(function(){
     //        $(this).removeClass('hover').find('.nav-links').stop().slideUp('fast');
     //    })
     //})();
-    ////ï¿½ï¿½ï¿½ï¿½Í¼
+    ////½¹µãÍ¼
     //(function(){
     //    var $liImg=$('.focus .slider-main li');
     //    var $liNav=$('.focus .slider-nav li');
@@ -33,13 +33,13 @@ $(function(){
     //    }
     //    timer=setInterval(autoFocus,iSpeed);
     //})();
-    ////ï¿½ï¿½ï¿½ï¿½
+    ////ÅÅÐò
     //(function(){
     //    $('.shop-sort .link2 dt').click(function(){
     //        $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
     //    })
     //})();
-    ////ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Ò³
+    ////ÉÌÆ·ÏêÇéÒ³
     //(function(){
     //    var simgLi=$('.preview .slider-img li');
     //    var BimgLi=$('.preview .slider-main li');
@@ -56,7 +56,7 @@ $(function(){
     //        timer=setInterval(autoRun,iSpeed);
     //    })
     //    timer=setInterval(autoRun,iSpeed);
-    //    //ï¿½Ô¶ï¿½ï¿½Ö²ï¿½
+    //    //×Ô¶¯ÂÖ²¥
     //    function autoRun(){
     //        index++;
     //        if(index>simgLi.length-1){
@@ -65,7 +65,7 @@ $(function(){
     //        BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
     //        simgLi.eq(index).addClass('active').siblings('li').removeClass('active');
     //    }
-    //    //ï¿½Õ²ï¿½
+    //    //ÊÕ²Ø
     //    var $add=$('.preview .collect .icon');
     //    var $hover=$add.siblings('.hover');
     //    var $active=$add.siblings('.active');
@@ -84,7 +84,7 @@ $(function(){
     //        $hover.hide();
     //        $active.show();
     //    })
-    //    //ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½
+    //    //¹Ì¶¨µ¼º½
     //    $(window).scroll(function(){
     //        var d=$(document).scrollTop();
     //        if(d>900){
@@ -94,19 +94,19 @@ $(function(){
     //        }
     //    });
     //    $('.product-intro .detail .part:last').css({'border':'0'});
-    //    //ï¿½ï¿½ï¿½
+    //    //Ãèµã
     //    $('.tab-items li a').click(function(){
     //        var pos=$($(this).attr('href')).offset().top;
     //        $("html,body").animate({scrollTop:pos-75},500);
     //        return false;
     //    });
-    //    //ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+    //    //¹æ¸ñÑ¡ÖÐ
     //    $('.itemInfo .ul-list li').click(function(){
     //        $(this).addClass('active');
     //    })
     //
     //})();
-    ////×¢ï¿½ï¿½--Ð­ï¿½ï¿½
+    ////×¢²á--Ð­Òé
     //(function(){
     //    $('#protocol').click(function(){
     //        $('.thickframe').show();
@@ -117,7 +117,7 @@ $(function(){
     //        return false;
     //    })
     //})();
-    //ï¿½ÒµÄ¶ï¿½ï¿½ï¿½
+    //ÎÒµÄ¶©µ¥
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
         $('.clearing-site span .btn-cart-add').click(function(){
@@ -128,7 +128,7 @@ $(function(){
             // return false;
         })
     })();
-    //ï¿½Õ»ï¿½ï¿½ï¿½Ö·
+    //ÊÕ»õµØÖ·
     (function(){
         $('.my-order .extra-r>a').click(function(){
             $(this).siblings('.active-pop').show();
@@ -138,7 +138,7 @@ $(function(){
             return false;
         })
     })();
-    //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+    //ÉÌÆ·ËÑË÷
     (function(){
         $('.nav-item .title').click(function(){
             $(this).find('.icon').toggleClass('icon-active');
@@ -149,7 +149,7 @@ $(function(){
 
 })
 
-//ï¿½Õ»ï¿½ï¿½ï¿½Ö·
+//ÊÕ»õµØÖ·
 $(function(){
     $('.my-order .extra-r>a').click(function(){
         $(this).siblings('.active-pop').show();
@@ -159,14 +159,14 @@ $(function(){
         return false;
     })
 })
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//¶©µ¥ÐÅÏ¢
 $(function(){
     $('#act-q').click(function(){
         $(this).siblings('.list-express').slideToggle();
 
     })
 })
-//ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½js
+//ÆÀ¼ÛÖÐµÄÐÇÐÇ´ò·Öjs
 var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");
 for(var i=0;i < GradList.length;i++){
     GradList[i].onmouseover = function(){
@@ -176,23 +176,23 @@ for(var i=0;i < GradList.length;i++){
         for(var Qii=0;Qii<this.name;Qii++){
             GradList[Qii].style.backgroundPosition = '-5px -21px';
         }
-        document.getElementById("QuacorGradingValue").innerHTML = '<b><font size="5" color="#fd7d28">'+this.name+'</font></b>åˆ†';
+        document.getElementById("QuacorGradingValue").innerHTML = '<b><font size="5" color="#fd7d28">'+this.name+'</font></b>·Ö';
     }
 }
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+//ÆÀ¼ÛÖÐÑ¡Ôñ
 $(function(){
     $('.evaluation .mutual .parameter .data .data-list .tally .djml').click(function(){
         $(this).toggleClass('cl-active')
     })
 })
-//ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
+//µã»÷°´Å¥
 $(function(){
     $('.act-ui').click(function(){
         $(this).parents('.table').siblings('.mutual').slideToggle();
         return false;
     })
 })
-//ï¿½ó¶¨°ï¿½Å¥
+//°ó¶¨°´Å¥
 $(function(){
     $('.kd').click(function(){
         $(this).parents('.binding').sibling('.binding-list').slideToggle();

@@ -47,7 +47,11 @@
                         <h1>${tenant.fullName}</h1>
                         <p>
                             <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <c:forEach items="${tenant.masterProjectList}" var="obj">
+                                    <c:if test="${obj.status == '1'}">
+                                        <p>[${obj.project.name}]</p>
+                                    </c:if>
+                                </c:forEach>
                                 <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>
@@ -76,7 +80,11 @@
                         <h1>${tenant.fullName}</h1>
                         <p>
                             <a href="http://${tenant.name}.efeiyi.com:${pageContext.request.serverPort}${pageContext.request.contextPath}" target="_blank">
-                                <p>[${tenant.masterProjectList[0].project.name}]</p>
+                                <c:forEach items="${tenant.masterProjectList}" var="obj">
+                                    <c:if test="${obj.status == '1'}">
+                                        <p>[${obj.project.name}]</p>
+                                    </c:if>
+                                </c:forEach>
                                 <p><ming800:status name='level' dataType='Tenant.level' checkedValue='${tenant.level}' type='normal'/>非物质文化遗产传承人</p>
                             </a>
                         </p>

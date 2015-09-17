@@ -39,11 +39,11 @@
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <div class="img"><a href="" target="_blank" title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
-      <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
-      <div class="p-img"><a href="http://${productModel.product.master.name}.efeiyi.com" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
+      <h1>${productModel.product.master.fullName}.${productModel.name}</h1>
+      <div class="p-img"><a target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>
       <div class="item p-text">${productModel.product.master.content}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
@@ -65,9 +65,12 @@
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
-          <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
-            <p class="wh name">${map.get(productModel)}
+          <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
+            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
+            <p class="wh name">${productModel.product.name}
+              <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                ${productPropertyValue.projectPropertyValue.value}
+              </c:forEach>
             </p>
             <p class="wh price">￥${productModel.price}</p>
           </a>

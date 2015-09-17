@@ -1,9 +1,6 @@
 package com.efeiyi.ec.project.model;
 
-import com.efeiyi.ec.organization.model.AddressCity;
-import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.wiki.model.ProjectContent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -35,20 +32,17 @@ public class Project {
     private List<ProjectTag> projectTagList;//项目标签
     private  List<ProjectProperty> projectPropertyList;//项目属性
     private String description;// project描述
-    private String picture_url;//project图片
+//    private String picture_url;//project图片
     private List<Product> productList;
-    private List<ProjectContent> projectContents;
-    private List<ProjectFollowed> projectFolloweds;
-    private AddressDistrict addressDistrict;
 
-    @Column(name="picture_url")
-    public String getPicture_url() {
-        return picture_url;
-    }
-
-    public void setPicture_url(String picture_url) {
-        this.picture_url = picture_url;
-    }
+//    @Column(name="picture_url")
+//    public String getPicture_url() {
+//        return picture_url;
+//    }
+//
+//    public void setPicture_url(String picture_url) {
+//        this.picture_url = picture_url;
+//    }
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<Product> getProductList() {
@@ -78,7 +72,7 @@ public class Project {
     public void setSerial(String serial) {
         this.serial = serial;
     }
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_project_id")
     public  Project getFatherProject(){
@@ -124,7 +118,6 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     public ProjectCategory getProjectCategory() {
@@ -153,7 +146,6 @@ public class Project {
         this.type=type;
     }
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public  List<ProjectTag> getProjectTagList(){
@@ -162,7 +154,7 @@ public class Project {
     public  void  setProjectTagList(List<ProjectTag> projectTagList){
         this.projectTagList = projectTagList;
     }
-    @JsonIgnore
+
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
     @Where(clause = "status=1")
     public  List<Project> getSubProjectList(){
@@ -182,40 +174,13 @@ public class Project {
     public void setProjectPropertyList(List<ProjectProperty> projectPropertyList) {
         this.projectPropertyList = projectPropertyList;
     }
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
-    public List<ProjectContent> getProjectContents() {
-        return projectContents;
-    }
 
-    public void setProjectContents(List<ProjectContent> projectContents) {
-        this.projectContents = projectContents;
-    }
+
 
     //    @Column(name="father_project_id")
 //    public String getFatherProjectId(){return  fatherProjectId;}
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
-    public List<ProjectFollowed> getProjectFolloweds() {
-        return projectFolloweds;
-    }
-
-    public void setProjectFolloweds(List<ProjectFollowed> projectFolloweds) {
-        this.projectFolloweds = projectFolloweds;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="district_id")
-
-    public AddressDistrict getAddressDistrict() {
-        return addressDistrict;
-    }
-
-    public void setAddressDistrict(AddressDistrict addressDistrict) {
-        this.addressDistrict = addressDistrict;
-    }
 }
 
