@@ -45,7 +45,6 @@ $(function(){
         var BimgLi=$('.preview .slider-main li');
         var index=0;
         var timer=null;
-        var iSpeed=3000;
         simgLi.click(function(){
             clearInterval(timer);
             index=$(this).index();
@@ -74,7 +73,7 @@ $(function(){
         //固定导航
         $(window).scroll(function(){
             var d=$(document).scrollTop();
-            if(d>900){
+            if(d>820){
                 $('.tab-wrap').css({'position':'fixed','top':'0'})
             }else{
                 $('.tab-wrap').css({'position':'','top':''})

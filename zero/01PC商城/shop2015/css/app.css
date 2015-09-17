@@ -190,7 +190,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .slider-img li img {border:2px #ccc solid}
 .product-intro .itemInfo .preview .slider-img li.active img {border:2px #000 solid}
 .product-intro .itemInfo .preview .slider-main {width:800px;height:643px;float:left;margin:0 28px;background:#f6f6f6;overflow:hidden}
-.product-intro .itemInfo .preview .slider-main li {width:100%;float:left;text-align:center}
+.product-intro .itemInfo .preview .slider-main li {width:100%;float:left;text-align:center;background: #ebf0ff}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
 .product-intro .itemInfo .preview .collect {width:36px;position:absolute;top:16px;right:40px}
 .product-intro .itemInfo .preview .collect .icon {background:url(../images/icon.png) no-repeat -244px -50px;width:32px;height:28px;float:left;margin-left:2px;margin-bottom:5px;cursor:pointer}
