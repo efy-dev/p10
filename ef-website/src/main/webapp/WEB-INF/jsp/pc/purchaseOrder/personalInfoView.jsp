@@ -50,7 +50,7 @@
             </dl>
         </div>
         <div class="userinfo-datum">
-            <form id="personalInfo" action="<c:url value="/myEfeiyi/updatePersonalInfo.do"/>" method="get">
+            <form id="personalInfo" action="<c:url value="/myEfeiyi/updatePersonalInfo.do"/>" method="post">
                 <ul>
                     <li>
                         <label>昵称：</label>

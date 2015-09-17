@@ -42,7 +42,7 @@
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
             <c:if test="${product.isChoose==1}">
               <li>
-                <img class="img" src="${product.productModel.product.picture_url}" alt="">
+                <img class="img" src="${product.productModel.productPicture.pictureUrl}" alt="">
                 <div class="bd info">
                   <p class="text">${product.productModel.product.name}</p>
                   <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
@@ -58,7 +58,7 @@
 
     <!-- //End--order-list-->
     <div class="bd order-total">
-      <p><strong>优惠券</strong><span class="btn-coupons">2张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
+      <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right" class="arrow-right"></a></p>
       <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.intValue()}</span></p>
       <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
       <p><strong>运费</strong><span><em>￥</em>0</span></p>
@@ -74,7 +74,10 @@
   </div>
   <!-- //End--cart-order-->
   <div class="bd payment-total-bar">
-    <span class="txt">总计付款${cart.totalPrice.intValue()}元</span>
+    <span>总计付款</span>
+    <span class="txt" id="change" style="float: none">
+      ${cart.totalPrice.intValue()}</span>
+    <span>元</span>
     <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
   </div>
 </article>
@@ -157,50 +160,65 @@
 <!--//End--弹出地址-->
 
 <!--Start--弹出地址-->
-<div id="order-total" class="alert-delete" style="display:none;">
+<div id="order-total" class="alert-delete yhq" style="display:none;">
   <div class="bd cart-coupons">
     <div class="title">
       <h2>优惠券</h2>
     </div>
     <!--//ENd-->
-    <ul class="ul-list">
-     <%-- <li>
-        <input type="checkbox" name="" id="cbox1">
-        <p>满500减50</p>
-        <p>有效期：2012-09-09至2013-09-09</p>
-        <p>适用范围：全网通用</p>
-      </li>
-      <li>
-        <input type="checkbox" name="" id="cbox2">
-        <p>满500减50</p>
-        <p>有效期：2012-09-09至2013-09-09</p>
-        <p>适用范围：全网通用</p>
-      </li>
-      <li>
-        <input type="checkbox" name="" id="cbox3">
-        <p>满500减50</p>
-        <p>有效期：2012-09-09至2013-09-09</p>
-        <p>适用范围：全网通用</p>
-      </li>
-      <li>
-        <input type="checkbox" name="" id="cbox4">
-        <p>满500减50</p>
-        <p>有效期：2012-09-09至2013-09-09</p>
-        <p>适用范围：全网通用</p>
-      </li>--%>
-    </ul>
+      <ul class="ul-list" id="ul-list">
+      </ul>
 
-    <div class="bd">
-      <a href="#确定" class="cart-btn" title="确定">确定</a>
-    </div>
+      <div class="bd">
+        <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
+      </div>
   </div>
   <div class="overbg"></div>
 </div>
 
 <script>
-
   var payment = "1";
-  var consumerAddress = document.getElementById("hiddenId").text();
+  var consumerAddress = document.getElementById("hiddenId").textContent;
+
+
+
+  $(function(){
+    $.ajax({
+      type: 'get',
+      async: false,
+      url: '<c:url value="/coupon/list/${purchaseOrder.id}"/>',
+      dataType: 'json',
+      data: { status: 1},
+      success: function (data) {
+        if (data != null) {
+          var out = '';
+          $("#yhq").text(data.length+"张优惠券可用");
+          for (var i = 0; i < data.length; i++) {
+           out += '<li>' + '<input type="radio" name="radio"' + 'value="' +data[i]["couponBatch"]["price"]+'"' + 'id="cbox' +(i+1)+ '">' + '<p>满' +data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+           + '<p>有效期：' + formatDate(data[i]["couponBatch"]["startDate"]) + '至' + formatDate(data[i]["couponBatch"]["endDate"]) + '</p>' + '<p>适用范围：全网通用</p> </li>';
+           }
+          $("#ul-list").html(out);
+        }
+      },
+      error:function(data){
+        console.log(data);
+      }
+
+    });
+  })
+
+  function yhq(){
+    var totalPrice = $("#change").text();
+    var t_price = parseInt(totalPrice);
+    var chkobjs = document.getElementsByName("radio");
+    for(var i=0;i<chkobjs.length;i++){
+      if(chkobjs[i].checked){
+        t_price = t_price-parseInt(chkobjs[i].value);
+      }
+    }
+    $("#change").text(t_price);
+    $(".yhq").hide();
+  }
 
   function add_Address(){
     $("#adddiv").attr("style","display:block;position: absolute;background: #fff;z-index:9999;width: 90%;left: 5%");
@@ -210,10 +228,6 @@
   function zhifubao(element) {
     $("#zhifubao").attr("style", "border:2px solid red");
     $("#weixin").attr("style", "");
-//    $(element).attr("class", "alipay wechat-active");
-//    $("#weixin").attr("class", "alipay");
-//    $("#weixin").find("i").remove();
-//    $(element).append('<i class="triangle" style="display: block"></i>')
     payment = "1";
   }
 
@@ -440,7 +454,7 @@
   chooseCity($("${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
   </c:forEach>
 
-  $().ready(function () {
+/*  $().ready(function () {
     $("#addAddress").validate({
       rules: {
         consignee: "required",
@@ -457,7 +471,10 @@
         phone: "required",
       },
     });
-  });
+  });*/
+  function formatDate(now){
+    return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/,' ');
+  }
 
 </script>
 </body>

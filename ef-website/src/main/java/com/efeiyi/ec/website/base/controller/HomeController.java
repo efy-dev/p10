@@ -48,7 +48,7 @@ public class HomeController {
         model.addAttribute("bannerList", bannerList);
 
         //传承人
-        List<Object> masterList = objectRecommendedManager.getRecommendedList("masterRecommended");
+        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
         model.addAttribute("masterList", masterList);
         model.addAttribute("sign", "000");
 

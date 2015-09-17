@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.controller;
+package com.efeiyi.ec.wiki.base.controller;
 
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;

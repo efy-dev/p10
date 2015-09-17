@@ -1,6 +1,7 @@
 package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,11 +18,13 @@ public class Document {
     private String name;
     private String keywords;
     private DocumentContent documentContent;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date theDatetime;
     private Integer documentOrder;
     private String group;
     private String status;
     private String sampleContent;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date publishDate;
     private List<DocumentAttachment> documentAttachmentList;
 

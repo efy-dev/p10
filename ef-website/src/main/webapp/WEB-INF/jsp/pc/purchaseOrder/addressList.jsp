@@ -24,7 +24,7 @@
                         <i class="clase" title="关闭"></i>
                     </div>
                     <div class="m-form">
-                        <form id="addAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="get" accept-charset="utf-8">
+                        <form id="addAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>" method="post" accept-charset="utf-8">
                             <ul>
                                 <li>
                                     <label>收货人：</label>
@@ -143,7 +143,7 @@
                               </div>
                               <div class="m-form">
                                   <form class="aaa" id="updateAddress" action="<c:url value="/myEfeiyi/addAddress.do"/>"
-                                        method="get">
+                                        method="post">
                                       <ul>
                                           <li>
                                               <label>收货人：</label>

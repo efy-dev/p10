@@ -91,6 +91,6 @@
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
     <welcome-file-list>
-        <welcome-file>/home.do</welcome-file>
+        <welcome-file>/category.do</welcome-file>
     </welcome-file-list>
 </web-app>

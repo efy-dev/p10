@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/28.
@@ -19,6 +20,7 @@ public class PurchaseOrderPayment {
     private Date createDateTime;
     private BigDecimal paymentAmount; //支付金额
     private String payWay;//1支付宝 2银行卡 3微信
+    private List<PurchaseOrderPaymentDetails> purchaseOrderPaymentDetailsList;
     private User user;
     private String serial;//支付记录编号
     private String status;//1支付成功  2支付失败 3 待支付
@@ -106,5 +108,14 @@ public class PurchaseOrderPayment {
 
     public void setTransactionNumber(String transactionNumber) {
         this.transactionNumber = transactionNumber;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "purchaseOrderPayment")
+    public List<PurchaseOrderPaymentDetails> getPurchaseOrderPaymentDetailsList() {
+        return purchaseOrderPaymentDetailsList;
+    }
+
+    public void setPurchaseOrderPaymentDetailsList(List<PurchaseOrderPaymentDetails> purchaseOrderPaymentDetailsList) {
+        this.purchaseOrderPaymentDetailsList = purchaseOrderPaymentDetailsList;
     }
 }

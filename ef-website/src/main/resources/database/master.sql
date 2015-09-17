@@ -253,5 +253,20 @@ ALTER TABLE `subject`
 ADD COLUMN `index`  int(11) NULL AFTER `status`;
 
 
+CREATE TABLE `purchase_order_payment_details` (
+  `id`  char(16) NOT NULL ,
+  `payway`  char(8) NULL ,
+  `money`  decimal NULL ,
+  `coupon_id`  char(16) NULL ,
+  `purchase_order_payment_id`  char(16) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+
+
+ALTER TABLE `purchase_order_product`
+ADD COLUMN `purchase_order_comment_id`  char(16) NULL AFTER `purchase_price`;
+
+
 
 
