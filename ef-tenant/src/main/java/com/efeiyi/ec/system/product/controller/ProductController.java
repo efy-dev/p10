@@ -164,15 +164,9 @@ public class ProductController extends BaseController {
         return list;
     }
 
-<<<<<<< HEAD
-    @RequestMapping("/Master.do")
-    public String Master(Product product,ProductDescription productDescription,
-                                 ProductPicture productPicture,ProductModelBean productModelBean,
-=======
     @RequestMapping("/saveNewProduct.do")
     public String saveNewProduct(Product product, ProductDescription productDescription,
                                  ProductPicture productPicture, ProductModelBean productModelBean,
->>>>>>> origin/master
                                  HttpServletRequest request,
                                  String resultPage, Model model, String step) {
 
