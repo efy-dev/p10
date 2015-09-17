@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by Administrator on 2015/9/17.
  */
 @Entity
-@Table(name = "purchase-order-business-reply")
+@Table(name = "purchase_order_business_reply")
 public class PurchaseOrderBusinessReply{
     private String id;
     private String reply;

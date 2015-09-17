@@ -175,6 +175,10 @@ body { height:100%;background:#626262}
         <div class="section1">
             <div class="mask"></div>
             <div class="sec-left">
+                <div class="btn-scroll">
+                    <span class="btn-scroll-left"></span>
+                    <span class="btn-scroll-right"></span>
+                </div>
                 <div class="part">
                     <div class="autoWidth">
                         <dl>
@@ -362,6 +366,10 @@ body { height:100%;background:#626262}
         <!-- //End--section3--技艺-->
         <div class="section4">
             <div class="sec-left">
+                <div class="btn-scroll">
+                    <span class="btn-scroll-left"></span>
+                    <span class="btn-scroll-right"></span>
+                </div>
                 <div class="part">
                     <div class="autoWidth">
                         <dl>
@@ -561,9 +569,9 @@ $(function(){
         var bodyHtml=$('body');//页面
         var wH=bodyHtml.height();//页面高度
         //如果页面刷新则页面滚动到最顶部
-//        if(bodyHtml.not(".scroll")){
-//            bodyHtml.animate({'scrollTop':0},100);
-//        }
+        if(bodyHtml.not(".scroll")){
+            bodyHtml.animate({'scrollTop':0},100);
+        }
         //悬浮导航
         navLi.click(function(){
             index=$(this).index();
@@ -651,6 +659,20 @@ $(function(){
                 ulSnumLi.eq(1).html(index+1);
             })
         }
+
+
+        //保养
+
+        $('.btn-scroll-left').click(function(){
+            $(this).parents('.btn-scroll').siblings('.part').animate({'scrollLeft':'0'});
+        })
+        $('.btn-scroll-right').click(function(){
+            $(this).parents('.btn-scroll').siblings('.part').animate({'scrollLeft':'600px'});
+        })
+
+
+
+
     })();
 })
 </script>
