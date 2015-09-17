@@ -32,14 +32,15 @@
     <form id="bannerForm" action="<c:url value='/myBanner/saveBanner.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <c:if test="${not empty object.id}">
-            <input value="${object.id}" name="id"
-                   type="hidden"/>
-        </c:if>
+        <input value="${object.id}" name="id"
+               type="hidden"/>
         <input value="banner" name="group"
                type="hidden"/>
         <input value="${object.status}" name="status"
                type="hidden"/>
+        <input value="${object.imageUrl}" name="imageUrl"
+               type="hidden"/>
+
         <div class="am-form-group">
             <label name="title" for="title" class="am-u-sm-3 am-form-label">标题/title
                 <small>*</small>
@@ -62,7 +63,10 @@
         </div>
 
         <div class="am-form-group">
-            <label for="image" class="am-u-sm-3 am-form-label">轮播图/Banner<small>&nbsp;&nbsp;</small></label>
+            <label for="image" class="am-u-sm-3 am-form-label">轮播图/Banner
+                <small>&nbsp;&nbsp;</small>
+            </label>
+
             <div class="am-u-sm-9">
                 <input type="file" id="image" name="image" placeholder="">
             </div>
