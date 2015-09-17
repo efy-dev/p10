@@ -270,3 +270,6 @@ ADD COLUMN `purchase_order_comment_id`  char(16) NULL AFTER `purchase_price`;
 
 
 
+ALTER TABLE `purchase_order_payment_details`
+ADD COLUMN `transaction_number`  char(128) NULL AFTER `purchase_order_payment_id`;
+
