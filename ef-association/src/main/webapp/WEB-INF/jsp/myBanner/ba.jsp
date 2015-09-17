@@ -15,11 +15,13 @@
   <title></title>
 </head>
 <body>
+<div style="text-align: left;margin-left: 10px;" >
+  <input onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&banner.group=${banner.group}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
+         type="button" class="am-btn am-btn-default am-btn-xs"
+         style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建" />
+</div>
 <jsp:include page="/layouts/myConfirm.jsp"/>
 <div class="am-g">
-  <button onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&banner.group=${banner.group}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
-          class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建</button>
-
   <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr>
       <td>操作</td>
@@ -31,26 +33,26 @@
     <c:forEach items="${bannerList}" var="banner">
       <tr>
         <td>
-          <button onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
-                  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 编辑</button>
-          <button onclick="myConfirm('<c:url value="/myBanner/removeBanner.do?qm=removeBanner&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>','D')"
-                  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-
-          <input id="${banner.id}0" value="${banner.id}" name="${banner.id}"
-                 metaProperty="id" type="hidden"/>
-          <input id="${banner.id}1" value="${banner.group}"
-                 name="${banner.id}"
-                 metaProperty="group" type="hidden"/>
-          <input id="${banner.id}2" value="${banner.status}" name="${banner.id}"
-                 metaProperty="status" type="hidden"/>
-          <input id="${banner.id}3" value="${banner.directUrl}"
-                 name="${banner.id}" readonly="true" metaProperty="directUrl" type="hidden"/>
+          <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+              <button onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
+                      class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+              <button onclick="myConfirm('<c:url value="/myBanner/removeBanner.do?qm=removeBanner&id=${banner.id}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>', 'D')"
+                      class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+              <input id="${banner.id}0" value="${banner.id}" name="${banner.id}" metaProperty="id" type="hidden"/>
+              <input id="${banner.id}1" value="${banner.group}" name="${banner.id}" metaProperty="group" type="hidden"/>
+              <input id="${banner.id}2" value="${banner.status}" name="${banner.id}" metaProperty="status" type="hidden"/>
+              <input id="${banner.id}3" value="${banner.directUrl}" name="${banner.id}" readonly="true" metaProperty="directUrl" type="hidden"/>
+            </div>
+          </div>
         </td>
         <td>
           <div  id="${banner.id}4" name="${banner.id}" >${banner.title}</div>
         </td>
         <td>
-          <img id="${banner.id}5"  name="${banner.id}" src="<%=imgBasePath%>${banner.imageUrl}<%=imgListCss%>">
+          <c:if test="${!empty banner.imageUrl}">
+            <img id="${banner.id}5"  name="${banner.id}" src="<%=imgBasePath%>${banner.imageUrl}<%=imgListCss%>">
+          </c:if>
         </td>
         <td>
           <div id="${banner.id}6"  name="${banner.id}">${banner.bannerOrder}</div>

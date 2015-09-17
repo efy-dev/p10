@@ -9,6 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
@@ -32,47 +33,49 @@
     <form id="bannerForm" action="<c:url value='/myBanner/saveBanner.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <c:if test="${not empty object.id}">
-            <input value="${object.id}" name="id"
-                   type="hidden"/>
-        </c:if>
-        <input value="banner" name="group"
-               type="hidden"/>
+        <input value="${object.id}" name="id" type="hidden"/>
+        <input value="banner" name="group" type="hidden"/>
+        <input value="${object.status}" name="status" type="hidden"/>
+        <input value="${object.imageUrl}" name="imageUrl" type="hidden"/>
         <div class="am-form-group">
             <label name="title" for="title" class="am-u-sm-3 am-form-label">标题/title
                 <small>*</small>
             </label>
-
             <div class="am-u-sm-9">
                 <input type="text" name="title" id="title" placeholder="title" value="${object.title}" required="true">
             </div>
         </div>
-
         <div class="am-form-group">
             <label name="bannerOrder" for="bannerOrder" class="am-u-sm-3 am-form-label">bannerOrder
                 <small>*</small>
             </label>
-
             <div class="am-u-sm-9">
                 <input type="number" name="bannerOrder" id="bannerOrder" placeholder="bannerOrder"
                        value="${object.bannerOrder}" required="true">
             </div>
         </div>
-
-        <div class="am-form-group">
-            <label for="image" class="am-u-sm-3 am-form-label">轮播图/Banner<small>&nbsp;&nbsp;</small></label>
-            <div class="am-u-sm-9">
-                <input type="file" id="image" name="image" placeholder="">
-            </div>
-        </div>
-
         <div class="am-form-group">
             <label name="directUrl" for="directUrl" class="am-u-sm-3 am-form-label">新闻/news
                 <small>&nbsp;&nbsp;</small>
             </label>
-
             <div class="am-u-sm-9">
                 <input type="text" name="directUrl" id="directUrl" placeholder="directUrl" value="${object.directUrl}">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label for="image" class="am-u-sm-3 am-form-label">轮播图/Banner
+                <small>&nbsp;&nbsp;</small>
+            </label>
+            <div class="am-u-sm-9">
+                <input type="file" id="image" name="image" placeholder="">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label"><small></small></label>
+            <div class="am-u-sm-9">
+                <c:if test="${!empty object.imageUrl}">
+                    <img src="<%=imgBasePath %>${object.imageUrl}<%=imgFormCSS %>">
+                </c:if>
             </div>
         </div>
 

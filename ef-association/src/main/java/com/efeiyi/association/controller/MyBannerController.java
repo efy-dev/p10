@@ -114,6 +114,10 @@ public class MyBannerController {
         //新建内容
         if (banner.getId() == null || "".equals(banner.getId())) {
             banner.setStatus("1");
+            banner.setId(null);
+        }
+        if(banner.getImageUrl() == null || "".equals(banner.getId())){
+            banner.setImageUrl(null);
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
