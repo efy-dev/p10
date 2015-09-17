@@ -45,8 +45,12 @@ $(function(){
         var BimgLi=$('.preview .slider-main li');
         var index=0;
         var timer=null;
+<<<<<<< HEAD
+        simgLi.click(function(){
+=======
         var iSpeed=3000;
         simgLi.mousedown(function(){
+>>>>>>> origin/master
             clearInterval(timer);
             index=$(this).index();
             BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
@@ -87,7 +91,7 @@ $(function(){
         //固定导航
         $(window).scroll(function(){
             var d=$(document).scrollTop();
-            if(d>900){
+            if(d>820){
                 $('.tab-wrap').css({'position':'fixed','top':'0'})
             }else{
                 $('.tab-wrap').css({'position':'','top':''})
