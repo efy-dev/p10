@@ -21,6 +21,7 @@
         <module>pal-model</module>
         <module>ef-wiki</module>
         <module>pal-website</module>
+        <module>ef-association</module>
     </modules>
 
     <repositories>

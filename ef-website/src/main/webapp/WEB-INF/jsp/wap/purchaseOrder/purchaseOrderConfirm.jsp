@@ -74,7 +74,10 @@
   </div>
   <!-- //End--cart-order-->
   <div class="bd payment-total-bar">
-    <span class="txt">总计付款${cart.totalPrice.intValue()}元</span>
+    <span>总计付款</span>
+    <span class="txt" id="change" style="float: none">
+      ${cart.totalPrice.intValue()}</span>
+    <span>元</span>
     <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
   </div>
 </article>
@@ -157,21 +160,18 @@
 <!--//End--弹出地址-->
 
 <!--Start--弹出地址-->
-<div id="order-total" class="alert-delete" style="display:none;">
+<div id="order-total" class="alert-delete yhq" style="display:none;">
   <div class="bd cart-coupons">
     <div class="title">
       <h2>优惠券</h2>
     </div>
     <!--//ENd-->
-    <form>
       <ul class="ul-list" id="ul-list">
       </ul>
 
       <div class="bd">
-        <a href="#确定" class="cart-btn" title="确定">确定</a>
+        <a onclick="yhq();" class="cart-btn" id="yhq-btn" title="确定">确定</a>
       </div>
-    </form>
-
   </div>
   <div class="overbg"></div>
 </div>
@@ -179,6 +179,8 @@
 <script>
   var payment = "1";
   var consumerAddress = document.getElementById("hiddenId").textContent;
+
+
 
   $(function(){
     $.ajax({
@@ -192,7 +194,7 @@
           var out = '';
           $("#yhq").text(data.length+"张优惠券可用");
           for (var i = 0; i < data.length; i++) {
-           out += '<li>' + '<input type="radio" name="radio"' + 'id="cbox' +(i+1)+ '">' + '<p>满' +data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+           out += '<li>' + '<input type="radio" name="radio"' + 'value="' +data[i]["couponBatch"]["price"]+'"' + 'id="cbox' +(i+1)+ '">' + '<p>满' +data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
            + '<p>有效期：' + formatDate(data[i]["couponBatch"]["startDate"]) + '至' + formatDate(data[i]["couponBatch"]["endDate"]) + '</p>' + '<p>适用范围：全网通用</p> </li>';
            }
           $("#ul-list").html(out);
@@ -205,6 +207,19 @@
     });
   })
 
+  function yhq(){
+    var totalPrice = $("#change").text();
+    var t_price = parseInt(totalPrice);
+    var chkobjs = document.getElementsByName("radio");
+    for(var i=0;i<chkobjs.length;i++){
+      if(chkobjs[i].checked){
+        t_price = t_price-parseInt(chkobjs[i].value);
+      }
+    }
+    $("#change").text(t_price);
+    $(".yhq").hide();
+  }
+
   function add_Address(){
     $("#adddiv").attr("style","display:block;position: absolute;background: #fff;z-index:9999;width: 90%;left: 5%");
     $("#list-order").attr("style","display:none");
@@ -213,10 +228,6 @@
   function zhifubao(element) {
     $("#zhifubao").attr("style", "border:2px solid red");
     $("#weixin").attr("style", "");
-//    $(element).attr("class", "alipay wechat-active");
-//    $("#weixin").attr("class", "alipay");
-//    $("#weixin").find("i").remove();
-//    $(element).append('<i class="triangle" style="display: block"></i>')
     payment = "1";
   }
 

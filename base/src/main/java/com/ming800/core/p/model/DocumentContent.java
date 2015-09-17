@@ -1,6 +1,8 @@
 package com.ming800.core.p.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -11,7 +13,6 @@ public class DocumentContent {
     private String id;
     private Document document;
     private String content;
-
 
 
     @Id
@@ -25,7 +26,7 @@ public class DocumentContent {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "document_id")
     public Document getDocument() {
         return document;

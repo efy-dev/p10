@@ -264,4 +264,9 @@ CREATE TABLE `purchase_order_payment_details` (
 ;
 
 
+ALTER TABLE `purchase_order_product`
+ADD COLUMN `purchase_order_comment_id`  char(16) NULL AFTER `purchase_price`;
+
+
+
 
