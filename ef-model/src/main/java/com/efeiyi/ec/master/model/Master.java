@@ -65,6 +65,7 @@ public class Master implements Serializable {
         this.projectName = projectName;
     }
 
+    @JsonIgnore
     @Transient
     public MasterProject getMainProjectName() {
         List<MasterProject>  masterProjectList = getMasterProjectList();
