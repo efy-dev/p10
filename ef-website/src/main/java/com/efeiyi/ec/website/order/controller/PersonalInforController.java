@@ -4,11 +4,13 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +42,22 @@ public class PersonalInforController {
         return "redirect:/myEfeiyi/personalInfo.do";
 
     }
+    /*
+    * 我的收藏
+    * */
+    @RequestMapping({"listProductFavorite.do"})
+    public String  listProductFavorite(HttpServletRequest request,Model model)throws Exception{
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        List<Object> list = null;
+        if (currentUser.getId() != null) {
+            XQuery xQuery = new XQuery("plistProductFavorite_default", request);
+            list = baseManager.listObject(xQuery);
+        }
+        model.addAttribute("productFavoriteList", list);
+        return "/purchaseOrder/productCollectionList";
+
+    }
+
     @RequestMapping({"personalInfo.do"})
     public String getPersonalInfo(ModelMap modelMap){
         String id = AuthorizationUtil.getMyUser().getId();

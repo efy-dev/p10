@@ -1,19 +1,18 @@
 package com.efeiyi.ec.website.order.service;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
 
 /**
  * Created by Administrator on 2015/8/3.
  */
 public interface PaymentManager {
 
-    String alipay(PurchaseOrder purchaseOrder,Float paymentAmount);
+    String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails,Float paymentAmount);
 
     void payCallback(String purchaseOrderPaymentId,String transactionNumber);
 
-//    void wxpayCallback(String purchaseOrderPaymentId,String transactionNumber);
+    Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount,String openid);
 
-    Object wxpay(PurchaseOrder purchaseOrder, Float paymentAmount,String openid);
-
-    String wxNativePay(PurchaseOrder purchaseOrder, Float paymentAmount);
+    String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
 }

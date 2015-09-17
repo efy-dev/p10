@@ -38,7 +38,7 @@ public class PurchaseOrder {
     private Tenant tenant;
     private List<PurchaseOrder> subPurchaseOrder;
     private PurchaseOrder fatherPurchaseOrder;
-    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信
+    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
     private String message; //买家留言
     private Coupon coupon; //优惠券
 
@@ -178,21 +178,22 @@ public class PurchaseOrder {
 
     @Column(name = "total")
     public BigDecimal getTotal() {
-        try {
-            if (getCoupon() != null) {
-                Coupon coupon = getCoupon();
-                System.out.println("=============start=============");
-                System.out.println(coupon.getCouponBatch().getPrice());
-                System.out.println(originalPrice);
-                System.out.println(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-                System.out.println("=============end=============");
-                return new BigDecimal(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-            } else {
-                return originalPrice;
-            }
-        }catch (Exception e){
-            return originalPrice;
-        }
+//        try {
+//            if (getCoupon() != null) {
+//                Coupon coupon = getCoupon();
+//                System.out.println("=============start=============");
+//                System.out.println(coupon.getCouponBatch().getPrice());
+//                System.out.println(originalPrice);
+//                System.out.println(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
+//                System.out.println("=============end=============");
+//                return new BigDecimal(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
+//            } else {
+//                return originalPrice;
+//            }
+//        }catch (Exception e){
+//            return originalPrice;
+//        }
+        return total;
     }
 
     public void setTotal(BigDecimal total) {

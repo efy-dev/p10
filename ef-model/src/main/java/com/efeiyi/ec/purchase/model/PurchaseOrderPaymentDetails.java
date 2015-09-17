@@ -18,6 +18,8 @@ public class PurchaseOrderPaymentDetails {
     private BigDecimal money;
     private Coupon coupon;
     private PurchaseOrderPayment purchaseOrderPayment;
+    private String transactionNumber; //交易号
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -66,5 +68,14 @@ public class PurchaseOrderPaymentDetails {
 
     public void setPurchaseOrderPayment(PurchaseOrderPayment purchaseOrderPayment) {
         this.purchaseOrderPayment = purchaseOrderPayment;
+    }
+
+    @Column(name = "transaction_number")
+    public String getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
     }
 }

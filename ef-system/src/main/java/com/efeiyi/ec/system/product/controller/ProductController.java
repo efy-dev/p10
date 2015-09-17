@@ -2,10 +2,7 @@ package com.efeiyi.ec.system.product.controller;
 
 
 import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPicture;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
@@ -141,6 +138,58 @@ public class ProductController extends BaseController {
 
     }
 
+    @RequestMapping("/subjectUploadify.do")
+    @ResponseBody
+    public String subjectUploadifyImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String data = "";
+
+        String subjectId = request.getParameter("subjectId");
+
+        Subject subject = null;
+        if(!"".equals(subjectId)){
+                subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
+        }
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            SubjectPicture subjectPicture = new SubjectPicture();
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            String fileName = mf.getOriginalFilename();//获取原文件名
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            url = "subject/" + fileName.substring(0, index) + identify + ".jpg";
+            try {
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+//                if(subject != null && "2".equals(request.getParameter("status"))) {
+//                    subjectPicture.setPictureUrl(url);
+//                    subjectPicture.setSubject(subject);
+//                    baseManager.saveOrUpdate(SubjectPicture.class.getTypeName(), subjectPicture);
+//
+//                    data = subjectPicture.getId() + ":" + url;
+//                 }else {
+//                    data = url;
+//                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        System.out.print(url);
+        return url;
+
+
+    }
+
     @RequestMapping("/getImg.do")
     @ResponseBody
     public String getImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -225,6 +274,24 @@ public class ProductController extends BaseController {
             Product productTemp = (Product) baseManager.getObject(Product.class.getName(), request.getParameter("productId"));
             model.addAttribute("object", productTemp);
         }
+
+        return resultPage;
+    }
+
+    @RequestMapping("/saveSubject.do")
+    public String saveNewProduct(Subject subject, String[] flag,String[] spId,String[] subjectPicture,
+                                 HttpServletRequest request,
+                                 String resultPage) {
+
+                try {
+                   productManager.saveSubject(subject,flag,spId,subjectPicture);
+
+                }catch (Exception e){
+                   e.printStackTrace();
+                }
+
+
+
 
         return resultPage;
     }
@@ -329,5 +396,28 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return pictureId;
+    }
+
+
+    @RequestMapping("/linkSubject.do")
+    @ResponseBody
+    public String linkSubject(String subjectId, String productId,String subjectProductId,String status, HttpServletRequest request) {
+
+        try {
+            if("0".equals(status)){
+                baseManager.delete(SubjectProduct.class.getName(),subjectProductId);
+
+            }else {
+                SubjectProduct subjectProduct = new SubjectProduct();
+                subjectProduct.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProduct.setProduct((Product)baseManager.getObject(Product.class.getName(),productId));
+                baseManager.saveOrUpdate(SubjectProduct.class.getName(), subjectProduct);
+                subjectProductId = subjectProduct.getId();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectProductId;
     }
 }
