@@ -1,10 +1,9 @@
 package com.efeiyi.ec.organization.model;
 
-import com.efeiyi.ec.wiki.model.ProjectContent;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/28.
@@ -15,7 +14,6 @@ public class Consumer extends BigUser {
     private BigDecimal deposit;
     private Integer score;
     private String unionid;
-    //private List<ProjectContent> projectContents;
 
     @Column(name = "deposit")
     public BigDecimal getDeposit() {
@@ -43,14 +41,4 @@ public class Consumer extends BigUser {
     public void setUnionid(String unionid) {
         this.unionid = unionid;
     }
-
-   /* @ManyToMany(fetch = FetchType.LAZY,mappedBy = "consumer")
-    public List<ProjectContent> getProjectContents() {
-        return projectContents;
-    }
-
-    public void setProjectContents(List<ProjectContent> projectContents) {
-        this.projectContents = projectContents;
-    }*/
-
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http pattern="/scripts/assets/wap/css/style.css" security="none"/>
+    <http pattern="/scripts/assets/images/i/gl.jpg" security="none"/>
+    <http pattern="/**/*.jpeg" security="none"/>
+    <http pattern="/scripts/assets/images/img3.gif" security="none"/>
+    <http pattern="/scripts/assets/images/images/header1.png" security="none"/>
+    <http pattern="/js/*.js" security="none"/>
+    <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
+        <csrf disabled="true"/>
+        <!--<intercept-url pattern="/home.do" access="hasRole('ROLE_USER')"/>-->
+        <intercept-url pattern="/home.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>
+        <custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
+        <custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
+        <custom-filter position="CAS_FILTER" ref="casFilter"/>
+    </http>
+    <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+        <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
+        <b:property name="serviceProperties" ref="serviceProperties"/>
+    </b:bean>
+    <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
+        <b:property name="service"  value="http://192.168.1.39:8080/j_spring_cas_security_check"/>
+        <b:property name="sendRenew" value="false"/>
+    </b:bean>
+    <b:bean id="casFilter"  class="org.springframework.security.cas.web.CasAuthenticationFilter">
+        <b:property name="authenticationManager" ref="authenticationManager"/>
+    </b:bean>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="casAuthenticationProvider"/>
+    </authentication-manager>
+    <b:bean id="casAuthenticationUserDetailsService" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+        <b:property name="userDetailsService" >
+            <b:ref bean="userManager" />
+        </b:property>
+    </b:bean>
+    <b:bean id="casAuthenticationProvider"
+            class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+        <b:property name="authenticationUserDetailsService" ref="casAuthenticationUserDetailsService"/>
+        <b:property name="serviceProperties" ref="serviceProperties" />
+        <b:property name="ticketValidator">
+            <b:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+                <b:constructor-arg index="0" value="http://192.168.1.57/cas" />
+            </b:bean>
+        </b:property>
+        <b:property name="key" value="an_id_for_this_auth_provider_only"/>
+    </b:bean>
+    <b:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
+    <b:bean id="requestSingleLogoutFilter"
+            class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <b:constructor-arg
+                value="http://192.168.1.57/cas/logout" />
+        <b:constructor-arg>
+            <b:bean
+                    class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+        </b:constructor-arg>
+        <b:property name="filterProcessesUrl" value="/j_spring_cas_security_logout" />
+    </b:bean>
+</b:beans>

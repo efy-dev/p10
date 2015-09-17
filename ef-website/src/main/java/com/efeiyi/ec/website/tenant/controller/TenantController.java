@@ -2,12 +2,18 @@ package com.efeiyi.ec.website.tenant.controller;
 
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.Page;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.AutoSerialManager;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -27,10 +33,8 @@ public class TenantController {
         String tenantId = conditions.substring(18,conditions.length());
         xQuery.addRequestParamToModel(model,request);
         PageInfo pageInfo =baseManager.listPageInfo(xQuery);
-        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         model.addAttribute("productModelList", pageInfo.getList());
         model.addAttribute("tenantId",tenantId);
-        model.addAttribute("tenant",tenant);
         return "/tenant/productPList";
     }
 

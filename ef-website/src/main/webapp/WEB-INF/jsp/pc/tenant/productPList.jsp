@@ -7,9 +7,9 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="<c:url value="${tenant.logoUrl}"/>" alt=""/></div>
+        <div class="img"><img src="<c:url value="/scripts/upload/shop-1.jpg"/>" alt=""/></div>
             <span class="des">
-                <p><h1>${tenant.name}</h1></p>
+                <p><h1>杨柳青年画</h1></p>
               <p><font>天津</font><font>杨柳青</font><font>国家级传承人霍庆有</font></p>
             </span>
       </div>

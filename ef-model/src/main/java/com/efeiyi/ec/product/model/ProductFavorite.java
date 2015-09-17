@@ -16,23 +16,13 @@ public class ProductFavorite {
 
 
     private String id;
-    private ProductModel productModel;
+    private Product product;
     private User user;
     private String status;
     private Date createDatetime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_model_id")
-    public ProductModel getProductModel() {
-        return productModel;
-    }
-
-    public void setProductModel(ProductModel productModel) {
-        this.productModel = productModel;
-    }
 
     @Id
-
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
     public String getId() {
@@ -43,8 +33,15 @@ public class ProductFavorite {
         this.id = id;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
 
-
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

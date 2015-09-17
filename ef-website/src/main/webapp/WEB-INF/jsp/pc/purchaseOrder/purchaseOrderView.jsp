@@ -52,10 +52,10 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productPicture.pictureUrl}@!product-icon"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="<c:url value="${op.productModel.product.picture_url}"/>"></a></li>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
+                <td class="commodity_price_unit1  price9">${op.productModel.product.category.name}</td>
                 <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                 <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
               </tr>

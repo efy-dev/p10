@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -24,7 +23,7 @@
                 <c:if test="${status.index!=0}">
                     <li>
                 </c:if>
-                <a href="<c:url value="${banner.directUrl}"/> "><img src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481" alt=""/></a></li>
+                <img src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481" alt=""/></li>
             </c:forEach>
             <%--<li><img src="shop2015/upload/focus2.jpg" width="1280" height="481" alt=""/></li>--%>
             <%--<li><img src="shop2015/upload/focus3.jpg" width="1280" height="481" alt=""/></li>--%>
@@ -41,7 +40,7 @@
     <div class="box-hd wh">
         <div class="title wh"><h3>品牌故事</h3></div>
         <div class="banner">
-            <a href="<c:url value="/subject/${subject.id}"/> " target="_blank"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400" alt=""/></a>
+            <a href="" target="_blank"><img src="/scripts/images/banner.jpg" width="1280" height="400" alt=""/></a>
         </div>
     </div>
     <!-- //End--品牌故事-->
@@ -76,15 +75,14 @@
             <ul class="ul-item">
                 <c:forEach items="${masterList}" var="master">
                     <li>
-                        <a href="http://${master.name}.efeiyi.com" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}@!ef-home-master"
+                        <a href="" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com${master.favicon}"
                                                         alt=""/></a>
 
-                        <p><strong>${master.fullName}</strong></p>
+                        <p><strong>${master.name}</strong></p>
 
-                        <p>[${master.getMainProjectName().getProject().getName()}]</p>
+                        <p>[木版水印]</p>
 
-                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
-                        <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
+                        <p>国家级传承人</p>
 
                         <p><a class="more" href="" target="_blank" title="更多"><i class="icon"></i>更多</a></p>
                     </li>

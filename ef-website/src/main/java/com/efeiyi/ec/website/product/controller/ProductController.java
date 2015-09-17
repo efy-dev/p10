@@ -1,6 +1,9 @@
 package com.efeiyi.ec.website.product.controller;
 
-import com.efeiyi.ec.product.model.*;
+import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductFavorite;
+import com.efeiyi.ec.product.model.ProductModel;
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -52,27 +55,11 @@ public class ProductController {
         XQuery xQuery = new XQuery("plistProductModel_default",request);
         xQuery.put("product_project_id", projectId);
         xQuery.addRequestParamToModel(model,request);
-        List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
-        Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModel:productModelList){
-                StringBuilder s = new StringBuilder();
-                s.append(productModel.getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
-                }
-                if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
-                    s.append("...");
-                }
-                map.put(productModel,s.toString());
-            }
-        }
+        List<Object> productModelList = baseManager.listPageInfo(xQuery).getList();
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
         String proName = project.getName();
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
-        model.addAttribute("map",map);
         model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
     }
@@ -94,11 +81,10 @@ public class ProductController {
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
     public boolean addProductFavorite(HttpServletRequest request) throws Exception{
-        String productModelId =request.getParameter("id");
+        String productId =request.getParameter("productId");
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
         xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
-        xSaveOrUpdate.getParamMap().remove("id");
+        xSaveOrUpdate.getParamMap().put("product_id", productId);
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return true;
     }
@@ -109,25 +95,9 @@ public class ProductController {
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         List<ProductModel> productModelList  = productModel.getProduct().getProductModelList();
-        Map<ProductModel,String> map = new HashMap<>();
-        if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModelTemp:productModelList){
-                StringBuilder s = new StringBuilder();
-                s.append(productModelTemp.getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:productModelTemp.getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
-                }
-                if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
-                    s.append("...");
-                }
-                map.put(productModelTemp,s.toString());
-            }
-        }
         productModelList.remove(productModel);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
-        model.addAttribute("map",map);
         return "/product/recommendationList";
 }
     /**
@@ -166,21 +136,9 @@ public class ProductController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
         List<ProductModel> productModelListTmp = product.getProductModelList();
-        List<ProductPicture> productPictures = product.getProductPictureList();
-        ProductPicture productPicture = new ProductPicture();
-        if (productPictures != null && productPictures.size() > 0) {
-            for (ProductPicture p : productPictures) {
-                    if("2".equals(p.getStatus())){
-                        productPicture = p;
-                        break;
-                    }
-            }
-        }
         model.addAttribute("productModelList", productModelListTmp);
         model.addAttribute("productModel", productModel);
         model.addAttribute("product", product);
-        model.addAttribute("productPicture",productPicture);
-        model.addAttribute("productPictures",productPictures);
         return "/product/productDetails";
     }
 

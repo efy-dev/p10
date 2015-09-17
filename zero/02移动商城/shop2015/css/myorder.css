@@ -236,11 +236,7 @@ ul,dl{list-style:none}
 .enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1rem;width: 100%;float: left}
 .enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;width: 100%;float: left}
 .enroll .start .login .page li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;}
-.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
-.enroll .start .login .page li span{padding-left: 2rem;float: right;padding-right: 0}
-@media(min-width:640px) {
-.enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
-}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: left;color:#000;}
 .enroll .start .login .page li .tet1{width: 100%;float: left;}
 .enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
 .enroll .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
