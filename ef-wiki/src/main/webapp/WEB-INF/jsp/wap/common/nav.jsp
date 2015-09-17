@@ -7,17 +7,27 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="topbar wh">
-    <div class="hd">
-        <ul class="ul-item">
+<div class="topbar wh" id="nav" >
 
-            <li><a href="<c:url value=""/>" title="热门">热门</a></li>
-            <li><a href="<c:url value=""/>" title="关注">关注</a></li>
-            <li><a href="<c:url value=""/>" title="分类">分类</a></li>
+              <div data-am-widget="tabs"
+                 class="am-tabs am-tabs-default">
+                <ul class="am-tabs-nav am-cf">
+                    <li><a class="am-active" href="<c:url value=""/>" title="热门">热门</a></li>
+                    <li><a href="<c:url value=""/>" title="关注">关注</a></li>
+                    <li><a href='<c:url value="/category.do" />' id=="fenlei" title="分类">分类</a></li>
+                </ul>
+                </div>
 
-        </ul>
-    </div>
 </div>
+<script >
+
+$().ready(function () {
+
+    $("#fenlei").click(function(){
+        $("#nav").style.display="inline";
+    });
+});
+</script>
 <!-- //End--topbar-->
 
-</div>
+

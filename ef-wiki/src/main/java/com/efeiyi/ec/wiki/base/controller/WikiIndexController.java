@@ -1,4 +1,4 @@
-package com.efeiyi.ec.wiki.controller;
+package com.efeiyi.ec.wiki.base.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
