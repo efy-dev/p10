@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="am-g">
-  <button onclick="window.location.href='<c:url value="/content/newOrganization.do?qm=direct2JspOrganization_default&resultPage=/content/organization.do?qm=${requestScope.qm}"/>'"
+  <button onclick="window.location.href='<c:url value="/myDocument/newOrganization.do?group=${group}&qm=direct2JspOrganization_default&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
           class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建</button>
 
   <table class="am-table am-table-bordered am-table-radius am-table-striped">
@@ -28,49 +28,19 @@
     <c:forEach items="${intangibleCulturalOrganizationList}" var="organization">
       <tr>
         <td>
-            <button onclick="window.location.href='<c:url value="/content/newOrganization.do?qm=direct2JspOrganization_newOrganization&id=${organization.id}&resultPage=/content/organization.do?qm=${requestScope.qm}"/>'"
+            <button onclick="window.location.href='<c:url value="/myDocument/newOrganization.do?group=${group}&qm=direct2JspOrganization_newOrganization&id=${organization.id}&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 编辑</button>
-            <button onclick="window.location.href='<c:url value="/content/removeDocument.do?qm=removeContent&id=${organization.id}"/>'"
+            <button onclick="window.location.href='<c:url value="/myDocument/removeDocument.do?qm=removeContent&id=${organization.id}"/>'"
                   class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-
-          <input id="${organization.id}0" value="${organization.id}" name="${organization.id}"
-                 metaProperty="id" type="hidden"/>
-          <input id="${organization.id}1" value="${organization.addressDistrict.id}"
-                 name="${organization.id}"
-                 metaProperty="addressDistrict.id" type="hidden"/>
-          <input id="${organization.id}2" value="${organization.status}" name="${organization.id}"
-                 metaProperty="status" type="hidden"/>
-          <input id="${organization.id}3"
-                 value="<fmt:formatDate value="${organization.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
-                 name="${organization.id}"
-                 metaProperty="theDatetime" type="hidden"/>
-
         </td>
         <td>
-          <input type="text" id="${organization.id}4"
-                 value="${organization.name}"
-                 name="${organization.id}" metaProperty="name"
-                 readonly="true"
-                 ondblclick="switchReadOnly(this.id,false)"
-                 onblur="switchReadOnly(this.id,true,'<c:url
-                         value='/organization/saveOrganization.do'/>','metaProperty')"/>
+          <div>${organization.name}</div>
         </td>
           <td>
-              <input type="text"
-                     <%--id="${organization.id}5"--%>
-                     value="${organization.addressDistrict.addressCity.addressProvince.name} ${organization.addressDistrict.addressCity.name} ${organization.addressDistrict.name}"
-                     <%--name="${organization.id}" metaProperty="addressDistrict.id"--%>
-                     readonly="true"
-                     />
+              <div>${organization.addressDistrict.addressCity.addressProvince.name} ${organization.addressDistrict.addressCity.name} ${organization.addressDistrict.name}</div>
           </td>
           <td>
-              <input type="text" id="${organization.id}6"
-                     value="${organization.inCharge}"
-                     name="${organization.id}" metaProperty="inCharge"
-                     readonly="true"
-                     ondblclick="switchReadOnly(this.id,false)"
-                     onblur="switchReadOnly(this.id,true,'<c:url
-                             value='/organization/saveOrganization.do'/>','metaProperty')"/>
+              <div>${organization.inCharge}</div>
           </td>
       </tr>
     </c:forEach>

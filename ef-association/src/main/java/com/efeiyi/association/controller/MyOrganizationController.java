@@ -14,12 +14,12 @@ import java.util.Date;
  * Created by Administrator on 2015/9/14.
  */
 @RestController
-public class OrganizationController {
+public class MyOrganizationController {
     @Autowired
     private BaseManager baseManager;
 
 
-    @RequestMapping("/organization/saveOrganization.do")
+    @RequestMapping("/myOrganization/saveOrganization.do")
     public String saveOrganization(ModelMap model, HttpServletRequest request, IntangibleCulturalOrganization intangibleCulturalOrganization) throws Exception {
 
         //新建内容
@@ -28,13 +28,11 @@ public class OrganizationController {
         if (intangibleCulturalOrganization.getId() == null || "".equals(intangibleCulturalOrganization.getId())) {
             //新建内容传入原页面地址
             intangibleCulturalOrganization.setStatus("1");
-            baseManager.saveOrUpdate(intangibleCulturalOrganization.getClass().getName(), intangibleCulturalOrganization);
-
+            intangibleCulturalOrganization.setId(null);
 
         }
         baseManager.saveOrUpdate(intangibleCulturalOrganization.getClass().getName(),intangibleCulturalOrganization);
 
         return request.getContextPath() + path;
-//        return null;
     }
 }
