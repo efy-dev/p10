@@ -68,18 +68,12 @@
         </div>
         <div class="am-form-group">
             <label name="theDate" for="theDate" class="am-u-sm-3 am-form-label">认证时间 <small>*</small></label>
-            <%--<div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}">--%>
-                <%--<input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间"--%>
-                       <%--value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>" required readonly/>--%>
-                <%--<span class="am-input-group-btn am-datepicker-add-on">--%>
-                    <%--<button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button>--%>
-                <%--</span>--%>
-            <%--</div>--%>
-            <div class="am-u-sm-9">
-                <input type="text" name="theDate" id="theDate" class="am-form-field"
-                       data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}"
-                       value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>"
-                       placeholder="日历组件" data-am-datepicker readonly/>
+            <div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years', minViewMode: 'months'}">
+                <input type="text" name="theDate" id="theDate" class="am-form-field" placeholder="认证时间"
+                       value="<fmt:formatDate value='${object.theDate}'  pattern='yyyy-MM'/>" required readonly/>
+                <span class="am-input-group-btn am-datepicker-add-on">
+                    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button>
+                </span>
             </div>
         </div>
         <div class="am-form-group">

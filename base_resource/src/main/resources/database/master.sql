@@ -353,6 +353,8 @@ CREATE TABLE `tenant_category` (
 PRIMARY KEY (`id`)
 )
 ;
+<<<<<<< HEAD
+=======
 
 ALTER TABLE `product_description`
 MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;
@@ -393,3 +395,4 @@ CREATE TABLE `subject_product` (
 )
 ;
 
+>>>>>>> origin/master

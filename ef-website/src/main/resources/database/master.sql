@@ -22,7 +22,7 @@ AFTER `status`;
 
 CREATE TABLE `product_favorite` (
   `id`         CHAR(16) NOT NULL,
-  `product_model_id` CHAR(16) NULL,
+  `product_id` CHAR(16) NULL,
   `user_id`    CHAR(16) NULL,
   `status`     CHAR(8)  NULL,
   PRIMARY KEY (`id`)
@@ -186,6 +186,7 @@ CREATE TABLE `product_model_description` (
   PRIMARY KEY (`id`)
 );
 
+#-------------------------------未执行----------------------------------
 
 ALTER TABLE `purchase_coupon`
 MODIFY COLUMN `id` CHAR(16)
@@ -210,66 +211,6 @@ AFTER `serial`;
 
 
 
-ALTER TABLE `purchase_order`
-ADD COLUMN `coupon_id`  char(16) NULL AFTER `message`;
-
-#-------------------------------未执行----------------------------------
-CREATE TABLE `subject` (
-  `id`  char(16) NOT NULL ,
-  `picture_url`  varchar(255) NULL ,
-  `subject_discription_id`  char(16) NULL ,
-  `status`  char(8) NULL ,
-  PRIMARY KEY (`id`)
-)
-;
 
 
-
-CREATE TABLE `subject_description` (
-  `id`  char(16) NOT NULL ,
-  `content`  text NULL ,
-  PRIMARY KEY (`id`)
-)
-;
-
-CREATE TABLE `subject_picture` (
-  `id`  char(16) NOT NULL ,
-  `picture_url`  varchar(255) NULL ,
-  `subject_id`  char(16) NULL ,
-  PRIMARY KEY (`id`)
-)
-;
-
-CREATE TABLE `subject_product_model` (
-  `id`  char(16) NOT NULL ,
-  `subject_id`  char(16) NULL ,
-  `product_model_id`  char(16) NULL ,
-  `status`  char(8) NULL ,
-  PRIMARY KEY (`id`)
-)
-;
-
-ALTER TABLE `subject`
-ADD COLUMN `index`  int(11) NULL AFTER `status`;
-
-
-CREATE TABLE `purchase_order_payment_details` (
-  `id`  char(16) NOT NULL ,
-  `payway`  char(8) NULL ,
-  `money`  decimal NULL ,
-  `coupon_id`  char(16) NULL ,
-  `purchase_order_payment_id`  char(16) NULL ,
-  PRIMARY KEY (`id`)
-)
-;
-
-
-ALTER TABLE `purchase_order_product`
-ADD COLUMN `purchase_order_comment_id`  char(16) NULL AFTER `purchase_price`;
-
-
-
-
-ALTER TABLE `purchase_order_payment_details`
-ADD COLUMN `transaction_number`  char(128) NULL AFTER `purchase_order_payment_id`;
 

@@ -112,7 +112,7 @@
 <script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/system.js"/>"></script>
 <script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
-<script src="<c:url value="/scripts/js/jquery.uploadify.min.js"/>"></script>
+<script src="<c:url value="/scripts/upload/jquery.uploadify.min.js"/>"></script>
 
 
 
@@ -149,7 +149,7 @@
             width: 120,
             height: 30,
             dataType: 'json',
-            swf: '<c:url value="/scripts/js/uploadify.swf"/>',
+            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
             uploader: '<c:url value="/myEfeiyi/uploadIcon.do?id=${user.id}"/>',
             'onUploadSuccess':function(file, data, response){
                 $('#' + file.id).find('.data').html(' 上传完毕');

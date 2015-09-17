@@ -45,4 +45,4 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="<c:url value="/scripts/js/system.js?v=1"/>"></script>
+<script src="<c:url value="/resources/js/system.js"/>"></script>

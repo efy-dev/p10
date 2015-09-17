@@ -38,19 +38,8 @@ public class PurchaseOrder {
     private Tenant tenant;
     private List<PurchaseOrder> subPurchaseOrder;
     private PurchaseOrder fatherPurchaseOrder;
-    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
+    private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信
     private String message; //买家留言
-    private Coupon coupon; //优惠券
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coupon_id")
-    public Coupon getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
-    }
 
     @Column(name = "message")
     public String getMessage() {
@@ -61,7 +50,7 @@ public class PurchaseOrder {
         this.message = message;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fatherPurchaseOrder")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "fatherPurchaseOrder")
     public List<PurchaseOrder> getSubPurchaseOrder() {
         return subPurchaseOrder;
     }
@@ -139,7 +128,7 @@ public class PurchaseOrder {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_address_id")
+    @JoinColumn(name="user_address_id")
     public ConsumerAddress getConsumerAddress() {
         return consumerAddress;
     }
@@ -178,21 +167,6 @@ public class PurchaseOrder {
 
     @Column(name = "total")
     public BigDecimal getTotal() {
-//        try {
-//            if (getCoupon() != null) {
-//                Coupon coupon = getCoupon();
-//                System.out.println("=============start=============");
-//                System.out.println(coupon.getCouponBatch().getPrice());
-//                System.out.println(originalPrice);
-//                System.out.println(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//                System.out.println("=============end=============");
-//                return new BigDecimal(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//            } else {
-//                return originalPrice;
-//            }
-//        }catch (Exception e){
-//            return originalPrice;
-//        }
         return total;
     }
 
@@ -225,15 +199,5 @@ public class PurchaseOrder {
 
     public void setPayWay(String payWay) {
         this.payWay = payWay;
-    }
-
-    @Transient
-    public BigDecimal getRealPayMoney(){
-        List<PurchaseOrderPayment> purchaseOrderPaymentList  = getPurchaseOrderPaymentList();
-        BigDecimal price = new BigDecimal(0);
-        for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList){
-            price.add(purchaseOrderPaymentTemp.getPaymentAmount());
-        }
-        return price;
     }
 }

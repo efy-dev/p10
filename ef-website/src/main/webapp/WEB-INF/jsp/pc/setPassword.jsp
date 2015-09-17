@@ -10,12 +10,11 @@
       <ul>
         <li>
           <label>设置新密码</label>
-          <input name="np" class="txt" type="password" placeholder="请输入新密码"onblur="checkLg(this);">
-          <span class="active-d span2"></span>
+          <input name="np" class="txt" type="text" placeholder="请输入新密码">
         </li>
         <li>
           <label>重复新密码</label>
-          <input name="pwd" class="txt" type="password" placeholder="请重复输入新密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
+          <input name="pwd" class="txt" type="text" placeholder="请重复输入新密码" onkeydown="checkEq(this);" onkeyup="checkEq(this);">
           <span class="active-d span2"></span>
         </li>
         <li>
@@ -41,14 +40,19 @@
 
   function okChange(){
     var  flag = true;
-    var np= $(":input[name='np']").val();
-    var pwd= $(":input[name='pwd']").val();
     $(".active-d").each(function(){
-      if($(this).text()!="" || np=="" || pwd==""){
+      if($(this).text()!=""){
         flag = false;
         return false;
       }
     });
+    var np= $(":input[name='np']").val();
+    var pwd= $(":input[name='pwd']").val();
+    if(np!="" && pwd!=""){
+      flag = true;
+    }else{
+      flag = false;
+    }
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
       window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
@@ -65,15 +69,6 @@
       $(obj).next("span").text("");
     }
   }
-  function checkLg(obj){
-    var lg= $(":input[name='np']").val().length;
-    if(lg<5 || lg>16){
-      $(obj).next("span").text("密码由6位-16位字母或数字组成");
-    }else{
-      $(obj).next("span").text("");
-
-    }
-  }
-</script>
+</script>>
 </body>
 </html>

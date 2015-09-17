@@ -26,7 +26,7 @@
         <div class="am-form-group">
             <label name="tenant_id" for="tenant_idName" class="am-u-sm-3 am-form-label">商户名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" id="tenant_idName" title="商户名称" placeholder="商户名称"
+                <input type="text" id="tenant_idName" placeholder="商户名称"
                        onclick="m8uDialog.openDialog('tenant_id','tenant_idName','tenant', null,'<%=path%>')"
                        value="${object.tenant.name}" required="true" readonly>
                 <input type="hidden" id="tenant_id"  name="tenant.id" value="${object.tenant.id}">
