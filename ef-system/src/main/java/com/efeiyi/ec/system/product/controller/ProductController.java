@@ -397,4 +397,27 @@ public class ProductController extends BaseController {
         }
         return pictureId;
     }
+
+
+    @RequestMapping("/linkSubject.do")
+    @ResponseBody
+    public String linkSubject(String subjectId, String productId,String subjectProductId,String status, HttpServletRequest request) {
+
+        try {
+            if("0".equals(status)){
+                baseManager.delete(SubjectProduct.class.getName(),subjectProductId);
+
+            }else {
+                SubjectProduct subjectProduct = new SubjectProduct();
+                subjectProduct.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProduct.setProduct((Product)baseManager.getObject(Product.class.getName(),productId));
+                baseManager.saveOrUpdate(SubjectProduct.class.getName(), subjectProduct);
+                subjectProductId = subjectProduct.getId();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectProductId;
+    }
 }

@@ -19,6 +19,7 @@ public class Subject {
     private SubjectDescription subjectDescription;
     private Integer subjectIndex;
     private List<SubjectPicture> subjectPictureList;
+    private List<SubjectProduct> subjectProductList;
     private String status;
 
     @Id
@@ -86,5 +87,15 @@ public class Subject {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public List<SubjectProduct> getSubjectProductList() {
+        return subjectProductList;
+    }
+
+    public void setSubjectProductList(List<SubjectProduct> subjectProductList) {
+        this.subjectProductList = subjectProductList;
     }
 }

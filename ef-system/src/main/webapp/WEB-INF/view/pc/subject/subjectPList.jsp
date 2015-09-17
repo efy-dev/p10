@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=${view}&id=${product.id}'/>">${subject.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewSubject&id=${subject.id}'/>">${subject.name}</a></td>
                         <td class="am-hide-sm-only">
                             <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${subject.pictureUrl}@!product-model"/>"
                                  alt=""/>

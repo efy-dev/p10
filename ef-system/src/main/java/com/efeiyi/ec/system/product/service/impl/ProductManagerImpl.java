@@ -279,17 +279,13 @@ public class ProductManagerImpl implements ProductManager{
 
     @Override
     public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
+        SubjectDescription subjectDescription = subject.getSubjectDescription();
         if("".equals(subject.getId())) {
             subject.setId(null);
-
-           // subject.setStatus("1");
-
-            SubjectDescription subjectDescription = subject.getSubjectDescription();
             subjectDescription.setId(null);
-            xdoDao.saveOrUpdateObject(subjectDescription);
-            subject.setSubjectDescription(subjectDescription);
-
         }
+        xdoDao.saveOrUpdateObject(subjectDescription);
+        subject.setSubjectDescription(subjectDescription);
         subject.setStatus("1");
         subject.setSubjectIndex(1);
         xdoDao.saveOrUpdateObject(subject);

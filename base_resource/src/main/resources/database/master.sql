@@ -385,3 +385,11 @@ ADD COLUMN `subject_id`  char(16) NULL AFTER `content`;
 
 ALTER TABLE `subject`
 CHANGE COLUMN `index2` `subject_index`  int(11) NULL DEFAULT NULL AFTER `status`;
+
+CREATE TABLE `subject_product` (
+`id`  char(16) NOT NULL ,
+`subject_id`  char(16) NULL ,
+`product_id`  char(16) NULL
+)
+;
+
