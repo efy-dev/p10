@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>">
   <sitemesh:write property='head'/>
   <style>
-    .ass-active {
+    .pal-active {
       background-color: #9a9a9a;
     }
   </style>

@@ -69,7 +69,7 @@
                             </td>
                             <td width="437">
                                 <div class="cols1">
-                                    <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
+                                    <img src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}@!product-icon" alt=""/>
 
                                     <div class="info">
                                         <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -104,7 +104,7 @@
                             </td>
                             <td width="111">
                     <span>
-                    <p><a onclick="showAlert('提示','是否确认删除',function(){
+                    <p><a onclick="showConfirm('提示','是否确认删除',function(){
                         window.location.href = '<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>';
                     })">删除</a></p>
                     <%--<p><a href="#">移到我的收藏</a></p>--%>

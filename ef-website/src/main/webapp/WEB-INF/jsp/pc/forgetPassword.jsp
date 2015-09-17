@@ -93,7 +93,6 @@
           username:userName
         },
         success: function (data) {
-          alert(data);
           if(data == false){
             $("#error").text("您输入的用户名不正确");
             $("#verificationButton").removeAttr("disabled");

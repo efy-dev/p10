@@ -44,8 +44,7 @@
                             class="am-icon-trash-o"></span> 删除
                     </button>
                     <button onclick="saveObject('${document.id}','<c:url
-                            value='/myDocument/saveDocument.do'/>','status',<c:if test="${document.status == 1}">'2'</c:if><c:if test="${document.status != 1}">'1'</c:if>,'&qm=/myDocument/doc.do?qm=${requestScope.qm}'
-                            )"
+                            value='/myDocument/saveDocument.do'/>','status',<c:if test="${document.status == 1}">'2'</c:if><c:if test="${document.status != 1}">'1'</c:if>,'&qm=/myDocument/doc.do?qm=plistNewsOrganization_default')"
                             class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                             class="am-icon-trash-o"></span> <c:if test="${document.status == 1}">取消推荐</c:if><c:if test="${document.status != 1}">推荐</c:if>
                     </button>
@@ -71,7 +70,7 @@
                     <input type="hidden" id="${document.id}10" name="${document.id}" value="${document.title}" metaProperty="title">
                 </td>
                 <td>
-                    <c:forEach items="${document.documentAttachmentList}" var="attachment">
+                    <c:forEach items="${documentAttachmentList}" var="attachment">
                         <img  id="${document.id}11" name="${document.id}" src="<%=imgBasePath%>${attachment.path}<%=imgListCss%>">
                     </c:forEach>
                 </td>

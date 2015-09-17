@@ -317,7 +317,7 @@ CREATE TABLE `core_p_auto_serial` (
 	`serial` bigint(10) NULL,
 	`groupName` varchar(25) NULL,
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;4
 
 
 CREATE TABLE `tenant_master` (
@@ -353,8 +353,6 @@ CREATE TABLE `tenant_category` (
 PRIMARY KEY (`id`)
 )
 ;
-<<<<<<< HEAD
-=======
 
 ALTER TABLE `product_description`
 MODIFY COLUMN `content`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;
@@ -386,7 +384,7 @@ ALTER TABLE `subject_description`
 ADD COLUMN `subject_id`  char(16) NULL AFTER `content`;
 
 ALTER TABLE `subject`
-CHANGE COLUMN `index2` `subject_index`  int(11) NULL DEFAULT NULL AFTER `status`;
+CHANGE COLUMN `index` `subject_index`  int(11) NULL DEFAULT NULL AFTER `status`;
 
 CREATE TABLE `subject_product` (
 `id`  char(16) NOT NULL ,
@@ -395,4 +393,3 @@ CREATE TABLE `subject_product` (
 )
 ;
 
->>>>>>> origin/master

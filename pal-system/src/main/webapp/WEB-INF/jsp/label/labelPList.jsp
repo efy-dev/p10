@@ -27,11 +27,11 @@
             <td>
                 <div id="thDiv">
                     操作
-                    <%--<c:if test="${not empty requestScope.pageInfo.list}">--%>
-                        <%--<button onclick="myConfirm('<c:url value="/Label/cancelLabelListAjax.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>', 'CL')"--%>
-                                <%--style="margin-right:2px;height: 30px"--%>
-                                <%--class="am-btn am-btn-default am-btn-xs am-text-danger">全部作废</button>--%>
-                    <%--</c:if>--%>
+                    <c:if test="${not empty requestScope.pageInfo.list}">
+                        <button onclick="myConfirm('<c:url value="/Label/cancelLabelListAjax.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>', 'CL')"
+                                style="margin-right:2px;height: 30px"
+                                class="am-btn am-btn-default am-btn-xs am-text-danger">全部作废</button>
+                    </c:if>
                 </div>
             </td>
             <td>序列号</td>
@@ -50,7 +50,7 @@
                 <td>
                     <div class="am-btn-toolbar">
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.id:${label.id}"/>'"
+                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistLabelCheckRecord_label&conditions=label.serial:${label.serial}"/>'"
                                     class="am-btn am-btn-default am-btn-xs">查询记录</button>
                             <c:if test="${label.status != '4'}">
                                 <button onclick="myConfirm('<c:url value="/Label/cancelLabelAjax.do?id=${label.id}"/>', 'CA')"

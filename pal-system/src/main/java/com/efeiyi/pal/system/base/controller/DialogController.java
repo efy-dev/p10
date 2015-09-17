@@ -7,6 +7,7 @@ import com.efeiyi.pal.organization.model.AddressProvince;
 import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.product.model.ProductSeries;
 import com.efeiyi.pal.product.model.TenantProductSeries;
+import com.efeiyi.pal.system.base.service.ModalServiceManager;
 import com.efeiyi.pal.system.order.service.LabelServiceManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.base.service.BaseManager;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -45,6 +47,9 @@ public class DialogController {
     @Autowired
     @Qualifier("labelServiceManagerImpl")
     private LabelServiceManager labelServiceManager;
+    @Autowired
+    @Qualifier("modalServiceManagerImpl")
+    private ModalServiceManager modalServiceManager;
 
     private XdoDao xdoDao = (XdoDao) ApplicationContextUtil.getApplicationContext().getBean("xdoDaoSupport");
 
@@ -59,6 +64,13 @@ public class DialogController {
         XQuery xQuery = new XQuery("listTenant_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         return list;
+    }
+
+    @RequestMapping({"/tenantLikesName/list/json"})
+    public Set<Object> listTenantLikesName(HttpServletRequest request) throws Exception{
+        String name = request.getParameter("name");
+        Set<Object> set = modalServiceManager.getListLikesName(name.trim(), "Tenant");
+        return set;
     }
 
     /**
@@ -91,6 +103,18 @@ public class DialogController {
         return list;
     }
 
+    @RequestMapping({"/product2LikesName/list/json"})
+    public Set<Object> listProduct2LikesName(Model model, HttpServletRequest request) throws Exception{
+        String tenantId = request.getParameter("tenantId");
+        String name = request.getParameter("name");
+        if (tenantId == null || "".equals(tenantId.trim())){
+            throw new Exception("无法获取商户Id");
+        }
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name, tenant, "Product");
+        return set;
+    }
+
     /**
      * 获取所有订单
      * @param request request
@@ -117,6 +141,13 @@ public class DialogController {
         return list;
     }
 
+    @RequestMapping({"/productSeriesLikesName/list/json"})
+    public Set<Object> listProductSeriesLikesName(HttpServletRequest request) throws Exception{
+        String name = request.getParameter("name");
+        Set<Object> set = modalServiceManager.getListLikesName(name.trim(), "ProductSeries");
+        return set;
+    }
+
     /**
      * 获取一个商户的所有认证信息
      * @param request request
@@ -128,6 +159,18 @@ public class DialogController {
         XQuery xQuery = new XQuery("listTenantCertification_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         return list;
+    }
+
+    @RequestMapping({"/tenantCertificationLikesName/list/json"})
+    public Set<Object> listTenantCertificationLikesName(HttpServletRequest request) throws Exception{
+        String tenantId = request.getParameter("tenantId");
+        String name = request.getParameter("name");
+        if (tenantId == null || "".equals(tenantId.trim())){
+            throw new Exception("无法获取商户Id");
+        }
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name.trim(), tenant, "TenantCertification");
+        return set;
     }
 
     /**
@@ -160,6 +203,13 @@ public class DialogController {
         return new HashSet<>(newList);
     }
 
+    @RequestMapping({"/seriesByTenantNullLikesName/list/json"})
+    public Set<Object> jsonListProductSeriesByTenantNullLikesName(HttpServletRequest request) throws Exception{
+        String name = request.getParameter("name");
+        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "productSeries");
+        return set;
+    }
+
     /**
      * 商户系列中某个商户包含的所有系列
      * @param request request
@@ -175,6 +225,18 @@ public class DialogController {
             newList.add(((TenantProductSeries) o).getProductSeries());
         }
         return newList;
+    }
+
+    @RequestMapping({"/seriesByTenantLikesName/list/json"})
+    public Set<Object> jsonListProductSeriesByTenantLikesName(HttpServletRequest request) throws Exception{
+        String tenantId = request.getParameter("tenantId");
+        String name = request.getParameter("name");
+        if (tenantId == null || "".equals(tenantId.trim())){
+            throw new Exception("无法获取商户Id");
+        }
+        Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
+        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(), "productSeries", "tenant", tenant);
+        return set;
     }
 
     /**
@@ -194,6 +256,13 @@ public class DialogController {
         return new HashSet<>(newList);
     }
 
+    @RequestMapping({"/TenantBySeriesNullLikesName/list/json"})
+    public Set<Object> jsonListTenantByProductSeriesNullLikesName(HttpServletRequest request) throws Exception{
+        String name = request.getParameter("name");
+        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "tenant");
+        return set;
+    }
+
     /**
      * 商户系列中某个系列包含的所有商户
      * @param request request
@@ -209,6 +278,18 @@ public class DialogController {
             newList.add(((TenantProductSeries) o).getTenant());
         }
         return newList;
+    }
+
+    @RequestMapping({"/TenantBySeriesLikesName/list/json"})
+    public Set<Object> jsonListTenantByProductSeriesLikesName(HttpServletRequest request) throws Exception{
+        String productSeriesId = request.getParameter("tenantId");
+        String name = request.getParameter("name");
+        if (productSeriesId == null || "".equals(productSeriesId.trim())){
+            throw new Exception("无法获取商户Id");
+        }
+        ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
+        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(),"tenant", "productSeries", productSeries);
+        return set;
     }
 
     /**
@@ -289,7 +370,7 @@ public class DialogController {
     }
 
     /**
-     *
+     * Ajax批量作废标签
      * @param request request
      * @return ajax访问需要返回值
      * @throws Exception

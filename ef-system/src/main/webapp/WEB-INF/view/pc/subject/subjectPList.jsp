@@ -70,7 +70,7 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
                                         删除
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="subjectRecommend('${subject.id}')"  href="javascript:void(0);"">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${product.id}"/>">
                                         推荐
                                     </a>
                                 </div>
@@ -106,19 +106,6 @@
             data:{id:divId},
             success: function (data) {
                 $("#"+divId).remove();
-            }
-        });
-    }
-
-    function subjectRecommend(id){
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/product/updateSubjectIndex.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:id},
-            success: function (data) {
-                location.reload();
             }
         });
     }

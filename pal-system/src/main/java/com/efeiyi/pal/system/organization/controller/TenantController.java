@@ -41,7 +41,7 @@ public class TenantController {
             tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         }
         tenant = setTenantBaseProperty(tenant, request, type);
-        tenant = getTenantRelationProperty(tenant, request);
+        tenant = getRelationProperty(tenant, request);
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
 
         modelMap.put("object", tenant);
@@ -106,31 +106,18 @@ public class TenantController {
      * @param request
      * @return
      */
-    private Tenant getTenantRelationProperty(Tenant tenant, HttpServletRequest request){
+    private Tenant getRelationProperty(Tenant tenant, HttpServletRequest request){
         String provinceId = request.getParameter("province.id");
         String cityId = request.getParameter("city.id");
         String districtId = request.getParameter("district.id");
 
-        if (provinceId == null || "".equals(provinceId)){
-            tenant.setProvince(null);
-        }else {
-            AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
-            tenant.setProvince(province);
-        }
+        AddressProvince province = (AddressProvince) baseManager.getObject(AddressProvince.class.getName(), provinceId);
+        AddressCity city = (AddressCity) baseManager.getObject(AddressCity.class.getName(), cityId);
+        AddressDistrict district = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), districtId);
 
-        if (cityId == null || "".equals(cityId)){
-            tenant.setCity(null);
-        }else {
-            AddressCity city = (AddressCity) baseManager.getObject(AddressCity.class.getName(), cityId);
-            tenant.setCity(city);
-        }
-
-        if (districtId == null || "".equals(districtId)){
-            tenant.setDistrict(null);
-        }else {
-            AddressDistrict district = (AddressDistrict) baseManager.getObject(AddressDistrict.class.getName(), districtId);
-            tenant.setDistrict(district);
-        }
+        tenant.setProvince(province);
+        tenant.setCity(city);
+        tenant.setDistrict(district);
 
         return tenant;
     }
