@@ -207,6 +207,7 @@
                 <th class="table-title">支付方式</th>
                 <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
+                <th class="table-title">支付详情(支付方式/金额)</th>
                 <th class="table-title">支付者姓名</th>
                 <th class="table-title">支付时间</th>
             </tr>
@@ -214,53 +215,66 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">
-                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                        checkedValue="${purchaseOrderPayment.payWay}"
-                                        type="normal"/>
-                    </td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
-                    <td class="am-hide-sm-only">
-                        <ming800:status name="status" dataType="purchaseOrderPayment.status"
-                                        checkedValue="${purchaseOrderPayment.status}"
-                                        type="normal"/>
-                    </td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
-                    <td class="am-hide-sm-only">
-                        <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <div class="am-u-sm-12">
-                            <table class="am-table am-table-striped am-table-hover table-main">
-                                <thead>
-                                <tr>
-                                    <th class="table-title">支付方式</th>
-                                    <th class="table-title">支付金额</th>
-                                    <th class="table-title">优惠券编号</th>
-                                </tr>
-                                </thead>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
+                                    checkedValue="${purchaseOrderPayment.payWay}"
+                                    type="normal"/>
+                </td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="status" dataType="purchaseOrderPayment.status"
+                                    checkedValue="${purchaseOrderPayment.status}"
+                                    type="normal"/>
+                </td>
+                <td class="am-hide-sm-only">
+                <c:forEach items="${purchaseOrderPayment.purchaseOrderPaymentDetailsList}"
+                           var="purchaseOrderPaymentDetails">
 
-                                <tbody>
-                                <c:forEach items="${purchaseOrderPayment.purchaseOrderPaymentDetailsList}" var="purchaseOrderPaymentDetails" >
-                                    <tr>
-                                        <td class="am-hide-sm-only">
-                                            <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
-                                                            checkedValue="${purchaseOrderPaymentDetails.payWay}"
-                                                            type="normal"/>
-                                        </td>
-                                        <td class="am-hide-sm-only">${purchaseOrderPaymentDetails.money}</td>
-                                        <td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-
-                            </table>
-                        </div>
-                    </td>
+                            <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
+                                            checkedValue="${purchaseOrderPaymentDetails.payWay}"
+                                            type="normal"/> : ${purchaseOrderPaymentDetails.money}
+                        <br>
+                        优惠券编号：${purchaseOrderPaymentDetails.coupon.serial}
+                    <br>
+                </c:forEach>
+                </td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
+                <td class="am-hide-sm-only">
+                    <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
+                                    pattern="yyyy-mm-dd"/>
+                </td>
                 </tr>
+                <%--<tr>--%>
+                <%--<td colspan="5">--%>
+                <%--<div class="am-u-sm-12">--%>
+                <%--<table class="am-table am-table-striped am-table-hover table-main">--%>
+                <%--<thead>--%>
+                <%--<tr>--%>
+                <%--<th class="table-title">支付方式</th>--%>
+                <%--<th class="table-title">支付金额</th>--%>
+                <%--<th class="table-title">优惠券编号</th>--%>
+                <%--</tr>--%>
+                <%--</thead>--%>
+
+                <%--<tbody>--%>
+                <%--<c:forEach items="${purchaseOrderPayment.purchaseOrderPaymentDetailsList}"--%>
+                           <%--var="purchaseOrderPaymentDetails">--%>
+                    <%--<tr>--%>
+                        <%--<td class="am-hide-sm-only">--%>
+                            <%--<ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"--%>
+                                            <%--checkedValue="${purchaseOrderPaymentDetails.payWay}"--%>
+                                            <%--type="normal"/>--%>
+                        <%--</td>--%>
+                        <%--<td class="am-hide-sm-only">${purchaseOrderPaymentDetails.money}</td>--%>
+                        <%--<td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+                <%--</tbody>--%>
+
+                <%--</table>--%>
+                <%--</div>--%>
+                <%--</td>--%>
+                <%--</tr>--%>
 
             </c:forEach>
             </tbody>
