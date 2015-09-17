@@ -167,18 +167,18 @@ $(function(){
     })
 })
 //�����е����Ǵ��js
-//var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");
-//for(var i=0;i < GradList.length;i++){
-//    GradList[i].onmouseover = function(){
-//        for(var Qi=0;Qi<GradList.length;Qi++){
-//            GradList[Qi].style.backgroundPosition = '-36px -21px';
-//        }
-//        for(var Qii=0;Qii<this.name;Qii++){
-//            GradList[Qii].style.backgroundPosition = '-5px -21px';
-//        }
-//        document.getElementById("QuacorGradingValue").innerHTML = '<b><font size="5" color="#fd7d28">'+this.name+'</font></b>��';
-//    }
-//}
+var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");
+for(var i=0;i < GradList.length;i++){
+    GradList[i].onmouseover = function(){
+        for(var Qi=0;Qi<GradList.length;Qi++){
+            GradList[Qi].style.backgroundPosition = '-36px -21px';
+        }
+        for(var Qii=0;Qii<this.name;Qii++){
+            GradList[Qii].style.backgroundPosition = '-5px -21px';
+        }
+        document.getElementById("QuacorGradingValue").innerHTML = '<b><font size="5" color="#fd7d28">'+this.name+'</font></b>分';
+    }
+}
 //������ѡ��
 $(function(){
     $('.evaluation .mutual .parameter .data .data-list .tally .djml').click(function(){
