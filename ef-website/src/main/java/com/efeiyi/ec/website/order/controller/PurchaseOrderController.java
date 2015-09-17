@@ -62,7 +62,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
         int c = 0;
-        if (orderStatus == null) {
+        if (orderStatus == null||orderStatus == "") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
             c = Integer.parseInt(orderStatus);
