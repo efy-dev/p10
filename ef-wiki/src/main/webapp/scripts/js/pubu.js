@@ -5,8 +5,7 @@
 function PBL(outer,boxs,style){//outer父级元素、boxs子级元素，style加载样式（ 1或者2 ）
     var pubu = $(outer);
     var box = $(boxs);
-    //var num = Math.floor($(document.body).width()/box.outerWidth());//根据浏览器宽度获得显示的列的数量
-    var num =1;
+    var num = Math.floor($(document.body).width()/box.outerWidth());//根据浏览器宽度获得显示的列的数量
     pubu.width(num*(box.outerWidth()));//给pubu的宽度赋值
     var allHeight = [];//定义一个数组存储所有列的高度
     for(var i=0;i<box.length;i++){

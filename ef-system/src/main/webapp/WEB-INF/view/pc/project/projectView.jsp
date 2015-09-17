@@ -14,6 +14,11 @@
 </head>
 
 <div class="am-g">
+    <div style="text-align: left;margin-left: 18px;" >
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProject_default"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="返回列表" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=formProject"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="新建项目" />
+        <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProject&param=formProject&id=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;height: 35px;" value="编辑项目" />
+    </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-bordered">
             <tbody>
@@ -42,9 +47,19 @@
                 <td class="am-u-md-3">
                     <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
                 </td>
-                <td class="am-primary am-u-md-3"></td>
+                <td class="am-primary am-u-md-3">省</td>
                 <td class="am-u-md-3">
-
+                       ${object.addressDistrict.addressCity.addressProvince.name}
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">市</td>
+                <td class="am-u-md-3">
+                    ${object.addressDistrict.addressCity.name}
+                </td>
+                <td class="am-primary am-u-md-3">区</td>
+                <td class="am-u-md-3">
+                    ${object.addressDistrict.name}
                 </td>
             </tr>
             </tbody>
@@ -70,11 +85,11 @@
         <%--</div>--%>
     <%--</div>--%>
 
-    <div style="text-align: left;" >
+    <div style="text-align: left;margin-left: 15px;" >
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
     </div>
 
-        <div class="am-panel am-panel-default">
+        <div class="am-panel am-panel-default" style="margin-left: 15px;">
             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">项目属性<span class="am-icon-chevron-down am-fr" ></span></div>
             <div id="collapse-panel-3" class="am-in">
                 <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">

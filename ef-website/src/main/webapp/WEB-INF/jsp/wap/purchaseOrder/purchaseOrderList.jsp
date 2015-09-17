@@ -38,14 +38,14 @@
                 <ul>
                     <c:if test="${purchaseOrder.purchaseOrderProductList.size()<=4}">
                         <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
-                            <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrderProduct.productModel.product.picture_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                            <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrderProduct.productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                         </c:forEach>
                     </c:if>
                     <c:if test="${purchaseOrder.purchaseOrderProductList.size()>4}">
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(0).productModel.product.picture_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(1).productModel.product.picture_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(2).productModel.product.picture_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.product.picture_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(0).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(1).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(2).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                     </c:if>
                 </ul>
                 <c:if test="${purchaseOrder.orderStatus == '1'}">

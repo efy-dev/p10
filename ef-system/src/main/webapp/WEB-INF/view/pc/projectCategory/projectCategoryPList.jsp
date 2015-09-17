@@ -20,10 +20,7 @@
 <body>
 
 <div class="admin-content">
-    <div class="am-g">
-        <div class="am-u-sm-12 am-u-md-6">
-        </div>
-        <div class="am-u-sm-12">
+
 
             <div>
                 <c:if test="${empty level}">
@@ -41,7 +38,7 @@
                            value="新建类别"/>
                 </c:if>
             </div>
-            <div class="am-u-sm-12">
+
                 <table class="am-table am-table-bordered am-table-radius am-table-striped">
                     <tr>
                         <td>操作</td>
@@ -53,7 +50,7 @@
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
                         <tr id="${projectCategory.id}">
-                            <td>
+                            <td width="25%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button onclick="window.location.href='<c:url
@@ -101,8 +98,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <a href="<c:url value="/basic/xm.do?qm=plistProjectCategory_default&view=plist&fatherCategoryId=${projectCategory.id}&level=${projectCategory.level+1}&conditions=fatherCategory.id:${projectCategory.id};level:${projectCategory.level+1}"/>">
+                            <td width="25%">
+                                <a href="<c:url value="/basic/xm.do?qm=viewProjectCategory&id=${projectCategory.id}&view=plist"/>">
                                         ${projectCategory.name}
                                 </a>
                                 <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">
@@ -111,16 +108,16 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td>
+                            <td width="25%">
                                     ${projectCategory.serial}
                             </td>
-                            <td>
+                            <td width="25%">
                                 <img width="8%" src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
-            </div>
+
             <div style="clear: both">
                 <c:url value="/basic/xm.do" var="url"/>
                 <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
@@ -131,6 +128,6 @@
 
         </div>
     </div>
-</div>
+
 </body>
 </html>

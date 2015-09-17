@@ -286,6 +286,19 @@
 
             </does>
         </entity>
+        <entity name="purchaseOrderPaymentDetails" label="purchaseOrderPaymentDetails"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails">
+            <fields>
+                <field name="payWay" label="支付方式" inputType="text">
+                    <statusType fieldName="payWay">
+                        <item label="支付宝" value="1"/>
+                        <item label="银行卡" value="2"/>
+                        <item label="微信" value="3"/>
+                    </statusType>
+                </field>
+            </fields>
+        </entity>
         <entity name="purchaseOrderProduct" label="purchaseOrderProduct"
                 basic="simple" others=""
                 model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">

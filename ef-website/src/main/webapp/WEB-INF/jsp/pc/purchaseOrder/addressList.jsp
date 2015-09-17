@@ -4,7 +4,6 @@
 <!doctype html>
 <html class="no-js">
 <head>
-
 </head>
 <body>
 
@@ -343,11 +342,6 @@
             });
 
         });
-
-
-
-
-
     });
 </script>
 

@@ -139,8 +139,10 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">订单号</th>
+                    <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
-                    <%--<th class="table-title">支付类型</th>--%>
+                    <th class="table-title">总额/实付金额</th>
+                <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
                     <th class="table-title">创建日期</th>
@@ -180,6 +182,11 @@
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
                         </td>
                         <td class="am-hide-sm-only">
+                            <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                            checkedValue="${purchaseOrder.orderStatus}"
+                                            type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only">
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <p style="margin-left: 10px;"><a
                                         href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProductModel=${viewProductModel}&id=${purchaseProduct.id}'/>">${purchaseProduct.productModel.product.name}</a>
@@ -188,6 +195,9 @@
                             </c:forEach>
 
                         </td>
+
+                        <td class="am-hide-sm-only">${purchaseOrder.total} <br>
+                        ${purchaseOrder.getRealPayMoney()}</td>
                         <%--<td class="am-hide-sm-only">--%>
                             <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
                                 <%--<span style="margin-left: 10px;">--%>

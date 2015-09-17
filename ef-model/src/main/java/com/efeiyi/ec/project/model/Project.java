@@ -78,7 +78,7 @@ public class Project {
     public void setSerial(String serial) {
         this.serial = serial;
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "father_project_id")
     public  Project getFatherProject(){
@@ -124,6 +124,7 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     public ProjectCategory getProjectCategory() {
@@ -152,6 +153,7 @@ public class Project {
         this.type=type;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
     @Where(clause = "status=1")
     public  List<ProjectTag> getProjectTagList(){
@@ -160,7 +162,7 @@ public class Project {
     public  void  setProjectTagList(List<ProjectTag> projectTagList){
         this.projectTagList = projectTagList;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "fatherProject")
     @Where(clause = "status=1")
     public  List<Project> getSubProjectList(){
@@ -180,6 +182,7 @@ public class Project {
     public void setProjectPropertyList(List<ProjectProperty> projectPropertyList) {
         this.projectPropertyList = projectPropertyList;
     }
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectContent> getProjectContents() {
         return projectContents;
@@ -194,7 +197,7 @@ public class Project {
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;

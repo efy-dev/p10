@@ -33,7 +33,6 @@
                                  <li>
                                      <label>收货人：</label>
                                      <input type="text" name="consignee">
-                                     <span>请您填写收货人姓名</span>
                                  </li>
                                  <li>
                                      <label>所在地区：</label>
@@ -47,8 +46,6 @@
                                              <option value="请选择">请选择</option>
                                          </select>
                                      </form>
-
-
                                  </li>
                                  <li>
                                      <label>详细地址：</label>
@@ -62,6 +59,7 @@
                                      <label></label>
                                      <input type="button" class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息">
                                      <input type="reset" style="display: none" id="reset">
+                                     <span id="ts" style="border: 0"></span>
                                  </li>
                              </ul>
                          </form>
@@ -278,16 +276,24 @@
     }
 
     function submitNewAddress() {
-        var param = $("#newAddress").serialize();
-        var success = function (data) {
-            console.log(data)
-            var html = newAddress(data);
-            $("#address").append(html);
-            $(".active-pop").hide();
-            $("#reset").click();
+        var consignee=$(":input[name='consignee']").val();
+        var  phone=$(":input[name='phone']").val();
+        var details=$(":input[name='details']").val();
+        if(consignee == "" || phone == ""|| details == "" ){
+           $("#ts").text("请完善您的新增地址");
+        }else{
+            var param = $("#newAddress").serialize();
+            var success = function (data) {
+                console.log(data)
+                var html = newAddress(data);
+                $("#address").append(html);
+                $(".active-pop").hide();
+                $("#reset").click();
+            }
+            ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
+            }, "post")
         }
-        ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
-        }, "post")
+
     }
 
     function chooseAddress(element, addressId) {
@@ -297,18 +303,6 @@
         })
         $(element).attr("class", "default-text triangle")
     }
-
-//    $().ready(function () {
-//        $("#newAddress").validate({
-//            rules: {
-//                consignee: "required",
-//                details: "required",
-//                name: "required",
-//                phone: "required",
-//            },
-//        });
-//    });
-
 </script>
 </body>
 </html>
