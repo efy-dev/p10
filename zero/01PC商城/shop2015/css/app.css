@@ -494,6 +494,10 @@ a,
 .section .btns-collect.active{border:1px solid #fff;background:#fff;color:#000}
 .section .sec-left .part {width:100%;height:500px;position:absolute;top:50%;left:0;margin-top:-250px;overflow-x:scroll;overflow-y:hidden;}
 .section .sec-left .part .autoWidth {width:200%;float: left;}
+.section .btn-scroll {width:600px;height:500px;position:absolute;top:50%;left:0;margin-top:-250px;z-index:99999;}
+.section .btn-scroll span {width:300px;height:10px;position:absolute;bottom:0;cursor: pointer}
+.section .btn-scroll-left {left:0;}
+.section .btn-scroll-right {right:0;}
 /*--------*/
 .section0 {width:100%;height:100%;float:left;position:relative;overflow:hidden}
 .section0 .sec-right {z-index:2;color:#fff}
@@ -513,6 +517,8 @@ a,
 .section1 .sec-left dl .ul-info li span,
 .section1 .sec-left dl .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333;font-weight: normal}
 .section1 .sec-left dl .ul-info li {width:100%;float:left}
+
+
 /*--//End--section1--*/
 .section2 {width:100%;height:100%;float:left}
 .section2 .sec-left {background:#000}
