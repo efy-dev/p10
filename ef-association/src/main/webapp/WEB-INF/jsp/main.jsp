@@ -5,9 +5,8 @@
   Time: 14:20
   To change this template use File | Settings | File Templates.
 --%>
-<html>
+<html class="no-js">
 <head>
-  <title></title>
 </head>
 <body>
 </body>

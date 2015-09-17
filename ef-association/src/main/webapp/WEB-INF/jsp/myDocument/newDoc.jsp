@@ -29,7 +29,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="documentForm" action="<c:url value='/myDocument/saveDocument.do'/>?qm=${requestScope.qm}"
+    <form id="documentForm" action="<c:url value='/content/saveDocument.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <c:if test="${not empty object.id}">
@@ -50,14 +50,6 @@
                value="<fmt:formatDate value="${object.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
                name="publishDate"
                type="hidden"/>
-        <input id="keywords"
-               value="${object.keywords}"
-               name="keywords"
-               type="hidden"/>
-        <input id="sampleContent"
-               value="${object.sampleContent}"
-               name="sampleContent"
-               type="hidden"/>
         <div class="am-form-group">
             <label name="title" for="title" class="am-u-sm-3 am-form-label">title
                 <small>*</small>
@@ -77,6 +69,28 @@
             </div>
         </div>
         <div class="am-form-group">
+            <label name="keywords" for="keywords" class="am-u-sm-3 am-form-label">keywords
+                <small>*</small>
+            </label>
+
+            <div class="am-u-sm-9">
+                <input type="text" id="keywords" placeholder="keywords" name="keywords"
+                       onclick=""
+                       value="${object.keywords}" required="true">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="sampleContent" for="sampleContent" class="am-u-sm-3 am-form-label">sampleContent
+                <small>*</small>
+            </label>
+
+            <div class="am-u-sm-9">
+                <input type="text" id="sampleContent" placeholder="sampleContent"
+                       onclick="" name="sampleContent"
+                       value="${object.sampleContent}" required="true">
+            </div>
+        </div>
+        <div class="am-form-group">
             <label name="group" for="group" class="am-u-sm-3 am-form-label">分类
                 <small>*</small>
             </label>
@@ -93,10 +107,9 @@
             </label>
 
             <div class="am-u-sm-9">
-                 <textarea id="documentContent.content" name="documentContent.content" class="ckeditor" id="content"
-                           placeholder="内容" required >
-                     ${object.documentContent.content}
-                 </textarea>
+                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content" class="am-form-field"
+                          placeholder="内容"
+                           required="true">${object.documentContent.content}</textarea>
             </div>
         </div>
         <div class="am-form-group">
@@ -106,6 +119,6 @@
         </div>
     </form>
 </div>
-<script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
+<script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 </body>
 </html>

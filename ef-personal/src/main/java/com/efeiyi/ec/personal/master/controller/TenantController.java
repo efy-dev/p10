@@ -1,14 +1,12 @@
 package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterMessage;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,13 +57,5 @@ public class TenantController extends BaseMasterController {
         return getMasterfromDomain(request);
     }
 
-
-    @RequestMapping("/list")
-    public ModelAndView listMasterMessage(HttpServletRequest request , ModelMap modelMap) throws Exception {
-        XQuery xQuery = new XQuery("plistMasterMessage_default",request);
-        List<MasterMessage> list = baseManager.listObject(xQuery);
-        modelMap.addAttribute("list",list);
-        return new ModelAndView("/pc/masterMessage/masterMessageList",modelMap);
-    }
 
 }

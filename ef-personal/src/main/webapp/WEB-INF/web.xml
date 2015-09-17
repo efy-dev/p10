@@ -10,15 +10,11 @@
         <param-value>classpath*:config/applicationContext-*.xml,/WEB-INF/applicationContext-*.xml</param-value>
     </context-param>
 
-     <!--SpringSecurity 核心过滤器配置 -->
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!-- SpringSecurity 核心过滤器配置 -->
+    <!--<filter>-->
+        <!--<filter-name>springSecurityFilterChain</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
 
     <!--sitemesh3 配置-->
     <filter>

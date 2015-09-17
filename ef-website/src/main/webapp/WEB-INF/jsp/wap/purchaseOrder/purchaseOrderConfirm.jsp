@@ -179,7 +179,6 @@
 <script>
   var payment = "1";
   var consumerAddress = document.getElementById("hiddenId").textContent;
-  var totalPrice = $("#change").text();
 
 
 
@@ -209,8 +208,8 @@
   })
 
   function yhq(){
-    var totalPrice1 = totalPrice;
-    var t_price = parseInt(totalPrice1);
+    var totalPrice = $("#change").text();
+    var t_price = parseInt(totalPrice);
     var chkobjs = document.getElementsByName("radio");
     for(var i=0;i<chkobjs.length;i++){
       if(chkobjs[i].checked){

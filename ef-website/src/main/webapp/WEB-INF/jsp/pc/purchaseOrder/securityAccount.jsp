@@ -78,12 +78,12 @@
     var np = $(":input[name='np']").val();
     var op= $(":input[name='op']").val();
     var pwd= $(":input[name='pwd']").val();
-    if(np !="" && op != "" && pwd !=""){
-        flag = true;
-    }else{
-        flag = false;
-    }
-    if(flag==true){
+//    if(np !="" && op != "" && pwd !=""){
+//        flag = true;
+//    }else{
+//        flag = false;
+//    }
+    if(flag==true && np!="" && op != "" && pwd !=""){
       var pwd = $(":input[name='pwd']").val();
       window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
     }

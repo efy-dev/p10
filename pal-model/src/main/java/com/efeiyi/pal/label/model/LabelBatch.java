@@ -22,6 +22,7 @@ public class LabelBatch {
     private Integer amount;
     private Date createDate;
     private String status;
+    private String type;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -77,6 +78,15 @@ public class LabelBatch {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

@@ -56,7 +56,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=formConsumer&id=${consumer.id}"/>"><span
-                                            class="am-icon-trash-o">编辑</span>
+                                            class="am-icon-trash-o"></span> 编辑
                                     </a>
                                 </div>
                                 <div class="am-btn-group am-btn-group-xs">
@@ -67,13 +67,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                        href="<c:url value="/basic/xm.do?qm=plistPurchaseOrder_consumer&view=consumer&viewIdentify=consumer&viewProductModel=consumer&conditions=user.id:${consumer.id}"/>"><span
-                                            class="am-icon-trash-o">查看消费者订单</span>
-                                    </a>
-                                </div>
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=plistConsumerCoupon_default&conditions=consumer.id:${consumer.id}"/>"><span
-                                            class="am-icon-trash-o">查看优惠券</span>
+                                            class="am-icon-trash-o"></span> 查看消费者订单
                                     </a>
                                 </div>
                             </div>

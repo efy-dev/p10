@@ -55,8 +55,8 @@
         <div class="des-content">
             <div class="bd title">详情</div>
             <div class="bd">
-                <c:if test="${!empty productModel.productModelDescription}">
-                    ${productModel.productModelDescription.content}
+                <c:if test="${!empty product.productDescription}">
+                    ${product.productDescription.content}
                 </c:if>
                 <%----%>
                 <%----%>

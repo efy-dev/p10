@@ -1,7 +1,6 @@
 package com.efeiyi.association.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.efeiyi.association.OrganizationConst;
 import com.efeiyi.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -11,7 +10,6 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
-import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
@@ -21,15 +19,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
@@ -62,9 +56,6 @@ public class MyDocumentController {
 
     @Autowired
     private DoManager doManager;
-    @Autowired
-    @Qualifier("aliOssUploadManagerImpl")
-    private AliOssUploadManager aliOssUploadManager;
 
     /**
      * 根据group_id查询获取相关document
@@ -137,6 +128,9 @@ public class MyDocumentController {
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
+//            document.setTheDatetime(new Date());
+//            documentManager.saveDocument(document);
+
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
 
@@ -187,8 +181,7 @@ public class MyDocumentController {
      * @return
      */
     @RequestMapping("/newDocument.do")
-    public ModelAndView direct2Jsp(ModelMap model, HttpServletRequest request, HttpServletResponse response, Document document) throws Exception {
-//        response.setHeader("X-Frame-Options", "SAMEORIGIN");
+    public ModelAndView direct2Jsp(ModelMap model, HttpServletRequest request, Document document) throws Exception {
         String qm = request.getParameter("qm");
 
         if (qm.split("_").length < 2) {
@@ -259,33 +252,10 @@ public class MyDocumentController {
 //            DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         //设置保存后的返回页面
         model.addAttribute("qm", request.getParameter("resultPage"));
-        if (organization.getId() != null && !"".equals(organization.getId())) {
+        if(organization.getId() != null && !"".equals(organization.getId())) {
             organization = (IntangibleCulturalOrganization) baseManager.getObject(organization.getClass().getName(), organization.getId());
             model.addAttribute("object", organization);
         }
         return new ModelAndView(request.getContextPath() + tempDo.getResult());
-    }
-
-    @RequestMapping("/ckeditorUpload.do")
-    @ResponseBody
-    public void ckeditorUpload(@RequestParam("upload") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String identify = sdf.format(new Date());
-        String url = "product/" + identify + ".jpg";
-
-        if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
-        }
-        String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
-        PrintWriter out;
-        String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", '" + OrganizationConst.imgBasePath + url + "','上传成功');</script>";
-        try {
-            out = response.getWriter();
-            out.print(s);
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
