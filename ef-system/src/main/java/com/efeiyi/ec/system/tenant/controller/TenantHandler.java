@@ -35,6 +35,10 @@ public class TenantHandler implements MultipartHandler {
             aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "ec-efeiyi", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
             paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
         }
+        if (!multipartRequest.getFile("pictureUrl").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("pictureUrl"), "ec-efeiyi", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
+            paramMap.put("pictureUrl", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
+        }
 
         //������� start
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
