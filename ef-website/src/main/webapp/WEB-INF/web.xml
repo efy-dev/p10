@@ -37,7 +37,7 @@
         <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
     <!--</listener>-->
     <!--编码配置-->
-    <filter>
+    <!--<filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter
@@ -61,7 +61,7 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
