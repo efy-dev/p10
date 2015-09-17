@@ -30,19 +30,19 @@
 
     <sitemesh:write property='head'/>
     <style>
-        .pal-active {
+        .ass-active {
             background-color: #9a9a9a;
         }
     </style>
 </head>
 <body>
 <jsp:include flush="true"
-             page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+             page="/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateHeader&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
 <div class="am-cf admin-main">
     <%----%>
     <jsp:include flush="true"
-                 page="/getMenu.do?jmenuId=commonMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+                 page="/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
     <div class="admin-content" style="height: auto">
     <%--<div class="admin-content" style="overflow-y: scroll">--%>
