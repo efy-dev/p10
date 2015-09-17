@@ -80,11 +80,11 @@
         <c:forEach var="subjectProduct" items="${subjectProductList}">
         var productId = '${subjectProduct.product.id}';
 
-            $("#"+productId).attr("status","0");
-            $("#"+productId).find("span").text("解除产品");
+            $("a[id='"+productId+"']").attr("status","0");
+            $("a[id='"+productId+"']").text("解除产品");
 
 
-        $("#"+productId).attr("subjectProductId",'${subjectProduct.id}')
+              $("a[id='"+productId+"']").attr("subjectProductId",'${subjectProduct.id}');
 
         </c:forEach>
 
@@ -94,7 +94,7 @@
 
         var  status = $(obj).attr("status");
         var  subjectProductId = $(obj).attr("subjectProductId");
-        alert(status);
+
         $.ajax({
             type: "get",
             url: '<c:url value="/product/linkSubject.do"/>',
@@ -102,14 +102,14 @@
             dataType: "json",
             data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:status},
             success: function (data) {
-                alert(data);
                 if(status=="0"){
                     $(obj).attr("status","1");
-                    $(obj).find("span").text("关联产品");
+                    $(obj).text("关联产品");
                     $(obj).attr("subjectProductId",data)
                 }else{
+
                     $(obj).attr("status","0");
-                    $(obj).find("span").text("解除产品");
+                    $(obj).text("解除产品");
                     $(obj).attr("subjectProductId",data)
                 }
             }

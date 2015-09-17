@@ -50,13 +50,12 @@
 
 <script>
     function removeSubjectProduct(subjectId,productId,subjectProductId){
-        alert("dd");
         $.ajax({
             type: "get",
             url: '<c:url value="/product/linkSubject.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:"1"},
+            data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:"0"},
             success: function (data) {
                 $("#"+data).remove();
 
