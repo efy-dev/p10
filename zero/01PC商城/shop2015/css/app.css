@@ -34,16 +34,16 @@ a:hover {color:#f00;text-decoration:underline}
 .header .logo a {background-position:0 0;width:307px;height:50px;float:left}
 .header .nav ul {float:right;margin-top:15px;margin-right:154px}
 .header .nav li {float:left;line-height:68px;position:relative}
-.header .nav li a {font-size:14px;color:#000;padding:0 30px;font-weight:bolder;font-family:FangSong;position:relative;z-index:5}
+.header .nav li a {font-size:12px;color:#000;padding:0 30px;font-weight:bolder;font-family:FangSong;position:relative;z-index:5}
 .header .nav li a:hover {color:#f00;text-decoration:underline}
 .header .nav li a.cur {color:#f00}
 .header .nav li .bgbor {border:1px #fff solid;border-bottom:none;background:#fff;width:112px;height:49px;position:absolute;top:16px;left:0;z-index:4}
 .header .nav li.hover>.bgbor a:hover {color:#000;text-decoration:none}
 .header .nav li.hover .bgbor {border:1px #000 solid;border-bottom:none;height:55px}
-.header .nav-links {width:1158px;padding:30px 20px;border:1px #000 solid;position:absolute;top:70px;left:-648px;box-sizing:content-box;background:#fff;z-index:3;display:none}
-.header .nav-links ul {width:105px;float:left;margin:0}
+.header .nav-links {width:610px;padding: 33px 53px;border:1px #000 solid;position:absolute;top:70px;left:-398px;box-sizing:content-box;background:#fff;z-index:3;display:none}
+.header .nav-links ul {width:122px;float:left;margin:0}
 .header .nav-links li {width:100%;line-height:24px;float:left;font-family:FangSong;font-size:12px}
-.header .nav-links li a {width:100%;float:left;padding:0;text-decoration:underline}
+.header .nav-links li a {width:100%;float:left;padding:0;}
 .header .nav-links li a:hover {color:#f00}
 .header .nav-links .title {border-bottom:1px #b2b2b2 solid;color:#999;padding-bottom:5px;margin-bottom:5px}
 /*--//End--header--*/
@@ -189,20 +189,15 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .slider-img li {margin-bottom:6px;cursor:pointer}
 .product-intro .itemInfo .preview .slider-img li img {border:2px #ccc solid}
 .product-intro .itemInfo .preview .slider-img li.active img {border:2px #000 solid}
-<<<<<<< HEAD
 .product-intro .itemInfo .preview .slider-main {width:800px;height:643px;float:left;margin:0 28px;background:#f6f6f6;overflow:hidden}
-.product-intro .itemInfo .preview .slider-main li {width:100%;float:left;text-align:center;background: #ebf0ff}
+.product-intro .itemInfo .preview .slider-main li {width:100%;float:left;text-align:center}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
-=======
-.product-intro .itemInfo .preview .slider-main {width:790px;height:690px;float:left;margin:0 28px;background:#f6f6f6;overflow:hidden}
-.product-intro .itemInfo .preview .slider-main li img {width:100%}
->>>>>>> origin/master
 .product-intro .itemInfo .preview .collect {width:36px;position:absolute;top:16px;right:40px}
 .product-intro .itemInfo .preview .collect .icon {background:url(../images/icon.png) no-repeat -244px -50px;width:32px;height:28px;float:left;margin-left:2px;margin-bottom:5px;cursor:pointer}
 .product-intro .itemInfo .preview .collect .icon-active,
 .product-intro .itemInfo .preview .collect .icon-active2 {background-position:0 -96px}
 .product-intro .itemInfo .preview .collect span {width:36px;font-size:12px;float:left;text-align:center;display:none}
-.product-intro .itemInfo .itme-ext {width:272px;float:left}
+.product-intro .itemInfo .itme-ext {width:264px;float:left}
 .product-intro .itemInfo .itme-ext .name {font-size:12px;margin-top:15px;margin-bottom:25px}
 .product-intro .itemInfo .itme-ext .name strong {font-size:20px;font-weight:bold}
 .product-intro .itemInfo .itme-ext .des {width:100%;float:left}
@@ -228,9 +223,10 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .price {width:100%;float:left;margin-top:28px;margin-bottom:57px;color:#666}
 .product-intro .itemInfo .price .p-text {font-size:12px;font-family:simsun}
 .product-intro .itemInfo .price .p-price {font-size:14px;color:#000}
-.product-intro .itemInfo .price .p-price span {font-size:30px}
+.product-intro .itemInfo .price .p-price span {font-size:30px;
+    font-family:Times New Roman;}
 .product-intro .itemInfo .price .m-price {font-size:12px}
-.product-intro .itemInfo .choose-btns .btn {width:272px;line-height:39px;text-align:center;border:1px #000 solid;float:left;margin-bottom:13px;font-family:FangSong;font-size:14px}
+.product-intro .itemInfo .choose-btns .btn {width:100%;line-height:39px;text-align:center;border:1px #000 solid;float:left;margin-bottom:13px;font-family:FangSong;font-size:14px}
 .product-intro .itemInfo .choose-btns .btn:hover,.product-intro .itemInfo .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
 .product-intro .itemInfo .jiathis_style {width:222px;padding-top:23px;padding-bottom:37px;padding-left:50px;float:left;border-bottom:1px #000 solid;box-sizing:content-box}
 .product-intro .itemInfo .jiathis_style .jiathis_txt {font-family:simsun;color:#666}
@@ -265,7 +261,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .am-sticky-placeholder {background:none}
 .product-intro .detail {padding-bottom:70px;position:relative}
 .product-intro .detail .title {text-align:center;padding:30px 0}
-.product-intro .detail .title h3 {width:20px;line-height:30px;font-family:FangSong;font-style:italic;display:inline-block;font-size:24px;font-weight:normal}
+.product-intro .detail .title h3 {width:20px;line-height:34px;font-family:FangSong;font-style:italic;display:inline-block;font-size:24px;font-weight:bold}
 .product-intro .detail .part {width:1000px;padding:0 100px;font-family:simsun;font-size:12px;color:#666;float:left;box-sizing:content-box;border-bottom:1px #b2b2b2 solid}
 .product-intro .detail .part p,.product-intro .detail .part li,.product-intro .detail .part h4,.product-intro .detail .part span,.product-intro .detail .part strong{font-family:simsun}
 .product-intro .detail .part h4 {width:100%;float:left;margin-bottom:36px;font-weight:normal}
@@ -420,36 +416,43 @@ a,
 .footer .copyright .frlinks a:hover,
 .shop-sort .link2 dd a:hover{color:#f00;text-decoration:underline}
 /*--//End--transition*/
-html, body {
-    width:100%;
-    height:100%;
-
-}
-
 .topbar-fine {position:fixed;top:0;left:0;z-index:50}
 .header-fine {position:fixed;top:31px;left:0;height:57px;z-index:5}
 .header-fine .logo {padding:10px 0}
 .header-fine .logo a {background:url(../images/logo2.png);width:225px;height:37px;float:left}
 .header-fine .nav {height:57px;float:right;position:relative}
-.header-fine .nav .nav-icon {background-position:0 -78px;width:28px;height:15px;position:absolute;bottom:13px;right:40px}
-.header-fine .nav .ul-list {width:140px;padding-top:40px;position:absolute;top:55px;right:0;margin:0;background:#fff;z-index:2;display:block}
-.header-fine .nav .ul-list li {width:100%;line-height:30px;float:left}
-.header-fine .nav .ul-list li a {float:right}
-.header-fine .mask {background:rgba(0, 0, 0, 0.6);position:fixed;top:86px;left:0;bottom:0;right:0;z-index:1;display:none}
-.header-fine .mask.visible {display:block}
+.header-fine .nav .icon {background-position:0 -78px;width:28px;height:15px;position:absolute;bottom:13px;right:40px}
+.header-fine .nav .nav-icon-active {width:48px;right:20px}
+.header-fine .nav .nav-icon-active .icon {background-position:-212px -95px;width:5px;height:15px;position:absolute;top:0;right:0}
 .header-fine .nav-links {top:30px;left:-1138px;z-index:50;border:0;background:#fff}
 .header-fine .nav li.hover .bgbor {width:140px;border:0;border-top:1px #000 solid;top:0}
+/*--//End--*/
+#menu-fine {}
+#menu-fine-list {width:100%;height:100%;position:fixed;top:86px;left:0;opacity:0;z-index:0;overflow:hidden}
+#menu-fine-list .hd {height:100%;position:relative;overflow:hidden}
+#menu-fine-list a {float:right;font-family:FangSong;font-size:12px}
+#menu-fine-list .ul-list {width:140px;height:100%;padding-top:40px;position:absolute;top:0;right:0;margin:0;background:#fff;z-index:2}
+#menu-fine-list .ul-list li {width:100%;line-height:30px;float:left;box-sizing:content-box}
+#menu-fine-list .ul-list li a {padding-right:40px}
+#menu-fine-list .ul-list li.active { border-top:1px solid #fff}
+#menu-fine-list .ul-list li.active:hover {border-top:1px solid #000}
+#menu-fine-list .nav-links {padding:37px 198px 30px 53px;position:absolute;top:100px;right:0;z-index:50;border:0;background:#fff}
+#menu-fine-list .nav-links ul { width:100px;float:left}
+#menu-fine-list .nav-links li {width:100%;float:left}
+#menu-fine-list .nav-links li.title { padding-bottom:15px;margin-bottom:15px;font-family:FangSong;color:#999;font-size:12px;border-bottom:1px solid #ccc}
+#menu-fine-list .nav-links li a { float:left;line-height:30px}
+#menu-fine-list .mask {width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;background:rgba(0, 0, 0, 0.6)}
 /*--//End--*/
 .nav-share {width:1200px;position:fixed;top:88px;left:50%;margin-left:-600px;z-index:2}
 .nav-share .share {position:absolute;top:0;left:0}
 .nav-share .jiathis_style {width:200px;position:absolute;top:15px;left:13px}
-.nav-share .jiathis_style .jiathis_txt {font-family:simsun;color:#666;float:left;font-size:12px;color:#fff}
-.nav-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;opacity:0.4;filter:alpha(opacity=40);-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s;float:left}
-.nav-share .jiathis_style .jtico:hover {opacity:1;filter:alpha(opacity=100)}
-.nav-share .jiathis_style .jtico_weixin {background-position:0 -21px}
-.nav-share .jiathis_style .jtico_tqq {background-position:-21px -21px;width:22px}
-.nav-share .jiathis_style .jtico_tsina {background-position:-43px -21px}
-.nav-share .jiathis_style .jtico_cqq {background-position:-65px -21px;width:22px}
+.nav-share .jiathis_style .jiathis_txt {font-family:simsun;color:#ccc;float:left;font-size:12px}
+.nav-share .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s;float:left}
+.nav-share .jiathis_style .jtico:hover {opacity:0.5;filter:alpha(opacity=50)}
+.nav-share .jiathis_style .jtico_weixin {background-position:0 -42px}
+.nav-share .jiathis_style .jtico_tqq {background-position:-21px -42px;width:22px}
+.nav-share .jiathis_style .jtico_tsina {background-position:-43px -42px}
+.nav-share .jiathis_style .jtico_cqq {background-position:-65px -42px;width:22px}
 .nav-share .nav {position:absolute;top:20px;right:20px}
 .nav-share .nav li {float:left;margin:0 10px}
 .nav-share .nav a {width:18px;padding:8px 0;color:#fff;font-size:14px;font-family:FangSong;float:left;font-style:italic;position:relative}
@@ -463,94 +466,164 @@ html, body {
 .nav-share .nav2 li .line {background:#000}
 .nav-share .nav2 li .icon-top {background-position:-177px -95px}
 .nav-share .nav2 li .icon-down {background-position:-177px -103px}
+.nav-share .nav3 a {color:#000}
+.nav-share .nav3 li .line {background:#000}
 /*--//ENd--*/
-.section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box;}
-.section .hd {height:720px;position:relative;overflow:hidden}
-.section .btn-arrow-down {width:32px;height:15px;position:absolute; bottom:20px;left:50%;margin-left:-16px}
-.section .btn-arrow-down .icon {background-position:-40px -68px;-webkit-animation:arrowGo 1s infinite linear;width:32px;height:15px;float:left}
-.section1 { background: #000;}
-.section1 .img-bg img {width:100%;height:720px}
-.section1 .info {position:absolute;top:50%;margin-top:-90px;right:37px;color:#fff;font-size:14px}
-.section1 .info .name {width:200px;position:absolute;top:-100px;right:0;text-align:right}
-.section1 .info .title p {width:12px;line-height:18px;float:right;margin-left:5px;font-size:12px;font-style:italic}
-.section1 .info .name-img {position:absolute;top:50%;margin-top:-90px;right:310px}
-.section1 .info .name-img p {width:50px;line-height:36px;float:right;font-size:24px;font-style:italic}
-.section1 .btn-add {position:absolute;top:670px;right:214px}
-.section1 .btn-add a {width:212px;line-height:36px;text-align:center;color:#fff;background:#000;border:1px #fff solid;float:left;font-family:FangSong}
-.section1 .btn-add a:hover {text-decoration:none;background:#fff;color:#000}
-.section1 .sec-details {background:#fff;width:100%;min-width:1200px;padding:20px 40px;position:absolute;bottom:-477px;left:0}
-.section1 .sec-details .icon-close {background-position:-122px -95px;width:22px;height:22px;position:absolute;top:20px;right:20px;cursor:pointer}
-.section1 .sec-details .part {width:100%;float:left;margin-bottom:20px}
-.section1 .sec-details .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
-.section1 .sec-details .ul-info {width:auto;float:left;border-bottom:1px solid #e5e5e5}
-.section1 .sec-details .ul-info li,
-.section1 .sec-details .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333}
-.section1 .sec-details .ul-txt li,
-.section1 .sec-details .ul-txt li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333}
-.section1 .sec-details .ul-txt li {width:48%;float:left;margin-right:2%}
+.section {width:100%;min-width:1200px;height:100%;position:relative;display:block;z-index:1;padding-top:88px;box-sizing:border-box}
+.section .hd {height:100%;position:relative}
+.section .img-bg {width:1200px;height:100%;position:fixed;top:0;left:50%;margin-left:-600px;z-index:0;overflow:hidden}
+.section .img-bg img {width:100%;height:100%;position:absolute;top:0;left:50%;margin-left:-50%}
+.section .btn-arrow-down {width:32px;height:15px;position:fixed;bottom:20px;z-index:10;cursor:pointer}
+.section .btn-arrow-down .icon {background-position:-40px -68px;;width:32px;height:15px;float:left}
+.section .collect {width:36px;position:absolute;top:13px;right:25px;z-index:3;text-align:center}
+.section .collect .icon {background-position:-145px -95px;width:32px;height:28px;display:inline-block}
+.section .collect em {width:100%;color:#fff;font-size:12px;float:left}
+.section .sec-right,
+.section .sec-left {width:50%;height:100%;float:right;position:relative;overflow:hidden;z-index:2}
+.section .sec-left {float:left}
+.section .sec-right .sec-right-top {width:100%;height:50%;float:left;position:relative}
+.section .sec-right .name {width:30px;line-height:20px;font-style:italic;position:absolute;top:40px;left:30px;font-size:18px;color:#000}
+.section .sec-right .username {width:30px;line-height:20px;font-style:italic;position:absolute;bottom:53px;left:30px;font-size:18px;color:#000}
+.section .sec-right .info-tab {width:300px;position:absolute;top:360px;left:50%;margin-left:-150px;text-align:center;display:none}
+.section .sec-right .info-tab p {font-size:12px;line-height:24px}
+.section .btns {width:100%;height:38px;position:absolute;bottom:53px;right:0;z-index:3}
+.section .btns-link {width:212px;line-height:36px;text-align:center;font-family:FangSong;font-size:14px;position:absolute;bottom:0;left:50%;margin-left:-106px}
+.section .btns-link:hover {text-decoration:none}
+.section .btns-collect {color:#fff;background:#000;border:1px #fff solid}
+.section .btns-collect:hover,
+.section .btns-collect.active{border:1px solid #fff;background:#fff;color:#000}
+.section .sec-left .part {width:100%;height:500px;position:absolute;top:50%;left:0;margin-top:-250px;overflow-x:scroll;overflow-y:hidden;}
+.section .sec-left .part .autoWidth {width:200%;float: left;}
+.section .btn-scroll {width:600px;height:500px;position:absolute;top:50%;left:0;margin-top:-250px;z-index:99999;}
+.section .btn-scroll span {width:300px;height:10px;position:absolute;bottom:0;cursor: pointer}
+.section .btn-scroll-left {left:0;}
+.section .btn-scroll-right {right:0;}
+/*--------*/
+.section0 {width:100%;height:100%;float:left;position:relative;overflow:hidden}
+.section0 .sec-right {z-index:2;color:#fff}
+.section0 .sec-right .title {position:absolute;top:50%;margin-top:-90px;right:40px}
+.section0 .sec-right .title p {width:12px;line-height:18px;float:right;margin-left:5px;font-size:12px;font-style:italic}
+.section0 .sec-right .name {width:200px;text-align:right;position:absolute;left:auto;right:40px;top:50%;margin-top:-10px;color:#fff}
+.section0 .sec-right .name2 {position:absolute;top:50%;margin-top:-90px;right:290px}
+.section0 .sec-right .name2 p {width:34px;line-height:29px;float:right;font-size:24px;font-style:italic;height:202px;overflow:hidden}
+/*--//End--section0--*/
+.section1 {width:100%;height:100%;float:left;position:relative;overflow:hidden}
+.section1 .mask {background:url(../images/section1-bg.png) repeat;width:100%;height:100%;position:absolute;top:0;left:0;z-index:1}
+.section1 .sec-left {background:#fff}
+.section1 .sec-left dl {width:494px;float:left;margin:60px 70px 0 36px;}
+.section1 .sec-left dl .title {width:100%;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px}
+.section1 .sec-left dl .ul-info {width:100%;float:left}
+.section1 .sec-left dl .ul-info li,
+.section1 .sec-left dl .ul-info li span,
+.section1 .sec-left dl .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333;font-weight: normal}
+.section1 .sec-left dl .ul-info li {width:100%;float:left}
+
+
 /*--//End--section1--*/
-.section2 { background: #000;}
-.section2 .part-left,
-.section2 .part-right {width:50%;height:100%;float:left;position:relative}
-.section2 .part-right {background:#fff;float:right}
-.section2 .part-left .collect {width:36px;position:absolute;top:13px;right:25px;z-index:3;text-align:center}
-.section2 .part-left .collect .icon-collect {background-position:-145px -95px;width:32px;height:28px;display:inline-block}
-.section2 .part-left .collect em {width:100%;color:#fff;font-size:12px;float:left}
-.section2 .part-left .sec-focus {width:100%;height:100%;position:relative;float:left}
-.section2 .part-left .sec-focus .ul-img {width:100%;height:100%;position:absolute;top:0;left:0;z-index:1}
-.section2 .part-left .sec-focus .ul-img li {width:100%;position:absolute;top:0;left:0;float:left; display: none}
-.section2 .part-left .sec-focus .ul-img li img {width:100%;min-height:720px;}
-.section2 .part-left .sec-focus .ul-num {position:absolute;bottom:20px;left:60px;z-index:2}
-.section2 .part-left .sec-focus .ul-num li {width:8px;height:8px;background:#9aa1b8;border-radius:4px;float:left;margin:0 7px;cursor:pointer}
-.section2 .part-left .sec-focus .ul-num li.active {background:#900}
-.section2 .part-left .sec-focus .ul-snum {width:19px;position: absolute;bottom:20px;left:20px;z-index:2; color: #fff;}
-.section2 .part-left .sec-focus .ul-snum li { float: left;}
-.section2 .part-left .sec-focus .ul-snum .icon-glass { background-position:-191px -94px; width: 19px; height: 17px;}
-.section2 .part-left .sec-focus .ul-snum .icon-line { background-position:-34px -119px; width: 19px; height: 3px;}
-.section2 .part-left .sec-focus .ul-snum .t1 {font-size:36px;}
-.section2 .part-left .sec-focus .ul-snum .t2 { font-size: 16px; margin-left:3px;}
-.section2 .part-right .name {width:30px; line-height:20px; font-style: italic;position: absolute;top:40px; left:30px; font-size: 18px; color: #000;}
-.section2 .part-right .username {width:30px; line-height:20px; font-style: italic;position: absolute;bottom:53px; left:30px; font-size: 18px; color: #000;}
-.section2 .part-right .info-tab {width:300px;position: absolute;top:360px; left:50%; margin-left:-150px; text-align: center; display: none;}
-.section2 .part-right .info-tab p { font-size:12px; line-height: 24px;}
-.section2 .part-right .btns .btn-collect {width:212px;line-height:36px; border: 1px solid #000; text-align: center; color: #000; position: absolute;bottom:53px; left:50%; margin-left:-106px; font-family: FangSong; font-size:14px;}
-.section2 .part-right .btns .btn-collect:hover,
-.section2 .part-right .btns .btn-collect.active{ text-decoration: none; border: 1px solid #666;}
+.section2 {width:100%;height:100%;float:left}
+.section2 .sec-left {background:#000}
+.section2 .sec-left .sec-focus {width:100%;height:100%;position:relative;float:left}
+.section2 .sec-left .sec-focus .icon-glass {background-position:-191px -94px;width:19px;height:17px;position:absolute;top:470px;left:10px;z-index: 99991;}
+.section2 .sec-left .sec-focus .ul-img {width:500px;height:500px;position:absolute;top:50%;left:50%;margin-top:-250px;margin-left:-250px;overflow:hidden;cursor: move;}
+.section2 .sec-left .sec-focus .ul-img li {width:100%;position:absolute;top:0;left:0;float:left;text-align:center;opacity:0;}
+.section2 .sec-left .sec-focus .ul-img li img {width:100%}
+.section2 .sec-left .sec-focus .ul-img li a {cursor: move;}
+.section2 .sec-left .sec-focus .ul-num {position:absolute;bottom:20px;left:20px;z-index:2}
+.section2 .sec-left .sec-focus .ul-num li {width:18px;height:18px;line-height:18px;text-align:center;color:#fff;background:#9aa1b8;border-radius:20px;float:left;margin-right:18px;cursor:pointer;font-size:14px;font-family:Times New Roman}
+.section2 .sec-left .sec-focus .ul-num li.active {background:#900;width:32px;height:32px;line-height:32px;font-size:36px}
+.section2 .sec-left .sec-focus .ul-snum {width:19px;position:absolute;bottom:50px;left:20px;z-index:2;color:#fff}
+.section2 .sec-right {background:#fff}
+.section2 .btns-collect {color:#000;background:#fff;border:1px #000 solid}
+.section2 .btns-collect:hover,
+.section2 .btns-collect.active{border:1px solid #000;background:#000;color:#fff}
 /*--//End--section2--*/
-.section3 {background:#626262}
-.section3 .img-btm {width:100%; height:100%; position: absolute; top:0; left:0;}
-.section3 .img-btm em {background: url(../images/section3-bg.png) repeat;width:100%; height:100%; position:absolute;top:0; left: 0;}
-.section3 .part-left,
-.section3 .part-right {width:50%;height:100%;float:left;position:relative;}
-.section3 .part-left .sec-focus {width:520px;height:334px;position: absolute;top:50%; margin-top:-167px;left:40px;}
-.section3 .part-right .name {width:30px; line-height:20px; font-style: italic;position: absolute;top:40px; left:30px; font-size: 18px; color: #fff}
-.section3 .part-right .username {width:30px; line-height:20px; font-style: italic;position: absolute;bottom:53px; left:30px; font-size: 18px; color: #fff}
-.section3 .part-right .info-tab {width:300px;position: absolute;top:360px; left:50%; margin-left:-150px; text-align: center}
-.section3 .part-right .info-tab p {font-size:12px; line-height: 24px; color: #fff;}
-.section3 .part-right .btns .btn-collect { background:rgba(0, 0, 0, 0.8)000;width:212px;line-height:36px; border: 1px solid #fff; text-align: center; color: #fff; position: absolute;bottom:53px; left:50%; margin-left:-106px; font-family: FangSong; font-size:14px;}
-.section3 .part-right .btns .btn-collect:hover,
-.section3 .part-right .btns .btn-collect.active{ text-decoration: none; background: #fff; color: #000;}
+.section3 {background:url(../images/section3-bg.png) repeat;width:100%;height:100%;float:left;position:relative}
+.section3 .sec-left .video-box {width:520px;height:334px;position:absolute;top:50%;margin-top:-167px;left:40px}
+.section3 .sec-right .name,
+.section3 .sec-right .username,
+.section3 .sec-right .info-tab p{color:#fff}
+.section3 .sec-right .btns .btn-collect {background:rgba(0, 0, 0, 0.8);width:212px;line-height:36px;border:1px solid #fff;text-align:center;color:#fff;position:absolute;bottom:53px;left:50%;margin-left:-106px;font-family:FangSong;font-size:14px}
+.section3 .sec-right .btns .btn-collect:hover,
+.section3 .sec-right .btns .btn-collect.active{text-decoration:none;background:#fff;color:#000}
+.section3 .btns-collect {color:#fff;background:#000;border:1px #fff solid}
+.section3 .btns-collect:hover,
+.section3 .btns-collect.active{border:1px solid #000;background:#fff;color:#000}
+/*--//End--section3--*/
+.section4 {width:100%;height:100%;float:left;position:relative}
+.section4 .sec-left,
+.section4 .sec-right {width:50%;height:100%;float:left;position:relative}
+.section4 .sec-left {background:#fff;padding:70px 40px;font-size:12px}
+.section4 .sec-left .part {width:600px;}
+.section4 .sec-left dl {width:1200px;float:left}
+.section4 .sec-left dl .title {width:1160px;font-family:FangSong;font-size:12px;font-weight:bold;float:left;margin-bottom:25px;margin-left:40px}
+.section4 .sec-left dl dd {width:100%;float: left;margin: 0}
+.section4 .sec-left dl dd .ul-info {width:100%;float:left}
+.section4 .sec-left dl dd .ul-info li,
+.section4 .sec-left dl dd .ul-info li p,
+.section4 .sec-left dl dd .ul-info li span,
+.section4 .sec-left dl dd .ul-info li strong {font-size:12px;font-family:FangSong;line-height:22px;color:#333;font-weight: normal}
+.section4 .sec-left dl dd .ul-info li {width:560px;float:left;padding-right:30px;margin-left:40px}
 
 
 
 
 
+.section4 .btns-collect {color:#fff;background:#000;border:1px #fff solid}
+.section4 .btns-collect:hover,
+.section4 .btns-collect.active{border:1px solid #000;background:#fff;color:#000}
 
 
-/*--//End--精品详情*/
+
+
+
+/*--//End--section4--*/
+.section5 {width:100%;height:100%;background:#fff;float:left;position:relative;overflow:hidden}
+.section5 .part {background:#fff;width:100%;height:100%;position:absolute;top:0}
+.section5 .part1 { left:0}
+.section5 .part1 .imgbox {position:absolute;top:70px;right:20px}
+.section5 .part1 .sec-right-box {height:559px;position:absolute;top:70px;left:20px}
+.section5 .part1 .sec-right-box .des-name {width:100%;font-size:12px;float:left}
+.section5 .part1 .sec-right-box .des-name strong {font-size:18px}
+.section5 .part1 .sec-right-box .des-part {width:100%;float:left;margin:36px 0}
+.section5 .part1 .sec-right-box .des-part,
+.section5 .part1 .sec-right-box .des-part span,
+.section5 .part1 .sec-right-box .des-part strong {line-height:18px;font-size:12px;font-family:SimSun;color:#666}
+.section5 .part1 .sec-right-box .price {width:100%;float:left;margin-top:28px;margin-bottom:57px;color:#666}
+.section5 .part1 .sec-right-box .price .p-text {font-size:12px;font-family:simsun}
+.section5 .part1 .sec-right-box .price .p-price {font-size:14px;color:#000;font-family:Times New Roman;font-weight:bold}
+.section5 .part1 .sec-right-box .price .p-price span {font-size:30px}
+.section5 .part1 .sec-right-box .price .m-price {font-size:12px}
+.section5 .part1 .choose-btns .btn {width:210px;line-height:36px;text-align:center;border:1px #000 solid;float:left;margin-right:5px;font-family:FangSong;font-size:14px}
+.section5 .part1 .choose-btns .btn:hover,.section5 .choose-btns .btn-append {text-decoration:none;background:#000;color:#fff}
+.section5 .part1 .related-collect {background-position:0 -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-34px;right:10px}
+.section5 .part2 { left:100%}
+.section5 .part2 .title {width:100%;text-align:center;float:left;margin-top:80px;margin-bottom:40px}
+.section5 .part2 .title strong {width:30px;line-height:30px;font-size:24px;font-style:italic;display:inline-block}
+.section5 .part2 .sec-items {width:1023px;position:absolute;right:40px;top:50%;margin-top:-120px}
+.section5 .part2 .sec-items ul {float:left;margin-left:-20px}
+.section5 .part2 .sec-items li {width:240px;height:240px;float:left;margin-left:20px;position:relative;overflow:hidden}
+.section5 .part2 .sec-items li img {width:100%}
+.section5 .part2 .sec-items li p {text-align:right;color:#000;padding:0 10px;margin-top:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.section5 .part2 .sec-items li .name {font-size:14px;height:25px}
+.section5 .part2 .sec-items li .price {font-size:12px;height:20px}
+.section5 .part2 .related-collect {background-position:-49px -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-120px;left:50px}
+
+
+
 @media (max-width:1200px) {
-    .body-detail {overflow:visible}
+    .btn-arrow-down {left:584px}
+}
+@media (min-width:1200px) {
+    .btn-arrow-down {left:50%;margin-left:-16px;}
+
 }
 @media (max-height:720px){
     .login-wrap {height:564px}
 }
-@-webkit-keyframes arrowGo {
-    0%{
-        opacity:1;
-        -webkit-transform:translate(0, 0);
-    }
-    100%{
-        opacity:1;
-        -webkit-transform:translate(0,100%);
-    }
-}
+
+::-webkit-scrollbar {width: 14px;height: 14px}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {border:10px solid transparent;  }
+::-webkit-scrollbar-track {box-shadow:2px 2px 10px rgba(0,0,0,.1) inset}
+::-webkit-scrollbar-thumb {background-clip: content-box;box-shadow: 0 0 0 10px rgba(0,0,0,.4) inset}
+::-webkit-scrollbar-corner {background: transparent}
