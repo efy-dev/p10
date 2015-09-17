@@ -109,9 +109,25 @@ public class ProductController {
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         List<ProductModel> productModelList  = productModel.getProduct().getProductModelList();
+        Map<ProductModel,String> map = new HashMap<>();
+        if(productModelList!=null&&productModelList.size()>0){
+            for(ProductModel productModelTemp:productModelList){
+                StringBuilder s = new StringBuilder();
+                s.append(productModelTemp.getProduct().getName());
+                for(ProductPropertyValue productPropertyValue:productModelTemp.getProductPropertyValueList()){
+                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                }
+                if(s.length()>14){
+                    s = new StringBuilder(s.substring(0,14));
+                    s.append("...");
+                }
+                map.put(productModelTemp,s.toString());
+            }
+        }
         productModelList.remove(productModel);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
+        model.addAttribute("map",map);
         return "/product/recommendationList";
 }
     /**

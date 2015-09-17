@@ -1,30 +1,30 @@
-package com.efeiyi.ec.website.order.controller;
+package com.efeiyi.ec.wiki.base.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.does.model.XQuery;
+
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/19.
+ *
  */
 @Controller
 @RequestMapping("/myEfeiyi")
@@ -34,46 +34,28 @@ public class PersonalInforController {
     @Autowired
     private AliOssUploadManager aliOssUploadManager;
 
-    @RequestMapping({"updatePersonalInfo.do"})
+    @RequestMapping({"/updatePersonalInfo.do"})
     public String  updatePersonalInfo(HttpServletRequest request)throws Exception{
         XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
         baseManager.saveOrUpdate(xSaveOrUpdate);
-
-        return "redirect:/myEfeiyi/personalInfo.do";
-
+        return "redirect:/myEfeiyi/getPersonalInfo.do";
     }
-    /*
-    * 我的收藏
-    * */
-    @RequestMapping({"listProductFavorite.do"})
-    public String  listProductFavorite(HttpServletRequest request,Model model)throws Exception{
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        List<Object> list = null;
-        if (currentUser.getId() != null) {
-            XQuery xQuery = new XQuery("plistProductFavorite_default", request);
-            list = baseManager.listObject(xQuery);
-        }
-        model.addAttribute("productFavoriteList", list);
-        return "/purchaseOrder/productCollectionList";
-
-    }
-
-    @RequestMapping({"personalInfo.do"})
+    @RequestMapping({"/getPersonalInfo.do"})
     public String getPersonalInfo(ModelMap modelMap){
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/personalInfoView";
+        return "/personal/personalInfoView";
     }
 
-    @RequestMapping({"personalInfoOfMobile.do"})
+    @RequestMapping({"/personalInfoOfMobile.do"})
     public String getPersonalInfoOfMobile(ModelMap modelMap){
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/updateUser";
+        return "/personal/updateUser";
     }
     /**
      * 密码修改
@@ -81,7 +63,7 @@ public class PersonalInforController {
      * @return
      * @throws Exception
      */
-    @RequestMapping({"updatePassword.do"})
+    @RequestMapping({"/updatePassword.do"})
     public String updatePassword(HttpServletRequest request) throws Exception {
         String contion = request.getParameter("pwd");
         String password= StringUtil.encodePassword(contion, "SHA");
@@ -94,17 +76,17 @@ public class PersonalInforController {
         }
         MyUser bigUser = AuthorizationUtil.getMyUser();
         System.out.println(bigUser.isAccountExpired());
-        return "redirect:/sso.do";
+        return "redirect:/myEfeiyi/getPersonalInfo.do";
 
     }
-    @RequestMapping({"getPassword.do"})
+    @RequestMapping({"/getPassword.do"})
     public String getPassword(HttpServletRequest request,ModelMap modelMap){
 
         String id = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
 
         modelMap.addAttribute("user", user);
-        return "/purchaseOrder/securityAccount";
+        return "/personal/securityAccount";
     }
 
     /**
@@ -112,7 +94,7 @@ public class PersonalInforController {
      * @param request
      * @return
      */
-    @RequestMapping({"checkPassword.do"})
+    @RequestMapping({"/checkPassword.do"})
     @ResponseBody
     public boolean checkPassword(HttpServletRequest request){
         String mm=request.getParameter("password");

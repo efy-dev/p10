@@ -1,10 +1,7 @@
 package com.efeiyi.ec.system.product.service.impl;
 
 import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.product.model.Product;
-import com.efeiyi.ec.product.model.ProductDescription;
-import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.dao.ProductDao;
@@ -278,5 +275,35 @@ public class ProductManagerImpl implements ProductManager{
 
     public void removeProduct(String id){
 
+    }
+
+    @Override
+    public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
+        SubjectDescription subjectDescription = subject.getSubjectDescription();
+        if("".equals(subject.getId())) {
+            subject.setId(null);
+            subjectDescription.setId(null);
+        }
+        xdoDao.saveOrUpdateObject(subjectDescription);
+        subject.setSubjectDescription(subjectDescription);
+        subject.setStatus("1");
+        subject.setSubjectIndex(1);
+        xdoDao.saveOrUpdateObject(subject);
+            for(int i=0;i<spId.length;i++){
+                if("0".equals(spId[i])){
+                    SubjectPicture subjectPicture1 = new SubjectPicture();
+                    subjectPicture1.setSubject(subject);
+                    subjectPicture1.setPictureUrl(subjectPicture[i]);
+                    xdoDao.saveOrUpdateObject(subjectPicture1);
+
+                }else {
+                    if("-1".equals(flag[i])){
+                        xdoDao.deleteObject(SubjectPicture.class.getName(),spId[i]);
+
+                    }
+                }
+            }
+
+        return subject;
     }
 }

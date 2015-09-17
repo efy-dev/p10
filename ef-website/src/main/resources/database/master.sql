@@ -270,3 +270,36 @@ ADD COLUMN `purchase_order_comment_id`  char(16) NULL AFTER `purchase_price`;
 
 
 
+ALTER TABLE `purchase_order_payment_details`
+ADD COLUMN `transaction_number`  char(128) NULL AFTER `purchase_order_payment_id`;
+/----------评价新建表----------------------/
+用户评价表
+CREATE TABLE purchase_order_comment (
+`id`  char(16) NOT NULL ,
+`starts`  varchar(16) NULL ,
+`status`  char(8) NULL ,
+`content`  varchar(1024) NULL ,
+`purchase_order_product_id`  varchar(16) NULL ,
+`sub_purchase_order_comment_id`  varchar(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+用户晒单表
+CREATE TABLE purchase_order_comment_picture (
+`id`  char(16) NOT NULL ,
+`picture_url`  varchar(256) NULL ,
+`status`  char(8) NULL ,
+`purchase_order_comment_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+卖家回复表
+CREATE TABLE purchase_order_business_reply (
+`id`  char(16) NOT NULL ,
+`reply`  varchar(1024) NULL ,
+`purchase_order_comment_id`  char(16) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+/---------------评价新建表-----------------------/
+
