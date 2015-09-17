@@ -52,7 +52,11 @@
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       onclick="showConfirm('提示','是否删除',function(){removeMaster('${master.id}')})" href="#"><span
+                                       href="<c:url value="/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
+                                            class="am-icon-trash-o"></span> 最新动态
+                                    </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                        href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看粉丝
                                     </a>
                                     <c:if test="${empty master.masterRecommendedList}">

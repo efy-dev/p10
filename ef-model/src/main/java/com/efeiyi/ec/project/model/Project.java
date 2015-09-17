@@ -32,17 +32,17 @@ public class Project {
     private List<ProjectTag> projectTagList;//项目标签
     private  List<ProjectProperty> projectPropertyList;//项目属性
     private String description;// project描述
-    private String picture_url;//project图片
+//    private String picture_url;//project图片
     private List<Product> productList;
 
-    @Column(name="picture_url")
-    public String getPicture_url() {
-        return picture_url;
-    }
-
-    public void setPicture_url(String picture_url) {
-        this.picture_url = picture_url;
-    }
+//    @Column(name="picture_url")
+//    public String getPicture_url() {
+//        return picture_url;
+//    }
+//
+//    public void setPicture_url(String picture_url) {
+//        this.picture_url = picture_url;
+//    }
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     public List<Product> getProductList() {

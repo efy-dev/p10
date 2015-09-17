@@ -147,10 +147,10 @@
                 <input type="hidden" name="step" value="description">
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea id="productDescription" name="content" class="ckeditor" id="content"
-                                      placeholder="商品描述" required >
-                                ${object.productDescription.content}
-                            </textarea>
+                    <textarea id="productDescription" name="content" class="ckeditor" id="content"
+                              placeholder="商品描述" required >
+                        ${object.productDescription.content}
+                    </textarea>
                 </div>
             </form>
             <br>
