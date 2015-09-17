@@ -230,6 +230,7 @@ public class MyDocumentController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
+        modelMap.put("group", tempDo.getLabel());
         return pageInfo.getList();
     }
 

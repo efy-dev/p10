@@ -29,7 +29,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="documentForm" action="<c:url value='/content/saveDocument.do'/>?qm=${requestScope.qm}"
+    <form id="documentForm" action="<c:url value='/myDocument/saveDocument.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <c:if test="${not empty object.id}">

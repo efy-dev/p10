@@ -53,30 +53,30 @@
 
     <jnode id="SubordinateInstitutionManagement" url="/main.do?jnodeId=SubordinateInstitutionManagement" text_zh_CN="下属机构管理">
         <jnode id="InstitutionManagement" url="" access="admin,manager" text_zh_CN="下属机构管理">
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="" text_zh_CN="委员会名录管理">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/organization.do?qm=plistCommitteeAssociation_default" access="" text_zh_CN="委员会名录管理">
+                <match url="/myDocument/newOrganization.do?group=委员会名录管理"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="" text_zh_CN="各地协会名录管理">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/organization.do?qm=plistAssociation_default" access="" text_zh_CN="各地协会名录管理">
+                <match url="/myDocument/newOrganization.do?group=各地协会名录管理"/>
             </jnode>
         </jnode>
         <jnode id="MemberManagement" url="" access="admin,manager" text_zh_CN="会员管理">
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="会员申请指南">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/doc.do?qm=plistMemberGuide_default" access="admin,manager" text_zh_CN="会员申请指南">
+                <match url="/myDocument/doc.do?qm=plistMemberGuide_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="会员管理">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/doc.do?qm=plistMemberManagement_default" access="admin,manager" text_zh_CN="会员管理">
+                <match url="/myDocument/doc.do?qm=plistMemberManagement_default"/>
             </jnode>
         </jnode>
     </jnode>
 
     <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="在线申报管理">
         <jnode id="ProjectApplicationManagement" url="" access="admin,manager" text_zh_CN="项目申报管理">
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="" text_zh_CN="申报资料上传管理">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/doc.do?qm=plistMaterialUpload_default" access="" text_zh_CN="申报资料上传管理">
+                <match url="/myDocument/doc.do?qm=plistMaterialUpload_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="" text_zh_CN="申报资料下载管理">
-                <match url="/myDocument/doc.do?qm=listPCBanner_default"/>
+            <jnode url="/myDocument/doc.do?qm=plistMaterialDownload_default" access="" text_zh_CN="申报资料下载管理">
+                <match url="/myDocument/doc.do?qm=plistMaterialDownload_default"/>
             </jnode>
         </jnode>
     </jnode>

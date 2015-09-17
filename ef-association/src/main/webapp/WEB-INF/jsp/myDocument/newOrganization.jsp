@@ -30,11 +30,11 @@
 <div class="am-g">
     <form id="organizationForm" method="post" class="am-form am-form-horizontal">
         <div class="am-u-sm-9">
-            <input type="hidden" name="theDatetime" id="theDatetime" value="${object.theDatetime}">
-            <c:if test="${not empty object.id}">
-                <input type="hidden" name="id" id="id" value="${object.id}">
-            </c:if>
-            <input type="hidden" name="status" id="status" value="${object.status}">
+            <input type="hidden" name="theDatetime" value="${object.theDatetime}">
+            <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="status" value="${object.status}">
+            <%--<input type="hidden" name="group"  value="${object.group}">--%>
+            <%--<input type="hidden" name="group"  value="${requestScope.group}">--%>
         </div>
 
         <div class="am-form-group">
@@ -76,16 +76,18 @@
             </div>
         </div>
 
-        <%--<div class="am-form-group">--%>
-        <%--<label name="theDatetime" for="theDatetime" class="am-u-sm-3 am-form-label">时间 <small>*</small></label>--%>
-        <%--<div class="am-input-group am-datepicker-date am-u-sm-9" data-am-datepicker="{format: 'yyyy-mm-dd'}">--%>
-        <%--<input type="datetime" name="theDatetime" id="theDatetime" class="am-form-field" title="theDatetime" placeholder="date"--%>
-        <%--value="" readonly required="true"/>--%>
-        <%--<span class="am-input-group-btn am-datepicker-add-on">--%>
-        <%--<button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>--%>
-        <%--</span>--%>
-        <%--</div>--%>
-        <%--</div>--%>
+        <div class="am-form-group">
+            <label name="group" for="group" class="am-u-sm-3 am-form-label">分类
+                <small>*</small>
+            </label>
+
+            <div class="am-u-sm-9">
+                <ming800:status name="group" dataType="intangibleCultureOrganization.group"
+                                checkedValue="${object.group}"
+                                type="select"/>
+            </div>
+        </div>
+
         <div class="am-form-group">
             <label name="inCharge" for="inCharge" class="am-u-sm-3 am-form-label">inCharge
                 <small>*</small>
@@ -101,7 +103,7 @@
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="button"
                        onclick="testAjaxSubmitForm('organizationForm', '<c:url
-                               value="/organization/saveOrganization.do"/>?qm=${requestScope.qm}');"
+                               value="/myOrganization/saveOrganization.do"/>?qm=${requestScope.qm}');"
                        class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
