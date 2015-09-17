@@ -1,6 +1,5 @@
 package com.efeiyi.ec.controller;
 
-import com.efeiyi.ec.wiki.controller.WikiIndexController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.impl.BaseManagerImpl;
 import org.apache.log4j.Logger;
@@ -23,7 +22,6 @@ public class WikiIndexControllerTest {
     private static Logger logger = Logger.getLogger(WikiIndexControllerTest.class);
     MockHttpServletRequest request;
     MockHttpServletResponse response;
-    WikiIndexController wikiIndexController;
     //ModelAndView mv ;
     @Autowired
     BaseManager baseManager;
@@ -50,7 +48,6 @@ public class WikiIndexControllerTest {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         request.setCharacterEncoding("UTF-8");
-        wikiIndexController =(WikiIndexController)applicationContext.getBean("wikiIndexController");
         baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
 
     }
@@ -68,7 +65,6 @@ public class WikiIndexControllerTest {
     @Test
     public void demo2()throws  Exception{
 
-        wikiIndexController.getWikiBannerList(request);
 
     }
 }
