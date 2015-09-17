@@ -18,6 +18,7 @@ public class PurchaseOrderComment {
     private String starts;
     private List<PurchaseOrderCommentPicture> purchaseOrderCommentPictureList;
     private String status;
+    private String content;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -75,5 +76,13 @@ public class PurchaseOrderComment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
