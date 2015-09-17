@@ -2,20 +2,24 @@ package com.efeiyi.ec.wiki.model;
 
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.master.model.Master;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/24.
  */
 @Entity
 @Table(name="wiki_project_content")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProjectContent {
     private String id;
     private String content;
@@ -24,7 +28,8 @@ public class ProjectContent {
     private Date createDatetime;
     private String type;
     private Project project;
-    private AddressCity city;
+    //private List<Consumer> consumer;
+
 
 
     @Id
@@ -79,19 +84,24 @@ public class ProjectContent {
     public String getType() { return type; }
 
     public void setType(String type) { this.type = type; }
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="project_id")
     @JsonIgnore
     public Project getProject() {return project;}
 
     public void setProject(Project project) {this.project = project;}
-    @ManyToOne(fetch = FetchType.LAZY,optional = true)
-    @JoinColumn(name="city_id")
-    public AddressCity getCity() {
-        return city;
+
+  /*  @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "wiki_projectContent_consumer",
+            joinColumns = { @JoinColumn(name = "projectContent_id") },
+            inverseJoinColumns = { @JoinColumn(name = "consumer_id") }
+    )
+    public List<Consumer> getConsumer() {
+        return consumer;
     }
 
-    public void setCity(AddressCity city) {
-        this.city = city;
-    }
+    public void setConsumer(List<Consumer> consumer) {
+        this.consumer = consumer;
+    }*/
+
 }

@@ -18,6 +18,7 @@ public class PurchaseOrderProduct {
     private ProductModel productModel;
     private Integer purchaseAmount;
     private BigDecimal purchasePrice;
+    private PurchaseOrderComment purchaseOrderComment;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -67,5 +68,15 @@ public class PurchaseOrderProduct {
 
     public void setPurchasePrice(BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_order_comment_id")
+    public PurchaseOrderComment getPurchaseOrderComment() {
+        return purchaseOrderComment;
+    }
+
+    public void setPurchaseOrderComment(PurchaseOrderComment purchaseOrderComment) {
+        this.purchaseOrderComment = purchaseOrderComment;
     }
 }

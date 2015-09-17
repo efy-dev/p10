@@ -1,5 +1,6 @@
 package com.efeiyi.ec.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization_address_district")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class AddressDistrict implements Serializable {
     private String id;
     private String name;
@@ -39,7 +41,8 @@ public class AddressDistrict implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "opened_city_id")
+    @JoinColumn(name = "city_id")
+    @JsonIgnore
     public AddressCity getAddressCity() {
         return addressCity;
     }

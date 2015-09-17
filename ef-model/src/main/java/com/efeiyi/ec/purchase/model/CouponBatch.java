@@ -1,8 +1,11 @@
 package com.efeiyi.ec.purchase.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +14,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "purchase_coupon_batch")
-public class CouponBatch {
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class CouponBatch implements Serializable{
     private String id;
     private String name;
     private Integer amount;//生成优惠券数量
@@ -79,6 +83,7 @@ public class CouponBatch {
         this.endDate = endDate;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "couponBatch")
     public List<Coupon> getCouponList() {
         return couponList;
