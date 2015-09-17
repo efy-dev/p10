@@ -87,7 +87,7 @@
 </div>
 <div class="list-pro wh1" id="orderNum">
 <c:forEach items="${orderList}" var="order">
-  <c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() == 0}">
+  <%--<c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() != 0}">--%>
       <table class="list-pro-table">
         <tr>
           <th colspan="6">
@@ -148,7 +148,7 @@
           </c:if>
         </tr>
       </table>
-  </c:if>
+  <%--</c:if>--%>
 </c:forEach>
 </div>
 </div>
