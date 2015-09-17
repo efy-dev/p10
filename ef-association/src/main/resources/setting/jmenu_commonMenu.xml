@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenu id="AssociationMenu">
+
+    <jnode id="AssociationHomePage" url="/main.do?jnodeId=AssociationHomePage" text_zh_CN="首页面">
+        <jnode url="/myBanner/ba.do?qm=listPCBanner_default"  access="admin,manager" text_zh_CN="顶部轮播图管理">
+            <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+        </jnode>
+    </jnode>
+
+    <jnode id="NewsBulletinManagement" url="/main.do?jnodeId=NewsBulletinManagement" text_zh_CN="新闻公告管理">
+        <jnode id="NewsManagement" url="" access="admin,manager" text_zh_CN="新闻管理">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="协会新闻">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="行业新闻">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="公告管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+        <jnode id="AssociationSurvey" url="" access="admin,manager" text_zh_CN="协会概况">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="协会介绍">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="协会章程">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="联系方式">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+        <jnode id="IntangibleCulturalHeritageProtection" url="" access="admin,manager" text_zh_CN="非遗保护">
+            <jnode url="" access="admin,manager" text_zh_CN="非遗法">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="" access="admin,manager" text_zh_CN="非遗保护政策">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="" access="admin,manager" text_zh_CN="非遗申报指南">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+        <jnode id="IntangibleCulturalHeritage" url="" access="admin,manager" text_zh_CN="非遗名录">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="非遗项目">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="非遗传承人">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+
+    <jnode id="SubordinateInstitutionManagement" url="/main.do?jnodeId=SubordinateInstitutionManagement" text_zh_CN="下属机构管理">
+        <jnode id="InstitutionManagement" url="" access="admin,manager" text_zh_CN="下属机构管理">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="委员会名录管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="各地协会名录管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+        <jnode id="MemberManagement" url="" access="admin,manager" text_zh_CN="会员管理">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="会员申请指南">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="admin,manager" text_zh_CN="会员管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+
+    <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="在线申报管理">
+        <jnode id="ProjectApplicationManagement" url="" access="admin,manager" text_zh_CN="项目申报管理">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="申报资料上传管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="申报资料下载管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="权限管理">
+        <jnode id="UserManagement" url="" access="admin,manager" text_zh_CN="用户管理">
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="用户列表">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+            <jnode url="/myBanner/ba.do?qm=listPCBanner_default" access="" text_zh_CN="角色管理">
+                <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            </jnode>
+        </jnode>
+    </jnode>
+
+
+
+
+    <!--<jnode id="messageManager" url="/main.do?jnodeId=associationManager" text_zh_CN="非遗协会管理">-->
+
+        <!--<jnode url="" id="newsManager" access="admin,manager" state="open"  text_zh_CN="新闻公告管理">-->
+            <!--<jnode url="/myDocument/doc.do?qm=plistNewsOrganization_default"  access="admin,manager" text_zh_CN="协会新闻">-->
+                <!--<match url="/myDocument/doc.do?qm=plistNews_organization"/>-->
+            <!--</jnode>-->
+            <!--<jnode url="/myDocument/doc.do?qm=plistNewsIndustry_default"  access="admin,manager" text_zh_CN="行业新闻">-->
+                <!--<match url="/myDocument/doc.do?qm=plistNews_industry"/>-->
+            <!--</jnode>-->
+            <!--<jnode url="/myDocument/doc.do?qm=plistNews_note"  access="admin,manager" text_zh_CN="公告管理">-->
+                <!--<match url="/myDocument/doc.do?qm=plistNews_note"/>-->
+            <!--</jnode>-->
+        <!--</jnode>-->
+
+        <!--<jnode url="" id="organizationManager" access="admin,manager" state="closed"  text_zh_CN="协会概况">-->
+
+            <!--<jnode url="/myDocument/organization.do?qm=plistAssociation_introduction" access="admin,manager" text_zh_CN="协会介绍">-->
+                <!--<match url="/myDocument/doc.do?qm=plistAssociation_introduction"/>-->
+            <!--</jnode>-->
+
+            <!--<jnode url="/myDocument/doc.do?qm=plistAssociation_statute" access="admin,manager" text_zh_CN="协会章程">-->
+                <!--<match url="/myDocument/doc.do?qm=plistAssociation_statute"/>-->
+            <!--</jnode>-->
+
+            <!--<jnode url="/myDocument/doc.do?qm=plistAssociation_contact" access="admin,manager" text_zh_CN="联系方式">-->
+                <!--<match url="/myDocument/doc.do?qm=plistAssociation_contact"/>-->
+            <!--</jnode>-->
+
+        <!--</jnode>-->
+
+        <!--<jnode url="" id="memeberManager" access="admin,manager" state="closed"  text_zh_CN="非遗保护">-->
+
+            <!--<jnode url="/myDocument/organization.do?qm=plistIntangibleCultural_law" access="admin,manager" text_zh_CN="非遗法">-->
+                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_law"/>-->
+            <!--</jnode>-->
+
+            <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_policy" access="admin,manager" text_zh_CN="非遗保护政策">-->
+                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_policy"/>-->
+            <!--</jnode>-->
+
+            <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_guide" access="admin,manager" text_zh_CN="非遗申报指南">-->
+                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_guide"/>-->
+            <!--</jnode>-->
+
+        <!--</jnode>-->
+
+        <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_recommend" access="admin,manager" text_zh_CN="非遗名录推荐">-->
+            <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_recommend"/>-->
+        <!--</jnode>-->
+
+    <!--</jnode>-->
+
+</jmenu>
