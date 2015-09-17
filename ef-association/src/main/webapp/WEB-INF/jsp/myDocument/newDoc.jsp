@@ -29,7 +29,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="documentForm" action="<c:url value='/content/saveDocument.do'/>?qm=${requestScope.qm}"
+    <form id="documentForm" action="<c:url value='/myDocument/saveDocument.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <c:if test="${not empty object.id}">
@@ -96,7 +96,7 @@
             </label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="group" dataType="announcements.group"
+                <ming800:status name="group" dataType="document.group"
                                 checkedValue="${object.group}"
                                 type="select"/>
             </div>

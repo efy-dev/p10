@@ -4,6 +4,7 @@
     <jnode id="AssociationHomePage" url="/main.do?jnodeId=AssociationHomePage" text_zh_CN="首页面">
         <jnode url="/myBanner/ba.do?qm=listPCBanner_default"  access="admin,manager" text_zh_CN="顶部轮播图管理">
             <match url="/myBanner/ba.do?qm=listPCBanner_default"/>
+            <match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group=顶部轮播图管理"/>
         </jnode>
     </jnode>
 
@@ -11,12 +12,15 @@
         <jnode id="NewsManagement" url="" access="admin,manager" text_zh_CN="新闻管理">
             <jnode url="/myDocument/doc.do?qm=plistNewsOrganization_default" access="admin,manager" text_zh_CN="协会新闻">
                 <match url="/myDocument/doc.do?qm=plistNewsOrganization_default"/>
+                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=协会新闻"/>
             </jnode>
             <jnode url="/myDocument/doc.do?qm=plistNewsIndustry_default" access="admin,manager" text_zh_CN="行业新闻">
                 <match url="/myDocument/doc.do?qm=plistNewsIndustry_default"/>
+                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=行业新闻"/>
             </jnode>
             <jnode url="/myDocument/doc.do?qm=plistNewsNote_default" access="admin,manager" text_zh_CN="公告管理">
                 <match url="/myDocument/doc.do?qm=plistNewsNote_default"/>
+                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=公告管理"/>
             </jnode>
         </jnode>
         <jnode id="AssociationSurvey" url="" access="admin,manager" text_zh_CN="协会概况">
@@ -80,6 +84,7 @@
             </jnode>
         </jnode>
     </jnode>
+
     <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="权限管理">
         <jnode id="UserManagement" url="" access="admin,manager" text_zh_CN="用户管理">
             <jnode url="/myDocument/doc.do?qm=listPCBanner_default" access="" text_zh_CN="用户列表">
@@ -90,60 +95,4 @@
             </jnode>
         </jnode>
     </jnode>
-
-
-
-
-    <!--<jnode id="messageManager" url="/main.do?jnodeId=associationManager" text_zh_CN="非遗协会管理">-->
-
-        <!--<jnode url="" id="newsManager" access="admin,manager" state="open"  text_zh_CN="新闻公告管理">-->
-            <!--<jnode url="/myDocument/doc.do?qm=plistNewsOrganization_default"  access="admin,manager" text_zh_CN="协会新闻">-->
-                <!--<match url="/myDocument/doc.do?qm=plistNews_organization"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/myDocument/doc.do?qm=plistNewsIndustry_default"  access="admin,manager" text_zh_CN="行业新闻">-->
-                <!--<match url="/myDocument/doc.do?qm=plistNews_industry"/>-->
-            <!--</jnode>-->
-            <!--<jnode url="/myDocument/doc.do?qm=plistNews_note"  access="admin,manager" text_zh_CN="公告管理">-->
-                <!--<match url="/myDocument/doc.do?qm=plistNews_note"/>-->
-            <!--</jnode>-->
-        <!--</jnode>-->
-
-        <!--<jnode url="" id="organizationManager" access="admin,manager" state="closed"  text_zh_CN="协会概况">-->
-
-            <!--<jnode url="/myDocument/organization.do?qm=plistAssociation_introduction" access="admin,manager" text_zh_CN="协会介绍">-->
-                <!--<match url="/myDocument/doc.do?qm=plistAssociation_introduction"/>-->
-            <!--</jnode>-->
-
-            <!--<jnode url="/myDocument/doc.do?qm=plistAssociation_statute" access="admin,manager" text_zh_CN="协会章程">-->
-                <!--<match url="/myDocument/doc.do?qm=plistAssociation_statute"/>-->
-            <!--</jnode>-->
-
-            <!--<jnode url="/myDocument/doc.do?qm=plistAssociation_contact" access="admin,manager" text_zh_CN="联系方式">-->
-                <!--<match url="/myDocument/doc.do?qm=plistAssociation_contact"/>-->
-            <!--</jnode>-->
-
-        <!--</jnode>-->
-
-        <!--<jnode url="" id="memeberManager" access="admin,manager" state="closed"  text_zh_CN="非遗保护">-->
-
-            <!--<jnode url="/myDocument/organization.do?qm=plistIntangibleCultural_law" access="admin,manager" text_zh_CN="非遗法">-->
-                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_law"/>-->
-            <!--</jnode>-->
-
-            <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_policy" access="admin,manager" text_zh_CN="非遗保护政策">-->
-                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_policy"/>-->
-            <!--</jnode>-->
-
-            <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_guide" access="admin,manager" text_zh_CN="非遗申报指南">-->
-                <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_guide"/>-->
-            <!--</jnode>-->
-
-        <!--</jnode>-->
-
-        <!--<jnode url="/myDocument/doc.do?qm=plistIntangibleCultural_recommend" access="admin,manager" text_zh_CN="非遗名录推荐">-->
-            <!--<match url="/myDocument/doc.do?qm=plistIntangibleCultural_recommend"/>-->
-        <!--</jnode>-->
-
-    <!--</jnode>-->
-
 </jmenu>
