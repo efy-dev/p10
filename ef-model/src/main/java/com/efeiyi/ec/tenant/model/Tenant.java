@@ -35,6 +35,7 @@ public class Tenant implements Serializable {
     private List<TenantMaster> tenantMasterList;
     private List<TenantProject> tenantProjectList;
     private List<TenantRecommended> tenantRecommendedList;
+    private  String pictureUrl;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -47,6 +48,15 @@ public class Tenant implements Serializable {
         this.id = id;
     }
 
+
+    @Column(name = "picture_url")
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")

@@ -393,3 +393,5 @@ CREATE TABLE `subject_product` (
 )
 ;
 
+ALTER TABLE `tenant`
+ADD COLUMN `picture_url`  varchar(255) NULL AFTER `serial`;
