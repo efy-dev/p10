@@ -2,9 +2,9 @@ $(function(){
     //¶¥²¿ºÚÌõ
     (function(){
         $('.btn-top-wechat').hover(function(){
-            $(this).find('.top-wechat').slideDown('fast');
+            $(this).find('.top-wechat').stop(true).slideDown('fast');
         },function(){
-            $(this).find('.top-wechat').slideUp('fast');
+            $(this).find('.top-wechat').stop(true).slideUp('fast');
         })
     })();
     //µ¼º½
