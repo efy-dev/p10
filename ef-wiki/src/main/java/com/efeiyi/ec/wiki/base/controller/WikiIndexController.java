@@ -68,4 +68,14 @@ public class WikiIndexController extends WikibaseController {
         List list = getWondenfulProjectList();
         return list;
     }
+
+    @RequestMapping("/getPerson.do")
+     public ModelAndView getPersonCenter( HttpServletRequest request, Model model)throws Exception{
+        return new ModelAndView("/personal/personalCenter");
+    }
+
+    @RequestMapping("/getPersonalInfo.do")
+    public ModelAndView getPersonInfo( HttpServletRequest request, Model model)throws Exception{
+        return new ModelAndView("/personal/personalInfoView");
+    }
 }

@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>12010703大师分类-地区</title>
+  <title>工艺-分类</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -32,8 +32,8 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/app.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/cyclopedia.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -54,9 +54,8 @@
       <ul class="bd">
         <li><a href="" title="首页">首页</a></li>
         <li><a href="" title="分类">分&nbsp;类</a></li>
-        <li class="active"><a href="" title="购物车">购&nbsp;物&nbsp;车</a></li>
         <li><a href="" title="传承人">传承人</a></li>
-        <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="<c:url value='/getPerson.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
@@ -145,8 +144,8 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="<c:url value='/scripts/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>
 </html>
