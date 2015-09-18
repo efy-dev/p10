@@ -342,14 +342,14 @@
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
                                             </dd>
-                                            <dd style="width: 100%;text-align: center;" >
-                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
-                                            </dd>
+                                            <%--<dd style="width: 100%;text-align: center;" >--%>
+                                                    <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
+                                            <%--</dd>--%>
                                         </dl>
                                     </li>
                                 </c:if>
