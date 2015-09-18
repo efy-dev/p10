@@ -33,6 +33,7 @@
                 <match url="/basic/xm.do?qm=viewProduct&amp;viewIdentify=consumer"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProductModel=consumer"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=consumer"/>
+                <match url="/basic/xm.do?qm=plistConsumerCoupon_default"/>
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
