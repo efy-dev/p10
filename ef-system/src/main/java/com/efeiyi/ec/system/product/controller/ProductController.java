@@ -434,4 +434,18 @@ public class ProductController extends BaseController {
         }
         return subjectProductModelId;
     }
+
+    @RequestMapping("/updateSubjectIndex.do")
+    @ResponseBody
+    public String updateSubjectIndex(String subjectId, HttpServletRequest request) {
+
+        try {
+           Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectIndex(subject.getSubjectIndex() + 1);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectId;
+    }
 }
