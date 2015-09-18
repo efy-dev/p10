@@ -40,7 +40,7 @@
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot-picture" /></a></div>
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
