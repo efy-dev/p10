@@ -100,7 +100,7 @@
                 <tr>
                     <td>
                         <img width="30px;"
-                             src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo"
+                             src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!tenant-manage-photo"
                              alt="商品图片">
                         <a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderProduct.id}"/>">
                                 ${purchaseOrderProduct.productModel.product.name}
