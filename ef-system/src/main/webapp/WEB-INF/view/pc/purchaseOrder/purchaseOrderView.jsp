@@ -124,7 +124,7 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">下单人姓名</td>
-                <td class="am-u-md-3">${object.user.name}</td>
+                <td class="am-u-md-3">${object.user.username}</td>
                 <td class="am-primary am-u-md-3">性别</td>
                 <td class="am-u-md-3">
                     <ming800:status name="sex" dataType="consumer.sex" checkedValue="${object.user.sex}" type="normal"/>
@@ -238,44 +238,12 @@
                     <br>
                 </c:forEach>
                 </td>
-                <td class="am-hide-sm-only">${purchaseOrderPayment.user.name}</td>
+                <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                 <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
                                     pattern="yyyy-mm-dd"/>
                 </td>
                 </tr>
-                <%--<tr>--%>
-                <%--<td colspan="5">--%>
-                <%--<div class="am-u-sm-12">--%>
-                <%--<table class="am-table am-table-striped am-table-hover table-main">--%>
-                <%--<thead>--%>
-                <%--<tr>--%>
-                <%--<th class="table-title">支付方式</th>--%>
-                <%--<th class="table-title">支付金额</th>--%>
-                <%--<th class="table-title">优惠券编号</th>--%>
-                <%--</tr>--%>
-                <%--</thead>--%>
-
-                <%--<tbody>--%>
-                <%--<c:forEach items="${purchaseOrderPayment.purchaseOrderPaymentDetailsList}"--%>
-                           <%--var="purchaseOrderPaymentDetails">--%>
-                    <%--<tr>--%>
-                        <%--<td class="am-hide-sm-only">--%>
-                            <%--<ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"--%>
-                                            <%--checkedValue="${purchaseOrderPaymentDetails.payWay}"--%>
-                                            <%--type="normal"/>--%>
-                        <%--</td>--%>
-                        <%--<td class="am-hide-sm-only">${purchaseOrderPaymentDetails.money}</td>--%>
-                        <%--<td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>--%>
-                    <%--</tr>--%>
-                <%--</c:forEach>--%>
-                <%--</tbody>--%>
-
-                <%--</table>--%>
-                <%--</div>--%>
-                <%--</td>--%>
-                <%--</tr>--%>
-
             </c:forEach>
             </tbody>
         </table>
