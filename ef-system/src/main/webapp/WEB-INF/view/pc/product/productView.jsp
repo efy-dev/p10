@@ -270,10 +270,16 @@
                                             <dd style="width: 100%;text-align: center;" >
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '2'}">
-                                                        <a href="javascript:void(0);" status="2" onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
+                                                        <a href="javascript:void(0);" modelId="${productPicture.productModel.id}" status="2" onclick="updatePictureStatus(this,'${productPicture.id}','1')">主图片</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="javascript:void(0);" status="1" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                        <c:if test="${empty productPicture.productModel}">
+                                                            <a href="javascript:void(0);" status="1" modelId="0" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                        </c:if>
+                                                        <c:if test="${not empty productPicture.productModel}">
+                                                            <a href="javascript:void(0);" status="1" modelId="${productPicture.productModel.id}" onclick="updatePictureStatus(this,'${productPicture.id}','2')">设为主图片</a>
+                                                        </c:if>
+
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
@@ -281,10 +287,12 @@
 
                                             <dd style="width: 100%;text-align: center;" >
 
-                                                    <select style="width: 85%;" onchange="setModelPic(this,'${productPicture.id}')">
+                                                    <select style="width: 85%;" onclick="temVal(this)" onchange="setModelPic(this,'${productPicture.id}')">
                                                         <option value="0">设置商品规格图片</option>
                                                         <c:forEach var="productModel1" items="${object.productModelList}">
-                                                            <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
+
+                                                              <option value="${productModel1.id}" <c:if test="${productModel1.id==productPicture.productModel.id}">selected="selected"</c:if>>${productModel1.name}</option>
+
                                                         </c:forEach>
                                                     </select>
 
@@ -387,22 +395,30 @@
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
 <script>
+  var selectVal;
+    function temVal(obj){
+        selectVal = $(obj).val();
+    }
+
     function setModelPic(obj,pictureId){
-
        var modelId = $(obj).val();
+        $(obj).parent().prev().find("a").attr("modelId",modelId);
+       if( $(obj).parent().prev().find("a").attr("status")=="2"){
+           alert("请先取消主图片!");
+           $("option[value='"+selectVal+"']",obj).attr("selected","selected");
+       }else{
+           $.ajax({
+               type: "get",
+               url: '<c:url value="/product/setModelPicture.do"/>',
+               cache: false,
+               dataType: "json",
+               data:{pictureId:pictureId.trim(),modelId:modelId},
+               success: function (data) {
+                   $(obj).parent().prev().find("a").attr("modelId",data);
+               }
+           });
+       }
 
-            $.ajax({
-                type: "get",
-                url: '<c:url value="/product/setModelPicture.do"/>',
-                cache: false,
-                dataType: "json",
-                data:{pictureId:pictureId.trim(),modelId:modelId},
-                success: function (data) {
-//                    $("#picUrl tr[name='" + divId + "']").remove();
-//                    $("#collapse-panel-1 li[name='" + divId + "']").remove();
-//                    $("#collapse-panel-3 li[name='" + divId + "']").remove();
-                }
-            });
 
     }
 
@@ -494,7 +510,7 @@ var modelIds = [];
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        '<a href="javascript:void(0);" status="1" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -613,19 +629,25 @@ var modelIds = [];
 
 
     function updatePictureStatus(obj,id,status){
+        var modelId = $(obj).parent().next().find("select").val();
+        if(modelId == "0"){
+            alert("请选择规格!");
+        }else{
+
+
         var productId = $("input[name='product.id']").val();
         $.ajax({
             type: "get",
             url: '<c:url value="/product/updatePicture.do"/>',
             cache: false,
             dataType: "json",
-            data:{id:id.trim(),status:status,productId:productId},
+            data:{id:id.trim(),status:status,productId:productId,modelId:modelId},
             success: function (data) {
                 if(status == '2'){
-                    if($("a[status='2']").length!=0){
-                        $("a[status='2']").text("设为主图片");
-                        $("a[status='2']").attr("onclick","updatePictureStatus(this,'"+data+"','2')");
-                        $("a[status='2']").attr("status","1");
+                    if($("a[status='2'][modelId='"+data+"']").length!=0){
+                        $("a[status='2'][modelId='"+data+"']").text("设为主图片");
+                        $("a[status='2'][modelId='"+data+"']").attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                        $("a[status='2'][modelId='"+data+"']").attr("status","1");
                     }
 
                     $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','1')");
@@ -661,6 +683,8 @@ var modelIds = [];
 
             }
         });
+        }
+
     }
 
 
