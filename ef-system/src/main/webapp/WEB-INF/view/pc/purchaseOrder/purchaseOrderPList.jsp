@@ -190,7 +190,7 @@
                             <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseProduct">
                                 <p style="margin-left: 10px;"><a
                                         href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewProductModel=${viewProductModel}&id=${purchaseProduct.id}'/>">${purchaseProduct.productModel.product.name}</a>
-                                    <img width="20px" src="http://pro.efeiyi.com/${purchaseProduct.productModel.product.picture_url}@!product-model" alt="产品图片">
+                                    <img width="20px" src="http://pro.efeiyi.com/${purchaseProduct.productModel.productModel_url}@!product-model" alt="产品图片">
                                 </p>
                             </c:forEach>
 
