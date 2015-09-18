@@ -161,7 +161,7 @@
                     <td class="am-hide-sm-only"><a
                             href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderProduct&viewIdentify=${viewIdentify}&id=${purchaseOrderProduct.id}'/>">${purchaseOrderProduct.productModel.product.name}</a><img
                             width="20px"
-                            src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!product-model"
+                            src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!product-model"
                             alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>

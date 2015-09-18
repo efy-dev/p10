@@ -45,7 +45,7 @@
     <div class="info">
       <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
       <div class="p-img">
-        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" target="_blank" width="286" height="206" alt=""/></a>
+        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-master" target="_blank"  alt=""/></a>
         <div class="des-txt">
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
           <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
@@ -75,7 +75,7 @@
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
             <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-              <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
+              <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
               <p class="wh name">${map.get(productModel)}
               </p>
               <p class="wh price">￥${productModel.price}</p>

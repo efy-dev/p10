@@ -113,7 +113,7 @@
                 <c:forEach var="purchaseOrderProduct" items="${purchaseOrder.purchaseOrderProductList}" >
                     <tr >
                         <td class="am-text-center">
-                            <img width="30px;" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.product.picture_url}@!tenant-manage-photo" alt="商品图片">
+                            <img width="30px;" src="http://tenant.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!tenant-manage-photo" alt="商品图片">
                         </td>
                         <td class="am-text-center">
                             <a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderProduct.id}"/>">

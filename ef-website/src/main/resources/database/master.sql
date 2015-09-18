@@ -301,5 +301,8 @@ PRIMARY KEY (`id`)
 )
 ;
 /---------------评价新建表-----------------------/
+/---------PurchaseOrderPoduct表添加评价状态字段----------/
+ALTER TABLE `purchase_order_product`
+ADD COLUMN `status`  char(8) NULL AFTER `purchase_order_comment_id`;
 #-------------------------------未执行----------------------------------
 
