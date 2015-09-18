@@ -15,11 +15,16 @@
     <title></title>
 </head>
 <body>
+<div style="text-align: left;margin-left: 10px;" >
+    <input onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
+           type="button" class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建" />
+</div>
 <div class="am-g">
-    <button onclick="window.location.href='<c:url
-            value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建
-    </button>
+    <%--<button onclick="window.location.href='<c:url--%>
+            <%--value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"--%>
+            <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建--%>
+    <%--</button>--%>
 
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
@@ -33,37 +38,45 @@
         <c:forEach items="${documentList}" var="document">
             <tr>
                 <td>
-                    <button onclick="window.location.href='<c:url
-                            value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                            class="am-icon-trash-o"></span> 编辑
-                    </button>
-                    <button onclick="window.location.href='<c:url
-                            value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                            class="am-icon-trash-o"></span> 删除
-                    </button>
-                    <button onclick="saveObject('${document.id}','<c:url
-                            value='/myDocument/saveDocument.do'/>','status',<c:if test="${document.status == 1}">'2'</c:if><c:if test="${document.status != 1}">'1'</c:if>,'&qm=/myDocument/doc.do?qm=plistNewsOrganization_default')"
-                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                            class="am-icon-trash-o"></span> <c:if test="${document.status == 1}">取消推荐</c:if><c:if test="${document.status != 1}">推荐</c:if>
-                    </button>
-                    <input id="${document.id}0" value="${document.id}" name="${document.id}" metaProperty="id" type="hidden"/>
-                    <input id="${document.id}1" value="${document.documentContent.id}" name="${document.id}" metaProperty="documentContent.id"
-                           type="hidden"/>
-                    <input id="${document.id}2" value="${document.documentOrder}" name="${document.id}" metaProperty="documentOrder" type="hidden"/>
-                    <input id="${document.id}3" value="${document.keywords}" name="${document.id}" metaProperty="keywords" type="hidden"/>
-                    <input id="${document.id}4" value="${document.sampleContent}" name="${document.id}" metaProperty="sampleContent" type="hidden"/>
-                    <input id="${document.id}5"
-                           value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
-                           name="${document.id}" metaProperty="theDatetime" type="hidden"/>
-                    <input id="${document.id}6"
-                           value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
-                           name="${document.id}" metaProperty="publishDate" type="hidden"/>
-                    <input id="${document.id}7" value="${document.status}" name="${document.id}" type="hidden" metaProperty="status"/>
-                    <input id="${document.id}8" value="${document.group}" name="${document.id}" metaProperty="group" type="hidden"/>
-                    <input id="${document.id}9" value="${document.documentContent.content}" metaProperty="documentContent.content" name="${document.id}"
-                           type="hidden"/>
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                            <button onclick="window.location.href='<c:url
+                                    value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                    class="am-icon-edit"></span> 编辑
+                            </button>
+                            <button onclick="window.location.href='<c:url
+                                    value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                    class="am-icon-trash-o"></span> 删除
+                            </button>
+                            <button onclick="saveObject('${document.id}','<c:url value='/myDocument/saveDocument.do'/>','status',
+                                    '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
+                                    '&qm=/myDocument/doc.do?qm=plistNewsOrganization_default')"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><c:if test="${document.status == 1}">取消推荐</c:if><c:if test="${document.status != 1}"><font color="green">推荐</font></c:if>
+                            </button>
+                            <input id="${document.id}0" value="${document.id}"
+                                   name="${document.id}" metaProperty="id" type="hidden"/>
+                            <input id="${document.id}1" value="${document.documentContent.id}"
+                                   name="${document.id}" metaProperty="documentContent.id" type="hidden"/>
+                            <input id="${document.id}2" value="${document.documentOrder}"
+                                   name="${document.id}" metaProperty="documentOrder" type="hidden"/>
+                            <input id="${document.id}3" value="${document.keywords}"
+                                   name="${document.id}" metaProperty="keywords" type="hidden"/>
+                            <input id="${document.id}4" value="${document.sampleContent}"
+                                   name="${document.id}" metaProperty="sampleContent" type="hidden"/>
+                            <input id="${document.id}5" value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
+                                   name="${document.id}" metaProperty="theDatetime" type="hidden"/>
+                            <input id="${document.id}6" value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
+                                   name="${document.id}" metaProperty="publishDate" type="hidden"/>
+                            <input id="${document.id}7" value="${document.status}"
+                                   name="${document.id}" type="hidden" metaProperty="status"/>
+                            <input id="${document.id}8" value="${document.group}"
+                                   name="${document.id}" metaProperty="group" type="hidden"/>
+                            <input id="${document.id}9" value="${document.documentContent.content}" metaProperty="documentContent.content"
+                                   name="${document.id}" type="hidden"/>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <div name="title">${document.title}</div>

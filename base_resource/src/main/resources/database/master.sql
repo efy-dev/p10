@@ -393,3 +393,14 @@ CREATE TABLE `subject_product` (
 )
 ;
 
+ALTER TABLE `tenant`
+ADD COLUMN `picture_url`  varchar(255) NULL AFTER `serial`;
+
+CREATE TABLE `project_category_product_model` (
+`id`  char(16) NOT NULL ,
+`project_category_id`  char(16) NULL ,
+`product_model_id`  char(16) NULL ,
+`status`  varchar(8) NULL ,
+PRIMARY KEY (`id`)
+)
+;

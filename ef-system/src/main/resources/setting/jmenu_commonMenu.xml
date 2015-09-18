@@ -33,6 +33,7 @@
                 <match url="/basic/xm.do?qm=viewProduct&amp;viewIdentify=consumer"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProductModel=consumer"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=consumer"/>
+                <match url="/basic/xm.do?qm=plistConsumerCoupon_default"/>
             </jnode>
         </jnode>
         <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="优惠券管理">
@@ -118,13 +119,17 @@
                 <match url="/basic/xm.do?qm=formSubject"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
-                <match url="/basic/xm.do?qm=plistTProduct_default"/>
+                <match url="/basic/xm.do?qm=plistTProductModel_default"/>
                 <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=viewEcProjectCategory"/>
+                <match url="/basic/xm.do?qm=plistPCProductModel_default"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductModel_index" access="admin,manager" text_zh_CN="首页推荐产品">
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=index"/>

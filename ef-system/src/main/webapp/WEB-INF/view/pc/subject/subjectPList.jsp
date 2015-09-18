@@ -67,10 +67,10 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formSubject&view=${view}&id=${subject.id}"/>">
                                         编辑
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
                                         删除
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${product.id}"/>">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="recommendSubject('${subject.id}')" href="javascript:void (0);">
                                         推荐
                                     </a>
                                 </div>
@@ -110,6 +110,18 @@
         });
     }
 
+    function recommendSubject(divId){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/updateSubjectIndex.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{subjectId:divId},
+            success: function (data) {
+               location.reload();
+            }
+        });
+    }
 </script>
 
 </body>

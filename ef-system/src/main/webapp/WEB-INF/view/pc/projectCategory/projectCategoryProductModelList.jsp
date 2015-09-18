@@ -13,7 +13,7 @@
 
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
-        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistTProduct_default&subjectId=${object.id}"/>">关联产品</a>
+        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistPCProductModel_default&projectCategoryId=${object.id}"/>">关联产品</a>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -26,18 +26,18 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${objectList}" var="subjectProduct" end="4">
-                <tr id="${subjectProduct.id}">
+            <c:forEach items="${objectList}" var="projectCategoryProductModel" end="4">
+                <tr id="${projectCategoryProductModel.id}">
                     <td>
-                        <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProduct('${subjectProduct.subject.id}','${subjectProduct.product.id}','${subjectProduct.id}')})"><span
-                                class="am-icon-pencil-square-o"></span> 解除商品
+                        <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProductModel('${projectCategoryProductModel.projectCategory.id}','${projectCategoryProductModel.productModel.id}','${projectCategoryProductModel.id}')})"><span
+                                class="am-icon-pencil-square-o"></span> 解除产品
                         </a>
                     </td>
                     <td class="am-hide-sm-only">
-                            ${subjectProduct.product.name}
+                            ${projectCategoryProductModel.productModel.name}
                     </td>
                     <td class="am-hide-sm-only">
-                            ${subjectProduct.product.serial}
+                            ${projectCategoryProductModel.productModel.serial}
 
                     </td>
 
@@ -49,14 +49,13 @@
 </div>
 
 <script>
-    function removeSubjectProduct(subjectId,productId,subjectProductId){
-        alert("dd");
+    function removeSubjectProductModel(projectCategoryId,productModelId,projectCategoryProductModelId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/product/linkSubject.do"/>',
+            url: '<c:url value="/product/linkProjectCategory.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:"1"},
+            data:{projectCategoryId:projectCategoryId,productModelId:productModelId,projectCategoryProductModelId:projectCategoryProductModelId,status:"0"},
             success: function (data) {
                 $("#"+data).remove();
 

@@ -3,6 +3,8 @@ package com.efeiyi.ec.system.product.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.*;
+import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.project.model.ProjectCategoryProductModel;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
@@ -321,6 +323,7 @@ public class ProductController extends BaseController {
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
             }
+
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
@@ -389,7 +392,10 @@ public class ProductController extends BaseController {
             if ("0".equals(modelId)) {
                 productPicture.setProductModel(null);
             } else {
-                productPicture.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId));
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
+                productModel.setProductModel_url(productPicture.getPictureUrl());
+                baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+                productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
@@ -401,23 +407,75 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/linkSubject.do")
     @ResponseBody
-    public String linkSubject(String subjectId, String productId,String subjectProductId,String status, HttpServletRequest request) {
+    public String linkSubject(String subjectId, String productModelId,String subjectProductModelId,String status, HttpServletRequest request) {
 
         try {
             if("0".equals(status)){
-                baseManager.delete(SubjectProduct.class.getName(),subjectProductId);
+                SubjectProductModel subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+                subjectProductModel.setStatus(status);
+                baseManager.saveOrUpdate(SubjectProductModel.class.getName(),subjectProductModel);
 
             }else {
-                SubjectProduct subjectProduct = new SubjectProduct();
-                subjectProduct.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
-                subjectProduct.setProduct((Product)baseManager.getObject(Product.class.getName(),productId));
-                baseManager.saveOrUpdate(SubjectProduct.class.getName(), subjectProduct);
-                subjectProductId = subjectProduct.getId();
+                SubjectProductModel subjectProductModel = null;
+                if("0".equals(subjectProductModelId)){
+                    subjectProductModel = new SubjectProductModel();
+                }else {
+                    subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+                }
+                subjectProductModel.setStatus(status);
+                subjectProductModel.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
+                baseManager.saveOrUpdate(SubjectProductModel.class.getName(), subjectProductModel);
+                subjectProductModelId = subjectProductModel.getId();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return subjectProductId;
+        return subjectProductModelId;
+    }
+
+    @RequestMapping("/updateSubjectIndex.do")
+    @ResponseBody
+    public String updateSubjectIndex(String subjectId, HttpServletRequest request) {
+
+        try {
+           Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectIndex(subject.getSubjectIndex() + 1);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectId;
+    }
+
+    @RequestMapping("/linkProjectCategory.do")
+    @ResponseBody
+    public String linkProjectCategory(String projectCategoryId, String productModelId,String projectCategoryProductModelId,String status, HttpServletRequest request) {
+
+        try {
+            if("0".equals(status)){
+                ProjectCategoryProductModel projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+                projectCategoryProductModel.setStatus(status);
+                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
+
+            }else {
+                ProjectCategoryProductModel projectCategoryProductModel = null;
+                if("0".equals(projectCategoryProductModelId)){
+                    projectCategoryProductModel = new ProjectCategoryProductModel();
+                }else {
+                    projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+                }
+                projectCategoryProductModel.setStatus(status);
+                projectCategoryProductModel.setProjectCategory((ProjectCategory) baseManager.getObject(ProjectCategory.class.getName(), projectCategoryId));
+                projectCategoryProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
+                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(), projectCategoryProductModel);
+                projectCategoryProductModelId = projectCategoryProductModel.getId();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return projectCategoryProductModelId;
     }
 }

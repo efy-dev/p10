@@ -241,7 +241,7 @@
                     <ul style="width: 100%"  style="list-style:none">
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
-                                <c:if test="${productPicture.status != '3'}">
+                                <c:if test="${productPicture.status != '3' && productPicture.status != '9'}">
                                     <li style="float: left;margin-right: 10px;width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
@@ -261,6 +261,7 @@
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
+
                                             <dd style="width: 100%;text-align: center;" >
 
                                                     <select style="width: 85%;" onchange="setModelPic(this,'${productPicture.id}')">
@@ -299,7 +300,7 @@
                     <ul style="width: 100%"  style="list-style:none">
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
-                                <c:if test="${productPicture.status == '3'}">
+                                <c:if test="${productPicture.status == '3' || productPicture.status == '9'}">
                                     <li style="float: left;margin-right: 10px; width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
@@ -309,7 +310,14 @@
                                             </dt>
 
                                             <dd style="width: 100%;text-align: center;" >
-
+                                                <c:choose>
+                                                    <c:when test="${productPicture.status == '9'}">
+                                                        <a href="javascript:void(0);" status="3" onclick="updatePictureStatus(this,'${productPicture.id}','3')">推荐图片</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,'${productPicture.id}','9')">设为推荐图片</a>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
 
@@ -522,6 +530,7 @@ var modelIds = [];
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
+             //   var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
                 ///图片信息
@@ -544,7 +553,7 @@ var modelIds = [];
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                            //      '<a href="javascript:void(0);" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,"'+pictureId+'","9")">'+'设为推荐图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -608,6 +617,17 @@ var modelIds = [];
 //                            '</a>';
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                 }
+                if(status == '9'){
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','3')");
+                    $(obj).attr("status","3");
+                    $(obj).text("推荐图片");
+                }
+                if(status == '3'){
+                    $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','9')");
+                    $(obj).attr("status","9");
+                    $(obj).text("设为推荐图片");
+                }
+
             }
         });
     }

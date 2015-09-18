@@ -17,10 +17,20 @@ public class IntangibleCulturalOrganization {
     private String id;
     private String name;
     private AddressDistrict addressDistrict;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date theDatetime;
     private String inCharge;
     private String status;
+    private String group;
+
+    @Column(name = "group_name")
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

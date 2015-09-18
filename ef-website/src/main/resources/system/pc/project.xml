@@ -17,7 +17,7 @@
             <does>
                 <do name="listProject" access="" label="项目列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="projectCategory.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
@@ -35,9 +35,7 @@
                         <item label="非遗美术" value="2"/>
                     </statusType>
                 </field>
-            </fields>
-
-            <field name="level" label="等级" inputType="text">
+                <field name="level" label="等级" inputType="text">
                 <statusType fieldName="level">
                     <item label="国家级" value="1"/>
                     <item label="省级" value="2"/>
@@ -45,6 +43,8 @@
                     <item label="县级" value="4"/>
                 </statusType>
             </field>
+            </fields>
+
 
         </entity>
     </entities>

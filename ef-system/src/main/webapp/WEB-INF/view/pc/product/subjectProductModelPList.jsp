@@ -46,19 +46,19 @@
 
 
 
-                <c:forEach items="${requestScope.pageInfo.list}" var="product">
-                    <tr id="${product.id}">
+                <c:forEach items="${requestScope.pageInfo.list}" var="productModel">
+                    <tr id="${productModel.id}">
                         <td width="33%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a id="${product.id}" subjectProductId="0" status="1" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="removeSubjectProduct1(this,'${subjectId}','${product.id}')">
+                                    <a id="${productModel.id}" subjectProductModelId="0" status="1" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="removeSubjectProduct1(this,'${subjectId}','${productModel.id}')">
                                         关联产品
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="33%">${product.name}</td>
-                        <td class="am-hide-sm-only" width="33%">${product.serial}</td>
+                        <td class="am-hide-sm-only" width="33%">${productModel.name}</td>
+                        <td class="am-hide-sm-only" width="33%">${productModel.serial}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -70,6 +70,7 @@
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+            <ming800:pcPageParam name="subjectId" value="${subjectId}"/>
         </ming800:pcPageList>
     </div>
 </div>
@@ -77,40 +78,46 @@
 
     $(function(){
 
-        <c:forEach var="subjectProduct" items="${subjectProductList}">
-        var productId = '${subjectProduct.product.id}';
+        <c:forEach var="subjectProductModel" items="${subjectProductModelList}">
+        var productModelId = '${subjectProductModel.productModel.id}';
+           <c:if test="${subjectProductModel.status=='0'}">
+                     $("a[id='"+productModelId+"']").attr("status","1");
+                     $("a[id='"+productModelId+"']").text("关联产品");
+                     $("a[id='"+productModelId+"']").attr("subjectProductModelId",'${subjectProductModel.id}')
+        </c:if>
+        <c:if test="${subjectProductModel.status=='1'}">
+                    $("a[id='"+productModelId+"']").attr("status","0");
+                    $("a[id='"+productModelId+"']").text("解除产品");
+                    $("a[id='"+productModelId+"']").attr("subjectProductModelId",'${subjectProductModel.id}')
+        </c:if>
 
-            $("#"+productId).attr("status","0");
-            $("#"+productId).find("span").text("解除产品");
 
 
-        $("#"+productId).attr("subjectProductId",'${subjectProduct.id}')
 
         </c:forEach>
 
     });
 
-    function removeSubjectProduct1(obj,subjectId,productId){
+    function removeSubjectProduct1(obj,subjectId,productModelId){
 
         var  status = $(obj).attr("status");
-        var  subjectProductId = $(obj).attr("subjectProductId");
-        alert(status);
+        var  subjectProductModelId = $(obj).attr("subjectProductModelId");
+
         $.ajax({
             type: "get",
             url: '<c:url value="/product/linkSubject.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:subjectId,productId:productId,subjectProductId:subjectProductId,status:status},
+            data:{subjectId:subjectId,productModelId:productModelId,subjectProductModelId:subjectProductModelId,status:status},
             success: function (data) {
-                alert(data);
                 if(status=="0"){
                     $(obj).attr("status","1");
-                    $(obj).find("span").text("关联产品");
-                    $(obj).attr("subjectProductId",data)
+                    $(obj).text("关联产品");
+                    $(obj).attr("subjectProductModelId",data)
                 }else{
                     $(obj).attr("status","0");
-                    $(obj).find("span").text("解除产品");
-                    $(obj).attr("subjectProductId",data)
+                    $(obj).text("解除产品");
+                    $(obj).attr("subjectProductModelId",data)
                 }
             }
         });
