@@ -1,5 +1,9 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head></head>
@@ -45,16 +49,15 @@
                     <td width="400">
                       <div class="list-refer">
                         <dl>
-                          <dt><a href="#"> <img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></a></dt>
-                          <dd>禅意香薰陶瓷哥窑龙泉青瓷盘香香炉</dd>
+                          <dt><a href="#"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a></dt>
+                          <dd>${op.productModel.product.name}</dd>
                         </dl>
                       </div>
                     </td>
                     <td width="180">
                       <div class="list-refer-2">
-                        <p>2015—08—01</p>
-
-                        <p>18:29:30</p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="yyyy-MM-dd" /></p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="hh:mm:ss" /></p>
                       </div>
                     </td>
                     <td width="150">
@@ -172,7 +175,7 @@
                             <label></label>
                           </dt>
                           <dd>
-                            <input type="button" class="btn" value="追&nbsp加&nbsp评&nbsp价&nbsp" id="click-btn" style="">
+                            <input type="button" class="btn" value="追&nbsp加&nbsp评&nbsp价&nbsp"  style="">
                           </dd>
                         </dl>
                       </li>
@@ -427,12 +430,14 @@
   </div>
 </div>
 <script>
-  $(function(){
-    $('#click-btn').click(function(){
-      $('#zt').slideToggle();
-      $('#click-btn').attr("style","display: none")
-    })
-  });
+
+
+      $('.btn').each(
+              $(this).click(function(){
+        $('.data-list').slideToggle();
+//      $('#click-btn').attr("style","display: none")
+      }))
+
 </script>
 <!--content-->
 <!-- //End--footer-->
