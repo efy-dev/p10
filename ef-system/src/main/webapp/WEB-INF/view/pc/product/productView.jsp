@@ -241,7 +241,7 @@
                     <ul style="width: 100%"  style="list-style:none">
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
-                                <c:if test="${productPicture.status != '3'}">
+                                <c:if test="${productPicture.status != '3' && productPicture.status != '9'}">
                                     <li style="float: left;margin-right: 10px;width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
