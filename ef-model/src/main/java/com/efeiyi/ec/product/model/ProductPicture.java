@@ -61,13 +61,13 @@ public class ProductPicture {
         this.status = status;
     }
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_model_id")
-//    public ProductModel getProductModel() {
-//        return productModel;
-//    }
-//
-//    public void setProductModel(ProductModel productModel) {
-//        this.productModel = productModel;
-//    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_model_id")
+    public ProductModel getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
+    }
 }
