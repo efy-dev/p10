@@ -38,8 +38,11 @@
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderDelivery">
                     <tr>
                             <%--<td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a></td>--%>
-                        <td class="am-hide-sm-only">
-                            ${purchaseOrderDelivery.serial}
+                        <%--<td class="am-hide-sm-only">--%>
+                            <%--${purchaseOrderDelivery.serial}--%>
+                        <%--</td>--%>
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrderDelivery&id=${purchaseOrderDelivery.id}'/>">${purchaseOrderDelivery.serial}</a>
                         </td>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&id=${purchaseOrderDelivery.purchaseOrder.id}'/>">${purchaseOrderDelivery.purchaseOrder.serial}</a>
