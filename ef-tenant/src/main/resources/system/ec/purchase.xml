@@ -86,6 +86,8 @@
                     </query>
                 </do>
 
+                <do name="viewPurchaseOrderDelivery" label="查看发货记录" access=""
+                    result="/purchaseOrderDelivery/purchaseOrderDeliveryView"/>
                 <do name="removePurchaseOrderDelivery" label="删除purchaseOrderDelivery" access="" result="json"/>
                 <do name="formPurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliveryForm"></do>
                 <do name="saveOrUpdatePurchaseOrderDelivery" label="保存purchaseOrderDelivery" access="" result="/purchaseOrderDelivery/purchaseOrderDeliverySaveSuccess"></do>
