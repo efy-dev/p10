@@ -137,7 +137,7 @@
                                 <tr>
                                     <td width="542">
                                         <div class="cols1 page-pdl">
-                                            <img src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}@!product-icon" alt=""/>
+                                            <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
 
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
