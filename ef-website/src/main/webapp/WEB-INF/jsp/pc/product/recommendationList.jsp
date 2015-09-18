@@ -72,7 +72,7 @@
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
+        <c:forEach items="${productModelList}" var="productModel" begin="0" end="15" varStatus="rec">
           <li>
             <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
