@@ -36,6 +36,8 @@
               </table>
             </div>
             <!--状态查看评价-->
+            <c:forEach items="${finishList}" var="finish">
+              <c:forEach items="${finish.purchaseOrderProductList}" var="op">
             <div class="appraise">
               <div class="table">
                 <table>
@@ -180,241 +182,243 @@
               </div>
               <!--状态1内容-->
             </div>
+                </c:forEach>
+            </c:forEach>
             <!--状态查看评价-->
             <!--状态发表评价-->
-            <div class="appraise">
-              <div class="table">
-                <table>
-                  <tr>
-                    <td width="400">
-                      <div class="list-refer">
-                        <dl>
-                          <dt><a href="#"> <img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></a></dt>
-                          <dd>禅意香薰陶瓷哥窑龙泉青瓷盘香香炉</dd>
-                        </dl>
-                      </div>
-                    </td>
-                    <td width="180">
-                      <div class="list-refer-2">
-                        <p>2015—08—01</p>
+            <%--<div class="appraise">--%>
+              <%--<div class="table">--%>
+                <%--<table>--%>
+                  <%--<tr>--%>
+                    <%--<td width="400">--%>
+                      <%--<div class="list-refer">--%>
+                        <%--<dl>--%>
+                          <%--<dt><a href="#"> <img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></a></dt>--%>
+                          <%--<dd>禅意香薰陶瓷哥窑龙泉青瓷盘香香炉</dd>--%>
+                        <%--</dl>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="180">--%>
+                      <%--<div class="list-refer-2">--%>
+                        <%--<p>2015—08—01</p>--%>
 
-                        <p>18:29:30</p>
-                      </div>
-                    </td>
-                    <td width="150">
-                      <div class="list-refer-3">
-                        <P><strong>未评价</strong></P>
-                      </div>
-                    </td>
-                    <td width="120">
-                      <div class="list-refer-4">
-                        <P><a href="#" class="act-ui">发表评价</a></P>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <!--状态2内容-->
-              <div class="mutual" style="display: none">
-                <div class="parameter">
-                  <form>
-                    <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>标签：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally">
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                            </ul>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>心得：</label>
-                          </dt>
-                          <dd>
-                                                   <span class="am-txt" style="width: 640px;">
-                                                       <textarea class="rarae" ></textarea>
-                                                   </span>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label></label>
-                          </dt>
-                          <dd>
-                            <input type="button" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价">
-                                                        <span style="margin-left: 44px;font-size: 12px;">
-                                                        <input type="checkbox" class="btn"
-                                                               value="评&nbsp&nbsp&nbsp&nbsp价">
-                                                            匿名评价
-                                                        </span>
-                          </dd>
-                        </dl>
-                      </li>
-                    </ul>
-                  </form>
-                </div>
-              </div>
-              <!--状态2内容-->
-            </div>
+                        <%--<p>18:29:30</p>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="150">--%>
+                      <%--<div class="list-refer-3">--%>
+                        <%--<P><strong>未评价</strong></P>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="120">--%>
+                      <%--<div class="list-refer-4">--%>
+                        <%--<P><a href="#" class="act-ui">发表评价</a></P>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                  <%--</tr>--%>
+                <%--</table>--%>
+              <%--</div>--%>
+              <%--<!--状态2内容-->--%>
+              <%--<div class="mutual" style="display: none">--%>
+                <%--<div class="parameter">--%>
+                  <%--<form>--%>
+                    <%--<ul class="data">--%>
+                      <%--<li class="data-list">--%>
+                        <%--<label>评分：</label>--%>
+                        <%--<div class="starbox">--%>
+                          <%--<div id="quacorgrading">--%>
+                            <%--<input name="1" type="button" />--%>
+                            <%--<input name="2" type="button" />--%>
+                            <%--<input name="3" type="button" />--%>
+                            <%--<input name="4" type="button" />--%>
+                            <%--<input name="5" type="button" />--%>
+                            <%--<span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>--%>
+                          <%--</div>--%>
+                        <%--</div>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label>标签：</label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                            <%--<ul class="tally">--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                            <%--</ul>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label>心得：</label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                                                   <%--<span class="am-txt" style="width: 640px;">--%>
+                                                       <%--<textarea class="rarae" ></textarea>--%>
+                                                   <%--</span>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label></label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                            <%--<input type="button" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价">--%>
+                                                        <%--<span style="margin-left: 44px;font-size: 12px;">--%>
+                                                        <%--<input type="checkbox" class="btn"--%>
+                                                               <%--value="评&nbsp&nbsp&nbsp&nbsp价">--%>
+                                                            <%--匿名评价--%>
+                                                        <%--</span>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                    <%--</ul>--%>
+                  <%--</form>--%>
+                <%--</div>--%>
+              <%--</div>--%>
+              <%--<!--状态2内容-->--%>
+            <%--</div>--%>
             <!--状态发表评价-->
             <!--状态追加评价-->
-            <div class="appraise">
-              <div class="table">
-                <table>
-                  <tr>
-                    <td width="400">
-                      <div class="list-refer">
-                        <dl>
-                          <dt><a href="#"> <img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></a></dt>
-                          <dd>禅意香薰陶瓷哥窑龙泉青瓷盘香香炉</dd>
-                        </dl>
-                      </div>
-                    </td>
-                    <td width="180">
-                      <div class="list-refer-2">
-                        <p>2015—08—01</p>
+            <%--<div class="appraise">--%>
+              <%--<div class="table">--%>
+                <%--<table>--%>
+                  <%--<tr>--%>
+                    <%--<td width="400">--%>
+                      <%--<div class="list-refer">--%>
+                        <%--<dl>--%>
+                          <%--<dt><a href="#"> <img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></a></dt>--%>
+                          <%--<dd>禅意香薰陶瓷哥窑龙泉青瓷盘香香炉</dd>--%>
+                        <%--</dl>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="180">--%>
+                      <%--<div class="list-refer-2">--%>
+                        <%--<p>2015—08—01</p>--%>
 
-                        <p>18:29:30</p>
-                      </div>
-                    </td>
-                    <td width="150">
-                      <div class="list-refer-3">
-                        <P><strong>已评价</strong></P>
-                      </div>
-                    </td>
-                    <td width="120">
-                      <div class="list-refer-4">
-                        <P><a href="#" class="act-ui">查看评价</a></P>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <!--状态3内容-->
-              <div class="mutual" style="display: none">
-                <div class="parameter">
-                  <form>
-                    <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>标签：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally">
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                            </ul>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>心得：</label>
-                          </dt>
-                          <dd>
-                            <span class="am-txt"> 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意
-                              宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意
-                            </span>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>晒单：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally-1">
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                            </ul>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list" >
-                        <div class="con-vessel">
-                          <ul class="dialogue">
-                            <!--卖家回复状态-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">卖家回复：</dt>
-                                <dd>h宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意</dd>
-                              </dl>
-                            </li>
-                            <!--卖家回复状态-->
-                            <!--买家回复的状态-->
-                            <!--文字标题部分-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt1">收货2个月后追加的评价：</dt>
-                                <dd class="dd">h宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意</dd>
-                              </dl>
-                            </li>
-                            <!--img-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">
-                                  <label></label>
-                                </dt>
-                                <dd>
-                                  <ul class="add-images">
-                                    <li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                                    <li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                                  </ul>
-                                </dd>
-                              </dl>
-                            </li>
-                            <!--买家回复的状态-->
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </form>
-                </div>
-              </div>
-              <!--状态3内容-->
-            </div>
+                        <%--<p>18:29:30</p>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="150">--%>
+                      <%--<div class="list-refer-3">--%>
+                        <%--<P><strong>已评价</strong></P>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                    <%--<td width="120">--%>
+                      <%--<div class="list-refer-4">--%>
+                        <%--<P><a href="#" class="act-ui">查看评价</a></P>--%>
+                      <%--</div>--%>
+                    <%--</td>--%>
+                  <%--</tr>--%>
+                <%--</table>--%>
+              <%--</div>--%>
+              <%--<!--状态3内容-->--%>
+              <%--<div class="mutual" style="display: none">--%>
+                <%--<div class="parameter">--%>
+                  <%--<form>--%>
+                    <%--<ul class="data">--%>
+                      <%--<li class="data-list">--%>
+                        <%--<label>评分：</label>--%>
+                        <%--<div class="starbox">--%>
+                          <%--<div id="quacorgrading">--%>
+                            <%--<input name="1" type="button" />--%>
+                            <%--<input name="2" type="button" />--%>
+                            <%--<input name="3" type="button" />--%>
+                            <%--<input name="4" type="button" />--%>
+                            <%--<input name="5" type="button" />--%>
+                            <%--<span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>--%>
+                          <%--</div>--%>
+                        <%--</div>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label>标签：</label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                            <%--<ul class="tally">--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                              <%--<li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>--%>
+                            <%--</ul>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label>心得：</label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                            <%--<span class="am-txt"> 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意--%>
+                              <%--宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意--%>
+                            <%--</span>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list">--%>
+                        <%--<dl>--%>
+                          <%--<dt>--%>
+                            <%--<label>晒单：</label>--%>
+                          <%--</dt>--%>
+                          <%--<dd>--%>
+                            <%--<ul class="tally-1">--%>
+                              <%--<li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>--%>
+                              <%--<li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>--%>
+                            <%--</ul>--%>
+                          <%--</dd>--%>
+                        <%--</dl>--%>
+                      <%--</li>--%>
+                      <%--<li class="data-list" >--%>
+                        <%--<div class="con-vessel">--%>
+                          <%--<ul class="dialogue">--%>
+                            <%--<!--卖家回复状态-->--%>
+                            <%--<li class="list-crossover">--%>
+                              <%--<dl class="content">--%>
+                                <%--<dt class="dt">卖家回复：</dt>--%>
+                                <%--<dd>h宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意</dd>--%>
+                              <%--</dl>--%>
+                            <%--</li>--%>
+                            <%--<!--卖家回复状态-->--%>
+                            <%--<!--买家回复的状态-->--%>
+                            <%--<!--文字标题部分-->--%>
+                            <%--<li class="list-crossover">--%>
+                              <%--<dl class="content">--%>
+                                <%--<dt class="dt1">收货2个月后追加的评价：</dt>--%>
+                                <%--<dd class="dd">h宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意</dd>--%>
+                              <%--</dl>--%>
+                            <%--</li>--%>
+                            <%--<!--img-->--%>
+                            <%--<li class="list-crossover">--%>
+                              <%--<dl class="content">--%>
+                                <%--<dt class="dt">--%>
+                                  <%--<label></label>--%>
+                                <%--</dt>--%>
+                                <%--<dd>--%>
+                                  <%--<ul class="add-images">--%>
+                                    <%--<li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>--%>
+                                    <%--<li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>--%>
+                                  <%--</ul>--%>
+                                <%--</dd>--%>
+                              <%--</dl>--%>
+                            <%--</li>--%>
+                            <%--<!--买家回复的状态-->--%>
+                          <%--</ul>--%>
+                        <%--</div>--%>
+                      <%--</li>--%>
+                    <%--</ul>--%>
+                  <%--</form>--%>
+                <%--</div>--%>
+              <%--</div>--%>
+              <%--<!--状态3内容-->--%>
+            <%--</div>--%>
           </div>
           <!-- //End--title-->
         </div>
