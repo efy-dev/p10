@@ -92,13 +92,13 @@
         </table>
     </div>
 </c:if>
-<link rel="stylesheet" href="<c:url value='/scripts/upload/uploadify.css'/>"/>
-<script src="<c:url value='/scripts/upload/jquery.uploadify.js'/>"></script>
+<link rel="stylesheet" href="<c:url value='/resources/plugins/uploadify/uploadify.css'/>"/>
+<script src="<c:url value='/resources/plugins/uploadify/jquery.uploadify.js'/>"></script>
 <script type="text/javascript">
     $(function () {
         $('#btn_upload').uploadify({
             uploader: '<c:url value="/tenantProductSeriesImg/saveTenantProductSeriesImg.do"/>;jsessionid=<%=request.getSession().getId()%>',            // 服务器处理地址
-            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
+            swf: '<c:url value="/resources/plugins/uploadify/uploadify.swf"/>',
             buttonText: "选择溯源图片",                 //按钮文字
             buttonClass: "am-btn am-btn-primary",         //按钮样式
             buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子
