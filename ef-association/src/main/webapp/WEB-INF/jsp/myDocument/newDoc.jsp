@@ -50,7 +50,7 @@
                value="${object.keywords}">
         <input type="hidden" id="sampleContent" placeholder="sampleContent"
                name="sampleContent"
-               value="${object.sampleContent}" required="true">
+               value="${object.sampleContent}">
 
         <div class="am-form-group">
             <label name="标题" for="title" class="am-u-sm-3 am-form-label">title
@@ -103,7 +103,6 @@
             </div>
         </div>
     </form>
-    ${group}${empty object.group}${object.group}
 </div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
