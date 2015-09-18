@@ -25,7 +25,7 @@
     <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8"><%--少了这个div就出错--%>
     </div>
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form action="<c:url value="/achment/saveAttachment.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+        <form action="<c:url value="/attachment/saveAttachment.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateMessageAttachment" name="qm">
             <input type="hidden" name="masterMessageId" value="${masterMessageId}">
             <input type="hidden" name="masterMessage.id" value="${masterMessageId}">
