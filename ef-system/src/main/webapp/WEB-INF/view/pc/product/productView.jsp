@@ -57,10 +57,24 @@
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
         <fieldset>
             <legend>
-                <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${object.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
-                    修改基本信息
-                </a>
+                <c:if test="${view == 'newProduct'}">
+                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_defalut&view=${view}')"  href="javascript:void (0);">
+                        返回列表
+                    </a>
+                </c:if>
+                <c:if test="${view == 'tenant'}">
+                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"  href="javascript:void (0);">
+                        返回列表
+                    </a>
+                    <%--<input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>--%>
+                </c:if>
+                <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_defalut&view=${view}')"  href="javascript:void (0);">--%>
+                    <%--返回列表--%>
+                <%--</a>--%>
             </legend>
+            <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${object.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
+                修改基本信息
+            </a>
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品编号</label>
 
@@ -135,10 +149,11 @@
     </form>
     <fieldset>
         <legend>
-            <a style="width: 10%;" href="javascript:void(0);" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
-                保存商品描述
-            </a>
+
         </legend>
+        <a style="width: 10%;" href="javascript:void(0);" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=${view}&id=${object.id}')">
+            保存商品描述
+        </a>
         <div class="am-form-group" >
             <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form1">
                 <input type="hidden" name="id" value="${object.productDescription.id}">
@@ -160,10 +175,11 @@
     </fieldset>
     <fieldset>
         <legend>
-            <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${object.id}"/>">
-                修改规格
-            </a>
+
         </legend>
+        <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&id=${object.id}"/>">
+            修改规格
+        </a>
         <div class="am-u-md-9" style="margin-left: 19%;">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商品规格<span
@@ -229,9 +245,9 @@
             <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">--%>
             <%--修改图片--%>
             <%--</a>--%>
-            <a id="btn_upload"></a>
-        </legend>
 
+        </legend>
+        <a id="btn_upload"></a>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
@@ -292,8 +308,9 @@
     <fieldset>
         <legend>
 
-            <a id="btn_upload3"></a>
+
         </legend>
+        <a id="btn_upload3"></a>
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
