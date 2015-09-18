@@ -3,6 +3,7 @@
     <!--&lt;!&ndash;<mapping path="/*" decorator="/layouts/mainTemplate.jsp"/>&ndash;&gt;-->
   <mapping path="/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/order/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/comment/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
 
     <!--<mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>-->
