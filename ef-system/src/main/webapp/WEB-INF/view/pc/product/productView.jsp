@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title></title>
@@ -273,6 +274,9 @@
 
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
+                                            </dd>
+                                            <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
                                             </dd>
                                         </dl>
@@ -320,9 +324,14 @@
                                                 </c:choose>
                                                 <a href="javascript:void(0);" onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
-
+                                            <dd style="width: 100%;text-align: center;" >
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}
+                                            </dd>
                                             <dd style="width: 100%;text-align: center;" >
                                                 <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                            </dd>
+                                            <dd style="width: 100%;text-align: center;" >
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                         </dl>
                                     </li>
@@ -445,6 +454,7 @@ var modelIds = [];
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
+                var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
 //                ///图片信息
@@ -481,6 +491,8 @@ var modelIds = [];
 
                 }
                 img += '      </select>'+
+                        '</dd>'+
+                        '<dd style="width: 100%;text-align: center;" >'+imgName+'.jpg'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="'+trueUrl+'">'+'复制图片地址'+'</a>'+
@@ -530,7 +542,7 @@ var modelIds = [];
                 data = data.substring(1,data.length-1)
                 var pictureId = data.split(":")[0].trim();
                 var  imgUrl = data.split(":")[1];
-             //   var  imgName = data.split(":")[2];
+                var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
                 var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
                 ///图片信息
@@ -557,6 +569,8 @@ var modelIds = [];
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
+                        '</dd>'+
+                        '<dd style="width: 100%;text-align: center;" >'+imgName+'.jpg'+
                         '</dd>'+
                         '<dd style="width: 100%;text-align: center;" >'+
                         '  <a href="javascript:void(0);" onclick="copyInit(this);" class="copy" url="'+trueUrl+'">'+'复制图片地址'+'</a>'+

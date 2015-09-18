@@ -121,6 +121,7 @@ public class ProductController extends BaseController {
             if(fileName.indexOf(".jpg")!=-1){
                 index = fileName.indexOf(".jpg");
             }
+            String imgName = fileName.substring(0, index);
             url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
@@ -128,7 +129,7 @@ public class ProductController extends BaseController {
                 productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);
                 baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                data = productPicture.getId() + ":" + url;
+                data = productPicture.getId() + ":" + url+":"+imgName;
             } catch (Exception e) {
                 e.printStackTrace();
             }
