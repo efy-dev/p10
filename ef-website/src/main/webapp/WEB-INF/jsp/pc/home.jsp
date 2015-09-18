@@ -59,7 +59,7 @@
                             <c:set var="style" value="odd"/>
                         </c:if>
                         <li class="${style}"><a href="<c:url value="/product/hot/${product.productModel.id}"/>" target="_blank"
-                                                title="${product.productModel.product.name}"><strong>${product.productModel.product.name}</strong><span
+                                                title="${product.productModel.name}"><strong>${product.productModel.name}</strong><span
                                 class="price"><em>￥</em><font>${product.productModel.price}</font></span><img class="imgfilter"
                                                                                                  src="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"
                                                                                                  alt=""/></a></li>
