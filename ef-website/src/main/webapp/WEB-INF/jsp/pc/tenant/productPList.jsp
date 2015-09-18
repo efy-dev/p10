@@ -16,7 +16,7 @@
       <!-- //End-->
       <div class="btndes">
         <a href="" title="收藏店铺">收 藏 店 铺</a>
-        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人">了 解 传 承 人</a>
+        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 传 承 人</a>
       </div>
     </div>
   </div>
