@@ -60,14 +60,18 @@
   <!-- //End-->
   <div class="bd list-class">
     <ul class="ul-list">
-      <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-      <li>
+
+      <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
         <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-        <img src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
+        <li>
+
+        <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
+
         <p class="name">${map.get(productModel)}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
-          </a>
+
       </li>
+        </a>
       </c:forEach>
     </ul>
   </div>
