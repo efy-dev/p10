@@ -89,7 +89,10 @@ public class PurchaseOrderController extends BaseController {
         }
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
+        String userId = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
         model.addAttribute("orderList", list);
+        model.addAttribute("user",user);
         return "/purchaseOrder/purchaseOrderList";
     }
 
