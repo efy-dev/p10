@@ -426,7 +426,7 @@ public class ProductController extends BaseController {
         try {
             productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
             if ("0".equals(modelId)) {
-                productPicture.setProductModel(null);
+//                productPicture.setProductModel(null);
             } else {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
                 productModel.setProductModel_url(productPicture.getPictureUrl());
