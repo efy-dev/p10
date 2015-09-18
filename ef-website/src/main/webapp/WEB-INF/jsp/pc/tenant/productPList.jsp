@@ -7,10 +7,10 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="<c:url value="/scripts/upload/shop-1.jpg"/>" alt=""/></div>
+        <div class="img"><img src="<c:url value="${tenant.logoUrl}"/>" alt=""/></div>
             <span class="des">
-                <p><h1>杨柳青年画</h1></p>
-              <p><font>天津</font><font>杨柳青</font><font>国家级传承人霍庆有</font></p>
+                <p><h1>${tenant.name}</h1></p>
+              <p><font>${tenant.tenantMasterList.get(0).master.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font>${tenant.tenantMasterList.get(0).master.level}</font></p>
             </span>
       </div>
       <!-- //End-->
