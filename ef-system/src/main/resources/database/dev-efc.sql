@@ -34,6 +34,18 @@ CREATE TABLE `master_followed` (
   PRIMARY KEY (`id`)
 )
 ;
-
+---------------20150918--------
+----------------dev-efc---------
+CREATE TABLE `master_comment` (
+  `id`  char(16) NOT NULL ,
+  `master_message_id`  char(16) NULL ,
+  `content`  varchar(500) NULL ,
+  `status`  varchar(20) NULL ,
+  `user_id`  char(16) NULL ,
+  `create_datetime`  datetime(6) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+---------------end----------------------
 
 

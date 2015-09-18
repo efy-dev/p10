@@ -22,7 +22,7 @@ public class PurchaseCommentController {
     @RequestMapping("/finishOrderList.do")
     public String finishOrder(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default13",request);
+        XQuery xQuery = new XQuery("plistPurchaseOrder_default1",request);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
