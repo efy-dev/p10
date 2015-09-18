@@ -63,7 +63,7 @@
       <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
       <li>
         <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-        <img src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}" alt="">
+        <img src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
         <p class="name">${map.get(productModel)}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
           </a>
