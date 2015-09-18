@@ -407,23 +407,45 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/linkSubject.do")
     @ResponseBody
-    public String linkSubject(String subjectId, String productId,String subjectProductId,String status, HttpServletRequest request) {
+    public String linkSubject(String subjectId, String productModelId,String subjectProductModelId,String status, HttpServletRequest request) {
 
         try {
             if("0".equals(status)){
-                baseManager.delete(SubjectProduct.class.getName(),subjectProductId);
+                SubjectProductModel subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+                subjectProductModel.setStatus(status);
+                baseManager.saveOrUpdate(SubjectProductModel.class.getName(),subjectProductModel);
 
             }else {
-                SubjectProduct subjectProduct = new SubjectProduct();
-                subjectProduct.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
-                subjectProduct.setProduct((Product)baseManager.getObject(Product.class.getName(),productId));
-                baseManager.saveOrUpdate(SubjectProduct.class.getName(), subjectProduct);
-                subjectProductId = subjectProduct.getId();
+                SubjectProductModel subjectProductModel = null;
+                if("0".equals(subjectProductModelId)){
+                    subjectProductModel = new SubjectProductModel();
+                }else {
+                    subjectProductModel = (SubjectProductModel)baseManager.getObject(SubjectProductModel.class.getName(),subjectProductModelId);
+                }
+                subjectProductModel.setStatus(status);
+                subjectProductModel.setSubject((Subject)baseManager.getObject(Subject.class.getName(),subjectId));
+                subjectProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
+                baseManager.saveOrUpdate(SubjectProductModel.class.getName(), subjectProductModel);
+                subjectProductModelId = subjectProductModel.getId();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return subjectProductId;
+        return subjectProductModelId;
+    }
+
+    @RequestMapping("/updateSubjectIndex.do")
+    @ResponseBody
+    public String updateSubjectIndex(String subjectId, HttpServletRequest request) {
+
+        try {
+           Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectIndex(subject.getSubjectIndex() + 1);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectId;
     }
 }
