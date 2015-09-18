@@ -207,6 +207,7 @@ public class Project {
         this.projectFolloweds = projectFolloweds;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,optional = true)
     @JoinColumn(name="district_id")
 

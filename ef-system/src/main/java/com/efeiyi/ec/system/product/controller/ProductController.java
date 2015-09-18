@@ -3,6 +3,8 @@ package com.efeiyi.ec.system.product.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.*;
+import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.project.model.ProjectCategoryProductModel;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.product.service.ProductModelManager;
@@ -321,9 +323,7 @@ public class ProductController extends BaseController {
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
             }
-            if("-1".equals(status)){
-                status = "1";
-            }
+
             ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
             productPicture.setStatus(status);
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
@@ -447,5 +447,35 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return subjectId;
+    }
+
+    @RequestMapping("/linkProjectCategory.do")
+    @ResponseBody
+    public String linkProjectCategory(String projectCategoryId, String productModelId,String projectCategoryProductModelId,String status, HttpServletRequest request) {
+
+        try {
+            if("0".equals(status)){
+                ProjectCategoryProductModel projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+                projectCategoryProductModel.setStatus(status);
+                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
+
+            }else {
+                ProjectCategoryProductModel projectCategoryProductModel = null;
+                if("0".equals(projectCategoryProductModelId)){
+                    projectCategoryProductModel = new ProjectCategoryProductModel();
+                }else {
+                    projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
+                }
+                projectCategoryProductModel.setStatus(status);
+                projectCategoryProductModel.setProjectCategory((ProjectCategory) baseManager.getObject(ProjectCategory.class.getName(), projectCategoryId));
+                projectCategoryProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
+                baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(), projectCategoryProductModel);
+                projectCategoryProductModelId = projectCategoryProductModel.getId();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return projectCategoryProductModelId;
     }
 }

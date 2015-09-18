@@ -21,7 +21,8 @@
           <ul>
             <li>
               <label>用户名</label>
-              <input type="text" name="username" value="${user.username}">
+              <%--<input type="text" name="username" value="${user.username}">--%>
+              ${user.username}
             </li>
             <li>
               <label>昵称</label>

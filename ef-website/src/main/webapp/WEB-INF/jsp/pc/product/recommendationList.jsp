@@ -40,12 +40,12 @@
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
       <div class="p-img">
-        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a>
+        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" target="_blank" width="286" height="206" alt=""/></a>
         <div class="des-txt">
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
           <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
