@@ -7,7 +7,7 @@
   <div class="shop-header wh">
     <div class="hd">
       <div class="logo">
-        <div class="img"><img src="<c:url value="${tenant.logoUrl}"/>" alt=""/></div>
+        <div class="img"><img src="<c:url value="http://pro.efeiyi.com/${tenant.logoUrl}@!tenant-logo"/>" alt=""/></div>
             <span class="des">
                 <p><h1>${tenant.name}</h1></p>
               <p><font>${tenant.tenantMasterList.get(0).master.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font>${tenant.tenantMasterList.get(0).master.level}</font></p>
@@ -16,14 +16,14 @@
       <!-- //End-->
       <div class="btndes">
         <a href="" title="收藏店铺">收 藏 店 铺</a>
-        <a href="" title="了解传承人">了 解 传 承 人</a>
+        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人">了 解 传 承 人</a>
       </div>
     </div>
   </div>
   <!-- //End--shop-header-->
   <div class="focus wh">
     <ul class="slider-main">
-      <li style="display: block;"><img src="<c:url value="/scripts/upload/master-1.jpg"/>" width="1280" height="481" alt=""/></li>
+      <li style="display: block;"><img src="<c:url value="http://pro.efeiyi.com/${tenant.pictureUrl}"/>" width="1280" height="481" alt=""/></li>
     </ul>
   </div>
   <!-- //End--focus-->
@@ -51,8 +51,8 @@
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel">
           <li>
-            <a href="" target="_blank" title="">
-              <img class="imgfilter" src="<c:url value="${productModel.product.picture_url}"/>" alt="">
+            <a href="/product/productModel/${productModel.id}" target="_blank" title="">
+              <img class="imgfilter" src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}"/>" alt="">
               <p class="wh name">${productModel.name}</p>
               <p class="wh price">${productModel.price}</p>
             </a>
