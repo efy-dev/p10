@@ -23,7 +23,7 @@
 
 
 <div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewSubject&id=${subjectId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="返回" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewEcProjectCategory&id=${projectCategoryId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="返回" />
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
@@ -51,7 +51,7 @@
                         <td width="33%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a id="${productModel.id}" subjectProductModelId="0" status="1" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="removeSubjectProduct1(this,'${subjectId}','${productModel.id}')">
+                                    <a id="${productModel.id}" projectCategoryProductModelId="0" status="1" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="removeSubjectProduct1(this,'${projectCategoryId}','${productModel.id}')">
                                         关联产品
                                     </a>
                                 </div>
@@ -70,7 +70,8 @@
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
-            <ming800:pcPageParam name="subjectId" value="${subjectId}"/>
+            <ming800:pcPageParam name="projectCategoryId" value="${projectCategoryId}"/>
+
         </ming800:pcPageList>
     </div>
 </div>
@@ -78,17 +79,17 @@
 
     $(function(){
 
-        <c:forEach var="subjectProductModel" items="${subjectProductModelList}">
-        var productModelId = '${subjectProductModel.productModel.id}';
-           <c:if test="${subjectProductModel.status=='0'}">
+        <c:forEach var="projectCategoryProductModel" items="${projectCategoryProductModelList}">
+        var productModelId = '${projectCategoryProductModel.productModel.id}';
+           <c:if test="${projectCategoryProductModel.status=='0'}">
                      $("a[id='"+productModelId+"']").attr("status","1");
                      $("a[id='"+productModelId+"']").text("关联产品");
-                     $("a[id='"+productModelId+"']").attr("subjectProductModelId",'${subjectProductModel.id}')
+                     $("a[id='"+productModelId+"']").attr("projectCategoryProductModelId",'${projectCategoryProductModel.id}')
         </c:if>
-        <c:if test="${subjectProductModel.status=='1'}">
+        <c:if test="${projectCategoryProductModel.status=='1'}">
                     $("a[id='"+productModelId+"']").attr("status","0");
                     $("a[id='"+productModelId+"']").text("解除产品");
-                    $("a[id='"+productModelId+"']").attr("subjectProductModelId",'${subjectProductModel.id}')
+                    $("a[id='"+productModelId+"']").attr("projectCategoryProductModelId",'${projectCategoryProductModel.id}')
         </c:if>
 
 
@@ -98,26 +99,26 @@
 
     });
 
-    function removeSubjectProduct1(obj,subjectId,productModelId){
+    function removeSubjectProduct1(obj,projectCategoryId,productModelId){
 
         var  status = $(obj).attr("status");
-        var  subjectProductModelId = $(obj).attr("subjectProductModelId");
+        var  projectCategoryProductModelId = $(obj).attr("projectCategoryProductModelId");
 
         $.ajax({
             type: "get",
-            url: '<c:url value="/product/linkSubject.do"/>',
+            url: '<c:url value="/product/linkProjectCategory.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:subjectId,productModelId:productModelId,subjectProductModelId:subjectProductModelId,status:status},
+            data:{projectCategoryId:projectCategoryId,productModelId:productModelId,projectCategoryProductModelId:projectCategoryProductModelId,status:status},
             success: function (data) {
                 if(status=="0"){
                     $(obj).attr("status","1");
                     $(obj).text("关联产品");
-                    $(obj).attr("subjectProductModelId",data)
+                    $(obj).attr("projectCategoryProductModelId",data)
                 }else{
                     $(obj).attr("status","0");
                     $(obj).text("解除产品");
-                    $(obj).attr("subjectProductModelId",data)
+                    $(obj).attr("projectCategoryProductModelId",data)
                 }
             }
         });
