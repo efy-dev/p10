@@ -553,7 +553,7 @@ var modelIds = [];
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,"'+pictureId+'","9")">'+'设为推荐图片'+'</a>'+
+                        ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,\''+pictureId+'\',\'9\')">'+'设为推荐图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
