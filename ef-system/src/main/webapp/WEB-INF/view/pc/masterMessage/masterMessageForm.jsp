@@ -105,6 +105,18 @@
                 </div>
             </div>
         </form>
+        <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8"><%--少了这个div就出错--%>
+        </div>
+        <c:if test="${object != null && object.messageAttachmentLists != null}">
+             <c:forEach items="${object.messageAttachmentLists}" var="attachment" varStatus="att">
+                 <label class="am-u-sm-3 am-form-label">动态${att.index +1}</label>
+                 <div class="am-u-sm-9" style="margin-top: 10px;">
+                <textarea id="productDescription" name="content" class="" cols="110" rows="8"
+                          placeholder="动态" required >${attachment.fileName}
+                </textarea>
+                 </div>
+             </c:forEach>
+        </c:if>
     </div>
 </div>
 </body>
