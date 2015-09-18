@@ -33,7 +33,7 @@ public class XDoUtil {
         //默认页数索引
         pageEntity.setIndex(1);
         //默认每页显示数量
-        pageEntity.setSize(9);
+        pageEntity.setSize(12);
         if (index != null && !"".equals(index)) {
             pageEntity.setIndex(Integer.parseInt(index));
         }
