@@ -45,6 +45,7 @@
       <li class="am-active">${proName}</li>
     </ol>
   </div>
+
   <!-- //End--breadcrumb-->
     <div class="explain">
         <img src="http://pro.efeiyi.com/${project.picture_url}" width="1200" height="150" alt=""/>
@@ -84,7 +85,7 @@
                 <%--<%}else{%>--%>
                        <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
-                            src="http://pro.efeiyi.com/${productModel.productPicture.pictureUrl}@!product-hot" alt=""/>
+                            src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>
                        <%--<%}%>--%>
                 <p class="wh name">

@@ -65,9 +65,12 @@
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
         <li>
-          <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
-            <p class="wh name">${map.get(productModel)}
+          <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
+            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
+            <p class="wh name">${productModel.product.name}
+              <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                ${productPropertyValue.projectPropertyValue.value}
+              </c:forEach>
             </p>
             <p class="wh price">￥${productModel.price}</p>
           </a>
