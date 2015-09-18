@@ -59,35 +59,32 @@
     </ul>
   </div>
   <!-- //End--shop-sort-->
-<c:if test="${productModelList.size()>0}">
+  <c:if test="${productModelList.size()>0}">
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-        <li>
-          <a href="<c:url value='/product/hot/${productModel.id}'/>" target="_blank" title="">
-            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
-            <p class="wh name">${productModel.product.name}
-              <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                ${productPropertyValue.projectPropertyValue.value}
-              </c:forEach>
-            </p>
-            <p class="wh price">￥${productModel.price}</p>
-          </a>
-        </li>
+          <li>
+            <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
+              <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
+              <p class="wh name">${map.get(productModel)}
+              </p>
+              <p class="wh price">￥${productModel.price}</p>
+            </a>
+          </li>
         </c:forEach>
       </ul>
     </div>
     </c:if>
     <!-- //End--list-pro-->
-<%--    <div class="page wh">
-      <ul class="am-pagination am-pagination-centered">
-        <li class="bigRound"><a href="">«</a></li>
-        <li><a href="">1</a></li>
-        <li class="am-active"><a href="#">2</a></li>
-        <li class="am-disabled bigRound"><a href="#">»</a></li>
-      </ul>
-    </div>--%>
+    <%--    <div class="page wh">
+          <ul class="am-pagination am-pagination-centered">
+            <li class="bigRound"><a href="">«</a></li>
+            <li><a href="">1</a></li>
+            <li class="am-active"><a href="#">2</a></li>
+            <li class="am-disabled bigRound"><a href="#">»</a></li>
+          </ul>
+        </div>--%>
     <!-- //End--page-->
   </div>
   <!-- //End---->
