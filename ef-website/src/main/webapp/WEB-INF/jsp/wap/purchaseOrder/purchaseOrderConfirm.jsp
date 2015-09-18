@@ -17,16 +17,21 @@
 <article class="bd shop-cart">
   <div class="bd cart-order">
     <div class="bd order-address" id="order-add">
-      <c:forEach items="${addressList}" var="address">
-        <c:if test="${address.status=='2'}">
-          <a href="#btn-edit-addres" class="btn-edit-addres">
-            <p id="hiddenId" hidden>${address.id}</p>
-            <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
-            <p class="txt">${address.province.name}${address.details}</p>
-            <a href="#arrow-right" class="arrow-right"></a>
-          </a>
-        </c:if>
-      </c:forEach>
+      <c:if test="${addressList.size() > 0}">
+        <c:forEach items="${addressList}" var="address">
+          <c:if test="${address.status=='2'}">
+            <a href="#btn-edit-addres" class="btn-edit-addres">
+              <p id="hiddenId" hidden>${address.id}</p>
+              <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
+              <p class="txt">${address.province.name}${address.details}</p>
+              <a href="#arrow-right" class="arrow-right"></a>
+            </a>
+          </c:if>
+        </c:forEach>
+      </c:if>
+      <c:if test="${addressList.size() == 0}">
+      <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
+      </c:if>
     </div>
     <div class="bd order-address" id="order-add1" style="display: none">
       <a href="#btn-edit-addres" class="btn-edit-addres">
@@ -42,7 +47,7 @@
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
             <c:if test="${product.isChoose==1}">
               <li>
-                <img class="img" src="${product.productModel.productPicture.pictureUrl}" alt="">
+                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}" alt="">
                 <div class="bd info">
                   <p class="text">${product.productModel.product.name}</p>
                   <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
@@ -178,7 +183,7 @@
 
 <script>
   var payment = "1";
-  var consumerAddress = document.getElementById("hiddenId").textContent;
+  var consumerAddress = $("#hiddenId").text();
   var totalPrice = $("#change").text();
 
 
@@ -188,7 +193,8 @@
       async: false,
       url: '<c:url value="/coupon/list/${purchaseOrder.id}"/>',
       dataType: 'json',
-      data: { status: 1},
+      data: { status: 1,
+            },
       success: function (data) {
         if (data != null) {
           var out = '';

@@ -4,13 +4,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>我的订单</title>
+    <title>个人中心</title>
 </head>
 <body>
 <div class="myorder">
     <div class="order-head">
         <dl>
-            <dt><img src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></dt>
+            <dt><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..." class="am-img-thumbnail"></dt>
             <c:set var="user" >
                 <%= AuthorizationUtil.getMyUser().getUsername()%>
             </c:set>
@@ -38,14 +38,14 @@
                 <ul>
                     <c:if test="${purchaseOrder.purchaseOrderProductList.size()<=4}">
                         <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
-                            <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrderProduct.productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                            <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrderProduct.productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                         </c:forEach>
                     </c:if>
                     <c:if test="${purchaseOrder.purchaseOrderProductList.size()>4}">
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(0).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(1).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(2).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
-                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(0).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(1).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(2).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
+                        <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productPicture.pictureUrl}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                     </c:if>
                 </ul>
                 <c:if test="${purchaseOrder.orderStatus == '1'}">
