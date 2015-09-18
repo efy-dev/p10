@@ -396,7 +396,7 @@ public class ProductController extends BaseController {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
                 productModel.setProductModel_url(productPicture.getPictureUrl());
                 baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
-                productPicture.setProductModel(productModel);
+          //      productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
