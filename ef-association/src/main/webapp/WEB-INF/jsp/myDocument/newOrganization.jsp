@@ -18,7 +18,7 @@
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="返回" />
+           value="返回"/>
 </div>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
@@ -82,9 +82,14 @@
             </label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="group" dataType="intangibleCultureOrganization.group"
-                                checkedValue="${object.group}"
-                                type="select"/>
+                <c:if test='${empty object.group}'>
+                    <ming800:status name="group" dataType="intangibleCultureOrganization.group"
+                                    checkedValue='${group}' type="select"/>
+                </c:if>
+                <c:if test='${not empty object.group}'><ming800:status name="group"
+                                                                       dataType="intangibleCultureOrganization.group"
+                                                                       checkedValue="${object.group}"
+                                                                       type="select"/></c:if>
             </div>
         </div>
 

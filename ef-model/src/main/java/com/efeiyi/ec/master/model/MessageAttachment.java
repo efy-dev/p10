@@ -13,10 +13,12 @@ import javax.persistence.*;
 @Entity
 @Table(name="master_message_attachment")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class MessageAttachmentList {
+public class MessageAttachment {
 
 	private String id;
 	private String fileName;
+	private String pictureUrl;
+	private String videoPath;
 	protected MasterMessage masterMessage;
 
 	@Id
@@ -37,6 +39,24 @@ public class MessageAttachmentList {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	@Column(name = "picture_url")
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
+	@Column(name = "video_path")
+	public String getVideoPath() {
+		return videoPath;
+	}
+
+	public void setVideoPath(String videoPath) {
+		this.videoPath = videoPath;
 	}
 
 	@JsonIgnore

@@ -104,7 +104,7 @@ public class MyDocumentController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
-        modelMap.put("group",tempDo.getLabel());
+        modelMap.put("group",tempDo.getData());
         return pageInfo.getList();
 //        return docs;
         //return new ModelAndView("/",model);
@@ -198,6 +198,7 @@ public class MyDocumentController {
             document = (Document) baseManager.getObject(document.getClass().getName(), document.getId());
             model.addAttribute("object", document);
         }
+        model.addAttribute("group",document.getGroup());
         return new ModelAndView(request.getContextPath() + tempDo.getResult());
     }
 
@@ -231,7 +232,7 @@ public class MyDocumentController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getLabel());
+        modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }
 
@@ -258,6 +259,7 @@ public class MyDocumentController {
             organization = (IntangibleCulturalOrganization) baseManager.getObject(organization.getClass().getName(), organization.getId());
             model.addAttribute("object", organization);
         }
+        model.addAttribute("group",organization.getGroup());
         return new ModelAndView(request.getContextPath() + tempDo.getResult());
     }
 }

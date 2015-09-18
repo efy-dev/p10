@@ -18,7 +18,7 @@
     <input onclick="window.history.back()"
            type="button" class="am-btn am-btn-default am-btn-xs"
            style="margin-top: 8px;margin-bottom: 6px;margin-left:2px;height: 35px;"
-           value="返回" />
+           value="返回"/>
 </div>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
@@ -32,15 +32,11 @@
     <form id="documentForm" action="<c:url value='/myDocument/saveDocument.do'/>?qm=${requestScope.qm}"
           onsubmit="return afterSubmitForm('documentForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-        <c:if test="${not empty object.id}">
         <input id="id" value="${object.id}" name="id"
                type="hidden"/>
-        </c:if>
-        <c:if test="${not empty object.documentContent.id}">
         <input id="documentContent.id" value="${object.documentContent.id}"
                name="documentContent.id"
                type="hidden"/>
-        </c:if>
         <input id="documentOrder" value="${object.documentOrder}"
                name="documentOrder"
                type="hidden"/>
@@ -50,44 +46,28 @@
                value="<fmt:formatDate value="${object.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
                name="publishDate"
                type="hidden"/>
+        <input type="hidden" id="keywords" placeholder="keywords" name="keywords"
+               value="${object.keywords}">
+        <input type="hidden" id="sampleContent" placeholder="sampleContent"
+               name="sampleContent"
+               value="${object.sampleContent}" required="true">
+
         <div class="am-form-group">
-            <label name="title" for="title" class="am-u-sm-3 am-form-label">title
+            <label name="标题" for="title" class="am-u-sm-3 am-form-label">title
                 <small>*</small>
             </label>
 
             <div class="am-u-sm-9">
-                <input type="text" name="title" id="title" placeholder="title" value="${object.title}" required="true">
+                <input type="text" name="title" id="title" placeholder="标题" value="${object.title}" required="true">
             </div>
         </div>
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">name
+            <label name="发布人" for="name" class="am-u-sm-3 am-form-label">name
                 <small>&nbsp;&nbsp;</small>
             </label>
 
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="name" placeholder="name" value="${object.name}">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="keywords" for="keywords" class="am-u-sm-3 am-form-label">keywords
-                <small>*</small>
-            </label>
-
-            <div class="am-u-sm-9">
-                <input type="text" id="keywords" placeholder="keywords" name="keywords"
-                       onclick=""
-                       value="${object.keywords}" required="true">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="sampleContent" for="sampleContent" class="am-u-sm-3 am-form-label">sampleContent
-                <small>*</small>
-            </label>
-
-            <div class="am-u-sm-9">
-                <input type="text" id="sampleContent" placeholder="sampleContent"
-                       onclick="" name="sampleContent"
-                       value="${object.sampleContent}" required="true">
+                <input type="text" name="name" id="name" placeholder="发布人" value="${object.name}">
             </div>
         </div>
         <div class="am-form-group">
@@ -96,9 +76,13 @@
             </label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="group" dataType="document.group"
-                                checkedValue="${object.group}"
-                                type="select"/>
+                <c:if test='${empty object.group}'>
+                    <ming800:status name="group" dataType="document.group"
+                                    checkedValue='${group}' type="select"/>
+                </c:if>
+                <c:if test='${not empty object.group}'><ming800:status name="group" dataType="document.group"
+                                                                       checkedValue='${object.group}'
+                                                                       type="select"/></c:if>
             </div>
         </div>
         <div class="am-form-group">
@@ -107,9 +91,10 @@
             </label>
 
             <div class="am-u-sm-9">
-                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content" class="am-form-field"
+                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content"
+                          class="ckeditor"
                           placeholder="内容"
-                           required="true">${object.documentContent.content}</textarea>
+                          required="true">${object.documentContent.content}</textarea>
             </div>
         </div>
         <div class="am-form-group">
@@ -118,7 +103,9 @@
             </div>
         </div>
     </form>
+    ${group}${empty object.group}${object.group}
 </div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
+<script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
 </body>
 </html>

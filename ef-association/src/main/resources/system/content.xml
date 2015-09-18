@@ -24,22 +24,23 @@
             <fields>
                 <field name="group" label="分类" inputType="text">
                     <statusType fieldName="level">
-                        <item label="非遗项目" value="project"/>
-                        <item label="非遗传承人" value="inheritors"/>
+                        <!--<item label="非遗项目" value="project"/>-->
+                        <!--<item label="非遗传承人" value="inheritors"/>-->
                         <item label="协会新闻" value="orgNews"/>
                         <item label="行业新闻" value="industryNews"/>
-                        <item label="公告管理" value="notice"/>
-                        <item label="协会介绍" value="orgIntro"/>
-                        <item label="协会章程" value="orgRules"/>
-                        <item label="联系方式" value="contactInfo"/>
-                        <item label="非遗法" value="law"/>
-                        <item label="非遗保护政策" value="policy"/>
-                        <item label="非遗申报指南" value="guide"/>
-                        <item label="各地协会" value="local"/>
-                        <item label="会员申请指南" value="userGuide"/>
+                        <item label="公告管理" value="noticeManage"/>
+                        <item label="协会介绍" value="assIntro"/>
+                        <item label="协会章程" value="assStatute"/>
+                        <item label="联系方式" value="assContact"/>
+                        <item label="非遗法" value="intLaw"/>
+                        <item label="非遗保护政策" value="intPolicy"/>
+                        <item label="非遗申报指南" value="submissionGuide"/>
+                        <item label="申报资料下载管理" value="materialDown"/>
+                        <item label="申报资料上传管理" value="materialUpload"/>
+                        <item label="会员申请指南" value="memGuide"/>
                         <item label="会员管理" value="userManage"/>
-                        <item label="在线申报管理" value="online"/>
-                        <item label="角色管理" value="role"/>
+                        <item label="角色管理" value="roleManagement"/>
+                        <item label="用户列表" value="userList"/>
                     </statusType>
                 </field>
             </fields>
@@ -62,7 +63,7 @@
                 <!--<do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistTenant_default"/>-->
             <!--</does>-->
             <does>
-                <do name="plistNewsOrganization" access="" label="协会新闻" result="">
+                <do name="plistNewsOrganization" access="" label="协会新闻" result="" data="orgNews">
                     <query name="organization" label="默认" type="auto" orderBy="documentOrder:desc">
                         <condition name="group" defaultValue="orgNews" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
@@ -71,7 +72,7 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistNewsOrganization_default"/>
             </does>
             <does>
-                <do name="plistNewsIndustry" access="" label="行业新闻" result="">
+                <do name="plistNewsIndustry" access="" label="行业新闻" result="" data="industryNews">
                     <query name="industry" label="默认" type="auto" orderBy="documentOrder:desc">
                         <condition name="group" defaultValue="industryNews" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
@@ -80,117 +81,117 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistNewsIndustry_default"/>
             </does>
             <does>
-                <do name="plistNewsNote" access="" label="公告管理" result="">
+                <do name="plistNewsNote" access="" label="公告管理" result="" data="noticeManage">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="4" operation="eq"/>
+                        <condition name="group" defaultValue="noticeManage" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistNewsNote_default"/>
             </does>
             <does>
-                <do name="plistAssociationIntroduction" access="" label="协会介绍" result="">
+                <do name="plistAssociationIntroduction" access="" label="协会介绍" result="" data="assIntro">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="5" operation="eq"/>
+                        <condition name="group" defaultValue="assIntro" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistIntroduction_default"/>
             </does>
             <does>
-                <do name="plistStatute" access="" label="协会章程" result="">
+                <do name="plistStatute" access="" label="协会章程" result="" data="assStatute">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="6" operation="eq"/>
+                        <condition name="group" defaultValue="assStatute" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistStatute_default"/>
             </does>
             <does>
-                <do name="plistContact" access="" label="联系方式" result="">
+                <do name="plistContact" access="" label="联系方式" result="" data="assContact">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="7" operation="eq"/>
+                        <condition name="group" defaultValue="assContact" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistContact_default"/>
             </does>
             <does>
-                <do name="plistLaw" access="" label="非遗法" result="">
+                <do name="plistLaw" access="" label="非遗法" result="" data="intLaw">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="8" operation="eq"/>
+                        <condition name="group" defaultValue="intLaw" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistLaw_default"/>
             </does>
             <does>
-                <do name="plistPolicy" access="" label="非遗保护政策" result="">
+                <do name="plistPolicy" access="" label="非遗保护政策" result="" data="intPolicy">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="9" operation="eq"/>
+                        <condition name="group" defaultValue="intPolicy" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistPolicy_default"/>
             </does>
             <does>
-                <do name="plistSubmissionHandbook" access="" label="非遗申报指南" result="">
+                <do name="plistSubmissionHandbook" access="" label="非遗申报指南" result="" data="submissionGuide">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="10" operation="eq"/>
+                        <condition name="group" defaultValue="submissionGuide" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistSubmissionHandbook_default"/>
             </does>
             <does>
-                <do name="plistMemberGuide" access="" label="会员申请指南" result="">
+                <do name="plistMemberGuide" access="" label="会员申请指南" result="" data="memGuide">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="11" operation="eq"/>
+                        <condition name="group" defaultValue="memGuide" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistAssociation_default"/>
             </does>
             <does>
-                <do name="plistMemberSubmissionHandbook" access="" label="会员申请指南" result="">
+                <do name="plistMemberManagement" access="" label="会员管理" result="" data="memManagement">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="11" operation="eq"/>
-                        <condition name="status" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMemberSubmissionHandbook_default"/>
-            </does>
-            <does>
-                <do name="plistMemberManagement" access="" label="会员管理" result="">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="12" operation="eq"/>
+                        <condition name="group" defaultValue="memManagement" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMemberManagement_default"/>
             </does>
             <does>
-                <do name="plistMaterialUpload" access="" label="申报资料上传管理" result="">
+                <do name="plistMaterialUpload" access="" label="申报资料上传管理" result="" data="materialUpload">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="13" operation="eq"/>
+                        <condition name="group" defaultValue="materialUpload" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialUpload_default"/>
             </does>
             <does>
-                <do name="plistMaterialDownload" access="" label="申报资料下载管理" result="">
+                <do name="plistMaterialDownload" access="" label="申报资料下载管理" result="" data="materialDown">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="14" operation="eq"/>
+                        <condition name="group" defaultValue="materialDown" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>
             </does>
             <does>
-                <do name="plistRole" access="" label="角色管理" result="">
+                <do name="plistRole" access="" label="角色管理" result="" data="roleManagement">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="15" operation="eq"/>
+                        <condition name="group" defaultValue="roleManagement" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistRole_default"/>
+            </does>
+            <does>
+                <do name="plistUser" access="" label="用户列表" result="" data="userList">
+                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                        <condition name="group" defaultValue="userList" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
@@ -202,30 +203,6 @@
             </does>
         </entity>
 
-        <!--<entity name="PCUser" label="用户"  model="com.efeiyi.pal.organization.model.User">-->
-            <!--<does>-->
-                <!--<do name="listUser" access="" label="用户列表" result="/user/userList">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--&lt;!&ndash;<condition name="id" defaultValue="0" operation="ne"/>&ndash;&gt;-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-                <!--<do name="plistUser" access="" label="用户分页列表" result="/user/userPList">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="id:desc">-->
-                        <!--&lt;!&ndash;<condition name="id" defaultValue="0" operation="ne"/>&ndash;&gt;-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-
-                <!--<do name="formUser" label="用户信息" access="" result="/user/userForm"/>-->
-                <!--<do name="viewUser" label="用户信息详情页" access="" result="/user/userView"/>-->
-                <!--<do name="removeUser" label="删除用户信息" access="" result="redirect:/basic/xm.do?qm=plistUser_default"/>-->
-                <!--<do name="saveOrUpdateUser" label="新建或更新用户信息" access="" result="redirect:/basic/xm.do?qm=plistUser_default"-->
-                    <!--execute="com.efeiyi.pal.system.organization.controller.UserHandler">-->
-                <!--</do>-->
-            <!--</does>-->
-        <!--</entity>-->
-
         <entity name="intangibleCultureOrganization" label="各地协会"  model="com.efeiyi.association.model.IntangibleCulturalOrganization">
             <fields>
                 <field name="group" label="分类" inputType="text">
@@ -236,7 +213,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCommitteeAssociation" access="" label="委员会名录管理" result="">
+                <do name="plistCommitteeAssociation" access="" label="委员会名录管理" result="" data="committeeAss">
                     <query name="default" label="默认" type="auto" orderBy="">
                         <condition name="group" defaultValue="committeeAss" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
@@ -245,7 +222,7 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/organization.do?qm=plistCommitteeAssociation_default"/>
             </does>
             <does>
-                <do name="plistAssociation" access="" label="各地协会名录管理" result="">
+                <do name="plistAssociation" access="" label="各地协会名录管理" result="" data="association">
                     <query name="default" label="默认" type="auto" orderBy="">
                         <condition name="group" defaultValue="association" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
