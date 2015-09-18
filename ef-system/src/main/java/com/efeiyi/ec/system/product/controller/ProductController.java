@@ -121,6 +121,7 @@ public class ProductController extends BaseController {
             if(fileName.indexOf(".jpg")!=-1){
                 index = fileName.indexOf(".jpg");
             }
+            String imgName = fileName.substring(0, index);
             url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
@@ -128,7 +129,7 @@ public class ProductController extends BaseController {
                 productPicture.setStatus(request.getParameter("status"));
                 productPicture.setProduct(product);
                 baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                data = productPicture.getId() + ":" + url;
+                data = productPicture.getId() + ":" + url+":"+imgName;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -457,6 +458,7 @@ public class ProductController extends BaseController {
             if("0".equals(status)){
                 ProjectCategoryProductModel projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
                 projectCategoryProductModel.setStatus(status);
+                projectCategoryProductModel.setSort(0);
                 baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
 
             }else {
@@ -466,6 +468,7 @@ public class ProductController extends BaseController {
                 }else {
                     projectCategoryProductModel = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),projectCategoryProductModelId);
                 }
+                projectCategoryProductModel.setSort(0);
                 projectCategoryProductModel.setStatus(status);
                 projectCategoryProductModel.setProjectCategory((ProjectCategory) baseManager.getObject(ProjectCategory.class.getName(), projectCategoryId));
                 projectCategoryProductModel.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId));
@@ -477,5 +480,25 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return projectCategoryProductModelId;
+    }
+
+    @RequestMapping("/updateProductModelSort.do")
+    @ResponseBody
+    public String updateProductModelSort(String id, String sort, HttpServletRequest request) {
+
+        try {
+            ProjectCategoryProductModel projectCategoryProductModel
+                     = (ProjectCategoryProductModel)baseManager.getObject(ProjectCategoryProductModel.class.getName(),id);
+            if("".equals(sort)||sort==null){
+                projectCategoryProductModel.setSort(0);
+            }else {
+                projectCategoryProductModel.setSort(Integer.parseInt(sort));
+            }
+          baseManager.saveOrUpdate(ProjectCategoryProductModel.class.getName(),projectCategoryProductModel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

@@ -11,6 +11,7 @@
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=delivery"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderDelivery"/>
             </jnode>
             <jnode id="" url="" state="closed" match="" extend="" access="" text_zh_CN="退货管理">
                 <match url=""/>

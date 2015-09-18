@@ -49,11 +49,13 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping("/updateOrderStatus.do")
     @ResponseBody
-    public String updateOrderStatus(PurchaseOrder purchaseOrder){
+    public String updateOrderStatus(PurchaseOrder purchaseOrder,HttpServletRequest request){
 
+        String logisticsCompany = request.getParameter("logisticsCompany");
+        String serial = request.getParameter("serial");
         String id = "";
         try {
-          id = purchaseOrderManager.updateOrderStatus(purchaseOrder);
+          id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
         }catch (Exception e){
             e.printStackTrace();
         }
