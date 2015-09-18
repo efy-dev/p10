@@ -19,6 +19,7 @@ public class PurchaseOrderProduct {
     private Integer purchaseAmount;
     private BigDecimal purchasePrice;
     private PurchaseOrderComment purchaseOrderComment;
+    private String status;//评价状态 0：未评价 1：已评价
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -78,5 +79,14 @@ public class PurchaseOrderProduct {
 
     public void setPurchaseOrderComment(PurchaseOrderComment purchaseOrderComment) {
         this.purchaseOrderComment = purchaseOrderComment;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
