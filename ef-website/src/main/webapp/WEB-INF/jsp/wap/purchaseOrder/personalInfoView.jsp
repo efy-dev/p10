@@ -13,7 +13,7 @@
 <div class="personal-material">
   <div class="personal">
     <div class="material">
-      <strong><img src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></strong>
+      <strong><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..." class="am-img-thumbnail"></strong>
     </div>
     <div class="personal-list">
       <form>

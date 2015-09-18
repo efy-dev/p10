@@ -198,4 +198,9 @@ CREATE TABLE `projectFollowed` (
 -- ----------------------------
 INSERT INTO `projectFollowed` VALUES ('1', 'ichld4520000i9y0', '1', '2015-09-09 15:16:18', 'icwz67p000009mnr');
 
+------------aliyun/efc----------
+------------masterNews-----------
+ALTER TABLE `master_news`
+	ADD COLUMN `project_id` char(16) NULL AFTER `brief`;
+------------end---------------
 

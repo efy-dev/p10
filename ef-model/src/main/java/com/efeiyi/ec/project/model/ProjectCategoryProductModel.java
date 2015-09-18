@@ -26,6 +26,8 @@ public class ProjectCategoryProductModel implements Serializable{
 
     private  String status;
 
+    private  Integer sort;
+
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -63,6 +65,15 @@ public class ProjectCategoryProductModel implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "sort")
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }
 

@@ -13,7 +13,7 @@
 
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
-        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistPCProductModel_default&projectCategoryId=${object.id}"/>">关联产品</a>
+        <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=plistPCProductModel_default&projectCategoryId=${object.id}"/>">推荐产品</a>
     </div>
     <div class="am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover table-main">
@@ -22,7 +22,7 @@
                 <th class="table-title" width="25%">操作</th>
                 <th class="table-title" width="25%">产品名称</th>
                 <th class="table-title" width="25%">产品编号</th>
-
+                <th class="table-title" width="25%">排序</th>
             </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
                 <tr id="${projectCategoryProductModel.id}">
                     <td>
                         <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProductModel('${projectCategoryProductModel.projectCategory.id}','${projectCategoryProductModel.productModel.id}','${projectCategoryProductModel.id}')})"><span
-                                class="am-icon-pencil-square-o"></span> 解除产品
+                                class="am-icon-pencil-square-o"></span> 取消推荐
                         </a>
                     </td>
                     <td class="am-hide-sm-only">
@@ -40,7 +40,13 @@
                             ${projectCategoryProductModel.productModel.serial}
 
                     </td>
+                    <td class="am-hide-sm-only">
 
+                        <a href="#" onclick="toUpdateSort(this,'<c:url value="/product/updateProductModelSort.do"/>')" sort="${projectCategoryProductModel.sort}" id="${projectCategoryProductModel.id}">
+                                ${projectCategoryProductModel.sort}
+                        </a>
+
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -49,6 +55,27 @@
 </div>
 
 <script>
+
+    function toUpdateSort(obj,updateUrl){
+        var sort = $(obj).attr("sort");
+        var id = $(obj).attr("id");
+        $(obj).parent().html("<input id="+id+" onblur=\"updateSort(this,'"+updateUrl+"')\" type=\"text\" name=\"sort\" style=\"width: 35px;\" value="+sort+" />");
+    }
+    function updateSort(obj,updateUrl){
+        var sort = $(obj).val();
+        var id = $(obj).attr("id");
+        $.ajax({
+            type: "get",
+            url: updateUrl,
+            cache: false,
+            dataType: "json",
+            data:{id:id,sort:sort},
+            success: function (data) {
+//                $(obj).parent().html("<a onclick=\"toUpdateSort(this,'"+updateUrl+"')\" sort="+sort+" id="+id+">"+sort+"</a>");
+                location.reload();
+            }
+        });
+    }
     function removeSubjectProductModel(projectCategoryId,productModelId,projectCategoryProductModelId){
         $.ajax({
             type: "get",

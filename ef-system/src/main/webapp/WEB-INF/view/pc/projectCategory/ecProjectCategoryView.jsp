@@ -35,7 +35,7 @@
 
 <div class="am-g">
     <div class="am-u-md-12">
-        <h2>关联产品</h2>
+        <h2>推荐产品</h2>
     </div>
 
     <div class="am-u-md-12">
