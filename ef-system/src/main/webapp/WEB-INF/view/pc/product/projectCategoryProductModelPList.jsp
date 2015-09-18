@@ -52,7 +52,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a id="${productModel.id}" projectCategoryProductModelId="0" status="1" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="removeSubjectProduct1(this,'${projectCategoryId}','${productModel.id}')">
-                                        关联产品
+                                        推荐
                                     </a>
                                 </div>
                             </div>
@@ -83,12 +83,12 @@
         var productModelId = '${projectCategoryProductModel.productModel.id}';
            <c:if test="${projectCategoryProductModel.status=='0'}">
                      $("a[id='"+productModelId+"']").attr("status","1");
-                     $("a[id='"+productModelId+"']").text("关联产品");
+                     $("a[id='"+productModelId+"']").text("推荐");
                      $("a[id='"+productModelId+"']").attr("projectCategoryProductModelId",'${projectCategoryProductModel.id}')
         </c:if>
         <c:if test="${projectCategoryProductModel.status=='1'}">
                     $("a[id='"+productModelId+"']").attr("status","0");
-                    $("a[id='"+productModelId+"']").text("解除产品");
+                    $("a[id='"+productModelId+"']").text("取消推荐");
                     $("a[id='"+productModelId+"']").attr("projectCategoryProductModelId",'${projectCategoryProductModel.id}')
         </c:if>
 
@@ -113,11 +113,11 @@
             success: function (data) {
                 if(status=="0"){
                     $(obj).attr("status","1");
-                    $(obj).text("关联产品");
+                    $(obj).text("推荐");
                     $(obj).attr("projectCategoryProductModelId",data)
                 }else{
                     $(obj).attr("status","0");
-                    $(obj).text("解除产品");
+                    $(obj).text("取消推荐");
                     $(obj).attr("projectCategoryProductModelId",data)
                 }
             }
