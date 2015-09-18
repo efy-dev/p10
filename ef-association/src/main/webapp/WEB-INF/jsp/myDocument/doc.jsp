@@ -52,28 +52,28 @@
                             </button>
                             <button onclick="saveObject('${document.id}','<c:url value='/myDocument/saveDocument.do'/>','status',
                                     '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
-                                    '&qm=/myDocument/doc.do?qm=plistNewsOrganization_default')"
+                                    '&qm=/myDocument/doc.do?qm=${requestScope.qm}')"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><c:if test="${document.status == 1}">取消推荐</c:if><c:if test="${document.status != 1}"><font color="green">推荐</font></c:if>
                             </button>
-                            <input id="${document.id}0" value="${document.id}"
+                            <input value="${document.id}"
                                    name="${document.id}" metaProperty="id" type="hidden"/>
-                            <input id="${document.id}1" value="${document.documentContent.id}"
+                            <input value="${document.documentContent.id}"
                                    name="${document.id}" metaProperty="documentContent.id" type="hidden"/>
-                            <input id="${document.id}2" value="${document.documentOrder}"
+                            <input value="${document.documentOrder}"
                                    name="${document.id}" metaProperty="documentOrder" type="hidden"/>
-                            <input id="${document.id}3" value="${document.keywords}"
+                            <input value="${document.keywords}"
                                    name="${document.id}" metaProperty="keywords" type="hidden"/>
-                            <input id="${document.id}4" value="${document.sampleContent}"
+                            <input value="${document.sampleContent}"
                                    name="${document.id}" metaProperty="sampleContent" type="hidden"/>
-                            <input id="${document.id}5" value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
+                            <input value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
                                    name="${document.id}" metaProperty="theDatetime" type="hidden"/>
-                            <input id="${document.id}6" value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
+                            <input value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
                                    name="${document.id}" metaProperty="publishDate" type="hidden"/>
-                            <input id="${document.id}7" value="${document.status}"
+                            <input value="${document.status}"
                                    name="${document.id}" type="hidden" metaProperty="status"/>
-                            <input id="${document.id}8" value="${document.group}"
+                            <input value="${document.group}"
                                    name="${document.id}" metaProperty="group" type="hidden"/>
-                            <input id="${document.id}9" value="${document.documentContent.content}" metaProperty="documentContent.content"
+                            <input value='${document.documentContent.content}' metaProperty="documentContent.content"
                                    name="${document.id}" type="hidden"/>
                         </div>
                     </div>
@@ -83,8 +83,8 @@
                     <input type="hidden" id="${document.id}10" name="${document.id}" value="${document.title}" metaProperty="title">
                 </td>
                 <td>
-                    <c:forEach items="${documentAttachmentList}" var="attachment">
-                        <img  id="${document.id}11" name="${document.id}" src="<%=imgBasePath%>${attachment.path}<%=imgListCss%>">
+                    <c:forEach items="${document.documentAttachmentList}" var="attachment">
+                        <img  id="${document.id}11" name="${document.id}" src="${attachment.path}<%=imgListCss%>">
                     </c:forEach>
                 </td>
                 <td>

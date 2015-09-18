@@ -310,6 +310,13 @@
                         <item label="微信" value="3"/>
                     </statusType>
                 </field>
+                <field name="status" label="支付状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="支付成功" value="1"/>
+                        <item label="支付失败" value="2"/>
+                        <item label="未支付" value="3"/>
+                    </statusType>
+                </field>
             </fields>
         </entity>
         <entity name="purchaseOrderProduct" label="purchaseOrderProduct"

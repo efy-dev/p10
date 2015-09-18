@@ -53,10 +53,10 @@
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
-          <c:if test="${productPicture.status=='2'}">
-          <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
+          <%--<c:if test="${productPicture.status=='2'}">--%>
+          <li class="active"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" width="60" height="60"
                                   alt=""/></li>
-          </c:if>
+          <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
               <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
@@ -68,9 +68,9 @@
       <!-- //End--sliderimg-->
       <div class="slider-main">
         <ul>
-         <c:if test="${productPicture.status=='2'}">
-          <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
-         </c:if>
+         <%--<c:if test="${productPicture.status=='2'}">--%>
+          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}" width="" height="643" alt=""/></li>
+         <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
             <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="" height="643" alt=""/></li>
@@ -130,7 +130,7 @@
          </c:if>
         <c:if test="${productModel.amount != 0}">
           <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
-          <a class="btn btn-buy" href="/order/easyBuy/${productModel.id}" title="立即购买" disabled="disabled" >立即购买</a>
+          <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买" disabled="disabled" >立即购买</a>
         </c:if>
         <!-- JiaThis Button BEGIN -->
         <div class="jiathis_style">
@@ -160,11 +160,11 @@
       <!-- JiaThis Button END -->
       <div class="tab-items">
         <ul>
-          <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+          <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
           <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
-          <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">同 店 精 品</a></li>
+          <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">进 入 店 铺</a></li>
         </ul>
       </div>
       <!-- //End-->

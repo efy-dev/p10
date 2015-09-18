@@ -1,6 +1,6 @@
 package com.efeiyi.association.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.efeiyi.association.OrganizationConst;
 import com.efeiyi.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -10,24 +10,36 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
+import com.ming800.core.p.model.DocumentAttachment;
+import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
-import com.ming800.core.util.JsonUtil;
+import org.htmlparser.Node;
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.filters.TagNameFilter;
+import org.htmlparser.tags.ImageTag;
+import org.htmlparser.util.NodeList;
+import org.htmlparser.util.SimpleNodeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Administrator on 2015/7/14.
@@ -56,6 +68,10 @@ public class MyDocumentController {
 
     @Autowired
     private DoManager doManager;
+
+    @Autowired
+    @Qualifier("aliOssUploadManagerImpl")
+    private AliOssUploadManager aliOssUploadManager;
 
     /**
      * 根据group_id查询获取相关document
@@ -104,7 +120,7 @@ public class MyDocumentController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
-        modelMap.put("group",tempDo.getData());
+        modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
 //        return docs;
         //return new ModelAndView("/",model);
@@ -125,14 +141,45 @@ public class MyDocumentController {
         //新建内容
         if (document.getId() == null || "".equals(document.getId())) {
             //新建内容传入原页面地址
+            document.setId(null);
+            document.getDocumentContent().setId(null);
             document.setTheDatetime(new Date());
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
-//            document.setTheDatetime(new Date());
-//            documentManager.saveDocument(document);
 
+        }else{
+            documentManager.deleteDocument(document);
+            document.setId(null);
         }
+
+        Parser parser = new Parser(document.getDocumentContent().getContent());
+        NodeFilter filter = new TagNameFilter("img");
+        NodeList nodes = parser.extractAllNodesThatMatch(filter);
+
+        if (nodes != null) {
+            Node eachNode = null;
+            ImageTag imageTag = null;
+            String srcPath = null;
+            DocumentAttachment documentAttachment = null;
+            document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+
+//              遍历所有的img节点
+            for (int i = 0; i < nodes.size(); i++) {
+                eachNode = (Node) nodes.elementAt(i);
+                if (eachNode instanceof ImageTag) {
+                    imageTag = (ImageTag) eachNode;
+
+//                      获得html文本的原来的src属性
+                    srcPath = imageTag.getAttribute("src");
+                    documentAttachment = new DocumentAttachment();
+                    documentAttachment.setPath(srcPath);
+                    documentAttachment.setDocument(document);
+                    document.getDocumentAttachmentList().add(documentAttachment);
+                }
+            }
+        }
+
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
 
         documentManager.saveDocument(document);
@@ -198,7 +245,7 @@ public class MyDocumentController {
             document = (Document) baseManager.getObject(document.getClass().getName(), document.getId());
             model.addAttribute("object", document);
         }
-        model.addAttribute("group",document.getGroup());
+        model.addAttribute("group", document.getGroup());
         return new ModelAndView(request.getContextPath() + tempDo.getResult());
     }
 
@@ -255,11 +302,61 @@ public class MyDocumentController {
 //            DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         //设置保存后的返回页面
         model.addAttribute("qm", request.getParameter("resultPage"));
-        if(organization.getId() != null && !"".equals(organization.getId())) {
+        if (organization.getId() != null && !"".equals(organization.getId())) {
             organization = (IntangibleCulturalOrganization) baseManager.getObject(organization.getClass().getName(), organization.getId());
             model.addAttribute("object", organization);
         }
-        model.addAttribute("group",organization.getGroup());
+        model.addAttribute("group", organization.getGroup());
         return new ModelAndView(request.getContextPath() + tempDo.getResult());
     }
+
+    @RequestMapping("/ckeditorUpload.do")
+    @ResponseBody
+    public void ckeditorUpload(@RequestParam("upload") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        response.setContentType("text/html;charset=UTF-8");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "product/" + identify + ".jpg";
+
+        if (!multipartFile.getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
+        }
+        String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
+        PrintWriter out;
+        String s = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", '" + OrganizationConst.imgBasePath + url + "');</script>";
+//        String s = "window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", '" + OrganizationConst.imgBasePath + url + "');";
+
+        try {
+            out = response.getWriter();
+            out.print(s);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    private void processNodeList(NodeList list, String keyword) {
+//        //迭代开始
+//        SimpleNodeIterator iterator = list.elements();
+//        while (iterator.hasMoreNodes()) {
+//            Node node = iterator.nextNode();
+//            //得到该节点的子节点列表
+//            NodeList childList = node.getChildren();
+//            //孩子节点为空，说明是值节点
+//            if (null == childList)
+//            {
+//                //得到值节点的值
+//                String result = node.;
+//                //若包含关键字，则简单打印出来文本
+//                if (keyword.equals(result))
+//                    System.out.println(result);
+//            } //end if
+//            //孩子节点不为空，继续迭代该孩子节点
+//            else
+//            {
+//                processNodeList(childList, keyword);
+//            }//end else
+//        }//end wile
+//    }
 }

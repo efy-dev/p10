@@ -21,6 +21,6 @@ public interface PurchaseOrderManager {
      * @param purchaseOrder
      * @return
      */
-    String updateOrderStatus(PurchaseOrder purchaseOrder);
+    String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany);
 
 }

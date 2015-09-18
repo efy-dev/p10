@@ -124,7 +124,6 @@ public class ProductController {
                 map.put(productModelTemp,s.toString());
             }
         }
-        productModelList.remove(productModel);
         model.addAttribute("productModelList", productModelList);
         model.addAttribute("productModel", productModel);
         model.addAttribute("map",map);
