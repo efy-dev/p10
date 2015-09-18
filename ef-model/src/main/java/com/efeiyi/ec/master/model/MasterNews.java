@@ -1,6 +1,8 @@
 package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.project.model.Project;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -23,6 +25,7 @@ public class MasterNews {
     private Master master;
     private String status;
     private String dataSource; //来源
+    private Project project;
     private List<MasterNewsTag> masterNewsTagList;
     private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
     @Id
@@ -117,6 +120,17 @@ public class MasterNews {
 
     public void setMasterNewsTagList(List<MasterNewsTag> masterNewsTagList) {
         this.masterNewsTagList = masterNewsTagList;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "masterNews")
