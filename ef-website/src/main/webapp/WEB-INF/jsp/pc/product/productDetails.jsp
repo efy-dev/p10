@@ -45,11 +45,19 @@
       <div class="slider-main">
         <ul>
          <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/></li>
+          <li>
+            <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/>
+            </a>
+          </li>
          <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/></li>
+            <li>
+              <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+              <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/>
+              </a>
+            </li>
             </c:if>
           </c:forEach>
         </ul>
@@ -109,14 +117,6 @@
           <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买" disabled="disabled" >立即购买</a>
         </c:if>
         <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style">
-          <span class="jiathis_txt">分享到</span>
-          <a class="jiathis_button_weixin"></a>
-          <a class="jiathis_button_tqq"></a>
-          <a class="jiathis_button_tsina"></a>
-          <a class="jiathis_button_cqq"></a>
-        </div>
-        <!-- JiaThis Button END -->
       </div>
       <!-- //End-->
     </div>
