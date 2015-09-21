@@ -117,8 +117,8 @@ function getChooseConfirmDiv(){//动态添加确认框内容到当前页面
         "您确定继续此操作吗?"+
         "</div>"+
         "<div class=\"am-modal-footer\">"+
-        "<span class=\"am-modal-btn\" data-am-modal-cancel>继续逛逛</span>"+
-        "<span class=\"am-modal-btn\" data-am-modal-confirm>立即下单</span>"+
+        "<span class=\"am-modal-btn\" data-am-modal-cancel>支付遇到问题？</span>"+
+        "<span class=\"am-modal-btn\" data-am-modal-confirm>支付完成</span>"+
         "</div>"+
         "</div>"+
         "</div>");
