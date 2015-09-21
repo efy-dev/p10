@@ -1,7 +1,6 @@
 package com.efeiyi.ec.system.product.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.efeiyi.ec.tenant.model.TenantProject;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/7/20.
  */
-public class toFormProductHandler implements DoHandler {
+public class toFormTenantProductHandler implements DoHandler {
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
@@ -30,8 +29,11 @@ public class toFormProductHandler implements DoHandler {
         modelMap.put("view",request.getParameter("view"));
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
         modelMap.put("tenantId",request.getParameter("tenantId"));
+
+        modelMap.put("TENANT",baseManager.getObject(Tenant.class.getName(),request.getParameter("tenantId")));
+
         XQuery xQuery = new XQuery("listTenantMaster_default",request);//
-        xQuery.put("tenant_id",request.getParameter("tenantId"));
+        //    xQuery.put("tenant_id",request.getParameter("tenantId"));
         List<TenantMaster> masterList = baseManager.listObject(xQuery);//大师
         modelMap.put("masterList",masterList);
         xQuery = new XQuery("listMasterProject_default",request);
@@ -42,7 +44,7 @@ public class toFormProductHandler implements DoHandler {
         List<Tenant> tenantList = baseManager.listObject(xQuery);
         modelMap.put("tenantList",tenantList);
         xQuery = new XQuery("listTenantProject_default",request);//商家项目
-        xQuery.put("tenant_id",request.getParameter("tenantId"));
+        //    xQuery.put("tenant_id",request.getParameter("tenantId"));
         List<TenantProject> tenantProjectList = baseManager.listObject(xQuery);
         modelMap.put("tenantProjectList",tenantProjectList);
 

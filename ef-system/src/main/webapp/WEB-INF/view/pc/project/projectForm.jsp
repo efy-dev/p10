@@ -14,6 +14,7 @@
 <head>
     <title></title>
     <script src="<c:url value="/scripts/PCDSelect.js" />"></script>
+    <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -94,7 +95,15 @@
             </div>
 
         </div>
-
+        <div class="am-form-group">
+            <label name="type" for="description" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
+            <div class="am-u-sm-9" style="margin-top: 10px">
+                <%--<textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>--%>
+                  <textarea id="description" name="description" class="ckeditor" placeholder="项目内容" >
+                      ${object.description}
+                </textarea>
+            </div>
+        </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
