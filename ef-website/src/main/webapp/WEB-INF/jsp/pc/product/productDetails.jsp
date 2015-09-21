@@ -45,11 +45,19 @@
       <div class="slider-main">
         <ul>
          <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/></li>
+          <li>
+            <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/>
+            </a>
+          </li>
          <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/></li>
+            <li>
+              <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+              <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/>
+              </a>
+            </li>
             </c:if>
           </c:forEach>
         </ul>
