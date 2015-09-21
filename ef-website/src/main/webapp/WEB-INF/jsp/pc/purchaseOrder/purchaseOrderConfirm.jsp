@@ -183,7 +183,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a onclick="submitOrder('${purchaseOrder.id}')">提交订单</a> </span>
+                <span><a href="" target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>
@@ -217,7 +217,7 @@
         $("#zhifubao").attr("class", "alipay");
         payment = "3";
     }
-    function submitOrder(orderId) {
+    function submitOrder(element,orderId) {
         var messageObject = new Object();
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
@@ -232,7 +232,14 @@
         } else {
             var url = "<c:url value="/order/confirm/"/>";
             url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-            window.location.href = url;
+            element.onclick = null;
+            $(element).attr("href",url);
+            $(element).click();
+            showChooseConfirm("提示","是否支付成功？",function(){
+                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+            },function(){
+                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+            })
         }
     }
 
