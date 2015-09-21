@@ -260,16 +260,12 @@
                     <%--<input type="button" onclick="toSubmit('/productPicture/productPictureForm')" class="am-btn am-btn-primary" value="保存,并进入商品图片"/>--%>
                     <%--</span>--%>
                     <span style="padding: 10px;">
-                     <c:if test="${view == 'newProduct'}">
-                         <input type="button"
-                                onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"
-                                class="am-btn am-btn-primary" value="保存"/>
-                     </c:if>
-                        <c:if test="${view == 'tenant'}">
+
+
                             <input type="button"
-                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
+                                   onclick="toSubmit('redirect:/basic/xm.do?qm=plistProduct_default&view=${view}&tenantId=${object.tenant.id}')"
                                    class="am-btn am-btn-primary" value="完成"/>
-                        </c:if>
+
                     </span>
                       <span style="padding: 10px;">
                        <input type="button"
@@ -482,8 +478,13 @@
     function removeProductModel(obj) {
         if ($(obj).parent().parent().attr("id") != "0") {
             $(obj).parent().parent().hide();
+            if($(obj).parent().parent().attr("flag")=="custom"){
+                $("input[name='modelStatus']", $(obj).parent().parent()).val("-1");
+            }else{
+                $("input[name='modelStatus']", $(obj).parent().parent()).val("0");
+            }
             $(obj).parent().parent().attr("status", "0");
-            $("input[name='modelStatus']", $(obj).parent().parent()).val("0");
+
         } else {
             $(obj).parent().parent().remove();
         }

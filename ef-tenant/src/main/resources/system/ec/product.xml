@@ -23,9 +23,11 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="0" operation="ne"/>
                         <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="serial" label="作品号" type="auto" orderBy="serial:asc">
                         <condition name="serial"  operation="eq" label="作品号" />
+                        <condition name="status" defaultValue="0" operation="ne"/>
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>

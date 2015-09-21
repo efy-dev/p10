@@ -482,8 +482,13 @@
     function removeProductModel(obj) {
         if ($(obj).parent().parent().attr("id") != "0") {
             $(obj).parent().parent().hide();
+            if($(obj).parent().parent().attr("flag")=="custom"){
+                $("input[name='modelStatus']", $(obj).parent().parent()).val("-1");
+            }else{
+                $("input[name='modelStatus']", $(obj).parent().parent()).val("0");
+            }
             $(obj).parent().parent().attr("status", "0");
-            $("input[name='modelStatus']", $(obj).parent().parent()).val("0");
+        //    $("input[name='modelStatus']", $(obj).parent().parent()).val("0");
         } else {
             $(obj).parent().parent().remove();
         }
