@@ -41,10 +41,9 @@ public class TenantController {
         return "/tenant/productPList";
     }
 
-    @RequestMapping({"/tenantOfMobile/view"})
-    public String listProductOfMobile(HttpServletRequest request,Model model) throws Exception {
+    @RequestMapping({"/tenantOfMobile/{tenantId}"})
+    public String listProductOfMobile(@PathVariable String tenantId,HttpServletRequest request,Model model) throws Exception {
         XQuery xQuery = new XQuery("listProductModel_default1", request);
-        String tenantId = request.getParameter("tenantId");
         xQuery.put("product_tenant_id",tenantId);
         List list = baseManager.listObject(xQuery);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
