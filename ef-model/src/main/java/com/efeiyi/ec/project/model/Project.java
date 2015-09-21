@@ -40,6 +40,9 @@ public class Project {
     private List<ProjectContent> projectContents;
     private List<ProjectFollowed> projectFolloweds;
     private AddressDistrict addressDistrict;
+    private List<ProjectRecommended> projectRecommendeds;
+
+
 
     @Column(name="picture_url")
     public String getPicture_url() {
@@ -197,7 +200,7 @@ public class Project {
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;
@@ -217,6 +220,17 @@ public class Project {
 
     public void setAddressDistrict(AddressDistrict addressDistrict) {
         this.addressDistrict = addressDistrict;
+    }
+
+
+
+    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    public List<ProjectRecommended> getProjectRecommendeds() {
+        return projectRecommendeds;
+    }
+
+    public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
+        this.projectRecommendeds = projectRecommendeds;
     }
 }
 

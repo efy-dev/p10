@@ -175,15 +175,8 @@ public class ProductController extends BaseController {
 
         if ("product".equals(step)) {
 
-//            try {
-//                Product product1 =        productManager.saveProduct(product);
-//                System.out.print(product1.getMaster().getName());
-//            }catch (Exception e){
-//
-//            }
+
             Product temProduct = productManager.saveProduct(product);
-            //  model.addAttribute("object",productManager.saveProduct(product));
-            //  &tenantId=${tenantId}&masterId=${masterId}&id=
             String tenantId = "0";
             String masterId = "0";
             if (temProduct.getTenant() != null) {

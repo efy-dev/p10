@@ -1,12 +1,15 @@
 package com.efeiyi.ec.system.product.service.impl;
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.product.model.ProductPropertyValue;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.project.model.ProjectPropertyValue;
 import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
 import org.apache.commons.beanutils.BeanUtils;
@@ -62,17 +65,33 @@ public class ProductManagerImpl implements ProductManager {
     public Product saveProduct(Product product) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-        if("".equals(product.getId())){
+            if("".equals(product.getId())){
                 product.setId(null);
                 product.setCreateDateTime(sdf.parse(sdf.format(new Date())));
 
-        }
+            }else {
+                product.setProductModelList(xdoDao.getObjectList("from ProductModel where status!='0' and product.id=?",new Object[]{product.getId()}));
+            }
             System.out.print("".equals(product.getProductDescription().getId()));
             if("".equals(product.getProductDescription().getId())){
                 product.setProductDescription(null);
             }else {
-                product.setProductDescription((ProductDescription)xdoDao.getObject(ProductDescription.class.getName(),product.getProductDescription().getId()));
+                product.setProductDescription((ProductDescription) xdoDao.getObject(ProductDescription.class.getName(), product.getProductDescription().getId()));
             }
+            if("".equals(product.getMaster().getId())){
+                product.setMaster(null);
+            }else {
+                product.setMaster((Master) xdoDao.getObject(Master.class.getName(), product.getMaster().getId()));
+            }
+            if("".equals(product.getProject().getId())){
+                product.setProject(null);
+            }else {
+                product.setProject((Project) xdoDao.getObject(Project.class.getName(), product.getProject().getId()));
+            }
+            if ("".equals(product.getTenant().getId())){
+                product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
+            }
+
 
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
@@ -82,7 +101,6 @@ public class ProductManagerImpl implements ProductManager {
 
         return product;
     }
-
 
     @Override
     public Product saveProductModel(ProductModelBean productModelBean) throws  Exception{

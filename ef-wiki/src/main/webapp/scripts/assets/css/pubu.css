@@ -2,13 +2,13 @@
 	margin:0 auto;
 	position:relative;
 }
-#pubu .box {
-	width:560px;
+#pubu #box {
+	width:100%;
 	height:auto;
 	padding:10px;
 	float:left;
 }
-#pubu .box .pic {
+#pubu #box .pic {
 	width:560px;
 	height:auto;
     box-shadow:1px 1px 4px #ddd,-1px -1px 4px #ddd;
