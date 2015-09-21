@@ -137,7 +137,7 @@
                                 <tr>
                                     <td width="542">
                                         <div class="cols1 page-pdl">
-                                            <img src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}@!product-icon" alt=""/>
+                                            <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
 
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)">
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)" style="color: black">
                     <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
@@ -195,7 +195,7 @@
 
     var payment = "1";
     var consumerAddress = "";
-    if ($(".activeFlag") != null) {
+    if (typeof $(".activeFlag").attr("id")!="undefined") {
         consumerAddress = $(".activeFlag").attr("id");
     }
 

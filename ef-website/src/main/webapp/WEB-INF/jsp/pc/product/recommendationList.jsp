@@ -11,42 +11,19 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>爆款推荐</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="<c:url value='/resources/assets/i/favicon.png'/>">
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css?v=20150831'/>">
-  <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/css/app.css?v=20150831'/>">
 </head>
 <body>
 <!-- //End--topbar-->
 <div class="hd explosion">
   <div class="details wh">
-    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" width="500" height="350"/></a></div>
+    <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot-picture" /></a></div>
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
-      <h1>${productModel.product.master.fullName}.${productModel.product.name}</h1>
+      <h1>${productModel.product.name}</h1>
       <div class="p-img">
-        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-master" target="_blank"  alt=""/></a>
+        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
         <div class="des-txt">
+          <p>${productModel.product.master.fullName}</p>
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
           <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
         </div>
@@ -72,7 +49,7 @@
   <div class="category">
     <div class="list-pro">
       <ul class="ul-item">
-        <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
+        <c:forEach items="${productModelList}" var="productModel" begin="0" end="15" varStatus="rec">
           <li>
             <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">

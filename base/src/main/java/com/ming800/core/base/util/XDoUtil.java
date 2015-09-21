@@ -33,7 +33,7 @@ public class XDoUtil {
         //默认页数索引
         pageEntity.setIndex(1);
         //默认每页显示数量
-        pageEntity.setSize(9);
+        pageEntity.setSize(12);
         if (index != null && !"".equals(index)) {
             pageEntity.setIndex(Integer.parseInt(index));
         }
@@ -117,6 +117,8 @@ public class XDoUtil {
                     paramObject = Boolean.valueOf(paramObject.toString());
                 } else if (pageField.getDataType().equals("float")) {
                     paramObject = Float.valueOf(paramObject.toString());
+                }else if (paramObject.equals("null")){
+                    continue;
                 }
 
                 if (ReflectUtil.invokeGetterMethod(object, pageField.getName()) == null) {

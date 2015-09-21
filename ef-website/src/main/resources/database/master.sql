@@ -300,6 +300,11 @@ CREATE TABLE purchase_order_business_reply (
 PRIMARY KEY (`id`)
 )
 ;
+/-----------------优惠券批次表增加图片字段------------------/
+ALTER TABLE `purchase_coupon_batch`
+ADD COLUMN `picture_url`  varchar(255) NULL AFTER `price_limit`;
+/-----------------优惠券批次表增加图片字段------------------/
+
 /---------------评价新建表-----------------------/
 /---------PurchaseOrderPoduct表添加评价状态字段----------/
 ALTER TABLE `purchase_order_product`

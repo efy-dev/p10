@@ -22,9 +22,9 @@
 </div>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">添加/编辑<ming800:status name="group" dataType="announcements.group"
-                                                                        checkedValue="${object.group}"
-                                                                        type="normal"/></strong>
+        <strong class="am-text-primary am-text-lg">添加/编辑
+            <ming800:status name="group" dataType="document.group" checkedValue='${group}' type="normal"/>
+        </strong>
     </div>
 </div>
 <hr/>

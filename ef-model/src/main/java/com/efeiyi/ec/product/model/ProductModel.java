@@ -30,9 +30,20 @@ public class ProductModel implements Serializable {
     private BigDecimal marketPrice;//市场价格
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
-//    private ProductPicture  productPicture;
+    private List<ProductPicture> productPictureList;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
+    public List<ProductPicture> getProductPictureList() {
+        return productPictureList;
+    }
+
+    public void setProductPictureList(List<ProductPicture> productPictureList) {
+        this.productPictureList = productPictureList;
+    }
+
+    //    private ProductPicture  productPicture;
 //
-@JsonIgnore
+
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "productModel")
 //    public ProductPicture getProductPicture() {
 //        return productPicture;
