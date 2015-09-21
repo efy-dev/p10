@@ -47,5 +47,10 @@ CREATE TABLE `master_comment` (
 )
 ;
 ---------------end----------------------
+-----------20150921-----------
+-----------dev-efc------------
+ALTER TABLE `master_comment`
+ADD COLUMN `praise`  varchar(20) NULL AFTER `create_datetime`;
+--------------end--------------
 
 

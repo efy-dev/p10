@@ -39,14 +39,21 @@ function getData(url){
             var pubu = $("#pubu");
             if(data.list && data.list != null){
             for(i in data.list){
-                var box = $("<div class='box'><div class='pic'><img src="+data.list[i].project.picture_url+"></div></div>");
+                //var box = $("<div class='box'><div class='pic'><img src="+data.list[i].project.picture_url+"></div></div>");
+              //alert(data.list[i].project.projectFolloweds.length);
+                var moods = data.list[i].project.projectFolloweds.length;
+                var box = $("<ul class='hot' id='box'>" +
+                    "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                    "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
+                    "<span>"+moods+"</span> " +
+                    "</div></li> </ul>");
                 pubu.append(box);
             }
             }else{
                 //alert("no data!!!");
                 return false;
             }
-            PBL("#pubu",".box",2);
+            PBL("#pubu","#box",2);
             //StartNum=StartNum+1;
         },
         error:function(){
@@ -74,7 +81,7 @@ function getData(url){
 //判断请求数据的开关
 function getDataCheck(){
     var pubu = $("#pubu");
-    var box = $(".box");
+    var box = $("#box");
     var lastboxHeight = $(box[box.length-1]).offset().top+Math.floor($(box[box.length-1]).outerHeight()/2);
     var documentHeight = $(window).height();
     var scrollTop = $(document).scrollTop();
