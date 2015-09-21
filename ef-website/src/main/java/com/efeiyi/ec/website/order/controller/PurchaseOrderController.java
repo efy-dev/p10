@@ -615,19 +615,59 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/{orderId}"})
     public String orderPay(@PathVariable String orderId, HttpServletRequest request) {
+        //从新创建支付记录详情
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String payment = purchaseOrder.getPayWay();
+
+        //生成支付记录以及支付详情
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("1");
+        try {
+            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String userid = AuthorizationUtil.getMyUser().getId();
+        User user = (User) baseManager.getObject(User.class.getName(), userid);
+        purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        //支付详情
+        if (purchaseOrder.getCoupon() != null) {
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+            purchaseOrderPaymentDetails.setCoupon(coupon);
+            purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
+            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        }
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+        if (purchaseOrder.getCoupon() != null) {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+        }else {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+        }
+        purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+        baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+
         if (payment.equals("1")) {//支付宝
-            return "redirect:/order/pay/alipay/" + purchaseOrder.getId();
+            return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
-                return "redirect:/order/pay/weixin/" + purchaseOrder.getId();
+                return "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
             } else {
-                return "redirect:/order/pay/weixin/native/" + purchaseOrder.getId();
+                return "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
         }
-        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
+        return "redirect:/order/choosePayment/" + purchaseOrderPaymentDetails.getId();
 //        return "redirect:/order/pay/alipay/callback";
     }
 
