@@ -10,6 +10,8 @@
 <!doctype html>
 <html class="no-js">
 <head>
+  <title>商品推荐专区</title>
+
 </head>
 <body>
 <%--<header class="am-header custom-header">--%>
