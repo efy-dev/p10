@@ -24,7 +24,11 @@
 
   <!-- //End--breadcrumb-->
     <div class="explain">
-        <img src="http://pro.efeiyi.com/${project.picture_url}" width="1200" height="150" alt=""/>
+        <div class="title">
+            <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
+        </div>
+        <div class="info">${project.description}</div>
+        <a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>
     </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
