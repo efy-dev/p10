@@ -74,12 +74,12 @@ a:hover {color:#f00;text-decoration:underline}
 .box-hd .list-pro li strong {width:20px;line-height:20px;position:absolute;top:100px;font-family:FangSong;color:#fff;font-style:italic;font-weight:bolder;z-index:1}
 .box-hd .list-pro li .price {position:absolute;font-family:FangSong;bottom:10px;color:#fff;z-index:2}
 .box-hd .list-pro li .price em {font-size:12px}
-.box-hd .list-pro li .price font {font-size:30px;font-family:Times New Roman;}
+.box-hd .list-pro li .price font {font-size:30px}
 .box-hd .list-pro li.odd strong {right:30px}
 .box-hd .list-pro li.even strong {left:30px}
 .box-hd .list-pro li.odd {padding-right:1px}
-.box-hd .list-pro li.odd .price {left:30px}
-.box-hd .list-pro li.even .price {right:30px}
+.box-hd .list-pro li.odd .price {right:30px}
+.box-hd .list-pro li.even .price {left:30px}
 .box-hd .list-pro li:hover {opacity:0.6;filter:alpha(opacity=60)}
 /*--//End--*/
 .box-hd .list-pep {margin-bottom:70px;overflow:hidden}
@@ -245,7 +245,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .jiathis_style .jtico_tqq {background-position:-21px 0;width:22px}
 .product-intro .itemInfo .jiathis_style .jtico_tsina {background-position:-43px 0}
 .product-intro .itemInfo .jiathis_style .jtico_cqq {background-position:-65px 0;width:22px}
-.product-intro .tab-wrap {width:1200px;height:44px;line-height:44px;padding-left:170px;position:relative;border:1px #000 solid;background:#fff;z-index:999}
+.product-intro .tab-wrap {width:1200px;height:44px;line-height:44px;margin-top:33px;padding-left:170px;position:relative;border:1px #000 solid;background:#fff;z-index:999}
 .product-intro .tab-wrap .jiathis_style {background:#7f7f7f;height:44px;float:left;padding:0 13px;position:absolute;top:-1px;left:-1px;border-right:1px #000 solid}
 .product-intro .tab-wrap .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;margin-top:10px}
 .product-intro .tab-wrap .jiathis_style .jiathis_txt {line-height:44px!important;color:#fff;font-family:simsun}
@@ -677,3 +677,9 @@ a,
     .login-wrap {height:564px}
 }
 
+::-webkit-scrollbar {width: 14px;height: 14px}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {border:10px solid transparent;  }
+::-webkit-scrollbar-track {box-shadow:2px 2px 10px rgba(0,0,0,.1) inset}
+::-webkit-scrollbar-thumb {background-clip: content-box;box-shadow: 0 0 0 10px rgba(0,0,0,.4) inset}
+::-webkit-scrollbar-corner {background: transparent}
