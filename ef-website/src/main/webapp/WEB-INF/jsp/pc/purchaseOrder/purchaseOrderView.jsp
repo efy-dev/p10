@@ -66,7 +66,7 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
-            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
+            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}${order.consumerAddress.details}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consignee}</span></p>
             <p>联系电话：<span>${order.consumerAddress.phone}</span></p>
 

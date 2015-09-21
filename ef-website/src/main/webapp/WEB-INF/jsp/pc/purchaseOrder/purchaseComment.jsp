@@ -62,7 +62,12 @@
                     </td>
                     <td width="150">
                       <div class="list-refer-3">
+                        <c:if test="${op.status}==1">
                         <P><strong>已评价</strong></P>
+                        </c:if>
+                        <c:if test="${op.status}==0">
+                          <P><strong>未评价</strong></P>
+                        </c:if>
                       </div>
                     </td>
                     <td width="120">
@@ -432,11 +437,10 @@
 <script>
 
 
-      $('.btn').each(
-              $(this).click(function(){
+      $('.btn').click(function(){
         $('.data-list').slideToggle();
-//      $('#click-btn').attr("style","display: none")
-      }))
+      $('#click-btn').attr("style","display: none")
+      })
 
 </script>
 <!--content-->

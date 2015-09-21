@@ -35,7 +35,7 @@ public class DocumentDaoHibernate implements DocumentDao{
     public  List getDocumentList(String groupName){
 
         Session session = this.getSession();
-        Query query = session.createQuery("SELECT d FROM Document d WHERE d.group = :group and d.theStatus = 1  order by d.id ")
+        Query query = session.createQuery("SELECT d FROM Document d WHERE d.group = :group and d.status = 1  order by d.id ")
                 .setString("group", groupName);
         return query.list();
 
@@ -66,7 +66,7 @@ public class DocumentDaoHibernate implements DocumentDao{
 
     @Override
     public void  removeDocument(Document document){
-        String hql = "update Document set theStatus = 0 where  id = :id";
+        String hql = "update Document set status = 0 where  id = :id";
         Query query = this.getSession().createQuery(hql)
                 .setString("id", document.getId());
         query.executeUpdate();
