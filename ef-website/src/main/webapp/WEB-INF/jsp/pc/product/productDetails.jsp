@@ -117,14 +117,6 @@
           <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买" disabled="disabled" >立即购买</a>
         </c:if>
         <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style">
-          <span class="jiathis_txt">分享到</span>
-          <a class="jiathis_button_weixin"></a>
-          <a class="jiathis_button_tqq"></a>
-          <a class="jiathis_button_tsina"></a>
-          <a class="jiathis_button_cqq"></a>
-        </div>
-        <!-- JiaThis Button END -->
       </div>
       <!-- //End-->
     </div>
