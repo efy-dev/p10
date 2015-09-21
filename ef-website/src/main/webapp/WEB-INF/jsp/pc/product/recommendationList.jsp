@@ -23,7 +23,7 @@
       <div class="p-img">
         <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
         <div class="des-txt">
-          <p>${productModel.product.master.fullName}</p>
+          <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
           <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
         </div>
