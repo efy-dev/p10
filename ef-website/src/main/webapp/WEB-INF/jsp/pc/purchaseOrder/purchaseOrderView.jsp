@@ -52,7 +52,7 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productPicture.pictureUrl}@!product-icon"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                   </ul>
                 </td>
                 <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
