@@ -196,6 +196,8 @@
                 </do>
                 <do name="direct2JspUploadAttach" access="" label="上传附件" result="/myAttachment/newAttachment">
                 </do>
+                <do name="heritageProjectForm" access="" label="添加/编辑" result="/myHeritageProject/heritageProjectForm">
+                </do>
             </does>
         </entity>
 
