@@ -10,7 +10,13 @@
 <div class="myorder">
     <div class="order-head">
         <dl>
+            <c:if test="${!empty user.pictureUrl}">
             <dt><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..." class="am-img-thumbnail"></dt>
+                </c:if>
+            <c:if test="${empty user.pictureUrl}">
+                <dt><img src="<c:url value="/scripts/images/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></dt>
+
+            </c:if>
             <c:set var="user" >
                 <%= AuthorizationUtil.getMyUser().getUsername()%>
             </c:set>
