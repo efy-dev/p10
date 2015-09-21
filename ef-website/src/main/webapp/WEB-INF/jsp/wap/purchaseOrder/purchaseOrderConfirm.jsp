@@ -47,7 +47,7 @@
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
             <c:if test="${product.isChoose==1}">
               <li>
-                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}" alt="">
+                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}" alt="">
                 <div class="bd info">
                   <p class="text">${product.productModel.product.name}</p>
                   <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>

@@ -393,7 +393,7 @@
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
-<script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
 <script>
   var selectVal;
     function temVal(obj){
@@ -433,7 +433,7 @@
     function copyInit(obj){
 
         $(obj).zclip({
-            path: "http://www.steamdev.com/zclip/js/ZeroClipboard.swf",
+            path: "<c:url value="/scripts/zclip/ZeroClipboard.swf" />",
             copy: function(){
                 return $(this).attr("url");
             },
