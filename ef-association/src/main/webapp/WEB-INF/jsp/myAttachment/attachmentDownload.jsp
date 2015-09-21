@@ -72,10 +72,9 @@
                     </c:forEach>${attachSize}</div>
             </td>
             <td>
-                <input type="checkbox" name="download">
-                <a href="<c:forEach items="${material.document.documentAttachmentList}" var="attachment">
-                        ${attachment.path}
-                        </c:forEach>"
+                <input type="checkbox" name="download" value="<c:forEach items='${material.document.documentAttachmentList}' var='attachment'>${attachment.path};</c:forEach>">
+                <a href="javascript:void(0)"
+                   onclick="downloadFileOnPage('<c:forEach items='${material.document.documentAttachmentList}' var='attachment'>${attachment.path};</c:forEach>')"
                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                         class="am-icon-trash-o"></span> 下载
                 </a>
@@ -96,7 +95,12 @@
                 <option value="2" selected="selected">已通过</option>
             </select></td>
         <td></td>
-        <td></td>
+        <td>
+            <button onclick="batchDownloadFileOnPageByCheckbox('download')"
+                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                    class="am-icon-trash-o">批量下载</span>
+            </button>
+        </td>
     </tr>
 </table>
 </div>
@@ -108,48 +112,5 @@
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>
-<script type="text/javascript">
-
-    function switchValue(tag, url, appendParam) {
-        var status = $(tag).find("option:selected").val();
-        window.location = url + "&status=" + status + appendParam;
-    }
-
-    function batchSwitchValue(option, url, resultUrl) {
-        var optionValue = $("#" + option).find("option:selected").val();
-        var statusTags = $("input[name='status']");
-        var tagList = new Array();
-        for (var x = 0; x < statusTags.length; x++) {
-            if (statusTags[x].checked) {
-                tagList.push({id: $(statusTags[x]).attr("id"), status: optionValue});
-            }
-        }
-        var json1 = JSON.stringify(tagList);
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: json1,//将对象序列化成JSON字符串
-            dataType: "json",
-            contentType: 'application/json;charset=utf-8', //设置请求头信息
-            success: function (data) {
-                window.location = resultUrl;
-            },
-            error: function (res) {
-                if (res.status == 200) {
-                    window.location = resultUrl;
-                }
-            }
-        });
-    }
-
-    function downloadAll() {
-        var url = "";
-        ${material.document.documentAttachmentList}
-        <c:forEach items="${material.document.documentAttachmentList}" var="attachment">
-        url += ${attachment.path};
-        </c:forEach>
-        window.location = url;
-    }
-</script>
 </body>
 </html>
