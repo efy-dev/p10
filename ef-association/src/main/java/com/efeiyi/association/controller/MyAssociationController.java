@@ -3,17 +3,14 @@ package com.efeiyi.association.controller;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
-import com.ming800.core.base.util.XDoUtil;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
-import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,27 +19,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/9/18.
+ * 协会概况 Controller
  */
+
 @Controller
 @RequestMapping("/myAssociation")
 public class MyAssociationController {
 
     @Autowired
     private BaseManager baseManager;
-
     @Autowired
     private DocumentManager documentManager;
-
     @Autowired
     private XdoManager xdoManager;
-
     @Autowired
     private XdoSupportManager xdoSupportManager;
-
     @Autowired
     private DoManager doManager;
 
@@ -70,7 +64,6 @@ public class MyAssociationController {
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
-
 
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
@@ -129,7 +122,6 @@ public class MyAssociationController {
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
-
 
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);

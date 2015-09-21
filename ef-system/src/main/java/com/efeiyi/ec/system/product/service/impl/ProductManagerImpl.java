@@ -155,12 +155,15 @@ public class ProductManagerImpl implements ProductManager{
                         }
 
                     } else {
-                        if ("0".equals(productModelBean.getModelStatus()[i])) {
+                        if ("0".equals(productModelBean.getModelStatus()[i])||"-1".equals(productModelBean.getModelStatus()[i])) {
                             ProductModel temp = (ProductModel)xdoDao.getObject(ProductModel.class.getName(),ids[i]);
 
                             xdoDao.deleteObject(ProductModel.class.getName(), ids[i]);
                             if(temp!=null) {
                                 deleteProductPropertyValue(ids[i]);
+                            }
+                            if("-1".equals(productModelBean.getModelStatus()[i])){
+                                j++;
                             }
                         } else if ("1".equals(productModelBean.getModelStatus()[i])) {
                             ProductModel productModel = (ProductModel) xdoDao.getObject(ProductModel.class.getName(), ids[i]);

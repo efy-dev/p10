@@ -9,29 +9,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%@include file="/layouts/public.jsp"%>
+<%@include file="/layouts/public.jsp" %>
 <html>
 <head>
     <title></title>
 </head>
 <body>
-<div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建" />
+<div style="text-align: left;margin-left: 10px;">
+    <button onclick="window.location.href='<c:url
+            value="/myDocument/newDocument.do?qm=direct2JspUploadAttach_newDocument&group=${group}&resultPage=/myAttachment/attachment.do?qm=${requestScope.qm}"/>'"
+            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>上传附件
+    </button>
 </div>
 <div class="am-g">
-    <%--<button onclick="window.location.href='<c:url--%>
-            <%--value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"--%>
-            <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建--%>
-    <%--</button>--%>
-
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
             <td>标题</td>
-            <td>图片</td>
-            <td>发布人</td>
+            <td>附件</td>
             <td>创建时间</td>
         </tr>
 
@@ -39,18 +34,16 @@
             <tr>
                 <td>
                     <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                        <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                             <button onclick="window.location.href='<c:url
-                                    value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                            <button onclick="myConfirm('<c:url value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>', 'D');"
-                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                            <button onclick="saveObject('${document.id}','<c:url value='/myDocument/saveDocument.do'/>','status',
-                                    '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
-                                    '&qm=/myDocument/doc.do?qm=${requestScope.qm}')"
-                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                <c:if test="${document.status != 1}">取消推荐</c:if>
-                                <c:if test="${document.status == 1}"><font color="green">推荐</font></c:if>
+                                    value="/myDocument/newDocument.do?qm=direct2JspUploadAttach_newDocument&group=${group}&id=${document.id}&resultPage=/myAttachment/attachment.do?qm=${requestScope.qm}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                    class="am-icon-edit"></span> 编辑
+                            </button>
+                            <button onclick="window.location.href='<c:url
+                                    value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myAttachment/attachment.do?qm=${requestScope.qm}"/>'"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                    class="am-icon-trash-o"></span> 删除
                             </button>
                             <input value="${document.id}"
                                    name="${document.id}" metaProperty="id" type="hidden"/>
@@ -77,16 +70,16 @@
                 </td>
                 <td>
                     <div name="title">${document.title}</div>
-                    <input type="hidden" id="${document.id}10" name="${document.id}" value="${document.title}" metaProperty="title">
+                    <input type="hidden" id="${document.id}10" name="${document.id}" value="${document.title}"
+                           metaProperty="title">
                 </td>
                 <td>
-                    <c:forEach items="${document.documentAttachmentList}" var="attachment">
-                        <img  id="${document.id}11" name="${document.id}" src="${attachment.path}<%=imgListCss%>">
-                    </c:forEach>
-                </td>
-                <td>
-                    <div name="name">${document.name}</div>
-                    <input type="hidden" id="${document.id}12" name="${document.id}" value="${document.name}" metaProperty="name">
+                    <c:set var="attachSize" value="0" scope="page"/>
+
+                    <div id="${document.id}11" name="${document.id}" href="${document.documentAttachmentList}">
+                        <c:forEach items="${document.documentAttachmentList}">
+                            <c:set var="attachSize" value="${attachSize = attachSize + 1}" scope="page"/>
+                        </c:forEach>${attachSize}</div>
                 </td>
                 <td>
                     <div id="${document.id}13"><fmt:formatDate value="${document.publishDate}"
@@ -96,7 +89,6 @@
         </c:forEach>
     </table>
 </div>
-<jsp:include page="/layouts/myConfirm.jsp"/>
 <div style="clear: both">
     <c:url value="/myDocument/doc.do" var="url"/>
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">

@@ -35,12 +35,6 @@
                         <item label="非遗法" value="intLaw"/>
                         <item label="非遗保护政策" value="intPolicy"/>
                         <item label="非遗申报指南" value="submissionGuide"/>
-                        <item label="申报资料下载管理" value="materialDown"/>
-                        <item label="申报资料上传管理" value="materialUpload"/>
-                        <item label="会员申请指南" value="memGuide"/>
-                        <item label="会员管理" value="userManage"/>
-                        <item label="角色管理" value="roleManagement"/>
-                        <item label="用户列表" value="userList"/>
                     </statusType>
                 </field>
             </fields>
@@ -162,24 +156,6 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMemberManagement_default"/>
             </does>
             <does>
-                <do name="plistMaterialUpload" access="" label="申报资料上传管理" result="" data="materialUpload">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="materialUpload" operation="eq"/>
-                        <condition name="status" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialUpload_default"/>
-            </does>
-            <does>
-                <do name="plistMaterialDownload" access="" label="申报资料下载管理" result="" data="materialDown">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
-                        <condition name="group" defaultValue="materialDown" operation="eq"/>
-                        <condition name="status" defaultValue="0" operation="ne"/>
-                    </query>
-                </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>
-            </does>
-            <does>
                 <do name="plistRole" access="" label="角色管理" result="" data="roleManagement">
                     <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
                         <condition name="group" defaultValue="roleManagement" operation="eq"/>
@@ -198,7 +174,29 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistRole_default"/>
             </does>
             <does>
-                <do name="direct2Jsp" access="" label="新增" result="/myDocument/newDoc">
+                <do name="plistMaterial" access="" label="项目申报管理" result="" data="submitAttach">
+                    <query name="default" label="默认" type="auto" orderBy="">
+                        <condition name="group" defaultValue="submitAttach" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeContent" label="删除" access="" result="redirect:/myDocumentAttachment/attachment.do?qm=plistMaterialUpload_default"/>
+            </does>
+            <does>
+                <do name="plistMaterial" access="" label="申报资料上传管理" result="" data="submitAttach">
+                    <query name="default" label="默认" type="auto" orderBy="">
+                        <condition name="group" defaultValue="submitAttach" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>
+            </does>
+            <does>
+                <do name="direct2Jsp" access="" label="新建" result="/myDocument/newDoc">
+                </do>
+                <do name="direct2JspUploadAttach" access="" label="上传附件" result="/myAttachment/newAttachment">
+                </do>
+                <do name="heritageProjectForm" access="" label="添加/编辑" result="/myHeritageProject/heritageProjectForm">
                 </do>
             </does>
         </entity>
@@ -269,6 +267,38 @@
                         <condition name="addressCity.id" defaultValue="" operation="eq"/>
                     </query>
                 </do>
+            </does>
+        </entity>
+
+
+        <entity name="SubmissionMaterial" label="申报材料下载" model="com.efeiyi.association.model.ApplicationMaterial">
+
+            <fields>
+                <field name="applyType" label="申请列表" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="苏绣" value="suxiu"/>
+                    </statusType>
+                </field>
+                <field name="group" label="申请类别" inputType="text">
+                    <statusType fieldName="level2">
+                        <item label="传承人申请" value="masterApply"/>
+                    </statusType>
+                </field>
+                <field name="status" label="申请状态" inputType="text">
+                    <statusType fieldName="level3">
+                        <item label="待处理" value="1"/>
+                        <item label="已通过" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
+                <do name="plistMaterialDownload" access="" label="申报资料下载管理" result="" data="attachDown">
+                    <query name="default" label="默认" type="auto" orderBy="">
+                        <condition name="document.group" defaultValue="attachDown" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>
             </does>
         </entity>
     </entities>

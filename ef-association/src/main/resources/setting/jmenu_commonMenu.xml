@@ -35,17 +35,17 @@
             </jnode>
         </jnode>
         <jnode id="IntangibleCulturalHeritageProtection" url="" access="admin,manager" text_zh_CN="非遗保护">
-            <jnode url="/myDocument/doc.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
-                <match url="/myDocument/doc.do?qm=plistLaw_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intLaw"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistLaw_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intLaw"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
-                <match url="/myDocument/doc.do?qm=plistPolicy_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intPolicy"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intPolicy"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
-                <match url="/myDocument/doc.do?qm=plistSubmissionHandbook_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=submissionGuide"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=submissionGuide"/>
             </jnode>
         </jnode>
         <!--<jnode id="IntangibleCulturalHeritage" url="" access="admin,manager" text_zh_CN="非遗名录">-->
@@ -83,11 +83,13 @@
 
     <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="在线申报管理">
         <jnode id="ProjectApplicationManagement" url="" access="admin,manager" text_zh_CN="项目申报管理">
-            <jnode url="/myDocument/doc.do?qm=plistMaterialUpload_default" access="" text_zh_CN="申报资料上传管理">
-                <match url="/myDocument/doc.do?qm=plistMaterialUpload_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=materialUpload"/>
+            <jnode url="/myAttachment/attachment.do?qm=plistMaterial_default" access="" text_zh_CN="申报材料管理">
+                <match url="/myAttachment/attachment.do?qm=plistMaterial_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistMaterialDownload_default" access="" text_zh_CN="申报资料下载管理">
+            <jnode url="/myDocument/newDocument.do?qm=direct2JspUploadAttach_newDocument&amp;group=submitAttach&amp;resultPage=/myAttachment/attachment.do?qm=plistMaterial_default" access="" text_zh_CN="申报资料上传管理">
+                <match url="/myDocument/newDocument.do?qm=direct2JspUploadAttach"/>
+            </jnode>
+            <jnode url="/myAttachment/attachmentDownload.do?qm=plistMaterialDownload_default" access="" text_zh_CN="申报资料下载管理">
                 <match url="/myDocument/doc.do?qm=plistMaterialDownload_default"/>
                 <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=materialDown"/>
             </jnode>
