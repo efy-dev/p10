@@ -131,7 +131,7 @@
     function removeProduct(divId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeProduct"/>',
+            url: '<c:url value="/product/removeProduct.do"/>',
             cache: false,
             dataType: "json",
             data:{id:divId},

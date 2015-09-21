@@ -10,6 +10,8 @@
 <!doctype html>
 <html class="no-js">
 <head>
+  <title>商品推荐专区</title>
+
 </head>
 <body>
 <%--<header class="am-header custom-header">--%>
@@ -46,7 +48,7 @@
         <p class="txt-des">${productModel.product.master.content}</p>
       </div>
       <div class="img">
-        <span><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" alt=""/></span>
+        <span><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/></span>
         <span><a href="http://${productModel.product.master.name}.efeiyi.com">查看传承人<i class="arrow-right"></i></a></span>
       </div>
     </div>
@@ -60,36 +62,22 @@
   <!-- //End-->
   <div class="bd list-class">
     <ul class="ul-list">
-      <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-      <li>
+
+      <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
         <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
-        <img src="http://pro.efeiyi.com/${productModel.productModel_url}" alt="">
+        <li>
+
+        <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
+
         <p class="name">${map.get(productModel)}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
-          </a>
+
       </li>
+        </a>
       </c:forEach>
     </ul>
   </div>
 </artice>
-
-
-<div class="login-reg">
-  <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-  <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
-<!--//End--login-reg-->
-<footer class="bd footer">
-  <div class="bd info">
-    <a class="icon"></a>
-    <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台</div>
-    <div class="wechat"></div>
-    <div class="txt">关注微信公众号</div>
-    <div class="txt">领取超值代金券</div>
-  </div>
-  <div class="bd copyright">京ICP备15032511号-1</div>
-</footer>
-<!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="../shop2015/js/jquery.min.js"></script>
