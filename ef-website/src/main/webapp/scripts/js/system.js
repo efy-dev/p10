@@ -92,7 +92,7 @@ $(function(){
         //描点
         $('.tab-items li a').click(function(){
             var pos=$($(this).attr('href')).offset().top;
-            $("html,body").animate({scrollTop:pos-75},500);
+            $("html,body").animate({scrollTop:pos},500);
             return false;
         });
         //规格选中
