@@ -35,7 +35,7 @@
 
                 <p>分享</p>
             </a>
-            <a href="#收藏" class="addfav">
+            <a onclick="getStatus(${productModel.product.id})" class="addfav">
                 <i class="icon icon-addfav"></i>
 
                 <p>收藏</p>
@@ -174,6 +174,21 @@
         <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
     </div>
 </div>
-
+<script type="text/javascript">
+    function getStatus(o) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
+            dataType: 'json',
+            success: function (data) {
+                if(data==true){
+                }
+            },
+        });
+    }
+</script>
 </body>
+
+
 </html>
