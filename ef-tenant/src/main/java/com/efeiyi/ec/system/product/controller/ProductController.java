@@ -78,45 +78,39 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/uploadify.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
         String productId = request.getParameter("productId");
-        String productModelId = request.getParameter("productModelId");
-        Product product = null;
-        ProductModel productModel = null;
-        if(productId==null&&productModelId!=null){
-            productModel = (ProductModel) baseManager.getObject(ProductModel.class.getTypeName(), productModelId);
-        }else if(productModelId==null&&productId!=null){
-            product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
-        }
+        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            String imgName = fileName.substring(0, index);
+            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
-                aliOssUploadManager.uploadFile(mf, "tenant", url);
-                if(product!=null) {
-                    productPicture.setPictureUrl(url);
-                    productPicture.setStatus("1");
-                    productPicture.setProduct(product);
-                    baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId()+":"+url;
-                }else  if(productModel!=null){
-                    productModel.setProductModel_url(url);
-                    baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
-                    data = productModel.getId()+":"+url;
-                }
-
-            }catch (Exception e){
-                 e.printStackTrace();
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                productPicture.setPictureUrl(url);
+                productPicture.setStatus(request.getParameter("status"));
+                productPicture.setProduct(product);
+                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                data = productPicture.getId() + ":" + url+":"+imgName;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }
