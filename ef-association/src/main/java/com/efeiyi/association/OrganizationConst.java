@@ -1,6 +1,13 @@
 package com.efeiyi.association;
 
 
+import com.ming800.core.util.JsonUtil;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+
+import java.util.Map;
+
 public class OrganizationConst {
 
     //branch状态
@@ -37,4 +44,17 @@ public class OrganizationConst {
     public static final Integer ROLE_SUPER_PERMISSION_FALSE = 2; //不具有超级权限
 
    public static String imgBasePath = "http://master3.efeiyi.com/";
+
+    public static void main(String[]args){
+
+//        HttpClient httpclient = new HttpClient();
+//        HttpMethod method = new GetMethod("");
+//        httpclient.executeMethod(method);
+//        String json = method.getResponseBodyAsString();
+//        System.out.println(method.getResponseBodyAsString());
+//        method.releaseConnection();
+//        Map<?, ?> ipAddressMap = JsonUtil.parseJsonStringToMap(json);
+//        String [] addresses = ((String)ipAddressMap.get("address")).split("\\|");
+//        return (String)ipAddressMap.get("address");
+    }
 }

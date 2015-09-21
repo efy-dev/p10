@@ -1,4 +1,4 @@
-package com.efeiyi.association.model;
+package com.efeiyi.ec.association.model;
 
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import org.hibernate.annotations.GenericGenerator;

@@ -1,8 +1,6 @@
 package com.efeiyi.association.controller;
 
-import com.efeiyi.association.OrganizationConst;
-import com.efeiyi.association.model.ApplicationMaterial;
-import com.efeiyi.ec.App;
+import com.efeiyi.ec.association.model.ApplicationMaterial;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -29,9 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
