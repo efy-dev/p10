@@ -307,4 +307,18 @@ function saveObject(id,url,propertyName,propertyValue,appendUrl){
     url += getData;
     window.location=url + appendUrl;
 
+    function switchStatus(){
+
+
+    }
 }
+
+function selectAll(checkStatus,tagName){
+    var someTags = document.getElementsByName(tagName);
+    for(var x=0;x<someTags.length;x++){
+        if(someTags[x].checked != null){
+            someTags[x].checked = checkStatus;
+        }
+    }
+}
+
