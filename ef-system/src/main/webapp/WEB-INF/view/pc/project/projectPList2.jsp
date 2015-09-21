@@ -15,6 +15,7 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
@@ -42,7 +43,38 @@
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistMasterWorkwiki_getProduct2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看作品</button>
                         <%--<button onclick="window.location.href='<c:url value="/basic/xm.do?qm=listMasterProject2Master_default2&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search-plus"></span> 查看大师</button>--%>
                         <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=plistProjectFollowed_default&conditions=project.id:${project.id}"/>'" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-search"></span> 查看关注</button>
+                            <c:if test="${empty project.projectRecommendeds}">
+                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                   onclick="recommended(this,1,'<c:url
+                                           value="/Recommended/deleteObjectRecommended.do"/>')"
+                                   href="#" recommend="1" recommendedId="${project.id}" id="">
+                                    <span class="am-icon-heart"> 推荐</span>
+                                </a>
 
+
+                            </c:if>
+                            <c:if test="${not empty project.projectRecommendeds}">
+                                <c:forEach var="recommended"
+                                           items="${project.projectRecommendeds}">
+                                    <c:if test="${recommended.project.id == project.id}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           href="#" onclick="recommended(this,1,'<c:url
+                                                value="/Recommended/deleteObjectRecommended.do"/>')"
+                                           recommendedId="${project.id}" id="${recommended.id}"
+                                           recommend="0">
+                                            <span class="am-icon-heart">取消推荐 </span>
+                                        </a>
+                                    </c:if>
+                                </c:forEach>
+
+                            </c:if>
+                         <span style="display: none;float: left;padding-left: 10px;">
+                                                <input type="text" name="sort" style="width: 35px;" value=""/>
+                                                <a class=" am-btn-primary"
+                                                   onclick="saveRecommended(this,'projectRecommended',1,'<c:url
+                                                           value="/Recommended/saveObjectRecommended.do"/>')"
+                                                   style="padding: 0px 10px 5px 10px"> 保存</a>
+                                       </span>
                     </div>
                 </div>
             </td>

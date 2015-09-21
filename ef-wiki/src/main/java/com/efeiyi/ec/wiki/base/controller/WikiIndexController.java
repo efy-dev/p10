@@ -1,5 +1,6 @@
 package com.efeiyi.ec.wiki.base.controller;
 
+import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.apache.log4j.Logger;
@@ -61,7 +62,15 @@ public class WikiIndexController extends WikibaseController {
      */
     @RequestMapping("/home.do")
     public ModelAndView getHotProjects( HttpServletRequest request  , Model model)throws Exception{
-        return new ModelAndView("/hotProjects/hotProjects");
+        XQuery query = new XQuery("plistProjectRecommended_default",request);
+        List<ProjectRecommended> list = baseManager.listObject(query);
+        model.addAttribute("popularProjectsList",list);
+
+        XQuery query2 = new XQuery("plistProjectRecommended_default",request);
+        query2.put("groupName","attentionProject");
+        List<ProjectRecommended> list2 = baseManager.listObject(query2);
+        model.addAttribute("attentionProjectsList",list2);
+        return new ModelAndView("/hotProjects/PopularProjects");
     }
     @RequestMapping("/getHotProjects.do")
     public List getHotProjects( HttpServletRequest request)throws Exception{
