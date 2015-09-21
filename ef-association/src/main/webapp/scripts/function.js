@@ -307,4 +307,66 @@ function saveObject(id,url,propertyName,propertyValue,appendUrl){
     url += getData;
     window.location=url + appendUrl;
 
+    function switchStatus(){
+
+
+    }
+}
+
+function selectAll(checkStatus,tagName){
+    var someTags = document.getElementsByName(tagName);
+    for(var x=0;x<someTags.length;x++){
+        if(someTags[x].checked != null){
+            someTags[x].checked = checkStatus;
+        }
+    }
+}
+
+function switchValue(tag, url, appendParam) {
+    var status = $(tag).find("option:selected").val();
+    window.location = url + "&status=" + status + appendParam;
+}
+
+function batchSwitchValue(option, url, resultUrl) {
+    var optionValue = $("#" + option).find("option:selected").val();
+    var statusTags = $("input[name='status']");
+    var tagList = new Array();
+    for (var x = 0; x < statusTags.length; x++) {
+        if (statusTags[x].checked) {
+            tagList.push({id: $(statusTags[x]).attr("id"), status: optionValue});
+        }
+    }
+    var json1 = JSON.stringify(tagList);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: json1,//将对象序列化成JSON字符串
+        dataType: "json",
+        contentType: 'application/json;charset=utf-8', //设置请求头信息
+        success: function (data) {
+            window.location = resultUrl;
+        },
+        error: function (res) {
+            if (res.status == 200) {
+                window.location = resultUrl;
+            }
+        }
+    });
+}
+
+
+function downloadFileOnPage(str) {
+    var strArray = str.split(";");
+    for(var x=0;x<strArray.length;x++){
+        window.open(strArray[x]);
+    }
+}
+
+function batchDownloadFileOnPageByCheckbox(tagName){
+    var downloadTags = $("input[name='"+ tagName +"']");
+    for (var x = 0; x < downloadTags.length; x++) {
+        if (downloadTags[x].checked) {
+            downloadFileOnPage($(downloadTags[x]).val());
+        }
+    }
 }

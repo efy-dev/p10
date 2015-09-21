@@ -30,18 +30,19 @@ public class toFormProductHandler implements DoHandler {
         modelMap.put("view",request.getParameter("view"));
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
         modelMap.put("tenantId",request.getParameter("tenantId"));
-     //   modelMap.put("tenant", AuthorizationUtil.getMyUser().getBigTenant().getName());
         XQuery xQuery = new XQuery("listTenantMaster_default",request);//
+        xQuery.put("tenant_id",request.getParameter("tenantId"));
         List<TenantMaster> masterList = baseManager.listObject(xQuery);//大师
         modelMap.put("masterList",masterList);
         xQuery = new XQuery("listMasterProject_default",request);
         xQuery.put("master_id",request.getParameter("masterId"));
         List<MasterProject> projectList = baseManager.listObject(xQuery);//项目
         modelMap.put("projectList",projectList);
-//        xQuery = new XQuery("listTenant_product",request);//商家
-//        List<Tenant> tenantList = baseManager.listObject(xQuery);
-//        modelMap.put("tenantList",tenantList);
+        xQuery = new XQuery("listTenant_product",request);//商家
+        List<Tenant> tenantList = baseManager.listObject(xQuery);
+        modelMap.put("tenantList",tenantList);
         xQuery = new XQuery("listTenantProject_default",request);//商家项目
+        xQuery.put("tenant_id",request.getParameter("tenantId"));
         List<TenantProject> tenantProjectList = baseManager.listObject(xQuery);
         modelMap.put("tenantProjectList",tenantProjectList);
 

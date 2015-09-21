@@ -28,7 +28,7 @@
     <c:forEach items="${intangibleCulturalOrganizationList}" var="organization">
       <tr>
         <td>
-            <button onclick="window.location.href='<c:url value="/myDocument/newOrganization.do?qm=direct2JspOrganization_newOrganization&group=${group}&id=${organization.id}&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
+            <button onclick="window.location.href='<c:url value="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&group=${group}&id=${organization.id}&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 编辑</button>
             <button onclick="window.location.href='<c:url value="/myDocument/removeDocument.do?qm=removeContent&id=${organization.id}"/>'"
                   class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
