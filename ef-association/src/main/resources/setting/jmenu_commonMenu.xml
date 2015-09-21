@@ -35,17 +35,17 @@
             </jnode>
         </jnode>
         <jnode id="IntangibleCulturalHeritageProtection" url="" access="admin,manager" text_zh_CN="非遗保护">
-            <jnode url="/myDocument/doc.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
-                <match url="/myDocument/doc.do?qm=plistLaw_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intLaw"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistLaw_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intLaw"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
-                <match url="/myDocument/doc.do?qm=plistPolicy_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intPolicy"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intPolicy"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
-                <match url="/myDocument/doc.do?qm=plistSubmissionHandbook_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=submissionGuide"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=submissionGuide"/>
             </jnode>
         </jnode>
         <!--<jnode id="IntangibleCulturalHeritage" url="" access="admin,manager" text_zh_CN="非遗名录">-->

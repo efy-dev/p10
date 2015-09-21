@@ -200,6 +200,8 @@
             <does>
                 <do name="direct2Jsp" access="" label="新增" result="/myDocument/newDoc">
                 </do>
+                <do name="heritageProjectForm" access="" label="添加/编辑" result="/myHeritageProject/heritageProjectForm">
+                </do>
             </does>
         </entity>
 
