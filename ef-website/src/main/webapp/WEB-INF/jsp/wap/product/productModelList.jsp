@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>商品列表</title>
+    <title>${project.name}</title>
 </head>
 <body>
 <artice class="custom">
@@ -19,8 +19,8 @@
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价格">价格</a></li>
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="新品">新品</a></li>
         </ul>
-
-        <c:if test="${productModelList.size()>0}">
+        <div class="list-ad1"><a href=""><img src="http://pro.efeiyi.com/${project.picture_url}" alt=""/></a></div>
+         <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
                     <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
