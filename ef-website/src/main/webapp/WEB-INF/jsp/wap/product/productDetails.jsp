@@ -17,6 +17,7 @@
 <article class="custom">
     <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
         <ul class="am-slides">
+            <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-pic"></li>
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
                 <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
             </c:forEach>
@@ -34,7 +35,7 @@
 
                 <p>分享</p>
             </a>
-            <a href="#收藏" class="addfav">
+            <a onclick="getStatus(${productModel.product.id})" class="addfav">
                 <i class="icon icon-addfav"></i>
 
                 <p>收藏</p>
@@ -132,7 +133,7 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="/tenantOfMobile/view?tenantId=${productModel.product.tenant.id}" title="进店">进店</a>
+        <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
         <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
                 class="icon"></i>放入购物车</a>
@@ -173,6 +174,21 @@
         <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
     </div>
 </div>
-
+<script type="text/javascript">
+    function getStatus(o) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
+            dataType: 'json',
+            success: function (data) {
+                if(data==true){
+                }
+            },
+        });
+    }
+</script>
 </body>
+
+
 </html>

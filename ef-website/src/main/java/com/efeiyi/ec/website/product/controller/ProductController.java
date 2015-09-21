@@ -108,20 +108,23 @@ public class ProductController {
     @RequestMapping({"/hot/{productModelId}"})
     public String recommendation(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
-        List<ProductModel> productModelList  = productModel.getProduct().getProductModelList();
+        Project project = productModel.getProduct().getProject();
+        XQuery xQuery = new XQuery("listProductModel_default",request);
+        xQuery.put("product_project_id", project.getId());
+        List<Object> productModelList =  baseManager.listObject(xQuery);
         Map<ProductModel,String> map = new HashMap<>();
         if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModelTemp:productModelList){
+            for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(productModelTemp.getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:productModelTemp.getProductPropertyValueList()){
+                s.append(((ProductModel) productModelTemp).getProduct().getName());
+                for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
                 if(s.length()>14){
                     s = new StringBuilder(s.substring(0,14));
                     s.append("...");
                 }
-                map.put(productModelTemp,s.toString());
+                map.put((ProductModel)productModelTemp,s.toString());
             }
         }
         model.addAttribute("productModelList", productModelList);

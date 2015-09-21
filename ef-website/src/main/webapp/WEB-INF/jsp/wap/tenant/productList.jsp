@@ -8,14 +8,14 @@
 <artice class="custom">
   <div data-am-widget="slider" class="am-slider am-slider-a1 details-shop-slider" data-am-slider='{"directionNav":false}' >
     <ul class="am-slides">
-      <li><img src="<c:url value="/scripts/wap/upload/details-shop-slider-exp1.jpg"/>"></li>
+      <li><img src="<c:url value="http://pro.efeiyi.com/${tenant.pictureUrl}"/>"></li>
     </ul>
   </div>
   <!-- //End--slider-->
   <div class="details-shop-des">
     <div class="bd details-shop">
       <div class="bd s-part s-part2">
-        <div class="img"><img src="<c:url value="/scripts/wap/upload/shop-details-exp2.jpg"/>" width="80" alt=""/></div>
+        <div class="img"><img src="<c:url value="http://pro.efeiyi.com/${tenant.logoUrl}"/>" width="80" alt=""/></div>
         <div class="bd txt">
           <p>${tenant.name}</p>
           <p>200人关注</p>
@@ -29,13 +29,15 @@
         <li><a href="#热门分类" title="热门分类">热门分类</a></li>
         <li><a href="#店铺详情" title="店铺详情">店铺详情</a></li>
       </ul>
-      <h3 class="title">欢迎语欢迎语欢迎语欢迎语欢迎语欢迎语</h3>
+      <h3 class="title">欢迎</h3>
       <ul class="ul-list">
         <c:forEach items="${productModelList}" var="productModel">
           <li>
-            <img src="<c:url value="${productModel.productPicture.pictureUrl}"/>" alt="">
+            <a href="/product/productModel/${productModel.id}">
+            <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}"/>" alt="">
             <p class="name">${productModel.name}</p>
             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
+            </a>
           </li>
         </c:forEach>
       </ul>

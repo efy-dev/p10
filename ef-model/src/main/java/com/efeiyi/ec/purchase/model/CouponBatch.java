@@ -26,6 +26,16 @@ public class CouponBatch implements Serializable{
     private String status;//批次装填
     private Integer isCreatedCoupon;//是否创建了优惠券
     private Float priceLimit;//使用限制价格 比如满100用
+    private String pictureUrl;//优惠券图片
+
+    @Column(name = "picture_url")
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

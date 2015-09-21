@@ -310,28 +310,63 @@ public class ProductController extends BaseController {
         return id;
     }
 
+    @RequestMapping("/removeProduct.do")
+    @ResponseBody
+    public String removeProduct(String id,HttpServletRequest request) {
+        try {
+            baseManager.remove(ProductPicture.class.getName(), id);
+            XQuery xQuery = new XQuery("listProductModel_default5",request);
+            xQuery.put("product_id",id);
+            for(ProductModel productModel : (List<ProductModel>)baseManager.listObject(xQuery)){
+                baseManager.remove(ProductModel.class.getName(),productModel.getId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
     @RequestMapping("/updatePicture.do")
     @ResponseBody
-    public String updateModelPicture(String id, String status,String productId,HttpServletRequest request) {
+    public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
+
+        ProductModel tempProductModel = null;
         try {
+
+            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
+            if("0".equals(modelId)){
+                XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
+                productModelXQuery.put("product_id",productId);
+                tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
+
+            }else {
+                tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+            }
             if("2".equals(status)){
-              XQuery xQuery = new XQuery("listProductPicture_default2",request);
+
+                tempProductModel.setProductModel_url(productPicture.getPictureUrl());
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                XQuery xQuery = new XQuery("listProductPicture_default2",request);
                 xQuery.put("product_id",productId);
+                xQuery.put("productModel_id",tempProductModel.getId());
                 List<ProductPicture> pictures = baseManager.listObject(xQuery);
                 if(pictures.size()!=0){
                     ProductPicture picture = pictures.get(0);
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
+            }else {
+                tempProductModel.setProductModel_url(null);
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
             }
 
-            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
+
             productPicture.setStatus(status);
+            productPicture.setProductModel(tempProductModel);
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return modelId;
     }
 
     @RequestMapping("/linkTenant.do")
@@ -391,7 +426,7 @@ public class ProductController extends BaseController {
         try {
             productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
             if ("0".equals(modelId)) {
-                productPicture.setProductModel(null);
+//                productPicture.setProductModel(null);
             } else {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
                 productModel.setProductModel_url(productPicture.getPictureUrl());
@@ -402,7 +437,7 @@ public class ProductController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pictureId;
+        return modelId;
     }
 
 

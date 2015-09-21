@@ -43,11 +43,11 @@
             <ul class="ul-index-list">
                 <c:forEach items="${recommendMap.get(project.id)}" var="product" varStatus="status" begin="0" end="3">
                     <li>
-                        <a href="<c:url value="/product/hot/${product.id}"/>" title="">
-                            <img src="<c:url value="http://pro.efeiyi.com/${product.productModel_url}@!home-product"/>"
+                        <a href="<c:url value="/product/hot/${product.productModel.id}"/>" title="">
+                            <img src="<c:url value="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"/>"
                                  alt=""/>
-                            <em class="name">${product.product.name}</em>
-                            <span class="price"><i>￥</i><strong>${product.price}</strong></span>
+                            <em class="name">${product.productModel.product.name}</em>
+                            <span class="price"><i>￥</i><strong>${product.productModel.price}</strong></span>
                         </a>
                     </li>
                 </c:forEach>
