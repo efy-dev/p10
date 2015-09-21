@@ -35,13 +35,17 @@ public class CouponController {
      */
     @RequestMapping({"/coupon/list"})
     public String listCoupon(HttpServletRequest request , Model model) throws Exception{
+        if(AuthorizationUtil.getMyUser().getId() != null){
+            XQuery couponQuery = new XQuery("listCoupon_default", request);
+            List<Object> couponList = baseManager.listObject(couponQuery);
 
-        XQuery couponQuery = new XQuery("listCoupon_default", request);
-        List<Object> couponList = baseManager.listObject(couponQuery);
+            model.addAttribute("couponList",couponList);
 
-        model.addAttribute("couponList",couponList);
+            return "/purchaseOrder/couponList";
+        }else {
+            return "redirect:/sso.do";
+        }
 
-        return "/purchaseOrder/couponList";
 
     }
 
