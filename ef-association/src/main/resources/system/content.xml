@@ -23,7 +23,7 @@
         <entity name="document" label="新闻公告"  model="com.ming800.core.p.model.Document">
             <fields>
                 <field name="group" label="分类" inputType="text">
-                    <statusType fieldName="level">
+                    <statusType fieldName="group">
                         <!--<item label="非遗项目" value="project"/>-->
                         <!--<item label="非遗传承人" value="inheritors"/>-->
                         <item label="协会新闻" value="orgNews"/>
@@ -268,17 +268,17 @@
 
             <fields>
                 <field name="applyType" label="申请列表" inputType="text">
-                    <statusType fieldName="level">
+                    <statusType fieldName="applyType">
                         <item label="苏绣" value="suxiu"/>
                     </statusType>
                 </field>
                 <field name="group" label="申请类别" inputType="text">
-                    <statusType fieldName="level2">
+                    <statusType fieldName="group">
                         <item label="传承人申请" value="masterApply"/>
                     </statusType>
                 </field>
                 <field name="status" label="申请状态" inputType="text">
-                    <statusType fieldName="level3">
+                    <statusType fieldName="status">
                         <item label="待处理" value="1"/>
                         <item label="已通过" value="2"/>
                     </statusType>

@@ -50,6 +50,7 @@
                     result="redirect:/basic/xm.do?qm=plistProjectCategory_default"
                     execute="com.efeiyi.ec.system.project.controller.ProjectCategoryFormHandler"/>
                 <do name="viewProjectCategory" label="查看" access="" result="/projectCategory/projectCategoryView"/>
+                <do name="viewNoProjectCategory" label="查看" access="" result="/projectCategory/projectCategoryView"/>
                 <do name="listProjectCategory" label="category列表" access=""
                     result="/projectCategory/projectCategoryList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
@@ -145,6 +146,13 @@
                     <query name="name" label="项目名称" type="auto" orderBy="serial:asc">
                         <condition label="项目名称" name="name" operation="eq" inputType="text"/>
                     </query>
+                </do>
+                <do name="listProject3" label="project列表" access="" result="/projectCategory/projectIncludeList">
+                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
+                        <condition label="project主键" name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition label="类别id" name="projectCategory.id" defaultValue="0" operation="eq" inputType="default"/>
+                    </query>
+
                 </do>
                 <do name="viewProjectwiki" label="查看" access="" execute="com.efeiyi.ec.system.project.controller.MasterProjectHander" result="/project/projectView2"   />
             </does>
