@@ -8,9 +8,11 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +41,9 @@ public class MyAssociationController {
     private XdoSupportManager xdoSupportManager;
     @Autowired
     private DoManager doManager;
-
+    @Autowired
+    @Qualifier("autoSerialManager")
+    private AutoSerialManager autoSerialManager;
     @RequestMapping("/assContact.do")
     public Document getAssContact(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
@@ -91,6 +95,7 @@ public class MyAssociationController {
             document.setTheDatetime(new Date());
             document.setStatus("1");
             document.setPublishDate(new Date());
+            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
         }
 
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());

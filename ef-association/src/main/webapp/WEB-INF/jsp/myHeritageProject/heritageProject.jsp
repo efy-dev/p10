@@ -71,7 +71,7 @@
                     </td>
                 </c:if>
                 <td>
-                    <fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>
+                    <fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd"/>
                 </td>
             </tr>
         </c:forEach>

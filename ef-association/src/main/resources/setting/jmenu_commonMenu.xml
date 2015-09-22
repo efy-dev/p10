@@ -63,10 +63,14 @@
             <jnode url="/myDocument/organization.do?qm=plistCommitteeAssociation_default" access="" text_zh_CN="委员会名录管理">
                 <match url="/myDocument/organization.do?qm=plistCommitteeAssociation_default"/>
                 <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_newOrganization&amp;group=committeeAss"/>
+                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&amp;group=committeeAss"/>
+
             </jnode>
             <jnode url="/myDocument/organization.do?qm=plistAssociation_default" access="" text_zh_CN="各地协会名录管理">
                 <match url="/myDocument/organization.do?qm=plistAssociation_default"/>
                 <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_newOrganization&amp;group=association"/>
+                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&amp;group=association"/>
+
             </jnode>
         </jnode>
         <jnode id="MemberManagement" url="" access="admin,manager" text_zh_CN="会员管理">

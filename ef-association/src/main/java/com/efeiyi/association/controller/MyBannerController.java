@@ -11,6 +11,7 @@ import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.p.service.AliOssUploadManager;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.ApplicationContextUtil;
@@ -55,6 +56,10 @@ public class MyBannerController {
     @Autowired
     @Qualifier("aliOssUploadManagerImpl")
     private AliOssUploadManager aliOssUploadManager;
+
+    @Autowired
+    @Qualifier("autoSerialManager")
+    private AutoSerialManager autoSerialManager;
 
     /**
      * 通过模块ID获取相关模块的轮播图（状态为可用）的所有对象
@@ -109,15 +114,13 @@ public class MyBannerController {
      * @return
      */
     @RequestMapping(value = "/saveBanner.do", method = RequestMethod.POST)
-    public ModelAndView saveBanner(@RequestParam(value = "image") MultipartFile multipartFile, HttpServletRequest request, Banner banner) throws IOException {
+    public ModelAndView saveBanner(@RequestParam(value = "image") MultipartFile multipartFile, HttpServletRequest request, Banner banner) throws Exception {
 
         String path = request.getParameter("qm");
         //新建内容
         if (banner.getId() == null || "".equals(banner.getId())) {
             banner.setStatus("1");
             banner.setId(null);
-        }
-        if(banner.getImageUrl() == null || "".equals(banner.getId())){
             banner.setImageUrl(null);
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");

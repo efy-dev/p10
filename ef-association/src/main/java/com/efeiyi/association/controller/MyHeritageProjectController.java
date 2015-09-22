@@ -9,6 +9,7 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.p.model.DocumentAttachment;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.htmlparser.Node;
@@ -18,6 +19,7 @@ import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.tags.ImageTag;
 import org.htmlparser.util.NodeList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +50,9 @@ public class MyHeritageProjectController {
     private XdoSupportManager xdoSupportManager;
     @Autowired
     private DoManager doManager;
-
+    @Autowired
+    @Qualifier("autoSerialManager")
+    private AutoSerialManager autoSerialManager;
     @RequestMapping("/heritageProject.do")
     public List<Document> getDocByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
@@ -111,6 +115,7 @@ public class MyHeritageProjectController {
             document.getDocumentContent().setId(null);
             document.setStatus("1");
             document.setPublishDate(new Date());
+            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
         }else{
             documentManager.deleteDocument(document);
             document.setId(null);
