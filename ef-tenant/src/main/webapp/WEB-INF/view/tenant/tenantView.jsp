@@ -9,6 +9,10 @@
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>详细信息</h2>
+
+        <div style="margin-bottom: 10px;">
+            <a type="button" class="am-btn am-btn-default am-btn-xs" href="<c:url value="/basic/xm.do?qm=formTenant&id=${object.id}"/>">修改</a>
+        </div>
         <table class="am-table am-table-bordered">
             <tbody>
             <tr>
