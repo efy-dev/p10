@@ -139,6 +139,7 @@ public class CartController {
         if (list1.size() > 0) {
             for (CartProduct cartProductTemp : list1) {
                 CartProduct cartProduct = cartProductTemp;
+                cartProduct.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProduct.getProductModel().getId()));
                 if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         if (cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")) < cartProduct.getProductModel().getAmount()) {
