@@ -98,14 +98,15 @@
 
     <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="权限管理">
         <jnode id="UserManagement" url="" access="admin,manager" text_zh_CN="用户管理">
-            <jnode url="/myDocument/doc.do?qm=plistUser_default" access="" text_zh_CN="用户列表">
-                <match url="/myDocument/doc.do?qm=plistUser_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=userList"/>
+            <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">
+                <match url="/basic/xm.do?qm=plistUser_default"/>
+                <match url="/basic/xm.do?qm=formUser"/>
+                <match url="/basic/xm.do?qm=viewUser&amp;user=user"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistRole_default" access="" text_zh_CN="角色管理">
-                <match url="/myDocument/doc.do?qm=plistRole_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=roleManagement"/>
-            </jnode>
+            <!--<jnode url="/myDocument/doc.do?qm=plistRole_default" access="" text_zh_CN="角色管理">-->
+                <!--<match url="/myDocument/doc.do?qm=plistRole_default"/>-->
+                <!--<match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=roleManagement"/>-->
+            <!--</jnode>-->
         </jnode>
     </jnode>
 </jmenu>
