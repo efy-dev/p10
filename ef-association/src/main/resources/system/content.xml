@@ -7,7 +7,7 @@
         <entity name="listPCBanner" label="顶部轮播图管理"  model="com.ming800.core.p.model.Banner">
             <does>
                 <do name="listPCBanner" access="" label="顶部轮播图管理" result="">
-                    <query name="default" label="默认" type="auto" orderBy="">
+                    <query name="default" label="默认" type="auto" orderBy="bannerOrder">
                         <condition name="group" defaultValue="banner" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -60,7 +60,7 @@
             <!--</does>-->
             <does>
                 <do name="plistNewsOrganization" access="" label="协会新闻" result="" data="orgNews">
-                    <query name="organization" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="organization" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="orgNews" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -69,7 +69,7 @@
             </does>
             <does>
                 <do name="plistNewsIndustry" access="" label="行业新闻" result="" data="industryNews">
-                    <query name="industry" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="industry" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="industryNews" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -78,7 +78,7 @@
             </does>
             <does>
                 <do name="plistNewsNote" access="" label="公告管理" result="" data="noticeManage">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="noticeManage" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -87,7 +87,7 @@
             </does>
             <does>
                 <do name="plistAssociationIntroduction" access="" label="协会介绍" result="" data="assIntro">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="assIntro" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -95,7 +95,7 @@
             </does>
             <does>
                 <do name="plistStatute" access="" label="协会章程" result="" data="assStatute">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="assStatute" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -103,7 +103,7 @@
             </does>
             <does>
                 <do name="plistContact" access="" label="联系方式" result="" data="assContact">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="assContact" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -119,7 +119,7 @@
             </does>
             <does>
                 <do name="plistPolicy" access="" label="非遗保护政策" result="" data="intPolicy">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="intPolicy" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -127,7 +127,7 @@
             </does>
             <does>
                 <do name="plistSubmissionHandbook" access="" label="非遗申报指南" result="" data="submissionGuide">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="submissionGuide" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -135,7 +135,7 @@
             </does>
             <does>
                 <do name="plistMemberGuide" access="" label="会员申请指南" result="" data="memGuide">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="memGuide" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -143,7 +143,7 @@
             </does>
             <does>
                 <do name="plistMemberManagement" access="" label="会员管理" result="" data="memManagement">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="memManagement" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -151,7 +151,7 @@
             </does>
             <does>
                 <do name="plistRole" access="" label="角色管理" result="" data="roleManagement">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="roleManagement" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -160,7 +160,7 @@
             </does>
             <does>
                 <do name="plistUser" access="" label="用户列表" result="" data="userList">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="userList" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -169,7 +169,7 @@
             </does>
             <does>
                 <do name="plistMaterial" access="" label="项目申报管理" result="" data="submitAttach">
-                    <query name="default" label="默认" type="auto" orderBy="">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="submitAttach" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
@@ -178,7 +178,7 @@
             </does>
             <does>
                 <do name="plistMaterial" access="" label="申报资料上传管理" result="" data="submitAttach">
-                    <query name="default" label="默认" type="auto" orderBy="">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="submitAttach" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>

@@ -57,9 +57,9 @@
                                    name="${document.id}" metaProperty="keywords" type="hidden"/>
                             <input value="${document.sampleContent}"
                                    name="${document.id}" metaProperty="sampleContent" type="hidden"/>
-                            <input value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd HH:mm"/>"
+                            <input value="<fmt:formatDate value="${document.theDatetime}" pattern="yyyy-MM-dd"/>"
                                    name="${document.id}" metaProperty="theDatetime" type="hidden"/>
-                            <input value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
+                            <input value="<fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd"/>"
                                    name="${document.id}" metaProperty="publishDate" type="hidden"/>
                             <input value="${document.status}"
                                    name="${document.id}" type="hidden" metaProperty="status"/>
@@ -85,7 +85,7 @@
                 </td>
                 <td>
                     <div id="${document.id}13"><fmt:formatDate value="${document.publishDate}"
-                                                               pattern="yyyy-MM-dd HH:mm"/></div>
+                                                               pattern="yyyy-MM-dd"/></div>
                 </td>
             </tr>
         </c:forEach>
