@@ -29,8 +29,8 @@
                     <th class="table-title">发货记录编号</th>
                     <th class="table-title">订单号</th>
                     <th class="table-title">发货状态</th>
-                    <th class="table-title">发送日期</th>
                     <th class="table-title">物流公司</th>
+                    <th class="table-title">发送日期</th>
                     <th class="table-title">发送地址</th>
                 </tr>
                 </thead>
@@ -52,9 +52,10 @@
                                             checkedValue="${purchaseOrderDelivery.status}"
                                             type="normal"/>
                         </td>
+                        <td class="am-hide-sm-only">${purchaseOrderDelivery.logisticsCompany}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                                                     type="both" pattern="yyyy-MM-dd HH:mm"/></td>
-                        <td class="am-hide-sm-only">${purchaseOrderDelivery.logisticsCompany}</td>
+
                         <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}</td>
                     </tr>
                 </c:forEach>

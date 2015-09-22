@@ -53,8 +53,9 @@ public class MyHeritageProjectController {
     private XdoSupportManager xdoSupportManager;
     @Autowired
     private DoManager doManager;
+
     @RequestMapping("/heritageProject.do")
-    public List<Document> getDocByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public List<Document> getHeritageProjectByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
@@ -116,7 +117,6 @@ public class MyHeritageProjectController {
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
-            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
         }else{
             documentManager.deleteDocument(document);
             document.setId(null);
