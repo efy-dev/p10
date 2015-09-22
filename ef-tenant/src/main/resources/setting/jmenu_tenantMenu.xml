@@ -60,6 +60,12 @@
         </jnode>
         -->
         <jnode id="accountManager" url="" text_zh_CN="账号管理"><!--系统管理-->
+            <jnode id="" url="/tenant/viewTenant.do" state="" extend="" access="" text_zh_CN="基本信息">
+                <match url="/tenant/viewTenant.do"/>
+                <match url="/basic/xm.do?qm=viewTenant"/>
+                <match url="/basic/xm.do?qm=plistTMaster_default"/>
+                <match url="/basic/xm.do?qm=plistTProject_default"/>
+            </jnode>
             <jnode id="" url="/tenantType/sendTenantTypePage.do" state="" extend="" access="" text_zh_CN="提交信息">
                 <match url=""/>
             </jnode>
