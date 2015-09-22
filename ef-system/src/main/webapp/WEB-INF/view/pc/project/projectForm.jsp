@@ -82,7 +82,7 @@
         </div>
 
         <div class="am-form-group">
-            <label for="picture_url" class="am-u-sm-3 am-form-label">项目图片</label>
+            <label for="picture_url" class="am-u-sm-3 am-form-label">项目图片(PC)</label>
 
             <div class="am-u-sm-9">
                 <span style="padding: 10px;">
@@ -93,6 +93,20 @@
                 <input type="file" id="picture_url" name="picture_url" placeholder="picture_url"
                        value="${object.picture_url}">
             </div>
+
+
+            <div class="am-form-group">
+                <label for="picture_wap_url" class="am-u-sm-3 am-form-label">项目图片(WAP)</label>
+
+                <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.picture_wap_url}">
+                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_wap_url}@!product-model">
+                       </c:if>
+                </span>
+                    <input type="file" id="picture_wap_url" name="picture_wap_url" placeholder="picture_wap_url"
+                           value="${object.picture_wap_url}">
+                </div>
 
         </div>
         <div class="am-form-group">
