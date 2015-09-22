@@ -55,7 +55,7 @@
     function removeTenantMaster(tenantId,masterId,tenantMasterId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/master//linkTenant.do"/>',
+            url: '<c:url value="/tenant/linkMaster.do"/>',
             cache: false,
             dataType: "json",
             data:{tenantId:tenantId,masterId:masterId,tenantMasterId:tenantMasterId,status:"1"},
