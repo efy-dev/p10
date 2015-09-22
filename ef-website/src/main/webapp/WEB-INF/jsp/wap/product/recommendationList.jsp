@@ -47,9 +47,14 @@
         <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
         <p class="txt-des">${productModel.product.master.content}</p>
       </div>
+
       <div class="img">
-        <span><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/></span>
-        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>"   >查看传承人<i class="arrow-right"></i></a></span>
+        <span>
+           <a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>">
+          <img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/>
+           </a>
+        </span>
+        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看传承人<i class="arrow-right"></i></a></span>
       </div>
     </div>
     <!-- //End--pep-info-->

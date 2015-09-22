@@ -457,7 +457,9 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderTemp.setTenant(tenantTemp);
                 BigDecimal bigDecimal = new BigDecimal(0);
                 for (CartProduct cartProductTemp : cartProductList) {
-
+                    if (cartProductTemp.getProductModel().getProduct()==null){
+                        cartProductTemp.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId()));
+                    }
                     if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId()) && cartProductTemp.getIsChoose().equals("1")) {
                         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
                         purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());

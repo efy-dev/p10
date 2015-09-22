@@ -120,10 +120,6 @@ public class ProductController {
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
-                if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
-                    s.append("...");
-                }
                 map.put((ProductModel)productModelTemp,s.toString());
             }
         }
