@@ -53,7 +53,7 @@
                value="${object.sampleContent}">
 
         <div class="am-form-group">
-            <label name="标题" for="title" class="am-u-sm-3 am-form-label">title
+            <label name="标题" for="title" class="am-u-sm-3 am-form-label">标题
                 <small>*</small>
             </label>
 
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="发布人" for="name" class="am-u-sm-3 am-form-label">name
+            <label name="发布人" for="name" class="am-u-sm-3 am-form-label">发布人
                 <small>&nbsp;&nbsp;</small>
             </label>
 

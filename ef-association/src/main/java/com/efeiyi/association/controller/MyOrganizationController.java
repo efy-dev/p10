@@ -36,7 +36,7 @@ public class MyOrganizationController {
         }
         baseManager.saveOrUpdate(intangibleCulturalOrganization.getClass().getName(),intangibleCulturalOrganization);
 
-        return /*request.getContextPath() +*/ path;
+        return request.getContextPath() + path;
     }
 
     @RequestMapping("/removeOrganization.do")
@@ -46,6 +46,6 @@ public class MyOrganizationController {
 
         baseManager.remove(organization.getClass().getName(), organization.getId());
 
-        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
+        return new ModelAndView("redirect:" + request.getContextPath() + path);
     }
 }
