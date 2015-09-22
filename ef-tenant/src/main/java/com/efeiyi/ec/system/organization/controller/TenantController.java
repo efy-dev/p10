@@ -1,16 +1,23 @@
 package com.efeiyi.ec.system.organization.controller;
 
+import com.efeiyi.ec.master.model.Master;
 import com.efeiyi.ec.organization.model.Permission;
 import com.efeiyi.ec.organization.model.Role;
+import com.efeiyi.ec.system.organization.service.TenantManager;
+import com.efeiyi.ec.system.organization.util.AuthorizationUtil;
+import com.efeiyi.ec.tenant.model.BigTenant;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Module;
 import com.ming800.core.does.service.ModuleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -25,10 +32,58 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/Register")
+@RequestMapping("/tenant")
 public class TenantController extends BaseController {
 
+    @Autowired
+    private TenantManager tenantManager;
+
+    @RequestMapping("/viewTenant.do")
+    public String viewTenant(Model model){
+        BigTenant tenant = (BigTenant) AuthorizationUtil.getMyUser().getBigTenant();
+
+        return "redirect:/basic/xm.do?qm=viewTenant&id="+tenant.getId();
+    }
+
+    @RequestMapping("/linkMaster.do")
+    @ResponseBody
+    public String linkMaster(String tenantId,String masterId,String tenantMasterId,String status){
+        TenantMaster tenantMaster = null;
+        try {
+            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
+            if(tenantMaster == null){
+                tenantMaster = new TenantMaster();
+                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
+                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
+                tenantMaster.setStatus("1");
+            }else {
+                if("0".equals(status)){
+                    tenantMaster.setStatus("1");
+                }
+                if("1".equals(status)){
+                    tenantMaster.setStatus("0");
+                }
+            }
+            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
 
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  tenantMaster.getId();
+    }
+
+    @RequestMapping("/linkProject.do")
+    @ResponseBody
+    public String linkProject(String tenantId,String projectId,String tenantProjectId,String status){
+        String id = "";
+        try {
+
+            id =  tenantManager.linkProject(tenantId,projectId,tenantProjectId,status);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
 
 }
