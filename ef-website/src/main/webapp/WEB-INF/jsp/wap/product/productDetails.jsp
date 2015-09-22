@@ -138,7 +138,7 @@
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
             <a class="btn-cart" data-am-modal="{target: '#my-actions'}" title="放入购物车"><i
                     class="icon"></i>放入购物车</a>
-        <a class="btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买">立即购买</a>
+        <a class="btn-buy"data-am-modal="{target: '#my-actions'}" title="立即购买">立即购买</a>
     </div>
 </article>
 

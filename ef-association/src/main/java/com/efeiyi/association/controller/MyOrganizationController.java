@@ -2,7 +2,6 @@ package com.efeiyi.association.controller;
 
 import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.p.model.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

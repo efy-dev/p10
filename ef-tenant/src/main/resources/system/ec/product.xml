@@ -111,6 +111,11 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
+                    </query>
                 </do>
 
             </does>
