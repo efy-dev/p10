@@ -201,27 +201,85 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/deletePicture.do")
     @ResponseBody
-    public String deletePicture(String id){
-         try {
-            baseManager.delete(ProductPicture.class.getName(),id);
-         }catch (Exception e){
-              e.printStackTrace();
-         }
-        return  id;
-    }
-
-    @RequestMapping("/updatePicture.do")
-    @ResponseBody
-    public String updateModelPicture(String id,String status){
+    public String deletePicture(String id) {
         try {
-            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
-            productPicture.setStatus(status);
-            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
-        }catch (Exception e){
+            baseManager.delete(ProductPicture.class.getName(), id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
+    @RequestMapping("/updatePicture.do")
+    @ResponseBody
+    public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
+
+        ProductModel tempProductModel = null;
+        try {
+
+            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
+            if("0".equals(modelId)){
+                XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
+                productModelXQuery.put("product_id",productId);
+                tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
+
+
+            }else if(modelId!=null){
+                tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+
+            }else {
+                modelId = "0";
+            }
+            if("2".equals(status)){
+
+                tempProductModel.setProductModel_url(productPicture.getPictureUrl());
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
+                XQuery xQuery = new XQuery("listProductPicture_default2",request);
+                xQuery.put("product_id",productId);
+                xQuery.put("productModel_id",tempProductModel.getId());
+                List<ProductPicture> pictures = baseManager.listObject(xQuery);
+                if(pictures.size()!=0){
+                    ProductPicture picture = pictures.get(0);
+                    picture.setStatus("1");
+                    baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
+                }
+            }else if("1".equals(status)){
+                tempProductModel.setProductModel_url(null);
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
+            }
+
+
+            productPicture.setStatus(status);
+
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return modelId;
+    }
+    @RequestMapping("/setModelPicture.do")
+    @ResponseBody
+    public String setModelPicture(String modelId, String pictureId, HttpServletRequest request) {
+
+        ProductPicture productPicture = null;
+        try {
+            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
+            if ("0".equals(modelId)) {
+//                productPicture.setProductModel(null);
+            } else {
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
+           //     productModel.setProductModel_url(productPicture.getPictureUrl());
+            //    baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+                productPicture.setProductModel(productModel);
+            }
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return modelId;
+    }
+
 
     @RequestMapping("/removeProduct.do")
     @ResponseBody

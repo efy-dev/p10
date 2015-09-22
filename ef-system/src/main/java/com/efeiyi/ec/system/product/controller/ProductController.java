@@ -329,6 +329,7 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
 
+
         ProductModel tempProductModel = null;
         try {
 
@@ -338,13 +339,18 @@ public class ProductController extends BaseController {
                 productModelXQuery.put("product_id",productId);
                 tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
 
-            }else {
+
+            }else if(modelId!=null){
                 tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+
+            }else {
+                modelId = "0";
             }
             if("2".equals(status)){
 
                 tempProductModel.setProductModel_url(productPicture.getPictureUrl());
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
                 XQuery xQuery = new XQuery("listProductPicture_default2",request);
                 xQuery.put("product_id",productId);
                 xQuery.put("productModel_id",tempProductModel.getId());
@@ -354,14 +360,15 @@ public class ProductController extends BaseController {
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
-            }else {
+            }else if("1".equals(status)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
             }
 
 
             productPicture.setStatus(status);
-            productPicture.setProductModel(tempProductModel);
+
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
             e.printStackTrace();
@@ -429,8 +436,8 @@ public class ProductController extends BaseController {
 //                productPicture.setProductModel(null);
             } else {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
-                productModel.setProductModel_url(productPicture.getPictureUrl());
-                baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+    //            productModel.setProductModel_url(productPicture.getPictureUrl());
+    //            baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
                 productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);

@@ -115,12 +115,12 @@ public class   SigninController extends BaseController {
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
         //注册时给新用户初始化一个购物车
-        User user = new User();
-        user.setId(bigUser.getId());
-        Cart cart = new Cart();
-        cart.setUser(user);
-        cart.setCreateDatetime(new Date());
-        baseManager.saveOrUpdate(Cart.class.getName(), cart);
+//        User user = new User();
+//        user.setId(bigUser.getId());
+//        Cart cart = new Cart();
+//        cart.setUser(user);
+//        cart.setCreateDatetime(new Date());
+//        baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return new ModelAndView("redirect:/login");
     }
 
