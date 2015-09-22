@@ -13,6 +13,7 @@
 <head>
     <title></title>
     <link href="<c:url value="/scripts/upload/uploadify.css"/>" rel="stylesheet"/>
+
     <style type="text/css">
         .line{margin-bottom:20px;}
         /* 复制提示 */
@@ -21,6 +22,14 @@
     </style>
 </head>
 <body>
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="your-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-bd">
+            <img src="" title="原图">
+        </div>
+    </div>
+</div>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品详情</strong> / <small>Product Details</small></div>
 </div>
@@ -54,6 +63,7 @@
                 <%--</span>--%>
         <%--</legend>--%>
     <%--</fieldset>--%>
+
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" id="form">
         <fieldset>
             <legend>
@@ -262,9 +272,11 @@
                                     <li style="float: left;margin-right: 10px;width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
+                                                <a title="点击查看原图" href="javascript:void (0);" onclick="tc('http://pro.efeiyi.com/${productPicture.pictureUrl}')">
                                                 <img width="100%" name=""
                                                      src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
                                                      alt="商品图片"/>
+                                                </a>
                                             </dt>
 
                                             <dd style="width: 100%;text-align: center;" >
@@ -333,9 +345,11 @@
                                     <li style="float: left;margin-right: 10px; width: 200px;"  name="${productPicture.id}">
                                         <dl style="margin-top: 6px;">
                                             <dt style="width: 100%">
+                                                <a title="点击查看原图" href="javascript:void (0);" onclick="tc('http://pro.efeiyi.com/${productPicture.pictureUrl}')">
                                                 <img width="100%" name=""
                                                      src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
                                                      alt="商品图片"/>
+                                                    </a>
                                             </dt>
 
                                             <dd style="width: 100%;text-align: center;" >
@@ -394,10 +408,16 @@
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
+
 <script>
   var selectVal;
     function temVal(obj){
         selectVal = $(obj).val();
+    }
+
+    function tc(url){
+        $("#your-modal .am-modal-bd img").attr("src",url);
+        $("#your-modal").modal();
     }
 
     function setModelPic(obj,pictureId){
@@ -507,7 +527,9 @@ var modelIds = [];
                 var img ='<li style="float: left;margin-right: 10px;width:200px;" name="'+pictureId+'">'+
                         '<dl style="margin-top: 6px;" >'+
                         '  <dt  style="width: 100%">'+
-                        '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\''+trueUrl+'\')">'+
+                        '      <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '   </a>'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
                         '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\''+pictureId+'\',\'2\')">'+'设为主图片'+'</a>'+
@@ -568,7 +590,7 @@ var modelIds = [];
             successTimeout:1000000,                 //超时
             fileSizeLimit:'20MB',
             removeTimeout:1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;*",           //允许的文件类型
+            fileTypeExts: "*.jpg;*.png;*.*",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: { "imgType": "normal" }, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
@@ -595,7 +617,9 @@ var modelIds = [];
                 var img ='<li style="float: left;margin-right: 10px;width:200px;" name="'+pictureId+'">'+
                         '<dl style="margin-top: 6px;" >'+
                         '  <dt  style="width: 100%">'+
-                        '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\''+trueUrl+'\')">'+
+                        '      <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
+                        '   </a>'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
                         ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,\''+pictureId+'\',\'9\')">'+'设为推荐图片'+'</a>'+
