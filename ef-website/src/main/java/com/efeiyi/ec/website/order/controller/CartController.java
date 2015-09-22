@@ -698,7 +698,8 @@ public class CartController {
         }
         Integer cartAmount = 0;
         for (CartProduct cartProduct : cart.getCartProductList()) {
-            if (cartProduct.getIsChoose().equals("1")) {
+            CartProduct cartProduct1 = (CartProduct) baseManager.getObject(CartProduct.class.getName(),cartProduct.getId());
+            if (cartProduct1.getIsChoose().equals("1")) {
                 cartAmount++;
             }
         }
