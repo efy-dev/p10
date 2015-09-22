@@ -53,7 +53,7 @@
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel" begin="0" end="15" varStatus="rec">
           <li>
-            <a href="<c:url value='/pr0oduct/productModel/${productModel.id}'/>" target="_blank" title="">
+            <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
               <p class="wh name">
                 <c:if test="${fn:length(map.get(productModel))>'14'}">
