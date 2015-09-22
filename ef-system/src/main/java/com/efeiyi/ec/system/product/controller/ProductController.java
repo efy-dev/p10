@@ -329,6 +329,7 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
 
+
         ProductModel tempProductModel = null;
         try {
 
@@ -359,11 +360,13 @@ public class ProductController extends BaseController {
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
-            }else if("1".equals(modelId)){
+            }else if("1".equals(status)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
                 productPicture.setProductModel(tempProductModel);
             }
+
+
             productPicture.setStatus(status);
 
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
