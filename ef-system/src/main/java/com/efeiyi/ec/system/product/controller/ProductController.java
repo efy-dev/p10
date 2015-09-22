@@ -337,9 +337,13 @@ public class ProductController extends BaseController {
                 XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
                 productModelXQuery.put("product_id",productId);
                 tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
+                productPicture.setProductModel(tempProductModel);
 
-            }else {
+            }else if(modelId!=null){
                 tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+                productPicture.setProductModel(tempProductModel);
+            }else {
+                modelId = "0";
             }
             if("2".equals(status)){
 
@@ -354,14 +358,12 @@ public class ProductController extends BaseController {
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
-            }else {
+            }else if("1".equals(modelId)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
             }
-
-
             productPicture.setStatus(status);
-            productPicture.setProductModel(tempProductModel);
+
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
             e.printStackTrace();
@@ -429,8 +431,8 @@ public class ProductController extends BaseController {
 //                productPicture.setProductModel(null);
             } else {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
-                productModel.setProductModel_url(productPicture.getPictureUrl());
-                baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+    //            productModel.setProductModel_url(productPicture.getPictureUrl());
+    //            baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
                 productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);

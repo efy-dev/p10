@@ -474,7 +474,7 @@
                         '   <img width="100%" name="'+pictureId+ '"  src="'+url+'" alt="商品主图片">'+
                         '  </dt>'+
                         '  <dd style="width: 100%;text-align:center" >'+
-                        '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
+                        '<a href="javascript:void(0);" status="1"  modelId="0" onclick="updatePictureStatus(this,\''+pictureId+'\',\'2\')">'+'设为主图片'+'</a>'+
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\''+pictureId+'\')">'+
                         ' 删除'+
                         '</a>'+
@@ -610,11 +610,11 @@
                     if(status == '2'){
                         if($("a[status='2'][modelId='"+data+"']").length!=0){
                             $("a[status='2'][modelId='"+data+"']").text("设为主图片");
-                            $("a[status='2'][modelId='"+data+"']").attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                            $("a[status='2'][modelId='"+data+"']").attr("onclick","updatePictureStatus(this,'"+id+"','2')");
                             $("a[status='2'][modelId='"+data+"']").attr("status","1");
                         }
 
-                        $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','1')");
+                        $(obj).attr("onclick","updatePictureStatus(this,'"+id+"','1')");
                         $(obj).attr("status","2");
                         $(obj).text("主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'1\')">'+'主图片'+'</a>'+
@@ -625,7 +625,7 @@
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                     }
                     if(status == '1'){
-                        $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','2')");
+                        $(obj).attr("onclick","updatePictureStatus(this,'"+id+"','2')");
                         $(obj).attr("status","1");
                         $(obj).text("设为主图片");
 //                    var  a = '<a href="#"  onclick="updatePictureStatus(\''+data+'\',\'2\')">'+'设为主图片'+'</a>'+
@@ -635,12 +635,12 @@
 //                    $("#collapse-panel-1 li[name='" + data + "'] dd").html(a);
                     }
                     if(status == '9'){
-                        $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','3')");
+                        $(obj).attr("onclick","updatePictureStatus(this,'"+id+"','3')");
                         $(obj).attr("status","3");
                         $(obj).text("推荐图片");
                     }
                     if(status == '3'){
-                        $(obj).attr("onclick","updatePictureStatus(this,'"+data+"','9')");
+                        $(obj).attr("onclick","updatePictureStatus(this,'"+id+"','9')");
                         $(obj).attr("status","9");
                         $(obj).text("设为推荐图片");
                     }
@@ -653,19 +653,25 @@
 
 
     function deletePicture(obj,divId){
-        $.ajax({
-            type: "get",
-            url: '<c:url value="/product/deletePicture.do"/>',
-            cache: false,
-            dataType: "json",
-            data:{id:divId.trim()},
-            success: function (data) {
-                $("#picUrl tr[name='" + divId + "']").remove();
-                $("#collapse-panel-1 li[name='" + divId + "']").remove();
-                $("#collapse-panel-3 li[name='" + divId + "']").remove();
-            }
-        });
+        var status = $(obj).prev().attr("status");
+        if(status=="2"){
+            alert("请先取消主图片!");
+        }else {
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/deletePicture.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {id: divId.trim()},
+                success: function (data) {
+                    $("#picUrl tr[name='" + divId + "']").remove();
+                    $("#collapse-panel-1 li[name='" + divId + "']").remove();
+                    $("#collapse-panel-3 li[name='" + divId + "']").remove();
+                }
+            });
+        }
     }
+
 
     function toSubmit(st,result){
         $("input[name='resultPage']").val(result);
