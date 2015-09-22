@@ -8,8 +8,15 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
+import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
+import org.htmlparser.Node;
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.filters.TagNameFilter;
+import org.htmlparser.tags.ImageTag;
+import org.htmlparser.util.NodeList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -80,7 +88,7 @@ public class MyAssociationController {
 
     @RequestMapping("/saveAssContact.do")
     @ResponseBody
-    public ModelAndView saveDocument(HttpServletRequest request, Document document) throws Exception {
+    public ModelAndView saveAssContact(HttpServletRequest request, Document document) throws Exception {
 
         document.getDocumentContent().setDocument(document);
         //新建内容
@@ -95,7 +103,7 @@ public class MyAssociationController {
 
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
-        return new ModelAndView("redirect:" + request.getContextPath() + request.getParameter("qm"));
+        return new ModelAndView("redirect:" + request.getContextPath() + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
     }
 
     @RequestMapping("/assIntroOrStatute.do")
@@ -134,6 +142,62 @@ public class MyAssociationController {
             document = (Document) pageInfo.getList().get(0);
         }
         return document;
+    }
+
+    @RequestMapping("/saveAssIntroOrStatute.do")
+    @ResponseBody
+    public ModelAndView saveAssIntroOrStatute(HttpServletRequest request, Document document) throws Exception {
+
+        String group = document.getGroup();
+        String path = request.getParameter("qm");
+        document.getDocumentContent().setDocument(document);
+        //新建内容
+        if (document.getId() == null || "".equals(document.getId())) {
+            //新建内容传入原页面地址
+            document.setId(null);
+            document.getDocumentContent().setId(null);
+            document.setStatus("1");
+        } else {
+            documentManager.deleteDocument(document);
+            document.setId(null);
+        }
+        if (document.getDocumentContent().getContent() != null) {
+            Parser parser = new Parser(document.getDocumentContent().getContent());
+            NodeFilter filter = new TagNameFilter("img");
+            NodeList nodes = parser.extractAllNodesThatMatch(filter);
+
+            if (nodes != null) {
+                Node eachNode = null;
+                ImageTag imageTag = null;
+                String srcPath = null;
+                DocumentAttachment documentAttachment = null;
+                document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+
+                //遍历所有的img节点
+                for (int i = 0; i < nodes.size(); i++) {
+                    eachNode = (Node) nodes.elementAt(i);
+                    if (eachNode instanceof ImageTag) {
+                        imageTag = (ImageTag) eachNode;
+
+                        //获得html文本的原来的src属性
+                        srcPath = imageTag.getAttribute("src");
+                        documentAttachment = new DocumentAttachment();
+                        documentAttachment.setPath(srcPath);
+                        documentAttachment.setDocument(document);
+                        document.getDocumentAttachmentList().add(documentAttachment);
+                    }
+                }
+            }
+        }
+        baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
+        documentManager.saveDocument(document);
+        String resultPage = "redirect:" + request.getContextPath() + path;
+        if ("assIntro".equals(group)){
+            resultPage += "&resultPage=/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default";
+        }else {
+            resultPage += "&resultPage=/myAssociation/assIntroOrStatute.do?qm=plistStatute_default";
+        }
+        return new ModelAndView(resultPage);
     }
 
 }
