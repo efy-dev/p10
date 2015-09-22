@@ -53,9 +53,6 @@ public class MyHeritageProjectController {
     private XdoSupportManager xdoSupportManager;
     @Autowired
     private DoManager doManager;
-    @Autowired
-    @Qualifier("autoSerialManager")
-    private AutoSerialManager autoSerialManager;
     @RequestMapping("/heritageProject.do")
     public List<Document> getDocByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");

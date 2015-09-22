@@ -8,6 +8,7 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
+import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.htmlparser.Node;
