@@ -210,7 +210,7 @@ public class Project {
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;
@@ -233,7 +233,7 @@ public class Project {
     }
 
 
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectRecommended> getProjectRecommendeds() {
         return projectRecommendeds;
