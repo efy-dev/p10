@@ -28,6 +28,9 @@ public class Project {
     private String status;//状态
     private String level;//级别
     private String type; //类别 1.美术 2.技艺
+
+
+
     private Project fatherProject;//父id
     private ProjectCategory projectCategory;//类别
     private Date createDateTime;//忽略
@@ -36,11 +39,21 @@ public class Project {
     private  List<ProjectProperty> projectPropertyList;//项目属性
     private String description;// project描述
     private String picture_url;//project图片
+    private String picture_wap_url;//移动端图片project图片
     private List<Product> productList;
     private List<ProjectContent> projectContents;
     private List<ProjectFollowed> projectFolloweds;
     private AddressDistrict addressDistrict;
+    private List<ProjectRecommended> projectRecommendeds;
 
+    @Column(name="picture_wap_url")
+    public String getPicture_wap_url() {
+        return picture_wap_url;
+    }
+
+    public void setPicture_wap_url(String picture_wap_url) {
+        this.picture_wap_url = picture_wap_url;
+    }
     @Column(name="picture_url")
     public String getPicture_url() {
         return picture_url;
@@ -197,7 +210,7 @@ public class Project {
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;
@@ -217,6 +230,17 @@ public class Project {
 
     public void setAddressDistrict(AddressDistrict addressDistrict) {
         this.addressDistrict = addressDistrict;
+    }
+
+
+
+    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    public List<ProjectRecommended> getProjectRecommendeds() {
+        return projectRecommendeds;
+    }
+
+    public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
+        this.projectRecommendeds = projectRecommendeds;
     }
 }
 

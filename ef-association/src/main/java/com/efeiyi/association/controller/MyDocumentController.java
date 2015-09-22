@@ -1,7 +1,7 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
-import com.efeiyi.association.model.IntangibleCulturalOrganization;
+import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -21,7 +21,6 @@ import org.htmlparser.Parser;
 import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.tags.ImageTag;
 import org.htmlparser.util.NodeList;
-import org.htmlparser.util.SimpleNodeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -148,38 +147,38 @@ public class MyDocumentController {
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
 
-        }else{
+        } else {
             documentManager.deleteDocument(document);
             document.setId(null);
         }
+        if (document.getDocumentContent().getContent() != null) {
+            Parser parser = new Parser(document.getDocumentContent().getContent());
+            NodeFilter filter = new TagNameFilter("img");
+            NodeList nodes = parser.extractAllNodesThatMatch(filter);
 
-        Parser parser = new Parser(document.getDocumentContent().getContent());
-        NodeFilter filter = new TagNameFilter("img");
-        NodeList nodes = parser.extractAllNodesThatMatch(filter);
-
-        if (nodes != null) {
-            Node eachNode = null;
-            ImageTag imageTag = null;
-            String srcPath = null;
-            DocumentAttachment documentAttachment = null;
-            document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+            if (nodes != null) {
+                Node eachNode = null;
+                ImageTag imageTag = null;
+                String srcPath = null;
+                DocumentAttachment documentAttachment = null;
+                document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
 
 //              遍历所有的img节点
-            for (int i = 0; i < nodes.size(); i++) {
-                eachNode = (Node) nodes.elementAt(i);
-                if (eachNode instanceof ImageTag) {
-                    imageTag = (ImageTag) eachNode;
+                for (int i = 0; i < nodes.size(); i++) {
+                    eachNode = (Node) nodes.elementAt(i);
+                    if (eachNode instanceof ImageTag) {
+                        imageTag = (ImageTag) eachNode;
 
 //                      获得html文本的原来的src属性
-                    srcPath = imageTag.getAttribute("src");
-                    documentAttachment = new DocumentAttachment();
-                    documentAttachment.setPath(srcPath);
-                    documentAttachment.setDocument(document);
-                    document.getDocumentAttachmentList().add(documentAttachment);
+                        srcPath = imageTag.getAttribute("src");
+                        documentAttachment = new DocumentAttachment();
+                        documentAttachment.setPath(srcPath);
+                        documentAttachment.setDocument(document);
+                        document.getDocumentAttachmentList().add(documentAttachment);
+                    }
                 }
             }
         }
-
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
 
         documentManager.saveDocument(document);

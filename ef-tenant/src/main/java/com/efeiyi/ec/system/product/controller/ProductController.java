@@ -78,45 +78,39 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/uploadify.do")
     @ResponseBody
-    public String uploadProductImg(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+    public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
         String productId = request.getParameter("productId");
-        String productModelId = request.getParameter("productModelId");
-        Product product = null;
-        ProductModel productModel = null;
-        if(productId==null&&productModelId!=null){
-            productModel = (ProductModel) baseManager.getObject(ProductModel.class.getTypeName(), productModelId);
-        }else if(productModelId==null&&productId!=null){
-            product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
-        }
+        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String,MultipartFile> fileMap = multipartRequest.getFileMap();
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "" ;
-        for (Map.Entry<String,MultipartFile> entry : fileMap.entrySet()){
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "product/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            Integer index = 0;
+            if(fileName.indexOf(".JPG")!=-1){
+                index = fileName.indexOf(".JPG");
+            }
+            if(fileName.indexOf(".jpg")!=-1){
+                index = fileName.indexOf(".jpg");
+            }
+            String imgName = fileName.substring(0, index);
+            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
             try {
-                aliOssUploadManager.uploadFile(mf, "tenant", url);
-                if(product!=null) {
-                    productPicture.setPictureUrl(url);
-                    productPicture.setStatus("1");
-                    productPicture.setProduct(product);
-                    baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId()+":"+url;
-                }else  if(productModel!=null){
-                    productModel.setProductModel_url(url);
-                    baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
-                    data = productModel.getId()+":"+url;
-                }
-
-            }catch (Exception e){
-                 e.printStackTrace();
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                productPicture.setPictureUrl(url);
+                productPicture.setStatus(request.getParameter("status"));
+                productPicture.setProduct(product);
+                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                data = productPicture.getId() + ":" + url+":"+imgName;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }
@@ -175,15 +169,8 @@ public class ProductController extends BaseController {
 
         if ("product".equals(step)) {
 
-//            try {
-//                Product product1 =        productManager.saveProduct(product);
-//                System.out.print(product1.getMaster().getName());
-//            }catch (Exception e){
-//
-//            }
+
             Product temProduct = productManager.saveProduct(product);
-            //  model.addAttribute("object",productManager.saveProduct(product));
-            //  &tenantId=${tenantId}&masterId=${masterId}&id=
             String tenantId = "0";
             String masterId = "0";
             if (temProduct.getTenant() != null) {
@@ -214,27 +201,85 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/deletePicture.do")
     @ResponseBody
-    public String deletePicture(String id){
-         try {
-            baseManager.delete(ProductPicture.class.getName(),id);
-         }catch (Exception e){
-              e.printStackTrace();
-         }
-        return  id;
-    }
-
-    @RequestMapping("/updatePicture.do")
-    @ResponseBody
-    public String updateModelPicture(String id,String status){
+    public String deletePicture(String id) {
         try {
-            ProductPicture productPicture = (ProductPicture)baseManager.getObject(ProductPicture.class.getName(),id);
-            productPicture.setStatus(status);
-            baseManager.saveOrUpdate(ProductPicture.class.getName(),productPicture);
-        }catch (Exception e){
+            baseManager.delete(ProductPicture.class.getName(), id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return  id;
+        return id;
     }
+    @RequestMapping("/updatePicture.do")
+    @ResponseBody
+    public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
+
+        ProductModel tempProductModel = null;
+        try {
+
+            ProductPicture productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), id);
+            if("0".equals(modelId)){
+                XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
+                productModelXQuery.put("product_id",productId);
+                tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
+
+
+            }else if(modelId!=null){
+                tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+
+            }else {
+                modelId = "0";
+            }
+            if("2".equals(status)){
+
+                tempProductModel.setProductModel_url(productPicture.getPictureUrl());
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
+                XQuery xQuery = new XQuery("listProductPicture_default2",request);
+                xQuery.put("product_id",productId);
+                xQuery.put("productModel_id",tempProductModel.getId());
+                List<ProductPicture> pictures = baseManager.listObject(xQuery);
+                if(pictures.size()!=0){
+                    ProductPicture picture = pictures.get(0);
+                    picture.setStatus("1");
+                    baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
+                }
+            }else if("1".equals(status)){
+                tempProductModel.setProductModel_url(null);
+                baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
+            }
+
+
+            productPicture.setStatus(status);
+
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return modelId;
+    }
+    @RequestMapping("/setModelPicture.do")
+    @ResponseBody
+    public String setModelPicture(String modelId, String pictureId, HttpServletRequest request) {
+
+        ProductPicture productPicture = null;
+        try {
+            productPicture = (ProductPicture) baseManager.getObject(ProductPicture.class.getName(), pictureId);
+            if ("0".equals(modelId)) {
+//                productPicture.setProductModel(null);
+            } else {
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
+           //     productModel.setProductModel_url(productPicture.getPictureUrl());
+            //    baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+                productPicture.setProductModel(productModel);
+            }
+            baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return modelId;
+    }
+
 
     @RequestMapping("/removeProduct.do")
     @ResponseBody

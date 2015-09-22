@@ -16,16 +16,11 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
+    <input onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建" />
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建" />
 </div>
 <div class="am-g">
-    <%--<button onclick="window.location.href='<c:url--%>
-            <%--value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"--%>
-            <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建--%>
-    <%--</button>--%>
-
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
@@ -42,18 +37,15 @@
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                             <button onclick="window.location.href='<c:url
                                     value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                    class="am-icon-edit"></span> 编辑
-                            </button>
-                            <button onclick="window.location.href='<c:url
-                                    value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                    class="am-icon-trash-o"></span> 删除
-                            </button>
+                                    class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
+                            <button onclick="myConfirm('<c:url value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>', 'D');"
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                             <button onclick="saveObject('${document.id}','<c:url value='/myDocument/saveDocument.do'/>','status',
                                     '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
                                     '&qm=/myDocument/doc.do?qm=${requestScope.qm}')"
-                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><c:if test="${document.status == 1}">取消推荐</c:if><c:if test="${document.status != 1}"><font color="green">推荐</font></c:if>
+                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                                <c:if test="${document.status != 1}">取消推荐</c:if>
+                                <c:if test="${document.status == 1}"><font color="green">推荐</font></c:if>
                             </button>
                             <input value="${document.id}"
                                    name="${document.id}" metaProperty="id" type="hidden"/>
@@ -99,6 +91,7 @@
         </c:forEach>
     </table>
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div style="clear: both">
     <c:url value="/myDocument/doc.do" var="url"/>
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">

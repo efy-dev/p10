@@ -24,31 +24,28 @@
             </jnode>
         </jnode>
         <jnode id="AssociationSurvey" url="" access="admin,manager" text_zh_CN="协会概况">
-            <jnode url="/myDocument/doc.do?qm=plistAssociationIntroduction_default" access="admin,manager" text_zh_CN="协会介绍">
-                <match url="/myDocument/doc.do?qm=plistAssociationIntroduction_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=assIntro"/>
+            <jnode url="/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default&amp;resultPage=/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default" access="admin,manager" text_zh_CN="协会介绍">
+                <match url="/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistStatute_default" access="admin,manager" text_zh_CN="协会章程">
-                <match url="/myDocument/doc.do?qm=plistStatute_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=assStatute"/>
+            <jnode url="/myAssociation/assIntroOrStatute.do?qm=plistStatute_default&amp;resultPage=/myAssociation/assIntroOrStatute.do?qm=plistStatute_default" access="admin,manager" text_zh_CN="协会章程">
+                <match url="/myAssociation/assIntroOrStatute.do?qm=plistStatute_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistContact_default" access="admin,manager" text_zh_CN="联系方式">
-                <match url="/myDocument/doc.do?qm=plistContact_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=assContact"/>
+            <jnode url="/myAssociation/assContact.do?qm=plistContact_default&amp;resultPage=/myAssociation/assContact.do?qm=plistContact_default" access="admin,manager" text_zh_CN="联系方式">
+                <match url="/myAssociation/assContact.do?qm=plistContact_default"/>
             </jnode>
         </jnode>
         <jnode id="IntangibleCulturalHeritageProtection" url="" access="admin,manager" text_zh_CN="非遗保护">
-            <jnode url="/myDocument/doc.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
-                <match url="/myDocument/doc.do?qm=plistLaw_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intLaw"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistLaw_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intLaw"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
-                <match url="/myDocument/doc.do?qm=plistPolicy_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=intPolicy"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intPolicy"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
-                <match url="/myDocument/doc.do?qm=plistSubmissionHandbook_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=submissionGuide"/>
+            <jnode url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="非遗申报指南">
+                <match url="/myHeritageProject/heritageProject.do?qm=plistSubmissionHandbook_default"/>
+                <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=submissionGuide"/>
             </jnode>
         </jnode>
         <!--<jnode id="IntangibleCulturalHeritage" url="" access="admin,manager" text_zh_CN="非遗名录">-->
@@ -65,11 +62,11 @@
         <jnode id="InstitutionManagement" url="" access="admin,manager" text_zh_CN="下属机构管理">
             <jnode url="/myDocument/organization.do?qm=plistCommitteeAssociation_default" access="" text_zh_CN="委员会名录管理">
                 <match url="/myDocument/organization.do?qm=plistCommitteeAssociation_default"/>
-                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&amp;group=committeeAss"/>
+                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_newOrganization&amp;group=committeeAss"/>
             </jnode>
             <jnode url="/myDocument/organization.do?qm=plistAssociation_default" access="" text_zh_CN="各地协会名录管理">
                 <match url="/myDocument/organization.do?qm=plistAssociation_default"/>
-                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&amp;group=association"/>
+                <match url="/myDocument/newOrganization.do?qm=direct2JspOrganization_newOrganization&amp;group=association"/>
             </jnode>
         </jnode>
         <jnode id="MemberManagement" url="" access="admin,manager" text_zh_CN="会员管理">
@@ -86,11 +83,13 @@
 
     <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="在线申报管理">
         <jnode id="ProjectApplicationManagement" url="" access="admin,manager" text_zh_CN="项目申报管理">
-            <jnode url="/myDocument/doc.do?qm=plistMaterialUpload_default" access="" text_zh_CN="申报资料上传管理">
-                <match url="/myDocument/doc.do?qm=plistMaterialUpload_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=materialUpload"/>
+            <jnode url="/myAttachment/attachment.do?qm=plistMaterial_default" access="" text_zh_CN="申报材料管理">
+                <match url="/myAttachment/attachment.do?qm=plistMaterial_default"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistMaterialDownload_default" access="" text_zh_CN="申报资料下载管理">
+            <jnode url="/myDocument/newDocument.do?qm=direct2JspUploadAttach_newDocument&amp;group=submitAttach&amp;resultPage=/myAttachment/attachment.do?qm=plistMaterial_default" access="" text_zh_CN="申报资料上传管理">
+                <match url="/myDocument/newDocument.do?qm=direct2JspUploadAttach"/>
+            </jnode>
+            <jnode url="/myAttachment/attachmentDownload.do?qm=plistMaterialDownload_default" access="" text_zh_CN="申报资料下载管理">
                 <match url="/myDocument/doc.do?qm=plistMaterialDownload_default"/>
                 <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=materialDown"/>
             </jnode>
@@ -99,14 +98,15 @@
 
     <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="权限管理">
         <jnode id="UserManagement" url="" access="admin,manager" text_zh_CN="用户管理">
-            <jnode url="/myDocument/doc.do?qm=plistUser_default" access="" text_zh_CN="用户列表">
-                <match url="/myDocument/doc.do?qm=plistUser_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=userList"/>
+            <jnode url="/basic/xm.do?qm=plistUser_default"  access="admin,manager" text_zh_CN="用户管理">
+                <match url="/basic/xm.do?qm=plistUser_default"/>
+                <match url="/basic/xm.do?qm=formUser"/>
+                <match url="/basic/xm.do?qm=viewUser&amp;user=user"/>
             </jnode>
-            <jnode url="/myDocument/doc.do?qm=plistRole_default" access="" text_zh_CN="角色管理">
-                <match url="/myDocument/doc.do?qm=plistRole_default"/>
-                <match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=roleManagement"/>
-            </jnode>
+            <!--<jnode url="/myDocument/doc.do?qm=plistRole_default" access="" text_zh_CN="角色管理">-->
+                <!--<match url="/myDocument/doc.do?qm=plistRole_default"/>-->
+                <!--<match url="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&amp;group=roleManagement"/>-->
+            <!--</jnode>-->
         </jnode>
     </jnode>
 </jmenu>

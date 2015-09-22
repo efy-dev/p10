@@ -41,7 +41,9 @@
                         <ming800:status name="sex" dataType="Master.sex" checkedValue="${tenantMaster.master.sex}" type="normal"/>
 
                     </td>
-                    <td class="am-hide-sm-only">${tenantMaster.master.level}</td>
+                    <td class="am-hide-sm-only">
+                        <ming800:status name="level" dataType="Master.level" checkedValue="${tenantMaster.master.level}" type="normal"/>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

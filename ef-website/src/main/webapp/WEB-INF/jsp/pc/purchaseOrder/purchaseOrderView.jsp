@@ -52,7 +52,7 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productPicture.pictureUrl}@!product-icon"></a></li>
+                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                   </ul>
                 </td>
                 <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
@@ -66,7 +66,7 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
-            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}</span></p>
+            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}${order.consumerAddress.details}</span></p>
             <p>收货人姓名：<span>${order.consumerAddress.consignee}</span></p>
             <p>联系电话：<span>${order.consumerAddress.phone}</span></p>
 

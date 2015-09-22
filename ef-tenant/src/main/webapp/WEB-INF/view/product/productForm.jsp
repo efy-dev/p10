@@ -83,20 +83,19 @@
                 </div>
             </div>
 
-            <%--<div class="am-form-group">--%>
-                <%--<label name="serial" class="am-u-sm-3 am-form-label">商家名称</label>--%>
+            <div class="am-form-group">
+                <label name="serial" class="am-u-sm-3 am-form-label">关联商家</label>
 
-                <%--<div class="am-u-sm-9" style="margin-top: 10px;">--%>
-                    <%--${tenant.name}--%>
-                    <%--&lt;%&ndash;<select name="tenantCheck" onchange="changeTenant(this)">&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<option value="0">请选择</option>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<c:forEach var="tenant" items="${tenantList}">&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<option value="${tenant.id}" <c:if test="${object.tenant.id == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;</select>&ndash;%&gt;--%>
-                    <%--<!--<small>必填项*</small>-->--%>
-                <%--</div>--%>
-            <%--</div>--%>
+                <div class="am-u-sm-9" style="margin-top: 10px;">
+                    <select name="tenantCheck" onchange="changeTenant(this)" disabled="disabled">
+                        <option value="0">请选择</option>
+                        <c:forEach var="tenant" items="${tenantList}">
+                            <option value="${tenant.id}" <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> <c:if test="${tenantId == tenant.id}">selected="selected"</c:if> >${tenant.name}</option>
+                        </c:forEach>
+                    </select>
+                    <!--<small>必填项*</small>-->
+                </div>
+            </div>
 
 
             <div class="am-form-group">
@@ -212,42 +211,42 @@
         $("#"+projectId+" input[value='"+projectId+"']").attr("checked",true);
     });
 
-    <%--function changeTenant(obj){--%>
-        <%--var tenantId = $(obj).val();--%>
-        <%--$.ajax({--%>
-            <%--type: "get",--%>
-            <%--url: '<c:url value="/product/changeTenant.do"/>',--%>
-            <%--cache: false,--%>
-            <%--dataType: "json",--%>
-            <%--data:{tenantId:tenantId},--%>
-            <%--success: function (data) {--%>
-                <%--$("#master").text("");--%>
-                <%--$("#Project").text("");--%>
-                <%--$.each(data,function(k,v){--%>
-                    <%--if(k=="masterList"){--%>
-                        <%--for(var i=0;i<v.length;i++){--%>
-                            <%--var span = '<span style="margin-left: 10px;">'+--%>
-                                    <%--'     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+--%>
-                                    <%--' </span>';--%>
-                            <%--$("#master").append(span);--%>
-                        <%--}--%>
-                    <%--}--%>
-                    <%--if(k=="projectList"){--%>
+    function changeTenant(obj){
+        var tenantId = $(obj).val();
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/changeTenant.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{tenantId:tenantId},
+            success: function (data) {
+                $("#master").text("");
+                $("#Project").text("");
+                $.each(data,function(k,v){
+                    if(k=="masterList"){
+                        for(var i=0;i<v.length;i++){
+                            var span = '<span style="margin-left: 10px;">'+
+                                    '     <input type="radio" value="'+v[i].master.id+'" onclick="changeMaster(this)" name="masterCheck"/>'+v[i].master.fullName+
+                                    ' </span>';
+                            $("#master").append(span);
+                        }
+                    }
+                    if(k=="projectList"){
 
-                        <%--for(var i=0;i<v.length;i++){--%>
-                            <%--var span = '<span style="margin-left: 10px;" flag="1" id="'+v[i].project.id+'">'+--%>
-                                    <%--'     <input type="radio" value="'+v[i].project.id+'"  name="projectCheck"/>'+v[i].project.name+--%>
-                                    <%--' </span>';--%>
-                            <%--$("#Project").append(span);--%>
-                        <%--}--%>
-                    <%--}--%>
-                <%--});--%>
+                        for(var i=0;i<v.length;i++){
+                            var span = '<span style="margin-left: 10px;" flag="1" id="'+v[i].project.id+'">'+
+                                    '     <input type="radio" value="'+v[i].project.id+'"  name="projectCheck"/>'+v[i].project.name+
+                                    ' </span>';
+                            $("#Project").append(span);
+                        }
+                    }
+                });
 
 
 
-            <%--}--%>
-        <%--});--%>
-    <%--}--%>
+            }
+        });
+    }
     function toSubmit(result){
         $("input[name='resultPage']").val(result);
         if($("#name").val()==""){
@@ -260,12 +259,13 @@
 //    else if(!checkPrice($("#price").val())){
 //      alert("商品价格必须为数字!");
 //    }
-        else if($("select[name='tenantCheck']").val()=="0"){
-            $("input[name='tenant.id']").val("");
-        } else{
+//        else if($("select[name='tenantCheck']").val()=="0"){
+//            $("input[name='tenant.id']").val("");
+//        }
+        else{
             $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
             $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
-            $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
+      //      $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
             $("form").submit();
         }
 
