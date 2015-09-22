@@ -39,10 +39,10 @@
 
                                      <form>
                                          <select class="cars" id="province" name="province.id"
-                                                 onchange="provinceChange(this)">
+                                                 onchange="provinceChange(this)" required>
                                              <option value="请选择">请选择</option>
                                          </select>
-                                         <select class="car1" id="city" name="city.id">
+                                         <select class="car1" id="city" name="city.id" required>
                                              <option value="请选择">请选择</option>
                                          </select>
                                      </form>
@@ -183,7 +183,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a href="" target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
+                <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>

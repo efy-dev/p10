@@ -35,9 +35,9 @@
 
                                     <form>
                                         <select id="provinceVal" class="cars" name="province.id"
-                                                onclick="province(this);">
+                                                onclick="province(this);" required>
                                         </select>
-                                        <select id="cityVal" class="car1" name="city.id" onclick="city(this);">
+                                        <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
                                         </select>
                                     </form>
                                 </li>
@@ -155,12 +155,12 @@
 
                                               <form>
                                                   <select id="${address.id}" name="province.id" class="cars"
-                                                          onchange="provinceChange(this , '${address.id}')">
+                                                          onchange="provinceChange(this , '${address.id}')" required>
                                                       <c:forEach var="pro" items="${province}">
                                                           <option value="${pro.id}">${pro.name}</option>
                                                       </c:forEach>
                                                   </select>
-                                                  <select id="citys${address.id}" name="city.id" class="car1">
+                                                  <select id="citys${address.id}" name="city.id" class="car1" required>
                                                   </select>
                                               </form>
                                           </li>

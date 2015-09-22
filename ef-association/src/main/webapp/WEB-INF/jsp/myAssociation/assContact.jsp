@@ -23,64 +23,58 @@
 <hr/>
 <div class="am-g">
     <form id="assContactForm" action="<c:url value='/myAssociation/saveAssContact.do'/>?qm=${requestScope.resultPage}"
-                 onsubmit="return afterSubmitForm('assContactForm')"
-                 method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-    <input id="id" value="${document.id}" name="id" type="hidden"/>
-    <input id="documentContent.id" value="${document.documentContent.id}" name="documentContent.id" type="hidden"/>
-    <input id="status" value="${document.status}" name="status" type="hidden"/>
-    <input id="group" name="group" value="${group}" type="hidden">
+          onsubmit="return afterSubmitForm('assContactForm')"
+          method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
+        <input value="${document.id}" name="id" type="hidden"/>
+        <input value="${document.status}" name="status" type="hidden"/>
+        <input value="${document.documentContent.id}" name="documentContent.id" type="hidden"/>
+        <input value="${group}" name="group" type="hidden">
 
-    <div class="am-form-group">
-        <label name="介绍" for="documentContent.content" class="am-u-sm-3 am-form-label">介&nbsp;&nbsp;绍<small>*</small></label>
-        <div class="am-u-sm-9">
+        <div class="am-form-group">
+            <label name="介绍" for="documentContent.content" class="am-u-sm-3 am-form-label">介&nbsp;&nbsp;绍<small>*</small></label>
+            <div class="am-u-sm-9">
                 <textarea rows="3" name="documentContent.content" id="documentContent.content"
                           placeholder="介绍" required="true">${document.documentContent.content}</textarea>
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <label name="地址" for="sampleContent" class="am-u-sm-3 am-form-label">地&nbsp;&nbsp;址<small>*</small></label>
-        <div class="am-u-sm-9">
-            <input type="text" name="sampleContent" id="sampleContent" placeholder="地址"
-                   value="${document.sampleContent}" required="true">
+        <div class="am-form-group">
+            <label name="地址" for="sampleContent" class="am-u-sm-3 am-form-label">地&nbsp;&nbsp;址<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="sampleContent" id="sampleContent" placeholder="地址"
+                       value="${document.sampleContent}" required="true">
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <label name="邮编" for="documentOrder" class="am-u-sm-3 am-form-label">邮&nbsp;&nbsp;编<small>*</small></label>
-        <div class="am-u-sm-9">
-            <input type="number" name="documentOrder" id="documentOrder" min="100000" max="999999"
-                   placeholder="邮编" value="${document.documentOrder}" required="true">
+        <div class="am-form-group">
+            <label name="邮编" for="documentOrder" class="am-u-sm-3 am-form-label">邮&nbsp;&nbsp;编<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="number" name="documentOrder" id="documentOrder" min="100000" max="999999"
+                       placeholder="邮编" value="${document.documentOrder}" required="true">
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <label name="电话" for="name" class="am-u-sm-3 am-form-label">电&nbsp;&nbsp;话<small>*</small></label>
-        <div class="am-u-sm-9">
-            <input type="text" name="name" id="name" placeholder="电话" value="${document.name}" required="true">
+        <div class="am-form-group">
+            <label name="电话" for="name" class="am-u-sm-3 am-form-label">电&nbsp;&nbsp;话<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="name" id="name" placeholder="电话" value="${document.name}" required="true">
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <label name="Email" for="title" class="am-u-sm-3 am-form-label">E-mail<small>*</small></label>
-        <div class="am-u-sm-9">
-            <input type="text" name="title" id="title" placeholder="E-mail" value="${document.title}" required="true">
+        <div class="am-form-group">
+            <label name="Email" for="title" class="am-u-sm-3 am-form-label">E-mail<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="email" name="title" id="title" placeholder="E-mail" value="${document.title}" required="true">
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <label name="客服电话" for="keywords" class="am-u-sm-3 am-form-label">在线客服<small>*</small></label>
-        <div class="am-u-sm-9">
-            <input type="text" name="keywords" id="keywords" placeholder="在线客服" value="${document.keywords}" required="true">
+        <div class="am-form-group">
+            <label name="客服电话" for="keywords" class="am-u-sm-3 am-form-label">在线客服<small>*</small></label>
+            <div class="am-u-sm-9">
+                <input type="text" name="keywords" id="keywords" placeholder="在线客服" value="${document.keywords}" required="true">
+            </div>
         </div>
-    </div>
-
-    <div class="am-form-group">
-        <div class="am-u-sm-9 am-u-sm-push-3">
-            <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+        <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+                <input type="submit" class="am-btn am-btn-primary" value="保存"/>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 </div>
 </body>
 </html>
