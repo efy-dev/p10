@@ -42,7 +42,7 @@ public class MyOrganizationController {
     @RequestMapping("/removeOrganization.do")
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, IntangibleCulturalOrganization organization) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path =/* request.getContextPath() +*/ request.getParameter("resultPage");
 
         baseManager.remove(organization.getClass().getName(), organization.getId());
 

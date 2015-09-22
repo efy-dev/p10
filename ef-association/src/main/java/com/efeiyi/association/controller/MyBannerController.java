@@ -132,7 +132,7 @@ public class MyBannerController {
             banner.setImageUrl(url);
         }
         bannerManager.saveBanner(banner);
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath() */+ path);
     }
 
     /**
@@ -169,7 +169,7 @@ public class MyBannerController {
 
         bannerManager.removeBanner(banner);
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     /**
@@ -195,7 +195,7 @@ public class MyBannerController {
             banner = (Banner) baseManager.getObject(banner.getClass().getName(), banner.getId());
             model.addAttribute("object", banner);
         }
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
 

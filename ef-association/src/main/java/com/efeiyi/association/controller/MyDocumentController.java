@@ -184,7 +184,7 @@ public class MyDocumentController {
         documentManager.saveDocument(document);
 
 //        return null;
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     /**
@@ -214,11 +214,11 @@ public class MyDocumentController {
     @RequestMapping("/removeDocument.do")
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, Document document) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
 
         documentManager.removeDocument(document);
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     /**
@@ -245,7 +245,7 @@ public class MyDocumentController {
             model.addAttribute("object", document);
         }
         model.addAttribute("group", document.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
     @RequestMapping("/organization.do")
@@ -306,7 +306,7 @@ public class MyDocumentController {
             model.addAttribute("object", organization);
         }
         model.addAttribute("group", organization.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
     @RequestMapping("/ckeditorUpload.do")

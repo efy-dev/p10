@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.project.controller;
+package com.efeiyi.ec.system.tenant.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Do;
@@ -15,12 +15,12 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2015/7/16.
+ * Created by Administrator on 2015/7/20.
  */
-public class ProjectFormHandler implements MultipartHandler {
-
+public class SaveTenantHandler implements MultipartHandler {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
+
 
     @Override
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
@@ -31,23 +31,20 @@ public class ProjectFormHandler implements MultipartHandler {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
 
-        if (!multipartRequest.getFile("picture_url").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url"), "ec-efeiyi", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
-            paramMap.put("picture_url", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
+        if (!multipartRequest.getFile("logo").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "ec-efeiyi", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
         }
-        if (!multipartRequest.getFile("picture_wap_url").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_wap_url"), "ec-efeiyi", "project_picture/" + multipartRequest.getFile("picture_wap_url").getOriginalFilename());
-            paramMap.put("picture_wap_url", "project_picture/" + multipartRequest.getFile("picture_wap_url").getOriginalFilename());
+        if (!multipartRequest.getFile("pictureUrl").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("pictureUrl"), "ec-efeiyi", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
+            paramMap.put("pictureUrl", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
         }
 
         //������� start
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
         //������� end
         modelMap.put("object", object);
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createDatetime = sdf2.format(new Date());
-        modelMap.put("createDateTime",createDatetime);
-        modelMap.put("fatherId",request.getParameter("fatherId"));
+
         return modelMap;
     }
 }
