@@ -43,7 +43,7 @@
         <input id="status" value="${object.status}" name="status"
                type="hidden"/>
         <input id="publishDate"
-               value="<fmt:formatDate value="${object.publishDate}" pattern="yyyy-MM-dd HH:mm"/>"
+               value="<fmt:formatDate value="${object.publishDate}" pattern="yyyy-MM-dd"/>"
                name="publishDate"
                type="hidden"/>
         <input type="hidden" id="keywords" placeholder="keywords" name="keywords"

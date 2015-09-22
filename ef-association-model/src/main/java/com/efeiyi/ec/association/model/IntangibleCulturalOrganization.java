@@ -17,7 +17,7 @@ public class IntangibleCulturalOrganization {
     private String id;
     private String name;
     private AddressDistrict addressDistrict;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date theDatetime;
     private String inCharge;
     private String status;
