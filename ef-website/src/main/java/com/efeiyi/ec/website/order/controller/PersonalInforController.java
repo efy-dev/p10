@@ -143,7 +143,9 @@ public class PersonalInforController {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            url = "user/"+fileName.substring(0,fileName.indexOf(".jpg"))+identify+".jpg";
+            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+
+            url = "user/"+fileName.substring(0,fileName.indexOf(hz))+identify+hz;
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateInfo",request);
