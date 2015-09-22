@@ -36,16 +36,16 @@ public class MyOrganizationController {
         }
         baseManager.saveOrUpdate(intangibleCulturalOrganization.getClass().getName(),intangibleCulturalOrganization);
 
-        return request.getContextPath() + path;
+        return /*request.getContextPath() +*/ path;
     }
 
     @RequestMapping("/removeOrganization.do")
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, IntangibleCulturalOrganization organization) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path =/* request.getContextPath() +*/ request.getParameter("resultPage");
 
         baseManager.remove(organization.getClass().getName(), organization.getId());
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 }

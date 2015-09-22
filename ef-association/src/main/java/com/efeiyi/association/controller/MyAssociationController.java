@@ -103,7 +103,7 @@ public class MyAssociationController {
 
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
-        return new ModelAndView("redirect:" + request.getContextPath() + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
     }
 
     @RequestMapping("/assIntroOrStatute.do")
@@ -191,7 +191,7 @@ public class MyAssociationController {
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
-        String resultPage = "redirect:" + request.getContextPath() + path;
+        String resultPage = "redirect:" /*+ request.getContextPath() */+ path;
         if ("assIntro".equals(group)){
             resultPage += "&resultPage=/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default";
         }else {
