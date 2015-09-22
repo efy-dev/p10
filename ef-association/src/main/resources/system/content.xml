@@ -201,7 +201,7 @@
             </does>
         </entity>
 
-        <entity name="intangibleCultureOrganization" label="各地协会"  model="com.efeiyi.association.model.IntangibleCulturalOrganization">
+        <entity name="intangibleCultureOrganization" label="各地协会"  model="com.efeiyi.ec.association.model.IntangibleCulturalOrganization">
             <fields>
                 <field name="group" label="分类" inputType="text">
                     <statusType fieldName="level">
@@ -271,7 +271,7 @@
         </entity>
 
 
-        <entity name="SubmissionMaterial" label="申报材料下载" model="com.efeiyi.association.model.ApplicationMaterial">
+        <entity name="SubmissionMaterial" label="申报材料下载" model="com.efeiyi.ec.association.model.ApplicationMaterial">
 
             <fields>
                 <field name="applyType" label="申请列表" inputType="text">

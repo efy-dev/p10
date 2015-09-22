@@ -43,7 +43,7 @@
     <!-- //End-->
     <div class="bd pep-info">
       <div class="bd txt">
-        <p class="txt-price"><em>￥</em><span>189.00</span></p>
+        <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
         <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
         <p class="txt-des">${productModel.product.master.content}</p>
       </div>
@@ -64,7 +64,7 @@
     <ul class="ul-list">
 
       <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
-        <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
+        <a href="<c:url value='/product/productModel/${productModel.id}'/>"  title="">
         <li>
 
         <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">

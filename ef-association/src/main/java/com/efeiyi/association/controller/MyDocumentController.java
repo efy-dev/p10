@@ -1,7 +1,7 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
-import com.efeiyi.association.model.IntangibleCulturalOrganization;
+import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;

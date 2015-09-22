@@ -1,4 +1,4 @@
-package com.efeiyi.association.model;
+package com.efeiyi.ec.association.model;
 
 /**
  * Created by Administrator on 2015/9/18.
@@ -6,7 +6,6 @@ package com.efeiyi.association.model;
 
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.DocumentAttachment;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -14,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity(name = "association_application_material")
 public class ApplicationMaterial {

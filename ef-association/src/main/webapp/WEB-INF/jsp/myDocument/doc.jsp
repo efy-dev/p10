@@ -21,11 +21,6 @@
            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建" />
 </div>
 <div class="am-g">
-    <%--<button onclick="window.location.href='<c:url--%>
-            <%--value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&document.group=${document.group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"--%>
-            <%--class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>新建--%>
-    <%--</button>--%>
-
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
