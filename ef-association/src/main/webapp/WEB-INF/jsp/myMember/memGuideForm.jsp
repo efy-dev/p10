@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2015/9/21
-  Time: 13:38
+  Time: 20:05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -28,8 +28,8 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="heritageProjectForm" action="<c:url value='/myHeritageProject/saveHeritageProjectForm.do'/>?qm=${requestScope.qm}"
-          onsubmit="return afterSubmitForm('heritageProjectForm')"
+    <form id="memGuideForm" action="<c:url value='/myMember/saveMemGuideForm.do'/>?qm=${requestScope.qm}"
+          onsubmit="return afterSubmitForm('memGuideForm')"
           method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
         <input value="${object.id}" name="id" type="hidden"/>
         <input value="${object.status}" name="status" type="hidden"/>
@@ -47,9 +47,10 @@
         <div class="am-form-group">
             <label name="documentContent.content" for="documentContent.content" class="am-u-sm-3 am-form-label">正文<small>*</small></label>
             <div class="am-u-sm-9">
-                <textarea name="documentContent.content" id="documentContent.content"
+                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content"
                           class="ckeditor"
-                          placeholder="内容" required="true">${object.documentContent.content}</textarea>
+                          placeholder="内容"
+                          required="true">${object.documentContent.content}</textarea>
             </div>
         </div>
         <div class="am-form-group">

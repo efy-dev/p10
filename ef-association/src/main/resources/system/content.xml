@@ -35,6 +35,8 @@
                         <item label="非遗法" value="intLaw"/>
                         <item label="非遗保护政策" value="intPolicy"/>
                         <item label="非遗申报指南" value="submissionGuide"/>
+                        <item label="会员申请指南" value="memGuide"/>
+                        <item label="会员管理" value="memManagement"/>
                     </statusType>
                 </field>
             </fields>
@@ -90,7 +92,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistIntroduction_default"/>
             </does>
             <does>
                 <do name="plistStatute" access="" label="协会章程" result="" data="assStatute">
@@ -99,7 +100,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistStatute_default"/>
             </does>
             <does>
                 <do name="plistContact" access="" label="联系方式" result="" data="assContact">
@@ -108,16 +108,14 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistContact_default"/>
             </does>
             <does>
                 <do name="plistLaw" access="" label="非遗法" result="" data="intLaw">
-                    <query name="default" label="默认" type="auto" orderBy="documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="intLaw" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistLaw_default"/>
             </does>
             <does>
                 <do name="plistPolicy" access="" label="非遗保护政策" result="" data="intPolicy">
@@ -126,7 +124,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistPolicy_default"/>
             </does>
             <does>
                 <do name="plistSubmissionHandbook" access="" label="非遗申报指南" result="" data="submissionGuide">
@@ -135,7 +132,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistSubmissionHandbook_default"/>
             </does>
             <does>
                 <do name="plistMemberGuide" access="" label="会员申请指南" result="" data="memGuide">
@@ -144,7 +140,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistAssociation_default"/>
             </does>
             <does>
                 <do name="plistMemberManagement" access="" label="会员管理" result="" data="memManagement">
@@ -153,7 +148,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMemberManagement_default"/>
             </does>
             <does>
                 <do name="plistRole" access="" label="角色管理" result="" data="roleManagement">
@@ -192,12 +186,11 @@
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>
             </does>
             <does>
-                <do name="direct2Jsp" access="" label="新建" result="/myDocument/newDoc">
-                </do>
-                <do name="direct2JspUploadAttach" access="" label="上传附件" result="/myAttachment/newAttachment">
-                </do>
-                <do name="heritageProjectForm" access="" label="添加/编辑" result="/myHeritageProject/heritageProjectForm">
-                </do>
+                <do name="direct2Jsp" access="" label="新建" result="/myDocument/newDoc"/>
+                <do name="direct2JspUploadAttach" access="" label="上传附件" result="/myAttachment/newAttachment"/>
+                <do name="heritageProjectForm" access="" label="添加/编辑非遗保护" result="/myHeritageProject/heritageProjectForm"/>
+                <do name="memGuideForm" access="" label="添加/编辑会员申请指南" result="/myMember/memGuideForm"/>
+                <do name="memManagementForm" access="" label="添加/编辑会员管理" result="/myMember/memManagementForm"/>
             </does>
         </entity>
 
