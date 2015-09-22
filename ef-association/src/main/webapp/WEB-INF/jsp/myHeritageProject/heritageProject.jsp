@@ -41,7 +41,7 @@
                                     value="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&group=${group}&id=${document.id}&resultPage=/myHeritageProject/heritageProject.do?qm=${requestScope.qm}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span>编辑</button>
-                            <button onclick="myConfirm('<c:url value="/myHeritageProject/removeHeritageProject.do?qm=removeContent&id=${document.id}&resultPage=/myHeritageProject/heritageProject.do?qm=${requestScope.qm}"/>','D');"
+                            <button onclick="myConfirm('<c:url value="/myHeritageProject/removeHeritageProject.do?id=${document.id}&resultPage=/myHeritageProject/heritageProject.do?qm=${requestScope.qm}"/>','D');"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>删除</button>
                             <button onclick="saveObject('${document.id}','<c:url value="/myHeritageProject/saveHeritageProjectForm.do"/>','status',
                                     '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
@@ -51,12 +51,13 @@
                                     <c:if test="${document.status == 1}"><font color="green">推荐</font></c:if>
                             </button>
                             <input value="${document.id}" name="${document.id}" metaProperty="id" type="hidden"/>
-                            <input value="${document.documentContent.id}" name="${document.id}" metaProperty="documentContent.id" type="hidden"/>
-                            <input value="${document.publishDate}" name="${document.id}" metaProperty="publishDate" type="hidden"/>
-                            <input value="${document.status}" name="${document.id}" type="hidden" metaProperty="status"/>
-                            <input value="${document.group}" name="${document.id}" metaProperty="group" type="hidden"/>
-                            <input value='${document.documentContent.content}' metaProperty="documentContent.content" name="${document.id}" type="hidden"/>
                             <input value="${document.title}" name="${document.id}" metaProperty="title" type="hidden"/>
+                            <input value="${document.group}" name="${document.id}" metaProperty="group" type="hidden"/>
+                            <input value="${document.status}" name="${document.id}" type="hidden" metaProperty="status"/>
+                            <input value="${document.publishDate}" name="${document.id}" metaProperty="publishDate" type="hidden"/>
+                            <input value="${document.documentOrder}" name="${document.id}" metaProperty="documentOrder" type="hidden"/>
+                            <input value="${document.documentContent.id}" name="${document.id}" metaProperty="documentContent.id" type="hidden"/>
+                            <input value='${document.documentContent.content}' metaProperty="documentContent.content" name="${document.id}" type="hidden"/>
                         </div>
                     </div>
                 </td>
@@ -71,7 +72,7 @@
                     </td>
                 </c:if>
                 <td>
-                    <fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/>
+                    <fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd"/>
                 </td>
             </tr>
         </c:forEach>

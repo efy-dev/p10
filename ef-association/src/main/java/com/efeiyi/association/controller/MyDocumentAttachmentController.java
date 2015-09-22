@@ -124,6 +124,7 @@ public class MyDocumentAttachmentController {
             document.setTheDatetime(new Date());
             document.setStatus("1");
             document.setPublishDate(new Date());
+            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
         }
         DocumentAttachment attachment = new DocumentAttachment();
         attachment.setDocument(document);

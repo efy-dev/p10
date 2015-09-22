@@ -183,7 +183,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a href="" target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
+                <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>

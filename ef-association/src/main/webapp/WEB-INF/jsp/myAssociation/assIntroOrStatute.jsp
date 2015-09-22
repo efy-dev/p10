@@ -22,13 +22,13 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="assForm" action="<c:url value='/myDocument/saveDocument.do'/>?qm=${requestScope.resultPage}"
+    <form id="assForm" action="<c:url value='/myAssociation/saveAssIntroOrStatute.do'/>?qm=${requestScope.resultPage}"
           onsubmit="return afterSubmitForm('assForm')"
           method="post" enctype="multipart/form-data" class="am-form">
-        <input id="id" value="${document.id}" name="id" type="hidden"/>
-        <input id="documentContent.id" value="${document.documentContent.id}" name="documentContent.id" type="hidden"/>
-        <input id="status" value="${document.status}" name="status" type="hidden"/>
-        <input id="group" name="group" value="${group}" type="hidden">
+        <input value="${document.id}" name="id" type="hidden"/>
+        <input value="${document.status}" name="status" type="hidden"/>
+        <input value="${document.documentContent.id}" name="documentContent.id" type="hidden"/>
+        <input value="${group}" name="group"  type="hidden">
 
         <div class="am-form-group">
             <textarea name="documentContent.content" id="documentContent.content"
