@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -19,7 +21,7 @@
     <div class="img"><a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank"  title=""><img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot-picture" /></a></div>
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
-      <h1>${productModel.product.name}</h1>
+      <h1>${productModel.name}</h1>
       <div class="p-img">
         <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
         <div class="des-txt">
@@ -30,7 +32,7 @@
       </div>
 
       <%--<div class="p-img"><a href="http://${productModel.product.master.name}.efeiyi.com" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>--%>
-      <div class="item p-text">${productModel.product.master.content}</div>
+      <div class="item p-text">${map.get(productModel)}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <div class="item p-btn">
         <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
@@ -51,9 +53,15 @@
       <ul class="ul-item">
         <c:forEach items="${productModelList}" var="productModel" begin="0" end="15" varStatus="rec">
           <li>
-            <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
+            <a href="<c:url value='/pr0oduct/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
-              <p class="wh name">${map.get(productModel)}
+              <p class="wh name">
+                <c:if test="${fn:length(map.get(productModel))>'14'}">
+                  ${fn:substring(map.get(productModel),"0","14")}...
+                </c:if>
+                <c:if test="${fn:length(map.get(productModel))<='14'}">
+                  ${map.get(productModel)}
+                </c:if>
               </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
