@@ -38,7 +38,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="name" for="name" class="am-u-sm-3 am-form-label">name
+            <label name="name" for="name" class="am-u-sm-3 am-form-label">机构名称
                 <small>*</small>
             </label>
 
@@ -94,7 +94,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="inCharge" for="inCharge" class="am-u-sm-3 am-form-label">inCharge
+            <label name="inCharge" for="inCharge" class="am-u-sm-3 am-form-label">负责人
                 <small>*</small>
             </label>
 
