@@ -39,10 +39,10 @@
 
                                      <form>
                                          <select class="cars" id="province" name="province.id"
-                                                 onchange="provinceChange(this)">
+                                                 onchange="provinceChange(this)" required>
                                              <option value="请选择">请选择</option>
                                          </select>
-                                         <select class="car1" id="city" name="city.id">
+                                         <select class="car1" id="city" name="city.id" required>
                                              <option value="请选择">请选择</option>
                                          </select>
                                      </form>
