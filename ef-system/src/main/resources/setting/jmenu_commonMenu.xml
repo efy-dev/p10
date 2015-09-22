@@ -249,7 +249,7 @@
         <jnode url="" id="CategoryManager" access="admin" state="closed" text_zh_CN="非遗项目与类别">
             <jnode url="/basic/xm.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目列表">
                 <match url="/basic/xm.do?qm=plistProject_default"/>
-                <match url="/basic/xm.do?qm=viewProject"/>
+
                 <match url="/basic/xm.do?qm=viewProject&amp;param=project"/>
                 <match url="/basic/xm.do?qm=formProject&amp;param=formProject"/>
                 <match url="/basic/xm.do?qm=formProject&amp;param=project"/>
@@ -262,7 +262,8 @@
                 <match url="/basic/xm.do?qm=plistProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=formProjectCategory&amp;param=JiChu"/>
-                <match url="/basic/xm.do?qm=viewProject"/>
+                <match url="/basic/xm.do?qm=viewProjectCategory&amp;view=plist"/>
+
             </jnode>
         </jnode>
     </jnode>
