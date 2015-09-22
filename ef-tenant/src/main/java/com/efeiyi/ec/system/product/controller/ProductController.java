@@ -221,11 +221,11 @@ public class ProductController extends BaseController {
                 XQuery productModelXQuery = new XQuery("listProductModel_default4",request);
                 productModelXQuery.put("product_id",productId);
                 tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
-                productPicture.setProductModel(tempProductModel);
+
 
             }else if(modelId!=null){
                 tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
-                productPicture.setProductModel(tempProductModel);
+
             }else {
                 modelId = "0";
             }
@@ -233,6 +233,7 @@ public class ProductController extends BaseController {
 
                 tempProductModel.setProductModel_url(productPicture.getPictureUrl());
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
                 XQuery xQuery = new XQuery("listProductPicture_default2",request);
                 xQuery.put("product_id",productId);
                 xQuery.put("productModel_id",tempProductModel.getId());
@@ -245,6 +246,7 @@ public class ProductController extends BaseController {
             }else if("1".equals(status)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
             }
 
 
