@@ -101,7 +101,7 @@ public class MyMemberController {
             model.addAttribute("object", document);
         }
         model.addAttribute("group", document.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() + */tempDo.getResult());
     }
 
     @RequestMapping("/saveMemGuideForm.do")
@@ -152,15 +152,15 @@ public class MyMemberController {
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath() */+ path);
     }
 
     @RequestMapping("/removeMemGuide.do")
     @ResponseBody
     public ModelAndView removeMemGuide(HttpServletRequest request, Document document) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
         documentManager.removeDocument(document);
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     //会员管理-会员管理
@@ -210,7 +210,7 @@ public class MyMemberController {
             model.addAttribute("object", document);
         }
         model.addAttribute("group", document.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
     @RequestMapping("/saveMemManagementForm.do")
@@ -260,7 +260,7 @@ public class MyMemberController {
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath() */+ path);
     }
 
     @RequestMapping("/removeMemManagement.do")
@@ -268,7 +268,7 @@ public class MyMemberController {
     public ModelAndView removeMemManagement(HttpServletRequest request, Document document) throws Exception {
         String path = request.getContextPath() + request.getParameter("resultPage");
         documentManager.removeDocument(document);
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
 }

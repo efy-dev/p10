@@ -124,7 +124,7 @@ public class MyDocumentAttachmentController {
             document.setTheDatetime(new Date());
             document.setStatus("1");
             document.setPublishDate(new Date());
-            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
+
         }
         DocumentAttachment attachment = new DocumentAttachment();
         attachment.setDocument(document);
@@ -139,7 +139,7 @@ public class MyDocumentAttachmentController {
         }
 
         String path = request.getParameter("qm");
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     @RequestMapping("/attachmentDownload")
@@ -184,11 +184,11 @@ public class MyDocumentAttachmentController {
     @RequestMapping("/removeAttachment.do")
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, ApplicationMaterial material) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() + */request.getParameter("resultPage");
 
         baseManager.remove(material.getClass().getName(), material.getId());
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     /**
@@ -205,7 +205,7 @@ public class MyDocumentAttachmentController {
 
         newMaterial.setStatus(material.getStatus());
         baseManager.saveOrUpdate(newMaterial.getClass().getName(), newMaterial);
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
     /**

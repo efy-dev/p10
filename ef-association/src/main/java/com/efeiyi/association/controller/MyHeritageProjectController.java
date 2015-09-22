@@ -151,15 +151,15 @@ public class MyHeritageProjectController {
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         documentManager.saveDocument(document);
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:"/* + request.getContextPath()*/ + path);
     }
 
     @RequestMapping("/removeHeritageProject.do")
     @ResponseBody
     public ModelAndView removeHeritageProject(HttpServletRequest request, Document document) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
         documentManager.removeDocument(document);
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
 }
