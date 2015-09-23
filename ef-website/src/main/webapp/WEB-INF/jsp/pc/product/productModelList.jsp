@@ -34,7 +34,7 @@
   <div class="shop-sort wh">
       <ul class="link1">
 
-          <li class="active"><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-up"></i></a></li>
+          <li class="active"><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
       </ul>
   </div>
   <!-- //End--shop-sort-->
