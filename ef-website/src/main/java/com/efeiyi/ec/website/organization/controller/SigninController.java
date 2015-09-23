@@ -123,7 +123,7 @@ public class   SigninController extends BaseController {
 //        cart.setUser(user);
 //        cart.setCreateDatetime(new Date());
 //        baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/sso.do");
     }
 
     /*
