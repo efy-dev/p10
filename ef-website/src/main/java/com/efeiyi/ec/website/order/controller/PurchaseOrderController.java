@@ -207,7 +207,11 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                 //@TODO 修改订单状态
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-
+                if (purchaseOrder ==null){
+                    System.out.println("purchaseOrder is null,session problem");
+                    purchaseOrder = ((PurchaseOrderPayment)baseManager.getObject(PurchaseOrderPayment.class.getName(),purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
+                }
+                System.out.println(purchaseOrder.getId());
 
                 if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                     //同时修改子订单状态

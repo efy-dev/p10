@@ -27,11 +27,11 @@
     </div>
 </div>
 <script>
-    showChooseConfirm("提示","是否支付成功？",function(){
-        window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"
-    },function(){
-        window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"
-    })
+    <%--showChooseConfirm("提示","是否支付成功？",function(){--%>
+        <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
+    <%--},function(){--%>
+        <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
+    <%--})--%>
 </script>
 </body>
 </html>
