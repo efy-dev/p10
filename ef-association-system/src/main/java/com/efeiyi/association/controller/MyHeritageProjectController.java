@@ -100,7 +100,7 @@ public class MyHeritageProjectController {
             model.addAttribute("object", document);
         }
         model.addAttribute("group", document.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
     @RequestMapping("/saveHeritageProjectForm.do")
