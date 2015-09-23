@@ -39,10 +39,10 @@
 
                                      <form>
                                          <select class="cars" id="province" name="province.id"
-                                                 onchange="provinceChange(this)">
+                                                 onchange="provinceChange(this)" required>
                                              <option value="请选择">请选择</option>
                                          </select>
-                                         <select class="car1" id="city" name="city.id">
+                                         <select class="car1" id="city" name="city.id" required>
                                              <option value="请选择">请选择</option>
                                          </select>
                                      </form>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)">
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)" style="color: black">
                     <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
@@ -183,7 +183,7 @@
         <!--结算-->
         <div class="System">
             <div class="System-text">
-                <span><a onclick="submitOrder('${purchaseOrder.id}')">提交订单</a> </span>
+                <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
                 <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
             </div>
         </div>
@@ -195,7 +195,7 @@
 
     var payment = "1";
     var consumerAddress = "";
-    if ($(".activeFlag") != null) {
+    if (typeof $(".activeFlag").attr("id")!="undefined") {
         consumerAddress = $(".activeFlag").attr("id");
     }
 
@@ -217,7 +217,7 @@
         $("#zhifubao").attr("class", "alipay");
         payment = "3";
     }
-    function submitOrder(orderId) {
+    function submitOrder(element,orderId) {
         var messageObject = new Object();
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
@@ -232,7 +232,14 @@
         } else {
             var url = "<c:url value="/order/confirm/"/>";
             url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-            window.location.href = url;
+            element.onclick = null;
+            $(element).attr("href",url);
+            $(element).click();
+            showChooseConfirm("提示","是否支付成功？",function(){
+                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+            },function(){
+                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+            })
         }
     }
 

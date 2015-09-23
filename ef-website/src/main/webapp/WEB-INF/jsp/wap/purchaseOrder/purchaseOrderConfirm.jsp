@@ -47,7 +47,7 @@
           <c:forEach items="${productMap.get(tenant.id)}" var="product">
             <c:if test="${product.isChoose==1}">
               <li>
-                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productPicture.pictureUrl}" alt="">
+                <img class="img" src="http://pro.efeiyi.com/${product.productModel.productModel_url}" alt="">
                 <div class="bd info">
                   <p class="text">${product.productModel.product.name}</p>
                   <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
@@ -129,9 +129,9 @@
               <li>
                 <label>所在地区</label>
                 <select id="provinceVal" class="cars" name="province.id"
-                        onclick="province(this);">
+                        onclick="province(this);" required>
                 </select>
-                <select id="cityVal" class="car1" name="city.id" onclick="city(this);">
+                <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
                 </select>
               </li>
               <li>

@@ -266,13 +266,15 @@
 <!-- content end -->
 <hr/>
 
-<div class="am-g">
+<div class="am-g" style="position: relative;min-height:380px">
     <div class="am-u-sm-12 am-u-md-6">
         <h4>物流记录</h4>
     </div>
+    <div style="width:530px;height:380px;position: absolute;top:0;left:50%;margin-left:-266px;">
     <iframe id="kuaidi100" name="kuaidi100" src="" width="600" height="380" marginwidth="0" marginheight="0" hspace="0"
             vspace="0" frameborder="0" scrolling="no">
     </iframe>
+    </div>
 </div>
 <script>
     function editPurchaseOrderDelivery(purchaseOrderDeliveryId, logisticsCompany, serial) {

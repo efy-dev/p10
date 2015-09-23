@@ -35,6 +35,10 @@ public class ProjectFormHandler implements MultipartHandler {
             aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url"), "ec-efeiyi", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
             paramMap.put("picture_url", "project_picture/" + multipartRequest.getFile("picture_url").getOriginalFilename());
         }
+        if (!multipartRequest.getFile("picture_wap_url").getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_wap_url"), "ec-efeiyi", "project_picture/" + multipartRequest.getFile("picture_wap_url").getOriginalFilename());
+            paramMap.put("picture_wap_url", "project_picture/" + multipartRequest.getFile("picture_wap_url").getOriginalFilename());
+        }
 
         //������� start
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);

@@ -50,7 +50,7 @@
         <th>操作</th>
         <th>订单号</th>
         <th>订单状态</th>
-        <th>总计(元)</th>
+        <th>总额/实付金额</th>
         <th>收货人</th>
         <!--<th>ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" type="select" /> </th> -->
         <th>下单时间</th>
@@ -91,7 +91,8 @@
                 <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal" />
             </td>
             <td width="10%">
-                    ${purchaseOrder.total}
+                    ${purchaseOrder.total}<br>
+                    ${purchaseOrder.getRealPayMoney()}
             </td>
             <td width="10%">
               ${purchaseOrder.user.name}

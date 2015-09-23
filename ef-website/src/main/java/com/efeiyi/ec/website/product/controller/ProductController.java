@@ -120,10 +120,6 @@ public class ProductController {
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
-                if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
-                    s.append("...");
-                }
                 map.put((ProductModel)productModelTemp,s.toString());
             }
         }
@@ -171,7 +167,7 @@ public class ProductController {
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
         if (productPictures != null && productPictures.size() > 0) {
-            for (ProductPicture p : productPictures) {
+             for (ProductPicture p : productPictures) {
                     if("2".equals(p.getStatus())){
                         productPicture = p;
                         break;

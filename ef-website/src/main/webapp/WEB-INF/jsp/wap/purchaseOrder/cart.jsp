@@ -19,7 +19,7 @@
 
                         <div class="bd info">
                             <div class="title">${tenant.name}</div>
-                            <div class="txt">已购满0元，已减0元</div>
+                           <%-- <div class="txt">已购满0元，已减0元</div>--%>
                             <a href="#arrow-right" class="arrow-right"></a>
                         </div>
                     </li>
@@ -94,55 +94,6 @@
 
                 <p class="bd">去看看心仪的商品吧。</p>
             </div>
-            <!-- //End--prompt-txt-->
-            <%--<div class="bd pro-rec">
-                <h2>精品推荐</h2>
-                <ul class="ul-list">
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                    <li>
-                        <img src="<c:url value="/scripts/wap/upload/cart-exp-1.jpg"/>" alt=""/>
-
-                        <p class="name">这是商品这是商品</p>
-
-                        <p class="price"><em>￥</em><span>2000</span></p>
-                    </li>
-                </ul>
-            </div>--%>
-            <!-- //End--products-->
         </div>
         <!-- //End--cart-list-no-->
     </article>
@@ -158,7 +109,6 @@
         window.location.href = "<c:url value='/cart/removeProduct.do?cartProductId='/>"+cartProductId;
     }
     function submit(){
-
         var param = {cartId:'${cart.id}'}
 
         var success = function(data){
@@ -268,6 +218,13 @@
             $("input").each(function () {
                 var inputId = $(this).attr("id") + "";
                 if (inputId.indexOf(data["tenantId"]) >= 0) {
+                    /*alert(inputId);
+                    var cp = inputId.split(":")[1];
+                    alert("1111"+cp);*/
+
+                   /* var cartProductId = inputId.split(":");*/
+
+                    /*chooseItem(cp);*/
                     this.checked = true;
                 }
             })

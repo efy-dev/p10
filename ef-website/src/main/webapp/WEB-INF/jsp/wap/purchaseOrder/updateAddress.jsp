@@ -22,12 +22,12 @@
         <li>
           <label>所在地区</label>
           <select id="${address.id}" name="province.id" class="cars"
-                  onchange="provinceChange(this , '${address.id}')">
+                  onchange="provinceChange(this , '${address.id}')" required>
             <c:forEach var="pro" items="${province}">
               <option value="${pro.id}">${pro.name}</option>
             </c:forEach>
           </select>
-          <select id="citys${address.id}" name="city.id" class="car1">
+          <select id="citys${address.id}" name="city.id" class="car1" required>
           </select>
         </li>
         <li>

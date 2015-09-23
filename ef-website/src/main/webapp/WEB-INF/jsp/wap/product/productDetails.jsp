@@ -26,7 +26,8 @@
     <!--//End--am-slider-->
     <div class="bd details">
         <div class="bd des-title">
-            <strong class="bd txt">${productModel.product.name} <c:forEach
+            <strong class="bd txt">${productModel.product.name}
+                <c:forEach
                     items="${productModel.productPropertyValueList}" var="pv">
                 ${pv.projectPropertyValue.value}
             </c:forEach> </strong>
@@ -135,9 +136,9 @@
     <div class="bd details-total-bar">
         <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
-        <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
-                class="icon"></i>放入购物车</a>
-        <a class="btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买">立即购买</a>
+            <a class="btn-cart" data-am-modal="{target: '#my-actions'}" title="放入购物车"><i
+                    class="icon"></i>放入购物车</a>
+        <a class="btn-buy"data-am-modal="{target: '#my-actions'}" title="立即购买">立即购买</a>
     </div>
 </article>
 
@@ -152,7 +153,7 @@
         </dl>
         <ul class="bd ul-nav">
             <c:forEach items="${productModel.product.productModelList}" var="pm">
-                <li><a href="<c:url value="/product/productModel/${pm.id}"/> ">
+                <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
                         ${pm.product.name} <c:forEach
                         items="${pm.productPropertyValueList}" var="pv">
                     ${pv.projectPropertyValue.value}
@@ -171,7 +172,12 @@
         <%--<a class="add" href="#加"></a>--%>
         <%--</li>--%>
         <%--</ul>--%>
-        <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
+        <c:if test="${productModel.amount <= 0}">
+            <a  class="bd btn-cart">缺货</a>
+        </c:if>
+        <c:if test="${productModel.amount > 0}">
+            <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
+        </c:if>
     </div>
 </div>
 <script type="text/javascript">
