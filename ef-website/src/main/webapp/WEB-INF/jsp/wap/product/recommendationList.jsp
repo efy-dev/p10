@@ -66,7 +66,7 @@
 
   <!-- //End-->
   <div class="bd list-class">
-    <ul class="ul-list">http://www2.efeiyi.com/
+    <ul class="ul-list">
 
       <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
         <a href="<c:url value='/product/productModel/${productModel.id}'/>"  title="">
