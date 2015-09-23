@@ -115,14 +115,9 @@ public class ProductController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
             Integer index = 0;
-            if(fileName.indexOf(".JPG")!=-1){
-                index = fileName.indexOf(".JPG");
-            }
-            if(fileName.indexOf(".jpg")!=-1){
-                index = fileName.indexOf(".jpg");
-            }
-            String imgName = fileName.substring(0, index);
-            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
+            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String imgName = fileName.substring(0, fileName.indexOf(hz));
+            url = "product/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
