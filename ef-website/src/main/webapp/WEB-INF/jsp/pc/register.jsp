@@ -205,7 +205,7 @@
                         <h1>注册会员</h1>
                         <span class="link">
                             <p>已是会员，</p>
-                            <a class="reg" href="<c:url value="/login"/> ">登录</a>
+                            <a class="reg" href="<c:url value="/sso.do"/> ">登录</a>
                         </span>
                     </div>
                     <div class="am-form-group">
@@ -217,7 +217,7 @@
                                placeholder="请输入您的手机号"
                                required>
                         <label class="msg-tips" id="usernameMessage" style="display: none">
-                            <span class="msg">！该手机号已存在,如果您是该用户，请 <a href="<c:url value="/login"/> ">立刻登录</a></span>
+                            <span class="msg">！该手机号已存在,如果您是该用户，请 <a href="<c:url value="/sso.do"/> ">立刻登录</a></span>
                         </label>
                     </div>
                     <div class="am-form-group">
