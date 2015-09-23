@@ -21,7 +21,7 @@
     <http realm="Contacts Realm" use-expressions="true">
         <csrf disabled="true"/>
         <intercept-url pattern="/main.do" access="isAuthenticated()"/>
-        <intercept-url pattern="/content/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/my**" access="isAuthenticated()"/>
         <intercept-url pattern="/index.jsp" access="isAuthenticated()"/>
         <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
         <form-login login-page="/login.jsp" login-processing-url="/j_spring_security_check"
