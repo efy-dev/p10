@@ -53,7 +53,15 @@
         <label name="name" class="am-u-sm-3 am-form-label">商品名称</label>
 
         <div class="am-u-sm-9">
-          <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}">
+          <input type="text" name="name" id="name" placeholder="商品名称" value="${object.name}" required>
+          <!--<small>必填项*</small>-->
+        </div>
+      </div>
+      <div class="am-form-group">
+        <label name="subName" class="am-u-sm-3 am-form-label">商品副名称</label>
+
+        <div class="am-u-sm-9">
+          <input type="text" name="subName" id="subName" placeholder="商品副名称" value="${object.subName}">
           <!--<small>必填项*</small>-->
         </div>
       </div>
