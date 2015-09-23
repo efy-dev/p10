@@ -27,9 +27,13 @@ public class BasicBannerFormHandler implements MultipartHandler{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "banner/"+identify+"_"+request.getParameter("groupName")+".jpg";
-        String bucket = request.getParameter("bucket");
-        boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("imageUrl"), bucket, url);
+        String url=request.getParameter("OldImageUrl");
+        String bucket;
+        if(!multipartRequest.getFile("imageUrl").getOriginalFilename().equals("")) {
+         url = "banner/"+identify+"_"+request.getParameter("groupName")+".jpg";
+         bucket = request.getParameter("bucket");
+            boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("imageUrl"), bucket, url);
+        }
 
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
         HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();

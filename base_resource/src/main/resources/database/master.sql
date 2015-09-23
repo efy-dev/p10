@@ -405,3 +405,6 @@ PRIMARY KEY (`id`)
 )
 ;
 =================================================以上 已执行======================================================
+
+ALTER TABLE `project`
+ADD COLUMN `fansAmout`  bigint(20) NULL AFTER `district_id`;
