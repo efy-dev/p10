@@ -369,6 +369,7 @@ public class PurchaseOrderController extends BaseController {
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("productModel",productModel);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
