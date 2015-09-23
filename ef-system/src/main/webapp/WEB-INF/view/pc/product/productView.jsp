@@ -23,8 +23,12 @@
 </head>
 <body>
 
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="your-modal">
-    <div class="am-modal-dialog">
+<style>
+.am-modal-dialog {background: transparent}
+.am-modal-dialog img {width:100%}
+</style>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="your-modal" style="background: #f00;">
+    <div class="am-modal-dialog" style="width:800px;height:800px;position: absolute;top:50%;left: 50%;margin-top: -400px;margin-left: -400px">
         <div class="am-modal-bd">
             <img src="" title="原图">
         </div>
@@ -422,8 +426,20 @@
         selectVal = $(obj).val();
     }
 
+  var options = {
+
+      height:"0"
+  };
     function tc(url){
+        var img = new Image();
+        img.src = url;
+        img.onload = function(){
+           // alert(img.width+"-->"+img.height);
+         //  $("#your-modal .am-modal-dialog ").css({"margin-top":img.width/2,"margin-left":});
+            $("#your-modal .am-modal-bd img").attr("title","原图"+img.width+"x"+img.height);
+        };
         $("#your-modal .am-modal-bd img").attr("src",url);
+
         $("#your-modal").modal();
     }
 
