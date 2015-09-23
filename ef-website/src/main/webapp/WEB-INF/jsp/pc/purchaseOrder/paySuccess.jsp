@@ -19,7 +19,7 @@
             <p>您已成功提交付款</p>
 
             <p>
-                <a href="<c:url value="/cart/view"/> ">返回购物车</a>
+                <a href="<c:url value="/order/myEfeiyi/view/${order.id}"/> ">查看订单</a>
                 <a href="<c:url value="/"/> ">首页</a>
             </p>
         </div>

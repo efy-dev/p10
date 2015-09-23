@@ -198,9 +198,9 @@ public class PurchaseOrderController extends BaseController {
                     transactionNumber = messageDetailJson.getString("trade_no");
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
-                System.out.println("transactionNumber : " + transactionNumber);
-                System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
-                System.out.println("=========================test isUpdate==========================");
+//                System.out.println("transactionNumber : " + transactionNumber);
+//                System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
+//                System.out.println("=========================test isUpdate==========================");
 //            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
 
 
@@ -209,10 +209,10 @@ public class PurchaseOrderController extends BaseController {
                 //@TODO 修改订单状态
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
                 if (purchaseOrder ==null){
-                    System.out.println("purchaseOrder is null,session problem");
+//                    System.out.println("purchaseOrder is null,session problem");
                     purchaseOrder = ((PurchaseOrderPayment)baseManager.getObject(PurchaseOrderPayment.class.getName(),purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                 }
-                System.out.println(purchaseOrder.getId());
+//                System.out.println(purchaseOrder.getId());
 
                 if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                     //同时修改子订单状态
@@ -703,8 +703,8 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) {
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        model.addAttribute("order", purchaseOrder);
+        PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         return "/purchaseOrder/paySuccess";
     }
 
