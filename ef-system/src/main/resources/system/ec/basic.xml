@@ -49,11 +49,11 @@
                        execute="com.efeiyi.ec.system.basic.controller.ToBasicBannerFormHandler"  result="/banner/bannerForm"/>
                 <do name="saveOrUpdateBanner" label="保存banner" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
-                    result="redirect:/basic/xm.do?qm=plistBanner_master"
+                    result="redirect:/basic/xm.do?groupName=master.homePage&amp;qm=plistBanner_master.homePage"
                     />
                 <do name="saveOrUpdateEcBanner" label="保存电商网站轮播图" access=""
                     execute="com.efeiyi.ec.system.basic.controller.BasicBannerFormHandler"
-                    result="redirect:/basic/xm.do?qm=plistEcBanner_tenant"
+                    result="redirect:/basic/xm.do?qm=plistEcBanner_tenant&amp;groupName=ec.home.banner"
                         />
                 <do name="listBanner" label="banner列表" access="" result="/banner/bannerList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">

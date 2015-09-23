@@ -47,9 +47,12 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                      onclick="showConfirm('提示','是否删除',function(){removeBanner('${banner.id}')})" href="#"/><span
+                                       href="<c:url value="/basic/xm.do?qm=formBanner&groupName=${groupName}&bucket=ec-efeiyi&id=${banner.id}"/>"><span
+                                            class="am-icon-trash-o">编辑</span>
+                                    </a>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       onclick="showConfirm('提示','是否删除',function(){removeBanner('${banner.id}')})" href="javascript:void (0);"><span
                                             class="am-icon-trash-o">删除</span>
                                     </a>
                                 </div>

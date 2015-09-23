@@ -26,9 +26,13 @@
                 <input type="hidden" name="bucket" value="${bucket}">
                 <c:if test="${bucket == 'ec-efeiyi'}">
                     <input type="hidden" value="saveOrUpdateEcBanner" name="qm">
+                    <c:set var="url" value="pro"/>
+                    <c:set var="urlStyle" value="product-model"/>
                 </c:if>
                 <c:if test="${bucket == 'tenant'}">
                     <input type="hidden" value="saveOrUpdateBanner" name="qm">
+                    <c:set var="url" value="tenant"/>
+                    <c:set var="urlStyle" value="tenant-manage-banner"/>
                 </c:if>
                 <div class="am-form-group">
                     <label for="title" class="am-u-sm-3 am-form-label">标题 / Title</label>
@@ -41,8 +45,20 @@
                     <label for="imageUrl" class="am-u-sm-3 am-form-label">轮播图 / Banner</label>
 
                     <div class="am-u-sm-9">
-                        <input type="file" id="imageUrl" name="imageUrl" placeholder="轮播图 / Banner">
+                        <c:if test="${not empty object.imageUrl}">
+                            <img src="http://${url}.efeiyi.com/${object.imageUrl}@!${urlStyle}"/>
+                            <input name="OldImageUrl" type="hidden" value="${object.imageUrl}">
+                        </c:if>
+                        <input type="file" id="imageUrl" value="${object.imageUrl}" name="imageUrl" placeholder="轮播图 / Banner">
                         <small>选择你要保存的轮播图</small>
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="directUrl" class="am-u-sm-3 am-form-label">跳转地址</label>
+
+                    <div class="am-u-sm-9">
+                        <input type="text" id="directUrl" name="directUrl" placeholder="点击轮播图跳转的url" value="${object.directUrl}">
                     </div>
                 </div>
                 <div class="am-form-group">
