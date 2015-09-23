@@ -41,6 +41,7 @@ public class Project {
     private List<ProjectFollowed> projectFolloweds;
     private AddressDistrict addressDistrict;
     private List<ProjectRecommended> projectRecommendeds;
+    private Long fsAmount;
 
 
 
@@ -200,7 +201,7 @@ public class Project {
 //    public void  setFatherProjectId(String fatherProjectId){
 //          this.fatherProjectId = fatherProjectId;
 //    }
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectFollowed> getProjectFolloweds() {
         return projectFolloweds;
@@ -223,7 +224,7 @@ public class Project {
     }
 
 
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
     public List<ProjectRecommended> getProjectRecommendeds() {
         return projectRecommendeds;
@@ -231,6 +232,14 @@ public class Project {
 
     public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
         this.projectRecommendeds = projectRecommendeds;
+    }
+    @Column(name="fansAmout")
+    public Long getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Long fsAmount) {
+        this.fsAmount = fsAmount;
     }
 }
 
