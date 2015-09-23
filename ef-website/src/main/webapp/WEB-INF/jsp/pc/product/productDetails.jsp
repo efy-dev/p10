@@ -26,7 +26,7 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect" onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
+      <div class="collect" disabled =disable  onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
@@ -154,7 +154,9 @@
           <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
+          <c:if test="${not empty product.master.id}">
           <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">进 入 店 铺</a></li>
+          </c:if>
         </ul>
       </div>
       <!-- //End-->
