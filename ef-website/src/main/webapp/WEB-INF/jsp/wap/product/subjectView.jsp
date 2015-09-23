@@ -14,7 +14,7 @@
     <ul class="ul-list">
       <c:forEach items="${productModelList}" var="productModel">
         <li>
-          <img src="http://pro.efeiyi.com/${productModel.productModel.productPicture.pictureUrl}" alt="">
+          <img src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}" alt="">
           <p class="name">${productModel.productModel.product.name}</p>
           <p class="price red"><em>￥</em><span>${productModel.productModel.price}</span></p>
         </li>
