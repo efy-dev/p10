@@ -48,7 +48,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="bannerOrder" for="bannerOrder" class="am-u-sm-3 am-form-label">bannerOrder
+            <label name="bannerOrder" for="bannerOrder" class="am-u-sm-3 am-form-label">展示顺序
                 <small>*</small>
             </label>
 
@@ -59,7 +59,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="directUrl" for="directUrl" class="am-u-sm-3 am-form-label">新闻/news
+            <label name="directUrl" for="directUrl" class="am-u-sm-3 am-form-label">链接地址
                 <small>&nbsp;&nbsp;</small>
             </label>
             <div class="am-u-sm-9">

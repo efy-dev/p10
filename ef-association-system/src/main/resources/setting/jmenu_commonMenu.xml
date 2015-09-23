@@ -35,8 +35,8 @@
             </jnode>
         </jnode>
         <jnode id="IntangibleCulturalHeritageProtection" url="" access="admin,manager" text_zh_CN="非遗保护">
-            <jnode url="/myHeritageProject/heritageProject.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
-                <match url="/myHeritageProject/heritageProject.do?qm=plistLaw_default"/>
+            <jnode url="/myHeritageProject/heritageLaw.do?qm=plistLaw_default&amp;resultPage=/myHeritageProject/heritageLaw.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法">
+                <match url="/myHeritageProject/heritageLaw.do?qm=plistLaw_default"/>
                 <match url="/myHeritageProject/heritageProjectForm.do?qm=heritageProjectForm_form&amp;group=intLaw"/>
             </jnode>
             <jnode url="/myHeritageProject/heritageProject.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="非遗保护政策">
