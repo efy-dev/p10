@@ -209,7 +209,7 @@ public class Master implements Serializable {
         this.presentAddress = presentAddress;
     }
 
-    @Column(name = "fsAmount")
+    @Column(name = "fansAmount")
     public Long getFsAmount() {
         return fsAmount;
     }
