@@ -57,6 +57,13 @@
                 </div>
             </div>
             <div class="am-form-group">
+                <label for="address" class="am-u-sm-3 am-form-label">商家地址</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" required>
+                </div>
+            </div>
+            <div class="am-form-group">
                 <label for="logo" class="am-u-sm-3 am-form-label">Logo</label>
 
                 <div class="am-u-sm-9">

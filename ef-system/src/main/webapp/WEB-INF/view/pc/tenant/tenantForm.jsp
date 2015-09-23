@@ -95,6 +95,13 @@
                     <%--<input type="text" id="content" name="content" placeholder="企业商家简介" value="${object.content}" required>--%>
                 </div>
             </div>
+            <div class="am-form-group">
+                <label for="address" class="am-u-sm-3 am-form-label">商家地址</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" required>
+                </div>
+            </div>
             <%--<div class="am-form-group">--%>
                 <%--<label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>--%>
 
