@@ -117,9 +117,8 @@ public class XDoUtil {
                     paramObject = Boolean.valueOf(paramObject.toString());
                 } else if (pageField.getDataType().equals("float")) {
                     paramObject = Float.valueOf(paramObject.toString());
-                }else if (paramObject.equals("null")){
-                    continue;
                 }
+
 
                 if (ReflectUtil.invokeGetterMethod(object, pageField.getName()) == null) {
                     ReflectUtil.invokeSetterMethod(object, pageField.getName(), paramObject);

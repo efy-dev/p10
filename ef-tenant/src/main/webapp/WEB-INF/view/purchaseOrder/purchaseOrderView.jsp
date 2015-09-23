@@ -339,7 +339,7 @@
             data: {company: company, serial: serial},
             dataType: "json",
             success: function (data) {
-                alert(data);
+                //alert(data);
                 $("#kuaidi100").attr("src", data);
             }
         });

@@ -48,17 +48,6 @@
                     // alert('不想说!');
                 }
             });
-
-
-            <%--jQuery.ajax({--%>
-            <%--type: "GET",--%>
-            <%--url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',--%>
-            <%--data: {id: orderId},--%>
-            <%--dataType: "json",--%>
-            <%--success: function (data) {--%>
-            <%--$("#" + orderId).remove();--%>
-            <%--}--%>
-            <%--});--%>
         }
 
 
@@ -70,7 +59,7 @@
                 data: {company: company, serial: serial},
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
+                    //alert(data);
                     $("#kuaidi100").attr("src", data);
                 }
             });

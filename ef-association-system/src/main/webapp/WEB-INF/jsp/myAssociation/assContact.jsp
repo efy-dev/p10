@@ -33,7 +33,8 @@
         <div class="am-form-group">
             <label name="介绍" for="documentContent.content" class="am-u-sm-3 am-form-label">介&nbsp;&nbsp;绍<small>*</small></label>
             <div class="am-u-sm-9">
-                <textarea rows="3" name="documentContent.content" id="documentContent.content"
+                <textarea name="documentContent.content" id="documentContent.content"
+                          class="ckeditor"
                           placeholder="介绍" required="true">${document.documentContent.content}</textarea>
             </div>
         </div>
@@ -76,5 +77,7 @@
         </div>
     </form>
 </div>
+<script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
+<script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
 </body>
 </html>
