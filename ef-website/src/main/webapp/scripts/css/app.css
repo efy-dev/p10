@@ -35,7 +35,7 @@ a:hover {color:#f00;text-decoration:underline}
 .header .logo a {background-position:0 0;width:307px;height:50px;float:left}
 .header .nav ul {float:right;margin-top:15px;margin-right:154px}
 .header .nav li {float:left;line-height:68px;position:relative}
-.header .nav li a {font-size:12px;color:#000;padding:0 30px;position:relative;z-index:5}
+.header .nav li a {font-size:14px;color:#000;padding:0 30px;position:relative;z-index:5}
 .header .nav li a:hover {color:#f00;text-decoration:underline}
 .header .nav li a.cur {color:#f00}
 .header .nav li .bgbor {border:1px #fff solid;border-bottom:none;background:#fff;width:112px;height:47px;position:absolute;top:18px;left:0;z-index:4}
@@ -105,7 +105,7 @@ a:hover {color:#f00;text-decoration:underline}
 .category .explain .title p {line-height:30px;margin-bottom:30px}
 .category .explain .title p .zh {width:30px;font-size:12px;color:#666;float:left}
 .category .explain .title p .cn {font-size:24px;float:left}
-.category .explain .info {width:840px;font-size:12px;float:left;line-height:24px}
+.category .explain .info {width:840px;height:72px;font-size:12px;line-height:24px;position: absolute;top:50%;margin-top: -36px;left:250px;overflow: hidden}
 .category .explain .more {position:absolute;bottom:5px;right:120px;font-weight: normal}
 .category .explain .more .icon {margin-top:6px}
 /*--//End--explain--*/

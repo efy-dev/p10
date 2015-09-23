@@ -45,6 +45,7 @@ public class Project {
     private List<ProjectFollowed> projectFolloweds;
     private AddressDistrict addressDistrict;
     private List<ProjectRecommended> projectRecommendeds;
+    private Long fsAmount;
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -241,6 +242,14 @@ public class Project {
 
     public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
         this.projectRecommendeds = projectRecommendeds;
+    }
+    @Column(name="fansAmout")
+    public Long getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Long fsAmount) {
+        this.fsAmount = fsAmount;
     }
 }
 

@@ -172,10 +172,10 @@
         <%--<a class="add" href="#加"></a>--%>
         <%--</li>--%>
         <%--</ul>--%>
-        <c:if test="${productModel.amount == 0}">
+        <c:if test="${productModel.amount <= 0}">
             <a  class="bd btn-cart">缺货</a>
         </c:if>
-        <c:if test="${productModel.amount != 0}">
+        <c:if test="${productModel.amount > 0}">
             <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
         </c:if>
     </div>

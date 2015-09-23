@@ -109,7 +109,6 @@
         window.location.href = "<c:url value='/cart/removeProduct.do?cartProductId='/>"+cartProductId;
     }
     function submit(){
-alert(${cart.id})
         var param = {cartId:'${cart.id}'}
 
         var success = function(data){
@@ -219,11 +218,14 @@ alert(${cart.id})
             $("input").each(function () {
                 var inputId = $(this).attr("id") + "";
                 if (inputId.indexOf(data["tenantId"]) >= 0) {
-                    alert(inputId);
-                    this.checked = true;
-                    var cartProductId = inputId.split(":");
+                    /*alert(inputId);
+                    var cp = inputId.split(":")[1];
+                    alert("1111"+cp);*/
 
-                    chooseItem(cartProductId);
+                   /* var cartProductId = inputId.split(":");*/
+
+                    /*chooseItem(cp);*/
+                    this.checked = true;
                 }
             })
             $("#totalPrice").html(data["totalPrice"]);
