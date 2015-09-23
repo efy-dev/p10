@@ -51,6 +51,7 @@
         <input type="hidden" id="sampleContent" placeholder="sampleContent"
                name="sampleContent"
                value="${object.sampleContent}">
+        <input value="${group}" name="group" type="hidden"/>
 
         <div class="am-form-group">
             <label name="标题" for="title" class="am-u-sm-3 am-form-label">标题
@@ -68,21 +69,6 @@
 
             <div class="am-u-sm-9">
                 <input type="text" name="name" id="name" placeholder="发布人" value="${object.name}">
-            </div>
-        </div>
-        <div class="am-form-group">
-            <label name="group" for="group" class="am-u-sm-3 am-form-label">分类
-                <small>*</small>
-            </label>
-
-            <div class="am-u-sm-9">
-                <c:if test='${empty object.group}'>
-                    <ming800:status name="group" dataType="document.group"
-                                    checkedValue='${group}' type="select"/>
-                </c:if>
-                <c:if test='${not empty object.group}'><ming800:status name="group" dataType="document.group"
-                                                                       checkedValue='${object.group}'
-                                                                       type="select"/></c:if>
             </div>
         </div>
         <div class="am-form-group">

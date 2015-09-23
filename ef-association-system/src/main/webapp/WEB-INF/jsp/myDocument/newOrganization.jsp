@@ -22,19 +22,19 @@
 </div>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">添加/编辑机构</strong>
+        <strong class="am-text-primary am-text-lg">添加/编辑机构
+            <ming800:status name="group" dataType="intangibleCultureOrganization.group" checkedValue='${group}' type="normal"/>
+        </strong>
     </div>
 </div>
 <hr/>
-
 <div class="am-g">
     <form id="organizationForm" method="post" class="am-form am-form-horizontal">
         <div class="am-u-sm-9">
             <input type="hidden" name="theDatetime" value="${object.theDatetime}">
             <input type="hidden" name="id" value="${object.id}">
             <input type="hidden" name="status" value="${object.status}">
-            <%--<input type="hidden" name="group"  value="${object.group}">--%>
-            <%--<input type="hidden" name="group"  value="${requestScope.group}">--%>
+            <input type="hidden" name="group"  value="${group}">
         </div>
 
         <div class="am-form-group">
@@ -77,23 +77,6 @@
         </div>
 
         <div class="am-form-group">
-            <label name="group" for="group" class="am-u-sm-3 am-form-label">分类
-                <small>*</small>
-            </label>
-
-            <div class="am-u-sm-9">
-                <c:if test='${empty object.group}'>
-                    <ming800:status name="group" dataType="intangibleCultureOrganization.group"
-                                    checkedValue='${group}' type="select"/>
-                </c:if>
-                <c:if test='${not empty object.group}'><ming800:status name="group"
-                                                                       dataType="intangibleCultureOrganization.group"
-                                                                       checkedValue="${object.group}"
-                                                                       type="select"/></c:if>
-            </div>
-        </div>
-
-        <div class="am-form-group">
             <label name="inCharge" for="inCharge" class="am-u-sm-3 am-form-label">负责人
                 <small>*</small>
             </label>
@@ -130,4 +113,3 @@
 </script>
 </body>
 </html>
-
