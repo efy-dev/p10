@@ -74,7 +74,7 @@
 
         <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
-        <p class="name">${map.get(productModel)}</p>
+        <p class="name">${productModel.name}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
 
       </li>
