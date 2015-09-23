@@ -39,10 +39,11 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
+                <li><a href="http://www2.efeiyi.com" title="首页">首页</a></li>
                 <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                 <li><a href="<c:url value="/order/myEfeiyi/list.do"/> " title="个人中心">个人中心</a></li>
                 <li><a href="<c:url value="/productCategory.do"/> " title="分类">分类</a></li>
-                <li><a href="" title="传承人">大师</a></li>
+                <li><a href="" title="大师">大师</a></li>
             </ul>
         </div>
     </header>
