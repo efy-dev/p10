@@ -18,7 +18,7 @@ public class ConsumerAddress {
     private String post;
     private String phone;
     private String email;
-    private Consumer consumer;
+    private MyUser consumer;
     private String status;   //1 正常的 2 默认的
     private  String consignee;
     @Id
@@ -99,11 +99,11 @@ public class ConsumerAddress {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consumer_id")
-    public Consumer getConsumer() {
+    public MyUser getConsumer() {
         return consumer;
     }
 
-    public void setConsumer(Consumer consumer) {
+    public void setConsumer(MyUser consumer) {
         this.consumer = consumer;
     }
 
