@@ -243,7 +243,7 @@ public class Project {
     public void setProjectRecommendeds(List<ProjectRecommended> projectRecommendeds) {
         this.projectRecommendeds = projectRecommendeds;
     }
-    @Column(name="fansAmout")
+    @Column(name="fans_amount")
     public Long getFsAmount() {
         return fsAmount;
     }
