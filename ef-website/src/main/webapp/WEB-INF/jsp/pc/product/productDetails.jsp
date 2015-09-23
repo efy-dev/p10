@@ -74,18 +74,25 @@
       <div class="des">
         <ul class="ul-list">
           <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
-            <c:if test="${productModel.id == productModelTmp.id}">
-              <li class="active">
-            </c:if>
+            <%--<c:if test="${productModel.id == productModelTmp.id}">--%>
+              <%--<li class="active" >--%>
+                <%--<a href="/product/productModel/${productModelTmp.id}">--%>
+                  <%--<c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">--%>
+                    <%--${productPropertyValue.projectPropertyValue.value}--%>
+                  <%--</c:forEach>--%>
+                    <%--${product.name}</a>--%>
+              <%--</li>--%>
+            <%--</c:if>--%>
             <c:if test="${productModel.id != productModelTmp.id}">
               <li class="">
+                <a href="/product/productModel/${productModelTmp.id}">
+                  <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                    ${productPropertyValue.projectPropertyValue.value}
+                  </c:forEach>
+                    ${product.name}</a>
+              </li>
             </c:if>
-            <a href="/product/productModel/${productModelTmp.id}">
-                <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                  ${productPropertyValue.projectPropertyValue.value}
-                </c:forEach>
-                  ${product.name}</a>
-            </li>
+
 
           </c:forEach>
         </ul>
