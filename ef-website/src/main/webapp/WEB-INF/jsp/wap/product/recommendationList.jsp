@@ -40,7 +40,7 @@
 <artice class="custom">
   <div class="bd pro-rec-area">
     <div class="list-ad1"><a href="<c:url value="/product/productModel/${productModel.id}"/>"><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt=""/></a></div>
-    <!-- //End--
+    <!-- //End-->
     <div class="bd pep-info">
       <div class="bd txt">
         <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
