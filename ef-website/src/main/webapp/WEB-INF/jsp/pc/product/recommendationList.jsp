@@ -22,14 +22,32 @@
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.name}</h1>
-      <div class="p-img">
-        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
-        <div class="des-txt">
-          <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
-          <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+       <%--<c:if test="${empty productModel.product.master} ">--%>
+       <%--<div class="p-img">--%>
+        <%--<a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>--%>
+        <%--<div class="des-txt">--%>
+
+          <%--<p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>--%>
+          <%--<p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>--%>
+          <%--<p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>--%>
+           <%--</div>--%>
+       <%--</div>--%>
+      <%--</c:if>--%>
+
+        <div class="p-img">
+
+          <c:if test="${empty productModel.product.master}">
+          </c:if>
+          <c:if test="${not empty productModel.product.master.id}">
+          <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
+          <div class="des-txt">
+
+            <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
+            <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
+            <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+            </div>
+          </c:if>
         </div>
-      </div>
 
       <%--<div class="p-img"><a href="http://${productModel.product.master.name}.efeiyi.com" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>--%>
       <div class="item p-text">${map.get(productModel)}</div>
