@@ -62,7 +62,7 @@ CREATE TABLE `master_message_praise` (
 -----------start-----------
 ------------20150923----------
 ALTER TABLE `master`
-ADD COLUMN `fansAmout`  bigint(20) NULL AFTER `master_speech`;
+ADD COLUMN `fansAmount`  bigint(20) NULL AFTER `master_speech`;
 ------------end-----------
 
 
