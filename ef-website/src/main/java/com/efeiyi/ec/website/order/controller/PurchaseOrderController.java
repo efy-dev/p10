@@ -200,6 +200,7 @@ public class PurchaseOrderController extends BaseController {
                 }
                 System.out.println("transactionNumber : " + transactionNumber);
                 System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
+                System.out.println("=========================test isUpdate==========================");
 //            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
 
 
