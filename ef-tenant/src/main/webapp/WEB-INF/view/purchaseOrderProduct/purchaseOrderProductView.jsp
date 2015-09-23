@@ -7,10 +7,14 @@
 <body>
 <%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
 
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
-        <h2>详细信息</h2>
         <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>详细信息</th>
+            </tr>
+            </thead>
             <tbody>
             <tr>
 
