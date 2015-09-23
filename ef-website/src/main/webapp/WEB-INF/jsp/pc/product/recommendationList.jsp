@@ -22,14 +22,32 @@
     <%--<div class="img"><a href="<c:url value=''/>" target="_blank" title=""><img class="imgfilter" src="" width="500" height="350"/></a></div>--%>
     <div class="info">
       <h1>${productModel.name}</h1>
-      <div class="p-img">
-        <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
-        <div class="des-txt">
-          <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
-          <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
+       <%--<c:if test="${empty productModel.product.master} ">--%>
+       <%--<div class="p-img">--%>
+        <%--<a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>--%>
+        <%--<div class="des-txt">--%>
+
+          <%--<p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>--%>
+          <%--<p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>--%>
+          <%--<p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>--%>
+           <%--</div>--%>
+       <%--</div>--%>
+      <%--</c:if>--%>
+
+        <div class="p-img">
+
+          <c:if test="${empty productModel.product.master}">
+          </c:if>
+          <c:if test="${not empty productModel.product.master.id}">
+          <a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!ef-home-master" target="_blank" alt="" /></a>
+          <div class="des-txt">
+
+            <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
+            <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
+            <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+            </div>
+          </c:if>
         </div>
-      </div>
 
       <%--<div class="p-img"><a href="http://${productModel.product.master.name}.efeiyi.com" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>--%>
       <div class="item p-text">${map.get(productModel)}</div>
@@ -56,12 +74,13 @@
             <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
               <p class="wh name">
-                <c:if test="${fn:length(map.get(productModel))>'14'}">
-                  ${fn:substring(map.get(productModel),"0","14")}...
-                </c:if>
-                <c:if test="${fn:length(map.get(productModel))<='14'}">
-                  ${map.get(productModel)}
-                </c:if>
+                ${productModel.name}
+                <%--<c:if test="${fn:length(map.get(productModel))>'14'}">--%>
+                  <%--${fn:substring(map.get(productModel),"0","14")}...--%>
+                <%--</c:if>--%>
+                <%--<c:if test="${fn:length(map.get(productModel))<='14'}">--%>
+                  <%--${map.get(productModel)}--%>
+                <%--</c:if>--%>
               </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>

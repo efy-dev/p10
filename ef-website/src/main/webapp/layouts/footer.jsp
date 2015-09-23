@@ -18,8 +18,6 @@
         <a class="line"></a>
         <a href="" target="_blank" title="意见反馈">意见反馈</a>
         <a class="line"></a>
-        <a href="" target="_blank" title="帮助中心">帮助中心</a>
-        <a class="line"></a>
         <a href="" target="_blank" title="诚信保障">诚信保障</a>
         <a class="line"></a>
         <a href="" target="_blank" title="新闻资讯">新闻资讯</a>

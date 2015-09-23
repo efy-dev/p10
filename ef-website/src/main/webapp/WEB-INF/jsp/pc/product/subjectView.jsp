@@ -100,7 +100,7 @@
                     <li>
                         <a href="" target="_blank" title="">
                             <%--<span class="tips">精品<em class="icon"></em></span>--%>
-                            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel.productPicture.pictureUrl}@!product-hot" alt="">
+                            <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}@!product-hot" alt="">
                             <p class="wh name">${productModel.productModel.product.name}
                                 <c:forEach items="${productModel.productModel.productPropertyValueList}"
                                            var="ppv"> ${ppv.projectPropertyValue.value}</c:forEach></p>

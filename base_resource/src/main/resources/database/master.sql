@@ -405,3 +405,14 @@ PRIMARY KEY (`id`)
 )
 ;
 =================================================以上 已执行======================================================
+
+ALTER TABLE `project`
+ADD COLUMN `fansAmout`  bigint(20) NULL AFTER `district_id`;
+
+ALTER TABLE `product`
+MODIFY COLUMN `name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`,
+ADD COLUMN `sub_name`  varchar(255) NULL AFTER `master_id`;
+
+ALTER TABLE `tenant`
+ADD COLUMN `address`  varchar(255) NULL AFTER `picture_url`;
+
