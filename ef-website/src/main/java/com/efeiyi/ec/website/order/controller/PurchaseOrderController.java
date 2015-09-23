@@ -449,9 +449,9 @@ public class PurchaseOrderController extends BaseController {
         //拆分订单
         if (tenantList.size() > 1) {
             for (Tenant tenantTemp : tenantList) {
-                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder2", request);
                 xSaveOrUpdateTemp.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
-                xSaveOrUpdateTemp.getParamMap().put("user.id", null);
+//                xSaveOrUpdateTemp.getParamMap().put("user.id", null);
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
                 purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
                 purchaseOrderTemp.setTenant(tenantTemp);
