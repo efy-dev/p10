@@ -62,7 +62,7 @@
                                    inputType="default"/>
                             <field name="createDatetime" label="下单时间" defaultValue="${CURRENT_DATETIME}"
                                    inputType="default"/>
-                            <field name="user" label="订单所属用户" defaultValue="null"
+                            <field name="user" label="订单所属用户" defaultValue="${MY_USER}"
                                    inputType="default"/>
                             <field name="orderStatus" label="订单状态" defaultValue="1"
                                    inputType="default"/>

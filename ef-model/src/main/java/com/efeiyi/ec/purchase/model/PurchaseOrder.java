@@ -2,6 +2,7 @@ package com.efeiyi.ec.purchase.model;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.tenant.model.Tenant;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,7 +30,7 @@ public class PurchaseOrder {
     private List<PurchaseOrderDelivery> purchaseOrderDeliveryList;  //发货记录 订单配送
     private List<PurchaseOrderPayment> purchaseOrderPaymentList;
     private Date createDatetime;       //下单时间
-    private Consumer user;
+    private MyUser user;
     private ConsumerAddress consumerAddress;  //收获地址
     private String status;
     private BigDecimal total;  //订单总价
@@ -130,11 +131,11 @@ public class PurchaseOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public Consumer getUser() {
+    public MyUser getUser() {
         return user;
     }
 
-    public void setUser(Consumer user) {
+    public void setUser(MyUser user) {
         this.user = user;
     }
 
