@@ -39,13 +39,13 @@
 <!--//End--header-->
 <artice class="custom">
   <div class="bd pro-rec-area">
-    <%--<div class="list-ad1"><a href=""><img src="../shop2015/upload/list-ad2.jpg" alt=""/></a></div>--%>
+    <div class="list-ad1"><a href=""><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt=""/></a></div>
     <!-- //End-->
     <div class="bd pep-info">
       <div class="bd txt">
         <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
         <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
-        <%--<p class="txt-des">${productModel.product.master.content}</p>--%>
+        <p class="txt-des">${map.get(productModel)}</p>
       </div>
 
       <div class="img">
