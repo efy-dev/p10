@@ -162,12 +162,16 @@ public class PurchaseOrderController extends BaseController {
     }
 
 
+
+
     @RequestMapping({"/pay/alipay/callback"})
     @ResponseBody
     public String aliPayCallback(HttpServletRequest request) throws IOException {
         try {
 
 //
+//            String resultJson = "{\"transactionType\":\"PAY\",\"retryCounter\":8,\"transactionFee\":100,\"tradeSuccess\":true,\"notifyUrl\":\"http://master4.efeiyi.com/ef-website/order/pay/alipay/callback\",\"channelType\":\"WX\",\"optional\":{},\"messageDetail\":{\"transaction_id\":\"1004340401201509230968268774\",\"nonce_str\":\"iewjq1m3c20zz6zt\",\"bank_type\":\"BOB_DEBIT\",\"openid\":\"oc_M1uNonikJprGJts09m2_1iaY0\",\"fee_type\":\"CNY\",\"mch_id\":\"1243815402\",\"cash_fee\":\"100\",\"out_trade_no\":\"ienx05k3c680t1qt\",\"tradeSuccess\":true,\"appid\":\"wx7f6aa253b75466dd\",\"total_fee\":\"100\",\"trade_type\":\"NATIVE\",\"result_code\":\"SUCCESS\",\"time_end\":\"20150923164630\",\"is_subscribe\":\"Y\",\"return_code\":\"SUCCESS\"},\"transactionId\":\"iewjq1m3c20zz6zt\",\"sign\":\"df09e0f46b4d73b025f8669c7acdeb7f\",\"timestamp\":1442998500000}";
+
             ServletInputStream servletInputStream = request.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(servletInputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -194,8 +198,9 @@ public class PurchaseOrderController extends BaseController {
                     transactionNumber = messageDetailJson.getString("trade_no");
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
-                System.out.println("transactionNumber : " + transactionNumber);
-                System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
+//                System.out.println("transactionNumber : " + transactionNumber);
+//                System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
+//                System.out.println("=========================test isUpdate==========================");
 //            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
 
 
@@ -203,7 +208,11 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                 //@TODO 修改订单状态
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-
+                if (purchaseOrder ==null){
+//                    System.out.println("purchaseOrder is null,session problem");
+                    purchaseOrder = ((PurchaseOrderPayment)baseManager.getObject(PurchaseOrderPayment.class.getName(),purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
+                }
+//                System.out.println(purchaseOrder.getId());
 
                 if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                     //同时修改子订单状态
@@ -449,9 +458,9 @@ public class PurchaseOrderController extends BaseController {
         //拆分订单
         if (tenantList.size() > 1) {
             for (Tenant tenantTemp : tenantList) {
-                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder2", request);
                 xSaveOrUpdateTemp.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
-                xSaveOrUpdateTemp.getParamMap().put("user.id", null);
+//                xSaveOrUpdateTemp.getParamMap().put("user.id", null);
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
                 purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
                 purchaseOrderTemp.setTenant(tenantTemp);
@@ -694,8 +703,8 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/paysuccess/{orderId}"})
     public String paySuccess(@PathVariable String orderId, Model model) {
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        model.addAttribute("order", purchaseOrder);
+        PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
+        model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         return "/purchaseOrder/paySuccess";
     }
 

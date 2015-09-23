@@ -57,6 +57,7 @@
                     <page>
                         <fields>
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                            <field name="consumer" label="默认值" defaultValue="${MY_USER}" inputType="default" />
                         </fields>
                     </page>
                 </do>

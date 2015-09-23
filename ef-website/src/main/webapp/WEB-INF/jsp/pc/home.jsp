@@ -70,7 +70,7 @@
     </c:forEach>
 
     <div class="box-hd">
-        <div class="title wh"><h3>大师</h3><a class="more" href="" target="_blank" title="了解更多大师"><i class="icon"></i>了解更多大师</a>
+        <div class="title wh"><h3>大师</h3><a class="more" href="http://master.efeiyi.com" target="_blank" title="了解更多大师"><i class="icon"></i>了解更多大师</a>
         </div>
         <div class="list-pep wh">
             <ul class="ul-item">
