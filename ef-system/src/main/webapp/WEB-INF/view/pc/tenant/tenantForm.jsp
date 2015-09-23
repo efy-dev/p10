@@ -87,7 +87,21 @@
                     <img src="http://pro.efeiyi.com/${object.pictureUrl}@!product-model">
                 </c:if>
             </div>
+            <div class="am-form-group">
+                <label for="name" class="am-u-sm-3 am-form-label">商家简介</label>
 
+                <div class="am-u-sm-9">
+                    <textarea id="content" name="content" rows="3" cols="5" placeholder="企业商家简介" required>${object.content}</textarea>
+                    <%--<input type="text" id="content" name="content" placeholder="企业商家简介" value="${object.content}" required>--%>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label for="address" class="am-u-sm-3 am-form-label">商家地址</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" id="address" name="address" placeholder="商家地址" value="${object.address}" required>
+                </div>
+            </div>
             <%--<div class="am-form-group">--%>
                 <%--<label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>--%>
 

@@ -13,7 +13,12 @@
 <div class="personal-material">
   <div class="personal">
     <div class="material">
-      <strong><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..." class="am-img-thumbnail"></strong>
+      <c:if test="${!empty user.pictureUrl}">
+       <strong><img src="<c:url value="http://pro.efeiyi.com/${user.pictureUrl}@!user-pic"/>" alt="..." class="am-img-thumbnail"></strong>
+        </c:if>
+      <c:if test="${empty user.pictureUrl}">
+        <strong><img src="<c:url value="/scripts/images/yonghm.jpg"/>" alt="..." class="am-img-thumbnail"></strong>
+      </c:if>
     </div>
     <div class="personal-list">
       <form>

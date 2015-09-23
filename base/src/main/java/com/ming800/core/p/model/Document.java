@@ -18,13 +18,13 @@ public class Document {
     private String name;
     private String keywords;
     private DocumentContent documentContent;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date theDatetime;
     private Integer documentOrder;
     private String group;
     private String status;
     private String sampleContent;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date publishDate;
     private List<DocumentAttachment> documentAttachmentList;
 

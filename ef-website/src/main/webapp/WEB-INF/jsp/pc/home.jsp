@@ -70,7 +70,7 @@
     </c:forEach>
 
     <div class="box-hd">
-        <div class="title wh"><h3>传承人</h3><a class="more" href="" target="_blank" title="了解更多传承人"><i class="icon"></i>了解更多传承人</a>
+        <div class="title wh"><h3>大师</h3><a class="more" href="" target="_blank" title="了解更多大师"><i class="icon"></i>了解更多大师</a>
         </div>
         <div class="list-pep wh">
             <ul class="ul-item">
@@ -79,14 +79,14 @@
                         <a href="http://${master.name}.efeiyi.com" target="_blank"><img class="imgfilter" src="http://tenant.efeiyi.com/${master.favicon}@!ef-home-master"
                                                         alt=""/></a>
 
-                        <p><strong>${master.fullName}</strong></p>
+                        <p><a href="http://${master.name}.efeiyi.com" target="_blank"><strong>${master.fullName}</strong></a></p>
 
                         <p>[${master.getMainProjectName().getProject().getName()}]</p>
 
-                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
+                        <p><ming800:status name="level" dataType="Project.level" checkedValue="${master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
                         <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
 
-                        <p><a class="more" href="" target="_blank" title="更多"><i class="icon"></i>更多</a></p>
+                        <p><a class="more" href="http://master.efeiyi.com" target="_blank" title="更多"><i class="icon"></i>更多</a></p>
                     </li>
                 </c:forEach>
                 <%--<li>--%>

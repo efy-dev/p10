@@ -39,17 +39,22 @@
 <!--//End--header-->
 <artice class="custom">
   <div class="bd pro-rec-area">
-    <%--<div class="list-ad1"><a href=""><img src="../shop2015/upload/list-ad2.jpg" alt=""/></a></div>--%>
+    <div class="list-ad1"><a href=""><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt=""/></a></div>
     <!-- //End-->
     <div class="bd pep-info">
       <div class="bd txt">
-        <p class="txt-price"><em>￥</em><span>189.00</span></p>
+        <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
         <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
-        <p class="txt-des">${productModel.product.master.content}</p>
+        <p class="txt-des">${map.get(productModel)}</p>
       </div>
+
       <div class="img">
-        <span><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/></span>
-        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>"   >查看传承人<i class="arrow-right"></i></a></span>
+        <span>
+           <a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>">
+          <img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/>
+           </a>
+        </span>
+        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看大师<i class="arrow-right"></i></a></span>
       </div>
     </div>
     <!-- //End--pep-info-->
@@ -62,14 +67,13 @@
   <!-- //End-->
   <div class="bd list-class">
     <ul class="ul-list">
-
       <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
-        <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
+        <a href="<c:url value='/product/productModel/${productModel.id}'/>"  title="">
         <li>
 
         <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
-        <p class="name">${map.get(productModel)}</p>
+        <p class="name">${productModel.name}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
 
       </li>

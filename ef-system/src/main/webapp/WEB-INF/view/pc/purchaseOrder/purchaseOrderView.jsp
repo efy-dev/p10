@@ -48,17 +48,6 @@
                     // alert('不想说!');
                 }
             });
-
-
-            <%--jQuery.ajax({--%>
-            <%--type: "GET",--%>
-            <%--url: '<c:url value="/basic/xmj.do?qm=removePurchaseOrder"/>',--%>
-            <%--data: {id: orderId},--%>
-            <%--dataType: "json",--%>
-            <%--success: function (data) {--%>
-            <%--$("#" + orderId).remove();--%>
-            <%--}--%>
-            <%--});--%>
         }
 
 
@@ -70,7 +59,7 @@
                 data: {company: company, serial: serial},
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
+                    //alert(data);
                     $("#kuaidi100").attr("src", data);
                 }
             });
@@ -78,7 +67,7 @@
     </script>
 </head>
 <body>
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
         <table class="am-table am-table-bordered">
             <thead>
@@ -91,21 +80,29 @@
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3">${object.serial}</td>
 
-                <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3">${object.total}</td>
-
-            </tr>
-            <tr>
                 <td class="am-primary am-u-md-3">订单状态</td>
                 <td class="am-u-md-3">
                     <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
                                     checkedValue="${object.orderStatus}"
                                     type="normal"/>
                 </td>
-                <td class="am-primary am-u-md-3">下单时间</td>
-                <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
-                </td>
+
+
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单总额</td>
+                <td class="am-u-md-3">${object.total}</td>
+
+                <td class="am-primary am-u-md-3">实付金额</td>
+                <td class="am-u-md-3">${object.getRealPayMoney()}</td>
+
+            </tr>
+            <td class="am-primary am-u-md-3">下单时间</td>
+            <td class="am-u-md-3" colspan="3">
+                <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+            </td>
+            <tr>
+
             </tr>
             </tbody>
         </table>
@@ -310,13 +307,16 @@
     </div>
 </div>
 
-<div class="am-g">
+<div class="am-g" style="position: relative;min-height:380px">
     <div class="am-u-sm-12 am-u-md-6">
         <h4>物流记录</h4>
     </div>
-    <iframe id="kuaidi100" name="kuaidi100" src="" width="600" height="380" marginwidth="0" marginheight="0" hspace="0"
-            vspace="0" frameborder="0" scrolling="no">
-    </iframe>
+    <div style="width:530px;height:380px;position: absolute;top:0;left:50%;margin-left:-266px;">
+        <iframe id="kuaidi100" name="kuaidi100" src="" width="532" height="380" marginwidth="0" marginheight="0" hspace="0"
+                vspace="0" frameborder="0" scrolling="no">
+        </iframe>
+    </div>
+
 </div>
 </body>
 </html>

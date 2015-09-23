@@ -99,7 +99,7 @@
                                 </div>
                             </td>
                             <td width="25%">
-                                <a href="<c:url value="/basic/xm.do?qm=viewProjectCategory&id=${projectCategory.id}&view=plist"/>">
+                                <a href="<c:url value="/basic/xm.do?qm=viewProjectCategory&view=plist&id=${projectCategory.id}"/>">
                                         ${projectCategory.name}
                                 </a>
                                 <c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">

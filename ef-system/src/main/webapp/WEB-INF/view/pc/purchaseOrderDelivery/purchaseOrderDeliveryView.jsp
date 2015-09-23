@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
         <table class="am-table am-table-bordered">
             <thead>
@@ -29,10 +29,19 @@
                 </td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">物流公司</td>
+                <td class="am-hide-sm-only">
+                    <ming800:status name="logisticsCompany" dataType="purchaseOrderDelivery.logisticsCompany"
+                                    checkedValue="${object.logisticsCompany}"
+                                    type="normal"/>
+                </td>
                 <td class="am-primary am-u-md-3">发货时间</td>
                 <td class="am-u-md-3"><fmt:formatDate value="${object.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">发货地址</td>
-                <td class="am-u-md-3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>
@@ -61,6 +70,14 @@
                                 </span>
                     </c:forEach>
                 </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">订单总额</td>
+                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+
+                <td class="am-primary am-u-md-3">实付金额</td>
+                <td class="am-u-md-3">${object.purchaseOrder.getRealPayMoney()}</td>
+
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单状态</td>

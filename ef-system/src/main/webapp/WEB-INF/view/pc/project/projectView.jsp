@@ -43,23 +43,32 @@
                 </td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">项目图片</td>
+                <td class="am-primary am-u-md-3">项目图片(PC)</td>
                 <td class="am-u-md-3">
                     <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_url}@!product-model"/>" alt=""/>
                 </td>
-                <td class="am-primary am-u-md-3">省</td>
+                <td class="am-primary am-u-md-3">项目图片(WAP)</td>
                 <td class="am-u-md-3">
-                       ${object.addressDistrict.addressCity.addressProvince.name}
+                    <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${object.picture_wap_url}@!product-model"/>" alt=""/>
                 </td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">省</td>
+                <td class="am-u-md-3">
+                    ${object.addressDistrict.addressCity.addressProvince.name}
+                </td>
                 <td class="am-primary am-u-md-3">市</td>
                 <td class="am-u-md-3">
                     ${object.addressDistrict.addressCity.name}
                 </td>
+            <tr>
                 <td class="am-primary am-u-md-3">区</td>
                 <td class="am-u-md-3">
                     ${object.addressDistrict.name}
+                </td>
+                <td class="am-primary am-u-md-3"></td>
+                <td class="am-u-md-3">
+
                 </td>
             </tr>
             </tbody>

@@ -81,7 +81,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://192.168.1.57/cas/logout?service=http://www2.efeiyi.com" />
+                value="http://192.168.1.57/cas/logout?service=http://localhost:8082" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

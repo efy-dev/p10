@@ -115,14 +115,9 @@ public class ProductController extends BaseController {
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
             Integer index = 0;
-            if(fileName.indexOf(".JPG")!=-1){
-                index = fileName.indexOf(".JPG");
-            }
-            if(fileName.indexOf(".jpg")!=-1){
-                index = fileName.indexOf(".jpg");
-            }
-            String imgName = fileName.substring(0, index);
-            url = "product/" + fileName.substring(0, index) + identify + ".jpg";
+            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String imgName = fileName.substring(0, fileName.indexOf(hz));
+            url = "product/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                 productPicture.setPictureUrl(url);
@@ -329,6 +324,7 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String updateModelPicture(String id, String status,String productId,String modelId,HttpServletRequest request) {
 
+
         ProductModel tempProductModel = null;
         try {
 
@@ -338,13 +334,18 @@ public class ProductController extends BaseController {
                 productModelXQuery.put("product_id",productId);
                 tempProductModel = (ProductModel)baseManager.listObject(productModelXQuery).get(0);
 
-            }else {
+
+            }else if(modelId!=null){
                 tempProductModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),modelId);
+
+            }else {
+                modelId = "0";
             }
             if("2".equals(status)){
 
                 tempProductModel.setProductModel_url(productPicture.getPictureUrl());
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
                 XQuery xQuery = new XQuery("listProductPicture_default2",request);
                 xQuery.put("product_id",productId);
                 xQuery.put("productModel_id",tempProductModel.getId());
@@ -354,14 +355,15 @@ public class ProductController extends BaseController {
                     picture.setStatus("1");
                     baseManager.saveOrUpdate(ProductPicture.class.getName(),picture);
                 }
-            }else {
+            }else if("1".equals(status)){
                 tempProductModel.setProductModel_url(null);
                 baseManager.saveOrUpdate(ProductModel.class.getName(),tempProductModel);
+                productPicture.setProductModel(tempProductModel);
             }
 
 
             productPicture.setStatus(status);
-            productPicture.setProductModel(tempProductModel);
+
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);
         } catch (Exception e) {
             e.printStackTrace();
@@ -429,8 +431,8 @@ public class ProductController extends BaseController {
 //                productPicture.setProductModel(null);
             } else {
                 ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), modelId);
-                productModel.setProductModel_url(productPicture.getPictureUrl());
-                baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
+    //            productModel.setProductModel_url(productPicture.getPictureUrl());
+    //            baseManager.saveOrUpdate(ProductModel.class.getName(),productModel);
                 productPicture.setProductModel(productModel);
             }
             baseManager.saveOrUpdate(ProductPicture.class.getName(), productPicture);

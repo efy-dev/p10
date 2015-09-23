@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -25,17 +26,17 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect" onclick="getStatus(${productModel.product.id})">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
+      <div class="collect" onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
           <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li class="active"><img src="http://pro.efeiyi.com/${productModel.productModel_url}" width="60" height="60"
+          <li class="active"><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-detail-pc-view"
                                   alt=""/></li>
           <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-              <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}" width="60" height="60"
+              <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
                                       alt=""/></li>
             </c:if>
           </c:forEach>
@@ -45,11 +46,19 @@
       <div class="slider-main">
         <ul>
          <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/></li>
+          <li>
+            <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+            <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/>
+            </a>
+          </li>
          <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-            <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/></li>
+            <li>
+              <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
+              <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/>
+              </a>
+            </li>
             </c:if>
           </c:forEach>
         </ul>
@@ -65,22 +74,35 @@
       <!-- //End-->
       <div class="des">
         <ul class="ul-list">
-          <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
-            <c:if test="${productModel.id == productModelTmp.id}">
-              <li class="active">
-            </c:if>
-            <c:if test="${productModel.id != productModelTmp.id}">
-              <li class="">
-            </c:if>
-            <a href="/product/productModel/${productModelTmp.id}">
-                <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                  ${productPropertyValue.projectPropertyValue.value}
-                </c:forEach>
-                  ${product.name}</a>
-            </li>
+        <c:if test="${fn:length(productModelList) >1}">
+        </c:if>
+          <c:if test="${fn:length(productModelList) >1}">
+            <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
+              <c:if test="${productModel.id == productModelTmp.id}">
+                <li class="active" >
+                  <a href="/product/productModel/${productModelTmp.id}">
+                    <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                      ${productPropertyValue.projectPropertyValue.value}
+                    </c:forEach>
+                      ${product.name}</a>
+                </li>
+              </c:if>
+              <c:if test="${productModel.id != productModelTmp.id}">
+                <li class="">
+                  <a href="/product/productModel/${productModelTmp.id}">
+                    <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                      ${productPropertyValue.projectPropertyValue.value}
+                    </c:forEach>
+                      ${product.name}</a>
+                </li>
+              </c:if>
 
-          </c:forEach>
-        </ul>
+
+            </c:forEach>
+
+
+          </c:if>
+                  </ul>
       </div>
       <!-- //End-->
       <%--<div class="amount">--%>
@@ -109,14 +131,6 @@
           <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买" disabled="disabled" >立即购买</a>
         </c:if>
         <!-- JiaThis Button BEGIN -->
-        <div class="jiathis_style">
-          <span class="jiathis_txt">分享到</span>
-          <a class="jiathis_button_weixin"></a>
-          <a class="jiathis_button_tqq"></a>
-          <a class="jiathis_button_tsina"></a>
-          <a class="jiathis_button_cqq"></a>
-        </div>
-        <!-- JiaThis Button END -->
       </div>
       <!-- //End-->
     </div>

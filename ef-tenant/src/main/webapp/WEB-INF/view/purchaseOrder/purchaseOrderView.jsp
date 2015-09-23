@@ -12,14 +12,17 @@
 <html>
 <head>
     <title></title>
-
 </head>
 <body>
 <hr/>
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
-        <h2>订单信息</h2>
         <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>订单信息</th>
+            </tr>
+            </thead>
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
@@ -33,18 +36,25 @@
             <tr>
                 <td class="am-primary am-u-md-3">总计（元）</td>
                 <td class="am-u-md-3">${object.total}</td>
+
+                <td class="am-primary am-u-md-3">实付金额</td>
+                <td class="am-u-md-3">${object.getRealPayMoney()}</td>
+
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">收货人</td>
                 <td class="am-u-md-3">
                     ${object.user.name}
                 </td>
-            </tr>
-            <tr>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
                     <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
                 </td>
+
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>
@@ -266,13 +276,15 @@
 <!-- content end -->
 <hr/>
 
-<div class="am-g">
+<div class="am-g" style="position: relative;min-height:380px">
     <div class="am-u-sm-12 am-u-md-6">
         <h4>物流记录</h4>
     </div>
+    <div style="width:530px;height:380px;position: absolute;top:0;left:50%;margin-left:-266px;">
     <iframe id="kuaidi100" name="kuaidi100" src="" width="600" height="380" marginwidth="0" marginheight="0" hspace="0"
             vspace="0" frameborder="0" scrolling="no">
     </iframe>
+    </div>
 </div>
 <script>
     function editPurchaseOrderDelivery(purchaseOrderDeliveryId, logisticsCompany, serial) {
@@ -327,7 +339,7 @@
             data: {company: company, serial: serial},
             dataType: "json",
             success: function (data) {
-                alert(data);
+                //alert(data);
                 $("#kuaidi100").attr("src", data);
             }
         });

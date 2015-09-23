@@ -21,9 +21,9 @@
             <span><i class="icon"></i></span>
             <span>分类</span>
         </a>
-        <a class="item user" href="#user">
+        <a class="item user" href="http://master.efeiyi.com">
             <span><i class="icon"></i></span>
-            <span>传&nbsp;承&nbsp;人</span>
+            <span>大&nbsp;师</span>
         </a>
         <a class="item coupon" href="/coupon/list">
             <span><i class="icon"></i></span>
@@ -33,7 +33,7 @@
     <!--//End--toolbar-->
     <div class="box-hd">
         <ul class="ul-index-list">
-            <li><a href="" title=""><img src="<c:url value="/scripts/wap/upload/box-hd-1.jpg"/>" alt=""/></a></li>
+            <li><a href="<c:url value="/subject/${subject.id}"/>" title=""><img src="http://pro.efeiyi.com/${subject.pictureUrl}" alt=""/></a></li>
         </ul>
     </div>
     <!--//End--铜的故事-->
@@ -46,7 +46,7 @@
                         <a href="<c:url value="/product/hot/${product.productModel.id}"/>" title="">
                             <img src="<c:url value="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"/>"
                                  alt=""/>
-                            <em class="name">${product.productModel.product.name}</em>
+                            <em class="name">${product.productModel.name}</em>
                             <span class="price"><i>￥</i><strong>${product.productModel.price}</strong></span>
                         </a>
                     </li>

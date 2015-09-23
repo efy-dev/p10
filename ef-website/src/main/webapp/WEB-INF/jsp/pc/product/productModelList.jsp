@@ -23,19 +23,18 @@
   </div>
 
   <!-- //End--breadcrumb-->
-    <div class="explain">
+    <div class="explain" height="22px">
         <div class="title">
             <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
         </div>
         <div class="info">${project.description}</div>
-        <a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>
+        <%--<a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>--%>
     </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
       <ul class="link1">
-          <li class="active"><a
-                  href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>"
-                  title="价  格">价 格</a></li>
+
+          <li class="active"><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
       </ul>
   </div>
   <!-- //End--shop-sort-->
@@ -69,7 +68,7 @@
                        </a>
                        <%--<%}%>--%>
                 <p class="wh name">
-                    ${map.get(productModel)}
+                    ${productModel.name}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>

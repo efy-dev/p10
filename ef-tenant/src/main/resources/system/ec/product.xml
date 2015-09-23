@@ -21,11 +21,14 @@
                 <do name="plistProduct" access="" label="产品分页列表"
                     result="/product/productPList" execute="com.efeiyi.ec.system.product.controller.plistProductHandler">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
-                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
-                    <query name="serial" label="作品号" type="auto" orderBy="serial:asc">
-                        <condition name="serial"  operation="eq" label="作品号" />
+                    <query name="serial" label="快速查询" type="auto" orderBy="serial:asc">
+                        <condition name="name"  operation="eq" label="商品名称" inputType="text"  />
+                        <condition name="serial"  operation="eq" label="商品编号" inputType="text"  />
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>
@@ -108,6 +111,11 @@
                 <do name="listProductPicture" label="产品描述列表" access="" result="/productPicture/productPictureList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
+                        <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
+                        <condition label="status" name="status" defaultValue="2" operation="eq"/>
                     </query>
                 </do>
 

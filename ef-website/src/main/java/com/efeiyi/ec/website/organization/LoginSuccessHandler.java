@@ -1,8 +1,11 @@
 package com.efeiyi.ec.website.organization;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.model.SystemLog;
 import com.ming800.core.util.HttpUtil;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,6 +40,25 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart = null;
+        try {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            if (list != null && list.size() > 0) {
+                cart = (Cart) list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cart == null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setCreateDatetime(new Date());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        }
 //        if (request.getParameter("j_password") != null && !request.getParameter("j_password").equals("123456")) {
 //            SystemLog systemLog = new SystemLog();
 //            WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) authentication.getDetails();
