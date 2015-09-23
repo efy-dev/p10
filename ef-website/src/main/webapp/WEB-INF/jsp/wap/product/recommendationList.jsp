@@ -54,7 +54,7 @@
           <img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/>
            </a>
         </span>
-        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看传承人<i class="arrow-right"></i></a></span>
+        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看大师<i class="arrow-right"></i></a></span>
       </div>
     </div>
     <!-- //End--pep-info-->

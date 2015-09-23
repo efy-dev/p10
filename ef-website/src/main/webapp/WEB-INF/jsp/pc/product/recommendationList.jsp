@@ -27,7 +27,7 @@
         <div class="des-txt">
           <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
+          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
         </div>
       </div>
 
