@@ -7,10 +7,14 @@
     </style>
 </head>
 <body>
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
-        <h2>详细信息</h2>
         <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>详细信息</th>
+            </tr>
+            </thead>
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">用户名</td>
