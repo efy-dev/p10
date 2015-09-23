@@ -23,14 +23,12 @@
          <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-                    <a  href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank">
+                    <a  href="<c:url value="/product/productModel/${productModel.id}"/>">
                         <li>
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt="">
 
-                            <p class="wh name">${productModel.product.name}
-                                <c:forEach items="${productModel.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                                    ${productPropertyValue.projectPropertyValue.value}
-                                </c:forEach>
+                            <p class="wh name">${productModel.name}
+
                             </p>
                             <p class="price"><em>￥</em><span>${productModel.price.intValue()}</span></p>
                         </li>

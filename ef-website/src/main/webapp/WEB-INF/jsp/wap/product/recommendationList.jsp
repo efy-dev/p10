@@ -54,7 +54,7 @@
           <img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/>
            </a>
         </span>
-        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看传承人<i class="arrow-right"></i></a></span>
+        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看大师<i class="arrow-right"></i></a></span>
       </div>
     </div>
     <!-- //End--pep-info-->
@@ -66,7 +66,7 @@
 
   <!-- //End-->
   <div class="bd list-class">
-    <ul class="ul-list">
+    <ul class="ul-list">http://www2.efeiyi.com/
 
       <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
         <a href="<c:url value='/product/productModel/${productModel.id}'/>"  title="">
@@ -74,7 +74,7 @@
 
         <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
-        <p class="name">${map.get(productModel)}</p>
+        <p class="name">${productModel.name}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
 
       </li>

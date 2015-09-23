@@ -63,7 +63,7 @@
                       <p class="list-cost">￥<span>${collectList.productModel.price}</span></p>
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
-                        <li class="option-right"><a href="<c:url value="/cart/addProduct.do?id=${collectList.productModel.product.id}"/>"> 加入购物车</a></li>
+                        <li class="option-right"><a href="<c:url value="/cart/addProduct.do?id=${collectList.productModel.id}"/>"> 加入购物车</a></li>
                       </ul>
                     </dd>
                   </dl>

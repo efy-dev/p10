@@ -27,7 +27,7 @@
         <div class="des-txt">
           <p><a href="http://${productModel.product.master.name}.efeiyi.com" target="_blank" title="">${productModel.product.master.fullName}</a></p>
           <p>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
+          <p><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
         </div>
       </div>
 
@@ -56,12 +56,13 @@
             <a href="<c:url value='/product/productModel/${productModel.id}'/>" target="_blank" title="">
               <img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt="">
               <p class="wh name">
-                <c:if test="${fn:length(map.get(productModel))>'14'}">
-                  ${fn:substring(map.get(productModel),"0","14")}...
-                </c:if>
-                <c:if test="${fn:length(map.get(productModel))<='14'}">
-                  ${map.get(productModel)}
-                </c:if>
+                ${productModel.name}
+                <%--<c:if test="${fn:length(map.get(productModel))>'14'}">--%>
+                  <%--${fn:substring(map.get(productModel),"0","14")}...--%>
+                <%--</c:if>--%>
+                <%--<c:if test="${fn:length(map.get(productModel))<='14'}">--%>
+                  <%--${map.get(productModel)}--%>
+                <%--</c:if>--%>
               </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
