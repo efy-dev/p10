@@ -25,7 +25,7 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect" onclick="getStatus('${productModel.product.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
+      <div class="collect" onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
