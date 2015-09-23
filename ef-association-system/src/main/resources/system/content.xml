@@ -111,7 +111,7 @@
             </does>
             <does>
                 <do name="plistLaw" access="" label="非遗法" result="" data="intLaw">
-                    <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
+                    <query name="default" label="默认" type="auto" orderBy="status:desc">
                         <condition name="group" defaultValue="intLaw" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
