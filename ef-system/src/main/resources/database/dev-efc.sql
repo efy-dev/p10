@@ -59,4 +59,10 @@ CREATE TABLE `master_message_praise` (
 ;
 --------------end--------------
 
+-----------start-----------
+------------20150923----------
+ALTER TABLE `master`
+ADD COLUMN `fansAmout`  bigint(20) NULL AFTER `master_speech`;
+------------end-----------
+
 
