@@ -29,9 +29,9 @@
           </c:if>
         </c:forEach>
       </c:if>
-      <c:if test="${addressList.size() == 0}">
+      <%--<c:if test="${addressList.size() == 0}">--%>
       <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
-      </c:if>
+      <%--</c:if>--%>
     </div>
     <div class="bd order-address" id="order-add1" style="display: none">
       <a href="#btn-edit-addres" class="btn-edit-addres">
@@ -116,9 +116,11 @@
         </div>
         <div class="m-form">
           <form id="addAddress" action="<c:url value="/myEfeiyi/addAddressOfMob1.do"/>" method="post">
+
+            <input type="hidden" name="productModel" value="${productModel.id}">
+
             <ul>
               <li>
-                <input name="id" type="hidden" value="">
                 <label>收货人</label>
                 <input type="text" class="txt" name="consignee" value="" required>
               </li>

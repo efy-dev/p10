@@ -257,6 +257,8 @@
   }
   function toSubmit(result){
     $("input[name='resultPage']").val(result);
+    $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
+    $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
     if($("#name").val()==""){
       alert("商品名称不能为空");
     }
@@ -269,9 +271,9 @@
 //    }
     else if($("select[name='tenantCheck']").val()=="0"){
       $("input[name='tenant.id']").val("");
+      $("form").submit();
     } else{
-      $("input[name='master.id']").val($("input[name='masterCheck']:checked").val());
-      $("input[name='project.id']").val($("input[name='projectCheck']:checked").val());
+
       $("input[name='tenant.id']").val($("select[name='tenantCheck']").val());
       $("form").submit();
     }
@@ -301,8 +303,8 @@
         });
         for(var i=0;i<obj.length;i++){
           if($("#Project span[id='"+obj[i].project.id+"']").length==0){
-            var span = '<span style="margin-left: 10px;">'+
-                    '     <input type="radio" value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
+            var span = '<span style="margin-left: 10px;" id="'+obj[i].project.id+'">'+
+                    '     <input type="radio" flag="0" value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
                     ' </span>';
             $("#Project").append(span);
           }
