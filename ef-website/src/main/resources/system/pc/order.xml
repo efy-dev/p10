@@ -168,6 +168,29 @@
             </fields>
         </entity>
 
+        <entity name="PurchaseOrderComment" label="用户评价"  model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
+            <does>
+                <do name="saveOrUpdateComment"  access="" label="保存评价">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+            </does>
+        </entity>
+        <entity name="PurchaseOrderProduct" label="用户评价状态"  model="com.efeiyi.ec.purchase.model.PurchaseOrderProduct">
+            <does>
+                <do name="saveOrUpdateProduct"  access="" label="修改状态值">
+                    <page>
+                        <fields>
+                            <field name="status" label="默认值" defaultValue="1" inputType="default" />
+                        </fields>
+                    </page>
+                </do>
+            </does>
+        </entity>
+
 
 
 

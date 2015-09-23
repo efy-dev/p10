@@ -62,10 +62,10 @@
                     </td>
                     <td width="150">
                       <div class="list-refer-3">
-                        <c:if test="${op.status}==1">
+                        <c:if test="${op.status==1}">
                         <P><strong>已评价</strong></P>
                         </c:if>
-                        <c:if test="${op.status}==0">
+                        <c:if test="${op.status!=1}">
                           <P><strong>未评价</strong></P>
                         </c:if>
                       </div>
@@ -78,7 +78,8 @@
                   </tr>
                 </table>
               </div>
-              <!--状态1内容-->
+              <!--追加评价状态-->
+              <c:if test="${op.status==1}">
               <div class="mutual" style="display: none">
                 <div class="parameter">
                   <form>
@@ -99,26 +100,11 @@
                       <li class="data-list">
                         <dl>
                           <dt>
-                            <label>标签：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally">
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                              <li class="djml">材&nbsp质材&nbsp质材&nbsp质材&nbsp质</li>
-                            </ul>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
                             <label>心得：</label>
                           </dt>
                           <dd>
-                            <span class="am-txt"> 宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意
-                                                   宝贝是否满意，宝贝是否满意，是否满意宝贝是否满意，宝贝是否满意，是否满意
+                            <span class="am-txt">
+                              ${op.purchaseOrderComment.content}
                             </span>
                           </dd>
                         </dl>
@@ -167,7 +153,7 @@
                               <dl class="content">
                                 <dt class="dt"><label></label></dt>
                                 <dd>
-                                  <input type="button" value="确认追加" class="btn">
+                                  <input type="button"  value="确认追加" class="btn">
                                 </dd>
                               </dl>
                             </li>
@@ -180,7 +166,7 @@
                             <label></label>
                           </dt>
                           <dd>
-                            <input type="button" class="btn" value="追&nbsp加&nbsp评&nbsp价&nbsp"  style="">
+                            <input type="button" class="btn" onclick="a1(this)" value="追&nbsp加&nbsp评&nbsp价&nbsp">
                           </dd>
                         </dl>
                       </li>
@@ -188,7 +174,59 @@
                   </form>
                 </div>
               </div>
-              <!--状态1内容-->
+              </c:if>
+              <!--没有评价状态-->
+              <c:if test="${op.status!=1}">
+              <div class="mutual" style="display: none">
+                <div class="parameter">
+                  <form action="<c:url value="/comment/saveComment.do"/>" method="post">
+                    <ul class="data">
+                      <li class="data-list">
+                        <label>评分：</label>
+                        <div class="starbox">
+                          <div id="quacorgrading">
+                            <input name="1" type="button" />
+                            <input name="2" type="button" />
+                            <input name="3" type="button" />
+                            <input name="4" type="button" />
+                            <input name="5" type="button" />
+                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
+                          </div>
+                        </div>
+                        <input type="hidden" value="${op.id}" name="productId">
+                        <input type="hidden" value="">
+                      </li>
+                      <li class="data-list">
+                        <dl>
+                          <dt>
+                            <label>心得：</label>
+                          </dt>
+                          <dd>
+                            <span class="am-txt" style="width: 640px;">
+                              <textarea class="rarae" name="content"></textarea>
+                            </span>
+                          </dd>
+                        </dl>
+                      </li>
+                      <li class="data-list">
+                        <dl>
+                          <dt>
+                            <label></label>
+                          </dt>
+                          <dd>
+                            <input type="submit" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价" >
+                               <%--<span style="margin-left: 44px;font-size: 12px;">--%>
+                                 <%--<input type="checkbox" class="btn" value="评&nbsp&nbsp&nbsp&nbsp价">--%>
+                                 <%--匿名评价--%>
+                               <%--</span>--%>
+                          </dd>
+                        </dl>
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+              </div>
+              </c:if>
             </div>
                 </c:forEach>
             </c:forEach>
@@ -226,7 +264,7 @@
                   <%--</tr>--%>
                 <%--</table>--%>
               <%--</div>--%>
-              <%--<!--状态2内容-->--%>
+              <!--状态2内容-->
               <%--<div class="mutual" style="display: none">--%>
                 <%--<div class="parameter">--%>
                   <%--<form>--%>
@@ -290,7 +328,7 @@
                   <%--</form>--%>
                 <%--</div>--%>
               <%--</div>--%>
-              <%--<!--状态2内容-->--%>
+              <!--状态2内容-->
             <%--</div>--%>
             <!--状态发表评价-->
             <!--状态追加评价-->
@@ -435,12 +473,11 @@
   </div>
 </div>
 <script>
+  function a1(obj){
+    $(obj).hide();
+    $('#zt',$(obj).parents("ul")).slideToggle();
+  }
 
-
-      $('.btn').click(function(){
-        $('.data-list').slideToggle();
-      $('#click-btn').attr("style","display: none")
-      })
 
 </script>
 <!--content-->
