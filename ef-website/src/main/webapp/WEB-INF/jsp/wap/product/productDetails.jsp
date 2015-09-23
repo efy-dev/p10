@@ -56,7 +56,7 @@
         <!-- //End--des-format-->
         <div class="des-content">
             <div class="bd title">详情</div>
-            <div class="bd">
+            <div class="bd" style="padding: 10px">
                 <c:if test="${!empty product.productDescription}">
                     ${product.productDescription.content}
                 </c:if>
@@ -193,6 +193,14 @@
             },
         });
     }
+
+    $().ready(function(){
+
+        $("img").each(function(){
+            $(this).css("width","100%");
+        })
+
+    })
 </script>
 </body>
 
