@@ -31,14 +31,6 @@
         <input value="${group}" name="group" type="hidden">
 
         <div class="am-form-group">
-            <label name="介绍" for="documentContent.content" class="am-u-sm-3 am-form-label">介&nbsp;&nbsp;绍<small>*</small></label>
-            <div class="am-u-sm-9">
-                <textarea name="documentContent.content" id="documentContent.content"
-                          class="ckeditor"
-                          placeholder="介绍" required="true">${document.documentContent.content}</textarea>
-            </div>
-        </div>
-        <div class="am-form-group">
             <label name="地址" for="sampleContent" class="am-u-sm-3 am-form-label">地&nbsp;&nbsp;址<small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="sampleContent" id="sampleContent" placeholder="地址"
@@ -68,6 +60,14 @@
             <label name="客服电话" for="keywords" class="am-u-sm-3 am-form-label">在线客服<small>*</small></label>
             <div class="am-u-sm-9">
                 <input type="text" name="keywords" id="keywords" placeholder="在线客服" value="${document.keywords}" required="true">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="介绍" for="documentContent.content" class="am-u-sm-3 am-form-label">介&nbsp;&nbsp;绍<small>*</small></label>
+            <div class="am-u-sm-9">
+                <textarea name="documentContent.content" id="documentContent.content"
+                          class="ckeditor"
+                          placeholder="介绍" required="true">${document.documentContent.content}</textarea>
             </div>
         </div>
         <div class="am-form-group">
