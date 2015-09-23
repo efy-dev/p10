@@ -1,4 +1,93 @@
 
+$(window).load(function(){
+    //getData("<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+    PBL("#pubu","#box",2);
+    //var ajaxkey = true;
+    var winH = $(window).height(); //页面可视区域高度
+    $(window).scroll(function(){
+        var pageH = $(document.body).height();
+        var scrollT = $(window).scrollTop(); //滚动条top
+        var aa = (pageH - winH - scrollT) / winH;
+        //alert(aa)
+        if(aa < 0.02){
+           // if (getDataCheck() && ajaxkey) {
+            //if (ajaxkey) {
+                $("#wikiNav li").each(function(index,element){
+
+                    if($(element).attr("class")=="item active"){
+
+                        //if($(element).children().attr("href")=="[data-tab-panel-0]"){
+                        if($(element).attr("id")=="0"){
+                            if(ajaxkey1){
+                                PBL("#pubu","#box",2);
+                                getData1("/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index=");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
+
+                            }
+
+                        }
+                        if($(element).attr("id")=="1"){
+                            var flag = $("#flag").val();
+                            //alert(flag)
+                            if(ajaxkey && flag=="front"){
+                                PBL("#recommends","#recommend",2);
+                                getData("/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index=");
+                            }
+                            if(ajaxkey && flag=="back"){
+                                //PBL("#recommends","#recommend",2);
+                                //getData("/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index=");
+                            }
+                        }
+                        if($(element).attr("id")=="2"){
+
+                        }
+                    }
+
+                });
+               // getData("/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index=");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
+
+           // };
+
+        }
+
+
+    });
+
+
+
+
+});
+
+function saveProjectFllow(projectId){
+    /*if(AuthorizationUtil.getMyUser().getId() == null){
+     alert("您还未登陆，请登录后再操作");
+     return false;
+     }*/
+    $.ajax({
+        type:"get",
+        url:"/base/attention.do?projectId="+projectId,//设置请求的脚本地址
+        data:"",
+        dataType:"json",
+        success:function(data){
+            if(data==false){
+                alert("您还未登陆，请登录后再操作");
+                return false;
+            }
+          if(data==true){
+              $("#"+projectId).html("已关注");
+              return true;
+          }
+
+        },
+        error:function(){
+
+            alert("出错了，请联系管理员！！！");
+            return false;
+        },
+        complete:function(){
+
+        }
+    });
+}
 
 /************************************************* ↓ 函数 ↓ */
 //瀑布流主函数
@@ -25,11 +114,94 @@ function getSy(minH,allH){
         if(allH[sy]==minH) return sy;
     }
 }
+
+function checkIsAttention(projectId){
+    isAttention = false;
+    $.ajax({
+        type:"get",
+        url:"/base/Isattention.do?projectId="+projectId,
+        data:"",
+        async:false,
+        dataType:"json",
+        success:function(data){
+            if(data==false){
+                isAttention = false;
+                return false;
+            }
+            if(data==true){
+                isAttention=true;
+                return true;
+            }
+        },
+        error:function(){
+
+            alert("出错了，请联系管理员！！！");
+            return false;
+        },
+        complete:function(){
+
+        }
+    })
+
+}
+
+
+
+
+
 //请求数据的方法
 function getData(url){
+    var flag = false;
+    $.ajax({
+        type:"get",//设置get请求方式
+        url:url+StartNum2,//设置请求的脚本地址
+        data:"",//设置请求的数据
+        dataType:"json",//设置请求返回的数据格式
+        success:function(data){
+            var pubu = $("#recommend");
+            if(data.list && data.list != null){
+            for(i in data.list){
+
+                var projectid = data.list[i].project.id;
+                var word ="关注";
+                checkIsAttention(projectid);
+                 if(isAttention==true){
+                    word = "已关注";
+                 }
+                var box = $("<li> <div class='suit-list-bt'>" +
+                    "<a href='#'><img src="+data.list[i].project.picture_url+"></a>" +
+                    " <a class='gz-fd-icon' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
+                    word +
+                    "</a> </div> </li>");
+
+                pubu.append(box);
+
+            }
+
+            }else{
+                //alert("no data!!!");
+                flag = true;
+            }
+            PBL("#recommends","#recommend",2);
+            StartNum2=StartNum2+1;
+        },
+        error:function(){
+
+            alert("出错了，请联系管理员！！！");
+            return false;
+		},
+        complete:function(){
+            if(flag==true)
+            ajaxkey = false;
+        }
+    });
 
 
-    ajaxkey = false;
+}
+
+//请求数据的方法
+function getData1(url){
+    var flag = false;
     $.ajax({
         type:"get",//设置get请求方式
         url:url+StartNum,//设置请求的脚本地址
@@ -38,46 +210,37 @@ function getData(url){
         success:function(data){
             var pubu = $("#pubu");
             if(data.list && data.list != null){
-            for(i in data.list){
-                //var box = $("<div class='box'><div class='pic'><img src="+data.list[i].project.picture_url+"></div></div>");
-              //alert(data.list[i].project.projectFolloweds.length);
-                var moods = data.list[i].project.projectFolloweds.length;
-                var box = $("<ul class='hot' id='box'>" +
-                    "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
-                    "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
-                    "<span>"+moods+"</span> " +
-                    "</div></li> </ul>");
-                pubu.append(box);
-            }
+                for(i in data.list){
+
+                    var moods = data.list[i].project.fsAmount;
+                    if(moods==null) moods=0;
+                    var box = $("<ul class='hot' id='box'>" +
+                        "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                        "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
+                        "<span>"+moods+"</span> " +
+                        "</div></li> </ul>");
+                    pubu.append(box);
+                }
+
             }else{
                 //alert("no data!!!");
-                return false;
+                flag = true;
             }
             PBL("#pubu","#box",2);
-            //StartNum=StartNum+1;
+            StartNum=StartNum+1;
         },
         error:function(){
-       /* var data2 = [{"src":"/scripts/assets/images/3.jpg"},{"src":"/scripts/assets/images/4.jpg"},{"src":"/scripts/assets/images/5.jpg"},{"src":"/scripts/assets/images/6.jpg"},{"src":"/scripts/assets/images/7.jpg"},{"src":"/scripts/assets/images/8.jpg"},{"src":"/scripts/assets/images/9.jpg"},{"src":"/scripts/assets/images/10.jpg"}];
-		var pubu = $("#pubu");
-		     if(data2){
-                for(i in data2){
-                 var box = $("<div class='box'><div class='pic'><img src="+data2[i].src+"></div></div>");
-                  pubu.append(box);
-                }
-			 }else{
-			    alert("no data!!!");
-				return false;
-			 }
-            
-            PBL("#pubu",".box",2);
-		StartNum=StartNum+1;*/
+
             alert("出错了，请联系管理员！！！");
-		},
+            return false;
+        },
         complete:function(){
-            ajaxkey = true;
+            if(flag==true) {
+                ajaxkey1 = false;}
         }
     })
 }
+
 //判断请求数据的开关
 function getDataCheck(){
     var pubu = $("#pubu");
@@ -90,6 +253,10 @@ function getDataCheck(){
 //存储开始请求数据条数的位置
 var getStartNum = 0;
 var StartNum = 1;
+var StartNum2 = 1;
+var ajaxkey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
+var ajaxkey1 = true;
+var  isAttention = false;
 //设置请求数据加载的样式
 function getStyle(boxs,top,left,index,style){
     if (getStartNum>=index) {
@@ -118,4 +285,9 @@ function getStyle(boxs,top,left,index,style){
             },999);
     }
     getStartNum = index;//更新请求数据的条数位置
+
+
+
+
+
 }

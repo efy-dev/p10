@@ -6,6 +6,7 @@ package com.efeiyi.ec.website.organization.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
@@ -13,6 +14,7 @@ import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
 import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.service.UserManager;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -176,6 +178,27 @@ public class   SigninController extends BaseController {
 
     @RequestMapping("/sso.do")
     public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart = null;
+        try {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            if (list != null && list.size() > 0) {
+                cart = (Cart) list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cart == null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setCreateDatetime(new Date());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
+        }
+
         response.sendRedirect(request.getContextPath() + "/");
     }
 

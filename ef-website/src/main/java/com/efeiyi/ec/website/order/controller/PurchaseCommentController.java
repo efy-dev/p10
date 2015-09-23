@@ -1,7 +1,9 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.XSaveOrUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +30,17 @@ public class PurchaseCommentController {
         model.addAttribute("finishList",list);
         return "/purchaseOrder/purchaseComment";
     }
-    @RequestMapping("/saveComment.do")
-    public Boolean saveOrUpdateComment(HttpServletRequest request){
 
-    return true;
+    @RequestMapping("/saveComment.do")
+    public String saveOrUpdateComment(HttpServletRequest request) throws Exception {
+        XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+        String id=request.getParameter("productId");
+//        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateProduct",request);
+
+//        String sql="update purchase_order_product set status= '1'and purchase_order_comment_id ='"++"' where id='"+id+"' ";
+//        baseManager.executeSql(null,sql,null);
+        return"redirect:/comment/finishOrderList.do";
     }
     public String checkComment(HttpServletRequest request,Model model){
 

@@ -5,15 +5,16 @@
     <title></title>
 </head>
 <body>
-<%--<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>--%>
-
-<div class="am-g">
+<div class="am-g" style="margin-top: 30px;">
     <div class="am-u-md-12">
-        <h2>详细信息</h2>
         <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>详细信息</th>
+            </tr>
+            </thead>
             <tbody>
             <tr>
-
                 <td class="am-primary am-u-md-3">名字</td>
                 <td class="am-u-md-3">${object.productModel.product.name}</td>
                 <td class="am-primary am-u-md-3">编号</td>
@@ -31,7 +32,6 @@
                 <td class="am-u-md-3" colspan="3">
                     <img width="20px" src="http://pro.efeiyi.com/${object.productModel.productModel_url}@!product-model" alt="产品图片">
                 </td>
-
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">描述</td>
@@ -42,8 +42,6 @@
             </tbody>
         </table>
     </div>
-
-
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -25,7 +26,7 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect" onclick="getStatus('${productModel.product.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
+      <div class="collect" onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
@@ -73,22 +74,35 @@
       <!-- //End-->
       <div class="des">
         <ul class="ul-list">
-          <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
-            <c:if test="${productModel.id == productModelTmp.id}">
-              <li class="active">
-            </c:if>
-            <c:if test="${productModel.id != productModelTmp.id}">
-              <li class="">
-            </c:if>
-            <a href="/product/productModel/${productModelTmp.id}">
-                <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
-                  ${productPropertyValue.projectPropertyValue.value}
-                </c:forEach>
-                  ${product.name}</a>
-            </li>
+        <c:if test="${fn:length(productModelList) >1}">
+        </c:if>
+          <c:if test="${fn:length(productModelList) >1}">
+            <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
+              <c:if test="${productModel.id == productModelTmp.id}">
+                <li class="active" >
+                  <a href="/product/productModel/${productModelTmp.id}">
+                    <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                      ${productPropertyValue.projectPropertyValue.value}
+                    </c:forEach>
+                      ${product.name}</a>
+                </li>
+              </c:if>
+              <c:if test="${productModel.id != productModelTmp.id}">
+                <li class="">
+                  <a href="/product/productModel/${productModelTmp.id}">
+                    <c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">
+                      ${productPropertyValue.projectPropertyValue.value}
+                    </c:forEach>
+                      ${product.name}</a>
+                </li>
+              </c:if>
 
-          </c:forEach>
-        </ul>
+
+            </c:forEach>
+
+
+          </c:if>
+                  </ul>
       </div>
       <!-- //End-->
       <%--<div class="amount">--%>

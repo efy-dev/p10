@@ -100,7 +100,14 @@
                     <!--<small>必填项*</small>-->
                 </div>
             </div>
+            <div class="am-form-group">
+                <label name="name" class="am-u-sm-3 am-form-label">商品副名称</label>
 
+                <div class="am-u-sm-9" style="margin-top: 10px;">
+                    ${object.subName}
+                    <!--<small>必填项*</small>-->
+                </div>
+            </div>
             <%--<div class="am-form-group">--%>
                 <%--<label name="price" class="am-u-sm-3 am-form-label">商品价格</label>--%>
 
@@ -500,7 +507,7 @@ var modelIds = [];
             successTimeout:1000000,                 //超时
             fileSizeLimit:'20MB',
             removeTimeout:1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeExts: "*.jpg;*.png;*.*",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: { "imgType": "normal" }, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理

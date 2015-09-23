@@ -1,6 +1,5 @@
 #pubu {
-	margin:0 auto;
-	position:relative;
+
 }
 #pubu #box {
 	width:100%;
@@ -20,4 +19,15 @@
     margin:0 auto;
     padding: 15px 0;
     cursor: pointer;
+}
+
+#recommends{
+	margin:0 auto;
+	position:relative;
+}
+#recommends #recommend{
+	width:32%;
+	height:auto;
+	padding:10px;
+	float:left;
 }

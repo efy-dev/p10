@@ -38,6 +38,7 @@ public class Product implements Serializable{
 //    private List<ProductPropertyValue> productPropertyValueList;//项目属性值（所有可能的值）可以使用project获得
     private Integer recommendedIndex;//首页推荐排序字段
     private List<ProductModel> productModelList;
+    private String subName;//副标题
 
 
     @Transient
@@ -206,5 +207,12 @@ public class Product implements Serializable{
         this.tenant = tenant;
     }
 
+    @Column(name = "sub_name")
+    public String getSubName() {
+        return subName;
+    }
 
+    public void setSubName(String subName) {
+        this.subName = subName;
+    }
 }

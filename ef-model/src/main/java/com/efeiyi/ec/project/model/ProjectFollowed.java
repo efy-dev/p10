@@ -1,6 +1,7 @@
 package com.efeiyi.ec.project.model;
 
 import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -19,7 +20,7 @@ import java.util.Date;
 public class ProjectFollowed implements Serializable {
     private String id;
     private Project project;
-    private Consumer user;
+    private MyUser user;
     private String status;
     private Date createDatetime;
     @Id
@@ -52,11 +53,11 @@ public class ProjectFollowed implements Serializable {
     }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consumer_id")
-    public Consumer getUser() {
+    public MyUser getUser() {
         return user;
     }
 
-    public void setUser(Consumer user) {
+    public void setUser(MyUser user) {
         this.user = user;
     }
     @Column(name="createDatetime")

@@ -71,11 +71,12 @@
         <b:property name="ticketValidator">
             <b:bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
                 <b:constructor-arg index="0" value="http://passport.efeiyi.com" />
+                <!--<b:constructor-arg index="0" value="http://192.168.1.57/cas" />-->
             </b:bean>
         </b:property>
         <b:property name="key" value="an_id_for_this_auth_provider_only"/>
     </b:bean>
-    <b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>
+    <!--<b:bean id="loginOutSuccessHandler" class="com.efeiyi.ec.website.organization.LoginOutSuccessHandler"/>-->
     <!-- 注销客户端 -->
     <b:bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
 

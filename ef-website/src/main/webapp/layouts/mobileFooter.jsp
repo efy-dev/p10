@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="<c:url value="/register"/>" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www2.efeiyi.com/sso.do" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
     %>
