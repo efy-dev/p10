@@ -68,7 +68,7 @@
                        </a>
                        <%--<%}%>--%>
                 <p class="wh name">
-                    ${map.get(productModel)}
+                    ${productModel.name}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
