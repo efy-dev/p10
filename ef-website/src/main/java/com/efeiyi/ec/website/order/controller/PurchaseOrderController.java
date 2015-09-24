@@ -615,19 +615,20 @@ public class PurchaseOrderController extends BaseController {
         }
 
         System.out.println("=================test===================");
-        System.out.println("purchaseOrderPaymentDetails.getId()");
+        System.out.println(purchaseOrderPaymentDetails.getId());
         System.out.println("=================test===================");
+        String resultPage = "";
         if (payment.equals("1")) {//支付宝
-            return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
+            resultPage= "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
-                return "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
+                resultPage= "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
             } else {
-                return "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+                resultPage= "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
         }
-        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
-//        return "redirect:/order/pay/alipay/callback";
+        System.out.println(resultPage);
+        return resultPage;
     }
 
 
