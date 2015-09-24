@@ -34,7 +34,7 @@
                         <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
                             <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&id=${user.id}"/>'"
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-                            <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=removeUser&id=${user.id}"/>'"
+                            <button onclick="myConfirm('<c:url value="/basic/xm.do?qm=removeUser&id=${user.id}"/>','D')"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                         </div>
                     </div>
@@ -53,6 +53,7 @@
         </c:forEach>
     </table>
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div style="clear: both">
     <c:url value="/basic/xm.do" var="url" />
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">

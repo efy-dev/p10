@@ -25,7 +25,9 @@
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
         <tr>
             <td>操作</td>
-            <td>标题</td>
+            <td>附件名称</td>
+            <td>关键字</td>
+            <td>附件说明</td>
             <td>附件</td>
             <td>创建时间</td>
         </tr>
@@ -40,8 +42,8 @@
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                     class="am-icon-edit"></span> 编辑
                             </button>
-                            <button onclick="window.location.href='<c:url
-                                    value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myAttachment/attachment.do?qm=${requestScope.qm}"/>'"
+                            <button onclick="myConfirm('<c:url
+                                    value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myAttachment/attachment.do?qm=${requestScope.qm}"/>','D')"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                     class="am-icon-trash-o"></span> 删除
                             </button>
@@ -74,9 +76,19 @@
                            metaProperty="title">
                 </td>
                 <td>
+                    <div name="title">${document.keywords}</div>
+                    <input type="hidden" id="${document.id}11" name="${document.id}" value="${document.keywords}"
+                           metaProperty="title">
+                </td>
+                <td>
+                    <div name="title">${document.sampleContent}</div>
+                    <input type="hidden" id="${document.id}11" name="${document.id}" value="${document.sampleContent}"
+                           metaProperty="title">
+                </td>
+                <td>
                     <c:set var="attachSize" value="0" scope="page"/>
 
-                    <div id="${document.id}11" name="${document.id}" href="${document.documentAttachmentList}">
+                    <div id="${document.id}12" name="${document.id}" href="${document.documentAttachmentList}">
                         <c:forEach items="${document.documentAttachmentList}">
                             <c:set var="attachSize" value="${attachSize = attachSize + 1}" scope="page"/>
                         </c:forEach>${attachSize}</div>
@@ -89,6 +101,7 @@
         </c:forEach>
     </table>
 </div>
+<jsp:include page="/layouts/myConfirm.jsp"/>
 <div style="clear: both">
     <c:url value="/myDocument/doc.do" var="url"/>
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
