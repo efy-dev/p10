@@ -1,6 +1,6 @@
 package com.efeiyi.ec.tenant.model;
 
-import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,12 +11,12 @@ import java.io.Serializable;
  * Created by Administrator on 2015/7/17.
  */
 @Entity
-@Table(name = "tenant_category")
+@Table(name = "tenant_product_tag")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class TenantCategory implements Serializable {
+public class TenantProductTag implements Serializable {
     private String id;
-    private Tenant tenant;
-    private String value;
+    private TenantCategory tenantCategory;
+    private Product product;
     private String status;
 
     @Id
@@ -31,23 +31,24 @@ public class TenantCategory implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
-    public Tenant getTenant() {
-        return tenant;
+    @JoinColumn(name = "value")
+    public Product getProduct() {
+        return product;
     }
 
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    public TenantCategory getTenantCategory() {
 
-    @Column(name = "value")
-    public String getValue() {
-        return value;
+        return tenantCategory;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTenantCategory(TenantCategory tenantCategory) {
+        this.tenantCategory = tenantCategory;
     }
 
     @Column(name="status")
