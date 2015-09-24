@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -152,14 +153,16 @@
             <dd>规格</dd>
         </dl>
         <ul class="bd ul-nav">
-            <c:forEach items="${productModel.product.productModelList}" var="pm">
-                <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
-                        ${pm.product.name} <c:forEach
-                        items="${pm.productPropertyValueList}" var="pv">
-                    ${pv.projectPropertyValue.value}
+            <c:if test="${fn:length(productModelList) >1}">
+                <c:forEach items="${productModel.product.productModelList}" var="pm">
+                    <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
+                            ${pm.product.name} <c:forEach
+                            items="${pm.productPropertyValueList}" var="pv">
+                        ${pv.projectPropertyValue.value}
+                    </c:forEach>
+                    </a></li>
                 </c:forEach>
-                </a></li>
-            </c:forEach>
+            </c:if>
             <%--<li><a href="#规格2">规格2</a></li>--%>
             <%--<li><a href="#规格1">规格1</a></li>--%>
             <%--<li><a href="#规格2">规格2</a></li>--%>
