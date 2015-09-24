@@ -32,6 +32,7 @@
             font-size: 1.2rem;
              background: #000;
         }
+        .add-ress-icon{width: 1.5rem;height: 1.5rem;position:fixed;right: 28px;top:105px;display: block;background: url("<c:url value="/scripts/wap/images/myorderps.png"/>")no-repeat;}
     </style>
 </head>
 <body>
@@ -149,7 +150,8 @@
             </div>
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">
-            <div class="pop-up">
+            <div class="pop-up" style="position: relative">
+                <a class="add-ress-icon" href="javascript:history.go(0)"></a>
                 <div class="pop-h">新增收货人信息
                     <i class="clase" title="关闭"></i>
                 </div>
@@ -201,6 +203,7 @@
         </div>
 
     </div>
+
     <div class="overbg"></div>
 </div>
 <!--//End--弹出地址-->
@@ -226,7 +229,6 @@
     var payment = "1";
     var consumerAddress = $("#hiddenId").text();
     var totalPrice = $("#change").text();
-
 
     $(function () {
         $.ajax({
