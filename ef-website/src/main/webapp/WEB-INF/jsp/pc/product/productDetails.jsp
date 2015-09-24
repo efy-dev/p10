@@ -128,7 +128,7 @@
          </c:if>
         <c:if test="${productModel.amount != 0}">
           <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
-          <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买" disabled="disabled" >立即购买</a>
+          <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买"  >立即购买</a>
         </c:if>
         <!-- JiaThis Button BEGIN -->
       </div>
@@ -176,9 +176,6 @@
     <div class="wh title"><h3>商品详情</h3></div>
       <div class="wh part">
       ${product.productDescription.content}
-    </div>
-    <div class="online-ask">
-      <a href="" class="btn"><i class="icon"></i>在线咨询</a>
     </div>
   </div>
 </div>

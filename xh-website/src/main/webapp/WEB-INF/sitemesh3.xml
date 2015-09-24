@@ -1,0 +1,10 @@
+<sitemesh>
+    <!--<mapping path="/main.do" decorator="/layouts/main.jsp"/>-->
+    <!--<mapping path="/index.jsp" decorator="/layouts/main.jsp"/>-->
+    <!--<mapping path="/*" decorator="/layouts/main.jsp"/>-->
+    <!--<mapping path="/content/**" decorator="/layouts/main.jsp"/>-->
+    <!--<mapping path="/login.jsp" decorator="/layouts/iframe.jsp"/>-->
+    <!--<mapping path="/" decorator="/layouts/main.jsp"/>-->
+    <mapping path="/index.jsp" decorator="/index.jsp"/>
+    <!--<mapping path="/home/homeTest.do" decorator="/home.jsp"/>-->
+</sitemesh>

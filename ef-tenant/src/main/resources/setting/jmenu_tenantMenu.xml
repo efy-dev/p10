@@ -76,7 +76,7 @@
                 <match url="/basic/xm.do?qm=plistTProject_default"/>
                 <match url="/basic/xm.do?qm=formTenant"/>
             </jnode>
-            <jnode id="" url="/tenantType/sendTenantTypePage.do" state="" extend="" access="" text_zh_CN="提交信息">
+            <jnode id="" url="/tenantType/sendTenantTypePage.do" state="" extend="" access="" text_zh_CN="完善信息">
                 <match url=""/>
             </jnode>
             <jnode id="" url="/sign/toChangePassword.do" state="" extend="" access="" text_zh_CN="修改密码">
