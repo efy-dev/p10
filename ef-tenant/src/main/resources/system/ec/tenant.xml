@@ -355,6 +355,66 @@
                 </do>
             </does>
         </entity>
+        <entity name="TenantCategory" label="商家类别"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantCategory">
+            <does>
+                <do name="plistTenantCategory" access="" label="商家大师分页列表"
+                    result="/tenantCategory/tenantCategoryPList"  execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="viewTenantCategory" label="查看商家" access="" result="/tenantCategory/tenantCategoryView"/>
+                <do name="formTenantCategory" label="保存商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler"
+                    result="/tenantCategory/tenantCategoryForm" />
+                <do name="saveOrUpdateTenantCategory" label="保存商家大师" access="" result="/tenantCategory/tenantCategorySaveSuccess">
+                </do>
+                <do name="removeTenantCategory" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantCategory" label="大师商家大师" access="" result="/tenantCategory/tenantCategoryList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenant.id" defaultValue="1"  operation="eq"/>
+                    </query>
+                </do>
 
+            </does>
+        </entity>
+
+        <entity name="TenantProductTag" label="商家类别商品"
+                basic="simple" others=""
+                model="com.efeiyi.ec.tenant.model.TenantProductTag">
+            <does>
+                <do name="plistTenantProductTag" access="" label="商家大师分页列表"
+                    result="/tenantProductTag/tenantProductTagPList"  execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
+                <do name="viewTenantProductTag" label="查看商家" access="" result="/tenantProductTag/tenantProductTagView"/>
+                <do name="formTenantProductTag" label="保存商家大师" access=""
+                    execute="com.efeiyi.ec.system.tenant.controller.TenantCategoryHandler"
+                    result="/tenantProductTag/tenantProductTagForm" />
+                <do name="saveOrUpdateTenantProductTag" label="保存商家大师" access="" result="/tenantProductTag/tenantProductTagSaveSuccess">
+                </do>
+                <do name="removeTenantProductTag" label="删除商家大师" access="" result="json"/>
+                <do name="listTenantProductTag" label="大师商家大师" access=""
+                    execute="com.efeiyi.ec.system.product.controller.plistTProductHandler"
+                    result="/tenantProductTag/tenantProductTagList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenantCategory.id" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="status" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="product.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                    <query name="default1" label="默认" type="auto" orderBy="id:desc">
+                        <condition label="商家id" name="tenantCategory.id" defaultValue="1"  operation="eq"/>
+                        <condition label="状态" name="product.status" defaultValue="0"  operation="ne"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>

@@ -93,9 +93,13 @@
                 <match url="/basic/xm.do?qm=formTenant"/>
                 <match url="/product/saveNewProduct.do?view=tenant"/>
                 <match url="/basic/xm.do?qm=formTenantCategory"/>
+                <match url="/basic/xm.do?qm=viewTenantCategory"/>
                 <match url="/basic/xm.do?qm=plistTenantCategory_default"/>
                 <match url="/basic/xm.do?qm=plistTMaster_default"/>
                 <match url="/basic/xm.do?qm=plistTProject_default"/>
+                <match url="/basic/xm.do?qm=plistTProduct_default"/>
+                <match url="/basic/xm.do?qm=plistTProduct_serial"/>
+
 
 
             </jnode>

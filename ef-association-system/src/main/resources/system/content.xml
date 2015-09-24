@@ -272,8 +272,8 @@
                         <item label="苏绣" value="suxiu"/>
                     </statusType>
                 </field>
-                <field name="group" label="申请类别" inputType="text">
-                    <statusType fieldName="group">
+                <field name="subGroup" label="申请类别" inputType="text">
+                    <statusType fieldName="subGroup">
                         <item label="传承人申请" value="masterApply"/>
                     </statusType>
                 </field>
@@ -281,13 +281,14 @@
                     <statusType fieldName="status">
                         <item label="待处理" value="1"/>
                         <item label="已通过" value="2"/>
+                        <item label="已驳回" value="9"/>
                     </statusType>
                 </field>
             </fields>
             <does>
                 <do name="plistMaterialDownload" access="" label="申报资料下载管理" result="" data="attachDown">
                     <query name="default" label="默认" type="auto" orderBy="">
-                        <condition name="document.group" defaultValue="attachDown" operation="eq"/>
+                        <condition name="group" defaultValue="attachDown" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>

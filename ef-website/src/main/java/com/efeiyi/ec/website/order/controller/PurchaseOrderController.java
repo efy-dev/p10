@@ -271,9 +271,8 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
-        System.out.println("============in the weixin=============");
         //@TODO 添加订单数据部分
-        String redirect_uri = "http://master4.efeiyi.com/order/pay/wxParam/" + orderId;
+        String redirect_uri = "http://www2.efeiyi.com/order/pay/wxParam/" + orderId;
 //        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
@@ -287,7 +286,6 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
-        System.out.println("============in the weixin param=============");
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         String result;
         //1、网页授权后获取传递的code，用于获取openId
@@ -307,15 +305,14 @@ public class PurchaseOrderController extends BaseController {
             throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
-        System.out.println("openId is "+openid);
         JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue(), openid);
-        System.out.println(jsonStr.toString());
         model.addAttribute("appId", jsonStr.getString("appId"));
         model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
         model.addAttribute("pk", jsonStr.getString("package"));
         model.addAttribute("paySign", jsonStr.getString("paySign"));
         model.addAttribute("signType", jsonStr.getString("signType"));
         model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
+        model.addAttribute("orderId",purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
         return "/order/wxpay";
     }
 
@@ -614,18 +611,18 @@ public class PurchaseOrderController extends BaseController {
             }
         }
 
-
+        String resultPage = "";
         if (payment.equals("1")) {//支付宝
-            return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
+            resultPage= "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
-                return "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
+                resultPage= "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
             } else {
-                return "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+                resultPage= "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
         }
-        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
-//        return "redirect:/order/pay/alipay/callback";
+        System.out.println(resultPage);
+        return resultPage;
     }
 
 

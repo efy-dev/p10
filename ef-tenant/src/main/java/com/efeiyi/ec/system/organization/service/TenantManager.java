@@ -13,4 +13,6 @@ public interface TenantManager {
      * @return
      */
    String linkProject(String tenantId, String projectId, String tenantProjectId, String status);
+
+    String linkProduct(String tenantCategoryId, String productId, String tenantProductId, String status);
 }

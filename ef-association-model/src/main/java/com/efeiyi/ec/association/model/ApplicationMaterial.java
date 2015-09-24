@@ -13,28 +13,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-
-@Entity(name = "association_application_material")
-public class ApplicationMaterial {
-    private String id;
+@Entity
+@Table(name = "association_application_material")
+@Inheritance(strategy=InheritanceType.JOINED)
+@PrimaryKeyJoinColumn(name="id")
+public class ApplicationMaterial extends Document{
+//    private String id;
     private String applyType;
     private Tenant tenant;
-    private String group;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date theDatetime;
-    private String status;
-    private Document document;
+    private String subGroup;
+//    @DateTimeFormat(pattern="yyyy-MM-dd")
+//    private Date theDatetime;
+//    private String status;
+//    private Document document;
 
-    @Id
-    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
-    @GeneratedValue(generator = "id")
-    public String getId() {
-        return id;
-    }
+//    @Id
+//    @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
+//    @GeneratedValue(generator = "id")
+//    public String getId() {
+//        return id;
+//    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     @Column(name = "apply_type")
     public String getApplyType() {
@@ -56,41 +58,41 @@ public class ApplicationMaterial {
         this.tenant = tenant;
     }
 
-    @Column(name = "group_name")
-    public String getGroup() {
-        return group;
+    @Column(name = "sub_group")
+    public String getSubGroup() {
+        return subGroup;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setSubGroup(String subGroup) {
+        this.subGroup = subGroup;
     }
 
-    @Column(name = "the_datetime")
-    public Date getTheDatetime() {
-        return theDatetime;
-    }
+//    @Column(name = "the_datetime")
+//    public Date getTheDatetime() {
+//        return theDatetime;
+//    }
+//
+//    public void setTheDatetime(Date theDatetime) {
+//        this.theDatetime = theDatetime;
+//    }
 
-    public void setTheDatetime(Date theDatetime) {
-        this.theDatetime = theDatetime;
-    }
+//    @Column(name = "status")
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 
-    @Column(name = "status")
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_id")
-    @NotFound(action = NotFoundAction.IGNORE)
-    public Document getDocument() {
-        return document;
-    }
-
-    public void setDocument(Document document) {
-        this.document = document;
-    }
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "document_id")
+//    @NotFound(action = NotFoundAction.IGNORE)
+//    public Document getDocument() {
+//        return document;
+//    }
+//
+//    public void setDocument(Document document) {
+//        this.document = document;
+//    }
 }

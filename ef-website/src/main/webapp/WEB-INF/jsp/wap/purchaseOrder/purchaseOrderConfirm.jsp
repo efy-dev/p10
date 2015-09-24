@@ -5,9 +5,32 @@
 <head>
     <title>确认订单</title>
     <style>
-        .acd {  background: #fff !important;  color: #000 !important;  border: 1px solid #000 !important;  }
-        .add-btn{background:#fff;height: 3rem;width: 100%;border: 1px solid #000;color: #000;display:block;font-size: 1.2rem}
-        .add-address{width: 100%;line-height: 3rem;height: 3rem;text-align: center;border: 1px solid #000;display:block;color: #000;font-size: 1.2rem}
+        .acd {
+            background: #fff !important;
+            color: #000 !important;
+            border: 1px solid #000 !important;
+        }
+
+        .add-btn {
+            background: #fff;
+            height: 3rem;
+            width: 100%;
+            border: 1px solid #000;
+            color: #000;
+            display: block;
+            font-size: 1.2rem
+        }
+
+        .add-address {
+            width: 100%;
+            line-height: 3rem;
+            height: 3rem;
+            text-align: center;
+            border: 1px solid #000;
+            display: block;
+            color: #000;
+            font-size: 1.2rem
+        }
     </style>
 </head>
 <body>
@@ -277,8 +300,15 @@
         if (consumerAddress == "") {
             showAlert("提示", "请选择一个收货地址！");
         } else {
+
+            var isweixin = "";
+
+            if (isWeiXin()) {
+                isweixin = "&isWeiXin=1";
+            }
+
             var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
             window.location.href = url;
         }
     }
