@@ -7,6 +7,7 @@
 				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
+    <mvc:resources mapping="/shop2015/**" location="/shop2015/"/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven />
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

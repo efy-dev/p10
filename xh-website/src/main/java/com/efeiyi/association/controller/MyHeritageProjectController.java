@@ -100,7 +100,7 @@ public class MyHeritageProjectController {
             model.addAttribute("object", document);
         }
         model.addAttribute("group", document.getGroup());
-        return new ModelAndView(request.getContextPath() + tempDo.getResult());
+        return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
     @RequestMapping("/saveHeritageProjectForm.do")
@@ -162,4 +162,44 @@ public class MyHeritageProjectController {
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
+    //非遗法
+    @RequestMapping("/heritageLaw.do")
+    public Document getHeritageLawByGroupId(HttpServletRequest request) throws Exception {
+        String qm = request.getParameter("qm");
+        if (qm.split("_").length < 2) {
+            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        }
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+        PageEntity pageEntity = new PageEntity();
+        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
+
+        Document document = new Document();
+        if (pageInfo.getList() != null && pageInfo.getList().size() >0){
+            document = (Document) pageInfo.getList().get(0);
+        }
+        return document;
+    }
+
+    //非遗保护政策
+    @RequestMapping("/heritagePolicy.do")
+    public List<Document> getHeritagePolicyByGroupId(HttpServletRequest request) throws Exception {
+        String qm = request.getParameter("qm");
+        if (qm.split("_").length < 2) {
+            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        }
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+//        PageEntity pageEntity = new PageEntity();
+//        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
+        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
+
+        return pageInfo.getList();
+    }
 }

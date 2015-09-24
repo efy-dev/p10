@@ -11,29 +11,8 @@
 <head>
     <title></title>
 </head>
-<body>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div>
-    <div align="center">
-        <h1><img src="<c:url value='/resources/images/favicon.png'/>" width="300" height="136" /></h1>
-    </div>
-</div>
-<br>
-<br>
-<br>
-<div align="center">
-    <h1><p style="color: #0000FF;font-size: larger">非遗协会</p></h1>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<%--<body>--%>
+<body onload="window.location.href='<c:url value="/home/home.do"/>'">
+哈哈测试
 </body>
 </html>
