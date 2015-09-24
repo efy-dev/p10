@@ -614,7 +614,9 @@ public class PurchaseOrderController extends BaseController {
             }
         }
 
-
+        System.out.println("=================test===================");
+        System.out.println("purchaseOrderPaymentDetails.getId()");
+        System.out.println("=================test===================");
         if (payment.equals("1")) {//支付宝
             return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
