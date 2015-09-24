@@ -24,12 +24,12 @@
 
 <script>
     function jsApiCall() {
-        <%--alert("${appId}");--%>
-        <%--alert("${timeStamp}");--%>
-        <%--alert("${pk}");--%>
-        <%--alert("${paySign}");--%>
-        <%--alert("${signType}");--%>
-        <%--alert("${nonceStr}");--%>
+        alert("${appId}");
+        alert("${timeStamp}");
+        alert("${pk}");
+        alert("${paySign}");
+        alert("${signType}");
+        alert("${nonceStr}");
         WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',
                 {
