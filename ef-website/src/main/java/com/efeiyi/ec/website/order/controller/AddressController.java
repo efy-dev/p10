@@ -99,6 +99,11 @@ public class AddressController {
     @RequestMapping({"addAddress.do"})
     public String addAddress(HttpServletRequest request) throws Exception {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+        XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
+        List addressList = baseManager.listObject(xQuery);
+        if(addressList==null||addressList.size()==0){
+            xSaveOrUpdate.getParamMap().put("status",2);
+        }
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
 
