@@ -44,7 +44,7 @@
     <div class="bd pep-info">
       <div class="bd txt">
         <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
-        <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
+        <p class="txt-name"><strong>${productModel.name}</strong></p>
         <p class="txt-des">${map.get(productModel)}</p>
       </div>
 
