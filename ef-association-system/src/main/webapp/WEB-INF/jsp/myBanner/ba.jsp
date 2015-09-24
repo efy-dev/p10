@@ -18,7 +18,7 @@
 <div style="text-align: left;margin-left: 10px;" >
   <input onclick="window.location.href='<c:url value="/myBanner/newBanner.do?qm=direct2BannerJsp_new&group=${group}&banner.group=${banner.group}&resultPage=/myBanner/ba.do?qm=${requestScope.qm}"/>'"
          type="button" class="am-btn am-btn-default am-btn-xs"
-         style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建" />
+         style="margin-top: 4px;margin-bottom: 6px;margin-left: 2px;height: 35px;" value="新建轮播图" />
 </div>
 <jsp:include page="/layouts/myConfirm.jsp"/>
 <div class="am-g">
@@ -68,6 +68,5 @@
     <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
   </ming800:pcPageList>
 </div>
-<%--<script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>--%>
 </body>
 </html>

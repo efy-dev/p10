@@ -18,7 +18,7 @@
     <input onclick="window.location.href='<c:url
             value="/myMember/memGuideForm.do?qm=memGuideForm_form&group=${group}&resultPage=/myMember/memGuide.do?qm=${requestScope.qm}"/>'"
            type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建"/>
+           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建会员申请指南"/>
 </div>
 <div class="am-g">
     <table class="am-table am-table-bordered am-table-radius am-table-striped">

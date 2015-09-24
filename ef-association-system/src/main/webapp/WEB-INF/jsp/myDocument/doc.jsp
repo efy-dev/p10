@@ -16,9 +16,11 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;" >
-    <input onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建" />
+    <button onclick="window.location.href='<c:url value="/myDocument/newDocument.do?qm=direct2Jsp_newDocument&group=${group}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>'"
+            class="am-btn am-btn-default am-btn-xs"
+            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;">新建
+        <ming800:status name="group" dataType="document.group" checkedValue='${group}' type="normal"/>
+    </button>
 </div>
 <div class="am-g">
     <table class="am-table am-table-bordered am-table-radius am-table-striped">
