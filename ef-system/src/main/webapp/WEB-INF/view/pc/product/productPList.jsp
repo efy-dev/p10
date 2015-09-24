@@ -16,17 +16,7 @@
 <head>
     <title></title>
     <script>
-        function removeProduct1(productId){
-            jQuery.ajax({
-                type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeProduct"/>',
-                data:{id:productId},
-                dataType:"json",
-                success:function(data){
-                    $("#"+productId).remove();
-                }
-            });
-        }
+
     </script>
 </head>
 <body>
@@ -91,7 +81,7 @@
                                         <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">--%>
                                         <%--修改图片--%>
                                         <%--</a>--%>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct1('${product.id}')})">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})">
                                         删除
                                     </a>
                                     <c:if test="${empty product.project}">

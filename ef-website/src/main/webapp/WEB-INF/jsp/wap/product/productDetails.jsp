@@ -191,7 +191,8 @@
             url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
             dataType: 'json',
             success: function (data) {
-                if(data==true){
+                if(data==false){
+                    window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
                 }
             },
         });

@@ -49,7 +49,7 @@
                             </button>
                             <input value="${document.id}"
                                    name="${document.id}" metaProperty="id" type="hidden"/>
-                            <input value="${document.documentContent.id}"
+                            <input value="${document.id}"
                                    name="${document.id}" metaProperty="documentContent.id" type="hidden"/>
                             <input value="${document.documentOrder}"
                                    name="${document.id}" metaProperty="documentOrder" type="hidden"/>
