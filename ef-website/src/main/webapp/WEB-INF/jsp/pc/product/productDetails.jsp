@@ -31,12 +31,12 @@
       <div class="slider-img">
         <ul>
           <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li class="active"><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-detail-pc-view"
+          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-detail-pc-view"
                                   alt=""/></li>
           <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-              <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
+              <li ><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
                                       alt=""/></li>
             </c:if>
           </c:forEach>
@@ -150,11 +150,15 @@
       <!-- JiaThis Button END -->
       <div class="tab-items">
         <ul>
+          <c:if test="${empty product.master.id}">
+            <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+          </c:if>
+          <c:if test="${not empty product.master.id}">
           <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
           <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="商品评价">商 品 评 价<i class="icon"></i></a></li>--%>
           <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
-          <c:if test="${not empty product.master.id}">
+
           <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">进 入 店 铺</a></li>
           </c:if>
         </ul>

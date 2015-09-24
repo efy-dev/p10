@@ -6,15 +6,16 @@ package com.efeiyi.association.core;
 public class DatabaseContextHolder {
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
 
-    public static void setCustomerType(String customerType) {
-        contextHolder.set(customerType);
+    public static void setDataSource(String dataSource) {
+        contextHolder.set(dataSource);
     }
 
-    public static String getCustomerType() {
+    public static String getDataSource() {
         return contextHolder.get();
     }
 
-    public static void clearCustomerType() {
+    public static void clearDataSource() {
         contextHolder.remove();
     }
+
 }

@@ -39,7 +39,7 @@
 <!--//End--header-->
 <artice class="custom">
   <div class="bd pro-rec-area">
-    <div class="list-ad1"><a href=""><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt=""/></a></div>
+    <div class="list-ad1"><a href="<c:url value="/product/productModel/${productModel.id}"/>"><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt=""/></a></div>
     <!-- //End-->
     <div class="bd pep-info">
       <div class="bd txt">

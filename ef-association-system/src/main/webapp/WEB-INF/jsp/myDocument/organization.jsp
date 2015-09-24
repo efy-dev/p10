@@ -15,10 +15,11 @@
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;">
-    <input onclick="window.location.href='<c:url
-            value="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&group=${group}&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
-           type="button" class="am-btn am-btn-default am-btn-xs"
-           style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;" value="新建"/>
+    <button onclick="window.location.href='<c:url value="/myDocument/newOrganization.do?qm=direct2JspOrganization_default&group=${group}&resultPage=/myDocument/organization.do?qm=${requestScope.qm}"/>'"
+            class="am-btn am-btn-default am-btn-xs"
+            style="margin-top: 4px;margin-bottom: 6px;margin-left:2px;height: 35px;">新建
+        <ming800:status name="group" dataType="intangibleCultureOrganization.group" checkedValue='${group}' type="normal"/>
+    </button>
 </div>
 <jsp:include page="/layouts/myConfirm.jsp"/>
 <div class="am-g">
@@ -57,7 +58,7 @@
     </table>
 </div>
 <div style="clear: both">
-    <c:url value="/content/organization.do" var="url"/>
+    <c:url value="/myDocument/organization.do" var="url"/>
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>

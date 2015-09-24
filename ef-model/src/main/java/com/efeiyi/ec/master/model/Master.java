@@ -47,6 +47,7 @@ public class Master implements Serializable {
     private String projectName ;
     private String levelName;
     private String masterSpeech;
+    private Long fsAmount;
     @Column(name = "master_speech")
     public String getMasterSpeech() {
         return masterSpeech;
@@ -206,6 +207,15 @@ public class Master implements Serializable {
 
     public void setPresentAddress(String presentAddress) {
         this.presentAddress = presentAddress;
+    }
+
+    @Column(name = "fans_amount")
+    public Long getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Long fsAmount) {
+        this.fsAmount = fsAmount;
     }
 
     @JsonIgnore
