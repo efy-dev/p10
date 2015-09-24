@@ -149,7 +149,7 @@
         </profile>
     </profiles>
     <build>
-        <finalName>ef-association-system</finalName>
+        <finalName>xh-system</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources/</directory>
@@ -179,7 +179,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                    <packagingExcludes>${project.build.directory}/ef-association-system/*</packagingExcludes>
+                    <packagingExcludes>${project.build.directory}/xh-system/*</packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
