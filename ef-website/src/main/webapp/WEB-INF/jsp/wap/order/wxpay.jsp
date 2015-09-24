@@ -47,7 +47,7 @@
                         window.location.href = "<c:url value="/"/>";
                     }
                     else {
-
+                        alert(res.err_msg);
                             window.location.href = "/";
                     }
                 }

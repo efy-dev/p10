@@ -13,24 +13,17 @@
     <link href="<c:url value="/scripts/css/myorder.css"/>" type="text/css " rel="stylesheet">
 </head>
 <body>
-<div class="wr wh">
-    <div class="success">
-        <div class="success-shop">
-            <p>您已成功提交付款</p>
+<p>您已成功提交付款</p>
 
-            <p>
-                <a href="<c:url value="/order/myEfeiyi/view/${order.id}"/> ">查看订单</a>
-                <a href="<c:url value="/"/> ">首页</a>
-            </p>
-        </div>
-
-    </div>
-</div>
+<p>
+    <a href="<c:url value="/order/myEfeiyi/view/${order.id}"/> ">查看订单</a>
+    <a href="<c:url value="/"/> ">首页</a>
+</p>
 <script>
     <%--showChooseConfirm("提示","是否支付成功？",function(){--%>
-        <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
+    <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
     <%--},function(){--%>
-        <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
+    <%--window.location.href = "<c:url value="/order/myEfeiyi/view/${order.id}"/>"--%>
     <%--})--%>
 </script>
 </body>
