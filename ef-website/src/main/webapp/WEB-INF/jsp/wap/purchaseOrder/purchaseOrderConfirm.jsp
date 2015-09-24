@@ -53,9 +53,9 @@
                     </c:if>
                 </c:forEach>
             </c:if>
-            <%--<c:if test="${addressList.size() == 0}">--%>
+            <c:if test="${addressList.size() == 0}">
             <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
-            <%--</c:if>--%>
+            </c:if>
         </div>
         <div class="bd order-address" id="order-add1" style="display: none">
             <a href="#btn-edit-addres" class="btn-edit-addres">
