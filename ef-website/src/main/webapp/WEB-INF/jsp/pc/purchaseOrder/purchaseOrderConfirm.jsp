@@ -206,7 +206,8 @@
     }
 
     function updateCount(element){
-        var tenantId = $(element).attr("id");
+        var Id = $(element).attr("id");
+        var tenantId = Id.substring(0,Id.length-7);
         var str = $(element).val();
         var count = str.length;
         $("#"+tenantId+"Count").html(count+"/45");
