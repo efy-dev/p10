@@ -8,14 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- sidebar start -->
-<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-  <div class="am-offcanvas-bar admin-offcanvas-bar">
-    <ul class="am-list admin-sidebar-list">
+<div class="wh nav">
+  <div class="hd">
+    <ul class="ul-list">
       <c:forEach items="${jnode.children}" var="childJnode">
         <c:if test="${!empty childJnode.children&& childJnode.children.size()>0}">
-          <li class="admin-parent">
-            <a class="am-cf" data-am-collapse="{target: '#${childJnode.id}'}"><span
-                    class="am-icon-file"></span> ${childJnode.text_zh_CN}</a>
+          <li>
+            <a href="" title="" target="_blank">${childJnode.text_zh_CN}</a>
             <ul class="am-list am-collapse admin-sidebar-sub am-in" id="${childJnode.id}">
               <c:forEach items="${childJnode.children}" var="childchildJnode">
                 <li>
