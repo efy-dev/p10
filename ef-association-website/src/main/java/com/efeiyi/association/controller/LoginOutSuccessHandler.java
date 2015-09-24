@@ -18,7 +18,7 @@ public class LoginOutSuccessHandler extends SimpleUrlLogoutSuccessHandler implem
     @Override
     public void onLogoutSuccess (HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
         super.onLogoutSuccess(request, response, authentication);
     }
 

@@ -1,7 +1,9 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
+import com.efeiyi.association.core.DatabaseContextHolder;
 import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
+import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -335,27 +337,11 @@ public class MyDocumentController {
         }
     }
 
-//    private void processNodeList(NodeList list, String keyword) {
-//        //迭代开始
-//        SimpleNodeIterator iterator = list.elements();
-//        while (iterator.hasMoreNodes()) {
-//            Node node = iterator.nextNode();
-//            //得到该节点的子节点列表
-//            NodeList childList = node.getChildren();
-//            //孩子节点为空，说明是值节点
-//            if (null == childList)
-//            {
-//                //得到值节点的值
-//                String result = node.;
-//                //若包含关键字，则简单打印出来文本
-//                if (keyword.equals(result))
-//                    System.out.println(result);
-//            } //end if
-//            //孩子节点不为空，继续迭代该孩子节点
-//            else
-//            {
-//                processNodeList(childList, keyword);
-//            }//end else
-//        }//end wile
-//    }
+    @RequestMapping("/test.do")
+    public ModelAndView test(ModelMap modelMap){
+//        DatabaseContextHolder.setDataSource("dataSource");
+        Tenant tenant = (Tenant)baseManager.getObject(Tenant.class.getName(),"ibxcx0xq0000g6oj");
+        return new ModelAndView("/myDocument/doc");
+    }
+
 }

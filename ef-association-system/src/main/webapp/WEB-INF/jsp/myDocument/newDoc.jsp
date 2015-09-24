@@ -72,12 +72,12 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="documentContent.content" for="documentContent.content" class="am-u-sm-3 am-form-label">正文
+            <label name="documentContent.content" for="content" class="am-u-sm-3 am-form-label">正文
                 <small>*</small>
             </label>
 
             <div class="am-u-sm-9">
-                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content"
+                <textarea cols="10" rows="5" name="documentContent.content" id="content"
                           class="ckeditor"
                           placeholder="内容"
                           required="true">${object.documentContent.content}</textarea>
@@ -85,28 +85,21 @@
         </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="button" class="am-btn am-btn-primary"
-                       data-am-modal="{target: '#preview', closeViaDimmer: 0, width: 800, height: 250}"
-                       value="预览"/>
+                <input type="button" class="am-btn am-btn-primary" onclick="addHTML()" value="预览">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
     </form>
 </div>
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="preview">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">中国非物质文化遗产保护协会-
-            <ming800:status name="group" dataType="document.group" checkedValue='${group}' type="normal"/>
-            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-        </div>
-        <div class="am-modal-bd">
-            <div id="contentText" align="left" style="height: 200px;overflow-y: auto">
-                ${object.documentContent.content}
-            </div>
-        </div>
-    </div>
-</div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
+<script type="text/javascript">
+    function addHTML(){
+        var ss=window.open("");
+        var content = CKEDITOR.instances.content.getData();
+        ss.document.write(content);
+        ss.document.close();
+    }
+</script>
 </body>
 </html>

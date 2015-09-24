@@ -31,7 +31,7 @@
                 <label for="username" class="am-u-sm-2 am-form-label">用户名</label>
 
                 <div class="am-u-sm-10">
-                    <input type="text" id="username" name="username" placeholder="输入用户名" value="${enrollUsername}"/>
+                    <input type="text" id="username" name="username" placeholder="输入用户名" value="${object.name}"/>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
                 <div class="am-u-sm-10">
                         <input type="password" class="form-control" id="password" name="password" placeholder="输入密码"
-                               value="${j_password}"/>
+                               value="${object.password}"/>
                 </div>
             </div>
             <%

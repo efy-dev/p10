@@ -20,9 +20,10 @@
 
     <http realm="Contacts Realm" use-expressions="true">
         <csrf disabled="true"/>
-        <intercept-url pattern="/main.do" access="isAuthenticated()"/>
-        <intercept-url pattern="/content/**" access="isAuthenticated()"/>
-        <intercept-url pattern="/index.jsp" access="isAuthenticated()"/>
+        <intercept-url pattern="/main.do" access="permitAll"/>
+        <intercept-url pattern="/basic/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/my**" access="permitAll"/>
+        <intercept-url pattern="/index.jsp" access="permitAll"/>
         <anonymous key="cookie_key" username="ananoymous" granted-authority="anonymous,ROLE_ANONYMOUS"/>
         <form-login login-page="/login.jsp" login-processing-url="/j_spring_security_check"
                     authentication-success-handler-ref="loginSuccessHandler"
@@ -34,7 +35,6 @@
     <b:bean id="loginOutSuccessHandler" class="com.efeiyi.association.controller.LoginOutSuccessHandler"/>
     <b:bean id="loginSuccessHandler" class="com.efeiyi.association.controller.LoginSuccessHandler"/>
     <b:bean id="loginFailureHandler" class="com.efeiyi.association.controller.LoginFailureHandler"/>
-
     <!--<authentication-manager>-->
     <!--<authentication-provider>-->
     <!--<user-service>-->
