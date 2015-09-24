@@ -24,12 +24,12 @@
 
 <script>
     function jsApiCall() {
-        alert("${appId}");
-        alert("${timeStamp}");
-        alert("${pk}");
-        alert("${paySign}");
-        alert("${signType}");
-        alert("${nonceStr}");
+        <%--alert("${appId}");--%>
+        <%--alert("${timeStamp}");--%>
+        <%--alert("${pk}");--%>
+        <%--alert("${paySign}");--%>
+        <%--alert("${signType}");--%>
+        <%--alert("${nonceStr}");--%>
         WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',
                 {
@@ -47,7 +47,7 @@
                         window.location.href = "<c:url value="/"/>";
                     }
                     else {
-
+                        alert(res.err_msg);
                             window.location.href = "/";
                     }
                 }
