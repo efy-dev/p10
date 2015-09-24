@@ -72,39 +72,26 @@
         </property>
     </bean>
 
-    <!--<context:annotation-config/>-->
-    <!-- 定义切面 -->
+    <bean id="dataContextHolder"
+          class="com.efeiyi.association.core.DatabaseContextHolder" />
+
     <!--<aop:config>-->
-        <!--<aop:advisor id="managerTx2" advice-ref="txAdvice2" pointcut="execution(* com.efeiyi.pal.system.label.labelService.impl.*.*(..))"/>-->
-        <!--&lt;!&ndash;<aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.efeiyi.ec.website.organization.service.*.*(..))"/>&ndash;&gt;-->
+        <!--<aop:aspect id="dataSourceHolderAdviceAspect"-->
+                    <!--ref="dataContextHolder">-->
+            <!--&lt;!&ndash;<aop:before method="setDataSource" arg-names="dataSource"&ndash;&gt;-->
+                       <!--&lt;!&ndash;pointcut="execution(* com.efeiyi.association.controller.*.test(..)) and args(dataSource)" />&ndash;&gt;-->
+            <!--<aop:after method="clearDataSource"-->
+                       <!--pointcut="execution(* com.efeiyi.association.controller.*.test(..))" />-->
+        <!--</aop:aspect>-->
     <!--</aop:config>-->
 
-    <!--<tx:annotation-driven/>-->
+    <tx:annotation-driven/>
+
 
     <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <!--<tx:advice id="txAdvice2" transaction-manager="transactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="get*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>-->
-            <!--<tx:method name="list*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>-->
-            <!--<tx:method name="form*" read-only="true" rollback-for="java.lang.Exception" propagation="REQUIRED"/>-->
-            <!--<tx:method name="buildLabelSetByLabelBatch"  rollback-for="java.lang.Exception" propagation="NESTED"/>-->
-            <!--<tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-
-
-
-    <!--<bean id="labelServiceManagerImpl" class="com.efeiyi.pal.system.order.service.impl.LabelServiceManagerImpl"/>-->
-    <!--<bean id="labelDaoHibernate" class="com.efeiyi.pal.system.order.dao.hibernate.LabelDaoHibernate"/>-->
-
-    <!--<bean id="productServiceManagerImpl" class="com.efeiyi.pal.system.product.service.impl.ProductServiceManagerImpl"/>-->
-    <!--<bean id="productDaoHibernate" class="com.efeiyi.pal.system.product.dao.hibernate.ProductDaoHibernate"/>-->
-
-    <!--<bean id="productSeriesServiceManagerImpl" class="com.efeiyi.pal.system.product.service.impl.ProductSeriesServiceManagerImpl"/>-->
-    <!--<bean id="productSeriesDaoHibernate" class="com.efeiyi.pal.system.product.dao.hibernate.ProductSeriesDaoHibernate"/>-->
 
     <!--userDao用于spring security-->
     <bean id="userDao" class="com.efeiyi.association.dao.hibernate.UserDaoHibernate">

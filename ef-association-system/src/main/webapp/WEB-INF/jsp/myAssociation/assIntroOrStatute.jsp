@@ -31,7 +31,7 @@
         <input value="${group}" name="group"  type="hidden">
 
         <div class="am-form-group">
-            <textarea name="documentContent.content" id="documentContent.content"
+            <textarea name="documentContent.content" id="content"
                       class="ckeditor"
                       placeholder="内容"
                       required="true">${document.documentContent.content}</textarea>
@@ -41,7 +41,7 @@
                 <%--<input type="button" class="am-btn am-btn-primary"--%>
                         <%--data-am-modal="{target: '#assPreview', closeViaDimmer: 0, width: 800, height: 250}"--%>
                         <%--value="预览"/>--%>
-                    <input type="button" onclick="addHTML()" value="预览">
+                    <input type="button" class="am-btn am-btn-primary" onclick="addHTML()" value="预览">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
@@ -65,12 +65,10 @@
 <script type="text/javascript">
     function addHTML(){
        var ss=window.open("");
-        var xx = document.getElementById("documentContent.content");
-        var content = $(xx).val();
-        alert(content);
+        var content = CKEDITOR.instances.content.getData();
+//        alert(content);
         ss.document.write(content);
         ss.document.close();
-//        ss.document.innerHTML=content;
     }
 </script>
 </body>

@@ -1,7 +1,7 @@
 package com.efeiyi.association.service;
 
 import com.efeiyi.association.dao.UserDao;
-import com.efeiyi.ec.association.model.AssMyUser;
+import com.efeiyi.ec.association.model.AssUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,18 +28,18 @@ public class UserLoginManager implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        String queryStr = "SELECT u FROM AssMyUser u WHERE u.name=:username AND u.status != 0";
+        String queryStr = "SELECT u FROM AssUser u WHERE u.name=:username AND u.status != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
         queryParamMap.put("username", username);
         System.out.println("username is " + username);
 
-        AssMyUser myUser = userLoginDao.getUniqueMyUserByConditions(username, queryStr, queryParamMap);
+        AssUser user = userLoginDao.getUniqueMyUserByConditions(username, queryStr, queryParamMap);
         System.out.println("查询完数据 ");
-        if (myUser == null) {
+        if (user == null) {
             System.out.println("myuser is null");
             throw new UsernameNotFoundException("user '" + username + "' not found...");
         } else {
-            return myUser;
+            return user;
         }
     }
 

@@ -1,7 +1,7 @@
 package com.efeiyi.association.dao;
 
 
-import com.efeiyi.ec.association.model.AssMyUser;
+import com.efeiyi.ec.association.model.AssUser;
 import com.ming800.core.base.dao.BaseDao;
 
 import java.util.LinkedHashMap;
@@ -13,9 +13,9 @@ import java.util.LinkedHashMap;
  * Time: 下午4:18
  * To change this template use File | Settings | File Templates.
  */
-public interface UserDao extends BaseDao<AssMyUser> {
+public interface UserDao extends BaseDao<AssUser> {
 
 
-     AssMyUser getUniqueMyUserByConditions(String branchName, String queryHql, LinkedHashMap<String, Object> queryParamMap);
+     AssUser getUniqueMyUserByConditions(String branchName, String queryHql, LinkedHashMap<String, Object> queryParamMap);
 
 }

@@ -77,7 +77,7 @@
             </label>
 
             <div class="am-u-sm-9">
-                <textarea cols="10" rows="5" name="documentContent.content" id="documentContent.content"
+                <textarea cols="10" rows="5" name="documentContent.content" id="content"
                           class="ckeditor"
                           placeholder="内容"
                           required="true">${object.documentContent.content}</textarea>
@@ -85,9 +85,7 @@
         </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="button" class="am-btn am-btn-primary"
-                       data-am-modal="{target: '#preview', closeViaDimmer: 0, width: 800, height: 250}"
-                       value="预览"/>
+                <input type="button" class="am-btn am-btn-primary" onclick="addHTML()" value="预览">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
@@ -108,5 +106,14 @@
 </div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
+<script type="text/javascript">
+    function addHTML(){
+        var ss=window.open("");
+        var content = CKEDITOR.instances.content.getData();
+//        alert(content);
+        ss.document.write(content);
+        ss.document.close();
+    }
+</script>
 </body>
 </html>
