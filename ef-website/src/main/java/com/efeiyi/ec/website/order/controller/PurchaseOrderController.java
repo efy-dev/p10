@@ -271,6 +271,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
+        System.out.println("============in the weixin=============");
         //@TODO 添加订单数据部分
         String redirect_uri = "http://master4.efeiyi.com/order/pay/wxParam/" + orderId;
 //        redirect_uri = redirect_uri + "?orderId=" + orderId;
@@ -286,6 +287,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/pay/wxParam/{orderId}"})
     public String getWxOpenId(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
+        System.out.println("============in the weixin param=============");
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         String result;
         //1、网页授权后获取传递的code，用于获取openId
@@ -305,7 +307,9 @@ public class PurchaseOrderController extends BaseController {
             throw new RuntimeException("get openId error：" + result);
         }
         String openid = jsonObject.getString("openid");
+        System.out.println("openId is "+openid);
         JSONObject jsonStr = (JSONObject) paymentManager.wxpay(purchaseOrderPaymentDetails, purchaseOrderPaymentDetails.getMoney().floatValue(), openid);
+        System.out.println(jsonStr.toString());
         model.addAttribute("appId", jsonStr.getString("appId"));
         model.addAttribute("timeStamp", jsonStr.getString("timeStamp"));
         model.addAttribute("pk", jsonStr.getString("package"));
