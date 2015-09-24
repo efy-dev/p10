@@ -214,14 +214,17 @@ public class MyDocumentAttachmentController {
      */
     @RequestMapping("/batchSaveAttachmentDownload.do")
     @ResponseBody
-    public void batchSaveAttachmentDownload( @RequestBody List<ApplicationMaterial> materialList) throws Exception {
+    public void batchSaveAttachmentDownload(@RequestBody List<ApplicationMaterial> materialList) throws Exception {
 
+        if (materialList == null || materialList.size() == 0) {
+            return;
+        }
         ApplicationMaterial newMaterial = null;
 
         for (ApplicationMaterial material : materialList) {
             newMaterial = (ApplicationMaterial) baseManager.getObject(material.getClass().getName(), material.getId());
             newMaterial.setStatus(material.getStatus());
-            baseManager.saveOrUpdate(material.getClass().getName(),newMaterial);
+            baseManager.saveOrUpdate(material.getClass().getName(), newMaterial);
         }
     }
 

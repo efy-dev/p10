@@ -186,7 +186,18 @@ public class MyDocumentController {
 //        return null;
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
+    @RequestMapping("/recommendDocument.do")
+    @ResponseBody
+    public ModelAndView recommendDocument(HttpServletRequest request, Document document) throws Exception {
 
+        String path = request.getParameter("qm");
+        Document newDocument = (Document)baseManager.getObject(document.getClass().getName(),document.getId());
+        newDocument.setStatus(document.getStatus());
+        documentManager.saveDocument(newDocument);
+
+//        return null;
+        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
+    }
     /**
      * 真删
      *

@@ -42,7 +42,7 @@
                                     class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
                             <button onclick="myConfirm('<c:url value="/myDocument/removeDocument.do?qm=removeContent&id=${document.id}&resultPage=/myDocument/doc.do?qm=${requestScope.qm}"/>', 'D');"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                            <button onclick="saveObject('${document.id}','<c:url value='/myDocument/saveDocument.do'/>','status',
+                            <button onclick="saveObject('${document.id}','<c:url value='/myDocument/recommendDocument.do'/>','status',
                                     '<c:if test="${document.status == 1}">2</c:if><c:if test="${document.status != 1}">1</c:if>',
                                     '&qm=/myDocument/doc.do?qm=${requestScope.qm}')"
                                     class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
@@ -67,8 +67,8 @@
                                    name="${document.id}" type="hidden" metaProperty="status"/>
                             <input value="${document.group}"
                                    name="${document.id}" metaProperty="group" type="hidden"/>
-                            <input value='${document.documentContent.content}' metaProperty="documentContent.content"
-                                   name="${document.id}" type="hidden"/>
+                            <%--<input value='${document.documentContent.content}' metaProperty="documentContent.content"--%>
+                                   <%--name="${document.id}" type="hidden"/>--%>
                         </div>
                     </div>
                 </td>

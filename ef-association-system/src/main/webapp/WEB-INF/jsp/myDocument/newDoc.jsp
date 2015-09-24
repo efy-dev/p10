@@ -48,9 +48,9 @@
                type="hidden"/>
         <input type="hidden" id="keywords" placeholder="keywords" name="keywords"
                value="${object.keywords}">
-        <input type="hidden" id="sampleContent" placeholder="sampleContent"
-               name="sampleContent"
-               value="${object.sampleContent}">
+        <%--<input type="hidden" id="sampleContent" placeholder="sampleContent"--%>
+               <%--name="sampleContent"--%>
+               <%--value="${object.sampleContent}">--%>
         <input value="${group}" name="group" type="hidden"/>
 
         <div class="am-form-group">
@@ -60,6 +60,15 @@
 
             <div class="am-u-sm-9">
                 <input type="text" name="title" id="title" placeholder="标题" value="${object.title}" required="true">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="简述" for="sampleContent" class="am-u-sm-3 am-form-label">简述
+                <small>*</small>
+            </label>
+
+            <div class="am-u-sm-9">
+                <input type="text" name="sampleContent" id="sampleContent" placeholder="简述" value="${object.sampleContent}" required="true">
             </div>
         </div>
         <div class="am-form-group">
@@ -94,12 +103,16 @@
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
 <script type="text/javascript">
-    function addHTML(){
-        var ss=window.open("");
+    function addHTML() {
+        var ss = window.open("");
         var content = CKEDITOR.instances.content.getData();
         ss.document.write(content);
         ss.document.close();
     }
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: '<c:url value="/myDocument/ckeditorUpload.do"/>'
+    });
+
 </script>
 </body>
 </html>
