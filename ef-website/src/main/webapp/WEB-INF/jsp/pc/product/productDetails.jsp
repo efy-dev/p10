@@ -31,12 +31,12 @@
       <div class="slider-img">
         <ul>
           <%--<c:if test="${productPicture.status=='2'}">--%>
-          <li class="active"><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-detail-pc-view"
+          <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-detail-pc-view"
                                   alt=""/></li>
           <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
-              <li class="active"><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
+              <li ><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
                                       alt=""/></li>
             </c:if>
           </c:forEach>

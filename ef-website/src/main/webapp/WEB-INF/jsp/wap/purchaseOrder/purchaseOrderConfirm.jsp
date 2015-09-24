@@ -5,19 +5,31 @@
 <head>
     <title>确认订单</title>
     <style>
-        .paymentActive {
-            border: 2px red;
-        }
-
         .acd {
             background: #fff !important;
             color: #000 !important;
             border: 1px solid #000 !important;
         }
 
-        .acn {
-            background: #000 !important;
-            color: #fff !important;
+        .add-btn {
+            background: #fff;
+            height: 3rem;
+            width: 100%;
+            border: 1px solid #000;
+            color: #000;
+            display: block;
+            font-size: 1.2rem
+        }
+
+        .add-address {
+            width: 100%;
+            line-height: 3rem;
+            height: 3rem;
+            text-align: center;
+            border: 1px solid #000;
+            display: block;
+            color: #000;
+            font-size: 1.2rem
         }
     </style>
 </head>
@@ -132,7 +144,7 @@
                 </c:forEach>
             </ul>
             <div class="bd">
-                <a href="#" id="add" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
+                <a href="#" id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
             </div>
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">
@@ -179,7 +191,7 @@
                         <%--<input type="submit" class="dj-btn" value="保存收货人信息">--%>
 
                         <p>
-                            <button type="submit" class="am-btn am-btn-default">保存收货人信息</button>
+                            <button type="submit" class="am-btn am-btn-default add-btn">保存收货人信息</button>
                         </p>
                     </form>
                 </div>
@@ -288,8 +300,15 @@
         if (consumerAddress == "") {
             showAlert("提示", "请选择一个收货地址！");
         } else {
+
+            var isweixin = "";
+
+            if (isWeiXin()) {
+                isweixin = "&isWeiXin=1";
+            }
+
             var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
             window.location.href = url;
         }
     }

@@ -33,7 +33,7 @@
       <ul class="ul-list">
         <c:forEach items="${productModelList}" var="productModel">
           <li>
-            <a href="/product/productModel/${productModel.id}">
+            <a href="/product/productModel/${productModel.id}" style="color: #000">
             <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@product-model-wap-tenant"/>" alt="">
             <p class="name">${productModel.name}</p>
             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
