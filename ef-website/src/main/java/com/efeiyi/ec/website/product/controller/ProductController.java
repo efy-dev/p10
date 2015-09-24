@@ -1,11 +1,14 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import org.jboss.marshalling.util.BooleanReadField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,14 +96,20 @@ public class ProductController {
      */
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
-    public boolean addProductFavorite(HttpServletRequest request) throws Exception{
-        String productModelId =request.getParameter("id");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-        xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
-        xSaveOrUpdate.getParamMap().remove("id");
-        baseManager.saveOrUpdate(xSaveOrUpdate);
-        return true;
+    public boolean addProductFavorite(HttpServletRequest request) throws Exception {
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = true;
+        if (currentUser.getId() != null) {
+            String productModelId = request.getParameter("id");
+            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite", request);
+            xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
+            xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
+            xSaveOrUpdate.getParamMap().remove("id");
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+        } else {
+         flag = false;
+        }
+        return flag;
     }
     /**
      * 爆款推荐

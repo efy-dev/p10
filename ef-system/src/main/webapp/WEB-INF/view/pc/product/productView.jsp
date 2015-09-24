@@ -187,6 +187,7 @@
                             <textarea id="productDescription" name="content" class="ckeditor" id="content"
                                       placeholder="商品描述" required >
                                 ${object.productDescription.content}
+
                             </textarea>
                 </div>
             </form>
@@ -324,7 +325,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                         </dl>
                                     </li>
@@ -378,7 +379,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask-detail">复制图片地址</a>
                                             </dd>
                                             <%--<dd style="width: 100%;text-align: center;" >--%>
                                                     <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
@@ -496,7 +497,6 @@ var modelIds = [];
     var  modelNames = [];
     $(function(){
 
-
         CKEDITOR.replace('content', { height: '440px', width: '1000px' });
         $(".copy").each(function(){
             copyInit($(this));
@@ -532,7 +532,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask";
 //                ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +
@@ -622,7 +622,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask-detail";
                 ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +
