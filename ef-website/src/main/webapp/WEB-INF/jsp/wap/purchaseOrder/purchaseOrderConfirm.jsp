@@ -28,8 +28,9 @@
             text-align: center;
             border: 1px solid #000;
             display: block;
-            color: #000;
-            font-size: 1.2rem
+            color: #fff;
+            font-size: 1.2rem;
+             background: #000;
         }
     </style>
 </head>
@@ -46,22 +47,22 @@
 
                             <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
 
-                            <p class="txt">${address.province.name}${address.details}</p>
+                            <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
                         </a>
                     </c:if>
                 </c:forEach>
             </c:if>
-            <%--<c:if test="${addressList.size() == 0}">--%>
+            <c:if test="${addressList.size() == 0}">
             <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
-            <%--</c:if>--%>
+            </c:if>
         </div>
         <div class="bd order-address" id="order-add1" style="display: none">
             <a href="#btn-edit-addres" class="btn-edit-addres">
                 <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
                 </p>
 
-                <p class="txt" id="txt">${address.province.name}${address.details}</p>
+                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.details}</p>
                 <a href="#arrow-right" class="arrow-right"></a>
             </a>
         </div>
@@ -131,10 +132,10 @@
                 <c:forEach items="${addressList}" var="address">
 
                     <li class="cart-btn acd"
-                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">
+                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.city.name}','${address.details}')">
                         <p class="bd title">${address.consignee} ${address.phone}</p>
 
-                        <p class="bd des">${address.province.name}${address.details}</p>
+                        <p class="bd des">${address.province.name}${address.city.name}${address.details}</p>
 
                         <p class="bd btns">
                                 <%--<input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">--%>
@@ -365,11 +366,12 @@
         }, "post")
     }
 
-    function chooseAddress(addressId, consignee, phone, province, details) {
+    function chooseAddress(addressId, consignee, phone, province,city, details) {
         consumerAddress = addressId;
         var conConsignee = consignee;
         var conPhone = phone;
         var conProvince = province;
+        var conCity = city;
         var conDetails = details;
 
         console.log(consumerAddress);
@@ -377,7 +379,7 @@
         $("#order-add1").attr("style", "display:block");
         $("#span1").text(conConsignee);
         $("#span2").text(conPhone);
-        $("#txt").text(conProvince + conDetails);
+        $("#txt").text(conProvince + conCity + conDetails);
 
     }
 
