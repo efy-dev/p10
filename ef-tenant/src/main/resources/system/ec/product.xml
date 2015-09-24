@@ -43,6 +43,7 @@
                         <condition name="name"  operation="eq" label="商品名称" inputType="text"  />
                         <condition name="serial"  operation="eq" label="商品编号" inputType="text"  />
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                         <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
                     </query>
                 </do>
