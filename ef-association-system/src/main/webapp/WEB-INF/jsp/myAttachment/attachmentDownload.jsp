@@ -20,11 +20,11 @@
         <td>操作</td>
         <td>申请列表</td>
         <td>申请类别</td>
-        <td>申请人</td>
-        <td>申请时间</td>
         <td>申请状态 全选<input type="checkbox" onclick="selectAll(this.checked,'status')"></td>
         <td>附件</td>
         <td>下载<input type="checkbox" onclick="selectAll(this.checked,'download')">全选</td>
+        <td>申请人</td>
+        <td>申请时间</td>
     </tr>
 
     <c:forEach items="${applicationMaterialList}" var="material">
@@ -50,13 +50,6 @@
                                                      checkedValue='${material.group}' type="normal"/></div>
             </td>
             <td>
-                <div name="material">${material.tenant.name}</div>
-            </td>
-            <td>
-                <fmt:formatDate value="${material.theDatetime}"
-                                pattern="yyyy-MM-dd"/>
-            </td>
-            <td>
                 <input type="checkbox" name="status" id="${material.id}" value="${material.status}">
 
                 <ming800:status name="" dataType="SubmissionMaterial.status"
@@ -79,10 +72,17 @@
                         class="am-icon-trash-o"></span> 下载
                 </a>
             </td>
+            <td>
+                <div name="material">${material.tenant.name}</div>
+            </td>
+            <td>
+                <fmt:formatDate value="${material.theDatetime}"
+                                pattern="yyyy-MM-dd"/>
+            </td>
         </tr>
     </c:forEach>
     <tr>
-        <td colspan="5"></td>
+        <td colspan="3"></td>
         <td>
             <button onclick="batchSwitchValue('batchOption','<c:url
                     value='/myAttachment/batchSaveAttachmentDownload.do'/>',
@@ -101,6 +101,7 @@
                     class="am-icon-trash-o">批量下载</span>
             </button>
         </td>
+        <td colspan="2"></td>
     </tr>
 </table>
 </div>

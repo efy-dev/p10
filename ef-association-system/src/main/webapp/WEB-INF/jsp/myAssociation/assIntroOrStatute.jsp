@@ -38,9 +38,10 @@
         </div>
         <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-                <input type="button" class="am-btn am-btn-primary"
-                        data-am-modal="{target: '#assPreview', closeViaDimmer: 0, width: 800, height: 250}"
-                        value="预览"/>
+                <%--<input type="button" class="am-btn am-btn-primary"--%>
+                        <%--data-am-modal="{target: '#assPreview', closeViaDimmer: 0, width: 800, height: 250}"--%>
+                        <%--value="预览"/>--%>
+                    <input type="button" onclick="addHTML()" value="预览">
                 <input type="submit" class="am-btn am-btn-primary" value="保存"/>
             </div>
         </div>
@@ -61,5 +62,16 @@
 </div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
+<script type="text/javascript">
+    function addHTML(){
+       var ss=window.open("");
+        var xx = document.getElementById("documentContent.content");
+        var content = $(xx).val();
+        alert(content);
+        ss.document.write(content);
+        ss.document.close();
+//        ss.document.innerHTML=content;
+    }
+</script>
 </body>
 </html>
