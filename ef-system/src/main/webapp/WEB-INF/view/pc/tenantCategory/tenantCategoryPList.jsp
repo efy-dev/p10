@@ -20,18 +20,17 @@
 <body>
 
 <div class="admin-content">
+    <div style="margin-left: 15px;">
+        <input onclick="window.location.href='<c:url
+                value="/basic/xm.do?qm=formTenantCategory&tenantId=${tenantId}"/>'"
+               type="button" class="am-btn am-btn-default am-btn-xs"
+               style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
+               value="新建类别"/>
+    </div>
     <div class="am-g">
-        <div class="am-u-sm-12 am-u-md-6">
-        </div>
-        <div class="am-u-sm-12">
 
-            <div>
-                    <input onclick="window.location.href='<c:url
-                            value="/basic/xm.do?qm=formTenantCategory&tenantId=${tenantId}"/>'"
-                           type="button" class="am-btn am-btn-default am-btn-xs"
-                           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;"
-                           value="新建类别"/>
-            </div>
+
+
             <div class="am-u-sm-12">
                 <table class="am-table am-table-bordered am-table-radius am-table-striped">
                     <tr>
@@ -92,7 +91,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#">
+                                <a href="<c:url value="/basic/xm.do?qm=viewTenantCategory&id=${tenantCategory.id}&tenantId=${tenantId}" />">
                                         ${tenantCategory.value}
                                 </a>
                                 <%--<c:forEach var="recommended" items="${projectCategory.projectCategoryRecommendeds}">--%>
@@ -121,7 +120,7 @@
 
         </div>
     </div>
-</div>
+
 <script>
     function removeTenantCategory(divId){
         $.ajax({

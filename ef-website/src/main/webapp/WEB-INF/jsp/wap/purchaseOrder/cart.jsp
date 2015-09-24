@@ -218,13 +218,6 @@
             $("input").each(function () {
                 var inputId = $(this).attr("id") + "";
                 if (inputId.indexOf(data["tenantId"]) >= 0) {
-                    /*alert(inputId);
-                    var cp = inputId.split(":")[1];
-                    alert("1111"+cp);*/
-
-                   /* var cartProductId = inputId.split(":");*/
-
-                    /*chooseItem(cp);*/
                     this.checked = true;
                 }
             })

@@ -27,7 +27,7 @@
     <div class="bd list-class">
       <ul class="ul-list-nav">
         <li><a href="#热门分类" title="热门分类">热门分类</a></li>
-        <li><a href="#店铺详情" title="店铺详情">店铺详情</a></li>
+        <li><a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解大师">了解大师</a></li>
       </ul>
       <h3 class="title">欢迎</h3>
       <ul class="ul-list">

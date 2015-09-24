@@ -327,9 +327,13 @@ function switchValue(tag, url, appendParam) {
     window.location = url + "&status=" + status + appendParam;
 }
 
-function batchSwitchValue(option, url, resultUrl) {
+function batchSwitchValue(option, url, resultUrl,tagName) {
     var optionValue = $("#" + option).find("option:selected").val();
-    var statusTags = $("input[name='status']");
+    batchPushValue(optionValue,url,resultUrl,tagName);
+}
+
+function batchPushValue(optionValue,url,resultUrl,tagName){
+    var statusTags = document.getElementsByName(tagName);
     var tagList = new Array();
     for (var x = 0; x < statusTags.length; x++) {
         if (statusTags[x].checked) {
@@ -354,7 +358,6 @@ function batchSwitchValue(option, url, resultUrl) {
     });
 }
 
-
 function downloadFileOnPage(str) {
     var strArray = str.split(";");
     for(var x=0;x<strArray.length;x++){
@@ -366,7 +369,7 @@ function batchDownloadFileOnPageByCheckbox(tagName){
     var downloadTags = $("input[name='"+ tagName +"']");
     for (var x = 0; x < downloadTags.length; x++) {
         if (downloadTags[x].checked) {
-            downloadFileOnPage($(downloadTags[x]).val());
+            downloadFileOnPage($(downloadTags[x]).attr("download"));
         }
     }
 }

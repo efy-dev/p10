@@ -86,4 +86,18 @@ public class TenantController extends BaseController {
         return  id;
     }
 
+
+    @RequestMapping("/linkProduct.do")
+    @ResponseBody
+    public String linkProduct(String tenantCategoryId,String productId,String tenantProductId,String status){
+        String id = "";
+        try {
+
+            id =  tenantManager.linkProduct(tenantCategoryId,productId,tenantProductId,status);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
+
 }
