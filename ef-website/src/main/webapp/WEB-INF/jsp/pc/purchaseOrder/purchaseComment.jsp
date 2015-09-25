@@ -84,19 +84,7 @@
                 <div class="parameter">
                   <form>
                     <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                      </li>
+                      <li class="data-list"></li>
                       <li class="data-list">
                         <dl>
                           <dt>
@@ -111,50 +99,23 @@
                       </li>
 
                       <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>晒单：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally-1">
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                            </ul>
-                          </dd>
-                        </dl>
+                        <dl></dl>
                       </li>
                       <li class="data-list" style="display: none;" id="zt">
                         <div class="con-vessel">
                           <ul class="dialogue">
                             <!--买家回复的状态-->
                             <!--文字标题部分-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">追加评价：</dt>
-                                <dd>
-                                  <textarea class="rarae"></textarea>
-                                </dd>
-                              </dl>
-                            </li>
+                            <li class="list-crossover"></li>
                             <!--img-->
                             <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">添加图片：</dt>
-                                <dd>
-                                  <ul class="add-images">
-                                    <li><input type="file" name="pic" accept=""></li>
-                                    <li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                                  </ul>
-                                </dd>
-                              </dl>
+                              <dl class="content"></dl>
                             </li>
                             <!--买家回复的状态-->
                             <li class="list-crossover">
                               <dl class="content">
                                 <dt class="dt"><label></label></dt>
-                                <dd>
-                                  <input type="button"  value="确认追加" class="btn">
-                                </dd>
+                                <dd></dd>
                               </dl>
                             </li>
                           </ul>
@@ -165,9 +126,7 @@
                           <dt>
                             <label></label>
                           </dt>
-                          <dd>
-                            <input type="button" class="btn" onclick="a1(this)" value="追&nbsp加&nbsp评&nbsp价&nbsp">
-                          </dd>
+                          <dd></dd>
                         </dl>
                       </li>
                     </ul>
@@ -182,15 +141,15 @@
                   <form action="<c:url value="/comment/saveComment.do"/>" method="post">
                     <ul class="data">
                       <li class="data-list">
-                        <label>评分：</label>
+                        <%--<label>评分：</label>--%>
                         <div class="starbox">
                           <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
+                            <%--<input name="1" type="button" />--%>
+                            <%--<input name="2" type="button" />--%>
+                            <%--<input name="3" type="button" />--%>
+                            <%--<input name="4" type="button" />--%>
+                            <%--<input name="5" type="button" />--%>
+                            <%--<span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>--%>
                           </div>
                         </div>
                         <input type="hidden" value="${op.id}" name="productId">

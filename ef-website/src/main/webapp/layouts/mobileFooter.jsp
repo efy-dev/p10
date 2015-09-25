@@ -54,15 +54,15 @@
         }
     }
 
-    var registerWx = "<c:url value="/wx/userInfo"/>";
+    <%--var registerWx = "<c:url value="/wx/userInfo"/>";--%>
 
-    var register = "<c:url value="/register"/> ";
+    <%--var register = "<c:url value="/register"/> ";--%>
 
-    if (isWeiXin()) {
-//        alert("not weixin");
-        $("#signin").attr("href", registerWx);
-    } else {
-//        alert("weixin");
-        $("#signin").attr("href", register);
-    }
+<%--//    if (isWeiXin()) {--%>
+<%--////        alert("not weixin");--%>
+<%--//        $("#signin").attr("href", registerWx);--%>
+<%--//    } else {--%>
+<%--////        alert("weixin");--%>
+<%--//        $("#signin").attr("href", register);--%>
+<%--//    }--%>
 </script>
