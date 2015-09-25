@@ -45,14 +45,9 @@ public class ManageController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping({"/news.do"})
+    @RequestMapping({"/news.do","/news.Bulletin.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
-//        XQuery  xQuery = new XQuery(qm,request);
-//        List<Document> docs = baseManager.listObject(xQuery);
-
-//        String conditions = request.getParameter("conditions");
-//        request.setAttribute("conditions", conditions);
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
         }
@@ -60,9 +55,6 @@ public class ManageController {
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//        modelMap.put("tempDo", tempDo);
-//        modelMap.put("doQueryList", tempDo.getDoQueryList());
-//        String resultPage = tempDo.getResult();
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -78,12 +70,6 @@ public class ManageController {
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
 
-//                返回列表
-//        Map map = request.getParameterMap();
-//        xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
-        // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
-
-
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
@@ -91,8 +77,6 @@ public class ManageController {
         modelMap.put("group", tempDo.getData());
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
-//        return docs;
-        //return new ModelAndView("/",model);
     }
 
 }

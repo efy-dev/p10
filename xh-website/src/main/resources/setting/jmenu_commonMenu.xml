@@ -18,7 +18,7 @@
         </jnode>
         <jnode url="/news.do?qm=plistNewsIndustry_default" access="admin,manager" text_zh_CN="行业新闻">
         </jnode>
-        <jnode url="/news.do?qm=plistNewsNote_default" access="admin,manager" text_zh_CN="公告管理">
+        <jnode url="/news.Bulletin.do?qm=plistNewsNote_default" access="admin,manager" text_zh_CN="公告管理">
         </jnode>
     </jnode>
 

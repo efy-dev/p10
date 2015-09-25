@@ -82,6 +82,7 @@ public class PersonalInforController {
      * @throws Exception
      */
     @RequestMapping({"updatePassword.do"})
+    @ResponseBody
     public String updatePassword(HttpServletRequest request) throws Exception {
         String contion = request.getParameter("pwd");
         String password= StringUtil.encodePassword(contion, "SHA");
@@ -94,7 +95,7 @@ public class PersonalInforController {
         }
         MyUser bigUser = AuthorizationUtil.getMyUser();
         System.out.println(bigUser.isAccountExpired());
-        return "redirect:/sso.do";
+        return password;
 
     }
     @RequestMapping({"getPassword.do"})

@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- sidebar start -->
 <div class="wh nav">
   <div class="hd">
     <ul class="ul-list">
@@ -19,3 +18,4 @@
     </ul>
   </div>
 </div>
+<!--//End--nav-->
