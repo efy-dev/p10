@@ -733,35 +733,3 @@ a:hover{text-decoration: underline}
 .max-four .five-max{position: fixed;right: 0;top:0}
 .max-four .logo-four{width: 158px;height: 191px;background: url('../images/efeiyicuowu.png') no-repeat right -405px;float: right;margin-top: 234px;}
 /*404错误信息*/
-.header .nav-links{width: 614px;padding: 33px 53px;left: -398px;}
-.header .nav-links ul{width: 122px;}
-/*pcdashouye-gai*/
-.header .nav li a{width: 100%;text-align: center}
-/*shangpin-xiangqing(gai)*/
-.product-intro .itemInfo .itme-ext .name{margin-top: 0px;margin-bottom: 26px;}
-.product-intro .itemInfo .itme-ext .name p{margin-bottom: 14px;}
-.product-intro .itemInfo .itme-ext .master-name{padding-left: 53px;width: 100%;position: relative;margin-bottom: 27px;}
-.product-intro .itemInfo .itme-ext .master-name p{color: #999;}
-.product-intro .itemInfo .itme-ext .master-name p span{color: #000!important;margin-right: 7px;}
-.product-intro .itemInfo .itme-ext .master-name .p1{font-size: 14px;}
-.product-intro .itemInfo .itme-ext .master-name .p2{font-size: 12px;}
-.product-intro .itemInfo .itme-ext .master-name .master-img-pt{width: 40px;height: 40px;position: absolute;top: 0;left: 0;}
-.product-intro .itemInfo .itme-ext .master-name .master-img-pt img{width: 100%;}
-.product-intro .itemInfo .itme-ext .master-cost{width: 100%;margin-bottom: 26px;float: left}
-.product-intro .itemInfo .itme-ext .master-cost p{font-size: 12px;color: #000;}
-.product-intro .itemInfo .itme-ext .master-cost p del{color: #999;}
-.product-intro .itemInfo .itme-ext .master-cost p span{font-size: 36px;float: left}
-.product-intro .itemInfo .itme-ext .master-cost p strong{float: left;font-size: 14px;}
-.product-intro .itemInfo .itme-ext .des .ul-list li:hover a, .product-intro .itemInfo .itme-ext .des .ul-list li.active a{background: #333;}
-.product-intro .colour{padding-right: 8px;float: left;font-size: 12px;color: #000;}
-.product-intro .itemInfo .itme-ext .des .ul-list li{border: 1px solid #333;margin-bottom: 4px;margin-right: 9px;}
-.product-intro .colour-page{float: left;width: 208px;font-size: 12px;}
-.product-intro .itemInfo .preview{margin-left:0;}
-.product-intro .ul-list{width: 100%;}
-.product-intro .itemInfo .itme-ext .des{margin-bottom:15px; }
-.product-intro .itemInfo .itme-ext .des .ul-list li a{padding:0 8px;}
-.product-intro .itemInfo .itme-ext .amount{border: 1px solid #000;padding: 2px 0;}
-.product-intro .colour-page .btn-add{margin: 5px 0;border-right: 1px solid #000;padding:0 8px;color: #000;text-decoration: none}
-.product-intro .colour-page .txt{width: 58px;padding: 2px 5px;text-align: center;font-size: 12px;}
-.product-intro .itemInfo .itme-ext .amount{width: 131px;}
-.product-intro .colour-page .btn-sub{margin: 5px 0;border-left: 1px solid #000;padding:0 7px;color: #000;text-decoration: none}

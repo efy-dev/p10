@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="AssociationMenu">
 
-    <jnode id="AssociationHomePage" url="/main.do?jnodeId=AssociationHomePage" text_zh_CN="">
-        <jnode url="/home/home.do"  access="admin,manager" text_zh_CN="首页">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+    <jnode id="AssociationHomePage" url="/home/home.do" text_zh_CN="首页">
+        <jnode url="/home/home.do" access="admin,manager" text_zh_CN="首页">
         </jnode>
-        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default"  access="admin,manager" text_zh_CN="协会概况">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+    </jnode>
+
+    <jnode id="NewsBulletinManagement" url="/association/association.do?qm=plistAssociationIntroduction_default" text_zh_CN="协会概况">
+        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default" access="admin,manager" text_zh_CN="协会介绍"/>
+        <jnode url="/association/association.do?qm=plistStatute_default" access="admin,manager" text_zh_CN="协会章程"/>
+        <jnode url="" access="admin,manager" text_zh_CN="组织机构"/>
+        <jnode url="/association/association.do?qm=plistContact_default" access="admin,manager" text_zh_CN="联系方式"/>
+    </jnode>
+
+    <jnode id="SubordinateInstitutionManagement" url="/news.do?qm=plistNewsOrganization_default" text_zh_CN="新闻公告">
+        <jnode url="/news.do?qm=plistNewsOrganization_default" access="admin,manager" text_zh_CN="协会新闻">
         </jnode>
-        <jnode url="/myDocument/doc.do?qm=news_default"  access="admin,manager" text_zh_CN="新闻公告">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        <jnode url="/news.do?qm=plistNewsIndustry_default" access="admin,manager" text_zh_CN="行业新闻">
         </jnode>
-        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="下属机构">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        <jnode url="/news.do?qm=plistNewsNote_default" access="admin,manager" text_zh_CN="公告管理">
         </jnode>
-        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="非遗名录">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+    </jnode>
+
+    <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="下属机构">
+        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="下属机构">
         </jnode>
-        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="非遗保护">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+    </jnode>
+
+    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗名录">
+        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="非遗名录">
         </jnode>
-        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="学术研究">
-            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
-            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+    </jnode>
+
+    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗保护">
+        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="非遗保护">
+        </jnode>
+    </jnode>
+
+    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="学术研究">
+        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="学术研究">
         </jnode>
     </jnode>
 

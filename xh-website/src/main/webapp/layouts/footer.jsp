@@ -7,9 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<body>
 <div class="footer wh">
-
   <div class="links wh">
     <a href="" target="_blank" title="关于我们">关于我们</a>
     <a class="line"></a>
@@ -43,4 +41,3 @@
 <![endif]-->
 <script src="../shop2015/js/amazeui.min.js"></script>
 <script src="../shop2015/js/system.js"></script>
-</body>
