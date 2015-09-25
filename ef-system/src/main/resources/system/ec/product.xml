@@ -14,6 +14,12 @@
                 <field name="picture_url" label="产品图片链接" inputType="text"/>
                 <field name="createDatetime" label="创建时间" inputType="date"/>
                 <field name="master.id" label="用户" inputType="dialog_pop"/>
+                <field name="status" label="状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistProduct" access="" label="产品分页列表"
