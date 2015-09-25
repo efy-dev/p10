@@ -39,14 +39,14 @@
             <c:forEach items="${collectList}" var="collectList">
             <li class="single">
               <dl>
-                <dt class="list-img"><a href="#"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
+                <dt class="list-img"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
                 <dd>
                   <dl class="list-title">
                     <dt>
                       <label><input type="checkbox"></label>
                     </dt>
                     <dd>
-                      <p class="list-title-text">${collectList.productModel.product.name}</p>
+                      <p class="list-title-text"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a></p>
                       <p class="list-cost">￥<span>${collectList.productModel.price}</span></p>
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
