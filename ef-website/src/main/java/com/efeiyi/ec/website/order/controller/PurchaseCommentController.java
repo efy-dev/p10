@@ -1,5 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.purchase.model.PurchaseOrderComment;
+import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -33,19 +35,19 @@ public class PurchaseCommentController {
 
     @RequestMapping("/saveComment.do")
     public String saveOrUpdateComment(HttpServletRequest request) throws Exception {
-        XSaveOrUpdate xSaveOrUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
-        baseManager.saveOrUpdate(xSaveOrUpdate);
+
         String id=request.getParameter("productId");
-//        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateProduct",request);
+        XSaveOrUpdate xUpdate =new XSaveOrUpdate("saveOrUpdateComment",request);
+        xUpdate.getParamMap().put("purchaseOrderProduct_id",id);
+        PurchaseOrderComment comment = (PurchaseOrderComment)baseManager.saveOrUpdate(xUpdate);
 
-//        String sql="update purchase_order_product set status= '1'and purchase_order_comment_id ='"++"' where id='"+id+"' ";
-//        baseManager.executeSql(null,sql,null);
+        PurchaseOrderProduct purchaseOrderProduct = (PurchaseOrderProduct)baseManager.getObject(PurchaseOrderProduct.class.getName(),id);
+        purchaseOrderProduct.setStatus("1");
+        purchaseOrderProduct.setPurchaseOrderComment(comment);
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(),purchaseOrderProduct);
+
+
         return"redirect:/comment/finishOrderList.do";
-    }
-    public String checkComment(HttpServletRequest request,Model model){
-
-
-        return null;
     }
 
 }
