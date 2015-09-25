@@ -18,6 +18,7 @@ import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,61 +29,43 @@ import java.util.List;
  * Created by Administrator on 2015/7/13.
  */
 @Controller
+@RequestMapping("/xh")
 public class ManageController {
-    @Autowired
-    private BaseManager baseManager;
+    @RequestMapping("/getMenu.do")
+    public String getManageJmenuHeader(HttpServletRequest request, Model model) {
 
-    @Autowired
-    @Qualifier("autoSerialManager")
-    private AutoSerialManager autoSerialManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private XdoManager xdoManager;
-
-    @Autowired
-    private XdoSupportManager xdoSupportManager;
-
-    @Autowired
-    private DoManager doManager;
-
-    @RequestMapping({"/news.do","/news.Bulletin.do"})
-    public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
-        String qm = request.getParameter("qm");
-        if (qm.split("_").length < 2) {
-            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
+        String matchUrl = match;
+        match = match.substring(0,match.indexOf("."));
+//        System.out.println("======================================");
+//        System.out.println(match);
+//        System.out.println("======================================");
+        String resultPage = request.getParameter("resultPage");
+        String jnodeId = request.getParameter("jnodeId");
+        String jmenuId = request.getParameter("jmenuId");
+        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuId);
+//        System.out.println("startTime: " + System.currentTimeMillis());
+        Jnode currentJnode = getCurrentJnode(jmenu, match);
+        Jnode matchJnode = getMatchJnode(currentJnode, matchUrl);
+//        System.out.println("endTime: " + System.currentTimeMillis());
+        model.addAttribute("jmenu", jmenu);
+        if (currentJnode != null) {
+            model.addAttribute("currentJnode", currentJnode);
+            model.addAttribute("jnode", currentJnode.getRootFather());
+            model.addAttribute("matchJnode",matchJnode);
+        } else if (jnodeId != null) {
+            for (Jnode jnodeTemp : jmenu.getChildren()) {
+                if (jnodeTemp.getId().equals(jnodeId)) {
+                    model.addAttribute("jnode", jnodeTemp);
+                    break;
+                }
+            }
+        } else {
+            model.addAttribute("jnode", jmenu.getChildren().get(0));
         }
-        //先找到配置文件里的entity
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        return resultPage;
 
-        PageEntity pageEntity = new PageEntity();
-        String pageIndex = request.getParameter("pageEntity.index");
-        String pageSize = request.getParameter("pageEntity.size");
-        if (pageIndex != null) {
-            pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
-        }
-
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-//                resultPage = "/pc/choiceness";
-        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
-        modelMap.put("pageInfo", pageInfo);
-        modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
-            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-        }
-        modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getData());
-        modelMap.put("group", tempDo.getData());
-        return pageInfo.getList();
     }
-
-
     @RequestMapping("/getSubMenu.do")
     public String getSubMenu(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
@@ -118,7 +101,7 @@ public class ManageController {
 
     }
     private Jnode getCurrentJnode(Jmenu jmenu, String match) {
-        if (match == null || match.equals("")) {
+        if (match == null || match.equals("") || jmenu == null) {
             return null;
         }
         Jnode resultJnode = null;
@@ -130,7 +113,7 @@ public class ManageController {
         return resultJnode;
     }
     private Jnode getMatchJnode(Jnode jnode, String match) {
-        if (match == null || match.equals("")) {
+        if (match == null || match.equals("")||jnode == null) {
             return null;
         }
         Jnode resultJnode = null;
