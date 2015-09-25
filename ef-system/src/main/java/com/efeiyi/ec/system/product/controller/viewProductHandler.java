@@ -23,7 +23,7 @@ public class viewProductHandler implements DoHandler {
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        if(request.getParameter("id")!=""){
+        if(request.getParameter("id")!="" && request.getParameter("id")!=null){
             String id = request.getParameter("id");
             Product product = (Product)baseManager.getObject(Product.class.getName(),id);
             product.setStatus("2");
