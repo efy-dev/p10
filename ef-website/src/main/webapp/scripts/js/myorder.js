@@ -186,12 +186,12 @@ $(function(){
     })
 })
 //�����ť
-//$(function(){
-//    $('.act-ui').click(function(){
-//        $(this).parents('.table').siblings('.mutual').slideToggle();
-//        return false;
-//    })
-//})
+$(function(){
+    $('.act-ui').click(function(){
+        $(this).parents('.table').siblings('.mutual').slideToggle();
+        return false;
+    })
+})
 //�󶨰�ť
 $(function(){
     $('.kd').click(function(){

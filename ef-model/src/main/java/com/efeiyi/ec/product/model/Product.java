@@ -30,7 +30,7 @@ public class Product implements Serializable{
     private BigDecimal price;
     private List<ProductPicture> productPictureList;
     private ProductDescription productDescription;
-    private String status;
+    private String status;//1:上架 2 下架
     private Project project;
     private Date createDateTime;
     private Tenant tenant;
@@ -39,6 +39,7 @@ public class Product implements Serializable{
     private Integer recommendedIndex;//首页推荐排序字段
     private List<ProductModel> productModelList;
     private String subName;//副标题
+    private  String type;//1：普通2：收藏品
 
 
     @Transient
@@ -214,5 +215,14 @@ public class Product implements Serializable{
 
     public void setSubName(String subName) {
         this.subName = subName;
+    }
+
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

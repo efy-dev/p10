@@ -486,4 +486,8 @@ CHANGE COLUMN `fansAmount` `fans_amount`  bigint(20) NULL DEFAULT NULL AFTER `ma
 ALTER TABLE `project`
 CHANGE COLUMN `fansAmout` `fans_amount`  bigint(20) NULL DEFAULT NULL AFTER `district_id`;
 
+-----------20150925------------
+ALTER TABLE `product`
+ADD COLUMN `type`  char(2) NULL AFTER `sub_name`;
+
 

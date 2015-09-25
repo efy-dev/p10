@@ -18,4 +18,6 @@ public interface ProductManager {
     Product saveProductModel(ProductModelBean productModelBean) throws  Exception;
 
     Subject saveSubject(Subject subject, String[] flag,String[] spId,String[] subjectPicture);
+
+    Product setProductStatus(String status,String id);
 }

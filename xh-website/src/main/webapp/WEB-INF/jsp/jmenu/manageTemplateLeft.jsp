@@ -8,14 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="wh nav">
-  <div class="hd">
-    <ul class="ul-list">
-      <c:forEach items="${jmenu.children}" var="jmenuNode">
-          <li>
-            <a href="${jmenuNode.url}" title="" target="_parent">${jmenuNode.text_zh_CN}</a>
-          </li>
-      </c:forEach>
-    </ul>
-  </div>
+    <div class="hd">
+        <ul class="ul-list">
+            <c:forEach items="${jmenu.children}" var="jmenuNode">
+                <c:if test="${children.id== matchJnode.id}">
+                    <li class="items active"><a href="${jmenuNode.url}" title=""
+                                                target="_parent">${jmenuNode.text_zh_CN}</a></li>
+                </c:if>
+                <c:if test="${children.id!= matchJnode.id}">
+                    <li>
+                        <a href="${jmenuNode.url}" title="" target="_parent">${jmenuNode.text_zh_CN}</a>
+                    </li>
+                </c:if>
+
+            </c:forEach>
+        </ul>
+    </div>
 </div>
 <!--//End--nav-->
