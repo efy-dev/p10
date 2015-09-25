@@ -14,7 +14,22 @@
     <title></title>
 </head>
 <body>
-  <div id="native"></div>
+  <%--<div id="native"></div>--%>
+
+  <div class="wh">
+    <div class="scan-code">
+      <div class="scan-text">
+        <ul>
+          <li class="tx1"><span>e飞蚁订单：${order.purchaseOrderPayment.purchaseOrder.serial}</span></li>
+          <li class="tx2"><span><strong>${order.money}</strong>元</span></li>
+        </ul>
+      </div>
+      <div class="scan-img">
+        <div id="native"></div>
+        <div class="scan-img-right"></div>
+      </div>
+    </div>
+  </div>
 <script>
   $('#native').qrcode({
     render: "div",
