@@ -26,7 +26,15 @@
   <!-- //End--面包屑-->
   <div class="wh itemInfo">
     <div class="preview">
-      <div class="collect" disabled =disable  onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>
+      <div class="collect" id ="show" onclick="collect('${productModel.id}')">
+        <i class="icon icon-hover"></i>
+        <span class="hover">收藏</span>
+      </div>
+      <div class="collect" id="hidden" style="visibility: hidden" onclick="deCollect('${productModel.id}')">
+        <i class="icon icon-hover"></i>
+        <span class="hover">已收藏</span>
+      </div>
+      <%--<div class="collect" disabled =disable  onclick="getStatus('${productModel.id}')">  <i class="icon" > </i> <span class="hover" id="collection" >收藏</span><span class="active">已收藏</span>  </div>--%>
       <%--<div class="collect" > <a <a onclick="getStatus('${productModel.id}')"> method="post"/> <i class="icon"></i></a><span class="hover">收藏</span></div>--%>
       <div class="slider-img">
         <ul>
@@ -47,17 +55,13 @@
         <ul>
          <%--<c:if test="${productPicture.status=='2'}">--%>
           <li>
-            <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-details-picture"  alt=""/>
-            </a>
           </li>
          <%--</c:if>--%>
           <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
             <c:if test="${productPicture.status=='1'}">
             <li>
-              <a href="<c:url value="http://${product.master.name}.efeiyi.com"/>" target="_blank" title="">
               <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"  alt=""/>
-              </a>
             </li>
             </c:if>
           </c:forEach>
@@ -179,19 +183,9 @@
     </div>
   </div>
 </div>
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/scripts/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="/scripts/js/amazeui.min.js"></script>
-<script src="/scripts/js/system.js"></script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <script type="text/javascript">
-  function getStatus(o) {
+  function collect(o) {
+    style="visibility: none;"
     $.ajax({
       type: 'post',
       async: false,
@@ -200,6 +194,29 @@
       success: function (data) {
         if(data==false){
           window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
+        }else{
+          document.getElementById("show").style.visibility="hidden";
+          document.getElementById("hidden").style.visibility="visible";
+        }
+      },
+    });
+  }
+</script>
+
+<script type="text/javascript">
+  function deCollect(o) {
+    style="visibility: none;"
+    $.ajax({
+      type: 'post',
+      async: false,
+      url: '<c:url value="/product/removeProductFavorite.do?id="/>' + o,
+      dataType: 'json',
+      success: function (data) {
+        if(data==false){
+          window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
+        }else{
+          document.getElementById("show").style.visibility="visible";
+          document.getElementById("hidden").style.visibility="hidden";
         }
       },
     });
