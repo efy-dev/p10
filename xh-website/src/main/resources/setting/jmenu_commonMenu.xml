@@ -6,10 +6,11 @@
         </jnode>
     </jnode>
 
-    <jnode id="NewsBulletinManagement" url="/news.do?qm=plistAssociationIntroduction_default" text_zh_CN="协会概况">
-        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default" access="admin,manager"
-               text_zh_CN="协会概况">
-        </jnode>
+    <jnode id="NewsBulletinManagement" url="/association/association.do?qm=plistAssociationIntroduction_default" text_zh_CN="协会概况">
+        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default" access="admin,manager" text_zh_CN="协会介绍"/>
+        <jnode url="/association/association.do?qm=plistStatute_default" access="admin,manager" text_zh_CN="协会章程"/>
+        <jnode url="" access="admin,manager" text_zh_CN="组织机构"/>
+        <jnode url="/association/association.do?qm=plistContact_default" access="admin,manager" text_zh_CN="联系方式"/>
     </jnode>
 
     <jnode id="SubordinateInstitutionManagement" url="/news.do?qm=plistNewsOrganization_default" text_zh_CN="新闻公告">

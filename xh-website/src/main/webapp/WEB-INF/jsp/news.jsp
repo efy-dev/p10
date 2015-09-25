@@ -24,26 +24,25 @@
             </c:forEach>
         </ul>
     </div>
-</div>
+    <div class="pages wh">
+        <ul class="am-pagination am-pagination-centered">
+            <li><a href="">首页</a></li>
+            <li><a href="">上一页</a></li>
+            <li class="am-active"><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li><a href="">...</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+            <li class="am-disabled bigRound"><a href="#">下一页</a></li>
+            <li class="pages-total">共135条</li>
+            <li class="pages-nums">第01/35页</li>
+        </ul>
+    </div>
 </div>
 
 <!-- //End--div-list-->
-<div class="pages wh">
-    <ul class="am-pagination am-pagination-centered">
-        <li><a href="">首页</a></li>
-        <li><a href="">上一页</a></li>
-        <li class="am-active"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li><a href="">5</a></li>
-        <li><a href="">...</a></li>
-        <li><a href="#">9</a></li>
-        <li><a href="#">10</a></li>
-        <li class="am-disabled bigRound"><a href="#">下一页</a></li>
-        <li class="pages-total">共135条</li>
-        <li class="pages-nums">第01/35页</li>
-    </ul>
-</div>
-</div>
+
 </body>
