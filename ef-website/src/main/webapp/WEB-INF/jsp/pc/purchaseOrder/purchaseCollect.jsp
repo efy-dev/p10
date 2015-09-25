@@ -39,7 +39,7 @@
             <c:forEach items="${collectList}" var="collectList">
             <li class="single">
               <dl>
-                <dt class="list-img"><a href="#"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
+                <dt class="list-img"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
                 <dd>
                   <dl class="list-title">
                     <dt>
