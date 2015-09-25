@@ -40,12 +40,14 @@
 <div class="wh home-list isoc">
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
-    <jsp:include flush="true"
-                 page="/myDocument/getSubMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateSubMenu&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
 
+    <div class="wh home-list news">
+
+        <jsp:include flush="true"
+                     page="/getSubMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateSubMenu&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
     <%--<div class="wh home-list news">--%>
-        <sitemesh:write property='body'/>
-    <%--</div>--%>
+    <sitemesh:write property='body'/>
+    </div>
 </div>
 <%@include file="/layouts/footer.jsp" %>
 </body>
