@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.util.StringUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -51,9 +52,19 @@
     });
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
-      window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
-    }
+      $.ajax({
+        type:"post",
+        dataType:"json",
+        url:"/myEfeiyi/updatePassword.do",
+        data:{pwd:pwd,id:'${user.id}'},
+        success:function(data){
+            window.location.href="<c:url value="/sso.do"/>";
+         }
+      });
   }
+  }
+
+
 
   function checkEq(obj){
 

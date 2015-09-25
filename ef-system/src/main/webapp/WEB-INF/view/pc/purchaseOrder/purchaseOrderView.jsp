@@ -238,7 +238,7 @@
                 <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                 <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                    pattern="yyyy-mm-dd"/>
+                                    pattern="yyyy-MM-dd"/>
                 </td>
                 </tr>
             </c:forEach>
