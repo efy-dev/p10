@@ -119,7 +119,7 @@
 </div>
 <script>
     function removeProduct1(divId){
-        alert("dd");
+
         $.ajax({
             type: "get",
             url: '<c:url value="/product/removeProduct.do"/>',
