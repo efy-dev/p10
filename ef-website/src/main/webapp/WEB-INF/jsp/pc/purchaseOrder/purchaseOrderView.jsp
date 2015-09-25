@@ -30,20 +30,21 @@
             <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
           </dd>
         </dl>
-        <c:if test="${!empty purchaseOrderDelivery}">
+        <%--<c:if test="${!empty purchaseOrderDelivery}">--%>
+        <c:forEach items="${pl}" var="pl" varStatus="i">
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">物流信息</dt>
           <dd class="od-id">
             <p >物流方式：<span>普通快递</span></p>
-            <p>物流公司：<span><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${purchaseOrderDelivery.logisticsCompany}" type="normal"/></span></p>
-            <p>运单号码：<span>${purchaseOrderDelivery.serial}</span></p>
-            <p style="cursor: pointer" id="act-q"> 物流查看：</p></li>
+            <p>物流公司：<span><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${pl.logisticsCompany}" type="normal"/></span></p>
+            <p>运单号码：<span>${pl.serial}</span></p>
+            <p style="cursor: pointer" id="act-q" name="ss" test="${dl[i.index]}"> 物流查看：</p></li>
             <div class="list-express" style="display: none; margin-left: 30px;">
-              <iframe id="kuaidi100" name="kuaidi100" src="${content}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
+              <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
             </div>
           </dd>
         </dl>
-        </c:if>
+        <%--</c:if>--%>
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">商品信息</dt>
           <dd class="od-id">
@@ -63,6 +64,7 @@
             </c:forEach>
           </dd>
         </dl>
+        </c:forEach>
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
@@ -85,7 +87,7 @@
   </div>
 <script>
   $(function(){
-    $('#act-q').mouseenter(function(){
+    $("p[name='ss']").mouseenter(function(){
       $(this).siblings('.list-express').slideToggle();
 
     })
@@ -107,33 +109,5 @@
 <![endif]-->
 <script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
 <script src="<c:url value="/scripts/js/system.js"/>"></script>
-<%--<script>--%>
-  <%--$(document).ready(function(){--%>
-    <%--$.ajax({--%>
-     <%--type:'get',--%>
-      <%--async:'false',--%>
-      <%--url:'http://www.kuaidi100.com/applyurl?key="f8e96a50d49ef863"&com="yunda"&nu="1700173247399"',--%>
-      <%--dataType:'jsonp',--%>
-      <%--error:function(data){--%>
-        <%--console.log(data);--%>
-      <%--},--%>
-      <%--success: function(data){--%>
-<%--//        document.getElementById("kuaidi100").src = data;--%>
-<%--//        console.log("test");--%>
-<%--//        console.log(typeof data);--%>
-        <%--$("#kuaidi100").attr("src",data);--%>
-<%--//        $("iframe[name='kuaidi100']").attr("src",data);--%>
-<%--//        var rowHtml = "";--%>
-<%--//        var obj = data.data;--%>
-<%--//        for(var i = 0; i< obj.length;i++){--%>
-<%--//            rowHtml+="<p><span class='active2'>"+obj[i].time +"</span><span>"+obj[i].context+"</span></p>";--%>
-<%--//        }--%>
-<%--//        $("#wl").append(rowHtml);--%>
-
-    <%--},--%>
-    <%--});--%>
-
-  <%--})--%>
-<%--</script>--%>
 </body>
 </html>

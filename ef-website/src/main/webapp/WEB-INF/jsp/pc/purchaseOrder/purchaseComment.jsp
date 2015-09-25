@@ -132,6 +132,7 @@
                             </span>
                           </dd>
                         </dl>
+                        <input type="hidden" value="${op.id}" name="productId">
                       </li>
                       <li class="data-list">
                         <dl>

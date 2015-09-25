@@ -35,7 +35,8 @@
           </li>
           <li>
             <label>新密码：</label>
-            <input name="np"  type="password" class="userinfo-tex">
+            <input name="np"  type="password" class="userinfo-tex" onblur="checkLg(this);">
+            <span class="active-d"></span>
           </li>
           <li>
             <label>确定密码：</label>
@@ -125,6 +126,16 @@
       $(obj).next("span").text("");
     }
 
+  }
+
+  function checkLg(obj){
+    var lg= $(":input[name='np']").val().length;
+    if(lg<5 || lg>16){
+      $(obj).next("span").text("密码由6位-16位字符组成");
+    }else{
+      $(obj).next("span").text("");
+
+    }
   }
 </script>
 
