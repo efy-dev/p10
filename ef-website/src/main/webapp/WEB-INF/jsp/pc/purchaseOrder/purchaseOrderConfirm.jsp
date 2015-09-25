@@ -291,8 +291,9 @@
            $("#ts").text("请完善您的新增地址");
         }else{
             var param = $("#newAddress").serialize();
+
             var success = function (data) {
-                console.log(data)
+                window.location.href=window.location.href;
                 var html = newAddress(data);
                 $("#address").append(html);
                 $(".active-pop").hide();

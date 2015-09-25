@@ -11,56 +11,33 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>X10101首页</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link type="text/css" rel="stylesheet" href="/shop2015/css/amazeui.min.css?v=20150831">
-  <link type="text/css" rel="stylesheet" href="/shop2015/css/app.css?v=20150831">
+
 </head>
 <body>
-<header class="wh header">
-  <div class="hd">
-    <a class="icon logo" href="" title="中国非物质文化遗产保护协会"></a>
-    <div class="txt">
-      <p>以“宣传、保护、传承”非物质文化遗产为宗旨。</p>
-      <p>以提升我国人民群众对非物质文化遗产的保护意识为目的。</p>
-    </div>
-  </div>
-</header>
+<%--<header class="wh header">--%>
+  <%--<div class="hd">--%>
+    <%--<a class="icon logo" href="" title="中国非物质文化遗产保护协会"></a>--%>
+    <%--<div class="txt">--%>
+      <%--<p>以“宣传、保护、传承”非物质文化遗产为宗旨。</p>--%>
+      <%--<p>以提升我国人民群众对非物质文化遗产的保护意识为目的。</p>--%>
+    <%--</div>--%>
+  <%--</div>--%>
+<%--</header>--%>
 <!--//End--header-->
-<div class="wh nav">
-  <div class="hd">
-    <ul class="ul-list">
-      <li><a href="" title="" target="_blank">首页</a></li>
-      <li><a href="" title="" target="_blank">协会概况</a></li>
-      <li><a href="" title="" target="_blank">新闻公告</a></li>
-      <li><a href="" title="" target="_blank">下属机构</a></li>
-      <li><a href="" title="" target="_blank">非遗名录</a></li>
-      <li><a href="" title="" target="_blank">非遗保护</a></li>
-    </ul>
-    <a href="#btn-menu-down" class="btn-menu-down" title=""><i class="icon icon-menu"></i></a>
-    <a style="display: none;" href="btn-menu-up" class="btn-menu-up" title=""><i class="icon icon-menu"></i></a>
-  </div>
-</div>
+<%--<div class="wh nav">--%>
+  <%--<div class="hd">--%>
+    <%--<ul class="ul-list">--%>
+      <%--<li><a href="" title="" target="_blank">首页</a></li>--%>
+      <%--<li><a href="" title="" target="_blank">协会概况</a></li>--%>
+      <%--<li><a href="" title="" target="_blank">新闻公告</a></li>--%>
+      <%--<li><a href="" title="" target="_blank">下属机构</a></li>--%>
+      <%--<li><a href="" title="" target="_blank">非遗名录</a></li>--%>
+      <%--<li><a href="" title="" target="_blank">非遗保护</a></li>--%>
+    <%--</ul>--%>
+    <%--<a href="#btn-menu-down" class="btn-menu-down" title=""><i class="icon icon-menu"></i></a>--%>
+    <%--<a style="display: none;" href="btn-menu-up" class="btn-menu-up" title=""><i class="icon icon-menu"></i></a>--%>
+  <%--</div>--%>
+<%--</div>--%>
 <!--//End--nav-->
 <div class="wh home">
   <div class="hd">
@@ -295,45 +272,45 @@
   </div>
 </div>
 <!--//End--home-->
-<div class="footer wh">
+<%--<div class="footer wh">--%>
 
-  <div class="links wh">
-    <a href="" target="_blank" title="关于我们">关于我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="联系我们">联系我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="意见反馈">意见反馈</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚信保障">诚信保障</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
-  </div>
-  <div class="copyright wh">
-    <div class="frlinks">
-      <span>友情链接：</span>
-      <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/whzx/bnsjdt/fwzwhycs/" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-      <a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-    </div>
-    <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-  </div>
-</div>
+  <%--<div class="links wh">--%>
+    <%--<a href="" target="_blank" title="关于我们">关于我们</a>--%>
+    <%--<a class="line"></a>--%>
+    <%--<a href="" target="_blank" title="联系我们">联系我们</a>--%>
+    <%--<a class="line"></a>--%>
+    <%--<a href="" target="_blank" title="诚聘英才">诚聘英才</a>--%>
+    <%--<a class="line"></a>--%>
+    <%--<a href="" target="_blank" title="意见反馈">意见反馈</a>--%>
+    <%--<a class="line"></a>--%>
+    <%--<a href="" target="_blank" title="诚信保障">诚信保障</a>--%>
+    <%--<a class="line"></a>--%>
+    <%--<a href="" target="_blank" title="新闻资讯">新闻资讯</a>--%>
+  <%--</div>--%>
+  <%--<div class="copyright wh">--%>
+    <%--<div class="frlinks">--%>
+      <%--<span>友情链接：</span>--%>
+      <%--<a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>--%>
+      <%--<a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>--%>
+      <%--<a rel="nofollow" href="http://www.mcprc.gov.cn/whzx/bnsjdt/fwzwhycs/" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>--%>
+      <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
+    <%--</div>--%>
+    <%--<div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>--%>
+  <%--</div>--%>
+<%--</div>--%>
 
 
 
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../shop2015/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
-<script src="../shop2015/js/system.js"></script>
+<%--<script src="../shop2015/js/jquery.min.js"></script>--%>
+<%--<!--<![endif]-->--%>
+<%--<!--[if lte IE 8 ]>--%>
+<%--<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>--%>
+<%--<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>--%>
+<%--<script src="assets/js/amazeui.ie8polyfill.min.js"></script>--%>
+<%--<![endif]-->--%>
+<%--<script src="../shop2015/js/amazeui.min.js"></script>--%>
+<%--<script src="../shop2015/js/system.js"></script>--%>
 </body>
 </html>
