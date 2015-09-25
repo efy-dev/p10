@@ -123,10 +123,10 @@
       <!-- //End-->
 
       <div class="choose-btns">
-         <c:if test="${productModel.amount == 0}">
+         <c:if test="${productModel.amount <= 0}">
          <a id ="modelId" class="btn btn-append"  title="缺货">缺货</a>
          </c:if>
-        <c:if test="${productModel.amount != 0}">
+        <c:if test="${productModel.amount > 0}">
           <a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
           <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买"  >立即购买</a>
         </c:if>
@@ -165,7 +165,7 @@
       </div>
       <!-- //End-->
       <div class="btns">
-     <c:if test="${productModel.amount != 0}">
+     <c:if test="${productModel.amount > 0}">
         <a class="buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立 即 购 买</a>
         <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i class="icon"></i>放 入 购 物 车</a>
      </c:if>
