@@ -115,10 +115,14 @@
                         <td class="am-hide-sm-only">${product.serial}</td>
                         <td class="am-hide-sm-only">
                             <c:if test="${product.status == '2'}">
-                                  下架
+                                   <span>
+                                      下架
+                                   </span>
                             </c:if>
                             <c:if test="${product.status == '1'}">
-                                   上架
+                                <span style="color: red">
+                                    上架
+                                </span>
                             </c:if>
                         </td>
                         <%--<td class="am-hide-sm-only">${product.price}</td>--%>
@@ -149,12 +153,14 @@
                 if(status=="1"){
                     $(obj).text("下架");
                     $(obj).attr("onclick","setStatus(this,'2','"+data+"')");
-                    $("#"+data+" td:eq(3)").text("上架");
+                    var span =  '<span style="color: red">上架 </span>';
+                    $("#"+data+" td:eq(3)").html(span);
                 }
                if(status=="2"){
                    $(obj).text("上架");
                    $(obj).attr("onclick","setStatus(this,'1','"+data+"')");
-                   $("#"+data+" td:eq(3)").text("下架");
+                   var span =  '<span>下架 </span>';
+                   $("#"+data+" td:eq(3)").html(span);
                }
             }
         });
