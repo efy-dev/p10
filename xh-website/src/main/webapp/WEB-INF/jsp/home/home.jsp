@@ -11,34 +11,9 @@
 <!doctype html>
 <html class="no-js">
 <head>
-
+  <title>非遗协会首页</title>
 </head>
 <body>
-<%--<header class="wh header">--%>
-  <%--<div class="hd">--%>
-    <%--<a class="icon logo" href="" title="中国非物质文化遗产保护协会"></a>--%>
-    <%--<div class="txt">--%>
-      <%--<p>以“宣传、保护、传承”非物质文化遗产为宗旨。</p>--%>
-      <%--<p>以提升我国人民群众对非物质文化遗产的保护意识为目的。</p>--%>
-    <%--</div>--%>
-  <%--</div>--%>
-<%--</header>--%>
-<!--//End--header-->
-<%--<div class="wh nav">--%>
-  <%--<div class="hd">--%>
-    <%--<ul class="ul-list">--%>
-      <%--<li><a href="" title="" target="_blank">首页</a></li>--%>
-      <%--<li><a href="" title="" target="_blank">协会概况</a></li>--%>
-      <%--<li><a href="" title="" target="_blank">新闻公告</a></li>--%>
-      <%--<li><a href="" title="" target="_blank">下属机构</a></li>--%>
-      <%--<li><a href="" title="" target="_blank">非遗名录</a></li>--%>
-      <%--<li><a href="" title="" target="_blank">非遗保护</a></li>--%>
-    <%--</ul>--%>
-    <%--<a href="#btn-menu-down" class="btn-menu-down" title=""><i class="icon icon-menu"></i></a>--%>
-    <%--<a style="display: none;" href="btn-menu-up" class="btn-menu-up" title=""><i class="icon icon-menu"></i></a>--%>
-  <%--</div>--%>
-<%--</div>--%>
-<!--//End--nav-->
 <div class="wh home">
   <div class="hd">
     <div class="slide-left">
@@ -54,48 +29,6 @@
                 </div>
               </li>
             </c:forEach>
-            <%--<li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>
-            <li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>
-            <li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>
-            <li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>
-            <li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>
-            <li>
-              <img src="../shop2015/upload/banner1.jpg">
-              <div class="am-slider-desc">
-                <h3>这是标题标题标题标题标题标题标题0</h3>
-                <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-              </div>
-            </li>--%>
           </ul>
         </div>
       </div>
@@ -106,54 +39,40 @@
           <ul class="ul-items">
             <c:forEach items="${IndustryList}" var="industry">
               <li>
-                <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                <c:if test="${empty industry.documentAttachmentList}">
+                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                </c:if>
+                <c:if test="${not empty industry.documentAttachmentList}">
+                  <c:forEach items="${industry.documentAttachmentList}" var="att" end="0">
+                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                  </c:forEach>
+                </c:if>
                 <p class="name">${industry.title}</p>
                 <p class="info">${industry.sampleContent}</p>
                 <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
-            <%--<li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">文化部启动非遗传承人群研修研习培训计划</p>
-              <p class="info">非遗协会的业务范围广泛，包括：调查研究信息收集、举办展览、专业培训咨询服务和国际合作等方面，济和文化交流工作。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>
-            <li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">第九届中国（长春）民间艺术博览会</p>
-              <p class="info">中国方面，永新文化产业集团董事长李永军先生作出“一多相容、和而不同”的主题演讲，引发大家对文化多样性的深思。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>
-            <li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">由中国非物质文化遗产保护协会</p>
-              <p class="info">巴基斯坦拉合尔国立大学视觉艺术及设计学院美术系主任拉什德•拉农先生阐述：“艺术，文化表达的交汇点”。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>--%>
           </ul>
         </div>
         <!-- //End---->
         <div class="list-news list-news2">
           <div class="title">重要通知</div>
           <ul class="ul-items">
-            <li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">文化部启动非遗传承人群研修研习培训计划</p>
-              <p class="info">非遗协会的业务范围广泛，包括：调查研究信息收集、举办展览、专业培训咨询服务和国际合作等方面，济和文化交流工作。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>
-            <li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">第九届中国（长春）民间艺术博览会</p>
-              <p class="info">中国方面，永新文化产业集团董事长李永军先生作出“一多相容、和而不同”的主题演讲，引发大家对文化多样性的深思。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>
-            <li>
-              <a href="" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
-              <p class="name">由中国非物质文化遗产保护协会</p>
-              <p class="info">巴基斯坦拉合尔国立大学视觉艺术及设计学院美术系主任拉什德•拉农先生阐述：“艺术，文化表达的交汇点”。</p>
-              <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
-            </li>
+            <c:forEach items="${NoteList}" var="note">
+              <li>
+                <c:if test="${empty note.documentAttachmentList}">
+                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                </c:if>
+                <c:if test="${not empty note.documentAttachmentList}">
+                  <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
+                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                  </c:forEach>
+                </c:if>
+                <p class="name">${note.title}</p>
+                <p class="info">${note.sampleContent}</p>
+                <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
+              </li>
+            </c:forEach>
           </ul>
         </div>
         <!-- //End---->
@@ -271,46 +190,5 @@
     <!-- //End--slide-right-->
   </div>
 </div>
-<!--//End--home-->
-<%--<div class="footer wh">--%>
-
-  <%--<div class="links wh">--%>
-    <%--<a href="" target="_blank" title="关于我们">关于我们</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="联系我们">联系我们</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="诚聘英才">诚聘英才</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="意见反馈">意见反馈</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="诚信保障">诚信保障</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="新闻资讯">新闻资讯</a>--%>
-  <%--</div>--%>
-  <%--<div class="copyright wh">--%>
-    <%--<div class="frlinks">--%>
-      <%--<span>友情链接：</span>--%>
-      <%--<a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>--%>
-      <%--<a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>--%>
-      <%--<a rel="nofollow" href="http://www.mcprc.gov.cn/whzx/bnsjdt/fwzwhycs/" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>--%>
-      <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
-    <%--</div>--%>
-    <%--<div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>--%>
-  <%--</div>--%>
-<%--</div>--%>
-
-
-
-
-<!--[if (gte IE 9)|!(IE)]><!-->
-<%--<script src="../shop2015/js/jquery.min.js"></script>--%>
-<%--<!--<![endif]-->--%>
-<%--<!--[if lte IE 8 ]>--%>
-<%--<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>--%>
-<%--<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>--%>
-<%--<script src="assets/js/amazeui.ie8polyfill.min.js"></script>--%>
-<%--<![endif]-->--%>
-<%--<script src="../shop2015/js/amazeui.min.js"></script>--%>
-<%--<script src="../shop2015/js/system.js"></script>--%>
 </body>
 </html>

@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html class="no-js">
+<body>
 <%@include file="/layouts/title.jsp"%>
 <div class="am-cf admin-main">
     <%----%>
