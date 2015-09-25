@@ -16,6 +16,25 @@
         </entity>
 
         <entity name="document" label="新闻公告" model="com.ming800.core.p.model.Document">
+            <fields>
+                <field name="group" label="分类" inputType="text">
+                    <statusType fieldName="group">
+                        <!--<item label="非遗项目" value="project"/>-->
+                        <!--<item label="非遗传承人" value="inheritors"/>-->
+                        <item label="协会新闻" value="orgNews"/>
+                        <item label="行业新闻" value="industryNews"/>
+                        <item label="公告管理" value="noticeManage"/>
+                        <item label="协会介绍" value="assIntro"/>
+                        <item label="协会章程" value="assStatute"/>
+                        <item label="联系方式" value="assContact"/>
+                        <item label="非遗法" value="intLaw"/>
+                        <item label="非遗保护政策" value="intPolicy"/>
+                        <item label="非遗申报指南" value="submissionGuide"/>
+                        <item label="会员申请指南" value="memGuide"/>
+                        <item label="会员管理" value="memManagement"/>
+                    </statusType>
+                </field>
+            </fields>
             <does >
                 <do name="news" access="" label="新闻公告" result="" data="">
                     <query name="organization" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">

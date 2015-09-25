@@ -6,7 +6,7 @@
             <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
             <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
         </jnode>
-        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="协会概况">
+        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default"  access="admin,manager" text_zh_CN="协会概况">
             <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
             <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
         </jnode>

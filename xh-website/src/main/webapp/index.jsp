@@ -11,8 +11,6 @@
 <head>
     <title></title>
 </head>
-<%--<body>--%>
 <body onload="window.location.href='<c:url value="/home/home.do"/>'">
-哈哈测试
 </body>
 </html>
