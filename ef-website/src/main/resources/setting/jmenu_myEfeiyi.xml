@@ -20,9 +20,9 @@
 
         </jnode>
 
-        <!--<jnode url="/comment/finishOrderList.do" access="admin,manager" text_zh_CN="我的评价">-->
+        <jnode url="/comment/finishOrderList.do" access="admin,manager" text_zh_CN="我的评价">
 
-        <!--</jnode>-->
+        </jnode>
     </jnode>
 
 </jmenu>
