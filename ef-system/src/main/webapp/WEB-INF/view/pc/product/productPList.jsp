@@ -74,7 +74,7 @@
                                         修改规格
                                     </a>
                                     <c:if test="${product.status == '2'}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="setStatus(this,'1','${product.id}')">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'1','${product.id}')">
                                             上架
                                         </a>
                                     </c:if>
