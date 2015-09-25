@@ -57,7 +57,7 @@
                     <td width="180">
                       <div class="list-refer-2">
                         <p><fmt:formatDate value="${finish.createDatetime}" pattern="yyyy-MM-dd" /></p>
-                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="hh:mm:ss" /></p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="H:m:s" /></p>
                       </div>
                     </td>
                     <td width="150">
@@ -121,21 +121,6 @@
                 <div class="parameter">
                   <form action="<c:url value="/comment/saveComment.do"/>" method="post">
                     <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                        <input type="hidden" value="${op.id}" name="productId">
-                        <input type="hidden" value="">
-                      </li>
                       <li class="data-list">
                         <dl>
                           <dt>
