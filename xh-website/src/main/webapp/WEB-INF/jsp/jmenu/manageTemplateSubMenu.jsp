@@ -8,8 +8,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--//End--header-->
-<div class="wh home-list news">
-    ${matchJnode.id}
+<%--<div class="wh home-list news">--%>
+    <%--${matchJnode.id}--%>
     <div class="hd">
         <div class="slide-left">
             <div class="nav-list">
@@ -28,5 +28,7 @@
                 </ul>
             </div>
         </div>
+    </div>
+<%--</div>--%>
         <!-- //End--slide-left-->
         <!-- //End--slide-right-->

@@ -36,7 +36,7 @@
     <link type="text/css" rel="stylesheet" href="/shop2015/css/app.css?v=20150831">
 </head>
 <body>
-<header class="wh header">
+<header class="wh header hd">
     <div class="hd">
         <a class="icon logo" href="" title="中国非物质文化遗产保护协会"></a>
         <div class="txt">

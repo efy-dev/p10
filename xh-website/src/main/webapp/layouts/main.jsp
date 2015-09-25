@@ -11,7 +11,7 @@
 <html class="no-js">
 <body>
 <%@include file="/layouts/title.jsp"%>
-<div class="am-cf admin-main">
+<div>
     <%----%>
     <jsp:include flush="true"
                  page="/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
