@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.product.controller;
 
 import com.efeiyi.ec.master.model.MasterProject;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.ProjectProperty;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantMaster;
@@ -29,6 +30,12 @@ public class toFormProductHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
+        if(request.getParameter("id")!="" && request.getParameter("id")!=null){
+               String id = request.getParameter("id");
+               Product product = (Product)baseManager.getObject(Product.class.getName(),id);
+               product.setStatus("2");
+               baseManager.saveOrUpdate(Product.class.getName(),product);
+        }
         modelMap.put("view",request.getParameter("view"));
         modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
         modelMap.put("tenantId",request.getParameter("tenantId"));
