@@ -83,7 +83,7 @@ public class MyDocumentController {
     public String getSubMenu(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
         String matchUrl = match;
-        match = match.substring(0,match.indexOf("?"));
+        match = match.substring(0,match.indexOf("."));
 //        System.out.println("======================================");
 //        System.out.println(match);
 //        System.out.println("======================================");
