@@ -17,19 +17,14 @@
         </property>
     </bean>
 
+    <!-- 数据源切换拦截-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/"/>
-            <mvc:mapping path="/**"/>
-            <mvc:mapping path="**"/>
-            <bean class="com.efeiyi.association.interceptor.DriverInterceptor"/>
+            <mvc:mapping path="/**/test.do"/>
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:mapping path="**"/>-->
+            <bean class="com.efeiyi.association.core.DataSourceInterceptor"/>
         </mvc:interceptor>
-        <!--<mvc:interceptor>-->
-        <!--<mvc:mapping path="/"/>-->
-        <!--<mvc:mapping path="/**"/>-->
-        <!--<mvc:mapping path="**"/>-->
-        <!--<bean class="com.efeiyi.ec.personal.master.interceptor.BaseTenantInterceptor"/>-->
-        <!--</mvc:interceptor>-->
     </mvc:interceptors>
 
 

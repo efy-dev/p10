@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmenu id="AssociationMenu">
+
+    <jnode id="AssociationHomePage" url="/main.do?jnodeId=AssociationHomePage" text_zh_CN="">
+        <jnode url="/home/home.do"  access="admin,manager" text_zh_CN="首页">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/association/association.do?qm=plistAssociationIntroduction_default"  access="admin,manager" text_zh_CN="协会概况">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/myDocument/doc.do?qm=news_default"  access="admin,manager" text_zh_CN="新闻公告">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="下属机构">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="非遗名录">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="非遗保护">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+        <jnode url="/myBanner/ba.do?qm=news_default"  access="admin,manager" text_zh_CN="学术研究">
+            <!--<match url="/myBanner/ba.do?qm=news_default"/>-->
+            <!--<match url="/myBanner/newBanner.do?qm=direct2BannerJsp_new&amp;group="/>-->
+        </jnode>
+    </jnode>
+
+</jmenu>

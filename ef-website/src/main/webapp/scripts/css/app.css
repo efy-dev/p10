@@ -64,7 +64,7 @@ a:hover {color:#f00;text-decoration:underline}
 .shop .focus .slider-main li img {width:1200px;height:400px}
 /*--//End--focus--*/
 .box-hd .title {padding:30px 0;text-align:center;position:relative}
-.box-hd .title h3 {width:20px;line-height:30px;font-style:italic;display:inline-block;font-size:24px;
+.box-hd .title h3 {width:20px;line-height:40px;font-style:italic;display:inline-block;font-size:24px;
     font-weight: normal;}
 .box-hd .title .more {position:absolute;bottom:30px;right:40px}
 .box-hd .title .more .icon {background-position:-34px -50px;width:10px;height:10px;margin-top:5px;margin-right:3px}
@@ -89,8 +89,8 @@ a:hover {color:#f00;text-decoration:underline}
 .box-hd .list-pep li img {width:100%}
 .box-hd .list-pep a:hover img {opacity:0.6;filter:alpha(opacity=60)}
 .box-hd .list-pep p {width:166px;line-height:24px;padding:0 10px;font-size:12px;float:left;box-sizing:content-box}
-.box-hd .list-pep strong {font-size:14px;padding:15px 0;float:right;font-weight:bold}
-.box-hd .list-pep .more {float:right}
+.box-hd .list-pep strong {font-size:14px;padding:15px 0;float:right}
+.box-hd .list-pep .more {float:right;font-weight: normal}
 .master .box-hd .list-pep {margin-bottom:0}
 .master .box-hd .list-pep .ul-item {border-bottom:1px #000 solid}
 .master .box-hd .list-pep li {margin-bottom:100px}
@@ -175,7 +175,7 @@ a:hover {color:#f00;text-decoration:underline}
 .explosion .details .info .master li img {width:105px;height:85px}
 .explosion .details .info .master .mask {background:rgba(255, 255, 255, 0.7);width:100%;height:30px;line-height:30px;text-align:right;float:left}
 .explosion .shop-sort {background:#fff;border:1px #000 solid}
-.explosion .shop-sort .link1 li a {color:#000;font-weight:bold}
+.explosion .shop-sort .link1 li a {color:#000;font-size:14px}
 .explosion .shop-sort .link1 li a:hover {background:#000;color:#fff}
 /*--End--explosion--*/
 .pages .am-pagination>li {color:#000}
@@ -200,8 +200,12 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
 .product-intro .itemInfo .preview .collect {width:36px;position:absolute;top:16px;right:40px}
 .product-intro .itemInfo .preview .collect .icon {background:url(../images/icon.png) no-repeat -244px -50px;width:32px;height:28px;float:left;margin-left:2px;margin-bottom:5px;cursor:pointer}
-.product-intro .itemInfo .preview .collect .icon-active,
+.product-intro .itemInfo .preview .collect .icon-hover,
 .product-intro .itemInfo .preview .collect .icon-active2 {background-position:0 -96px}
+
+
+
+
 .product-intro .itemInfo .preview .collect span {width:36px;font-size:12px;float:left;text-align:center;display:none}
 .product-intro .itemInfo .itme-ext {width:264px;float:left}
 .product-intro .itemInfo .itme-ext .name {font-size:12px;margin-top:15px;margin-bottom:25px}

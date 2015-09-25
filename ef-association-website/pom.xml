@@ -64,7 +64,7 @@
             </activation>
         </profile>
         <profile>
-            <id>ec-develop</id>
+            <id>dev-efc</id>
             <properties>
                 <db-driver2>com.mysql.jdbc.Driver</db-driver2>
                 <db-password2>yX798tcK3P5VZ7bUTbh+nQ==</db-password2>
@@ -78,7 +78,7 @@
             </activation>
         </profile>
         <profile>
-            <id>dev-efc</id>
+            <id>ec-develop</id>
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>

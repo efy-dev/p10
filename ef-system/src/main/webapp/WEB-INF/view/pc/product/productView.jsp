@@ -23,8 +23,12 @@
 </head>
 <body>
 
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="your-modal">
-    <div class="am-modal-dialog">
+<style>
+.am-modal-dialog {background: transparent}
+.am-modal-dialog img {width:100%}
+</style>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="your-modal" style="background: #f00;">
+    <div class="am-modal-dialog" style="width:800px;height:800px;position: absolute;top:50%;left: 50%;margin-top: -400px;margin-left: -400px">
         <div class="am-modal-bd">
             <img src="" title="原图">
         </div>
@@ -183,6 +187,7 @@
                             <textarea id="productDescription" name="content" class="ckeditor" id="content"
                                       placeholder="商品描述" required >
                                 ${object.productDescription.content}
+
                             </textarea>
                 </div>
             </form>
@@ -320,7 +325,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                         </dl>
                                     </li>
@@ -374,7 +379,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                             <%--<dd style="width: 100%;text-align: center;" >--%>
                                                     <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
@@ -422,8 +427,20 @@
         selectVal = $(obj).val();
     }
 
+  var options = {
+
+      height:"0"
+  };
     function tc(url){
+        var img = new Image();
+        img.src = url;
+        img.onload = function(){
+           // alert(img.width+"-->"+img.height);
+         //  $("#your-modal .am-modal-dialog ").css({"margin-top":img.width/2,"margin-left":});
+            $("#your-modal .am-modal-bd img").attr("title","原图"+img.width+"x"+img.height);
+        };
         $("#your-modal .am-modal-bd img").attr("src",url);
+
         $("#your-modal").modal();
     }
 
@@ -480,7 +497,6 @@ var modelIds = [];
     var  modelNames = [];
     $(function(){
 
-
         CKEDITOR.replace('content', { height: '440px', width: '1000px' });
         $(".copy").each(function(){
             copyInit($(this));
@@ -516,7 +532,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask";
 //                ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +
@@ -606,7 +622,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask";
                 ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +

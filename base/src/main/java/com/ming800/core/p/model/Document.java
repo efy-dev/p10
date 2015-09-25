@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "base_document")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Document {
 
     private String id;

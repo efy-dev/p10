@@ -206,7 +206,8 @@
     }
 
     function updateCount(element){
-        var tenantId = $(element).attr("id");
+        var Id = $(element).attr("id");
+        var tenantId = Id.substring(0,Id.length-7);
         var str = $(element).val();
         var count = str.length;
         $("#"+tenantId+"Count").html(count+"/45");
@@ -290,8 +291,9 @@
            $("#ts").text("请完善您的新增地址");
         }else{
             var param = $("#newAddress").serialize();
+
             var success = function (data) {
-                console.log(data)
+                window.location.href=window.location.href;
                 var html = newAddress(data);
                 $("#address").append(html);
                 $(".active-pop").hide();

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.tenant.model;
 
 import com.efeiyi.ec.project.model.Project;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "tenant_category")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class TenantCategory implements Serializable {
     private String id;
     private Tenant tenant;

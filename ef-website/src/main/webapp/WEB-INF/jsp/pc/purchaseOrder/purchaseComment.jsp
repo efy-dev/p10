@@ -57,7 +57,7 @@
                     <td width="180">
                       <div class="list-refer-2">
                         <p><fmt:formatDate value="${finish.createDatetime}" pattern="yyyy-MM-dd" /></p>
-                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="hh:mm:ss" /></p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="H:m:s" /></p>
                       </div>
                     </td>
                     <td width="150">
@@ -84,19 +84,19 @@
                 <div class="parameter">
                   <form>
                     <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                      </li>
+                      <%--<li class="data-list">--%>
+                        <%--<label>评分：</label>--%>
+                        <%--<div class="starbox">--%>
+                          <%--<div id="quacorgrading">--%>
+                            <%--<input name="1" type="button" />--%>
+                            <%--<input name="2" type="button" />--%>
+                            <%--<input name="3" type="button" />--%>
+                            <%--<input name="4" type="button" />--%>
+                            <%--<input name="5" type="button" />--%>
+                            <%--<span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>--%>
+                          <%--</div>--%>
+                        <%--</div>--%>
+                      <%--</li>--%>
                       <li class="data-list">
                         <dl>
                           <dt>
@@ -110,66 +110,6 @@
                         </dl>
                       </li>
 
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label>晒单：</label>
-                          </dt>
-                          <dd>
-                            <ul class="tally-1">
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                              <li class="img-act"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                            </ul>
-                          </dd>
-                        </dl>
-                      </li>
-                      <li class="data-list" style="display: none;" id="zt">
-                        <div class="con-vessel">
-                          <ul class="dialogue">
-                            <!--买家回复的状态-->
-                            <!--文字标题部分-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">追加评价：</dt>
-                                <dd>
-                                  <textarea class="rarae"></textarea>
-                                </dd>
-                              </dl>
-                            </li>
-                            <!--img-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt">添加图片：</dt>
-                                <dd>
-                                  <ul class="add-images">
-                                    <li><input type="file" name="pic" accept=""></li>
-                                    <li><img src="<c:url value="/scripts/upload/pep-2.jpg"/>"></li>
-                                  </ul>
-                                </dd>
-                              </dl>
-                            </li>
-                            <!--买家回复的状态-->
-                            <li class="list-crossover">
-                              <dl class="content">
-                                <dt class="dt"><label></label></dt>
-                                <dd>
-                                  <input type="button"  value="确认追加" class="btn">
-                                </dd>
-                              </dl>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li class="data-list">
-                        <dl>
-                          <dt>
-                            <label></label>
-                          </dt>
-                          <dd>
-                            <input type="button" class="btn" onclick="a1(this)" value="追&nbsp加&nbsp评&nbsp价&nbsp">
-                          </dd>
-                        </dl>
-                      </li>
                     </ul>
                   </form>
                 </div>
@@ -181,21 +121,6 @@
                 <div class="parameter">
                   <form action="<c:url value="/comment/saveComment.do"/>" method="post">
                     <ul class="data">
-                      <li class="data-list">
-                        <label>评分：</label>
-                        <div class="starbox">
-                          <div id="quacorgrading">
-                            <input name="1" type="button" />
-                            <input name="2" type="button" />
-                            <input name="3" type="button" />
-                            <input name="4" type="button" />
-                            <input name="5" type="button" />
-                            <span id="QuacorGradingValue"><b><font size="5" color="#fd7d28">0</font></b>分</span>
-                          </div>
-                        </div>
-                        <input type="hidden" value="${op.id}" name="productId">
-                        <input type="hidden" value="">
-                      </li>
                       <li class="data-list">
                         <dl>
                           <dt>
@@ -477,8 +402,12 @@
     $(obj).hide();
     $('#zt',$(obj).parents("ul")).slideToggle();
   }
-
-
+  $(function(){
+    $('.act-ui').click(function(){
+      $(this).parents('.table').siblings('.mutual').slideToggle();
+      return false;
+    })
+  })
 </script>
 <!--content-->
 <!-- //End--footer-->

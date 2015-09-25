@@ -21,9 +21,9 @@
         <module>pal-model</module>
         <module>ef-wiki</module>
         <module>pal-website</module>
-        <module>ef-association-system</module>
-        <module>ef-association-website</module>
-        <module>ef-association-model</module>
+        <module>xh-system</module>
+        <module>xh-website</module>
+        <module>xh-model</module>
     </modules>
 
     <repositories>

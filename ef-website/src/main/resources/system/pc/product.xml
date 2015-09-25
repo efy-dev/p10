@@ -94,7 +94,7 @@
                         <fields>
                             <field name="createDatetime" label="创建时间" defaultValue="${CURRENT_DATETIME}" inputType="default"/>
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
-                            <field name="productModel" label="默认值" defaultValue="1" inputType="default" />
+                            <!--<field name="productModel" label="默认值" defaultValue="1" inputType="default" />-->
                         </fields>
                     </page>
                 </do>

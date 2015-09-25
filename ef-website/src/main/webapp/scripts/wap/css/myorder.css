@@ -236,7 +236,11 @@ ul,dl{list-style:none}
 .enroll .start .login .page li label{padding: 0.8rem 0;font-size: 1rem;width: 100%;float: left}
 .enroll .start .login .page li .txt{width: 100%;border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;width: 100%;float: left}
 .enroll .start .login .page li .txt1{border: 1px solid #ccc;padding: 1rem 0.8rem;font-size: 1rem;}
-.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: left;color:#000;}
+.enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
+.enroll .start .login .page li span{padding-left: 2rem;float: right;padding-right: 0}
+@media(min-width:640px) {
+.enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
+}
 .enroll .start .login .page li .tet1{width: 100%;float: left;}
 .enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
 .enroll .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
@@ -254,8 +258,10 @@ ul,dl{list-style:none}
 /*020208修改密码*/
 /*共同样式*/
 .active-cl-si{font-size: 1rem;color: #ff0000;}
-/*共同样式*/
 /*移动按钮*/
 .btn-p-1{padding: 0.9rem 1.1rem;border: 1px solid #000;font-size: 1rem;text-decoration: none;background: #fff;transition: all 0.5s;float:left}
 .btn-p-1:hover{background: #000;color: #fff;}
-/*移动按钮*/
+/*共同样式*/
+/*购物车结算页按钮修改样式*/
+.add-btn{background:#fff;height: 3rem;width: 100%;border: 1px solid #000;color: #000;display:block;font-size: 1.2rem}
+.add-address{width: 100%;line-height: 3rem;height: 3rem;text-align: center;border: 1px solid #000;display:block;color: #000;font-size: 1.2rem}
