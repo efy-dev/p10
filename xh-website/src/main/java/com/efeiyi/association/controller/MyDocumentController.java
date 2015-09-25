@@ -72,47 +72,7 @@ public class MyDocumentController {
     @Autowired
     private DoManager doManager;
 
-    @Autowired
-    @Qualifier("aliOssUploadManagerImpl")
-    private AliOssUploadManager aliOssUploadManager;
 
-
-
-
-    @RequestMapping("/getSubMenu.do")
-    public String getSubMenu(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
-        String matchUrl = match;
-        match = match.substring(0,match.indexOf("."));
-//        System.out.println("======================================");
-//        System.out.println(match);
-//        System.out.println("======================================");
-        String resultPage = request.getParameter("resultPage");
-        String jnodeId = request.getParameter("jnodeId");
-        String jmenuId = request.getParameter("jmenuId");
-        Jmenu jmenu = JmenuManagerImpl.getJmenu(jmenuId);
-//        System.out.println("startTime: " + System.currentTimeMillis());
-        Jnode currentJnode = getCurrentJnode(jmenu, match);
-        Jnode matchJnode = getMatchJnode(currentJnode, matchUrl);
-//        System.out.println("endTime: " + System.currentTimeMillis());
-        modelMap.addAttribute("jmenu", jmenu);
-        if (currentJnode != null) {
-            modelMap.addAttribute("currentJnode", currentJnode);
-            modelMap.addAttribute("matchJnode",matchJnode);
-            modelMap.addAttribute("jnode", currentJnode.getRootFather());
-        } else if (jnodeId != null) {
-            for (Jnode jnodeTemp : jmenu.getChildren()) {
-                if (jnodeTemp.getId().equals(jnodeId)) {
-                    modelMap.addAttribute("jnode", jnodeTemp);
-                    break;
-                }
-            }
-        } else {
-            modelMap.addAttribute("jnode", jmenu.getChildren().get(0));
-        }
-        return resultPage;
-
-    }
     /**
      * 根据group_id查询获取相关document
      */
@@ -167,30 +127,6 @@ public class MyDocumentController {
     }
 
 
-    private Jnode getCurrentJnode(Jmenu jmenu, String match) {
-        if (match == null || match.equals("")) {
-            return null;
-        }
-        Jnode resultJnode = null;
-        for (Jnode jnodeTemp : jmenu.getChildren()) {
-            if (resultJnode == null) {
-                resultJnode = jnodeTemp.getUrl().trim().startsWith(match.trim())?jnodeTemp:null;
-            }
-        }
-        return resultJnode;
-    }
-    private Jnode getMatchJnode(Jnode jnode, String match) {
-        if (match == null || match.equals("")) {
-            return null;
-        }
-        Jnode resultJnode = null;
-        for (Jnode jnodeTemp : jnode.getChildren()) {
-            if (resultJnode == null && jnodeTemp.getUrl().trim().startsWith(match.trim())) {
-                resultJnode = jnodeTemp;
-            }
-        }
-        return resultJnode;
-    }
 
 //    private Jnode findJnode(Jnode jnode, String match) {
 //        Jnode resultJnode = null;

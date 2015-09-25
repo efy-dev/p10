@@ -18,12 +18,31 @@
         <ul class="div-list-ul">
             <c:forEach items="${documentList}" var="document" varStatus="status">
                 <li>
-                    <p><strong><em>${status.index + 1}、</em>${document.title}[<fmt:formatDate
-                            value="${document.publishDate}" pattern="yyyy-MM-dd"/>]</strong></p>
-
-                    <p>${document.sampleContent}...</p>
+                    <a href="" target="_blank" title="">${status.index + 1}、${document.title}<em>[<fmt:formatDate
+                            value="${document.publishDate}" pattern="yyyy-MM-dd"/>]</em></a>
                 </li>
             </c:forEach>
+            <li><a href="" target="_blank" title="">1、水城千米农民画成画仪式筹备工作有序进行水城千米农民画成画仪式筹备工作有序进行水城千米农民画成画仪式筹备工作有序进行水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">2、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">3、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">4、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">5、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">6、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">7、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">8、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">9、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">10、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">11、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">12、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">13、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">14、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">15、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">16、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">17、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">18、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">19、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+            <li><a href="" target="_blank" title="">20、水城千米农民画成画仪式筹备工作有序进行<em class="time">[2015-6-29]</em></a></li>
+
         </ul>
     </div>
     <%--<div class="pages wh">--%>
