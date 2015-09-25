@@ -309,7 +309,7 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String removeProduct(String id,HttpServletRequest request) {
         try {
-            baseManager.remove(ProductPicture.class.getName(), id);
+            baseManager.remove(Product.class.getName(), id);
             XQuery xQuery = new XQuery("listProductModel_default5",request);
             xQuery.put("product_id",id);
             for(ProductModel productModel : (List<ProductModel>)baseManager.listObject(xQuery)){
