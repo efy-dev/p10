@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -128,6 +129,37 @@
                             <%--<td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>--%>
                             <%--<td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>--%>
                         <td width="332">总计（免运费）<span class="moneycl" id="totalPrice">${cart.totalPrice}</span>元</td>
+                        <%
+                            if (AuthorizationUtil.getMyUser().getId() != null) {
+                        %>
+                        <td>
+                            <div class="coupon" id="cart-coupon">
+                                <a class="btn-coupon" href="#优惠券" target="_blank" title="">优惠券<i class="icon"></i></a>
+                                <ul class="ul-list">
+                                    <li class="active">
+                                        <img src="../shop2015/upload/coupon-20.jpg" alt=""/>
+                                        <p>满2000立减20</p>
+                                        <p>全场通用</p>
+                                        <a class="btn-drawed" href="" title="已领取">已领取</a>
+                                    </li>
+                                    <li>
+                                        <img src="../shop2015/upload/coupon-20.jpg" alt=""/>
+                                        <p>满2000立减20</p>
+                                        <p>全场通用</p>
+                                        <a class="btn-draw" href="" title="领取">领取</a>
+                                    </li>
+                                    <li>
+                                        <img src="../shop2015/upload/coupon-20.jpg" alt=""/>
+                                        <p>满2000立减20</p>
+                                        <p>全场通用</p>
+                                        <a class="btn-draw" href="" title="领取">领取</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <%
+                            }
+                        %>
                         <td width="147"><a onclick="submit()"
                                            class="btn-settle">结算</a></td>
                     </tr>
