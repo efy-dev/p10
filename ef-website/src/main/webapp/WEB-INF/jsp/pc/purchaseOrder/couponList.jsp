@@ -22,6 +22,16 @@
               <ul class="am-tabs-nav am-cf">
                 <li class="am-active">我的卡券</li>
               </ul>
+        <c:if test="${empty couponList}">
+                  <tr style="border-top: 1px solid #ccc">
+                    <td colspan="4">
+                      <div class="mt-null">
+                        <p>你还没有可用的优惠券哟</p>
+                      </div>
+                    </td>
+                  </tr>
+         </c:if>
+              <c:if test="${!empty couponList}">
               <div class="am-tabs-bd">
                 <div data-tab-panel-0 class="am-tab-panel am-active">
                   <div class="serial-list-page">
@@ -40,8 +50,8 @@
                   </div>
                 </div>
               </div>
+              </c:if>
             </div>
-
           </div>
 
         </div>
