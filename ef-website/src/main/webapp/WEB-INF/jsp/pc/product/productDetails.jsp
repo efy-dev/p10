@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -226,6 +227,8 @@
         <!--  JiaThis Button END-->
       </div>
       <!-- //End-->
+
+
     </div>
   </div>
   <!-- //End--itemInfo-->
@@ -248,7 +251,7 @@
           <c:if test="${not empty product.master.id}">
           <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
           <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
-          <li><a href="/comment/finishOrderList.do" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
+          <li><a href="#title" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
           <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
 
           <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">进 入 店 铺</a></li>
@@ -267,9 +270,36 @@
   <div class="wh detail" id="detail">
     <div class="wh title"><h3>商品详情</h3></div>
       <div class="wh part">
-      ${product.productDescription.content}
+
+        <%--<div class="wh part">--%>
+          ${product.productDescription.content}
+          <div class="discuss">
+            <div class="title" id="title"><h3>商品评价</h3></div>
+            <div class="dis-con">
+              <div class="dis-title">用户印象：</div>
+              <div class="dis-ul">
+                <ul>
+                  <li>
+                    <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                      <div class="txt">${purchaseOrderProduct.purchaseOrderComment.content}</div>
+                      <%--<div class="star">5星</div>--%>
+                      <c:set var="user" >
+                        ${purchaseOrderProduct.purchaseOrder.user}
+                      </c:set>
+                      <div class="user"><i class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</div>
+                    </c:forEach>
+                   </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+     </div>
     </div>
-  </div>
+    </div>
+
+
+
+
 </div>
 <script type="text/javascript">
   function collect(o) {

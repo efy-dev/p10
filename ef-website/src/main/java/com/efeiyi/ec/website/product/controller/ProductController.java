@@ -63,7 +63,7 @@ public class ProductController {
                 for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
-                if(s.length()>14){
+                if(s.length()>10){
                     s = new StringBuilder(s.substring(0,10));
                     s.append("...");
                 }
@@ -124,6 +124,7 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
+                s.append(((ProductModel) productModelTemp).getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
@@ -174,9 +175,12 @@ public class ProductController {
      * @throws Exception
      */
     @RequestMapping({"productModel/{productModelId}"})
-    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) {
+    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", productModelId);
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         List<ProductModel> productModelListTmp = product.getProductModelList();
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
@@ -193,6 +197,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("productPicture",productPicture);
         model.addAttribute("productPictures",productPictures);
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
         return "/product/productDetails";
     }
 
