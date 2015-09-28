@@ -26,7 +26,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${objectList}" var="projectCategoryProductModel" end="4">
+            <c:forEach items="${objectList}" var="projectCategoryProductModel">
                 <tr id="${projectCategoryProductModel.id}">
                     <td>
                         <a  class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);"  onclick="showConfirm('提示','确认解除产品？',function(){removeSubjectProductModel('${projectCategoryProductModel.projectCategory.id}','${projectCategoryProductModel.productModel.id}','${projectCategoryProductModel.id}')})"><span
