@@ -289,4 +289,18 @@ public class ProductController extends BaseController {
         return  "";
     }
 
+    @RequestMapping("/changeMaster.do")
+    @ResponseBody
+    public List changeMaster(String masterId, HttpServletRequest request) {
+        List list = null;
+        try {
+            XQuery xQuery = new XQuery("listMasterProject_default", request);
+            xQuery.put("master_id", masterId);
+            list = baseManager.listObject(xQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
