@@ -16,17 +16,17 @@
 <head>
     <title></title>
     <script>
-        function removeProduct(productId){
-            jQuery.ajax({
-                type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeProduct"/>',
-                data:{id:productId},
-                dataType:"json",
-                success:function(data){
-                    $("#"+productId).remove();
-                }
-            });
-        }
+        <%--function removeProduct(productId){--%>
+            <%--jQuery.ajax({--%>
+                <%--type:"GET",--%>
+                <%--url:'<c:url value="/basic/xmj.do?qm=removeProduct"/>',--%>
+                <%--data:{id:productId},--%>
+                <%--dataType:"json",--%>
+                <%--success:function(data){--%>
+                    <%--$("#"+productId).remove();--%>
+                <%--}--%>
+            <%--});--%>
+        <%--}--%>
     </script>
 </head>
 <body>

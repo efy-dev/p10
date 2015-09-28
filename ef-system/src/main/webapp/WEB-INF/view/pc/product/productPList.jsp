@@ -34,9 +34,10 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set" width="33%">操作</th>
-                    <th class="table-title" width="33%">产品名称</th>
-                    <th class="table-title" width="33%">产品编号</th>
+                    <th class="table-set" width="35%">操作</th>
+                    <th class="table-title" width="35%">产品名称</th>
+                    <th class="table-title" width="15%">产品编号</th>
+                    <th class="table-title" width="15%">状态</th>
                     <%--<th class="table-title">产品价格</th>--%>
 
 
@@ -72,6 +73,17 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${product.id}"/>">
                                         修改规格
                                     </a>
+                                    <c:if test="${product.status == '2'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'1','${product.id}')">
+                                            上架
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${product.status == '1'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="setStatus(this,'2','${product.id}')">
+                                            下架
+                                        </a>
+                                    </c:if>
+
                                         <%--<c:if test="${view == 'newProduct'}">--%>
                                         <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=plistTenantProduct_default&productId=${product.id}&view=${view}"/>">--%>
                                         <%--关联商家--%>
@@ -81,7 +93,7 @@
                                         <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${product.id}"/>">--%>
                                         <%--修改图片--%>
                                         <%--</a>--%>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct('${product.id}')})">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="showConfirm('提示','是否删除',function(){removeProduct1('${product.id}')})">
                                         删除
                                     </a>
                                     <c:if test="${empty product.project}">
@@ -101,6 +113,18 @@
                         </td>
                         <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=${view}&id=${product.id}'/>">${product.name}</a></td>
                         <td class="am-hide-sm-only">${product.serial}</td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${product.status == '2'}">
+                                   <span>
+                                      下架
+                                   </span>
+                            </c:if>
+                            <c:if test="${product.status == '1'}">
+                                <span style="color: red">
+                                    上架
+                                </span>
+                            </c:if>
+                        </td>
                         <%--<td class="am-hide-sm-only">${product.price}</td>--%>
                     </tr>
                 </c:forEach>
@@ -118,7 +142,31 @@
     </div>
 </div>
 <script>
-    function removeProduct(divId){
+    function setStatus(obj,status,id){
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/setProductStatus.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:id,status:status},
+            success: function (data) {
+                if(status=="1"){
+                    $(obj).text("下架");
+                    $(obj).attr("onclick","setStatus(this,'2','"+data+"')");
+                    var span =  '<span style="color: red">上架 </span>';
+                    $("#"+data+" td:eq(3)").html(span);
+                }
+               if(status=="2"){
+                   $(obj).text("上架");
+                   $(obj).attr("onclick","setStatus(this,'1','"+data+"')");
+                   var span =  '<span>下架 </span>';
+                   $("#"+data+" td:eq(3)").html(span);
+               }
+            }
+        });
+    }
+    function removeProduct1(divId){
+
         $.ajax({
             type: "get",
             url: '<c:url value="/product/removeProduct.do"/>',

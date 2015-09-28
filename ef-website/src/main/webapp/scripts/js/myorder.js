@@ -185,14 +185,14 @@ $(function(){
         $(this).toggleClass('cl-active')
     })
 })
-//�����ť
-//$(function(){
-//    $('.act-ui').click(function(){
-//        $(this).parents('.table').siblings('.mutual').slideToggle();
-//        return false;
-//    })
-//})
-//�󶨰�ť
+//
+$(function(){
+    $('.act-ui').click(function(){
+        $(this).parents('.table').siblings('.mutual').slideToggle();
+        return false;
+    })
+})
+//
 $(function(){
     $('.kd').click(function(){
         $(this).parents('.binding').sibling('.binding-list').slideToggle();
