@@ -64,7 +64,7 @@ public class ProductController {
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
                 if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
+                    s = new StringBuilder(s.substring(0,10));
                     s.append("...");
                 }
                 map.put(productModel,s.toString());
