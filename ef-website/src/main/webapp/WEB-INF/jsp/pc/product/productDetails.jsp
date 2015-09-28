@@ -281,7 +281,11 @@
                 <ul>
                   <li>
                     <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
-                      <div class="txt">${purchaseOrderProduct.purchaseOrderComment.content}</div>
+                      <div class="txt">
+                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
+                      ${purchaseOrderProduct.purchaseOrderComment.content}
+                        </c:if>
+                      </div>
                       <%--<div class="star">5星</div>--%>
                       <c:set var="user" >
                         ${purchaseOrderProduct.purchaseOrder.user}
