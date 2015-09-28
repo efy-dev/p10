@@ -153,7 +153,7 @@
 
     <div class="itme-ext">
       <div class="name">
-        <p><strong>${productModel.name}</strong></p>
+        <p><strong>${product.name}</strong></p>
         <p>${product.subName}</p>
       </div>
       <!-- //End-->
@@ -310,6 +310,7 @@
     });
   }
 </script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 </body>
 </html>
 

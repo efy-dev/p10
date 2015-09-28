@@ -60,12 +60,11 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(ProductModel productModel:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(productModel.getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
                 if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
+                    s = new StringBuilder(s.substring(0,10));
                     s.append("...");
                 }
                 map.put(productModel,s.toString());
@@ -125,7 +124,6 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(((ProductModel) productModelTemp).getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
