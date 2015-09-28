@@ -1,5 +1,6 @@
 package com.efeiyi.association.association.controller;
 
+import com.efeiyi.association.core.DatabaseContextHolder;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.model.DoQuery;
@@ -46,7 +47,7 @@ public class HomeController {
         //再从中找到query的信息
         tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
-        modelMap.put("IndustryList", subList(pageInfo.getList()));
+        modelMap.put("IndustryList", subList(pageInfo.getList(), 3));
 
         //重要通知==新闻公告
         qm = "plistNewsNote_industry";
@@ -55,15 +56,36 @@ public class HomeController {
         //再从中找到query的信息
         tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
-        modelMap.put("NoteList", subList(pageInfo.getList()));
+        modelMap.put("NoteList", subList(pageInfo.getList(), 3));
+
+        //协会新闻
+        qm = "plistNewsOrganization_organization";
+        //先找到配置文件里的entity
+        tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
+        modelMap.put("OrgNewsList", subList(pageInfo.getList(), 2));
+
+        //传承人
+        DatabaseContextHolder.setDataSource("dataSource");//切换数据源
+
+        qm = "plistMaster_master";
+        //先找到配置文件里的entity
+        tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
+        modelMap.put("masterList", subList(pageInfo.getList(), 2));
+        DatabaseContextHolder.setDataSource(null);//切换回数据源
 
         return new ModelAndView("home/home");
     }
 
-    private List subList(List oldList){
-        if (oldList != null && oldList.size()>3){
+    private List subList(List oldList, int size){
+        if (oldList != null && oldList.size()>size){
             List newList = new ArrayList();
-            for (int i=0;i<3;i++){
+            for (int i=0;i<size;i++){
                 newList.add(i,oldList.get(i));
             }
             return newList;
