@@ -40,16 +40,16 @@
             <c:forEach items="${IndustryList}" var="industry">
               <li>
                 <c:if test="${empty industry.documentAttachmentList}">
-                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="#" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty industry.documentAttachmentList}">
                   <c:forEach items="${industry.documentAttachmentList}" var="att" end="0">
-                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="#" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
                 <p class="name">${industry.title}</p>
                 <p class="info">${industry.sampleContent}</p>
-                <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="/news.do?qm=plistNewsIndustry_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -61,16 +61,16 @@
             <c:forEach items="${NoteList}" var="note">
               <li>
                 <c:if test="${empty note.documentAttachmentList}">
-                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="#" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty note.documentAttachmentList}">
                   <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="#" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
                 <p class="name">${note.title}</p>
                 <p class="info">${note.sampleContent}</p>
-                <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="/news.Bulletin.do?qm=plistNewsNote_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -148,42 +148,44 @@
     <!-- //End--slide-right-->
     <div class="slider-right">
       <div class="part">
-        <div class="title">非物质文化</div>
+        <div class="title">协会新闻</div>
         <ul class="ul-list">
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
-            <p>建立非遗协会这样国家级的非物质文化遗产构。</p>
-            <a class="btn-more" href="#更多" target="_blank" title="更多">更多</a>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
-            <p>建立非遗协会这样国家级的非物质文化遗产构。</p>
-            <a class="btn-more" href="#更多" target="_blank" title="更多">更多</a>
-          </li>
+          <c:forEach items="${OrgNewsList}" var="orgNews">
+            <li>
+              <c:if test="${empty orgNews.documentAttachmentList}">
+                <a href="" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
+              </c:if>
+              <c:if test="${not empty orgNews.documentAttachmentList}">
+                <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
+                  <a href="#" title=""><img src="${att.path}" alt=""/></a>
+                </c:forEach>
+              </c:if>
+              <p>${orgNews.title}</p>
+              <a class="btn-more" href="/news.do?qm=plistNewsOrganization_default" title="更多">更多</a>
+            </li>
+          </c:forEach>
         </ul>
       </div>
       <!-- //End--part1-->
       <div class="part">
         <div class="title">在线服务</div>
         <ul class="ul-list-btn">
-          <li><a href="#在线申报" target="_blank" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
-          <li><a href="#非遗名录" target="_blank" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
-          <li><a href="#法规政策" target="_blank" title="法规政策"><i class="icon icon-3"></i>法规政策</a></li>
-          <li><a href="#下属机构" target="_blank" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
+          <li><a href="#在线申报" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
+          <li><a href="/project/project.do?qm=listAddressProvince_default" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
+          <li><a href="/protection/protection.do?qm=plistLaw_default" title="法规政策"><i class="icon icon-3"></i>法规政策</a></li>
+          <li><a href="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
         </ul>
       </div>
       <!-- //End--part-->
       <div class="part">
-        <div class="title">非物质文化</div>
+        <div class="title">非遗传承人</div>
         <ul class="ul-list">
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
-            <p>姚惠芬-苏绣</p>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
-            <p>姚惠芬-苏绣</p>
-          </li>
+          <c:forEach items="${masterList}" var="master">
+            <li>
+              <a href="" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
+              <p>${master.fullName}</p>
+            </li>
+          </c:forEach>
         </ul>
       </div>
     </div>

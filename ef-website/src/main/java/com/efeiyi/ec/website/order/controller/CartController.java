@@ -122,6 +122,9 @@ public class CartController {
             Object cartTemp = request.getSession().getAttribute("cart");
             if (cartTemp != null) {
                 cart = (Cart) cartTemp;
+                if (cart.getCartProductList()==null){
+                    cart.setCartProductList(new ArrayList<CartProduct>());
+                }
             } else {
                 cart = new Cart();
                 cart.setCartProductList(new ArrayList<CartProduct>());
@@ -197,7 +200,8 @@ public class CartController {
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
                 if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId());
+                    float price = productModel.getPrice().floatValue() * cartProductTemp.getAmount();
                     totalPrice += price;
                 }
             }
