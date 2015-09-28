@@ -153,7 +153,7 @@
 
     <div class="itme-ext">
       <div class="name">
-        <p><strong>${productModel.name}</strong></p>
+        <p><strong>${product.name}</strong></p>
         <p>${product.subName}</p>
       </div>
       <!-- //End-->
