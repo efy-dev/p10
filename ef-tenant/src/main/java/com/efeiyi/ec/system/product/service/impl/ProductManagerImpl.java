@@ -272,4 +272,12 @@ public class ProductManagerImpl implements ProductManager {
     }
 
 
+    @Override
+    public Product setProductStatus(String status, String id) {
+        Product product = (Product)xdoDao.getObject(Product.class.getName(),id);
+        product.setStatus(status);
+        xdoDao.saveOrUpdateObject(product);
+        return product;
+    }
+
 }

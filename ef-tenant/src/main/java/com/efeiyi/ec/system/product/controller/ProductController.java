@@ -303,4 +303,18 @@ public class ProductController extends BaseController {
         return list;
     }
 
+
+    @RequestMapping("/setProductStatus.do")
+    @ResponseBody
+    public String setProductStatus(String id, String status, HttpServletRequest request) {
+
+        try {
+            productManager.setProductStatus(status,id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 }
