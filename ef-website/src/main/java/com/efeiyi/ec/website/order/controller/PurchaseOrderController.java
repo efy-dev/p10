@@ -418,7 +418,7 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
-        String couponId = request.getParameter("couponId");
+
         String cartId = request.getParameter("cartId");
         Cart cart;
         if (cartId == null || cartId.equals("")) {
@@ -490,8 +490,11 @@ public class PurchaseOrderController extends BaseController {
 //        coupon.setId("idlany3zf4hbs5uz");
 //
 //        purchaseOrder.setCoupon(coupon);
-        Coupon coupon = (Coupon)baseManager.getObject(Coupon.class.getName(),couponId);
-        purchaseOrder.setCoupon(coupon);
+        if(!HttpUtil.isPhone(request)){
+            String couponId = request.getParameter("couponId");
+            Coupon coupon = (Coupon)baseManager.getObject(Coupon.class.getName(),couponId);
+            purchaseOrder.setCoupon(coupon);
+        }
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder); //生成父订单
 
         //拆分订单
