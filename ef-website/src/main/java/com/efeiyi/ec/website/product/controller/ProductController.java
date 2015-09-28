@@ -146,7 +146,14 @@ public class ProductController {
     @RequestMapping({"/removeProductFavorite.do"})
     @ResponseBody
     public boolean removeProductFavorite(HttpServletRequest request) throws Exception{
-        baseManager.remove(ProductFavorite.class.getName(),request.getParameter("productFavoriteId"));
+        String productModelId = request.getParameter("id");
+        XQuery xQuery = new XQuery("listProductFavorite_default",request);
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        xQuery.put("user_id", currentUser.getId());
+        xQuery.put("productModel_id",productModelId);
+        List<Object> productFavoriteList =  baseManager.listObject(xQuery);
+        ProductFavorite p = (ProductFavorite)productFavoriteList.get(0);
+        baseManager.remove(ProductFavorite.class.getName(),p.getId());
         return true;
     }
 

@@ -60,24 +60,21 @@ $(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
         });
         //收藏
-        var oColect=$('.preview .collect');
-
-
-
-        oColect.hover(function(){
+        var oBiao=$('.preview .collect .biao');
+        oBiao.hover(function(){
             $(this).find('.icon').addClass('icon-hover');
         },function(){
             $(this).find('.icon').removeClass('icon-hover');
         });
-
-        oColect.click(function(){
+        oBiao.click(function(){
+            var oCllect=$(this).parents('.collect');
             $(this).find('.icon').toggleClass('icon-active');
-            $(this).find('span.hover').remove();
-            if($(this).find('span').is('.active')){
-                $(this).find('span.active').remove();
-                $(this).append('<span class="hover">收藏</span>');
+            oCllect.find('span.hover').remove();
+            if(oCllect.find('span').is('.active')){
+                oCllect.find('span.active').remove();
+                oCllect.append('<span class="txt hover">添加收藏</span>');
             }else{
-                $(this).append('<span class="active">已收藏</span>');
+                oCllect.append('<span class="txt active">取消收藏</span>');
             }
         })
         //�
@@ -96,10 +93,15 @@ $(function(){
             $("html,body").animate({scrollTop:pos},500);
             return false;
         });
-        //���ѡ��
+        //
         $('.itemInfo .ul-list li').click(function(){
             $(this).addClass('active');
         })
+        //计算轮播图===图片大小进行定位
+        //var bigGlassli=$('.product-intro .itemInfo .preview .slider-main li');
+        //var bigGlassliImg=bigGlassli.find('img');
+        //bigGlassli.find('.zoom-section').css({'margin-left':-bigGlassliImg.width()/2+'px'})
+        //bigGlassli.find('.mousetrap').css({'width':'800px'})
 
     })();
     //�
@@ -113,7 +115,7 @@ $(function(){
             return false;
         })
     })();
-    //�ҵĶ���
+    //�
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
         $('.clearing-site span a').click(function(){
