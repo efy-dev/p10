@@ -93,7 +93,7 @@
                 <%--<a href="" target="_blank"><img class="imgfilter" src="shop2015/upload/pep-2.jpg" alt=""/></a>--%>
 
                 <%--<p><strong>姚惠芬</strong></p>--%>
-
+i
                 <%--<p>[苏绣]</p>--%>
 
                 <%--<p>国家级传承人</p>--%>
