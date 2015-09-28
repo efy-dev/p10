@@ -12,12 +12,6 @@ import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
-import org.htmlparser.Node;
-import org.htmlparser.NodeFilter;
-import org.htmlparser.Parser;
-import org.htmlparser.filters.TagNameFilter;
-import org.htmlparser.tags.ImageTag;
-import org.htmlparser.util.NodeList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -103,56 +97,56 @@ public class MyHeritageProjectController {
         return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
-    @RequestMapping("/saveHeritageProjectForm.do")
-    @ResponseBody
-    public ModelAndView saveHeritageProject(HttpServletRequest request, Document document) throws Exception {
-
-        String path = request.getParameter("qm");
-        document.getDocumentContent().setDocument(document);
-        //新建内容
-        if (document.getId() == null || "".equals(document.getId())) {
-            //新建内容传入原页面地址
-            document.setId(null);
-            document.getDocumentContent().setId(null);
-            document.setStatus("1");
-            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
-            document.setPublishDate(new Date());
-        }else{
-            documentManager.deleteDocument(document);
-            document.setId(null);
-        }
-
-        Parser parser = new Parser(document.getDocumentContent().getContent());
-        NodeFilter filter = new TagNameFilter("img");
-        NodeList nodes = parser.extractAllNodesThatMatch(filter);
-
-        if (nodes != null) {
-            Node eachNode = null;
-            ImageTag imageTag = null;
-            String srcPath = null;
-            DocumentAttachment documentAttachment = null;
-            document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
-
-            //遍历所有的img节点
-            for (int i = 0; i < nodes.size(); i++) {
-                eachNode = (Node) nodes.elementAt(i);
-                if (eachNode instanceof ImageTag) {
-                    imageTag = (ImageTag) eachNode;
-
-                    //获得html文本的原来的src属性
-                    srcPath = imageTag.getAttribute("src");
-                    documentAttachment = new DocumentAttachment();
-                    documentAttachment.setPath(srcPath);
-                    documentAttachment.setDocument(document);
-                    document.getDocumentAttachmentList().add(documentAttachment);
-                }
-            }
-        }
-        baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-        documentManager.saveDocument(document);
-
-        return new ModelAndView("redirect:"/* + request.getContextPath()*/ + path);
-    }
+//    @RequestMapping("/saveHeritageProjectForm.do")
+//    @ResponseBody
+//    public ModelAndView saveHeritageProject(HttpServletRequest request, Document document) throws Exception {
+//
+//        String path = request.getParameter("qm");
+//        document.getDocumentContent().setDocument(document);
+//        //新建内容
+//        if (document.getId() == null || "".equals(document.getId())) {
+//            //新建内容传入原页面地址
+//            document.setId(null);
+//            document.getDocumentContent().setId(null);
+//            document.setStatus("1");
+//            document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
+//            document.setPublishDate(new Date());
+//        }else{
+//            documentManager.deleteDocument(document);
+//            document.setId(null);
+//        }
+//
+//        Parser parser = new Parser(document.getDocumentContent().getContent());
+//        NodeFilter filter = new TagNameFilter("img");
+//        NodeList nodes = parser.extractAllNodesThatMatch(filter);
+//
+//        if (nodes != null) {
+//            Node eachNode = null;
+//            ImageTag imageTag = null;
+//            String srcPath = null;
+//            DocumentAttachment documentAttachment = null;
+//            document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+//
+//            //遍历所有的img节点
+//            for (int i = 0; i < nodes.size(); i++) {
+//                eachNode = (Node) nodes.elementAt(i);
+//                if (eachNode instanceof ImageTag) {
+//                    imageTag = (ImageTag) eachNode;
+//
+//                    //获得html文本的原来的src属性
+//                    srcPath = imageTag.getAttribute("src");
+//                    documentAttachment = new DocumentAttachment();
+//                    documentAttachment.setPath(srcPath);
+//                    documentAttachment.setDocument(document);
+//                    document.getDocumentAttachmentList().add(documentAttachment);
+//                }
+//            }
+//        }
+//        baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
+//        documentManager.saveDocument(document);
+//
+//        return new ModelAndView("redirect:"/* + request.getContextPath()*/ + path);
+//    }
 
     @RequestMapping("/removeHeritageProject.do")
     @ResponseBody
