@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<header class="wh header hd">
+<header class="wh header">
     <div class="hd">
         <a class="icon logo" href="" title="中国非物质文化遗产保护协会"></a>
         <div class="txt">

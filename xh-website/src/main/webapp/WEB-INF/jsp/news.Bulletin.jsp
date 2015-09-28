@@ -18,7 +18,7 @@
         <ul class="div-list-ul">
             <c:forEach items="${documentList}" var="document" varStatus="status">
                 <li>
-                    <a href="" target="_blank" title="">${status.index + 1}、${document.title}<em>[<fmt:formatDate
+                    <a href="" target="_blank" title="">${status.index + 1}、${document.title}<em class="time">[<fmt:formatDate
                             value="${document.publishDate}" pattern="yyyy-MM-dd"/>]</em></a>
                 </li>
             </c:forEach>

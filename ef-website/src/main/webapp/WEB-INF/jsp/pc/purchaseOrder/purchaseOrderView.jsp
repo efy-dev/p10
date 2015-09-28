@@ -31,6 +31,7 @@
           </dd>
         </dl>
         <%--<c:if test="${!empty purchaseOrderDelivery}">--%>
+        <c:if test="${!empty pl}">
         <c:forEach items="${pl}" var="pl" varStatus="i">
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">物流信息</dt>
@@ -65,6 +66,27 @@
           </dd>
         </dl>
         </c:forEach>
+        </c:if>
+
+        <c:if test="${empty pl}"><dl class="orderid-mashup bd-top">
+          <dt class="orderid">商品信息</dt>
+          <dd class="od-id">
+            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
+              <table class="item-bg">
+                <tr>
+                  <td class="commodity_info1">
+                    <ul class="commodity_info-1">
+                      <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
+                    </ul>
+                  </td>
+                  <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
+                  <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
+                  <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
+                </tr>
+              </table>
+            </c:forEach>
+          </dd>
+        </dl></c:if>
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">

@@ -78,8 +78,10 @@
   }
   function checkLg(obj){
     var lg= $(":input[name='np']").val().length;
-    if(lg<5 || lg>16){
-      $(obj).next("span").text("密码由6位-16位字母或数字组成");
+    var ch= $(":input[name='np']").val();
+    var reg = /^[0-9a-zA-Z]+$/;
+    if(lg<5 || lg>16 || !reg.test(ch)){
+      $(obj).next("span").text("密码由6位-16位数字或字母组成");
     }else{
       $(obj).next("span").text("");
 

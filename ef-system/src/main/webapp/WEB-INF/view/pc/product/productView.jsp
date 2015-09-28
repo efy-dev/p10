@@ -418,6 +418,7 @@
 <!-- content end -->
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
+<%--<script src="<c:url value='/scripts/new_ckeditor/ckeditor.js'/>"></script>--%>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
 

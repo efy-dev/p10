@@ -105,6 +105,7 @@
             dataType: "json",
             data:{tenantId:tenantId,masterId:masterId,tenantMasterId:tenantMasterId,status:status},
             success: function (data) {
+                alert(data);
                 if(status == '0'){
                     $(obj).attr("status","1");
                     $(obj).find("span").text("解除商家");
