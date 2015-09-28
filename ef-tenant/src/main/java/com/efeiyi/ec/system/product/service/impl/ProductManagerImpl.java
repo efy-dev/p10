@@ -92,7 +92,7 @@ public class ProductManagerImpl implements ProductManager {
                 product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
             }
 
-
+            product.setStatus("2");
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
             e.printStackTrace();
@@ -271,5 +271,13 @@ public class ProductManagerImpl implements ProductManager {
         }
     }
 
+
+    @Override
+    public Product setProductStatus(String status, String id) {
+        Product product = (Product)xdoDao.getObject(Product.class.getName(),id);
+        product.setStatus(status);
+        xdoDao.saveOrUpdateObject(product);
+        return product;
+    }
 
 }

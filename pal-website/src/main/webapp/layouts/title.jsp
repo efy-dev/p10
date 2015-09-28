@@ -30,8 +30,9 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="<c:url value='/resources/assets/i/app-icon72x72@2x.png'/>">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link rel="stylesheet" href="<c:url value='/css/amazeui.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/amazeui.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/css/pc.css'/>">
+    <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 </head>
 <body>
 </body>

@@ -22,24 +22,26 @@
         </jnode>
     </jnode>
 
-    <jnode id="OnlineReportingManagement" url="/main.do?jnodeId=OnlineReportingManagement" text_zh_CN="下属机构">
-        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="下属机构">
+    <jnode id="OnlineReportingManagement" url="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" text_zh_CN="下属机构">
+        <jnode url="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" access="admin,manager" text_zh_CN="专业委员会">
+        </jnode>
+        <jnode url="/organization/organization.association.do?qm=plistAssociation_default" access="admin,manager" text_zh_CN="各地协会">
+        </jnode>
+        <jnode url="/organization/organization.member.do?qm=plistMemberManagement_default" access="admin,manager" text_zh_CN="协会会员">
         </jnode>
     </jnode>
 
-    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗名录">
-        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="非遗名录">
-        </jnode>
+    <jnode id="AuthorityManagement" url="/project/project.do?qm=listAddressProvince_default" text_zh_CN="非遗名录">
+        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="项目"/>
+        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="传承人"/>
     </jnode>
 
-    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗保护">
-        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="非遗保护">
-        </jnode>
-    </jnode>
-
-    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="学术研究">
-        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="学术研究">
-        </jnode>
+    <jnode id="ProtectionPolicy" url="/protection/protection.do?qm=plistLaw_default" text_zh_CN="非遗保护">
+        <jnode url="/protection/protection.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法"/>
+        <jnode url="/protection/protection.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="政策法规"/>
+        <jnode url="/protection/protection.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="申报指南"/>
+        <jnode url="/protection/protection.do?qm=plistMaterial_default" access="admin,manager" text_zh_CN="申报提交"/>
+        <jnode url="/protection/protection.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>
     </jnode>
 
 </jmenu>

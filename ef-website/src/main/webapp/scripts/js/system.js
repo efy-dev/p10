@@ -173,7 +173,17 @@ $(function(){
                 $('body').stop(true).animate({'scrollTop':'0'},300);
             })
         })
-
     })();
+
+    //购物车
+    (function(){
+        $('#cart-coupon').find('.btn-coupon').click(function(){
+            $(this).toggleClass('active');
+            $(this).siblings('.ul-list').slideToggle('fast');
+            return false;
+        })
+    })();
+
+
 
 })
