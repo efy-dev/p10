@@ -171,7 +171,7 @@ public class CartController {
                 cartProduct.setCart(cart);
             }
             cartProduct.setStatus("1");
-            cartProduct.setIsChoose("0");
+            cartProduct.setIsChoose("1");
             if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                 cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
             } else {

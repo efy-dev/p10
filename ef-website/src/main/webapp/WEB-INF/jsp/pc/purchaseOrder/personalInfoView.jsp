@@ -42,9 +42,8 @@
                 </dt>
                 <dd>
                     <p>当前头像</p>
-
-                    <p><span>用户名：</span><span>${user.username}</span></p>
-
+                    <c:set var="pUser">${user.username}</c:set>
+                    <p><span>用户名：</span><span>  ${fn:substring(pUser, 0,3 )}*****${fn:substring(pUser,7,11)}</span></p>
                     <p><span>用户类型：</span><span>个人用户</span></p>
                 </dd>
             </dl>

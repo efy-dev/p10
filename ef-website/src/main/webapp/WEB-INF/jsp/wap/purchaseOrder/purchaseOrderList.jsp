@@ -58,14 +58,14 @@
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">待付款</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="/order/myEfeiyi/view/${purchaseOrder.id}">查看订单</a></li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/pay/${purchaseOrder.id}"/>">立即支付</a></li>
                     </ul>
                 </c:if>
                 <c:if test="${purchaseOrder.orderStatus == '5'}">
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">待收货</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="/order/myEfeiyi/view/${purchaseOrder.id}">查看物流</a></li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a></li>
                     </ul>
                 </c:if>
                 <c:if test="${purchaseOrder.orderStatus == '13'}">
@@ -79,7 +79,7 @@
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">已取消</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="/order/myEfeiyi/view/${purchaseOrder.id}"></a></li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>"></a></li>
                     </ul>
                 </c:if>
                 <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
@@ -89,18 +89,21 @@
     </div>
     <!--个人信息-->
     <div class="Extras">
-        <a href="/myEfeiyi/personalInfo.do"> 个人信息<i class="icon-sj"></i></a>
+        <a href="<c:url value="/myEfeiyi/personalInfo.do"/>"> 个人信息<i class="icon-sj"></i></a>
     </div>
     <!--地址管理-->
     <div class="Extras">
-        <a href="/myEfeiyi/address/list"> 地址信息<i class="icon-sj"></i></a>
+        <a href="<c:url value="/myEfeiyi/address/list"/>"> 地址信息<i class="icon-sj"></i></a>
     </div>
     <!--修改密码-->
     <div class="Extras">
-        <a href="/myEfeiyi/getPassword.do"> 修改密码<i class="icon-sj"></i></a>
+        <a href="<c:url value="/myEfeiyi/getPassword.do"/>"> 修改密码<i class="icon-sj"></i></a>
+    </div>
+    <div class="Extras">
+        <%--<a href="<c:url value="/purchaseCollect/collectList.do"/>"> 产品收藏<i class="icon-sj"></i></a>--%>
     </div>
     <!--安全退出-->
-    <div class="aq-btn"><a href="/j_spring_cas_security_logout">安全退出</a> </div>
+    <div class="aq-btn"><a href="<c:url value="/j_spring_cas_security_logout"/>">安全退出</a> </div>
 </div>
 </body>
 </html>

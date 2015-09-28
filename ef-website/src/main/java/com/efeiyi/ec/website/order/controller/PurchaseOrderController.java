@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.product.model.Product;
@@ -62,7 +63,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("status", orderStatus);
         XQuery xQuery = null;
         int c = 0;
-        if (orderStatus == null||orderStatus == "") {
+        if (orderStatus == null || orderStatus == "") {
             xQuery = new XQuery("plistPurchaseOrder_default", request, 10);
         } else {
             c = Integer.parseInt(orderStatus);
@@ -92,7 +93,7 @@ public class PurchaseOrderController extends BaseController {
         String userId = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
         model.addAttribute("orderList", list);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "/purchaseOrder/purchaseOrderList";
     }
 
@@ -114,41 +115,77 @@ public class PurchaseOrderController extends BaseController {
     * */
     @RequestMapping({"/myEfeiyi/view/{orderId}"})
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
+        List dl=new ArrayList();
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
-        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("orderId", orderId);
-        String hql = "from PurchaseOrderDelivery p where p.purchaseOrder.id=:orderId";
-        PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-        String pd = "null";
-        String serial = "null";
-        if (purchaseOrderDelivery != null) {
-            pd = purchaseOrderDelivery.getLogisticsCompany();
-            serial = purchaseOrderDelivery.getSerial();
-        }
-        model.addAttribute("purchaseOrderDelivery", purchaseOrderDelivery);
+        String lc = "";
+        String serial = "";
         String content = "";
-        try {
-            URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + pd + "&nu=" + serial);
-            URLConnection con = url.openConnection();
-            con.setAllowUserInteraction(false);
-            InputStream urlStream = url.openStream();
-            byte b[] = new byte[10000];
-            int numRead = urlStream.read(b);
-            content = new String(b, 0, numRead);
-            while (numRead != -1) {
-                numRead = urlStream.read(b);
-                if (numRead != -1) {
-                    String newContent = new String(b, 0, numRead, "UTF-8");
-                    content += newContent;
+        if(purchaseOrder.getSubPurchaseOrder().equals(null) || purchaseOrder.getSubPurchaseOrder().size()==0){
+            List pl=purchaseOrder.getPurchaseOrderDeliveryList();
+            if(pl.size()>0){
+
+                serial= purchaseOrder.getPurchaseOrderDeliveryList().get(0).getSerial();
+                lc=purchaseOrder.getPurchaseOrderDeliveryList().get(0).getLogisticsCompany();
+
+                try {
+                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                    URLConnection con = url.openConnection();
+                    con.setAllowUserInteraction(false);
+                    InputStream urlStream = url.openStream();
+                    byte b[] = new byte[10000];
+                    int numRead = urlStream.read(b);
+                    content = new String(b, 0, numRead);
+                    while (numRead != -1) {
+                        numRead = urlStream.read(b);
+                        if (numRead != -1) {
+                            String newContent = new String(b, 0, numRead, "UTF-8");
+                            content += newContent;
+                        }
+                    }
+                    urlStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-            urlStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            dl.add(content);
+            model.addAttribute("dl", dl);
+            model.addAttribute("pl", pl);
+        }else{
+            List pl=purchaseOrder.getPurchaseOrderDeliveryList();
+            if(pl.size()>0){
+                for(int i=0;i<pl.size();i++){
+                    serial= purchaseOrder.getPurchaseOrderDeliveryList().get(i).getSerial();
+                    lc=purchaseOrder.getPurchaseOrderDeliveryList().get(i).getLogisticsCompany();
+                    try {
+                        URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                        URLConnection con = url.openConnection();
+                        con.setAllowUserInteraction(false);
+                        InputStream urlStream = url.openStream();
+                        byte b[] = new byte[10000];
+                        int numRead = urlStream.read(b);
+                        content = new String(b, 0, numRead);
+                        while (numRead != -1) {
+                            numRead = urlStream.read(b);
+                            if (numRead != -1) {
+                                String newContent = new String(b, 0, numRead, "UTF-8");
+                                content += newContent;
+                            }
+                        }
+                        dl.add(content);
+                        urlStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+            model.addAttribute("pl",pl);
+            model.addAttribute("dl", dl);
         }
-        System.out.print(content);
-        model.addAttribute("content", content);
+
 
         return "/purchaseOrder/purchaseOrderView";
     }
@@ -160,8 +197,6 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("resultHtml", resultHtml);
         return "/order/alipay";
     }
-
-
 
 
     @RequestMapping({"/pay/alipay/callback"})
@@ -208,9 +243,9 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                 //@TODO 修改订单状态
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-                if (purchaseOrder ==null){
+                if (purchaseOrder == null) {
 //                    System.out.println("purchaseOrder is null,session problem");
-                    purchaseOrder = ((PurchaseOrderPayment)baseManager.getObject(PurchaseOrderPayment.class.getName(),purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
+                    purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                 }
 //                System.out.println(purchaseOrder.getId());
 
@@ -241,8 +276,8 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/cancelOrder/{orderId}"})
     public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
-            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount()+purchaseOrderProduct.getPurchaseAmount());
+        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
         }
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -272,7 +307,7 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
-        String redirect_uri = "http://master4.efeiyi.com/ef-website/order/pay/wxParam/" + orderId;
+        String redirect_uri = "http://www2.efeiyi.com/order/pay/wxParam/" + orderId;
 //        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
@@ -312,6 +347,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("paySign", jsonStr.getString("paySign"));
         model.addAttribute("signType", jsonStr.getString("signType"));
         model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
+        model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
         return "/order/wxpay";
     }
 
@@ -369,7 +405,7 @@ public class PurchaseOrderController extends BaseController {
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
-        model.addAttribute("productModel",productModel);
+        model.addAttribute("productModel", productModel);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -467,8 +503,8 @@ public class PurchaseOrderController extends BaseController {
                 purchaseOrderTemp.setTenant(tenantTemp);
                 BigDecimal bigDecimal = new BigDecimal(0);
                 for (CartProduct cartProductTemp : cartProductList) {
-                    if (cartProductTemp.getProductModel().getProduct()==null){
-                        cartProductTemp.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId()));
+                    if (cartProductTemp.getProductModel().getProduct() == null) {
+                        cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
                     }
                     if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId()) && cartProductTemp.getIsChoose().equals("1")) {
                         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
@@ -591,7 +627,7 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
         if (purchaseOrder.getCoupon() != null) {
             purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
-        }else {
+        } else {
             purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
         }
         purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
@@ -610,18 +646,18 @@ public class PurchaseOrderController extends BaseController {
             }
         }
 
-
+        String resultPage = "";
         if (payment.equals("1")) {//支付宝
-            return "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
+            resultPage = "redirect:/order/pay/alipay/" + purchaseOrderPaymentDetails.getId();
         } else if (payment.equals("3")) { //微信
             if (isWeiXin != null) {
-                return "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
+                resultPage = "redirect:/order/pay/weixin/" + purchaseOrderPaymentDetails.getId();
             } else {
-                return "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
+                resultPage = "redirect:/order/pay/weixin/native/" + purchaseOrderPaymentDetails.getId();
             }
         }
-        return "redirect:/order/choosePayment/" + purchaseOrder.getId();
-//        return "redirect:/order/pay/alipay/callback";
+        System.out.println(resultPage);
+        return resultPage;
     }
 
 
@@ -663,7 +699,7 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
         if (purchaseOrder.getCoupon() != null) {
             purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
-        }else {
+        } else {
             purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
         }
         purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
@@ -699,7 +735,17 @@ public class PurchaseOrderController extends BaseController {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);
-        return object;
+        ConsumerAddress consumerAddress = (ConsumerAddress) object;
+        consumerAddress.setStatus("2");
+
+        String hql = "select obj from " + ConsumerAddress.class.getName() + " obj where obj.status=2 and obj.consumer.id='" + consumerAddress.getConsumer().getId() + "'";
+        if (baseManager.listObject(hql) != null && baseManager.listObject(hql).size() > 0) {
+            ConsumerAddress consumerAddressTemp = (ConsumerAddress) (baseManager.listObject(hql).get(0));
+            consumerAddressTemp.setStatus("1");
+            baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddressTemp);
+        }
+        baseManager.saveOrUpdate(ConsumerAddress.class.getName(), consumerAddress);
+        return consumerAddress;
     }
 
     @RequestMapping({"/paysuccess/{orderId}"})

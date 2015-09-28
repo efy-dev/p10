@@ -1,8 +1,10 @@
 package com.efeiyi.controller;
 
+import com.efeiyi.util.MsgService;
 import com.efeiyi.util.PalConst;
-import com.efeiyi.pal.product.model.Product;
 import com.efeiyi.service.ILabelCheckManager;
+import com.efeiyi.util.WebServiceClient;
+import com.ming800.core.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,7 @@ import com.efeiyi.pal.label.model.Label;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/27.
@@ -26,6 +28,39 @@ public class LabelCheckController {
     @Qualifier("labelCheckManagerImpl")
     private ILabelCheckManager iLabelCheckService;
 
+
+    @RequestMapping(value = "/checkLabelNfc.do")
+    public ModelAndView checkLabelNfc(HttpServletRequest request) throws Exception {
+        ModelMap model = new ModelMap();
+        String code = request.getParameter(PalConst.getInstance().checkLabelParam2);
+        Label label = iLabelCheckService.getUniqueLabel(code);
+
+        // label不存在
+        if (label == null) {
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
+        }
+        //label存在
+        else {
+//            String ip = request.getRemoteHost();
+            String ip = null;
+
+            model.addAttribute(PalConst.getInstance().ip, ip);
+
+            String chk = request.getParameter("a0");
+            Integer apoid = Integer.parseInt(request.getParameter("a1"));
+
+            MsgService service = (MsgService) WebServiceClient.getFactory().create();
+            String json = (String) service.chkVerify(chk, apoid, ip);
+            Map map = JsonUtil.parseJsonStringToMap(json);
+            if (map == null || !(Boolean)map.get("verifyResult")) {
+                model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
+            } else {
+                iLabelCheckService.updateRecord(model, label, true);
+            }
+        }
+        return new ModelAndView(PalConst.getInstance().resultView, model);
+
+    }
 
     @RequestMapping(value = "/checkLabel.do")
     public ModelAndView checkLabelWap(HttpServletRequest request) throws Exception {
@@ -45,12 +80,12 @@ public class LabelCheckController {
             //请求来自pc
             if (PalConst.getInstance().labelCache.remove(code) == null) {
                 System.out.println("未扫二维码");
-                iLabelCheckService.updateRecord(model, label,true);
-            }else{
+                iLabelCheckService.updateRecord(model, label, true);
+            } else {
                 System.out.println("已扫二维码");
-                iLabelCheckService.updateRecord(model, label,false);
+                iLabelCheckService.updateRecord(model, label, false);
             }
-            model.addAttribute(PalConst.getInstance().code,code);
+            model.addAttribute(PalConst.getInstance().code, code);
         }
         return new ModelAndView(PalConst.getInstance().resultView, model);
     }
@@ -87,13 +122,13 @@ public class LabelCheckController {
     }
 
     @RequestMapping(value = "/aboutUs.do")
-    public ModelAndView aboutUs(ModelMap model,HttpServletRequest request) throws Exception{
-        return  new ModelAndView(PalConst.getInstance().aboutUsView,model);
+    public ModelAndView aboutUs(ModelMap model, HttpServletRequest request) throws Exception {
+        return new ModelAndView(PalConst.getInstance().aboutUsView, model);
     }
 
     @RequestMapping(value = "/userManual.do")
-    public ModelAndView userManual(ModelMap model,HttpServletRequest request) throws Exception{
-        return  new ModelAndView(PalConst.getInstance().userManualView,model);
+    public ModelAndView userManual(ModelMap model, HttpServletRequest request) throws Exception {
+        return new ModelAndView(PalConst.getInstance().userManualView, model);
     }
 
 }

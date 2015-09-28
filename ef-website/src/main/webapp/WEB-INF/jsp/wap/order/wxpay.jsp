@@ -13,23 +13,10 @@
 </head>
 <body>
 <%--${redirect}--%>
-<a onclick=""> 微信支付</a>
-
-<div>
-    <h2>调试部分</h2>
-
-    <div id="testContent"></div>
-</div>
 
 
 <script>
     function jsApiCall() {
-        alert("${appId}");
-        alert("${timeStamp}");
-        alert("${pk}");
-        alert("${paySign}");
-        alert("${signType}");
-        alert("${nonceStr}");
         WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',
                 {
@@ -44,11 +31,10 @@
 //                    alert(res.err_code + res.err.desc + res.err_msg);
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
                         //跳转到查看支付是否成功
-                        window.location.href = "<c:url value="/"/>";
+                        window.location.href = "<c:url value="/order/myEfeiyi/view/${orderId}"/>";
                     }
                     else {
-
-                            window.location.href = "/";
+                            window.location.href = "<c:url value="/order/myEfeiyi/view/${orderId}"/>";
                     }
                 }
         );

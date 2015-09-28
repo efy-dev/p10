@@ -124,10 +124,10 @@
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                    <c:if test="${object.status=='1'}">
+                    <c:if test="${object.type=='1'}">
                         普通
                     </c:if>
-                    <c:if test="${object.status=='2'}">
+                    <c:if test="${object.type=='2'}">
                         精品
                     </c:if>
                     <!--<small>必填项*</small>-->
@@ -187,6 +187,7 @@
                             <textarea id="productDescription" name="content" class="ckeditor" id="content"
                                       placeholder="商品描述" required >
                                 ${object.productDescription.content}
+
                             </textarea>
                 </div>
             </form>
@@ -324,7 +325,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                         </dl>
                                     </li>
@@ -378,7 +379,7 @@
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
                                             </dd>
                                             <dd style="width: 100%;text-align: center;" >
-                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}">复制图片地址</a>
+                                                <a href="javascript:void(0);"  class="copy" url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
                                             <%--<dd style="width: 100%;text-align: center;" >--%>
                                                     <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
@@ -417,6 +418,7 @@
 <!-- content end -->
 <hr/>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
+<%--<script src="<c:url value='/scripts/new_ckeditor/ckeditor.js'/>"></script>--%>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
 
@@ -496,7 +498,6 @@ var modelIds = [];
     var  modelNames = [];
     $(function(){
 
-
         CKEDITOR.replace('content', { height: '440px', width: '1000px' });
         $(".copy").each(function(){
             copyInit($(this));
@@ -532,7 +533,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask";
 //                ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +
@@ -622,7 +623,7 @@ var modelIds = [];
                 var  imgUrl = data.split(":")[1];
                 var  imgName = data.split(":")[2];
                 var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
-                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl;
+                var  trueUrl = "http://pro.efeiyi.com/"+imgUrl+"@!water-mask";
                 ///图片信息
 //                var tr = '<tr name = "'+pictureId+'">' +
 //                        ' <td>  ' +

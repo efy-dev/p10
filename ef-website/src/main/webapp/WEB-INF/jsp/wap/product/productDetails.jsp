@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -134,14 +135,12 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
+        <a class="btn-default" href="#进店" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
-            <a class="btn-cart" data-am-modal="{target: '#my-actions'}" title="放入购物车"><i
-                    class="icon"></i>放入购物车</a>
-        <a class="btn-buy"data-am-modal="{target: '#my-actions'}" title="立即购买">立即购买</a>
+        <a class="btn-cart" href="#放入购物车" title="放入购物车"><i class="icon"></i>放入购物车</a>
+        <a class="btn-buy" href="#立即购买" title="立即购买">立即购买</a>
     </div>
 </article>
-
 <div class="am-modal-actions dialog-des-format" id="my-actions">
     <div class="bd ">
         <dl class="bd dl-des">
@@ -152,14 +151,16 @@
             <dd>规格</dd>
         </dl>
         <ul class="bd ul-nav">
-            <c:forEach items="${productModel.product.productModelList}" var="pm">
-                <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
-                        ${pm.product.name} <c:forEach
-                        items="${pm.productPropertyValueList}" var="pv">
-                    ${pv.projectPropertyValue.value}
+            <c:if test="${fn:length(productModelList) >1}">
+                <c:forEach items="${productModel.product.productModelList}" var="pm">
+                    <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
+                            ${pm.product.name} <c:forEach
+                            items="${pm.productPropertyValueList}" var="pv">
+                        ${pv.projectPropertyValue.value}
+                    </c:forEach>
+                    </a></li>
                 </c:forEach>
-                </a></li>
-            </c:forEach>
+            </c:if>
             <%--<li><a href="#规格2">规格2</a></li>--%>
             <%--<li><a href="#规格1">规格1</a></li>--%>
             <%--<li><a href="#规格2">规格2</a></li>--%>
@@ -180,6 +181,7 @@
         </c:if>
     </div>
 </div>
+<div class="am-dimmer am-active" data-am-dimmer="" style="display: none;"></div>
 <script type="text/javascript">
     function getStatus(o) {
         $.ajax({
@@ -188,7 +190,8 @@
             url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
             dataType: 'json',
             success: function (data) {
-                if(data==true){
+                if(data==false){
+                    window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
                 }
             },
         });
@@ -200,6 +203,19 @@
             $(this).css("width","100%");
         })
 
+    })
+</script>
+<script>
+    $(function(){
+        $('.btn-cart,.btn-format,.btn-buy').click(function(){
+            $('.dialog-des-format').css({'-webkit-transform':'translateY(0)'});
+            $('.am-dimmer').show();
+            $('.am-active').click(function(){
+                $('.dialog-des-format').css({'-webkit-transform':'translateY(110%)'});
+                $('.am-dimmer').hide();
+            })
+            return false;
+        })
     })
 </script>
 </body>

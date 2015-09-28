@@ -121,17 +121,17 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">下单人姓名</td>
-                <td class="am-u-md-3">${object.user.username}</td>
+                <td class="am-u-md-3">${object.user.bigUser.username}</td>
                 <td class="am-primary am-u-md-3">性别</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="sex" dataType="consumer.sex" checkedValue="${object.user.sex}" type="normal"/>
+                    <ming800:status name="sex" dataType="consumer.sex" checkedValue="${object.user.bigUser.sex}" type="normal"/>
                 </td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
-                <td class="am-u-md-3">${object.user.deposit}</td>
+                <td class="am-u-md-3">${object.user.bigUser.deposit}</td>
                 <td class="am-primary am-u-md-3">积分</td>
-                <td class="am-u-md-3">${object.user.score}</td>
+                <td class="am-u-md-3">${object.user.bigUser.score}</td>
             </tr>
             </tbody>
         </table>
@@ -238,7 +238,7 @@
                 <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                 <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                    pattern="yyyy-mm-dd"/>
+                                    pattern="yyyy-MM-dd"/>
                 </td>
                 </tr>
             </c:forEach>

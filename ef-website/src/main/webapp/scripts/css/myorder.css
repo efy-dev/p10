@@ -334,6 +334,108 @@ a:hover{text-decoration: underline}
 .efeiyi-cart a.btn-settle:hover{background: #000;color: #fff;transition: all 0.5s;text-decoration: none}
 .efeiyi-cart .settle-hd{height: 68px;}
 .efeiyi-cart .settle .settle-cll{color:#003366;}
+
+.efeiyi-cart .title table td .cart-info {
+    width:100%;
+    padding-right: 30px;
+    line-height:20px;
+    text-align: right;
+    float: right;
+    position: relative;
+}
+.efeiyi-cart .title table td .coupon {
+    width:100%;
+    padding-right: 30px;
+    line-height:20px;
+    float: right;
+    position: relative;
+    margin-top: 10px;
+}
+.efeiyi-cart .title table td .coupon .btn-coupon {
+    width:80px;
+    height:25px;
+    line-height: 25px;
+    float: right;
+    border: 1px solid #000;
+    text-align: center;
+    position: relative;
+}
+.efeiyi-cart .title table td .coupon .btn-coupon.active .icon {
+    background-position: -247px -110px;
+}
+
+
+.efeiyi-cart .title table td .coupon .icon {
+    background-position:-238px -110px;
+    width: 9px;
+    height:5px;
+    display: inline-block;
+    margin-left:6px;
+    position: relative;
+    top:-1px;
+}
+.efeiyi-cart .title table td .coupon .btn-coupon:hover {
+    text-decoration: none;
+}
+.efeiyi-cart .title table td .coupon .ul-list {
+    background: #fff;
+    width:350px;
+    position: absolute;
+    top:14px;
+    right:30px;
+    padding:23px 20px;
+    border: 1px solid #000;
+    display: none;
+}
+.efeiyi-cart .title table td .coupon .ul-list li {
+    position: relative;
+    padding-left:126px;
+    padding-right:70px;
+    line-height:26px;
+    margin-bottom:20px;
+    color: #000;
+}
+.efeiyi-cart .title table td .coupon .ul-list li img {
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.efeiyi-cart .title table td .coupon a {
+    width: 65px;
+    height:25px;
+    line-height:25px;
+    text-align:center;
+    border:1px solid #000;
+    position:absolute;
+    top:50%;
+    right:0;
+    margin-top:-10px;
+    background: #fff;
+}
+.efeiyi-cart .title table td .coupon .ul-list li a:hover {
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+}
+.efeiyi-cart .title table td .coupon a.btn-drawed {
+
+}
+.efeiyi-cart .title table td .coupon .ul-list li:last-child {
+    margin-bottom: 0;
+}
+.efeiyi-cart .title table td .coupon .ul-list li.active {
+    color: #999;
+}
+.efeiyi-cart .title table td .coupon .ul-list li.active .btn-drawed {
+    color: #999;
+    border: 1px solid #999;
+    cursor: not-allowed;
+}
+
+
+
+
+
 /*购物车缺货页面*/
 .oss{width: 1000px;height: 85px;margin: 70px auto 0;border: 1px solid #ccc;text-align: center;line-height: 70px;}
 .oss span{font-size: 14px;color:#ff0000;}
@@ -733,3 +835,33 @@ a:hover{text-decoration: underline}
 .max-four .five-max{position: fixed;right: 0;top:0}
 .max-four .logo-four{width: 158px;height: 191px;background: url('../images/efeiyicuowu.png') no-repeat right -405px;float: right;margin-top: 234px;}
 /*404错误信息*/
+.header .nav-links{width: 614px;padding: 33px 53px;left: -398px;}
+.header .nav-links ul{width: 122px;}
+/*shangpin-xiangqing(gai)*/
+/*.product-intro .itemInfo .itme-ext .name{margin-top: 0px;margin-bottom: 26px;}*/
+/*.product-intro .itemInfo .itme-ext .name p{margin-bottom: 14px;}*/
+/*.product-intro .itemInfo .itme-ext .master-name{padding-left: 53px;width: 100%;position: relative;margin-bottom: 27px;}*/
+/*.product-intro .itemInfo .itme-ext .master-name p{color: #999;}*/
+/*.product-intro .itemInfo .itme-ext .master-name p span{color: #000!important;margin-right: 7px;}*/
+/*.product-intro .itemInfo .itme-ext .master-name .p1{font-size: 14px;}*/
+/*.product-intro .itemInfo .itme-ext .master-name .p2{font-size: 12px;}*/
+/*.product-intro .itemInfo .itme-ext .master-name .master-img-pt{width: 40px;height: 40px;position: absolute;top: 0;left: 0;}*/
+/*.product-intro .itemInfo .itme-ext .master-name .master-img-pt img{width: 100%;}*/
+/*.product-intro .itemInfo .itme-ext .master-cost{width: 100%;margin-bottom: 26px;float: left}*/
+/*.product-intro .itemInfo .itme-ext .master-cost p{font-size: 12px;color: #000;}*/
+/*.product-intro .itemInfo .itme-ext .master-cost p del{color: #999;}*/
+/*.product-intro .itemInfo .itme-ext .master-cost p span{font-size: 36px;float: left}*/
+/*.product-intro .itemInfo .itme-ext .master-cost p strong{float: left;font-size: 14px;}*/
+/*.product-intro .itemInfo .itme-ext .des .ul-list li:hover a, .product-intro .itemInfo .itme-ext .des .ul-list li.active a{background: #333;}*/
+/*.product-intro .colour{padding-right: 8px;float: left;font-size: 12px;color: #000;}*/
+/*.product-intro .itemInfo .itme-ext .des .ul-list li{border: 1px solid #333;margin-bottom: 4px;margin-right: 9px;}*/
+/*.product-intro .colour-page{float: left;width: 208px;font-size: 12px;}*/
+/*.product-intro .itemInfo .preview{margin-left:0;}*/
+/*.product-intro .ul-list{width: 100%;}*/
+/*.product-intro .itemInfo .itme-ext .des{margin-bottom:15px; }*/
+/*.product-intro .itemInfo .itme-ext .des .ul-list li a{padding:0 8px;}*/
+/*.product-intro .itemInfo .itme-ext .amount{border: 1px solid #000;padding: 2px 0;}*/
+/*.product-intro .colour-page .btn-add{margin: 5px 0;border-right: 1px solid #000;padding:0 8px;color: #000;text-decoration: none}*/
+/*.product-intro .colour-page .txt{width: 58px;padding: 2px 5px;text-align: center;font-size: 12px;}*/
+/*.product-intro .itemInfo .itme-ext .amount{width: 131px;}*/
+/*.product-intro .colour-page .btn-sub{margin: 5px 0;border-left: 1px solid #000;padding:0 7px;color: #000;text-decoration: none}*/

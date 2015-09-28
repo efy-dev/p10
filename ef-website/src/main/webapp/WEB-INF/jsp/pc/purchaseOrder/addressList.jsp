@@ -39,7 +39,9 @@
                                         </select>
                                         <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
                                         </select>
+                                        <span class="active-d span2" id="hao" style="border: 0;color: #000"></span>
                                     </form>
+
                                 </li>
                                 <li>
                                     <label>详细地址：</label>
@@ -51,7 +53,7 @@
                                 </li>
                                 <li>
                                     <label></label>
-                                    <input type="submit" class="dj-btn" value="保存收货人信息">
+                                    <input type="button" onclick="sm()" class="dj-btn" value="保存收货人信息">
                                 </li>
                             </ul>
                         </form>
@@ -202,6 +204,16 @@
 
 <script>
 
+    function sm(){
+        var province=$("#provinceVal").val();
+        var city=$("#cityVal").val();
+        if(province=="请选择"||city=="请选择"){
+            $("#hao").html("省市不能为空");
+        }else {
+            $("#addAddress").submit();
+            $("#hao").html("");
+        }
+    }
     $(function () {
         $("#add").click(function () {
             $(this).siblings('.active-pop').show();

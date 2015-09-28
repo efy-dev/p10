@@ -1,11 +1,14 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import org.jboss.marshalling.util.BooleanReadField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,12 +60,11 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(ProductModel productModel:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(productModel.getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
                 if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
+                    s = new StringBuilder(s.substring(0,10));
                     s.append("...");
                 }
                 map.put(productModel,s.toString());
@@ -93,14 +95,20 @@ public class ProductController {
      */
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
-    public boolean addProductFavorite(HttpServletRequest request) throws Exception{
-        String productModelId =request.getParameter("id");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-        xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
-        xSaveOrUpdate.getParamMap().remove("id");
-        baseManager.saveOrUpdate(xSaveOrUpdate);
-        return true;
+    public boolean addProductFavorite(HttpServletRequest request) throws Exception {
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = true;
+        if (currentUser.getId() != null) {
+            String productModelId = request.getParameter("id");
+            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite", request);
+            xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
+            xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
+            xSaveOrUpdate.getParamMap().remove("id");
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+        } else {
+         flag = false;
+        }
+        return flag;
     }
     /**
      * 爆款推荐
@@ -116,7 +124,6 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(((ProductModel) productModelTemp).getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
@@ -137,7 +144,14 @@ public class ProductController {
     @RequestMapping({"/removeProductFavorite.do"})
     @ResponseBody
     public boolean removeProductFavorite(HttpServletRequest request) throws Exception{
-        baseManager.remove(ProductFavorite.class.getName(),request.getParameter("productFavoriteId"));
+        String productModelId = request.getParameter("id");
+        XQuery xQuery = new XQuery("listProductFavorite_default",request);
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        xQuery.put("user_id", currentUser.getId());
+        xQuery.put("productModel_id",productModelId);
+        List<Object> productFavoriteList =  baseManager.listObject(xQuery);
+        ProductFavorite p = (ProductFavorite)productFavoriteList.get(0);
+        baseManager.remove(ProductFavorite.class.getName(),p.getId());
         return true;
     }
 

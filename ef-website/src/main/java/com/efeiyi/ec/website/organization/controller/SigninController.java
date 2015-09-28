@@ -112,7 +112,7 @@ public class   SigninController extends BaseController {
         /*bigUser.setRoleType("user");             //system,    admin,    user*/
         bigUser.setCreateDatetime(new Date());
 
-        baseManager.saveOrUpdate(BigUser.class.getName(), bigUser);
+        baseManager.saveOrUpdate(Consumer.class.getName(), bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
@@ -246,7 +246,7 @@ public class   SigninController extends BaseController {
 
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
-        String redirect_uri = "http://master4.efeiyi.com//wx/bind";
+        String redirect_uri = "http://www2.efeiyi.com/wx/bind";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +

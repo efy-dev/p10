@@ -44,7 +44,7 @@
     <div class="bd pep-info">
       <div class="bd txt">
         <p class="txt-price"><em>￥</em><span>${productModel.price}</span></p>
-        <p class="txt-name"><strong>${productModel.product.master.fullName}●${productModel.product.name}</strong></p>
+        <p class="txt-name"><strong>${productModel.name}</strong></p>
         <p class="txt-des">${map.get(productModel)}</p>
       </div>
 
@@ -68,32 +68,19 @@
   <div class="bd list-class">
     <ul class="ul-list">
       <c:forEach items="${productModelList}" var="productModel" begin="0" end="7" varStatus="rec">
-        <a href="<c:url value='/product/productModel/${productModel.id}'/>"  title="">
-        <li>
 
-        <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
+        <li>
+          <a href="<c:url value='/product/productModel/${productModel.id}'/>" style="color: #000" title="">
+         <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
         <p class="name">${productModel.name}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
-
+          </a>
       </li>
-        </a>
+
       </c:forEach>
     </ul>
   </div>
 </artice>
-
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../shop2015/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
-<!--自定义js--Start-->
-<script src="../shop2015/js/system.js?v=20150831"></script>
-<!--自定义js--End-->
 </body>
 </html>
