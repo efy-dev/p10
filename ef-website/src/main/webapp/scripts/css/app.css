@@ -227,6 +227,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .collect span.txt {width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center}
 
 .product-intro .zoom-section {
+    width:800px;
     position: absolute;
     top:0;
     left:50%;
@@ -322,9 +323,9 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .tab-wrap .btns .buy:hover {background:#000;color:#fff}
 .product-intro .am-sticky-placeholder {background:none}
 .product-intro .detail {padding-bottom:70px;position:relative}
-.product-intro .detail .title {text-align:center;padding:30px 0}
+.product-intro .detail .title {text-align:center;padding:40px 0}
 .product-intro .detail .title h3 {width:20px;line-height:34px;font-style:italic;display:inline-block;font-size:24px;font-weight:bold}
-.product-intro .detail .part {width:1000px;padding:0 100px;font-size:12px;color:#666;float:left;box-sizing:content-box;border-bottom:1px #b2b2b2 solid}
+.product-intro .detail .part {width:1000px;padding:0 100px 70px 100px;font-size:12px;color:#666;float:left;box-sizing:content-box;border-bottom:1px #b2b2b2 solid}
 .product-intro .detail .part p,.product-intro .detail .part li,.product-intro .detail .part h4,.product-intro .detail .part span,.product-intro .detail .part strong{}
 .product-intro .detail .part h4 {width:100%;float:left;margin-bottom:36px;font-weight:normal}
 .product-intro .detail .part li {width:100%;line-height:24px;float:left}
@@ -332,9 +333,19 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .detail .part .des-title{width:100%;line-height:40px;height:40px;float:left;margin-bottom:35px;position:relative;}
 .product-intro .detail .part .des-title strong{padding:0 20px;font-size:20px;font-family:"Microsoft YaHei";color:#000;position:absolute;top:0;left:16px;z-index:2;background:#fff;float:left;}
 .product-intro .detail .part .des-title .icon{width:9px;height:20px;position:absolute;top:50%;margin-top:-8px;}
-.product-intro .detail .part .des-title .icon-title-left{background-position:-218px-95px;left:5px;}
+.product-intro .detail .part .des-title .icon-title-left{background-position:-218px -95px;left:5px;}
 .product-intro .detail .part .des-title .icon-title-right{background-position:-229px -95px;right:5px}
 .product-intro .detail .part .des-title .line {width:100%;height:3px;position:absolute;top:50%;left: 0;background: #000;z-index: 1}
+.product-intro .detail .part .discuss{margin-top:20px;}
+.product-intro .detail .part .discuss .dis-con .dis-title{font-size:18px;color:#000;margin-bottom:20px;}
+.product-intro .detail .part .discuss .dis-con li{padding-right:453px;position:relative;border-bottom:1px solid #ebebeb;margin-bottom:20px;}
+.product-intro .detail .part .discuss .dis-con li .txt{width:540px;color:#000;font-size:14px;line-height:24px;float:left;margin-bottom:10px;}
+.product-intro .detail .part .discuss .dis-con li .txt p{width:100%;padding:0;float:left;}
+.product-intro .detail .part .discuss .dis-con li .star{width:210px;position:absolute;top:50%;right:243px;text-align:center;}
+.product-intro .detail .part .discuss .dis-con li .user{width:243px;line-height:40px;position:absolute;top:50%;right:0;margin-top:-20px;font-size:14px;color:#000;}
+.product-intro .detail .part .discuss .dis-con li .user .icon{background-position:-136px -143px;width:40px;height:40px;float:left;margin-right:10px;}
+.product-intro .detail .part .discuss .dis-con li .txt .time{font-size:12px;float:left;}
+.product-intro .detail .part .discuss .dis-con li .txt .time span{float:left;margin-right:20px;color:#999;}
 .product-intro .detail .spe1 li {padding:0 20px}
 .product-intro .detail .spe1 span {float:left;word-wrap:break-word;word-break:normal}
 .product-intro .detail .spe1 strong {width:84px;float:left;margin-right:120px}
@@ -342,7 +353,7 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .detail .spe2 li {margin-bottom:36px}
 .product-intro .detail .spe3 li {margin-bottom:70px}
 .product-intro .detail .spe4 h4 {margin-top:70px}
-.product-intro .detail .feeling {width:100%;padding-bottom:70px;float:left}
+.product-intro .detail .feeling {width:100%;float:left}
 .product-intro .detail .feeling .info {width:694px;border:5px #999 solid;float:left;padding:30px 55px;margin:0 93px;;box-sizing:content-box;font-size:12px;color:#666}
 .product-intro .detail .feeling .info .tbar .icon {background-position:-164px -50px;width:17px;height:15px;display:inline-block;position:relative;top:4px;margin-right:5px}
 .product-intro .detail .feeling .info .txt p {width:100%;float:left;margin-bottom:35px}
