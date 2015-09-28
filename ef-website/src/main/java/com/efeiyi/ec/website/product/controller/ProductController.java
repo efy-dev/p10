@@ -124,7 +124,6 @@ public class ProductController {
         if(productModelList!=null&&productModelList.size()>0){
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(((ProductModel) productModelTemp).getProduct().getName());
                 for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
                     s.append(productPropertyValue.getProjectPropertyValue().getValue());
                 }
