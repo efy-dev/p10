@@ -27,9 +27,9 @@
         </jnode>
     </jnode>
 
-    <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗名录">
-        <jnode url="/myBanner/ba.do?qm=news_default" access="admin,manager" text_zh_CN="非遗名录">
-        </jnode>
+    <jnode id="AuthorityManagement" url="/project/project.do?qm=listAddressProvince_default" text_zh_CN="非遗名录">
+        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="项目"/>
+        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="传承人"/>
     </jnode>
 
     <jnode id="AuthorityManagement" url="/main.do?jnodeId=AuthorityManagement" text_zh_CN="非遗保护">
