@@ -76,10 +76,10 @@
               <p class="wh name">
                 ${productModel.product.name}
                 <c:if test="${fn:length(map.get(productModel))>'10'}">
-                  [${fn:substring(map.get(productModel),"0","10")}...]
+                  ${fn:substring(map.get(productModel),"0","10")}...
                 </c:if>
                 <c:if test="${fn:length(map.get(productModel))<='10'}">
-                 [${map.get(productModel)}]
+                 ${map.get(productModel)}
                 </c:if>
               </p>
               <p class="wh price">￥${productModel.price}</p>

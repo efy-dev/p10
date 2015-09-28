@@ -174,7 +174,7 @@
       <div class="des">
         <div class="colour">发货地：</div>
         <div class="colour-page">
-          <span>${product.tenant.address}（有货）  包邮</span>
+          <span>${product.tenant.address}  包邮</span>
         </div>
       </div>
       <div class="des">
