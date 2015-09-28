@@ -1,9 +1,15 @@
 $(function(){
     //头部无logoA
     $('#menu').click(function(){
-        $(this).find('.line').toggleClass('active');
-        $('.menu-list').slideToggle('fast');
+        $(this).hide();
+        $('#menu2').show();
+        $('.menu-list').slideDown();
     });
+    $('#menu2').click(function() {
+        $(this).hide();
+        $('#menu').show();
+        $('.menu-list').slideUp();
+    })
     //
     //动态--关注--分类导航
     (function(){
@@ -14,10 +20,10 @@ $(function(){
             $(this).addClass('active').siblings('.item').removeClass('active');
             tabsBd.eq(index).show().siblings('.am-tab-panel').hide();
         })
-        tabsNav.find('.item-class').click(function(){
-            tabsNav.hide().siblings('.tabs-nav-2').show();
-            return false
-        })
+        //tabsNav.find('.item-class').click(function(){
+        //    tabsNav.hide().siblings('.tabs-nav-2').show();
+        //    return false
+        //})
     })();
 
     //大师---作品

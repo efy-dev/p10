@@ -2,6 +2,7 @@ package com.efeiyi.ec.organization.model;
 
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import java.util.*;
  */
 @Entity
 @Table(name = "organization_user")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     private String id;

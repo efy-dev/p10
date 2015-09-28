@@ -1,9 +1,13 @@
 package com.efeiyi.ec.wiki.base.controller;
 
+import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterFollowed;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.model.Praise2Product;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -17,10 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/7/31.
@@ -156,8 +157,115 @@ public class WikiIndexController extends WikibaseController {
     public ModelAndView getBrifProject( HttpServletRequest request,Model model)throws Exception{
            String projectId = request.getParameter("projectId");
            Project project = (Project)baseManager.getObject(Project.class.getName(),projectId);
+        boolean flag = checkIsAttention(request, model);//判断用户是否已经关注该项目
+        model.addAttribute("flag",flag);
            model.addAttribute("project",project);
         return new ModelAndView("/project/brifProject");
+    }
+
+
+    @RequestMapping("/IsattentionMaster.do")
+    @ResponseBody
+    public boolean IsattentionMaster( HttpServletRequest request,Model model)throws Exception{
+        boolean flag = false;
+        String masterId = request.getParameter("masterId");
+        if (AuthorizationUtil.getMyUser().getId()!= null){
+            XQuery xQuery = new XQuery("listMasterFollowed_check",request);
+            xQuery.put("master_id",masterId);
+            xQuery.put("user_id",AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> list =  baseManager.listObject(xQuery);
+            if (list!= null || list.size()>=1){
+                flag = true;
+            }
+        }
+
+        return  flag;
+    }
+
+
+    @RequestMapping("/attentionMaster.do")
+    @ResponseBody
+    public boolean saveMasterFollows( HttpServletRequest request, Model model)throws Exception{
+        String masterId = request.getParameter("masterId");
+        MasterFollowed masterFollowed = new MasterFollowed();
+        MyUser user= AuthorizationUtil.getMyUser();
+        if (user.getId()==null){
+            return false;
+        }
+        masterFollowed.setUser(user);
+        Master master = (Master)baseManager.getObject(Master.class.getName(),masterId);
+        masterFollowed.setCreateDateTime(new Date());
+        masterFollowed.setMaster(master);
+        masterFollowed.setStatus("1");
+        masterFollowed.setUser(user);
+        //这里需要同步更新master的粉丝数量字段，待大师项目跟进后修改
+        baseManager.saveOrUpdate(MasterFollowed.class.getName(),masterFollowed);
+
+        return true;
+    }
+
+    @RequestMapping("/showProduct.do")
+    public ModelAndView showProduct( HttpServletRequest request,Model model)throws Exception{
+        String productId = request.getParameter("productId");
+        Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+        boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
+        model.addAttribute("flag",flag);
+        model.addAttribute("product",product);
+        return new ModelAndView("/product/brifProduct");
+    }
+
+
+    public boolean IsattentionMaster2( HttpServletRequest request,String userid)throws Exception{
+        boolean flag = false;
+        if (AuthorizationUtil.getMyUser().getId()!= null){
+            XQuery xQuery = new XQuery("listMasterFollowed_check",request);
+            xQuery.put("master_id",userid);
+            xQuery.put("user_id",AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> list =  baseManager.listObject(xQuery);
+            if (list!= null || list.size()>=1){
+                flag = true;
+            }
+        }
+        return  flag;
+    }
+
+
+
+    @RequestMapping("/saveThumbUp.do")
+    @ResponseBody
+    public boolean savaUP( HttpServletRequest request, Model model)throws Exception{
+        String productId = request.getParameter("productId");
+        MyUser user= AuthorizationUtil.getMyUser();
+        if (user.getId()==null){
+            return false;
+        }
+        Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+        Praise2Product praise2Product = new Praise2Product();
+        String oper = request.getParameter("operation");
+        if (oper!=null && oper.equalsIgnoreCase("up")){
+            praise2Product.setUser(user);
+            praise2Product.setProduct(product);
+            baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
+            product.setFsAmount(product.getFsAmount()==null?1:product.getFsAmount()+1);
+            baseManager.saveOrUpdate(Product.class.getName(),product);
+        }
+
+
+        if (oper!=null && oper.equalsIgnoreCase("down")){
+            String queryHql ="from Praise2Product t where t.user.id=:userId and t.product.id=:productId";
+            LinkedHashMap<String,Object> map = new LinkedHashMap<>();
+            map.put("userId",user.getId());
+            map.put("productId",product.getId());
+            Praise2Product praise2Product1 = (Praise2Product)baseManager.getUniqueObjectByConditions(queryHql,map);
+            if (praise2Product1!= null && praise2Product1.getId()!=null)//不为null,说明已经点过赞了，可以取消点赞
+            baseManager.delete(Praise2Product.class.getName(),praise2Product1.getId());
+            product.setFsAmount(product.getFsAmount() == null ? 0 : product.getFsAmount() - 1);
+            baseManager.saveOrUpdate(Product.class.getName(),product);
+        }
+
+
+
+        return true;
     }
 
 
