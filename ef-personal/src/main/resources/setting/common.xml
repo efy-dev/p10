@@ -6,5 +6,6 @@
         <recommend group="masterSkillRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="技艺大师推荐" amount="12"/>
         <recommend group="masterArtRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="美术大师推荐" amount="9" />
         <recommend group="masterWorkRecommended" recommendedModel="com.efeiyi.ec.master.model.MasterWork" note="大师作品推荐" amount="3" />
+        <recommend group="masterRecommended" recommendedModel="com.efeiyi.ec.master.model.Master" note="大师作品推荐" amount="6" />
     </recommends>
 </common>
