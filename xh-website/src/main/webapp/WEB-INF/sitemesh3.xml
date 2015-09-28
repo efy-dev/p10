@@ -3,6 +3,7 @@
     <mapping path="/news*" decorator="/layouts/secondary.jsp"/>
     <mapping path="/association/*.do" decorator="/layouts/secondary.jsp"/>
     <mapping path="/project/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/organization/*.do" decorator="/layouts/secondary.jsp"/>
     <!--<mapping path="/content/**" decorator="/layouts/news.jsp"/>-->
     <!--<mapping path="/login.jsp" decorator="/layouts/iframe.jsp"/>-->
     <!--<mapping path="/" decorator="/layouts/main.jsp"/>-->

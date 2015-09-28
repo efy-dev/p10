@@ -186,7 +186,7 @@
                 </field>
             </fields>
             <does>
-                <do name="plistCommitteeAssociation" access="" label="委员会名录管理" result="" data="committeeAss">
+                <do name="plistCommitteeAssociation" access="" label="专业委员会" result="" data="committeeAss">
                     <query name="default" label="默认" type="auto" orderBy="">
                         <condition name="group" defaultValue="committeeAss" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
