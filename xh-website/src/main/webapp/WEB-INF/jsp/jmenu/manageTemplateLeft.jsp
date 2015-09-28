@@ -11,11 +11,11 @@
     <div class="hd">
         <ul class="ul-list">
             <c:forEach items="${jmenu.children}" var="jmenuNode">
-                <c:if test="${children.id== matchJnode.id}">
+                <c:if test="${currentJnode.id== jmenuNode.id}">
                     <li class="items active"><a href="${jmenuNode.url}" title=""
                                                 target="_parent">${jmenuNode.text_zh_CN}</a></li>
                 </c:if>
-                <c:if test="${children.id!= matchJnode.id}">
+                <c:if test="${currentJnode.id!= jmenuNode.id}">
                     <li>
                         <a href="${jmenuNode.url}" title="" target="_parent">${jmenuNode.text_zh_CN}</a>
                     </li>

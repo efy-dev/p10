@@ -229,6 +229,7 @@
     var payment = "1";
     var consumerAddress = $("#hiddenId").text();
     var totalPrice = $("#change").text();
+    var orderId = "${purchaseOrder.id}";
 
     $(function () {
         $.ajax({
@@ -244,7 +245,7 @@
                     var out = '';
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
-                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + (i + 1) + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + formatDate(data[i]["couponBatch"]["startDate"]) + '至' + formatDate(data[i]["couponBatch"]["endDate"]) + '</p>' + '<p>适用范围：全网通用</p> </li>';
                     }
                     $("#ul-list").html(out);
@@ -258,15 +259,39 @@
     })
 
     function yhq() {
-        var t_price = parseInt(totalPrice);
-        var chkobjs = document.getElementsByName("radio");
-        for (var i = 0; i < chkobjs.length; i++) {
-            if (chkobjs[i].checked) {
-                t_price = t_price - parseInt(chkobjs[i].value);
+        var couponid = null;
+        $("input:radio").each(function(){
+            if(this.checked){
+                couponid = $(this).attr("id");
             }
-        }
-        $("#change").text(t_price);
-        $(".yhq").hide();
+        })
+        var couponId = couponid.substring(4,couponid.length);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/coupon/use.do"/>',
+            dataType: 'json',
+            data: {
+                couponId: couponId,
+                orderId: orderId
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    var t_price = parseInt(totalPrice);
+                    var chkobjs = document.getElementsByName("radio");
+                    for (var i = 0; i < chkobjs.length; i++) {
+                        if (chkobjs[i].checked) {
+                            t_price = t_price - parseInt(chkobjs[i].value);
+                        }
+                    }
+                    $("#change").text(t_price);
+                    $(".yhq").hide();
+                }
+            },
+
+        });
+
     }
 
     function add_Address() {

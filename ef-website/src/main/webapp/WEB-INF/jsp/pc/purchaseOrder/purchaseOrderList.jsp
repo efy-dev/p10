@@ -103,10 +103,10 @@
                 <table class="item">
                   <td width="237">
                     <div class="cols1">
-                      <img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt="">
+                      <a href="<c:url value="/product/productModel/${op.productModel.id}"/>"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                       <div class="info">
-                        <p><a href="#">${op.productModel.product.project.projectCategory.name}</a></p>
-                        <p><a href="#">${op.productModel.product.name}</a></p>
+                        <p><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.project.projectCategory.name}</a></p>
+                        <p><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}</a></p>
                       </div>
                     </div>
                   </td>

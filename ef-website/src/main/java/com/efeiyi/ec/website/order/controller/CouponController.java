@@ -77,7 +77,7 @@ public class CouponController {
         String orderId = request.getParameter("orderId");
         String couponId = request.getParameter("couponId");
         PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        Coupon coupon = (Coupon)baseManager.getObject(PurchaseOrder.class.getName(),couponId);
+        Coupon coupon = (Coupon)baseManager.getObject(Coupon.class.getName(),couponId);
 
         purchaseOrder.setCoupon(coupon);
 

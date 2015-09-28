@@ -23,6 +23,7 @@ public class PalConst {
     private static PalConst instance;
 
     public String checkLabelParam1 = "serial";                      //标签ID
+    public String checkLabelParam2 = "code";                      //nfc防伪码
     public String productId = "id";                          //商品ID
 //    public String queryRecheckLabelColumn = "id";                //二次查询码被访问次数时绑定的字段
 
