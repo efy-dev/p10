@@ -22,4 +22,6 @@ public interface ProductManager {
 
     Product saveProductModel(ProductModelBean productModelBean) throws  Exception;
 
+    Product setProductStatus(String status,String id);
+
 }

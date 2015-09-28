@@ -303,8 +303,8 @@
         });
         for(var i=0;i<obj.length;i++){
           if($("#Project span[id='"+obj[i].project.id+"']").length==0){
-            var span = '<span style="margin-left: 10px;" id="'+obj[i].project.id+'">'+
-                    '     <input type="radio" flag="0" value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
+            var span = '<span style="margin-left: 10px;" flag="0" id="'+obj[i].project.id+'">'+
+                    '     <input type="radio"  value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
                     ' </span>';
             $("#Project").append(span);
           }

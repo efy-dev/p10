@@ -21,8 +21,8 @@ import java.util.List;
  * Created by Administrator on 2015/9/14.
  */
 @Controller
-@RequestMapping("/organization")
-public class OrganizationController {
+@RequestMapping("/protection")
+public class ProtectionController {
     @Autowired
     private BaseManager baseManager;
 
@@ -35,7 +35,7 @@ public class OrganizationController {
     private XdoSupportManager xdoSupportManager;
 
 
-    @RequestMapping({"/organization.committee.do","/organization.association.do","/organization.member.do"})
+    @RequestMapping({"/protection.do"})
     public List<Document> news(HttpServletRequest request, ModelMap modelMap) throws Exception {
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
@@ -65,7 +65,7 @@ public class OrganizationController {
         }
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
-//        modelMap.put("group", tempDo.getData());
+        modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }
 
