@@ -110,7 +110,7 @@ a:hover {color:#f00;text-decoration:underline}
 /*--//End--explain--*/
 .category .list-pro {width:100%;float:left;overflow:hidden}
 .category .list-pro .ul-item {width:1250px;float:left;overflow:hidden}
-.category .list-pro .ul-item li {width:280px;float:left;margin-top:45px;padding-bottom:45px;border-bottom:1px #cdcdcd solid;margin-right:27px;position:relative}
+.category .list-pro .ul-item li {width:280px;float:left;padding-bottom:45px;border-bottom:1px #cdcdcd solid;margin-right:27px;position:relative}
 .category .list-pro .ul-item li .tips {height:17px;line-height:17px;padding:0 5px;position:absolute;top:6px;left:0;z-index:2;background:#f00;font-size:12px;color:#fff}
 .category .list-pro .ul-item li .tips .icon {background-position:-128px -50px;width:5px;height:17px;position:absolute;top:0;right:-5px}
 .category .list-pro .ul-item li .icon-r {position:absolute;top:4px;right:4px;z-index:4}
@@ -150,7 +150,22 @@ a:hover {color:#f00;text-decoration:underline}
 .shop-sort .link2 dd a {width:104px;margin:0 12px;float:left;color:#000;box-sizing:content-box;border-bottom:1px #b3b3b3 solid;color:#999;font-weight:bold}
 .shop-sort .link2 dd a:last-child {border-bottom:0}
 .shop-sort .link2 dd a.active {color:#000}
-/*--End--shop-sort--*/
+
+.shop-sort-list {
+    padding:30px 0;
+}
+.shop-sort-list strong {
+    float: left;
+    margin-left:45px;
+    font-size: 14px;
+    color: #999;
+}
+.shop-sort-list a {
+    float: left;
+    margin-left:20px;
+    font-size: 14px;
+}
+    /*--End--shop-sort--*/
 .explosion .details .img,.explosion .details .info {float:left}
 .explosion .details .img {width:507px;height:403px;overflow:hidden}
 .explosion .details .img img {width:507px;height:403px}
