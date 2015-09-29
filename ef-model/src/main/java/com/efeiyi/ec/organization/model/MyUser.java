@@ -73,7 +73,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     public MyUser() {
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     public Role getRole() {

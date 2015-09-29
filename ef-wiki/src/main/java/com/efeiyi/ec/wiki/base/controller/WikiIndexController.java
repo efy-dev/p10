@@ -8,6 +8,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.model.Praise2Product;
+import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -211,6 +212,9 @@ public class WikiIndexController extends WikibaseController {
         boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
         model.addAttribute("flag",flag);
         model.addAttribute("product",product);
+        if (AuthorizationUtil.getMyUser().getId()!= null){
+            model.addAttribute("myUser",AuthorizationUtil.getMyUser());
+        }
         return new ModelAndView("/product/brifProduct");
     }
 
@@ -245,6 +249,8 @@ public class WikiIndexController extends WikibaseController {
         if (oper!=null && oper.equalsIgnoreCase("up")){
             praise2Product.setUser(user);
             praise2Product.setProduct(product);
+            praise2Product.setCreateDateTime(new Date());
+            praise2Product.setType("1");
             baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
             product.setFsAmount(product.getFsAmount()==null?1:product.getFsAmount()+1);
             baseManager.saveOrUpdate(Product.class.getName(),product);
@@ -267,6 +273,107 @@ public class WikiIndexController extends WikibaseController {
 
         return true;
     }
+
+    @RequestMapping("/saveComment.do")
+    @ResponseBody
+    public boolean saveComment( HttpServletRequest request, Model model)throws Exception{
+        String productId = request.getParameter("productId");
+        String content =request.getParameter("content");
+        MyUser user= AuthorizationUtil.getMyUser();
+        if (user.getId()==null){
+            return false;
+        }
+        Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+        ProductComment productComment = new ProductComment();
+        productComment.setCreateDateTime(new Date());
+        productComment.setUser(user);
+        productComment.setProduct(product);
+        productComment.setStatus("1");
+        productComment.setContent(content);
+        productComment.setAmount(0l);
+        ProductComment fatherProductComment = new ProductComment();
+        fatherProductComment.setId("0");
+        productComment.setFatherComment(fatherProductComment);
+        baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        product.setAmount(product.getAmount()==null?1:product.getAmount()+1);
+        baseManager.saveOrUpdate(Product.class.getName(),product);
+        return true;
+    }
+
+    @RequestMapping("/saveComment2.do")
+    @ResponseBody
+    public boolean saveComment2( HttpServletRequest request, Model model)throws Exception{
+        String productId = request.getParameter("productId");
+        String content =request.getParameter("content");
+        String contentId =request.getParameter("contentId");
+        MyUser user= AuthorizationUtil.getMyUser();
+        if (user.getId()==null){
+            return false;
+        }
+
+        Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+        ProductComment productComment = new ProductComment();
+        productComment.setCreateDateTime(new Date());
+        productComment.setUser(user);
+        productComment.setProduct(product);
+        productComment.setStatus("1");
+        productComment.setContent(content);
+        productComment.setAmount(0l);
+        ProductComment fatherProductComment = new ProductComment();
+        fatherProductComment.setId(contentId);
+        productComment.setFatherComment(fatherProductComment);
+        baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        product.setAmount(product.getAmount()==null?1:product.getAmount()+1);
+        baseManager.saveOrUpdate(Product.class.getName(),product);
+        return true;
+    }
+
+
+    @RequestMapping("/commentUpAndDown.do")
+    @ResponseBody
+    public boolean commentUpAndDown( HttpServletRequest request, Model model)throws Exception{
+        String productId = request.getParameter("productId");
+        String commentId = request.getParameter("commentId");
+
+        MyUser user= AuthorizationUtil.getMyUser();
+        if (user.getId()==null){
+            return false;
+        }
+        Product product = (Product)baseManager.getObject(Product.class.getName(),productId);
+        ProductComment productComment = (ProductComment)baseManager.getObject(ProductComment.class.getName(),commentId);
+        Praise2Product praise2Product = new Praise2Product();
+        String oper = request.getParameter("operation");
+        if (oper!=null && oper.equalsIgnoreCase("up")){
+            praise2Product.setUser(user);
+            praise2Product.setProduct(product);
+            praise2Product.setCreateDateTime(new Date());
+            praise2Product.setType("2");
+            praise2Product.setComment(productComment);
+            baseManager.saveOrUpdate(Praise2Product.class.getName(),praise2Product);
+            productComment.setAmount(productComment.getAmount()==null?1:productComment.getAmount()+1);
+            baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        }
+
+
+        if (oper!=null && oper.equalsIgnoreCase("down")){
+            String queryHql ="from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id:commentId";
+            LinkedHashMap<String,Object> map = new LinkedHashMap<>();
+            map.put("userId",user.getId());
+            map.put("productId",product.getId());
+            map.put("commentId",commentId);
+            Praise2Product praise2Product1 = (Praise2Product)baseManager.getUniqueObjectByConditions(queryHql,map);
+            if (praise2Product1!= null && praise2Product1.getId()!=null)//不为null,说明已经点过赞了，可以取消点赞
+                baseManager.delete(Praise2Product.class.getName(),praise2Product1.getId());
+            productComment.setAmount(productComment.getAmount()==null?0:productComment.getAmount()-11);
+            baseManager.saveOrUpdate(ProductComment.class.getName(),productComment);
+        }
+
+
+
+        return true;
+    }
+
+
 
 
 }

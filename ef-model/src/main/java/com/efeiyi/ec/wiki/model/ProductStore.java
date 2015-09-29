@@ -6,24 +6,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2015/9/25.
+ * Created by Administrator on 2015/9/29.
  *
  */
 @Entity
-@Table(name = "wiki_Praise_Product")
+@Table(name = "wiki_product_store")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Praise2Product implements Serializable {
+public class ProductStore implements Serializable {
     private String id;
     private Product product;
     private MyUser user;
-    private ProductComment comment;
-    private String type;
     private Date createDateTime;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -36,8 +33,6 @@ public class Praise2Product implements Serializable {
         this.id = id;
     }
 
-
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -49,7 +44,7 @@ public class Praise2Product implements Serializable {
         this.product = product;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public MyUser getUser() {
@@ -60,24 +55,6 @@ public class Praise2Product implements Serializable {
         this.user = user;
     }
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")
-    public ProductComment getComment() {
-        return comment;
-    }
-
-    public void setComment(ProductComment comment) {
-        this.comment = comment;
-    }
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
     @Column(name = "create_datetime")
     public Date getCreateDateTime() {
         return createDateTime;

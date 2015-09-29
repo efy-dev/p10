@@ -148,18 +148,19 @@ ${product.productDescription.content}
 
     </div>
     <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
-  </div>
+    <input type="hidden" name="" id="content" value="" />
+</div>
   <!--评论-->
 </div>
 <!--悬浮-->
 <div class="suspend">
   <div class="great">
     <div class="dynamic-ft">
-      <a href="#" onclick="savaUP(${product.id})" id="good-1" class="ft-a" name="up"> <i class="good-1"></i> <em>${product.fsAmount}</em></a>
+      <a href="#" onclick="savaUP('${product.id}')" id="good-1" class="ft-a" name="up"> <i class="good-1"></i> <em id="em1">${product.fsAmount}</em></a>
       <i class="s-solid ft-a"></i>
-      <a href="#" class="ft-a"> <i class="good-2"></i> <em>${product.amount}</em> </a>
+      <a href="#"  class="ft-a" onclick="showmodal()"> <i class="good-2"></i> <em>${product.amount}</em> </a>
       <i class="s-solid ft-a"></i>
-      <a href="#" class="ft-a"> <i class="good-3"></i> </a>
+      <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a"> <i class="good-4"></i> </a>
     </div>
@@ -219,16 +220,19 @@ var startNum=1;
               }else{
                 amout1 =data.list[i].amount;
               }
-
+              var userName = data.list[i].user.name2;
+              if(userName==null){
+                userName ="匿名用户";
+              }
 
               var box = $("<div class='matter' id='"+data.list[i].id+"'> " +
-                      "<p class='text-h1'>"+data.list[i].user.name2+"</p> " +
+                      "<p class='text-h1'>"+userName+"</p> " +
                       "<p class='text-time'>"+cTime+"</p> " +
                       "<p class='text-content'>" +
-                      "<a href='#' >"+data.list[i].content+"</a></p> " +
+                      "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
                       "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
                       "<div class='owner-good'>" +
-                      "<a href='#'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
+                      "<a href='#' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
               pubu.append(box);
 
               //获取盖楼式回复
@@ -264,8 +268,10 @@ var startNum=1;
       showTime=intervalTime.toFixed(0)+"分钟前";
     }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
       showTime=(intervalTime/60).toFixed(0)+"小时前";
-    }else{
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
       showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
     }
      return showTime;
   }
@@ -280,7 +286,7 @@ var startNum=1;
          success:function(data){
            if(data.list && data.list != null){
              for(i in data.list){
-               var  pubu =$("#fatherId");
+               var  pubu =$("#"+fatherId);
                var cTime =transdate(data.list[i].createDateTime);
                var amout1;
                if(data.list[i].amount==null){
@@ -288,11 +294,14 @@ var startNum=1;
                }else{
                  amout1 =data.list[i].amount;
                }
+               var userName = data.list[i].user.name2;
+               if(userName==null){
+                 userName ="匿名用户";
+               }
 
-
-               var box = $("<div class='respond'> <p><span class='txt-name'>" +
-                       "<a href='#'> "+data.list[i].user.name2+"：</a>" +
-                       "</span><span class='txt-content'>"+data.list[i].content+"</span></p> </div> ");
+               var box = $("<div class='respond' id='"+data.list[i].id+"'> <p><span class='txt-name'>" +
+                       "<a href='#'> "+userName+"：</a>" +
+                       "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</span></p> </div> ");
                pubu.append(box);
 
                //获取盖楼式回复
@@ -322,7 +331,7 @@ function savaUP(productId){
   var oper = $("#good-1").attr("name");
   $.ajax({
     type:"get",
-    url:"<c:url value='/basic/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
+    url:"<c:url value='/base/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
     data:"",
     dataType:"json",
     success:function(data){
@@ -330,17 +339,169 @@ function savaUP(productId){
        alert("您还未登陆，请登录后再操作！！！");
        return false;
      }
+      if(data==true && oper=='up'){
+        $("#em1").html(parseInt($("#em1").text())+1);
+      }
+      if(data==true && oper=='down'){
+        $("#em1").html(parseInt($("#em1").text())-1);
+      }
     },
     error:function(){
       alert("出错了，请联系管理员！！！");
       return false;
     },
     complete:function(){
-
+      $("#good-1").attr("name","down");
     }
   });
 }
 
+
+  function showmodal(){
+    window.open("<c:url value='/comment.jsp'/>");
+
+  }
+  function showmodal2(data){
+    $("#content").attr("name",$(data).attr("about"));
+    window.open("<c:url value='/comment2.jsp'/>");
+
+  }
+
+  function setValue(data){
+    var ret =document.getElementById("content").value = data;
+  if(ret && ret.toString().length>=1){
+    var CommentValue=$("#content").val();
+    if(CommentValue==null || CommentValue==""){
+      alert("你未发表任何评论，请评论");
+      return false;
+    }
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/saveComment.do?productId=${product.id}'/>"+"&content="+CommentValue,
+      data:"",
+      dataType:"json",
+      async:true,
+      success:function(data){
+        if(data==false){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
+                "<p class='text-time'>刚刚</p> <p class='text-content'>" +
+                "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
+                "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
+                "</div> <div class='owner-good'><a href='#'>" +
+                "<i class='good-1'></i><em>0</em></a></div> " + "</div>");
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    });
+  }
+  }
+
+  function setValue2(data){
+    var ret =document.getElementById("content").value = data;
+    var contentId = $("#content").attr("name");
+    if(ret && ret.toString().length>=1){
+      var CommentValue=$("#content").val();
+      if(CommentValue==null || CommentValue==""){
+        alert("你未发表任何评论，请评论");
+        return false;
+      }
+      $.ajax({
+        type:"get",
+        url:"<c:url value='/base/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
+        data:"",
+        dataType:"json",
+        async: true,
+        success:function(data){
+          if(data==false){
+            alert("您还未登陆，请登录后再操作！！！");
+            return false;
+          }
+          $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
+                  "<a href='#'> ${myUser.name2}：</a>" +
+                  "</span><span class='txt-content'>"+CommentValue+"</span></p> </div> ");
+        },
+        error:function(){
+          alert("出错了，请联系管理员！！！");
+          return false;
+        },
+        complete:function(){
+
+        }
+      });
+    }
+  }
+
+
+  function commentUpAndDown(data,commentId){
+    var oper = $(data).attr("name");
+    var productId = $(data).attr("about");
+    //alert($(data).children().eq(1).text());
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/commentUpAndDown.do?productId='/>"+productId+"&operation="+oper+"&commentId="+commentId,
+      data:"",
+      async: true,
+      dataType:"json",
+      success:function(data){
+        if(data==false){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        if(data==true && oper=='up'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+        }
+        if(data==true && oper=='down'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        $(data).attr("name","down");
+      }
+    });
+  }
+
+
+
+  function storeProduct(productId){
+
+    $.ajax({
+      type:"get",
+      url:"/base/attentionMaster.do?masterId="+productId,//设置请求的脚本地址
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data==false){
+          alert("您还未登陆，请登录后再操作");
+          return false;
+        }
+        if(data==true){
+          $("#"+masterId).html("已关注");
+          return true;
+        }
+
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    });
+  }
 </script>
 
 <!--//End--footer-->
