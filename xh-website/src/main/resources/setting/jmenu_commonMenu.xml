@@ -19,9 +19,14 @@
     </jnode>
 
     <jnode id="OnlineReportingManagement" url="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" text_zh_CN="下属机构">
-        <jnode url="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" access="admin,manager" text_zh_CN="专业委员会"/>
-        <jnode url="/organization/organization.association.do?qm=plistAssociation_default" access="admin,manager" text_zh_CN="各地协会"/>
-        <jnode url="/organization/organization.member.do?qm=plistMemberManagement_default" access="admin,manager" text_zh_CN="协会会员"/>
+        <jnode url="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" access="admin,manager" text_zh_CN="专业委员会">
+        </jnode>
+        <jnode url="/organization/organization.association.do?qm=plistAssociation_default" access="admin,manager" text_zh_CN="各地协会">
+        </jnode>
+        <jnode url="" access="admin,manager" text_zh_CN="协会会员">
+            <jnode url="/organization/organization.member.do?qm=plistMemberManagement_default" text_zh_CN="会员名录" />
+            <jnode url="/organization/organization.memberGuide.do?qm=plistMemberGuide_default" text_zh_CN="会员申请指南" />
+        </jnode>
     </jnode>
 
     <jnode id="AuthorityManagement" url="/project/project.do?qm=listAddressProvince_default" text_zh_CN="非遗名录">

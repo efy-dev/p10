@@ -69,4 +69,34 @@ public class OrganizationController {
         return pageInfo.getList();
     }
 
+    @RequestMapping("/organization.memberGuide.do")
+    public List<Document> memberGuide(HttpServletRequest request, Document document,ModelMap modelMap) throws Exception {
+        String qm = request.getParameter("qm");
+        if (qm.split("_").length < 2) {
+            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        }
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+        PageEntity pageEntity = new PageEntity();
+        String pageIndex = request.getParameter("pageEntity.index");
+        String pageSize = request.getParameter("pageEntity.size");
+        if (pageIndex != null) {
+            pageEntity.setIndex(Integer.parseInt(pageIndex));
+            pageEntity.setSize(Integer.parseInt(pageSize));
+        }
+        modelMap.put("tabTitle", tempDoQuery.getLabel());
+        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
+        modelMap.put("pageInfo", pageInfo);
+        modelMap.put("pageEntity", pageInfo.getPageEntity());
+
+        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
+        }
+        modelMap.put("qm", qm);
+        modelMap.put("group", tempDo.getData());
+        return pageInfo.getList();
+    }
 }
