@@ -94,4 +94,27 @@ public class MasterManagerImpl implements MasterManager {
         }
         return tenantMaster.getId();
     }
+
+    @Override
+    public String removeMaster(String id) {
+        Master master = (Master)xdoDao.getObject(Master.class.getName(),id);
+        if(master.getMasterProjectList()!=null||master.getMasterProjectList().size()!=0){
+            for(MasterProject masterProject : master.getMasterProjectList()){
+                masterProject.setStatus("0");
+                xdoDao.saveOrUpdateObject(masterProject);
+            }
+        }
+        String sql = "from TenantMaster where master.id = ?";
+        List<TenantMaster> list = xdoDao.getObjectList(sql,new Object[]{id});
+        if(list.size()!=0){
+            for(TenantMaster tenantMaster : list){
+                tenantMaster.setStatus("0");
+                xdoDao.saveOrUpdateObject(tenantMaster);
+            }
+        }
+
+        master.setStatus("0");
+        xdoDao.saveOrUpdateObject(master);
+        return id;
+    }
 }

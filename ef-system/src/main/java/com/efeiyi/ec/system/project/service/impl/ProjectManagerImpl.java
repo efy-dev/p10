@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.project.service.impl;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -12,6 +13,7 @@ import com.efeiyi.ec.system.product.model.ProductModelBean;
 import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.system.project.service.ProjectManager;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
@@ -63,6 +65,32 @@ public class ProjectManagerImpl implements ProjectManager{
             e.printStackTrace();
         }
         return  tenantProject.getId();
+
+    }
+
+    @Override
+    public String removeProject(String id) {
+        Project project = (Project)xdoDao.getObject(Project.class.getName(),id);
+        String sql = "from MasterProject where project.id = ?";
+        List<MasterProject> list = xdoDao.getObjectList(sql,new Object[]{id});
+        if(list.size()!=0){
+            for(MasterProject masterProject : list){
+                masterProject.setStatus("0");
+                xdoDao.saveOrUpdateObject(masterProject);
+            }
+        }
+        sql = "from TenantProject where project.id = ?";
+        List<TenantProject> list2 = xdoDao.getObjectList(sql,new Object[]{id});
+        if(list2.size()!=0){
+            for(TenantProject tenantProject : list2){
+                tenantProject.setStatus("0");
+                xdoDao.saveOrUpdateObject(tenantProject);
+            }
+        }
+
+        project.setStatus("0");
+        xdoDao.saveOrUpdateObject(project);
+        return id;
 
     }
 }
