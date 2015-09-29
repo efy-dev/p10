@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -27,7 +28,11 @@ import java.util.List;
  * Created by Administrator on 2015/7/13.
  */
 @Controller
+@RequestMapping("/news")
 public class NewsController {
+
+    @Autowired
+    private BaseManager baseManager;
 
     @Autowired
     private XdoManager xdoManager;
@@ -70,6 +75,20 @@ public class NewsController {
         modelMap.put("group", tempDo.getData());
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
+    }
+
+    @RequestMapping("newView.do")
+    public ModelAndView getOneNews(HttpServletRequest request,ModelMap modelMap) throws Exception{
+        String id = request.getParameter("id");
+        String group = request.getParameter("group");
+        if (id == null || "".equals(id)) {
+            throw new Exception("id不能为空");
+        }
+        Document document = (Document) baseManager.getObject(Document.class.getName(), id);
+
+        modelMap.put("object", document);
+        modelMap.put("group", group);
+        return new ModelAndView("news/newView");
     }
 
 }
