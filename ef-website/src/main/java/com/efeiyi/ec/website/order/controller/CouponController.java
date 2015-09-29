@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.order.controller;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -69,6 +70,19 @@ public class CouponController {
 
         return couponList;
 
+    }
+
+    @RequestMapping({"/coupon/listCoupon"})
+    @ResponseBody
+    public List<Object> listCouponBypriceLimit(HttpServletRequest request , Model model) throws Exception{
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            Cart cart = (Cart) list.get(0);
+            XQuery couponQuery = new XQuery("listCoupon_byorder", request);
+            couponQuery.put("couponBatch_priceLimit",cart.getTotalPrice().floatValue());
+            List<Object> couponList = baseManager.listObject(couponQuery);
+            model.addAttribute("couponList",couponList);
+            return couponList;
     }
 
     @RequestMapping({"/coupon/use.do"})

@@ -304,5 +304,15 @@
                 </do>
             </does>
         </entity>
+
+        <entity name="Master" label="非遗传承人" model="com.efeiyi.ec.master.model.Master">
+            <does>
+                <do name="plistMaster" access="" label="传承人">
+                    <query name="master" label="传承人" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>
