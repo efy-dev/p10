@@ -177,7 +177,7 @@
             if(data != null){
                 var out = '';
                 for (var i = 0; i < data.length; i++) {
-                    out += '<li>' + '<img src="http://pro.efeiyi.com/' + '"  alt=""/>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
+                    out += '<li>' + '<img src="http://pro.efeiyi.com/' + data[i]["couponBatch"]["pictureUrl"] + '"  alt=""/>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
                             '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
                 }
                 $(".ul-list").html(out);
