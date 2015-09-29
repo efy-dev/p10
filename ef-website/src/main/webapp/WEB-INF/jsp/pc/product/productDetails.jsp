@@ -174,7 +174,12 @@
       <div class="des">
         <div class="colour">发货地：</div>
         <div class="colour-page">
+          <c:if test="${product.tenant.address==null}">
+            <span>未知  包邮</span>
+            </c:if>
+          <c:if test="${product.tenant.address!=null}">
           <span>${product.tenant.address}  包邮</span>
+          </c:if>
         </div>
       </div>
       <div class="des">
@@ -247,6 +252,7 @@
         <ul>
           <c:if test="${empty product.master.id}">
             <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+            <li><a href="#title" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
           </c:if>
           <c:if test="${not empty product.master.id}">
           <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
@@ -283,7 +289,7 @@
                     <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
                       <div class="txt">
                         <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
-                      ${purchaseOrderProduct.purchaseOrderComment.content}
+                       ${purchaseOrderProduct.purchaseOrderComment.content}
                         </c:if>
                       </div>
                       <%--<div class="star">5星</div>--%>
