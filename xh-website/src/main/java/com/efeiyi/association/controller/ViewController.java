@@ -21,7 +21,7 @@ public class ViewController {
     @Autowired
     BaseManager baseManager;
 
-    @RequestMapping("/viewDefault.do")
+    @RequestMapping({"/viewDefault.do", "newView.do"})
     public Document getContentView(HttpServletRequest request, ModelMap modelMap) {
         Document document = new Document();
         document.setId(request.getParameter("id"));
