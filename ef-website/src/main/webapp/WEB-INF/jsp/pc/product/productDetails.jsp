@@ -159,7 +159,7 @@
       </div>
       <!-- //End-->
       <div class="master-name">
-        <p class="p1"><span>${product.master.fullName}</span>[${product.master.getMainProjectName().getProject().getName()}]</p>
+        <p class="p1"><a href="http://${product.master.name}.efeiyi.com" target="_blank"><span>${product.master.fullName}</span></a>[${product.master.getMainProjectName().getProject().getName()}]</p>
         <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
         <div class="master-img-pt"><a  href="http://${product.master.name}.efeiyi.com" target="_blank" title=""><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></a></div>
       </div>
