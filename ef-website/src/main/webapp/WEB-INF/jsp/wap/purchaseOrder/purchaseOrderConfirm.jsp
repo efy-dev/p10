@@ -239,6 +239,11 @@
     var orderId = "${purchaseOrder.id}";
 
     $(function () {
+
+        if(!isWeiXin()){
+            $("#weixin").hide();
+        }
+
         $.ajax({
             type: 'get',
             async: false,

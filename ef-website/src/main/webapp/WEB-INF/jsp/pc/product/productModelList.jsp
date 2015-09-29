@@ -62,13 +62,13 @@
                        <%--</a>--%>
 
                 <%--<%}else{%>--%>
-                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" title="">
+                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
                             src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>
                        <%--<%}%>--%>
                 <p class="wh name">
-                    ${productModel.product.name}
+                        ${map.get(productModel)}
                 </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>

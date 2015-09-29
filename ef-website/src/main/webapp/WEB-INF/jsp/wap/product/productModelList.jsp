@@ -26,7 +26,7 @@
                         <li>
                             <a  href="<c:url value="/product/productModel/${productModel.id}"/>" style="color: #000">
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt="">
-                            <p class="wh name">${productModel.name}
+                            <p class="wh name">${map.get(productModel)}
                             </p>
                             <p class="price"><em>￥</em><span>${productModel.price.intValue()}</span></p>
                             </a>

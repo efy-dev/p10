@@ -59,7 +59,7 @@
           <a href="<c:url value='/product/productModel/${productModel.id}'/>" style="color: #000" title="">
          <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model" alt="">
 
-        <p class="name">${productModel.product.name} [${map.get(productModel)}]</p>
+        <p class="name">${map.get(productModel)}</p>
         <p class="price"><em>￥</em><span>${productModel.price}</span></p>
           </a>
       </li>
