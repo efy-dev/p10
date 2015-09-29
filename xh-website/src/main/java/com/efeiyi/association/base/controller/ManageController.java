@@ -138,6 +138,10 @@ public class ManageController {
         for (Jnode jnodeTemp : jnode.getChildren()) {
             if (resultJnode == null && jnodeTemp.getUrl().trim().startsWith(match.trim())) {
                 resultJnode = jnodeTemp;
+            }else if(resultJnode == null){
+                if(jnodeTemp.getChildren() != null &&jnodeTemp.getChildren().size()!=0){
+                    resultJnode = getCurrentJnode(jnodeTemp,match);
+                }
             }
         }
         return resultJnode;

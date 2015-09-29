@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/layouts/public.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -51,7 +52,7 @@
                   <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title="${industry.title}">${industry.title}</a>
                 </p>
                 <p class="info">${industry.sampleContent}</p>
-                <a href="/news.do?qm=plistNewsIndustry_default" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="<c:url value='/news/news.do?qm=plistNewsIndustry_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -74,7 +75,7 @@
                   <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" target="_parent" title="${note.title}">${note.title}</a>
                 </p>
                 <p class="info">${note.sampleContent}</p>
-                <a href="/news.Bulletin.do?qm=plistNewsNote_default" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="<c:url value='/news/news.Bulletin.do?qm=plistNewsNote_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -107,45 +108,12 @@
       </div>
       <!-- //End---->
       <div class="wh data-down">
-        <div class="title">资料下载<a class="btn-more" href="#更多" title="更多">更多</a></div>
-        <ul class="list-table">
-          <li>
-            <a href="#" target="_blank" title="国家级非物质文化遗产项目代表性传承人认定与管理暂行办法(2008)">
-              <table>
-                <tr>
-                  <td>国家级非物质文化遗产项目代表性传承人认定与管理暂行办法(2008)</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）(2008)</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-        </ul>
+        <div class="title">资料下载<a class="btn-more" href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default'/> " title="更多">更多</a></div>
+
+        <jsp:include flush="true"
+                     page="/protection/protection.homeList.do?qm=plistPolicy_default&jmenuId=AssociationMenu&"/>
+
+
       </div>
       <!-- //End---->
     </div>
@@ -167,7 +135,7 @@
               <p>
                 <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" target="_parent">${orgNews.title}</a>
               </p>
-              <a class="btn-more" href="/news.do?qm=plistNewsOrganization_default" title="更多">更多</a>
+              <a class="btn-more" href="<c:url value='/news/news.do?qm=plistNewsOrganization_default'/>" title="更多">更多</a>
             </li>
           </c:forEach>
         </ul>

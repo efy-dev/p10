@@ -30,9 +30,9 @@ public class PurchaseCommentController {
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
-        return "/purchaseOrder/purchaseComment";
-    }
 
+    return "/purchaseOrder/purchaseComment";
+}
     @RequestMapping("/saveComment.do")
     public String saveOrUpdateComment(HttpServletRequest request) throws Exception {
 

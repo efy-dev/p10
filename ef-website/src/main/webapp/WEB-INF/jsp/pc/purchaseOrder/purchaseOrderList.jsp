@@ -106,7 +106,15 @@
                       <a href="<c:url value="/product/productModel/${op.productModel.id}"/>"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                       <div class="info">
                         <p><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.project.projectCategory.name}</a></p>
-                        <p><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}</a></p>
+                        <p><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}</a>
+                          <c:if test="${op.productModel.productPropertyValueList.size()>1}">
+                            [
+                            <c:forEach items="${op.productModel.productPropertyValueList}"
+                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                            ]
+                          </c:if>
+                        </p>
+
                       </div>
                     </div>
                   </td>

@@ -81,9 +81,9 @@ $(function(){
         $(window).scroll(function(){
             var d=$(document).scrollTop();
             if(d>900){
-                $('.tab-wrap').css({'position':'fixed','top':'0'})
+                $('.tab-wrap').parents('.wh').addClass('fixed-tab');
             }else{
-                $('.tab-wrap').css({'position':'','top':''})
+                $('.tab-wrap').parents('.wh').removeClass('fixed-tab');
             }
         });
         $('.product-intro .detail .part:last').css({'border':'0'});
