@@ -36,7 +36,7 @@ public class ProtectionController {
 
 
     @RequestMapping({"/protection.do"})
-    public List<Document> news(HttpServletRequest request, ModelMap modelMap) throws Exception {
+    public List<Document> protection(HttpServletRequest request, ModelMap modelMap) throws Exception {
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
@@ -51,8 +51,8 @@ public class ProtectionController {
         String pageSize = request.getParameter("pageEntity.size");
         if (pageIndex != null) {
             pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
         }
+        pageEntity.setSize(1);
 
         modelMap.put("tabTitle", tempDoQuery.getLabel());
 //                resultPage = "/pc/choiceness";
@@ -65,8 +65,6 @@ public class ProtectionController {
         }
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
-        modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }
-
 }

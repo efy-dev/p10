@@ -17,7 +17,7 @@ a:hover {color:#f00;text-decoration:underline}
 .topbar {min-width:1200px;height:31px;background:#000;position: relative;z-index:999}
 .topbar .ul-item {float:right}
 .topbar .ul-item li {float:left;position: relative}
-.topbar .ul-item li strong {line-height:31px;float:left;font-size:12px;color:#fff}
+.topbar .ul-item li strong {line-height:31px;float:left;font-size:12px;color:#999}
 .topbar .ul-item li a {line-height:31px;font-size:12px;color:#999;padding:0 20px;float:left}
 .topbar .ul-item li:hover a {background:#333;text-decoration:none}
 .topbar .ul-item li.cart {padding:0 38px;background:#333;position:relative}
@@ -198,47 +198,14 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
 .product-intro .itemInfo .preview .collect {width:36px;position:absolute;top:16px;right:40px}
-
-.product-intro .itemInfo .preview .icon-big-glass {
-    width:38px;
-    height:38px;
-    position: absolute;
-    bottom:10px;
-    right:36px;
-    cursor: pointer;
-}
-.product-intro .itemInfo .preview .icon-big-glass .icon {
-    background-position:-98px -143px;
-    width:38px;
-    height:38px;
-    float: left;
-}
-
-.product-intro .itemInfo .preview .collect .biao {width:35px;height:35px;background:#fff;border: 1px solid #ccc;border-radius:6px;cursor:pointer;
-    position: relative;}
-.product-intro .itemInfo .preview .collect .biao .icon {background:url(../images/icon.png) no-repeat -98px -124px;width:21px;height:19px;
-    position: absolute;top:50%;
-    left:50%;
-    margin-top:-9px;
-    margin-left:-10px;
-}
+.product-intro .itemInfo .preview .icon-big-glass{width:38px;height:38px;position:absolute;bottom:10px;right:36px;cursor:pointer;}
+.product-intro .itemInfo .preview .icon-big-glass .icon{background-position:-98px -143px;width:38px;height:38px;float:left;}
+.product-intro .itemInfo .preview .collect .biao{width:35px;height:35px;background:#fff;border:1px solid #ccc;border-radius:6px;cursor:pointer;position:relative;}
+.product-intro .itemInfo .preview .collect .biao .icon{background:url(../images/icon.png) no-repeat -98px -124px;width:21px;height:19px;position:absolute;top:50%;left:50%;margin-top:-9px;margin-left:-10px;}
 .product-intro .itemInfo .preview .collect .biao .icon-hover,
-.product-intro .itemInfo .preview .collect .biao .icon-active {background-position:-119px -124px}
-.product-intro .itemInfo .preview .collect span.txt {width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center}
-
-.product-intro .zoom-section {
-    width:800px;
-    position: absolute;
-    top:0;
-    left:50%;
-    overflow: hidden;
-}
-
-
-
-
-
-
+.product-intro .itemInfo .preview .collect .biao .icon-active{background-position:-119px -124px;}
+.product-intro .itemInfo .preview .collect span.txt{width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center;}
+.product-intro .zoom-section{width:800px;position:absolute;top:0;left:50%;overflow:hidden;}
 .product-intro .itemInfo .itme-ext {width:264px;float:left}
 .product-intro .itemInfo .itme-ext .name {font-size:12px;margin-top:0;margin-bottom:26px}
 .product-intro .itemInfo .itme-ext .name p{margin-bottom: 14px;}
@@ -299,7 +266,26 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .jiathis_style .jtico_tqq {background-position:-21px 0;width:22px}
 .product-intro .itemInfo .jiathis_style .jtico_tsina {background-position:-43px 0}
 .product-intro .itemInfo .jiathis_style .jtico_cqq {background-position:-65px 0;width:22px}
-.product-intro .tab-wrap {width:1200px;height:44px;line-height:44px;padding-left:170px;position:relative;border:1px #000 solid;background:#fff;z-index:999}
+.product-intro .tab-wrap {width:1200px;height:44px;line-height:44px;padding-left:170px;position:absolute;
+    left:50%;
+    margin-left:-600px;border:1px #000 solid;background:#fff}
+
+
+.product-intro .fixed-tab {
+    width: 100%;
+    height:44px;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 9999;
+    background: #393939;
+}
+
+
+
+
+
+
 .product-intro .tab-wrap .jiathis_style {background:#7f7f7f;height:44px;float:left;padding:0 13px;position:absolute;top:-1px;left:-1px;border-right:1px #000 solid}
 .product-intro .tab-wrap .jiathis_style .jtico {background:url(../images/icon-share.png) no-repeat;width:21px;height:21px!important;margin-left:5px;margin-top:10px}
 .product-intro .tab-wrap .jiathis_style .jiathis_txt {line-height:44px!important;color:#fff}
@@ -679,6 +665,25 @@ a,
 .scroll-bar-ask .btn .icon {background-position:-181px -50px;height:18px;top:6px;margin-right:5px}
 .scroll-bar-ask .btn:hover {text-decoration:none;background:#fff;color:#000}
 .scroll-bar-ask .btn:hover .icon {background-position:-204px -50px}
+/*--//End--*/
+.news-list {
+    width:100%;
+    float: left;
+    margin-bottom:50px;
+}
+.news-list li {
+    font-size:15px;
+    width:100%;
+    float: left;
+    margin-top:50px;
+}
+.news-list li a {
+    width:100%;
+    float: left;
+    font-size: 18px;
+    margin-bottom:20px;
+}
+
 @media (max-width:1200px) {
     .btn-arrow-down {left:584px}
 }

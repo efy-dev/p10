@@ -38,7 +38,7 @@
 
     <jnode id="ProtectionPolicy" url="/protection/protection.do?qm=plistLaw_default" text_zh_CN="非遗保护">
         <jnode url="/protection/protection.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法"/>
-        <jnode url="/protection/protection.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="政策法规"/>
+        <jnode url="/protection/protection.list.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="政策法规"/>
         <jnode url="/protection/protection.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="申报指南"/>
         <jnode url="/protection/protection.do?qm=plistMaterial_default" access="admin,manager" text_zh_CN="申报提交"/>
         <jnode url="/protection/protection.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>

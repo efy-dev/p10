@@ -12,7 +12,7 @@
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <body>
 <div class="slide-right">
-    <div class="title">${tabTitle}</div>
+    <div class="title">${tabTitle}<span>(共计${pageInfo.count}人)</span><a class="more" href="#" target="_parent">会员申请指南</a></div>
     <div class="list-table">
         <table>
             <c:forEach items="${documentList}" var="document" varStatus="status">
