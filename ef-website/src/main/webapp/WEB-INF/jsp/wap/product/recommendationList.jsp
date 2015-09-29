@@ -25,7 +25,7 @@
         <p class="txt-name"><strong>${productModel.product.name}</strong></p>
         <p class="txt-des">${productModel.product.subName}</p>
       </div>
-
+      <c:if test="${not empty productModel.product.master.id}">
       <div class="img">
         <span>
            <a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>">
@@ -34,6 +34,7 @@
         </span>
         <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看大师<i class="arrow-right"></i></a></span>
       </div>
+      </c:if>
     </div>
     <!-- //End--pep-info-->
     <div class="bd btns">
