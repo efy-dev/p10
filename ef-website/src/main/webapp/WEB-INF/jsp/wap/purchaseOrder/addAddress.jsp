@@ -48,12 +48,13 @@
       </div>
   </div>
   <div class="edit-info">
-    <input type="button" class="a" value="保存信息" onclick="sm()">
+    <input type="button" class="a" value="保存信息" onclick="sm();" >
   </div>
   </form>
 </div>
-<script>
+<script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 
+<script>
   function putVal(o){
     var ele = document.getElementById("checkbox");
     if(ele.checked){
@@ -144,14 +145,6 @@
 
   $().ready(function () {
     $("#addAddress").validate({
-      rules: {
-        consignee: "required",
-        details: "required",
-        name: "required",
-        phone: "required",
-      },
-    });
-    $("#updateAddress").validate({
       rules: {
         consignee: "required",
         details: "required",
