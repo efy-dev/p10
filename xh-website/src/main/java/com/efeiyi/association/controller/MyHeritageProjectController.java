@@ -148,13 +148,13 @@ public class MyHeritageProjectController {
 //        return new ModelAndView("redirect:"/* + request.getContextPath()*/ + path);
 //    }
 
-    @RequestMapping("/removeHeritageProject.do")
-    @ResponseBody
-    public ModelAndView removeHeritageProject(HttpServletRequest request, Document document) throws Exception {
-        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
-        documentManager.removeDocument(document);
-        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
-    }
+//    @RequestMapping("/removeHeritageProject.do")
+//    @ResponseBody
+//    public ModelAndView removeHeritageProject(HttpServletRequest request, Document document) throws Exception {
+//        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
+//        documentManager.removeDocument(document);
+//        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
+//    }
 
     //非遗法
     @RequestMapping("/heritageLaw.do")

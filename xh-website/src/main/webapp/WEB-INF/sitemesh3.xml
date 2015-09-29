@@ -7,9 +7,4 @@
     <mapping path="/protection/*.do" decorator="/layouts/secondary.jsp"/>
     <mapping path="/view/*.do" decorator="/layouts/secondary.jsp"/>
     <mapping path="/member/*.do" decorator="/layouts/secondary.jsp"/>
-    <!--<mapping path="/content/**" decorator="/layouts/news.jsp"/>-->
-    <!--<mapping path="/login.jsp" decorator="/layouts/iframe.jsp"/>-->
-    <!--<mapping path="/" decorator="/layouts/main.jsp"/>-->
-    <!--<mapping path="/index.jsp" decorator="/index.jsp"/>-->
-    <!--<mapping path="/home/homeTest.do" decorator="/home.jsp"/>-->
 </sitemesh>
