@@ -1,5 +1,6 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.OrganizationConst;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -129,6 +130,7 @@ public class MyBannerController {
 
         if (!multipartFile.getOriginalFilename().equals("")) {
             aliOssUploadManager.uploadFile(multipartFile, "association", url);
+            url = OrganizationConst.imgBasePath + url;
             banner.setImageUrl(url);
         }
         bannerManager.saveBanner(banner);
