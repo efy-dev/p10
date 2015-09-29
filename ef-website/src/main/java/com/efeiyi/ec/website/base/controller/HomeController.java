@@ -81,4 +81,11 @@ public class HomeController {
         return "/common/productCategory";
     }
 
+    @RequestMapping({"/news"})
+    public String listNews(){
+
+        return "/common/news";
+
+    }
+
 }
