@@ -8,18 +8,11 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.Jmenu;
-import com.ming800.core.p.model.Jnode;
-import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.DocumentManager;
-import com.ming800.core.p.service.impl.JmenuManagerImpl;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -28,7 +21,6 @@ import java.util.List;
  * Created by Administrator on 2015/7/13.
  */
 @Controller
-@RequestMapping("/news")
 public class NewsController {
 
     @Autowired
@@ -43,7 +35,7 @@ public class NewsController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping({"/news.do","/news.Bulletin.do","/protection/protection.list.do"})
+    @RequestMapping({"/news/news.do","/news/news.Bulletin.do","/protection/protection.list.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
@@ -74,20 +66,6 @@ public class NewsController {
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
-    }
-
-    @RequestMapping("newView.do")
-    public ModelAndView getOneNews(HttpServletRequest request,ModelMap modelMap) throws Exception{
-        String id = request.getParameter("id");
-        String group = request.getParameter("group");
-        if (id == null || "".equals(id)) {
-            throw new Exception("id不能为空");
-        }
-        Document document = (Document) baseManager.getObject(Document.class.getName(), id);
-
-        modelMap.put("object", document);
-        modelMap.put("group", group);
-        return new ModelAndView("news/newView");
     }
 
 }

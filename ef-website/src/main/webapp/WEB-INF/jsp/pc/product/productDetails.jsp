@@ -1,4 +1,3 @@
-<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -20,7 +19,7 @@
   <div class="wh">
     <ol class="am-breadcrumb">
       <li><a href="/">首页</a></li>
-      <li><a href="#">分类</a></li>
+      <li><a href="javascript:window.history.back()">分类</a></li>
       <li class="am-active">内容</li>
     </ol>
   </div>
@@ -159,7 +158,7 @@
       </div>
       <!-- //End-->
       <div class="master-name">
-        <p class="p1"><span>${product.master.fullName}</span>[${product.master.getMainProjectName().getProject().getName()}]</p>
+        <p class="p1"><a href="http://${product.master.name}.efeiyi.com" target="_blank"><span>${product.master.fullName}</span></a>[${product.master.getMainProjectName().getProject().getName()}]</p>
         <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
         <div class="master-img-pt"><a  href="http://${product.master.name}.efeiyi.com" target="_blank" title=""><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></a></div>
       </div>

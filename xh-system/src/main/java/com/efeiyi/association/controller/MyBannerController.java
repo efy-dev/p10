@@ -125,10 +125,10 @@ public class MyBannerController {
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "product/" + identify + ".jpg";
+        String url = "banner/" + identify + ".jpg";
 
         if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
+            aliOssUploadManager.uploadFile(multipartFile, "association", url);
             banner.setImageUrl(url);
         }
         bannerManager.saveBanner(banner);

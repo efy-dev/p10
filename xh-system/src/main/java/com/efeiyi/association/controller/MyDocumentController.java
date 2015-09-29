@@ -327,10 +327,10 @@ public class MyDocumentController {
         response.setContentType("text/html;charset=UTF-8");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "product/" + identify + ".jpg";
+        String url = "document/" + identify + ".jpg";
 
         if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
+            aliOssUploadManager.uploadFile(multipartFile, "association", url);
         }
         String CKEditorFuncNum = request.getParameter("CKEditorFuncNum");
         PrintWriter out;

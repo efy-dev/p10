@@ -37,14 +37,20 @@ $(function(){
             }
         })
     })();
-
     //
-    (function(){
-       $('.org .slide-left .nav-list-ul li').click(function(){
-           $(this).toggleClass('active');
-           $(this).find('.items-list').stop(true).slideToggle();
-           return false
-       })
-    })();
+    $('.org .slide-left .nav-list-ul li .btn-list').click(function(){
+        $(this).parents('li').toggleClass('active');
+        $(this).siblings('.items-list').stop(true).slideToggle('fast');
+        return false
+    })
+    //X1010604申报查询
+    var divList=$('#div-list');
+    var divTabBox=divList.find('.div-tab-box');
+    divTabBox.eq(0).show();
+    divList.find('.div-tab-btn span').click(function(){
+        var index=$(this).index();
+        $(this).addClass('active').siblings('span').removeClass('active');
+        divTabBox.eq(index).show().siblings('.div-tab-box').hide();
+    })
 
 })
