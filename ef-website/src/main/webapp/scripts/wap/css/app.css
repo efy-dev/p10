@@ -179,9 +179,10 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .list-class .ul-list li p {width:100%;float:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .list-class .ul-list li p.name { padding-top:10px;padding-bottom:5px}
 .list-class .ul-list li .price em {font-size:12px}
+.list-class .ul-list li a {color: #000}
 .list-class .ul-list li:nth-child(2n) {float:right}
-.list-class .ul-list li:last-child,
-.list-class .ul-list li:nth-last-child(2){border-bottom: 0;padding-bottom:0;margin-bottom: 0}
+/*.list-class .ul-list li:last-child,*/
+/*.list-class .ul-list li:nth-last-child(2){border-bottom: 0;padding-bottom:0;margin-bottom: 0}*/
 .list-class .ul-list-img { float: left;margin-top:-20px}
 .list-class .ul-list-img img {width:100%}
 .list-class .ul-list-img p { width:100%;padding:25px 20px;font-size: 12px}
@@ -203,7 +204,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .pro-rec-area { padding-bottom:20px;border-bottom: 1px solid #ccc}
 .pro-rec-area .list-ad1 { margin-bottom: 0}
 .pro-rec-area .pep-info { padding: 20px;position: relative}
-.pro-rec-area .pep-info .txt {font-size:14px;padding-right:90px}
+.pro-rec-area .pep-info .txt {font-size:14px;padding-right:90px;min-height:86px;}
 .pro-rec-area .pep-info .txt p {width:100%;float: left;border-right: 1px solid #ccc;padding-right:7px}
 .pro-rec-area .pep-info .txt-price {color:#f00}
 .pro-rec-area .pep-info .txt-name { padding-bottom:10px}

@@ -26,4 +26,5 @@
         </div>
     </div>
 </div>
+<input type="hidden" value="${matchJnode.id}" id="matchJnode">
 <!-- //End--slide-left-->

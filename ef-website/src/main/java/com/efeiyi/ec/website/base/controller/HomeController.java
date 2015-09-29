@@ -88,4 +88,28 @@ public class HomeController {
 
     }
 
+    @RequestMapping({"/500"})
+    public String show500(){
+        return "/common/500";
+    }
+
+    @RequestMapping({"/404"})
+    public String show404(){
+        return "/common/404";
+    }
+
+
+//    @RequestMapping({"/test/404"})
+//    public String show404Test(){
+//        return "/common/test";
+//    }
+//
+//    @RequestMapping({"/test/500"})
+//    public String show5004Test(){
+//       throw new RuntimeException();
+//    }
+
+
+
+
 }
