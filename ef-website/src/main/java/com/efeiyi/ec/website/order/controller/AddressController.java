@@ -136,9 +136,9 @@ public class AddressController {
 
     @RequestMapping({"addAddressOfMob1.do"})
     public String addAddressOfMobile1(HttpServletRequest request) throws Exception {
-        XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
-        List list = baseManager.listObject(xQuery);
-        if ("1".equals(request.getParameter("checkbox"))||list.size()==0) {
+        /*XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
+        List list = baseManager.listObject(xQuery);*/
+        /*if ("1".equals(request.getParameter("checkbox"))||list.size()==0) {*/
             String id = AuthorizationUtil.getMyUser().getId();
             String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
             baseManager.executeSql(null, hql, null);
@@ -151,7 +151,7 @@ public class AddressController {
                 return "redirect:/order/easyBuy/" + request.getParameter("productModel");
             }
             return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
-        } else {
+        /*} else {
             String cartId = request.getParameter("cartId");
             XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
             xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
@@ -160,7 +160,7 @@ public class AddressController {
                 return "redirect:/order/easyBuy/" + request.getParameter("productModel");
             }
             return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
-        }
+        }*/
 
 
     }
