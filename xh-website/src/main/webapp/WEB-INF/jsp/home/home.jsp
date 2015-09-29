@@ -47,9 +47,9 @@
                     <a href="#" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${industry.title}</p>
+                <p class="name" style="width: 90%;"><a href="/news/newView.do?id=${industry.id}&group=industryNews" title="${industry.title}">${industry.title}</a></p>
                 <p class="info">${industry.sampleContent}</p>
-                <a href="/news.do?qm=plistNewsIndustry_default" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="/news/news.do?qm=plistNewsIndustry_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -68,9 +68,9 @@
                     <a href="#" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${note.title}</p>
+                <p class="name" style="width: 90%;"><a href="/news/newView.do?id=${note.id}&group=noticeManage" title="${note.title}">${note.title}</a></p>
                 <p class="info">${note.sampleContent}</p>
-                <a href="/news.Bulletin.do?qm=plistNewsNote_default" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="/news/news.Bulletin.do?qm=plistNewsNote_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -161,7 +161,7 @@
                 </c:forEach>
               </c:if>
               <p>${orgNews.title}</p>
-              <a class="btn-more" href="/news.do?qm=plistNewsOrganization_default" title="更多">更多</a>
+              <a class="btn-more" href="/news/news.do?qm=plistNewsOrganization_default" title="更多">更多</a>
             </li>
           </c:forEach>
         </ul>
