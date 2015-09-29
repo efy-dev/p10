@@ -95,7 +95,10 @@ body {overflow-x:hidden}
 .home-list .slide-left .nav-list-ul li a:hover{text-decoration:none}
 .home-list .slide-left .nav-list-ul .title a {font-size:18px;color:#fff;background:#b4361c}
 .home-list .slide-left .nav-list-ul .active a {background:#f6f6f6}
-.home-list .slide-left .nav-list-ul .items:hover a{background:#f6f6f6}
+/*.home-list .slide-left .nav-list-ul .items:hover a{background:#f6f6f6}*/
+.home-list .slide-left .nav-list-ul li a.btn-list:hover {
+    background: #f6f6f6;
+}
 .home-list .slide-right {width:785px;min-height:600px;padding:50px 0 60px 20px;float:left;margin-left:-1px;border-left:1px solid #dcdcdc}
 .home-list .slide-right .title-hide,
 .home-list .slide-right .title{width:100%;padding:20px 0;float:left;text-align:center;font-size:20px;color:#080808;border-bottom:1px solid #dcdcdc;position: relative;}

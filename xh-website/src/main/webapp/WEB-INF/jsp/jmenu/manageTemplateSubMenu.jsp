@@ -21,7 +21,7 @@
                         <c:if test="${not empty child.children}">
                             <li class="items active">
                                 <a class="btn-list" href="" target="_parent" title="">协会会员<i class="icon"></i></a>
-                                <div class="items-list" style="display: none;">
+                                <div class="items-list" style="display: block;">
                                     <c:forEach items="${child.children}" var="subChild">
                                         <c:if test="${child.id== matchJnode.id}">
                                     <a class="items-active" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
@@ -42,12 +42,12 @@
                         <c:if test="${not empty child.children}">
                             <li class="items">
                                 <a class="btn-list" href="" target="_parent" title="">${child.text_zh_CN}<i class="icon"></i></a>
-                                <div class="items-list" style="display: none;">
+                                <div class="items-list" style="display: block;">
                                     <c:forEach items="${child.children}" var="subChild">
-                                        <c:if test="${child.id== matchJnode.id}">
+                                        <c:if test="${subChild.id== matchJnode.id}">
                                             <a class="items-active" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
-                                        <c:if test="${child.id!= matchJnode.id}">
+                                        <c:if test="${subChild.id!= matchJnode.id}">
                                             <a class="items-a" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
                                     </c:forEach>

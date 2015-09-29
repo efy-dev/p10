@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,17 +24,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/protection")
 public class ProtectionController {
+
     @Autowired
     private BaseManager baseManager;
-
     @Autowired
     private DoManager doManager;
-
     @Autowired
     private XdoManager xdoManager;
     @Autowired
     private XdoSupportManager xdoSupportManager;
-
 
     @RequestMapping({"/protection.do"})
     public List<Document> protection(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -67,4 +66,24 @@ public class ProtectionController {
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }
+
+    @RequestMapping({"/protection.declare.do"})
+    public ModelAndView declare(HttpServletRequest request, ModelMap modelMap) throws Exception {
+        String qm = request.getParameter("qm");
+        if (qm.split("_").length < 2) {
+            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        }
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+        List list = (List) xdoManager.list(tempDo, tempDoQuery, null);
+        if (list != null && list.size()>0){
+            modelMap.put("object", list.get(0));
+        }
+
+        return new ModelAndView("protection/declare");
+    }
+
 }

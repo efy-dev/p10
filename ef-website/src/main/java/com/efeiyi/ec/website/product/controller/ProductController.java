@@ -58,16 +58,31 @@ public class ProductController {
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
         if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModel:productModelList){
+            for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                s.append(((ProductModel) productModelTemp).getProduct().getName());
+                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
+                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    map.put((ProductModel)productModelTemp,s.toString());
+
+                }else {
+                    s.append("[");
+                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
+                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                    }
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    s.append("]");
+                    map.put((ProductModel) productModelTemp, s.toString());
+
                 }
-                if(s.length()>10){
-                    s = new StringBuilder(s.substring(0,10));
-                    s.append("...");
-                }
-                map.put(productModel,s.toString());
+
             }
         }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
@@ -125,10 +140,28 @@ public class ProductController {
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
                 s.append(((ProductModel) productModelTemp).getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
+                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    map.put((ProductModel)productModelTemp,s.toString());
+
+                }else if(productPropertyValueList!=null&&productPropertyValueList.size()>1){
+                    s.append("[");
+                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
+                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                    }
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    s.append("]");
+                    map.put((ProductModel) productModelTemp, s.toString());
+
                 }
-                map.put((ProductModel)productModelTemp,s.toString());
+
             }
         }
         model.addAttribute("productModelList", productModelList);

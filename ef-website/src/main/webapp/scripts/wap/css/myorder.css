@@ -265,16 +265,3 @@ ul,dl{list-style:none}
 /*购物车结算页按钮修改样式*/
 .add-btn{background:#fff;height: 3rem;width: 100%;border: 1px solid #000;color: #000;display:block;font-size: 1.2rem}
 .add-address{width: 100%;line-height: 3rem;height: 3rem;text-align: center;border: 1px solid #000;display:block;color: #000;font-size: 1.2rem}
-/*铜的故事高度控制*/
-@media (width: 320px) {
-    .list-class .ul-list li{height: 17rem}
-    .list-class .ul-list li img{height: 11.2rem}
-}
-@media (min-width: 414px) {
-    .list-class .ul-list li{height: 21.5rem}
-    .list-class .ul-list li img{height: 14.96rem}
-}
-@media (width: 375px) {
-    .list-class .ul-list li{height: 17.5rem}
-    .list-class .ul-list li img{height: 13.4rem}
-}
