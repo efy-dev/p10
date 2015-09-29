@@ -35,7 +35,7 @@ public class NewsController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping({"/news/news.do","/news/news.Bulletin.do","/protection/protection.list.do"})
+    @RequestMapping({"/news/news.do","/news/news.Bulletin.do","/protection/protection.list.do","/protection/protection.homeList.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
