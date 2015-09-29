@@ -19,7 +19,7 @@
   <div class="wh">
     <ol class="am-breadcrumb">
       <li><a href="/">首页</a></li>
-      <li><a href="#">分类</a></li>
+      <li><a href="javascript:window.history.back()">分类</a></li>
       <li class="am-active">内容</li>
     </ol>
   </div>
@@ -158,7 +158,7 @@
       </div>
       <!-- //End-->
       <div class="master-name">
-        <p class="p1"><span>${product.master.fullName}</span>[${product.master.getMainProjectName().getProject().getName()}]</p>
+        <p class="p1"><a href="http://${product.master.name}.efeiyi.com" target="_blank"><span>${product.master.fullName}</span></a>[${product.master.getMainProjectName().getProject().getName()}]</p>
         <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
         <div class="master-img-pt"><a  href="http://${product.master.name}.efeiyi.com" target="_blank" title=""><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></a></div>
       </div>
@@ -173,7 +173,12 @@
       <div class="des">
         <div class="colour">发货地：</div>
         <div class="colour-page">
-          <span>${product.tenant.address}（有货）  包邮</span>
+          <c:if test="${product.tenant.address==null}">
+            <span>未知  包邮</span>
+            </c:if>
+          <c:if test="${product.tenant.address!=null}">
+          <span>${product.tenant.address}  包邮</span>
+          </c:if>
         </div>
       </div>
       <div class="des">
@@ -226,6 +231,8 @@
         <!--  JiaThis Button END-->
       </div>
       <!-- //End-->
+
+
     </div>
   </div>
   <!-- //End--itemInfo-->
@@ -244,11 +251,12 @@
         <ul>
           <c:if test="${empty product.master.id}">
             <li><a href="#detail" title="商品详情">商 品 详 情</a></li>
+            <li><a href="#title" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
           </c:if>
           <c:if test="${not empty product.master.id}">
           <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
           <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
-          <li><a href="/comment/finishOrderList.do" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
+          <li><a href="#title" title="商品评价">商 品 评 价<i class="icon"></i></a></li>
           <%--<li><a href="#" title="服务保障">服 务 保 障<i class="icon"></i></a></li>--%>
 
           <li><a href="<c:url value="/tenant/${product.tenant.id}"/>" title="同店精品">进 入 店 铺</a></li>
@@ -267,9 +275,40 @@
   <div class="wh detail" id="detail">
     <div class="wh title"><h3>商品详情</h3></div>
       <div class="wh part">
-      ${product.productDescription.content}
+
+        <%--<div class="wh part">--%>
+          ${product.productDescription.content}
+          <div class="discuss">
+            <div class="title" id="title"><h3>商品评价</h3></div>
+            <div class="dis-con">
+              <div class="dis-title">用户印象：</div>
+              <div class="dis-ul">
+                <ul>
+                  <li>
+                    <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                      <div class="txt">
+                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
+                       ${purchaseOrderProduct.purchaseOrderComment.content}
+                        </c:if>
+                      </div>
+                      <%--<div class="star">5星</div>--%>
+                      <c:set var="user" >
+                        ${purchaseOrderProduct.purchaseOrder.user}
+                      </c:set>
+                      <div class="user"><i class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</div>
+                    </c:forEach>
+                   </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+     </div>
     </div>
-  </div>
+    </div>
+
+
+
+
 </div>
 <script type="text/javascript">
   function collect(o) {

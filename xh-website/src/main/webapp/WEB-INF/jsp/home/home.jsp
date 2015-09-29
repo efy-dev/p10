@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/layouts/public.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -40,16 +41,18 @@
             <c:forEach items="${IndustryList}" var="industry">
               <li>
                 <c:if test="${empty industry.documentAttachmentList}">
-                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty industry.documentAttachmentList}">
                   <c:forEach items="${industry.documentAttachmentList}" var="att" end="0">
-                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${industry.title}</p>
+                <p class="name" style="width: 90%;">
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title="${industry.title}">${industry.title}</a>
+                </p>
                 <p class="info">${industry.sampleContent}</p>
-                <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="<c:url value='/news/news.do?qm=plistNewsIndustry_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -61,16 +64,18 @@
             <c:forEach items="${NoteList}" var="note">
               <li>
                 <c:if test="${empty note.documentAttachmentList}">
-                  <a href="#" target="_blank" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty note.documentAttachmentList}">
                   <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                    <a href="#" target="_blank" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${note.title}</p>
+                <p class="name" style="width: 90%;">
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" target="_parent" title="${note.title}">${note.title}</a>
+                </p>
                 <p class="info">${note.sampleContent}</p>
-                <a href="#阅读更多" class="btn-more" title="阅读更多">阅读更多</a>
+                <a href="<c:url value='/news/news.Bulletin.do?qm=plistNewsNote_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
             </c:forEach>
           </ul>
@@ -103,92 +108,72 @@
       </div>
       <!-- //End---->
       <div class="wh data-down">
-        <div class="title">资料下载<a class="btn-more" href="#更多" title="更多">更多</a></div>
-        <ul class="list-table">
-          <li>
-            <a href="#" target="_blank" title="国家级非物质文化遗产项目代表性传承人认定与管理暂行办法(2008)">
-              <table>
-                <tr>
-                  <td>国家级非物质文化遗产项目代表性传承人认定与管理暂行办法(2008)</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）(2008)</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" title="中华人民共和国非物质文化遗产法（2011）">
-              <table>
-                <tr>
-                  <td>中华人民共和国非物质文化遗产法（2011）</td>
-                </tr>
-              </table>
-            </a>
-          </li>
-        </ul>
+        <div class="title">资料下载<a class="btn-more" href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default'/> " title="更多">更多</a></div>
+
+        <jsp:include flush="true"
+                     page="/protection/protection.homeList.do?qm=plistPolicy_default&jmenuId=AssociationMenu&"/>
+
+
       </div>
       <!-- //End---->
     </div>
     <!-- //End--slide-right-->
     <div class="slider-right">
       <div class="part">
-        <div class="title">非物质文化</div>
+        <div class="title">协会新闻</div>
         <ul class="ul-list">
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
-            <p>建立非遗协会这样国家级的非物质文化遗产构。</p>
-            <a class="btn-more" href="#更多" target="_blank" title="更多">更多</a>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
-            <p>建立非遗协会这样国家级的非物质文化遗产构。</p>
-            <a class="btn-more" href="#更多" target="_blank" title="更多">更多</a>
-          </li>
+          <c:forEach items="${OrgNewsList}" var="orgNews">
+            <li>
+              <c:if test="${empty orgNews.documentAttachmentList}">
+                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
+              </c:if>
+              <c:if test="${not empty orgNews.documentAttachmentList}">
+                <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" title=""><img src="${att.path}" alt=""/></a>
+                </c:forEach>
+              </c:if>
+              <p>
+                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" target="_parent">${orgNews.title}</a>
+              </p>
+              <a class="btn-more" href="<c:url value='/news/news.do?qm=plistNewsOrganization_default'/>" title="更多">更多</a>
+            </li>
+          </c:forEach>
         </ul>
       </div>
       <!-- //End--part1-->
       <div class="part">
         <div class="title">在线服务</div>
         <ul class="ul-list-btn">
-          <li><a href="#在线申报" target="_blank" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
-          <li><a href="#非遗名录" target="_blank" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
-          <li><a href="#法规政策" target="_blank" title="法规政策"><i class="icon icon-3"></i>法规政策</a></li>
-          <li><a href="#下属机构" target="_blank" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
+          <li><a href="#在线申报" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
+          <li><a href="/project/project.do?qm=listAddressProvince_default" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
+          <li><a href="/protection/protection.do?qm=plistLaw_default" title="法规政策"><i class="icon icon-3"></i>法规政策</a></li>
+          <li><a href="/organization/organization.committee.do?qm=plistCommitteeAssociation_default" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
         </ul>
       </div>
       <!-- //End--part-->
       <div class="part">
-        <div class="title">非物质文化</div>
+        <div class="title">非遗传承人</div>
         <ul class="ul-list">
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
-            <p>姚惠芬-苏绣</p>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
-            <p>姚惠芬-苏绣</p>
-          </li>
+          <c:forEach items="${masterList}" var="master">
+            <li>
+              <a href="" title=""><img src="../shop2015/upload/exp6.jpg" alt=""></a>
+              <p>${master.fullName}</p>
+            </li>
+          </c:forEach>
         </ul>
       </div>
     </div>
     <!-- //End--slide-right-->
   </div>
 </div>
+<script type="text/javascript">
+  function getMatchJnodes(id,val){
+    var jmenu = document.getElementById("jmenu").value;
+    var currentJnode = "SubordinateInstitutionManagement";
+    var matchJnode = val;
+    var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
+    window.location=url;
+  }
+</script>
 </body>
 </html>

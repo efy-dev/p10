@@ -1,5 +1,6 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.OrganizationConst;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -125,10 +126,11 @@ public class MyBannerController {
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
-        String url = "product/" + identify + ".jpg";
+        String url = "banner/" + identify + ".jpg";
 
         if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
+            aliOssUploadManager.uploadFile(multipartFile, "association", url);
+            url = OrganizationConst.imgBasePath + url;
             banner.setImageUrl(url);
         }
         bannerManager.saveBanner(banner);

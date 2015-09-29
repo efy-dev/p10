@@ -472,7 +472,7 @@ a:hover{text-decoration: underline}
 .my-clearing .divtop{margin-top: 40px;}
 .my-clearing .alipay{text-align:center;margin-right: 34px;float: left;cursor: pointer;padding:10px 44px;background-color:#fff;border: 1px solid #ccc;font-size: 12px;color: #000;position: relative;width:141px;}
 .my-clearing .triangle{background: url("../images/efeiyi-active.png")no-repeat right bottom;border: 1px solid #000;text-decoration: none;}
-.my-clearing .page-store{height: 70px;line-height: 70px;}
+.my-clearing .page-store{height: 55px;line-height: 55px;}
 .my-clearing .page-store a{outline:none;font-size: 12px;font-family: "宋体";color: #003366;position: relative;padding-right: 50px;}
 .my-clearing .page-inventory{border: 1px solid #ccc;width: 1000px;overflow: hidden;margin-top: -1px;float: left;padding: 23px 0 22px 20px;}
 .my-clearing .page-inventory .triangle-bg{background: url('../images/efeiyi-gwc.png') no-repeat -62px 0;width: 13px;height: 6px;position: absolute;left:53px;top: 2px;}
@@ -482,7 +482,7 @@ a:hover{text-decoration: underline}
 .my-clearing .bd-gwc{border: 1px solid #ccc;}
 .my-clearing .pd-gwc{margin-top: 20px;}
 .my-clearing .cols1 img {  width:78px;  float: left;border: 1px solid #ccc;text-align: center;margin: 20px 0;}
-.my-clearing .info {width:300px;  float: left;padding:22px 0 40px 10px;}
+.my-clearing .info {width:300px;  float: left;padding:40px 0 40px 10px;}
 .my-clearing .info p{font-size: 12px;font-family: "宋体";line-height:20px;}
 .my-clearing .info a{font-size: 12px;color:#666;font-family:  "宋体";font-weight: normal;outline: none;}
 .my-clearing .moneycl{color: #ff0000;}
@@ -769,7 +769,8 @@ a:hover{text-decoration: underline}
 .scan-code .scan-text ul li strong{font-weight:100;color:#ff9900;font-size: 22px!important; }
 .scan-code .scan-text ul .tx1{float: left!important;text-align: left;font-size: 12px;color: #000;margin-top: 10px;}
 .scan-code .scan-text ul .tx2{float: right;text-align: right;font-size: 12px;color: #000;}
-.scan-code .scan-img-left{float: left;background: url("../images/efeiyi-wxzf.fw.png") no-repeat left top;width: 288px;height: 369px;}
+.scan-code .scan-img-left{float: left;background: url("../images/efeiyi-wxzf.fw.png") no-repeat left top;width: 288px;height: 369px;position: relative;}
+.scan-code .scan-img-left img {position: absolute;top: 25px;left: 25px;}
 .scan-code .scan-img-right{float: right;background: url("../images/efeiyi-wxzf.fw.png") no-repeat right top;width: 352px;height: 369px;}
 .scan-code .scan-img{margin-bottom: 64px;padding:76px 148px;float:left;width: 100%;border-top:3px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px  solid #ccc; }
 /*注册修改兼容ie*/
@@ -865,3 +866,15 @@ a:hover{text-decoration: underline}
 /*.product-intro .colour-page .txt{width: 58px;padding: 2px 5px;text-align: center;font-size: 12px;}*/
 /*.product-intro .itemInfo .itme-ext .amount{width: 131px;}*/
 /*.product-intro .colour-page .btn-sub{margin: 5px 0;border-left: 1px solid #000;padding:0 7px;color: #000;text-decoration: none}*/
+@media (width: 320px) {
+    .list-class .ul-list li{height: 17rem}
+    .list-class .ul-list li img{height: 11.2rem}
+}
+@media (min-width: 414px) {
+    .list-class .ul-list li{height: 21.5rem}
+    .list-class .ul-list li img{height: 14.96rem}
+}
+@media (width: 375px) {
+    .list-class .ul-list li{height: 17.5rem}
+    .list-class .ul-list li img{height: 13.4rem}
+}

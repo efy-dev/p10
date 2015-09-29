@@ -25,7 +25,7 @@
         </ul>
       </div>
       <div class="scan-img">
-        <div id="native"></div>
+        <div class="scan-img-left" id="native"></div>
         <div class="scan-img-right"></div>
       </div>
     </div>

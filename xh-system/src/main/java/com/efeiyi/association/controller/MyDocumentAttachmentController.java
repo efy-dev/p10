@@ -1,5 +1,6 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.OrganizationConst;
 import com.efeiyi.ec.association.model.ApplicationMaterial;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -113,9 +114,10 @@ public class MyDocumentAttachmentController {
     @RequestMapping("/saveAttachment.do")
     @ResponseBody
     public ModelAndView saveAttachment(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response, Document document) throws Exception {
-        String url = "product/" + multipartFile.getOriginalFilename();
+        String url = "attachment/" + multipartFile.getOriginalFilename();
         if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "315pal", url);
+            aliOssUploadManager.uploadFile(multipartFile, "association", url);
+            url = OrganizationConst.imgBasePath + url;
         }
         if (document.getId() == null || "".equals(document.getId())) {
             //新建内容传入原页面地址

@@ -8,14 +8,8 @@ import com.ming800.core.does.model.DoQuery;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.Jmenu;
-import com.ming800.core.p.model.Jnode;
-import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.DocumentManager;
-import com.ming800.core.p.service.impl.JmenuManagerImpl;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +24,9 @@ import java.util.List;
 public class NewsController {
 
     @Autowired
+    private BaseManager baseManager;
+
+    @Autowired
     private XdoManager xdoManager;
 
     @Autowired
@@ -38,7 +35,7 @@ public class NewsController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping({"/news.do","/news.Bulletin.do"})
+    @RequestMapping({"/news/news.do","/news/news.Bulletin.do","/protection/protection.list.do","/protection/protection.homeList.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
@@ -67,7 +64,6 @@ public class NewsController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getData());
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }

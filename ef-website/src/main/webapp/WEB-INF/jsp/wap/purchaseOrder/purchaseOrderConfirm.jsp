@@ -78,7 +78,14 @@
                                      alt="">
 
                                 <div class="bd info">
-                                    <p class="text">${product.productModel.product.name}</p>
+                                    <p class="text">${product.productModel.name}
+                                        <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                            [
+                                            <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                            ]
+                                        </c:if>
+                                    </p>
 
                                     <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
 

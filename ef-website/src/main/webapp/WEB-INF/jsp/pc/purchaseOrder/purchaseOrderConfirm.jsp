@@ -142,9 +142,14 @@
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
 
-                                                <p><a href="#">${product.productModel.product.name}
+                                                <p><a href="#">${product.productModel.name}
+                                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                                        [
                                                     <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                               var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                        ]
+                                                    </c:if>
+
                                                 </p>
                                             </div>
                                         </div>
@@ -184,7 +189,7 @@
         <div class="System">
             <div class="System-text">
                 <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
-                <span>应付金额：<strong>${cart.totalPrice.intValue()}</strong> 元</span>
+                <span>应付金额：<strong>${cart.totalPrice-purchaseOrder.coupon.couponBatch.price}</strong> 元</span>
             </div>
         </div>
         <!--结算-->

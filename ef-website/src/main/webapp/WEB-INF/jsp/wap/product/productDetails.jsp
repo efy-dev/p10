@@ -20,7 +20,9 @@
         <ul class="am-slides">
             <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-pic"></li>
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
+                <c:if test="${picture.status=='1'}">
                 <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
+                </c:if>
             </c:forEach>
         </ul>
     </div>
@@ -135,10 +137,10 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="#进店" title="进店">进店</a>
+        <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
-        <a class="btn-cart" href="#放入购物车" title="放入购物车"><i class="icon"></i>放入购物车</a>
-        <a class="btn-buy" href="#立即购买" title="立即购买">立即购买</a>
+        <a class="btn-cart" id="btn-cart" href="#放入购物车" title="放入购物车"><i class="icon"></i>放入购物车</a>
+        <a class="btn-buy"  id="btn-buy"href="#立即购买" title="立即购买">立即购买</a>
     </div>
 </article>
 <div class="am-modal-actions dialog-des-format" id="my-actions">
@@ -177,7 +179,7 @@
             <a  class="bd btn-cart">缺货</a>
         </c:if>
         <c:if test="${productModel.amount > 0}">
-            <a href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" class="bd btn-cart">加 入 购 物 车</a>
+            <a class="bd btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" >加 入 购 物 车</a>
         </c:if>
     </div>
 </div>
@@ -205,19 +207,19 @@
 
     })
 </script>
-<script>
-    $(function(){
-        $('.btn-cart,.btn-format,.btn-buy').click(function(){
-            $('.dialog-des-format').css({'-webkit-transform':'translateY(0)'});
-            $('.am-dimmer').show();
-            $('.am-active').click(function(){
-                $('.dialog-des-format').css({'-webkit-transform':'translateY(110%)'});
-                $('.am-dimmer').hide();
-            })
-            return false;
-        })
-    })
-</script>
+<%--<script>--%>
+    <%--$(function(){--%>
+        <%--$('.btn-cart,.btn-format,.btn-buy').click(function(){--%>
+            <%--$('.dialog-des-format').css({'-webkit-transform':'translateY(0)'});--%>
+            <%--$('.am-dimmer').show();--%>
+            <%--$('.am-active').click(function(){--%>
+                <%--$('.dialog-des-format').css({'-webkit-transform':'translateY(110%)'});--%>
+                <%--$('.am-dimmer').hide();--%>
+            <%--})--%>
+            <%--return false;--%>
+        <%--})--%>
+    <%--})--%>
+<%--</script>--%>
 </body>
 
 

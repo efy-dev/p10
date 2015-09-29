@@ -10,17 +10,17 @@
         <div class="icon wechat"></div>
     </div>
     <div class="links wh">
-        <a href="" target="_blank" title="关于我们">关于我们</a>
+        <a href="http://www.efeiyi.com/main/aboutUs" target="_blank" title="关于我们">关于我们</a>
         <a class="line"></a>
-        <a href="" target="_blank" title="联系我们">联系我们</a>
+        <a href="http://www.efeiyi.com/main/contactUs" target="_blank" title="联系我们">联系我们</a>
         <a class="line"></a>
-        <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
+        <a href="http://www.efeiyi.com/main/welcome" target="_blank" title="诚聘英才">诚聘英才</a>
         <a class="line"></a>
-        <a href="" target="_blank" title="意见反馈">意见反馈</a>
+        <a href="mailto:kefu@efeiyi.com" target="_blank" title="意见反馈">意见反馈</a>
         <a class="line"></a>
         <a href="" target="_blank" title="诚信保障">诚信保障</a>
         <a class="line"></a>
-        <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
+        <a href="<c:url value="/news"/> " target="_blank" title="新闻资讯">新闻资讯</a>
     </div>
     <div class="copyright wh">
         <div class="phone">
@@ -43,4 +43,6 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
-<script src="<c:url value="/scripts/js/system.js?v=1"/>"></script>
+<script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
