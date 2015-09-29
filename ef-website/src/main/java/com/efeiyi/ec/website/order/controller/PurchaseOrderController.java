@@ -468,6 +468,9 @@ public class PurchaseOrderController extends BaseController {
                 PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
                 purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
                 purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
+                if (cartProductTemp.getProductModel().getPrice() == null){
+                    cartProductTemp.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId()));
+                }
                 purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
                 purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
