@@ -44,3 +44,5 @@
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
 <script src="<c:url value="/scripts/js/system.js?v=1"/>"></script>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
