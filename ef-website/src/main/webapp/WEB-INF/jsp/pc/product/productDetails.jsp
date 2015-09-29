@@ -1,4 +1,3 @@
-<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -20,7 +19,7 @@
   <div class="wh">
     <ol class="am-breadcrumb">
       <li><a href="/">首页</a></li>
-      <li><a href="#">分类</a></li>
+      <li><a href="javascript:window.history.back()">分类</a></li>
       <li class="am-active">内容</li>
     </ol>
   </div>
