@@ -43,7 +43,7 @@ public class NewsController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping({"/news.do","/news.Bulletin.do"})
+    @RequestMapping({"/news.do","/news.Bulletin.do","/protection/protection.list.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
@@ -72,7 +72,6 @@ public class NewsController {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
         modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getData());
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
     }

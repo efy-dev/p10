@@ -16,78 +16,24 @@
     <div class="list-table">
         <table>
             <tr>
-                <td class="txt-left">机构名称</td>
-                <td>主要负责人</td>
+                <td class="txt-left">协会名称</td>
+                <td>区域</td>
                 <td>成立时间</td>
             </tr>
             <c:forEach items="${documentList}" var="association" varStatus="status">
-                <tr>
-                    <td class="txt-left">
-                        <p>${association.name}</p>
-
-                        <p>(${association.addressDistrict.addressCity.name})</p>
-                    </td>
-                    <td>${association.inCharge}</td>
-                    <td><fmt:formatDate
-                            value="${association.theDatetime}" pattern="yyyy.MM"/></td>
-                </tr>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-                <%--<tr>--%>
-                <%--<td class="txt-left">--%>
-                <%--<p>刺绣委员会</p>--%>
-
-                <%--<p>（苏州）</p>--%>
-                <%--</td>--%>
-                <%--<td>姚惠芬</td>--%>
-                <%--<td>2012.8</td>--%>
-                <%--</tr>--%>
-            </c:forEach>
-        </table>
+            <tr>
+                <td class="txt-left">${association.name}</td>
+                <td>${association.addressDistrict.addressCity.name}</td>
+                <td><fmt:formatDate
+                        value="${association.theDatetime}" pattern="yyyy.MM"/></td>
+            </tr>
+            <!-- //End--slide-right-->
     </div>
+</div>
+
+</c:forEach>
+</table>
+</div>
 </div>
 <!-- //End--slide-right-->
 </div>

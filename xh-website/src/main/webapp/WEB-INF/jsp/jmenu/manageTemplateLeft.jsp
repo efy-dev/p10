@@ -25,4 +25,6 @@
         </ul>
     </div>
 </div>
+<input type="hidden" value="${currentJnode.id}" id="currentJnode">
+<input type="hidden" value="${jmenu.id}" id="jmenu">
 <!--//End--nav-->
