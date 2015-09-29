@@ -396,8 +396,6 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
         purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-        productModel.setAmount(productModel.getAmount() - 1);
-        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
 
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);

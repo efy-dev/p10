@@ -40,14 +40,16 @@
             <c:forEach items="${IndustryList}" var="industry">
               <li>
                 <c:if test="${empty industry.documentAttachmentList}">
-                  <a href="#" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty industry.documentAttachmentList}">
                   <c:forEach items="${industry.documentAttachmentList}" var="att" end="0">
-                    <a href="#" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${industry.title}</p>
+                <p class="name" style="width: 90%;">
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7)" title="${industry.title}">${industry.title}</a>
+                </p>
                 <p class="info">${industry.sampleContent}</p>
                 <a href="/news.do?qm=plistNewsIndustry_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
@@ -61,14 +63,16 @@
             <c:forEach items="${NoteList}" var="note">
               <li>
                 <c:if test="${empty note.documentAttachmentList}">
-                  <a href="#" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" title=""><img src="../shop2015/upload/exp1.jpg" alt=""/></a>
                 </c:if>
                 <c:if test="${not empty note.documentAttachmentList}">
                   <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                    <a href="#" title=""><img src="${att.path}" alt=""/></a>
+                    <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" title=""><img src="${att.path}" alt=""/></a>
                   </c:forEach>
                 </c:if>
-                <p class="name">${note.title}</p>
+                <p class="name" style="width: 90%;">
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8)" target="_parent" title="${note.title}">${note.title}</a>
+                </p>
                 <p class="info">${note.sampleContent}</p>
                 <a href="/news.Bulletin.do?qm=plistNewsNote_default" class="btn-more" title="阅读更多">阅读更多</a>
               </li>
@@ -153,14 +157,16 @@
           <c:forEach items="${OrgNewsList}" var="orgNews">
             <li>
               <c:if test="${empty orgNews.documentAttachmentList}">
-                <a href="" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
+                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" title=""><img src="../shop2015/upload/exp5.jpg" alt=""/></a>
               </c:if>
               <c:if test="${not empty orgNews.documentAttachmentList}">
                 <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                  <a href="#" title=""><img src="${att.path}" alt=""/></a>
+                  <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" title=""><img src="${att.path}" alt=""/></a>
                 </c:forEach>
               </c:if>
-              <p>${orgNews.title}</p>
+              <p>
+                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6)" target="_parent">${orgNews.title}</a>
+              </p>
               <a class="btn-more" href="/news.do?qm=plistNewsOrganization_default" title="更多">更多</a>
             </li>
           </c:forEach>
@@ -192,5 +198,14 @@
     <!-- //End--slide-right-->
   </div>
 </div>
+<script type="text/javascript">
+  function getMatchJnodes(id,val){
+    var jmenu = document.getElementById("jmenu").value;
+    var currentJnode = "SubordinateInstitutionManagement";
+    var matchJnode = val;
+    var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
+    window.location=url;
+  }
+</script>
 </body>
 </html>

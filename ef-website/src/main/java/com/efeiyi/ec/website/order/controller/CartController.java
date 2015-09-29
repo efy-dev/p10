@@ -189,7 +189,8 @@ public class CartController {
             float totalPrice = 0;
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
+                    ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId());
+                    float price = productModel.getPrice().floatValue() * cartProductTemp.getAmount();
                     totalPrice += price;
                 }
             }
