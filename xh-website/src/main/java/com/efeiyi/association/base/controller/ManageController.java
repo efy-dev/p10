@@ -107,6 +107,24 @@ public class ManageController {
         Jnode resultJnode = null;
         for (Jnode jnodeTemp : jmenu.getChildren()) {
             if (resultJnode == null) {
+                if(jnodeTemp.getChildren() != null &&jnodeTemp.getChildren().size()!=0){
+                    resultJnode = getCurrentJnode(jnodeTemp,match);
+                }
+                resultJnode = jnodeTemp.getUrl().trim().startsWith(match.trim())?jnodeTemp:null;
+            }
+        }
+        return resultJnode;
+    }
+    private Jnode getCurrentJnode(Jnode jmenu, String match) {
+        if (match == null || match.equals("") || jmenu == null) {
+            return null;
+        }
+        Jnode resultJnode = null;
+        for (Jnode jnodeTemp : jmenu.getChildren()) {
+            if (resultJnode == null) {
+                if(jnodeTemp.getChildren() != null &&jnodeTemp.getChildren().size()!=0){
+                    resultJnode = getCurrentJnode(jnodeTemp,match);
+                }
                 resultJnode = jnodeTemp.getUrl().trim().startsWith(match.trim())?jnodeTemp:null;
             }
         }

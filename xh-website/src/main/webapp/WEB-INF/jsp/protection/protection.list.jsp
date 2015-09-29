@@ -29,7 +29,7 @@
                     <a href='javascript:void(0)' onclick="getMatchJnodes('${document.id}')"><p><strong><em>${status.index + 1}、</em>${document.title}[<fmt:formatDate
                             value="${document.publishDate}" pattern="yyyy-MM-dd"/>]</strong></p>
 
-                    <p>${document.sampleContent}...</p></a>
+                    </a>
                 </li>
             </c:forEach>
         </ul>
