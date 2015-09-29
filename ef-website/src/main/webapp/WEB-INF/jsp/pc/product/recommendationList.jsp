@@ -52,10 +52,17 @@
       <%--<div class="p-img"><a href="http://${productModel.product.master.name}.efeiyi.com" title=""><img class="imgfilter" src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-pc-tenant-list" width="286" height="206" alt=""/></a></div>--%>
       <div class="item p-text">${productModel.product.subName}</div>
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
+      <c:if test="${productModel.amount<=0}">
+        <div class="item p-btn active" >
+          <a class="btn btn-append" href="" title="缺货"><i class="icon"></i>缺货</a>
+        </div>
+      </c:if>
+      <c:if test="${productModel.amount>0}">
       <div class="item p-btn">
         <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>"} title="立即购买">立即购买</a>
       </div>
+       </c:if>
     </div>
   </div>
   <!-- //End--details-->
