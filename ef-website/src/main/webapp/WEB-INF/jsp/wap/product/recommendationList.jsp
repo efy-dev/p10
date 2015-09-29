@@ -38,8 +38,10 @@
     <!-- //End--pep-info-->
     <div class="bd btns">
       <c:if test="${productModel.amount<=0}">
-        <a class="btn-buy"  href=""/>缺货</a>
+        <a class="not-btn-buy" href="#缺 货">缺 货</a>
       </c:if>
+    </div>
+    <div class="bd btns">
       <c:if test="${productModel.amount>0}">
       <a class="btn-buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>">立即购买</a>
       <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>">加入购物车</a>
@@ -65,5 +67,18 @@
     </ul>
   </div>
 </artice>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../shop2015/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="../shop2015/js/amazeui.min.js"></script>
+<!--自定义js--Start-->
+<script src="../shop2015/js/system.js?v=20150831"></script>
+<!--自定义js--End-->
 </body>
 </html>

@@ -41,6 +41,8 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .custom-header .menu-list:before {content:'';width:2px;height:2px;background:#fff;position:absolute;bottom:-1px;left:-1px}
 .index-header {border-bottom:3px #000 solid;border-top:3px #000 solid}
 .index-header .am-header-nav {margin-top:-16px}
+.custom-header .chevron-left{width:40px;height:40px;position:absolute;top:-14px;left:0;}
+.custom-header .chevron-left:before{position:absolute;top:50%;left:50%;margin-top:-6px;margin-left:-6px;}
 /*--//End--*/
 .custom .am-slider {box-shadow:none}
 .custom .am-control-nav li a {background:#cecece;box-shadow:none}
@@ -215,9 +217,10 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .pro-rec-area .pep-info .img span { width:100%;float: left}
 .pro-rec-area .pep-info .img span a {color:#036;font-size: 12px;position: relative}
 .pro-rec-area .pep-info .img span .arrow-right:before {width:8px;height:8px;position: absolute;top:50%;margin-top:-4px;right:-8px}
-.pro-rec-area .btns { padding:0 20px}
-.pro-rec-area .btns a {width:46%;text-align: center;line-height:35px;color:#000;border: 1px solid #000;float: left}
-.pro-rec-area .btns a:last-child { float: right}
+.pro-rec-area .btns{width:100%;height:37px;float:left;padding:0 20px;position:relative;}
+.pro-rec-area .btns a{width:46%;text-align:center;line-height:35px;color:#000;border:1px solid #000;float:left;}
+.pro-rec-area .btns a:last-child{float:right;}
+.pro-rec-area .btns a.not-btn-buy{background:#000;color:#fff;position:absolute;top:0;left:50%;margin-left:-23%;cursor:not-allowed;}
 /*--//End--*/
 .shop-cart li {width:100%;float:left;position:relative}
 .shop-cart .cart-list {padding:0 20px;box-sizing:border-box}
