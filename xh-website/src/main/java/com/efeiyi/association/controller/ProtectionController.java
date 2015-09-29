@@ -51,8 +51,8 @@ public class ProtectionController {
         String pageSize = request.getParameter("pageEntity.size");
         if (pageIndex != null) {
             pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
         }
+        pageEntity.setSize(1);
 
         modelMap.put("tabTitle", tempDoQuery.getLabel());
 //                resultPage = "/pc/choiceness";
