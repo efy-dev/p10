@@ -86,8 +86,6 @@
                                     checkedValue="${object.orderStatus}"
                                     type="normal"/>
                 </td>
-
-
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单总额</td>
@@ -97,12 +95,17 @@
                 <td class="am-u-md-3">${object.getRealPayMoney()}</td>
 
             </tr>
-            <td class="am-primary am-u-md-3">下单时间</td>
-            <td class="am-u-md-3" colspan="3">
-                <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
-            </td>
             <tr>
-
+                <td class="am-primary am-u-md-3">下单时间</td>
+                <td class="am-u-md-3" colspan="3">
+                    <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">收货地址</td>
+                <td class="am-u-md-3" colspan="3">
+                    ${object.consumerAddress.details}
+                </td>
             </tr>
             </tbody>
         </table>
@@ -132,6 +135,12 @@
                 <td class="am-u-md-3">${consumer.deposit}</td>
                 <td class="am-primary am-u-md-3">积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">电话</td>
+                <td class="am-u-md-3">${consumer.phone}</td>
+                <td class="am-primary am-u-md-3">邮箱</td>
+                <td class="am-u-md-3">${consumer.email}</td>
             </tr>
             </tbody>
         </table>
