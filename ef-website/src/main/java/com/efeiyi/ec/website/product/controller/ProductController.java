@@ -238,8 +238,9 @@ public class ProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping({"/productFavoriteStatus.do"})
-   Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
+    @RequestMapping({"/favorite/productFavoriteStatus.do"})
+    @ResponseBody
+   public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
         Boolean flag = false;
         if (currentUser.getId() != null) {
