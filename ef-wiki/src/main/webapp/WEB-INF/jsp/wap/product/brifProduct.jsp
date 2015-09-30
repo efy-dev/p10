@@ -35,6 +35,8 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
+  <link type="text/css" rel="stylesheet" href="http://v3.jiathis.com/code/css/jiathis_share.css">
+
 </head>
 <body style="position: relative;">
 <%--<header class="am-header custom-header">--%>
@@ -162,7 +164,23 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="#" class="ft-a"> <i class="good-4"></i> </a>
+      <a href="#" class="ft-a" style="position:relative">
+        <i class="good-4"></i>
+        <div class="nr-share">
+        <div class="nr-bg">
+          <div class="jiathis_style">
+            <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"></a>
+            <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"></a>
+            <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"></a>
+            <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"></a>
+           <%-- <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin" ></span></a>
+            <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq" ></span></a>
+            <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina" ></span></a>
+            <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"><span class="jiathis_txt jtico jtico_cqq" ></span></a>--%>
+          </div>
+        </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -334,15 +352,19 @@ function savaUP(productId){
     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
     data:"",
     dataType:"json",
-    success:function(data){
-     if(data==false){
+    success:function(data2){
+     if(data2=="false"){
        alert("您还未登陆，请登录后再操作！！！");
        return false;
      }
-      if(data==true && oper=='up'){
+      if(data2=="repeat"){
+        alert("请不要重复操作！！！");
+        return false;
+      }
+      if(data2=="true" && oper=='up'){
         $("#em1").html(parseInt($("#em1").text())+1);
       }
-      if(data==true && oper=='down'){
+      if(data2=="true" && oper=='down'){
         $("#em1").html(parseInt($("#em1").text())-1);
       }
     },
@@ -351,7 +373,13 @@ function savaUP(productId){
       return false;
     },
     complete:function(){
-      $("#good-1").attr("name","down");
+      if($("#good-1").attr("name")=="down"){
+        $("#good-1").attr("name","up");
+      }else{
+        $("#good-1").attr("name","down");
+      }
+
+
     }
   });
 }
@@ -450,16 +478,20 @@ function savaUP(productId){
       data:"",
       async: true,
       dataType:"json",
-      success:function(data){
-        if(data==false){
+      success:function(data2){
+        if(data2=="false"){
           alert("您还未登陆，请登录后再操作！！！");
           return false;
         }
-        if(data==true && oper=='up'){
+        if(data2=="repeat"){
+          alert("您已经点过赞了！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
         }
-        if(data==true && oper=='down'){
-          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+        if(data2=="true" && oper=='down'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
         }
       },
       error:function(){
@@ -467,7 +499,12 @@ function savaUP(productId){
         return false;
       },
       complete:function(){
-        $(data).attr("name","down");
+
+        if( $(data).attr("name")=="up"){
+          $(data).attr("name","down");
+        }else{
+          $(data).attr("name","up");
+        }
       }
     });
   }
@@ -478,23 +515,27 @@ function savaUP(productId){
 
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+productId,//设置请求的脚本地址
+      url:"<c:url value='/base/storeProduct.do?productId='/>"+productId,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
-        if(data==false){
-          alert("您还未登陆，请登录后再操作");
+        if(data=="false"){
+          showAlert("提示","您还未登陆，请登录后再操作");
           return false;
         }
-        if(data==true){
-          $("#"+masterId).html("已关注");
+        if(data=="repeat"){
+          showAlert("提示","您已收藏过了！")
+          return true;
+        }
+        if(data=="true"){
+         showAlert("提示","您好，收藏成功！")
           return true;
         }
 
       },
       error:function(){
 
-        alert("出错了，请联系管理员！！！");
+        showAlert("error","出错了，请联系管理员！！！");
         return false;
       },
       complete:function(){
@@ -512,6 +553,7 @@ function savaUP(productId){
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+
 <script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
 <![endif]-->
 <script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js?v=20150831'/>"></script>
@@ -519,7 +561,7 @@ function savaUP(productId){
 
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
 <script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
-
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 <!--自定义js--End-->
 </body>
 </html>

@@ -7,7 +7,7 @@
   Time: 9:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.lang.*" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
@@ -93,9 +93,9 @@
         <div class="am-tab-panel " style="display:none;">
           <div class="suit">
             <div class="dynamic" style="border-bottom: 0;">
-              <% System.out.println(AuthorizationUtil.getMyUser().getId());
-                System.out.println(request.getAttribute("isShow"));
-              %>
+             <%-- <% out.println(AuthorizationUtil.getMyUser().getId());
+                out.println(request.getAttribute("isShow"));
+              %>--%>
               <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
               <div class="suit">
                 <div class="dynamic" id="recommends">
@@ -131,27 +131,17 @@
               <c:if test="${isShow =='ok'}">
                 <input id="flag" type="hidden" name="flag" value="back" />
               </c:if>
-              <%if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getParameter("isShow")) ){%>
+              <%
+                if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
+                /*  out.println(request.getAttribute("isShow"));
+                  out.println(AuthorizationUtil.getMyUser().getId());*/
+              %>
 
-              <div class="dynamic">
-                <ul class="suit-zt-2">
+              <div class="dynamic" id="after">
+                <ul class="suit-zt-2" id="attention">
                   <li>
                     <div class="suit-zt--2-img am-u-sm-5 am-u-end">
                       <a href="#"><img src="../shop2015/upload/120211-tx-1.jpg">
-                        <div class="tp-bg-0">
-                          <table>
-                            <tr><td><div style="padding: 0 1rem;">铜胎掐丝珐琅景泰蓝</div></td></tr>
-                          </table>
-                        </div></a>
-                    </div>
-                    <div class="suit-zt--2-text am-u-sm-7 am-u-end">
-                      <h4>景泰蓝工艺详情更新了</h4>
-                      <p><a href="#"> 增加相关大师5位</a></p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="suit-zt--2-img am-u-sm-5 am-u-end">
-                      <a href="www.baidu.com"><img src="../shop2015/upload/120211-tx-1.jpg">
                         <div class="tp-bg-0">
                           <table>
                             <tr><td><div style="padding: 0 1rem;">铜胎掐丝珐琅景泰蓝</div></td></tr>
@@ -185,6 +175,9 @@
     </div>
 </div>
 </div>
+<script>
+
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <!--<![endif]-->
 <!--[if lte IE 8 ]>

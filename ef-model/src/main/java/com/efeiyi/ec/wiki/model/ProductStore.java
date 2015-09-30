@@ -21,6 +21,7 @@ public class ProductStore implements Serializable {
     private String id;
     private Product product;
     private MyUser user;
+    private String status;
     private Date createDateTime;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -62,5 +63,13 @@ public class ProductStore implements Serializable {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

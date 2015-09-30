@@ -18,6 +18,22 @@ $(function(){
         var index=$(this).index();
         $(this).addClass('active').siblings('.item').removeClass('active');
         tabsBd.eq(index).show().siblings('.am-tab-panel').hide();
+        //自定义加载数据函数
+        $("#wikiNav li").each(function(index,element){
+
+            if($(element).attr("class")=="item active"){
+                if($(element).attr("id")=="1"){
+                    var flag = $("#flag").val();
+
+                    if(flag=="back"){
+                        PBL("#after","#attention",2);
+                        getData3("/base/afterAttention.do?conditions=&pageEntity.size=10&pageEntity.index=");
+                    }
+                }
+
+            }
+
+        });
     })
 
     //大师---作品
@@ -95,3 +111,47 @@ $(function(){
 
 
 })
+
+var afterNum=1;
+
+function getData3(url){
+    $.ajax({
+        type:"get",//设置get请求方式
+        url:url+afterNum,//设置请求的脚本地址
+        data:"",//设置请求的数据
+        dataType:"json",//设置请求返回的数据格式
+        success:function(data){
+            var pubu = $("#attention");
+            if(data && data.length>=1){
+                for(i in data){
+                for(var key in data[i]){
+                    var box = $(" <li> <div class='suit-zt--2-img am-u-sm-5 am-u-end'>" +
+                        " <a href='/base/brifProject.do?projectId="+data[i][key].project.id+"'><img src='"+data[i][key].project.picture_url+"'> " +
+                        "<div class='tp-bg-0'> " +
+                        "<table> <tr><td>" +
+                        "<div style='padding: 0 1rem;'>"+data[i][key].project.name+"</div></td></tr> </table> " +
+                        "</div></a> </div> <div class='suit-zt--2-text am-u-sm-7 am-u-end'> " +
+                        "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
+                        "<a href='#'> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+
+                }
+
+                    pubu.append(box);
+
+                }
+
+            }else{
+                alert("暂时没有更新，敬请期待")
+            }
+            PBL("#after","#attention",2);
+        },
+        error:function(){
+
+            alert("出错了，请联系管理员！！！");
+            return false;
+        },
+        complete:function(){
+
+        }
+    });
+}

@@ -61,6 +61,8 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     private BigUser bigUser;
 
     private Date lastLoginDatetime;//最后一次登陆时间
+    private Date lastLogoutDatetime;//最后一次登陆时间
+
 
     @Transient
     public BigUser getBigUser() {
@@ -362,4 +364,13 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     public void setLastLoginDatetime(Date lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
+    @Transient
+    public Date getLastLogoutDatetime() {
+        return lastLogoutDatetime;
+    }
+
+    public void setLastLogoutDatetime(Date lastLogoutDatetime) {
+        this.lastLogoutDatetime = lastLogoutDatetime;
+    }
+
 }
