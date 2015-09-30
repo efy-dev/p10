@@ -1,0 +1,10 @@
+<sitemesh>
+    <mapping path="/home/home.do" decorator="/layouts/main.jsp"/>
+    <mapping path="/news*" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/association/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/project/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/organization/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/protection/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/view/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/member/*.do" decorator="/layouts/secondary.jsp"/>
+</sitemesh>

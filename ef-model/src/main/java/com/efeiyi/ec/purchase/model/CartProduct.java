@@ -3,7 +3,9 @@ package com.efeiyi.ec.purchase.model;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ming800.core.base.service.BaseManager;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.persistence.criteria.Fetch;
@@ -15,6 +17,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="purchase_cart_product")
 public class CartProduct implements Serializable {
+
     private String id;
     private Cart cart;
     private ProductModel productModel;

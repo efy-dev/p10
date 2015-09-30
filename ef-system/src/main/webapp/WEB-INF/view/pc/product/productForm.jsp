@@ -80,11 +80,11 @@
 
         <div class="am-u-sm-9" style="margin-top: 10px;">
                  <span style="margin-left: 10px;">
-                   <input type="radio" name="status" value="1" />
+                   <input type="radio" name="type" value="1" />
                      普通
                  </span>
                  <span style="margin-left: 10px;">
-                   <input type="radio" name="status" value="2"/>
+                   <input type="radio" name="type" value="2"/>
                      精品
                  </span>
           <!--<small>必填项*</small>-->
@@ -195,8 +195,8 @@
 
   $(function(){
     //新建初始化
-    var status = '${object.status}';
-    $("input[name='status'][value='"+status+"']").attr("checked",true);
+    var type = '${object.type}';
+    $("input[name='type'][value='"+type+"']").attr("checked",true);
 
     if(${empty object.id}){
       var date = new Date();
@@ -303,8 +303,8 @@
         });
         for(var i=0;i<obj.length;i++){
           if($("#Project span[id='"+obj[i].project.id+"']").length==0){
-            var span = '<span style="margin-left: 10px;" id="'+obj[i].project.id+'">'+
-                    '     <input type="radio" flag="0" value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
+            var span = '<span style="margin-left: 10px;" flag="0" id="'+obj[i].project.id+'">'+
+                    '     <input type="radio"  value="'+obj[i].project.id+'"  name="projectCheck"/>'+obj[i].project.name+
                     ' </span>';
             $("#Project").append(span);
           }

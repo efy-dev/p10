@@ -36,15 +36,16 @@
                     <img id="uploadPic" style="width:100%;height:100%" src="http://pro.efeiyi.com/${user.pictureUrl}@!info-user-pic">
                 </c:if>
                 </div>
-                <div class="editor">
+                <div class="editor" style="color: #fff;">
                     <a id="file" href="#">编辑头像</a>
                 </div>
                 </dt>
                 <dd>
                     <p>当前头像</p>
-
-                    <p><span>用户名：</span><span>${user.username}</span></p>
-
+                    <c:set var="pUser">
+                        ${user.username}
+                        </c:set>
+                    <p><span>用户名：</span><span>${fn:substring(pUser, 0,3 )}****${fn:substring(pUser,7,11)}</span></p>
                     <p><span>用户类型：</span><span>个人用户</span></p>
                 </dd>
             </dl>
@@ -146,8 +147,11 @@
     $(function () {
         //头像上传，使用 uploadify 插件。
         $("#file").uploadify({
-            width: 120,
+
+            width: 106,
             height: 30,
+            left:0,
+            top:0,
             dataType: 'json',
             swf: '<c:url value="/scripts/js/uploadify.swf"/>',
             uploader: '<c:url value="/myEfeiyi/uploadIcon.do?id=${user.id}"/>',

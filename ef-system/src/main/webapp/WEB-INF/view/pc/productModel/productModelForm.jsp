@@ -50,10 +50,10 @@
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                    <c:if test="${object.status=='1'}">
+                    <c:if test="${object.type=='1'}">
                         普通
                     </c:if>
-                    <c:if test="${object.status=='2'}">
+                    <c:if test="${object.type=='2'}">
                         精品
                     </c:if>
                 </div>

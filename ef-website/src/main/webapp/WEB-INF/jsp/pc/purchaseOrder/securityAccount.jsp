@@ -35,7 +35,8 @@
           </li>
           <li>
             <label>新密码：</label>
-            <input name="np"  type="password" class="userinfo-tex">
+            <input name="np"  type="password" class="userinfo-tex" onblur="checkLg(this);">
+            <span class="active-d"></span>
           </li>
           <li>
             <label>确定密码：</label>
@@ -78,18 +79,19 @@
     var np = $(":input[name='np']").val();
     var op= $(":input[name='op']").val();
     var pwd= $(":input[name='pwd']").val();
-//    if(np !="" && op != "" && pwd !=""){
-//        flag = true;
-//    }else{
-//        flag = false;
-//    }
+
     if(flag==true && np!="" && op != "" && pwd !=""){
       var pwd = $(":input[name='pwd']").val();
-      window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
+      $.ajax({
+        type:"post",
+        dataType:"json",
+        url:"/myEfeiyi/updatePassword.do",
+        data:{pwd:pwd,id:'${user.id}'},
+        success:function(data){
+          window.location.href="<c:url value="/sso.do"/>";
+        }
+      });
     }
-
-
-
   }
   function checkPassword(obj){
 
@@ -124,6 +126,18 @@
       $(obj).next("span").text("");
     }
 
+  }
+
+  function checkLg(obj){
+    var lg= $(":input[name='np']").val().length;
+    var ch= $(":input[name='np']").val()
+    var reg = /^[0-9a-zA-Z]+$/;
+    if(lg<5 || lg>16 || !reg.test(ch)){
+      $(obj).next("span").text("密码由6位-16位数字或字母组成");
+    }else{
+      $(obj).next("span").text("");
+
+    }
   }
 </script>
 

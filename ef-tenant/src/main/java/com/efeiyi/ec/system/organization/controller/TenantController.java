@@ -48,29 +48,14 @@ public class TenantController extends BaseController {
     @RequestMapping("/linkMaster.do")
     @ResponseBody
     public String linkMaster(String tenantId,String masterId,String tenantMasterId,String status){
-        TenantMaster tenantMaster = null;
+        String id = "";
         try {
-            tenantMaster = (TenantMaster)baseManager.getObject(TenantMaster.class.getName(),tenantMasterId);
-            if(tenantMaster == null){
-                tenantMaster = new TenantMaster();
-                tenantMaster.setTenant((Tenant)baseManager.getObject(Tenant.class.getName(),tenantId));
-                tenantMaster.setMaster((Master)baseManager.getObject(Master.class.getName(),masterId));
-                tenantMaster.setStatus("1");
-            }else {
-                if("0".equals(status)){
-                    tenantMaster.setStatus("1");
-                }
-                if("1".equals(status)){
-                    tenantMaster.setStatus("0");
-                }
-            }
-            baseManager.saveOrUpdate(TenantMaster.class.getName(),tenantMaster);
 
-
+            id = tenantManager.linkMaster(tenantId,masterId,tenantMasterId,status);
         }catch (Exception e){
-            e.printStackTrace();
+
         }
-        return  tenantMaster.getId();
+        return  id;
     }
 
     @RequestMapping("/linkProject.do")
@@ -80,6 +65,20 @@ public class TenantController extends BaseController {
         try {
 
             id =  tenantManager.linkProject(tenantId,projectId,tenantProjectId,status);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
+
+
+    @RequestMapping("/linkProduct.do")
+    @ResponseBody
+    public String linkProduct(String tenantCategoryId,String productId,String tenantProductId,String status){
+        String id = "";
+        try {
+
+            id =  tenantManager.linkProduct(tenantCategoryId,productId,tenantProductId,status);
         }catch (Exception e){
             e.printStackTrace();
         }

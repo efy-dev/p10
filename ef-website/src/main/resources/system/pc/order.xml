@@ -202,7 +202,6 @@
                 </field>
             </fields>
         </entity>
-
         <entity name="PurchaseOrderComment" label="用户评价"  model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
             <does>
                 <do name="saveOrUpdateComment"  access="" label="保存评价">
@@ -222,6 +221,12 @@
                             <field name="status" label="默认值" defaultValue="1" inputType="default" />
                         </fields>
                     </page>
+                </do>
+                <do name="listPurchaseOrderProduct" access="" label="商品评价">
+                    <query name="default" label="默认" type="auto" >
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="productModel.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>

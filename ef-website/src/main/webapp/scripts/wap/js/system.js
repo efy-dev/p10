@@ -41,6 +41,16 @@ $(function(){
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+        //加入购物车-立即购买-调出规格弹出层
+        $('#btn-cart,#btn-format,#btn-buy').click(function(){
+            $('.dialog-des-format').css({'-webkit-transform':'translateY(0)'});
+            $('.am-dimmer').show();
+            $('.am-active').click(function(){
+                $('.dialog-des-format').css({'-webkit-transform':'translateY(110%)'});
+                $('.am-dimmer').hide();
+            })
+            return false;
+        })
     })();
     //订单
     (function(){

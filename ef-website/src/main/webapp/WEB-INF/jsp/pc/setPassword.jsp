@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.util.StringUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -51,9 +52,19 @@
     });
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
-      window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
-    }
+      $.ajax({
+        type:"post",
+        dataType:"json",
+        url:"/myEfeiyi/updatePassword.do",
+        data:{pwd:pwd,id:'${user.id}'},
+        success:function(data){
+            window.location.href="<c:url value="/sso.do"/>";
+         }
+      });
   }
+  }
+
+
 
   function checkEq(obj){
 
@@ -67,8 +78,10 @@
   }
   function checkLg(obj){
     var lg= $(":input[name='np']").val().length;
-    if(lg<5 || lg>16){
-      $(obj).next("span").text("密码由6位-16位字母或数字组成");
+    var ch= $(":input[name='np']").val();
+    var reg = /^[0-9a-zA-Z]+$/;
+    if(lg<5 || lg>16 || !reg.test(ch)){
+      $(obj).next("span").text("密码由6位-16位数字或字母组成");
     }else{
       $(obj).next("span").text("");
 

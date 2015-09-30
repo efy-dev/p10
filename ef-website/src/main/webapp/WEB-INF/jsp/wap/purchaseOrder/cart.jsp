@@ -40,14 +40,21 @@
                             <img class="img" src="<c:url value="http://pro.efeiyi.com/${product.productModel.productModel_url}"/>" alt=""/>
 
                             <div class="bd info">
-                                <p class="title">${product.productModel.product.name}</p>
+                                <p class="title">${product.productModel.name}
+                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                    [
+                                    <c:forEach items="${product.productModel.productPropertyValueList}"
+                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                    ]
+                                </c:if>
+                                </p>
 
                                 <p class="info-opt">
-                                    <a class="sub" href="#" onclick="subtractProduct('${product.id}')" title="减"></a>
+                                    <a class="sub" onclick="subtractProduct('${product.id}')" title="减"></a>
                                     <input id="${product.id}Amount" class="ipt-txt" type="text"
                                            value="${product.amount}" onblur="changeProduct('${product.id}',this)"
                                            onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)"/>
-                                    <a class="add" href="#" onclick="addProduct('${product.id}')" title="加"></a>
+                                    <a class="add" onclick="addProduct('${product.id}')" title="加"></a>
                                 </p>
 
                                 <p class="info-price"><em>￥</em><span class="moneycl"
@@ -218,13 +225,6 @@
             $("input").each(function () {
                 var inputId = $(this).attr("id") + "";
                 if (inputId.indexOf(data["tenantId"]) >= 0) {
-                    /*alert(inputId);
-                    var cp = inputId.split(":")[1];
-                    alert("1111"+cp);*/
-
-                   /* var cartProductId = inputId.split(":");*/
-
-                    /*chooseItem(cp);*/
                     this.checked = true;
                 }
             })

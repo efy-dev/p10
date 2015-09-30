@@ -14,6 +14,12 @@
                 <field name="picture_url" label="产品图片链接" inputType="text"/>
                 <field name="createDatetime" label="创建时间" inputType="date"/>
                 <field name="master.id" label="用户" inputType="dialog_pop"/>
+                <field name="status" label="状态" inputType="text">
+                    <statusType fieldName="status">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistProduct" access="" label="产品分页列表"
@@ -36,7 +42,21 @@
                         <!--<condition name="id" defaultValue="0" operation="ne"/>-->
                     <!--</query>-->
                 </do>
+                <do name="plistTProduct" access="" label="产品分页列表"
+                    result="/tenantProductTag/tenantProductPList" execute="com.efeiyi.ec.system.product.controller.plistTenantProductHandler">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq" inputType="default"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="serial" label="快速查询" type="auto" orderBy="serial:asc">
+                        <condition name="name"  operation="eq" label="商品名称" inputType="text"  />
 
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq" inputType="default"/>
+                        <!--   <condition name="user" defaultValue="${MY_USER}" operation="eq" /> -->
+                    </query>
+                </do>
                 <do name="saveOrUpdateProduct" label="保存附件" result="redirect:/basic/xm.do?qm=plistProduct_default">
                     <page>
                         <fields>

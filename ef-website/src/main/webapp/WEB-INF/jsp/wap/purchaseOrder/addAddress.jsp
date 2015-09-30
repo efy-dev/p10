@@ -8,7 +8,7 @@
 
 <!--//End--header-->
 <div class="shipping-address">
-  <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post">
+  <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post" id="addAddress">
   <div class="address">
       <ul>
         <li>
@@ -22,12 +22,18 @@
         </li>
         <li>
           <label>所在地区</label>
-          <select id="provinceVal" class="cars" name="province.id"
-                  onclick="province(this);" required>
+          <select id="provinceVal" class="cars" name="province.id" onchange="province(this)"
+                  required>
+            <option value="请选择">请选择</option>
+            <c:forEach var="pro" items="${province}">
+               <option value="${pro.id}">${pro.name}</option>
+            </c:forEach>
           </select>
-          <select id="cityVal" class="car1" name="city.id" onclick="city(this);" required>
+          <select id="cityVal" class="car1" name="city.id" required>
+            <option value="请选择">请选择</option>
           </select>
         </li>
+        <span class="active-d span2" id="hao" style="border: 0;color: #000"></span>
         <li>
           <label>具体地址</label>
           <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
@@ -42,12 +48,13 @@
       </div>
   </div>
   <div class="edit-info">
-    <input type="submit" class="a" value="保存信息">
+    <input type="button" class="a" value="保存信息" onclick="sm();" >
   </div>
   </form>
 </div>
-<script>
+<script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 
+<script>
   function putVal(o){
     var ele = document.getElementById("checkbox");
     if(ele.checked){
@@ -122,68 +129,22 @@
 
   function province(obj) {
     var v = $(obj).val();
-    $("#provinceVal").empty();
-    $.ajax({
-      type: 'post',
-      async: false,
-      url: '<c:url value="/myEfeiyi/address/listProvince.do"/>',
-      dataType: 'json',
-      success: function (data) {
-        var obj = eval(data);
-        var rowHtml = "";
-        rowHtml += "<option value='请选择'>请选择</option>";
-        for (var i = 0; i < obj.length; i++) {
-          rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
-
-        }
-        $("#provinceVal").append(rowHtml);
-        $("#provinceVal option[value='" + v + "']").attr("selected", "selected");
-        city(v);
-      },
-
-    });
+    city(v);
   }
 
-  function provinceChange(element, o, callback) {
-    $("#citys" + o).empty();
-    var provinceId = $(element).val();
-    ajaxRequest("<c:url value="/myEfeiyi/address/listCity.do"/>",
-            {provinceId: provinceId},
-            function (data) {
-              var out = '<option value="">请选择</option>';
-              for (var i = 0; i < data.length; i++) {
-                out += '<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>';
-              }
-              $("#citys" + o).append(out);
-              if(typeof callback!= "undefined"){
-                callback();
-              }
-            }
-    )
-  }
-
-  function chooseCity(element,provinceId,cityId,o){
-    $(element).val(provinceId);
-    var callback = function(){
-      $("#citys" + o).val(cityId);
+  function sm(){
+    var province=$("#provinceVal").val();
+    var city=$("#cityVal").val();
+    if(province=="请选择"||city=="请选择"){
+      $("#hao").html("省市不能为空");
+    }else {
+      $("#addAddress").submit();
+      $("#hao").html("");
     }
-    provinceChange(element, o,callback);
   }
-
-  <c:forEach items="${addressList}" var="address">
-  chooseCity($("${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
-  </c:forEach>
 
   $().ready(function () {
     $("#addAddress").validate({
-      rules: {
-        consignee: "required",
-        details: "required",
-        name: "required",
-        phone: "required",
-      },
-    });
-    $("#updateAddress").validate({
       rules: {
         consignee: "required",
         details: "required",

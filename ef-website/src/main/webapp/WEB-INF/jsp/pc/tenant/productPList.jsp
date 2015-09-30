@@ -16,7 +16,7 @@
       <!-- //End-->
       <div class="btndes">
         <a href="" title="收藏店铺">收 藏 店 铺</a>
-        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 传 承 人</a>
+        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
       </div>
     </div>
   </div>
@@ -53,7 +53,14 @@
           <li>
             <a href="/product/productModel/${productModel.id}" target="_blank" title="">
               <img class="imgfilter" src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}"/>" alt="">
-              <p class="wh name">${productModel.name}</p>
+              <p class="wh name">${productModel.name}
+                <c:if test="${productModel.productPropertyValueList.size()>1}">
+                  [
+                  <c:forEach items="${productModel.productPropertyValueList}"
+                             var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                  ]
+                </c:if>
+              </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
           </li>

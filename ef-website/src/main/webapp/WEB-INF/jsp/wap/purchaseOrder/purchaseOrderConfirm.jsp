@@ -5,20 +5,34 @@
 <head>
     <title>确认订单</title>
     <style>
-        .paymentActive {
-            border: 2px red;
-        }
-
         .acd {
             background: #fff !important;
             color: #000 !important;
             border: 1px solid #000 !important;
         }
 
-        .acn {
-            background: #000 !important;
-            color: #fff !important;
+        .add-btn {
+            background: #fff;
+            height: 3rem;
+            width: 100%;
+            border: 1px solid #000;
+            color: #000;
+            display: block;
+            font-size: 1.2rem
         }
+
+        .add-address {
+            width: 100%;
+            line-height: 3rem;
+            height: 3rem;
+            text-align: center;
+            border: 1px solid #000;
+            display: block;
+            color: #fff;
+            font-size: 1.2rem;
+             background: #000;
+        }
+        .add-ress-icon{width: 1.5rem;height: 1.5rem;position:fixed;right: 28px;top:105px;display: block;background: url("<c:url value="/scripts/wap/images/myorderps.png"/>")no-repeat;}
     </style>
 </head>
 <body>
@@ -34,22 +48,22 @@
 
                             <p class="title"><span>${address.consignee}</span><span>${address.phone}</span></p>
 
-                            <p class="txt">${address.province.name}${address.details}</p>
+                            <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
                         </a>
                     </c:if>
                 </c:forEach>
             </c:if>
-            <%--<c:if test="${addressList.size() == 0}">--%>
+            <c:if test="${addressList.size() == 0}">
             <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
-            <%--</c:if>--%>
+            </c:if>
         </div>
         <div class="bd order-address" id="order-add1" style="display: none">
             <a href="#btn-edit-addres" class="btn-edit-addres">
                 <p class="title"><span id="span1">${address.consignee}</span><span id="span2">${address.phone}</span>
                 </p>
 
-                <p class="txt" id="txt">${address.province.name}${address.details}</p>
+                <p class="txt" id="txt">${address.province.name}${address.city.name}${address.details}</p>
                 <a href="#arrow-right" class="arrow-right"></a>
             </a>
         </div>
@@ -64,7 +78,14 @@
                                      alt="">
 
                                 <div class="bd info">
-                                    <p class="text">${product.productModel.product.name}</p>
+                                    <p class="text">${product.productModel.name}
+                                        <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                            [
+                                            <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                            ]
+                                        </c:if>
+                                    </p>
 
                                     <p class="price"><em>￥</em><span>${product.productModel.price}</span></p>
 
@@ -113,16 +134,16 @@
 
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete" style="display:none;">
-    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;">
+    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
         <div class="bd list-adress" id="list-order">
             <ul class="ul-list">
                 <c:forEach items="${addressList}" var="address">
 
                     <li class="cart-btn acd"
-                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">
+                        onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.city.name}','${address.details}')">
                         <p class="bd title">${address.consignee} ${address.phone}</p>
 
-                        <p class="bd des">${address.province.name}${address.details}</p>
+                        <p class="bd des">${address.province.name}${address.city.name}${address.details}</p>
 
                         <p class="bd btns">
                                 <%--<input type="radio" name="address" id="address" onclick="chooseAddress('${address.id}','${address.consignee}','${address.phone}','${address.province.name}','${address.details}')">--%>
@@ -132,11 +153,12 @@
                 </c:forEach>
             </ul>
             <div class="bd">
-                <a href="#" id="add" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
+                <a href="#" id="add" class="add-address" onclick="add_Address()" title="新增收货地址">新增收货地址</a>
             </div>
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">
-            <div class="pop-up">
+            <div class="pop-up" style="position: relative">
+                <a class="add-ress-icon" href="javascript:history.go(0)"></a>
                 <div class="pop-h">新增收货人信息
                     <i class="clase" title="关闭"></i>
                 </div>
@@ -166,20 +188,20 @@
                             <label>具体地址</label>
                             <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
                         </div>
-                        <div class="am-form-group">
+                        <%--<div class="am-form-group">
                             <p>
                                 <input type="checkbox" id="checkbox" onclick="putVal(this);" name="checkbox"
                                        value="">
                                 <strong>设为默认地址</strong>
                                 <span>（注：每次下单时都使用该地址）</span>
                             </p>
-                        </div>
+                        </div>--%>
                         <input type="hidden" name="cartId" value="${cart.id}">
                         <label></label>
                         <%--<input type="submit" class="dj-btn" value="保存收货人信息">--%>
 
                         <p>
-                            <button type="submit" class="am-btn am-btn-default">保存收货人信息</button>
+                            <button type="submit" class="am-btn am-btn-default add-btn">保存收货人信息</button>
                         </p>
                     </form>
                 </div>
@@ -188,6 +210,7 @@
         </div>
 
     </div>
+
     <div class="overbg"></div>
 </div>
 <!--//End--弹出地址-->
@@ -213,9 +236,14 @@
     var payment = "1";
     var consumerAddress = $("#hiddenId").text();
     var totalPrice = $("#change").text();
-
+    var orderId = "${purchaseOrder.id}";
 
     $(function () {
+
+        if(!isWeiXin()){
+            $("#weixin").hide();
+        }
+
         $.ajax({
             type: 'get',
             async: false,
@@ -229,7 +257,7 @@
                     var out = '';
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
-                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + (i + 1) + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                        out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + formatDate(data[i]["couponBatch"]["startDate"]) + '至' + formatDate(data[i]["couponBatch"]["endDate"]) + '</p>' + '<p>适用范围：全网通用</p> </li>';
                     }
                     $("#ul-list").html(out);
@@ -243,15 +271,39 @@
     })
 
     function yhq() {
-        var t_price = parseInt(totalPrice);
-        var chkobjs = document.getElementsByName("radio");
-        for (var i = 0; i < chkobjs.length; i++) {
-            if (chkobjs[i].checked) {
-                t_price = t_price - parseInt(chkobjs[i].value);
+        var couponid = null;
+        $("input:radio").each(function(){
+            if(this.checked){
+                couponid = $(this).attr("id");
             }
-        }
-        $("#change").text(t_price);
-        $(".yhq").hide();
+        })
+        var couponId = couponid.substring(4,couponid.length);
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/coupon/use.do"/>',
+            dataType: 'json',
+            data: {
+                couponId: couponId,
+                orderId: orderId
+
+            },
+            success: function (data) {
+                if (data == true) {
+                    var t_price = parseInt(totalPrice);
+                    var chkobjs = document.getElementsByName("radio");
+                    for (var i = 0; i < chkobjs.length; i++) {
+                        if (chkobjs[i].checked) {
+                            t_price = t_price - parseInt(chkobjs[i].value);
+                        }
+                    }
+                    $("#change").text(t_price);
+                    $(".yhq").hide();
+                }
+            },
+
+        });
+
     }
 
     function add_Address() {
@@ -288,8 +340,15 @@
         if (consumerAddress == "") {
             showAlert("提示", "请选择一个收货地址！");
         } else {
+
+            var isweixin = "";
+
+            if (isWeiXin()) {
+                isweixin = "&isWeiXin=1";
+            }
+
             var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
             window.location.href = url;
         }
     }
@@ -346,11 +405,12 @@
         }, "post")
     }
 
-    function chooseAddress(addressId, consignee, phone, province, details) {
+    function chooseAddress(addressId, consignee, phone, province,city, details) {
         consumerAddress = addressId;
         var conConsignee = consignee;
         var conPhone = phone;
         var conProvince = province;
+        var conCity = city;
         var conDetails = details;
 
         console.log(consumerAddress);
@@ -358,7 +418,7 @@
         $("#order-add1").attr("style", "display:block");
         $("#span1").text(conConsignee);
         $("#span2").text(conPhone);
-        $("#txt").text(conProvince + conDetails);
+        $("#txt").text(conProvince + conCity + conDetails);
 
     }
 

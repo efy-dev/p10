@@ -17,7 +17,8 @@
           <ul class="page">
             <li>
               <label>新密码</label>
-              <input name="np" type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合">
+              <input name="np" type="password" class="txt" placeholder="6—16个字符，建议使用字母、数字或符号的组合"onblur="checkLg(this);">
+              <span class="active-d span2"></span>
             </li>
             <li>
               <label>重复密码</label>
@@ -45,15 +46,26 @@
   <script>
     function okChange(){
       var  flag = true;
+      var np= $(":input[name='np']").val();
+      var pwd= $(":input[name='pwd']").val();
       $(".active-d").each(function(){
-        if($(this).text()!=""){
+        if($(this).text()!="" || np=="" || pwd==""){
           flag = false;
           return false;
         }
       });
       if(flag==true){
         var pwd = $(":input[name='pwd']").val();
-        window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
+        $.ajax({
+          type:"post",
+          dataType:"json",
+          url:"/myEfeiyi/updatePassword.do",
+          data:{pwd:pwd,id:'${user.id}'},
+          success:function(data){
+            window.location.href="<c:url value="/sso.do"/>";
+          }
+        });
+        <%--window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;--%>
       }
     }
     function checkEq(obj){
@@ -64,6 +76,17 @@
         $(obj).next("span").text("您输入的两次密码不一致");
       }else{
         $(obj).next("span").text("");
+      }
+    }
+    function checkLg(obj){
+      var lg= $(":input[name='np']").val().length;
+      var ch= $(":input[name='np']").val();
+      var reg = /^[0-9a-zA-Z]+$/;
+      if(lg<5 || lg>16 || !reg.test(ch)){
+        $(obj).next("span").text("密码由6位-16位数字或字母组成");
+      }else{
+        $(obj).next("span").text("");
+
       }
     }
 

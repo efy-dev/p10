@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -75,10 +76,14 @@
                                     <div class="info">
                                         <p><a href="#">${product.productModel.product.project.name}</a></p>
 
-                                        <p><a href="#">${product.productModel.product.name}
-                                            <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                       var="ppv">-${ppv.projectPropertyValue.value}</c:forEach>
-                                        </a></p>
+                                        <p><a href="#">${product.productModel.name}
+                                            <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                                [
+                                                <c:forEach items="${product.productModel.productPropertyValueList}"
+                                                           var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                                                ]
+                                            </c:if>
+                                            </a></p>
                                     </div>
                                 </div>
                             </td>
@@ -128,6 +133,20 @@
                             <%--<td width="128"><a href="#" class="settle-cll">删除选中商品</a></td>--%>
                             <%--<td width="297"><a href="#" class="settle-cll">移到我的收藏夹</a></td>--%>
                         <td width="332">总计（免运费）<span class="moneycl" id="totalPrice">${cart.totalPrice}</span>元</td>
+                        <%
+                            if (AuthorizationUtil.getMyUser().getId() != null) {
+                        %>
+                        <td id="hiddenCoupon"></td>
+                        <td>
+                            <div class="coupon" id="cart-coupon">
+                                <a class="btn-coupon" href="#优惠券" onclick="openCoupon()" target="_blank" title="">优惠券<i class="icon"></i></a>
+                                <ul class="ul-list">
+                                </ul>
+                            </div>
+                        </td>
+                        <%
+                            }
+                        %>
                         <td width="147"><a onclick="submit()"
                                            class="btn-settle">结算</a></td>
                     </tr>
@@ -150,6 +169,37 @@
     </div>
 </c:if>
 <script>
+    var couponId = null;
+    function openCoupon() {
+        var param = {
+        };
+        var success = function (data) {
+            if(data != null){
+                var out = '';
+                for (var i = 0; i < data.length; i++) {
+                    out += '<li>' + '<img src="http://pro.efeiyi.com/' + data[i]["couponBatch"]["pictureUrl"] + '"  alt=""/>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
+                            '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
+                }
+                $(".ul-list").html(out);
+            }
+        }
+        ajaxRequest("<c:url value="/coupon/listCoupon"/>", param, success, function () {
+        }, "post")
+    }
+
+    function chooseCoupon(o){
+
+        var id = $(o).attr("id");
+        couponId = id.split("|")[0];
+        var priceLimit = id.split("|")[1];
+        var price = id.split("|")[2];
+        var out = '';
+        out = '满' + priceLimit +'立减' +price;
+        $("#hiddenCoupon").html(out);
+        $("#totalPrice").text($("#totalPrice").text()-price);
+        $(".ul-list").hide();
+
+    }
 
     function submit(){
 
@@ -157,7 +207,7 @@
 
         var success = function(data){
             if(data){
-                window.location.href = "<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}"/>"
+                window.location.href = "<c:url value="/order/saveOrUpdateOrder.do?cartId=${cart.id}&couponId="/>"+couponId;
             }else{
                 showAlert("提示","请选中一件商品!");
             }

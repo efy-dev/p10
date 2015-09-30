@@ -20,50 +20,40 @@
             <%--<li><a href="#">收藏的店铺</a></li>--%>
           </ul>
         </div>
-        <!--筛选内容-->
-        <%--<div class="my-goods fav-mg">--%>
-          <%--<dl class="my-screen">--%>
-            <%--<dt>--%>
-              <%--<span>分类筛选：</span>--%>
-              <%--<a href="#">全部</a>--%>
-            <%--</dt>--%>
-            <%--<dd>--%>
-              <%--<ul>--%>
-                <%--<li><a href="#">木板水印</a></li>--%>
-                <%--<li><a href="#">苏绣</a></li>--%>
-                <%--<li><a href="#">泥塑</a></li>--%>
-              <%--</ul>--%>
-            <%--</dd>--%>
-          <%--</dl>--%>
-        <%--</div>--%>
-        <!--商品列表-->
+
         <div class="goods-list">
-          <%--<ul class="list-filtrate bd-bt">--%>
-            <%--<li>--%>
-              <%--<form>--%>
-                <%--<input type="checkbox">--%>
-              <%--</form>--%>
-            <%--</li>--%>
-            <%--<li>全部</li>--%>
-            <%--<li><a href="#">加入购物车</a></li>--%>
-            <%--<li><a href="#">取消关注</a></li>--%>
-          <%--</ul>--%>
+        <c:if test="${empty collectList}">
+          <tr style="border-top: 1px solid #ccc">
+            <td colspan="6">
+              <div class="mt-null">
+                <p>目前还没有收藏商品，挑几件您喜欢的商品吧！</p>
+                <ul>
+                  <li class="efeiyi"><a href="/">e飞蚁首页</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          </c:if>
+         <c:if test="${!empty collectList}">
           <ul class="list-number">
             <c:forEach items="${collectList}" var="collectList">
             <li class="single">
               <dl>
-                <dt class="list-img"><a href="#"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
+                <dt class="list-img"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
                 <dd>
                   <dl class="list-title">
-                    <dt>
-                      <label><input type="checkbox"></label>
-                    </dt>
+                    <%--<dt>--%>
+                      <%--<label><input type="checkbox"></label>--%>
+                    <%--</dt>--%>
                     <dd>
-                      <p class="list-title-text">${collectList.productModel.product.name}</p>
+                      <p class="list-title-text"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a></p>
                       <p class="list-cost">￥<span>${collectList.productModel.price}</span></p>
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
+                        <c:if test="${collectList.productModel.amount!=0}">
                         <li class="option-right"><a href="<c:url value="/cart/addProduct.do?id=${collectList.productModel.id}"/>"> 加入购物车</a></li>
+                        </c:if>
+
                       </ul>
                     </dd>
                   </dl>
@@ -76,63 +66,9 @@
               <ming800:pcPageParam name="conditions"
                                    value='<%=request.getParameter("conditions")!=null ? request.getParameter("conditions") : ""%>'/>
             </ming800:pcPageList>
-          <%--<ul class="list-filtrate bd-tp">--%>
-            <%--<li>--%>
-              <%--<form>--%>
-                <%--<input type="checkbox">--%>
-              <%--</form>--%>
-            <%--</li>--%>
-            <%--<li>全部</li>--%>
-            <%--<li><a href="#">加入购物车</a></li>--%>
-            <%--<li><a href="#">取消关注</a></li>--%>
-          <%--</ul>--%>
+          </c:if>
+
         </div>
-        <!--商品列表-->
-        <!--店铺列表-->
-        <%--<div class="store-list">--%>
-          <%--<ul>--%>
-            <%--<!--一个店铺-->--%>
-            <%--<li class="shop-type">--%>
-              <%--<dl>--%>
-                <%--<dt class="store-logo"><a href="#"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>" width="98" height="98"></a></dt>--%>
-                <%--<dd>--%>
-                  <%--<p>非物质文化遗产</p>--%>
-                  <%--<p>关注时间：2015-08-03</p>--%>
-                  <%--<p><a href="#">进入店铺</a></p>--%>
-                  <%--<p><a href="#">点击收藏</a></p>--%>
-                <%--</dd>--%>
-              <%--</dl>--%>
-              <%--<div class="product">--%>
-                <%--<ul>--%>
-                  <%--<span class="sign-left"></span>--%>
-                  <%--<li class="product-list">--%>
-                    <%--<dl>--%>
-                      <%--<dt><a href="#"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>" width="80" height="80"></a></dt>--%>
-                      <%--<dd>--%>
-                        <%--<p>价格：<strong>20000</strong></p>--%>
-                      <%--</dd>--%>
-                    <%--</dl>--%>
-                    <%--<dl>--%>
-                      <%--<dt><a href="#"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>" width="80" height="80"></a></dt>--%>
-                      <%--<dd>--%>
-                        <%--<p>价格：<strong>20000</strong></p>--%>
-                      <%--</dd>--%>
-                    <%--</dl>--%>
-                    <%--<dl>--%>
-                      <%--<dt><a href="#"><img src="<c:url value="/scripts/upload/pep-2.jpg"/>" width="80" height="80"></a></dt>--%>
-                      <%--<dd>--%>
-                        <%--<p>价格：<strong>20000</strong></p>--%>
-                      <%--</dd>--%>
-                    <%--</dl>--%>
-                  <%--</li>--%>
-                  <%--<span class="sign-right"></span>--%>
-                <%--</ul>--%>
-              <%--</div>--%>
-            <%--</li>--%>
-            <%--<!--一个店铺-->--%>
-          <%--</ul>--%>
-        <%--</div>--%>
-        <!--店铺列表-->
       </div>
     </div>
   </div>

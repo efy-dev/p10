@@ -43,7 +43,7 @@
             <%= AuthorizationUtil.getMyUser().getUsername()%>
           </c:set>
            <span><img id="uploadPi" src="" width="48" height="48"></span>
-          <p>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
+          <p>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
         </div>
         <c:set var="match" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
         <jsp:include flush="true" page="/getMenu.do?jmenuId=orderMenu&jnodeId=orderManager&resultPage=/purchaseOrder/purchaseOrderTemplate&match=${match} "/>

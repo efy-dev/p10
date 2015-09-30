@@ -11,10 +11,10 @@
       <li class="bd"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" alt=""/></li>
       <li><p>${subject.subjectDescription.content}</p></li>
     </ul>
-    <ul class="ul-list">
+    <ul class="bd ul-list">
       <c:forEach items="${productModelList}" var="productModel">
         <li class="bd">
-          <img src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}" alt="">
+          <img width="100%" src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}" alt="">
           <p class="name">${productModel.productModel.product.name}</p>
           <p class="price red"><em>￥</em><span>${productModel.productModel.price}</span></p>
         </li>

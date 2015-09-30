@@ -1,11 +1,14 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.*;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
+import org.jboss.marshalling.util.BooleanReadField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,17 +58,31 @@ public class ProductController {
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
         if(productModelList!=null&&productModelList.size()>0){
-            for(ProductModel productModel:productModelList){
+            for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
-                s.append(productModel.getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:productModel.getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                s.append(((ProductModel) productModelTemp).getProduct().getName());
+                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
+                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    map.put((ProductModel)productModelTemp,s.toString());
+
+                }else {
+                    s.append("[");
+                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
+                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                    }
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    s.append("]");
+                    map.put((ProductModel) productModelTemp, s.toString());
+
                 }
-                if(s.length()>14){
-                    s = new StringBuilder(s.substring(0,14));
-                    s.append("...");
-                }
-                map.put(productModel,s.toString());
+
             }
         }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
@@ -93,14 +110,20 @@ public class ProductController {
      */
     @RequestMapping({"/addProductFavorite.do"})
     @ResponseBody
-    public boolean addProductFavorite(HttpServletRequest request) throws Exception{
-        String productModelId =request.getParameter("id");
-        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
-        xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
-        xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
-        xSaveOrUpdate.getParamMap().remove("id");
-        baseManager.saveOrUpdate(xSaveOrUpdate);
-        return true;
+    public boolean addProductFavorite(HttpServletRequest request) throws Exception {
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = true;
+        if (currentUser.getId() != null) {
+            String productModelId = request.getParameter("id");
+            XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite", request);
+            xSaveOrUpdate.getParamMap().put("user_id", AuthorizationUtil.getMyUser().getId());
+            xSaveOrUpdate.getParamMap().put("productModel_id", productModelId);
+            xSaveOrUpdate.getParamMap().remove("id");
+            baseManager.saveOrUpdate(xSaveOrUpdate);
+        } else {
+         flag = false;
+        }
+        return flag;
     }
     /**
      * 爆款推荐
@@ -117,10 +140,28 @@ public class ProductController {
             for(Object productModelTemp:productModelList){
                 StringBuilder s = new StringBuilder();
                 s.append(((ProductModel) productModelTemp).getProduct().getName());
-                for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
-                    s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
+                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    map.put((ProductModel)productModelTemp,s.toString());
+
+                }else if(productPropertyValueList!=null&&productPropertyValueList.size()>1){
+                    s.append("[");
+                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
+                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
+                    }
+                    if(s.toString().length()>14){
+                        s = new StringBuilder(s.substring(0,14));
+                        s.append("...");
+                    }
+                    s.append("]");
+                    map.put((ProductModel) productModelTemp, s.toString());
+
                 }
-                map.put((ProductModel)productModelTemp,s.toString());
+
             }
         }
         model.addAttribute("productModelList", productModelList);
@@ -137,7 +178,14 @@ public class ProductController {
     @RequestMapping({"/removeProductFavorite.do"})
     @ResponseBody
     public boolean removeProductFavorite(HttpServletRequest request) throws Exception{
-        baseManager.remove(ProductFavorite.class.getName(),request.getParameter("productFavoriteId"));
+        String productModelId = request.getParameter("id");
+        XQuery xQuery = new XQuery("listProductFavorite_default",request);
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        xQuery.put("user_id", currentUser.getId());
+        xQuery.put("productModel_id",productModelId);
+        List<Object> productFavoriteList =  baseManager.listObject(xQuery);
+        ProductFavorite p = (ProductFavorite)productFavoriteList.get(0);
+        baseManager.remove(ProductFavorite.class.getName(),p.getId());
         return true;
     }
 
@@ -160,9 +208,12 @@ public class ProductController {
      * @throws Exception
      */
     @RequestMapping({"productModel/{productModelId}"})
-    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) {
+    public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", productModelId);
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
         List<ProductModel> productModelListTmp = product.getProductModelList();
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
@@ -179,7 +230,28 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("productPicture",productPicture);
         model.addAttribute("productPictures",productPictures);
+        model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
         return "/product/productDetails";
     }
-
+    /**商品收藏状态判断
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/productFavoriteStatus.do"})
+   Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = false;
+        if (currentUser.getId() != null) {
+            String productModelId = request.getParameter("id");
+            XQuery xQuery = new XQuery("listProductFavorite_default",request);
+            xQuery.put("user_id", currentUser.getId());
+            xQuery.put("productModel_id", productModelId);
+            List<ProductFavorite> productFavoriteList =  baseManager.listObject(xQuery);
+            if(productFavoriteList!=null&&"1".equals(productFavoriteList.get(0).getStatus())){
+            flag = true;
+            }
+        }
+        return flag;
+     }
 }

@@ -24,7 +24,7 @@
                 <c:if test="${status.index!=0}">
                     <li>
                 </c:if>
-                <a href="<c:url value="${banner.directUrl}"/> "><img src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481" alt=""/></a></li>
+                <a href="<c:url value="${banner.directUrl}"/> " target="_blank"><img src="http://pro.efeiyi.com/${banner.imageUrl}@!home-banner" width="1280" height="481" alt=""/></a></li>
             </c:forEach>
             <%--<li><img src="shop2015/upload/focus2.jpg" width="1280" height="481" alt=""/></li>--%>
             <%--<li><img src="shop2015/upload/focus3.jpg" width="1280" height="481" alt=""/></li>--%>
@@ -93,7 +93,7 @@
                 <%--<a href="" target="_blank"><img class="imgfilter" src="shop2015/upload/pep-2.jpg" alt=""/></a>--%>
 
                 <%--<p><strong>姚惠芬</strong></p>--%>
-
+i
                 <%--<p>[苏绣]</p>--%>
 
                 <%--<p>国家级传承人</p>--%>
