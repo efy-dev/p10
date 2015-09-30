@@ -39,10 +39,14 @@
 
                 <p>分享</p>
             </a>
-            <a onclick="getStatus(${productModel.product.id})" class="addfav">
+            <a id ="show" onclick="collect('${productModel.id}')" class="addfav">
                 <i class="icon icon-addfav"></i>
 
                 <p>收藏</p>
+            </a>
+            <a id ="hidden" style="display: none;" onclick="deCollect('${productModel.id}')" class="addfav addfav-end">
+                <i class="icon icon-addfav"></i>
+                <p>已收藏</p>
             </a>
         </div>
         <!-- //End--des-title-->
@@ -76,7 +80,7 @@
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart"  href=""  title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy"   href=""  title="立即购买">立即购买</a>
+            <a class="btn-buy"   href=""  title="立即购买">缺货</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
             <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
@@ -120,15 +124,21 @@
 </div>
 <div class="am-dimmer am-active" data-am-dimmer="" style="display: none;"></div>
 <script type="text/javascript">
-    function getStatus(o) {
+    function collect(o) {
+        style = "visibility: none;"
         $.ajax({
             type: 'post',
             async: false,
             url: '<c:url value="/product/addProductFavorite.do?id="/>' + o,
             dataType: 'json',
             success: function (data) {
-                if(data==false){
-                    window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
+                if (data == false) {
+                    window.location.href = "<c:url value="/sso.do"/>";
+                } else {
+//                    document.getElementById("show").style.visibility = "hidden";
+//                    document.getElementById("hidden").style.visibility = "visible";
+                    $("#show").hide();
+                    $("#hidden").show();
                 }
             },
         });
@@ -155,6 +165,39 @@
         <%--})--%>
     <%--})--%>
 <%--</script>--%>
+<script type="text/javascript">
+    $().ready(function(){
+        ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>",{"id":"${productModel.id}"},function(data){
+            if(data){
+                $("#show").hide();
+                $("#hidden").show();
+            }else{
+                $("#show").show();
+                $("#hidden").hide();
+            }
+        },function(){},"get")
+    })
+</script>
+<script type="text/javascript">
+    function deCollect(o) {
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/product/removeProductFavorite.do?id="/>' + o,
+            dataType: 'json',
+            success: function (data) {
+                if (data == false) {
+                    window.location.href = "<c:url value="/sso.do"/>";
+                } else {
+//                    document.getElementById("show").style.visibility = "visible";
+//                    document.getElementById("hidden").style.visibility = "hidden";
+                    $("#show").show();
+                    $("#hidden").hide();
+                }
+            },
+        });
+    }
+</script>
 </body>
 
 
