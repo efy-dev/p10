@@ -20,15 +20,18 @@
           <p>${address.province.name}${address.city.name}${address.details}</p>
         </div>
         <ul class="botton-list">
-          <li><a href="/myEfeiyi/removeAddress.do?addressId=${address.id}">删除</a></li>
-          <li><a href="/myEfeiyi/addAddressOfMobile.do?addressId=${address.id}">编辑</a></li>
+          <li><a href="#"  onclick="showConfirm('提示','是否删除',function(){
+                  window.location.href='<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>';
+                  })">删除</a></li>
+
+          <li><a href="<c:url value="/myEfeiyi/addAddressOfMobile.do?addressId=${address.id}"/>">编辑</a></li>
         </ul>
       </div>
     </c:forEach>
     <!--一个地址-->
   </div>
   <div class="edit-info">
-    <a href="/myEfeiyi/addAddressOfMobile.do?addressId=null">新增地址</a>
+    <a href="<c:url value="/myEfeiyi/addAddressOfMobile.do?addressId=null"/>">新增地址</a>
   </div>
 </div>
 </body>
