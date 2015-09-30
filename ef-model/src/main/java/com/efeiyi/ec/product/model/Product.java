@@ -39,8 +39,9 @@ public class Product implements Serializable{
     private Integer recommendedIndex;//首页推荐排序字段
     private List<ProductModel> productModelList;
     private String subName;//副标题
+    private Long fsAmount;
+    private Long amount;
     private  String type;//1：普通2：收藏品
-
 
     @Transient
     public ProductPicture getProductPicture(){
@@ -215,6 +216,22 @@ public class Product implements Serializable{
 
     public void setSubName(String subName) {
         this.subName = subName;
+    }
+    @Column(name="fans_amount")
+    public Long getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Long fsAmount) {
+        this.fsAmount = fsAmount;
+    }
+    @Column(name = "praise_number")
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     @Column(name = "type")

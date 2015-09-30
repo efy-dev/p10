@@ -313,7 +313,10 @@
 
     function zhifubao(element) {
         $("#zhifubao").attr("style", "border:2px solid red");
-        $("#weixin").attr("style", "");
+        if(isWeiXin()){
+            $("#weixin").attr("style", "");
+        }
+
         payment = "1";
     }
 

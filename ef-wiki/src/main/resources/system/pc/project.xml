@@ -72,20 +72,45 @@
                         <item label="非遗美术" value="2"/>
                     </statusType>
                 </field>
+                <field name="type" label="项目级别" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="国家级" value="1"/>
+                        <item label="省级" value="2"/>
+                        <item label="市级" value="3"/>
+                        <item label="县级" value="4"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
-                <do name="plistProject" access="" label="project列表"
-                    result="/project/projectPList">
+                <do name="plistProject" access="" label="project列表" execute=""
+                    result="/classify/projectCategory">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <!--<condition name="fatherProject.fatherProjectId" defaultValue="" operation="eq" inputType="default"/>-->
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
-
                     </query>
 
                     <query name="default1" label="查询" type="auto" orderBy="id:desc">
                         <condition name="name"  operation="eq" label="项目名称" inputType="text"/>
                         <condition name="serial"  operation="eq" label="项目编号" inputType="text"/>
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="allCategory" label="查询" type="auto" orderBy="projectCategory:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="Category" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="projectCategory.id" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="all" label="查询" type="auto" orderBy="level:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="level" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="level" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="allDirt" label="查询" type="auto" orderBy="addressDistrict:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                    <query name="Dirt" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="addressDistrict.addressCity.addressProvince.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
                 <do name="plistProject2" access="" label="project列表"
@@ -221,6 +246,9 @@
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="master" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
 
                 <do name="removeMasterProject" label="删除MasterProject" access="" result="json"/>
@@ -265,6 +293,10 @@
                         <condition name="project.id" defaultValue="0" operation="eq"/>
                         <condition name="user.id" defaultValue="0" operation="eq"/>
                     </query>
+                    <query name="after" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="user.id" defaultValue="0" operation="eq"/>
+                    </query>
                 </do>
                 <do name="listProjectFollowed" access="" label="projectFollowed列表"
                     result="/hotProjects/PopularProjects">
@@ -278,5 +310,22 @@
                 </do>
             </does>
         </entity>
+
+        <entity name="ProductComment" label="ProductComment"
+                basic="simple" others=""
+                model="com.efeiyi.ec.wiki.model.ProductComment">
+            <does>
+                <do name="plistProductComment" access="" label="ProductComment列表"
+                    result="json">
+                    <query name="coment" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="product.id" defaultValue="0" operation="eq"/>
+                        <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
+                    </query>
+
+                </do>
+            </does>
+        </entity>
+
     </entities>
 </module>

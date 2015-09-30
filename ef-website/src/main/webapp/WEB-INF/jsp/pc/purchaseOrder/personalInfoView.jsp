@@ -118,18 +118,7 @@
 
 
 <script>
-    function info() {
-        $.ajax({
-            type: 'get',
-            async: false,
-            url: '<c:url value="/myEfeiyi/defaultAddress.do"/>',
-            dataType: 'json',
-            data: {},
-            success: function (data) {
-            },
 
-        });
-    }
     $().ready(function() {
         $("#personalInfo").validate({
             rules: {
