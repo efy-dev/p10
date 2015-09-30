@@ -80,7 +80,7 @@
         <a class="btn-default" href="#咨询" title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart"  href=""  title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy"   href=""  title="立即购买">立即购买</a>
+            <a class="btn-buy"   href=""  title="立即购买">缺货</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
             <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
