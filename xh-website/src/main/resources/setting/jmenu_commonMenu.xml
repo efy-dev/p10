@@ -39,7 +39,7 @@
         <jnode url="/protection/protection.list.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="政策法规"/>
         <jnode url="/protection/protection.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="申报指南"/>
         <jnode url="/protection/protection.declare.do?qm=plistMaterial_default" access="admin,manager" text_zh_CN="申报提交"/>
-        <jnode url="/protection/protection.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>
+        <jnode url="/protection/protection.checkDeclare.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>
     </jnode>
 
 </jmenu>

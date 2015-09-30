@@ -90,10 +90,11 @@
             <c:if test="${fn:length(productModelList) >1}">
                 <c:forEach items="${productModel.product.productModelList}" var="pm">
                     <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
-                            ${pm.product.name} <c:forEach
-                            items="${pm.productPropertyValueList}" var="pv">
-                        ${pv.projectPropertyValue.value}
-                    </c:forEach>
+                            ${pm.name}
+                            <%--${pm.product.name} <c:forEach--%>
+                            <%--items="${pm.productPropertyValueList}" var="pv">--%>
+                        <%--${pv.projectPropertyValue.value}--%>
+                    <%--</c:forEach>--%>
                     </a></li>
                 </c:forEach>
             </c:if>
