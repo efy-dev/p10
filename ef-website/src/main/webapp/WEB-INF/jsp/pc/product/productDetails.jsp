@@ -36,9 +36,9 @@
                 <div class="biao"><i class="icon"></i></div>
                 <span class="txt hover">添加收藏</span>
             </div>
-            <div class="collect" id="hidden" style="visibility: hidden" onclick="deCollect('${productModel.id}')">
-                <div class="biao"><i class="icon"></i></div>
-                <span class="txt hover">添加收藏</span>
+            <div class="collect" id="hidden" style="display: none;" onclick="deCollect('${productModel.id}')">
+                <div class="biao"><i class="icon icon-active"></i></div>
+                <span class="txt active">取消收藏</span>
             </div>
             <%--<div class="collect" id="hidden" style="visibility: hidden" onclick="deCollect('${productModel.id}')">--%>
             <%--<i class="icon icon-hover"></i>--%>
@@ -81,77 +81,7 @@
             </div>
             <!-- //End--slider-main-->
         </div>
-        <!-- //End--des-focus-->
-        <%--<div class="itme-ext">--%>
-        <%--<div class="name">--%>
-        <%--<p>${product.master.fullName}</p>--%>
-        <%--<p><strong>${product.name}</strong></p>--%>
-        <%--</div>--%>
-        <%--<!-- //End-->--%>
-        <%--<div class="des">--%>
-        <%--<ul class="ul-list">--%>
-        <%--<c:if test="${fn:length(productModelList) >1}">--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${fn:length(productModelList) >1}">--%>
-        <%--<c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">--%>
-        <%--<c:if test="${productModel.id == productModelTmp.id}">--%>
-        <%--<li class="active" >--%>
-        <%--<a href="/product/productModel/${productModelTmp.id}">--%>
-        <%--<c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">--%>
-        <%--${productPropertyValue.projectPropertyValue.value}--%>
-        <%--</c:forEach>--%>
-        <%--${product.name}</a>--%>
-        <%--</li>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${productModel.id != productModelTmp.id}">--%>
-        <%--<li class="">--%>
-        <%--<a href="/product/productModel/${productModelTmp.id}">--%>
-        <%--<c:forEach items="${productModelTmp.productPropertyValueList}" var="productPropertyValue" varStatus="rec">--%>
-        <%--${productPropertyValue.projectPropertyValue.value}--%>
-        <%--</c:forEach>--%>
-        <%--${product.name}</a>--%>
-        <%--</li>--%>
-        <%--</c:if>--%>
 
-
-        <%--</c:forEach>--%>
-
-
-        <%--</c:if>--%>
-        <%--</ul>--%>
-        <%--</div>--%>
-        <%--<!-- //End-->--%>
-        <%--&lt;%&ndash;<div class="amount">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<div class="ipt">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<input class="txt" type="text" value=${productModel.amount}/><em class="ge">个</em>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<div class="btns">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<a href="#btn-add" class="btn-add" title="加">+</a>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<a href="#btn-sub" class="btn-sub" title="减">-</a>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-        <%--<!-- //End-->--%>
-        <%--<div class="price">--%>
-        <%--<div class="p-text">飞蚁价：</div>--%>
-        <%--<div class="p-price"><em>￥</em><span>${productModel.price}</span></div>--%>
-        <%--<div class="m-price">市场价：￥${productModel.marketPrice}</div>--%>
-        <%--</div>--%>
-        <%--<!-- //End-->--%>
-
-        <%--<div class="choose-btns">--%>
-        <%--<c:if test="${productModel.amount <= 0}">--%>
-        <%--<a id ="modelId" class="btn btn-append"  title="缺货">缺货</a>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${productModel.amount > 0}">--%>
-        <%--<a id ="modelId" class="btn btn-append"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>--%>
-        <%--<a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>" title="立即购买"  >立即购买</a>--%>
-        <%--</c:if>--%>
-        <%--<!-- JiaThis Button BEGIN -->--%>
-        <%--</div>--%>
-        <%--<!-- //End-->--%>
-        <%--</div>--%>
-        <!-- //End--itme-ext-->
-        <!-- //End--des-focus-->
 
         <div class="itme-ext">
             <div class="name">
@@ -206,21 +136,25 @@
                                 <c:if test="${productModel.id == productModelTmp.id}">
                                     <li class="active">
                                         <a href="/product/productModel/${productModelTmp.id}">
-                                            <c:forEach items="${productModelTmp.productPropertyValueList}"
-                                                       var="productPropertyValue" varStatus="rec">
-                                                ${productPropertyValue.projectPropertyValue.value}
-                                            </c:forEach>
-                                                ${product.name}</a>
+                                            <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
+                                                       <%--var="productPropertyValue" varStatus="rec">--%>
+                                                <%--${productPropertyValue.projectPropertyValue.value}--%>
+                                            <%--</c:forEach>--%>
+                                                <%--${product.name}--%>
+                                            ${productModelTmp.name}
+                                        </a>
                                     </li>
                                 </c:if>
                                 <c:if test="${productModel.id != productModelTmp.id}">
                                     <li class="">
                                         <a href="/product/productModel/${productModelTmp.id}">
-                                            <c:forEach items="${productModelTmp.productPropertyValueList}"
-                                                       var="productPropertyValue" varStatus="rec">
-                                                ${productPropertyValue.projectPropertyValue.value}
-                                            </c:forEach>
-                                                ${product.name}</a>
+                                            <%--<c:forEach items="${productModelTmp.productPropertyValueList}"--%>
+                                                       <%--var="productPropertyValue" varStatus="rec">--%>
+                                                <%--${productPropertyValue.projectPropertyValue.value}--%>
+                                            <%--</c:forEach>--%>
+                                                <%--${product.name}--%>
+                                                    ${productModelTmp.name}
+                                        </a>
                                     </li>
                                 </c:if>
                             </c:forEach>
@@ -333,6 +267,21 @@
 
 </div>
 <script type="text/javascript">
+
+    $().ready(function(){
+        ajaxRequest("<c:url value="/product/favorite/productFavoriteStatus.do"/>",{"id":"${productModel.id}"},function(data){
+            if(data){
+                $("#show").hide();
+                $("#hidden").show();
+            }else{
+                $("#show").show();
+                $("#hidden").hide();
+            }
+        },function(){},"get")
+    })
+
+
+
     function collect(o) {
         style = "visibility: none;"
         $.ajax({
@@ -342,10 +291,12 @@
             dataType: 'json',
             success: function (data) {
                 if (data == false) {
-                    window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
+                    window.location.href = "<c:url value="/sso.do"/>";
                 } else {
-                    document.getElementById("show").style.visibility = "hidden";
-                    document.getElementById("hidden").style.visibility = "visible";
+//                    document.getElementById("show").style.visibility = "hidden";
+//                    document.getElementById("hidden").style.visibility = "visible";
+                    $("#show").hide();
+                    $("#hidden").show();
                 }
             },
         });
@@ -362,10 +313,12 @@
             dataType: 'json',
             success: function (data) {
                 if (data == false) {
-                    window.location.href = "<c:url value="http://passport.efeiyi.com/login"/>";
+                    window.location.href = "<c:url value="/sso.do"/>";
                 } else {
-                    document.getElementById("show").style.visibility = "visible";
-                    document.getElementById("hidden").style.visibility = "hidden";
+//                    document.getElementById("show").style.visibility = "visible";
+//                    document.getElementById("hidden").style.visibility = "hidden";
+                    $("#show").show();
+                    $("#hidden").hide();
                 }
             },
         });

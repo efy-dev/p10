@@ -39,7 +39,7 @@
 <body>
 <header class="am-header custom-header">
   <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
+    <a href="javascript:window.history.go(-1);" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
   <h1 class="am-header-title"></h1>
@@ -64,6 +64,7 @@
 <!--//End--header-->
 <!--地区-->
 <div class="dis-q1">
+  <div class="dis-q2">
   <div data-am-widget="tabs"
        class="am-tabs am-tabs-default">
     <ul class="am-tabs-nav am-cf">
@@ -77,10 +78,10 @@
           <div class="menu-page">
             <ul class="list-site">
               <li>
-                <a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
+                <a href="<c:url value='/basic/xm.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index=1'/>">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
               <c:if test="${!empty ProjectCategoryList}">
                 <c:forEach var="projectcategory" items="${ProjectCategoryList}">
-                  <li><a href="#">${projectcategory.name}</a></li>
+                  <li><a href="<c:url value='/basic/xm.do?qm=plistProject_Category&conditions=projectCategory.id:${projectcategory.id}&pageEntity.size=10&pageEntity.index=1'/>">${projectcategory.name}</a></li>
                 </c:forEach>
               </c:if>
             </ul>
@@ -91,12 +92,11 @@
         <div class="site">
           <div class="menu-page">
             <ul class="list-site">
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
-              <li><a href="#">联合国</a></li>
-              <li><a href="#">国际级</a></li>
-              <li><a href="#">国家级</a></li>
-              <li><a href="#">省级</a></li>
-              <li><a href="#">市级</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index=1'/>">全&nbsp;&nbsp;部</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_level&conditions=level:1&pageEntity.size=10&pageEntity.index=1'/>">国家级</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_level&conditions=level:2&pageEntity.size=10&pageEntity.index=1'/>">省&nbsp;&nbsp;级</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_level&conditions=level:3&pageEntity.size=10&pageEntity.index=1'/>">市&nbsp;&nbsp;级</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_level&conditions=level:4&pageEntity.size=10&pageEntity.index=1'/>">县&nbsp;&nbsp;级</a></li>
             </ul>
           </div>
         </div>
@@ -105,10 +105,10 @@
         <div class="site">
           <div class="menu-page">
             <ul class="list-site">
-              <li><a href="#">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
+              <li><a href="<c:url value='/basic/xm.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index=1'/>">全&nbsp;&nbsp;&nbsp;&nbsp;部</a></li>
               <c:if test="${!empty AddressProvinceList}">
                 <c:forEach var="AddressProvince" items="${AddressProvinceList}">
-                  <li><a href="#">${AddressProvince.name}</a></li>
+                  <li><a href="<c:url value='/basic/xm.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${AddressProvince.id}&pageEntity.size=10&pageEntity.index=1'/>">${AddressProvince.name}</a></li>
                 </c:forEach>
               </c:if>
             </ul>
@@ -117,6 +117,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!--地区-->
 <%--<div class="login-reg">
