@@ -162,8 +162,6 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <!--<do name="removeContent" label="删除" access=""-->
-                    <!--result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>-->
             </does>
             <does>
                 <do name="searchMaterial" access="" label="申报查询" result="" data="submitAttach">
@@ -265,6 +263,7 @@
                 <field name="group" label="申请类别" inputType="text">
                     <statusType fieldName="group">
                         <item label="传承人申请" value="masterApply"/>
+                        <item label="项目申请" value="projectApply"/>
                     </statusType>
                 </field>
                 <field name="status" label="申请状态" inputType="text">

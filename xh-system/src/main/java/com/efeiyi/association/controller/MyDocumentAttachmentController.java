@@ -42,9 +42,6 @@ public class MyDocumentAttachmentController {
     @Autowired
     private BaseManager baseManager;
 
-    @Autowired
-    @Qualifier("autoSerialManager")
-    private AutoSerialManager autoSerialManager;
 
     @Autowired
     private DocumentManager documentManager;

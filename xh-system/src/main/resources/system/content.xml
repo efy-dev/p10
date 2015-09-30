@@ -275,6 +275,7 @@
                 <field name="subGroup" label="申请类别" inputType="text">
                     <statusType fieldName="subGroup">
                         <item label="传承人申请" value="masterApply"/>
+                        <item label="非遗项目申请" value="projectApply"/>
                     </statusType>
                 </field>
                 <field name="status" label="申请状态" inputType="text">
