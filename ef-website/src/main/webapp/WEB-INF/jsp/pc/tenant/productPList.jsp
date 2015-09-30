@@ -53,7 +53,14 @@
           <li>
             <a href="/product/productModel/${productModel.id}" target="_blank" title="">
               <img class="imgfilter" src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}"/>" alt="">
-              <p class="wh name">${productModel.name}</p>
+              <p class="wh name">${productModel.name}
+                <c:if test="${productModel.productPropertyValueList.size()>1}">
+                  [
+                  <c:forEach items="${productModel.productPropertyValueList}"
+                             var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                  ]
+                </c:if>
+              </p>
               <p class="wh price">￥${productModel.price}</p>
             </a>
           </li>

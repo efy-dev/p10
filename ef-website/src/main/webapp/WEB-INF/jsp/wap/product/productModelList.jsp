@@ -23,17 +23,14 @@
          <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
-                    <a  href="<c:url value="/product/productModel/${productModel.id}"/>" style="color: #000">
                         <li>
+                            <a  href="<c:url value="/product/productModel/${productModel.id}"/>" style="color: #000">
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt="">
-
-                            <p class="wh name">${productModel.name}
-
+                            <p class="wh name">${map.get(productModel)}
                             </p>
                             <p class="price"><em>￥</em><span>${productModel.price.intValue()}</span></p>
-
+                            </a>
                         </li>
-                    </a>
                 </c:forEach>
             </ul>
         </c:if>

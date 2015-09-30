@@ -38,16 +38,16 @@
 <body>
 <%@include file="/layouts/title.jsp" %>
 <%--<div class="wh home-list isoc">--%>
+<jsp:include flush="true"
+             page="/xh/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+
+<%--<div class="wh home-list news xiehui">--%>
+<div class="wh home-list org">
     <jsp:include flush="true"
-                 page="/xh/getMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateLeft&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
-
-    <div class="wh home-list news xiehui">
-
-        <jsp:include flush="true"
-                     page="/xh/getSubMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateSubMenu&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
+                 page="/xh/getSubMenu.do?jmenuId=AssociationMenu&resultPage=/jmenu/manageTemplateSubMenu&match=${requestScope['javax.servlet.forward.servlet_path']}%3F${fn:replace(pageContext.request.queryString,'&','%26')}"/>
     <%--<div class="wh home-list news">--%>
     <sitemesh:write property='body'/>
-    </div>
+</div>
 <%--</div>--%>
 <%@include file="/layouts/footer.jsp" %>
 </body>

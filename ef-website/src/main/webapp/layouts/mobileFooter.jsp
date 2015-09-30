@@ -39,10 +39,10 @@
 <![endif]-->
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=929"/>"></script>
 <!--自定义js--End-->
 
-
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 <script>
 
     function isWeiXin(){

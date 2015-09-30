@@ -142,9 +142,14 @@
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
 
-                                                <p><a href="#">${product.productModel.product.name}
+                                                <p><a href="#">${product.productModel.name}
+                                                    <c:if test="${product.productModel.productPropertyValueList.size()>1}">
+                                                        [
                                                     <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                               var="ppv">-${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach></a>
+                                                        ]
+                                                    </c:if>
+
                                                 </p>
                                             </div>
                                         </div>

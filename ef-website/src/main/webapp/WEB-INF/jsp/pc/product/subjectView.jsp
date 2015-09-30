@@ -98,7 +98,7 @@
             <ul class="ul-item">
                 <c:forEach items="${productModelList}" var="productModel" begin="0" end="7">
                     <li>
-                        <a href="<c:url value="/product/productModel/${productModel.id}"/> " target="_blank" title="">
+                        <a href="<c:url value="/product/productModel/${productModel.productModel.id}"/> " target="_blank" title="">
                                 <%--<span class="tips">精品<em class="icon"></em></span>--%>
                             <img class="imgfilter"
                                  src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}@!product-hot"

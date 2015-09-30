@@ -136,7 +136,9 @@
                             </c:if>
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
                 <span><span class="text-a"><a
-                        href="<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>">删除</a></span></span>
+                        href="#" onclick="showConfirm('提示','是否删除',function(){
+                     window.location.href='<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>';
+                        })">删除</a></span></span>
 
                       <div class="active-pop" style="display: none">
                           <div class="pop-up  ae-lf">

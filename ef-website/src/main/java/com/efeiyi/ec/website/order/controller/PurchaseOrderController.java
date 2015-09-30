@@ -277,7 +277,12 @@ public class PurchaseOrderController extends BaseController {
     public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
+            if (purchaseOrderProduct.getProductModel().getAmount()!=null){
+                purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
+            }else {
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),purchaseOrderProduct.getProductModel().getId());
+                productModel.setAmount(productModel.getAmount()+purchaseOrderProduct.getPurchaseAmount());
+            }
         }
         purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_CONSEL);
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -289,6 +294,16 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/deleteOrder/{orderId}"})
     public String deleteOrder(@PathVariable String orderId) {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
+            if (purchaseOrderProduct.getProductModel().getAmount() != null){
+                purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
+            }else {
+                ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(),purchaseOrderProduct.getProductModel().getId());
+                productModel.setAmount(productModel.getAmount()+purchaseOrderProduct.getPurchaseAmount());
+            }
+        }
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
         baseManager.remove(PurchaseOrder.class.getName(), orderId);
         return "redirect:/order/myEfeiyi/list.do";
     }
@@ -396,8 +411,6 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrderProduct.setPurchasePrice(productModel.getPrice());
         purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
-        productModel.setAmount(productModel.getAmount() - 1);
-        baseManager.saveOrUpdate(ProductModel.class.getName(), productModel);
 
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -455,6 +468,9 @@ public class PurchaseOrderController extends BaseController {
                 PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
                 purchaseOrderProduct.setProductModel(cartProductTemp.getProductModel());
                 purchaseOrderProduct.setPurchaseAmount(cartProductTemp.getAmount());
+                if (cartProductTemp.getProductModel().getPrice() == null){
+                    cartProductTemp.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId()));
+                }
                 purchaseOrderProduct.setPurchasePrice(cartProductTemp.getProductModel().getPrice());
                 purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);

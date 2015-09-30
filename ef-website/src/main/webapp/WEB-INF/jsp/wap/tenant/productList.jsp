@@ -35,7 +35,14 @@
           <li>
             <a href="/product/productModel/${productModel.id}" style="color: #000">
             <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@product-model-wap-tenant"/>" alt="">
-            <p class="name">${productModel.name}</p>
+            <p class="name">${productModel.name}
+              <c:if test="${productModel.productPropertyValueList.size()>1}">
+                [
+                <c:forEach items="${productModel.productPropertyValueList}"
+                           var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                ]
+              </c:if>
+            </p>
             <p class="price"><em>￥</em><span>${productModel.price}</span></p>
             </a>
           </li>
