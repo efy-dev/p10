@@ -8,10 +8,10 @@ $(function(){
         tabsNav.find('.item').click(function(){
             $(this).addClass('active').siblings('.item').removeClass('active');
         })
-        tabsNav.find('.item-class').click(function(){
-            tabsNav.hide().siblings('.tabs-nav-2').show();
-            return false
-        })
+        //tabsNav.find('.item-class').click(function(){
+        //    tabsNav.hide().siblings('.tabs-nav-2').show();
+        //    return false
+        //})
 
         
 
@@ -51,9 +51,13 @@ $(document).ready(function(){
 
 
 ////fenxiang
-//$(document).ready(function(){
-//    $('#fxq').click(function(){
-//        $('#fx').show();
-//        return false
-//    })
-//})
+$(document).ready(function(){
+    $('#fx').click(function(){
+        $('#fxq').show();
+        return false
+   })
+    $('#gb').click(function(){
+        $('#fxq').hide();
+        return false
+    })
+})

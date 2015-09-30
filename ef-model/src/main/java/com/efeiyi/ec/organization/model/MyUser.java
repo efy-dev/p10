@@ -2,6 +2,7 @@ package com.efeiyi.ec.organization.model;
 
 import com.efeiyi.ec.tenant.model.BigTenant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ming800.core.base.model.BaseUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import java.util.*;
  */
 @Entity
 @Table(name = "organization_user")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     private String id;
@@ -59,6 +61,8 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     private BigUser bigUser;
 
     private Date lastLoginDatetime;//最后一次登陆时间
+    private Date lastLogoutDatetime;//最后一次登陆时间
+
 
     @Transient
     public BigUser getBigUser() {
@@ -71,7 +75,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     public MyUser() {
     }
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     public Role getRole() {
@@ -360,4 +364,13 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     public void setLastLoginDatetime(Date lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
+    @Transient
+    public Date getLastLogoutDatetime() {
+        return lastLogoutDatetime;
+    }
+
+    public void setLastLogoutDatetime(Date lastLogoutDatetime) {
+        this.lastLogoutDatetime = lastLogoutDatetime;
+    }
+
 }
