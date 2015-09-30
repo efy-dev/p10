@@ -16,13 +16,13 @@
 
     <!--<context:component-scan base-package="com.efeiyi.pal"/>-->
 
-    <bean id="dataSource2" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+    <bean id="associationDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
         <property name="poolProperties">
             <bean class="org.apache.tomcat.jdbc.pool.PoolProperties">
                 <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="${connection2.url}"/>
-                <property name="username" value="${connection2.username}"/>
-                <property name="password" value="${BSS_ENCRYPT.connection2.password}"/>
+                <property name="url" value="${assConnection.url}"/>
+                <property name="username" value="${assConnection.username}"/>
+                <property name="password" value="${BSS_ENCRYPT.assConnection.password}"/>
                 <property name="validationQuery" value="SELECT 1"/>
                 <property name="testWhileIdle" value="true"/>
                 <property name="timeBetweenEvictionRunsMillis" value="3600000"/>
@@ -42,10 +42,10 @@
         <property name="targetDataSources">
             <map key-type="java.lang.String">
                 <entry value-ref="dataSource" key="dataSource"></entry>
-                <entry value-ref="dataSource2" key="dataSource2"></entry>
+                <entry value-ref="associationDataSource" key="associationDataSource"></entry>
             </map>
         </property>
-        <property name="defaultTargetDataSource" ref="dataSource">
+        <property name="defaultTargetDataSource" ref="associationDataSource">
         </property>
     </bean>
 
