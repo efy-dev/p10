@@ -45,8 +45,9 @@
   function okChange(){
     var  flag = true;
     $(".active-d").each(function(){
-
-      if($(this).text()!=""){
+      var np= $(":input[name='np']").val();
+      var pwd= $(":input[name='pwd']").val();
+      if($(this).text()!="" || np==""|| pwd==""){
         flag = false;
         return false;
       }
@@ -54,10 +55,16 @@
     });
     if(flag==true){
       var pwd = $(":input[name='pwd']").val();
-      window.location.href="<c:url value="/myEfeiyi/updatePassword.do?id=${user.id}&pwd="/>"+pwd;
+      $.ajax({
+        type:"post",
+        dataType:"json",
+        url:"/myEfeiyi/updatePassword.do",
+        data:{pwd:pwd,id:'${user.id}'},
+        success:function(data){
+          window.location.href="<c:url value="/sso.do"/>";
+        }
+      });
     }
-
-
 
   }
   function checkPassword(obj){
