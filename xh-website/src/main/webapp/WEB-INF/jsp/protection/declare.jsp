@@ -22,7 +22,7 @@
         </div>
         <!-- //End--div-tab-btn-->
         <div class="div-tab-box div-tab-zn">
-            <div class="tbar">申请步骤：</div>
+            <div class="tbar">传承人申请步骤：</div>
             <div class="img"><img src="<c:url value='/shop2015/upload/exp11.jpg'/>" alt=""/></div>
             <form method="post" action="<c:url value='/attachment/attachmentUpload.do?qm='/><c:url value='/protection/protection.declare.do?qm=plistMaterial_default'/> "
                   enctype="multipart/form-data">
@@ -45,20 +45,20 @@
                             <input class="file" type="file" name="file"/>
                             <%--<span>未上传文件</span>--%>
                             <span class="">传承人姓名<i class="icon"></i></span>
-                            <input class="txt" type="text" name="name"/>
+                            <input class="txt" type="text" name="name" required/>
                         </p>
                     </li>
                     <li>
                         <input name="subGroup" value="masterApply" type="hidden">
                         <input name="group" value="attachDown" type="hidden">
-                        <p class="t1"><input class="txt" type="submit" name="name"/></p>
+                        <p class="t1"><input class="txt" type="submit"/></p>
                     </li>
                 </ul>
             </form>
         </div>
         <!-- //End--传承人申报-->
         <div class="div-tab-box div-tab-zn">
-            <div class="tbar">申请步骤：用作测试的文字项目申报</div>
+            <div class="tbar">项目申请步骤：</div>
             <div class="img">
                 <img class="img1" src="<c:url value='/shop2015/upload/exp11.jpg'/>" alt=""/>
                 <img class="img2" src="<c:url value='/shop2015/upload/exp12.jpg'/>" alt=""/>
@@ -83,13 +83,13 @@
                             <input class="file" type="file" name="file"/>
                             <%--<span>未上传文件</span>--%>
                             <span class="">传承人姓名<i class="icon"></i></span>
-                            <input class="txt" type="text" name="name"/>
+                            <input class="txt" type="text" name="name" required/>
                         </p>
                     </li>
                     <li>
                         <input name="subGroup" value="projectApply" type="hidden">
                         <input name="group" value="attachDown" type="hidden">
-                        <p class="t1"><input class="txt" type="submit" name="name"/></p>
+                        <p class="t1"><input class="txt" type="submit"/></p>
                     </li>
                 </ul>
             </form>

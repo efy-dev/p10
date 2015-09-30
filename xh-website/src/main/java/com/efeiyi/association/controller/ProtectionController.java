@@ -87,4 +87,9 @@ public class ProtectionController {
         return new ModelAndView("/protection/declare");
     }
 
+    @RequestMapping({"/protection.checkDeclare.do"})
+    public ModelAndView checkDeclare(){
+        return new ModelAndView("protection/checkDeclare");
+    }
+
 }
