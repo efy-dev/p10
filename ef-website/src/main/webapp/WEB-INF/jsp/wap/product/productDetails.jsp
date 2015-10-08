@@ -76,7 +76,12 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-        <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
+      <c:if test="${empty productModel.product.master.id}">
+          <a class="btn-default" href="" title="进店">进店</a>
+      </c:if>
+     <c:if test="${not empty product.master.id}">
+         <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
+     </c:if>
         <a class="btn-default" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=742565508&site=qq&menu=yes" title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart"  href=""  title="放入购物车"><i class="icon"></i>放入购物车</a>

@@ -310,7 +310,7 @@ var startNum=1;
     }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
       showTime=(intervalTime/60/24).toFixed(0)+"天前";
     }else{
-      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
      return showTime;
   }

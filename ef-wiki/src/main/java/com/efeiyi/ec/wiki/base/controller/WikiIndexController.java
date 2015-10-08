@@ -14,6 +14,7 @@ import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpResponse;
@@ -81,6 +82,9 @@ public class WikiIndexController extends WikibaseController {
      */
     @RequestMapping("/home.do")
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
+        if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
+            return new ModelAndView("redirect:/pc/index.do");
+        }
 
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         List<ProjectRecommended> list = baseManager.listObject(query);
