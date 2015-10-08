@@ -68,7 +68,7 @@
                                             class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                      onclick="showConfirm('提示','是否删除',function(){removeMaster('${master.id}')})" href="#"><span
+                                      onclick="showConfirm('提示','删除大师同时会解除该大师与商家，项目的关联，确认删除?',function(){removeMaster('${master.id}')})" href="#"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -169,7 +169,7 @@
     function removeMaster(divId){
         $.ajax({
             type: "get",
-            url: '<c:url value="/basic/xmj.do?qm=removeMaster"/>',
+            url: '<c:url value="/master/removeMaster.do"/>',
             cache: false,
             dataType: "json",
             data:{id:divId,recommendId:divId},

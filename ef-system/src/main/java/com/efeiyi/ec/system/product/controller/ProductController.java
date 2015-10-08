@@ -553,4 +553,16 @@ public class ProductController extends BaseController {
         return id;
     }
 
+    @RequestMapping("/updateAmount.do")
+    @ResponseBody
+    public String updateAmount(String id, Integer amount,String creator, HttpServletRequest request) {
+         String tempAmount = null;
+        try {
+            tempAmount = productModelManager.updateAmount(id,amount,creator).toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tempAmount;
+    }
 }

@@ -8,6 +8,8 @@
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewProductModel=order"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderProduct"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;viewIdentify=orderProduct"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_search"/>
+
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="支付记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderPayment_default"/>
@@ -66,6 +68,11 @@
                 <match url="/product/saveNewProduct.do?view=newProduct"/>
 
 
+
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistKCProductModel_default" access="admin" text_zh_CN="库存列表">
+                 <match url="/basic/xm.do?qm=plistKCProductModel_default" />
+                <match url="/basic/xm.do?qm=plistProductModelRecord_default"/>
 
             </jnode>
             <jnode url="/basic/xm.do?qm=plistProductRecommended_default" access="admin,manager" text_zh_CN="推荐商品管理">

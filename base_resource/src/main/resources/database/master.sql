@@ -491,3 +491,18 @@ ALTER TABLE `product`
 ADD COLUMN `type`  char(2) NULL AFTER `sub_name`;
 
 
+CREATE TABLE `NewTable` (
+  `id`  char(16) NOT NULL ,
+  `amount`  integer(255) NULL ,
+  `creator`  varchar(255) NULL ,
+  `product_model_id`  char(16) NULL ,
+  `create_datetime`  datetime NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+ALTER TABLE `product_model_record`
+ADD COLUMN `status`  varchar(2) NULL AFTER `create_datetime`;
+
+
+
+

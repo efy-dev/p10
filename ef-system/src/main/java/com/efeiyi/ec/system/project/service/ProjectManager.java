@@ -17,4 +17,6 @@ public interface ProjectManager {
      * @return
      */
    String linkTenant(String tenantId,String projectId,String tenantProjectId,String status);
+
+    String removeProject(String id);
 }

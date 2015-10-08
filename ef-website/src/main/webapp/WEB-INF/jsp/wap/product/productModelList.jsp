@@ -19,7 +19,7 @@
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价格">价格</a></li>
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="新品">新品</a></li>
         </ul>
-        <div class="list-ad1"><a href=""><img src="http://pro.efeiyi.com/${project.picture_wap_url}@!project-wap-view" alt=""/></a></div>
+        <div class="list-ad1"><a><img src="http://pro.efeiyi.com/${project.picture_wap_url}@!project-wap-view" alt=""/></a></div>
          <c:if test="${productModelList.size()>0}">
             <ul class="ul-list">
                 <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
