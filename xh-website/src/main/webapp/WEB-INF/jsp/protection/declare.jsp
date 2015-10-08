@@ -82,7 +82,7 @@
                             <a target="_blank" title="上传文件">上传文件</a>
                             <input class="file" type="file" name="file"/>
                             <%--<span>未上传文件</span>--%>
-                            <span class="">传承人姓名<i class="icon"></i></span>
+                            <span class="">项目名称<i class="icon"></i></span>
                             <input class="txt" type="text" name="name" required/>
                         </p>
                     </li>

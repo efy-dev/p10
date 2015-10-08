@@ -118,4 +118,17 @@ public class ProjectController extends BaseController {
         return  status;
     }
 
+    @RequestMapping("/project/removeProject.do")
+    @ResponseBody
+    public String removeProject(String id){
+
+        try {
+
+        id =  projectManager.removeProject(id);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  id;
+    }
 }
