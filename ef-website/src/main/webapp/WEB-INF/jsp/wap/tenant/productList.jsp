@@ -3,6 +3,20 @@
 <html>
 <head>
     <title>${tenant.name}</title>
+  <style>
+    @media (width: 320px) {
+      .list-class .ul-list li{height: 17rem}
+      .list-class .ul-list li img{height: 11.2rem}
+    }
+    @media (min-width: 414px) {
+      .list-class .ul-list li{height: 21.5rem}
+      .list-class .ul-list li img{height: 14.96rem}
+    }
+    @media (width: 375px) {
+      .list-class .ul-list li{height: 17.5rem}
+      .list-class .ul-list li img{height: 13.4rem}
+    }
+  </style>
 </head>
 <body>
 <artice class="custom">
@@ -34,7 +48,7 @@
         <c:forEach items="${productModelList}" var="productModel">
           <li>
             <a href="/product/productModel/${productModel.id}" style="color: #000">
-            <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@product-model-wap-tenant"/>" alt="">
+            <img src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-tenant"/>" alt="">
             <p class="name">${productModel.name}
               <c:if test="${productModel.productPropertyValueList.size()>1}">
                 [

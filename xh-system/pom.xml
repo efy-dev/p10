@@ -57,26 +57,26 @@
         <profile>
             <id>ef-association</id>
             <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/ef-association?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
+                <db-assDriver>com.mysql.jdbc.Driver</db-assDriver>
+                <db-assPassword>yX798tcK3P5VZ7bUTbh+nQ==</db-assPassword>
+                <db-assUrl>jdbc:mysql://192.168.1.57/ef-association?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-assUrl>
+                <db-assUsername>root</db-assUsername>
+                <db-assLevel>DEBUG</db-assLevel>
+                <dbAsspath>/tmp/logs/</dbAsspath>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
         <profile>
-            <id>ec-develop</id>
+            <id>xh-release</id>
             <properties>
-                <db-driver2>com.mysql.jdbc.Driver</db-driver2>
-                <db-password2>yX798tcK3P5VZ7bUTbh+nQ==</db-password2>
-                <db-url2>jdbc:mysql://192.168.1.57/dev-efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url2>
-                <db-username2>root</db-username2>
-                <db-level2>DEBUG</db-level2>
-                <dbpath2>/tmp/logs/</dbpath2>
+                <db-assDriver>com.mysql.jdbc.Driver</db-assDriver>
+                <db-assPassword>z5MurSDMqew5V/irhnO9FA==</db-assPassword>
+                <db-assUrl>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/association?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-assUrl>
+                <db-assUsername>xh</db-assUsername>
+                <db-assLevel>DEBUG</db-assLevel>
+                <dbAsspath>/tmp/logs/</dbAsspath>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -87,21 +87,7 @@
             <properties>
                 <db-driver>com.mysql.jdbc.Driver</db-driver>
                 <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>ec-test</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/efy?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
+                <db-url>jdbc:mysql://192.168.1.57/dev-efc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
                 <db-username>root</db-username>
                 <db-level>DEBUG</db-level>
                 <dbpath>/tmp/logs/</dbpath>
@@ -121,35 +107,7 @@
                 <dbpath>/tmp/logs/</dbpath>
             </properties>
             <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>pal-test</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>z5MurSDMqew5V/irhnO9FA==</db-password>
-                <db-url>jdbc:mysql://rds7t6qjsj0we3796b6lprivate.mysql.rds.aliyuncs.com/pal_test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>pal</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>pal-dev</id>
-            <properties>
-                <db-driver>com.mysql.jdbc.Driver</db-driver>
-                <db-password>yX798tcK3P5VZ7bUTbh+nQ==</db-password>
-                <db-url>jdbc:mysql://192.168.1.57/pal?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</db-url>
-                <db-username>root</db-username>
-                <db-level>DEBUG</db-level>
-                <dbpath>/tmp/logs/</dbpath>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
     </profiles>

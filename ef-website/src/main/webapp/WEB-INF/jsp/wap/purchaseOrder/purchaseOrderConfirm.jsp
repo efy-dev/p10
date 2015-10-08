@@ -134,7 +134,7 @@
 
 <!--Start--弹出地址-->
 <div id="order-address" class="alert-delete" style="display:none;">
-    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;">
+    <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
         <div class="bd list-adress" id="list-order">
             <ul class="ul-list">
                 <c:forEach items="${addressList}" var="address">
@@ -188,14 +188,14 @@
                             <label>具体地址</label>
                             <textarea name="details" id="doc-vld-ta-2-1" class="text-act" required></textarea>
                         </div>
-                        <div class="am-form-group">
+                        <%--<div class="am-form-group">
                             <p>
                                 <input type="checkbox" id="checkbox" onclick="putVal(this);" name="checkbox"
                                        value="">
                                 <strong>设为默认地址</strong>
                                 <span>（注：每次下单时都使用该地址）</span>
                             </p>
-                        </div>
+                        </div>--%>
                         <input type="hidden" name="cartId" value="${cart.id}">
                         <label></label>
                         <%--<input type="submit" class="dj-btn" value="保存收货人信息">--%>
@@ -239,6 +239,11 @@
     var orderId = "${purchaseOrder.id}";
 
     $(function () {
+
+        if(!isWeiXin()){
+            $("#weixin").hide();
+        }
+
         $.ajax({
             type: 'get',
             async: false,
@@ -308,7 +313,10 @@
 
     function zhifubao(element) {
         $("#zhifubao").attr("style", "border:2px solid red");
-        $("#weixin").attr("style", "");
+        if(isWeiXin()){
+            $("#weixin").attr("style", "");
+        }
+
         payment = "1";
     }
 

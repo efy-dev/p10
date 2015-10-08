@@ -5,6 +5,7 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.wiki.organization.OrganizationConst;
 import com.efeiyi.ec.wiki.organization.dao.UserDao;
 import com.efeiyi.ec.wiki.organization.service.UserManager;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -31,7 +33,8 @@ import java.util.List;
 public class UserManagerImpl implements UserManager, UserDetailsService {
     @Autowired
     private UserDao userDao;
-
+    @Autowired
+    BaseManager baseManager;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -73,6 +76,8 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 //            if (username.split(",")[2].equals("2009")) {
 //                myUser.setPassword(StringUtil.encodePassword("2009", "SHA"));
 //            }
+            saveLoginLog( myUser);//记录用户最近一次登陆的日志
+            System.out.println(myUser.getLastLoginDatetime());
             return myUser;
         }
     }
@@ -86,5 +91,14 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 //        StudentUser studentUser = studentUserDao.getUniqueStudentUserByConditions(username.split(",")[1], queryStr, queryParamMap);
         return null;
     }
+
+    public void saveLoginLog(MyUser myUser) {
+        MyUser user= myUser;
+        user.setLastLogoutDatetime(user.getLastLoginDatetime());
+        user.setLastLoginDatetime(new Date());
+        baseManager.saveOrUpdate(MyUser.class.getName(),user);
+    }
+
+
 
 }

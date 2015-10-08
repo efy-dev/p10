@@ -29,17 +29,17 @@
         </jnode>
     </jnode>
 
-    <jnode id="AuthorityManagement" url="/project/project.do?qm=listAddressProvince_default" text_zh_CN="非遗名录">
-        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="项目"/>
-        <jnode url="/project/project.do?qm=listAddressProvince_default" access="admin,manager" text_zh_CN="传承人"/>
+    <jnode id="AuthorityManagement" url="/project/project.do?qm=plistProject_default" text_zh_CN="非遗名录">
+        <jnode url="/project/project.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目"/>
+        <jnode url="/project/project.do?qm=plistTenant_default" access="admin,manager" text_zh_CN="传承人"/>
     </jnode>
 
     <jnode id="ProtectionPolicy" url="/protection/protection.do?qm=plistLaw_default" text_zh_CN="非遗保护">
         <jnode url="/protection/protection.do?qm=plistLaw_default" access="admin,manager" text_zh_CN="非遗法"/>
         <jnode url="/protection/protection.list.do?qm=plistPolicy_default" access="admin,manager" text_zh_CN="政策法规"/>
         <jnode url="/protection/protection.do?qm=plistSubmissionHandbook_default" access="admin,manager" text_zh_CN="申报指南"/>
-        <jnode url="/protection/protection.do?qm=plistMaterial_default" access="admin,manager" text_zh_CN="申报提交"/>
-        <jnode url="/protection/protection.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>
+        <jnode url="/protection/protection.declare.do?qm=plistMaterial_default" access="admin,manager" text_zh_CN="申报提交"/>
+        <jnode url="/protection/protection.checkDeclare.do?qm=searchMaterial_default" access="admin,manager" text_zh_CN="申报查询"/>
     </jnode>
 
 </jmenu>

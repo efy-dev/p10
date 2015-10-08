@@ -233,5 +233,26 @@ public class ProductController {
         model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
         return "/product/productDetails";
     }
-
+    /**商品收藏状态判断
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/favorite/productFavoriteStatus.do"})
+    @ResponseBody
+   public Boolean productFavoriteStatus(HttpServletRequest request) throws Exception{
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = false;
+        if (currentUser.getId() != null) {
+            String productModelId = request.getParameter("id");
+            XQuery xQuery = new XQuery("listProductFavorite_default",request);
+            xQuery.put("user_id", currentUser.getId());
+            xQuery.put("productModel_id", productModelId);
+            List<ProductFavorite> productFavoriteList =  baseManager.listObject(xQuery);
+            if(productFavoriteList!=null&&"1".equals(productFavoriteList.get(0).getStatus())){
+            flag = true;
+            }
+        }
+        return flag;
+     }
 }

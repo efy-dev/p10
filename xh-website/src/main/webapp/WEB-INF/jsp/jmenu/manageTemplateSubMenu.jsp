@@ -15,7 +15,7 @@
                 <c:forEach items="${currentJnode.children}" var="child" varStatus="status">
                     <c:if test="${child.id== matchJnode.id}">
                         <c:if test="${empty child.children}">
-                        <li class="items active"><a href="${child.url}" target="_parent"
+                        <li class="items active"><a href="<c:url value= '${child.url}'/>" target="_parent"
                                                     title="">${child.text_zh_CN}</a></li>
                         </c:if>
                         <c:if test="${not empty child.children}">
@@ -24,10 +24,10 @@
                                 <div class="items-list" style="display: block;">
                                     <c:forEach items="${child.children}" var="subChild">
                                         <c:if test="${child.id== matchJnode.id}">
-                                    <a class="items-active" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
+                                    <a class="items-active" href="<c:url value= '${subChild.url}'/>" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
                                         <c:if test="${child.id!= matchJnode.id}">
-                                        <a class="items-a" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
+                                        <a class="items-a" href="<c:url value= '${subChild.url}'/>" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
                                     </c:forEach>
                                 </div>
@@ -36,7 +36,7 @@
                     </c:if>
                     <c:if test="${child.id != matchJnode.id}">
                         <c:if test="${empty child.children}">
-                            <li class="items"><a href="${child.url}" target="_parent"
+                            <li class="items"><a href="<c:url value= '${child.url}'/>" target="_parent"
                                                         title="">${child.text_zh_CN}</a></li>
                         </c:if>
                         <c:if test="${not empty child.children}">
@@ -45,10 +45,10 @@
                                 <div class="items-list" style="display: block;">
                                     <c:forEach items="${child.children}" var="subChild">
                                         <c:if test="${subChild.id== matchJnode.id}">
-                                            <a class="items-active" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
+                                            <a class="items-active" href="<c:url value= '${subChild.url}'/>" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
                                         <c:if test="${subChild.id!= matchJnode.id}">
-                                            <a class="items-a" href="${subChild.url}" target="_parent" title="">${subChild.text_zh_CN}</a>
+                                            <a class="items-a" href="<c:url value= '${subChild.url}'/>" target="_parent" title="">${subChild.text_zh_CN}</a>
                                         </c:if>
                                     </c:forEach>
                                 </div>

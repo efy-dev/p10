@@ -60,23 +60,23 @@ $(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
         });
         //收藏
-        var oBiao=$('.preview .collect .biao');
-        oBiao.hover(function(){
-            $(this).find('.icon').addClass('icon-hover');
-        },function(){
-            $(this).find('.icon').removeClass('icon-hover');
-        });
-        oBiao.click(function(){
-            var oCllect=$(this).parents('.collect');
-            $(this).find('.icon').toggleClass('icon-active');
-            oCllect.find('span.hover').remove();
-            if(oCllect.find('span').is('.active')){
-                oCllect.find('span.active').remove();
-                oCllect.append('<span class="txt hover">添加收藏</span>');
-            }else{
-                oCllect.append('<span class="txt active">取消收藏</span>');
-            }
-        })
+        //var oBiao=$('.preview .collect .biao');
+        //oBiao.hover(function(){
+        //    $(this).find('.icon').addClass('icon-hover');
+        //},function(){
+        //    $(this).find('.icon').removeClass('icon-hover');
+        //});
+        //oBiao.click(function(){
+        //    var oCllect=$(this).parents('.collect');
+        //    $(this).find('.icon').toggleClass('icon-active');
+        //    oCllect.find('span.hover').remove();
+        //    if(oCllect.find('span').is('.active')){
+        //        oCllect.find('span.active').remove();
+        //        oCllect.append('<span class="txt hover">添加收藏</span>');
+        //    }else{
+        //        oCllect.append('<span class="txt active">取消收藏</span>');
+        //    }
+        //})
         //�
         $(window).scroll(function(){
             var d=$(document).scrollTop();
