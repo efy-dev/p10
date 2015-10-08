@@ -5,17 +5,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
- * Created by AC丶man on 2015/9/21.
+ * Created by AC丶man on 2015/9/18.
  */
 @Entity
-@Table(name = "master_message_praise")
-public class MasterMessagePraise {
+@Table(name = "master_message_store")
+public class MasterMessageStore implements Serializable {
 
-	private String id;
-	private MasterMessage message;
+	private String id ;
+	private String status;
+	private MasterMessage masterMessage;
 	private MyUser user;
+
 
 	@Id
 	@GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -28,15 +31,24 @@ public class MasterMessagePraise {
 		this.id = id;
 	}
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "master_message_id")
-	public MasterMessage getMessage() {
-		return message;
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
 	}
 
-	public void setMessage(MasterMessage message) {
-		this.message = message;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "message_id")
+	public MasterMessage getMasterMessage() {
+		return masterMessage;
+	}
+
+	public void setMasterMessage(MasterMessage masterMessage) {
+		this.masterMessage = masterMessage;
 	}
 
 	@JsonIgnore

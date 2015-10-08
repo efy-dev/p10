@@ -490,6 +490,24 @@ CHANGE COLUMN `fansAmout` `fans_amount`  bigint(20) NULL DEFAULT NULL AFTER `dis
 ALTER TABLE `product`
 ADD COLUMN `type`  char(2) NULL AFTER `sub_name`;
 
+--------------20150929---------
+ALTER TABLE `master_news`
+ADD COLUMN `praise_number`  bigint(20) NULL AFTER `project_id`;
+ALTER TABLE `master_message_praise`
+DROP COLUMN `praise_number`;
+
+--------------20151008---------
+CREATE TABLE `master_message_store` (
+  `id`  char(16) NOT NULL ,
+  `message_id`  char(16) NULL ,
+  `user_id`  char(16) NULL ,
+  `status`  varchar(20) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+
+
+
 
 CREATE TABLE `product_model_record` (
   `id`  char(16) NOT NULL ,

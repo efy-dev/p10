@@ -72,7 +72,7 @@
                 <li><a href="#">全部</a></li>
                 <c:if test="${!empty categoryList}">
                     <c:forEach items="${categoryList}" var="cate">
-                        <li><a href="#">${cate.project.name}</a></li>
+                        <li><a href="<c:url value='/masterCategory/getProjectNameList.do?projectId='/>${cate.project.id}">${cate.project.name}</a></li>
                     </c:forEach>
                 </c:if>
               </ul>
@@ -85,10 +85,10 @@
             <div class="menu-page">
               <ul class="list-site" id="level">
                 <li><a href="#">全部</a></li>
-                <li><a href="#">国际级</a></li>
-                <li><a href="#">国家级</a></li>
-                <li><a href="#">省级</a></li>
-                <li><a href="#">市级</a></li>
+                <li><a href="<c:url value='/masterCategory/getLevelList.do?level=1'/>">国际级</a></li>
+                <li><a href="<c:url value='/masterCategory/getLevelList.do?level=2'/>">国家级</a></li>
+                <li><a href="<c:url value='/masterCategory/getLevelList.do?level=3'/>">省级</a></li>
+                <li><a href="<c:url value='/masterCategory/getLevelList.do?level=4'/>">市级</a></li>
               </ul>
             </div>
           </div>
@@ -101,7 +101,7 @@
                 <li><a href="#">全部</a></li>
                 <c:if test="${!empty cityList}">
                   <c:forEach items="${cityList}" var="city">
-                    <li><a href="#">${city.name}</a></li>
+                    <li><a href="<c:url value='/masterCategory/getCityList.do?cityId='/>${city.id}">${city.name}</a></li>
                   </c:forEach>
                 </c:if>
               </ul>

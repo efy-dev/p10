@@ -1,7 +1,7 @@
 <%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -37,7 +37,7 @@
     <a href="javascript:history.go(-1);" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
-  <h1 class="am-header-title">${object.fullName}</h1>
+  <h1 class="am-header-title"></h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">
     <a href="#chevron-right" class="chevron-right" id="menu">
@@ -50,69 +50,26 @@
       <ul class="bd">
         <li><a href="" title="首页">首页</a></li>
         <li><a href="" title="分类">消&nbsp;息</a></li>
-        <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="<c:url value='/personal/getPersonal.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
 </header>
 <!--//End--header-->
-<div class="master-works">
-  <div class="user">
-    <img class="img-user" src="/scripts/assets/upload/master-0.jpg" alt=""/>
-    <img class="img-bg" src="/scripts/assets/upload/master-1.jpg" alt=""/>
-    <div class="user-info">
-      <p class="user-name">${object.fullName}</p>
-      <p class="project-name">徽派竹刻</p>
-      <p class="level-name"><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人
-        <i class="icon icon-v"></i>
-      </p>
-    </div>
-    <div class="user-nav">
-      <ul>
-        <li class="active">
-          <i class="icon icon-user-1"></i>
-          <strong>动态</strong>
-          <i class="user-arrow-up"></i>
-        </li>
-        <li>
-          <i class="icon icon-user-2"></i>
-          <strong>简介</strong>
-        </li>
-        <li>
-          <i class="icon icon-user-3"></i>
-          <strong>作品</strong>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!-- //End---->
-  <div class="great">
-    <!--大师动态-->
-    <div class="suit">
-      <c:forEach items="${objectList}" var="message">
-      <div class="dynamic">
-        <div class="dynamic-st">
-          <div class="suit-st-text">
-            <p><span>${message.content}</span></p>
-          </div>
-          <!--图片效果1！-->
-          <div class="suit-st-img"> <img src="/scripts/assets/upload/120101-p1-2.jpg"> </div>
-
-          <!--图片效果2！定死9张图片-->
-          <div class="suit-st-ft">
-            <div class="suit-ft-left"><span>${message.dataSource}</span></div>
-            <div class="suit-ft-right"><span>1小时前</span></div>
-          </div>
+<!--地区-->
+<div class="master-class">
+  <c:forEach items="${list}" var="obj">
+      <div class="inheritor">
+        <div class="inheritor-text">
+          <p class="itor-text-1">${obj.fullName}</p>
+          <p class="itor-text-2">${obj.projectName}</p>
+          <p class="itor-text-3"><ming800:status name='level' dataType='Tenant.level' checkedValue='${obj.level}' type='normal'/>非遗传承人</p>
+          <p class="itor-text-4">${obj.brief}</p>
+          <a class="gz-fd-icon" onclick="changeFollowedStatus(this,'${obj.id}');">${obj.followStatus}</a>
+          <div class="gz-fd-img"><a href="#"><img src="../shop2015/upload/120211-tx-1.jpg"></a></div>
         </div>
-        <div class="dynamic-ft">
-          <a href="#" onclick="changePraiseStatus(this,'${message.id}');" class="ft-a"> <i class="good-1"></i>
-              <em><c:if test="${empty message.praiseStatus}">赞</c:if><c:if test="${message.praiseStatus != null}">${message.praiseStatus}</c:if></em>
-          </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i>
-          <a onclick="collected('${message.id}');" class="ft-a"> <i class="good-3"></i> </a> </div>
       </div>
-      </c:forEach>
-    </div>
-  </div>
+  </c:forEach>
 </div>
 <!--地区-->
 <div class="login-reg">
@@ -137,35 +94,28 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--//End--footer-->
-<script>
-
-  function collected(messageId){
+<script >
+  function changeFollowedStatus(o,masterId){
+    var status = "";
+    var str = $(o).html();
+    if(str == "已关注"){
+      status = "2";
+    }else if(str == "关注"){
+      status = "1";
+    }
     $.ajax({
-      url:"<c:url value='/masterMessage/collected.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
-      dataType:"json",
-      error:function(){},
-      success:function(msg){
-        if(true == msg){
-          alert("收藏成功!");
-        }else{
-          alert("收藏已移除!");
-        }
-      }
-    });
-  }
-
-  function changePraiseStatus(o,messageId){
-    $.ajax({
-      url:"<c:url value='/masterMessagePraise/changePraiseNum.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
+      type: "POST",
+      url: "<c:url value='/masterFollow/followed.do'/>",
+      data:"masterId="+masterId+"&status="+status,
       async:false,
       dataType:"json",
-      error:function(){},
+      error:function(){alert("操作失败.请联系系统管理员!")},
       success:function(msg){
-        $(o).find("em").html(msg);
+        if(msg == "1"){
+          $(o).html("关注");
+        }else if(msg == "2"){
+          $(o).html("已关注");
+        }
       }
     })
   }
@@ -184,8 +134,5 @@
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
 <script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
-<script>
-  $
-</script>
 </body>
 </html>

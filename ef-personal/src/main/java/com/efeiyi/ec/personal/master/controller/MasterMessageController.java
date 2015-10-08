@@ -1,7 +1,6 @@
 package com.efeiyi.ec.personal.master.controller;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterMessage;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -43,8 +42,10 @@ public class MasterMessageController {
 	@RequestMapping("/masterMessageList.do")
 	public List MasterMessageList(HttpServletRequest request) throws Exception {
 		XQuery xQuery = new XQuery("plistMasterMessage_default",request);
+		MyUser user = AuthorizationUtil.getMyUser();
 		List<MasterMessage> messageList = baseManager.listObject(xQuery);
 		for (MasterMessage message : messageList){
+			getPraiseStatus(message,user);
 			message.setMasterId(message.getMaster().getId());
 			message.setMasterName(message.getMaster().getFullName());
 		}
@@ -69,10 +70,117 @@ public class MasterMessageController {
 		String messageId = request.getParameter("messageId");
 		if (!StringTools.isEmpty(messageId)){
 			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),messageId);
+			getMasterFollowedStatus(message.getMaster());
 			model.addAttribute("object",message);
 		}
 		return "/masterMessage/masterMessageView";
 	}
 
+	public String getMasterFollowedStatus(Master master){
+		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.status=1";
+		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("masterId",master.getId());
+		List<MasterFollowed> list = baseManager.listObject(queryHql,queryMap);
+		if (list != null && list.size() > 0){
+			master.setFollowStatus("已关注");
+		}else{
+			master.setFollowStatus("关注");
+		}
+		return master.getFollowStatus();
+	}
 
+
+	public String getPraiseStatus(MasterMessage message , MyUser user){
+		String queryHql = "from MasterMessagePraise p where p.message.id=:messageId and p.user.id=:userId";
+		LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("messageId",message.getId());
+		queryMap.put("userId",user.getId());
+		List<MasterMessagePraise> list = baseManager.listObject(queryHql,queryMap);
+		if (list != null && list.size() > 0){
+			message.setPraiseStatus("取消赞");
+		}else{
+			message.setPraiseStatus("赞");
+		}
+		return message.getPraiseStatus();
+	}
+
+	@ResponseBody
+	@RequestMapping("/collected.do")
+	public boolean collected(HttpServletRequest request){
+		String messageId = request.getParameter("messageId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		String queryHql = "from MasterMessageStore s where s.masterMessage.id=:messageId and s.user.id=:userId";
+		LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("messageId",messageId);
+		queryMap.put("userId",user.getId());
+		List<MasterMessageStore> list = baseManager.listObject(queryHql,queryMap);
+		if (list == null || list.size() <= 0){
+			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),messageId);
+			MasterMessageStore store = new MasterMessageStore();
+			store.setUser(user);
+			store.setMasterMessage(message);
+			baseManager.saveOrUpdate(MasterMessageStore.class.getName(),store);
+			return true;
+		}else {
+			MasterMessageStore store = list.get(0);
+			baseManager.delete(MasterMessageStore.class.getName(),store.getId());
+			return false;
+		}
+	}
+
+	@RequestMapping("/getMasterDetails.do")
+	public String getMasterDetails(HttpServletRequest request , Model model){
+		String masterId = request.getParameter("masterId");
+		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+		model.addAttribute("object",master);
+		String queryHql = "from MasterMessage m where m.master.id=:masterId";
+		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("masterId",master.getId());
+		List<MasterMessage> list = baseManager.listObject(queryHql,queryMap);
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (list != null && list.size() > 0){
+			for (MasterMessage message : list){
+				String queryHql1 = "from MasterMessagePraise m where m.message.id=:messageId and m.user.id=:userId";
+				LinkedHashMap<String,Object> queryMap1 = new LinkedHashMap<>();
+				queryMap1.put("masterId",master.getId());
+				queryMap1.put("userId",user.getId());
+				List<MasterMessage> praiseList = baseManager.listObject(queryHql1,queryMap1);
+				if (praiseList != null && praiseList.size() > 0){
+					message.setPraiseStatus("取消赞");
+				}else{
+					message.setPraiseStatus("赞");
+				}
+//				String queryHql2 = "from MasterMessageStore m where m.masterMessage.id=:messageId and m.user.id=:userId";
+//				LinkedHashMap<String,Object> queryMap2 = new LinkedHashMap<>();
+//				queryMap2.put("masterId",master.getId());
+//				queryMap2.put("userId",user.getId());
+//				List<MasterMessage> storeList = baseManager.listObject(queryHql2,queryMap2);
+			}
+			model.addAttribute("messageList",list);
+		}
+		return "/masterMessage/masterMessageDetails";
+	}
+
+	public String mainMasterProject(List<MasterProject> masterProjects) {
+
+		MasterProject masterProject = null;
+
+		if (masterProjects != null && masterProjects.size() > 0) {
+
+			for (MasterProject masterProjectTemp : masterProjects) {
+				if (masterProjectTemp.getStatus().equals("1")) {
+					masterProject = masterProjectTemp;
+				}
+			}
+			if (masterProject == null) {
+				masterProject = masterProjects.get(0);
+			}
+
+			return masterProject.getProject().getName();
+		} else {
+
+			return "";
+		}
+	}
 }

@@ -1,7 +1,6 @@
 <%@ page import="com.efeiyi.ec.personal.AuthorizationUtil" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -37,7 +36,7 @@
     <a href="javascript:history.go(-1);" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
-  <h1 class="am-header-title">${object.fullName}</h1>
+  <h1 class="am-header-title">魏立中</h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">
     <a href="#chevron-right" class="chevron-right" id="menu">
@@ -58,14 +57,12 @@
 <!--//End--header-->
 <div class="master-works">
   <div class="user">
-    <img class="img-user" src="/scripts/assets/upload/master-0.jpg" alt=""/>
-    <img class="img-bg" src="/scripts/assets/upload/master-1.jpg" alt=""/>
+    <img class="img-user" src="../shop2015/upload/master-0.jpg" alt=""/>
+    <img class="img-bg" src="../shop2015/upload/master-1.jpg" alt=""/>
     <div class="user-info">
       <p class="user-name">${object.fullName}</p>
-      <p class="project-name">徽派竹刻</p>
-      <p class="level-name"><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人
-        <i class="icon icon-v"></i>
-      </p>
+      <p class="project-name">${object.projectName}</p>
+      <p class="level-name"><ming800:status name='level' dataType='Tenant.level' checkedValue='${obj.level}' type='normal'/>非物质文化遗产传承人<i class="icon icon-v"></i></p>
     </div>
     <div class="user-nav">
       <ul>
@@ -89,30 +86,33 @@
   <div class="great">
     <!--大师动态-->
     <div class="suit">
-      <c:forEach items="${objectList}" var="message">
-      <div class="dynamic">
-        <div class="dynamic-st">
-          <div class="suit-st-text">
-            <p><span>${message.content}</span></p>
-          </div>
-          <!--图片效果1！-->
-          <div class="suit-st-img"> <img src="/scripts/assets/upload/120101-p1-2.jpg"> </div>
+      <c:if test="${!empty messageList}">
+        <c:forEach items="${messageList}" var="message">
+          <div class="dynamic">
+            <div class="dynamic-hd">
 
-          <!--图片效果2！定死9张图片-->
-          <div class="suit-st-ft">
-            <div class="suit-ft-left"><span>${message.dataSource}</span></div>
-            <div class="suit-ft-right"><span>1小时前</span></div>
+            </div>
+            <div class="dynamic-st">
+              <div class="suit-st-text">
+                <p><span>${message.content}</span></p>
+              </div>w
+              <!--图片效果1！-->
+              <div class="suit-st-img"> <img src="../shop2015/upload/120101-p1-2.jpg"> </div>
+
+              <!--图片效果2！定死9张图片-->
+              <div class="suit-st-ft">
+                <div class="suit-ft-left"><span>${message.dataSource}</span></div>
+                <div class="suit-ft-right"><span>1小时前</span></div>
+              </div>
+            </div>
+            <div class="dynamic-ft">
+              <a href="#" class="ft-a"> <i class="good-1"></i> <em></em> </a> <i class="s-solid ft-a"></i>
+              <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i>
+              <a href="#" class="ft-a"> <i class="good-3"></i> </a> </div>
           </div>
-        </div>
-        <div class="dynamic-ft">
-          <a href="#" onclick="changePraiseStatus(this,'${message.id}');" class="ft-a"> <i class="good-1"></i>
-              <em><c:if test="${empty message.praiseStatus}">赞</c:if><c:if test="${message.praiseStatus != null}">${message.praiseStatus}</c:if></em>
-          </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i>
-          <a onclick="collected('${message.id}');" class="ft-a"> <i class="good-3"></i> </a> </div>
-      </div>
-      </c:forEach>
+        </c:forEach>
+      </c:if>
     </div>
-  </div>
 </div>
 <!--地区-->
 <div class="login-reg">
@@ -123,7 +123,6 @@
   <a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
   <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
   <% } %>
-
 </div>
 <!--//End--login-reg-->
 <footer class="bd footer">
@@ -137,55 +136,20 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--//End--footer-->
-<script>
-
-  function collected(messageId){
-    $.ajax({
-      url:"<c:url value='/masterMessage/collected.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
-      dataType:"json",
-      error:function(){},
-      success:function(msg){
-        if(true == msg){
-          alert("收藏成功!");
-        }else{
-          alert("收藏已移除!");
-        }
-      }
-    });
-  }
-
-  function changePraiseStatus(o,messageId){
-    $.ajax({
-      url:"<c:url value='/masterMessagePraise/changePraiseNum.do'/>",
-      data:"messageId="+messageId,
-      type:"POST",
-      async:false,
-      dataType:"json",
-      error:function(){},
-      success:function(msg){
-        $(o).find("em").html(msg);
-      }
-    })
-  }
-</script>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
-<![endif]-->
 <script src="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
 <!--自定义js--Start-->
 <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
 <script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 <script>
-  $
+
 </script>
 </body>
 </html>

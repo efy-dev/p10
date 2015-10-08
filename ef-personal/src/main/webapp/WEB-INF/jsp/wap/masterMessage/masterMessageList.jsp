@@ -37,9 +37,12 @@
 <body>
 <div class="great">
   <header class="am-header custom-header">
-    <div class="am-header-left am-header-nav"> <a href="javascript:history.go(-1);" class="chevron-left"></a> </div>
+    <div class="am-header-left am-header-nav">
+      <a href="javascript:history.go(-1);" class="chevron-left"></a>
+    </div>
     <h1 class="am-header-title">大师</h1>
-    <div class="am-header-right am-header-nav am-header-right1"> <a href="#chevron-right" class="chevron-right" id="menu"> <i class="icon icon-user"></i> </a> </div>
+    <div class="am-header-right am-header-nav am-header-right1">
+      <a href="#chevron-right" class="chevron-right" id="menu"> <i class="icon icon-user"></i> </a> </div>
   </header>
   <!--//End--header-->
   <!--地区-->
@@ -59,25 +62,7 @@
         <div class="am-tab-panel am-active">
           <!--大师动态-->
           <div class="suit" id="pubu">
-            <c:forEach items="${messageList}" var="msg">
-            <div class="dynamic">
-              <div class="dynamic-hd">
-                <a class="suit-tx" href="<c:url value='/masterMessage/getOnlyMasterMessageList.do'/>"><img class="am-circle" src="/scripts/assets/upload/120101-p1-1.jpg"></a>
-                <div class="suit-name" ><span>${msg.master.fullName}</span></div>
-                <a class="suit-gz"><span>关注</span></a> </div>
-              <div class="dynamic-st">
-                <div class="suit-st-text">
-                  <p><span>${msg.content}</span></p>
-                </div>
-                <div class="suit-st-img"> <img src="/scripts/assets/upload/120101-p1-2.jpg"> </div>
-                <div class="suit-st-ft">
-                  <div class="suit-ft-left"><span>${msg.dataSource}</span></div>
-                  <div class="suit-ft-right"><span>1小时前</span></div>
-                </div>
-              </div>
-              <div class="dynamic-ft"> <a href="#" class="ft-a"> <i class="good-1"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-2"></i> <em>9999</em> </a> <i class="s-solid ft-a"></i> <a href="#" class="ft-a"> <i class="good-3"></i> </a> </div>
-            </div>
-            </c:forEach>
+
           </div>
         </div>
       </div>
@@ -167,14 +152,46 @@
                   +"<div class=\"suit-ft-right\"><span>1小时前</span></div>"
                   +"</div></div>"
                   +"<div class=\"dynamic-ft\"> "
-                  +"<a href=\"#\" class=\"ft-a\"> <i class=\"good-1\"></i><em>9999</em></a><i class=\"s-solid ft-a\"></i> "
+                  +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
                   +"<a href=\"#\" class=\"ft-a\"> <i class=\"good-2\"></i><em>9999</em></a><i class=\"s-solid ft-a\"></i> "
-                  +"<a href=\"#\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
+                  +"<a onclick=\"collected('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
           box.append(sub);
         }
       }
     });
   }
+
+  function collected(messageId){
+    $.ajax({
+      url:"<c:url value='/masterMessage/collected.do'/>",
+      data:"messageId="+messageId,
+      type:"POST",
+      dataType:"json",
+      error:function(){},
+      success:function(msg){
+        if(true == msg){
+          alert("收藏成功!");
+        }else{
+          alert("收藏已移除!");
+        }
+      }
+    });
+  }
+
+  function changePraiseStatus(o,messageId){
+    $.ajax({
+      url:"<c:url value='/masterMessagePraise/changePraiseNum.do'/>",
+      data:"messageId="+messageId,
+      type:"POST",
+      async:false,
+      dataType:"json",
+      error:function(){},
+      success:function(msg){
+        $(o).find("em").html(msg);
+      }
+    })
+  }
+
   function getAttentionStatus(masterId){
     $.ajax({
       type: "POST",
@@ -248,7 +265,7 @@
                           "<a href=\"#\"><img src=\"/scripts/assets/upload/box-tx-3-4-7.jpg\"></a>"+
                           "<a class=\"gz-fd-icon\" id=\"isOrNot\" onclick=\"changeFollowedStatus(this,'"+recommendList[i].id+"')\">关注</a></div></li>";
                 }
-                sub += "</ul><a href=\"#\" class=\"state-btn\">查看更多大师<span class=\"gd-icon\"></span></a> </div>";
+                sub += "</ul><a href=\"<c:url value='/masterCategory/CategoryList.do'/>\" class=\"state-btn\">查看更多大师<span class=\"gd-icon\"></span></a> </div>";
                 box.append(sub);
               }
             });

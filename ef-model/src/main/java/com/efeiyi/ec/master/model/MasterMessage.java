@@ -32,6 +32,8 @@ public class MasterMessage implements Serializable {
 	private String masterName;
 	private String status;
 	private String dataSource; //来源
+	private Long praiseNum;
+	private String praiseStatus;
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 
@@ -53,6 +55,24 @@ public class MasterMessage implements Serializable {
 
 	public void setMasterName(String masterName) {
 		this.masterName = masterName;
+	}
+
+	@Transient
+	public String getPraiseStatus() {
+		return praiseStatus;
+	}
+
+	public void setPraiseStatus(String praiseStatus) {
+		this.praiseStatus = praiseStatus;
+	}
+
+	@Column(name = "praise_number")
+	public Long getPraiseNum() {
+		return praiseNum;
+	}
+
+	public void setPraiseNum(Long praiseNum) {
+		this.praiseNum = praiseNum;
 	}
 
 	@Transient

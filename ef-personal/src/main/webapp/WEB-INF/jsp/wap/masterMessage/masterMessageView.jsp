@@ -48,8 +48,8 @@
         <div class="suit">
           <div class="dynamic">
             <div class="dynamic-hd"> <a class="suit-tx"><img class="am-circle" src="/scripts/assets/upload/120102-p1-1.jpg"></a>
-              <div class="suit-name"><a href="#"><span>魏立中</span></a></div>
-              <a class="suit-gz"><span>关注</span></a> </div>
+              <div class="suit-name"><a href="#"><span>${object.master.fullName}</span></a></div>
+              <a class="suit-gz" onclick="changeStatus(this,'${object.master.id}');"><span>${object.master.followStatus}</span></a> </div>
             <div class="dynamic-st">
               <div class="dynamic-suit-st-img">
                 <p><img src="/scripts/assets/upload/120102-p1-2.jpg"></p>
@@ -57,15 +57,9 @@
                   国目前纯粹作为非物质文化遗产予以继承和发展。</p>
                 <p><img src="/scripts/assets/upload/120102-p1-3.jpg"></p>
               </div>
-              <!--//End--单图--多图效果-->
-
             </div>
-
           </div>
-          <!-- //End---->
         </div>
-        <!--end大师动态-->
-
       </div>
     </div>
   </div>
@@ -131,6 +125,32 @@
 </footer>
 <!--//End--footer-->
 </div>
+<script>
+  function changeStatus(o,masterId){
+    var status = "";
+    var str = $(o).find("span").html();
+    if(str == "已关注"){
+      status = "2";
+    }else if(str == "关注"){
+      status = "1";
+    }
+    $.ajax({
+      type: "POST",
+      url: "<c:url value='/masterFollow/followed.do'/>",
+      data:"masterId="+masterId+"&status="+status,
+      async:false,
+      dataType:"json",
+      error:function(){alert("操作失败.请联系系统管理员!")},
+      success:function(msg){
+        if(msg == "1"){
+          $(o).find("span").html("关注");
+        }else if(msg == "2"){
+          $(o).find("span").html("已关注");
+        }
+      }
+    })
+  }
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
 <!--<![endif]-->
