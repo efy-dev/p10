@@ -263,6 +263,16 @@
         </div>
     </div>
 </div>
+<div class="scroll-bar">
+    <div class="scroll-bar-top">
+        <span class="btn"><i class="icon"></i>顶部</span>
+    </div>
+    <!-- //End--返回顶部-->
+    <div class="scroll-bar-ask" >
+        <span class="btn"><i class="icon"></i>在线咨询</span>
+    </div>
+    <!-- //End--在线咨询-->
+</div>
 
 
 </div>
