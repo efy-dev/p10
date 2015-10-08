@@ -268,8 +268,8 @@
         <span class="btn"><i class="icon"></i>顶部</span>
     </div>
     <!-- //End--返回顶部-->
-    <div class="scroll-bar-ask" >
-        <span class="btn"><i class="icon"></i>在线咨询</span>
+    <div class="scroll-bar-ask">
+        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=742565508&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
     </div>
     <!-- //End--在线咨询-->
 </div>
