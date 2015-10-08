@@ -1,5 +1,7 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.service.ProtectionServiceManager;
+import com.efeiyi.ec.association.model.ApplicationMaterial;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -10,6 +12,7 @@ import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,10 @@ public class ProtectionController {
     private XdoManager xdoManager;
     @Autowired
     private XdoSupportManager xdoSupportManager;
+
+    @Autowired
+    @Qualifier("protectionServiceManager")
+    private ProtectionServiceManager protectionServiceManager;
 
     @RequestMapping({"/protection.do"})
     public List<Document> protection(HttpServletRequest request, ModelMap modelMap) throws Exception {
@@ -90,6 +97,16 @@ public class ProtectionController {
     @RequestMapping({"/protection.checkDeclare.do"})
     public ModelAndView checkDeclare(){
         return new ModelAndView("protection/checkDeclare");
+    }
+
+    @RequestMapping({"/protection.checkDeclareState.do"})
+    public ModelAndView checkDeclareState(HttpServletRequest request, ModelMap modelMap){
+        String type = request.getParameter("type");
+        String name = request.getParameter("name");
+        ApplicationMaterial applicationMaterial = (ApplicationMaterial) protectionServiceManager.CheckDeclareState(name, type);
+        modelMap.put("type", type);
+        modelMap.put("object", applicationMaterial);
+        return new ModelAndView("protection/checkDeclareState");
     }
 
 }
