@@ -136,7 +136,24 @@
   <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--//End--footer-->
-
+<script>
+  function transdate(endTime){
+    var timestamp = Date.parse(new Date());
+    var oldTime = parseInt(endTime);
+    var intervalTime = (timestamp - oldTime)/1000/60;
+    var showTime = "";
+    if(intervalTime<=59){
+      showTime=intervalTime.toFixed(0)+"分钟前";
+    }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+      showTime=(intervalTime/60).toFixed(0)+"小时前";
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+      showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
+    }
+    return showTime;
+  }
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>

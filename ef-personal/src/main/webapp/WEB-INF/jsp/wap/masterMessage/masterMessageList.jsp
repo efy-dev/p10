@@ -130,6 +130,7 @@
         for(var i = 0 ;i < obj.length ;i++){
           var masterId = obj[i].masterId;
           var masterName = obj[i].masterName;
+          var cTime = transdate(obj[i].createDateTime);
           getAttentionStatus(masterId);
           var attention = "";
           if(flag == true){
@@ -149,7 +150,7 @@
                   +"<div class=\"suit-st-img\"><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\"><img src=\"/scripts/assets/upload/120101-p1-2.jpg\"></a> </div>"
                   +"<div class=\"suit-st-ft\">"
                   +"<div class=\"suit-ft-left\"><span>"+obj[i].dataSource+"</span></div>"
-                  +"<div class=\"suit-ft-right\"><span>1小时前</span></div>"
+                  +"<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>"
                   +"</div></div>"
                   +"<div class=\"dynamic-ft\"> "
                   +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
@@ -159,6 +160,23 @@
         }
       }
     });
+  }
+
+  function transdate(endTime){
+    var timestamp = Date.parse(new Date());
+    var oldTime = parseInt(endTime);
+    var intervalTime = (timestamp - oldTime)/1000/60;
+    var showTime = "";
+    if(intervalTime<=59){
+      showTime=intervalTime.toFixed(0)+"分钟前";
+    }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+      showTime=(intervalTime/60).toFixed(0)+"小时前";
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+      showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
+    }
+    return showTime;
   }
 
   function collected(messageId){
