@@ -14,6 +14,7 @@ import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.HttpUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpResponse;
@@ -81,6 +82,9 @@ public class WikiIndexController extends WikibaseController {
      */
     @RequestMapping("/home.do")
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
+        if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
+            return new ModelAndView("redirect:/pc/index.do");
+        }
 
         XQuery query = new XQuery("plistProjectRecommended_default", request);
         List<ProjectRecommended> list = baseManager.listObject(query);
@@ -125,23 +129,51 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/attention.do")
     @ResponseBody
-    public boolean saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+    public String saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
         String projectid = request.getParameter("projectId");
-        ProjectFollowed projectFollowed = new ProjectFollowed();
+        String oper = request.getParameter("oper");
+        Project project = (Project) baseManager.getObject(Project.class.getName(), projectid);
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
-            return false;
+            return "false";
         }
-        projectFollowed.setUser(user);
-        Project project = (Project) baseManager.getObject(Project.class.getName(), projectid);
-        projectFollowed.setProject(project);
-        projectFollowed.setStatus("1");
-        projectFollowed.setCreateDatetime(new Date());
-        project.setFsAmount(project.getFsAmount() == null ? (0 + 1) : (project.getFsAmount() + 1));
-        baseManager.saveOrUpdate(Project.class.getName(), project);
-        baseManager.saveOrUpdate(ProjectFollowed.class.getName(), projectFollowed);
+        if (oper.equalsIgnoreCase("del")){
+            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId";
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("userId", user.getId());
+            map.put("projectId", projectid);
+            ProjectFollowed pf = (ProjectFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
+            if (pf != null && pf.getId() != null)//说明已经关注
+            {
+                baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
 
-        return true;
+                long FsAmount =0;
+                if(project.getFsAmount() == null){
+                    FsAmount =0;
+                }else  if(project.getFsAmount() - 1<=0){
+                    FsAmount =0;
+                }else if (project.getFsAmount() - 1>=1){
+                    FsAmount =project.getFsAmount() - 1;
+                }
+                project.setFsAmount(FsAmount);
+                baseManager.saveOrUpdate(Project.class.getName(),project);
+                return "del";
+            }
+            return "error";
+        }
+        if (oper.equalsIgnoreCase("add")){
+            ProjectFollowed projectFollowed = new ProjectFollowed();
+            projectFollowed.setUser(user);
+            projectFollowed.setProject(project);
+            projectFollowed.setStatus("1");
+            projectFollowed.setCreateDatetime(new Date());
+            project.setFsAmount(project.getFsAmount() == null ? (0 + 1) : (project.getFsAmount() + 1));
+            baseManager.saveOrUpdate(Project.class.getName(), project);
+            baseManager.saveOrUpdate(ProjectFollowed.class.getName(), projectFollowed);
+
+            return "true";
+        }
+        return "error";
     }
 
     @RequestMapping("/Isattention.do")
@@ -195,23 +227,55 @@ public class WikiIndexController extends WikibaseController {
 
     @RequestMapping("/attentionMaster.do")
     @ResponseBody
-    public boolean saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
+    public String saveMasterFollows(HttpServletRequest request, Model model) throws Exception {
         String masterId = request.getParameter("masterId");
-        MasterFollowed masterFollowed = new MasterFollowed();
+        String oper = request.getParameter("oper");
+
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
-            return false;
+            return "false";
         }
-        masterFollowed.setUser(user);
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
-        masterFollowed.setCreateDateTime(new Date());
-        masterFollowed.setMaster(master);
-        masterFollowed.setStatus("1");
-        masterFollowed.setUser(user);
-        //这里需要同步更新master的粉丝数量字段，待大师项目跟进后修改
-        baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
+        if(oper.equalsIgnoreCase("del")){
+            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId";
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("userId", user.getId());
+            map.put("masterId", masterId);
+            MasterFollowed mf = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
+            if (mf != null && mf.getId() != null)//说明已经关注
+            {
+                baseManager.delete(MasterFollowed.class.getName(), mf.getId());
 
-        return true;
+                long FsAmount =0;
+                if(master.getFsAmount() == null){
+                    FsAmount =0;
+                }else  if(master.getFsAmount() - 1<=0){
+                    FsAmount =0;
+                }else if (master.getFsAmount() - 1>=1){
+                    FsAmount =master.getFsAmount() - 1;
+                }
+                master.setFsAmount(FsAmount);
+                baseManager.saveOrUpdate(Master.class.getName(),master);
+                return "del";
+            }
+           return "error";
+        }
+
+        if(oper.equalsIgnoreCase("add")) {
+            MasterFollowed masterFollowed = new MasterFollowed();
+            masterFollowed.setUser(user);
+            masterFollowed.setCreateDateTime(new Date());
+            masterFollowed.setMaster(master);
+            masterFollowed.setStatus("1");
+            masterFollowed.setUser(user);
+            //这里需要同步更新master的粉丝数量字段
+            baseManager.saveOrUpdate(MasterFollowed.class.getName(), masterFollowed);
+            master.setFsAmount(master.getFsAmount()==null?1:master.getFsAmount()+1);
+            baseManager.saveOrUpdate(Master.class.getName(),master);
+            return "true";
+        }
+
+        return "error";
     }
 
     @RequestMapping("/showProduct.do")

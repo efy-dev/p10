@@ -117,9 +117,11 @@
           <div class="sit-suit-cgz">
             <div class="sit-suit-cgz-l"><a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
               <c:if test="${flag ==true}">
+                <input id="saveProjectFllow" type="hidden" value="0">
                 已关注
               </c:if>
               <c:if test="${flag ==false}">
+                <input id="saveProjectFllow" type="hidden" value="1">
                 关注
               </c:if>
               </a></div>
@@ -240,9 +242,11 @@
 
               var masterid = data.list[i].master.id;
               var word ="关注";
+              var opertation ="0";
               checkIsAttentionMaster(masterid);
               if(isAttention==true){
-                word = "已关注";
+                word = "取消关注";
+                opertation ="1";
               }
               var level=data.list[i].master.level;
               var levelName="";
@@ -267,7 +271,7 @@
                       "<p class='itor-text-1'>"+data.list[i].master.fullName+"</p> " +
                       "<p class='itor-text-3'>"+levelName+"</p> " +
                       "<p class='itor-text-4' style='padding-bottom: 1.5rem'>"+data.list[i].master.brief+"</p> " +
-                      "<a class='gz-fd-icon' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
+                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
                       "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");
 
               pubu.append(box);
@@ -376,22 +380,35 @@
 
 
     function saveMasterFllow(masterId){
-
+      var val = $("#"+masterId).attr("about");
+      var oper;
+      if(val=='1'){
+        oper="del";
+      }else if(val=='0'){
+        oper="add";
+      }
       $.ajax({
         type:"get",
-        url:"/base/attentionMaster.do?masterId="+masterId,//设置请求的脚本地址
+        url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
         data:"",
         dataType:"json",
         success:function(data){
-          if(data==false){
+          if(data=="false"){
             alert("您还未登陆，请登录后再操作");
             return false;
           }
-          if(data==true){
-            $("#"+masterId).html("已关注");
+          if(data=="true"){
+            $("#"+masterId).html("取消关注");
             return true;
           }
-
+          if(data=="del"){
+            $("#"+masterId).html("关注");
+            return true;
+          }
+          if(data=="error"){
+            showAlert("提示","未知错误，请联系管理员！！！");
+            return false;
+          }
         },
         error:function(){
 
@@ -399,7 +416,12 @@
           return false;
         },
         complete:function(){
-
+          if(oper=="0"){
+            var val = $("#"+masterId).attr("about","1");
+          }
+          if(oper=="1"){
+            var val = $("#"+masterId).attr("about","0");
+          }
         }
       });
     }
@@ -409,22 +431,35 @@
 
 
     function saveProjectFllow(projectId){
-
+      var val = $("#saveProjectFllow").val();
+      var oper;
+      if(val=='0'){
+        oper="del";
+      }else if(val=='1'){
+        oper="add";
+      }
       $.ajax({
         type:"get",
-        url:"<c:url value='/base/attention.do?projectId='/>"+projectId,//设置请求的脚本地址
+        url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
         data:"",
         dataType:"json",
         success:function(data){
-          if(data==false){
+          if(data=="false"){
             alert("您还未登陆，请登录后再操作");
             return false;
           }
-          if(data==true){
-            $("#"+projectId).html("已关注");
+          if(data=="true"){
+            $("#"+projectId).html("取消关注");
             return true;
           }
-
+          if(data=="del"){
+            $("#"+projectId).html("关注");
+            return true;
+          }
+          if(data=="error"){
+            showAlert("提示","未知错误，请联系管理员！！！");
+            return false;
+          }
         },
         error:function(){
 
@@ -432,6 +467,12 @@
           return false;
         },
         complete:function(){
+          if(oper=="0"){
+            var val = $("#saveProjectFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveProjectFllow").val("0");
+          }
 
         }
       });

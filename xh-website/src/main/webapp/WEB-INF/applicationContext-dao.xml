@@ -87,6 +87,8 @@
 
     <tx:annotation-driven/>
 
+    <bean id="protectionDaoHibernate" class="com.efeiyi.association.dao.hibernate.ProtectionDaoHibernate"/>
+    <bean id="protectionServiceManager" class="com.efeiyi.association.service.impl.ProtectionServiceManagerImpl"/>
 
     <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

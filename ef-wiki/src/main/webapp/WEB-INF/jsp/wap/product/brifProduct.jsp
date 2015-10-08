@@ -128,11 +128,13 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow(${product.master.id})">
+      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow(${product.master.id})" id="">
         <c:if test="${flag == true}">
-          已关注
+          <input id="saveMasterFllow" type="hidden" value="0">
+          取消关注
         </c:if>
         <c:if test="${flag == false}">
+          <input id="saveMasterFllow" type="hidden" value="1">
           关注
         </c:if>
 
@@ -189,22 +191,36 @@ ${product.productDescription.content}
 <script>
   //var productId =${product};
   function saveMasterFllow(masterId){
+    var val = $("#saveMasterFllow").val();
+    var oper;
+    if(val=='0'){
+      oper="del";
+    }else if(val=='1'){
+      oper="add";
+    }
 
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId,//设置请求的脚本地址
+      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
-        if(data==false){
+        if(data=="false"){
           alert("您还未登陆，请登录后再操作");
           return false;
         }
-        if(data==true){
-          $("#"+masterId).html("已关注");
+        if(data=="true"){
+          $("#"+masterId).html("取消关注");
           return true;
         }
-
+        if(data=="del"){
+          $("#"+masterId).html("关注");
+          return true;
+        }
+        if(data=="error"){
+        showAlert("提示","未知错误，请联系管理员！！！");
+          return false;
+        }
       },
       error:function(){
 
@@ -212,7 +228,12 @@ ${product.productDescription.content}
         return false;
       },
       complete:function(){
-
+        if(oper=="0"){
+          var val = $("#saveMasterFllow").val("1");
+        }
+        if(oper=="1"){
+          var val = $("#saveMasterFllow").val("0");
+        }
       }
     });
   }
@@ -289,7 +310,7 @@ var startNum=1;
     }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
       showTime=(intervalTime/60/24).toFixed(0)+"天前";
     }else{
-      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
      return showTime;
   }
