@@ -393,6 +393,7 @@ public class PurchaseOrderController extends BaseController {
             cart1 = new Cart();
             cart1.setUser(user);
             cart1.setCreateDatetime(new Date());
+            cart1.setCartProductList(new ArrayList<CartProduct>());
             baseManager.saveOrUpdate(Cart.class.getName(), cart1);
         }
 
@@ -464,12 +465,13 @@ public class PurchaseOrderController extends BaseController {
             e.printStackTrace();
         }
 
-        if (cart1 == null) {
+        if (cart1 == null && bigUser.getId()!=null) {
             User user = new User();
             user.setId(bigUser.getId());
             cart1 = new Cart();
             cart1.setUser(user);
             cart1.setCreateDatetime(new Date());
+            cart1.setCartProductList(new ArrayList<CartProduct>());
             baseManager.saveOrUpdate(Cart.class.getName(), cart1);
         }
 
