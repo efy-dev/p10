@@ -128,10 +128,10 @@
                 </div>
             </div>
             <div class="des">
+                <c:if test="${fn:length(productModelList) >1}">
                 <div class="colour">规格：</div>
                 <div class="colour-page">
                     <ul class="ul-list">
-                        <c:if test="${fn:length(productModelList) >1}">
                             <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
                                 <c:if test="${productModel.id == productModelTmp.id}">
                                     <li class="active">
@@ -158,9 +158,9 @@
                                     </li>
                                 </c:if>
                             </c:forEach>
-                        </c:if>
                     </ul>
                 </div>
+                </c:if>
             </div>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
