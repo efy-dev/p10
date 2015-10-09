@@ -1,10 +1,12 @@
 package com.efeiyi.ec.wiki.base.controller;
 
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
+import com.ming800.core.taglib.PageEntity;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,14 +40,17 @@ public class WikiDynamicController extends WikibaseController {
         //1.获取所有的类别
         XQuery query = new XQuery("listProjectCategory_default", request);
         List<ProjectCategory> list = baseManager.listObject(query);
-        model.addAttribute("projectCategory", list);
+        //一步加载
+        /*String index = request.getParameter(PageEntity.PARAM_NAME_PAGEINDEX);
+        String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);*/
+        List<List<Project>> pc = new ArrayList<List<Project>>();
         for (ProjectCategory projectCategory : list){
-
+            XQuery query2 = new XQuery("listProject2_byCategory", request);
+            List<Project> listp = baseManager.listObject(query2);
+            pc.add(listp);
         }
 
-
-
-
+        model.addAttribute("projectCategory", pc);
 
 
         return new ModelAndView("/hotProjects/PopularProjects");

@@ -75,7 +75,7 @@
                         <condition name="status" defaultValue="1" operation="eq" label="状态" inputType="default"/>
                     </query>
                     <query name="consumer" label="查找" type="auto" orderBy="id:desc">
-                        <condition name="user.id" operation="eq" label="消费者id"/>
+                        <condition name="user.id" operation="eq" label="消费者id" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="serial" operation="eq" label="订单号" inputType="text"/>
@@ -120,7 +120,7 @@
                         <condition name="status" defaultValue="1" operation="eq" label="优惠券状态" inputType="default"/>
                     </query>
                     <query name="couponBatch" label="查找" type="auto" orderBy="id:desc">
-                        <condition name="couponBatch.id" operation="eq" label="优惠券批次id"/>
+                        <condition name="couponBatch.id" operation="eq" label="优惠券批次id" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>

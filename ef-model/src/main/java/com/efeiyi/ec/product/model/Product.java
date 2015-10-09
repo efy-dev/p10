@@ -217,6 +217,8 @@ public class Product implements Serializable{
     public void setSubName(String subName) {
         this.subName = subName;
     }
+
+
     @Column(name="fans_amount")
     public Long getFsAmount() {
         return fsAmount;

@@ -46,8 +46,8 @@ public class LabelCheckController {
 
             model.addAttribute(PalConst.getInstance().ip, ip);
 
-            String chk = request.getParameter("a0");
-            Integer apoid = Integer.parseInt(request.getParameter("a1"));
+            String chk = request.getParameter("chk");
+            Integer apoid = Integer.parseInt(request.getParameter("apoid"));
 
             MsgService service = (MsgService) WebServiceClient.getFactory().create();
             String json = (String) service.chkVerify(chk, apoid, ip);

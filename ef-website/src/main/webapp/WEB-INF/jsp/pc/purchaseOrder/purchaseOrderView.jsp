@@ -54,10 +54,10 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
+                    <a href="<c:url value="/product/productModel/${op.productModel.id}"/>"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9">${op.productModel.product.name}</td>
+                <td class="commodity_price_unit1  price9"><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}</a></td>
                 <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                 <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
               </tr>
@@ -76,16 +76,17 @@
                 <tr>
                   <td class="commodity_info1">
                     <ul class="commodity_info-1">
-                      <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
+                      <li class="l1 informala"><a href="<c:url value="/product/productModel/${op.productModel.id}"/>" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                     </ul>
                   </td>
-                  <td class="commodity_price_unit1  price9">${op.productModel.product.name}
+                  <td class="commodity_price_unit1  price9"><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}
                     <c:if test="${op.productModel.productPropertyValueList.size()>1}">
                       [
                       <c:forEach items="${op.productModel.productPropertyValueList}"
                                  var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
                       ]
                     </c:if>
+                    </a>
                   </td>
                   <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                   <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
