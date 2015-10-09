@@ -19,7 +19,8 @@ import java.util.List;
 public class PurchaseOrder {
 
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
-    public static final String ORDER_STATUS_WRECEIVE = "5"; //等待收货
+    public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
+    public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
     public static final String ORDER_STATUS_FINISHED = "13"; //已完成
     public static final String ORDER_STATUS_CONSEL = "17"; //已取消

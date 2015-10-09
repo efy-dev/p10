@@ -87,6 +87,11 @@
             </label>
             <div class="am-u-sm-9">
                 <input type="file" id="file" name="file" placeholder="">
+                <c:if test="${not empty object.documentAttachmentList}">
+                    <c:forEach items="${object.documentAttachmentList}" var="att" end="0">
+                        <a href="<c:url value='${att.path}'/>">${url}</a>
+                    </c:forEach>
+                </c:if>
             </div>
         </div>
 

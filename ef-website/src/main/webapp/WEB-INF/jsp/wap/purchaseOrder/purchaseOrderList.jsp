@@ -21,7 +21,7 @@
                 <%= AuthorizationUtil.getMyUser().getUsername()%>
             </c:set>
             <dd>
-                <p>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
+                <p>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
             </dd>
         </dl>
     </div>

@@ -239,6 +239,14 @@ public class MyDocumentController {
             document = (Document) baseManager.getObject(document.getClass().getName(), document.getId());
             model.addAttribute("object", document);
         }
+
+        if (document.getDocumentAttachmentList() != null && document.getDocumentAttachmentList().size()>0){
+            DocumentAttachment documentAttachment = document.getDocumentAttachmentList().get(0);
+            String path = documentAttachment.getPath();
+            String url = path.substring(path.lastIndexOf("/")+1, path.length());
+            model.addAttribute("url", url);
+        }
+
         model.addAttribute("group", document.getGroup());
         return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
