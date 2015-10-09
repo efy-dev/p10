@@ -19,50 +19,13 @@
     <div class="title">国家非物质文化遗产国家名录项目</div>
     <div class="div-list">
         <div class="filter-item">
-            <%--<div class="wh stone">--%>
-            <%--<div class="tbar">申报批次：</div>--%>
-            <%--<ul id="batch">--%>
-            <%--<li><a href="#" class="active" title="全部" target="_self" onclick="batchClick(this, '全部');">全部</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="#" title="第一批" target="_self" onclick="batchClick(this, '第一批');">第一批</a></li>--%>
-            <%--<li><a href="#" title="第二批" target="_self" onclick="batchClick(this, '第二批');">第二批</a></li>--%>
-            <%--<li><a href="#" title="第三批" target="_self" onclick="batchClick(this, '第三批');">第三批</a></li>--%>
-            <%--</ul>--%>
-            <%--</div>--%>
             <jsp:include flush="true"
-                         page="/project/provinceList.do"/>
-
-
-            <%--<div class="wh sjape">--%>
-                <%--<div class="tbar">项目类别：</div>--%>
-                <%--<ul id="type">--%>
-                    <%--<li><a href="#" title="" class="active" target="_self" onclick="typeClick(this, '全部');">全部</a></li>--%>
-                    <%--<c:forEach items="${projectList}" var="project">--%>
-                        <%--<li><a href="#" title="" target="_self"--%>
-                               <%--onclick="typeClick(this, '${project.type}');"><ming800:status name="level"--%>
-                                                                                             <%--dataType="Project.type"--%>
-                                                                                             <%--checkedValue="${project.type}"--%>
-                                                                                             <%--type="normal"/></a></li>--%>
-                    <%--</c:forEach>--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" class="active" target="_self" onclick="typeClick(this, '全部');">全部</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '民间文学');">民间文学</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统音乐');">传统音乐</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统舞蹈');">传统舞蹈</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统戏剧');">传统戏剧</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '曲艺');">曲艺</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统体育、游艺与杂技');">传统体育、游艺与杂技</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统美术');">传统美术</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统技艺');">传统技艺</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '传统医药');">传统医药</a></li>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<li><a href="#" title="" target="_self" onclick="typeClick(this, '民俗');">民俗</a></li>&ndash;%&gt;--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+                         page="/project/provinceList.do?provinceid=${provinceid}&type=${type}"/>
         <jsp:include flush="true"
-                             page="/project/project.type.do"/>
+                             page="/project/project.type.do?type=${type}&provinceid=${provinceid}"/>
         <!-- //End--filter-item-->
         <jsp:include flush="true"
-                     page="/project/project.List.do"/>
+                     page="/project/project.List.do?provinceid=${provinceid}&type=${type}"/>
         <!-- //End--div-list-->
 
         <!-- //End--pages-->
@@ -74,14 +37,34 @@
             $(object).addClass("active");
             return false;
         }
-        function projectClick(object, val) {
+        function provinceClick(object, provinceid) {
             $("#pro a").removeClass("active");
             $(object).addClass("active");
+            var types = $("#type a");
+            var type = "-1";
+            for(var x=0; x< types.length;x++){
+                if( "active" == $(types[x]).attr("class")){
+                    type = $(types[x]).attr("id");
+                    break;
+                }
+            }
+            var url = "<c:url value="/project/project.do?qm=plistProject_default&provinceid="/>" + provinceid + "&type=" + type;
+            window.location.href = url;
             return false;
         }
-        function typeClick(object, val) {
+        function typeClick(object, type) {
             $("#type a").removeClass("active");
             $(object).addClass("active");
+            var provinceids = $("#pro a");
+            var provinceid = "-1";
+            for(var x=0; x< provinceids.length;x++){
+                if( "active" == $(provinceids[x]).attr("class")){
+                    provinceid = $(provinceids[x]).attr("id");
+                    break;
+                }
+            }
+            var url = "<c:url value="/project/project.do?qm=plistProject_default&provinceid="/>" + provinceid + "&type=" + type;
+            window.location.href = url;
             return false;
         }
     </script>

@@ -1,16 +1,13 @@
 package com.efeiyi.association.association.controller;
 
-import com.efeiyi.association.core.DatabaseContextHolder;
 import com.efeiyi.ec.project.model.Project;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
-import com.ming800.core.does.model.Do;
-import com.ming800.core.does.model.DoQuery;
-import com.ming800.core.does.model.PageInfo;
-import com.ming800.core.does.model.XQuery;
+import com.ming800.core.does.model.*;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.taglib.PageEntity;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,24 +37,10 @@ public class ProjectController {
     @RequestMapping("/project.do")
     public ModelAndView getProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-//        String qm = request.getParameter("qm");
-//        //先找到配置文件里的entity
-//        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-//        //再从中找到query的信息
-//        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//
-//        DatabaseContextHolder.setDataSource("dataSource");
-//        List<Project> list= (List<Project>)xdoManager.list(tempDo, tempDoQuery, null);
-//        Map<String,Project> map = new HashMap<String,Project>();
-//        for(Project project : list){
-//            map.put(project.getType(),project);
-//        }
-//        list = new ArrayList<Project>();
-//        for(Map.Entry<String,Project> entry : map.entrySet()){
-//            list.add(entry.getValue());
-//        }
-//        modelMap.put("projectList", list);
-//        DatabaseContextHolder.setDataSource("associationDataSource");
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+        modelMap.addAttribute("provinceid", provinceId);
+        modelMap.addAttribute("type", type);
         return new ModelAndView("heritageProject/project");
     }
 
@@ -65,60 +48,51 @@ public class ProjectController {
     public List<Project> getProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         String qm = request.getParameter("qm");
+
         //先找到配置文件里的entity
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
-//        DatabaseContextHolder.setDataSource("dataSource");
-        List<Project> list= (List<Project>)xdoManager.list(tempDo, tempDoQuery, null);
-        Map<String,Project> map = new HashMap<String,Project>();
-        for(Project project : list){
-            map.put(project.getType(),project);
+        List<Project> list = (List<Project>) xdoManager.list(tempDo, tempDoQuery, null);
+        Map<String, Project> map = new HashMap<String, Project>();
+        for (Project project : list) {
+            map.put(project.getType(), project);
         }
         list = new ArrayList<Project>();
-        for(Map.Entry<String,Project> entry : map.entrySet()){
+        for (Map.Entry<String, Project> entry : map.entrySet()) {
             list.add(entry.getValue());
         }
-//        modelMap.put("projectList", list);
-//        DatabaseContextHolder.setDataSource("associationDataSource");
-//        return new ModelAndView("heritageProject/project");
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+        modelMap.addAttribute("provinceid", provinceId);
+        modelMap.addAttribute("type", type);
         return list;
     }
 
-//    @RequestMapping("/project.do")
-//    public ModelAndView getAssIntroByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
-//
-//        String qm = request.getParameter("qm");
-//        //先找到配置文件里的entity
-//        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-//        //再从中找到query的信息
-//        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//
-//        DatabaseContextHolder.setDataSource("dataSource");
-//        modelMap.put("provinceList", xdoManager.list(tempDo, tempDoQuery, null));
-//        DatabaseContextHolder.setDataSource("associationDataSource");
-//        return new ModelAndView("heritageProject/project");
-//    }
 
     @RequestMapping({"/provinceList.do"})
-    public List<Object> getProvinceList(HttpServletRequest request) throws Exception {
+    public List<Object> getProvinceList(ModelMap modelMap, HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> list = baseManager.listObject(xQuery);
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+        modelMap.addAttribute("provinceid", provinceId);
+        modelMap.addAttribute("type", type);
         return list;
     }
 
     @RequestMapping({"/project.List.do"})
-    public List<Object> getProjectList(HttpServletRequest request,ModelMap modelMap) throws Exception {
+    public List<Object> getProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
+
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
         }
         //先找到配置文件里的entity
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -128,9 +102,38 @@ public class ProjectController {
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
 
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-//                resultPage = "/pc/choiceness";
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        List<QueryCondition> originList = tempDoQuery.getConditionList();
+
+        if (!"-1".equals(type)) {
+            QueryCondition condition = new QueryCondition();
+            BeanUtils.copyProperties(condition,originList.get(0));
+            condition.setName("type");
+            condition.setValue(type);
+            condition.setOperation("eq");
+
+            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+            tempDoQuery.getConditionList().addAll(originList);
+            tempDoQuery.getConditionList().add(condition);
+        }
+        List<QueryCondition> firstList = tempDoQuery.getConditionList();
+
+        if (!"-1".equals(provinceId)) {
+            QueryCondition condition = new QueryCondition();
+            BeanUtils.copyProperties(condition,originList.get(0));
+            condition.setName("addressDistrict.addressCity.addressProvince.id");
+            condition.setValue(provinceId);
+            condition.setOperation("eq");
+
+            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+            tempDoQuery.getConditionList().addAll(firstList);
+            tempDoQuery.getConditionList().add(condition);
+        }
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
+        modelMap.put("tabTitle", tempDoQuery.getLabel());
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
 
@@ -139,11 +142,10 @@ public class ProjectController {
         }
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
+        tempDoQuery.setConditionList(originList);
         return pageInfo.getList();
 
-//        XQuery xQuery = new XQuery("listAddressProvince_default", request);
-//        List<Object> list = baseManager.listObject(xQuery);
-//        return list;
     }
+
 
 }

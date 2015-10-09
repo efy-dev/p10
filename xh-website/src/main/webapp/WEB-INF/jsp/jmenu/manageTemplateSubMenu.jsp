@@ -20,7 +20,7 @@
                         </c:if>
                         <c:if test="${not empty child.children}">
                             <li class="items active">
-                                <a class="btn-list" href="" target="_parent" title="">协会会员<i class="icon"></i></a>
+                                <a class="btn-list" href="" target="_parent" title="">${child.text_zh_CN}<i class="icon"></i></a>
                                 <div class="items-list" style="display: block;">
                                     <c:forEach items="${child.children}" var="subChild">
                                         <c:if test="${child.id== matchJnode.id}">
