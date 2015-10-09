@@ -118,14 +118,9 @@
             <!-- //End-->
             <!-- //End-->
             <div class="des">
-                <div class="colour">发货地：</div>
+                <div class="colour">服务：</div>
                 <div class="colour-page">
-                    <c:if test="${product.tenant.address==null}">
-                        <span>未知  包邮</span>
-                    </c:if>
-                    <c:if test="${product.tenant.address!=null}">
-                        <span>${product.tenant.address}  包邮</span>
-                    </c:if>
+                        <span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
