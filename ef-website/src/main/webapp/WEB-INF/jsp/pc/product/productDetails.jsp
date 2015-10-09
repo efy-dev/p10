@@ -249,7 +249,7 @@
                                     </div>
                                     <%--<div class="star">5星</div>--%>
                                     <c:set var="user">
-                                        ${purchaseOrderProduct.purchaseOrder.user}
+                                        ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                     </c:set>
                                     <div class="user"><i
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
@@ -261,7 +261,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <div class="scroll-bar">
     <div class="scroll-bar-top">
