@@ -95,7 +95,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
 
                                     <a  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                       href="<c:url value="/basic/xm.do?qm=plistProductModelRecord_default2&conditions=productModel.id:${productModel.id}&productModelId=${productModel.id}" />"><span
+                                       href="<c:url value="/basic/xm.do?qm=plistProductModelRecord_default2&conditions=productModel.id:${productModel.id}" />"><span
                                             class="am-icon-trash-o">查看记录</span>
                                     </a>
                                 </div>

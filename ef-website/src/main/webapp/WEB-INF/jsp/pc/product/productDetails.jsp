@@ -249,7 +249,7 @@
                                     </div>
                                     <%--<div class="star">5星</div>--%>
                                     <c:set var="user">
-                                        ${purchaseOrderProduct.purchaseOrder.user}
+                                        ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                     </c:set>
                                     <div class="user"><i
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
@@ -261,7 +261,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <div class="scroll-bar">
     <div class="scroll-bar-top">
@@ -269,7 +268,7 @@
     </div>
     <!-- //End--返回顶部-->
     <div class="scroll-bar-ask">
-        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=742565508&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
+        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
     </div>
     <!-- //End--在线咨询-->
 </div>

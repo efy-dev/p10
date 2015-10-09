@@ -28,9 +28,9 @@
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                         <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
                     </query>
-                    <query name="default1" label="产品名称" type="auto" orderBy="id:desc">
-                        <condition name="name"  operation="eq" label="产品名称" inputType="text"/>
-                        <condition name="serial"  operation="eq" label="产品编号" inputType="text"/>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial"  operation="like" label="产品编号" inputType="text"/>
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                     </query>
                     <query name="tenant" label="商家商品列表" type="auto" orderBy="id:desc">
@@ -150,8 +150,8 @@
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
-                        <condition name="name" defaultValue="" operation="eq" label="产品名称" inputType="text"/>
-                        <condition name="serial" defaultValue="" operation="eq" label="产品编号" inputType="text"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
                     </query>
                 </do>
                 <do name="plistKCProductModel" access="" label="产品分页列表"
@@ -162,8 +162,8 @@
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
-                        <condition name="name" defaultValue="" operation="eq" label="产品名称" inputType="text"/>
-                        <condition name="serial" defaultValue="" operation="eq" label="产品编号" inputType="text"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
                     </query>
                 </do>
                 <do name="removeProductModel" label="删除产品" access="" result="json"/>
@@ -363,12 +363,12 @@
             <does>
                 <do name="plistProductModelRecord" access="" label="产品图片分页列表"
                     result="/productModelRecord/productModelRecordPList"
-                        execute="com.efeiyi.ec.system.product.controller.ProductModelRecordHandler">
-                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                       >
+                    <query name="default2" label="默认" type="auto" orderBy="createDateTime:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default" />
                         <condition name="productModel.id" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
-                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="createDateTime:desc">
                         <condition name="productModel.id" defaultValue="1"  operation="eq" inputType="default"/>
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
