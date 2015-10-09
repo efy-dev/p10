@@ -43,7 +43,7 @@
                     <query name="default9" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
-                        <condition name="orderStatus" defaultValue="9" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="9,13" operation="in"/>
                     </query>
                     <query name="default13" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
