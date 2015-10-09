@@ -9,6 +9,7 @@
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderProduct"/>
                 <match url="/basic/xm.do?qm=viewProduct&amp;viewIdentify=orderProduct"/>
                 <match url="/basic/xm.do?qm=plistPurchaseOrder_search"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_default"/>
 
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderPayment_default" access="admin,manager" text_zh_CN="支付记录">
@@ -46,14 +47,15 @@
                 <match url="/basic/xm.do?qm=plistCoupon_default&amp;view=coupon"/>
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
                 <match url="/basic/xm.do?qm=plistCoupon_search"/>
+                <match url="/basic/xm.do?qm=plistCoupon_default"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,manager" text_zh_CN="优惠券批次">
                 <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=formCouponBatch"/>
-                <!--<match url="/couponBatch/saveAndCreateCoupon.do"/>-->
                 <match url="/basic/xm.do?qm=plistCoupon_couponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=plistCouponBatch_search"/>
+                <match url="/basic/xm.do?qm=plistCouponBatch_default"/>
             </jnode>
         </jnode>
 
