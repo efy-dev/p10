@@ -107,7 +107,9 @@ public class PurchaseOrderPaymentController {
         String purchaseOrderId = request.getParameter("purchaseOrder.id");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
         if (type.equals("new")){
-            purchaseOrder.setStatus("2");
+            if ("1".equals(purchaseOrder.getStatus()) || "2".equals(purchaseOrder.getStatus())){
+                purchaseOrder.setStatus("2");
+            }
             baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
         }
         purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
