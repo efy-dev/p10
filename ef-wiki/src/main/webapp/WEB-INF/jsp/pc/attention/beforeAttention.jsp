@@ -1,11 +1,12 @@
+
 <%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2015/10/8
-  Time: 11:18
+  Date: 2015/10/9
+  Time: 10:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -131,7 +132,7 @@
       <%
         if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
       %>
-      <li><a href="<c:url value='/pc/afterAttention.do'/>">已关注</a></li>
+      <li><a href="#">已关注</a></li>
       <%}%>
 
       <li><a href="#">发&nbsp;现</a></li>
@@ -146,8 +147,8 @@
       <ul class="slider-main">
         <c:if test="${! empty bannerList}">
           <c:forEach var="banner" items="${bannerList}" varStatus="status">
-          <c:if test="${status.index==0}">
-          <li style="display: block;"><a href="#"><img src="${banner.imageUrl}" ></a></li>
+            <c:if test="${status.index==0}">
+              <li style="display: block;"><a href="#"><img src="${banner.imageUrl}" ></a></li>
             </c:if>
             <c:if test="${status.index!=0}">
               <li><a href="#"><img src="${banner.imageUrl}" ></a></li>
@@ -164,53 +165,20 @@
     </div>
     <!-- //End--nav-->
     <div class="cart-tabe">
-      <div class="craft-zy" style="display: block">
-      <c:if test="${!empty projectCategory}">
-        <c:forEach items="${projectCategory}" var="pc" varStatus="status">
-          <div class="craft-content ae">
-            <h4>${pc[status.index].projectCategory.name}</h4>
-            <a href="#" class="left-icon"></a>
-            <div class="commodity-list ae">
-              <ul>
 
+      <div class="craft-gz ae" style="display: block">
+        <div class="craft-wz ae"><span>共关注${fsAmount}个工艺</span></div>
+        <div class="craft-ts ae"><span>您还没有关注任何工艺，下面是我们为您推荐的几位工艺项目</span></div>
+        <div class="craft-list ae">
+          <ul class="craft-l-page ae" id="beforeAttention">
 
-                <c:if test="${!empty pc}">
-                  <c:forEach items="${pc}" var="project" varStatus="status">
-                    <li>
-                      <div class="commodity-img">
-                        <a href="#"><img src="${project.picture_url}"></a>
-                        <a href="#">
-                          <div class="list-moods">
-                            <i class="img-icon"></i>
-                            <em>${project.fsAmount}</em>
-                          </div>
-                        </a>
-                      </div>
-                      <div class="commodity-txt">
-                        <h4><a href="#">${project.name}</a></h4></p>
-                        <p>${project.addressDistrict.addressCity.addressProvince.name}</p>
-
-                        <p>${fn:length(project.productList)}件作品</p>
-
-                        <p>${fn:length(project.masterProjects)}位传承人</p>
-                      </div>
-                    </li>
-                  </c:forEach>
-                </c:if>
-
-              </ul>
-            </div>
-            <a href="#" class="right-icon"></a>
-          </div>
-        </c:forEach>
-      </c:if>
-
-
+          </ul>
+        </div>
       </div>
-
     </div>
   </div>
 </div>
+
 <div class="footer wh">
   <div class="service wh">
     <div class="icon phone"></div>
@@ -251,6 +219,242 @@
     <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
   </div>
 </div>
+
+<script>
+
+  $(document).ready(function(){
+    getData("<c:url value='/pc/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+  });
+
+  function getData(url){
+    var flag = false;
+    $.ajax({
+      type:"get",//设置get请求方式
+      url:url+StartNum2,//设置请求的脚本地址
+      data:"",//设置请求的数据
+      async:true,
+      dataType:"json",//设置请求返回的数据格式
+      success:function(data){
+        var pubu = $("#beforeAttention");
+        if(data && data.length>=1){
+          for(i in data){
+            var levelName="";
+            switch(data[i].level)
+            {
+              case "1":levelName="国家级非物质文化遗产";break;
+              case "2":levelName="省级非物质文化遗产";break;
+              case "3":levelName="市级非物质文化遗产";break;
+              default:levelName="县级非物质文化遗产";
+            }
+            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var word ="";
+            if(isA==true){
+              word="取消关注";
+            }else{
+              word="关注";
+            }
+              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
+                      "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
+                      "<h5>"+data[i].projectName+"</h5>  " +
+                      "<p>"+levelName+"</p> " +
+                      "<p><strong>"+data[i].works+" 件作品</strong>" +
+                      "<strong>"+data[i].masters+" 位大师</strong></p> " +
+                      "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
+                      "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
+                      "</a> </div> </li>");
+
+            pubu.append(box);
+            //PBL("#beforeAttention",".before",2);
+          }
+
+        }else{
+          flag = true;
+        }
+
+        StartNum2=StartNum2+1;
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if(flag==true) {
+          ajaxkey2 = false;
+        }
+      }
+    })
+  }
+
+  $(window).load(function(){
+
+    //PBL("#beforeAttention",".before",2);
+    var winH = $(window).height(); //页面可视区域高度
+    $(window).scroll(function(){
+      var pageH = $(document.body).height();
+      var scrollT = $(window).scrollTop(); //滚动条top
+      var aa = (pageH - winH - scrollT) / winH;
+      if(aa < 0.02){
+        if(ajaxkey2){
+          getData("<c:url value='/pc/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+        }
+
+      }
+
+
+    });
+
+
+
+
+  });
+
+  function saveProjectFllow(projectId){
+   var oper = $("#"+projectId).attr("about");
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
+      data:"",
+      dataType:"json",
+      success:function(data){
+
+        if(data=="false"){
+          alert("您还未登陆，请登录后再操作");
+          return false;
+        }
+        if(data=="true"){
+          $("#"+projectId).html("取消关注");
+          return true;
+        }
+        if(data=="del"){
+          $("#"+projectId).html("关注");
+          return true;
+        }
+        if(data=="error"){
+          alert("未知错误，请联系管理员！！！");
+          return false;
+        }
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if(oper=="add"){
+          var val = $("#"+projectId).attr("about","del");
+        }
+        if(oper=="del"){
+          var val = $("#"+projectId).attr("about","add");
+        }
+      }
+    });
+  }
+
+  function PBL(outer,boxs,style){//outer父级元素、boxs子级元素，style加载样式（ 1或者2 ）
+    var pubu = $(outer);
+    var box = $(boxs);
+    var num = Math.floor($(document.body).width()/box.outerWidth());//根据浏览器宽度获得显示的列的数量
+    pubu.width(num*(box.outerWidth()));//给pubu的宽度赋值
+    var allHeight = [];//定义一个数组存储所有列的高度
+    for(var i=0;i<box.length;i++){
+      if (i<num) {
+        allHeight[i]=box.eq(i).outerHeight();
+      }else{
+        var minHeight = Math.min.apply({},allHeight);//获得所有的列中高度最小的列的高度
+        var sy = getSy(minHeight,allHeight);//获取高度最小的列的索引
+        getStyle(box.eq(i),minHeight,sy*box.eq(i).outerWidth(),i,style);
+        allHeight[sy] += box.eq(i).outerHeight();
+      }
+    }
+  }
+  //获取高度最小的列的索引
+  function getSy(minH,allH){
+    for(sy in allH){
+      if(allH[sy]==minH) return sy;
+    }
+  }
+
+  function checkIsAttention(projectId){
+    isAttention = false;
+    $.ajax({
+      type:"get",
+      url:"/base/Isattention.do?projectId="+projectId,
+      data:"",
+      async:false,
+      dataType:"json",
+      success:function(data){
+        if(data==false){
+          isAttention = false;
+          return false;
+        }
+        if(data==true){
+          isAttention=true;
+          return true;
+        }
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    })
+
+  }
+
+
+
+
+  //判断请求数据的开关
+  function getDataCheck(){
+    var pubu = $("#pubu");
+    var box = $("#box");
+    var lastboxHeight = $(box[box.length-1]).offset().top+Math.floor($(box[box.length-1]).outerHeight()/2);
+    var documentHeight = $(window).height();
+    var scrollTop = $(document).scrollTop();
+    return lastboxHeight<documentHeight+scrollTop?true:false;
+  }
+  //存储开始请求数据条数的位置
+  var getStartNum = 0;
+  var StartNum2 = 1;
+  var ajaxkey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
+  var ajaxkey2 = true;
+  var  isAttention = false;
+  //设置请求数据加载的样式
+  function getStyle(boxs,top,left,index,style){
+    if (getStartNum>=index) {
+      return;
+    }
+    boxs.css("position","absolute");
+    switch(style){
+      case 1:
+        boxs.css({
+          "top":top+$(window).height(),
+          "left":left
+        });
+        boxs.stop().animate({
+          "top":top,
+          "left":left
+        },999);
+        break;
+      case 2:
+        boxs.css({
+          "top":top,
+          "left":left,
+          "opacity":"0"
+        });
+        boxs.stop().animate({
+          "opacity":"1"
+        },999);
+    }
+    getStartNum = index;//更新请求数据的条数位置
+
+  }
+
+</script>
 <!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <!--<![endif]-->
@@ -265,4 +469,5 @@
 <script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
 </body>
 </html>
+
 

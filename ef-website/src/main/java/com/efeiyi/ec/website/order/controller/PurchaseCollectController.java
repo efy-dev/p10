@@ -25,7 +25,7 @@ public class PurchaseCollectController {
     @RequestMapping("/collectList.do")
     public String purchaseCollect(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery=new XQuery("plistProductFavorite_default",request,6);
+        XQuery xQuery=new XQuery("plistProductFavorite_default",request,8);
 
         xQuery.addRequestParamToModel(model, request);
 
@@ -34,7 +34,18 @@ public class PurchaseCollectController {
         model.addAttribute("collectList",list);
         return "/purchaseOrder/purchaseCollect";
     }
+    @RequestMapping("/wapCollectList.do")
+    public String wapPurchaseCollect(HttpServletRequest request,Model model) throws Exception {
 
+        XQuery xQuery=new XQuery("plistProductFavorite_default",request);
+
+        xQuery.addRequestParamToModel(model, request);
+
+        List<Object> list = baseManager.listObject(xQuery);
+
+        model.addAttribute("collectList",list);
+        return "/purchaseOrder/purchaseCollect";
+    }
 
 
     @RequestMapping({"/unfollow.do"})

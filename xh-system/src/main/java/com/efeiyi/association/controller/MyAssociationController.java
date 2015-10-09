@@ -1,5 +1,6 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.service.MyDocumentManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -9,7 +10,6 @@ import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.p.model.DocumentAttachment;
-import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.htmlparser.Node;
 import org.htmlparser.NodeFilter;
@@ -18,6 +18,7 @@ import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.tags.ImageTag;
 import org.htmlparser.util.NodeList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,8 @@ public class MyAssociationController {
     @Autowired
     private BaseManager baseManager;
     @Autowired
-    private DocumentManager documentManager;
+    @Qualifier("myDocumentManagerImpl")
+    private MyDocumentManager myDocumentManager;
     @Autowired
     private XdoManager xdoManager;
     @Autowired
@@ -102,7 +104,7 @@ public class MyAssociationController {
         }
 
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-        documentManager.saveDocument(document);
+        myDocumentManager.saveDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
     }
 
@@ -158,7 +160,7 @@ public class MyAssociationController {
             document.getDocumentContent().setId(null);
             document.setStatus("1");
         } else {
-            documentManager.deleteDocument(document);
+            myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
         if (document.getDocumentContent().getContent() != null) {
@@ -190,7 +192,7 @@ public class MyAssociationController {
             }
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-        documentManager.saveDocument(document);
+        myDocumentManager.saveDocument(document);
         String resultPage = "redirect:" /*+ request.getContextPath() */+ path;
         if ("assIntro".equals(group)){
             resultPage += "&resultPage=/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default";

@@ -1,6 +1,7 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
+import com.efeiyi.association.service.MyDocumentManager;
 import com.efeiyi.ec.association.model.ApplicationMaterial;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -12,8 +13,6 @@ import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.AliOssUploadManager;
-import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,9 +41,9 @@ public class MyDocumentAttachmentController {
     @Autowired
     private BaseManager baseManager;
 
-
     @Autowired
-    private DocumentManager documentManager;
+    @Qualifier("myDocumentManagerImpl")
+    private MyDocumentManager myDocumentManager;
 
     @Autowired
     private XdoManager xdoManager;
@@ -131,7 +130,7 @@ public class MyDocumentAttachmentController {
         if (document.getDocumentAttachmentList() == null) {
             document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
         }
-        documentManager.saveDocument(document);
+        myDocumentManager.saveDocument(document);
         if (!multipartFile.getOriginalFilename().equals("")) {
             document.getDocumentAttachmentList().add(attachment);
             baseManager.saveOrUpdate(attachment.getClass().getName(), attachment);

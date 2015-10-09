@@ -30,7 +30,7 @@
     </script>
 </head>
 <body>
-<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=productModel.id:${productModelId};${requestScope.conditions}&productModelId=${productModelId}"/>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
 
     <div class="am-g">

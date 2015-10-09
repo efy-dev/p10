@@ -16,4 +16,6 @@ public interface PurchaseOrderManager {
      * 记录该订单的物流公司和物流单号*/
     String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany);
 
+    String updateOrderStatus(PurchaseOrder purchaseOrder);
+
 }

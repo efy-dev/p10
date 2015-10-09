@@ -108,8 +108,9 @@
             </c:if>
             <!-- //End-->
             <div class="master-cost">
+                <c:if test="productModel.marketPrice!=null">
                 <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
-
+                 </c:if>
                 <p>飞蚁价</p>
 
                 <p><strong>￥</strong><span>${productModel.price}</span></p>
@@ -117,21 +118,16 @@
             <!-- //End-->
             <!-- //End-->
             <div class="des">
-                <div class="colour">发货地：</div>
+                <div class="colour">服务：</div>
                 <div class="colour-page">
-                    <c:if test="${product.tenant.address==null}">
-                        <span>未知  包邮</span>
-                    </c:if>
-                    <c:if test="${product.tenant.address!=null}">
-                        <span>${product.tenant.address}  包邮</span>
-                    </c:if>
+                        <span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
+                <c:if test="${fn:length(productModelList) >1}">
                 <div class="colour">规格：</div>
                 <div class="colour-page">
                     <ul class="ul-list">
-                        <c:if test="${fn:length(productModelList) >1}">
                             <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
                                 <c:if test="${productModel.id == productModelTmp.id}">
                                     <li class="active">
@@ -158,9 +154,9 @@
                                     </li>
                                 </c:if>
                             </c:forEach>
-                        </c:if>
                     </ul>
                 </div>
+                </c:if>
             </div>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
@@ -249,7 +245,7 @@
                                     </div>
                                     <%--<div class="star">5星</div>--%>
                                     <c:set var="user">
-                                        ${purchaseOrderProduct.purchaseOrder.user}
+                                        ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                     </c:set>
                                     <div class="user"><i
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
@@ -261,7 +257,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <div class="scroll-bar">
     <div class="scroll-bar-top">
@@ -269,7 +264,7 @@
     </div>
     <!-- //End--返回顶部-->
     <div class="scroll-bar-ask">
-        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=742565508&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
+        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
     </div>
     <!-- //End--在线咨询-->
 </div>

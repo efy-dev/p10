@@ -96,10 +96,13 @@
 
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">收货人姓名</td>
+                <td class="am-u-md-3">${object.consumerAddress.consignee}</td>
                 <td class="am-primary am-u-md-3">下单时间</td>
-                <td class="am-u-md-3" colspan="3">
-                    <fmt:formatDate value="${object.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                <td class="am-u-md-3">
+                    <fmt:formatDate value="${object.createDatetime}" pattern="yyyy-MM-dd HH:mm"/>
                 </td>
+
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
@@ -247,7 +250,7 @@
                 <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                 <td class="am-hide-sm-only">
                     <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                    pattern="yyyy-MM-dd"/>
+                                    pattern="yyyy-MM-dd HH:mm"/>
                 </td>
                 </tr>
             </c:forEach>

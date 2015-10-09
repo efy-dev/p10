@@ -1,5 +1,6 @@
 package com.efeiyi.association.controller;
 
+import com.efeiyi.association.service.MyDocumentManager;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -10,7 +11,6 @@ import com.ming800.core.does.service.DoManager;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.htmlparser.Node;
 import org.htmlparser.NodeFilter;
@@ -46,7 +46,8 @@ public class MyMemberController {
     @Qualifier("autoSerialManager")
     private AutoSerialManager autoSerialManager;
     @Autowired
-    private DocumentManager documentManager;
+    @Qualifier("myDocumentManagerImpl")
+    private MyDocumentManager myDocumentManager;
     @Autowired
     private XdoManager xdoManager;
     @Autowired
@@ -119,7 +120,7 @@ public class MyMemberController {
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
         }else{
-            documentManager.deleteDocument(document);
+            myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
 
@@ -150,7 +151,7 @@ public class MyMemberController {
             }
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-        documentManager.saveDocument(document);
+        myDocumentManager.saveDocument(document);
 
         return new ModelAndView("redirect:" /*+ request.getContextPath() */+ path);
     }
@@ -159,7 +160,7 @@ public class MyMemberController {
     @ResponseBody
     public ModelAndView removeMemGuide(HttpServletRequest request, Document document) throws Exception {
         String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
-        documentManager.removeDocument(document);
+        myDocumentManager.removeDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 
@@ -227,7 +228,7 @@ public class MyMemberController {
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
         }else{
-            documentManager.deleteDocument(document);
+            myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
 
@@ -258,7 +259,7 @@ public class MyMemberController {
             }
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-        documentManager.saveDocument(document);
+        myDocumentManager.saveDocument(document);
 
         return new ModelAndView("redirect:" /*+ request.getContextPath() */+ path);
     }
@@ -267,7 +268,7 @@ public class MyMemberController {
     @ResponseBody
     public ModelAndView removeMemManagement(HttpServletRequest request, Document document) throws Exception {
         String path = request.getContextPath() + request.getParameter("resultPage");
-        documentManager.removeDocument(document);
+        myDocumentManager.removeDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 

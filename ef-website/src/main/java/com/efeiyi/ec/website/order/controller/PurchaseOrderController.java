@@ -201,9 +201,6 @@ public class PurchaseOrderController extends BaseController {
     public String aliPayCallback(HttpServletRequest request) throws IOException {
         try {
 
-//
-//            String resultJson = "{\"transactionType\":\"PAY\",\"retryCounter\":8,\"transactionFee\":100,\"tradeSuccess\":true,\"notifyUrl\":\"http://master4.efeiyi.com/ef-website/order/pay/alipay/callback\",\"channelType\":\"WX\",\"optional\":{},\"messageDetail\":{\"transaction_id\":\"1004340401201509230968268774\",\"nonce_str\":\"iewjq1m3c20zz6zt\",\"bank_type\":\"BOB_DEBIT\",\"openid\":\"oc_M1uNonikJprGJts09m2_1iaY0\",\"fee_type\":\"CNY\",\"mch_id\":\"1243815402\",\"cash_fee\":\"100\",\"out_trade_no\":\"ienx05k3c680t1qt\",\"tradeSuccess\":true,\"appid\":\"wx7f6aa253b75466dd\",\"total_fee\":\"100\",\"trade_type\":\"NATIVE\",\"result_code\":\"SUCCESS\",\"time_end\":\"20150923164630\",\"is_subscribe\":\"Y\",\"return_code\":\"SUCCESS\"},\"transactionId\":\"iewjq1m3c20zz6zt\",\"sign\":\"df09e0f46b4d73b025f8669c7acdeb7f\",\"timestamp\":1442998500000}";
-
             ServletInputStream servletInputStream = request.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(servletInputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -230,21 +227,18 @@ public class PurchaseOrderController extends BaseController {
                     transactionNumber = messageDetailJson.getString("trade_no");
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
-//                System.out.println("transactionNumber : " + transactionNumber);
-//                System.out.println("purchaseOrderPaymentId : " + purchaseOrderPaymentId);
-//                System.out.println("=========================test isUpdate==========================");
-//            paymentManager.payCallback(purchaseOrderPaymentId, transactionNumber);
 
 
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentId);
                 purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
+                PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
+                purchaseOrderPayment.setStatus("2");
+                baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(),purchaseOrderPayment);
                 //@TODO 修改订单状态
                 PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
                 if (purchaseOrder == null) {
-//                    System.out.println("purchaseOrder is null,session problem");
                     purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                 }
-//                System.out.println(purchaseOrder.getId());
 
                 if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
                     //同时修改子订单状态
@@ -286,6 +280,18 @@ public class PurchaseOrderController extends BaseController {
         return "redirect:/order/myEfeiyi/list.do";
     }
 
+    /**
+     * 确认收货
+     * @param orderId
+     * @return
+     */
+    @RequestMapping({"/confirmGet/{orderId}"})
+    public String confirmGet(@PathVariable String orderId){
+        PurchaseOrder purchaseOrder =(PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        return "redirect:/order/myEfeiyi/list.do";
+    }
     /**
      * 订单删除
      */
@@ -487,6 +493,7 @@ public class PurchaseOrderController extends BaseController {
             if (cart.getCartProductList() != null && cart.getCartProductList().size() > 0) {
                 for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(realCart);
+                    realCart.getCartProductList().add(cartProduct);
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
                 }
             }
@@ -819,6 +826,20 @@ public class PurchaseOrderController extends BaseController {
         PurchaseOrderPaymentDetails purchaseOrder = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder.getPurchaseOrderPayment().getPurchaseOrder());
         return "/purchaseOrder/paySuccess";
+    }
+
+
+    @RequestMapping({"/orderCheck/{orderId}"})
+    @ResponseBody
+    public boolean checkOrderStatus(@PathVariable String orderId){
+
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails)baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(),orderId);
+        if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 

@@ -64,11 +64,11 @@ function saveProjectFllow(projectId){
      }*/
     $.ajax({
         type:"get",
-        url:"/base/attention.do?projectId="+projectId,//设置请求的脚本地址
+        url:"/base/attention.do?projectId="+projectId+"oper=add",//设置请求的脚本地址
         data:"",
         dataType:"json",
         success:function(data){
-            if(data==false){
+           /* if(data==false){
                 alert("您还未登陆，请登录后再操作");
                 return false;
             }
@@ -76,7 +76,23 @@ function saveProjectFllow(projectId){
               $("#"+projectId).html("已关注");
               return true;
           }
-
+       */
+            if(data=="false"){
+                alert("您还未登陆，请登录后再操作");
+                return false;
+            }
+            if(data=="true"){
+                $("#"+projectId).html("取消关注");
+                return true;
+            }
+            if(data=="del"){
+                $("#"+projectId).html("关注");
+                return true;
+            }
+            if(data=="error"){
+                alert("未知错误，请联系管理员！！！");
+                return false;
+            }
         },
         error:function(){
 

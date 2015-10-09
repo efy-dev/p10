@@ -20,7 +20,7 @@ public class ConsumerAddress {
     private String email;
     private MyUser consumer;
     private String status;   //1 正常的 2 默认的
-    private  String consignee;
+    private  String consignee; //收货人姓名
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
