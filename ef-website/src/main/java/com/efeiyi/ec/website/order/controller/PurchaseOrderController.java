@@ -487,6 +487,7 @@ public class PurchaseOrderController extends BaseController {
             if (cart.getCartProductList() != null && cart.getCartProductList().size() > 0) {
                 for (CartProduct cartProduct : cart.getCartProductList()) {
                     cartProduct.setCart(realCart);
+                    realCart.getCartProductList().add(cartProduct);
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
                 }
             }
