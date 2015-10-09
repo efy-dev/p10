@@ -108,8 +108,9 @@
             </c:if>
             <!-- //End-->
             <div class="master-cost">
+                <c:if test="productModel.marketPrice!=null">
                 <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
-
+                 </c:if>
                 <p>飞蚁价</p>
 
                 <p><strong>￥</strong><span>${productModel.price}</span></p>
