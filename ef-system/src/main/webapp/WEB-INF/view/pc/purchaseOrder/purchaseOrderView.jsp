@@ -136,7 +136,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
                 <td class="am-u-md-3">${consumer.deposit}</td>
-                <td class="am-primary am-u-md-3">积分</td>
+                <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
             </tr>
             <tr>
