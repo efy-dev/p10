@@ -167,171 +167,11 @@
     <div class="cart-tabe">
 
       <div class="craft-gz ae" style="display: block">
-        <div class="craft-wz ae"><span>共关注<c:if test=" ${!empty fsAmount}">${fsAmount}</c:if>
-          个工艺</span></div>
+        <div class="craft-wz ae"><span>共关注${fsAmount}个工艺</span></div>
         <div class="craft-ts ae"><span>您还没有关注任何工艺，下面是我们为您推荐的几位工艺项目</span></div>
         <div class="craft-list ae">
           <ul class="craft-l-page ae" id="beforeAttention">
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="eimg"><a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a></div>
-              <div class="etext">
-                <p class="dz">北京</p>
-                <h5>景泰蓝</h5>
-                <p>又称“铜胎掐丝珐琅”</p>
-                <p>国家级非物质文化遗产</p>
-                <p><strong>1000 件作品</strong><strong>50 位大师</strong></p>
-                <a class="btn-guan" href="#">
-                  <div class="gz-q">
-                    <i class="gz-icon"></i>
-                    <em>关注</em>
-                  </div>
-                </a>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -383,7 +223,7 @@
 <script>
 
   $(document).ready(function(){
-    getData("<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+    getData("<c:url value='/pc/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
   });
 
   function getData(url){
@@ -392,38 +232,50 @@
       type:"get",//设置get请求方式
       url:url+StartNum2,//设置请求的脚本地址
       data:"",//设置请求的数据
+      async:true,
       dataType:"json",//设置请求返回的数据格式
       success:function(data){
         var pubu = $("#beforeAttention");
-
         if(data && data.length>=1){
           for(i in data){
-            for(var key in data[i]){
-              var box = $("<li> <div class='eimg'><a href='#'><img src='../shop2015/upload/110206jpg-02.png'></a></div> " +
-                      "<div class='etext'> <p class='dz'>北京</p> " +
-                      "<h5>景泰蓝</h5> <p>又称“铜胎掐丝珐琅”</p> " +
-                      "<p>国家级非物质文化遗产</p> " +
-                      "<p><strong>1000 件作品</strong>" +
-                      "<strong>50 位大师</strong></p> " +
-                      "<a class='btn-guan' href='#'> " +
-                      "<div class='gz-q'> <i class='gz-icon'></i> <em>关注</em> </div> " +
+            var levelName="";
+            switch(data[i].level)
+            {
+              case "1":levelName="国家级非物质文化遗产";break;
+              case "2":levelName="省级非物质文化遗产";break;
+              case "3":levelName="市级非物质文化遗产";break;
+              default:levelName="县级非物质文化遗产";
+            }
+            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var word ="";
+            if(isA==true){
+              word="取消关注";
+            }else{
+              word="关注";
+            }
+              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
+                      "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
+                      "<h5>"+data[i].projectName+"</h5>  " +
+                      "<p>"+levelName+"</p> " +
+                      "<p><strong>"+data[i].works+" 件作品</strong>" +
+                      "<strong>"+data[i].masters+" 位大师</strong></p> " +
+                      "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
+                      "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                       "</a> </div> </li>");
 
-            }
-
             pubu.append(box);
-
+            //PBL("#beforeAttention",".before",2);
           }
 
         }else{
           flag = true;
         }
-        PBL("#beforeAttention","#before",2);
+
         StartNum2=StartNum2+1;
       },
       error:function(){
 
-        showAlert("effor","出错了，请联系管理员！！！");
+        alert("出错了，请联系管理员！！！");
         return false;
       },
       complete:function(){
@@ -436,14 +288,16 @@
 
   $(window).load(function(){
 
-    PBL("#pubu","#box",2);
+    //PBL("#beforeAttention",".before",2);
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
       var pageH = $(document.body).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       if(aa < 0.02){
-
+        if(ajaxkey2){
+          getData("<c:url value='/pc/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+        }
 
       }
 
@@ -456,22 +310,30 @@
   });
 
   function saveProjectFllow(projectId){
-
+   var oper = $("#"+projectId).attr("about");
     $.ajax({
       type:"get",
-      url:"/base/attention.do?projectId="+projectId,//设置请求的脚本地址
+      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
-        if(data==false){
+
+        if(data=="false"){
           alert("您还未登陆，请登录后再操作");
           return false;
         }
-        if(data==true){
-          $("#"+projectId).html("已关注");
+        if(data=="true"){
+          $("#"+projectId).html("取消关注");
           return true;
         }
-
+        if(data=="del"){
+          $("#"+projectId).html("关注");
+          return true;
+        }
+        if(data=="error"){
+          alert("未知错误，请联系管理员！！！");
+          return false;
+        }
       },
       error:function(){
 
@@ -479,7 +341,12 @@
         return false;
       },
       complete:function(){
-
+        if(oper=="add"){
+          var val = $("#"+projectId).attr("about","del");
+        }
+        if(oper=="del"){
+          var val = $("#"+projectId).attr("about","add");
+        }
       }
     });
   }

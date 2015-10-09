@@ -49,7 +49,7 @@ public class ManageController {
     @RequestMapping("/getSubMenu.do")
     public String getSubMenu(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String match = request.getParameter("match"); //用来得到menuId，筛选jmenu
-        String matchUrl = match;
+        String matchUrl = match.substring(0, match.indexOf("&") == -1?match.length():match.indexOf("&"));
         match = match.substring(0,match.indexOf("."));
         String resultPage = request.getParameter("resultPage");
         String jnodeId = request.getParameter("jnodeId");

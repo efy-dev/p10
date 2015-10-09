@@ -1,10 +1,14 @@
 package com.efeiyi.ec.wiki.base.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectFollowed;
+import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.model.ProjectModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
 import org.apache.log4j.Logger;
@@ -12,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -90,9 +97,49 @@ public class WikiDynamicController extends WikibaseController {
             model.addAttribute("fsAmount", projectFolloweds.size());
         } else {
             model.addAttribute("isShow", "no");
-            model.addAttribute("fsAmount", 0);
+            model.addAttribute("fsAmount", "0");
         }
 
         return new ModelAndView("/attention/beforeAttention");
     }
+
+
+    @RequestMapping("/xmj.do")
+    @ResponseBody
+    public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+        XQuery query = new XQuery("plistProjectRecommended_default", request);
+        PageInfo pageInfo = baseManager.listPageInfo(query);
+        List<ProjectRecommended> list = pageInfo.getList();
+        List<ProjectModel> pm = new ArrayList<ProjectModel>();
+        if (null!=list && list.size()>=1){
+            for (ProjectRecommended projectRecommended:list){
+                 Project project = projectRecommended.getProject();
+                 ProjectModel projectModel = projectConvertprojectModel(project);
+                 pm.add(projectModel);
+            }
+            return pm;
+        }
+
+        return new ArrayList<ProjectModel>();
+
+    }
+
+
+    public ProjectModel projectConvertprojectModel(Project project)  {
+        ProjectModel projectModel = new ProjectModel();
+        projectModel.setCreateDateTime(project.getCreateDateTime());
+        projectModel.setAddressDistrict(project.getAddressDistrict().getAddressCity().getAddressProvince().getName());
+        projectModel.setDescription(project.getDescription());
+        projectModel.setFsAmount(project.getFsAmount());
+        projectModel.setLevel(project.getLevel());
+        projectModel.setMasters(project.getMasterProjects().size());
+        projectModel.setPicture_url(project.getPicture_url());
+        projectModel.setPicture_wap_url(project.getPicture_wap_url());
+        projectModel.setProjectId(project.getId());
+        projectModel.setProjectName(project.getName());
+        projectModel.setWorks(project.getProductList().size());
+
+        return projectModel;
+    }
+
 }

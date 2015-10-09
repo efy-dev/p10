@@ -12,6 +12,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.persistence.criteria.Fetch;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @Entity
 @Table(name="project")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-public class Project {
+public class Project implements Serializable {
     private String id;
     private String serial;//项目编号
     private String name;//项目名称
@@ -224,7 +225,7 @@ public class Project {
         this.projectFolloweds = projectFolloweds;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,optional = true)
     @JoinColumn(name="district_id")
 
