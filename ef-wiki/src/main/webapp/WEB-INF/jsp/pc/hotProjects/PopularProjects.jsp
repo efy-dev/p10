@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
@@ -16,7 +17,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>010101大首页</title>
+  <title>e飞蚁工艺秀</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -124,7 +125,15 @@
   <div class="nav-bars ae">
     <ul class="bars">
       <li class="active"><a href="#">动&nbsp;态</a></li>
-      <li><a href="#">已关注</a></li>
+      <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
+      <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
+      <%}%>
+      <%
+        if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
+      %>
+      <li><a href="<c:url value='/pc/afterAttention.do'/>">已关注</a></li>
+      <%}%>
+
       <li><a href="#">发&nbsp;现</a></li>
     </ul>
   </div>
