@@ -27,13 +27,13 @@
         <div class="am-form-group">
             <label name="name" for="user-name" class="am-u-sm-3 am-form-label">类别名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}">
+                <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}" required>
             </div>
         </div>
         <div class="am-form-group">
             <label name="serial" for="serial" class="am-u-sm-3 am-form-label">类别编号 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}">
+                <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}" required>
             </div>
         </div>
         <div class="am-form-group">
@@ -41,7 +41,7 @@
 
             <div class="am-u-sm-9">
                 <input type="file" id="pictureUrl" name="pictureUrl" placeholder="pictureUrl"
-                       value="${object.pictureUrl}">
+                       value="${object.pictureUrl}" required>
             </div>
             <c:if test="${!empty object.pictureUrl}">
                 <img src="http://pro.efeiyi.com/${object.pictureUrl}@!product-model">

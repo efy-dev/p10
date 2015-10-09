@@ -61,7 +61,7 @@
                         <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/pay/${purchaseOrder.id}"/>">立即支付</a></li>
                     </ul>
                 </c:if>
-                <c:if test="${purchaseOrder.orderStatus == '5'}">
+                <c:if test="${purchaseOrder.orderStatus == '5'} || ${purchaseOrder.orderStatus == '7'}">
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">待收货</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
@@ -100,7 +100,7 @@
         <a href="<c:url value="/myEfeiyi/getPassword.do"/>"> 修改密码<i class="icon-sj"></i></a>
     </div>
     <div class="Extras">
-        <a href="<c:url value="/purchaseCollect/collectList.do"/>"> 产品收藏<i class="icon-sj"></i></a>
+        <a href="<c:url value="/purchaseCollect/wapCollectList.do"/>"> 产品收藏<i class="icon-sj"></i></a>
     </div>
     <!--安全退出-->
     <div class="aq-btn"><a href="<c:url value="/j_spring_cas_security_logout"/>">安全退出</a> </div>
