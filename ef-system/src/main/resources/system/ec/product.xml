@@ -150,8 +150,8 @@
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
-                        <condition name="name" defaultValue="" operation="eq" label="产品名称" inputType="text"/>
-                        <condition name="serial" defaultValue="" operation="eq" label="产品编号" inputType="text"/>
+                        <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
+                        <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
                     </query>
                 </do>
                 <do name="plistKCProductModel" access="" label="产品分页列表"
