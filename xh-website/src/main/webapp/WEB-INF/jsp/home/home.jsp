@@ -12,7 +12,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>非遗协会首页</title>
+  <title>非遗协会</title>
 </head>
 <body>
 <div class="wh home">
@@ -23,7 +23,7 @@
           <ul class="am-slides">
             <c:forEach items="${bannerList}" var="banner">
               <li>
-                <a href="${banner.directUrl}" target="_blank"><img src="<%=imgBasePath %>${banner.imageUrl}"></a>
+                <a href="${banner.directUrl}" target="_self"><img src="<%=imgBasePath %>${banner.imageUrl}"></a>
                 <div class="am-slider-desc">
                   <h3>${banner.title}</h3>
                   <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
@@ -84,7 +84,7 @@
       </div>
       <!-- //End---->
       <div class="wh directory">
-        <div class="title">非遗名录<a class="btn-more" href="#更多" title="更多">更多</a></div>
+        <div class="title">非遗名录<a class="btn-more" href="<c:url value='/project/project.do?qm=plistProject_default'/>" title="更多">更多</a></div>
         <ul class="list-img-txt">
           <li>
             <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
@@ -143,8 +143,8 @@
       <div class="part">
         <div class="title">在线服务</div>
         <ul class="ul-list-btn">
-          <li><a href="#在线申报" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
-          <li><a href="<c:url value='/project/project.do?qm='/>" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
+          <li><a href="<c:url value='/protection/protection.declare.do?qm=plistMaterial_default'/>" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
+          <li><a href="<c:url value='/project/project.do?qm=plistProject_default'/>" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
           <li><a href="<c:url value='/protection/protection.do?qm=plistLaw_default" title="法规政策'/>"><i class="icon icon-3"></i>法规政策</a></li>
           <li><a href="<c:url value='/organization/organization.committee.do?qm=plistCommitteeAssociation_default'/>" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
         </ul>

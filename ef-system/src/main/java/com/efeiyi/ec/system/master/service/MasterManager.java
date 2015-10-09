@@ -23,4 +23,6 @@ public interface MasterManager {
      */
     String linkTenant(String tenantId,String masterId,String tenantMasterId,String status);
 
+    String removeMaster(String id);
+
 }

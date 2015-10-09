@@ -1,6 +1,7 @@
 package com.efeiyi.ec.system.master.controller;
 
 import com.efeiyi.ec.master.model.Master;
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
@@ -118,6 +119,19 @@ public class MasterController {
         try {
 
             id = masterManager.linkTenant(tenantId,masterId,tenantMasterId,status);
+        }catch (Exception e){
+
+        }
+        return  id;
+    }
+
+    @RequestMapping("/master/removeMaster.do")
+    @ResponseBody
+    public String removeMaster(String id){
+
+        try {
+
+            id = masterManager.removeMaster(id);
         }catch (Exception e){
 
         }

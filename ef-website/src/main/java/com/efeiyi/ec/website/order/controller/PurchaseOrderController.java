@@ -1,9 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.BigUser;
-import com.efeiyi.ec.organization.model.Consumer;
-import com.efeiyi.ec.organization.model.ConsumerAddress;
-import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
@@ -377,6 +374,30 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
+
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart1 = null;
+        try {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            if (list != null && list.size() > 0) {
+                cart1 = (Cart) list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cart1 == null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart1 = new Cart();
+            cart1.setUser(user);
+            cart1.setCreateDatetime(new Date());
+            cart1.setCartProductList(new ArrayList<CartProduct>());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart1);
+        }
+
+
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
@@ -431,6 +452,30 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
+
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart1 = null;
+        try {
+            XQuery xQuery = new XQuery("listCart_default", request);
+            List<Object> list = baseManager.listObject(xQuery);
+            if (list != null && list.size() > 0) {
+                cart1 = (Cart) list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cart1 == null && bigUser.getId()!=null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart1 = new Cart();
+            cart1.setUser(user);
+            cart1.setCreateDatetime(new Date());
+            cart1.setCartProductList(new ArrayList<CartProduct>());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart1);
+        }
+
+
 
         String cartId = request.getParameter("cartId");
         Cart cart;

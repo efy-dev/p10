@@ -5,4 +5,6 @@ package com.efeiyi.ec.system.product.service;
  */
 public interface ProductModelManager {
     int getMaxRecommendedIndex(String categoryId);
+
+    Integer updateAmount(String id, Integer amount,String creator);
 }

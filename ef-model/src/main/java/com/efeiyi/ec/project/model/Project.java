@@ -1,5 +1,6 @@
 package com.efeiyi.ec.project.model;
 
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressDistrict;
 import com.efeiyi.ec.product.model.Product;
@@ -46,6 +47,8 @@ public class Project {
     private AddressDistrict addressDistrict;
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
+    private List<MasterProject> masterProjects;
+
 
     @Column(name="picture_wap_url")
     public String getPicture_wap_url() {
@@ -250,6 +253,16 @@ public class Project {
 
     public void setFsAmount(Long fsAmount) {
         this.fsAmount = fsAmount;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY  ,mappedBy = "project")
+    public List<MasterProject> getMasterProjects() {
+        return masterProjects;
+    }
+
+    public void setMasterProjects(List<MasterProject> masterProjects) {
+        this.masterProjects = masterProjects;
     }
 }
 
