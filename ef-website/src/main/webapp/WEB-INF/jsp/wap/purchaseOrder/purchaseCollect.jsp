@@ -13,9 +13,9 @@
    <c:forEach items="${collectList}" var="collectList">
       <div class="act-wid">
         <dl>
-          <dt><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
+          <dt><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
           <dd>
-            <p class="commodity-bt"><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a></p>
+              <a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>" style="color: #666;font-size: 12px;"> <p class="commodity-bt">${collectList.productModel.product.name}</p></a>
             <p><a href="#" onclick="showConfirm('提示','是否取消',function(){
                     window.location.href='<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>';
                     })"  class="edit-dete">取消收藏</a><strong>￥${collectList.productModel.price}</strong></p>

@@ -25,7 +25,7 @@ public class PurchaseCollectController {
     @RequestMapping("/collectList.do")
     public String purchaseCollect(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery=new XQuery("plistProductFavorite_default",request,6);
+        XQuery xQuery=new XQuery("plistProductFavorite_default",request,8);
 
         xQuery.addRequestParamToModel(model, request);
 
