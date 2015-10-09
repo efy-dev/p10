@@ -16,7 +16,7 @@
                     </query>
                     <query name="search" label="快速查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
-                        <condition name="title" operation="likes" inputType="text" label="标题"/>
+                        <condition name="title" operation="like" inputType="text" label="标题"/>
                         <condition name="group" defaultValue="ec.home.banner" operation="eq" inputType="default"/>
                     </query>
                 </do>
