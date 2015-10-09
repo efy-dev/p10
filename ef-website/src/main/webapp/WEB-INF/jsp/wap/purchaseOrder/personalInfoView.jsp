@@ -23,7 +23,10 @@
     <div class="personal-list">
       <form>
         <ul>
-          <li>用户名 :<span>${user.username}</span></li>
+          <c:set  var="ur">
+            ${user.username}
+          </c:set>
+          <li>用户名 :<span>${fn:substring(ur, 0,3 )}****${fn:substring(ur,7,11)}</span></li>
           <li>昵称 :<span>${user.name2}</span></li>
           <li>性别 :<span>
           <c:if test="${user.sex == '1'}">
