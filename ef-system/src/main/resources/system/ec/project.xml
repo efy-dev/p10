@@ -85,9 +85,9 @@
 
                     </query>
 
-                    <query name="default1" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="name" operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="serial" operation="eq" label="项目编号" inputType="text"/>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="name" operation="like" label="项目名称" inputType="text"/>
+                        <condition name="serial" operation="like" label="项目编号" inputType="text"/>
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                 </do>
@@ -100,9 +100,9 @@
                         <condition name="level" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
 
-                    <query name="default1" label="查询" type="auto" orderBy="id:desc">
-                        <condition name="name" operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="serial" operation="eq" label="项目编号" inputType="text"/>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="name" operation="like" label="项目名称" inputType="text"/>
+                        <condition name="serial" operation="like" label="项目编号" inputType="text"/>
                     </query>
                 </do>
                 <do name="plistTProject" access="" label="project列表"
@@ -112,9 +112,9 @@
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
 
-                    <query name="default1" label="查询" type="auto" orderBy="serial:desc">
-                        <condition name="name" operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="serial" operation="eq" label="项目编号" inputType="text"/>
+                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                        <condition name="name" operation="like" label="项目名称" inputType="text"/>
+                        <condition name="serial" operation="like" label="项目编号" inputType="text"/>
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                     </query>
                 </do>
