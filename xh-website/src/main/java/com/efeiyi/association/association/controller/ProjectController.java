@@ -40,13 +40,37 @@ public class ProjectController {
     @RequestMapping("/project.do")
     public ModelAndView getProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
+//        String qm = request.getParameter("qm");
+//        //先找到配置文件里的entity
+//        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+//        //再从中找到query的信息
+//        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+//
+//        DatabaseContextHolder.setDataSource("dataSource");
+//        List<Project> list= (List<Project>)xdoManager.list(tempDo, tempDoQuery, null);
+//        Map<String,Project> map = new HashMap<String,Project>();
+//        for(Project project : list){
+//            map.put(project.getType(),project);
+//        }
+//        list = new ArrayList<Project>();
+//        for(Map.Entry<String,Project> entry : map.entrySet()){
+//            list.add(entry.getValue());
+//        }
+//        modelMap.put("projectList", list);
+//        DatabaseContextHolder.setDataSource("associationDataSource");
+        return new ModelAndView("heritageProject/project");
+    }
+
+    @RequestMapping("/project.type.do")
+    public List<Project> getProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
+
         String qm = request.getParameter("qm");
         //先找到配置文件里的entity
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
-        DatabaseContextHolder.setDataSource("dataSource");
+//        DatabaseContextHolder.setDataSource("dataSource");
         List<Project> list= (List<Project>)xdoManager.list(tempDo, tempDoQuery, null);
         Map<String,Project> map = new HashMap<String,Project>();
         for(Project project : list){
@@ -56,9 +80,10 @@ public class ProjectController {
         for(Map.Entry<String,Project> entry : map.entrySet()){
             list.add(entry.getValue());
         }
-        modelMap.put("projectList", list);
-        DatabaseContextHolder.setDataSource("associationDataSource");
-        return new ModelAndView("heritageProject/project");
+//        modelMap.put("projectList", list);
+//        DatabaseContextHolder.setDataSource("associationDataSource");
+//        return new ModelAndView("heritageProject/project");
+        return list;
     }
 
 //    @RequestMapping("/project.do")
