@@ -835,4 +835,18 @@ public class PurchaseOrderController extends BaseController {
     }
 
 
+    @RequestMapping({"/orderCheck/{orderId}"})
+    @ResponseBody
+    public boolean checkOrderStatus(@PathVariable String orderId){
+
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails)baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(),orderId);
+        if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+
 }
