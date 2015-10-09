@@ -1,6 +1,7 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
+import com.efeiyi.association.service.MyDocumentManager;
 import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -13,7 +14,6 @@ import com.ming800.core.p.model.Document;
 import com.ming800.core.p.model.DocumentAttachment;
 import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.AutoSerialManager;
-import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.taglib.PageEntity;
 import org.htmlparser.Node;
 import org.htmlparser.NodeFilter;
@@ -47,8 +47,6 @@ import java.util.List;
 @RequestMapping("/myDocument")
 public class MyDocumentController {
 
-    //    private static Logger logger = Logger.getLogger(BannerController.class);
-
     @Autowired
     private BaseManager baseManager;
 
@@ -57,7 +55,8 @@ public class MyDocumentController {
     private AutoSerialManager autoSerialManager;
 
     @Autowired
-    private DocumentManager documentManager;
+    @Qualifier("myDocumentManagerImpl")
+    private MyDocumentManager myDocumentManager;
 
     @Autowired
     private XdoManager xdoManager;
@@ -114,7 +113,6 @@ public class MyDocumentController {
 //        xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
         // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
 
-
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
         }
@@ -146,9 +144,8 @@ public class MyDocumentController {
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
             document.setPublishDate(new Date());
-
         } else {
-            documentManager.deleteDocument(document);
+            myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
         if (document.getDocumentContent().getContent() != null) {
@@ -180,22 +177,16 @@ public class MyDocumentController {
             }
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
-
-        documentManager.saveDocument(document);
-
-//        return null;
+        myDocumentManager.saveDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
     @RequestMapping("/recommendDocument.do")
     @ResponseBody
     public ModelAndView recommendDocument(HttpServletRequest request, Document document) throws Exception {
-
         String path = request.getParameter("qm");
         Document newDocument = (Document)baseManager.getObject(document.getClass().getName(),document.getId());
         newDocument.setStatus(document.getStatus());
-        documentManager.saveDocument(newDocument);
-
-//        return null;
+        myDocumentManager.saveDocument(newDocument);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
     /**
@@ -207,14 +198,9 @@ public class MyDocumentController {
     @RequestMapping("/deleteDocument.do")
     @ResponseBody
     public String deleteDocument(Document document) {
-
-
-        documentManager.deleteDocument(document);
-
-
+        myDocumentManager.deleteDocument(document);
         return document.getId();
     }
-
 
     /**
      * 假删
@@ -226,9 +212,7 @@ public class MyDocumentController {
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, Document document) throws Exception {
         String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
-
-        documentManager.removeDocument(document);
-
+        myDocumentManager.removeDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 

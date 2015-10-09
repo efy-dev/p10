@@ -103,8 +103,8 @@
     <!--<bean id="productServiceManagerImpl" class="com.efeiyi.pal.system.product.service.impl.ProductServiceManagerImpl"/>-->
     <!--<bean id="productDaoHibernate" class="com.efeiyi.pal.system.product.dao.hibernate.ProductDaoHibernate"/>-->
 
-    <!--<bean id="productSeriesServiceManagerImpl" class="com.efeiyi.pal.system.product.service.impl.ProductSeriesServiceManagerImpl"/>-->
-    <!--<bean id="productSeriesDaoHibernate" class="com.efeiyi.pal.system.product.dao.hibernate.ProductSeriesDaoHibernate"/>-->
+    <bean id="myDocumentManagerImpl" class="com.efeiyi.association.service.impl.MyDocumentManagerImpl"/>
+    <bean id="myDocumentDaoHibernate" class="com.efeiyi.association.dao.hibernate.MyDocumentDaoHibernate"/>
 
     <!--userDao用于spring security-->
     <bean id="userDao" class="com.efeiyi.association.dao.hibernate.UserDaoHibernate">
