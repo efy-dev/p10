@@ -60,4 +60,9 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         }
         return purchaseOrder.getId();
     }
+
+    @Override
+    public String updateOrderStatus(PurchaseOrder purchaseOrder) {
+        return purchaseOrderDao.updateOrderStatus(purchaseOrder);
+    }
 }
