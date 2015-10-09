@@ -65,7 +65,7 @@
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                     </query>
                     <query name="serial" label="快速查询" type="auto" orderBy="serial:asc">
-                        <condition name="name"  operation="eq" label="商品名称" inputType="text"  />
+                        <condition name="name"  operation="like" label="商品名称" inputType="text"  />
 
                         <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="tenant.id" defaultValue="1" operation="eq" inputType="default"/>
