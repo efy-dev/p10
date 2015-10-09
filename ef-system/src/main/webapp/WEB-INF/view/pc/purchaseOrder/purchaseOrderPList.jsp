@@ -160,10 +160,10 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                            onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span
-                                            class="am-icon-trash-o">删除</span>
-                                    </button>
+                                    <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                            <%--onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span--%>
+                                            <%--class="am-icon-trash-o">删除</span>--%>
+                                    <%--</button>--%>
 
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
