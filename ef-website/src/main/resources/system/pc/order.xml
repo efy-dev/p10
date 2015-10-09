@@ -8,7 +8,9 @@
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
-                        <item label="等待收货" value="5"/>
+                        <item label="未发货" value="5"/>
+                        <item label="已发货" value="7"/>
+                        <item label="未评价" value="9"/>
                         <item label="已完成" value="13"/>
                         <item label="订单已取消" value="17"/>
                     </statusType>
@@ -36,7 +38,7 @@
                     <query name="default5" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
-                        <condition name="orderStatus" defaultValue="5" operation="eq"/>
+                        <condition name="orderStatus" defaultValue="5,7" operation="in"/>
                     </query>
                     <query name="default9" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>

@@ -54,7 +54,7 @@
       <div class="item p-price"><em>￥</em>${productModel.price}</div>
       <c:if test="${productModel.amount<=0}">
         <div class="item p-btn active" >
-          <a class="btn btn-append" href="" title="缺货"><i class="icon"></i>缺货</a>
+          <a class="btn btn-append" href="<c:url value="/product/productModel/${productModel.id}"/>" title="查看详情"><i class="icon"></i>查看详情</a>
         </div>
       </c:if>
       <c:if test="${productModel.amount>0}">

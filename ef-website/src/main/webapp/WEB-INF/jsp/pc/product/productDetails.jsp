@@ -108,8 +108,9 @@
             </c:if>
             <!-- //End-->
             <div class="master-cost">
+                <c:if test="productModel.marketPrice!=null">
                 <p><font>市场价：</font><em>${productModel.marketPrice}</em></p>
-
+                 </c:if>
                 <p>飞蚁价</p>
 
                 <p><strong>￥</strong><span>${productModel.price}</span></p>
@@ -117,21 +118,16 @@
             <!-- //End-->
             <!-- //End-->
             <div class="des">
-                <div class="colour">发货地：</div>
+                <div class="colour">服务：</div>
                 <div class="colour-page">
-                    <c:if test="${product.tenant.address==null}">
-                        <span>未知  包邮</span>
-                    </c:if>
-                    <c:if test="${product.tenant.address!=null}">
-                        <span>${product.tenant.address}  包邮</span>
-                    </c:if>
+                        <span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
+                <c:if test="${fn:length(productModelList) >1}">
                 <div class="colour">规格：</div>
                 <div class="colour-page">
                     <ul class="ul-list">
-                        <c:if test="${fn:length(productModelList) >1}">
                             <c:forEach items="${productModelList}" var="productModelTmp" varStatus="rec">
                                 <c:if test="${productModel.id == productModelTmp.id}">
                                     <li class="active">
@@ -158,9 +154,9 @@
                                     </li>
                                 </c:if>
                             </c:forEach>
-                        </c:if>
                     </ul>
                 </div>
+                </c:if>
             </div>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">

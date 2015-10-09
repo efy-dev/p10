@@ -66,7 +66,7 @@
                                             class="am-icon-trash-o"></span>删除
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                    href="<c:url value="/basic/xm.do?qm=plistProduct_tenant&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
+                                    href="<c:url value="/basic/xm.do?qm=plistTENANTProduct_default&view=tenant&conditions=tenant.id:${tenant.id}&tenantId=${tenant.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看商品列表
                                     </a>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
