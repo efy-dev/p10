@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -135,7 +136,7 @@
       <!--轮播图-->
       <ul class="slider-main">
         <c:if test="${! empty bannerList}">
-          <c:forEach var="empty bannerList}" items="banner" varStatus="status">
+          <c:forEach var="banner" items="${bannerList}" varStatus="status">
           <c:if test="${status.index==0}">
           <li style="display: block;"><a href="#"><img src="${banner.imageUrl}" ></a></li>
             </c:if>
@@ -155,457 +156,46 @@
     <!-- //End--nav-->
     <div class="cart-tabe">
       <div class="craft-zy" style="display: block">
+      <c:if test="${!empty projectCategory}">
+        <c:forEach items="${projectCategory}" var="pc" varStatus="status">
+          <div class="craft-content ae">
+            <h4>${pc[status.index].projectCategory.name}</h4>
+            <a href="#" class="left-icon"></a>
+            <div class="commodity-list ae">
+              <ul>
 
-        <!-- //End--craft-->
-        <div class="craft-content ae">
-          <h4>木作编扎</h4>
-          <a href="#" class="left-icon"></a>
-          <div class="commodity-list ae">
-            <ul>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
 
-                  <p>1000件作品</p>
+                <c:if test="${!empty pc}">
+                  <c:forEach items="${pc}" var="project" varStatus="status">
+                    <li>
+                      <div class="commodity-img">
+                        <a href="#"><img src="${project.picture_url}"></a>
+                        <a href="#">
+                          <div class="list-moods">
+                            <i class="img-icon"></i>
+                            <em>${project.fsAmount}</em>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="commodity-txt">
+                        <h4><a href="#">${project.name}</a></h4></p>
+                        <p>${project.addressDistrict.addressCity.addressProvince.name}</p>
 
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
+                        <p>${fn:length(project.productList)}件作品</p>
 
-                  <p>1000件作品</p>
+                        <p>${fn:length(project.masterProjects)}位传承人</p>
+                      </div>
+                    </li>
+                  </c:forEach>
+                </c:if>
 
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-            </ul>
+              </ul>
+            </div>
+            <a href="#" class="right-icon"></a>
           </div>
-          <a href="#" class="right-icon"></a>
-        </div>
-        <!-- //End--craft-->
-        <div class="craft-content ae">
-          <h4>织染印绣</h4>
-          <a href="#" class="left-icon"></a>
-          <div class="commodity-list ae">
-            <ul>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
+        </c:forEach>
+      </c:if>
 
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <a href="#" class="right-icon"></a>
-        </div>
-        <!-- //End--craft-->
-        <div class="craft-content ae" style="margin-bottom: 104px;border-bottom: 0;">
-          <h4>传统美术</h4>
-          <a href="#" class="left-icon"></a>
-          <div class="commodity-list ae">
-            <ul>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-              <li>
-                <div class="commodity-img">
-                  <a href="#"><img src="../shop2015/upload/110208-img1.png"></a>
-                  <a href="#">
-                    <div class="list-moods">
-                      <i class="img-icon"></i>
-                      <em>7890</em>
-                    </div>
-                  </a>
-                </div>
-                <div class="commodity-txt">
-                  <h4><a href="#">紫砂</a></h4></p>
-                  <p>北京</p>
-
-                  <p>1000件作品</p>
-
-                  <p>99位传承人</p>
-                </div>
-              </li>
-
-            </ul>
-          </div>
-          <a href="#" class="right-icon"></a>
-        </div>
-        <!-- //End--craft-->
 
       </div>
 
