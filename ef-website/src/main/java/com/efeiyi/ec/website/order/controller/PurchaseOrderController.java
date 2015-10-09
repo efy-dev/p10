@@ -287,6 +287,18 @@ public class PurchaseOrderController extends BaseController {
     }
 
     /**
+     * 确认收货
+     * @param orderId
+     * @return
+     */
+    @RequestMapping({"/confirmGet/{orderId}"})
+    public String confirmGet(@PathVariable String orderId){
+        PurchaseOrder purchaseOrder =(PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_UNCOMMENT);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        return "redirect:/order/myEfeiyi/list.do";
+    }
+    /**
      * 订单删除
      */
     @RequestMapping({"/deleteOrder/{orderId}"})

@@ -144,6 +144,15 @@
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
               </td>
             </c:if>
+            <c:if test="${order.orderStatus == 7}">
+              <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+                <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+                <p><a href="#" onclick="showConfirm('提示','是否确定收货',function(){
+                        window.location.href='<c:url value="/order/confirmGet/${order.id}"/>';
+                        })">确定收货</a></p>
+              </td>
+            </c:if>
+
             <c:if test="${order.orderStatus == 13}">
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
@@ -153,6 +162,11 @@
             <c:if test="${order.orderStatus == 17}">
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+              </td>
+            </c:if>
+            <c:if test="${order.orderStatus == 9}">
+              <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
+                <p><a href="<c:url value="/comment/finishOrderList.do"/>">去评价</a></p>
               </td>
             </c:if>
           </tr>
