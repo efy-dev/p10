@@ -79,7 +79,7 @@
                                         </a>
                                     </c:if>
                                     <c:if test="${product.status == '1'}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#" onclick="setStatus(this,'2','${product.id}')">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void(0);" onclick="setStatus(this,'2','${product.id}')">
                                             下架
                                         </a>
                                     </c:if>
