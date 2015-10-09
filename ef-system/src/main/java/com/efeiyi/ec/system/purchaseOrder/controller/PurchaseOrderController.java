@@ -70,6 +70,8 @@ public class PurchaseOrderController extends BaseController {
                             purchaseOrderManager.updateOrderStatus(fPurchaseOrder);
                             purchaseOrder.setOrderStatus("7");
                             id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
+                            p.setOrderStatus("7");
+                            purchaseOrderManager.updateOrderStatus(p);
                         }else{//如果有未发货的并且不是列表的最后一个 修改自己状态 跳出循环
                             purchaseOrder.setOrderStatus("7");
                             id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
