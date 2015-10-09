@@ -165,7 +165,7 @@ a:hover {color:#f00;text-decoration:underline}
     margin-left:20px;
     font-size: 14px;
 }
-    /*--End--shop-sort--*/
+/*--End--shop-sort--*/
 .explosion .details .img,.explosion .details .info {float:left}
 .explosion .details .img {width:507px;height:403px;overflow:hidden}
 .explosion .details .img img {width:507px;height:403px}
@@ -216,9 +216,9 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .icon-big-glass{width:38px;height:38px;position:absolute;bottom:10px;right:36px;cursor:pointer;}
 .product-intro .itemInfo .preview .icon-big-glass .icon{background-position:-98px -143px;width:38px;height:38px;float:left;}
 .product-intro .itemInfo .preview .collect .biao{width:35px;height:35px;background:#fff;border:1px solid #ccc;border-radius:6px;cursor:pointer;position:relative;}
-.product-intro .itemInfo .preview .collect .biao .icon{background:url(../images/icon.png) no-repeat -98px -124px;width:21px;height:19px;position:absolute;top:50%;left:50%;margin-top:-9px;margin-left:-10px;}
+.product-intro .itemInfo .preview .collect .biao .icon{background:url(../images/icon.png) no-repeat -99px -124px;width:21px;height:19px;position:absolute;top:50%;left:50%;margin-top:-9px;margin-left:-10px;}
 .product-intro .itemInfo .preview .collect .biao .icon-hover,
-.product-intro .itemInfo .preview .collect .biao .icon-active{background-position:-119px -124px;}
+.product-intro .itemInfo .preview .collect .biao .icon-active{background-position:-120px -124px;}.product-intro .itemInfo .preview .collect span.txt{width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center;}
 .product-intro .itemInfo .preview .collect span.txt{width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center;}
 .product-intro .zoom-section{width:800px;position:absolute;top:0;left:50%;overflow:hidden;}
 .product-intro .itemInfo .itme-ext {width:264px;float:left}

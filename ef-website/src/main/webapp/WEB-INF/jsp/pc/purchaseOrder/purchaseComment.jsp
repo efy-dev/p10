@@ -133,6 +133,7 @@
                           </dd>
                         </dl>
                         <input type="hidden" value="${op.id}" name="productId">
+                        <input type="hidden" value="${finish.id}" name="orderId">
                       </li>
                       <li class="data-list">
                         <dl>

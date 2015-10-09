@@ -94,9 +94,12 @@
                        // alert('不想说!');
                     }
                 });
-            }else if(temp == "无法发货"){
+            }else if(temp == "已取消"){
 
-                alert("无法发货!")
+                alert("订单已取消，无法发货!")
+            }else if(temp == "等待付款"){
+
+                alert("等待付款，无法发货!")
             }else{
                 alert("已经发货!")
             }
@@ -165,13 +168,16 @@
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
                                 <c:if test="${purchaseOrder.orderStatus==1}">
+                                    等待付款
+                                </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==5}">
                                     立即发货
                                 </c:if>
-                                <c:if test="${purchaseOrder.orderStatus!=1 and purchaseOrder.orderStatus!=17}">
+                                <c:if test="${purchaseOrder.orderStatus==9 or purchaseOrder.orderStatus==13 or purchaseOrder.orderStatus==7}">
                                     已发货
                                 </c:if>
                                  <c:if test="${ purchaseOrder.orderStatus==17}">
-                                     无法发货
+                                     已取消
                                  </c:if>
                             </span>
                                     </a>
@@ -179,7 +185,15 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only"><a
-                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                                href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}
+                        </a>
+                            <br>
+                            <c:if test="${empty purchaseOrder.fatherPurchaseOrder}">
+                                父订单
+                            </c:if>
+                            <c:if test="${not empty purchaseOrder.fatherPurchaseOrder}">
+                                子订单
+                            </c:if>
                         </td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
@@ -228,28 +242,28 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function updateOrderStatus(obj,id){
-        var temp = $(obj).find("span").text().trim()
-        var orderStatus = "5";
-        if(temp=="立即发货"){
-            $.ajax({
-                type:"get",
-                data:{id:id,orderStatus:orderStatus},
-                url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
-                success:function(data){
-                    $(obj).find("span").text("已发货");
-                }
-            });
-        }else if(temp == "无法发货"){
+<%--<script type="text/javascript">--%>
+    <%--function updateOrderStatus(obj,id){--%>
+        <%--var temp = $(obj).find("span").text().trim()--%>
+        <%--var orderStatus = "5";--%>
+        <%--if(temp=="立即发货"){--%>
+            <%--$.ajax({--%>
+                <%--type:"get",--%>
+                <%--data:{id:id,orderStatus:orderStatus},--%>
+                <%--url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",--%>
+                <%--success:function(data){--%>
+                    <%--$(obj).find("span").text("已发货");--%>
+                <%--}--%>
+            <%--});--%>
+        <%--}else if(temp == "无法发货"){--%>
 
-            alert("无法发货!")
-        }else{
-            alert("已经发货!")
-        }
-    }
+            <%--alert("无法发货!")--%>
+        <%--}else{--%>
+            <%--alert("已经发货!")--%>
+        <%--}--%>
+    <%--}--%>
 
 
-</script>
+<%--</script>--%>
 </body>
 </html>

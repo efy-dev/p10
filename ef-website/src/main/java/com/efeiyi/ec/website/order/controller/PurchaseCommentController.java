@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderComment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -26,7 +27,7 @@ public class PurchaseCommentController {
     @RequestMapping("/finishOrderList.do")
     public String finishOrder(HttpServletRequest request,Model model) throws Exception {
 
-        XQuery xQuery = new XQuery("plistPurchaseOrder_default13",request);
+        XQuery xQuery = new XQuery("plistPurchaseOrder_default9",request);
         xQuery.addRequestParamToModel(model, request);
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         model.addAttribute("finishList",list);
@@ -45,6 +46,11 @@ public class PurchaseCommentController {
         purchaseOrderProduct.setStatus("1");
         purchaseOrderProduct.setPurchaseOrderComment(comment);
         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(),purchaseOrderProduct);
+
+        String orderId=request.getParameter("orderId");
+        PurchaseOrder purchaseOrder=(PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_FINISHED);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
 
 
         return"redirect:/comment/finishOrderList.do";
