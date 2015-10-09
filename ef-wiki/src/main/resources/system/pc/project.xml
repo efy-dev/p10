@@ -158,6 +158,9 @@
                     <query name="name" label="项目名称" type="auto" orderBy="serial:asc">
                         <condition label="项目名称" name="name"  operation="eq" inputType="text"/>
                     </query>
+                    <query name="byCategory" label="项目名称" type="auto" orderBy="serial:asc">
+                        <condition label="项目类别" name="projectCategory.id" defaultValue="" operation="eq" />
+                    </query>
                 </do>
 
             </does>
