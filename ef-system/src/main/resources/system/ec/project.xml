@@ -32,12 +32,12 @@
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
                     </query>
-                    <query name="default1" label="类别查询" type="auto" orderBy="id:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
                         <!--<condition name="fatherCategory.id" defaultValue="" operation="eq" inputType="default"/>-->
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <!--<condition name="level" defaultValue="1" operation="eq" inputType="default"/>-->
-                        <condition name="name" operation="eq" label="类别名称" inputType="text"/>
-                        <condition name="serial" operation="eq" label="类别编号" inputType="text"/>
+                        <condition name="name" operation="like" label="类别名称" inputType="text"/>
+                        <condition name="serial" operation="like" label="类别编号" inputType="text"/>
                     </query>
                 </do>
                 <do name="viewEcProjectCategory" label="查看" access="" result="/projectCategory/ecProjectCategoryView"/>

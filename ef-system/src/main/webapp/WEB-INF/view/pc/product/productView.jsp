@@ -72,12 +72,12 @@
         <fieldset>
             <legend>
                 <c:if test="${view == 'newProduct'}">
-                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_defalut&view=${view}')"  href="javascript:void (0);">
+                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')"  href="javascript:void (0);">
                         返回列表
                     </a>
                 </c:if>
                 <c:if test="${view == 'tenant'}">
-                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"  href="javascript:void (0);">
+                    <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"  href="javascript:void (0);">
                         返回列表
                     </a>
                     <%--<input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>--%>
@@ -404,10 +404,10 @@
 
                     <span style="padding: 10px;">
                         <c:if test="${view == 'newProduct'}">
-                            <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_defalut&view=${view}')" class="am-btn am-btn-primary" value="返回商品列表"/>
+                            <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=${view}')" class="am-btn am-btn-primary" value="返回商品列表"/>
                         </c:if>
                          <c:if test="${view == 'tenant'}">
-                             <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_tenant&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>
+                             <input type="button"  onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=${view}&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')" class="am-btn am-btn-primary" value="返回商品列表"/>
                          </c:if>
 
                     </span>
