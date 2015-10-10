@@ -9,7 +9,7 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
 
-import com.efeiyi.ec.wiki.base.service.WxPayConfig;
+import com.efeiyi.ec.wiki.base.util.WxPayConfig;
 import com.efeiyi.ec.wiki.organization.service.BranchManager;
 import com.efeiyi.ec.wiki.organization.service.RoleManager;
 import com.efeiyi.ec.wiki.organization.service.SmsCheckManager;

@@ -1,9 +1,14 @@
 package com.efeiyi.ec.wiki.category.controller;
 
 import com.efeiyi.ec.organization.model.AddressProvince;
+import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
+import com.efeiyi.ec.wiki.model.ProjectModel;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.ObjectRecommendedManager;
 import org.apache.log4j.Logger;
@@ -11,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,7 +53,28 @@ public class ProjectCategoryController extends BaseController {
         return  new ModelAndView("/classify/projectClassify");
     }
 
+    @RequestMapping("/pc/projectClassifyj.do")
+    @ResponseBody
+    public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
+        String qm = request.getParameter("qm");
+        if (null==qm || "".equalsIgnoreCase(qm)){
+            qm = "plistProject_all";
+        }
+        XQuery query = new XQuery(qm, request);
+        PageInfo pageInfo = baseManager.listPageInfo(query);
+        List<Project> list = pageInfo.getList();
+        List<ProjectModel> pm = new ArrayList<ProjectModel>();
+        if (null!=list && list.size()>=1){
+            for (Project project:list){
+                ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
+                pm.add(projectModel);
+            }
+            return pm;
+        }
 
+        return new ArrayList<ProjectModel>();
+
+    }
 
 
 

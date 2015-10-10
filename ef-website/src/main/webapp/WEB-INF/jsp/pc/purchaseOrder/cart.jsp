@@ -106,7 +106,7 @@
                                     <%--<div class="control-cl">商家存货仅剩200件</div>--%>
                             </td>
                             <td width="119"><span class="moneycl"
-                                                  id="${product.id}Price">${(product.productModel.price.intValue())*product.amount}</span>
+                                                  id="${product.id}Price">${(product.productModel.price)*product.amount}</span>
                             </td>
                             <td width="111">
                     <span>

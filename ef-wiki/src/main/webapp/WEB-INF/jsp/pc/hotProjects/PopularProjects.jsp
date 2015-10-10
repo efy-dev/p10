@@ -124,7 +124,7 @@
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li class="active"><a href="#">动&nbsp;态</a></li>
+      <li class="active"><a href="/pc/index.do">动&nbsp;态</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
@@ -134,7 +134,7 @@
       <li><a href="<c:url value='/pc/afterAttention.do'/>">已关注</a></li>
       <%}%>
 
-      <li><a href="#">发&nbsp;现</a></li>
+      <li><a href="<c:url value='/category.do'/>">发&nbsp;现</a></li>
     </ul>
   </div>
 </div>

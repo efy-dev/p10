@@ -99,18 +99,21 @@
                     </query>
                     <query name="Category" label="查询" type="auto" orderBy="id:desc">
                         <condition name="projectCategory.id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="all" label="查询" type="auto" orderBy="level:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="level" label="查询" type="auto" orderBy="id:desc">
                         <condition name="level" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="allDirt" label="查询" type="auto" orderBy="addressDistrict:desc">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                     <query name="Dirt" label="查询" type="auto" orderBy="id:desc">
                         <condition name="addressDistrict.addressCity.addressProvince.id" defaultValue="1" operation="eq"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="plistProject2" access="" label="project列表"

@@ -44,7 +44,7 @@
     </div>
     <div class="bd btns">
       <c:if test="${productModel.amount>0}">
-      <a class="btn-buy"  href="<c:url value="/order/easyBuy/${productModel.id}"/>">立即购买</a>
+      <a class="btn-buy"  href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>">立即购买</a>
       <a class="btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>">加入购物车</a>
       </c:if>
     </div>
