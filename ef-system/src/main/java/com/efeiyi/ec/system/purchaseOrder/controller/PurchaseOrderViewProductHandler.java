@@ -34,7 +34,13 @@ public class PurchaseOrderViewProductHandler implements DoHandler {
         if(request.getParameter("id") != null) {
             String orderId = request.getParameter("id");
             PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), purchaseOrder.getUser().getId());
+            String  userId = null;
+            if(null == purchaseOrder.getUser()){
+                userId = purchaseOrder.getFatherPurchaseOrder().getUser().getId();
+            }else{
+                userId = purchaseOrder.getUser().getId();
+            }
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
             modelMap.put("consumer",consumer);
         }
         return modelMap;

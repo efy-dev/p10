@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">支付金额</td>
-                <td class="am-u-md-3">${object.paymentAmount}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">支付用户</td>
                 <td class="am-u-md-3">${object.user.username}</td>
             </tr>
@@ -76,7 +76,7 @@
                                     checkedValue="${purchaseOrderPaymentDetails.payWay}"
                                     type="normal"/>
                 </td>
-                <td class="am-hide-sm-only">${purchaseOrderPaymentDetails.money}</td>
+                <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPaymentDetails.money}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>
             </tr>
         </c:forEach>
@@ -98,11 +98,11 @@
                 <td class="am-primary am-u-md-3">订单号</td>
                 <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&viewIdentify=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
                 <td class="am-primary am-u-md-3">订单总价</td>
-                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3"><fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/> </td>
             </tr>

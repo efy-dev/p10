@@ -97,8 +97,8 @@
                                     </div>
                                 </td>
                                 <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${couponBatch.id}'/>">${couponBatch.name}</a></td>
-                                <td class="am-hide-sm-only">${couponBatch.price}</td>
-                                <td class="am-hide-sm-only">${couponBatch.priceLimit}</td>
+                                <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${couponBatch.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                                <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
                                 <td class="am-hide-sm-only">
                                 <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm"/>

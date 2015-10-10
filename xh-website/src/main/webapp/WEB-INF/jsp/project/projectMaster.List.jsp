@@ -12,15 +12,18 @@
 <div id="show" class="list-table">
     <table>
         <tr>
-            <td>所在地区</td>
             <td>非物质文化遗产名称</td>
-            <td>详细</td>
+            <td>传承人</td>
+            <td>类别</td>
         </tr>
-        <c:forEach items="${objectList}" var="project">
+        <c:forEach items="${objectList}" var="masterProject">
             <tr>
-                <td>${project.addressDistrict.addressCity.addressProvince.name}</td>
-                <td>${project.name}</td>
-                <td>详细</td>
+                <td>${masterProject.project.name}</td>
+                <td>${masterProject.master.fullName}</td>
+                <td><ming800:status name="level"
+                                    dataType="MasterProject.type"
+                                    checkedValue="${masterProject.project.type}"
+                                    type="normal"/></td>
             </tr>
         </c:forEach>
     </table>
@@ -29,7 +32,7 @@
 <div class="pages wh">
     <ul class="am-pagination am-pagination-centered">
         <div style="clear: both">
-            <c:url value="/project/project.do" var="url"/>
+            <c:url value="/project/project.master.do" var="url"/>
             <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
                 <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
                 <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>

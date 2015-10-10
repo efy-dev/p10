@@ -29,9 +29,9 @@
         </jnode>
     </jnode>
 
-    <jnode id="AuthorityManagement" url="/project/project.do?qm=plistProject_default" text_zh_CN="非遗名录">
-        <jnode url="/project/project.do?qm=plistProject_default" access="admin,manager" text_zh_CN="项目"/>
-        <jnode url="/project/project.do?qm=plistTenant_default" access="admin,manager" text_zh_CN="传承人"/>
+    <jnode id="AuthorityManagement" url="/project/project.do?qm=plistProject_default&amp;provinceid=-1&amp;type=-1" text_zh_CN="非遗名录">
+        <jnode url="/project/project.do?qm=plistProject_default&amp;provinceid=-1&amp;type=-1" access="admin,manager" text_zh_CN="项目"/>
+        <jnode url="/project/project.master.do?qm=plistTenant_default&amp;provinceid=-1&amp;type=-1" access="admin,manager" text_zh_CN="传承人"/>
     </jnode>
 
     <jnode id="ProtectionPolicy" url="/protection/protection.do?qm=plistLaw_default" text_zh_CN="非遗保护">

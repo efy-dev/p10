@@ -61,6 +61,7 @@
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
                         <item label="等待收货" value="5"/>
+                        <item label="已发货" value="7"/>
                         <item label="未评价" value="9"/>
                         <item label="已完成" value="13"/>
                         <item label="已取消" value="17"/>
@@ -78,6 +79,7 @@
                         <condition name="user.id" operation="eq" label="消费者id" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
+                        <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
                         <condition name="serial" operation="eq" label="订单号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
@@ -262,9 +264,9 @@
                 </field>
                 <field name="status" label="支付状态" inputType="text">
                     <statusType fieldName="status">
-                        <item label="支付成功" value="1"/>
-                        <item label="支付失败" value="2"/>
-                        <item label="未支付" value="3"/>
+                        <item label="待支付" value="1"/>
+                        <item label="已支付" value="2"/>
+                        <item label="支付失败" value="3"/>
                     </statusType>
                 </field>
             </fields>

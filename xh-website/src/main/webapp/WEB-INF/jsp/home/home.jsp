@@ -84,7 +84,7 @@
       </div>
       <!-- //End---->
       <div class="wh directory">
-        <div class="title">非遗名录<a class="btn-more" href="<c:url value='/project/project.do?qm=plistProject_default'/>" title="更多">更多</a></div>
+        <div class="title">非遗名录<a class="btn-more" href="<c:url value='/project/project.do?qm=plistProject_default&provinceid=-1&type=-1'/>" title="更多">更多</a></div>
         <ul class="list-img-txt">
           <li>
             <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
@@ -144,7 +144,7 @@
         <div class="title">在线服务</div>
         <ul class="ul-list-btn">
           <li><a href="<c:url value='/protection/protection.declare.do?qm=plistMaterial_default'/>" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
-          <li><a href="<c:url value='/project/project.do?qm=plistProject_default'/>" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
+          <li><a href="<c:url value='/project/project.do?qm=plistProject_default&provinceid=-1&type=-1'/>" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
           <li><a href="<c:url value='/protection/protection.do?qm=plistLaw_default" title="法规政策'/>"><i class="icon icon-3"></i>法规政策</a></li>
           <li><a href="<c:url value='/organization/organization.committee.do?qm=plistCommitteeAssociation_default'/>" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
         </ul>
@@ -155,7 +155,7 @@
         <ul class="ul-list">
           <c:forEach items="${masterList}" var="master">
             <li>
-              <a href="" title=""><img src="<c:url value='/shop2015/upload/exp6.jpg'/>" alt=""></a>
+              <a href="<c:url value='/project/project.master.do?qm=plistTenant_default&provinceid=-1&type=-1'/>" title=""><img src="<c:url value='/shop2015/upload/exp6.jpg'/>" alt=""></a>
               <p>${master.fullName}</p>
             </li>
           </c:forEach>

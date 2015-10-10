@@ -144,7 +144,7 @@
                     <th class="table-title">订单号</th>
                     <th class="table-title">订单状态</th>
                     <th class="table-title">产品</th>
-                    <th class="table-title">总额/实付金额</th>
+                    <th class="table-title">总额/实付金额(元)</th>
                 <%--<th class="table-title">支付类型</th>--%>
                     <th class="table-title">收货地址</th>
                     <th class="table-title">下单人</th>
@@ -160,10 +160,10 @@
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                            onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span
-                                            class="am-icon-trash-o">删除</span>
-                                    </button>
+                                    <%--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                            <%--onclick="showConfirm('提示','是否删除',function(){removePurchaseOrder('${purchaseOrder.id}')})"><span--%>
+                                            <%--class="am-icon-trash-o">删除</span>--%>
+                                    <%--</button>--%>
 
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" id="send" onclick="updateOrderStatusNew(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
@@ -210,8 +210,8 @@
 
                         </td>
 
-                        <td class="am-hide-sm-only">${purchaseOrder.total} <br>
-                        ${purchaseOrder.getRealPayMoney()}</td>
+                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/> <br>
+                            <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <%--<td class="am-hide-sm-only">--%>
                             <%--<c:forEach items="${purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">--%>
                                 <%--<span style="margin-left: 10px;">--%>

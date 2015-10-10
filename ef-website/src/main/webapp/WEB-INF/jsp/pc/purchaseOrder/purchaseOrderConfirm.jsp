@@ -57,7 +57,7 @@
                                  </li>
                                  <li>
                                      <label></label>
-                                     <input type="button" class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息">
+                                     <a  class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息" href="javascript:void(0)">保存收货人信息</a>
                                      <input type="reset" style="display: none" id="reset">
                                      <span id="ts" style="border: 0"></span>
                                  </li>
@@ -298,11 +298,12 @@
             var param = $("#newAddress").serialize();
 
             var success = function (data) {
-                window.location.href=window.location.href;
+//                window.location.href=window.location.href;
                 var html = newAddress(data);
                 $("#address").append(html);
                 $(".active-pop").hide();
                 $("#reset").click();
+                $("#"+data.id).click();
             }
             ajaxRequest("<c:url value="/order/addAddress.do"/>", param, success, function () {
             }, "post")

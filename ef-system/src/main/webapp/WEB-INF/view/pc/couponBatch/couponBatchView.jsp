@@ -26,16 +26,16 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">优惠价格</td>
-                <td class="am-u-md-3" colspan="3">${object.price}</td>
+                <td class="am-u-md-3" colspan="3"><fmt:formatNumber type="number" value="${object.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">生效日期</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.startDate}" pattern="yyyy-mm-dd"/>
+                    <fmt:formatDate value="${object.startDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
                 </td>
                 <td class="am-primary am-u-md-3">失效日期</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.endDate}" pattern="yyyy-mm-dd"/>
+                    <fmt:formatDate value="${object.endDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
                 </td>
             </tr>
 
@@ -68,7 +68,7 @@
                                     type="normal"/>
                 </td>
 
-                <td class="am-hide-sm-only">${coupon.couponBatch.priceLimit}</td>
+                <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${coupon.couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </c:forEach>
             </tbody>
         </table>

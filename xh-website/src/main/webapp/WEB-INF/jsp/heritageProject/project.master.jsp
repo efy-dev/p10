@@ -19,13 +19,13 @@
     <div class="title">国家非物质文化遗产国家名录项目</div>
     <div class="div-list">
         <div class="filter-item">
-            <jsp:include flush="true"
-                         page="/project/provinceList.do?provinceid=${provinceid}&type=${type}"/>
+            <%--<jsp:include flush="true"--%>
+                         <%--page="/project/provinceList.do?provinceid=${provinceid}&type=${type}"/>--%>
         <jsp:include flush="true"
-                             page="/project/project.type.do?type=${type}&provinceid=${provinceid}"/>
+                             page="/project/project.master.type.do?type=${type}&provinceid=${provinceid}"/>
         <!-- //End--filter-item-->
         <jsp:include flush="true"
-                     page="/project/project.List.do?provinceid=${provinceid}&type=${type}"/>
+                     page="/project/projectMaster.List.do?provinceid=${provinceid}&type=${type}"/>
         <!-- //End--div-list-->
 
         <!-- //End--pages-->
@@ -48,7 +48,7 @@
                     break;
                 }
             }
-            var url = "<c:url value="/project/project.do?qm=plistProject_default&provinceid="/>" + provinceid + "&type=" + type;
+            var url = "<c:url value="/project/project.master.do?qm=plistTenant_default&provinceid="/>" + provinceid + "&type=" + type;
             window.location.href = url;
             return false;
         }
@@ -63,7 +63,7 @@
                     break;
                 }
             }
-            var url = "<c:url value="/project/project.do?qm=plistProject_default&provinceid="/>" + provinceid + "&type=" + type;
+            var url = "<c:url value="/project/project.master.do?qm=plistTenant_default&provinceid="/>" + provinceid + "&type=" + type;
             window.location.href = url;
             return false;
         }

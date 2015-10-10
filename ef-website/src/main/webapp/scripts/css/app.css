@@ -216,9 +216,9 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .preview .icon-big-glass{width:38px;height:38px;position:absolute;bottom:10px;right:36px;cursor:pointer;}
 .product-intro .itemInfo .preview .icon-big-glass .icon{background-position:-98px -143px;width:38px;height:38px;float:left;}
 .product-intro .itemInfo .preview .collect .biao{width:35px;height:35px;background:#fff;border:1px solid #ccc;border-radius:6px;cursor:pointer;position:relative;}
-.product-intro .itemInfo .preview .collect .biao .icon{background:url(../images/icon.png) no-repeat -99px -124px;width:21px;height:19px;position:absolute;top:50%;left:50%;margin-top:-9px;margin-left:-10px;}
+.product-intro .itemInfo .preview .collect .biao .icon{background:url(../images/icon.png) no-repeat -98px -124px;width:21px;height:19px;position:absolute;top:50%;left:50%;margin-top:-9px;margin-left:-10px;}
 .product-intro .itemInfo .preview .collect .biao .icon-hover,
-.product-intro .itemInfo .preview .collect .biao .icon-active{background-position:-120px -124px;}.product-intro .itemInfo .preview .collect span.txt{width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center;}
+.product-intro .itemInfo .preview .collect .biao .icon-active{background-position:-120px -124px;}
 .product-intro .itemInfo .preview .collect span.txt{width:35px;line-height:16px;font-size:12px;float:left;margin-top:5px;text-align:center;}
 .product-intro .zoom-section{width:800px;position:absolute;top:0;left:50%;overflow:hidden;}
 .product-intro .itemInfo .itme-ext {width:264px;float:left}
@@ -281,6 +281,9 @@ a:hover {color:#f00;text-decoration:underline}
 .product-intro .itemInfo .jiathis_style .jtico_tqq {background-position:-21px 0;width:22px}
 .product-intro .itemInfo .jiathis_style .jtico_tsina {background-position:-43px 0}
 .product-intro .itemInfo .jiathis_style .jtico_cqq {background-position:-65px 0;width:22px}
+
+.product-intro .destail-tab {
+    height:44px;}
 .product-intro .tab-wrap {width:1200px;height:44px;line-height:44px;padding-left:170px;position:absolute;
     left:50%;
     margin-left:-600px;border:1px #000 solid;background:#fff}

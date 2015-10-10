@@ -12,11 +12,11 @@
     <div class="tbar">项目类别：</div>
     <ul id="type">
         <li><a href="#" title="" <c:if test="${type == -1}">class="active"</c:if> target="_self" onclick="typeClick(this, '-1');" id="-1">全部</a></li>
-        <c:forEach items="${projectList}" var="project">
-            <li><a href="#" title="" target="_self" id="${project.type}" <c:if test="${project.type == type}"> class="active" </c:if>
-                   onclick="typeClick(this, '${project.type}');"><ming800:status name="level"
+        <c:forEach items="${masterProjectList}" var="masterProject">
+            <li><a href="#" title="" target="_self" id="${masterProject.project.type}" <c:if test="${masterProject.project.type == type}"> class="active" </c:if>
+                   onclick="typeClick(this, '${masterProject.project.type}');"><ming800:status name="level"
                                                                                  dataType="Project.type"
-                                                                                 checkedValue="${project.type}"
+                                                                                 checkedValue="${masterProject.project.type}"
                                                                                  type="normal"/></a></li>
         </c:forEach>
     </ul>

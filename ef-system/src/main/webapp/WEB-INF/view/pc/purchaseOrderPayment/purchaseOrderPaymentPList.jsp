@@ -74,7 +74,7 @@
                                                 type="normal"/>
                         </td>
                         <td class="am-hide-sm-only">${purchaseOrderPayment.transactionNumber}</td>
-                        <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
+                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="status" dataType="purchaseOrderPayment.status"
                                             checkedValue="${purchaseOrderPayment.status}"
