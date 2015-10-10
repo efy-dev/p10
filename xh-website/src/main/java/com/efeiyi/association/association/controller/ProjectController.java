@@ -122,11 +122,10 @@ public class ProjectController {
         return list;
     }
 
-    @RequestMapping({"/project.List.do","projectMaster.List.do"})
-    public List<Object> getProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
+    @RequestMapping({"/projectMaster.List.do","/project.List.do"})
+    public List<Object> getMasterProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
-
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
         }
@@ -151,7 +150,11 @@ public class ProjectController {
         if (!"-1".equals(type)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition,originList.get(0));
-            condition.setName("project.type");
+            if("plistTenant_default".equals(qm)){
+                condition.setName("project.type");
+            }else if("plistProject_default".equals(qm)){
+                condition.setName("type");
+            }
             condition.setValue(type);
             condition.setOperation("eq");
 
@@ -164,7 +167,12 @@ public class ProjectController {
         if (!"-1".equals(provinceId)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition,originList.get(0));
-            condition.setName("project.addressDistrict.addressCity.addressProvince.id");
+
+            if("plistTenant_default".equals(qm)) {
+                condition.setName("project.addressDistrict.addressCity.addressProvince.id");
+            }else if("plistProject_default".equals(qm)){
+                condition.setName("addressDistrict.addressCity.addressProvince.id");
+            }
             condition.setValue(provinceId);
             condition.setOperation("eq");
 
@@ -183,6 +191,71 @@ public class ProjectController {
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
         tempDoQuery.setConditionList(originList);
+        return pageInfo.getList();
+
+    }
+
+    @RequestMapping({"/project.home.list.do"})
+    public List<Object> getProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
+
+        String qm = request.getParameter("qm");
+
+        if (qm.split("_").length < 2) {
+            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
+        }
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+
+        PageEntity pageEntity = new PageEntity();
+        String pageIndex = request.getParameter("pageEntity.index");
+        String pageSize = request.getParameter("pageEntity.size");
+        if (pageIndex != null) {
+            pageEntity.setIndex(Integer.parseInt(pageIndex));
+            pageEntity.setSize(Integer.parseInt(pageSize));
+        }
+
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+//        List<QueryCondition> originList = tempDoQuery.getConditionList();
+//
+//        if (!"-1".equals(type)) {
+//            QueryCondition condition = new QueryCondition();
+//            BeanUtils.copyProperties(condition,originList.get(0));
+//            condition.setName("type");
+//            condition.setValue(type);
+//            condition.setOperation("eq");
+//
+//            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+//            tempDoQuery.getConditionList().addAll(originList);
+//            tempDoQuery.getConditionList().add(condition);
+//        }
+//        List<QueryCondition> firstList = tempDoQuery.getConditionList();
+//
+//        if (!"-1".equals(provinceId)) {
+//            QueryCondition condition = new QueryCondition();
+//            BeanUtils.copyProperties(condition,originList.get(0));
+//            condition.setName("addressDistrict.addressCity.addressProvince.id");
+//            condition.setValue(provinceId);
+//            condition.setOperation("eq");
+//
+//            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+//            tempDoQuery.getConditionList().addAll(firstList);
+//            tempDoQuery.getConditionList().add(condition);
+//        }
+        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
+        modelMap.put("tabTitle", tempDoQuery.getLabel());
+        modelMap.put("pageInfo", pageInfo);
+        modelMap.put("pageEntity", pageInfo.getPageEntity());
+
+        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
+            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
+        }
+        modelMap.put("qm", qm);
+        modelMap.put("group", tempDo.getData());
+//        tempDoQuery.setConditionList(originList);
         return pageInfo.getList();
 
     }
