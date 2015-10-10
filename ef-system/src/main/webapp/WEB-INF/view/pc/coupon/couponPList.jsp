@@ -67,8 +67,8 @@
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a>
                         </td>
-                        <td class="am-hide-sm-only">${coupon.couponBatch.price}</td>
-                        <td class="am-hide-sm-only">${coupon.couponBatch.priceLimit}</td>
+                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${coupon.couponBatch.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                        <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${coupon.couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                         <td class="am-hide-sm-only">
                             <ming800:status name="status" dataType="coupon.status"
                                             checkedValue="${coupon.status}"
@@ -76,10 +76,10 @@
 
                         </td>
                         <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy:MM:dd hh:mm:ss"/>
+                            <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
                         </td>
                         <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy:MM:dd hh:mm:ss"/>
+                            <fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
                         </td>
                     </tr>
                 </c:forEach>

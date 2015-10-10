@@ -16,9 +16,9 @@ public class ProjectModel implements Serializable {
     private String description;// project描述
     private String picture_url;//project图片
     private String picture_wap_url;//移动端图片project图片
-    private long works;
+    private Long works;
     private Long fsAmount;
-    private long masters;
+    private Long masters;
 
     public String getProjectId() {
         return projectId;
@@ -84,11 +84,11 @@ public class ProjectModel implements Serializable {
         this.picture_wap_url = picture_wap_url;
     }
 
-    public long getWorks() {
+    public Long getWorks() {
         return works;
     }
 
-    public void setWorks(long works) {
+    public void setWorks(Long works) {
         this.works = works;
     }
 
@@ -100,11 +100,11 @@ public class ProjectModel implements Serializable {
         this.fsAmount = fsAmount;
     }
 
-    public long getMasters() {
+    public Long getMasters() {
         return masters;
     }
 
-    public void setMasters(long masters) {
+    public void setMasters(Long masters) {
         this.masters = masters;
     }
 }
