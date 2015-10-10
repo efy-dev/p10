@@ -158,13 +158,24 @@
                 </div>
                 </c:if>
             </div>
+            <div class="des">
+                <div class="colour">数量：</div>
+                <div class="colour-page">
+                    <div class="amount">
+                        <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
+                        <input id = "value" class="txt" type="text" value="1"/><em class="ge">个</em>
+                        <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
+                    </div>
+                    <!-- //End-->
+                </div>
+            </div>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
                     <a id="modelId" class="btn btn-append" title="缺货">缺货</a>
                 </c:if>
                 <c:if test="${productModel.amount > 0}">
                     <a id="modelId" class="btn btn-append"
-                       href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车" dis>放入购物车</a>
+                      onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
                     <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>"
                        title="立即购买">立即购买</a>
                 </c:if>
@@ -186,7 +197,7 @@
         </div>
     </div>
     <!-- //End--itemInfo-->
-    <div class="wh">
+    <div class="wh destail-tab">
         <div class="tab-wrap">
             <!-- JiaThis Button BEGIN -->
             <div class="jiathis_style">
@@ -327,6 +338,38 @@
                 }
             },
         });
+    }
+
+//    $(function(){
+//        var t = $("#text_box");
+//        $("#add").click(function(){
+//            t.val(parseInt(t.val())+1)
+//            setTotal();
+//        })
+//        $("#min").click(function(){
+//            t.val(parseInt(t.val())-1)
+//            setTotal();
+//        })
+//        function setTotal(){
+//            $("#total").html((parseInt(t.val())*300).toFixed(2));
+//        }
+//        setTotal();
+//    })
+
+    function subtractProduct() {
+        var t = $("#value");
+        if(t.val()<=1){
+           document.getElementById("classid").value = 1;
+        }
+        t.val(parseInt(t.val())-1)
+    }
+    function addProduct() {
+        var t = $("#value");
+        t.val(parseInt(t.val())+1)
+    }
+    function addCart(o){
+        var t = document.getElementById("value").value;
+        window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t;
     }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
