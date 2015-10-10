@@ -1,5 +1,6 @@
 package com.efeiyi.association.association.controller;
 
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.project.model.Project;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -43,6 +44,15 @@ public class ProjectController {
         modelMap.addAttribute("type", type);
         return new ModelAndView("heritageProject/project");
     }
+    @RequestMapping("/project.master.do")
+    public ModelAndView getMasterProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
+
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+        modelMap.addAttribute("provinceid", provinceId);
+        modelMap.addAttribute("type", type);
+        return new ModelAndView("heritageProject/project.master");
+    }
 
     @RequestMapping("/project.type.do")
     public List<Project> getProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
@@ -70,6 +80,36 @@ public class ProjectController {
         return list;
     }
 
+    @RequestMapping("/project.master.type.do")
+    public List<MasterProject> getMasterProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
+
+        String qm = request.getParameter("qm");
+
+        //先找到配置文件里的entity
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
+        //再从中找到query的信息
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+        List<MasterProject> list = (List<MasterProject>) xdoManager.list(tempDo, tempDoQuery, null);
+        Map<String, MasterProject> map = new HashMap<String, MasterProject>();
+        for (MasterProject masterProject : list) {
+            try {
+                map.put(masterProject.getProject().getType(), masterProject);
+            }catch (NullPointerException e){
+                continue;
+            }
+        }
+        list = new ArrayList<MasterProject>();
+        for (Map.Entry<String, MasterProject> entry : map.entrySet()) {
+            list.add(entry.getValue());
+        }
+        String provinceId = request.getParameter("provinceid");
+        String type = request.getParameter("type");
+        modelMap.addAttribute("provinceid", provinceId);
+        modelMap.addAttribute("type", type);
+        return list;
+    }
+
 
     @RequestMapping({"/provinceList.do"})
     public List<Object> getProvinceList(ModelMap modelMap, HttpServletRequest request) throws Exception {
@@ -82,7 +122,7 @@ public class ProjectController {
         return list;
     }
 
-    @RequestMapping({"/project.List.do"})
+    @RequestMapping({"/project.List.do","projectMaster.List.do"})
     public List<Object> getProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
@@ -111,7 +151,7 @@ public class ProjectController {
         if (!"-1".equals(type)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition,originList.get(0));
-            condition.setName("type");
+            condition.setName("project.type");
             condition.setValue(type);
             condition.setOperation("eq");
 
@@ -124,7 +164,7 @@ public class ProjectController {
         if (!"-1".equals(provinceId)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition,originList.get(0));
-            condition.setName("addressDistrict.addressCity.addressProvince.id");
+            condition.setName("project.addressDistrict.addressCity.addressProvince.id");
             condition.setValue(provinceId);
             condition.setOperation("eq");
 

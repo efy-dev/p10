@@ -298,6 +298,24 @@
                 </field>
             </fields>
             <does>
+                <do name="plistProject" access="" label="项目">
+                    <query name="master" label="传承人" type="auto" orderBy="id:desc" groupby="type">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+        <entity name="MasterProject" label="传承人非遗名录" model="com.efeiyi.ec.master.model.MasterProject">
+            <fields>
+                <field name="type" label="项目类别" inputType="text">
+                    <statusType fieldName="level">
+                        <item label="美术" value="1"/>
+                        <item label="技艺" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
+            <does>
                 <do name="plistTenant" access="" label="传承人">
                     <query name="master" label="传承人" type="auto" orderBy="id:desc" groupby="type">
                         <condition name="status" defaultValue="0" operation="ne"/>
@@ -305,14 +323,8 @@
                     </query>
                 </do>
             </does>
-            <does>
-                <do name="plistProject" access="" label="项目">
-                    <query name="master" label="传承人" type="auto" orderBy="id:desc" groupby="type">
-                        <condition name="status" defaultValue="0" operation="ne"/>
-                        <!--<groupby name="type" key="" gtype=""/>-->
-                    </query>
-                </do>
-            </does>
         </entity>
+
+
     </entities>
 </module>
