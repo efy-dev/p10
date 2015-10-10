@@ -40,13 +40,13 @@
         <div class="am-form-group">
             <label name="name" for="user-name" class="am-u-sm-3 am-form-label">项目名称 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}" required>
+                <input type="text" name="name" id="user-name" placeholder="项目名称" value="${object.name}" >
             </div>
         </div>
         <div class="am-form-group">
             <label name="serial" for="serial" class="am-u-sm-3 am-form-label">项目编号 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}" required>
+                <input type="text" name="serial" id="serial" placeholder="项目编号" value="${object.serial}" >
             </div>
         </div>
         <div id="pcdDiv">
@@ -91,7 +91,7 @@
                        </c:if>
                 </span>
                 <input type="file" id="picture_url" name="picture_url" placeholder="picture_url"
-                       value="${object.picture_url}" required>
+                       value="${object.picture_url}" >
             </div>
 
 
@@ -105,7 +105,7 @@
                        </c:if>
                 </span>
                     <input type="file" id="picture_wap_url" name="picture_wap_url" placeholder="picture_wap_url"
-                           value="${object.picture_wap_url}" required>
+                           value="${object.picture_wap_url}" >
                 </div>
 
         </div>
@@ -113,7 +113,7 @@
             <label name="type" for="description" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">
                 <%--<textarea id="content" name="content"  style="overflow-y: scroll"><c:if test="${!empty projectContent.content}">${projectContent.content}</c:if></textarea>--%>
-                  <textarea id="description" name="description" class="ckeditor" placeholder="项目内容" required >
+                  <textarea id="description" name="description" class="ckeditor" placeholder="项目内容"  >
                       ${object.description}
                 </textarea>
             </div>
