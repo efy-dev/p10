@@ -87,7 +87,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td width="111"><span class="moneycl">${product.productModel.price.intValue()}</span></td>
+                            <td width="111"><span class="moneycl">${product.productModel.price}</span></td>
                             <td width="129">
                                 <div class="control-pd">
                                     <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
@@ -221,8 +221,6 @@
             cartProductId: cartProductId
         };
         var success = function (data) {
-            console.log(data);
-            console.log($("#" + cartProductId + "Amount"));
             $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
