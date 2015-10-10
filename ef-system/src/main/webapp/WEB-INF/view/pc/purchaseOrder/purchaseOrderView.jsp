@@ -88,11 +88,13 @@
                 </td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3">${object.total}</td>
+                <td class="am-primary am-u-md-3">订单总额(元)</td>
+                <td class="am-u-md-3">
+                    <fmt:formatNumber type="number" value="${object.total}" maxFractionDigits="2" minFractionDigits="2"/>
+                </td>
 
-                <td class="am-primary am-u-md-3">实付金额</td>
-                <td class="am-u-md-3">${object.getRealPayMoney()}</td>
+                <td class="am-primary am-u-md-3">实付金额(元)</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
             </tr>
             <tr>
@@ -134,8 +136,8 @@
                 </td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">账户余额</td>
-                <td class="am-u-md-3">${consumer.deposit}</td>
+                <td class="am-primary am-u-md-3">账户余额(元)</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${consumer.deposit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
             </tr>
@@ -161,7 +163,7 @@
                 <th class="table-title">产品名字</th>
                 <th class="table-title">购买个数</th>
                 <th class="table-title">产品编号</th>
-                <th class="table-title">产品单价</th>
+                <th class="table-title">产品单价(元)</th>
             </tr>
             </thead>
             <tbody>
@@ -174,7 +176,7 @@
                             alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.price}</td>
+                    <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.product.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -216,7 +218,7 @@
                 <th class="table-title">支付方式</th>
                 <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
-                <th class="table-title">支付详情(支付方式/金额)</th>
+                <th class="table-title">支付详情(支付方式/金额(元))</th>
                 <th class="table-title">支付者姓名</th>
                 <th class="table-title">支付时间</th>
             </tr>
@@ -229,7 +231,7 @@
                                     checkedValue="${purchaseOrderPayment.payWay}"
                                     type="normal"/>
                 </td>
-                <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
+                <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderPayment.status"
                                     checkedValue="${purchaseOrderPayment.status}"
@@ -241,7 +243,7 @@
 
                             <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
                                             checkedValue="${purchaseOrderPaymentDetails.payWay}"
-                                            type="normal"/> : ${purchaseOrderPaymentDetails.money}
+                                            type="normal"/> : <fmt:formatNumber type="number" value="${purchaseOrderPaymentDetails.money}" maxFractionDigits="2" minFractionDigits="2"/>
                         <br>
                         优惠券编号：${purchaseOrderPaymentDetails.coupon.serial}
                     <br>

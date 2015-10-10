@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title></title>
@@ -30,7 +31,7 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
-                <td class="am-u-md-3">${object.deposit}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.deposit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">积分</td>
                 <td class="am-u-md-3">${object.score}</td>
             </tr>
