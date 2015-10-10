@@ -83,9 +83,9 @@
       </table>
     </div>
     <!-- //End--title-->
-    <div class="list-pro wh1">
-      <table></table>
-    </div>
+    <%--<div class="list-pro wh1">--%>
+      <%--<table></table>--%>
+    <%--</div>--%>
     <div class="list-pro wh1" id="orderNum">
       <c:forEach items="${orderList}" var="order">
         <%--<c:if test="${order.subPurchaseOrder == null || order.subPurchaseOrder.size() != 0}">--%>
