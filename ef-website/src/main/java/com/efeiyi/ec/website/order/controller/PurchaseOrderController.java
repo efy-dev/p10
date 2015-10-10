@@ -407,7 +407,8 @@ public class PurchaseOrderController extends BaseController {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
-        cartProduct.setAmount(1);
+        String amount = request.getParameter("amount");
+        cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
