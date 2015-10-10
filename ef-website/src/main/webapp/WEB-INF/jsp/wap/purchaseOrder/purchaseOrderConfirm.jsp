@@ -96,7 +96,7 @@
                     </c:forEach>
                 </ul>
                 <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4"
-                                              placeholder="给卖家留言"></textarea></div>
+                                              placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
 
