@@ -101,8 +101,12 @@ public class ProductController extends BaseController {
     @ResponseBody
     public String uploadProductImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String data = "";
-        String productId = request.getParameter("productId");
-        Product product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
+        String productId = "";
+        Product product = null;
+        if(request.getParameter("trueUrl")==null||"".equals(request.getParameter("trueUrl"))) {
+            productId = request.getParameter("productId");
+            product = (Product) baseManager.getObject(Product.class.getTypeName(), productId);
+        }
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
@@ -118,21 +122,39 @@ public class ProductController extends BaseController {
             String hz = fileName.substring(fileName.indexOf("."),fileName.length());
             String imgName = fileName.substring(0, fileName.indexOf(hz));
             url = "product/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
-            try {
+            if(request.getParameter("trueUrl")!=null&&!"".equals(request.getParameter("trueUrl"))){
+                url = request.getParameter("trueUrl");
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
-                productPicture.setPictureUrl(url);
-                productPicture.setStatus(request.getParameter("status"));
-                productPicture.setProduct(product);
-                baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                data = productPicture.getId() + ":" + url+":"+imgName;
-            } catch (Exception e) {
-                e.printStackTrace();
+            }else {
+                try {
+                    aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+                    productPicture.setPictureUrl(url);
+                    productPicture.setStatus(request.getParameter("status"));
+                    productPicture.setProduct(product);
+                    baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
+                    data = productPicture.getId() + ":" + url + ":" + imgName;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }
         System.out.print(url);
         return data;
 
+
+    }
+
+
+    @RequestMapping({"/changeImg.do"})
+    public String uploadMasterNewsPicture(MultipartRequest multipartRequest,String trueUrl,String changeImgUrl, HttpServletRequest request) throws Exception {
+
+        MultipartFile multipartFile = multipartRequest.getFile("changeFile");
+
+        boolean result = aliOssUploadManager.uploadFile(multipartFile, "ec-efeiyi", trueUrl);
+
+
+        return changeImgUrl;
 
     }
 
