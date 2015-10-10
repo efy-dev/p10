@@ -237,7 +237,6 @@
     <div class="wh detail" id="detail">
         <div class="wh title"><h3>商品详情</h3></div>
         <div class="wh part">
-
             <%--<div class="wh part">--%>
             ${product.productDescription.content}
             <div class="discuss">
@@ -247,6 +246,7 @@
                     <div class="dis-ul">
                         <ul>
                             <li>
+                                <c:if test="${not empty purchaseOrderProductList}">
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
                                     <div class="txt">
@@ -261,7 +261,8 @@
                                     <div class="user"><i
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
                                     </div>
-                                </c:forEach>
+                                 </c:forEach>
+                                    </c:if>
                             </li>
                         </ul>
                     </div>
