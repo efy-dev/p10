@@ -32,7 +32,7 @@
             font-size: 1.2rem;
              background: #000;
         }
-        .add-ress-icon{width: 1.5rem;height: 1.5rem;position:fixed;right: 28px;top:105px;display: block;background: url("<c:url value="/scripts/wap/images/myorderps.png"/>")no-repeat;}
+        .add-ress-icon{width: 1.5rem;height: 1.5rem;position:absolute;right: -29px;top:8px;display: block;background: url("<c:url value="/scripts/wap/images/myorderps.png"/>")no-repeat;}
     </style>
 </head>
 <body>
@@ -96,7 +96,7 @@
                     </c:forEach>
                 </ul>
                 <div class="bd ask"><textarea name="message" id="${tenant.id}Message" cols="30" rows="4"
-                                              placeholder="给卖家留言"></textarea></div>
+                                              placeholder="给卖家留言(如需开具发票，请在此输入开票信息)"></textarea></div>
             </div>
         </c:forEach>
 
