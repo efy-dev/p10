@@ -56,6 +56,22 @@
 
     <tag>
         <description>type:normal ,select , radio</description>
+        <name>radioSet</name>
+        <tag-class>com.ming800.core.taglib.RadioSetTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>valueSet</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>onclick</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <description>type:normal ,select , radio</description>
         <name>status</name>
         <tag-class>com.ming800.core.taglib.StatusTag</tag-class>
         <body-content>empty</body-content>
@@ -446,7 +462,6 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
-
 
 
 </taglib>

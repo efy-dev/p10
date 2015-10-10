@@ -38,8 +38,8 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public String alipay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
-
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, purchaseOrderPaymentDetails.getMoney().intValue() * 100, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, price.intValue(), purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
 //        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.ALI_WEB, 1, purchaseOrderPaymentDetails.getId(), "非遗产品", null, "http://www2.efeiyi.com/order/paysuccess/" + purchaseOrderPaymentDetails.getId(), null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             System.out.println(bcPayResult.getHtml());
@@ -76,9 +76,8 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount, String openid) {
-
-
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, purchaseOrderPaymentDetails.getMoney().intValue() * 100, purchaseOrderPaymentDetails.getId() + "", "非遗产品", null, null, openid, null, null);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_JSAPI, price.intValue(), purchaseOrderPaymentDetails.getId() + "", "非遗产品", null, null, openid, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             JSONObject jsonObject = JSONObject.fromObject(bcPayResult.getWxJSAPIMap());
             return jsonObject;
