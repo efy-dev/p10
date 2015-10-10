@@ -200,163 +200,15 @@
     <div class="l-f-right">
       <div class="f-right-gy ae">
         <div class="h4"><span>热门工艺</span></div>
-        <ul class="gy-grounp ae">
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
+        <ul class="gy-grounp ae" id="hot">
+
         </ul>
-        <div class="f-r-gd ae"><a href="#"><span>更多工艺</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="#" onclick="getMoreHotProject()"><span>更多工艺</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>新加入工艺</span></div>
-        <ul class="gy-grounp ae">
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
-          <li>
-            <div class="text">
-              <p class="p1">铜雕</p>
-              <p class="p2">国家级非物质文化遗产</p>
-            </div>
-            <div class="bt-gz">
-              <a href="#">
-                <i class="gz-icon"></i>
-                <em>关注</em>
-              </a>
-            </div>
-            <div class="img-q">
-              <a href="#"><img src="../shop2015/upload/110206jpg-02.png"></a>
-            </div>
-          </li>
+        <ul class="gy-grounp ae" id="new">
+
         </ul>
       </div>
     </div>
@@ -409,6 +261,8 @@
 
   $(document).ready(function(){
     getData(object,"<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
+    getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+    getData3("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
   });
 
   function getData(e,url){
@@ -455,7 +309,7 @@
                    "<p style='height:112px;overflow: hidden'>"+data[i].description+"</p> " +
                    "<div class=\"text3\"><span>"+data[i].works+" 件作品</span>" +
                    "<span>"+data[i].masters+"位大师</span></div> " +
-                   "<a href=\"#\" class=\"text4\"><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "<a href=\"#\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
                    "</dd> </dl> </li> ");
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
@@ -479,7 +333,116 @@
       }
     })
   }
+  function getData2(url){
+    var flag = false;
+    $.ajax({
+      type:"get",//设置get请求方式
+      url:url+StartNum2,//设置请求的脚本地址
+      data:"",//设置请求的数据
+      async:true,
+      dataType:"json",//设置请求返回的数据格式
+      success:function(data){
+        var pubu = $("#hot");
+        if(data && data.length>=1){
+          for(i in data){
+            var levelName="";
+            switch(data[i].level)
+            {
+              case "1":levelName="国家级非物质文化遗产";break;
+              case "2":levelName="省级非物质文化遗产";break;
+              case "3":levelName="市级非物质文化遗产";break;
+              default:levelName="县级非物质文化遗产";
+            }
+            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var word ="";
+            if(isA==true){
+              word="取消关注";
+            }else{
+              word="关注";
+            }
 
+            var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<img src=\""+data[i].picture_url+"\"></a> </div>");
+            pubu.append(box);
+
+            //PBL("#beforeAttention",".before",2);
+          }
+
+        }else{
+          flag = true;
+        }
+
+        StartNum2=StartNum2+1;
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if(flag==true) {
+          ajaxkey = false;
+        }
+      }
+    })
+  }
+  function getData3(url){
+    var flag = false;
+    $.ajax({
+      type:"get",//设置get请求方式
+      url:url+StartNum2,//设置请求的脚本地址
+      data:"",//设置请求的数据
+      async:true,
+      dataType:"json",//设置请求返回的数据格式
+      success:function(data){
+        var pubu = $("#new");
+        if(data && data.length>=1){
+          for(i in data){
+            var levelName="";
+            switch(data[i].level)
+            {
+              case "1":levelName="国家级非物质文化遗产";break;
+              case "2":levelName="省级非物质文化遗产";break;
+              case "3":levelName="市级非物质文化遗产";break;
+              default:levelName="县级非物质文化遗产";
+            }
+            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var word ="";
+            if(isA==true){
+              word="取消关注";
+            }else{
+              word="关注";
+            }
+
+            var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<img src=\""+data[i].picture_url+"\"></a> </div>");
+            pubu.append(box);
+
+            //PBL("#beforeAttention",".before",2);
+          }
+
+        }else{
+          flag = true;
+        }
+
+        StartNum2=StartNum2+1;
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if(flag==true) {
+          ajaxkey = false;
+        }
+      }
+    })
+  }
   //判断:当前元素是否是被筛选元素的子元素
   $.fn.isChildOf = function(b){
     return (this.parents(b).length > 0);
@@ -531,6 +494,7 @@
 
   function saveProjectFllow(projectId){
     var oper = $("#"+projectId).attr("about");
+    var mark = false;
     $.ajax({
       type:"get",
       url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
@@ -544,10 +508,12 @@
         }
         if(data=="true"){
           $("#"+projectId).html("取消关注");
+          mark = true;
           return true;
         }
         if(data=="del"){
           $("#"+projectId).html("关注");
+          mark = true;
           return true;
         }
         if(data=="error"){
@@ -561,12 +527,13 @@
         return false;
       },
       complete:function(){
-        if(oper=="add"){
+        if(oper=="add" &&  mark == true){
           var val = $("#"+projectId).attr("about","del");
         }
-        if(oper=="del"){
+        if(oper=="del" &&  mark == true){
           var val = $("#"+projectId).attr("about","add");
         }
+
       }
     });
   }
@@ -625,7 +592,11 @@
 
   }
 
-
+  function getMoreHotProject(){
+   if(ajaxkey == true){
+     getData2("<c:url value='/pc/projectClassifyj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=6&pageEntity.index='/>");
+   }
+ }
 
 
   //判断请求数据的开关
@@ -640,6 +611,7 @@
   //存储开始请求数据条数的位置
   var getStartNum = 0;
   var StartNum = 1;
+  var StartNum2 = 1;
   var ajaxkey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
   var ajaxkey2 = true;
   var isAttention = false;

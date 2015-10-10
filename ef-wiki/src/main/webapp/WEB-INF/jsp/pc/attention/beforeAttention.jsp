@@ -311,6 +311,7 @@
 
   function saveProjectFllow(projectId){
    var oper = $("#"+projectId).attr("about");
+    var mark = false;
     $.ajax({
       type:"get",
       url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
@@ -324,10 +325,12 @@
         }
         if(data=="true"){
           $("#"+projectId).html("取消关注");
+          mark = true;
           return true;
         }
         if(data=="del"){
           $("#"+projectId).html("关注");
+          mark = true;
           return true;
         }
         if(data=="error"){
@@ -341,10 +344,10 @@
         return false;
       },
       complete:function(){
-        if(oper=="add"){
+        if(oper=="add" &&  mark == true){
           var val = $("#"+projectId).attr("about","del");
         }
-        if(oper=="del"){
+        if(oper=="del" &&  mark == true){
           var val = $("#"+projectId).attr("about","add");
         }
       }

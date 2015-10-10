@@ -432,6 +432,7 @@
 
     function saveProjectFllow(projectId){
       var val = $("#saveProjectFllow").val();
+      var mark = false;
       var oper;
       if(val=='0'){
         oper="del";
@@ -450,10 +451,12 @@
           }
           if(data=="true"){
             $("#"+projectId).html("取消关注");
+            mark = true;
             return true;
           }
           if(data=="del"){
             $("#"+projectId).html("关注");
+            mark = true;
             return true;
           }
           if(data=="error"){
@@ -467,10 +470,10 @@
           return false;
         },
         complete:function(){
-          if(oper=="0"){
+          if(oper=="0" &&  mark == true){
             var val = $("#saveProjectFllow").val("1");
           }
-          if(oper=="1"){
+          if(oper=="1" &&  mark == true){
             var val = $("#saveProjectFllow").val("0");
           }
 
