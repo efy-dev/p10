@@ -85,7 +85,7 @@
         <a class="btn-default" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes" title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy" title="立即购买">缺货</a>
+            <a class="btn-buy" title="售罄">售罄</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
             <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
