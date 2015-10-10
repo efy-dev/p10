@@ -110,6 +110,12 @@ public class HomeController {
 //    }
 
 
+    @RequestMapping({"/test.do"})
+    public String test(){
+        return "/test";
+    }
+
+
 
 
 }
