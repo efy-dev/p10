@@ -127,19 +127,48 @@ public class WikiDynamicController extends WikibaseController {
 
     public ProjectModel projectConvertprojectModel(Project project)  {
         ProjectModel projectModel = new ProjectModel();
-        projectModel.setCreateDateTime(project.getCreateDateTime());
-        projectModel.setAddressDistrict(project.getAddressDistrict().getAddressCity().getAddressProvince().getName());
-        projectModel.setDescription(project.getDescription());
-        projectModel.setFsAmount(project.getFsAmount());
-        projectModel.setLevel(project.getLevel());
-        projectModel.setMasters(project.getMasterProjects().size());
-        projectModel.setPicture_url(project.getPicture_url());
-        projectModel.setPicture_wap_url(project.getPicture_wap_url());
-        projectModel.setProjectId(project.getId());
-        projectModel.setProjectName(project.getName());
-        projectModel.setWorks(project.getProductList().size());
+        if (project!=null){
+            projectModel.setCreateDateTime(project.getCreateDateTime() == null ? new Date (): project.getCreateDateTime());
+            projectModel.setAddressDistrict(project.getAddressDistrict().getAddressCity().getAddressProvince().getName()==null?"":project.getAddressDistrict().getAddressCity().getAddressProvince().getName());
+            projectModel.setDescription(project.getDescription()==null?"":project.getDescription());
+            projectModel.setFsAmount(project.getFsAmount()==null?0l:project.getFsAmount());
+            projectModel.setLevel(project.getLevel()==null?"":project.getLevel());
+            projectModel.setMasters((long)project.getMasterProjects().size());
+            projectModel.setPicture_url(project.getPicture_url()==null?"":project.getPicture_url());
+            projectModel.setPicture_wap_url(project.getPicture_wap_url()==null?"":project.getPicture_wap_url());
+            projectModel.setProjectId(project.getId()==null?"":project.getId());
+            projectModel.setProjectName(project.getName()==null?"":project.getName());
+            projectModel.setWorks((long)project.getProductList().size());
+        }
+
 
         return projectModel;
+    }
+
+   //关注后
+    @RequestMapping("/afterAttention.do")
+    public ModelAndView getAfterAttention(HttpServletRequest request, Model model) throws Exception {
+        //轮播图
+        List<Object> bannerList = getBanners();
+        model.addAttribute("bannerList", bannerList);
+
+        //关注前or关注后
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
+            query3.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> projectFolloweds = baseManager.listObject(query3);
+            if (projectFolloweds.size() >= 5) {
+                model.addAttribute("isShow", "ok");
+            } else {
+                model.addAttribute("isShow", "no");
+            }
+            model.addAttribute("fsAmount", projectFolloweds.size());
+        } else {
+            model.addAttribute("isShow", "no");
+            model.addAttribute("fsAmount", "0");
+        }
+
+        return new ModelAndView("/attention/afterAttention");
     }
 
 }

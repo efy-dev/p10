@@ -73,10 +73,10 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
                 <td class="am-primary am-u-md-3">实付金额</td>
-                <td class="am-u-md-3">${object.purchaseOrder.getRealPayMoney()}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
             </tr>
             <tr>
@@ -93,7 +93,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3" colspan="3">
-                    <fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                    <fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/>
                 </td>
             </tr>
             </tbody>

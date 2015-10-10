@@ -176,7 +176,7 @@
                 <c:if test="${productModel.amount > 0}">
                     <a id="modelId" class="btn btn-append"
                       onclick="addCart('${productModel.id}')"  title="放入购物车" dis>放入购物车</a>
-                    <a class="btn btn-buy" href="<c:url value="/order/easyBuy/${productModel.id}"/>"
+                    <a class="btn btn-buy" onclick="immediateBuy('${productModel.id}')"
                        title="立即购买">立即购买</a>
                 </c:if>
                 <%--<a class="btn btn-append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车">放入购物车</a>--%>
@@ -227,7 +227,7 @@
             <!-- //End-->
             <div class="btns">
                 <c:if test="${productModel.amount > 0}">
-                    <a class="buy" href="/order/easyBuy/${productModel.id}" title="立即购买">立 即 购 买</a>
+                    <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
                     <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>
                 </c:if>
@@ -237,7 +237,6 @@
     <div class="wh detail" id="detail">
         <div class="wh title"><h3>商品详情</h3></div>
         <div class="wh part">
-
             <%--<div class="wh part">--%>
             ${product.productDescription.content}
             <div class="discuss">
@@ -247,10 +246,11 @@
                     <div class="dis-ul">
                         <ul>
                             <li>
+                                <c:if test="${not empty purchaseOrderProductList}">
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
                                     <div class="txt">
-                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
+                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.content!=null}">
                                             ${purchaseOrderProduct.purchaseOrderComment.content}
                                         </c:if>
                                     </div>
@@ -261,7 +261,8 @@
                                     <div class="user"><i
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
                                     </div>
-                                </c:forEach>
+                                 </c:forEach>
+                                    </c:if>
                             </li>
                         </ul>
                     </div>
@@ -370,6 +371,10 @@
     function addCart(o){
         var t = document.getElementById("value").value;
         window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t;
+    }
+    function immediateBuy(o){
+        var t = document.getElementById("value").value;
+        window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;
     }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
