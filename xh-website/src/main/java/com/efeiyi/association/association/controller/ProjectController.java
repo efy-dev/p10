@@ -44,6 +44,7 @@ public class ProjectController {
         modelMap.addAttribute("type", type);
         return new ModelAndView("heritageProject/project");
     }
+
     @RequestMapping("/project.master.do")
     public ModelAndView getMasterProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
@@ -95,7 +96,7 @@ public class ProjectController {
         for (MasterProject masterProject : list) {
             try {
                 map.put(masterProject.getProject().getType(), masterProject);
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 continue;
             }
         }
@@ -122,7 +123,7 @@ public class ProjectController {
         return list;
     }
 
-    @RequestMapping({"/projectMaster.List.do","/project.List.do"})
+    @RequestMapping({"/projectMaster.List.do", "/project.List.do"})
     public List<Object> getMasterProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
@@ -147,12 +148,12 @@ public class ProjectController {
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         List<QueryCondition> originList = tempDoQuery.getConditionList();
 
-        if (!"-1".equals(type)) {
+        if (type != null && !"-1".equals(type)) {
             QueryCondition condition = new QueryCondition();
-            BeanUtils.copyProperties(condition,originList.get(0));
-            if("plistTenant_default".equals(qm)){
+            BeanUtils.copyProperties(condition, originList.get(0));
+            if ("plistTenant_default".equals(qm)) {
                 condition.setName("project.type");
-            }else if("plistProject_default".equals(qm)){
+            } else if ("plistProject_default".equals(qm)) {
                 condition.setName("type");
             }
             condition.setValue(type);
@@ -164,13 +165,13 @@ public class ProjectController {
         }
         List<QueryCondition> firstList = tempDoQuery.getConditionList();
 
-        if (!"-1".equals(provinceId)) {
+        if (provinceId != null && !"-1".equals(provinceId)) {
             QueryCondition condition = new QueryCondition();
-            BeanUtils.copyProperties(condition,originList.get(0));
+            BeanUtils.copyProperties(condition, originList.get(0));
 
-            if("plistTenant_default".equals(qm)) {
+            if ("plistTenant_default".equals(qm)) {
                 condition.setName("project.addressDistrict.addressCity.addressProvince.id");
-            }else if("plistProject_default".equals(qm)){
+            } else if ("plistProject_default".equals(qm)) {
                 condition.setName("addressDistrict.addressCity.addressProvince.id");
             }
             condition.setValue(provinceId);
@@ -221,30 +222,16 @@ public class ProjectController {
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 //        List<QueryCondition> originList = tempDoQuery.getConditionList();
 //
-//        if (!"-1".equals(type)) {
-//            QueryCondition condition = new QueryCondition();
-//            BeanUtils.copyProperties(condition,originList.get(0));
-//            condition.setName("type");
-//            condition.setValue(type);
-//            condition.setOperation("eq");
+//        QueryCondition condition = new QueryCondition();
+//        BeanUtils.copyProperties(condition, originList.get(0));
+//        condition.setName("picture_url");
+//        condition.setValue("");
+//        condition.setOperation("ne");
 //
-//            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
-//            tempDoQuery.getConditionList().addAll(originList);
-//            tempDoQuery.getConditionList().add(condition);
-//        }
-//        List<QueryCondition> firstList = tempDoQuery.getConditionList();
-//
-//        if (!"-1".equals(provinceId)) {
-//            QueryCondition condition = new QueryCondition();
-//            BeanUtils.copyProperties(condition,originList.get(0));
-//            condition.setName("addressDistrict.addressCity.addressProvince.id");
-//            condition.setValue(provinceId);
-//            condition.setOperation("eq");
-//
-//            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
-//            tempDoQuery.getConditionList().addAll(firstList);
-//            tempDoQuery.getConditionList().add(condition);
-//        }
+//        tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+//        tempDoQuery.getConditionList().addAll(originList);
+//        tempDoQuery.getConditionList().add(condition);
+
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("tabTitle", tempDoQuery.getLabel());
         modelMap.put("pageInfo", pageInfo);
