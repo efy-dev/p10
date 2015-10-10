@@ -67,7 +67,7 @@
     </div>
   </div>
 </c:if>
-<c:if test="${order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13}">
+<c:if test="${order.orderStatus == 7 or order.orderStatus == 9 or order.orderStatus == 13}">
   <div class="line-item">
     <div class="address">
       <p><span>${order.consumerAddress.consignee}</span><span>${order.consumerAddress.phone}</span></p>

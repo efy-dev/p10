@@ -272,7 +272,7 @@ a:hover{text-decoration: underline}
 .my-favorite .goods-list .list-number li dd{width: 150px;}
 .my-favorite .goods-list .list-number li dd .list-title{overflow: hidden}
 .my-favorite .goods-list .list-number li dd .list-title dt{width: 28px;float: left}
-.my-favorite .goods-list .list-number li dd .list-title dd{width: 122px;float: left;overflow: hidden;font-size: 12px;font-family: "宋体";color: #666;}
+.my-favorite .goods-list .list-number li dd .list-title dd{width: 150px;float: left;overflow: hidden;font-size: 12px;font-family: "宋体";color: #666;}
 .my-favorite .list-cost{text-align: right;color: #000;height: 35px;line-height: 35px;}
 .my-favorite .list-cost span{color: #ff0000}
 .my-favorite .list-option a{color: #0e3976;font-size: 12px;}

@@ -61,9 +61,16 @@
                         <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/pay/${purchaseOrder.id}"/>">立即支付</a></li>
                     </ul>
                 </c:if>
-                <c:if test="${purchaseOrder.orderStatus == '5'} || ${purchaseOrder.orderStatus == '7'}">
+                <c:if test="${purchaseOrder.orderStatus == '5'}">
                     <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">待收货</li>
+                        <li class="am-u-sm-2 jp-pd-r">未发货</li>
+                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+                    </ul>
+                </c:if>
+                <c:if test="${purchaseOrder.orderStatus == '7'}">
+                    <ul class="jp-pd">
+                        <li class="am-u-sm-2 jp-pd-r">已发货</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
                         <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a></li>
                     </ul>
@@ -79,7 +86,14 @@
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">已取消</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>"></a></li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+                    </ul>
+                </c:if>
+                <c:if test="${purchaseOrder.orderStatus == '9'}">
+                    <ul class="jp-pd">
+                        <li class="am-u-sm-2 jp-pd-r">未评价</li>
+                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
                     </ul>
                 </c:if>
                 <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
