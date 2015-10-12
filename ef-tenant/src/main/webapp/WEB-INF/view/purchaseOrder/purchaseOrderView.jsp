@@ -48,7 +48,7 @@
                 </td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
+                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="yyy-MM-dd hh:mm"/>
                 </td>
 
             </tr>
@@ -203,7 +203,7 @@
                     <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                     <td class="am-hide-sm-only">
                         <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
+                                        pattern="yyy-MM-dd hh:mm"/>
                     </td>
                 </tr>
 
@@ -263,9 +263,11 @@
                     </td>
                     <td class="am-hide-sm-only">
                         <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
+                                        pattern="yyy-MM-dd hh:mm"/>
                     </td>
-                    <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                    <td class="am-hide-sm-only">
+                            ${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
