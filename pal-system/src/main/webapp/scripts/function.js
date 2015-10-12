@@ -209,7 +209,6 @@ function myConfirm(url, type){
             }
         },
         onCancel: function() {
-            alert('算求，不弄了');
         }
     });
 }

@@ -98,6 +98,7 @@
             <thead>
             <tr>
                 <th class="table-set">图片</th>
+                <th class="table-set">规格</th>
                 <th class="table-title">商品编号</th>
                 <th class="table-title">单价(元)</th>
                 <th class="table-title">数量</th>
@@ -115,6 +116,9 @@
                         <a href="<c:url value="/basic/xm.do?qm=viewPurchaseOrderProduct&view=${view}&id=${purchaseOrderProduct.id}"/>">
                                 ${purchaseOrderProduct.productModel.product.name}
                         </a>
+                    </td>
+                    <td>
+                            ${purchaseOrderProduct.productModel.name}
                     </td>
                     <td>
                             ${purchaseOrderProduct.productModel.serial}

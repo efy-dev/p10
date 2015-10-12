@@ -39,7 +39,7 @@
     <!-- //End--pep-info-->
     <div class="bd btns">
       <c:if test="${productModel.amount<=0}">
-        <a class="not-btn-buy" href="#缺 货">缺 货</a>
+        <a class="not-btn-buy" href="#售 罄">售 罄</a>
       </c:if>
     </div>
     <div class="bd btns">

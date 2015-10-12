@@ -34,6 +34,23 @@
                 </td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">规格</td>
+                <td class="am-u-md-3" colspan="3">${object.productModel.name}</td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">属性</td>
+                <td class="am-u-md-3" colspan="3">
+                    <c:if test="${object.productModel.status == 1}">
+                        <c:forEach var="ProductProperty" items="${object.productModel.productPropertyValueList}">
+                            ${ProductProperty.projectPropertyValue.value}
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${object.productModel.status == 2}">
+                        ${object.productModel.customProperty}
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
                 <td class="am-primary am-u-md-3">描述</td>
                 <td class="am-u-md-3" colspan="3">
                         ${object.productModel.product.productDescription.content}

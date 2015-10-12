@@ -161,6 +161,7 @@
             <thead>
             <tr>
                 <th class="table-title">产品名字</th>
+                <th class="table-title">规格</th>
                 <th class="table-title">购买个数</th>
                 <th class="table-title">产品编号</th>
                 <th class="table-title">产品单价(元)</th>
@@ -174,6 +175,7 @@
                             width="20px"
                             src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!product-model"
                             alt="产品图片"></td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
                     <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
