@@ -19,7 +19,7 @@
     <div class="wh">
         <ol class="am-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="javascript:window.history.back()">分类</a></li>
+            <li><a href="/product/list/${project.id}">分类</a></li>
             <li class="am-active">内容</li>
         </ol>
     </div>
@@ -239,18 +239,19 @@
         <div class="wh part">
             <%--<div class="wh part">--%>
             ${product.productDescription.content}
-            <div class="discuss">
+                <c:if test="${not empty purchaseOrderProductList}">
+             <div class="discuss">
                 <div class="title" id="title"><h3>商品评价</h3></div>
                 <div class="dis-con">
                     <div class="dis-title">用户印象：</div>
                     <div class="dis-ul">
                         <ul>
                             <li>
-                                <c:if test="${not empty purchaseOrderProductList}">
+                                <%--<c:if test="${not empty purchaseOrderProductList}">--%>
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
                                     <div class="txt">
-                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.content!=null}">
+                                        <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
                                             ${purchaseOrderProduct.purchaseOrderComment.content}
                                         </c:if>
                                     </div>
@@ -262,12 +263,14 @@
                                             class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
                                     </div>
                                  </c:forEach>
-                                    </c:if>
+
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
+                </c:if>
         </div>
 </div>
 <div class="scroll-bar">

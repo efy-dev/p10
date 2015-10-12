@@ -21,8 +21,10 @@
           <ul>
             <li>
               <label>用户名</label>
-              <%--<input type="text" name="username" value="${user.username}">--%>
-              ${user.username}
+              <c:set  var="ur">
+                ${user.username}
+              </c:set>
+              ${fn:substring(ur, 0,3 )}****${fn:substring(ur,7,11)}
             </li>
             <li>
               <label>昵称</label>
