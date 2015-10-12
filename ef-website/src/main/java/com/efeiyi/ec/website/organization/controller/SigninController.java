@@ -277,7 +277,7 @@ public class   SigninController extends BaseController {
         }
         String unionid = jsonObject.getString("unionid");
         model.addAttribute("unionid", unionid);
-        return "/register";
+        return "/wxRedirect";
     }
 }
 

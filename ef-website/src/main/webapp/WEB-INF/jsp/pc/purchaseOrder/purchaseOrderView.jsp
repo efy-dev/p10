@@ -107,7 +107,9 @@
         <dl class="orderid-mashup bd-top item-list5">
           <dt class="orderid">支付及配送方式</dt>
           <dd class="od-id">
-            <p >支付方式：<span><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/></span></p>
+            <p ><span>支付方式：</span><span ><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/> <strong style="font-size: 12px;color:#ff0000;font-weight: 100">共支付${order.total}元 <c:if test="${!empty order.coupon}">
+              ,优惠券抵扣${order.coupon.consumer.score}元
+            </c:if></strong></p>
             <p>配送方式：<span>普通快递</span></p>
             <p>运费：<span>免运费</span></p>
           </dd>

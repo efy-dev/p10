@@ -160,8 +160,8 @@
     <div am-panel am-panel-default admin-sidebar-panel>
         <table class="am-table am-table-bordered am-table-radius am-table-striped">
             <tr>
-                <c:if test="${object.status == '1' || object.status == '2'}">
-                    <td>操作</td>
+                <c:if test="${tagNFC == 'true'}">
+                <td>操作</td>
                 </c:if>
                 <td>订单编号</td>
                 <td>商品名称</td>
@@ -170,21 +170,29 @@
             </tr>
             <c:forEach items="${object.purchaseOrderLabelList}" var="pol">
                 <tr>
-                    <c:if test="${object.status == '1' || object.status == '2'}">
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
-                                    <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderLabel&order=orderLabel&id=${pol.id}"/>'"
-                                            class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                        <span class="am-icon-edit"></span> 编辑
-                                    </button>
-                                    <button onclick="window.location.href='<c:url value="/purchaseOrderLabel/removePurchaseOrderLabel.do?orderLabelId=${pol.id}"/>'"
-                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                        <span class="am-icon-trash-o"></span> 删除
-                                    </button>
-                                </div>
+                    <c:if test="${tagNFC == 'true'}">
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs" style="width: 100%;" >
+                                <c:if test="${object.status == '1' || object.status == '2'}">
+                                <button onclick="window.location.href='<c:url value="/basic/xm.do?qm=formPurchaseOrderLabel&order=orderLabel&id=${pol.id}"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                                    <span class="am-icon-edit"></span> 编辑
+                                </button>
+                                <button onclick="window.location.href='<c:url value="/purchaseOrderLabel/removePurchaseOrderLabel.do?orderLabelId=${pol.id}"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                                    <span class="am-icon-trash-o"></span> 删除
+                                </button>
+                                </c:if>
+                                <c:if test="${pol.type == '2' && object.status == '9'}">
+                                <button onclick="window.location.href='<c:url value="#"/>'"
+                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
+                                    下载NFC
+                                </button>
+                                </c:if>
                             </div>
-                        </td>
+                        </div>
+                    </td>
                     </c:if>
                     <td>${pol.purchaseOrder.serial}</td>
                     <td>${pol.product.name}</td>

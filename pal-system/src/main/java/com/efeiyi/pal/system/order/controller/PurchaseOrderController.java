@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/17.
+ * PurchaseOrder订单 Controller
  */
 
 @Controller
@@ -39,7 +41,7 @@ public class PurchaseOrderController {
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
     @RequestMapping("/savePurchaseOrder.do")
-    public ModelAndView savePurchaseOrder(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public ModelAndView savePurchaseOrder(HttpServletRequest request) throws Exception {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         String purchaseOrderId = request.getParameter("id");
         String type = "new";
@@ -58,9 +60,9 @@ public class PurchaseOrderController {
 
     /**
      * 订单分配标签
-     * @param modelMap
-     * @param request
-     * @return
+     * @param modelMap 存储返回对象
+     * @param request 获取页面参数
+     * @return ModelAndView 返回对应页面
      * @throws Exception
      */
     @RequestMapping("/deliverGoods.do")
@@ -71,9 +73,9 @@ public class PurchaseOrderController {
             throw new Exception("deliverGoods 订单Id不能为空!");
         }
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        Integer sumProduct = getSumProductAmount(purchaseOrder);
 
-        purchaseOrder = distributeLabelList(purchaseOrder, getLabelListBySumProduct(sumProduct), sumProduct);
+        Map<String, Integer> sumMap = getSumProductAmount(purchaseOrder);
+        purchaseOrder = distributeLabelList(purchaseOrder, getLabelListBySumProduct(sumMap), sumMap);
 
         modelMap.put("object", purchaseOrder);
         String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
@@ -85,9 +87,9 @@ public class PurchaseOrderController {
 
     /**
      * 激活或作废标签
-     * @param modelMap
-     * @param request
-     * @return
+     * @param modelMap 存储返回对象
+     * @param request 获取页面参数
+     * @return ModelAndView 返回对应页面
      * @throws Exception
      */
     @RequestMapping("/activatedOrCancelLabels.do")
@@ -113,39 +115,55 @@ public class PurchaseOrderController {
 
     /**
      * 计算订单中购买的标签数量
-     * @param purchaseOrder
-     * @return
+     * @param purchaseOrder 订单
+     * @return map "sumQR"二维码类型标签个数; "sumNFC"NFC类型标签个数
      */
-    private Integer getSumProductAmount(PurchaseOrder purchaseOrder){
+    private Map<String, Integer> getSumProductAmount(PurchaseOrder purchaseOrder){
+        Map<String, Integer> map = new HashMap<>();
         List<PurchaseOrderLabel> list = purchaseOrder.getPurchaseOrderLabelList();
-        Integer sum = 0;
+        Integer sumNFC = 0;
+        Integer sumQR = 0;
         for (PurchaseOrderLabel pol: list){
-            sum += pol.getAmount();
+            if ("1".equals(pol.getType())){
+                sumQR += pol.getAmount();
+            }else {
+                sumNFC += pol.getAmount();
+            }
         }
-        return sum;
+        map.put("sumQR", sumQR);//二维码标签数量和
+        map.put("sumNFC", sumNFC);//NFC标签数量和
+        return map;
     }
 
     /**
      * 获取购买同等数量的标签
-     * @param sumProduct
-     * @return
+     * @param sumMap "sumQR"二维码类型标签个数; "sumNFC"NFC类型标签个数
+     * @return map "listQR"二维码类型标签集合; "listNFC"NFC类型标签集合
      */
-    private List<Label> getLabelListBySumProduct(Integer sumProduct){
-        List<Label> list = labelServiceManager.getLabelListByMinSerialAndSumProduct(sumProduct);
-        return list;
+    private Map<String, List<Label>> getLabelListBySumProduct(Map<String, Integer> sumMap){
+        Map<String, List<Label>> map = new HashMap<>();
+        List<Label> listQR = labelServiceManager.getLabelListByMinSerialAndSumProduct(sumMap.get("sumQR"), "1");
+        List<Label> listNFC = labelServiceManager.getLabelListByMinSerialAndSumProduct(sumMap.get("sumNFC"), "2");
+        map.put("listQR", listQR);
+        map.put("listNFC", listNFC);
+        return map;
     }
 
     /**
      * 分配标签
-     * @param purchaseOrder
-     * @param labelList
-     * @param sumProduct
+     * @param purchaseOrder 订单
+     * @param listMap "listQR"二维码类型标签集合; "listNFC"NFC类型标签集合
+     * @param sumMap "sumQR"二维码类型标签个数; "sumNFC"NFC类型标签个数
      */
-    private PurchaseOrder distributeLabelList(PurchaseOrder purchaseOrder, List<Label> labelList, Integer sumProduct) throws Exception {
-        if (sumProduct> labelList.size()){
-            throw new Exception("标签库标签数量不足，请联系系统管理员，申请新标签！");
+    private PurchaseOrder distributeLabelList(PurchaseOrder purchaseOrder, Map<String, List<Label>> listMap, Map<String, Integer> sumMap) throws Exception {
+        if (sumMap.get("sumQR") > listMap.get("listQR").size()){
+            throw new Exception("标签库中二维码标签数量不足，请联系系统管理员，申请新标签！");
         }
-        labelServiceManager.distributeLabelList(purchaseOrder, labelList);
+        if (sumMap.get("sumNFC") > listMap.get("listNFC").size()){
+            throw new Exception("标签库中NFC标签数量不足，请联系系统管理员，申请新标签！");
+        }
+
+        labelServiceManager.distributeLabelList(purchaseOrder, listMap);
 
         purchaseOrder.setStatus("9");
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -154,7 +172,7 @@ public class PurchaseOrderController {
 
     /**
      * 获取为订单分配的所有标签
-     * @param purchaseOrder
+     * @param purchaseOrder 订单
      * @return
      */
     private List<Label> getLabelListByOrder(PurchaseOrder purchaseOrder) throws Exception {
@@ -167,7 +185,7 @@ public class PurchaseOrderController {
 
     /**
      * 批量激活或作废订单标签
-     * @param purchaseOrder
+     * @param purchaseOrder 订单
      * @param labels
      * @param type
      * @return
@@ -186,7 +204,7 @@ public class PurchaseOrderController {
 
     /**
      * 订单信息基本内容
-     * @param purchaseOrder
+     * @param purchaseOrder 订单
      * @param request
      * @param type
      * @return
@@ -212,7 +230,7 @@ public class PurchaseOrderController {
 
     /**
      * 订单关联对象
-     * @param purchaseOrder
+     * @param purchaseOrder 订单
      * @param request
      * @return
      */

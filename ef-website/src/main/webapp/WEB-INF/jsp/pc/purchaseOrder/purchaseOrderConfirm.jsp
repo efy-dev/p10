@@ -40,16 +40,16 @@
                                      <form>
                                          <select class="cars" id="province" name="province.id"
                                                  onchange="provinceChange(this)" required>
-                                             <option value="请选择">请选择</option>
+                                             <option value="请选择">请选择所在省市</option>
                                          </select>
                                          <select class="car1" id="city" name="city.id" required>
-                                             <option value="请选择">请选择</option>
+                                             <option value="请选择">请选择所在区县</option>
                                          </select>
                                      </form>
                                  </li>
                                  <li>
                                      <label>详细地址：</label>
-                                     <input type="text" name="details">
+                                     <input style="width: 255px" type="text" name="details">
                                  </li>
                                  <li>
                                      <label>手机号码：</label>
