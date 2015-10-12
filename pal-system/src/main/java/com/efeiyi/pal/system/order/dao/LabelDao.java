@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface LabelDao {
 
-    List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct);
+    List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct, String type);
 
     void saveOrUpdate(String modelType, Object object);
 
