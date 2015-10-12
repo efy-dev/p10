@@ -65,7 +65,7 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
                 continue;
             }
             for (int i=0; i<pol.getAmount(); i++){
-                Label label = listMap.get("sumNFC").get(i+flag);
+                Label label = listMap.get("listNFC").get(i+flag);
                 label.setPurchaseOrderLabel(pol);
                 label.setSeller(purchaseOrder.getTenant());
                 label.setStatus("2");
