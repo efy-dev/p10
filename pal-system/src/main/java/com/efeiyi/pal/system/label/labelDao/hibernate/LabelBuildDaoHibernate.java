@@ -33,6 +33,11 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
         return sessionFactory.getCurrentSession();
     }
 
+    /**
+     * 批量生成二维码标签
+     * @param labelBatch
+     * @throws Exception
+     */
     @Override
     public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception{
         Session session = getSession();//使用同一个session
@@ -44,7 +49,6 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
             new Thread(new Code2UrlConsumer(url2FileConsumer)).start();
         }
         new Thread(url2FileConsumer).start();
-
 //        long begin = System.currentTimeMillis();
         for (int i = 1; i <= num;) {
             String code = RandomStringUtils.randomNumeric(18);
@@ -75,6 +79,45 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
         synchronized (url2FileConsumer.getCodeList()) {
             url2FileConsumer.getCodeList().notifyAll();
         }
+//        System.out.print(System.currentTimeMillis()-begin);
+    }
+
+    /**
+     * 批量生成 NFC标签的防伪码
+     * @param labelBatch
+     * @throws Exception
+     */
+    @Override
+    public void buildLabelSetByLabelBatchNFC(LabelBatch labelBatch) throws Exception {
+        Session session = getSession();//使用同一个session
+        session.setCacheMode(CacheMode.IGNORE);//关闭与二级缓存的交互
+        Integer num = labelBatch.getAmount();
+        int count = 0;
+//        long begin = System.currentTimeMillis();
+        for (int i = 1; i <= num;) {
+            String code = RandomStringUtils.randomNumeric(18);
+            code = Long.toString(Long.parseLong(code), 36);
+            if (code.length() != 12) {
+                continue;
+            }
+            i++;
+            String serial = autoSerialManager.nextSerial("palLabelSerial");
+            Label label = new Label();
+            label.setSerial(serial);
+            label.setCode(code);
+            label.setLabelBatch(labelBatch);
+            label.setPurchaseOrderLabel(null);
+            label.setSeller(null);
+            label.setStatus("1");
+            session.saveOrUpdate(label);
+            count++;
+            if (count == 500) {
+                session.flush();
+                session.clear();
+                count = 0;
+            }
+        }
+        session.flush();
 //        System.out.print(System.currentTimeMillis()-begin);
     }
 

@@ -35,26 +35,28 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">总计（元）</td>
-                <td class="am-u-md-3">${object.total}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
                 <td class="am-primary am-u-md-3">实付金额</td>
-                <td class="am-u-md-3">${object.getRealPayMoney()}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">收货人</td>
                 <td class="am-u-md-3">
-                    ${object.user.name}
+                    ${object.consumerAddress.consignee}
                 </td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
+                    <fmt:formatDate value="${object.createDatetime}" type="both" pattern="yyy-MM-dd hh:mm"/>
                 </td>
 
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">
+                    ${object.consumerAddress.province.name}&nbsp;${object.consumerAddress.city.name}&nbsp;${object.consumerAddress.district.name}&nbsp;${object.consumerAddress.details}
+                </td>
             </tr>
             </tbody>
         </table>
@@ -80,8 +82,8 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
-                <td class="am-u-md-3">${consumer.deposit}</td>
-                <td class="am-primary am-u-md-3">积分</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${consumer.deposit}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
             </tr>
             </tbody>
@@ -98,6 +100,7 @@
             <thead>
             <tr>
                 <th class="table-set">图片</th>
+                <th class="table-set">规格</th>
                 <th class="table-title">商品编号</th>
                 <th class="table-title">单价(元)</th>
                 <th class="table-title">数量</th>
@@ -117,16 +120,19 @@
                         </a>
                     </td>
                     <td>
+                            ${purchaseOrderProduct.productModel.name}
+                    </td>
+                    <td>
                             ${purchaseOrderProduct.productModel.serial}
                     </td>
                     <td>
-                            ${purchaseOrderProduct.productModel.price}
+                        <fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/>
                     </td>
                     <td>
                             ${purchaseOrderProduct.purchaseAmount}
                     </td>
                     <td>
-                            ${purchaseOrderProduct.purchasePrice}
+                        <fmt:formatNumber type="number" value="${purchaseOrderProduct.purchasePrice}" maxFractionDigits="2" minFractionDigits="2"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -166,7 +172,6 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th class="table-title">支付方式</th>
                 <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
                 <th class="table-title">支付详情(支付方式/金额)</th>
@@ -177,12 +182,7 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">
-                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                        checkedValue="${purchaseOrderPayment.payWay}"
-                                        type="normal"/>
-                    </td>
-                    <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
+                    <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                     <td class="am-hide-sm-only">
                         <ming800:status name="status" dataType="purchaseOrderPayment.status"
                                         checkedValue="${purchaseOrderPayment.status}"
@@ -203,7 +203,7 @@
                     <td class="am-hide-sm-only">${purchaseOrderPayment.user.username}</td>
                     <td class="am-hide-sm-only">
                         <fmt:formatDate value="${purchaseOrderPayment.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
+                                        pattern="yyy-MM-dd hh:mm"/>
                     </td>
                 </tr>
 
@@ -263,9 +263,11 @@
                     </td>
                     <td class="am-hide-sm-only">
                         <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
+                                        pattern="yyy-MM-dd hh:mm"/>
                     </td>
-                    <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                    <td class="am-hide-sm-only">
+                            ${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

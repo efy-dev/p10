@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2015/8/19.
+ * 批量生成标签 Service
  */
 
 @Service
@@ -18,7 +19,11 @@ public class LabelBuildServiceImpl implements LabelBuildService {
 
     @Override
     public void buildLabelSetByLabelBatch(LabelBatch labelBatch) throws Exception {
-        labelBuildDao.buildLabelSetByLabelBatch(labelBatch);
+        if ("1".equals(labelBatch.getType())){
+            labelBuildDao.buildLabelSetByLabelBatch(labelBatch);
+        }else {
+            labelBuildDao.buildLabelSetByLabelBatchNFC(labelBatch);
+        }
     }
 
 }
