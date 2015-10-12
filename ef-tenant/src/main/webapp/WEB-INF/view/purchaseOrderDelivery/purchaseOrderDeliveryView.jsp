@@ -87,7 +87,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3" colspan="3">
-                    <fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy:MM:dd hh:mm"/>
+                    <fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/>
                 </td>
             </tr>
             </tbody>

@@ -67,14 +67,17 @@
                         </a>
                         <a class="am-btn am-btn-default am-btn-xs am-text-secondary" style="color: red;" onclick="updateOrderStatus(this,'${purchaseOrder.id}')">
                             <span class="am-icon-pencil-square-o">
-                                <c:if test="${purchaseOrder.orderStatus==1}">
+                               <c:if test="${purchaseOrder.orderStatus==1}">
+                                   等待付款
+                               </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==5}">
                                     立即发货
                                 </c:if>
-                                <c:if test="${purchaseOrder.orderStatus!=1 and purchaseOrder.orderStatus!=17}">
+                                <c:if test="${purchaseOrder.orderStatus==9 or purchaseOrder.orderStatus==13 or purchaseOrder.orderStatus==7}">
                                     已发货
                                 </c:if>
                                  <c:if test="${ purchaseOrder.orderStatus==17}">
-                                     无法发货
+                                     已取消
                                  </c:if>
                             </span>
                         </a>
@@ -212,9 +215,12 @@
                     // alert('不想说!');
                 }
             });
-        }else if(temp == "无法发货"){
+        }else if(temp == "已取消"){
 
-            alert("无法发货!")
+            alert("订单已取消，无法发货!")
+        }else if(temp == "等待付款"){
+
+            alert("等待付款，无法发货!")
         }else{
             alert("已经发货!")
         }

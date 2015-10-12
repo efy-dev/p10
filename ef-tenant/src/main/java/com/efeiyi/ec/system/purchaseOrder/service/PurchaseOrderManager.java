@@ -23,4 +23,6 @@ public interface PurchaseOrderManager {
      */
     String updateOrderStatus(PurchaseOrder purchaseOrder,String serial,String logisticsCompany);
 
+    String updateOrderStatus(PurchaseOrder purchaseOrder);
+
 }
