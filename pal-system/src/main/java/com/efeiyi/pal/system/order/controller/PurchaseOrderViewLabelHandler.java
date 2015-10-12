@@ -28,10 +28,13 @@ public class PurchaseOrderViewLabelHandler implements DoHandler {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
 
         boolean orderTag = false;
+        boolean tagNFC = false;
         if (purchaseOrder != null){
             orderTag = purchaseOrderLabels(purchaseOrder);
+            tagNFC = purchaseOrderLabelsNFC(purchaseOrder);
         }
 
+        modelMap.put("tagNFC", tagNFC);
         modelMap.put("orderTag", orderTag);
         modelMap.put("object", purchaseOrder);
         return modelMap;
@@ -47,4 +50,18 @@ public class PurchaseOrderViewLabelHandler implements DoHandler {
         }
         return false;
     }
+
+    private boolean purchaseOrderLabelsNFC(PurchaseOrder purchaseOrder){
+        List<PurchaseOrderLabel> purchaseOrderLabelList= purchaseOrder.getPurchaseOrderLabelList();
+        for (PurchaseOrderLabel pol: purchaseOrderLabelList){
+            if (pol != null && "2".equals(pol.getType())){
+                return true;
+            }
+        }
+        if ("1".equals(purchaseOrder.getStatus()) || "2".equals(purchaseOrder.getStatus())){
+            return true;
+        }
+        return false;
+    }
+
 }

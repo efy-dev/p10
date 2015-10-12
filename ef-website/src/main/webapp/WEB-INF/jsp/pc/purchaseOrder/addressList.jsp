@@ -45,7 +45,7 @@
                                 </li>
                                 <li>
                                     <label>详细地址：</label>
-                                    <input type="text" name="details">
+                                    <input style="width: 255px;" type="text" name="details">
                                 </li>
                                 <li>
                                     <label>手机号码：</label>
@@ -170,7 +170,7 @@
                                           </li>
                                           <li>
                                               <label>详细地址：</label>
-                                              <input type="text" name="details" value="${address.details}">
+                                              <input style="width: 255px;" type="text" name="details" value="${address.details}">
                                           </li>
                                           <li>
                                               <label>手机号码：</label>
@@ -209,7 +209,7 @@
     function sm(){
         var province=$("#provinceVal").val();
         var city=$("#cityVal").val();
-        if(province=="请选择"||city=="请选择"){
+        if(province == "请选择" || city == "请选择"){
             $("#hao").html("省市不能为空");
         }else {
             $("#addAddress").submit();
@@ -270,7 +270,7 @@
             success: function (data) {
                 var obj = eval(data);
                 var rowHtml = "";
-                rowHtml += "<option value='请选择'>请选择</option>";
+                rowHtml += "<option value='请选择'>请选择所在区县</option>";
                 for (var i = 0; i < obj.length; i++) {
                     rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
                 }
@@ -292,7 +292,7 @@
             success: function (data) {
                 var obj = eval(data);
                 var rowHtml = "";
-                rowHtml += "<option value='请选择'>请选择</option>";
+                rowHtml += "<option value='请选择'>请选择所在省市</option>";
                 for (var i = 0; i < obj.length; i++) {
                     rowHtml += "<option value='" + obj[i].id + "'>" + obj[i].name + "</option>";
 

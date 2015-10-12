@@ -37,6 +37,7 @@
             <td>序列号</td>
             <td>防伪码</td>
             <td>批次序号</td>
+            <td>标签类型</td>
             <td>商品</td>
             <td>商户</td>
             <td>状态</td>
@@ -62,6 +63,9 @@
                 <td><a href="<c:url value='/basic/xm.do?qm=viewLabel&label=view&id=${label.id}'/>">${label.serial}</a></td>
                 <td>${label.code}</td>
                 <td>${label.labelBatch.serial}</td>
+                <td>
+                    <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="${label.labelBatch.type}" type="normal"/>
+                </td>
                 <td>
                     <c:if test="${label.purchaseOrderLabel != null && not empty label.purchaseOrderLabel}">
                         <c:if test="${label.purchaseOrderLabel.product != null && not empty label.purchaseOrderLabel.product}">
