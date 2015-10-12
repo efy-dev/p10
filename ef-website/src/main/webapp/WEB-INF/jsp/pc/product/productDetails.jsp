@@ -19,7 +19,7 @@
     <div class="wh">
         <ol class="am-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="javascript:window.history.back()">分类</a></li>
+            <li><a href="/product/list/${project.id}">分类</a></li>
             <li class="am-active">内容</li>
         </ol>
     </div>

@@ -211,6 +211,7 @@ public class ProductController {
     public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
+        Project project = product.getProject();
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", productModelId);
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
@@ -231,6 +232,7 @@ public class ProductController {
         model.addAttribute("productPicture",productPicture);
         model.addAttribute("productPictures",productPictures);
         model.addAttribute("purchaseOrderProductList",purchaseOrderProductList);
+        model.addAttribute("project",project);
         return "/product/productDetails";
     }
     /**商品收藏状态判断
