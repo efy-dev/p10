@@ -44,7 +44,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">收货人</td>
                 <td class="am-u-md-3">
-                    ${object.user.name}
+                    ${object.consumerAddress.consignee}
                 </td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
@@ -54,7 +54,9 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">
+                    ${object.consumerAddress.province.name}&nbsp;${object.consumerAddress.city.name}&nbsp;${object.consumerAddress.district.name}&nbsp;${object.consumerAddress.details}
+                </td>
             </tr>
             </tbody>
         </table>
@@ -81,7 +83,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">账户余额</td>
                 <td class="am-u-md-3">${consumer.deposit}</td>
-                <td class="am-primary am-u-md-3">积分</td>
+                <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
             </tr>
             </tbody>
@@ -170,7 +172,6 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th class="table-title">支付方式</th>
                 <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
                 <th class="table-title">支付详情(支付方式/金额)</th>
@@ -181,11 +182,6 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
                 <tr>
-                    <td class="am-hide-sm-only">
-                        <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                        checkedValue="${purchaseOrderPayment.payWay}"
-                                        type="normal"/>
-                    </td>
                     <td class="am-hide-sm-only">${purchaseOrderPayment.paymentAmount}</td>
                     <td class="am-hide-sm-only">
                         <ming800:status name="status" dataType="purchaseOrderPayment.status"
