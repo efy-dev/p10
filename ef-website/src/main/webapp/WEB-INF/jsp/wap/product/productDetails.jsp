@@ -88,7 +88,7 @@
             <a class="btn-buy" title="售罄">售罄</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
-            <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
+            <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a class="btn-buy"   href="/order/easyBuy/${productModel.id}?amount=1" title="立即购买">立即购买</a>
         </c:if>
     </div>
