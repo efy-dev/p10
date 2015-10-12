@@ -221,8 +221,6 @@
             cartProductId: cartProductId
         };
         var success = function (data) {
-            console.log(data);
-            console.log($("#" + cartProductId + "Amount"));
             $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);

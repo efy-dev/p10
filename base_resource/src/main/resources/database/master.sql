@@ -491,7 +491,7 @@ ALTER TABLE `product`
 ADD COLUMN `type`  char(2) NULL AFTER `sub_name`;
 
 
-CREATE TABLE `NewTable` (
+CREATE TABLE `product_model_record` (
   `id`  char(16) NOT NULL ,
   `amount`  integer(255) NULL ,
   `creator`  varchar(255) NULL ,

@@ -55,11 +55,11 @@
                 <ul>
                     <li>
                         <label>昵称：</label>
-                        <input type="text" class="userinfo-tex" name="name2" value="${user.name2}">
+                        <input type="text" id="name2" class="userinfo-tex" name="name2" value="${user.name2}">
                     </li>
                     <li>
                         <label>真实姓名：</label>
-                        <input type="text" class="userinfo-tex" name="name" value="${user.name}">
+                        <input type="text" id="name" class="userinfo-tex" name="name" value="${user.name}">
                     </li>
                     <li>
                         <label>性别：</label>
@@ -73,14 +73,14 @@
                         <input type="radio" class="userinfo-box" value="2" name="sex" checked>女
                       </c:if>
                         <c:if test="${user.sex != 2}">
-                            <input type="radio" class="userinfo-box" value="2" name="sex" >女
+                            <input type="radio"  class="userinfo-box" value="2" name="sex" >女
                         </c:if>
                     </li>
                     <li>
                         <label class="act1">生日：</label>
                         <!--amazeui-->
                         <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-                            <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" />">
+                            <input type="text" id="bd" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd" />">
       <span class="am-input-group-btn am-datepicker-add-on">
         <button class="am-btn am-btn-default actt" type="button"><span class="am-icon-calendar-1 "></span></button>
       </span>
@@ -90,7 +90,8 @@
                     <input type="hidden" name="id" value="${user.id}" >
                     <li>
                         <label></label>
-                        <input type="submit" class="dj-btn" value="保存个人信息">
+                        <input type="button" class="dj-btn" onclick="pd(this);" value="保存个人信息">
+                        <span class="active-d"></span>
                     </li>
                 </ul>
             </form>
@@ -118,16 +119,28 @@
 
 
 <script>
+    function pd(obj){
+        var name2=$("#name2").val();
+        var name=$("#name").val();
+        var bd=$("#bd").val();
+        if(name=="" || name2=="" || bd==""){
+            $(obj).next("span").text("您填写的信息不完整");
+        }else{
+            $("#personalInfo").submit();
+            $(obj).next("span").text("");
+        }
 
-    $().ready(function() {
-        $("#personalInfo").validate({
-            rules: {
-                name2: "required",
-                name: "required",
-                birthDate: "required",
-            },
-        });
-    });
+    }
+
+//    $().ready(function() {
+//        $("#personalInfo").validate({
+//            rules: {
+//                name2: "required",
+//                name: "required",
+//                birthDate: "required",
+//            },
+//        });
+//    });
 
     function addPhotoDynamic(photoUrl){
         $("#uploadPic").attr("src","http://pro.efeiyi.com/"+photoUrl+"@!info-user-pic");

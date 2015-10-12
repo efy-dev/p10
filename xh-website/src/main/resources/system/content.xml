@@ -299,7 +299,7 @@
             </fields>
             <does>
                 <do name="plistProject" access="" label="项目">
-                    <query name="master" label="传承人" type="auto" orderBy="id:desc" groupby="type">
+                    <query name="project" label="项目" type="auto" orderBy="id:desc" groupby="type">
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>

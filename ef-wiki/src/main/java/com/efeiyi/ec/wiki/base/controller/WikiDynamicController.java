@@ -5,6 +5,7 @@ import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProjectModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -22,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -104,7 +104,7 @@ public class WikiDynamicController extends WikibaseController {
     }
 
 
-    @RequestMapping("/xmj.do")
+    @RequestMapping("/prj.do")
     @ResponseBody
     public List saveProjectFollows(HttpServletRequest request, Model model) throws Exception {
         XQuery query = new XQuery("plistProjectRecommended_default", request);
@@ -114,7 +114,7 @@ public class WikiDynamicController extends WikibaseController {
         if (null!=list && list.size()>=1){
             for (ProjectRecommended projectRecommended:list){
                  Project project = projectRecommended.getProject();
-                 ProjectModel projectModel = projectConvertprojectModel(project);
+                 ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
                  pm.add(projectModel);
             }
             return pm;
@@ -125,25 +125,7 @@ public class WikiDynamicController extends WikibaseController {
     }
 
 
-    public ProjectModel projectConvertprojectModel(Project project)  {
-        ProjectModel projectModel = new ProjectModel();
-        if (project!=null){
-            projectModel.setCreateDateTime(project.getCreateDateTime() == null ? new Date (): project.getCreateDateTime());
-            projectModel.setAddressDistrict(project.getAddressDistrict().getAddressCity().getAddressProvince().getName()==null?"":project.getAddressDistrict().getAddressCity().getAddressProvince().getName());
-            projectModel.setDescription(project.getDescription()==null?"":project.getDescription());
-            projectModel.setFsAmount(project.getFsAmount()==null?0l:project.getFsAmount());
-            projectModel.setLevel(project.getLevel()==null?"":project.getLevel());
-            projectModel.setMasters((long)project.getMasterProjects().size());
-            projectModel.setPicture_url(project.getPicture_url()==null?"":project.getPicture_url());
-            projectModel.setPicture_wap_url(project.getPicture_wap_url()==null?"":project.getPicture_wap_url());
-            projectModel.setProjectId(project.getId()==null?"":project.getId());
-            projectModel.setProjectName(project.getName()==null?"":project.getName());
-            projectModel.setWorks((long)project.getProductList().size());
-        }
 
-
-        return projectModel;
-    }
 
    //关注后
     @RequestMapping("/afterAttention.do")

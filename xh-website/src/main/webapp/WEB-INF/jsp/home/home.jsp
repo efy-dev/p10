@@ -83,29 +83,9 @@
         <!-- //End---->
       </div>
       <!-- //End---->
-      <div class="wh directory">
-        <div class="title">非遗名录<a class="btn-more" href="<c:url value='/project/project.do?qm=plistProject_default&provinceid=-1&type=-1'/>" title="更多">更多</a></div>
-        <ul class="list-img-txt">
-          <li>
-            <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
-            <p>蓝印花布手工艺</p>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
-            <p>蓝印花布手工艺</p>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
-            <p>蓝印花布手工艺</p>
-          </li>
-          <li>
-            <a href="" target="_blank" title=""><img src="<c:url value='/shop2015/upload/exp4.jpg'/>" alt=""/></a>
-            <p>蓝印花布手工艺</p>
-          </li>
-        </ul>
-        <a href="#上一页" class="btn btn-prev" title="上一页"></a>
-        <a href="#下一页" class="btn btn-next" title="下一页"></a>
-      </div>
+
+      <jsp:include flush="true"
+                   page="/project/project.home.list.do?qm=plistProject_default"/>
       <!-- //End---->
       <div class="wh data-down">
         <div class="title">资料下载<a class="btn-more" href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default'/> " title="更多">更多</a></div>

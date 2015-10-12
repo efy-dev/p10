@@ -122,7 +122,7 @@ public class CartController {
             Object cartTemp = request.getSession().getAttribute("cart");
             if (cartTemp != null) {
                 cart = (Cart) cartTemp;
-                if (cart.getCartProductList()==null){
+                if (cart.getCartProductList() == null) {
                     cart.setCartProductList(new ArrayList<CartProduct>());
                 }
             } else {
@@ -142,7 +142,7 @@ public class CartController {
         if (list1.size() > 0) {
             for (CartProduct cartProductTemp : list1) {
                 CartProduct cartProduct = cartProductTemp;
-                cartProduct.setProductModel((ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProduct.getProductModel().getId()));
+                cartProduct.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProduct.getProductModel().getId()));
                 if (productId.equals(cartProduct.getProductModel().getId())) {
                     if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
                         if (cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")) < cartProduct.getProductModel().getAmount()) {
@@ -186,27 +186,10 @@ public class CartController {
         }
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId());
-                    float price = productModel.getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    ProductModel productModel = (ProductModel)baseManager.getObject(ProductModel.class.getName(),cartProductTemp.getProductModel().getId());
-                    float price = productModel.getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
         }
 
         return "/purchaseOrder/addProductSuccess";
@@ -267,6 +250,23 @@ public class CartController {
     }
 
 
+    private void updateTotalPrice(Cart cart) {
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (CartProduct cartProductTemp : cart.getCartProductList()) {
+            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
+            cartProductTemp.setProductModel(productModel);
+            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
+//                    BigDecimal priceTemp = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
+                if (totalPrice.intValue() == 0) {
+                    totalPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
+                } else {
+                    totalPrice.add(cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00)));
+                }
+            }
+        }
+        cart.setTotalPrice(totalPrice);
+    }
+
     @RequestMapping({"/cart/addProductCount.do"})
     @ResponseBody
     public Object addProductCount(HttpServletRequest request) {
@@ -276,17 +276,9 @@ public class CartController {
             cartProduct.setAmount(cartProduct.getAmount() + 1);
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
         }
-
         if (AuthorizationUtil.getMyUser().getId() != null) {
             Cart cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -295,15 +287,7 @@ public class CartController {
                     cartProductTemp.setAmount(cartProduct.getAmount());
                 }
             }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             cartProduct.setCart(cart);
         }
 
@@ -326,14 +310,7 @@ public class CartController {
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
             Cart cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -342,15 +319,7 @@ public class CartController {
                     cartProductTemp.setAmount(cartProduct.getAmount());
                 }
             }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             cartProduct.setCart(cart);
         }
 
@@ -369,14 +338,7 @@ public class CartController {
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
             Cart cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -385,15 +347,7 @@ public class CartController {
                     cartProductTemp.setAmount(cartProduct.getAmount());
                 }
             }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             cartProduct.setCart(cart);
         }
 
@@ -411,28 +365,13 @@ public class CartController {
         Cart cart = null;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
             cart = (Cart) request.getSession().getAttribute("cart");
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getId().equals(cartProduct.getId())) {
                     cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
                 }
             }
 
@@ -443,8 +382,7 @@ public class CartController {
 //                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
                 }
             }
-
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
         }
 
 
@@ -462,28 +400,13 @@ public class CartController {
         Cart cart = null;
         if (AuthorizationUtil.getMyUser().getId() != null) {
             cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         } else {
             cart = (Cart) request.getSession().getAttribute("cart");
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getId().equals(cartProduct.getId())) {
                     cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
                 }
             }
 
@@ -494,8 +417,7 @@ public class CartController {
 //                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
                 }
             }
-
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
         }
         return cart;
     }
@@ -515,40 +437,26 @@ public class CartController {
                 }
             }
 
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
             return result;
         } else {
 //            Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
             Cart cart = (Cart) request.getSession().getAttribute("cart");
             List<CartProduct> cartProductList = cart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                CartProduct cartProductTemp2 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
+                if (cartProductTemp2.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                    cartProductTemp2.setIsChoose("1");
                     cartProductTemp.setIsChoose("1");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp2);
                 }
             }
 
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
 //            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
             return result;
         }
     }
@@ -569,40 +477,24 @@ public class CartController {
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
                 }
             }
-
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
             return result;
         } else {
             Cart cart = (Cart) request.getSession().getAttribute("cart");
             List<CartProduct> cartProductList = cart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                CartProduct cartProductTemp2 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
+                if (cartProductTemp2.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
+                    cartProductTemp2.setIsChoose("0");
                     cartProductTemp.setIsChoose("0");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp2);
                 }
             }
-
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
 //            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
             return result;
         }
     }
@@ -627,16 +519,9 @@ public class CartController {
                 baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
             }
 
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
             return result;
         } else {
 
@@ -650,19 +535,9 @@ public class CartController {
                 }
                 baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
             }
-
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
-                    float price = productModel.getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
+            updateTotalPrice(cart);
 //            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().intValue() + "\"}";
+            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().toString() + "\"}";
             return result;
         }
 
@@ -699,12 +574,12 @@ public class CartController {
         if (AuthorizationUtil.getMyUser().getId() != null) {
             String cartId = request.getParameter("cartId");
             cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-        }else {
-            cart = (Cart)request.getSession().getAttribute("cart");
+        } else {
+            cart = (Cart) request.getSession().getAttribute("cart");
         }
         Integer cartAmount = 0;
         for (CartProduct cartProduct : cart.getCartProductList()) {
-            CartProduct cartProduct1 = (CartProduct) baseManager.getObject(CartProduct.class.getName(),cartProduct.getId());
+            CartProduct cartProduct1 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());
             if (cartProduct1.getIsChoose().equals("1")) {
                 cartAmount++;
             }
