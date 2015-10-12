@@ -68,7 +68,7 @@ $(function(){
         return false;
     })
     //关注
-    $('.btn-guan').click(function(){
+    /*$('.btn-guan').click(function(){
         $(this).toggleClass('active');
         if($(this).find('.gz-icon').is(':visible')){
             $(this).find('.gz-icon').hide();
@@ -83,7 +83,7 @@ $(function(){
             $(this).find('em').html('关注')
         }
         return false;
-    })
+    })*/
     //110209工艺详情页-作品简介
     $('.details .detaile-left .detaile-intro .intro-matter li').click(function(){
         $(this).addClass('active').siblings('li').removeClass('active');

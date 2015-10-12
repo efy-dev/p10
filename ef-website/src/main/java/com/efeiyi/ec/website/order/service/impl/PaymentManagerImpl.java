@@ -88,8 +88,8 @@ public class PaymentManagerImpl implements PaymentManager {
 
     @Override
     public String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount) {
-
-        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_NATIVE, purchaseOrderPaymentDetails.getMoney().intValue() * 100, purchaseOrderPaymentDetails.getId() + "", "非遗产品", null, null, null, null, null);
+        BigDecimal price = new BigDecimal(purchaseOrderPaymentDetails.getMoney().floatValue()* 100);
+        BCPayResult bcPayResult = BCPay.startBCPay(BCEumeration.PAY_CHANNEL.WX_NATIVE,price.intValue(), purchaseOrderPaymentDetails.getId() + "", "非遗产品", null, null, null, null, null);
         if (bcPayResult.getType().ordinal() == 0) {
             String codeUrl = bcPayResult.getCodeUrl();
             return codeUrl;

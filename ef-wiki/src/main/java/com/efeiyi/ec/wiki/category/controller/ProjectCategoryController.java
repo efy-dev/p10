@@ -62,15 +62,34 @@ public class ProjectCategoryController extends BaseController {
         }
         XQuery query = new XQuery(qm, request);
         PageInfo pageInfo = baseManager.listPageInfo(query);
-        List<Project> list = pageInfo.getList();
+
         List<ProjectModel> pm = new ArrayList<ProjectModel>();
-        if (null!=list && list.size()>=1){
-            for (Project project:list){
-                ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
-                pm.add(projectModel);
+
+
+        if (qm.equalsIgnoreCase("plistProjectRecommended_default")){
+            List<ProjectRecommended> list = pageInfo.getList();
+            if (null!=list && list.size()>=1){
+                for (ProjectRecommended projectRecommended:list){
+                    Project project = projectRecommended.getProject();
+                    ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
+                    pm.add(projectModel);
+                }
+                return pm;
             }
-            return pm;
+        }else {
+            List<Project> list = pageInfo.getList();
+            if (null!=list && list.size()>=1){
+                for (Project project:list){
+                    ProjectModel projectModel = projectConvertprojectModelUtil.projectConvertprojectModel(project);
+                    pm.add(projectModel);
+                }
+                return pm;
+            }
         }
+
+
+
+
 
         return new ArrayList<ProjectModel>();
 

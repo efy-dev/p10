@@ -58,7 +58,7 @@
                                 </p>
 
                                 <p class="info-price"><em>￥</em><span class="moneycl"
-                                                                      id="${product.id}Price">${(product.productModel.price.intValue())*product.amount}</span>
+                                                                      id="${product.id}Price">${(product.productModel.price)*product.amount}</span>
                                 </p>
                                 <%--<a href="<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>"--%>
                                 <a id="remove" onclick="removeProduct('${product.id}')"
@@ -94,7 +94,7 @@
 <c:if test="${empty tenantList}">
     <article class="bd shop-cart">
         <div class="bd cart-list-no">
-            <div class="bd prompt-txt">
+            <div class="bd prompt-txt"> 
                 <p class="bd"><i class="icon"></i></p>
 
                 <p class="bd">你的购物车还是空空的，</p>
