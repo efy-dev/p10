@@ -133,7 +133,7 @@
 
 
 <!--Start--弹出地址-->
-<div id="order-address" class="alert-delete" style="display:none;">
+<div id="order-address" class="alert-delete or-address" style="display:none;">
     <div class="bd cart-address" style="width: 90%;left: 5%;overflow: scroll;top: 2%">
         <div class="bd list-adress" id="list-order">
             <ul class="ul-list">
@@ -158,7 +158,7 @@
         </div>
         <div class="bd list-adress" id="adddiv" style="display: none;">
             <div class="pop-up" style="position: relative">
-                <a class="add-ress-icon" href="javascript:history.go(0)"></a>
+                <a class="add-ress-icon" href="#" onclick="closeAll()"></a>
                 <div class="pop-h">新增收货人信息
                     <i class="clase" title="关闭"></i>
                 </div>
@@ -309,6 +309,12 @@
     function add_Address() {
         $("#adddiv").attr("style", "display:block;background: #fff;z-index:9999;width: 90%;left: 5%");
         $("#list-order").attr("style", "display:none");
+    }
+
+    function closeAll(){
+        $(".or-address").attr("style", "display:none");
+        $("#adddiv").attr("style", "display:none");
+        $("#list-order").attr("style", "");
     }
 
     function zhifubao(element) {
@@ -572,6 +578,7 @@
     function formatDate(now) {
         return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
     }
+
 
 </script>
 </body>
