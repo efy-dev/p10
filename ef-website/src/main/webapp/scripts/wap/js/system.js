@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-           $('.alert-delete').fadeIn('fast');
+            $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -29,7 +29,7 @@ $(function(){
     })();
     //020104商品详情
     (function(){
-        ////收藏
+        //收藏
         //$('.addfav').click(function(){
         //    $(this).addClass('addfav-end').find('p').html('已收藏');
         //    $('.alert-red-top').slideDown(100,function(){
