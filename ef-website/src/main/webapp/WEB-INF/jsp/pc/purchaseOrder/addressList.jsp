@@ -209,7 +209,7 @@
     function sm(){
         var province=$("#provinceVal").val();
         var city=$("#cityVal").val();
-        if(province=="请选择"||city=="请选择"){
+        if(province == "请选择" || city == "请选择"){
             $("#hao").html("省市不能为空");
         }else {
             $("#addAddress").submit();
