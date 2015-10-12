@@ -71,6 +71,8 @@ public class PurchaseOrderLabelController {
             String status = request.getParameter("status");
             purchaseOrderLabel.setStatus(status);
         }
+        String polType = request.getParameter("type");
+        purchaseOrderLabel.setType(polType);
         return purchaseOrderLabel;
     }
 

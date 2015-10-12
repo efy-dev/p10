@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@include file="/layouts/public.jsp" %>
 <html>
 <head>
@@ -20,8 +21,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
-        <input type="hidden" name="qm" value="saveOrUpdateTenantSource">
+    <form id="productLabelForm" onsubmit="return productLabelForm()" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
@@ -43,7 +43,13 @@
         <div class="am-form-group">
             <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="number" name="amount" id="amount" min="0" placeholder="数量" value="${object.amount}" required>
+                <input type="number" name="amount" id="amount" min="1" placeholder="数量" value="${object.amount}" required>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label for="type" class="am-u-sm-3 am-form-label">标签类型 <small>*</small></label>
+            <div class="am-u-sm-9" id="POType">
+                <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="${object.type}" type="select"/>
             </div>
         </div>
         <div class="am-form-group">
@@ -52,6 +58,18 @@
             </div>
         </div>
     </form>
+    <script type="text/javascript">
+        function productLabelForm(){
+            var LType = document.getElementById("POType");
+            var type = LType.firstElementChild.value;
+            if(type == null || type == ""){
+                alert("请选择防伪标签类型");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </div>
 </body>
 </html>
