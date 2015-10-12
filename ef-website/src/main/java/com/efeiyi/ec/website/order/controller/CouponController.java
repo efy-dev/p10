@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -60,11 +61,16 @@ public class CouponController {
      */
     @RequestMapping({"/coupon/list/{orderId}"})
     @ResponseBody
-    public List<Object> listCouponByOrder(HttpServletRequest request , Model model,@PathVariable String orderId) throws Exception{
+    public List<Coupon> listCouponByOrder(HttpServletRequest request , Model model,@PathVariable String orderId) throws Exception{
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH时mm分");
         PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),orderId);
         XQuery couponQuery = new XQuery("listCoupon_byorder", request);
         couponQuery.put("couponBatch_priceLimit",purchaseOrder.getTotal().floatValue());
-        List<Object> couponList = baseManager.listObject(couponQuery);
+        List<Coupon> couponList = baseManager.listObject(couponQuery);
+        for(Coupon coupon:couponList){
+            coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));
+            coupon.getCouponBatch().setEndDateString(df.format(coupon.getCouponBatch().getEndDate()));
+        }
 
         model.addAttribute("couponList",couponList);
 

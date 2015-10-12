@@ -128,7 +128,7 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow(${product.master.id})" id="">
+      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow('${product.master.id}')" id="">
         <c:if test="${flag == true}">
           <input id="saveMasterFllow" type="hidden" value="0">
           取消关注
