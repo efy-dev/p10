@@ -95,9 +95,6 @@
                                            checkedValue="${master.getMainProjectName().getProject().getLevel()}"
                                            type="normal"/>大师</p>
                             <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
-
-                        <p><a class="more" href="http://master.efeiyi.com" target="_blank" title="更多"><i
-                                class="icon"></i>更多</a></p>
                     </li>
                 </c:forEach>
                 <%--<li>--%>
