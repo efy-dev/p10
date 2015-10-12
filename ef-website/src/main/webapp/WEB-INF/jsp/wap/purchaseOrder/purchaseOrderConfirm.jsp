@@ -105,11 +105,11 @@
             <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
                                                                                      class="arrow-right"></a></p>
 
-            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.intValue()}</span></p>
+            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.floatValue()}</span></p>
 
-            <p><strong class="grey">返现</strong><span><em>￥</em>0</span></p>
+            <p><strong class="grey">返现</strong><span><em>￥</em>0.00</span></p>
 
-            <p><strong>运费</strong><span><em>￥</em>0</span></p>
+            <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
         </div>
         <!-- //End--order-total-->
         <div class="bd cart-pay">
@@ -125,7 +125,7 @@
     <div class="bd payment-total-bar">
         <span>总计付款</span>
     <span class="txt" id="change" style="float: none">
-        ${cart.totalPrice.intValue()}</span>
+        ${cart.totalPrice}</span>
         <span>元</span>
         <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
     </div>

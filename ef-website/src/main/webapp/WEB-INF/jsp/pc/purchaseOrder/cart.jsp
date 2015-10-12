@@ -87,16 +87,16 @@
                                     </div>
                                 </div>
                             </td>
-                            <td width="111"><span class="moneycl">${product.productModel.price.intValue()}</span></td>
+                            <td width="111"><span class="moneycl">${product.productModel.price}</span></td>
                             <td width="129">
                                 <div class="control-pd">
-                                    <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
+                                    <a href="#" class="cart-btn-right"
+                                       onclick="subtractProduct('${product.id}')">-</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
                                            value="${product.amount}" onblur="changeProduct('${product.id}',this)"
                                            onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)">
                                         <%--<c:if test="${product.amount>1}">--%>
-                                    <a href="#" class="cart-btn-right"
-                                       onclick="subtractProduct('${product.id}')">-</a>
+                                    <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                         <%--</c:if>--%>
                                         <%--<c:if test="${product.amount<=1}">--%>
                                         <%--<a href="#" class="cart-btn-right">-</a>--%>
@@ -106,7 +106,7 @@
                                     <%--<div class="control-cl">商家存货仅剩200件</div>--%>
                             </td>
                             <td width="119"><span class="moneycl"
-                                                  id="${product.id}Price">${(product.productModel.price.intValue())*product.amount}</span>
+                                                  id="${product.id}Price">${(product.productModel.price)*product.amount}</span>
                             </td>
                             <td width="111">
                     <span>
