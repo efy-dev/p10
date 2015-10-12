@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -258,7 +259,7 @@
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                                + '<p>有效期：' + formatDate(data[i]["couponBatch"]["startDate"]) + '至' + formatDate(data[i]["couponBatch"]["endDate"]) + '</p>' + '<p>适用范围：全网通用</p> </li>';
+                                + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
                     }
                     $("#ul-list").html(out);
                 }
@@ -575,9 +576,9 @@
      },
      });
      });*/
-    function formatDate(now) {
+ /*   function formatDate(now) {
         return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
-    }
+    }*/
 
 
 </script>
