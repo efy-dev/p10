@@ -95,9 +95,9 @@ public class LabelBuildDaoHibernate implements LabelBuildDao {
         int count = 0;
 //        long begin = System.currentTimeMillis();
         for (int i = 1; i <= num;) {
-            String code = RandomStringUtils.randomNumeric(18);
+            String code = RandomStringUtils.randomNumeric(17);
             code = Long.toString(Long.parseLong(code), 36);
-            if (code.length() != 12) {
+            if (code.length() != 11) {
                 continue;
             }
             i++;

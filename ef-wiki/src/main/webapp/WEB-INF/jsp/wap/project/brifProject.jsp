@@ -141,11 +141,11 @@
           <span style="float: left;margin-left: 10px;">简介</span><i class="sod-sr"></i></a></li>
         <li class=""><a href="[data-tab-panel-1]">
           <i class="bz-icon2"></i>
-          <span style="float: left;margin-left: 10px;" onclick="getData('/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index=')">传承人</span><i class="sod-sr"></i>
+          <span style="float: left;margin-left: 10px;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/> ')">传承人</span><i class="sod-sr"></i>
         </a></li>
         <li class=""><a href="[data-tab-panel-2]">
           <i class="bz-icon3"></i>
-          <span style="float: left;margin-left: 10px;" onclick="getData2('/basic/xmj.do?qm=plistProduct_project&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index=')">作品</span></i>
+          <span style="float: left;margin-left: 10px;" onclick="getData2('<c:url value='/basic/xmj.do?qm=plistProduct_project&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/>')">作品</span></i>
         </a></li>
       </ul>
       <div class="am-tabs-bd">
@@ -212,13 +212,13 @@
             if($(element).attr("class")=="am-active"){
               if($(element).children().eq(0).attr("href")=="[data-tab-panel-1]"){
                 if(ajaxkey){
-                  getData("/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index=");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
+                  getData("<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/>");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
                 }
               }
 
               if($(element).children().eq(0).attr("href")=="[data-tab-panel-2]"){
                 if(ajaxkey2){
-                  getData2("/basic/xmj.do?qm=plistProduct_project&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index=");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
+                  getData2("<c:url value='/basic/xmj.do?qm=plistProduct_project&conditions=project.id:${project.id}&pageEntity.size=5&pageEntity.index='/>");//jquery的Ajax异步加载数据、需要从数据库加载的、需要调用该函数
                 }
               }
             }
@@ -315,10 +315,10 @@
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
-                      "<em>9999</em></a> " +
+                      "<em>"+data.list[i].fsAmount+"</em></a> " +
                       "<a href='#'>" +
                       "<i class='icon good-2'>" +
-                      "</i><em>9999</em>" +
+                      "</i><em>"+data.list[i].amount+"</em>" +
                       "</a> </div> </div> </li>");
 
               pubu.append(box);

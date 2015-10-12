@@ -173,7 +173,7 @@ public class PurchaseOrderController {
     /**
      * 获取为订单分配的所有标签
      * @param purchaseOrder 订单
-     * @return
+     * @return 返回订单标签集合(不区分标签类型)
      */
     private List<Label> getLabelListByOrder(PurchaseOrder purchaseOrder) throws Exception {
         List<Label> list = labelServiceManager.getLabelListByOrder(purchaseOrder);
@@ -186,9 +186,9 @@ public class PurchaseOrderController {
     /**
      * 批量激活或作废订单标签
      * @param purchaseOrder 订单
-     * @param labels
-     * @param type
-     * @return
+     * @param labels 订单下标签集合(不区分标签类型)
+     * @param type "A"是激活标签; "C"是作废标签
+     * @return purchaseOrder订单
      */
     private PurchaseOrder activateOrCancelLabelList(PurchaseOrder purchaseOrder, List<Label> labels, String type){
         String status = "4";
@@ -205,9 +205,9 @@ public class PurchaseOrderController {
     /**
      * 订单信息基本内容
      * @param purchaseOrder 订单
-     * @param request
-     * @param type
-     * @return
+     * @param request 获取页面参数
+     * @param type "new"是新建订单; "edit"修改订单
+     * @return purchaseOrder订单
      * @throws Exception
      */
     private PurchaseOrder getBaseProperty(PurchaseOrder purchaseOrder, HttpServletRequest request, String type) throws Exception {
@@ -231,8 +231,8 @@ public class PurchaseOrderController {
     /**
      * 订单关联对象
      * @param purchaseOrder 订单
-     * @param request
-     * @return
+     * @param request 获取页面参数
+     * @return purchaseOrder订单
      */
     private PurchaseOrder getRelationObject(PurchaseOrder purchaseOrder, HttpServletRequest request){
         String tenantId = request.getParameter("tenant.id");

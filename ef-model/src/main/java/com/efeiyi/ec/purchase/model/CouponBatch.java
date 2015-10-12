@@ -28,6 +28,27 @@ public class CouponBatch implements Serializable{
     private Float priceLimit;//使用限制价格 比如满100用
     private String pictureUrl;//优惠券图片
 
+    @Transient
+    public String getStartDateString() {
+        return startDateString;
+    }
+
+    public void setStartDateString(String startDateString) {
+        this.startDateString = startDateString;
+    }
+
+    @Transient
+    public String getEndDateString() {
+        return endDateString;
+    }
+
+    public void setEndDateString(String endDateString) {
+        this.endDateString = endDateString;
+    }
+
+    private String startDateString;
+    private String endDateString;
+
     @Column(name = "picture_url")
     public String getPictureUrl() {
         return pictureUrl;
