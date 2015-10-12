@@ -98,8 +98,8 @@
                 <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal" />
             </td>
             <td width="10%">
-                    ${purchaseOrder.total}<br>
-                    ${purchaseOrder.getRealPayMoney()}
+                <fmt:formatNumber type="number" value="${purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/><br>
+                <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/>
             </td>
             <td width="10%">
               ${purchaseOrder.user.name}
@@ -133,13 +133,13 @@
                                     ${purchaseOrderProduct.productModel.name}
                         </td>
                         <td class="am-text-center">
-                                    ${purchaseOrderProduct.productModel.price}
+                            <fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/>
                         </td>
                         <td class="am-text-center">
                                     ${purchaseOrderProduct.purchaseAmount}
                         </td>
                         <td class="am-text-center">
-                                    ${purchaseOrderProduct.purchasePrice}
+                            <fmt:formatNumber type="number" value="${purchaseOrderProduct.purchasePrice}" maxFractionDigits="2" minFractionDigits="2"/>
                         </td>
                     </tr>
                 </c:forEach>
