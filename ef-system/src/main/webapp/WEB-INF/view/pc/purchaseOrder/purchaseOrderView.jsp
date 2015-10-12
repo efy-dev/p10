@@ -109,7 +109,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
                 <td class="am-u-md-3" colspan="3">
-                    ${object.consumerAddress.details}
+                    ${object.consumerAddress.province.name}&nbsp;${object.consumerAddress.city.name}&nbsp;${object.consumerAddress.district.name}&nbsp;${object.consumerAddress.details}
                 </td>
             </tr>
             </tbody>
@@ -161,6 +161,7 @@
             <thead>
             <tr>
                 <th class="table-title">产品名字</th>
+                <th class="table-title">规格</th>
                 <th class="table-title">购买个数</th>
                 <th class="table-title">产品编号</th>
                 <th class="table-title">产品单价(元)</th>
@@ -174,9 +175,10 @@
                             width="20px"
                             src="http://pro.efeiyi.com/${purchaseOrderProduct.productModel.productModel_url}@!product-model"
                             alt="产品图片"></td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
-                    <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.product.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                    <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -215,7 +217,6 @@
         <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
             <tr>
-                <th class="table-title">支付方式</th>
                 <th class="table-title">支付金额</th>
                 <th class="table-title">支付状态</th>
                 <th class="table-title">支付详情(支付方式/金额(元))</th>
@@ -226,11 +227,6 @@
             <tbody>
             <c:forEach items="${object.purchaseOrderPaymentList}" var="purchaseOrderPayment" varStatus="stat">
                 <tr>
-                <td class="am-hide-sm-only">
-                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                    checkedValue="${purchaseOrderPayment.payWay}"
-                                    type="normal"/>
-                </td>
                 <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPayment.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-hide-sm-only">
                     <ming800:status name="status" dataType="purchaseOrderPayment.status"
@@ -313,7 +309,8 @@
                         <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                         pattern="yyyy-mm-dd"/>
                     </td>
-                    <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.details}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

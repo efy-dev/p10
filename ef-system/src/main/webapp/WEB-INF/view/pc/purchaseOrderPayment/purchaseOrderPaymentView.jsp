@@ -32,23 +32,15 @@
                                     checkedValue="${object.status}"
                                     type="normal"/>
                 </td>
-                <td class="am-primary am-u-md-3">支付方式</td>
-                <td class="am-u-md-3">
-                    <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                    checkedValue="${object.payWay}"
-                                    type="normal"/>
-                </td>
-            </tr>
-            <tr>
                 <td class="am-primary am-u-md-3">支付金额</td>
                 <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.paymentAmount}" maxFractionDigits="2" minFractionDigits="2"/></td>
-                <td class="am-primary am-u-md-3">支付用户</td>
-                <td class="am-u-md-3">${object.user.username}</td>
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">支付用户</td>
+                <td class="am-u-md-3">${object.user.username}</td>
                 <td class="am-primary am-u-md-3">支付时间</td>
                 <td class="am-u-md-3" colspan="3"><fmt:formatDate value="${object.createDateTime}" type="both"
-                                                      pattern="yyyy-MM-dd HH:mm"/></td>
+                                                                  pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
             </tbody>
         </table>
@@ -64,6 +56,7 @@
         <tr>
             <th class="table-title">支付方式</th>
             <th class="table-title">支付金额</th>
+            <th class="table-title">交易号</th>
             <th class="table-title">优惠券编号</th>
         </tr>
         </thead>
@@ -77,7 +70,8 @@
                                     type="normal"/>
                 </td>
                 <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderPaymentDetails.money}" maxFractionDigits="2" minFractionDigits="2"/></td>
-                <td class="am-hide-sm-only">${purchaseOrderPayment.coupon.serial}</td>
+                <td class="am-hide-sm-only">${purchaseOrderPaymentDetails.transactionNumber}</td>
+                <td class="am-hide-sm-only">${purchaseOrderPaymentDetails.coupon.serial}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -101,15 +95,15 @@
                 <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
+                <td class="am-primary am-u-md-3">实付金额</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3"><fmt:formatDate value="${object.purchaseOrder.createDatetime}" pattern="yyyy-MM-dd HH:mm"/> </td>
             </tr>
 
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.province.name}&nbsp;${object.purchaseOrder.consumerAddress.city.name}&nbsp;${object.purchaseOrder.consumerAddress.district.name}&nbsp;${object.purchaseOrder.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>

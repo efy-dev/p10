@@ -171,7 +171,7 @@
             </div>
             <div class="choose-btns">
                 <c:if test="${productModel.amount <= 0}">
-                    <a id="modelId" class="btn btn-append" title="缺货">缺货</a>
+                    <a id="modelId" class="btn btn-append" title="售罄">售罄</a>
                 </c:if>
                 <c:if test="${productModel.amount > 0}">
                     <a id="modelId" class="btn btn-append"
