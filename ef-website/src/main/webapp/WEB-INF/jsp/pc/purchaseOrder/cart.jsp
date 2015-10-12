@@ -87,16 +87,16 @@
                                     </div>
                                 </div>
                             </td>
-                            <td width="111"><span class="moneycl">${product.productModel.price.intValue()}</span></td>
+                            <td width="111"><span class="moneycl">${product.productModel.price}</span></td>
                             <td width="129">
                                 <div class="control-pd">
-                                    <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
+                                    <a href="#" class="cart-btn-right"
+                                       onclick="subtractProduct('${product.id}')">-</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
                                            value="${product.amount}" onblur="changeProduct('${product.id}',this)"
                                            onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)">
                                         <%--<c:if test="${product.amount>1}">--%>
-                                    <a href="#" class="cart-btn-right"
-                                       onclick="subtractProduct('${product.id}')">-</a>
+                                    <a href="#" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                         <%--</c:if>--%>
                                         <%--<c:if test="${product.amount<=1}">--%>
                                         <%--<a href="#" class="cart-btn-right">-</a>--%>
@@ -221,8 +221,6 @@
             cartProductId: cartProductId
         };
         var success = function (data) {
-            console.log(data);
-            console.log($("#" + cartProductId + "Amount"));
             $("#" + cartProductId + "Amount").val(data["amount"]);
             $("#totalPrice").html(data["cart"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
