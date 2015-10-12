@@ -77,15 +77,8 @@ $(function(){
         //        oCllect.append('<span class="txt active">取消收藏</span>');
         //    }
         //})
-        //�
-        $(window).scroll(function(){
-            var d=$(document).scrollTop();
-            if(d>900){
-                $('.tab-wrap').parents('.wh').addClass('fixed-tab');
-            }else{
-                $('.tab-wrap').parents('.wh').removeClass('fixed-tab');
-            }
-        });
+        //
+
         $('.product-intro .detail .part:last').css({'border':'0'});
         //���
         $('.tab-items li a').click(function(){

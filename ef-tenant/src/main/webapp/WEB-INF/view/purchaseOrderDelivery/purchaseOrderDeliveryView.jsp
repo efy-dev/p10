@@ -39,9 +39,13 @@
                 <td class="am-u-md-3"><fmt:formatDate value="${object.createDateTime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
 
             </tr>
+            <td class="am-primary am-u-md-3">收货人</td>
+            <td class="am-u-md-3">
+                ${object.purchaseOrder.consumerAddress.consignee}
+            </td>
             <tr>
                 <td class="am-primary am-u-md-3">发货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.province.name}&nbsp;${object.purchaseOrder.consumerAddress.city.name}&nbsp;${object.purchaseOrder.consumerAddress.district.name}&nbsp;${object.purchaseOrder.consumerAddress.details}</td>
             </tr>
             </tbody>
         </table>
@@ -59,24 +63,14 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
-                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
-                <td class="am-primary am-u-md-3">支付方式</td>
-                <td class="am-u-md-3">
-                    <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                checkedValue="${purchaseOrderPayment.payWay}"
-                                                type="normal"/>
-                                </span>
-                    </c:forEach>
-                </td>
+                <td class="am-u-md-3" colspan="3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单总额</td>
-                <td class="am-u-md-3">${object.purchaseOrder.total}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
                 <td class="am-primary am-u-md-3">实付金额</td>
-                <td class="am-u-md-3">${object.purchaseOrder.getRealPayMoney()}</td>
+                <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/></td>
 
             </tr>
             <tr>

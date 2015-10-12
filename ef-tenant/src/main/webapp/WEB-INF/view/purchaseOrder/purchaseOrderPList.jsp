@@ -86,13 +86,20 @@
                 <a  href="<c:url value="/basic/xm.do?qm=viewPurchaseOrder&view=${view}&id=${purchaseOrder.id}"/>">
                  ${purchaseOrder.serial}
                 </a>
+                <br>
+                <c:if test="${empty purchaseOrder.fatherPurchaseOrder}">
+                    父订单
+                </c:if>
+                <c:if test="${not empty purchaseOrder.fatherPurchaseOrder}">
+                    子订单
+                </c:if>
             </td>
             <td width="10%" id="${purchaseOrder.id}">
                 <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal" />
             </td>
             <td width="10%">
-                    ${purchaseOrder.total}<br>
-                    ${purchaseOrder.getRealPayMoney()}
+                <fmt:formatNumber type="number" value="${purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/><br>
+                <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/>
             </td>
             <td width="10%">
               ${purchaseOrder.user.name}
@@ -107,6 +114,7 @@
                 <tr>
                     <th class="am-text-center">图片</th>
                     <th class="am-text-center">商品</th>
+                    <th class="am-text-center">规格</th>
                     <th class="am-text-center">单价</th>
                     <th class="am-text-center">数量</th>
                     <th class="am-text-center">实付款</th>
@@ -122,13 +130,16 @@
                             </a>
                         </td>
                         <td class="am-text-center">
-                                    ${purchaseOrderProduct.productModel.price}
+                                    ${purchaseOrderProduct.productModel.name}
+                        </td>
+                        <td class="am-text-center">
+                            <fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/>
                         </td>
                         <td class="am-text-center">
                                     ${purchaseOrderProduct.purchaseAmount}
                         </td>
                         <td class="am-text-center">
-                                    ${purchaseOrderProduct.purchasePrice}
+                            <fmt:formatNumber type="number" value="${purchaseOrderProduct.purchasePrice}" maxFractionDigits="2" minFractionDigits="2"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -141,6 +152,7 @@
     <c:url value="/basic/xm.do" var="url"/>
     <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
         <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+        <ming800:pcPageParam name="view" value="order"/>
         <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
 </div>

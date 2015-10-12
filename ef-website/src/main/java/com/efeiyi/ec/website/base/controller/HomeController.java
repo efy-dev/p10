@@ -33,6 +33,14 @@ public class HomeController {
 
     @RequestMapping({"/home.do"})
     public String home(HttpServletRequest request, Model model) throws Exception {
+
+        //判断是否有需要重定向的页面
+        String redirectUrl = request.getParameter("redirect");
+        if (redirectUrl!=null){
+            return "redirect:"+redirectUrl;
+        }
+
+
         List<Object> projectList = objectRecommendedManager.getRecommendedList("categoryRecommended");
         HashMap<String, List> map = new HashMap<>();
         for (Object object : projectList) {

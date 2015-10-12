@@ -109,7 +109,14 @@ public class CartController {
 
 
     @RequestMapping({"/cart/addProduct.do"})
-    public String addProduct(HttpServletRequest request) throws Exception {
+    public String addProduct(HttpServletRequest request, Model model) throws Exception {
+
+        String url = request.getParameter("redirect");
+        if (url == null) {
+            model.addAttribute("redirect", "");
+        } else {
+            model.addAttribute("redirect", url);
+        }
         String productId = request.getParameter("id");
         // 需要判断用户是否登录
         Cart cart = null;
