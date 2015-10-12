@@ -108,7 +108,7 @@
     </c:if>
 </div>
 <div class="am-g" id="productForm" style="display:none">
-    <form id="selectProduct" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
+    <form id="selectProduct" onsubmit="return selectProductSubmit()" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="purchaseOrder.id" value="${object.id}">
@@ -123,7 +123,13 @@
         <div class="am-form-group">
             <label name="amount" for="amount" class="am-u-sm-3 am-form-label">数量 <small>*</small></label>
             <div class="am-u-sm-9">
-                <input type="number" name="amount" id="amount" min="0" placeholder="数量" required>
+                <input type="number" name="amount" id="amount" min="1" placeholder="数量" required>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label for="type" class="am-u-sm-3 am-form-label">标签类型 <small>*</small></label>
+            <div class="am-u-sm-9" id="POType">
+                <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="" type="select"/>
             </div>
         </div>
         <div class="am-form-group">
@@ -132,6 +138,18 @@
             </div>
         </div>
     </form>
+    <script type="text/javascript">
+        function selectProductSubmit(){
+            var LType = document.getElementById("POType");
+            var type = LType.firstElementChild.value;
+            if(type == null || type == ""){
+                alert("请选择防伪标签类型");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </div>
 <c:if test="${not empty object.purchaseOrderLabelList}">
     <div class="am-cf am-padding">
@@ -147,6 +165,7 @@
                 </c:if>
                 <td>订单编号</td>
                 <td>商品名称</td>
+                <td>标签类型</td>
                 <td>标签数量</td>
             </tr>
             <c:forEach items="${object.purchaseOrderLabelList}" var="pol">
@@ -169,6 +188,9 @@
                     </c:if>
                     <td>${pol.purchaseOrder.serial}</td>
                     <td>${pol.product.name}</td>
+                    <td>
+                        <ming800:status name="type" dataType="PCLabelBatch.type" checkedValue="${pol.type}" type="normal"/>
+                    </td>
                     <td>${pol.amount}</td>
                 </tr>
             </c:forEach>

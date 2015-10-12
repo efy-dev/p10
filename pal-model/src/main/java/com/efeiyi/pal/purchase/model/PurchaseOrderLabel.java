@@ -23,6 +23,7 @@ public class PurchaseOrderLabel {
     private Product product;
     private Integer amount;
     private String status;
+    private String type;
     private List<Label> labelList;
 
     @Id
@@ -84,6 +85,15 @@ public class PurchaseOrderLabel {
 
     public void setLabelList(List<Label> labelList) {
         this.labelList = labelList;
+    }
+
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }
