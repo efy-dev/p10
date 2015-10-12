@@ -22,8 +22,8 @@
                     <span class="bg-cart"></span>
                     <p>商&nbsp;品&nbsp;已&nbsp;成&nbsp;功&nbsp;加&nbsp;入&nbsp;购&nbsp;物&nbsp;车！</p>
                     <div class="join">
-                        <a href="#" class="gc-left">去购物车结算</a>
-                        <a href="#" class="gc-right">继续购物</a>
+                        <a href="<c:url value="/cart/view"/> " class="gc-left">去购物车结算</a>
+                        <a href="<c:url value="/"/> " class="gc-right">继续购物</a>
                     </div>
                 </div>
 
