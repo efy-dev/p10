@@ -8,12 +8,12 @@ $(function(){
         tabsNav.find('.item').click(function(){
             $(this).addClass('active').siblings('.item').removeClass('active');
         })
-        /*tabsNav.find('.item-class').click(function(){
-            tabsNav.hide().siblings('.tabs-nav-2').show();
-            return false
-        })
-*/
-        
+        //tabsNav.find('.item-class').click(function(){
+        //    tabsNav.hide().siblings('.tabs-nav-2').show();
+        //    return false
+        //})
+
+
 
 
 
@@ -23,12 +23,10 @@ $(function(){
 
 
 
-
-
 //zhan_kai
 $(function(){
     $('unwind').click(function(){
-       $('texp').css('height','auto');
+        $('texp').css('height','auto');
     })
 })
 
@@ -40,3 +38,27 @@ $(document).ready(function(){
         $('#showMessage').show();
         return false})
 })
+
+
+
+//zhan-kai
+$(document).ready(function(){
+    $('#zk').click(function(){
+        $('.texp').css('height','auto');
+        return false
+    })
+})
+
+
+////fenxiang
+$(document).ready(function(){
+    $('#fx').click(function(){
+        $('#fxq').show();
+        return false
+    })
+    $('#gb').click(function(){
+        $('#fxq').hide();
+        return false
+    })
+})
+//aa

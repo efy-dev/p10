@@ -505,6 +505,9 @@ CREATE TABLE `master_message_store` (
   PRIMARY KEY (`id`)
 )
 ;
+---------------20151009----------
+ALTER TABLE `master_introduction_attachment`
+ADD COLUMN `video_path`  varchar(64) NULL AFTER `master_news_id`;
 
 
 

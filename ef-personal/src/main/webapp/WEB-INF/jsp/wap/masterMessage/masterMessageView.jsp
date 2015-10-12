@@ -53,8 +53,7 @@
             <div class="dynamic-st">
               <div class="dynamic-suit-st-img">
                 <p><img src="/scripts/assets/upload/120102-p1-2.jpg"></p>
-                <p class="txt">木版水印（古代彩色版画印刷术）水印字画是中国汉族特有的版画印刷技艺。它集绘画、雕刻和印刷为一体，根据水墨渗透原理显示笔触墨韵，既可用以创作体现自身特点的艺术作品，也可逼真地复制各类中国字画。木版水印字画在我国具有悠久的历史。远在唐代，单色木版印刷已经具有相当水平。明末以十竹斋为代表的“饾版”、“拱花”等套色叠印，表明技术有了更大的进步。
-                  国目前纯粹作为非物质文化遗产予以继承和发展。</p>
+                <p class="txt">${object.content}</p>
                 <p><img src="/scripts/assets/upload/120102-p1-3.jpg"></p>
               </div>
             </div>

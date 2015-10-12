@@ -140,7 +140,7 @@
           }
           var sub = "<div class=\"dynamic\">"
                   +"<div class=\"dynamic-hd\">"
-                  +"<a class=\"suit-tx\" href=\"<c:url value='/masterMessage/getOnlyMasterMessageList.do?masterId='/>"+masterId+"\"><img class=\"am-circle\" src=\"/scripts/assets/upload/120101-p1-1.jpg\"></a>"
+                  +"<a class=\"suit-tx\" href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+masterId+"\"><img class=\"am-circle\" src=\"/scripts/assets/upload/120101-p1-1.jpg\"></a>"
                   +"<div class=\"suit-name\"><a href=\"#\"><span>"+masterName+"</span></a></div>"
                   +"<a class=\"suit-gz\" onclick=\"changeStatus(this,'"+masterId+"');\"><input type=\"hidden\" name='"+masterId+"'><span>"+attention+"</span></a> </div>"
                   +"<div class=\"dynamic-st\">"
@@ -174,11 +174,10 @@
     }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
       showTime=(intervalTime/60/24).toFixed(0)+"天前";
     }else{
-      showTime=new Date(oldTime.toLocaleString().replace(/:\d{1,2}$/,' '));
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
     return showTime;
   }
-
   function collected(messageId){
     $.ajax({
       url:"<c:url value='/masterMessage/collected.do'/>",

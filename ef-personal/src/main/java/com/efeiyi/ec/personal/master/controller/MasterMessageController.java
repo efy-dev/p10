@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -128,12 +130,21 @@ public class MasterMessageController {
 		}
 	}
 
+
+	@RequestMapping("/forwardMasterDetails.do")
+	public String forwardDetails(HttpServletRequest request, Model model) {
+		String masterId = request.getParameter("masterId");
+		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
+		model.addAttribute("object",master);
+		return "/masterMessage/masterMessageDetails";
+	}
+
+	@ResponseBody
 	@RequestMapping("/getMasterDetails.do")
-	public String getMasterDetails(HttpServletRequest request , Model model){
+	public List getMasterDetails(HttpServletRequest request){
 		String masterId = request.getParameter("masterId");
 		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
 		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-		model.addAttribute("object",master);
 		String queryHql = "from MasterMessage m where m.master.id=:masterId";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("masterId",master.getId());
@@ -143,7 +154,7 @@ public class MasterMessageController {
 			for (MasterMessage message : list){
 				String queryHql1 = "from MasterMessagePraise m where m.message.id=:messageId and m.user.id=:userId";
 				LinkedHashMap<String,Object> queryMap1 = new LinkedHashMap<>();
-				queryMap1.put("masterId",master.getId());
+				queryMap1.put("messageId",message.getId());
 				queryMap1.put("userId",user.getId());
 				List<MasterMessage> praiseList = baseManager.listObject(queryHql1,queryMap1);
 				if (praiseList != null && praiseList.size() > 0){
@@ -151,15 +162,9 @@ public class MasterMessageController {
 				}else{
 					message.setPraiseStatus("赞");
 				}
-//				String queryHql2 = "from MasterMessageStore m where m.masterMessage.id=:messageId and m.user.id=:userId";
-//				LinkedHashMap<String,Object> queryMap2 = new LinkedHashMap<>();
-//				queryMap2.put("masterId",master.getId());
-//				queryMap2.put("userId",user.getId());
-//				List<MasterMessage> storeList = baseManager.listObject(queryHql2,queryMap2);
 			}
-			model.addAttribute("messageList",list);
 		}
-		return "/masterMessage/masterMessageDetails";
+		return list;
 	}
 
 	public String mainMasterProject(List<MasterProject> masterProjects) {
