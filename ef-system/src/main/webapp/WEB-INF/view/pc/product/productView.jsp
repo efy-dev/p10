@@ -59,21 +59,21 @@
         </div>
     </div>
 </div>
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="change-img">
-    <div class="am-modal-dialog">
-        <%--<div class="am-modal-hd">Amaze UI</div>--%>
-        <div class="am-modal-bd">
+<%--<div class="am-modal am-modal-no-btn" tabindex="-1" id="change-img">--%>
+    <%--<div class="am-modal-dialog">--%>
+        <%--&lt;%&ndash;<div class="am-modal-hd">Amaze UI</div>&ndash;%&gt;--%>
+        <%--<div class="am-modal-bd">--%>
 
 
-            <div>
+            <%--<div>--%>
 
-                <a id="btn_upload4" style="width: 0;" ></a>
+                <%--<a id="btn_upload4" style="width: 0;" ></a>--%>
 
-            </div>
-        </div>
+            <%--</div>--%>
+        <%--</div>--%>
 
-    </div>
-</div>
+    <%--</div>--%>
+<%--</div>--%>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品详情</strong> /
         <small>Product Details</small>
@@ -399,9 +399,9 @@
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
-                                            <dd style="width: 100%;text-align: center;">
-                                                    <a href="javascript:void(0);"   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>
-                                            </dd>
+                                            <%--<dd style="width: 100%;text-align: center;">--%>
+                                                    <%--<a href="javascript:void(0);"   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
+                                            <%--</dd>--%>
                                         </dl>
                                     </li>
                                 </c:if>
@@ -463,10 +463,10 @@
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
-                                            <dd style="width: 100%;text-align: center;">
-                                                <a href="javascript:void(0);"
-                                                   onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>
-                                            </dd>
+                                            <%--<dd style="width: 100%;text-align: center;">--%>
+                                                <%--<a href="javascript:void(0);"--%>
+                                                   <%--onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
+                                            <%--</dd>--%>
                                                 <%--<dd style="width: 100%;text-align: center;" >--%>
                                                 <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
                                                 <%--</dd>--%>
@@ -525,36 +525,36 @@
         height: "0"
     };
 
-    function changeImg(url) {
-        $('#btn_upload4').uploadify({
-            uploader: '<c:url value="/product/uploadify.do"/>',            // 服务器处理地址
-            swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
-            buttonText: "上传替换商品图片",                 //按钮文字
-            buttonClass: "am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式
-            buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子
-            height: 34,                             //按钮高度
-            width: 140,                              //按钮宽度
-            auto: true,                          //自动上传
-            multi: false,                            //多个文件上传
-            scriptDate: {'status': '3'},
-            checkExisting: true,                    //检查文件重复
-            successTimeout: 1000000,                 //超时
-            fileSizeLimit: '20MB',
-            removeTimeout: 1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;*.*",           //允许的文件类型
-            fileTypeDesc: "请选择图片文件",           //文件说明
-            formData: {"imgType": "normal", "trueUrl": url}, //提交给服务器端的参数
-            onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
-                $("#change-img").modal('close');
+    <%--function changeImg(url) {--%>
+        <%--$('#btn_upload4').uploadify({--%>
+            <%--uploader: '<c:url value="/product/uploadify.do"/>',            // 服务器处理地址--%>
+            <%--swf: '<c:url value="/scripts/upload/uploadify.swf"/>',--%>
+            <%--buttonText: "上传替换商品图片",                 //按钮文字--%>
+            <%--buttonClass: "am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式--%>
+            <%--buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子--%>
+            <%--height: 34,                             //按钮高度--%>
+            <%--width: 140,                              //按钮宽度--%>
+            <%--auto: true,                          //自动上传--%>
+            <%--multi: false,                            //多个文件上传--%>
+            <%--scriptDate: {'status': '3'},--%>
+            <%--checkExisting: true,                    //检查文件重复--%>
+            <%--successTimeout: 1000000,                 //超时--%>
+            <%--fileSizeLimit: '20MB',--%>
+            <%--removeTimeout: 1,                        //移除时间--%>
+            <%--fileTypeExts: "*.jpg;*.png;*.*",           //允许的文件类型--%>
+            <%--fileTypeDesc: "请选择图片文件",           //文件说明--%>
+            <%--formData: {"imgType": "normal", "trueUrl": url}, //提交给服务器端的参数--%>
+            <%--onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理--%>
+                <%--$("#change-img").modal('close');--%>
 
-            }
-        });
-        $("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});
-        $("#change-img .uploadify").css({"width": "0px"});
-        $('#change-img').modal();
+            <%--}--%>
+        <%--});--%>
+        <%--$("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});--%>
+        <%--$("#change-img .uploadify").css({"width": "0px"});--%>
+        <%--$('#change-img').modal();--%>
 
 
-    }
+    <%--}--%>
     function tc(url) {
         var img = new Image();
         img.src = url;
@@ -699,9 +699,9 @@
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
                         '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' +
-                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
-                        '</dd>' +
+//                        '<dd style="width: 100%;text-align: center;" >' +
+//                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
+//                        '</dd>' +
                         '</dl>' +
                         '</li>';
 
@@ -782,9 +782,9 @@
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);" class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
                         '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' +
-                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
-                        '</dd>' +
+//                        '<dd style="width: 100%;text-align: center;" >' +
+//                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
+//                        '</dd>' +
                         '</dl>' +
                         '</li>';
 
