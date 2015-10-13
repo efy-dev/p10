@@ -34,7 +34,7 @@
           <p>${tenant.name}</p>
           <p>200人关注</p>
         </div>
-        <a href="#收藏" class="addfav"><i class="icon icon-addfav"></i><p>收藏</p></a>
+        <%--<a href="#收藏" class="addfav"><i class="icon icon-addfav"></i><p>收藏</p></a>--%>
       </div>
     </div>
     <!-- //End---->

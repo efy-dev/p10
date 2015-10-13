@@ -19,7 +19,7 @@
     <div class="wh">
         <ol class="am-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="javascript:window.history.back()">分类</a></li>
+            <li><a href="/product/list/${project.id}">分类</a></li>
             <li class="am-active">内容</li>
         </ol>
     </div>
@@ -163,7 +163,7 @@
                 <div class="colour-page">
                     <div class="amount">
                         <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
-                        <input id = "value" class="txt" type="text" value="1"/><em class="ge">个</em>
+                        <input id = "value" class="txt" type="text" value="1"/>
                         <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
                     </div>
                     <!-- //End-->
@@ -373,7 +373,7 @@
     }
     function addCart(o){
         var t = document.getElementById("value").value;
-        window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t;
+        window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;
     }
     function immediateBuy(o){
         var t = document.getElementById("value").value;

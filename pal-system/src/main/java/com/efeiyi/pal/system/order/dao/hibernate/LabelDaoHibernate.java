@@ -28,10 +28,11 @@ public class LabelDaoHibernate implements LabelDao {
     }
 
     @Override
-    public List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct) {
-        String hql = "From Label WHERE status = :status order by serial";
+    public List<Label> getLabelListByMinSerialAndSumProduct(Integer sumProduct, String type) {
+        String hql = "From Label as lab WHERE lab.status = :status AND lab.labelBatch.type = :labelType order by serial";
         Query query = this.getSession().createQuery(hql)
-                .setString("status", "1");
+                .setString("status", "1")
+                .setString("labelType", type);
         query.setMaxResults(sumProduct);
         List<Label> list = query.list();
         return list;

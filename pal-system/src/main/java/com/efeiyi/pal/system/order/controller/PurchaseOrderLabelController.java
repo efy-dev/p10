@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * Created by Administrator on 2015/8/17.
@@ -92,6 +96,38 @@ public class PurchaseOrderLabelController {
         purchaseOrderLabel.setProduct(product);
 
         return purchaseOrderLabel;
+    }
+
+    @RequestMapping("/downNFCTxt.do")
+    public void downloadLabelTxt(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+        String orderLabelId = request.getParameter("orderLabelId");
+        String path = this.getClass().getClassLoader().getResource("/").getPath();
+        File clazzDir = new File(path);
+        String fileName = clazzDir.getParent() + "/file/" + orderLabelId + ".txt";
+        File file = new File(fileName);
+//        response.setContentType("application/force-download");
+        response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setContentLength((int) file.length());
+        BufferedReader bis = null;
+        try {
+            if (!file.exists())
+                throw new NullPointerException("指定文件" + fileName + "不存在");
+            bis = new BufferedReader(new FileReader(new File(fileName)));
+            int i;
+            while ((i = bis.read()) != -1) {
+                response.getWriter().write(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                bis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
