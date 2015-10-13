@@ -332,7 +332,7 @@
 
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
-                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}${fn:substring(productPicture.pictureUrl,fn:indexOf(productPicture.pictureUrl,"." ) ,fn:length(productPicture.pictureUrl)+1 )}
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
                                                 <a href="javascript:void(0);" class="copy"
@@ -393,7 +393,7 @@
                                                    onclick="deletePicture(this,'${productPicture.id}')">删除</a>
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
-                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg
+                                                    ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}${fn:substring(productPicture.pictureUrl,fn:indexOf(productPicture.pictureUrl,"." ) ,fn:length(productPicture.pictureUrl)+1 )}
                                             </dd>
                                             <dd style="width: 100%;text-align: center;">
                                                 <a href="javascript:void(0);" class="copy"
@@ -537,7 +537,7 @@
             successTimeout: 1000000,                 //超时
             fileSizeLimit: '20MB',
             removeTimeout: 1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;",           //允许的文件类型
+            fileTypeExts: "*.jpg;*.png;*.gif",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: {"imgType": "normal"}, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
@@ -584,7 +584,7 @@
                 }
                 img += '      </select>' +
                         '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' + imgName + '.jpg' +
+                        '<dd style="width: 100%;text-align: center;" >' + imgName +
                         '</dd>' +
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);"   class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
@@ -627,7 +627,7 @@
             successTimeout: 1000000,                 //超时
             fileSizeLimit: '20MB',
             removeTimeout: 1,                        //移除时间
-            fileTypeExts: "*.jpg;*.png;*",           //允许的文件类型
+            fileTypeExts: "*.jpg;*.png;*.gif",           //允许的文件类型
             fileTypeDesc: "请选择图片文件",           //文件说明
             formData: {"imgType": "normal"}, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
@@ -664,7 +664,7 @@
                         ' 删除' +
                         '</a>' +
                         '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' + imgName + '.jpg' +
+                        '<dd style="width: 100%;text-align: center;" >' + imgName +
                         '</dd>' +
                         '<dd style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);" class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
