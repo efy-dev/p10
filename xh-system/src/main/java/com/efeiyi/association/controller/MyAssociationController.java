@@ -93,9 +93,7 @@ public class MyAssociationController {
     public ModelAndView saveAssContact(HttpServletRequest request, Document document) throws Exception {
 
         document.getDocumentContent().setDocument(document);
-        //新建内容
         if (document.getId() == null || "".equals(document.getId())) {
-            //新建内容传入原页面地址
             document.setId(null);
             document.getDocumentContent().setId(null);
             document.setTheDatetime(new Date());
@@ -105,7 +103,7 @@ public class MyAssociationController {
 
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         myDocumentManager.saveDocument(document);
-        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
+        return new ModelAndView("redirect:" + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
     }
 
     @RequestMapping("/assIntroOrStatute.do")
@@ -153,9 +151,8 @@ public class MyAssociationController {
         String group = document.getGroup();
         String path = request.getParameter("qm");
         document.getDocumentContent().setDocument(document);
-        //新建内容
+
         if (document.getId() == null || "".equals(document.getId())) {
-            //新建内容传入原页面地址
             document.setId(null);
             document.getDocumentContent().setId(null);
             document.setStatus("1");
@@ -193,7 +190,7 @@ public class MyAssociationController {
         }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         myDocumentManager.saveDocument(document);
-        String resultPage = "redirect:" /*+ request.getContextPath() */+ path;
+        String resultPage = "redirect:" + path;
         if ("assIntro".equals(group)){
             resultPage += "&resultPage=/myAssociation/assIntroOrStatute.do?qm=plistAssociationIntroduction_default";
         }else {
