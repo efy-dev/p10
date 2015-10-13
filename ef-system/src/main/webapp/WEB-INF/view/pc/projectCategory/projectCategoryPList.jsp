@@ -58,6 +58,20 @@
                                                 class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
                                                 class="am-icon-edit"></span> 编辑
                                         </button>
+                                        <c:if test="${projectCategory.status == '1'}">
+                                            <button onclick="changeCategoryStatus(this,'${projectCategory.id}')" status="2"
+                                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                    class="am-icon-trash-o">隐藏</span>
+
+                                            </button>
+                                        </c:if>
+                                        <c:if test="${projectCategory.status == '2'}">
+                                            <button onclick="changeCategoryStatus(this,'${projectCategory.id}')" status="1"
+                                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                    class="am-icon-trash-o">显示</span>
+
+                                            </button>
+                                        </c:if>
                                         <button onclick="window.location.href='<c:url
                                                 value="/basic/xm.do?qm=removeProjectCategory&id=${projectCategory.id}"/>'"
                                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
@@ -128,6 +142,29 @@
 
         </div>
     </div>
-
+<script>
+    function changeCategoryStatus(obj,id){
+        var status = $(obj).attr("status");
+        alert(status);
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/projectCategory/updateStatus.do"/>',
+            cache: false,
+            dataType: "json",
+            data:{id:id,status:status},
+            success: function (data) {
+                $(obj).attr("status",data);
+                if(status=="1"){
+                    $(obj).find("span").text("隐藏");
+                    $(obj).attr("status","2");
+                }
+                if(status=="2"){
+                    $(obj).find("span").text("显示");
+                    $(obj).attr("status","1");
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
