@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Administrator on 2015/7/24.
  */
-
+@Deprecated
 public class UserHandler implements DoHandler {
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");

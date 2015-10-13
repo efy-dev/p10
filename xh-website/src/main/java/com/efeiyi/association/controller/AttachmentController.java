@@ -43,25 +43,30 @@ public class AttachmentController {
     @RequestMapping("/attachmentUpload.do")
     @ResponseBody
     public ModelAndView saveAttachment(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response, ApplicationMaterial material) throws Exception {
-        String url = "attachment/" + multipartFile.getOriginalFilename();
-        if (!multipartFile.getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartFile, "association", url);
-            url = OrganizationConst.imgBasePath + url;
-        }
-            //新建内容传入原页面地址
-        String group = request.getParameter("group");
-        material.setGroup(group);
+
+        //新建内容传入原页面地址
+        material.setGroup(request.getParameter("group"));
         material.setDocumentContent(null);
         material.setTheDatetime(new Date());
         material.setStatus("1");
         material.setPublishDate(new Date());
 
+        //上传到云
+        String url = "attachment/" + multipartFile.getOriginalFilename();
+        if (!multipartFile.getOriginalFilename().equals("")) {
+            aliOssUploadManager.uploadFile(multipartFile, "association", url);
+            url = OrganizationConst.imgBasePath + url;
+        }
+
+        //设置关联
         DocumentAttachment attachment = new DocumentAttachment();
         attachment.setDocument(material);
         attachment.setPath(url);
         if (material.getDocumentAttachmentList() == null) {
             material.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
         }
+
+        //持久化
         documentManager.saveDocument(material);
         if (!multipartFile.getOriginalFilename().equals("")) {
             material.getDocumentAttachmentList().add(attachment);
