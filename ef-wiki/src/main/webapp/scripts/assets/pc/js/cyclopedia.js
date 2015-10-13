@@ -89,6 +89,50 @@ $(function(){
         $(this).addClass('active').siblings('li').removeClass('active');
         $('.master-tab').eq($(this).index()).show().siblings('.master-tab').hide();
     })
+//110209工艺详情页-作品简介-2弹出框
+    $(function(){
+        $("#btn-xj").click(function(){
+            $("#word").show();
+            $("#shut-btn").click(function(){
+                $("#word").hide();
+            })
+            return false;
+        })
+    })
+    //大师作品简介-回复
+    $(function(){
+        $(".details .detaile-left .detaile-comment .comment li .status .status-right .hf a").click(function(){
+            $(this).parents().parents().siblings(".review").show();
+        })
+        return false;
+    })
+})
+//fenxiang
+$(function(){
+    $('.pc-dynamic .p-dy-left .list-dynamic  li .one-state .state li').click(function(){
 
+        $(this).find('.nr-share').slideToggle();
+        return false;
+    })
+})
+//zuopin-tab,xuanxiangka
+$(function(){
+    $('.craft-work3 .library li').click(function(){
+        $(this).addClass('active').siblings().removeClass('active')
 
+    })
+})
+//huifu js
+$(function(){
+    $('.details .detaile-left .detaile-comment .comment li .status .status-right .hf a').click(function(){
+        $(this).find('.review').slideToggle();
+        return false;
+    })
+})
+//dashi-huifu js
+$(function(){
+    $('.details .detaile-left .detaile-comment .comment li a').click(function(){
+        $(this).find('.review').slideToggle();
+        return false
+    })
 })
