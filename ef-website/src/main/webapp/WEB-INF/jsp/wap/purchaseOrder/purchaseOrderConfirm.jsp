@@ -40,6 +40,9 @@
 <!--//End--header-->
 <article class="bd shop-cart">
     <div class="bd cart-order">
+        <%
+            boolean b = false;
+        %>
         <div class="bd order-address" id="order-add">
             <c:if test="${addressList.size() > 0}">
                 <c:forEach items="${addressList}" var="address">
@@ -51,9 +54,15 @@
 
                             <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
+                            <%
+                                b = true;
+                            %>
                         </a>
                     </c:if>
                 </c:forEach>
+                <c:if test="<%=!b%>">
+                <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
+                </c:if>
             </c:if>
             <c:if test="${addressList.size() == 0}">
             <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>

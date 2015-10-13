@@ -52,7 +52,7 @@
         <c:forEach items="${productModelList}" var="productModel">
           <li>
             <a href="/product/productModel/${productModel.id}" target="_blank" title="">
-              <img class="imgfilter" src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}"/>" alt="">
+              <img class="imgfilter" src="<c:url value="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot"/>" alt="">
               <p class="wh name">${productModel.name}
                 <c:if test="${productModel.productPropertyValueList.size()>1}">
                   [

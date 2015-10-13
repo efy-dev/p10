@@ -31,7 +31,7 @@
                         <condition name="product.project.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="default1" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="product.status" defaultValue="1" operation="eq"/>
                         <condition name="product.tenant.id" defaultValue="1" operation="eq"/>
 
                     </query>
@@ -47,7 +47,7 @@
                         <condition name="product.project.id" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="default1" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="product.status" defaultValue="1" operation="eq"/>
                         <condition name="product.tenant.id" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
