@@ -68,7 +68,7 @@
                                     </c:if>
                                 </label>
                             </td>
-                            <td width="437">
+                            <td width="350">
                                 <div class="cols1">
                                     <img src="http://pro.efeiyi.com/${product.productModel.productModel_url
                                     }@!product-icon" alt=""/>
@@ -87,8 +87,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td width="111"><span class="moneycl">${product.productModel.price}</span></td>
-                            <td width="129">
+                            <td width="150" style="text-align: center"><span class="moneycl">${product.productModel.price}</span></td>
+                            <td width="80">
                                 <div class="control-pd">
                                     <a href="#" class="cart-btn-right"
                                        onclick="subtractProduct('${product.id}')">-</a>
@@ -105,10 +105,10 @@
                                 </div>
                                     <%--<div class="control-cl">商家存货仅剩200件</div>--%>
                             </td>
-                            <td width="119"><span class="moneycl"
+                            <td width="140" style="text-align: center"><span class="moneycl"
                                                   id="${product.id}Price">${(product.productModel.price)*product.amount}</span>
                             </td>
-                            <td width="111">
+                            <td width="96">
                     <span>
                     <p><a onclick="showConfirm('提示','是否确认删除',function(){
                         window.location.href = '<c:url value="/cart/removeProduct.do?cartProductId=${product.id}"/>';
@@ -196,7 +196,7 @@
         var out = '';
         out = '满' + priceLimit +'立减' +price;
         $("#hiddenCoupon").html(out);
-        $("#totalPrice").text($("#totalPrice").text()-price);
+//        $("#totalPrice").text($("#totalPrice").text()-price);
         $(".ul-list").hide();
 
     }
@@ -221,9 +221,13 @@
             cartProductId: cartProductId
         };
         var success = function (data) {
-            $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cart"]["totalPrice"]);
-            $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            if(data != null){
+                $("#" + cartProductId + "Amount").val(data["amount"]);
+                $("#totalPrice").html(data["cart"]["totalPrice"]);
+                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            }else{
+                showAlert("提示","库存不足");
+            }
 
         }
         ajaxRequest("<c:url value="/cart/addProductCount.do"/>", param, success, function () {
@@ -236,10 +240,15 @@
             amount: $(element).val()
         };
         var success = function (data) {
-            console.log(data);
-            $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cart"]["totalPrice"]);
-            $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            if(data != null){
+                console.log(data);
+                $("#" + cartProductId + "Amount").val(data["amount"]);
+                $("#totalPrice").html(data["cart"]["totalPrice"]);
+                $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
+            }else{
+                showAlert("提示","库存不足");
+            }
+
 
         }
         ajaxRequest("<c:url value="/cart/changeProductCount.do"/>", param, success, function () {

@@ -339,6 +339,17 @@ public class PurchaseOrderPaymentController {
         return "/purchaseOrder/paySuccess";
     }
 
+    @RequestMapping({"/checkInventory/{orderId}"})
+    @ResponseBody
+    public boolean checkInventory(@PathVariable String orderId){
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
+            if (purchaseOrderProduct.getPurchaseAmount()>purchaseOrderProduct.getProductModel().getAmount()){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
