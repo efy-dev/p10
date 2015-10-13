@@ -194,7 +194,7 @@
 
                             <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
                                             checkedValue="${purchaseOrderPaymentDetails.payWay}"
-                                            type="normal"/> : ${purchaseOrderPaymentDetails.money}
+                                            type="normal"/> : <fmt:formatNumber type="number" value="${purchaseOrderPaymentDetails.money}" maxFractionDigits="2" minFractionDigits="2"/>
                             <br>
                             优惠券编号：${purchaseOrderPaymentDetails.coupon.serial}
                             <br>
