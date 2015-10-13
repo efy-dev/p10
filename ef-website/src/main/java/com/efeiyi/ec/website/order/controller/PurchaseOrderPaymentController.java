@@ -82,29 +82,32 @@ public class PurchaseOrderPaymentController {
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentId);
-                purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
-                PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
-                purchaseOrderPayment.setStatus("2");
-                baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(),purchaseOrderPayment);
-                //@TODO 修改订单状态
-                PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-                if (purchaseOrder == null) {
-                    purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
-                }
-                if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
-                    //同时修改子订单状态
-                    for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
-                        purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
-                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+                if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")) {
+
+                    purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
+                    PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
+                    purchaseOrderPayment.setStatus("2");
+                    baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+                    //@TODO 修改订单状态
+                    PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+                    if (purchaseOrder == null) {
+                        purchaseOrder = ((PurchaseOrderPayment) baseManager.getObject(PurchaseOrderPayment.class.getName(), purchaseOrderPaymentDetails.getPurchaseOrderPayment().getId())).getPurchaseOrder();
                     }
+                    if (purchaseOrder.getSubPurchaseOrder() != null && purchaseOrder.getSubPurchaseOrder().size() > 0) {
+                        //同时修改子订单状态
+                        for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()) {
+                            purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE);
+                            baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
+                        }
+                    }
+                    for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                        purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
+                        baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
+                    }
+                    purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
+                    baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+                    baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
                 }
-                for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                    purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
-                    baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
-                }
-                purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
-                baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
-                baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -345,16 +348,15 @@ public class PurchaseOrderPaymentController {
 
     @RequestMapping({"/checkInventory/{orderId}"})
     @ResponseBody
-    public boolean checkInventory(@PathVariable String orderId){
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
-        for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
-            if (purchaseOrderProduct.getPurchaseAmount()>purchaseOrderProduct.getProductModel().getAmount()){
+    public boolean checkInventory(@PathVariable String orderId) {
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+            if (purchaseOrderProduct.getPurchaseAmount() > purchaseOrderProduct.getProductModel().getAmount()) {
                 return false;
             }
         }
         return true;
     }
-
 
 
 }

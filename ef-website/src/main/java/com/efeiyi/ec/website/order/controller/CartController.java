@@ -263,7 +263,6 @@ public class CartController {
             ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
             cartProductTemp.setProductModel(productModel);
             if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-//                    BigDecimal priceTemp = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
                 if (totalPrice.floatValue() == 0.00) {
                     totalPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
                 } else {

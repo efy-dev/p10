@@ -51,7 +51,7 @@
         </div>
         <!-- //End--des-title-->
         <div class="bd des-price">
-            <p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price.intValue()}</strong></p>
+            <p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price()}</strong></p>
 
             <p class="bd express">快递：0（飞蚁包邮）</p>
         </div>

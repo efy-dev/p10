@@ -24,11 +24,7 @@ public class PurchaseOrderDaoHibernate implements PurchaseOrderDao {
 
 
 
-    /**
-     * ¸Ä±ä¶©µ¥×´Ì¬
-     * @param purchaseOrder
-     * @return
-     */
+
      @Override
      public String updateOrderStatus(PurchaseOrder purchaseOrder){
 

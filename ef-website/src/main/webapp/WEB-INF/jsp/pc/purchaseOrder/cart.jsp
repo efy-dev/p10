@@ -70,13 +70,14 @@
                             </td>
                             <td width="350">
                                 <div class="cols1">
-                                    <img src="http://pro.efeiyi.com/${product.productModel.productModel_url
+                                    <a href="/product/productModel/${product.productModel.id}" target="_blank">
+                                        <img src="http://pro.efeiyi.com/${product.productModel.productModel_url
                                     }@!product-icon" alt=""/>
-
+                                    </a>
                                     <div class="info">
                                         <p><a href="#">${product.productModel.product.project.name}</a></p>
 
-                                        <p><a href="#">${product.productModel.name}
+                                        <p><a href="/product/productModel/${product.productModel.id}" target="_blank">${product.productModel.name}
                                             <c:if test="${product.productModel.productPropertyValueList.size()>1}">
                                                 [
                                                 <c:forEach items="${product.productModel.productPropertyValueList}"
