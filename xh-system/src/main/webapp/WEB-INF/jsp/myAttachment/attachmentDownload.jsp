@@ -70,7 +70,7 @@
                     </c:forEach>${attachSize}</div>
             </td>
             <td>
-                <div name="material">${material.tenant.name}</div>
+                <div name="material">${material.name}</div>
             </td>
             <td>
                 <fmt:formatDate value="${material.theDatetime}"
