@@ -29,12 +29,9 @@ public class AssController {
 
     @RequestMapping("/association.do")
     public ModelAndView getAssIntroByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
-
         String qm = request.getParameter("qm");
-        //先找到配置文件里的entity
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);//先找到配置文件里的entity
+        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);//再从中找到query的信息
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, null);
 
         Document document = new Document();
