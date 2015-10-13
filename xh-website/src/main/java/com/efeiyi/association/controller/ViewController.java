@@ -21,6 +21,12 @@ public class ViewController {
     @Autowired
     BaseManager baseManager;
 
+    /**
+     * 首页直接点击进入其他页面时，找到对应的高亮菜单
+     * @param request
+     * @param modelMap
+     * @return
+     */
     @RequestMapping({"/viewDefault.do", "newView.do"})
     public Document getContentView(HttpServletRequest request, ModelMap modelMap) {
         Document document = new Document();
@@ -37,6 +43,12 @@ public class ViewController {
         return document;
     }
 
+    /**
+     * 顶部高亮导航菜单
+     * @param jmenu
+     * @param match
+     * @return
+     */
     private Jnode getCurrentJnode(Jmenu jmenu, String match) {
         if (match == null || match.equals("") || jmenu == null) {
             return null;
@@ -49,6 +61,13 @@ public class ViewController {
         }
         return resultJnode;
     }
+
+    /**
+     * 左侧高亮导航菜单
+     * @param jnode
+     * @param match
+     * @return
+     */
     private Jnode getMatchJnode(Jnode jnode, String match) {
         if (match == null || match.equals("")||jnode == null) {
             return null;

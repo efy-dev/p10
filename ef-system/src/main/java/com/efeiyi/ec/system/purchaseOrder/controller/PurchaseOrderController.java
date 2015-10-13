@@ -42,9 +42,20 @@ public class PurchaseOrderController extends BaseController {
         String id = "";
         purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrder.getId());
         try {
-            if(null == purchaseOrder.getFatherPurchaseOrder()){
+            if(null == purchaseOrder.getFatherPurchaseOrder()){//如果是父订单发货 所有的子订单都得变成已发货状态
                 purchaseOrder.setOrderStatus("7");
                 id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
+                List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
+                if(null != subPurchaseOrderList && subPurchaseOrderList.size() > 0){
+                    PurchaseOrder p1 = null;
+                    for(int i = 0;i < subPurchaseOrderList.size();i++){
+                        p1 = subPurchaseOrderList.get(i);
+                        if("1".equals(p1.getOrderStatus()) || "5".equals(p1.getOrderStatus())){
+                            p1.setOrderStatus("7");
+                            purchaseOrderManager.updateOrderStatus(p1);
+                        }
+                    }
+                }
             }else{
                 PurchaseOrder fPurchaseOrder = purchaseOrder.getFatherPurchaseOrder();
                 List<PurchaseOrder> subPurchaseOrderList = fPurchaseOrder.getSubPurchaseOrder();
@@ -65,17 +76,17 @@ public class PurchaseOrderController extends BaseController {
                     }
 
                     if("1".equals(p.getOrderStatus()) || "5".equals(p.getOrderStatus())){//如果有未发货的就修改自己 然后跳出循环
-                        if(i == subPurchaseOrderList.size()-1){//如果循环到了最后一个 并且最后一个不是自己并且前面没有未发货的
-                            fPurchaseOrder.setOrderStatus("7");
-                            purchaseOrderManager.updateOrderStatus(fPurchaseOrder);
+//                        if(i == subPurchaseOrderList.size()-1){//如果循环到了最后一个 并且最后一个不是自己并且前面没有未发货的
+//                            fPurchaseOrder.setOrderStatus("7");
+//                            purchaseOrderManager.updateOrderStatus(fPurchaseOrder);
+//                            purchaseOrder.setOrderStatus("7");
+//                            id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
+//                            p.setOrderStatus("7");
+//                            purchaseOrderManager.updateOrderStatus(p);
+//                        }else{//如果有未发货的并且不是列表的最后一个 修改自己状态 跳出循环
                             purchaseOrder.setOrderStatus("7");
                             id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
-                            p.setOrderStatus("7");
-                            purchaseOrderManager.updateOrderStatus(p);
-                        }else{//如果有未发货的并且不是列表的最后一个 修改自己状态 跳出循环
-                            purchaseOrder.setOrderStatus("7");
-                            id = purchaseOrderManager.updateOrderStatus(purchaseOrder,serial,logisticsCompany);
-                        }
+//                        }
                         break;
                     }
                     if(i == subPurchaseOrderList.size()-1){//如果循环到了最后一个 并且最后一个不是自己并且前面没有未发货的

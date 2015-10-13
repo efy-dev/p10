@@ -49,7 +49,7 @@
                 </do>
                 <do name="formIndex" access="" label="安全退出" result="/index">
                 </do>
-                <do name="viewProduct" label="商品详情" access="" result="/product/productView" />
+                <do name="viewProduct" label="商品详情" access="" result="/product/productView" execute="com.efeiyi.ec.system.product.controller.viewTenantProductHandler" />
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormTenantProductHandler" />
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />

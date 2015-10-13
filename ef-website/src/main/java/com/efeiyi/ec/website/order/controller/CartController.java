@@ -264,13 +264,16 @@ public class CartController {
             cartProductTemp.setProductModel(productModel);
             if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
 //                    BigDecimal priceTemp = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
-                if (totalPrice.intValue() == 0) {
+                if (totalPrice.floatValue() == 0.00) {
                     totalPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
                 } else {
-                    totalPrice.add(cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00)));
+                    BigDecimal addPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
+                    float x = totalPrice.floatValue() + addPrice.floatValue();
+                    totalPrice = new BigDecimal(x);
                 }
             }
         }
+        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         cart.setTotalPrice(totalPrice);
     }
 
@@ -299,7 +302,7 @@ public class CartController {
             }
 
             return cartProduct;
-        }else {
+        } else {
             cartProduct = null;
             return cartProduct;
         }

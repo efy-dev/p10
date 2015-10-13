@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * 处理spring security 登录失败
  */
+@Deprecated
 @Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Autowired
