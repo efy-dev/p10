@@ -35,29 +35,45 @@ public class ProjectController {
     @Autowired
     private XdoSupportManager xdoSupportManager;
 
+    /**
+     * 直接转入非遗名录子的项目页面
+     * @param modelMap
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/project.do")
     public ModelAndView getProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-        modelMap.addAttribute("provinceid", provinceId);
-        modelMap.addAttribute("type", type);
-        return new ModelAndView("heritageProject/project");
+        modelMap.addAttribute("provinceid", request.getParameter("provinceid"));
+        modelMap.addAttribute("type", request.getParameter("type"));
+        return new ModelAndView("/heritageProject/project");
     }
 
+    /**
+     *转入非遗名录的传承人页面
+     * @param modelMap
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/project.master.do")
     public ModelAndView getMasterProject(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-        modelMap.addAttribute("provinceid", provinceId);
-        modelMap.addAttribute("type", type);
-        return new ModelAndView("heritageProject/project.master");
+        modelMap.addAttribute("provinceid", request.getParameter("provinceid"));
+        modelMap.addAttribute("type", request.getParameter("type"));
+        return new ModelAndView("/heritageProject/project.master");
     }
 
+    /**
+     * 非遗名录项目页面下的技艺类型子页面
+     * @param modelMap
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/project.type.do")
-    public List<Project> getProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
-
+    public Set<String> getProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
 
         //先找到配置文件里的entity
@@ -66,23 +82,27 @@ public class ProjectController {
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
         List<Project> list = (List<Project>) xdoManager.list(tempDo, tempDoQuery, null);
-        Map<String, Project> map = new HashMap<String, Project>();
-        for (Project project : list) {
-            map.put(project.getType(), project);
+
+        modelMap.addAttribute("provinceid", request.getParameter("provinceid"));
+        modelMap.addAttribute("type", request.getParameter("type"));
+
+        //因group by配置无效，自己去重
+        Set<String> typeSet = new TreeSet<String>();
+        for(Project project : list){
+            typeSet.add(project.getType() == null ? "-1" : project.getType());
         }
-        list = new ArrayList<Project>();
-        for (Map.Entry<String, Project> entry : map.entrySet()) {
-            list.add(entry.getValue());
-        }
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-        modelMap.addAttribute("provinceid", provinceId);
-        modelMap.addAttribute("type", type);
-        return list;
+        return typeSet;
     }
 
+    /**
+     * 非遗名录传承人页面下的技艺类型子页面
+     * @param modelMap
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/project.master.type.do")
-    public List<MasterProject> getMasterProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
+    public Set<String> getMasterProjectType(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
         String qm = request.getParameter("qm");
 
@@ -92,38 +112,48 @@ public class ProjectController {
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
         List<MasterProject> list = (List<MasterProject>) xdoManager.list(tempDo, tempDoQuery, null);
-        Map<String, MasterProject> map = new HashMap<String, MasterProject>();
-        for (MasterProject masterProject : list) {
+
+        //因group by配置无效，自己去重
+        Set<String> typeSet = new TreeSet<String>();
+        for(MasterProject masterProject : list){
             try {
-                map.put(masterProject.getProject().getType(), masterProject);
+                typeSet.add(masterProject.getProject().getType() == null ? "-1" : masterProject.getProject().getType());
             } catch (NullPointerException e) {
                 continue;
             }
         }
-        list = new ArrayList<MasterProject>();
-        for (Map.Entry<String, MasterProject> entry : map.entrySet()) {
-            list.add(entry.getValue());
-        }
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-        modelMap.addAttribute("provinceid", provinceId);
-        modelMap.addAttribute("type", type);
-        return list;
+
+        modelMap.addAttribute("provinceid", request.getParameter("provinceid"));
+        modelMap.addAttribute("type", request.getParameter("type"));
+
+        return typeSet;
     }
 
-
+    /**
+     * 非遗名录项目页面和传承人也面的地区子页面
+     * @param modelMap
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/provinceList.do"})
     public List<Object> getProvinceList(ModelMap modelMap, HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
         List<Object> list = baseManager.listObject(xQuery);
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-        modelMap.addAttribute("provinceid", provinceId);
-        modelMap.addAttribute("type", type);
+
+        modelMap.addAttribute("provinceid", request.getParameter("provinceid"));
+        modelMap.addAttribute("type", request.getParameter("type"));
         return list;
     }
 
-    @RequestMapping({"/projectMaster.List.do", "/project.List.do"})
+    /**
+     * 非遗名录的项目页面和传承人页面的查询结果列表子页面
+     * @param request
+     * @param modelMap
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/projectMaster.List.do", "/project.List.do","/project.home.list.do"})
     public List<Object> getMasterProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
@@ -146,8 +176,12 @@ public class ProjectController {
         String type = request.getParameter("type");
 
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
+
+        //根据页面选择，动态加入新查询condition
+        //首先记录原condition，查询结束时替换回原condition
         List<QueryCondition> originList = tempDoQuery.getConditionList();
 
+        //技艺类型condition
         if (type != null && !"-1".equals(type)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition, originList.get(0));
@@ -163,8 +197,11 @@ public class ProjectController {
             tempDoQuery.getConditionList().addAll(originList);
             tempDoQuery.getConditionList().add(condition);
         }
+
+        //记录更新后的condition
         List<QueryCondition> firstList = tempDoQuery.getConditionList();
 
+        //地区condition
         if (provinceId != null && !"-1".equals(provinceId)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition, originList.get(0));
@@ -191,61 +228,10 @@ public class ProjectController {
         }
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
+
+        //替换回有原condition
         tempDoQuery.setConditionList(originList);
         return pageInfo.getList();
 
     }
-
-    @RequestMapping({"/project.home.list.do"})
-    public List<Object> getProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
-
-        String qm = request.getParameter("qm");
-
-        if (qm.split("_").length < 2) {
-            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
-        }
-        //先找到配置文件里的entity
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-
-        PageEntity pageEntity = new PageEntity();
-        String pageIndex = request.getParameter("pageEntity.index");
-        String pageSize = request.getParameter("pageEntity.size");
-        if (pageIndex != null) {
-            pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
-        }
-
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//        List<QueryCondition> originList = tempDoQuery.getConditionList();
-//
-//        QueryCondition condition = new QueryCondition();
-//        BeanUtils.copyProperties(condition, originList.get(0));
-//        condition.setName("picture_url");
-//        condition.setValue("");
-//        condition.setOperation("ne");
-//
-//        tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
-//        tempDoQuery.getConditionList().addAll(originList);
-//        tempDoQuery.getConditionList().add(condition);
-
-        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-        modelMap.put("pageInfo", pageInfo);
-        modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
-            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-        }
-        modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getData());
-//        tempDoQuery.setConditionList(originList);
-        return pageInfo.getList();
-
-    }
-
-
 }

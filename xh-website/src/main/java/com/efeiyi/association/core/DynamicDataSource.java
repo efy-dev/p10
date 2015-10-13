@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 /**
  * Created by Administrator on 2015/9/22.
+ * 数据源动态切换
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
     @Autowired

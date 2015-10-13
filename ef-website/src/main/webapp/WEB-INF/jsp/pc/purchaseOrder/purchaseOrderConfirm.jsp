@@ -155,7 +155,7 @@
                                         </div>
                                     </td>
                                     <td width="171"><span
-                                            class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
+                                            class="moneycl">${(product.productModel.price)*product.amount}</span>
                                     </td>
                                     <td width="137">
                                         <span>x${product.amount}</span>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" placeholder="限45个字" maxlength="45" onchange="updateCount(this)" style="color: black">
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="(如需开具发票，请在此输入开票信息)" maxlength="45" onchange="updateCount(this)" style="color: black">
                     <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
@@ -232,21 +232,33 @@
         for (var key in messageObject) {
             message += key + ":" + messageObject[key] + ";"
         }
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            success: function (data) {
+                if(data){
+                    if (consumerAddress == "") {
+                        showAlert("提示", "请选择一个收货地址！");
+                    } else {
+                        var url = "<c:url value="/order/confirm/"/>";
+                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
+                        element.onclick = null;
+                        $(element).attr("href",url);
+                        $(element).click();
+                        showChooseConfirm("提示","是否支付成功？",function(){
+                            window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+                        },function(){
+                            window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+                        })
+                    }
+                }else{
+                    showAlert("提示", "抱歉，该商品已售罄！")
+                }
+            },
 
-        if (consumerAddress == "") {
-            showAlert("提示", "请选择一个收货地址！");
-        } else {
-            var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message;
-            element.onclick = null;
-            $(element).attr("href",url);
-            $(element).click();
-            showChooseConfirm("提示","是否支付成功？",function(){
-                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
-            },function(){
-                window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
-            })
-        }
+        });
     }
 
 

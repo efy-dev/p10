@@ -98,6 +98,10 @@ public class PurchaseOrderPaymentController {
                         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp);
                     }
                 }
+                for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                    purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
+                    baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
+                }
                 purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WRECEIVE); //改变订单状态为待收货状态
                 baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
@@ -194,10 +198,10 @@ public class PurchaseOrderPaymentController {
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
         purchaseOrder.setConsumerAddress(consumerAddress);
-        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
-            baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
-        }
+//        for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+//            purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() - purchaseOrderProduct.getPurchaseAmount());
+//            baseManager.saveOrUpdate(ProductModel.class.getName(), purchaseOrderProduct.getProductModel());
+//        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
@@ -339,6 +343,17 @@ public class PurchaseOrderPaymentController {
         return "/purchaseOrder/paySuccess";
     }
 
+    @RequestMapping({"/checkInventory/{orderId}"})
+    @ResponseBody
+    public boolean checkInventory(@PathVariable String orderId){
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),orderId);
+        for(PurchaseOrderProduct purchaseOrderProduct:purchaseOrder.getPurchaseOrderProductList()){
+            if (purchaseOrderProduct.getPurchaseAmount()>purchaseOrderProduct.getProductModel().getAmount()){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 

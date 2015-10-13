@@ -110,9 +110,8 @@ public class MyHeritageProjectController {
 
         String path = request.getParameter("qm");
         document.getDocumentContent().setDocument(document);
-        //新建内容
+
         if (document.getId() == null || "".equals(document.getId())) {
-            //新建内容传入原页面地址
             document.setId(null);
             document.getDocumentContent().setId(null);
             document.setStatus("1");
@@ -205,9 +204,8 @@ public class MyHeritageProjectController {
 
         String path = request.getParameter("qm");
         document.getDocumentContent().setDocument(document);
-        //新建内容
+
         if (document.getId() == null || "".equals(document.getId())) {
-            //新建内容传入原页面地址
             document.setId(null);
             document.getDocumentContent().setId(null);
             document.setStatus("1");

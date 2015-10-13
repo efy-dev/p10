@@ -503,6 +503,8 @@ CREATE TABLE `product_model_record` (
 ALTER TABLE `product_model_record`
 ADD COLUMN `status`  varchar(2) NULL AFTER `create_datetime`;
 
+=======================================以上已执行============================================
+
 
 
 

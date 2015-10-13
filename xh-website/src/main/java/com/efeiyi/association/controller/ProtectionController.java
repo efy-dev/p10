@@ -29,8 +29,6 @@ import java.util.List;
 public class ProtectionController {
 
     @Autowired
-    private BaseManager baseManager;
-    @Autowired
     private DoManager doManager;
     @Autowired
     private XdoManager xdoManager;

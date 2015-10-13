@@ -40,6 +40,9 @@
 <!--//End--header-->
 <article class="bd shop-cart">
     <div class="bd cart-order">
+        <%
+            boolean b = false;
+        %>
         <div class="bd order-address" id="order-add">
             <c:if test="${addressList.size() > 0}">
                 <c:forEach items="${addressList}" var="address">
@@ -51,9 +54,15 @@
 
                             <p class="txt">${address.province.name}${address.city.name}${address.details}</p>
                             <a href="#arrow-right" class="arrow-right"></a>
+                            <%
+                                b = true;
+                            %>
                         </a>
                     </c:if>
                 </c:forEach>
+                <c:if test="<%=!b%>">
+                <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
+                </c:if>
             </c:if>
             <c:if test="${addressList.size() == 0}">
             <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
@@ -106,7 +115,7 @@
             <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
                                                                                      class="arrow-right"></a></p>
 
-            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.floatValue()}</span></p>
+            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice}</span></p>
 
             <p><strong class="grey">返现</strong><span><em>￥</em>0.00</span></p>
 
@@ -346,21 +355,34 @@
         for (var key in messageObject) {
             message += key + ":" + messageObject[key] + ";"
         }
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            success: function (data) {
+                if(data){
+                    if (consumerAddress == "") {
+                        showAlert("提示", "请选择一个收货地址！");
+                    } else {
 
-        if (consumerAddress == "") {
-            showAlert("提示", "请选择一个收货地址！");
-        } else {
+                        var isweixin = "";
 
-            var isweixin = "";
+                        if (isWeiXin()) {
+                            isweixin = "&isWeiXin=1";
+                        }
 
-            if (isWeiXin()) {
-                isweixin = "&isWeiXin=1";
-            }
+                        var url = "<c:url value="/order/confirm/"/>";
+                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
+                        window.location.href = url;
+                    }
+                }else{
+                    showAlert("提示", "抱歉，该商品已售罄！")
+                }
+            },
 
-            var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
-            window.location.href = url;
-        }
+        });
+
     }
 
 

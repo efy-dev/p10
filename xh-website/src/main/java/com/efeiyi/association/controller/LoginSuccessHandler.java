@@ -17,6 +17,7 @@ import java.io.IOException;
 /**
  * 处理 spring security 登录成功
  */
+@Deprecated
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
