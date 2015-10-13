@@ -198,6 +198,9 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/cancelOrder/{orderId}"})
     public String cancelPurchaseOrder(@PathVariable String orderId) throws Exception {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
+        if(purchaseOrder.getCoupon() != null){
+            purchaseOrder.getCoupon().setStatus("1");
+        }
         for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
             if (purchaseOrderProduct.getProductModel().getAmount() != null) {
                 purchaseOrderProduct.getProductModel().setAmount(purchaseOrderProduct.getProductModel().getAmount() + purchaseOrderProduct.getPurchaseAmount());
