@@ -28,7 +28,7 @@
                             <img src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-model-wap-view" alt="">
                             <p class="wh name">${map.get(productModel)}
                             </p>
-                            <p class="price"><em>￥</em><span>${productModel.price.intValue()}</span></p>
+                            <p class="price"><em>￥</em><span>${productModel.price}</span></p>
                             </a>
                         </li>
                 </c:forEach>
