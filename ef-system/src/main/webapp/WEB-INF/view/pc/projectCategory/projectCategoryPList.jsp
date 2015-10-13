@@ -145,7 +145,6 @@
 <script>
     function changeCategoryStatus(obj,id){
         var status = $(obj).attr("status");
-        alert(status);
         $.ajax({
             type: "get",
             url: '<c:url value="/projectCategory/updateStatus.do"/>',
