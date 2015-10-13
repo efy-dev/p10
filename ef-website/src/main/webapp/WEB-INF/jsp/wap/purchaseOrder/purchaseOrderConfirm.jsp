@@ -346,21 +346,34 @@
         for (var key in messageObject) {
             message += key + ":" + messageObject[key] + ";"
         }
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
+            dataType: 'json',
+            success: function (data) {
+                if(data){
+                    if (consumerAddress == "") {
+                        showAlert("提示", "请选择一个收货地址！");
+                    } else {
 
-        if (consumerAddress == "") {
-            showAlert("提示", "请选择一个收货地址！");
-        } else {
+                        var isweixin = "";
 
-            var isweixin = "";
+                        if (isWeiXin()) {
+                            isweixin = "&isWeiXin=1";
+                        }
 
-            if (isWeiXin()) {
-                isweixin = "&isWeiXin=1";
-            }
+                        var url = "<c:url value="/order/confirm/"/>";
+                        url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
+                        window.location.href = url;
+                    }
+                }else{
+                    showAlert("提示", "抱歉，该商品已售罄！")
+                }
+            },
 
-            var url = "<c:url value="/order/confirm/"/>";
-            url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
-            window.location.href = url;
-        }
+        });
+
     }
 
 

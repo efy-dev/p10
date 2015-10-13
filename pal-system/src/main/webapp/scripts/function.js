@@ -268,3 +268,15 @@ function deleteNode(val){
         delDiv.parentNode.removeChild(delDiv);
     }
 }
+
+function selectObjectSubmit(divId){
+    //var LType = document.getElementById("POType");
+    var LType = document.getElementById(divId);
+    var type = LType.firstElementChild.value;
+    if(type == null || type == ""){
+        alert("请选择标签类型");
+        return false;
+    } else {
+        return true;
+    }
+}

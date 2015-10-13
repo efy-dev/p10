@@ -108,7 +108,7 @@
     </c:if>
 </div>
 <div class="am-g" id="productForm" style="display:none">
-    <form id="selectProduct" onsubmit="return selectProductSubmit()" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
+    <form id="selectProduct" onsubmit="return selectObjectSubmit('POType')" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id">
         <input type="hidden" name="status" value="1" />
         <input type="hidden" name="purchaseOrder.id" value="${object.id}">
@@ -138,18 +138,6 @@
             </div>
         </div>
     </form>
-    <script type="text/javascript">
-        function selectProductSubmit(){
-            var LType = document.getElementById("POType");
-            var type = LType.firstElementChild.value;
-            if(type == null || type == ""){
-                alert("请选择防伪标签类型");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </div>
 <c:if test="${not empty object.purchaseOrderLabelList}">
     <div class="am-cf am-padding">

@@ -21,7 +21,7 @@
 </div>
 <hr/>
 <div class="am-g">
-    <form id="productLabelForm" onsubmit="return productLabelForm()" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
+    <form id="productLabelForm" onsubmit="return selectObjectSubmit('POType')" action="<c:url value='/purchaseOrderLabel/savePurchaseOrderLabel.do'/>" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
         <div class="am-form-group">
@@ -58,18 +58,6 @@
             </div>
         </div>
     </form>
-    <script type="text/javascript">
-        function productLabelForm(){
-            var LType = document.getElementById("POType");
-            var type = LType.firstElementChild.value;
-            if(type == null || type == ""){
-                alert("请选择防伪标签类型");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </div>
 </body>
 </html>

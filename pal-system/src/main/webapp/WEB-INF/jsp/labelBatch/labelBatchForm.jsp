@@ -11,18 +11,6 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript">
-        function LabelBatchFormSubmit(){
-            var LType = document.getElementById("LType");
-            var type = LType.firstElementChild.value;
-            if(type == null || type == ""){
-                alert("请选择标签类型");
-                return false;
-            } else {
-                return true;
-            }
-        }
-    </script>
 </head>
 <body>
 <div class="am-cf am-padding">
@@ -33,7 +21,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="<c:url value='/basic/xm.do'/>" onsubmit="return LabelBatchFormSubmit()" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value='/basic/xm.do'/>" onsubmit="return selectObjectSubmit('LType')" method="post" class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateLabelBatch">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="${object.status}" />
