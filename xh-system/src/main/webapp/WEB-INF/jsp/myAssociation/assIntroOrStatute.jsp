@@ -53,6 +53,9 @@
         ss.document.write(content);
         ss.document.close();
     }
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: '<c:url value="/myDocument/ckeditorUpload.do"/>'
+    });
 </script>
 </body>
 </html>
