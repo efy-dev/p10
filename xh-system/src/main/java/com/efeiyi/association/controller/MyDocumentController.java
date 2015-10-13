@@ -2,6 +2,7 @@ package com.efeiyi.association.controller;
 
 import com.efeiyi.association.OrganizationConst;
 import com.efeiyi.association.service.MyDocumentManager;
+import com.efeiyi.association.util.SavePicsOfDocUtil;
 import com.efeiyi.ec.association.model.IntangibleCulturalOrganization;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -75,14 +76,10 @@ public class MyDocumentController {
      * 根据group_id查询获取相关document
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping("/doc.do")
+    @RequestMapping({"/doc.do","/organization.do"})
     public List<Document> getDocByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
-//        XQuery  xQuery = new XQuery(qm,request);
-//        List<Document> docs = baseManager.listObject(xQuery);
 
-//        String conditions = request.getParameter("conditions");
-//        request.setAttribute("conditions", conditions);
         if (qm.split("_").length < 2) {
             throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
         }
@@ -90,9 +87,6 @@ public class MyDocumentController {
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//        modelMap.put("tempDo", tempDo);
-//        modelMap.put("doQueryList", tempDo.getDoQueryList());
-//        String resultPage = tempDo.getResult();
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -103,15 +97,9 @@ public class MyDocumentController {
         }
 
         modelMap.put("tabTitle", tempDoQuery.getLabel());
-//                resultPage = "/pc/choiceness";
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-//                返回列表
-//        Map map = request.getParameterMap();
-//        xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
-        // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
 
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
@@ -119,8 +107,6 @@ public class MyDocumentController {
         modelMap.put("qm", qm);
         modelMap.put("group", tempDo.getData());
         return pageInfo.getList();
-//        return docs;
-        //return new ModelAndView("/",model);
     }
 
     /**
@@ -148,34 +134,9 @@ public class MyDocumentController {
             myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
-        if (document.getDocumentContent().getContent() != null) {
-            Parser parser = new Parser(document.getDocumentContent().getContent());
-            NodeFilter filter = new TagNameFilter("img");
-            NodeList nodes = parser.extractAllNodesThatMatch(filter);
 
-            if (nodes != null) {
-                Node eachNode = null;
-                ImageTag imageTag = null;
-                String srcPath = null;
-                DocumentAttachment documentAttachment = null;
-                document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+        SavePicsOfDocUtil.savePicsOfDoc(document);
 
-//              遍历所有的img节点
-                for (int i = 0; i < nodes.size(); i++) {
-                    eachNode = (Node) nodes.elementAt(i);
-                    if (eachNode instanceof ImageTag) {
-                        imageTag = (ImageTag) eachNode;
-
-//                      获得html文本的原来的src属性
-                        srcPath = imageTag.getAttribute("src");
-                        documentAttachment = new DocumentAttachment();
-                        documentAttachment.setPath(srcPath);
-                        documentAttachment.setDocument(document);
-                        document.getDocumentAttachmentList().add(documentAttachment);
-                    }
-                }
-            }
-        }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         myDocumentManager.saveDocument(document);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
@@ -231,8 +192,6 @@ public class MyDocumentController {
         }
         //先找到配置文件里的entity
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-//            DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         //设置保存后的返回页面
         model.addAttribute("qm", request.getParameter("resultPage"));
         if (document.getId() != null && !"".equals(document.getId())) {
@@ -251,40 +210,6 @@ public class MyDocumentController {
         return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
-    @RequestMapping("/organization.do")
-    public List<IntangibleCulturalOrganization> getOrganization(HttpServletRequest request, ModelMap modelMap) throws Exception {
-
-        String qm = request.getParameter("qm");
-        if (qm.split("_").length < 2) {
-            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
-        }
-        //先找到配置文件里的entity
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-
-        PageEntity pageEntity = new PageEntity();
-        String pageIndex = request.getParameter("pageEntity.index");
-        String pageSize = request.getParameter("pageEntity.size");
-        if (pageIndex != null) {
-            pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
-        }
-
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
-        modelMap.put("pageInfo", pageInfo);
-        modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-
-        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
-            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-        }
-        modelMap.put("qm", qm);
-        modelMap.put("group", tempDo.getData());
-        return pageInfo.getList();
-    }
-
     /**
      * 新建页面
      *
@@ -300,8 +225,6 @@ public class MyDocumentController {
         }
         //先找到配置文件里的entity
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-//            DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
         //设置保存后的返回页面
         model.addAttribute("qm", request.getParameter("resultPage"));
         if (organization.getId() != null && !"".equals(organization.getId())) {
@@ -312,6 +235,13 @@ public class MyDocumentController {
         return new ModelAndView(/*request.getContextPath() +*/ tempDo.getResult());
     }
 
+    /**
+     * ckediotr上传图片
+     * @param multipartFile
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/ckeditorUpload.do")
     @ResponseBody
     public void ckeditorUpload(@RequestParam("upload") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -337,28 +267,4 @@ public class MyDocumentController {
             e.printStackTrace();
         }
     }
-
-//    private void processNodeList(NodeList list, String keyword) {
-//        //迭代开始
-//        SimpleNodeIterator iterator = list.elements();
-//        while (iterator.hasMoreNodes()) {
-//            Node node = iterator.nextNode();
-//            //得到该节点的子节点列表
-//            NodeList childList = node.getChildren();
-//            //孩子节点为空，说明是值节点
-//            if (null == childList)
-//            {
-//                //得到值节点的值
-//                String result = node.;
-//                //若包含关键字，则简单打印出来文本
-//                if (keyword.equals(result))
-//                    System.out.println(result);
-//            } //end if
-//            //孩子节点不为空，继续迭代该孩子节点
-//            else
-//            {
-//                processNodeList(childList, keyword);
-//            }//end else
-//        }//end wile
-//    }
 }

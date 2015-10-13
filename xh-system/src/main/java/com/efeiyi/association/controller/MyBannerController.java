@@ -39,7 +39,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/myBanner")
 public class MyBannerController {
-    private static Logger logger = Logger.getLogger(MyBannerController.class);
     @Autowired
     private BaseManager baseManager;
 
@@ -58,9 +57,6 @@ public class MyBannerController {
     @Qualifier("aliOssUploadManagerImpl")
     private AliOssUploadManager aliOssUploadManager;
 
-    @Autowired
-    @Qualifier("autoSerialManager")
-    private AutoSerialManager autoSerialManager;
 
     /**
      * 通过模块ID获取相关模块的轮播图（状态为可用）的所有对象
@@ -76,9 +72,6 @@ public class MyBannerController {
         Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-//        modelMap.put("tempDo", tempDo);
-//        modelMap.put("doQueryList", tempDo.getDoQueryList());
-//        String resultPage = tempDo.getResult();
 
         PageEntity pageEntity = new PageEntity();
         String pageIndex = request.getParameter("pageEntity.index");
@@ -89,16 +82,9 @@ public class MyBannerController {
         }
 
         modelMap.put("tabTitle", tempDoQuery.getLabel());
-//                resultPage = "/pc/choiceness";
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-//                返回列表
-//        Map map = request.getParameterMap();
-//        xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, pageEntity.getIndex() + "", pageEntity.getSize() + "");
-        // xdoSupportManager.generateTempPageConditions(request.getRequestURI(), map, 1 + "", 20 + "");
-
 
         if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
             modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
