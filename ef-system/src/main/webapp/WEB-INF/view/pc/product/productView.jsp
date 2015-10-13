@@ -745,7 +745,6 @@
             formData: {"imgType": "normal"}, //提交给服务器端的参数
             onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理
                 data = data.substring(1, data.length - 1);
-                alert(data);
                 var pictureId = data.split(":")[0].trim();
                 var imgUrl = data.split(":")[1];
                 var imgName = data.split(":")[2];
