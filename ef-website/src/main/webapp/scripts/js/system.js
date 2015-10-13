@@ -78,7 +78,15 @@ $(function(){
         //    }
         //})
         //
-
+        $(window).scroll(function(){
+            var d=$(document).scrollTop();
+            if(d>900){
+                $('.tab-wrap').parents('.wh').addClass('fixed-tab');
+            }else{
+                $('.tab-wrap').parents('.wh').removeClass('fixed-tab');
+            }
+        });
+        //
         $('.product-intro .detail .part:last').css({'border':'0'});
         //���
         $('.tab-items li a').click(function(){
@@ -126,7 +134,7 @@ $(function(){
             return false;
         })
     })();
-    //�ջ���ַ
+    //
     (function(){
         $('.my-order .extra-r>a').click(function(){
             $(this).siblings('.active-pop').show();
@@ -136,7 +144,7 @@ $(function(){
             return false;
         })
     })();
-    //��Ʒ����
+    //
     (function(){
         $('.nav-item .title').click(function(){
             $(this).find('.icon').toggleClass('icon-active');
@@ -144,9 +152,8 @@ $(function(){
             $(this).parents('.nav-item').find('.ul-list')
         })
     })();
-    //�Ҳ�������
+    //
     (function(){
-
         $(window).scroll(function(){
             var _top=$(window).scrollTop();
             var btnTop=$('.scroll-bar-top');
@@ -167,7 +174,6 @@ $(function(){
             })
         })
     })();
-
     //购物车
     (function(){
         $('#cart-coupon').find('.btn-coupon').click(function(){
@@ -176,7 +182,34 @@ $(function(){
             return false;
         })
     })();
-
-
-
+    //010110结算页-计数
+    (function(){
+        var $tex = $("#leaveword-txt");
+        var $num = $('#leaveword-num');
+        var ie = jQuery.support.htmlSerialize;
+        var str = 0;
+        var abcnum = 0;
+        var maxNum = 90;
+        var texts= 0;
+        var num = 0;
+        $tex.val("");
+        //文本框字数计算和提示改变
+        if(ie){
+            $tex[0].oninput = changeNum;
+        }
+        function changeNum(){
+            //汉字的个数
+            str = ($tex.val().replace(/\w/g,"")).length;
+            //非汉字的个数
+            abcnum = $tex.val().length-str;
+            total = str*2+abcnum;
+            if(str*2+abcnum<maxNum || str*2+abcnum == maxNum){
+                texts =Math.ceil((maxNum - (str*2+abcnum))/2);
+                $num.html("<span>"+(45-texts)+"/45</span>").children();
+            }else if(str*2+abcnum>maxNum){
+                texts =Math.ceil(((str*2+abcnum)-maxNum)/2);
+                $num.html("<span>"+texts+"/45</span>").children("span").css({"color":"red"});
+            }
+        }
+    })();
 })
