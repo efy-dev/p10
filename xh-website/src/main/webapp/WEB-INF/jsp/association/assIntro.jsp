@@ -21,8 +21,6 @@
       </li>
     </ul>
   </div>
-  <!-- //End--div-list-->
 </div>
-<!-- //End--slide-right-->
 </body>
 </html>

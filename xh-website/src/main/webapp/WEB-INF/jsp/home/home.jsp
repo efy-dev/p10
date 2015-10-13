@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/layouts/public.jsp" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -18,139 +16,58 @@
 <div class="wh home">
   <div class="hd">
     <div class="slide-left">
-      <div class="focus">
-        <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"animation":"slide","slideshow":false}' >
-          <ul class="am-slides">
-            <c:forEach items="${bannerList}" var="banner">
-              <li>
-                <a href="${banner.directUrl}" target="_self"><img src="<%=imgBasePath %>${banner.imageUrl}"></a>
-                <div class="am-slider-desc">
-                  <h3>${banner.title}</h3>
-                  <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
-                </div>
-              </li>
-            </c:forEach>
-          </ul>
-        </div>
-      </div>
-      <!--//End--am-slider-->
+      <jsp:include flush="true" page="/home/homeBanner.do?qm=listPCBanner_default"/>
+      <%-- 轮播图 --%>
       <div class="wh list-box">
-        <div class="list-news">
-          <div class="title">非遗要闻</div>
-          <ul class="ul-items">
-            <c:forEach items="${IndustryList}" var="industry">
-              <li>
-                <c:if test="${empty industry.documentAttachmentList}">
-                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7,'SubordinateInstitutionManagement')" title=""><img src="<c:url value='/shop2015/upload/exp1.jpg'/>" alt=""/></a>
-                </c:if>
-                <c:if test="${not empty industry.documentAttachmentList}">
-                  <c:forEach items="${industry.documentAttachmentList}" var="att" end="0">
-                    <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7,'SubordinateInstitutionManagement')" title=""><img src="${att.path}" alt=""/></a>
-                  </c:forEach>
-                </c:if>
-                <p class="name" style="width: 90%;">
-                  <a href="javascript:void(0)" onclick="getMatchJnodes('${industry.id}', 7,'SubordinateInstitutionManagement')" title="${industry.title}">${industry.title}</a>
-                </p>
-                <p class="info">${industry.sampleContent}</p>
-                <a href="<c:url value='/news/news.do?qm=plistNewsIndustry_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
-              </li>
-            </c:forEach>
-          </ul>
-        </div>
-        <!-- //End---->
-        <div class="list-news list-news2">
-          <div class="title">重要通知</div>
-          <ul class="ul-items">
-            <c:forEach items="${NoteList}" var="note">
-              <li>
-                <c:if test="${empty note.documentAttachmentList}">
-                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8,'SubordinateInstitutionManagement')" title=""><img src="<c:url value='/shop2015/upload/exp1.jpg'/>" alt=""/></a>
-                </c:if>
-                <c:if test="${not empty note.documentAttachmentList}">
-                  <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                    <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8,'SubordinateInstitutionManagement')" title=""><img src="${att.path}" alt=""/></a>
-                  </c:forEach>
-                </c:if>
-                <p class="name" style="width: 90%;">
-                  <a href="javascript:void(0)" onclick="getMatchJnodes('${note.id}', 8,'SubordinateInstitutionManagement')" target="_parent" title="${note.title}">${note.title}</a>
-                </p>
-                <p class="info">${note.sampleContent}</p>
-                <a href="<c:url value='/news/news.Bulletin.do?qm=plistNewsNote_default'/>" class="btn-more" title="阅读更多">阅读更多</a>
-              </li>
-            </c:forEach>
-          </ul>
-        </div>
-        <!-- //End---->
+        <jsp:include flush="true" page="/home/homeIndustryNews.do?qm=plistNewsIndustry_industry"/>
+        <%-- 行业新闻 --%>
+        <jsp:include flush="true" page="/home/homeNoteNews.do?qm=plistNewsNote_industry"/>
+        <%-- 新闻公告 --%>
       </div>
-      <!-- //End---->
 
-      <jsp:include flush="true"
-                   page="/project/project.home.list.do?qm=plistProject_default"/>
-      <!-- //End---->
-      <div class="wh data-down">
-        <div class="title">资料下载<a class="btn-more" href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default'/> " title="更多">更多</a></div>
-
-        <jsp:include flush="true"
-                     page="/protection/protection.homeList.do?qm=plistPolicy_default&jmenuId=AssociationMenu"/>
-
-      </div>
-      <!-- //End---->
+      <jsp:include flush="true" page="/project/project.home.list.do?qm=plistProject_default"/>
+      <%-- 非遗名录 --%>
+      <jsp:include flush="true" page="/protection/protection.homeList.do?qm=plistPolicy_default&jmenuId=AssociationMenu"/>
+      <%-- 资料下载 --%>
     </div>
-    <!-- //End--slide-right-->
+    <%-- 页面左部 --%>
     <div class="slider-right">
-      <div class="part">
-        <div class="title">协会新闻</div>
-        <ul class="ul-list">
-          <c:forEach items="${OrgNewsList}" var="orgNews">
-            <li>
-              <c:if test="${empty orgNews.documentAttachmentList}">
-                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6,'SubordinateInstitutionManagement')" title=""><img src="<c:url value='/shop2015/upload/exp5.jpg'/>" alt=""/></a>
-              </c:if>
-              <c:if test="${not empty orgNews.documentAttachmentList}">
-                <c:forEach items="${note.documentAttachmentList}" var="att" end="0">
-                  <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6,'SubordinateInstitutionManagement')" title=""><img src="${att.path}" alt=""/></a>
-                </c:forEach>
-              </c:if>
-              <p>
-                <a href="javascript:void(0)" onclick="getMatchJnodes('${orgNews.id}', 6,'SubordinateInstitutionManagement')" target="_parent">${orgNews.title}</a>
-              </p>
-              <a class="btn-more" href="<c:url value='/news/news.do?qm=plistNewsOrganization_default'/>" title="更多">更多</a>
-            </li>
-          </c:forEach>
-        </ul>
-      </div>
-      <!-- //End--part1-->
+      <jsp:include flush="true" page="/home/homeOrgNews.do?qm=plistNewsOrganization_organization"/>
+      <%-- 协会新闻 --%>
       <div class="part">
         <div class="title">在线服务</div>
         <ul class="ul-list-btn">
-          <li><a href="<c:url value='/protection/protection.declare.do?qm=plistMaterial_default'/>" title="在线申报"><i class="icon icon-1"></i>在线申报</a></li>
-          <li><a href="<c:url value='/project/project.do?qm=plistProject_default&provinceid=-1&type=-1'/>" title="非遗名录"><i class="icon icon-2"></i>非遗名录</a></li>
-          <li><a href="<c:url value='/protection/protection.do?qm=plistLaw_default" title="法规政策'/>"><i class="icon icon-3"></i>法规政策</a></li>
-          <li><a href="<c:url value='/organization/organization.committee.do?qm=plistCommitteeAssociation_default'/>" title="下属机构"><i class="icon icon-4"></i>下属机构</a></li>
+          <li>
+            <a href="<c:url value='/protection/protection.declare.do?qm=plistMaterial_default'/>" title="在线申报">
+              <i class="icon icon-1"></i>在线申报
+            </a>
+          </li>
+          <li>
+            <a href="<c:url value='/project/project.do?qm=plistProject_default&provinceid=-1&type=-1'/>" title="非遗名录">
+              <i class="icon icon-2"></i>非遗名录
+            </a>
+          </li>
+          <li>
+            <a href="<c:url value='/protection/protection.do?qm=plistLaw_default" title="法规政策'/>">
+              <i class="icon icon-3"></i>法规政策</a>
+          </li>
+          <li>
+            <a href="<c:url value='/organization/organization.committee.do?qm=plistCommitteeAssociation_default'/>" title="下属机构">
+              <i class="icon icon-4"></i>下属机构</a>
+          </li>
         </ul>
       </div>
-      <!-- //End--part-->
-      <div class="part">
-        <div class="title">非遗传承人</div>
-        <ul class="ul-list">
-          <c:forEach items="${masterList}" var="master">
-            <li>
-              <a href="<c:url value='/project/project.master.do?qm=plistTenant_default&provinceid=-1&type=-1'/>" title=""><img src="<c:url value='/shop2015/upload/exp6.jpg'/>" alt=""></a>
-              <p>${master.fullName}</p>
-            </li>
-          </c:forEach>
-        </ul>
-      </div>
+      <%-- 在线服务 --%>
+      <jsp:include flush="true" page="/home/homeMaster.do?qm=plistMaster_master"/>
+      <%-- 非遗传承人 --%>
     </div>
-    <!-- //End--slide-right-->
+    <%-- 页面右部 --%>
   </div>
 </div>
 <script type="text/javascript">
-  function getMatchJnodes(id,matchJnode,currentJnode){
-//    var currentJnode = "SubordinateInstitutionManagement";
-    var jmenu = document.getElementById("jmenu").value;
-//    var matchJnode = val;
-    var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
+  function homeMatchJNodes(id,matchJNode,currentJNode){
+    var jMenu = document.getElementById("jmenu").value;
+    var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jMenu + "&currentJnode=" + currentJNode + "&matchJnode=" + matchJNode;
     window.location=url;
   }
 </script>

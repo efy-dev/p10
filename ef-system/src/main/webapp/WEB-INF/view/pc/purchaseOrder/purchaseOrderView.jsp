@@ -307,7 +307,7 @@
                     </td>
                     <td class="am-hide-sm-only">
                         <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
-                                        pattern="yyyy-mm-dd"/>
+                                        pattern="yyyy-MM-dd HH:mm"/>
                     </td>
                     <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
                     </td>

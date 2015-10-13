@@ -10,22 +10,23 @@
 <script type="text/javascript">
   function getMatchJnodes(id,currentJnode,matchJnode){
     var jmenu = document.getElementById("jmenu").value;
-//    var currentJnode = "SubordinateInstitutionManagement";
-//    var matchJnode = val;
     var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
     window.location=url;
   }
 </script>
-<ul class="list-table">
-  <c:forEach items="${documentList}" var="document" begin="0" end="3">
-    <li>
-      <a href="javascript:(0)" onclick="getMatchJnodes('${document.id}','17','ProtectionPolicy')" target="_parent" title="${document.title}">
-        <table>
-          <tr>
-            <td>${document.title}</td>
-          </tr>
-        </table>
-      </a>
-    </li>
-  </c:forEach>
-</ul>
+<div class="wh data-down">
+  <div class="title">资料下载<a class="btn-more" href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default'/> " title="更多">更多</a></div>
+  <ul class="list-table">
+    <c:forEach items="${documentList}" var="document" begin="0" end="3">
+      <li>
+        <a href="javascript:(0)" onclick="getMatchJnodes('${document.id}','17','ProtectionPolicy')" target="_parent" title="${document.title}">
+          <table>
+            <tr>
+              <td>${document.title}</td>
+            </tr>
+          </table>
+        </a>
+      </li>
+    </c:forEach>
+  </ul>
+</div>

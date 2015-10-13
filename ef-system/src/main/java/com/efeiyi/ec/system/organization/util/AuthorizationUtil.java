@@ -34,7 +34,6 @@ public class AuthorizationUtil {
     }
 
 
-    //TODO 某些情况下会报空指针，用户未登录的时候获取调用该方法会报空指针 建议按照getMyUser()方法修改
     public static User getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
