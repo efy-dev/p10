@@ -50,7 +50,7 @@
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
                         <tr id="${projectCategory.id}">
-                            <td width="25%">
+                            <td width="30%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button onclick="window.location.href='<c:url
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td width="25%">
+                            <td width="20%">
                                 <a href="<c:url value="/basic/xm.do?qm=viewProjectCategory&view=plist&id=${projectCategory.id}"/>">
                                         ${projectCategory.name}
                                 </a>
@@ -145,7 +145,6 @@
 <script>
     function changeCategoryStatus(obj,id){
         var status = $(obj).attr("status");
-        alert(status);
         $.ajax({
             type: "get",
             url: '<c:url value="/projectCategory/updateStatus.do"/>',

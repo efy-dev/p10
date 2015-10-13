@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
  * Time: 下午4:18
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface UserDao extends BaseDao<AssUser> {
 
 

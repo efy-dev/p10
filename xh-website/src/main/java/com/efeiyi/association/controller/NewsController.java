@@ -24,9 +24,6 @@ import java.util.List;
 public class NewsController {
 
     @Autowired
-    private BaseManager baseManager;
-
-    @Autowired
     private XdoManager xdoManager;
 
     @Autowired
@@ -35,6 +32,13 @@ public class NewsController {
     @Autowired
     private DoManager doManager;
 
+    /**
+     * 新闻公告系列页面
+     * @param request
+     * @param modelMap
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/news/news.do","/news/news.Bulletin.do","/protection/protection.list.do","/protection/protection.homeList.do"})
     public List<Document> news(HttpServletRequest request,ModelMap modelMap) throws Exception{
         String qm = request.getParameter("qm");
@@ -55,7 +59,6 @@ public class NewsController {
         }
 
         modelMap.put("tabTitle", tempDoQuery.getLabel());
-//                resultPage = "/pc/choiceness";
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("pageInfo", pageInfo);
         modelMap.put("pageEntity", pageInfo.getPageEntity());

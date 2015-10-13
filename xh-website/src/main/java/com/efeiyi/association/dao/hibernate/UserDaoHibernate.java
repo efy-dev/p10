@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Administrator on 2015/8/10.
  */
+@Deprecated
 public class UserDaoHibernate extends BaseDaoSupport<AssUser> implements UserDao {
 
     @Override

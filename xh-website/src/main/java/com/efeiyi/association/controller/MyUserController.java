@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Administrator on 2015/9/23.
  */
+@Deprecated
 @Controller
 @RequestMapping("/myUser")
 public class MyUserController {

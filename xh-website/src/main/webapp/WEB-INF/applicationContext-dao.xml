@@ -105,6 +105,6 @@
     <!--<bean id="userManager" class="com.efeiyi.association.service.impl.UserManagerImpl">-->
         <!--<property name="userDao" ref="userDao"/>-->
     <!--</bean>-->
-    <bean id="autoSerialManager" class="com.efeiyi.association.autoserial.AutoSerialManagerImpl">
-    </bean>
+    <!--<bean id="autoSerialManager" class="com.efeiyi.association.autoserial.AutoSerialManagerImpl">-->
+    <!--</bean>-->
 </beans>

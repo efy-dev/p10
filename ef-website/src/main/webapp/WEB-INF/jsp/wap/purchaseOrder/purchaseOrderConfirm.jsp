@@ -115,7 +115,7 @@
             <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
                                                                                      class="arrow-right"></a></p>
 
-            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice.floatValue()}</span></p>
+            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice}</span></p>
 
             <p><strong class="grey">返现</strong><span><em>￥</em>0.00</span></p>
 

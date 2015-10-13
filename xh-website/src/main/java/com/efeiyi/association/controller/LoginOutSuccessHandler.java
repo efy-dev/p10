@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * 处理退出系统
  */
+@Deprecated
 public class LoginOutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
