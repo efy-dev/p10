@@ -1,5 +1,7 @@
 package com.efeiyi.ec.system.product.controller;
 
+import com.efeiyi.ec.product.model.Product;
+import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.Do;
 import com.ming800.core.does.service.DoHandler;
@@ -17,10 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 public class viewTenantProductHandler implements DoHandler {
 
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
-    private XdoManager xdoManager = (XdoManager) ApplicationContextUtil.getApplicationContext().getBean("xdoManagerImpl");
+    private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
+        if(request.getParameter("id")!="" && request.getParameter("id")!=null){
+            String id = request.getParameter("id");
+            Product product = (Product)baseManager.getObject(Product.class.getName(),id);
+            product.setStatus("2");
+            baseManager.saveOrUpdate(Product.class.getName(),product);
+        }
         modelMap.put("view",request.getParameter("view"));
         return modelMap;
     }
