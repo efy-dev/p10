@@ -8,16 +8,11 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
  * Created by IntelliJ IDEA.
  * User: ming
  * Date: 12-10-16
- * Time: ÏÂÎç4:18
+ * Time: ï¿½ï¿½ï¿½ï¿½4:18
  * To change this template use File | Settings | File Templates.
  */
 public interface PurchaseOrderDao {
 
-    /**
-     * ¸Ä±ä¶©µ¥×´Ì¬
-     * @param purchaseOrder
-     * @return
-     */
     String updateOrderStatus(PurchaseOrder purchaseOrder);
 
 
