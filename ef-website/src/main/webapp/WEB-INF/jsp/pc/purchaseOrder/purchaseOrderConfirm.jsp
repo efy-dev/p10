@@ -11,6 +11,10 @@
 <head>
     <title></title>
     <link href="<c:url value="/scripts/css/myorder.css"/>" type="text/css " rel="stylesheet">
+    <style>
+        .my-clearing .m-form li .dj-btn{padding: 7px 33px;}
+        .my-clearing .m-form{padding:15px 37px 32px;}
+    </style>
 </head>
 <body>
 <div class="wr wh">
@@ -137,12 +141,14 @@
                                 <tr>
                                     <td width="542">
                                         <div class="cols1 page-pdl">
-                                            <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
+                                            <a href="/product/productModel/${product.productModel.id}" target="_blank">
+                                                <img src="http://pro.efeiyi.com/${product.productModel.productModel_url}@!product-icon" alt=""/>
+                                            </a>
 
                                             <div class="info">
                                                 <p><a href="#">${product.productModel.product.project.name}</a></p>
 
-                                                <p><a href="#">${product.productModel.name}
+                                                <p><a href="/product/productModel/${product.productModel.id}" target="_blank">${product.productModel.name}
                                                     <c:if test="${product.productModel.productPropertyValueList.size()>1}">
                                                         [
                                                     <c:forEach items="${product.productModel.productPropertyValueList}"
