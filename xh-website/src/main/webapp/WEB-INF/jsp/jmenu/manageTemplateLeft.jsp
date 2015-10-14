@@ -17,12 +17,15 @@
                 </c:if>
                 <c:if test="${currentJnode.id!= jmenuNode.id}">
                     <li>
-                        <a href="<c:url value= '${jmenuNode.url}'/>" title="" target="_parent">${jmenuNode.text_zh_CN}</a>
+                        <a href="<c:url value= '${jmenuNode.url}'/>" title=""
+                           target="_parent">${jmenuNode.text_zh_CN}</a>
                     </li>
                 </c:if>
 
             </c:forEach>
         </ul>
+        <a href="#btn-menu-down" class="btn-menu-down" title=""><i class="icon icon-menu"></i></a>
+        <a style="display:none" href="btn-menu-up" class="btn-menu-up" title=""><i class="icon icon-menu"></i></a>
     </div>
 </div>
 <input type="hidden" value="${currentJnode.id}" id="currentJnode">

@@ -31,8 +31,8 @@
                 <property name="timeBetweenEvictionRunsMillis" value="3600000"/>
                 <property name="minEvictableIdleTimeMillis" value="18000000"/>
                 <property name="testOnBorrow" value="true"/>
-                <property name="maxActive" value="80"/>
-                <property name="maxIdle" value="20"/>
+                <property name="maxActive" value="60"/>
+                <property name="maxIdle" value="10"/>
                 <property name="maxWait" value="2000"/>
                 <property name="defaultAutoCommit" value="true"/>
                 <property name="removeAbandoned" value="true"/>

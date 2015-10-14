@@ -64,6 +64,24 @@
                 }
             });
         }
+
+        function saveReceiver(purchaseOrderId,orderStatus){
+            if(orderStatus == '7' || orderStatus == '9' || orderStatus == '13'){
+                alert("订单已发货，不能修改收货人信息");
+            }else if(orderStatus == '17'){
+                alert("订单已取消，不能修改收货人信息");
+            }else{
+                jQuery.ajax({
+                    type: "GET",
+                    url: '<c:url value="/purchaseOrder/saveReceiver.do"/>',
+                    data: {name: $('#name').val(), phone: $('#phone').val(),address:$('#address').val(),id:purchaseOrderId},
+                    dataType: "json",
+                    success: function (data) {
+                        alert("收货人信息修改成功");
+                    }
+                });
+            }
+        }
     </script>
 </head>
 <body>
@@ -98,25 +116,50 @@
 
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">收货人姓名</td>
-                <td class="am-u-md-3">${object.consumerAddress.consignee}</td>
+
                 <td class="am-primary am-u-md-3">下单时间</td>
-                <td class="am-u-md-3">
+                <td class="am-u-md-3" colspan="3">
                     <fmt:formatDate value="${object.createDatetime}" pattern="yyyy-MM-dd HH:mm"/>
                 </td>
 
             </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-md-12">
+        <table class="am-table am-table-bordered">
+            <thead>
+            <tr>
+                <th>收货人</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="am-primary am-u-md-3">收货人姓名</td>
+                <td class="am-u-md-3"><input type="text" id="name" value="${object.receiverName}"></td>
+                <td class="am-primary am-u-md-3">电话</td>
+                <td class="am-u-md-3">
+                    <input type="text" id="phone" value="${object.receiverPhone}">
+                </td>
+            </tr>
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">
-                    ${object.consumerAddress.province.name}&nbsp;${object.consumerAddress.city.name}&nbsp;${object.consumerAddress.district.name}&nbsp;${object.consumerAddress.details}
+                <td class="am-u-md-3">
+                    <input type="text" id="address" value="${object.purchaseOrderAddress}">
+                </td>
+                <td class="am-primary am-u-md-3">保存</td>
+                <td class="am-u-md-3">
+                    <input type="button" value="保存" onclick="saveReceiver('${object.id}','${object.orderStatus}')">
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 
 <div class="am-g">
     <div class="am-u-md-12">
@@ -177,7 +220,7 @@
                             alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.serial}</td>
                     <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </tr>
             </c:forEach>
@@ -309,7 +352,8 @@
                         <fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                         pattern="yyyy-MM-dd HH:mm"/>
                     </td>
-                    <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
+                    <td class="am-hide-sm-only">
+                    ${purchaseOrderDelivery.purchaseOrder.purchaseOrderAddress}
                     </td>
                 </tr>
             </c:forEach>
