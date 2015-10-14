@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -36,7 +37,6 @@
             </c:forEach> </strong>
             <a href="#分享" class="share">
                 <i class="icon icon-share"></i>
-
                 <p>分享</p>
             </a>
             <a id ="show" onclick="collect('${productModel.id}')" class="addfav">
@@ -50,15 +50,41 @@
             </a>
         </div>
         <!-- //End--des-title-->
-        <div class="bd des-price">
-            <p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price()}</strong></p>
-
-            <p class="bd express">快递：0（飞蚁包邮）</p>
+        <div class="des-master">
+            <p class="p1"><span>${productModel.product.master.fullName}</span>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
+            <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+            <p class="img"><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></p>
         </div>
+        <!-- //End--des-master-->
+        <div class="bd des-price">
+            <c:if test="productModel.marketPrice!=null">
+                <p class="bd t1"><span>市场价：</span>
+                    <del>${productModel.marketPrice}</del>
+                </p>
+            </c:if>
+            <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
+            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>" style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+        </div>
+        <!-- //End--des-price-->
+        <div class="bd des-format">
+            <a id="btn-num" class="bd btn-num">
+                <span class="select">数量</span>
+                <span class="add-sub">
+                    <em class="sub btn-cart-no" onclick="subtractProduct()" href="#"></em>
+                    <input id = "value" class="ipt-txt" type="text" value="1">
+                    <em class="add" onclick="addProduct()" href="#"></em>
+                </span>
+            </a>
+        </div>
+        <%--<div class="bd des-price">--%>
+            <%--<p class="bd p-price"><span>价格：</span><em>￥</em><strong>${productModel.price()}</strong></p>--%>
+
+            <%--<p class="bd express">快递：0（飞蚁包邮）</p>--%>
+        <%--</div>--%>
         <!-- //End--des-price-->
         <c:if test="${fn:length(productModelList)>1}">
         <div class="bd des-format">
-            <a data-am-modal="{target: '#my-actions'}" class="bd btn-format" title="选择规格">选择规格<i
+            <a data-am-modal="{target: '#my-actions'}" style="color: #000" class="bd btn-format" title="选择规格">选择规格<i
                     class="arrow-right"></i></a>
         </div>
         </c:if>
@@ -88,17 +114,18 @@
             <a class="btn-buy" title="售罄">售罄</a>
         </c:if>
         <c:if test="${productModel.amount>0}">
-            <a class="btn-cart"  href="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}" title="放入购物车"><i class="icon"></i>放入购物车</a>
-            <a class="btn-buy"   href="/order/easyBuy/${productModel.id}?amount=1" title="立即购买">立即购买</a>
+            <a class="btn-cart"  onclick="addCart('${productModel.id}')"  title="放入购物车"><i class="icon"></i>放入购物车</a>
+            <a class="btn-buy"   onclick="immediateBuy('${productModel.id}')" title="立即购买">立即购买</a>
         </c:if>
     </div>
 </article>
 <div class="am-modal-actions dialog-des-format" id="my-actions">
+    <div class="format-error">请选择商品规格</div>
     <div class="bd ">
         <ul class="bd ul-nav">
             <c:if test="${fn:length(productModelList) >1}">
                 <c:forEach items="${productModel.product.productModelList}" var="pm">
-                    <li> <a href="<c:url value="/product/productModel/${pm.id}"/> ">
+                    <li> <a href="<c:url value="/product/productModel/${pm.id}"/> " style="color: #000">
                             ${pm.name}
                             <%--${pm.product.name} <c:forEach--%>
                             <%--items="${pm.productPropertyValueList}" var="pv">--%>
@@ -201,6 +228,27 @@
                 }
             },
         });
+    }
+
+    function subtractProduct() {
+        var t = $("#value");
+        if(t.val()<=1){
+            document.getElementById("classid").value = 1;
+        }
+        t.val(parseInt(t.val())-1)
+    }
+    function addProduct() {
+        var t = $("#value");
+        t.val(parseInt(t.val())+1)
+    }
+
+    function addCart(o){
+        var t = document.getElementById("value").value;
+        window.location.href = "<c:url value="/cart/addProduct.do?id="/>"+o +"&amount="+ t+"&redirect=/product/productModel/"+o;
+    }
+    function immediateBuy(o){
+        var t = document.getElementById("value").value;
+        window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;
     }
 </script>
 </body>
