@@ -58,7 +58,7 @@ public class MyDocumentAttachmentController {
     @Qualifier("aliOssUploadManagerImpl")
     private AliOssUploadManager aliOssUploadManager;
 
-    @RequestMapping({"/attachment.do","/attachmentDownload"})
+    @RequestMapping({"/attachment.do","/attachmentDownload.do"})
     public List<Document> getAttachByGroupId(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String qm = request.getParameter("qm");
         if (qm.split("_").length < 2) {
