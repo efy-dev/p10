@@ -11,9 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 /**
  * Created by Administrator on 2015/8/17.
@@ -104,19 +102,20 @@ public class PurchaseOrderLabelController {
         String orderLabelId = request.getParameter("orderLabelId");
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         File clazzDir = new File(path);
-        String fileName = clazzDir.getParent() + "/file/" + orderLabelId + ".txt";
+        String fileType = request.getParameter("filetype");
+        String fileName = clazzDir.getParent() + "/file/" + orderLabelId + (fileType == null?".txt":fileType);
         File file = new File(fileName);
 //        response.setContentType("application/force-download");
         response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
         response.setContentLength((int) file.length());
-        BufferedReader bis = null;
+        DataInputStream bis = null;
         try {
             if (!file.exists())
                 throw new NullPointerException("指定文件" + fileName + "不存在");
-            bis = new BufferedReader(new FileReader(new File(fileName)));
+            bis = new DataInputStream(new FileInputStream(new File(fileName)));
             int i;
             while ((i = bis.read()) != -1) {
-                response.getWriter().write(i);
+                response.getOutputStream().write(i);
             }
         } catch (Exception e) {
             e.printStackTrace();

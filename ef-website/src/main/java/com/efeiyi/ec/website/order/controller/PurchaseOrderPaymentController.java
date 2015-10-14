@@ -192,12 +192,12 @@ public class PurchaseOrderPaymentController {
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("") && messageTemp.length() == 2) {
+            if (messageTemp != null && !messageTemp.equals("")) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        String purchaseOrderAddress = consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "" + " " + consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "" + " " + consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "" ;
+        String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "") ;
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);

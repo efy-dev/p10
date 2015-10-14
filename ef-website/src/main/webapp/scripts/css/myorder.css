@@ -895,3 +895,4 @@ a:hover{text-decoration: underline}
 /*.od-id p a{margin-left: 55px;width: 100px;height: 25px;color: #fff;font-size: 12px;background: #000;padding:6px 30px;text-decoration: none;}*/
 .my-clearing .m-form li .dj-btn{padding: 7px 33px;}
 .my-clearing .m-form{padding:15px 37px 32px;}
+.header .nav-links li a{white-space:nowrap;text-overflow:ellipsis;width: 87px;table-layout:fixed;overflow: hidden}

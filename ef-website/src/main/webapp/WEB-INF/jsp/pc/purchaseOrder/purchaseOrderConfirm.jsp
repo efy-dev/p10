@@ -234,10 +234,12 @@
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
-        var message = "";
+        var message1 = "";
         for (var key in messageObject) {
-            message += key + ":" + messageObject[key] + ";"
+            message1 += key + ":" + messageObject[key] + ";"
         }
+        var message = encodeURIComponent(message1);
+        alert(message);
         $.ajax({
             type: 'post',
             async: false,
