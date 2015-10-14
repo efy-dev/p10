@@ -43,7 +43,9 @@ public class PurchaseOrder {
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
     private String message; //买家留言
     private Coupon coupon; //优惠券
-    private String purchaseOrderAddress;
+    private String purchaseOrderAddress;//收货人地址
+    private String receiverName;//收货人姓名
+    private String receiverPhone;//收货人联系方式
 
     @Column(name = "purchase_order_address")
     public String getPurchaseOrderAddress() {
@@ -230,6 +232,24 @@ public class PurchaseOrder {
         this.originalPrice = originalPrice;
     }
 
+    @Column(name = "receiver_name")
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    @Column(name = "receiver_phone")
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
     @Column(name = "")
     public String getPayWay() {
         return payWay;
@@ -238,6 +258,8 @@ public class PurchaseOrder {
     public void setPayWay(String payWay) {
         this.payWay = payWay;
     }
+
+
 
     @Transient
     public BigDecimal getRealPayMoney(){
