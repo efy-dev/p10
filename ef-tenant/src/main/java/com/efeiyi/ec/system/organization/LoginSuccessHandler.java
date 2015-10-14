@@ -57,7 +57,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if(user.getBigTenant()==null){
             response.sendRedirect(request.getContextPath() + "/login.do");
         }else {
-            response.sendRedirect(request.getContextPath() + "/main.do?TENANT=" + user.getBigTenant().getName());
+            response.sendRedirect(request.getContextPath() + "/main.do" );
         }
 //        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
 //        if (savedRequest != null) {
