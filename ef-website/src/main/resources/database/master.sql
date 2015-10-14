@@ -311,3 +311,6 @@ ALTER TABLE `purchase_order_product`
 ADD COLUMN `status`  char(8) NULL AFTER `purchase_order_comment_id`;
 #-------------------------------未执行----------------------------------
 
+ALTER TABLE `purchase_order`
+ADD COLUMN `purchase_order_address`  varchar(255) NULL AFTER `coupon_id`;
+
