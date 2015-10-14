@@ -101,7 +101,7 @@
           <dd class="od-id">
             <p>收货地址：<span>${order.purchaseOrderAddress}</span></p>
             <p>收货人姓名：<span>${order.receiverName}</span></p>
-            <p>联系电话：<span>${order.receiverPhone.phone}</span></p>
+            <p>联系电话：<span>${order.receiverPhone}</span></p>
 
           </dd>
         </dl>
