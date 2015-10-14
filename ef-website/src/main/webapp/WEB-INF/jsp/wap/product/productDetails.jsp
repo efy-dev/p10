@@ -148,7 +148,7 @@
         </c:if>
     </div>
 </article>
-<div class="am-modal-actions dialog-des-format" id="my-actions">
+<div class="am-modal-actions dialog-des-format" id="my-actions" style="display: none;">
     <div class="format-error">请选择商品规格</div>
     <div class="bd ">
         <ul class="bd ul-nav">
