@@ -15,7 +15,7 @@
             <%
                 if (AuthorizationUtil.getMyUser().getId() != null) {
             %>
-            <li><a href="<c:url value="/order/myEfeiyi/list.do"/>" title="个人中心">个人中心</a></li>
+            <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
             <li><a href="<c:url value='/j_spring_cas_security_logout'/>" title="退出">退出</a></li>
             <%
                 }
