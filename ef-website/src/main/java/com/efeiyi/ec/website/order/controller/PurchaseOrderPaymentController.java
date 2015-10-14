@@ -82,7 +82,7 @@ public class PurchaseOrderPaymentController {
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentId);
-                if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")) {
+                if (!purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")) {
 
                     purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                     PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
