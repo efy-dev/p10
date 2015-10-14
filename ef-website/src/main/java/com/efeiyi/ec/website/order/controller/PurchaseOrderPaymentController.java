@@ -192,7 +192,7 @@ public class PurchaseOrderPaymentController {
         //买家留言
         HashMap<String, String> messageMap = new HashMap<>();
         for (String messageTemp : message.split(";")) {
-            if (messageTemp != null && !messageTemp.equals("") && messageTemp.length() == 2) {
+            if (messageTemp != null && !messageTemp.equals("")) {
                 messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
