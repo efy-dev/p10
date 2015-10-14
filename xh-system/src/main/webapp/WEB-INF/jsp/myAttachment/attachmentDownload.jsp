@@ -26,7 +26,7 @@
         <td>申请时间</td>
     </tr>
 
-    <c:forEach items="${applicationMaterialList}" var="material">
+    <c:forEach items="${documentList}" var="material">
         <tr>
             <td>
                 <div class="am-btn-toolbar">
