@@ -27,7 +27,7 @@
                     </query>
                 </do>
                 <do name="viewTenant" label="查看商家" access="" result="/tenant/tenantView"/>
-                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm"/>
+                <do name="formTenant" label="保存大师页" access="" result="/tenant/tenantForm" execute="com.efeiyi.ec.system.tenant.controller.FormTenantHandler"/>
                 <do name="saveOrUpdateTenant" label="保存大师" access=""
                     execute="com.efeiyi.ec.system.tenant.controller.SaveTenantHandler"
                     result="redirect:/tenant/viewTenant.do">
