@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -42,7 +43,7 @@
             <ul class="ul-nav-list" style="display:none;">
                 <c:forEach items="${projectMap.get(category.id)}" var="project">
                     <%--<li><a href="<c:url value="/product/list/${project.id}"/>" target="_blank" title="${project.name}">${project.name}</a></li>--%>
-                    <li class="active"><a href="<c:url value="/product/list/${project.id}"/>"
+                    <li class="active"><a href="<%=PConst.HOSTNAME%>/product/list/${project.id}"
                                           title="${project.name}">${project.name}</a></li>
                 </c:forEach>
                     <%--<li><a href="" target="_blank" title="">景泰蓝</a></li>--%>

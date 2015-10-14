@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -28,7 +29,7 @@
               <div class="mt-null">
                 <p>目前还没有收藏商品，挑几件您喜欢的商品吧！</p>
                 <ul>
-                  <li class="efeiyi"><a href="/">e飞蚁首页</a></li>
+                  <li class="efeiyi"><a href="http://www2.efeiyi.com/">e飞蚁首页</a></li>
                 </ul>
               </div>
             </td>
@@ -39,14 +40,14 @@
             <c:forEach items="${collectList}" var="collectList">
             <li class="single">
               <dl>
-                <dt class="list-img"><a href="http://www2.efeiyi.com/product/productModel/${collectList.productModel.id}"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-collect"></a></dt>
+                <dt class="list-img"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-collect"></a></dt>
                 <dd>
                   <dl class="list-title">
                     <%--<dt>--%>
                       <%--<label><input type="checkbox"></label>--%>
                     <%--</dt>--%>
                     <dd>
-                      <p class="list-title-text"><a href="http://www2.efeiyi.com/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a>
+                      <p class="list-title-text"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a>
                         <c:if test="${collectList.productModel.productPropertyValueList.size()>1}">
                         [
                         <c:forEach items="${collectList.productModel.productPropertyValueList}"
@@ -57,7 +58,7 @@
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
                         <c:if test="${collectList.productModel.amount!=0}">
-                        <li class="option-right"><a href="http://www2.efeiyi.com/cart/addProduct.do?id=${collectList.productModel.id}"> 加入购物车</a></li>
+                        <li class="option-right"><a href="<%=PConst.HOSTNAME%>/cart/addProduct.do?id=${collectList.productModel.id}"> 加入购物车</a></li>
                         </c:if>
 
                       </ul>

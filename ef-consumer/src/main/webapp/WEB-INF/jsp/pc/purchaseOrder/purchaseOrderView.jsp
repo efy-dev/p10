@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
@@ -54,10 +55,10 @@
               <tr>
                 <td class="commodity_info1">
                   <ul class="commodity_info-1">
-                    <a href="http://www2.efeiyi.com/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
+                    <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
                   </ul>
                 </td>
-                <td class="commodity_price_unit1  price9"><a href="http://www2.efeiyi.com/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
+                <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
                 <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                 <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
               </tr>
@@ -76,10 +77,10 @@
                 <tr>
                   <td class="commodity_info1">
                     <ul class="commodity_info-1">
-                      <li class="l1 informala"><a href="<c:url value="/product/productModel/${op.productModel.id}"/>" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
+                      <li class="l1 informala"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                     </ul>
                   </td>
-                  <td class="commodity_price_unit1  price9"><a href="<c:url value="/product/productModel/${op.productModel.id}"/>">${op.productModel.product.name}
+                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}
                     <c:if test="${op.productModel.productPropertyValueList.size()>1}">
                       [
                       <c:forEach items="${op.productModel.productPropertyValueList}"

@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.consumer.organization.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 
@@ -37,7 +38,7 @@
                 <span class="top-wechat"></span>
             </li>
             <li class="cart">
-                <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
+                <a href="<%=PConst.HOSTNAME%>/cart/view " title="购物车"><i class="icon"></i>购物车</a>
                 <span class="tips"><em id="cartAmount">0</em></span>
             </li>
         </ul>

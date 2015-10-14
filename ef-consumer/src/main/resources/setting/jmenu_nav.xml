@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmenu id="nav">
 <jnode id="nav" url="" text_zh_CN="电商导航">
-    <jnode url="/" id="organization" access="admin,manager" state="closed"
+
+    <jnode url="http://www2.efeiyi.com" id="organization" access="admin,manager" state="closed"
            text_zh_CN="首页">
-        <match url="/index.jsp"/>
+        <match url="/"/>
     </jnode>
     <jnode url="#" id="productCategory" access="admin,manager" state="productCategory"
            text_zh_CN="商品分类"/>
