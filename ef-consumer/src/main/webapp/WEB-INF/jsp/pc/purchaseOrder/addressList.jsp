@@ -137,7 +137,7 @@
                 <span><span class="text-a"><a class="hideDiv" href="">编辑</a>
                 <span><span class="text-a"><a
                         href="#" onclick="showConfirm('提示','是否删除',function(){
-                     window.location.href='<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>';
+                        window.location.href='<c:url value="/myEfeiyi/removeAddress.do?addressId=${address.id}"/>';
                         })">删除</a></span></span>
 
                       <div class="active-pop" style="display: none">
@@ -198,7 +198,11 @@
 </div>
 </div>
 </div>
+<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
 
+<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/js/system.js"/>"></script>
+<script src="<c:url value="/scripts/js/jquery.validate.js"/>"></script>
 
 <script>
 
@@ -328,7 +332,7 @@
     }
 
     <c:forEach items="${addressList}" var="address">
-        chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
+    chooseCity($("#${address.id}") , "${address.province.id}","${address.city.id}","${address.id}");
     </c:forEach>
 
     $().ready(function () {
