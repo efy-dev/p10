@@ -11,12 +11,8 @@
 <body>
 <div class="am-g">
     <div class="am-u-md-12">
+        <h2>商家用户详情</h2>
         <table class="am-table am-table-bordered">
-            <thead>
-            <tr>
-                <th>商家用户数据</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">用户名</td>
