@@ -85,9 +85,9 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-title a.addfav {right:0}
 .details .des-title .icon {width:20px;height:20px;display: inline-block;margin-top: 5px}
 .details .des-title .icon-share { background-position: -80px -84px}
-#cover{position:fixed;right:0;bottom:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:1100;display:none;}
+#cover{position:fixed;right:0;bottom:0;width:100%;height:100%;z-index:1100;display:none;}
 #cover img{width:260px;height:180px;position:absolute;top:5px;right:18px;}
-#cover.bg {}
+#cover .bg {position:fixed;right:0;bottom:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);}
 .details .des-title p {width:100%;float:left;margin-top:-3px}
 .details .des-master {width:100%;padding:0 15px 0 68px;float:left;position: relative;margin:15px 0}
 .details .des-master p{color: #999;font-size: 12px;line-height:20px;}
@@ -130,8 +130,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .dialog-des-format .dl-des dd i {color: #f00;font-style: normal;}
 .dialog-des-format .dl-des dd em {color: #f00;font-size:15px;}
 .dialog-des-format .dl-des dd span.sec-color,
-.dialog-des-format .dl-des dd span.sec-size {padding:0 22px;line-height:15px;border:1px solid #000;float:left;margin-top:5px;color:#000;font-size:9px;
-    display:none}
+.dialog-des-format .dl-des dd span.sec-size {padding:0 22px;line-height:15px;border:1px solid #000;float:left;margin-top:5px;color:#000;font-size:9px;display:none}
 .dialog-des-format .des-scroll {width:100%;height:260px;float:left;overflow-y:scroll}
 .dialog-des-format .des-scroll .dl-list{border-bottom:1px solid #ccc;}
 .dialog-des-format .des-scroll .dl-list dt{width:100%;padding-left:20px;font-size:12px;font-weight:normal;float:left;margin:10px 0;}
@@ -190,10 +189,22 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     z-index: 9;
     font-size: 9px;
 }
-
-
 /*--//End--*/
-.details .des-content {font-size: 12px}
+.details .des-content {width:100%;float:left;font-size: 12px}
+
+.details .des-tab {width:100%;float:left;padding: 0 20px;margin-top:5px}
+.details .des-tab .link {width:50%;
+    float: left;
+    border: 1px solid #000;
+    text-align: center;
+    font-size:12px;
+    color: #000;
+    line-height:28px;
+}
+.details .des-tab .active {
+    background: #000;
+    color: #fff;
+}
 .details .des-content .title { padding:20px;font-size: 16px}
 .details .des-content .ul-text { padding:0 20px;color: #666;line-height:22px}
 .details .des-content .ul-text .small-title {padding:20px 0;color: #666}
@@ -213,6 +224,66 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .details .des-content .peo-info li span {color:#c60}
 .details .des-content .peo-info li img { width:100%}
 .details .des-content .peo-info li.text { margin:10px 0}
+
+.details .des-content .discuss {}
+.details .des-content .discuss .dis-title {font-size:14px;padding:0 20px}
+.details .des-content .discuss .ul-list .item {
+    width:100%;
+    float: left;
+    margin:15px 0;
+    border-top:2px solid #e5e5e5;
+    border-bottom:2px solid #e5e5e5;
+    padding:15px 20px;
+}
+.details .des-content .discuss .ul-list .item .user-info {
+    width:100%;
+    float: left;
+    margin-bottom:15px;
+    position: relative;
+    padding-left:40px;
+}
+.details .des-content .discuss .ul-list .item .user-info img {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 100px;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.details .des-content .discuss .ul-list .item .user-info p {width:100%;
+    float: left;
+    height:15px;
+    line-height:15px;
+}
+.details .des-content .discuss .ul-list .item .user-info p.time {
+    color: #999;
+}
+.details .des-content .discuss .ul-list .item .seller {width:100%;float:left}
+.details .des-content .discuss .ul-list .item .seller p {
+    width:100%;
+    float: left;
+}
+.details .des-content .discuss .ul-list .item .seller p.answer {
+    margin-top: 15px;
+    color: #999;
+}
+.details .des-content .discuss .ul-list .item .store {
+    width:100%;
+    float: left;
+    margin-top: 15px;
+    border-top:2px solid #e5e5e5;
+}
+.details .des-content .discuss .ul-list .item .store p {
+    width:100%;
+    float: left;
+}
+.details .des-content .discuss .ul-list .item .store p.s-title {
+    margin:15px 0;
+}
+
+
+
+
 .details-total-bar {height:42px;line-height:42px;background:#fff;position:fixed;left:0;bottom:0;box-sizing:border-box;border-top:2px solid #000;border-bottom:2px solid #000}
 .details-total-bar a {font-size:14px;color:#000;float: left;border-right:1px #000 solid;text-align: center}
 .details-total-bar a:last-child { border-right: 0}
