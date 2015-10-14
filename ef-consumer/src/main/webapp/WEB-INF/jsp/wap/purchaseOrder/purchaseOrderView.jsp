@@ -16,8 +16,8 @@
 <c:if test="${order.orderStatus == 1 or order.orderStatus == 17}">
   <div class="line-item">
     <div class="address">
-      <p><span>${order.consumerAddress.consignee}</span><span>${order.consumerAddress.phone}</span></p>
-      <p>${order.consumerAddress.province.name}${order.consumerAddress.city.name}${order.consumerAddress.details}</p>
+      <p><span>${order.receiverName}</span><span>${order.receiverPhone}</span></p>
+      <p>${order.purchaseOrderAddress}</p>
     </div>
     <div class="order-content">
       <div class="order-header">
