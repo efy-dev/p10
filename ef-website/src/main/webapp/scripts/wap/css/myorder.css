@@ -239,7 +239,7 @@ ul,dl{list-style:none}
 .enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
 .enroll .start .login .page li span{padding-left: 2rem;float: right;padding-right: 0}
 @media(min-width:640px) {
-.enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
+    .enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
 }
 .enroll .start .login .page li .tet1{width: 100%;float: left;}
 .enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
