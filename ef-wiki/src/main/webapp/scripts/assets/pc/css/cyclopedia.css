@@ -38,7 +38,7 @@ a{outline: none}
 /*--标签--110208工艺详情页-作品*/
 .craft-work3 .library{padding-bottom: 35px;}
 .craft-work3 .library li{float: left;margin-right: 20px;}
-.craft-work3 .library a{padding:10px 40px;display: block;font-size: 18px;color: #000;border: 1px solid #505050;text-decoration: none;}
+.craft-work3 .library a{padding:10px 40px;display: block;font-size: 16px;color: #000;border: 1px solid #505050;text-decoration: none;}
 .craft-work3 .library a:hover,.craft-work3 .library .active a{background: #505050;color: #fff;}
 .craft-work3 .list-box{padding-top: 10px;}
 .craft-work3 .list-box .box-l{float: left;}
@@ -52,16 +52,16 @@ a{outline: none}
 .craft-work3 .craft-page h4{padding: 16px 0 16px 10px;font-size: 14px;float: left;color: #000;}
 .craft-work3 .craft-page .function-page{padding:0 10px 16px 10px;}
 .craft-work3 .craft-page .function-page .d-left{float: left;}
-.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 5px;}
+.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 2px;}
 .craft-work3 .craft-page .function-page .d-left span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
 .craft-work3 .craft-page .function-page .d-right{float: right}
 .craft-work3 .craft-page .function-page .d-right .right1{float: left;}
-.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 5px;}
+.craft-work3 .craft-page .function-page .d-left .h-i-con{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat 0 -17px;margin-top: 2px;}
 .craft-work3 .craft-page .function-page .d-left span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
 .craft-work3 .craft-page .function-page .d-right .right2{float: right;margin-left: 20px;}
-.craft-work3 .craft-page .function-page .d-right .right1 .h-i-con2{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px 0px;margin-top: 5px;}
+.craft-work3 .craft-page .function-page .d-right .right1 .h-i-con2{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px 0px;margin-top: 2px;}
 .craft-work3 .craft-page .function-page .d-right .right1 span{font-size: 10px;color: #000;float: left;margin-left: 5px;}
-.craft-work3 .craft-page .function-page .d-right .right2 .h-i-con3{width: 10px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px -15px;margin-top: 5px;}
+.craft-work3 .craft-page .function-page .d-right .right2 .h-i-con3{width: 11px;height: 10px;float: left;background: url(../images/cyclopedia.png) no-repeat -19px -15px;margin-top: 2px;}
 .box {
     padding: 15px 0 0 15px;
     float: left;
@@ -97,7 +97,7 @@ a{outline: none}
 .craft-master2 ul li .text h4{font-size: 14px;color: #000;margin-bottom: 5px;}
 .craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;}
 .craft-master2 ul li .text p span{color:#999!important;}
-.craft-master2 ul li .text a{padding:5px 7px;border: 1px solid #ccc;display:inline-block}
+.craft-master2 ul li .text a{width: 53px;height:31px;padding:5px 7px;border: 1px solid #ccc;display:inline-block;cursor: pointer}
 .craft-master2 .gz-icon{background:url('../images/cyclopedia.png') no-repeat -34px 0px;width: 10px;height: 10px;float: left;margin-top: 4px;margin-right: 3px;}
 .craft-master2 ul li .text a em{float: left;font-size: 12px;color: #000;}
 .craft-master2 ul li .img{position: absolute;left: 20px;top: 20px;width: 108px;height: 108px;}
@@ -148,9 +148,10 @@ a{outline: none}
 .craft-gz .craft-list .craft-l-page li .etext .gz-q .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat -34px 0;float: left}
 .craft-gz .craft-list .craft-l-page li .etext .gz-q em{font-size: 12px;float: left}
 .craft-gz .craft-list .craft-l-page li .etext a{font-size: 12px;color: #000}
-.craft-gz .craft-list .craft-l-page li .etext .gz-q{padding: 5px 7px;float: left;border: 1px solid #ccc;}
+.craft-gz .craft-list .craft-l-page li .etext .gz-q{width: 51px;height:31px;padding: 5px 6px;float: left;border: 1px solid #ccc;}
 .craft-gz .craft-list .craft-l-page li .eimg{position: absolute;left: 20px;top:20px;width: 180px;height: 180px;}
 .craft-gz .craft-list .craft-l-page li .eimg img{width: 100%;height: 100%;}
+.craft-master2 ul li .text .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat -34px 0;float: left}
 
 
 
@@ -209,6 +210,7 @@ a{outline: none}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd{width: 272px;float: right;border-left:1px solid #e5e5e5;padding-left: 46px;height: 365px;margin: 0}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text1{color: #000;font-size: 12px;padding: 10px 0 20px 0;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text2{font-size: 18px;color: #000;margin-bottom: 10px;}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{height: 112px;overflow: hidden}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd p{font-size: 12px;color: #000;margin-bottom: 10px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text3{margin-right: 25px;font-size: 12px;color: #999;margin-bottom: 42px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text4{padding: 10px 24px;border: 1px solid #000;color: #000;font-size: 12px;text-decoration: none;outline: none}
@@ -223,7 +225,7 @@ a{outline: none}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz .gz-icon{width: 10px;height: 10px;margin-top: 5px;margin-right: 3px;background:url('../images/cyclopedia.png') no-repeat 0px 0;float: left}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz em{font-size: 12px;float: left}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .etext a{font-size: 12px;color: #000}
-.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz {padding: 5px 7px;float: left;border: 1px solid #ccc;position: absolute;top:8px;right: 14px;}
+.list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .bt-gz {width: 53px;height:31px;padding: 5px 7px;float: left;border: 1px solid #ccc;position: absolute;top:8px;right: 14px;}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li a{color: #000;}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .img-q{width: 50px;height: 50px;left: 9px;top:9px;position: absolute}
 .list-find .list-f-content .l-f-right .f-right-gy .gy-grounp li .img-q img{width: 100%;height: 100%;}
@@ -290,6 +292,7 @@ a{outline: none}
 .details .detaile-left .detaile-comment .comment li .status .status-right{float: right;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .zan{float: right;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .hf{font-size:12px;color:#000;float: right;text-align: right;width:47px;border-left:1px solid #ebebeb;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .ef{font-size:12px;color:#000;float: right;text-align: right;width:47px;border-left:1px solid #ebebeb;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .zan .icon{margin-right: 10px;float: left;width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -2px;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .zan em{float: right;font-size: 14px;color: #000;margin-right: 19px;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .hf a{font-size:12px;color:#000;text-decoration: none;}
@@ -306,6 +309,11 @@ a{outline: none}
 .review .btn{padding:6px 35px;color: #fff;font-size: 14px;outline: none;background: #000;float: right}
 .review .btn1{margin-bottom: 20px;}
 .review .btn1 a{font-size: 14px;color: #999;float: right;margin-right: 30px;outline: none;margin-top: 5px;text-decoration: none;}
+/*评论回复*/
+.review-sr textarea{width: 100%;outline: none;resize:none;height: 100px;border:1px solid #e5e5e5;font-size: 14px;color: #000;margin-bottom: 20px;}
+.review-sr .btn{padding:6px 35px;color: #fff;font-size: 14px;outline: none;background: #000;float: right}
+.review-sr .btn1{margin-bottom: 20px;}
+.review-sr .btn1 a{font-size: 14px;color: #999;float: right;margin-right: 30px;outline: none;margin-top: 5px;text-decoration: none;}
 /*end评论回复*/
 .details .detaile-right{float: right;width: 272px;}
 .details .detaile-right .h4{width: 100%;height: 38px;background: #000;padding: 8px 0 0 9px;font-size: 14px;color: #999}
@@ -336,6 +344,10 @@ a{outline: none}
 .word .leave .word-note .content-pg .worde-r{padding: 10px 14px;height: 70px;border: 1px solid #999;font-size: 14px;color: #000;outline: none;}
 .word .leave .word-note .content-pg .btn{outline: none;width: 328px;height: 30px;border: 1px solid #000;background: #fff;color: #000;font-size: 14px;transition: all 0.5s;}
 .word .leave .word-note .content-pg .btn:hover{color: #fff;background: #000;}
-.word .leave .close .shut{width: 15px;height: 15px;position: absolute;right: 10px;top: 10px;background: url("../images/cyclopedia.png") no-repeat;}
+.word .leave .close .shut{width: 15px;height: 15px;position: absolute;right: -25px;top: -25px;background: url("../images/cyclopedia.png") no-repeat -139px -13px; cursor: pointer}
 .word .leave .close{position: relative;}
 .word .leave-bg{position: fixed;background: #000;opacity:0.5;z-index: 400;right: 0;left: 0;top:0;bottom: 0;}
+.details .detaile-left .detaile-comment .comment li .status .status-right .ef a{}
+
+
+/*110111*/

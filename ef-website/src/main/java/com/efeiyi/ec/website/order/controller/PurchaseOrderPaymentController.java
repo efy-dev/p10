@@ -82,7 +82,7 @@ public class PurchaseOrderPaymentController {
                     purchaseOrderPaymentId = messageDetailJson.getString("out_trade_no");
                 }
                 PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getObject(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentId);
-                if (purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")) {
+                if (!purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getOrderStatus().equals("5")) {
 
                     purchaseOrderPaymentDetails.setTransactionNumber(transactionNumber);
                     PurchaseOrderPayment purchaseOrderPayment = purchaseOrderPaymentDetails.getPurchaseOrderPayment();
@@ -197,7 +197,7 @@ public class PurchaseOrderPaymentController {
             }
         }
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        String purchaseOrderAddress = consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "" + " " + consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "" + " " + consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "" ;
+        String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "") ;
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);

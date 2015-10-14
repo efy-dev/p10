@@ -3,6 +3,7 @@ package com.efeiyi.ec.wiki.base.util;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.wiki.model.ProjectDataModel;
 import com.efeiyi.ec.wiki.model.ProjectModel;
 import org.apache.log4j.Logger;
 
@@ -44,4 +45,14 @@ public class projectConvertprojectModelUtil {
 
         return projectModel;
     }
+
+
+    public static ProjectDataModel getProjectDataModel(Project project)  {
+        ProjectModel projectModel = projectConvertprojectModel(project);
+        ProjectDataModel projectDataModel = new ProjectDataModel();
+        projectDataModel.setProjectModel(projectModel);
+        projectDataModel.setProducts(project.getProductList());
+      return projectDataModel;
+    }
+
 }

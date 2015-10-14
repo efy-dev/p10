@@ -2,6 +2,7 @@
 <%@ page import="com.efeiyi.ec.wiki.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -45,9 +46,8 @@
   <div class="hd">
     <ul class="ul-item">
       <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="" title="请登录">请登录</a></li>
+      <li><a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8082%2Fj_spring_cas_security_check'/>" title="请登录">请登录</a></li>
       <li><a href="" title="快速注册">快速注册</a></li>
-      <li><a href="" title="商家入驻">商家入驻</a></li>
       <li class="btn-top-wechat">
         <a title="手机e飞蚁">手机e飞蚁</a>
         <span class="top-wechat"></span>
@@ -66,54 +66,7 @@
     <div class="nav">
       <ul>
         <li><a href="" title="首页">首页</a></li>
-        <li class="" >
-          <a title="商品分类">商品分类</a>
-          <span class="bgbor"></span>
-          <div class="nav-links">
-            <ul>
-              <li class="title">陶 冶 烧 造</li>
-              <li><a href="" target="_blank" title="">紫砂</a></li>
-              <li><a href="" target="_blank" title="">景泰蓝</a></li>
-              <li><a href="" target="_blank" title="">景德镇</a></li>
-              <li><a href="" target="_blank" title="">钧瓷</a></li>
-              <li><a href="" target="_blank" title="">龙泉青瓷</a></li>
-            </ul>
-            <ul>
-              <li class="title">传 统 美 术</li>
-              <li><a href="" target="_blank" title="">唐卡</a></li>
-              <li><a href="" target="_blank" title="">剪纸</a></li>
-              <li><a href="" target="_blank" title="">书法篆刻</a></li>
-              <li><a href="" target="_blank" title="">陶瓷微书</a></li>
-              <li><a href="" target="_blank" title="">脸谱</a></li>
-              <li><a href="" target="_blank" title="">掐丝珐琅画</a></li>
-            </ul>
-            <ul>
-              <li class="title">金 石 錾 锻</li>
-              <li><a href="" target="_blank" title="">铜雕</a></li>
-              <li><a href="" target="_blank" title="">花丝镶嵌</a></li>
-            </ul>
-            <ul>
-              <li class="title">如胶似膝</li>
-              <li><a href="" target="_blank" title="">平遥漆器</a></li>
-              <li><a href="" target="_blank" title="">北京雕漆</a></li>
-            </ul>
-            <ul>
-              <li class="title">织 染 印.绣</li>
-              <li><a href="" target="_blank" title="">潮绣</a></li>
-              <li><a href="" target="_blank" title="">苏绣</a></li>
-              <li><a href="" target="_blank" title="">顾绣</a></li>
-              <li><a href="" target="_blank" title="">沈绣</a></li>
-              <li><a href="" target="_blank" title="">瑶族绣</a></li>
-              <li><a href="" target="_blank" title="">京绣</a></li>
-              <li><a href="" target="_blank" title="">云锦</a></li>
-              <li><a href="" target="_blank" title="">蜀锦</a></li>
-              <li><a href="" target="_blank" title="">漳缎</a></li>
-              <li><a href="" target="_blank" title="">缂丝</a></li>
-              <li><a href="" target="_blank" title="">蓝印花布</a></li>
-              <li><a href="" target="_blank" title="">蜡染</a></li>
-            </ul>
-          </div>
-        </li>
+
         <li><a href="" title="传承人">大师</a></li>
         <li><a href="<c:url value='/pc/index.do'/>" title="展览">工艺</a></li>
 
@@ -125,7 +78,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a>工艺</a><i class="fu-icon"></i><a>景泰蓝</a><i class="fu-icon"></i><a>作品</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a>工艺</a><i class="fu-icon"></i><a>景泰蓝</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId=<%=request.getParameter("projectId")%>'/>">作品</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
@@ -142,8 +95,7 @@
           <!-- JiaThis Button END -->
           <div class="thumb-up">
             <div class="thump-assist">
-              <a href="#"><i class="z-icon"></i> </a>
-              <a href="#"><em>赞(${product.amount})</em></a>
+              <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.amount}</em></a>
             </div>
             <div class="thump-collect">
               <a href="#"><i class="s-icon"></i> </a>
@@ -194,7 +146,8 @@
             <div class="master-tab norms" style="display: none">
               <p>作品名称：${product.name}</p>
               <p>意&nbsp;&nbsp; &nbsp; &nbsp;        境：${product.subName}</p>
-              <p>创作时间：${product.createDateTime}</p>
+              <p>创作时间：<fmt:formatDate value="${product.createDateTime}" pattern="yyyy年MM月dd日 HH点mm分ss秒" />
+              </p>
               <p>类&nbsp;&nbsp; &nbsp; &nbsp;        别：${product.project.projectCategory.name}</p>
             </div>
           </div>
@@ -203,102 +156,21 @@
         <div class="detaile-comment ae">
           <form>
             <h4>评论</h4>
-            <ul class="comment ae">
-              <li class="ae">
-                <div class="img"><a href="#"><img class="am-circle" src="../shop2015/upload/yonghm.jpg"></a></div>
-                <div class="text"><span><a href="#">Andy ：</a></span><span>作品很震撼人！之前没有这么认真的去了解过景泰蓝的工艺，更没有关注过中国的非物质文化遗产，总认为这些东西距离我们的生活是那么的远，然而却离我们这麽近，我们应该学会去珍惜它们。</span></div>
-                <div class="status ae">
-                  <div class="status-left"><span>10分钟前</span></div>
-                  <div class="status-right">
-                    <div class="hf"><a href="#">回复</a></div>
-                    <div class="zan">
-                      <a href="#"><i class="icon"></i></a>
-                      <em>99999</em>
-                    </div>
-                  </div>
-                </div>
-                <div class="review ae" style="display: none;">
-                  <textarea></textarea>
-                  <div class="btn1 ae">
-                    <input type="submit" class="btn" value="评论">
-                    <!--<a href="#">取消</a>-->
-                  </div>
-                </div>
-              </li>
-              <li class="ae">
-                <div class="img"><a href="#"><img class="am-circle" src="../shop2015/upload/yonghm.jpg"></a></div>
-                <div class="text"><span><a href="#">Andy ：</a></span><span>作品很震撼人！之前没有这么认真的去了解过景泰蓝的工艺，更没有关注过中国的非物质文化遗产，总认为这些东西距离我们的生活是那么的远，然而却离我们这麽近，我们应该学会去珍惜它们。</span></div>
-                <div class="status ae">
-                  <div class="status-left"><span>10分钟前</span></div>
-                  <div class="status-right">
-                    <div class="hf"><a href="#">回复</a></div>
-                    <div class="zan">
-                      <a href="#"><i class="icon"></i></a>
-                      <em>99999</em>
-                    </div>
-                  </div>
-                </div>
-                <div class="review ae" style="display: none;">
-                  <textarea></textarea>
-                  <div class="btn1 ae">
-                    <input type="submit" class="btn" value="评论">
-                    <!--<a href="#">取消</a>-->
-                  </div>
-                </div>
-              </li>
-              <li class="ae">
-                <div class="img"><a href="#"><img class="am-circle" src="../shop2015/upload/yonghm.jpg"></a></div>
-                <div class="text"><span><a href="#">Andy ：</a></span><span>作品很震撼人！之前没有这么认真的去了解过景泰蓝的工艺，更没有关注过中国的非物质文化遗产，总认为这些东西距离我们的生活是那么的远，然而却离我们这麽近，我们应该学会去珍惜它们。</span></div>
-                <div class="status ae">
-                  <div class="status-left"><span>10分钟前</span></div>
-                  <div class="status-right">
-                    <div class="hf"><a href="#">回复</a></div>
-                    <div class="zan">
-                      <a href="#"><i class="icon"></i></a>
-                      <em>13</em>
-                    </div>
-                  </div>
-                </div>
-                <div class="review ae" style="display: none;">
-                  <textarea></textarea>
-                  <div class="btn1 ae">
-                    <input type="submit" class="btn" value="评论">
-                    <!--<a href="#">取消</a>-->
-                  </div>
-                </div>
-              </li>
-              <li class="ae">
-                <div class="img"><a href="#"><img class="am-circle" src="../shop2015/upload/yonghm.jpg"></a></div>
-                <div class="text"><span><a href="#">Andy ：</a></span><span>作品很震撼人！之前没有这么认真的去了解过景泰蓝的工艺，更没有关注过中国的非物质文化遗产，总认为这些东西距离我们的生活是那么的远，然而却离我们这麽近，我们应该学会去珍惜它们。</span></div>
-                <div class="status ae">
-                  <div class="status-left"><span>10分钟前</span></div>
-                  <div class="status-right">
-                    <div class="hf"><a href="#">回复</a></div>
-                    <div class="zan">
-                      <a href="#"><i class="icon"></i></a>
-                      <em>99999</em>
-                    </div>
-                  </div>
-                </div>
-                <div class="review ae" style="display: none;">
-                  <textarea></textarea>
-                  <div class="btn1 ae">
-                    <input type="submit" class="btn" value="评论">
-                    <!--<a href="#">取消</a>-->
-                  </div>
-                </div>
-              </li>
+            <ul class="comment ae" id="commentAll">
+
+
             </ul>
             <div class="review ae">
               <textarea></textarea>
               <div class="btn1 ae">
-                <input type="submit" class="btn" value="评论">
+                <input type="button" onclick="saveProductComment('${product.id}')" class="btn" value="评论" id="commentForProduct">
                 <!--<a href="#">取消</a>-->
               </div>
             </div>
           </form>
         </div>
       </div>
+
       <div class="detaile-right">
         <div class="f-right-gy ae">
           <div class="h4"><span>传承人</span></div>
@@ -435,8 +307,425 @@
       }
     });
   }
+  var startNum=1;
+  $(document).ready(function(){
+    getData();
+
+    function  getData(){
+      $.ajax({
+        type:"get",
+        url:"<c:url value='/basic/xmj.do?qm=plistProductComment_coment&conditions=product.id:${product.id}&pageEntity.size=5&pageEntity.index='/>"+startNum,
+        data:"",
+        dataType:"json",
+        success:function(data){
+          if(data.list && data.list != null){
+            for(i in data.list){
+              var  pubu =$("#commentAll");
+              var cTime =transdate(data.list[i].createDateTime);
+              var amout1;
+              if(data.list[i].amount==null){
+                amout1 =0;
+              }else{
+                amout1 =data.list[i].amount;
+              }
+              var userName = data.list[i].user.name2;
+              if(userName==null){
+                userName ="匿名用户";
+              }
+
+             /* var box = $("<div class='matter' id='"+data.list[i].id+"'> " +
+                      "<p class='text-h1'>"+userName+"</p> " +
+                      "<p class='text-time'>"+cTime+"</p> " +
+                      "<p class='text-content'>" +
+                      "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
+                      "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
+                      "<div class='owner-good'>" +
+                      "<a href='#' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
+*/
+              var box = $("<li class=\"ae\" id=\""+data.list[i].id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                      "<div class=\"text\"><span>" +
+                      "<a href=\"#\">"+userName+" ：</a></span>" +
+                      "<span>"+data.list[i].content+"</span></div> " +
+                      "<div class=\"status ae\"> <div class=\"status-left\">" +
+                      "<span>"+cTime+"</span></div> <div class=\"status-right\"> " +
+                      "<div class=\"hf\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct(this)\">回复</a></div> " +
+                      "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                      " </div> </div> <div class=\"review ae\" style=\"display: none;\"> " +
+                      "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                      "<input type=\"button\" onclick=\"saveComment2Comment('0', this,'"+userName+"','"+data.list[i].id+"')\" name=\""+data.list[i].id+"\" class=\"btn\" value=\"评论\">  </div> </div> </li> ");
+
+              pubu.append(box);
+
+              //获取盖楼式回复
+              getReply(data.list[i].id,userName,true);
+
+            }
+
+          }else{
+            flag = true;
+          }
+
+        },
+        error:function(){
+          alert("出错了，请联系管理员！！！");
+          return false;
+        },
+        complete:function(){
+          startNum =startNum+1;
+        }
+      });
+
+    }
 
 
+  });
+  function transdate(endTime){
+    var timestamp = Date.parse(new Date());
+    var oldTime = parseInt(endTime);
+    var intervalTime = (timestamp - oldTime)/1000/60;
+    var showTime = "";
+    if(intervalTime<=59){
+      showTime=intervalTime.toFixed(0)+"分钟前";
+    }else if(1<=(intervalTime/60) && (intervalTime/60)<24){
+      showTime=(intervalTime/60).toFixed(0)+"小时前";
+    }else if(1<=(intervalTime/60/24) && (intervalTime/60/24)<=30){
+      showTime=(intervalTime/60/24).toFixed(0)+"天前";
+    }else{
+      showTime=new Date(oldTime).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+    return showTime;
+  }
+
+  function commentUpAndDown(data,commentId){
+    var oper = $(data).attr("name");
+    var productId = $(data).attr("about");
+    //alert($(data).children().eq(1).text());
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/commentUpAndDown.do?productId='/>"+productId+"&operation="+oper+"&commentId="+commentId,
+      data:"",
+      async: true,
+      dataType:"json",
+      success:function(data2){
+        if(data2=="false"){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        if(data2=="repeat"){
+          alert("您已经点过赞了！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+        }
+        if(data2=="true" && oper=='down'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+        if( $(data).attr("name")=="up"){
+          $(data).attr("name","down");
+        }else{
+          $(data).attr("name","up");
+        }
+      }
+    });
+  }
+
+  function getReply(fatherId,name,flaag){
+    var flag =false;
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/basic/xmj.do?qm=plistProductComment_coment&conditions=product.id:${product.id};fatherComment.id:"+fatherId+"&pageEntity.size=20&pageEntity.index=1'/>",
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data.list && data.list != null){
+          for(i in data.list){
+            var  pubu =$("#"+fatherId);
+            var cTime =transdate(data.list[i].createDateTime);
+            var amout1;
+            if(data.list[i].amount==null){
+              amout1 =0;
+            }else{
+              amout1 =data.list[i].amount;
+            }
+            var userName = data.list[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
+
+            /*var box = $("<div class='respond' id='"+data.list[i].id+"'> <p><span class='txt-name'>" +
+                    "<a href='#'> "+userName+"：</a>" +
+                    "</span><span class='txt-content' onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</span></p> </div> ");*/
+            if(flaag==true){
+              var box =$(" <ul style=\"position: relative;float:left;margin: 0;\" id=\""+data.list[i].id+"\" about=\"matter\" class=\"commentP\">" +
+                      "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
+                      +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                      "<div class=\"text\"><span>" +
+                      "<a href=\"#\">"+userName+" 回复 "+name+"：</a></span>" +
+                      "<span>"+data.list[i].content+"</span></div> " +
+                      "<div class=\"status ae\"> <div class=\"status-left\">" +
+                      "<span>"+cTime+"</span></div> <div class=\"status-right\"> " +
+                      "<div class=\"ef\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct2(this)\">回复</a></div> " +
+                      "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                      " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
+                      "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                      "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\" name=\""+data.list[i].id+"\"  class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul> ");
+              pubu.append(box);
+            }
+            if(flaag==false){
+              var box =$("  <li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+data.list[i].id+"\" about=\"matter\"" +
+                      ">"
+              +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                      "<div class=\"text\"><span>" +
+                      "<a href=\"#\">"+userName+" 回复 "+name+"：</a></span>" +
+                      "<span>"+data.list[i].content+"</span></div> " +
+                      "<div class=\"status ae\"> <div class=\"status-left\">" +
+                      "<span>"+cTime+"</span></div> <div class=\"status-right\"> " +
+                      "<div class=\"ef\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct2(this)\">回复</a></div> " +
+                      "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                      " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
+                      "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                      "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\"  name=\""+data.list[i].id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div> ");
+              //$("#"+fatherId).parent(".commentP").append(box);
+              $(".commentP").append(box);
+            }
+
+            //获取盖楼式回复
+            getReply(data.list[i].id,userName,false);
+
+            //imgload();
+          }
+
+        }else{
+          flag = true;
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if(flag ==true){
+          return false;
+        }
+      }
+    });
+
+  }
+function getHfProduct(e){
+
+    $(e).parent().parent().parent().parent().find('.review').slideToggle();
+    return false;
+
+}
+
+  function getHfProduct2(e){
+
+    $(e).parent().parent().parent().parent().find(".review-sr").slideToggle();
+    return false;
+
+  }
+
+  function saveProductComment(data){
+    var CommentValue = $("#commentForProduct").parent().parent().children().eq(0).val();
+    if(CommentValue==null || CommentValue==""){
+      alert("你未发表任何评论，请评论");
+      return false;
+    }
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/product/saveComment.do?productId='/>"+data+"&content="+CommentValue,
+      data:"",
+      dataType:"json",
+      async:true,
+      success:function(o){
+        if(o==false){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        var amout1;
+        if(o.amount==null){
+          amout1 =0;
+        }else{
+          amout1 =o.amount;
+        }
+        $("#commentAll").append("<li class=\"ae\" id=\""+o.id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                "<div class=\"text\"><span>" +
+                "<a href=\"#\">${myUser.name2} ：</a></span>" +
+                "<span>"+CommentValue+"</span></div> " +
+                "<div class=\"status ae\"> <div class=\"status-left\">" +
+                "<span>刚刚</span></div> <div class=\"status-right\"> " +
+                "<div class=\"hf\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct(this)\">回复</a></div> " +
+                "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+o.id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                " </div> </div> <div class=\"review ae\" style=\"display: none;\"> " +
+                "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                "<input type=\"submit\" name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </li>");
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        $("#commentForProduct").parent().parent().children().eq(0).val("");
+      }
+    });
+  }
+
+  function saveComment2Comment(fag,e,name,data){
+    var CommentValue = $(e).parent().parent().children().eq(0).val();
+    if(CommentValue==null || CommentValue==""){
+      alert("你未发表任何评论，请评论");
+      return false;
+    }
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/product/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+data,
+      data:"",
+      dataType:"json",
+      async:true,
+      success:function(o){
+        if(o==false){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        var amout1;
+        if(o.amount==null){
+          amout1 =0;
+        }else{
+          amout1 =o.amount;
+        }
+        if(fag=='0'){
+          $("#"+data).append("<ul style=\"position: relative;float:left;margin: 0;\" id=\""+o.id+"\" about=\"matter\" class=\"commentP\">" +
+                  "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
+                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                  "<div class=\"text\"><span>" +
+                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<span>"+CommentValue+"</span></div> " +
+                  "<div class=\"status ae\"> <div class=\"status-left\">" +
+                  "<span>刚刚" +
+                  "</span></div> <div class=\"status-right\"> " +
+                  "<div class=\"ef\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct2(this)\">回复</a></div> " +
+                  "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+o.id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                  " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
+                  "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
+        }
+        if(fag=='1'){
+          $("#"+data).append("" +
+                  "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+o.id+"\" about=\"matter\" >"
+                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                  "<div class=\"text\"><span>" +
+                  "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
+                  "<span>"+CommentValue+"</span></div> " +
+                  "<div class=\"status ae\"> <div class=\"status-left\">" +
+                  "<span>刚刚" +
+                  "</span></div> <div class=\"status-right\"> " +
+                  "<div class=\"ef\"><a href=\"javascript:void(0)\" onclick=\"getHfProduct2(this)\">回复</a></div> " +
+                  "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+o.id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
+                  " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
+                  "<textarea></textarea> <div class=\"btn1 ae\"> " +
+                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        $(e).parent().parent().children().eq(0).val("");
+      }
+    });
+  }
+
+
+  function savaUpAndDown(ds){
+    var oper = $("#good-1").attr("name");
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/saveThumbUp.do?productId='/>"+ds+"&operation="+oper,
+      data:"",
+      dataType:"json",
+      success:function(data2){
+        if(data2=="false"){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        if(data2=="repeat"){
+          alert("请不要重复操作！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
+          $("#em1").html(parseInt($("#em1").text())+1);
+        }
+        if(data2=="true" && oper=='down'){
+          $("#em1").html(parseInt($("#em1").text())-1);
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        if($("#good-1").attr("name")=="down"){
+          $("#good-1").attr("name","up");
+        }else{
+          $("#good-1").attr("name","down");
+        }
+
+
+      }
+    });
+  }
+
+  function commentUpAndDown(data,commentId){
+    var oper = $(data).attr("name");
+    var productId = $(data).attr("about");
+    //alert($(data).children().eq(1).text());
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/commentUpAndDown.do?productId='/>"+productId+"&operation="+oper+"&commentId="+commentId,
+      data:"",
+      async: true,
+      dataType:"json",
+      success:function(data2){
+        if(data2=="false"){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        if(data2=="repeat"){
+          alert("您已经点过赞了！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+        }
+        if(data2=="true" && oper=='down'){
+          $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+        if( $(data).attr("name")=="up"){
+          $(data).attr("name","down");
+        }else{
+          $(data).attr("name","up");
+        }
+      }
+    });
+  }
 </script>
 <!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->

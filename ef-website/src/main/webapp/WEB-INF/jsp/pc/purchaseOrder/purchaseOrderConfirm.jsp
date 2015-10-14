@@ -161,7 +161,7 @@
                                         </div>
                                     </td>
                                     <td width="171"><span
-                                            class="moneycl">${(product.productModel.price)*product.amount}</span>
+                                            class="moneycl">￥${product.productModel.price}</span>
                                     </td>
                                     <td width="137">
                                         <span>x${product.amount}</span>
