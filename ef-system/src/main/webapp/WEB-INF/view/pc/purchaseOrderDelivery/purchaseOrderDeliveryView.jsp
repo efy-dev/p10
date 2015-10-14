@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">发货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.purchaseOrderAddress}</td>
             </tr>
             </tbody>
         </table>
@@ -62,13 +62,9 @@
                 <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&view=delivery&viewIdentify=orderDelivery&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
                 <td class="am-primary am-u-md-3">支付方式</td>
                 <td class="am-u-md-3">
-                    <c:forEach items="${object.purchaseOrder.purchaseOrderPaymentList}" var="purchaseOrderPayment">
-                                <span style="margin-left: 10px;">
-                                <ming800:status name="payWay" dataType="purchaseOrderPayment.payWay"
-                                                checkedValue="${purchaseOrderPayment.payWay}"
-                                                type="normal"/>
-                                </span>
-                    </c:forEach>
+                     <ming800:status name="payWay" dataType="purchaseOrderPaymentDetails.payWay"
+                              checkedValue="${object.purchaseOrder.payWay}"
+                               type="normal"/>
                 </td>
             </tr>
             <tr>
