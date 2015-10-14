@@ -148,7 +148,7 @@ public class AddressController {
             baseManager.saveOrUpdate(xSaveOrUpdate1);
             String cartId = request.getParameter("cartId");
             if (cartId == null || cartId.equals("")) {
-                return "redirect:/order/easyBuy/" + request.getParameter("productModel");
+                return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
             }
             return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
         /*} else {

@@ -177,6 +177,9 @@
                           class="am-form">
 
                         <input type="hidden" name="productModel" value="${productModel.id}">
+                        <c:if test="${amount != null}">
+                            <input type="hidden" name="amount" value="${amount}">
+                        </c:if>
 
                         <div class="am-form-group">
                             <label>收货人</label>

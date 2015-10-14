@@ -1,6 +1,7 @@
 package com.efeiyi.association.controller;
 
 import com.efeiyi.association.service.MyDocumentManager;
+import com.efeiyi.association.util.SavePicsOfDocUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.base.service.XdoSupportManager;
@@ -50,7 +51,7 @@ public class MyAssociationController {
     @Autowired
     private DoManager doManager;
 
-    @RequestMapping("/assContact.do")
+    @RequestMapping({"/assContact.do","/assIntroOrStatute.do"})
     public Document getAssContact(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
@@ -106,44 +107,6 @@ public class MyAssociationController {
         return new ModelAndView("redirect:" + request.getParameter("qm") + "&resultPage=/myAssociation/assContact.do?qm=plistContact_default");
     }
 
-    @RequestMapping("/assIntroOrStatute.do")
-    public Document getAssIntroOrStatute(HttpServletRequest request, ModelMap modelMap) throws Exception {
-
-        String qm = request.getParameter("qm");
-        if (qm.split("_").length < 2) {
-            throw new Exception("qm:" + qm + "的具体查询部分没有定义即'_'的后半部分没有定义");
-        }
-        //先找到配置文件里的entity
-        Do tempDo = doManager.getDoByQueryModel(qm.split("_")[0]);
-        //再从中找到query的信息
-        DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
-
-        PageEntity pageEntity = new PageEntity();
-        String pageIndex = request.getParameter("pageEntity.index");
-        String pageSize = request.getParameter("pageEntity.size");
-        if (pageIndex != null) {
-            pageEntity.setIndex(Integer.parseInt(pageIndex));
-            pageEntity.setSize(Integer.parseInt(pageSize));
-        }
-
-        modelMap.put("tabTitle", tempDoQuery.getLabel());
-        PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
-        modelMap.put("pageInfo", pageInfo);
-        modelMap.put("pageEntity", pageInfo.getPageEntity());
-
-        if (tempDo.getExecute() != null && !tempDo.getExecute().equals("")) {
-            modelMap = xdoSupportManager.execute(tempDo, modelMap, request);
-        }
-        modelMap.put("qm", qm);
-        modelMap.put("resultPage", request.getParameter("resultPage"));
-        modelMap.put("group", tempDo.getData());
-        Document document = new Document();
-        if (pageInfo.getList() != null && pageInfo.getList().size() >0){
-            document = (Document) pageInfo.getList().get(0);
-        }
-        return document;
-    }
-
     @RequestMapping("/saveAssIntroOrStatute.do")
     @ResponseBody
     public ModelAndView saveAssIntroOrStatute(HttpServletRequest request, Document document) throws Exception {
@@ -160,34 +123,9 @@ public class MyAssociationController {
             myDocumentManager.deleteDocument(document);
             document.setId(null);
         }
-        if (document.getDocumentContent().getContent() != null) {
-            Parser parser = new Parser(document.getDocumentContent().getContent());
-            NodeFilter filter = new TagNameFilter("img");
-            NodeList nodes = parser.extractAllNodesThatMatch(filter);
 
-            if (nodes != null) {
-                Node eachNode = null;
-                ImageTag imageTag = null;
-                String srcPath = null;
-                DocumentAttachment documentAttachment = null;
-                document.setDocumentAttachmentList(new ArrayList<DocumentAttachment>());
+        SavePicsOfDocUtil.savePicsOfDoc(document);
 
-                //遍历所有的img节点
-                for (int i = 0; i < nodes.size(); i++) {
-                    eachNode = (Node) nodes.elementAt(i);
-                    if (eachNode instanceof ImageTag) {
-                        imageTag = (ImageTag) eachNode;
-
-                        //获得html文本的原来的src属性
-                        srcPath = imageTag.getAttribute("src");
-                        documentAttachment = new DocumentAttachment();
-                        documentAttachment.setPath(srcPath);
-                        documentAttachment.setDocument(document);
-                        document.getDocumentAttachmentList().add(documentAttachment);
-                    }
-                }
-            }
-        }
         baseManager.saveOrUpdate(document.getDocumentContent().getClass().getName(), document.getDocumentContent());
         myDocumentManager.saveDocument(document);
         String resultPage = "redirect:" + path;
@@ -198,5 +136,7 @@ public class MyAssociationController {
         }
         return new ModelAndView(resultPage);
     }
+
+
 
 }

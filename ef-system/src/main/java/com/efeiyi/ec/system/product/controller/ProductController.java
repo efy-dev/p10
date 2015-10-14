@@ -132,7 +132,7 @@ public class ProductController extends BaseController {
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId() + ":" + url + ":" + imgName;
+                    data = productPicture.getId() + ":" + url + ":" + imgName+hz;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -79,5 +79,10 @@
 </div>
 <script src="<c:url value='http://libs.baidu.com/jquery/1.11.3/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/> "></script>
+<script type="text/javascript">
+    CKEDITOR.replace('documentContent.content', {
+        filebrowserUploadUrl: '<c:url value="/myDocument/ckeditorUpload.do"/>'
+    });
+</script>
 </body>
 </html>

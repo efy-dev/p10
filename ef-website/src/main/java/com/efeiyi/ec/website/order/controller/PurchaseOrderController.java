@@ -264,7 +264,7 @@ public class PurchaseOrderController extends BaseController {
         productMap.put(productModel.getProduct().getTenant().getId(), cartProductList);
         model.addAttribute("productMap", productMap);
         Cart cart = new Cart();
-        cart.setTotalPrice(productModel.getPrice());
+        cart.setTotalPrice(productModel.getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
         model.addAttribute("cart", cart);
         List<Tenant> tenantList = new ArrayList<>();
         tenantList.add(productModel.getProduct().getTenant());
@@ -294,6 +294,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("productModel", productModel);
+        model.addAttribute("amount",amount);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
