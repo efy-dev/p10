@@ -159,7 +159,7 @@ public class WikiDynamicController extends WikibaseController {
 @RequestMapping("/afterAtJ.do")
 @ResponseBody
 public List getAttentionProjects(HttpServletRequest request, Model model) throws Exception {
-    XQuery query = new XQuery("plistProjectFollowed_isShow", request);
+    XQuery query = new XQuery("plistProjectFollowed2_isShow", request);
     query.put("user_id", AuthorizationUtil.getMyUser().getId());
     PageInfo pageInfo = baseManager.listPageInfo(query);
     List<ProjectFollowed> projectFolloweds = pageInfo.getList();

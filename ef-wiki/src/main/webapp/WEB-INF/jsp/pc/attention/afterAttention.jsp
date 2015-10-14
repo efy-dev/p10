@@ -44,7 +44,7 @@
 <div class="topbar wh" data-am-sticky>
   <div class="hd">
     <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
+      <li><strong><%=AuthorizationUtil.getMyUser().getName2()%></strong><a href="" title="退出">退出</a></li>
       <li><a href="" title="请登录">请登录</a></li>
       <li><a href="" title="快速注册">快速注册</a></li>
       <li class="btn-top-wechat">
@@ -172,7 +172,7 @@
 <script>
 
   $(document).ready(function(){
-    getData("<c:url value='/pc/afterAtJ.do?qm=plistProjectFollowed_isShow&conditions=&pageEntity.size=10&pageEntity.index='/>");
+    getData("<c:url value='/pc/afterAtJ.do?qm=plistProjectFollowed2_isShow&conditions=&pageEntity.size=10&pageEntity.index='/>");
   });
 
   function getData(url){
@@ -188,7 +188,7 @@
         if(data && data.length>=1){
           for(i in data){
 
-            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\""+data[i].projectModel.fsAmount+"\"></a>" +
+            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\""+data[i].projectModel.picture_url+"\"></a>" +
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
                     "<div class=\"xz-left\">"+data[i].projectModel.works+"</div> <div class=\"xz-right\"> " +
@@ -240,7 +240,7 @@
       var aa = (pageH - winH - scrollT) / winH;
       if(aa < 0.02){
         if(ajaxkey2){
-          getData("<c:url value='/pc/afterAtJ.do?qm=plistProjectFollowed_isShow&conditions=&pageEntity.size=10&pageEntity.index='/>");
+          getData("<c:url value='/pc/afterAtJ.do?qm=plistProjectFollowed2_isShow&conditions=&pageEntity.size=10&pageEntity.index='/>");
         }
 
       }
