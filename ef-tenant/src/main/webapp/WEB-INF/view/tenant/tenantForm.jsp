@@ -27,11 +27,20 @@
               enctype="multipart/form-data">
             <input type="hidden" value="saveOrUpdateTenant" name="qm">
             <input type="hidden" name="id" value="${object.id}">
+            <input type="hidden" name="status" value="1">
             <div class="am-form-group">
                 <label for="name" class="am-u-sm-3 am-form-label">商家编号</label>
 
                 <div class="am-u-sm-9">
-                    <input type="text" id="serial" name="serial" placeholder="商家编号" value="${object.serial}" readonly="readonly">
+
+                        <c:if test="${serial == '1'}">
+                            <input type="text" id="serial" name="serial" placeholder="自动生成" value="${object.serial}" readonly="readonly">
+                        </c:if>
+                        <c:if test="${serial != '1'}">
+                            <input type="text" id="serial" name="serial" placeholder="自动生成" value="${serial}" readonly="readonly">
+                        </c:if>
+
+
                 </div>
             </div>
             <div class="am-form-group">
