@@ -24,6 +24,7 @@
         <module>xh-system</module>
         <module>xh-website</module>
         <module>xh-model</module>
+        <module>ef-consumer</module>
     </modules>
 
     <repositories>

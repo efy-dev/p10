@@ -254,9 +254,9 @@
                         $(element).attr("href",url);
                         $(element).click();
                         showChooseConfirm("提示","是否支付成功？",function(){
-                            window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/"+orderId;
                         },function(){
-                            window.location.href = "<c:url value="/order/myEfeiyi/view/"/>"+orderId;
+                            window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/"+orderId;
                         })
                     }
                 }else{
