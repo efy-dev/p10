@@ -120,6 +120,8 @@
             <jnode url="/basic/xm.do?qm=plistProfessional_default" access="admin,manager" text_zh_CN="商家用户列表">
                 <match url="/basic/xm.do?qm=plistProfessional_default"/>
                 <match url="/basic/xm.do?qm=viewProfessional&amp;view=professional"/>
+                <match url="/basic/xm.do?qm=formProfessional"/>
+                <match url="/professional/saveProfessional.do"/>
             </jnode>
         </jnode>
 

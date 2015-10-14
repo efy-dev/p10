@@ -32,14 +32,14 @@
                     <ming800:status name="sex" dataType="Professional.sex" checkedValue="${object.sex}" type="normal"/>
                 </td>
             </tr>
-            <tr>
-                <td class="am-primary am-u-md-3">生日</td>
-                <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.birthDate}" pattern="yyyy:MM:dd hh:mm" type="both"/>
-                </td>
-                <td class="am-primary am-u-md-3">身份证号码</td>
-                <td class="am-u-md-3">${object.identity}</td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td class="am-primary am-u-md-3">生日</td>--%>
+                <%--<td class="am-u-md-3">--%>
+                    <%--<fmt:formatDate value="${object.birthDate}" pattern="yyyy:MM:dd hh:mm" type="both"/>--%>
+                <%--</td>--%>
+                <%--<td class="am-primary am-u-md-3">身份证号码</td>--%>
+                <%--<td class="am-u-md-3">${object.identity}</td>--%>
+            <%--</tr>--%>
             <tr>
                 <td class="am-primary am-u-md-3">注册日期</td>
                 <td class="am-u-md-3">
