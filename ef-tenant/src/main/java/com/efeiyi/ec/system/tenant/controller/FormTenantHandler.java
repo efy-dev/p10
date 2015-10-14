@@ -21,11 +21,9 @@ public class FormTenantHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        if("".equals(request.getParameter("id"))||request.getParameter("id")==null){
+
             modelMap.put("serial" ,autoSerialManager.nextSerial("product"));
-        }else {
-            modelMap.put("serial","1");
-        }
+
         return modelMap;
     }
 }
