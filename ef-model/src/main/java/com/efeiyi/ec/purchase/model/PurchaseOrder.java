@@ -43,6 +43,16 @@ public class PurchaseOrder {
     private String payWay; //订单的支付方式 1支付宝 2银行卡 3微信 4优惠券
     private String message; //买家留言
     private Coupon coupon; //优惠券
+    private String purchaseOrderAddress;
+
+    @Column(name = "purchase_order_address")
+    public String getPurchaseOrderAddress() {
+        return purchaseOrderAddress;
+    }
+
+    public void setPurchaseOrderAddress(String purchaseOrderAddress) {
+        this.purchaseOrderAddress = purchaseOrderAddress;
+    }
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
