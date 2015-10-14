@@ -54,7 +54,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //        baseManager.saveOrUpdate(bigUser.getClass().getName(), bigUser);
         System.out.println("登录成功");
         MyUser user = (MyUser)authentication.getPrincipal();
-        response.sendRedirect(request.getContextPath() + "/main.do?TENANT="+user.getBigTenant().getId());
+        if(user.getBigTenant()==null){
+            response.sendRedirect(request.getContextPath() + "/login.do");
+        }else {
+            response.sendRedirect(request.getContextPath() + "/main.do?TENANT=" + user.getBigTenant().getName());
+        }
 //        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
 //        if (savedRequest != null) {
 //            response.sendRedirect(savedRequest.getRedirectUrl());
