@@ -106,5 +106,18 @@ public class PurchaseOrderController extends BaseController {
         return  id;
     }
 
+    @RequestMapping("/saveReceiver.do")
+    @ResponseBody
+    public void saveReceiver(HttpServletRequest request){
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String purchaseOrderId = request.getParameter("id");
 
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+        purchaseOrder.setPurchaseOrderAddress(address);
+        purchaseOrder.setReceiverName(name);
+        purchaseOrder.setReceiverPhone(phone);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+    }
 }
