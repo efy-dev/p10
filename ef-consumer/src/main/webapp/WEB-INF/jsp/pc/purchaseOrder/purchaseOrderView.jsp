@@ -99,9 +99,9 @@
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">收货信息</dt>
           <dd class="od-id">
-            <p>收货地址：<span>${order.consumerAddress.province.name} ${order.consumerAddress.city.name}${order.consumerAddress.details}</span></p>
-            <p>收货人姓名：<span>${order.consumerAddress.consignee}</span></p>
-            <p>联系电话：<span>${order.consumerAddress.phone}</span></p>
+            <p>收货地址：<span>${order.purchaseOrderAddress}</span></p>
+            <p>收货人姓名：<span>${order.receiverName}</span></p>
+            <p>联系电话：<span>${order.receiverPhone.phone}</span></p>
 
           </dd>
         </dl>
@@ -109,7 +109,7 @@
           <dt class="orderid">支付及配送方式</dt>
           <dd class="od-id">
             <p ><span>支付方式：</span><span ><ming800:status name="payWay" dataType="PurchaseOrder.payWay" checkedValue="${order.payWay}" type="normal"/> <strong style="font-size: 12px;color:#ff0000;font-weight: 100">共支付${order.total}元 <c:if test="${!empty order.coupon}">
-              ,优惠券抵扣${order.coupon.consumer.score}元
+              ,优惠券抵扣${order.coupon.couponBatch.price}元
             </c:if></strong></p>
             <p>配送方式：<span>普通快递</span></p>
             <p>运费：<span>免运费</span></p>
