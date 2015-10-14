@@ -47,9 +47,10 @@
                 </td>
                 <td class="am-primary am-u-md-3">最后一次登录时间</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.lastLoginDatetime}" pattern="yyyy:MM:dd" type="both"/>
+                    <fmt:formatDate value="${object.lastLoginDatetime}" pattern="yyyy:MM:dd hh:mm:ss" type="both"/>
                 </td>
             </tr>
+
             </tbody>
         </table>
     </div>
