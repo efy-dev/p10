@@ -197,7 +197,7 @@
         var out = '';
         out = '满' + priceLimit +'立减' +price;
         $("#hiddenCoupon").html(out);
-//        $("#totalPrice").text($("#totalPrice").text()-price);
+        $("#totalPrice").text(${cart.totalPrice}-price);
         $(".ul-list").hide();
 
     }
