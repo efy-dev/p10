@@ -78,7 +78,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a>工艺</a><i class="fu-icon"></i><a>景泰蓝</a><i class="fu-icon"></i><a>作品</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a>工艺</a><i class="fu-icon"></i><a>景泰蓝</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId=<%=request.getParameter("projectId")%>'/>">作品</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">

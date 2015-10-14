@@ -314,7 +314,7 @@
                         <condition name="user.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
-                <do name="plistProjectFollowed" access="" label="projectFollowed列表"
+                <do name="plistProjectFollowed2" access="" label="projectFollowed列表"
                     result="json">
                     <query name="isShow" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
