@@ -61,6 +61,7 @@
       <div class="tabs-bd">
         <div class="am-tab-panel am-active">
           <!--大师动态-->
+          <input id="content" value="" name="" type="hidden" />
           <div class="suit" id="pubu">
 
           </div>
@@ -154,12 +155,48 @@
                   +"</div></div>"
                   +"<div class=\"dynamic-ft\"> "
                   +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
-                  +"<a href=\"#\" class=\"ft-a\"> <i class=\"good-2\"></i><em>9999</em></a><i class=\"s-solid ft-a\"></i> "
+                  +"<a onclick=\"showModel('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
                   +"<a onclick=\"collected('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
           box.append(sub);
         }
       }
     });
+  }
+
+  function showModel(msgId){
+    $("#content").attr("name",msgId);
+    window.open("<c:url value='/comment.jsp?msgId='/>"+msgId);
+
+  }
+
+  function setValue(data){
+    var msgId = $("#content").attr("name");
+    console.log(msgId);
+    var ret =document.getElementById("content").value = data;
+    if(ret && ret.toString().length>=1) {
+      var CommentValue = $("#content").val();
+      if (CommentValue == null || CommentValue == "") {
+        alert("你未发表任何评论，请评论");
+        return false;
+      }
+    }
+    $.ajax({
+      type: "POST",
+      url:"<c:url value='/masterMessage/workComment.do?msgId='/>"+msgId,
+      data:"content="+CommentValue,
+      async: false,
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        if(data==false){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }else{
+          alert("评论成功!");
+        }
+      }
+    })
   }
 
   function transdate(endTime){
@@ -289,10 +326,11 @@
         }else{
           var sub = "";
           for(var i = 0 ;i < data.length ;i++){
+            var cTime = transdate(data[i].createDateTime);
             sub += "<div class=\"dynamic\">" +
                     "<div class=\"dynamic-hd\"> <a class=\"suit-tx\"><img class=\"am-circle\" src=\"/scripts/assets/upload/120101-p1-1.jpg\"></a>" +
-                    "<div class=\"suit-name\"><a href=\"#\"><span>蔡水况</span></a></div>" +
-                    "<a class=\"suit-gz\"><span>已关注</span></a> </div>" +
+                    "<div class=\"suit-name\"><a href=\"#\"><span>"+data[i].fullName+"</span></a></div>" +
+                    "<a class=\"suit-gz\"><span>"+data[i].praiseStatus+"</span></a> </div>" +
                     "<div class=\"dynamic-st\">" +
                     "<div class=\"suit-st-text\">" +
                     "<p><span>"+data[i].content+"</span></p>" +
@@ -300,9 +338,9 @@
                     "<div class=\"suit-st-img\"> <img src=\"/scripts/assets/upload/120101-p1-2.jpg\"> </div>" +
                     "<div class=\"suit-st-ft\">" +
                     "<div class=\"suit-ft-left\"><span>"+data[i].dataSource+"</span></div>" +
-                    "<div class=\"suit-ft-right\"><span>1小时前</span></div>" +
+                    "<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>" +
                     "</div></div>" +
-                    "<div class=\"dynamic-ft\"> <a href=\"#\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>9999</em> </a>  " +
+                    "<div class=\"dynamic-ft\"> <a href=\"#\" onclick=\"changeFollowedStatus(this,'"+data[i].id+"')\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+data[i].praiseStatus+"</em> </a>  " +
                     "<i class=\"s-solid ft-a\"></i> <a href=\"#\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a>"+
                     "<i class=\"s-solid ft-a\"></i> <a href=\"#\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>";
           }
@@ -335,7 +373,6 @@
       }
     })
   }
-
 </script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>

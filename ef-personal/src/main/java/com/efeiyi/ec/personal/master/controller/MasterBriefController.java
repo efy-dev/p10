@@ -1,6 +1,8 @@
 package com.efeiyi.ec.personal.master.controller;
 
 import com.efeiyi.ec.master.model.*;
+import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.personal.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.hibernate.envers.internal.tools.StringTools;
@@ -64,6 +66,9 @@ public class MasterBriefController {
 			queryHql = "from MasterWork p where p.master.id=:masterId and p.status='1'";
 		}
 		List<MasterWork> list = baseManager.listObject(queryHql,queryMap);
+		for (MasterWork work : list){
+			work.setPraiseStatus(work.getPraiseStatus()==null?"赞":work.getPraiseStatus());
+		}
 		return list;
 	}
 
@@ -72,7 +77,44 @@ public class MasterBriefController {
 	public String getMasterWork(HttpServletRequest request , Model model){
 		String workId = request.getParameter("workId");
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
+		work.setPraiseStatus(work.getPraiseStatus()==null?"赞":work.getPraiseStatus());
+		MyUser user = AuthorizationUtil.getMyUser();
+		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId";
+		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("masterId",work.getMaster().getId());
+		queryMap.put("userId",user.getId());
+		List<MasterFollowed> list = baseManager.listObject(queryHql,queryMap);
+		if (list != null && list.size() > 0){
+			work.getMaster().setFollowStatus("已关注");
+		}else{
+			work.getMaster().setFollowStatus("关注");
+		}
 		model.addAttribute("work",work);
-		return "/master";
+		model.addAttribute("myUser",user);
+		return "/masterWork/masterWorkView";
+	}
+
+	@ResponseBody
+	@RequestMapping("/masterWorkPraise.do")
+	public String masterWorkPraise(HttpServletRequest request){
+		String workId = request.getParameter("workId");
+		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
+		MyUser user = AuthorizationUtil.getMyUser();
+		String queryHql = "from MasterWorkPraise w where w.work.id=:workId and w.user.id =:userId";
+		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("workId",workId);
+		queryMap.put("userId",user.getId());
+		List<MasterWorkPraise> list = baseManager.listObject(queryHql,queryMap);
+		if (list != null && list.size()> 0 ){
+			work.setPraiseStatus("赞");
+			baseManager.delete(MasterWorkPraise.class.getName(),list.get(0).getId());
+		}else{
+			work.setPraiseStatus("取消赞");
+			MasterWorkPraise praise = new MasterWorkPraise();
+			praise.setUser(user);
+			praise.setWork(work);
+			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),praise);
+		}
+		return work.getPraiseStatus();
 	}
 }

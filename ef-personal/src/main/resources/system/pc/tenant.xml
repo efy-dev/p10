@@ -188,5 +188,22 @@
             </does>
         </entity>
 
+        <entity name="masterComment" label="关注前"  model="com.efeiyi.ec.master.model.MasterComment">
+            <does>
+                <do name="plistMasterComment" access="" label="关注" result="json">
+                    <query name="comment" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="masterWork.id" defaultValue="0" operation="eq"/>
+                        <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
+                    </query>
+                    <query name="message" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="masterMessage.id" defaultValue="0" operation="eq"/>
+                        <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+
+            </does>
+        </entity>
     </entities>
 </module>

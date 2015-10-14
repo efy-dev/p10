@@ -225,14 +225,30 @@
         if(data != null && data.length > 0){
           for(var i = 0;i<data.length;i++){
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
-                    "<a href=\"http://www.baidu.com\"><img src=\""+data[i].pictureUrl+"\"></a>" +
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\""+data[i].pictureUrl+"\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
-                    "<a href=\"#\"><i class=\"icon good-1\"></i><em>9999</em></a>"+
+                    "<a href=\"#\" onclick=\"praiseWork(this,'"+data[i].id+"');\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
                     "<a href=\"#\"><i class=\"icon good-2\"></i><em>9999</em></a></div></div></li>";
           }
         }
         sub += "</ul>";
         box.append(sub);
+      }
+    })
+  }
+
+  function praiseWork(o,workId){
+    $.ajax({
+      type: "POST",
+      url: "<c:url value='/masterBrief/masterWorkPraise.do'/>",
+      async: false,
+      data: "workId=" + workId,
+      dataType: "json",
+      error: function () {
+        alert('出错了,请联系系统管理员!');
+      },
+      success: function (data) {
+        $(o).find("em").html(data);
       }
     })
   }
@@ -254,9 +270,9 @@
           var sub = "";
           for(var i = 0;i<data.length;i++){
             sub += "<li class=\"item\" title=\""+data[i].project.id+"\">"+data[i].project.name +
-                    "<a href=\"http://www.baidu.com\"><img src=\""+data[i].pictureUrl+"\"></a>" +
+                    "<a href=\"<c:url value='/masterBrief/getMasterWork.do?workId='/>"+data[i].id+"\"><img src=\""+data[i].pictureUrl+"\"></a>" +
                     "<div class=\"txt\"><div class=\"name\">"+data[i].name+"</div><div class=\"txt-info\">" +
-                    "<a href=\"#\"><i class=\"icon good-1\"></i><em>9999</em></a>"+
+                    "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data[i].praiseStatus+"</em></a>"+
                     "<a href=\"#\"><i class=\"icon good-2\"></i><em>9999</em></a></div></div></li>";
           }
           box.append(sub);

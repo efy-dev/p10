@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class MasterMessageController {
 			getPraiseStatus(message,user);
 			message.setMasterId(message.getMaster().getId());
 			message.setMasterName(message.getMaster().getFullName());
+			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
+			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
 		}
 		return messageList;
 	}
@@ -70,10 +73,12 @@ public class MasterMessageController {
 	@RequestMapping("/getMasterMessage.do")
 	public String getMasterMessage(HttpServletRequest request,Model model){
 		String messageId = request.getParameter("messageId");
+		MyUser user = AuthorizationUtil.getMyUser();
 		if (!StringTools.isEmpty(messageId)){
 			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),messageId);
 			getMasterFollowedStatus(message.getMaster());
 			model.addAttribute("object",message);
+			model.addAttribute("myUser",user);
 		}
 		return "/masterMessage/masterMessageView";
 	}
@@ -188,4 +193,218 @@ public class MasterMessageController {
 			return "";
 		}
 	}
+
+//	@ResponseBody
+//	@RequestMapping("/messageComment.do")
+//	public boolean messageComment(HttpServletRequest request){
+//		String msgId = request.getParameter("msgId");
+//		String content = request.getParameter("content");
+//		MyUser user = AuthorizationUtil.getMyUser();
+//		if (user == null){
+//			return false;
+//		}
+//		return true;
+//	}
+
+	@ResponseBody
+	@RequestMapping("/workComment.do")
+	public boolean messageCommented(HttpServletRequest request)throws Exception{
+		String msgId = request.getParameter("msgId");
+		String content = request.getParameter("content");
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null){
+			return false;
+		}
+		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterComment comment = new MasterComment();
+		comment.setContent(content);
+		comment.setUser(user);
+		comment.setAmount(0);
+		comment.setCreateDateTime(new Date());
+		comment.setMasterMessage(msg);
+		comment.setStatus("1");
+		MasterComment fatherComment = new MasterComment();
+		fatherComment.setId("0");
+		comment.setFatherComment(fatherComment);
+		baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
+		msg.setAmount(msg.getAmount()==null? 1 :msg.getAmount() + 1);
+		baseManager.saveOrUpdate(MasterMessage.class.getName(),msg);
+		return true;
+	}
+
+	@ResponseBody
+	@RequestMapping("/commentOther.do")
+	public boolean fatherCommented(HttpServletRequest request)throws Exception{
+		String msgId = request.getParameter("msgId");
+		String content = request.getParameter("content");
+		String fatherId = request.getParameter("contentId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null){
+			return false;
+		}
+		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterComment comment = new MasterComment();
+		comment.setContent(content);
+		comment.setUser(user);
+		comment.setAmount(0);
+		comment.setCreateDateTime(new Date());
+		comment.setMasterMessage(msg);
+		comment.setStatus("1");
+		MasterComment fatherComment = new MasterComment();
+		fatherComment.setId(fatherId);
+		comment.setFatherComment(fatherComment);
+		baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
+		msg.setAmount(msg.getAmount()==null? 1 :msg.getAmount() + 1);
+		baseManager.saveOrUpdate(MasterMessage.class.getName(),msg);
+		return true;
+	}
+
+	@RequestMapping("/commentUpAndDown.do")
+	@ResponseBody
+	public String commentUpAndDown(HttpServletRequest request) throws Exception {
+		String msgId = request.getParameter("msgId");
+		String commentId = request.getParameter("commentId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user.getId() == null) {
+			return "false";
+		}
+		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commentId);
+		MasterMessagePraise praise = new MasterMessagePraise();
+		String oper = request.getParameter("operation");
+		if (oper != null && oper.equalsIgnoreCase("up")) {
+			String queryHql = "from MasterMessagePraise t where t.user.id=:userId and t.comment.id=:commentId";
+			LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+			map.put("userId", user.getId());
+			map.put("commentId", commentId);
+//			List<MasterWorkPraise> list = baseManager.listObject(queryHql,map);
+
+			MasterMessagePraise p2 = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+			if (p2 != null && p2.getId() != null)//不为null,说明已经点过赞了
+			{
+				return "repeat";
+			}
+			//防止重复点赞
+			praise.setUser(user);
+			praise.setCreateDateTime(new Date());
+			praise.setComment(comment);
+			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
+			comment.setAmount(comment.getAmount() == null ? 1 : comment.getAmount() + 1);
+			baseManager.saveOrUpdate(MasterComment.class.getName(), comment);
+		}
+
+		if (oper != null && oper.equalsIgnoreCase("down")) {
+			String queryHql = "from MasterMessagePraise t where t.user.id=:userId and t.comment.id=:commentId";
+			LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+			map.put("userId", user.getId());
+			map.put("commentId", commentId);
+			MasterMessagePraise praise1 = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+			if (praise1 != null && praise1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
+				baseManager.delete(MasterMessagePraise.class.getName(), praise1.getId());
+
+			int Amount=0;
+			if(comment.getAmount() == null){
+				Amount=0;
+			}else if (comment.getAmount() - 1<=0){
+				Amount=0;
+			}else if (comment.getAmount() - 1>=1){
+				Amount = comment.getAmount() - 1;
+			}
+			comment.setAmount(Amount);
+			baseManager.saveOrUpdate(MasterComment.class.getName(), comment);
+		}
+		return "true";
+	}
+
+	@RequestMapping("/saveThumbUp.do")
+	@ResponseBody
+	public String savaUP(HttpServletRequest request) throws Exception {
+		String msgId = request.getParameter("msgId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user.getId() == null) {
+			return "false";
+		}
+		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterMessagePraise praise = new MasterMessagePraise();
+		String oper = request.getParameter("operation");
+		if (oper != null && oper.equalsIgnoreCase("up")) {
+
+			String queryHql = "from MasterMessagePraise t where t.user.id=:userId and t.message.id=:workId";
+			LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+			map.put("userId", user.getId());
+			map.put("workId", msg.getId());
+			MasterMessagePraise praise1 = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+			if (praise1 != null && praise1.getId() != null)//不为null,说明已经点过赞了
+			{
+				return "repeat";
+			}
+
+
+
+			//防止重复点赞
+
+
+			praise.setUser(user);
+			praise.setMessage(msg);
+			praise.setCreateDateTime(new Date());
+			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
+			msg.setFsAmount(msg.getFsAmount() == null ? 1 : msg.getFsAmount() + 1);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(), msg);
+		}
+
+
+		if (oper != null && oper.equalsIgnoreCase("down")) {
+			String queryHql = "from MasterMessagePraise t where t.user.id=:userId and t.message.id=:workId";
+			LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+			map.put("userId", user.getId());
+			map.put("workId", msg.getId());
+			MasterMessagePraise praise1 = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql, map);
+			if (praise1 != null && praise1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
+				baseManager.delete(MasterMessagePraise.class.getName(), praise1.getId());
+			int FsAmount =0;
+			if(msg.getFsAmount() == null){
+				FsAmount =0;
+			}else  if(msg.getFsAmount() - 1<=0){
+				FsAmount =0;
+			}else if (msg.getFsAmount() - 1>=1){
+				FsAmount =msg.getFsAmount() - 1;
+			}
+			msg.setFsAmount(FsAmount);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(), msg);
+		}
+
+
+		return "true";
+	}
+
+	@RequestMapping("/storeWork.do")
+	@ResponseBody
+	public String storeWork(HttpServletRequest request) throws Exception {
+		String msgId = request.getParameter("msgId");
+		MasterMessageStore store = new MasterMessageStore();
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user.getId() == null) {
+			return "false";
+		}
+		if (user.getId() != null) {
+			String queryHql = "from MasterMessageStore t where t.user.id=:userId and t.masterMessage.id=:workId";
+			LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+			map.put("userId", user.getId());
+			map.put("workId", msgId);
+			MasterMessageStore ps = (MasterMessageStore) baseManager.getUniqueObjectByConditions(queryHql, map);
+			if (ps != null && ps.getId() != null){
+				return "repeat" ;
+			}//不为null,说明已经收藏了
+		}
+		store.setUser(user);
+		MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), msgId);
+		store.setMasterMessage(work);
+		store.setStatus("1");
+		store.setCreateDateTime(new Date());
+		baseManager.saveOrUpdate(MasterMessageStore.class.getName(), store);
+
+		return "true";
+	}
+
+
 }

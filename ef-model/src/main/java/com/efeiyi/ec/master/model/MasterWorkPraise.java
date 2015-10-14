@@ -2,20 +2,23 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by AC丶man on 2015/9/21.
+ * Created by AC丶man on 2015/10/12.
  */
 @Entity
-@Table(name = "master_message_praise")
-public class MasterMessagePraise {
+@Table(name = "master_work_praise")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+public class MasterWorkPraise implements Serializable {
 
 	private String id;
-	private MasterMessage message;
+	private MasterWork work;
 	private MyUser user;
 	private MasterComment comment;
 	private String status;
@@ -32,20 +35,18 @@ public class MasterMessagePraise {
 		this.id = id;
 	}
 
-	@JsonIgnore
+	@JoinColumn(name="work_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "master_message_id")
-	public MasterMessage getMessage() {
-		return message;
+	public MasterWork getWork() {
+		return work;
 	}
 
-	public void setMessage(MasterMessage message) {
-		this.message = message;
+	public void setWork(MasterWork work) {
+		this.work = work;
 	}
 
-	@JsonIgnore
+	@JoinColumn(name="user_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
 	public MyUser getUser() {
 		return user;
 	}

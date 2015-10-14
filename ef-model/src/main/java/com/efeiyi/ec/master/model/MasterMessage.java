@@ -34,6 +34,8 @@ public class MasterMessage implements Serializable {
 	private String dataSource; //来源
 	private Long praiseNum;
 	private String praiseStatus;
+	private Integer amount;
+	private Integer fsAmount;
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 
@@ -188,5 +190,23 @@ public class MasterMessage implements Serializable {
 
 	public void setMessageAttachmentLists(List<MessageAttachment> messageAttachmentLists) {
 		this.messageAttachmentLists = messageAttachmentLists;
+	}
+
+	@Column(name = "amount")
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	@Column(name = "fans_amount")
+	public Integer getFsAmount() {
+		return fsAmount;
+	}
+
+	public void setFsAmount(Integer fsAmount) {
+		this.fsAmount = fsAmount;
 	}
 }

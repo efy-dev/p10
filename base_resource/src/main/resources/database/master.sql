@@ -509,6 +509,25 @@ CREATE TABLE `master_message_store` (
 ALTER TABLE `master_introduction_attachment`
 ADD COLUMN `video_path`  varchar(64) NULL AFTER `master_news_id`;
 
+---------------------20151012---------
+CREATE TABLE `master_work_praise` (
+  `id`  char(16) NOT NULL ,
+  `user_id`  char(16) NULL ,
+  `work_id`  char(16) NULL ,
+  `status`  varchar(20) NULL ,
+  `create_datetime`  datetime(6) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+CREATE TABLE `master_work_store` (
+  `id`  char(16) NOT NULL ,
+  `user_id`  char(16) NULL ,
+  `work_id`  char(16) NULL ,
+  `status`  varchar(16) NULL ,
+  `create_datetime`  datetime(6) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
 
 
 
@@ -524,7 +543,44 @@ CREATE TABLE `product_model_record` (
 ALTER TABLE `product_model_record`
 ADD COLUMN `status`  varchar(2) NULL AFTER `create_datetime`;
 
-=======================================以上已执行============================================
+--------------20151013----------
+ALTER TABLE `master_comment`
+ADD COLUMN `father_id`  char(16) NULL AFTER `create_datetime`;
+
+ALTER TABLE `master_comment`
+ADD COLUMN `comment_number`  int(20) NULL AFTER `father_id`;
+
+ALTER TABLE `master_comment`
+ADD COLUMN `master_work_id`  char(16) NULL AFTER `id`;
+
+ALTER TABLE `master_work`
+ADD COLUMN `comment_number`  int(20) NULL AFTER `master_id`;
+
+ALTER TABLE `master_work_praise`
+ADD COLUMN `comment_id`  char(16) NULL AFTER `create_datetime`;
+
+ALTER TABLE `master_work`
+ADD COLUMN `fans_amount`  int(20) NULL AFTER `comment_number`;
+
+ALTER TABLE `master_news`
+ADD COLUMN `fans_amount`  int(20) NULL AFTER `type`,
+ADD COLUMN `amount`  int(20) NULL AFTER `fans_amount`;
+
+ALTER TABLE `master_message_praise`
+ADD COLUMN `comment_id`  char(16) NULL AFTER `user_id`,
+ADD COLUMN `status`  varchar(20) NULL AFTER `comment_id`,
+ADD COLUMN `create_datetime`  datetime(6) NULL AFTER `status`;
+
+ALTER TABLE `master_message_store`
+ADD COLUMN `create_datetime`  datetime(6) NULL AFTER `status`;
+
+
+
+
+
+
+
+
 
 
 

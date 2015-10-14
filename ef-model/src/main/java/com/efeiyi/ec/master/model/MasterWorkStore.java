@@ -1,7 +1,6 @@
 package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,18 +8,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by AC丶man on 2015/9/18.
+ * Created by AC丶man on 2015/10/12.
  */
+
 @Entity
-@Table(name = "master_message_store")
-public class MasterMessageStore implements Serializable {
+@Table(name="master_work_store")
+public class MasterWorkStore implements Serializable {
 
-	private String id ;
-	private String status;
-	private MasterMessage masterMessage;
+	private String id;
+	private MasterWork work;
 	private MyUser user;
+	private String status;
 	private Date createDateTime;
-
 
 	@Id
 	@GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -33,35 +32,33 @@ public class MasterMessageStore implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "status")
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	@JsonIgnore
+	@JoinColumn(name="work_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "message_id")
-	public MasterMessage getMasterMessage() {
-		return masterMessage;
+	public MasterWork getWork() {
+		return work;
 	}
 
-	public void setMasterMessage(MasterMessage masterMessage) {
-		this.masterMessage = masterMessage;
+	public void setWork(MasterWork work) {
+		this.work = work;
 	}
 
-	@JsonIgnore
+	@JoinColumn(name="user_id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
 	public MyUser getUser() {
 		return user;
 	}
 
 	public void setUser(MyUser user) {
 		this.user = user;
+	}
+
+	@Column(name="status")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Column(name="create_datetime")
@@ -72,4 +69,5 @@ public class MasterMessageStore implements Serializable {
 	public void setCreateDateTime(Date createDateTime) {
 		this.createDateTime = createDateTime;
 	}
+
 }

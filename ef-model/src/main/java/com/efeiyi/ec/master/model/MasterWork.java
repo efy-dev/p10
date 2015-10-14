@@ -35,6 +35,18 @@ public class MasterWork {
     private  List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
 // /   private  MasterWorkRecommended recommended;//推荐作品
 //    private List<ProjectTag> projectTagList;
+    private String praiseStatus;
+    private Integer amount;
+    private Integer fsAmount;
+
+    @Transient
+    public String getPraiseStatus() {
+        return praiseStatus;
+    }
+
+    public void setPraiseStatus(String praiseStatus) {
+        this.praiseStatus = praiseStatus;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -175,4 +187,21 @@ public class MasterWork {
         this.masterWorkRecommendedList = masterWorkRecommendedList;
     }
 
+    @Column(name = "comment_number")
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Column(name = "fans_amount")
+    public Integer getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Integer fsAmount) {
+        this.fsAmount = fsAmount;
+    }
 }
