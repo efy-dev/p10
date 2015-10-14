@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Created by Administrator on 2015/8/18.
@@ -73,7 +73,7 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
                 label.setStatus("2");
                 labelDao.saveOrUpdate(Label.class.getName(), label);
             }
-            buildNfcLabelFile(listMap.get("listNFC"),pol,flag);
+            buildNfcLabelFile(listMap.get("listNFC"), pol, flag);
             flag += pol.getAmount();
         }
 
@@ -82,7 +82,7 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
 
     }
 
-    private void buildNfcLabelFile(List<Label> listNFC, PurchaseOrderLabel pol,Integer flag) {
+    private void buildNfcLabelFile(List<Label> listNFC, PurchaseOrderLabel pol, Integer flag) {
         BufferedWriter bw = null;
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         File clazzDir = new File(path);
@@ -92,16 +92,22 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
             parent.mkdirs();
         }
         try {
-            File file = new File(webInfPath + pol.getId() + ".txt.tmp");
-
-            bw = new BufferedWriter(new FileWriter(file));
             long startTime = System.currentTimeMillis();
-//            int increment = pol.getAmount() - flag;
-            for (int x=0;x<pol.getAmount(); x++) {
-                bw.write(listNFC.get(x + flag).getCode() + "\n");
+            List<File> cfgFileList = new ArrayList<File>(pol.getAmount());
+            for (int x = 0; x < pol.getAmount(); x++) {
+                File tmpCfgFile = new File(webInfPath + listNFC.get(x + flag).getCode() + ".tmp");
+                bw = new BufferedWriter(new FileWriter(tmpCfgFile));
+                StringBuilder line = new StringBuilder();
+                line.append("code=").append(listNFC.get(x + flag).getCode()).append("\n").append("apoid=8\n");
+                bw.write(line.toString());
+                bw.flush();
+                File cfgFile = new File(webInfPath + listNFC.get(x + flag).getCode() + ".cfg");
+                FileUtils.copyFile(tmpCfgFile, cfgFile);
+                cfgFileList.add(cfgFile);
             }
-            bw.flush();
-            FileUtils.copyFile(file, new File(webInfPath + pol.getId() + ".txt"));
+
+            compressFiles(cfgFileList, clazzDir.getParent() + "/file/" + pol.getId() + ".rar");
+
             System.out.println("输出用时：" + (System.currentTimeMillis() - startTime));
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,6 +120,36 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
                 }
             }
         }
+    }
+
+    private void compressFiles(List<File> fileList, String fullName) throws Exception {
+        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(fullName));
+        FileInputStream fis = null;
+        try {
+            for (File file : fileList) {
+                fis = new FileInputStream(file);
+                ZipEntry ze = new ZipEntry(file.getName());
+                zos.putNextEntry(ze);
+                byte[] content = new byte[1024];
+                int len;
+                while ((len = fis.read(content)) != -1) {
+                    zos.write(content, 0, len);
+                    zos.flush();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+                zos.close();
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+
     }
 
     @Override
