@@ -43,11 +43,42 @@ $(function(){
         };
         //加入购物车-立即购买-调出规格弹出层
         $('#btn-cart,#btn-format,#btn-buy').click(function(){
+            $('body').css('overflow','hidden');
             $('.dialog-des-format').css({'-webkit-transform':'translateY(0)'});
             $('.am-dimmer').show();
-            $('.am-active').click(function(){
+            //关闭
+            $('.am-active,.dialog-des-format .format-close').click(function(){
+                $('body').css('overflow','');
                 $('.dialog-des-format').css({'-webkit-transform':'translateY(110%)'});
                 $('.am-dimmer').hide();
+                //添加内容
+                $('.details .des-format span.color').html(secColor.html());
+                $('.details .des-format span.size').html(secSize.html());
+            });
+            //
+            var dlColorA=$('.dialog-des-format .des-scroll .dl-color a');
+            var dlSizeA=$('.dialog-des-format .des-scroll .dl-size a');
+            var secColor=$('.dialog-des-format .dl-des dd span.sec-color');
+            var secSize=$('.dialog-des-format .dl-des dd span.sec-size');
+            //点击颜色
+            dlColorA.click(function(){
+                $(this).addClass('active').siblings('a').removeClass('active');
+                secColor.show().html($(this).html())
+                return false;
+            });
+            //点击尺寸
+            dlSizeA.click(function(){
+                $(this).addClass('active').siblings('a').removeClass('active');
+                secSize.show().html($(this).html())
+                return false;
+            })
+            return false;
+        })
+        //分享
+        $('.details .des-title a.share').click(function(){
+            $('#cover').show();
+            $('#cover .bg').click(function(){
+                $(this).parents('#cover').hide();
             })
             return false;
         })
