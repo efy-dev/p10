@@ -49,7 +49,8 @@
                                 </li>
                                 <li>
                                     <label>手机号码：</label>
-                                    <input type="text" name="phone">
+                                    <input type="text" name="phone" id="ph">
+                                    <span class="active-d span2" id="pe" style="border: 0;color: #000"></span>
                                 </li>
                                 <li>
                                     <label></label>
@@ -209,10 +210,18 @@
     function sm(){
         var province=$("#provinceVal").val();
         var city=$("#cityVal").val();
+        var phone=$("#ph").val();
+        var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
         if(province == "请选择" || city == "请选择"){
             $("#hao").html("省市不能为空");
+
         }else {
-            $("#addAddress").submit();
+            if(reg.test(phone)){
+                $("#addAddress").submit();
+                $("#pe").html("");
+                $("#hao").html("");
+            }
+            $("#pe").html("您的手机格式不正确");
             $("#hao").html("");
         }
     }

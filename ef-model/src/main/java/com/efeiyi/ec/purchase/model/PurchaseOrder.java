@@ -192,21 +192,6 @@ public class PurchaseOrder {
 
     @Column(name = "total")
     public BigDecimal getTotal() {
-//        try {
-//            if (getCoupon() != null) {
-//                Coupon coupon = getCoupon();
-//                System.out.println("=============start=============");
-//                System.out.println(coupon.getCouponBatch().getPrice());
-//                System.out.println(originalPrice);
-//                System.out.println(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//                System.out.println("=============end=============");
-//                return new BigDecimal(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//            } else {
-//                return originalPrice;
-//            }
-//        }catch (Exception e){
-//            return originalPrice;
-//        }
         return total;
     }
 
