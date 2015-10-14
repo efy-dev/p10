@@ -147,6 +147,7 @@
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
+                <match url="/basic/xm.do?qm=formProjectCategory&amp;param=tenant"/>
                 <match url="/basic/xm.do?qm=viewEcProjectCategory"/>
                 <match url="/basic/xm.do?qm=plistPCProductModel_default"/>
 
