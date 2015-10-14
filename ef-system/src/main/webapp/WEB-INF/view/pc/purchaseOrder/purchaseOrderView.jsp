@@ -220,7 +220,7 @@
                             alt="产品图片"></td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.name}</td>
                     <td class="am-hide-sm-only">${purchaseOrderProduct.purchaseAmount}</td>
-                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.product.serial}</td>
+                    <td class="am-hide-sm-only">${purchaseOrderProduct.productModel.serial}</td>
                     <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 </tr>
             </c:forEach>
@@ -353,7 +353,7 @@
                                         pattern="yyyy-MM-dd HH:mm"/>
                     </td>
                     <td class="am-hide-sm-only">
-                    ${purchaseOrderDelivery.purchaseOrder.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.purchaseOrder.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.purchaseOrder.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.purchaseOrder.consumerAddress.details}
+                    ${purchaseOrderDelivery.purchaseOrder.purchaseOrderAddress}
                     </td>
                 </tr>
             </c:forEach>

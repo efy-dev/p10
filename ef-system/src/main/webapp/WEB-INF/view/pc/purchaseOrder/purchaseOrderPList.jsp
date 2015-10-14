@@ -220,7 +220,7 @@
                                                     <%--type="normal"/>--%>
                             <%--</c:forEach>--%>
                         <%--</td>--%>
-                        <td class="am-hide-sm-only">${purchaseOrder.consumerAddress.province.name}</td>
+                        <td class="am-hide-sm-only">${purchaseOrder.purchaseOrderAddress}</td>
                         <td class="am-hide-sm-only">${purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"
                                                                     pattern="yyyy-MM-dd HH:mm"/></td>
