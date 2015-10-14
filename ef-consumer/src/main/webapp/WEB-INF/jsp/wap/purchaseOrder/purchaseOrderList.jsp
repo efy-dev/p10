@@ -1,6 +1,8 @@
 <%@ page import="com.efeiyi.ec.consumer.organization.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,6 +43,9 @@
         <!--订单状态-->
         <c:forEach items="${orderList}" var="purchaseOrder">
             <div class="list-pege">
+                <div class="state" style="padding: 1rem 0">
+                    <p class="clo-2"><span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${purchaseOrder.orderStatus}" type="normal"/></p>
+                </div>
                 <ul>
                     <c:if test="${purchaseOrder.purchaseOrderProductList.size()<=4}">
                         <c:forEach items="${purchaseOrder.purchaseOrderProductList}" var="purchaseOrderProduct">
@@ -54,48 +59,52 @@
                         <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productModel_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                     </c:if>
                 </ul>
-                <c:if test="${purchaseOrder.orderStatus == '1'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">待付款</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/pay/${purchaseOrder.id}"/>">立即支付</a></li>
-                    </ul>
-                </c:if>
-                <c:if test="${purchaseOrder.orderStatus == '5'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">未发货</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
-                    </ul>
-                </c:if>
                 <c:if test="${purchaseOrder.orderStatus == '7'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">已发货</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a></li>
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
                     </ul>
                 </c:if>
+
+                <c:if test="${purchaseOrder.orderStatus == '5'}">
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+                    </ul>
+                </c:if>
+
+                <c:if test="${purchaseOrder.orderStatus == '1'}">
+
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a>
+                            <a style="margin-right: 0px;" href="#" onclick="showConfirm('提示','是否确定收货',function(){
+                                    window.location.href='<c:url value="/order/confirmGet/${purchaseOrder.id}"/>';
+                                    })">确定收货</a></li>
+                    </ul>
+                </c:if>
+
                 <c:if test="${purchaseOrder.orderStatus == '13'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">已收货</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="#"></a></li>
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已完成</a></li>
                     </ul>
                 </c:if>
+
                 <c:if test="${purchaseOrder.orderStatus == '17'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">已取消</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已取消</a></li>
                     </ul>
                 </c:if>
+
                 <c:if test="${purchaseOrder.orderStatus == '9'}">
-                    <ul class="jp-pd">
-                        <li class="am-u-sm-2 jp-pd-r">未评价</li>
-                        <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
+                    <ul class="jp-pd jp-pd-btns">
+                        <li>￥${purchaseOrder.total}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">未&nbsp;评&nbsp;价</a></li>
                     </ul>
                 </c:if>
+
                 <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
             </div>
         </c:forEach>

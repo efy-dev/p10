@@ -91,13 +91,42 @@
         <!-- //End--des-format-->
         <div class="des-content">
             <div class="bd title">详情</div>
-            <div class="bd" style="padding: 10px">
+            <div class="bd">
                 <c:if test="${!empty product.productDescription}">
                     ${product.productDescription.content}
                 </c:if>
+                <c:if test="${not empty purchaseOrderProductList}">
+                    <div class="discuss">
+                        <div class="bd dis-title">【顾客评论】</div>
+                        <ul class="ul-list">
+                            <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <li class="item">
+                                    <div class="user-info">
+                                        <img  src="/scripts/upload/yonghm.jpg">
+                                        <c:set var="user">
+                                            ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                        </c:set>
+                                        <p class="name">${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
+                                            <%--<p class="time">2015-10-12   16:16</p>--%>
+                                    </div>
+                                    <div class="seller">
+                                        <p class="ask">
+                                            <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
+                                                ${purchaseOrderProduct.purchaseOrderComment.content}
+                                            </c:if>
+                                        </p>
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                        </ul>
+                    </div>
+                    <!-- //End--box-des-->
+                </c:if>
             </div>
-            <!-- //End--box-des-->
+
         </div>
+
         <!-- //End--des-format-->
     </div>
     <!-- //End---->
@@ -108,7 +137,7 @@
      <c:if test="${not empty product.master.id}">
          <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
      </c:if>
-        <a class="btn-default" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes" title="咨询">咨询</a>
+        <a class="btn-default" target="_blank"  title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a class="btn-buy" title="售罄">售罄</a>
@@ -119,7 +148,7 @@
         </c:if>
     </div>
 </article>
-<div class="am-modal-actions dialog-des-format" id="my-actions">
+<div class="am-modal-actions dialog-des-format" id="my-actions" style="display: none;">
     <div class="format-error">请选择商品规格</div>
     <div class="bd ">
         <ul class="bd ul-nav">
@@ -175,14 +204,6 @@
             },
         });
     }
-
-    $().ready(function(){
-
-        $("img").each(function(){
-            $(this).css("width","100%");
-        })
-
-    })
 </script>
 <%--<script>--%>
     <%--$(function(){--%>
@@ -250,6 +271,20 @@
         var t = document.getElementById("value").value;
         window.location.href = "<c:url value=""/>"+"/order/easyBuy/"+o +"?amount="+ t;
     }
+</script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
 </script>
 </body>
 

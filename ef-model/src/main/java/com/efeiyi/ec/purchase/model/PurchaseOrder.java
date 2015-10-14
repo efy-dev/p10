@@ -192,21 +192,6 @@ public class PurchaseOrder {
 
     @Column(name = "total")
     public BigDecimal getTotal() {
-//        try {
-//            if (getCoupon() != null) {
-//                Coupon coupon = getCoupon();
-//                System.out.println("=============start=============");
-//                System.out.println(coupon.getCouponBatch().getPrice());
-//                System.out.println(originalPrice);
-//                System.out.println(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//                System.out.println("=============end=============");
-//                return new BigDecimal(originalPrice.floatValue()-coupon.getCouponBatch().getPrice());
-//            } else {
-//                return originalPrice;
-//            }
-//        }catch (Exception e){
-//            return originalPrice;
-//        }
         return total;
     }
 
@@ -260,13 +245,16 @@ public class PurchaseOrder {
     }
 
 
-
     @Transient
-    public BigDecimal getRealPayMoney(){
-        List<PurchaseOrderPayment> purchaseOrderPaymentList  = getPurchaseOrderPaymentList();
+    public BigDecimal getRealPayMoney() {
+        List<PurchaseOrderPayment> purchaseOrderPaymentList = getPurchaseOrderPaymentList();
         BigDecimal price = new BigDecimal(0);
-        for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList){
-            price.add(purchaseOrderPaymentTemp.getPaymentAmount());
+        for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
+            for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
+                if (purchaseOrderPaymentDetails.getCoupon() == null) {
+                    price.add(purchaseOrderPaymentTemp.getPaymentAmount());
+                }
+            }
         }
         return price;
     }

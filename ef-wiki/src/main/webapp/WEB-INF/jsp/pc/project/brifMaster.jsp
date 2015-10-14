@@ -47,7 +47,6 @@
       <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
       <li><a href="" title="请登录">请登录</a></li>
       <li><a href="" title="快速注册">快速注册</a></li>
-      <li><a href="" title="商家入驻">商家入驻</a></li>
       <li class="btn-top-wechat">
         <a title="手机e飞蚁">手机e飞蚁</a>
         <span class="top-wechat"></span>
@@ -66,54 +65,7 @@
     <div class="nav">
       <ul>
         <li><a href="" title="首页">首页</a></li>
-        <li class="" >
-          <a title="商品分类">商品分类</a>
-          <span class="bgbor"></span>
-          <div class="nav-links">
-            <ul>
-              <li class="title">陶 冶 烧 造</li>
-              <li><a href="" target="_blank" title="">紫砂</a></li>
-              <li><a href="" target="_blank" title="">景泰蓝</a></li>
-              <li><a href="" target="_blank" title="">景德镇</a></li>
-              <li><a href="" target="_blank" title="">钧瓷</a></li>
-              <li><a href="" target="_blank" title="">龙泉青瓷</a></li>
-            </ul>
-            <ul>
-              <li class="title">传 统 美 术</li>
-              <li><a href="" target="_blank" title="">唐卡</a></li>
-              <li><a href="" target="_blank" title="">剪纸</a></li>
-              <li><a href="" target="_blank" title="">书法篆刻</a></li>
-              <li><a href="" target="_blank" title="">陶瓷微书</a></li>
-              <li><a href="" target="_blank" title="">脸谱</a></li>
-              <li><a href="" target="_blank" title="">掐丝珐琅画</a></li>
-            </ul>
-            <ul>
-              <li class="title">金 石 錾 锻</li>
-              <li><a href="" target="_blank" title="">铜雕</a></li>
-              <li><a href="" target="_blank" title="">花丝镶嵌</a></li>
-            </ul>
-            <ul>
-              <li class="title">如胶似膝</li>
-              <li><a href="" target="_blank" title="">平遥漆器</a></li>
-              <li><a href="" target="_blank" title="">北京雕漆</a></li>
-            </ul>
-            <ul>
-              <li class="title">织 染 印.绣</li>
-              <li><a href="" target="_blank" title="">潮绣</a></li>
-              <li><a href="" target="_blank" title="">苏绣</a></li>
-              <li><a href="" target="_blank" title="">顾绣</a></li>
-              <li><a href="" target="_blank" title="">沈绣</a></li>
-              <li><a href="" target="_blank" title="">瑶族绣</a></li>
-              <li><a href="" target="_blank" title="">京绣</a></li>
-              <li><a href="" target="_blank" title="">云锦</a></li>
-              <li><a href="" target="_blank" title="">蜀锦</a></li>
-              <li><a href="" target="_blank" title="">漳缎</a></li>
-              <li><a href="" target="_blank" title="">缂丝</a></li>
-              <li><a href="" target="_blank" title="">蓝印花布</a></li>
-              <li><a href="" target="_blank" title="">蜡染</a></li>
-            </ul>
-          </div>
-        </li>
+
         <li><a href="" title="传承人">大师</a></li>
         <li><a href="<c:url value='/pc/index.do'/>" title="展览">工艺</a></li>
 

@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -39,10 +40,10 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
-                <li><a href="http://www2.efeiyi.com" title="首页">首页</a></li>
-                <li><a href="<c:url value="#"/> " title="购物车">购物车</a></li>
+                <li><a href="<%=PConst.HOSTNAME%>" title="首页">首页</a></li>
+                <li><a href="<%=PConst.HOSTNAME%>/cart/view " title="购物车">购物车</a></li>
                 <li><a href="<c:url value="/order/myEfeiyi/list.do"/> " title="个人中心">个人中心</a></li>
-                <li><a href="<c:url value="/productCategory.do"/> " title="分类">分类</a></li>
+                <li><a href="<%=PConst.HOSTNAME%>/productCategory.do " title="分类">分类</a></li>
                 <li><a href="http://master.efeiyi.com" title="大师">大师</a></li>
             </ul>
         </div>

@@ -103,7 +103,7 @@
 
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.province.name}&nbsp;${object.purchaseOrder.consumerAddress.city.name}&nbsp;${object.purchaseOrder.consumerAddress.district.name}&nbsp;${object.purchaseOrder.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.purchaseOrderAddress}</td>
             </tr>
             </tbody>
         </table>

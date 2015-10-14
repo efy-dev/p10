@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
@@ -14,9 +15,9 @@
    <c:forEach items="${collectList}" var="collectList">
       <div class="act-wid">
         <dl>
-          <dt><a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>"><img width="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
+          <dt><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}"><img width="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-icon"></a></dt>
           <dd>
-              <a href="<c:url value="/product/productModel/${collectList.productModel.id}"/>" style="color: #666;font-size: 12px;"> <p class="commodity-bt">${collectList.productModel.product.name}</p></a>
+              <a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;"> <p class="commodity-bt">${collectList.productModel.product.name}</p></a>
             <p><a href="#" onclick="showConfirm('提示','是否取消',function(){
                     window.location.href='<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>';
                     })"  class="edit-dete">取消收藏</a><strong>￥${collectList.productModel.price}</strong></p>

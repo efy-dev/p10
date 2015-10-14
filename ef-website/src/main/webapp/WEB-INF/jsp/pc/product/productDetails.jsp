@@ -278,9 +278,9 @@
         <span class="btn"><i class="icon"></i>顶部</span>
     </div>
     <!-- //End--返回顶部-->
-    <div class="scroll-bar-ask">
-        <a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>
-    </div>
+    <%--<div class="scroll-bar-ask">--%>
+        <%--<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>--%>
+    <%--</div>--%>
     <!-- //End--在线咨询-->
 </div>
 
@@ -381,6 +381,19 @@
     }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+</script>
 </body>
 </html>
 

@@ -85,4 +85,6 @@ public class PConst {
     public static final Integer CUSTOMIZATION = 3;
     public static final Integer PACKAGEORDER = 2;
 
+    public static final String HOSTNAME = "http://www2.efeiyi.com";
+
 }

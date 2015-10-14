@@ -136,3 +136,14 @@ $(function(){
         return false
     })
 })
+
+//gongyi-erjihuifu
+$(function(){
+    $('.details .detaile-left .detaile-comment .comment li .status .status-right .ef a').click(function(){
+        $(this).parent().parent().parent().parent().find(".review-sr").slideToggle();
+        return false;
+    })
+})
+
+
+

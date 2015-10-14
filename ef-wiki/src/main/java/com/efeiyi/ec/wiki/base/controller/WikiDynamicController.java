@@ -6,6 +6,7 @@ import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
+import com.efeiyi.ec.wiki.model.ProjectDataModel;
 import com.efeiyi.ec.wiki.model.ProjectModel;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -134,13 +135,15 @@ public class WikiDynamicController extends WikibaseController {
         List<Object> bannerList = getBanners();
         model.addAttribute("bannerList", bannerList);
 
-        //关注前or关注后
+
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
             query3.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> projectFolloweds = baseManager.listObject(query3);
+
             if (projectFolloweds.size() >= 5) {
                 model.addAttribute("isShow", "ok");
+
             } else {
                 model.addAttribute("isShow", "no");
             }
@@ -153,4 +156,24 @@ public class WikiDynamicController extends WikibaseController {
         return new ModelAndView("/attention/afterAttention");
     }
 
+@RequestMapping("/afterAtJ.do")
+@ResponseBody
+public List getAttentionProjects(HttpServletRequest request, Model model) throws Exception {
+    XQuery query = new XQuery("plistProjectFollowed2_isShow", request);
+    query.put("user_id", AuthorizationUtil.getMyUser().getId());
+    PageInfo pageInfo = baseManager.listPageInfo(query);
+    List<ProjectFollowed> projectFolloweds = pageInfo.getList();
+    List<ProjectDataModel> pm = new ArrayList<ProjectDataModel>();
+    if (null!=projectFolloweds && projectFolloweds.size()>=1){
+        for (ProjectFollowed projectFollowed:projectFolloweds){
+            Project project = projectFollowed.getProject();
+            ProjectDataModel projectDataModel = projectConvertprojectModelUtil.getProjectDataModel(project);
+            pm.add(projectDataModel);
+        }
+        return pm;
+    }
+
+    return new ArrayList<ProjectModel>();
+
+}
 }

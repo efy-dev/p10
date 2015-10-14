@@ -26,8 +26,7 @@ public class SecurityController {
 
     @RequestMapping({"/main.do"})
     public String main(Model model,HttpServletRequest request){
-        System.out.print(request.getParameter("TENANT"));
-       model.addAttribute("TENANT",request.getParameter("TENANT"));
+
         return "/main";
     }
 

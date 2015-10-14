@@ -18,7 +18,7 @@
         <div class="am-header-right am-header-nav">
             <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em
                     id="cartAmount">0</em></span></a>
-            <a href="<c:url value="/order/myEfeiyi/list.do"/>" class="icon icon-user"></a>
+            <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
         </div>
     </header>
 </c:if>

@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
@@ -45,7 +46,7 @@
             <div class="mt-null">
               <p>目前还没有订单，现在开启您的购物之旅吧！</p>
               <ul>
-                <li class="efeiyi"><a href="/">e飞蚁首页</a></li>
+                <li class="efeiyi"><a href="<%=PConst.HOSTNAME%>">e飞蚁首页</a></li>
               </ul>
             </div>
           </td>
@@ -103,9 +104,9 @@
                 <table class="item">
                   <td width="237">
                     <div class="cols1">
-                      <a href="http://www2.efeiyi.com/product/productModel/${op.productModel.id}"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
+                      <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                       <div class="info">
-                        <a href="http://www2.efeiyi.com/product/productModel/${op.productModel.id}"><p>${op.productModel.product.project.projectCategory.name}</p>
+                        <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"><p>${op.productModel.product.project.projectCategory.name}</p>
                         <p>${op.productModel.product.name}
                           <c:if test="${op.productModel.productPropertyValueList.size()>1}">
                             [
@@ -135,7 +136,7 @@
             <c:if test="${order.orderStatus == 1}">
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-                <p><a href="http://www2.efeiyi.com/order/pay/${order.id}">付款</a></p>
+                <p><a href="<%=PConst.HOSTNAME%>/order/pay/${order.id}">付款</a></p>
                 <p><a href="<c:url value="/order/cancelOrder/${order.id}"/>">取消订单</a></p>
               </td>
             </c:if>
@@ -147,6 +148,7 @@
             <c:if test="${order.orderStatus == 7}">
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
+
                 <p><a href="#" onclick="showConfirm('提示','是否确定收货',function(){
                         window.location.href='<c:url value="/order/confirmGet/${order.id}"/>';
                         })">确定收货</a></p>
@@ -156,7 +158,9 @@
             <c:if test="${order.orderStatus == 13}">
               <td class="rowspan" width="139" rowspan='2' style="border-left:1px solid #ccc;border-right:1px solid #ccc">
                 <p><a href="<c:url value="/order/myEfeiyi/view/${order.id}"/>">查看</a></p>
-                <p><a href="<c:url value="/order/deleteOrder/${order.id}"/>">删除</a></p>
+                <p><a href="#" onclick="showConfirm('提示','是否确定删除',function(){
+                        window.location.href='<c:url value="/order/deleteOrder/${order.id}"/>';
+                        })">删除</a></p>
               </td>
             </c:if>
             <c:if test="${order.orderStatus == 17}">
