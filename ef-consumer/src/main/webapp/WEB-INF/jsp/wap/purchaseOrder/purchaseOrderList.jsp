@@ -1,4 +1,5 @@
 <%@ page import="com.efeiyi.ec.consumer.organization.util.AuthorizationUtil" %>
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -58,7 +59,7 @@
                     <ul class="jp-pd">
                         <li class="am-u-sm-2 jp-pd-r">待付款</li>
                         <li class="am-u-sm-4 jp-pd-l">￥${purchaseOrder.total}</li>
-                        <li class="am-u-sm-6 jp-pd-l"><a href="<c:url value="/order/pay/${purchaseOrder.id}"/>">立即支付</a></li>
+                        <li class="am-u-sm-6 jp-pd-l"><a href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
                     </ul>
                 </c:if>
                 <c:if test="${purchaseOrder.orderStatus == '5'}">

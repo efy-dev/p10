@@ -140,6 +140,9 @@
             <taglib-location>/WEB-INF/taglib/ming800.tld</taglib-location>
         </taglib>
     </jsp-config>
+    <welcome-file-list>
+        <welcome-file>/order/myEfeiyi/list.do</welcome-file>
+    </welcome-file-list>
 
     <!--sitemesh2.4.2 配置-->
     <!--<filter>-->
