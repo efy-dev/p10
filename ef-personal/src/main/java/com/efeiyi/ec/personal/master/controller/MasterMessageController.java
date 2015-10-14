@@ -407,4 +407,11 @@ public class MasterMessageController {
 	}
 
 
+	/*--------------PC-Start--------------*/
+	@RequestMapping("forwardPage.do")
+	public String forwardPage(){
+		return "/masterMessage/masterMessageList";
+	}
+
+
 }
