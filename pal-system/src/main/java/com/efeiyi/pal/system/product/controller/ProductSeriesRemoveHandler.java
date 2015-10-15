@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/8/28.
- *
+ * 删除商品系列 Handler
  */
 
 public class ProductSeriesRemoveHandler implements DoHandler {
