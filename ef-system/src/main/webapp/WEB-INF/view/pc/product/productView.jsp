@@ -59,21 +59,7 @@
         </div>
     </div>
 </div>
-<%--<div class="am-modal am-modal-no-btn" tabindex="-1" id="change-img">--%>
-    <%--<div class="am-modal-dialog">--%>
-        <%--&lt;%&ndash;<div class="am-modal-hd">Amaze UI</div>&ndash;%&gt;--%>
-        <%--<div class="am-modal-bd">--%>
 
-
-            <%--<div>--%>
-
-                <%--<a id="btn_upload4" style="width: 0;" ></a>--%>
-
-            <%--</div>--%>
-        <%--</div>--%>
-
-    <%--</div>--%>
-<%--</div>--%>
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商品详情</strong> /
         <small>Product Details</small>
@@ -93,22 +79,7 @@
     <c:set var="masterId" value="0"/>
 </c:if>
 <div class="am-g">
-    <%--<fieldset>--%>
-    <%--<legend>--%>
-    <%--<span >--%>
-    <%--&lt;%&ndash;<select onchange="changeUrl(this)" >&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option value="0">请选择</option>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<c:forEach var="model" items="${object.productModelList}">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<option value="${model.id}">${model.name}</option>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</select>&ndash;%&gt;--%>
 
-    <%--&lt;%&ndash;<a style="width: 10%;" id="yulan" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="#">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;生成预览&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</a>&ndash;%&gt;--%>
-    <%--</span>--%>
-    <%--</legend>--%>
-    <%--</fieldset>--%>
 
     <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal"
           id="form">
@@ -161,13 +132,7 @@
                     <!--<small>必填项*</small>-->
                 </div>
             </div>
-            <%--<div class="am-form-group">--%>
-            <%--<label name="price" class="am-u-sm-3 am-form-label">商品价格</label>--%>
 
-            <%--<div class="am-u-sm-9" style="margin-top: 10px;">--%>
-            <%--${object.price}--%>
-            <%--</div>--%>
-            <%--</div>--%>
 
             <div class="am-form-group">
                 <label name="serial" class="am-u-sm-3 am-form-label">商品类型</label>
@@ -239,7 +204,7 @@
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
 
                 <div class="am-u-sm-9" style="margin-top: 10px;">
-                            <textarea id="productDescription" name="content" class="ckeditor" id="content"
+                            <textarea  name="content" class="ckeditor" id="content"
                                       placeholder="商品描述" required>
                                 ${object.productDescription.content}
 
@@ -324,9 +289,7 @@
     </fieldset>
     <fieldset>
         <legend>
-            <%--<a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Picture&id=${object.id}"/>">--%>
-            <%--修改图片--%>
-            <%--</a>--%>
+
 
         </legend>
         <a id="btn_upload"></a>
@@ -463,13 +426,7 @@
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
                                             </dd>
-                                            <%--<dd style="width: 100%;text-align: center;">--%>
-                                                <%--<a href="javascript:void(0);"--%>
-                                                   <%--onclick="changeImg('${productPicture.pictureUrl}');">替换图片</a>--%>
-                                            <%--</dd>--%>
-                                                <%--<dd style="width: 100%;text-align: center;" >--%>
-                                                <%--${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}.jpg--%>
-                                                <%--</dd>--%>
+
                                         </dl>
                                     </li>
                                 </c:if>
@@ -525,36 +482,7 @@
         height: "0"
     };
 
-    <%--function changeImg(url) {--%>
-        <%--$('#btn_upload4').uploadify({--%>
-            <%--uploader: '<c:url value="/product/uploadify.do"/>',            // 服务器处理地址--%>
-            <%--swf: '<c:url value="/scripts/upload/uploadify.swf"/>',--%>
-            <%--buttonText: "上传替换商品图片",                 //按钮文字--%>
-            <%--buttonClass: "am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only",         //按钮样式--%>
-            <%--buttonCursor: "hand",                    //鼠标指针悬停在按钮上的样子--%>
-            <%--height: 34,                             //按钮高度--%>
-            <%--width: 140,                              //按钮宽度--%>
-            <%--auto: true,                          //自动上传--%>
-            <%--multi: false,                            //多个文件上传--%>
-            <%--scriptDate: {'status': '3'},--%>
-            <%--checkExisting: true,                    //检查文件重复--%>
-            <%--successTimeout: 1000000,                 //超时--%>
-            <%--fileSizeLimit: '20MB',--%>
-            <%--removeTimeout: 1,                        //移除时间--%>
-            <%--fileTypeExts: "*.jpg;*.png;*.*",           //允许的文件类型--%>
-            <%--fileTypeDesc: "请选择图片文件",           //文件说明--%>
-            <%--formData: {"imgType": "normal", "trueUrl": url}, //提交给服务器端的参数--%>
-            <%--onUploadSuccess: function (file, data, response) {   //一个文件上传成功后的响应事件处理--%>
-                <%--$("#change-img").modal('close');--%>
 
-            <%--}--%>
-        <%--});--%>
-        <%--$("#btn_upload4-button").css({"padding": "0em 0em", "text-align": "center"});--%>
-        <%--$("#change-img .uploadify").css({"width": "0px"});--%>
-        <%--$('#change-img').modal();--%>
-
-
-    <%--}--%>
     function tc(url) {
         var img = new Image();
         img.src = url;
@@ -620,12 +548,10 @@
     var modelIds = [];
     var modelNames = [];
     $(function () {
-
         CKEDITOR.replace('content', {height: '440px', width: '1000px'});
         $(".copy").each(function () {
             copyInit($(this));
         });
-
 
         <c:forEach var="productModel1" items="${object.productModelList}">
         modelIds.push('${productModel1.id}');
