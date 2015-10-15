@@ -31,42 +31,46 @@
             <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
           </dd>
         </dl>
+
+        <dl class="orderid-mashup bd-top">
+          <dt class="orderid">商品信息</dt>
+          <dd class="od-id">
+            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
+              <table class="item-bg">
+                <tr>
+                  <td class="commodity_info1">
+                    <ul class="commodity_info-1">
+                      <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
+                    </ul>
+                  </td>
+                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
+                  <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
+                  <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
+                </tr>
+              </table>
+            </c:forEach>
+          </dd>
+        </dl>
         <%--<c:if test="${!empty purchaseOrderDelivery}">--%>
         <c:if test="${!empty pl}">
         <c:forEach items="${pl}" var="pl" varStatus="i">
         <dl class="orderid-mashup bd-top">
           <dt class="orderid">物流信息</dt>
           <dd class="od-id">
+            <p >店铺名称：<span>${pl.purchaseOrder.tenant.name}</span></p>
             <p >物流方式：<span>普通快递</span></p>
             <p>物流公司：<span><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${pl.logisticsCompany}" type="normal"/></span></p>
             <p>运单号码：<span>${pl.serial}</span></p>
-            <p style="cursor: pointer" id="act-q" name="ss" test="${dl[i.index]}"> 物流查看：</p></li>
+            <p style="cursor: pointer" id="act-q" name="ss" test="${dl[i.index]}"> 物流查看：物流跟踪</p></li>
             <div class="list-express" style="display: none; margin-left: 30px;">
               <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
             </div>
           </dd>
         </dl>
-        <%--</c:if>--%>
-        <dl class="orderid-mashup bd-top">
-          <dt class="orderid">商品信息</dt>
-          <dd class="od-id">
-            <c:forEach  items="${order.purchaseOrderProductList}" var="op">
-            <table class="item-bg">
-              <tr>
-                <td class="commodity_info1">
-                  <ul class="commodity_info-1">
-                    <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
-                  </ul>
-                </td>
-                <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
-                <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
-                <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
-              </tr>
-            </table>
-            </c:forEach>
-          </dd>
-        </dl>
         </c:forEach>
+        <%--</c:if>--%>
+
+
         </c:if>
 
         <c:if test="${empty pl}"><dl class="orderid-mashup bd-top">
