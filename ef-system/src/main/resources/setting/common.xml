@@ -25,11 +25,15 @@
 
     <logisticsCompanys>
         <logisticsCompany memo="shunfeng" name="顺丰"/>
+        <logisticsCompany memo="yuantong" name="圆通"/>
+        <logisticsCompany memo="shentong" name="申通"/>
         <logisticsCompany memo="zhongtong" name="中通"/>
         <logisticsCompany memo="yunda" name="韵达"/>
-        <logisticsCompany memo="yuantong" name="圆通"/>
-        <logisticsCompany memo="guotongkuaidi" name="国通"/>
-        <logisticsCompany memo="shentong" name="申通"/>
+        <logisticsCompany memo="zhaijisong" name="宅急送"/>
+        <logisticsCompany memo="ems" name="EMS"/>
+        <logisticsCompany memo="huitongkuaidi" name="汇通快运"/>
+        <logisticsCompany memo="tiantian" name="天天快递"/>
+        <logisticsCompany memo="ups" name="UPS"/>
     </logisticsCompanys>
 
 </common>

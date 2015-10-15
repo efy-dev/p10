@@ -15,6 +15,7 @@ import java.io.*;
 
 /**
  * Created by Administrator on 2015/8/17.
+ * 订单-商品-标签 Controller
  */
 
 @Controller
@@ -59,10 +60,10 @@ public class PurchaseOrderLabelController {
 
     /**
      * 获取purchaseOrderLabel的Form表单基本数据
-     * @param purchaseOrderLabel
-     * @param request
-     * @param type
-     * @return
+     * @param purchaseOrderLabel 订单商品标签
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return purchaseOrderLabel 订单商品标签
      */
     private PurchaseOrderLabel setPurchaseOrderLabelBaseProperty(PurchaseOrderLabel purchaseOrderLabel, HttpServletRequest request, String type) throws Exception {
         String amount = request.getParameter("amount");
@@ -80,9 +81,9 @@ public class PurchaseOrderLabelController {
 
     /**
      * 获取关联属性的对象
-     * @param purchaseOrderLabel
-     * @param request
-     * @return
+     * @param purchaseOrderLabel 订单商品标签
+     * @param request 获取页面参数
+     * @return purchaseOrderLabel 订单商品标签
      */
     private PurchaseOrderLabel getRelationAttributeObject(PurchaseOrderLabel purchaseOrderLabel, HttpServletRequest request){
         String purchaseOrderId = request.getParameter("purchaseOrder.id");
@@ -105,7 +106,6 @@ public class PurchaseOrderLabelController {
         String fileType = request.getParameter("filetype");
         String fileName = clazzDir.getParent() + "/file/" + orderLabelId + (fileType == null?".txt":fileType);
         File file = new File(fileName);
-//        response.setContentType("application/force-download");
         response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
         response.setContentLength((int) file.length());
         DataInputStream bis = null;

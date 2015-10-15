@@ -67,7 +67,6 @@ public class PurchaseOrderController {
      */
     @RequestMapping("/deliverGoods.do")
     public ModelAndView deliverGoods(ModelMap modelMap, HttpServletRequest request) throws Exception {
-//        Long begin = System.currentTimeMillis();
         String purchaseOrderId = request.getParameter("orderId");
         if (purchaseOrderId == null || purchaseOrderId.trim().equals("")) {
             throw new Exception("deliverGoods 订单Id不能为空!");
@@ -79,9 +78,7 @@ public class PurchaseOrderController {
 
         modelMap.put("object", purchaseOrder);
         String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
-//        System.out.println(" ************ ");
-//        System.out.println(System.currentTimeMillis() - begin);
-//        System.out.println(" ************ ");
+
         return new ModelAndView(resultPage);
     }
 
@@ -94,7 +91,6 @@ public class PurchaseOrderController {
      */
     @RequestMapping("/activatedOrCancelLabels.do")
     public ModelAndView activatedOrCancelLabels(ModelMap modelMap, HttpServletRequest request) throws Exception {
-//        Long begin = System.currentTimeMillis();
         String type = request.getParameter("type");
         String purchaseOrderId = request.getParameter("orderId");
         if (purchaseOrderId == null || purchaseOrderId.trim().equals("")) {
@@ -107,9 +103,6 @@ public class PurchaseOrderController {
 
         modelMap.put("object", purchaseOrder);
         String resultPage = "redirect:/basic/xm.do?qm=viewPurchaseOrder&order=view&id=" + purchaseOrder.getId();
-//        System.out.println(" ************ ");
-//        System.out.println(System.currentTimeMillis() - begin);
-//        System.out.println(" ************ ");
         return new ModelAndView(resultPage);
     }
 
@@ -204,7 +197,7 @@ public class PurchaseOrderController {
 
     /**
      * 订单信息基本内容
-     * @param purchaseOrder 订单
+     * @param purchaseOrder 新建或修改订单基本属性
      * @param request 获取页面参数
      * @param type "new"是新建订单; "edit"修改订单
      * @return purchaseOrder订单
