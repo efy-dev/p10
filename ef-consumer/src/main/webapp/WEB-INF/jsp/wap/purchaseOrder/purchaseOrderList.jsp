@@ -59,7 +59,7 @@
                         <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productModel_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                     </c:if>
                 </ul>
-                <c:if test="${purchaseOrder.orderStatus == '7'}">
+                <c:if test="${purchaseOrder.orderStatus == '1'}">
                     <ul class="jp-pd jp-pd-btns">
                         <li>￥${purchaseOrder.total}</li>
                         <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
@@ -73,7 +73,7 @@
                     </ul>
                 </c:if>
 
-                <c:if test="${purchaseOrder.orderStatus == '1'}">
+                <c:if test="${purchaseOrder.orderStatus == '7'}">
 
                     <ul class="jp-pd jp-pd-btns">
                         <li>￥${purchaseOrder.total}</li>
