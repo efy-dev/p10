@@ -40,14 +40,14 @@
             <c:forEach items="${collectList}" var="collectList">
             <li class="single">
               <dl>
-                <dt class="list-img"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}"><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-collect"></a></dt>
+                <dt class="list-img"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" target=_blank><img width="150"height="150" src="http://pro.efeiyi.com/${collectList.productModel.productModel_url}@!product-collect"></a></dt>
                 <dd>
                   <dl class="list-title">
                     <%--<dt>--%>
                       <%--<label><input type="checkbox"></label>--%>
                     <%--</dt>--%>
                     <dd>
-                      <p class="list-title-text"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;">${collectList.productModel.product.name}</a>
+                      <p class="list-title-text"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;" target=_blank>${collectList.productModel.product.name}</a>
                         <c:if test="${collectList.productModel.productPropertyValueList.size()>1}">
                         [
                         <c:forEach items="${collectList.productModel.productPropertyValueList}"

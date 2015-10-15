@@ -13,7 +13,7 @@
 </head>
 <body>
 <!--//End--header-->
-<c:if test="${order.orderStatus == 1 or order.orderStatus == 17}">
+<c:if test="${order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5}">
   <div class="line-item">
     <div class="address">
       <p><span>${order.receiverName}</span><span>${order.receiverPhone}</span></p>
