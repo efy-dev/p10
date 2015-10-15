@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/24.
+ * 认证图片 Controller
  */
 
 @RestController

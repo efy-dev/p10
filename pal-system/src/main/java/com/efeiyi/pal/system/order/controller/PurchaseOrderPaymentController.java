@@ -14,6 +14,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/17.
+ * 订单支付方式 Controller
  */
 
 @Controller
@@ -77,10 +78,10 @@ public class PurchaseOrderPaymentController {
 
     /**
      * 获取purchaseOrderLabel的Form表单基本数据
-     * @param purchaseOrderPayment
-     * @param request
-     * @param type
-     * @return
+     * @param purchaseOrderPayment 订单支付方式
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return purchaseOrderPayment 订单支付方式
      */
     private PurchaseOrderPayment setPurchaseOrderLabelBaseProperty(PurchaseOrderPayment purchaseOrderPayment, HttpServletRequest request, String type) throws Exception {
         String payWay = request.getParameter("payWay");
@@ -98,10 +99,10 @@ public class PurchaseOrderPaymentController {
 
     /**
      * 获取关联属性的对象
-     * @param purchaseOrderPayment
-     * @param request
-     * @param type
-     * @return
+     * @param purchaseOrderPayment 订单支付方式
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return purchaseOrderPayment 订单支付方式
      */
     private PurchaseOrderPayment getRelationAttributeObject(PurchaseOrderPayment purchaseOrderPayment, HttpServletRequest request, String type){
         String purchaseOrderId = request.getParameter("purchaseOrder.id");

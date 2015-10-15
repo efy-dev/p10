@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/9/7.
- *
+ * 省市县级联 Controller
  */
 @RestController
 public class PCDController {
@@ -21,26 +21,23 @@ public class PCDController {
     private BaseManager baseManager;
 
     @RequestMapping({"/pal/address/provinceList.do"})
-    public List<Object> getProvinceList(HttpServletRequest request) throws Exception {
+    public List getProvinceList(HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressProvince_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/pal/address/cityListByProvince.do"})
-    public List<Object> getCityListByProvince(Model model, HttpServletRequest request) throws Exception {
+    public List getCityListByProvince(Model model, HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressCity_province", request);
         xQuery.addRequestParamToModel(model, request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/pal/address/districtListByCity.do"})
-    public List<Object> getDistrictListByCity(Model model, HttpServletRequest request) throws Exception {
+    public List getDistrictListByCity(Model model, HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("listAddressDistrict_city", request);
         xQuery.addRequestParamToModel(model, request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
 }

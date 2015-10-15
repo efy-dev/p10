@@ -11,7 +11,7 @@
             <span class="des">
                 <p><h1>${tenant.name}</h1></p>
               <c:if test="${not empty tenant.tenantMasterList}">
-              <p><font>.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font><ming800:status name="level" dataType="Project.level" checkedValue="${tenant.tenantMasterList.get(0).master.level}" type="normal"/></font></p>
+              <p><font>${tenant.tenantMasterList.get(0).master.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font><ming800:status name="level" dataType="Project.level" checkedValue="${tenant.tenantMasterList.get(0).master.level}" type="normal"/></font></p>
               </c:if>
                 </span>
       </div>
@@ -37,9 +37,6 @@
   <div class="shop-sort wh">
     <ul class="link1">
       <li class="active"><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
     </ul>
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>

@@ -36,7 +36,7 @@
             <div class="am-u-sm-9">
                 <input type="text" id="product_idName" placeholder="商品名称"
                        onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.purchaseOrder.tenant.id}','<%=path%>')"
-                       value="${object.product.name}" required>
+                       value="${object.product.name}" required readonly>
                 <input type="hidden" id="product_id"  name="product.id" value="${object.product.id}">
             </div>
         </div>

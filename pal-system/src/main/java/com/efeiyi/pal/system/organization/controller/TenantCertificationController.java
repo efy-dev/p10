@@ -4,13 +4,11 @@ import com.efeiyi.pal.organization.model.Tenant;
 import com.efeiyi.pal.organization.model.TenantCertification;
 import com.efeiyi.pal.system.product.service.ProductSeriesServiceManager;
 import com.ming800.core.base.service.BaseManager;
-import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.util.ApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +17,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/6.
+ * 商户认证 Controller
  */
 
 @Controller
@@ -28,7 +27,6 @@ public class TenantCertificationController {
     @Autowired
     private BaseManager baseManager;
 
-    private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
     private ProductSeriesServiceManager productSeriesServiceManager = (ProductSeriesServiceManager) ApplicationContextUtil.getApplicationContext().getBean("productSeriesServiceManagerImpl");
 
     @RequestMapping("/newTenantCertification.do")
@@ -45,7 +43,7 @@ public class TenantCertificationController {
     }
 
     @RequestMapping("/saveTenantCertification.do")
-    public ModelAndView saveTenantCertification(MultipartRequest multipartRequest, HttpServletRequest request) throws Exception {
+    public ModelAndView saveTenantCertification(HttpServletRequest request) throws Exception {
         TenantCertification tenantCertification = new TenantCertification();
 
         String tenantCertificationId = request.getParameter("id");
@@ -64,7 +62,7 @@ public class TenantCertificationController {
     }
 
     @RequestMapping("/removeTenantCertification.do")
-    public ModelAndView removeTenantCertification(ModelMap modelMap, HttpServletRequest request) throws Exception{
+    public ModelAndView removeTenantCertification(HttpServletRequest request) throws Exception{
         String tenantCertificationId = request.getParameter("tenantCertificationId");
         if (tenantCertificationId == null || tenantCertificationId.trim().equals("")) {
             throw new Exception("认证信息id不能为空!");
@@ -78,10 +76,10 @@ public class TenantCertificationController {
 
     /**
      * 获取tenantCertification的Form表单基本数据
-     * @param tenantCertification
-     * @param request
-     * @param type
-     * @return
+     * @param tenantCertification 商户认证信息
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return tenantCertification 商户认证信息
      */
     private TenantCertification setTenantCertificationBaseProperty(TenantCertification tenantCertification, HttpServletRequest request, String type) throws Exception {
         String name = request.getParameter("name");
@@ -106,9 +104,9 @@ public class TenantCertificationController {
 
     /**
      * 获取关联属性的对象
-     * @param tenantCertification
-     * @param request
-     * @return
+     * @param tenantCertification 商户认证信息
+     * @param request 获取页面参数
+     * @return tenantCertification 商户认证信息
      */
     private TenantCertification getRelationAttributeObject(TenantCertification tenantCertification, HttpServletRequest request){
         String tenantId = request.getParameter("tenant.id");

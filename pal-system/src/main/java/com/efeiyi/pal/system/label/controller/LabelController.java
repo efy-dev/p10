@@ -1,6 +1,5 @@
 package com.efeiyi.pal.system.label.controller;
 
-import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.label.model.LabelBatch;
 import com.efeiyi.pal.system.label.labelService.LabelBuildService;
 import com.ming800.core.base.service.BaseManager;
@@ -15,6 +14,7 @@ import java.io.*;
 
 /**
  * Created by Administrator on 2015/7/28.
+ * 标签处理 Controller
  */
 
 @Controller
