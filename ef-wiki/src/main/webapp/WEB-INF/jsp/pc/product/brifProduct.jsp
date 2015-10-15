@@ -40,6 +40,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
   <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -78,7 +79,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a>工艺</a><i class="fu-icon"></i><a>景泰蓝</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId=<%=request.getParameter("projectId")%>'/>">作品</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a>工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId='/><%=request.getParameter("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
@@ -98,8 +99,7 @@
               <a href="javascript:void(0)" onclick="savaUpAndDown('${product.id}')" id="good-1" name="up"><i class="z-icon"></i><em id="em1">${product.amount}</em></a>
             </div>
             <div class="thump-collect">
-              <a href="#"><i class="s-icon"></i> </a>
-              <a href="#"><em>收藏</em></a>
+              <a href="javascript:void(0)" onclick="storeProduct('${product.id}')"><i class="s-icon"></i><em>收藏</em></a>
             </div>
             <div class="thump-enquiry">
               <a href="#" id="btn-xj">询价</a>
@@ -726,6 +726,39 @@ function getHfProduct(e){
       }
     });
   }
+
+  function storeProduct(productId){
+
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/storeProduct.do?productId='/>"+productId,//设置请求的脚本地址
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data=="false"){
+          alert("您还未登陆，请登录后再操作");
+          return false;
+        }
+        if(data=="repeat"){
+          alert("您已收藏过了！")
+          return true;
+        }
+        if(data=="true"){
+          alert("您好，收藏成功！")
+          return true;
+        }
+
+      },
+      error:function(){
+
+        alert("error","出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    });
+  }
 </script>
 <!-- //End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -740,6 +773,7 @@ function getHfProduct(e){
 <!--自定义js--Start-->
 <script src="<c:url value='/scripts/assets/pc/js/system.js?v=20150831'/>"></script>
 <script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/js/alert.js'/>"></script>
 </body>
 </html>
 

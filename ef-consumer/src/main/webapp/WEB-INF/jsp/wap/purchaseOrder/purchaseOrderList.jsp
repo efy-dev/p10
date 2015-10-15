@@ -27,7 +27,6 @@
             </dd>
         </dl>
     </div>
-    <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
     <%-- <div class="myfunction">
        <ul>
          <li class="am-u-sm-4 "><a href="#"><p>商品收藏</p><p>1</p></a></li>
@@ -59,7 +58,7 @@
                         <li class="am-u-sm-3 am-u-end jp-pd-l"><img src="http://pro.efeiyi.com/<c:url value="${purchaseOrder.purchaseOrderProductList.get(3).productModel.productModel_url}"/>" onclick="window.location.href='/order/myEfeiyi/view/${purchaseOrder.id}'"></li>
                     </c:if>
                 </ul>
-                <c:if test="${purchaseOrder.orderStatus == '7'}">
+                <c:if test="${purchaseOrder.orderStatus == '1'}">
                     <ul class="jp-pd jp-pd-btns">
                         <li>￥${purchaseOrder.total}</li>
                         <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
@@ -73,7 +72,7 @@
                     </ul>
                 </c:if>
 
-                <c:if test="${purchaseOrder.orderStatus == '1'}">
+                <c:if test="${purchaseOrder.orderStatus == '7'}">
 
                     <ul class="jp-pd jp-pd-btns">
                         <li>￥${purchaseOrder.total}</li>
@@ -105,7 +104,6 @@
                     </ul>
                 </c:if>
 
-                <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
             </div>
         </c:forEach>
         <!--订单状态-->

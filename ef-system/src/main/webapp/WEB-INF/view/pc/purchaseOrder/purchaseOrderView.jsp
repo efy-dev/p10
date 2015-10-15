@@ -302,6 +302,31 @@
 
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
+        <h4>买家留言</h4>
+    </div>
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+            <tr>
+                <th class="table-title">留言</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${messageList}" var="message" varStatus="stat">
+                <tr>
+                    <td class="am-hide-sm-only">
+                        ${message}
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="am-g">
+    <div class="am-u-sm-12 am-u-md-6">
         <h4>发货记录</h4>
     </div>
     <div class="am-u-sm-12">

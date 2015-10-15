@@ -44,8 +44,12 @@
                 <label name="password" class="am-u-sm-3 am-form-label">密码</label>
 
                 <div class="am-u-sm-9">
-                    <input type="password" name="password" id="password" placeholder="密码" value="${object.password}"
-                           required>
+                    <c:if test="${empty object.id}">
+                      <input type="password" name="password" id="password" placeholder="密码" value="" required>
+                    </c:if>
+                    <c:if test="${not empty object.id}">
+                        <input type="password" name="password" id="password" placeholder="若为空,密码为原密码" value="">
+                    </c:if>
                     <!--<small>必填项*</small>-->
                 </div>
             </div>

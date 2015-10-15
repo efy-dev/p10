@@ -63,7 +63,7 @@
                 </p>
             </c:if>
             <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
-            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>" style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
         <!-- //End--des-price-->
         <div class="bd des-format">
@@ -102,7 +102,7 @@
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
                                 <li class="item">
                                     <div class="user-info">
-                                        <img  src="/scripts/upload/yonghm.jpg">
+                                        <img id="personPhoto" src="/scripts/upload/yonghm.jpg">
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
@@ -131,11 +131,11 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-      <c:if test="${empty productModel.product.master.id}">
+      <c:if test="${empty productModel.product.tenant.id}">
           <a class="btn-default" title="进店">进店</a>
       </c:if>
-     <c:if test="${not empty product.master.id}">
-         <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
+     <c:if test="${not empty productModel.product.tenant.id}">
+         <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
         <a class="btn-default" target="_blank"  title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
@@ -285,6 +285,15 @@
         s.parentNode.insertBefore(j, s)
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
+    $().ready(function(){
+        $("img").each(function(){
+            $(this).css("width","100%");
+        })
+        $("img").each(function(){
+            $('#personPhoto').css("width","auto");
+        })
+
+    })
 </script>
 </body>
 

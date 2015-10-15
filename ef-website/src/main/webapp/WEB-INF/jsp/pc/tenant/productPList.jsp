@@ -10,13 +10,20 @@
         <div class="img"><img src="<c:url value="http://pro.efeiyi.com/${tenant.logoUrl}@!tenant-logo"/>" alt=""/></div>
             <span class="des">
                 <p><h1>${tenant.name}</h1></p>
+              <c:if test="${not empty tenant.tenantMasterList}">
               <p><font>${tenant.tenantMasterList.get(0).master.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font><ming800:status name="level" dataType="Project.level" checkedValue="${tenant.tenantMasterList.get(0).master.level}" type="normal"/></font></p>
-            </span>
+              </c:if>
+                </span>
       </div>
       <!-- //End-->
       <div class="btndes">
         <%--<a href="" title="收藏店铺">收 藏 店 铺</a>--%>
-        <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
+          <c:if test="${empty tenant.tenantMasterList}">
+            <a title="了解传承人" target="_blank">了 解 大 师</a>
+          </c:if>
+          <c:if test="${not empty tenant.tenantMasterList}">
+          <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
+          </c:if>
       </div>
     </div>
   </div>
@@ -30,9 +37,6 @@
   <div class="shop-sort wh">
     <ul class="link1">
       <li class="active"><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
     </ul>
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>

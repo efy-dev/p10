@@ -120,7 +120,7 @@
             <div class="des">
                 <div class="colour">服务：</div>
                 <div class="colour-page">
-                        <span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
+                        <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
@@ -210,11 +210,11 @@
             <!-- JiaThis Button END -->
             <div class="tab-items">
                 <ul>
-                    <c:if test="${empty product.master.id}">
+                    <c:if test="${empty productModel.product.tenant.id}">
                         <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
                         <li><a href="#title" title="商品评价">商 品 评 价</a></li>
                     </c:if>
-                    <c:if test="${not empty product.master.id}">
+                    <c:if test="${not empty productModel.product.tenant.id}">
                         <li><a href="#detail" title="商品详情">商 品 详 情<i class="icon"></i></a></li>
                         <%--<li><a href="#feeling" title="大师感悟">大 师 感 悟<i class="icon"></i></a></li>--%>
                         <li><a href="#title" title="商品评价">商 品 评 价<i class="icon"></i></a></li>

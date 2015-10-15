@@ -115,9 +115,26 @@ public class PurchaseOrderController extends BaseController {
         String purchaseOrderId = request.getParameter("id");
 
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
-        purchaseOrder.setPurchaseOrderAddress(address);
-        purchaseOrder.setReceiverName(name);
-        purchaseOrder.setReceiverPhone(phone);
-        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+
+        if (null == purchaseOrder.getFatherPurchaseOrder()){
+            List<PurchaseOrder> list = purchaseOrder.getSubPurchaseOrder();
+            PurchaseOrder subPurchaseOrder = null;
+            for(int i = 0;i < list.size();i++){
+                subPurchaseOrder = list.get(i);
+                subPurchaseOrder.setReceiverPhone(phone);
+                subPurchaseOrder.setReceiverName(name);
+                subPurchaseOrder.setPurchaseOrderAddress(address);
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),subPurchaseOrder);
+            }
+            purchaseOrder.setPurchaseOrderAddress(address);
+            purchaseOrder.setReceiverName(name);
+            purchaseOrder.setReceiverPhone(phone);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        }else{
+            purchaseOrder.setPurchaseOrderAddress(address);
+            purchaseOrder.setReceiverName(name);
+            purchaseOrder.setReceiverPhone(phone);
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+        }
     }
 }

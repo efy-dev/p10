@@ -28,11 +28,11 @@
       <c:if test="${not empty productModel.product.master.id}">
       <div class="img">
         <span>
-           <a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>">
+           <a href="http://${productModel.product.master.name}.efeiyi.com">
           <img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tenant-mobile-tenant-list" alt=""/>
           </a>
         </span>
-        <span><a href="<c:url value="http://${productModel.product.master.name}.efeiyi.com"/>" >查看大师<i class="arrow-right"></i></a></span>
+        <span><a href="http://${productModel.product.master.name}.efeiyi.com" >查看大师<i class="arrow-right"></i></a></span>
       </div>
       </c:if>
     </div>

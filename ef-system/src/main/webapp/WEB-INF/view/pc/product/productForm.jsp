@@ -34,6 +34,7 @@
       <input type="hidden" name="tenant.id" value="">
       <input type="hidden" name="master.id" value="">
       <input type="hidden" name="project.id" value="">
+        <input type="hidden" name="status" value="${object.status}">
       <%--<input type="hidden" name="view" value="${view}">--%>
       <input type="hidden" name="productDescription.id" value="${object.productDescription.id}">
       <div class="am-form-group">

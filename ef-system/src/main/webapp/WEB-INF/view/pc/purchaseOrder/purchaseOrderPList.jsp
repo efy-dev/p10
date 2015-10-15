@@ -87,6 +87,7 @@
                             url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
                             success:function(data){
                                 $(obj).find("span").text("已发货");
+                                window.location.reload();
                             }
                         });
                     },

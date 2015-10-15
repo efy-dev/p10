@@ -23,12 +23,12 @@ public class viewTenantProductHandler implements DoHandler {
 
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
-        if(request.getParameter("id")!="" && request.getParameter("id")!=null){
-            String id = request.getParameter("id");
-            Product product = (Product)baseManager.getObject(Product.class.getName(),id);
-            product.setStatus("2");
-            baseManager.saveOrUpdate(Product.class.getName(),product);
-        }
+//        if(request.getParameter("id")!="" && request.getParameter("id")!=null){
+//            String id = request.getParameter("id");
+//            Product product = (Product)baseManager.getObject(Product.class.getName(),id);
+//            product.setStatus("2");
+//            baseManager.saveOrUpdate(Product.class.getName(),product);
+//        }
         modelMap.put("view",request.getParameter("view"));
         return modelMap;
     }
