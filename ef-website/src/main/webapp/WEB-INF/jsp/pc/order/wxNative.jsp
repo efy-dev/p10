@@ -47,7 +47,7 @@
     function checkOrderStatus() {
         ajaxRequest("<c:url value="/order/orderCheck/${order.id}"/>", {}, function (data) {
             if (data) {
-                window.location.href = "<c:url value="/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}"/>";
+                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
             }
         }, function () {
         }, "get")
