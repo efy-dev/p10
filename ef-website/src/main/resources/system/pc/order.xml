@@ -232,7 +232,15 @@
                 </do>
             </does>
         </entity>
-
+        <entity name="CouponBatch" label="优惠券批次"  model="com.efeiyi.ec.purchase.model.CouponBatch">
+            <does>
+                <do name="listCouponBatch" access="" label="优惠券批次">
+                    <query name="default" label="默认" type="auto" >
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
 
 
 

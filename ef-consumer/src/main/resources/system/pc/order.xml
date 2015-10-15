@@ -29,31 +29,37 @@
                     <condition name="status" defaultValue="1" operation="eq"/>
                     <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                     <condition name="orderStatus" defaultValue="17" operation="ne"/>
+                    <!--<condition name="fatherPurchaseOrder.id" defaultValue="" operation="eq"/>-->
                 </query>
                     <query name="default1" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="1" operation="eq"/>
+                        <!--<condition name="fatherPurchaseOrder" defaultValue="" operation="eq"/>-->
                     </query>
                     <query name="default5" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="5,7" operation="in"/>
+                        <!--<condition name="fatherPurchaseOrder" defaultValue="" operation="eq"/>-->
                     </query>
                     <query name="default9" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="9,13" operation="in"/>
+                        <!--<condition name="fatherPurchaseOrder" defaultValue="" operation="eq"/>-->
                     </query>
                     <query name="default13" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="13" operation="eq"/>
+                        <!--<condition name="fatherPurchaseOrder" defaultValue="" operation="eq"/>-->
                     </query>
                     <query name="default17" label="默认" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="orderStatus" defaultValue="17" operation="eq"/>
+                        <!--<condition name="fatherPurchaseOrder" defaultValue="" operation="eq"/>-->
                     </query>
                </do>
 
