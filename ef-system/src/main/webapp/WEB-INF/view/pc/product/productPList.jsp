@@ -25,7 +25,7 @@
 <div style="text-align: left" >
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=${view}&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
 </div>
-<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -141,9 +141,11 @@
     <div style="clear: both">
         <c:url value="/basic/xm.do" var="url" />
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
-            <ming800:pcPageParam name="view" value="${view}"/>
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
+            <ming800:pcPageParam name="view" value="${view}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
+            <ming800:pcPageParam name="tenant.id" value="${tenantId}"/>
+            <ming800:pcPageParam name="tenantId" value="${tenantId}"/>
         </ming800:pcPageList>
     </div>
 </div>

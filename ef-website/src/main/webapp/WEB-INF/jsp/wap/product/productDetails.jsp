@@ -51,9 +51,11 @@
         </div>
         <!-- //End--des-title-->
         <div class="des-master">
+         <c:if test="${not empty productModel.product.master.id}">
             <p class="p1"><span>${productModel.product.master.fullName}</span>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
             <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
             <p class="img"><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></p>
+        </c:if>
         </div>
         <!-- //End--des-master-->
         <div class="bd des-price">
@@ -63,7 +65,7 @@
                 </p>
             </c:if>
             <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
-            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
         <!-- //End--des-price-->
         <div class="bd des-format">

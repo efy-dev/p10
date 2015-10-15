@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -13,7 +14,7 @@
 </head>
 <body>
 <!--//End--header-->
-<c:if test="${order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5}">
+<c:if test="${order.orderStatus == 1 or order.orderStatus == 17 or order.orderStatus == 5 or order.orderStatus == 9 or order.orderStatus == 13}">
   <div class="line-item">
     <div class="address">
       <p><span>${order.receiverName}</span><span>${order.receiverPhone}</span></p>
@@ -67,26 +68,18 @@
     </div>
   </div>
 </c:if>
-<c:if test="${order.orderStatus == 7 or order.orderStatus == 9 or order.orderStatus == 13}">
+<c:if test="${order.orderStatus == 7 }">
   <div class="line-item">
     <div class="address">
-      <p><span>${order.consumerAddress.consignee}</span><span>${order.consumerAddress.phone}</span></p>
-      <p>${order.consumerAddress.province.name}${order.consumerAddress.city.name}${order.consumerAddress.details}</p>
+      <p><span>${order.receiverName}</span><span>${order.receiverPhone}</span></p>
+      <p>${order.purchaseOrderAddress}</p>
     </div>
     <div class="order-content">
       <div class="order-header">
         <p>订单号：<span>${order.serial}</span></p>
       </div>
       <!--订单状态为已付款-->
-      <c:forEach items="${pl}" var="pl" varStatus="i">
-      <div class="order-js-list">
-        <h1>
-          <p>${pl.logisticsCompany}</p>
-          <p>快递单号：<span>${pl.serial}</span></p>
-        </h1>
-        <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
-        <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
-      </div>
+
       <!--订单状态为已付款-->
       <!--一个商品-->
       <div class="order-js-list">
@@ -114,6 +107,15 @@
           </div>
         </div>
       </div>
+      <c:forEach items="${pl}" var="pl" varStatus="i">
+        <div class="order-js-list">
+          <h1>
+            <p><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${pl.logisticsCompany}" type="normal"/></p>
+            <p>快递单号：<span>${pl.serial}</span></p>
+          </h1>
+          <div><hr data-am-widget="divider" style="" class=" am-divider-default" /></div>
+          <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
+        </div>
       </c:forEach>
       <!--一个商品-->
     </div>
