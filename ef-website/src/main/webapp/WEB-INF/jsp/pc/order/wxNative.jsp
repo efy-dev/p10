@@ -36,10 +36,10 @@
         text: "${codeUrl}"
     });
 
-    var i = 5000;
-    var wait = 5000;
+    var i = 1000;
+    var wait = 1000;
 
-    for (var j = 0; j < 15; j++) {
+    for (var j = 0; j < 30; j++) {
         wait += j * i;
         setTimeout(checkOrderStatus, wait);
     }
@@ -47,7 +47,7 @@
     function checkOrderStatus() {
         ajaxRequest("<c:url value="/order/orderCheck/${order.id}"/>", {}, function (data) {
             if (data) {
-                window.location.href = "<c:url value="/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}"/>";
+                window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${order.purchaseOrderPayment.purchaseOrder.id}";
             }
         }, function () {
         }, "get")

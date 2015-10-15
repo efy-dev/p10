@@ -31,6 +31,8 @@ ul,dl{list-style:none}
 .myorder .list-pege .state .clo-1{color: #ccc;}
 .myorder .list-pege .state .clo-2{color: #ff0000}
 .myorder .list-pege{padding: 0 7px;margin-bottom: 15px;}
+.myorder .list-pege{border-bottom: 1px solid #ddd;}
+.myorder .list-pege:last-child{border-bottom: 0;}
 .myorder .list-pege ul{width: 100%;padding-top: 16px;overflow: hidden;height: auto}
 .myorder .list-pege ul li{margin-bottom:.8rem}
 .myorder .list-pege ul li img{width:100%;}
@@ -38,8 +40,15 @@ ul,dl{list-style:none}
 .myorder .jp-pd-l{padding-left:.4rem;padding-right:.4rem;text-align: right}
 .myorder .jp-pd-r{padding:0;text-align:left}
 .myorder .jp-pd li{font-size: 1rem;color:#ff0000;padding-top: 18px;}
-.myorder .jp-pd li a{padding:11px 15px;border: 1px solid #000;color:#000;transition: all 0.5s;}
+.myorder .jp-pd li a{padding:11px 15px;border: 1px solid #000;color:#000;transition: all 0.5s}
 .myorder .jp-pd li a:hover{background: #000;color: #fff;}
+
+.myorder .jp-pd-btns li {
+    float: left;}
+.myorder .jp-pd-btns li a {padding:8px 10px}
+.myorder .jp-pd-btns li:nth-child(2){float: right}
+.myorder .jp-pd-btns li:nth-child(2) a:last-child {
+    margin-right:10px;}
 .myorder .Extras{border:1px solid #ccc;width: 100%;overflow: hidden;height: auto;padding:11px 8px;margin-bottom: 20px;}
 .myorder .Extras a{float: left;width: 100%;font-size: 1rem;font-weight: 100;position: relative;color: #000;}
 /*左三角*/
@@ -53,8 +62,6 @@ ul,dl{list-style:none}
     transfrom:rotate(-45deg);/*deg:度；旋转的属性*/
     -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/
     -ms-transfrom:rotate(-45deg);/*ie浏览器*/
-    -o-transfrom:rotate(-45deg);/*欧鹏浏览器*/
-    -moz-transform:rotate(-45deg);/*火狐浏览器*/
     position: absolute;
     right: 1rem;
 }
@@ -172,7 +179,7 @@ ul,dl{list-style:none}
 .edit-personal .edit-material ul li{float: left;width: 100%;margin-bottom: 0.5rem;}
 .edit-personal .edit-material ul li label{width: 100%;font-size: 1rem;;float:left;margin: 0;padding: 0.5rem 0 }
 .edit-personal .edit-material ul li input{width: 100%;border: 1px solid #ccc;padding: 1rem;font-size: 1rem;background-color: #fff;}
-.edit-personal .sex .sex1{width: 50%;border: 1px solid #ccc;padding: 1rem;font-size: 1rem;}
+.edit-personal .sex .sex1{width: 50%;border: 1px solid #ccc;padding:0.5rem 1rem;font-size: 1rem;}
 .edit-personal .sex .sex2{width: 50%;}
 .edit-personal .am-icon-rq{
     width: 1rem;
@@ -207,7 +214,7 @@ ul,dl{list-style:none}
 .shipping-address .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}
 .shipping-address .edit-info .a{width: 100%;float: left;border: 1px solid #000;padding: 0.9rem 0;font-size: 1.2rem;color: #000;transition: all 0.5s;background-color: #fff;}
 .shipping-address .edit-info .a:hover{color: #fff;background-color: #000;}
-.shipping-address .default{padding:1rem 0;float: left;width: 100%}
+.shipping-address .default{padding:1rem 0.9rem;float: left;width: 100%}
 .shipping-address .default p{font-size: 1rem;color: #000;}
 .shipping-address .default p input{vertical-align:text-bottom;}
 .shipping-address .default p span{color: #ccc;}
@@ -239,7 +246,7 @@ ul,dl{list-style:none}
 .enroll .start .login .page li span a{padding:0.9rem 1.1rem;font-size: 1rem;border: 1px solid #000;float: right;color:#000;}
 .enroll .start .login .page li span{padding-left: 2rem;float: right;padding-right: 0}
 @media(min-width:640px) {
-.enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
+    .enroll .start .login .page li span{padding-left: 3rem;float: right;padding-right: 0}
 }
 .enroll .start .login .page li .tet1{width: 100%;float: left;}
 .enroll .edit-info{width: 100%;float: left;text-align: center;margin-top: 2rem}

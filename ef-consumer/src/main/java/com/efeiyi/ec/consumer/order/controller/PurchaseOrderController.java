@@ -4,6 +4,7 @@ import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -72,6 +73,10 @@ public class PurchaseOrderController {
 
         }
         xQuery.addRequestParamToModel(model, request);
+
+        xQuery.setQueryHql((xQuery.getQueryHql())+ " and s.fatherPurchaseOrder.id is null");
+        xQuery.updateHql();
+
         List<Object> list = baseManager.listPageInfo(xQuery).getList();
         String userId = AuthorizationUtil.getMyUser().getId();
         BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), userId);
@@ -110,7 +115,7 @@ public class PurchaseOrderController {
         String lc = "";
         String serial = "";
         String content = "";
-        if (purchaseOrder.getSubPurchaseOrder().equals(null) || purchaseOrder.getSubPurchaseOrder().size() == 0) {
+        if (purchaseOrder.getSubPurchaseOrder()==null || purchaseOrder.getSubPurchaseOrder().size() == 0) {
             List pl = purchaseOrder.getPurchaseOrderDeliveryList();
             if (pl.size() > 0) {
 
@@ -142,35 +147,43 @@ public class PurchaseOrderController {
             model.addAttribute("dl", dl);
             model.addAttribute("pl", pl);
         } else {
-            List pl = purchaseOrder.getPurchaseOrderDeliveryList();
-            if (pl.size() > 0) {
-                for (int i = 0; i < pl.size(); i++) {
-                    serial = purchaseOrder.getPurchaseOrderDeliveryList().get(i).getSerial();
-                    lc = purchaseOrder.getPurchaseOrderDeliveryList().get(i).getLogisticsCompany();
-                    try {
-                        URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
-                        URLConnection con = url.openConnection();
-                        con.setAllowUserInteraction(false);
-                        InputStream urlStream = url.openStream();
-                        byte b[] = new byte[10000];
-                        int numRead = urlStream.read(b);
-                        content = new String(b, 0, numRead);
-                        while (numRead != -1) {
-                            numRead = urlStream.read(b);
-                            if (numRead != -1) {
-                                String newContent = new String(b, 0, numRead, "UTF-8");
-                                content += newContent;
-                            }
-                        }
-                        dl.add(content);
-                        urlStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            List pl = new ArrayList();
+            for (PurchaseOrder purchaseOrderTemp : purchaseOrder.getSubPurchaseOrder()){
+                if (purchaseOrderTemp.getPurchaseOrderDeliveryList()!=null && purchaseOrderTemp.getPurchaseOrderDeliveryList().size()>0){
+                    for (PurchaseOrderDelivery purchaseOrderDeliveryTemp : purchaseOrderTemp.getPurchaseOrderDeliveryList()){
+                        pl.add(purchaseOrderDeliveryTemp);
                     }
+                }
+            }
 
+
+
+            for (int i = 0; i < pl.size(); i++) {
+                serial = ((PurchaseOrderDelivery)(pl.get(i))).getSerial();
+                lc = ((PurchaseOrderDelivery)(pl.get(i))).getLogisticsCompany();
+                try {
+                    URL url = new URL("http://www.kuaidi100.com/applyurl?key=" + "f8e96a50d49ef863" + "&com=" + lc + "&nu=" + serial);
+                    URLConnection con = url.openConnection();
+                    con.setAllowUserInteraction(false);
+                    InputStream urlStream = url.openStream();
+                    byte b[] = new byte[10000];
+                    int numRead = urlStream.read(b);
+                    content = new String(b, 0, numRead);
+                    while (numRead != -1) {
+                        numRead = urlStream.read(b);
+                        if (numRead != -1) {
+                            String newContent = new String(b, 0, numRead, "UTF-8");
+                            content += newContent;
+                        }
+                    }
+                    dl.add(content);
+                    urlStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }
+
             model.addAttribute("pl", pl);
             model.addAttribute("dl", dl);
         }

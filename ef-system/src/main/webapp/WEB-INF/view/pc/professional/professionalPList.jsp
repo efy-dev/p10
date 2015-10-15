@@ -32,41 +32,43 @@
 <body>
 <div class="admin-content">
     <div class="am-g">
-        <div class="am-u-sm-12 am-u-md-6">
+        <div style="text-align: left;margin-left: 10px;">
+            <input onclick="window.location.href='<c:url
+                    value="/basic/xm.do?qm=formProfessional"/>'" type="button"
+                   class="am-btn am-btn-default am-btn-xs"
+                   style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商家用户"/>
         </div>
+        <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">用户名</th>
-                    <th class="table-title">电话</th>
-                    <th class="table-title">邮箱</th>
                     <th class="table-title">性别</th>
-                    <th class="table-title">生日</th>
+                    <th class="table-title">商家</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${requestScope.pageInfo.list}" var="professional">
                     <tr id="${professional.id}">
-                        <td>
+                        <td width="25%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value="/basic/xm.do?qm=formProfessional&id=${professional.id}"/>" ><span
+                                            class="am-icon-trash-o">编辑</span>
+                                    </a>
                                     <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeProfessional('${professional.id}')})"><span
                                             class="am-icon-trash-o">删除</span>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.username}</a></td>
-                        <td class="am-hide-sm-only">${professional.phone}</td>
-                        <td class="am-hide-sm-only">${professional.email}</td>
-                        <td class="am-hide-sm-only">
+                        <td class="am-hide-sm-only" width="25%"><a href="<c:url value='/basic/xm.do?qm=viewProfessional&view=professional&id=${professional.id}'/>">${professional.username}</a></td>
+                        <td class="am-hide-sm-only" width="25%">
                             <ming800:status name="sex" dataType="Professional.sex" checkedValue="${professional.sex}" type="normal"/>
                         </td>
-                        <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${professional.birthDate}" pattern="yyyy:MM:dd hh:mm"/>
-                        </td>
+                        <td class="am-hide-sm-only" width="25%">${professional.bigTenant.name}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

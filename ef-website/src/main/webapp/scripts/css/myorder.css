@@ -515,7 +515,7 @@ a:hover{text-decoration: underline}
 .my-clearing .sh-bg{position: fixed;background: #000;opacity: 0.6;z-index: -1;right: 0;top:0;left: 0;bottom: 0;}
 /*表单弹出*/
 .my-clearing .System{height: 68px;width: 1000px;border: 1px solid #ccc; float: left;margin-top: 40px;line-height: 68px;}
-.my-clearing .System .System-text{width: 350px;height: 40px;float: right}
+.my-clearing .System .System-text{width: 650px;height: 40px;float: right}
 .my-clearing .System .System-text span{font-size: 12px;font-family: "宋体";color:#000;padding-right: 20px;float: right}
 .my-clearing .System .System-text span strong{font-weight: 100;color:#ff0000;}
 .my-clearing .System .System-text span a{padding:13px 26px;border: 1px solid #000;font-size: 12px;font-family: "宋体";}
@@ -836,8 +836,8 @@ a:hover{text-decoration: underline}
 .max-four .five-max{position: fixed;right: 0;top:0}
 .max-four .logo-four{width: 158px;height: 191px;background: url('../images/efeiyicuowu.png') no-repeat right -405px;float: right;margin-top: 234px;}
 /*404错误信息*/
-.header .nav-links{width: 1342px;padding: 33px 53px;left: -754px;}
-.header .nav-links ul{width: 122px;}
+.header .nav-links{width: 873px;padding: 33px 53px;left: -535px;}
+.header .nav-links ul{width: 109px;}
 /*shangpin-xiangqing(gai)*/
 /*.product-intro .itemInfo .itme-ext .name{margin-top: 0px;margin-bottom: 26px;}*/
 /*.product-intro .itemInfo .itme-ext .name p{margin-bottom: 14px;}*/
@@ -878,3 +878,21 @@ a:hover{text-decoration: underline}
     .list-class .ul-list li{height: 17.5rem}
     .list-class .ul-list li img{height: 13.4rem}
 }
+.add-null .null-shop{width: 261px;}
+.add-null .null-shop p{padding-left: 85px;height: 90px;}
+.add-null  .join  .gc-left{font-size: 12px;width: 150px;height: 38px;float: left;text-align: center;background: #000;color: #fff;line-height: 38px;text-decoration: none;margin-left: 25px;}
+.add-null  .join  .gc-right{color: #ff6600;font-size: 12px;float: right;text-decoration: underline;margin-top: 13px;}
+
+
+@media (max-width:768px) {
+    .efeiyi-null{max-height: 420px;}
+}
+/*结算业滑动显示*/
+.jc-hc{height: 39px;width: 769px;border-top:1px solid #cccccc;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;position: absolute;right: 30px;top:0px;}
+.jc-hc a{color: #003366;font-size: 12px;float: right;margin-right: 30px;margin-top: 10px;}
+
+/*我的订单按钮*/
+/*.od-id p a{margin-left: 55px;width: 100px;height: 25px;color: #fff;font-size: 12px;background: #000;padding:6px 30px;text-decoration: none;}*/
+.my-clearing .m-form li .dj-btn{padding: 7px 33px;}
+.my-clearing .m-form{padding:15px 37px 32px;}
+.header .nav-links li a{white-space:nowrap;text-overflow:ellipsis;width: 87px;table-layout:fixed;overflow: hidden}

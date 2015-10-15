@@ -29,10 +29,10 @@
                         <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="status"  operation="eq" label="状态" inputType="select_status" key="Product.status"/>
                         <condition name="name"  operation="like" label="产品名称" inputType="text"/>
                         <condition name="serial"  operation="like" label="产品编号" inputType="text"/>
                         <condition name="project.name"  operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                     </query>
 
 
@@ -48,10 +48,10 @@
                         <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="status"  operation="eq" label="状态" inputType="select_status" key="Product.status"/>
                         <condition name="name"  operation="like" label="产品名称" inputType="text"/>
                         <condition name="serial"  operation="like" label="产品编号" inputType="text"/>
                         <condition name="project.name"  operation="eq" label="项目名称" inputType="text"/>
-                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                     </query>
 
 

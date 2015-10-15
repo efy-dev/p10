@@ -128,7 +128,7 @@
 
             <div class="page-inventory">
                 <div class="page-store">
-                    <a href="#">${tenant.name}</a>
+                    ${tenant.name}
                         <%--<a href="#">收起店铺--%>
                         <%--<span class="triangle-bg"></span>--%>
                         <%--</a>--%>
@@ -146,16 +146,15 @@
                                             </a>
 
                                             <div class="info">
-                                                <p><a href="#">${product.productModel.product.project.name}</a></p>
+                                                <p><a href="/product/productModel/${product.productModel.id}" target="_blank">${product.productModel.product.project.name}</a></p>
 
                                                 <p><a href="/product/productModel/${product.productModel.id}" target="_blank">${product.productModel.name}
                                                     <c:if test="${product.productModel.productPropertyValueList.size()>1}">
                                                         [
                                                     <c:forEach items="${product.productModel.productPropertyValueList}"
-                                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach></a>
-                                                        ]
+                                                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>]
                                                     </c:if>
-
+                                                </a>
                                                 </p>
                                             </div>
                                         </div>
@@ -195,7 +194,7 @@
         <div class="System">
             <div class="System-text">
                 <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
-                <span>应付金额：<strong>${cart.totalPrice-purchaseOrder.coupon.couponBatch.price}</strong> 元</span>
+                <span>订单总价：<strong>${cart.totalPrice}</strong> 元， 优惠券优惠：<strong>-${purchaseOrder.coupon.couponBatch.price}</strong> 元，应付金额：<strong>${cart.totalPrice-purchaseOrder.coupon.couponBatch.price}</strong> 元</span>
             </div>
         </div>
         <!--结算-->
@@ -234,10 +233,11 @@
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
-        var message = "";
+        var message1 = "";
         for (var key in messageObject) {
-            message += key + ":" + messageObject[key] + ";"
+            message1 += key + ":" + messageObject[key] + ";"
         }
+        var message = encodeURIComponent(message1);
         $.ajax({
             type: 'post',
             async: false,

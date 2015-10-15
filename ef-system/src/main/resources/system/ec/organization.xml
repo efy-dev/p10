@@ -229,11 +229,16 @@
                 <do name="plistProfessional" access="" label="商家用户列表"
                     result="/professional/professionalPList">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" inputType="default"/>
+                        <condition name="username" defaultValue="" label="用户名" operation="eq"/>
+                        <condition name="bigTenant.name" defaultValue="" label="商家名称" operation="eq"/>
                     </query>
                 </do>
                 <do name="removeProfessional" label="删除商家用户" access="" result="json"/>
-                <do name="formProfessional" label="保存商家用户" access="" result="/professional/professionalForm"/>
+                <do name="formProfessional" label="保存商家用户" access="" result="/professional/professionalForm" execute="com.efeiyi.ec.system.professional.controller.toFormProfessionalHandler"/>
                 <do name="viewProfessional" label="查看商家用户" access="" result="/professional/professionalView"/>
                 <do name="saveOrUpdateProfessional" label="保存商家用户" access="" result="redirect:/basic/xm.do?qm=plistProfessional_default"/>
                 <do name="listProfessional" label="Professional列表" access="" result="/professional/professionalList">

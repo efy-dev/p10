@@ -256,7 +256,7 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+            var box = $("<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +

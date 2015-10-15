@@ -174,7 +174,7 @@
                                 </button>
                                 </c:if>
                                 <c:if test="${pol.type == '2' && object.status == '9'}">
-                                <button onclick="window.location.href='<c:url value="/purchaseOrderLabel/downNFCTxt.do?orderLabelId=${pol.id}"/>'"
+                                <button onclick="window.location.href='<c:url value="/purchaseOrderLabel/downNFCTxt.do?orderLabelId=${pol.id}&filetype=.rar"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                     下载NFC
                                 </button>
