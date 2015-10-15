@@ -36,10 +36,10 @@
         text: "${codeUrl}"
     });
 
-    var i = 5000;
-    var wait = 5000;
+    var i = 1000;
+    var wait = 1000;
 
-    for (var j = 0; j < 15; j++) {
+    for (var j = 0; j < 30; j++) {
         wait += j * i;
         setTimeout(checkOrderStatus, wait);
     }
