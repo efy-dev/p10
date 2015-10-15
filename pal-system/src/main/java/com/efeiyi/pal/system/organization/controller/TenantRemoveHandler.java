@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/8/29.
- *
+ * 删除商户 Handler
  */
 
 public class TenantRemoveHandler implements DoHandler {

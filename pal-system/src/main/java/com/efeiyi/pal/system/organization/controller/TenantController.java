@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/8/6.
+ * 商户 Controller
  */
 
 @Controller
@@ -82,10 +83,10 @@ public class TenantController {
 
     /**
      * 获取tenant的Form表单基本数据
-     * @param tenant
-     * @param request
-     * @param type
-     * @return
+     * @param tenant 商户
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return tenant 商户
      */
     private Tenant setTenantBaseProperty(Tenant tenant, HttpServletRequest request, String type) {
         String name = request.getParameter("name");
@@ -102,9 +103,9 @@ public class TenantController {
 
     /**
      * 获取关联对象
-     * @param tenant
-     * @param request
-     * @return
+     * @param tenant 商户
+     * @param request 获取页面参数
+     * @return tenant 商户
      */
     private Tenant getRelationProperty(Tenant tenant, HttpServletRequest request){
         String provinceId = request.getParameter("province.id");

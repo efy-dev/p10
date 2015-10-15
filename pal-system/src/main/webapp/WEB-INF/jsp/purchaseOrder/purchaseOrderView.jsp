@@ -116,7 +116,8 @@
             <label name="product_id" for="product_idName" class="am-u-sm-3 am-form-label">商品名称 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-left: 0px">
                 <input type="text" id="product_idName" placeholder="商品名称"
-                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')" required>
+                       onclick="m8uDialog.openDialog('product_id', 'product_idName', 'product2', '${object.tenant.id}','<%=path%>')"
+                       required readonly>
                 <input type="hidden" id="product_id"  name="product.id" >
             </div>
         </div>
