@@ -19,7 +19,7 @@
         </div>
         <div class="edit-material">
           <ul>
-            <li>
+            <li style="font-size: 1.2rem;">
               <label>用户名</label>
               <c:set  var="ur">
                 ${user.username}
@@ -66,7 +66,7 @@
             <li>
               <label>出生日期</label>
               <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-                <input type="text" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd"/>">
+                <input type="text" style="width: 80%" class="am-form-field" placeholder="年月日" readonly name="birthDate" value="<fmt:formatDate value="${user.birthDate}" pattern="yyyy-MM-dd"/>">
                                     <span class="am-input-group-btn am-datepicker-add-on">
                                             <button class="am-btn am-btn-default" type="button">
                                               <span class="am-icon-rq"></span>
