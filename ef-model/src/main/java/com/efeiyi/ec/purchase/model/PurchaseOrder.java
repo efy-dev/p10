@@ -248,14 +248,16 @@ public class PurchaseOrder {
     @Transient
     public BigDecimal getRealPayMoney() {
         List<PurchaseOrderPayment> purchaseOrderPaymentList = getPurchaseOrderPaymentList();
-        BigDecimal price = new BigDecimal(0);
+        float resultPrice = 0f;
         for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetails.getCoupon() == null && purchaseOrderPaymentDetails.getTransactionNumber()!=null) {
-                    price.add(purchaseOrderPaymentTemp.getPaymentAmount());
+                    resultPrice+=purchaseOrderPaymentTemp.getPaymentAmount().floatValue();
                 }
             }
         }
+        BigDecimal price = new BigDecimal(resultPrice);
+        price = price.setScale(2,BigDecimal.ROUND_HALF_UP);
         return price;
     }
 }

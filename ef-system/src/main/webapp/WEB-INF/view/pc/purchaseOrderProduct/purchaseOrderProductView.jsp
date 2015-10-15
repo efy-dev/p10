@@ -18,11 +18,11 @@
                 <td class="am-primary am-u-md-3">名字</td>
                 <td class="am-u-md-3">${object.productModel.product.name}</td>
                 <td class="am-primary am-u-md-3">编号</td>
-                <td class="am-u-md-3">${object.productModel.product.serial}</td>
+                <td class="am-u-md-3">${object.productModel.serial}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">价格</td>
-                <td class="am-u-md-3">${object.productModel.product.price}</td>
+                <td class="am-u-md-3">${object.productModel.price}</td>
                 <td class="am-primary am-u-md-3">分类</td>
                 <td class="am-u-md-3">${object.productModel.product.project.projectCategory.name}</td>
             </tr>
