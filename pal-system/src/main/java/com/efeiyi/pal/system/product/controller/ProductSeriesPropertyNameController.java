@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Administrator on 2015/7/31.
- *
+ * 商品系列(非遗项目)属性名 Controller
  */
 
 @Controller
@@ -66,11 +66,11 @@ public class ProductSeriesPropertyNameController {
 
     /**
      * 循环遍历listForm页面保存PropertyName
-     * @param request
-     * @param flag
-     * @param productSeries
-     * @param productSeriesId
-     * @return
+     * @param request 获取页面参数
+     * @param flag    属性名个数
+     * @param productSeries 商品系列
+     * @param productSeriesId 商品系列Id
+     * @return 跳转链接
      * @throws Exception
      */
     private String savePropertyNameList(HttpServletRequest request, int flag, ProductSeries productSeries, String productSeriesId) throws Exception{

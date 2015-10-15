@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/8/23.
+ * 商户-商品系列 Controller
  */
 
 @Controller
@@ -45,9 +46,9 @@ public class TenantProductSeriesController {
 
     /**
      * 获取Form表单基本信息
-     * @param request
-     * @param tenantProductSeries
-     * @return
+     * @param request 获取页面参数
+     * @param tenantProductSeries 商户商品系列
+     * @return tenantProductSeries 商户商品系列
      */
     private TenantProductSeries setBasePropertyValue(HttpServletRequest request, TenantProductSeries tenantProductSeries){
 
@@ -64,9 +65,9 @@ public class TenantProductSeriesController {
 
     /**
      * 获取关联属性的对象
-     * @param request
-     * @param tenantProductSeries
-     * @return
+     * @param request 获取页面参数
+     * @param tenantProductSeries 商户商品系列
+     * @return tenantProductSeries 商户商品系列
      */
     private TenantProductSeries getRelationAttributeObject(HttpServletRequest request, TenantProductSeries tenantProductSeries){
 

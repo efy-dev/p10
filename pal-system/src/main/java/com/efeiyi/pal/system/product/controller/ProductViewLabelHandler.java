@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/8/22.
+ * 商品查看 Handler
  */
 public class ProductViewLabelHandler implements DoHandler {
 

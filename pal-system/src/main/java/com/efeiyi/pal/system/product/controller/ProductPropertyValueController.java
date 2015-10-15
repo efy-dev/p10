@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Administrator on 2015/8/4.
+ * 商品属性 Controller
  */
 
 @Controller
@@ -44,11 +45,11 @@ public class ProductPropertyValueController {
 
     /**
      * 获取listForm页面商品系列属性并保存在商品属性值
-     * @param request
-     * @param flag
-     * @param product
-     * @param productId
-     * @return
+     * @param request 获取页面图片
+     * @param flag    统计属性个数
+     * @param product 商品
+     * @param productId 商品ID
+     * @return 跳转链接
      * @throws Exception
      */
     private String saveProductPropertyValueList(HttpServletRequest request, int flag, Product product, String productId) throws Exception{
