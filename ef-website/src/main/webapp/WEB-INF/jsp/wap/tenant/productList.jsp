@@ -39,13 +39,13 @@
     </div>
     <!-- //End---->
     <div class="bd list-class">
-      <ul class="ul-list-nav">
+      <ul class="ul-list-nav ul-list-nav2">
         <li><a href="#热门分类" title="热门分类">热门分类</a></li>
         <c:if test="${empty tenant.tenantMasterList}">
           <li><a title="了解大师">了解大师</a></li>
         </c:if>
         <c:if test="${not empty tenant.tenantMasterList}">
-        <li><a href="http://${tenant.tenantMasterList}.efeiyi.com" title="了解大师">了解大师</a></li>
+        <li><a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解大师">了解大师</a></li>
        </c:if>
          </ul>
       <h3 class="title">欢迎</h3>
