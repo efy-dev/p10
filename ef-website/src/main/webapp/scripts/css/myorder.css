@@ -515,7 +515,7 @@ a:hover{text-decoration: underline}
 .my-clearing .sh-bg{position: fixed;background: #000;opacity: 0.6;z-index: -1;right: 0;top:0;left: 0;bottom: 0;}
 /*表单弹出*/
 .my-clearing .System{height: 68px;width: 1000px;border: 1px solid #ccc; float: left;margin-top: 40px;line-height: 68px;}
-.my-clearing .System .System-text{width: 350px;height: 40px;float: right}
+.my-clearing .System .System-text{width: 650px;height: 40px;float: right}
 .my-clearing .System .System-text span{font-size: 12px;font-family: "宋体";color:#000;padding-right: 20px;float: right}
 .my-clearing .System .System-text span strong{font-weight: 100;color:#ff0000;}
 .my-clearing .System .System-text span a{padding:13px 26px;border: 1px solid #000;font-size: 12px;font-family: "宋体";}

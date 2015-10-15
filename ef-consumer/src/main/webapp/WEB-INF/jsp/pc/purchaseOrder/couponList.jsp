@@ -38,7 +38,7 @@
                     <div class="list-zq">
                       <c:forEach items="${couponList}" var="coupon">
                       <ul class="serial-list">
-                        <li class="list1"><img src="<c:url value="http://pro.efeiyi.com/${coupon.couponBatch.pictureUrl}"/>"></li>
+                        <%--<li class="list1"><img src="<c:url value="http://pro.efeiyi.com/${coupon.couponBatch.pictureUrl}"/>"></li>--%>
                         <li class="list2"><p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p></li>
                         <li class="list3">
                           <p><a href="#">有效期限 <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd"/>—<fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd"/></a></p>

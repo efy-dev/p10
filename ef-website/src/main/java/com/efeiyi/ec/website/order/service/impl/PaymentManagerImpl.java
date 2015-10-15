@@ -101,9 +101,9 @@ public class PaymentManagerImpl implements PaymentManager {
     private String getTitle(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails){
         String title = "";
         if(purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size()>1){
-            title = "e飞蚁"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName()+" "+"等多件";
+            title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName()+" "+"等多件";
         }else if(purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size() == 1){
-            title = "e飞蚁"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
+            title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
         return title;
     }

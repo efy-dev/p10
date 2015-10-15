@@ -47,7 +47,7 @@
 <!-- //End--topbar-->
 <div class="header wh">
     <div class="hd">
-        <div class="logo"><a class="icon" href="<c:url value="/"/>" title="e飞蚁-爱非遗"></a></div>
+        <div class="logo"><a class="icon" href="<%=PConst.HOSTNAME%>" title="e飞蚁-爱非遗"></a></div>
         <div class="nav">
             <ul>
                 <c:forEach items="${jnode.children}" var="child">

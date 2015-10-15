@@ -270,6 +270,8 @@
                     var out = '';
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
+                        /*out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
+                                + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
                     }
@@ -354,10 +356,11 @@
         $("input[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
-        var message = "";
+        var message1 = "";
         for (var key in messageObject) {
-            message += key + ":" + messageObject[key] + ";"
+            message1 += key + ":" + messageObject[key] + ";"
         }
+        var message = encodeURIComponent(message1);
         $.ajax({
             type: 'post',
             async: false,
