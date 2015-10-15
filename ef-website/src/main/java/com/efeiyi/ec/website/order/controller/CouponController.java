@@ -1,8 +1,9 @@
 package com.efeiyi.ec.website.order.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.Coupon;
+import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Path;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -104,6 +105,30 @@ public class CouponController {
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
 
         return true;
+
+    }
+
+    @RequestMapping({"/coupon/sentEverybodyACoupon"})
+    public String sentCoupon(HttpServletRequest request , Model model) throws Exception{
+        XQuery xQuery1 = new XQuery("listConsumer_default",request);
+        XQuery xQuery2 = new XQuery("listCouponBatch_default",request);
+        List<Consumer> list1 = baseManager.listObject(xQuery1);
+        List<CouponBatch> list2 = baseManager.listObject(xQuery2);
+        List list = new ArrayList();
+        for (Consumer consumer:list1){
+            for(CouponBatch couponBatch:list2){
+                Coupon coupon  = new Coupon();
+                coupon.setConsumer(consumer);
+                coupon.setCouponBatch(couponBatch);
+                coupon.setStatus("1");
+
+                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                list.add(coupon);
+            }
+        }
+
+        model.addAttribute("list",list);
+        return "/purchaseOrder/couponMessage";
 
     }
 
