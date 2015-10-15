@@ -251,7 +251,7 @@ public class PurchaseOrder {
         BigDecimal price = new BigDecimal(0);
         for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
-                if (purchaseOrderPaymentDetails.getCoupon() == null) {
+                if (purchaseOrderPaymentDetails.getCoupon() == null && purchaseOrderPaymentDetails.getTransactionNumber()!=null) {
                     price.add(purchaseOrderPaymentTemp.getPaymentAmount());
                 }
             }
