@@ -36,6 +36,10 @@ public class ProfessionalManagerImpl implements ProfessionalManager{
     public String saveProfessional(Professional professional) throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = sdf.format(new Date());
+        if("".equals(professional.getPassword())){
+            Professional tempProfessional =(Professional)xdoDao.getObject(Professional.class.getName(), professional.getId());
+            professional.setPassword(tempProfessional.getPassword());
+        }
         professional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
         professional.setStatus("1");
         professional.setEnabled(true);
