@@ -120,7 +120,7 @@
             <div class="des">
                 <div class="colour">服务：</div>
                 <div class="colour-page">
-                        <span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
+                        <span>由 <a target="_blank" href="<c:url value="/tenant/${product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</span>
                 </div>
             </div>
             <div class="des">
