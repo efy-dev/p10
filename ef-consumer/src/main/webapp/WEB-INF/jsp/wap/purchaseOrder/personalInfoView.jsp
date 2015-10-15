@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="edit-info">
-    <a href="<c:url value="/myEfeiyi/personalInfoOfMobile.do"/>">编辑信息</a>
+    <a class="a" href="<c:url value="/myEfeiyi/personalInfoOfMobile.do"/>">编辑信息</a>
   </div>
 </div>
 </body>

@@ -27,7 +27,6 @@
             </dd>
         </dl>
     </div>
-    <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
     <%-- <div class="myfunction">
        <ul>
          <li class="am-u-sm-4 "><a href="#"><p>商品收藏</p><p>1</p></a></li>
@@ -105,7 +104,6 @@
                     </ul>
                 </c:if>
 
-                <div><hr data-am-widget="divider" style="" class="am-divider am-divider-default" /></div>
             </div>
         </c:forEach>
         <!--订单状态-->
