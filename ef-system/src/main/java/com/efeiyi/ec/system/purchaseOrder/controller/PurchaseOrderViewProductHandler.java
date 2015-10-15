@@ -52,8 +52,12 @@ public class PurchaseOrderViewProductHandler implements DoHandler {
             List<String> messageList = new ArrayList<String>();
             if(null == purchaseOrder.getFatherPurchaseOrder()){
                 List<PurchaseOrder> subMessageList = purchaseOrder.getSubPurchaseOrder();
-                for (int i = 0;i < subMessageList.size();i++){
-                    messageList.add(subMessageList.get(i).getMessage());
+                if(null == subMessageList || subMessageList.size() == 0){
+                    messageList.add(purchaseOrder.getMessage());
+                }else{
+                    for (int i = 0;i < subMessageList.size();i++){
+                        messageList.add(subMessageList.get(i).getMessage());
+                    }
                 }
                 modelMap.put("messageList",messageList);
             }else{
