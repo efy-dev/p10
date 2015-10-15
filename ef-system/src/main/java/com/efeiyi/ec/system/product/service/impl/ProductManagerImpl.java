@@ -71,7 +71,7 @@ public class ProductManagerImpl implements ProductManager{
             if("".equals(product.getId())){
                 product.setId(null);
                 product.setCreateDateTime(sdf.parse(sdf.format(new Date())));
-
+                product.setStatus("2");
             }else {
                 product.setProductModelList(xdoDao.getObjectList("from ProductModel where status!='0' and product.id=?",new Object[]{product.getId()}));
             }
@@ -95,7 +95,7 @@ public class ProductManagerImpl implements ProductManager{
                 product.setTenant((Tenant) xdoDao.getObject(Tenant.class.getName(), product.getTenant().getId()));
             }
 
-            product.setStatus("2");
+
             xdoDao.saveOrUpdateObject(Product.class.getName(),product);
         }catch (Exception e){
             e.printStackTrace();
