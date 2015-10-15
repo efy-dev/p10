@@ -192,24 +192,25 @@ public class PurchaseOrderPaymentController {
         HashMap<String, String> messageMap = new HashMap<>();
         for (String messageTemp : message.split(";")) {
             if (messageTemp != null && !messageTemp.equals("")) {
-                messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
+                if (messageTemp.split(":").length >= 2)
+                    messageMap.put(messageTemp.split(":")[0], messageTemp.split(":")[1]);
             }
         }
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
-        String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "") ;
+        String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         purchaseOrder.setStatus("1");
         purchaseOrder.setPayWay(payment);
 //        purchaseOrder.setConsumerAddress(consumerAddress);
         purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
-        purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "" );
+        purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
         purchaseOrder.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
                 purchaseOrderTemp.setStatus("1");
                 purchaseOrderTemp.setPurchaseOrderAddress(purchaseOrderAddress);
-                purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "" );
+                purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
                 purchaseOrderTemp.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
 //                purchaseOrderTemp.setConsumerAddress(consumerAddress);
                 purchaseOrderTemp.setMessage(messageMap.get(purchaseOrderTemp.getTenant().getId() + "Message"));
