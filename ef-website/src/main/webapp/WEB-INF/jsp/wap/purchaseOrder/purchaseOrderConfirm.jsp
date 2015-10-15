@@ -305,11 +305,11 @@
             },
             success: function (data) {
                 if (data == true) {
-                    var t_price = parseInt(totalPrice);
+                    var t_price = parseFloat(totalPrice);
                     var chkobjs = document.getElementsByName("radio");
                     for (var i = 0; i < chkobjs.length; i++) {
                         if (chkobjs[i].checked) {
-                            t_price = t_price - parseInt(chkobjs[i].value);
+                            t_price = t_price - parseFloat(chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);
