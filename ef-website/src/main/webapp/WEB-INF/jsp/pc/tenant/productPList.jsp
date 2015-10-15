@@ -37,9 +37,6 @@
   <div class="shop-sort wh">
     <ul class="link1">
       <li class="active"><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
-      <li><a href="" title="推荐商品">推荐商品</a></li>
     </ul>
     <dl class="link2">
       <dt class="">排&nbsp;&nbsp;序</dt>

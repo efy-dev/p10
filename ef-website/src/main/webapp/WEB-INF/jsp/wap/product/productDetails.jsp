@@ -63,7 +63,7 @@
                 </p>
             </c:if>
             <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
-            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenant/${product.tenant.id}"/>" style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
         <!-- //End--des-price-->
         <div class="bd des-format">
@@ -135,7 +135,7 @@
           <a class="btn-default" title="进店">进店</a>
       </c:if>
      <c:if test="${not empty productModel.product.tenant.id}">
-         <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
+         <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
         <a class="btn-default" target="_blank"  title="咨询">咨询</a>
         <c:if test="${productModel.amount<=0}">
