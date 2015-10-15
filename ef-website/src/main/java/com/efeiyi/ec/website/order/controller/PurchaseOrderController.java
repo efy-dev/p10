@@ -360,21 +360,26 @@ public class PurchaseOrderController extends BaseController {
         //拆分订单
         if (tenantSet.size() > 1) {
             for (Tenant tenantTemp : tenantSet) {
-                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder2", request);
+                XSaveOrUpdate xSaveOrUpdateTemp = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
                 xSaveOrUpdateTemp.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+                xSaveOrUpdateTemp.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
                 PurchaseOrder purchaseOrderTemp = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdateTemp);
                 purchaseOrderTemp.setFatherPurchaseOrder(purchaseOrder);
                 purchaseOrderTemp.setTenant(tenantTemp);
-                BigDecimal bigDecimal = new BigDecimal(0);
+//                BigDecimal bigDecimal = new BigDecimal(0);
+                float resultPrice = 0f;
+//                bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
                 for (CartProduct cartProductTemp : cartProductList) {
                     cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
                     if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantTemp.getId()) && cartProductTemp.getIsChoose().equals("1")) {
                         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrderTemp,cartProductTemp.getProductModel(),cartProductTemp.getAmount(),cartProductTemp.getProductModel().getPrice());
-                        bigDecimal.add(cartProductTemp.getProductModel().getPrice());
+                        resultPrice+=cartProductTemp.getProductModel().getPrice().floatValue()*cartProductTemp.getAmount();
                         baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
                     }
                 }
                 //计算子订单的价格
+                BigDecimal bigDecimal = new BigDecimal(resultPrice);
+                bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
                 purchaseOrderTemp.setOriginalPrice(bigDecimal);
                 purchaseOrderTemp.setTotal(bigDecimal);
                 baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrderTemp); //更新子订单

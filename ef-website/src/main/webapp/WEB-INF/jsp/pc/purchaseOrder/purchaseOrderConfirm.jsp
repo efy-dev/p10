@@ -238,7 +238,6 @@
             message1 += key + ":" + messageObject[key] + ";"
         }
         var message = encodeURIComponent(message1);
-        alert(message);
         $.ajax({
             type: 'post',
             async: false,

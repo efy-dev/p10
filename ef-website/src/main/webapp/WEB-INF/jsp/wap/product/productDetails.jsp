@@ -131,10 +131,10 @@
     </div>
     <!-- //End---->
     <div class="bd details-total-bar">
-      <c:if test="${empty productModel.product.master.id}">
+      <c:if test="${empty productModel.product.tenant.id}">
           <a class="btn-default" title="进店">进店</a>
       </c:if>
-     <c:if test="${not empty product.master.id}">
+     <c:if test="${not empty productModel.product.tenant.id}">
          <a class="btn-default" href="/tenantOfMobile/${productModel.product.tenant.id}" title="进店">进店</a>
      </c:if>
         <a class="btn-default" target="_blank"  title="咨询">咨询</a>

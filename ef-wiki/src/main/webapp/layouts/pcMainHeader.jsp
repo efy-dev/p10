@@ -16,5 +16,5 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
 <!--<![endif]-->
-<script src="<c:url value='/resources/js/alert.js'/>"></script>
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>
+<script src="<c:url value='/resources/js/alert.js'/>"></script>
