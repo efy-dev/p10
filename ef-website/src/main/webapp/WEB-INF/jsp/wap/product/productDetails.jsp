@@ -102,7 +102,7 @@
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
                                 <li class="item">
                                     <div class="user-info">
-                                        <img  src="/scripts/upload/yonghm.jpg">
+                                        <img id="personPhoto" src="/scripts/upload/yonghm.jpg">
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
@@ -285,6 +285,15 @@
         s.parentNode.insertBefore(j, s)
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
+    $().ready(function(){
+        $("img").each(function(){
+            $(this).css("width","100%");
+        })
+        $("img").each(function(){
+            $('#personPhoto').css("width","auto");
+        })
+
+    })
 </script>
 </body>
 
