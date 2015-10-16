@@ -94,7 +94,20 @@
                        value="${object.picture_url}" >
             </div>
 
+            <div class="am-form-group">
+                <label for="picture_pc_url" class="am-u-sm-3 am-form-label">项目图片内容(PC_URL)</label>
 
+                <div class="am-u-sm-9">
+                <span style="padding: 10px;">
+                       <c:if test="${!empty object.picture_pc_url}">
+                           <img width="7%" src="http://pro.efeiyi.com/${object.picture_pc_url}@!product-model">
+                       </c:if>
+                </span>
+                    <input type="file" id="picture_pc_url" name="picture_pc_url" placeholder="picture_pc_url"
+                           value="${object.picture_pc_url}" >
+                </div>
+
+            </div>
             <div class="am-form-group">
                 <label for="picture_wap_url" class="am-u-sm-3 am-form-label">项目图片(WAP)</label>
 
@@ -109,6 +122,7 @@
                 </div>
 
         </div>
+
         <div class="am-form-group">
             <label name="type" for="description" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">

@@ -109,7 +109,7 @@
                         <!--只显示9个-->
                         <li>
                           <div class="suit-list-bt">
-                            <a href="#"><img src="${apj.project.picture_url}"></a>
+                            <a href="#"><img src="http://pro.efeiyi.com/${apj.project.picture_url}"></a>
                             <a class="gz-fd-icon" id="${apj.project.id}" href="#" onclick="saveProjectFllow('${apj.project.id}')">关注</a>
                           </div>
                         </li>
@@ -363,7 +363,7 @@
                             word = "已关注";
                         }
                         var box = $("<li> <div class='suit-list-bt'>" +
-                                "<a href='#'><img src="+data.list[i].project.picture_url+"></a>" +
+                                "<a href='#'><img src='http://pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a>" +
                                 " <a class='gz-fd-icon' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
                                 word +
                                 "</a> </div> </li>");
@@ -409,7 +409,7 @@
                         var moods = data.list[i].project.fsAmount;
                         if(moods==null) moods=0;
                         var box = $("<ul class='hot' id='box'>" +
-                                "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                                "<li><a href='#'><img src='http://pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a> " +
                                 "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                                 "<span>"+moods+"</span> " +
                                 "</div></li> </ul>");
@@ -502,7 +502,7 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\""+data[i][key].project.picture_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\"http://pro.efeiyi.com/"+data[i][key].project.picture_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +

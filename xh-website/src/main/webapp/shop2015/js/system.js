@@ -36,6 +36,41 @@ $(function(){
                 ulNum.css({'margin-left':'0','left':'450px'})
             }
         })
+        if($(document).width()>640){
+            //非遗名录
+            var btnPrev=$('.home .directory .btn-prev');
+            var btnNext=$('.home .directory .btn-next');
+            var listImg=$('#list-img');
+            var listImgUl=listImg.find('ul');
+            var listImgLi=listImgUl.find('li');
+
+            listImgUl.css({'width':listImgLi.length*181+'px'})
+            var index=0;
+            btnNext.click(function(){
+                index++;
+                if(index>listImgLi.length/2+1){
+                    index=parseInt(listImgLi.length/2+1);
+                }
+                if(index>listImgLi.length/2){
+                    $(this).hide();
+                }
+                $(this).siblings('.btn').show();
+                listImgUl.stop(true,true).animate({'margin-left':-index*181+'px'});
+                return false;
+            });
+            btnPrev.click(function(){
+                index--;
+                if(index<=0){
+                    index=0;
+                    $(this).hide();
+                }
+                $(this).siblings('.btn').show();
+                listImgUl.stop(true,true).animate({'margin-left':-index*181+'px'});
+                return false;
+            });
+        }
+
+
     })();
     //
     $('.org .slide-left .nav-list-ul li .btn-list').click(function(){
@@ -52,5 +87,4 @@ $(function(){
         $(this).addClass('active').siblings('span').removeClass('active');
         divTabBox.eq(index).show().siblings('.div-tab-box').hide();
     })
-
 })

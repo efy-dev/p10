@@ -41,6 +41,7 @@ public class Project implements Serializable {
     private  List<ProjectProperty> projectPropertyList;//项目属性
     private String description;// project描述
     private String picture_url;//project图片
+    private String picture_pc_url;//pc端图片project图片
     private String picture_wap_url;//移动端图片project图片
     private List<Product> productList;
     private List<ProjectContent> projectContents;
@@ -264,6 +265,14 @@ public class Project implements Serializable {
 
     public void setMasterProjects(List<MasterProject> masterProjects) {
         this.masterProjects = masterProjects;
+    }
+    @Column(name="picture_pc_url")
+    public String getPicture_pc_url() {
+        return picture_pc_url;
+    }
+
+    public void setPicture_pc_url(String picture_pc_url) {
+        this.picture_pc_url = picture_pc_url;
     }
 }
 
