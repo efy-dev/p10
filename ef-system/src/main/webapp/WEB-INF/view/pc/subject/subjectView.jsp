@@ -12,7 +12,7 @@
         <h2>详细信息</h2>
         <div style="width: 100px;margin-bottom: 10px;">
             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-               href="http://www2.efeiyi.com/subject/${object.id}">
+               href="javaScript:void (0);" onclick="openUrl('${object.id}')">
                 预览
             </a>
         </div>
@@ -81,7 +81,12 @@
                      page="/basic/xm.do?qm=listSubjectProductModel_default&conditions=subject.id:${object.id}"/>
     </div>
 </div>
-
+<script>
+    function openUrl(id){
+      var   url = "http://www2.efeiyi.com/subject/"+id;
+        window.open(url);
+    }
+</script>
 
 </body>
 </html>
