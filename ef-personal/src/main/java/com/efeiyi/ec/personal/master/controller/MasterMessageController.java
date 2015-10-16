@@ -662,12 +662,6 @@ public class MasterMessageController {
 		queryMap.put("msgId",msgId);
 		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
 		if (list != null && list.size() > 0){
-//			for (MasterComment comm : list){
-//				String querySql = "from MasterMessagePraise p where p.comment.id=:commId";
-//				LinkedHashMap<String,Object> queryMap1 = new LinkedHashMap<>();
-//				queryMap1.put("commId",comm.getId());
-//				List<MasterMessagePraise> praises = baseManager.listObject(querySql,queryMap1);
-//			}
 			model.addAttribute("commentList",list);
 		}
 		return "/masterMessage/masterMessageView";
