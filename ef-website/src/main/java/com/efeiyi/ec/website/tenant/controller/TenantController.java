@@ -32,23 +32,31 @@ public class TenantController {
     public String listProduct(@PathVariable String tenantId, HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("plistProductModel_default1",request,12);
         xQuery.put("product_tenant_id",tenantId);
+        XQuery xQuery1 = new XQuery("listTenantMaster_default",request);
+        xQuery1.put("tenant_id",tenantId);
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> list = baseManager.listPageInfo(xQuery).getList();
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
+        List list1 = baseManager.listObject(xQuery1);
         model.addAttribute("productModelList", list);
         model.addAttribute("tenantId",tenantId);
         model.addAttribute("tenant",tenant);
+        model.addAttribute("tenantMasterList",list1);
         return "/tenant/productPList";
     }
 
     @RequestMapping({"/tenantOfMobile/{tenantId}"})
     public String listProductOfMobile(@PathVariable String tenantId,HttpServletRequest request,Model model) throws Exception {
         XQuery xQuery = new XQuery("listProductModel_default1", request);
+        XQuery xQuery1 = new XQuery("listTenantMaster_default",request);
+        xQuery1.put("tenant_id",tenantId);
         xQuery.put("product_tenant_id",tenantId);
         List list = baseManager.listObject(xQuery);
+        List list1 = baseManager.listObject(xQuery1);
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
         model.addAttribute("productModelList", list);
         model.addAttribute("tenant",tenant);
+        model.addAttribute("tenantMasterList",list1);
         return "/tenant/productList";
     }
 

@@ -194,7 +194,12 @@
         <div class="System">
             <div class="System-text">
                 <span><a  target="_blank" onclick="submitOrder(this,'${purchaseOrder.id}')">提交订单</a> </span>
-                <span>订单总价：<strong>${cart.totalPrice}</strong> 元， 优惠券优惠：<strong>-${purchaseOrder.coupon.couponBatch.price}</strong> 元，应付金额：<strong>${cart.totalPrice-purchaseOrder.coupon.couponBatch.price}</strong> 元</span>
+                <span>订单总价：<strong>${cart.totalPrice}</strong> 元，
+                    <c:if test="${not empty purchaseOrder.coupon}">
+                        优惠券优惠：<strong>-${purchaseOrder.coupon.couponBatch.price}
+                        </strong> 元，
+                    </c:if>
+                    应付金额：<strong>${cart.totalPrice-purchaseOrder.coupon.couponBatch.price}</strong> 元</span>
             </div>
         </div>
         <!--结算-->
