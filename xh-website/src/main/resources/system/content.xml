@@ -19,8 +19,6 @@
             <fields>
                 <field name="group" label="分类" inputType="text">
                     <statusType fieldName="group">
-                        <!--<item label="非遗项目" value="project"/>-->
-                        <!--<item label="非遗传承人" value="inheritors"/>-->
                         <item label="协会新闻" value="orgNews"/>
                         <item label="行业新闻" value="industryNews"/>
                         <item label="公告管理" value="noticeManage"/>
@@ -312,6 +310,24 @@
                     <statusType fieldName="level">
                         <item label="美术" value="1"/>
                         <item label="技艺" value="2"/>
+                        <item label="类别3" value="3"/>
+                        <item label="类别4" value="4"/>
+                        <item label="类别5" value="5"/>
+                        <item label="类别6" value="6"/>
+                        <item label="类别7" value="7"/>
+                        <item label="类别8" value="8"/>
+                        <item label="类别9" value="9"/>
+                        <item label="类别10" value="10"/>
+                        <item label="类别11" value="11"/>
+                        <item label="类别12" value="12"/>
+                        <item label="类别13" value="13"/>
+                        <item label="类别14" value="14"/>
+                        <item label="类别15" value="15"/>
+                        <item label="类别16" value="16"/>
+                        <item label="类别17" value="17"/>
+                        <item label="类别18" value="18"/>
+                        <item label="类别19" value="19"/>
+                        <item label="类别20" value="20"/>
                     </statusType>
                 </field>
             </fields>

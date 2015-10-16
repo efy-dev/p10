@@ -118,7 +118,9 @@ public class MyMemberController {
             document.getDocumentContent().setId(null);
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
-            document.setPublishDate(new Date());
+            if(document.getPublishDate() == null) {
+                document.setPublishDate(new Date());
+            }
         }else{
             myDocumentManager.deleteDocument(document);
             document.setId(null);

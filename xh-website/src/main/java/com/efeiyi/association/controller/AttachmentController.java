@@ -10,6 +10,7 @@ import com.ming800.core.p.service.DocumentManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,7 +43,7 @@ public class AttachmentController {
 
     @RequestMapping("/attachmentUpload.do")
     @ResponseBody
-    public ModelAndView saveAttachment(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response, ApplicationMaterial material) throws Exception {
+    public ModelAndView saveAttachment(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response, ApplicationMaterial material/*,ModelMap modelMap*/) throws Exception {
 
         //新建内容传入原页面地址
         material.setGroup(request.getParameter("group"));
@@ -73,7 +74,8 @@ public class AttachmentController {
             baseManager.saveOrUpdate(attachment.getClass().getName(), attachment);
         }
 
-        String path = request.getParameter("qm");
-        return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
+        String path = request.getParameter("resultPage");
+        String submitResult = request.getParameter("submitResult");
+        return new ModelAndView("redirect:" + /*request.getContextPath() +*/ path + "&submitResult=" + submitResult);
     }
 }
