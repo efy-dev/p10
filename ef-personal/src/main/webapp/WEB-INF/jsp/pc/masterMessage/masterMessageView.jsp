@@ -88,7 +88,7 @@
             </div>
             <div class="thump-assist">
               <a href="#"><i class="z-icon"></i> </a>
-              <a onclick="praiseMessage(this,'${msg.id}');"><em>赞${msg.praiseNum}</em></a>
+              <a onclick="praiseMessage('${msg.id}');"><em>赞${msg.praiseNum}</em></a>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
                         <div class="status-right">
                           <div class="hf"><a href="#">回复</a></div>
                           <div class="zan">
-                            <a href="#"><i class="icon"></i></a>
+                            <a onclick="praise('${comm.id}');"><i class="icon"></i></a>
                             <em>${comm.amount}</em>
                           </div>
                         </div>
@@ -124,7 +124,7 @@
                                     <div class="status-right">
                                       <div class="ef"><a href="#">回复</a></div>
                                       <div class="zan">
-                                        <a href="#"><i class="icon"></i> <em>${sub.amount}</em></a>
+                                        <a onclick="praise('${sub.id}');"><i class="icon"></i> <em>${sub.amount}</em></a>
 
                                       </div>
                                     </div>
@@ -226,7 +226,7 @@
   </div>
 </div>
 <script>
-  function praiseMessage(o,msgId){
+  function praiseMessage(msgId){
     $.ajax({
       type: "get",//设置get请求方式
       url: "<c:url value='/masterMessage/praiseMessage.do'/>",//设置请求的脚本地址
@@ -243,7 +243,7 @@
         }
       }
     })
-  }
+}
 </script>
 <!-- //End--footer-->
 
