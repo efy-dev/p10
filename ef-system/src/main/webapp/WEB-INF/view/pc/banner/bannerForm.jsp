@@ -27,7 +27,7 @@
                 <c:if test="${empty object.bannerOrder}">
                     <input type="hidden" name="bannerOrder" value="1">
                 </c:if>
-                <c:if test="${not empty object.sort}">
+                <c:if test="${not empty object.bannerOrder}">
                     <input type="hidden" name="bannerOrder" value="${object.bannerOrder}">
                 </c:if>
                 <c:if test="${bucket == 'ec-efeiyi'}">
