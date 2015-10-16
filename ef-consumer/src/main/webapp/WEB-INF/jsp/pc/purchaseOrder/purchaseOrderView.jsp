@@ -27,7 +27,7 @@
           <dt class="orderid">订单</dt>
           <dd class="od-id">
             <p >订单号: <span>${order.serial}</span></p>
-            <p>订单金额：<span>${order.total}</span></p>
+            <p>订单金额：<span>${order.total-order.coupon.couponBatch.price}</span></p>
             <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
           </dd>
         </dl>
@@ -40,10 +40,19 @@
                 <tr>
                   <td class="commodity_info1">
                     <ul class="commodity_info-1">
-                      <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
+                    <li class="l1 informala"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                     </ul>
                   </td>
-                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
+                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
+                  ${op.productModel.product.name}
+                    <c:if test="${op.productModel.productPropertyValueList.size()>1}">
+                    [
+                    <c:forEach items="${op.productModel.productPropertyValueList}"
+                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                    ]
+                  </c:if>
+                  </a></td>
+
                   <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                   <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
                 </tr>

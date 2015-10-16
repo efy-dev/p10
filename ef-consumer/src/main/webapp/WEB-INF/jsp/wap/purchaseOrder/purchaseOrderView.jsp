@@ -98,6 +98,7 @@
             </c:if>
             </p>
             <p class="item-rmb">￥${purchaseOrderProduct.purchasePrice}<span>x${purchaseOrderProduct.purchaseAmount}</span></p>
+
           </div>
         </div>
         </c:forEach>

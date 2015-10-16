@@ -7,8 +7,9 @@
 <body>
 <!--//End--header-->
 <div class="shipping-address">
+  <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post">
   <div class="address">
-    <form action="<c:url value="/myEfeiyi/addAddressOfMob.do"/>" method="post">
+
       <ul>
         <li>
           <input name="id" type="hidden" value="${address.id}">
@@ -21,13 +22,13 @@
         </li>
         <li>
           <label>所在地区</label>
-          <select id="${address.id}" name="province.id" class="cars"
+          <select id="${address.id}" name="province.id" class="cars  am-selected am-dropdown am-selected-btn"
                   onchange="provinceChange(this , '${address.id}')" required>
             <c:forEach var="pro" items="${province}">
               <option value="${pro.id}">${pro.name}</option>
             </c:forEach>
           </select>
-          <select id="citys${address.id}" name="city.id" class="car1" required>
+          <select id="citys${address.id}" name="city.id" class="car1  am-selected am-dropdown am-selected-btn" required>
           </select>
         </li>
         <li>
@@ -42,12 +43,13 @@
             <span>（注：每次下单时都使用该地址）</span>
           </p>
       </div>
-      <div class="edit-info">
-        <input type="submit" class="dj-btn" value="保存信息">
-      </div>
-    </form>
-  </div>
 
+
+  </div>
+<div class="edit-info">
+  <input type="submit" class="a" value="保存信息">
+</div>
+  </form>
 </div>
 <script>
   function putVal(o){
