@@ -51,9 +51,25 @@ body {overflow-x:hidden}
 .home .directory .btn-next {background-position:-31px -100px;right:0}
 .home .directory .title{font-size:15px;color:#808080}
 .home .directory .title .btn-more{color:#3c8643;font-size:13px;float:right}
-.home .directory .list-img-txt{float:left;margin-top:30px;margin-left:9px}
-.home .directory .list-img-txt li{width:170px;line-height:30px;font-size:12px;float:left;margin-left:11px;color:#000}
+
+
+#list-img {
+    width:713px;
+    overflow: hidden;
+    float: left;
+    position: relative;
+    margin-left: 20px;
+}
+
+
+
+.home .directory .list-img-txt{float:left;margin-top:30px}
+.home .directory .list-img-txt li{width:170px;line-height:30px;font-size:12px;float:left;margin-right:11px;color:#000}
 .home .directory .list-img-txt li img{width:100%}
+
+
+
+
 /*--//End--list-box--*/
 .home .data-down {width:753px;margin:20px 36px 10px 10px;padding-bottom:20px;position:relative;border-bottom: 1px solid #e8e8e8}
 .home .data-down .title{font-size:15px;color:#808080;margin-top:34px;margin-bottom:30px}
@@ -95,10 +111,7 @@ body {overflow-x:hidden}
 .home-list .slide-left .nav-list-ul li a:hover{text-decoration:none}
 .home-list .slide-left .nav-list-ul .title a {font-size:18px;color:#fff;background:#b4361c}
 .home-list .slide-left .nav-list-ul .active a {background:#f6f6f6}
-/*.home-list .slide-left .nav-list-ul .items:hover a{background:#f6f6f6}*/
-.home-list .slide-left .nav-list-ul li a.btn-list:hover {
-    background: #f6f6f6;
-}
+.home-list .slide-left .nav-list-ul .items:hover a{background:#f6f6f6}
 .home-list .slide-right {width:785px;min-height:600px;padding:50px 0 60px 20px;float:left;margin-left:-1px;border-left:1px solid #dcdcdc}
 .home-list .slide-right .title-hide,
 .home-list .slide-right .title{width:100%;padding:20px 0;float:left;text-align:center;font-size:20px;color:#080808;border-bottom:1px solid #dcdcdc;position: relative;}
@@ -261,6 +274,8 @@ body {overflow-x:hidden}
     .home .list-box .list-news .ul-items li .btn-more {display:none}
     .home .list-box .list-news2 {margin-right:0}
     /*--//End--list-box--*/
+
+    
     .home .directory {width:100%;padding-right:15px;padding-left: 15px;margin: 0}
     .home .directory .list-img-txt {width:100%;float:left;margin-top:10px;margin-left: 0}
     .home .directory .list-img-txt li {width:47%;margin-left: 0}
