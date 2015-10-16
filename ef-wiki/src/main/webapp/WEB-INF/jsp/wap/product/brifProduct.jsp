@@ -372,6 +372,7 @@ function savaUP(productId){
     type:"get",
     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
     data:"",
+    async:"true",
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
@@ -497,7 +498,7 @@ function savaUP(productId){
       type:"get",
       url:"<c:url value='/base/commentUpAndDown.do?productId='/>"+productId+"&operation="+oper+"&commentId="+commentId,
       data:"",
-      async: true,
+      async:true,
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
