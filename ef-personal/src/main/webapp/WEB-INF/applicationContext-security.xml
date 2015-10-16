@@ -22,8 +22,8 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
-
-        <intercept-url pattern="/masterMessage/forwardIndex.do" access="isAuthenticated()"/>
+        <!--<intercept-url pattern="/masterMessage/forwardPage.do" access="isAuthenticated()"/>-->
+        <!--<intercept-url pattern="/masterMessage/forwardIndex.do" access="isAuthenticated()"/>-->
         <!--<intercept-url pattern="/myEfeiyi/**" access="hasRole('ROLE_USER')"/>-->
         <intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>
         <!-- logout-success-url="/login.html" -->

@@ -32,10 +32,10 @@ public class MasterMessage implements Serializable {
 	private String masterName;
 	private String status;
 	private String dataSource; //来源
-	private Long praiseNum;
+	private Long praiseNum;//点赞数量
 	private String praiseStatus;
-	private Integer amount;
-	private Integer fsAmount;
+	private Integer amount;//评论数量
+	private Integer fsAmount;//关注人数
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 
