@@ -1,5 +1,6 @@
 package com.efeiyi.ec.master.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class MasterIntroductionAttachment {
 
     private String id ;
     private String url;
+    private String videoPath;
     private MasterIntroduction introduction;
     private String status;
     private String title;
@@ -38,6 +40,16 @@ public class MasterIntroductionAttachment {
         this.url = url;
     }
 
+    @Column(name = "video_path")
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_introduction_id")
     public MasterIntroduction getIntroduction() {
