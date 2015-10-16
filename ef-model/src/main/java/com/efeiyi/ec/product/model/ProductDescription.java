@@ -1,5 +1,6 @@
 package com.efeiyi.ec.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class ProductDescription {
     public void setContent(String content) {
         this.content = content;
     }
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
