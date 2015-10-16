@@ -355,7 +355,7 @@
         type:"get",
         url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
         data:"",
-        async:false,
+        async:true,
         dataType:"json",
         success:function(data){
           if(data==false){
@@ -392,6 +392,7 @@
         type:"get",
         url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){
@@ -444,6 +445,7 @@
         type:"get",
         url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){

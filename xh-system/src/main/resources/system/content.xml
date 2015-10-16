@@ -22,21 +22,10 @@
 
         <entity name="document" label="新闻公告"  model="com.ming800.core.p.model.Document">
             <fields>
-                <field name="group" label="分类" inputType="text">
-                    <statusType fieldName="group">
-                        <!--<item label="非遗项目" value="project"/>-->
-                        <!--<item label="非遗传承人" value="inheritors"/>-->
-                        <item label="协会新闻" value="orgNews"/>
-                        <item label="行业新闻" value="industryNews"/>
-                        <item label="公告管理" value="noticeManage"/>
-                        <item label="协会介绍" value="assIntro"/>
-                        <item label="协会章程" value="assStatute"/>
-                        <item label="联系方式" value="assContact"/>
-                        <item label="非遗法" value="intLaw"/>
-                        <item label="非遗保护政策" value="intPolicy"/>
-                        <item label="非遗申报指南" value="submissionGuide"/>
-                        <item label="会员申请指南" value="memGuide"/>
-                        <item label="会员管理" value="memManagement"/>
+                <field name="keywords" label="申请类别" inputType="text">
+                    <statusType fieldName="keywords">
+                        <item label="传承人申请" value="masterApply"/>
+                        <item label="项目申请" value="projectApply"/>
                     </statusType>
                 </field>
             </fields>
@@ -267,16 +256,11 @@
         <entity name="SubmissionMaterial" label="申报材料下载" model="com.efeiyi.ec.association.model.ApplicationMaterial">
 
             <fields>
-                <field name="applyType" label="申请列表" inputType="text">
-                    <statusType fieldName="applyType">
-                        <item label="苏绣" value="suxiu"/>
-                    </statusType>
-                </field>
-                <field name="subGroup" label="申请类别" inputType="text">
-                    <statusType fieldName="subGroup">
-                        <item label="传承人申请" value="masterApply"/>
-                    </statusType>
-                </field>
+                <!--<field name="applyType" label="申请列表" inputType="text">-->
+                    <!--<statusType fieldName="applyType">-->
+                        <!--<item label="苏绣" value="suxiu"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
                 <field name="status" label="申请状态" inputType="text">
                     <statusType fieldName="status">
                         <item label="待处理" value="1"/>

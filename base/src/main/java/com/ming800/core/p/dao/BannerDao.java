@@ -33,4 +33,10 @@ public interface BannerDao  {
      * @param banner
      */
     void  removeBanner(Banner banner);
+
+    /**
+     * 更新排序
+     * @param banner
+     */
+    void  updateBannerOrder(Banner banner);
 }
