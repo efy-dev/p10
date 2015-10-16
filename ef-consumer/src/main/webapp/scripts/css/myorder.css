@@ -897,3 +897,4 @@ a:hover{text-decoration: underline}
 .my-clearing .m-form li .dj-btn{padding: 7px 33px;}
 .my-clearing .m-form{padding:15px 37px 32px;}
 .header .nav-links li a{white-space:nowrap;text-overflow:ellipsis;width: 87px;table-layout:fixed;overflow: hidden}
+.my-order .od-id .od-id-btn{width:100px;line-height:24px;height:24px;background:#000;color:#fff;text-align:center;display:inline-block;margin-left:60px;}
