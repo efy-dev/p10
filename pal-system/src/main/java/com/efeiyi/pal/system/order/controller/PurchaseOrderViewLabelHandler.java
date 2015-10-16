@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/9/2.
+ * 订单查看 Handler
  */
 public class PurchaseOrderViewLabelHandler implements DoHandler {
 
@@ -58,10 +59,7 @@ public class PurchaseOrderViewLabelHandler implements DoHandler {
                 return true;
             }
         }
-        if ("1".equals(purchaseOrder.getStatus()) || "2".equals(purchaseOrder.getStatus())){
-            return true;
-        }
-        return false;
+        return "1".equals(purchaseOrder.getStatus()) || "2".equals(purchaseOrder.getStatus());
     }
 
 }

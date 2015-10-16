@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -60,32 +59,29 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/tenant/list/json"})
-    public List<Object> listTenant(HttpServletRequest request) throws Exception{
+    public List listTenant(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenant_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/tenantLikesName/list/json"})
     public Set<Object> listTenantLikesName(HttpServletRequest request) throws Exception{
         String name = request.getParameter("name");
-        Set<Object> set = modalServiceManager.getListLikesName(name.trim(), "Tenant");
-        return set;
+        return modalServiceManager.getListLikesName(name.trim(), "Tenant");
     }
 
     /**
      * 获取所有商品
-     * @param model
+     * @param model model
      * @param request request
      * @return list
      * @throws Exception
      */
     @RequestMapping({"/product/list/json"})
-    public List<Object> listProduct(Model model, HttpServletRequest request) throws Exception{
+    public List listProduct(Model model, HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listProduct_default", request);
         xQuery.addRequestParamToModel(model, request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     /**
@@ -96,23 +92,21 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/product2/list/json"})
-    public List<Object> listProduct2(Model model, HttpServletRequest request) throws Exception{
+    public List listProduct2(Model model, HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listProduct_tenant", request);
         xQuery.addRequestParamToModel(model, request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/product2LikesName/list/json"})
-    public Set<Object> listProduct2LikesName(Model model, HttpServletRequest request) throws Exception{
+    public Set<Object> listProduct2LikesName(HttpServletRequest request) throws Exception{
         String tenantId = request.getParameter("tenantId");
         String name = request.getParameter("name");
         if (tenantId == null || "".equals(tenantId.trim())){
             throw new Exception("无法获取商户Id");
         }
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name, tenant, "Product");
-        return set;
+        return modalServiceManager.getObjectByTenantLikesName(name, tenant, "Product");
     }
 
     /**
@@ -122,10 +116,9 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/order/list/json"})
-    public List<Object> listOrder(HttpServletRequest request) throws Exception{
+    public List listOrder(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listPurchaseOrder_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     /**
@@ -135,17 +128,15 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/productSeries/list/json"})
-    public List<Object> listProductSeries(HttpServletRequest request) throws Exception{
+    public List listProductSeries(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listProductSeries_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/productSeriesLikesName/list/json"})
     public Set<Object> listProductSeriesLikesName(HttpServletRequest request) throws Exception{
         String name = request.getParameter("name");
-        Set<Object> set = modalServiceManager.getListLikesName(name.trim(), "ProductSeries");
-        return set;
+        return modalServiceManager.getListLikesName(name.trim(), "ProductSeries");
     }
 
     /**
@@ -155,10 +146,9 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/tenantCertification/list/json"})
-    public List<Object> listTenantCertification(HttpServletRequest request) throws Exception{
+    public List listTenantCertification(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantCertification_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     @RequestMapping({"/tenantCertificationLikesName/list/json"})
@@ -169,8 +159,7 @@ public class DialogController {
             throw new Exception("无法获取商户Id");
         }
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        Set<Object> set = modalServiceManager.getObjectByTenantLikesName(name.trim(), tenant, "TenantCertification");
-        return set;
+        return modalServiceManager.getObjectByTenantLikesName(name.trim(), tenant, "TenantCertification");
     }
 
     /**
@@ -180,10 +169,9 @@ public class DialogController {
      * @throws Exception
      */
     @RequestMapping({"/user/list/json"})
-    public List<Object> listUser(HttpServletRequest request) throws Exception{
+    public List listUser(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listUser_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        return baseManager.listObject(xQuery);
     }
 
     /**
@@ -195,7 +183,7 @@ public class DialogController {
     @RequestMapping({"/seriesByTenantNull/list/json"})
     public Set<Object> jsonListProductSeriesByTenantNull(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
+        List list = baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getProductSeries());
@@ -206,20 +194,19 @@ public class DialogController {
     @RequestMapping({"/seriesByTenantNullLikesName/list/json"})
     public Set<Object> jsonListProductSeriesByTenantNullLikesName(HttpServletRequest request) throws Exception{
         String name = request.getParameter("name");
-        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "productSeries");
-        return set;
+        return modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "productSeries");
     }
 
     /**
      * 商户系列中某个商户包含的所有系列
-     * @param request request
+     * @param request 获取页面参数
      * @return newList
      * @throws Exception
      */
     @RequestMapping({"/seriesByTenant/list/json"})
     public List<Object> jsonListProductSeriesByTenant(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_productSeriesByTenant", request);
-        List<Object> list = baseManager.listObject(xQuery);
+        List list = baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getProductSeries());
@@ -235,8 +222,7 @@ public class DialogController {
             throw new Exception("无法获取商户Id");
         }
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(), tenantId);
-        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(), "productSeries", "tenant", tenant);
-        return set;
+        return modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(), "productSeries", "tenant", tenant);
     }
 
     /**
@@ -248,7 +234,7 @@ public class DialogController {
     @RequestMapping({"/TenantBySeriesNull/list/json"})
     public Set<Object> jsonListTenantByProductSeriesNull(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_default", request);
-        List<Object> list = baseManager.listObject(xQuery);
+        List list = baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getTenant());
@@ -259,8 +245,7 @@ public class DialogController {
     @RequestMapping({"/TenantBySeriesNullLikesName/list/json"})
     public Set<Object> jsonListTenantByProductSeriesNullLikesName(HttpServletRequest request) throws Exception{
         String name = request.getParameter("name");
-        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "tenant");
-        return set;
+        return modalServiceManager.getTypeFromTenantProductSeriesLikesName(name.trim(), "tenant");
     }
 
     /**
@@ -272,7 +257,7 @@ public class DialogController {
     @RequestMapping({"/TenantBySeries/list/json"})
     public List<Object> jsonListTenantByProductSeries(HttpServletRequest request) throws Exception{
         XQuery xQuery = new XQuery("listTenantProductSeries_tenantByProductSeries", request);
-        List<Object> list = baseManager.listObject(xQuery);
+        List list = baseManager.listObject(xQuery);
         List<Object> newList = new ArrayList<>();
         for(Object o:list){
             newList.add(((TenantProductSeries) o).getTenant());
@@ -288,8 +273,7 @@ public class DialogController {
             throw new Exception("无法获取商户Id");
         }
         ProductSeries productSeries = (ProductSeries) baseManager.getObject(ProductSeries.class.getName(), productSeriesId);
-        Set<Object> set = modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(),"tenant", "productSeries", productSeries);
-        return set;
+        return modalServiceManager.getTypeFromTenantProductSeriesByObjectLikesName(name.trim(),"tenant", "productSeries", productSeries);
     }
 
     /**
@@ -316,9 +300,8 @@ public class DialogController {
         }
         tenant = getTenantRelationProperty(tenant, request);
         baseManager.saveOrUpdate(Tenant.class.getName(), tenant);
-        String resultPage = request.getContextPath()+"/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
 
-        return resultPage;
+        return request.getContextPath()+"/basic/xm.do?qm=viewTenant&tenant=tenant&id=" + tenant.getId();
     }
 
     /**
@@ -347,8 +330,7 @@ public class DialogController {
         }
         baseManager.saveOrUpdate(productSeries.getClass().getName(), productSeries);
 
-        String resultPage = request.getContextPath()+"/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
-        return resultPage;
+        return request.getContextPath()+"/basic/xm.do?qm=viewProductSeries&ps=ps&id=" + productSeries.getId();
     }
 
     /**

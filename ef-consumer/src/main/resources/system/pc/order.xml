@@ -206,6 +206,10 @@
                         <item label="圆通" value="yuantong"/>
                         <item label="国通" value="guotongkuaidi"/>
                         <item label="申通" value="shentong"/>
+                        <item label="宅急送" value="zhaijisong"/>
+                        <item label="EMS" value="ems"/>
+                        <item label="汇通快运" value="huitongkuaidi"/>
+                        <item label="天天快递" value="tiantian"/>
                     </statusType>
                 </field>
             </fields>

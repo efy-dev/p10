@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 2015/7/24.
+ * User Handler
  */
 
 public class UserHandler implements DoHandler {
@@ -39,9 +40,9 @@ public class UserHandler implements DoHandler {
 
     /**
      * 获取关联属性的对象
-     * @param user
-     * @param request
-     * @return
+     * @param user user
+     * @param request 获取页面参数
+     * @return user user
      */
     private User getRelationAttributeObject(User user, HttpServletRequest request){
         String tenantId = request.getParameter("tenant.id");
@@ -52,9 +53,10 @@ public class UserHandler implements DoHandler {
 
     /**
      * 获取user的Form表单基本数据
-     * @param user
-     * @param request
-     * @return
+     * @param user user
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return user user
      */
     private User setUserBaseProperty(User user, HttpServletRequest request, String type) {
         String name = request.getParameter("name");

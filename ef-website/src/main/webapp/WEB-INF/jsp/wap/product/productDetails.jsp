@@ -51,9 +51,11 @@
         </div>
         <!-- //End--des-title-->
         <div class="des-master">
+         <c:if test="${not empty productModel.product.master.id}">
             <p class="p1"><span>${productModel.product.master.fullName}</span>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
             <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
             <p class="img"><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></p>
+        </c:if>
         </div>
         <!-- //End--des-master-->
         <div class="bd des-price">
@@ -63,7 +65,7 @@
                 </p>
             </c:if>
             <p class="bd t2"><span>飞蚁价：</span><dfn>￥</dfn><em>${productModel.price}</em></p>
-            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
+            <p class="bd t3"><span>  服务：</span>由 <a href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" style="color: #000">${product.tenant.name}</a>[${product.tenant.address}] 发货并提供售后服务</p>
         </div>
         <!-- //End--des-price-->
         <div class="bd des-format">
@@ -102,7 +104,7 @@
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
                                 <li class="item">
                                     <div class="user-info">
-                                        <img id="personPhoto" src="/scripts/upload/yonghm.jpg">
+                                        <img id="personPhoto${rec.index}" src="/scripts/upload/yonghm.jpg">
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
@@ -290,7 +292,12 @@
             $(this).css("width","100%");
         })
         $("img").each(function(){
-            $('#personPhoto').css("width","auto");
+            var length = ${fn:length(productModelList)};
+            for (var i=0; i<length; i++)
+            {
+                $('#personPhoto'+i).css("width","auto");
+            }
+
         })
 
     })
