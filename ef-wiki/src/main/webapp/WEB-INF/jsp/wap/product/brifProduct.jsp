@@ -426,7 +426,7 @@ function savaUP(productId){
     }
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/saveComment.do?productId=${product.id}'/>"+"&content="+CommentValue,
+      url:"<c:url value='/product/saveComment.do?productId=${product.id}'/>"+"&content="+CommentValue,
       data:"",
       dataType:"json",
       async:true,
@@ -464,7 +464,7 @@ function savaUP(productId){
       }
       $.ajax({
         type:"get",
-        url:"<c:url value='/base/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
+        url:"<c:url value='/product/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
         data:"",
         dataType:"json",
         async: true,

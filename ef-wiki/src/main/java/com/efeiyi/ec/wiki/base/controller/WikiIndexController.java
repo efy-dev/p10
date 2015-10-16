@@ -396,7 +396,7 @@ public class WikiIndexController extends WikibaseController {
         return "true";
     }
 
-    @RequestMapping("/saveComment.do")
+  /*  @RequestMapping("/saveComment.do")
     @ResponseBody
     public boolean saveComment(HttpServletRequest request, Model model) throws Exception {//此方法待作废
         String productId = request.getParameter("productId");
@@ -448,7 +448,7 @@ public class WikiIndexController extends WikibaseController {
         product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
         baseManager.saveOrUpdate(Product.class.getName(), product);
         return true;
-    }
+    }*/
 
 
     @RequestMapping("/commentUpAndDown.do")

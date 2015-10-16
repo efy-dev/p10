@@ -23,7 +23,7 @@
 <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/resources/jquery/jquery.min.js"/>"></script>
-<script src="<c:url value='/scripts/assets/js/jquery-2.1.3.min.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--<![endif]-->
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/myorder.css?v=20150831'/>">
