@@ -36,6 +36,8 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
+                    <th class="table-title">跳转地址</th>
+                    <th class="table-title">序号</th>
                     <th class="table-title">图片</th>
 
                 </tr>
@@ -43,7 +45,7 @@
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
-                    <tr id="${banner.id}">
+                    <tr id="${banner.id}" width="20%">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -58,8 +60,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only">${banner.title}</td>
-                        <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
+                        <td class="am-hide-sm-only" width="20%">${banner.title}</td>
+                        <td class="am-hide-sm-only" width="20%">${banner.directUrl}</td>
+                        <td class="am-hide-sm-only" width="20%">
+                            <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
+                                    ${banner.bannerOrder}
+                            </a>
+                        </td>
+                        <td class="am-hide-sm-only" width="20%"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -76,6 +84,32 @@
     </div>
 </div>
 <script>
+
+
+    function toUpdateBannerOrder(obj,updateUrl){
+        var bannerOrder = $(obj).attr("bannerOrder");
+        var id = $(obj).attr("id");
+        $(obj).parent().html("<input id="+id+" onblur=\"updateBannerOrder(this,'"+updateUrl+"')\" type=\"text\" name=\"bannerOrder\" style=\"width: 35px;\" value="+bannerOrder+" />");
+    }
+
+    /**
+     * 更新序号
+     * @param obj
+     */
+    function updateBannerOrder(obj,updateUrl){
+        var bannerOrder = $(obj).val();
+        var id = $(obj).attr("id");
+        $.ajax({
+            type: "get",
+            url: updateUrl,
+            cache: false,
+            dataType: "json",
+            data:{id:id,bannerOrder:bannerOrder},
+            success: function (data) {
+                $(obj).parent().html("<a onclick=\"toUpdateBannerOrder(this,'"+updateUrl+"')\" bannerOrder="+bannerOrder+" id="+id+">"+bannerOrder+"</a>");
+            }
+        });
+    }
 
     function removeBanner(divId){
         $.ajax({
