@@ -372,7 +372,7 @@ function savaUP(productId){
     type:"get",
     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
     data:"",
-    async:"true",
+    async:true,
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
