@@ -37,6 +37,7 @@ public class ProjectController {
 
     /**
      * 直接转入非遗名录子的项目页面
+     *
      * @param modelMap
      * @param request
      * @return
@@ -51,7 +52,8 @@ public class ProjectController {
     }
 
     /**
-     *转入非遗名录的传承人页面
+     * 转入非遗名录的传承人页面
+     *
      * @param modelMap
      * @param request
      * @return
@@ -67,6 +69,7 @@ public class ProjectController {
 
     /**
      * 非遗名录项目页面下的技艺类型子页面
+     *
      * @param modelMap
      * @param request
      * @return
@@ -88,7 +91,7 @@ public class ProjectController {
 
         //因group by配置无效，自己去重
         Set<String> typeSet = new TreeSet<String>();
-        for(Project project : list){
+        for (Project project : list) {
             typeSet.add(project.getType() == null ? "-1" : project.getType());
         }
         return typeSet;
@@ -96,6 +99,7 @@ public class ProjectController {
 
     /**
      * 非遗名录传承人页面下的技艺类型子页面
+     *
      * @param modelMap
      * @param request
      * @return
@@ -115,7 +119,7 @@ public class ProjectController {
 
         //因group by配置无效，自己去重
         Set<String> typeSet = new TreeSet<String>();
-        for(MasterProject masterProject : list){
+        for (MasterProject masterProject : list) {
             try {
                 typeSet.add(masterProject.getProject().getType() == null ? "-1" : masterProject.getProject().getType());
             } catch (NullPointerException e) {
@@ -131,6 +135,7 @@ public class ProjectController {
 
     /**
      * 非遗名录项目页面和传承人也面的地区子页面
+     *
      * @param modelMap
      * @param request
      * @return
@@ -148,12 +153,13 @@ public class ProjectController {
 
     /**
      * 非遗名录的项目页面和传承人页面的查询结果列表子页面
+     *
      * @param request
      * @param modelMap
      * @return
      * @throws Exception
      */
-    @RequestMapping({"/projectMaster.List.do", "/project.List.do","/project.home.list.do"})
+    @RequestMapping({"/projectMaster.List.do", "/project.List.do", "/project.home.list.do"})
     public List<Object> getMasterProjectList(HttpServletRequest request, ModelMap modelMap) throws Exception {
 
         String qm = request.getParameter("qm");
@@ -171,10 +177,6 @@ public class ProjectController {
             pageEntity.setIndex(Integer.parseInt(pageIndex));
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
-
-        String provinceId = request.getParameter("provinceid");
-        String type = request.getParameter("type");
-
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
         //根据页面选择，动态加入新查询condition
@@ -182,6 +184,7 @@ public class ProjectController {
         List<QueryCondition> originList = tempDoQuery.getConditionList();
 
         //技艺类型condition
+        String type = request.getParameter("type");
         if (type != null && !"-1".equals(type)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition, originList.get(0));
@@ -202,6 +205,7 @@ public class ProjectController {
         List<QueryCondition> firstList = tempDoQuery.getConditionList();
 
         //地区condition
+        String provinceId = request.getParameter("provinceid");
         if (provinceId != null && !"-1".equals(provinceId)) {
             QueryCondition condition = new QueryCondition();
             BeanUtils.copyProperties(condition, originList.get(0));
@@ -218,6 +222,25 @@ public class ProjectController {
             tempDoQuery.getConditionList().addAll(firstList);
             tempDoQuery.getConditionList().add(condition);
         }
+
+        //记录更新后的condition
+        List<QueryCondition> secondList = tempDoQuery.getConditionList();
+
+        //传承人condition
+        String masterId = request.getParameter("masterid");
+        if (masterId != null && !"-1".equals(masterId)) {
+            QueryCondition condition = new QueryCondition();
+            BeanUtils.copyProperties(condition, originList.get(0));
+
+            condition.setName("master.id");
+            condition.setValue(masterId);
+            condition.setOperation("eq");
+
+            tempDoQuery.setConditionList(new ArrayList<QueryCondition>());
+            tempDoQuery.getConditionList().addAll(secondList);
+            tempDoQuery.getConditionList().add(condition);
+        }
+
         PageInfo pageInfo = xdoManager.listPage(tempDo, tempDoQuery, null, pageEntity);
         modelMap.put("tabTitle", tempDoQuery.getLabel());
         modelMap.put("pageInfo", pageInfo);
