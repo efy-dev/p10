@@ -24,7 +24,7 @@
         <div class="div-tab-box div-tab-zn">
             <div class="tbar">传承人申请步骤：</div>
             <div class="img"><img src="<c:url value='/shop2015/upload/exp11.jpg'/>" alt=""/></div>
-            <form method="post" action="<c:url value='/attachment/attachmentUpload.do?qm='/>/protection/protection.declare.do?qm=plistMaterial_default"
+            <form method="post" action="<c:url value='/attachment/attachmentUpload.do?resultPage='/>/protection/protection.declare.do?qm=plistMaterial_default&submitResult=true"
                   enctype="multipart/form-data">
                 <ul class="ul-list">
                     <li>
@@ -63,7 +63,7 @@
                 <img class="img1" src="<c:url value='/shop2015/upload/exp11.jpg'/>" alt=""/>
                 <img class="img2" src="<c:url value='/shop2015/upload/exp12.jpg'/>" alt=""/>
             </div>
-            <form method="post" action="<c:url value='/attachment/attachmentUpload.do?qm='/>/protection/protection.declare.do?qm=plistMaterial_default"
+            <form method="post" action="<c:url value='/attachment/attachmentUpload.do?resultPage=/protection/protection.declare.do?qm=plistMaterial_default&submitResult=true'/>"
                   enctype="multipart/form-data">
                 <ul class="ul-list">
                     <li>
@@ -100,5 +100,10 @@
 </div>
 <!-- //End--slide-right-->
 <script src="<c:url value='/scripts/function.js'/>"></script>
+<script type="text/javascript">
+    if(${submitResult}){
+        alert("提交成功");
+    }
+</script>
 </body>
 <%--</html>--%>

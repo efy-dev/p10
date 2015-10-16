@@ -24,7 +24,7 @@
       <c:if test="${not empty document.publishDate}">
         <span>发布日期：<fmt:formatDate value="${document.publishDate}" pattern="yyyy年MM月dd日"/></span>
       </c:if>
-      <span>阅读次数：5085次</span>
+      <%--<span>阅读次数：5085次</span>--%>
     </div>
     <!-- //End---->
     <div class="article-con">
