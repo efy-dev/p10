@@ -40,10 +40,19 @@
                 <tr>
                   <td class="commodity_info1">
                     <ul class="commodity_info-1">
-                      <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"> <li class="l1 informala"><a href="#" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li></a>
+                    <li class="l1 informala"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" style="outline: none"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon"></a></li>
                     </ul>
                   </td>
-                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></td>
+                  <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
+                  ${op.productModel.product.name}
+                    <c:if test="${op.productModel.productPropertyValueList.size()>1}">
+                    [
+                    <c:forEach items="${op.productModel.productPropertyValueList}"
+                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
+                    ]
+                  </c:if>
+                  </a></td>
+
                   <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>
                   <td class="commodity_price  price8">￥${op.purchasePrice * op.purchaseAmount}</td>
                 </tr>
