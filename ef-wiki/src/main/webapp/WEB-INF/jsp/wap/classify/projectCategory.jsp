@@ -71,7 +71,7 @@
     <c:forEach var="ppj" items="${pageInfo.list}">
       <ul class="hot" id="box">
         <li>
-          <a href="<c:url value='/base/brifProject.do?projectId=${ppj.id}'/>"><img src="${ppj.picture_url}"></a>
+          <a href="<c:url value='/base/brifProject.do?projectId=${ppj.id}'/>"><img src="pro.efeiyi.com/${ppj.picture_url}"></a>
           <div class="hot-poge">
             <span style="margin-right: 1rem">人气</span>
               <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -168,7 +168,7 @@
             var moods = data.list[i].project.fsAmount;
             if(moods==null) moods=0;
             var box = $("<ul class='hot' id='box'>" +
-                    "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                    "<li><a href='#'><img src='pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a> " +
                     "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                     "<span>"+moods+"</span> " +
                     "</div></li> </ul>");
