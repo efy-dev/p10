@@ -37,7 +37,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -130,7 +130,7 @@
                   <c:forEach items="${pc}" var="project" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>"><img src="${project.picture_url}"></a>
+                        <a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>"><img src="pro.efeiyi.com/${project.picture_url}"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>

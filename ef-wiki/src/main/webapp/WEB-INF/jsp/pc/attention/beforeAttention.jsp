@@ -38,7 +38,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -205,7 +205,7 @@
             }else{
               word="关注";
             }
-              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
+              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='pro.efeiyi.com/"+data[i].picture_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
                       "<h5>"+data[i].projectName+"</h5>  " +
                       "<p>"+levelName+"</p> " +

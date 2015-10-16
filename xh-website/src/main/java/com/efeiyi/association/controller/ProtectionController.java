@@ -88,7 +88,7 @@ public class ProtectionController {
             modelMap.put("object", list.get(0));
             modelMap.put("object2", list.get(1));
         }
-
+        modelMap.addAttribute("submitResult",request.getParameter("submitResult"));
         return new ModelAndView("/protection/declare");
     }
 

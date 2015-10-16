@@ -30,7 +30,7 @@
             <td>地址</td>
             <td>负责人</td>
         </tr>
-        <c:forEach items="${intangibleCulturalOrganizationList}" var="organization">
+        <c:forEach items="${documentList}" var="organization">
             <tr>
                 <td>
                     <div class="am-btn-toolbar">

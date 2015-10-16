@@ -35,6 +35,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -70,7 +71,7 @@
     <c:forEach var="ppj" items="${pageInfo.list}">
       <ul class="hot" id="box">
         <li>
-          <a href="<c:url value='/base/brifProject.do?projectId=${ppj.id}'/>"><img src="${ppj.picture_url}"></a>
+          <a href="<c:url value='/base/brifProject.do?projectId=${ppj.id}'/>"><img src="pro.efeiyi.com/${ppj.picture_url}"></a>
           <div class="hot-poge">
             <span style="margin-right: 1rem">人气</span>
               <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -90,7 +91,6 @@
   var startNumber =2;
   var ajaxkey1 = true;
   $(window).load(function(){
-
     PBL("#pubu","#box",2);
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
@@ -100,29 +100,23 @@
       if(aa < 0.02){
        var addType = $("#addType").val();
        if(addType=="allCategory" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="Category" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="all" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="level" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_level&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_level&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="allDirt" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="Dirt" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xm.do?qm=plistProject_Dirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Dirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else{
 
        }
 
       }
-
-
     });
-
-
-
-
   });
 
 
@@ -174,7 +168,7 @@
             var moods = data.list[i].project.fsAmount;
             if(moods==null) moods=0;
             var box = $("<ul class='hot' id='box'>" +
-                    "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                    "<li><a href='#'><img src='pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a> " +
                     "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                     "<span>"+moods+"</span> " +
                     "</div></li> </ul>");
@@ -254,7 +248,7 @@
 
 </script>
 
-<script src="/scripts/assets/js/jquery.min.js?v=20150831"></script>
+<script src="<c:url value='/resources/jquery/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
@@ -263,9 +257,9 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="/scripts/assets/js/amazeui.min.js?v=20150831"></script>
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

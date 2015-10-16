@@ -12,7 +12,7 @@
   <ul class="ul-list">
     <c:forEach items="${masterList}" var="master">
       <li>
-        <a href="<c:url value='/project/project.master.do?qm=plistTenant_default&provinceid=-1&type=-1'/>" title="">
+        <a href="<c:url value='/project/project.master.do?qm=plistTenant_default&provinceid=-1&type=-1&masterid=${master.id}'/>" title="">
           <img src="<c:url value='/shop2015/upload/exp6.jpg'/>" alt="">
         </a>
         <p>${master.fullName}</p>

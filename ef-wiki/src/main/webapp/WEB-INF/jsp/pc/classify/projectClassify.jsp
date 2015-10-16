@@ -38,7 +38,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -254,7 +254,7 @@
                     "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
-           var box = $("<li> <dl> <dt><a href=\"#\"><img src=\""+data[i].picture_url+"\"></a> " +
+           var box = $("<li> <dl> <dt><a href=\"#\"><img src=\"pro.efeiyi.com/"+data[i].picture_url+"\"></a> " +
                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><span>"+data[i].projectName+"</span></div>  <p>"+levelName+"</p> " +
@@ -316,7 +316,7 @@
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
-                    "<img src=\""+data[i].picture_url+"\"></a> </div>");
+                    "<img src=\"pro.efeiyi.com/"+data[i].picture_url+"\"></a> </div>");
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);
@@ -371,7 +371,7 @@
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
-                    "<img src=\""+data[i].picture_url+"\"></a> </div>");
+                    "<img src=\"pro.efeiyi.com/"+data[i].picture_url+"\"></a> </div>");
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);
@@ -518,7 +518,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/Isattention.do?projectId="+projectId,
+      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
       data:"",
       async:false,
       dataType:"json",

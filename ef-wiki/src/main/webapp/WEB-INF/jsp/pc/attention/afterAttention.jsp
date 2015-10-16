@@ -38,7 +38,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -188,7 +188,7 @@
         if(data && data.length>=1){
           for(i in data){
 
-            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\""+data[i].projectModel.picture_url+"\"></a>" +
+            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\"pro.efeiyi.com/"+data[i].projectModel.picture_url+"\"></a>" +
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
                     "<div class=\"xz-left\">"+data[i].projectModel.works+"</div> <div class=\"xz-right\"> " +
@@ -201,7 +201,7 @@
             if(data[i] && data[i].products.length>=1){
 
               for(j in data[i].products){
-               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct.do?productId='/>\""+data[i].products[j].id+"><img src=\""+data[i].products[j].picture_url+"\"></a><p>"+
+               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct.do?productId='/>\""+data[i].products[j].id+"><img src=\"pro.efeiyi.com/"+data[i].products[j].picture_url+"\"></a><p>"+
                         "<a href=\"#\">"+data[i].products[j].name+"</a></p></li> ");
                 subBox.children().eq(0).append(subChrildBox);
               }

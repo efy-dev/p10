@@ -38,7 +38,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -76,7 +76,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="${project.picture_url}">
+    <img src="pro.efeiyi.com/${project.picture_url}">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>

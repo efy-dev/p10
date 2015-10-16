@@ -37,7 +37,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
   <%--<script type="text/javascript" src="/scripts/assets/js/pubu.js"></script>--%>
 </head>
 <body style=" overflow: scroll; ">
@@ -109,8 +109,8 @@
                         <!--只显示9个-->
                         <li>
                           <div class="suit-list-bt">
-                            <a href="#"><img src="${apj.project.picture_url}"></a>
-                            <a class="gz-fd-icon" href="#" onclick="saveProjectFllow('${apj.project.id}')">关注</a>
+                            <a href="#"><img src="pro.efeiyi.com/${apj.project.picture_url}"></a>
+                            <a class="gz-fd-icon" id="${apj.project.id}" href="#" onclick="saveProjectFllow('${apj.project.id}')">关注</a>
                           </div>
                         </li>
                     </c:forEach>
@@ -122,7 +122,7 @@
                   </c:if>
 
                 </div>
-                <a href="#" class="state-btn" style="color: #000;" onclick="getData('/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index=')">查看更多工艺</a>
+                <a href="#" class="state-btn" style="color: #000;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>')">查看更多工艺</a>
               </div>
               <%}%>
               <c:if test="${isShow =='no'}">
@@ -139,7 +139,7 @@
 
               <div class="dynamic" id="after">
                 <ul class="suit-zt-2" id="attention">
-                  <li>
+                 <%-- <li>
                     <div class="suit-zt--2-img am-u-sm-5 am-u-end">
                       <a href="#"><img src="../shop2015/upload/120211-tx-1.jpg">
                         <div class="tp-bg-0">
@@ -152,7 +152,7 @@
                       <h4>景泰蓝工艺详情更新了</h4>
                       <p><a href="#"> 增加相关大师5位</a></p>
                     </div>
-                  </li>
+                  </li>--%>
                 </ul>
               </div>
               <%}%>
@@ -242,7 +242,7 @@
          }*/
         $.ajax({
             type:"get",
-            url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper=add",//设置请求的脚本地址
+            url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper=add",//设置请求的脚本地址
             data:"",
             dataType:"json",
             success:function(data){
@@ -363,7 +363,7 @@
                             word = "已关注";
                         }
                         var box = $("<li> <div class='suit-list-bt'>" +
-                                "<a href='#'><img src="+data.list[i].project.picture_url+"></a>" +
+                                "<a href='#'><img src='pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a>" +
                                 " <a class='gz-fd-icon' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
                                 word +
                                 "</a> </div> </li>");
@@ -409,7 +409,7 @@
                         var moods = data.list[i].project.fsAmount;
                         if(moods==null) moods=0;
                         var box = $("<ul class='hot' id='box'>" +
-                                "<li><a href='#'><img src="+data.list[i].project.picture_url+"></a> " +
+                                "<li><a href='#'><img src='pro.efeiyi.com/"+data.list[i].project.picture_url+"'></a> " +
                                 "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                                 "<span>"+moods+"</span> " +
                                 "</div></li> </ul>");
@@ -502,7 +502,7 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\""+data[i][key].project.picture_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\"pro.efeiyi.com/"+data[i][key].project.picture_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
@@ -534,6 +534,33 @@
             }
         })
     }
+
+    $(function(){
+    //动态--关注--分类导航
+    var tabsNav=$('.dis-q1-tabs .tabs-nav-1');
+    var tabsBd=$('.tabs-bd .am-tab-panel');
+    tabsNav.find('.item').click(function(){
+        var index=$(this).index();
+        $(this).addClass('active').siblings('.item').removeClass('active');
+        tabsBd.eq(index).show().siblings('.am-tab-panel').hide();
+        //自定义加载数据函数
+        $("#wikiNav li").each(function(index,element){
+
+            if($(element).attr("class")=="item active"){
+                if($(element).attr("id")=="1"){
+                    var flag = $("#flag").val();
+
+                    if(flag=="back"){
+                        PBL("#after","#attention",2);
+                        getData3("<c:url value='/base/afterAttention.do?conditions=&pageEntity.size=10&pageEntity.index='/>");
+                    }
+                }
+
+            }
+
+        });
+    })
+    })
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <!--<![endif]-->
@@ -543,8 +570,8 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

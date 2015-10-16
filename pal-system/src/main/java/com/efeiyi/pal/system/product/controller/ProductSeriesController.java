@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/30.
+ * 商品系列(非遗项目) Controller
  */
 
 @Controller
@@ -49,15 +50,15 @@ public class ProductSeriesController {
 
     /**
      * 获取关联属性的对象
-     * @param productSeries
-     * @param request
-     * @param type
-     * @return
+     * @param productSeries 商品系列
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return productSeries 商品系列
      */
     private ProductSeries getRelationAttributeObject(ProductSeries productSeries, HttpServletRequest request, String type) throws Exception {
 
         if ("new".equals(type)){
-            List<ProductSeriesPropertyName> productSeriesPropertyNameList = new ArrayList();
+            List<ProductSeriesPropertyName> productSeriesPropertyNameList = new ArrayList<>();
             productSeries.setProductSeriesPropertyNameList(productSeriesPropertyNameList);
             productSeries.setTenantProductSeriesList(new ArrayList<TenantProductSeries>());
             String serial = autoSerialManager.nextSerial("serial");
@@ -73,9 +74,9 @@ public class ProductSeriesController {
 
     /**
      * 获取Form表单基本数据
-     * @param productSeries
-     * @param request
-     * @return
+     * @param productSeries 商品系列
+     * @param request 获取页面参数
+     * @return productSeries 商品系列
      */
     private ProductSeries setProductSeriesProperty(ProductSeries productSeries, HttpServletRequest request) {
         String name = request.getParameter("name");

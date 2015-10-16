@@ -72,7 +72,13 @@
                     </td>
                     <td width="120">
                       <div class="list-refer-4">
-                        <P><a href="#" class="act-ui">查看评价</a></P>
+                        <c:if test="${op.status==1}">
+                          <P><a href="#" class="act-ui">查看评价</a></P>
+                        </c:if>
+                        <c:if test="${op.status!=1}">
+                          <P><a href="#" class="act-ui">评&nbsp;价</a></P>
+                        </c:if>
+
                       </div>
                     </td>
                   </tr>

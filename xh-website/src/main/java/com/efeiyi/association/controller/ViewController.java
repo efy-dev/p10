@@ -27,7 +27,7 @@ public class ViewController {
      * @param modelMap
      * @return
      */
-    @RequestMapping({"/viewDefault.do", "newView.do"})
+    @RequestMapping("newView.do")
     public Document getContentView(HttpServletRequest request, ModelMap modelMap) {
         Document document = new Document();
         document.setId(request.getParameter("id"));

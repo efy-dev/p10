@@ -16,7 +16,7 @@
         var jmenu = document.getElementById("jmenu").value;
         var currentJnode = document.getElementById("currentJnode").value;
         var matchJnode = document.getElementById("matchJnode").value;
-        var url =' <c:url value="/view/viewDefault.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
+        var url =' <c:url value="/view/newView.do"/>' + "?id=" + id + "&jmenu=" + jmenu + "&currentJnode=" + currentJnode + "&matchJnode=" + matchJnode;
         window.location=url;
     }
 </script>
