@@ -60,18 +60,20 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
         System.out.println("loadUserByUsername");
-        String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.theStatus != 0";
+        String queryStr = "SELECT u FROM MyUser u WHERE u.username=:username AND u.status != 0";
         LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username", username.split(",")[0]);
+        queryParamMap.put("username", username);
+        System.out.println("username is " + username);
 
-        MyUser myUser = userDao.getUniqueMyUserByConditions(username.split(",")[1], queryStr, queryParamMap);
+        MyUser myUser = userDao.getUniqueMyUserByConditions(username, queryStr, queryParamMap);
         System.out.println("查询完数据 ");
         if (myUser == null) {
+            System.out.println("myuser is null");
             throw new UsernameNotFoundException("user '" + username + "' not found...");
         } else {
-            if (username.split(",")[2].equals("2009")) {
-                myUser.setPassword(StringUtil.encodePassword("2009", "SHA"));
-            }
+//            if (username.split(",")[2].equals("2009")) {
+//                myUser.setPassword(StringUtil.encodePassword("2009", "SHA"));
+//            }
             return myUser;
         }
     }
