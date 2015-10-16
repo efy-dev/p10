@@ -71,7 +71,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="附件说明" for="name" class="am-u-sm-3 am-form-label">附件说明
+            <label name="附件说明" for="sampleContent" class="am-u-sm-3 am-form-label">附件说明
                 <small>&nbsp;&nbsp;</small>
             </label>
 
@@ -81,6 +81,17 @@
             </div>
         </div>
 
+        <div class="am-form-group">
+            <label name="附件类型" for="group" class="am-u-sm-3 am-form-label">附件类型
+                <small>&nbsp;&nbsp;</small>
+            </label>
+
+            <div class="am-u-sm-9">
+                <ming800:status name="keywords" dataType="document.keywords"
+                                checkedValue="${object.keywords}"
+                                type="select"/>
+            </div>
+        </div>
         <div class="am-form-group">
             <label for="file" class="am-u-sm-3 am-form-label">附件上传
                 <small>&nbsp;&nbsp;</small>

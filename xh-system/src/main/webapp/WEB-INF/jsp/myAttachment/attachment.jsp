@@ -76,7 +76,9 @@
                            metaProperty="title">
                 </td>
                 <td>
-                    <div name="title">${document.keywords}</div>
+                    <div name="title"><ming800:status name="keywords" dataType="document.keywords"
+                                                      checkedValue="${document.keywords}"
+                                                      type="normal"/></div>
                     <input type="hidden" id="${document.id}11" name="${document.id}" value="${document.keywords}"
                            metaProperty="title">
                 </td>

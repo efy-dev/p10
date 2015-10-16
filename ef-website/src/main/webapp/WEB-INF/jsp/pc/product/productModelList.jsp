@@ -39,8 +39,8 @@
   </div>
   <!-- //End--shop-sort-->
     <div class="shop-sort-list wh">
-        <strong>分类：</strong>
-        <a class="active" href=""  title="">全部</a>
+        <%--<strong>分类：</strong>--%>
+        <%--<a class="active" href=""  title="">全部</a>--%>
     </div>
   <c:if test="${productModelList.size()>0}">
       <div class="list-pro">
