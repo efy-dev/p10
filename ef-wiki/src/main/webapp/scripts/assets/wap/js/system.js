@@ -11,30 +11,7 @@ $(function(){
         $('.menu-list').slideUp();
     })
     //
-    //动态--关注--分类导航
-    var tabsNav=$('.dis-q1-tabs .tabs-nav-1');
-    var tabsBd=$('.tabs-bd .am-tab-panel');
-    tabsNav.find('.item').click(function(){
-        var index=$(this).index();
-        $(this).addClass('active').siblings('.item').removeClass('active');
-        tabsBd.eq(index).show().siblings('.am-tab-panel').hide();
-        //自定义加载数据函数
-        $("#wikiNav li").each(function(index,element){
 
-            if($(element).attr("class")=="item active"){
-                if($(element).attr("id")=="1"){
-                    var flag = $("#flag").val();
-
-                    if(flag=="back"){
-                        PBL("#after","#attention",2);
-                        getData3("/base/afterAttention.do?conditions=&pageEntity.size=10&pageEntity.index=");
-                    }
-                }
-
-            }
-
-        });
-    })
 
     //大师---作品
     var oParent=$('.master-works');

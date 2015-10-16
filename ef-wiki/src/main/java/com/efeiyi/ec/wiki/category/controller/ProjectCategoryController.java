@@ -3,9 +3,11 @@ package com.efeiyi.ec.wiki.category.controller;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.ProjectModel;
+import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.PageInfo;
@@ -50,6 +52,19 @@ public class ProjectCategoryController extends BaseController {
            XQuery xQuery2 = new XQuery("listAddressProvince_default",request);
            List<AddressProvince> list2 = baseManager.listObject(xQuery2);
            model.addAttribute("AddressProvinceList",list2);
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
+            query3.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> projectFolloweds = baseManager.listObject(query3);
+            if (projectFolloweds.size() >= 5) {
+                model.addAttribute("isShow", "ok");
+            } else {
+                model.addAttribute("isShow", "no");
+            }
+        } else {
+            model.addAttribute("isShow", "no");
+        }
+
         return  new ModelAndView("/classify/projectClassify");
     }
 
