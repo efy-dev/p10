@@ -26,10 +26,16 @@ public class MasterMessage implements Serializable {
 	private Date createDateTime;
 	private List<MessageAttachment> messageAttachmentLists;
 	private String title;
+	private String masterId;
 	private User creator;
-	private  String brief; //简介
+	private String brief; //简介
+	private String masterName;
 	private String status;
 	private String dataSource; //来源
+	private Long praiseNum;//点赞数量
+	private String praiseStatus;
+	private Integer amount;//评论数量
+	private Integer fsAmount;//关注人数
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 
@@ -42,6 +48,42 @@ public class MasterMessage implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	@Transient
+	public String getMasterName() {
+		return masterName;
+	}
+
+	public void setMasterName(String masterName) {
+		this.masterName = masterName;
+	}
+
+	@Transient
+	public String getPraiseStatus() {
+		return praiseStatus;
+	}
+
+	public void setPraiseStatus(String praiseStatus) {
+		this.praiseStatus = praiseStatus;
+	}
+
+	@Column(name = "praise_number")
+	public Long getPraiseNum() {
+		return praiseNum;
+	}
+
+	public void setPraiseNum(Long praiseNum) {
+		this.praiseNum = praiseNum;
+	}
+
+	@Transient
+	public String getMasterId() {
+		return masterId;
+	}
+
+	public void setMasterId(String masterId) {
+		this.masterId = masterId;
 	}
 
 	@Column(name="title")
@@ -148,5 +190,23 @@ public class MasterMessage implements Serializable {
 
 	public void setMessageAttachmentLists(List<MessageAttachment> messageAttachmentLists) {
 		this.messageAttachmentLists = messageAttachmentLists;
+	}
+
+	@Column(name = "amount")
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	@Column(name = "fans_amount")
+	public Integer getFsAmount() {
+		return fsAmount;
+	}
+
+	public void setFsAmount(Integer fsAmount) {
+		this.fsAmount = fsAmount;
 	}
 }

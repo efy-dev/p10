@@ -2,25 +2,34 @@ package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by AC丶man on 2015/9/18.
  */
 @Entity
 @Table(name = "master_comment")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class MasterComment implements Serializable {
 
 	private String id ;
 	private String status;
 	private String content;
+	private MasterComment fatherComment;
+	private List<MasterComment> subComment;
+	private List<MasterWorkPraise> praises;
 	private MasterMessage masterMessage;
+	private MasterWork masterWork;
 	private Date createDateTime;
 	private MyUser user;
+	private Integer amount;
+
 
 
 	@Id
@@ -53,6 +62,48 @@ public class MasterComment implements Serializable {
 	}
 
 	@JsonIgnore
+	@JoinColumn(name = "father_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	public MasterComment getFatherComment() {
+		return fatherComment;
+	}
+
+	public void setFatherComment(MasterComment fatherComment) {
+		this.fatherComment = fatherComment;
+	}
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "fatherComment", cascade = CascadeType.ALL)
+	public List<MasterComment> getSubComment() {
+		return subComment;
+	}
+
+	public void setSubComment(List<MasterComment> subComment) {
+		this.subComment = subComment;
+	}
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "comment", cascade = CascadeType.ALL)
+	public List<MasterWorkPraise> getPraises() {
+		return praises;
+	}
+
+	public void setPraises(List<MasterWorkPraise> praises) {
+		this.praises = praises;
+	}
+
+	@JsonIgnore
+	@JoinColumn(name = "master_work_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	public MasterWork getMasterWork() {
+		return masterWork;
+	}
+
+	public void setMasterWork(MasterWork masterWork) {
+		this.masterWork = masterWork;
+	}
+
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "master_message_id")
 	public MasterMessage getMasterMessage() {
@@ -72,7 +123,6 @@ public class MasterComment implements Serializable {
 		this.createDateTime = createDateTime;
 	}
 
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	public MyUser getUser() {
@@ -81,5 +131,14 @@ public class MasterComment implements Serializable {
 
 	public void setUser(MyUser user) {
 		this.user = user;
+	}
+
+	@Column(name = "comment_number")
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 }
