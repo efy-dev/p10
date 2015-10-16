@@ -369,7 +369,11 @@
     }
     function addProduct() {
         var t = $("#value");
+        var t1 = ${productModel.amount};
         t.val(parseInt(t.val())+1)
+        if(t.val()>=t1){
+            document.getElementById("value").value = t1;
+        }
     }
     function addCart(o){
         var t = document.getElementById("value").value;
