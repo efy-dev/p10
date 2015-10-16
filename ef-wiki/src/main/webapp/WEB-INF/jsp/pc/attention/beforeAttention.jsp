@@ -205,7 +205,7 @@
             }else{
               word="关注";
             }
-              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='http://pro.efeiyi.com/"+data[i].picture_url+"'></a></div> " +
+              var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
                       "<h5>"+data[i].projectName+"</h5>  " +
                       "<p>"+levelName+"</p> " +
