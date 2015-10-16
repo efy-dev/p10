@@ -46,8 +46,8 @@
                value="<fmt:formatDate value="${object.publishDate}" pattern="yyyy-MM-dd"/>"
                name="publishDate"
                type="hidden"/>
-        <input type="hidden" id="keywords" placeholder="keywords" name="keywords"
-               value="${object.keywords}">
+        <%--<input type="hidden" id="keywords" placeholder="keywords" name="keywords"--%>
+               <%--value="${object.keywords}">--%>
         <input type="hidden" id="name" placeholder="name"
                name="name"
                value="${object.name}">
@@ -82,7 +82,7 @@
         </div>
 
         <div class="am-form-group">
-            <label name="附件类型" for="group" class="am-u-sm-3 am-form-label">附件类型
+            <label name="申请类型" for="group" class="am-u-sm-3 am-form-label">申请类型
                 <small>&nbsp;&nbsp;</small>
             </label>
 
