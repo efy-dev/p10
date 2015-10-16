@@ -163,7 +163,7 @@
                 <div class="colour-page">
                     <div class="amount">
                         <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
-                        <input id = "value" class="txt" type="text" value="1"/>
+                        <input id = "value" class="txt" type="text" value="1" readOnly="true"/>
                         <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
                     </div>
                     <!-- //End-->
