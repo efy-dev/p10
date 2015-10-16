@@ -45,7 +45,7 @@
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
-                    <tr id="${banner.id}" width="20%">
+                    <tr id="${banner.id}" width="30%">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -60,9 +60,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${banner.title}</td>
-                        <td class="am-hide-sm-only" width="20%">${banner.directUrl}</td>
-                        <td class="am-hide-sm-only" width="20%">
+                        <td class="am-hide-sm-only" width="15%">${banner.title}</td>
+                        <td class="am-hide-sm-only" width="25%">${banner.directUrl}</td>
+                        <td class="am-hide-sm-only" width="10%">
                             <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
                                     ${banner.bannerOrder}
                             </a>
