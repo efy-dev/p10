@@ -130,7 +130,7 @@
           </div>
           <div class="sit-suit-twz"><p>${project.description}</p></div>
         </div>
-        <div class="sit-suit-img"><a href="#"><img src="${project.picture_url}"></a></div>
+        <div class="sit-suit-img"><a href="#"><img src="http://pro.efeiyi.com/${project.picture_url}"></a></div>
       </div>
     </div>
 
@@ -312,7 +312,7 @@
 
               var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct.do?productId="+data.list[i].id+"'/> "+
                       "'>" +
-                      "<img src='"+data.list[i].picture_url+"'></a>" +
+                      "<img src='http://pro.efeiyi.com/"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
@@ -545,11 +545,11 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
-<!--[if lte IE 8 ]>
+<!--[if lte IE 8 ]><![endif]-->
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
-<![endif]-->
+
 <script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 

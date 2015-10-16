@@ -10,19 +10,19 @@
         <div class="img"><img src="<c:url value="http://pro.efeiyi.com/${tenant.logoUrl}@!tenant-logo"/>" alt=""/></div>
             <span class="des">
                 <p><h1>${tenant.name}</h1></p>
-              <c:if test="${not empty tenant.tenantMasterList}">
-              <p><font>${tenant.tenantMasterList.get(0).master.originProvince.name}</font><font>${tenant.tenantMasterList.get(0).master.fullName}</font><font><ming800:status name="level" dataType="Project.level" checkedValue="${tenant.tenantMasterList.get(0).master.level}" type="normal"/></font></p>
+              <c:if test="${not empty tenantMasterList}">
+              <p><font>${tenantMasterList.get(0).master.originProvince.name}</font><font>${tenantMasterList.get(0).master.fullName}</font><font><ming800:status name="level" dataType="Project.level" checkedValue="${tenantMasterList.get(0).master.level}" type="normal"/></font></p>
               </c:if>
                 </span>
       </div>
       <!-- //End-->
       <div class="btndes">
         <%--<a href="" title="收藏店铺">收 藏 店 铺</a>--%>
-          <c:if test="${empty tenant.tenantMasterList}">
+          <c:if test="${empty tenantMasterList}">
             <a title="了解传承人" target="_blank">了 解 大 师</a>
           </c:if>
-          <c:if test="${not empty tenant.tenantMasterList}">
-          <a href="http://${tenant.tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
+          <c:if test="${not empty tenantMasterList}">
+          <a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
           </c:if>
       </div>
     </div>

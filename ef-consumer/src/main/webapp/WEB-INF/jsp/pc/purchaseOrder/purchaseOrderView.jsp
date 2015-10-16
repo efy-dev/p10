@@ -23,12 +23,17 @@
         </div>
       </div>
       <div class="orderinfo">
-        <dl class="orderid-mashup">
+        <dl class="orderid-mashup" style="margin-bottom: 15px;">
           <dt class="orderid">订单</dt>
           <dd class="od-id">
             <p >订单号: <span>${order.serial}</span></p>
             <p>订单金额：<span>${order.total-order.coupon.couponBatch.price}</span></p>
-            <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
+            <c:if test="${order.orderStatus!=1}">
+              <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
+            </c:if>
+            <c:if test="${order.orderStatus==1}">
+              <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span><a class="od-id-btn" href="<%=PConst.HOSTNAME%>/order/pay/${order.id}" title="去付款">去付款</a></p>
+            </c:if>
           </dd>
         </dl>
 

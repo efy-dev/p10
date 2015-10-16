@@ -188,7 +188,7 @@
         if(data && data.length>=1){
           for(i in data){
 
-            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\""+data[i].projectModel.picture_url+"\"></a>" +
+            var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"#\"><img src=\"http://pro.efeiyi.com/"+data[i].projectModel.picture_url+"\"></a>" +
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
                     "<div class=\"xz-left\">"+data[i].projectModel.works+"</div> <div class=\"xz-right\"> " +
@@ -201,7 +201,7 @@
             if(data[i] && data[i].products.length>=1){
 
               for(j in data[i].products){
-               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct.do?productId='/>\""+data[i].products[j].id+"><img src=\""+data[i].products[j].picture_url+"\"></a><p>"+
+               var subChrildBox = ("<li><a href=\"<c:url value='/project/showProduct.do?productId='/>\""+data[i].products[j].id+"><img src=\"http://pro.efeiyi.com/"+data[i].products[j].picture_url+"\"></a><p>"+
                         "<a href=\"#\">"+data[i].products[j].name+"</a></p></li> ");
                 subBox.children().eq(0).append(subChrildBox);
               }
