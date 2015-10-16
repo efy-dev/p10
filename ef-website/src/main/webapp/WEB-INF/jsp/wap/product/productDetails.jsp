@@ -104,7 +104,7 @@
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
                                 <li class="item">
                                     <div class="user-info">
-                                        <img id="personPhoto${rec.index}" src="/scripts/upload/yonghm.jpg">
+                                        <img id="personPhoto${rec.index}" class="user-favor" src="/scripts/upload/yonghm.jpg">
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
@@ -292,12 +292,7 @@
             $(this).css("width","100%");
         })
         $("img").each(function(){
-            var length = ${fn:length(productModelList)};
-            for (var i=0; i<length; i++)
-            {
-                $('#personPhoto'+i).css("width","auto");
-            }
-
+                $(".user-favor").css("width","auto");
         })
 
     })
