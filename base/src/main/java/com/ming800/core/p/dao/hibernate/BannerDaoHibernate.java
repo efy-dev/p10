@@ -73,4 +73,12 @@ public class BannerDaoHibernate  implements BannerDao {
                 .setString("id", banner.getId());
         query.executeUpdate();
     }
+    @Override
+    public void  updateBannerOrder(Banner banner){
+        String hql = "update Banner set bannerOrder = :bannerOrder where  id = :id";
+        Query query = this.getSession().createQuery(hql)
+                .setInteger("bannerOrder",banner.getBannerOrder())
+                .setString("id", banner.getId());
+        query.executeUpdate();
+    }
 }

@@ -24,6 +24,12 @@
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="groupName" value="${groupName}">
                 <input type="hidden" name="bucket" value="${bucket}">
+                <c:if test="${empty object.bannerOrder}">
+                    <input type="hidden" name="bannerOrder" value="1">
+                </c:if>
+                <c:if test="${not empty object.sort}">
+                    <input type="hidden" name="bannerOrder" value="${object.bannerOrder}">
+                </c:if>
                 <c:if test="${bucket == 'ec-efeiyi'}">
                     <input type="hidden" value="saveOrUpdateEcBanner" name="qm">
                     <c:set var="url" value="pro"/>
