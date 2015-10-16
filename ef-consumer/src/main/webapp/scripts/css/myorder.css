@@ -126,8 +126,8 @@ a:hover{text-decoration: underline}
 .my-order .commodity_price{width:157px;}
 .my-order .commodity_states{width:130px;}
 .my-order .commodity_action{width:139px;}
-.price8{color:#ff0000;font-size: 12px;font-weight: normal;font-family:  "Times New Roman";padding:20px 0px 20px 60px;}
-.price9{font-size: 12px;font-weight: normal;font-family:  "Times New Roman";padding:20px 0px 20px 60px;}
+.price8{color:#ff0000;font-size: 12px;font-weight: normal;font-family:Times New Roman,Microsoft YaHei;padding:20px 0px 20px 60px;}
+.price9{font-size: 12px;font-weight: normal;font-family:Times New Roman,Microsoft YaHei;padding:20px 0px 20px 60px;}
 /*系统信息*/
 .my-order .title-message{border: 1px solid #ccc}
 .my-order .title-message tr{border: 1px solid #ccc;}

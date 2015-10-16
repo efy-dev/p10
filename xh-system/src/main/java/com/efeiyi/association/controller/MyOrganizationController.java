@@ -46,6 +46,6 @@ public class MyOrganizationController {
 
         baseManager.remove(organization.getClass().getName(), organization.getId());
 
-        return new ModelAndView("redirect:" + request.getContextPath() + path);
+        return new ModelAndView("redirect:"/* + request.getContextPath()*/ + path);
     }
 }
