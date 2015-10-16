@@ -518,7 +518,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/Isattention.do?projectId="+projectId,
+      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
       data:"",
       async:false,
       dataType:"json",
