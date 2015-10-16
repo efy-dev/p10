@@ -4,6 +4,7 @@ import com.efeiyi.ec.product.model.ProductDescription;
 import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -34,6 +35,18 @@ public class MasterWork {
     private  List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
 // /   private  MasterWorkRecommended recommended;//推荐作品
 //    private List<ProjectTag> projectTagList;
+    private String praiseStatus;
+    private Integer amount;
+    private Integer fsAmount;
+
+    @Transient
+    public String getPraiseStatus() {
+        return praiseStatus;
+    }
+
+    public void setPraiseStatus(String praiseStatus) {
+        this.praiseStatus = praiseStatus;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -124,6 +137,7 @@ public class MasterWork {
         this.masterWorkPictureList = masterWorkPictureList;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_description_id")
     public ProductDescription getProductDescription() {
@@ -162,6 +176,7 @@ public class MasterWork {
         this.createDateTime = createDateTime;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "masterWork")
     @Where(clause = "status=1")
     public List<MasterWorkRecommended> getMasterWorkRecommendedList() {
@@ -172,4 +187,21 @@ public class MasterWork {
         this.masterWorkRecommendedList = masterWorkRecommendedList;
     }
 
+    @Column(name = "comment_number")
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Column(name = "fans_amount")
+    public Integer getFsAmount() {
+        return fsAmount;
+    }
+
+    public void setFsAmount(Integer fsAmount) {
+        this.fsAmount = fsAmount;
+    }
 }

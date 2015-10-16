@@ -130,7 +130,7 @@
           </div>
           <div class="sit-suit-twz"><p>${project.description}</p></div>
         </div>
-        <div class="sit-suit-img"><a href="#"><img src="http://pro.efeiyi.com/${project.picture_url}"></a></div>
+        <div class="sit-suit-img"><a href="#"><img src="${project.picture_url}"></a></div>
       </div>
     </div>
 
@@ -312,7 +312,7 @@
 
               var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct.do?productId="+data.list[i].id+"'/> "+
                       "'>" +
-                      "<img src='http://pro.efeiyi.com/"+data.list[i].picture_url+"'></a>" +
+                      "<img src='"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
                       "<div class='txt-info'> <a href='#'>" +
                       "<i class='icon good-1'></i>" +
@@ -355,7 +355,7 @@
         type:"get",
         url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
         data:"",
-        async:false,
+        async:true,
         dataType:"json",
         success:function(data){
           if(data==false){
@@ -392,6 +392,7 @@
         type:"get",
         url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){
@@ -444,6 +445,7 @@
         type:"get",
         url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){
