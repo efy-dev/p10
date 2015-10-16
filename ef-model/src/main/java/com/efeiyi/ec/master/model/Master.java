@@ -48,6 +48,7 @@ public class Master implements Serializable {
     private String levelName;
     private String masterSpeech;
     private Long fsAmount;
+    private String followStatus;
     @Column(name = "master_speech")
     public String getMasterSpeech() {
         return masterSpeech;
@@ -55,6 +56,15 @@ public class Master implements Serializable {
 
     public void setMasterSpeech(String masterSpeech) {
         this.masterSpeech = masterSpeech;
+    }
+
+    @Transient
+    public String getFollowStatus() {
+        return followStatus;
+    }
+
+    public void setFollowStatus(String followStatus) {
+        this.followStatus = followStatus;
     }
 
     @Transient
