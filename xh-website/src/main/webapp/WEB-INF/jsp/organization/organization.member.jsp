@@ -17,6 +17,13 @@
                                                                         target="_parent">会员申请指南</a></div>
     <div class="list-table">
         <table>
+            <tr>
+                <td class="txt-left">
+                    <p>会员名称</p>
+                </td>
+                <td>会员类别</td>
+                <td>入会时间</td>
+            </tr>
             <c:forEach items="${documentList}" var="document" varStatus="status">
                 <tr>
                     <td class="txt-left">

@@ -194,6 +194,50 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
     }
 
     /**
+     * 无视是否查询，直接更新标签状态和查询记录
+     *
+     * @param model
+     * @param label
+     * @return
+     * @throws Exception
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateRecord(ModelMap model, Label label) throws ServletException {
+
+        Date date = new Date();
+        addLabelCheckRecord(model, label, date);
+        label.setCheckCount(label.getCheckCount() + 1);
+        System.out.println("标签已查次数：" + label.getCheckCount());
+
+        //状态码是已激活或已查询
+        if (label.getStatus().equals(PalConst.getInstance().unusedStatus) || label.getStatus().equals(PalConst.getInstance().usedStatus)) {
+
+            label.setStatus(PalConst.getInstance().usedStatus);
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
+        }
+        //如果其他状态码无效
+        else {
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
+        }
+
+        //数据不完整时，记录中更新为null
+        try {
+            model.addAttribute(PalConst.getInstance().resultProduct, label.getPurchaseOrderLabel().getProduct());
+        } catch (NullPointerException e) {
+            model.addAttribute(PalConst.getInstance().resultProduct, null);
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().wrongBean);
+        }
+        //更新标签状态
+        label.setLastCheckDateTime(date);
+        //更新首次查询时间
+        if (label.getCheckCount() == 1) {
+            label.setFirstCheckDateTime(date);
+        }
+        palDao.saveOrUpdate(label.getClass().getName(), label);
+
+    }
+
+    /**
      * 更新标签状态和查询记录
      *
      * @param model
@@ -221,7 +265,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
                 label.setStatus(PalConst.getInstance().usedStatus);
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
             } else {
-                CheckResultBean recheckBean = getCheckResultBean(label,timeDiffer);
+                CheckResultBean recheckBean = getCheckResultBean(label, timeDiffer);
                 model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
             }
         }
@@ -234,7 +278,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().wrongBean);
             }
 
-            CheckResultBean recheckBean = getCheckResultBean(label,timeDiffer);
+            CheckResultBean recheckBean = getCheckResultBean(label, timeDiffer);
 
             model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
         }
@@ -262,12 +306,13 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 判断查询次数和间隔时间显示正确的提示信息
+     *
      * @param label
      * @param timeDiffer
      * @return
      * @throws ServletException
      */
-    private CheckResultBean getCheckResultBean(Label label,Long timeDiffer) throws ServletException{
+    private CheckResultBean getCheckResultBean(Label label, Long timeDiffer) throws ServletException {
         CheckResultBean recheckBean = new CheckResultBean();
 
         try {
@@ -296,6 +341,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 写入查询记录
+     *
      * @param model
      * @param label
      * @param date
@@ -323,14 +369,14 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getRecheckRecordMsg(Label label) {
-        if(label != null) {
+        if (label != null) {
             String msg = PalConst.getInstance().recheckFakeBean.getMsg().
                     replaceAll("#N#", Integer.toString(label.getCheckCount())).
                     replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
             System.out.println("getRecheckRecordMsg：" + msg);
             return msg;
         }
-            return null;
+        return null;
     }
 
     /**
@@ -341,7 +387,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getWeixinRecheckRecordMsg(Label label) {
-        if(label != null) {
+        if (label != null) {
             String msg = PalConst.getInstance().weixinRecheckMsg.
                     replaceAll("#N#", Integer.toString(label.getCheckCount())).
                     replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));

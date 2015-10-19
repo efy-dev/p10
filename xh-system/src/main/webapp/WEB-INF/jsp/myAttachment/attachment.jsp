@@ -26,7 +26,7 @@
         <tr>
             <td>操作</td>
             <td>附件名称</td>
-            <td>关键字</td>
+            <td>申请类型</td>
             <td>附件说明</td>
             <td>附件</td>
             <td>创建时间</td>
@@ -76,14 +76,16 @@
                            metaProperty="title">
                 </td>
                 <td>
-                    <div name="title">${document.keywords}</div>
+                    <div name="keywords"><ming800:status name="keywords" dataType="document.keywords"
+                                                      checkedValue="${document.keywords}"
+                                                      type="normal"/></div>
                     <input type="hidden" id="${document.id}11" name="${document.id}" value="${document.keywords}"
-                           metaProperty="title">
+                           metaProperty="keywords">
                 </td>
                 <td>
-                    <div name="title">${document.sampleContent}</div>
+                    <div name="sampleContent">${document.sampleContent}</div>
                     <input type="hidden" id="${document.id}11" name="${document.id}" value="${document.sampleContent}"
-                           metaProperty="title">
+                           metaProperty="sampleContent">
                 </td>
                 <td>
                     <c:set var="attachSize" value="0" scope="page"/>

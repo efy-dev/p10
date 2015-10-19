@@ -1,6 +1,7 @@
 package com.efeiyi.ec.master.model;
 
 import com.efeiyi.ec.product.model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
@@ -28,6 +29,7 @@ public class MasterWorkPicture {
         this.id = id;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public MasterWork getMasterWork() {

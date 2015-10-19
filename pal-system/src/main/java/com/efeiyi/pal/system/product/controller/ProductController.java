@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/8/4.
+ * 商品 Controller
  */
 
 @Controller
@@ -39,7 +40,7 @@ public class ProductController {
     private AliOssUploadManager aliOssUploadManager = (AliOssUploadManager) ApplicationContextUtil.getApplicationContext().getBean("aliOssUploadManagerImpl");
 
     @RequestMapping("/saveProduct.do")
-    public ModelAndView saveProduct(ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
+    public ModelAndView saveProduct(HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
         Product product = new Product();
 
         String productId = request.getParameter("id");
@@ -78,10 +79,10 @@ public class ProductController {
 
     /**
      * 获取关联属性的对象
-     * @param product
-     * @param request
-     * @param type
-     * @return
+     * @param product 商品
+     * @param request 获取页面参数
+     * @param type 新建"new"; 修改"edit"
+     * @return product 商品
      */
     private Product getRelationAttributeObject(Product product, HttpServletRequest request, String type) throws Exception {
         String productSeriesId = request.getParameter("productSeries.id");
@@ -93,7 +94,7 @@ public class ProductController {
         product.setTenantProductSeries(tenantProductSeries);
 
         if (type.equals("new")){
-            List<ProductPropertyValue> productPropertyValueList = new ArrayList();
+            List<ProductPropertyValue> productPropertyValueList = new ArrayList<>();
             product.setProductPropertyValueList(productPropertyValueList);
             String serial = autoSerialManager.nextSerial("serial");//序列号自动生成
             product.setSerial(serial);
@@ -116,9 +117,9 @@ public class ProductController {
 
     /**
      * 获取Form表单基本数据
-     * @param product
-     * @param request
-     * @return
+     * @param product 商品
+     * @param request 获取页面参数
+     * @return product 商品
      */
     private Product setProductBaseProperty(Product product, HttpServletRequest request) throws Exception {
         String name = request.getParameter("name");
@@ -138,8 +139,8 @@ public class ProductController {
 
     /**
      * 商品系列更改后，删除系列对应属性的商品对应值
-     * @param product
-     * @return
+     * @param product 商品
+     * @return product 商品
      */
     private Product deleteRelatedAttributes(Product product){
         List<ProductPropertyValue> PPVList = product.getProductPropertyValueList();
@@ -152,9 +153,9 @@ public class ProductController {
 
     /**
      * 上传商品logo
-     * @param multipartRequest
-     * @param product
-     * @return
+     * @param multipartRequest 上床多张图片
+     * @param product 商品
+     * @return product 商品
      * @throws Exception
      */
     private Product upLoadLogo(MultipartRequest multipartRequest, Product product) throws Exception{

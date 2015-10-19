@@ -54,4 +54,9 @@ public class BannerManagerImpl implements BannerManager {
     public void deleteBanner(Banner banner) {
            bannerDao.deleteBanner(banner);
     }
+
+    @Override
+    public void updateBannerOrder(Banner banner) {
+          bannerDao.updateBannerOrder(banner);
+    }
 }

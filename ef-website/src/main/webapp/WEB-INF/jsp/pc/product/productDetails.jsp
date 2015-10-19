@@ -163,7 +163,7 @@
                 <div class="colour-page">
                     <div class="amount">
                         <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
-                        <input id = "value" class="txt" type="text" value="1"/>
+                        <input id = "value" class="txt" type="text" value="1" readOnly="true"/>
                         <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
                     </div>
                     <!-- //End-->
@@ -228,7 +228,7 @@
             <div class="btns">
                 <c:if test="${productModel.amount > 0}">
                     <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
-                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="放入购物车"><i
+                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>
                 </c:if>
             </div>
@@ -369,7 +369,11 @@
     }
     function addProduct() {
         var t = $("#value");
+        var t1 = ${productModel.amount};
         t.val(parseInt(t.val())+1)
+        if(t.val()>=t1){
+            document.getElementById("value").value = t1;
+        }
     }
     function addCart(o){
         var t = document.getElementById("value").value;

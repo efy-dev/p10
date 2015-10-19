@@ -263,13 +263,7 @@ public class CartController {
             ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
             cartProductTemp.setProductModel(productModel);
             if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                if (totalPrice.floatValue() == 0.00) {
-                    totalPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
-                } else {
-                    BigDecimal addPrice = cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount() * 1.00));
-                    float x = totalPrice.floatValue() + addPrice.floatValue();
-                    totalPrice = new BigDecimal(x);
-                }
+                totalPrice = totalPrice.add(cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount())));
             }
         }
         totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);

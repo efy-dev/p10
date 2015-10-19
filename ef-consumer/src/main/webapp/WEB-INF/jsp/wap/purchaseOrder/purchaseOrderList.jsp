@@ -60,14 +60,14 @@
                 </ul>
                 <c:if test="${purchaseOrder.orderStatus == '1'}">
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
                         <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
                     </ul>
                 </c:if>
 
                 <c:if test="${purchaseOrder.orderStatus == '5'}">
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
                         <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
                     </ul>
                 </c:if>
@@ -75,7 +75,7 @@
                 <c:if test="${purchaseOrder.orderStatus == '7'}">
 
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
                         <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看物流</a>
                             <a style="margin-right: 0px;" href="#" onclick="showConfirm('提示','是否确定收货',function(){
                                     window.location.href='<c:url value="/order/confirmGet/${purchaseOrder.id}"/>';
@@ -85,22 +85,22 @@
 
                 <c:if test="${purchaseOrder.orderStatus == '13'}">
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
                         <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已完成</a></li>
                     </ul>
                 </c:if>
 
                 <c:if test="${purchaseOrder.orderStatus == '17'}">
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
                         <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">已取消</a></li>
                     </ul>
                 </c:if>
 
                 <c:if test="${purchaseOrder.orderStatus == '9'}">
                     <ul class="jp-pd jp-pd-btns">
-                        <li>￥${purchaseOrder.total}</li>
-                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">未&nbsp;评&nbsp;价</a></li>
+                        <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
+                        <li><a style="margin-right: 10px;" href="<c:url value="/order/myEfeiyi/view/${purchaseOrder.id}"/>">查看详情</a></li>
                     </ul>
                 </c:if>
 

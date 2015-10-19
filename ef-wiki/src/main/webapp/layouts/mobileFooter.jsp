@@ -41,17 +41,16 @@
     <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js?v=20150831'/>"></script>
+
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
 <![endif]-->
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 
 

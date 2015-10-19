@@ -67,6 +67,7 @@
                 </dd>
               </dl>
             </li>
+
             </c:forEach>
           </ul>
             <ming800:pcPageList bean="${pageEntity}" url="${pageContext.request.contextPath}/purchaseCollect/collectList.do">

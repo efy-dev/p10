@@ -8,6 +8,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -110,9 +113,22 @@ public class CouponController {
 
     @RequestMapping({"/coupon/sentEverybodyACoupon"})
     public String sentCoupon(HttpServletRequest request , Model model) throws Exception{
-        XQuery xQuery1 = new XQuery("listConsumer_default",request);
+        String time = request.getParameter("time");
+        String month = time.substring(0,2);
+        String day = time.substring(2,4);
+        String hour = time.substring(4,6);
+        String min = time.substring(6,8);
+        String limitTime1 = "2015-" + month + "-" + day + " " + hour + ":" + min + ":" + "00";
+        Date limitTime = DateUtil.parseAllDate(limitTime1);
+        Date date = new Date();
+
+        String queryHql = "from "+Consumer.class.getName()+" t where t.createDatetime >= :limitTime and t.createDatetime <= :timeNow order by t.id desc";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("limitTime",limitTime);
+        queryParamMap.put("timeNow",date);
+        List<Consumer> list1 = baseManager.listObject(queryHql,queryParamMap);
+
         XQuery xQuery2 = new XQuery("listCouponBatch_default",request);
-        List<Consumer> list1 = baseManager.listObject(xQuery1);
         List<CouponBatch> list2 = baseManager.listObject(xQuery2);
         List list = new ArrayList();
         for (Consumer consumer:list1){

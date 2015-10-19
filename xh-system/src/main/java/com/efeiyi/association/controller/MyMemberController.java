@@ -118,7 +118,9 @@ public class MyMemberController {
             document.getDocumentContent().setId(null);
             document.setStatus("1");
             document.setDocumentOrder(Integer.parseInt(autoSerialManager.nextSerial("documentOrder")));
-            document.setPublishDate(new Date());
+            if(document.getPublishDate() == null) {
+                document.setPublishDate(new Date());
+            }
         }else{
             myDocumentManager.deleteDocument(document);
             document.setId(null);
@@ -143,7 +145,7 @@ public class MyMemberController {
     @RequestMapping("/removeMemManagement.do")
     @ResponseBody
     public ModelAndView removeMemManagement(HttpServletRequest request, Document document) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
         myDocumentManager.removeDocument(document);
         return new ModelAndView("redirect:" + path);
     }

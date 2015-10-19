@@ -35,6 +35,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -138,7 +139,7 @@
 </footer>
 <!--//End--footer-->--%>
 
-<script src="/scripts/assets/js/jquery.min.js?v=20150831"></script>
+<script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
@@ -147,9 +148,9 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <!--自定义js--Start-->
-<script src="/scripts/assets/js/amazeui.min.js?v=20150831"></script>
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

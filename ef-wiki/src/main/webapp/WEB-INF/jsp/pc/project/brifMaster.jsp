@@ -38,7 +38,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/cyclopedia.css?v=20150831'/>">
-  <script src="/scripts/assets/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="topbar wh" data-am-sticky>
@@ -317,7 +317,7 @@
       if(aa < 0.02){
         //alert(StartNum)
         if(ajaxkey){
-          getData(<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=12&pageEntity.index='/>);
+          getData("<c:url value='/basic/xmj.do?qm=plistMasterProject_master&conditions=project.id:${project.id}&pageEntity.size=12&pageEntity.index='/>");
         }
 
       }
@@ -360,7 +360,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/Isattention.do?projectId="+projectId,
+      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
       data:"",
       async:false,
       dataType:"json",
@@ -390,7 +390,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/IsattentionMaster.do?masterId="+masterId,
+      url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
       data:"",
       async:false,
       dataType:"json",
@@ -427,7 +427,7 @@
     }
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){

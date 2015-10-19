@@ -37,6 +37,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/amazeui.min.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       $(".zoom,.ilike").hide();
@@ -354,7 +355,7 @@
         type:"get",
         url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
         data:"",
-        async:false,
+        async:true,
         dataType:"json",
         success:function(data){
           if(data==false){
@@ -391,6 +392,7 @@
         type:"get",
         url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){
@@ -443,6 +445,7 @@
         type:"get",
         url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
         data:"",
+        async:true,
         dataType:"json",
         success:function(data){
           if(data=="false"){
@@ -542,18 +545,18 @@
   </script>
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
-<!--[if lte IE 8 ]>
+<!--[if lte IE 8 ]><![endif]-->
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
-<![endif]-->
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
+
+<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <script type="text/javascript">
  /* $(function(){
 

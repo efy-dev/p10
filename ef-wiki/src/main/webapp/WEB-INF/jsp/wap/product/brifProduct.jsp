@@ -36,7 +36,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
   <link type="text/css" rel="stylesheet" href="http://v3.jiathis.com/code/css/jiathis_share.css">
-
+  <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body style="position: relative;">
 <%--<header class="am-header custom-header">--%>
@@ -271,7 +271,7 @@ var startNum=1;
                       "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
                       "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
                       "<div class='owner-good'>" +
-                      "<a href='#' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
+                      "<a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
               pubu.append(box);
 
               //获取盖楼式回复
@@ -372,6 +372,7 @@ function savaUP(productId){
     type:"get",
     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+productId+"&operation="+oper,
     data:"",
+    async:true,
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
@@ -426,7 +427,7 @@ function savaUP(productId){
     }
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/saveComment.do?productId=${product.id}'/>"+"&content="+CommentValue,
+      url:"<c:url value='/product/saveComment.do?productId=${product.id}'/>"+"&content="+CommentValue,
       data:"",
       dataType:"json",
       async:true,
@@ -439,8 +440,8 @@ function savaUP(productId){
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
                 "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
-                "</div> <div class='owner-good'><a href='#'>" +
-                "<i class='good-1'></i><em>0</em></a></div> " + "</div>");
+                "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
+                "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
@@ -464,7 +465,7 @@ function savaUP(productId){
       }
       $.ajax({
         type:"get",
-        url:"<c:url value='/base/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
+        url:"<c:url value='/product/saveComment2.do?productId=${product.id}'/>"+"&content="+CommentValue+"&contentId="+contentId,
         data:"",
         dataType:"json",
         async: true,
@@ -497,7 +498,7 @@ function savaUP(productId){
       type:"get",
       url:"<c:url value='/base/commentUpAndDown.do?productId='/>"+productId+"&operation="+oper+"&commentId="+commentId,
       data:"",
-      async: true,
+      async:true,
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
@@ -569,19 +570,19 @@ function savaUP(productId){
 <!--//End--footer-->
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value='/scripts/assets/wap/js/jquery.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 
-<script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.ie8polyfill.min.js?v=20150831'/>"></script>
 <![endif]-->
-<script src="<c:url value='/scripts/assets/wap/js/amazeui.min.js?v=20150831'/>"></script>
+<script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
-<script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 <!--自定义js--End-->
 </body>
