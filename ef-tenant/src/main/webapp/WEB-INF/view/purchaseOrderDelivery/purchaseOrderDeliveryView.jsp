@@ -41,11 +41,17 @@
             </tr>
             <td class="am-primary am-u-md-3">收货人</td>
             <td class="am-u-md-3">
-                ${object.purchaseOrder.consumerAddress.consignee}
+                ${object.purchaseOrder.receiverName}
+            </td>
+            <td class="am-primary am-u-md-3">收货人联系方式</td>
+            <td class="am-u-md-3">
+                ${object.purchaseOrder.receiverPhone}
             </td>
             <tr>
                 <td class="am-primary am-u-md-3">发货地址</td>
-                <td class="am-u-md-3" colspan="3">${object.purchaseOrder.consumerAddress.province.name}&nbsp;${object.purchaseOrder.consumerAddress.city.name}&nbsp;${object.purchaseOrder.consumerAddress.district.name}&nbsp;${object.purchaseOrder.consumerAddress.details}</td>
+                <td class="am-u-md-3" colspan="3">
+                    ${object.purchaseOrder.purchaseOrderAddress}
+                </td>
             </tr>
             </tbody>
         </table>

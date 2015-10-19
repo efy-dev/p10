@@ -17,21 +17,21 @@
 
         <entity name="document" label="新闻公告" model="com.ming800.core.p.model.Document">
             <fields>
-                <field name="group" label="分类" inputType="text">
-                    <statusType fieldName="group">
-                        <item label="协会新闻" value="orgNews"/>
-                        <item label="行业新闻" value="industryNews"/>
-                        <item label="公告管理" value="noticeManage"/>
-                        <item label="协会介绍" value="assIntro"/>
-                        <item label="协会章程" value="assStatute"/>
-                        <item label="联系方式" value="assContact"/>
-                        <item label="非遗法" value="intLaw"/>
-                        <item label="非遗保护政策" value="intPolicy"/>
-                        <item label="非遗申报指南" value="submissionGuide"/>
-                        <item label="会员申请指南" value="memGuide"/>
-                        <item label="会员管理" value="memManagement"/>
-                    </statusType>
-                </field>
+                <!--<field name="group" label="分类" inputType="text">-->
+                    <!--<statusType fieldName="group">-->
+                        <!--<item label="协会新闻" value="orgNews"/>-->
+                        <!--<item label="行业新闻" value="industryNews"/>-->
+                        <!--<item label="公告管理" value="noticeManage"/>-->
+                        <!--<item label="协会介绍" value="assIntro"/>-->
+                        <!--<item label="协会章程" value="assStatute"/>-->
+                        <!--<item label="联系方式" value="assContact"/>-->
+                        <!--<item label="非遗法" value="intLaw"/>-->
+                        <!--<item label="非遗保护政策" value="intPolicy"/>-->
+                        <!--<item label="非遗申报指南" value="submissionGuide"/>-->
+                        <!--<item label="会员申请指南" value="memGuide"/>-->
+                        <!--<item label="会员管理" value="memManagement"/>-->
+                    <!--</statusType>-->
+                <!--</field>-->
                 <field name="status" label="申报状态" inputType="text">
                     <statusType fieldName="status">
                         <item label="审核中..." value="1"/>
@@ -99,8 +99,8 @@
                 </do>
             </does>
             <does>
-                <do name="plistPolicy" access="" label="非遗保护政策" result="" data="intPolicy">
-                    <query name="default" label="非遗保护政策" type="auto" orderBy="status:desc;documentOrder:desc">
+                <do name="plistPolicy" access="" label="政策法规" result="" data="intPolicy">
+                    <query name="default" label="政策法规" type="auto" orderBy="status:desc;documentOrder:desc">
                         <condition name="group" defaultValue="intPolicy" operation="eq"/>
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>

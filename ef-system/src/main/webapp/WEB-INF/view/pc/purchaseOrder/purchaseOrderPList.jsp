@@ -83,7 +83,7 @@
                         //console.log(e.data);
                         $.ajax({
                             type:"get",
-                            data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
+                            data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data,logisticsCompanyZHCN:$('#logisticsCompany option:checked').text()},//输入框的值传递到后台
                             url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
                             success:function(data){
                                 $(obj).find("span").text("已发货");

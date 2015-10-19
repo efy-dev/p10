@@ -4,8 +4,10 @@ package com.efeiyi.ec.system.purchaseOrder.controller;
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
+import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,9 @@ public class PurchaseOrderController extends BaseController {
 
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     /**
      * ����
@@ -98,6 +103,17 @@ public class PurchaseOrderController extends BaseController {
 
                 }
             }
+
+
+            //发送短信提示发货 短信中提示的订单都是父订单的订单号
+            String sysOrder = null;
+            if(null == purchaseOrder.getFatherPurchaseOrder()){
+                sysOrder = purchaseOrder.getSerial();
+            }else{
+                sysOrder = purchaseOrder.getFatherPurchaseOrder().getSerial();
+            }
+            String logisticsCompanyZHCN = request.getParameter("logisticsCompanyZHCN");
+            this.smsCheckManager.send(purchaseOrder.getUser().getUsername(), "#purchaseOrderSerial#="+sysOrder+"&#LogisticsCompany#="+logisticsCompanyZHCN+"&#serial#="+serial, "1035759", PConst.TIANYI);
 
         }catch (Exception e){
             e.printStackTrace();
