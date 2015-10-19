@@ -56,7 +56,7 @@
                         <td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrderDelivery.createDateTime}"
                                                                     type="both" pattern="yyyy-MM-dd HH:mm"/></td>
 
-                        <td class="am-hide-sm-only">${purchaseOrderDelivery.consumerAddress.province.name}</td>
+                        <td class="am-hide-sm-only">${purchaseOrderDelivery.purchaseOrder.purchaseOrderAddress}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
