@@ -751,7 +751,7 @@ function getHfProduct(e){
       },
       error:function(){
 
-        alert("error","出错了，请联系管理员！！！");
+        alert("出错了，请联系管理员！！！");
         return false;
       },
       complete:function(){
