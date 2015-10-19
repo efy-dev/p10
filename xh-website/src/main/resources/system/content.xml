@@ -175,29 +175,11 @@
                         <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
-                <!--<do name="removeContent" label="删除" access=""-->
-                <!--result="redirect:/myDocument/doc.do?qm=plistMaterialDownload_default"/>-->
             </does>
-            <!--<does>-->
-            <!--<do name="direct2Jsp" access="" label="新建" result="/myDocument/newDoc"/>-->
-            <!--<do name="direct2JspUploadAttach" access="" label="上传附件" result="/myAttachment/newAttachment"/>-->
-            <!--<do name="heritageProjectForm" access="" label="添加/编辑非遗保护"-->
-            <!--result="/myHeritageProject/heritageProjectForm"/>-->
-            <!--<do name="memGuideForm" access="" label="添加/编辑会员申请指南" result="/myMember/memGuideForm"/>-->
-            <!--<do name="memManagementForm" access="" label="添加/编辑会员管理" result="/myMember/memManagementForm"/>-->
-            <!--</does>-->
         </entity>
 
         <entity name="intangibleCultureOrganization" label="各地协会"
                 model="com.efeiyi.ec.association.model.IntangibleCulturalOrganization">
-            <!--<fields>-->
-            <!--<field name="group" label="分类" inputType="text">-->
-            <!--<statusType fieldName="level">-->
-            <!--<item label="委员会名录" value="committeeAss"/>-->
-            <!--<item label="各地协会名录" value="association"/>-->
-            <!--</statusType>-->
-            <!--</field>-->
-            <!--</fields>-->
             <does>
                 <do name="plistCommitteeAssociation" access="" label="专业委员会" result="" data="committeeAss">
                     <query name="default" label="专业委员会" type="auto" orderBy="">
@@ -214,10 +196,6 @@
                     </query>
                 </do>
             </does>
-            <!--<does>-->
-            <!--<do name="direct2JspOrganization" access="" label="新增" result="/myDocument/newOrganization">-->
-            <!--</do>-->
-            <!--</does>-->
         </entity>
 
         <entity name="PCAddressProvince" label="省" model="com.efeiyi.ec.organization.model.AddressProvince">
@@ -292,6 +270,24 @@
                     <statusType fieldName="level">
                         <item label="美术" value="1"/>
                         <item label="技艺" value="2"/>
+                        <item label="类别3" value="3"/>
+                        <item label="类别4" value="4"/>
+                        <item label="类别5" value="5"/>
+                        <item label="类别6" value="6"/>
+                        <item label="类别7" value="7"/>
+                        <item label="类别8" value="8"/>
+                        <item label="类别9" value="9"/>
+                        <item label="类别10" value="10"/>
+                        <item label="类别11" value="11"/>
+                        <item label="类别12" value="12"/>
+                        <item label="类别13" value="13"/>
+                        <item label="类别14" value="14"/>
+                        <item label="类别15" value="15"/>
+                        <item label="类别16" value="16"/>
+                        <item label="类别17" value="17"/>
+                        <item label="类别18" value="18"/>
+                        <item label="类别19" value="19"/>
+                        <item label="类别20" value="20"/>
                     </statusType>
                 </field>
             </fields>
@@ -335,7 +331,6 @@
                 <do name="plistTenant" access="" label="传承人">
                     <query name="master" label="传承人" type="auto" orderBy="id:desc" groupby="type">
                         <condition name="status" defaultValue="0" operation="ne"/>
-                        <!--<groupby name="type" key="" gtype=""/>-->
                     </query>
                 </do>
             </does>
