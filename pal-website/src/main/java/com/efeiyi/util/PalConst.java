@@ -58,7 +58,7 @@ public class PalConst {
     public String authenticity = "authenticity";            //标签已查询次数
     public Long hour = 24l;             //查码时间跨度
     public Long timeIncrement = 1000 * 3600 * 24 * hour;//时间跨度对应毫秒
-    public int timeLimit = 10000;   //查询结果页有效时间秒
+    public int timeLimit = 120000;   //查询结果页有效时间秒(2分)
     public boolean isTimeLimited = true;
     public boolean isNotTimeLimited = false;
 
