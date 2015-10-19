@@ -8,6 +8,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -27,7 +28,9 @@
         <div class="title">
             <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
         </div>
-        <div class="info">${project.description}</div>
+        <div class="info">
+            <c:if test="${fn:length(project.description)>186}">${fn:substring(project.description,0 ,186 )}......</c:if><c:if test="${fn:length(project.description)<=186}">${project.description}</c:if>
+        </div>
         <%--<a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>--%>
     </div>
   <!-- //End--explain-->
