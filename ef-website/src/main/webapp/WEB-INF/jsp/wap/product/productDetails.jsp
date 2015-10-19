@@ -73,7 +73,7 @@
                 <span class="select">数量</span>
                 <span class="add-sub">
                     <em class="sub btn-cart-no" onclick="subtractProduct()" href="#"></em>
-                    <input id = "value" class="ipt-txt" type="text" value="1">
+                    <input id = "value" class="ipt-txt" type="text" readOnly="true" value="1">
                     <em class="add" onclick="addProduct()" href="#"></em>
                 </span>
             </a>
