@@ -43,7 +43,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
                     <tr id="${banner.id}">
-                        <td>
+                        <td width="30%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -57,14 +57,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${banner.title}</td>
-                        <td class="am-hide-sm-only" width="20%">${banner.directUrl}</td>
-                        <td class="am-hide-sm-only" width="20%">
+                        <td class="am-hide-sm-only" width="15%">${banner.title}</td>
+                        <td class="am-hide-sm-only" width="25%">${banner.directUrl}</td>
+                        <td class="am-hide-sm-only" width="10%">
                             <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
                                     ${banner.bannerOrder}
                             </a>
                         </td>
-                        <td class="am-hide-sm-only"><img width="35px;" src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
+                        <td class="am-hide-sm-only"><img width="20px;" src="<c:url value="http://tenant.efeiyi.com/${banner.imageUrl}@!tenant-manage-banner"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
