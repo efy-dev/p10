@@ -173,7 +173,7 @@
                 </div>
                 <div class="page-leaveword">
                     <label>给店家留言</label>
-                    <input id="${tenant.id}Message" name="message" type="text" placeholder="(如需开具发票，请在此输入开票信息)" maxlength="45" onchange="updateCount(this)" style="color: black">
+                    <input id="${tenant.id}Message" name="message" type="text" placeholder="(如需开具发票，请在此输入开票信息)" maxlength="45" oninput="updateCount(this)" style="color: black">
                     <span id="${tenant.id}Count">0/45</span>
                 </div>
             </div>
@@ -205,7 +205,6 @@
         <!--结算-->
     </div>
 </div>
-
 <script>
 
     var payment = "1";
