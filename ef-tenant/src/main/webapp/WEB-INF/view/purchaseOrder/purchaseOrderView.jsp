@@ -53,8 +53,12 @@
 
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">收货人联系方式</td>
+                <td class="am-u-md-3">
+                    ${object.receiverPhone}
+                </td>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">
+                <td class="am-u-md-3">
                     ${object.purchaseOrderAddress}
                 </td>
             </tr>
