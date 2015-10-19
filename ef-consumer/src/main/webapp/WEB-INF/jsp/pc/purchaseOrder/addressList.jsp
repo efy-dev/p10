@@ -211,7 +211,8 @@
         var province=$("#provinceVal").val();
         var city=$("#cityVal").val();
         var phone=$("#ph").val();
-        var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+
         if(province == "请选择" || city == "请选择"){
             $("#hao").html("省市不能为空");
 
@@ -220,9 +221,11 @@
                 $("#addAddress").submit();
                 $("#pe").html("");
                 $("#hao").html("");
+            }else{
+                $("#pe").html("您的手机格式不正确");
+                $("#hao").html("");
             }
-            $("#pe").html("您的手机格式不正确");
-            $("#hao").html("");
+
         }
     }
     $(function () {
