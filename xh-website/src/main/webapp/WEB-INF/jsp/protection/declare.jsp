@@ -31,8 +31,10 @@
                         <p class="t1">1、申请表格下载并填写</p>
 
                         <p class="t2">
-                            <a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${object.documentAttachmentList}" var="dat" >${dat.path};</c:forEach>')" target="_blank"
-                               title="申请表格下载">申请表格下载</a>
+                            <%--<a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${object.documentAttachmentList}" var="dat" >${dat.path};</c:forEach>')" target="_blank"--%>
+                               <%--title="申请表格下载">申请表格下载</a>--%>
+                                <a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${masterApply.documentAttachmentList}" var="attachment" end="0">${attachment.path}</c:forEach>')" target="_blank"
+                                   title="申请表格下载">申请表格下载</a>
                         </p>
 
                         <p class="t3">* 项目说明，项目论证，项目管理，保护计划表格请在这里下载，填写，并上传。</p>
@@ -69,8 +71,10 @@
                     <li>
                         <p class="t1">1、申请表格下载并填写</p>
                         <p class="t2">
-                            <a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${object2.documentAttachmentList}" var="dat">${dat.path};</c:forEach>')" target="_blank"
-                               title="申请表格下载">申请表格下载</a>
+                            <%--<a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${object2.documentAttachmentList}" var="dat">${dat.path};</c:forEach>')" target="_blank"--%>
+                               <%--title="申请表格下载">申请表格下载</a>--%>
+                                <a href="javascript:void(0)" onclick="downloadFileOnPage('<c:forEach items="${projectApply.documentAttachmentList}" var="attachment" end="0">${attachment.path}</c:forEach>')" target="_blank"
+                                   title="申请表格下载">申请表格下载</a>
                        </p>
 
                         <p class="t3">* 项目说明，项目论证，项目管理，保护计划表格请在这里下载，填写，并上传。</p>
