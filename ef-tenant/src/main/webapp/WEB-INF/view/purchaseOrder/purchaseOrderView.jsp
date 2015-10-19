@@ -44,7 +44,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">收货人</td>
                 <td class="am-u-md-3">
-                    ${object.consumerAddress.consignee}
+                    ${object.receiverName}
                 </td>
                 <td class="am-primary am-u-md-3">下单时间</td>
                 <td class="am-u-md-3">
@@ -55,7 +55,7 @@
             <tr>
                 <td class="am-primary am-u-md-3">收货地址</td>
                 <td class="am-u-md-3" colspan="3">
-                    ${object.consumerAddress.province.name}&nbsp;${object.consumerAddress.city.name}&nbsp;${object.consumerAddress.district.name}&nbsp;${object.consumerAddress.details}
+                    ${object.purchaseOrderAddress}
                 </td>
             </tr>
             </tbody>
@@ -104,7 +104,6 @@
                 <th class="table-title">商品编号</th>
                 <th class="table-title">单价(元)</th>
                 <th class="table-title">数量</th>
-                <th class="table-title">实付款</th>
             </tr>
             </thead>
             <tbody>
@@ -130,9 +129,6 @@
                     </td>
                     <td>
                             ${purchaseOrderProduct.purchaseAmount}
-                    </td>
-                    <td>
-                        <fmt:formatNumber type="number" value="${purchaseOrderProduct.purchasePrice}" maxFractionDigits="2" minFractionDigits="2"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -266,7 +262,7 @@
                                         pattern="yyy-MM-dd hh:mm"/>
                     </td>
                     <td class="am-hide-sm-only">
-                            ${purchaseOrderDelivery.consumerAddress.province.name}&nbsp;${purchaseOrderDelivery.consumerAddress.city.name}&nbsp;${purchaseOrderDelivery.consumerAddress.district.name}&nbsp;${purchaseOrderDelivery.consumerAddress.details}
+                          ${purchaseOrderDelivery.purchaseOrder.purchaseOrderAddress}
                     </td>
                 </tr>
             </c:forEach>
