@@ -135,8 +135,8 @@ public class MyDocumentAttachmentController {
     public ModelAndView removeDocument(HttpServletRequest request, ApplicationMaterial material) throws Exception {
         String path = /*request.getContextPath() + */request.getParameter("resultPage");
 
-        baseManager.remove(material.getClass().getName(), material.getId());
-
+//        baseManager.remove(material.getClass().getName(), material.getId());
+        myDocumentManager.removeDocument(material);
         return new ModelAndView("redirect:" /*+ request.getContextPath()*/ + path);
     }
 

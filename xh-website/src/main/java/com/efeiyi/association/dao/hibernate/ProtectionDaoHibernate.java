@@ -29,7 +29,7 @@ public class ProtectionDaoHibernate implements ProtectionDao {
     @SuppressWarnings("JpaQlInspection")
     @Override
     public Object CheckDeclareState(String name, String sub_group) {
-        String hql = "From ApplicationMaterial as am WHERE am.subGroup = :subGroup AND am.name = :name";
+        String hql = "From ApplicationMaterial as am WHERE am.subGroup = :subGroup AND am.name = :name and status <> '0'";
         Query query = this.getSession().createQuery(hql)
                 .setString("name", name)
                 .setString("subGroup", sub_group);

@@ -14,7 +14,7 @@
 
 <body>
 <div class="slide-right">
-    <div class="title-hide">申报指南</div>
+    <div class="title-hide">申报提交</div>
     <div class="div-list" id="div-list">
         <div class="div-tab-btn">
             <span class="active">传承人申报<i class="icon"></i></span>
@@ -44,7 +44,7 @@
 
                         <p class="t2">
                             <a target="_blank" title="上传文件">上传文件</a>
-                            <input class="file" type="file" name="file"/>
+                            <input class="file" type="file" name="file" required/>
                             <%--<span>未上传文件</span>--%>
                             <span class="">传承人姓名<i class="icon"></i></span>
                             <input class="txt" type="text" name="name" required/>
@@ -84,7 +84,7 @@
 
                         <p class="t2">
                             <a target="_blank" title="上传文件">上传文件</a>
-                            <input class="file" type="file" name="file"/>
+                            <input class="file" type="file" name="file" required/>
                             <%--<span>未上传文件</span>--%>
                             <span class="">项目名称<i class="icon"></i></span>
                             <input class="txt" type="text" name="name" required/>
