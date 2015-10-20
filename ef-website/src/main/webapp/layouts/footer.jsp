@@ -37,9 +37,8 @@
         <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
 </div>
-
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js?v=11"></script>
 <!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
