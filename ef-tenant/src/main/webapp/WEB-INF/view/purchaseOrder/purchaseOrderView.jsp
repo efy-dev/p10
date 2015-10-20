@@ -90,6 +90,12 @@
                 <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
             </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">电话</td>
+                <td class="am-u-md-3">${consumer.phone}</td>
+                <td class="am-primary am-u-md-3">邮箱</td>
+                <td class="am-u-md-3">${consumer.email}</td>
+            </tr>
             </tbody>
         </table>
     </div>
