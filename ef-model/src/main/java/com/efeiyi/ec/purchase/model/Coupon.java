@@ -16,7 +16,7 @@ public class Coupon implements Serializable {
     private String id;
     private String serial;
     private CouponBatch couponBatch;//批次
-    private String status;//1未使用 2已使用
+    private String status;//1未使用 2已使用 3关闭
     private Consumer consumer;
 
     @Id
