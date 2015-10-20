@@ -25,6 +25,7 @@
         <module>xh-website</module>
         <module>xh-model</module>
         <module>ef-consumer</module>
+        <module>tg-website</module>
     </modules>
 
     <repositories>
