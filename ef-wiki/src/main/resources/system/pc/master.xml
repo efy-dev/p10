@@ -702,6 +702,7 @@
                     <query name="check" label="默认" type="auto" orderBy="createDateTime:desc">
                         <condition label="Id" name="user.id" defaultValue="0" operation="eq"/>
                         <condition label="Id" name="master.id" defaultValue="0" operation="eq"/>
+                        <condition label="zhuangtai" name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
                 <do name="plistMasterFollowed" access="" label="传承人推荐列表" result="/masterFollowed/masterFollowedPList">

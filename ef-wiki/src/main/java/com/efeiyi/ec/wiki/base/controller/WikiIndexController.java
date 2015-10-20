@@ -164,15 +164,15 @@ public class WikiIndexController extends WikibaseController {
             return "false";
         }
         if (oper.equalsIgnoreCase("del")){
-            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId";
+            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("projectId", projectid);
             ProjectFollowed pf = (ProjectFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (pf != null && pf.getId() != null)//说明已经关注
             {
-                baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
-
+                //baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
+                baseManager.remove(ProjectFollowed.class.getName(), pf.getId());//假删
                 long FsAmount =0;
                 if(project.getFsAmount() == null){
                     FsAmount =0;
@@ -212,7 +212,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("project_id", projectid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -242,7 +242,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", masterId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -263,15 +263,16 @@ public class WikiIndexController extends WikibaseController {
         }
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
         if(oper.equalsIgnoreCase("del")){
-            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId";
+            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("masterId", masterId);
             MasterFollowed mf = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (mf != null && mf.getId() != null)//说明已经关注
             {
-                baseManager.delete(MasterFollowed.class.getName(), mf.getId());
-
+                //baseManager.delete(MasterFollowed.class.getName(), mf.getId());
+                mf.setStatus("0");                                                      //假删除
+                baseManager.saveOrUpdate(MasterFollowed.class.getName(),mf);
                 long FsAmount =0;
                 if(master.getFsAmount() == null){
                     FsAmount =0;
@@ -325,7 +326,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -346,7 +347,7 @@ public class WikiIndexController extends WikibaseController {
         String oper = request.getParameter("operation");
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
@@ -372,13 +373,14 @@ public class WikiIndexController extends WikibaseController {
 
 
         if (oper != null && oper.equalsIgnoreCase("down")) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
             Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                  baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long FsAmount =0;
             if(product.getFsAmount() == null){
                 FsAmount =0;
@@ -468,7 +470,7 @@ public class WikiIndexController extends WikibaseController {
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
             //String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId";
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             //map.put("productId", product.getId());
@@ -494,15 +496,15 @@ public class WikiIndexController extends WikibaseController {
 
 
         if (oper != null && oper.equalsIgnoreCase("down")) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
             map.put("commentId", commentId);
             Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
-
+                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long Amount=0;
             if(productComment.getAmount() == null){
                 Amount=0;
