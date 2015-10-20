@@ -29,24 +29,6 @@
                     </statusType>
                 </field>
             </fields>
-            <!--<does>-->
-                <!--<do name="plistProject" access="" label="非遗项目" result="">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="documentOrder:desc">-->
-                        <!--<condition name="group" defaultValue="1" operation="eq"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-                <!--<do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistProject_default"/>-->
-            <!--</does>-->
-            <!--<does>-->
-                <!--<do name="plistTenant" access="" label="非遗传承人" result="">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="documentOrder:desc">-->
-                        <!--<condition name="group" defaultValue="2" operation="eq"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-                <!--<do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistTenant_default"/>-->
-            <!--</does>-->
             <does>
                 <do name="plistNewsOrganization" access="" label="协会新闻" result="" data="orgNews">
                     <query name="organization" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
@@ -156,15 +138,6 @@
                 </do>
                 <do name="removeContent" label="删除" access="" result="redirect:/myDocument/doc.do?qm=plistRole_default"/>
             </does>
-            <!--<does>-->
-                <!--<do name="plistMaterial" access="" label="项目申报管理" result="" data="submitAttach">-->
-                    <!--<query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">-->
-                        <!--<condition name="group" defaultValue="submitAttach" operation="eq"/>-->
-                        <!--<condition name="status" defaultValue="0" operation="ne"/>-->
-                    <!--</query>-->
-                <!--</do>-->
-                <!--<do name="removeContent" label="删除" access="" result="redirect:/myDocumentAttachment/attachment.do?qm=plistMaterialUpload_default"/>-->
-            <!--</does>-->
             <does>
                 <do name="plistMaterial" access="" label="申报资料上传管理" result="" data="submitAttach">
                     <query name="default" label="默认" type="auto" orderBy="status:desc;documentOrder:desc">
@@ -261,6 +234,12 @@
                         <!--<item label="苏绣" value="suxiu"/>-->
                     <!--</statusType>-->
                 <!--</field>-->
+                <field name="subGroup" label="申请类别" inputType="text">
+                    <statusType fieldName="subGroup">
+                        <item label="传承人申请" value="masterApply"/>
+                        <item label="项目申请" value="projectApply"/>
+                    </statusType>
+                </field>
                 <field name="status" label="申请状态" inputType="text">
                     <statusType fieldName="status">
                         <item label="待处理" value="1"/>

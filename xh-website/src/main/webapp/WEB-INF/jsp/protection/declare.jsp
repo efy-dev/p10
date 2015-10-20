@@ -14,7 +14,7 @@
 
 <body>
 <div class="slide-right">
-    <div class="title-hide">申报指南</div>
+    <div class="title-hide">申报提交</div>
     <div class="div-list" id="div-list">
         <div class="div-tab-btn">
             <span class="active">传承人申报<i class="icon"></i></span>
