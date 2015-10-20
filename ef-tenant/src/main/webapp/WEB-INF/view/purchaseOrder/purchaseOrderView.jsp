@@ -53,8 +53,12 @@
 
             </tr>
             <tr>
+                <td class="am-primary am-u-md-3">收货人联系方式</td>
+                <td class="am-u-md-3">
+                    ${object.receiverPhone}
+                </td>
                 <td class="am-primary am-u-md-3">收货地址</td>
-                <td class="am-u-md-3" colspan="3">
+                <td class="am-u-md-3">
                     ${object.purchaseOrderAddress}
                 </td>
             </tr>
@@ -85,6 +89,12 @@
                 <td class="am-u-md-3"><fmt:formatNumber type="number" value="${consumer.deposit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                 <td class="am-primary am-u-md-3">剩余积分</td>
                 <td class="am-u-md-3">${consumer.score}</td>
+            </tr>
+            <tr>
+                <td class="am-primary am-u-md-3">电话</td>
+                <td class="am-u-md-3">${consumer.phone}</td>
+                <td class="am-primary am-u-md-3">邮箱</td>
+                <td class="am-u-md-3">${consumer.email}</td>
             </tr>
             </tbody>
         </table>

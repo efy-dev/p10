@@ -306,7 +306,7 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
     position: relative;
 }
 .master-works .works-list .list-con li {
-    width:48%;
+    width:100%;
     float: left;
     margin-bottom: 1rem;
 }

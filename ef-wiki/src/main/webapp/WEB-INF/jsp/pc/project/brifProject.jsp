@@ -203,7 +203,7 @@
           return true;
         }
         if(data=="error"){
-          showAlert("提示","未知错误，请联系管理员！！！");
+          showAlert("未知错误，请联系管理员！！！");
           return false;
         }
       },
