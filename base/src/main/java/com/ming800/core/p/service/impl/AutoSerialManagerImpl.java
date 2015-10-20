@@ -78,7 +78,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
 
         return returnSerial;*/
         Queue<Long> updateSerials = map.get(group);
-        if (updateSerials == null || updateSerials.isEmpty()) {
+        if (updateSerials == null) {
             synchronized (this) {
                 if (map.get(group) == null) {
                     map.put(group, new ConcurrentLinkedQueue<Long>());
