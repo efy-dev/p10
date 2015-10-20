@@ -26,8 +26,11 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
 
     @Autowired
     private CommonManager commonManager;
-    protected  static Stack<Long> updateSerials = new Stack<Long>();
-    protected static Map<String,Stack> map = new HashMap<String,Stack>();
+    //protected  static Stack<Long> updateSerials = new Stack<Long>();
+    //protected  static List<Long> updateSerials = new ArrayList<Long>();
+    //protected static Map<String,Stack> map = new HashMap<String,Stack>();
+    protected  static List<Long> updateSerials  = Collections.synchronizedList(new ArrayList());
+    protected static Map<String,List> map = new HashMap<String,List>();
     String prefix;
  /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
@@ -57,14 +60,22 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     public String nextSerial(String group) throws Exception {
        if(map.get(group) != null){
            updateSerials = map.get(group);
-           if (updateSerials.empty()){
+           //if (updateSerials.empty()){
+           if (updateSerials.isEmpty()){
                makeSerials( group);
            }
        }else{
            makeSerials( group);
        }
 
-       return updateSerials.pop().toString();
+       //return updateSerials.pop().toString();
+        String returnSerial;
+        synchronized(updateSerials){
+             returnSerial = updateSerials.get(0).toString();
+                            updateSerials.remove(0);
+        }
+
+        return returnSerial;
     }
 
     private void makeSerials(String group) throws Exception{
@@ -104,7 +115,8 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                     autoSerial.setSerial(serial);
                     autoSerialDao.saveOrUpdateObject(autoSerial);
                 }
-                updateSerials.push(serial);
+                //updateSerials.push(serial);
+                updateSerials.add(serial);
             }
             map.put(group,updateSerials);
         }else{
@@ -114,7 +126,8 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                     autoSerial.setSerial(serial);
                     autoSerialDao.saveOrUpdateObject(autoSerial);
                 }
-                updateSerials.push(serial);
+                //updateSerials.push(serial);
+                updateSerials.add(serial);
             }
             map.put(group,updateSerials);
         }
