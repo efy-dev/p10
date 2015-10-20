@@ -1,0 +1,15 @@
+<sitemesh>
+  <!--sitemesh  <mapping path="/main.do" decorator="/layouts/mainTemplate.jsp"/>-->
+    <!--&lt;!&ndash;<mapping path="/*" decorator="/layouts/mainTemplate.jsp"/>&ndash;&gt;-->
+  <mapping path="/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/order/myEfeiyi/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/comment/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/purchaseCollect/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/coupon/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
+  <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
+
+    <!--<mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>-->
+    <!--<mapping path="/pc/login.do" decorator="/layouts/iframe.jsp"/>-->
+    <!--<mapping path="/" decorator="/layouts/iframe.jsp"/>-->
+    <!--<mapping path="/imgView.jsp*" exclue="true" />-->
+</sitemesh>
