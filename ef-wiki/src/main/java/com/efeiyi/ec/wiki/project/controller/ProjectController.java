@@ -103,7 +103,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }

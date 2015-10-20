@@ -194,7 +194,7 @@
                       <p><span>县级传承人</span></p>
                     </c:otherwise>
                   </c:choose>
-                  <a class="btn-guan" href="#" onclick="saveMasterFllow('${product.master.id}')">
+                  <a class="btn-guan" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')">
 
                     <c:if test="${flag == true}">
                       <input id="saveMasterFllow" type="hidden" value="0">
@@ -280,15 +280,35 @@
           return false;
         }
         if(data=="true"){
-          $("#"+masterId).html("取消关注");
+               //$("#"+masterId).html("取消关注");
+          var parentE = $("#saveMasterFllow").parent();
+          parentE.empty();
+          if(val=="1"){
+            //var val = $("#saveMasterFllow").val("1");
+            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
+          }
+          if(val=="0"){
+            //var val = $("#saveMasterFllow").val("0");
+            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
+          }
           return true;
         }
         if(data=="del"){
-          $("#"+masterId).html("关注");
+          //$("#"+masterId).html("关注");
+          var parentE = $("#saveMasterFllow").parent();
+          parentE.empty();
+          if(val=="0"){
+            //var val = $("#saveMasterFllow").val("1");
+            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"1\"> <i class=\"gz-icon\"></i> <em>关注</em>");
+          }
+          if(val=="1"){
+            //var val = $("#saveMasterFllow").val("0");
+            parentE.append("<input id=\"saveMasterFllow\" type=\"hidden\" value=\"0\"> <em>已关注</em>");
+          }
           return true;
         }
         if(data=="error"){
-          showAlert("提示","未知错误，请联系管理员！！！");
+          alert("未知错误，请联系管理员！！！");
           return false;
         }
       },
@@ -298,12 +318,7 @@
         return false;
       },
       complete:function(){
-        if(oper=="0"){
-          var val = $("#saveMasterFllow").val("1");
-        }
-        if(oper=="1"){
-          var val = $("#saveMasterFllow").val("0");
-        }
+
       }
     });
   }

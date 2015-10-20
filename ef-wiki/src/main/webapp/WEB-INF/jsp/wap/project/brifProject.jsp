@@ -58,6 +58,7 @@
       });
 
       $("#waterfall li").mouseout(function(){
+
         $(this).removeClass("hover");
         $(this).find(".zoom,.ilike").hide();
       });

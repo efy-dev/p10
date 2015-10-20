@@ -2,6 +2,8 @@ package com.efeiyi.ec.controller;
 
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.impl.BaseManagerImpl;
+import com.ming800.core.p.service.AutoSerialManager;
+import com.ming800.core.p.service.impl.AutoSerialManagerImpl;
 import org.apache.log4j.Logger;
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Administrator on 2015/7/31.
  *
  */
+
 @Controller
 public class WikiIndexControllerTest {
     private static Logger logger = Logger.getLogger(WikiIndexControllerTest.class);
@@ -25,7 +30,8 @@ public class WikiIndexControllerTest {
     //ModelAndView mv ;
     @Autowired
     BaseManager baseManager;
-
+    @Autowired
+    AutoSerialManager autoSerialManager;
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
 
@@ -49,7 +55,7 @@ public class WikiIndexControllerTest {
         response = new MockHttpServletResponse();
         request.setCharacterEncoding("UTF-8");
         baseManager=(BaseManagerImpl)applicationContext.getBean("baseManagerImpl");
-
+        autoSerialManager=(AutoSerialManagerImpl)applicationContext.getBean("autoSerialManagerImpl");
     }
 
     @After
@@ -64,6 +70,9 @@ public class WikiIndexControllerTest {
 
     @Test
     public void demo2()throws  Exception{
+        for (int i=0 ;1<=1000;i++){
+           System.out.println(autoSerialManager.nextSerial("product"));
+        }
 
 
     }
