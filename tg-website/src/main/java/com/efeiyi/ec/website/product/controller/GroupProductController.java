@@ -34,5 +34,22 @@ public class GroupProductController {
         model.addAttribute("groupProductList",groupProductList);
         return "";
     }
+    /**
+     * 开团详情页
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/groupProduct/{productId}")
+    @ResponseBody
+    public String groupProductDetails(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("listGroupProduct_default",request);
+        List<Object> groupProductList = baseManager.listObject(xQuery);
+        model.addAttribute("groupProductList",groupProductList);
+        return "";
+    }
+
+
+
 
 }
