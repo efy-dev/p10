@@ -508,7 +508,7 @@
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
                                     "</div></a> </div> <div class=\"suit-zt--2-text am-u-sm-7 am-u-end\"> " +
                                     "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
-                                    "<a href=\"#\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+                                    "<a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
 
                         }
 

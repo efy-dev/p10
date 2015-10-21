@@ -133,7 +133,11 @@ public class WikiIndexController extends WikibaseController {
         } else {
             model.addAttribute("isShow", "no");
         }
-
+        String path = request.getContextPath();
+        String basePath = request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + path + "/";
+        model.addAttribute("basePath", basePath);
         return new ModelAndView("/hotProjects/PopularProjects");
     }
 
