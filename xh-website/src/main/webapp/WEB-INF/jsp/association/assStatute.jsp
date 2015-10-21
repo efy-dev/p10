@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="slide-right">
-  <div class="title">中国非物质文化遗产保护协会-<ming800:status name="group" dataType="document.group" checkedValue='${group}' type="normal"/></div>
+  <div class="title">中国非物质文化遗产保护协会-协会章程</div>
   <div class="div-list">
     <ul class="div-list-ul">
       <li>
