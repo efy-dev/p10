@@ -22,7 +22,10 @@ public class GroupController {
 
     @RequestMapping(value = "/createGroup.do")
     public String listProduct(HttpServletRequest request, Model model) throws Exception{
-        MyUser currentUser = AuthorizationUtil.getMyUser();
+       /* MyUser currentUser = AuthorizationUtil.getMyUser();
+        if(currentUser != null){
+
+        }*/
         return "";
     }
 }
