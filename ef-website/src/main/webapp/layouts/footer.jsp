@@ -24,7 +24,7 @@
     </div>
     <div class="copyright wh">
         <div class="phone">
-            <strong>商家入住热线</strong>
+            <strong>商家入驻热线</strong>
             <em>400-876-8766</em>
         </div>
         <div class="frlinks">
