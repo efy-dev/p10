@@ -32,6 +32,16 @@ public class AuthorizationUtil {
         }
     }
 
+    public static boolean isAuthenticated() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        try {
+            return authentication.isAuthenticated();
+        }catch (Exception e){
+            return false;
+        }
+    }
+
 
     public static User getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();

@@ -6,6 +6,7 @@ import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -30,6 +31,9 @@ public class CartController {
 
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private CartManager cartManager;
 
     @RequestMapping({"/cart/view"})
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
@@ -108,9 +112,32 @@ public class CartController {
     }
 
 
+    private Cart getCurrentCart(HttpServletRequest request) {
+        Cart cart;
+        if (AuthorizationUtil.isAuthenticated()) {
+            cart = cartManager.fetchCart();
+        } else {
+            Object cartObj = request.getSession().getAttribute("cart");
+            if (cartObj != null) {
+                cart = (Cart) cartObj;
+            } else {
+                cart = new Cart();
+                cart.setCartProductList(new ArrayList<CartProduct>());
+                cart.setTotalPrice(new BigDecimal(0));
+            }
+        }
+        return cart;
+    }
+
+    /*
+        1.获取Cart （需要知道是否登陆来判断cart的来源，1.数据库 2.session）
+        2.判断当前的商品是否在购物车中存在，如果存在单纯增加数量，在增加数量的时候需要判断库存
+
+        在该方法中需要做的就是判断是否登陆得到购物车，然后取到ProductModel 调用CartManager的方法
+
+     */
     @RequestMapping({"/cart/addProduct.do"})
     public String addProduct(HttpServletRequest request, Model model) throws Exception {
-
         String url = request.getParameter("redirect");
         if (url == null) {
             model.addAttribute("redirect", "");
@@ -118,156 +145,19 @@ public class CartController {
             model.addAttribute("redirect", url);
         }
         String productId = request.getParameter("id");
+        ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productId);
+        cartManager.addToCart(getCurrentCart(request), productModel, Integer.parseInt(request.getParameter("amount")));
         // 需要判断用户是否登录
-        Cart cart = null;
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        if (currentUser.getId() != null) {
-            XQuery xQuery = new XQuery("listCart_default", request);
-            List<Object> list = baseManager.listObject(xQuery);
-            cart = (Cart) list.get(0);
-        } else {
-            Object cartTemp = request.getSession().getAttribute("cart");
-            if (cartTemp != null) {
-                cart = (Cart) cartTemp;
-                if (cart.getCartProductList() == null) {
-                    cart.setCartProductList(new ArrayList<CartProduct>());
-                }
-            } else {
-                cart = new Cart();
-                cart.setCartProductList(new ArrayList<CartProduct>());
-                request.getSession().setAttribute("cart", cart);
-            }
-        }
-
-        boolean ne = false;
-        boolean ab = false;
-
-//        XQuery xQuery1 = new XQuery("listCartProduct_default", request);
-//        xQuery1.put("cart_id", cart.getId());
-        List<CartProduct> list1 = cart.getCartProductList();
-
-        if (list1.size() > 0) {
-            for (CartProduct cartProductTemp : list1) {
-                CartProduct cartProduct = cartProductTemp;
-                cartProduct.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProduct.getProductModel().getId()));
-                if (productId.equals(cartProduct.getProductModel().getId())) {
-                    if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
-                        if (cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")) < cartProduct.getProductModel().getAmount()) {
-                            cartProduct.setAmount(cartProduct.getAmount() + Integer.parseInt(request.getParameter("amount")));
-                        } else {
-                            cartProduct.setAmount(cartProduct.getProductModel().getAmount());
-                        }
-                    } else {
-                        if (cartProduct.getAmount() + 1 < cartProduct.getProductModel().getAmount()) {
-                            cartProduct.setAmount(cartProduct.getAmount() + 1);
-                        } else {
-                            cartProduct.setAmount(cartProduct.getProductModel().getAmount());
-                        }
-                    }
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-
-                    ab = true;
-                    ne = true;
-
-                }
-            }
-        }
-        if (!ne) {
-            ProductModel product = new ProductModel();
-            product.setId(productId);
-            CartProduct cartProduct = new CartProduct();
-            cartProduct.setProductModel(product);
-            if (cart.getId() != null) {
-                cartProduct.setCart(cart);
-            }
-            cartProduct.setStatus("1");
-            cartProduct.setIsChoose("1");
-            if (null != request.getParameter("amount") && "" != request.getParameter("amount")) {
-                cartProduct.setAmount(Integer.parseInt(request.getParameter("amount")));
-            } else {
-                cartProduct.setAmount(1);
-            }
-            cart.getCartProductList().add(cartProduct);
-            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-            ab = true;
-        }
-
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        } else {
-            updateTotalPrice(cart);
-        }
 
         return "/purchaseOrder/addProductSuccess";
     }
 
     @RequestMapping({"/cart/removeProduct.do"})
     public String removeProduct(HttpServletRequest request) throws Exception {
-        String cartId = request.getParameter("cartProductId");
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            String cartProductId = request.getParameter("cartProductId");
-            baseManager.remove(CartProduct.class.getName(), cartProductId);
-        } else {
-            String cartProductId = request.getParameter("cartProductId");
-            baseManager.remove(CartProduct.class.getName(), cartProductId);
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getId().equals(cartProductId)) {
-                    cart.getCartProductList().remove(cartProductTemp);
-                    break;
-                }
-            }
-        }
-
-        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), request.getParameter("cartProductId"));
-
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            Cart cart = cartProduct.getCart();
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        } else {
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
-            float totalPrice = 0;
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                cartProductTemp = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                    float price = cartProductTemp.getProductModel().getPrice().floatValue() * cartProductTemp.getAmount();
-                    totalPrice += price;
-                }
-            }
-            cart.setTotalPrice(new BigDecimal(totalPrice));
-            cartProduct.setCart(cart);
-        }
-
-
+        String cartProductId = request.getParameter("cartProductId");
+        CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
+        cartManager.removeFromCart(getCurrentCart(request), cartProduct);
         return "redirect:/cart/view";
-    }
-
-
-    private void updateTotalPrice(Cart cart) {
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (CartProduct cartProductTemp : cart.getCartProductList()) {
-            ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId());
-            cartProductTemp.setProductModel(productModel);
-            if (cartProductTemp.getIsChoose() != null && cartProductTemp.getIsChoose().equals("1")) {
-                totalPrice = totalPrice.add(cartProductTemp.getProductModel().getPrice().multiply(new BigDecimal(cartProductTemp.getAmount())));
-            }
-        }
-        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-        cart.setTotalPrice(totalPrice);
     }
 
     @RequestMapping({"/cart/addProductCount.do"})
@@ -275,31 +165,7 @@ public class CartController {
     public Object addProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        if (cartProduct.getAmount() < cartProduct.getProductModel().getAmount()) {
-            cartProduct.setAmount(cartProduct.getAmount() + 1);
-            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-
-            if (AuthorizationUtil.getMyUser().getId() != null) {
-                Cart cart = cartProduct.getCart();
-                updateTotalPrice(cart);
-                baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            } else {
-                Cart cart = (Cart) request.getSession().getAttribute("cart");
-                for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                    if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                        cartProductTemp.setAmount(cartProduct.getAmount());
-                    }
-                }
-                updateTotalPrice(cart);
-                cartProduct.setCart(cart);
-            }
-
-            return cartProduct;
-        } else {
-            cartProduct = null;
-            return cartProduct;
-        }
-
+        return cartManager.addCount(getCurrentCart(request), cartProduct);
     }
 
     @RequestMapping({"/cart/changeProductCount.do"})
@@ -308,33 +174,7 @@ public class CartController {
         String cartProductId = request.getParameter("cartProductId");
         String productAmount = request.getParameter("amount");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        if (Integer.parseInt(productAmount) <= cartProduct.getProductModel().getAmount()) {
-            cartProduct.setAmount(Integer.parseInt(productAmount));
-            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-            /*cartProduct.setAmount(cartProduct.getProductModel().getAmount());
-            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);*/
-            if (AuthorizationUtil.getMyUser().getId() != null) {
-                Cart cart = cartProduct.getCart();
-                updateTotalPrice(cart);
-                baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            } else {
-                Cart cart = (Cart) request.getSession().getAttribute("cart");
-                for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                    if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                        cartProductTemp.setAmount(cartProduct.getAmount());
-                    }
-                }
-                updateTotalPrice(cart);
-                cartProduct.setCart(cart);
-            }
-
-            return cartProduct;
-
-        } else {
-            cartProduct = null;
-            return cartProduct;
-
-        }
+        return cartManager.changeCount(getCurrentCart(request), cartProduct, Integer.parseInt(productAmount));
 
     }
 
@@ -343,28 +183,7 @@ public class CartController {
     public Object subtractProductCount(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        if (cartProduct.getAmount() > 1) {
-            cartProduct.setAmount(cartProduct.getAmount() - 1);
-            baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-        }
-
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            Cart cart = cartProduct.getCart();
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        } else {
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
-            updateTotalPrice(cart);
-            cartProduct.setCart(cart);
-        }
-
-
-        return cartProduct;
+        return cartManager.subtractCount(getCurrentCart(request), cartProduct);
     }
 
     @RequestMapping({"/cart/chooseProduct.do"})
@@ -372,33 +191,8 @@ public class CartController {
     public Object chooseProduct(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        cartProduct.setIsChoose("1"); //1代表选中
-        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-        Cart cart = null;
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            cart = cartProduct.getCart();
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        } else {
-            cart = (Cart) request.getSession().getAttribute("cart");
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
 
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (cartProductTemp.getId().equals(cartProductId)) {
-                    cartProductTemp.setIsChoose("1");
-//                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-                }
-            }
-            updateTotalPrice(cart);
-        }
-
-
-        return cart;
+        return cartManager.chooseProduct(getCurrentCart(request), cartProduct, "1");
 
     }
 
@@ -407,70 +201,19 @@ public class CartController {
     public Object cancelChooseProduct(HttpServletRequest request) {
         String cartProductId = request.getParameter("cartProductId");
         CartProduct cartProduct = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductId);
-        cartProduct.setIsChoose("0"); //0代表取消选中
-        baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
-        Cart cart = null;
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            cart = cartProduct.getCart();
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        } else {
-            cart = (Cart) request.getSession().getAttribute("cart");
-            for (CartProduct cartProductTemp : cart.getCartProductList()) {
-                if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp.setAmount(cartProduct.getAmount());
-                }
-            }
 
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (cartProductTemp.getId().equals(cartProductId)) {
-                    cartProductTemp.setIsChoose("0");
-//                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-                }
-            }
-            updateTotalPrice(cart);
-        }
-        return cart;
+        return cartManager.chooseProduct(getCurrentCart(request), cartProduct, "0");
     }
 
     @RequestMapping("/cart/chooseTenant.do")
     @ResponseBody
     public String chooseTenant(HttpServletRequest request) {
         String tenantId = request.getParameter("tenantId");
-        String cartId = request.getParameter("cartId");
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
-                    cartProductTemp.setIsChoose("1");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-                }
-            }
-
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
-            return result;
-        } else {
-//            Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                CartProduct cartProductTemp2 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp2.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
-                    cartProductTemp2.setIsChoose("1");
-                    cartProductTemp.setIsChoose("1");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp2);
-                }
-            }
-
-            updateTotalPrice(cart);
-//            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
-            return result;
-        }
+        Tenant tenant = new Tenant();
+        tenant.setId(tenantId);
+        Cart cart = cartManager.chooseTenant(getCurrentCart(request), tenant, "1");
+        String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
+        return result;
     }
 
 
@@ -478,37 +221,11 @@ public class CartController {
     @ResponseBody
     public String cancelChooseTenant(HttpServletRequest request) {
         String tenantId = request.getParameter("tenantId");
-        String cartId = request.getParameter("cartId");
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-
-            Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (cartProductTemp.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
-                    cartProductTemp.setIsChoose("0");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-                }
-            }
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
-            return result;
-        } else {
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                CartProduct cartProductTemp2 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProductTemp.getId());
-                if (cartProductTemp2.getProductModel().getProduct().getTenant().getId().equals(tenantId)) {
-                    cartProductTemp2.setIsChoose("0");
-                    cartProductTemp.setIsChoose("0");
-                    baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp2);
-                }
-            }
-            updateTotalPrice(cart);
-//            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
-            return result;
-        }
+        Tenant tenant = new Tenant();
+        tenant.setId(tenantId);
+        Cart cart = cartManager.chooseTenant(getCurrentCart(request), tenant, "0");
+        String result = "{\"tenantId\":\"" + tenantId + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
+        return result;
     }
 
 
@@ -517,42 +234,9 @@ public class CartController {
     public String chooseAll(HttpServletRequest request) {
         String cartId = request.getParameter("cartId");
         String chooseType = request.getParameter("chooseType");
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-
-            Cart cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-            List<CartProduct> cartProductList = cart.getCartProductList();
-
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (chooseType.equals("1")) {
-                    cartProductTemp.setIsChoose("1");
-                } else {
-                    cartProductTemp.setIsChoose("0");
-                }
-                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-            }
-
-            updateTotalPrice(cart);
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
-            return result;
-        } else {
-
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
-            List<CartProduct> cartProductList = cart.getCartProductList();
-            for (CartProduct cartProductTemp : cartProductList) {
-                if (chooseType.equals("1")) {
-                    cartProductTemp.setIsChoose("1");
-                } else {
-                    cartProductTemp.setIsChoose("0");
-                }
-                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
-            }
-            updateTotalPrice(cart);
-//            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-            String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice().toString() + "\"}";
-            return result;
-        }
-
+        Cart cart = cartManager.chooseAll(getCurrentCart(request), chooseType);
+        String result = "{\"chooseType\":\"" + chooseType + "\",\"totalPrice\":\"" + cart.getTotalPrice() + "\"}";
+        return result;
     }
 
     @RequestMapping({"/cart/cartAmount.do"})
