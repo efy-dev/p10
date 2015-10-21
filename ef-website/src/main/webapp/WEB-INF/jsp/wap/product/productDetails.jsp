@@ -39,6 +39,7 @@
                 <i class="icon icon-share"></i>
                 <p>分享</p>
             </a>
+            <div id="cover"><em class="bg"></em><img src="/scripts/upload/guide-share.png" alt=""></div>
             <a id ="show" onclick="collect('${productModel.id}')" class="addfav">
                 <i class="icon icon-addfav"></i>
 
