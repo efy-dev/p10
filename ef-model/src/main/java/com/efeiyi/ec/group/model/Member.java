@@ -1,6 +1,6 @@
 package com.efeiyi.ec.group.model;
 
-import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class Member {
 
     private String id;
-    private BigUser user;//用户
+    private MyUser user;//用户
     private String level;//
     private Member supMember;
     private List<Member> subMemberList;
@@ -36,11 +36,11 @@ public class Member {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public BigUser getUser() {
+    public MyUser getUser() {
         return user;
     }
 
-    public void setUser(BigUser user) {
+    public void setUser(MyUser user) {
         this.user = user;
     }
 
