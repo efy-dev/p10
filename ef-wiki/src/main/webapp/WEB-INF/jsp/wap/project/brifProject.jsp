@@ -357,7 +357,7 @@
         type:"get",
         url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
         data:"",
-        async:true,
+        async:false,
         dataType:"json",
         success:function(data){
           if(data==false){
@@ -402,10 +402,22 @@
             return false;
           }
           if(data=="true"){
+            if(oper=="add"){
+              $("#"+masterId).attr("about","1");
+            }
+            if(val=="del"){
+             $("#"+masterId).attr("about","0");
+            }
             $("#"+masterId).html("取消关注");
             return true;
           }
           if(data=="del"){
+            if(oper=="add"){
+              $("#"+masterId).attr("about","1");
+            }
+            if(val=="del"){
+              $("#"+masterId).attr("about","0");
+            }
             $("#"+masterId).html("关注");
             return true;
           }
@@ -420,12 +432,7 @@
           return false;
         },
         complete:function(){
-          if(oper=="0"){
-            var val = $("#"+masterId).attr("about","1");
-          }
-          if(oper=="1"){
-            var val = $("#"+masterId).attr("about","0");
-          }
+
         }
       });
     }
