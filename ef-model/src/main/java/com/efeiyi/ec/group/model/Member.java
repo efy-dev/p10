@@ -20,6 +20,8 @@ public class Member {
     private Member supMember;
     private List<Member> subMemberList;
     private String status;
+    private Group group;
+
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -78,5 +80,15 @@ public class Member {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
