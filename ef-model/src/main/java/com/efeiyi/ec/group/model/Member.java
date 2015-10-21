@@ -64,7 +64,7 @@ public class Member {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supMember")
     public List<Member> getSubMemberList() {
         return subMemberList;
     }

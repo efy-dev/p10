@@ -41,8 +41,7 @@ public class Group {
         this.groupProduct = groupProduct;
     }
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
     public List<Member> getMemberList() {
         return memberList;
     }
