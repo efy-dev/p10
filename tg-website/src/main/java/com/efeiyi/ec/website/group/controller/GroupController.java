@@ -1,7 +1,5 @@
 package com.efeiyi.ec.website.group.controller;
 
-import com.efeiyi.ec.organization.model.MyUser;
-import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
