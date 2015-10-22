@@ -182,7 +182,7 @@
                    /* out += '<li>' + '<img src="http://pro.efeiyi.com/' + data[i]["couponBatch"]["pictureUrl"] + '"  alt=""/>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
                             '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';*/
                     out += '<li>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
-                            '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
+                            '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全网通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
                 }
                 $(".ul-list").html(out);
             }
