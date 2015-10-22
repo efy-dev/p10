@@ -324,6 +324,10 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .list-class .ul-list-nav li a {width:100%;line-height: 40px;text-align: center;color:#000;float: left;font-size: 15px;border-top: 1px solid #000;border-bottom: 1px solid #000}
 .list-class .ul-list-nav li:nth-child(2) {width:34%;}
 .list-class .ul-list-nav li:nth-child(2) a{border-left: 1px solid #000;border-right: 1px solid #000}
+
+.list-class .ul-list-nav2 li {width:50%}
+.list-class .ul-list-nav2 li:nth-child(2) {width:50%;}
+
 .list-class .ul-nav-slice3 { padding:10px 20px;display: flex}
 .list-class .ul-nav-slice3 li {width:33%}
 .list-class .ul-nav-slice3 li a {width:100%;line-height:40px;color:#000;font-size:14px;text-align:center;float: left;border: 1px solid #000}
@@ -510,6 +514,5 @@ input[type="checkbox"],textarea {border-radius:0;box-shadow: none}
 .footer .info .wechat {background:url(../images/icon-wechat.png) no-repeat;background-size:153px auto;width:153px;height:153px;display:inline-block;margin:10px 0}
 .footer .copyright {text-align:center;font-size:10px;line-height:20px;border-top:1px #ccc solid;color:#999}
 
-.list-class .ul-list-nav2 li {width:50%}
-.list-class .ul-list-nav2 li:nth-child(2) {width:50%;}
+
 
