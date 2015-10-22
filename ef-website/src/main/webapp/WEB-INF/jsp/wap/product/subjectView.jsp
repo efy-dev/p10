@@ -8,7 +8,6 @@
 <artice class="custom">
   <div class="bd list-class">
     <ul class="bd ul-list-img">
-      <li class="bd"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" alt=""/></li>
       <li><p>${subject.subjectDescription.content}</p></li>
     </ul>
     <ul class="bd ul-list">
