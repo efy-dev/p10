@@ -586,6 +586,21 @@ ADD COLUMN `deliver_type`  char(8) NULL AFTER `cdkey`;
 
 
 
+CREATE TABLE `NewTable` (
+`id`  char(16) NOT NULL ,
+`name`  varchar(64) NULL ,
+`img`  varchar(255) NULL ,
+`redirect`  varchar(255) NULL ,
+`order`  int(11) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+
+
+
+
+
 
 
 
