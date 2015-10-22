@@ -80,7 +80,7 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="orderStatus" operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
-                        <condition name="serial" operation="eq" label="订单号" inputType="text"/>
+                        <condition name="serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDatetime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
@@ -126,7 +126,7 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
-                        <condition name="serial" operation="eq" label="优惠券序列号" inputType="text"/>
+                        <condition name="serial" operation="like" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
                         <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
@@ -173,7 +173,7 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" label="优惠券批次状态" inputType="default"/>
-                        <condition name="name"  operation="eq" label="优惠券批次名称"/>
+                        <condition name="name"  operation="like" label="优惠券批次名称"/>
                         <condition name="price"  operation="eq" label="优惠金额" inputType="text" dataType="float"/>
                         <condition name="priceLimit"  operation="eq" label="使用限制金额" inputType="text" dataType="float"/>
                         <condition name="startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
@@ -231,9 +231,9 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="发货状态" inputType="select_status" key="purchaseOrderDelivery.status"/>
-                        <condition name="serial" operation="eq" label="发货记录编号" inputType="text"/>
-                        <condition name="purchaseOrder.serial" operation="eq" label="订单号" inputType="text"/>
-                        <condition name="logisticsCompany" operation="likes" label="物流公司" inputType="text"/>
+                        <condition name="serial" operation="like" label="发货记录编号" inputType="text"/>
+                        <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
+                        <condition name="logisticsCompany" operation="like" label="物流公司" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
@@ -282,8 +282,8 @@
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="支付状态" inputType="select_status" key="purchaseOrderPayment.status"/>
-                        <condition name="serial" operation="eq" label="支付记录编号" inputType="text"/>
-                        <condition name="purchaseOrder.serial" operation="eq" label="订单号" inputType="text"/>
+                        <condition name="serial" operation="like" label="支付记录编号" inputType="text"/>
+                        <condition name="purchaseOrder.serial" operation="like" label="订单号" inputType="text"/>
                         <condition name="createDateTime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
                         <condition name="createDateTime" operation="le" label="截止时间" inputType="date" dataType="date"/>
                     </query>
