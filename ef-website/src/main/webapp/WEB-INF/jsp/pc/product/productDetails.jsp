@@ -98,7 +98,7 @@
 
                     <p class="p2"><ming800:status name="level" dataType="Project.level"
                                                   checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}"
-                                                  type="normal"/>大师</p>
+                                                  type="normal"/>传承人</p>
 
                     <div class="master-img-pt"><a href="http://${product.master.name}.efeiyi.com" target="_blank"
                                                   title=""><img
