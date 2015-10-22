@@ -1,5 +1,7 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.efeiyi.ec.group.model.GroupProduct;
+import com.efeiyi.ec.product.model.Product;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class GroupProductController {
         xQuery.put("status","1");
         List<Object> groupProductList = baseManager.listObject(xQuery);
         model.addAttribute("groupProductList",groupProductList);
-        return "/index";
+        return "/groupProduct/groupProductList";
     }
     /**
      * 开团详情页
@@ -41,12 +43,11 @@ public class GroupProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/groupProduct/{productId}")
-    public String groupProductDetails(@PathVariable String productId ,HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("listGroupProduct_default",request);
-        List<Object> groupProductList = baseManager.listObject(xQuery);
-        model.addAttribute("groupProductList",groupProductList);
-        return "";
+    @RequestMapping(value = "/groupProduct/{groupProductId}")
+    public String groupProductDetails(@PathVariable String groupProductId ,HttpServletRequest request, Model model) throws Exception {
+        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        model.addAttribute("groupProduct", groupProduct);
+        return "/groupProduct/groupProductDetails";
     }
 
 
