@@ -139,7 +139,7 @@ public class CartManagerImpl implements CartManager {
 
     @Override
     public CartProduct addCount(Cart cart, CartProduct cartProduct) {
-        if (stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount() + 1)) {
+        if (!stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount() + 1)) {
             cartProduct.setAmount(cartProduct.getAmount() + 1);
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
@@ -182,7 +182,7 @@ public class CartManagerImpl implements CartManager {
     @Override
     public CartProduct changeCount(Cart cart, CartProduct cartProduct, Integer count) {
         cartProduct.getProductModel().setAmount(count);
-        if (stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount())) {
+        if (!stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount())) {
             cartProduct.setAmount(cartProduct.getAmount() - 1);
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
