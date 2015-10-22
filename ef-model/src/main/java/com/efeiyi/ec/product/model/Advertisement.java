@@ -15,7 +15,8 @@ public class Advertisement {
     private String name;
     private String img;
     private String redirect;
-    private Integer order;
+    private Integer adsOrder;
+    private String status;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -55,12 +56,21 @@ public class Advertisement {
         this.name = name;
     }
 
-    @Column(name = "order")
-    public Integer getOrder() {
-        return order;
+    @Column(name = "ads_order")
+    public Integer getAdsOrder() {
+        return adsOrder;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setAdsOrder(Integer adsOrder) {
+        this.adsOrder = adsOrder;
+    }
+
+    @Column(name = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
