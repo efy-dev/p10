@@ -28,13 +28,12 @@ public class GroupProductController {
      * @throws Exception
      */
     @RequestMapping(value = "/groupProduct.do")
-    @ResponseBody
     public String listProduct(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listGroupProduct_default",request);
         xQuery.put("status","1");
         List<Object> groupProductList = baseManager.listObject(xQuery);
         model.addAttribute("groupProductList",groupProductList);
-        return "";
+        return "/index";
     }
     /**
      * 开团详情页
@@ -43,7 +42,6 @@ public class GroupProductController {
      * @throws Exception
      */
     @RequestMapping(value = "/groupProduct/{productId}")
-    @ResponseBody
     public String groupProductDetails(@PathVariable String productId ,HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listGroupProduct_default",request);
         List<Object> groupProductList = baseManager.listObject(xQuery);
