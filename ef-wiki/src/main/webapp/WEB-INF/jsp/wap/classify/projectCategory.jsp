@@ -166,7 +166,7 @@
           for(i in data.list){
 
             var moods =0;
-            if(data.list[i].fsAmount==null) {moods=data.list[i].fsAmount;}
+            if(data.list[i].fsAmount!=null) {moods = data.list[i].fsAmount;}
             var box = $("<ul class='hot' id='box'>" +
                     "<li><a href='#'><img src='"+data.list[i].picture_url+"'></a> " +
                     "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
