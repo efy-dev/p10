@@ -5,6 +5,7 @@ import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,12 +21,16 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     @Override
     public PurchaseOrder saveOrUpdatePurchaseOrder(Cart cart) {
-        return null;
+
+        PurchaseOrder purchaseOrder = createNewPurchaseOrder(cart.getCartProductList());
+        return purchaseOrder;
+
     }
 
     private PurchaseOrder createNewPurchaseOrder(List<CartProduct> cartProductList) {
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setUser(AuthorizationUtil.getMyUser());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         if (cartProductList != null && cartProductList.size() > 0) {
@@ -34,7 +39,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(),purchaseOrderProduct);
             }
         }
-        return null;
+        return purchaseOrder;
     }
 
     @Override
