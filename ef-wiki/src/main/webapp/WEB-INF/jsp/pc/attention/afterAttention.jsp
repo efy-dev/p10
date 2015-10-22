@@ -191,9 +191,9 @@
             var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"<c:url value='/project/brifProject.do?projectId='/>"+data[i].projectModel.projectId+"\"><img src=\""+data[i].projectModel.picture_url+"\"></a>" +
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
-                    "<a href=\"<c:url value='/project/brifProject.do?projectId='/>"+data[i].projectModel.projectId+"\"><div class=\"xz-left\">"+data[i].projectModel.works+"</div> </a><div class=\"xz-right\"> " +
+                    "<a href=\"<c:url value='/project/listProduct.do?projectId='/>"+data[i].projectModel.projectId+"\"><div class=\"xz-left\">"+data[i].projectModel.works+"</div> </a><div class=\"xz-right\"> " +
                     "<div>全部</div> <div>幅作品</div> </div> </div> " +
-                    "<p class=\"p1\">全部&nbsp;<a href=\"<c:url value='/project/brifProject.do?projectId='/>"+data[i].projectModel.projectId+"\"><span>"+data[i].projectModel.masters+"</span></a>&nbsp;位大师</p> </div> " +
+                    "<p class=\"p1\">全部&nbsp;<a href=\"<c:url value='/project/brifMaster.do?projectId='/>"+data[i].projectModel.projectId+"\"><span>"+data[i].projectModel.masters+"</span></a>&nbsp;位大师</p> </div> " +
                     "</div>");
 
             pubu.append(box);
