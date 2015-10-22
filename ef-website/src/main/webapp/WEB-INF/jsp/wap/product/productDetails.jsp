@@ -140,7 +140,7 @@
      <c:if test="${not empty productModel.product.tenant.id}">
          <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
-        <a class="btn-default" target="_blank"  title="咨询">咨询</a>
+        <%--<a class="btn-default" target="_blank"  title="咨询">咨询</a>--%>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a class="btn-buy" title="售罄">售罄</a>
