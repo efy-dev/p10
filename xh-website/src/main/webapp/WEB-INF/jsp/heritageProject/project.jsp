@@ -16,7 +16,7 @@
 <body>
 <!-- //End--slide-left-->
 <div class="slide-right">
-    <div class="title">国家非物质文化遗产国家名录项目</div>
+    <div class="title">国家级非物质文化遗产项目</div>
     <div class="div-list">
         <div class="filter-item">
             <jsp:include flush="true"
