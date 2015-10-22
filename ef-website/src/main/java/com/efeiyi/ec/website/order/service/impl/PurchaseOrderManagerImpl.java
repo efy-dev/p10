@@ -29,8 +29,10 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         if (cartProductList != null && cartProductList.size() > 0) {
-//            for (CartProduct cartProduct : cartProductList)
-//            PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+            for (CartProduct cartProduct : cartProductList) {
+                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder,cartProduct.getProductModel(),cartProduct.getAmount(),cartProduct.getProductModel().getPrice());
+                baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(),purchaseOrderProduct);
+            }
         }
         return null;
     }
