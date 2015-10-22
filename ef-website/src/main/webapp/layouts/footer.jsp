@@ -20,7 +20,7 @@
         <a class="line"></a>
         <a href="" target="_blank" title="诚信保障">诚信保障</a>
         <a class="line"></a>
-        <a href="<c:url value="/news"/> " target="_blank" title="新闻资讯">新闻资讯</a>
+        <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
     </div>
     <div class="copyright wh">
         <div class="phone">
