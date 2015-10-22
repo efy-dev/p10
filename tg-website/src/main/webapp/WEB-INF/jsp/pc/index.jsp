@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -12,5 +13,10 @@
 </head>
 <body>
 hello
+<c:forEach items="${groupProductList}" var="groupProduct">
+  ${groupProduct.id}
+  <img src="http://pro.efeiyi.com/${groupProduct.product.picture_url}"/>
+</c:forEach>
+
 </body>
 </html>

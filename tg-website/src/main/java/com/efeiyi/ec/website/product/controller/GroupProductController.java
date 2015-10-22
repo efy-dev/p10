@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Administrator on 2015/10/20.
  */
 @Controller
-@RequestMapping("/group")
+@RequestMapping("/product")
 public class GroupProductController {
     @Autowired
     private BaseManager baseManager;

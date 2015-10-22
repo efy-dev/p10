@@ -36,3 +36,9 @@ PRIMARY KEY (`id`)
 
 
 /----------------------团表生成------------------------/
+
+/-----------------------团表团长字段修改为关联biguser---------------------------/
+ALTER TABLE `group`
+CHANGE COLUMN `manmember_id` `man_user_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `create_datetime`;
+
+/-------------------------团表团长字段修改为关联biguser---------------------------/
