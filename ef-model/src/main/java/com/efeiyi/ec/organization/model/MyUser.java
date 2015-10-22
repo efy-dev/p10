@@ -87,7 +87,7 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     }
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tenant_id")
     public BigTenant getBigTenant() {
         return bigTenant;
