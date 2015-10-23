@@ -69,7 +69,7 @@ public class GroupProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/groupProduct/groupBuyStatus.do")
+    @RequestMapping(value = "/groupProduct/joinGroupStatus.do")
     public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
