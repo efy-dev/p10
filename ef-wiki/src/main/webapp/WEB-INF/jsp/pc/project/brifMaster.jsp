@@ -246,7 +246,7 @@
             var opertation ="0";
             checkIsAttentionMaster(masterid);
             if(isAttention==true){
-              word = "<em>取消关注</em>";
+              word = "<em>已关注</em>";
               opertation ="1";
             }
             var level=data.list[i].master.level;
@@ -277,7 +277,7 @@
 
             var box = $(" <li> <div class=\"text\"> <h4>"+data.list[i].master.fullName+"</h4> " +
                     "<p>"+levelName+"</p> <p><span>"+data.list[i].master.brief+"</span></p> " +
-                    "<a class=\"btn-guan\" href=\"#\"  about=\""+opertation+"\" onclick=\"saveMasterFllow(\""+data.list[i].master.id+"\")\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
+                    "<a class=\"btn-guan\" href=\"#\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
                     "<div class=\"img\"><img src=\""+data.list[i].master.favicon+"\"></div> </li>");
 
 
@@ -436,11 +436,26 @@
           return false;
         }
         if(data=="true"){
-          $("#"+masterId).html("取消关注");
+          //$("#"+masterId).html("取消关注");
+          $("#"+masterId).empty();
+          $("#"+masterId).append("<em>已关注</em>");
+          if(oper=="add"){
+            var val = $("#"+masterId).attr("about","1");
+          }
+          if(oper=="del"){
+            var val = $("#"+masterId).attr("about","0");
+          }
           return true;
         }
         if(data=="del"){
-          $("#"+masterId).html("关注");
+          $("#"+masterId).empty();
+          $("#"+masterId).append("<i class=\"gz-icon\"></i><em>关注</em>");
+          if(oper=="add"){
+            var val = $("#"+masterId).attr("about","1");
+          }
+          if(oper=="del"){
+            var val = $("#"+masterId).attr("about","0");
+          }
           return true;
         }
         if(data=="error"){
@@ -454,12 +469,7 @@
         return false;
       },
       complete:function(){
-        if(oper=="0"){
-          var val = $("#"+masterId).attr("about","1");
-        }
-        if(oper=="1"){
-          var val = $("#"+masterId).attr("about","0");
-        }
+
       }
     });
   }

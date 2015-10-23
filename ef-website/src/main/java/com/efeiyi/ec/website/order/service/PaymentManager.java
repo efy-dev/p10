@@ -15,4 +15,6 @@ public interface PaymentManager {
     Object wxpay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount,String openid);
 
     String wxNativePay(PurchaseOrderPaymentDetails purchaseOrderPaymentDetails, Float paymentAmount);
+
+    PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder);
 }

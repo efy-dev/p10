@@ -165,6 +165,10 @@
                 <match url="/basic/xm.do?qm=plistEcMaster_index"/>
                 <match url="/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"/>
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistAdvertisement_default" access="admin,manager" text_zh_CN="首页推荐广告">
+                <match url="/basic/xm.do?qm=plistAdvertisement_default"/>
+                <match url="/basic/xm.do?qm=formAdvertisement"/>
+            </jnode>
         </jnode>
     </jnode>
 

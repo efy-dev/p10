@@ -124,6 +124,7 @@ public class CartController {
                 cart = new Cart();
                 cart.setCartProductList(new ArrayList<CartProduct>());
                 cart.setTotalPrice(new BigDecimal(0));
+                request.getSession().setAttribute("cart",cart);
             }
         }
         return cart;

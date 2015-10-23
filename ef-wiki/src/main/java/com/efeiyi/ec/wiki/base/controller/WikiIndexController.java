@@ -7,9 +7,11 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.Praise2Product;
 import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.model.ProductStore;
+import com.efeiyi.ec.wiki.model.ProjectRecommendedModel;
 import com.efeiyi.ec.wiki.organization.service.UserManager;
 import com.efeiyi.ec.wiki.organization.service.imp.UserManagerImpl;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
@@ -116,10 +118,13 @@ public class WikiIndexController extends WikibaseController {
         List<ProjectRecommended> list = baseManager.listObject(query);
         model.addAttribute("popularProjectsList", list);
 
-        XQuery query2 = new XQuery("plistProjectRecommended_default", request);
+        XQuery query2 = new XQuery("listProjectRecommended_default", request);
         //query2.put("groupName","attentionProject");
-        List<ProjectRecommended> list2 = baseManager.listObject(query2);
-        model.addAttribute("attentionProjectsList", list2);
+        List<ProjectRecommended> list2 = baseManager.listObject(query2);//增加是否已经关注逻辑
+        List<ProjectRecommendedModel> list21  = projectConvertprojectModelUtil.getProjectRecommendedModels(list2);
+        List<ProjectRecommendedModel> list22  = getProjectRecommendedModels(list21,request);
+
+        model.addAttribute("attentionProjectsList", list22);
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
@@ -130,6 +135,8 @@ public class WikiIndexController extends WikibaseController {
             } else {
                 model.addAttribute("isShow", "no");
             }
+              /* List hadAttentionProjects =  afterAttention(request,model);
+            model.addAttribute("projectFolloweds", hadAttentionProjects);*/
         } else {
             model.addAttribute("isShow", "no");
         }
@@ -228,10 +235,14 @@ public class WikiIndexController extends WikibaseController {
     @RequestMapping("/brifProject.do")
     public ModelAndView getBrifProject(HttpServletRequest request, Model model) throws Exception {
         String projectId = request.getParameter("projectId");
+        String page = request.getParameter("page");
         Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
         boolean flag = checkIsAttention(request, model);//判断用户是否已经关注该项目
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
+        if(page!=null && page.equals("2")){
+            return new ModelAndView("/project/brifProject2");
+        }
         return new ModelAndView("/project/brifProject");
     }
 
@@ -589,4 +600,29 @@ public class WikiIndexController extends WikibaseController {
         }
      return res;
     }
+
+    public  List<ProjectRecommendedModel> getProjectRecommendedModels(List<ProjectRecommendedModel> projectRecommendedModels,HttpServletRequest request) throws Exception {
+        List<ProjectRecommendedModel> list = projectRecommendedModels;
+
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery query = new XQuery("listProjectFollowed_isShow", request);
+            query.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> projectFolloweds = baseManager.listObject(query);
+        for (ProjectRecommendedModel projectRecommendedModel : projectRecommendedModels){
+            for (ProjectFollowed projectFollowed : projectFolloweds){
+              if(projectRecommendedModel.getProject().getId().equals(projectFollowed.getProject().getId())){
+                  projectRecommendedModel.setAttention("1");
+              }
+
+            }
+        }
+
+        }
+        return list;
+    }
+
+
+
+
+
 }

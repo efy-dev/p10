@@ -5,7 +5,8 @@ $(function(){
             $(this).find('.top-wechat').stop(true).slideDown('fast');
         },function(){
             $(this).find('.top-wechat').stop(true).slideUp('fast');
-        })
+        });
+
     })();
     //
     (function(){
@@ -98,14 +99,8 @@ $(function(){
         $('.itemInfo .ul-list li').click(function(){
             $(this).addClass('active');
         })
-        //计算轮播图===图片大小进行定位
-        //var bigGlassli=$('.product-intro .itemInfo .preview .slider-main li');
-        //var bigGlassliImg=bigGlassli.find('img');
-        //bigGlassli.find('.zoom-section').css({'margin-left':-bigGlassliImg.width()/2+'px'})
-        //bigGlassli.find('.mousetrap').css({'width':'800px'})
-
     })();
-    //�
+    //
     (function(){
         $('#protocol').click(function(){
             $('.thickframe').show();
@@ -116,7 +111,7 @@ $(function(){
             return false;
         })
     })();
-    //�
+    //
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
         $('.clearing-site span a').click(function(){
@@ -196,13 +191,15 @@ $(function(){
         //文本框字数计算和提示改变
         if(ie){
             $tex[0].oninput = changeNum;
+        }else{
+            $tex[0].onpropertychange  = changeNum;
         }
         function changeNum(){
             //汉字的个数
             str = ($tex.val().replace(/\w/g,"")).length;
             //非汉字的个数
             abcnum = $tex.val().length-str;
-            total = str*2+abcnum;
+            // total = str*2+abcnum;
             if(str*2+abcnum<maxNum || str*2+abcnum == maxNum){
                 texts =Math.ceil((maxNum - (str*2+abcnum))/2);
                 $num.html("<span>"+(45-texts)+"/45</span>").children();
@@ -212,4 +209,5 @@ $(function(){
             }
         }
     })();
+
 })

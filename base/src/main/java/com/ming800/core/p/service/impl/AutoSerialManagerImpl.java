@@ -87,15 +87,20 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             }
 
         }
-        if(updateSerials.isEmpty()){
-            updateSerials = makeSerials(group);
+       if(updateSerials.isEmpty()){
+            synchronized (updateSerials) {
+                if( updateSerials.isEmpty()) {
+                    updateSerials = makeSerials(group);
+                }
+            }
         }
+
 
 
         return updateSerials.poll().toString();
     }
 
-    private synchronized Queue<Long> makeSerials(String group) throws Exception{
+    private  Queue<Long> makeSerials(String group) throws Exception{
         CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
         //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";

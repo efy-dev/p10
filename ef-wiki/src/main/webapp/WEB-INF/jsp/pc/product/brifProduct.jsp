@@ -79,7 +79,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a>工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId='/><%=request.getParameter("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct.do?projectId='/><%=request.getParameter("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
@@ -271,7 +271,7 @@
 
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){

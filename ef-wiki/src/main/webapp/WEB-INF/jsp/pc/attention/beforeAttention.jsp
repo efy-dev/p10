@@ -201,9 +201,9 @@
             var isA = checkIsAttention("'"+data[i].projectId+"'");
             var word ="";
             if(isA==true){
-              word="取消关注";
+              word="<em about=\"add\" id=\""+data[i].projectId+"\">已关注</em>";
             }else{
-              word="关注";
+              word="<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em>";
             }
               var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
@@ -212,7 +212,7 @@
                       "<p><strong>"+data[i].works+" 件作品</strong>" +
                       "<strong>"+data[i].masters+" 位大师</strong></p> " +
                       "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
-                      "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
+                      "<div class='gz-q'>"+word+" </div> " +
                       "</a> </div> </li>");
 
             pubu.append(box);
@@ -266,7 +266,7 @@
     var mark = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
@@ -276,13 +276,28 @@
           return false;
         }
         if(data=="true"){
-          $("#"+projectId).html("取消关注");
+          //$("#"+projectId).html("取消关注");
           mark = true;
+          $("#"+projectId).parent().parent().empty();
+          if(oper=="add" &&  mark == true){
+            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
+          }
+          if(oper=="del" &&  mark == true){
+            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
+          }
+
+
           return true;
         }
         if(data=="del"){
-          $("#"+projectId).html("关注");
+          //$("#"+projectId).html("关注");
           mark = true;
+          if(oper=="add" &&  mark == true){
+            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
+          }
+          if(oper=="del" &&  mark == true){
+            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
+          }
           return true;
         }
         if(data=="error"){
@@ -296,12 +311,12 @@
         return false;
       },
       complete:function(){
-        if(oper=="add" &&  mark == true){
+        /*if(oper=="add" &&  mark == true){
           var val = $("#"+projectId).attr("about","del");
         }
         if(oper=="del" &&  mark == true){
           var val = $("#"+projectId).attr("about","add");
-        }
+        }*/
       }
     });
   }

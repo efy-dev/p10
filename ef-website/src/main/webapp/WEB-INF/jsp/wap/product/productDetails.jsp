@@ -39,6 +39,7 @@
                 <i class="icon icon-share"></i>
                 <p>分享</p>
             </a>
+            <div id="cover"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture" alt=""></div>
             <a id ="show" onclick="collect('${productModel.id}')" class="addfav">
                 <i class="icon icon-addfav"></i>
 
@@ -53,7 +54,7 @@
         <div class="des-master">
          <c:if test="${not empty productModel.product.master.id}">
             <p class="p1"><span>${productModel.product.master.fullName}</span>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-            <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+            <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
             <p class="img"><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></p>
         </c:if>
         </div>
@@ -139,7 +140,7 @@
      <c:if test="${not empty productModel.product.tenant.id}">
          <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
-        <a class="btn-default" target="_blank"  title="咨询">咨询</a>
+        <%--<a class="btn-default" target="_blank"  title="咨询">咨询</a>--%>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a class="btn-buy" title="售罄">售罄</a>
@@ -294,7 +295,9 @@
         $("img").each(function(){
                 $(".user-favor").css("width","auto");
         })
-
+        $("img").each(function(){
+            $(".share-picture").css("width","auto");
+        })
     })
 </script>
 </body>
