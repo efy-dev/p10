@@ -7,7 +7,7 @@
         <div class="line"></div>
         <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
         <div class="line"></div>
-        <div class="icon wechat"></div>
+        <div class="icon wechat"><i class="icon"></i></div>
     </div>
     <div class="links wh">
         <a href="http://www.efeiyi.com/main/aboutUs" target="_blank" title="关于我们">关于我们</a>
