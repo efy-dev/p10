@@ -31,13 +31,13 @@ public class CouponBatch implements Serializable{
     private Float priceLimit;//使用限制价格 比如满100用
     private String pictureUrl;//优惠券图片
 
-//    private String type ; //优惠券类型  1 满减卷 2 现金卷  需要配置固定类型
-//    private String range; //优惠券使用范围 1 全场通用  2 品类使用 3 店铺使用 4 单品使用 需要在配置文件中配置一下固定类型
-//    private Project project; //品类  没有可以为空
-//    private Tenant tenant;  //店铺    没有可以为空
-//    private Product product; //单品   没有可以为空
-//    private String cdkey; //兑换码  需要系统生成  只有再发放方式为兑换码的时候才生成
-//    private String deliverType; //发放方式 1 发优惠券 2 发兑换码
+    private String type ; //优惠券类型  1 满减卷 2 现金卷  需要配置固定类型
+    private String range; //优惠券使用范围 1 全场通用  2 品类使用 3 店铺使用 4 单品使用 需要在配置文件中配置一下固定类型
+    private Project project; //品类  没有可以为空
+    private Tenant tenant;  //店铺    没有可以为空
+    private Product product; //单品   没有可以为空
+    private String cdkey; //兑换码  需要系统生成  只有再发放方式为兑换码的时候才生成 输入兑换码 生成优惠券 优惠券数量-1 直到0为止
+    private String deliverType; //发放方式 1 发优惠券 2 发兑换码
 
 
     @Transient
@@ -163,69 +163,69 @@ public class CouponBatch implements Serializable{
         this.priceLimit = priceLimit;
     }
 
-//    @Column(name = "type")
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-//
-//    @Column(name = "range")
-//    public String getRange() {
-//        return range;
-//    }
-//
-//    public void setRange(String range) {
-//        this.range = range;
-//    }
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "project_id")
-//    public Project getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(Project project) {
-//        this.project = project;
-//    }
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "tenant_id")
-//    public Tenant getTenant() {
-//        return tenant;
-//    }
-//
-//    public void setTenant(Tenant tenant) {
-//        this.tenant = tenant;
-//    }
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_id")
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-//
-//    @Column(name = "cdkey")
-//    public String getCdkey() {
-//        return cdkey;
-//    }
-//
-//    public void setCdkey(String cdkey) {
-//        this.cdkey = cdkey;
-//    }
-//
-//    @Column(name = "deliver_type")
-//    public String getDeliverType() {
-//        return deliverType;
-//    }
-//
-//    public void setDeliverType(String deliverType) {
-//        this.deliverType = deliverType;
-//    }
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Column(name = "range")
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(String range) {
+        this.range = range;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Column(name = "cdkey")
+    public String getCdkey() {
+        return cdkey;
+    }
+
+    public void setCdkey(String cdkey) {
+        this.cdkey = cdkey;
+    }
+
+    @Column(name = "deliver_type")
+    public String getDeliverType() {
+        return deliverType;
+    }
+
+    public void setDeliverType(String deliverType) {
+        this.deliverType = deliverType;
+    }
 }

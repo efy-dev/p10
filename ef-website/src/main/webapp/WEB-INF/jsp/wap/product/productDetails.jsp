@@ -109,7 +109,7 @@
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
-                                        <p class="name">${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
+                                        <p class="name">${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
                                             <%--<p class="time">2015-10-12   16:16</p>--%>
                                     </div>
                                     <div class="seller">

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "purchase_coupon")
 public class Coupon implements Serializable {
     private String id;
-    private String serial;
+    private String serial;//优惠券的编号
     private CouponBatch couponBatch;//批次
     private String status;//1未使用 2已使用 3关闭
     private Consumer consumer;

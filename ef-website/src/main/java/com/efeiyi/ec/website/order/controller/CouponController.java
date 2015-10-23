@@ -25,6 +25,9 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/9/14 0014.
+ * 优惠券的部分包括领取优惠券和使用优惠券
+ * 领取优惠卷则是列出所有可用优惠券，这里包括 1.全场通用的优惠券 2.店铺优惠券 3.单品优惠券 每个订单只能使用一张优惠券
+ * 每次注册用户的时候都需要发放一张优惠券，这个时候需要设定一下默认是发放哪种优惠券，后台加个接口选择一下需要发放的优惠券
  */
 @Controller
 public class CouponController {
@@ -32,32 +35,45 @@ public class CouponController {
     @Autowired
     private BaseManager baseManager;
 
+
+
     /**
-     * 我的卡卷
-     * @param request
-     * @param model
+     * 列出单品优惠券
      * @return
-     * @throws Exception
      */
-    @RequestMapping({"/coupon/list"})
-    public String listCoupon(HttpServletRequest request , Model model) throws Exception{
-        if(AuthorizationUtil.getMyUser().getId() != null){
-            XQuery couponQuery = new XQuery("listCoupon_default", request);
-            List<Object> couponList = baseManager.listObject(couponQuery);
-
-            model.addAttribute("couponList",couponList);
-
-            return "/purchaseOrder/couponList";
-        }else {
-            return "redirect:/sso.do";
-        }
-
-
+    @RequestMapping({"/listProductCoupon.do"})
+    @ResponseBody
+    public List<Object> listProductCoupon(){
+        return null;
     }
 
+    /**
+     * 列出店铺优惠券
+     * @return
+     */
+    @RequestMapping({"/listTenantCoupon.do"})
+    @ResponseBody
+    public List<Object> listTenantCoupon(){
+        return null;
+    }
 
     /**
-     * 可用优惠券
+     * 领取优惠券
+     * @return
+     */
+    @RequestMapping({"/claimCoupon.do"})
+    @ResponseBody
+    public boolean claimCoupon(){
+        return true;
+    }
+
+    @RequestMapping({"/exchangeCoupon.do"})
+    public boolean exchangeCoupon(){
+        return true;
+    }
+
+    /**
+     * 列出通用优惠券
      * @param request
      * @param model
      * @return
@@ -95,6 +111,7 @@ public class CouponController {
             return couponList;
     }
 
+    //使用优惠卷 使用优惠券可以放到manager中去处理 （使用优惠券只在结算页面可以使用）
     @RequestMapping({"/coupon/use.do"})
     @ResponseBody
     public boolean useCouponByOrder(HttpServletRequest request){
@@ -111,6 +128,13 @@ public class CouponController {
 
     }
 
+    /**
+     * 发放优惠券
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping({"/coupon/sentEverybodyACoupon"})
     public String sentCoupon(HttpServletRequest request , Model model) throws Exception{
         String time = request.getParameter("time");
