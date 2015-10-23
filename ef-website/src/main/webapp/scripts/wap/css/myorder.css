@@ -295,6 +295,8 @@ ul,dl{list-style:none}
 .ae{width: 100%;float: left;}
 .btn{padding: 0.75rem 0;width: 100%;background:#d42811;text-align: center;float: left;color: #fff;list-style: none;border: 0;outline: none}
 .btn:hover{color: #fff;}
+.gbtn{width: 100%;padding: 1.2rem 0;text-align: center;float: left;background: #000;color: #fff;position: relative}
+.pq{margin-left: 2%;width: 0.8rem;height: 0.8rem;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;transfrom:rotate(-45deg); -webkit-transform:rotate(-45deg);float: left;margin-top: 0.5rem}
 /*三角图标*/
 .s-icon{width: 1rem;height: 1rem;position: absolute;border-right: 1px solid #000;border-bottom: 1px solid #000;right: 1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/
     -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/}
@@ -308,7 +310,7 @@ ul,dl{list-style:none}
 /*------加载更多*/
 .more{text-align: center;font-size: 1.2rem;background: #e6e6e6;border-top: 1px solid #ccc;}
 .more a{width: 100%;float: left;padding: 0.7rem 0;font-size: 1.4rem;color: #000;position: relative}
-.more a .icon{background: url("../images/purchase.png")no-repeat 0 0;width: 15px;height: 17px;position: absolute;left: 25%;top: 30%;background-size: 17px;}
+.more a .icon{background: url("../images/purchase.png")no-repeat 0 0;width: 15px;height: 17px;position: absolute;left: 25%;top: 30%;background-size: 375%;}
 /*b01020301全部商品首页*/
 .all-bulk .price{  padding: 1rem 1.8rem;margin: 0}
 .all-bulk .price li{width: 33%;float: left;font-size: 1.2rem;color: #000;}
@@ -349,6 +351,15 @@ ul,dl{list-style:none}
 .colonel-table .col-pl ul li .p-img img{width: 100%}
 .colonel-table .col-pl ul li .p-img:nth-child(odd){float: left;}
 .colonel-table .col-pl ul li .p-img:nth-child(even){float: right;}
+.colonel-table .introduce{padding-top: 1.7rem}
+.colonel-table .introduce img{width: 100%;float: left;margin-bottom: 1.7rem}
+.colonel-table .introduce p{font-size: 14px;color: #000;margin-bottom: 2rem;width: 100%;float: left;padding:0 1.8rem}
+.colonel-table .introduce p strong{color: #999;font-weight: 100;}
+.colonel-table .introduce .button{padding:0 15%;margin-bottom: 2rem}
+.colonel-table .introduce .button span{padding-left: 2.3rem;}
+.colonel-table .introduce .button .icon1{width: 16px;height: 13px;background:url("../images/purchase.png") no-repeat -16px 1px;position: absolute;left: 25%;top: 38%;display: inline-block;background-size:37px auto;}
+.colonel-table .efeiyi-btn{position: relative;padding: 1.4rem 0;width: 100%;float: left;border-top: 1px solid #000;font-size: 1.4rem;color: #000;text-align: center}
+.colonel-table .efeiyi-btn .efiyi{width:10px;height: 10px;position: absolute;border-right: 1px solid #000;border-bottom: 1px solid #000;left: 65%;top: 50%;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);margin-top: -4px;margin-left: 0px;}
 /*申请退货*/
 .sales-return{padding-top: 4rem;font-weight: 400}
 .sales-return p:nth-child(1){font-size: 1.5rem;color: #000;text-align: center;margin-bottom: 1rem;width: 100%}
@@ -380,4 +391,49 @@ ul,dl{list-style:none}
 .my-packet .top .text p{font-size: 14px;color: #000;margin-bottom: 1.5rem}
 .my-packet .top .text p:last-child{margin-bottom: 0;}
 .my-packet .page p{font-size: 14px;color: #000;margin-bottom: 0.8rem}
+/*我的参团/开团*/
+.offered{padding: 1.6rem 1.8rem;}
+.offered li{width: 100%;float:left;position: relative;margin-bottom: 1.6rem;border-bottom: 1px solid #dedede;}
+.offered li p{font-size: 14px;margin-bottom: 1.6rem;color: #000;}
+.offered li p:nth-child(2){font-size: 12px;color: #999;}
+.offered li span{color:#ff0000;font-size: 12px;position: absolute;right: 0;margin-top: -22px;top: 50%;}
+/*开团详情*/
+.my-colonel .cost{margin-top: 0.4rem}
+.my-colonel .cost .txt1{font-size: 12px;color:#999;float: left;width:40%;text-align:left;padding:0.7rem 0 0 1.8rem;}
+.my-colonel .cost .txt2{width: 60%;float: right;}
+.my-colonel .cost .txt2 em{padding: 0.6rem 0.9rem;float:right;background-color:#d42811;font-size: 14px;color: #fff;}
+.my-colonel .cost .txt2 .icon{width: 17px;height: 36px;background: url('../images/purchase.png')no-repeat 2px -29px;float: right;}
+.my-colonel .iwill{border-top: 1px solid #ccc;margin-top: 0.4rem;padding:1.5rem 1.8rem 0;}
+.my-colonel .iwill .txt3{font-size: 1.2rem;color: #666;padding: 1.6rem 0;}
+.my-colonel .iwill .txt4{font-size: 1.2rem;color: #666;padding: 1.6rem 3.5rem 1.6rem 0;position: relative}
+.my-colonel .iwill .txt4 .txcon{width: 3.2rem;height: 2.2rem;background: url("../images/purchase.png")no-repeat -28px -41px;position: absolute;right: 0;top: 35%;}
+.my-colonel .iwill .page{margin-bottom: 1.5rem}
+.my-colonel .iwill .page .left{width: 48%;font-size: 14px;color: #000;float: left}
+.my-colonel .iwill .page .right{width: 47%;float: right;font-size: 14px;color: #000;text-align: right}
+/*未参团人打开*/
+.join .txt-page{font-size: 12px;color: #000;}
+.join .time{font-size: 26px;color: #000;}
+.join .txt-page span:nth-child(2){float: right}
+.join .txt-page span:nth-child(1){float: left}
+.join .Powerweb{height: 1rem;position: relative;margin: 0.6rem 0;}
+.join .Powerweb .black{background: #000;height: 1rem;position: absolute;left: 0;top: 0;}
+.join .Powerweb .gray{background: #f3f3f3;width: 100%;height: 1rem;}
+/*待评价/全部/待收货/待发货*/
+.od-tab1 .product li{float: left;width: 100%;padding-bottom: 4px;border-bottom: 1px solid #ccc;border-top: 1rem solid #f2f2f2}
+.od-tab1 .product li:nth-child(1){border-top: 0;}
+.od-tab1 .product li{}
+.od-tab1 .product li .top{padding: 0.8rem 1.8rem;font-size: 1.2rem;color: #000;width: 100%;float: left;border-top: 1px solid #ccc;}
+.od-tab1 .product li .top span{float: left;position: relative}
+.od-tab1 .product li .top span:last-child{float: right;color:#cc0000;}
+.od-tab1 .product li .center{padding: 1.6rem 1.8rem;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;position: relative}
+.od-tab1 .product li .center .pic{position: absolute;left: 1.8rem;top:1.6rem;width: 125px;height: 125px;}
+.od-tab1 .product li .center .pic img{width: 100%;}
+.od-tab1 .product li .center .txt{padding-left: 143px;height: 11rem;}
+.od-tab1 .product li .center .txt p{font-size: 12px;color: #000;margin-bottom: 1.6rem}
+.od-tab1 .product li .bottom{padding: 0 1.8rem;margin-top: 4px}
+.od-tab1 .product li .bottom .left{float: left;font-size: 12px;color: #000;margin-top: 10px;width: 20%}
+.od-tab1 .product li .bottom .right{float: right;width: 80%}
+.od-tab1 .product li .bottom .right li{margin-bottom: 0;float: right;width: 70px;height: 36px;border: 1px solid #000;padding: 0.6rem 0;text-align: center;margin-right: 1%;border-radius: 4px;}
+.od-tab1 .product li .bottom .right li a{width: 100%;float: left;font-size: 1.2rem;color: #000;}
+
 

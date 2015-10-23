@@ -261,7 +261,7 @@
                                         ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                     </c:set>
                                     <div class="user"><i
-                                            class="icon"></i>${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}
+                                            class="icon"></i>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}
                                     </div>
                                     </li>
                                  </c:forEach>
