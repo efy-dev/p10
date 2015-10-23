@@ -5,6 +5,7 @@ import cn.beecloud.BCPay;
 import cn.beecloud.BCPayResult;
 import cn.beecloud.BeeCloud;
 import com.efeiyi.ec.organization.model.User;
+import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPayment;
 import com.efeiyi.ec.purchase.model.PurchaseOrderPaymentDetails;
@@ -106,5 +107,46 @@ public class PaymentManagerImpl implements PaymentManager {
             title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
         return title;
+    }
+
+    @Override
+    public PurchaseOrderPaymentDetails initPurchaseOrderPayment(PurchaseOrder purchaseOrder) {
+        PurchaseOrderPayment purchaseOrderPayment = new PurchaseOrderPayment();
+        purchaseOrderPayment.setStatus("1");
+        purchaseOrderPayment.setCreateDateTime(new Date());
+        purchaseOrderPayment.setPaymentAmount(purchaseOrder.getTotal());
+        purchaseOrderPayment.setPurchaseOrder(purchaseOrder);
+        purchaseOrderPayment.setPayWay("1");
+        try {
+            purchaseOrderPayment.setSerial(autoSerialManager.nextSerial("payment"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String userid = AuthorizationUtil.getMyUser().getId();
+        User user = (User) baseManager.getObject(User.class.getName(), userid);
+        purchaseOrderPayment.setUser(user);
+        baseManager.saveOrUpdate(PurchaseOrderPayment.class.getName(), purchaseOrderPayment);
+        //支付详情
+        if (purchaseOrder.getCoupon() != null) {
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+            purchaseOrderPaymentDetails.setCoupon(coupon);
+            purchaseOrderPaymentDetails.setMoney(new BigDecimal(coupon.getCouponBatch().getPrice()));
+            purchaseOrderPaymentDetails.setPayWay("4");
+            purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+            baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        }
+        PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = new PurchaseOrderPaymentDetails();
+        if (purchaseOrder.getCoupon() != null) {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal().subtract(new BigDecimal(purchaseOrder.getCoupon().getCouponBatch().getPrice())));
+        } else {
+            purchaseOrderPaymentDetails.setMoney(purchaseOrder.getTotal());
+        }
+        purchaseOrderPaymentDetails.setPayWay(purchaseOrder.getPayWay());
+        purchaseOrderPaymentDetails.setPurchaseOrderPayment(purchaseOrderPayment);
+        baseManager.saveOrUpdate(PurchaseOrderPaymentDetails.class.getName(), purchaseOrderPaymentDetails);
+        return purchaseOrderPaymentDetails;
     }
 }

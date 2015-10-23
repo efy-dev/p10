@@ -80,10 +80,13 @@ public class CartManagerImpl implements CartManager {
                     if (cart.getId() == null) {
                         cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
                     }
-                    if (stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
+                    if (!stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
                         cartProductTemp.setAmount(cartProductTemp.getProductModel().getAmount());
                     } else {
                         cartProductTemp.setAmount(cartProductTemp.getAmount() + count);
+                    }
+                    if (cart.getId() == null) {
+                        cartProductTemp.setCart(null);
                     }
                     cartProductTemp.setIsChoose("1");
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
@@ -95,7 +98,9 @@ public class CartManagerImpl implements CartManager {
             CartProduct cartProduct = new CartProduct();
             cartProduct.setProductModel(productModel);
             cartProduct.setAmount(count);
-            cartProduct.setCart(cart);
+            if (cart.getId() != null) {
+                cartProduct.setCart(cart);
+            }
             cartProduct.setIsChoose("1");
             cartProduct.setStatus("1");
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
@@ -137,9 +142,26 @@ public class CartManagerImpl implements CartManager {
         }
     }
 
+
+    @Override
+    public Cart copyCart(Cart cart) {
+        Cart realCart = fetchCart();
+        if (cart != null) {
+            List<CartProduct> cartProductList = cart.getCartProductList();
+            for (CartProduct cartProductTemp : cartProductList) {
+                cartProductTemp.setCart(realCart);
+                realCart.getCartProductList().add(cartProductTemp);
+                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                updateTotalPrice(realCart);
+                baseManager.saveOrUpdate(Cart.class.getName(), realCart);
+            }
+        }
+        return realCart;
+    }
+
     @Override
     public CartProduct addCount(Cart cart, CartProduct cartProduct) {
-        if (stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount() + 1)) {
+        if (!stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount() + 1)) {
             cartProduct.setAmount(cartProduct.getAmount() + 1);
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
@@ -182,7 +204,7 @@ public class CartManagerImpl implements CartManager {
     @Override
     public CartProduct changeCount(Cart cart, CartProduct cartProduct, Integer count) {
         cartProduct.getProductModel().setAmount(count);
-        if (stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount())) {
+        if (!stockManager.isOutOfStock(cartProduct.getProductModel(), cartProduct.getAmount())) {
             cartProduct.setAmount(cartProduct.getAmount() - 1);
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {

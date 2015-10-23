@@ -8,7 +8,7 @@
         <jnode url="/myEfeiyi/personalInfo.do" access="admin,manager" text_zh_CN="个人信息">
 
         </jnode>
-        <jnode url="/myEfeiyi/getPassword.do" access="admin,manager" text_zh_CN="账号安全">
+        <jnode url="/myEfeiyi/getPassword.do" access="admin,manager" text_zh_CN="修改密码">
             <match url="plistPurchaseOrderPayment_default"/>
             <match url="viewPurchaseOrderPayment"/>
         </jnode>

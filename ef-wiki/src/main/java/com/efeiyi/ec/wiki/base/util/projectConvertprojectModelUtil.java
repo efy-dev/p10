@@ -3,11 +3,15 @@ package com.efeiyi.ec.wiki.base.util;
 import com.efeiyi.ec.organization.model.AddressCity;
 import com.efeiyi.ec.organization.model.AddressProvince;
 import com.efeiyi.ec.project.model.Project;
+import com.efeiyi.ec.project.model.ProjectRecommended;
 import com.efeiyi.ec.wiki.model.ProjectDataModel;
 import com.efeiyi.ec.wiki.model.ProjectModel;
+import com.efeiyi.ec.wiki.model.ProjectRecommendedModel;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/10/10.
@@ -55,4 +59,32 @@ public class projectConvertprojectModelUtil {
       return projectDataModel;
     }
 
+
+
+    public static ProjectRecommendedModel getProjectRecommendedModel(ProjectRecommended projectRecommended)  {
+        ProjectRecommendedModel projectRecommendedModel = new ProjectRecommendedModel();
+        projectRecommendedModel.setStatus(projectRecommended.getStatus());
+        projectRecommendedModel.setId(projectRecommended.getId());
+        projectRecommendedModel.setGroupName(projectRecommended.getGroupName());
+        projectRecommendedModel.setSort(projectRecommended.getSort());
+        projectRecommendedModel.setProject(projectRecommended.getProject());
+        projectRecommendedModel.setAttention("0");
+        return projectRecommendedModel;
+    }
+
+    public static List<ProjectRecommendedModel> getProjectRecommendedModels(List<ProjectRecommended> projectRecommendeds)  {
+        List<ProjectRecommendedModel> list = new ArrayList<ProjectRecommendedModel>();
+        for (ProjectRecommended projectRecommended : projectRecommendeds) {
+            ProjectRecommendedModel projectRecommendedModel = new ProjectRecommendedModel();
+            projectRecommendedModel.setStatus(projectRecommended.getStatus());
+            projectRecommendedModel.setId(projectRecommended.getId());
+            projectRecommendedModel.setGroupName(projectRecommended.getGroupName());
+            projectRecommendedModel.setSort(projectRecommended.getSort());
+            projectRecommendedModel.setProject(projectRecommended.getProject());
+            projectRecommendedModel.setAttention("0");
+            list.add(projectRecommendedModel);
+        }
+
+        return list;
+    }
 }

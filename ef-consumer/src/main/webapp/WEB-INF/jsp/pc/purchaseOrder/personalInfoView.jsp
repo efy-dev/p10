@@ -161,7 +161,9 @@
                 $('#' + file.id).find('.data').html(' 上传完毕');
                 var jsonResult = eval(data);
                 addPhotoDynamic(jsonResult);
+                window.location.reload();
             },
+
         });
     });
 

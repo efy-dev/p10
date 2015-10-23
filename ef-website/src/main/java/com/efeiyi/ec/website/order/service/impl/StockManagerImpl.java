@@ -12,7 +12,7 @@ public class StockManagerImpl implements StockManager {
 
     @Override
     public boolean isOutOfStock(ProductModel productModel, Integer amount) {
-        return productModel.getAmount() >= amount;
+        return productModel.getAmount() < amount;
 
     }
 
