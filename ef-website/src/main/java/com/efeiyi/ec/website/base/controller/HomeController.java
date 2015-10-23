@@ -61,10 +61,10 @@ public class HomeController {
         model.addAttribute("sign", "000");
 
         //品牌故事
-        XQuery subjectQuery = new XQuery("listSubject_default", request);
+        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
         List<Object> subjectList = baseManager.listObject(subjectQuery);
         if (subjectList != null && subjectList.size() > 0) {
-            model.addAttribute("subject", subjectList.get(0));
+            model.addAttribute("advertisement", subjectList);
         }
 
         return "/home";

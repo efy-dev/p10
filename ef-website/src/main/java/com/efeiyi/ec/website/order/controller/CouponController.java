@@ -25,6 +25,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/9/14 0014.
+ * 优惠券的部分包括领取优惠券和使用优惠券
+ * 领取优惠卷则是列出所有可用优惠券，这里包括 1.全场通用的优惠券 2.店铺优惠券 3.单品优惠券 每个订单只能使用一张优惠券
  */
 @Controller
 public class CouponController {
