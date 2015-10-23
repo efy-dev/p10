@@ -1,6 +1,7 @@
 package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class GroupProduct implements Serializable {
     private BigDecimal bonus;// 分享的红包
     private Date groupPurchaseTime;// 成团时间
     private String status;// 状态标记
-    private Product product; //商品
+    private ProductModel productModel; //商品
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -83,10 +84,10 @@ public class GroupProduct implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
+    public ProductModel getProductModel() {
+        return productModel;
     }
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
 }
