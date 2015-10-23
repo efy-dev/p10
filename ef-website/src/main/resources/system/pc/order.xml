@@ -109,7 +109,37 @@
             </does>
         </entity>
 
-        <entity name="Coupon" label="商品列表" model="com.efeiyi.ec.purchase.model.Coupon">
+
+        <entity name="CouponBatch" label="优惠券" model="com.efeiyi.ec.purchase.model.CouponBatch">
+            <does>
+                <do name="listCouponBatch" access="" label="优惠券列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <!--<condition name="status" defaultValue="1" operation="eq"/>-->
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                    </query>
+                    <query name="product" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="priceLimit" defaultValue="1" operation="le"/>
+                        <condition name="product.id" defaultValue="1" operation="eq"/>
+                        <condition name="startDate" defaultValue="${CURRENT_DATETIME}" operation="le"/>
+                        <condition name="endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"/>
+                    </query>
+                    <query name="tenant" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="priceLimit" defaultValue="1" operation="le"/>
+                        <condition name="tenant.id" defaultValue="1" operation="eq"/>
+                        <condition name="startDate" defaultValue="${CURRENT_DATETIME}" operation="le"/>
+                        <condition name="endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"/>
+                    </query>
+                    <query name="normal" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="priceLimit" defaultValue="1" operation="le"/>
+                        <condition name="startDate" defaultValue="${CURRENT_DATETIME}" operation="le"/>
+                        <condition name="endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+
+
+        <entity name="Coupon" label="优惠券" model="com.efeiyi.ec.purchase.model.Coupon">
             <!--<fields>-->
                 <!--<field name="orderStatus" label="订单状态" inputType="text">-->
                     <!--<statusType fieldName="orderStatus">-->
@@ -136,6 +166,11 @@
                     <query name="byorder" label="可用列表" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>
+                    </query>
+                    <query name="product" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>
                         <condition name="couponBatch.priceLimit" defaultValue="1" operation="le"/>
                     </query>
                 </do>
