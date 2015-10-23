@@ -77,6 +77,17 @@
             </does>
         </entity>
 
+        <entity name="Advertisement" label="广告"  model="com.efeiyi.ec.product.model.Advertisement">
+            <does>
+                <do name="listAdvertisement" access="" label="商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="adsOrder:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <!--<condition name="subject.id" defaultValue="1" operation="eq"/>-->
+                    </query>
+                </do>
+            </does>
+        </entity>
+
         <entity name="ProductFavorite" label="商品列表"  model="com.efeiyi.ec.product.model.ProductFavorite">
             <does>
                 <do name="listProductFavorite" access="" label="商品列表">

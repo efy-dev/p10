@@ -41,10 +41,18 @@
     </div>
     <!-- //End--topbar-->
     <div class="box-hd wh">
-        <div class="title wh"><h3>品牌故事</h3></div>
+        <div class="title wh"><h3>非遗优选</h3></div>
         <div class="banner">
-            <a href="<c:url value="/subject/${subject.id}"/> " target="_blank"><img
-                    src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400" alt=""/></a>
+            <ul class="brand-ul">
+                <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank" title=""><strong>${advertisement[0].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank" title=""><strong>${advertisement[1].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank" title=""><strong>${advertisement[2].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank" title=""><strong>${advertisement[3].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank" title=""><strong>${advertisement[4].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank" title=""><strong>${advertisement[5].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank" title=""><strong>${advertisement[6].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small" alt=""></a></li>
+                <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank" title=""><strong>${advertisement[7].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big" alt=""></a></li>
+            </ul>
         </div>
     </div>
     <!-- //End--品牌故事-->
@@ -101,7 +109,6 @@
                 <%--<a href="" target="_blank"><img class="imgfilter" src="shop2015/upload/pep-2.jpg" alt=""/></a>--%>
 
                 <%--<p><strong>姚惠芬</strong></p>--%>
-                i
                 <%--<p>[苏绣]</p>--%>
 
                 <%--<p>国家级传承人</p>--%>
