@@ -204,6 +204,7 @@ public class ProductController {
         XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
         purchaseOrderProductQuery.put("productModel_id", productModelId);
         List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+        Collections.reverse(purchaseOrderProductList);
         List<ProductModel> productModelListTmp = product.getProductModelList();
         List<ProductPicture> productPictures = product.getProductPictureList();
         ProductPicture productPicture = new ProductPicture();
