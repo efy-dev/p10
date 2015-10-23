@@ -102,15 +102,15 @@
        if(addType=="allCategory" && ajaxkey1==true){
          getData1("<c:url value='/basic/xmj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="Category" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Category&conditions=projectCategory.id:${query}&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="all" && ajaxkey1==true){
          getData1("<c:url value='/basic/xmj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="level" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xmj.do?qm=plistProject_level&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_level&conditions=level:${query}&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="allDirt" && ajaxkey1==true){
          getData1("<c:url value='/basic/xmj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
        }else if(addType=="Dirt" && ajaxkey1==true){
-         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Dirt&conditions=&pageEntity.size=10&pageEntity.index='/>");
+         getData1("<c:url value='/basic/xmj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${query}&pageEntity.size=10&pageEntity.index='/>");
        }else{
 
        }
