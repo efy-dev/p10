@@ -39,6 +39,16 @@ public class CouponBatch implements Serializable{
     private String cdkey; //兑换码  需要系统生成  只有再发放方式为兑换码的时候才生成 输入兑换码 生成优惠券 优惠券数量-1 直到0为止
     private String deliverType; //发放方式 1 发优惠券 2 发兑换码
 
+    private String viewStatus;
+
+    @Transient
+    public String getViewStatus() {
+        return viewStatus;
+    }
+
+    public void setViewStatus(String viewStatus) {
+        this.viewStatus = viewStatus;
+    }
 
     @Transient
     public String getStartDateString() {

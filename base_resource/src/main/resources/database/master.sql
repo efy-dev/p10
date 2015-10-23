@@ -601,6 +601,8 @@ ALTER TABLE `advertisement`
 CHANGE COLUMN `order` `ads_order`  int(11) NULL DEFAULT NULL AFTER `redirect`,
 ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
 
+ALTER TABLE `purchase_coupon`
+ADD COLUMN `cdkey`  char(128) NULL AFTER `consumer_id`;
 
 
 

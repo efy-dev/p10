@@ -1,14 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2015/8/24
-  Time: 9:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -105,7 +96,7 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="/scripts/wapjs/amazeui.min.js"></script>
+<script src="../scripts/wap/js/amazeui.min.js"></script>
 <!--自定义js--Start-->
 <script src="../shop2015/js/system.js?v=20150831"></script>
 <script src="../shop2015/js/myorder.js?v=20150831"></script>

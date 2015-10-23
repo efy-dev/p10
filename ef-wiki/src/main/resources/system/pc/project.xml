@@ -343,10 +343,28 @@
                         <condition name="product.id" defaultValue="0" operation="eq"/>
                         <condition name="fatherComment.id" defaultValue="0" operation="eq"/>
                     </query>
-
+                    <query name="ownerComent" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="moderator.id" defaultValue="0" operation="eq"/>
+                        <condition name="watch" defaultValue="0" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
 
+        <entity name="Praise2Product" label="Praise2Product"
+                basic="simple" others=""
+                model="com.efeiyi.ec.wiki.model.Praise2Product">
+            <does>
+                <do name="plistPraise2Product" access="" label="Praise2Product列表"
+                    result="json">
+                    <query name="ownerPraise" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="moderator.id" defaultValue="0" operation="eq"/>
+                        <condition name="watch" defaultValue="0" operation="eq"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>
