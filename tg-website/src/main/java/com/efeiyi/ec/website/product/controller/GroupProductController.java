@@ -49,8 +49,31 @@ public class GroupProductController {
         model.addAttribute("groupProduct", groupProduct);
         return "/groupProduct/groupProductDetails";
     }
+    /**
+     *  我的开团
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/groupProduct/groupBuyStatus.do")
+    public String groupBuyStatus(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("listCreateProduct_default",request);
+        List<Object> myCreateProductList = baseManager.listObject(xQuery);
+        model.addAttribute("myCreateProductList", myCreateProductList);
+        return "";
+    }
 
-
-
-
+    /**
+     *  我的参团
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/groupProduct/groupBuyStatus.do")
+    public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
+        XQuery xQuery = new XQuery("listJoinGroup_default",request);
+        List<Object> groupJoinList = baseManager.listObject(xQuery);
+        model.addAttribute("groupJoinList", groupJoinList);
+        return "";
+    }
 }
