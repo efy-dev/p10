@@ -13,12 +13,12 @@
 </head>
 <body>
 <div class="hd goods-rec">
-    <div class="focus wh">
-        <ul class="slider-main">
-            <li style="display: block;"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400"
-                                             alt=""></li>
-        </ul>
-    </div>
+    <%--<div class="focus wh">--%>
+        <%--<ul class="slider-main">--%>
+            <%--<li style="display: block;"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400"--%>
+                                             <%--alt=""></li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
     <!-- //End--focus-->
     <div class="goods-rec-hd wh">
         ${subject.subjectDescription.content}

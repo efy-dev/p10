@@ -80,10 +80,13 @@ public class CartManagerImpl implements CartManager {
                     if (cart.getId() == null) {
                         cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
                     }
-                    if (stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
+                    if (!stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
                         cartProductTemp.setAmount(cartProductTemp.getProductModel().getAmount());
                     } else {
                         cartProductTemp.setAmount(cartProductTemp.getAmount() + count);
+                    }
+                    if (cart.getId() == null) {
+                        cartProductTemp.setCart(null);
                     }
                     cartProductTemp.setIsChoose("1");
                     baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
@@ -95,7 +98,9 @@ public class CartManagerImpl implements CartManager {
             CartProduct cartProduct = new CartProduct();
             cartProduct.setProductModel(productModel);
             cartProduct.setAmount(count);
-            cartProduct.setCart(cart);
+            if (cart.getId() != null) {
+                cartProduct.setCart(cart);
+            }
             cartProduct.setIsChoose("1");
             cartProduct.setStatus("1");
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
@@ -135,6 +140,23 @@ public class CartManagerImpl implements CartManager {
         } else {
             return null;
         }
+    }
+
+
+    @Override
+    public Cart copyCart(Cart cart) {
+        Cart realCart = fetchCart();
+        if (cart != null) {
+            List<CartProduct> cartProductList = cart.getCartProductList();
+            for (CartProduct cartProductTemp : cartProductList) {
+                cartProductTemp.setCart(realCart);
+                realCart.getCartProductList().add(cartProductTemp);
+                baseManager.saveOrUpdate(CartProduct.class.getName(), cartProductTemp);
+                updateTotalPrice(realCart);
+                baseManager.saveOrUpdate(Cart.class.getName(), realCart);
+            }
+        }
+        return realCart;
     }
 
     @Override

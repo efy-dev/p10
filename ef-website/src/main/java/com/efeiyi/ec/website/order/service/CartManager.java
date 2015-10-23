@@ -1,6 +1,5 @@
 package com.efeiyi.ec.website.order.service;
 
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
@@ -43,6 +42,8 @@ public interface CartManager {
     Cart chooseTenant(Cart cart, Tenant tenant, String chooseStatus);
 
     Cart chooseAll(Cart cart, String chooseStatus);
+
+    Cart copyCart(Cart cart);
 
 
 }
