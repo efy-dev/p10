@@ -8,6 +8,7 @@ import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/9/14 0014.
@@ -35,6 +33,9 @@ public class CouponController {
     @Autowired
     private BaseManager baseManager;
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
+
 
 
     /**
@@ -43,8 +44,11 @@ public class CouponController {
      */
     @RequestMapping({"/listProductCoupon.do"})
     @ResponseBody
-    public List<Object> listProductCoupon(){
-        return null;
+    public List<Object> listProductCoupon(HttpServletRequest request) throws Exception{
+        XQuery productCouponXQuery = new XQuery("listCouponBatch_product",request);
+        productCouponXQuery.put("priceLimit",Float.parseFloat(request.getParameter("priceLimit")));
+        productCouponXQuery.put("product_id", request.getParameter("productId"));
+        return baseManager.listObject(productCouponXQuery);
     }
 
     /**
@@ -53,17 +57,46 @@ public class CouponController {
      */
     @RequestMapping({"/listTenantCoupon.do"})
     @ResponseBody
-    public List<Object> listTenantCoupon(){
-        return null;
+    public List<Object> listTenantCoupon(HttpServletRequest request) throws Exception{
+        XQuery productCouponXQuery = new XQuery("listCouponBatch_product",request);
+        productCouponXQuery.put("priceLimit",Float.parseFloat(request.getParameter("priceLimit")));
+        productCouponXQuery.put("tenant_id", request.getParameter("tenantId"));
+        return baseManager.listObject(productCouponXQuery);
+    }
+
+    /**
+     * 列出店铺优惠券
+     * @return
+     */
+    @RequestMapping({"/listNormalCoupon.do"})
+    @ResponseBody
+    public List<Object> listNormalCoupon(HttpServletRequest request) throws Exception{
+        XQuery productCouponXQuery = new XQuery("listCouponBatch_normal",request);
+        productCouponXQuery.put("priceLimit",Float.parseFloat(request.getParameter("priceLimit")));
+        return baseManager.listObject(productCouponXQuery);
     }
 
     /**
      * 领取优惠券
+     * 生成优惠券的时候需要生成一个兑换码  生成规则是 创建时间+随机数201510231000007043
      * @return
      */
     @RequestMapping({"/claimCoupon.do"})
     @ResponseBody
-    public boolean claimCoupon(){
+    public boolean claimCoupon(HttpServletRequest request) throws Exception{
+        String couponBatchId = request.getParameter("couponBatchId");
+        CouponBatch couponBatch = (CouponBatch)baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+        Coupon coupon = new Coupon();
+        coupon.setStatus("1");
+        coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+        coupon.setCouponBatch(couponBatch);
+        Date currentDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String currentDateStr = simpleDateFormat.format(currentDate);
+        coupon.setCdkey(currentDateStr+coupon.getSerial());
+        Consumer consumer = (Consumer)baseManager.getObject(Consumer.class.getName(),AuthorizationUtil.getMyUser().getId());
+        coupon.setConsumer(consumer);
+        baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         return true;
     }
 
