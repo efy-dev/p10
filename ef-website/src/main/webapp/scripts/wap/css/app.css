@@ -16,10 +16,6 @@ input[type="checkbox"], textarea { border-radius: 0; box-shadow: none }
 .chevron-left:before { content: ''; width: 12px; height: 12px; border-left: 1px solid #000; border-top: 1px solid #000; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); display: inline-block }
 .icon-addfav { background-position: -80px -104px; width: 20px; height: 20px }
 .addfav-end .icon-addfav { background-position: -100px -104px }
-
-@media (min-width:520px) {
-    body { width: 640px; margin: 0 auto }
-}
 /*--//End--common*/
 .custom-header { background: #fff; height: 55px; position: relative; z-index: 101; border-bottom: 2px #000 solid; border-top: 0 }
 .custom-header .logo a { background-position: 0 0; width: 152px; height: 27px; position: absolute; top: 50%; margin-top: -13px; left: 21px }
@@ -62,7 +58,8 @@ input[type="checkbox"], textarea { border-radius: 0; box-shadow: none }
 .box-hd .title2 strong { width: 100%; padding: 20px 0; text-align: center; float: left; font-size: 16px }
 .box-hd .ul-index-list { width: 100%; float: left; overflow: hidden }
 .box-hd .ul-index-list>li {
-    margin-bottom: 2%;
+
+    margin-bottom:1px;
     float: left;
     position: relative;
 }
@@ -78,14 +75,13 @@ input[type="checkbox"], textarea { border-radius: 0; box-shadow: none }
     font-style: italic;
     line-height: 14px;
 }
-
-.box-hd .ul-index-list>li.stau1 { width:100%}
+.box-hd .ul-index-list>li.stau1 {width:100%;
+    margin-bottom:2px;}
 .box-hd .ul-index-list>li.stau1 em {right:19px}
-.box-hd .ul-index-list>li.stau2 { width:49%}
+.box-hd .ul-index-list>li.stau2 {width:50%;padding-right:1px;margin-bottom:2px;}
 .box-hd .ul-index-list>li.stau2 em {left:19px}
-.box-hd .ul-index-list>li.stau3 { width:49%; float: right }
+.box-hd .ul-index-list>li.stau3 {width:50%;float: right;padding-left:1px;margin-bottom:2px;}
 .box-hd .ul-index-list>li.stau3 em {right:19px}
-
 .box-hd .ul-index-list>li img { width: 100% }
 .box-hd .ul-index-list>li a { display: block; position: relative }
 .box-hd .ul-index-list>li .name { width: 20px; line-height: 20px; position: absolute; top: 50%; margin-top: -40px; right: 10px; color: #fff; font-style: italic }
@@ -431,3 +427,10 @@ input[type="checkbox"], textarea { border-radius: 0; box-shadow: none }
 .footer .info .icon { background-position: 0 0; width: 68px; height: 26px; display: inline-block }
 .footer .info .wechat { background: url(../images/icon-wechat.png) no-repeat; background-size: 153px auto; width: 153px; height: 153px; display: inline-block; margin: 10px 0 }
 .footer .copyright { text-align: center; font-size: 10px; line-height: 20px; border-top: 1px #ccc solid; color: #999 }
+/*//End--*/
+@media (min-width:520px) {
+    body { width: 640px; margin: 0 auto }
+}
+@media (min-width:320px) {
+    .box-hd .ul-index-list>li em {height:126px;}
+}
