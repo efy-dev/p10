@@ -27,6 +27,8 @@ public class Praise2Product implements Serializable {
     private String type;
     private Date createDateTime;
     private String status;
+    private MyUser moderator;
+    private String watch;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -96,5 +98,23 @@ public class Praise2Product implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "moderator_id")
+    public MyUser getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(MyUser moderator) {
+        this.moderator = moderator;
+    }
+    @Column(name = "watch")
+
+    public String getWatch() {
+        return watch;
+    }
+
+    public void setWatch(String watch) {
+        this.watch = watch;
     }
 }
