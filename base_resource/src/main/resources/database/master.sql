@@ -572,7 +572,7 @@ ADD COLUMN `create_datetime`  datetime(6) NULL AFTER `status`;
 ALTER TABLE `master_message_store`
 ADD COLUMN `create_datetime`  datetime(6) NULL AFTER `status`;
 
----------------------未执行 ------------------------------
+---------------------已执行 ------------------------------
 
 ALTER TABLE `purchase_coupon_batch`
 ADD COLUMN `type`  char(8) NULL AFTER `picture_url`,
@@ -601,7 +601,7 @@ ALTER TABLE `advertisement`
 CHANGE COLUMN `order` `ads_order`  int(11) NULL DEFAULT NULL AFTER `redirect`,
 ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
 
-
+---------------------未执行 ------------------------------
 
 
 
