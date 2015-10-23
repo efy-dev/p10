@@ -56,7 +56,7 @@ public class LabelCheckController {
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
             } else {
                 iLabelCheckService.updateRecord(model, label);
-//                model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
+                model.addAttribute(PalConst.getInstance().code, code);
             }
         }
         return new ModelAndView(PalConst.getInstance().resultView, model);
