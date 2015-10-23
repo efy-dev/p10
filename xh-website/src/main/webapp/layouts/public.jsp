@@ -9,7 +9,7 @@
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path ;
-  String imgBasePath = "http://master3.efeiyi.com/";
+  String imgBasePath = "http://association.oss-cn-beijing.aliyuncs.com/";
   String imgListCss = "@!pal-img-list";
   String imgFormCSS = "@!pal-img-form";
 %>
