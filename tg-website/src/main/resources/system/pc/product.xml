@@ -12,5 +12,25 @@
                 </do>
             </does>
         </entity>
+        <entity name="Group" label="商品列表"  model="com.efeiyi.ec.group.model.Group">
+            <does>
+                <do name="listCreateProduct" access="" label="商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
+        <entity name="JoinGroup" label="商品列表"  model="com.efeiyi.ec.group.model.Member">
+            <does>
+                <do name="listJoinGroup" access="" label="商品列表">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="ne"/>
+                    </query>
+                </do>
+            </does>
+        </entity>
     </entities>
 </module>
