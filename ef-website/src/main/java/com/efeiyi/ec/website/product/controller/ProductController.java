@@ -58,31 +58,20 @@ public class ProductController {
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
         if(productModelList!=null&&productModelList.size()>0){
-            for(Object productModelTemp:productModelList){
-                StringBuilder s = new StringBuilder();
-                s.append(((ProductModel)productModelTemp).getName());
-                List<ProductPropertyValue> productPropertyValueList = ((ProductModel) productModelTemp).getProductPropertyValueList();
-                if(productPropertyValueList==null||productPropertyValueList.size()==0||productPropertyValueList.size()==1){
+            for(ProductModel productModelTemp:productModelList){
+                StringBuilder s = new StringBuilder(productModelTemp.getProduct().getName());
+                if(productModelTemp.getProduct().getProductModelList().size()==1){
+                    map.put(productModelTemp,s.toString());
+                }else{
+                    s.append("[").append(productModelTemp.getName());
                     if(s.toString().length()>14){
                         s = new StringBuilder(s.substring(0,14));
-                        s.append("...");
+                        s.append("...").append("]");
+                    }else{
+                        s.append("]");
                     }
-                    map.put((ProductModel)productModelTemp,s.toString());
-
-                }else {
-                    s.append("[");
-                    for(ProductPropertyValue productPropertyValue:((ProductModel)productModelTemp).getProductPropertyValueList()){
-                        s.append(productPropertyValue.getProjectPropertyValue().getValue());
-                    }
-                    if(s.toString().length()>14){
-                        s = new StringBuilder(s.substring(0,14));
-                        s.append("...");
-                    }
-                    s.append("]");
-                    map.put((ProductModel) productModelTemp, s.toString());
-
+                    map.put(productModelTemp,s.toString());
                 }
-
             }
         }
         Project project  = (Project)baseManager.getObject(Project.class.getName(),projectId);
