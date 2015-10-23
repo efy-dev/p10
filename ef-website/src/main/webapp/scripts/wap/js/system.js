@@ -81,7 +81,9 @@ $(function(){
                 $(this).parents('#cover').hide();
             })
             return false;
-        })
+        });
+        //详情和评论-tab
+        $('')
     })();
     //订单
     (function(){

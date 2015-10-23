@@ -586,6 +586,23 @@ ADD COLUMN `deliver_type`  char(8) NULL AFTER `cdkey`;
 
 
 
+CREATE TABLE `advertisement` (
+`id`  char(16) NOT NULL ,
+`name`  varchar(64) NULL ,
+`img`  varchar(255) NULL ,
+`redirect`  varchar(255) NULL ,
+`order`  int(11) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+
+ALTER TABLE `advertisement`
+CHANGE COLUMN `order` `ads_order`  int(11) NULL DEFAULT NULL AFTER `redirect`,
+ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
+
+
+
 
 
 

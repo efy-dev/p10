@@ -23,6 +23,7 @@
         <jnode id="goodsManager" url="" text_zh_CN="商品管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistProduct_default&amp;view=product" state=""  extend="" access="" text_zh_CN="商品列表">
                 <match url="/basic/xm.do?qm=plistProduct_default&amp;view=product"/>
+                <match url="/basic/xm.do?qm=plistProduct_default1"/>
                 <match url="/basic/xm.do?qm=viewProduct"/>
                 <match url="/basic/xm.do?qm=formProduct"/>
                 <match url="/basic/xm.do?qm=formProduct_Description"/>
@@ -42,6 +43,7 @@
                 <match url="/basic/xm.do?qm=plistTenantCategory_default"/>
                 <match url="/basic/xm.do?qm=formTenantCategory"/>
                 <match url="/basic/xm.do?qm=plistTProduct_default"/>
+                <match url="/basic/xm.do?qm=plistTProduct_default1"/>
                 <match url="/basic/xm.do?qm=viewTenantCategory"/>
 
 
