@@ -90,6 +90,8 @@
                 <match url="/basic/xm.do?qm=plistPurchaseOrderComment_default" />
                 <match url="/basic/xm.do?qm=plistPurchaseOrderComment_default1"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=comment"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=comment"/>
+
 
 
             </jnode>
