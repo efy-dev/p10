@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * Created by Administrator on 2015/8/17.
@@ -101,18 +102,29 @@ public class PurchaseOrderLabelController {
     public void downloadLabelTxt(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         String orderLabelId = request.getParameter("orderLabelId");
+
+        PurchaseOrderLabel orderLabel = (PurchaseOrderLabel) baseManager.getObject(PurchaseOrderLabel.class.getName(), orderLabelId);
+        String orderSerial = orderLabel.getPurchaseOrder().getSerial();
+        String productName = orderLabel.getProduct().getName();
+        String productSerial = orderLabel.getProduct().getSerial();
+
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         File clazzDir = new File(path);
         String fileType = request.getParameter("filetype");
-        String fileName = clazzDir.getParent() + "/file/" + orderLabelId + (fileType == null?".txt":fileType);
-        File file = new File(fileName);
-        response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+//        String fileName = clazzDir.getParent() + "/file/" + orderLabelId + (fileType == null?".txt":fileType);
+
+        //文件名==订单编号-商品名称-商品编号-订单标签Id
+        String fileName = orderSerial + "-" + productName + "-" + productSerial + "-" + orderLabelId + (fileType == null?".txt":fileType);
+
+        File file = new File(clazzDir.getParent() + "/file/" +fileName);
+        response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
         response.setContentLength((int) file.length());
         DataInputStream bis = null;
         try {
             if (!file.exists())
                 throw new NullPointerException("指定文件" + fileName + "不存在");
-            bis = new DataInputStream(new FileInputStream(new File(fileName)));
+//            bis = new DataInputStream(new FileInputStream(new File(fileName)));
+            bis = new DataInputStream(new FileInputStream(new File(clazzDir.getParent() + "/file/" + fileName)));
             int i;
             while ((i = bis.read()) != -1) {
                 response.getOutputStream().write(i);
