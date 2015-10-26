@@ -64,7 +64,7 @@ public class GroupProductController {
         XQuery xQuery = new XQuery("listCreateProduct_default",request);
         List<Object> myCreateProductList = baseManager.listObject(xQuery);
         model.addAttribute("myCreateProductList", myCreateProductList);
-        return "/personGroup/myCreateGroup.jsp";
+        return "/personGroup/myCreateGroup";
     }
 
     /**
@@ -78,7 +78,7 @@ public class GroupProductController {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
         model.addAttribute("groupJoinList", groupJoinList);
-        return "";
+        return "/personGroup/myJoinGroup";
     }
     /**
      *  我的红包
