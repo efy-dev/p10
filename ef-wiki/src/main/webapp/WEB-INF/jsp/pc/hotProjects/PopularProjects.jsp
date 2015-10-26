@@ -80,7 +80,7 @@
     <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
     <div class="nav">
       <ul>
-        <li><a href="" title="首页">首页</a></li>
+        <li><a href="" title="首页">电商首页</a></li>
 
         <li><a href="" title="传承人">大师</a></li>
         <li><a href="" title="展览">工艺</a></li>

@@ -79,7 +79,7 @@
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
                 <li>
-                  <a href="<c:url value='/base/brifProject.do?projectId=${ppj.project.id}'/>"><img src="${ppj.project.picture_wap_url}"></a>
+                  <a href="<c:url value='/base/brifProject.do?projectId=${ppj.project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.project.picture_wap_url}"></a>
                   <div class="hot-poge">
                     <span style="margin-right: 1rem">人气</span>
                  <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
