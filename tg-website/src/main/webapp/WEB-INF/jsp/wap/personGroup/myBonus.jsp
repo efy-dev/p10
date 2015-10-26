@@ -41,8 +41,8 @@
     <div class="top ae">
         <div class="pic"><a href="#"><img src="/scripts/upload/yonghm.jpg"></a></div>
         <div class="text">
-            <p>用户名：</p>
-            <p>红包总额：${AuthorizationUtil.myUser.userName}元</p>
+            <p>用户名：${AuthorizationUtil.myUser.userName}</p>
+            <p>红包总额：${totalBonus}元</p>
         </div>
     </div>
     <div class="page ae">
