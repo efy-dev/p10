@@ -23,19 +23,17 @@
                 <td>成立时间</td>
             </tr>
             <c:forEach items="${documentList}" var="association" varStatus="status">
-            <tr>
-                <td class="txt-left">${association.name}</td>
-                <td>${association.inCharge}</td>
-                <td>${association.addressDistrict.addressCity.name}</td>
-                <td><fmt:formatDate
-                        value="${association.theDatetime}" pattern="yyyy.MM"/></td>
-            </tr>
-            <!-- //End--slide-right-->
-    </div>
-</div>
-
-</c:forEach>
-</tbody></table>
+                <tr>
+                    <td class="txt-left">${association.name}</td>
+                    <td>${association.inCharge}</td>
+                    <td>${association.addressDistrict.addressCity.name}</td>
+                    <td><fmt:formatDate
+                            value="${association.theDatetime}" pattern="yyyy.MM"/></td>
+                </tr>
+                <!-- //End--slide-right-->
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
 <!-- //End--slide-right-->

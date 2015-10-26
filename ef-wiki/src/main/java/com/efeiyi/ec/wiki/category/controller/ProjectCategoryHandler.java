@@ -21,6 +21,15 @@ public class ProjectCategoryHandler implements DoHandler {
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
        String addType = request.getParameter("qm").split("_")[1];
         modelMap.put("addType",addType);
+        String conditions = request.getParameter("conditions");
+        if(conditions != null && !conditions.equals("")){
+            switch (addType){
+               case "Category": modelMap.put("query",conditions.split(":")[1]); break;
+               case "level": modelMap.put("query",conditions.split(":")[1]); break;
+               default:modelMap.put("query",conditions.split(":")[1]);break;
+            }
+        }
+
         return modelMap;
     }
 }

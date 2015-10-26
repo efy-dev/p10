@@ -153,7 +153,7 @@ public class MyBannerController {
     @RequestMapping("/removeBanner.do")
     @ResponseBody
     public ModelAndView removeDocument(HttpServletRequest request, Banner banner) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
 
         bannerManager.removeBanner(banner);
 

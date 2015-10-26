@@ -80,7 +80,7 @@
             <label class="am-u-sm-3 am-form-label"><small></small></label>
             <div class="am-u-sm-9">
                 <c:if test="${!empty object.imageUrl}">
-                    <img src="<%=imgBasePath %>${object.imageUrl}<%=imgFormCSS %>">
+                    <img src="${object.imageUrl}<%=imgFormCSS %>">
                 </c:if>
             </div>
         </div>

@@ -157,7 +157,7 @@
                             <a href="#下一页" title="下一页" class="btn-gz bot-btn"></a>
                         </div>
                         <div class="attention">
-                            <p>目前您还没有关注任何大师，以上是我们为您推荐的大师</p>
+                            <p>以下是您关注的相关工艺的最新动态</p>
                         </div>
                         <div class="dynamic">
                             <%if(AuthorizationUtil.getMyUser().getId()!=null){%>

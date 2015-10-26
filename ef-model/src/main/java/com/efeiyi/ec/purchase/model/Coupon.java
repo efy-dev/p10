@@ -17,6 +17,7 @@ public class Coupon implements Serializable {
     private String serial;//优惠券的编号
     private CouponBatch couponBatch;//批次
     private String status;//1未使用 2已使用 3关闭
+    private String cdkey;
     private Consumer consumer;
 
     @Id
@@ -67,5 +68,14 @@ public class Coupon implements Serializable {
 
     public void setConsumer(Consumer consumer) {
         this.consumer = consumer;
+    }
+
+    @Column(name = "cdkey")
+    public String getCdkey() {
+        return cdkey;
+    }
+
+    public void setCdkey(String cdkey) {
+        this.cdkey = cdkey;
     }
 }

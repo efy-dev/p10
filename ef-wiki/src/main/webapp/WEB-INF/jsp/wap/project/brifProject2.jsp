@@ -104,8 +104,8 @@
     <div class="menu-list" id="menu-list">
       <div class="menu-page">
         <ul class="bd">
-          <li><a href="" title="首页">首页</a></li>
-          <li><a href="" title="分类">消&nbsp;息</a></li>
+          <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
+          <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
           <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
       </div>
@@ -587,7 +587,7 @@
     var
     //参数
             setting={
-              column_width:159,//列宽
+              column_width:140,//列宽
               column_className:'waterfall_column',//列的类名
               column_space:10,//列间距
               cell_selector:'.cell',//要排列的砖块的选择器，context为整个外部容器
