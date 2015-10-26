@@ -2,7 +2,9 @@ package com.efeiyi.ec.website.product.controller;
 
 import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.GroupProduct;
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.product.model.Product;
+import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +59,7 @@ public class GroupProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/groupProduct/groupBuyStatus.do")
+    @RequestMapping(value = "/groupBuyStatus.do")
     public String groupBuyStatus(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listCreateProduct_default",request);
         List<Object> myCreateProductList = baseManager.listObject(xQuery);
@@ -71,7 +73,7 @@ public class GroupProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/groupProduct/joinGroupStatus.do")
+    @RequestMapping(value = "/joinGroupStatus.do")
     public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
@@ -84,7 +86,7 @@ public class GroupProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/groupProduct/bonusTotal.do")
+    @RequestMapping(value = "/bonusTotal.do")
     public String groupBonusTotal(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listCreateProduct_default",request);
         xQuery.put("status","1");
@@ -95,5 +97,22 @@ public class GroupProductController {
         }
         model.addAttribute("totalBonus",totalBonus);
         return "/personGroup/myBonus";
+    }
+    /**
+     *  个人中心
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/personInfoView.do")
+    public String personInfoView(HttpServletRequest request, Model model) throws Exception {
+        MyUser currentUser = AuthorizationUtil.getMyUser();
+        Boolean flag = true;
+        if (currentUser.getId() != null) {
+            return "/personGroup/personGroupInfo";
+        } else {
+            //返回登陆页面
+            return "/personGroup/personGroupInfo";
+        }
     }
 }
