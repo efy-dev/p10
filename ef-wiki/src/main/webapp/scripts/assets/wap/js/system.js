@@ -1,4 +1,14 @@
 $(function(){
+    /*$('#menu').click(function(){
+        $(this).hide();
+        $('#menu2').show();
+        $('.menu-list').slideDown();
+    });
+    $('#menu2').click(function() {
+        $(this).hide();
+        $('#menu').show();
+        $('.menu-list').slideUp();
+    })*/
     //头部无logoA
     function menuSlide(){
         $('#menu .line').toggleClass('active');
@@ -232,3 +242,18 @@ function getRootPath(){
     var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
     return(localhostPaht+projectName);
 }
+////fenxiang
+$(document).ready(function(){
+    $('#fx').click(function(){
+        $('#fxq').show();
+        return false
+    })
+    $('#gb').click(function(){
+        $('#fxq').hide();
+        return false
+    })
+})
+//fenxiang111
+$(document).ready(function(){
+    $('.suspend .great .dynamic-ft a')
+})
