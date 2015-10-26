@@ -433,5 +433,28 @@
                     execute="com.efeiyi.ec.system.advertisement.controller.AdvertisementFormHandler" />
             </does>
         </entity>
+
+        <entity name="PurchaseOrderComment" label="评价列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
+            <does>
+                <do name="plistPurchaseOrderComment" access="" label="评价分页列表"
+                    result="/purchaseOrderComment/purchaseOrderCommentPList" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="purchaseOrderProduct.purchaseOrder.serial"  operation="like" label="订单编号" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.serial"  operation="like" label="产品编号" inputType="text"/>
+                        <condition name="status"  operation="ne" label="状态" defaultValue="0" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removePurchaseOrderComment" label="删除评价" access="" result="json"/>
+                <do name="formPurchaseOrderComment" label="保存评价" access="" result="/purchaseOrderComment/purchaseOrderCommentForm" />
+                <do name="saveOrUpdatePurchaseOrderComment" label="保存产品描述" access="" result="/purchaseOrderComment/purchaseOrderCommentSaveSuccess"
+                   />
+            </does>
+        </entity>
     </entities>
 </module>
