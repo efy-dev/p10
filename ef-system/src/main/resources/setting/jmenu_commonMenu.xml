@@ -86,6 +86,13 @@
                 <match url="/basic/xm.do?qm=viewProduct&amp;view=recommend"/>
                 <match url="/basic/xm.do?qm=viewTenant&amp;view=recommend"/>
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderComment_default" access="admin" text_zh_CN="评价列表">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderComment_default" />
+                <match url="/basic/xm.do?qm=plistPurchaseOrderComment_default1"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=comment"/>
+
+
+            </jnode>
         </jnode>
         <jnode url="" id="tenantManager" access="admin" state="closed" text_zh_CN="商家管理">
             <jnode url="/basic/xm.do?qm=plistTenant_default&amp;view=tenant" access="admin,manager" text_zh_CN="商家列表">
