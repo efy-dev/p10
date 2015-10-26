@@ -77,7 +77,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="${project.picture_url}">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_url}">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
@@ -247,7 +247,7 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -257,7 +257,7 @@
 
 
             pubu.append(box);
-            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -712,7 +712,7 @@
 
 
                 // pubu.append(box);
-                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +

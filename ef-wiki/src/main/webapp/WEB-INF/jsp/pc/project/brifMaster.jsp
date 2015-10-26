@@ -76,7 +76,7 @@
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="${project.picture_url}">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>

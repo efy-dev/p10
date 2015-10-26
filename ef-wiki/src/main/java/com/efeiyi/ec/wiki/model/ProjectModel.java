@@ -14,10 +14,19 @@ public class ProjectModel implements Serializable {
     private String level;
     private Date createDateTime;//发布时间
     private String description;// project描述
-    private String picture_url;//project图片
+    private String picture_pc_url;//project图片
     private String picture_wap_url;//移动端图片project图片
     private Long works;
     private Long fsAmount;
+
+    public String getPicture_pc_url() {
+        return picture_pc_url;
+    }
+
+    public void setPicture_pc_url(String picture_pc_url) {
+        this.picture_pc_url = picture_pc_url;
+    }
+
     private Long masters;
 
     public String getProjectId() {
@@ -68,13 +77,7 @@ public class ProjectModel implements Serializable {
         this.description = description;
     }
 
-    public String getPicture_url() {
-        return picture_url;
-    }
 
-    public void setPicture_url(String picture_url) {
-        this.picture_url = picture_url;
-    }
 
     public String getPicture_wap_url() {
         return picture_wap_url;

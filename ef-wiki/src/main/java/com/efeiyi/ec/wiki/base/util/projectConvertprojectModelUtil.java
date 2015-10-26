@@ -39,7 +39,7 @@ public class projectConvertprojectModelUtil {
             projectModel.setFsAmount(project.getFsAmount() == null ? 0l : project.getFsAmount());
             projectModel.setLevel(project.getLevel() == null ? "" : project.getLevel());
             projectModel.setMasters((long) project.getMasterProjects().size());
-            projectModel.setPicture_url(project.getPicture_url() == null ? "" : project.getPicture_url());
+            projectModel.setPicture_pc_url(project.getPicture_pc_url() == null ? "" : project.getPicture_pc_url());
             projectModel.setPicture_wap_url(project.getPicture_wap_url() == null ? "" : project.getPicture_wap_url());
             projectModel.setProjectId(project.getId() == null ? "" : project.getId());
             projectModel.setProjectName(project.getName() == null ? "" : project.getName());
