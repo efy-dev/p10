@@ -129,7 +129,7 @@
         var name=$("#name").val();
         var bd=$("#bd").val();
         var email=$("#em").val();
-        var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        var reg =/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         if(name=="" || name2=="" || bd==""){
             $("#tj").html("您填写的信息不完整");
         }else{
