@@ -101,12 +101,20 @@ public class LabelServiceManagerImpl implements LabelServiceManager {
                 line.append("code=").append(listNFC.get(x + flag).getCode()).append("\n").append("apoid=8\n");
                 bw.write(line.toString());
                 bw.flush();
-                File cfgFile = new File(webInfPath + listNFC.get(x + flag).getCode() + ".cfg");
+//                File cfgFile = new File(webInfPath + listNFC.get(x + flag).getCode() + ".cfg");
+                File cfgFile = new File(webInfPath + listNFC.get(x + flag).getSerial() + ".cfg");
                 FileUtils.copyFile(tmpCfgFile, cfgFile);
                 cfgFileList.add(cfgFile);
             }
 
-            compressFiles(cfgFileList, clazzDir.getParent() + "/file/" + pol.getId() + ".rar");
+            String orderSerial = pol.getPurchaseOrder().getSerial();
+            String productName = pol.getProduct().getName();
+            String productSerial = pol.getProduct().getSerial();
+            //文件名==订单编号-商品名称-商品编号-订单标签Id
+            String filename = orderSerial + "-" + productName + "-" + productSerial + "-" + pol.getId() + ".rar";
+
+//            compressFiles(cfgFileList, clazzDir.getParent() + "/file/" + pol.getId() + ".rar");
+            compressFiles(cfgFileList, clazzDir.getParent() + "/file/" + filename);
 
             System.out.println("输出用时：" + (System.currentTimeMillis() - startTime));
         } catch (Exception e) {
