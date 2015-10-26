@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -38,12 +39,14 @@
 </header>
 <!--//End--header-->
 <ul class="offered ae">
+    <c:forEach items="${myCreateProductList}" var="group" varStatus="rec">
     <li>
-        <p>《东方清韵》瓷胎竹编茶具套装典藏版</p>
-        <p>2015.04.04</p>
-        <p>100人/3000人成团</p>
+        <p> ${group.groupProduct.modelProduct.product.name}</p>
+        <p>${group.groupProduct.group.createDateTime}</p>
+        <p>${group.memberList.size()}人/${group.groupProduct.memberAmount}人成团</p>
         <span>进行中</span>
     </li>
+    </c:forEach>
 </ul>
 <!--//End--footer-->
 
