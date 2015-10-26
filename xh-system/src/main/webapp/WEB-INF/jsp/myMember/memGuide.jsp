@@ -44,7 +44,7 @@
                     </div>
                 </td>
                 <td>${document.title}</td>
-                <td><fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd HH:mm"/></td>
+                <td><fmt:formatDate value="${document.publishDate}" pattern="yyyy-MM-dd"/></td>
             </tr>
         </c:forEach>
     </table>
