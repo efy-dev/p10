@@ -72,7 +72,7 @@
                         </c:if>
                         <li class="${style}"><a href="<c:url value="/product/hot/${product.productModel.id}"/>"
                                                 target="_blank"
-                                                title="${product.productModel.name}"><strong>${product.productModel.name}</strong><img
+                                                title="${product.name}"><strong>${product.name}</strong><img
                                 class="imgfilter"
                                 src="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"
                                 alt=""/></a></li>
