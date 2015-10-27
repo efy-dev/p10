@@ -23,6 +23,7 @@
                         <item label="意见反馈" value="ec.yjfk"/>
                         <item label="法律声明" value="ec.flsm"/>
                         <item label="安全及隐私声明" value="ec.aqjyssm"/>
+                        <item label="平台优势" value="ec.ptys"/>
                     </statusType>
                 </field>
             </fields>

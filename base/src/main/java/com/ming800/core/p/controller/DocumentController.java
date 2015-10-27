@@ -47,8 +47,7 @@ public class DocumentController {
      * @return
      */
     @RequestMapping("/saveDocument.do")
-    @ResponseBody
-    public String saveDocument(Document document){
+    public String saveDocument(Document document,HttpServletRequest request){
 
         try{
             documentManager.saveDocument(document);
@@ -57,7 +56,7 @@ public class DocumentController {
             e.printStackTrace();
         }
         System.out.print(document.getId());
-        return  document.getId();
+        return  request.getParameter("url");
     }
 
     /**

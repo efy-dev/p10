@@ -25,7 +25,7 @@
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
             <form action="<c:url value="/document/saveDocument.do?groupName=${groupName}"/>" method="post" class="am-form am-form-horizontal">
-                <input type="hidden" value="saveOrUpdateDocument" name="qm">
+                <input type="hidden" value="redirect:/basic/xm.do?qm=plistDocument_tenant&groupName=${groupName} " name="url">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="documentContent.id" value="${object.documentContent.id}">
                 <div class="am-form-group">
@@ -43,7 +43,7 @@
                 <div class="am-form-group">
                     <label  class="am-u-sm-3 am-form-label">内容</label>
                     <div class="am-u-sm-9">
-                            <textarea id="sampleContent" name="documentContent.content" class="ckeditor"
+                            <textarea id="documentContent.content" name="documentContent.content" class="ckeditor"
                                       placeholder="输入内容">${object.documentContent.content}
                             </textarea>
                     </div>
@@ -58,6 +58,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(function(){
+        CKEDITOR.replace('documentContent.content', {height: '440px', width: '1000px'});
+    });
+</script>
 </body>
 </html>

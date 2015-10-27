@@ -38,7 +38,7 @@
         <a type="button" class="am-btn am-btn-default" href="<c:url value="/basic/xm.do?qm=formDocument&groupName=${groupName}"/>"><span class="am-icon-plus"></span>新建文档</a>
     </div>
 </div>
-<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
+<jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&groupName=${groupName}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
@@ -50,14 +50,13 @@
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
                     <th class="table-title">类别</th>
-                    <th class="table-title">创建时间</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="document">
                     <tr id="${document.id}">
-                        <td width="25%">
+                        <td width="33%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
@@ -71,11 +70,10 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="25%"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
-                        <td class="am-hide-sm-only" width="25%">
-                            <ming800:status name="group" dataType="Document.group" defaultValue="${object.group}" type="normal"/>
+                        <td class="am-hide-sm-only" width="33%"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
+                        <td class="am-hide-sm-only" width="33%">
+                            <ming800:status name="group" dataType="Document.group" checkedValue="${document.group}"  type="normal"/>
                         </td>
-                        <td class="am-hide-sm-only" width="25%"><fmt:formatDate value="${document.theDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
