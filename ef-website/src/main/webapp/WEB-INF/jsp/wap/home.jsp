@@ -54,7 +54,7 @@
                             <img src="<c:url value="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"/>"
                                  alt=""/>
                             <em class="name">${product.productModel.product.name}</em>
-                            <span class="price"><i>￥</i><strong>${product.productModel.price}</strong></span>
+                            <span class="price"><i>￥</i><strong>${product.productModel.price.intValue()}</strong></span>
                         </a>
                     </li>
                 </c:forEach>
