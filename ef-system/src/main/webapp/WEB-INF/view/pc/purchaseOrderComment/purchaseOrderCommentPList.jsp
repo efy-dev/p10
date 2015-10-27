@@ -53,7 +53,7 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderComment">
-                    <tr id="${purchaseOrderComment.id}">
+                    <tr id="${purchaseOrderComment.id}" width="12%">
                         <td width="12%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -72,7 +72,7 @@
                         <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
                         <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
                         <td class="am-hide-sm-only" width="12%">
-                            <%--<fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/> <br>--%>
+                            <fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/> <br>
                         </td>
                         <td class="am-hide-sm-only" width="12%">
                                 <p style="margin-left: 10px;">

@@ -301,12 +301,12 @@
                     </query>
                     <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default" />
-                        <condition name="username" defaultValue="" label="用户名" operation="eq" inputType="text" />
-                        <condition name="name" defaultValue="" label="真实姓名" operation="eq" inputType="text" />
+                        <condition name="username"  label="用户名" operation="like" inputType="text" />
+                        <condition name="name"  label="真实姓名" operation="like" inputType="text" />
                     </query>
-                    <query name="default2" label="分类查询" type="auto" orderBy="id:desc">
-                        <condition name="status" defaultValue="" operation="eq" inputType="default" />
-                    </query>
+                    <!--<query name="default2" label="分类查询" type="auto" orderBy="id:desc">-->
+                        <!--<condition name="status" defaultValue="" operation="eq" inputType="default" />-->
+                    <!--</query>-->
                 </do>
                 <do name="removeUser" label="删除用户" access="" result="json"/>
                 <do name="formUser" label="保存用户" access="" result="/user/userForm" execute="com.efeiyi.ec.system.organization.controller.ToUserFormHandler" />
