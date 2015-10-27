@@ -72,7 +72,8 @@
                         </c:if>
                         <li class="${style}"><a href="<c:url value="/product/hot/${product.productModel.id}"/>"
                                                 target="_blank"
-                                                title="${product.productModel.name}"><strong>${product.productModel.name}</strong><img
+                                                title="${product.productModel.name}"><strong>${product.productModel.product.name}</strong><span
+                                class="price"><em>￥</em><font>${product.productModel.price}</font></span><img
                                 class="imgfilter"
                                 src="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"
                                 alt=""/></a></li>
@@ -101,7 +102,7 @@
 
                         <p><ming800:status name="level" dataType="Project.level"
                                            checkedValue="${master.getMainProjectName().getProject().getLevel()}"
-                                           type="normal"/>大师</p>
+                                           type="normal"/>传承人</p>
                             <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
                     </li>
                 </c:forEach>

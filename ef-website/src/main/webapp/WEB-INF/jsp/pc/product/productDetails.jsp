@@ -385,19 +385,6 @@
     }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
-</script>
 </body>
 </html>
 

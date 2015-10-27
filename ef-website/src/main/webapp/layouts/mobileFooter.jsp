@@ -13,7 +13,8 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www2.efeiyi.com/sso.do" class="btn-reg" onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www2.efeiyi.com/sso.do" class="btn-reg"
+       onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
     %>
@@ -24,9 +25,9 @@
 
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
         </div>
-        <div class="wechat"></div>
-        <div class="txt">关注微信公众号</div>
-        <div class="txt">领取好礼</div>
+        <div class="wechat" id="wechat"></div>
+        <div class="txt" id="wechatStr1">关注微信公众号</div>
+        <div class="txt"id="wechatStr2">领取好礼</div>
     </div>
     <div class="bd copyright">京ICP备15032511号-1</div>
 </footer>
@@ -44,15 +45,28 @@
 
 <div style="display: none">
 
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <script>
 
-    function isWeiXin(){
+    (function (m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function () {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+
+    function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -65,5 +79,10 @@
     if (isWeiXin()) {
 //        alert("not weixin");
         $("#signin").attr("href", registerWx);
+
+    }else{
+        $("#wechat").hide();
+        $("#wechatStr1").hide();
+        $("#wechatStr2").hide();
     }
 </script>
