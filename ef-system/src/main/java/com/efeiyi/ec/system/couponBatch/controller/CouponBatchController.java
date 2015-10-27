@@ -29,14 +29,14 @@ public class CouponBatchController extends BaseController {
 
     @RequestMapping("/createCoupon.do")
     @ResponseBody
-    public String createCoupon(String id,int amount){
+    public String createCoupon(String id,int amount) throws Exception {
         Coupon coupon = null;
         CouponBatch couponBatch = (CouponBatch) super.baseManager.getObject("com.efeiyi.ec.purchase.model.CouponBatch",id);
         for (int i = 0;i < amount;i++){
             coupon = new Coupon();
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);
-            String serial = RandomStringUtils.randomNumeric(10);
+            String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
@@ -116,5 +116,24 @@ public class CouponBatchController extends BaseController {
         List<Object> list = baseManager.listObject(xQuery);
         return list;
     }
+    @RequestMapping("/setDefaultFlag.do")
+    @ResponseBody
+    public int setDefaultFlag(HttpServletRequest request) throws Exception {
+        String couponBatchId = request.getParameter("id");
+        String ftext = request.getParameter("ftext");
 
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+
+        int flag;
+        if("设置新注册送券".equals(ftext)){
+            couponBatch.setDefaultFlag("1");
+            baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
+            flag = 1;
+        }else {
+            couponBatch.setDefaultFlag("2");
+            baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
+            flag = 2;
+        }
+        return flag;
+    }
 }
