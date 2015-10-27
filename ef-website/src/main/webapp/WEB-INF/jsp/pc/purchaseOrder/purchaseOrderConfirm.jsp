@@ -216,7 +216,7 @@
                 </ul>
                 <div class="list div-list" id="couponExchange">
                     <span>使用兑换码</span>
-                    <input class="ipt-txt" type="text" value="1234567890" id="cdkey">
+                    <input class="ipt-txt" type="text" value="" id="cdkey">
                     <a class="btn-submit" value="确定使用" onclick="exchangeCoupon()">确定使用</a>
                     <span class="red" id="exchangeError" style="display: none">订单不满足该优惠券使用条件(兑换码输入错误，请核对后重新输入！)</span>
                 </div>
