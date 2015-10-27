@@ -26,7 +26,7 @@ public class LabelWeiXinController extends HttpServlet {
 
 
     @Override
-    @RequestMapping(value = "/contact.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/contact.do", method = RequestMethod.POST)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
