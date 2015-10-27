@@ -41,8 +41,6 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         for (CartProduct cartProductTemp : cartProductList) {
             if (cartProductTemp.getIsChoose().equals("1")) {
                 cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
-                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProductTemp.getProductModel(), cartProductTemp.getAmount(), cartProductTemp.getProductModel().getPrice());
-                baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
                 Tenant tenant = cartProductTemp.getProductModel().getProduct().getTenant();
                 tenantSet.add(tenant);
                 if (productMap.get(tenant.getId()) != null) {

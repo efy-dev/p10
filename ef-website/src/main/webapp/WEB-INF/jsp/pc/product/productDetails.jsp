@@ -228,7 +228,7 @@
             <div class="btns">
                 <c:if test="${productModel.amount > 0}">
                     <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
-                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
+                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>
                 </c:if>
             </div>
@@ -273,16 +273,7 @@
                 </c:if>
         </div>
 </div>
-<div class="scroll-bar">
-    <div class="scroll-bar-top">
-        <span class="btn"><i class="icon"></i>顶部</span>
-    </div>
-    <!-- //End--返回顶部-->
-    <%--<div class="scroll-bar-ask">--%>
-        <%--<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>--%>
-    <%--</div>--%>
-    <!-- //End--在线咨询-->
-</div>
+
 
 
 </div>
