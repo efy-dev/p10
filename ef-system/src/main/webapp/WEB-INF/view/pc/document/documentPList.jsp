@@ -49,7 +49,7 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
-                    <th class="table-title">名字</th>
+                    <th class="table-title">类别</th>
                     <th class="table-title">创建时间</th>
                 </tr>
                 </thead>
@@ -57,7 +57,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="document">
                     <tr id="${document.id}">
-                        <td>
+                        <td width="25%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
@@ -71,9 +71,11 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
-                        <td class="am-hide-sm-only">${document.name}</td>
-                        <td class="am-hide-sm-only"><fmt:formatDate value="${document.theDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
+                        <td class="am-hide-sm-only" width="25%"><a href="<c:url value="/basic/xm.do?qm=viewDocument&groupName=${groupName}&id=${document.id}"/>">${document.title}</a></td>
+                        <td class="am-hide-sm-only" width="25%">
+                            <ming800:status name="group" dataType="Document.group" defaultValue="${object.group}" type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only" width="25%"><fmt:formatDate value="${document.theDatetime}" type="both" pattern="yyyy-MM-dd HH:mm"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>
