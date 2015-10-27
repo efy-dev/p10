@@ -9,6 +9,8 @@ import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
+import com.efeiyi.ec.purchase.model.Coupon;
+import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.website.order.service.WxPayConfig;
 import com.efeiyi.ec.website.organization.service.BranchManager;
 import com.efeiyi.ec.website.organization.service.RoleManager;
@@ -21,6 +23,7 @@ import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.PConst;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
@@ -38,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -65,6 +69,9 @@ public class   SigninController extends BaseController {
     private XdoManager xdoManager;
     @Autowired
     private SmsCheckManager smsCheckManager;
+
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
 
     /**
@@ -177,7 +184,32 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                Coupon coupon = new Coupon();
+                coupon.setStatus("1");
+                coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                Date currentDate = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                String currentDateStr = simpleDateFormat.format(currentDate);
+                coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                coupon.setConsumer(consumer);
+                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+            }
+
+        }
+        response.sendRedirect(request.getContextPath() + "/sso2.do");
+    }
+
+
+    @RequestMapping("/sso2.do")
+    public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         MyUser bigUser = AuthorizationUtil.getMyUser();
         Cart cart = null;
         try {
@@ -201,7 +233,6 @@ public class   SigninController extends BaseController {
 
         response.sendRedirect(request.getContextPath() + "/");
     }
-
     @RequestMapping({"/login"})
     public String login(HttpServletRequest request ,Model model){
         String error = request.getParameter("error");

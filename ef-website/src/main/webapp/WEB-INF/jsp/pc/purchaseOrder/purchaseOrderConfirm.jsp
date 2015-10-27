@@ -384,7 +384,11 @@
     function couponListHtml(it /**/) {
         var out = ' ';
         for (var i = 0; i < it.length; i++) {
-            out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+            if (it[i]["couponBatch"]["type"] == "1") {
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">满' + (it[i]["couponBatch"]["priceLimit"]) + '元立减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+            } else {
+                out += ' <li> <input type="checkbox" onclick="chooseUsefulCoupon(this)" name="coupon" id="' + it[i].id + '"> <span class="t1">减' + (it[i].couponBatch.price) + '元</span>  <span class="t3">' + ((it[i]["startTimeL"])) + '至' + ((it[i]["endTimeL"])) + '</span> </li> ';
+            }
         }
         return out;
     }
@@ -434,10 +438,11 @@
 
     function chooseUsefulCoupon(element) {
         var status = "1";
-        if ($(element).attr("checked") == true) {
-            status = "2";
-        } else {
+        console.log($(element).is(':checked'));
+        if ($(element).is(':checked') == true) {
             status = "1";
+        } else {
+            status = "2";
         }
         //选中优惠卷以后会发送一个请求就是把优惠券绑定到订单当中，绑定完成之后再发送一个请求来更新价格返回的是一个拼装好的json字符串
         var param = {"purchaseOrderId": "${purchaseOrder.id}", "couponId": $(element).attr("id"), "status": status};
@@ -483,7 +488,7 @@
             }, 1000);
 
         }
-        var param = {"price": "${purchaseOrder.total}"}
+        var param = {"price": "${purchaseOrder.total}","purchaseOrderId":"${purchaseOrder.id}"}
         //初始化优惠券列表
         ajaxRequest("<c:url value="/listUserCoupon.do"/>", param, success, function () {
         }, "post");

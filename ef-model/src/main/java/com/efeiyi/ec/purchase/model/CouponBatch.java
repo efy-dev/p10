@@ -40,6 +40,16 @@ public class CouponBatch implements Serializable{
     private String deliverType; //发放方式 1 发优惠券 2 发兑换码  3通码
     private String startReceiveTime;//领取时间起
     private String endReceiveTime;//领取时间止
+    private String defaultFlag; //默认优惠券的标示  注册自动发放优惠券就发放有该标示的批次
+
+    @Column(name = "default_flag")
+    public String getDefaultFlag() {
+        return defaultFlag;
+    }
+
+    public void setDefaultFlag(String defaultFlag) {
+        this.defaultFlag = defaultFlag;
+    }
 
     private String viewStatus;
 
