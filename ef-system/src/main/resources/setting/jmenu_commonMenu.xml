@@ -141,10 +141,11 @@
                 <match url="/basic/xm.do?qm=plistEcBanner_search"/>
 
             </jnode>
-            <jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant" access="admin,manager" text_zh_CN="电商网站文档">
+            <jnode url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=ec" access="admin,manager" text_zh_CN="电商网站文档">
                 <match url="/basic/xm.do?qm=plistDocument_tenant&amp;groupName=tenant"/>
-                <match url="/basic/xm.do?qm=formDocument&amp;groupName=tenant"/>
-                <match url="/basic/xm.do?qm=viewDocument&amp;groupName=tenant"/>
+                <match url="/basic/xm.do?qm=formDocument&amp;groupName=ec"/>
+                <match url="/basic/xm.do?qm=viewDocument&amp;groupName=ec"/>
+                <match url="/document/saveDocument.do&amp;groupName=ec"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,manager" text_zh_CN="首页推荐专题">
                 <match url="/basic/xm.do?qm=formSubject"/>

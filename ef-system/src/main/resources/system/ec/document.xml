@@ -8,6 +8,24 @@
         <entity name="Document" label="Document"
                 basic="simple" others=""
                 model="com.ming800.core.p.model.Document">
+            <fields>
+                <field name="group" label="类别" inputType="text">
+                    <statusType fieldName="group">
+                        <item label="购物流程" value="购物流程"/>
+                        <item label="支付方式" value="支付方式"/>
+                        <item label="配送方式" value="配送方式"/>
+                        <item label="正品保障" value="正品保障"/>
+                        <item label="售后正常" value="正品保障"/>
+                        <item label="退换货流程" value="退换货流程"/>
+                        <item label="关于我们" value="关于我们"/>
+                        <item label="联系我们" value="联系我们"/>
+                        <item label="诚聘英才" value="诚聘英才"/>
+                        <item label="意见反馈" value="意见反馈"/>
+                        <item label="法律声明" value="法律声明"/>
+                        <item label="安全及隐私声明" value="安全及隐私声明"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistDocument" access="" label="Document列表"
                     result="/document/documentPList"
@@ -29,7 +47,9 @@
                 </do>
 
                 <do name="removeDocument" label="删除document" access="" result="json"/>
-                <do name="formDocument" label="保存document" access="" result="/document/documentForm"/>
+                <do name="formDocument" label="保存document" access="" result="/document/documentForm"
+                        execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                        />
                 <do name="viewDocument" label="保存document" access="" result="/document/documentView"/>
                 <do name="saveOrUpdateDocument" label="保存Document" access="" result="redirect:/basic/xm.do?qm=plistDocument_tenant">
                     <page>
