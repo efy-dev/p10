@@ -53,8 +53,8 @@
                         <a href="<c:url value="/product/hot/${product.productModel.id}"/>" title="">
                             <img src="<c:url value="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"/>"
                                  alt=""/>
-                            <em class="name">${product.productModel.product.name}</em>
-                            <span class="price"><i></i><strong></strong></span>
+                            <em class="name">${product.productModel.name}</em>
+                            <span class="price"><i>￥</i><strong>${product.productModel.price}</strong></span>
                         </a>
                     </li>
                 </c:forEach>
