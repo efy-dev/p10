@@ -74,4 +74,10 @@ $(function(){
         alert('sadasdsa')
         $(this).parent().find('.common-popup').show()
     })
+    //°ïÖúÖÐÐÄ
+    $('.help-order .page .left dt').click(function(){
+        $(this).toggleClass('active');
+        $(this).siblings('dd').slideToggle('fast');
+    })
+
 })

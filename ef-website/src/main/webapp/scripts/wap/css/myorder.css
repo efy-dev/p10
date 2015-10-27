@@ -297,6 +297,10 @@ ul,dl{list-style:none}
 .btn:hover{color: #fff;}
 .gbtn{width: 100%;padding: 1.2rem 0;text-align: center;float: left;background: #000;color: #fff;position: relative}
 .pq{margin-left: 2%;width: 0.8rem;height: 0.8rem;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;transfrom:rotate(-45deg); -webkit-transform:rotate(-45deg);float: left;margin-top: 0.5rem}
+.tab-btn{padding: 1.4rem 1.8rem;width: 100%;float: left;border-top: 1px solid #000;font-size: 1.4rem;color: #000;}
+.tab-btn a{float: left;color: #000;padding-left: 1.5rem;position: relative}
+.tab-btn a .gicon{width: 1rem;height: 1rem;position: absolute;border-right: 1px solid #000;border-bottom: 1px solid #000;left:0;top:20%;transform:rotate(136deg); }
+.tab-btn a:nth-child(2){float: right;padding-left: 0;}
 /*三角图标*/
 .s-icon{width: 1rem;height: 1rem;position: absolute;border-right: 1px solid #000;border-bottom: 1px solid #000;right: 1.4rem;top:1.3rem;transfrom:rotate(-45deg);/*deg:度；旋转的属性*/
     -webkit-transform:rotate(-45deg);/*谷歌和苹果浏览器*/}
@@ -310,7 +314,7 @@ ul,dl{list-style:none}
 /*------加载更多*/
 .more{text-align: center;font-size: 1.2rem;background: #e6e6e6;border-top: 1px solid #ccc;}
 .more a{width: 100%;float: left;padding: 0.7rem 0;font-size: 1.4rem;color: #000;position: relative}
-.more a .icon{background: url("../images/purchase.png")no-repeat 0 0;width: 15px;height: 17px;position: absolute;left: 25%;top: 30%;background-size: 375%;}
+.more a .icon{background: url("../images/purchase.png")no-repeat 0 0;width: 15px;height: 17px;position: absolute;left: 27%;top: 35%;background-size: 755%;}
 /*b01020301全部商品首页*/
 .all-bulk .price{  padding: 1rem 1.8rem;margin: 0}
 .all-bulk .price li{width: 33%;float: left;font-size: 1.2rem;color: #000;}
@@ -357,7 +361,7 @@ ul,dl{list-style:none}
 .colonel-table .introduce p strong{color: #999;font-weight: 100;}
 .colonel-table .introduce .button{padding:0 15%;margin-bottom: 2rem}
 .colonel-table .introduce .button span{padding-left: 2.3rem;}
-.colonel-table .introduce .button .icon1{width: 16px;height: 13px;background:url("../images/purchase.png") no-repeat -16px 1px;position: absolute;left: 25%;top: 38%;display: inline-block;background-size:37px auto;}
+.colonel-table .introduce .button .icon1{width: 16px;height: 13px;background:url("../images/purchase.png") no-repeat -16px 1px;position: absolute;left: 25%;top: 38%;display: inline-block;background-size:80px auto;}
 .colonel-table .efeiyi-btn{position: relative;padding: 1.4rem 0;width: 100%;float: left;border-top: 1px solid #000;font-size: 1.4rem;color: #000;text-align: center}
 .colonel-table .efeiyi-btn .efiyi{width:10px;height: 10px;position: absolute;border-right: 1px solid #000;border-bottom: 1px solid #000;left: 65%;top: 50%;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);margin-top: -4px;margin-left: 0px;}
 /*申请退货*/
@@ -433,7 +437,12 @@ ul,dl{list-style:none}
 .od-tab1 .product li .bottom{padding: 0 1.8rem;margin-top: 4px}
 .od-tab1 .product li .bottom .left{float: left;font-size: 12px;color: #000;margin-top: 10px;width: 20%}
 .od-tab1 .product li .bottom .right{float: right;width: 80%}
-.od-tab1 .product li .bottom .right li{margin-bottom: 0;float: right;width: 70px;height: 36px;border: 1px solid #000;padding: 0.6rem 0;text-align: center;margin-right: 1%;border-radius: 4px;}
+.od-tab1 .product li .bottom .right li{margin-bottom: 0;float: right;width: 70px;height: 30px;border: 1px solid #000;padding: 0.4rem 0;text-align: center;margin-right: 1%;border-radius: 4px;}
 .od-tab1 .product li .bottom .right li a{width: 100%;float: left;font-size: 1.2rem;color: #000;}
-
-
+/*没有相关订单*/
+.no-order{padding:0 1.8rem;}
+.no-order .b-btn{padding:0 5rem;}
+.no-order .top .txt{padding:17px 0 17px 35%;position: relative;width: 100%;float: left;font-size: 12px;color: #000;}
+.no-order .top .txt p{margin-bottom: 1.5rem;}
+.no-order .top .txt p:nth-child(1){font-size: 20px;}
+.no-order .top .txt .bgpic{width: 8.5rem;height: 8.5rem;position: absolute;display: inline-block;left: 0;top:0;background: url('../images/purchase.png') no-repeat -80px 14px;}

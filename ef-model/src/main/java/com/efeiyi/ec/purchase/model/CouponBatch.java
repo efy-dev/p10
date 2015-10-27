@@ -43,6 +43,24 @@ public class CouponBatch implements Serializable{
 
     private String viewStatus;
 
+    @Column(name = "start_receive_time")
+    public String getStartReceiveTime() {
+        return startReceiveTime;
+    }
+
+    public void setStartReceiveTime(String startReceiveTime) {
+        this.startReceiveTime = startReceiveTime;
+    }
+
+    @Column(name = "end_receive_time")
+    public String getEndReceiveTime() {
+        return endReceiveTime;
+    }
+
+    public void setEndReceiveTime(String endReceiveTime) {
+        this.endReceiveTime = endReceiveTime;
+    }
+
     @Column(name = "cdkey")
     public String getUniqueKey() {
         return uniqueKey;
@@ -193,7 +211,7 @@ public class CouponBatch implements Serializable{
         this.type = type;
     }
 
-    @Column(name = "range")
+    @Column(name = "use_range")
     public String getRange() {
         return range;
     }
