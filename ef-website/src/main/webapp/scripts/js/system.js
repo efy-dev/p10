@@ -8,9 +8,9 @@ $(function(){
         });
         //footer二维码
         $('.footer .service .wechat').hover(function(){
-            $(this).addClass('wechat-hover');
+            $(this).find('.icon').fadeIn('100');
         },function(){
-            $(this).removeClass('wechat-hover');
+            $(this).find('.icon').delay(2000).fadeOut();
         })
     })();
     //
@@ -25,7 +25,8 @@ $(function(){
     })();
     //
     (function(){
-        var $liImg=$('.focus .slider-main li');
+        var $sliderMain=$('.focus .slider-main');
+        var $liImg=$sliderMain.find('li');
         var $liNav=$('.focus .slider-nav li');
         var index=0;
         var timer=null;
@@ -39,6 +40,12 @@ $(function(){
         $liNav.mouseup(function(){
             timer=setInterval(autoFocus,iSpeed);
         })
+        $sliderMain.hover(function(){
+            clearInterval(timer);
+        },function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
+
         function autoFocus(){
             index++;
             if(index>$liImg.length-1){index=0;}
@@ -68,21 +75,28 @@ $(function(){
         //收藏
         var oBiao=$('.preview .collect .biao');
         oBiao.hover(function(){
-            $(this).find('.icon').addClass('icon-hover');
-        },function(){
-            $(this).find('.icon').removeClass('icon-hover');
-        });
-        oBiao.click(function(){
-            var oCllect=$(this).parents('.collect');
-            $(this).find('.icon').toggleClass('icon-active');
-            oCllect.find('span.hover').remove();
-            if(oCllect.find('span').is('.active')){
-                oCllect.find('span.active').remove();
-                oCllect.append('<span class="txt hover">添加收藏</span>');
-            }else{
-                oCllect.append('<span class="txt active">取消收藏</span>');
+            var $span=$(this).siblings('span');
+            $span.text('添加收藏');
+            if($span.is('.active')){
+                $span.text('取消收藏');
+            }
+            if($span.is('.hover')){
+                $span.text('添加收藏');
             }
         })
+
+        oBiao.find('.icon').toggle(
+            function(){
+                var $span=$(this).parents('.biao').siblings('span');
+                $(this).addClass('icon-active');
+                $span.attr('class','txt active').text('取消收藏');
+            },
+            function(){
+                var $span=$(this).parents('.biao').siblings('span');
+                $(this).removeClass('icon-active');
+                $span.attr('class','txt hover').text('添加收藏');
+            }
+        );
         //
         $(window).scroll(function(){
             var d=$(document).scrollTop();
@@ -94,7 +108,7 @@ $(function(){
         });
         //
         $('.product-intro .detail .part:last').css({'border':'0'});
-        //���
+        //
         $('.tab-items li a').click(function(){
             var pos=$($(this).attr('href')).offset().top;
             $("html,body").animate({scrollTop:pos},500);
@@ -200,5 +214,4 @@ $(function(){
             }
         });
     })();
-
 })

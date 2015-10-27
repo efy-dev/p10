@@ -36,7 +36,7 @@
                     <c:forEach items="${requestScope.pageInfo.list}" var="projectCategory">
 
                         <tr id="${projectCategory.id}">
-                            <td>
+                            <td width="25%">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button onclick="window.location.href='<c:url
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td width="25%">
                                 <a href="<c:url value="/basic/xm.do?qm=viewEcProjectCategory&id=${projectCategory.id}"/>">
                                         ${projectCategory.name}
                                 </a>
@@ -94,10 +94,10 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td>
+                            <td width="25%">
                                     ${projectCategory.serial}
                             </td>
-                            <td>
+                            <td width="25%">
                                 <img  width="10%" src="http://pro.efeiyi.com/${projectCategory.pictureUrl}@!product-model">
                             </td>
                         </tr>

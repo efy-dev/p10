@@ -4,6 +4,7 @@ import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.group.model.Member;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -26,34 +27,51 @@ public class GroupController {
     @Autowired
     private BaseManager baseManager;
 
-    @RequestMapping(value = "/createGroup.do")
-    public String CreateGroup(HttpServletRequest request, Model model) throws Exception{
+    @RequestMapping(value = "/group.do")
+    public String group(HttpServletRequest request,Model model) throws Exception{
+        return "/illustration";
+    }
+
+    @RequestMapping(value = "/createGroup")
+    public String createGroup(HttpServletRequest request, Model model) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
         String groupProductId = request.getParameter("groupProductId");
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
+        String amount = "1";
+
         if (currentUser != null){
-            XQuery xQuery = new XQuery("listGroup_default",request);
-            xQuery.put("manUser_id",currentUser.getBigUser().getId());
-            xQuery.put("groupProduct_id",groupProductId);
-            List<Group> list = baseManager.listObject(xQuery);
-            if (list.size() > 0){
+            PurchaseOrder purchaseOrder = new PurchaseOrder();//待用接口处
+
+            if(purchaseOrder.getOrderStatus().equals("5")){
+
                 Group group = new Group();
-                group.setManUser(currentUser.getBigUser());
+                group.setManUser(currentUser);
                 group.setStatus("1");
                 group.setCreateDateTime(new Date());
                 group.setGroupProduct(groupProduct);
+                group.setCreateDateTime(new Date());
+                group.setStatus("1");
+                group.setManUser(currentUser);
                 baseManager.saveOrUpdate(Group.class.getName(),group);
 
-                model.addAttribute("group",group);
-                return "/";
+                Member member = new Member();
+                member.setStatus("1");
+                member.setGroup(group);
+                member.setLevel("0");
+                member.setUser(currentUser);
+                baseManager.saveOrUpdate(Member.class.getName(),member);
             }
 
+                return "/";
+        }else {
+            return "/";
         }
-        return "/";
+
     }
 
+
     /*@RequestMapping(value = "/groupBuy")
-    public String GroupBuy(HttpServletRequest request,Model model) throws Exception{
+    public String groupBuy(HttpServletRequest request,Model model) throws Exception{
         String groupProductId = request.getParameter("groupProductId");
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
         String productModelId = groupProduct.getProductModel().getId();
@@ -77,5 +95,10 @@ public class GroupController {
         model.addAttribute("groupList1",list);
         model.addAttribute("groupList2",list2);
         return "/";
+    }
+
+    @RequestMapping(value = "/protocol")
+    public String protocol(HttpServletRequest request, Model model) throws Exception{
+        return "/protocolDetails";
     }
 }

@@ -1,4 +1,3 @@
-@charset "utf-8";
 a { outline: none; cursor: pointer }
 a:hover { text-decoration: underline }
 /*各页面头部*/
@@ -25,21 +24,21 @@ a:hover { text-decoration: underline }
 .my-order .order-nav .layout-li { margin-top: 15px; }
 .my-order .order-nav .layout-li .liul a { color: #000; font-size: 12px; padding-left: 4px; }
 .my-order .order-nav .layout-li li { padding-bottom: 7px; cursor: pointer }
-.my-order .order-nav .layout-li li a { color: #666; padding-left: 4px; font-family: "宋体"; font-size: 12px; outline: none; }
+.my-order .order-nav .layout-li li a { color: #666; padding-left: 4px; font-family: "simsun"; font-size: 12px; outline: none; }
 .aborder { padding-top: 7px; border-top: 1px solid #666; }
 .my-order .layout-col { width: 853px; float: right; position: relative }
 .my-order .filter-bar { width: 780px; }
 .my-order .extra-l { float: left; }
 .my-order .filter-bar li { float: left; padding-right: 40px; }
-.my-order .filter-bar li a { font-size: 12px; color: #666; font-family: "宋体"; outline: none; }
+.my-order .filter-bar li a { font-size: 12px; color: #666; font-family: "simsun"; outline: none; }
 .my-order .filter-bar li a span { padding: 0 2px; }
 .my-order .filter-bar li .curr { font-size: 16px; font-family: "Microsoft YaHei"; color: #000; }
 .my-order .extra-r { float: right; }
 .my-order .fav-bar { padding-right: 16px; }
 .my-order .fav-bar li { padding-right: 5px; float: right }
-.my-order .fav-bar li a { color: #003366; font-size: 12px; font-family: "宋体"; outline: none; }
+.my-order .fav-bar li a { color: #003366; font-size: 12px; font-family: "simsun"; outline: none; }
 .my-order .commodity_list { width: 853px; border: 1px solid #ccc; margin: 26px 0 34px 27px; }
-.my-order .commodity_list tr th { font-size: 12px; color: #666; font-family: "宋体"; padding: 14px 0; text-align: center; font-weight: normal }
+.my-order .commodity_list tr th { font-size: 12px; color: #666; font-family: "simsun"; padding: 14px 0; text-align: center; font-weight: normal }
 .my-order .commodity_info { width: 245px; }
 .my-order .commodity_price_unit { width: 165px; }
 .my-order .commodity_quantity { width: 50px; }
@@ -55,26 +54,26 @@ a:hover { text-decoration: underline }
 .my-order .commodity_info-1 .l2 p { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 .my-order .commodity_info-1 .l1 { width: 80px; height: 80px; padding: 0; float: left; }
 .my-order .commodity_info-1 .l2 { padding: 22px 0 0 16px; }
-.my-order .commodity_info-1 .l2 p a { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; outline: none; }
+.my-order .commodity_info-1 .l2 p a { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; outline: none; }
 .my-order .commodity_info-1 .l2 p a:hover { text-decoration: underline; }
 .my-order .price { color: #ff0000; font-size: 12px; font-weight: normal; font-family: "Times New Roman"; padding: 20px 0px 20px 60px; }
 .my-order .amount { font-size: 12px; color: #666; font-weight: normal; padding: 20px 0px 20px 20px; }
 .my-order .price1 { color: #ff0000; font-size: 12px; font-weight: normal; font-family: "Times New Roman"; }
-.my-order .price2 a { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; }
+.my-order .price2 a { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; }
 .my-order .amount1 { padding: 20px 0px 20px 55px; }
-.my-order .price3 { color: #ff0000; font-size: 12px; font-weight: normal; font-family: "宋体"; padding: 20px 0px 20px 42px; }
-.my-order .price4 { padding: 20px 0px 20px 14px; text-align: center; color: #003366; font-size: 12px; font-weight: normal; font-family: "宋体"; }
-.my-order .price4 a { font-size: 12px; font-weight: normal; font-family: "宋体"; text-align: center; color: #003366; outline: none; }
+.my-order .price3 { color: #ff0000; font-size: 12px; font-weight: normal; font-family: "simsun"; padding: 20px 0px 20px 42px; }
+.my-order .price4 { padding: 20px 0px 20px 14px; text-align: center; color: #003366; font-size: 12px; font-weight: normal; font-family: "simsun"; }
+.my-order .price4 a { font-size: 12px; font-weight: normal; font-family: "simsun"; text-align: center; color: #003366; outline: none; }
 .my-order .price4 a:hover { text-decoration: underline; }
 .my-order .active-clolor1 { border-left: 1px solid #ccc; }
 .my-order .price5 { text-align: center; }
 .my-order .price6 { text-align: center; }
-.my-order .price6 p { font-size: 12px; color: #999; font-weight: normal; font-family: "宋体"; }
+.my-order .price6 p { font-size: 12px; color: #999; font-weight: normal; font-family: "simsun"; }
 .my-order .price6 p .evaluate { color: #003366; }
-.my-order .price5 a { font-size: 12px; font-weight: normal; font-family: "宋体"; color: #003366; outline: none; }
+.my-order .price5 a { font-size: 12px; font-weight: normal; font-family: "simsun"; color: #003366; outline: none; }
 .my-order .price5 a:hover { text-decoration: underline; }
 .my-order .title table { width: 851px; border: 1px #ccc solid }
-.my-order .title table th { line-height: 40px; text-align: center; font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal }
+.my-order .title table th { line-height: 40px; text-align: center; font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal }
 .my-order .list-pro { margin-top: 7px; }
 .my-order .list-pro-table { width: 851px; margin-bottom: 20px; }
 .my-order .list-pro-table .item tr { border: 0; }
@@ -84,17 +83,17 @@ a:hover { text-decoration: underline }
 .my-order .list-pro .cols1 { padding: 22px 0 0 47px; }
 .my-order .list-pro .cols1 img { width: 78px; float: left; border: 1px solid #ccc; text-align: center }
 .my-order .list-pro .info { width: 100px; float: left; padding: 22px 0 40px 10px; }
-.my-order .list-pro .info a { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; outline: none; }
-.my-order .extra-l a { font-size: 12px; color: #666; font-family: "宋体"; outline: none; margin-right: 40px; }
+.my-order .list-pro .info a { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; outline: none; }
+.my-order .extra-l a { font-size: 12px; color: #666; font-family: "simsun"; outline: none; margin-right: 40px; }
 .my-order .extra-l strong { font-size: 16px; font-family: "Microsoft YaHei"; color: #000; padding-right: 40px; font-weight: normal }
-.my-order .extra-r a { color: #003366; font-size: 12px; font-family: "宋体"; outline: none; }
+.my-order .extra-r a { color: #003366; font-size: 12px; font-family: "simsun"; outline: none; }
 .my-order .list-pro td { text-align: center; }
-.my-order .list-pro td a { color: #003366; font-size: 12px; font-family: "宋体"; outline: none; }
+.my-order .list-pro td a { color: #003366; font-size: 12px; font-family: "simsun"; outline: none; }
 /*--空--*/
 .my-order .mt-null { width: 287px; height: 80px; margin: 55px 280px; }
-.my-order .mt-null p { font-size: 12px; color: #000; font-family: "宋体"; text-align: center }
+.my-order .mt-null p { font-size: 12px; color: #000; font-family: "simsun"; text-align: center }
 .my-order .mt-null ul { margin-top: 30px; }
-.my-order .mt-null ul li a { width: 129px; height: 36px; color: #000; font-family: "仿体"; text-align: center; display: block; line-height: 36px; font-size: 14px; border: 1px solid #000; text-decoration: none }
+.my-order .mt-null ul li a { width: 129px; height: 36px; color: #000; font-family: "simsun"; text-align: center; display: block; line-height: 36px; font-size: 14px; border: 1px solid #000; text-decoration: none }
 .my-order .mt-null ul li a:hover { transition: all 0.5s; background-color: #000; color: #fff; }
 /*.my-order .efeiyi{float: left}*/
 /*样式*/
@@ -104,7 +103,7 @@ a:hover { text-decoration: underline }
 /*--查看订单收获信息--*/
 .my-order .filter-bar-1 { width: 854px; }
 .my-order .filter-bar-1 li { float: left; padding-right: 40px; }
-.my-order .filter-bar-1 li a { font-size: 12px; color: #666; font-family: "宋体"; outline: none; }
+.my-order .filter-bar-1 li a { font-size: 12px; color: #666; font-family: "simsun"; outline: none; }
 .my-order .filter-bar-1 li a span { padding: 0 2px; }
 .my-order .filter-bar-1 li .curr { font-size: 16px; font-family: "Microsoft YaHei"; color: #000; }
 .my-order .orderinfo { width: 853px; border: 1px solid #ccc; overflow: hidden; margin-bottom: 100px }
@@ -113,13 +112,13 @@ a:hover { text-decoration: underline }
 .my-order .od-id { padding-left: 14px; }
 .my-order .od-id .od-id-btn { width: 100px; line-height: 24px; height: 24px; background: #000; color: #fff; text-align: center; display: inline-block; margin-left: 60px; }
 .my-order .od-id .od-id-btn:hover { text-decoration: none; }
-.my-order .od-id p { line-height: 25px; font-size: 12px; font-family: "宋体"; color: #000; }
+.my-order .od-id p { line-height: 25px; font-size: 12px; font-family: "simsun"; color: #000; }
 .my-order .od-id p span { padding-left: 10px; }
 .my-order .bd-top { border-top: 1px solid #CBCBCB; padding-bottom: 20px; }
-.my-order .strong { font-size: 12px; font-family: "宋体"; color: #000; padding: 0 }
+.my-order .strong { font-size: 12px; font-family: "simsun"; color: #000; padding: 0 }
 .my-order .od-id p span .active2 { padding: 0 }
 .my-order .item-list5 { padding-bottom: 30px; }
-.my-order .od-id .strong-1 .strong { float: left; font-size: 12px; font-family: "宋体"; color: #000; padding: 0 }
+.my-order .od-id .strong-1 .strong { float: left; font-size: 12px; font-family: "simsun"; color: #000; padding: 0 }
 .my-order .od-id .strong-1 { overflow: hidden }
 .my-order .commodity_info1 { width: 80px; }
 .my-order .informala { border: 1px solid #ccc; }
@@ -134,8 +133,8 @@ a:hover { text-decoration: underline }
 .my-order .title-message { border: 1px solid #ccc }
 .my-order .title-message tr { border: 1px solid #ccc; }
 .my-order .title-message tr td { text-align: left }
-.my-order .title-message tr td span { font-size: 12px; color: #666; font-family: "宋体"; padding-left: 26px; line-height: 70px; text-align: right; }
-.my-order .title-message tr td span a { color: #003366; font-size: 12px; font-family: "宋体"; outline: none; margin-right: 26px; }
+.my-order .title-message tr td span { font-size: 12px; color: #666; font-family: "simsun"; padding-left: 26px; line-height: 70px; text-align: right; }
+.my-order .title-message tr td span a { color: #003366; font-size: 12px; font-family: "simsun"; outline: none; margin-right: 26px; }
 .my-order .title-message tr td span.cl-black { color: #000; line-height: 40px; }
 .my-order .no-border { margin-top: -1px; }
 .my-order .title-number { float: right; margin-top: 29px; }
@@ -146,12 +145,12 @@ a:hover { text-decoration: underline }
 .my-order .title-number-page a { font-size: 12px; font-weight: normal; font-family: "Times New Roman"; color: #000; }
 /*收货地址*/
 .my-order .address { border: 1px solid #ccc }
-.my-order .address tr td { font-size: 12px; color: #666; font-family: "宋体"; line-height: 34px; text-align: left; }
+.my-order .address tr td { font-size: 12px; color: #666; font-family: "simsun"; line-height: 34px; text-align: left; }
 .my-order .address tr td strong { text-align: right; width: 100% }
 .my-order .address tr td span.ae-black { color: #000; line-height: 40px; padding-left: 21px }
 .my-order .ae-rg { text-align: right; }
 .my-order .ae-lf { text-align: left }
-.my-order .ae-rg span a { color: #003366; font-size: 12px; font-family: "宋体"; outline: none; }
+.my-order .ae-rg span a { color: #003366; font-size: 12px; font-family: "simsun"; outline: none; }
 .my-order .ae-rg1 { border-right: 1px solid #ccc }
 .my-order .ae-rg a { margin-right: 40px; }
 .my-order .yes-border { border: 1px solid #ccc; }
@@ -160,17 +159,17 @@ a:hover { text-decoration: underline }
 .my-order .pop-h { padding-left: 20px; font-size: 14px; color: #000; font-family: "Microsoft YaHei"; line-height: 44px; border-bottom: 1px solid #000; background: #fff; }
 .my-order .m-form { padding: 15px 37px 32px; background: #fff; }
 .my-order .m-form li { height: 44px; line-height: 44px; }
-.my-order .m-form li input { border: 1px solid #000; padding: 6px; color: #000; font-size: 12px; font-family: "宋体"; }
-.my-order .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: "宋体"; font-weight: normal; text-align: right }
-.my-order .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: "宋体"; padding: 4px 13px; }
-.my-order .m-form li select option { color: #000; font-size: 12px; font-family: "宋体"; }
+.my-order .m-form li input { border: 1px solid #000; padding: 6px; color: #000; font-size: 12px; font-family: "simsun"; }
+.my-order .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: "simsun"; font-weight: normal; text-align: right }
+.my-order .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: "simsun"; padding: 4px 13px; }
+.my-order .m-form li select option { color: #000; font-size: 12px; font-family: "simsun"; }
 .my-order .m-form li .cars { width: 96px; }
 .my-order .m-form li .car1 { width: 108px; }
 .my-order .m-form li .car2 { width: 142px; }
 .my-order .m-form li strong { font-size: 10px; color: #666; }
-.my-order .m-form li .dj-btn { width: 163px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "宋体"; }
+.my-order .m-form li .dj-btn { width: 163px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "simsun"; }
 .my-order .m-form li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
-.my-order .m-form li span { width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: "宋体"; line-height: 25px; padding: 5px 13px; }
+.my-order .m-form li span { width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: "simsun"; line-height: 25px; padding: 5px 13px; }
 .my-order .clase { width: 15px; height: 15px; position: absolute; top: 15px; right: 20px; cursor: pointer; transition: all 0.5s; background: url("../images/efeiyi-icon.png") no-repeat; }
 .my-order .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*用户信息*/
@@ -182,34 +181,34 @@ a:hover { text-decoration: underline }
 .my-order .userinfo-portrait dl dd p { line-height: 27px; }
 .my-order .userinfo-figure { width: 108px; height: 108px; border: 1px solid #ccc; overflow: hidden; }
 .my-order .editor { width: 106px; height: 24px; background: rgba(0,0,0,0.6); position: absolute; top: 171px; left: 50px; font-size: 12px; text-align: center; }
-.my-order .editor a { font-family: "宋体"; color: #fff; line-height: 24px; font-weight: normal; }
+.my-order .editor a { font-family: "simsun"; color: #fff; line-height: 24px; font-weight: normal; }
 .my-order .userinfo-datum { margin: 0 26px; padding-top: 46px; }
-.my-order .userinfo-datum li { font-family: "宋体"; color: #666; font-size: 12px; font-weight: normal; line-height: 54px; height: 54px; }
+.my-order .userinfo-datum li { font-family: "simsun"; color: #666; font-size: 12px; font-weight: normal; line-height: 54px; height: 54px; }
 .my-order .userinfo-datum li label { width: 80px; text-align: right; font-weight: 100 }
-.my-order .userinfo-tex { width: 124px; height: 37px; border: 1px solid #ccc; padding: 10px 11px; font-family: "宋体"; color: #000; font-size: 12px; }
+.my-order .userinfo-tex { width: 124px; height: 37px; border: 1px solid #ccc; padding: 10px 11px; font-family: "simsun"; color: #000; font-size: 12px; }
 .my-order .userinfo-tex:active, .my-order .userinfo-tex:hover { border: 1px solid #000; }
 .my-order .userinfo-box { widht: 11px; height: 11px; line-height: 11px; }
 .my-order .am-input-group { width: 215px; height: 37px; display: table; }
 .my-order .act1 { float: left; height: 38px; margin: 0 }
 .my-order .am-btn { float: left; display: block; background: #fff; }
-.my-order .am-input-group .am-form-field { background: #fff; font-size: 12px; font-family: "宋体"; }
+.my-order .am-input-group .am-form-field { background: #fff; font-size: 12px; font-family: "simsun"; }
 .my-order .am-icon-calendar-1 { width: 20px; height: 20px; background: url("../images/efeiyi-icon.png") 160px 1px; }
-.my-order .userinfo-datum li select { border: 1px solid #ccc; color: #ccc; font-size: 14px; font-family: "宋体"; padding: 4px 13px; }
-.my-order .userinfo-datum li select option { color: #000; font-size: 12px; font-family: "宋体"; }
+.my-order .userinfo-datum li select { border: 1px solid #ccc; color: #ccc; font-size: 14px; font-family: "simsun"; padding: 4px 13px; }
+.my-order .userinfo-datum li select option { color: #000; font-size: 12px; font-family: "simsun"; }
 .my-order .userinfo-datum li .cars { width: 96px; }
 .my-order .userinfo-datum li .car1 { width: 108px; }
 .my-order .userinfo-datum li .car2 { width: 142px; }
 .my-order .userinfo-datum li form { display: inline-block }
-.my-order .userinfo-tex1 { width: 348px; height: 37px; border: 1px solid #ccc; padding: 10px 11px; font-family: "宋体"; color: #000; font-size: 12px; }
+.my-order .userinfo-tex1 { width: 348px; height: 37px; border: 1px solid #ccc; padding: 10px 11px; font-family: "simsun"; color: #000; font-size: 12px; }
 .my-order .userinfo-tex1:active, .my-order .userinfo-tex1:hover { border: 1px solid #000; }
-.my-order .userinfo-datum li .dj-btn { width: 178px; height: 42px; border: 1px solid #ccc; background: #fff; color: #000; font-size: 12px; font-family: "宋体"; }
+.my-order .userinfo-datum li .dj-btn { width: 178px; height: 42px; border: 1px solid #ccc; background: #fff; color: #000; font-size: 12px; font-family: "simsun"; }
 .my-order .userinfo-datum li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
 /*修改密码*/
 .my-order .password { width: 853px; border: 1px solid #ccc; overflow: hidden; padding: 41px 0 55px 178px; }
-.my-order .password label { font-size: 12px; font-family: "宋体"; color: #000; width: 116px; height: 26px; text-align: right; font-weight: 100 }
-.my-order .password .userinfo-tex { width: 211px; height: 25px; padding: 4px 10px; border: 1px solid #999; font-size: 12px; font-family: "宋体"; color: #000; }
+.my-order .password label { font-size: 12px; font-family: "simsun"; color: #000; width: 116px; height: 26px; text-align: right; font-weight: 100 }
+.my-order .password .userinfo-tex { width: 211px; height: 25px; padding: 4px 10px; border: 1px solid #999; font-size: 12px; font-family: "simsun"; color: #000; }
 .my-order .password span { font-size: 12px; padding-left: 10px; font-family: "Times New Roman"; }
-.my-order .password li .dj-btn { width: 116px; height: 34px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "宋体"; }
+.my-order .password li .dj-btn { width: 116px; height: 34px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "simsun"; }
 .my-order .password li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
 .my-order .password .active-d { color: #ff0000; }
 /*我的收藏*/
@@ -236,7 +235,7 @@ a:hover { text-decoration: underline }
 .my-favorite .goods-list .list-number li dd { width: 150px; }
 .my-favorite .goods-list .list-number li dd .list-title { overflow: hidden }
 /*.my-favorite .goods-list .list-number li dd .list-title dt{width: 28px;float: left}*/
-.my-favorite .goods-list .list-number li dd .list-title dd { width: 122px; float: left; overflow: hidden; font-size: 12px; font-family: "宋体"; color: #666; }
+.my-favorite .goods-list .list-number li dd .list-title dd { width: 122px; float: left; overflow: hidden; font-size: 12px; font-family: "simsun"; color: #666; }
 .my-favorite .list-cost { text-align: right; color: #000; height: 35px; line-height: 35px; }
 .my-favorite .list-cost span { color: #ff0000 }
 .my-favorite .list-option a { color: #0e3976; font-size: 12px; }
@@ -270,7 +269,7 @@ a:hover { text-decoration: underline }
 .my-favorite .goods-list .list-number li dd { width: 150px; }
 .my-favorite .goods-list .list-number li dd .list-title { overflow: hidden }
 .my-favorite .goods-list .list-number li dd .list-title dt { width: 28px; float: left }
-.my-favorite .goods-list .list-number li dd .list-title dd { width: 150px; float: left; overflow: hidden; font-size: 12px; font-family: "宋体"; color: #666; }
+.my-favorite .goods-list .list-number li dd .list-title dd { width: 150px; float: left; overflow: hidden; font-size: 12px; font-family: "simsun"; color: #666; }
 .my-favorite .list-cost { text-align: right; color: #000; height: 35px; line-height: 35px; }
 .my-favorite .list-cost span { color: #ff0000 }
 .my-favorite .list-option a { color: #0e3976; font-size: 12px; }
@@ -286,7 +285,7 @@ a:hover { text-decoration: underline }
 .my-favorite .store-list dl { float: left; width: 280px; }
 .my-favorite .store-list dl .store-logo { float: left; width: 100px; height: 100px; border: 1px solid #ccc; }
 .my-favorite .store-list dl dd p { }
-.my-favorite .store-list dl dd { float: left; font-size: 12px; font-family: "宋体"; color: #000; padding-left: 15px; margin: 0; }
+.my-favorite .store-list dl dd { float: left; font-size: 12px; font-family: "simsun"; color: #000; padding-left: 15px; margin: 0; }
 .my-favorite .store-list dl dd p a { width: 81px; height: 24px; color: #000; font-size: 12px; border: 1px solid #ccc; display: block; text-align: center; ; line-height: 24px; margin-top: 7px; text-decoration: none }
 .my-favorite .store-list dl dd p a:hover { transition: all 0.5s; background: #000; color: #fff; }
 .my-favorite .store-list .product { float: right; padding: 0 80px; position: relative; }
@@ -294,7 +293,7 @@ a:hover { text-decoration: underline }
 .my-favorite .store-list .product-list dl { width: 80px; overflow: hidden; margin-right: 30px; }
 .my-favorite .store-list .product-list dt { width: 80px; }
 .my-favorite .store-list .product-list dd { width: 100%; padding: 0 }
-.my-favorite .store-list .product-list dd p { padding-top: 10px; font-size: 12px; font-family: "宋体"; text-align: center; width: 80px; overflow: hidden; }
+.my-favorite .store-list .product-list dd p { padding-top: 10px; font-size: 12px; font-family: "simsun"; text-align: center; width: 80px; overflow: hidden; }
 .my-favorite .store-list .product-list dd p strong { font-weight: 100; color: #ff0000; overflow: hidden; width: 36px; }
 .my-favorite .sign-left { width: 12px; height: 23px; background: url("../images/efeiyi-gwc.png") no-repeat -62px -13px; position: absolute; left: 23px; top: 55px; cursor: pointer; }
 .my-favorite .sign-right { width: 12px; height: 23px; background: url("../images/efeiyi-gwc.png") no-repeat -74px -13px; position: absolute; right: 53px; top: 55px; cursor: pointer; }
@@ -304,9 +303,9 @@ a:hover { text-decoration: underline }
 /*购物车页面*/
 .efeiyi-cart { margin: 70px auto 0; min-height: 580px; }
 .efeiyi-cart .title table { width: 1000px; margin: 0 auto; }
-.efeiyi-cart .title table td { line-height: 40px; text-align: left; font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal }
+.efeiyi-cart .title table td { line-height: 40px; text-align: left; font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal }
 .efeiyi-cart .wh1 { width: 100%; float: left; min-height: 700px; }
-.efeiyi-cart .title table td label { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; line-height: 12px; }
+.efeiyi-cart .title table td label { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; line-height: 12px; }
 .efeiyi-cart .active-box { padding-left: 16px; }
 .efeiyi-cart input[type="checkbox"] { vertical-align: middle; width: 12px; height: 12px; border: 1px solid #ccc; }
 .efeiyi-cart .middle-active { vertical-align: middle; width: 12px; height: 12px; }
@@ -314,16 +313,16 @@ a:hover { text-decoration: underline }
 .efeiyi-cart .pd-gwc { margin-top: 20px; }
 .efeiyi-cart .cols1 img { width: 78px; float: left; border: 1px solid #ccc; text-align: center; margin: 20px 0; }
 .efeiyi-cart .info { width: 300px; float: left; padding: 22px 0 40px 10px; }
-.efeiyi-cart .info p { font-size: 12px; font-family: "宋体"; line-height: 20px; }
-.efeiyi-cart .info a { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; outline: none; }
+.efeiyi-cart .info p { font-size: 12px; font-family: "simsun"; line-height: 20px; }
+.efeiyi-cart .info a { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; outline: none; }
 .efeiyi-cart .moneycl { color: #ff0000; }
-.cart-center { width: 39px; height: 25px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; float: left; padding: 4px 9px; font-size: 12px; color: #666; font-family: "宋体"; text-align: center }
-.efeiyi-cart .cart-btn-left { width: 25px; height: 25px; border: 1px solid #ccc; float: left; line-height: 25px; text-align: center; font-size: 12px; color: #666; font-family: "宋体"; }
+.cart-center { width: 39px; height: 25px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; float: left; padding: 4px 9px; font-size: 12px; color: #666; font-family: "simsun"; text-align: center }
+.efeiyi-cart .cart-btn-left { width: 25px; height: 25px; border: 1px solid #ccc; float: left; line-height: 25px; text-align: center; font-size: 12px; color: #666; font-family: "simsun"; }
 .efeiyi-cart .cart-btn-left:hover { text-decoration: none; }
-.efeiyi-cart .cart-btn-right { width: 25px; height: 25px; border: 1px solid #ccc; float: left; line-height: 25px; text-align: center; font-size: 12px; color: #666; font-family: "宋体"; }
+.efeiyi-cart .cart-btn-right { width: 25px; height: 25px; border: 1px solid #ccc; float: left; line-height: 25px; text-align: center; font-size: 12px; color: #666; font-family: "simsun"; }
 .efeiyi-cart .cart-btn-right:hover { text-decoration: none; }
 .efeiyi-cart span p { line-height: 22px; }
-.efeiyi-cart span p a { font-size: 12px; color: #003366; font-family: "宋体"; font-weight: normal; outline: none; }
+.efeiyi-cart span p a { font-size: 12px; color: #003366; font-family: "simsun"; font-weight: normal; outline: none; }
 .efeiyi-cart .control-pd { margin: 0px auto 0; height: 25px; width: 95px; }
 /*.efeiyi-cart .control-cl{line-height: 25px;color: #ff0000;text-align: center}*/
 .efeiyi-cart .control-cl { color: #ff0000; position: absolute; left: -6px; }
@@ -400,12 +399,12 @@ a:hover { text-decoration: underline }
 .my-clearing { margin: 70px auto 50px; min-height: 550px; width: 1000px; overflow: hidden }
 .my-clearing h1 { font-size: 16px; color: #000; font-weight: 100; height: 45px; }
 .my-clearing .clearing-site { width: 1000px; height: 49px; line-height: 49px; border: 1px solid #ccc; padding: 0 43px 0 23px; float: left }
-.my-clearing .clearing-site span { font-size: 12px; font-family: "宋体"; }
-.my-clearing .clearing-site span a { outline: none; font-size: 12px; font-family: "宋体"; color: #003366; }
+.my-clearing .clearing-site span { font-size: 12px; font-family: "simsun"; }
+.my-clearing .clearing-site span a { outline: none; font-size: 12px; font-family: "simsun"; color: #003366; }
 
 
 .my-clearing .invoice { width: 1000px; border: 1px solid #ccc; padding: 0 43px 0 23px; float: left }
-.my-clearing .invoice .title {width:100%;font-size: 12px; font-family: "宋体";
+.my-clearing .invoice .title {width:100%;font-size: 12px; font-family: "simsun";
     line-height: 48px;
     float: left;
     border-bottom: 1px solid #ccc;
@@ -504,7 +503,7 @@ a:hover { text-decoration: underline }
 .my-clearing .clearing-right { float: right }
 .my-clearing .page-clearing { border: 1px solid #ccc; width: 1000px; overflow: hidden; margin-top: -1px; float: left; padding: 23px 0 22px 44px; }
 .my-clearing .page-default { margin-bottom: 22px; overflow: hidden; cursor: pointer }
-.my-clearing .page-default span { font-size: 12px; color: #666; padding-left: 15px; font-family: "宋体"; float: left; line-height: 37px; }
+.my-clearing .page-default span { font-size: 12px; color: #666; padding-left: 15px; font-family: "simsun"; float: left; line-height: 37px; }
 .my-clearing .default-text { text-align: center; margin-right: 34px; float: left; cursor: pointer; background-color: #fff; border: 1px solid #ccc; font-size: 12px; color: #000; position: relative; width: 141px; }
 .my-clearing .default-text strong { text-align: center; }
 .my-clearing .page-default span a:hover { border: 1px solid #000; text-decoration: none; }
@@ -518,7 +517,7 @@ a:hover { text-decoration: underline }
 .my-clearing .alipay { text-align: center; margin-right: 34px; float: left; cursor: pointer; padding: 10px 44px; background-color: #fff; border: 1px solid #ccc; font-size: 12px; color: #000; position: relative; width: 141px; }
 .my-clearing .triangle { background: url("../images/efeiyi-active.png")no-repeat right bottom; border: 1px solid #000; text-decoration: none; }
 .my-clearing .page-store { height: 55px; line-height: 55px; }
-.my-clearing .page-store a { outline: none; font-size: 12px; font-family: "宋体"; color: #003366; position: relative; padding-right: 50px; }
+.my-clearing .page-store a { outline: none; font-size: 12px; font-family: "simsun"; color: #003366; position: relative; padding-right: 50px; }
 .my-clearing .page-inventory { border: 1px solid #ccc; width: 1000px; overflow: hidden; margin-top: -1px; float: left; padding: 23px 0 22px 20px; }
 .my-clearing .page-inventory .triangle-bg { background: url('../images/efeiyi-gwc.png') no-repeat -62px 0; width: 13px; height: 6px; position: absolute; left: 53px; top: 2px; }
 .my-clearing .my-clearing .wh1 { width: 100%; float: left; margin-bottom: 27px; min-height: 700px; }
@@ -528,11 +527,11 @@ a:hover { text-decoration: underline }
 .my-clearing .pd-gwc { margin-top: 20px; }
 .my-clearing .cols1 img { width: 78px; float: left; border: 1px solid #ccc; text-align: center; margin: 20px 0; }
 .my-clearing .info { width: 300px; float: left; padding: 40px 0 40px 10px; }
-.my-clearing .info p { font-size: 12px; font-family: "宋体"; line-height: 20px; }
-.my-clearing .info a { font-size: 12px; color: #666; font-family: "宋体"; font-weight: normal; outline: none; }
+.my-clearing .info p { font-size: 12px; font-family: "simsun"; line-height: 20px; }
+.my-clearing .info a { font-size: 12px; color: #666; font-family: "simsun"; font-weight: normal; outline: none; }
 .my-clearing .moneycl { color: #ff0000; }
 .my-clearing .page-pdl { padding-left: 25px; }
-.my-clearing .page-Commodity td span { font-size: 12px; font-family: "宋体"; color: #666; }
+.my-clearing .page-Commodity td span { font-size: 12px; font-family: "simsun"; color: #666; }
 .my-clearing .page-leaveword { height: 40px; line-height: 40px; }
 .my-clearing .page-leaveword label { font-size: 12px; color: #666; font-weight: 100 }
 .my-clearing .page-leaveword input { font-size: 12px; color: #ccc; padding: 13px 11px; border: 1px solid #ccc; width: 800px; height: 40px; color: #333 }
@@ -543,27 +542,27 @@ a:hover { text-decoration: underline }
 .apt { }
 .my-clearing .m-form { padding: 15px 37px 33px; background: #fff; }
 .my-clearing .m-form li { height: 44px; line-height: 44px; }
-.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: "宋体"; }
-.my-clearing .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: "宋体"; font-weight: normal; text-align: right }
-.my-clearing .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: "宋体"; padding: 4px 13px; }
-.my-clearing .m-form li select option { color: #000; font-size: 12px; font-family: "宋体"; }
+.my-clearing .m-form li input { border: 1px solid #000; padding: 3px; color: #000; font-size: 12px; font-family: "simsun"; }
+.my-clearing .m-form li label { width: 81px; color: #000; font-size: 12px; font-family: "simsun"; font-weight: normal; text-align: right }
+.my-clearing .m-form li select { border: 1px solid #000; color: #000; font-size: 14px; font-family: "simsun"; padding: 4px 13px; }
+.my-clearing .m-form li select option { color: #000; font-size: 12px; font-family: "simsun"; }
 .my-clearing .m-form li .cars { width: 96px; }
 .my-clearing .m-form li .car1 { width: 108px; }
 .my-clearing .m-form li .car2 { width: 142px; }
 .my-clearing .m-form li strong { font-size: 10px; color: #666; }
-.my-clearing .m-form li .dj-btn { width: 163px; height: 25px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "宋体"; outline: none; }
+.my-clearing .m-form li .dj-btn { width: 163px; height: 25px; border: 1px solid #000; background: #fff; color: #000; font-size: 12px; font-family: "simsun"; outline: none; }
 .my-clearing .m-form li .dj-btn:hover { background: #000; color: #fff; transition: all 0.5s; }
-.my-clearing .m-form li span { float: inherit; width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: "宋体"; line-height: 25px; padding: 5px 13px; }
+.my-clearing .m-form li span { float: inherit; width: 145px; height: 25px; border: 1px solid #fe0000; color: #fe0000; font-size: 12px; font-family: "simsun"; line-height: 25px; padding: 5px 13px; }
 .my-clearing .clase { width: 15px; height: 15px; position: absolute; top: 15px; right: 20px; cursor: pointer; transition: all 0.5s; background: url("../images/efeiyi-icon.png") no-repeat; }
 .my-clearing .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*表单弹出*/
 .my-clearing .System {width: 1000px; border: 1px solid #ccc; float: left; margin-top: 40px;}
 .my-clearing .System .System-text {float:right;
     padding:18px;}
-.my-clearing .System .System-text span {font-size: 12px; font-family: "宋体"; color: #000; float: right }
+.my-clearing .System .System-text span {font-size: 12px; font-family: "simsun"; color: #000; float: right }
 .my-clearing .System .System-text span strong { font-weight: 100; color: #ff0000; }
 .my-clearing .System .System-text span a {width:135px;height:60px;
-    line-height: 60px;border: 1px solid #000; font-size: 12px; font-family: "宋体";
+    line-height: 60px;border: 1px solid #000; font-size: 12px; font-family: "simsun";
     float: left;
     text-align: center;
     background: #000;
@@ -571,7 +570,6 @@ a:hover { text-decoration: underline }
     font-size: 16px;
     font-family: "Microsoft YaHei";
 }
-.my-clearing .System .System-text span.
 
 
 
@@ -581,20 +579,20 @@ a:hover { text-decoration: underline }
 .success-shop { text-align: center; padding-top: 117px; }
 .success-shop p { font-size: 16px; height: 43px; }
 .success-shop p span { color: #ff0000 }
-.success-shop p a { color: #f1961a; margin: 0 20px 53px; font-size: 12px; font-family: "宋体"; text-decoration: underline }
+.success-shop p a { color: #f1961a; margin: 0 20px 53px; font-size: 12px; font-family: "simsun"; text-decoration: underline }
 /*找回密码*/
 .dentification { width: 100%; min-height: 550px; float: left }
 .dentification .short { width: 568px; margin: 0 auto; margin-top: 161px; height: 180px; }
 .dentification .short ul { width: 100%; }
 .dentification .short ul li { margin-bottom: 20px; width: 100%; }
-.dentification .short ul li label { padding-right: 15px; text-align: right; width: 108px; font-size: 12px; font-family: "宋体"; font-weight: 100; }
-.dentification .short ul li .txt { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "宋体"; font-weight: 100; width: 305px; }
-.dentification .short ul li .txt1 { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "宋体"; font-weight: 100; width: 155px; margin-right: 15px; }
+.dentification .short ul li label { padding-right: 15px; text-align: right; width: 108px; font-size: 12px; font-family: "simsun"; font-weight: 100; }
+.dentification .short ul li .txt { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "simsun"; font-weight: 100; width: 305px; }
+.dentification .short ul li .txt1 { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "simsun"; font-weight: 100; width: 155px; margin-right: 15px; }
 .dentification .short ul li .span-lest1 a { padding: 11px 22px; border: 1px solid #ccc; font-size: 12px; text-decoration: none }
 .dentification .short ul li .span-lest1 a:hover { background: #000; color: #fff; }
 .dentification .short ul li .span-lest2 a { padding: 10px 36px; border: 1px solid #ccc; font-size: 12px; text-decoration: none }
 .dentification .short ul li .span-lest2 a:hover { background: #000; color: #fff; }
-.dentification .short ul li .span1 { padding-left: 12px; font-size: 12px; font-family: "宋体"; }
+.dentification .short ul li .span1 { padding-left: 12px; font-size: 12px; font-family: "simsun"; }
 /*pc按钮*/
 .btn-p { padding: 11px 22px; border: 1px solid #ccc; font-size: 12px; text-decoration: none; background: #fff; transition: all 0.5s; }
 .btn-p:hover { background: #000; color: #fff; }
@@ -604,30 +602,30 @@ a:hover { text-decoration: underline }
 .new .short { width: 630px; margin: 0 auto; margin-top: 161px; height: 180px; }
 .new .short ul { width: 100%; }
 .new .short ul li { margin-bottom: 20px; width: 100%; }
-.new .short ul li label { padding-right: 15px; text-align: right; width: 108px; font-size: 12px; font-family: "宋体"; font-weight: 100; }
-.new .short ul li .txt { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "宋体"; font-weight: 100; width: 305px; }
-.new .short ul li .txt1 { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "宋体"; font-weight: 100; width: 155px; margin-right: 15px; }
+.new .short ul li label { padding-right: 15px; text-align: right; width: 108px; font-size: 12px; font-family: "simsun"; font-weight: 100; }
+.new .short ul li .txt { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "simsun"; font-weight: 100; width: 305px; }
+.new .short ul li .txt1 { border: 1px solid #ccc; padding: 12px 13px; font-size: 12px; font-family: "simsun"; font-weight: 100; width: 155px; margin-right: 15px; }
 .new .short ul li .span-lest2 a { padding: 10px 121px; border: 1px solid #ccc; font-size: 12px; text-decoration: none }
 .new .short ul li .span-lest2 a:hover { background: #000; color: #fff; }
-.new .short ul li .span2 { padding-left: 12px; font-size: 12px; font-family: "宋体"; }
+.new .short ul li .span2 { padding-left: 12px; font-size: 12px; font-family: "simsun"; }
 /*设置新密码*/
 /*我的资讯*/
 .sp-nav { width: 851px; float: right; border: 1px solid #ccc; height: 50px; line-height: 50px }
-.sp-nav span { width: 100%; text-align: center; display: block; font-size: 14px; font-family: "宋体"; font-weight: 500; position: relative; }
+.sp-nav span { width: 100%; text-align: center; display: block; font-size: 14px; font-family: "simsun"; font-weight: 500; position: relative; }
 .sp-nav .tb-triangular { background: url("../images/efeiyi-icon.png") no-repeat -21px -5px; width: 10px; height: 7px; position: absolute; top: 20px; right: 30px; }
 .sp-list { width: 851px; float: right; border: 1px solid #ccc; padding: 20px 0 20px 0px; margin-top: -1px; }
 .sp-list .list-refer { width: 100%; float: right; padding-left: 45px; }
 .sp-list .list-refer dl dt { width: 55px; height: 55px; float: left; }
 .sp-list .list-refer dl dt img { width: 100%; }
-.sp-list .list-refer dl dd { width: 250px; font-size: 12px; color: #000; font-family: "宋体"; float: left; padding-left: 24px; }
+.sp-list .list-refer dl dd { width: 250px; font-size: 12px; color: #000; font-family: "simsun"; float: left; padding-left: 24px; }
 .sp-list .list-refer-2 { width: 100%; float: left; text-align: center; }
-.sp-list .list-refer-2 p { font-size: 12px; font-family: "宋体"; }
+.sp-list .list-refer-2 p { font-size: 12px; font-family: "simsun"; }
 .sp-list .list-refer-3 { width: 100%; float: left; }
 .sp-list .list-refer-3 p { text-align: center; }
-.sp-list .list-refer-3 p a { font-size: 12px; font-family: "宋体"; color: #003366 }
+.sp-list .list-refer-3 p a { font-size: 12px; font-family: "simsun"; color: #003366 }
 .sp-list .list-refer-4 { width: 100%; float: left; }
 .sp-list .list-refer-4 p { text-align: center; }
-.sp-list .list-refer-4 p a { font-size: 12px; font-family: "宋体"; color: #003366 }
+.sp-list .list-refer-4 p a { font-size: 12px; font-family: "simsun"; color: #003366 }
 .sp-restore { width: 851px; float: right; border: 1px solid #ccc; margin-top: -1px; padding: 43px 116px; }
 .sp-restore .sp-re-hd { height: 12px; width: 100%; float: right; }
 .sp-restore .sp-re-hd .re-h1 { width: 240px; height: 12px; border-bottom: 1px solid #ccc; float: left }
@@ -648,25 +646,25 @@ a:hover { text-decoration: underline }
 /*我的评价*/
 .evaluation .evaluation-nav { width: 851px; float: right; border: 1px solid #ccc; }
 .evaluation .my-order .title table { border: 0; }
-.evaluation .evaluation-nav .sp-page { float: left; text-align: center; width: 100%; height: 45px; line-height: 45px; font-size: 14px; font-family: "宋体"; }
+.evaluation .evaluation-nav .sp-page { float: left; text-align: center; width: 100%; height: 45px; line-height: 45px; font-size: 14px; font-family: "simsun"; }
 .evaluation .appraise { width: 851px; float: right; border: 1px solid #ccc; margin-top: -1px; }
 .evaluation .list-refer { padding-left: 45px; }
 .evaluation .list-refer dl dt { width: 55px; height: 55px; float: left; border: 1px solid #ccc; }
 .evaluation .list-refer dl dt img { width: 100%; }
-.evaluation .list-refer dl dd { width: 250px; font-size: 12px; color: #000; font-family: "宋体"; float: left; padding-left: 24px; }
+.evaluation .list-refer dl dd { width: 250px; font-size: 12px; color: #000; font-family: "simsun"; float: left; padding-left: 24px; }
 .evaluation .list-refer-2 { width: 100%; float: left; text-align: center; }
-.evaluation .list-refer-2 p { font-size: 12px; font-family: "宋体"; }
+.evaluation .list-refer-2 p { font-size: 12px; font-family: "simsun"; }
 .evaluation .list-refer-3 { width: 100%; float: left; }
 .evaluation .list-refer-3 p { text-align: center; }
-.evaluation .list-refer-3 p strong { font-size: 12px; font-family: "宋体"; color: #666; }
+.evaluation .list-refer-3 p strong { font-size: 12px; font-family: "simsun"; color: #666; }
 .evaluation .list-refer-4 { width: 100%; float: left; }
 .evaluation .list-refer-4 p { text-align: center; }
-.evaluation .list-refer-4 p a { font-size: 12px; font-family: "宋体"; color: #003366 }
+.evaluation .list-refer-4 p a { font-size: 12px; font-family: "simsun"; color: #003366 }
 .evaluation .mutual { width: 851px; padding: 40px; float: left }
 .evaluation .mutual .parameter { width: 100%; float: left; }
 .evaluation .mutual .parameter .data { width: 100%; float: left; }
 .evaluation .mutual .parameter .data .data-list { padding-bottom: 30px; width: 100%; float: left; position: relative; }
-.evaluation .mutual .parameter .data .data-list label { float: left; width: 50px; font-size: 12px; font-family: "宋体"; font-weight: 100 }
+.evaluation .mutual .parameter .data .data-list label { float: left; width: 50px; font-size: 12px; font-family: "simsun"; font-weight: 100 }
 .evaluation .mutual .parameter .data .data-list .starbox { float: left; width: 300px; position: absolute; top: -17px; left: 50px; }
 .evaluation #quacorgrading input { width: 18px; height: 18px; cursor: pointer; background: url('../images/efeiyi-icon.png') no-repeat scroll -36px -21px; }
 .evaluation .mutual .parameter .data .data-list .tally { float: left; width: 100%; margin: 0; }
@@ -682,18 +680,18 @@ a:hover { text-decoration: underline }
 .evaluation .tally-1 { float: left; width: 100%; margin: 0; }
 .evaluation .img-act { width: 80px; height: 80px; float: left; margin: 0 30px 20px 0; }
 .evaluation .img-act img { width: 100%; border: 1px solid #ccc; }
-.evaluation .btn { padding: 12px 40px; border: 1px solid #000; font-size: 12px; font-family: "宋体"; background: #fff; transition: all 0.5s; }
+.evaluation .btn { padding: 12px 40px; border: 1px solid #000; font-size: 12px; font-family: "simsun"; background: #fff; transition: all 0.5s; }
 .evaluation .btn:hover { color: #fff; background: #000 }
 .evaluation .table { border-bottom: 1px solid #ccc; padding: 20px 0; float: left; margin-bottom: -1px; }
-.evaluation .rarae { width: 640px; height: 102px; border: 1px solid #ccc; resize: none; font-size: 12px; font-family: "宋体"; color: #000; }
+.evaluation .rarae { width: 640px; height: 102px; border: 1px solid #ccc; resize: none; font-size: 12px; font-family: "simsun"; color: #000; }
 .evaluation .con-vessel { width: 100%; float: left; }
 .evaluation .dialogue { width: 100%; border-top: 1px solid #ccc; padding-top: 35px; }
 .evaluation .dialogue .list-crossover { width: 100%; float: left; padding-bottom: 35px; }
 .evaluation .dialogue .list-crossover .content { width: 100%; float: left }
-.evaluation .dialogue .list-crossover .content .dt { float: left; font-size: 12px; font-family: "宋体"; width: 90px!important; }
-.evaluation .dialogue .list-crossover .content dd { float: left; font-size: 12px; font-family: "宋体"; width: 680px!important; }
-.evaluation .dialogue .list-crossover .content .dt1 { width: 145px!important; float: left; font-size: 12px; font-family: "宋体"; }
-.evaluation .dialogue .list-crossover .content .dd { width: 550px!important; float: left; font-size: 12px; font-family: "宋体"; }
+.evaluation .dialogue .list-crossover .content .dt { float: left; font-size: 12px; font-family: "simsun"; width: 90px!important; }
+.evaluation .dialogue .list-crossover .content dd { float: left; font-size: 12px; font-family: "simsun"; width: 680px!important; }
+.evaluation .dialogue .list-crossover .content .dt1 { width: 145px!important; float: left; font-size: 12px; font-family: "simsun"; }
+.evaluation .dialogue .list-crossover .content .dd { width: 550px!important; float: left; font-size: 12px; font-family: "simsun"; }
 .evaluation .add-images { width: 100%; float: left }
 .evaluation .add-images li { width: 80px; height: 80px; float: left; margin: 0 10px 10px 0; }
 .evaluation .add-images li img { border: 1px solid #ccc; width: 100%; }
@@ -705,23 +703,23 @@ a:hover { text-decoration: underline }
 .security-level .rank-list li dl { width: 100%; float: left; }
 .security-level .rank-list li dl dt { width: 132px; height: 35px; font-size: 18px; font-weight: 500; float: left; position: relative }
 .security-level .rank-list li dl dt span { width: 1px; height: 35px; background: url("../images/efeiyi-icon.png") no-repeat right top; position: absolute; right: 0; }
-.security-level .rank-list .warn { margin-left: 32px; font-size: 12px; font-family: "宋体"; float: left }
+.security-level .rank-list .warn { margin-left: 32px; font-size: 12px; font-family: "simsun"; float: left }
 .security-level .rank-list .interlinkage { float: right }
-.security-level .rank-list .interlinkage a { font-size: 12px; font-family: "宋体"; color: #003366; }
+.security-level .rank-list .interlinkage a { font-size: 12px; font-family: "simsun"; color: #003366; }
 /*账号安全*/
 /*账号绑定*/
 .binding-account .binding { margin-top: 23px; width: 851px; float: left; border: 1px solid #ccc; padding: 20px 60px; }
 .binding-account .binding ul { float: left; width: 100%; }
-.binding-account .binding ul li { font-size: 12px; color: #666; font-family: "宋体" }
-.binding-account .binding .state2 { padding-left: 10px; float: left; font-family: "宋体" }
-.binding-account .binding .state3 { float: right; font-family: "宋体" }
-.binding-account .binding .state3 a { color: #003366; font-size: 12px; font-family: "宋体"; }
+.binding-account .binding ul li { font-size: 12px; color: #666; font-family: "simsun" }
+.binding-account .binding .state2 { padding-left: 10px; float: left; font-family: "simsun" }
+.binding-account .binding .state3 { float: right; font-family: "simsun" }
+.binding-account .binding .state3 a { color: #003366; font-size: 12px; font-family: "simsun"; }
 .binding-account .binding .state1 { float: left }
 .binding-account .binding-list { width: 851px; float: left; border: 1px solid #ccc; margin-top: -1px; }
 .binding-account .binding-list dl { float: left; width: 100%; }
 .binding-account .binding-list dl dt { float: left; width: 443px; padding-left: 60px; position: relative }
 .binding-account .binding-list dl dt ul { width: 100%; padding-top: 19px }
-.binding-account .binding-list dl dt ul li { font-size: 12px; font-family: "宋体"; font-weight: 100; padding-bottom: 25px; float: left; width: 90% }
+.binding-account .binding-list dl dt ul li { font-size: 12px; font-family: "simsun"; font-weight: 100; padding-bottom: 25px; float: left; width: 90% }
 .binding-account .binding-list dl dt ul li a { padding: 12px 40px; float: left; border: 1px solid #000; text-decoration: none; }
 .binding-account .binding-list dl dt ul li a:hover { background: #000; color: #fff; }
 .binding-account .binding-list dl dd { width: 405px; float: left; padding-left: 80px; }
@@ -738,14 +736,14 @@ a:hover { text-decoration: underline }
 /*手机号绑定*/
 .binding-phone .phone-page { width: 851px; float: left; padding: 69px 0px 141px 108px; border: 1px solid #ccc; }
 .binding-phone .phone-page li { margin-bottom: 20px; float: left; width: 100%; }
-.binding-phone .phone-page li label { width: 160px; text-align: right; font-size: 12px; font-family: "宋体"; font-weight: 100 }
+.binding-phone .phone-page li label { width: 160px; text-align: right; font-size: 12px; font-family: "simsun"; font-weight: 100 }
 .binding-phone .phone-page li p { padding: 10px 0 0 160px; font-size: 12px; color: #11315f; }
-.binding-phone .phone-page li .phone-txt { width: 280px; height: 40px; padding: 15px; font-size: 12px; font-family: "宋体"; border: 1px solid #000 }
+.binding-phone .phone-page li .phone-txt { width: 280px; height: 40px; padding: 15px; font-size: 12px; font-family: "simsun"; border: 1px solid #000 }
 .binding-phone .phone-page li .phone-txt2:hover { background: #000; color: #fff; }
-.binding-phone .phone-page li .phone-txt2 { transition: all 0.5s; margin-top: 36px; width: 280px; height: 40px; padding: 15px; font-size: 12px; font-family: "宋体"; border: 1px solid #000; background: #fff; }
-.binding-phone .phone-page li .text-yz { padding: 14px 25px; font-size: 12px; color: #ff9900; font-family: "宋体"; border: 1px solid #000; text-decoration: none; }
+.binding-phone .phone-page li .phone-txt2 { transition: all 0.5s; margin-top: 36px; width: 280px; height: 40px; padding: 15px; font-size: 12px; font-family: "simsun"; border: 1px solid #000; background: #fff; }
+.binding-phone .phone-page li .text-yz { padding: 14px 25px; font-size: 12px; color: #ff9900; font-family: "simsun"; border: 1px solid #000; text-decoration: none; }
 .binding-phone .phone-page li .text-yz:hover { background: #000; color: #fff; }
-.binding-phone .phone-page li .phone-txt1 { width: 120px; height: 40px; padding: 15px; font-size: 12px; font-family: "宋体"; border: 1px solid #000; margin-right: 20px; }
+.binding-phone .phone-page li .phone-txt1 { width: 120px; height: 40px; padding: 15px; font-size: 12px; font-family: "simsun"; border: 1px solid #000; margin-right: 20px; }
 .binding-phone .phone-page li .clq a { color: #ff9900; font-size: 12px; }
 .binding-phone .phone-page li .clq { color: #000; font-size: 12px; }
 .binding-phone .successfully { margin: 0 auto; width: 333px!important; height: 30px; padding-left: 54px; background: url("../images/efeiyi-icon.png") no-repeat left -138px; font-size: 20px; font-weight: 500 }
@@ -775,12 +773,12 @@ a:hover { text-decoration: underline }
 /*公共样式！商品推荐！精品推荐*/
 .recommend { width: 100%; float: left; margin-top: 45px; border: 1px solid #ccc; }
 .recommend .topic { width: 100%; float: left; padding: 17px 20px; border-bottom: 1px solid #ccc; }
-.recommend .topic p { font-size: 14px; font-family: "宋体"; color: #000; }
+.recommend .topic p { font-size: 14px; font-family: "simsun"; color: #000; }
 .recommend .carousel { padding: 24px 20px; float: left; width: 100%; }
 .recommend .carousel li { width: 100%; float: left; padding: 0 63px; position: relative }
 .recommend .carousel .car-content { float: left; margin-right: 14px; width: 157px; border: 1px solid #ccc; padding: 10px; }
 .recommend .carousel .car-content dt { width: 130px; height: 130px; }
-.recommend .carousel .car-content dd { font-size: 12px; color: #000; font-family: "宋体"; text-align: center }
+.recommend .carousel .car-content dd { font-size: 12px; color: #000; font-family: "simsun"; text-align: center }
 .recommend .carousel .car-content dd p { margin-bottom: 10px; }
 .recommend .carousel .car-content dd p strong { color: #ff0000; font-weight: 100 }
 .recommend .carousel .car-content dd p a { padding: 5px 20px; color: #000; border: 1px solid #000; text-decoration: none; }
@@ -865,9 +863,9 @@ a:hover { text-decoration: underline }
 /*合并付款*/
 .y5 .system { height: 68px; width: 853px; border: 1px solid #ccc; float: left; margin-top: 40px; line-height: 68px; }
 .y5 .system .system-text { width: 350px; height: 40px; float: right }
-.y5 .system .system-text span { font-size: 12px; font-family: "宋体"; color: #000; padding-right: 20px; float: right }
+.y5 .system .system-text span { font-size: 12px; font-family: "simsun"; color: #000; padding-right: 20px; float: right }
 .y5 .system .system-text span strong { font-weight: 100; color: #ff0000; }
-.y5 .system .system-text span a { padding: 13px 26px; border: 1px solid #000; font-size: 12px; font-family: "宋体"; }
+.y5 .system .system-text span a { padding: 13px 26px; border: 1px solid #000; font-size: 12px; font-family: "simsun"; }
 .y5 .system .system-text span a:hover { background-color: #000; color: #fff; text-decoration: none }
 .y5 .sh-bg { position: fixed; background: #000; opacity: 0.6; z-index: -1; right: 0; top: 0; left: 0; bottom: 0; }
 /*500错误信息*/
@@ -980,3 +978,31 @@ a:hover { text-decoration: underline }
 .hours { width: 102px; height: 54px; background: url("../upload/kaquan01.png") no-repeat; position: absolute; left: 0; top: 0; font-size: 35px; color: #fff; }
 .hours .yhq { position: relative; width: 100%; float: left; height: 100% }
 .hours span { position: absolute; left: 12px; top: 11px; }
+/*诚信保证*/
+.integrity-2015{width:1000px;margin: 0 auto 160px;}
+.integrity-2015 .h1{text-align: center;font-size: 25px;color: #000;margin: 64px 0 80px 0;}
+.integrity-2015 .h2{font-size: 20px;color: #000;}
+.integrity-2015 .b1{margin: 100px 0  47px 0;text-align: center}
+.integrity-2015 .b2{margin-bottom: 30px;}
+.integrity-2015 .t1{font-size: 12px;color: #000;margin-bottom: 75px;line-height: 28px;}
+.integrity-2015 .w{margin-bottom: 35px;}
+.integrity-2015 .h{margin-bottom:16px;}
+.integrity-2015 .bd-bt1{width: 100%;border-bottom:2px solid #000;}
+.integrity-2015 .icon{width: 7px;height: 7px;background:url("../images/myefeiyi.png") no-repeat -30px -182px;display: inline-block;margin:0 10px  }
+.integrity-2015 .t2{font-size: 12px;color: #000;margin-bottom: 17px;line-height: 28px;}
+/*帮助中心*/
+.ae{width: 100%;float: left}
+.help-order{width: 1000px;margin: 0 auto;}
+.help-order .title p{text-align: center;font-size: 35px;color: #000;margin: 56px 0 83px 0;}
+.help-order .page .bk{border: 1px solid #000;}
+.help-order .page .left{width: 216px;float: left;}
+.help-order .page .left dt{float: left;width: 100%;position: relative;margin-top: 0;cursor: pointer}
+.help-order .page .left dt .add-icon{width: 15px;height: 15px;position: absolute;background:url("../images/myefeiyi.png") no-repeat 0px -209px;left: 20px;top: 12px;}
+.help-order .page .left .active .add-icon{background:url("../images/myefeiyi.png") no-repeat 0px -227px;}
+.help-order .page .left dd{width: 100%;float: left;margin-top:-1px;border-top: 1px solid #000;}
+.help-order .page .left dd a{width: 100%;float: left;text-align: center;font-size: 12px;color: #000;position: relative;line-height: 33px;text-decoration:none;outline: none}
+.help-order .page .left dd a:hover{background: #000;color: #fff;}
+.help-order .page .left dd a .sj{width: 6px;height: 11px;background:url("../images/myefeiyi.png") no-repeat -44px -218px;right: 66px;top:11px;position: absolute}
+.help-order .page .left dd a:hover .sj{background:url("../images/myefeiyi.png") no-repeat -44px -234px;}
+.help-order .page .left dt a{padding:10px 75px;font-size: 14px;color: #000;display: inline-block;width: 100%;text-decoration: none;outline: none;border-top: 1px solid #000;margin-top: -1px; }
+.help-order .page .right{width: 752px;float: right;padding: 49px 95px;}

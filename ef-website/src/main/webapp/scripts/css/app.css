@@ -46,7 +46,7 @@ a:hover { color: #f00; text-decoration: underline }
 .header .nav-links li { width: 100%; line-height: 24px; float: left; font-size: 12px }
 .header .nav-links li a { width: 100%; float: left; padding: 0 }
 .header .nav-links li a:hover { color: #f00 }
-.header .nav-links .title { border-bottom: 1px #b2b2b2 solid; color: #999; padding-bottom: 5px; margin-bottom: 5px }
+.header .nav-links .title { border-bottom: 1px #b2b2b2 solid; color: #000;font-weight:bold;padding-bottom: 5px; margin-bottom: 5px }
 /*--//End--header--*/
 .focus { height: 481px; position: relative }
 .focus .slider-main { position: absolute; top: 0; left: 0; z-index: 1 }
@@ -137,7 +137,7 @@ a:hover { color: #f00; text-decoration: underline }
 .shop-header .btndes a { width: 202px; height: 55px; line-height: 55px; text-align: center; border: 1px #000 solid; float: left; margin-left: -1px; font-size: 16px }
 .shop-header .btndes a:hover { background: #000; color: #fff; text-decoration: none }
 /*--//End----*/
-.shop-sort { background: #000; width: 1200px; height: 38px; line-height: 38px; padding: 3px 0; box-sizing: content-box; position: relative; z-index: 2 }
+.shop-sort { background: #000; width: 1200px; height: 38px; line-height: 38px; padding: 3px 0;margin-bottom:30px;box-sizing: content-box; position: relative; z-index: 2 }
 .shop-sort a { font-size: 12px; float: left }
 .shop-sort .link1 { padding: 0 3px }
 .shop-sort .link1 li { float: left }
@@ -204,8 +204,8 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .itemInfo .preview .slider-main { width: 800px; height: 643px; float: left; margin: 0 30px; overflow: hidden }
 .product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }
 .product-intro .itemInfo .preview .slider-main li .zoom-section { width: 800px; position: absolute; top: 0; left: 0; overflow: hidden; }
-.product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
-.product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
+.product-intro .itemInfo .preview .slider-main li .cloud-zoom { height: 643px; left: 0; text-align: center; }
+.product-intro .itemInfo .preview .slider-main li img { width: auto; height: 643px; position: absolute; top: 0; left: 50%; }
 .product-intro .itemInfo .preview .collect { width: 36px; position: absolute; top: 16px; right: 40px; z-index: 99999 }
 .product-intro .itemInfo .preview .icon-big-glass { width: 38px; height: 38px; position: absolute; bottom: 10px; right: 36px; cursor: pointer; }
 .product-intro .itemInfo .preview .icon-big-glass .icon { background-position: -98px -143px; width: 38px; height: 38px; float: left; }
@@ -627,11 +627,11 @@ a, .ul-item li, .ul-item li img, .imgfilter { -webkit-transition: all 0.4s; -moz
 .section5 .part2 .related-collect { background-position: -49px -124px; width: 49px; height: 68px; position: absolute; top: 50%; margin-top: -120px; left: 50px }
 /*--//End--*/
 .scroll-bar { position: fixed; bottom: 252px; right: 0; text-align: center }
-.scroll-bar .btn { width: 92px; height: 37px; line-height: 37px; float: left; font-size: 12px; border-radius: 5px; text-decoration: none; cursor: pointer }
+.scroll-bar .btn { width: 33px; height: 53px; line-height: 37px; float: left; font-size: 12px; border-radius: 5px; text-decoration: none; cursor: pointer }
 .scroll-bar .btn .icon { width: 23px; display: inline-block; position: relative }
 .scroll-bar-top { width: 100%; float: left; margin-bottom: 10px; display: none }
 .scroll-bar-top .btn { background: #fff; border: 1px solid #ccc; color: #000 }
-.scroll-bar-top .btn .icon { background-position: -238px -95px; height: 11px; margin-right: 6px }
+.scroll-bar-top .btn .icon { background-position: -238px -95px; height: 11px;}
 .scroll-bar-ask .btn { background: #000; border: 1px solid #000; color: #fff }
 .scroll-bar-ask .btn .icon { background-position: -181px -50px; height: 18px; top: 6px; margin-right: 5px }
 .scroll-bar-ask .btn:hover { text-decoration: none; background: #fff; color: #000 }
@@ -640,6 +640,9 @@ a, .ul-item li, .ul-item li img, .imgfilter { -webkit-transition: all 0.4s; -moz
 .news-list { width: 100%; float: left; margin-bottom: 50px; }
 .news-list li { font-size: 15px; width: 100%; float: left; margin-top: 50px; }
 .news-list li a { width: 100%; float: left; font-size: 18px; margin-bottom: 20px; }
+/*//End-*/
+
+/*//End-*/
 
 @media (max-width:1200px) {
     .btn-arrow-down { left: 584px }
@@ -648,7 +651,6 @@ a, .ul-item li, .ul-item li img, .imgfilter { -webkit-transition: all 0.4s; -moz
 @media (min-width:1200px) {
     .btn-arrow-down { left: 50%; margin-left: -16px }
 }
-
 @media (max-height:720px) {
     .login-wrap { height: 564px }
 }

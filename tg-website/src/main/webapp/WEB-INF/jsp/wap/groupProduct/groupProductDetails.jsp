@@ -25,9 +25,10 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/myorder.css?v=20150831">
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -55,7 +56,7 @@
     <!--功能-->
     <div class="iwill ae">
         <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间10天</p></div></div>
-        <a href="/group/createGroup.do" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+        <a href="/tg/group/group.do" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
     <!-- 选项卡-->
@@ -74,15 +75,15 @@
                     ${groupProduct.productModel.product.productDescription.content}
                     <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
                 </div>
-                <a class="efeiyi-btn" href="http://www.baidu.com">e飞蚁拼团协议<i class="efiyi"></i></a>
+                <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
             </div>
             <div class="co-page" style="display: none">
                 <div class="col-pl ae">
                     <ul class="ae">
-                        <li><div class="co-pic"><img class="am-circle" src="/shop2015/upload/yonghm.jpg"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="/shop2015/upload/yonghm.jpg"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="/shop2015/upload/yonghm.jpg"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="/shop2015/upload/yonghm.jpg"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><p><strong>2015-08-19</strong></p></li>
+                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
+                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
+                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
+                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><p><strong>2015-08-19</strong></p></li>
                     </ul>
                 </div>
                 <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
@@ -93,17 +94,16 @@
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/wap/js/jquery.min.js"></script>
+<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="/scripts/wap/js/amazeui.min.js"></script>
 <!--自定义js--Start-->
-<script src="/scripts/wap/js/system.js?v=20150831"></script>
-<script src="/scripts/wap/js/myorder.js?v=20150831"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
+<script src="<c:url value="/scripts/wap/js/myorder.js"/>"></script>
 <script>
     $().ready(function(){
         $("img").each(function(){
