@@ -78,7 +78,7 @@ a:hover { color: #f00; text-decoration: underline }
 .box-hd .list-pro li strong { width: 20px; line-height: 20px; position: absolute; top: 100px; color: #fff; font-style: italic; font-weight: normal; z-index: 1 }
 .box-hd .list-pro li .price { position: absolute; bottom: 10px; color: #fff; z-index: 2 }
 .box-hd .list-pro li .price em { font-size: 12px }
-.box-hd .list-pro li .price font { font-size: 18px; font-family: Times New Roman }
+.box-hd .list-pro li .price font { font-size: 30px; font-family: Times New Roman }
 .box-hd .list-pro li.odd strong { top: 30px; right: 30px; font-size: 16px; }
 .box-hd .list-pro li.even strong { top: 30px; left: 30px; font-size: 16px; }
 .box-hd .list-pro li.odd { padding-right: 1px }
@@ -201,9 +201,7 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .itemInfo .preview .slider-img { width: 60px; float: left; margin-top: 60px }
 .product-intro .itemInfo .preview .slider-img li { margin-bottom: 6px; cursor: pointer }
 .product-intro .itemInfo .preview .slider-img li img { border: 2px #ccc solid }
-.product-intro .itemInfo .preview .slider-main { width: 800px; height: 643px; float: left; margin: 0 30px; overflow: hidden }
-.product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }
-.product-intro .itemInfo .preview .slider-main li .zoom-section { width: 800px; position: absolute; top: 0; left: 0; overflow: hidden; }
+.product-intro .itemInfo .preview .slider-main {width:800px;height:643px;float:left;margin:0 30px;overflow:hidden}
 .product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
 .product-intro .itemInfo .preview .collect { width: 36px; position: absolute; top: 16px; right: 40px; z-index: 99999 }
@@ -445,7 +443,7 @@ a:hover { color: #f00; text-decoration: underline }
 .footer .service .chengbao { background-position: 0 -109px; width: 100px; height: 45px }
 .footer .service .chengbao a { width: 137px; height: 61px; line-height: 999px; float: left; overflow: hidden }
 .footer .service .wechat { background-position: 0 -155px; width: 73px; height: 53px; position: relative; top: 5px }
-.footer .service .wechat .icon { background:url(../images/fwechat.png) no-repeat; width: 215px; height:220px; position: absolute; top:-145px; left: -4px; display:none; }
+.footer .service .wechat .icon { background:url(../images/fwechat.png) no-repeat; width: 215px; height:220px; position: absolute; top: -17px; left: -5px; display:block; }
 .footer .service .line { width: 2px; height: 42px; display: inline-block; margin: 0 30px; background: #c1c1c1 }
 .footer .links { background: #000; height: 16px; line-height: 16px; text-align: center; padding: 15px 0 }
 .footer .links a { margin: 0 10px; display: inline-block; box-sizing: content-box; color: #fff }
