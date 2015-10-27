@@ -32,7 +32,7 @@
 <body>
 <header class="am-header custom-header">
   <div class="am-header-left am-header-nav">
-    <a href="#chevron-left" class="chevron-left"></a>
+    <a href="javascript:history.go(-1)" class="chevron-left"></a>
   </div>
   <!-- //End--chevron-left-->
   <h1 class="am-header-title">参团说明</h1>
@@ -46,15 +46,19 @@
     <p>若您的好友再次分享该链接，并帮助您招募到团员，拼团成功后，您和您的好友都即可得到红包。</p>
   </div>
   <form>
-    <div class="act-tuxedo ae"><input type="checkbox" id="cbox"><span>e飞蚁拼团协议</span></div>
-        <a id="a" href="javascript(0);" class="btn">确&nbsp;认&nbsp;参&nbsp;团</a>
+    <div class="act-tuxedo ae"><input type="checkbox" id="cbox" onclick="PutHref();"><span>e飞蚁拼团协议</span></div>
+        <a id="a" href="#" class="btn">确&nbsp;认&nbsp;参&nbsp;团</a>
     <%--<input type="submit" class="btn" onclick="cbox()" value="确&nbsp;认&nbsp;参&nbsp;团"/>--%>
   </form>
 </div>
 <script>
-  function cbox(){
-    if($("#cbox").checked){
-      $("#id").href("<c:url value="/group/createGroup"/>");
+  function PutHref(){
+    var ele = document.getElementById("cbox");
+    var groupProductId = ${groupProductId};
+    if(ele.checked){
+      $("#a").attr('href','/tg/group/createGroup?groupProductId='+groupProductId);
+    }else{
+      $("#a").attr('href','#');
     }
   }
 </script>

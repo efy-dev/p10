@@ -29,6 +29,8 @@ public class GroupController {
 
     @RequestMapping(value = "/group.do")
     public String group(HttpServletRequest request,Model model) throws Exception{
+        String groupProductId = request.getParameter("groupProductId");
+        model.addAttribute("groupProductId",groupProductId);
         return "/illustration";
     }
 
