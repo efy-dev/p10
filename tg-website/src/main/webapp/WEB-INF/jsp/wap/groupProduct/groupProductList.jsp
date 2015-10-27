@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="/scripts/wap/assets/i/favicon.png">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="/resources/assets/i/app-icon72x72@2x.png">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -26,8 +26,8 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link type="text/css" rel="stylesheet" href="/scripts/wap/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/shop2015/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/shop2015/css/myorder.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/app.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/myorder.css?v=20150831">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -65,17 +65,17 @@
     <div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/shop2015/js/jquery.min.js"></script>
+<script src="/scripts/wap/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 <script src="/scripts/wap/js/amazeui.min.js"></script>
 <!--自定义js--Start-->
-<script src="/shop2015/js/system.js?v=20150831"></script>
-<script src="/shop2015/js/myorder.js?v=20150831"></script>
+<script src="/scripts/wap/js/system.js?v=20150831"></script>
+<script src="/scripts/wap/js/myorder.js?v=20150831"></script>
 <!--自定义js--End-->
 </body>
 </html>
