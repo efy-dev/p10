@@ -40,15 +40,15 @@
 </header>
 <!--//End--header-->
 <ul class="offered ae">
-    groupJoinList
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-    <li>
+      <>
+      <li>
         <p>${member.group.groupProduct.productModel.name}</p>
         <p>2015.04.04</p>
         <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
         <p>团长:东方不败东方不败东方不败</p>
         <span>进行中</span>
-    </li>
+      </li>
     </c:forEach>
 </ul>
 <!--//End--footer-->
