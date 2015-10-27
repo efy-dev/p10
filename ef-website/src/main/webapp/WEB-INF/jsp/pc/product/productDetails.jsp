@@ -19,8 +19,8 @@
     <div class="wh">
         <ol class="am-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="/product/list/${project.id}">分类</a></li>
-            <li class="am-active">内容</li>
+            <li><a href="/product/list/${project.id}">${project.name}</a></li>
+            <li class="am-active">${product.name}</li>
         </ol>
     </div>
     <!-- //End--面包屑-->
