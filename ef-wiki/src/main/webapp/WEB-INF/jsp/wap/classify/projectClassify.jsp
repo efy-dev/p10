@@ -54,9 +54,8 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="分类">分&nbsp;类</a></li>
-        <li><a href="" title="传承人">传承人</a></li>
+        <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
+        <li><a href="" title="消息">消&nbsp;息</a></li>
         <li><a href="<c:url value='/getPerson.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>

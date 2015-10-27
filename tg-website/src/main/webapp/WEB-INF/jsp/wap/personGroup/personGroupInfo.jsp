@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -7,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>我的开团</title>
+    <title>b01020302我的团</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -34,20 +35,25 @@
         <a href="#chevron-left" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
-    <h1 class="am-header-title">我的开团</h1>
+    <h1 class="am-header-title">我的团</h1>
     <!-- //End--title-->
+    <div class="am-header-right am-header-nav am-header-right1">
+        <a href="#chevron-right" class="chevron-right" id="menu">
+            <i class="icon icon-user"></i>
+        </a>
+    </div>
 </header>
 <!--//End--header-->
-<ul class="offered ae">
-    <c:forEach items="${myCreateProductList}" var="group" varStatus="rec">
-    <li>
-        <p> ${group.groupProduct.modelProduct.product.name}</p>
-        <p>${group.groupProduct.group.createDateTime}</p>
-        <p>${group.memberList.size()}人/${group.groupProduct.memberAmount}人成团</p>
-        <span>进行中</span>
-    </li>
-    </c:forEach>
-</ul>
+<div class="my-pce ae">
+    <div class="my-pic ae"><img src="/scripts/upload/mypurchase01.png"></div>
+    <ul class="my-btn ae">
+        <li><a href="#"><em>我&nbsp;的&nbsp;参&nbsp;团</em><i class="s-icon"></i></a></li>
+        <li><a href="#"><em>我&nbsp;的&nbsp;开&nbsp;团</em><i class="s-icon"></i></a></li>
+        <li><a href="#"><em>我&nbsp;的&nbsp;订&nbsp;单</em><i class="s-icon"></i></a></li>
+        <li><a href="#"><em>我&nbsp;的&nbsp;红&nbsp;包</em><i class="s-icon"></i></a></li>
+        <li><a href="#"><em>申&nbsp;请&nbsp;退&nbsp;货</em><i class="s-icon"></i></a></li>
+    </ul>
+</div>
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->

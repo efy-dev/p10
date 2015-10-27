@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -7,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>我的开团</title>
+    <title>申请退货</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -34,20 +33,14 @@
         <a href="#chevron-left" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
-    <h1 class="am-header-title">我的开团</h1>
+    <h1 class="am-header-title">申请退货</h1>
     <!-- //End--title-->
 </header>
 <!--//End--header-->
-<ul class="offered ae">
-    <c:forEach items="${myCreateProductList}" var="group" varStatus="rec">
-    <li>
-        <p> ${group.groupProduct.modelProduct.product.name}</p>
-        <p>${group.groupProduct.group.createDateTime}</p>
-        <p>${group.memberList.size()}人/${group.groupProduct.memberAmount}人成团</p>
-        <span>进行中</span>
-    </li>
-    </c:forEach>
-</ul>
+<div class="sales-return ae">
+    <p>申请退货请拨打客服电话</p>
+    <p>400—876—8766</p>
+</div>
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
