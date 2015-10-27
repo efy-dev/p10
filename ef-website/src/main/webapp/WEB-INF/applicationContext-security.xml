@@ -23,7 +23,7 @@
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
-        <intercept-url pattern="/sso.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>
         <intercept-url pattern="/order/**" access="isAuthenticated()"/>

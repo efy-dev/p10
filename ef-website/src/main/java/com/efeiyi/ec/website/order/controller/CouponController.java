@@ -39,6 +39,7 @@ public class CouponController {
     @ResponseBody
     public List<Object> listUserCoupon(HttpServletRequest request) throws Exception {
         float price = Float.parseFloat(request.getParameter("price"));
+        PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),request.getParameter("purchaseOrderId"));
         XQuery couponQuery = new XQuery("listCoupon_useful", request);
         List<Object> couponList = baseManager.listObject(couponQuery);
         Iterator couponIterator = couponList.iterator();
@@ -47,20 +48,19 @@ public class CouponController {
             Coupon couponTemp = (Coupon) couponIterator.next();
             couponTemp.setStartTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getStartDate()));
             couponTemp.setEndTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getEndDate()));
-            if (couponTemp.getCouponBatch().getType().equals("1")) {
-                if (couponTemp.getCouponBatch().getPriceLimit() > price) {
+            if (!isUserful(purchaseOrder,couponTemp)) {
+//                if (couponTemp.getCouponBatch().getPriceLimit() > price) {
                     couponIterator.remove();
-                    continue;
-                }
-                if (couponTemp.getCouponBatch().getRange().equals("1")) {
-                    couponTemp.setRangeLabel("全场通用");
-                } else if (couponTemp.getCouponBatch().getRange().equals("2")) {
-                    couponTemp.setRangeLabel("品类使用");
-                } else if (couponTemp.getCouponBatch().getRange().equals("3")) {
-                    couponTemp.setRangeLabel("店铺使用");
-                } else if (couponTemp.getCouponBatch().getRange().equals("4")) {
-                    couponTemp.setRangeLabel("单品使用");
-                }
+//                }
+//                if (couponTemp.getCouponBatch().getRange().equals("1")) {
+//                    couponTemp.setRangeLabel("全场通用");
+//                } else if (couponTemp.getCouponBatch().getRange().equals("2")) {
+//                    couponTemp.setRangeLabel("品类使用");
+//                } else if (couponTemp.getCouponBatch().getRange().equals("3")) {
+//                    couponTemp.setRangeLabel("店铺使用");
+//                } else if (couponTemp.getCouponBatch().getRange().equals("4")) {
+//                    couponTemp.setRangeLabel("单品使用");
+//                }
             }
         }
         return couponList;
