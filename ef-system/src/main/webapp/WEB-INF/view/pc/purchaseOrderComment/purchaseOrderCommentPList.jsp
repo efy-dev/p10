@@ -42,7 +42,7 @@
                     <th class="table-title">订单编号</th>
                     <th class="table-title">用户名</th>
                     <th class="table-title">昵称</th>
-                    <%--<th class="table-title">总额/实付金额(元)</th>--%>
+                    <th class="table-title">总额/实付金额(元)</th>
                     <th class="table-title">产品</th>
                     <th class="table-title">评价内容</th>
                     <th class="table-title">评价时间</th>
@@ -53,7 +53,7 @@
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="purchaseOrderComment">
-                    <tr id="${purchaseOrderComment.id}" width="14%">
+                    <tr id="${purchaseOrderComment.id}" width="12%">
                         <td width="12%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -63,26 +63,26 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="14%">
+                        <td class="am-hide-sm-only" width="12%">
                             <a
                                 href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=comment&id=${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.id}'/>">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.serial}
                             </a>
                         </td>
 
-                        <td class="am-hide-sm-only" width="14%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
-                        <td class="am-hide-sm-only" width="14%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
-                        <%--<td class="am-hide-sm-only" width="12%">--%>
-                            <%--<fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/> <br>--%>
-                        <%--</td>--%>
-                        <td class="am-hide-sm-only" width="14%">
+                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.username}</td>
+                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.purchaseOrderProduct.purchaseOrder.user.name}</td>
+                        <td class="am-hide-sm-only" width="12%">
+                            <fmt:formatNumber type="number" value="${purchaseOrderComment.purchaseOrderProduct.productModel.price}" maxFractionDigits="2" minFractionDigits="2"/> <br>
+                        </td>
+                        <td class="am-hide-sm-only" width="12%">
                                 <p style="margin-left: 10px;">
                                          ${purchaseOrderComment.purchaseOrderProduct.productModel.name}
                                          <img width="20px" src="http://pro.efeiyi.com/${purchaseOrderComment.purchaseOrderProduct.productModel.productModel_url}@!product-model" alt="产品图片">
                                 </p>
                         </td>
 
-                        <td class="am-hide-sm-only" width="14%">${purchaseOrderComment.content}</td>
-                        <td class="am-hide-sm-only" width="14%"></td>
+                        <td class="am-hide-sm-only" width="12%">${purchaseOrderComment.content}</td>
+                        <td class="am-hide-sm-only" width="12%"></td>
                         <%--<td class="am-hide-sm-only"><fmt:formatDate value="${purchaseOrder.createDatetime}" type="both"--%>
                                                                     <%--pattern="yyyy-MM-dd HH:mm"/></td>--%>
                     </tr>
