@@ -6,7 +6,6 @@
   <mapping path="/comment/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/purchaseCollect/**" decorator="/layouts/myEfeiyiTemplate.jsp"/>
   <mapping path="/coupon/list" decorator="/layouts/myEfeiyiTemplate.jsp"/>
-  <mapping path="/document/**" decorator="/layouts/documentTemplate.jsp"/>
   <mapping path="/**" decorator="/layouts/mainTemplate.jsp"/>
 
     <!--<mapping path="/getXPage.do" decorator="/layouts/iframe.jsp"/>-->
