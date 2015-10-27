@@ -1,6 +1,6 @@
 package com.efeiyi.ec.group.model;
 
-import com.efeiyi.ec.organization.model.BigUser;
+import com.efeiyi.ec.organization.model.MyUser;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ public class Group {
     private List<Member> memberList;
     private String status;
     private Date createDateTime;
-    private BigUser manUser;
+    private MyUser manUser;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -70,11 +70,11 @@ public class Group {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "man_user_id")
-    public BigUser getManUser() {
+    public MyUser getManUser() {
         return manUser;
     }
 
-    public void setManUser(BigUser manUser) {
+    public void setManUser(MyUser manUser) {
         this.manUser = manUser;
     }
 }

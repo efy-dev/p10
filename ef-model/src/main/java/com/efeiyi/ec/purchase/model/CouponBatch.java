@@ -36,10 +36,19 @@ public class CouponBatch implements Serializable{
     private Project project; //品类  没有可以为空
     private Tenant tenant;  //店铺    没有可以为空
     private Product product; //单品   没有可以为空
-    private String cdkey; //兑换码  需要系统生成  只有再发放方式为兑换码的时候才生成 输入兑换码 生成优惠券 优惠券数量-1 直到0为止
-    private String deliverType; //发放方式 1 发优惠券 2 发兑换码
+    private String uniqueKey; //兑换码  需要系统生成  只有再发放方式为兑换码的时候才生成 输入兑换码 生成优惠券 优惠券数量-1 直到0为止
+    private String deliverType; //发放方式 1 发优惠券 2 发兑换码 3通码
 
     private String viewStatus;
+
+    @Column(name = "cdkey")
+    public String getUniqueKey() {
+        return uniqueKey;
+    }
+
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
+    }
 
     @Transient
     public String getViewStatus() {
@@ -191,6 +200,7 @@ public class CouponBatch implements Serializable{
         this.range = range;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     public Project getProject() {
@@ -201,6 +211,7 @@ public class CouponBatch implements Serializable{
         this.project = project;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
     public Tenant getTenant() {
@@ -211,6 +222,7 @@ public class CouponBatch implements Serializable{
         this.tenant = tenant;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     public Product getProduct() {
@@ -219,15 +231,6 @@ public class CouponBatch implements Serializable{
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    @Column(name = "cdkey")
-    public String getCdkey() {
-        return cdkey;
-    }
-
-    public void setCdkey(String cdkey) {
-        this.cdkey = cdkey;
     }
 
     @Column(name = "deliver_type")
