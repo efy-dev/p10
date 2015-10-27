@@ -33,7 +33,7 @@
 <body>
 <header class="am-header custom-header">
     <div class="am-header-left am-header-nav">
-        <a href="#chevron-left" class="chevron-left"></a>
+        <a href="javascript:history.go(-1)" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
@@ -56,7 +56,7 @@
     <!--功能-->
     <div class="iwill ae">
         <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间10天</p></div></div>
-        <a href="/tg/group/group.do" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+        <a href="/tg/group/group.do?groupProductId=${groupProduct.id}" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
     <!-- 选项卡-->

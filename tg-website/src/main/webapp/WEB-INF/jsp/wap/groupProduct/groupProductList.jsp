@@ -36,7 +36,7 @@
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
-        <a href="#chevron-right" class="chevron-right" id="menu">
+        <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
             <i class="icon icon-user"></i>
         </a>
     </div>
@@ -45,48 +45,24 @@
 <div class="all-bulk ae">
     <div class="one-bulk ae">
         <ul class="ae">
-            <li class="ae">
-                <div class="colonel-pic ae"><a href="javascript:void(0)"><img src="<c:url value="/scripts/wap/upload/mypurchase03.png"/>"></a>
 
-                    <div class="c-page"><span><a href="javascript:void(0)">《东方清韵》瓷胎竹编茶》瓷胎竹编茶》瓷胎竹编茶具套装典藏版装典藏版</a></span>
+            <c:forEach items="${groupProductList}" var="groupProduct" varStatus="rec">
+                <li class="ae">
+                    <div class="colonel-pic ae"><a href="/product/groupProduct/${groupProduct.id}"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"></a>
+
+                        <div class="c-page"><span><a href="javascript:void(0)">${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</a></span>
+                        </div>
                     </div>
-                </div>
-                <ul class="price ae">
-                    <li><s>原价:1000.0元</s></li>
-                    <li>团购价:1200.0元</li>
-                    <li>5人成团</li>
-                </ul>
-
-            </li>
-            <li class="ae">
-                <div class="colonel-pic ae"><a href="javascript:void(0)"><img src="<c:url value="/scripts/wap/upload/mypurchase04.png"/>"></a>
-
-                    <div class="c-page"><span><a href="javascript:void(0)">《东方清韵》瓷胎竹编茶》瓷胎竹编茶》瓷胎竹编茶具套装典藏版装典藏版</a></span>
-                    </div>
-                </div>
-                <ul class="price ae">
-                    <li><s>原价:1000.0元</s></li>
-                    <li>团购价:1200.0元</li>
-                    <li>5人成团</li>
-                </ul>
-
-            </li><li class="ae">
-            <div class="colonel-pic ae"><a href="javascript:void(0)"><img src="<c:url value="/scripts/wap/upload/mypurchase05.png"/>"></a>
-
-                <div class="c-page"><span><a href="javascript:void(0)">《东方清韵》瓷胎竹编茶》瓷胎竹编茶》瓷胎竹编茶具套装典藏版装典藏版</a></span>
-                </div>
-            </div>
-            <ul class="price ae">
-                <li><s>原价:1000.0元</s></li>
-                <li>团购价:1200.0元</li>
-                <li>5人成团</li>
-            </ul>
-
-        </li>
-
+                    <ul class="price ae">
+                        <li><s>原价:${groupProduct.productModel.price}元</s></li>
+                        <li>团购价:${groupProduct.groupPrice}元</li>
+                        <li>${groupProduct.memberAmount}人成团</li>
+                    </ul>
+                </li>
+            </c:forEach>
         </ul>
     </div>
-    <div class="more ae"><a href="javascript:void(0)"><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
+    <div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
 </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
