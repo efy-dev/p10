@@ -38,7 +38,7 @@
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
-        <a href="#chevron-right" class="chevron-right" id="menu">
+        <a href="/product/personInfoView.do" class="chevron-right" id="menu">
             <i class="icon icon-user"></i>
         </a>
     </div>
