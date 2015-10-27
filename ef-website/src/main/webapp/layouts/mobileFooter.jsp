@@ -25,7 +25,8 @@
 
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
         </div>
-        <div class="wechat" id="wechat"></div>
+        <div class="wechat"></div>
+        <div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>
         <div class="txt" id="wechatStr1">关注微信公众号</div>
         <div class="txt"id="wechatStr2">领取好礼</div>
     </div>
