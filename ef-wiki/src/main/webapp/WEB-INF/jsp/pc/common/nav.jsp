@@ -34,10 +34,10 @@
                 <a title="手机e飞蚁">手机e飞蚁</a>
                 <span class="top-wechat"></span>
             </li>
-            <li class="cart">
+           <%-- <li class="cart">
                 <a href="<c:url value="/cart/view"/> " title="购物车"><i class="icon"></i>购物车</a>
                 <span class="tips"><em id="cartAmount">0</em></span>
-            </li>
+            </li>--%>
         </ul>
     </div>
 </div>
@@ -56,26 +56,22 @@
                         <c:if test="${child.getState().equals('productCategory')}">
                             <a class="${child.jnodeMatch("cur",currentJnode)}"
                                title="${child.text_zh_CN}">${child.text_zh_CN}</a>
-                            <jsp:include page="/productCategory.do" flush="true"/>
+                            <%--<jsp:include page="/productCategory.do" flush="true"/>--%>
                         </c:if>
                     </li>
                 </c:forEach>
-                <%--<li><a href="" title="商品分类">商品分类</a></li>--%>
-                <%--<li><a href="" title="传承人">传承人</a></li>--%>
-                <%--<li><a href="" title="展览">展览</a></li>--%>
-                <%--<li><a href="" title="资讯">资讯</a></li>--%>
             </ul>
         </div>
     </div>
 </div>
 <script>
 
-    $().ready(function () {
+   /* $().ready(function () {
         var success = function (data) {
             $("#cartAmount").html(data);
         }
         ajaxRequest("<c:url value="/cart/cartAmount.do"/>", {}, success, function () {
         }, "post");
     });
-
+*/
 </script>

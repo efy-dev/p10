@@ -46,14 +46,16 @@ public class WikiDynamicController extends WikibaseController {
         model.addAttribute("bannerList", bannerList);
         //通过类别查询所有的工艺
         //1.获取所有的类别
+
         XQuery query = new XQuery("listProjectCategory_default", request);
         List<ProjectCategory> list = baseManager.listObject(query);
         //一步加载
-        /*String index = request.getParameter(PageEntity.PARAM_NAME_PAGEINDEX);
-        String size = request.getParameter(PageEntity.PARAM_NAME_PAGERECORDS);*/
+
         List<List<Project>> pc = new ArrayList<List<Project>>();
         for (ProjectCategory projectCategory : list){
+
             XQuery query2 = new XQuery("listProject2_byCategory", request);
+            query2.put("projectCategory_id", projectCategory.getId());
             List<Project> listp = baseManager.listObject(query2);
             pc.add(listp);
         }

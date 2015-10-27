@@ -134,4 +134,19 @@ $(function(){
 
 
 
-})
+});
+(function(){
+    $('.btn-top-wechat').hover(function(){
+        $(this).find('.top-wechat').stop(true).slideDown('fast');
+    },function(){
+        $(this).find('.top-wechat').stop(true).slideUp('fast');
+    });
+    //footer二维码
+    $('.footer .service .wechat').hover(function(){
+        $(this).find('.icon').fadeIn('100');
+    },function(){
+        $(this).find('.icon').delay(2000).fadeOut();
+    })
+})();
+
+
