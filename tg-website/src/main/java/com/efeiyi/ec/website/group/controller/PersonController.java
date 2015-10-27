@@ -68,6 +68,18 @@ public class PersonController {
         return "/personGroup/myBonus";
     }
     /**
+     *  退货详情
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/returnGoods.do")
+    public String returnGoods(HttpServletRequest request, Model model) throws Exception {
+        return "/personGroup/returnGoods";
+    }
+
+
+    /**
      *  个人中心
      * @param request
      * @return
