@@ -2,10 +2,7 @@ package com.efeiyi.ec.website.order.service.impl;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.CartProduct;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -88,7 +85,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         if (cartProductList != null && cartProductList.size() > 0) {
             for (CartProduct cartProduct : cartProductList) {
                 PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProduct.getProductModel(), cartProduct.getAmount(), cartProduct.getProductModel().getPrice());
-                totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice());
+                totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
                 baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
             }
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -108,6 +105,11 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
         purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
         purchaseOrder.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
+        if (purchaseOrder.getCoupon()!=null){
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {

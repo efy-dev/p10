@@ -106,6 +106,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
+        model.addAttribute("isEasyBuy",true);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -125,8 +126,18 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
-
+        model.addAttribute("isEasyBuy",false);
         return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+    @RequestMapping({"/getPurchaseOrderPrice.do"})
+    @ResponseBody
+    public String getPurchaseOrderPrice(HttpServletRequest request) {
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+        String finalPrice = purchaseOrder.getTotal().subtract(new BigDecimal((purchaseOrder.getCoupon()!=null?purchaseOrder.getCoupon().getCouponBatch().getPrice():0))).toString();
+        String result = "{\"totalPrice\":\"" + purchaseOrder.getTotal() + "\",\"couponPrice\":\"" + (purchaseOrder.getCoupon() != null ? purchaseOrder.getCoupon().getCouponBatch().getPrice() : 0) + "\",\"finalPrice\":\""+finalPrice+"\"}";
+        return result;
     }
 
 
@@ -148,7 +159,7 @@ public class PurchaseOrderController extends BaseController {
         //订单收货地址//初始化订单状态
         ConsumerAddress consumerAddress = (ConsumerAddress) baseManager.getObject(ConsumerAddress.class.getName(), addressId);
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
-        purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder,consumerAddress,messageMap,payment);
+        purchaseOrder = purchaseOrderManager.confirmPurchaseOrder(purchaseOrder, consumerAddress, messageMap, payment);
         //生成支付记录以及支付详情
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = paymentManager.initPurchaseOrderPayment(purchaseOrder);
 

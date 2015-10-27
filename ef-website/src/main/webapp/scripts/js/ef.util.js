@@ -21,6 +21,6 @@ function ajaxRequest(url, param, success, error,requestType) {
         dataType: "json",
         data: param,
         success: success,
-        error: error
+        error: error,
     });
 }

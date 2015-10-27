@@ -176,61 +176,29 @@ $(function(){
     })();
     //购物车
     (function(){
-        $('#cart-coupon').find('.btn-coupon').click(function(){
+        //优惠券
+        $('.btn-coupon').click(function(){
             $(this).toggleClass('active');
             $(this).siblings('.ul-list').slideToggle('fast');
             return false;
-        })
+        });
     })();
     //010110结算页-计数
     (function(){
-        //var $tex = $("#leaveword-txt");
-        //var $num = $('#leaveword-num');
-        //var ie = jQuery.support.htmlSerialize;
-        //var str = 0;
-        //var abcnum = 0;
-        //var maxNum = 90;
-        //var texts= 0;
-        //var num = 0;
-        //$tex.val("");
-        ////文本框字数计算和提示改变
-        //if(ie){
-        //    $tex[0].oninput = changeNum;
-        //}else{
-        //    $tex[0].onpropertychange  = changeNum;
-        //}
-        //function changeNum(){
-        //    //汉字的个数
-        //    str = ($tex.val().replace(/\w/g,"")).length;
-        //    //非汉字的个数
-        //    abcnum = $tex.val().length-str;
-        //   // total = str*2+abcnum;
-        //    if(str*2+abcnum<maxNum || str*2+abcnum == maxNum){
-        //        texts =Math.ceil((maxNum - (str*2+abcnum))/2);
-        //        $num.html("<span>"+(45-texts)+"/45</span>").children();
-        //    }else if(str*2+abcnum>maxNum){
-        //        texts =Math.ceil(((str*2+abcnum)-maxNum)/2);
-        //        $num.html("<span>"+texts+"/45</span>").children("span").css({"color":"red"});
-        //    }
-        //}
-
-
         //输入框计数
         var textareaText=$('.my-clearing .page-leaveword input');
         textareaText.keydown(function(){
-            var aNum=60;
+            var aNum=45;
             var curLength=$(this).val().length;
-            var txtNmu=$(this).siblings('.label').find('em');
+            var txtNmu=$(this).siblings('span');
             if(curLength>=aNum){
                 var num=$(this).val().substr(0,aNum-1);
                 $(this).val(num);
             }
             else{
-                txtNmu.text((aNum-1)-$(this).val().length)
+                txtNmu.text((aNum-1)-$(this).val().length+'/45')
             }
         });
-
-
     })();
 
 })

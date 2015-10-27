@@ -106,6 +106,9 @@ public class PaymentManagerImpl implements PaymentManager {
         }else if(purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().size() == 1){
             title = "e飞蚁-"+purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getPurchaseOrderProductList().get(0).getProductModel().getName();
         }
+        if(title.length()>16){
+            title = title.substring(0,13)+"...";
+        }
         return title;
     }
 
