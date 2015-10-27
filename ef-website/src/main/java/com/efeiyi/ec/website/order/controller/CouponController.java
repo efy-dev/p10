@@ -73,75 +73,79 @@ public class CouponController {
     //3品类 ： 判断订单中是否有该品类的商品，如果有就继续判断如果是满减，就判断订单价格，低值卷就不用判断了直接可用
     //4单品 ： 判断订单中是否有该优惠券指定的商品，如果有就不用判断了直接可用
     private boolean isUserful(PurchaseOrder purchaseOrder, Coupon coupon) {
-        boolean isUseful = false;
-        if (coupon.getCouponBatch().getRange().equals("1")) {
-            if (coupon.getCouponBatch().getType().equals("1")) {
-                if (purchaseOrder.getTotal().floatValue() >= coupon.getCouponBatch().getPriceLimit()) {
-                    isUseful = true;
-                } else {
-                    isUseful = false;
-                }
-            } else {
-                isUseful = true;
-            }
-        } else if (coupon.getCouponBatch().getRange().equals("2")) {
-            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                if (purchaseOrderProduct.getProductModel().getProduct().getProject().getId().equals(coupon.getCouponBatch().getProject().getId())) {
-                    if (coupon.getCouponBatch().getType().equals("1")) {
-                        BigDecimal totalPrice = new BigDecimal(0);
-                        for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
-                            if (purchaseOrderProductTemp.getProductModel().getProduct().getProject().getId().equals(coupon.getCouponBatch().getProject().getId())) {
-                                totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
-                            }
-                        }
-                        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-                        if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
-                            isUseful = true;
-                        } else {
-                            isUseful = false;
-                        }
-                    } else {
+        try {
+            boolean isUseful = false;
+            if (coupon.getCouponBatch().getRange().equals("1")) {
+                if (coupon.getCouponBatch().getType().equals("1")) {
+                    if (purchaseOrder.getTotal().floatValue() >= coupon.getCouponBatch().getPriceLimit()) {
                         isUseful = true;
-                    }
-                    break;
-                }
-            }
-        } else if (coupon.getCouponBatch().getRange().equals("3")) {
-            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                if (purchaseOrderProduct.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
-                    if (coupon.getCouponBatch().getType().equals("1")) {
-                        BigDecimal totalPrice = new BigDecimal(0);
-                        for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
-                            if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
-                                totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
-                            }
-                        }
-                        totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-                        if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
-                            isUseful = true;
-                        } else {
-                            isUseful = false;
-                        }
                     } else {
-                        isUseful = true;
+                        isUseful = false;
                     }
-                    break;
                 } else {
-                    isUseful = false;
-                }
-            }
-        } else if (coupon.getCouponBatch().getRange().equals("4")) {
-            for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
-                if (purchaseOrderProduct.getProductModel().getProduct().getId().equals(coupon.getCouponBatch().getProduct().getId())) {
                     isUseful = true;
-                    break;
-                } else {
-                    isUseful = false;
+                }
+            } else if (coupon.getCouponBatch().getRange().equals("2")) {
+                for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                    if (purchaseOrderProduct.getProductModel().getProduct().getProject().getId().equals(coupon.getCouponBatch().getProject().getId())) {
+                        if (coupon.getCouponBatch().getType().equals("1")) {
+                            BigDecimal totalPrice = new BigDecimal(0);
+                            for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getProject().getId().equals(coupon.getCouponBatch().getProject().getId())) {
+                                    totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
+                                }
+                            }
+                            totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                                isUseful = true;
+                            } else {
+                                isUseful = false;
+                            }
+                        } else {
+                            isUseful = true;
+                        }
+                        break;
+                    }
+                }
+            } else if (coupon.getCouponBatch().getRange().equals("3")) {
+                for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                    if (purchaseOrderProduct.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
+                        if (coupon.getCouponBatch().getType().equals("1")) {
+                            BigDecimal totalPrice = new BigDecimal(0);
+                            for (PurchaseOrderProduct purchaseOrderProductTemp : purchaseOrder.getPurchaseOrderProductList()) {
+                                if (purchaseOrderProductTemp.getProductModel().getProduct().getTenant().equals(coupon.getCouponBatch().getTenant().getId())) {
+                                    totalPrice = totalPrice.add(purchaseOrderProduct.getPurchasePrice());
+                                }
+                            }
+                            totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                                isUseful = true;
+                            } else {
+                                isUseful = false;
+                            }
+                        } else {
+                            isUseful = true;
+                        }
+                        break;
+                    } else {
+                        isUseful = false;
+                    }
+                }
+            } else if (coupon.getCouponBatch().getRange().equals("4")) {
+                for (PurchaseOrderProduct purchaseOrderProduct : purchaseOrder.getPurchaseOrderProductList()) {
+                    if (purchaseOrderProduct.getProductModel().getProduct().getId().equals(coupon.getCouponBatch().getProduct().getId())) {
+                        isUseful = true;
+                        break;
+                    } else {
+                        isUseful = false;
+                    }
                 }
             }
-        }
 
-        return isUseful;
+            return isUseful;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 
