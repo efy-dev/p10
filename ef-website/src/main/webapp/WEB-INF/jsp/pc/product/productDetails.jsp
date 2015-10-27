@@ -19,8 +19,8 @@
     <div class="wh">
         <ol class="am-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="/product/list/${project.id}">分类</a></li>
-            <li class="am-active">内容</li>
+            <li><a href="/product/list/${project.id}">${project.name}</a></li>
+            <li class="am-active">${product.name}</li>
         </ol>
     </div>
     <!-- //End--面包屑-->
@@ -228,7 +228,7 @@
             <div class="btns">
                 <c:if test="${productModel.amount > 0}">
                     <a class="buy" href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>" title="立即购买">立 即 购 买</a>
-                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
+                    <a class="append" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1&redirect=/product/productModel/${productModel.id}"/>" title="放入购物车"><i
                             class="icon"></i>放 入 购 物 车</a>
                 </c:if>
             </div>
