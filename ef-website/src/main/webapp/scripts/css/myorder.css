@@ -995,8 +995,8 @@ a:hover { text-decoration: underline }
 .help-order{width: 1000px;margin: 0 auto;}
 .help-order .title p{text-align: center;font-size: 35px;color: #000;margin: 56px 0 83px 0;}
 .help-order .page .bk{border: 1px solid #000;}
-.help-order .page .left{width: 216px;float: left;}
-.help-order .page .left dt{float: left;width: 100%;position: relative;margin-top: 0;cursor: pointer}
+.help-order .page .left{width: 216px;float: left;margin-bottom: 30px;}
+.help-order .page .left dt{float: left;width: 100%;position: relative;margin-top: 0;cursor: pointer;text-align: center}
 .help-order .page .left dt .add-icon{width: 15px;height: 15px;position: absolute;background:url("../images/myefeiyi.png") no-repeat 0px -209px;left: 20px;top: 12px;}
 .help-order .page .left .active .add-icon{background:url("../images/myefeiyi.png") no-repeat 0px -227px;}
 .help-order .page .left dd{width: 100%;float: left;margin-top:-1px;border-top: 1px solid #000;}
@@ -1004,5 +1004,5 @@ a:hover { text-decoration: underline }
 .help-order .page .left dd a:hover{background: #000;color: #fff;}
 .help-order .page .left dd a .sj{width: 6px;height: 11px;background:url("../images/myefeiyi.png") no-repeat -44px -218px;right: 66px;top:11px;position: absolute}
 .help-order .page .left dd a:hover .sj{background:url("../images/myefeiyi.png") no-repeat -44px -234px;}
-.help-order .page .left dt a{padding:10px 75px;font-size: 14px;color: #000;display: inline-block;width: 100%;text-decoration: none;outline: none;border-top: 1px solid #000;margin-top: -1px; }
+.help-order .page .left dt a{padding:10px 40px;font-size: 14px;color: #000;display: inline-block;width: 100%;text-decoration: none;outline: none;border-top: 1px solid #000;margin-top: -1px; }
 .help-order .page .right{width: 752px;float: right;padding: 49px 95px;}
