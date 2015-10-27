@@ -2,10 +2,7 @@ package com.efeiyi.ec.website.order.service.impl;
 
 import com.efeiyi.ec.organization.model.ConsumerAddress;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.Cart;
-import com.efeiyi.ec.purchase.model.CartProduct;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.website.order.service.PurchaseOrderManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -37,7 +34,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
 
     @Override
     public PurchaseOrder saveOrUpdatePurchaseOrder(Cart cart, Model model) throws Exception {
-        HashMap<String,List> productMap = new HashMap<>();
+        HashMap<String, List> productMap = new HashMap<>();
         PurchaseOrder purchaseOrder = createNewPurchaseOrder(cart.getCartProductList());
         LinkedHashSet<Tenant> tenantSet = new LinkedHashSet<>();
         List<CartProduct> cartProductList = cart.getCartProductList();
@@ -87,9 +84,11 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         BigDecimal totalPrice = new BigDecimal(0);
         if (cartProductList != null && cartProductList.size() > 0) {
             for (CartProduct cartProduct : cartProductList) {
-                PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProduct.getProductModel(), cartProduct.getAmount(), cartProduct.getProductModel().getPrice());
-                totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice());
-                baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+                if (cartProduct.getIsChoose().equals("1")) {
+                    PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct(purchaseOrder, cartProduct.getProductModel(), cartProduct.getAmount(), cartProduct.getProductModel().getPrice());
+                    totalPrice = totalPrice.add(cartProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
+                    baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+                }
             }
             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
         }
@@ -100,18 +99,25 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
     }
 
     @Override
-    public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder ,ConsumerAddress consumerAddress,HashMap<String, String> messageMap,String payWay) {
+    public PurchaseOrder confirmPurchaseOrder(PurchaseOrder purchaseOrder, ConsumerAddress consumerAddress, HashMap<String, String> messageMap, String payWay) {
         String purchaseOrderAddress = (consumerAddress.getProvince() != null ? consumerAddress.getProvince().getName() : "") + " " + (consumerAddress.getCity() != null ? consumerAddress.getCity().getName() : "") + " " + (consumerAddress.getDetails() != null ? consumerAddress.getDetails() : "");
         purchaseOrder.setStatus("1");
+        purchaseOrder.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
         purchaseOrder.setPayWay(payWay);
 //        purchaseOrder.setConsumerAddress(consumerAddress);
         purchaseOrder.setPurchaseOrderAddress(purchaseOrderAddress);
         purchaseOrder.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
         purchaseOrder.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");
+        if (purchaseOrder.getCoupon() != null) {
+            Coupon coupon = purchaseOrder.getCoupon();
+            coupon.setStatus("2");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+        }
         List<PurchaseOrder> subPurchaseOrderList = purchaseOrder.getSubPurchaseOrder();
         if (subPurchaseOrderList != null && subPurchaseOrderList.size() > 1) {
             for (PurchaseOrder purchaseOrderTemp : subPurchaseOrderList) {
                 purchaseOrderTemp.setStatus("1");
+                purchaseOrderTemp.setOrderStatus(PurchaseOrder.ORDER_STATUS_WPAY);
                 purchaseOrderTemp.setPurchaseOrderAddress(purchaseOrderAddress);
                 purchaseOrderTemp.setReceiverName(consumerAddress.getConsignee() != null ? consumerAddress.getConsignee() : "");
                 purchaseOrderTemp.setReceiverPhone(consumerAddress.getPhone() != null ? consumerAddress.getPhone() : "");

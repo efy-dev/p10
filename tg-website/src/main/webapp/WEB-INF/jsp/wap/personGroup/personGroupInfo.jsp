@@ -25,9 +25,9 @@
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="/scripts/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/css/myorder.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/amazeui.min.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/app.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/myorder.css?v=20150831">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -45,29 +45,29 @@
 </header>
 <!--//End--header-->
 <div class="my-pce ae">
-    <div class="my-pic ae"><img src="/scripts/upload/mypurchase01.png"></div>
+    <div class="my-pic ae"><img src="/scripts/wap/upload/mypurchase01.png"></div>
     <ul class="my-btn ae">
-        <li><a href="#"><em>我&nbsp;的&nbsp;参&nbsp;团</em><i class="s-icon"></i></a></li>
-        <li><a href="#"><em>我&nbsp;的&nbsp;开&nbsp;团</em><i class="s-icon"></i></a></li>
+        <li><a href="/person/joinGroupStatus.do"><em>我&nbsp;的&nbsp;参&nbsp;团</em><i class="s-icon"></i></a></li>
+        <li><a href="/person/groupBuyStatus.do"><em>我&nbsp;的&nbsp;开&nbsp;团</em><i class="s-icon"></i></a></li>
         <li><a href="#"><em>我&nbsp;的&nbsp;订&nbsp;单</em><i class="s-icon"></i></a></li>
-        <li><a href="#"><em>我&nbsp;的&nbsp;红&nbsp;包</em><i class="s-icon"></i></a></li>
-        <li><a href="#"><em>申&nbsp;请&nbsp;退&nbsp;货</em><i class="s-icon"></i></a></li>
+        <li><a href="/person/bonusTotal.do"><em>我&nbsp;的&nbsp;红&nbsp;包</em><i class="s-icon"></i></a></li>
+        <li><a href="/person/returnGoods.do"><em>申&nbsp;请&nbsp;退&nbsp;货</em><i class="s-icon"></i></a></li>
     </ul>
 </div>
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/js/jquery.min.js"></script>
+<script src="/scripts/wap/js/jquery.min.js"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="/scripts/js/amazeui.min.js"></script>
+<script src="/scripts/wap/js/amazeui.min.js"></script>
 <!--自定义js--Start-->
-<script src="/scripts/js/system.js?v=20150831"></script>
-<script src="/scripts/js/myorder.js?v=20150831"></script>
+<script src="/scripts/wap/js/system.js?v=20150831"></script>
+<script src="/scripts/wap/js/myorder.js?v=20150831"></script>
 <!--自定义js--End-->
 </body>
 </html>

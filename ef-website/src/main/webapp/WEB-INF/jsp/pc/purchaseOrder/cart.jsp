@@ -138,14 +138,14 @@
                         <%
                             if (AuthorizationUtil.getMyUser().getId() != null) {
                         %>
-                        <td id="hiddenCoupon"></td>
-                        <td>
-                            <div class="coupon" id="cart-coupon">
-                                <a class="btn-coupon" href="#优惠券" onclick="openCoupon()" target="_blank" title="">优惠券<i class="icon"></i></a>
-                                <ul class="ul-list">
-                                </ul>
-                            </div>
-                        </td>
+                        <%--<td id="hiddenCoupon"></td>--%>
+                        <%--<td>--%>
+                            <%--<div class="coupon" id="cart-coupon">--%>
+                                <%--<a class="btn-coupon" href="#优惠券" onclick="openCoupon()" target="_blank" title="">优惠券<i class="icon"></i></a>--%>
+                                <%--<ul class="ul-list">--%>
+                                <%--</ul>--%>
+                            <%--</div>--%>
+                        <%--</td>--%>
                         <%
                             }
                         %>

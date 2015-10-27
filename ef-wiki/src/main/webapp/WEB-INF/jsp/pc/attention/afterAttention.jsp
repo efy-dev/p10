@@ -115,14 +115,14 @@
       </ul>
     </div>
     <!-- //End--nav-->
-    <div class="craft-gz ae" style="display: block">
+    <div class="craft-gz ae" style="display: block" id="afterAttention">
       <!--标题-->
       <div class="craft-wz ae"><span>共关注${fsAmount}个工艺</span></div>
       <!-- 一个循环文件-->
-      <div class="craft-l-content ae" id="afterAttention">
+      <%--<div class="craft-l-content ae">
         <!--左边名称文件-->
 
-      </div>
+      </div>--%>
 
     </div>
   </div>
@@ -187,7 +187,7 @@
         var pubu = $("#afterAttention");
         if(data && data.length>=1){
           for(i in data){
-
+           var container =$(" <div class=\"craft-l-content ae\"></div>");
             var box = $("<div class=\"craft-dt ae\"> <div class=\"img-dt\"> <a href=\"<c:url value='/project/brifProject.do?projectId='/>"+data[i].projectModel.projectId+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].projectModel.picture_pc_url+"\"></a>" +
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
@@ -196,7 +196,7 @@
                     "<p class=\"p1\">全部&nbsp;<a href=\"<c:url value='/project/brifMaster.do?projectId='/>"+data[i].projectModel.projectId+"\"><span>"+data[i].projectModel.masters+"</span></a>&nbsp;位大师</p> </div> " +
                     "</div>");
 
-            pubu.append(box);
+            container.append(box);
             var subBox = $("<div class=\"craft-dd ae\"> <ul></ul> </div>");
             if(data[i] && data[i].products.length>=1){
 
@@ -207,7 +207,8 @@
               }
 
             }
-            pubu.append(subBox);
+            container.append(subBox);
+            pubu.append(container);
             //PBL("#beforeAttention",".before",2);
           }
 

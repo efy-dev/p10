@@ -1,7 +1,4 @@
 $(function(){
-    //ï¿½ï¿½ï¿½ï¿½
-
-    //ï¿½ÒµÄ¶ï¿½ï¿½ï¿½
     (function(){
         $('#orderNum .item:last tr').css({'border':'0'});
         $('.clearing-site span .btn-cart-add').click(function(){
@@ -12,7 +9,7 @@ $(function(){
             // return false;
         })
     })();
-    //ï¿½Õ»ï¿½ï¿½ï¿½Ö·
+    //
     (function(){
         $('.my-order .extra-r>a').click(function(){
             $(this).siblings('.active-pop').show();
@@ -22,7 +19,7 @@ $(function(){
             return false;
         })
     })();
-    //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+    //
     (function(){
         $('.nav-item .title').click(function(){
             $(this).find('.icon').toggleClass('icon-active');
@@ -30,102 +27,57 @@ $(function(){
             $(this).parents('.nav-item').find('.ul-list')
         })
     })();
-
-})
-
-//ï¿½Õ»ï¿½ï¿½ï¿½Ö·
-$(function(){
+    //
     $('.my-order .extra-r>a').click(function(){
         $(this).siblings('.active-pop').show();
         $('.my-order .clase, .my-order .sh-bg').click(function(){
             $(this).parents('.active-pop').hide();
         })
         return false;
-    })
-})
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
-$(function(){
+    });
+    //
     $('#act-q').click(function(){
         $(this).siblings('.list-express').slideToggle();
-
     })
-})
-//ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½js
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
-$(function(){
+    //
     $('.evaluation .mutual .parameter .data .data-list .tally .djml').click(function(){
         $(this).toggleClass('cl-active')
-    })
-})
-//ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
-$(function(){
+    });
+    //
     $('.act-ui').click(function(){
         $(this).parents('.table').siblings('.mutual').slideToggle();
         return false;
-    })
-})
-//ï¿½ó¶¨°ï¿½Å¥
-$(function(){
+    });
+    //
     $('.kd').click(function(){
         $(this).parents('.binding').sibling('.binding-list').slideToggle();
     })
-})
-
-$(function(){
-    $('#cart-coupon').find('.btn-coupon').click(function(){
-        alert('asd')
-        $('#cart-coupon').find('.ul-list').slideDown();
-        return false;
-    })
-})
-
-
-//dingdan zuobiandianjijs
-
-$(function(){
+    //dingdan zuobiandianjijs
     $('.my-order .order-nav .layout-li li').click(function(){
         alert('asdsasad')
         $(this).addClass('liul').siblings().removeClass('liul');
     })
-})
-
-
-//huadongxianshi
-$(function(){
+    //huadongxianshi
     $('.my-clearing .page-default').mouseenter(function(){
         $(this).find('.jc-hc').show();
     })
     $('.my-clearing .page-default').mouseleave(function(){
         $(this).find('.jc-hc').hide();
-    })
-
-})
-$(function(){
+    });
+    //
     $('.edit-act').click(function(){
         $(this).parent().find('.apt').show();
 
-    })
-})
-
-
-$(function(){
+    });
+    //
     $('.but-bil').click(function(){
         alert('sadasdsa')
         $(this).parent().find('.common-popup').show()
     })
+    //°ïÖúÖÐÐÄ
+    $('.help-order .page .left dt').click(function(){
+        $(this).toggleClass('active');
+        $(this).siblings('dd').slideToggle('fast');
+    })
+
 })
-
-
-/*
-var GradList = document.getElementById("quacorgrading").getElementsByTagName("input");
-for(var i=0;i < GradList.length;i++){
-    GradList[i].onmouseover = function(){
-        for(var Qi=0;Qi<GradList.length;Qi++){
-            GradList[Qi].style.backgroundPosition = '-36px -21px';
-        }
-        for(var Qii=0;Qii<this.name;Qii++){
-            GradList[Qii].style.backgroundPosition = '-5px -21px';
-        }
-        document.getElementById("QuacorGradingValue").innerHTML = '<b><font size="5" color="#fd7d28">'+this.name+'</font></b>åˆ†';
-    }
-}*/

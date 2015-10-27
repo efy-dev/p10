@@ -3,11 +3,11 @@
     <div class="service wh">
         <div class="icon phone"></div>
         <div class="line"></div>
-        <div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>
+        <div class="icon platform"><a href="http://www.efeiyi.com/main/do7" target="_blank" title="平台优势">平台优势</a></div>
         <div class="line"></div>
-        <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
+        <div class="icon chengbao"><a href="http://www.315cheng.com" target="_blank" title="诚品宝">诚品宝</a></div>
         <div class="line"></div>
-        <div class="icon wechat"></div>
+        <div class="icon wechat"><i class="icon"></i></div>
     </div>
     <div class="links wh">
         <a href="http://www.efeiyi.com/main/aboutUs" target="_blank" title="关于我们">关于我们</a>
@@ -32,7 +32,7 @@
             <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
             <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
             <a rel="nofollow" href="http://www.mcprc.gov.cn/whzx/bnsjdt/fwzwhycs/" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-            <a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
+            <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
         <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
@@ -43,6 +43,19 @@
 <![endif]-->
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+</script>
 <div style="display: none">
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>

@@ -170,7 +170,7 @@
 ${product.productDescription.content}
   <!--购买-->
   <div class="purchase-inheritor">
-    <a href="#">我&nbsp;要&nbsp;购&nbsp;买</a>
+    <a href="http://www2.efeiyi.com/product/productModel/{${product.productModelList[0].id}}">我&nbsp;要&nbsp;购&nbsp;买</a>
   </div>
   <!--购买-->
   <div class="inheritor ">
