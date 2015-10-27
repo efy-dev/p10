@@ -20,7 +20,7 @@ public class GroupProduct implements Serializable {
     private BigDecimal groupPrice; // 团购价格
     private Date createDateTime; //创建时间
     private BigDecimal bonus;// 分享的红包
-    private Date groupPurchaseTime;// 成团时间
+    private Integer groupPurchaseTime;// 成团时间
     private String status;// 状态标记
     private ProductModel productModel; //商品
     @Id
@@ -66,11 +66,11 @@ public class GroupProduct implements Serializable {
         this.bonus = bonus;
     }
     @Column(name = "group_purchase_time")
-    public Date getGroupPurchaseTime() {
+    public Integer getGroupPurchaseTime() {
         return groupPurchaseTime;
     }
 
-    public void setGroupPurchaseTime(Date groupPurchaseTime) {
+    public void setGroupPurchaseTime(Integer groupPurchaseTime) {
         this.groupPurchaseTime = groupPurchaseTime;
     }
     @Column(name = "status")
