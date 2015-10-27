@@ -575,8 +575,7 @@ ADD COLUMN `create_datetime`  datetime(6) NULL AFTER `status`;
 ---------------------未执行 ------------------------------
 
 ALTER TABLE `purchase_coupon_batch`
-ADD COLUMN `type`  char(8) NULL AFTER `picture_url`,
-ADD COLUMN `range`  char(8) NULL AFTER `type`,
+ADD COLUMN `range`  char(8) NULL ,
 ADD COLUMN `project_id`  char(16) NULL AFTER `range`,
 ADD COLUMN `tenant_id`  char(16) NULL AFTER `project_id`,
 ADD COLUMN `product_id`  char(16) NULL AFTER `tenant_id`,

@@ -38,7 +38,7 @@ public class GroupController {
             List<Group> list = baseManager.listObject(xQuery);
             if (list.size() > 0){
                 Group group = new Group();
-                group.setManUser(currentUser.getBigUser());
+//                group.setManUser(currentUser.getBigUser());
                 group.setStatus("1");
                 group.setCreateDateTime(new Date());
                 group.setGroupProduct(groupProduct);
