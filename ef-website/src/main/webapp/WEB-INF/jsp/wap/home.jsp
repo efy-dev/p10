@@ -19,13 +19,13 @@
     <div class="toolbar">
         <a class="item asso" href="<c:url value="/productCategory.do"/> ">
             <span><i class="icon"></i></span>
-            <span>分类</span>
+            <span>分&nbsp;类</span>
         </a>
-        <a class="item user" href="http://master.efeiyi.com">
+        <a class="item user" href="http://www2.efeiyi.com/subject/ig8zlvonengegjk9">
             <span><i class="icon"></i></span>
-            <span>大&nbsp;师</span>
+            <span>精&nbsp;选&nbsp;专&nbsp;题</span>
         </a>
-        <a class="item coupon" href="/coupon/list">
+        <a class="item coupon" href="http://i.efeiyi.com/coupon/list">
             <span><i class="icon"></i></span>
             <span>我&nbsp;的&nbsp;卡&nbsp;券</span>
         </a>

@@ -28,15 +28,35 @@
             });
         }
 
-        function createCoupon(obj,url,couponBatchId,amount){
+        function createCoupon(obj,url,couponBatchId,amount,deliverType){
+            if("3" == deliverType){
+                alert("通码不能生成优惠券！");
+            }else{
+                $.ajax({
+                    type:"GET",
+                    url:url,
+                    data:{id:couponBatchId,amount:amount},
+                    success:function(data){
+                        $(obj).find("span").text("查看优惠券");
+                        $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
+                        $(obj).attr("onclick","");
+                    }
+                });
+            }
+        }
+        function setDefaultFlag(obj,url,couponBatchId){
+            var f = $(obj).find("span").text();
             $.ajax({
                 type:"GET",
                 url:url,
-                data:{id:couponBatchId,amount:amount},
+                data:{id:couponBatchId,ftext:f},
                 success:function(data){
-                    $(obj).find("span").text("查看优惠券");
-                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
-                    $(obj).attr("onclick","");
+                    console.log(data);
+                    if("1" != data){
+                        $(obj).find("span").text("设置新注册送券");
+                    }else{
+                        $(obj).find("span").text("取消新注册送券");
+                    }
                 }
             });
         }
@@ -84,7 +104,7 @@
 
                                             <c:if test="${couponBatch.isCreatedCoupon == 1}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#" onclick="createCoupon(this,'<c:url value="/couponBatch/createCoupon.do"/>','${couponBatch.id}','${couponBatch.amount}')"><span
+                                                   href="#" onclick="createCoupon(this,'<c:url value="/couponBatch/createCoupon.do"/>','${couponBatch.id}','${couponBatch.amount}','${couponBatch.deliverType}')"><span
                                                         class="am-icon-trash-o">创建优惠券</span>
                                                 </a>
                                             </c:if>
@@ -93,6 +113,21 @@
                                                    href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&view=${view}&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
                                                 </a>
                                             </c:if>
+
+                                            <c:choose>
+                                                <c:when test="${couponBatch.defaultFlag != 1}">
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="setDefaultFlag(this,'<c:url value="/couponBatch/setDefaultFlag.do"/>','${couponBatch.id}')" id=""><span
+                                                            class="am-icon-trash-o">设置新注册送券</span>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="setDefaultFlag(this,'<c:url value="/couponBatch/setDefaultFlag.do"/>','${couponBatch.id}')"><span
+                                                            class="am-icon-trash-o">取消新注册送券</span>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </td>
