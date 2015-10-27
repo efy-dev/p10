@@ -45,6 +45,9 @@ public class GroupController {
             if(purchaseOrder.getOrderStatus().equals("5")){
 
                 Group group = new Group();
+                group.setManUser(currentUser.getBigUser());
+                group.setStatus("1");
+                group.setCreateDateTime(new Date());
                 group.setGroupProduct(groupProduct);
                 group.setCreateDateTime(new Date());
                 group.setStatus("1");

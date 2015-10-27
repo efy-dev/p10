@@ -72,7 +72,7 @@
                         </td>
                         <td class="am-hide-sm-only" width="20%">${ads.name}</td>
                         <td class="am-hide-sm-only" width="20%">
-                           <a href="${ads.redirect}">${ads.redirect}</a>
+                           <a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
                         </td>
                         <td class="am-hide-sm-only" width="20%">
                             <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${ads.img}@!product-model"/>"
