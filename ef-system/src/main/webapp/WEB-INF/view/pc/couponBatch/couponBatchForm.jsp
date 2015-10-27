@@ -23,6 +23,7 @@
                         $("#xzpinlei").hide();
                         $("#xzdianpu").hide();
                         $("#xzshangpin").hide();
+                        $("#miane").hide();
                     }
 
                     $("input:radio[name=range]").bind("change", function () {
@@ -299,7 +300,7 @@
                     <label for="price1" class="am-u-sm-3 am-form-label">面额</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="price1" name="price" value="${object.price}">
+                        <input type="text" id="price1" name="price1" value="${object.price}">
                     </div>
                 </div>
 
