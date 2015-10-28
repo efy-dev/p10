@@ -10,6 +10,10 @@
         <div class="icon wechat"><i class="icon"></i></div>
     </div>
     <div class="links wh">
+        <a href="<c:url value="/document/richTextView?group=ec.gulc"/> " target="_blank" title="帮助中心">帮助中心</a>
+        <a class="line"></a>
+        <a href="<c:url value="/document/richTextView?group=ec.zpbz"/> " target="_blank" title="服务保障">服务保障</a>
+        <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.gywm"/> " target="_blank" title="关于我们">关于我们</a>
         <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.lxwm"/>" target="_blank" title="联系我们">联系我们</a>
@@ -19,6 +23,8 @@
         <a href="<c:url value="/document/richTextView?group=ec.yjfk"/>" target="_blank" title="意见反馈">意见反馈</a>
         <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.gywm"/>" target="_blank" title="诚信保障">诚信保障</a>
+        <a class="line"></a>
+        <a href="<c:url value="/document/richTextView?group=ec.flsm"/>" target="_blank" title="法律声明">法律声明</a>
         <%--<a class="line"></a>--%>
         <%--<a href="<c:url value="/document/richTextView?group=ec.gywm"/> " target="_blank" title="新闻资讯">新闻资讯</a>--%>
     </div>

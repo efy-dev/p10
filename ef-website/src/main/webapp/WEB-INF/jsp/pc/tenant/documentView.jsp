@@ -25,8 +25,8 @@
                     <dt><a href="#">服务保障<i class="add-icon"></i></a></dt>
                     <dd style="display: none">
                         <a href="<c:url value="/document/richTextView?group=ec.zpbz"/>">正品保障<i class="sj"></i></a>
-                        <a href="<c:url value="/document/richTextView?group=ec.shzc"/>">售后正常<i class="sj"></i></a>
-                        <a href="<c:url value="/document/richTextView?group=ec.thhlc"/>">退换货流程<i class="sj"></i></a>
+                        <a href="<c:url value="/document/richTextView?group=ec.shzc"/>">售后政策<i class="sj"></i></a>
+                        <%--<a href="<c:url value="/document/richTextView?group=ec.thhlc"/>">退换货流程<i class="sj"></i></a>--%>
                     </dd>
                 </dl>
                 <dl class="ae">
