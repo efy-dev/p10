@@ -65,20 +65,22 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only">${coupon.serial}</td>
                         <td class="am-hide-sm-only">
-                            <c:if test="${coupon.isBind == '1'}">
+                            <a href="<c:url value='/basic/xm.do?qm=viewCoupon&id=${coupon.id}'/>">${coupon.serial}
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${coupon.whetherBind == '1'}">
                                 未绑定
                             </c:if>
-                            <c:if test="${coupon.isBind == '2'}">
+                            <c:if test="${coupon.whetherBind == '2'}">
                                 ${coupon.consumer.username}
                             </c:if>
                         </td>
                         <td class="am-hide-sm-only">
-                            <c:if test="${coupon.isBind == '1'}">
+                            <c:if test="${coupon.whetherBind == '1'}">
                                 未绑定
                             </c:if>
-                            <c:if test="${coupon.isBind == '2'}">
+                            <c:if test="${coupon.whetherBind == '2'}">
                                 ${coupon.bindTime}
                             </c:if>
                         </td>

@@ -145,7 +145,7 @@
                 </do>
 
                 <do name="removeCoupon" label="删除优惠券" access="" result="json"/>
-                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView" />
+                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
                 <do name="formCoupon" label="保存优惠券" access="" result="/coupon/couponForm"/>
                 <do name="saveOrUpdateCoupon" label="保存优惠券" access=""
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
