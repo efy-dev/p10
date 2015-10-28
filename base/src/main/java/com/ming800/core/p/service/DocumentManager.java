@@ -18,7 +18,7 @@ public interface DocumentManager {
      * 保存字典
      * @param tag
      */
-    void saveDocument(Document document);
+    void saveDocument(Document document,String[] flag, String[] spId, String[] documentPicture);
 
     /**
      * 假删

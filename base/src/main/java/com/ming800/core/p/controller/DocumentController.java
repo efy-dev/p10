@@ -3,15 +3,23 @@ package com.ming800.core.p.controller;
 import com.ming800.core.p.model.Document;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.model.DocumentPicture;
+import com.ming800.core.p.service.AliOssUploadManager;
 import com.ming800.core.p.service.DocumentManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/7/14.
@@ -27,6 +35,9 @@ public class DocumentController {
 
     @Autowired
     private DocumentManager documentManager;
+
+    @Autowired
+    private AliOssUploadManager aliOssUploadManager;
     /**
      *根据group_id查询获取相关document
      */
@@ -47,10 +58,12 @@ public class DocumentController {
      * @return
      */
     @RequestMapping("/saveDocument.do")
-    public String saveDocument(Document document,HttpServletRequest request){
+    public String saveDocument(Document document,
+                               String[] flag, String[] spId, String[] documentPicture,
+                               HttpServletRequest request){
 
         try{
-            documentManager.saveDocument(document);
+            documentManager.saveDocument(document,flag,spId,documentPicture);
         }catch (Exception e){
 
             e.printStackTrace();
@@ -99,4 +112,39 @@ public class DocumentController {
         return  document.getId();
     }
 
+    @RequestMapping("/documentUploadify.do")
+    @ResponseBody
+    public String documentUploadifyImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String data = "";
+
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        // String ctxPath = request.getSession().getServletContext().getRealPath("/")+ File.separator+"uploadFiles";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
+        String url = "";
+        for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            DocumentPicture documentPicture = new DocumentPicture();
+            //上传文件
+            MultipartFile mf = entry.getValue();
+            String fileName = mf.getOriginalFilename();//获取原文件名
+            Integer index = 0;
+            String hz = fileName.substring(fileName.indexOf("."),fileName.length());
+            String imgName = fileName.substring(0, fileName.indexOf(hz));
+            url = "document/" + fileName.substring(0, fileName.indexOf(hz)) + identify + hz;
+
+            try {
+                aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+//
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        System.out.print(url);
+        return url;
+
+
+    }
 }
