@@ -77,7 +77,7 @@
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li ><a href="<c:url value='/pc/index.do'/>">动&nbsp;态</a></li>
+      <li ><a href="<c:url value='/pc/index.do'/>">热&nbsp;门</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li class="active"><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
@@ -94,7 +94,7 @@
 <!--nav-bars-->
 <div class="home-craft">
   <div class="craft-details">
-    <div class="focus wh">
+    <%--<div class="focus wh">
       <!--轮播图-->
       <ul class="slider-main">
         <c:if test="${! empty bannerList}">
@@ -114,7 +114,7 @@
         <li></li>
         <li></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--nav-->
     <div class="cart-tabe">
 
