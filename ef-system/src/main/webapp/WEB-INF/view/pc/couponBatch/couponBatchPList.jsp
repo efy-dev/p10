@@ -97,10 +97,10 @@
                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeCouponBatch('${couponBatch.id}')})"><span
                                                     class="am-icon-trash-o">删除</span>
                                             </button>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span
-                                                    class="am-icon-trash-o">编辑</span>
-                                            </a>
+                                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                               <%--href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span--%>
+                                                    <%--class="am-icon-trash-o">编辑</span>--%>
+                                            <%--</a>--%>
 
                                             <c:if test="${couponBatch.isCreatedCoupon == 1}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"

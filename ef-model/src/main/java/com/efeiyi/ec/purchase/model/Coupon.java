@@ -23,6 +23,7 @@ public class Coupon implements Serializable {
     private String startTimeL;
     private String endTimeL;
     private String isUseful;
+    private String isBind;//优惠券是否绑定 1-未绑定  2-已绑定
 
 
     @Column(name = "cdkey")
@@ -120,4 +121,12 @@ public class Coupon implements Serializable {
         this.consumer = consumer;
     }
 
+    @Column(name = "isbind")
+    public String getIsBind() {
+        return isBind;
+    }
+
+    public void setIsBind(String isBind) {
+        this.isBind = isBind;
+    }
 }

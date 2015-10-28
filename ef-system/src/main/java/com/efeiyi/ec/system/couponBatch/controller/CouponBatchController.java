@@ -1,7 +1,10 @@
 package com.efeiyi.ec.system.couponBatch.controller;
 
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,6 +42,7 @@ public class CouponBatchController extends BaseController {
             coupon.setCouponBatch(couponBatch);
             String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
+            coupon.setIsBind("1");
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
 
@@ -100,20 +105,28 @@ public class CouponBatchController extends BaseController {
     }
     @RequestMapping("/getTenantByProject.do")
     @ResponseBody
-    public List<Object> getTenantByProject(Model model,HttpServletRequest request) throws Exception {
+    public List<Tenant> getTenantByProject(Model model,HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
         XQuery xQuery = new XQuery("listTenantProject_default3",request);
         xQuery.put("project_id",id);
         List<Object> list = baseManager.listObject(xQuery);
-        return list;
+
+        List<Tenant> tList = new ArrayList<>();
+        TenantProject tenantProject = null;
+        for(int i = 0;i < list.size();i++){
+            tenantProject = (TenantProject) list.get(i);
+            tList.add(tenantProject.getTenant());
+        }
+
+        return tList;
     }
     @RequestMapping("/getProductByProject.do")
     @ResponseBody
-    public List<Object> getProductByProject(Model model,HttpServletRequest request) throws Exception {
+    public List<Product> getProductByProject(Model model,HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
-        XQuery xQuery = new XQuery("listProduct_default",request);
+        XQuery xQuery = new XQuery("listProduct_default1",request);
         xQuery.put("project_id",id);
-        List<Object> list = baseManager.listObject(xQuery);
+        List<Product> list = baseManager.listObject(xQuery);
         return list;
     }
     @RequestMapping("/setDefaultFlag.do")
