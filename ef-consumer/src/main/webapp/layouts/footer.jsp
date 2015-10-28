@@ -23,8 +23,6 @@
         <a class="line"></a>
         <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.yjfk" target="_blank" title="意见反馈">意见反馈</a>
         <a class="line"></a>
-        <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.gywm" target="_blank" title="诚信保障">诚信保障</a>
-        <a class="line"></a>
         <a href="<%=PConst.HOSTNAME%>/document/richTextView?group=ec.flsm" target="_blank" title="法律声明">法律声明</a>
     </div>
     <div class="copyright wh">
