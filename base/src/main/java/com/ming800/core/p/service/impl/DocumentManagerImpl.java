@@ -65,18 +65,21 @@ public class DocumentManagerImpl implements DocumentManager {
          xdoDao.saveOrUpdateObject(documentContent);
          tempDoc.setDocumentContent(documentContent);
          xdoDao.saveOrUpdateObject(tempDoc);
-        for(int i=0;i<spId.length;i++){
-            if("0".equals(spId[i])){
-                DocumentPicture documentPicture1 = new DocumentPicture();
-                documentPicture1.setDocument(tempDoc);
-                documentPicture1.setPictureUrl(documentPicture[i]);
-                xdoDao.saveOrUpdateObject(documentPicture1);
+        if(spId!=null) {
+            for (int i = 0; i < spId.length; i++) {
+                if ("0".equals(spId[i])) {
+                    DocumentPicture documentPicture1 = new DocumentPicture();
+                    documentPicture1.setDocument(tempDoc);
+                    documentPicture1.setPictureUrl(documentPicture[i]);
+                    xdoDao.saveOrUpdateObject(documentPicture1);
 
-            }else {
-                if("-1".equals(flag[i])){
-                    xdoDao.deleteObject(DocumentPicture.class.getName(),spId[i]);
+                } else {
+                    if ("-1".equals(flag[i])) {
+                        xdoDao.deleteObject(DocumentPicture.class.getName(), spId[i]);
 
+                    }
                 }
+
             }
         }
     }
