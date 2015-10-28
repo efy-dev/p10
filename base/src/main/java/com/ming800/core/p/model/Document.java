@@ -1,5 +1,6 @@
 package com.ming800.core.p.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,6 +29,7 @@ public class Document {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date publishDate;
     private List<DocumentAttachment> documentAttachmentList;
+    private List<DocumentPicture> documentPictureList;
 
 
     @Id
@@ -141,5 +143,15 @@ public class Document {
 
     public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
+    }
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "document")
+    public List<DocumentPicture> getDocumentPictureList() {
+        return documentPictureList;
+    }
+
+    public void setDocumentPictureList(List<DocumentPicture> documentPictureList) {
+        this.documentPictureList = documentPictureList;
     }
 }

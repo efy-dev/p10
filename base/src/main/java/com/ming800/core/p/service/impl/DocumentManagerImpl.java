@@ -3,10 +3,7 @@ package com.ming800.core.p.service.impl;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.dao.DocumentDao;
 import com.ming800.core.p.dao.TagDao;
-import com.ming800.core.p.model.CommonDocument;
-import com.ming800.core.p.model.CommonTag;
-import com.ming800.core.p.model.Document;
-import com.ming800.core.p.model.DocumentContent;
+import com.ming800.core.p.model.*;
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.p.service.TagManager;
@@ -46,7 +43,7 @@ public class DocumentManagerImpl implements DocumentManager {
     }
 
     @Override
-    public void saveDocument(Document document)  {
+    public void saveDocument(Document document,String[] flag, String[] spId, String[] documentPicture)  {
         Document tempDoc = null;
         DocumentContent documentContent = null;
         if("".equals(document.getId())){
@@ -68,6 +65,20 @@ public class DocumentManagerImpl implements DocumentManager {
          xdoDao.saveOrUpdateObject(documentContent);
          tempDoc.setDocumentContent(documentContent);
          xdoDao.saveOrUpdateObject(tempDoc);
+        for(int i=0;i<spId.length;i++){
+            if("0".equals(spId[i])){
+                DocumentPicture documentPicture1 = new DocumentPicture();
+                documentPicture1.setDocument(tempDoc);
+                documentPicture1.setPictureUrl(documentPicture[i]);
+                xdoDao.saveOrUpdateObject(documentPicture1);
+
+            }else {
+                if("-1".equals(flag[i])){
+                    xdoDao.deleteObject(DocumentPicture.class.getName(),spId[i]);
+
+                }
+            }
+        }
     }
 
     @Override
@@ -78,5 +89,10 @@ public class DocumentManagerImpl implements DocumentManager {
     @Override
     public void deleteDocument(Document document) {
         documentDao.deleteDocument(document);
+    }
+
+    @Override
+    public void saveDocument(Document document) {
+        documentDao.saveDocument(document);
     }
 }

@@ -606,7 +606,13 @@ ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
 
 
 
-
+CREATE TABLE `base_document_picture` (
+  `id`  char(16) NOT NULL ,
+  `document_id`  char(16) NULL ,
+  `picture_url`  varchar(255) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
 
 
 
