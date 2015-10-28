@@ -42,7 +42,7 @@
 
 </head>
 <body style="float: left">
-<div class="topbar wh" data-am-sticky>
+<%--<div class="topbar wh" data-am-sticky>
   <div class="hd">
     <ul class="ul-item">
       <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
@@ -73,7 +73,7 @@
       </ul>
     </div>
   </div>
-</div>
+</div>--%>
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
@@ -117,9 +117,9 @@
   </div>
   <div class="ae">
     <ul class="craft-nav">
-      <li ><a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>">介&nbsp;绍</a></li>
-      <li ><a href="<c:url value='/project/brifMaster.do?projectId=${project.id}'/>">大&nbsp;师</a></li>
-      <li class="active"><a href="<c:url value='/project/listProduct.do?projectId=${project.id}'/>">作&nbsp;品</a></li>
+      <li ><a href="<c:url value='/project/brifProject/${project.id}'/>">介&nbsp;绍</a></li>
+      <li ><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
+      <li class="active"><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>
     </ul>
     <div class="craft-work3 ae" style="display: block">
 
@@ -133,46 +133,7 @@
 
   </div>
 </div>
-<div class="footer wh">
-  <div class="service wh">
-    <div class="icon phone"></div>
-    <div class="line"></div>
-    <div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>
-    <div class="line"></div>
-    <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
-    <div class="line"></div>
-    <div class="icon wechat"></div>
-  </div>
-  <div class="links wh">
-    <a href="" target="_blank" title="关于我们">关于我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="联系我们">联系我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="意见反馈">意见反馈</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="帮助中心">帮助中心</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚信保障">诚信保障</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
-  </div>
-  <div class="copyright wh">
-    <div class="phone">
-      <strong>商家入住热线</strong>
-      <em>400-876-8766</em>
-    </div>
-    <div class="frlinks">
-      <span>友情链接：</span>
-      <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-      <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-      <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-    </div>
-    <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-  </div>
-</div>
+
 <!-- //End--footer-->
 
 
@@ -209,7 +170,7 @@
           return true;
         }
         if(data=="error"){
-          showAlert("提示","未知错误，请联系管理员！！！");
+          alert("未知错误，请联系管理员！！！");
           return false;
         }
       },
@@ -247,7 +208,7 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -257,7 +218,7 @@
 
 
             pubu.append(box);
-            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -344,7 +305,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/Isattention.do?projectId="+projectId,
+      url:"<c:url value='/base/Isattention/'/>"+projectId,
       data:"",
       async:false,
       dataType:"json",
@@ -374,7 +335,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/IsattentionMaster.do?masterId="+masterId,
+      url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
       data:"",
       async:false,
       dataType:"json",
@@ -411,7 +372,7 @@
     }
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
@@ -712,7 +673,7 @@
 
 
                 // pubu.append(box);
-                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +

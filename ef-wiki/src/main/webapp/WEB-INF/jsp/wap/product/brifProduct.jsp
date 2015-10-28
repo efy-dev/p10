@@ -154,6 +154,7 @@
 
             </li>--%>
           </ul>
+          <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
         </div>
       </div>
     </div>
@@ -735,7 +736,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct.do?productId='/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");
@@ -752,7 +753,7 @@ function savaUP(productId){
       data:"",
       dataType:"json",
       success:function(o){
-        window.location.href="<c:url value='/project/showProduct.do?productId='/>"+data2;
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
       },
       error:function(){
         alert("出错了，请联系管理员！！！");

@@ -18,7 +18,7 @@ ul,dl{list-style:none}
 .myorder .myfunction ul li{text-align: center;font-size: 0.9rem;color: #000;float: left;padding: 0;}
 .myorder .myfunction .ac-ave{margin-left: -1px;}
 .myorder .myfunction .ac-ave1{margin-left: -2px;}
-.myorder .myfunction  a{background-color:#fff; border:1px solid  #000;padding:7px 0;float:left;color: #000;margin: 0 auto;width: 100%}
+.myorder .myfunction  a{background-color:#fff; border:1px solid  #000;padding:15px 0;float:left;color: #000;margin: 0 auto;width: 100%}
 .myorder .myfunction  a:hover{background: #000;color: #fff;transition: all 0.5s;}
 .myorder .myfunction  button p{color:#000;text-align: center;}
 .myorder .order-list{width: 100%;border:1px solid #ccc;margin:18px 0;overflow: hidden;height: auto}
@@ -131,6 +131,7 @@ ul,dl{list-style:none}
 /*amazeuiorg*/
 /*020202优惠券*/
 /*020203店铺收藏*/
+.myorder .myfunction ul li:nth-child(2) a{border-left: 0;}
 .collection{width: 100%;padding:0 19px;float: left}
 .collection .collection-list{width: 100%;float: left;margin-top: 17px;}
 .collection .collection-list dl{width: 100%;float: left;border:1px solid #ccc;}
@@ -149,10 +150,12 @@ ul,dl{list-style:none}
 .collection .tab-right{float: right;}
 /*020203店铺收藏*/
 /*020204商品收藏*/
-.commodity .commodity-bt{height: 4rem;overflow: hidden}
-.commodity .on-list strong{color: #ff0000;line-height: 27px;}
-.commodity .on-list dl{width: 100%;display: block;padding-bottom: 17px;float: left;margin:-1px;border-top: 1px solid #ccc;}
-.commodity  .act-wid{padding: 0 0.9rem;float: left; width: 100%;}
+.discount .on-list .act-wid{border-bottom:1px solid #ccc;padding: 0}
+.discount .on-list .act-wid:last-child{border-bottom: 0}
+.commodity .commodity-bt {height:4rem;overflow:hidden}
+.commodity .on-list strong {color:#ff0000;line-height:27px;}
+.commodity .on-list dl {width:100%;display:block;padding-bottom:17px;float:left;margin:-1px;}
+.commodity .act-wid {padding:0 0.9rem;float:left;width:100%;}
 /*020204商品收藏*/
 /*020206个人信息*/
 .personal-material{width: 100%;padding:0 19px;float: left}
@@ -272,3 +275,4 @@ ul,dl{list-style:none}
 /*购物车结算页按钮修改样式*/
 .add-btn{background:#fff;height: 3rem;width: 100%;border: 1px solid #000;color: #000;display:block;font-size: 1.2rem}
 .add-address{width: 100%;line-height: 3rem;height: 3rem;text-align: center;border: 1px solid #000;display:block;color: #000;font-size: 1.2rem}
+.myorder .list-topic:last-child{width:100%;border-bottom:0;overflow:hidden;padding:10px 0;height:auto}

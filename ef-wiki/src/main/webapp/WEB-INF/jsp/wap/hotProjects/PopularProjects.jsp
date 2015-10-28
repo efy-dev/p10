@@ -79,7 +79,7 @@
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
                 <li>
-                  <a href="<c:url value='/base/brifProject.do?projectId=${ppj.project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.project.picture_wap_url}"></a>
+                  <a href="<c:url value='/base/brifProject/${ppj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.project.picture_wap_url}"></a>
                   <div class="hot-poge">
                     <span style="margin-right: 1rem">人气</span>
                  <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -139,7 +139,7 @@
                                     <c:forEach var="apj" items="${attentionProjectsList}">
                                     <li>
                                         <p class="tb">
-                                            <a href="<c:url value='/base/brifProject.do?projectId=${apj.project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${apj.project.picture_wap_url}"></a>
+                                            <a href="<c:url value='/base/brifProject/${apj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${apj.project.picture_wap_url}"></a>
                                             <c:if test="${apj.attention=='0'}">
                                             <a class="icon-guanzu" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="0">关注</a>
                                             </c:if>
@@ -369,7 +369,7 @@
         isAttention = false;
         $.ajax({
             type:"get",
-            url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
+            url:"<c:url value='/base/Isattention/'/>"+projectId,
             data:"",
             async:false,
             dataType:"json",
@@ -421,7 +421,7 @@
                             at='1';
                         }
                         var box = $("<li> <div class='suit-list-bt'>" +
-                                "<a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data.list[i].project.id+"\"> <img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a>" +
+                                "<a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"> <img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a>" +
                                 " <a class='gz-fd-icon' about='"+at+"' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
                                 word +
                                 "</a> </div> </li>");
@@ -467,7 +467,7 @@
                         var moods = data.list[i].project.fsAmount;
                         if(moods==null) moods=0;
                         var box = $("<ul class='hot' id='box'>" +
-                                "<li><a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data.list[i].project.id+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a> " +
+                                "<li><a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a> " +
                                 "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                                 "<span>"+moods+"</span> " +
                                 "</div></li> </ul>");
@@ -560,13 +560,13 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
                                     "</div></a> </div> <div class=\"suit-zt--2-text am-u-sm-7 am-u-end\"> " +
                                     "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
-                                    "<a href=\"<c:url value='/base/brifProject.do?page=2&projectId='/>"+data[i][key].project.id+"\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+                                    "<a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/2\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
 
                         }
 
@@ -615,13 +615,13 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
                                     "</div></a> </div> <div class=\"suit-zt--2-text am-u-sm-7 am-u-end\"> " +
                                     "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
-                                    "<a href=\"<c:url value='/base/brifProject.do?page=2&projectId='/>"+data[i][key].project.id+"\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+                                    "<a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/2\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
 
                         }
 

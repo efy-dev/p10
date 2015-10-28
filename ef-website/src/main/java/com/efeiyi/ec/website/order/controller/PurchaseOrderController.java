@@ -106,7 +106,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
-        model.addAttribute("isEasyBuy",true);
+        model.addAttribute("isEasyBuy", true);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -126,7 +126,7 @@ public class PurchaseOrderController extends BaseController {
         List addressList = baseManager.listObject(xQuery);
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
-        model.addAttribute("isEasyBuy",false);
+        model.addAttribute("isEasyBuy", false);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
@@ -135,8 +135,8 @@ public class PurchaseOrderController extends BaseController {
     public String getPurchaseOrderPrice(HttpServletRequest request) {
         String purchaseOrderId = request.getParameter("purchaseOrderId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        String finalPrice = purchaseOrder.getTotal().subtract(new BigDecimal((purchaseOrder.getCoupon()!=null?purchaseOrder.getCoupon().getCouponBatch().getPrice():0))).toString();
-        String result = "{\"totalPrice\":\"" + purchaseOrder.getTotal() + "\",\"couponPrice\":\"" + (purchaseOrder.getCoupon() != null ? purchaseOrder.getCoupon().getCouponBatch().getPrice() : 0) + "\",\"finalPrice\":\""+finalPrice+"\"}";
+        String finalPrice = purchaseOrder.getTotal().subtract(new BigDecimal((purchaseOrder.getCoupon() != null ? purchaseOrder.getCoupon().getCouponBatch().getPrice() : 0))).toString();
+        String result = "{\"totalPrice\":\"" + purchaseOrder.getTotal() + "\",\"couponPrice\":\"" + (purchaseOrder.getCoupon() != null ? purchaseOrder.getCoupon().getCouponBatch().getPrice() : 0) + "\",\"finalPrice\":\"" + finalPrice + "\"}";
         return result;
     }
 
@@ -144,6 +144,9 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/confirm/{orderId}"})
     public String orderConfirm(@PathVariable String orderId, HttpServletRequest request) throws Exception {
         //获取参数
+        if (request.getSession().getAttribute("cart") != null) {
+            request.getSession().removeAttribute("cart");
+        }
         String payment = request.getParameter("payment");
         String isWeiXin = request.getParameter("isWeiXin");//移动网站页面用的
         String addressId = request.getParameter("address");

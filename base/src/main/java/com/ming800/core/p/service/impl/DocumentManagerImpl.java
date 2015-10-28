@@ -1,10 +1,12 @@
 package com.ming800.core.p.service.impl;
 
+import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.dao.DocumentDao;
 import com.ming800.core.p.dao.TagDao;
 import com.ming800.core.p.model.CommonDocument;
 import com.ming800.core.p.model.CommonTag;
 import com.ming800.core.p.model.Document;
+import com.ming800.core.p.model.DocumentContent;
 import com.ming800.core.p.service.CommonManager;
 import com.ming800.core.p.service.DocumentManager;
 import com.ming800.core.p.service.TagManager;
@@ -31,6 +33,9 @@ public class DocumentManagerImpl implements DocumentManager {
     @Autowired
     private CommonManager commonManager;
 
+    @Autowired
+    private XdoDao xdoDao;
+
 
     @Override
     public  List getDocumentList(String groupName) throws Exception{
@@ -41,8 +46,28 @@ public class DocumentManagerImpl implements DocumentManager {
     }
 
     @Override
-    public void saveDocument(Document document) {
-        documentDao.saveDocument(document);
+    public void saveDocument(Document document)  {
+        Document tempDoc = null;
+        DocumentContent documentContent = null;
+        if("".equals(document.getId())){
+               tempDoc = new Document();
+        }else {
+            tempDoc = (Document)xdoDao.getObject(Document.class.getName(),document.getId());
+        }
+        tempDoc.setStatus("1");
+        tempDoc.setTitle(document.getTitle());
+        tempDoc.setGroup(document.getGroup());
+        xdoDao.saveOrUpdateObject(tempDoc);
+        if("".equals(document.getDocumentContent().getId())||document.getDocumentContent()==null){
+               documentContent = new DocumentContent();
+               documentContent.setContent(document.getDocumentContent().getContent());
+        }else {
+               documentContent = document.getDocumentContent();
+        }
+         documentContent.setDocument(tempDoc);
+         xdoDao.saveOrUpdateObject(documentContent);
+         tempDoc.setDocumentContent(documentContent);
+         xdoDao.saveOrUpdateObject(tempDoc);
     }
 
     @Override

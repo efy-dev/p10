@@ -86,10 +86,12 @@
         <%--</div>--%>
         <!-- //End--des-price-->
         <c:if test="${fn:length(productModelList)>1}">
-        <div class="bd des-format">
-            <a data-am-modal="{target: '#my-actions'}" style="color: #000" class="bd btn-format" title="选择规格">选择规格<i
-                    class="arrow-right"></i></a>
-        </div>
+            <div class="bd des-format">
+                <a id="btn-format" class="bd btn-format">
+                    <span class="select">选择规格</span>
+                    <i class="arrow-right"></i>
+                </a>
+            </div>
         </c:if>
         <!-- //End--des-format-->
         <div class="des-content">
@@ -151,42 +153,29 @@
         </c:if>
     </div>
 </article>
-<div class="am-modal-actions dialog-des-format" id="my-actions" style="display: none;">
+<!--Start--选择规格弹出框-->
+<div class="am-modal-actions dialog-des-format" id="my-actions">
+    <i class="format-close" title="关闭"></i>
     <div class="format-error">请选择商品规格</div>
-    <div class="bd ">
-        <ul class="bd ul-nav">
+    <div class="bd">
+        <%--<dl class="bd dl-des">--%>
+        <%--</dl>--%>
+        <div class="des-scroll">
+            <ul class="bd ul-nav">
             <c:if test="${fn:length(productModelList) >1}">
                 <c:forEach items="${productModel.product.productModelList}" var="pm">
                     <li> <a href="<c:url value="/product/productModel/${pm.id}"/> " style="color: #000">
                             ${pm.name}
-                            <%--${pm.product.name} <c:forEach--%>
-                            <%--items="${pm.productPropertyValueList}" var="pv">--%>
-                        <%--${pv.projectPropertyValue.value}--%>
-                    <%--</c:forEach>--%>
                     </a></li>
                 </c:forEach>
             </c:if>
-            <%--<li><a href="#规格2">规格2</a></li>--%>
-            <%--<li><a href="#规格1">规格1</a></li>--%>
-            <%--<li><a href="#规格2">规格2</a></li>--%>
-        </ul>
-        <%--<ul class="bd ul-amount">--%>
-        <%--<li>购买数量</li>--%>
-        <%--<li>--%>
-        <%--<a class="sub btn-cart-no" href="#减"></a>--%>
-        <%--<input class="ipt-txt" type="text" value="1"/>--%>
-        <%--<a class="add" href="#加"></a>--%>
-        <%--</li>--%>
-        <%--</ul>--%>
-        <%--<c:if test="${productModel.amount <= 0}">--%>
-            <%--<a  class="bd btn-cart">缺货</a>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${productModel.amount > 0}">--%>
-            <%--<a class="bd btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" >加 入 购 物 车</a>--%>
-        <%--</c:if>--%>
+            </ul>
+        </div>
+        <!-- //End---->
     </div>
 </div>
-<div class="am-dimmer am-active" data-am-dimmer="" style="display: none;"></div>
+<div class="am-dimmer am-active" data-am-dimmer="" style="display:none"></div>
+<!--//End--Start--选择规格弹出框-->
 <script type="text/javascript">
     function collect(o) {
         style = "visibility: none;"
