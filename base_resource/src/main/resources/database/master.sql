@@ -606,15 +606,22 @@ ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
 -------------------------------2015-10-27------------------------已执行
 alter table purchase_coupon_batch add start_receive_time datetime default null;
 alter table purchase_coupon_batch add end_receive_time datetime default null;
-
--------------------------------2015-10-28--------------------------未执行
 alter table purchase_coupon add column isbind char(1);
 
+-------------------------------2015-10-28--------------------------未执行
+alter table purchase_coupon add column bind_time datetime;
 
 
 
 
 
+CREATE TABLE `base_document_picture` (
+  `id`  char(16) NOT NULL ,
+  `document_id`  char(16) NULL ,
+  `picture_url`  varchar(255) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
 
 
 

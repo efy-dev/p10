@@ -3,6 +3,7 @@ package com.efeiyi.ec.system.couponBatch.controller;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.system.product.model.ProductDateModel;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
@@ -122,12 +123,19 @@ public class CouponBatchController extends BaseController {
     }
     @RequestMapping("/getProductByProject.do")
     @ResponseBody
-    public List<Product> getProductByProject(Model model,HttpServletRequest request) throws Exception {
+    public List<ProductDateModel> getProductByProject(Model model,HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
         XQuery xQuery = new XQuery("listProduct_default1",request);
         xQuery.put("project_id",id);
         List<Product> list = baseManager.listObject(xQuery);
-        return list;
+        List<ProductDateModel> list2 =new ArrayList<ProductDateModel>();
+        for(Product product : list){
+            ProductDateModel productDateModel = new ProductDateModel();
+            productDateModel.setId(product.getId());
+            productDateModel.setName(product.getName());
+            list2.add(productDateModel);
+        }
+        return list2;
     }
     @RequestMapping("/setDefaultFlag.do")
     @ResponseBody

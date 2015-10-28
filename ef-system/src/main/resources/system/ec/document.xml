@@ -15,7 +15,7 @@
                         <item label="支付方式" value="ec.zffs"/>
                         <item label="配送方式" value="ec.psfs"/>
                         <item label="正品保障" value="ec.zpbz"/>
-                        <item label="售后正常" value="ec.shzc"/>
+                        <item label="售后政策" value="ec.shzc"/>
                         <item label="退换货流程" value="ec.thhlc"/>
                         <item label="关于我们" value="ec.gywm"/>
                         <item label="联系我们" value="ec.lxwm"/>

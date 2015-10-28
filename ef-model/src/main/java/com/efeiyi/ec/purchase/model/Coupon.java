@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/10.
@@ -24,7 +25,16 @@ public class Coupon implements Serializable {
     private String endTimeL;
     private String isUseful;
     private String isBind;//优惠券是否绑定 1-未绑定  2-已绑定
+    private Date bindTime;//绑定时间
 
+    @Column(name = "bind_time")
+    public Date getBindTime() {
+        return bindTime;
+    }
+
+    public void setBindTime(Date bindTime) {
+        this.bindTime = bindTime;
+    }
 
     @Column(name = "cdkey")
     public String getUniqueKey() {
