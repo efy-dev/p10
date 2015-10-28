@@ -71,7 +71,7 @@
     <c:forEach var="ppj" items="${pageInfo.list}">
       <ul class="hot" id="box">
         <li>
-          <a href="<c:url value='/base/brifProject.do?projectId=${ppj.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.picture_wap_url}"></a>
+          <a href="<c:url value='/base/brifProject/${ppj.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.picture_wap_url}"></a>
           <div class="hot-poge">
             <span style="margin-right: 1rem">人气</span>
               <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -168,7 +168,7 @@
             var moods =0;
             if(data.list[i].fsAmount!=null) {moods = data.list[i].fsAmount;}
             var box = $("<ul class='hot' id='box'>" +
-                    "<li><a href='<c:url value='/base/brifProject.do?projectId='/>'"+data.list[i].id+"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_wap_url+"'></a> " +
+                    "<li><a href='<c:url value='/base/brifProject/'/>"+data.list[i].id+"/1'><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_wap_url+"'></a> " +
                     "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                     "<span>"+moods+"</span> " +
                     "</div></li> </ul>");

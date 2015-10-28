@@ -166,7 +166,7 @@
             }else{
               word="<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+data[i].projectId+"\">关注</em>";
             }
-              var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject.do?projectId='/>"+data[i].projectId+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"'></a></div> " +
+              var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
                       "<h5>"+data[i].projectName+"</h5>  " +
                       "<p>"+levelName+"</p> " +
@@ -310,7 +310,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
+      url:"<c:url value='/base/Isattention/'/>"+projectId,
       data:"",
       async:false,
       dataType:"json",

@@ -166,10 +166,12 @@ public class CartManagerImpl implements CartManager {
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp = cartProduct;
+                    cartProductTemp.setAmount(cartProduct.getAmount());
+//                    cartProductTemp = cartProduct;
                     break;
                 }
             }
+            cartProduct.setCartCatch(cart);
         } else {
             cartProduct = null;
         }
@@ -187,10 +189,11 @@ public class CartManagerImpl implements CartManager {
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp = cartProduct;
+                    cartProductTemp.setAmount(cartProduct.getAmount());
                     break;
                 }
             }
+            cartProduct.setCartCatch(cart);
         } else {
             cartProduct = null;
         }
@@ -209,10 +212,11 @@ public class CartManagerImpl implements CartManager {
             baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
             for (CartProduct cartProductTemp : cart.getCartProductList()) {
                 if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                    cartProductTemp = cartProduct;
+                    cartProductTemp.setAmount(cartProduct.getAmount());
                     break;
                 }
             }
+            cartProduct.setCartCatch(cart);
         } else {
             cartProduct = null;
         }
@@ -229,7 +233,8 @@ public class CartManagerImpl implements CartManager {
         baseManager.saveOrUpdate(CartProduct.class.getName(), cartProduct);
         for (CartProduct cartProductTemp : cart.getCartProductList()) {
             if (cartProductTemp.getId().equals(cartProduct.getId())) {
-                cartProductTemp = cartProduct;
+                cartProductTemp.setIsChoose(cartProduct.getIsChoose());
+//                cartProductTemp = cartProduct;
                 break;
             }
         }

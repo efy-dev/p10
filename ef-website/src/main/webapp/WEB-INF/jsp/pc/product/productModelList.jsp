@@ -37,7 +37,17 @@
   <div class="shop-sort wh">
       <ul class="link1">
 
-          <li class="active"><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
+          <li class="active">
+              <c:if test="${str==null}">
+              <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a>
+              </c:if>
+              <c:if test="${str=='desc'}">
+              <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-down"></i></a>
+              </c:if>
+              <c:if test="${str=='asc'}">
+              <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-up"></i></a>
+               </c:if>
+                  </li>
       </ul>
   </div>
   <!-- //End--shop-sort-->

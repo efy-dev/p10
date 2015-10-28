@@ -44,14 +44,38 @@
         <div class="title wh"><h3>非遗优选</h3></div>
         <div class="banner">
             <ul class="brand-ul">
-                <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank" title=""><strong>${advertisement[0].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank" title=""><strong>${advertisement[1].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank" title=""><strong>${advertisement[2].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank" title=""><strong>${advertisement[3].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank" title=""><strong>${advertisement[4].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank" title=""><strong>${advertisement[5].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank" title=""><strong>${advertisement[6].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank" title=""><strong>${advertisement[7].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[0].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[1].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big"
+                                                                                            alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[2].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[3].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[4].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[5].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[6].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small"
+                                                                                            alt=""></a></li>
+                <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[7].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big"
+                                                                                            alt=""></a></li>
             </ul>
         </div>
     </div>
@@ -102,7 +126,7 @@
 
                         <p><ming800:status name="level" dataType="Project.level"
                                            checkedValue="${master.getMainProjectName().getProject().getLevel()}"
-                                           type="normal"/>大师</p>
+                                           type="normal"/>传承人</p>
                             <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
                     </li>
                 </c:forEach>

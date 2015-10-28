@@ -203,13 +203,13 @@ function getData3(url){
                 for(i in data){
                     for(var key in data[i]){
                         var box = $(" <li> <div class='suit-zt--2-img am-u-sm-5 am-u-end'>" +
-                            " <a href='/base/brifProject.do?projectId="+data[i][key].project.id+"'><img src='"+data[i][key].project.picture_url+"'> " +
+                            " <a href='/base/brifProject/"+data[i][key].project.id+"/1'><img src='"+data[i][key].project.picture_url+"'> " +
                             "<div class='tp-bg-0'> " +
                             "<table> <tr><td>" +
                             "<div style='padding: 0 1rem;'>"+data[i][key].project.name+"</div></td></tr> </table> " +
                             "</div></a> </div> <div class='suit-zt--2-text am-u-sm-7 am-u-end'> " +
                             "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
-                            "<a href=\""+ getRootPath()+"/base/brifProject.do?projectId="+data[i][key].project.id+"\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+                            "<a href=\""+ getRootPath()+"/base/brifProject/"+data[i][key].project.id+"/2\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
 
                     }
 

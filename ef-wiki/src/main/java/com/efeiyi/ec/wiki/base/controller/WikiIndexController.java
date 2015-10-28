@@ -29,6 +29,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -213,14 +214,14 @@ public class WikiIndexController extends WikibaseController {
         return "error";
     }
 
-    @RequestMapping("/Isattention.do")
+    @RequestMapping("/Isattention/{projectId}")
     @ResponseBody
-    public boolean checkIsAttention(HttpServletRequest request, Model model) throws Exception {
+    public boolean checkIsAttention(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         boolean flag = false;
-        String projectid = request.getParameter("projectId");
+        //String projectid = request.getParameter("projectId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery xQuery = new XQuery("plistProjectFollowed_check", request);
-            xQuery.put("project_id", projectid);
+            xQuery.put("project_id", projectId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
             if (list != null && list.size() >= 1) {
@@ -232,12 +233,12 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-    @RequestMapping("/brifProject.do")
-    public ModelAndView getBrifProject(HttpServletRequest request, Model model) throws Exception {
-        String projectId = request.getParameter("projectId");
-        String page = request.getParameter("page");
+    @RequestMapping("/brifProject/{projectId}/{page}")
+    public ModelAndView getBrifProject(@PathVariable String projectId,@PathVariable String page,HttpServletRequest request, Model model) throws Exception {
+        //String projectId = request.getParameter("projectId");
+        //String page = request.getParameter("page");
         Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
-        boolean flag = checkIsAttention(request, model);//判断用户是否已经关注该项目
+        boolean flag = checkIsAttention(projectId,request, model);//判断用户是否已经关注该项目
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
         if(page!=null && page.equals("2")){
@@ -320,9 +321,9 @@ public class WikiIndexController extends WikibaseController {
         return "error";
     }
 
-    @RequestMapping("/showProduct.do")
-    public ModelAndView showProduct(HttpServletRequest request, Model model) throws Exception {
-        String productId = request.getParameter("productId");
+    @RequestMapping("/showProduct/{productId}")
+    public ModelAndView showProduct(@PathVariable String productId, HttpServletRequest request, Model model) throws Exception {
+        //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
         model.addAttribute("flag", flag);
@@ -415,59 +416,6 @@ public class WikiIndexController extends WikibaseController {
         return "true";
     }
 
-  /*  @RequestMapping("/saveComment.do")
-    @ResponseBody
-    public boolean saveComment(HttpServletRequest request, Model model) throws Exception {//此方法待作废
-        String productId = request.getParameter("productId");
-        String content = request.getParameter("content");
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return false;
-        }
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        ProductComment productComment = new ProductComment();
-        productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
-        productComment.setProduct(product);
-        productComment.setStatus("1");
-        productComment.setContent(content);
-        productComment.setAmount(0l);
-        ProductComment fatherProductComment = new ProductComment();
-        fatherProductComment.setId("0");
-        productComment.setFatherComment(fatherProductComment);
-        baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
-        baseManager.saveOrUpdate(Product.class.getName(), product);
-        return true;
-    }
-
-    @RequestMapping("/saveComment2.do")
-    @ResponseBody
-    public boolean saveComment2(HttpServletRequest request, Model model) throws Exception {//此方法待作废
-        String productId = request.getParameter("productId");
-        String content = request.getParameter("content");
-        String contentId = request.getParameter("contentId");
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return false;
-        }
-
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        ProductComment productComment = new ProductComment();
-        productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
-        productComment.setProduct(product);
-        productComment.setStatus("1");
-        productComment.setContent(content);
-        productComment.setAmount(0l);
-        ProductComment fatherProductComment = new ProductComment();
-        fatherProductComment.setId(contentId);
-        productComment.setFatherComment(fatherProductComment);
-        baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
-        baseManager.saveOrUpdate(Product.class.getName(), product);
-        return true;
-    }*/
 
 
     @RequestMapping("/commentUpAndDown.do")
