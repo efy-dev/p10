@@ -898,3 +898,11 @@ a:hover{text-decoration: underline}
 .my-clearing .m-form{padding:15px 37px 32px;}
 .header .nav-links li a{white-space:nowrap;text-overflow:ellipsis;width: 87px;table-layout:fixed;overflow: hidden}
 .my-order .od-id .od-id-btn{width:100px;line-height:24px;height:24px;background:#000;color:#fff;text-align:center;display:inline-block;margin-left:60px;}
+
+
+
+.starts,.starts ul{float:left;}
+.starts{padding-left:16px;padding-top:7px;}
+.starts ul li{width:32px;height:31px;float:left;background:#ddd;padding-right:3px;}
+.starts ul li.on{background:red;}
+.starts ul span{display:inline;float:left;padding-left:10px;height:31px;line-height:31px;}

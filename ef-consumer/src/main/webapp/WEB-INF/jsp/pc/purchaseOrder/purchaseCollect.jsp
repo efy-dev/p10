@@ -58,7 +58,7 @@
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
                         <c:if test="${collectList.productModel.amount!=0}">
-                        <li class="option-right"><a href="<%=PConst.HOSTNAME%>/cart/addProduct.do?id=${collectList.productModel.id}"> 加入购物车</a></li>
+                        <li class="option-right"><a href="<%=PConst.HOSTNAME%>/cart/addProduct.do?id=${collectList.productModel.id}&amount=1"> 加入购物车</a></li>
                         </c:if>
 
                       </ul>
