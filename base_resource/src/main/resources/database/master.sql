@@ -615,7 +615,13 @@ alter table purchase_coupon add column bind_time datetime;
 
 
 
-
+CREATE TABLE `base_document_picture` (
+  `id`  char(16) NOT NULL ,
+  `document_id`  char(16) NULL ,
+  `picture_url`  varchar(255) NULL ,
+  PRIMARY KEY (`id`)
+)
+;
 
 
 

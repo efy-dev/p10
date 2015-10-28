@@ -93,7 +93,6 @@ public class ProductController {
         model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
     }
-
     @RequestMapping(value = "/getProduct.do")
     public String getProduct(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");

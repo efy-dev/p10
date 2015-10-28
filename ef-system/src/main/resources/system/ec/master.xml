@@ -56,7 +56,7 @@
                     <page>
                         <fields>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="status" label="创建时间" defaultValue="1" inputType="default"/>
                         </fields>
                     </page>
@@ -265,6 +265,7 @@
                         <item label="大师荣誉" value="2"/>
                         <item label="出版著作" value="3"/>
                         <item label="艺术年表" value="4"/>
+                        <item label="工作坊" value="5"/>
                     </statusType>
                 </field>
             </fields>
