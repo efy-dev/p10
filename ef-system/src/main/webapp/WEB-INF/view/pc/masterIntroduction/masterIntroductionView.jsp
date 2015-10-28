@@ -96,15 +96,16 @@
                 <th class="table-set">操作</th>
                 <th class="table-title">连接</th>
                 <th class="table-title">内容</th>
-
-
+<c:if test="${object.type == 5}">
+                <th class="table-title">视频链接</th>
+    </c:if>
             </tr>
             </thead>
             <tbody id="attachmentTbody">
 
             <c:forEach items="${object.attachmentList}" var="attachment">
                 <tr id="${attachment.id}">
-                    <td>
+                    <td width="25%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -114,14 +115,19 @@
                             </div>
                         </div>
                     </td>
-                    <td class="am-hide-sm-only">http://tenant.efeiyi.com/${attachment.url}</td>
-                    <td class="am-hide-sm-only">
+                    <td class="am-hide-sm-only" width="25%">http://tenant.efeiyi.com/${attachment.url}</td>
+                    <td class="am-hide-sm-only" width="25%">
                         <a href="/Img/imgUrl.do?imgUrl=http://tenant.efeiyi.com/${attachment.url}">
                         <img width="18%"
                             src="<c:url value="http://tenant.efeiyi.com/${attachment.url}@!tenant-manage-banner"/>"
                             alt=""/>
                         </a>
                     </td>
+                    <c:if test="${object.type == 5}">
+                    <td class="am-hide-sm-only" width="25%">
+                         http://tenant.efeiyi.com/${attachment.videoPath}
+                    </td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>
@@ -156,12 +162,22 @@
                     <%--<small>选择你要保存的轮播图</small>--%>
                 </div>
             </div>
+            <c:if test="${object.type == 5}">
+                <div class="am-form-group">
+                    <label for="videoPath" class="am-u-sm-3 am-form-label">video</label>
 
+                    <div class="am-u-sm-9">
+                        <input type="file" id="videoPath" name="videoPath" placeholder="video">
+                        <small>选择你要保存的视频</small>
+                    </div>
+                </div>
+            </c:if>
             <div class="am-form-group">
                 <div class="am-u-sm-9 am-u-sm-push-3">
                     <button type="submit" class="am-btn am-btn-primary">保存</button>
                 </div>
             </div>
+
         </form>
 
     </div>
