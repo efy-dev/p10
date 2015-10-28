@@ -43,7 +43,6 @@
                 <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
                 <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
                 <li><a href="<c:url value="/productCategory.do"/> " title="分类">分类</a></li>
-                <li><a href="http://master.efeiyi.com" title="大师">大师</a></li>
             </ul>
         </div>
     </header>

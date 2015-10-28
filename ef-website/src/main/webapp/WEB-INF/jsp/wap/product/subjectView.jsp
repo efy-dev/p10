@@ -23,5 +23,12 @@
     </ul>
   </div>
 </artice>
+<script>
+  $().ready(function(){
+    $("img").each(function(){
+      $(this).css("width","100%");
+    })
+  });
+</script>
 </body>
 </html>

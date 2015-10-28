@@ -57,24 +57,30 @@ ul,dl{list-style:none}
 .myorder .aq-btn a:hover {color:#fff;background:#000;}
 /*0202个人中心*/
 /*020201订单详情-未付款line-item*/
-.line-item {padding:0 19px;width:100%;}
-.line-item .address {width:100%;border:1px solid #ccc;padding:10px;overflow:hidden;height:auto;margin-top:2rem}
+.qb{padding:0 19px;}
+.line-item {width:100%;}
+.line-item .address {width:100%;border:1px solid #000;padding:1.9rem;overflow:hidden;height:auto;}
 .line-item .address p {font-size:1rem;padding-top:5px;}
 .line-item .address span {padding-right:13px;}
-.line-item .order-content {width:100%;overflow:hidden;margin-top:2rem}
-.line-item .order-header {width:100%;border:1px solid #ccc;padding:1.2rem 1rem;}
+.line-item .order-content {width:100%;overflow:hidden;margin-top:2rem;padding:0 19px;}
+.line-item .order-header {width:100%;border-bottom:1px solid #ccc;padding:1.2rem 1rem;}
 .line-item .order-header p {font-size:1rem;color:#000;}
-.line-item .order-js-list {width:100%;border:1px solid #ccc;margin-top:-1px;height:auto;padding:0 .9rem;}
+.line-item .order-js-list {width:100%;margin-top:-1px;height:auto;padding:0 .9rem;}
 .line-item .order-js-list h1 {padding:1.25rem 0;font-size:1rem;color:#000;font-weight:100}
 .line-item .item-act {padding:0 0.3rem 0 0.3rem;}
 .line-item .item-acr {margin-bottom:1rem}
 .line-item .item-rmb {color:#ff0000;position:relative;}
 .line-item .item-rmb span {position:absolute;right:0;color:#000}
-.line-item .btn-payment {width:100%;border:1px solid #ccc;height:auto;display:block;margin:2rem 0 6rem 0;}
-.line-item .btn-payment a {padding:0.6rem 0.9rem;display:block;color:#000;font-size:1rem;}
+.line-item .btn-payment {width:100%;height:auto;display:block;padding:2.7rem 0.9rem;border-bottom: 1px solid #000;}
+.line-item .btn-payment a {padding:1rem 0.9rem;display:block;color:#000;font-size:1rem;border:1px solid #ccc;}
 .line-item .btn-payment a:hover {transition:all 0.5s;background:#000;color:#fff;}
 .line-item .btn-payment a span {position:relative;width:100%;display:block}
 .line-item .btn-payment a span .sp-active {position:absolute;right:0}
+.line-item .figure{width: 100%;float: left;padding: 0 1.9rem;margin-top: 22px;}
+.line-item .figure li{margin-bottom:0.6rem;width: 100%;float: left}
+.line-item .figure li span{font-size: 1.2rem;color: #000;}
+.line-item .figure li span:nth-child(1){float: left;}
+.line-item .figure li span:nth-child(2){float: right;color: #ff0000;}
 /*020201订单详情-未付款*/
 /*020201订单详情-已付款*/
 .line-item .express-address {padding:0 0.9rem;height:auto;width:100%;overflow:hidden}

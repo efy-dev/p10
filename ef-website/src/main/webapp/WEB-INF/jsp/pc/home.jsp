@@ -102,7 +102,7 @@
 
                         <p><ming800:status name="level" dataType="Project.level"
                                            checkedValue="${master.getMainProjectName().getProject().getLevel()}"
-                                           type="normal"/>大师</p>
+                                           type="normal"/>传承人</p>
                             <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
                     </li>
                 </c:forEach>
