@@ -57,7 +57,7 @@ public class DocumentController {
      * @param document
      * @return
      */
-    @RequestMapping("/saveDocument.do")
+    @RequestMapping("/saveECDocument.do")
     public String saveDocument(Document document,
                                String[] flag, String[] spId, String[] documentPicture,
                                HttpServletRequest request){
@@ -71,6 +71,27 @@ public class DocumentController {
         System.out.print(document.getId());
         return  request.getParameter("url");
     }
+
+
+    /**
+     * 保存
+     * @param document
+     * @return
+     */
+    @RequestMapping("/saveDocument.do")
+    @ResponseBody
+    public String saveDocument(Document document){
+
+        try{
+            documentManager.saveDocument(document);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        System.out.print(document.getId());
+        return  document.getId();
+    }
+
 
     /**
      * 真删

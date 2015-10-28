@@ -90,4 +90,9 @@ public class DocumentManagerImpl implements DocumentManager {
     public void deleteDocument(Document document) {
         documentDao.deleteDocument(document);
     }
+
+    @Override
+    public void saveDocument(Document document) {
+        documentDao.saveDocument(document);
+    }
 }

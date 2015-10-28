@@ -31,7 +31,7 @@
         </div>
 
 
-            <form action="<c:url value="/document/saveDocument.do?groupName=${groupName}"/>" method="post" class="am-form am-form-horizontal">
+            <form action="<c:url value="/document/saveECDocument.do?groupName=${groupName}"/>" method="post" class="am-form am-form-horizontal">
                 <input type="hidden" value="redirect:/basic/xm.do?qm=plistDocument_tenant&groupName=${groupName} " name="url">
                 <input type="hidden" name="id" value="${object.id}">
                 <input type="hidden" name="documentContent.id" value="${object.documentContent.id}">
