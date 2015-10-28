@@ -22,8 +22,6 @@
         <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.yjfk"/>" target="_blank" title="意见反馈">意见反馈</a>
         <a class="line"></a>
-        <a href="<c:url value="/document/richTextView?group=ec.gywm"/>" target="_blank" title="诚信保障">诚信保障</a>
-        <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.flsm"/>" target="_blank" title="法律声明">法律声明</a>
         <%--<a class="line"></a>--%>
         <%--<a href="<c:url value="/document/richTextView?group=ec.gywm"/> " target="_blank" title="新闻资讯">新闻资讯</a>--%>
