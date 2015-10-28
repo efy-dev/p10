@@ -29,7 +29,7 @@
             <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
         </div>
         <div class="info">
-            <c:if test="${fn:length(project.description)>186}">${fn:substring(project.description,0 ,186 )}......</c:if><c:if test="${fn:length(project.description)<=186}">${project.description}</c:if>
+            ${project.description}
         </div>
         <%--<a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>--%>
     </div>
