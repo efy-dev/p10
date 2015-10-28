@@ -27,13 +27,12 @@
             </dd>
         </dl>
     </div>
-    <%-- <div class="myfunction">
+     <div class="myfunction">
        <ul>
-         <li class="am-u-sm-4 "><a href="#"><p>商品收藏</p><p>1</p></a></li>
-         <li class="am-u-sm-4"><a href="#"><p>店铺收藏</p><p>1</p></a></li>
-         <li class="am-u-sm-4 ac-ave1"><a href="#"><p>我的卡券</p><p>1</p></a></li>
+         <li class="am-u-sm-6 "><a href="<c:url value="/purchaseCollect/wapCollectList.do"/>" style="padding: 15px 0;"><p>商品收藏</p></a></li>
+         <li class="am-u-sm-6 ac-ave1"><a href="<c:url value="/coupon/list"/>"><p>我的卡券</p></a></li>
        </ul>
-     </div>--%>
+     </div>
     <div class="order-list">
         <div class="list-topic">
             <h2>我的订单</h2>
@@ -61,7 +60,7 @@
                 <c:if test="${purchaseOrder.orderStatus == '1'}">
                     <ul class="jp-pd jp-pd-btns">
                         <li>￥${purchaseOrder.total-purchaseOrder.coupon.couponBatch.price}</li>
-                        <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}">立即支付</a></li>
+                        <li><a style="margin-right: 10px;" href="<%=PConst.HOSTNAME%>/order/pay/${purchaseOrder.id}?isWeiXin=" onclick="isWeiXin(this)">立即支付</a></li>
                     </ul>
                 </c:if>
 
@@ -120,11 +119,13 @@
     <div class="Extras">
         <a href="<c:url value="/myEfeiyi/getPassword.do"/>"> 修改密码<i class="icon-sj"></i></a>
     </div>
-    <div class="Extras">
-        <a href="<c:url value="/purchaseCollect/wapCollectList.do"/>"> 产品收藏<i class="icon-sj"></i></a>
-    </div>
+
     <!--安全退出-->
     <div class="aq-btn"><a href="<c:url value="/j_spring_cas_security_logout"/>">安全退出</a> </div>
 </div>
+<script>
+    isWeiXin()
+    </script>
 </body>
+
 </html>

@@ -227,8 +227,8 @@
         var success = function (data) {
             if(data != null){
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#hiddenCoupon").html("");
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
@@ -249,8 +249,8 @@
             if(data != null){
                 console.log(data);
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#hiddenCoupon").html("");
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
@@ -270,8 +270,8 @@
         var success = function (data) {
             console.log(data);
             $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cart"]["totalPrice"]);
-            $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+            $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+            $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
             $("#hiddenCoupon").html("");
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
         }

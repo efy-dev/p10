@@ -387,7 +387,7 @@
           if(data.list && data.list != null){
             for(i in data.list){
 
-              var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct.do?productId="+data.list[i].id+"'/> "+
+              var box = $(" <li class='item'> <a href='" +"<c:url value='/base/showProduct/"+data.list[i].id+"}'/> "+
                       "'>" +
                       "<img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"'></a>" +
                       " <div class='txt'> <div class='name'>"+data.list[i].name+"</div> " +
@@ -856,7 +856,7 @@
               for(i in data.list){
 
 
-                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\">" +
+                html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
                         "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
                         "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
@@ -1066,7 +1066,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct.do?productId='/>"+data2;
+       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");
@@ -1083,7 +1083,7 @@
      data:"",
      dataType:"json",
      success:function(o){
-       window.location.href="<c:url value='/project/showProduct.do?productId='/>"+data2;
+       window.location.href="<c:url value='/project/showProduct/'/>"+data2;
      },
      error:function(){
        alert("出错了，请联系管理员！！！");

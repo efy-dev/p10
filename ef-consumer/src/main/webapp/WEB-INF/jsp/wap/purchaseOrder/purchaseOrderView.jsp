@@ -66,6 +66,28 @@
         </strong></span>
       </a>
     </div>
+    <ul class="figure">
+      <c:if test="${!empty order.coupon}">
+        <li><span>总金额</span><span>￥${order.total}</span></li>
+        <li><span>优惠券金额</span><span>￥${order.coupon.couponBatch.price}</span></li>
+        <c:if test="${order.orderStatus==1}">
+        <li><span>应付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+          </c:if>
+        <c:if test="${order.orderStatus !=1}">
+          <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+        </c:if>
+      </c:if>
+      <c:if test="${empty order.coupon}">
+      <li><span>总金额</span><span>￥${order.total}</span></li>
+      <li><span>优惠券金额</span><span>￥0</span></li>
+        <c:if test="${order.orderStatus==1}">
+          <li><span>应付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+        </c:if>
+        <c:if test="${order.orderStatus !=1}">
+          <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+        </c:if>
+        </c:if>
+    </ul>
   </div>
 </c:if>
 <c:if test="${order.orderStatus == 7 }">
@@ -135,7 +157,20 @@
         </strong></span>
       </a>
     </div>
+    <ul class="figure">
+      <c:if test="${!empty order.coupon}">
+        <li><span>总金额</span><span>￥${order.total}</span></li>
+        <li><span>优惠券金额</span><span>￥${order.coupon.couponBatch.price}</span></li>
+        <li><span>已付金额</span><span>￥${order.total-order.coupon.couponBatch.price}</span></li>
+      </c:if>
+      <c:if test="${empty order.coupon}">
+        <li><span>总金额</span><span>￥${order.total}</span></li>
+        <li><span>优惠券金额</span><span>￥0</span></li>
+        <li><span>已付金额</span><span>￥${order.total}</span></li>
+      </c:if>
+    </ul>
   </div>
 </c:if>
+
 </body>
 </html>

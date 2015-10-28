@@ -30,7 +30,6 @@ public class Code2UrlConsumer implements Runnable {
     private Url2FileConsumer url2FileConsumer;
 
 
-
     public Code2UrlConsumer(Url2FileConsumer url2FileConsumer) {
         this.url2FileConsumer = url2FileConsumer;
     }
@@ -95,7 +94,11 @@ public class Code2UrlConsumer implements Runnable {
 
     private String getAccessToken() {
 
-        HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7f6aa253b75466dd&secret=04928de13ab23dca159d235ba6dc19ea");
+        //服务号
+//        HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7f6aa253b75466dd&secret=04928de13ab23dca159d235ba6dc19ea");
+        //订阅号
+        HttpMethod method = new GetMethod("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa58e5140a4bdb7d2&secret=4d9dc76cda0c35255dcbcf4490e41135");
+
         try {
             httpclient.executeMethod(method);
             String accessToken = method.getResponseBodyAsString();
@@ -117,8 +120,8 @@ public class Code2UrlConsumer implements Runnable {
         method.setEntity(stringEntity);
         response = httpClient.execute(method);
         String json = EntityUtils.toString(response.getEntity());
-        String ticket = (String)JSONObject.parseObject(json).get("ticket");
-        if(ticket == null){
+        String ticket = (String) JSONObject.parseObject(json).get("ticket");
+        if (ticket == null) {
             Code2UrlConsumer.accessToken = getAccessToken();
             ticket = getTicket(code);
         }

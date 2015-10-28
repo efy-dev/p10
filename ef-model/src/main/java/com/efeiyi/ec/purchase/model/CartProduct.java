@@ -24,6 +24,16 @@ public class CartProduct implements Serializable {
     private Integer amount;
     private String status;
     private String isChoose;
+    private Cart cartCatch;
+
+    @Transient
+    public Cart getCartCatch() {
+        return cartCatch;
+    }
+
+    public void setCartCatch(Cart cartCatch) {
+        this.cartCatch = cartCatch;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

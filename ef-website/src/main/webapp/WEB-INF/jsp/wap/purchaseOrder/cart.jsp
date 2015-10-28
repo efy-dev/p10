@@ -37,7 +37,7 @@
                                        onclick="productItem(this,'${product.id}')"
                                        value="option1">
                             </c:if>
-                            <img class="img" src="<c:url value="http://pro.efeiyi.com/${product.productModel.productModel_url}"/>" alt=""/>
+                            <img class="img" src="<c:url value="http://pro.efeiyi.com/${product.productModel.productModel_url}@!cart-product-mobile"/>" alt=""/>
 
                             <div class="bd info">
                                 <p class="title">${product.productModel.name}
@@ -138,7 +138,7 @@
                 console.log(data);
                 console.log($("#" + cartProductId + "Amount"));
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
                 showAlert("提示","商品库存不足!");
@@ -158,7 +158,7 @@
             if(data != null){
                 console.log(data);
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
                 showAlert("提示","商品库存不足!");
@@ -177,7 +177,7 @@
         var success = function (data) {
             console.log(data);
             $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cart"]["totalPrice"]);
+            $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
         }
         ajaxRequest("<c:url value="/cart/subtractProductCount.do"/>", param, success, function () {
@@ -280,8 +280,11 @@
             $("input").each(function () {
                 if (data["chooseType"] == "1") {
                     this.checked = true;
-                } else {
-                    this.checked = false;
+
+
+
+
+
                 }
             });
             $("#totalPrice").html(data["totalPrice"]);
