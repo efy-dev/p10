@@ -312,10 +312,12 @@ public class CouponController {
     @RequestMapping({"/coupon/list/{orderId}"})
     @ResponseBody
     public List<Coupon> listCouponByOrder(HttpServletRequest request, Model model, @PathVariable String orderId) throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH时mm分");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         XQuery couponQuery = new XQuery("listCoupon_byorder", request);
         couponQuery.put("couponBatch_priceLimit", purchaseOrder.getTotal().floatValue());
+        couponQuery.put("couponBatch_startDate",new Date());
+        couponQuery.put("couponBatch_endDate",new Date());
         List<Coupon> couponList = baseManager.listObject(couponQuery);
         for (Coupon coupon : couponList) {
             coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));

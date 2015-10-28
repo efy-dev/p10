@@ -43,16 +43,16 @@
         <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
 </div>
-<%--<div class="scroll-bar">--%>
-    <%--<div class="scroll-bar-top">--%>
-        <%--<span class="btn"><i class="icon"></i>顶部</span>--%>
+<div class="scroll-bar" style="z-index: 9999">
+    <div class="scroll-bar-top">
+        <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i>顶部</span>
+    </div>
+    <!-- //End--返回顶部-->
+    <%--<div class="scroll-bar-ask">--%>
+    <%--<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>--%>
     <%--</div>--%>
-    <%--<!-- //End--返回顶部-->--%>
-    <%--&lt;%&ndash;<div class="scroll-bar-ask">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-    <%--<!-- //End--在线咨询-->--%>
-<%--</div>--%>
+    <!-- //End--在线咨询-->
+</div>
 <!--[if lte IE 8 ]>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
