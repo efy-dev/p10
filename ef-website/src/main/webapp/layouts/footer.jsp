@@ -43,20 +43,47 @@
 </div>
 <div class="scroll-bar" style="z-index: 9999">
     <div class="scroll-bar-top">
-        <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i>顶部</span>
+        <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
     </div>
-    <!-- //End--返回顶部-->
-    <%--<div class="scroll-bar-ask">--%>
-    <%--<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>--%>
-    <%--</div>--%>
-    <!-- //End--在线咨询-->
 </div>
 <!--[if lte IE 8 ]>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
 <![endif]-->
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
-
+<style type="text/css">
+    #MEIQIA-BTN-HOLDER {
+        right: 0;bottom: 207px;}
+    #MEIQIA-BTN {
+        background: #000;
+        width: 33px;
+        height:53px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    #MEIQIA-BTN-LINE {
+        display: none;}
+    #MEIQIA-BTN-TEXT {
+        width:48px;
+        font-size: 12px;
+        position: absolute;
+        left:-28px;
+        top:20px;
+        display: none;
+    }
+    .MEIQIA-ICON {
+        background:url(http://localhost:8080/scripts/images/icon.png) no-repeat -176px -143px;
+    }
+    #MEIQIA-BTN-ICON {
+        width: 23px;
+        height: 28px;
+        margin: 0;
+        float: left;
+        margin-left:5px;
+        margin-top: 6px;
+    }
+</style>
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
@@ -70,6 +97,7 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
+<!--//End--右侧返回顶部和在线客服-->
 <div style="display: none">
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
