@@ -10,7 +10,7 @@
         <div class="icon wechat"><i class="icon"></i></div>
     </div>
     <div class="links wh">
-        <a href="<c:url value="/document/richTextView?group=ec.gulc"/> " target="_blank" title="帮助中心">帮助中心</a>
+        <a href="<c:url value="/document/richTextView?group=ec.gwlc"/> " target="_blank" title="帮助中心">帮助中心</a>
         <a class="line"></a>
         <a href="<c:url value="/document/richTextView?group=ec.zpbz"/> " target="_blank" title="服务保障">服务保障</a>
         <a class="line"></a>

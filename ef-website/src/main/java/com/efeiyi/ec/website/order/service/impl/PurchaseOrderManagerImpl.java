@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/10/21 0021.
@@ -77,6 +74,7 @@ public class PurchaseOrderManagerImpl implements PurchaseOrderManager {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.setUser(AuthorizationUtil.getMyUser());
         purchaseOrder.setSerial(autoSerialManager.nextSerial("orderSerial"));
+        purchaseOrder.setCreateDatetime(new Date());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         BigDecimal totalPrice = new BigDecimal(0);
