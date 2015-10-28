@@ -95,9 +95,17 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             }
         }
 
+       synchronized (updateSerials) {
+             if(!updateSerials.isEmpty()) {
+                   return updateSerials.poll().toString();
+                }else{
+                  updateSerials = makeSerials(group);
+                  return updateSerials.poll().toString();
+               }
+           
+        }
 
-
-        return updateSerials.poll().toString();
+        
     }
 
     private  Queue<Long> makeSerials(String group) throws Exception{
