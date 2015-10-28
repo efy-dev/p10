@@ -93,7 +93,7 @@
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li class="active"><a href="/pc/index.do">动&nbsp;态</a></li>
+      <li class="active"><a href="/pc/index.do">热&nbsp;门</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
@@ -161,7 +161,7 @@
 
                         <p>${fn:length(project.productList)}件作品</p>
 
-                        <p>${fn:length(project.masterProjects)}位传承人</p>
+                        <p>${fn:length(project.masterProjects)}位大师</p>
                       </div>
                     </li>
                   </c:forEach>

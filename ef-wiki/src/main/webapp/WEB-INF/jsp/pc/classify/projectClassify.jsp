@@ -77,7 +77,7 @@
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li ><a href="<c:url value='/pc/index.do'/>">动&nbsp;态</a></li>
+      <li ><a href="<c:url value='/pc/index.do'/>">热&nbsp;门</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
@@ -93,9 +93,9 @@
 </div>
 <!--nav-bars-->
 <div class="list-find">
-  <div class="list-f-title">
+  <%--<div class="list-f-title">
     <p><a>工艺</a><i class="fu-icon"></i><span>发现</span></p>
-  </div>
+  </div>--%>
   <div class="list-f-select">
     <div class="f-select-group">
       <div class="select-head">
@@ -410,7 +410,7 @@
     var mark = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){

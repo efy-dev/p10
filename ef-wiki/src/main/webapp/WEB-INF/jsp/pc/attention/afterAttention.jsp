@@ -93,7 +93,7 @@
 <!--nav-bars-->
 <div class="home-craft">
   <div class="craft-details">
-    <div class="focus wh">
+    <%--<div class="focus wh">
       <!--轮播图-->
       <ul class="slider-main">
         <c:if test="${! empty bannerList}">
@@ -113,7 +113,7 @@
         <li></li>
         <li></li>
       </ul>
-    </div>
+    </div>--%>
     <!-- //End--nav-->
     <div class="craft-gz ae" style="display: block" id="afterAttention">
       <!--标题-->
@@ -153,8 +153,8 @@
                     "<a href=\"#\"> <div class=\"list-moods\"> <i class=\"img-icon\"></i> <em>"+data[i].projectModel.fsAmount+"</em> </div> " +
                     "</a> </div> <div class=\"img-txt\"> <p>"+data[i].projectModel.projectName+"</p> <div class=\"xz-max\"> " +
                     "<a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectModel.projectId+"\"><div class=\"xz-left\">"+data[i].projectModel.works+"</div> </a><div class=\"xz-right\"> " +
-                    "<div>全部</div> <div>幅作品</div> </div> </div> " +
-                    "<p class=\"p1\">全部&nbsp;<a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectModel.projectId+"\"><span>"+data[i].projectModel.masters+"</span></a>&nbsp;位大师</p> </div> " +
+                    "<div></div> <div>幅作品</div> </div> </div> " +
+                    "<p class=\"p1\">&nbsp;<a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectModel.projectId+"\"><span>"+data[i].projectModel.masters+"</span></a>&nbsp;位大师</p> </div> " +
                     "</div>");
 
             container.append(box);
