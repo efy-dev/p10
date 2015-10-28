@@ -54,6 +54,16 @@ public class ProductController {
         //前端传递projectId
         XQuery xQuery = new XQuery("plistProductModel_default",request);
         xQuery.put("product_project_id", projectId);
+        String sortString= request.getParameter("sort");
+        String[] sort = new String[]{};
+        if(sortString!=null&&sortString.length()>0){
+            sort = sortString.split(":");
+        }
+        String str = null;
+        if(sort.length>0){
+            str = sort[0];
+        }
+
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> productModelList = baseManager.listPageInfo(xQuery).getList();
         Map<ProductModel,String> map = new HashMap<>();
@@ -79,6 +89,7 @@ public class ProductController {
         model.addAttribute("proName",proName);
         model.addAttribute("project",project);
         model.addAttribute("map",map);
+        model.addAttribute("str",str);
         model.addAttribute("productModelList",productModelList);
         return "/product/productModelList";
     }
