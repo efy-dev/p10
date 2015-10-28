@@ -201,8 +201,7 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .itemInfo .preview .slider-img { width: 60px; float: left; margin-top: 60px }
 .product-intro .itemInfo .preview .slider-img li { margin-bottom: 6px; cursor: pointer }
 .product-intro .itemInfo .preview .slider-img li img { border: 2px #ccc solid }
-.product-intro .itemInfo .preview .slider-main { width: 800px; height: 643px; float: left; margin: 0 30px; overflow: hidden }
-.product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }
+.product-intro .itemInfo .preview .slider-img li.active img {border:2px #000 solid}
 .product-intro .itemInfo .preview .slider-main {width:800px;height:643px;float:left;margin:0 30px;overflow:hidden}
 .product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
