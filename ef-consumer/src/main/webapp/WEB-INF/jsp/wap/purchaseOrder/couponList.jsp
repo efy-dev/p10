@@ -16,7 +16,6 @@
       <c:forEach items="${couponList}" var="coupon">
         <div class="on-list">
           <dl>
-            <dt><a href="#"><img src="<c:url value="http://pro.efeiyi.com/${coupon.couponBatch.pictureUrl}"/>"><i class="icon-gq"></i></a></dt>
             <dd class="clpt">
               <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
               <p>有效期限 <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd"/>—<fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd"/></p>
