@@ -199,7 +199,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -222,7 +222,7 @@
                    "<p style='height:112px;overflow: hidden'>"+data[i].description+"</p> " +
                    "<div class=\"text3\"><span>"+data[i].works+" 件作品</span>" +
                    "<span>"+data[i].masters+"位大师</span></div> " +
-                   "<a href=\"#\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
                    "</dd> </dl> </li> ");
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
@@ -266,7 +266,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -275,7 +275,7 @@
             }
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
@@ -321,7 +321,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -330,7 +330,7 @@
             }
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
@@ -486,11 +486,11 @@
       success:function(data){
         if(data==false){
           isAttention = false;
-          return false;
+          //return false;
         }
         if(data==true){
           isAttention=true;
-          return true;
+          //return true;
         }
       },
       error:function(){
@@ -501,8 +501,8 @@
       complete:function(){
 
       }
-    })
-
+    });
+    return isAttention;
   }
 
   function getMoreHotProject(){
