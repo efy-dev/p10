@@ -38,7 +38,7 @@
             <%--<a rel="nofollow" href="http://www.yongxinhua.cn/ " target="_blank" title="永新华控股">永新华控股</a>--%>
             <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
-        <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+        <div class="info">Copyright © 2015 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
 </div>
 <div class="scroll-bar" style="z-index: 9999">
