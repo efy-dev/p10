@@ -24,7 +24,7 @@ PRIMARY KEY (`id`)
 )
 ;
 /----------------------团表生成---------------------------/
-CREATE TABLE `group` (
+CREATE TABLE `group_buy` (
 `id`  char(16) NOT NULL ,
 `group_product_id`  char(16) NULL ,
 `status`  char(2) NULL ,
@@ -38,7 +38,7 @@ PRIMARY KEY (`id`)
 /----------------------团表生成------------------------/
 
 /-----------------------团表团长字段修改为关联biguser---------------------------/
-ALTER TABLE `group`
+ALTER TABLE `group_buy`
 CHANGE COLUMN `manmember_id` `man_user_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `create_datetime`;
 
 /-------------------------团表团长字段修改为关联biguser---------------------------/
