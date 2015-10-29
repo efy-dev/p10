@@ -27,7 +27,7 @@
           <dt class="orderid">订单</dt>
           <dd class="od-id">
             <p >订单号: <span>${order.serial}</span></p>
-            <p>订单金额：<span>${order.total-order.coupon.couponBatch.price}</span></p>
+            <p>订单金额：<span>${order.tota}</span></p>
             <c:if test="${order.orderStatus!=1}">
               <p>订单状态：<span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/></span></p>
             </c:if>
@@ -75,7 +75,7 @@
             <p >物流方式：<span>普通快递</span></p>
             <p>物流公司：<span><ming800:status name="logisticsCompany" dataType="PurchaseOrderDelivery.logisticsCompany" checkedValue="${pl.logisticsCompany}" type="normal"/></span></p>
             <p>运单号码：<span>${pl.serial}</span></p>
-            <p style="cursor: pointer" id="act-q" name="ss" test="${dl[i.index]}"> 物流查看：物流跟踪</p></li>
+            <p style="cursor: pointer" id="act-q" name="ss" test="${dl[i.index]}"> 物流查看：&nbsp;&nbsp;物流跟踪</p></li>
             <div class="list-express" style="display: none; margin-left: 30px;">
               <iframe id="kuaidi100" name="kuaidi100" src="${dl[i.index]}" width="600" height="380" marginwidth="12" marginheight="10" hspace="11" vspace="10" frameborder="0" scrolling="no"></iframe>
             </div>

@@ -353,7 +353,7 @@
     }
     function submitOrder(orderId) {
         var messageObject = new Object();
-        $("input[name=message]").each(function () {
+        $("textarea[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
         var message1 = "";

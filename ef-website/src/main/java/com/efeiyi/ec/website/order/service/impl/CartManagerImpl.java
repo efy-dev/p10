@@ -131,15 +131,23 @@ public class CartManagerImpl implements CartManager {
 
     @Override
     public Cart fetchCart() {
-        String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:user_id";
+        MyUser bigUser = AuthorizationUtil.getMyUser();
+        Cart cart;
+        String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("user_id", AuthorizationUtil.getMyUser().getId());
-        List<Object> cartList = baseManager.listObject(hql, param);
-        if (cartList != null & cartList.size() > 0) {
-            return (Cart) cartList.get(0);
-        } else {
-            return null;
+        param.put("userid", bigUser.getId());
+
+        cart = (Cart) baseManager.getUniqueObjectByConditions(hql, param);
+        if (cart == null && bigUser.getId() != null) {
+            User user = new User();
+            user.setId(bigUser.getId());
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setCreateDatetime(new Date());
+            cart.setCartProductList(new ArrayList<CartProduct>());
+            baseManager.saveOrUpdate(Cart.class.getName(), cart);
         }
+        return cart;
     }
 
 
