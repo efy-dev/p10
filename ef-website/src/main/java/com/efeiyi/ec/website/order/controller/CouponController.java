@@ -196,11 +196,19 @@ public class CouponController {
      *
      * @return
      */
-    @RequestMapping({"/claimCoupon.do"})
+    @RequestMapping({"/claimCoupon/{unkey}"})
     @ResponseBody
-    public boolean claimCoupon(HttpServletRequest request) throws Exception {
-        String couponBatchId = request.getParameter("couponBatchId");
-        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
+    public boolean claimCoupon(HttpServletRequest request , @PathVariable String unkey) throws Exception {
+        XQuery xQuery = new XQuery("listCouponBatch_bycdkey", request);
+        xQuery.put("uniqueKey", unkey);
+        Date date = new Date();
+        xQuery.put("startDate", date);
+        xQuery.put("endDate", date);
+        List<Object> couponBatchList = baseManager.listObject(xQuery);
+        CouponBatch couponBatch = null;
+        if (couponBatchList!=null&&couponBatchList.size()>0){
+            couponBatch = (CouponBatch)couponBatchList.get(0);
+        }
         Coupon coupon = new Coupon();
         coupon.setStatus("1");
         coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
@@ -230,6 +238,9 @@ public class CouponController {
         List<Object> couponBatchList = baseManager.listObject(xQuery);
         if (couponBatchList != null && couponBatchList.size() > 0) {
             CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
+            if (currentCouponBatch.getAmount()<=currentCouponBatch.getCouponList().size()){
+                return "null";
+            }
 //            生成一张该批次的优惠券  这里使用的是通码
             coupon = new Coupon();
             coupon.setStatus("1");
@@ -255,6 +266,9 @@ public class CouponController {
             List result = baseManager.listObject(xQuery2);
             if (result != null && result.size() > 0) {
                 coupon = (Coupon) result.get(0);
+                if (coupon.getStatus().equals("2")){
+                    return "null";
+                }
                 Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
                 coupon.setConsumer(consumer);
                 coupon.setConsumer(consumer);
