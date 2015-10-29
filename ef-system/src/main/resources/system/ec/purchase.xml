@@ -112,6 +112,12 @@
                         <item label="已使用" value="2"/>
                     </statusType>
                 </field>
+                <field name="whetherBind" label="是否绑定" inputType="text">
+                    <statusType fieldName="whetherBind">
+                        <item label="未绑定" value="1"/>
+                        <item label="已绑定" value="2"/>
+                    </statusType>
+                </field>
             </fields>
             <does>
                 <do name="plistCoupon" access="" label="优惠券列表"
@@ -132,6 +138,7 @@
 
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
+                        <condition name="whetherBind" operation="eq" label="是否绑定" inputType="select_status" key="coupon.whetherBind"/>
                         <condition name="serial" operation="like" label="优惠券序列号" inputType="text"/>
                         <condition name="couponBatch.name" operation="like" label="优惠券批次名" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
