@@ -190,7 +190,7 @@
 
                 <do name="removeCouponBatch" label="删除优惠券批次" access="" result="json"/>
                 <do name="viewCouponBatch" label="查看优惠券批次" access="" result="/couponBatch/couponBatchView"
-                    execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                    execute="com.efeiyi.ec.system.couponBatch.controller.LastCouponHandler"
                         />
                 <do name="formCouponBatch" label="保存优惠券批次" access="" result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access=""

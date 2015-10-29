@@ -1,4 +1,4 @@
-package com.efeiyi.ec.system.basic.controller;
+package com.efeiyi.ec.system.couponBatch.controller;
 
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/7/22.
  */
-public class commonHandler implements DoHandler {
+public class LastCouponHandler implements DoHandler {
 
     private BaseManager baseManager = (BaseManager) ApplicationContextUtil.getApplicationContext().getBean("baseManagerImpl");
 
@@ -22,6 +22,21 @@ public class commonHandler implements DoHandler {
 
         modelMap.put("groupName" , request.getParameter("groupName"));
         modelMap.put("view" , request.getParameter("view"));
+
+        String couponBatchId = request.getParameter("id");
+        if(!("".equals(couponBatchId) || null == couponBatchId)){
+            CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+            List<Coupon> list = couponBatch.getCouponList();
+
+            int lastCoupon = 0;
+            for(int i = 0;i<list.size();i++){
+                if("1".equals(list.get(i).getWhetherBind())){
+                    lastCoupon++;
+                }
+            }
+
+            modelMap.put("lastCoupon",lastCoupon);
+        }
 
         return modelMap;
     }
