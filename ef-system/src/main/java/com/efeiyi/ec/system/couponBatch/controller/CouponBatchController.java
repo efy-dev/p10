@@ -172,6 +172,7 @@ public class CouponBatchController extends BaseController {
         CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
         List<Coupon> list = couponBatch.getCouponList();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         String hql = "from Consumer c where 1=1 ";
         LinkedHashMap<String,Object> hm = new LinkedHashMap<>();
@@ -181,11 +182,11 @@ public class CouponBatchController extends BaseController {
         }
         if (!"".equals(startBindDate)){
             hql += " and c.createDatetime>=:startBindDate ";
-            hm.put("startBindDate",startBindDate);
+            hm.put("startBindDate",sdf.parse(startBindDate));
         }
         if (!"".equals(endBindDate)){
             hql += " and c.createDatetime<=:endBindDate ";
-            hm.put("endBindDate",endBindDate);
+            hm.put("endBindDate",sdf.parse(endBindDate));
         }
 
         List<Consumer> consumersList = baseManager.listObject(hql,hm);
