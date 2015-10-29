@@ -26,17 +26,44 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">关联订单</td>
-                <td class="am-u-md-3">${purchaseOrder.serial}</td>
+                <td class="am-u-md-3">
+                    <c:choose>
+                        <c:when test="${havePurchaseOrder == 'No'}">
+                            没有关联订单
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td class="am-primary am-u-md-3">订单状态</td>
                 <td class="am-u-md-3">
-                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
-                                    checkedValue="${purchaseOrder.orderStatus}"
-                                    type="normal"/>
+                    <c:choose>
+                        <c:when test="${havePurchaseOrder == 'No'}">
+                            没有关联订单
+                        </c:when>
+                        <c:otherwise>
+                            <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                            checkedValue="${purchaseOrder.orderStatus}"
+                                            type="normal"/>
+                        </c:otherwise>
+                    </c:choose>
+
                 </td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">订单金额</td>
-                <td class="am-u-md-3" colspan="3">${purchaseOrder.total}</td>
+                <td class="am-u-md-3" colspan="3">
+
+                    <c:choose>
+                        <c:when test="${havePurchaseOrder == 'No'}">
+                            没有关联订单
+                        </c:when>
+                        <c:otherwise>
+                            ${purchaseOrder.total}
+                        </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
 
             </tbody>
