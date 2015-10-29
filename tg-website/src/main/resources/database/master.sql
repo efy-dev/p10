@@ -17,9 +17,9 @@ CREATE TABLE `group_product` (
 `group_price`  DECIMAL(8) NULL ,
 `create_datetime`  DATETIME NULL ,
 `bonus`  DECIMAL(10) NULL ,
-`group_purchase_time `  int(8) NULL,
-`product_id `  char(16) NULL,
-`status `  char(16) NOT NULL,
+`group_purchase_time`  int(8) NULL,
+`product_id`  char(16) NULL,
+`status`  char(16) NOT NULL,
 PRIMARY KEY (`id`)
 )
 ;
