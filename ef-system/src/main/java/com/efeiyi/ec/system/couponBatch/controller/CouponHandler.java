@@ -25,8 +25,13 @@ public class CouponHandler implements DoHandler {
         hm.put("id",id);
         PurchaseOrderPaymentDetails purchaseOrderPaymentDetails = (PurchaseOrderPaymentDetails) baseManager.getUniqueObjectByConditions(hql,hm);
 
-        PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
-        modelMap.put("purchaseOrder",purchaseOrder);
+        if(null == purchaseOrderPaymentDetails){
+            modelMap.put("havePurchaseOrder","No");
+        }else{
+            PurchaseOrder purchaseOrder = purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder();
+            modelMap.put("purchaseOrder",purchaseOrder);
+            modelMap.put("havePurchaseOrder","Yes");
+        }
 
         return modelMap;
     }

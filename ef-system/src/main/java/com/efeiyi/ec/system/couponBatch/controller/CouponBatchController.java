@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.couponBatch.controller;
 
+import com.efeiyi.ec.organization.model.Consumer;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
@@ -157,4 +159,80 @@ public class CouponBatchController extends BaseController {
         }
         return flag;
     }
+
+
+    @RequestMapping("/sendCoupon.do")
+    @ResponseBody
+    public int sendCoupon(HttpServletRequest request) throws Exception {
+        String username = request.getParameter("username");
+        String startBindDate = request.getParameter("startBindDate");
+        String endBindDate = request.getParameter("endBindDate");
+        String couponBatchId = request.getParameter("couponBatchId");
+
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
+        List<Coupon> list = couponBatch.getCouponList();
+
+
+        String hql = "from Consumer c where ";
+        LinkedHashMap<String,Object> hm = new LinkedHashMap<>();
+        if (!"".equals(username)){
+            hql += " c.username=:username ";
+            hm.put("username",username);
+        }
+        if (!"".equals(startBindDate)){
+            hql += " and c.createDatetime>=:startBindDate ";
+            hm.put("startBindDate",startBindDate);
+        }
+        if (!"".equals(endBindDate)){
+            hql += " and c.createDatetime<=endBindDate ";
+            hm.put("endBindDate",endBindDate);
+        }
+
+        List<Consumer> consumersList = baseManager.listObject(hql,hm);
+
+        for(int i = 0;i < consumersList.size();i++){
+            Consumer tempConsumer = consumersList.get(i);
+            Coupon tempCoupon = null;
+            for(int j = 0;j < list.size();j++){
+                tempCoupon = list.get(j);
+                if("2".equals(tempCoupon.getWhetherBind())){
+                    continue;
+                }else {
+                    tempCoupon.setConsumer(tempConsumer);
+                    tempCoupon.setWhetherBind("2");
+                    baseManager.saveOrUpdate(Coupon.class.getName(),tempCoupon);
+                    break;
+                }
+            }
+        }
+        return consumersList.size();
+    }
+
+    @RequestMapping("/searchUserNum.do")
+    @ResponseBody
+    public int searchUserNum(HttpServletRequest request) throws Exception {
+        String username = request.getParameter("username");
+        String startBindDate = request.getParameter("startBindDate");
+        String endBindDate = request.getParameter("endBindDate");
+
+        String hql = "from Consumer c where ";
+        LinkedHashMap<String,Object> hm = new LinkedHashMap<>();
+        if (!"".equals(username)){
+            hql += " c.username=:username ";
+            hm.put("username",username);
+        }
+        if (!"".equals(startBindDate)){
+            hql += " and c.createDatetime>=:startBindDate ";
+            hm.put("startBindDate",startBindDate);
+        }
+        if (!"".equals(endBindDate)){
+            hql += " and c.createDatetime<=endBindDate ";
+            hm.put("endBindDate",endBindDate);
+        }
+
+        List<Consumer> consumersList = baseManager.listObject(hql,hm);
+
+        return consumersList.size();
+    }
+
 }

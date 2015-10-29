@@ -128,6 +128,10 @@
                                                     </a>
                                                 </c:otherwise>
                                             </c:choose>
+
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value='/basic/xm.do?qm=plistCoupon_used&conditions=couponBatch.id:${couponBatch.id}'/>"><span
+                                                    class="am-icon-trash-o">查看优惠券使用情况</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
