@@ -59,7 +59,13 @@
                 <input type="text" name="redirect" id="redirect" placeholder="" value="${object.redirect}" >
             </div>
         </div>
+        <div class="am-form-group">
+            <label name="price" class="am-u-sm-3 am-form-label">价格</label>
 
+            <div class="am-u-sm-9">
+                <input type="text" name="price" id="price" placeholder="" value="${object.price}" >
+            </div>
+        </div>
 
 
         <div class="am-form-group">

@@ -164,7 +164,6 @@ public class ProductController extends BaseController {
         String data = "";
 
         String subjectId = request.getParameter("subjectId");
-
         Subject subject = null;
         if(!"".equals(subjectId)){
                 subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
@@ -180,14 +179,11 @@ public class ProductController extends BaseController {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            Integer index = 0;
-            if(fileName.indexOf(".JPG")!=-1){
-                index = fileName.indexOf(".JPG");
-            }
-            if(fileName.indexOf(".jpg")!=-1){
-                index = fileName.indexOf(".jpg");
-            }
-            url = "subject/" + fileName.substring(0, index) + identify + ".jpg";
+
+                url = "subject/" + fileName;
+
+
+
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
 //                if(subject != null && "2".equals(request.getParameter("status"))) {

@@ -57,11 +57,11 @@ public class GroupProduct implements Serializable {
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
     }
-
+    @Column(name = "bonus")
     public BigDecimal getBonus() {
         return bonus;
     }
-    @Column(name = "bonus")
+
     public void setBonus(BigDecimal bonus) {
         this.bonus = bonus;
     }
