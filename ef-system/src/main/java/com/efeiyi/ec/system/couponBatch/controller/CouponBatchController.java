@@ -1,7 +1,12 @@
 package com.efeiyi.ec.system.couponBatch.controller;
 
+import com.efeiyi.ec.organization.model.Consumer;
+import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
+import com.efeiyi.ec.system.product.model.ProductDateModel;
+import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
@@ -29,21 +36,22 @@ public class CouponBatchController extends BaseController {
 
     @RequestMapping("/createCoupon.do")
     @ResponseBody
-    public String createCoupon(String id,int amount) throws Exception {
+    public String createCoupon(String id, int amount) throws Exception {
         Coupon coupon = null;
-        CouponBatch couponBatch = (CouponBatch) super.baseManager.getObject("com.efeiyi.ec.purchase.model.CouponBatch",id);
-        for (int i = 0;i < amount;i++){
+        CouponBatch couponBatch = (CouponBatch) super.baseManager.getObject("com.efeiyi.ec.purchase.model.CouponBatch", id);
+        for (int i = 0; i < amount; i++) {
             coupon = new Coupon();
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);
             String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
-            baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+            coupon.setWhetherBind("1");
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
         }
 
         couponBatch.setIsCreatedCoupon(2);
-        baseManager.saveOrUpdate(CouponBatch.class.getName(),couponBatch);
-        return  id;
+        baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
+        return id;
     }
 
     @RequestMapping("/saveAndCreateCoupon.do")
@@ -69,71 +77,178 @@ public class CouponBatchController extends BaseController {
         baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
 
         Coupon coupon = null;
-        for(int i = 0;i < couponBatch.getAmount();i++){
+        for (int i = 0; i < couponBatch.getAmount(); i++) {
             coupon = new Coupon();
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);
 //            String serial = RandomStringUtils.randomNumeric(10);
             String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
-            baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
         }
         return "redirect:/basic/xm.do?qm=plistCouponBatch_default&view=Batch";
     }
 
     @RequestMapping("/getAllProjectCategory.do")
     @ResponseBody
-    public List<Object> getAllProjectCategory(Model model,HttpServletRequest request) throws Exception {
-        XQuery xQuery = new XQuery("listProjectCategory_default",request);
+    public List<Object> getAllProjectCategory(Model model, HttpServletRequest request) throws Exception {
+        XQuery xQuery = new XQuery("listProjectCategory_default", request);
         List<Object> list = baseManager.listObject(xQuery);
         return list;
     }
 
     @RequestMapping("/getAllProject.do")
     @ResponseBody
-    public List<Object> getAllProject(Model model,HttpServletRequest request) throws Exception {
+    public List<Object> getAllProject(Model model, HttpServletRequest request) throws Exception {
         String id = request.getParameter("projectCategory_id");
-        XQuery xQuery = new XQuery("listProject_default",request);
-        xQuery.put("projectCategory_id",id);
+        XQuery xQuery = new XQuery("listProject_default", request);
+        xQuery.put("projectCategory_id", id);
         List<Object> list = baseManager.listObject(xQuery);
         return list;
     }
+
     @RequestMapping("/getTenantByProject.do")
     @ResponseBody
-    public List<Object> getTenantByProject(Model model,HttpServletRequest request) throws Exception {
+    public List<Tenant> getTenantByProject(Model model, HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
-        XQuery xQuery = new XQuery("listTenantProject_default3",request);
-        xQuery.put("project_id",id);
+        XQuery xQuery = new XQuery("listTenantProject_default3", request);
+        xQuery.put("project_id", id);
         List<Object> list = baseManager.listObject(xQuery);
-        return list;
+
+        List<Tenant> tList = new ArrayList<>();
+        TenantProject tenantProject = null;
+        for (int i = 0; i < list.size(); i++) {
+            tenantProject = (TenantProject) list.get(i);
+            tList.add(tenantProject.getTenant());
+        }
+
+        return tList;
     }
+
     @RequestMapping("/getProductByProject.do")
     @ResponseBody
-    public List<Object> getProductByProject(Model model,HttpServletRequest request) throws Exception {
+    public List<ProductDateModel> getProductByProject(Model model, HttpServletRequest request) throws Exception {
         String id = request.getParameter("project_id");
-        XQuery xQuery = new XQuery("listProduct_default",request);
-        xQuery.put("project_id",id);
-        List<Object> list = baseManager.listObject(xQuery);
-        return list;
+        XQuery xQuery = new XQuery("listProduct_default1", request);
+        xQuery.put("project_id", id);
+        List<Product> list = baseManager.listObject(xQuery);
+        List<ProductDateModel> list2 = new ArrayList<ProductDateModel>();
+        for (Product product : list) {
+            ProductDateModel productDateModel = new ProductDateModel();
+            productDateModel.setId(product.getId());
+            productDateModel.setName(product.getName());
+            list2.add(productDateModel);
+        }
+        return list2;
     }
+
     @RequestMapping("/setDefaultFlag.do")
     @ResponseBody
     public int setDefaultFlag(HttpServletRequest request) throws Exception {
         String couponBatchId = request.getParameter("id");
         String ftext = request.getParameter("ftext");
 
-        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
 
         int flag;
-        if("设置新注册送券".equals(ftext)){
+        if ("设置新注册送券".equals(ftext)) {
             couponBatch.setDefaultFlag("1");
             baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
             flag = 1;
-        }else {
+        } else {
             couponBatch.setDefaultFlag("2");
             baseManager.saveOrUpdate(CouponBatch.class.getName(), couponBatch);
             flag = 2;
         }
         return flag;
     }
+
+
+    @RequestMapping("/sendCoupon.do")
+    @ResponseBody
+    public String sendCoupon(HttpServletRequest request) throws Exception {
+        String username = request.getParameter("username");
+        String startBindDate = request.getParameter("startBindDate");
+        String endBindDate = request.getParameter("endBindDate");
+        String couponBatchId = request.getParameter("couponBatchId");
+
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
+        List<Coupon> list = couponBatch.getCouponList();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String hql = "from Consumer c where 1=1 ";
+        LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
+        if (!"".equals(username)) {
+            hql += " and c.username=:username ";
+            hm.put("username", username);
+        }
+        if (!"".equals(startBindDate)) {
+            hql += " and c.createDatetime>=:startBindDate ";
+            hm.put("startBindDate", sdf.parse(startBindDate));
+        }
+        if (!"".equals(endBindDate)) {
+            hql += " and c.createDatetime<=:endBindDate ";
+            hm.put("endBindDate", sdf.parse(endBindDate));
+        }
+
+        List<Consumer> consumersList = baseManager.listObject(hql, hm);
+
+        int availableCoupon = 0;
+        for (Coupon coupon : list) {//优惠券可用数量比要发放优惠券的用户少
+            if ("1".equals(coupon.getWhetherBind())) {
+                availableCoupon++;
+            }
+        }
+        if (consumersList.size() > availableCoupon) {
+            return "Less";
+        } else {
+            for (int i = 0; i < consumersList.size(); i++) {
+                Consumer tempConsumer = consumersList.get(i);
+                Coupon tempCoupon = null;
+                for (int j = 0; j < list.size(); j++) {
+                    tempCoupon = list.get(j);
+                    if ("2".equals(tempCoupon.getWhetherBind())) {
+                        continue;
+                    } else {
+                        tempCoupon.setConsumer(tempConsumer);
+                        tempCoupon.setWhetherBind("2");
+                        baseManager.saveOrUpdate(Coupon.class.getName(), tempCoupon);
+                        break;
+                    }
+                }
+            }
+            return consumersList.size() + "";
+        }
+    }
+
+    @RequestMapping("/searchUserNum.do")
+    @ResponseBody
+    public int searchUserNum(HttpServletRequest request) throws Exception {
+        String username = request.getParameter("username");
+        String startBindDate = request.getParameter("startBindDate");
+        String endBindDate = request.getParameter("endBindDate");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String hql = "from Consumer c where 1=1 ";
+        LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
+        if (!"".equals(username)) {
+            hql += " and c.username=:username ";
+            hm.put("username", username);
+        }
+        if (!"".equals(startBindDate)) {
+            hql += " and c.createDatetime>=:startBindDate ";
+            hm.put("startBindDate", sdf.parse(startBindDate));
+        }
+        if (!"".equals(endBindDate)) {
+            hql += " and c.createDatetime<=:endBindDate ";
+            hm.put("endBindDate", sdf.parse(endBindDate));
+        }
+
+        List<Consumer> consumersList = baseManager.listObject(hql, hm);
+
+        return consumersList.size();
+    }
+
 }

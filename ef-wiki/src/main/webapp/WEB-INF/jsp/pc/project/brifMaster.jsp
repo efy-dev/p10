@@ -116,9 +116,9 @@
   </div>
   <div class="ae">
     <ul class="craft-nav">
-      <li ><a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>">介&nbsp;绍</a></li>
-      <li class="active"><a href="<c:url value='/project/brifMaster.do?projectId=${project.id}'/>">大&nbsp;师</a></li>
-      <li><a href="<c:url value='/project/listProduct.do?projectId=${project.id}'/>">作&nbsp;品</a></li>
+      <li ><a href="<c:url value='/project/brifProject/${project.id}'/>">介&nbsp;绍</a></li>
+      <li class="active"><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
+      <li><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>
     </ul>
     <div class="craft-master2 ae" style="display: block">
       <ul class="ae" id="master">
@@ -321,7 +321,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
+      url:"<c:url value='/base/Isattention/'/>"+projectId,
       data:"",
       async:false,
       dataType:"json",

@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -24,15 +26,25 @@ public class MasterAttachmentHandler implements MultipartHandler {
 
     @Override
     public ModelMap handleMultipart(Do tempDo, ModelMap modelMap, HttpServletRequest request, MultipartRequest multipartRequest) throws Exception {
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String identify = sdf.format(new Date());
         String introductionId = request.getParameter("introductionId");
         String masterNewsId = request.getParameter("masterNewsId");
         MultipartFile multipartFile = multipartRequest.getFile("attachmentFile");
-        String url = "attachment/" +masterNewsId+introductionId + "/" + multipartFile.getOriginalFilename();
+        String url = "attachment/" +identify + "/" + multipartFile.getOriginalFilename();
+
         aliOssUploadManager.uploadFile(multipartFile, "tenant", url);
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(), request);
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("url", url);
+        MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
+        String identify1 = sdf.format(new Date());
+        if (!multipartFile1.getOriginalFilename().equals("")) {
+            url  = "attachment/" +identify1 + "/" + multipartFile1.getOriginalFilename();
+            aliOssUploadManager.uploadFile(multipartFile1, "tenant", url);
+            paramMap.put("videoPath",url);
+        }
+
         paramMap.put("introduction.id", introductionId);
         paramMap.put("masterNews.id", masterNewsId);
         Object object = baseManager.saveOrUpdate(xSaveOrUpdate);

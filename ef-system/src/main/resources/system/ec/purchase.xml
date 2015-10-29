@@ -124,9 +124,16 @@
                     <query name="couponBatch" label="查找" type="auto" orderBy="id:desc">
                         <condition name="couponBatch.id" operation="eq" label="优惠券批次id" inputType="default"/>
                     </query>
+
+                    <query name="used" label="使用的优惠券" type="auto" orderBy="id:desc">
+                        <condition name="couponBatch.id" operation="eq" label="优惠券批次id" inputType="default"/>
+                        <condition name="status" operation="eq" defaultValue="2" label="已使用" inputType="default"/>
+                    </query>
+
                     <query name="search" label="查询" type="auto" orderBy="id:desc">
                         <condition name="status" operation="eq" label="优惠券状态" inputType="select_status" key="coupon.status"/>
                         <condition name="serial" operation="like" label="优惠券序列号" inputType="text"/>
+                        <condition name="couponBatch.name" operation="like" label="优惠券批次名" inputType="text"/>
                         <condition name="couponBatch.startDate" operation="ge" label="生效日期" inputType="date" dataType="date"/>
                         <condition name="couponBatch.endDate" operation="le" label="失效日期" inputType="date" dataType="date"/>
                     </query>
@@ -145,7 +152,7 @@
                 </do>
 
                 <do name="removeCoupon" label="删除优惠券" access="" result="json"/>
-                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView" />
+                <do name="viewCoupon" label="查看优惠券" access="" result="/coupon/couponView" execute="com.efeiyi.ec.system.couponBatch.controller.CouponHandler"/>
                 <do name="formCoupon" label="保存优惠券" access="" result="/coupon/couponForm"/>
                 <do name="saveOrUpdateCoupon" label="保存优惠券" access=""
                     result="/purchaseOrder/purchaseOrderSaveSuccess"/>
@@ -183,7 +190,7 @@
 
                 <do name="removeCouponBatch" label="删除优惠券批次" access="" result="json"/>
                 <do name="viewCouponBatch" label="查看优惠券批次" access="" result="/couponBatch/couponBatchView"
-                    execute="com.efeiyi.ec.system.basic.controller.commonHandler"
+                    execute="com.efeiyi.ec.system.couponBatch.controller.LastCouponHandler"
                         />
                 <do name="formCouponBatch" label="保存优惠券批次" access="" result="/couponBatch/couponBatchForm"/>
                 <do name="saveOrUpdateCouponBatch" label="保存优惠券批次" access=""

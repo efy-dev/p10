@@ -93,7 +93,7 @@
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li class="active"><a href="/pc/index.do">动&nbsp;态</a></li>
+      <li class="active"><a href="/pc/index.do">热&nbsp;门</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
@@ -147,7 +147,7 @@
                   <c:forEach items="${pc}" var="project" varStatus="status">
                     <li>
                       <div class="commodity-img">
-                        <a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}"></a>
+                        <a href="<c:url value='/project/brifProject/${project.id}'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_pc_url}"></a>
                         <a href="#">
                           <div class="list-moods">
                             <i class="img-icon"></i>
@@ -161,7 +161,7 @@
 
                         <p>${fn:length(project.productList)}件作品</p>
 
-                        <p>${fn:length(project.masterProjects)}位传承人</p>
+                        <p>${fn:length(project.masterProjects)}位大师</p>
                       </div>
                     </li>
                   </c:forEach>

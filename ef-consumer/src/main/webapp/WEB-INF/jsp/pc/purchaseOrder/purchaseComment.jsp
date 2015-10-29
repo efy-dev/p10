@@ -57,7 +57,7 @@
                     <td width="180">
                       <div class="list-refer-2">
                         <p><fmt:formatDate value="${finish.createDatetime}" pattern="yyyy-MM-dd" /></p>
-                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="H:m:s" /></p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="HH:mm:ss" /></p>
                       </div>
                     </td>
                     <td width="150">

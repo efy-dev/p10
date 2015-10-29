@@ -73,7 +73,8 @@ public class PalConst {
 
     public Map<String,String> labelCache = new HashMap<String,String>();
 
-
+public String appId = "wx7f6aa253b75466dd";
+    public String encodingAESKey = "vo3dJHGXZTkDCtf9kyyhiKtGdTFdzdb62CGxk1eqxkw";
     private PalConst(){
         trueBean = new CheckResultBean();
         fakeBean = new CheckResultBean();

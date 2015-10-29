@@ -40,9 +40,7 @@ public class CartController {
         Cart cart = null;
         MyUser currentUser = AuthorizationUtil.getMyUser();
         if (currentUser.getId() != null) {
-            XQuery xQuery = new XQuery("listCart_default", request);
-            List<Object> list = baseManager.listObject(xQuery);
-            cart = (Cart) list.get(0);
+            cart = cartManager.fetchCart();
         } else {
             if (request.getSession().getAttribute("cart") != null) {
                 cart = (Cart) request.getSession().getAttribute("cart");

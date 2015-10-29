@@ -13,21 +13,21 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/resources/assets/i/favicon.png">
+    <link rel="icon" type="image/png" href="<c:url value="/resources/assets/i/favicon.png"/>">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/amazeui.min.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/app.css?v=20150831">
-    <link type="text/css" rel="stylesheet" href="/scripts/wap/css/myorder.css?v=20150831">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 </head>
 <body>
 <header class="am-header custom-header">
@@ -42,29 +42,46 @@
 <ul class="offered ae">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
       <>
-      <li>
         <p>${member.group.groupProduct.productModel.name}</p>
-        <p>2015.04.04</p>
+        <p>${member.group.createDateTime}</p>
         <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
-        <p>团长:东方不败东方不败东方不败</p>
-        <span>进行中</span>
+          <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
+         <c:if test="${member.level==0}">
+             <c:set var="commander">
+               ${member.user.name}
+             </c:set>
+         </c:if>
+          </c:forEach>
+          <p>团长:${commander}</p>
+
+            <c:if test="${member.status==1}">
+               <span>
+                进行中
+               </span>
+            </c:if>
+            <c:if test="${member.status!=1}">
+                <span>
+                拼团结束
+                </span>
+            </c:if>
+
       </li>
     </c:forEach>
 </ul>
 <!--//End--footer-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/scripts/wap/js/jquery.min.js"></script>
+<script href="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="/scripts/wap/js/amazeui.min.js"></script>
+<script href="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
-<script src="/scripts/wap/js/system.js?v=20150831"></script>
-<script src="/scripts/wap/js/myorder.js?v=20150831"></script>
+<script href="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
+<script href="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

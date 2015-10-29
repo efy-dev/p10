@@ -115,7 +115,7 @@
             <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
                                                                                      class="arrow-right"></a></p>
 
-            <p><strong>商品金额</strong><span><em>￥</em>${cart.totalPrice}</span></p>
+            <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
 
             <p><strong class="grey">返现</strong><span><em>￥</em>0.00</span></p>
 
@@ -135,7 +135,7 @@
     <div class="bd payment-total-bar">
         <span>总计付款</span>
     <span class="txt" id="change" style="float: none">
-        ${cart.totalPrice}</span>
+        ${purchaseOrder.total}</span>
         <span>元</span>
         <a onclick="submitOrder('${purchaseOrder.id}')" class="btn-right">提交订单</a>
     </div>
@@ -230,7 +230,7 @@
 
 <!--Start--弹出地址-->
 <div id="order-total" class="alert-delete yhq" style="display:none;">
-    <div class="bd cart-coupons">
+    <div class="bd cart-coupons" style="position: fixed;">
         <div class="title">
             <h2>优惠券</h2>
         </div>
@@ -353,7 +353,7 @@
     }
     function submitOrder(orderId) {
         var messageObject = new Object();
-        $("input[name=message]").each(function () {
+        $("textarea[name=message]").each(function () {
             messageObject[$(this).attr("id")] = $(this).val();
         })
         var message1 = "";

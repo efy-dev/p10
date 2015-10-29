@@ -29,7 +29,7 @@ public class AutoSerialManagerImpl extends com.ming800.core.p.service.impl.AutoS
     public String nextSerial(String group) throws Exception {
 
         Queue<Long> updateSerials = map.get(group);
-        Object o = this;
+//        Object o = this;
         if (updateSerials == null) {
             synchronized (this) {
                 if (map.get(group) == null) {
@@ -38,17 +38,23 @@ public class AutoSerialManagerImpl extends com.ming800.core.p.service.impl.AutoS
                 }
             }
         }
-        if( updateSerials.isEmpty()) {
-            synchronized (updateSerials) {
-                if( updateSerials.isEmpty()) {
-                    updateSerials = makeSerials(group);
-                }
-            }
-        }
+//        if( updateSerials.isEmpty()) {
+//            synchronized (updateSerials) {
+//                if( updateSerials.isEmpty()) {
+//                    updateSerials = makeSerials(group);
+//                }
+//            }
+//        }
 
-        //双保险同步有必要否
+        //关注下是否会出现重复数据
         synchronized (updateSerials) {
-            return updateSerials.poll().toString();
+            if(!updateSerials.isEmpty()) {
+                return updateSerials.poll().toString();
+            }else{
+                updateSerials = makeSerials(group);
+                return updateSerials.poll().toString();
+            }
+
         }
     }
 
