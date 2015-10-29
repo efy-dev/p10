@@ -173,10 +173,10 @@ public class CouponBatchController extends BaseController {
         List<Coupon> list = couponBatch.getCouponList();
 
 
-        String hql = "from Consumer c where ";
+        String hql = "from Consumer c where 1=1 ";
         LinkedHashMap<String,Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)){
-            hql += " c.username=:username ";
+            hql += " and c.username=:username ";
             hm.put("username",username);
         }
         if (!"".equals(startBindDate)){
@@ -184,7 +184,7 @@ public class CouponBatchController extends BaseController {
             hm.put("startBindDate",startBindDate);
         }
         if (!"".equals(endBindDate)){
-            hql += " and c.createDatetime<=endBindDate ";
+            hql += " and c.createDatetime<=:endBindDate ";
             hm.put("endBindDate",endBindDate);
         }
 
@@ -215,19 +215,21 @@ public class CouponBatchController extends BaseController {
         String startBindDate = request.getParameter("startBindDate");
         String endBindDate = request.getParameter("endBindDate");
 
-        String hql = "from Consumer c where ";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String hql = "from Consumer c where 1=1 ";
         LinkedHashMap<String,Object> hm = new LinkedHashMap<>();
         if (!"".equals(username)){
-            hql += " c.username=:username ";
+            hql += " and c.username=:username ";
             hm.put("username",username);
         }
         if (!"".equals(startBindDate)){
             hql += " and c.createDatetime>=:startBindDate ";
-            hm.put("startBindDate",startBindDate);
+            hm.put("startBindDate",sdf.parse(startBindDate));
         }
         if (!"".equals(endBindDate)){
-            hql += " and c.createDatetime<=endBindDate ";
-            hm.put("endBindDate",endBindDate);
+            hql += " and c.createDatetime<=:endBindDate ";
+            hm.put("endBindDate",sdf.parse(endBindDate));
         }
 
         List<Consumer> consumersList = baseManager.listObject(hql,hm);
