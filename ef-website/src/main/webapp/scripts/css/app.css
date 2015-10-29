@@ -194,7 +194,7 @@ a:hover { color: #f00; text-decoration: underline }
 .pages .am-pagination>li.default { }
 .pages .am-pagination { margin: 100px 0; float: right }
 /*--End--pages--*/
-.product-intro .am-breadcrumb { padding: 8 px 20px; margin-bottom: 0; font-size: 12px }
+.product-intro .am-breadcrumb { padding: 8px 20px; margin-bottom: 0; font-size: 12px }
 .product-intro .am-breadcrumb li { color: #000 }
 .product-intro .am-breadcrumb li a { color: #999 }
 .product-intro .am-breadcrumb>li+li:before { content: ">"; color: #000 }
