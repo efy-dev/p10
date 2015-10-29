@@ -71,6 +71,7 @@
         <a href="#" onclick="func(5)">待收货</a>
         <a href="#" onclick="func(13)">已完成</a>
         <a href="#" onclick="func(17)">订单回收站</a>
+        <strong style="font-size: 22px"><small>客服电话:</small> 400-876-8766</strong>
       </div>
 
     </div>
