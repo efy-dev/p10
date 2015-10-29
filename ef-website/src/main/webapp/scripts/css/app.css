@@ -27,7 +27,7 @@ a:hover { color: #f00; text-decoration: underline }
 .topbar .ul-item li.cart:hover { background: #fff }
 .topbar .ul-item li.cart:hover a { color: #333; background: transparent; text-decoration: none }
 .topbar .ul-item li.cart:hover .icon { background-position: 0 -63px }
-.topbar .top-wechat { background: url(../images/top-wechat.png) no-repeat; width: 184px; height: 227px; position: absolute; top: 31px; left: 50%; margin-left: -92px; display: none }
+.topbar .top-wechat { background: url(../images/top-wechat.png) no-repeat; width: 200px; height:246px; position: absolute; top: 31px; left: 50%; margin-left: -92px; display: none }
 .am-sticky-placeholder { background: #000; width: 100%; float: left; position: relative; z-index: 20 }
 /*--//End--topbar--*/
 .header { min-width: 1200px; height: 88px; border-bottom: 3px #000 solid; background: #fff;z-index:2;}
@@ -72,8 +72,8 @@ a:hover { color: #f00; text-decoration: underline }
 .box-hd .brand-ul li img { width: 100%; }
 .box-hd .brand-ul li strong { width: 20px; height: 180px; position: absolute; top: 30px; left: 28px; font-size: 16px; color: #fff; line-height: 18px; font-style: italic; overflow: hidden; z-index: 5; }
 .box-hd .brand-ul li.stau1 { width: 239px;position: relative}
-.box-hd .brand-ul li span{position:absolute;left: 30px;bottom: 10px;color: #fff;font-size: 18px;  font-family: Times New Roman;}
-.box-hd .brand-ul li span em{font-size: 12px;}
+.box-hd .brand-ul li span{position:absolute;right: 30px;bottom: 10px;color: #fff;font-size: 18px;  font-family: Times New Roman;}
+.box-hd .brand-ul li span em{font-size: 16px;}
 .box-hd .banner img { width: 1200px }
 .box-hd .list-pro li { width: 50%; height: 280px; float: left; margin-bottom: 1px; position: relative; overflow: hidden }
 .box-hd .list-pro li img { width: 100% }
@@ -206,8 +206,8 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .itemInfo .preview .slider-main { width: 800px; height: 643px; float: left; margin: 0 30px; overflow: hidden }
 .product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }
 .product-intro .itemInfo .preview .slider-main li .zoom-section { width: 800px; position: absolute; top: 0; left: 0; overflow: hidden; }
-.product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
-.product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
+.product-intro .itemInfo .preview .slider-main li .cloud-zoom { height: 643px; left: 0; text-align: center; }
+.product-intro .itemInfo .preview .slider-main li img { width: auto; height: 643px; position: absolute; top: 0; left: 50%; }
 .product-intro .itemInfo .preview .collect { width: 36px; position: absolute; top: 16px; right: 40px; z-index: 99999 }
 .product-intro .itemInfo .preview .icon-big-glass { width: 38px; height: 38px; position: absolute; bottom: 10px; right: 36px; cursor: pointer; }
 .product-intro .itemInfo .preview .icon-big-glass .icon { background-position: -98px -143px; width: 38px; height: 38px; float: left; }

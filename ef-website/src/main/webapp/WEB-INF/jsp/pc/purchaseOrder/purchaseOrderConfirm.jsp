@@ -22,7 +22,16 @@
     </style>
 </head>
 <body>
-<div class="active-pop" style="display: none">
+<div class="wr wh">
+    <!--结算-->
+    <div class="my-clearing">
+        <h1>填写并核对订单信息</h1>
+        <!--地址-->
+        <div class="clearing-site">
+            <span class="clearing-left">收货人信息</span>
+        <span class="clearing-right">
+            <a href="#" class="btn-cart-add">新增收货地址</a>
+            <div class="active-pop" style="display: none">
     <div class="pop-up">
         <div class="pop-h">编辑收货人信息
             <i class="clase" title="关闭"></i>
@@ -68,16 +77,6 @@
         <div class="sh-bg"></div>
     </div>
 </div>
-<div class="wr wh">
-    <!--结算-->
-    <div class="my-clearing">
-        <h1>填写并核对订单信息</h1>
-        <!--地址-->
-        <div class="clearing-site">
-            <span class="clearing-left">收货人信息</span>
-        <span class="clearing-right">
-            <a href="#" class="btn-cart-add">新增收货地址</a>
-
         </span>
         </div>
         <div class="page-clearing" id="address">
@@ -489,7 +488,7 @@
             }, 1000);
 
         }
-        var param = {"price": "${purchaseOrder.total}","purchaseOrderId":"${purchaseOrder.id}"}
+        var param = {"price": "${purchaseOrder.total}", "purchaseOrderId": "${purchaseOrder.id}"}
         //初始化优惠券列表
         ajaxRequest("<c:url value="/listUserCoupon.do"/>", param, success, function () {
         }, "post");
