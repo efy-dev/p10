@@ -17,7 +17,7 @@
         <div class="on-list">
           <dl>
             <dd class="clpt">
-              <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
+              <p>满${coupon.couponBatch.priceLimit}元减${coupon.couponBatch.price}元</p>
               <p>有效期限 <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd"/>—<fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd"/></p>
               <p>适用范围：全网通用</p>
             </dd>

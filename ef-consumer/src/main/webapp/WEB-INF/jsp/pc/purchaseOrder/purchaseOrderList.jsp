@@ -23,14 +23,12 @@
     <div class="mt wh1">
       <div class="extra-l">
         <strong>我的订单</strong>
+        <a href="#" onclick="func(0)">全部订单</a>
         <a href="#" onclick="func(1)">待付款</a>
         <a href="#" onclick="func(5)">待收货</a>
         <a href="#" onclick="func(13)">已完成</a>
         <a href="#" onclick="func(17)">订单回收站</a>
-      </div>
-      <div class="extra-r">
-        <a href="">合并</a>
-        <a href="">付款</a>
+        <strong style="font-size: 22px"><small>客服电话:</small> 400-876-8766</strong>
       </div>
     </div>
     <!-- //End--mt-->
@@ -67,6 +65,7 @@
     <div class="mt wh1">
       <div class="extra-l">
         <strong>我的订单</strong>
+        <a href="#" onclick="func(0)">全部订单</a>
         <a href="#" onclick="func(1)">待付款</a>
         <a href="#" onclick="func(5)">待收货</a>
         <a href="#" onclick="func(13)">已完成</a>
