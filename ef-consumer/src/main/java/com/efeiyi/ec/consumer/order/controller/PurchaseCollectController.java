@@ -56,4 +56,12 @@ public class PurchaseCollectController {
         baseManager.saveOrUpdate(xSaveOrUpdate);
         return "redirect:/purchaseCollect/collectList.do";
     }
+
+    @RequestMapping({"/wapUnfollow.do"})
+    public String wapAddProductFavorite(HttpServletRequest request) throws Exception{
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateProductFavorite" ,request);
+        xSaveOrUpdate.getParamMap().put("status",2);
+        baseManager.saveOrUpdate(xSaveOrUpdate);
+        return "redirect:/purchaseCollect/wapCollectList.do";
+    }
 }

@@ -41,7 +41,7 @@
                 </div>
                 </dt>
                 <dd>
-                    <p>当前头像</p>
+                    <p>&nbsp;&nbsp;&nbsp;</p>
                     <c:set var="pUser">
                         ${user.username}
                         </c:set>
