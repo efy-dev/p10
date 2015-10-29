@@ -624,5 +624,9 @@ CREATE TABLE `base_document_picture` (
 ALTER TABLE `advertisement`
 ADD COLUMN `price`  varchar(32) NULL AFTER `status`;
 
+ALTER TABLE `master`
+ADD COLUMN `remark`  varchar(50) NULL AFTER `fans_amount`;
+
+
 
 
