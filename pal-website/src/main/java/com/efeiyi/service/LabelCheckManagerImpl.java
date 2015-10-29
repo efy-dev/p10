@@ -6,10 +6,10 @@ import com.efeiyi.dao.IPalDao;
 import com.efeiyi.pal.check.model.LabelCheckRecord;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.util.WXEncrypt;
 import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.*;
 import org.hibernate.Query;
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -150,6 +150,29 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
             throw new IOException(e.getMessage());
         }
         Element root = document.getRootElement();
+
+        String encryptType = request.getParameter("encrypt_type");
+        String msgSignature = request.getParameter("msg_signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        WXEncrypt pc = null;
+        //如果加密模式收发，先解密
+        if ("aes".equals(encryptType)) {
+
+            try {
+//                inXml = root.element("Encrypt").getText();
+                System.out.println("解密前密文: " + inXml);
+                pc = new WXEncrypt(PalConst.getInstance().weiXinToken, PalConst.getInstance().encodingAESKey, PalConst.getInstance().appId);
+                inXml = pc.decryptMsg(msgSignature, timestamp, nonce, inXml);
+                System.out.println("解密后明文: " + inXml);
+                document = DocumentHelper.parseText(inXml);
+                root = document.getRootElement();
+            } catch (Exception e) {
+                throw new ServletException(e.getCause());
+            }
+        }
+
+
         String serial = root.element("EventKey").getText();
         String event = root.element("Event").getText();
         System.out.println("Event=\'" + event + "\'");
@@ -181,12 +204,25 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
             updateRecord(model, label, true);
             System.out.println("标签已查次数：" + label.getCheckCount());
             String content = constructWeiXinPushContent(model);
+
             System.out.println("content:" + content);
             outXml = constructWeiXinMsg(label, fromUserName, toUserName, content, url);
 
         } else {
             outXml = constructWeiXinMsg(label, fromUserName, toUserName, PalConst.getInstance().fakeBean.getMsg(), url);
         }
+
+        //如果加密模式收发，加密返回
+        if ("aes".equals(encryptType)) {
+            System.out.println("加密前outXml:" + outXml);
+            try {
+                outXml = pc.encryptMsg(outXml, timestamp, nonce);
+                System.out.println("加密后密文outXml: " + outXml);
+            } catch (Exception e) {
+                throw new ServletException(e.getCause());
+            }
+        }
+
 
         System.out.println("\n\n" + new Date(System.currentTimeMillis()) + "--outXml:\n" + outXml + "\n\n");
         return outXml;
@@ -457,7 +493,8 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 使用百度api查询Ip归属地
-     * @param ip
+     *
+     * @param
      * @return
      * @throws Exception
      */
@@ -473,14 +510,16 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 //        String [] addresses = ((String)ipAddressMap.get("address")).split("\\|");
 //        return (String)ipAddressMap.get("address");
 //    }
+    public static void main(String[] args) {
+        try {
+            WXEncrypt pc = new WXEncrypt(PalConst.getInstance().weiXinToken, PalConst.getInstance().encodingAESKey, PalConst.getInstance().appId);
 
-//    public static void main(String [] args){
-//
-//        try {
-//            new LabelCheckManagerImpl().getIpAddress("");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+
+            String inXml = pc.decryptMsg("11ef68f4db29758253d90a1a788cf2fa7585805a", "1409304348", "xxxxxx",
+                    "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[6QPGajK0r6AH0EW/HHF4FAtz9u9XuMzoqpOEYp+aKcvPJz3/HzY1sL/71TH/lNWippAm/hu+4cKC6/u1ba2hAw==]]></Encrypt></xml>"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
