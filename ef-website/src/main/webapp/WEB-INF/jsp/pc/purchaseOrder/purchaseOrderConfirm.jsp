@@ -22,6 +22,52 @@
     </style>
 </head>
 <body>
+<div class="active-pop" style="display: none">
+    <div class="pop-up">
+        <div class="pop-h">编辑收货人信息
+            <i class="clase" title="关闭"></i>
+        </div>
+        <div class="m-form">
+            <form id="newAddress">
+                <ul>
+                    <li>
+                        <label>收货人：</label>
+                        <input type="text" name="consignee">
+                    </li>
+                    <li>
+                        <label>所在地区：</label>
+
+                        <form>
+                            <select class="cars" id="province" name="province.id"
+                                    onchange="provinceChange(this)" required>
+                                <option value="请选择">请选择所在省市</option>
+                            </select>
+                            <select class="car1" id="city" name="city.id" required>
+                                <option value="请选择">请选择所在区县</option>
+                            </select>
+                        </form>
+                    </li>
+                    <li>
+                        <label>详细地址：</label>
+                        <input style="width: 255px" type="text" name="details">
+                    </li>
+                    <li>
+                        <label>手机号码：</label>
+                        <input type="text" name="phone">
+                    </li>
+                    <li>
+                        <label></label>
+                        <a class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息"
+                           href="javascript:void(0)">保存收货人信息</a>
+                        <input type="reset" style="display: none" id="reset">
+                        <span id="ts" style="border: 0"></span>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="sh-bg"></div>
+    </div>
+</div>
 <div class="wr wh">
     <!--结算-->
     <div class="my-clearing">
@@ -31,52 +77,7 @@
             <span class="clearing-left">收货人信息</span>
         <span class="clearing-right">
             <a href="#" class="btn-cart-add">新增收货地址</a>
-             <div class="active-pop" style="display: none">
-                 <div class="pop-up">
-                     <div class="pop-h">编辑收货人信息
-                         <i class="clase" title="关闭"></i>
-                     </div>
-                     <div class="m-form">
-                         <form id="newAddress">
-                             <ul>
-                                 <li>
-                                     <label>收货人：</label>
-                                     <input type="text" name="consignee">
-                                 </li>
-                                 <li>
-                                     <label>所在地区：</label>
 
-                                     <form>
-                                         <select class="cars" id="province" name="province.id"
-                                                 onchange="provinceChange(this)" required>
-                                             <option value="请选择">请选择所在省市</option>
-                                         </select>
-                                         <select class="car1" id="city" name="city.id" required>
-                                             <option value="请选择">请选择所在区县</option>
-                                         </select>
-                                     </form>
-                                 </li>
-                                 <li>
-                                     <label>详细地址：</label>
-                                     <input style="width: 255px" type="text" name="details">
-                                 </li>
-                                 <li>
-                                     <label>手机号码：</label>
-                                     <input type="text" name="phone">
-                                 </li>
-                                 <li>
-                                     <label></label>
-                                     <a class="dj-btn" onclick="submitNewAddress()" value="保存收货人信息"
-                                        href="javascript:void(0)">保存收货人信息</a>
-                                     <input type="reset" style="display: none" id="reset">
-                                     <span id="ts" style="border: 0"></span>
-                                 </li>
-                             </ul>
-                         </form>
-                     </div>
-                     <div class="sh-bg"></div>
-                 </div>
-             </div>
         </span>
         </div>
         <div class="page-clearing" id="address">

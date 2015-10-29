@@ -93,7 +93,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                     updateSerials = makeSerials(group);
                 }
             }
-        }
+        }//此代码块可能有些冗余，为了安全起见，先行保留
 
        synchronized (updateSerials) {
              if(!updateSerials.isEmpty()) {

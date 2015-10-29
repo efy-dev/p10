@@ -14,16 +14,16 @@
         <div class="page ae">
             <div class="left bk">
                 <dl class="ae">
-                    <dt ><a href="#">帮助中心<i class="add-icon"></i></a></dt>
-                    <dd style="display: none">
+                    <dt class="active"> <a href="#">帮助中心<i class="add-icon"></i></a></dt>
+                    <dd style="display: block">
                         <a href="<c:url value="/document/richTextView?group=ec.gwlc"/>">购物流程<i class="sj"></i></a>
                         <a href="<c:url value="/document/richTextView?group=ec.zffs"/>">支付方式<i class="sj"></i></a>
                         <a href="<c:url value="/document/richTextView?group=ec.psfs"/>">配送方式<i class="sj"></i></a>
                     </dd>
                 </dl>
                 <dl class="ae">
-                    <dt><a href="#">服务保障<i class="add-icon"></i></a></dt>
-                    <dd style="display: none">
+                    <dt class="active" ><a href="#">服务保障<i class="add-icon"></i></a></dt>
+                    <dd style="display: block">
                         <a href="<c:url value="/document/richTextView?group=ec.zpbz"/>">正品保障<i class="sj"></i></a>
                         <a href="<c:url value="/document/richTextView?group=ec.shzc"/>">售后政策<i class="sj"></i></a>
                         <%--<a href="<c:url value="/document/richTextView?group=ec.thhlc"/>">退换货流程<i class="sj"></i></a>--%>
@@ -45,8 +45,8 @@
                     <dt><a href="<c:url value="/document/richTextView?group=ec.yjfk"/>">意见反馈</a></dt>
                 </dl>
                 <dl class="ae">
-                    <dt><a href="#">法律声明<i class="add-icon"></i></a></dt>
-                    <dd style="display: none">
+                    <dt class="active"><a href="#">法律声明<i class="add-icon"></i></a></dt>
+                    <dd style="display: block">
                         <a href="<c:url value="/document/richTextView?group=ec.flsm"/>">法律声明<i class="sj"></i></a>
                         <a href="<c:url value="/document/richTextView?group=ec.aqjyssm"/>">安全及隐私声明</a>
                     </dd>
