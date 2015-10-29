@@ -19,7 +19,7 @@ public class Member {
     private String level;//
     private Member supMember;
     private List<Member> subMemberList;
-    private String status;
+    private String status;//0:取消 1进行中 3：组团成功 5：组团失败
     private Group group;
 
 
