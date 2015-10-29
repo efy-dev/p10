@@ -29,6 +29,9 @@ public class Code2UrlConsumer implements Runnable {
     StringEntity stringEntity;
     private Url2FileConsumer url2FileConsumer;
 
+    //true:永久二维码模式；false：临时二维码模式
+    private boolean runningModel = false;
+//    private boolean runningModel = true;
 
     public Code2UrlConsumer(Url2FileConsumer url2FileConsumer) {
         this.url2FileConsumer = url2FileConsumer;
@@ -45,7 +48,15 @@ public class Code2UrlConsumer implements Runnable {
             }
         }
         method = new HttpPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + accessToken);
-        prepareJsonObject();
+
+        //永久/临时二维码
+        if(runningModel){
+            //永久
+            preparePermanentJsonObject();
+        }else{
+            //临时
+            prepareTempJsonObject();
+        }
 
         while (true) {
             if (url2FileConsumer.isStart()) {
@@ -82,9 +93,18 @@ public class Code2UrlConsumer implements Runnable {
 
     }
 
-    private void prepareJsonObject() {
+    private void prepareTempJsonObject() {
         jsonObject.put("expire_seconds", "3000");
         jsonObject.put("action_name", "QR_SCENE");
+
+        JSONObject sceneId = new JSONObject();
+        JSONObject scene = new JSONObject();
+        scene.put("scene", sceneId);
+        jsonObject.put("action_info", scene);
+    }
+
+    private void preparePermanentJsonObject() {
+        jsonObject.put("action_name", "QR_LIMIT_STR_SCENE");
 
         JSONObject sceneId = new JSONObject();
         JSONObject scene = new JSONObject();
@@ -114,7 +134,15 @@ public class Code2UrlConsumer implements Runnable {
 
     private String getTicket(String code) throws IOException {
 
-        ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", code);
+        //写入二维码Json参数code
+        if(runningModel){
+            //永久
+            ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_str", code);
+        }else {
+            //临时
+            ((JSONObject) ((JSONObject) jsonObject.get("action_info")).get("scene")).put("scene_id", code);
+        }
+
         stringEntity = new StringEntity(jsonObject.toJSONString(), "utf-8");
         stringEntity.setContentType("application/json");
         method.setEntity(stringEntity);
