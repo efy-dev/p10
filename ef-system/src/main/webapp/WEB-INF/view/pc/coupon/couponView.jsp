@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <html>
 <head>
     <title></title>
@@ -13,28 +14,31 @@
         <table class="am-table am-table-bordered">
             <thead>
             <tr>
-                <th>产品数据</th>
+                <th>优惠券信息</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="am-primary am-u-md-3">产品名字</td>
-                <td class="am-u-md-3">${object.name}</td>
-                <td class="am-primary am-u-md-3">产品编号</td>
+                <td class="am-primary am-u-md-3">优惠券编码</td>
                 <td class="am-u-md-3">${object.serial}</td>
+                <td class="am-primary am-u-md-3">优惠券批次名</td>
+                <td class="am-u-md-3">${object.couponBatch.name}</td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">产品价格</td>
-                <td class="am-u-md-3">${object.price}</td>
-                <td class="am-primary am-u-md-3">产品类别</td>
-                <td class="am-u-md-3">${object.category.name}</td>
+                <td class="am-primary am-u-md-3">关联订单</td>
+                <td class="am-u-md-3">${purchaseOrder.serial}</td>
+                <td class="am-primary am-u-md-3">订单状态</td>
+                <td class="am-u-md-3">
+                    <ming800:status name="orderStatus" dataType="purchaseOrder.orderStatus"
+                                    checkedValue="${purchaseOrder.orderStatus}"
+                                    type="normal"/>
+                </td>
             </tr>
             <tr>
-                <td class="am-primary am-u-md-3">产品描述</td>
-                <td class="am-u-md-3">${object.productDescription.content}</td>
-                <td class="am-primary am-u-md-3">产品图片</td>
-                <td class="am-u-md-3"><img src="${object.picture_url}" alt="产品图片"></td>
+                <td class="am-primary am-u-md-3">订单金额</td>
+                <td class="am-u-md-3" colspan="3">${purchaseOrder.total}</td>
             </tr>
+
             </tbody>
         </table>
     </div>

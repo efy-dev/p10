@@ -43,7 +43,7 @@ public class CouponBatchController extends BaseController {
             coupon.setCouponBatch(couponBatch);
             String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
-            coupon.setIsBind("1");
+            coupon.setWhetherBind("1");
             baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
         }
 
