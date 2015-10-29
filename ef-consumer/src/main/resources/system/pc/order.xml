@@ -119,6 +119,7 @@
             <does>
                 <do name="listCouponBatch" access="" label="优惠券列表">
                     <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                     <query name="default" label="默认" type="auto">
@@ -142,11 +143,13 @@
                         <condition name="endDate" defaultValue="${CURRENT_DATETIME}" operation="ge"/>
                     </query>
                     <query name="bycdkey" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="startDate" defaultValue="1" operation="le"/>
                         <condition name="endDate" defaultValue="1" operation="ge"/>
                         <condition name="uniqueKey" defaultValue="1" operation="eq"/>
                     </query>
                     <query name="defaultFlag" label="可用列表" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
                         <condition name="defaultFlag" defaultValue="1" operation="eq"/>
                     </query>
                 </do>

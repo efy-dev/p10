@@ -245,11 +245,10 @@
                 <div class="dis-con">
                     <div class="dis-title">用户印象：</div>
                     <div class="dis-ul">
-                        <ul>
-
                                 <%--<c:if test="${not empty purchaseOrderProductList}">--%>
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
+                                    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
                                     <li>
                                     <div class="txt">
                                         <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
@@ -264,6 +263,7 @@
                                             class="icon"></i>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}
                                     </div>
                                     </li>
+                                    </c:if>
                                  </c:forEach>
                         </ul>
                     </div>

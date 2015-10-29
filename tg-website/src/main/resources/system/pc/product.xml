@@ -16,8 +16,8 @@
             <does>
                 <do name="listCreateProduct" access="" label="商品列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
-                        <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="ne"/>
+                        <condition name="manUser.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>
@@ -27,7 +27,7 @@
                 <do name="listJoinGroup" access="" label="商品列表">
                     <query name="default" label="默认" type="auto" orderBy="id:desc">
                         <condition name="user.id" defaultValue="${MY_USER}" operation="eq"/>
-                        <condition name="status" defaultValue="1" operation="ne"/>
+                        <condition name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
             </does>

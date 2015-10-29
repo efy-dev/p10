@@ -75,6 +75,12 @@
     ${object.brief}
 </div>
 </div>
+<div class="am-u-md-12">
+    <label   class="am-u-sm-3 am-form-label">摘要 / Remark</label>
+    <div >
+        ${object.remark}
+    </div>
+</div>
 <div class="am-g">
     <div class="am-u-md-12">
         <h2>传承人的项目</h2>
