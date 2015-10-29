@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Administrator on 2015/10/21.
  */
 @Entity
-@Table(name = "group")
+@Table(name = "group_buy")
 public class Group {
     private String id;
     private GroupProduct groupProduct;//团购商品
