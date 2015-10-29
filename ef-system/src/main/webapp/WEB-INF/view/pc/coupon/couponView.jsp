@@ -32,7 +32,7 @@
                             没有关联订单
                         </c:when>
                         <c:otherwise>
-                            ${purchaseOrder.serial}
+                            <a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&id=${purchaseOrder.id}'/>">${purchaseOrder.serial}</a>
                         </c:otherwise>
                     </c:choose>
                 </td>
