@@ -38,7 +38,7 @@
             <%--<a rel="nofollow" href="http://www.yongxinhua.cn/ " target="_blank" title="永新华控股">永新华控股</a>--%>
             <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
-        <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+        <div class="info">Copyright © 2015 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
 </div>
 <div class="scroll-bar" style="z-index: 9999">
@@ -46,14 +46,9 @@
         <span class="btn"><i class="icon" style="margin-left: 4px;margin-top: 6px;display: block;"></i></span>
     </div>
 </div>
-<!--[if lte IE 8 ]>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
-        right: 0;bottom: 207px;}
+        right: 0;bottom: 252px;}
     #MEIQIA-BTN {
         background: #000;
         width: 33px;
@@ -73,7 +68,7 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://www2.efeiyi.com/scripts/images/icon.png) no-repeat -176px -143px;
+        background:url(http://www.efeiyi.com/scripts/images/icon.png) no-repeat -176px -143px;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -84,6 +79,11 @@
         margin-top: 6px;
     }
 </style>
+<!--[if lte IE 8 ]>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
+<![endif]-->
+<script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
         m[a] = m[a] || function() {
@@ -97,6 +97,8 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
+
+
 <!--//End--右侧返回顶部和在线客服-->
 <div style="display: none">
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>

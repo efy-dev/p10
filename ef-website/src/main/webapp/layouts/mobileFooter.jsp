@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www2.efeiyi.com/sso.do" class="btn-reg"
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do" class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
@@ -25,7 +25,6 @@
 
         <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台
         </div>
-        <div class="wechat"></div>
         <div class="wechat"  id="wechat"><img src="/scripts/images/icon-wechat.png"></div>
         <div class="txt" id="wechatStr1">关注微信公众号</div>
         <div class="txt"id="wechatStr2">领取好礼</div>
@@ -75,7 +74,7 @@
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
-    var register = "http://passport.efeiyi.com/register?service=http://www2.efeiyi.com/sso.do";
+    var register = "http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do";
 
     if (isWeiXin()) {
 //        alert("not weixin");

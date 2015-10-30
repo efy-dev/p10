@@ -23,7 +23,12 @@
                     couponBatchId: couponBatchId
                 },
                 success: function (data) {
-                    alert("给"+data+"个用户发放优惠券成功")
+                    if(data == 'Less'){
+                        alert("可用的优惠券太少！")
+                    }else{
+                        alert("给"+data+"个用户发放优惠券成功");
+                    }
+                    window.location.reload();
                 },
             });
         }
@@ -43,7 +48,7 @@
                     endBindDate: endBindDate
                 },
                 success: function (data) {
-                    $("#userNum").val(data)
+                    $("#userNum").val(data);
                 },
             });
         }

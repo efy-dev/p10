@@ -835,10 +835,46 @@ a:hover { text-decoration: underline }
 .reg-form .btn-p1 { width: 112px; height: 36px; line-height: 36px; text-align: center; border: 1px solid #ccc; float: left; text-decoration: none; font-family: KaiTi; background: #fff; transition: all 0.5s; }
 .reg-form .btn-p1:hover { background: #000; color: #fff; }
 /*我的卡券套用amazeui样式修改 my-kj*/
-.my-kj .am-tabs-default .am-tabs-nav a { font-size: 14px!important; color: #999!important; text-decoration: none; background: #fff; border: 1px solid #ccc; outline: none; }
+.my-kj .am-tabs-default .am-tabs-nav a {font-size: 14px!important; color: #999!important; text-decoration: none; background: #fff; border: 1px solid #ccc; outline: none; }
 .my-kj .am-tabs-default .am-tabs-nav>.am-active a { font-size: 14px!important; color: #fff!important; text-decoration: none; background: #000; border: 1px solid #000; }
 .my-kj .am-tabs-bd { top: 30px; border-top: 1px solid #ccc; border: 1px solid #ccc; float: left }
 .my-kj .am-tabs-bd .am-tab-panel { padding: 0 23px; }
+.am-tabs-bd .am-tab-panel.am-active~.am-tab-panel
+.my-kj .am-tabs-nav .ul-list {
+    width: 100%;
+    float: left;
+    margin-left: 1px;
+}
+.my-kj .am-tabs-nav .ul-list li.items {
+    width: 220px;
+    line-height: 47px;
+    text-align: center;
+    float: left;
+    margin-left: -1px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+}
+.my-kj .am-tabs-nav .ul-list li.items a {color:#999}
+.my-kj .am-tabs-nav .ul-list li a:hover {text-decoration: none}
+.my-kj .am-tabs-nav .ul-list li.active {
+    background: #000;
+    border: 1px solid #000;
+}
+.my-kj .am-tabs-nav .ul-list li.active a {
+    color: #fff
+}
+
+.my-kj .am-tabs-nav .ul-list li.items2 {
+    width: 162px;
+    height: 47px;
+    line-height: 47px;
+    border: 1px solid #000;
+    float: right;
+    text-align: center;
+}
+
+
 /*我的卡券自写样式*/
 .my-ds { position: relative!important; left: 50%!important; overflow: visible!important; display: inline-block!important; margin-left: -500px!important; }
 .my-kj { float: left; width: 100% }
@@ -849,7 +885,7 @@ a:hover { text-decoration: underline }
 .my-kj .serial-list-page .list-zq .serial-list .list1 { width: 208px;height:111px; margin-right: 98px; float: left; margin-left: 14px;
     position: relative;}
 .my-kj .serial-list-page .list-zq .serial-list .list1 em.bg1 {
-    background:url(../images/coupon1.jpg) no-repeat 0 0;
+    background:url(../images/coupon.png) no-repeat 0 0;
     width:208px;
     height:111px;
     position: absolute;
@@ -866,17 +902,35 @@ a:hover { text-decoration: underline }
     left: 0;
     z-index: 1;
 }
+.my-kj .serial-list-page .list-zq .serial-list .list1 span {
+    width: 20px;
+    font-size: 20px;
+    position: absolute;
+    top: 8px;
+    right: 23px;
+    z-index: 2;
+    color: #fff;
+    line-height: 30px;
+}
 .my-kj .serial-list-page .list-zq .serial-list .list1 strong {
-    width: 73px;
-    height: 100px;
+    width:120px;
+    height: 111px;
+    line-height:111px;
     position: absolute;
     top: 0;
     left: 32px;
     z-index: 2;
-    font-size:64px;
+    font-size:95px;
     color: #fff;
+    font-weight: bold;
+    text-align: center;
+    font-family: Impact Regular;
 }
-.my-kj .serial-list-page .list-zq .serial-list .list2 { width: 300px; padding: 45px 0; float: left; padding-left: 27px; background: url('../images/efeiyi-gwc.png') no-repeat -67px -58px; }
+.my-kj .serial-list-page .list-zq .serial-list .list2 { width: 300px; padding:25px 0 45px 27px; float: left;background: url(../images/efeiyi-gwc.png) no-repeat -67px -82px}
+.my-kj .serial-list-page .list-zq .serial-list .list2 p {
+    font-size:12px;
+    color: #000;
+}
 .my-kj .serial-list-page .list-zq .serial-list .list3 { width: 161px; text-align: center; float: left; padding: 20px 0; }
 .my-kj .serial-list-page .list-zq .serial-list .list3 a { font-size: 12px; color: #003366; }
 /*我的订单回收站为空*/

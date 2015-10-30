@@ -22,7 +22,16 @@
     </style>
 </head>
 <body>
-<div class="active-pop" style="display: none">
+<div class="wr wh">
+    <!--结算-->
+    <div class="my-clearing">
+        <h1>填写并核对订单信息</h1>
+        <!--地址-->
+        <div class="clearing-site">
+            <span class="clearing-left">收货人信息</span>
+        <span class="clearing-right">
+            <a href="#" class="btn-cart-add">新增收货地址</a>
+            <div class="active-pop" style="display: none">
     <div class="pop-up">
         <div class="pop-h">编辑收货人信息
             <i class="clase" title="关闭"></i>
@@ -68,16 +77,6 @@
         <div class="sh-bg"></div>
     </div>
 </div>
-<div class="wr wh">
-    <!--结算-->
-    <div class="my-clearing">
-        <h1>填写并核对订单信息</h1>
-        <!--地址-->
-        <div class="clearing-site">
-            <span class="clearing-left">收货人信息</span>
-        <span class="clearing-right">
-            <a href="#" class="btn-cart-add">新增收货地址</a>
-
         </span>
         </div>
         <div class="page-clearing" id="address">
@@ -219,7 +218,7 @@
                     <span>使用兑换码</span>
                     <input class="ipt-txt" type="text" value="" id="cdkey">
                     <a class="btn-submit" value="确定使用" onclick="exchangeCoupon()">确定使用</a>
-                    <span class="red" id="exchangeError" style="display: none">订单不满足该优惠券使用条件(兑换码输入错误，请核对后重新输入！)</span>
+                    <span class="red" id="exchangeError" style="display: none">订单不满足该优惠券使用条件</span>
                 </div>
                 <ul class="list ul-list ul-list-last" id="exchangeCouponList">
                     <%--<li>--%>
@@ -489,7 +488,7 @@
             }, 1000);
 
         }
-        var param = {"price": "${purchaseOrder.total}","purchaseOrderId":"${purchaseOrder.id}"}
+        var param = {"price": "${purchaseOrder.total}", "purchaseOrderId": "${purchaseOrder.id}"}
         //初始化优惠券列表
         ajaxRequest("<c:url value="/listUserCoupon.do"/>", param, success, function () {
         }, "post");

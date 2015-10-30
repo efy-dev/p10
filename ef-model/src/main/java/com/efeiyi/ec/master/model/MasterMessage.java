@@ -36,6 +36,7 @@ public class MasterMessage implements Serializable {
 	private String praiseStatus;
 	private Integer amount;//评论数量
 	private Integer fsAmount;//关注人数
+    private String remark;//摘要
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 
@@ -209,4 +210,13 @@ public class MasterMessage implements Serializable {
 	public void setFsAmount(Integer fsAmount) {
 		this.fsAmount = fsAmount;
 	}
+
+    @Column(name = "remark")
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

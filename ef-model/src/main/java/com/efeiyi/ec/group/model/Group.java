@@ -11,12 +11,12 @@ import java.util.List;
  * Created by Administrator on 2015/10/21.
  */
 @Entity
-@Table(name = "group")
+@Table(name = "group_buy")
 public class Group {
     private String id;
     private GroupProduct groupProduct;//团购商品
     private List<Member> memberList;
-    private String status;
+    private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
     private Date createDateTime;
     private MyUser manUser;
 

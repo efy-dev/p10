@@ -19,7 +19,7 @@
         function removeCouponBatch(couponBatchId){
             jQuery.ajax({
                 type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeCouponBatch"/>',
+                url:'<c:url value="/couponBatch/removeCouponBatch.do"/>',
                 data:{id:couponBatchId},
                 dataType:"json",
                 success:function(data){

@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>${subject.name}</title>
+  <title>【" 精选专题 "】 -e飞蚁</title>
 <body>
 <artice class="custom">
   <div class="bd list-class">

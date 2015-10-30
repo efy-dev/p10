@@ -60,6 +60,8 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .box-hd .ul-index-list>li {margin-bottom:1px;float:left;position:relative;}
 .box-hd .ul-index-list>li em {position:absolute;top:19px;color:#fff;font-size:12px;width:16px;height:140px;overflow:hidden;font-style:italic;line-height:14px;}
 .box-hd .ul-index-list>li.stau1 {width:100%;margin-bottom:2px;}
+.box-hd .ul-index-list>li.stau1 span{position: absolute;left: 10px;bottom: 10px;font-size: 12px;color: #fff;}
+.box-hd .ul-index-list>li.stau2 span{position: absolute;right: 10px;bottom: 10px;text-align: right}
 .box-hd .ul-index-list>li.stau1 em {right:19px}
 .box-hd .ul-index-list>li.stau2 {width:50%;padding-right:1px;margin-bottom:2px;}
 .box-hd .ul-index-list>li.stau2 em {left:19px}
@@ -192,10 +194,10 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details-total-bar {height:42px;line-height:42px;background:#fff;position:fixed;left:0;bottom:0;box-sizing:border-box;border-top:2px solid #000;border-bottom:2px solid #000}
 .details-total-bar a {font-size:14px;color:#000;float:left;border-right:1px #000 solid;text-align:center}
 .details-total-bar a:last-child {border-right:0}
-.details-total-bar .btn-default {width:15%}
-.details-total-bar .btn-cart {background:#000;width:40%;color:#fff}
+.details-total-bar .btn-default {width:33%}
+.details-total-bar .btn-cart {background:#000;width:33%;color:#fff}
 .details-total-bar .btn-cart .icon {background-position:-110px -27px;width:19px;height:13px;display:inline-block;margin-right:3px;position:relative;top:1px}
-.details-total-bar .btn-buy {width:30%}
+.details-total-bar .btn-buy {width:33%}
 /*--//End--*/
 .details-shop {padding:0 20px}
 .details-shop .s-part {position:relative;padding:20px 0 20px 90px;font-size:1.4rem;border-bottom:1px solid #000}

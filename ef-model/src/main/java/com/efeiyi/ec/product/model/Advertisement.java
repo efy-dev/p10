@@ -17,6 +17,16 @@ public class Advertisement {
     private String redirect;
     private Integer adsOrder;
     private String status;
+    private String price;
+
+    @Column(name = "price")
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")

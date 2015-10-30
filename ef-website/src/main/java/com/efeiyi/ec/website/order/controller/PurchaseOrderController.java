@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.order.controller;
 
+import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.*;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
@@ -59,12 +60,68 @@ public class PurchaseOrderController extends BaseController {
     private PaymentManager paymentManager;
 
 
+    @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
+    public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model,@PathVariable String amount) throws Exception {
+        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        CartProduct cartProduct = new CartProduct();
+        cartProduct.setProductModel(groupProduct.getProductModel());
+//        String amount = request.getParameter("amount");
+        cartProduct.setAmount(Integer.valueOf(amount));
+        cartProduct.setIsChoose("1");
+        cartProduct.setStatus("1");
+        List<CartProduct> cartProductList = new ArrayList<>();
+        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
+        cartProductList.add(cartProduct);
+        Map<String, List> productMap = new HashMap<>();
+        productMap.put(groupProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
+        model.addAttribute("productMap", productMap);
+        Cart cart = new Cart();
+        cart.setTotalPrice(groupProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
+        model.addAttribute("cart", cart);
+        List<Tenant> tenantList = new ArrayList<>();
+        tenantList.add(groupProduct.getProductModel().getProduct().getTenant());
+        model.addAttribute("tenantList", tenantList);
+
+        XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdatePurchaseOrder", request);
+        xSaveOrUpdate.getParamMap().put("serial", autoSerialManager.nextSerial("orderSerial"));
+        xSaveOrUpdate.getParamMap().put("user.id", AuthorizationUtil.getMyUser().getId());
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.saveOrUpdate(xSaveOrUpdate);
+
+        purchaseOrder.setTenant(tenantList.get(0));
+        purchaseOrder.setTotal(cart.getTotalPrice());
+        purchaseOrder.setOriginalPrice(cart.getTotalPrice());
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+
+        PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
+        purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
+        purchaseOrderProduct.setProductModel(groupProduct.getProductModel());
+        purchaseOrderProduct.setPurchasePrice(groupProduct.getGroupPrice());
+        purchaseOrderProduct.setPurchaseAmount(cartProduct.getAmount());
+        baseManager.saveOrUpdate(PurchaseOrderProduct.class.getName(), purchaseOrderProduct);
+
+        XQuery xQuery = new XQuery("listConsumerAddress_default", request);
+        xQuery.addRequestParamToModel(model, request);
+        List addressList = baseManager.listObject(xQuery);
+
+        model.addAttribute("addressList", addressList);
+        model.addAttribute("purchaseOrder", purchaseOrder);
+        model.addAttribute("productModel", groupProduct.getProductModel());
+        model.addAttribute("amount", amount);
+        model.addAttribute("isEasyBuy", true);
+
+        return "/purchaseOrder/purchaseOrderConfirm";
+    }
+
+
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
         String amount = request.getParameter("amount");
+        if (amount==null){
+            amount = "1";
+        }
         cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");

@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>首页</title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
 </head>
 <body>
 <!--//End--header-->
@@ -21,7 +21,7 @@
             <span><i class="icon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item user" href="http://www2.efeiyi.com/subject/ig8zlvonengegjk9">
+        <a class="item user" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">
             <span><i class="icon"></i></span>
             <span>精&nbsp;选&nbsp;专&nbsp;题</span>
         </a>
@@ -33,14 +33,14 @@
     <!--//End--toolbar-->
     <div class="box-hd">
         <ul class="ul-index-list">
-            <li class="stau1"><a href="${advertisement[1].redirect}" title=""><em>${advertisement[1].name}</em><img src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big-mobile" alt=""/></a></li>
-            <li class="stau2"><a href="${advertisement[0].redirect}" title=""><em>${advertisement[0].name}</em><img src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small-mobile" alt=""/></a></li>
-            <li class="stau3"><a href="${advertisement[2].redirect}" title=""><em>${advertisement[2].name}</em><img src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small-mobile" alt=""/></a></li>
-            <li class="stau1"><a href="${advertisement[7].redirect}" title=""><em>${advertisement[7].name}</em><img src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big-mobile" alt=""/></a></li>
-            <li class="stau2"><a href="${advertisement[3].redirect}" title=""><em>${advertisement[3].name}</em><img src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small-mobile" alt=""/></a></li>
-            <li class="stau3"><a href="${advertisement[4].redirect}" title=""><em>${advertisement[4].name}</em><img src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small-mobile" alt=""/></a></li>
-            <li class="stau2"><a href="${advertisement[5].redirect}" title=""><em>${advertisement[5].name}</em><img src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small-mobile" alt=""/></a></li>
-            <li class="stau3"><a href="${advertisement[6].redirect}" title=""><em>${advertisement[6].name}</em><img src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small-mobile" alt=""/></a></li>
+            <li class="stau1"><a href="${advertisement[1].redirect}" title=""><em>${advertisement[1].name}</em><img src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[1].price}</strong></span></li>
+            <li class="stau2"><a href="${advertisement[0].redirect}" title=""><em>${advertisement[0].name}</em><img src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[0].price}</strong></span></li>
+            <li class="stau3"><a href="${advertisement[2].redirect}" title=""><em>${advertisement[2].name}</em><img src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[2].price}</strong></span></li>
+            <li class="stau1"><a href="${advertisement[7].redirect}" title=""><em>${advertisement[7].name}</em><img src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[7].price}</strong></span></li>
+            <li class="stau2"><a href="${advertisement[3].redirect}" title=""><em>${advertisement[3].name}</em><img src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[3].price}</strong></span></li>
+            <li class="stau3"><a href="${advertisement[4].redirect}" title=""><em>${advertisement[4].name}</em><img src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[4].price}</strong></span></li>
+            <li class="stau2"><a href="${advertisement[5].redirect}" title=""><em>${advertisement[5].name}</em><img src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[5].price}</strong></span></li>
+            <li class="stau3"><a href="${advertisement[6].redirect}" title=""><em>${advertisement[6].name}</em><img src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small-mobile" alt=""/></a><span class="price"><i>￥</i><strong>${advertisement[6].price}</strong></span></li>
         </ul>
     </div>
     <!--//End--铜的故事-->

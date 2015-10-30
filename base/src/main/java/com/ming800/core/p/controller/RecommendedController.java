@@ -50,7 +50,7 @@ public class RecommendedController {
     public String saveObjectRecommended(ObjectRecommended objectRecommended){
 
         try{
-            objectRecommendedManager.saveObjectRecommend(objectRecommended);
+            baseManager.saveOrUpdate(ObjectRecommended.class.getName(),objectRecommended);
         }catch (Exception e){
 
             e.printStackTrace();

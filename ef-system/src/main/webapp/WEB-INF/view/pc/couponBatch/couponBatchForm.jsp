@@ -199,8 +199,6 @@
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-            <div class="am-panel am-panel-default">
-            </div>
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
@@ -368,9 +366,9 @@
                 <div class="am-form-group">
                     <div class="am-u-sm-9 am-u-sm-push-3">
                         <button type="submit" class="am-btn am-btn-primary">保存</button>
-                        <button type="submit" id="sc" class="am-btn am-btn-primary" onclick="saveAndCreate()">
-                            保存并生成
-                        </button>
+                        <%--<button type="submit" id="sc" class="am-btn am-btn-primary" onclick="saveAndCreate()">--%>
+                            <%--保存并生成--%>
+                        <%--</button>--%>
                     </div>
                 </div>
             </form>

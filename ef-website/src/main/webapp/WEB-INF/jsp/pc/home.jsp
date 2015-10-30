@@ -10,7 +10,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
+    <meta name=“keywords” content=“e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
 </head>
 <body>
 <div class="hd">
@@ -47,35 +48,35 @@
                 <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank"
                                      title=""><strong>${advertisement[0].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[0].price}</font></span></li>
                 <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank"
                                      title=""><strong>${advertisement[1].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[1].price}</font></span></li>
                 <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank"
                                      title=""><strong>${advertisement[2].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[2].price}</font></span></li>
                 <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank"
                                      title=""><strong>${advertisement[3].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[3].price}</font></span></li>
                 <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank"
                                      title=""><strong>${advertisement[4].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[4].price}</font></span></li>
                 <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank"
                                      title=""><strong>${advertisement[5].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[5].price}</font></span></li>
                 <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank"
                                      title=""><strong>${advertisement[6].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[6].price}</font></span></li>
                 <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank"
                                      title=""><strong>${advertisement[7].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big"
-                                                                                            alt=""></a></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[7].price}</font></span></li>
             </ul>
         </div>
     </div>
