@@ -54,16 +54,24 @@ public class GroupController {
 
         boolean flag = false;
         String url1 = "";
-        for(Group group:list){
-            for(Member member:group.getMemberList()){
-                if(member.getUser().getId().equals(currentUser.getId())){
-                    flag = true;
-                    url1 = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
-                    break;
+        if(groupId.equals("null")||groupId.isEmpty()){
+            for(Group group:list){
+                for(Member member:group.getMemberList()){
+                    if(member.getUser().getId().equals(currentUser.getId())&&member.getLevel().equals("0")){
+                        flag = true;
+                        url1 = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
+                        break;
+                    }
                 }
-            }
 
+            }
+        }else {
+            Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+            if (group.getManUser().getId().equals(currentUser.getId())){
+                flag = true;
+            }
         }
+
 
         String amount = "1";
         String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
