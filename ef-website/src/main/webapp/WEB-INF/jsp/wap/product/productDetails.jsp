@@ -12,7 +12,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>商品详情</title>
+    <title>【“${product.name} ${productModel.name}”】“${product.subName}” -e飞蚁</title>
 </head>
 <body>
 

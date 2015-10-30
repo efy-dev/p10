@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -62,6 +63,7 @@ public class BigUser {
     protected String addressCityName;
     protected AddressProvince addressProvince;
     protected Date lastLoginDatetime; //最后一次登陆时间
+    protected BigDecimal redPacket;//红包（相当于钱包）
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_id", updatable = false, insertable = false)
@@ -433,5 +435,14 @@ public class BigUser {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    @Column(name = "red_packet")
+    public BigDecimal getRedPacket() {
+        return redPacket;
+    }
+
+    public void setRedPacket(BigDecimal redPacket) {
+        this.redPacket = redPacket;
     }
 }

@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>首页</title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
 </head>
 <body>
 <!--//End--header-->

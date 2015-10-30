@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- //End--header-->
+<html>
+<head>
+  <title>【" ${tenant.name}"】-e飞蚁</title>
+</head>
 <body>
 <div class="hd shop">
   <div class="shop-header wh">

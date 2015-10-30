@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/couponBatch")
@@ -46,6 +47,15 @@ public class CouponBatchController extends BaseController {
             String serial = autoSerialManager.nextSerial("systemAutoSerial");
             coupon.setSerial(serial);
             coupon.setWhetherBind("1");
+
+
+            StringBuffer randomValidateCode = new StringBuffer();
+            for(int j = 0;j <8;j++){
+                Random random = new Random();
+                randomValidateCode.append(random.nextInt(10));
+            }
+
+            coupon.setUniqueKey(randomValidateCode+serial);
             baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
         }
 

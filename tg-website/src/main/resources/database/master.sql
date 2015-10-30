@@ -42,3 +42,10 @@ ALTER TABLE `group_buy`
 CHANGE COLUMN `manmember_id` `man_user_id`  char(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `create_datetime`;
 
 /-------------------------团表团长字段修改为关联biguser---------------------------/
+
+
+/-------------------biguser添加红包字段----------------------------/
+ALTER TABLE `organization_user`
+ADD COLUMN `red_packet`  decimal(10,2) NULL AFTER `tenant_type`;
+
+/-----------------------biguser添加红包字段-------------------------/
