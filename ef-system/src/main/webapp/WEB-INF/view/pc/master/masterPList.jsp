@@ -20,6 +20,7 @@
             if($(obj).attr("recommend")=="0"){
                 recommended(obj,status,url);
             }else{
+                $("#type option[value='masterRecommended']").attr("selected","selected");
             $('#my-prompt').modal({
                 relatedTarget: this,
                 onConfirm: function(e) {
@@ -82,7 +83,7 @@
                                     <c:if test="${empty master.masterRecommendedList}">
                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                            onclick="recommend2(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
-                                           href="#" recommend="1" recommendedId = "${master.id}" id="" >
+                                           href="javascript:void(0);" recommend="1" recommendedId = "${master.id}" id="" >
                                             <span class="am-icon-heart"> 推荐</span>
                                         </a>
                                     </c:if>
@@ -90,7 +91,7 @@
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
                                             <c:if test="${recommended.master.id == master.id}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
+                                                   href="javascript:void(0);"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
                                                     <span class="am-icon-heart" >取消推荐 </span>
                                                 </a>
                                             </c:if>
