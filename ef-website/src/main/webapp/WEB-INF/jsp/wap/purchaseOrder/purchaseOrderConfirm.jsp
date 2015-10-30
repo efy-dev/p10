@@ -117,7 +117,7 @@
 
             <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
 
-            <p><strong class="grey">返现</strong><span><em>￥</em>0.00</span></p>
+            <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span></p>
 
             <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
         </div>
@@ -310,6 +310,7 @@
                     for (var i = 0; i < chkobjs.length; i++) {
                         if (chkobjs[i].checked) {
                             t_price = t_price - parseFloat(chkobjs[i].value);
+                            $("#couponPrice").html(chkobjs[i].value);
                         }
                     }
                     $("#change").text(t_price);

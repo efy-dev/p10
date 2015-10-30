@@ -71,7 +71,7 @@
                 <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank"
                                      title=""><strong>${advertisement[6].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small"
-                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[61].price}</font></span></li>
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[6].price}</font></span></li>
                 <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank"
                                      title=""><strong>${advertisement[7].name}</strong><img class="imgfilter"
                                                                                             src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big"

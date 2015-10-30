@@ -19,7 +19,7 @@
       <div class="btndes">
         <%--<a href="" title="收藏店铺">收 藏 店 铺</a>--%>
           <c:if test="${empty tenantMasterList}">
-            <a title="了解传承人" target="_blank">了 解 大 师</a>
+            <%--<a title="了解传承人" target="_blank">了 解 大 师</a>--%>
           </c:if>
           <c:if test="${not empty tenantMasterList}">
           <a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>
