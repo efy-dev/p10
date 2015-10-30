@@ -157,6 +157,11 @@
                 <match url="/basic/xm.do?qm=formEcProjectCategory&amp;param=tenant"/>
 
             </jnode>
+            <jnode url="/basic/xm.do?qm=plistECMaster_default" access="admin,manager" text_zh_CN="首页大师推荐">
+                <match url="/basic/xm.do?qm=plistECMaster_default"/>
+
+
+            </jnode>
             <jnode url="/basic/xm.do?qm=plistEcProjectCategory_default" access="admin,manager" text_zh_CN="首页推荐类别">
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
@@ -171,12 +176,12 @@
                 <!--<match url="/basic/xm.do?qm=plistProductModel_index"/>-->
                 <!--<match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=index"/>-->
             <!--</jnode>-->
-            <jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">
-                <match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>
-                <match url="/basic/xm.do?qm=formMaster&amp;form=recommend"/>
-                <match url="/basic/xm.do?qm=plistEcMaster_index"/>
-                <match url="/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"/>
-            </jnode>
+            <!--<jnode url="/basic/xm.do?qm=plistEcMaster_index" access="admin,manager" text_zh_CN="首页推荐传承人">-->
+                <!--<match url="/basic/xm.do?qm=viewEcMaster&amp;view=recommend"/>-->
+                <!--<match url="/basic/xm.do?qm=formMaster&amp;form=recommend"/>-->
+                <!--<match url="/basic/xm.do?qm=plistEcMaster_index"/>-->
+                <!--<match url="/basic/xm.do?qm=plistMaster_default&amp;param=EcMaster"/>-->
+            <!--</jnode>-->
             <jnode url="/basic/xm.do?qm=plistAdvertisement_default" access="admin,manager" text_zh_CN="首页推荐广告">
                 <match url="/basic/xm.do?qm=plistAdvertisement_default"/>
                 <match url="/basic/xm.do?qm=formAdvertisement"/>

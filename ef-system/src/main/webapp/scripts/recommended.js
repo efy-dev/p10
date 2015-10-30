@@ -43,7 +43,7 @@ function deleteRecommended(obj,id,td,url){
  */
 function saveRecommended(obj,groupName,td,saveUrl){
     var recommendId = $(obj).parent().prev("a").attr("recommendedId");
-    var sort = $(obj).prev().val();
+    var sort = $(obj).prev("input").val();
     $.ajax({
         type:"get",
         url:saveUrl,
