@@ -59,7 +59,7 @@
         <div class="gray"></div>
       </div>
       <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
-      <div class="time ae" id="timer">04:44:43</div>
+      <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${flag==1}">
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>=0}">
@@ -70,7 +70,7 @@
       </c:if>
     </c:if>
     <c:if test="${flag==0}">
-      <a href="<c:url value="/group/groupBuy"/>"+${url} class="btn">参&nbsp;团</a>
+      <a href="<c:url value='/group/groupBuy'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
     <div class="txt4 ae"><span>参团享低价，分享赚红包！您成功参团并分享该链接帮助好友参团，就可以得红包啦！红包无上限，更多分享，更多红包！
             <a href="#" class="txcon"></a>
@@ -122,7 +122,6 @@
     </div>
   </div>
 </div>
-${endTime}
 <script type="text/javascript">
   var endDate=${endTime};
   setInterval("daoJiShi()",1000);
