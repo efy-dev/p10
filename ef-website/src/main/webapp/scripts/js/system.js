@@ -16,6 +16,7 @@ $(function(){
     //
     (function(){
         $('.header .nav li').hover(function(){
+            $('.header,.footer').css('z-index','');
             $(this).find('.bgbor').show();
             $(this).addClass('hover').find('.nav-links').stop().slideDown('fast');
         },function(){
@@ -72,7 +73,7 @@ $(function(){
             BimgLi.eq(index).fadeIn('200').siblings().fadeOut('200');
             $(this).addClass('active').siblings('li').removeClass('active');
         });
-        ////收藏
+        //收藏
         //var oBiao=$('.preview .collect .biao');
         //oBiao.hover(function(){
         //    var $span=$(this).siblings('span');
@@ -176,13 +177,6 @@ $(function(){
             }else{
                 btnTop.fadeOut();
             }
-
-            if(_top>$(document).height()-900){
-
-                $('.scroll-bar').css({'bottom':'200px'})
-            }
-
-
             btnTop.click(function(){
                 $('body').stop(true).animate({'scrollTop':'0'},300);
             })
@@ -192,6 +186,7 @@ $(function(){
     (function(){
         //优惠券
         $('.btn-coupon').click(function(){
+            $('.header,.footer').css('z-index','-1');
             $(this).toggleClass('active');
             $(this).siblings('.ul-list').slideToggle('fast');
             return false;

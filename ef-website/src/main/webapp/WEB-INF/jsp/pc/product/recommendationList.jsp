@@ -9,11 +9,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>【" ${productModel.product.name}" 】“${productModel.product.subName}” -e飞蚁</title>
+  <title>【 ${productModel.product.name} 】${productModel.product.subName} -e飞蚁</title>
 </head>
 <body>
 <!-- //End--topbar-->

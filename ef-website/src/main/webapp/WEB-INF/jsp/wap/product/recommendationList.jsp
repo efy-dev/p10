@@ -10,7 +10,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>【" ${productModel.product.name}" 】“${productModel.product.subName}” -e飞蚁</title>
+  <title>【 ${productModel.product.name} 】${productModel.product.subName} -e飞蚁</title>
 
 </head>
 <body>
