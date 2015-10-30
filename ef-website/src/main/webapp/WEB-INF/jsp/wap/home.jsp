@@ -3,7 +3,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>首页</title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
 </head>
 <body>
 <!--//End--header-->
@@ -21,7 +21,7 @@
             <span><i class="icon"></i></span>
             <span>分&nbsp;类</span>
         </a>
-        <a class="item user" href="http://www2.efeiyi.com/subject/ig8zlvonengegjk9">
+        <a class="item user" href="http://www.efeiyi.com/subject/ig8zlvonengegjk9">
             <span><i class="icon"></i></span>
             <span>精&nbsp;选&nbsp;专&nbsp;题</span>
         </a>

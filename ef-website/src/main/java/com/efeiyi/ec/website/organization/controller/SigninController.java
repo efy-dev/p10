@@ -256,7 +256,7 @@ public class   SigninController extends BaseController {
 
     @RequestMapping({"/wx/userInfo"})
     public String wxPay(HttpServletRequest request) throws Exception {
-        String redirect_uri = "http://www2.efeiyi.com/wx/bind";
+        String redirect_uri = "http://www.efeiyi.com/wx/bind";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + WxPayConfig.APPID +
                 "&redirect_uri=" +

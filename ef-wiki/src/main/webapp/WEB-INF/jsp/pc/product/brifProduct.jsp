@@ -304,7 +304,7 @@
               }else{
                 amout1 =data.list[i].amount;
               }
-              var userName = data.list[i].user.name2;
+              var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
               if(userName==null){
                 userName ="匿名用户";
               }
@@ -431,7 +431,7 @@
             }else{
               amout1 =data.list[i].amount;
             }
-            var userName = data.list[i].user.name2;
+            var userName = data.list[i].user.username.substring(0,3)+"****"+data.list[i].user.username.substring(7,11);
             if(userName==null){
               userName ="匿名用户";
             }
@@ -535,7 +535,7 @@ function getHfProduct(e){
         }
         $("#commentAll").append("<li class=\"ae\" id=\""+o.id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
                 "<div class=\"text\"><span>" +
-                "<a href=\"#\">${myUser.name2} ：</a></span>" +
+                "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} ：</a></span>" +
                 "<span>"+CommentValue+"</span></div> " +
                 "<div class=\"status ae\"> <div class=\"status-left\">" +
                 "<span>刚刚</span></div> <div class=\"status-right\"> " +

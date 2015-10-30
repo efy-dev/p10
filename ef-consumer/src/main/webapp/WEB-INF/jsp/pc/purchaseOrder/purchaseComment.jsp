@@ -410,26 +410,13 @@
     $(obj).hide();
     $('#zt',$(obj).parents("ul")).slideToggle();
   }
-  $(function(){
-    $('.act-ui').click(function(){
-      $(this).parents('.table').siblings('.mutual').slideToggle();
-      return false;
-    })
-  })
+//  $(function(){
+//    $('.act-ui').click(function(){
+//      $(this).parents('.table').siblings('.mutual').slideToggle();
+//      return false;
+//    })
+//  })
 </script>
-<!--content-->
-<!-- //End--footer-->
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
-<!--<script src="../shop2015/js/system.js"></script>-->
-<script src="<c:url value="/scripts/js/myorder.js"/>"></script>
 </body>
 </html>

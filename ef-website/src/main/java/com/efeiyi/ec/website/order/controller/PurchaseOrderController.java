@@ -119,6 +119,9 @@ public class PurchaseOrderController extends BaseController {
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
         String amount = request.getParameter("amount");
+        if (amount==null){
+            amount = "1";
+        }
         cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");

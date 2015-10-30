@@ -9,6 +9,7 @@ import com.efeiyi.ec.system.organization.service.UserManager;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.does.model.PageInfo;
 import com.ming800.core.taglib.PageEntity;
+import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +33,9 @@ import java.util.List;
 @Transactional
 public class LogManagerImpl implements LogManager {
 
+     private void  saveInfoLog(JoinPoint point){
 
+     }
 
 
 }

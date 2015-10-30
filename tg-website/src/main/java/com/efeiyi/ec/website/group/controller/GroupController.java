@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -39,13 +38,17 @@ public class GroupController {
         return "/illustration";
     }
 
+    //购买
     @RequestMapping(value = "/groupBuy")
     public  String groupBuy(HttpServletRequest request,Model model) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
         String groupProductId = request.getParameter("groupProductId");
-        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
+        String memberId = request.getParameter("memberId");
+        String groupId = request.getParameter("groupId");
+       // GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
         String amount = "1";
-        return "";
+        String url = "https://www.baidu.com";
+        return "redirect:" + url;
 
     }
 
@@ -78,7 +81,8 @@ public class GroupController {
                     baseManager.saveOrUpdate(Member.class.getName(),member);
 
                     model.addAttribute("groupId",groupbuy.getId());
-                    return "redirect:/group/joinGroup";
+                    String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
+                    return "redirect:/group/joinGroup"+url;
                 }else {
                     Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
                     Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
@@ -95,7 +99,8 @@ public class GroupController {
                     baseManager.saveOrUpdate(Member.class.getName(),member);
 
                     model.addAttribute("groupId",group.getId());
-                    return "redirect:/group/joinGroup";
+                    String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
+                    return "redirect:/group/joinGroup?groupId="+url;
                 }
 
 
@@ -110,14 +115,6 @@ public class GroupController {
 
     }
 
-
-    /*@RequestMapping(value = "/groupBuy")
-    public String groupBuy(HttpServletRequest request,Model model) throws Exception{
-        String groupProductId = request.getParameter("groupProductId");
-        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
-        String productModelId = groupProduct.getProductModel().getId();
-        return "redirect:www2.efeiyi.com/easyBuy/"+productModelId+"?amount=1";
-    }*/
 
     @RequestMapping(value = "/listGroup")
     public String listGroup(HttpServletRequest request, Model model) throws Exception{
@@ -151,6 +148,7 @@ public class GroupController {
 
         MyUser user = AuthorizationUtil.getMyUser();
         String groupId = request.getParameter("groupId");
+        String memberId = request.getParameter("memberId");
         Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
         int memberAmount = group.getGroupProduct().getMemberAmount();
         int a = (int)((float)group.getMemberList().size()/memberAmount);
@@ -167,10 +165,12 @@ public class GroupController {
             }
         }
         //设置参团与否参数
+        String url = "";
         if (flag){
             model.addAttribute("flag","1");//已参团
         }else {
             model.addAttribute("flag","0");//未参团
+            url = "?groupProductId="+group.getGroupProduct().getId()+"&groupId="+groupId+"&memberId="+memberId;
         }
 
         //获取团剩余时间
@@ -180,84 +180,14 @@ public class GroupController {
         calendar.setTime(createTime);
         calendar.add(Calendar.DATE,limintDay);
         Date endTime = calendar.getTime();
-        /*Date dateNow = new Date();
 
-        long result = (df.parse(df.format(endTime)).getTime() - df.parse(df.format(dateNow)).getTime())/1000;
-        if(result>0){
-            int hour = (int)result/3600;
-            int min = (int)(result%3600)/60;
-            int ss = (int)((result%3600)%60);
-            String h = null;
-            String m = null;
-            String s = null;
-            if(hour<10){
-                h = "0"+hour;
-            }else {
-                h = String.valueOf(hour);
-            }
-            if(min<10){
-                m = "0"+min;
-            }else {
-                m = String.valueOf(min);
-            }
-            if(ss<10){
-                s = "0"+ss;
-            }else {
-                s = String.valueOf(ss);
-            }
-            String data = h+":"+m+":"+s;
-            return data;
-        }else {
-            return "00:00:00";
-        }*/
+
         model.addAttribute("endTime",df.parse(df.format(endTime)).getTime());
         model.addAttribute("group",group);
+        model.addAttribute("url",url);
+
         return "/personGroup/shareGroup";
     }
 
-/*    @RequestMapping(value = "/restTime")
-    @ResponseBody
-    public String restTime(HttpServletRequest request ,Model model) throws Exception{
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        String groupId = request.getParameter("groupId");
-        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-        Date createTime = group.getCreateDateTime();
-        int limintDay = group.getGroupProduct().getGroupPurchaseTime();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(createTime);
-        calendar.add(Calendar.DATE,limintDay);
-        Date endTime = calendar.getTime();
-        Date dateNow = new Date();
-
-        long result = (df.parse(df.format(endTime)).getTime() - df.parse(df.format(dateNow)).getTime())/1000;
-        if(result>0){
-            int hour = (int)result/3600;
-            int min = (int)(result%3600)/60;
-            int ss = (int)((result%3600)%60);
-            String h = null;
-            String m = null;
-            String s = null;
-            if(hour<10){
-                h = "0"+hour;
-            }else {
-                h = String.valueOf(hour);
-            }
-            if(min<10){
-                m = "0"+min;
-            }else {
-                m = String.valueOf(min);
-            }
-            if(ss<10){
-                s = "0"+ss;
-            }else {
-                s = String.valueOf(ss);
-            }
-            String data = h+":"+m+":"+s;
-            return data;
-        }else {
-            return "00:00:00";
-        }
-
-    }*/
 }

@@ -29,7 +29,7 @@
               <div class="mt-null">
                 <p>目前还没有收藏商品，挑几件您喜欢的商品吧！</p>
                 <ul>
-                  <li class="efeiyi"><a href="http://www2.efeiyi.com/">e飞蚁首页</a></li>
+                  <li class="efeiyi"><a href="http://www.efeiyi.com/">e飞蚁首页</a></li>
                 </ul>
               </div>
             </td>
