@@ -44,10 +44,33 @@
         <li>
             <p>${member.group.groupProduct.productModel.name}</p>
             <p>${member.group.createDateTime}</p>
-            <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
-            <p>团长:东方不败东方不败东方不败</p>
-
-            <span>进行中</span>
+            <c:if test="${member.group.status=='1'}">
+                <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
+            </c:if>
+            <c:if test="${member.group.status=='3'}">
+                <p>组团成功</p>
+            </c:if>
+            <c:if test="${member.group.status=='5'}">
+                <p>组团失败</p>
+            </c:if>
+            <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
+                <c:if test="${member.level==0}">
+                    <c:set var="commander">
+                        ${member.user.name}
+                    </c:set>
+                </c:if>
+            </c:forEach>
+            <p>${commander}</p>
+            <c:if test="${member.group.status=='1'}">
+               <span>
+                进行中
+               </span>
+            </c:if>
+            <c:if test="${member.group.status!='1'}">
+               <span>
+                拼团结束
+               </span>
+            </c:if>
         </li>
     </c:forEach>
 </ul>
