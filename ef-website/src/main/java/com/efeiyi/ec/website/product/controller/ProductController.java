@@ -206,7 +206,7 @@ public class ProductController {
      * @return
      * @throws Exception
      */
-    @RequestMapping({"productModel/{productModelId}"})
+    @RequestMapping({"/productModel/{productModelId}"})
     public String productDetalis(@PathVariable String productModelId, HttpServletRequest request, Model model) throws Exception {
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         Product product = productModel.getProduct();
