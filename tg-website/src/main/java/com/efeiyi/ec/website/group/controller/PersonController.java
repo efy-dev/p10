@@ -36,10 +36,13 @@ public class PersonController {
 //        List<Object> myCreateProductList = baseManager.listObject(xQuery);
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> myCreateProductList = baseManager.listObject(xQuery);
-        for(Object obj : myCreateProductList){
-            if("0".equals(((Member)obj).getLevel())==false){
-                myCreateProductList.remove(obj);
-            }
+        if(myCreateProductList!=null&&myCreateProductList.size()>0){
+           for(int i=0;i<myCreateProductList.size();i++){
+               Member member = (Member)myCreateProductList.get(i);
+               if("0".equals(member.getLevel())==false){
+                   myCreateProductList.remove(member);
+               }
+           }
         }
         model.addAttribute("myCreateProductList", myCreateProductList);
         return "/personGroup/myCreateGroup";
@@ -103,8 +106,6 @@ public class PersonController {
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
         MyUser currentUser = AuthorizationUtil.getMyUser();
-
-
         Boolean flag = true;
         if (currentUser.getId() != null) {
             return "/personGroup/personGroupInfo";
