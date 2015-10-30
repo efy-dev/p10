@@ -13,15 +13,15 @@
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="<c:url value="/resources/assets/i/favicon.png"/>">
+    <link rel="icon" type="image/png" href="/resources/assets/i/favicon.png">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
+    <link rel="icon" sizes="192x192" href="/resources/assets/i/app-icon72x72@2x.png">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="<c:url value="/resources/assets/i/app-icon72x72@2x.png"/>">
+    <link rel="apple-touch-icon-precomposed" href="/resources/assets/i/app-icon72x72@2x.png">
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
@@ -41,31 +41,37 @@
 <!--//End--header-->
 <ul class="offered ae">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
-      <>
-        <p>${member.group.groupProduct.productModel.name}</p>
-        <p>${member.group.createDateTime}</p>
-        <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
-          <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
-         <c:if test="${member.level==0}">
-             <c:set var="commander">
-               ${member.user.name}
-             </c:set>
-         </c:if>
-          </c:forEach>
-          <p>团长:${commander}</p>
-
-            <c:if test="${member.status==1}">
+        <li>
+            <p>${member.group.groupProduct.productModel.name}</p>
+            <p>${member.group.createDateTime}</p>
+            <c:if test="${member.group.status=='1'}">
+                <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
+            </c:if>
+            <c:if test="${member.group.status=='3'}">
+                <p>组团成功</p>
+            </c:if>
+            <c:if test="${member.group.status=='5'}">
+                <p>组团失败</p>
+            </c:if>
+            <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
+                <c:if test="${member.level==0}">
+                    <c:set var="commander">
+                        ${member.user.name}
+                    </c:set>
+                </c:if>
+            </c:forEach>
+            <p>${commander}</p>
+            <c:if test="${member.group.status=='1'}">
                <span>
                 进行中
                </span>
             </c:if>
-            <c:if test="${member.status!=1}">
-                <span>
+            <c:if test="${member.group.status!='1'}">
+               <span>
                 拼团结束
-                </span>
+               </span>
             </c:if>
-
-      </li>
+        </li>
     </c:forEach>
 </ul>
 <!--//End--footer-->
