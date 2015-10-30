@@ -24,7 +24,7 @@
 
     <!-- 定义切面 -->
     <aop:config>
-        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))"/>
+        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.ming800.core.base..*.delete*(..))||execution(* com.ming800.core.base..*.remove*(..))||execution(* com.ming800.core.base..*.save*(..))"/>
         <!--<aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.efeiyi.ec.website.organization.service.*.*(..))"/>-->
     </aop:config>
 

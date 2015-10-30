@@ -48,6 +48,7 @@
                     <th class="table-title">广告名称</th>
                     <th class="table-title">广告链接</th>
                     <th class="table-title">广告图片</th>
+                    <th class="table-title">价格</th>
                     <th class="table-title">排序</th>
 
                 </tr>
@@ -56,7 +57,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="ads">
                     <tr id="${ads.id}">
-                        <td width="20%">
+                        <td width="16%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
 
@@ -70,15 +71,18 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${ads.name}</td>
-                        <td class="am-hide-sm-only" width="20%">
+                        <td class="am-hide-sm-only" width="16%">${ads.name}</td>
+                        <td class="am-hide-sm-only" width="16%">
                            <a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">
+                        <td class="am-hide-sm-only" width="16%">
                             <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${ads.img}@!product-model"/>"
                                  alt=""/>
                         </td>
-                        <td class="am-hide-sm-only" width="20%">${ads.adsOrder}</td>
+                        <td class="am-hide-sm-only" width="16%">
+                           ${ads.price}
+                        </td>
+                        <td class="am-hide-sm-only" width="16%">${ads.adsOrder}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

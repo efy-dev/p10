@@ -155,7 +155,7 @@
         <ul class="gy-grounp ae" id="hot">
 
         </ul>
-        <div class="f-r-gd ae"><a href="#" onclick="getMoreHotProject()"><span>更多工艺</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="javascript:void(0);" onclick="getMoreHotProject()"><span>更多工艺</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>新加入工艺</span></div>
@@ -305,7 +305,7 @@
     var flag = false;
     $.ajax({
       type:"get",//设置get请求方式
-      url:url+StartNum2,//设置请求的脚本地址
+      url:url+StartNum3,//设置请求的脚本地址
       data:"",//设置请求的数据
       async:true,
       dataType:"json",//设置请求返回的数据格式
@@ -342,7 +342,7 @@
           flag = true;
         }
 
-        StartNum2=StartNum2+1;
+        StartNum3=StartNum3+1;
       },
       error:function(){
 
@@ -525,6 +525,7 @@
   var getStartNum = 0;
   var StartNum = 1;
   var StartNum2 = 1;
+  var StartNum3 = 1;
   var ajaxkey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
   var ajaxkey2 = true;
   var isAttention = false;

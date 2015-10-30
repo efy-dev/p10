@@ -96,7 +96,7 @@ public class CouponController {
                                 }
                             }
                             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPriceLimit()) {
                                 isUseful = true;
                             } else {
                                 isUseful = false;
@@ -118,7 +118,7 @@ public class CouponController {
                                 }
                             }
                             totalPrice = totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
-                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPrice()) {
+                            if (Float.parseFloat(totalPrice.toString()) >= coupon.getCouponBatch().getPriceLimit()) {
                                 isUseful = true;
                             } else {
                                 isUseful = false;

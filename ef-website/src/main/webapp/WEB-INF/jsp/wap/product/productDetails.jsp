@@ -12,7 +12,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>商品详情</title>
+    <title>【“${product.name} ${productModel.name}”】“${product.subName}” -e飞蚁</title>
 </head>
 <body>
 
@@ -105,6 +105,7 @@
                         <div class="bd dis-title">【顾客评论】</div>
                         <ul class="ul-list">
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
                                 <li class="item">
                                     <div class="user-info">
                                         <img id="personPhoto${rec.index}" class="user-favor" src="/scripts/upload/yonghm.jpg">
@@ -122,6 +123,7 @@
                                         </p>
                                     </div>
                                 </li>
+                                </c:if>
                             </c:forEach>
                         </ul>
                         </ul>

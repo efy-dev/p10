@@ -251,4 +251,20 @@ public class CouponBatchController extends BaseController {
         return consumersList.size();
     }
 
+    @RequestMapping("/removeCouponBatch.do")
+    @ResponseBody
+    public String removeCouponBatch(HttpServletRequest request) throws Exception {
+        String couponBatchId = request.getParameter("id");
+
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
+
+        couponBatch.setStatus("0");
+        baseManager.saveOrUpdate(CouponBatch.class.getName(),couponBatch);
+        List<Coupon> list = couponBatch.getCouponList();
+        for(Coupon coupon : list){
+            coupon.setStatus("0");
+            baseManager.saveOrUpdate(Coupon.class.getName(),coupon);
+        }
+        return couponBatchId;
+    }
 }

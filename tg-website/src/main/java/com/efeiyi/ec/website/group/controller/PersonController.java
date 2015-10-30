@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.group.controller;
 
 import com.efeiyi.ec.group.model.Group;
+import com.efeiyi.ec.group.model.Member;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -31,12 +32,19 @@ public class PersonController {
      */
     @RequestMapping(value = "/groupBuyStatus.do")
     public String groupBuyStatus(HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("listCreateProduct_default",request);
-        xQuery.put("manUser_id","ibxg38sk00000ste");
+//        XQuery xQuery = new XQuery("listCreateProduct_default",request);
+//        List<Object> myCreateProductList = baseManager.listObject(xQuery);
+        XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> myCreateProductList = baseManager.listObject(xQuery);
+        for(Object obj : myCreateProductList){
+            if("0".equals(((Member)obj).getLevel())==false){
+                myCreateProductList.remove(obj);
+            }
+        }
         model.addAttribute("myCreateProductList", myCreateProductList);
         return "/personGroup/myCreateGroup";
     }
+
 
     /**
      *  我的参团
@@ -48,6 +56,11 @@ public class PersonController {
     public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
+        for(Object obj : groupJoinList){
+            if("0".equals(((Member)obj).getLevel())){
+                groupJoinList.remove(obj);
+            }
+        }
         model.addAttribute("groupJoinList", groupJoinList);
         return "/personGroup/myJoinGroup";
     }
@@ -90,6 +103,8 @@ public class PersonController {
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
         MyUser currentUser = AuthorizationUtil.getMyUser();
+
+
         Boolean flag = true;
         if (currentUser.getId() != null) {
             return "/personGroup/personGroupInfo";
