@@ -12,9 +12,11 @@ $(function(){
     //
     (function(){
         $('.my-order .extra-r>a').click(function(){
+            $('.header,.footer').css('z-index','-1');
             $(this).siblings('.active-pop').show();
             $('.my-order .clase, .my-order .sh-bg').click(function(){
                 $(this).parents('.active-pop').hide();
+                $('.header,.footer').css('z-index','');
             })
             return false;
         })
@@ -28,13 +30,13 @@ $(function(){
         })
     })();
     //
-    $('.my-order .extra-r>a').click(function(){
+    /*$('.my-order .extra-r>a').click(function(){
         $(this).siblings('.active-pop').show();
         $('.my-order .clase, .my-order .sh-bg').click(function(){
             $(this).parents('.active-pop').hide();
         })
         return false;
-    });
+    });*/
     //
     $('#act-q').click(function(){
         $(this).siblings('.list-express').slideToggle();
@@ -54,7 +56,6 @@ $(function(){
     })
     //dingdan zuobiandianjijs
     $('.my-order .order-nav .layout-li li').click(function(){
-        alert('asdsasad')
         $(this).addClass('liul').siblings().removeClass('liul');
     })
     //huadongxianshi
@@ -78,6 +79,14 @@ $(function(){
     $('.help-order .page .left dt').click(function(){
         $(this).toggleClass('active');
         $(this).siblings('dd').slideToggle('fast');
+    })
+    //ÎÒµÄ¿¨È¯
+    $('.my-kj .am-tabs-nav .ul-list li.items').click(function(){
+        var amTabPanel=$(this).parents('.ul-list').siblings('.am-tabs-bd');
+        var $index=$(this).index();
+        $(this).addClass('active').siblings('.items').removeClass('active');
+        amTabPanel.find('.am-tab-panel').eq($index).show().siblings('.am-tab-panel').hide();
+        return false
     })
 
 })

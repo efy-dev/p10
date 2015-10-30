@@ -129,7 +129,7 @@ public class PurchaseOrderPaymentController {
     @RequestMapping({"/pay/weixin/{orderId}"})
     public String wxPay(HttpServletRequest request, @PathVariable String orderId) throws Exception {
         //@TODO 添加订单数据部分
-        String redirect_uri = "http://www2.efeiyi.com/order/pay/wxParam/" + orderId;
+        String redirect_uri = "http://www.efeiyi.com/order/pay/wxParam/" + orderId;
 //        redirect_uri = redirect_uri + "?orderId=" + orderId;
         //scope 参数视各自需求而定，这里用scope=snsapi_base 不弹出授权页面直接授权目的只获取统一支付接口的openid
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
