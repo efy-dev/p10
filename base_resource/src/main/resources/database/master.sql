@@ -633,6 +633,18 @@ DROP COLUMN `remark`;
 ALTER TABLE `master_news`
 ADD COLUMN `remark`  varchar(50) NULL AFTER `type`;
 
+CREATE TABLE `base_operation_record` (
+  `id`  char(16) NOT NULL ,
+  `username`  varchar(255) NULL ,
+  `target_name`  varchar(255) NULL ,
+  `create_time`  datetime NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+ALTER TABLE `base_operation_record`
+ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
+
+
 
 
 

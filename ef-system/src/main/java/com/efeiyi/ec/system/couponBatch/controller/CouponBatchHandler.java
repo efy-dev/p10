@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Administrator on 2015/10/27.
@@ -25,9 +26,15 @@ public class CouponBatchHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
         String serial = autoSerialManager.nextSerial("systemAutoSerial");
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String date1 = sdf.format(date);
+//        Date date = new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//        String date1 = sdf.format(date);
+
+        StringBuffer randomValidateCode = new StringBuffer();
+        for(int j = 0;j <8;j++){
+            Random random = new Random();
+            randomValidateCode.append(random.nextInt(10));
+        }
 
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -74,7 +81,7 @@ public class CouponBatchHandler implements DoHandler {
         couponBatch.setStartDate(sdf1.parse(request.getParameter("startDate")));
 
         couponBatch.setType(request.getParameter("type"));
-        couponBatch.setUniqueKey(date1+serial);
+        couponBatch.setUniqueKey(randomValidateCode+serial);
 
         modelMap.put("object",couponBatch);
 

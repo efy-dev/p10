@@ -1,12 +1,17 @@
-package com.ming800.core.p;
+package com.efeiyi.ec.system.log;
 
+import com.efeiyi.ec.system.log.service.LogManager;
 import com.ming800.core.does.model.Do;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.logicalcobwebs.logging.Log;
 import org.logicalcobwebs.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.text.ParseException;
 
 /**
  * Created by Administrator on 2015/10/30.
@@ -14,9 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class ServiceAspect {
-    private final static Log log = LogFactory.getLog(ServiceAspect.class);
 
-    @Pointcut("execution(* com.ming800.core.base..*.delete*(..))||execution(* com.ming800.core.base..*.remove*(..))||execution(* com.ming800.core.base..*.save*(..))")
+
+    @Autowired
+    private LogManager logManager;
+
+    @Pointcut("execution(* com.ming800.core.base..*.delete*(..))||execution(* com.ming800.core.base..*.remove*(..))||execution(* com.ming800.core.base..*.saveOrUpdate*(..))")
     public  void  aspect(){}
     /*
 	 * 配置前置通知,使用在方法aspect()上注册的切入点
@@ -30,24 +38,12 @@ public class ServiceAspect {
 //    }
 
     //配置后置通知,使用在方法aspect()上注册的切入点
-    @After("aspect()")
-    public void after(JoinPoint joinPoint){
-
-        for (int i = 0;i<joinPoint.getArgs().length;i++) {
-            String t = joinPoint.getArgs()[i].toString();
-            if (t != null) {
-                if (t.indexOf("Do@") != -1) {
-                    Do tempDo = (Do) joinPoint.getArgs()[i];
-                    System.out.println(tempDo.getName());
-                    System.out.println(tempDo.getXentity().getModel());
-                }
-                System.out.println(joinPoint.getArgs()[i]);
-            }
-        }
-        if(log.isInfoEnabled()){
-            log.info("after " + joinPoint);
-        }
-    }
+//    @After("aspect()")
+//    public void after(JoinPoint joinPoint){
+//        if(log.isInfoEnabled()){
+//            log.info("after " + joinPoint);
+//        }
+//    }
 
 //    //配置环绕通知,使用在方法aspect()上注册的切入点
 //    @Around("aspect()")
@@ -70,9 +66,34 @@ public class ServiceAspect {
     //配置后置返回通知,使用在方法aspect()上注册的切入点
     @AfterReturning("aspect()")
     public void afterReturn(JoinPoint joinPoint){
-        if(log.isInfoEnabled()){
-            log.info("afterReturn " + joinPoint);
-        }
+        String operation  =joinPoint.getSignature().getName();
+
+            String t = joinPoint.getArgs()[0].toString();
+            System.out.println(t);
+            String targetName = t;
+            if (t != null) {
+                if (t.indexOf("Do@") != -1) {
+                    Do tempDo = (Do) joinPoint.getArgs()[0];
+                    targetName = tempDo.getXentity().getModel();
+                    System.out.println(tempDo.getName());
+                    String m = tempDo.getXentity().getModel();
+                    System.out.println(m.substring(t.lastIndexOf(".")+1,m.indexOf("@")));
+                }else {
+                    if(t.indexOf("@")==-1){
+                        targetName = t.substring(t.lastIndexOf(".")+1);
+                    }else {
+                        targetName = t.substring(t.lastIndexOf(".") + 1, t.indexOf("@"));
+                    }
+                }
+                try {
+                    logManager.saveLog(targetName,operation);
+                }catch (ParseException pe){
+                      pe.printStackTrace();
+                }
+
+            }
+
+
     }
 
 //    //配置抛出异常后通知,使用在方法aspect()上注册的切入点
