@@ -94,8 +94,7 @@
                                     <a href="javascript:void(0)" class="cart-btn-right"
                                        onclick="subtractProduct('${product.id}')">-</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
-                                           value="${product.amount}" onblur="changeProduct('${product.id}',this)"
-                                           onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)">
+                                           value="${product.amount}" disabled>
                                         <%--<c:if test="${product.amount>1}">--%>
                                     <a href="javascript:void(0)" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                         <%--</c:if>--%>
