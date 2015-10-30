@@ -16,7 +16,7 @@ public class Group {
     private String id;
     private GroupProduct groupProduct;//团购商品
     private List<Member> memberList;
-    private String status;
+    private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
     private Date createDateTime;
     private MyUser manUser;
 
