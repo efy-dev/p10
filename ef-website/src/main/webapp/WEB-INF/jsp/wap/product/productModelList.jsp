@@ -17,8 +17,18 @@
     <div class="bd list-class">
         <ul class="ul-list-nav">
             <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="人气">人气</a></li>
-            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价格">价格</a></li>
-            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="新品">新品</a></li>
+            <li>
+                <c:if test="${str==null}">
+                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>
+                </c:if>
+                <c:if test="${str=='desc'}">
+                    <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价格</a>
+                </c:if>
+                <c:if test="${str=='asc'}">
+                    <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价格</a>
+                </c:if>
+            </li>
+            <li><a href="<c:url value="/product/list/${project.id}?sort=desc:product.createDateTime&pageEntity.index=1"/>" title="新品">新品</a></li>
         </ul>
         <%--<div class="list-ad1"><a><img src="http://pro.efeiyi.com/${project.picture_wap_url}@!project-wap-view" alt=""/></a></div>--%>
          <c:if test="${productModelList.size()>0}">
