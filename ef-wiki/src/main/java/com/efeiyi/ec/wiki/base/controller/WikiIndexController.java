@@ -95,7 +95,7 @@ public class WikiIndexController extends WikibaseController {
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
         //为了测试方便，骗过CAS
 
-        MyUser userDetails=null;
+       /* MyUser userDetails=null;
 
         try{
              userDetails = (MyUser)userManager.loadUserByUsername("admin");
@@ -105,7 +105,7 @@ public class WikiIndexController extends WikibaseController {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);*/
        //欺诈结束
 
 
