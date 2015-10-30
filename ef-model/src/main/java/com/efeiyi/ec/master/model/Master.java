@@ -49,7 +49,7 @@ public class Master implements Serializable {
     private String masterSpeech;
     private Long fsAmount;
     private String followStatus;
-    private  String remark;
+
     @Column(name = "master_speech")
     public String getMasterSpeech() {
         return masterSpeech;
@@ -278,14 +278,7 @@ public class Master implements Serializable {
         this.masterRecommendedList = masterRecommendedList;
     }
 
-    @Column(name = "remark")
-    public String getRemark() {
-        return remark;
-    }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 
 
 }

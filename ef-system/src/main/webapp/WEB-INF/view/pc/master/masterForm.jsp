@@ -139,14 +139,7 @@
                 </c:if>
             </div>
 
-            <div class="am-form-group">
-                <label for="remark" class="am-u-sm-3 am-form-label">摘要</label>
 
-                <div class="am-u-sm-9" style="text-align: left;">
-                    <textarea class="" cols="6" name="remark" rows="2" id="remark" placeholder="输入短简介,限50字以内">${object.remark}</textarea>
-                    <small>输入短简介,限50字以内</small>
-                </div>
-            </div>
             <div class="am-form-group">
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>
 

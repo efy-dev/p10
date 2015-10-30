@@ -204,10 +204,18 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .itemInfo .preview .slider-img li { margin-bottom: 6px; cursor: pointer }
 .product-intro .itemInfo .preview .slider-img li img { border: 2px #ccc solid }
 .product-intro .itemInfo .preview .slider-main { width: 800px; height: 643px; float: left; margin: 0 30px; overflow: hidden }
-.product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }
-.product-intro .itemInfo .preview .slider-main li .zoom-section { width: 800px; position: absolute; top: 0; left: 0; overflow: hidden; }
+
+/*--Start//详情页放大镜样式--*/
+/*.product-intro .itemInfo .preview .slider-main li { width: 100%; height: 643px; background: #ebf0ff; float: left; text-align: center; position: relative }*/
+/*.product-intro .itemInfo .preview .slider-main li .zoom-section { width: 800px; position: absolute; top: 0; left: 0; overflow: hidden; }*/
+/*.product-intro .itemInfo .preview .slider-main li .cloud-zoom { height: 643px; left: 0; text-align: center; }*/
+/*.product-intro .itemInfo .preview .slider-main li img { width: auto; height: 643px; position: absolute; top: 0; left: 50%; }*/
 .product-intro .itemInfo .preview .slider-main li {width:100%;height:643px;background:#ebf0ff;float:left;text-align:center}
 .product-intro .itemInfo .preview .slider-main li img {width:auto;height:643px}
+/*--End//详情页放大镜样式--*/
+
+
+
 .product-intro .itemInfo .preview .collect { width: 36px; position: absolute; top: 16px; right: 40px; z-index: 99999 }
 .product-intro .itemInfo .preview .icon-big-glass { width: 38px; height: 38px; position: absolute; bottom: 10px; right: 36px; cursor: pointer; }
 .product-intro .itemInfo .preview .icon-big-glass .icon { background-position: -98px -143px; width: 38px; height: 38px; float: left; }
@@ -306,7 +314,7 @@ a:hover { color: #f00; text-decoration: underline }
 .product-intro .detail { padding-bottom: 70px; position: relative }
 .product-intro .detail .title { text-align: center; padding: 40px 0 }
 .product-intro .detail .title h3 { width: 20px; line-height: 34px; font-style: italic; display: inline-block; font-size: 24px; font-weight: bold }
-.product-intro .detail .part { width: 1000px; padding: 0 100px 70px 100px; font-size: 12px; color: #666; float: left; box-sizing: content-box; border-bottom: 1px #b2b2b2 solid }
+.product-intro .detail .part { width: 1000px;min-width:1000px;padding: 0 100px 70px 100px; font-size: 12px; color: #666; float: left; box-sizing: content-box; border-bottom: 1px #b2b2b2 solid }
 .product-intro .detail .part p, .product-intro .detail .part li, .product-intro .detail .part h4, .product-intro .detail .part span, .product-intro .detail .part strong { }
 .product-intro .detail .part h4 { width: 100%; float: left; margin-bottom: 36px; font-weight: normal }
 .product-intro .detail .part li { width: 100%; line-height: 24px; float: left }
@@ -438,7 +446,7 @@ a:hover { color: #f00; text-decoration: underline }
 .thickframe .thickcon .btnt .btn-img { width: 322px; height: 34px; line-heiht: 34px; background: #e4393c; color: #FFF; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; font-family: "微软雅黑"; font-size: 16px; font-weight: 800 }
 .thickframe .thickclose:link { display: block; position: absolute; z-index: 100000; top: 7px; right: 12px; overflow: hidden; width: 15px; height: 15px; background-position: -276px -50px; font-size: 0; line-height: 100px }
 /*--//End--login-form--*/
-.footer { min-width: 1200px; border-top: 3px #000 solid; font-size: 12px }
+.footer { min-width: 1200px; border-top: 3px #000 solid; font-size: 12px;background:#fff}
 .footer .icon { background: url(../images/footer-icon.png) no-repeat; display: inline-block }
 .footer .service { padding: 20px 0; text-align: center; position: relative; }
 .footer .service .phone { background-position: 0 0; width: 225px; height: 58px; position: relative; top: 5px }
@@ -628,7 +636,7 @@ a, .ul-item li, .ul-item li img, .imgfilter { -webkit-transition: all 0.4s; -moz
 .section5 .part2 .sec-items li .price { font-size: 12px; height: 20px }
 .section5 .part2 .related-collect { background-position: -49px -124px; width: 49px; height: 68px; position: absolute; top: 50%; margin-top: -120px; left: 50px }
 /*--//End--*/
-.scroll-bar { position: fixed; bottom: 252px; right: 0; text-align: center;z-index:20;}
+.scroll-bar { position: fixed; bottom:184px; right: 0; text-align: center;z-index:20;}
 .scroll-bar .btn { width: 33px; height: 53px; line-height: 37px; float: left; font-size: 12px; border-radius: 5px; text-decoration: none; cursor: pointer }
 .scroll-bar .btn .icon { width: 23px; display: inline-block; position: relative }
 .scroll-bar-top { width: 100%; float: left; margin-bottom: 10px; display: none }

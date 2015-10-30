@@ -10,7 +10,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
+    <meta name=“keywords” content=“e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
 </head>
 <body>
 <div class="hd">
