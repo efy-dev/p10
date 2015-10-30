@@ -69,21 +69,16 @@ public class ServiceAspect {
         String operation  =joinPoint.getSignature().getName();
 
             String t = joinPoint.getArgs()[0].toString();
-            System.out.println(t);
             String targetName = t;
             if (t != null) {
                 if (t.indexOf("Do@") != -1) {
                     Do tempDo = (Do) joinPoint.getArgs()[0];
-                    targetName = tempDo.getXentity().getModel();
-                    System.out.println(tempDo.getName());
-                    String m = tempDo.getXentity().getModel();
-                    System.out.println(m.substring(t.lastIndexOf(".")+1,m.indexOf("@")));
-                }else {
+                    t = tempDo.getXentity().getModel();
+                }
                     if(t.indexOf("@")==-1){
                         targetName = t.substring(t.lastIndexOf(".")+1);
                     }else {
                         targetName = t.substring(t.lastIndexOf(".") + 1, t.indexOf("@"));
-                    }
                 }
                 try {
                     logManager.saveLog(targetName,operation);
