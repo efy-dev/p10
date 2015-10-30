@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>【“${proName}”】-e飞蚁</title>
+    <title>【${proName}】-e飞蚁</title>
 </head>
 <body>
 <artice class="custom">
