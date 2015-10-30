@@ -35,13 +35,15 @@
                 </c:forEach>
             </ul>
         </c:if>
+
     </div>
-    <div class="page wh">
+    <div class="page bd">
         <ming800:pcPageList bean="${pageEntity}" url="/product/list/${project.id}">
             <ming800:pcPageParam name="sort"
                                  value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
         </ming800:pcPageList>
     </div>
 </artice>
+
 </body>
 </html>
