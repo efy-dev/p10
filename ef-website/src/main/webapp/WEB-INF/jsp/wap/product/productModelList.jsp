@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -34,23 +35,12 @@
                 </c:forEach>
             </ul>
         </c:if>
-
-        <%--<div class="list-pro">--%>
-        <%--<ul class="ul-item">--%>
-        <%--<li>--%>
-        <%--<a href="<c:url value="/product/${productModel.id}"/>" target="_blank" title="">--%>
-        <%--<img class="imgfilter"--%>
-        <%--src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>--%>
-
-        <%--<p class="wh name">${productModel.name}</p>--%>
-
-        <%--<p class="wh price">￥${productModel.price}</p>--%>
-        <%--</a>--%>
-        <%--</li>--%>
-        <%--</ul>--%>
-        <%--<!-- //End-->--%>
-        <%--</div>--%>
-
+    </div>
+    <div class="page wh">
+        <ming800:pcPageList bean="${pageEntity}" url="/product/list/${project.id}">
+            <ming800:pcPageParam name="sort"
+                                 value='<%=request.getParameter("sort")!=null ? request.getParameter("sort") : ""%>'/>
+        </ming800:pcPageList>
     </div>
 </artice>
 </body>
