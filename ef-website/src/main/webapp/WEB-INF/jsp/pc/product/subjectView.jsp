@@ -9,18 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>【 精选专题 】 -e飞蚁</title>
 </head>
 <body>
 <div class="hd goods-rec">
-    <div class="focus wh">
-        <ul class="slider-main">
-            <li style="display: block;"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400"
-                                             alt=""></li>
-        </ul>
-    </div>
+    <%--<div class="focus wh">--%>
+        <%--<ul class="slider-main">--%>
+            <%--<li style="display: block;"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" width="1280" height="400"--%>
+                                             <%--alt=""></li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
     <!-- //End--focus-->
-    <div class="goods-rec-hd wh">
+    <div class="goods-rec-hd wh" style="padding: 20px 0;">
         ${subject.subjectDescription.content}
         <%--<div class="goods-rec-hd-left wh">--%>
         <%--<div class="title"><i class="icon icon-l"></i><strong>铜的历史</strong><i class="icon icon-r"></i></div>--%>

@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<c:url value='/protection/protection.do?qm=plistLaw_default" title="法规政策'/>">
+                        <a href="<c:url value='/protection/protection.list.do?qm=plistPolicy_default" title="政策法规'/>">
                             <i class="icon icon-3"></i>政策法规</a>
                     </li>
                     <li>

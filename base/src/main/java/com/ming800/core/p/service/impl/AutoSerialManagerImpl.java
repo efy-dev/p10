@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,8 +27,11 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
 
     @Autowired
     private CommonManager commonManager;
-    protected  static Stack<Long> updateSerials = new Stack<Long>();
-    protected static Map<String,Stack> map = new HashMap<String,Stack>();
+    //protected  static Stack<Long> updateSerials = new Stack<Long>();
+    //protected  static List<Long> updateSerials = new ArrayList<Long>();
+    //protected static Map<String,Stack> map = new HashMap<String,Stack>();
+    //protected  static List<Long> updateSerials  = Collections.synchronizedList(new ArrayList());
+    protected static Map<String,Queue> map = new HashMap<String,Queue>();
     String prefix;
  /*   public String nextAutoSerial(String model) {
         //检查表中是否包含该项对应的记录
@@ -55,19 +59,56 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
     }*/
 
     public String nextSerial(String group) throws Exception {
-       if(map.get(group) != null){
+     /*  if(map.get(group) != null){
            updateSerials = map.get(group);
-           if (updateSerials.empty()){
+           //if (updateSerials.empty()){
+           if (updateSerials.isEmpty()){
                makeSerials( group);
            }
        }else{
            makeSerials( group);
        }
 
-       return updateSerials.pop().toString();
+       //return updateSerials.pop().toString();
+        String returnSerial;
+        synchronized(updateSerials){
+             returnSerial = updateSerials.get(0).toString();
+                            updateSerials.remove(0);
+        }
+
+        return returnSerial;*/
+        Queue<Long> updateSerials = map.get(group);
+        if (updateSerials == null) {
+            synchronized (this) {
+                if (map.get(group) == null) {
+                    map.put(group, new ConcurrentLinkedQueue<Long>());
+                    updateSerials = map.get(group);
+                }
+            }
+
+        }
+       if(updateSerials.isEmpty()){
+            synchronized (updateSerials) {
+                if( updateSerials.isEmpty()) {
+                    updateSerials = makeSerials(group);
+                }
+            }
+        }//此代码块可能有些冗余，为了安全起见，先行保留
+
+       synchronized (updateSerials) {
+             if(!updateSerials.isEmpty()) {
+                   return updateSerials.poll().toString();
+                }else{
+                  updateSerials = makeSerials(group);
+                  return updateSerials.poll().toString();
+               }
+           
+        }
+
+        
     }
 
-    private void makeSerials(String group) throws Exception{
+    private  Queue<Long> makeSerials(String group) throws Exception{
         CommonSerial commonSerial = commonManager.getAutoSerial(group);//获取xml配置对象
         //从数据库中获取初始值，如果为空，默认从1开始
         //String queryStr = "select max(serial) from core_p_auto_serial where groupName= :groupName order by serial desc LIMIT 1";
@@ -95,6 +136,7 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
             prefix = commonSerial.getPrefix();
         }
         Long begin= Long.parseLong(makeChar(length));
+        Queue<Long> updateSerials = map.get(group);
         if (autoSerial==null){
             for (int i=1;i<=size;i++){
                 Long serial= begin+i*step;
@@ -104,9 +146,11 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                     autoSerial.setSerial(serial);
                     autoSerialDao.saveOrUpdateObject(autoSerial);
                 }
-                updateSerials.push(serial);
+                //updateSerials.push(serial);
+                //updateSerials.add(serial);
+                updateSerials.offer(serial);
             }
-            map.put(group,updateSerials);
+            //map.put(group,updateSerials);
         }else{
             for (int i=1;i<=size;i++){
                 Long serial = autoSerial.getSerial()+i*step;
@@ -114,11 +158,13 @@ public class AutoSerialManagerImpl implements AutoSerialManager {
                     autoSerial.setSerial(serial);
                     autoSerialDao.saveOrUpdateObject(autoSerial);
                 }
-                updateSerials.push(serial);
+                //updateSerials.push(serial);
+                //updateSerials.add(serial);
+                updateSerials.offer(serial);
             }
-            map.put(group,updateSerials);
+            //map.put(group,updateSerials);
         }
-
+        return updateSerials;
     }
     private String makeChar(int num){
         StringBuilder chars = new StringBuilder();

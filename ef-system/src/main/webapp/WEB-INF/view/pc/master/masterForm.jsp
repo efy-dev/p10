@@ -11,6 +11,7 @@
 <html>
 <head>
     <title></title>
+    <script src="<c:url value="/scripts/PCDSelect.js" />"></script>
     <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>" ></script>
 </head>
 <body>
@@ -75,14 +76,16 @@
                     </div>
                 </div>
             </div>
-            <div class="am-form-group">
-                <label for="provinceName" class="am-u-sm-3 am-form-label">籍贯</label>
-
-                <div class="am-u-sm-9">
-                    <input type="text" id="provinceName" name="provinceName" placeholder="籍贯 / ProvinceName"
-                           value="${object.provinceName}" required>
+            <div id="pcdDiv">
+                <div class="am-form-group">
+                    <label name="province" for="originProvince.id" class="am-u-sm-3 am-form-label">省份 <small></small></label>
+                    <div class="am-u-sm-9">
+                        <select name="originProvince.id" class="addressProvince" id="originProvince.id"></select>
+                    </div>
                 </div>
+
             </div>
+
             <div class="am-form-group">
                 <label for="presentAddress" class="am-u-sm-3 am-form-label">现居地</label>
 
@@ -136,6 +139,7 @@
                 </c:if>
             </div>
 
+
             <div class="am-form-group">
                 <label for="user-intro" class="am-u-sm-3 am-form-label">短简介</label>
 
@@ -153,5 +157,18 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $(function(){
+        $("#pcdDiv").pcdSelect(
+                "<c:url value='/pj/address/provinceList.do'/>",
+                "",
+                "",
+                "${object.originProvince.id}",
+                "",
+                ""
+
+        )
+    });
+</script>
 </body>
 </html>

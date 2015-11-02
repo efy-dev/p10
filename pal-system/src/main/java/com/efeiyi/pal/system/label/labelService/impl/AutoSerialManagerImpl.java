@@ -27,26 +27,35 @@ public class AutoSerialManagerImpl extends com.ming800.core.p.service.impl.AutoS
 
     @Override
     public String nextSerial(String group) throws Exception {
-//        if(map.get(group) != null){
-//            updateSerials = map.get(group);
-//            if (updateSerials.size() == 0){
-//                makeSerials( group);
-//            }
-//        }else{
-//            updateSerials = new ConcurrentLinkedQueue<Long>();
-//            makeSerials( group);
-//        }
+
         Queue<Long> updateSerials = map.get(group);
-        if (updateSerials == null || updateSerials.size() == 0) {
-            synchronized (group) {
+//        Object o = this;
+        if (updateSerials == null) {
+            synchronized (this) {
                 if (map.get(group) == null) {
                     map.put(group, new ConcurrentLinkedQueue<Long>());
+                    updateSerials = map.get(group);
                 }
             }
-            updateSerials = makeSerials(group);
         }
+//        if( updateSerials.isEmpty()) {
+//            synchronized (updateSerials) {
+//                if( updateSerials.isEmpty()) {
+//                    updateSerials = makeSerials(group);
+//                }
+//            }
+//        }
 
-        return updateSerials.poll().toString();
+        //关注下是否会出现重复数据
+        synchronized (updateSerials) {
+            if(!updateSerials.isEmpty()) {
+                return updateSerials.poll().toString();
+            }else{
+                updateSerials = makeSerials(group);
+                return updateSerials.poll().toString();
+            }
+
+        }
     }
 
     private Queue<Long> makeSerials(String group) throws Exception {

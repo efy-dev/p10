@@ -43,6 +43,8 @@ public class ProductController extends WikibaseController {
         productComment.setStatus("1");
         productComment.setContent(content);
         productComment.setAmount(0l);
+        productComment.setModerator(null);
+        productComment.setWatch("0");
         ProductComment fatherProductComment = new ProductComment();
         fatherProductComment.setId("0");
         productComment.setFatherComment(fatherProductComment);
@@ -71,6 +73,9 @@ public class ProductController extends WikibaseController {
         productComment.setStatus("1");
         productComment.setContent(content);
         productComment.setAmount(0l);
+        productComment.setWatch("0");
+        MyUser moderator =((ProductComment)baseManager.getObject(ProductComment.class.getName(),contentId)).getModerator();
+        productComment.setModerator(moderator);
         ProductComment fatherProductComment = new ProductComment();
         fatherProductComment.setId(contentId);
         productComment.setFatherComment(fatherProductComment);

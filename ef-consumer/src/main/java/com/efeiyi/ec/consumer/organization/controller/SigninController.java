@@ -15,11 +15,14 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.organization.model.User;
 import com.efeiyi.ec.purchase.model.Cart;
 
+import com.efeiyi.ec.purchase.model.Coupon;
+import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.PConst;
+import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
@@ -36,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -50,7 +54,7 @@ import java.util.List;
  */
 
 @Controller
-public class   SigninController extends BaseController {
+public class SigninController extends BaseController {
 
     @Autowired
     private BranchManager branchManager;
@@ -60,6 +64,8 @@ public class   SigninController extends BaseController {
     @Autowired
     private SmsCheckManager smsCheckManager;
 
+    @Autowired
+    private AutoSerialManager autoSerialManager;
 
 
     /**
@@ -80,7 +86,6 @@ public class   SigninController extends BaseController {
 
         return false;
     }
-
 
 
     /*
@@ -114,11 +119,11 @@ public class   SigninController extends BaseController {
         request.getSession().setAttribute(cellPhoneNumber, verificationCode);
         String massage = this.smsCheckManager.send(cellPhoneNumber, verificationCode, "1", PConst.TIANYI);
         if (massage != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return true;
+        } else {
+            return false;
         }
+    }
 
 
     /**
@@ -130,46 +135,50 @@ public class   SigninController extends BaseController {
         if (source != null) {
             model.addAttribute("source", source);
         }
-        return "/register" ;
+        return "/register";
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        MyUser bigUser = AuthorizationUtil.getMyUser();
-        Cart cart = null;
-        try {
-            XQuery xQuery = new XQuery("listCart_default", request);
-            List<Object> list = baseManager.listObject(xQuery);
-            if (list != null && list.size() > 0) {
-                cart = (Cart) list.get(0);
+    public void forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String userId = request.getParameter("userId");
+        if (userId != null && !"".equals(userId)) {
+            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
+            XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            for (Object couponBatchTemp : couponBatchList) {
+                Coupon coupon = new Coupon();
+                coupon.setStatus("1");
+                coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                Date currentDate = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                String currentDateStr = simpleDateFormat.format(currentDate);
+                coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                coupon.setConsumer(consumer);
+                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        if (cart == null) {
-            User user = new User();
-            user.setId(bigUser.getId());
-            cart = new Cart();
-            cart.setUser(user);
-            cart.setCreateDatetime(new Date());
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
         }
+        response.sendRedirect(request.getContextPath() + "/sso2.do");
+    }
 
+
+    @RequestMapping("/sso2.do")
+    public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");
     }
 
     @RequestMapping({"/login"})
-    public String login(HttpServletRequest request ,Model model){
+    public String login(HttpServletRequest request, Model model) {
         String error = request.getParameter("error");
-        if (error!=null){
-            model.addAttribute("error","true");
+        if (error != null) {
+            model.addAttribute("error", "true");
         }
         return "/login";
     }
 
     @RequestMapping({"/register"})
-    public String register(HttpServletRequest request ,Model model){
+    public String register(HttpServletRequest request, Model model) {
 //        String error = request.getParameter("error");
 //        if (error!=null){
 //            model.addAttribute("error","true");
@@ -178,25 +187,23 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping({"/forgetPwd"})
-    public String forgetPwd(HttpServletRequest request ){
+    public String forgetPwd(HttpServletRequest request) {
 
         return "/forgetPassword";
 
     }
+
     @RequestMapping({"/setPwd"})
-    public String setPwd(HttpServletRequest request,Model model ) throws Exception {
-       String username=request.getParameter("username");
-        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
-        queryParamMap.put("username",username);
-        String hql="from BigUser s where s.username=:username";
+    public String setPwd(HttpServletRequest request, Model model) throws Exception {
+        String username = request.getParameter("username");
+        LinkedHashMap<String, Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("username", username);
+        String hql = "from BigUser s where s.username=:username";
         BigUser biguser = (BigUser) baseManager.getUniqueObjectByConditions(hql, queryParamMap);
-         model.addAttribute("user",biguser);
+        model.addAttribute("user", biguser);
         return "/setPassword";
 
     }
-
-
-
 
 
 }

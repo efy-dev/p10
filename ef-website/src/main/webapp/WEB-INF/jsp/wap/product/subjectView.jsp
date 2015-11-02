@@ -3,12 +3,16 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>${subject.name}</title>
+  <title>【 精选专题 】 -e飞蚁</title>
+<style>
+  .list-class .ul-list-img p{
+    padding:0;
+  }
+</style>
 <body>
 <artice class="custom">
   <div class="bd list-class">
     <ul class="bd ul-list-img">
-      <li class="bd"><img src="http://pro.efeiyi.com/${subject.pictureUrl}" alt=""/></li>
       <li><p>${subject.subjectDescription.content}</p></li>
     </ul>
     <ul class="bd ul-list">
@@ -24,5 +28,12 @@
     </ul>
   </div>
 </artice>
+<script>
+  $().ready(function(){
+    $("img").each(function(){
+      $(this).css("width","100%");
+    })
+  });
+</script>
 </body>
 </html>

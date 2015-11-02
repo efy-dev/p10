@@ -13,7 +13,7 @@
     <p>
       <a href="<c:url value='/aboutUs.do'/>" title="关于诚品宝">关于诚品宝</a>
       <a href="<c:url value='/userManual.do'/>" title="使用前必读">使用前必读</a>
-      <strong>商家入住热线</strong>
+      <strong>商家入驻热线</strong>
       <em>400-876-8766</em>
     </p>
     <p class="copyright">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</p>

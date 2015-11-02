@@ -13,10 +13,10 @@
     <ul class="am-slides">
       <c:forEach items="${bannerList}" var="banner">
         <li>
-          <a href="${banner.directUrl}" target="_self"><img src="<%=imgBasePath %>${banner.imageUrl}"></a>
+          <a href="${banner.directUrl}" target="_self"><img src="${banner.imageUrl}"></a>
           <div class="am-slider-desc">
             <h3>${banner.title}</h3>
-            <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
+            <%--<p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>--%>
           </div>
         </li>
       </c:forEach>

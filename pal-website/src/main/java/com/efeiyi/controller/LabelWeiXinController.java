@@ -31,10 +31,12 @@ public class LabelWeiXinController extends HttpServlet {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
         String nonce = request.getParameter("nonce");
+        String msgSignature = request.getParameter("msg_signature");
 
         System.out.println("signature:" + signature);
         System.out.println("timestamp:"+timestamp);
         System.out.println("nonce:"+nonce);
+        System.out.println("msgSignature:"+msgSignature);
 //        System.out.println("echostr:" + request.getParameter("echostr"));
 
         if(signature == null || timestamp == null || nonce == null){
@@ -59,4 +61,45 @@ public class LabelWeiXinController extends HttpServlet {
             response.getWriter().write("");
         }
     }
+
+    /**
+     * 微信接入配置时，需要启用以下代码（明文模式）
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+//    @RequestMapping(value = "/contact.do", method = RequestMethod.GET)
+    protected void contact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String echostr = request.getParameter("echostr");
+
+        System.out.println("echostr:" + echostr);
+
+
+        response.getWriter().write(echostr);
+    }
+
+    /**
+     * 微信接入配置时，需要启用以下代码（加密模式）
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+//    @RequestMapping(value = "/contact.do", method = RequestMethod.GET)
+    protected void encyrptContact(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String signature = request.getParameter("signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        String echostr = request.getParameter("echostr");
+
+        System.out.println("signature:" + signature);
+        System.out.println("timestamp:"+timestamp);
+        System.out.println("nonce:"+nonce);
+        System.out.println("echostr:" + echostr);
+
+        response.getWriter().write(echostr);
+
+    }
+
 }

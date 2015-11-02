@@ -8,10 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>新闻详情</title>
+  <title><ming800:status name="group" dataType="document.group" checkedValue="${document.group}" type="normal"/></title>
 </head>
 <body>
 <div class="slide-right">

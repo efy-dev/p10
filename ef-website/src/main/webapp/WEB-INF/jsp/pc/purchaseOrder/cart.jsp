@@ -94,8 +94,7 @@
                                     <a href="javascript:void(0)" class="cart-btn-right"
                                        onclick="subtractProduct('${product.id}')">-</a>
                                     <input id="${product.id}Amount" type="text" class="cart-center"
-                                           value="${product.amount}" onblur="changeProduct('${product.id}',this)"
-                                           onkeydown="if(event.keyCode==13)changeProduct('${product.id}',this)">
+                                           value="${product.amount}" disabled>
                                         <%--<c:if test="${product.amount>1}">--%>
                                     <a href="javascript:void(0)" class="cart-btn-left" onclick="addProduct('${product.id}')">+</a>
                                         <%--</c:if>--%>
@@ -138,14 +137,14 @@
                         <%
                             if (AuthorizationUtil.getMyUser().getId() != null) {
                         %>
-                        <td id="hiddenCoupon"></td>
-                        <td>
-                            <div class="coupon" id="cart-coupon">
-                                <a class="btn-coupon" href="#优惠券" onclick="openCoupon()" target="_blank" title="">优惠券<i class="icon"></i></a>
-                                <ul class="ul-list">
-                                </ul>
-                            </div>
-                        </td>
+                        <%--<td id="hiddenCoupon"></td>--%>
+                        <%--<td>--%>
+                            <%--<div class="coupon" id="cart-coupon">--%>
+                                <%--<a class="btn-coupon" href="#优惠券" onclick="openCoupon()" target="_blank" title="">优惠券<i class="icon"></i></a>--%>
+                                <%--<ul class="ul-list">--%>
+                                <%--</ul>--%>
+                            <%--</div>--%>
+                        <%--</td>--%>
                         <%
                             }
                         %>
@@ -182,7 +181,7 @@
                    /* out += '<li>' + '<img src="http://pro.efeiyi.com/' + data[i]["couponBatch"]["pictureUrl"] + '"  alt=""/>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
                             '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';*/
                     out += '<li>' + '<p>满' + data[i]["couponBatch"]["priceLimit"] +
-                            '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全场通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
+                            '立减' + data[i]["couponBatch"]["price"] + '</p>' + '<p>全网通用</p>' + '<a class="btn-draw" id="' + data[i]["id"] + '|' + data[i]["couponBatch"]["priceLimit"] + '|' + data[i]["couponBatch"]["price"] + '"' + 'onclick="chooseCoupon(this)" title="使用">使用' + '</a>' + '</li>';
                 }
                 $(".ul-list").html(out);
             }
@@ -227,8 +226,8 @@
         var success = function (data) {
             if(data != null){
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#hiddenCoupon").html("");
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
@@ -249,8 +248,8 @@
             if(data != null){
                 console.log(data);
                 $("#" + cartProductId + "Amount").val(data["amount"]);
-                $("#totalPrice").html(data["cart"]["totalPrice"]);
-                $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+                $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+                $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
                 $("#hiddenCoupon").html("");
                 $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
             }else{
@@ -270,8 +269,8 @@
         var success = function (data) {
             console.log(data);
             $("#" + cartProductId + "Amount").val(data["amount"]);
-            $("#totalPrice").html(data["cart"]["totalPrice"]);
-            $("#hiddenTotalPrice").html(data["cart"]["totalPrice"]);
+            $("#totalPrice").html(data["cartCatch"]["totalPrice"]);
+            $("#hiddenTotalPrice").html(data["cartCatch"]["totalPrice"]);
             $("#hiddenCoupon").html("");
             $("#" + cartProductId + "Price").html(data["productModel"]["price"] * data["amount"]);
         }

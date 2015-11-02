@@ -2,6 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- //End--header-->
+<html>
+<head>
+  <title>【${tenant.name}】-e飞蚁</title>
+  <c:if test="${not empty tenantMasterList}">
+    <c:set var="tenantName">
+      ${tenantMasterList.get(0).master.fullName}
+    </c:set>
+  </c:if>
+  <c:if test="${not empty productModelList}">
+    <c:set var="projectName">
+      ${productModelList.get(0).product.project.name}
+    </c:set>
+    <c:set var="projectContent">
+      ${productModelList.get(0).product.project.name}
+    </c:set>
+  </c:if>
+  <meta name="keywords" content="${projectName},${tenantName},${tenant.name}" />
+  <meta name="description" content="${tenant.name},${projectContent}" />
+</head>
 <body>
 <div class="hd shop">
   <div class="shop-header wh">
@@ -19,7 +38,7 @@
       <div class="btndes">
         <%--<a href="" title="收藏店铺">收 藏 店 铺</a>--%>
           <c:if test="${empty tenantMasterList}">
-            <a title="了解传承人" target="_blank">了 解 大 师</a>
+            <%--<a title="了解传承人" target="_blank">了 解 大 师</a>--%>
           </c:if>
           <c:if test="${not empty tenantMasterList}">
           <a href="http://${tenantMasterList.get(0).master.name}.efeiyi.com" title="了解传承人" target="_blank">了 解 大 师</a>

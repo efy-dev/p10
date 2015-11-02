@@ -41,6 +41,8 @@
                 <tr>
                     <th class="table-set">操作</th>
                     <th class="table-title">优惠券编号</th>
+                    <th class="table-title">绑定账号</th>
+                    <th class="table-title">绑定时间</th>
                     <th class="table-title">优惠券批次</th>
                     <th class="table-title">优惠价格</th>
                     <th class="table-title">使用限制价格</th>
@@ -63,7 +65,25 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only">${coupon.serial}</td>
+                        <td class="am-hide-sm-only">
+                            <a href="<c:url value='/basic/xm.do?qm=viewCoupon&id=${coupon.id}'/>">${coupon.serial}
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${coupon.whetherBind == '1'}">
+                                未绑定
+                            </c:if>
+                            <c:if test="${coupon.whetherBind == '2'}">
+                                ${coupon.consumer.username}
+                            </c:if>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${coupon.whetherBind == '1'}">
+                                未绑定
+                            </c:if>
+                            <c:if test="${coupon.whetherBind == '2'}">
+                                ${coupon.bindTime}
+                            </c:if>
+                        </td>
                         <td class="am-hide-sm-only"><a
                                 href="<c:url value='/basic/xm.do?qm=viewCouponBatch&view=${view}&id=${coupon.couponBatch.id}'/>">${coupon.couponBatch.name}</a>
                         </td>

@@ -103,7 +103,7 @@
         <%--window.open("", "_self");--%>
         <%--window.close();--%>
         <%--}--%>
-        location.href = "<c:url value='/500.jsp'/>";
+        location.href = "<c:url value='/index.jsp'/>";
     }
     </c:if>
 </script>

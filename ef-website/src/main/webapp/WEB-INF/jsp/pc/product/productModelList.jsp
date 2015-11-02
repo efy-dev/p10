@@ -8,9 +8,13 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>【${proName}】-e飞蚁</title>
+    <meta name="keywords" content="${proName}" />
+    <meta name="description" content="${project.description}" />
 </head>
 <body>
 <!-- //End--header-->
@@ -27,14 +31,26 @@
         <div class="title">
             <img src="http://pro.efeiyi.com/${project.picture_url}@!project-pc-view" alt=""/>
         </div>
-        <div class="info">${project.description}</div>
+        <div class="info">
+            <c:if test="${fn:length(project.description)>186}">${fn:substring(project.description,0 ,186 )}......</c:if><c:if test="${fn:length(project.description)<=186}">${project.description}</c:if>
+        </div>
         <%--<a href="" class="more" title="了解更多"><i class="icon"></i>了解更多</a>--%>
     </div>
   <!-- //End--explain-->
   <div class="shop-sort wh">
       <ul class="link1">
 
-          <li class="active"><a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a></li>
+          <li class="active">
+              <c:if test="${str==null}">
+              <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格</a>
+              </c:if>
+              <c:if test="${str=='desc'}">
+              <a href="<c:url value="/product/list/${project.id}?sort=asc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-down"></i></a>
+              </c:if>
+              <c:if test="${str=='asc'}">
+              <a href="<c:url value="/product/list/${project.id}?sort=desc:price&pageEntity.index=1"/>" title="价  格">价  格<i class="icon arrow-up"></i></a>
+               </c:if>
+                  </li>
       </ul>
   </div>
   <!-- //End--shop-sort-->
@@ -45,24 +61,7 @@
             <%--<%! int i=0 ;%>--%>
           <c:forEach items="${productModelList}" var="productModel" varStatus="rec">
           <li>
-               <%--<% if(i==0){%>--%>
-                   <%--<a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">--%>
-                <%--&lt;%&ndash;<span class="tips">精品<em class="icon"></em></span>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<span class="icon-r">&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<i class="icon icon-chengpin"></i>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<i class="icon icon-hand"></i>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;</span>&ndash;%&gt;--%>
-                  <%--<img  class="imgfilter" src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>--%>
-                               <%--<% i++;%>--%>
-                               <%--<%}else if(i==1){%>--%>
-                       <%--<% i++;%>--%>
-                       <%--<a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">--%>
-                           <%--&lt;%&ndash;<span class="tips">精品<em class="icon"></em></span>&ndash;%&gt;--%>
-                           <%--<img class="imgfilter" src="http://pro.efeiyi.com/${productModel.productPictureList[0].pictureUrl}@!product-hot" alt=""/>--%>
-                       <%--</a>--%>
-
-                <%--<%}else{%>--%>
-                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" title="">
+                       <a href="<c:url value="/product/productModel/${productModel.id}"/>" target="_blank" title="">
                        <img class="imgfilter"
                             src="http://pro.efeiyi.com/${productModel.productModel_url}@!product-hot" alt=""/>
                        </a>

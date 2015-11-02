@@ -145,7 +145,7 @@ public class MyMemberController {
     @RequestMapping("/removeMemManagement.do")
     @ResponseBody
     public ModelAndView removeMemManagement(HttpServletRequest request, Document document) throws Exception {
-        String path = request.getContextPath() + request.getParameter("resultPage");
+        String path = /*request.getContextPath() +*/ request.getParameter("resultPage");
         myDocumentManager.removeDocument(document);
         return new ModelAndView("redirect:" + path);
     }

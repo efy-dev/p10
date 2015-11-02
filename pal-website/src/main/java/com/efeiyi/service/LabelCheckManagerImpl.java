@@ -6,10 +6,10 @@ import com.efeiyi.dao.IPalDao;
 import com.efeiyi.pal.check.model.LabelCheckRecord;
 import com.efeiyi.pal.label.model.Label;
 import com.efeiyi.pal.product.model.Product;
+import com.efeiyi.util.WXEncrypt;
 import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.*;
 import org.hibernate.Query;
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -150,6 +150,29 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
             throw new IOException(e.getMessage());
         }
         Element root = document.getRootElement();
+
+        String encryptType = request.getParameter("encrypt_type");
+        String msgSignature = request.getParameter("msg_signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        WXEncrypt pc = null;
+        //如果加密模式收发，先解密
+        if ("aes".equals(encryptType)) {
+
+            try {
+//                inXml = root.element("Encrypt").getText();
+                System.out.println("解密前密文: " + inXml);
+                pc = new WXEncrypt(PalConst.getInstance().weiXinToken, PalConst.getInstance().encodingAESKey, PalConst.getInstance().appId);
+                inXml = pc.decryptMsg(msgSignature, timestamp, nonce, inXml);
+                System.out.println("解密后明文: " + inXml);
+                document = DocumentHelper.parseText(inXml);
+                root = document.getRootElement();
+            } catch (Exception e) {
+                throw new ServletException(e.getCause());
+            }
+        }
+
+
         String serial = root.element("EventKey").getText();
         String event = root.element("Event").getText();
         System.out.println("Event=\'" + event + "\'");
@@ -181,6 +204,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
             updateRecord(model, label, true);
             System.out.println("标签已查次数：" + label.getCheckCount());
             String content = constructWeiXinPushContent(model);
+
             System.out.println("content:" + content);
             outXml = constructWeiXinMsg(label, fromUserName, toUserName, content, url);
 
@@ -188,9 +212,65 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
             outXml = constructWeiXinMsg(label, fromUserName, toUserName, PalConst.getInstance().fakeBean.getMsg(), url);
         }
 
+        //如果加密模式收发，加密返回
+        if ("aes".equals(encryptType)) {
+            System.out.println("加密前outXml:" + outXml);
+            try {
+                outXml = pc.encryptMsg(outXml, timestamp, nonce);
+                System.out.println("加密后密文outXml: " + outXml);
+            } catch (Exception e) {
+                throw new ServletException(e.getCause());
+            }
+        }
+
+
         System.out.println("\n\n" + new Date(System.currentTimeMillis()) + "--outXml:\n" + outXml + "\n\n");
         return outXml;
 //        return "";
+    }
+
+    /**
+     * 无视是否查询，直接更新标签状态和查询记录
+     *
+     * @param model
+     * @param label
+     * @return
+     * @throws Exception
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateRecord(ModelMap model, Label label) throws ServletException {
+
+        Date date = new Date();
+        addLabelCheckRecord(model, label, date);
+        label.setCheckCount(label.getCheckCount() + 1);
+        System.out.println("标签已查次数：" + label.getCheckCount());
+
+        //状态码是已激活或已查询
+        if (label.getStatus().equals(PalConst.getInstance().unusedStatus) || label.getStatus().equals(PalConst.getInstance().usedStatus)) {
+
+            label.setStatus(PalConst.getInstance().usedStatus);
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
+        }
+        //如果其他状态码无效
+        else {
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().fakeBean);
+        }
+
+        //数据不完整时，记录中更新为null
+        try {
+            model.addAttribute(PalConst.getInstance().resultProduct, label.getPurchaseOrderLabel().getProduct());
+        } catch (NullPointerException e) {
+            model.addAttribute(PalConst.getInstance().resultProduct, null);
+            model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().wrongBean);
+        }
+        //更新标签状态
+        label.setLastCheckDateTime(date);
+        //更新首次查询时间
+        if (label.getCheckCount() == 1) {
+            label.setFirstCheckDateTime(date);
+        }
+        palDao.saveOrUpdate(label.getClass().getName(), label);
+
     }
 
     /**
@@ -221,7 +301,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
                 label.setStatus(PalConst.getInstance().usedStatus);
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().trueBean);
             } else {
-                CheckResultBean recheckBean = getCheckResultBean(label,timeDiffer);
+                CheckResultBean recheckBean = getCheckResultBean(label, timeDiffer);
                 model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
             }
         }
@@ -234,7 +314,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
                 model.addAttribute(PalConst.getInstance().resultLabel, PalConst.getInstance().wrongBean);
             }
 
-            CheckResultBean recheckBean = getCheckResultBean(label,timeDiffer);
+            CheckResultBean recheckBean = getCheckResultBean(label, timeDiffer);
 
             model.addAttribute(PalConst.getInstance().resultLabel, recheckBean);
         }
@@ -262,12 +342,13 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 判断查询次数和间隔时间显示正确的提示信息
+     *
      * @param label
      * @param timeDiffer
      * @return
      * @throws ServletException
      */
-    private CheckResultBean getCheckResultBean(Label label,Long timeDiffer) throws ServletException{
+    private CheckResultBean getCheckResultBean(Label label, Long timeDiffer) throws ServletException {
         CheckResultBean recheckBean = new CheckResultBean();
 
         try {
@@ -296,6 +377,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 写入查询记录
+     *
      * @param model
      * @param label
      * @param date
@@ -323,14 +405,14 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getRecheckRecordMsg(Label label) {
-        if(label != null) {
+        if (label != null) {
             String msg = PalConst.getInstance().recheckFakeBean.getMsg().
                     replaceAll("#N#", Integer.toString(label.getCheckCount())).
                     replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
             System.out.println("getRecheckRecordMsg：" + msg);
             return msg;
         }
-            return null;
+        return null;
     }
 
     /**
@@ -341,7 +423,7 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
      * @throws Exception
      */
     private String getWeixinRecheckRecordMsg(Label label) {
-        if(label != null) {
+        if (label != null) {
             String msg = PalConst.getInstance().weixinRecheckMsg.
                     replaceAll("#N#", Integer.toString(label.getCheckCount())).
                     replaceAll("#TIME#", PalConst.getInstance().dateFormat.format(label.getLastCheckDateTime()));
@@ -411,7 +493,8 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 
     /**
      * 使用百度api查询Ip归属地
-     * @param ip
+     *
+     * @param
      * @return
      * @throws Exception
      */
@@ -427,14 +510,16 @@ public class LabelCheckManagerImpl implements ILabelCheckManager {
 //        String [] addresses = ((String)ipAddressMap.get("address")).split("\\|");
 //        return (String)ipAddressMap.get("address");
 //    }
+    public static void main(String[] args) {
+        try {
+            WXEncrypt pc = new WXEncrypt(PalConst.getInstance().weiXinToken, PalConst.getInstance().encodingAESKey, PalConst.getInstance().appId);
 
-//    public static void main(String [] args){
-//
-//        try {
-//            new LabelCheckManagerImpl().getIpAddress("");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+
+            String inXml = pc.decryptMsg("11ef68f4db29758253d90a1a788cf2fa7585805a", "1409304348", "xxxxxx",
+                    "<xml><ToUserName><![CDATA[toUser]]></ToUserName><Encrypt><![CDATA[6QPGajK0r6AH0EW/HHF4FAtz9u9XuMzoqpOEYp+aKcvPJz3/HzY1sL/71TH/lNWippAm/hu+4cKC6/u1ba2hAw==]]></Encrypt></xml>"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

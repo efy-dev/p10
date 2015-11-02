@@ -15,26 +15,7 @@
 <head>
     <title></title>
     <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
-    <script>
-        function recommend2(obj,status,url){
-            if($(obj).attr("recommend")=="0"){
-                recommended(obj,status,url);
-            }else{
-            $('#my-prompt').modal({
-                relatedTarget: this,
-                onConfirm: function(e) {
-                    var  typeRecommended = $("#type").val();
-                    recommended(obj,status,url);
-                    $(obj).next("span").find("a").attr("onclick","saveRecommended(this,'"+typeRecommended+"',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')");
-                },
-                onCancel: function(e) {
-                    // alert('不想说!');
-                }
-            });
-        }
-        }
 
-    </script>
 </head>
 <body>
 <div class="admin-content">
@@ -60,7 +41,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="master">
                     <tr id="${master.id}">
-                        <td>
+                        <td width="50%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-xs am-text-secondary"
@@ -79,47 +60,56 @@
                                         href="<c:url value="/basic/xm.do?qm=plistMasterFollowed_default&conditions=master.id:${master.id}&masterId=${master.id}"/>"><span
                                             class="am-icon-trash-o"></span> 查看粉丝
                                     </a>
-                                    <c:if test="${empty master.masterRecommendedList}">
-                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                           onclick="recommend2(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
-                                           href="#" recommend="1" recommendedId = "${master.id}" id="" >
-                                            <span class="am-icon-heart"> 推荐</span>
-                                        </a>
-                                    </c:if>
+                                    <c:set value="0" var="isOk"/>
                                     <c:if test="${not empty master.masterRecommendedList}">
                                         <c:forEach var="recommended" items="${master.masterRecommendedList}">
-                                            <c:if test="${recommended.master.id == master.id}">
+                                            <c:if test="${recommended.master.id == master.id && (recommended.group == 'masterSkillRecommended'||recommended.group=='masterArtRecommended')}">
+                                                <c:set value="1" var="isOk"/>
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
+                                                   href="javascript:void(0);"  onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')" recommendedId = "${master.id}"  id="${recommended.id}" recommend="0">
                                                     <span class="am-icon-heart" >取消推荐 </span>
                                                 </a>
                                             </c:if>
                                         </c:forEach>
 
                                     </c:if>
+                                    <c:if test="${isOk == '0'}">
+                                        <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                           onclick="recommended(this,1,'<c:url value="/Recommended/deleteObjectRecommended.do" />')"
+                                           href="javascript:void(0);" recommend="1" recommendedId = "${master.id}" id="" >
+                                            <span class="am-icon-heart"> 推荐</span>
+                                        </a>
+                                    </c:if>
+
                                        <span style="display: none;float: left;padding-left: 10px;">
+                                            <select id="type" name="type" style="width: 90px;display: inline-block;">
+                                                <option value="ec.masterRecommended">请选择</option>
+                                                <option value="masterSkillRecommended">传统技艺</option>
+                                                <option value="masterArtRecommended">传统美术</option>
+                                            </select>
                                                 <input type="text" name="sort" style="width: 35px;" value="" />
-                                                <a class=" am-btn-primary" onclick="saveRecommended(this,'masterRecommended',1,'<c:url value="/Recommended/saveObjectRecommended.do" />')" style="padding: 0px 10px 5px 10px" > 保存</a>
+                                                <a class=" am-btn-primary" href="javascript:void (0);" onclick="saveModel(this)" style="padding: 0px 10px 5px 10px" > 保存</a>
+
                                        </span>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only">
+                        <td class="am-hide-sm-only" width="20%">
                             <a href="<c:url value="/basic/xm.do?qm=viewMaster&view=master&id=${master.id}"/>">
                               ${master.fullName}
                             </a>
                             <c:forEach var="recommended" items="${master.masterRecommendedList}">
-                                <c:if test="${recommended.master.id == master.id}" >
+                                <c:if test="${recommended.master.id == master.id && (recommended.group == 'masterSkillRecommended'||recommended.group=='masterArtRecommended')}" >
                                     <span  id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
                                 </c:if>
                             </c:forEach>
                         </td>
 
-                        <td class="am-hide-sm-only">
+                        <td class="am-hide-sm-only" width="10%">
                             <ming800:status name="sex" dataType="Master.sex" checkedValue="${master.sex}" type="normal"/>
 
                         </td>
-                        <td class="am-hide-sm-only">
+                        <td class="am-hide-sm-only" width="20%">
                             <ming800:status name="level" dataType="Master.level" checkedValue="${master.level}" type="normal" />
 
                         </td>
@@ -137,33 +127,25 @@
         </ming800:pcPageList>
     </div>
 </div>
-<%--点击立即发货的时候弹出的模态对话框--%>
-<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
-    <div class="am-modal-dialog">
-        <%--<div class="am-modal-hd">Amaze UI</div>--%>
-        <div class="am-modal-bd">
-            <div>请选择大师推荐类别</div>
-
-            <%--物流公司: <input type="text" id="logisticsCompany" name="logisticsCompany" class="am-modal-prompt-input">--%>
-            <div>
-                类别:
-                <select class="am-modal-prompt-select" id="type" name="type" style="width: 90px;display: inline-block;">
-                    <option value="masterRecommended">请选择</option>
-                    <option value="masterSkillRecommended">传统技艺</option>
-                    <option value="masterArtRecommended">传统美术</option>
-                </select>
-
-            </div>
-
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
-        </div>
-    </div>
-</div>
 
 <script>
+
+
+
+    function saveModel(obj){
+        var  typeRecommended = $(obj).parent().find("select").val();
+        if(typeRecommended == "ec.masterRecommended"){
+            alert("请选择推荐类型!");
+        }else if($(obj).prev("input").val()==""){
+            alert("请输入序号!");
+        }else {
+            saveRecommended(obj, typeRecommended, 1, '<c:url value="/Recommended/saveObjectRecommended.do" />');
+        }
+
+
+
+    }
+
 
 
     function removeMaster(divId){

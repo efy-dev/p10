@@ -105,7 +105,7 @@
                 <fmt:formatNumber type="number" value="${purchaseOrder.getRealPayMoney()}" maxFractionDigits="2" minFractionDigits="2"/>
             </td>
             <td width="10%">
-              ${purchaseOrder.user.name}
+              ${purchaseOrder.receiverName}
             </td>
             <td width="20%">
                 <fmt:formatDate value="${purchaseOrder.createDatetime}" type="both" pattern="YYYY-MM-dd HH:mm" />
@@ -120,7 +120,6 @@
                     <th class="am-text-center">规格</th>
                     <th class="am-text-center">单价</th>
                     <th class="am-text-center">数量</th>
-                    <th class="am-text-center">实付款</th>
                 </tr>
                 <c:forEach var="purchaseOrderProduct" items="${purchaseOrder.purchaseOrderProductList}" >
                     <tr >
@@ -140,9 +139,6 @@
                         </td>
                         <td class="am-text-center">
                                     ${purchaseOrderProduct.purchaseAmount}
-                        </td>
-                        <td class="am-text-center">
-                            <fmt:formatNumber type="number" value="${purchaseOrderProduct.purchasePrice}" maxFractionDigits="2" minFractionDigits="2"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -204,7 +200,7 @@
                     //console.log(e.data);
                     $.ajax({
                         type:"get",
-                        data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data},//输入框的值传递到后台
+                        data:{id:id,orderStatus:orderStatus,logisticsCompany:$('#logisticsCompany').val(),serial: e.data,logisticsCompanyZHCN:$('#logisticsCompany option:checked').text()},//输入框的值传递到后台
                         url:"<c:url value="/purchaseOrder/updateOrderStatus.do"/>",
                         success:function(data){
                             $(obj).find("span").text("已发货");

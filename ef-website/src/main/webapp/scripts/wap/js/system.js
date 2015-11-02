@@ -7,7 +7,7 @@ $(function(){
     //购物车
     (function(){
         $('.icon-delete').click(function(){
-            $('.alert-delete').fadeIn('fast');
+           $('.alert-delete').fadeIn('fast');
         })
 
         $('.edit-dete').click(function(){
@@ -75,13 +75,15 @@ $(function(){
             return false;
         })
         //分享
-        $('.details .des-title a.share').click(function(){
+        $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon').click(function(){
             $('#cover').show();
             $('#cover .bg').click(function(){
                 $(this).parents('#cover').hide();
             })
             return false;
-        })
+        });
+        //详情和评论-tab
+        //$('')
     })();
     //订单
     (function(){
@@ -105,8 +107,32 @@ $(function(){
         })
     })();
 
+    //我的团---我的订单tab
+    (function(){
+        $('.discount .employ a').click(function(){
+            $(this).addClass('yhq-active').siblings().removeClass('yhq-active');
+        })
 
-
-
+        var mdli = $('.m-order .order-title li');
+        var mdbox = $('.m-order .order-content .od-tab1')
+        var time = null;
+        mdli.click(function(){
+            var mthis=$(this);
+            mthis.addClass('active').siblings().removeClass('active')
+            var index = mthis.index();
+            mdbox.eq(index).show().siblings().hide();
+        })
+    })();
+    //开团详情tab
+    (function(){
+        var coli = $('.colonel-table .c-title ul li')
+        var cobox = $('.colonel-table .c-content .co-page')
+        coli.click(function(){
+            var cothis = $(this)
+            cothis.addClass('active').siblings().removeClass('active')
+            var index = cothis.index()
+            cobox.eq(index).show().siblings().hide();
+        })
+    })();
 
 })

@@ -7,9 +7,11 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectFollowed;
 import com.efeiyi.ec.project.model.ProjectRecommended;
+import com.efeiyi.ec.wiki.base.util.projectConvertprojectModelUtil;
 import com.efeiyi.ec.wiki.model.Praise2Product;
 import com.efeiyi.ec.wiki.model.ProductComment;
 import com.efeiyi.ec.wiki.model.ProductStore;
+import com.efeiyi.ec.wiki.model.ProjectRecommendedModel;
 import com.efeiyi.ec.wiki.organization.service.UserManager;
 import com.efeiyi.ec.wiki.organization.service.imp.UserManagerImpl;
 import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
@@ -27,6 +29,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -92,7 +95,7 @@ public class WikiIndexController extends WikibaseController {
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
         //为了测试方便，骗过CAS
 
-        MyUser userDetails=null;
+       /* MyUser userDetails=null;
 
         try{
              userDetails = (MyUser)userManager.loadUserByUsername("admin");
@@ -102,7 +105,7 @@ public class WikiIndexController extends WikibaseController {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);*/
        //欺诈结束
 
 
@@ -116,10 +119,13 @@ public class WikiIndexController extends WikibaseController {
         List<ProjectRecommended> list = baseManager.listObject(query);
         model.addAttribute("popularProjectsList", list);
 
-        XQuery query2 = new XQuery("plistProjectRecommended_default", request);
+        XQuery query2 = new XQuery("listProjectRecommended_default", request);
         //query2.put("groupName","attentionProject");
-        List<ProjectRecommended> list2 = baseManager.listObject(query2);
-        model.addAttribute("attentionProjectsList", list2);
+        List<ProjectRecommended> list2 = baseManager.listObject(query2);//增加是否已经关注逻辑
+        List<ProjectRecommendedModel> list21  = projectConvertprojectModelUtil.getProjectRecommendedModels(list2);
+        List<ProjectRecommendedModel> list22  = getProjectRecommendedModels(list21,request);
+
+        model.addAttribute("attentionProjectsList", list22);
 
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
@@ -130,10 +136,16 @@ public class WikiIndexController extends WikibaseController {
             } else {
                 model.addAttribute("isShow", "no");
             }
+              /* List hadAttentionProjects =  afterAttention(request,model);
+            model.addAttribute("projectFolloweds", hadAttentionProjects);*/
         } else {
             model.addAttribute("isShow", "no");
         }
-
+        String path = request.getContextPath();
+        String basePath = request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + path + "/";
+        model.addAttribute("basePath", basePath);
         return new ModelAndView("/hotProjects/PopularProjects");
     }
 
@@ -164,15 +176,15 @@ public class WikiIndexController extends WikibaseController {
             return "false";
         }
         if (oper.equalsIgnoreCase("del")){
-            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId";
+            String queryHql = "from ProjectFollowed t where t.user.id=:userId and t.project.id=:projectId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("projectId", projectid);
             ProjectFollowed pf = (ProjectFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (pf != null && pf.getId() != null)//说明已经关注
             {
-                baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
-
+                //baseManager.delete(ProjectFollowed.class.getName(), pf.getId());
+                baseManager.remove(ProjectFollowed.class.getName(), pf.getId());//假删
                 long FsAmount =0;
                 if(project.getFsAmount() == null){
                     FsAmount =0;
@@ -202,17 +214,17 @@ public class WikiIndexController extends WikibaseController {
         return "error";
     }
 
-    @RequestMapping("/Isattention.do")
+    @RequestMapping("/Isattention/{projectId}")
     @ResponseBody
-    public boolean checkIsAttention(HttpServletRequest request, Model model) throws Exception {
+    public boolean checkIsAttention(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
         boolean flag = false;
-        String projectid = request.getParameter("projectId");
+        //String projectid = request.getParameter("projectId");
         if (AuthorizationUtil.getMyUser().getId() != null) {
             XQuery xQuery = new XQuery("plistProjectFollowed_check", request);
-            xQuery.put("project_id", projectid);
+            xQuery.put("project_id", projectId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -221,13 +233,17 @@ public class WikiIndexController extends WikibaseController {
     }
 
 
-    @RequestMapping("/brifProject.do")
-    public ModelAndView getBrifProject(HttpServletRequest request, Model model) throws Exception {
-        String projectId = request.getParameter("projectId");
+    @RequestMapping("/brifProject/{projectId}/{page}")
+    public ModelAndView getBrifProject(@PathVariable String projectId,@PathVariable String page,HttpServletRequest request, Model model) throws Exception {
+        //String projectId = request.getParameter("projectId");
+        //String page = request.getParameter("page");
         Project project = (Project) baseManager.getObject(Project.class.getName(), projectId);
-        boolean flag = checkIsAttention(request, model);//判断用户是否已经关注该项目
+        boolean flag = checkIsAttention(projectId,request, model);//判断用户是否已经关注该项目
         model.addAttribute("flag", flag);
         model.addAttribute("project", project);
+        if(page!=null && page.equals("2")){
+            return new ModelAndView("/project/brifProject2");
+        }
         return new ModelAndView("/project/brifProject");
     }
 
@@ -242,7 +258,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", masterId);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -263,15 +279,16 @@ public class WikiIndexController extends WikibaseController {
         }
         Master master = (Master) baseManager.getObject(Master.class.getName(), masterId);
         if(oper.equalsIgnoreCase("del")){
-            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId";
+            String queryHql = "from MasterFollowed t where t.user.id=:userId and t.master.id=:masterId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("masterId", masterId);
             MasterFollowed mf = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (mf != null && mf.getId() != null)//说明已经关注
             {
-                baseManager.delete(MasterFollowed.class.getName(), mf.getId());
-
+                //baseManager.delete(MasterFollowed.class.getName(), mf.getId());
+                mf.setStatus("0");                                                      //假删除
+                baseManager.saveOrUpdate(MasterFollowed.class.getName(),mf);
                 long FsAmount =0;
                 if(master.getFsAmount() == null){
                     FsAmount =0;
@@ -304,9 +321,9 @@ public class WikiIndexController extends WikibaseController {
         return "error";
     }
 
-    @RequestMapping("/showProduct.do")
-    public ModelAndView showProduct(HttpServletRequest request, Model model) throws Exception {
-        String productId = request.getParameter("productId");
+    @RequestMapping("/showProduct/{productId}")
+    public ModelAndView showProduct(@PathVariable String productId, HttpServletRequest request, Model model) throws Exception {
+        //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
         boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
         model.addAttribute("flag", flag);
@@ -325,7 +342,7 @@ public class WikiIndexController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }
@@ -346,7 +363,7 @@ public class WikiIndexController extends WikibaseController {
         String oper = request.getParameter("operation");
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
@@ -365,6 +382,8 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setProduct(product);
             praise2Product.setCreateDateTime(new Date());
             praise2Product.setType("1");
+            praise2Product.setWatch("0");
+            praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
@@ -372,13 +391,14 @@ public class WikiIndexController extends WikibaseController {
 
 
         if (oper != null && oper.equalsIgnoreCase("down")) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
             Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                  baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long FsAmount =0;
             if(product.getFsAmount() == null){
                 FsAmount =0;
@@ -396,59 +416,6 @@ public class WikiIndexController extends WikibaseController {
         return "true";
     }
 
-  /*  @RequestMapping("/saveComment.do")
-    @ResponseBody
-    public boolean saveComment(HttpServletRequest request, Model model) throws Exception {//此方法待作废
-        String productId = request.getParameter("productId");
-        String content = request.getParameter("content");
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return false;
-        }
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        ProductComment productComment = new ProductComment();
-        productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
-        productComment.setProduct(product);
-        productComment.setStatus("1");
-        productComment.setContent(content);
-        productComment.setAmount(0l);
-        ProductComment fatherProductComment = new ProductComment();
-        fatherProductComment.setId("0");
-        productComment.setFatherComment(fatherProductComment);
-        baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
-        baseManager.saveOrUpdate(Product.class.getName(), product);
-        return true;
-    }
-
-    @RequestMapping("/saveComment2.do")
-    @ResponseBody
-    public boolean saveComment2(HttpServletRequest request, Model model) throws Exception {//此方法待作废
-        String productId = request.getParameter("productId");
-        String content = request.getParameter("content");
-        String contentId = request.getParameter("contentId");
-        MyUser user = AuthorizationUtil.getMyUser();
-        if (user.getId() == null) {
-            return false;
-        }
-
-        Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        ProductComment productComment = new ProductComment();
-        productComment.setCreateDateTime(new Date());
-        productComment.setUser(user);
-        productComment.setProduct(product);
-        productComment.setStatus("1");
-        productComment.setContent(content);
-        productComment.setAmount(0l);
-        ProductComment fatherProductComment = new ProductComment();
-        fatherProductComment.setId(contentId);
-        productComment.setFatherComment(fatherProductComment);
-        baseManager.saveOrUpdate(ProductComment.class.getName(), productComment);
-        product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
-        baseManager.saveOrUpdate(Product.class.getName(), product);
-        return true;
-    }*/
 
 
     @RequestMapping("/commentUpAndDown.do")
@@ -468,7 +435,7 @@ public class WikiIndexController extends WikibaseController {
         if (oper != null && oper.equalsIgnoreCase("up")) {
 
             //String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId";
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             //map.put("productId", product.getId());
@@ -486,6 +453,8 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setProduct(product);
             praise2Product.setCreateDateTime(new Date());
             praise2Product.setType("2");
+            praise2Product.setWatch("0");
+            praise2Product.setModerator(productComment.getUser());
             praise2Product.setComment(productComment);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             productComment.setAmount(productComment.getAmount() == null ? 1 : productComment.getAmount() + 1);
@@ -494,15 +463,15 @@ public class WikiIndexController extends WikibaseController {
 
 
         if (oper != null && oper.equalsIgnoreCase("down")) {
-            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId";
+            String queryHql = "from Praise2Product t where t.user.id=:userId and t.product.id=:productId and t.comment.id=:commentId and t.status!='0'";
             LinkedHashMap<String, Object> map = new LinkedHashMap<>();
             map.put("userId", user.getId());
             map.put("productId", product.getId());
             map.put("commentId", commentId);
             Praise2Product praise2Product1 = (Praise2Product) baseManager.getUniqueObjectByConditions(queryHql, map);
             if (praise2Product1 != null && praise2Product1.getId() != null)//不为null,说明已经点过赞了，可以取消点赞
-                baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
-
+                //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
+                baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long Amount=0;
             if(productComment.getAmount() == null){
                 Amount=0;
@@ -583,4 +552,29 @@ public class WikiIndexController extends WikibaseController {
         }
      return res;
     }
+
+    public  List<ProjectRecommendedModel> getProjectRecommendedModels(List<ProjectRecommendedModel> projectRecommendedModels,HttpServletRequest request) throws Exception {
+        List<ProjectRecommendedModel> list = projectRecommendedModels;
+
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery query = new XQuery("listProjectFollowed_isShow", request);
+            query.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> projectFolloweds = baseManager.listObject(query);
+        for (ProjectRecommendedModel projectRecommendedModel : projectRecommendedModels){
+            for (ProjectFollowed projectFollowed : projectFolloweds){
+              if(projectRecommendedModel.getProject().getId().equals(projectFollowed.getProject().getId())){
+                  projectRecommendedModel.setAttention("1");
+              }
+
+            }
+        }
+
+        }
+        return list;
+    }
+
+
+
+
+
 }

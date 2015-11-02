@@ -17,7 +17,7 @@
     <title></title>
 </head>
 <body>
-<div class="admin-content">
+
   <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6">
       <div class="am-btn-toolbar">
@@ -41,21 +41,21 @@
 
         <c:forEach items="${requestScope.pageInfo.list}" var="msg">
           <tr id="${msg.master.id}">
-            <td class="am-hide-sm-only">
+            <td class="am-hide-sm-only" width="10%">
               <a type="button" class="am-btn am-btn-default" href="<c:url value='/basic/xm.do?qm=formMessageAttachment&masterMessageId=${msg.id}&type=${msg.type}'/>">
                 添加<ming800:status name="type" dataType="MasterMessage.type" checkedValue="${msg.type}" type="normal" />
               </a>
             </td>
-            <td class="am-hide-sm-only">
+            <td class="am-hide-sm-only" width="10%">
                 ${msg.master.fullName}
             </td>
-            <td class="am-hide-sm-only">
+            <td class="am-hide-sm-only" width="20%">
                 ${msg.project.name}
             </td>
-            <td class="am-hide-sm-only">
+            <td class="am-hide-sm-only" width="50%">
               <a href="<c:url value='/basic/xm.do?qm=formMasterMessage&masterId=${msg.master.id}&id=${msg.id}'/>">${msg.content}</a>
             </td>
-            <td class="am-hide-sm-only">
+            <td class="am-hide-sm-only" width="10%">
               <ming800:status name="type" dataType="MasterMessage.type" checkedValue="${msg.type}" type="normal" />
             </td>
           </tr>
@@ -71,6 +71,6 @@
       <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
     </ming800:pcPageList>
   </div>
-</div>
+
 </body>
 </html>

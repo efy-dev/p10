@@ -29,7 +29,7 @@
               <div class="mt-null">
                 <p>目前还没有收藏商品，挑几件您喜欢的商品吧！</p>
                 <ul>
-                  <li class="efeiyi"><a href="http://www2.efeiyi.com/">e飞蚁首页</a></li>
+                  <li class="efeiyi"><a href="http://www.efeiyi.com/">e飞蚁首页</a></li>
                 </ul>
               </div>
             </td>
@@ -58,7 +58,7 @@
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
                         <c:if test="${collectList.productModel.amount!=0}">
-                        <li class="option-right"><a href="<%=PConst.HOSTNAME%>/cart/addProduct.do?id=${collectList.productModel.id}"> 加入购物车</a></li>
+                        <li class="option-right"><a href="<%=PConst.HOSTNAME%>/cart/addProduct.do?id=${collectList.productModel.id}&amount=1"> 加入购物车</a></li>
                         </c:if>
 
                       </ul>

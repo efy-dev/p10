@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +30,9 @@ public class ProjectController extends WikibaseController {
     @Autowired
     BaseManager baseManager;
 
-    @RequestMapping("/brifProject.do")
-    public ModelAndView getBrifProject(HttpServletRequest request, Model model) throws Exception {
-        String projectId = request.getParameter("projectId");
+    @RequestMapping("/brifProject/{projectId}")
+    public ModelAndView getBrifProject(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
+        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
         boolean flag = checkIsAttention(request, model);
         model.addAttribute("flag", flag);
@@ -57,9 +58,9 @@ public class ProjectController extends WikibaseController {
         return flag;
     }
 
-    @RequestMapping("/brifMaster.do")
-    public ModelAndView getBrifMaster(HttpServletRequest request, Model model) throws Exception {
-        String projectId = request.getParameter("projectId");
+    @RequestMapping("/brifMaster/{projectId}")
+    public ModelAndView getBrifMaster(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
+        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
         boolean flag = checkIsAttention(request, model);
         model.addAttribute("flag", flag);
@@ -67,9 +68,9 @@ public class ProjectController extends WikibaseController {
         return new ModelAndView("/project/brifMaster");
     }
 
-    @RequestMapping("/listProduct.do")
-    public ModelAndView getListProducts(HttpServletRequest request, Model model) throws Exception {
-        String projectId = request.getParameter("projectId");
+    @RequestMapping("/listProduct/{projectId}")
+    public ModelAndView getListProducts(@PathVariable String projectId,HttpServletRequest request, Model model) throws Exception {
+        //String projectId = request.getParameter("projectId");
         Project project = getBrifProjectHeader(projectId);
         boolean flag = checkIsAttention(request, model);
         model.addAttribute("flag", flag);
@@ -77,17 +78,21 @@ public class ProjectController extends WikibaseController {
         return new ModelAndView("/project/listProduct");
     }
 
-    @RequestMapping("/showProduct.do")
-    public ModelAndView showProduct(HttpServletRequest request, Model model) throws Exception {
-        String productId = request.getParameter("productId");
+    @RequestMapping("/showProduct/{productId}")
+    public String showProduct(@PathVariable String productId,HttpServletRequest request, Model model) throws Exception {
+        //String productId = request.getParameter("productId");
         Product product = (Product) baseManager.getObject(Product.class.getName(), productId);
-        boolean flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
+        boolean flag = false;
+        if(product.getMaster()!=null && !"".equals(product.getMaster().getId())){
+            flag = IsattentionMaster2(request, product.getMaster().getId());//判断用户是否已经关注该作品的大师
+        }
+
         model.addAttribute("flag", flag);
         model.addAttribute("product", product);
         if (AuthorizationUtil.getMyUser().getId() != null) {
             model.addAttribute("myUser", AuthorizationUtil.getMyUser());
         }
-        return new ModelAndView("/product/brifProduct");
+        return "/product/brifProduct";
     }
 
 
@@ -103,7 +108,7 @@ public class ProjectController extends WikibaseController {
             xQuery.put("master_id", userid);
             xQuery.put("user_id", AuthorizationUtil.getMyUser().getId());
             List<ProjectFollowed> list = baseManager.listObject(xQuery);
-            if (list != null || list.size() >= 1) {
+            if (list != null && list.size() >= 1) {
                 flag = true;
             }
         }

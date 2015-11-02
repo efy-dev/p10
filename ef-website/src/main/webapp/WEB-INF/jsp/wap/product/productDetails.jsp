@@ -12,7 +12,14 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>商品详情</title>
+    <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
+    <c:if test="${product.master!=null}">
+        <c:set var="master">
+            ${product.master.fullName}
+        </c:set>
+    </c:if>
+    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.tenant.name}"/>
+    <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
 
@@ -39,6 +46,7 @@
                 <i class="icon icon-share"></i>
                 <p>分享</p>
             </a>
+            <div id="cover"><em class="bg"></em><img src="/scripts/wap/upload/guide-share.png" class="share-picture" alt=""></div>
             <a id ="show" onclick="collect('${productModel.id}')" class="addfav">
                 <i class="icon icon-addfav"></i>
 
@@ -53,7 +61,7 @@
         <div class="des-master">
          <c:if test="${not empty productModel.product.master.id}">
             <p class="p1"><span>${productModel.product.master.fullName}</span>[${productModel.product.master.getMainProjectName().getProject().getName()}]</p>
-            <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>大师</p>
+            <p class="p2"><ming800:status name="level" dataType="Project.level" checkedValue="${productModel.product.master.getMainProjectName().getProject().getLevel()}" type="normal"/>传承人</p>
             <p class="img"><img src="http://tenant.efeiyi.com/${productModel.product.master.favicon}@!tanent-details-view"></p>
         </c:if>
         </div>
@@ -73,7 +81,7 @@
                 <span class="select">数量</span>
                 <span class="add-sub">
                     <em class="sub btn-cart-no" onclick="subtractProduct()" href="#"></em>
-                    <input id = "value" class="ipt-txt" type="text" value="1">
+                    <input id = "value" class="ipt-txt" type="text" readOnly="true" value="1">
                     <em class="add" onclick="addProduct()" href="#"></em>
                 </span>
             </a>
@@ -85,10 +93,12 @@
         <%--</div>--%>
         <!-- //End--des-price-->
         <c:if test="${fn:length(productModelList)>1}">
-        <div class="bd des-format">
-            <a data-am-modal="{target: '#my-actions'}" style="color: #000" class="bd btn-format" title="选择规格">选择规格<i
-                    class="arrow-right"></i></a>
-        </div>
+            <div class="bd des-format">
+                <a id="btn-format" class="bd btn-format">
+                    <span class="select">选择规格</span>
+                    <i class="arrow-right"></i>
+                </a>
+            </div>
         </c:if>
         <!-- //End--des-format-->
         <div class="des-content">
@@ -102,13 +112,14 @@
                         <div class="bd dis-title">【顾客评论】</div>
                         <ul class="ul-list">
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
                                 <li class="item">
                                     <div class="user-info">
-                                        <img id="personPhoto${rec.index}" src="/scripts/upload/yonghm.jpg">
+                                        <img id="personPhoto${rec.index}" class="user-favor" src="/scripts/upload/yonghm.jpg">
                                         <c:set var="user">
                                             ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
                                         </c:set>
-                                        <p class="name">${fn:substring(user, 0,3 )}*****${fn:substring(user,7,11)}</p>
+                                        <p class="name">${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
                                             <%--<p class="time">2015-10-12   16:16</p>--%>
                                     </div>
                                     <div class="seller">
@@ -119,6 +130,7 @@
                                         </p>
                                     </div>
                                 </li>
+                                </c:if>
                             </c:forEach>
                         </ul>
                         </ul>
@@ -139,7 +151,7 @@
      <c:if test="${not empty productModel.product.tenant.id}">
          <a class="btn-default" href="<c:url value="/tenantOfMobile/${productModel.product.tenant.id}"/>" title="进店">进店</a>
      </c:if>
-        <a class="btn-default" target="_blank"  title="咨询">咨询</a>
+        <%--<a class="btn-default" target="_blank"  title="咨询">咨询</a>--%>
         <c:if test="${productModel.amount<=0}">
             <a class="btn-cart" title="放入购物车"><i class="icon"></i>放入购物车</a>
             <a class="btn-buy" title="售罄">售罄</a>
@@ -150,42 +162,29 @@
         </c:if>
     </div>
 </article>
-<div class="am-modal-actions dialog-des-format" id="my-actions" style="display: none;">
+<!--Start--选择规格弹出框-->
+<div class="am-modal-actions dialog-des-format" id="my-actions">
+    <i class="format-close" title="关闭"></i>
     <div class="format-error">请选择商品规格</div>
-    <div class="bd ">
-        <ul class="bd ul-nav">
+    <div class="bd">
+        <%--<dl class="bd dl-des">--%>
+        <%--</dl>--%>
+        <div class="des-scroll">
+            <ul class="bd ul-nav">
             <c:if test="${fn:length(productModelList) >1}">
                 <c:forEach items="${productModel.product.productModelList}" var="pm">
                     <li> <a href="<c:url value="/product/productModel/${pm.id}"/> " style="color: #000">
                             ${pm.name}
-                            <%--${pm.product.name} <c:forEach--%>
-                            <%--items="${pm.productPropertyValueList}" var="pv">--%>
-                        <%--${pv.projectPropertyValue.value}--%>
-                    <%--</c:forEach>--%>
                     </a></li>
                 </c:forEach>
             </c:if>
-            <%--<li><a href="#规格2">规格2</a></li>--%>
-            <%--<li><a href="#规格1">规格1</a></li>--%>
-            <%--<li><a href="#规格2">规格2</a></li>--%>
-        </ul>
-        <%--<ul class="bd ul-amount">--%>
-        <%--<li>购买数量</li>--%>
-        <%--<li>--%>
-        <%--<a class="sub btn-cart-no" href="#减"></a>--%>
-        <%--<input class="ipt-txt" type="text" value="1"/>--%>
-        <%--<a class="add" href="#加"></a>--%>
-        <%--</li>--%>
-        <%--</ul>--%>
-        <%--<c:if test="${productModel.amount <= 0}">--%>
-            <%--<a  class="bd btn-cart">缺货</a>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${productModel.amount > 0}">--%>
-            <%--<a class="bd btn-cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" >加 入 购 物 车</a>--%>
-        <%--</c:if>--%>
+            </ul>
+        </div>
+        <!-- //End---->
     </div>
 </div>
-<div class="am-dimmer am-active" data-am-dimmer="" style="display: none;"></div>
+<div class="am-dimmer am-active" data-am-dimmer="" style="display:none"></div>
+<!--//End--Start--选择规格弹出框-->
 <script type="text/javascript">
     function collect(o) {
         style = "visibility: none;"
@@ -276,30 +275,17 @@
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
+
     $().ready(function(){
         $("img").each(function(){
             $(this).css("width","100%");
         })
         $("img").each(function(){
-            var length = ${fn:length(productModelList)};
-            for (var i=0; i<length; i++)
-            {
-                $('#personPhoto'+i).css("width","auto");
-            }
-
+                $(".user-favor").css("width","auto");
         })
-
+        $("img").each(function(){
+            $(".share-picture").css("width","auto");
+        })
     })
 </script>
 </body>

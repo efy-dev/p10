@@ -104,7 +104,7 @@ public class StatusTag extends TagSupport {
     public int doEndTag() throws JspException {
         JspWriter out = pageContext.getOut();
         try {
-            out.println(htmlTag); //页面中显示的内容
+            out.print(htmlTag.trim()); //页面中显示的内容
         } catch (IOException e) {
             throw new JspException(e);
         }

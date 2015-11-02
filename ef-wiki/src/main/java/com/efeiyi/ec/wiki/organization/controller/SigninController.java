@@ -171,7 +171,7 @@ public class   SigninController extends BaseController {
         return "/register" ;
     }
 
-    @RequestMapping("sso.do")
+    @RequestMapping("/sso.do")
     public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");
     }

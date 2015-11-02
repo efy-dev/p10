@@ -155,7 +155,7 @@
                                         </div>
                                     </td>
                                     <td width="171"><span
-                                            class="moneycl">${(product.productModel.price.intValue())*product.amount}</span>
+                                            class="moneycl">${(product.productModel.price)*product.amount}</span>
                                     </td>
                                     <td width="137">
                                         <span>x${product.amount}</span>

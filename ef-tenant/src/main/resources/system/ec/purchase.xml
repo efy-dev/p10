@@ -63,11 +63,15 @@
                 <field name="logisticsCompany" label="物流公司" inputType="text">
                     <statusType fieldName="logisticsCompany">
                         <item label="顺丰" value="shunfeng"/>
+                        <item label="圆通" value="yuantong"/>
+                        <item label="申通" value="shentong"/>
                         <item label="中通" value="zhongtong"/>
                         <item label="韵达" value="yunda"/>
-                        <item label="圆通" value="yuantong"/>
-                        <item label="国通" value="guotongkuaidi"/>
-                        <item label="申通" value="shentong"/>
+                        <item label="宅急送" value="zhaijisong"/>
+                        <item label="EMS" value="ems"/>
+                        <item label="汇通快运" value="huitongkuaidi"/>
+                        <item label="天天快递" value="tiantian"/>
+                        <item label="UPS" value="ups"/>
                     </statusType>
                 </field>
             </fields>

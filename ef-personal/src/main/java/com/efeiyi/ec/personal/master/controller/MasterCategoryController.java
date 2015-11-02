@@ -268,6 +268,122 @@ public class MasterCategoryController {
 			master.setFollowStatus("关注");
 		}
 		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
+		MasterModel masterModel = ConvertMasterModelUtil.convertMasterWork(master,works);
+		return masterModel;
+	}
+	/******PC start******/
+
+	@ResponseBody
+	@RequestMapping("/getClassifyData.do")
+	public List getDataByClassify(HttpServletRequest request)throws Exception{
+		String qm = request.getParameter("qm");
+		MyUser user = AuthorizationUtil.getMyUser();
+		List<MasterModel> list = new ArrayList<>();
+		if ("plistMaster_all".equals(qm)){
+			XQuery query = new XQuery(qm,request);
+			PageEntity pageEntity = new PageEntity();
+			String pageIndex = request.getParameter("pageEntity.index");
+			String pageSize = request.getParameter("pageEntity.size");
+			if (pageIndex != null) {
+				pageEntity.setIndex(Integer.parseInt(pageIndex));
+				pageEntity.setSize(Integer.parseInt(pageSize));
+			}
+			query.setPageEntity(pageEntity);
+			PageInfo pageInfo = baseManager.listPageInfo(query);
+//			List<MasterModel> list = new ArrayList<>();
+			List<Master> masters = pageInfo.getList();
+			if (masters != null && masters.size() > 0){
+				for (Master master : masters){
+					MasterModel masterModel = convert(master,user);
+					list.add(masterModel);
+				}
+			}
+			return list;
+		}else if("plistMasterProject_default".equals(qm)){
+			String conditions = request.getParameter("conditions");
+			String projectId = conditions.split(":")[1].substring(0,conditions.split(":")[1].length() - 1);
+			String queryHql = "from MasterProject p where p.project.id =:projectId and p.status='1'";
+			LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+			queryMap.put("projectId",projectId);
+			List<MasterProject> masterProjects = baseManager.listObject(queryHql,queryMap);
+//			List<MasterModel> list = new ArrayList<>();
+			if (masterProjects != null && masterProjects.size() > 0){
+				for (MasterProject masterProject : masterProjects){
+					MasterModel masterModel = convert(masterProject.getMaster(),user);
+					list.add(masterModel);
+				}
+			}
+			return list;
+		}else if("plistMaster_byLevel".equals(qm)){
+			String conditions = request.getParameter("conditions");
+			String level = conditions.split(":")[1].substring(0,conditions.split(":")[1].length() - 1);
+			XQuery xQuery = new XQuery(qm,request);
+			xQuery.put("level",level);
+			PageEntity pageEntity = new PageEntity();
+			String pageIndex = request.getParameter("pageEntity.index");
+			String pageSize = request.getParameter("pageEntity.size");
+			if (pageIndex != null) {
+				pageEntity.setIndex(Integer.parseInt(pageIndex));
+				pageEntity.setSize(Integer.parseInt(pageSize));
+			}
+			xQuery.setPageEntity(pageEntity);
+			PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+			List<Master> masters = pageInfo.getList();
+//			List<MasterModel> list = new ArrayList<>();
+			if (masters != null && masters.size() > 0){
+				for (Master master : masters){
+					MasterModel masterModel = convert(master,user);
+					list.add(masterModel);
+				}
+			}
+			return list;
+		}else if("plistMaster_byCity".equals(qm)){
+			String conditions = request.getParameter("conditions");
+			String cityId = conditions.split(":")[1].substring(0,conditions.split(":")[1].length() - 1);
+			XQuery xQuery = new XQuery(qm,request);
+			xQuery.put("originProvince_id",cityId);
+			PageEntity pageEntity = new PageEntity();
+			String pageIndex = request.getParameter("pageEntity.index");
+			String pageSize = request.getParameter("pageEntity.size");
+			if (pageIndex != null) {
+				pageEntity.setIndex(Integer.parseInt(pageIndex));
+				pageEntity.setSize(Integer.parseInt(pageSize));
+			}
+			xQuery.setPageEntity(pageEntity);
+			PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+			List<Master> masters = pageInfo.getList();
+//			List<MasterModel> list = new ArrayList<>();
+			if (masters != null && masters.size() > 0){
+				for (Master master : masters){
+					MasterModel masterModel = convert(master,user);
+					list.add(masterModel);
+				}
+			}
+			return list;
+		}
+		return list;
+	}
+
+	public MasterModel convert(Master master , MyUser user){
+		String querySql = "from MasterWork w where w.master.id=:masterId and w.status='1'";
+		LinkedHashMap<String,Object> map = new LinkedHashMap<>();
+		map.put("masterId", master.getId());
+		List<MasterWork> works = baseManager.listObject(querySql,map);
+		if (user != null && user.getId() != null){
+			String querySql1 = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
+			LinkedHashMap<String,Object> map1 = new LinkedHashMap<>();
+			map1.put("masterId",master.getId());
+			map1.put("userId",user.getId());
+			MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(querySql1,map1);
+			if (followed != null){
+				master.setFollowStatus("已关注");
+			}else{
+				master.setFollowStatus("关注");
+			}
+		}else{
+			master.setFollowStatus("关注");
+		}
+		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
 		MasterModel masterModel = ConvertMasterModelUtil.convertMasterWork(master, works);
 		return masterModel;
 	}

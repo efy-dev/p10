@@ -95,6 +95,13 @@
                     <query name="tenant" label="商家产品" type="auto" orderBy="id:desc">
                         <condition name="tenant.id" defaultValue="0" operation="eq"/>
                     </query>
+                    <query name="default" label="商家产品" type="auto" orderBy="id:desc">
+                        <condition name="tenant.id" defaultValue="0" operation="eq"/>
+                        <condition name="project.id" defaultValue="0" operation="eq"/>
+                    </query>
+                    <query name="default1" label="项目管理产品" type="auto" orderBy="id:desc">
+                        <condition name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
                 </do>
                 <!--写两个list主要是为了不用一个列表页面，因为后台涉及到点击页面中的链接菜单选中的问题-->
                 <do name="listTenantProduct" label="产品列表" access="" result="/product/tenantProductList">
@@ -175,11 +182,11 @@
                 </do>
                 <do name="plistKCProductModel" access="" label="产品分页列表"
                     result="/productModel/productModelKCPList" >
-                    <query name="default" label="默认" type="auto" orderBy="serial:desc">
+                    <query name="default" label="默认" type="auto" orderBy="amount:asc">
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                         <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
                     </query>
-                    <query name="default1" label="快速查询" type="auto" orderBy="serial:desc">
+                    <query name="default1" label="快速查询" type="auto" orderBy="amount:asc">
                         <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
                         <condition name="name" defaultValue="" operation="like" label="产品名称" inputType="text"/>
                         <condition name="serial" defaultValue="" operation="like" label="产品编号" inputType="text"/>
@@ -412,6 +419,49 @@
 
             </does>
         </entity>
+        <entity name="Advertisement" label="产品列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.product.model.Advertisement">
+            <does>
+                <do name="plistAdvertisement" access="" label="产品分页列表"
+                    result="/advertisement/advertisementPList" >
+                    <query name="default" label="默认" type="auto" orderBy="adsOrder:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                        <!--<condition name="tenant.id" operation="ne" defaultValue="0" inputType="dialog_do" key="plistTenant_default"/>-->
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="adsOrder:desc">
+                        <condition name="name"  operation="like" label="广告名称" inputType="text"/>
+                        <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removeAdvertisement" label="删除广告" access="" result="json"/>
+                <do name="formAdvertisement" label="保存广告页" access="" result="/advertisement/advertisementForm" />
+                <do name="saveOrUpdateAdvertisement" label="保存产品描述" access="" result="/advertisement/advertisementSaveSuccess"
+                    execute="com.efeiyi.ec.system.advertisement.controller.AdvertisementFormHandler" />
+            </does>
+        </entity>
 
+        <entity name="PurchaseOrderComment" label="评价列表"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.PurchaseOrderComment">
+            <does>
+                <do name="plistPurchaseOrderComment" access="" label="评价分页列表"
+                    result="/purchaseOrderComment/purchaseOrderCommentPList" >
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="id:desc">
+                        <condition name="purchaseOrderProduct.purchaseOrder.serial"  operation="like" label="订单编号" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.name"  operation="like" label="产品名称" inputType="text"/>
+                        <condition name="purchaseOrderProduct.productModel.serial"  operation="like" label="产品编号" inputType="text"/>
+                        <condition name="status"  operation="ne" label="状态" defaultValue="0" inputType="default"/>
+                    </query>
+                </do>
+                <do name="removePurchaseOrderComment" label="删除评价" access="" result="json"/>
+                <do name="formPurchaseOrderComment" label="保存评价" access="" result="/purchaseOrderComment/purchaseOrderCommentForm" />
+                <do name="saveOrUpdatePurchaseOrderComment" label="保存产品描述" access="" result="/purchaseOrderComment/purchaseOrderCommentSaveSuccess"
+                   />
+            </does>
+        </entity>
     </entities>
 </module>

@@ -170,7 +170,7 @@
   function copyInit(obj){
 
     $(obj).zclip({
-      path: "http://www.steamdev.com/zclip/js/ZeroClipboard.swf",
+      path: "<c:url value="/scripts/zclip/ZeroClipboard.swf"/>",
       copy: function(){
         return $(this).attr("url");
       },

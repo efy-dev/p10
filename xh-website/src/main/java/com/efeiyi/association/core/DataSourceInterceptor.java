@@ -1,6 +1,5 @@
 package com.efeiyi.association.core;
 
-import com.ming800.core.util.HttpUtil;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -13,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DataSourceInterceptor extends HandlerInterceptorAdapter {
 
+
+
+
     /**
      * 拦截后处理，当前策略为恢复默认数据源
+     *
      * @param request
      * @param response
      * @param o
@@ -24,11 +27,14 @@ public class DataSourceInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object o, ModelAndView mav)
             throws Exception {
-        DatabaseContextHolder.setDataSource(null);
+
+            DatabaseContextHolder.setDataSource(null);
+
     }
 
     /**
      * 拦截前处理，当前策略为直接选择第二数据源
+     *
      * @param request
      * @param response
      * @param handler
@@ -37,7 +43,25 @@ public class DataSourceInterceptor extends HandlerInterceptorAdapter {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+
+        DatabaseContextHolder.getDataSourceLock(request).lock();
+
         DatabaseContextHolder.setDataSource("dataSource");
+
         return true;
+    }
+
+    /**
+     * 拦截最后解锁
+     * @param request
+     * @param response
+     * @param handler
+     * @throws Exception
+     */
+    @Override
+    public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        DatabaseContextHolder.getDataSourceLock(request).unlock();
+
     }
 }

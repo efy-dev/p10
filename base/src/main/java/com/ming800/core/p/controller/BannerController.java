@@ -103,5 +103,16 @@ public class BannerController {
         return  banner.getId();
     }
 
+    @RequestMapping("/updateBannerOrder.do")
+    @ResponseBody
+    public String updateBannerOrder(Banner banner){
 
+        try{
+            bannerManager.updateBannerOrder(banner);
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return  banner.getId();
+    }
 }

@@ -10,11 +10,11 @@
                 model="com.ming800.core.p.model.Banner">
             <does>
                 <do name="plistEcBanner" label="电商网站轮播图列表" execute="com.efeiyi.ec.system.basic.controller.commonHandler" result="/banner/ecBannerPList">
-                    <query name="tenant" label="默认" type="auto" orderBy="id:desc">
+                    <query name="tenant" label="默认" type="auto" orderBy="bannerOrder:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <condition name="group" defaultValue="ec.home.banner" operation="eq" inputType="default"/>
                     </query>
-                    <query name="search" label="快速查询" type="auto" orderBy="id:desc">
+                    <query name="search" label="快速查询" type="auto" orderBy="bannerOrder:desc">
                         <condition name="status" defaultValue="1" operation="eq" inputType="default"/>
                         <condition name="title" operation="like" inputType="text" label="标题"/>
                         <condition name="group" defaultValue="ec.home.banner" operation="eq" inputType="default"/>
@@ -23,20 +23,20 @@
                 <do name="plistBanner" access="" label="轮播图列表"
                     execute="com.efeiyi.ec.system.basic.controller.commonHandler"
                      result="/banner/bannerPList" >
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="bannerOrder:desc">
                         <condition name="id" defaultValue="1" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
-                    <query name="master" label="传承人轮播图" type="auto" orderBy="id:desc">
+                    <query name="master" label="传承人轮播图" type="auto" orderBy="bannerOrder:desc">
                       <condition name="group" defaultValue="master" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
 
-                    <query name="master.homePage" label="首页轮播图" type="auto" orderBy="id:desc">
+                    <query name="master.homePage" label="首页轮播图" type="auto" orderBy="bannerOrder:desc">
                         <condition name="group" defaultValue="master.homePage" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
-                    <query name="tenant" label="电商网站轮播图" type="auto" orderBy="id:desc">
+                    <query name="tenant" label="电商网站轮播图" type="auto" orderBy="bannerOrder:desc">
                         <condition name="group" defaultValue="tenant" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>

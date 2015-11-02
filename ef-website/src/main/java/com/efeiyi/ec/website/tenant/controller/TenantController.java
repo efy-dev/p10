@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.tenant.controller;
 
 import com.efeiyi.ec.product.model.ProductModel;
 import com.efeiyi.ec.tenant.model.Tenant;
+import com.efeiyi.ec.tenant.model.TenantMaster;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.Page;
 import com.ming800.core.does.model.PageInfo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -32,12 +34,15 @@ public class TenantController {
     public String listProduct(@PathVariable String tenantId, HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("plistProductModel_default1",request,12);
         xQuery.put("product_tenant_id",tenantId);
-        XQuery xQuery1 = new XQuery("listTenantMaster_default",request);
-        xQuery1.put("tenant_id",tenantId);
+
+        String queryHql = "from "+TenantMaster.class.getName()+" t where t.tenant.id =:tenantId and t.status ='1' order by t.id desc";
+        LinkedHashMap<String , Object> queryParamMap = new LinkedHashMap<>();
+        queryParamMap.put("tenantId",tenantId);
+        List<TenantMaster> list1 = baseManager.listObject(queryHql,queryParamMap);
+
         xQuery.addRequestParamToModel(model,request);
         List<ProductModel> list = baseManager.listPageInfo(xQuery).getList();
         Tenant tenant = (Tenant) baseManager.getObject(Tenant.class.getName(),tenantId);
-        List list1 = baseManager.listObject(xQuery1);
         model.addAttribute("productModelList", list);
         model.addAttribute("tenantId",tenantId);
         model.addAttribute("tenant",tenant);

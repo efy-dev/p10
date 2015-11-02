@@ -110,6 +110,28 @@ public class ProjectCategoryController extends BaseController {
 
     }
 
+    @RequestMapping("/pc/category")
+    public ModelAndView getProjectCategoryList2(HttpServletRequest request, Model model)throws Exception{
+        XQuery xQuery = new XQuery("plistProjectCategory_byType",request);
+        List<ProjectCategory> list = baseManager.listObject(xQuery);
+        model.addAttribute("ProjectCategoryList",list);
+        XQuery xQuery2 = new XQuery("listAddressProvince_default",request);
+        List<AddressProvince> list2 = baseManager.listObject(xQuery2);
+        model.addAttribute("AddressProvinceList",list2);
+        if (AuthorizationUtil.getMyUser().getId() != null) {
+            XQuery query3 = new XQuery("listProjectFollowed_isShow", request);
+            query3.put("user_id", AuthorizationUtil.getMyUser().getId());
+            List<ProjectFollowed> projectFolloweds = baseManager.listObject(query3);
+            if (projectFolloweds.size() >= 5) {
+                model.addAttribute("isShow", "ok");
+            } else {
+                model.addAttribute("isShow", "no");
+            }
+        } else {
+            model.addAttribute("isShow", "no");
+        }
 
+        return  new ModelAndView("/classify/projectClassify");
+    }
 
 }

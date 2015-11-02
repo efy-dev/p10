@@ -41,61 +41,30 @@
   <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
-<div class="topbar wh" data-am-sticky>
-  <div class="hd">
-    <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="" title="请登录">请登录</a></li>
-      <li><a href="" title="快速注册">快速注册</a></li>
-      <li class="btn-top-wechat">
-        <a title="手机e飞蚁">手机e飞蚁</a>
-        <span class="top-wechat"></span>
-      </li>
-      <li class="cart">
-        <a href="" title="购物车"><i class="icon"></i>购物车</a>
-        <span class="tips"><em>0</em></span>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- //End--topbar-->
-<div class="header wh">
-  <div class="hd">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
 
-        <li><a href="" title="传承人">大师</a></li>
-        <li><a href="" title="展览">工艺</a></li>
-
-      </ul>
-    </div>
-  </div>
-</div>
 <!-- //End--header-->
 <div class="craft-details ">
   <div class="nav-bars ae">
     <ul class="bars">
-      <li ><a href="<c:url value='/pc/index.do'/>">动&nbsp;态</a></li>
+      <li ><a href="<c:url value='/pc/index.do'/>">热&nbsp;门</a></li>
       <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
       <li><a href="<c:url value='/pc/beforeAttention.do'/>">关注</a></li>
       <%}%>
       <%
         if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
       %>
-      <li ><a href="<c:url value='/pc/afterAttention.do'/>">已关注</a></li>
+      <li ><a href="<c:url value='/pc/afterAttention.do'/>">关注</a></li>
       <%}%>
 
-      <li class="active"><a href="<c:url value='/category.do'/>">发&nbsp;现</a></li>
+      <li class="active"><a href="<c:url value='/pc/category'/>">发&nbsp;现</a></li>
     </ul>
   </div>
 </div>
 <!--nav-bars-->
 <div class="list-find">
-  <div class="list-f-title">
+  <%--<div class="list-f-title">
     <p><a>工艺</a><i class="fu-icon"></i><span>发现</span></p>
-  </div>
+  </div>--%>
   <div class="list-f-select">
     <div class="f-select-group">
       <div class="select-head">
@@ -155,7 +124,7 @@
         <ul class="gy-grounp ae" id="hot">
 
         </ul>
-        <div class="f-r-gd ae"><a href="#" onclick="getMoreHotProject()"><span>更多工艺</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="javascript:void(0);" onclick="getMoreHotProject()"><span>更多工艺</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>新加入工艺</span></div>
@@ -168,46 +137,7 @@
 </div>
 
 
-<div class="footer wh">
-  <div class="service wh">
-    <div class="icon phone"></div>
-    <div class="line"></div>
-    <div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>
-    <div class="line"></div>
-    <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
-    <div class="line"></div>
-    <div class="icon wechat"></div>
-  </div>
-  <div class="links wh">
-    <a href="" target="_blank" title="关于我们">关于我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="联系我们">联系我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="意见反馈">意见反馈</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="帮助中心">帮助中心</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚信保障">诚信保障</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
-  </div>
-  <div class="copyright wh">
-    <div class="phone">
-      <strong>商家入住热线</strong>
-      <em>400-876-8766</em>
-    </div>
-    <div class="frlinks">
-      <span>友情链接：</span>
-      <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-      <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-      <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-    </div>
-    <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-  </div>
-</div>
+
 
 <script>
 
@@ -238,7 +168,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -254,14 +184,14 @@
                     "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
-           var box = $("<li> <dl> <dt><a href=\"#\"><img src=\"http://pro.efeiyi.com/"+data[i].picture_url+"\"></a> " +
+           var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> " +
                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
-                   "<div class=\"text2\"><span>"+data[i].projectName+"</span></div>  <p>"+levelName+"</p> " +
-                   "<p style='height:112px;overflow: hidden'>"+data[i].description+"</p> " +
+                   "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
+                   "<p class='text5'>"+data[i].description+"</p> " +
                    "<div class=\"text3\"><span>"+data[i].works+" 件作品</span>" +
                    "<span>"+data[i].masters+"位大师</span></div> " +
-                   "<a href=\"#\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
                    "</dd> </dl> </li> ");
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
@@ -305,7 +235,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -314,9 +244,9 @@
             }
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
-                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_url+"\"></a> </div>");
+                    "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);
@@ -344,7 +274,7 @@
     var flag = false;
     $.ajax({
       type:"get",//设置get请求方式
-      url:url+StartNum2,//设置请求的脚本地址
+      url:url+StartNum3,//设置请求的脚本地址
       data:"",//设置请求的数据
       async:true,
       dataType:"json",//设置请求返回的数据格式
@@ -360,7 +290,7 @@
               case "3":levelName="市级非物质文化遗产";break;
               default:levelName="县级非物质文化遗产";
             }
-            var isA = checkIsAttention("'"+data[i].projectId+"'");
+            var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
               word="取消关注";
@@ -369,9 +299,9 @@
             }
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
-                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"#\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
+                    "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
-                    "<img src=\"http://pro.efeiyi.com/"+data[i].picture_url+"\"></a> </div>");
+                    "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
             //PBL("#beforeAttention",".before",2);
@@ -381,7 +311,7 @@
           flag = true;
         }
 
-        StartNum2=StartNum2+1;
+        StartNum3=StartNum3+1;
       },
       error:function(){
 
@@ -449,7 +379,7 @@
     var mark = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"oper"+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
@@ -518,18 +448,18 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
+      url:"<c:url value='/base/Isattention/'/>"+projectId,
       data:"",
       async:false,
       dataType:"json",
       success:function(data){
         if(data==false){
           isAttention = false;
-          return false;
+          //return false;
         }
         if(data==true){
           isAttention=true;
-          return true;
+          //return true;
         }
       },
       error:function(){
@@ -540,8 +470,8 @@
       complete:function(){
 
       }
-    })
-
+    });
+    return isAttention;
   }
 
   function getMoreHotProject(){
@@ -564,6 +494,7 @@
   var getStartNum = 0;
   var StartNum = 1;
   var StartNum2 = 1;
+  var StartNum3 = 1;
   var ajaxkey = true;//设置ajax请求的开关,如需动态加载、需要打开这个开关
   var ajaxkey2 = true;
   var isAttention = false;

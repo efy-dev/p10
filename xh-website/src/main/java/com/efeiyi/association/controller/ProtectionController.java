@@ -83,10 +83,13 @@ public class ProtectionController {
         //再从中找到query的信息
         DoQuery tempDoQuery = tempDo.getDoQueryByName(qm.split("_")[1]);
 
-        List list = (List) xdoManager.list(tempDo, tempDoQuery, null);
+        List<Document> list = (List<Document>) xdoManager.list(tempDo, tempDoQuery, null);
         if (list != null && list.size()>1){
-            modelMap.put("object", list.get(0));
-            modelMap.put("object2", list.get(1));
+            for(Document document : list){
+                modelMap.putIfAbsent(document.getKeywords(),document);
+            }
+//            modelMap.put("object", list.get(0));
+//            modelMap.put("object2", list.get(1));
         }
         modelMap.addAttribute("submitResult",request.getParameter("submitResult"));
         return new ModelAndView("/protection/declare");
