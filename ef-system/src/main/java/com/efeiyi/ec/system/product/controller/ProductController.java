@@ -583,4 +583,17 @@ public class ProductController extends BaseController {
         }
         return tempAmount;
     }
+
+    @RequestMapping("/outExcel.do")
+    @ResponseBody
+    public String outExcel2(HttpServletRequest request) {
+
+        try {
+           productManager.outExcel1();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

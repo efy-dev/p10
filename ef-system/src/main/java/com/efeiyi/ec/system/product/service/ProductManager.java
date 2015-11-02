@@ -20,4 +20,6 @@ public interface ProductManager {
     Subject saveSubject(Subject subject, String[] flag,String[] spId,String[] subjectPicture);
 
     Product setProductStatus(String status,String id);
+
+   void outExcel1();
 }
