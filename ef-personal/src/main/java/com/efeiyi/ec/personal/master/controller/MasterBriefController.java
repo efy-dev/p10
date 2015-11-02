@@ -79,7 +79,7 @@ public class MasterBriefController {
 		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
 		work.setPraiseStatus(work.getPraiseStatus()==null?"赞":work.getPraiseStatus());
 		MyUser user = AuthorizationUtil.getMyUser();
-		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId";
+		String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status='1'";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("masterId",work.getMaster().getId());
 		queryMap.put("userId",user.getId());

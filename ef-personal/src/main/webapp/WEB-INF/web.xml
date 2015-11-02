@@ -17,14 +17,7 @@
     <!--</filter>-->
 
     <!--sitemesh3 配置-->
-    <filter>
-        <filter-name>sitemesh</filter-name>
-        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+
     <!--懒加载配置-->
     <filter>
         <filter-name>lazyLoadingFilter</filter-name>
@@ -93,7 +86,14 @@
         <url-pattern>*.do</url-pattern>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <welcome-file-list>
         <welcome-file>/masterMessage/index.do</welcome-file>
