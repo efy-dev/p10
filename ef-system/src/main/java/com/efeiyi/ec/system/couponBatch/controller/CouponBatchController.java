@@ -5,20 +5,29 @@ import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.purchase.model.Coupon;
 import com.efeiyi.ec.purchase.model.CouponBatch;
 import com.efeiyi.ec.system.product.model.ProductDateModel;
+import com.efeiyi.ec.system.util.ExportExcel;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.efeiyi.ec.tenant.model.TenantProject;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AutoSerialManager;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -277,4 +286,40 @@ public class CouponBatchController extends BaseController {
         }
         return couponBatchId;
     }
+
+
+    @RequestMapping("/download.do")
+    @ResponseBody
+    public ResponseEntity<byte[]> download(HttpServletRequest request) throws Exception {
+        String couponBatchId = request.getParameter("id");
+
+        CouponBatch couponBatch = (CouponBatch) baseManager.getObject(CouponBatch.class.getName(), couponBatchId);
+
+        String fileName = couponBatch.getName();
+
+        ExportExcel exportExcel = new ExportExcel();
+        List<Coupon> couponList = couponBatch.getCouponList();
+        List<String> uniqueKeyList = new ArrayList<>();
+        for(Coupon coupon : couponList){
+            uniqueKeyList.add(coupon.getUniqueKey());
+        }
+
+        String[] title = {"兑换码"};
+
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+        File downloadFile = new File(path);
+
+        if(!downloadFile.exists()){
+            downloadFile.mkdir();
+        }
+        String resultFileName = exportExcel.exportExcel(path, fileName, title, uniqueKeyList);
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        File file = new File(path+"/"+resultFileName);
+        headers.setContentDispositionFormData("attachment", new String(resultFileName.getBytes("UTF-8"),"iso-8859-1"));
+        byte[] bytes = FileUtils.readFileToByteArray(file);
+        return new ResponseEntity<byte[]>(bytes,headers, HttpStatus.OK);
+    }
+
 }

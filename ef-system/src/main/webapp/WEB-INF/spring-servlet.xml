@@ -47,6 +47,7 @@
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <util:list id="beanList">
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
                 <ref bean="mappingJacksonHttpMessageConverter"/>
             </util:list>
         </property>
@@ -67,6 +68,7 @@
             </list>
         </property>
     </bean>
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/view/pc" p:suffix=".jsp"/>
     <context:annotation-config/>
