@@ -32,7 +32,7 @@
 <body>
 <header class="am-header custom-header">
     <div class="am-header-left am-header-nav">
-        <a href="#chevron-left" class="chevron-left"></a>
+        <a href="javascript:history.go(-1)" class="chevron-left"></a>
     </div>
     <!-- //End--chevron-left-->
     <h1 class="am-header-title">我的参团</h1>
@@ -53,10 +53,10 @@
             <c:if test="${member.group.status=='5'}">
                 <p>组团失败</p>
             </c:if>
-            <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
-                <c:if test="${member.level==0}">
+            <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
+                <c:if test="${memberTemp.level==0}">
                     <c:set var="commander">
-                        ${member.user.name}
+                        ${memberTemp.user.name}
                     </c:set>
                 </c:if>
             </c:forEach>

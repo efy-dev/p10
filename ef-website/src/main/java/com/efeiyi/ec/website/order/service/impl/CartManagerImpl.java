@@ -80,7 +80,7 @@ public class CartManagerImpl implements CartManager {
                     if (cart.getId() == null) {
                         cartProductTemp.setProductModel((ProductModel) baseManager.getObject(ProductModel.class.getName(), cartProductTemp.getProductModel().getId()));
                     }
-                    if (!stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
+                    if (stockManager.isOutOfStock(cartProductTemp.getProductModel(), cartProductTemp.getAmount() + count)) {
                         cartProductTemp.setAmount(cartProductTemp.getProductModel().getAmount());
                     } else {
                         cartProductTemp.setAmount(cartProductTemp.getAmount() + count);
