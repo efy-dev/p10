@@ -8,6 +8,7 @@
   .list-class .ul-list-img p{
     padding:0;
   }
+
 </style>
 <body>
 <artice class="custom">
@@ -17,13 +18,13 @@
     </ul>
     <ul class="bd ul-list">
       <c:forEach items="${productModelList}" var="productModel">
-        <a href="<c:url value="/product/productModel/${productModel.productModel.id}"/>">
         <li class="bd">
+          <a href="<c:url value="/product/productModel/${productModel.productModel.id}"/>">
           <img width="100%" src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}@!product-model-wap-subject" alt="">
           <p class="name">${productModel.productModel.product.name}</p>
           <p class="price red"><em>￥</em><span>${productModel.productModel.price}</span></p>
+          </a>
         </li>
-        </a>
       </c:forEach>
     </ul>
   </div>
