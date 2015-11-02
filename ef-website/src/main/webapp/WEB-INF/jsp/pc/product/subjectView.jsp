@@ -20,7 +20,7 @@
         <%--</ul>--%>
     <%--</div>--%>
     <!-- //End--focus-->
-    <div class="goods-rec-hd wh">
+    <div class="goods-rec-hd wh" style="padding: 20px 0;">
         ${subject.subjectDescription.content}
         <%--<div class="goods-rec-hd-left wh">--%>
         <%--<div class="title"><i class="icon icon-l"></i><strong>铜的历史</strong><i class="icon icon-r"></i></div>--%>

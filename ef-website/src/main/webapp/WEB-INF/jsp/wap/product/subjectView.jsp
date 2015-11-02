@@ -4,6 +4,11 @@
 <html class="no-js">
 <head>
   <title>【 精选专题 】 -e飞蚁</title>
+<style>
+  .list-class .ul-list-img p{
+    padding:0;
+  }
+</style>
 <body>
 <artice class="custom">
   <div class="bd list-class">
