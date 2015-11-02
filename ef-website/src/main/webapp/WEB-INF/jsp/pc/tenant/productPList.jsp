@@ -4,7 +4,13 @@
 <!-- //End--header-->
 <html>
 <head>
-  <title>【" ${tenant.name}"】-e飞蚁</title>
+  <title>【${tenant.name}】-e飞蚁</title>
+  <c:if test="${not empty tenantMasterList}">
+    <c:set var="tenantName">
+      ${tenantMasterList.get(0).master.fullName}
+    </c:set>
+  </c:if>
+  <meta name="keywords" content="${productModelList.get(0).product.project.name},${tenantName},${tenant.name}" />
 </head>
 <body>
 <div class="hd shop">
