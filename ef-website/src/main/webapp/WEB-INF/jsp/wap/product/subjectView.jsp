@@ -20,7 +20,7 @@
       <c:forEach items="${productModelList}" var="productModel">
         <li class="bd">
           <a href="<c:url value="/product/productModel/${productModel.productModel.id}"/>">
-          <img width="100%" src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}@!product-model-wap-subject" alt="">
+          <img width="100%" src="http://pro.efeiyi.com/${productModel.productModel.productModel_url}@!product-model" alt="">
           <p class="name">${productModel.productModel.product.name}</p>
           <p class="price red"><em>￥</em><span>${productModel.productModel.price}</span></p>
           </a>
