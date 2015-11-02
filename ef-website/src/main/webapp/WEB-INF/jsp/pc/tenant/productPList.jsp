@@ -10,7 +10,16 @@
       ${tenantMasterList.get(0).master.fullName}
     </c:set>
   </c:if>
-  <meta name="keywords" content="${productModelList.get(0).product.project.name},${tenantName},${tenant.name}" />
+  <c:if test="${not empty productModelList}">
+    <c:set var="projectName">
+      ${productModelList.get(0).product.project.name}
+    </c:set>
+    <c:set var="projectContent">
+      ${productModelList.get(0).product.project.name}
+    </c:set>
+  </c:if>
+  <meta name="keywords" content="${projectName},${tenantName},${tenant.name}" />
+  <meta name="description" content="${tenant.name},${projectContent}" />
 </head>
 <body>
 <div class="hd shop">
