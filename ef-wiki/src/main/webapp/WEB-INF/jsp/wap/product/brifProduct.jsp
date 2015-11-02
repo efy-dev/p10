@@ -82,7 +82,7 @@
     <div class="menu-page">
       <ul class="bd">
         <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
-        <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
+        <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
@@ -779,7 +779,7 @@ function savaUP(productId){
 <script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 
-<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<%--<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>--%>
 <script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 

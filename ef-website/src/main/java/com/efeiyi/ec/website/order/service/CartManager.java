@@ -23,8 +23,6 @@ public interface CartManager {
     /**
      * 初始化当前用户的购物车 是否登陆的判断放到Controller中去处理，如果登陆 那么就直接fetchCart获取购物车，如果未登陆，就直接取session中的Cart CartManager中需要添加一个临时变量存储cart
      */
-    Cart initCart();
-
     Cart addToCart(Cart cart, ProductModel productModel, Integer count);
 
     Cart removeFromCart(Cart cart, CartProduct cartProduct);
