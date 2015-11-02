@@ -43,39 +43,7 @@
 
 </head>
 <body>
-<%--<div class="topbar wh" data-am-sticky>
-  <div class="hd">
-    <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8082%2Fj_spring_cas_security_check'/>" title="请登录">请登录</a></li>
-      <li><a href="" title="快速注册">快速注册</a></li>
-      <li class="btn-top-wechat">
-        <a title="手机e飞蚁">手机e飞蚁</a>
-        <span class="top-wechat"></span>
-      </li>
-      <li class="cart">
-        <a href="" title="购物车"><i class="icon"></i>购物车</a>
-        <span class="tips"><em>0</em></span>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- //End--topbar-->
-<div class="header wh">
-  <div class="hd">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
 
-        <li><a href="" title="传承人">大师</a></li>
-        <li><a href="<c:url value='/pc/index.do'/>" title="展览">工艺</a></li>
-
-      </ul>
-    </div>
-  </div>
-</div>--%>
-<!-- //End--header-->
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
@@ -175,6 +143,7 @@
         <div class="f-right-gy ae">
           <div class="h4"><span>传承人</span></div>
           <div class="craft-master2">
+            <c:if test="${!empty product.master}">
             <ul class="rf">
               <li>
                 <div class="text">
@@ -209,6 +178,7 @@
                 <div class="img"><img src="${product.master.favicon}"></div>
               </li>
             </ul>
+            </c:if>
           </div>
         </div>
       </div>

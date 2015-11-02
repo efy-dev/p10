@@ -51,7 +51,7 @@ public class MasterFollowedController {
 			str = "2";
 		}else if("2".equals(status)){
 			LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
-			String queryHql = "from MasterFollowed m where m.user.id=:userId and m.master.id=:masterId";
+			String queryHql = "from MasterFollowed m where m.user.id=:userId and m.master.id=:masterId and m.status = '1'";
 			queryMap.put("userId",myUser.getId());
 			queryMap.put("masterId",masterId);
 			MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql, queryMap);
@@ -90,7 +90,7 @@ public class MasterFollowedController {
 		if(user == null){
 			return false;
 		}else{
-			String queryHql = "from MasterFollowed m where m.master.id=:masterId and m.user.id=:userId";
+			String queryHql = "from MasterFollowed m where m.master.id=:masterId and m.user.id=:userId and m.status = '1'";
 			LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
 			queryMap.put("masterId",masterId);
 			queryMap.put("userId",user.getId());

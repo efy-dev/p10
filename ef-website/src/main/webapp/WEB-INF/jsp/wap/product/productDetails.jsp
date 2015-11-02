@@ -13,6 +13,13 @@
 <html class="no-js">
 <head>
     <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
+    <c:if test="${product.master!=null}">
+        <c:set var="master">
+            ${product.master.fullName}
+        </c:set>
+    </c:if>
+    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.tenant.name}"/>
+    <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
 

@@ -20,29 +20,23 @@
     <!--SSO -->
     <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
         <csrf disabled="true"/>
-
-        <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
-        <!--<intercept-url pattern="/masterMessage/forwardPage.do" access="isAuthenticated()"/>-->
-        <intercept-url pattern="/masterMessage/index.do" access="isAuthenticated()"/>
-        <!--<intercept-url pattern="/myEfeiyi/**" access="hasRole('ROLE_USER')"/>-->
+        <intercept-url pattern="/masterMessage/storeWork.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/masterMessage/praiseMessage.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/masterMessage/followMaster.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/masterMessage/storeMessage.do" access="isAuthenticated()"/>
         <intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>
-        <!-- logout-success-url="/login.html" -->
-        <!--        <logout logout-url="/login.do" success-handler-ref="casLogoutSuccessHandler"/>   -->
         <custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
         <custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
         <custom-filter position="CAS_FILTER" ref="casFilter"/>
-
     </http>
 
     <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
-        <!--<b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>-->
-        <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>
+        <b:property name="loginUrl" value="http://master.efeiyi.com/cas/login"/>
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <b:property name="service"  value="http://localhost:8080/j_spring_cas_security_check"/>
-        <!--<b:property name="service"  value="http://www2.efeiyi.com/j_spring_cas_security_check"/>-->
+        <b:property name="service"  value="http://master.efeiyi.com/ef-person/j_spring_cas_security_check"/>
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
