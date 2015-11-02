@@ -53,10 +53,10 @@
             <c:if test="${member.group.status=='5'}">
                 <p>组团失败</p>
             </c:if>
-            <c:forEach items="${member.group.memberList}" var="member" varStatus="rec">
-                <c:if test="${member.level==0}">
+            <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
+                <c:if test="${memberTemp.level==0}">
                     <c:set var="commander">
-                        ${member.user.name}
+                        ${memberTemp.user.name}
                     </c:set>
                 </c:if>
             </c:forEach>
