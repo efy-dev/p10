@@ -33,11 +33,12 @@ public class MasterWork {
     private Project project;  //类别
     private Date createDateTime;
     private  List<MasterWorkRecommended> masterWorkRecommendedList;//推荐
-// /   private  MasterWorkRecommended recommended;//推荐作品
+    // /   private  MasterWorkRecommended recommended;//推荐作品
 //    private List<ProjectTag> projectTagList;
     private String praiseStatus;
     private Integer amount;
     private Integer fsAmount;
+    private Integer storeAmount;
 
     @Transient
     public String getPraiseStatus() {
@@ -203,5 +204,14 @@ public class MasterWork {
 
     public void setFsAmount(Integer fsAmount) {
         this.fsAmount = fsAmount;
+    }
+
+    @Column(name = "store_amount")
+    public Integer getStoreAmount() {
+        return storeAmount;
+    }
+
+    public void setStoreAmount(Integer storeAmount) {
+        this.storeAmount = storeAmount;
     }
 }

@@ -34,10 +34,12 @@ public class MasterMessage implements Serializable {
 	private String dataSource; //来源
 	private Long praiseNum;//点赞数量
 	private String praiseStatus;
+	private String followStatus;
 	private Integer amount;//评论数量
 	private Integer fsAmount;//关注人数
 	private List<MasterNewsTag> masterNewsTagList;
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
+	private String remark;
 
 	@Id
 	@GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -57,6 +59,15 @@ public class MasterMessage implements Serializable {
 
 	public void setMasterName(String masterName) {
 		this.masterName = masterName;
+	}
+
+	@Transient
+	public String getFollowStatus() {
+		return followStatus;
+	}
+
+	public void setFollowStatus(String followStatus) {
+		this.followStatus = followStatus;
 	}
 
 	@Transient
@@ -208,5 +219,14 @@ public class MasterMessage implements Serializable {
 
 	public void setFsAmount(Integer fsAmount) {
 		this.fsAmount = fsAmount;
+	}
+
+	@Column(name = "remark")
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }
