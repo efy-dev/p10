@@ -13,6 +13,8 @@
 <html>
 <head>
     <title>【${proName}】-e飞蚁</title>
+    <meta name="keywords" content="${proName}" />
+    <meta name="description" content="${project.description}" />
 </head>
 <body>
 <!-- //End--header-->
