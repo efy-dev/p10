@@ -33,28 +33,6 @@ public class CartManagerImpl implements CartManager {
     @Autowired
     private StockManager stockManager;
 
-    //初始化购物车
-    public Cart initCart() {
-        MyUser bigUser = AuthorizationUtil.getMyUser();
-        Cart cart;
-        String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
-        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
-        param.put("userid", bigUser.getId());
-
-        cart = (Cart) baseManager.getUniqueObjectByConditions(hql, param);
-        if (cart == null && bigUser.getId() != null) {
-            User user = new User();
-            user.setId(bigUser.getId());
-            cart = new Cart();
-            cart.setUser(user);
-            cart.setCreateDatetime(new Date());
-            cart.setCartProductList(new ArrayList<CartProduct>());
-            baseManager.saveOrUpdate(Cart.class.getName(), cart);
-        }
-        return cart;
-    }
-
-
     private void updateTotalPrice(Cart cart) {
         BigDecimal totalPrice = new BigDecimal(0);
         for (CartProduct cartProductTemp : cart.getCartProductList()) {

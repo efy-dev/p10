@@ -115,6 +115,7 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
+        cartManager.fetchCart();
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);

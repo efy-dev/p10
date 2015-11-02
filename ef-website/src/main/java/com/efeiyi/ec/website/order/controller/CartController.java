@@ -37,20 +37,7 @@ public class CartController {
 
     @RequestMapping({"/cart/view"})
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
-        Cart cart = null;
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        if (currentUser.getId() != null) {
-            cart = cartManager.fetchCart();
-        } else {
-            if (request.getSession().getAttribute("cart") != null) {
-                cart = (Cart) request.getSession().getAttribute("cart");
-            } else {
-                cart = new Cart();
-                cart.setCartProductList(new ArrayList<CartProduct>());
-                request.getSession().setAttribute("cart", cart);
-            }
-        }
-
+        Cart cart = getCurrentCart(request);
         List<Tenant> tenantListTemp = new ArrayList<>();
         List<Tenant> tenantList = new ArrayList<>();
         List<CartProduct> cartProductList = cart.getCartProductList();
