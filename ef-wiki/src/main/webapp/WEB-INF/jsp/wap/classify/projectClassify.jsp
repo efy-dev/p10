@@ -192,24 +192,7 @@
   </div>
 </div>
 </div>
-<!--地区-->
-<%--<div class="login-reg">
-  <div class="bd logined">李先生8899，<a class="btn-exit" href="#退出">退出</a></div>
-  <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-  <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
-<!--//End--login-reg-->
-<footer class="bd footer">
-  <div class="bd info">
-    <a class="icon"></a>
-    <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台</div>
-    <div class="wechat"></div>
-    <div class="txt">关注微信公众号</div>
-    <div class="txt">领取超值代金券</div>
-  </div>
-  <div class="bd copyright">京ICP备15032511号-1</div>
-</footer>
-<!--//End--footer-->--%>
+
 
 <script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->
