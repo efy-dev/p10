@@ -677,8 +677,8 @@
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
-                        "<div class=\"right1\"> <a href=\"#\"> <i class=\"h-i-con2\"></i> " +
-                        "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
+                        "<div class=\"right1\"> <a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" name=\"up\" id=\"good-1\"> <i class=\"h-i-con2\"></i> " +
+                        "<span id=\"em1\">"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"javascript:void(0);\" onclick=\"storeProduct('"+data.list[i].id+"')\"> " +
                         "<i class=\"h-i-con3\"></i> </a> </div> </div> </div> </li></ul>"
               }
               //return html;
@@ -708,6 +708,82 @@
   }
   $('#waterfall').waterfall(opt);
 
+  function savaUpAndDown(ds){
+    var oper = $("#good-1").attr("name");
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/saveThumbUp.do?productId='/>"+ds+"&operation="+oper,
+      data:"",
+      dataType:"json",
+      success:function(data2){
+        if(data2=="false"){
+          alert("您还未登陆，请登录后再操作！！！");
+          return false;
+        }
+        if(data2=="repeat"){
+          alert("请不要重复操作！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
+          $("#em1").html(parseInt($("#em1").text())+1);
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
+        }
+        if(data2=="true" && oper=='down'){
+          $("#em1").html(parseInt($("#em1").text())-1);
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+
+
+      }
+    });
+  }
+  function storeProduct(productId){
+
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/storeProduct.do?productId='/>"+productId,//设置请求的脚本地址
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data=="false"){
+          alert("您还未登陆，请登录后再操作");
+          return false;
+        }
+        if(data=="repeat"){
+          alert("您已收藏过了！")
+          return true;
+        }
+        if(data=="true"){
+          alert("您好，收藏成功！")
+          return true;
+        }
+
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    });
+  }
 </SCRIPT>
 
 
