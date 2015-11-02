@@ -59,6 +59,14 @@ public class PersonController {
     public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
+        if(groupJoinList!=null&&groupJoinList.size()>0){
+             for(int i=0;i<groupJoinList.size();i++){
+                 Member member = (Member)groupJoinList.get(i);
+                 if("0".equals(member.getLevel())){
+                     groupJoinList.remove(member);
+                 }
+             }
+        }
         for(Object obj : groupJoinList){
             if("0".equals(((Member)obj).getLevel())){
                 groupJoinList.remove(obj);
