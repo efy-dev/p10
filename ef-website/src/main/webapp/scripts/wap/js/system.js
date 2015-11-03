@@ -30,17 +30,32 @@ $(function(){
     //020104商品详情
     (function(){
         //收藏
-        //$('.addfav').click(function(){
-        //    $(this).addClass('addfav-end').find('p').html('已收藏');
-        //    $('.alert-red-top').slideDown(100,function(){
-        //        setTimeout('$(".alert-red-top").slideUp(50)',3000)
-        //    });
-        //    return false;
-        //});
+        $('.addfav').click(function(){
+            $(this).addClass('addfav-end').find('p').html('已收藏');
+            $('.alert-red-top').slideDown(100,function(){
+                setTimeout('$(".alert-red-top").slideUp(50)',3000)
+            });
+            return false;
+        });
         //加入购物车悬浮层
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+        //
+        (function(){
+            $(window).scroll(function(){
+                var _top=$(window).scrollTop();
+                var btnTop=$('.scroll-bar-top');
+                if(_top>200){
+                    btnTop.fadeIn();
+                }else{
+                    btnTop.fadeOut();
+                }
+                btnTop.click(function(){
+                    $('body').stop(true).animate({'scrollTop':'0'},300);
+                })
+            })
+        })();
         //加入购物车-立即购买-调出规格弹出层
         $('#btn-cart,#btn-format,#btn-buy').click(function(){
             $('body').css('overflow','hidden');

@@ -12,9 +12,13 @@ a:hover { text-decoration: underline }
 .myod-text3 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat -144px -51px; float: left; }
 /*我的e非遗*/
 .myod-text4 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat -158px 0px; float: left; }
+/*登录*/
+.myod-text5 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  0px -167px; float: left; }
+/*忘记密码*/
+.myod-text6 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  -158px -167px; float: left; }
 /*各页面头部*/
 /*--reset--*/
-.wh1 { width: 100%; float: left; margin-bottom: 27px; }
+.wh1 { width: 100%; float: left; margin-bottom: 27px;position: relative;z-index: 1; }
 /*//End--commmon*/
 .my-order .order-nav { width: 1000px; height: auto; margin: 0 auto; overflow: hidden; margin: 62px auto 150px; }
 .my-order .order-nav .layout-nav { float: left; width: 110px; height: auto; padding: 20px 14px 25px; border: 1px solid #ccc; }
@@ -301,10 +305,10 @@ a:hover { text-decoration: underline }
 /*******************购物车************************/
 
 /*购物车页面*/
-.efeiyi-cart { margin: 70px auto 0; min-height: 580px; }
+.efeiyi-cart { margin: 70px auto 0; min-height:710px; }
 .efeiyi-cart .title table { width: 1000px; margin: 0 auto; }
 .efeiyi-cart .title table td { line-height: 40px; text-align: left; font-size: 12px; color: #666; font-family: simsun; font-weight: normal }
-.efeiyi-cart .wh1 { width: 100%; float: left; min-height: 700px; }
+.efeiyi-cart .wh1 { width: 100%; float: left}
 .efeiyi-cart .title table td label { font-size: 12px; color: #666; font-family: simsun; font-weight: normal; line-height: 12px; }
 .efeiyi-cart .active-box { padding-left: 16px; }
 .efeiyi-cart input[type=checkbox] { vertical-align: middle; width: 12px; height: 12px; border: 1px solid #ccc; }
@@ -832,20 +836,20 @@ a:hover { text-decoration: underline }
 /*注册修改兼容ie*/
 .login-form .msg-tips .msg { -ms-transform: none!important; }
 /*注册修改样式*/
-.reg-form .btn-p1 { width: 112px; height: 36px; line-height: 36px; text-align: center; border: 1px solid #ccc; float: left; text-decoration: none; font-family: KaiTi; background: #fff; transition: all 0.5s; }
+.reg-form .btn-p1 { width: 112px; height: 36px; line-height: 36px; text-align: center; border: 1px solid #ccc; float: left; text-decoration: none;background: #fff; transition: all 0.5s; }
 .reg-form .btn-p1:hover { background: #000; color: #fff; }
 /*我的卡券套用amazeui样式修改 my-kj*/
 .my-kj .am-tabs-default .am-tabs-nav a {font-size: 14px!important; color: #999!important; text-decoration: none; background: #fff; border: 1px solid #ccc; outline: none; }
 .my-kj .am-tabs-default .am-tabs-nav>.am-active a { font-size: 14px!important; color: #fff!important; text-decoration: none; background: #000; border: 1px solid #000; }
 .my-kj .am-tabs-bd { top: 30px; border-top: 1px solid #ccc; border: 1px solid #ccc; float: left }
 .my-kj .am-tabs-bd .am-tab-panel { padding: 0 23px; }
-.am-tabs-bd .am-tab-panel.am-active~.am-tab-panel
+
 .my-kj .am-tabs-nav .ul-list {
     width: 100%;
     float: left;
     margin-left: 1px;
 }
-.my-kj .am-tabs-nav .ul-list li.items {
+.my-kj .am-tabs-nav .ul-list li.items1 {
     width: 220px;
     line-height: 47px;
     text-align: center;
@@ -875,6 +879,13 @@ a:hover { text-decoration: underline }
 }
 
 
+.my-kj .am-tabs-bd .am-tab-panel.am-active~.am-tab-panel {
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
+}
+
+
 /*我的卡券自写样式*/
 .my-ds { position: relative!important; left: 50%!important; overflow: visible!important; display: inline-block!important; margin-left: -500px!important; }
 .my-kj { float: left; width: 100% }
@@ -882,11 +893,11 @@ a:hover { text-decoration: underline }
 .my-kj .serial-list-page .list-hd { padding-top: 26px; font-size: 14px; float: left; width: 100%; color: #000; }
 .my-kj .serial-list-page .list-zq { width: 100%; float: left; }
 .my-kj .serial-list-page .list-zq .serial-list { width: 100%; float: left; border-bottom: 1px solid #ccc; margin-bottom: -1px; padding: 26px 0 38px 0; }
-.my-kj .serial-list-page .list-zq .serial-list .list1 { width: 208px;height:111px; margin-right: 98px; float: left; margin-left: 14px;
+.my-kj .serial-list-page .list-zq .serial-list .list1 { width:251px;height:111px; margin-right:55px; float: left; margin-left: 14px;
     position: relative;}
 .my-kj .serial-list-page .list-zq .serial-list .list1 em.bg1 {
     background:url(../images/coupon.png) no-repeat 0 0;
-    width:208px;
+    width:251px;
     height:111px;
     position: absolute;
     top:0;
@@ -913,7 +924,7 @@ a:hover { text-decoration: underline }
     line-height: 30px;
 }
 .my-kj .serial-list-page .list-zq .serial-list .list1 strong {
-    width:120px;
+    width:146px;
     height: 111px;
     line-height:111px;
     position: absolute;
