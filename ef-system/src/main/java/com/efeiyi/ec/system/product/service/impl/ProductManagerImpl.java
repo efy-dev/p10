@@ -17,17 +17,14 @@ import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.format.VerticalAlignment;
 import jxl.write.*;
-import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
