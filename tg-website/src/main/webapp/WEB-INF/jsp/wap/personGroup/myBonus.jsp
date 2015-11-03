@@ -41,10 +41,20 @@
 <!--//End--header-->
 <div class="my-packet ae">
     <div class="top ae">
-        <div class="pic"><a href="#"><img src="/scripts/upload/yonghm.jpg"></a></div>
+        <div class="pic"><a href="#"><img src="<c:url value="/scripts/upload/yonghm.jpg"/>"></a></div>
         <div class="text">
-            <p>用户名：${AuthorizationUtil.myUser.userName}</p>
-            <p>红包总额：${totalBonus}元</p>
+            <p>用户名：${user.username}</p>
+            <c:if test="${empty user.redPacket}">
+            <c:set var="bonus">
+                   0
+            </c:set>
+            </c:if>
+            <c:if test="${not empty user.redPacket}">
+                <c:set var="bonus">
+                    ${user.redPacket}
+                </c:set>
+            </c:if>
+            <p>红包总额：${bonus}元</p>
         </div>
     </div>
     <div class="page ae">
