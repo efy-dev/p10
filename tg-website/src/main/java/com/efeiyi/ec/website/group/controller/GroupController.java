@@ -54,7 +54,7 @@ public class GroupController {
 
         boolean flag = false;
         String url1 = "";
-        if(groupId.equals("null")||groupId.isEmpty()){
+        if(groupId==null||groupId.isEmpty()){
             for(Group group:list){
                 for(Member member:group.getMemberList()){
                     if(member.getUser().getId().equals(currentUser.getId())&&member.getLevel().equals("0")){

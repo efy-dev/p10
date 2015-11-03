@@ -1,5 +1,7 @@
 package com.efeiyi.ec.personal.master.model;
 
+import com.efeiyi.ec.master.model.MasterComment;
+import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.master.model.MessageAttachment;
 
 import java.io.Serializable;
@@ -22,8 +24,14 @@ public class MasterModel implements Serializable{
 	private String dataSource;
 	private Integer amount;//评论数
 	private Integer fsAmount;//关注数
+	private Integer storeAmount;//收藏数
+	private String praiseStatus;
 	private Long praiseNum;
+	private String remark;
+	private String cityName;
 	private List<MessageAttachment> messageAttachmentLists;
+	private List<MasterWork> works;
+	private List<MasterComment> comments;
 
 	public String getId() {
 		return id;
@@ -71,6 +79,14 @@ public class MasterModel implements Serializable{
 
 	public void setLevel(String level) {
 		this.level = level;
+	}
+
+	public String getPraiseStatus() {
+		return praiseStatus;
+	}
+
+	public void setPraiseStatus(String praiseStatus) {
+		this.praiseStatus = praiseStatus;
 	}
 
 	public String getFollowStatus() {
@@ -129,11 +145,51 @@ public class MasterModel implements Serializable{
 		this.praiseNum = praiseNum;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Integer getStoreAmount() {
+		return storeAmount;
+	}
+
+	public void setStoreAmount(Integer storeAmount) {
+		this.storeAmount = storeAmount;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	public List<MessageAttachment> getMessageAttachmentLists() {
 		return messageAttachmentLists;
 	}
 
 	public void setMessageAttachmentLists(List<MessageAttachment> messageAttachmentLists) {
 		this.messageAttachmentLists = messageAttachmentLists;
+	}
+
+	public List<MasterWork> getWorks() {
+		return works;
+	}
+
+	public void setWorks(List<MasterWork> works) {
+		this.works = works;
+	}
+
+	public List<MasterComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<MasterComment> comments) {
+		this.comments = comments;
 	}
 }

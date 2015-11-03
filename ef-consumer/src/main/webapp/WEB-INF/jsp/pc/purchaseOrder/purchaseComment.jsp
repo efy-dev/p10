@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -49,8 +50,8 @@
                     <td width="400">
                       <div class="list-refer">
                         <dl>
-                          <dt><a href="#"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a></dt>
-                          <dd>${op.productModel.product.name}</dd>
+                          <dt><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a></dt>
+                          <dd><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></dd>
                         </dl>
                       </div>
                     </td>

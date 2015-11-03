@@ -10,7 +10,7 @@ $(function(){
         $('.footer .service .wechat').hover(function(){
             $(this).find('.icon').fadeIn('100');
         },function(){
-            $(this).find('.icon').delay(2000).fadeOut();
+            $(this).find('.icon').fadeOut();
         })
     })();
     //

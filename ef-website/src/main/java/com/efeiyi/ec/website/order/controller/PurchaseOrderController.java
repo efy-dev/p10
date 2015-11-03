@@ -61,7 +61,7 @@ public class PurchaseOrderController extends BaseController {
 
 
     @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
-    public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model,@PathVariable String amount) throws Exception {
+    public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(groupProduct.getProductModel());
@@ -115,14 +115,16 @@ public class PurchaseOrderController extends BaseController {
 
     @RequestMapping({"/easyBuy/{productModelId}"})
     public String buyImmediate(HttpServletRequest request, @PathVariable String productModelId, Model model) throws Exception {
+        cartManager.fetchCart();
         ProductModel productModel = (ProductModel) baseManager.getObject(ProductModel.class.getName(), productModelId);
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
         String amount = request.getParameter("amount");
-        if (amount==null){
-            amount = "1";
+        try {
+            cartProduct.setAmount(Integer.valueOf(amount));
+        }catch (Exception e){
+            cartProduct.setAmount(1);
         }
-        cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();

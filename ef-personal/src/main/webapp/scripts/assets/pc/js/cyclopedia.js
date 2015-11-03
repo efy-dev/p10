@@ -68,22 +68,22 @@ $(function(){
         return false;
     })
     //关注
-    $('.btn-guan').click(function(){
-        $(this).toggleClass('active');
-        if($(this).find('.gz-icon').is(':visible')){
-            $(this).find('.gz-icon').hide();
-            $(this).find('.icon-txl').hide();
-        }else{
-            $(this).find('.gz-icon').show();
-            $(this).find('.icon-txl').show();
-        }
-        if($(this).hasClass('active')){
-            $(this).find('em').html('已关注')
-        }else{
-            $(this).find('em').html('关注')
-        }
-        return false;
-    })
+    //$('.btn-guan').click(function(){
+    //    $(this).toggleClass('active');
+    //    if($(this).find('.gz-icon').is(':visible')){
+    //        $(this).find('.gz-icon').hide();
+    //        $(this).find('.icon-txl').hide();
+    //    }else{
+    //        $(this).find('.gz-icon').show();
+    //        $(this).find('.icon-txl').show();
+    //    }
+    //    if($(this).hasClass('active')){
+    //        $(this).find('em').html('已关注')
+    //    }else{
+    //        $(this).find('em').html('关注')
+    //    }
+    //    return false;
+    //})
     //110209工艺详情页-作品简介
     $('.details .detaile-left .detaile-intro .intro-matter li').click(function(){
         $(this).addClass('active').siblings('li').removeClass('active');
@@ -147,7 +147,30 @@ $(function(){
 
 //shoucang
 
+/*
 $(function(){
-    
+    $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').click(function(){
+        $(this).find('.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon').toggle(function(){
+            $(this).addClass('s-icon1');
+        }),
+        function(){
+            $(this).removeClass('s-icon')
+        }
+    })
 })
+*/
+
+
+//收藏
+//var oBiao=$('.details .detaile-left .detaile-share .thumb-up .thump-collect a');
+//oBiao.click(function(){
+//    var oCllect=$(this).parents('.collect');
+//    $(this).find('.s-icon').toggleClass('s-icon1');
+//    if($(this).hasClass('s-icon')){
+//        $(this).find('em').html('收藏')
+//    }else{
+//        $(this).find('em').html('已收藏')
+//    }
+//})
+//
 

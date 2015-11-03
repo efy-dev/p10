@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,7 +51,12 @@ public class GroupProductController {
     @RequestMapping(value = "/groupProduct/{groupProductId}")
     public String groupProductDetails(@PathVariable String groupProductId ,HttpServletRequest request, Model model) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", groupProduct.getProductModel().getId());
+        List<Object> purchaseOrderProductList = baseManager.listObject(purchaseOrderProductQuery);
+        Collections.reverse(purchaseOrderProductList);
         model.addAttribute("groupProduct", groupProduct);
+        model.addAttribute("purchaseOrderProductList", purchaseOrderProductList);
         return "/groupProduct/groupProductDetails";
     }
 

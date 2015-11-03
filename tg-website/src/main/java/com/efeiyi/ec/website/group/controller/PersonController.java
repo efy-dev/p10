@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.group.controller;
 
 import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.Member;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -59,10 +60,13 @@ public class PersonController {
     public String groupJoinList(HttpServletRequest request, Model model) throws Exception {
         XQuery xQuery = new XQuery("listJoinGroup_default",request);
         List<Object> groupJoinList = baseManager.listObject(xQuery);
-        for(Object obj : groupJoinList){
-            if("0".equals(((Member)obj).getLevel())){
-                groupJoinList.remove(obj);
-            }
+        if(groupJoinList!=null&&groupJoinList.size()>0){
+             for(int i=0;i<groupJoinList.size();i++){
+                 Member member = (Member)groupJoinList.get(i);
+                 if("0".equals(member.getLevel())){
+                     groupJoinList.remove(member);
+                 }
+             }
         }
         model.addAttribute("groupJoinList", groupJoinList);
         return "/personGroup/myJoinGroup";
@@ -75,14 +79,9 @@ public class PersonController {
      */
     @RequestMapping(value = "/bonusTotal.do")
     public String groupBonusTotal(HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("listCreateProduct_default",request);
-        xQuery.put("status","1");
-        List<Object> myCreateProductList = baseManager.listObject(xQuery);
-        BigDecimal totalBonus = new BigDecimal(0.0);
-        for(Object obj:myCreateProductList) {
-            totalBonus.add(((Group)obj).getGroupProduct().getBonus());
-        }
-        model.addAttribute("totalBonus",totalBonus);
+        String id = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+        model.addAttribute("user", user);
         return "/personGroup/myBonus";
     }
     /**
@@ -105,14 +104,7 @@ public class PersonController {
      */
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        Boolean flag = true;
-        if (currentUser.getId() != null) {
             return "/personGroup/personGroupInfo";
-        } else {
-            //返回登陆页面
-            return "/personGroup/personGroupInfo";
-        }
     }
 
 

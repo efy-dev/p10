@@ -38,7 +38,7 @@
   <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
-<header class="am-header custom-header">
+
   <header class="am-header custom-header">
     <div class="am-header-left am-header-nav">
       <a href="javascript:window.history.go(-1);" class="chevron-left"></a>
@@ -55,14 +55,86 @@
     <div class="menu-list">
       <div class="menu-page">
         <ul class="bd">
-          <li><a href="" title="首页">首页</a></li>
-          <li><a href="" title="分类">消&nbsp;息</a></li>
+          <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
+          <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
           <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
         </ul>
       </div>
     </div>
   </header>
-</header>
+  <div style="display: none" id="showMessage" class="pops-up">
+    <div style="background: #fff;position: relative;z-index:2;"  data-am-widget="tabs" class="am-tabs am-tabs-default am-no-layout">
+      <ul class="am-tabs-nav am-cf">
+        <%-- <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
+           <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>--%>
+        <li class="am-active"><a href="[data-tab-panel-0]">
+          <i class="bz-icon2"></i>
+          <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+        </a></li>
+        <li class=""><a href="[data-tab-panel-1]">
+          <i class="bz-icon3"></i>
+          <span style="float: left;margin-left: 10px;">点赞</span>
+        </a></li>
+      </ul>
+      <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+        <%--<div data-tab-panel-0="" class="am-tab-panel am-active">
+          <div class="aboud-you">
+            <div class="list-you"><span>这些人最近关注了你</span></div>
+            <ul class="list-name">
+              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Andy</span></li>
+              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Lily</span></li>
+              <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>wangjl</span></li>
+            </ul>
+            <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+          </div>
+        </div>--%>
+        <div data-tab-panel-0="" class="am-tab-panel am-active">
+          <div class="discuss">
+            <ul class="discuss-2" id="newcommentList">
+              <%-- <li class="review">
+                 <div class="matter">
+                   <p class="text-h1"><a href="#">Andya</a>回复了你</p>
+                   <p class="text-time">51分钟前</p>
+                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                     有关注过，真心觉得中国的非遗文化值得我们
+                     去传承。</a></p>
+                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+                 </div>
+               </li>
+               <li class="review">
+                 <div class="matter">
+                   <p class="text-h1"><a href="#">Joe</a>回复了你</p>
+                   <p class="text-time">1小时前</p>
+                   <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                     有关注过，真心觉得中国的非遗文化值得我们
+                     去传承。</a></p>
+                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+                 </div>
+               </li>--%>
+            </ul>
+            <div class="more"><a href="javascript:void(0);" onclick="getCommentList()"><i class="time-1"></i>查看更多评论</a></div>
+          </div>
+        </div>
+        <div data-tab-panel-1="" class="am-tab-panel ">
+          <div class="discuss">
+            <ul class="discuss-2" id="newPraiseList">
+              <%-- <li class="review">
+                 <div class="matter">
+                   <p class="text-h1">Joe</p>
+                   <p class="text-time">1小时前</p>
+                   <p class="text-content"><a href="#">觉得你的评论“还不错”很赞</a></p>
+                   <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+                 </div>
+
+               </li>--%>
+            </ul>
+            <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg" ></div>
+  </div>
 <input type="hidden" name="addType" id="addType" value="<%=request.getAttribute("addType")%>">
 <!--//End--header-->
 <!--传统技艺-->

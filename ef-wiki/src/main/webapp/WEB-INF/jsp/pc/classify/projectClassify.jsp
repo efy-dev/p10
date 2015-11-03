@@ -41,38 +41,7 @@
   <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
-<%--<div class="topbar wh" data-am-sticky>
-  <div class="hd">
-    <ul class="ul-item">
-      <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
-      <li><a href="" title="请登录">请登录</a></li>
-      <li><a href="" title="快速注册">快速注册</a></li>
-      <li class="btn-top-wechat">
-        <a title="手机e飞蚁">手机e飞蚁</a>
-        <span class="top-wechat"></span>
-      </li>
-      <li class="cart">
-        <a href="" title="购物车"><i class="icon"></i>购物车</a>
-        <span class="tips"><em>0</em></span>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- //End--topbar-->
-<div class="header wh">
-  <div class="hd">
-    <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
-    <div class="nav">
-      <ul>
-        <li><a href="" title="首页">首页</a></li>
 
-        <li><a href="" title="传承人">大师</a></li>
-        <li><a href="" title="展览">工艺</a></li>
-
-      </ul>
-    </div>
-  </div>
-</div>--%>
 <!-- //End--header-->
 <div class="craft-details ">
   <div class="nav-bars ae">
@@ -215,11 +184,11 @@
                     "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                     "<div class='gz-q'> <i class='gz-icon'></i> <em about='add' id='"+data[i].projectId+"'>"+word+"</em> </div> " +
                     "</a> </div> </li>");*/
-           var box = $("<li> <dl> <dt><a href=\"#\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> " +
+           var box = $("<li> <dl> <dt><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> " +
                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
-                   "<div class=\"text2\"><span>"+data[i].projectName+"</span></div>  <p>"+levelName+"</p> " +
-                   "<p style='height:112px;overflow: hidden'>"+data[i].description+"</p> " +
+                   "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
+                   "<p class='text5'>"+data[i].description+"</p> " +
                    "<div class=\"text3\"><span>"+data[i].works+" 件作品</span>" +
                    "<span>"+data[i].masters+"位大师</span></div> " +
                    "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +

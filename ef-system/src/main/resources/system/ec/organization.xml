@@ -103,7 +103,7 @@
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="sex"  operation="eq" inputType="select_status" label="性别" key="consumer.sex" dataType="int"/>
                         <condition name="username"  operation="eq" inputType="text" label="用户名"/>
-                        <condition name="phone"  operation="eq" inputType="text" label="电话"/>
+                        <!--<condition name="phone"  operation="eq" inputType="text" label="电话"/>-->
                     </query>
                 </do>
 
