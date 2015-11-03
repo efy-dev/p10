@@ -96,10 +96,10 @@
 
                         </td>
                         <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
+                            <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
+                            <fmt:formatDate value="${coupon.couponBatch.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                     </tr>
                 </c:forEach>
