@@ -76,10 +76,10 @@
         <c:if test="${!empty ProjectCategoryList}">
           <c:forEach var="catagory" items="${ProjectCategoryList}" varStatus="status">
             <c:if test="${status.index==0}">
-              <li><a href="#" class="active" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="#" class="active" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
             <c:if test="${status.index!=0}">
-              <li><a href="#" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="#" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
           </c:forEach>
 
@@ -106,7 +106,7 @@
       <ul class="select-list">
         <c:if test="${!empty AddressProvinceList}">
           <c:forEach var="ap" items="${AddressProvinceList}" varStatus="status">
-            <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
+            <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${ap.id}&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
           </c:forEach>
         </c:if>
       </ul>
@@ -245,7 +245,7 @@
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
@@ -300,7 +300,7 @@
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
@@ -355,7 +355,7 @@
     //PBL("#beforeAttention",".before",2);
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
-      var pageH = $(document.body).height();
+      var pageH = $(document).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       if(aa < 0.02){

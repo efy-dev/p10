@@ -177,6 +177,7 @@
 
                </li>--%>
             </ul>
+            <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
           </div>
         </div>
       </div>

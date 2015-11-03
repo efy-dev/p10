@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,8 @@ public class praise2ProductController extends WikibaseController {
             query.put("moderator_id", AuthorizationUtil.getMyUser().getId());
             PageInfo pageInfo = baseManager.listPageInfo(query);
             list = projectConvertprojectModelUtil.getpraise2ProductModel(pageInfo.getList());
+        }else{
+            list = new ArrayList<Praise2ProductModel>();
         }
         return list;
 
