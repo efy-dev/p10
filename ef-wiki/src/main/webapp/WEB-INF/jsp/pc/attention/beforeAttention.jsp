@@ -120,7 +120,7 @@
 
       <div class="craft-gz ae" style="display: block">
         <div class="craft-wz ae"><span>共关注${fsAmount}个工艺</span></div>
-        <div class="craft-ts ae"><span>您还没有关注任何工艺，下面是我们为您推荐的几位工艺项目</span></div>
+        <div class="craft-ts ae"><span>您还没有关注任何工艺，下面是我们为您推荐的工艺项目</span></div>
         <div class="craft-list ae">
           <ul class="craft-l-page ae" id="beforeAttention">
 

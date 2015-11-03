@@ -383,6 +383,7 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setCreateDateTime(new Date());
             praise2Product.setType("1");
             praise2Product.setWatch("0");
+            praise2Product.setStatus("1");
             praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
