@@ -56,6 +56,7 @@
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=plistCouponBatch_search"/>
                 <match url="/basic/xm.do?qm=plistCouponBatch_default"/>
+                <match url="/basic/xm.do?qm=plistCoupon_used"/>
             </jnode>
         </jnode>
 
