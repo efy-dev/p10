@@ -2,6 +2,7 @@ package com.efeiyi.ec.website.group.controller;
 
 import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.Member;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -83,14 +84,9 @@ public class PersonController {
      */
     @RequestMapping(value = "/bonusTotal.do")
     public String groupBonusTotal(HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("listCreateProduct_default",request);
-        xQuery.put("status","1");
-        List<Object> myCreateProductList = baseManager.listObject(xQuery);
-        BigDecimal totalBonus = new BigDecimal(0.0);
-        for(Object obj:myCreateProductList) {
-            totalBonus.add(((Group)obj).getGroupProduct().getBonus());
-        }
-        model.addAttribute("totalBonus",totalBonus);
+        String id = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+        model.addAttribute("user", user);
         return "/personGroup/myBonus";
     }
     /**
@@ -113,14 +109,7 @@ public class PersonController {
      */
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        Boolean flag = true;
-        if (currentUser.getId() != null) {
             return "/personGroup/personGroupInfo";
-        } else {
-            //返回登陆页面
-            return "/personGroup/personGroupInfo";
-        }
     }
 
 
