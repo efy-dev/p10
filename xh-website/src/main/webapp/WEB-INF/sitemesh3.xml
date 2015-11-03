@@ -7,4 +7,6 @@
     <mapping path="/protection/*.do" decorator="/layouts/secondary.jsp"/>
     <mapping path="/view/*.do" decorator="/layouts/secondary.jsp"/>
     <mapping path="/member/*.do" decorator="/layouts/secondary.jsp"/>
+    <mapping path="/project/project.home.list.do"  exclue="true"/>
+    <mapping path="/home/homeMaster.do"  exclue="true"/>
 </sitemesh>

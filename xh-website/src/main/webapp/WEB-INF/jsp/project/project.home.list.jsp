@@ -31,3 +31,4 @@
     <a href="#上一页" class="btn btn-prev" title="上一页"></a>
     <a href="#下一页" class="btn btn-next" title="下一页"></a>
 </div>
+<script src="<c:url value='/shop2015/js/system.js'/>" />
