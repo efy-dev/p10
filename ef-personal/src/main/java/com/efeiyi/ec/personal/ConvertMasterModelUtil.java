@@ -56,43 +56,6 @@ public class ConvertMasterModelUtil {
 		masterModel.setId(master.getId()==null?"0":master.getId());
 		masterModel.setMasterName(master.getFullName()==null?master.getName():master.getFullName());
 		masterModel.setLevel(master.getLevel()==null?"":master.getLevel());
-		masterModel.setFavicon(master.getFavicon()==null?"":master.getFavicon());
-		masterModel.setContent(master.getBrief()==null?"":master.getBrief());
-		masterModel.setFollowStatus(master.getFollowStatus()==null?"关注":master.getFollowStatus());
-		masterModel.setContent(master.getBrief()==null?"":master.getBrief());
-		masterModel.setFavicon(master.getFavicon()==null?"":master.getFavicon());
-		if (master.getOriginProvince() != null){
-			masterModel.setCityName(master.getOriginProvince().getName()==null?"":master.getOriginProvince().getName());
-		}else{
-			masterModel.setCityName("");
-		}
-		masterModel.setProjectName(master.getProjectName()==null?"":master.getProjectName());
-		if (works != null && works.size() > 0){
-			masterModel.setWorks(works);
-		}
-		return masterModel;
-	}
-
-	public static MasterModel convertWork(MasterWork work){
-		MasterModel workModel = new MasterModel();
-		workModel.setMasterId(work.getMaster().getId());
-		workModel.setProjectName(work.getName()==null?"":work.getName());
-		workModel.setContent(work.getProductDescription().getContent()==null?"":work.getProductDescription().getContent());
-		workModel.setId(work.getId());
-		workModel.setCreateDateTime(work.getCreateDateTime());
-		workModel.setPraiseNum(Long.valueOf(String.valueOf(work.getAmount()==null?0:work.getAmount())));
-		workModel.setFavicon(work.getPictureUrl()==null?"":work.getPictureUrl());
-		workModel.setAmount(work.getAmount()==null?0:work.getAmount());
-		workModel.setStoreAmount(work.getStoreAmount()==null?0:work.getStoreAmount());
-		return workModel;
-	}
-
-
-	public static MasterModel convertMasterWork(Master master,List<MasterWork> works){
-		MasterModel masterModel = new MasterModel();
-		masterModel.setId(master.getId()==null?"0":master.getId());
-		masterModel.setMasterName(master.getFullName()==null?master.getName():master.getFullName());
-		masterModel.setLevel(master.getLevel()==null?"":master.getLevel());
 		masterModel.setFollowStatus(master.getFollowStatus()==null?"关注":master.getFollowStatus());
 		masterModel.setContent(master.getBrief()==null?"":master.getBrief());
 		masterModel.setFavicon(master.getFavicon()==null?"":master.getFavicon());
