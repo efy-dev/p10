@@ -24,6 +24,7 @@
 
 <div style="text-align: left" >
     <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=${view}&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
+    <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
 <div class="admin-content">
@@ -186,7 +187,22 @@
             }
         });
     }
+    function outExcel(){
+        var  home = "商品编号,商品名称,商品规格编号,商品规格名称,价格,市场价格,库存,状态,项目,店铺,类别";
+        var  on = "上架";
+        var  down = "下架";
+        window.location.href = "<c:url value="/product/outExcel.do"/>"+"?home="+home+"&on="+on+"&down="+down;
+        <%--$.ajax({--%>
+            <%--type: "get",--%>
+            <%--url: '<c:url value="/product/outExcel.do"/>',--%>
+            <%--cache: false,--%>
+            <%--dataType: "json",--%>
+            <%--data:{"home":"商品编号,商品名称,商品规格编号,商品规格名称,价格,市场价格,库存,状态,项目,店铺,类别","on":"上架","down":"下架"},--%>
+            <%--success: function (data) {--%>
 
+            <%--}--%>
+        <%--});--%>
+    }
 </script>
 
 </body>
