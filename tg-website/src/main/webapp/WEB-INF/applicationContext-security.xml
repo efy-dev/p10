@@ -45,7 +45,7 @@
     </b:bean>
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
-        <b:property name="service"  value="http://localhost:8080/tg/j_spring_cas_security_check"/>
+        <b:property name="service"  value="http://192.168.1.46:8080/j_spring_cas_security_check"/>
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
