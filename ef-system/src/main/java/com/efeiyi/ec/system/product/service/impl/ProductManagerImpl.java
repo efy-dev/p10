@@ -10,12 +10,17 @@ import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -316,5 +321,97 @@ public class ProductManagerImpl implements ProductManager{
         product.setStatus(status);
         xdoDao.saveOrUpdateObject(product);
         return product;
+    }
+
+    /***
+     * 输出表格
+     */
+    @Override
+    public  String outExcel1(String[] homes,String on,String down){
+        List<Object[]> resultList = productDao.getResult();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String date1 = sdf.format(date);
+        HSSFWorkbook wb = new HSSFWorkbook();//创建一个EXCEL文件
+        HSSFSheet sheet = wb.createSheet("商品规格表");//工作簿
+        HSSFDataFormat format = wb.createDataFormat();//单元格样式
+        sheet.setColumnWidth((short)3,20*256);//单元格宽度
+        sheet.setColumnWidth((short)4, 20* 256);
+        sheet.setDefaultRowHeight((short)300);
+        HSSFCellStyle style = wb.createCellStyle(); // 样式对象
+        style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 垂直
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 水平
+        //style1.setFillForegroundColor(IndexedColors.DARK_YELLOW.getIndex());
+        //style1.setFillPattern(CellStyle.SOLID_FOREGROUND);设置单元格颜色
+        style.setWrapText(true);   //设置是否能够换行，能够换行为true
+        style.setBorderBottom((short)1);   //设置下划线，参数是黑线的宽度
+        style.setBorderLeft((short)1);   //设置左边框
+        style.setBorderRight((short)1);   //设置有边框
+        style.setBorderTop((short)1);   //设置下边框
+        style.setDataFormat(format.getFormat("￥#,##0"));    //--->设置为单元格内容为货币格式
+        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00%"));    //--->设置单元格内容为百分数格式
+        HSSFRow rowHome = sheet.createRow(0);
+
+        for(int n = 0;n<homes.length;n++){
+            rowHome.createCell(n).setCellValue(homes[n]);
+        }
+
+
+      for(int i=0;i<resultList.size();i++)
+        {
+           Object [] os= resultList.get(i);
+            HSSFRow row = sheet.createRow(i+1);   //第9行...第n行
+
+            for(int j = 0;j<os.length;j++){
+                if(os[j]!=null) {
+                    if (j == 4 || j == 5) {
+                        BigDecimal m = (BigDecimal) os[j];
+                        row.createCell(j).setCellValue(m.toString());
+                    } else if(j == 7){
+                        Integer status = Integer.parseInt(os[j].toString());
+                        if(status ==  1){
+                            row.createCell(j).setCellValue(on);
+                        }else {
+                            row.createCell(j).setCellValue(down);
+                        }
+                    }else {
+                        row.createCell(j).setCellValue(os[j].toString());
+                    }
+                }
+
+
+            }
+        }
+        FileOutputStream fileOut = null;
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+        File downloadFile = new File(path);
+
+        if(!downloadFile.exists()){
+            downloadFile.mkdir();
+        }
+        String fileName = path+"//productModel"+date1+".xls";
+        try{
+            File file = new File(fileName);
+            file.createNewFile();
+         //   fileName = file.getName();
+            fileOut = new FileOutputStream(file);
+            wb.write(fileOut);
+            //fileOut.close();
+            System.out.print("OK");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(fileOut != null){
+                try {
+                    fileOut.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return fileName;
+
     }
 }

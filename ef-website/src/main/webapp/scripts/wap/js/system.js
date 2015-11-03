@@ -41,6 +41,21 @@ $(function(){
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+        //
+        (function(){
+            $(window).scroll(function(){
+                var _top=$(window).scrollTop();
+                var btnTop=$('.scroll-bar-top');
+                if(_top>200){
+                    btnTop.fadeIn();
+                }else{
+                    btnTop.fadeOut();
+                }
+                btnTop.click(function(){
+                    $('body').stop(true).animate({'scrollTop':'0'},300);
+                })
+            })
+        })();
         //加入购物车-立即购买-调出规格弹出层
         $('#btn-cart,#btn-format,#btn-buy').click(function(){
             $('body').css('overflow','hidden');

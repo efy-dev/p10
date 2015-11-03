@@ -62,7 +62,7 @@
             </c:forEach>
         </ul>
     </div>
-    <div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
+    <%--<div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>--%>
 </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->

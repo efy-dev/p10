@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -47,7 +48,7 @@
 <!--//End--header-->
 <div class="my-colonel ae">
     <!--产品-->
-    <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>《东方清韵》瓷胎竹编茶》瓷胎竹编茶》瓷胎竹编茶具套装典藏版装典藏版</span></div></div>
+    <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div>
     <!--价格-->
     <div class="cost ae">
         <div class="txt1"><s>原价:${groupProduct.productModel.price}元</s></div>
@@ -55,7 +56,7 @@
     </div>
     <!--功能-->
     <div class="iwill ae">
-        <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间10天</p></div></div>
+        <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间${groupProduct.groupPurchaseTime}天</p></div></div>
         <a href="/tg/group/group.do?groupProductId=${groupProduct.id}" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
@@ -78,15 +79,24 @@
                 <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
             </div>
             <div class="co-page" style="display: none">
+                <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
                 <div class="col-pl ae">
                     <ul class="ae">
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><p><strong>2015-08-19</strong></p></li>
+                        <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                           <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+                             <li>
+                                 <c:set var="user">
+                                     ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                 </c:set>
+                                 <div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</h5><P>${purchaseOrderProduct.purchaseOrderComment.content}</P><p><strong></strong></p></li>
+                            </li>
+                          </c:if>
+                        </c:forEach>
+
                     </ul>
                 </div>
-                <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
+                </c:if>
+                <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
             </div>
         </div>
     </div>
