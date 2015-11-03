@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by Administrator on 2015/10/30.
  */
+@Deprecated
 public class AntiDataSourceInterceptor extends HandlerInterceptorAdapter {
 
     /**
@@ -22,7 +23,7 @@ public class AntiDataSourceInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        DatabaseContextHolder.getDataSourceLock(request).lock();
+//        DatabaseContextHolder.getDataSourceLock(request).lock();
 
         return true;
     }
@@ -37,7 +38,7 @@ public class AntiDataSourceInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        DatabaseContextHolder.getDataSourceLock(request).unlock();
+//        DatabaseContextHolder.getDataSourceLock(request).unlock();
 
     }
 }
