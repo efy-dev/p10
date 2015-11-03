@@ -21,5 +21,5 @@ public interface ProductManager {
 
     Product setProductStatus(String status,String id);
 
-   void outExcel1();
+    String outExcel1(String[] homes,String on,String down);
 }

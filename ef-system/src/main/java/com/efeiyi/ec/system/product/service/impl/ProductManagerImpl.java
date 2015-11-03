@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -326,8 +327,11 @@ public class ProductManagerImpl implements ProductManager{
      * 输出表格
      */
     @Override
-    public  void outExcel1(){
+    public  String outExcel1(String[] homes,String on,String down){
         List<Object[]> resultList = productDao.getResult();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String date1 = sdf.format(date);
         HSSFWorkbook wb = new HSSFWorkbook();//创建一个EXCEL文件
         HSSFSheet sheet = wb.createSheet("商品规格表");//工作簿
         HSSFDataFormat format = wb.createDataFormat();//单元格样式
@@ -347,7 +351,7 @@ public class ProductManagerImpl implements ProductManager{
         style.setDataFormat(format.getFormat("￥#,##0"));    //--->设置为单元格内容为货币格式
         style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00%"));    //--->设置单元格内容为百分数格式
         HSSFRow rowHome = sheet.createRow(0);
-        String [] homes = new String[]{"商品编号","商品名称","商品规格编号","商品规格名称","价格","市场价格","库存","状态","项目","店铺","类别"};
+
         for(int n = 0;n<homes.length;n++){
             rowHome.createCell(n).setCellValue(homes[n]);
         }
@@ -363,7 +367,14 @@ public class ProductManagerImpl implements ProductManager{
                     if (j == 4 || j == 5) {
                         BigDecimal m = (BigDecimal) os[j];
                         row.createCell(j).setCellValue(m.toString());
-                    } else {
+                    } else if(j == 7){
+                        Integer status = Integer.parseInt(os[j].toString());
+                        if(status ==  1){
+                            row.createCell(j).setCellValue(on);
+                        }else {
+                            row.createCell(j).setCellValue(down);
+                        }
+                    }else {
                         row.createCell(j).setCellValue(os[j].toString());
                     }
                 }
@@ -372,8 +383,18 @@ public class ProductManagerImpl implements ProductManager{
             }
         }
         FileOutputStream fileOut = null;
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+        File downloadFile = new File(path);
+
+        if(!downloadFile.exists()){
+            downloadFile.mkdir();
+        }
+        String fileName = path+"//productModel"+date1+".xls";
         try{
-            fileOut = new FileOutputStream("d:\\productModel.xls");
+            File file = new File(fileName);
+            file.createNewFile();
+         //   fileName = file.getName();
+            fileOut = new FileOutputStream(file);
             wb.write(fileOut);
             //fileOut.close();
             System.out.print("OK");
@@ -390,6 +411,7 @@ public class ProductManagerImpl implements ProductManager{
                 }
             }
         }
+        return fileName;
 
     }
 }

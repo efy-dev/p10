@@ -39,10 +39,8 @@ public class ProductDaoHibernate implements ProductDao{
         String sql = "select " +
                 "p.serial as 商品编号,p.name as 商品名称," +
                 "pm.serial as 商品规格编号,pm.name as 商品规格名称,pm.price as 价格,pm.market_price as 市场价格,pm.amount as 库存," +
-                "case p.status" +
-                " when 1 then '上架' " +
-                " when 2 then '下架'" +
-                "end as 状态, " +
+                "p.status " +
+                "as 状态, " +
                 "pt.name as 项目,t.name as 店铺," +
                 "pg.name  as 类别 " +
                 "from product_model pm " +

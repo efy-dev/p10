@@ -14,7 +14,12 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -586,14 +592,31 @@ public class ProductController extends BaseController {
 
     @RequestMapping("/outExcel.do")
     @ResponseBody
-    public String outExcel2(HttpServletRequest request) {
-
+    public String outExcel2(HttpServletRequest request,String home,String on ,String down,HttpServletResponse response) {
+        String [] homes = home.split(",");
         try {
-           productManager.outExcel1();
+
+            String fileName = productManager.outExcel1(homes,on,down);
+            File file = new File(fileName);
+            InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            // 清空response
+            response.reset();
+            response.addHeader("Content-Disposition", "attachment;filename="
+                    + new String(file.getName().getBytes()));
+            response.addHeader("Content-Length", "" + file.length());
+            OutputStream toClient = new BufferedOutputStream(
+                    response.getOutputStream());
+            response.setContentType("application/vnd.ms-excel;charset=gb2312");
+            toClient.write(buffer);
+            toClient.flush();
+            toClient.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 }
