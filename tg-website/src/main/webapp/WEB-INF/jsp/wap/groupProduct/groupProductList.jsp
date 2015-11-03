@@ -49,7 +49,6 @@
             <c:forEach items="${groupProductList}" var="groupProduct" varStatus="rec">
                 <li class="ae">
                     <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/${groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"></a>
-
                         <div class="c-page"><span><a href="javascript:void(0)">${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</a></span>
                         </div>
                     </div>
@@ -62,7 +61,7 @@
             </c:forEach>
         </ul>
     </div>
-    <div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
+    <%--<div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>--%>
 </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->

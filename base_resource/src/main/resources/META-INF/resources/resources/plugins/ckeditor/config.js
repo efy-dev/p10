@@ -7,6 +7,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+    // 去 p
+    //config.enterMode = CKEDITOR.ENTER_BR;
+    //config.shiftEnterMode = CKEDITOR.ENTER_P;
     config.extraPlugins += (config.extraPlugins ? ',lineheight' : 'lineheight');
 };
 

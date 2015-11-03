@@ -44,7 +44,7 @@
 <!--//End--header-->
 <div class="my-colonel ae">
   <!--产品-->
-  <div class="colonel-pic ae"><img src="<c:url value="${group.groupProduct.productModel.productModel_url}"/>"><div class="c-page"><span>${group.groupProduct.productModel.name}</span></div></div>
+  <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.name}</span></div></div>
   <!--价格-->
   <div class="cost ae">
     <div class="txt1"><s>原价:${group.groupProduct.productModel.price}元</s></div>
@@ -90,17 +90,7 @@
     <div class="c-content ae">
       <div class="co-page">
         <div class="introduce ae">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase06.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase07.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase08.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase09.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase10.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase11.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase12.png"/>">
-          <img src="<c:url value="/scripts/wap/upload/mypurchase13.png"/>">
-          <p><strong>产品描述：</strong>一个好的器皿，初见就应该觉得美好，没有高高在上的姿态，而是温暖美好易用的器物。</p>
-          <p>怀念那个细功慢活的年代。那些纯朴的美好总是能触动我们隐藏在心底最真实的感动。</p>
-          <p>每个人都是生活的设计师，以淳朴的冻玉瓷和竹丝完美结合。不论是温润如玉，还是0.25厘的竹丝编织，表达的不仅是匠人的态度，还有我们对淳朴生活的向往。停下来享受感动。</p>
+          ${group.groupProduct.productModel.product.productDescription.content}
           <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <div class="tab-btn">
@@ -111,10 +101,10 @@
       <div class="co-page" style="display: none">
         <div class="col-pl ae">
           <ul class="ae">
-            <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-            <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-            <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>
-            <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>
+            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>--%>
+            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>--%>
+            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>--%>
+            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>--%>
           </ul>
         </div>
         <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>

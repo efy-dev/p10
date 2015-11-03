@@ -41,7 +41,7 @@
 <!--//End--header-->
 <div class="my-packet ae">
     <div class="top ae">
-        <div class="pic"><a href="#"><img src="<c:url value="/scripts/upload/yonghm.jpg"/>"></a></div>
+        <div class="pic"><a href="#"><img src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></a></div>
         <div class="text">
             <p>用户名：${user.username}</p>
             <c:if test="${empty user.redPacket}">

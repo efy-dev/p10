@@ -57,7 +57,10 @@ public class WikiDynamicController extends WikibaseController {
             XQuery query2 = new XQuery("listProject2_byCategory", request);
             query2.put("projectCategory_id", projectCategory.getId());
             List<Project> listp = baseManager.listObject(query2);
-            pc.add(listp);
+            if(listp!=null && listp.size()>=1){
+                pc.add(listp);
+            }
+
         }
         model.addAttribute("projectCategory", pc);
        //关注前or关注后
