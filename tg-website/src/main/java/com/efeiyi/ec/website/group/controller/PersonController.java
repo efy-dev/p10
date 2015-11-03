@@ -68,11 +68,6 @@ public class PersonController {
                  }
              }
         }
-        for(Object obj : groupJoinList){
-            if("0".equals(((Member)obj).getLevel())){
-                groupJoinList.remove(obj);
-            }
-        }
         model.addAttribute("groupJoinList", groupJoinList);
         return "/personGroup/myJoinGroup";
     }
