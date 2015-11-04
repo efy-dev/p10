@@ -48,7 +48,7 @@
 .sit-page .sit-suit-content .sit-suit-cgz .sit-suit-cgz-l{float: left;}
 .sit-page .sit-suit-content .sit-suit-cgz .sit-suit-cgz-l a{padding:0.9rem 2rem;border: 1px solid #999;display: inline-block}
 .sit-page .sit-suit-content .sit-suit-cgz .sit-suit-cgz-r{float: right;}
-.sit-page .sit-suit-content .sit-suit-twz{font-size: 1rem;color: #000;}
+.sit-page .sit-suit-content .sit-suit-twz{font-size: 1rem;color: #000;overflow: hidden;float:left;height: 55px;}
 .sit-page .sit-suit-nav{border-bottom: 1px solid #000;border-top: 1px solid #000;float: left;width: 100%;height: 4.4rem;line-height: 2.2rem;text-align: center;padding: 1.2rem 0;}
 .sit-page .sit-suit-nav a{width: 32.333334%;float: left;font-size: 1.2rem;}
 .sit-page .sod-sr{width: 1px;height: 1rem;border-right: 1px solid #000;float: left;margin-top: .6rem;position: absolute;right: 0;top: 25%;}
@@ -57,10 +57,10 @@
 .sit-page .bz-icon3{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -140px -243px;float: left;margin:10px 0 0  25%;}
 .sit-page .sit-suit-nav em{float: left;color: #000;font-size: 1.2rem;margin-left: 7%;}
 .sit-page .suit-bt-q{width: 100%;float: left;padding: 1.4rem;padding-bottom: 0;}
-.sit-page .suit-bt-q h5{font-size: 1.8rem;font-family: "Adobe 黑体 Std","思源黑体","Arial";}
-.sit-page .suit-bt-q p{font-size: 0.9rem;font-family: "思源黑体","Arial";}
+.sit-page .suit-bt-q h5{font-size: 1.8rem;font-family: "Adobe simsun Std","simsun","Arial";}
+.sit-page .suit-bt-q p{font-size: 0.9rem;font-family: "simsun","Arial";}
 .sit-page .suit-bt-c{float: left;width: 100%;}
-.sit-page .suit-bt-c p{color: #000;font-size: 1.2rem;font-family: "思源黑体","Arial";padding:0 0.9rem;margin: 1.4rem 0;width: 100%;float: left}
+.sit-page .suit-bt-c p{color: #000;font-size: 1.2rem;font-family: "simsun","Arial";padding:0 0.9rem;margin: 1.4rem 0;width: 100%;float: left}
 .sit-page .suit-btc-img{width: 100%;float: left;height: 100%;}
 .sit-page .suit-btc-img img{width: 100%;height: 100%;}
 .sit-page  .acadl{margin-bottom: 0.9rem}
@@ -162,10 +162,10 @@
 .pops-up .bz-icon3{width: 18px;height: 18px;background-size:100px auto; background:url(../images/bk-icon.png) no-repeat -181px -243px;float: left;margin:10px 0 0  25%;}
 .pops-up .sit-suit-nav em{float: left;color: #000;font-size: 1.2rem;margin-left: 7%;}
 .pops-up .suit-bt-q{width: 100%;float: left;padding: 1.4rem;padding-bottom: 0;}
-.pops-up .suit-bt-q h5{font-size: 1.8rem;font-family: "Adobe 黑体 Std","思源黑体","Arial";}
-.pops-up .suit-bt-q p{font-size: 0.9rem;font-family: "思源黑体","Arial";}
+.pops-up .suit-bt-q h5{font-size: 1.8rem;font-family: "Adobe simsun Std","simsun","Arial";}
+.pops-up .suit-bt-q p{font-size: 0.9rem;font-family: "simsun","Arial";}
 .pops-up .suit-bt-c{float: left;width: 100%;}
-.pops-up .suit-bt-c p{color: #000;font-size: 1.2rem;font-family: "思源黑体","Arial";padding:0 0.9rem;margin: 1.4rem 0;width: 100%;float: left}
+.pops-up .suit-bt-c p{color: #000;font-size: 1.2rem;font-family: "simsun","Arial";padding:0 0.9rem;margin: 1.4rem 0;width: 100%;float: left}
 .pops-up .suit-btc-img{width: 100%;float: left;height: 100%;}
 .pops-up .suit-btc-img img{width: 100%;height: 100%;}
 .pops-up  .acadl{margin-bottom: 0.9rem}
@@ -194,7 +194,7 @@
 .honor  .tx-q1{margin-bottom: 0!important;padding: 0 1.9rem;font-size: 1.2rem;width: 100%;float:none!important;}
 /*120115大师-简介-大师荣誉-出版著作-艺术年表-工作坊*/
 /*12011201顶部菜单-消息-关注*/
-.pops-up{position: absolute;width: 100%;height: 100%;z-index: 100}
+.pops-up{position: absolute;width: 100%;height: 100%;z-index: 500}
 .pops-up .aboud-you{width: 100%;float: left;padding:0.8rem 1.9rem 0 1.9rem;}
 .pops-up .aboud-you .list-you{width: 100%;float: left;margin-bottom: 1.4rem;font-size: 1.2rem;color: #000;font-weight: bold}
 .pops-up .aboud-you .list-name{width: 100%;font-size: 1.2rem;color: #000;padding-bottom: 0.8rem;float: left;z-index: 301}

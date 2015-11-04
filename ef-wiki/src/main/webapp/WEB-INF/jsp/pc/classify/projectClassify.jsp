@@ -387,7 +387,12 @@
       success:function(data){
 
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+
+        //$('.grounp-f').prepend("<iframe id='qwe' src=\"http://passport.efeiyi.com/login?service=http%3A%2F%2Fmaster.efeiyi.com%2Fef-wiki%2Fj_spring_cas_security_check\"></iframe>");
+        //$('.grounp-f').children('#qwe').remove();
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki";
+
           return false;
         }
         if(data=="true"){
