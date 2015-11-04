@@ -62,3 +62,8 @@ PRIMARY KEY (`id`)
 ;
 
 /-----------------------purchase_order_group表生成（团购订单表）--------------------------------------/
+
+/-----------------------Member表增加red_packet--------------------------------------/
+ALTER TABLE `member`
+ADD COLUMN `red_packet`  decimal(10,2) NULL AFTER `group_id`;
+/-----------------------Member表增加red_packet--------------------------------------/

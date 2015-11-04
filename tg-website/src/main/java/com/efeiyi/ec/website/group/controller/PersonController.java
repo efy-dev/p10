@@ -4,6 +4,7 @@ import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.Member;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -113,10 +114,12 @@ public class PersonController {
      * @return
      * @throws Exception
      */
-   /* @RequestMapping(value = "myPurchaseOrder.do")
+
+    @RequestMapping(value = "myPurchaseOrder.do")
     public String myPurchaseOrder(HttpServletRequest request, Model model) throws Exception{
-
-        return
-    }*/
-
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default",request);
+        List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+        model.addAttribute("purchaseOrderGroupList",list);
+        return "/personGroup/purchaseOrderGroupList";
+    }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class Member implements Serializable {
     private List<Member> subMemberList;
     private String status;//0:取消 1进行中 3：组团成功 5：组团失败
     private Group group;
+    private BigDecimal redPacket;
 
 
     @Id
@@ -91,5 +93,14 @@ public class Member implements Serializable {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    @Column(name = "red_packet")
+    public BigDecimal getRedPacket() {
+        return redPacket;
+    }
+
+    public void setRedPacket(BigDecimal redPacket) {
+        this.redPacket = redPacket;
     }
 }
