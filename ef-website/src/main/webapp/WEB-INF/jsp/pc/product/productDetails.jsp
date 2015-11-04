@@ -61,7 +61,7 @@
                              alt=""/></li>
                     <%--</c:if>--%>
                     <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
-                        <c:if test="${productPicture.status=='1'&&productPicture.productModel.id=={productModel.id}}">
+                        <c:if test="${productPicture.status=='1'&&productPicture.productModel.id==productModel.id}">
                             <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
                                      alt=""/></li>
                         </c:if>
@@ -78,7 +78,7 @@
                     </li>
                     <%--</c:if>--%>
                     <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
-                        <c:if test="${productPicture.status=='1'}">
+                        <c:if test="${productPicture.status=='1'&&productPicture.productModel.id==productModel.id}">
                             <li>
                                 <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"
                                      alt=""/>

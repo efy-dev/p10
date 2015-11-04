@@ -28,7 +28,7 @@
         <ul class="am-slides">
             <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-pic"></li>
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
-                <c:if test="${picture.status=='1'}">
+                <c:if test="${picture.status=='1'&&picture.productModel.id==productModel.id}">
                 <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
                 </c:if>
             </c:forEach>
