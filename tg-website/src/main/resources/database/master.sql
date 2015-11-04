@@ -49,3 +49,16 @@ ALTER TABLE `organization_user`
 ADD COLUMN `red_packet`  decimal(10,2) NULL AFTER `tenant_type`;
 
 /-----------------------biguser添加红包字段-------------------------/
+
+/-----------------------purchase_order_group表生成（团购订单表）--------------------------------------/
+CREATE TABLE `purchase_order_group` (
+`id`  char(16) NOT NULL ,
+`purchase_order_id`  char(16) NULL ,
+`group_id`  char(16) NULL ,
+`member_id`  char(16) NULL ,
+`status`  varchar(2) NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+/-----------------------purchase_order_group表生成（团购订单表）--------------------------------------/
