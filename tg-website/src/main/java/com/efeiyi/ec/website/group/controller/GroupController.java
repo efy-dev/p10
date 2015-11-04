@@ -76,7 +76,7 @@ public class GroupController {
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://192.168.1.64:8080/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://192.168.1.46:8080/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://master.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         if(!flag){
             return "redirect:" + url;
         }else {
