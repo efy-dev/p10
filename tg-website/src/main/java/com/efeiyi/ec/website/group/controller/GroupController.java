@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,7 +58,7 @@ public class GroupController {
         if(groupId==null||groupId.isEmpty()){
             for(Group group:list){
                 for(Member member:group.getMemberList()){
-                    if(member.getUser().getId().equals(currentUser.getId())&&member.getLevel().equals("0")){
+                    if(member.getUser().getId().equals(currentUser.getId())&&member.getLevel().equals("0")&&group.getStatus().equals("1")){
                         flag = true;
                         url1 = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
                         break;
@@ -67,14 +68,15 @@ public class GroupController {
             }
         }else {
             Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-            if (group.getManUser().getId().equals(currentUser.getId())){
+            if (group.getManUser().getId().equals(currentUser.getId())&&(group.getMemberList().size()<group.getGroupProduct().getMemberAmount())){
                 flag = true;
             }
         }
 
 
         String amount = "1";
-        String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
+       // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
+        String url = "http://192.168.1.64:8080/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://192.168.1.46:8080/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         if(!flag){
             return "redirect:" + url;
         }else {
@@ -88,15 +90,15 @@ public class GroupController {
     @RequestMapping(value = "/createGroup")
     public String createGroup(HttpServletRequest request, Model model) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
-        //String purchaseOrderId = request.getParameter("purchaseOrderId");
+        String purchaseOrderId = request.getParameter("purchaseOrderId");
         String groupProductId = request.getParameter("groupProductId");
         String groupId = request.getParameter("groupId");
         String memberId = request.getParameter("memberId");
-        //PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
         if (currentUser != null){
-            //if(purchaseOrder.getOrderStatus().equals("5")){
+           // if(purchaseOrder.getOrderStatus().equals("5")){
                 if (groupId.equals("null")||groupId.isEmpty()){
                     Group groupbuy = new Group();
                     groupbuy.setManUser(currentUser);
@@ -129,6 +131,26 @@ public class GroupController {
                     member.setSupMember(fatherMember);
 
                     baseManager.saveOrUpdate(Member.class.getName(),member);
+                    if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                        group.setStatus("3");
+                        baseManager.saveOrUpdate(Group.class.getName(),group);
+                        for(Member member1:group.getMemberList()){
+                            String userId = member1.getUser().getId();
+                            BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
+                            int i = 0;
+                            if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
+                                i = i + member1.getSubMemberList().size();
+                                for(Member member2:member1.getSubMemberList()){
+                                    if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
+                                        i = i + member2.getSubMemberList().size();
+                                    }
+                                }
+                            }
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                            baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+
+                        }
+                    }
 
                     model.addAttribute("groupId",group.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
@@ -137,8 +159,8 @@ public class GroupController {
 
 
 
-           /* }
-            else {
+           // }
+            /*else {
                 return "/";//未支付成功
             }*/
         }else {
@@ -196,12 +218,15 @@ public class GroupController {
                 break;
             }
         }
+        if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+            flag = true;
+        }
         //设置参团与否参数
         String url = "";
         if (flag){
             model.addAttribute("flag","1");//已参团
         }else {
-            model.addAttribute("flag","0");//未参团
+            model.addAttribute("flag","0");//未参团或者团已满
             url = "?groupProductId="+group.getGroupProduct().getId()+"&groupId="+groupId+"&memberId="+memberId;
         }
 
@@ -223,7 +248,7 @@ public class GroupController {
 
 
     //对所有团进行成团操作并发送红包
-    /*@RequestMapping(value = "/sendRedPacket")
+    @RequestMapping(value = "/sendRedPacket")
     public String sendRedPacket(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listGroup_default3",request);
         List<Group> list = baseManager.listObject(xQuery);
@@ -235,14 +260,26 @@ public class GroupController {
             calendar.add(Calendar.DATE,limintDay);
             Date endTime = calendar.getTime();
             Date date = new Date();
-            if((date.getTime()-endTime.getTime())>0){
+            if(date.after(endTime)){
                 if(group.getMemberList().size()-group.getGroupProduct().getMemberAmount()>=0){
                     group.setStatus("3");
                     baseManager.saveOrUpdate(Group.class.getName(),group);
 
                     for(Member member:group.getMemberList()){
                         String userId = member.getUser().getId();
-                        BigUser bigUser = baseManager.getObject(BigUser.class.getName(),)
+                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
+                        int i = 0;
+                        if(member.getSubMemberList()!=null&&member.getSubMemberList().size()>0){
+                            i = i + member.getSubMemberList().size();
+                            for(Member member1:member.getSubMemberList()){
+                                if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
+                                    i = i + member1.getSubMemberList().size();
+                                }
+                            }
+                        }
+                        bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+
                     }
                 }else {
                     group.setStatus("5");
@@ -250,6 +287,7 @@ public class GroupController {
                 }
             }
         }
-    }*/
+        return "";
+    }
 
 }

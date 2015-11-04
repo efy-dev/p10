@@ -107,5 +107,16 @@ public class PersonController {
             return "/personGroup/personGroupInfo";
     }
 
+    /**
+     *我的订单
+     * @param request
+     * @return
+     * @throws Exception
+     */
+   /* @RequestMapping(value = "myPurchaseOrder.do")
+    public String myPurchaseOrder(HttpServletRequest request, Model model) throws Exception{
+
+        return
+    }*/
 
 }

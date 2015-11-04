@@ -49,7 +49,7 @@
     <ul class="my-btn ae">
         <li><a href="<c:url value="/person/joinGroupStatus.do"/>"><em>我&nbsp;的&nbsp;参&nbsp;团</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/groupBuyStatus.do"/>"><em>我&nbsp;的&nbsp;开&nbsp;团</em><i class="s-icon"></i></a></li>
-        <li><a href="#"><em>我&nbsp;的&nbsp;订&nbsp;单</em><i class="s-icon"></i></a></li>
+        <li><a href="<c:url value="/person/myPurchaseOrder.do"/>"><em>我&nbsp;的&nbsp;订&nbsp;单</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/bonusTotal.do"/>"><em>我&nbsp;的&nbsp;红&nbsp;包</em><i class="s-icon"></i></a></li>
         <li><a href="<c:url value="/person/returnGoods.do"/>"><em>申&nbsp;请&nbsp;退&nbsp;货</em><i class="s-icon"></i></a></li>
     </ul>
