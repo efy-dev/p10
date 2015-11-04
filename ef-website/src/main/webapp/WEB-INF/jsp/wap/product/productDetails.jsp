@@ -276,20 +276,20 @@
     }
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<%--<script type='text/javascript'>--%>
+<script type='text/javascript'>
 
-    <%--$().ready(function(){--%>
-        <%--$("img").each(function(){--%>
-            <%--$(this).css("width","100%");--%>
-        <%--})--%>
-        <%--$("img").each(function(){--%>
-                <%--$(".user-favor").css("width","auto");--%>
-        <%--})--%>
-        <%--$("img").each(function(){--%>
-            <%--$(".share-picture").css("width","auto");--%>
-        <%--})--%>
-    <%--})--%>
-<%--</script>--%>
+    $().ready(function(){
+        $("img").each(function(){
+            $(this).css("width","100%");
+        })
+        $("img").each(function(){
+                $(".user-favor").css("width","auto");
+        })
+        $("img").each(function(){
+            $(".share-picture").css("width","auto");
+        })
+    })
+</script>
 </body>
 
 
