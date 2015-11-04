@@ -391,7 +391,7 @@
 
         //$('.grounp-f').prepend("<iframe id='qwe' src=\"http://passport.efeiyi.com/login?service=http%3A%2F%2Fmaster.efeiyi.com%2Fef-wiki%2Fj_spring_cas_security_check\"></iframe>");
         //$('.grounp-f').children('#qwe').remove();
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki";
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
 
           return false;
         }
