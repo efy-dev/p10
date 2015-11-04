@@ -321,7 +321,6 @@
                 <match url="/basic/xm.do?qm=plistUser_default1"/>
                 <match url="/basic/xm.do?qm=plistUser_default2"/>
                 <match url="/basic/xm.do?qm=formUser&amp;formParam=user"/>
-
             </jnode>
             <jnode url="/basic/xm.do?qm=plistRole_default" access="admin,manager" text_zh_CN="角色管理">
                 <match url="/basic/xm.do?qm=plistRole_default"/>

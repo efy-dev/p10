@@ -37,8 +37,8 @@
       <td width="20%">
         <div class="am-btn-toolbar">
           <div class="am-btn-group am-btn-group-xs" style="width: 100%;text-align: center;" >
-            <button  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&formParam=user&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</button>
-            <button onclick="removeUser('${user.id}')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+            <a  style="margin-left: 70px;" onclick="window.location.href='<c:url value="/basic/xm.do?qm=formUser&formParam=user&id=${user.id}"/>'" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-edit"></span> 编辑</a>
+              <a onclick="removeUser('${user.id}')" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
           </div>
         </div>
       </td>

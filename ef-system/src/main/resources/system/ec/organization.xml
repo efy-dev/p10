@@ -269,7 +269,6 @@
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
                 </do>
-
                 <do name="removeRole" label="删除角色" access="" result="json"/>
                 <do name="formRole" label="保存角色" access="" result="/role/roleForm" />
                 <do name="saveOrUpdateRole" label="保存角色" access="" result="/role/roleSaveSuccess" />
