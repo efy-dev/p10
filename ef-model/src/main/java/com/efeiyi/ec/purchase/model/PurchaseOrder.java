@@ -262,7 +262,7 @@ public class PurchaseOrder {
         for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetails.getCoupon() == null && purchaseOrderPaymentDetails.getTransactionNumber() != null) {
-                    resultPrice = resultPrice.add(purchaseOrderPaymentTemp.getPaymentAmount());
+                    resultPrice = resultPrice.add(purchaseOrderPaymentDetails.getMoney());
                 }
             }
         }
