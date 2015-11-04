@@ -64,6 +64,7 @@ public class PurchaseOrderController extends BaseController {
     public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
         CartProduct cartProduct = new CartProduct();
+        String callback = request.getParameter("callback");
         cartProduct.setProductModel(groupProduct.getProductModel());
 //        String amount = request.getParameter("amount");
         cartProduct.setAmount(Integer.valueOf(amount));
@@ -91,6 +92,10 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setTotal(cart.getTotalPrice());
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        //拼写回调路径purchaseOrderId,groupProductId,memberId,groupId
+        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+        purchaseOrder.setCallback(callback);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
@@ -108,6 +113,8 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("productModel", groupProduct.getProductModel());
         model.addAttribute("amount", amount);
         model.addAttribute("isEasyBuy", true);
+        model.addAttribute("callback", callback);
+        model.addAttribute("groupProductId", groupProductId);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -122,7 +129,7 @@ public class PurchaseOrderController extends BaseController {
         String amount = request.getParameter("amount");
         try {
             cartProduct.setAmount(Integer.valueOf(amount));
-        }catch (Exception e){
+        } catch (Exception e) {
             cartProduct.setAmount(1);
         }
         cartProduct.setIsChoose("1");

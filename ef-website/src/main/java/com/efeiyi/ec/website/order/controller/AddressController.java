@@ -149,6 +149,8 @@ public class AddressController {
             String cartId = request.getParameter("cartId");
             if (cartId == null || cartId.equals("")) {
                 return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
+            }else if (request.getParameter("callback")!=null){
+                return "redirect:/order/groupBuy/" + request.getParameter("groupProductId") + "/amount=" + request.getParameter("amount")+"?callback="+request.getParameter("callback");
             }
             return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
         /*} else {
