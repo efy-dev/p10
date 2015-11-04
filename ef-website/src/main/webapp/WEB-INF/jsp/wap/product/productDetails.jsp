@@ -184,7 +184,9 @@
     </div>
 </div>
 <div class="am-dimmer am-active" data-am-dimmer="" style="display:none"></div>
+
 <!--//End--Start--选择规格弹出框-->
+
 <script type="text/javascript">
     function collect(o) {
         style = "visibility: none;"
@@ -274,20 +276,20 @@
     }
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script type='text/javascript'>
+<%--<script type='text/javascript'>--%>
 
-    $().ready(function(){
-        $("img").each(function(){
-            $(this).css("width","100%");
-        })
-        $("img").each(function(){
-                $(".user-favor").css("width","auto");
-        })
-        $("img").each(function(){
-            $(".share-picture").css("width","auto");
-        })
-    })
-</script>
+    <%--$().ready(function(){--%>
+        <%--$("img").each(function(){--%>
+            <%--$(this).css("width","100%");--%>
+        <%--})--%>
+        <%--$("img").each(function(){--%>
+                <%--$(".user-favor").css("width","auto");--%>
+        <%--})--%>
+        <%--$("img").each(function(){--%>
+            <%--$(".share-picture").css("width","auto");--%>
+        <%--})--%>
+    <%--})--%>
+<%--</script>--%>
 </body>
 
 
