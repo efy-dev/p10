@@ -55,3 +55,5 @@ PRIMARY KEY (`id`)
 
 ALTER TABLE `member`
 ADD COLUMN `red_packet`  decimal(10,2) NULL AFTER `group_id`;
+ALTER TABLE `group_product`
+MODIFY COLUMN `group_price`  decimal(10,2) NULL DEFAULT NULL AFTER `member_amount`;
