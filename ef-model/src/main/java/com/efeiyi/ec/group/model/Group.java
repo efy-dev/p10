@@ -1,7 +1,9 @@
 package com.efeiyi.ec.group.model;
 
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class Group {
     private List<Member> memberList;
     private String status; //0:取消 1：进行中 3：组团成功 5： 组团失败
     private Date createDateTime;
+    private List<PurchaseOrderGroup> purchaseOrderGroupList;
     private MyUser manUser;
 
     @Id
@@ -76,5 +79,15 @@ public class Group {
 
     public void setManUser(MyUser manUser) {
         this.manUser = manUser;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "group")
+    @Where(clause = "status=1")
+    public List<PurchaseOrderGroup> getPurchaseOrderGroupList() {
+        return purchaseOrderGroupList;
+    }
+
+    public void setPurchaseOrderGroupList(List<PurchaseOrderGroup> purchaseOrderGroupList) {
+        this.purchaseOrderGroupList = purchaseOrderGroupList;
     }
 }
