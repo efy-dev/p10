@@ -50,11 +50,12 @@ public class PurchaseOrderGroup {
         this.group = group;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     public Member getMember() {
         return member;
     }
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+
     public void setMember(Member member) {
         this.member = member;
     }
