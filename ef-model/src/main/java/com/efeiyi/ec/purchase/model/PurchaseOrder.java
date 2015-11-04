@@ -245,7 +245,7 @@ public class PurchaseOrder {
         this.receiverPhone = receiverPhone;
     }
 
-    @Column(name = "")
+    @Column(name = "payway")
     public String getPayWay() {
         return payWay;
     }
