@@ -44,24 +44,23 @@
 <!--//End--header-->
 <div class="all-bulk ae">
     <div class="one-bulk ae">
-        <ul class="ae">
-
-            <c:forEach items="${groupProductList}" var="groupProduct" varStatus="rec">
-                <li class="ae">
-                    <div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/${groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"></a>
-                        <div class="c-page"><span><a href="javascript:void(0)">${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</a></span>
-                        </div>
-                    </div>
-                    <ul class="price ae">
-                        <li><s>原价:${groupProduct.productModel.price}元</s></li>
-                        <li>团购价:${groupProduct.groupPrice}元</li>
-                        <li>${groupProduct.memberAmount}人成团</li>
-                    </ul>
-                </li>
-            </c:forEach>
+        <ul class="ae" id = "productListId">
+            <%--<c:forEach items="${groupProductList}" var="groupProduct" varStatus="rec">--%>
+                <%--<li class="ae">--%>
+                    <%--<div class="colonel-pic ae"><a href="<c:url value="/product/groupProduct/${groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"></a>--%>
+                        <%--<div class="c-page"><span><a href="javascript:void(0)">${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</a></span>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<ul class="price ae">--%>
+                        <%--<li><s>原价:${groupProduct.productModel.price}元</s></li>--%>
+                        <%--<li>团购价:${groupProduct.groupPrice}元</li>--%>
+                        <%--<li>${groupProduct.memberAmount}人成团</li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
+            <%--</c:forEach>--%>
         </ul>
     </div>
-    <%--<div class="more ae"><a href=""><span>下拉了解更多商品...</span><div class="icon"></div></a></div>--%>
+    <div class="more ae"><a onclick="moreGroupProduct()"><span>下拉了解更多商品...</span><div class="icon"></div></a></div>
 </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -77,6 +76,64 @@
 <script src="<c:url value="/scripts/wap/js/system.js"/>"></script>
 <script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--Start-->
+
+
+<%--{{for(var i = 0 ; i<it.length ; i++) { }}--%>
+<%--<li class="ae">--%>
+    <%--<div class="colonel-pic ae"><a href="/product/groupProduct/{{=it[i].id}}"><img src="http://pro.efeiyi.com/{{=it[i].productModel.productModel_url}}@!tg-efeiyi-view-list"></a>--%>
+        <%--<div class="c-page"><span><a href="javascript:void(0)">{{=it[i].productModel.name}}{{=it[i].productModel.product.subName}}</a></span>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<ul class="price ae">--%>
+        <%--<li><s>原价:{{=it[i].productModel.price}}元</s></li>--%>
+        <%--<li>团购价:{{=it[i].groupPrice}}元</li>--%>
+        <%--<li>{{=it[i].memberAmount}}人成团</li>--%>
+    <%--</ul>--%>
+<%--</li>--%>
+<%--{{ } }}--%>
+
+
+
+
+
+
+<script>
+    function htmlGenerater(it /**/) {
+        var out = '';
+        for (var i = 0; i < it.length; i++) {
+            out += '<li class="ae"> <div class="colonel-pic ae"><a href="/product/groupProduct/' + (it[i].id) + '"><img src="http://pro.efeiyi.com/' + (it[i].productModel.productModel_url) + '@!tg-efeiyi-view-list"></a> <div class="c-page"><span><a href="javascript:void(0)">' + (it[i].productModel.name)  + '</a></span> </div> </div> <ul class="price ae"> <li><s>原价:' + (it[i].productModel.price) + '元</s></li> <li>团购价:' + (it[i].groupPrice) + '元</li> <li>' + (it[i].memberAmount) + '人成团</li> </ul></li>';
+        }
+        return out;
+    }
+
+
+
+    $(document).ready(function(){
+        getProductList("<c:url value='/product/groupProduct.do/'/>");
+    })
+    var count = 1;
+    function moreGroupProduct(){
+        var url = "<c:url value='/product/groupProduct.do/'/>";
+        getProductList(url);
+    }
+    function getProductList(url){
+        $.ajax({
+            type: "get",//设置get请求方式
+            url: url+count,//设置请求的脚本地址
+            data: "",//设置请求的数据
+            async: true,
+            dataType: "json",//设置请求返回的数据格式
+            success: function (data) {
+                console.log(data);
+                count = count + 1;
+                if(data != null && data.length > 0) {
+                    var box = htmlGenerater(data);
+                    $("#productListId").append(box);
+                }
+            }
+        })
+    }
+</script>
 <!--自定义js--End-->
 </body>
 </html>
