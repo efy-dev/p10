@@ -68,7 +68,7 @@ public class GroupController {
             }
         }else {
             Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-            if (group.getManUser().getId().equals(currentUser.getId())){
+            if (group.getManUser().getId().equals(currentUser.getId())&&(group.getMemberList().size()<group.getGroupProduct().getMemberAmount())){
                 flag = true;
             }
         }
@@ -131,6 +131,26 @@ public class GroupController {
                     member.setSupMember(fatherMember);
 
                     baseManager.saveOrUpdate(Member.class.getName(),member);
+                    if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                        group.setStatus("3");
+                        baseManager.saveOrUpdate(Group.class.getName(),group);
+                        for(Member member1:group.getMemberList()){
+                            String userId = member1.getUser().getId();
+                            BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
+                            int i = 0;
+                            if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
+                                i = i + member1.getSubMemberList().size();
+                                for(Member member2:member1.getSubMemberList()){
+                                    if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
+                                        i = i + member2.getSubMemberList().size();
+                                    }
+                                }
+                            }
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                            baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
+
+                        }
+                    }
 
                     model.addAttribute("groupId",group.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
@@ -198,12 +218,15 @@ public class GroupController {
                 break;
             }
         }
+        if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+            flag = true;
+        }
         //设置参团与否参数
         String url = "";
         if (flag){
             model.addAttribute("flag","1");//已参团
         }else {
-            model.addAttribute("flag","0");//未参团
+            model.addAttribute("flag","0");//未参团或者团已满
             url = "?groupProductId="+group.getGroupProduct().getId()+"&groupId="+groupId+"&memberId="+memberId;
         }
 
@@ -237,7 +260,7 @@ public class GroupController {
             calendar.add(Calendar.DATE,limintDay);
             Date endTime = calendar.getTime();
             Date date = new Date();
-            if(date.getTime()>endTime.getTime()){
+            if(date.after(endTime)){
                 if(group.getMemberList().size()-group.getGroupProduct().getMemberAmount()>=0){
                     group.setStatus("3");
                     baseManager.saveOrUpdate(Group.class.getName(),group);

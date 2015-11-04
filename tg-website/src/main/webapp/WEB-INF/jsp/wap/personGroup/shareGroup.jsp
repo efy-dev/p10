@@ -62,11 +62,11 @@
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${flag==1}">
-      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>=0}">
+      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
         <a href="javascript:void(0)" class="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
       </c:if>
-      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<0}">
-        <a href="javascript:void(0)" class="btn">还&nbsp;差&nbsp;0&nbsp;人&nbsp;成&nbsp;团</a>
+      <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
+        <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
       </c:if>
     </c:if>
     <c:if test="${flag==0}">
