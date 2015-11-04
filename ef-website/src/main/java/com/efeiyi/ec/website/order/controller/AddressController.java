@@ -101,8 +101,8 @@ public class AddressController {
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
         XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
         List addressList = baseManager.listObject(xQuery);
-        if(addressList==null||addressList.size()==0){
-            xSaveOrUpdate.getParamMap().put("status",2);
+        if (addressList == null || addressList.size() == 0) {
+            xSaveOrUpdate.getParamMap().put("status", 2);
         }
         xSaveOrUpdate.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate);
@@ -115,7 +115,7 @@ public class AddressController {
     public String addAddressOfMobile(HttpServletRequest request) throws Exception {
         XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
         List list = baseManager.listObject(xQuery);
-        if ("1".equals(request.getParameter("checkbox"))||list.size()==0) {
+        if ("1".equals(request.getParameter("checkbox")) || list.size() == 0) {
             String id = AuthorizationUtil.getMyUser().getId();
             String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
             baseManager.executeSql(null, hql, null);
@@ -139,20 +139,20 @@ public class AddressController {
         /*XQuery xQuery = new XQuery("ListConsumerAddress_default", request);
         List list = baseManager.listObject(xQuery);*/
         /*if ("1".equals(request.getParameter("checkbox"))||list.size()==0) {*/
-            String id = AuthorizationUtil.getMyUser().getId();
-            String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
-            baseManager.executeSql(null, hql, null);
-            XSaveOrUpdate xSaveOrUpdate1 = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
-            xSaveOrUpdate1.getParamMap().put("status", "2");
-            xSaveOrUpdate1.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
-            baseManager.saveOrUpdate(xSaveOrUpdate1);
-            String cartId = request.getParameter("cartId");
-            if (cartId == null || cartId.equals("")) {
-                return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
-            }else if (request.getParameter("callback")!=null){
-                return "redirect:/order/groupBuy/" + request.getParameter("groupProductId") + "/amount=" + request.getParameter("amount")+"?callback="+request.getParameter("callback");
-            }
-            return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
+        String id = AuthorizationUtil.getMyUser().getId();
+        String hql = "update organization_consumer_address set status = '1'where status<>0 and consumer_id='" + id + "'";
+        baseManager.executeSql(null, hql, null);
+        XSaveOrUpdate xSaveOrUpdate1 = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
+        xSaveOrUpdate1.getParamMap().put("status", "2");
+        xSaveOrUpdate1.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
+        baseManager.saveOrUpdate(xSaveOrUpdate1);
+        String cartId = request.getParameter("cartId");
+        if (cartId == null || cartId.equals("")) {
+            return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
+        } else if (request.getParameter("callback") != null && !request.getParameter("callback").equals("")) {
+            return "redirect:/order/groupBuy/" + request.getParameter("groupProductId") + "/amount=" + request.getParameter("amount") + "?callback=" + request.getParameter("callback");
+        }
+        return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
         /*} else {
             String cartId = request.getParameter("cartId");
             XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate("saveOrUpdateConsumerAddress", request);
