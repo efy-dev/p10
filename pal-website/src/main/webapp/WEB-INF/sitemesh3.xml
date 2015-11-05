@@ -3,6 +3,7 @@
     <mapping path="/aboutUs.do" decorator="/layouts/decorator.jsp"/>
     <mapping path="/userManual.do" decorator="/layouts/decorator.jsp"/>
     <mapping path="/checkLabelPc.do" decorator="/layouts/decorator.jsp"/>
+    <mapping path="/search.do" decorator="/layouts/decorator.jsp"/>
     <mapping path="/500.jsp" decorator="/layouts/decorator.jsp"/>
     <!--<mapping path="/checkLabelPc.do" decorator="/layouts/nodecorator.jsp"/>-->
     <mapping path="/checkLabel.do" exclue="true"/>
