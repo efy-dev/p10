@@ -58,7 +58,7 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${flag==1}">
@@ -72,7 +72,7 @@
     <c:if test="${flag==0}">
       <a href="<c:url value='/group/groupBuy'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
-    <div class="txt4 ae"><span>参团享低价，分享赚红包！您成功参团并分享该链接帮助好友参团，就可以得红包啦！红包无上限，更多分享，更多红包！
+    <div class="txt4 ae"><span>参团享低价，分享赚红包！分享该链接并成功帮好友参团，您还可以得红包呢！红包无上限，更多分享，更多红包！
             <a href="#" class="txcon"></a>
             <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
         </span></div>
@@ -95,7 +95,7 @@
         </div>
         <div class="tab-btn">
           <a href="#">更多团购商品<i class="gicon"></i></a>
-          <a href="#">我要开团</a>
+          <a href="#">我要开团<i class="gicon"></i></a>
         </div>
       </div>
       <div class="co-page" style="display: none">
