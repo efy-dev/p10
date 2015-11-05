@@ -114,7 +114,6 @@ public class CartManagerImpl implements CartManager {
         String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
         LinkedHashMap<String, Object> param = new LinkedHashMap<>();
         param.put("userid", bigUser.getId());
-
         cart = (Cart) baseManager.getUniqueObjectByConditions(hql, param);
         if (cart == null && bigUser.getId() != null) {
             User user = new User();
@@ -125,6 +124,17 @@ public class CartManagerImpl implements CartManager {
             cart.setCartProductList(new ArrayList<CartProduct>());
             baseManager.saveOrUpdate(Cart.class.getName(), cart);
         }
+        return cart;
+    }
+
+
+    @Override
+    public Cart fetchCart(String userId){
+        Cart cart;
+        String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
+        LinkedHashMap<String, Object> param = new LinkedHashMap<>();
+        param.put("userid", userId);
+        cart = (Cart) baseManager.getUniqueObjectByConditions(hql, param);
         return cart;
     }
 

@@ -45,7 +45,7 @@ public class ProfessionalManagerImpl implements ProfessionalManager{
         }
         if(!"".equals(professional.getPassword())){
 
-            professional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
+            tempProfessional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
         }
         tempProfessional.setBigTenant(professional.getBigTenant());
         tempProfessional.setName(professional.getName());

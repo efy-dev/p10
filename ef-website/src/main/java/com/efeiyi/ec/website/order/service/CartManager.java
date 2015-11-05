@@ -29,6 +29,8 @@ public interface CartManager {
 
     Cart fetchCart();
 
+    Cart fetchCart(String userId);
+
     CartProduct addCount(Cart cart, CartProduct cartProduct);
 
     CartProduct subtractCount(Cart cart, CartProduct cartProduct);

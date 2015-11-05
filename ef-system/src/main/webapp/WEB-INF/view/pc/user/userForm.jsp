@@ -20,7 +20,7 @@
 <hr/>
 
 <div class="am-g">
-    <form action="/basic/xm.do" method="post"  class="am-form am-form-horizontal">
+    <form action="<c:url value="/basic/xm.do"/>" method="post"  class="am-form am-form-horizontal">
         <input type="hidden" name="qm" value="saveOrUpdateUser">
         <input type="hidden" name="id" value="${object.id}">
         <input type="hidden" name="status" value="1">
@@ -37,10 +37,11 @@
             </div>
         </div>
         <div class="am-form-group">
-            <label name="role.id"  class="am-u-sm-3 am-form-label">角色 <small>*</small></label>
+            <label name="roleId"  class="am-u-sm-3 am-form-label">角色 <small>*</small></label>
             <div class="am-u-sm-9">
-                <select name="role.id" id="role.id" class="selectValidate" >
-                  <c:forEach items="${roleList}" var="role" >
+                <select name="role.id" id="roleId" class="selectValidate" >
+                    <option>请选择</option>
+                    <c:forEach items="${roleList}" var="role" >
                     <option value="${role.id}">${role.name}</option>
                   </c:forEach>
                 </select>
@@ -58,7 +59,9 @@
 <hr/>
 
 <script>
-    $("select option[value='${object.role.id}']").attr("selected","selected");
+    $(function(){
+        $("select option[value='${object.role.id}']").attr("selected","selected");
+    });
 </script>
 </body>
 </html>

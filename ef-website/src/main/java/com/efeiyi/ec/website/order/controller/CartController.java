@@ -10,12 +10,14 @@ import com.efeiyi.ec.website.order.service.CartManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -98,18 +100,24 @@ public class CartController {
 
 
     private Cart getCurrentCart(HttpServletRequest request) {
+        Cookie userinfo = CookieTool.getCookieByName(request, "userinfo");
         Cart cart;
         if (AuthorizationUtil.isAuthenticated()) {
             cart = cartManager.fetchCart();
         } else {
-            Object cartObj = request.getSession().getAttribute("cart");
-            if (cartObj != null) {
-                cart = (Cart) cartObj;
+            if (userinfo != null) {
+                String userId = userinfo.getValue();
+                cart = cartManager.fetchCart(userId);
             } else {
-                cart = new Cart();
-                cart.setCartProductList(new ArrayList<CartProduct>());
-                cart.setTotalPrice(new BigDecimal(0));
-                request.getSession().setAttribute("cart",cart);
+                Object cartObj = request.getSession().getAttribute("cart");
+                if (cartObj != null) {
+                    cart = (Cart) cartObj;
+                } else {
+                    cart = new Cart();
+                    cart.setCartProductList(new ArrayList<CartProduct>());
+                    cart.setTotalPrice(new BigDecimal(0));
+                    request.getSession().setAttribute("cart", cart);
+                }
             }
         }
         return cart;
@@ -229,19 +237,7 @@ public class CartController {
     @ResponseBody
     public String getCartAmount(HttpServletRequest request) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
-        Cart cart = null;
-        if (user.getId() != null) {
-            XQuery xQuery = new XQuery("listCart_default", request);
-            List<Object> list = baseManager.listObject(xQuery);
-            cart = (Cart) list.get(0);
-        } else {
-            if (request.getSession().getAttribute("cart") != null) {
-                cart = (Cart) request.getSession().getAttribute("cart");
-            } else {
-                cart = new Cart();
-            }
-        }
-
+        Cart cart = getCurrentCart(request);
         if (cart.getCartProductList() == null || cart.getCartProductList().size() == 0) {
             return "0";
         } else {

@@ -39,10 +39,12 @@ public class MasterAttachmentHandler implements MultipartHandler {
         paramMap.put("url", url);
         MultipartFile multipartFile1 = multipartRequest.getFile("videoPath");
         String identify1 = sdf.format(new Date());
-        if (!multipartFile1.getOriginalFilename().equals("")) {
-            url  = "attachment/" +identify1 + "/" + multipartFile1.getOriginalFilename();
-            aliOssUploadManager.uploadFile(multipartFile1, "tenant", url);
-            paramMap.put("videoPath",url);
+        if(multipartFile1!=null) {
+            if (!multipartFile1.getOriginalFilename().equals("")) {
+                url = "attachment/" + identify1 + "/" + multipartFile1.getOriginalFilename();
+                aliOssUploadManager.uploadFile(multipartFile1, "tenant", url);
+                paramMap.put("videoPath", url);
+            }
         }
 
         paramMap.put("introduction.id", introductionId);
