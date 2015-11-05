@@ -27,9 +27,10 @@
     </div>
     <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
         <form action="<c:url value="/basic/xm.do"/>" method="post" class="am-form am-form-horizontal">
-            <input type="hidden" value="saveOrUpdateMasterMessage" name="qm">
+            <input type="hidden" value="saveOrUpdateMasterNews" name="qm">
             <input type="hidden" name="master.id" value="${masterId}">
             <input  type="hidden" name="id" value="${object.id}"/>
+            <input type="hidden" name="resultPage" value="redirect:/basic/xm.do?qm=plistMasterMessage_default&conditions=master.id:${masterId}&masterId=${masterId}" />
             <div class="am-form-group">
                 <label for="remark" class="am-u-sm-3 am-form-label">摘要</label>
 
@@ -47,30 +48,45 @@
                 </div>
             </div>
             <div class="am-form-group">
-                <label for="projectId" class="am-u-sm-3 am-form-label">项目名称</label>
+                <label for="project.id" class="am-u-sm-3 am-form-label">项目名称</label>
 
                 <div class="am-u-sm-9">
                     <select id="project.id" name="project.id" >
-                        <c:if test="${object.project != null}">
-                            <c:forEach items="${projectList}" var="project">
-                                <c:if test="${object.project.id != project.id}">
-                                    <option value="${project.id}">${project.name}</option>
-                                </c:if>
-                                <c:if test="${object.project.id == project.id}">
-                                    <option value="${project.id}" selected="selected">${project.name}</option>
-                                </c:if>
+                            <option value="0">请选择</option>
+                            <c:forEach items="${masterProjectList}" var="masterProject">
+
+                                    <option value="${masterProject.project.id}"  <c:if test="${object.project.id != masterProject.project.id}">selected="selected"</c:if>>${masterProject.project.name}</option>
+
                             </c:forEach>
                             <%--<option value="${object.project.id}">${object.project.name}</option>--%>
-                        </c:if>
-                        <c:if test="${object.project == null}">
-                            <option value="0">请选择</option>
-                            <c:forEach items="${projectList}" var="project">
-                                <option value="${project.id}">${project.name}</option>
-                            </c:forEach>
-                        </c:if>
                     </select>
                 </div>
             </div>
+            <%--<div class="am-form-group">--%>
+                <%--<label for="projectId" class="am-u-sm-3 am-form-label">项目名称</label>--%>
+
+                <%--<div class="am-u-sm-9">--%>
+                    <%--<select id="project.id" name="project.id" >--%>
+                        <%--<c:if test="${object.project != null}">--%>
+                            <%--<c:forEach items="${projectList}" var="project">--%>
+                                <%--<c:if test="${object.project.id != project.id}">--%>
+                                    <%--<option value="${project.id}">${project.name}</option>--%>
+                                <%--</c:if>--%>
+                                <%--<c:if test="${object.project.id == project.id}">--%>
+                                    <%--<option value="${project.id}" selected="selected">${project.name}</option>--%>
+                                <%--</c:if>--%>
+                            <%--</c:forEach>--%>
+                            <%--&lt;%&ndash;<option value="${object.project.id}">${object.project.name}</option>&ndash;%&gt;--%>
+                        <%--</c:if>--%>
+                        <%--<c:if test="${object.project == null}">--%>
+                            <%--<option value="0">请选择</option>--%>
+                            <%--<c:forEach items="${projectList}" var="project">--%>
+                                <%--<option value="${project.id}">${project.name}</option>--%>
+                            <%--</c:forEach>--%>
+                        <%--</c:if>--%>
+                    <%--</select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <div class="am-form-group">
                 <label for="createDateTime" class="am-u-sm-3 am-form-label">创建日期</label>
 
@@ -82,6 +98,15 @@
                     </div>
                 </div>
             </div>
+            <div class="am-form-group">
+                <label name="dataSource" class="am-u-sm-3 am-form-label">来源</label>
+
+                <div class="am-u-sm-9">
+                    <input type="text" name="dataSource" id="dataSource" placeholder="来源" value="${object.dataSource}">
+                    <!--<small>必填项*</small>-->
+                </div>
+            </div>
+
             <div class="am-form-group">
                 <label for="type" class="am-u-sm-3 am-form-label">类型</label>
                 <div style="margin-top: 10px;">

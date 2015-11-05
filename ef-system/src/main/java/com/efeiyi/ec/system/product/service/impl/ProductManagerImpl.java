@@ -335,6 +335,7 @@ public class ProductManagerImpl implements ProductManager{
         List<Object[]> resultList = productDao.getResult();
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date1 = sdf.format(date);
 //        HSSFWorkbook wb = new HSSFWorkbook();//创建一个EXCEL文件
 //        HSSFSheet sheet = wb.createSheet("商品规格表");//工作簿
@@ -426,6 +427,9 @@ public class ProductManagerImpl implements ProductManager{
                                 sheet1.addCell(new Label(j,i+1,down, wcf_left));
 //                                row.createCell(j).setCellValue(down);
                             }
+                        }else if(j == 11){
+                            Date date2 = (Date)os[j];
+                            sheet1.addCell(new Label(j,i+1, sdf1.format(date2), wcf_left));
                         }else {
                             sheet1.addCell(new Label(j,i+1,os[j].toString(), wcf_left));
 //                            row.createCell(j).setCellValue(os[j].toString());

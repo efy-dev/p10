@@ -42,7 +42,8 @@ public class ProductDaoHibernate implements ProductDao{
                 "p.status " +
                 "as 状态, " +
                 "pt.name as 项目,t.name as 店铺," +
-                "pg.name  as 类别 " +
+                "pg.name  as 类别, " +
+                "p.create_datetime  as 商品创建时间 " +
                 "from product_model pm " +
                 "left join product p " +
                 "on pm.product_id = p.id " +

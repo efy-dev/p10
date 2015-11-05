@@ -25,6 +25,16 @@ public class CookieTool {
         response.addCookie(cookie);
     }
 
+    public static void addCookie(HttpServletResponse response, String name, String value, int maxAge,String domain) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        if (maxAge > 0) {
+            cookie.setMaxAge(maxAge);
+        }
+        response.addCookie(cookie);
+    }
+
     /**
      * 根据名字获取cookie（接口方法）
      *
