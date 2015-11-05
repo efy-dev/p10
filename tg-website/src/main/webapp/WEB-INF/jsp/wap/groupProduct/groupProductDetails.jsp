@@ -96,7 +96,7 @@
                     </ul>
                 </div>
                 </c:if>
-                <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
+                <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
             </div>
         </div>
     </div>
