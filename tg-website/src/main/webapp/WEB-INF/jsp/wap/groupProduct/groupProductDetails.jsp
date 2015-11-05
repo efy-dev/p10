@@ -102,7 +102,12 @@
     </div>
 </div>
 <!--//End--footer-->
-
+<div class="scroll-bar">
+    <div class="scroll-bar-top" style="display: block;">
+        <span class="btn"><i class="icon1"></i></span>
+    </div>
+    <!-- //End--返回顶部-->
+</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
@@ -122,5 +127,52 @@
     })
 </script>
 <!--自定义js--End-->
+
+<style type="text/css">
+    #MEIQIA-BTN-HOLDER {
+        right: 0;bottom: 145px;}
+    #MEIQIA-BTN {
+        background: #000;
+        width: 33px;
+        height:53px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    #MEIQIA-BTN-LINE {
+        display: none;}
+    #MEIQIA-BTN-TEXT {
+        width:48px;
+        font-size: 12px;
+        position: absolute;
+        left:-28px;
+        top:20px;
+        display: none;
+    }
+    .MEIQIA-ICON {
+        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+    }
+    #MEIQIA-BTN-ICON {
+        width: 23px;
+        height: 28px;
+        margin: 0;
+        float: left;
+        margin-left:5px;
+        margin-top: 6px;
+    }
+</style>
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+</script>
 </body>
 </html>
