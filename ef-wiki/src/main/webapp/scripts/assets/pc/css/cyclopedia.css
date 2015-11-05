@@ -139,7 +139,7 @@ a{outline: none}
 .craft-gz .craft-wz{padding: 17px 0;border-bottom: 2px solid #000;font-size: 24px;color: #999;}
 .craft-gz .craft-ts{padding: 35px 0;font-size: 14px;color: #999;text-align: center}
 .craft-gz .craft-list .craft-l-page{margin-left:-40px;width: 1040px;}
-.craft-gz .craft-list .craft-l-page li{padding: 20px;margin-left: 40px;position: relative;border: 1px solid #a0a0a0;width: 480px;float: left;margin-bottom: 40px;}
+.craft-gz .craft-list .craft-l-page li{padding: 20px;margin-left: 40px;position: relative;border: 1px solid #a0a0a0;width: 480px;float: left;margin-bottom: 40px;height: 222px;}
 .craft-gz .craft-list .craft-l-page li .etext{padding-left: 198px;height: 180px;}
 .craft-gz .craft-list .craft-l-page li .etext .dz{font-size: 12px;color: #000;margin-bottom: 12px;}
 .craft-gz .craft-list .craft-l-page li .etext h5{font-size: 18px;color: #000;margin-bottom: 5px;font-weight: 100;}
@@ -156,7 +156,7 @@ a{outline: none}
 
 
 
-
+.loding{text-align: center;width:100%;float: left;margin-bottom: 200px;}
 
 /*edn//110202工艺首页-关注*/
 /*110202工艺首页-关注后*/
