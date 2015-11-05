@@ -45,10 +45,10 @@ a{outline: none}
 .craft-work3 .list-box .box-l a{padding: 7px 34px;border: 1px solid #000;background: #fff;color: #000;font-size: 14px;margin-right: 10px;}
 .craft-work3 .list-box .box-l a:hover{background: #000;color: #fff;}
 /*--作品瀑布流--110208工艺详情页-作品*/
-#pubu{margin:0 auto; position: relative}
+#pubu{position: relative}
 .craft-work3 .river ul{padding-bottom: 102px;}
-.craft-work3 .craft-page{width: 235px;float: left;border: 1px solid #e5e5e5;margin-right: 20px;margin-bottom: 20px;height: auto;}
-.craft-work3 .craft-page img{width: 100%;height: auto;float: left;}
+.craft-work3 .craft-page{width: 235px;float: left;border: 1px solid #e5e5e5;margin-right: 20px;margin-bottom: 20px;}
+.craft-work3 .craft-page img{width: 100%;height: 100%;float: left;}
 .craft-work3 .craft-page h4{padding: 16px 0 16px 10px;font-size: 14px;float: left;color: #000;}
 .craft-work3 .craft-page .function-page{padding:0 10px 16px 10px;}
 .craft-work3 .craft-page .function-page .d-left{float: left;}
@@ -95,7 +95,7 @@ a{outline: none}
 .craft-master2 ul li{width: 321px;border: 1px solid #e5e5e5;float: left;padding: 20px;position: relative;margin: 0 0 35px 19px;}
 .craft-master2 ul li .text{padding-left: 127px;width: 100%;float: left;}
 .craft-master2 ul li .text h4{font-size: 14px;color: #000;margin-bottom: 5px;}
-.craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;}
+.craft-master2 ul li .text p{font-size: 12px;color: #262626;margin-bottom: 5px;height: 20px;overflow: hidden}
 .craft-master2 ul li .text p span{color:#999!important;}
 .craft-master2 ul li .text a{width: 53px;height:31px;padding:5px 7px;border: 1px solid #ccc;display:inline-block;cursor: pointer}
 .craft-master2 .gz-icon{background:url('../images/cyclopedia.png') no-repeat -34px 0px;width: 10px;height: 10px;float: left;margin-top: 4px;margin-right: 3px;}
@@ -166,7 +166,7 @@ a{outline: none}
 .craft-l-content .craft-dt .img-dt img{width: 100%;height: 100%;}
 .craft-l-content .craft-dt .img-txt{padding-left: 177px;width: 100%;height: 180px;padding-top:10px;}
 .craft-l-content .craft-dt .img-txt p{font-size: 18px;color: #000;float: left}
-.craft-l-content .craft-dd{width: 637px!important;float: right!important;}
+.craft-l-content .craft-dd{width: 637px!important;float: right!important;height: 382px;overflow: hidden;}
 .craft-l-content .craft-dt .img-dt .list-moods{position: absolute;right: 2px;top:2px;padding: 3px 4px;display: block;background: #fff;border-radius:10%; }
 .craft-l-content .craft-dt .img-dt .img-icon{margin-top: 4px;margin-right: 5px;background: url("../images/cyclopedia.png") no-repeat 0 -16px;display:block;width: 10px;height: 10px;float: left;}
 .craft-l-content .craft-dt .img-dt em{font-size:10px;color: #000;float: left}
@@ -270,6 +270,18 @@ a{outline: none}
 .details .detaile-left .detaile-share .thumb-up .thump-assist em{float: left;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-share .thumb-up .thump-assist a{color: #000;text-decoration: none;outline: none;}
 .details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -49px -28px;float: left;margin-top: 14px;margin-right: 10px;}
+
+
+.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon1{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -139px -42px;float: left;margin-top: 14px;margin-right: 10px;}
+
+
+
+
+
+
+
+
+
 .details .detaile-left .detaile-share .thumb-up .thump-collect em{float: left;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-share .thumb-up .thump-collect a{color: #000;text-decoration: none;outline: none;}
 .details .detaile-left .detaile-share .thumb-up .thump-enquiry{float: right;margin-top: 8px;}
@@ -348,6 +360,6 @@ a{outline: none}
 .word .leave .close{position: relative;}
 .word .leave-bg{position: fixed;background: #000;opacity:0.5;z-index: 400;right: 0;left: 0;top:0;bottom: 0;}
 .details .detaile-left .detaile-comment .comment li .status .status-right .ef a{}
-
-
+.add-obtain{position: relative;float:left;margin: 0;}
+.obtain{width: 100%;float:left}
 /*110111*/

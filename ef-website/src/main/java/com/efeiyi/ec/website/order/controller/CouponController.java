@@ -5,7 +5,9 @@ import com.efeiyi.ec.purchase.model.*;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.model.AutoSerial;
 import com.ming800.core.p.service.AutoSerialManager;
+import com.ming800.core.p.service.impl.AutoSerialManagerImpl;
 import com.ming800.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +41,7 @@ public class CouponController {
     @ResponseBody
     public List<Object> listUserCoupon(HttpServletRequest request) throws Exception {
         float price = Float.parseFloat(request.getParameter("price"));
-        PurchaseOrder purchaseOrder = (PurchaseOrder)baseManager.getObject(PurchaseOrder.class.getName(),request.getParameter("purchaseOrderId"));
+        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), request.getParameter("purchaseOrderId"));
         XQuery couponQuery = new XQuery("listCoupon_useful", request);
         List<Object> couponList = baseManager.listObject(couponQuery);
         Iterator couponIterator = couponList.iterator();
@@ -48,9 +50,9 @@ public class CouponController {
             Coupon couponTemp = (Coupon) couponIterator.next();
             couponTemp.setStartTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getStartDate()));
             couponTemp.setEndTimeL(simpleDateFormat.format(couponTemp.getCouponBatch().getEndDate()));
-            if (!isUserful(purchaseOrder,couponTemp)) {
+            if (!isUserful(purchaseOrder, couponTemp)) {
 //                if (couponTemp.getCouponBatch().getPriceLimit() > price) {
-                    couponIterator.remove();
+                couponIterator.remove();
 //                }
 //                if (couponTemp.getCouponBatch().getRange().equals("1")) {
 //                    couponTemp.setRangeLabel("全场通用");
@@ -143,7 +145,7 @@ public class CouponController {
             }
 
             return isUseful;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -198,7 +200,7 @@ public class CouponController {
      */
     @RequestMapping({"/claimCoupon/{unkey}"})
     @ResponseBody
-    public boolean claimCoupon(HttpServletRequest request , @PathVariable String unkey) throws Exception {
+    public boolean claimCoupon(HttpServletRequest request, @PathVariable String unkey) throws Exception {
         XQuery xQuery = new XQuery("listCouponBatch_bycdkey", request);
         xQuery.put("uniqueKey", unkey);
         Date date = new Date();
@@ -206,8 +208,8 @@ public class CouponController {
         xQuery.put("endDate", date);
         List<Object> couponBatchList = baseManager.listObject(xQuery);
         CouponBatch couponBatch = null;
-        if (couponBatchList!=null&&couponBatchList.size()>0){
-            couponBatch = (CouponBatch)couponBatchList.get(0);
+        if (couponBatchList != null && couponBatchList.size() > 0) {
+            couponBatch = (CouponBatch) couponBatchList.get(0);
         }
         Coupon coupon = new Coupon();
         coupon.setStatus("1");
@@ -226,67 +228,69 @@ public class CouponController {
     @RequestMapping({"/exchangeCoupon.do"})
     @ResponseBody
     public Object exchangeCoupon(HttpServletRequest request) throws Exception {
-        Coupon coupon = null;
-        String cdkey = request.getParameter("cdkey");
-        String purchaseOrderId = request.getParameter("purchaseOrderId");
-        PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
-        XQuery xQuery = new XQuery("listCouponBatch_bycdkey", request);
-        xQuery.put("uniqueKey", cdkey);
-        Date date = new Date();
-        xQuery.put("startDate", date);
-        xQuery.put("endDate", date);
-        List<Object> couponBatchList = baseManager.listObject(xQuery);
-        if (couponBatchList != null && couponBatchList.size() > 0) {
-            CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
-            if (currentCouponBatch.getAmount()<=currentCouponBatch.getCouponList().size()){
-                return "null";
-            }
-//            生成一张该批次的优惠券  这里使用的是通码
-            coupon = new Coupon();
-            coupon.setStatus("1");
-            coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-            coupon.setCouponBatch(currentCouponBatch);
-            Date currentDate = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-            String currentDateStr = simpleDateFormat.format(currentDate);
-            coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-            Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
-            coupon.setConsumer(consumer);
-            baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
-            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-            coupon.setStartTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getStartDate()));
-            coupon.setEndTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getEndDate()));
-        } else {
-            XQuery xQuery2 = new XQuery("listCoupon_bycdkey", request);
-            xQuery2.setQueryHql(xQuery2.getQueryHql() + " and s.consumer.id is null ");
-            xQuery2.updateHql();
-            xQuery2.put("uniqueKey", cdkey);
-            xQuery2.put("couponBatch_startDate", date);
-            xQuery2.put("couponBatch_endDate", date);
-            List result = baseManager.listObject(xQuery2);
-            if (result != null && result.size() > 0) {
-                coupon = (Coupon) result.get(0);
-                if (coupon.getStatus().equals("2")){
+        synchronized (this) {
+            Coupon coupon = null;
+            String cdkey = request.getParameter("cdkey");
+            String purchaseOrderId = request.getParameter("purchaseOrderId");
+            PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), purchaseOrderId);
+            XQuery xQuery = new XQuery("listCouponBatch_bycdkey", request);
+            xQuery.put("uniqueKey", cdkey);
+            Date date = new Date();
+            xQuery.put("startDate", date);
+            xQuery.put("endDate", date);
+            List<Object> couponBatchList = baseManager.listObject(xQuery);
+            if (couponBatchList != null && couponBatchList.size() > 0) {
+                CouponBatch currentCouponBatch = (CouponBatch) couponBatchList.get(0);
+                if (currentCouponBatch.getAmount() <= currentCouponBatch.getCouponList().size()) {
                     return "null";
                 }
+//            生成一张该批次的优惠券  这里使用的是通码
+                coupon = new Coupon();
+                coupon.setStatus("1");
+                coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                coupon.setCouponBatch(currentCouponBatch);
+                Date currentDate = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                String currentDateStr = simpleDateFormat.format(currentDate);
+                coupon.setUniqueKey(currentDateStr + coupon.getSerial());
                 Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
-                coupon.setConsumer(consumer);
                 coupon.setConsumer(consumer);
                 baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                 SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
                 coupon.setStartTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getStartDate()));
                 coupon.setEndTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getEndDate()));
+            } else {
+                XQuery xQuery2 = new XQuery("listCoupon_bycdkey", request);
+                xQuery2.setQueryHql(xQuery2.getQueryHql() + " and s.consumer.id is null ");
+                xQuery2.updateHql();
+                xQuery2.put("uniqueKey", cdkey);
+                xQuery2.put("couponBatch_startDate", date);
+                xQuery2.put("couponBatch_endDate", date);
+                List result = baseManager.listObject(xQuery2);
+                if (result != null && result.size() > 0) {
+                    coupon = (Coupon) result.get(0);
+                    if (coupon.getStatus().equals("2")) {
+                        return "null";
+                    }
+                    Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
+                    coupon.setConsumer(consumer);
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                    SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+                    coupon.setStartTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getStartDate()));
+                    coupon.setEndTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getEndDate()));
+                }
             }
-        }
 
 
-        if (coupon == null) {
-            return "null";
-        } else {
-            coupon.setIsUseful(isUserful(purchaseOrder, coupon) ? "1" : "0");
-            List<Object> couponList = new ArrayList<>();
-            couponList.add(coupon);
-            return couponList;
+            if (coupon == null) {
+                return "null";
+            } else {
+                coupon.setIsUseful(isUserful(purchaseOrder, coupon) ? "1" : "0");
+                List<Object> couponList = new ArrayList<>();
+                couponList.add(coupon);
+                return couponList;
+            }
         }
     }
 
@@ -330,8 +334,8 @@ public class CouponController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         XQuery couponQuery = new XQuery("listCoupon_byorder", request);
         couponQuery.put("couponBatch_priceLimit", purchaseOrder.getTotal().floatValue());
-        couponQuery.put("couponBatch_startDate",new Date());
-        couponQuery.put("couponBatch_endDate",new Date());
+        couponQuery.put("couponBatch_startDate", new Date());
+        couponQuery.put("couponBatch_endDate", new Date());
         List<Coupon> couponList = baseManager.listObject(couponQuery);
         for (Coupon coupon : couponList) {
             coupon.getCouponBatch().setStartDateString(df.format(coupon.getCouponBatch().getStartDate()));
@@ -365,11 +369,8 @@ public class CouponController {
         String couponId = request.getParameter("couponId");
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         Coupon coupon = (Coupon) baseManager.getObject(Coupon.class.getName(), couponId);
-
         purchaseOrder.setCoupon(coupon);
-
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
-
         return true;
 
     }

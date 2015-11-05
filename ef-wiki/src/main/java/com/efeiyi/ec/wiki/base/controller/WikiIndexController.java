@@ -528,7 +528,7 @@ public class WikiIndexController extends WikibaseController {
     public  List afterAttention(HttpServletRequest request, Model model) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
-            return null;
+            return new ArrayList();
         }
         XQuery query3 = new XQuery("plistProjectFollowed_after", request);
         query3.put("user_id", AuthorizationUtil.getMyUser().getId());

@@ -154,7 +154,8 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="true"){
@@ -377,7 +378,8 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="true"){
@@ -717,7 +719,8 @@
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data2=="repeat"){
@@ -761,7 +764,8 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="repeat"){
