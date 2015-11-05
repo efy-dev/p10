@@ -19,9 +19,16 @@
     <form id="form" action="<c:url value='/checkLabelPc.do'/>" method="get">
         <%--<div class="title"><a >真伪查询</a><span class="line"></span><a>非遗搜</a></div>--%>
             <div class="title"><a >真伪查询</a></div>
-        <label for="">
+        <label for="serial">
             <input class="txt" type="text" name="serial" id="serial" value="" />
             <input class="btn" type="submit" id="btn" value="查 询"/>
+        </label>
+    </form>
+    <form id="form2" action="<c:url value='/search.do'/>" method="get">
+        <div class="title"><a>非遗搜</a></div>
+        <label for="q">
+            <input class="txt" type="text" name="q" id="q" value="" />
+            <input class="btn" type="button" id="btn2" value="查 询" onclick="preSubmit()"/>
         </label>
     </form>
     <!--//End--form-->
@@ -50,4 +57,10 @@
             $('#form').submit();
         });
     });
+    function preSubmit(){
+        var q = $("#q").val();
+        q = encodeURI(q);
+        $("#q").val(q);
+        $("#form2").submit();
+    }
 </script>
