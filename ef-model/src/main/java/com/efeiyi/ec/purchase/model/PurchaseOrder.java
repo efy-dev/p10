@@ -46,6 +46,16 @@ public class PurchaseOrder {
     private String purchaseOrderAddress;//收货人地址
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
+    private String callback; //回调
+
+    @Column(name = "callback")
+    public String getCallback() {
+        return callback;
+    }
+
+    public void setCallback(String callback) {
+        this.callback = callback;
+    }
 
     @Column(name = "purchase_order_address")
     public String getPurchaseOrderAddress() {
@@ -235,7 +245,7 @@ public class PurchaseOrder {
         this.receiverPhone = receiverPhone;
     }
 
-    @Column(name = "")
+    @Column(name = "payway")
     public String getPayWay() {
         return payWay;
     }
@@ -252,7 +262,7 @@ public class PurchaseOrder {
         for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetails.getCoupon() == null && purchaseOrderPaymentDetails.getTransactionNumber() != null) {
-                    resultPrice = resultPrice.add(purchaseOrderPaymentTemp.getPaymentAmount());
+                    resultPrice = resultPrice.add(purchaseOrderPaymentDetails.getMoney());
                 }
             }
         }

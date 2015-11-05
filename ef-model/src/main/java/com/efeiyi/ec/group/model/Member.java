@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "member")
-public class Member {
+public class Member implements Serializable {
 
     private String id;
     private MyUser user;//用户
@@ -21,6 +23,7 @@ public class Member {
     private List<Member> subMemberList;
     private String status;//0:取消 1进行中 3：组团成功 5：组团失败
     private Group group;
+    private BigDecimal redPacket;
 
 
     @Id
@@ -90,5 +93,14 @@ public class Member {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    @Column(name = "red_packet")
+    public BigDecimal getRedPacket() {
+        return redPacket;
+    }
+
+    public void setRedPacket(BigDecimal redPacket) {
+        this.redPacket = redPacket;
     }
 }

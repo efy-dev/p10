@@ -69,17 +69,17 @@
     <div class="f-select-group">
       <div class="select-head">
         <span>分类：</span>
-        <strong><a href="#" class="" about="1" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        <strong><a href="#" class="active" about="1" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allCategory&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
       </div>
       <ul class="select-list">
 
         <c:if test="${!empty ProjectCategoryList}">
           <c:forEach var="catagory" items="${ProjectCategoryList}" varStatus="status">
             <c:if test="${status.index==0}">
-              <li><a href="#" class="active" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
             <c:if test="${status.index!=0}">
-              <li><a href="#" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
+              <li><a href="#" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Category&conditions=projectCategory.id:${catagory.id}&pageEntity.size=10&pageEntity.index='/>')">${catagory.name}</a></li>
             </c:if>
           </c:forEach>
 
@@ -89,7 +89,7 @@
     <div class="f-select-group">
       <div class="select-head">
         <span>级别：</span>
-        <strong><a href="#" class="active" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
       </div>
       <ul class="select-list">
         <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:1&pageEntity.size=10&pageEntity.index='/>')">国家级</a></li>
@@ -101,12 +101,12 @@
     <div class="f-select-group cl-act">
       <div class="select-head">
         <span>地区：</span>
-        <strong><a href="#" class="active" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
+        <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
       </div>
       <ul class="select-list">
         <c:if test="${!empty AddressProvinceList}">
           <c:forEach var="ap" items="${AddressProvinceList}" varStatus="status">
-            <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
+            <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_Dirt&conditions=addressDistrict.addressCity.addressProvince.id:${ap.id}&pageEntity.size=10&pageEntity.index='/>')">${ap.name}</a></li>
           </c:forEach>
         </c:if>
       </ul>
@@ -245,7 +245,7 @@
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
@@ -300,7 +300,7 @@
 
             var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
-                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"#\">" +
+                    "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
             pubu.append(box);
 
@@ -343,7 +343,9 @@
      $("#classify").empty();
      StartNum = 1;
      $(object).attr("about","0");
+     $(object).attr("class","");
      $(o).attr("about","1");
+     $(o).attr("class","active");
      object = o;
    }
   }
@@ -355,7 +357,7 @@
     //PBL("#beforeAttention",".before",2);
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
-      var pageH = $(document.body).height();
+      var pageH = $(document).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       if(aa < 0.02){
@@ -385,7 +387,12 @@
       success:function(data){
 
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+
+        //$('.grounp-f').prepend("<iframe id='qwe' src=\"http://passport.efeiyi.com/login?service=http%3A%2F%2Fmaster.efeiyi.com%2Fef-wiki%2Fj_spring_cas_security_check\"></iframe>");
+        //$('.grounp-f').children('#qwe').remove();
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+
           return false;
         }
         if(data=="true"){

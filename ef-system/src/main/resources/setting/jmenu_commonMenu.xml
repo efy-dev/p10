@@ -48,6 +48,7 @@
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=coupon"/>
                 <match url="/basic/xm.do?qm=plistCoupon_search"/>
                 <match url="/basic/xm.do?qm=plistCoupon_default"/>
+                <match url="/basic/xm.do?qm=viewCoupon"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch" access="admin,manager" text_zh_CN="优惠券批次">
                 <match url="/basic/xm.do?qm=plistCouponBatch_default&amp;view=Batch"/>
@@ -56,6 +57,7 @@
                 <match url="/basic/xm.do?qm=viewCouponBatch&amp;view=Batch"/>
                 <match url="/basic/xm.do?qm=plistCouponBatch_search"/>
                 <match url="/basic/xm.do?qm=plistCouponBatch_default"/>
+                <match url="/basic/xm.do?qm=plistCoupon_used"/>
             </jnode>
         </jnode>
 

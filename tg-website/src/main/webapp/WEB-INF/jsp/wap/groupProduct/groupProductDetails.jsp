@@ -40,7 +40,7 @@
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
-        <a href="/person/personInfoView.do" class="chevron-right" id="menu">
+        <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
             <i class="icon icon-user"></i>
         </a>
     </div>
@@ -57,7 +57,7 @@
     <!--功能-->
     <div class="iwill ae">
         <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间${groupProduct.groupPurchaseTime}天</p></div></div>
-        <a href="/tg/group/group.do?groupProductId=${groupProduct.id}" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+        <a href="<c:url value="/group/groupBuy?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
     <!-- 选项卡-->
@@ -96,7 +96,7 @@
                     </ul>
                 </div>
                 </c:if>
-                <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
+                <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
             </div>
         </div>
     </div>

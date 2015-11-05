@@ -79,16 +79,16 @@
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">兑换码</td>
-                <td class="am-u-md-3">${object.uniqueKey}</td>
+                <td class="am-u-md-3" colspan="3">${object.uniqueKey}</td>
             </tr>
             <tr>
                 <td class="am-primary am-u-md-3">生效日期</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.startDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
+                    <fmt:formatDate value="${object.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
                 <td class="am-primary am-u-md-3">失效日期</td>
                 <td class="am-u-md-3">
-                    <fmt:formatDate value="${object.endDate}" pattern="yyyy-MM-dd hh:mm:ss"/>
+                    <fmt:formatDate value="${object.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
             </tr>
 

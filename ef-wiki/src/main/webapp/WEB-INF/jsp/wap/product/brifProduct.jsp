@@ -278,7 +278,8 @@ ${product.productDescription.content}
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="true"){
@@ -448,7 +449,8 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       alert("您还未登陆，请登录后再操作！！！");
+       //alert("您还未登陆，请登录后再操作！！！");
+       window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
        return false;
      }
       if(data2=="repeat"){
@@ -511,7 +513,8 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
@@ -549,7 +552,8 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            alert("您还未登陆，请登录后再操作！！！");
+            //alert("您还未登陆，请登录后再操作！！！");
+            window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
@@ -580,7 +584,8 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data2=="repeat"){
@@ -620,7 +625,8 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          showAlert("提示","您还未登陆，请登录后再操作");
+          //showAlert("提示","您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="repeat"){
