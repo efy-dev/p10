@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.product.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.GroupProduct;
 import com.efeiyi.ec.organization.model.MyUser;
@@ -74,6 +75,31 @@ public class GroupProductController {
         model.addAttribute("groupProduct", groupProduct);
         model.addAttribute("purchaseOrderProductList", purchaseOrderProductList);
         return "/groupProduct/groupProductDetails";
+    }
+    /**
+     * 评价详情
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/groupProduct/purchaseOrderComment/{groupProductId}/{index}")
+    @ResponseBody
+    public List<Object> getPurchaseOrderCommentList(@PathVariable String groupProductId ,HttpServletRequest request,@PathVariable String index) throws Exception {
+        GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        XQuery purchaseOrderProductQuery = new XQuery("listPurchaseOrderProduct_default",request);
+        purchaseOrderProductQuery.put("productModel_id", groupProduct.getProductModel().getId());
+        PageEntity pageEntity = new PageEntity();
+        if (index != null) {
+            pageEntity.setIndex(Integer.parseInt(index));
+        }
+        pageEntity.setSize(4);
+        purchaseOrderProductQuery.setPageEntity(pageEntity);
+        PageInfo pageInfo = baseManager.listPageInfo(purchaseOrderProductQuery);
+        List<Object> list = pageInfo.getList();
+        if(list!=null&&list.size()>0){
+        Collections.reverse(list);
+        }
+        return list;
     }
 
 }
