@@ -23,7 +23,7 @@
 <div class="hd">
   <div class="search-result">
     <h1>检索结果</h1>
-    <c:forEach items="${linkedHashMapList}" var="item">
+    <c:forEach items="${searchList}" var="item">
     <div class="item">
       <a class="img" href=""><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${item.picture_url}"/></a>
       <ul>
@@ -45,13 +45,6 @@
         <ming800:pcPageParam name="q" value="${requestScope.q}"/>
       </ming800:pcPageList>
     </div>
-  </div>
-</div>
-<div class="footer">
-  <div class="hd">
-    <a href="" title="关于诚品宝">关于诚品宝</a>
-    <a href="" title="使用前必读">使用前必读</a>
-    <a href="" title="京ICP备:15032511号-1">京ICP备:15032511号-1</a>
   </div>
 </div>
 <!--//End--footer-->
