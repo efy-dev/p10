@@ -14,6 +14,7 @@ import com.efeiyi.ec.wiki.organization.service.BranchManager;
 import com.efeiyi.ec.wiki.organization.service.RoleManager;
 import com.efeiyi.ec.wiki.organization.service.SmsCheckManager;
 import com.efeiyi.ec.wiki.organization.service.UserManager;
+import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -172,10 +173,23 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String  callUrl = request.getParameter("callUrl");
+        String  userId = request.getParameter("userId");
+        if(callUrl!=null && !"".equals(callUrl)){
+            return "redirect:"+request.getContextPath() + callUrl;
+        }
+        if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){
+            return "redirect:"+request.getContextPath() + "/sso2.do";
+        }else{
+            return "redirect:"+request.getContextPath();
+        }
+
+    }
+    @RequestMapping("/sso2.do")
+    public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");
     }
-
     @RequestMapping({"/login"})
     public String login(HttpServletRequest request ,Model model){
         String error = request.getParameter("error");

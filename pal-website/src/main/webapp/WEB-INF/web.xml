@@ -64,6 +64,9 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>com.efeiyi.listener.SearchInitListener</listener-class>
+    </listener>
 
     <!-- 瀹氫箟DispatcherServlet -->
     <servlet>

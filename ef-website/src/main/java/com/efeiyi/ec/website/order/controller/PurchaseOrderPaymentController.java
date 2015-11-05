@@ -169,6 +169,7 @@ public class PurchaseOrderPaymentController {
         model.addAttribute("signType", jsonStr.getString("signType"));
         model.addAttribute("nonceStr", jsonStr.getString("nonceStr"));
         model.addAttribute("orderId", purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder().getId());
+        model.addAttribute("order",purchaseOrderPaymentDetails.getPurchaseOrderPayment().getPurchaseOrder());
         return "/order/wxpay";
     }
 

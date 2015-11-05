@@ -15,6 +15,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.BannerManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,6 @@ public class WikiDynamicController extends WikibaseController {
     BaseManager baseManager;
     @Autowired
     private BannerManager bannerManager;
-
     @RequestMapping("/index.do")
     public ModelAndView getHotProjects(HttpServletRequest request, Model model) throws Exception {
         //轮播图

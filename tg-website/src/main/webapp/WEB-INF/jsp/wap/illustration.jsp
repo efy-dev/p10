@@ -56,7 +56,7 @@
     var ele = document.getElementById("cbox");
     var groupProductId = ${groupProductId};
     if(ele.checked){
-      $("#a").attr('href','/group/groupBuy?groupProductId='+groupProductId);
+      $("#a").attr('href',"<c:url value="/group/groupBuy?groupProductId="/>"+groupProductId);
     }else{
       $("#a").attr('href','#');
     }

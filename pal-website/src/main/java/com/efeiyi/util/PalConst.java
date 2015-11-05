@@ -70,6 +70,7 @@ public class PalConst {
     public String weiXinToken = "11111111111111111111111111111111";
     public DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
     public String baiduApiUrl = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
+    public String solrUrl = "http://localhost:8080/solr-5.3.1/product/select?wt=json&indent=true&q=";
 
     public Map<String,String> labelCache = new HashMap<String,String>();
 
