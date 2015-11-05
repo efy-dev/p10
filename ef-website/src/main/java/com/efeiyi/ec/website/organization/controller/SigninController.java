@@ -24,6 +24,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.does.model.XSaveOrUpdate;
 import com.ming800.core.p.PConst;
 import com.ming800.core.p.service.AutoSerialManager;
+import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.HttpUtil;
 import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -210,6 +212,9 @@ public class   SigninController extends BaseController {
 
     @RequestMapping("/sso2.do")
     public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //将登陆的用户的用户信息保存到cookie中
+        MyUser myUser = AuthorizationUtil.getMyUser();
+        CookieTool.addCookie(response,"userinfo",myUser.getId(),10000000,".efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
     }
     @RequestMapping({"/login"})
