@@ -6,6 +6,7 @@ import com.efeiyi.ec.group.model.Member;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
@@ -98,7 +99,7 @@ public class GroupController {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
         if (currentUser != null){
-           // if(purchaseOrder.getOrderStatus().equals("5")){
+            if(purchaseOrder.getOrderStatus().equals("5")){
                 if (groupId.equals("null")||groupId.isEmpty()){
                     Group groupbuy = new Group();
                     groupbuy.setManUser(currentUser);
@@ -113,6 +114,13 @@ public class GroupController {
                     member.setLevel("0");
                     member.setUser(currentUser);
                     baseManager.saveOrUpdate(Member.class.getName(),member);
+
+                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                    purchaseOrderGroup.setStatus("1");
+                    purchaseOrderGroup.setGroup(groupbuy);
+                    purchaseOrderGroup.setMember(member);
+                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
                     model.addAttribute("groupId",groupbuy.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
@@ -129,8 +137,15 @@ public class GroupController {
                     member.setLevel(level);
                     member.setUser(currentUser);
                     member.setSupMember(fatherMember);
-
                     baseManager.saveOrUpdate(Member.class.getName(),member);
+
+                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                    purchaseOrderGroup.setStatus("1");
+                    purchaseOrderGroup.setGroup(group);
+                    purchaseOrderGroup.setMember(member);
+                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
+
                     if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                         group.setStatus("3");
                         baseManager.saveOrUpdate(Group.class.getName(),group);
@@ -159,10 +174,10 @@ public class GroupController {
 
 
 
-           // }
-            /*else {
+            }
+            else {
                 return "/";//未支付成功
-            }*/
+            }
         }else {
             return "/";//用户未登录
         }
