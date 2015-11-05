@@ -58,9 +58,9 @@
         });
     });
     function preSubmit(){
-        var q = $("#q").val();
-        q = encodeURI(q);
-        $("#q").val(q);
+//        var q = $("#q").val();
+//        q = encodeURI(q);
+//        $("#q").val(q);
         $("#form2").submit();
     }
 </script>
