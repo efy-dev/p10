@@ -9,26 +9,25 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</title>
+    <title>开团详情</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/resources/assets/i/favicon.png">
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
 </head>
 <body>
@@ -47,13 +46,13 @@
 </header>
 <!--//End--header-->
 <div class="my-colonel ae">
-    <!--产品-->
+    <!-- 轮播产品-->
     <div class="custom">
         <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
             <ul class="am-slides ">
                 <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
                 <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
-                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
                 </c:forEach>
             </ul>
         </div>
@@ -90,21 +89,21 @@
             </div>
             <div class="co-page" style="display: none">
                 <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
-                <div class="col-pl ae">
-                    <ul class="ae">
-                        <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
-                           <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
-                             <li>
-                                 <c:set var="user">
-                                     ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
-                                 </c:set>
-                                 <div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</h5><P>${purchaseOrderProduct.purchaseOrderComment.content}</P><p><strong></strong></p></li>
-                            </li>
-                          </c:if>
-                        </c:forEach>
+                    <div class="col-pl ae">
+                        <ul class="ae">
+                            <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+                                    <li>
+                                        <c:set var="user">
+                                            ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                        </c:set>
+                                        <div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</h5><P>${purchaseOrderProduct.purchaseOrderComment.content}</P><p><strong></strong></p></li>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 </c:if>
                 <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
             </div>
@@ -119,28 +118,6 @@
     </div>
 </div>
 <!--//End--footer-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
-<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
-<![endif]-->
-<!--自定义js--Start-->
-<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
-<script src="<c:url value="/scripts/wap/js/myorder.js"/>"></script>
-<script>
-    $().ready(function(){
-        $("img").each(function(){
-            $(this).css("width","100%");
-        })
-    })
-</script>
-<!--自定义js--End-->
-
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 145px;}
@@ -187,5 +164,19 @@
     })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
     _MEIQIA('entId', 486);
 </script>
+<!--end在线客服-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
+<!--自定义js--Start-->
+<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
+<script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
+<!--自定义js--End-->
 </body>
 </html>

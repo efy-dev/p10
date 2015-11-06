@@ -80,7 +80,7 @@
                   <span>组团失败-等待付款</span>
                 </c:if>
                 <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==18}">
-                  <span>组团失败-已</span>
+                  <span>组团失败-已付款</span>
                 </c:if>
               </c:if>
             </div>
@@ -104,8 +104,8 @@
               </c:if>
               <ul class="right">
                 <!--状态-->
-                <li><a href="#">追加评价</a></li>
-                <li><a href="#">查看物流</a></li>
+                <%--<li><a href="#">追加评价</a></li>--%>
+                <%--<li><a href="#">查看物流</a></li>--%>
               </ul>
             </div>
           </li>
@@ -138,7 +138,14 @@
           </div>
           <div class="center ae">
             <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
-            <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup5.member.redPacket}元</p></div>
+            <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p>
+              <c:if test="${purchaseOrderGroup5.group.status==1||purchaseOrderGroup5.group.status==5}">
+                <p>返回红包：0元</p>
+              </c:if>
+              <c:if test="${purchaseOrderGroup5.group.status==3}">
+                <p>返回红包：${purchaseOrderGroup5.member.redPacket}元</p>
+              </c:if>
+            </div>
           </div>
           <div class="bottom ae">
             <c:if test="${purchaseOrderGroup5.member.level==0}">
@@ -177,7 +184,14 @@
           </div>
           <div class="center ae">
             <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
-            <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p></div>
+            <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p>
+              <c:if test="${purchaseOrderGroup7.group.status==1||purchaseOrderGroup7.group.status==5}">
+                <p>返回红包：0元</p>
+              </c:if>
+              <c:if test="${purchaseOrderGroup7.group.status==3}">
+                <p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p>
+              </c:if>
+            </div>
           </div>
           <div class="bottom ae">
             <c:if test="${purchaseOrderGroup7.member.level==0}">
@@ -222,7 +236,14 @@
             </div>
             <div class="center ae">
               <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
-              <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p></div>
+              <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p>
+                <c:if test="${purchaseOrderGroup9.group.status==1||purchaseOrderGroup9.group.status==5}">
+                  <p>返回红包：0元</p>
+                </c:if>
+                <c:if test="${purchaseOrderGroup9.group.status==3}">
+                  <p>返回红包：${purchaseOrderGroup9.member.redPacket}元</p>
+                </c:if>
+              </div>
             </div>
             <div class="bottom ae">
               <c:if test="${purchaseOrderGroup9.member.level==0}">

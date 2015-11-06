@@ -95,7 +95,7 @@ public class PurchaseOrderController extends BaseController {
                         }
                         timer.cancel();//停止定时器
                     }
-                }, 60 * 1000);
+                }, 7*24*60*60*1000);
 
             }else{
                 PurchaseOrder fPurchaseOrder = purchaseOrder.getFatherPurchaseOrder();
@@ -165,7 +165,7 @@ public class PurchaseOrderController extends BaseController {
 
                         timer.cancel();//停止定时器
                     }
-                },  60 * 1000);
+                },  7*24*60*60*1000);
 
 
             }
