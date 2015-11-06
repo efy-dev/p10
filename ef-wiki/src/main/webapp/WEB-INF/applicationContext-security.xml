@@ -22,10 +22,11 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
-        <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/showProduct/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/find.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
-        <!--<intercept-url pattern="/pc/category" access="isAuthenticated()"/>-->
+        <intercept-url pattern="/pc/category" access="isAuthenticated()"/>
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>
         <intercept-url pattern="/order/**" access="isAuthenticated()"/>
@@ -46,7 +47,7 @@
     </b:bean>-->
     <b:bean id="casEntryPoint"  class="org.springframework.security.web.authentication.CasAuthenticationRedirect">
         <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
-       <!-- <b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
+        <!--<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
         <b:property name="serviceProperties" ref="serviceProperties"/>
     </b:bean>
     <b:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
@@ -56,7 +57,7 @@
 
     <b:bean id="serviceProperties"  class="org.springframework.security.cas.ServiceProperties">
         <b:property name="service"  value="http://master.efeiyi.com/ef-wiki/j_spring_cas_security_check"/>
-        <!--<b:property name="service"  value="http://192.168.1.61:8082/j_spring_cas_security_check"/>-->
+       <!-- <b:property name="service"  value="http://192.168.1.61:8082/ef-wiki/j_spring_cas_security_check"/>-->
         <b:property name="sendRenew" value="false"/>
     </b:bean>
 
@@ -96,8 +97,8 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-        value="http://passport.efeiyi.com/logout?service=http://master.efeiyi.com/ef-wiki" />
-               <!-- value="http://192.168.1.57/cas/logout?service=http://192.168.1.61:8082" />-->
+               value="http://passport.efeiyi.com/logout?service=http://master.efeiyi.com/ef-wiki" />
+        <!--value="http://192.168.1.57/cas/logout?service=http://192.168.1.61:8082/ef-wiki" />-->
 
         <b:constructor-arg>
             <b:bean

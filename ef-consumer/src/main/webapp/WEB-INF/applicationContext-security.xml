@@ -82,7 +82,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://i.efeiyi.com" />
+                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com/j_spring_cas_security_logout" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

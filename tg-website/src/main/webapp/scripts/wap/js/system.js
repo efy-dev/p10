@@ -41,6 +41,21 @@ $(function(){
         if($('div').hasClass('details-total-bar')){
             $('footer').css({'padding-bottom':'50px'})
         };
+        //
+        (function(){
+            $(window).scroll(function(){
+                var _top=$(window).scrollTop();
+                var btnTop=$('.scroll-bar-top');
+                if(_top>200){
+                    btnTop.fadeIn();
+                }else{
+                    btnTop.fadeOut();
+                }
+                btnTop.click(function(){
+                    $('body').stop(true).animate({'scrollTop':'0'},300);
+                })
+            })
+        })();
         //加入购物车-立即购买-调出规格弹出层
         $('#btn-cart,#btn-format,#btn-buy').click(function(){
             $('body').css('overflow','hidden');
@@ -75,7 +90,7 @@ $(function(){
             return false;
         })
         //分享
-        $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon').click(function(){
+        $('.details .des-title a.share,.my-colonel .iwill .txt4 .txcon,.packet .button .ad,#btn').click(function(){
             $('#cover').show();
             $('#cover .bg').click(function(){
                 $(this).parents('#cover').hide();
@@ -128,11 +143,29 @@ $(function(){
         var coli = $('.colonel-table .c-title ul li')
         var cobox = $('.colonel-table .c-content .co-page')
         coli.click(function(){
-            var cothis = $(this)
-            cothis.addClass('active').siblings().removeClass('active')
-            var index = cothis.index()
+            var index = $(this).index()
+            $(this).addClass('active').siblings().removeClass('active')
             cobox.eq(index).show().siblings().hide();
+        });
+        //打开领券地址-----计算页面的高度
+        var bodyH=$('body').height();
+        $('.coupon-sc').css({'height':(bodyH-55)+'px'});
+        if($('div').hasClass('coupon-sc')){
+            $('body').css('height','100%');
+        }
+
+    })();
+    //优惠-----优惠券tab
+    (function(){
+        var yhli = $('.coupon-tab .c-tab ul li')
+        var yhbox = $('.coupon-tab .c-page .box')
+        yhli.click(function(){
+            var index = $(this).index()
+            $(this).addClass('active').siblings().removeClass('active')
+            yhbox.eq(index).show().siblings().hide();
         })
     })();
+
+
 
 })

@@ -248,13 +248,7 @@ public class CartController {
     @RequestMapping({"/cart/cartCheck.do"})
     @ResponseBody
     public boolean cartCheck(HttpServletRequest request) {
-        Cart cart = null;
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            String cartId = request.getParameter("cartId");
-            cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-        } else {
-            cart = (Cart) request.getSession().getAttribute("cart");
-        }
+        Cart cart = getCurrentCart(request);
         Integer cartAmount = 0;
         for (CartProduct cartProduct : cart.getCartProductList()) {
             CartProduct cartProduct1 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());
