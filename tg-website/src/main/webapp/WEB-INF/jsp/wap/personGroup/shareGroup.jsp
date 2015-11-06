@@ -65,6 +65,7 @@
     <c:if test="${flag==1}">
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
         <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
       </c:if>
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
         <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
@@ -73,8 +74,6 @@
     <c:if test="${flag==0}">
       <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
-      <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
-
   </div>
   <!-- 选项卡-->
   <div class="colonel-table ae">
