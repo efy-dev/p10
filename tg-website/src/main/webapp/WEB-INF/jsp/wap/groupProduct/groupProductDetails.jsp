@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>b0102030101开团详情页</title>
+    <title>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -48,7 +48,17 @@
 <!--//End--header-->
 <div class="my-colonel ae">
     <!--产品-->
-    <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div>
+    <div class="custom">
+        <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
+            <ul class="am-slides ">
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+    <!-- 轮播产品-->
     <!--价格-->
     <div class="cost ae">
         <div class="txt1"><s>原价:${groupProduct.productModel.price}元</s></div>
@@ -57,7 +67,7 @@
     <!--功能-->
     <div class="iwill ae">
         <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间${groupProduct.groupPurchaseTime}天</p></div></div>
-        <a href="<c:url value="/group/groupBuy?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+        <a href="<c:url value="/group/groupBuy.do?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
     <!-- 选项卡-->
@@ -96,20 +106,28 @@
                     </ul>
                 </div>
                 </c:if>
-                <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
+                <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
             </div>
         </div>
     </div>
+    <!--在线客服-->
+    <div class="scroll-bar">
+        <div class="scroll-bar-top" style="display: block;">
+            <span class="btn"><i class="icon1"></i></span>
+        </div>
+        <!-- //End--返回顶部-->
+    </div>
 </div>
 <!--//End--footer-->
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <![endif]-->
 <!--自定义js--Start-->
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
@@ -122,5 +140,52 @@
     })
 </script>
 <!--自定义js--End-->
+
+<style type="text/css">
+    #MEIQIA-BTN-HOLDER {
+        right: 0;bottom: 145px;}
+    #MEIQIA-BTN {
+        background: #000;
+        width: 33px;
+        height:53px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    #MEIQIA-BTN-LINE {
+        display: none;}
+    #MEIQIA-BTN-TEXT {
+        width:48px;
+        font-size: 12px;
+        position: absolute;
+        left:-28px;
+        top:20px;
+        display: none;
+    }
+    .MEIQIA-ICON {
+        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+    }
+    #MEIQIA-BTN-ICON {
+        width: 23px;
+        height: 28px;
+        margin: 0;
+        float: left;
+        margin-left:5px;
+        margin-top: 6px;
+    }
+</style>
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+</script>
 </body>
 </html>

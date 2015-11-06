@@ -144,7 +144,7 @@ $(function(){
     })
 
 
-    $('.review-sr .btn').click(function(){
+    $('.review-sr .btn').bind('click',function(){
         $(this).parents().find('.review-sr').slideUp();
         return false;
     })

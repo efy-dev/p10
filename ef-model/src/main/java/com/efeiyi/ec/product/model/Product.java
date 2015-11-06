@@ -44,6 +44,7 @@ public class Product implements Serializable{
     private  String type;//1：普通2：收藏品
 
     @Transient
+    @JsonIgnore
     public ProductPicture getProductPicture(){
         ProductPicture productPicture = null;
         List<ProductPicture> productPictureList = getProductPictureList();
@@ -201,6 +202,7 @@ public class Product implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tenant_id")
+    @JsonIgnore
     public Tenant getTenant() {
         return tenant;
     }

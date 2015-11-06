@@ -168,11 +168,11 @@
             }
               var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
-                      "<h5>"+data[i].projectName+"</h5>  " +
+                      "<a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><h5>"+data[i].projectName+"</h5></a>  " +
                       "<p>"+levelName+"</p> " +
-                      "<p><strong>"+data[i].works+" 件作品</strong>" +
-                      "<strong>"+data[i].masters+" 位大师</strong></p> " +
-                      "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
+                      "<p><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><strong>"+data[i].works+" 件作品</strong></a>" +
+                      "<a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\"><strong>"+data[i].masters+" 位大师</strong></p></a> " +
+                      "<a class='btn-guan' href='javascript:void(0);' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                       "<div class='gz-q'>"+word+" </div> " +
                       "</a> </div> </li>");
 

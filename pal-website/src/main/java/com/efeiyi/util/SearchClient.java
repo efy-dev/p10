@@ -5,9 +5,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.security.spec.ECField;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,16 +16,16 @@ import java.util.Map;
 public class SearchClient implements Runnable {
 
     public static List<String> searchList = new LinkedList<String>();
-    public static Map<String,List> resultMap = new LinkedHashMap<String,List>();
+    public static Map resultMap = new LinkedHashMap<>();
     private static HttpClient httpclient = new HttpClient();
 
     public void run() {
         while (true) {
-            if (searchList.isEmpty()) {
-                synchronized (searchList) {
-                    if (searchList.isEmpty()) {
+            if (SearchClient.searchList.isEmpty()) {
+                synchronized (SearchClient.searchList) {
+                    if (SearchClient.searchList.isEmpty()) {
                         try {
-                            searchList.wait();
+                            SearchClient.searchList.wait();
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                             e.printStackTrace();
@@ -37,33 +34,29 @@ public class SearchClient implements Runnable {
                 }
             }
 
-            String query = searchList.remove(0);
+            String query = SearchClient.searchList.remove(0);
             try {
-                List result = postQuery2Solr(query);
-                resultMap.put(query, result);
-                synchronized (query){
-                    query.notifyAll();
-                }
+                Map result = postQuery2Solr(query);
+                SearchClient.resultMap.put(query, result);
+
             }catch (Exception e){
+                e.printStackTrace();
+            }finally {
                 synchronized (query){
                     query.notifyAll();
                 }
-                e.printStackTrace();
             }
         }
     }
 
-    private List postQuery2Solr(String query) throws Exception {
-//                HttpClient httpclient = new HttpClient();
-//        query = URLEncoder.encode(query,"utf-8");
+    private Map postQuery2Solr(String query) throws Exception {
         HttpMethod method = new GetMethod(PalConst.getInstance().solrUrl + query);
         httpclient.executeMethod(method);
         String json = method.getResponseBodyAsString();
         System.out.println(method.getResponseBodyAsString());
         method.releaseConnection();
         Map<?, ?> map = JsonUtil.parseJsonStringToMap(json);
-        List responseList = (List)((Map)map.get("response")).get("docs");
-        return responseList;
+        return (Map)map.get("response");
     }
 
     public static void main (String[]args){

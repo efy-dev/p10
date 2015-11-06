@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -58,24 +59,22 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${flag==1}">
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
-        <a href="javascript:void(0)" class="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
+        <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
       </c:if>
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
         <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
       </c:if>
     </c:if>
     <c:if test="${flag==0}">
-      <a href="<c:url value='/group/groupBuy'/>${url}" class="btn">参&nbsp;团</a>
+      <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
-    <div class="txt4 ae"><span>参团享低价，分享赚红包！您成功参团并分享该链接帮助好友参团，就可以得红包啦！红包无上限，更多分享，更多红包！
-            <a href="#" class="txcon"></a>
-            <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
-        </span></div>
+      <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
+
   </div>
   <!-- 选项卡-->
   <div class="colonel-table ae">
@@ -95,19 +94,28 @@
         </div>
         <div class="tab-btn">
           <a href="#">更多团购商品<i class="gicon"></i></a>
-          <a href="#">我要开团</a>
+          <a href="#">我要开团<i class="gicon"></i></a>
         </div>
       </div>
       <div class="co-page" style="display: none">
-        <div class="col-pl ae">
-          <ul class="ae">
-            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>--%>
-            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>--%>
-            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>--%>
-            <%--<li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div><div class="p-img"><img src="<c:url value="/scripts/wap/upload/mypurchase02.png"/>"></div></div><p><strong>2015-08-19</strong></p></li>--%>
-          </ul>
-        </div>
-        <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
+        <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
+          <div class="col-pl ae">
+            <ul class="ae">
+              <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+                  <li>
+                    <c:set var="user">
+                      ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                    </c:set>
+                    <div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</h5><P>${purchaseOrderProduct.purchaseOrderComment.content}</P><p><strong></strong></p></li>
+                  </li>
+                </c:if>
+              </c:forEach>
+
+            </ul>
+          </div>
+        </c:if>
+        <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
       </div>
     </div>
   </div>

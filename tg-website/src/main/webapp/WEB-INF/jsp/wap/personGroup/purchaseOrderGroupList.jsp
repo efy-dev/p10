@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -50,6 +51,7 @@
   </div>
   <div class="order-content ae">
     <div class="od-tab1" title="全部">
+      <c:if test="${not empty purchaseOrderGroupList&&fn:length(purchaseOrderGroupList)>0}">
       <ul class="product ae">
         <c:forEach items="${purchaseOrderGroupList}" var="purchaseOrderGroup">
           <li>
@@ -83,7 +85,7 @@
               </c:if>
             </div>
             <div class="center ae">
-              <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}"></a></div>
+              <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
               <div class="txt ae"><p>交易金额：${purchaseOrderGroup.purchaseOrder.total}元</p>
                 <c:if test="${purchaseOrderGroup.group.status==1||purchaseOrderGroup.group.status==5}">
                   <p>返回红包：0元</p>
@@ -109,18 +111,150 @@
           </li>
         </c:forEach>
       </ul>
+      </c:if>
       <!--没有相关订单状态-->
-      <!--  <div class="no-order ae">
+      <c:if test="${empty purchaseOrderGroupList||fn:length(purchaseOrderGroupList)==0}">
+        <div class="no-order ae">
+          <div class="top ae">
+            <div class="txt">
+              <p>您还没有相关订单</p>
+              <p>有很多商品等着你呢，快去看看吧</p>
+              <i class="bgpic"></i>
+            </div>
+          </div>
+          <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+        </div>
+      </c:if>
+      </div>
+    <div class="od-tab1" title="待发货" style="display: none">
+      <c:if test="${not empty purchaseOrderGroupList5&&fn:length(purchaseOrderGroupList5)>0}">
+      <ul class="product ae">
+          <c:forEach items="${purchaseOrderGroupList5}" var="purchaseOrderGroup5">
+          <li>
+          <div class="top">
+            <span>${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+            <i class=" pq"></i>
+            <span>待发货</span>
+          </div>
+          <div class="center ae">
+            <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+            <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup5.member.redPacket}元</p></div>
+          </div>
+          <div class="bottom ae">
+            <c:if test="${purchaseOrderGroup5.member.level==0}">
+            <div class="left">身份:团长</div>
+            </c:if>
+            <c:if test="${purchaseOrderGroup5.member.level!=0}">
+              <div class="left">身份:团员</div>
+            </c:if>
+          </div>
+        </li>
+          </c:forEach>
+      </ul>
+      </c:if>
+      <c:if test="${empty purchaseOrderGroupList5||fn:length(purchaseOrderGroupList5)==0}">
+      <div class="no-order ae">
+        <div class="top ae">
+          <div class="txt">
+            <p>您还没有相关订单</p>
+            <p>有很多商品等着你呢，快去看看吧</p>
+            <i class="bgpic"></i>
+          </div>
+        </div>
+        <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+      </div>
+      </c:if>
+    </div>
+    <div class="od-tab1" title="待收货"  style="display: none">
+      <c:if test="${not empty purchaseOrderGroupList7&&fn:length(purchaseOrderGroupList7)>0}">
+      <ul class="product ae">
+        <c:forEach items="${purchaseOrderGroupList7}" var="purchaseOrderGroup7">
+        <li>
+          <div class="top">
+            <span>${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+            <i class=" pq"></i>
+            <span>待收货</span>
+          </div>
+          <div class="center ae">
+            <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+            <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p></div>
+          </div>
+          <div class="bottom ae">
+            <c:if test="${purchaseOrderGroup7.member.level==0}">
+              <div class="left">身份:团长</div>
+            </c:if>
+            <c:if test="${purchaseOrderGroup7.member.level!=0}">
+              <div class="left">身份:团员</div>
+            </c:if>
+            <%--<ul class="right">--%>
+              <%--<!--状态-->--%>
+              <%--<li><a href="#">追加评价</a></li>--%>
+              <%--<li><a href="#">查看物流</a></li>--%>
+            <%--</ul>--%>
+          </div>
+        </li>
+        </c:forEach>
+        </c:if>
+      </ul>
+        <c:if test="${empty purchaseOrderGroupList7||fn:length(purchaseOrderGroupList7)==0}">
+          <div class="no-order ae">
             <div class="top ae">
-                <div class="txt">
-                    <p>您还没有相关订单</p>
-                    <p>有很多商品等着你呢，快去看看吧</p>
-                    <i class="bgpic"></i>
-                </div>
+              <div class="txt">
+                <p>您还没有相关订单</p>
+                <p>有很多商品等着你呢，快去看看吧</p>
+                <i class="bgpic"></i>
+              </div>
             </div>
             <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
-        </div>-->
+          </div>
+        </c:if>
     </div>
+    <div class="od-tab1" title="待评价"  style="display: none">
+      <!--没有相关订单状态-->
+      <c:if test="${not empty purchaseOrderGroupList9&&fn:length(purchaseOrderGroupList9)>0}">
+      <ul class="product ae">
+        <c:forEach items="${purchaseOrderGroupList9}" var="purchaseOrderGroup9">
+          <li>
+            <div class="top">
+              <span>${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+              <i class=" pq"></i>
+              <span>交易成功</span>
+            </div>
+            <div class="center ae">
+              <div class="pic"><a href="#"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+              <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p><p>返回红包：${purchaseOrderGroup7.member.redPacket}元</p></div>
+            </div>
+            <div class="bottom ae">
+              <c:if test="${purchaseOrderGroup9.member.level==0}">
+                <div class="left">身份:团长</div>
+              </c:if>
+              <c:if test="${purchaseOrderGroup9.member.level!=0}">
+                <div class="left">身份:团员</div>
+              </c:if>
+                <%--<ul class="right">--%>
+                <%--<!--状态-->--%>
+                <%--<li><a href="#">追加评价</a></li>--%>
+                <%--<li><a href="#">查看物流</a></li>--%>
+                <%--</ul>--%>
+            </div>
+          </li>
+        </c:forEach>
+      </ul>
+      </c:if>
+      <c:if test="${empty purchaseOrderGroupList9&&fn:length(purchaseOrderGroupList9)==0}">
+      <div class="no-order ae">
+        <div class="top ae">
+          <div class="txt">
+            <p>您还没有相关订单</p>
+            <p>有很多商品等着你呢，快去看看吧</p>
+            <i class="bgpic"></i>
+          </div>
+        </div>
+        <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+      </div>
+      </c:if>
+    </div>
+    <!--没有相关订单状态-->
   </div>
 </div>
 <!--//End--footer-->

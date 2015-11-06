@@ -184,7 +184,8 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
-        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cartManager.copyCart((Cart) request.getSession().getAttribute("cart")), model);
+        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"));
+        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -192,6 +193,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
+        model.addAttribute("cart",cart);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
