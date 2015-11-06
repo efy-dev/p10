@@ -497,7 +497,13 @@ function getHfProduct(e){
       success:function(o){
         if(o==false){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/'/>"+data;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         var amout1;
@@ -543,7 +549,13 @@ function getHfProduct(e){
       success:function(o){
         if(o==false){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         var amout1;
@@ -566,7 +578,7 @@ function getHfProduct(e){
                   "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+o.id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
                   " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
                   "<textarea></textarea> <div class=\"btn1 ae\"> " +
-                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
+                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+name+"','"+data+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
         }
         if(fag=='1'){
           $("#"+data).append("" +
@@ -582,7 +594,7 @@ function getHfProduct(e){
                   "<div class=\"zan\"> <a href=\"javascript:void(0)\" onclick='commentUpAndDown(this,\""+o.id+"\")' about='${product.id}' name='up'><i class=\"icon\"></i> <em>"+amout1+"</em></a> </div>" +
                   " </div> </div> <div class=\"review-sr ae\" style=\"display: none;\"> " +
                   "<textarea></textarea> <div class=\"btn1 ae\"> " +
-                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+userName+"','"+data.list[i].id+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
+                  "<input type=\"button\" onclick=\"saveComment2Comment('1', this,'"+name+"','"+data+"')\"  name=\""+o.id+"\" class=\"btn\" value=\"评论\">  </div> </div> </div></li></ul>");
         }
 
       },
@@ -592,6 +604,8 @@ function getHfProduct(e){
       },
       complete:function(){
         $(e).parent().parent().children().eq(0).val("");
+        $(e).parents().find('.review-sr').slideUp();
+        $(e).parents().find('.review').slideUp();
       }
     });
   }
@@ -607,7 +621,13 @@ function getHfProduct(e){
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/'/>"+ds;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -650,7 +670,14 @@ function getHfProduct(e){
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -689,7 +716,14 @@ function getHfProduct(e){
       success:function(data){
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="repeat"){

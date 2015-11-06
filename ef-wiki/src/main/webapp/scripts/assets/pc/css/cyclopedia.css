@@ -156,8 +156,8 @@ a{outline: none}
 
 
 
-.loding{text-align: center;width:100%;float: left;margin-bottom: 200px;}
 
+.loding{text-align: center;width:100%;float: left;margin-bottom: 200px;}
 /*edn//110202工艺首页-关注*/
 /*110202工艺首页-关注后*/
 .craft-l-content{padding: 35px 0;}
@@ -210,7 +210,7 @@ a{outline: none}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd{width: 272px;float: right;border-left:1px solid #e5e5e5;padding-left: 46px;height: 365px;margin: 0}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text1{color: #000;font-size: 12px;padding: 10px 0 20px 0;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text2{font-size: 18px;color: #000;margin-bottom: 10px;}
-.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{height: 112px;overflow: hidden}
+.list-find .list-f-content .l-f-left .grounp-f li dl dd .text5{height: 112px;overflow: hidden;font-size: 12px;color: #000;margin-bottom: 10px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd p{font-size: 12px;color: #000;margin-bottom: 10px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text3{margin-right: 25px;font-size: 12px;color: #999;margin-bottom: 42px;}
 .list-find .list-f-content .l-f-left .grounp-f li dl dd .text4{padding: 10px 24px;border: 1px solid #000;color: #000;font-size: 12px;text-decoration: none;outline: none}
@@ -363,3 +363,5 @@ a{outline: none}
 .add-obtain{position: relative;float:left;margin: 0;}
 .obtain{width: 100%;float:left}
 /*110111*/
+.no-list{width: 682px;height: 440px;border: 1px solid #000;float: left;margin-bottom: 37px;}
+.no-list .no-icon{width: 51px;height: 234px;background: url("../images/cyclopedia.png") 0  -180px;display: inline-block;margin: 107px 0 0 316px;}
