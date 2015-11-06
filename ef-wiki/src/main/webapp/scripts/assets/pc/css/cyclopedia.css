@@ -275,7 +275,7 @@ a{outline: none}
 .details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon1{width: 18px;height: 16px;background:url('../images/cyclopedia.png') no-repeat -139px -42px;float: left;margin-top: 14px;margin-right: 10px;}
 
 
-
+.commentP{width: 100%;float: left}
 
 
 
@@ -291,6 +291,7 @@ a{outline: none}
 .details .detaile-left .detaile-intro .intro-matter .active{color: #fff;background: #000;}
 .details .detaile-left .detaile-content{border-top: 2px solid #000;border-bottom: 2px solid #000;padding: 35px;float: left;width: 100%;margin-top: -1px;}
 .details .detaile-left .detaile-content .intro{font-size: 14px;color: #000;}
+.details .detaile-left .detaile-content .intro img{width: 100%;}
 .details .detaile-left .detaile-comment{padding: 0 20px;}
 .details .detaile-left .detaile-comment h4{padding: 20px;font-size: 14px;color: #000;}
 .details .detaile-left .detaile-comment .comment li{position: relative;padding-left: 55px;border-bottom: 1px solid #ebebeb;margin-bottom: 20px;}

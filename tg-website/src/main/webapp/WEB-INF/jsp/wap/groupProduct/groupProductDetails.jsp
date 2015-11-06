@@ -118,6 +118,13 @@
     </div>
 </div>
 <!--//End--footer-->
+<script>
+    $().ready(function(){
+        $("img").each(function(){
+            $(this).css("width","100%");
+        })
+    })
+</script>
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 145px;}

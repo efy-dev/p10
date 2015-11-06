@@ -289,7 +289,7 @@
                       "<div class='owner-good'>" +
                       "<a href='#' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
 */
-              var box = $("<li class=\"ae\" id=\""+data.list[i].id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+              var box = $("<li class=\"ae\" id=\""+data.list[i].id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                       "<div class=\"text\"><span>" +
                       "<a href=\"#\">"+userName+" ：</a></span>" +
                       "<span>"+data.list[i].content+"</span></div> " +
@@ -414,7 +414,7 @@
             if(flaag==true){
               var box =$(" <ul style=\"position: relative;float:left;margin: 0;\" id=\""+data.list[i].id+"\" about=\"matter\" class=\"commentP\">" +
                       "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
-                      +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                      +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                       "<div class=\"text\"><span>" +
                       "<a href=\"#\">"+userName+" 回复 "+name+"：</a></span>" +
                       "<span>"+data.list[i].content+"</span></div> " +
@@ -430,7 +430,7 @@
             if(flaag==false){
               var box =$("  <li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+data.list[i].id+"\" about=\"matter\"" +
                       ">"
-              +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+              +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                       "<div class=\"text\"><span>" +
                       "<a href=\"#\">"+userName+" 回复 "+name+"：</a></span>" +
                       "<span>"+data.list[i].content+"</span></div> " +
@@ -512,7 +512,7 @@ function getHfProduct(e){
         }else{
           amout1 =o.amount;
         }
-        $("#commentAll").append("<li class=\"ae\" id=\""+o.id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+        $("#commentAll").append("<li class=\"ae\" id=\""+o.id+"\" about=\"matter\"> <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                 "<div class=\"text\"><span>" +
                 "<a href=\"#\">${fn:substring(myUser.username, 0,3 )}****${fn:substring(myUser.username,7,11)} ：</a></span>" +
                 "<span>"+CommentValue+"</span></div> " +
@@ -567,7 +567,7 @@ function getHfProduct(e){
         if(fag=='0'){
           $("#"+data).append("<ul style=\"position: relative;float:left;margin: 0;\" id=\""+o.id+"\" about=\"matter\" class=\"commentP\">" +
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\"  >"
-                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
                   "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
@@ -583,7 +583,7 @@ function getHfProduct(e){
         if(fag=='1'){
           $("#"+data).append("" +
                   "<li style=\"margin: 0;border-bottom: 0;\" class=\"ae\" id=\""+o.id+"\" about=\"matter\" >"
-                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></a></div> " +
+                  +"<div class=\"ae\" > <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></a></div> " +
                   "<div class=\"text\"><span>" +
                   "<a href=\"#\">${myUser.name2} 回复 "+name+"：</a></span>" +
                   "<span>"+CommentValue+"</span></div> " +
