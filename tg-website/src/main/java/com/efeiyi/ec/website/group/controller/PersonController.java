@@ -118,8 +118,14 @@ public class PersonController {
     @RequestMapping(value = "myPurchaseOrder.do")
     public String myPurchaseOrder(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listPurchaseOrderGroup_default",request);
+        XQuery xQuery5 = new XQuery("listPurchaseOrderGroup_default5",request);
+        XQuery xQuery7 = new XQuery("listPurchaseOrderGroup_default7",request);
         List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+        List<PurchaseOrderGroup> list5 = baseManager.listObject(xQuery5);
+        List<PurchaseOrderGroup> list7 = baseManager.listObject(xQuery7);
         model.addAttribute("purchaseOrderGroupList",list);
+        model.addAttribute("purchaseOrderGroupList5",list5);
+        model.addAttribute("purchaseOrderGroupList7",list7);
         return "/personGroup/purchaseOrderGroupList";
     }
 }
