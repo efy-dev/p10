@@ -710,7 +710,14 @@
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/listProduct/'/>"+projectId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -755,7 +762,7 @@
       success:function(data){
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="repeat"){
