@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -51,6 +52,7 @@
   <div class="order-content ae">
     <div class="od-tab1" title="全部">
       <ul class="product ae">
+        <c:if test="${not empty purchaseOrderGroupList&&fn:length(purchaseOrderGroupList)>0}">
         <c:forEach items="${purchaseOrderGroupList}" var="purchaseOrderGroup">
           <li>
             <div class="top">
@@ -108,6 +110,7 @@
             </div>
           </li>
         </c:forEach>
+        </c:if>
       </ul>
       <!--没有相关订单状态-->
       <!--  <div class="no-order ae">
@@ -121,6 +124,19 @@
             <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
         </div>-->
     </div>
+    <!--没有相关订单状态-->
+    <c:if test="${empty purchaseOrderGroupList||fn:length(purchaseOrderGroupList)==0}">
+    <div class="no-order ae">
+      <div class="top ae">
+        <div class="txt">
+          <p>您还没有相关订单</p>
+          <p>有很多商品等着你呢，快去看看吧</p>
+          <i class="bgpic"></i>
+        </div>
+      </div>
+      <div class="b-btn"><a href="#" class="btn">去逛逛</a></div>
+    </div>
+    </c:if>
   </div>
 </div>
 <!--//End--footer-->

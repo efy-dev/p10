@@ -120,12 +120,15 @@ public class PersonController {
         XQuery xQuery = new XQuery("listPurchaseOrderGroup_default",request);
         XQuery xQuery5 = new XQuery("listPurchaseOrderGroup_default5",request);
         XQuery xQuery7 = new XQuery("listPurchaseOrderGroup_default7",request);
+        XQuery xQuery9 = new XQuery("listPurchaseOrderGroup_default9",request);
         List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
         List<PurchaseOrderGroup> list5 = baseManager.listObject(xQuery5);
         List<PurchaseOrderGroup> list7 = baseManager.listObject(xQuery7);
+        List<PurchaseOrderGroup> list9 = baseManager.listObject(xQuery9);
         model.addAttribute("purchaseOrderGroupList",list);
         model.addAttribute("purchaseOrderGroupList5",list5);
         model.addAttribute("purchaseOrderGroupList7",list7);
+        model.addAttribute("purchaseOrderGroupList9",list9);
         return "/personGroup/purchaseOrderGroupList";
     }
 }

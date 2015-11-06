@@ -48,7 +48,17 @@
 <!--//End--header-->
 <div class="my-colonel ae">
     <!--产品-->
-    <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div>
+    <div class="custom">
+        <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
+            <ul class="am-slides ">
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+    <!-- 轮播产品-->
     <!--价格-->
     <div class="cost ae">
         <div class="txt1"><s>原价:${groupProduct.productModel.price}元</s></div>
@@ -100,6 +110,13 @@
             </div>
         </div>
     </div>
+    <!--在线客服-->
+    <div class="scroll-bar">
+        <div class="scroll-bar-top" style="display: block;">
+            <span class="btn"><i class="icon1"></i></span>
+        </div>
+        <!-- //End--返回顶部-->
+    </div>
 </div>
 <!--//End--footer-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -108,7 +125,9 @@
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
+<script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
 <![endif]-->
 <!--自定义js--Start-->
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
