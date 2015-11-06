@@ -200,11 +200,12 @@ public class GroupController {
             }
         }
         if(flag){
-            return "forward:/group/joinGroup.do"+url;
-        }else {
             model.addAttribute("group",group);
             model.addAttribute("url",url);
             return "/personGroup/sharePage";
+
+        }else {
+            return "redirect:/group/joinGroup.do"+url;
         }
     }
 
