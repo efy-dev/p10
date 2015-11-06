@@ -124,7 +124,7 @@ public class GroupController {
 
                     model.addAttribute("groupId",groupbuy.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
-                    return "redirect:/group/joinGroup.do"+url;
+                    return "redirect:/group/shareGroup.do"+url;
                 }else {
                     Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
                     Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
