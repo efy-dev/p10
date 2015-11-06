@@ -1,14 +1,10 @@
 package com.efeiyi.util;
 
-import com.ming800.core.taglib.PageEntity;
 import com.ming800.core.util.JsonUtil;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.security.spec.ECField;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +18,6 @@ public class SearchClient implements Runnable {
     public static List<String> searchList = new LinkedList<String>();
     public static Map resultMap = new LinkedHashMap<>();
     private static HttpClient httpclient = new HttpClient();
-
 
     public void run() {
         while (true) {
@@ -64,7 +59,6 @@ public class SearchClient implements Runnable {
         return (Map)map.get("response");
     }
 
-
     public static void main (String[]args){
 
         SearchClient client = new SearchClient();
@@ -74,7 +68,5 @@ public class SearchClient implements Runnable {
             e.printStackTrace();
         }
     }
-
-
 
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,7 @@ public class SearchController {
         query = new StringBuilder(query).append("&start=")
                 .append((pageEntity.getIndex()-1)*pageEntity.getSize())
                 .append("&rows=")
-                .append((pageEntity.getIndex()*pageEntity.getSize() - 1)).toString();
+                .append(pageEntity.getIndex()*pageEntity.getSize()).toString();
         SearchClient.searchList.add(query);
 
         synchronized (query) {
