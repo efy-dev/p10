@@ -3,6 +3,7 @@ package com.efeiyi.util;
 
 import com.efeiyi.bean.CheckResultBean;
 
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class PalConst {
 
     public String checkLabel = "from Label a where a.code =:" + checkLabelParam1;//查询标签hql
     public String viewProduct = "from Product a where a.id =:" + productId;//查询商品hql
-//    public String recheckLabel = "select new com.efeiyi.LabelRecordResult(MIN(createDatetime),MAX(createDatetime),COUNT(1) + 1,label.serial) from LabelCheckRecord where label.serial=:" + qryRecheckLabelCol;
+    //    public String recheckLabel = "select new com.efeiyi.LabelRecordResult(MIN(createDatetime),MAX(createDatetime),COUNT(1) + 1,label.serial) from LabelCheckRecord where label.serial=:" + qryRecheckLabelCol;
     public String resultView = "/result";                           //标签验真伪返回页面
     public String certificateView = "/viewCertificate";                           //wap端证书详情返回页面
     public String productView = "/viewProduct";                           //wap端证书详情返回页面
@@ -51,7 +52,7 @@ public class PalConst {
     public String fakeLogo = "resources/upload/fake-logo.jpg";        //查为伪的logo
     public String trueLogo = "resources/upload/true-logo.jpg";        //查为真的logo
     public String uploadImgBaseUrl = "http://pal.efeiyi.com/";
-    public int _true = 1, _false = -1,_null = 0;   //查询真伪结果, 1真 -1伪 0不显示
+    public int _true = 1, _false = -1, _null = 0;   //查询真伪结果, 1真 -1伪 0不显示
 
 
     public String ip = "ip";                                            //访问的IP
@@ -63,20 +64,22 @@ public class PalConst {
     public boolean isNotTimeLimited = false;
 
 
-//    public String weiXinMsgType = "text";
+    //    public String weiXinMsgType = "text";
     public String weiXinMsgType = "news";
     public String weiXinSubscribeEvent = "subscribe";
     public String weiXinScanEvent = "SCAN";
     public String weiXinToken = "11111111111111111111111111111111";
     public DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
     public String baiduApiUrl = "http://api.map.baidu.com/location/ip?ak=zKrEDoOM6VCNjYDcBgpufSWR";
-    public String solrUrl = "http://localhost:8080/solr-5.3.1/product/select?wt=json&indent=true&q=";
+    public String solrUrl = "http://localhost:8080/solr-5.3.1/product/select?wt=json&indent=true&hl=true&hl.fl=product_name%2Csub_name%2Ctenant_name%2Cmaster_name&hl.simple.pre=%3Cfont+color%3D%27red%27%3E&hl.simple.post=%3C%2Ffont%3E&hl.simple.post=%3C%2Ffont%3E&q=";
 
-    public Map<String,String> labelCache = new HashMap<String,String>();
 
-public String appId = "wx7f6aa253b75466dd";
+    public Map<String, String> labelCache = new HashMap<String, String>();
+
+    public String appId = "wx7f6aa253b75466dd";
     public String encodingAESKey = "vo3dJHGXZTkDCtf9kyyhiKtGdTFdzdb62CGxk1eqxkw";
-    private PalConst(){
+
+    private PalConst() {
         trueBean = new CheckResultBean();
         fakeBean = new CheckResultBean();
         recheckTrueBean = new CheckResultBean();
@@ -101,11 +104,13 @@ public String appId = "wx7f6aa253b75466dd";
         wrongBean.setAuthenticity(_false);
         wrongBean.setMsg(wrongMsg);
     }
-    public static PalConst getInstance(){
 
-        if(instance == null){
-            instance =  new PalConst();
+    public static PalConst getInstance() {
+
+        if (instance == null) {
+            instance = new PalConst();
         }
         return instance;
     }
+
 }
