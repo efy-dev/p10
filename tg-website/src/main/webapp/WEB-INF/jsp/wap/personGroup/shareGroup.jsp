@@ -71,7 +71,7 @@
       </c:if>
     </c:if>
     <c:if test="${flag==0}">
-      <a href="<c:url value='/group/groupBuy'/>${url}" class="btn">参&nbsp;团</a>
+      <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
     <div class="txt4 ae"><span>参团享低价，分享赚红包！分享该链接并成功帮好友参团，您还可以得红包呢！红包无上限，更多分享，更多红包！
             <a href="#" class="txcon"></a>

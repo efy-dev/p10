@@ -42,7 +42,7 @@ public class GroupController {
     }
 
     //购买
-    @RequestMapping(value = "/groupBuy")
+    @RequestMapping(value = "/groupBuy.do")
     public  String groupBuy(HttpServletRequest request,Model model) throws Exception{
         MyUser currentUser = AuthorizationUtil.getMyUser();
         String groupProductId = request.getParameter("groupProductId");
