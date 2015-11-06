@@ -175,10 +175,13 @@
             }
             var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
+            var opertation1="";
             if(isA==true){
-              word="取消关注";
+              word="已关注";
+              opertation1="del"
             }else{
               word="关注";
+              opertation1="add";
             }
          /*   var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
                     "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
@@ -196,7 +199,7 @@
                    "<div class='text5'>"+data[i].description+"</div> " +
                    "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
                    "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
-                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='"+opertation1+"' id='"+data[i].projectId+"'>"+word+"</em></a> " +
                    "</dd> </dl> </li> ");
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
