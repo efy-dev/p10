@@ -27,7 +27,8 @@
     <form id="form2" action="<c:url value='/search.do'/>" method="get">
         <div class="title"><a>非遗搜</a></div>
         <label for="q">
-            <input class="txt" type="text" name="q" id="q" value="" />
+            <input type="hidden" name="q" id="q" value="" />
+            <input class="txt" type="text" name="query" id="query" value="" />
             <input class="btn" type="button" id="btn2" value="查 询" onclick="preSubmit()"/>
         </label>
     </form>
@@ -58,9 +59,10 @@
         });
     });
     function preSubmit(){
-//        var q = $("#q").val();
+        var query = $("#query").val();
 //        q = encodeURI(q);
-//        $("#q").val(q);
+        $("#q").val(" product_name:"+query+" master_name:"+query+" tenant_name:"+query+" sub_name:"+query);
+
         $("#form2").submit();
     }
 </script>
