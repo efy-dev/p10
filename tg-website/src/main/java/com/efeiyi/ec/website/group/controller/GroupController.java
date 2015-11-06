@@ -77,11 +77,11 @@ public class GroupController {
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://master.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://j.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         if(!flag){
             return "redirect:" + url;
         }else {
-            return "redirect:/group/joinGroup" + url1;
+            return "redirect:/group/joinGroup.do" + url1;
         }
 
 
@@ -124,7 +124,7 @@ public class GroupController {
 
                     model.addAttribute("groupId",groupbuy.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
-                    return "redirect:/group/joinGroup"+url;
+                    return "redirect:/group/joinGroup.do"+url;
                 }else {
                     Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
                     Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
@@ -169,7 +169,8 @@ public class GroupController {
 
                     model.addAttribute("groupId",group.getId());
                     String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
-                    return "redirect:/group/joinGroup"+url;
+//                    return "redirect:/group/joinGroup.do"+url;
+                    return "redirect:/group/shareGroup"+url;
                 }
 
 
@@ -182,6 +183,29 @@ public class GroupController {
             return "/";//用户未登录
         }
 
+    }
+    @RequestMapping(value = "/shareGroup")
+    public String shareGroup(HttpServletRequest request,Model model) throws Exception{
+        MyUser user = AuthorizationUtil.getMyUser();
+        String groupProductId = request.getParameter("groupProductId");
+        String groupId = request.getParameter("groupId");
+        String memberId = request.getParameter("memberId");
+        Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+        String url = "?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId;
+        boolean flag = false;
+        for (Member member:group.getMemberList()){
+            if(member.getUser().getId().equals(user.getId())){
+                flag = true;
+                break;
+            }
+        }
+        if(flag){
+            return "forward:/group/joinGroup.do"+url;
+        }else {
+            model.addAttribute("group",group);
+            model.addAttribute("url",url);
+            return "/personGroup/sharePage";
+        }
     }
 
 
@@ -211,7 +235,7 @@ public class GroupController {
     }
 
     //参团
-    @RequestMapping(value = "/joinGroup")
+    @RequestMapping(value = "/joinGroup.do")
     public String joinGroup(HttpServletRequest request,Model model) throws Exception{
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

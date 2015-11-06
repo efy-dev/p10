@@ -25,7 +25,7 @@
         <intercept-url pattern="/group/group.do" access="isAuthenticated()"/>
         <intercept-url pattern="/person/personInfoView.do" access="isAuthenticated()"/>
         <intercept-url pattern="/group/groupBuy" access="isAuthenticated()"/>
-        <intercept-url pattern="/group/joinGroup" access="isAuthenticated()"/>
+        <intercept-url pattern="/group/shareGroup" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/sso.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/myEfeiyi/list.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/easyBuy/**" access="isAuthenticated()"/>-->
