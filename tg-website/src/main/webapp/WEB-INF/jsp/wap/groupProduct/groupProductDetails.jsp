@@ -102,12 +102,6 @@
     </div>
 </div>
 <!--//End--footer-->
-<div class="scroll-bar">
-    <div class="scroll-bar-top" style="display: block;">
-        <span class="btn"><i class="icon1"></i></span>
-    </div>
-    <!-- //End--返回顶部-->
-</div>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
