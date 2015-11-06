@@ -28,13 +28,14 @@
       <a class="img" href=""><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${item.picture_url}"/></a>
       <ul>
         <li><span>证书编号: 140522398541258</span><i class="icon icon-code"></i><i class="icon icon-card"></i><i class="icon icon-dna"></i></li>
-        <li>名称: ${item.name}</li>
-        <li>作者: 姚惠芬</li>
-        <li>创作年代: 2006</li>
-        <li>认证时间: 2015年5月</li>
-        <li>尺寸: 100*128cm</li>
-        <li>类别: 苏绣</li>
-        <li>重量: 1236.12g</li>
+        <li>名称: ${item.product_name}</li>
+        <li>作者: ${item.master_name}</li>
+        <li>商户: ${item.tenant_name}</li>
+        <%--<li>创作年代: 2006</li>--%>
+        <%--<li>认证时间: 2015年5月</li>--%>
+        <%--<li>尺寸: 100*128cm</li>--%>
+        <%--<li>类别: 苏绣</li>--%>
+        <%--<li>重量: 1236.12g</li>--%>
       </ul>
     </div>
     </c:forEach>

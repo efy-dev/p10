@@ -32,7 +32,8 @@ public class SearchController {
             pageEntity.setSize(Integer.parseInt(pageSize));
         }
 
-        query = new StringBuilder(query).append("&start=")
+        query = new StringBuilder(query)
+                .append("&start=")
                 .append((pageEntity.getIndex()-1)*pageEntity.getSize())
                 .append("&rows=")
                 .append(pageEntity.getIndex()*pageEntity.getSize()).toString();
@@ -50,7 +51,7 @@ public class SearchController {
             }
 
         }
-        Map resultMap = (Map) SearchClient.resultMap.get(query);
+        Map resultMap = (Map) SearchClient.resultMap.remove(query);
         List resultList = (List) resultMap.get("docs");
         Integer num = (Integer) resultMap.get("numFound");
         pageEntity.setCount(num);
