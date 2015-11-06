@@ -9,7 +9,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .icon {background:url(../images/icon.png) no-repeat;background-size:152px auto}
 .icon1 {background:url(../images/qq.png) no-repeat;background-size:152px auto;}
 
-.scroll-bar { position: fixed; bottom:70px; right: 0; text-align: center;z-index:20;}
+.scroll-bar { position: fixed; bottom:80px; right: 0; text-align: center;z-index:20;}
 .scroll-bar .btn { width: 33px; height: 53px; line-height: 37px; float: left; font-size: 12px; border-radius: 5px; text-decoration: none; cursor: pointer }
 .scroll-bar .btn .icon1 { width: 23px; display: inline-block; position: relative }
 .scroll-bar-top { width: 100%; float: left; margin-bottom: 10px; display: none }

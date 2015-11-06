@@ -9,6 +9,14 @@
                         <condition name="member.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="default5" label="待发货" type="auto" orderBy="id:desc">
+                        <condition name="member.user.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="5" operation="eq"/>
+                    </query>
+                    <query name="default7" label="已发货" type="auto" orderBy="id:desc">
+                        <condition name="member.user.id" defaultValue="${MY_USER}" operation="eq"/>
+                        <condition name="status" defaultValue="7" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>
