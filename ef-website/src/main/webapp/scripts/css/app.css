@@ -466,14 +466,8 @@ a:hover {color:#f00;text-decoration:underline}
 .footer .copyright .frlinks {margin:10px 0}
 .footer .copyright .frlinks a {color:#666;margin:0 5px;display:inline-block}
 .footer .copyright .frlinks span, .footer .copyright .info {color:#666}
-
-.footer .authentication {
-    background: #000;
-    text-align: center;
-    padding:20px 0;
-}
-
-
+.footer .authentication {background: #000;text-align: center;padding:20px 0}
+.footer .authentication a {display: inline-block;margin:0 20px}
 /*--//End--footer*/
 a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-transition:all 0.4s;transition:all 0.4s}
 .imgfilter:hover {opacity:0.6;filter:alpha(opacity=60)}
@@ -643,7 +637,7 @@ a, .ul-item li, .ul-item li img, .imgfilter {-webkit-transition:all 0.4s;-moz-tr
 .section5 .part2 .sec-items li .price {font-size:12px;height:20px}
 .section5 .part2 .related-collect {background-position:-49px -124px;width:49px;height:68px;position:absolute;top:50%;margin-top:-120px;left:50px}
 /*--//End--*/
-.scroll-bar {position:fixed;bottom:207px;right:0;text-align:center;z-index:20}
+.scroll-bar {position:fixed;bottom:184px;right:0;text-align:center;z-index:20}
 .scroll-bar .btn {width:33px;height:53px;line-height:37px;float:left;font-size:12px;border-radius:5px;text-decoration:none;cursor:pointer}
 .scroll-bar .btn .icon {width:23px;display:inline-block;position:relative}
 .scroll-bar-top {width:100%;float:left;margin-bottom:10px;display:none}
