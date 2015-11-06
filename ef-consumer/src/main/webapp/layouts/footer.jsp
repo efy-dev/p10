@@ -34,10 +34,13 @@
             <span>友情链接：</span>
             <a rel="nofollow" href="http://en.unesco.org/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
             <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-            <%--<a rel="nofollow" href="http://www.yongxinhua.cn/" target="_blank" title="永新华控股">永新华控股</a>--%>
-            <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
-        <div class="info">Copyright © 2015-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+        <div class="info">Copyright © 2015-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div
+        <div class="wh authentication">
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
+            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"><img src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
+            <a href="<c:url value="/scripts/images/license.jpg"/>" target="_blank" title="企业营业执照"><img src="<c:url value="/scripts/images/authentication-3.png"/>" alt="企业营业执照 "></a>
+        </div>
     </div>
 </div>
 

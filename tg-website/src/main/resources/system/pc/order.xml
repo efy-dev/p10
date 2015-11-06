@@ -17,7 +17,7 @@
                         <condition name="member.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="7" operation="eq"/>
                     </query>
-                    <query name="default7" label="未评价" type="auto" orderBy="id:desc">
+                    <query name="default9" label="未评价" type="auto" orderBy="id:desc">
                         <condition name="member.user.id" defaultValue="${MY_USER}" operation="eq"/>
                         <condition name="status" defaultValue="9" operation="eq"/>
                     </query>

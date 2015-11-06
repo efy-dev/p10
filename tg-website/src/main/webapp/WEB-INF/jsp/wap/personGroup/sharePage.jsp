@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -40,7 +41,9 @@
         <p>红包计算方法：</p>
         <p>分享红包总额=分享红包*有效分享次数，详情请见e飞蚁拼团协议!</p>
     </div>
-    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do${url}"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a></div>
+    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do${url}"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
+    </div>
 </div>
 
 <!--[if (gte IE 9)|!(IE)]><!-->

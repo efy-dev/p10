@@ -5,6 +5,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
+import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,19 +51,20 @@ public class SearchClient implements Runnable {
     }
 
     private Map postQuery2Solr(String query) throws Exception {
-        HttpMethod method = new GetMethod(PalConst.getInstance().solrUrl + query);
+        String url = PalConst.getInstance().solrUrl + query;
+        HttpMethod method = new GetMethod(url);
         httpclient.executeMethod(method);
         String json = method.getResponseBodyAsString();
         System.out.println(method.getResponseBodyAsString());
         method.releaseConnection();
         Map<?, ?> map = JsonUtil.parseJsonStringToMap(json);
-        return (Map)map.get("response");
+        return map;
     }
 
     public static void main (String[]args){
-
         SearchClient client = new SearchClient();
         try {
+            System.out.println(URLEncoder.encode("<font color='red'>","utf-8"));
             client.postQuery2Solr("%E7%89%9B");
         }catch (Exception e){
             e.printStackTrace();

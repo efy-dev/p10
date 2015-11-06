@@ -61,7 +61,7 @@
     function preSubmit(){
         var query = $("#query").val();
 //        q = encodeURI(q);
-        $("#q").val(" product_name:"+query+" master_name:"+query+" tenant_name:"+query+" sub_name:"+query);
+        $("#q").val("all_name:"+query);
 
         $("#form2").submit();
     }
