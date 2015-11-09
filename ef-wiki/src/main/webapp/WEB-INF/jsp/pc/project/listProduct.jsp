@@ -110,7 +110,8 @@
           </a>
         </div>
         <div class="attention-page">
-          <span>已经被 ${project.fsAmount} 个景泰蓝爱好者关注</span>
+          <c:if test="${project.fsAmount !=null}"><span>已经被${project.fsAmount} 个景泰蓝爱好者关注</span></c:if>
+          <c:if test="${project.fsAmount ==null}"><span>已经被1个景泰蓝爱好者关注</span></c:if>
         </div>
       </div>
     </div>
