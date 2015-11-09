@@ -73,11 +73,11 @@
         font-size: 12px;
         position: absolute;
         left:-28px;
-        top:20px;
+        top:20px;,
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url(http://www.efeiyi.com/scripts/wap/images/qq.png) no-repeat -176px -143px;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -88,33 +88,20 @@
         margin-top: 6px;
     }
 </style>
-<script>
-
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-69796169-1', 'auto');
-
-    ga('send', 'pageview');
-
-</script>
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
+    if (isWeiXin()==false) {
+        (function(m, ei, q, i, a, j, s) {
+            m[a] = m[a] || function() {
+                        (m[a].a = m[a].a || []).push(arguments)
+                    };
+            j = ei.createElement(q),
+                    s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.src = i;
+            s.parentNode.insertBefore(j, s)
+        })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+        _MEIQIA('entId', 486);
+    }
 </script>
 <script>
     function isWeiXin() {
@@ -125,7 +112,19 @@
             return false;
         }
     }
-
+    if (isWeiXin()==false) {
+        (function(m, ei, q, i, a, j, s) {
+            m[a] = m[a] || function() {
+                        (m[a].a = m[a].a || []).push(arguments)
+                    };
+            j = ei.createElement(q),
+                    s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.src = i;
+            s.parentNode.insertBefore(j, s)
+        })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+        _MEIQIA('entId', 486);
+    }
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
