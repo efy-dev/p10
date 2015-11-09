@@ -40,6 +40,8 @@
                 <li></li>
             </c:forEach>
         </ul>
+        <div class="btn btn-prev" title="上一页"></div>
+        <div class="btn btn-next" title="下一页"></div>
     </div>
     <!-- //End--topbar-->
     <div class="box-hd wh">

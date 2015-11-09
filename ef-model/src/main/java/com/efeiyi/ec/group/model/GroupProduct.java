@@ -1,6 +1,5 @@
 package com.efeiyi.ec.group.model;
 
-import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.product.model.ProductModel;
 import org.hibernate.annotations.GenericGenerator;
 

@@ -23,7 +23,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -147,6 +147,9 @@
       data:"",//设置请求的数据
       async:true,
       dataType:"json",//设置请求返回的数据格式
+      beforeSend:function(){
+        $("#loading").show();
+      },
       success:function(data){
         var pubu = $("#beforeAttention");
         if(data && data.length>=1){
@@ -168,11 +171,11 @@
             }
               var box = $("<li class='before'> <div class='eimg'><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"'></a></div> " +
                       "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
-                      "<h5>"+data[i].projectName+"</h5>  " +
+                      "<a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><h5>"+data[i].projectName+"</h5></a>  " +
                       "<p>"+levelName+"</p> " +
-                      "<p><strong>"+data[i].works+" 件作品</strong>" +
-                      "<strong>"+data[i].masters+" 位大师</strong></p> " +
-                      "<a class='btn-guan' href='#' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
+                      "<p><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><strong>"+data[i].works+" 件作品</strong></a>" +
+                      "<a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\"><strong>"+data[i].masters+" 位大师</strong></p></a> " +
+                      "<a class='btn-guan' href='javascript:void(0);' onclick='saveProjectFllow(\""+data[i].projectId+"\")'> " +
                       "<div class='gz-q'>"+word+" </div> " +
                       "</a> </div> </li>");
 
@@ -185,6 +188,7 @@
         }
 
         StartNum2=StartNum2+1;
+        $("#loading").hide();
       },
       error:function(){
 
@@ -234,7 +238,14 @@
 
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/beforeAttention.do'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){

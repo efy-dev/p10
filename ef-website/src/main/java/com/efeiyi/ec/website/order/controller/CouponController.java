@@ -274,7 +274,6 @@ public class CouponController {
                     }
                     Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
                     coupon.setConsumer(consumer);
-                    coupon.setConsumer(consumer);
                     baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
                     SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
                     coupon.setStartTimeL(simpleDateFormat2.format(coupon.getCouponBatch().getStartDate()));

@@ -23,7 +23,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -110,7 +110,8 @@
           </a>
         </div>
         <div class="attention-page">
-          <span>已经被 ${project.fsAmount} 个景泰蓝爱好者关注</span>
+          <c:if test="${project.fsAmount !=null}"><span>已经被${project.fsAmount} 个景泰蓝爱好者关注</span></c:if>
+          <c:if test="${project.fsAmount ==null}"><span>已经被1个景泰蓝爱好者关注</span></c:if>
         </div>
       </div>
     </div>
@@ -641,17 +642,7 @@
       //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
       if(index>=7) index=index%7+1;
       html=''
-    /*  for(var i=20*(index-1);i<20*(index-1)+20;i++){
-        var k='';
-        for(var ii=0;ii<3-i.toString().length;ii++){
-          k+='0';
-        }
-        k+=i;
-        var src="http://cued.xunlei.com/demos/publ/img/P_"+k+".jpg";
-        html+='<ul><li class="cell craft-page"><a href="#"><img src="'+src+'" /></a>  <h4 class="ae">双耳瓶</h4> <div class="function-page ae"> <div class="d-left"> <a href="#"> <i class="h-i-con"></i> <span>999999</span> </a> </div> <div class="d-right"> <div class="right1"> <a href="#"> <i class="h-i-con2"></i> <span>999999</span> </a> </div> <div class="right2"> <a href="#"> <i class="h-i-con3"></i> </a> </div> </div> </div> </li></ul>';
 
-
-      }*/
       if(ajaxkey){
         var flag = false;
         $.ajax({
@@ -720,7 +711,14 @@
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/listProduct/'/>"+projectId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -765,7 +763,7 @@
       success:function(data){
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="repeat"){

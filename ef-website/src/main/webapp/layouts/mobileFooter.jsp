@@ -73,11 +73,12 @@
         font-size: 12px;
         position: absolute;
         left:-28px;
-        top:20px;
+        top:20px;,
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -88,19 +89,6 @@
         margin-top: 6px;
     }
 </style>
-<script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
-</script>
 <script>
     function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
@@ -110,7 +98,17 @@
             return false;
         }
     }
-
+        (function(m, ei, q, i, a, j, s) {
+            m[a] = m[a] || function() {
+                        (m[a].a = m[a].a || []).push(arguments)
+                    };
+            j = ei.createElement(q),
+                    s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.src = i;
+            s.parentNode.insertBefore(j, s)
+        })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+        _MEIQIA('entId', 486);
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 

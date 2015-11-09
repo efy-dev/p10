@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -28,7 +29,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
-  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <style>.colonel-table .introduce img{width:100%!important;float:left;margin-bottom:1.7rem;height: 100%!important;}</style>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -58,24 +59,21 @@
         <div class="black" style="width: ${bil}%;"></div>
         <div class="gray"></div>
       </div>
-      <div class="txt-page ae"><span>团长:${group.manUser.name}</span><span>${group.memberList.size()}人参团/${group.groupProduct.memberAmount}人起成团</span></div>
+      <div class="txt-page ae"><span>拼团倒计时：</span><span>分享红包：${group.groupProduct.bonus}</span></div>
       <div class="time ae" id="timer">00:00:00</div>
     </div>
     <c:if test="${flag==1}">
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
-        <a href="javascript:void(0)" class="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
+        <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
       </c:if>
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
         <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
       </c:if>
     </c:if>
     <c:if test="${flag==0}">
-      <a href="<c:url value='/group/groupBuy'/>${url}" class="btn">参&nbsp;团</a>
+      <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
-    <div class="txt4 ae"><span>参团享低价，分享赚红包！您成功参团并分享该链接帮助好友参团，就可以得红包啦！红包无上限，更多分享，更多红包！
-            <a href="#" class="txcon"></a>
-            <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
-        </span></div>
   </div>
   <!-- 选项卡-->
   <div class="colonel-table ae">
@@ -95,7 +93,7 @@
         </div>
         <div class="tab-btn">
           <a href="#">更多团购商品<i class="gicon"></i></a>
-          <a href="#">我要开团</a>
+          <a href="#">我要开团<i class="gicon"></i></a>
         </div>
       </div>
       <div class="co-page" style="display: none">
@@ -121,13 +119,6 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $("img").each(function(){
-      $(this).css("width","100%");
-    })
-  })
-  </script>
 <script type="text/javascript">
   var endDate=${endTime};
   setInterval("daoJiShi()",1000);

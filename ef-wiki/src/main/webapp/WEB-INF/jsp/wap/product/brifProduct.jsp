@@ -20,7 +20,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -279,7 +279,13 @@ ${product.productDescription.content}
       success:function(data){
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
@@ -450,7 +456,14 @@ function savaUP(productId){
     success:function(data2){
      if(data2=="false"){
        //alert("您还未登陆，请登录后再操作！！！");
-       window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+       //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+       var go = window.confirm("去登陆吧?");
+       if(go==true){
+         window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+       }
+       else{
+         return false;//取消
+       }
        return false;
      }
       if(data2=="repeat"){
@@ -514,7 +527,14 @@ function savaUP(productId){
       success:function(data){
         if(data==false){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
@@ -553,7 +573,13 @@ function savaUP(productId){
         success:function(data){
           if(data==false){
             //alert("您还未登陆，请登录后再操作！！！");
-            window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
@@ -585,7 +611,13 @@ function savaUP(productId){
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -626,7 +658,13 @@ function savaUP(productId){
       success:function(data){
         if(data=="false"){
           //showAlert("提示","您还未登陆，请登录后再操作");
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="repeat"){

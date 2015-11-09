@@ -100,27 +100,7 @@ public class CartController {
 
 
     private Cart getCurrentCart(HttpServletRequest request) {
-        Cookie userinfo = CookieTool.getCookieByName(request, "userinfo");
-        Cart cart;
-        if (AuthorizationUtil.isAuthenticated()) {
-            cart = cartManager.fetchCart();
-        } else {
-            if (userinfo != null) {
-                String userId = userinfo.getValue();
-                cart = cartManager.fetchCart(userId);
-            } else {
-                Object cartObj = request.getSession().getAttribute("cart");
-                if (cartObj != null) {
-                    cart = (Cart) cartObj;
-                } else {
-                    cart = new Cart();
-                    cart.setCartProductList(new ArrayList<CartProduct>());
-                    cart.setTotalPrice(new BigDecimal(0));
-                    request.getSession().setAttribute("cart", cart);
-                }
-            }
-        }
-        return cart;
+        return cartManager.getCurrentCart(request);
     }
 
     /*
@@ -248,13 +228,7 @@ public class CartController {
     @RequestMapping({"/cart/cartCheck.do"})
     @ResponseBody
     public boolean cartCheck(HttpServletRequest request) {
-        Cart cart = null;
-        if (AuthorizationUtil.getMyUser().getId() != null) {
-            String cartId = request.getParameter("cartId");
-            cart = (Cart) baseManager.getObject(Cart.class.getName(), cartId);
-        } else {
-            cart = (Cart) request.getSession().getAttribute("cart");
-        }
+        Cart cart = getCurrentCart(request);
         Integer cartAmount = 0;
         for (CartProduct cartProduct : cart.getCartProductList()) {
             CartProduct cartProduct1 = (CartProduct) baseManager.getObject(CartProduct.class.getName(), cartProduct.getId());

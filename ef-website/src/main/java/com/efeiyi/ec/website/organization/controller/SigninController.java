@@ -107,31 +107,19 @@ public class   SigninController extends BaseController {
      */
     @RequestMapping(value = "/pc/saveEnrollUser.do")
     public ModelAndView saveEnrollUser(HttpServletRequest request, Consumer bigUser, ModelMap modelMap) throws Exception {
-//        bigUser.setRole(roleManager.getRole("consumer"));
         bigUser.setPassword(StringUtil.encodePassword(bigUser.getPassword(), "SHA"));
-        /*bigUser.setRoleType(OrganizationConst.ROLE_THE_TYPE_AGENT);*/
         if (bigUser.getStatus() == null) {
             bigUser.setStatus("1");
         }
-        bigUser.setEnabled(true);           //注册的时候 默认false  激活后才可以登录
+        bigUser.setEnabled(true);
         bigUser.setAccountExpired(false);
         bigUser.setAccountLocked(false);
         bigUser.setCredentialsExpired(false);
-
-        /*bigUser.setRoleType("user");             //system,    admin,    user*/
         bigUser.setCreateDatetime(new Date());
-
         baseManager.saveOrUpdate(Consumer.class.getName(), bigUser);
         modelMap.put("user", bigUser);
         modelMap.put("message", "注册成功");
         request.getSession().setAttribute("username", bigUser.getUsername());
-        //注册时给新用户初始化一个购物车
-//        User user = new User();
-//        user.setId(bigUser.getId());
-//        Cart cart = new Cart();
-//        cart.setUser(user);
-//        cart.setCreateDatetime(new Date());
-//        baseManager.saveOrUpdate(Cart.class.getName(), cart);
         return new ModelAndView("redirect:/sso.do");
     }
 
@@ -186,7 +174,11 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String redirect = request.getParameter("callUrl");
+        if (redirect!=null){
+            return "redirect:"+redirect;
+        }
         String userId = request.getParameter("userId");
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
@@ -206,7 +198,8 @@ public class   SigninController extends BaseController {
             }
 
         }
-        response.sendRedirect(request.getContextPath() + "/sso2.do");
+//        response.sendRedirect(request.getContextPath() + "/sso2.do");
+        return "redirect:/sso2.do";
     }
 
 

@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div class="loading" id="loading" style="display: none;text-align: center;width:100%;float: left;margin-bottom: 200px;"><img style="margin-top: 30px" src="<c:url value='/scripts/assets/images/images/loding-1.gif'/>"/>
+</div>
 <div class="footer wh">
     <div class="service wh">
         <div class="icon phone"></div>

@@ -22,7 +22,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -190,7 +190,7 @@
       <div class="sit-suit-text">
         <div class="sit-suit-content">
           <div class="sit-suit-cgz">
-            <div class="sit-suit-cgz-l"><a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
+            <div class="sit-suit-cgz-l"><a href="javascript:void(0);" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
               <c:if test="${flag ==true}">
                 <input id="saveProjectFllow" type="hidden" value="0">
                 已关注
@@ -472,7 +472,14 @@
         success:function(data){
           if(data=="false"){
             //alert("您还未登陆，请登录后再操作");
-            window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+           // window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){
@@ -533,7 +540,13 @@
         success:function(data){
           if(data=="false"){
             //alert("您还未登陆，请登录后再操作");
-            window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){
@@ -1102,7 +1115,13 @@
      success:function(data2){
        if(data2=="false"){
          //alert("您还未登陆，请登录后再操作！！！");
-         window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+         var go = window.confirm("去登陆吧?");
+         if(go==true){
+           window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+         }
+         else{
+           return false;//取消
+         }
          return false;
        }
        if(data2=="repeat"){

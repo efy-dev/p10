@@ -23,7 +23,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -61,6 +61,7 @@
   </div>
 </div>
 <!--nav-bars-->
+
 <div class="list-find">
   <%--<div class="list-f-title">
     <p><a>工艺</a><i class="fu-icon"></i><span>发现</span></p>
@@ -86,7 +87,7 @@
         </c:if>
       </ul>
     </div>
-    <div class="f-select-group">
+ <%--   <div class="f-select-group">
       <div class="select-head">
         <span>级别：</span>
         <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_all&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
@@ -97,8 +98,8 @@
         <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:3&pageEntity.size=10&pageEntity.index='/>')">市级</a></li>
         <li><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_level&conditions=level:4&pageEntity.size=10&pageEntity.index='/>')">县级</a></li>
       </ul>
-    </div>
-    <div class="f-select-group cl-act">
+    </div>--%>
+  <%--  <div class="f-select-group cl-act">
       <div class="select-head">
         <span>地区：</span>
         <strong><a href="#" class="" about="0" onclick="getData(this,'<c:url value='/pc/projectClassifyj.do?qm=plistProject_allDirt&conditions=&pageEntity.size=10&pageEntity.index='/>')">全部</a></strong>
@@ -110,7 +111,7 @@
           </c:forEach>
         </c:if>
       </ul>
-    </div>
+    </div>--%>
   </div>
   <div class="list-f-content">
     <div class="l-f-left">
@@ -118,6 +119,7 @@
 
       </ul>
     </div>
+
     <div class="l-f-right">
       <div class="f-right-gy ae">
         <div class="h4"><span>热门工艺</span></div>
@@ -156,6 +158,9 @@
       data:"",//设置请求的数据
       async:true,
       dataType:"json",//设置请求返回的数据格式
+      beforeSend:function(){
+        $("#loading").show();
+      },
       success:function(data){
         var pubu = $("#classify");
         if(data && data.length>=1){
@@ -170,10 +175,13 @@
             }
             var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
+            var opertation1="";
             if(isA==true){
-              word="取消关注";
+              word="已关注";
+              opertation1="del"
             }else{
               word="关注";
+              opertation1="add";
             }
          /*   var box = $("<li class='before'> <div class='eimg'><a href='#'><img src='"+data[i].picture_url+"'></a></div> " +
                     "<div class='etext'> <p class='dz'>"+data[i].addressDistrict+"</p> " +
@@ -188,10 +196,10 @@
                    "<div class=\"list-moods\"> <a href=\"#\"><i class=\"img-icon\"></i></a> " +
                    "<em>"+data[i].fsAmount+"</em> </div></dt> <dd> <div class=\"text1\"><span>"+data[i].addressDistrict+"</span></div> " +
                    "<div class=\"text2\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><span>"+data[i].projectName+"</span></a></div>  <p>"+levelName+"</p> " +
-                   "<p class='text5'>"+data[i].description+"</p> " +
-                   "<div class=\"text3\"><span>"+data[i].works+" 件作品</span>" +
-                   "<span>"+data[i].masters+"位大师</span></div> " +
-                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='add' id='"+data[i].projectId+"'>"+word+"</em></a> " +
+                   "<div class='text5'>"+data[i].description+"</div> " +
+                   "<div class=\"text3\"><a href=\"<c:url value='/project/listProduct/'/>"+data[i].projectId+"\"><span>"+data[i].works+" 件作品</span></a>" +
+                   "<span><a href=\"<c:url value='/project/brifMaster/'/>"+data[i].projectId+"\">"+data[i].masters+"位大师</span></a></div> " +
+                   "<a href=\"javascript:void(0);\" class=\"text4\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'><em about='"+opertation1+"' id='"+data[i].projectId+"'>"+word+"</em></a> " +
                    "</dd> </dl> </li> ");
             pubu.append(box);
             //PBL("#beforeAttention",".before",2);
@@ -202,6 +210,7 @@
         }
 
         StartNum=StartNum+1;
+      $("#loading").hide();
       },
       error:function(){
 
@@ -212,6 +221,7 @@
         if(flag==true) {
           ajaxkey2 = false;
         }
+        //$("#loading").show();
       }
     })
   }
@@ -243,7 +253,7 @@
               word="关注";
             }
 
-            var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
+            var box = $("<li> <div class=\"text\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"><p class=\"p1\">"+data[i].projectName+"</p></a> <p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
@@ -298,7 +308,7 @@
               word="关注";
             }
 
-            var box = $("<li> <div class=\"text\"> <p class=\"p1\">"+data[i].projectName+"</p> <p class=\"p2\">"+levelName+"</p> </div> " +
+            var box = $("<li> <div class=\"text\"><a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\"> <p class=\"p1\">"+data[i].projectName+"</p> </a><p class=\"p2\">"+levelName+"</p> </div> " +
                     "<div class=\"bt-gz\"> <a class=\"btn-guan\" href=\"javascript:void(0);\" onclick='saveProjectFllow(\""+data[i].projectId+"\")'> <i class=\"gz-icon\"></i> " +
                     "<em about=\"add\" id=\""+data[i].projectId+"\">"+word+"</em> </a> </div> <div class=\"img-q\"> <a href=\"<c:url value='/project/brifProject/'/>"+data[i].projectId+"\">" +
                     "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i].picture_pc_url+"\"></a> </div>");
@@ -391,18 +401,49 @@
 
         //$('.grounp-f').prepend("<iframe id='qwe' src=\"http://passport.efeiyi.com/login?service=http%3A%2F%2Fmaster.efeiyi.com%2Fef-wiki%2Fj_spring_cas_security_check\"></iframe>");
         //$('.grounp-f').children('#qwe').remove();
-          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
-
+         // window.location.href ="http://192.168.1.61:8082/ef-wiki/sso2.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/find.do'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
-          $("#"+projectId).html("取消关注");
-          mark = true;
+          //$("#"+projectId).html("取消关注");
+          if(oper=="add" ){
+            var parent = $("#"+projectId).parent();
+            parent.empty();
+            parent.append("<em about=\"del\" id=\""+projectId+"\">已关注</em> </a>");
+          }
+          if(oper=="del"){
+            var parent = $("#"+projectId).parent();
+            parent.empty();
+            parent.append("<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </a>");
+            //var val = $("#"+projectId).attr("about","add");
+          }
           return true;
         }
         if(data=="del"){
-          $("#"+projectId).html("关注");
-          mark = true;
+          /*$("#"+projectId).html("关注");
+          if(oper=="add"){
+            var val = $("#"+projectId).attr("about","del");
+          }
+          if(oper=="del"){
+            var val = $("#"+projectId).attr("about","add");
+          }*/
+          if(oper=="add" ){
+            var parent = $("#"+projectId).parent();
+            parent.empty();
+            parent.append(" <em about=\"del\" id=\""+projectId+"\">已关注</em> </a>");
+          }
+          if(oper=="del"){
+            var parent = $("#"+projectId).parent();
+            parent.empty();
+            parent.append("<i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">关注</em> </a>");
+          }
           return true;
         }
         if(data=="error"){
@@ -416,12 +457,7 @@
         return false;
       },
       complete:function(){
-        if(oper=="add" &&  mark == true){
-          var val = $("#"+projectId).attr("about","del");
-        }
-        if(oper=="del" &&  mark == true){
-          var val = $("#"+projectId).attr("about","add");
-        }
+
 
       }
     });
@@ -553,5 +589,3 @@
 <script src="<c:url value='/scripts/assets/pc/js/cyclopedia.js?v=20150831'/>"></script>
 </body>
 </html>
-
-

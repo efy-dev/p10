@@ -62,6 +62,10 @@
             });
         }
 
+        function createURL(couponBatchId){
+            window.prompt("链接","www.efeiyi.com/yhq.do?id="+couponBatchId);
+        }
+
     </script>
 </head>
 <body>
@@ -139,6 +143,11 @@
                                                    href="<c:url value="/couponBatch/download.do"><c:param name="id" value="${couponBatch.id}"></c:param></c:url>"><span
                                                         class="am-icon-trash-o">下载</span>
                                                 </a>
+                                            </c:if>
+                                            <c:if test="${couponBatch.deliverType == 1 || couponBatch.deliverType == 2}">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="createURL('${couponBatch.id}')"><span
+                                                        class="am-icon-trash-o">生成链接</span>
+                                                </button>
                                             </c:if>
                                         </div>
                                     </div>
