@@ -177,7 +177,7 @@ ${product.productDescription.content}
   <div class="inheritor ">
 
     <div class="inheritor-text">
-      <p class="itor-text-1">${product.master.fullName}</p>
+      <a href="http://${product.master.name}.efeiyi.com"><p class="itor-text-1">${product.master.fullName}</p></a>
 
       <p class="itor-text-2">${product.name}</p>
 
@@ -200,7 +200,7 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow('${product.master.id}')" id="">
+      <a class="gz-fd-icon" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')" id="">
         <c:if test="${flag == true}">
           <input id="saveMasterFllow" type="hidden" value="0">
           取消关注
@@ -212,7 +212,7 @@ ${product.productDescription.content}
 
       </a>
 
-      <div class="gz-fd-img"><a href="#"><img src="${product.master.favicon}"></a>
+      <div class="gz-fd-img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a>
       </div>
     </div>
   </div>

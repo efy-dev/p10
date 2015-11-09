@@ -347,10 +347,10 @@
               }
               var box = $("<div class='inheritor'> " +
                       "<div class='inheritor-text'> " +
-                      "<p class='itor-text-1'>"+data.list[i].master.fullName+"</p> " +
+                      "<a href=\"http://"+data.list[i].master.name+".efeiyi.com\"><p class='itor-text-1'>"+data.list[i].master.fullName+"</p></a> " +
                       "<p class='itor-text-3'>"+levelName+"</p> " +
                       "<p class='itor-text-4' style='padding-bottom: 1.5rem'>"+data.list[i].master.brief+"</p> " +
-                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
+                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='javascript:void(0);' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href=\"http://"+data.list[i].master.name+".efeiyi.com\">" +
                       "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");
 
               pubu.append(box);

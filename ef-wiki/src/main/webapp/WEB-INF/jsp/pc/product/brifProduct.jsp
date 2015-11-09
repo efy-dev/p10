@@ -147,7 +147,7 @@
             <ul class="rf">
               <li>
                 <div class="text">
-                  <h4>${product.master.fullName}</h4>
+                  <a href="http://${product.master.name}.efeiyi.com"><h4>${product.master.fullName}</h4></a>
                   <p>${product.name}</p>
                   <c:choose>
                     <c:when test="${product.master.level =='1'}">
@@ -175,7 +175,7 @@
                     </c:if>
                   </a>
                 </div>
-                <div class="img"><img src="${product.master.favicon}"></div>
+                <div class="img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a></div>
               </li>
             </ul>
             </c:if>
