@@ -134,8 +134,7 @@
                 <do name="listProject" label="project列表" access="" result="/project/projectList"
                     execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition label="project主键" name="status" defaultValue="1" operation="eq"/>
-                        <condition label="projectCategoryId" name="projectCategory.id" defaultValue="1" operation="eq"/>
+                        <condition label="project主键" name="status" defaultValue="0" operation="ne"/>
                     </query>
                 </do>
                 <do name="listProject2" label="project列表" access="" result="/tenantProject/projectList"
