@@ -77,7 +77,8 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://www.efeiyi.com/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -97,7 +98,6 @@
             return false;
         }
     }
-    if (isWeiXin()==false) {
         (function(m, ei, q, i, a, j, s) {
             m[a] = m[a] || function() {
                         (m[a].a = m[a].a || []).push(arguments)
@@ -109,7 +109,6 @@
             s.parentNode.insertBefore(j, s)
         })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
         _MEIQIA('entId', 486);
-    }
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
