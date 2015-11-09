@@ -174,7 +174,11 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String redirect = request.getParameter("callUrl");
+        if (redirect!=null){
+            return "redirect:"+redirect;
+        }
         String userId = request.getParameter("userId");
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
@@ -194,7 +198,8 @@ public class   SigninController extends BaseController {
             }
 
         }
-        response.sendRedirect(request.getContextPath() + "/sso2.do");
+//        response.sendRedirect(request.getContextPath() + "/sso2.do");
+        return "redirect:/sso2.do";
     }
 
 
