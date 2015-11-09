@@ -144,6 +144,9 @@
       data:"",//设置请求的数据
       async:true,
       dataType:"json",//设置请求返回的数据格式
+      beforeSend:function(){
+        $("#loading").show();
+      },
       success:function(data){
         var pubu = $("#afterAttention");
         if(data && data.length>=1){
@@ -178,6 +181,7 @@
         }
 
         StartNum2=StartNum2+1;
+        $("#loading").hide();
       },
       error:function(){
 
