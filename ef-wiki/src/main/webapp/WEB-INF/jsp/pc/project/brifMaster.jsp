@@ -242,10 +242,10 @@
                     "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
                     "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");*/
 
-            var box = $(" <li> <div class=\"text\"> <h4>"+data.list[i].master.fullName+"</h4> " +
+            var box = $(" <li> <div class=\"text\"> <a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><h4>"+data.list[i].master.fullName+"</h4></a> " +
                     "<p>"+levelName+"</p> <p><span>"+data.list[i].master.brief+"</span></p> " +
-                    "<a class=\"btn-guan\" href=\"#\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
-                    "<div class=\"img\"><img src=\""+data.list[i].master.favicon+"\"></div> </li>");
+                    "<a class=\"btn-guan\" href=\"javascript:void(0);\"  about=\""+opertation+"\" onclick=\"saveMasterFllow('"+data.list[i].master.id+"')\"    id=\""+data.list[i].master.id+"\">"+word+"</a> </div> " +
+                    "<div class=\"img\"><a href=\"http://"+data.list[i].master.name+".efeiyi.com\" ><img src=\""+data.list[i].master.favicon+"\"></a></div> </li>");
 
 
             pubu.append(box);
