@@ -635,9 +635,19 @@ function getHfProduct(e){
           return false;
         }
         if(data2=="true" && oper=='up'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())+1);
         }
         if(data2=="true" && oper=='down'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())-1);
         }
       },
@@ -646,11 +656,7 @@ function getHfProduct(e){
         return false;
       },
       complete:function(){
-        if($("#good-1").attr("name")=="down"){
-          $("#good-1").attr("name","up");
-        }else{
-          $("#good-1").attr("name","down");
-        }
+
 
 
       }
@@ -686,9 +692,19 @@ function getHfProduct(e){
         }
         if(data2=="true" && oper=='up'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
         if(data2=="true" && oper=='down'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
       },
       error:function(){
@@ -697,11 +713,7 @@ function getHfProduct(e){
       },
       complete:function(){
 
-        if( $(data).attr("name")=="up"){
-          $(data).attr("name","down");
-        }else{
-          $(data).attr("name","up");
-        }
+
       }
     });
   }
@@ -727,11 +739,13 @@ function getHfProduct(e){
           return false;
         }
         if(data=="repeat"){
-          alert("您已收藏过了！")
+          //alert("您已收藏过了！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
         if(data=="true"){
-          alert("您好，收藏成功！")
+          //alert("您好，收藏成功！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
 
