@@ -23,7 +23,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/x-icon" href="/scripts/assets/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -110,7 +110,8 @@
           </a>
         </div>
         <div class="attention-page">
-          <span>已经被 ${project.fsAmount} 个景泰蓝爱好者关注</span>
+          <c:if test="${project.fsAmount !=null}"><span>已经被${project.fsAmount} 个景泰蓝爱好者关注</span></c:if>
+          <c:if test="${project.fsAmount ==null}"><span>已经被1个景泰蓝爱好者关注</span></c:if>
         </div>
       </div>
     </div>
