@@ -540,7 +540,7 @@
 
 
     function changeUrl(id) {
-        var url = "http://www2.efeiyi.com/product/productModel/" + id;
+        var url = "http://www.efeiyi.com/product/productModel/" + id;
         window.open(url);
 
     }
