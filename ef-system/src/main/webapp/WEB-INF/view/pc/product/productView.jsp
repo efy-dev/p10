@@ -384,32 +384,44 @@
 
 
         </legend>
+          <span style="margin-left: 90%;">
+                          <a style="width: 10%;"
+                             class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                             href="javascript:void(0);" onclick="toDiscription(this)">
+                              添加至描述
+                          </a>
+                    </span>
         <a id="btn_upload3"></a>
 
         <div class="am-u-md-13">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
-                    <strong> 商品详情图片</strong>
-                    <span class="am-icon-chevron-down am-fr"></span></div>
-                <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden">
 
-                    <ul style="width: 100%" style="list-style:none">
+                    <strong> 商品详情图片</strong>
+
+                    <span class="am-icon-chevron-down am-fr"></span>
+
+                </div>
+
+                <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden; ">
+
+                    <ul style="width: 100%;list-style:none;margin-left: 8%" >
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
                                 <c:if test="${productPicture.status == '3' || productPicture.status == '9'}">
-                                    <li style="float: left;margin-right: 10px; width: 200px;"
+                                    <li style=""
                                         name="${productPicture.id}">
-                                        <dl style="margin-top: 6px;">
-                                            <dt style="width: 100%">
+                                        <dl style="margin-top: 6px;position:relative">
+                                            <dt style="width: 60%">
                                                 <a title="点击查看原图" href="javascript:void (0);"
                                                    onclick="tc('http://pro.efeiyi.com/${productPicture.pictureUrl}')">
                                                     <img width="100%" name=""
-                                                         src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-model"
-                                                         alt="商品图片"/>
+                                                         src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask"
+                                                         alt="商品图片" />
                                                 </a>
                                             </dt>
-
-                                            <dd style="width: 100%;text-align: center;">
+                                            <dd style="position: absolute;width: 50%;right: 0;top: 25%;">
+                                            <div style="width: 100%;text-align: center;">
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '9'}">
                                                         <a href="javascript:void(0);" status="3"
@@ -422,15 +434,19 @@
                                                 </c:choose>
                                                 <a href="javascript:void(0);"
                                                    onclick="deletePicture(this,'${productPicture.id}')">删除</a>
-                                            </dd>
-                                            <dd style="width: 100%;text-align: center;">
+                                            </div>
+                                            <div style="width: 100%;text-align: center;">
                                                     ${fn:substring(productPicture.pictureUrl, fn:indexOf(productPicture.pictureUrl,"/" )+1, fn:length(productPicture.pictureUrl)-18)}${fn:substring(productPicture.pictureUrl,fn:indexOf(productPicture.pictureUrl,"." ) ,fn:length(productPicture.pictureUrl)+1 )}
-                                            </dd>
-                                            <dd style="width: 100%;text-align: center;">
+                                            </div>
+                                            <div style="width: 100%;text-align: center;">
                                                 <a href="javascript:void(0);" class="copy"
                                                    url="http://pro.efeiyi.com/${productPicture.pictureUrl}@!water-mask">复制图片地址</a>
+                                            </div>
+                                            <div style="width: 100%;text-align: center;" sort="">
+                                                <a href="javascript:void(0);" onclick="upImg(this);">上移</a>
+                                                <a href="javascript:void(0);" onclick="downImg(this);">下移</a>
+                                            </div>
                                             </dd>
-
                                         </dl>
                                     </li>
                                 </c:if>
@@ -551,8 +567,9 @@
     }
     var modelIds = [];
     var modelNames = [];
+    var myeditor=CKEDITOR.replace('content', {height: '440px', width: '1000px'});
     $(function () {
-        CKEDITOR.replace('content', {height: '440px', width: '1000px'});
+
         $(".copy").each(function () {
             copyInit($(this));
         });
@@ -694,24 +711,33 @@
 //                        ' </td>' +
 //                        '</tr>';
                 ///显示图片
-                var img = '<li style="float: left;margin-right: 10px;width:200px;" name="' + pictureId + '">' +
-                        '<dl style="margin-top: 6px;" >' +
-                        '  <dt  style="width: 100%">' +
+                var img = '<li style="" name="' + pictureId + '">' +
+                        '<dl style="margin-top: 6px;position:relative" >' +
+                        '  <dt  style="width: 60%">' +
                         '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\'' + trueUrl + '\')">' +
-                        '      <img width="100%" name="' + pictureId + '"  src="' + url + '" alt="商品主图片">' +
+                        '      <img width="100%" name="' + pictureId + '"  src="' + trueUrl + '" alt="商品主图片">' +
                         '   </a>' +
                         '  </dt>' +
-                        '  <dd style="width: 100%;text-align:center" >' +
+                        '<dd style="position: absolute;width: 50%;right: 0;top: 25%;">'+
+                        '  <div style="width: 100%;text-align:center" >' +
                         ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,\'' + pictureId + '\',\'9\')">' + '设为推荐图片' + '</a>' +
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\'' + pictureId + '\')">' +
                         ' 删除' +
                         '</a>' +
-                        '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' + imgName +
-                        '</dd>' +
-                        '<dd style="width: 100%;text-align: center;" >' +
+                        '</div>' +
+                        '<div style="width: 100%;text-align: center;" >' + imgName +
+                        '</div>' +
+                        '<div style="width: 100%;text-align: center;" >' +
                         '  <a href="javascript:void(0);" onclick="copyInit(this);" class="copy" url="' + trueUrl + '">' + '复制图片地址' + '</a>' +
-                        '</dd>' +
+                        '</div>' +
+                        '<div style="width: 100%;text-align: center;" sort="">'+
+                        '<a href="javascript:void(0);" onclick="upImg(this);">'+
+                        '上移'+
+                        '</a>'+
+                        '<a href="javascript:void(0);" onclick="downImg(this);">'+
+                        '下移'+'</a>'+
+                        '</div>'+
+                        '</dd>'+
 //                        '<dd style="width: 100%;text-align: center;" >' +
 //                        '   <a href="javascript:void(0);"   onclick="changeImg(\'' + imgUrl + '\');">' + '替换图片' + '</a>' +
 //                        '</dd>' +
@@ -821,6 +847,45 @@
 
         $("#form" + st).submit();
 
+
+    }
+
+    /**
+    * 上下移
+     */
+    function upImg(obj){
+       var li = $(obj).parents("li");
+        var getup = $(li).prev();
+
+        if(getup.length==0){
+            alert("已经是第一个了!");
+        }else{
+            $(getup).before(li);
+        }
+    }
+    function downImg(obj){
+        var li = $(obj).parents("li");
+        var getdown = $(li).next();
+        if(getdown.length==0){
+            alert("已经是最后一个了!");
+        }else{
+         $(getdown).after(li);
+        }
+
+    }
+    function toDiscription(obj){
+        var p = '';
+        if($("#collapse-panel-3 li").length==0){
+            alert("没有要赋值的内容!");
+        }else {
+            $("#collapse-panel-3 li").each(function () {
+                var img = $(this).find("img").attr("src");
+                p += '<img alt="" src="' + img + '"/>';
+
+            });
+            myeditor.setData(p);
+            alert("添加成功!");
+        }
 
     }
 </script>
