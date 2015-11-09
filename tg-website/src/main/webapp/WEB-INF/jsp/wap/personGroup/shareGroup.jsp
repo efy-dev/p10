@@ -29,7 +29,6 @@
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
-  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 <header class="am-header custom-header">
