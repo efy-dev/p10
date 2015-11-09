@@ -5,6 +5,8 @@ import com.efeiyi.ec.purchase.model.Cart;
 import com.efeiyi.ec.purchase.model.CartProduct;
 import com.efeiyi.ec.tenant.model.Tenant;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Administrator on 2015/10/10 0010.
  * <p/>
@@ -29,6 +31,8 @@ public interface CartManager {
 
     Cart fetchCart();
 
+    Cart getCurrentCart(HttpServletRequest request);
+
     Cart fetchCart(String userId);
 
     CartProduct addCount(Cart cart, CartProduct cartProduct);
@@ -43,7 +47,7 @@ public interface CartManager {
 
     Cart chooseAll(Cart cart, String chooseStatus);
 
-    Cart copyCart(Cart cart);
+    Cart copyCart(Cart sessionCart,Cart realCart);
 
 
 }
