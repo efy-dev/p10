@@ -168,7 +168,7 @@ $(function(){
 
 
 //收藏
-var oBiao=$('.details .detaile-left .detaile-share .thumb-up .thump-collect a');
+/*var oBiao=$('.details .detaile-left .detaile-share .thumb-up .thump-collect a');
 oBiao.click(function(){
     var oCllect=$(this).parents('.collect');
     $(this).find('.s-icon').toggleClass('s-icon1');
@@ -177,6 +177,6 @@ oBiao.click(function(){
     }else{
         $(this).find('em').html('已收藏')
     }
-})
+})*/
 //
 
