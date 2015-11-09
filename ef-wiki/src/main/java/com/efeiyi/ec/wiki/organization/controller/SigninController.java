@@ -296,7 +296,7 @@ public class   SigninController extends BaseController {
         response.sendRedirect(request.getContextPath() +"/project/brifProject/"+projectId);
     }
 
-    @RequestMapping("/brifProject/{projectId}")
+    @RequestMapping("/wapbrifProject/{projectId}")
     public void forwardFind7(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() +"/base/brifProject/"+projectId+"/1");
     }
