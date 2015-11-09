@@ -69,9 +69,12 @@ public class SearchController {
             Map subHighLightingMap = (Map)highLightingMap.get(id);
             for(Object subObj : subHighLightingMap.entrySet()){
                 Map.Entry entry = (Map.Entry)subObj;
+                if (subHighLightingMap.get(entry.getKey()) instanceof  List){
+                    docMap.put(entry.getKey(),((List)subHighLightingMap.get(entry.getKey())).get(0));
+                    continue;
+                }
                 docMap.put(entry.getKey(),subHighLightingMap.get(entry.getKey()));
             }
-            System.out.println("");
         }
         return new ModelAndView("/search");
     }

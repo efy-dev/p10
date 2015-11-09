@@ -20,7 +20,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <link rel="icon" type="image/png"
-        href="http://a.static.amazeui.org/assets/i/favicon.png">
+        href="/scripts/assets/images/favicon.ico">
   <link rel="stylesheet"
         href="http://cdn.amazeui.org/amazeui/2.1.0/css/amazeui.min.css">
   <link rel="stylesheet" href="http://a.static.amazeui.org/assets/plugin/css/app.min.css">
