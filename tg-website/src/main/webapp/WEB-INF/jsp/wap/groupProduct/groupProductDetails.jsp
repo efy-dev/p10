@@ -29,6 +29,7 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
+    <style>.colonel-table .introduce img{width:100%!important;float:left;margin-bottom:1.7rem;height: 100%!important;}</style>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -120,13 +121,13 @@
     </div>
 </div>
 <!--//End--footer-->
-<script>
+<%--<script>
     $().ready(function(){
         $("img").each(function(){
             $(this).css("width","100%");
         })
     })
-</script>
+</script>--%>
 <style type="text/css">
     #MEIQIA-BTN-HOLDER {
         right: 0;bottom: 145px;}
