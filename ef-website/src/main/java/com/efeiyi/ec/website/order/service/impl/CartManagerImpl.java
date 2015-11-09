@@ -12,9 +12,12 @@ import com.efeiyi.ec.website.order.service.StockManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.util.CookieTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -129,6 +132,33 @@ public class CartManagerImpl implements CartManager {
 
 
     @Override
+    public Cart getCurrentCart(HttpServletRequest request) {
+        Cookie userinfo = CookieTool.getCookieByName(request, "userinfo");
+        Cart cart;
+        if (AuthorizationUtil.isAuthenticated()) {
+            cart = fetchCart();
+        } else {
+            if (userinfo != null) {
+                String userId = userinfo.getValue();
+                cart = fetchCart(userId);
+            } else {
+                Object cartObj = request.getSession().getAttribute("cart");
+                if (cartObj != null) {
+                    cart = (Cart) cartObj;
+                } else {
+                    cart = new Cart();
+                    cart.setCartProductList(new ArrayList<CartProduct>());
+                    cart.setTotalPrice(new BigDecimal(0));
+                    request.getSession().setAttribute("cart", cart);
+                }
+            }
+        }
+        return cart;
+    }
+
+
+
+    @Override
     public Cart fetchCart(String userId){
         Cart cart;
         String hql = "select obj from " + Cart.class.getName() + " obj where obj.user.id=:userid";
@@ -140,10 +170,9 @@ public class CartManagerImpl implements CartManager {
 
 
     @Override
-    public Cart copyCart(Cart cart) {
-        Cart realCart = fetchCart();
-        if (cart != null) {
-            List<CartProduct> cartProductList = cart.getCartProductList();
+    public Cart copyCart(Cart sessionCart,Cart realCart) {
+        if (sessionCart != null) {
+            List<CartProduct> cartProductList = sessionCart.getCartProductList();
             for (CartProduct cartProductTemp : cartProductList) {
                 cartProductTemp.setCart(realCart);
                 realCart.getCartProductList().add(cartProductTemp);

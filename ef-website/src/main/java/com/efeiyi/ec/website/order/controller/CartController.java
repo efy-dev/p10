@@ -100,27 +100,7 @@ public class CartController {
 
 
     private Cart getCurrentCart(HttpServletRequest request) {
-        Cookie userinfo = CookieTool.getCookieByName(request, "userinfo");
-        Cart cart;
-        if (AuthorizationUtil.isAuthenticated()) {
-            cart = cartManager.fetchCart();
-        } else {
-            if (userinfo != null) {
-                String userId = userinfo.getValue();
-                cart = cartManager.fetchCart(userId);
-            } else {
-                Object cartObj = request.getSession().getAttribute("cart");
-                if (cartObj != null) {
-                    cart = (Cart) cartObj;
-                } else {
-                    cart = new Cart();
-                    cart.setCartProductList(new ArrayList<CartProduct>());
-                    cart.setTotalPrice(new BigDecimal(0));
-                    request.getSession().setAttribute("cart", cart);
-                }
-            }
-        }
-        return cart;
+        return cartManager.getCurrentCart(request);
     }
 
     /*
