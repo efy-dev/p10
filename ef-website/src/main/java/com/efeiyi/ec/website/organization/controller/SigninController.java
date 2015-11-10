@@ -245,7 +245,13 @@ public class   SigninController extends BaseController {
         return "/setPassword";
 
     }
-
+    @RequestMapping({"/registerSuccess.do"})
+    public String transitPage(HttpServletRequest request,Model model){
+        String id = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+        model.addAttribute("user", user);
+        return "/registerSuccess";
+    }
 
     @RequestMapping({"/wx/register"})
     public String wxRegister() {
