@@ -92,7 +92,7 @@
           <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <div class="tab-btn">
-          <a href="#">更多团购商品<i class="gicon"></i></a>
+          <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
           <a href="#">我要开团<i class="gicon"></i></a>
         </div>
       </div>

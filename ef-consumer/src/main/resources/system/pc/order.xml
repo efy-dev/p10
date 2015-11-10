@@ -170,9 +170,12 @@
                     </query>
                     <query name="bycdkey" label="可用列表" type="auto" orderBy="id:desc">
                         <condition name="status" defaultValue="1" operation="eq"/>
-                        <condition name="couponBatch.startDate" defaultValue="1" operation="le"/>
-                        <condition name="couponBatch.endDate" defaultValue="1" operation="ge"/>
+
                         <condition name="uniqueKey" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="allList" label="全部列表" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="2,0" operation="not in"/>
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
                     </query>
                 </do>
             </does>
