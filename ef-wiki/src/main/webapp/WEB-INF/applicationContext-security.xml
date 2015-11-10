@@ -20,8 +20,13 @@
     <!--SSO -->
     <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
         <csrf disabled="true"/>
-
+        <intercept-url pattern="/brifProject/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/wapbrifProject/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/brifProject2/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/wapShowProduct/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/brifMaster/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
+        <intercept-url pattern="/beforeAttention.do" access="isAuthenticated()"/>
         <intercept-url pattern="/showProduct/**" access="isAuthenticated()"/>
         <intercept-url pattern="/find.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
