@@ -39,6 +39,17 @@ public class HttpUtil {
     }
 
 
+    public static boolean isWeixin(HttpServletRequest request) {
+        String serverName = request.getServerName();
+        String userAgent = request.getHeader("User-Agent");
+        if (userAgent.contains("MicroMessenger")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     public static String getHttpResponse(String urlStr, String requestStr) throws Exception {
         URL url = new URL(urlStr);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
