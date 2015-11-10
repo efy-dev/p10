@@ -26,7 +26,7 @@
     <p>新用户注册送3张优惠券，已发放到您的账户</p>
     <div class="btn-q">
       <a href="http://www.efeiyi.com" class="but1">去购物</a>
-      <a href="http://i.efeiyi.com" class="but2">去查看</a>
+      <a href="http://i.efeiyi.com/coupon/list" class="but2">去查看</a>
     </div>
     <p><span>您的昵称${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}，会显示到页面顶部和商品评价等位置，如不希望暴露，建议您修改昵称。</span></p>
   </div>
