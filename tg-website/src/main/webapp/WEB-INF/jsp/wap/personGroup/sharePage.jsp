@@ -90,6 +90,7 @@
     document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
         // 发送给好友
         WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            alert(argy);
             shareFriend();
         });
         // 分享到朋友圈
