@@ -178,7 +178,7 @@ public class GroupController {
 
         }
         else {
-            return "/";//未支付成功
+            return "/zhifushibai";//未支付成功
         }
 
     }
