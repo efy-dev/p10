@@ -60,7 +60,10 @@
                 <match url="/basic/xm.do?qm=plistCoupon_used"/>
             </jnode>
         </jnode>
-
+        <jnode url="" id="consumer" access="admin" state="closed" text_zh_CN="营销活动">
+            <jnode url="/basic/xm.do?qm=formActivity" access="admin,manager" text_zh_CN="我的团长我的团">
+            </jnode>
+        </jnode>
     </jnode>
     <jnode id="efecProductAndTenant" url="/main.do?jnodeId=efecProductAndTenant" text_zh_CN="商品与商家">
         <jnode url="" id="productManager" access="admin,manager" state="closed" text_zh_CN="商品管理">
@@ -285,6 +288,18 @@
                 <match url="/basic/xm.do?qm=formMasterWork"/>
                 <match url="/basic/xm.do?qm=formwikiMasterWork"/>
                 <match url="/basic/xm.do?qm=viewMasterwiki"/>
+                <match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>
+                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=wikiProduct"/>
+                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=wikiProduct"/>
+                <match url="/basic/xm.do?view=wikiProduct"/>
+                <match url="/product/saveNewProduct.do?view=wikiProduct"/>
+                <match url="/basic/xm.do?qm=plistProduct_default1&amp;view=wikiProduct"/>
             </jnode>
 
         </jnode>

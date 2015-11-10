@@ -41,8 +41,8 @@
         <div class="info">Copyright © 2015 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
     </div>
     <div class="wh authentication">
-        <a href="http://www.miitbeian.gov.cn/icp/publish/query/icpMemoInfo_showPage.action" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
-        <a href="http://qyxy.baic.gov.cn/" target="_blank" title="企业信用信息备案"><img src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
+        <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
+        <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"><img src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
         <a href="<c:url value="/scripts/images/license.jpg"/>" target="_blank" title="企业营业执照"><img src="<c:url value="/scripts/images/authentication-3.png"/>" alt="企业营业执照 "></a>
     </div>
 </div>
@@ -103,6 +103,38 @@
     _MEIQIA('entId', 486);
 </script>
 
+<script>
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-69796169-1', 'auto');
+
+    ga('send', 'pageview');
+
+</script>
+<script>
+
+    var _hmt = _hmt || [];
+
+    (function() {
+
+        var hm = document.createElement("script");
+
+        hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(hm, s);
+
+    })();
+
+</script>
 
 <!--//End--右侧返回顶部和在线客服-->
 <div style="display: none">

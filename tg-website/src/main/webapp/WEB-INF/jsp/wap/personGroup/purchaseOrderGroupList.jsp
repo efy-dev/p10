@@ -56,7 +56,7 @@
         <c:forEach items="${purchaseOrderGroupList}" var="purchaseOrderGroup">
           <li>
             <div class="top">
-              <span>${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+              <span>${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
               <i class=" pq"></i>
               <c:if test="${purchaseOrderGroup.group.status==1}">
                 <span>组团中</span>
@@ -79,7 +79,7 @@
                 <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==5}">
                   <span>组团失败-等待付款</span>
                 </c:if>
-                <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==18}">
+                <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus!=1}">
                   <span>组团失败-已付款</span>
                 </c:if>
               </c:if>
@@ -132,7 +132,7 @@
           <c:forEach items="${purchaseOrderGroupList5}" var="purchaseOrderGroup5">
           <li>
           <div class="top">
-            <span>${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+            <span>${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
             <i class=" pq"></i>
             <span>待发货</span>
           </div>
@@ -178,7 +178,7 @@
         <c:forEach items="${purchaseOrderGroupList7}" var="purchaseOrderGroup7">
         <li>
           <div class="top">
-            <span>${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+            <span>${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
             <i class=" pq"></i>
             <span>待收货</span>
           </div>
@@ -230,7 +230,7 @@
         <c:forEach items="${purchaseOrderGroupList9}" var="purchaseOrderGroup9">
           <li>
             <div class="top">
-              <span>${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
+              <span>${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.product.name}${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.name}</span>
               <i class=" pq"></i>
               <span>交易成功</span>
             </div>

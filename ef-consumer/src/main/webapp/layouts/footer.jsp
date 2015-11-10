@@ -34,10 +34,13 @@
             <span>友情链接：</span>
             <a rel="nofollow" href="http://en.unesco.org/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
             <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-            <%--<a rel="nofollow" href="http://www.yongxinhua.cn/" target="_blank" title="永新华控股">永新华控股</a>--%>
-            <%--<a rel="nofollow" href="http://www.ihchina.cn/show/feiyiweb/index.html" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
         </div>
-        <div class="info">Copyright © 2015-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
+        <div class="info">Copyright © 2015-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div
+        <div class="wh authentication">
+            <a href="http://www.miitbeian.gov.cn" target="_blank" title="网站域名备案"><img src="<c:url value="/scripts/images/authentication-1.png"/>" alt="网站域名备案"></a>
+            <a href="http://www.baic.gov.cn/" target="_blank" title="企业信用信息备案"><img src="<c:url value="/scripts/images/authentication-2.png"/>" alt="企业信用信息备案"></a>
+            <a href="<c:url value="/scripts/images/license.jpg"/>" target="_blank" title="企业营业执照"><img src="<c:url value="/scripts/images/authentication-3.png"/>" alt="企业营业执照 "></a>
+        </div>
     </div>
 </div>
 
@@ -49,5 +52,39 @@
 <script src="<c:url value="/scripts/js/system.js?v=929"/>"></script>
 
 <div style="display: none">
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    <script>
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-69796169-1', 'auto');
+
+        ga('send', 'pageview');
+
+    </script>
+    <script>
+
+        var _hmt = _hmt || [];
+
+        (function() {
+
+            var hm = document.createElement("script");
+
+            hm.src = "//hm.baidu.com/hm.js?15b49366788c12ff091a0f6b23c8835f";
+
+            var s = document.getElementsByTagName("script")[0];
+
+            s.parentNode.insertBefore(hm, s);
+
+        })();
+
+    </script>
 </div>

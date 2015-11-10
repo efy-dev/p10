@@ -24,7 +24,7 @@
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
         <intercept-url pattern="/group/group.do" access="isAuthenticated()"/>
         <intercept-url pattern="/person/personInfoView.do" access="isAuthenticated()"/>
-        <intercept-url pattern="/group/groupBuy" access="isAuthenticated()"/>
+        <intercept-url pattern="/group/groupBuy.do" access="isAuthenticated()"/>
         <intercept-url pattern="/group/shareGroup" access="isAuthenticated()"/>
         <intercept-url pattern="/group/createGroup" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/sso.do" access="isAuthenticated()"/>

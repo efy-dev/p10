@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>分享页面</title>
+    <title>要精品也要实惠！匠人手作非遗品，惊喜团购价，无限红包，你还等什么</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -28,6 +28,7 @@
     <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
+    <script>src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"</script>
 </head>
 <body>
 <div class="packet ae">
@@ -35,15 +36,29 @@
         <div class="pic"><span>${group.groupProduct.bonus}</span></div>
     </div>
     <div class="text ae">
-        <p>1、恭喜您获得50元红包</p>
-        <p>2、分享给好友后您的好友可参团，可帮助您和好友获得红包</p>
+        <p>1、恭喜您参团成功！</p>
+        <p>2、分享该链接并成功帮好友参团，拼团成功后，您就可以得到分享红包！</p>
         <p>3、红包无上限，更多分享，更多红包！</p>
         <p>红包计算方法：</p>
         <p>分享红包总额=分享红包*有效分享次数，详情请见e飞蚁拼团协议!</p>
     </div>
-    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do${url}"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a></div>
+    <div class="button ae"><a class="btn ad">我&nbsp;要&nbsp;呼&nbsp;朋&nbsp;唤&nbsp;友</a><a href="<c:url value="/group/joinGroup.do${url}"/>" class="btn">查&nbsp;看&nbsp;参&nbsp;团&nbsp;进&nbsp;度</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
+    </div>
 </div>
-
+<script>
+    wx.onMenuShareTimeline({
+        title: '这是微信分享链接标题', // 分享标题
+        link: 'http://j.efeiyi.com/tg-website/group/joinGroup.do${url}', // 分享链接
+        imgUrl: 'http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}', // 分享图标
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+</script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->

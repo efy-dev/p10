@@ -295,5 +295,18 @@ public class   SigninController extends BaseController {
     public void forwardFind6(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() +"/project/brifProject/"+projectId);
     }
+
+    @RequestMapping("/wapbrifProject/{projectId}")
+    public void forwardFind7(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/base/brifProject/"+projectId+"/1");
+    }
+    @RequestMapping("/brifProject2/{projectId}")
+    public void forwardFind8(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/base/brifProject/"+projectId+"/2");
+    }
+    @RequestMapping("/wapShowProduct/{productId}")
+    public void forwardFind9(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId);
+    }
 }
 

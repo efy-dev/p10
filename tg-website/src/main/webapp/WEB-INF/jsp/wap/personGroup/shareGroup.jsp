@@ -29,7 +29,7 @@
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
   <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
-  <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+  <style>.colonel-table .introduce img{width:100%!important;float:left;margin-bottom:1.7rem;height: 100%!important;}</style>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -45,7 +45,19 @@
 <!--//End--header-->
 <div class="my-colonel ae">
   <!--产品-->
-  <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.name}</span></div></div>
+  <!-- 轮播产品-->
+  <div class="custom">
+    <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
+      <ul class="am-slides ">
+        <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+        <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
+          <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
+            <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+          </c:if>
+        </c:forEach>
+      </ul>
+    </div>
+  </div>
   <!--价格-->
   <div class="cost ae">
     <div class="txt1"><s>原价:${group.groupProduct.productModel.price}元</s></div>
@@ -65,6 +77,7 @@
     <c:if test="${flag==1}">
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()>0}">
         <a href="javascript:void(0)" class="btn" id="btn">还&nbsp;差&nbsp;${group.groupProduct.memberAmount-group.memberList.size()}&nbsp;人&nbsp;成&nbsp;团</a>
+        <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"> alt=""></div>
       </c:if>
       <c:if test="${group.groupProduct.memberAmount-group.memberList.size()<=0}">
         <a href="javascript:void(0)" class="btn">已&nbsp;成&nbsp;团</a>
@@ -73,8 +86,6 @@
     <c:if test="${flag==0}">
       <a href="<c:url value='/group/groupBuy.do'/>${url}" class="btn">参&nbsp;团</a>
     </c:if>
-      <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>" alt=""></div>
-
   </div>
   <!-- 选项卡-->
   <div class="colonel-table ae">
@@ -90,10 +101,10 @@
       <div class="co-page">
         <div class="introduce ae">
           ${group.groupProduct.productModel.product.productDescription.content}
-          <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+          <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <div class="tab-btn">
-          <a href="#">更多团购商品<i class="gicon"></i></a>
+          <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
           <a href="#">我要开团<i class="gicon"></i></a>
         </div>
       </div>
@@ -120,13 +131,6 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $("img").each(function(){
-      $(this).css("width","100%");
-    })
-  })
-  </script>
 <script type="text/javascript">
   var endDate=${endTime};
   setInterval("daoJiShi()",1000);

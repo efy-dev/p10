@@ -1,5 +1,6 @@
 package com.efeiyi.ec.website.base.controller;
 
+import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.project.model.Project;
 import com.efeiyi.ec.project.model.ProjectCategory;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
@@ -8,6 +9,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
+import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -47,11 +50,15 @@ public class HomeController {
     public String authenticationTest() {
         System.out.println(AuthorizationUtil.isAuthenticated());
         String name = "13693097151";
+        LinkedHashMap<String,Object> param = new LinkedHashMap<>();
+        param.put("username",name);
+        MyUser myUser = (MyUser)baseManager.getUniqueObjectByConditions("select obj from "+MyUser.class.getName()+" obj where obj.username=:username",param);
         String password = "123123";
         AuthenticationManager am = new SampleAuthenticationManager();
         try {
-            Authentication request = new UsernamePasswordAuthenticationToken(name, password);
+            Authentication request = new UsernamePasswordAuthenticationToken(myUser, StringUtil.encodePassword("123123", "SHA"));
             Authentication result = am.authenticate(request);
+            Object obj = result.getPrincipal();
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (AuthenticationException e) {
             System.out.println("Authentication failed: " + e.getMessage());
@@ -68,7 +75,7 @@ public class HomeController {
         }
 
         public Authentication authenticate(Authentication auth) throws AuthenticationException {
-                return new UsernamePasswordAuthenticationToken(auth.getName(),
+                return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
                         auth.getCredentials(), AUTHORITIES);
         }
     }

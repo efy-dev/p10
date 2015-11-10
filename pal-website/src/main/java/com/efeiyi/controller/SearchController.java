@@ -38,6 +38,7 @@ public class SearchController {
                 .append("&rows=")
                 .append(pageEntity.getIndex()*pageEntity.getSize()).toString();
         SearchClient.searchList.add(query);
+        modelMap.put("q", query);
 
         synchronized (query) {
             try {
@@ -51,14 +52,30 @@ public class SearchController {
             }
 
         }
-        Map resultMap = (Map) SearchClient.resultMap.remove(query);
-        List resultList = (List) resultMap.get("docs");
-        Integer num = (Integer) resultMap.get("numFound");
+        Map responseMap = (Map) SearchClient.resultMap.remove(query);
+        Map response = (Map)responseMap.get("response");
+        List docsList = (List) response.get("docs");
+        modelMap.put("searchList", docsList);
+
+        Integer num = (Integer) response.get("numFound");
         pageEntity.setCount(num);
-        modelMap.put("q", query);
-        modelMap.put("searchList", resultList);
         modelMap.put("pageEntity", pageEntity);
 
+        Map highLightingMap = (Map)responseMap.get("highlighting");
+
+        for(Object obj : docsList){
+            Map docMap = (Map)obj;
+            String id = (String)docMap.get("id");
+            Map subHighLightingMap = (Map)highLightingMap.get(id);
+            for(Object subObj : subHighLightingMap.entrySet()){
+                Map.Entry entry = (Map.Entry)subObj;
+                if (subHighLightingMap.get(entry.getKey()) instanceof  List){
+                    docMap.put(entry.getKey(),((List)subHighLightingMap.get(entry.getKey())).get(0));
+                    continue;
+                }
+                docMap.put(entry.getKey(),subHighLightingMap.get(entry.getKey()));
+            }
+        }
         return new ModelAndView("/search");
     }
 
