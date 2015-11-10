@@ -54,7 +54,7 @@ public class GroupController {
         List<Group> list = baseManager.listObject(xQuery);
         //GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
-        boolean flag = false;
+      /*  boolean flag = false;
         String url1 = "";
         if(groupId==null||groupId.isEmpty()){
             for(Group group:list){
@@ -72,17 +72,17 @@ public class GroupController {
             if (group.getManUser().getId().equals(currentUser.getId())&&(group.getMemberList().size()<group.getGroupProduct().getMemberAmount())){
                 flag = true;
             }
-        }
+        }*/
 
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
         String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://j.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
-        if(!flag){
+        //if(!flag){
             return "redirect:" + url;
-        }else {
+        /*}else {
             return "redirect:/group/joinGroup.do" + url1;
-        }
+        }*/
 
 
     }
@@ -98,91 +98,87 @@ public class GroupController {
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(),purchaseOrderId);
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
-        if (currentUser != null){
-            if(purchaseOrder.getOrderStatus().equals("5")){
-                if (groupId.equals("null")||groupId.isEmpty()){
-                    Group groupbuy = new Group();
-                    groupbuy.setManUser(currentUser);
-                    groupbuy.setStatus("1");
-                    groupbuy.setCreateDateTime(new Date());
-                    groupbuy.setGroupProduct(groupProduct);
-                    baseManager.saveOrUpdate(Group.class.getName(),groupbuy);
+        if(purchaseOrder.getOrderStatus().equals("5")){
+            if (groupId.equals("null")||groupId.isEmpty()){
+                Group groupbuy = new Group();
+                groupbuy.setManUser(currentUser);
+                groupbuy.setStatus("1");
+                groupbuy.setCreateDateTime(new Date());
+                groupbuy.setGroupProduct(groupProduct);
+                baseManager.saveOrUpdate(Group.class.getName(),groupbuy);
 
-                    Member member = new Member();
-                    member.setStatus("1");
-                    member.setGroup(groupbuy);
-                    member.setLevel("0");
-                    member.setUser(currentUser);
-                    baseManager.saveOrUpdate(Member.class.getName(),member);
+                Member member = new Member();
+                member.setStatus("1");
+                member.setGroup(groupbuy);
+                member.setLevel("0");
+                member.setUser(currentUser);
+                baseManager.saveOrUpdate(Member.class.getName(),member);
 
-                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
-                    purchaseOrderGroup.setStatus("1");
-                    purchaseOrderGroup.setGroup(groupbuy);
-                    purchaseOrderGroup.setMember(member);
-                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
-                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
+                PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                purchaseOrderGroup.setStatus("1");
+                purchaseOrderGroup.setGroup(groupbuy);
+                purchaseOrderGroup.setMember(member);
+                purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
-                    model.addAttribute("groupId",groupbuy.getId());
-                    String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
-                    return "redirect:/group/shareGroup.do"+url;
-                }else {
-                    Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
-                    Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
-                    String fatherLevel = fatherMember.getLevel();
-                    String level = String.valueOf(Integer.parseInt(fatherLevel)+1);
+                model.addAttribute("groupId",groupbuy.getId());
+                String url = "?groupProductId="+groupProductId+"&groupId="+groupbuy.getId()+"&memberId="+member.getId();
+                return "redirect:/group/shareGroup.do"+url;
+            }else {
+                Group group = (Group) baseManager.getObject(Group.class.getName(),groupId);
+                Member fatherMember = (Member) baseManager.getObject(Member.class.getName(),memberId);
+                String fatherLevel = fatherMember.getLevel();
+                String level = String.valueOf(Integer.parseInt(fatherLevel)+1);
 
-                    Member member = new Member();
-                    member.setStatus("1");
-                    member.setGroup(group);
-                    member.setLevel(level);
-                    member.setUser(currentUser);
-                    member.setSupMember(fatherMember);
-                    baseManager.saveOrUpdate(Member.class.getName(),member);
+                Member member = new Member();
+                member.setStatus("1");
+                member.setGroup(group);
+                member.setLevel(level);
+                member.setUser(currentUser);
+                member.setSupMember(fatherMember);
+                baseManager.saveOrUpdate(Member.class.getName(),member);
 
-                    PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
-                    purchaseOrderGroup.setStatus("1");
-                    purchaseOrderGroup.setGroup(group);
-                    purchaseOrderGroup.setMember(member);
-                    purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
-                    baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
+                PurchaseOrderGroup purchaseOrderGroup = new PurchaseOrderGroup();
+                purchaseOrderGroup.setStatus("1");
+                purchaseOrderGroup.setGroup(group);
+                purchaseOrderGroup.setMember(member);
+                purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
+                baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
-                    if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
-                        group.setStatus("3");
-                        baseManager.saveOrUpdate(Group.class.getName(),group);
-                        for(Member member1:group.getMemberList()){
-                            String userId = member1.getUser().getId();
-                            BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
-                            int i = 0;
-                            if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
-                                i = i + member1.getSubMemberList().size();
-                                for(Member member2:member1.getSubMemberList()){
-                                    if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
-                                        i = i + member2.getSubMemberList().size();
-                                    }
+                if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                    group.setStatus("3");
+                    baseManager.saveOrUpdate(Group.class.getName(),group);
+                    for(Member member1:group.getMemberList()){
+                        String userId = member1.getUser().getId();
+                        BigUser bigUser = (BigUser) baseManager.getObject(BigUser.class.getName(),userId);
+                        int i = 0;
+                        if(member1.getSubMemberList()!=null&&member1.getSubMemberList().size()>0){
+                            i = i + member1.getSubMemberList().size();
+                            for(Member member2:member1.getSubMemberList()){
+                                if(member2.getSubMemberList()!=null&&member2.getSubMemberList().size()>0){
+                                    i = i + member2.getSubMemberList().size();
                                 }
                             }
-                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                            member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
-                            baseManager.saveOrUpdate(Member.class.getName(),member1);
-                            baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
-
                         }
-                    }
+                        bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        baseManager.saveOrUpdate(Member.class.getName(),member1);
+                        baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
 
-                    model.addAttribute("groupId",group.getId());
-                    String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
-//                    return "redirect:/group/joinGroup.do"+url;
-                    return "redirect:/group/shareGroup"+url;
+                    }
                 }
 
+                model.addAttribute("groupId",group.getId());
+                String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
+//                    return "redirect:/group/joinGroup.do"+url;
+                return "redirect:/group/shareGroup"+url;
+            }
 
 
-            }
-            else {
-                return "/";//未支付成功
-            }
-        }else {
-            return "/";//用户未登录
+
+        }
+        else {
+            return "/";//未支付成功
         }
 
     }
