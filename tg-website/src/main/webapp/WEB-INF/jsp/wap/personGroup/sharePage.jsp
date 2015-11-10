@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>分享页面</title>
+    <title>要精品也要实惠！匠人手作非遗品，惊喜团购价，还有无上限红包，你还在等什么</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
