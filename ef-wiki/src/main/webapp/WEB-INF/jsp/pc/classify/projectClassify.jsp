@@ -303,7 +303,7 @@
             var isA = checkIsAttention(""+data[i].projectId);
             var word ="";
             if(isA==true){
-              word="取消关注";
+              word="已关注";
             }else{
               word="关注";
             }
