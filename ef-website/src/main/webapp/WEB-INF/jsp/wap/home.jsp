@@ -27,7 +27,7 @@
             <span><i class="icon"></i></span>
             <span>精&nbsp;选&nbsp;专&nbsp;题</span>
         </a>
-        <a class="item coupon" href="http://i.efeiyi.com/coupon/list">
+        <a class="item coupon" href="http://i.efeiyi.com/coupon/list?cf=4">
             <span><i class="icon"></i></span>
             <span>我&nbsp;的&nbsp;卡&nbsp;券</span>
         </a>
