@@ -2,6 +2,7 @@ package com.efeiyi.ec.personal;
 
 import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.personal.master.model.MasterModel;
+import com.efeiyi.ec.personal.master.model.MasterRecommendedModel;
 import com.efeiyi.ec.project.model.Project;
 
 import java.util.Date;

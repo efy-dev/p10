@@ -45,39 +45,66 @@ public class MasterMessageController {
 
 	@RequestMapping("/index.do")
 	public String mainPage(HttpServletRequest request , Model model) throws Exception {
-		if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
-			MyUser user = AuthorizationUtil.getMyUser();
-			if (user != null && user.getId() != null){
-				XQuery xQuery = new XQuery("listMasterFollow_default",request);
-				xQuery.put("user_id",user.getId());
-				List<MasterFollowed> list = baseManager.listObject(xQuery);
-				if (list != null && list.size() > 0){
-					model.addAttribute("result","show");
-				}else{
-					model.addAttribute("result","hide");
-				}
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user != null && user.getId() != null){
+			XQuery xQuery = new XQuery("listMasterFollow_default",request);
+			xQuery.put("user_id",user.getId());
+			List<MasterFollowed> list = baseManager.listObject(xQuery);
+			if (list != null && list.size() > 0){
+				model.addAttribute("result","show");
 			}else{
 				model.addAttribute("result","hide");
 			}
-			return "/masterMessage/masterMessageList";
+		}else{
+			model.addAttribute("result","hide");
 		}
 		return "/masterMessage/masterMessageList";
 	}
 
+//	@ResponseBody
+//	 @RequestMapping("/masterMessageList.do")
+//	 public List MasterMessageList(HttpServletRequest request) throws Exception {
+//		XQuery xQuery = new XQuery("plistMasterMessage_default", request);
+//		MyUser user = AuthorizationUtil.getMyUser();
+//		List<MasterMessage> messageList = baseManager.listObject(xQuery);
+//		for (MasterMessage message : messageList) {
+//			getPraiseStatus(message, user);
+//			message.setMasterId(message.getMaster().getId());
+//			message.setMasterName(message.getMaster().getFullName());
+//			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
+//			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+//		}
+//		return messageList;
+//	}
+
 	@ResponseBody
-	@RequestMapping("/masterMessageList.do")
-	public List MasterMessageList(HttpServletRequest request) throws Exception {
-		XQuery xQuery = new XQuery("plistMasterMessage_default", request);
+	@RequestMapping("/masterMessageList/{qm}/{size}/{index}")
+	public List MasterMessagePList(HttpServletRequest request , @PathVariable String qm , @PathVariable String size , @PathVariable String index) throws Exception {
+		XQuery xQuery = new XQuery(qm, request);
 		MyUser user = AuthorizationUtil.getMyUser();
-		List<MasterMessage> messageList = baseManager.listObject(xQuery);
-		for (MasterMessage message : messageList) {
-			getPraiseStatus(message, user);
-			message.setMasterId(message.getMaster().getId());
-			message.setMasterName(message.getMaster().getFullName());
-			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
-			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+		PageEntity pageEntity = new PageEntity();
+		if (index != null) {
+			pageEntity.setIndex(Integer.parseInt(index));
+			pageEntity.setSize(Integer.parseInt(size));
 		}
-		return messageList;
+		xQuery.setPageEntity(pageEntity);
+		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		List<MasterMessage> messageList = pageInfo.getList();
+		List<MasterModel> msgList = new ArrayList<>();
+		if (messageList != null && messageList.size() > 0){
+			for (MasterMessage message : messageList) {
+				message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(),user));
+				message.setFollowStatus(message.getMaster().getFollowStatus());
+				message.setPraiseStatus(getPraiseStatus(message, user));
+				message.setMasterId(message.getMaster().getId());
+				message.setMasterName(message.getMaster().getFullName());
+				message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
+				message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+				MasterModel msgModel = ConvertMasterModelUtil.convertMasterModel(message);
+				msgList.add(msgModel);
+			}
+		}
+		return msgList;
 	}
 
 	@RequestMapping("/getOnlyMasterMessageList.do")
@@ -135,9 +162,12 @@ public class MasterMessageController {
 
 	@ResponseBody
 	@RequestMapping("/collected.do")
-	public boolean collected(HttpServletRequest request) {
+	public String collected(HttpServletRequest request) {
 		String messageId = request.getParameter("messageId");
 		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null || user.getId() == null){
+			return "noRole";
+		}
 		String queryHql = "from MasterMessageStore s where s.masterMessage.id=:messageId and s.user.id=:userId";
 		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("messageId", messageId);
@@ -149,11 +179,11 @@ public class MasterMessageController {
 			store.setUser(user);
 			store.setMasterMessage(message);
 			baseManager.saveOrUpdate(MasterMessageStore.class.getName(), store);
-			return true;
+			return "add";
 		} else {
 			MasterMessageStore store = list.get(0);
 			baseManager.delete(MasterMessageStore.class.getName(), store.getId());
-			return false;
+			return "del";
 		}
 	}
 
@@ -479,14 +509,11 @@ public class MasterMessageController {
 	@RequestMapping("subMaster/{qm}/{size}/{index}")
 	public List getSubMaster(HttpServletRequest request , @PathVariable String qm , @PathVariable String size,@PathVariable String index)throws Exception{
 		MyUser user = AuthorizationUtil.getMyUser();
-//		String qm = request.getParameter("qm");
 		if (null == qm || "".equalsIgnoreCase(qm)) {
 			qm = "plistMaster_default";
 		}
 		XQuery query = new XQuery(qm, request);
 		PageEntity pageEntity = new PageEntity();
-//		String pageIndex = request.getParameter("pageEntity.index");
-//		String pageSize = request.getParameter("pageEntity.size");
 		if (index != null) {
 			pageEntity.setIndex(Integer.parseInt(index));
 			pageEntity.setSize(Integer.parseInt(size));
@@ -1135,483 +1162,6 @@ public class MasterMessageController {
 		return comment;
 	}
 
-//	@ResponseBody
-//	@RequestMapping("/praiseWorkComment.do")
-//	public String praiseWorkComment(HttpServletRequest request){
-//		String workId = request.getParameter("workId");
-//		String commId = request.getParameter("commentId");
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-//		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
-//		if (user.getId() == null){
-//			return "noRole";
-//		}
-//		String queryHql = "from MasterWorkPraise p where p.work.id=:workId and p.user.id=:userId and p.comment.id=:commId";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("workId",workId);
-//		queryMap.put("userId", user.getId());
-//		queryMap.put("commId",commId);
-//		MasterWorkPraise praise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-//		if (praise != null){
-//			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
-//			work.setAmount(work.getAmount()==null?0:work.getAmount() - 1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//			return "del";
-//		}else{
-//			MasterWorkPraise workPraise = new MasterWorkPraise();
-//			workPraise.setCreateDateTime(new Date());
-//			workPraise.setStatus("1");
-//			workPraise.setComment(comment);
-//			workPraise.setWork(work);
-//			workPraise.setUser(user);
-//			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),workPraise);
-//			work.setAmount(work.getAmount()==null?1:work.getAmount() + 1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(), work);
-//			return "add";
-//		}
-//		comment.getMasterMessage().setAmount(comment.getMasterMessage().getAmount()== null?1:comment.getMasterMessage().getAmount() + 1);
-//		return subComment;
-//	}
-
-//	@ResponseBody
-//	@RequestMapping("/subMainComment.do")
-//	public Object submitMainComment(HttpServletRequest request){
-//		String msgId = request.getParameter("msgId");
-//		String content = request.getParameter("content");
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user == null || user.getId() == null){
-//			return "noRole";
-//		}
-//		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
-//		MasterComment sub = new MasterComment();
-//		MasterComment main = new MasterComment();
-//		main.setId("0");
-//		sub.setCreateDateTime(new Date());
-//		sub.setUser(user);
-//		sub.setFatherComment(main);
-//		sub.setMasterMessage(msg);
-//		sub.setContent(content);
-//		sub.setAmount(0);
-//		sub.setStatus("1");
-//		baseManager.saveOrUpdate(MasterComment.class.getName(),sub);
-//		msg.setAmount(msg.getAmount()==null?1:msg.getAmount() + 1);
-//		return sub;
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/storeMessage.do")
-//	public String storeMessage(HttpServletRequest request){
-//		String msgId = request.getParameter("msgId");
-//		MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user == null || user.getId() == null){
-//			return "noRole";
-//		}
-//		String queryHql = "from MasterMessagePraise p where p.message.id=:msgId and p.user.id=:userId";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("msgId",msgId);
-//		queryMap.put("userId",user.getId());
-//		MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-//		if (praise == null){
-//			MasterMessagePraise messagePraise = new MasterMessagePraise();
-//			messagePraise.setStatus("1");
-//			messagePraise.setCreateDateTime(new Date());
-//			messagePraise.setMessage(message);
-//			messagePraise.setUser(user);
-//			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(),messagePraise);
-//			message.setPraiseNum(message.getPraiseNum()==null?1:message.getPraiseNum() + 1);
-//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
-//			return "add";
-//		}else{
-//			baseManager.delete(MasterMessagePraise.class.getName(),praise.getId());
-//			message.setPraiseNum(message.getPraiseNum()==null?0:message.getPraiseNum() - 1);
-//			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
-//			return "del";
-//		}
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/getComment.do")
-//	public List getCommentListByMsgId(HttpServletRequest request){
-//		String msgId = request.getParameter("msgId");
-//		String queryHql = "from MasterComment c where c.masterMessage.id=:msgId and c.fatherComment.id='0' order by createDateTime Desc";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("msgId",msgId);
-//		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
-//		if (list != null && list.size() > 0){
-//			return list;
-//		}else{
-//			return null;
-//		}
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/getSubCommentList.do")
-//	public List getSubCommentListByFatherId(HttpServletRequest request){
-//		String fatherId = request.getParameter("fatherId");
-//		String queryHql = "from MasterComment c where c.fatherComment.id=:fatherId order by createDateTime Desc";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("fatherId",fatherId);
-//		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
-//		if (list != null && list.size() > 0){
-//			return list;
-//		}else{
-//			return null;
-//		}
-//	}
-//
-//	@RequestMapping("/masterView/{masterId}")
-//	public String masterView(@PathVariable String masterId , Model model){
-////		String masterId = request.getParameter("masterId");
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
-//		if (user != null && user.getId() != null){
-//			String query = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
-//			LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-//			map.put("masterId",masterId);
-//			map.put("userId",user.getId());
-//			MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(query,map);
-//			if (followed != null){
-//				master.setFollowStatus("已关注");
-//			}
-//			if (followed == null || followed.getId() == null){
-//				master.setFollowStatus("关注");
-//			}
-//		}else{
-//			master.setFollowStatus("关注");
-//		}
-//		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-//		master.setFsAmount(master.getFsAmount()==null?0:master.getFsAmount());
-//		String queryHql = "from MasterWork f where f.master.id =:masterId";
-//		LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-//		map.put("masterId",masterId);
-//		List<MasterWork> list = baseManager.listObject(queryHql,map);
-//		model.addAttribute("workList",list);
-//		model.addAttribute("object",master);
-//		return "/masterDetails/masterDetails";
-//	}
-//
-//	@RequestMapping("/introView/{masterId}")
-//	public String introductionView(HttpServletRequest request , @PathVariable String masterId, Model model)throws Exception{
-//		//String masterId = request.getParameter("masterId");
-//		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user != null && user.getId() != null){
-//			String query = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
-//			LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-//			map.put("masterId",masterId);
-//			map.put("userId",user.getId());
-//			MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(query,map);
-//			if (followed != null){
-//				master.setFollowStatus("已关注");
-//			}
-//			if (followed == null || followed.getId() == null){
-//				master.setFollowStatus("关注");
-//			}
-//		}else{
-//			master.setFollowStatus("关注");
-//		}
-//		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-//		master.setFsAmount(master.getFsAmount()==null?0:master.getFsAmount());
-//		XQuery xQuery = new XQuery("listMasterBanner_default",request);
-//		XQuery query = new XQuery("listMasterIntroduction_default",request);
-//		xQuery.put("master_id",master.getId());
-//		query.put("master_id",master.getId());
-//		model.addAttribute("object",master);
-//		model.addAttribute("introductionList",baseManager.listObject(query));
-//		model.addAttribute("bannerList",baseManager.listObject(xQuery));
-//		return "/masterDetails/masterIntroduction";
-//	}
-//
-//	@RequestMapping("/classify")
-//	public String classify(HttpServletRequest request,Model model)throws Exception{
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user != null && user.getId() != null){
-//			XQuery xQuery = new XQuery("listMasterFollow_default",request);
-//			xQuery.put("user_id",user.getId());
-//			List<MasterFollowed> list = baseManager.listObject(xQuery);
-//			if (list != null && list.size() > 0){
-//				model.addAttribute("result","show");
-//			}else{
-//				model.addAttribute("result","hide");
-//			}
-//		}else{
-//			model.addAttribute("result","hide");
-//		}
-//		XQuery xQuery = new XQuery("listMasterProject_default",request);
-//		List<MasterProject> list = baseManager.listObject(xQuery);
-//		XQuery xQuery2 = new XQuery("listAddressProvince_asc",request);
-//		List<AddressProvince> list2 = baseManager.listObject(xQuery2);
-//		model.addAttribute("categoryList",list);
-//		model.addAttribute("cityList",list2);
-//		return "/classify/masterClassify";
-//	}
-//
-//	/****************************作品**************/
-//
-//	public String getFollowStatus(Master master , MyUser user){
-//		if (user != null && user.getId() != null){
-//			String queryHql = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status='1'";
-//			LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//			queryMap.put("masterId",master.getId());
-//			queryMap.put("userId",user.getId());
-//			MasterFollowed followed = (MasterFollowed) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-//			if (followed != null){
-//				master.setFollowStatus("已关注");
-//			}else{
-//				master.setFollowStatus("关注");
-//			}
-//		}else{
-//			master.setFollowStatus("关注");
-//		}
-//		return master.getFollowStatus();
-//	}
-//
-//	@RequestMapping("/getFollowBeforeList")
-//	public String getNoFollowMaster(HttpServletRequest request , Model model) throws Exception {
-//		List<MasterModel> list = marge(request);
-//		model.addAttribute("list",list);
-//		return "/masterFollowed/masterFollowedBefore";
-//	}
-//
-//	public List marge(HttpServletRequest request) throws Exception {
-//		XQuery xQuery = new XQuery("listMasterRecommend_default",request);
-//		List<MasterRecommended> list = baseManager.listObject(xQuery);
-//		List<MasterModel> masters = new ArrayList<>();
-//		if (list != null && list.size() > 0){
-//			for (MasterRecommended recommended : list){
-//				recommended.getMaster().setProjectName(mainMasterProject(recommended.getMaster().getMasterProjectList()));
-//				MasterModel masterModel = ConvertMasterModelUtil.convertMaster(recommended.getMaster());
-//				masters.add(masterModel);
-//			}
-//		}
-//		return masters;
-//	}
-//
-//	@RequestMapping("/forwardUrl")
-//	public String forwardUrl(){
-//		return "/masterFollowed/masterFollowedAfter";
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/getFollowAfterList/{qm}/{size}/{index}")
-//	public List getShowFollowMaster(HttpServletRequest request , @PathVariable String qm , @PathVariable String size , @PathVariable String index)throws Exception{
-//		if (null == qm || "".equalsIgnoreCase(qm)) {
-//			qm = "plistMasterFollow_default";
-//		}
-//		XQuery query = new XQuery(qm, request);
-//		query.put("user_id",AuthorizationUtil.getMyUser().getId());
-//		PageEntity pageEntity = new PageEntity();
-//		if (index != null) {
-//			pageEntity.setIndex(Integer.parseInt(index));
-//			pageEntity.setSize(Integer.parseInt(size));
-//		}
-//		query.setPageEntity(pageEntity);
-//		PageInfo pageInfo = baseManager.listPageInfo(query);
-//		List<MasterModel> list = new ArrayList<>();
-//		if (pageInfo.getList() != null && pageInfo.getList().size() > 0) {
-//			List<MasterFollowed> list1 = pageInfo.getList();
-//			for (MasterFollowed followed : list1) {
-//				XQuery xQuery = new XQuery("plistMasterMessage_default2",request);
-//				xQuery.put("master_id",followed.getMaster().getId());
-//				xQuery.put("creator_id",followed.getUser().getId());
-//				List<MasterMessage> list2 = baseManager.listObject(xQuery);
-//				if (list2 != null && list2.size() > 0){
-//					for (MasterMessage message : list2){
-//						message.setFollowStatus("已关注");
-//						MasterModel masterModel = ConvertMasterModelUtil.convertMasterModel(message);
-//						list.add(masterModel);
-//					}
-//				}
-//
-//			}
-//		}
-//		return list;
-//	}
-//
-//	@RequestMapping("/getPartWorks/{masterId}")
-//	public String getPartMasterWork(@PathVariable String masterId , Model model) throws Exception {
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		Master master = (Master) baseManager.getObject(Master.class.getName(),masterId);
-//		master.setProjectName(mainMasterProject(master.getMasterProjectList()));
-//		master.setFollowStatus(getFollowStatus(master,user));
-//		MasterModel mmd = ConvertMasterModelUtil.convertMaster(master);
-//		model.addAttribute("object",mmd);
-//		return "/masterDetails/masterWorkList";
-//	}
-//
-//	@RequestMapping("/getWorkDetails/{workId}")
-//	public String getMasterWorkDetails(@PathVariable String workId , Model model){
-////		String workId = request.getParameter("workId");
-//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-//		MasterModel workModel = ConvertMasterModelUtil.convertWork(work);
-//		work.getMaster().setProjectName(mainMasterProject(work.getMaster().getMasterProjectList()));
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		work.getMaster().setFollowStatus(getFollowStatus(work.getMaster(),user));
-//		model.addAttribute("object",work.getMaster());
-//		model.addAttribute("work",workModel);
-//		return "/masterDetails/masterWorkView";
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/getWorkComment.do")
-//	public List getWorkComment(HttpServletRequest request){
-//		String workId = request.getParameter("workId");
-//		String queryHql = "from MasterComment c where c.masterWork.id=:workId and c.fatherComment.id='0' order by createDateTime Desc";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("workId",workId);
-//		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
-//		if (list != null && list.size() > 0){
-//			return list;
-//		}else{
-//			return null;
-//		}
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/subWorkComment.do")
-//	public Object subWorkComment(HttpServletRequest request){
-//		String commId = request.getParameter("commId");
-//		String content = request.getParameter("content");
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user == null || user.getId() == null){
-//			return "noRole";
-//		}
-//		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
-//		MasterComment subComment = new MasterComment();
-//		subComment.setCreateDateTime(new Date());
-//		subComment.setUser(user);
-//		subComment.setFatherComment(comment);
-//		MasterWork masterWork = (MasterWork) baseManager.getObject(MasterWork.class.getName(),comment.getMasterWork().getId());
-//		subComment.setMasterWork(masterWork);
-//		subComment.setContent(content);
-//		subComment.setAmount(0);
-//		subComment.setStatus("1");
-//		baseManager.saveOrUpdate(MasterComment.class.getName(),subComment);
-//		comment.getMasterWork().setAmount(comment.getMasterWork().getAmount()== null?1:comment.getMasterWork().getAmount() + 1);
-//		return subComment;
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/getWorks/{qm}/{conditions}/{size}/{index}")
-//	public List getWorks(HttpServletRequest request , @PathVariable String qm  , @PathVariable String conditions , @PathVariable String size  , @PathVariable String index) throws Exception {
-//		//String url = "http://192.168.1.61:8082/importUsers";
-//
-//		XQuery xQuery = new XQuery(qm,request);
-//		xQuery.put("master_id",conditions);
-//		PageEntity entity = new PageEntity();
-//		entity.setIndex(Integer.parseInt(index));
-//		entity.setSize(Integer.parseInt(size));
-//		xQuery.setPageEntity(entity);
-//		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
-//		List<MasterModel> list = new ArrayList<>();
-//		List<MasterWork> works = pageInfo.getList();
-//		if (works != null && works.size() > 0) {
-//			for (MasterWork work : works){
-//				MasterModel masterModel = ConvertMasterModelUtil.convertWork(work);
-//				list.add(masterModel);
-//			}
-//		}
-//		return list;
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/praiseWork/{workId}")
-//	public String praiseWork(@PathVariable String workId){
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user.getId() == null){
-//			return "noRole";
-//		}
-//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-//		String queryHql = "from MasterWorkPraise p where p.user.id=:userId and p.work.id=:workId";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("userId",user.getId());
-//		queryMap.put("workId",work.getId());
-//		MasterWorkPraise praise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-//		if (praise != null){
-//			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
-//			work.setAmount(work.getAmount()==null?0:work.getAmount() -1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//			return "del";
-//		}else{
-//			MasterWorkPraise workPraise = new MasterWorkPraise();
-//			workPraise.setWork(work);
-//			workPraise.setUser(user);
-//			workPraise.setCreateDateTime(new Date());
-//			workPraise.setStatus("1");
-//			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),workPraise);
-//			work.setAmount(work.getAmount()==null?1:work.getAmount()+1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//			return "add";
-//		}
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/storeWork/{workId}")
-//	public String storedWork(@PathVariable String workId){
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user.getId() == null){
-//			return "noRole";
-//		}
-//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-//		String queryHql = "from MasterWorkStore p where p.user.id=:userId and p.work.id=:workId";
-//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-//		queryMap.put("userId",user.getId());
-//		queryMap.put("workId",work.getId());
-//		MasterWorkStore store = (MasterWorkStore) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
-//		if (store != null){
-//			baseManager.delete(MasterWorkStore.class.getName(),store.getId());
-//			work.setStoreAmount(work.getStoreAmount()==null?0:work.getStoreAmount() - 1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//			return "del";
-//		}else{
-//			MasterWorkStore story = new MasterWorkStore();
-//			story.setWork(work);
-//			story.setUser(user);
-//			story.setCreateDateTime(new Date());
-//			story.setStatus("1");
-//			baseManager.saveOrUpdate(MasterWorkStore.class.getName(),story);
-//			work.setStoreAmount(work.getStoreAmount() == null ? 1 : work.getStoreAmount()+1);
-//			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//			return "add";
-//		}
-//	}
-//
-//	@ResponseBody
-//	@RequestMapping("/commentWork.do")
-//	public Object commentWork(HttpServletRequest request){
-//		String content = request.getParameter("content");
-//		String workId = request.getParameter("workId");
-//		String fatherId = request.getParameter("fatherId");
-//		MyUser user = AuthorizationUtil.getMyUser();
-//		if (user == null || user.getId() == null){
-//			return "noRole";
-//		}
-//		if (content == null){
-//			return "nothing";
-//		}
-//		MasterWork work = (MasterWork) baseManager.getObject(MasterWork.class.getName(),workId);
-//		MasterComment comment = new MasterComment();
-//		if (!"0".equals(fatherId)){
-//			MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(),fatherId);
-//			comment.setFatherComment(fatherCom);
-//		}else{
-//			MasterComment fatherCom = new MasterComment();
-//			fatherCom.setId("0");
-//			comment.setFatherComment(fatherCom);
-//		}
-//		comment.setMasterWork(work);
-//		comment.setUser(user);
-//		comment.setContent(content);
-//		comment.setAmount(0);
-//		comment.setCreateDateTime(new Date());
-//		comment.setStatus("1");
-//		baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
-//		work.setAmount(work.getAmount()==null ? 1 :work.getAmount() + 1);
-//		baseManager.saveOrUpdate(MasterWork.class.getName(),work);
-//		return comment;
-//	}
-//
 	@ResponseBody
 	@RequestMapping("/praiseWorkComment.do")
 	public String praiseWorkComment(HttpServletRequest request){
