@@ -6,7 +6,7 @@
 <div class="search-list">
   <div class="search-home">
     <div class="logo">
-      <h1><a href="<c:url value='<%=basePath%>'/>"><img src="<c:url value='/META-INF/resources/resources/images/logo.png'/>"
+      <h1><a href="<c:url value='<%=basePath%>'/>"><img src="<c:url value='/resources/images/logo.png'/>"
                                                         width="160" height="72"/></a></h1>
     </div>
     <form id="form" method="get" action="<c:url value='/checkLabelPc.do'/>">

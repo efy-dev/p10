@@ -21,12 +21,7 @@ public class CasAuthenticationRedirect extends org.springframework.security.cas.
 
 
         if(serviceUrlBak==null)
-
-
-
             serviceUrlBak=getServiceProperties().getService();
-
-
         if(serviceUrlBak!=null){
             String ctx=request.getContextPath();
             String queryString=request.getQueryString();

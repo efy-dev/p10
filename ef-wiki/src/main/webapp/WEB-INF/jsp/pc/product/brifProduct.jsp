@@ -24,7 +24,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -147,7 +147,7 @@
             <ul class="rf">
               <li>
                 <div class="text">
-                  <h4>${product.master.fullName}</h4>
+                  <a href="http://${product.master.name}.efeiyi.com"><h4>${product.master.fullName}</h4></a>
                   <p>${product.name}</p>
                   <c:choose>
                     <c:when test="${product.master.level =='1'}">
@@ -175,7 +175,7 @@
                     </c:if>
                   </a>
                 </div>
-                <div class="img"><img src="${product.master.favicon}"></div>
+                <div class="img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a></div>
               </li>
             </ul>
             </c:if>
@@ -635,9 +635,19 @@ function getHfProduct(e){
           return false;
         }
         if(data2=="true" && oper=='up'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())+1);
         }
         if(data2=="true" && oper=='down'){
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
           $("#em1").html(parseInt($("#em1").text())-1);
         }
       },
@@ -646,11 +656,7 @@ function getHfProduct(e){
         return false;
       },
       complete:function(){
-        if($("#good-1").attr("name")=="down"){
-          $("#good-1").attr("name","up");
-        }else{
-          $("#good-1").attr("name","down");
-        }
+
 
 
       }
@@ -686,9 +692,19 @@ function getHfProduct(e){
         }
         if(data2=="true" && oper=='up'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())+1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
         if(data2=="true" && oper=='down'){
           $(data).children().eq(1).html(parseInt( $(data).children().eq(1).text())-1);
+          if( $(data).attr("name")=="up"){
+            $(data).attr("name","down");
+          }else{
+            $(data).attr("name","up");
+          }
         }
       },
       error:function(){
@@ -697,11 +713,7 @@ function getHfProduct(e){
       },
       complete:function(){
 
-        if( $(data).attr("name")=="up"){
-          $(data).attr("name","down");
-        }else{
-          $(data).attr("name","up");
-        }
+
       }
     });
   }
@@ -727,11 +739,13 @@ function getHfProduct(e){
           return false;
         }
         if(data=="repeat"){
-          alert("您已收藏过了！")
+          //alert("您已收藏过了！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
         if(data=="true"){
-          alert("您好，收藏成功！")
+          //alert("您好，收藏成功！");
+          $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').find('em').html('已收藏');
           return true;
         }
 
