@@ -45,6 +45,42 @@
         <div id="cover" style="display: none;"><em class="bg"></em><img src="<c:url value="/scripts/wap/upload/guide-share.png"/>"></div>
     </div>
 </div>
+<script type="text/javascript">
+    var tit = "要精品也要实惠！匠人手作非遗品，惊喜团购价，还有无上限红包，你还在等什么";//标题
+    var img = ${group.groupProduct.productModel.productModel_url}; //图片
+    var con = "小小小小参加了“瓷胎竹编茶具套装典藏版拼团，还差4人成团"; //简介
+    var link = "http://j.efeiyi.com/tg-website/group/joinGroup.do${url}"; //链接
+    document.addEventListener('WeixinJSBridgeReady搜索', function onBridgeReady() {
+// 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "appid": "123",
+                "img_url": img,
+                "img_width": "160",
+                "img_height": "160",
+                "link": link,
+                "desc": con,
+                "title": tit
+            }, function (res) {
+                _report('send_msg', res.err_msg);
+            })
+        });
+
+// 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": img,
+                "img_width": "160",
+                "img_height": "160",
+                "link": link,
+                "desc": con,
+                "title": tit
+            }, function (res) {
+                _report('timeline', res.err_msg);
+            });
+        });
+    }, false)
+</script>
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
