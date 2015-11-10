@@ -101,7 +101,7 @@
       <div class="co-page">
         <div class="introduce ae">
           ${group.groupProduct.productModel.product.productDescription.content}
-          <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+          <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${group.groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
         </div>
         <div class="tab-btn">
           <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
