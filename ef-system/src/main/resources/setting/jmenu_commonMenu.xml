@@ -285,6 +285,18 @@
                 <match url="/basic/xm.do?qm=formMasterWork"/>
                 <match url="/basic/xm.do?qm=formwikiMasterWork"/>
                 <match url="/basic/xm.do?qm=viewMasterwiki"/>
+                <match url="/basic/xm.do?qm=plistProductwiki_getProduct2"/>
+                <match url="/basic/xm.do?qm=plistProduct_defalut&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?qm=plistProduct_tenant&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?qm=viewProduct&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?qm=formProduct&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?qm=formProduct_Description&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?qm=formProduct_ProductModel&amp;view=newProduct2"/>
+                <match url="/product/saveNewProduct.do?view=newProduct2"/>
+                <match url="/basic/xm.do?qm=plistTenantProduct_default&amp;view=newProduct2"/>
+                <match url="/basic/xm.do?view=newProduct2"/>
+                <match url="/product/saveNewProduct.do?view=newProduct2"/>
+                <match url="/basic/xm.do?qm=plistProduct_default1&amp;view=newProduct2"/>
             </jnode>
 
         </jnode>
