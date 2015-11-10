@@ -23,7 +23,7 @@
 
 
 <div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=newProduct2&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProduct&view=wikiProduct&tenantId=${tenantId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建商品" />
     <input onclick="outExcel();" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="生成excel" />
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions};tenant.id:${tenantId}&tenantId=${tenantId}"/>
@@ -66,13 +66,13 @@
                                     <c:if test="${empty product.master}">
                                         <c:set var="masterId" value="0"/>
                                     </c:if>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=newProduct2&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=wikiProduct&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
                                         修改基本信息
                                     </a>
                                         <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_Description&view=${view}&id=${product.id}"/>">--%>
                                         <%--修改描述--%>
                                         <%--</a>--%>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=newProduct2&tenantId=${tenantId}&id=${product.id}"/>">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=wikiProduct&tenantId=${tenantId}&id=${product.id}"/>">
                                         修改规格
                                     </a>
                                     <c:if test="${product.status == '2'}">
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=newProduct2&id=${product.id}'/>">${product.name}</a></td>
+                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewProduct&view=wikiProduct&id=${product.id}'/>">${product.name}</a></td>
                         <td class="am-hide-sm-only">${product.serial}</td>
                         <td class="am-hide-sm-only">
                             <c:if test="${not empty product.project}">

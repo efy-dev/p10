@@ -24,13 +24,13 @@
 
   <fieldset>
     <legend class="" style="font-size: 17px">商品信息</legend>
-    <form action="<c:url value="/product/saveNewProduct.do?view=newProduct2"/>" method="post" class="am-form am-form-horizontal">
+    <form action="<c:url value="/product/saveNewProduct.do?view=wikiProduct"/>" method="post" class="am-form am-form-horizontal">
     <%--<form action="<c:url value="/basic/xm.do?view=${view}"/>" method="post" class="am-form am-form-horizontal">--%>
       <input type="hidden" name="id" value="${object.id}">
       <input type="hidden" name="qm" value="saveOrUpdateProduct">
       <input type="hidden" name="resultPage" value="0" />
       <input type="hidden" name="step" value="product">
-      <input type="hidden" name="view" value="newProduct2">
+      <input type="hidden" name="view" value="wikiProduct">
       <input type="hidden" name="tenant.id" value="">
       <input type="hidden" name="master.id" value="">
       <input type="hidden" name="project.id" value="">
@@ -163,10 +163,10 @@
                     <span style="padding: 10px;">
 
 
-                      <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct&view=newProduct2')"  class="am-btn am-btn-primary" value="保存"/>
+                      <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct&view=wikiProduct')"  class="am-btn am-btn-primary" value="保存"/>
 
 
-                         <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct_ProductModel&view=newProduct2')"  class="am-btn am-btn-primary" value="下一步"/>
+                         <input type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct_ProductModel&view=wikiProduct')"  class="am-btn am-btn-primary" value="下一步"/>
 
                       <%--<c:if test="${empty object.id}">--%>
                         <%--<input readonly="readonly" type="button" onclick="toSubmit('redirect:/basic/xm.do?qm=formProduct_ProductModel&view=${view}&tenantId=${tenantId}&id=${object.id}')"  class="am-btn am-btn-primary" value="下一步"/>--%>

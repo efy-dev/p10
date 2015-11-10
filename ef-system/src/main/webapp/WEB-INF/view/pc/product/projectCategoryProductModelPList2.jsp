@@ -23,7 +23,7 @@
 
 
 <div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewEcProjectCategory&view=newProduct2&id=${projectCategoryId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="返回" />
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=viewEcProjectCategory&view=wikiProduct&id=${projectCategoryId}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="返回" />
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">

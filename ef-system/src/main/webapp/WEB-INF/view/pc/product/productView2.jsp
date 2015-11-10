@@ -87,14 +87,14 @@
             <legend>
                 <c:if test="${view == 'newProduct'}">
                     <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=newProduct2')"
+                       onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=wikiProduct')"
                        href="javascript:void (0);">
                         返回列表
                     </a>
                 </c:if>
                 <c:if test="${view == 'tenant'}">
                     <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                       onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=newProduct2&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
+                       onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=wikiProduct&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
                        href="javascript:void (0);">
                         返回列表
                     </a>
@@ -105,7 +105,7 @@
                 <%--</a>--%>
             </legend>
             <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-               href="<c:url value="/basic/xm.do?qm=formProduct&view=newProduct2&id=${object.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
+               href="<c:url value="/basic/xm.do?qm=formProduct&view=wikiProduct&id=${object.id}&tenantId=${tenantId}&masterId=${masterId}"/>">
                 修改基本信息
             </a>
 
@@ -189,7 +189,7 @@
         </legend>
         <a style="width: 10%;" href="javascript:void(0);"
            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-           onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=newProduct2&id=${object.id}')">
+           onclick="toSubmit('1','redirect:/basic/xm.do?qm=viewProduct&view=wikiProduct&id=${object.id}')">
             保存商品描述
         </a>
 
@@ -199,7 +199,7 @@
                 <input type="hidden" name="id" value="${object.productDescription.id}">
                 <input type="hidden" name="product.id" value="${object.id}">
                 <input type="hidden" name="resultPage" value="0"/>
-                <input type="hidden" name="view" value="newProduct2">
+                <input type="hidden" name="view" value="wikiProduct">
                 <input type="hidden" name="step" value="description">
                 <label class="am-u-sm-3 am-form-label">商品描述</label>
 
@@ -220,7 +220,7 @@
 
         </legend>
         <a style="width: 10%;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-           href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=newProduct2&id=${object.id}"/>">
+           href="<c:url value="/basic/xm.do?qm=formProduct_ProductModel&view=wikiProduct&id=${object.id}"/>">
             修改规格
         </a>
 
@@ -470,12 +470,12 @@
                     <span style="padding: 10px;">
                         <c:if test="${view == 'newProduct'}">
                             <input type="button"
-                                   onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=newProduct2')"
+                                   onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistProduct_default&view=wikiProduct')"
                                    class="am-btn am-btn-primary" value="返回商品列表"/>
                         </c:if>
                          <c:if test="${view == 'tenant'}">
                              <input type="button"
-                                    onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=newProduct2&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
+                                    onclick="toSubmit('2','redirect:/basic/xm.do?qm=plistTENANTProduct_default&view=wikiProduct&conditions=tenant.id:${object.tenant.id}&tenantId=${object.tenant.id}')"
                                     class="am-btn am-btn-primary" value="返回商品列表"/>
                          </c:if>
 
