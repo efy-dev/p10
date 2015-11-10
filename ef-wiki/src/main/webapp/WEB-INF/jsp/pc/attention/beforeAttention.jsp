@@ -235,7 +235,7 @@
       data:"",
       dataType:"json",
       success:function(data){
-
+         var parentElement =$("#"+projectId).parent().parent();
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
@@ -251,12 +251,12 @@
         if(data=="true"){
           //$("#"+projectId).html("取消关注");
           mark = true;
-          $("#"+projectId).parent().parent().empty();
+          parentElement.empty();
           if(oper=="add" &&  mark == true){
-            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
+            parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
           }
           if(oper=="del" &&  mark == true){
-            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
+            parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
           }
 
 
@@ -264,12 +264,13 @@
         }
         if(data=="del"){
           //$("#"+projectId).html("关注");
+          parentElement.empty();
           mark = true;
           if(oper=="add" &&  mark == true){
-            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
+            parentElement.append("<div class=\"gz-q\"> <em about=\"del\" id=\""+projectId+"\">已关注</em> </div>");
           }
           if(oper=="del" &&  mark == true){
-            $("#"+projectId).parent().parent().append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
+            parentElement.append("<div class=\"gz-q\"><i class=\"gz-icon\"></i> <em about=\"add\" id=\""+projectId+"\">已关注</em> </div>");
           }
           return true;
         }
