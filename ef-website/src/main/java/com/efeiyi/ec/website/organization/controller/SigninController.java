@@ -30,7 +30,13 @@ import com.ming800.core.util.StringUtil;
 import com.ming800.core.util.VerificationCodeGenerator;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,6 +50,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -176,8 +183,12 @@ public class   SigninController extends BaseController {
     @RequestMapping("/sso.do")
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
+        String registeSuccess = request.getParameter("registeSuccess");
         if (redirect!=null){
             return "redirect:"+redirect;
+        }
+        if (registeSuccess!=null){
+            return "redirect:"+registeSuccess;
         }
         String userId = request.getParameter("userId");
         if (userId != null && !"".equals(userId)) {
@@ -230,10 +241,9 @@ public class   SigninController extends BaseController {
 
     @RequestMapping({"/forgetPwd"})
     public String forgetPwd(HttpServletRequest request ){
-
         return "/forgetPassword";
-
     }
+
     @RequestMapping({"/setPwd"})
     public String setPwd(HttpServletRequest request,Model model ) throws Exception {
        String username=request.getParameter("username");
@@ -263,6 +273,57 @@ public class   SigninController extends BaseController {
 
         return "redirect:" + url;
     }
+
+    @RequestMapping("/wx/login")
+    public String wxLogin(HttpServletRequest request,Model model)throws Exception{
+        String result = "";
+        //1、网页授权后获取传递的code，用于获取openId
+        String code = request.getParameter("code");
+        if (request.getSession().getAttribute(code) != null) {
+            result = request.getSession().getAttribute(code).toString();
+        } else {
+
+            System.out.println("1、 page code value：" + code);
+            String urlForOpenId = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
+            result = HttpUtil.getHttpResponse(urlForOpenId, null);
+            request.getSession().setAttribute(code, result);
+        }
+        System.out.println("2、get openid result：" + result);
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.containsKey("errcode")) {
+            throw new RuntimeException("get openId error：" + result);
+        }
+        String unionid = jsonObject.getString("unionid");
+        LinkedHashMap<String,Object> param = new LinkedHashMap<>();
+        param.put("unionid",unionid);
+        Consumer consumer = (Consumer)baseManager.getUniqueObjectByConditions("select obj from Consumer obj where obj.unionid=:unionid",param);
+        MyUser myUser = (MyUser)baseManager.getObject(MyUser.class.getName(),consumer.getId());
+        AuthenticationManager am = new SampleAuthenticationManager();
+        try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(myUser, myUser.getPassword());
+            Authentication authentication2 = am.authenticate(authentication);
+            Object obj = authentication2.getPrincipal();
+            SecurityContextHolder.getContext().setAuthentication(authentication2);
+        } catch (AuthenticationException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+        return "redirect:"+request.getParameter("redirect");
+    }
+
+
+    private static class SampleAuthenticationManager implements AuthenticationManager {
+        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
+
+        static {
+            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+            return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
+                    auth.getCredentials(), AUTHORITIES);
+        }
+    }
+
 
     @RequestMapping({"/wx/bind"})
     public String getWxOpenId(HttpServletRequest request, Model model) throws Exception {
