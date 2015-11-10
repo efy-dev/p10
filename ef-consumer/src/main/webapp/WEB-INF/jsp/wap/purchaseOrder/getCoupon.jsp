@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -69,8 +70,20 @@
       </li>
     </ul>
     <div class="aclass">
-      <a href="#">返&nbsp;回&nbsp;订&nbsp;单</a>
-      <a href="#">使&nbsp;用</a>
+      <a href="<%=PConst.HOSTNAME%>">返&nbsp;回&nbsp;首&nbsp;页</a>
+      <c:if test="${coupon.couponBatch.range ==1}">
+        <a href="<%=PConst.HOSTNAME%>">使&nbsp;用</a>
+      </c:if>
+      <c:if test="${coupon.couponBatch.range ==2}">
+        <a href="<%=PConst.HOSTNAME%>/product/list/${coupon.couponBatch.project.id}">使&nbsp;用</a>
+      </c:if>
+      <c:if test="${coupon.couponBatch.range ==3}">
+        <a href="<%=PConst.HOSTNAME%>/tenant/${coupon.couponBatch.tenant.id}">使&nbsp;用</a>
+      </c:if>
+      <c:if test="${coupon.couponBatch.range ==4}">
+        <a href="<%=PConst.HOSTNAME%>/product/productModel/${coupon.couponBatch.product.productModelList.get(0).id}">使&nbsp;用</a>
+      </c:if>
+
     </div>
   </form>
 </div>
@@ -126,7 +139,7 @@
         </li>
       </ul>
       <div class="aclass">
-        <a href="#">返&nbsp;回&nbsp;订&nbsp;单</a>
+        <a href="<%=PConst.HOSTNAME%>">返&nbsp;回&nbsp;首&nbsp;页</a>
         <a href="#">使&nbsp;用</a>
       </div>
     </form>
