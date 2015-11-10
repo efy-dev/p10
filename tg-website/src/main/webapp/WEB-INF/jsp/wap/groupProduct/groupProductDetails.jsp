@@ -86,7 +86,7 @@
             <div class="co-page">
                 <div class="introduce ae">
                     ${groupProduct.productModel.product.productDescription.content}
-                    <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+                    <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
                 </div>
                 <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
             </div>

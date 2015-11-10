@@ -195,6 +195,18 @@
                         <condition name="couponBatch.endDate" defaultValue="1" operation="ge"/>
                         <condition name="uniqueKey" defaultValue="1" operation="eq"/>
                     </query>
+                    <query name="pdyhq" label="判断优惠券" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                        <condition name="couponBatch.id" defaultValue="1" operation="eq"/>
+                        <condition name="whetherBind" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="qbyhq" label="全部优惠券" type="auto" orderBy="id:desc">
+                        <condition name="couponBatch.id" defaultValue="1" operation="eq"/>
+                    </query>
+                    <query name="have" label="用户已领取" type="auto" orderBy="id:desc">
+                        <condition name="couponBatch.id" defaultValue="1" operation="eq"/>
+                        <condition name="consumer.id" defaultValue="${MY_USER}" operation="eq"/>
+                    </query>
                 </do>
             </does>
         </entity>

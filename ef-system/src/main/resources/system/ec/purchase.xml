@@ -360,5 +360,16 @@
             </does>
         </entity>
 
+
+
+        <entity name="cartProduct" label="cartProduct"
+                basic="simple" others=""
+                model="com.efeiyi.ec.purchase.model.CartProduct">
+            <does>
+
+                <do name="formActivity" label="保存cartProduct" access="" result="/activity/activityForm"/>
+
+            </does>
+        </entity>
     </entities>
 </module>

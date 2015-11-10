@@ -2,6 +2,7 @@ package com.efeiyi.ec.system.purchaseOrder.controller;
 
 
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
+import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
 import com.efeiyi.ec.system.purchaseOrder.service.PurchaseOrderManager;
 import com.efeiyi.ec.system.purchaseOrder.service.SmsCheckManager;
 import com.efeiyi.ec.system.util.HTTPParam;
@@ -9,17 +10,16 @@ import com.efeiyi.ec.system.util.HTTPSend;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.p.PConst;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/18.
@@ -274,4 +274,37 @@ public class PurchaseOrderController extends BaseController {
             }
         }
     }
+
+
+    @RequestMapping("/edingyue.do")
+    @ResponseBody
+    public void eDingYue(HttpServletRequest request,HttpServletResponse response){
+        String param = request.getParameter("param");
+        JSONObject jsonObject = JSONObject.fromObject(param);
+        JSONObject jsonObject1 = jsonObject.getJSONObject("lastResult");
+        String purchaseOrderSerial = jsonObject1.getString("nu");
+        if("1".equals(jsonObject1.getString("ischeck"))){
+            String hql = "from PurchaseOrderDelivery c where c.serial=:serial ";
+            LinkedHashMap<String, Object> hm = new LinkedHashMap<>();
+            hm.put("serial",purchaseOrderSerial);
+            PurchaseOrderDelivery purchaseOrderDelivery = (PurchaseOrderDelivery) baseManager.listObject(hql, hm).get(0);
+            PurchaseOrder purchaseOrder = purchaseOrderDelivery.getPurchaseOrder();
+            if("7".equals(purchaseOrder.getOrderStatus())){
+                purchaseOrder.setOrderStatus("9");
+                baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
+
+            }
+        }
+        JSONObject result = new JSONObject();
+        result.put("result","true");
+        result.put("returnCode","200");
+        result.put("message","成功");
+        try {
+            response.getWriter().print(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
