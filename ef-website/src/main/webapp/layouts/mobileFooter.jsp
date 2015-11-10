@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do" class="btn-reg"
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
@@ -77,7 +77,8 @@
         display: none;
     }
     .MEIQIA-ICON {
-        background:url(http://www.efeiyi.com/scripts/wap/images/qq.png) no-repeat -176px -143px;
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background-size: auto auto;
     }
     #MEIQIA-BTN-ICON {
         width: 23px;
@@ -97,7 +98,6 @@
             return false;
         }
     }
-    if (isWeiXin()==false) {
         (function(m, ei, q, i, a, j, s) {
             m[a] = m[a] || function() {
                         (m[a].a = m[a].a || []).push(arguments)
@@ -109,7 +109,6 @@
             s.parentNode.insertBefore(j, s)
         })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
         _MEIQIA('entId', 486);
-    }
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 

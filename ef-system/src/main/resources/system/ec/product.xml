@@ -84,7 +84,13 @@
                         </fields>
                     </page>
                 </do>
-
+                <do name="plistProductwiki" access="" label="产品分页列表"
+                    result="/product/productPList2" execute="com.efeiyi.ec.system.product.controller.listProductHandler">
+                <query name="getProduct2" label="默认" type="auto" orderBy="id:desc">
+                    <condition name="status" defaultValue="0" operation="ne" label="状态" inputType="default"/>
+                    <condition name="project.id" operation="eq" defaultValue="0" label="项目"/>
+                </query>
+                </do>
                 <do name="removeProduct" label="删除产品" access="" result="json"/>
                 <do name="formProduct" label="保存产品页" access="" result="/product/productForm" execute="com.efeiyi.ec.system.product.controller.toFormProductHandler"/>
                 <do name="formProduct_Description" label="保存产品页" access="" result="/productDescription/productDescriptionForm" />
@@ -283,10 +289,10 @@
                 <do name="saveOrUpdateProductPicture" label="保存产品描述" access="" result="/productPicture/productPictureSaveSuccess"
                     execute="com.efeiyi.ec.system.product.controller.BasicBannerFormHandler" />
                 <do name="listProductPicture" label="产品描述列表" access="" result="/productPicture/productPictureList">
-                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default" label="默认" type="auto" orderBy="sort:desc">
                         <condition label="产品主键" name="id" defaultValue="1" operation="eq"/>
                     </query>
-                    <query name="default2" label="默认" type="auto" orderBy="id:desc">
+                    <query name="default2" label="默认" type="auto" orderBy="sort:desc">
                         <condition label="product.id" name="product.id" defaultValue="1" operation="eq"/>
                         <condition label="productModel.id" name="productModel.id" defaultValue="1" operation="eq"/>
                         <condition label="status" name="status" defaultValue="2" operation="eq"/>

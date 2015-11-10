@@ -418,5 +418,71 @@ public class CouponController {
         return "/purchaseOrder/couponMessage";
 
     }
+    @RequestMapping("yhq.do")
+    public String yhq(HttpServletRequest request,Model model){
+        model.addAttribute("couponBatchId",request.getParameter("couponBatchId"));
+        return "/yhq";
+    }
+    @RequestMapping("/getYhq.do")
+    public String  getYhq(HttpServletRequest request,Model model) throws Exception {
+        Coupon coupon=null;
+        Date date=new Date();
+        String couponBatchId =request.getParameter("couponBatchId");
+
+        Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), AuthorizationUtil.getMyUser().getId());
+        CouponBatch couponBatch= (CouponBatch) baseManager.getObject(CouponBatch.class.getName(),couponBatchId);
+
+        XQuery xQuery1=new XQuery("listCoupon_have",request);
+        xQuery1.put("couponBatch_id",couponBatchId);
+        xQuery1.put("consumer_id",consumer.getId());
+         List haveUser=baseManager.listObject(xQuery1);
+        synchronized (this) {
+            if (couponBatch != null) {
+
+                if (haveUser == null || haveUser.size() == 0) {
+
+                    XQuery xQuery3 = new XQuery("listCoupon_qbyhq", request);
+                    xQuery3.put("couponBatch_id", couponBatchId);
+                    List yhqList = baseManager.listObject(xQuery3);
+
+                    XQuery xQuery2 = new XQuery("listCoupon_pdyhq", request);
+                    xQuery2.put("couponBatch_id", couponBatchId);
+                    List result = baseManager.listObject(xQuery2);
+                    if (yhqList.size() != couponBatch.getAmount()) {
+                        coupon = new Coupon();
+                        coupon.setConsumer(consumer);
+                        coupon.setStatus("1");
+                        coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                        coupon.setCouponBatch(couponBatch);
+                        coupon.setWhetherBind("2");
+                        coupon.setBindTime(date);
+                        baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                        model.addAttribute("yhq", coupon);
+                    } else if (result.size() > 0 || result != null) {
+                        coupon = (Coupon) result.get(0);
+                        coupon.setConsumer(consumer);
+                        coupon.setWhetherBind("2");
+                        coupon.setBindTime(date);
+                        baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                        model.addAttribute("yhq", coupon);
+                    } else {
+
+                        model.addAttribute("yhq", null);
+
+                    }
+                } else {
+
+                    model.addAttribute("yhq", null);
+                }
+
+
+            } else {
+
+                model.addAttribute("yhq", null);
+
+            }
+        }
+        return "/getYhq";
+    }
 
 }

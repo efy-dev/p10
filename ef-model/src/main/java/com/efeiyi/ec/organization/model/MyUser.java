@@ -60,6 +60,8 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
 
     private BigUser bigUser;
 
+
+
     private Date lastLoginDatetime;//最后一次登陆时间
     private Date lastLogoutDatetime;//最后一次登陆时间
 
