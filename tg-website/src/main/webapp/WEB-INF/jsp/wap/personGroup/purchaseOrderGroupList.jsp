@@ -79,7 +79,7 @@
                 <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==5}">
                   <span>组团失败-等待付款</span>
                 </c:if>
-                <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus==18}">
+                <c:if test="${purchaseOrderGroup.purchaseOrder.orderStatus!=1}">
                   <span>组团失败-已付款</span>
                 </c:if>
               </c:if>

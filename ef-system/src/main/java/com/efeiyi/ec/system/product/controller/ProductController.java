@@ -256,31 +256,49 @@ public class ProductController extends BaseController {
     public String saveNewProduct(Product product, ProductDescription productDescription,
                                  ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
+                                 MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
 
-        model.addAttribute("view", request.getParameter("view"));
+        model.addAttribute("view",request.getParameter("view"));
 
 
         if ("product".equals(step)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String identify = sdf.format(new Date());
+            String url = "";
+            if(multipartRequest.getFile("picture_url1")!=null) {
+                if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
+                    url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
+                    product.setPicture_url(url);
 
+                }
+            }
 //            try {
 //                Product product1 =        productManager.saveProduct(product);
 //                System.out.print(product1.getMaster().getName());
 //            }catch (Exception e){
 //
 //            }
-            Product temProduct = productManager.saveProduct(product);
+            try {
+                Product temProduct = productManager.saveProduct(product);
+                //  &tenantId=${tenantId}&masterId=${masterId}&id=
+                String tenantId = "0";
+                String masterId = "0";
+                if (temProduct.getTenant() != null) {
+                    tenantId = temProduct.getTenant().getId();
+                }
+                if (temProduct.getMaster() != null) {
+                    masterId = temProduct.getMaster().getId();
+                }
+                resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+                aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             //  model.addAttribute("object",productManager.saveProduct(product));
-            //  &tenantId=${tenantId}&masterId=${masterId}&id=
-            String tenantId = "0";
-            String masterId = "0";
-            if (temProduct.getTenant() != null) {
-                tenantId = temProduct.getTenant().getId();
-            }
-            if (temProduct.getMaster() != null) {
-                masterId = temProduct.getMaster().getId();
-            }
-            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+
+
 
         } else if ("description".equals(step)) {
 
