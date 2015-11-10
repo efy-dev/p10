@@ -30,13 +30,13 @@ $(function(){
         })
     })();
     //
-    //$('.my-order .extra-r>a').click(function(){
-    //    $(this).siblings('.active-pop').show();
-    //    $('.my-order .clase, .my-order .sh-bg').click(function(){
-    //        $(this).parents('.active-pop').hide();
-    //    })
-    //    return false;
-    //});
+    /*$('.my-order .extra-r>a').click(function(){
+     $(this).siblings('.active-pop').show();
+     $('.my-order .clase, .my-order .sh-bg').click(function(){
+     $(this).parents('.active-pop').hide();
+     })
+     return false;
+     });*/
     //
     $('#act-q').click(function(){
         $(this).siblings('.list-express').slideToggle();
@@ -75,12 +75,12 @@ $(function(){
         alert('sadasdsa')
         $(this).parent().find('.common-popup').show()
     })
-    //��������
+    //帮助中心
     $('.help-order .page .left dt').click(function(){
         $(this).toggleClass('active');
         $(this).siblings('dd').slideToggle('fast');
     })
-    //�ҵĿ�ȯ
+    //我的卡券
     $('.my-kj .am-tabs-nav .ul-list li.items').click(function(){
         var amTabPanel=$(this).parents('.ul-list').siblings('.am-tabs-bd');
         var $index=$(this).index();
@@ -88,5 +88,20 @@ $(function(){
         amTabPanel.find('.am-tab-panel').eq($index).show().siblings('.am-tab-panel').hide();
         return false
     })
-
+    ////010213卡券弹出
+    //$('#efeiyi-dh').click(function(){
+    //    $(this).siblings('.ytacu').show();
+    //    $('.ytacu .dh .no').click(function(){
+    //        $(this).parent().parent().parent().parent().find('.ytacu').hide();
+    //    })
+    //    return false
+    //})
+    //010213卡券弹出2
+    //$('#efeiyi-dh').click(function(){
+    //    $(this).siblings('#ytacu2').show();
+    //    $('.ytacu .cg .btn').click(function(){
+    //        $(this).parent().parent().parent().parent().find('#ytacu2').hide();
+    //    })
+    //    return false
+    //})
 })

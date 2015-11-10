@@ -33,6 +33,7 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取当前请求的路径
         String requestUrl = request.getRequestURL().toString();
+        String requestParam  = request.getQueryString();
         if (request.getParameter("weixinTest") != null) {
             boolean isWeixin = HttpUtil.isWeixin(request);
             if (isWeixin) {
@@ -43,7 +44,7 @@ public class DriverInterceptor extends HandlerInterceptorAdapter {
                             "&redirect_uri=" +
                             URLEncoder.encode(redirect_uri, "UTF-8") +
                             "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-                    response.sendRedirect(url);
+                    response.sendRedirect(url+"?"+requestParam);
                 }
             }
         }

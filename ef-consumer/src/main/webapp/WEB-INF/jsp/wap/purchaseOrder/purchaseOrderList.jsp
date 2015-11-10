@@ -32,7 +32,7 @@
 		<ul>
 			<li class="am-u-sm-6 "><a href="<c:url value="/purchaseCollect/wapCollectList.do"/>"
 									  style="padding: 15px 0;"><p>商品收藏</p></a></li>
-			<li class="am-u-sm-6 ac-ave1"><a href="<c:url value="/coupon/list"/>"><p>我的卡券</p></a></li>
+			<li class="am-u-sm-6 ac-ave1"><a href="<c:url value="/coupon/list?cf=4"/>"><p>我的卡券</p></a></li>
 		</ul>
 	</div>
 	<div class="order-list">
