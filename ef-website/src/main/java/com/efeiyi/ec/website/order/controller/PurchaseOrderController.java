@@ -63,15 +63,22 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
     public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        ProductModel productModel = new ProductModel();
+        productModel.setId(groupProduct.getProductModel().getId());
+        productModel.setProduct(groupProduct.getProductModel().getProduct());
+        productModel.setPrice(groupProduct.getGroupPrice());
+        productModel.setAmount(groupProduct.getProductModel().getAmount());
+        productModel.setName(groupProduct.getProductModel().getName());
+
         CartProduct cartProduct = new CartProduct();
         String callback = request.getParameter("callback");
-        cartProduct.setProductModel(groupProduct.getProductModel());
+        cartProduct.setProductModel(productModel);
 //        String amount = request.getParameter("amount");
         cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
-        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
+//        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
         cartProductList.add(cartProduct);
         Map<String, List> productMap = new HashMap<>();
         productMap.put(groupProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
@@ -110,7 +117,7 @@ public class PurchaseOrderController extends BaseController {
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
-        model.addAttribute("productModel", groupProduct.getProductModel());
+        model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
         model.addAttribute("isEasyBuy", true);
         model.addAttribute("callback", callback);
@@ -193,7 +200,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
-        model.addAttribute("cart",cart);
+        model.addAttribute("cart", cart);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
