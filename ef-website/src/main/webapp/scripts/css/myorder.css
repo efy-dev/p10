@@ -12,9 +12,15 @@ a:hover { text-decoration: underline }
 .myod-text3 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat -144px -51px; float: left; }
 /*我的e非遗*/
 .myod-text4 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat -158px 0px; float: left; }
+/*登录*/
+.myod-text5 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  0px -167px; float: left; }
+/*忘记密码*/
+.myod-text6 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  -158px -167px; float: left; }
+/*注册中转页*/
+.myod-text6 { width: 127px; height: 51px; background: url(../images/myorder-head.jpg) no-repeat  0 -251px; float: left; }
 /*各页面头部*/
 /*--reset--*/
-.wh1 { width: 100%; float: left; margin-bottom: 27px; }
+.wh1 { width: 100%; float: left; margin-bottom: 27px;position: relative;z-index: 1; }
 /*//End--commmon*/
 .my-order .order-nav { width: 1000px; height: auto; margin: 0 auto; overflow: hidden; margin: 62px auto 150px; }
 .my-order .order-nav .layout-nav { float: left; width: 110px; height: auto; padding: 20px 14px 25px; border: 1px solid #ccc; }
@@ -301,10 +307,10 @@ a:hover { text-decoration: underline }
 /*******************购物车************************/
 
 /*购物车页面*/
-.efeiyi-cart { margin: 70px auto 0; min-height: 580px; }
+.efeiyi-cart { margin: 70px auto 0; min-height:710px; }
 .efeiyi-cart .title table { width: 1000px; margin: 0 auto; }
 .efeiyi-cart .title table td { line-height: 40px; text-align: left; font-size: 12px; color: #666; font-family: simsun; font-weight: normal }
-.efeiyi-cart .wh1 { width: 100%; float: left; min-height: 700px; }
+.efeiyi-cart .wh1 { width: 100%; float: left}
 .efeiyi-cart .title table td label { font-size: 12px; color: #666; font-family: simsun; font-weight: normal; line-height: 12px; }
 .efeiyi-cart .active-box { padding-left: 16px; }
 .efeiyi-cart input[type=checkbox] { vertical-align: middle; width: 12px; height: 12px; border: 1px solid #ccc; }
@@ -645,10 +651,10 @@ a:hover { text-decoration: underline }
 .sp-restore .sp-re-party .sp-le-portrait img { width: 100%; height: 100%; border-radius: 100%; }
 /*我的资讯*/
 /*我的评价*/
-.evaluation .evaluation-nav { width: 851px; float: right; border: 1px solid #ccc; }
+.evaluation .evaluation-nav { width: 852px; float: right; border: 1px solid #ccc; }
 .evaluation .my-order .title table { border: 0; }
 .evaluation .evaluation-nav .sp-page { float: left; text-align: center; width: 100%; height: 45px; line-height: 45px; font-size: 14px; font-family: simsun; }
-.evaluation .appraise { width: 851px; float: right; border: 1px solid #ccc; margin-top: -1px; }
+.evaluation .appraise { width: 852px; float: right; border: 1px solid #ccc; margin-top: -1px; }
 .evaluation .list-refer { padding-left: 45px; }
 .evaluation .list-refer dl dt { width: 55px; height: 55px; float: left; border: 1px solid #ccc; }
 .evaluation .list-refer dl dt img { width: 100%; }
@@ -666,6 +672,7 @@ a:hover { text-decoration: underline }
 .evaluation .mutual .parameter .data { width: 100%; float: left; }
 .evaluation .mutual .parameter .data .data-list { padding-bottom: 30px; width: 100%; float: left; position: relative; }
 .evaluation .mutual .parameter .data .data-list label { float: left; width: 50px; font-size: 12px; font-family: simsun; font-weight: 100 }
+.evaluation .mutual .parameter .data .data-list .lab{line-height: 40px;}
 .evaluation .mutual .parameter .data .data-list .starbox { float: left; width: 300px; position: absolute; top: -17px; left: 50px; }
 .evaluation #quacorgrading input { width: 18px; height: 18px; cursor: pointer; background: url('../images/efeiyi-icon.png') no-repeat scroll -36px -21px; }
 .evaluation .mutual .parameter .data .data-list .tally { float: left; width: 100%; margin: 0; }
@@ -832,20 +839,20 @@ a:hover { text-decoration: underline }
 /*注册修改兼容ie*/
 .login-form .msg-tips .msg { -ms-transform: none!important; }
 /*注册修改样式*/
-.reg-form .btn-p1 { width: 112px; height: 36px; line-height: 36px; text-align: center; border: 1px solid #ccc; float: left; text-decoration: none; font-family: KaiTi; background: #fff; transition: all 0.5s; }
+.reg-form .btn-p1 { width: 112px; height: 36px; line-height: 36px; text-align: center; border: 1px solid #ccc; float: left; text-decoration: none;background: #fff; transition: all 0.5s; }
 .reg-form .btn-p1:hover { background: #000; color: #fff; }
 /*我的卡券套用amazeui样式修改 my-kj*/
 .my-kj .am-tabs-default .am-tabs-nav a {font-size: 14px!important; color: #999!important; text-decoration: none; background: #fff; border: 1px solid #ccc; outline: none; }
 .my-kj .am-tabs-default .am-tabs-nav>.am-active a { font-size: 14px!important; color: #fff!important; text-decoration: none; background: #000; border: 1px solid #000; }
 .my-kj .am-tabs-bd { top: 30px; border-top: 1px solid #ccc; border: 1px solid #ccc; float: left }
 .my-kj .am-tabs-bd .am-tab-panel { padding: 0 23px; }
-.am-tabs-bd .am-tab-panel.am-active~.am-tab-panel
+
 .my-kj .am-tabs-nav .ul-list {
     width: 100%;
     float: left;
     margin-left: 1px;
 }
-.my-kj .am-tabs-nav .ul-list li.items {
+.my-kj .am-tabs-nav .ul-list li.items1 {
     width: 220px;
     line-height: 47px;
     text-align: center;
@@ -855,6 +862,7 @@ a:hover { text-decoration: underline }
     cursor: pointer;
 
 }
+.my-kj .am-tabs-nav .ul-list li.items1 a{width: 100%;float: left;height: 100%}
 .my-kj .am-tabs-nav .ul-list li.items a {color:#999}
 .my-kj .am-tabs-nav .ul-list li a:hover {text-decoration: none}
 .my-kj .am-tabs-nav .ul-list li.active {
@@ -872,6 +880,18 @@ a:hover { text-decoration: underline }
     border: 1px solid #000;
     float: right;
     text-align: center;
+    cursor: pointer;
+}
+.my-kj .am-tabs-nav .ul-list li.items2 a{
+    color: #000;
+    width: 100%;
+    float: left;
+}
+
+.my-kj .am-tabs-bd .am-tab-panel.am-active~.am-tab-panel {
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
 }
 
 
@@ -882,11 +902,11 @@ a:hover { text-decoration: underline }
 .my-kj .serial-list-page .list-hd { padding-top: 26px; font-size: 14px; float: left; width: 100%; color: #000; }
 .my-kj .serial-list-page .list-zq { width: 100%; float: left; }
 .my-kj .serial-list-page .list-zq .serial-list { width: 100%; float: left; border-bottom: 1px solid #ccc; margin-bottom: -1px; padding: 26px 0 38px 0; }
-.my-kj .serial-list-page .list-zq .serial-list .list1 { width: 208px;height:111px; margin-right: 98px; float: left; margin-left: 14px;
+.my-kj .serial-list-page .list-zq .serial-list .list1 { width:251px;height:111px; margin-right:55px; float: left; margin-left: 14px;
     position: relative;}
 .my-kj .serial-list-page .list-zq .serial-list .list1 em.bg1 {
     background:url(../images/coupon.png) no-repeat 0 0;
-    width:208px;
+    width:251px;
     height:111px;
     position: absolute;
     top:0;
@@ -907,18 +927,19 @@ a:hover { text-decoration: underline }
     font-size: 20px;
     position: absolute;
     top: 8px;
-    right: 23px;
+    right: 17px;
     z-index: 2;
     color: #fff;
     line-height: 30px;
 }
+
 .my-kj .serial-list-page .list-zq .serial-list .list1 strong {
-    width:120px;
+    width:146px;
     height: 111px;
     line-height:111px;
     position: absolute;
     top: 0;
-    left: 32px;
+    left: 46px;
     z-index: 2;
     font-size:95px;
     color: #fff;
@@ -1093,7 +1114,7 @@ a:hover { text-decoration: underline }
     margin-bottom:100px;}
 /*优惠券状态1*/
 .coupons{width: 1200px;height: 600px;background:url(../images/imgyhq.png) no-repeat;margin: 0 auto;position: relative}
-.coupons .btn{width: 225px;height: 60px;display: inline-block;background: #cc0000;text-align: center;line-height: 60px;color: #fff;font-size: 30px;text-decoration: none;}
+.coupons .btn{border-radius: 15px;width: 225px;height: 60px;display: inline-block;background: #cc0000;text-align: center;line-height: 60px;color: #fff;font-size: 30px;text-decoration: none;}
 .coupons .promptly{margin: 0px auto ;width: 225px;padding-top: 389px;}
 /*优惠券状态2*/
 .coupons  .celebrate{margin: 0px auto ;width: 500px;padding-top: 310px;}
@@ -1117,3 +1138,31 @@ a:hover { text-decoration: underline }
 .coupons  .impossibility  .act .btn1:hover{color: #fff;background: #000;}
 .coupons  .impossibility  .act .left{float: left}
 .coupons  .impossibility  .act .right{float: right}
+/*我的卡券弹出框*/
+.ytacu{}
+.ytacu .dh{position: fixed;left: 50%;top: 50%;margin-top: -225px;margin-left:-300px;background: #fff;width: 605px;height: 240px;z-index: 103;padding: 60px 74px;border: 1px solid #000;}
+.ytacu .dh .exchange{width: 100%;}
+.ytacu .dh .exchange label{float: left;font-size: 12px;color: #000;width: 119px;margin-top: 12px;}
+.ytacu .dh .exchange input{width: 336px;padding: 15px 13px;border: 1px solid #ccc;font-size: 12px;color: #000;}
+.ytacu .dh p{font-size: 12px;color: #ff0101;text-align: center;position: absolute;top: 115px;left: 192px;}
+.ytacu .dh .no{ width: 15px; height: 15px; position: absolute; top: 15px; right: 20px; cursor: pointer; transition: all 0.5s; background: url(../images/efeiyi-icon.png) no-repeat; }
+.ytacu .dh .btn{width: 150px;height: 40px;line-height: 40px;font-size: 12px;background: #000;color: #fff;display: inline-block;text-align: center;margin: 47px 150px 0 150px;outline: none;}
+.ytacu .bg{background: #000;position: fixed;z-index: 102;opacity: 0.6;left: 0;top:0;bottom: 0;right: 0;}
+.ytacu .cg{position: fixed;left: 50%;top: 50%;margin-top: -225px;margin-left:-300px;background: #fff;width: 605px;height: 370px;z-index: 103;padding: 60px 84px;border: 1px solid #000;}
+.ytacu .cg p{text-align: center;font-size: 16px;color: #000;}
+.ytacu .cg .yhqys{border: 1px solid #999;margin: 30px 0;padding: 22px 0; display: inline-block}
+.ytacu .cg .yhqys .left{margin-left: 32px;width: 125px;height: 68px;background:url('../images/couponx.png')no-repeat;float: left;position: relative}
+.ytacu .cg .yhqys .left strong{width:73px;  height: 55px;  line-height:111px;  position: absolute;  top: -19px;  left: 23px;  z-index: 2;  font-size:48px;  color: #fff;  font-weight: bold;  text-align: center;  font-family: Impact Regular;}
+.ytacu .cg .yhqys .left span{  width: 10px;  font-size: 12px;  position: absolute;  top: 3px;  right: 7px;  z-index: 2;  color: #fff;  line-height: 20px;}
+.ytacu .cg .yhqys .right{margin-left: 17px;width: 222px;float: left;}
+.ytacu .cg .yhqys .right p{color: #999;font-size: 12px;line-height: 23px;text-align: left}
+.ytacu .cg .btn{width: 150px!important;height: 40px;line-height: 40px;font-size: 12px;background: #000;color: #fff!important;display: inline-block;text-align: center;outline: none;float: none!important;}
+/*注册成功*/
+.successful{width: 1000px;margin: 169px auto 0;min-height: 550px;}
+.successful h5{font-size: 48px;color: #000;text-align: center;margin-bottom: 48px;}
+.successful p{font-size: 32px;color: #000;margin-bottom: 39px;text-align: center}
+.successful p span{font-size: 12px;color: #000;}
+.successful .btn-q{margin: 0 auto 29px;width: 531px;height: 54px;}
+.successful .btn-q a{text-decoration: none;outline:none;width: 240px;height: 43px;border: 1px solid #000;background: #000;color: #fff;text-align: center;font-size: 16px;line-height: 43px;}
+.successful .btn-q .but1{float: left}
+.successful .btn-q .but2{float: right}

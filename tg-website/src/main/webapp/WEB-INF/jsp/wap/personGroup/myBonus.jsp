@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>我的红包</title>
+    <title>个人中心-我的红包</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -41,10 +41,20 @@
 <!--//End--header-->
 <div class="my-packet ae">
     <div class="top ae">
-        <div class="pic"><a href="#"><img src="/scripts/upload/yonghm.jpg"></a></div>
+        <div class="pic"><a href="#"><img src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></a></div>
         <div class="text">
-            <p>用户名：${AuthorizationUtil.myUser.userName}</p>
-            <p>红包总额：${totalBonus}元</p>
+            <p>用户名：${user.username}</p>
+            <c:if test="${empty user.redPacket}">
+            <c:set var="bonus">
+                   0
+            </c:set>
+            </c:if>
+            <c:if test="${not empty user.redPacket}">
+                <c:set var="bonus">
+                    ${user.redPacket}
+                </c:set>
+            </c:if>
+            <p>红包总额：${bonus}元</p>
         </div>
     </div>
     <div class="page ae">

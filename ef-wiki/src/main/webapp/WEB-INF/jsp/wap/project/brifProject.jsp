@@ -22,7 +22,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -177,6 +177,7 @@
 
                </li>--%>
             </ul>
+            <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
           </div>
         </div>
       </div>
@@ -189,7 +190,7 @@
       <div class="sit-suit-text">
         <div class="sit-suit-content">
           <div class="sit-suit-cgz">
-            <div class="sit-suit-cgz-l"><a href="#" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
+            <div class="sit-suit-cgz-l"><a href="javascript:void(0);" id="${project.id}" class="cgz-r-1" onclick="saveProjectFllow('${project.id}')">
               <c:if test="${flag ==true}">
                 <input id="saveProjectFllow" type="hidden" value="0">
                 已关注
@@ -342,12 +343,12 @@
 
               }
               var box = $("<div class='inheritor'> " +
-                      "<div class='inheritor-text'> " +
-                      "<p class='itor-text-1'>"+data.list[i].master.fullName+"</p> " +
+                      "<div class='inheritor-text'> <a href=\"http://"+data.list[i].master.name+".efeiyi.com\">" +
+                      "<p class='itor-text-1'>"+data.list[i].master.fullName+"</p></a> " +
                       "<p class='itor-text-3'>"+levelName+"</p> " +
                       "<p class='itor-text-4' style='padding-bottom: 1.5rem'>"+data.list[i].master.brief+"</p> " +
-                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
-                      "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");
+                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'>" +
+                      "<a href=\"http://"+data.list[i].master.name+".efeiyi.com\"><img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");
 
               pubu.append(box);
             }
@@ -470,7 +471,15 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            alert("您还未登陆，请登录后再操作");
+            //alert("您还未登陆，请登录后再操作");
+           // window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){
@@ -530,7 +539,14 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            alert("您还未登陆，请登录后再操作");
+            //alert("您还未登陆，请登录后再操作");
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){
@@ -855,7 +871,7 @@
                 html+= "<ul class=\"list-con\" id=\"pubu\"><li class=\"cell item\"> <a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\">" +
                         "<img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"></a> <div class=\"txt\"> " +
                         "<div class=\"name\">"+data.list[i].name+"</div> <div class=\"txt-info\"> " +
-                        "<a href=\"#\"><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
+                        "<a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" id=\""+data.list[i].id+"\" name=\"up\" ><i class=\"icon good-1\"></i><em>"+data.list[i].fsAmount+"</em></a> " +
                         "<a href=\"#\"><i class=\"icon good-2\"></i><em>"+data.list[i].amount+"</em></a> " +
                         "</div> </div> </li></ul>";
 
@@ -1086,6 +1102,59 @@
        return false;
      },
      complete:function(){
+     }
+   });
+ }
+ function savaUpAndDown(ds){
+   var oper = $("#"+ds).attr("name");
+   $.ajax({
+     type:"get",
+     url:"<c:url value='/base/saveThumbUp.do?productId='/>"+ds+"&operation="+oper,
+     data:"",
+     dataType:"json",
+     success:function(data2){
+       if(data2=="false"){
+         //alert("您还未登陆，请登录后再操作！！！");
+         var go = window.confirm("去登陆吧?");
+         if(go==true){
+           window.location.href ="<c:url value='/wapbrifProject/${project.id}'/>";
+         }
+         else{
+           return false;//取消
+         }
+         return false;
+       }
+       if(data2=="repeat"){
+         alert("请不要重复操作！！！");
+         return false;
+       }
+       if(data2=="true" && oper=='up'){
+         //$("#em1").html(parseInt($("#em1").text())+1);
+         $("#"+ds).children("em").eq(0).html(parseInt($("#"+ds).children("em").eq(0).text())+1);
+         if($("#"+ds).attr("name")=="down"){
+           $("#"+ds).attr("name","up");
+         }else{
+           $("#"+ds).attr("name","down");
+         }
+       }
+       if(data2=="true" && oper=='down'){
+         $("#"+ds).children("em").eq(0).html(parseInt($("#"+ds).children("em").eq(0).text())-1);
+          // $("#em1").html(parseInt($("#em1").text())-1);
+         if($("#"+ds).attr("name")=="down"){
+           $("#"+ds).attr("name","up");
+         }else{
+           $("#"+ds).attr("name","down");
+         }
+       }
+     },
+     error:function(){
+       alert("出错了，请联系管理员！！！");
+       return false;
+     },
+     complete:function(){
+
+
+
      }
    });
  }

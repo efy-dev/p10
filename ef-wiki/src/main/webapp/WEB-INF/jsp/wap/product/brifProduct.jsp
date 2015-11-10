@@ -20,7 +20,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -177,7 +177,7 @@ ${product.productDescription.content}
   <div class="inheritor ">
 
     <div class="inheritor-text">
-      <p class="itor-text-1">${product.master.fullName}</p>
+      <a href="http://${product.master.name}.efeiyi.com"><p class="itor-text-1">${product.master.fullName}</p></a>
 
       <p class="itor-text-2">${product.name}</p>
 
@@ -200,7 +200,7 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow('${product.master.id}')" id="">
+      <a class="gz-fd-icon" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')" id="">
         <c:if test="${flag == true}">
           <input id="saveMasterFllow" type="hidden" value="0">
           取消关注
@@ -212,7 +212,7 @@ ${product.productDescription.content}
 
       </a>
 
-      <div class="gz-fd-img"><a href="#"><img src="${product.master.favicon}"></a>
+      <div class="gz-fd-img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a>
       </div>
     </div>
   </div>
@@ -278,7 +278,14 @@ ${product.productDescription.content}
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
@@ -448,7 +455,15 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       alert("您还未登陆，请登录后再操作！！！");
+       //alert("您还未登陆，请登录后再操作！！！");
+       //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+       var go = window.confirm("去登陆吧?");
+       if(go==true){
+         window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+       }
+       else{
+         return false;//取消
+       }
        return false;
      }
       if(data2=="repeat"){
@@ -511,7 +526,15 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
@@ -549,7 +572,14 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            alert("您还未登陆，请登录后再操作！！！");
+            //alert("您还未登陆，请登录后再操作！！！");
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
@@ -580,7 +610,14 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -620,7 +657,14 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          showAlert("提示","您还未登陆，请登录后再操作");
+          //showAlert("提示","您还未登陆，请登录后再操作");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="repeat"){

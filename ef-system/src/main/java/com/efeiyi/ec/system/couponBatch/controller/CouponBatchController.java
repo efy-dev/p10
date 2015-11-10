@@ -23,11 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +46,12 @@ public class CouponBatchController extends BaseController {
     public String createCoupon(String id, int amount) throws Exception {
         Coupon coupon = null;
         CouponBatch couponBatch = (CouponBatch) super.baseManager.getObject("com.efeiyi.ec.purchase.model.CouponBatch", id);
-        for (int i = 0; i < amount; i++) {
+        List<Coupon> couponList = couponBatch.getCouponList();
+        int createdCouponAmount = 0;
+        if(null != couponList && couponList.size()>0){
+            createdCouponAmount = couponList.size();
+        }
+        for (int i = 0; i < amount-createdCouponAmount; i++) {
             coupon = new Coupon();
             coupon.setStatus("1");
             coupon.setCouponBatch(couponBatch);

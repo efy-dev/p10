@@ -10,9 +10,18 @@ import com.efeiyi.ec.system.product.service.ProductManager;
 import com.efeiyi.ec.tenant.model.Tenant;
 import com.ming800.core.base.dao.XdoDao;
 import com.ming800.core.p.service.AutoSerialManager;
+import jxl.SheetSettings;
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
+import jxl.format.VerticalAlignment;
+import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -316,5 +325,139 @@ public class ProductManagerImpl implements ProductManager{
         product.setStatus(status);
         xdoDao.saveOrUpdateObject(product);
         return product;
+    }
+
+    /***
+     * 输出表格
+     */
+    @Override
+    public  String outExcel1(String[] homes,String on,String down){
+        List<Object[]> resultList = productDao.getResult();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date1 = sdf.format(date);
+//        HSSFWorkbook wb = new HSSFWorkbook();//创建一个EXCEL文件
+//        HSSFSheet sheet = wb.createSheet("商品规格表");//工作簿
+//        HSSFDataFormat format = wb.createDataFormat();//单元格样式
+//        sheet.setColumnWidth((short)3,20*256);//单元格宽度
+//        sheet.setColumnWidth((short)4, 20* 256);
+//        sheet.setDefaultRowHeight((short)300);
+//        HSSFCellStyle style = wb.createCellStyle(); // 样式对象
+//        style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 垂直
+//        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 水平
+//        //style1.setFillForegroundColor(IndexedColors.DARK_YELLOW.getIndex());
+//        //style1.setFillPattern(CellStyle.SOLID_FOREGROUND);设置单元格颜色
+//        style.setWrapText(true);   //设置是否能够换行，能够换行为true
+//        style.setBorderBottom((short)1);   //设置下划线，参数是黑线的宽度
+//        style.setBorderLeft((short)1);   //设置左边框
+//        style.setBorderRight((short)1);   //设置有边框
+//        style.setBorderTop((short)1);   //设置下边框
+//        style.setDataFormat(format.getFormat("￥#,##0"));    //--->设置为单元格内容为货币格式
+//        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00%"));    //--->设置单元格内容为百分数格式
+//        HSSFRow rowHome = sheet.createRow(0);
+//
+//        for(int n = 0;n<homes.length;n++){
+//            rowHome.createCell(n).setCellValue(homes[n]);
+//        }
+
+        FileOutputStream fileOut = null;
+        String path = this.getClass().getResource("/").getPath().toString() + "com/efeiyi/ec/system/download";
+        File downloadFile = new File(path);
+
+        if(!downloadFile.exists()){
+            downloadFile.mkdir();
+        }
+        String fileName = path+"//productModel"+date1+".xls";
+        try{
+            File file = new File(fileName);
+            file.createNewFile();
+         //   fileName = file.getName();
+            fileOut = new FileOutputStream(file);
+
+            WritableWorkbook workbook = Workbook.createWorkbook(fileOut);//创建工作簿
+
+            WritableSheet sheet1 = workbook.createSheet("商品规格详情",1);
+            /** **********设置纵横打印（默认为纵打）、打印纸***************** */
+            SheetSettings sheetset = sheet1.getSettings();
+            sheetset.setProtected(false);
+
+
+            /** ************设置单元格字体************** */
+            WritableFont NormalFont = new WritableFont(WritableFont.ARIAL, 10);
+            WritableFont BoldFont = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
+
+            /** ************以下设置三种单元格样式，灵活备用************ */
+            // 用于标题居中
+            WritableCellFormat wcf_center = new WritableCellFormat(BoldFont);
+            wcf_center.setBorder(Border.ALL, BorderLineStyle.THIN); // 线条
+            wcf_center.setVerticalAlignment(VerticalAlignment.CENTRE); // 文字垂直对齐
+            wcf_center.setAlignment(Alignment.CENTRE); // 文字水平对齐
+            wcf_center.setWrap(false); // 文字是否换行
+
+            // 用于正文居左
+            WritableCellFormat wcf_left = new WritableCellFormat(NormalFont);
+            wcf_left.setBorder(Border.NONE, BorderLineStyle.THIN); // 线条
+            wcf_left.setVerticalAlignment(VerticalAlignment.CENTRE); // 文字垂直对齐
+            wcf_left.setAlignment(Alignment.LEFT); // 文字水平对齐
+            wcf_left.setWrap(false); // 文字是否换行
+            //第一行
+            for(int n = 0;n<homes.length;n++){
+//                rowHome.createCell(n).setCellValue(homes[n]);
+                sheet1.addCell(new Label(n, 0, homes[n], wcf_center));
+            }
+            //正文
+            for(int i=0;i<resultList.size();i++)
+            {
+                Object [] os= resultList.get(i);
+               // HSSFRow row = sheet.createRow(i+1);   //第9行...第n行
+
+                for(int j = 0;j<os.length;j++){
+                    if(os[j]!=null) {
+                        if (j == 4 || j == 5) {
+                            BigDecimal m = (BigDecimal) os[j];
+                            sheet1.addCell(new Label(j,i+1,m.toString(), wcf_left));
+//                            row.createCell(j).setCellValue(m.toString());
+                        } else if(j == 7){
+                            Integer status = Integer.parseInt(os[j].toString());
+                            if(status ==  1){
+                                sheet1.addCell(new Label(j,i+1,on, wcf_left));
+//                                row.createCell(j).setCellValue(on);
+                            }else {
+                                sheet1.addCell(new Label(j,i+1,down, wcf_left));
+//                                row.createCell(j).setCellValue(down);
+                            }
+                        }else if(j == 11){
+                            Date date2 = (Date)os[j];
+                            sheet1.addCell(new Label(j,i+1, sdf1.format(date2), wcf_left));
+                        }else {
+                            sheet1.addCell(new Label(j,i+1,os[j].toString(), wcf_left));
+//                            row.createCell(j).setCellValue(os[j].toString());
+                        }
+                    }
+
+
+                }
+            }
+            workbook.write();
+//            wb.write(fileOut);
+            //fileOut.close();
+            workbook.close();
+            System.out.print("OK");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+//        finally{
+//            if(fileOut != null){
+//                try {
+//                    fileOut.close();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+        return fileName;
+
     }
 }

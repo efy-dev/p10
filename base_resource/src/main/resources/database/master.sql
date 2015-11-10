@@ -647,8 +647,9 @@ ALTER TABLE `base_operation_record`
 ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
 
 
+===========================================2015/11/5=========================================
 
 
 
-
-
+ALTER TABLE `master_message`
+ADD COLUMN `data_source`  varchar(255) NULL AFTER `author`;

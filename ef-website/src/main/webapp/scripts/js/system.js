@@ -6,11 +6,17 @@ $(function(){
         },function(){
             $(this).find('.top-wechat').stop(true).slideUp('fast');
         });
+        //
+        $('.btn-top-nav').hover(function(){
+            $(this).find('.ul-details').stop(true).slideDown('fast');
+        },function(){
+            $(this).find('.ul-details').stop(true).slideUp('fast');
+        });
         //footer二维码
         $('.footer .service .wechat').hover(function(){
             $(this).find('.icon').fadeIn('100');
         },function(){
-            $(this).find('.icon').delay(2000).fadeOut();
+            $(this).find('.icon').fadeOut();
         })
     })();
     //
@@ -26,6 +32,9 @@ $(function(){
     })();
     //
     (function(){
+        var $focus=$('.focus');
+        var $btnPrev=$focus.find('.btn-prev');
+        var $btnNext=$focus.find('.btn-next');
         var $sliderMain=$('.focus .slider-main');
         var $liImg=$sliderMain.find('li');
         var $liNav=$('.focus .slider-nav li');
@@ -44,9 +53,37 @@ $(function(){
         $sliderMain.hover(function(){
             clearInterval(timer);
         },function(){
-            timer=setInterval(autoFocus,iSpeed);
+            timer=setInterval(autoFocus,iSpeed)
         })
 
+        $focus.hover(function(){
+            $btnNext.animate({'right':'0'},100);
+            $btnPrev.animate({'left':'0'},100);
+        },function(){
+            $btnNext.animate({'right':'-45px'},100);
+            $btnPrev.animate({'left':'-45px'},100);
+        })
+        //下一页
+        $btnNext.mousedown(function(){
+            clearInterval(timer);
+            autoFocus();
+        })
+        $btnNext.mouseup(function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
+        //上一页
+        $btnPrev.mousedown(function(){
+            clearInterval(timer);
+            index--;
+            if(index<0){
+                index=$liImg.length-1;
+            }
+            $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+            $liNav.eq(index).addClass('active').siblings('li').removeClass('active');
+        })
+        $btnPrev.mouseup(function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
         function autoFocus(){
             index++;
             if(index>$liImg.length-1){index=0;}
@@ -55,7 +92,7 @@ $(function(){
         }
         timer=setInterval(autoFocus,iSpeed);
     })();
-    //����
+    //
     (function(){
         $('.shop-sort .link2 dt').click(function(){
             $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
@@ -209,4 +246,5 @@ $(function(){
             }
         });
     })();
+
 })

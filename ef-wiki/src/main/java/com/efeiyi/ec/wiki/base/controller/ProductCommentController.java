@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,8 @@ public class ProductCommentController extends WikibaseController {
             query.put("moderator_id", AuthorizationUtil.getMyUser().getId());
              PageInfo pageInfo = baseManager.listPageInfo(query);
              list = projectConvertprojectModelUtil.getProductCommentModel(pageInfo.getList());
+        }else{
+            list = new ArrayList<ProductCommentModel>();
         }
 
         return list;

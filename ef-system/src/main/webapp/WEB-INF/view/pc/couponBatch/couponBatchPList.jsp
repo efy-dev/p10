@@ -62,6 +62,10 @@
             });
         }
 
+        function createURL(couponBatchId){
+            window.prompt("链接","www.efeiyi.com/yhq.do?id="+couponBatchId);
+        }
+
     </script>
 </head>
 <body>
@@ -140,6 +144,11 @@
                                                         class="am-icon-trash-o">下载</span>
                                                 </a>
                                             </c:if>
+                                            <c:if test="${couponBatch.deliverType == 1 || couponBatch.deliverType == 2}">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="createURL('${couponBatch.id}')"><span
+                                                        class="am-icon-trash-o">生成链接</span>
+                                                </button>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </td>
@@ -148,10 +157,10 @@
                                 <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
                                 <td class="am-hide-sm-only">
-                                <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm"/>
+                                <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <td class="am-hide-sm-only">
-                                    <fmt:formatDate value="${couponBatch.endDate}" pattern="yyyy-MM-dd hh:mm"/>
+                                    <fmt:formatDate value="${couponBatch.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                             </tr>
                         </c:forEach>

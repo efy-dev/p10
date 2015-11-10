@@ -28,8 +28,6 @@
             <scope>compile</scope>
         </dependency>
 
-
-
         <dependency>
             <groupId>com.efeiyi.ec</groupId>
             <artifactId>ef-model</artifactId>

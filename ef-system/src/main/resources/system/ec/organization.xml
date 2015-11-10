@@ -103,7 +103,7 @@
                         <condition name="id" defaultValue="0" operation="ne" inputType="default"/>
                         <condition name="sex"  operation="eq" inputType="select_status" label="性别" key="consumer.sex" dataType="int"/>
                         <condition name="username"  operation="eq" inputType="text" label="用户名"/>
-                        <condition name="phone"  operation="eq" inputType="text" label="电话"/>
+                        <!--<condition name="phone"  operation="eq" inputType="text" label="电话"/>-->
                     </query>
                 </do>
 
@@ -269,7 +269,6 @@
                         <condition name="status" defaultValue="1" operation="eq" />
                     </query>
                 </do>
-
                 <do name="removeRole" label="删除角色" access="" result="json"/>
                 <do name="formRole" label="保存角色" access="" result="/role/roleForm" />
                 <do name="saveOrUpdateRole" label="保存角色" access="" result="/role/roleSaveSuccess" />

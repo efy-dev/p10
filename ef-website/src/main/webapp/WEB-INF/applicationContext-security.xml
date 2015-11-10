@@ -22,6 +22,7 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
+        <intercept-url pattern="/yhq.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/saveOrUpdateOrder.do" access="isAuthenticated()"/>
         <intercept-url pattern="/order/pay/alipay/callback" access="isAnonymous()"/>
         <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
@@ -38,7 +39,7 @@
 
     </http>
 
-    <b:bean id="casEntryPoint"  class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+    <b:bean id="casEntryPoint"  class="authentication.CasAuthenticationRedirect">
         <b:property name="loginUrl" value="http://passport.efeiyi.com/login"/>
         <!--<b:property name="loginUrl" value="http://192.168.1.57/cas/login"/>-->
         <b:property name="serviceProperties" ref="serviceProperties"/>

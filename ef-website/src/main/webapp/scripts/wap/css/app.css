@@ -7,6 +7,19 @@ body {color:#000}
 input[type="text"], input[type="password"], input[type="button"] {-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0}
 input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .icon {background:url(../images/icon.png) no-repeat;background-size:152px auto}
+.icon1 {background:url(../images/qq.png) no-repeat;background-size:152px auto;}
+
+.scroll-bar { position: fixed; bottom:80px; right: 0; text-align: center;z-index:20;}
+.scroll-bar .btn { width: 33px; height: 53px; line-height: 37px; float: left; font-size: 12px; border-radius: 5px; text-decoration: none; cursor: pointer }
+.scroll-bar .btn .icon1 { width: 23px; display: inline-block; position: relative }
+.scroll-bar-top { width: 100%; float: left; margin-bottom: 10px; display: none }
+.scroll-bar-top .btn { background: #fff; border: 1px solid #ccc; color: #000 }
+.scroll-bar-top .btn .icon1 { background-position: -171px -67px; height: 11px;width: 16px;background-size: 220px auto}
+.scroll-bar-ask .btn { background: #000; border: 1px solid #000; color: #fff }
+.scroll-bar-ask .btn .icon1 { background-position: -181px -50px; height: 18px; top: 6px; margin-right: 5px }
+.scroll-bar-ask .btn:hover { text-decoration: none; background: #fff; color: #000 }
+.scroll-bar-ask .btn:hover .icon1 { background-position: -204px -50px }
+
 .bd {width:100%;float:left}
 .red {color:#f00}
 .arrow-up:before, .arrow-right:before, .arrow-down:before {content:'';width:12px;height:12px;border-right:1px solid #000;-webkit-transform:rotate(45deg);display:inline-block;margin-left:10px}
@@ -194,10 +207,10 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details-total-bar {height:42px;line-height:42px;background:#fff;position:fixed;left:0;bottom:0;box-sizing:border-box;border-top:2px solid #000;border-bottom:2px solid #000}
 .details-total-bar a {font-size:14px;color:#000;float:left;border-right:1px #000 solid;text-align:center}
 .details-total-bar a:last-child {border-right:0}
-.details-total-bar .btn-default {width:33%}
-.details-total-bar .btn-cart {background:#000;width:33%;color:#fff}
+.details-total-bar .btn-default {width:15%}
+.details-total-bar .btn-cart {background:#000;width:40%;color:#fff}
 .details-total-bar .btn-cart .icon {background-position:-110px -27px;width:19px;height:13px;display:inline-block;margin-right:3px;position:relative;top:1px}
-.details-total-bar .btn-buy {width:33%}
+.details-total-bar .btn-buy {width:30%}
 /*--//End--*/
 .details-shop {padding:0 20px}
 .details-shop .s-part {position:relative;padding:20px 0 20px 90px;font-size:1.4rem;border-bottom:1px solid #000}

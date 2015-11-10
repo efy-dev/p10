@@ -2,7 +2,9 @@ package com.efeiyi.ec.website.group.controller;
 
 import com.efeiyi.ec.group.model.Group;
 import com.efeiyi.ec.group.model.Member;
+import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
+import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -67,11 +69,6 @@ public class PersonController {
                  }
              }
         }
-        for(Object obj : groupJoinList){
-            if("0".equals(((Member)obj).getLevel())){
-                groupJoinList.remove(obj);
-            }
-        }
         model.addAttribute("groupJoinList", groupJoinList);
         return "/personGroup/myJoinGroup";
     }
@@ -83,14 +80,9 @@ public class PersonController {
      */
     @RequestMapping(value = "/bonusTotal.do")
     public String groupBonusTotal(HttpServletRequest request, Model model) throws Exception {
-        XQuery xQuery = new XQuery("listCreateProduct_default",request);
-        xQuery.put("status","1");
-        List<Object> myCreateProductList = baseManager.listObject(xQuery);
-        BigDecimal totalBonus = new BigDecimal(0.0);
-        for(Object obj:myCreateProductList) {
-            totalBonus.add(((Group)obj).getGroupProduct().getBonus());
-        }
-        model.addAttribute("totalBonus",totalBonus);
+        String id = AuthorizationUtil.getMyUser().getId();
+        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+        model.addAttribute("user", user);
         return "/personGroup/myBonus";
     }
     /**
@@ -113,15 +105,30 @@ public class PersonController {
      */
     @RequestMapping(value = "/personInfoView.do")
     public String personInfoView(HttpServletRequest request, Model model) throws Exception {
-        MyUser currentUser = AuthorizationUtil.getMyUser();
-        Boolean flag = true;
-        if (currentUser.getId() != null) {
             return "/personGroup/personGroupInfo";
-        } else {
-            //返回登陆页面
-            return "/personGroup/personGroupInfo";
-        }
     }
 
+    /**
+     *我的订单
+     * @param request
+     * @return
+     * @throws Exception
+     */
 
+    @RequestMapping(value = "myPurchaseOrder.do")
+    public String myPurchaseOrder(HttpServletRequest request, Model model) throws Exception{
+        XQuery xQuery = new XQuery("listPurchaseOrderGroup_default",request);
+        XQuery xQuery5 = new XQuery("listPurchaseOrderGroup_default5",request);
+        XQuery xQuery7 = new XQuery("listPurchaseOrderGroup_default7",request);
+        XQuery xQuery9 = new XQuery("listPurchaseOrderGroup_default9",request);
+        List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+        List<PurchaseOrderGroup> list5 = baseManager.listObject(xQuery5);
+        List<PurchaseOrderGroup> list7 = baseManager.listObject(xQuery7);
+        List<PurchaseOrderGroup> list9 = baseManager.listObject(xQuery9);
+        model.addAttribute("purchaseOrderGroupList",list);
+        model.addAttribute("purchaseOrderGroupList5",list5);
+        model.addAttribute("purchaseOrderGroupList7",list7);
+        model.addAttribute("purchaseOrderGroupList9",list9);
+        return "/personGroup/purchaseOrderGroupList";
+    }
 }

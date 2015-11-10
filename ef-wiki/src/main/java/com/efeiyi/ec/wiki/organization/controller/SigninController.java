@@ -14,6 +14,7 @@ import com.efeiyi.ec.wiki.organization.service.BranchManager;
 import com.efeiyi.ec.wiki.organization.service.RoleManager;
 import com.efeiyi.ec.wiki.organization.service.SmsCheckManager;
 import com.efeiyi.ec.wiki.organization.service.UserManager;
+import com.efeiyi.ec.wiki.organization.util.AuthorizationUtil;
 import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.base.service.XdoManager;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -172,10 +174,24 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/sso.do")
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String forward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String  callUrl = request.getParameter("callUrl");
+        String  userId = request.getParameter("userId");
+        if(callUrl!=null && !"".equals(callUrl)){
+            return "redirect:" + callUrl;
+        }
+        if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){
+            //response.sendRedirect(request.getContextPath() + "/sso2.do");
+            return "redirect:/sso2.do";
+        }else{
+            return "redirect:"+request.getContextPath();
+        }
+
+    }
+    @RequestMapping("/sso2.do")
+    public void forward2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath() + "/");
     }
-
     @RequestMapping({"/login"})
     public String login(HttpServletRequest request ,Model model){
         String error = request.getParameter("error");
@@ -252,6 +268,45 @@ public class   SigninController extends BaseController {
         String unionid = jsonObject.getString("unionid");
         model.addAttribute("unionid", unionid);
         return "/register";
+    }
+
+    @RequestMapping("/find.do")
+    public void forwardFind(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/pc/category");
+    }
+
+    @RequestMapping("/listProduct/{projectId}")
+    public void forwardFind2(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/listProduct/"+projectId);
+    }
+    @RequestMapping("/showProduct/{productId}")
+    public void forwardFind3(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId);
+    }
+    @RequestMapping("/beforeAttention.do")
+    public void forwardFind4(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/pc/beforeAttention.do");
+    }
+    @RequestMapping("/brifMaster/{projectId}")
+    public void forwardFind5(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/brifMaster/"+projectId);
+    }
+    @RequestMapping("/brifProject/{projectId}")
+    public void forwardFind6(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/brifProject/"+projectId);
+    }
+
+    @RequestMapping("/wapbrifProject/{projectId}")
+    public void forwardFind7(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/base/brifProject/"+projectId+"/1");
+    }
+    @RequestMapping("/brifProject2/{projectId}")
+    public void forwardFind8(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/base/brifProject/"+projectId+"/2");
+    }
+    @RequestMapping("/wapShowProduct/{productId}")
+    public void forwardFind9(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId);
     }
 }
 

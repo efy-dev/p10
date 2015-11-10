@@ -61,16 +61,24 @@ public class PurchaseOrderController extends BaseController {
 
 
     @RequestMapping({"/groupBuy/{groupProductId}/{amount}"})
-    public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model,@PathVariable String amount) throws Exception {
+    public String groupBuy(HttpServletRequest request, @PathVariable String groupProductId, Model model, @PathVariable String amount) throws Exception {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(), groupProductId);
+        ProductModel productModel = new ProductModel();
+        productModel.setId(groupProduct.getProductModel().getId());
+        productModel.setProduct(groupProduct.getProductModel().getProduct());
+        productModel.setPrice(groupProduct.getGroupPrice());
+        productModel.setAmount(groupProduct.getProductModel().getAmount());
+        productModel.setName(groupProduct.getProductModel().getName());
+
         CartProduct cartProduct = new CartProduct();
-        cartProduct.setProductModel(groupProduct.getProductModel());
+        String callback = request.getParameter("callback");
+        cartProduct.setProductModel(productModel);
 //        String amount = request.getParameter("amount");
         cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
-        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
+//        cartProduct.getProductModel().setPrice(groupProduct.getGroupPrice());
         cartProductList.add(cartProduct);
         Map<String, List> productMap = new HashMap<>();
         productMap.put(groupProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
@@ -91,6 +99,10 @@ public class PurchaseOrderController extends BaseController {
         purchaseOrder.setTotal(cart.getTotalPrice());
         purchaseOrder.setOriginalPrice(cart.getTotalPrice());
         baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
+        //拼写回调路径purchaseOrderId,groupProductId,memberId,groupId
+        callback += "?purchaseOrderId=" + purchaseOrder.getId() + "&groupProductId=" + groupProductId + "&memberId=" + (request.getParameter("memberId") != null ? request.getParameter("memberId") : "null") + "&groupId=" + (request.getParameter("groupId") != null ? request.getParameter("groupId") : "null");
+        purchaseOrder.setCallback(callback);
+        baseManager.saveOrUpdate(PurchaseOrder.class.getName(), purchaseOrder);
 
         PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct();
         purchaseOrderProduct.setPurchaseOrder(purchaseOrder);
@@ -105,9 +117,11 @@ public class PurchaseOrderController extends BaseController {
 
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
-        model.addAttribute("productModel", groupProduct.getProductModel());
+        model.addAttribute("productModel", productModel);
         model.addAttribute("amount", amount);
         model.addAttribute("isEasyBuy", true);
+        model.addAttribute("callback", callback);
+        model.addAttribute("groupProductId", groupProductId);
 
         return "/purchaseOrder/purchaseOrderConfirm";
     }
@@ -120,10 +134,11 @@ public class PurchaseOrderController extends BaseController {
         CartProduct cartProduct = new CartProduct();
         cartProduct.setProductModel(productModel);
         String amount = request.getParameter("amount");
-        if (amount==null){
-            amount = "1";
+        try {
+            cartProduct.setAmount(Integer.valueOf(amount));
+        } catch (Exception e) {
+            cartProduct.setAmount(1);
         }
-        cartProduct.setAmount(Integer.valueOf(amount));
         cartProduct.setIsChoose("1");
         cartProduct.setStatus("1");
         List<CartProduct> cartProductList = new ArrayList<>();
@@ -176,7 +191,8 @@ public class PurchaseOrderController extends BaseController {
      */
     @RequestMapping({"/saveOrUpdateOrder.do"})
     public String saveOrUpdateOrder(HttpServletRequest request, Model model) throws Exception {
-        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cartManager.copyCart((Cart) request.getSession().getAttribute("cart")), model);
+        Cart cart = cartManager.copyCart((Cart) request.getSession().getAttribute("cart"),cartManager.getCurrentCart(request));
+        PurchaseOrder purchaseOrder = purchaseOrderManager.saveOrUpdatePurchaseOrder(cart, model);
         //收货地址
         XQuery xQuery = new XQuery("listConsumerAddress_default", request);
         xQuery.addRequestParamToModel(model, request);
@@ -184,6 +200,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("addressList", addressList);
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
+        model.addAttribute("cart", cart);
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 

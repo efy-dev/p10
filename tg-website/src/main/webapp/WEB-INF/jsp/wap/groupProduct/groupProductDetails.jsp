@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -8,27 +9,27 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>b0102030101开团详情页</title>
+    <title>开团详情</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/resources/assets/i/favicon.png">
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="apple-touch-icon-precomposed" href="/resources/assets/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="/resources/assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
-    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css"/>">
-    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/amazeui.min.css?v=20150831"/>">
+    <link type="text/css" rel="stylesheet"  href="<c:url value="/scripts/wap/css/app.css?v=20150831"/>">
     <link type="text/css" rel="stylesheet" href="<c:url value="/scripts/wap/css/myorder.css?v=20150831"/>">
+    <style>.colonel-table .introduce img{width:100%!important;float:left;margin-bottom:1.7rem;height: 100%!important;}</style>
 </head>
 <body>
 <header class="am-header custom-header">
@@ -39,15 +40,27 @@
     <h1 class="am-header-title" style="margin: 0 10%;">我的团长我的团</h1>
     <!-- //End--title-->
     <div class="am-header-right am-header-nav am-header-right1">
-        <a href="/person/personInfoView.do" class="chevron-right" id="menu">
+        <a href="<c:url value="/person/personInfoView.do"/>" class="chevron-right" id="menu">
             <i class="icon icon-user"></i>
         </a>
     </div>
 </header>
 <!--//End--header-->
 <div class="my-colonel ae">
-    <!--产品-->
-    <div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>《东方清韵》瓷胎竹编茶》瓷胎竹编茶》瓷胎竹编茶具套装典藏版装典藏版</span></div></div>
+    <!-- 轮播产品-->
+    <div class="custom">
+        <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
+            <ul class="am-slides ">
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
+                    <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
+                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+    <!-- 轮播产品-->
     <!--价格-->
     <div class="cost ae">
         <div class="txt1"><s>原价:${groupProduct.productModel.price}元</s></div>
@@ -55,8 +68,8 @@
     </div>
     <!--功能-->
     <div class="iwill ae">
-        <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间10天</p></div></div>
-        <a href="/tg/group/group.do?groupProductId=${groupProduct.id}" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
+        <div class="page ae"><div class="left"><p>分享红包:${groupProduct.bonus}元</p></div><div class="right"><p>${groupProduct.memberAmount}人起成团</p><p>成团时间${groupProduct.groupPurchaseTime}天</p></div></div>
+        <a href="<c:url value="/group/groupBuy.do?groupProductId=${groupProduct.id}"/>" class="btn">我&nbsp;要&nbsp;开&nbsp;团</a>
         <div class="txt3 ae"><span>开团当团长，分享赚红包！在规定时间内，好友通过您的链接成功参团，拼团成功后，红包就是你的了！红包无上限，更多分享，更多红包！</span></div>
     </div>
     <!-- 选项卡-->
@@ -73,44 +86,100 @@
             <div class="co-page">
                 <div class="introduce ae">
                     ${groupProduct.productModel.product.productDescription.content}
-                    <div class="button ae"><a href="$" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
+                    <div class="button ae"><a href="http://www.efeiyi.com/product/productModel/${groupProduct.productModel.id}" class="gbtn"><span>原价直接购买</span><i class="icon1"></i></a></div>
                 </div>
                 <a class="efeiyi-btn" href="<c:url value="/group/protocol"/>">e飞蚁拼团协议<i class="efiyi"></i></a>
             </div>
             <div class="co-page" style="display: none">
-                <div class="col-pl ae">
-                    <ul class="ae">
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><P>还不错，真是涨知识了。之前只是知道，现在对景泰蓝了解了这么多，真是棒极了。过段时间我也入手一件景泰蓝工艺品。</P><p><strong>2015-08-19</strong></p></li>
-                        <li><div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>东方不败</h5><div class="co-img ae"><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div><div class="p-img"><img src="../shop2015/upload/mypurchase02.png"></div></div><p><strong>2015-08-19</strong></p></li>
-                    </ul>
-                </div>
-                <div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>
+                <c:if test="${not empty purchaseOrderProductList&&fn:length(purchaseOrderProductList) >0}">
+                    <div class="col-pl ae">
+                        <ul class="ae">
+                            <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
+                                    <li>
+                                        <c:set var="user">
+                                            ${purchaseOrderProduct.purchaseOrder.user.getUsername()}
+                                        </c:set>
+                                        <div class="co-pic"><img class="am-circle" src="<c:url value="/scripts/wap/upload/yonghm.jpg"/>"></div><h5>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</h5><P>${purchaseOrderProduct.purchaseOrderComment.content}</P><p><strong></strong></p></li>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+
+                        </ul>
+                    </div>
+                </c:if>
+                <%--<div class="more ae"><a href="javascript:void(0)"><span>下拉加载更多...</span><div class="icon"></div></a></div>--%>
             </div>
         </div>
     </div>
+    <!--在线客服-->
+    <div class="scroll-bar">
+        <div class="scroll-bar-top" style="display: block;">
+            <span class="btn"><i class="icon1"></i></span>
+        </div>
+        <!-- //End--返回顶部-->
+    </div>
 </div>
 <!--//End--footer-->
-
+<style type="text/css">
+    #MEIQIA-BTN-HOLDER {
+        right: 0;bottom: 145px;}
+    #MEIQIA-BTN {
+        background: #000;
+        width: 33px;
+        height:53px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    #MEIQIA-BTN-LINE {
+        display: none;}
+    #MEIQIA-BTN-TEXT {
+        width:48px;
+        font-size: 12px;
+        position: absolute;
+        left:-28px;
+        top:20px;
+        display: none;
+    }
+    .MEIQIA-ICON {
+        background:url(/scripts/wap/images/qq.png) no-repeat -176px -143px;
+    }
+    #MEIQIA-BTN-ICON {
+        width: 23px;
+        height: 28px;
+        margin: 0;
+        float: left;
+        margin-left:5px;
+        margin-top: 6px;
+    }
+</style>
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+                    (m[a].a = m[a].a || []).push(arguments)
+                };
+        j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 486);
+</script>
+<!--end在线客服-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>
 <!--<![endif]-->
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/resources/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+<script src="<c:url value="/scripts/wap/js/amazeui.min.js"/>"></script>
 <!--自定义js--Start-->
 <script src="<c:url value="/scripts/wap/js/system.js?v=20150831"/>"></script>
-<script src="<c:url value="/scripts/wap/js/myorder.js"/>"></script>
-<script>
-    $().ready(function(){
-        $("img").each(function(){
-            $(this).css("width","100%");
-        })
-    })
-</script>
+<script src="<c:url value="/scripts/wap/js/myorder.js?v=20150831"/>"></script>
 <!--自定义js--End-->
 </body>
 </html>

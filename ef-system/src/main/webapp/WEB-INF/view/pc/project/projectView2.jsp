@@ -176,7 +176,7 @@
         <%--</div>--%>
     <%--</div>--%>
 
-    <div style="text-align: left;margin-left: 15px;" >
+   <%-- <div style="text-align: left;margin-left: 15px;" >
         <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formProjectProperty2&param=project&projectId=${object.id}"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建项目属性" />
     </div>
 
@@ -226,7 +226,7 @@
                 </table>
             </div>
         </div>
-
+--%>
 
 
 

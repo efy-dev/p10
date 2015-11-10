@@ -41,6 +41,9 @@ public class MasterMessage implements Serializable {
 	private List<MasterIntroductionAttachment> masterIntroductionAttachmentList;//附件
 	private String remark;
 
+	public MasterMessage() {
+	}
+
 	@Id
 	@GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
 	@GeneratedValue(generator = "id")

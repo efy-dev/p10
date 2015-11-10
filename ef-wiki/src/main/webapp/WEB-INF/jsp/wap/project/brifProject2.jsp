@@ -22,7 +22,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -177,6 +177,7 @@
 
                </li>--%>
             </ul>
+            <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
           </div>
         </div>
       </div>
@@ -346,10 +347,10 @@
               }
               var box = $("<div class='inheritor'> " +
                       "<div class='inheritor-text'> " +
-                      "<p class='itor-text-1'>"+data.list[i].master.fullName+"</p> " +
+                      "<a href=\"http://"+data.list[i].master.name+".efeiyi.com\"><p class='itor-text-1'>"+data.list[i].master.fullName+"</p></a> " +
                       "<p class='itor-text-3'>"+levelName+"</p> " +
                       "<p class='itor-text-4' style='padding-bottom: 1.5rem'>"+data.list[i].master.brief+"</p> " +
-                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='#' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href='#'>" +
+                      "<a class='gz-fd-icon'about='"+opertation+"' id='"+data.list[i].master.id+"' href='javascript:void(0);' onclick='saveMasterFllow(\""+data.list[i].master.id+"\")'>"+word+"</a> <div class='gz-fd-img'><a href=\"http://"+data.list[i].master.name+".efeiyi.com\">" +
                       "<img src='"+data.list[i].master.favicon+"'></a></div> </div> </div>");
 
               pubu.append(box);
@@ -473,7 +474,14 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            alert("您还未登陆，请登录后再操作");
+            //alert("您还未登陆，请登录后再操作");
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/brifProject2/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){
@@ -533,7 +541,14 @@
         dataType:"json",
         success:function(data){
           if(data=="false"){
-            alert("您还未登陆，请登录后再操作");
+            //alert("您还未登陆，请登录后再操作");
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/brifProject2/${project.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           if(data=="true"){

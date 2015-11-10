@@ -383,6 +383,7 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setCreateDateTime(new Date());
             praise2Product.setType("1");
             praise2Product.setWatch("0");
+            praise2Product.setStatus("1");
             praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
@@ -527,7 +528,7 @@ public class WikiIndexController extends WikibaseController {
     public  List afterAttention(HttpServletRequest request, Model model) throws Exception {
         MyUser user = AuthorizationUtil.getMyUser();
         if (user.getId() == null) {
-            return null;
+            return new ArrayList();
         }
         XQuery query3 = new XQuery("plistProjectFollowed_after", request);
         query3.put("user_id", AuthorizationUtil.getMyUser().getId());

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
@@ -31,9 +31,18 @@
             display: block;
             color: #fff;
             font-size: 1.2rem;
-             background: #000;
+            background: #000;
         }
-        .add-ress-icon{width: 1.5rem;height: 1.5rem;position:absolute;right: -29px;top:8px;display: block;background: url("<c:url value="/scripts/wap/images/myorderps.png"/>")no-repeat;}
+
+        .add-ress-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            position: absolute;
+            right: -29px;
+            top: 8px;
+            display: block;
+            background: url("<c:url value="/scripts/wap/images/myorderps.png"/>") no-repeat;
+        }
     </style>
 </head>
 <body>
@@ -61,11 +70,12 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="<%=!b%>">
-                <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
+                    <a href="#btn-edit-addres" class="btn-edit-addres">请选择一个地址</a>
                 </c:if>
             </c:if>
             <c:if test="${addressList.size() == 0}">
-            <a href="#btn-edit-addres" class="btn-edit-addres" style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
+                <a href="#btn-edit-addres" class="btn-edit-addres"
+                   style="color: #0000FF;font-size: 1.6rem;float: right">添加收货地址</a>
             </c:if>
         </div>
         <div class="bd order-address" id="order-add1" style="display: none">
@@ -112,12 +122,16 @@
 
         <!-- //End--order-list-->
         <div class="bd order-total">
-            <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
-                                                                                     class="arrow-right"></a></p>
+            <c:if test="${empty purchaseOrder.callback}">
+                <p><strong>优惠券</strong><span class="btn-coupons" id="yhq">0张券可用</span><a href="#arrow-right"
+                                                                                         class="arrow-right"></a></p>
+            </c:if>
 
             <p><strong>商品金额</strong><span><em>￥</em>${purchaseOrder.total}</span></p>
-
-            <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span></p>
+            <c:if test="${empty purchaseOrder.callback}">
+                <p><strong>优惠</strong><span><em>￥</em><span id="couponPrice" style="padding: 0px;">0.00</span></span>
+                </p>
+            </c:if>
 
             <p><strong>运费</strong><span><em>￥</em>0.00</span></p>
         </div>
@@ -169,6 +183,7 @@
         <div class="bd list-adress" id="adddiv" style="display: none;">
             <div class="pop-up" style="position: relative">
                 <a class="add-ress-icon" href="#" onclick="closeAll()"></a>
+
                 <div class="pop-h">新增收货人信息
                     <i class="clase" title="关闭"></i>
                 </div>
@@ -180,6 +195,8 @@
                         <c:if test="${amount != null}">
                             <input type="hidden" name="amount" value="${amount}">
                         </c:if>
+                        <input type="hidden" name="callback" value="${callback}">
+                        <input type="hidden" name="groupProductId" value="${groupProductId}">
 
                         <div class="am-form-group">
                             <label>收货人</label>
@@ -253,8 +270,10 @@
 
     $(function () {
 
-        if(!isWeiXin()){
+        if (!isWeiXin()) {
             $("#weixin").hide();
+        } else {
+            $("#zhifubao").remove();
         }
 
         $.ajax({
@@ -271,7 +290,7 @@
                     $("#yhq").text(data.length + "张优惠券可用");
                     for (var i = 0; i < data.length; i++) {
                         /*out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
-                                + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
+                         + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';*/
                         out += '<li>' + '<input type="radio" name="radio"' + 'value="' + data[i]["couponBatch"]["price"] + '"' + 'id="cbox' + data[i]["id"] + '">' + '<p>满' + data[i]["couponBatch"]["priceLimit"] + '元减' + data[i]["couponBatch"]["price"] + "元" + '</p>'
                                 + '<p>有效期：' + data[i]["couponBatch"]["startDateString"] + '至' + data[i]["couponBatch"]["endDateString"] + '</p>' + '<p>适用范围：全网通用</p> </li>';
                     }
@@ -287,12 +306,12 @@
 
     function yhq() {
         var couponid = null;
-        $("input:radio").each(function(){
-            if(this.checked){
+        $("input:radio").each(function () {
+            if (this.checked) {
                 couponid = $(this).attr("id");
             }
         })
-        var couponId = couponid.substring(4,couponid.length);
+        var couponId = couponid.substring(4, couponid.length);
         $.ajax({
             type: 'post',
             async: false,
@@ -327,7 +346,7 @@
         $("#list-order").attr("style", "display:none");
     }
 
-    function closeAll(){
+    function closeAll() {
         $(".or-address").attr("style", "display:none");
         $("#adddiv").attr("style", "display:none");
         $("#list-order").attr("style", "");
@@ -335,7 +354,7 @@
 
     function zhifubao(element) {
         $("#zhifubao").attr("style", "border:2px solid red");
-        if(isWeiXin()){
+        if (isWeiXin()) {
             $("#weixin").attr("style", "");
         }
 
@@ -368,7 +387,7 @@
             url: '<c:url value="/order/checkInventory/${purchaseOrder.id}"/>',
             dataType: 'json',
             success: function (data) {
-                if(data){
+                if (data) {
                     if (consumerAddress == "") {
                         showAlert("提示", "请选择一个收货地址！");
                     } else {
@@ -377,13 +396,14 @@
 
                         if (isWeiXin()) {
                             isweixin = "&isWeiXin=1";
+                            payment = "3"
                         }
 
                         var url = "<c:url value="/order/confirm/"/>";
                         url += orderId + "?payment=" + payment + "&address=" + consumerAddress + "&message=" + message + isweixin;
                         window.location.href = url;
                     }
-                }else{
+                } else {
                     showAlert("提示", "抱歉，该商品已售罄！")
                 }
             },
@@ -444,7 +464,7 @@
         }, "post")
     }
 
-    function chooseAddress(addressId, consignee, phone, province,city, details) {
+    function chooseAddress(addressId, consignee, phone, province, city, details) {
         consumerAddress = addressId;
         var conConsignee = consignee;
         var conPhone = phone;
@@ -605,9 +625,9 @@
      },
      });
      });*/
- /*   function formatDate(now) {
-        return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
-    }*/
+    /*   function formatDate(now) {
+     return new Date(parseInt(now)).toLocaleString().replace(/:\d{1,2}$/, ' ');
+     }*/
 
 
 </script>

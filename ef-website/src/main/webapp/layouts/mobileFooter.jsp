@@ -13,7 +13,7 @@
         if (AuthorizationUtil.getMyUser().getId() == null) {
     %>
     <a href="<c:url value="/sso.do"/>" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do" class="btn-reg"
+    <a id="signin" href="http://passport.efeiyi.com/register?service=http://www.efeiyi.com/sso.do?registeSuccess=/registerSuccess.do" class="btn-reg"
        onclick="register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
     <%
         }
@@ -48,20 +48,48 @@
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cspan id='cnzz_stat_icon_1256452193'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256452193' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
+<div class="scroll-bar">
+    <div class="scroll-bar-top" style="display: block;">
+        <span class="btn"><i class="icon1"></i></span>
+    </div>
+    <!-- //End--返回顶部-->
+</div>
+
+<style type="text/css">
+    #MEIQIA-BTN-HOLDER {
+        right: 0;bottom: 145px;}
+    #MEIQIA-BTN {
+        background: #000;
+        width: 33px;
+        height:53px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    #MEIQIA-BTN-LINE {
+        display: none;}
+    #MEIQIA-BTN-TEXT {
+        width:48px;
+        font-size: 12px;
+        position: absolute;
+        left:-28px;
+        top:20px;,
+        display: none;
+    }
+    .MEIQIA-ICON {
+        background:url("http://www.efeiyi.com/scripts/wap/images/qq.png") -176px -143px;
+        background-size: auto auto;
+    }
+    #MEIQIA-BTN-ICON {
+        width: 23px;
+        height: 28px;
+        margin: 0;
+        float: left;
+        margin-left:5px;
+        margin-top: 6px;
+    }
+</style>
 <script>
-
-    (function (m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function () {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
-
     function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -70,7 +98,17 @@
             return false;
         }
     }
-
+        (function(m, ei, q, i, a, j, s) {
+            m[a] = m[a] || function() {
+                        (m[a].a = m[a].a || []).push(arguments)
+                    };
+            j = ei.createElement(q),
+                    s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.src = i;
+            s.parentNode.insertBefore(j, s)
+        })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+        _MEIQIA('entId', 486);
 
     var registerWx = "<c:url value="/wx/userInfo"/>";
 
