@@ -81,7 +81,7 @@
 <div class="am-g">
 
 
-    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal"
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
           id="form">
         <fieldset>
             <legend>
@@ -194,7 +194,7 @@
         </a>
 
         <div class="am-form-group">
-            <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal"
+            <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
                   id="form1">
                 <input type="hidden" name="id" value="${object.productDescription.id}">
                 <input type="hidden" name="product.id" value="${object.id}">
@@ -459,7 +459,7 @@
     </fieldset>
 
 
-    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal"
+    <form action="<c:url value="/product/saveNewProduct.do"/>" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data"
           id="form2">
         <input type="hidden" name="resultPage" value="0"/>
         <input type="hidden" name="step" value="view">
