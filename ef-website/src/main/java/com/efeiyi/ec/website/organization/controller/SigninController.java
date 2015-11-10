@@ -221,6 +221,7 @@ public class   SigninController extends BaseController {
         CookieTool.addCookie(response,"userinfo",myUser.getId(),10000000,".efeiyi.com");
         response.sendRedirect(request.getContextPath() + "/");
     }
+
     @RequestMapping({"/login"})
     public String login(HttpServletRequest request ,Model model){
         String error = request.getParameter("error");
@@ -257,9 +258,9 @@ public class   SigninController extends BaseController {
     }
     @RequestMapping({"/registerSuccess.do"})
     public String transitPage(HttpServletRequest request,Model model){
-        String id = AuthorizationUtil.getMyUser().getId();
-        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
-        model.addAttribute("user", user);
+//        String id = AuthorizationUtil.getMyUser().getId();
+//        BigUser user = (BigUser) baseManager.getObject(BigUser.class.getName(), id);
+//        model.addAttribute("user", user);
         return "/registerSuccess";
     }
 
