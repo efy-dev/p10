@@ -125,8 +125,8 @@
 
 			</div>
 		</c:if>
-		<c:if test="${purchaseOrder.orderStatus!=1 && purchaseOrder.subPurchaseOrder==null}">
-
+		<c:if test="${purchaseOrder.orderStatus!=1}">
+            <c:if test="${purchaseOrder.subPurchaseOrder==null || purchaseOrder.subPurchaseOrder.size()==0}">
 			<div class="list-pege">
 				<div class="state" style="padding: 1rem 0">
 					<p class="clo-2"><span><ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus"
@@ -209,9 +209,10 @@
 
 			</div>
 
-
+			</c:if>
 		</c:if>
 		<c:if test="${purchaseOrder.orderStatus!=1 && purchaseOrder.subPurchaseOrder != null}">
+			<c:if test="${purchaseOrder.subPurchaseOrder != null || purchaseOrder.subPurchaseOrder.size()>0 }">
 			<c:forEach items="${purchaseOrder.subPurchaseOrder}" var="spList">
 
 				<div class="list-pege">
@@ -297,6 +298,7 @@
 				</div>
 
 			</c:forEach>
+		</c:if>
 		</c:if>
 	</c:forEach>
 	<!--订单状态-->
