@@ -28,12 +28,12 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
 </head>
 <body style="float: left">
-<div class="hd">
+<div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
     <li class="active"><a href="#">动&nbsp;态</a></li>
     <c:if test="${result == 'show'}">
-      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">已关注</a></li>
+      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>
     </c:if>
     <c:if test="${result == 'hide'}">
       <li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>
@@ -310,6 +310,7 @@
           alert("您还未登录,请登录后操作!");
         }else if(data=="add"){
           str = "已关注";
+          //$(this).find('.gz-icon').hide();
           changeFollowStatus(masterId,str);
         }else if(data=="del"){
           str = "关注";
@@ -321,6 +322,11 @@
   function changeFollowStatus(masterId,str){
     $("a[name='masterFollow"+masterId+"']").each(function(){
         $(this).find("em").html(str);
+      if(str == "关注"){
+        $(this).find('.gz-icon').show();
+      }else if(str == "已关注"){
+        $(this).find('.gz-icon').hide();
+      }
     })
   }
 

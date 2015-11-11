@@ -42,7 +42,7 @@
 <ul class="offered ae">
     <c:forEach items="${groupJoinList}" var="member" varStatus="rec">
         <li>
-            <p>${member.group.groupProduct.productModel.name}</p>
+            <p>${member.group.groupProduct.productModel.product.name} ${member.group.groupProduct.productModel.name}</p>
             <p>${member.group.createDateTime}</p>
             <c:if test="${member.group.status=='1'}">
                 <p>${member.group.memberList.size()}人/${member.group.groupProduct.memberAmount}人成团</p>
