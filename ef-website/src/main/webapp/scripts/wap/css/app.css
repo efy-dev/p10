@@ -82,7 +82,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .box-hd .ul-index-list>li.stau3 em {right:19px}
 .box-hd .ul-index-list>li img {width:100%}
 .box-hd .ul-index-list>li a {display:block;position:relative}
-.box-hd .ul-index-list>li .name {width:20px;line-height:20px;position:absolute;top:19px;right:10px;color:#fff;font-style:italic;
+.box-hd .ul-index-list>li .name {width:20px;line-height:18px;position:absolute;top:19px;right:10px;color:#fff;font-style:italic;
     font-weight: bold;}
 .box-hd .ul-index-list>li .price {position:absolute;bottom:10px;left:10px;font-size:12px;color:#fff}
 .box-hd .ul-index-list>li .price i {font-style:normal;font-size:8px}
@@ -192,7 +192,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 .details .des-content .peo-info li img {width:100%}
 .details .des-content .peo-info li.text {margin:10px 0}
 .details .des-content .discuss {}
-.details .des-content .discuss .dis-title {font-size:14px;padding:0 20px}
+.details .des-content .discuss .dis-title {font-size:14px;padding:0 20px;color: #666;}
 .details .des-content .discuss .ul-list .item {width:100%;float:left;margin:15px 0;border-top:2px solid #e5e5e5;border-bottom:2px solid #e5e5e5;padding:15px 20px;}
 .details .des-content .discuss .ul-list .item .user-info {width:100%;float:left;margin-bottom:15px;position:relative;padding-left:40px;}
 .details .des-content .discuss .ul-list .item .user-info img {width:30px;height:30px;-webkit-border-radius:100px;position:absolute;top:0;left:0;}
@@ -441,3 +441,7 @@ input[type="checkbox"], textarea {border-radius:0;box-shadow:none}
 @media (min-width:320px) {
     .box-hd .ul-index-list>li em {height:126px;}
 }
+/*--//End--*/
+.ae{width: 100%;float: left}
+.star-level .staring{}
+/*--//End--*/

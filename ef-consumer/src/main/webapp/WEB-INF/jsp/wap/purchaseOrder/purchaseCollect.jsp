@@ -5,7 +5,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
-<head></head>
+<head>
+    <title>
+        我的收藏
+    </title>
+</head>
 <body>
 <!--//End--header-->
 <div class="commodity">
