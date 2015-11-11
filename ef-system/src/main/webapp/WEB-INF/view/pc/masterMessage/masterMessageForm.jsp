@@ -137,7 +137,7 @@
                                         <c:forEach items="${object.messageAttachmentLists}" var="attachment" varStatus="att">
                                             <li style="float: left;width:100px; height:100px;margin-right:10px;margin-bottom:6px;"  name="">
                                                 <img width="100%" name="frontPhotoUrl"
-                                                     src="http://pro.efeiyi.com/${attachment.pictureUrl}@!product-model"
+                                                     src="http://tenant.efeiyi.com/${attachment.pictureUrl}@!master-message-little-more"
                                                      alt="附件"/>
                                             </li>
                                         </c:forEach>
@@ -178,7 +178,7 @@
                     data = data.substring(1,data.length-1)
                     var msgId = data.split(":")[0].trim();
                     var  imgUrl = data.split(":")[1];
-                    var  url = "http://pro.efeiyi.com/"+imgUrl+"@!product-model";
+                    var  url = "http://tenant.efeiyi.com/"+imgUrl+"@!master-message-little-more";
                     ///显示图片
                     var img ='<li style="float: left;width:100px; height:100px;margin-right:10px;margin-bottom:6px;" name="'+msgId+'">'+
                             '   <img width="100%" name="'+msgId+ '"  src="'+url+'" alt="附件">'+

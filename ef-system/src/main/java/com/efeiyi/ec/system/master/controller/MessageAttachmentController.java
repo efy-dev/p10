@@ -73,7 +73,7 @@ public class MessageAttachmentController {
 			attachment.setFileName(fileName.substring(0,fileName.indexOf(".jpg")));
 			baseManager.saveOrUpdate(MessageAttachment.class.getName(),attachment);
 			try {
-				aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
+				aliOssUploadManager.uploadFile(mf, "tenant", url);
 				data = msg.getId() + ":" + url;
 			}catch (Exception e){
 				e.printStackTrace();
