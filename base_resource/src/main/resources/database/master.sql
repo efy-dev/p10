@@ -653,3 +653,6 @@ ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
 
 ALTER TABLE `master_message`
 ADD COLUMN `data_source`  varchar(255) NULL AFTER `author`;
+
+ALTER TABLE `master_work`
+ADD COLUMN `store_amount`  int(16) NULL AFTER `tenant_id`;
