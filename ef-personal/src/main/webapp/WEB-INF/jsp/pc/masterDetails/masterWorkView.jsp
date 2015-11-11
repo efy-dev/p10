@@ -106,8 +106,15 @@
                                     <p><span><ming800:status name='level' dataType='Tenant.level'
                                                              checkedValue='${object.level}' type='normal'/>传承人</span>
                                     </p>
-                                    <a class="btn-guan" onclick="followMaster(this,'${object.id}')"><i
-                                            class="gz-icon"></i><em>${object.followStatus}</em></a>
+                                    <a class="btn-guan" onclick="followMaster(this,'${object.id}')">
+                                        <c:if test="${object.followStatus == '已关注'}">
+                                            <i class="gz-icon" style="display: none;"></i>
+                                        </c:if>
+                                        <c:if test="${object.followStatus == '关注'}">
+                                            <i class="gz-icon"></i>
+                                        </c:if>
+                                        <em>${object.followStatus}</em>
+                                    </a>
                                 </div>
                                 <div class="img"><a href="<c:url value='/masterMessage/introView/${object.id}'/>"><img
                                         src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}"></a></div>
@@ -223,14 +230,14 @@
             async: true,
             dataType: "json",//设置请求返回的数据格式
             success: function (data) {
-                if (data == "noRole") {
+                if(data == "noRole"){
                     alert("您还未登录,请登录后操作!");
-                } else if (data == "add") {
-                    str = "已关注";
-                    $(o).find("em").html(str);
-                } else if (data == "del") {
-                    str = "关注";
-                    $(o).find("em").html(str);
+                }else if(data=="add"){
+                    $(o).find('.gz-icon').hide();
+                    $(o).find("em").html("已关注");
+                }else if(data=="del"){
+                    $(o).find('.gz-icon').show();
+                    $(o).find("em").html("关注");
                 }
             }
         })
