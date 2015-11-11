@@ -179,7 +179,7 @@
         </table>
         </c:if>
 
-        <c:if test="${ order.orderStatus!=1 && order.subPurchaseOrder.size()==0}">
+        <c:if test="${ order.orderStatus!=1}">
           <c:if test="${order.subPurchaseOrder==null || order.subPurchaseOrder.size()==0}">
           <table class="list-pro-table">
             <tr>
@@ -268,7 +268,7 @@
           </c:if>
         </c:if>
 
-        <c:if test="${order.orderStatus!=1 && order.subPurchaseOrder!=null}">
+        <c:if test="${order.orderStatus!=1}">
         <c:if test="${order.subPurchaseOrder!=null || order.subPurchaseOrder.size()>0}">
           <c:forEach items="${order.subPurchaseOrder}" var="spList">
 
@@ -278,7 +278,7 @@
               <span>
               <fmt:formatDate value="${spList.createDatetime}" pattern="yyyy-MM-dd H:mm:ss" />
               </span>
-                  <span>订单号：<strong>${spList.serial}13214321</strong></span>
+                  <span>订单号：<strong>${spList.serial}</strong></span>
                   <span>${spList.tenant.name}</span>
                 </th>
               </tr>

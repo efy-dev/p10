@@ -49,9 +49,9 @@ public class GroupController {
         String memberId = request.getParameter("memberId");
         String groupId = request.getParameter("groupId");
 
-        XQuery xQuery = new XQuery("listGroup_default4",request);
-        xQuery.put("groupProduct_id",groupProductId);
-        List<Group> list = baseManager.listObject(xQuery);
+        //XQuery xQuery = new XQuery("listGroup_default4",request);
+        //xQuery.put("groupProduct_id",groupProductId);
+        //List<Group> list = baseManager.listObject(xQuery);
         //GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
       /*  boolean flag = false;
@@ -99,6 +99,8 @@ public class GroupController {
         GroupProduct groupProduct = (GroupProduct) baseManager.getObject(GroupProduct.class.getName(),groupProductId);
 
         if(purchaseOrder.getOrderStatus().equals("5")){
+            purchaseOrder.setOrderStatus("3");
+            baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder);
             if (groupId.equals("null")||groupId.isEmpty()){
                 Group groupbuy = new Group();
                 groupbuy.setManUser(currentUser);
@@ -165,6 +167,14 @@ public class GroupController {
                         baseManager.saveOrUpdate(Member.class.getName(),member1);
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
 
+                    }
+                    XQuery xQuery = new XQuery("listPurchaseOrderGroup_default3",request);
+                    xQuery.put("group_id",group.getId());
+                    List<PurchaseOrderGroup> list = baseManager.listObject(xQuery);
+                    for(PurchaseOrderGroup purchaseOrderGroup1:list){
+                        PurchaseOrder purchaseOrder1 = purchaseOrderGroup1.getPurchaseOrder();
+                        purchaseOrder1.setOrderStatus("5");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
                     }
                 }
 
@@ -320,6 +330,15 @@ public class GroupController {
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
                         baseManager.saveOrUpdate(Member.class.getName(),member);
 
+                    }
+
+                    XQuery xQuery1 = new XQuery("listPurchaseOrderGroup_default3",request);
+                    xQuery.put("group_id",group.getId());
+                    List<PurchaseOrderGroup> list1 = baseManager.listObject(xQuery1);
+                    for(PurchaseOrderGroup purchaseOrderGroup1:list1){
+                        PurchaseOrder purchaseOrder1 = purchaseOrderGroup1.getPurchaseOrder();
+                        purchaseOrder1.setOrderStatus("5");
+                        baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
                     }
                 }else {
                     group.setStatus("5");
