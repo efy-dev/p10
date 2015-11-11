@@ -69,7 +69,7 @@
   <ul class="bars">
     <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
     <c:if test="${result == 'show'}">
-      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">已关注</a></li>
+      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>
     </c:if>
     <c:if test="${result == 'hide'}">
       <li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>
