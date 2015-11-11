@@ -8,6 +8,7 @@
 --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 
 <html>
 <head>
@@ -35,6 +36,13 @@
       <input type="hidden" name="qm" value="saveOrUpdateSubject">
       <input type="hidden" name="resultPage" value="0" />
       <input type="hidden" name="step" value="subject">
+        <input type="hidden" name="subjectShow" value="${object.subjectShow}">
+        <c:if test="${empty object.subjectIndex}">
+            <input type="hidden" name="subjectIndex" value="1">
+        </c:if>
+        <c:if test="${not empty object.subjectIndex}">
+            <input type="hidden" name="subjectIndex" value="${object.subjectIndex}">
+        </c:if>
         <%--<input type="hidden" name="newUrl" value="">--%>
         <input type="hidden" name="pictureUrl" value="${object.pictureUrl}">
         <input type="hidden" name="subjectDescription.id" value="${object.subjectDescription.id}">
@@ -50,7 +58,33 @@
 
         </div>
       </div>
+        <div class="am-form-group">
+            <label name="template" class="am-u-sm-3 am-form-label">专题模板</label>
 
+            <div class="am-u-sm-9">
+                <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}" type="select" />
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label name="template" class="am-u-sm-3 am-form-label">专题类别</label>
+
+            <div class="am-u-sm-9">
+                <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="select" />
+            </div>
+        </div>
+        <c:if test="${not empty object.id}">
+            <div class="am-form-group">
+                <label name="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
+
+                <div class="am-u-sm-9">
+                    <div style="margin-top: 9px;">
+                        <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
+                        <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
+                    </div>
+                    <!-- <small>必填项*</small>-->
+                </div>
+            </div>
+        </c:if>
     <div class="am-form-group" >
 
 

@@ -637,4 +637,19 @@ public class ProductController extends BaseController {
         }
         return null;
     }
+
+
+    @RequestMapping("/updateShow.do")
+    @ResponseBody
+    public String updateShow(String subjectId,String show, HttpServletRequest request) {
+
+        try {
+            Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectShow(show);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return show;
+    }
 }

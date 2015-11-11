@@ -307,6 +307,29 @@
         <entity name="Subject" label="专题"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Subject">
+            <fields>
+                <field name="show" label="状态" inputType="text">
+                    <statusType fieldName="show">
+                        <item label="上架" value="1"/>
+                        <item label="下架" value="2"/>
+                    </statusType>
+                </field>
+                <field name="type" label="类别" inputType="text">
+                    <statusType fieldName="type">
+                        <item label="地区专题" value="dx"/>
+                        <item label="节日专题" value="jr"/>
+                        <item label="礼品专题" value="lp"/>
+                        <item label="品牌专题" value="pp"/>
+                        <item label="活动专题" value="hd"/>
+                    </statusType>
+                </field>
+                <field name="template" label="模板" inputType="text">
+                    <statusType fieldName="template">
+                        <item label="普通模板" value="1"/>
+                        <item label="活动模板" value="2"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistSubject" access="" label="专题分页列表"
                     result="/subject/subjectPList">
