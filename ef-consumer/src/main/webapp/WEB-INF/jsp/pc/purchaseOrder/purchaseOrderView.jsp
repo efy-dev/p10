@@ -50,12 +50,13 @@
                   </td>
                   <td class="commodity_price_unit1  price9"><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">
                   ${op.productModel.product.name}
-                    <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                    [
-                    <c:forEach items="${op.productModel.productPropertyValueList}"
-                               var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                    ]
-                  </c:if>
+                    [${op.productModel.name}]
+                    <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                    <%--[--%>
+                    <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                               <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                    <%--]--%>
+                  <%--</c:if>--%>
                   </a></td>
 
                   <td class="commodity_quantity  amount">x<span>${op.purchaseAmount}</span></td>

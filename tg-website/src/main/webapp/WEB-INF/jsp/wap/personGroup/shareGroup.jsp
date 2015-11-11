@@ -105,7 +105,7 @@
         </div>
         <div class="tab-btn">
           <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
-          <a href="#">我要开团<i class="gicon"></i></a>
+          <a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>
         </div>
       </div>
       <div class="co-page" style="display: none">

@@ -112,13 +112,13 @@
                       <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                       <div class="info">
                         <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                        <p>${op.productModel.product.name}
-                          <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                            [
-                            <c:forEach items="${op.productModel.productPropertyValueList}"
-                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                            ]
-                          </c:if>
+                        <p>${op.productModel.product.name}[${op.productModel.name}]
+                          <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                            <%--[--%>
+                            <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                       <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                            <%--]--%>
+                          <%--</c:if>--%>
                         </p></a>
 
                       </div>
@@ -201,12 +201,13 @@
                         <div class="info">
                           <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
                             <p>${op.productModel.product.name}
-                              <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                                [
-                                <c:forEach items="${op.productModel.productPropertyValueList}"
-                                           var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                ]
-                              </c:if>
+                            [${op.productModel.name}]
+                              <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                                <%--[--%>
+                                <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                           <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                <%--]--%>
+                              <%--</c:if>--%>
                             </p></a>
 
                         </div>
@@ -291,13 +292,13 @@
                           <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                           <div class="info">
                             <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                              <p>${op.productModel.product.name}
-                                <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                                  [
-                                  <c:forEach items="${op.productModel.productPropertyValueList}"
-                                             var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                  ]
-                                </c:if>
+                              <p>${op.productModel.product.name}[${op.productModel.name}]
+                                <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                                  <%--[--%>
+                                  <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                             <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                  <%--]--%>
+                                <%--</c:if>--%>
                               </p></a>
 
                           </div>

@@ -162,7 +162,7 @@ public class GroupController {
                                 }
                             }
                         }
-                        bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
                         member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         baseManager.saveOrUpdate(Member.class.getName(),member1);
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
