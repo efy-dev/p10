@@ -52,7 +52,7 @@
     var descContent = "xx参加了团购，还差4人成团";  // 分享后的描述信息
     var shareTitle = '这是微信分享链接标题';  // 分享后的标题
     var appid = '';  // 应用id,如果有可以填，没有就留空
-
+/*
 //    function shareFriend() {
         WeixinJSBridge.invoke('sendAppMessage',{
             "img_url": imgUrl,
@@ -100,7 +100,8 @@
 //        WeixinJSBridge.on('menu:share:weibo', function(argv){
 //            shareWeibo();
 //        });
-//    }, false);
+//    }, false);*/
+
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="<c:url value="/scripts/wap/js/jquery.min.js"/>"></script>

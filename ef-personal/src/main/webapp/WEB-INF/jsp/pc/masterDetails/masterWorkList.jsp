@@ -31,7 +31,7 @@
 <body style="float: left;">
 <div class="ae master-text">
   <div class="great-master">
-    <div class="master-pic"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}" alt="传承人" class="am-img-thumbnail am-circle">
+    <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle">
     </div>
     <h5>${object.masterName}</h5>
     <p>[${object.projectName}]</p>
@@ -330,10 +330,10 @@
                       "                    <h4 class=\"ae\">"+data[i].projectName+"</h4>"+
                       "                    <div class=\"function-page ae\">"+
                       "                        <div class=\"d-left\">"+
-                      "                            <a href=\"#\">"+
+//                      "                            <a onclick=\"followWork(this,'"+data[i].id+"');\">"+
                       "                                <i class=\"h-i-con\"></i>"+
                       "                                <span>"+data[i].amount+"</span>"+
-                      "                            </a>"+
+//                      "                            </a>"+
                       "                        </div>"+
                       "                        <div class=\"d-right\">"+
                       "                            <div class=\"right1\">"+

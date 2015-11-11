@@ -50,7 +50,7 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
+        <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
         <li><a href="" title="分类" id="acs">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
@@ -137,9 +137,10 @@
 <%--</div>--%>
 <%--<div style="background: #000;opacity: 0.5;width: 100%;height: 100%;position: absolute;"></div>--%>
 <%--</div>--%>
+
 <div class="work-details" id="work-details">
   <p class="ptext1">${work.name}</p>
-  <div class="pimg1"><img src="${work.pictureUrl}"></div>
+  <div class="pimg1"><img src="http://tenant.efeiyi.com/${work.pictureUrl}@!master-intro-product"></div>
   <p class="ptext2"> &nbsp;&nbsp;&nbsp;&nbsp;${work.productDescription.content}</p>
   <div class="inheritor ">
 
@@ -153,10 +154,11 @@
       <p class="itor-text-4">工笔勾画浓淡皆相宜</p>
       <a class="gz-fd-icon" onclick="changeStatus(this,'${work.master.id}')">${work.master.followStatus}</a>
 
-      <div class="gz-fd-img"><a href="#"><img src="${work.master.favicon}"></a>
+      <div class="gz-fd-img"><a href="#"><img src="http://tenant.efeiyi.com/${work.master.favicon}@!master-message-favicon"></a>
       </div>
     </div>
   </div>
+
   <!--评论-->
   <div class="review">
     <div class="dialogue">
@@ -534,19 +536,19 @@
     return showTime;
   }
 
-  function workComment(workId){
-    $.ajax({
-      type: "POST",
-      url: "<c:url value='/masterFollow/followed.do'/>",
-      data:"workId="+workId,
-      async:false,
-      dataType:"json",
-      error:function(){alert("出错了.请联系系统管理员!")},
-      success:function(msg){
+  <%--function workComment(workId){--%>
+    <%--$.ajax({--%>
+      <%--type: "POST",--%>
+      <%--url: "<c:url value='/masterFollow/followed.do'/>",--%>
+      <%--data:"workId="+workId,--%>
+      <%--async:false,--%>
+      <%--dataType:"json",--%>
+      <%--error:function(){alert("出错了.请联系系统管理员!")},--%>
+      <%--success:function(msg){--%>
 
-      }
-    })
-  }
+      <%--}--%>
+    <%--})--%>
+  <%--}--%>
 
   function changeStatus(o,masterId){
     var status = "";
@@ -564,9 +566,12 @@
       dataType:"json",
       error:function(){alert("出错了.请联系系统管理员!")},
       success:function(msg){
-        if(msg == "1"){
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }
+        if(msg == "del"){
           $(o).html("关注");
-        }else if(msg == "2"){
+        }else if(msg == "add"){
           $(o).html("已关注");
         }
       }

@@ -69,7 +69,6 @@ public class PurchaseOrderController extends BaseController {
         productModel.setPrice(groupProduct.getGroupPrice());
         productModel.setAmount(groupProduct.getProductModel().getAmount());
         productModel.setName(groupProduct.getProductModel().getName());
-
         CartProduct cartProduct = new CartProduct();
         String callback = request.getParameter("callback");
         cartProduct.setProductModel(productModel);
@@ -84,7 +83,7 @@ public class PurchaseOrderController extends BaseController {
         productMap.put(groupProduct.getProductModel().getProduct().getTenant().getId(), cartProductList);
         model.addAttribute("productMap", productMap);
         Cart cart = new Cart();
-        cart.setTotalPrice(groupProduct.getProductModel().getPrice().multiply(new BigDecimal(cartProduct.getAmount())));
+        cart.setTotalPrice(groupProduct.getGroupPrice().multiply(new BigDecimal(cartProduct.getAmount())));
         model.addAttribute("cart", cart);
         List<Tenant> tenantList = new ArrayList<>();
         tenantList.add(groupProduct.getProductModel().getProduct().getTenant());

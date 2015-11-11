@@ -157,7 +157,6 @@ public class SigninController extends BaseController {
                 coupon.setConsumer(consumer);
                 baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             }
-
         }
         response.sendRedirect(request.getContextPath() + "/sso2.do");
     }

@@ -186,11 +186,18 @@ public class MasterCategoryController {
 		}else if("plistMasterProject_default".equals(qm)){
 			String conditions = request.getParameter("conditions");
 			String projectId = conditions.split(":")[1].substring(0,conditions.split(":")[1].length() - 1);
-			String queryHql = "from MasterProject p where p.project.id =:projectId and p.status='1'";
-			LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-			queryMap.put("projectId",projectId);
-			List<MasterProject> masterProjects = baseManager.listObject(queryHql,queryMap);
-//			List<MasterModel> list = new ArrayList<>();
+			XQuery xQuery = new XQuery(qm,request);
+			xQuery.put("project_id",projectId);
+			PageEntity entity = new PageEntity();
+			String pageIndex = request.getParameter("pageEntity.index");
+			String pageSize = request.getParameter("pageEntity.size");
+			if (pageIndex != null) {
+				entity.setIndex(Integer.parseInt(pageIndex));
+				entity.setSize(Integer.parseInt(pageSize));
+			}
+			xQuery.setPageEntity(entity);
+			PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+			List<MasterProject> masterProjects = pageInfo.getList();
 			if (masterProjects != null && masterProjects.size() > 0){
 				for (MasterProject masterProject : masterProjects){
 					MasterModel masterModel = convert(masterProject.getMaster(),user);

@@ -34,7 +34,7 @@
 
   <style>
     .pc-dy-txt .pc-dy-box .pc-dy-content .one-pic img {height:100px;}
-    .master-text .mas-tx-left .publish img {height:100px}
+    .master-text .mas-tx-left .publish img {}
   </style>
 </head>
 <body >
@@ -77,7 +77,7 @@
 <!-- //End--header-->
 <div class="ae master-text">
   <div class="great-master">
-    <div class="master-pic"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}" alt="传承人" class="am-img-thumbnail am-circle"></div>
+    <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle"></div>
     <h5>${object.fullName}</h5>
     <p>[${object.projectName}]</p>
     <div class="great"><em><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>非物质文化遗产传承人</em><i class="icon-master"></i></div>
@@ -98,6 +98,7 @@
       </div>
     </div>
   </div>
+  <div class="hd">
   <div class="great-nav">
     <div class="nav-bars ae">
       <ul class="bars" >
@@ -107,6 +108,7 @@
       </ul>
     </div>
   </div>
+  </div>
   <!-- //End--master-nav-->
   <div class="homepage">
     <div class="pc-dynamic" >
@@ -115,25 +117,25 @@
         </ul>
       </div>
       <div class="p-dy-right mas-tx-left" style="float: right;margin-top: 20px;">
-
         <p>${object.content}</p>
-
         <h5>作品</h5>
         <ul class="publish">
           <c:if test="${!empty workList && workList.size() > 1}">
             <c:forEach items="${workList}" var="work" begin="0" end="2">
             <li>
-              <a href="<c:url value='/masterMessage/getWorkDetails/${work.id}'/>"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${work.pictureUrl}"> </a>
+              <a href="<c:url value='/masterMessage/getWorkDetails/${work.id}'/>"><img src="http://tenant.efeiyi.com/${work.pictureUrl}@!master-intro-product"> </a>
               <p>${work.name}</p>
             </li>
             </c:forEach>
           </c:if>
         </ul>
-        <div class="f-r-gd ae hpe"><a onclick="forwardCraft('${object.id}');"><span>更多作品</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae hpe"><a href="<c:url value='/masterMessage/getPartWorks/'/>${object.id}"><span>更多作品</span><i class="sp-icon"></i></a></div>
         <ul class="publish">
           <li>
-            <a href="#"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.masterProjectList.get(0).project.picture_pc_url}"> </a>
-            <p>${object.masterProjectList.get(0).project.name}</p>
+            <c:if test="${!empty object.masterProjectList && object.masterProjectList.size() > 0}">
+              <a href="#"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.masterProjectList.get(0).project.picture_pc_url}"> </a>
+              <p>${object.masterProjectList.get(0).project.name}</p>
+            </c:if>
           </li>
         </ul>
         <div class="f-r-gd ae"><a href="#"><span>查看工艺</span><i class="sp-icon"></i></a></div>
@@ -293,7 +295,7 @@
   $(window).load(function(){
     var winH = $(window).height(); //页面可视区域高度
     $(window).scroll(function(){
-      var pageH = $(document.body).height();
+      var pageH = $(document).height();
       var scrollT = $(window).scrollTop(); //滚动条top
       var aa = (pageH - winH - scrollT) / winH;
       if(aa < 0.02){
@@ -354,11 +356,11 @@
             if(attr != null && attr.length > 1 ){
               box += "<div class=\"two-pic\"><ul class=\"sudoku\">";
               for(var j in attr){
-                box += "<li><a href=\"#\"><img src=\""+attr[j].pictureUrl+"\"></a> </li>";
+                box += "<li><a href=\"#\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a> </li>";
               }
               box += "</ul></div>";
             }else if(attr != null && attr.length == 1){
-              box +="<div class=\"one-pic\"><a href=\"#\"><img src=\""+attr[0].pictureUrl+"\"></a></div>"
+              box +="<div class=\"one-pic\"><a href=\"#\"><img src=\"http://tenant.efeiyi.com/"+attr[0].pictureUrl+"@!master-message-only-little\"></a></div>"
             }
               box += "  <div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></p></div>"+
                     "                                </div>"+

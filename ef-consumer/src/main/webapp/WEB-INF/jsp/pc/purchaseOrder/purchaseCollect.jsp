@@ -47,13 +47,14 @@
                       <%--<label><input type="checkbox"></label>--%>
                     <%--</dt>--%>
                     <dd>
-                      <p class="list-title-text"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;" target=_blank>${collectList.productModel.product.name}</a>
-                        <c:if test="${collectList.productModel.productPropertyValueList.size()>1}">
-                        [
-                        <c:forEach items="${collectList.productModel.productPropertyValueList}"
-                                   var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                        ]
-                      </c:if></p>
+                      <p class="list-title-text"><a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;" target=_blank>${collectList.productModel.product.name}[${collectList.productModel.name}]</a>
+                        <%--<c:if test="${collectList.productModel.productPropertyValueList.size()>1}">--%>
+                        <%--[--%>
+                        <%--<c:forEach items="${collectList.productModel.productPropertyValueList}"--%>
+                                   <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                        <%--]--%>
+                      <%--</c:if>--%>
+                      </p>
                       <p class="list-cost">￥<span>${collectList.productModel.price}</span></p>
                       <ul class="list-option">
                         <li class="option-left"><a href="<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>">取消关注</a></li>
