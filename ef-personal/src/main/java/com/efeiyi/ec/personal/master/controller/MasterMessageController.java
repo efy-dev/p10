@@ -484,16 +484,17 @@ public class MasterMessageController {
 					} else {
 						message.setFollowStatus("关注");
 					}
-					String sql = "from MasterMessagePraise p where p.user.id=:userId and p.message.id=:msgId and p.status = '1'";
-					queryMap.clear();
-					queryMap.put("userId",user.getId());
-					queryMap.put("msgId",message.getId());
-					MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(sql,queryMap);
-					if (praise != null){
-						message.setPraiseStatus("取消赞");
-					}else {
-						message.setPraiseStatus("赞");
-					}
+					message.setPraiseStatus("赞");
+//					String sql = "from MasterMessagePraise p where p.user.id=:userId and p.message.id=:msgId and p.status = '1'";
+//					queryMap.clear();
+//					queryMap.put("userId",user.getId());
+//					queryMap.put("msgId",message.getId());
+//					MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(sql,queryMap);
+//					if (praise != null){
+//						message.setPraiseStatus("取消赞");
+//					}else {
+//						message.setPraiseStatus("赞");
+//					}
 				} else {
 					message.setFollowStatus("关注");
 					message.setPraiseStatus("赞");

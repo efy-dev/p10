@@ -43,7 +43,12 @@
           <div class="bt-gz">
             <a class="btn-guan" onclick="followMaster(this,'${object.id}');">
               <div class="gz-q">
-                <i class="gz-icon"></i>
+                <c:if test="${object.followStatus == '已关注'}">
+                  <i class="gz-icon" style="display: none;"></i>
+                </c:if>
+                <c:if test="${object.followStatus == '关注'}">
+                  <i class="gz-icon"></i>
+                </c:if>
                 <em>${object.followStatus}</em>
               </div>
             </a>
@@ -93,19 +98,19 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var next = $(o).parent().parent().next().find("span");
+        var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
         if(data == "noRole"){
           alert("您还未登录,请登录后操作!");
         }else if(data=="add"){
           str = "已关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").hide();
           next.html((fsAmount + 1)+"粉丝");
         }else if(data=="del"){
           str = "关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").show();
           next.html((fsAmount - 1)+"粉丝");
         }
       }
