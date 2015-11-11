@@ -143,7 +143,13 @@
               var projectName = "";
             }
             var box = "<li><div class=\"pc-dy-txt ae\"><div class=\"pc-dy-pic\"><div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view\"></a></div>" +
-                      "<div class=\"pc-gz gz-pc\"><div class=\"bt-gz act-1\"><a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\"><div class=\"gz-q\"><i class=\"gz-icon\"></i><em>"+data[i].followStatus+"</em></div></a></div></div></div>" +
+                      "<div class=\"pc-gz gz-pc\"><div class=\"bt-gz act-1\"><a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\"><div class=\"gz-q\">" ;
+                    if(data[i].followStatus == "已关注"){
+                      box += "<i class=\"gz-icon\" style='display: none'></i>";
+                    }else{
+                      box += "<i class=\"gz-icon\"></i>";
+                    }
+            box += "<em>"+data[i].followStatus+"</em></div></a></div></div></div>" +
                       "<div class=\"pc-dy-box\"><h5><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\">"+data[i].masterName+"</a></h5>"+projectName+"<p>"+levelName+"非遗传承人</p><div class=\"pc-dy-content\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>" +
                       "<div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></div>" ;
             var attr = data[i].messageAttachmentLists;
@@ -200,7 +206,7 @@
             }else if(data[i].level == "5"){
               levelName = "县级";
             }
-            var box = $("<li>"+
+            var box = "<li>"+
             "            <div class=\"text\">"+
             "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
             "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -208,16 +214,20 @@
             "            </div>"+
             "            <div class=\"bt-gz\">"+
             "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-            "                <div class=\"gz-q\">"+
-            "                  <i class=\"gz-icon\"></i>"+
-            "                  <em>"+data[i].followStatus+"</em>"+
+                    "                <div class=\"gz-q\">";
+            if(data[i].followStatus == "已关注"){
+              box += "<i class=\"gz-icon\" style='display: none'></i>";
+            }else{
+              box += "<i class=\"gz-icon\"></i>";
+            }
+            box += "<em>"+data[i].followStatus+"</em>"+
             "                </div>"+
             "              </a>"+
             "            </div>"+
             "            <div class=\"img-q\">"+
             "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
             "            </div>"+
-            "          </li>");
+            "          </li>";
             rightUp.append(box);
           }
         }else{
@@ -261,7 +271,7 @@
             }else if(data[i].level == "5"){
               levelName = "县级";
             }
-            var box = $("<li>"+
+            var box = "<li>"+
                     "            <div class=\"text\">"+
                     "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                     "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -269,16 +279,20 @@
                     "            </div>"+
                     "            <div class=\"bt-gz\">"+
                     "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-                    "                <div class=\"gz-q\">"+
-                    "                  <i class=\"gz-icon\"></i>"+
-                    "                  <em>"+data[i].followStatus+"</em>"+
+                    "                <div class=\"gz-q\">";
+                  if(data[i].followStatus == "已关注"){
+                    box += "<i class=\"gz-icon\" style='display: none'></i>";
+                  }else{
+                    box += "<i class=\"gz-icon\"></i>";
+                  }
+            box += "<em>"+data[i].followStatus+"</em>"+
                     "                </div>"+
                     "              </a>"+
                     "            </div>"+
                     "            <div class=\"img-q\">"+
                     "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
                     "            </div>"+
-                    "          </li>");
+                    "          </li>";
             rightDown.append(box);
           }
         }else{
@@ -338,12 +352,15 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var next = $(o).find("em");
+        var amount = parseInt(next.html().substring(1,next.html().length));
+        console.log(next.html()+"----"+amount);
         if(data =="noRole"){
           alert("您还没有登录,请登录后操作!");
         }else if(data == "add"){
-          alert("成功!");
+          next.html("赞"+(amount + 1));
         }else if(data == "del"){
-          alert("已取消点赞");
+          next.html("赞"+(amount - 1));
         }
       }
     })

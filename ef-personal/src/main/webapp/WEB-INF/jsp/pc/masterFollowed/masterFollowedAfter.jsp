@@ -397,13 +397,23 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
-        if(data =="noRole"){
-          alert("您还没有登录,请登录后操作!");
-        }else if(data == "add"){
-          alert("成功!");
-        }else if(data == "del"){
-          alert("已取消点赞");
-        }
+          var next = $(o).find("em");
+          var amount = parseInt(next.html().substring(1,next.html().length));
+          console.log(next.html()+"----"+amount);
+          if(data =="noRole"){
+              alert("您还没有登录,请登录后操作!");
+          }else if(data == "add"){
+              next.html("赞"+(amount + 1));
+          }else if(data == "del"){
+              next.html("赞"+(amount - 1));
+          }
+//          if(data =="noRole"){
+//          alert("您还没有登录,请登录后操作!");
+//        }else if(data == "add"){
+//          alert("成功!");
+//        }else if(data == "del"){
+//          alert("已取消点赞");
+//        }
       }
     })
   }
