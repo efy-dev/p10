@@ -76,7 +76,7 @@
         <P>${msg.content}</P>
         <c:if test="${!empty msg.messageAttachmentLists}">
           <c:forEach items="${msg.messageAttachmentLists}" var="att">
-            <div class="detaile-img"><a href="#"><img src="${att.pictureUrl}"></a></div>
+            <div class="detaile-img"><a href="#"><img src="http://tenant.efeiyi.com/${att.pictureUrl}@!master-message-view-big"></a></div>
           </c:forEach>
         </c:if>
           <div class="detaile-share ae" style="height: auto">
@@ -90,11 +90,11 @@
           <!-- JiaThis Button END -->
           <div class="thumb-up">
             <div class="thump-collect">
-              <a href="#"><i class="s-icon"></i> </a>
+              <a onclick="storeMessage('${msg.id}')"><i class="s-icon"></i> </a>
               <a onclick="storeMessage('${msg.id}')"><em>收藏</em></a>
             </div>
             <div class="thump-assist">
-              <a href="#"><i class="z-icon"></i> </a>
+              <a onclick="praiseMessage(this,'${msg.id}');"><i class="z-icon"></i> </a>
               <a onclick="praiseMessage(this,'${msg.id}');"><em>赞${msg.praiseNum}</em></a>
             </div>
           </div>
@@ -124,7 +124,7 @@
                   <h4>${msg.master.fullName}</h4>
                   <p>${msg.master.projectName}</p>
                   <p><span><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>传承人</span></p>
-                  <a class="btn-guan" onclick="followMaster('${msg.master.id}');"><i class="gz-icon"></i><em>关注</em></a>
+                  <a class="btn-guan" onclick="followMaster(this,'${msg.master.id}');"><i class="gz-icon"></i><em>关注</em></a>
                 </div>
                 <div class="img"><img src="http://tenant.efeiyi.com/${msg.master.favicon}@!master-favicon-view"></div>
               </li>
@@ -136,7 +136,7 @@
   </div>
 </div>
 <script>
-  function followMaster(masterId){
+  function followMaster(o,masterId){
         var str;
         $.ajax({
             type: "post",//设置get请求方式
@@ -148,11 +148,11 @@
                 if(data == "noRole"){
                     alert("您还未登录,请登录后操作!");
                 }else if(data=="add"){
-                    str = "已关注";
-                    changeFollowStatus(masterId,str);
+                    $(o).find('.gz-icon').hide();
+                    $(o).find("em").html("已关注");
                 }else if(data=="del"){
-                    str = "关注";
-                    changeFollowStatus(masterId,str);
+                    $(o).find('.gz-icon').show();
+                    $(o).find("em").html("关注");
                 }
             }
         })

@@ -15,18 +15,18 @@
             <% } %>
             <%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>
             <%--<li><a href="<c:url value='http://passport.efeiyi.com/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" title="登录">请登录</a></li>--%>
-            <li><a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" title="登录">请登录</a></li>
+            <li><a href="<c:url value='/sso.do'/>" title="登录">请登录</a></li>
             <li><a href="" title="快速注册">快速注册</a></li>
             <% } %>
-            <li><a href="" title="商家入驻">商家入驻</a></li>
+            <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
             <li class="btn-top-wechat">
                 <a title="手机e飞蚁">手机e飞蚁</a>
                 <span class="top-wechat"></span>
             </li>
-            <li class="cart">
-                <a href="" title="购物车"><i class="icon"></i>购物车</a>
-                <span class="tips"><em>0</em></span>
-            </li>
+            <%--<li class="cart">--%>
+                <%--<a href="" title="购物车"><i class="icon"></i>购物车</a>--%>
+                <%--<span class="tips"><em>0</em></span>--%>
+            <%--</li>--%>
         </ul>
     </div>
 </div>
@@ -36,9 +36,9 @@
         <div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>
         <div class="nav">
             <ul>
-                <li><a href="" title="首页">首页</a></li>
+                <li><a href="http://www2.efeiyi.com" title="首页">首页</a></li>
                 <li><a href="<c:url value='/masterMessage/index.do'/>" title="传承人">大师</a></li>
-                <li><a href="" title="工艺">工艺</a></li>
+                <li><a href="http://master.efeiyi.com/ef-wiki/pc/index.do" title="工艺">工艺</a></li>
             </ul>
         </div>
     </div>

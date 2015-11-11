@@ -65,7 +65,7 @@
   <%--</div>--%>
 <%--</div>--%>
 <%--<!-- //End--header-->--%>
-<div class="hd">
+<div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
     <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
@@ -199,6 +199,11 @@
   function changeFollowStatus(masterId,str){
     $("a[name='masterFollow"+masterId+"']").each(function(){
       $(this).find("em").html(str);
+      if(str == "关注"){
+        $(this).find('.gz-icon').show();
+      }else if(str == "已关注"){
+        $(this).find('.gz-icon').hide();
+      }
     })
   }
 </script>
