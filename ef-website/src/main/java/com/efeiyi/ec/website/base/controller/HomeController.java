@@ -9,6 +9,7 @@ import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.model.Banner;
 import com.ming800.core.p.service.BannerManager;
 import com.ming800.core.p.service.ObjectRecommendedManager;
+import com.ming800.core.util.CookieTool;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -66,7 +68,6 @@ public class HomeController {
         return AuthorizationUtil.getMyUser().getUsername();
     }
 
-
     private static class SampleAuthenticationManager implements AuthenticationManager {
         static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
 
@@ -78,6 +79,14 @@ public class HomeController {
                 return new UsernamePasswordAuthenticationToken(auth.getPrincipal(),
                         auth.getCredentials(), AUTHORITIES);
         }
+    }
+
+
+    @RequestMapping({"/logoutHandler"})
+    public String logoutHandler(HttpServletResponse response){
+        //只有手动退出的时候清除cookie
+        CookieTool.addCookie(response,"userinfo","",1,".efeiyi.com");
+        return "redirect:/";
     }
 
     @RequestMapping({"/home.do"})
