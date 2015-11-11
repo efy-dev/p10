@@ -32,7 +32,7 @@
   <script src="<c:url value='/scripts/assets/pc/js/jquery.min.js'/> "></script>
 </head>
 <body style="float: left">
-<div class="hd">
+<div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
     <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
@@ -147,9 +147,13 @@
                     "                            <!--关注组建-->"+
                     "                            <div class=\"pc-gz gz-pc\">"+
                     "                                <div class=\"bt-gz act-1\">"+
-                    "                                    <a  name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\">"+
-                    "                                        <i class=\"gz-icon\"></i>"+
-                    "                                        <em>"+data[i].followStatus+"</em>"+
+                    "                                    <a  name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\">";
+                          if(data[i].followStatus != "已关注"){
+                              box += "<i class=\"gz-icon\"></i>";
+                          }else{
+                              box += "<i class=\"gz-icon\" style='display: none'></i>";
+                          }
+                    box +="                                <em>"+data[i].followStatus+"</em>"+
                     "                                    </a>"+
                     "                                </div>"+
                     "                            </div>"+
@@ -258,7 +262,7 @@
                       }else if(data[i].level == "5"){
                           levelName = "县级";
                       }
-                      var box = $("<li>"+
+                      var box ="<li>"+
                               "            <div class=\"text\">"+
                               "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                               "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -266,16 +270,20 @@
                               "            </div>"+
                               "            <div class=\"bt-gz\">"+
                               "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-                              "                <div class=\"gz-q\">"+
-                              "                  <i class=\"gz-icon\"></i>"+
-                              "                  <em>"+data[i].followStatus+"</em>"+
+                              "                <div class=\"gz-q\">";
+                              if(data[i].followStatus == "已关注"){
+                                  box += "<i class=\"gz-icon\" style='display: none'></i>";
+                              }else{
+                                  box += "<i class=\"gz-icon\"></i>";
+                              }
+                              box += "<em>"+data[i].followStatus+"</em>"+
                               "                </div>"+
                               "              </a>"+
                               "            </div>"+
                               "            <div class=\"img-q\">"+
                               "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
                               "            </div>"+
-                              "          </li>");
+                              "          </li>";
                       rightUp.append(box);
                   }
               }else{
@@ -314,7 +322,7 @@
                       }else if(data[i].level == "5"){
                           levelName = "县级";
                       }
-                      var box = $("<li>"+
+                      var box = "<li>"+
                               "            <div class=\"text\">"+
                               "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                               "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -322,16 +330,20 @@
                               "            </div>"+
                               "            <div class=\"bt-gz\">"+
                               "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-                              "                <div class=\"gz-q\">"+
-                              "                  <i class=\"gz-icon\"></i>"+
-                              "                  <em>"+data[i].followStatus+"</em>"+
+                              "                <div class=\"gz-q\">";
+                              if(data[i].followStatus == "已关注"){
+                                  box += "<i class=\"gz-icon\" style='display: none'></i>";
+                              }else{
+                                  box += "<i class=\"gz-icon\"></i>";
+                              }
+                             box += "<em>"+data[i].followStatus+"</em>"+
                               "                </div>"+
                               "              </a>"+
                               "            </div>"+
                               "            <div class=\"img-q\">"+
                               "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
                               "            </div>"+
-                              "          </li>");
+                              "          </li>";
                       rightDown.append(box);
                   }
               }else{
@@ -369,6 +381,11 @@
   function changeFollowStatus(masterId,str){
     $("a[name='masterFollow"+masterId+"']").each(function(){
       $(this).find("em").html(str);
+        if(str == "关注"){
+            $(this).find('.gz-icon').show();
+        }else if(str == "已关注"){
+            $(this).find('.gz-icon').hide();
+        }
     })
   }
 
