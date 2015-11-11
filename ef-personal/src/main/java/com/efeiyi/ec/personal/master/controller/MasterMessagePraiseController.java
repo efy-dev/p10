@@ -27,32 +27,37 @@ public class MasterMessagePraiseController {
 
 	@ResponseBody
 	@RequestMapping("/changePraiseNum.do")
-	public String changePraiseNum(HttpServletRequest request , Model model){
+	public String changePraiseNum(HttpServletRequest request, Model model) {
 		String messageId = request.getParameter("messageId");
 		MyUser user = AuthorizationUtil.getMyUser();
-		String identify;
-		LinkedHashMap<String , Object> queryMap = new LinkedHashMap<>();
+		if (user == null || user.getId() == null) {
+			return "noRole";
+		}
+		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
 		String queryHql = "from MasterMessagePraise m where m.user.id=:userId and m.message.id=:messageId";
-		queryMap.put("userId",user.getId());
-		queryMap.put("messageId",messageId);
+		queryMap.put("userId", user.getId());
+		queryMap.put("messageId", messageId);
 		List<MasterMessagePraise> list = baseManager.listObject(queryHql, queryMap);
-		if (list != null && list.size() > 0){
+		if (list != null && list.size() > 0) {
 			MasterMessagePraise praise = list.get(0);
 			MasterMessage message = praise.getMessage();
-			message.setPraiseNum(message.getPraiseNum()==null?0:(message.getPraiseNum()-1));
+			message.setPraiseNum(message.getPraiseNum() == null ? 0 : (message.getPraiseNum() - 1));
 			message.setPraiseStatus("赞");
-			baseManager.delete(MasterMessagePraise.class.getName(),praise.getId());
-			identify = message.getPraiseStatus();
-		}else {
+			baseManager.delete(MasterMessagePraise.class.getName(), praise.getId());
+			message.setPraiseNum(message.getPraiseNum() == null ? 0 : message.getPraiseNum() - 1);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(), message);
+			return "del";
+		} else {
 			MasterMessagePraise praise = new MasterMessagePraise();
-			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),messageId);
+			MasterMessage message = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(), messageId);
 			praise.setUser(user);
 			praise.setMessage(message);
-			message.setPraiseNum(message.getPraiseNum()==null?(0+1):(message.getPraiseNum()+1));
+			message.setPraiseNum(message.getPraiseNum() == null ? (0 + 1) : (message.getPraiseNum() + 1));
 			message.setPraiseStatus("取消赞");
-			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(),praise);
-			identify = message.getPraiseStatus();
+			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(), praise);
+			message.setPraiseNum(message.getPraiseNum() == null ? 1 : message.getPraiseNum() + 1);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(), message);
+			return "add";
 		}
-		return identify;
 	}
 }

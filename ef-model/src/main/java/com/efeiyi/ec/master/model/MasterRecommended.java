@@ -78,7 +78,7 @@ public class MasterRecommended implements Serializable {
     }
 
     @Column(name = "group_name")
-    @Where(clause = "group_name = masterRecommended")
+    @Where(clause = "group_name = ec.masterRecommended")
     public String getGroup() {
         return group;
     }

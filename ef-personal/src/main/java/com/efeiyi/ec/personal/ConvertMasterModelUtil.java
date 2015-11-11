@@ -2,6 +2,7 @@ package com.efeiyi.ec.personal;
 
 import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.personal.master.model.MasterModel;
+import com.efeiyi.ec.personal.master.model.MasterRecommendedModel;
 import com.efeiyi.ec.project.model.Project;
 
 import java.util.Date;
@@ -42,11 +43,11 @@ public class ConvertMasterModelUtil {
 		MasterModel masterModel = new MasterModel();
 		masterModel.setAmount(master.getFsAmount()==null?1: (int) (master.getFsAmount() + 1));
 		masterModel.setId(master.getId()==null?"":master.getId());
-		masterModel.setMasterName(master.getFullName()==null?master.getName():master.getFullName());
-		masterModel.setProjectName(master.getProjectName()==null?"":master.getProjectName());
+		masterModel.setMasterName(master.getFullName() == null ? master.getName():master.getFullName());
+		masterModel.setProjectName(master.getProjectName() == null?"":master.getProjectName());
 		masterModel.setLevel(master.getLevel()==null?"":master.getLevel());
-		masterModel.setFavicon(master.getFavicon()==null?"":master.getFavicon());
-		masterModel.setContent(master.getBrief()==null?"":master.getBrief());
+		masterModel.setFavicon(master.getFavicon() ==null?"":master.getFavicon());
+		masterModel.setContent(master.getBrief() == null ? "" : master.getBrief());
 		masterModel.setFollowStatus(master.getFollowStatus()==null?"关注":master.getFollowStatus());
 		return masterModel;
 	}

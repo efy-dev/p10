@@ -48,7 +48,7 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
+        <li><a href="<c:url value='/masterMessage/index.do'/>" title="首页">首页</a></li>
         <li><a href="" title="分类">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
@@ -147,10 +147,12 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        if(true == msg){
+        if("add" == msg){
           alert("收藏成功!");
-        }else{
+        }else if("del" == msg){
           alert("收藏已移除!");
+        }else if("noRole" == msg){
+          alert("您还未登录,请登录后操作!");
         }
       }
     });
@@ -165,7 +167,13 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        $(o).find("em").html(msg);
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }else if(msg == "add"){
+          $(o).find("em").html("取消赞");
+        }else if(msg == "del"){
+          $(o).find("em").html("赞");
+        }
       }
     })
   }

@@ -54,7 +54,7 @@
                         <c:set var="sd">
                             <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy-MM-dd'/>
                         </c:set>
-                        <c:if test="${td<=sd || td>=ed && employ=='unUse'}">
+                        <c:if test="${td<sd || td>ed && employ=='unUse'}">
                        <div class="serial-list-page">
                         <div class="list-hd">
                             <span>券编号:${coupon.serial}</span>
@@ -93,10 +93,6 @@
                                     <c:if test="${coupon.couponBatch.type==1}">
                                         <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
                                     </c:if>
-                                    <c:if test="${coupon.couponBatch.type==2}">
-                                        <p>消费立减${coupon.couponBatch.price}元</p>
-                                    </c:if>
-
                                     <p>期限：
                                         <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
                                     -<fmt:formatDate value="${coupon.couponBatch.endDate}" pattern='yyyy.MM.dd' /></p>
@@ -150,9 +146,6 @@
                                             </c:choose>
                                             <c:if test="${coupon.couponBatch.type==1}">
                                                 <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
-                                            </c:if>
-                                            <c:if test="${coupon.couponBatch.type==2}">
-                                                <p>消费立减${coupon.couponBatch.price}元</p>
                                             </c:if>
                                             <p>期限：
                                                 <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
@@ -208,9 +201,6 @@
                                         </c:choose>
                                         <c:if test="${coupon.couponBatch.type==1}">
                                             <p>一次性消费满${coupon.couponBatch.priceLimit}元即可使用</p>
-                                        </c:if>
-                                        <c:if test="${coupon.couponBatch.type==2}">
-                                            <p>消费立减${coupon.couponBatch.price}元</p>
                                         </c:if>
                                         <p>期限：
                                             <fmt:formatDate value="${coupon.couponBatch.startDate}" pattern='yyyy.MM.dd'/>
