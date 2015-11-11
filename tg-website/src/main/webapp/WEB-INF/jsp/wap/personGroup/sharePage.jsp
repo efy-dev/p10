@@ -55,7 +55,6 @@
 
 //    function shareFriend() {
         WeixinJSBridge.invoke('sendAppMessage',{
-            "appid": appid,
             "img_url": imgUrl,
             "img_width": "200",
             "img_height": "200",
