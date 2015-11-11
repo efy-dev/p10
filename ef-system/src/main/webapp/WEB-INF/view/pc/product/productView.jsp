@@ -405,14 +405,14 @@
 
                 <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="height: auto;overflow: hidden; ">
 
-                    <ul style="width: 100%;list-style:none;margin-left: 8%" >
+                    <ul style="width: 100%;list-style:none;margin-left: 20%" >
                         <c:if test="${!empty object.productPictureList}">
                             <c:forEach var="productPicture" items="${object.productPictureList}">
                                 <c:if test="${productPicture.status == '3' || productPicture.status == '9'}">
                                     <li style=""
                                         name="${productPicture.id}">
                                         <dl style="margin-top: 6px;position:relative">
-                                            <dt style="width: 60%">
+                                            <dt style="width: 35%">
                                                 <a title="点击查看原图" href="javascript:void (0);"
                                                    onclick="tc('http://pro.efeiyi.com/${productPicture.pictureUrl}')">
                                                     <img width="100%" name=""
@@ -420,7 +420,7 @@
                                                          alt="商品图片" />
                                                 </a>
                                             </dt>
-                                            <dd style="position: absolute;width: 50%;right: 0;top: 25%;">
+                                            <dd style="position: absolute;width: 100%;right: 0;top: 25%;">
                                             <div style="width: 100%;text-align: center;">
                                                 <c:choose>
                                                     <c:when test="${productPicture.status == '9'}">
@@ -713,12 +713,12 @@
                 ///显示图片
                 var img = '<li style="" name="' + pictureId + '">' +
                         '<dl style="margin-top: 6px;position:relative" >' +
-                        '  <dt  style="width: 60%">' +
+                        '  <dt  style="width: 35%">' +
                         '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\'' + trueUrl + '\')">' +
                         '      <img width="100%" name="' + pictureId + '"  src="' + trueUrl + '" alt="商品主图片">' +
                         '   </a>' +
                         '  </dt>' +
-                        '<dd style="position: absolute;width: 50%;right: 0;top: 25%;">'+
+                        '<dd style="position: absolute;width: 100%;right: 0;top: 25%;">'+
                         '  <div style="width: 100%;text-align:center" >' +
                         ' <a href="javascript:void(0);" status="9" onclick="updatePictureStatus(this,\'' + pictureId + '\',\'9\')">' + '设为推荐图片' + '</a>' +
                         '   <a href="javascript:void(0);" onclick="deletePicture(this,\'' + pictureId + '\')">' +
