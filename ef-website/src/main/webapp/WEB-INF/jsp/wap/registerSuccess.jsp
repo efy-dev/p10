@@ -11,7 +11,7 @@
   <c:set var="user">
     ${user.getUsername()}
   </c:set>
-  <h5>恭喜，${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}已注册成功</h5>
+  <h5>恭喜您已经注册成功</h5>
   <p>新用户注册送3张优惠券，已发放！</p>
   <div class="kbtn">
     <a href="http://www.efeiyi.com">去首页</a>

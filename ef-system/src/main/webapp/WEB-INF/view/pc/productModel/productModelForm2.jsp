@@ -24,7 +24,7 @@
 
     <fieldset>
         <legend class="" style="font-size: 17px">商品模型</legend>
-        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post"
+        <form action="<c:url value="/product/saveNewProduct.do?view=${view}"/>" method="post" enctype="multipart/form-data"
               class="am-form am-form-horizontal">
             <input type="hidden" name="productId" value="${object.id}">
             <input type="hidden" name="resultPage" value="0"/>
