@@ -184,12 +184,6 @@ public class   SigninController extends BaseController {
     public String forward(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String redirect = request.getParameter("callUrl");
         String registeSuccess = request.getParameter("registeSuccess");
-        if (redirect!=null){
-            return "redirect:"+redirect;
-        }
-        if (registeSuccess!=null){
-            return "redirect:"+registeSuccess;
-        }
         String userId = request.getParameter("userId");
         if (userId != null && !"".equals(userId)) {
             Consumer consumer = (Consumer) baseManager.getObject(Consumer.class.getName(), userId);
@@ -208,6 +202,12 @@ public class   SigninController extends BaseController {
                 baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
             }
 
+        }
+        if (redirect != null) {
+            return "redirect:" + redirect;
+        }
+        if (registeSuccess != null) {
+            return "redirect:" + registeSuccess;
         }
 //        response.sendRedirect(request.getContextPath() + "/sso2.do");
         return "redirect:/sso2.do";
