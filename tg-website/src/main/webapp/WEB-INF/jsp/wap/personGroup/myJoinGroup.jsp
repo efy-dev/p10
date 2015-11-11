@@ -60,7 +60,7 @@
                     </c:set>
                 </c:if>
             </c:forEach>
-            <p>${commander}</p>
+            <p>团长:${commander}</p>
             <c:if test="${member.group.status=='1'}">
                <span>
                 进行中
