@@ -28,6 +28,6 @@
 
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/app.css"/>">
-<link rel="stylesheet" href="<c:url value="/scripts/assets/wap/css/style.css"/>">
+<link rel="stylesheet" href="<c:url value="/scripts/assets/css/style.css"/>">
 <script src="<c:url value="/resources/assets/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/assets/js/amazeui.min.js"/>"></script>

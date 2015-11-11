@@ -66,7 +66,7 @@
           <p class="itor-text-3"><ming800:status name='level' dataType='Tenant.level' checkedValue='${obj.level}' type='normal'/>非遗传承人</p>
           <p class="itor-text-4">${obj.brief}</p>
           <a class="gz-fd-icon" onclick="changeFollowedStatus(this,'${obj.id}');">${obj.followStatus}</a>
-          <div class="gz-fd-img"><a href="#"><img src="../shop2015/upload/120211-tx-1.jpg"></a></div>
+          <div class="gz-fd-img"><a href="#"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${obj.favicon}"></a></div>
         </div>
       </div>
   </c:forEach>
@@ -111,9 +111,12 @@
       dataType:"json",
       error:function(){alert("操作失败.请联系系统管理员!")},
       success:function(msg){
-        if(msg == "1"){
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }
+        if(msg == "del"){
           $(o).html("关注");
-        }else if(msg == "2"){
+        }else if(msg == "add"){
           $(o).html("已关注");
         }
       }

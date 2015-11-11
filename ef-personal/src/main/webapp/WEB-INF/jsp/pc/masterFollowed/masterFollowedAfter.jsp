@@ -32,12 +32,14 @@
   <script src="<c:url value='/scripts/assets/pc/js/jquery.min.js'/> "></script>
 </head>
 <body style="float: left">
+<div class="hd">
 <div class="nav-bars ae">
   <ul class="bars">
     <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
-    <li class="active"><a href="<c:url value='/masterMessage/forwardUrl.do'/>">已关注</a></li>
+    <li class="active"><a href="<c:url value='/masterMessage/forwardUrl.do'/>">关注</a></li>
     <li><a href="<c:url value='/masterMessage/classify.do'/>">发&nbsp;现</a></li>
   </ul>
+</div>
 </div>
 <!--nav-bars-->
 <div class="ae">
@@ -156,7 +158,7 @@
                     "                            <h5>"+data[i].masterName+"</h5>"+projectName+
                     "                            <p>"+levelName+"非遗传承人</p>"+
                     "                            <div class=\"pc-dy-content\">"+
-                    "                                <p>"+data[i].content+"</p>";
+                    "                                <p>"+data[i].remark+"</p>";
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length == 1){
               box += "<div class=\"one-pic\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[j].pictureUrl+"\"></a></div>";
