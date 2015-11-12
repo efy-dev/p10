@@ -7,8 +7,7 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
-import com.efeiyi.ec.website.group.service.SmsCheckManager;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -162,7 +161,8 @@ public class GroupController {
                 Date dateNow = new Date();
                 long min = endTime.getTime()-dateNow.getTime();
                 long leftMin = min/(1000*60);
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+leftMin, "1108985", PConst.TIANYI);
+                String left = String.valueOf(leftMin);
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+left, "1108985", PConst.TIANYI);
 
                 if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");

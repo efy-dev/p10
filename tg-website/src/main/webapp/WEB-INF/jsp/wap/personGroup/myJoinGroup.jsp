@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -55,12 +56,12 @@
             </c:if>
             <c:forEach items="${member.group.memberList}" var="memberTemp" varStatus="rec">
                 <c:if test="${memberTemp.level==0}">
-                    <c:set var="commander">
-                        ${memberTemp.user.name}
+                    <c:set var="user">
+                        ${memberTemp.user.getUsername()}
                     </c:set>
                 </c:if>
             </c:forEach>
-            <p>团长:${commander}</p>
+            <p>团长:${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}</p>
             <c:if test="${member.group.status=='1'}">
                <span>
                 进行中
