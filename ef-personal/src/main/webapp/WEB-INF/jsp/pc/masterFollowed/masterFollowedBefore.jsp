@@ -65,12 +65,14 @@
   <%--</div>--%>
 <%--</div>--%>
 <%--<!-- //End--header-->--%>
+<div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
     <li><a href="<c:url value='/masterMessage/index.do'/>">动&nbsp;态</a></li>
-    <li class="active"><a href="<c:url value='/masterMessage/forwardUrl.do'/>">关&nbsp;注</a></li>
+    <li class="active"><a href="<c:url value='/masterMessage/getFollowBeforeList.do'/>">关&nbsp;注</a></li>
     <li><a href="<c:url value='/masterMessage/classify.do'/>">发&nbsp;现</a></li>
   </ul>
+</div>
 </div>
 <!--nav-bars-->
 <div class="home-craft my">
@@ -80,14 +82,14 @@
         <!-- //End--craft-->
       </div>
       <div class="craft-gz ae" style="display: block">
-        <div class="craft-ts ae"><span>您还没有关注任何工艺，下面是我们为您推荐的几位工艺项目</span></div>
+        <div class="craft-ts ae"><span>您还没有关注任何大师，下面是我们为您推荐的几位大师</span></div>
         <div class="craft-list ae">
           <ul class="craft-l-page ae">
             <c:if test="${!empty list}">
               <c:forEach items="${list}" var="object">
                 <li>
                   <dl class="add">
-                    <dt><a href="<c:url value='/masterMessage/introView.do?masterId=${object.id}'/>"><img src="${object.favicon}"> </a></dt>
+                    <dt><a href="<c:url value='/masterMessage/introView.do?masterId=${object.id}'/>"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view"> </a></dt>
                     <dd>
                       <p class="txt1">
                         <a href="<c:url value='/masterMessage/introView.do?masterId=${object.id}'/>">
@@ -197,6 +199,11 @@
   function changeFollowStatus(masterId,str){
     $("a[name='masterFollow"+masterId+"']").each(function(){
       $(this).find("em").html(str);
+      if(str == "关注"){
+        $(this).find('.gz-icon').show();
+      }else if(str == "已关注"){
+        $(this).find('.gz-icon').hide();
+      }
     })
   }
 </script>

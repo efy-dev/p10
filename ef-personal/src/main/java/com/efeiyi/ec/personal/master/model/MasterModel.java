@@ -1,6 +1,7 @@
 package com.efeiyi.ec.personal.master.model;
 
 import com.efeiyi.ec.master.model.MasterComment;
+import com.efeiyi.ec.master.model.MasterMessage;
 import com.efeiyi.ec.master.model.MasterWork;
 import com.efeiyi.ec.master.model.MessageAttachment;
 
@@ -32,6 +33,7 @@ public class MasterModel implements Serializable{
 	private List<MessageAttachment> messageAttachmentLists;
 	private List<MasterWork> works;
 	private List<MasterComment> comments;
+	private List<MasterModel> msgList;
 
 	public String getId() {
 		return id;
@@ -191,5 +193,13 @@ public class MasterModel implements Serializable{
 
 	public void setComments(List<MasterComment> comments) {
 		this.comments = comments;
+	}
+
+	public List<MasterModel> getMsgList() {
+		return msgList;
+	}
+
+	public void setMsgList(List<MasterModel> msgList) {
+		this.msgList = msgList;
 	}
 }

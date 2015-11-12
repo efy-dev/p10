@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>大师动态-分享</title>
+
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -26,57 +26,14 @@
   <!-- Tile icon for Win8 (144x144 + tile color) -->
   <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
   <meta name="msapplication-TileColor" content="#0e90d2">
-  <%--<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/amazeui.min.css?v=20150831'/>">--%>
-  <%--<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/app.css?v=20150831'/>">--%>
-  <%--<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/pc/css/leader.css?v=20150831'/>">--%>
-  <%--<script src="<c:url value='/scripts/assets/pc/js/jquery.min.js'/> "></script>--%>
-
 </head>
 <body style="float: left">
-<%--<div class="topbar wh" data-am-sticky>--%>
-  <%--<div class="hd">--%>
-    <%--<ul class="ul-item">--%>
-
-      <%--<div class="bd logined"></div>--%>
-      <%--<li>--%>
-        <%--<%if(AuthorizationUtil.getMyUser()!=null && AuthorizationUtil.getMyUser().getId() != null){ %>--%>
-        <%--<strong><%=AuthorizationUtil.getMyUser().getUsername()%></strong><a href="<c:url value='/j_spring_cas_security_logout'/>">退出</a></li>--%>
-          <%--<% } %>--%>
-        <%--<%if(AuthorizationUtil.getMyUser()==null || AuthorizationUtil.getMyUser().getId() == null){ %>--%>
-      <%--<li><a href="<c:url value='http://192.168.1.57/cas/login?service=http%3A%2F%2Flocalhost:8080%2Fj_spring_cas_security_check'/>" title="登录">请登录</a></li>--%>
-      <%--<li><a href="" title="快速注册">快速注册</a></li>--%>
-        <%--<% } %>--%>
-      <%--<li><a href="" title="商家入驻">商家入驻</a></li>--%>
-      <%--<li class="btn-top-wechat">--%>
-        <%--<a title="手机e飞蚁">手机e飞蚁</a>--%>
-        <%--<span class="top-wechat"></span>--%>
-      <%--</li>--%>
-      <%--<li class="cart">--%>
-        <%--<a href="" title="购物车"><i class="icon"></i>购物车</a>--%>
-        <%--<span class="tips"><em>0</em></span>--%>
-      <%--</li>--%>
-    <%--</ul>--%>
-  <%--</div>--%>
-<%--</div>--%>
-<%--<!-- //End--topbar-->--%>
-<%--<div class="header wh">--%>
-  <%--<div class="hd">--%>
-    <%--<div class="logo"><a class="icon" href="" target="_blank" title="e飞蚁-爱非遗"></a></div>--%>
-    <%--<div class="nav">--%>
-      <%--<ul>--%>
-        <%--<li><a href="" title="首页">首页</a></li>--%>
-        <%--<li><a href="<c:url value='/masterMessage/index.do'/>" title="传承人">大师</a></li>--%>
-        <%--<li><a href="" title="工艺">工艺</a></li>--%>
-      <%--</ul>--%>
-    <%--</div>--%>
-  <%--</div>--%>
-<%--</div>--%>
-<%--<!-- //End--header-->--%>
+<div class="hd" style="width: 1000px;">
 <div class="nav-bars ae">
   <ul class="bars">
     <li class="active"><a href="#">动&nbsp;态</a></li>
     <c:if test="${result == 'show'}">
-      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">已关注</a></li>
+      <li><a href="<c:url value='/masterMessage/forwardUrl'/>">关注</a></li>
     </c:if>
     <c:if test="${result == 'hide'}">
       <li><a href="<c:url value='/masterMessage/getFollowBeforeList'/>">关注</a></li>
@@ -84,13 +41,15 @@
     <li><a href="<c:url value='/masterMessage/classify'/>">发&nbsp;现</a></li>
   </ul>
 </div>
+</div>
 <!--nav-bars-->
 <div class="ae">
   <div class="pc-dynamic" >
     <div class="p-dy-left" style="margin-bottom: 102px;">
       <ul class="list-dynamic ae" id="pubu">
-
+        
       </ul>
+      <div align="center" id="loding" style="display: none;"><img src="<c:url value='/scripts/assets/images/loding-1.gif'/>"></div>
     </div>
     <div class="p-dy-right">
       <div class="f-right-gy ae">
@@ -98,59 +57,18 @@
         <ul class="gy-grounp ae" id="newInsert">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
       <div class="f-right-gy ae">
         <div class="h4"><span>热门大师</span></div>
         <ul class="gy-grounp ae" id="hotMaster">
 
         </ul>
-        <div class="f-r-gd ae"><a onclick="moreHotMaster();"><span>更多大师</span><i class="sp-icon"></i></a></div>
+        <div class="f-r-gd ae"><a href="<c:url value='/masterMessage/classify'/>"><span>更多大师</span><i class="sp-icon"></i></a></div>
       </div>
     </div>
   </div>
 </div>
-<%--<div class="footer wh">--%>
-  <%--<div class="service wh">--%>
-    <%--<div class="icon phone"></div>--%>
-    <%--<div class="line"></div>--%>
-    <%--<div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>--%>
-    <%--<div class="line"></div>--%>
-    <%--<div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>--%>
-    <%--<div class="line"></div>--%>
-    <%--<div class="icon wechat"></div>--%>
-  <%--</div>--%>
-  <%--<div class="links wh">--%>
-    <%--<a href="" target="_blank" title="关于我们">关于我们</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="联系我们">联系我们</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="诚聘英才">诚聘英才</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="意见反馈">意见反馈</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="帮助中心">帮助中心</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="诚信保障">诚信保障</a>--%>
-    <%--<a class="line"></a>--%>
-    <%--<a href="" target="_blank" title="新闻资讯">新闻资讯</a>--%>
-  <%--</div>--%>
-  <%--<div class="copyright wh">--%>
-    <%--<div class="phone">--%>
-      <%--<strong>商家入住热线</strong>--%>
-      <%--<em>400-876-8766</em>--%>
-    <%--</div>--%>
-    <%--<div class="frlinks">--%>
-      <%--<span>友情链接：</span>--%>
-      <%--<a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>--%>
-      <%--<a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>--%>
-      <%--<a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>--%>
-      <%--<a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>--%>
-    <%--</div>--%>
-    <%--<div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>--%>
-  <%--</div>--%>
-<%--</div>--%>
-<!-- //End--footer-->
 <script>
   //存储开始请求数据条数的位置
   var StartMessageNum = 1;
@@ -166,11 +84,10 @@
   $(window).load(function(){
       var winH = $(window).height(); //页面可视区域高度
       $(window).scroll(function(){
-        var pageH = $(document.body).height();
+        var pageH = $(document).height();
         var scrollT = $(window).scrollTop(); //滚动条top
           var aa = (pageH - winH - scrollT) / winH;
         if(aa < 0.02){
-          console.log(ajaxKey + "******" + StartMessageNum);
           if(ajaxKey){
                 getData("<c:url value='/masterMessage/mainData/plistMasterMessage_default/0/4/'/>");
               }
@@ -225,14 +142,20 @@
             }else{
               var projectName = "";
             }
-            var box = "<li><div class=\"pc-dy-txt ae\"><div class=\"pc-dy-pic\"><div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a></div>" +
-                      "<div class=\"pc-gz gz-pc\"><div class=\"bt-gz act-1\"><a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\"><div class=\"gz-q\"><i class=\"gz-icon\"></i><em>"+data[i].followStatus+"</em></div></a></div></div></div>" +
+            var box = "<li><div class=\"pc-dy-txt ae\"><div class=\"pc-dy-pic\"><div class=\"pc-d-pic\"><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\"><img  class=\"am-circle\"  src=\"http://tenant.efeiyi.com/"+data[i].favicon+"@!master-favicon-view\"></a></div>" +
+                      "<div class=\"pc-gz gz-pc\"><div class=\"bt-gz act-1\"><a class=\"btn-guan\" name=\"masterFollow"+data[i].masterId+"\" onclick=\"followMaster('"+data[i].masterId+"');\"><div class=\"gz-q\">" ;
+                    if(data[i].followStatus == "已关注"){
+                      box += "<i class=\"gz-icon\" style='display: none'></i>";
+                    }else{
+                      box += "<i class=\"gz-icon\"></i>";
+                    }
+            box += "<em>"+data[i].followStatus+"</em></div></a></div></div></div>" +
                       "<div class=\"pc-dy-box\"><h5><a href=\"<c:url value='/masterMessage/masterView/'/>"+data[i].masterId+"\">"+data[i].masterName+"</a></h5>"+projectName+"<p>"+levelName+"非遗传承人</p><div class=\"pc-dy-content\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><p>"+data[i].remark+"</p></a>" +
                       "<div class=\"one-tiem\"><span>"+cTime+"</span><span>来自&nbsp;"+data[i].dataSource+"</span></div>" ;
             var attr = data[i].messageAttachmentLists;
             if(attr != null && attr.length > 0 ){
               for(var j in attr){
-                box += "<div class=\"detaile-img\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[j].pictureUrl+"\"></a></div>";
+                box += "<div class=\"detaile-img\"><a href=\"<c:url value='/masterMessage/getMessageView/'/>"+data[i].id+"\"><img src=\"http://tenant.efeiyi.com/"+attr[j].pictureUrl+"@!master-message-little-more\"></a></div>";
               }
             }
             box += "</div></div></div><div class=\"one-state\"><ul class=\"state\"><li><a onclick=\"praiseMessage(this,'"+data[i].id+"');\"><span class=\"pos\"><span class=\"line\"><i class=\"dnc-icon zq\"></i>" +
@@ -248,9 +171,12 @@
         }
       },
       complete:function(){
+        $("#loding").hide();
         if(flag==true) {
           ajaxKey = false;
         }
+      },beforeSend:function(){
+        $("#loding").show();
       }
     })
   }
@@ -280,7 +206,7 @@
             }else if(data[i].level == "5"){
               levelName = "县级";
             }
-            var box = $("<li>"+
+            var box = "<li>"+
             "            <div class=\"text\">"+
             "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
             "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -288,16 +214,20 @@
             "            </div>"+
             "            <div class=\"bt-gz\">"+
             "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-            "                <div class=\"gz-q\">"+
-            "                  <i class=\"gz-icon\"></i>"+
-            "                  <em>"+data[i].followStatus+"</em>"+
+                    "                <div class=\"gz-q\">";
+            if(data[i].followStatus == "已关注"){
+              box += "<i class=\"gz-icon\" style='display: none'></i>";
+            }else{
+              box += "<i class=\"gz-icon\"></i>";
+            }
+            box += "<em>"+data[i].followStatus+"</em>"+
             "                </div>"+
             "              </a>"+
             "            </div>"+
             "            <div class=\"img-q\">"+
             "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
             "            </div>"+
-            "          </li>");
+            "          </li>";
             rightUp.append(box);
           }
         }else{
@@ -341,7 +271,7 @@
             }else if(data[i].level == "5"){
               levelName = "县级";
             }
-            var box = $("<li>"+
+            var box = "<li>"+
                     "            <div class=\"text\">"+
                     "              <p class=\"p1\"><a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\">"+data[i].masterName+"</a></p>"+
                     "              <p class=\"p2\">"+data[i].projectName+"</p>"+
@@ -349,16 +279,20 @@
                     "            </div>"+
                     "            <div class=\"bt-gz\">"+
                     "              <a class=\"btn-guan\" name=\"masterFollow"+data[i].id+"\" onclick=\"followMaster('"+data[i].id+"');\">"+
-                    "                <div class=\"gz-q\">"+
-                    "                  <i class=\"gz-icon\"></i>"+
-                    "                  <em>"+data[i].followStatus+"</em>"+
+                    "                <div class=\"gz-q\">";
+                  if(data[i].followStatus == "已关注"){
+                    box += "<i class=\"gz-icon\" style='display: none'></i>";
+                  }else{
+                    box += "<i class=\"gz-icon\"></i>";
+                  }
+            box += "<em>"+data[i].followStatus+"</em>"+
                     "                </div>"+
                     "              </a>"+
                     "            </div>"+
                     "            <div class=\"img-q\">"+
                     "              <a href=\"<c:url value='/masterMessage/introView/'/>"+data[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+data[i].favicon+"\"></a>"+
                     "            </div>"+
-                    "          </li>");
+                    "          </li>";
             rightDown.append(box);
           }
         }else{
@@ -390,6 +324,7 @@
           alert("您还未登录,请登录后操作!");
         }else if(data=="add"){
           str = "已关注";
+          //$(this).find('.gz-icon').hide();
           changeFollowStatus(masterId,str);
         }else if(data=="del"){
           str = "关注";
@@ -401,6 +336,11 @@
   function changeFollowStatus(masterId,str){
     $("a[name='masterFollow"+masterId+"']").each(function(){
         $(this).find("em").html(str);
+      if(str == "关注"){
+        $(this).find('.gz-icon').show();
+      }else if(str == "已关注"){
+        $(this).find('.gz-icon').hide();
+      }
     })
   }
 
@@ -412,12 +352,15 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var next = $(o).find("em");
+        var amount = parseInt(next.html().substring(1,next.html().length));
+        console.log(next.html()+"----"+amount);
         if(data =="noRole"){
           alert("您还没有登录,请登录后操作!");
         }else if(data == "add"){
-          alert("成功!");
+          next.html("赞"+(amount + 1));
         }else if(data == "del"){
-          alert("已取消点赞");
+          next.html("赞"+(amount - 1));
         }
       }
     })
@@ -441,17 +384,6 @@
       }
     })
   }
-
-
-  //判断请求数据的开关
-//  function getDataCheck(){
-//    var pubu = $("#pubu");
-//    var box = $("#box");
-//    var lastboxHeight = $(box[box.length-1]).offset().top+Math.floor($(box[box.length-1]).outerHeight()/2);
-//    var documentHeight = $(window).height();
-//    var scrollTop = $(document).scrollTop();
-//    return lastboxHeight<documentHeight+scrollTop?true:false;
-//  }
 
 </script>
 

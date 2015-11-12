@@ -59,9 +59,6 @@
             <c:if test="${acl.couponBatch.type==1}">
             满${acl.couponBatch.priceLimit}元使用
             </c:if>
-            <c:if test="${acl.couponBatch.type==2}">
-              消费立减${acl.couponBatch.price}元
-            </c:if>
           </p>
             <c:choose>
               <c:when test="${acl.couponBatch.range ==1}">
@@ -115,7 +112,7 @@
             <fmt:formatDate value="${acl.couponBatch.startDate}" pattern='yyyy-MM-dd'/>
           </c:set>
 
-          <c:if test="${td<=sd || td>=ed}">
+          <c:if test="${td<sd || td>ed}">
             <li>
               <div class="left"><strong>
                 <c:set var="price" value="${acl.couponBatch.price}"/>
@@ -133,9 +130,6 @@
               <div class="top"><p>
                 <c:if test="${acl.couponBatch.type==1}">
                   满${acl.couponBatch.priceLimit}元使用
-                </c:if>
-                <c:if test="${acl.couponBatch.type==2}">
-                  消费立减${acl.couponBatch.price}元
                 </c:if>
               </p>
                 <c:choose>

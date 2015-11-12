@@ -21,7 +21,7 @@
     <%
         if(HttpUtil.isPhone(request)){
     %>
-    <%@include file="mobileHeader.jsp"%>
+    <%--<%@include file="mobileHeader.jsp"%>--%>
     <%
         }else{
     %>
@@ -33,7 +33,7 @@
     <%
         if(HttpUtil.isPhone(request)){
     %>
-    <%@include file="mobileFooter.jsp"%>
+    <%--<%@include file="mobileFooter.jsp"%>--%>
     <%
     }else{
     %>

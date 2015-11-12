@@ -25,4 +25,6 @@ public interface MasterManager {
 
     String removeMaster(String id);
 
+    String removeMasterMessage(String id);
+
 }

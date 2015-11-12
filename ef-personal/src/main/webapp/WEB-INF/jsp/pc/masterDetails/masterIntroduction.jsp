@@ -62,7 +62,7 @@
 <!-- //End--header-->
 <div class="ae">
   <div class="great-master">
-    <div class="master-pic"><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${object.favicon}" alt="传承人" class="am-img-thumbnail am-circle"></div>
+    <div class="master-pic"><img src="http://tenant.efeiyi.com/${object.favicon}@!master-favicon-view" alt="传承人" class="am-img-thumbnail am-circle"></div>
     <h5>${object.fullName}</h5>
     <c:if test="${object.projectName != null}">
       <p>[${object.projectName}]</p>
@@ -75,7 +75,12 @@
           <div class="bt-gz">
             <a class="btn-guan" onclick="followMaster(this,'${object.id}');">
               <div class="gz-q">
-                <i class="gz-icon"></i>
+                <c:if test="${object.followStatus == '已关注'}">
+                  <i class="gz-icon" style="display: none;"></i>
+                </c:if>
+                <c:if test="${object.followStatus == '关注'}">
+                  <i class="gz-icon"></i>
+                </c:if>
                 <em>${object.followStatus}</em>
               </div>
             </a>
@@ -85,6 +90,7 @@
       </div>
     </div>
   </div>
+  <div class="hd">
   <div class="great-nav">
     <div class="nav-bars ae">
       <ul class="bars">
@@ -93,6 +99,7 @@
         <li><a href="<c:url value='/masterMessage/getPartWorks/'/>${object.id}">作&nbsp;品</a></li>
       </ul>
     </div>
+  </div>
   </div>
   <!-- //End--master-nav-->
   <div class="content-master">
@@ -124,7 +131,7 @@
               <c:if test="${intro.type == '3'}">
                 <c:forEach items="${intro.attachmentList}" var="attr">
                   <li>
-                    <img src="http://tenant.oss-cn-beijing.aliyuncs.com/${attr.url}">
+                    <img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-product">
                     <p>${attr.title}</p>
                   </li>
                 </c:forEach>
@@ -141,7 +148,7 @@
               <h5>${intro.title}</h5>
               <video style="margin-bottom:20px; " controls="controls" src="http://www.iqiyi.com/common/flashplayer/20151008/MainPlayer_5_2_28_1_c3_3_7_5.swf" width="100%" height="384"></video>
               <p>${intro.content}</p>
-              <c:if test="${!empty intro.attachmentList && intro.attachmentList > 0}">
+              <c:if test="${!empty intro.attachmentList && intro.attachmentList.size() > 0}">
                 <c:forEach items="${intro.attachmentList}" var="attr">
                   <img src="${attr.videoPath}">
                 </c:forEach>
@@ -155,7 +162,7 @@
               <c:if test="${intro.type == '2'}">
                 <c:forEach items="${intro.attachmentList}" var="attr">
                   <li>
-                    <div><img src="http://tenant.oss-cn-beijing.aliyuncs.com/${attr.url}"></div>
+                    <div><img src="http://tenant.efeiyi.com/${attr.url}@!master-intro-honour"></div>
                     <p>${attr.title}</p>
                   </li>
                 </c:forEach>
@@ -178,19 +185,19 @@
       async: true,
       dataType: "json",//设置请求返回的数据格式
       success: function (data) {
+        var next = $(o).parent().parent().next().find("span");
+        var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
         if(data == "noRole"){
           alert("您还未登录,请登录后操作!");
         }else if(data=="add"){
           str = "已关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").hide();
           next.html((fsAmount + 1)+"粉丝");
         }else if(data=="del"){
           str = "关注";
           $(o).find("em").html(str);
-          var next = $(o).parent().parent().next().find("span");
-          var fsAmount = parseInt($(o).parent().parent().next().find("span").html().split("粉")[0]);
+          $(o).find(".gz-icon").show();
           next.html((fsAmount - 1)+"粉丝");
         }
       }

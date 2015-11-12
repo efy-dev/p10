@@ -1,8 +1,6 @@
 package com.efeiyi.ec.system.master.service.impl;
 
-import com.efeiyi.ec.master.model.Master;
-import com.efeiyi.ec.master.model.MasterProject;
-import com.efeiyi.ec.master.model.MasterWorkRecommended;
+import com.efeiyi.ec.master.model.*;
 import com.efeiyi.ec.product.model.Product;
 import com.efeiyi.ec.system.master.dao.MasterWorkRecommendedDao;
 import com.efeiyi.ec.system.master.service.MasterManager;
@@ -115,6 +113,20 @@ public class MasterManagerImpl implements MasterManager {
 
         master.setStatus("0");
         xdoDao.saveOrUpdateObject(master);
+        return id;
+    }
+
+    @Override
+    public String removeMasterMessage(String id) {
+
+        MasterMessage msg = (MasterMessage) xdoDao.getObject(MasterMessage.class.getName(),id);
+//        if (msg.getMessageAttachmentLists() != null || msg.getMessageAttachmentLists().size() > 0){
+//            for (MessageAttachment attr : msg.getMessageAttachmentLists()){
+//
+//            }
+//        }
+        msg.setStatus("0");
+        xdoDao.saveOrUpdateObject(msg);
         return id;
     }
 }

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -292,14 +293,22 @@ public class ProductManagerImpl implements ProductManager{
     @Override
     public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
         SubjectDescription subjectDescription = subject.getSubjectDescription();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if("".equals(subject.getId())) {
             subject.setId(null);
+            try {
+                subject.setCreateDateTime(sdf.parse(sdf.format(new Date())));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             subjectDescription.setId(null);
         }
         xdoDao.saveOrUpdateObject(subjectDescription);
         subject.setSubjectDescription(subjectDescription);
+        if("".equals(subject.getSubjectShow())){
+            subject.setSubjectShow("0");
+        }
         subject.setStatus("1");
-        subject.setSubjectIndex(1);
         xdoDao.saveOrUpdateObject(subject);
             for(int i=0;i<spId.length;i++){
                 if("0".equals(spId[i])){

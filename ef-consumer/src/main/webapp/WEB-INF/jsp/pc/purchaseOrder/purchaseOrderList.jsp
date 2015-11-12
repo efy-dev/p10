@@ -112,13 +112,13 @@
                       <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                       <div class="info">
                         <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                        <p>${op.productModel.product.name}
-                          <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                            [
-                            <c:forEach items="${op.productModel.productPropertyValueList}"
-                                       var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                            ]
-                          </c:if>
+                        <p>${op.productModel.product.name}[${op.productModel.name}]
+                          <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                            <%--[--%>
+                            <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                       <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                            <%--]--%>
+                          <%--</c:if>--%>
                         </p></a>
 
                       </div>
@@ -179,14 +179,15 @@
         </table>
         </c:if>
 
-        <c:if test="${ order.orderStatus!=1 && order.subPurchaseOrder == null}">
+        <c:if test="${ order.orderStatus!=1}">
+          <c:if test="${order.subPurchaseOrder==null || order.subPurchaseOrder.size()==0}">
           <table class="list-pro-table">
             <tr>
               <th colspan="6">
               <span>
               <fmt:formatDate value="${order.createDatetime}" pattern="yyyy-MM-dd H:mm:ss" />
               </span>
-                <span>订单号：<strong>${order.serial}13214321</strong></span>
+                <span>订单号：<strong>${order.serial}</strong></span>
                 <span>${order.tenant.name}</span>
               </th>
             </tr>
@@ -200,12 +201,13 @@
                         <div class="info">
                           <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
                             <p>${op.productModel.product.name}
-                              <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                                [
-                                <c:forEach items="${op.productModel.productPropertyValueList}"
-                                           var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                ]
-                              </c:if>
+                            [${op.productModel.name}]
+                              <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                                <%--[--%>
+                                <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                           <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                <%--]--%>
+                              <%--</c:if>--%>
                             </p></a>
 
                         </div>
@@ -264,9 +266,11 @@
               </c:if>
             </tr>
           </table>
+          </c:if>
         </c:if>
 
-        <c:if test="${order.orderStatus!=1 && order.subPurchaseOrder!=null}">
+        <c:if test="${order.orderStatus!=1}">
+        <c:if test="${order.subPurchaseOrder!=null || order.subPurchaseOrder.size()>0}">
           <c:forEach items="${order.subPurchaseOrder}" var="spList">
 
             <table class="list-pro-table">
@@ -275,7 +279,7 @@
               <span>
               <fmt:formatDate value="${spList.createDatetime}" pattern="yyyy-MM-dd H:mm:ss" />
               </span>
-                  <span>订单号：<strong>${spList.serial}13214321</strong></span>
+                  <span>订单号：<strong>${spList.serial}</strong></span>
                   <span>${spList.tenant.name}</span>
                 </th>
               </tr>
@@ -288,13 +292,13 @@
                           <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a>
                           <div class="info">
                             <a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}" target=_blank><p>${op.productModel.product.project.projectCategory.name}</p>
-                              <p>${op.productModel.product.name}
-                                <c:if test="${op.productModel.productPropertyValueList.size()>1}">
-                                  [
-                                  <c:forEach items="${op.productModel.productPropertyValueList}"
-                                             var="ppv">${ppv.projectPropertyValue.value}</c:forEach>
-                                  ]
-                                </c:if>
+                              <p>${op.productModel.product.name}[${op.productModel.name}]
+                                <%--<c:if test="${op.productModel.productPropertyValueList.size()>1}">--%>
+                                  <%--[--%>
+                                  <%--<c:forEach items="${op.productModel.productPropertyValueList}"--%>
+                                             <%--var="ppv">${ppv.projectPropertyValue.value}</c:forEach>--%>
+                                  <%--]--%>
+                                <%--</c:if>--%>
                               </p></a>
 
                           </div>
@@ -356,7 +360,7 @@
 
 
           </c:forEach>
-
+        </c:if>
         </c:if>
       </c:forEach>
     </div>

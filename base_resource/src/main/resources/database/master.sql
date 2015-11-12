@@ -529,6 +529,8 @@ CREATE TABLE `master_work_store` (
 )
 ;
 
+
+
 CREATE TABLE `product_model_record` (
   `id`  char(16) NOT NULL ,
   `amount`  integer(255) NULL ,
@@ -651,3 +653,14 @@ ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
 
 ALTER TABLE `master_message`
 ADD COLUMN `data_source`  varchar(255) NULL AFTER `author`;
+
+ALTER TABLE `master_work`
+ADD COLUMN `store_amount`  int(16) NULL AFTER `tenant_id`;
+
+===========================================2015/11/11=========================================
+
+ALTER TABLE `subject`
+ADD COLUMN `type`  varchar(255) NULL AFTER `name`,
+ADD COLUMN `show`  varchar(255) NULL AFTER `type`,
+ADD COLUMN `template`  varchar(255) NULL AFTER `show`,
+ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;

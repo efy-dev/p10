@@ -45,39 +45,66 @@ public class MasterMessageController {
 
 	@RequestMapping("/index.do")
 	public String mainPage(HttpServletRequest request , Model model) throws Exception {
-		if (!HttpUtil.isPhone(request.getHeader("User-Agent"))) {
-			MyUser user = AuthorizationUtil.getMyUser();
-			if (user != null && user.getId() != null){
-				XQuery xQuery = new XQuery("listMasterFollow_default",request);
-				xQuery.put("user_id",user.getId());
-				List<MasterFollowed> list = baseManager.listObject(xQuery);
-				if (list != null && list.size() > 0){
-					model.addAttribute("result","show");
-				}else{
-					model.addAttribute("result","hide");
-				}
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user != null && user.getId() != null){
+			XQuery xQuery = new XQuery("listMasterFollow_default",request);
+			xQuery.put("user_id",user.getId());
+			List<MasterFollowed> list = baseManager.listObject(xQuery);
+			if (list != null && list.size() > 0){
+				model.addAttribute("result","show");
 			}else{
 				model.addAttribute("result","hide");
 			}
-			return "/masterMessage/masterMessageList";
+		}else{
+			model.addAttribute("result","hide");
 		}
 		return "/masterMessage/masterMessageList";
 	}
 
+//	@ResponseBody
+//	 @RequestMapping("/masterMessageList.do")
+//	 public List MasterMessageList(HttpServletRequest request) throws Exception {
+//		XQuery xQuery = new XQuery("plistMasterMessage_default", request);
+//		MyUser user = AuthorizationUtil.getMyUser();
+//		List<MasterMessage> messageList = baseManager.listObject(xQuery);
+//		for (MasterMessage message : messageList) {
+//			getPraiseStatus(message, user);
+//			message.setMasterId(message.getMaster().getId());
+//			message.setMasterName(message.getMaster().getFullName());
+//			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
+//			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+//		}
+//		return messageList;
+//	}
+
 	@ResponseBody
-	@RequestMapping("/masterMessageList.do")
-	public List MasterMessageList(HttpServletRequest request) throws Exception {
-		XQuery xQuery = new XQuery("plistMasterMessage_default", request);
+	@RequestMapping("/masterMessageList/{qm}/{size}/{index}")
+	public List MasterMessagePList(HttpServletRequest request , @PathVariable String qm , @PathVariable String size , @PathVariable String index) throws Exception {
+		XQuery xQuery = new XQuery(qm, request);
 		MyUser user = AuthorizationUtil.getMyUser();
-		List<MasterMessage> messageList = baseManager.listObject(xQuery);
-		for (MasterMessage message : messageList) {
-			getPraiseStatus(message, user);
-			message.setMasterId(message.getMaster().getId());
-			message.setMasterName(message.getMaster().getFullName());
-			message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
-			message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+		PageEntity pageEntity = new PageEntity();
+		if (index != null) {
+			pageEntity.setIndex(Integer.parseInt(index));
+			pageEntity.setSize(Integer.parseInt(size));
 		}
-		return messageList;
+		xQuery.setPageEntity(pageEntity);
+		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		List<MasterMessage> messageList = pageInfo.getList();
+		List<MasterModel> msgList = new ArrayList<>();
+		if (messageList != null && messageList.size() > 0){
+			for (MasterMessage message : messageList) {
+				message.getMaster().setFollowStatus(getFollowStatus(message.getMaster(),user));
+				message.setFollowStatus(message.getMaster().getFollowStatus());
+				message.setPraiseStatus(getPraiseStatus(message, user));
+				message.setMasterId(message.getMaster().getId());
+				message.setMasterName(message.getMaster().getFullName());
+				message.setAmount(message.getAmount() == null ? 0 : message.getAmount());
+				message.setFsAmount(message.getFsAmount() == null ? 0 : message.getFsAmount());
+				MasterModel msgModel = ConvertMasterModelUtil.convertMasterModel(message);
+				msgList.add(msgModel);
+			}
+		}
+		return msgList;
 	}
 
 	@RequestMapping("/getOnlyMasterMessageList.do")
@@ -135,9 +162,12 @@ public class MasterMessageController {
 
 	@ResponseBody
 	@RequestMapping("/collected.do")
-	public boolean collected(HttpServletRequest request) {
+	public String collected(HttpServletRequest request) {
 		String messageId = request.getParameter("messageId");
 		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null || user.getId() == null){
+			return "noRole";
+		}
 		String queryHql = "from MasterMessageStore s where s.masterMessage.id=:messageId and s.user.id=:userId";
 		LinkedHashMap<String, Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("messageId", messageId);
@@ -149,11 +179,11 @@ public class MasterMessageController {
 			store.setUser(user);
 			store.setMasterMessage(message);
 			baseManager.saveOrUpdate(MasterMessageStore.class.getName(), store);
-			return true;
+			return "add";
 		} else {
 			MasterMessageStore store = list.get(0);
 			baseManager.delete(MasterMessageStore.class.getName(), store.getId());
-			return false;
+			return "del";
 		}
 	}
 
@@ -454,16 +484,17 @@ public class MasterMessageController {
 					} else {
 						message.setFollowStatus("关注");
 					}
-					String sql = "from MasterMessagePraise p where p.user.id=:userId and p.message.id=:msgId and p.status = '1'";
-					queryMap.clear();
-					queryMap.put("userId",user.getId());
-					queryMap.put("msgId",message.getId());
-					MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(sql,queryMap);
-					if (praise != null){
-						message.setPraiseStatus("取消赞");
-					}else {
-						message.setPraiseStatus("赞");
-					}
+					message.setPraiseStatus("赞");
+//					String sql = "from MasterMessagePraise p where p.user.id=:userId and p.message.id=:msgId and p.status = '1'";
+//					queryMap.clear();
+//					queryMap.put("userId",user.getId());
+//					queryMap.put("msgId",message.getId());
+//					MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(sql,queryMap);
+//					if (praise != null){
+//						message.setPraiseStatus("取消赞");
+//					}else {
+//						message.setPraiseStatus("赞");
+//					}
 				} else {
 					message.setFollowStatus("关注");
 					message.setPraiseStatus("赞");
@@ -479,14 +510,11 @@ public class MasterMessageController {
 	@RequestMapping("subMaster/{qm}/{size}/{index}")
 	public List getSubMaster(HttpServletRequest request , @PathVariable String qm , @PathVariable String size,@PathVariable String index)throws Exception{
 		MyUser user = AuthorizationUtil.getMyUser();
-//		String qm = request.getParameter("qm");
 		if (null == qm || "".equalsIgnoreCase(qm)) {
 			qm = "plistMaster_default";
 		}
 		XQuery query = new XQuery(qm, request);
 		PageEntity pageEntity = new PageEntity();
-//		String pageIndex = request.getParameter("pageEntity.index");
-//		String pageSize = request.getParameter("pageEntity.size");
 		if (index != null) {
 			pageEntity.setIndex(Integer.parseInt(index));
 			pageEntity.setSize(Integer.parseInt(size));
@@ -865,8 +893,8 @@ public class MasterMessageController {
 		List<MasterProject> list = baseManager.listObject(xQuery);
 		XQuery xQuery2 = new XQuery("listAddressProvince_asc",request);
 		List<AddressProvince> list2 = baseManager.listObject(xQuery2);
-		model.addAttribute("categoryList",list);
-		model.addAttribute("cityList",list2);
+		model.addAttribute("categoryList", list);
+		model.addAttribute("cityList", list2);
 		return "/classify/masterClassify";
 	}
 
@@ -1049,7 +1077,7 @@ public class MasterMessageController {
 		String queryHql = "from MasterWorkPraise p where p.user.id=:userId and p.work.id=:workId";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("userId",user.getId());
-		queryMap.put("workId",work.getId());
+		queryMap.put("workId", work.getId());
 		MasterWorkPraise praise = (MasterWorkPraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
 		if (praise != null){
 			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
@@ -1084,8 +1112,8 @@ public class MasterMessageController {
 		MasterWorkStore store = (MasterWorkStore) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
 		if (store != null){
 			baseManager.delete(MasterWorkStore.class.getName(),store.getId());
-			work.setStoreAmount(work.getStoreAmount()==null?0:work.getStoreAmount() - 1);
-			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
+			work.setStoreAmount(work.getStoreAmount() == null ? 0 : work.getStoreAmount() - 1);
+			baseManager.saveOrUpdate(MasterWork.class.getName(), work);
 			return "del";
 		}else{
 			MasterWorkStore story = new MasterWorkStore();
@@ -1093,9 +1121,9 @@ public class MasterMessageController {
 			story.setUser(user);
 			story.setCreateDateTime(new Date());
 			story.setStatus("1");
-			baseManager.saveOrUpdate(MasterWorkStore.class.getName(),story);
-			work.setStoreAmount(work.getStoreAmount() == null ? 1 : work.getStoreAmount()+1);
-			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
+			baseManager.saveOrUpdate(MasterWorkStore.class.getName(), story);
+			work.setStoreAmount(work.getStoreAmount() == null ? 1 : work.getStoreAmount() + 1);
+			baseManager.saveOrUpdate(MasterWork.class.getName(), work);
 			return "add";
 		}
 	}

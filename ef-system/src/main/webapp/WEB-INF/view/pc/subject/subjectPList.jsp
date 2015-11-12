@@ -15,25 +15,42 @@
 <html>
 <head>
     <title></title>
-    <script>
-        <%--function removeProduct(productId){--%>
-            <%--jQuery.ajax({--%>
-                <%--type:"GET",--%>
-                <%--url:'<c:url value="/basic/xmj.do?qm=removeProduct"/>',--%>
-                <%--data:{id:productId},--%>
-                <%--dataType:"json",--%>
-                <%--success:function(data){--%>
-                    <%--$("#"+productId).remove();--%>
-                <%--}--%>
-            <%--});--%>
-        <%--}--%>
-    </script>
+
+
+    <style type="text/css">
+        .line {
+            margin-bottom: 20px;
+        }
+
+        /* 复制提示 */
+        .copy-tips {
+            position: fixed;
+            z-index: 999;
+            bottom: 50%;
+            left: 50%;
+            margin: 0 0 -20px -80px;
+            background-color: rgba(0, 0, 0, 0.2);
+            filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#30000000, endColorstr=#30000000);
+            padding: 6px;
+        }
+
+        .copy-tips-wrap {
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid #F4D9A6;
+            background-color: #FFFDEE;
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript" src="<c:url value='/scripts/zclip/jquery.zclip.js'/>"></script>
 </head>
 <body>
 
 
-<div style="text-align: left" >
-    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject"/>'" type="button" class="am-btn am-btn-default am-btn-xs" style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题" />
+<div style="text-align: left">
+    <input onclick="window.location.href='<c:url value="/basic/xm.do?qm=formSubject"/>'" type="button"
+           class="am-btn am-btn-default am-btn-xs"
+           style="margin-top: 4px;margin-bottom: 6px;width: 100px;margin-left:2px;height: 35px;" value="新建专题"/>
 </div>
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <div class="admin-content">
@@ -44,15 +61,18 @@
             <table class="am-table am-table-striped am-table-hover table-main">
                 <thead>
                 <tr>
-                    <th class="table-set" width="33%">操作</th>
-                    <th class="table-title" width="33%">专题名称</th>
-                    <th class="table-title" width="33%">专题封面</th>
+                    <th class="table-set" width="30%">操作</th>
+                    <th class="table-title" width=20%">专题名称</th>
+                    <th class="table-title" width="10%">专题类别</th>
+                    <th class="table-title" width="10%">模板</th>
+                    <th class="table-title" width="10%">序号</th>
+                    <th class="table-title" width="15%">创建时间</th>
+                    <th class="table-title" width="10%">状态</th>
                     <%--<th class="table-title">产品价格</th>--%>
 
                 </tr>
                 </thead>
                 <tbody>
-
 
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="subject">
@@ -61,27 +81,70 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
 
-                                    <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">--%>
+                                        <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formProduct&view=${view}&id=${product.id}&tenantId=${tenantId}&masterId=${masterId}"/>">--%>
                                         <%--修改信息--%>
-                                    <%--</a>--%>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="<c:url value="/basic/xm.do?qm=formSubject&view=${view}&id=${subject.id}"/>">
+                                        <%--</a>--%>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="<c:url value="/basic/xm.do?qm=formSubject&view=${view}&id=${subject.id}"/>">
                                         编辑
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  href="javascript:void (0);" onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="javascript:void (0);"
+                                       onclick="showConfirm('提示','是否删除',function(){removeSubject('${subject.id}')})">
                                         删除
                                     </a>
-                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="recommendSubject('${subject.id}')" href="javascript:void (0);">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       onclick="recommendSubject('${subject.id}')" href="javascript:void (0);">
                                         推荐
+                                    </a>
+                                     <c:if test="${subject.subjectShow == '1'}">
+                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
+                                                   onclick="updateShow(this)" show="0" href="javascript:void (0);">
+                                                    下架
+                                          </a>
+                                    </c:if>
+                                    <c:if test="${subject.subjectShow == '0'}">
+                                         <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
+                                                   onclick="updateShow(this)" show="1" href="javascript:void (0);">
+                                                    上架
+                                         </a>
+                                     </c:if>
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only copy"
+                                       url="http://www.efeiyi.com/subject/${subject.id}" href="javascript:void (0);">
+                                        拷贝网址
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only"><a href="<c:url value='/basic/xm.do?qm=viewSubject&id=${subject.id}'/>">${subject.name}</a></td>
-                        <td class="am-hide-sm-only">
-                            <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${subject.pictureUrl}@!product-model"/>"
-                                 alt=""/>
+                        <td class="am-hide-sm-only"><a
+                                href="<c:url value='/basic/xm.do?qm=viewSubject&id=${subject.id}'/>">${subject.name}</a>
                         </td>
-                        <%--<td class="am-hide-sm-only">${product.price}</td>--%>
+
+                        <td class="am-hide-sm-only">
+                               <ming800:status name="type" dataType="Subject.type" checkedValue="${subject.type}" type="normal" />
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <ming800:status name="template" dataType="Subject.template" checkedValue="${subject.template}" type="normal" />
+                        </td>
+                        <td class="am-hide-sm-only">
+                            ${subject.subjectIndex}
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <fmt:formatDate value="${subject.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
+                        </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${subject.subjectShow == '0'}">
+                                   <span>
+                                      下架
+                                   </span>
+                            </c:if>
+                            <c:if test="${subject.subjectShow == '1'}">
+                                <span style="color: red">
+                                    上架
+                                </span>
+                            </c:if>
+                        </td>
+                            <%--<td class="am-hide-sm-only">${product.price}</td>--%>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -89,7 +152,7 @@
         </div>
     </div>
     <div style="clear: both">
-        <c:url value="/basic/xm.do" var="url" />
+        <c:url value="/basic/xm.do" var="url"/>
         <ming800:pcPageList bean="${requestScope.pageInfo.pageEntity}" url="${url}">
             <ming800:pcPageParam name="qm" value="${requestScope.qm}"/>
             <ming800:pcPageParam name="conditions" value="${requestScope.conditions}"/>
@@ -97,28 +160,74 @@
     </div>
 </div>
 <script>
-    function removeSubject(divId){
+    $(function () {
+
+        $(".copy").each(function () {
+            $(this).zclip({
+                path: "<c:url value="/scripts/zclip/ZeroClipboard.swf" />",
+                copy: function () {
+                    return $(this).attr("url");
+                },
+                beforeCopy: function () {/* 按住鼠标时的操作 */
+                    $(this).css("color", "orange");
+                },
+                afterCopy: function () {/* 复制成功后的操作 */
+                    var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>☺ 复制成功</div></div>");
+                    $("body").find(".copy-tips").remove().end().append($copysuc);
+                    $(".copy-tips").fadeOut(3000);
+                }
+            });
+        });
+
+    });
+    function removeSubject(divId) {
         $.ajax({
             type: "get",
             url: '<c:url value="/basic/xmj.do?qm=removeSubject"/>',
             cache: false,
             dataType: "json",
-            data:{id:divId},
+            data: {id: divId},
             success: function (data) {
-                $("#"+divId).remove();
+                $("#" + divId).remove();
             }
         });
     }
 
-    function recommendSubject(divId){
+    function updateShow(obj) {
+        var id = $(obj).attr("subId");
+        var show = $(obj).attr("show");
+        $.ajax({
+            type: "get",
+            url: '<c:url value="/product/updateShow.do"/>',
+            cache: false,
+            dataType: "json",
+            data: {subjectId: id,show:show},
+            success: function (data) {
+                if(show =="1"){
+                    $(obj).text("下架");
+                    $(obj).attr("show","0");
+                    var span =  '<span style="color: red">上架 </span>';
+                    $("#"+data+" td:eq(6)").html(span);
+                }
+                if(show =="0"){
+                    $(obj).text("上架");
+                    $(obj).attr("show","1");
+                    var span =  '<span>下架 </span>';
+                    $("#"+data+" td:eq(6)").html(span);
+                }
+            }
+        });
+    }
+
+    function recommendSubject(divId) {
         $.ajax({
             type: "get",
             url: '<c:url value="/product/updateSubjectIndex.do"/>',
             cache: false,
             dataType: "json",
-            data:{subjectId:divId},
+            data: {subjectId: divId},
             success: function (data) {
-               location.reload();
+                location.reload();
             }
         });
     }

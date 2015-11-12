@@ -49,10 +49,10 @@
   <div class="custom">
     <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
       <ul class="am-slides ">
-        <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
-        <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
-          <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
-            <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+        <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${group.groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}${group.groupProduct.productModel.name}${group.groupProduct.productModel.product.subName}</span></div></div></li>
+        <c:forEach items="${group.groupProduct.productModel.product.productPictureList}" var="picture">
+          <c:if test="${picture.status=='1'&&picture.productModel.id==group.groupProduct.productModel.id}">
+            <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${group.groupProduct.productModel.product.name}${group.groupProduct.productModel.name}${group.groupProduct.productModel.product.subName}</span></div></div></li>
           </c:if>
         </c:forEach>
       </ul>
@@ -105,7 +105,7 @@
         </div>
         <div class="tab-btn">
           <a href="<c:url value="/product/groupProduct1.do"/>">更多团购商品<i class="gicon"></i></a>
-          <a href="#">我要开团<i class="gicon"></i></a>
+          <a href="<c:url value="/product/groupProduct/${group.groupProduct.id}"/>">我要开团<i class="gicon"></i></a>
         </div>
       </div>
       <div class="co-page" style="display: none">
