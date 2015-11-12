@@ -62,8 +62,8 @@
                 <thead>
                 <tr>
                     <th class="table-set" width="30%">操作</th>
-                    <th class="table-title" width="15%">专题名称</th>
-                    <th class="table-title" width="15%">专题类别</th>
+                    <th class="table-title" width=20%">专题名称</th>
+                    <th class="table-title" width="10%">专题类别</th>
                     <th class="table-title" width="10%">模板</th>
                     <th class="table-title" width="10%">序号</th>
                     <th class="table-title" width="15%">创建时间</th>
@@ -100,13 +100,13 @@
                                      <c:if test="${subject.subjectShow == '1'}">
                                          <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
                                                    onclick="updateShow(this)" show="0" href="javascript:void (0);">
-                                                    上架
+                                                    下架
                                           </a>
                                     </c:if>
                                     <c:if test="${subject.subjectShow == '0'}">
                                          <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" subId="${subject.id}"
                                                    onclick="updateShow(this)" show="1" href="javascript:void (0);">
-                                                    下架
+                                                    上架
                                          </a>
                                      </c:if>
                                     <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only copy"
@@ -204,17 +204,16 @@
             data: {subjectId: id,show:show},
             success: function (data) {
                 if(show =="1"){
-                    $(obj).text("上架");
+                    $(obj).text("下架");
                     $(obj).attr("show","0");
-                    var span =  '<span>下架 </span>';
-
-                    $("#"+data+" td:eq(5)").html(span);
+                    var span =  '<span style="color: red">上架 </span>';
+                    $("#"+data+" td:eq(6)").html(span);
                 }
                 if(show =="0"){
-                    $(obj).text("下架");
+                    $(obj).text("上架");
                     $(obj).attr("show","1");
-                    var span =  '<span style="color: red">上架 </span>';
-                    $("#"+data+" td:eq(5)").html(span);
+                    var span =  '<span>下架 </span>';
+                    $("#"+data+" td:eq(6)").html(span);
                 }
             }
         });

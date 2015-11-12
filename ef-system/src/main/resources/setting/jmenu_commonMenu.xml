@@ -156,6 +156,7 @@
             </jnode>
             <jnode url="/basic/xm.do?qm=plistSubject_default" access="admin,manager" text_zh_CN="首页推荐专题">
                 <match url="/basic/xm.do?qm=formSubject"/>
+                <match url="/basic/xm.do?qm=plistSubject_default1"/>
                 <match url="/basic/xm.do?qm=plistEcProjectCategory_default&amp;view=plist"/>
                 <match url="/basic/xm.do?qm=viewSubject"/>
                 <match url="/basic/xm.do?qm=plistTProductModel_default"/>

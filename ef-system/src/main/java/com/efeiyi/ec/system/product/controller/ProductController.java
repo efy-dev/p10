@@ -650,6 +650,6 @@ public class ProductController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return show;
+        return subjectId;
     }
 }

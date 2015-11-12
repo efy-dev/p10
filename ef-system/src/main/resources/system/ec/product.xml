@@ -336,6 +336,12 @@
                     <query name="default" label="默认" type="auto" orderBy="subjectIndex:desc">
                         <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
                     </query>
+                    <query name="default1" label="快速查询" type="auto" orderBy="subjectIndex:desc">
+                        <condition defaultValue="0" name="status" operation="ne" inputType="default"/>
+                        <condition  name="name" label="专题名称" operation="like" inputType="text"/>
+                        <condition name="type" operation="eq" label="专题类别" inputType="select_status" key="Subject.type"/>
+                        <condition name="template" operation="eq" label="模板" inputType="select_status" key="Subject.template"/>
+                    </query>
                 </do>
                 <do name="viewSubject" label="查看专题" access="" result="/subject/subjectView"/>
                 <do name="removeSubject" label="删除产品图片" access="" result="json"/>
