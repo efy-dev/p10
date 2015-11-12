@@ -348,7 +348,7 @@ var startNum=1;
                       "<p class='text-time'>"+cTime+"</p> " +
                       "<p class='text-content'>" +
                       "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
-                      "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
+                      "<div class='owner'><img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/></div> " +
                       "<div class='owner-good'>" +
                       "<a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
               pubu.append(box);
@@ -540,7 +540,7 @@ function savaUP(productId){
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
-                "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
+                "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
                 "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
       },
@@ -709,7 +709,7 @@ function savaUP(productId){
                     "<a href=\"#\">"+userName+"</a>回复了你</p> " +
                     "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
                     "<a href=\"javascript:void(0);\" onclick=\"gotoWatch('"+data[i].id+"','"+data[i].product+"')\">"+data[i].content+"</a></p> " +
-                    "<div class=\"owner\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></div></div> </li>");
+                    "<div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div></div> </li>");
             pubu.append(box);
 
           }
@@ -748,7 +748,7 @@ function savaUP(productId){
             var box = $("<li class=\"review\"> <div class=\"matter\"> <p class=\"text-h1\">"+userName+"</p> " +
                     "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
                     "<a href=\"javascript:void(0);\" onclick=\"watchPraise('"+data[i].id+"','"+data[i].product+"')\">觉得你的评论“还不错”很赞</a></p> <div class=\"owner\">" +
-                    "<img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></div> </div> " +
+                    "<img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div> </div> " +
                     "</li>");
             pubu.append(box);
 
