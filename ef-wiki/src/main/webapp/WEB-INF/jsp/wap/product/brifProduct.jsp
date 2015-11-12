@@ -223,7 +223,7 @@ ${product.productDescription.content}
       </div>
 
     </div>
-    <div class="more"><a href="javascript:void(0);" onclick=""><i class="time-1"></i>查看更多评论</a></div>
+    <div class="more"><a href="javascript:void(0);" onclick="getData()"><i class="time-1"></i>查看更多评论</a></div>
     <input type="hidden" name="" id="content" value="" />
 </div>
   <!--评论-->
@@ -247,10 +247,7 @@ ${product.productDescription.content}
             <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"></a>
             <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"></a>
             <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"></a>
-           <%-- <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin" ></span></a>
-            <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq" ></span></a>
-            <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina" ></span></a>
-            <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"><span class="jiathis_txt jtico jtico_cqq" ></span></a>--%>
+
           </div>
         </div>
         </div>
@@ -290,10 +287,22 @@ ${product.productDescription.content}
         }
         if(data=="true"){
           $("#"+masterId).html("取消关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).html("关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="error"){
@@ -307,12 +316,7 @@ ${product.productDescription.content}
         return false;
       },
       complete:function(){
-        if(oper=="0"){
-          var val = $("#saveMasterFllow").val("1");
-        }
-        if(oper=="1"){
-          var val = $("#saveMasterFllow").val("0");
-        }
+
       }
     });
   }
