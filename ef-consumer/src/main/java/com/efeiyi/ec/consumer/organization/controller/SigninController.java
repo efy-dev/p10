@@ -146,17 +146,20 @@ public class SigninController extends BaseController {
             XQuery xQuery = new XQuery("listCouponBatch_defaultFlag", request);
             List<Object> couponBatchList = baseManager.listObject(xQuery);
             for (Object couponBatchTemp : couponBatchList) {
-                Coupon coupon = new Coupon();
-                coupon.setStatus("1");
-                coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
-                coupon.setCouponBatch((CouponBatch) couponBatchTemp);
-                Date currentDate = new Date();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-                String currentDateStr = simpleDateFormat.format(currentDate);
-                coupon.setUniqueKey(currentDateStr + coupon.getSerial());
-                coupon.setConsumer(consumer);
-                baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                if (((CouponBatch) couponBatchTemp).getCouponList().size() < ((CouponBatch) couponBatchTemp).getAmount()) {
+                    Coupon coupon = new Coupon();
+                    coupon.setStatus("1");
+                    coupon.setSerial(autoSerialManager.nextSerial("orderSerial"));
+                    coupon.setCouponBatch((CouponBatch) couponBatchTemp);
+                    Date currentDate = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+                    String currentDateStr = simpleDateFormat.format(currentDate);
+                    coupon.setUniqueKey(currentDateStr + coupon.getSerial());
+                    coupon.setConsumer(consumer);
+                    baseManager.saveOrUpdate(Coupon.class.getName(), coupon);
+                }
             }
+
         }
         response.sendRedirect(request.getContextPath() + "/sso2.do");
     }
