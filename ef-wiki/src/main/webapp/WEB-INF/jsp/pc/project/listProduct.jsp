@@ -671,7 +671,7 @@
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
                         "<div class=\"right1\"> <a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" name=\"up\" id=\"good-1\"> <i class=\"h-i-con2\"></i> " +
-                        "<span id=\"em1\">"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"javascript:void(0);\" onclick=\"storeProduct('"+data.list[i].id+"')\"> " +
+                        "<span id=\""+data.list[i].id+"\">"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"javascript:void(0);\" onclick=\"storeProduct('"+data.list[i].id+"')\"> " +
                         "<i class=\"h-i-con3\"></i> </a> </div> </div> </div> </li></ul>"
               }
               //return html;
@@ -714,7 +714,7 @@
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/listProduct/'/>"+projectId;
+            window.location.href ="<c:url value='/listProduct/'/>"+${project.id};
           }
           else{
             return false;//取消
@@ -726,7 +726,8 @@
           return false;
         }
         if(data2=="true" && oper=='up'){
-          $("#em1").html(parseInt($("#em1").text())+1);
+          //$("#em1").html(parseInt($("#em1").text())+1);
+          $("#"+ds).html(parseInt($("#em1").text())+1);
           if($("#good-1").attr("name")=="down"){
             $("#good-1").attr("name","up");
           }else{
@@ -734,7 +735,8 @@
           }
         }
         if(data2=="true" && oper=='down'){
-          $("#em1").html(parseInt($("#em1").text())-1);
+          //$("#em1").html(parseInt($("#em1").text())-1);
+          $("#"+ds).html(parseInt($("#em1").text())+1);
           if($("#good-1").attr("name")=="down"){
             $("#good-1").attr("name","up");
           }else{
@@ -764,6 +766,14 @@
         if(data=="false"){
           //alert("您还未登陆，请登录后再操作");
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/listProduct/'/>"+projectId;
+          }
+          else{
+            return false;//取消
+          }
+          return false;
           return false;
         }
         if(data=="repeat"){
