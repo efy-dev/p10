@@ -24,7 +24,7 @@ public class Subject {
     private String status;
     private String template;//1 普通 2 活动
     private String type;//类别
-    private String subjectShow;//1 上架 2  下架
+    private String subjectShow;//1 上架 0  下架
     private Date createDateTime;
 
 
