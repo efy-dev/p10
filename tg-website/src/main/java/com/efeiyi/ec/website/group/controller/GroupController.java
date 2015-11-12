@@ -8,9 +8,11 @@ import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
 import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.website.group.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,9 @@ import java.util.List;
 public class GroupController {
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     //跳转协议
     @RequestMapping(value = "/group.do")
@@ -147,6 +152,18 @@ public class GroupController {
                 purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
+                //发送短信
+                Date createTime = group.getCreateDateTime();
+                int limintDay = group.getGroupProduct().getGroupPurchaseTime();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(createTime);
+                calendar.add(Calendar.DATE,limintDay);
+                Date endTime = calendar.getTime();
+                Date dateNow = new Date();
+                long min = endTime.getTime()-dateNow.getTime();
+                long leftMin = min/(1000*60);
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+leftMin, "1108985", PConst.TIANYI);
+
                 if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
                     baseManager.saveOrUpdate(Group.class.getName(),group);
@@ -162,8 +179,17 @@ public class GroupController {
                                 }
                             }
                         }
-                        bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member1.getRedPacket()==null){
+                            member1.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
+
                         baseManager.saveOrUpdate(Member.class.getName(),member1);
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
 
@@ -325,8 +351,16 @@ public class GroupController {
                                 }
                             }
                         }
-                        bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member.getRedPacket()==null){
+                            member.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
                         baseManager.saveOrUpdate(Member.class.getName(),member);
 
