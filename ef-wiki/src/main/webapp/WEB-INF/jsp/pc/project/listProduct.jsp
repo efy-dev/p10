@@ -18,7 +18,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>e飞蚁工艺秀</title>
+  <title>e飞蚁工艺</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
@@ -210,7 +210,7 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -220,7 +220,7 @@
 
 
             pubu.append(box);
-            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -666,7 +666,7 @@
 
 
                 // pubu.append(box);
-                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
+                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
