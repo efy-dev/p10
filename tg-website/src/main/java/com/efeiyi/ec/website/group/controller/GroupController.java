@@ -162,7 +162,7 @@ public class GroupController {
                 long min = endTime.getTime()-dateNow.getTime();
                 long leftMin = min/(1000*60);
                 String left = String.valueOf(leftMin);
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+left, "1108985", PConst.TIANYI);
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getReceiverName()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+left, "1108985", PConst.TIANYI);
 
                 if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
@@ -323,7 +323,7 @@ public class GroupController {
 
     //对所有团进行成团操作并发送红包
     @RequestMapping(value = "/sendRedPacket")
-    public String sendRedPacket(HttpServletRequest request, Model model) throws Exception{
+    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listGroup_default3",request);
         List<Group> list = baseManager.listObject(xQuery);
         for(Group group:list){
@@ -364,6 +364,9 @@ public class GroupController {
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
                         baseManager.saveOrUpdate(Member.class.getName(),member);
 
+                        //发送短信
+                        this.smsCheckManager.send(member.getUser().getUsername(), "#productName#="+group.getGroupProduct().getProductModel().getName()+"&#redPacket#="+group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
+
                     }
 
                     XQuery xQuery1 = new XQuery("listPurchaseOrderGroup_default3",request);
@@ -380,7 +383,6 @@ public class GroupController {
                 }
             }
         }
-        return "";
     }
 
 }
