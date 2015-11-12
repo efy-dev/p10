@@ -171,7 +171,7 @@
 ${product.productDescription.content}
   <!--购买-->
   <div class="purchase-inheritor">
-    <a href="http://www2.efeiyi.com/product/productModel/{${product.productModelList[0].id}}">我&nbsp;要&nbsp;购&nbsp;买</a>
+    <a href="http://www.efeiyi.com/product/productModel/${product.productModelList[0].id}">我&nbsp;要&nbsp;购&nbsp;买</a>
   </div>
   <!--购买-->
   <div class="inheritor ">
@@ -223,7 +223,7 @@ ${product.productDescription.content}
       </div>
 
     </div>
-    <div class="more"><a href="javascript:void(0);" onclick=""><i class="time-1"></i>查看更多评论</a></div>
+    <div class="more"><a href="javascript:void(0);" onclick="getData()"><i class="time-1"></i>查看更多评论</a></div>
     <input type="hidden" name="" id="content" value="" />
 </div>
   <!--评论-->
@@ -247,10 +247,7 @@ ${product.productDescription.content}
             <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"></a>
             <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"></a>
             <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"></a>
-           <%-- <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin" ></span></a>
-            <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq" ></span></a>
-            <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina" ></span></a>
-            <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"><span class="jiathis_txt jtico jtico_cqq" ></span></a>--%>
+
           </div>
         </div>
         </div>
@@ -290,10 +287,22 @@ ${product.productDescription.content}
         }
         if(data=="true"){
           $("#"+masterId).html("取消关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).html("关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="error"){
@@ -307,12 +316,7 @@ ${product.productDescription.content}
         return false;
       },
       complete:function(){
-        if(oper=="0"){
-          var val = $("#saveMasterFllow").val("1");
-        }
-        if(oper=="1"){
-          var val = $("#saveMasterFllow").val("0");
-        }
+
       }
     });
   }
@@ -348,7 +352,7 @@ var startNum=1;
                       "<p class='text-time'>"+cTime+"</p> " +
                       "<p class='text-content'>" +
                       "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
-                      "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
+                      "<div class='owner'><img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/></div> " +
                       "<div class='owner-good'>" +
                       "<a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
               pubu.append(box);
@@ -540,7 +544,7 @@ function savaUP(productId){
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
-                "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
+                "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
                 "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
       },
@@ -709,7 +713,7 @@ function savaUP(productId){
                     "<a href=\"#\">"+userName+"</a>回复了你</p> " +
                     "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
                     "<a href=\"javascript:void(0);\" onclick=\"gotoWatch('"+data[i].id+"','"+data[i].product+"')\">"+data[i].content+"</a></p> " +
-                    "<div class=\"owner\"><img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></div></div> </li>");
+                    "<div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div></div> </li>");
             pubu.append(box);
 
           }
@@ -748,7 +752,7 @@ function savaUP(productId){
             var box = $("<li class=\"review\"> <div class=\"matter\"> <p class=\"text-h1\">"+userName+"</p> " +
                     "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
                     "<a href=\"javascript:void(0);\" onclick=\"watchPraise('"+data[i].id+"','"+data[i].product+"')\">觉得你的评论“还不错”很赞</a></p> <div class=\"owner\">" +
-                    "<img class=\"am-circle\" src=\"/scripts/assets/images/120102-p1-11.jpg\"></div> </div> " +
+                    "<img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div> </div> " +
                     "</li>");
             pubu.append(box);
 
