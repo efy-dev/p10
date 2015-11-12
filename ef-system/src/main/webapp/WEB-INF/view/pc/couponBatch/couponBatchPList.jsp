@@ -63,7 +63,7 @@
         }
 
         function createURL(couponBatchId){
-            window.prompt("链接","www.efeiyi.com/yhq.do?id="+couponBatchId);
+            window.prompt("链接","www.efeiyi.com/yhq.do?couponBatchId="+couponBatchId);
         }
 
     </script>
