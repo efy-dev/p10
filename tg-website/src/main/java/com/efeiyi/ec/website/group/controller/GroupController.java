@@ -161,7 +161,8 @@ public class GroupController {
                 Date dateNow = new Date();
                 long min = endTime.getTime()-dateNow.getTime();
                 long leftMin = min/(1000*60);
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+leftMin, "1108985", PConst.TIANYI);
+                String left = String.valueOf(leftMin);
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getConsumerAddress().getConsignee()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+left, "1108985", PConst.TIANYI);
 
                 if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
