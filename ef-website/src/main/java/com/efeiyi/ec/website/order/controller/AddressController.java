@@ -147,10 +147,10 @@ public class AddressController {
         xSaveOrUpdate1.getParamMap().put("consumer_id", AuthorizationUtil.getMyUser().getId());
         baseManager.saveOrUpdate(xSaveOrUpdate1);
         String cartId = request.getParameter("cartId");
-        if (cartId == null || cartId.equals("")) {
-            return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
-        } else if (request.getParameter("callback") != null && !request.getParameter("callback").equals("")) {
+        if (request.getParameter("callback") != null && !request.getParameter("callback").equals("")) {
             return "redirect:/order/groupBuy/" + request.getParameter("groupProductId") + "/amount=" + request.getParameter("amount") + "?callback=" + request.getParameter("callback");
+        } else if (cartId == null || cartId.equals("")) {
+            return "redirect:/order/easyBuy/" + request.getParameter("productModel") + "?amount=" + request.getParameter("amount");
         }
         return "redirect:/order/saveOrUpdateOrder.do?cartId=" + cartId;
         /*} else {
