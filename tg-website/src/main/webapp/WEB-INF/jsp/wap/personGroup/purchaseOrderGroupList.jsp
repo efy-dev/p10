@@ -137,7 +137,7 @@
             <span>待发货</span>
           </div>
           <div class="center ae">
-            <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+            <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup5.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
             <div class="txt ae"><p>交易金额：${purchaseOrderGroup5.purchaseOrder.total}元</p>
               <c:if test="${purchaseOrderGroup5.group.status==1||purchaseOrderGroup5.group.status==5}">
                 <p>返回红包：0元</p>
@@ -183,7 +183,7 @@
             <span>待收货</span>
           </div>
           <div class="center ae">
-            <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+            <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup7.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
             <div class="txt ae"><p>交易金额：${purchaseOrderGroup7.purchaseOrder.total}元</p>
               <c:if test="${purchaseOrderGroup7.group.status==1||purchaseOrderGroup7.group.status==5}">
                 <p>返回红包：0元</p>
@@ -235,7 +235,7 @@
               <span>交易成功</span>
             </div>
             <div class="center ae">
-              <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+              <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.groupProduct.id}"/>"><img src="http://pro.efeiyi.com/${purchaseOrderGroup9.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
               <div class="txt ae"><p>交易金额：${purchaseOrderGroup9.purchaseOrder.total}元</p>
                 <c:if test="${purchaseOrderGroup9.group.status==1||purchaseOrderGroup9.group.status==5}">
                   <p>返回红包：0元</p>
