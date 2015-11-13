@@ -33,7 +33,13 @@
                         <condition name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
-
+                <do name="plistECMaster" access="" label="传承人分页列表"
+                    result="/master/masterECPList">
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="status" defaultValue="1" operation="eq"/>
+                    </query>
+                </do>
                 <do name="plistTMaster" access="" label="传承人分页列表"
                     execute="com.efeiyi.ec.system.master.controller.TenantMasterListHandler"
                     result="/tenantMaster/tenantMasterPList">
@@ -122,7 +128,7 @@
                     <page>
                         <fields>
                             <field name="createDateTime" label="创建时间" defaultValue="${CURRENT_DATETIME}"
-                                   inputType="default"></field>
+                                   inputType="default"/>
                             <field name="status" label="创建时间" defaultValue="1" inputType="default"/>
                         </fields>
                     </page>
@@ -531,6 +537,7 @@
                     result="/masterRecommended/masterRecommendedPList">
                     <query name="default" label="默认" type="auto" orderBy="sort:asc">
                         <condition name="id" defaultValue="0" operation="ne"/>
+                        <condition name="group" defaultValue="ec.masterRecommended" operation="ne"/>
                         <condition name="status" defaultValue="1" operation="eq"/>
                         <condition name="master.status" defaultValue="1" operation="eq"/>
                     </query>
@@ -586,6 +593,14 @@
 
                     <query name="default2" label="默认" type="auto" orderBy="id:desc">
                         <condition name="project.id" defaultValue="1" operation="eq"/>
+                    </query>
+
+                </do>
+                <do name="listMasterProject3Message" label="大师著作产品" access="" result="/masterProject/masterProjectList2">
+
+                    <query name="default" label="默认" type="auto" orderBy="id:desc">
+                        <condition name="status" defaultValue="0" operation="ne"/>
+                        <condition name="master.id" defaultValue="1" operation="eq"/>
                     </query>
 
                 </do>
@@ -649,26 +664,19 @@
                 </do>
                 <do name="plistMasterMessage" access="" label="传承人推荐列表" execute="com.efeiyi.ec.system.master.controller.MasterIntroductionFormHandler" result="/masterMessage/masterMessagePList">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
+                        <condition label="状态" name="status" defaultValue="0" operation="ne"/>
                         <condition label="新闻动态Id" name="master.id" defaultValue="0" operation="eq"/>
                     </query>
                 </do>
+                <do name="removeMasterMessage" label="删除动态" access="" result="redirect:/basic/xm.do?qm=plistMaster_default"
+                    execute="com.efeiyi.ec.system.master.controller.DeleteMasterMessageHandler"/>
+                <do name="viewMasterMessage" label="查看大师动态" access="" result="/masterMessage/masterMessageView"/>
                 <do name="formMasterMessage" label="保存传承人推荐页" access="" execute="com.efeiyi.ec.system.master.controller.MasterIntroductionFormHandler"
                     result="/masterMessage/masterMessageForm"/>
                 <do name="saveOrUpdateMasterMessage" label="保存传承人推荐产品" access=""
                     result="redirect:/basic/xm.do?qm=plistMasterMessage_default&amp;conditions=master.id:${master.id}&amp;masterId=${master.id}">
                     <query name="default" label="默认" type="auto" orderBy="createDateTime:desc">
                         <condition label="新闻动态Id" name="master.id" defaultValue="0" operation="eq"/>
-                    </query>
-                </do>
-            </does>
-        </entity>
-        <entity name="Project" label="Project"
-                basic="simple" others=""
-                model="com.efeiyi.ec.project.model.Project">
-            <does>
-                <do name="listProject" label="project列表" access="" result="/masterMessage/masterMessageProjectList" execute="com.efeiyi.ec.system.project.controller.ProjectListHandler">
-                    <query name="default" label="默认" type="auto" orderBy="serial:asc">
-                        <condition label="project主键" name="status" defaultValue="1" operation="eq"/>
                     </query>
                 </do>
             </does>

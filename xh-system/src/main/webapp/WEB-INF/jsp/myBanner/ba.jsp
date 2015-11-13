@@ -51,7 +51,7 @@
         </td>
         <td>
           <c:if test="${!empty banner.imageUrl}">
-            <img id="${banner.id}5"  name="${banner.id}" src="<%=imgBasePath%>${banner.imageUrl}<%=imgListCss%>">
+            <img id="${banner.id}5"  name="${banner.id}" src="${banner.imageUrl}<%=imgListCss%>">
           </c:if>
         </td>
         <td>

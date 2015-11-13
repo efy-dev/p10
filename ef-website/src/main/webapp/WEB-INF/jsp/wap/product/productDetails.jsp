@@ -12,7 +12,14 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <title>商品详情</title>
+    <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
+    <c:if test="${product.master!=null}">
+        <c:set var="master">
+            ${product.master.fullName}
+        </c:set>
+    </c:if>
+    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.tenant.name}"/>
+    <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
 
@@ -21,7 +28,7 @@
         <ul class="am-slides">
             <li><img src="http://pro.efeiyi.com/${productModel.productModel_url}@!wap-product-pic"></li>
             <c:forEach items="${productModel.product.productPictureList}" var="picture">
-                <c:if test="${picture.status=='1'}">
+                <c:if test="${picture.status=='1'&&picture.productModel.id==productModel.id}">
                 <li><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!wap-product-pic"></li>
                 </c:if>
             </c:forEach>
@@ -105,6 +112,7 @@
                         <div class="bd dis-title">【顾客评论】</div>
                         <ul class="ul-list">
                             <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct" varStatus="rec">
+                                <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
                                 <li class="item">
                                     <div class="user-info">
                                         <img id="personPhoto${rec.index}" class="user-favor" src="/scripts/upload/yonghm.jpg">
@@ -122,6 +130,7 @@
                                         </p>
                                     </div>
                                 </li>
+                                </c:if>
                             </c:forEach>
                         </ul>
                         </ul>
@@ -175,7 +184,9 @@
     </div>
 </div>
 <div class="am-dimmer am-active" data-am-dimmer="" style="display:none"></div>
+
 <!--//End--Start--选择规格弹出框-->
+
 <script type="text/javascript">
     function collect(o) {
         style = "visibility: none;"
@@ -252,7 +263,11 @@
     }
     function addProduct() {
         var t = $("#value");
+        var t1 = ${productModel.amount};
         t.val(parseInt(t.val())+1)
+        if(t.val()>=t1){
+            document.getElementById("value").value = t1;
+        }
     }
 
     function addCart(o){
@@ -266,17 +281,7 @@
 </script>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
+
     $().ready(function(){
         $("img").each(function(){
             $(this).css("width","100%");

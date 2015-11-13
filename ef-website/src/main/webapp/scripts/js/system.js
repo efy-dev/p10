@@ -6,16 +6,23 @@ $(function(){
         },function(){
             $(this).find('.top-wechat').stop(true).slideUp('fast');
         });
+        //
+        $('.btn-top-nav').hover(function(){
+            $(this).find('.ul-details').stop(true).slideDown('fast');
+        },function(){
+            $(this).find('.ul-details').stop(true).slideUp('fast');
+        });
         //footer二维码
         $('.footer .service .wechat').hover(function(){
-            $(this).addClass('wechat-hover');
+            $(this).find('.icon').fadeIn('100');
         },function(){
-            $(this).removeClass('wechat-hover');
+            $(this).find('.icon').fadeOut();
         })
     })();
     //
     (function(){
         $('.header .nav li').hover(function(){
+            $('.header,.footer').css('z-index','');
             $(this).find('.bgbor').show();
             $(this).addClass('hover').find('.nav-links').stop().slideDown('fast');
         },function(){
@@ -25,7 +32,11 @@ $(function(){
     })();
     //
     (function(){
-        var $liImg=$('.focus .slider-main li');
+        var $focus=$('.focus');
+        var $btnPrev=$focus.find('.btn-prev');
+        var $btnNext=$focus.find('.btn-next');
+        var $sliderMain=$('.focus .slider-main');
+        var $liImg=$sliderMain.find('li');
         var $liNav=$('.focus .slider-nav li');
         var index=0;
         var timer=null;
@@ -39,6 +50,40 @@ $(function(){
         $liNav.mouseup(function(){
             timer=setInterval(autoFocus,iSpeed);
         })
+        $sliderMain.hover(function(){
+            clearInterval(timer);
+        },function(){
+            timer=setInterval(autoFocus,iSpeed)
+        })
+
+        $focus.hover(function(){
+            $btnNext.animate({'right':'0'},100);
+            $btnPrev.animate({'left':'0'},100);
+        },function(){
+            $btnNext.animate({'right':'-45px'},100);
+            $btnPrev.animate({'left':'-45px'},100);
+        })
+        //下一页
+        $btnNext.mousedown(function(){
+            clearInterval(timer);
+            autoFocus();
+        })
+        $btnNext.mouseup(function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
+        //上一页
+        $btnPrev.mousedown(function(){
+            clearInterval(timer);
+            index--;
+            if(index<0){
+                index=$liImg.length-1;
+            }
+            $liImg.eq(index).fadeIn(500).siblings('li').fadeOut(500);
+            $liNav.eq(index).addClass('active').siblings('li').removeClass('active');
+        })
+        $btnPrev.mouseup(function(){
+            timer=setInterval(autoFocus,iSpeed);
+        })
         function autoFocus(){
             index++;
             if(index>$liImg.length-1){index=0;}
@@ -47,7 +92,7 @@ $(function(){
         }
         timer=setInterval(autoFocus,iSpeed);
     })();
-    //����
+    //
     (function(){
         $('.shop-sort .link2 dt').click(function(){
             $(this).toggleClass('active').siblings('dd').stop().slideToggle('fast');
@@ -68,21 +113,28 @@ $(function(){
         //收藏
         //var oBiao=$('.preview .collect .biao');
         //oBiao.hover(function(){
-        //    $(this).find('.icon').addClass('icon-hover');
-        //},function(){
-        //    $(this).find('.icon').removeClass('icon-hover');
-        //});
-        //oBiao.click(function(){
-        //    var oCllect=$(this).parents('.collect');
-        //    $(this).find('.icon').toggleClass('icon-active');
-        //    oCllect.find('span.hover').remove();
-        //    if(oCllect.find('span').is('.active')){
-        //        oCllect.find('span.active').remove();
-        //        oCllect.append('<span class="txt hover">添加收藏</span>');
-        //    }else{
-        //        oCllect.append('<span class="txt active">取消收藏</span>');
+        //    var $span=$(this).siblings('span');
+        //    $span.text('添加收藏');
+        //    if($span.is('.active')){
+        //        $span.text('取消收藏');
+        //    }
+        //    if($span.is('.hover')){
+        //        $span.text('添加收藏');
         //    }
         //})
+        //
+        //oBiao.find('.icon').toggle(
+        //    function(){
+        //        var $span=$(this).parents('.biao').siblings('span');
+        //        $(this).addClass('icon-active');
+        //        $span.attr('class','txt active').text('取消收藏');
+        //    },
+        //    function(){
+        //        var $span=$(this).parents('.biao').siblings('span');
+        //        $(this).removeClass('icon-active');
+        //        $span.attr('class','txt hover').text('添加收藏');
+        //    }
+        //);
         //
         $(window).scroll(function(){
             var d=$(document).scrollTop();
@@ -94,7 +146,7 @@ $(function(){
         });
         //
         $('.product-intro .detail .part:last').css({'border':'0'});
-        //���
+        //
         $('.tab-items li a').click(function(){
             var pos=$($(this).attr('href')).offset().top;
             $("html,body").animate({scrollTop:pos},500);
@@ -162,13 +214,6 @@ $(function(){
             }else{
                 btnTop.fadeOut();
             }
-
-            if(_top>$(document).height()-900){
-
-                $('.scroll-bar').css({'bottom':'200px'})
-            }
-
-
             btnTop.click(function(){
                 $('body').stop(true).animate({'scrollTop':'0'},300);
             })
@@ -176,61 +221,30 @@ $(function(){
     })();
     //购物车
     (function(){
-        $('#cart-coupon').find('.btn-coupon').click(function(){
+        //优惠券
+        $('.btn-coupon').click(function(){
+            $('.header,.footer').css('z-index','-1');
             $(this).toggleClass('active');
             $(this).siblings('.ul-list').slideToggle('fast');
             return false;
-        })
+        });
     })();
     //010110结算页-计数
     (function(){
-        //var $tex = $("#leaveword-txt");
-        //var $num = $('#leaveword-num');
-        //var ie = jQuery.support.htmlSerialize;
-        //var str = 0;
-        //var abcnum = 0;
-        //var maxNum = 90;
-        //var texts= 0;
-        //var num = 0;
-        //$tex.val("");
-        ////文本框字数计算和提示改变
-        //if(ie){
-        //    $tex[0].oninput = changeNum;
-        //}else{
-        //    $tex[0].onpropertychange  = changeNum;
-        //}
-        //function changeNum(){
-        //    //汉字的个数
-        //    str = ($tex.val().replace(/\w/g,"")).length;
-        //    //非汉字的个数
-        //    abcnum = $tex.val().length-str;
-        //   // total = str*2+abcnum;
-        //    if(str*2+abcnum<maxNum || str*2+abcnum == maxNum){
-        //        texts =Math.ceil((maxNum - (str*2+abcnum))/2);
-        //        $num.html("<span>"+(45-texts)+"/45</span>").children();
-        //    }else if(str*2+abcnum>maxNum){
-        //        texts =Math.ceil(((str*2+abcnum)-maxNum)/2);
-        //        $num.html("<span>"+texts+"/45</span>").children("span").css({"color":"red"});
-        //    }
-        //}
-
-
         //输入框计数
         var textareaText=$('.my-clearing .page-leaveword input');
         textareaText.keydown(function(){
-            var aNum=60;
+            var aNum=45;
             var curLength=$(this).val().length;
-            var txtNmu=$(this).siblings('.label').find('em');
+            var txtNmu=$(this).siblings('span');
             if(curLength>=aNum){
                 var num=$(this).val().substr(0,aNum-1);
                 $(this).val(num);
             }
             else{
-                txtNmu.text((aNum-1)-$(this).val().length)
+                txtNmu.text((aNum-1)-$(this).val().length+'/45')
             }
         });
-
-
     })();
 
 })

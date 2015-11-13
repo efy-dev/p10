@@ -8,7 +8,7 @@
 <meta name="renderer" content="webkit">
 <!-- No Baidu Siteapp-->
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
 <!-- Add to homescreen for Chrome on Android -->
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -26,7 +26,7 @@
 <script src="<c:url value='/resources/jquery/jquery-2.1.3.min.js'/>"></script>
 <!--<![endif]-->
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/assets/css/amazeui.min.css"/>">
-<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/myorder.css?v=20150831'/>">
+<%--<link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/myorder.css?v=20150831'/>">--%>
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/app.css?v=20150831'/>">
 <link type="text/css" rel="stylesheet" href="<c:url value='/scripts/assets/wap/css/cyclopedia.css?v=20150831'/>">
 <script src="<c:url value='/resources/js/alert.js'/>"></script>

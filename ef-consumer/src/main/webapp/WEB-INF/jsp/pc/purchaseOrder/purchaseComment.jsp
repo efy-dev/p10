@@ -1,3 +1,4 @@
+<%@ page import="com.ming800.core.p.PConst" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -49,15 +50,15 @@
                     <td width="400">
                       <div class="list-refer">
                         <dl>
-                          <dt><a href="#"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a></dt>
-                          <dd>${op.productModel.product.name}</dd>
+                          <dt><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}"><img src="http://pro.efeiyi.com/${op.productModel.productModel_url}@!product-icon" alt=""></a></dt>
+                          <dd><a href="<%=PConst.HOSTNAME%>/product/productModel/${op.productModel.id}">${op.productModel.product.name}</a></dd>
                         </dl>
                       </div>
                     </td>
                     <td width="180">
                       <div class="list-refer-2">
                         <p><fmt:formatDate value="${finish.createDatetime}" pattern="yyyy-MM-dd" /></p>
-                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="H:m:s" /></p>
+                        <p><fmt:formatDate value="${finish.createDatetime}" pattern="HH:mm:ss" /></p>
                       </div>
                     </td>
                     <td width="150">
@@ -410,26 +411,13 @@
     $(obj).hide();
     $('#zt',$(obj).parents("ul")).slideToggle();
   }
-  $(function(){
-    $('.act-ui').click(function(){
-      $(this).parents('.table').siblings('.mutual').slideToggle();
-      return false;
-    })
-  })
+//  $(function(){
+//    $('.act-ui').click(function(){
+//      $(this).parents('.table').siblings('.mutual').slideToggle();
+//      return false;
+//    })
+//  })
 </script>
-<!--content-->
-<!-- //End--footer-->
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="<c:url value="/scripts/js/jquery.min.js"/>"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="<c:url value="/scripts/js/amazeui.ie8polyfill.min.js"/>"></script>
-<![endif]-->
-<script src="<c:url value="/scripts/js/amazeui.min.js"/>"></script>
-<!--<script src="../shop2015/js/system.js"></script>-->
-<script src="<c:url value="/scripts/js/myorder.js"/>"></script>
 </body>
 </html>

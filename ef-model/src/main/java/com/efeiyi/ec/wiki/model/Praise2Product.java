@@ -5,6 +5,7 @@ import com.efeiyi.ec.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class Praise2Product implements Serializable {
     private ProductComment comment;
     private String type;
     private Date createDateTime;
+    private String status;
+    private MyUser moderator;
+    private String watch;
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
     @GeneratedValue(generator = "id")
@@ -85,5 +89,32 @@ public class Praise2Product implements Serializable {
 
     public void setCreateDateTime(Date createDateTime) {
         this.createDateTime = createDateTime;
+    }
+    @Column(name="status")
+    @Where(clause = "status=1")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "moderator_id")
+    public MyUser getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(MyUser moderator) {
+        this.moderator = moderator;
+    }
+    @Column(name = "watch")
+
+    public String getWatch() {
+        return watch;
+    }
+
+    public void setWatch(String watch) {
+        this.watch = watch;
     }
 }

@@ -15,6 +15,7 @@ import com.ming800.core.p.service.AutoSerialManager;
 import com.ming800.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class ProfessionalManagerImpl implements ProfessionalManager{
         }
         if(!"".equals(professional.getPassword())){
 
-            professional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
+            tempProfessional.setPassword(StringUtil.encodePassword(professional.getPassword(), "SHA"));
         }
         tempProfessional.setBigTenant(professional.getBigTenant());
         tempProfessional.setName(professional.getName());

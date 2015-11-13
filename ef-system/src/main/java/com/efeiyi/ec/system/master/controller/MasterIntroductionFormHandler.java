@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.master.controller;
 
+import com.efeiyi.ec.master.model.MasterProject;
 import com.efeiyi.ec.project.model.Project;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
@@ -21,12 +22,18 @@ public class MasterIntroductionFormHandler implements DoHandler {
     @Override
     public ModelMap handle(ModelMap modelMap, HttpServletRequest request) throws Exception {
 
-        if (request.getParameter("masterId") != null) {
-            modelMap.put("masterId", request.getParameter("masterId"));
-        }
         XQuery xQuery = new XQuery("listProject_default",request);
         List<Project> list = baseManager.listObject(xQuery);
         modelMap.addAttribute("projectList",list);
+        if (request.getParameter("masterId") != null) {
+            modelMap.put("masterId", request.getParameter("masterId"));
+            xQuery = new XQuery("listMasterProject3Message_default",request);
+            xQuery.put("master_id", request.getParameter("masterId"));
+            List<MasterProject> masterProjectList = baseManager.listObject(xQuery);
+            modelMap.addAttribute("masterProjectList",masterProjectList);
+        }
+
+
         return modelMap;
     }
 }

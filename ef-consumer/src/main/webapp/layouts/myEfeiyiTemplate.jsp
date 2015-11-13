@@ -63,7 +63,7 @@
             dataType: 'json',
             success: function (data) {
                 if(data == "false" ){
-                    $("#uploadPi").attr("src", "<c:url value='/scripts/images/img-tx.png'/>");
+                    $("#uploadPi").attr("src", "<c:url value='/scripts/images/yonghm.jpg'/>");
                 }else if(data!=null || data!=null){
                     $("#uploadPi").attr("src", "http://pro.efeiyi.com/" + data + "@!user-pic");
                 }

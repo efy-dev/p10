@@ -18,12 +18,12 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>e飞蚁工艺秀</title>
+  <title>e飞蚁工艺</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -42,7 +42,7 @@
 
 </head>
 <body style="float: left">
-<div class="topbar wh" data-am-sticky>
+<%--<div class="topbar wh" data-am-sticky>
   <div class="hd">
     <ul class="ul-item">
       <li><strong>李先生8899</strong><a href="" title="退出">退出</a></li>
@@ -73,11 +73,11 @@
       </ul>
     </div>
   </div>
-</div>
+</div>--%>
 <!-- //End--header-->
 <div class="craft-details">
   <div class="craft-banner">
-    <img src="${project.picture_url}">
+    <img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${project.picture_url}">
     <div class="cart-b-page">
       <h5 class="ae">${project.name}</h5>
       <c:choose>
@@ -110,16 +110,17 @@
           </a>
         </div>
         <div class="attention-page">
-          <span>已经被 ${project.fsAmount} 个景泰蓝爱好者关注</span>
+          <c:if test="${project.fsAmount !=null}"><span>已经被${project.fsAmount} 个景泰蓝爱好者关注</span></c:if>
+          <c:if test="${project.fsAmount ==null}"><span>已经被1个景泰蓝爱好者关注</span></c:if>
         </div>
       </div>
     </div>
   </div>
   <div class="ae">
     <ul class="craft-nav">
-      <li ><a href="<c:url value='/project/brifProject.do?projectId=${project.id}'/>">介&nbsp;绍</a></li>
-      <li ><a href="<c:url value='/project/brifMaster.do?projectId=${project.id}'/>">大&nbsp;师</a></li>
-      <li class="active"><a href="<c:url value='/project/listProduct.do?projectId=${project.id}'/>">作&nbsp;品</a></li>
+      <li ><a href="<c:url value='/project/brifProject/${project.id}'/>">介&nbsp;绍</a></li>
+      <li ><a href="<c:url value='/project/brifMaster/${project.id}'/>">大&nbsp;师</a></li>
+      <li class="active"><a href="<c:url value='/project/listProduct/${project.id}'/>">作&nbsp;品</a></li>
     </ul>
     <div class="craft-work3 ae" style="display: block">
 
@@ -133,46 +134,7 @@
 
   </div>
 </div>
-<div class="footer wh">
-  <div class="service wh">
-    <div class="icon phone"></div>
-    <div class="line"></div>
-    <div class="icon platform"><a href="" target="_blank" title="平台优势">平台优势</a></div>
-    <div class="line"></div>
-    <div class="icon chengbao"><a href="" target="_blank" title="诚品宝">诚品宝</a></div>
-    <div class="line"></div>
-    <div class="icon wechat"></div>
-  </div>
-  <div class="links wh">
-    <a href="" target="_blank" title="关于我们">关于我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="联系我们">联系我们</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚聘英才">诚聘英才</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="意见反馈">意见反馈</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="帮助中心">帮助中心</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="诚信保障">诚信保障</a>
-    <a class="line"></a>
-    <a href="" target="_blank" title="新闻资讯">新闻资讯</a>
-  </div>
-  <div class="copyright wh">
-    <div class="phone">
-      <strong>商家入住热线</strong>
-      <em>400-876-8766</em>
-    </div>
-    <div class="frlinks">
-      <span>友情链接：</span>
-      <a rel="nofollow" href="http://www.unesco.org.cn/" target="_blank" title="联合国教科文组织">联合国教科文组织</a>
-      <a rel="nofollow" href="http://www.mcprc.gov.cn/" target="_blank" title="中国文化部">中国文化部</a>
-      <a rel="nofollow" href="" target="_blank" title="中国文化部非物质文化遗产保护司">中国文化部非物质文化遗产保护司</a>
-      <a rel="nofollow" href="" target="_blank" title="中国非物质文化遗产保护中心">中国非物质文化遗产保护中心</a>
-    </div>
-    <div class="info">Copyright © 2012-2022 永新华韵文化发展有限公司版权所有-京ICP备15032511号-1</div>
-  </div>
-</div>
+
 <!-- //End--footer-->
 
 
@@ -193,7 +155,8 @@
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="true"){
@@ -209,7 +172,7 @@
           return true;
         }
         if(data=="error"){
-          showAlert("提示","未知错误，请联系管理员！！！");
+          alert("未知错误，请联系管理员！！！");
           return false;
         }
       },
@@ -247,7 +210,7 @@
         var pubu = $("#pubu");
         if(data.list && data.list != null){
           for(i in data.list){
-            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+            var box = $("<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -257,7 +220,7 @@
 
 
             pubu.append(box);
-            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+            html+="<li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                     "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                     "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                     "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
@@ -344,7 +307,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/Isattention.do?projectId="+projectId,
+      url:"<c:url value='/base/Isattention/'/>"+projectId,
       data:"",
       async:false,
       dataType:"json",
@@ -374,7 +337,7 @@
     isAttention = false;
     $.ajax({
       type:"get",
-      url:"/base/IsattentionMaster.do?masterId="+masterId,
+      url:"<c:url value='/base/IsattentionMaster.do?masterId='/>"+masterId,
       data:"",
       async:false,
       dataType:"json",
@@ -411,12 +374,13 @@
     }
     $.ajax({
       type:"get",
-      url:"/base/attentionMaster.do?masterId="+masterId+"&oper="+oper,//设置请求的脚本地址
+      url:"<c:url value='/base/attentionMaster.do?masterId='/>"+masterId+"&oper="+oper,//设置请求的脚本地址
       data:"",
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           return false;
         }
         if(data=="true"){
@@ -678,17 +642,7 @@
       //index为已加载次数,render为渲染接口函数,接受一个dom集合或jquery对象作为参数。通过ajax等异步方法得到的数据可以传入该接口进行渲染，如 render(elem)
       if(index>=7) index=index%7+1;
       html=''
-    /*  for(var i=20*(index-1);i<20*(index-1)+20;i++){
-        var k='';
-        for(var ii=0;ii<3-i.toString().length;ii++){
-          k+='0';
-        }
-        k+=i;
-        var src="http://cued.xunlei.com/demos/publ/img/P_"+k+".jpg";
-        html+='<ul><li class="cell craft-page"><a href="#"><img src="'+src+'" /></a>  <h4 class="ae">双耳瓶</h4> <div class="function-page ae"> <div class="d-left"> <a href="#"> <i class="h-i-con"></i> <span>999999</span> </a> </div> <div class="d-right"> <div class="right1"> <a href="#"> <i class="h-i-con2"></i> <span>999999</span> </a> </div> <div class="right2"> <a href="#"> <i class="h-i-con3"></i> </a> </div> </div> </div> </li></ul>';
 
-
-      }*/
       if(ajaxkey){
         var flag = false;
         $.ajax({
@@ -712,12 +666,12 @@
 
 
                 // pubu.append(box);
-                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct.do?projectId=${project.id}&productId='/>"+data.list[i].id+"\"> <img src=\""+data.list[i].picture_url+"\"> " +
+                html+="<ul><li class=\"cell craft-page\"><a href=\"<c:url value='/project/showProduct/'/>"+data.list[i].id+"/${project.id}\"> <img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].picture_url+"\"> " +
                         "</a><h4 class=\"ae\">"+data.list[i].name+"</h4> <div class=\"function-page ae\"> " +
                         "<div class=\"d-left\"> <a href=\"#\"> <i class=\"h-i-con\"></i> " +
                         "<span>"+data.list[i].fsAmount+"</span> </a> </div> <div class=\"d-right\"> " +
-                        "<div class=\"right1\"> <a href=\"#\"> <i class=\"h-i-con2\"></i> " +
-                        "<span>"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"#\"> " +
+                        "<div class=\"right1\"> <a href=\"javascript:void(0);\" onclick=\"savaUpAndDown('"+data.list[i].id+"')\" name=\"up\" id=\"good-1\"> <i class=\"h-i-con2\"></i> " +
+                        "<span id=\""+data.list[i].id+"\">"+data.list[i].amount+"</span> </a> </div> <div class=\"right2\"> <a href=\"javascript:void(0);\" onclick=\"storeProduct('"+data.list[i].id+"')\"> " +
                         "<i class=\"h-i-con3\"></i> </a> </div> </div> </div> </li></ul>"
               }
               //return html;
@@ -747,6 +701,101 @@
   }
   $('#waterfall').waterfall(opt);
 
+  function savaUpAndDown(ds){
+    var oper = $("#good-1").attr("name");
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/saveThumbUp.do?productId='/>"+ds+"&operation="+oper,
+      data:"",
+      dataType:"json",
+      success:function(data2){
+        if(data2=="false"){
+          //alert("您还未登陆，请登录后再操作！！！");
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/listProduct/'/>"+${project.id};
+          }
+          else{
+            return false;//取消
+          }
+          return false;
+        }
+        if(data2=="repeat"){
+          alert("请不要重复操作！！！");
+          return false;
+        }
+        if(data2=="true" && oper=='up'){
+          //$("#em1").html(parseInt($("#em1").text())+1);
+          $("#"+ds).html(parseInt($("#"+ds).text())+1);
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
+        }
+        if(data2=="true" && oper=='down'){
+          //$("#em1").html(parseInt($("#em1").text())-1);
+          $("#"+ds).html(parseInt($("#"+ds).text())+1);
+          if($("#good-1").attr("name")=="down"){
+            $("#good-1").attr("name","up");
+          }else{
+            $("#good-1").attr("name","down");
+          }
+        }
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+
+
+      }
+    });
+  }
+  function storeProduct(productId){
+
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/base/storeProduct.do?productId='/>"+productId,//设置请求的脚本地址
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data=="false"){
+          //alert("您还未登陆，请登录后再操作");
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/listProduct/'/>"+projectId;
+          }
+          else{
+            return false;//取消
+          }
+          return false;
+          return false;
+        }
+        if(data=="repeat"){
+          alert("您已收藏过了！")
+          return true;
+        }
+        if(data=="true"){
+          alert("您好，收藏成功！")
+          return true;
+        }
+
+      },
+      error:function(){
+
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+
+      }
+    });
+  }
 </SCRIPT>
 
 

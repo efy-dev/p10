@@ -32,6 +32,7 @@
   <script src="<c:url value='/resources/jquery/jquery-1.11.1.min.js'/>"></script>
   <script src="<c:url value='/scripts/assets/js/jquery.min.js'/>"></script>
   <script src="<c:url value='/scripts/assets/js/jquery-2.1.3.min.js'/>" type="text/javascript"></script>
+  <script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
   <script type="text/javascript" src="<c:url value='/scripts/assets/js/pubu.js'/>"></script>
 </head>
 <body>
@@ -50,7 +51,12 @@
     <div class="dis-q1-tabs">
       <ul class="tabs-nav tabs-nav-1" id="dynamic" onclick="changePage(this);">
         <li class="item active" title="1">动态</li>
-        <li class="item" title="2">关注</li>
+        <c:if test="${'show' == result}">
+          <li class="item" about="${result}" title="2">关注</li>
+        </c:if>
+        <c:if test="${'hide' == result}">
+          <li class="item" about="${result}" title="2">关注</li>
+        </c:if>
         <li class="item-class"><a href="<c:url value='/masterCategory/CategoryList.do'/>">分类</a></li>
       </ul>
       <ul class="tabs-nav tabs-nav-2">
@@ -93,82 +99,107 @@
   <!--//End--footer-->
 </div>
 <script>
+  var startNum = 1;
+  var startNum1 = 1;
+  var ajaxKey = true;
+  $(document).ready(function(){
+    getData("<c:url value='/masterMessage/masterMessageList/plistMasterMessage_default/6/'/>");
+  });
+  $(window).load(function(){
+    var winH = $(window).height(); //页面可视区域高度
+    $(window).scroll(function(){
+      var pageH = $(document).height();
+      var scrollT = $(window).scrollTop(); //滚动条top
+      var aa = (pageH - winH - scrollT) / winH;
+      if(aa < 0.02){
+        if(ajaxKey){
+          $("#dynamic li").each(function(){
+            if($(this).attr("class")=="item active"){
+              if($(this).attr("title")=="1"){
+                getData("<c:url value='/masterMessage/masterMessageList/plistMasterMessage_default/6/'/>");
+              }
+              if($(this).attr("title")=="2"){
+                var result = $(this).attr("about");
+                getAttentionList(result);
+              }
+            }
+          });
+        }
+      }
+    });
+  });
   function changePage(){
     $("#dynamic li").each(function(){
       if($(this).attr("class")=="item active"){
+        $("#pubu").empty();
         if($(this).attr("title")=="1"){
-          getData();
+          startNum = 1;
+          getData("<c:url value='/masterMessage/masterMessageList/plistMasterMessage_default/6/'/>");
         }
         if($(this).attr("title")=="2"){
+          startNum1 = 1;
           getAttentionList();
         }
       }
     });
   }
-  var flag = false;
-  $(window).load(function(){
-    $("#dynamic li").each(function(){
-      if($(this).attr("class")=="item active"){
-        if($(this).attr("title")=="1"){
-          getData();
-        }
-        if($(this).attr("title")=="2"){
-          getAttentionList();
-        }
-      }
-    });
-  });
-  function getData(){
+  function getData(url){
+    var flag = false;
     $.ajax({
       type: "POST",
-      url: "<c:url value='/masterMessage/masterMessageList.do'/>",
+      url: url + startNum,
       async:false ,
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data){
         var obj = eval(data);
         var box = $("#pubu");
-        box.empty();
-        for(var i = 0 ;i < obj.length ;i++){
-          var masterId = obj[i].masterId;
-          var masterName = obj[i].masterName;
-          var cTime = transdate(obj[i].createDateTime);
-          getAttentionStatus(masterId);
-          var attention = "";
-          if(flag == true){
-            attention = "已关注";
-          }else{
-            attention = "关注";
+        console.log(obj);
+        if(obj != null && obj.length > 0){
+          for(var i = 0 ;i < obj.length ;i++){
+            var masterId = obj[i].masterId;
+            var masterName = obj[i].masterName;
+            var cTime = transdate(obj[i].createDateTime);
+            var sub = "<div class=\"dynamic\">"
+                    +"<div class=\"dynamic-hd\">"
+                    +"<a class=\"suit-tx\" href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+masterId+"\"><img class=\"am-circle\" src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[i].favicon+"\"></a>"
+                    +"<div class=\"suit-name\"><a href=\"#\"><span>"+masterName+"</span></a></div>"
+                    +"<a class=\"suit-gz\" onclick=\"changeStatus(this,'"+masterId+"');\"><input type=\"hidden\" name='"+masterId+"'><span>"+obj[i].followStatus+"</span></a> </div>"
+                    +"<div class=\"dynamic-st\">"
+                    +"<div class=\"suit-st-text\">"
+                    +"<p><span>"+obj[i].remark+"</span></p>"
+                    +"</div>";
+            var attr = obj[i].messageAttachmentLists;
+            if(attr != null && attr.length > 0 ){
+              for(var j in attr){
+                sub += "<div class=\"suit-st-img\"><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[j].pictureUrl+"\"></a> </div>";
+              }
+            }
+              sub += "<div class=\"suit-st-ft\">"
+                    +"<div class=\"suit-ft-left\"><span>"+obj[i].dataSource+"</span></div>"
+                    +"<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>"
+                    +"</div></div>"
+                    +"<div class=\"dynamic-ft\"> "
+                    +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
+                    +"<a onclick=\"showModel('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
+                    +"<a onclick=\"collected('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
+            box.append(sub);
           }
-          var sub = "<div class=\"dynamic\">"
-                  +"<div class=\"dynamic-hd\">"
-                  +"<a class=\"suit-tx\" href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+masterId+"\"><img class=\"am-circle\" src=\"/scripts/assets/upload/120101-p1-1.jpg\"></a>"
-                  +"<div class=\"suit-name\"><a href=\"#\"><span>"+masterName+"</span></a></div>"
-                  +"<a class=\"suit-gz\" onclick=\"changeStatus(this,'"+masterId+"');\"><input type=\"hidden\" name='"+masterId+"'><span>"+attention+"</span></a> </div>"
-                  +"<div class=\"dynamic-st\">"
-                  +"<div class=\"suit-st-text\">"
-                  +"<p><span>"+obj[i].content+"</span></p>"
-                  +"</div>"
-                  +"<div class=\"suit-st-img\"><a href=\"<c:url value='/masterMessage/getMasterMessage.do?messageId='/>"+obj[i].id+"\"><img src=\"/scripts/assets/upload/120101-p1-2.jpg\"></a> </div>"
-                  +"<div class=\"suit-st-ft\">"
-                  +"<div class=\"suit-ft-left\"><span>"+obj[i].dataSource+"</span></div>"
-                  +"<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>"
-                  +"</div></div>"
-                  +"<div class=\"dynamic-ft\"> "
-                  +"<a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i><em>"+obj[i].praiseStatus+"</em></a><i class=\"s-solid ft-a\"></i> "
-                  +"<a onclick=\"showModel('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-2\"></i><em>"+obj[i].amount+"</em></a><i class=\"s-solid ft-a\"></i> "
-                  +"<a onclick=\"collected('"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-3\"></i></a></div></div>";
-          box.append(sub);
+        }else{
+          flag = true;
+        }
+        startNum = startNum + 1;
+      },complete:function(){
+        if(flag == true){
+          ajaxkey = false;
         }
       }
     });
   }
-
   function showModel(msgId){
     $("#content").attr("name",msgId);
     window.open("<c:url value='/comment.jsp?msgId='/>"+msgId);
 
   }
-
   function setValue(data){
     var msgId = $("#content").attr("name");
     console.log(msgId);
@@ -198,7 +229,6 @@
       }
     })
   }
-
   function transdate(endTime){
     var timestamp = Date.parse(new Date());
     var oldTime = parseInt(endTime);
@@ -223,15 +253,16 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        if(true == msg){
+        if("add" == msg){
           alert("收藏成功!");
-        }else{
+        }else if("del" == msg){
           alert("收藏已移除!");
+        }else if("noRole" == msg){
+          alert("您还未登录,请登录后操作!");
         }
       }
     });
   }
-
   function changePraiseStatus(o,messageId){
     $.ajax({
       url:"<c:url value='/masterMessagePraise/changePraiseNum.do'/>",
@@ -241,31 +272,16 @@
       dataType:"json",
       error:function(){},
       success:function(msg){
-        $(o).find("em").html(msg);
-      }
-    })
-  }
-
-  function getAttentionStatus(masterId){
-    $.ajax({
-      type: "POST",
-      url: "<c:url value='/masterFollow/masterFollowed.do'/>",
-      data:"masterId="+masterId,
-      async:false,
-      dataType:"json",
-      error: function(){alert('操作失败,请联系系统管理员!');},
-      success: function(msg){
-        if(msg == true){
-          flag = true;
-          return flag;
-        }else{
-          flag = false;
-          return flag;
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }else if(msg == "add"){
+          $(o).find("em").html("取消赞");
+        }else if(msg == "del"){
+          $(o).find("em").html("赞");
         }
       }
     })
   }
-
   function changeStatus(o,masterId){
     var status = "";
     var str = $(o).find("span").html();
@@ -282,76 +298,164 @@
       dataType:"json",
       error:function(){alert("出错了.请联系系统管理员!")},
       success:function(msg){
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }
         $("input[name='"+masterId+"']").each(function(){
-          if(msg == "1"){
+          if(msg == "del"){
             $(this).next().html("关注");
-          }else if(msg == "2"){
+          }else if(msg == "add"){
             $(this).next().html("已关注");
           }
         })
       }
     })
   }
+  function bindClick(){
+      var leaderUl=$('.great .suit-focus .div-list ul');
+      var leaderLi=leaderUl.find('li');
+      var leaderLiW=leaderLi.eq(0).outerWidth(true);
+      var cur=0;
+      leaderUl.css('width',leaderLiW*leaderLi.length+'px')
+      //向右移动
+      $('.great .bot-btn').click(function(){
+        cur++;
+        $(this).siblings('.btn-gz').animate({'opacity':'1'},0);
+        if(leaderLi.length%2==0){
+          if(cur<=leaderLi.length/(cur+1)+1){
+            leaderUl.stop(true,true).animate({'margin-left':-(leaderLiW*2)*cur+'px'},500);
+          }
+          if(cur==leaderLi.length/(cur+1)+1){
+            cur=leaderLi.length/2-1;
+            $(this).parents('.suit-focus').append('<a href="#上一页" title="上一页" class="btn-gz bot-btn opa02"></a>');
+            $(this).animate({'opacity':'0'},0);
 
-  <!-- getData1(); -->
-
-  function getAttentionList(){
+          }
+        }else{
+          if(cur<=(leaderLi.length+1)/(cur+1)+1){
+            leaderUl.stop(true,true).animate({'margin-left':-(leaderLiW*2)*cur+'px'},500);
+          }
+          if(cur==(leaderLi.length+1)/(cur+1)+1){
+            $(this).hide();
+          }
+        }
+        return false;
+      });
+      //向左移动
+      $('.great .top-btn').click(function(){
+        cur--;
+        $(this).siblings('.btn-gz').animate({'opacity':'1'},0);
+        $(this).siblings('.opa02').remove();
+        if(cur>0){
+          leaderUl.stop(true,true).animate({'margin-left':-(leaderLiW*2)*cur+'px'},500);
+        }
+        if(cur<=0){
+          cur=0;
+          $(this).animate({'opacity':'0.2'},0);
+          leaderUl.stop(true,true).animate({'margin-left':-(leaderLiW*2)*cur+'px'},500);
+        }
+        return false;
+      })
+  }
+  function getAttentionList(result){
     $.ajax({
       type: "POST",
       url: "<c:url value='/masterFollow/masterFollowedList.do'/>",
+      data:"result="+result,
       async:false ,
       dataType:"json",
       error: function(){alert('出错了,请联系系统管理员!');},
       success: function(data){
         var box = $("#pubu");
-        box.empty();
-        if(data.length > 0 && data.length < 5){
-            $.ajax({
-              type: "POST",
-              url: "<c:url value='/masterFollow/getMasterRecommendList.do'/>",
-              async:false ,
-              error: function(){alert('出错了,请联系系统管理员!');},
-              success: function(objList){
-                var recommendList = eval("("+objList+")");
-                var sub = "<div class=\"dynamic\"><div class=\"attention\"><p>目前您还没有关注任何大师，下面是我们为您推荐的几位大师</p></div><ul class=\"dynamic-list-suit\">";
-                for(var i = 0 ;i < recommendList.length ;i++){
-                    sub += "<li><div class=\"suit-list-bt\">"+
-                          "<a href=\"#\"><img src=\"/scripts/assets/upload/box-tx-3-4-7.jpg\"></a>"+
-                          "<a class=\"gz-fd-icon\" id=\"isOrNot\" onclick=\"changeFollowedStatus(this,'"+recommendList[i].id+"')\">关注</a></div></li>";
+        var sub = "";
+        console.log(data);
+        if(data.mrModelList != null && data.mrModelList.length > 0){
+          sub +="<div class=\"dynamic\" style=\"border-bottom:0;\">"+
+          "                    <div class=\"suit-focus\">"+
+          "                        <div class=\"title\">您可能喜欢的工艺:</div>"+
+          "                        <div class=\"div-list\">"+
+          "                            <ul>";
+          var attr = data.mrModelList;
+          for(var i in attr){
+            sub +="                                <li>"+
+                    "                                    <p class=\"tb\">"+
+                    "                                        <a href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+attr[i].id+"\"><img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[i].favicon+"\"></a>"+
+                    "                                        <a class=\"icon-guanzu\" name=\"yesOrNo"+attr[i].id+"\" onclick=\"changeFollowedStatus(this,'"+attr[i].id+"');\"><span>"+attr[i].followStatus+"</span></a>"+
+                    "                                    </p>"+
+                    "                                    <P>"+attr[i].masterName+"</P>"+
+                    "                                </li>";
+          }
+          sub +="                       </ul>"+
+          "                        </div>"+
+          "                        <a href=\"#上一页\" title=\"上一页\" class=\"btn-gz top-btn\"></a>"+
+          "                        <a href=\"#下一页\" title=\"下一页\" class=\"btn-gz bot-btn\"></a>"+
+          "                    </div>"+
+          "                </div>";
+          if(data.msgModelList != null && data.msgModelList.length > 0){
+            var obj = data.msgModelList;
+            for(var i in obj){
+              var ctime = transdate(obj[i].createDateTime);
+              sub += "<div class=\"dynamic\">"+
+                      "                    <div class=\"dynamic-hd\"> <a class=\"suit-tx\" href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+obj[i].masterId+"\"><img class=\"am-circle\" src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[i].favicon+"\"></a>"+
+                      "                        <div class=\"suit-name\"><a href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+obj[i].masterId+"\"><span>"+obj[i].masterName+"</span></a></div>"+
+                      "                        <a class=\"suit-gz\" name=\"yesOrNo"+obj[i].masterId+"\" onclick=\"changeFollowedStatus(this , '"+obj[i].masterId+"');\"><span>已关注</span></a> </div>"+
+                      "                    <div class=\"dynamic-st\">"+
+                      "                        <div class=\"suit-st-text\">"+
+                      "                            <p><span>"+obj[i].content+"</span></p>"+
+                      "                        </div>";
+                var attr = obj[i].messageAttachmentLists;
+                if(attr != null && attr.length > 0){
+                    for(var j in attr){
+                      sub += "<div class=\"suit-st-img\"> <img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[j].pictureUrl+"\"> </div>";
+                    }
                 }
-                sub += "</ul><a href=\"<c:url value='/masterCategory/CategoryList.do'/>\" class=\"state-btn\">查看更多大师<span class=\"gd-icon\"></span></a> </div>";
-                box.append(sub);
-              }
-            });
-        }else{
-          var sub = "";
-          for(var i = 0 ;i < data.length ;i++){
-            var cTime = transdate(data[i].createDateTime);
-            sub += "<div class=\"dynamic\">" +
-                    "<div class=\"dynamic-hd\"> <a class=\"suit-tx\"><img class=\"am-circle\" src=\"/scripts/assets/upload/120101-p1-1.jpg\"></a>" +
-                    "<div class=\"suit-name\"><a href=\"#\"><span>"+data[i].fullName+"</span></a></div>" +
-                    "<a class=\"suit-gz\"><span>"+data[i].praiseStatus+"</span></a> </div>" +
-                    "<div class=\"dynamic-st\">" +
-                    "<div class=\"suit-st-text\">" +
-                    "<p><span>"+data[i].content+"</span></p>" +
-                    "</div>" +
-                    "<div class=\"suit-st-img\"> <img src=\"/scripts/assets/upload/120101-p1-2.jpg\"> </div>" +
-                    "<div class=\"suit-st-ft\">" +
-                    "<div class=\"suit-ft-left\"><span>"+data[i].dataSource+"</span></div>" +
-                    "<div class=\"suit-ft-right\"><span>"+cTime+"</span></div>" +
-                    "</div></div>" +
-                    "<div class=\"dynamic-ft\"> <a href=\"#\" onclick=\"changeFollowedStatus(this,'"+data[i].id+"')\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+data[i].praiseStatus+"</em> </a>  " +
-                    "<i class=\"s-solid ft-a\"></i> <a href=\"#\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>9999</em> </a>"+
-                    "<i class=\"s-solid ft-a\"></i> <a href=\"#\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>";
+                      sub +="                  <div class=\"suit-st-ft\">"+
+                      "                            <div class=\"suit-ft-left\"><span>来自"+obj[i].dataSource+"</span></div>"+
+                      "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
+                      "                        </div>"+
+                      "                    </div>"+
+                      "                    <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                </div>";
+            }
           }
           box.append(sub);
+          bindClick();
+        }else{
+          if(data.msgModelList != null && data.msgModelList.length > 0){
+            var obj = data.msgModelList;
+            for(var j in obj){
+              var ctime = transdate(obj[j].createDateTime);
+              sub += "<div class=\"dynamic\">"+
+                      "                    <div class=\"dynamic-hd\"> <a class=\"suit-tx\"><img class=\"am-circle\" src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+obj[j].favicon+"\"></a>"+
+                      "                        <div class=\"suit-name\"><a href=\"<c:url value='/masterMessage/forwardMasterDetails.do?masterId='/>"+obj[j].masterId+"\"><span>"+obj[j].masterName+"</span></a></div>"+
+                      "                        <a class=\"suit-gz\" name=\"yesOrNo"+obj[j].masterId+"\" onclick=\"changeFollowedStatus(this,'"+obj[j].masterId+"');\"><span>"+obj[j].followStatus+"</span></a> </div>"+
+                      "                    <div class=\"dynamic-st\">"+
+                      "                        <div class=\"suit-st-text\">"+
+                      "                            <p><span>"+obj[j].content+"</span></p>"+
+                      "                        </div>";
+              if(obj[j].messageAttachmentLists != null){
+                  var attr = obj[j].messageAttachmentLists;
+                for(var e in attr){
+                  sub += "<div class=\"suit-st-img\"> <img src=\"http://tenant.oss-cn-beijing.aliyuncs.com/"+attr[e].pictureUrl+"\"> </div>";
+                }
+              }
+              sub +="                  <div class=\"suit-st-ft\">"+
+                      "                            <div class=\"suit-ft-left\"><span>来自"+obj[j].dataSource+"</span></div>"+
+                      "                            <div class=\"suit-ft-right\"><span>"+ctime+"</span></div>"+
+                      "                        </div>"+
+                      "                    </div>"+
+                      "                 <div class=\"dynamic-ft\"> <a onclick=\"changePraiseStatus(this,'"+obj[i].id+"');\" class=\"ft-a\"> <i class=\"good-1\"></i> <em>"+obj[i].fsAmount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"showModel('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-2\"></i> <em>"+obj[i].amount+"</em> </a> <i class=\"s-solid ft-a\"></i> <a onclick=\"collected('"+obj[i].id+"')\" class=\"ft-a\"> <i class=\"good-3\"></i> </a> </div>"+
+                      "                </div>";
+              box.append(sub);
+            }
+          }
         }
       }
     });
   }
   function changeFollowedStatus(o,masterId){
     var status = "";
-    var str = $(o).html();
+    var str = $(o).find("span").html();
     if(str == "已关注"){
       status = "2";
     }else if(str == "关注"){
@@ -365,11 +469,16 @@
       dataType:"json",
       error:function(){alert("操作失败.请联系系统管理员!")},
       success:function(msg){
-          if(msg == "1"){
-            $(o).html("关注");
-          }else if(msg == "2"){
-            $(o).html("已关注");
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }
+        $("a[name='yesOrNo"+masterId+"']").each(function(){
+          if(msg == "del"){
+            $(this).find("span").html("关注");
+          }else if(msg == "add"){
+            $(this).find("span").html("已关注");
           }
+        })
       }
     })
   }
@@ -378,7 +487,7 @@
 <script src="<c:url value='/scripts/assets/js/amazeui.ie8polyfill.min.js'/>"></script>
 <script src="<c:url value='/scripts/assets/js/amazeui.min.js'/>"></script>
 <!--自定义js--Start-->
-<script src="<c:url value='/scripts/assets/js/system.js?v=20150831'/>"></script>
+
 <script src="<c:url value='/scripts/assets/js/cyclopedia.js?v=20150831'/>"></script>
 <!--自定义js--End-->
 </body>

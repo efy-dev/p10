@@ -7,16 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/layouts/public.jsp" %>
 <div class="focus">
   <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"animation":"slide","slideshow":false}' >
     <ul class="am-slides">
       <c:forEach items="${bannerList}" var="banner">
         <li>
-          <a href="${banner.directUrl}" target="_self"><img src="<%=imgBasePath %>${banner.imageUrl}"></a>
+          <a href="${banner.directUrl}" target="_self"><img src="${banner.imageUrl}"></a>
           <div class="am-slider-desc">
             <h3>${banner.title}</h3>
-            <p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>
+            <%--<p>这是标题标题标题标题标题标题标题这是标题标题标题标题标题标题标题</p>--%>
           </div>
         </li>
       </c:forEach>

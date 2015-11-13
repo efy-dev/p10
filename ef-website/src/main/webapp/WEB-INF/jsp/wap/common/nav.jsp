@@ -1,3 +1,4 @@
+<%@ page import="com.efeiyi.ec.website.organization.util.AuthorizationUtil" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -18,7 +19,11 @@
         <div class="am-header-right am-header-nav">
             <a href="<c:url value="/cart/view"/>" class="icon icon-cart"><span class="tips"><em
                     id="cartAmount">0</em></span></a>
+            <% if (AuthorizationUtil.isAuthenticated()) {%>
             <a href="http://i.efeiyi.com/order/myEfeiyi/list.do" class="icon icon-user"></a>
+            <%} else {%>
+            <a href="<c:url value="/sso.do"/>" class="icon icon-user"></a>
+            <%}%>
         </div>
     </header>
 </c:if>
@@ -39,11 +44,14 @@
         <!-- //End--chevron-left-->
         <div class="menu-list">
             <ul class="bd">
-                <li><a href="http://www2.efeiyi.com" title="首页">首页</a></li>
+                <li><a href="http://www.efeiyi.com" title="首页">首页</a></li>
                 <li><a href="<c:url value="/cart/view"/> " title="购物车">购物车</a></li>
+                <% if (AuthorizationUtil.isAuthenticated()) {%>
                 <li><a href="http://i.efeiyi.com" title="个人中心">个人中心</a></li>
+                <%} else {%>
+                <li><a href="<c:url value="/sso.do"/>" title="个人中心">个人中心</a></li>
+                <%}%>
                 <li><a href="<c:url value="/productCategory.do"/> " title="分类">分类</a></li>
-                <li><a href="http://master.efeiyi.com" title="大师">大师</a></li>
             </ul>
         </div>
     </header>

@@ -20,7 +20,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -54,14 +54,86 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="分类">分&nbsp;类</a></li>
-        <li><a href="" title="传承人">传承人</a></li>
-        <li><a href="<c:url value='/getPerson.do'/>" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
+        <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
+        <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
+        <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
 </header>
+<div style="display: none" id="showMessage" class="pops-up">
+  <div style="background: #fff;position: relative;z-index:2;"  data-am-widget="tabs" class="am-tabs am-tabs-default am-no-layout">
+    <ul class="am-tabs-nav am-cf">
+      <%-- <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
+         <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>--%>
+      <li class="am-active"><a href="[data-tab-panel-0]">
+        <i class="bz-icon2"></i>
+        <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+      </a></li>
+      <li class=""><a href="[data-tab-panel-1]">
+        <i class="bz-icon3"></i>
+        <span style="float: left;margin-left: 10px;">点赞</span>
+      </a></li>
+    </ul>
+    <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <%--<div data-tab-panel-0="" class="am-tab-panel am-active">
+        <div class="aboud-you">
+          <div class="list-you"><span>这些人最近关注了你</span></div>
+          <ul class="list-name">
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Andy</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Lily</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>wangjl</span></li>
+          </ul>
+          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>--%>
+      <div data-tab-panel-0="" class="am-tab-panel am-active">
+        <div class="discuss">
+          <ul class="discuss-2" id="newcommentList">
+            <%-- <li class="review">
+               <div class="matter">
+                 <p class="text-h1"><a href="#">Andya</a>回复了你</p>
+                 <p class="text-time">51分钟前</p>
+                 <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                   有关注过，真心觉得中国的非遗文化值得我们
+                   去传承。</a></p>
+                 <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+               </div>
+             </li>
+             <li class="review">
+               <div class="matter">
+                 <p class="text-h1"><a href="#">Joe</a>回复了你</p>
+                 <p class="text-time">1小时前</p>
+                 <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                   有关注过，真心觉得中国的非遗文化值得我们
+                   去传承。</a></p>
+                 <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+               </div>
+             </li>--%>
+          </ul>
+          <div class="more"><a href="javascript:void(0);" onclick="getCommentList()"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>
+      <div data-tab-panel-1="" class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2" id="newPraiseList">
+            <%-- <li class="review">
+               <div class="matter">
+                 <p class="text-h1">Joe</p>
+                 <p class="text-time">1小时前</p>
+                 <p class="text-content"><a href="#">觉得你的评论“还不错”很赞</a></p>
+                 <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+               </div>
+
+             </li>--%>
+          </ul>
+          <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg" ></div>
+</div>
 <!--//End--header-->
 <!--地区-->
 <div class="dis-q1">
@@ -120,24 +192,7 @@
   </div>
 </div>
 </div>
-<!--地区-->
-<%--<div class="login-reg">
-  <div class="bd logined">李先生8899，<a class="btn-exit" href="#退出">退出</a></div>
-  <a href="#login" class="btn-login" title="登录">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-  <a href="#reg" class="btn-reg">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-</div>
-<!--//End--login-reg-->
-<footer class="bd footer">
-  <div class="bd info">
-    <a class="icon"></a>
-    <div class="txt">中&nbsp;&nbsp;国&nbsp;&nbsp;非&nbsp;&nbsp;遗&nbsp;&nbsp;电&nbsp;&nbsp;商&nbsp;&nbsp;平&nbsp;&nbsp;台</div>
-    <div class="wechat"></div>
-    <div class="txt">关注微信公众号</div>
-    <div class="txt">领取超值代金券</div>
-  </div>
-  <div class="bd copyright">京ICP备15032511号-1</div>
-</footer>
-<!--//End--footer-->--%>
+
 
 <script src="<c:url value='/resources/assets/js/jquery.min.js?v=20150831'/>"></script>
 <!--<![endif]-->

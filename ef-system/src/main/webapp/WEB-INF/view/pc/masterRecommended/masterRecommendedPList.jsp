@@ -35,11 +35,13 @@
                     <th class="table-title">中文姓名</th>
                     <th class="table-title">性别</th>
                     <th class="table-title">等级</th>
+                    <th class="table-title">类型</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="masterRecommended">
+                    <c:if test="${masterRecommended.group != 'ec.masterRecommended'}">
                     <tr id="${masterRecommended.id}">
                         <td>
                             <div class="am-btn-toolbar">
@@ -68,7 +70,16 @@
                         <td class="am-hide-sm-only">
                             <ming800:status name="level" dataType="Master.level" checkedValue="${masterRecommended.master.level}" type="normal" />
                         </td>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${masterRecommended.group == 'masterSkillRecommended'}">
+                                传统技艺
+                            </c:if>
+                            <c:if test="${masterRecommended.group == 'masterArtRecommended'}">
+                                传统美术
+                            </c:if>
+                        </td>
                     </tr>
+                    </c:if>
                 </c:forEach>
                 </tbody>
             </table>

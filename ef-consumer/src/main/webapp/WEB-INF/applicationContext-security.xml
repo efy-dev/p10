@@ -22,8 +22,8 @@
         <csrf disabled="true"/>
 
         <!--<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>-->
-        <intercept-url pattern="/*" access="isAuthenticated()"/>
-        <intercept-url pattern="/sso.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/sso2.do" access="isAuthenticated()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/myEfeiyi/**" access="hasRole('ROLE_USER')"/>-->
         <intercept-url pattern="/j_spring_cas_security_check/**" access="permitAll"/>
         <!-- logout-success-url="/login.html" -->
@@ -82,7 +82,7 @@
     <b:bean id="requestSingleLogoutFilter"
             class="org.springframework.security.web.authentication.logout.LogoutFilter">
         <b:constructor-arg
-                value="http://passport.efeiyi.com/logout?service=http://i.efeiyi.com" />
+                value="http://passport.efeiyi.com/logout?service=http://www.efeiyi.com/j_spring_cas_security_logout" />
         <b:constructor-arg>
             <b:bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

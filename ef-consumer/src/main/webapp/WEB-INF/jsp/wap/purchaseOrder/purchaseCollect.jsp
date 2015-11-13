@@ -5,7 +5,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="no-js">
-<head></head>
+<head>
+    <title>
+        我的收藏
+    </title>
+</head>
 <body>
 <!--//End--header-->
 <div class="commodity">
@@ -19,7 +23,7 @@
           <dd>
               <a href="<%=PConst.HOSTNAME%>/product/productModel/${collectList.productModel.id}" style="color: #666;font-size: 12px;"> <p class="commodity-bt">${collectList.productModel.product.name}</p></a>
             <p><a href="#" onclick="showConfirm('提示','是否取消',function(){
-                    window.location.href='<c:url value="/purchaseCollect/unfollow.do?id=${collectList.id}"/>';
+                    window.location.href='<c:url value="/purchaseCollect/wapUnfollow.do?id=${collectList.id}"/>';
                     })"  class="edit-dete">取消收藏</a><strong>￥${collectList.productModel.price}</strong></p>
           </dd>
         </dl>

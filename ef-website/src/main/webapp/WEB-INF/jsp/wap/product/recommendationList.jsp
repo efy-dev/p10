@@ -10,8 +10,14 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <title>商品推荐专区</title>
-
+  <title>【 ${productModel.product.name} 】${productModel.product.subName} -e飞蚁</title>
+  <c:if test="${product.master!=null}">
+    <c:set var="master">
+      ${productModel.product.master.fullName}
+    </c:set>
+  </c:if>
+  <meta name="keywords" content="${productModel.product.project.name},${master.name},${productModel.product.name},${productModel.product.subName}, ${productModel.name}" />
+  <meta name="description" content="${productModel.name},${productModel.product.name},${productModel.product.subName},${productModel.product.project.description}" />
 </head>
 <body>
 <!--//End--header-->
@@ -45,7 +51,7 @@
     <div class="bd btns">
       <c:if test="${productModel.amount>0}">
       <a class="btn-buy"  href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>">立即购买</a>
-      <a class="btn-cart"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}"/>">加入购物车</a>
+      <a class="btn-cart"  href="<c:url value="/cart/addProduct.do?id=${productModel.id}&redirect=/product/productModel/${productModel.id}&amount=1"/>">加入购物车</a>
       </c:if>
     </div>
   </div>

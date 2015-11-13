@@ -19,7 +19,7 @@
         function removeCouponBatch(couponBatchId){
             jQuery.ajax({
                 type:"GET",
-                url:'<c:url value="/basic/xmj.do?qm=removeCouponBatch"/>',
+                url:'<c:url value="/couponBatch/removeCouponBatch.do"/>',
                 data:{id:couponBatchId},
                 dataType:"json",
                 success:function(data){
@@ -28,18 +28,44 @@
             });
         }
 
-        function createCoupon(obj,url,couponBatchId,amount){
+        function createCoupon(obj,url,couponBatchId,amount,deliverType){
+            if("3" == deliverType){
+                alert("通码不能生成优惠券！");
+            }else{
+                $.ajax({
+                    type:"GET",
+                    url:url,
+                    data:{id:couponBatchId,amount:amount},
+                    success:function(data){
+                        $(obj).find("span").text("查看优惠券");
+                        $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
+                        $(obj).attr("onclick","");
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+        function setDefaultFlag(obj,url,couponBatchId){
+            var f = $(obj).find("span").text();
             $.ajax({
                 type:"GET",
                 url:url,
-                data:{id:couponBatchId,amount:amount},
+                data:{id:couponBatchId,ftext:f},
                 success:function(data){
-                    $(obj).find("span").text("查看优惠券");
-                    $(obj).attr("href",'<c:url value="/basic/xm.do"/>?qm=plistCoupon_couponBatch&view=couponBatch&conditions=couponBatch.id:'+data.substring(1,data.length-1));
-                    $(obj).attr("onclick","");
+                    console.log(data);
+                    if("1" != data){
+                        $(obj).find("span").text("设置新注册送券");
+                    }else{
+                        $(obj).find("span").text("取消新注册送券");
+                    }
                 }
             });
         }
+
+        function createURL(couponBatchId){
+            window.prompt("链接","www.efeiyi.com/yhq.do?couponBatchId="+couponBatchId);
+        }
+
     </script>
 </head>
 <body>
@@ -77,14 +103,14 @@
                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="showConfirm('提示','是否删除',function(){removeCouponBatch('${couponBatch.id}')})"><span
                                                     class="am-icon-trash-o">删除</span>
                                             </button>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                               href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span
-                                                    class="am-icon-trash-o">编辑</span>
-                                            </a>
+                                            <%--<a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"--%>
+                                               <%--href="<c:url value="/basic/xm.do?qm=formCouponBatch&id=${couponBatch.id}"/>"><span--%>
+                                                    <%--class="am-icon-trash-o">编辑</span>--%>
+                                            <%--</a>--%>
 
                                             <c:if test="${couponBatch.isCreatedCoupon == 1}">
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                   href="#" onclick="createCoupon(this,'<c:url value="/couponBatch/createCoupon.do"/>','${couponBatch.id}','${couponBatch.amount}')"><span
+                                                   href="#" onclick="createCoupon(this,'<c:url value="/couponBatch/createCoupon.do"/>','${couponBatch.id}','${couponBatch.amount}','${couponBatch.deliverType}')"><span
                                                         class="am-icon-trash-o">创建优惠券</span>
                                                 </a>
                                             </c:if>
@@ -92,6 +118,36 @@
                                                 <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                    href="<c:url value="/basic/xm.do?qm=plistCoupon_couponBatch&view=${view}&conditions=couponBatch.id:${couponBatch.id}"/>"><span class="am-icon-trash-o">查看优惠券</span>
                                                 </a>
+                                            </c:if>
+
+                                            <c:choose>
+                                                <c:when test="${couponBatch.defaultFlag != 1}">
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="setDefaultFlag(this,'<c:url value="/couponBatch/setDefaultFlag.do"/>','${couponBatch.id}')" id=""><span
+                                                            class="am-icon-trash-o">设置新注册送券</span>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                       href="#" onclick="setDefaultFlag(this,'<c:url value="/couponBatch/setDefaultFlag.do"/>','${couponBatch.id}')"><span
+                                                            class="am-icon-trash-o">取消新注册送券</span>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" href="<c:url value='/basic/xm.do?qm=plistCoupon_used&conditions=couponBatch.id:${couponBatch.id}'/>"><span
+                                                    class="am-icon-trash-o">查看优惠券使用情况</span>
+                                            </a>
+                                            <c:if test="${couponBatch.deliverType == 2 && couponBatch.isCreatedCoupon == 2}">
+                                                <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                   href="<c:url value="/couponBatch/download.do"><c:param name="id" value="${couponBatch.id}"></c:param></c:url>"><span
+                                                        class="am-icon-trash-o">下载</span>
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${couponBatch.deliverType == 1 || couponBatch.deliverType == 2}">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="createURL('${couponBatch.id}')"><span
+                                                        class="am-icon-trash-o">生成链接</span>
+                                                </button>
                                             </c:if>
                                         </div>
                                     </div>
@@ -101,10 +157,10 @@
                                 <td class="am-hide-sm-only"><fmt:formatNumber type="number" value="${couponBatch.priceLimit}" maxFractionDigits="2" minFractionDigits="2"/></td>
                                 <td class="am-hide-sm-only">${couponBatch.amount}</td>
                                 <td class="am-hide-sm-only">
-                                <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd hh:mm"/>
+                                <fmt:formatDate value="${couponBatch.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <td class="am-hide-sm-only">
-                                    <fmt:formatDate value="${couponBatch.endDate}" pattern="yyyy-MM-dd hh:mm"/>
+                                    <fmt:formatDate value="${couponBatch.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                             </tr>
                         </c:forEach>

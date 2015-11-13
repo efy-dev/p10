@@ -10,7 +10,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>e飞蚁-领先的非物质文化遗产电商平台</title>
+    <meta name="keywords" content="e飞蚁,非物质文化遗产,中国非物质文化遗产,非物质文化遗产网,非遗博览园,非遗节,非遗产品,非遗大师,传统工艺" />
+    <meta name="description" content="e飞蚁，中国领先的非物质文化遗产电商与交流平台，汇聚诸多传承人和各类传统工艺" />
 </head>
 <body>
 <div class="hd">
@@ -38,20 +40,46 @@
                 <li></li>
             </c:forEach>
         </ul>
+        <div class="btn btn-prev" title="上一页"></div>
+        <div class="btn btn-next" title="下一页"></div>
     </div>
     <!-- //End--topbar-->
     <div class="box-hd wh">
         <div class="title wh"><h3>非遗优选</h3></div>
         <div class="banner">
             <ul class="brand-ul">
-                <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank" title=""><strong>${advertisement[0].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank" title=""><strong>${advertisement[1].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank" title=""><strong>${advertisement[2].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank" title=""><strong>${advertisement[3].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank" title=""><strong>${advertisement[4].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank" title=""><strong>${advertisement[5].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank" title=""><strong>${advertisement[6].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small" alt=""></a></li>
-                <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank" title=""><strong>${advertisement[7].name}</strong><img class="imgfilter" src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big" alt=""></a></li>
+                <li class="stau1"><a href="${advertisement[0].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[0].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[0].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[0].price}</font></span></li>
+                <li class="stau2"><a href="${advertisement[1].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[1].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[1].img}@!advertisement-big"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[1].price}</font></span></li>
+                <li class="stau1"><a href="${advertisement[2].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[2].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[2].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[2].price}</font></span></li>
+                <li class="stau1"><a href="${advertisement[3].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[3].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[3].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[3].price}</font></span></li>
+                <li class="stau1"><a href="${advertisement[4].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[4].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[4].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[4].price}</font></span></li>
+                <li class="stau1"><a href="${advertisement[5].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[5].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[5].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[5].price}</font></span></li>
+                <li class="stau1"><a href="${advertisement[6].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[6].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[6].img}@!advertisement-small"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[6].price}</font></span></li>
+                <li class="stau2"><a href="${advertisement[7].redirect}" target="_blank"
+                                     title=""><strong>${advertisement[7].name}</strong><img class="imgfilter"
+                                                                                            src="http://pro.efeiyi.com/${advertisement[7].img}@!advertisement-big"
+                                                                                            alt=""></a><span class="price"><em>￥</em><font>${advertisement[7].price}</font></span></li>
             </ul>
         </div>
     </div>
@@ -72,7 +100,8 @@
                         </c:if>
                         <li class="${style}"><a href="<c:url value="/product/hot/${product.productModel.id}"/>"
                                                 target="_blank"
-                                                title="${product.productModel.product.name}"><strong>${product.productModel.product.name}</strong><img
+                                                title="${product.productModel.name}"><strong>${product.productModel.product.name}</strong><span
+                                class="price"><em>￥</em><font>${product.productModel.price.intValue()}</font></span><img
                                 class="imgfilter"
                                 src="http://pro.efeiyi.com/${product.productModel.product.getProductPicture().pictureUrl}@!home-product"
                                 alt=""/></a></li>
@@ -101,7 +130,7 @@
 
                         <p><ming800:status name="level" dataType="Project.level"
                                            checkedValue="${master.getMainProjectName().getProject().getLevel()}"
-                                           type="normal"/>大师</p>
+                                           type="normal"/>传承人</p>
                             <%--<ming800:status name="orderStatus" dataType="PurchaseOrder.orderStatus" checkedValue="${order.orderStatus}" type="normal"/>--%>
                     </li>
                 </c:forEach>

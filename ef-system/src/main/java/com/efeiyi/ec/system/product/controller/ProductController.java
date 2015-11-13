@@ -14,7 +14,12 @@ import com.ming800.core.base.controller.BaseController;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import com.ming800.core.p.service.AliOssUploadManager;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -164,7 +170,6 @@ public class ProductController extends BaseController {
         String data = "";
 
         String subjectId = request.getParameter("subjectId");
-
         Subject subject = null;
         if(!"".equals(subjectId)){
                 subject = (Subject) baseManager.getObject(Subject.class.getTypeName(), subjectId);
@@ -180,14 +185,11 @@ public class ProductController extends BaseController {
             //上传文件
             MultipartFile mf = entry.getValue();
             String fileName = mf.getOriginalFilename();//获取原文件名
-            Integer index = 0;
-            if(fileName.indexOf(".JPG")!=-1){
-                index = fileName.indexOf(".JPG");
-            }
-            if(fileName.indexOf(".jpg")!=-1){
-                index = fileName.indexOf(".jpg");
-            }
-            url = "subject/" + fileName.substring(0, index) + identify + ".jpg";
+
+                url = "subject/" + fileName;
+
+
+
             try {
                 aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
 //                if(subject != null && "2".equals(request.getParameter("status"))) {
@@ -254,31 +256,49 @@ public class ProductController extends BaseController {
     public String saveNewProduct(Product product, ProductDescription productDescription,
                                  ProductPicture productPicture, ProductModelBean productModelBean,
                                  HttpServletRequest request,
+                                 MultipartRequest multipartRequest,
                                  String resultPage, Model model, String step) {
 
-        model.addAttribute("view", request.getParameter("view"));
+        model.addAttribute("view",request.getParameter("view"));
 
 
         if ("product".equals(step)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String identify = sdf.format(new Date());
+            String url = "";
+            if(multipartRequest.getFile("picture_url1")!=null) {
+                if (!multipartRequest.getFile("picture_url1").getOriginalFilename().equals("")) {
+                    url = "product/" + identify + multipartRequest.getFile("picture_url1").getOriginalFilename();
+                    product.setPicture_url(url);
 
+                }
+            }
 //            try {
 //                Product product1 =        productManager.saveProduct(product);
 //                System.out.print(product1.getMaster().getName());
 //            }catch (Exception e){
 //
 //            }
-            Product temProduct = productManager.saveProduct(product);
+            try {
+                Product temProduct = productManager.saveProduct(product);
+                //  &tenantId=${tenantId}&masterId=${masterId}&id=
+                String tenantId = "0";
+                String masterId = "0";
+                if (temProduct.getTenant() != null) {
+                    tenantId = temProduct.getTenant().getId();
+                }
+                if (temProduct.getMaster() != null) {
+                    masterId = temProduct.getMaster().getId();
+                }
+                resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+                aliOssUploadManager.uploadFile(multipartRequest.getFile("picture_url1"), "ec-efeiyi", url);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             //  model.addAttribute("object",productManager.saveProduct(product));
-            //  &tenantId=${tenantId}&masterId=${masterId}&id=
-            String tenantId = "0";
-            String masterId = "0";
-            if (temProduct.getTenant() != null) {
-                tenantId = temProduct.getTenant().getId();
-            }
-            if (temProduct.getMaster() != null) {
-                masterId = temProduct.getMaster().getId();
-            }
-            resultPage = resultPage + "&tenantId="+tenantId+"&masterId="+masterId+"&id="+temProduct.getId();
+
+
 
         } else if ("description".equals(step)) {
 
@@ -586,5 +606,50 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return tempAmount;
+    }
+
+    @RequestMapping("/outExcel.do")
+    @ResponseBody
+    public String outExcel2(HttpServletRequest request,String home,String on ,String down,HttpServletResponse response) {
+        String [] homes = home.split(",");
+        try {
+
+            String fileName = productManager.outExcel1(homes,on,down);
+            File file = new File(fileName);
+            InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            // 清空response
+            response.reset();
+            response.addHeader("Content-Disposition", "attachment;filename="
+                    + new String(file.getName().getBytes()));
+            response.addHeader("Content-Length", "" + file.length());
+            OutputStream toClient = new BufferedOutputStream(
+                    response.getOutputStream());
+            response.setContentType("application/vnd.ms-excel;charset=gb2312");
+            toClient.write(buffer);
+            toClient.flush();
+            toClient.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @RequestMapping("/updateShow.do")
+    @ResponseBody
+    public String updateShow(String subjectId,String show, HttpServletRequest request) {
+
+        try {
+            Subject subject = (Subject)baseManager.getObject(Subject.class.getName(),subjectId);
+            subject.setSubjectShow(show);
+            baseManager.saveOrUpdate(Subject.class.getName(),subject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectId;
     }
 }

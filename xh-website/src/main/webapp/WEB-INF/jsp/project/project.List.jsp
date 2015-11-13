@@ -14,12 +14,17 @@
         <tr>
             <td>所在地区</td>
             <td>非物质文化遗产名称</td>
+            <td>类别</td>
             <td>详细</td>
         </tr>
         <c:forEach items="${objectList}" var="project">
             <tr>
                 <td>${project.addressDistrict.addressCity.addressProvince.name}</td>
                 <td>${project.name}</td>
+                <td><ming800:status name="level"
+                                    dataType="MasterProject.type"
+                                    checkedValue="${project.type}"
+                                    type="normal"/></td>
                 <td>详细</td>
             </tr>
         </c:forEach>

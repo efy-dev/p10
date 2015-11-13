@@ -41,7 +41,7 @@
                 </div>
                 </dt>
                 <dd>
-                    <p>当前头像</p>
+                    <p>&nbsp;&nbsp;&nbsp;</p>
                     <c:set var="pUser">
                         ${user.username}
                         </c:set>
@@ -87,11 +87,16 @@
                         </div>
                         <!--amazeui-->
                     </li>
+                    <li>
+                        <label>电子邮箱：</label>
+                        <input style="width: 212px;" type="text" id="em" class="userinfo-tex" name="email" value="${user.email}">
+                        <span class="active-d" id="yx"></span>
+                    </li>
                     <input type="hidden" name="id" value="${user.id}" >
                     <li>
                         <label></label>
-                        <input type="button" class="dj-btn" onclick="pd(this);" value="保存个人信息">
-                        <span class="active-d"></span>
+                        <input type="button" class="dj-btn" onclick="pd();" value="保存个人信息">
+                        <span class="active-d" id="tj"></span>
                     </li>
                 </ul>
             </form>
@@ -119,15 +124,25 @@
 
 
 <script>
-    function pd(obj){
+    function pd(){
         var name2=$("#name2").val();
         var name=$("#name").val();
         var bd=$("#bd").val();
+        var email=$("#em").val();
+        var reg =/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
         if(name=="" || name2=="" || bd==""){
-            $(obj).next("span").text("您填写的信息不完整");
+            $("#tj").html("您填写的信息不完整");
         }else{
-            $("#personalInfo").submit();
-            $(obj).next("span").text("");
+            if(reg.test(email)){
+                $("#personalInfo").submit();
+                $("#yx").html("");
+                $("#tj").html("");
+
+            }else{
+                $("#yx").html("您的邮箱格式不正确");
+                $("#tj").html("");
+            }
+
         }
 
     }
@@ -161,7 +176,9 @@
                 $('#' + file.id).find('.data').html(' 上传完毕');
                 var jsonResult = eval(data);
                 addPhotoDynamic(jsonResult);
+                window.location.reload();
             },
+
         });
     });
 

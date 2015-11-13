@@ -173,7 +173,7 @@
                                     <span class="am-icon-trash-o"></span> 删除
                                 </button>
                                 </c:if>
-                                <c:if test="${pol.type == '2' && object.status == '9'}">
+                                <c:if test="${pol.type == '2' && (object.status == '9' || object.status == '3' || object.status == '4')}">
                                 <button onclick="window.location.href='<c:url value="/purchaseOrderLabel/downNFCTxt.do?orderLabelId=${pol.id}&filetype=.rar"/>'"
                                         class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                     下载NFC

@@ -12,6 +12,14 @@
 <!doctype html>
 <html class="no-js">
 <head>
+    <title>【${product.name} ${productModel.name}】${product.subName} -e飞蚁</title>
+    <c:if test="${product.master!=null}">
+        <c:set var="master">
+            ${product.master.fullName}
+        </c:set>
+    </c:if>
+    <meta name="keywords" content="${product.project.name},${master},${product.name},${product.subName}, ${productModel.name},${product.tenant.name}"/>
+    <meta name="description" content="${product.name},${productModel.name},${product.subName},${product.project.description}"/>
 </head>
 <body>
 <!-- //End--header-->
@@ -53,7 +61,7 @@
                              alt=""/></li>
                     <%--</c:if>--%>
                     <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
-                        <c:if test="${productPicture.status=='1'}">
+                        <c:if test="${productPicture.status=='1'&&productPicture.productModel.id==productModel.id}">
                             <li><img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-detail-pc-view"
                                      alt=""/></li>
                         </c:if>
@@ -70,7 +78,7 @@
                     </li>
                     <%--</c:if>--%>
                     <c:forEach items="${productPictures}" var="productPicture" varStatus="rec">
-                        <c:if test="${productPicture.status=='1'}">
+                        <c:if test="${productPicture.status=='1'&&productPicture.productModel.id==productModel.id}">
                             <li>
                                 <img src="http://pro.efeiyi.com/${productPicture.pictureUrl}@!product-details-picture"
                                      alt=""/>
@@ -163,7 +171,7 @@
                 <div class="colour-page">
                     <div class="amount">
                         <a  onclick="subtractProduct()" class="btn-sub" title="减"><i class="icon icon-add"></i></a>
-                        <input id = "value" class="txt" type="text" value="1" readOnly="true"/>
+                        <input id = "value" class="txt" type="text" value="1"/>
                         <a  onclick="addProduct()" class="btn-add" title="加"><i class="icon icon-sub"></i></a>
                     </div>
                     <!-- //End-->
@@ -245,11 +253,10 @@
                 <div class="dis-con">
                     <div class="dis-title">用户印象：</div>
                     <div class="dis-ul">
-                        <ul>
-
                                 <%--<c:if test="${not empty purchaseOrderProductList}">--%>
                                 <c:forEach items="${purchaseOrderProductList}" var="purchaseOrderProduct"
                                            varStatus="rec">
+                                    <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment&&purchaseOrderProduct.purchaseOrderComment.status!='0'}">
                                     <li>
                                     <div class="txt">
                                         <c:if test="${not empty purchaseOrderProduct.purchaseOrderComment}">
@@ -264,6 +271,7 @@
                                             class="icon"></i>${fn:substring(user, 0,3 )}****${fn:substring(user,7,11)}
                                     </div>
                                     </li>
+                                    </c:if>
                                  </c:forEach>
                         </ul>
                     </div>
@@ -273,16 +281,7 @@
                 </c:if>
         </div>
 </div>
-<div class="scroll-bar">
-    <div class="scroll-bar-top">
-        <span class="btn"><i class="icon"></i>顶部</span>
-    </div>
-    <!-- //End--返回顶部-->
-    <%--<div class="scroll-bar-ask">--%>
-        <%--<a class="btn" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2074505591&site=qq&menu=yes"><i class="icon"></i>在线咨询</a>--%>
-    <%--</div>--%>
-    <!-- //End--在线咨询-->
-</div>
+
 
 
 </div>
@@ -385,19 +384,6 @@
     }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[a] = m[a] || function() {
-                    (m[a].a = m[a].a || []).push(arguments)
-                };
-        j = ei.createElement(q),
-                s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.src = i;
-        s.parentNode.insertBefore(j, s)
-    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
-    _MEIQIA('entId', 486);
-</script>
 </body>
 </html>
 

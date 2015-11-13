@@ -9,10 +9,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js">
 <head>
+  <title>【 ${productModel.product.name} 】${productModel.product.subName} -e飞蚁</title>
+  <c:if test="${product.master!=null}">
+    <c:set var="master">
+      ${productModel.product.master.fullName}
+    </c:set>
+  </c:if>
+  <meta name="keywords" content="${productModel.product.project.name},${master.name},${productModel.product.name},${productModel.product.subName}, ${productModel.name}" />
+  <meta name="description" content="${productModel.name},${productModel.product.name},${productModel.product.subName},${productModel.product.project.description}" />
+
 </head>
 <body>
 <!-- //End--topbar-->
@@ -59,7 +67,7 @@
       </c:if>
       <c:if test="${productModel.amount>0}">
       <div class="item p-btn">
-        <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
+        <a class="cart" href="<c:url value="/cart/addProduct.do?id=${productModel.id}&amount=1"/>" title="加入购物车"><i class="icon"></i>加入购物车</a>
         <a class="buy"  href="<c:url value="/order/easyBuy/${productModel.id}?amount=1"/>"} title="立即购买">立即购买</a>
       </div>
        </c:if>

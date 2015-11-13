@@ -25,7 +25,8 @@
                 <%-- 新闻公告 --%>
             </div>
 
-            <jsp:include flush="true" page="/project/project.home.list.do?qm=plistProject_default"/>
+            <%--<jsp:include flush="true" page="/project/project.home.list.do?qm=plistProject_default"/>--%>
+            <%@include file="/WEB-INF/jsp/project/project.home.list.media.jsp"%>
             <%-- 非遗名录 --%>
             <jsp:include flush="true"
                          page="/protection/protection.homeList.do?qm=plistPolicy_default&jmenuId=AssociationMenu"/>
@@ -62,7 +63,8 @@
                 </ul>
             </div>
             <%-- 在线服务 --%>
-            <jsp:include flush="true" page="/home/homeMaster.do?qm=plistMaster_master"/>
+            <%--<jsp:include flush="true" page="/home/homeMaster.media.do?qm=plistMaster_master"/>--%>
+            <%@include file="/WEB-INF/jsp/home/homeMaster.media.jsp"%>
             <%-- 非遗传承人 --%>
         </div>
         <%-- 页面右部 --%>

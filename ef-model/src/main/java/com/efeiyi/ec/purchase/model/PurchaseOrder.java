@@ -19,6 +19,7 @@ import java.util.List;
 public class PurchaseOrder {
 
     public static final String ORDER_STATUS_WPAY = "1";  //等待付款
+    public static final String ORDER_STATUS_WAIT_GROUP = "3" ; //等待成团
     public static final String ORDER_STATUS_WRECEIVE = "5"; //未发货
     public static final String ORDER_STATUS_POSTED = "7";  //已发货
     public static final String ORDER_STATUS_UNCOMMENT = "9"; //未评价
@@ -46,6 +47,16 @@ public class PurchaseOrder {
     private String purchaseOrderAddress;//收货人地址
     private String receiverName;//收货人姓名
     private String receiverPhone;//收货人联系方式
+    private String callback; //回调
+
+    @Column(name = "callback")
+    public String getCallback() {
+        return callback;
+    }
+
+    public void setCallback(String callback) {
+        this.callback = callback;
+    }
 
     @Column(name = "purchase_order_address")
     public String getPurchaseOrderAddress() {
@@ -235,7 +246,7 @@ public class PurchaseOrder {
         this.receiverPhone = receiverPhone;
     }
 
-    @Column(name = "")
+    @Column(name = "payway")
     public String getPayWay() {
         return payWay;
     }
@@ -252,7 +263,7 @@ public class PurchaseOrder {
         for (PurchaseOrderPayment purchaseOrderPaymentTemp : purchaseOrderPaymentList) {
             for (PurchaseOrderPaymentDetails purchaseOrderPaymentDetails : purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()) {
                 if (purchaseOrderPaymentDetails.getCoupon() == null && purchaseOrderPaymentDetails.getTransactionNumber() != null) {
-                    resultPrice = resultPrice.add(purchaseOrderPaymentTemp.getPaymentAmount());
+                    resultPrice = resultPrice.add(purchaseOrderPaymentDetails.getMoney());
                 }
             }
         }

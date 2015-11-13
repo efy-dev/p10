@@ -39,5 +39,5 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-<script src="../shop2015/js/amazeui.min.js"></script>
-<script src="../shop2015/js/system.js"></script>
+<script src="<c:url value='/shop2015/js/amazeui.min.js'/>"></script>
+<script src="<c:url value='/shop2015/js/system.js'/>"></script>

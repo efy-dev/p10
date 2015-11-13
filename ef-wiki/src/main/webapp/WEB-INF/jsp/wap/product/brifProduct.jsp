@@ -20,7 +20,7 @@
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -70,7 +70,7 @@
   <h1 class="am-header-title">景泰蓝工艺</h1>
   <!-- //End--title-->
   <div class="am-header-right am-header-nav">
-    <a href="#chevron-right" class="chevron-right" id="menu">
+    <a href="#chevron-right" class="chevron-right" id="menu" style="display: block;">
       <i class="line"></i>
     </a>
     <a href="#chevron-right" class="chevron-right" id="menu2" style="display: none;">
@@ -81,14 +81,86 @@
   <div class="menu-list">
     <div class="menu-page">
       <ul class="bd">
-        <li><a href="" title="首页">首页</a></li>
-        <li><a href="" title="分类">消&nbsp;息</a></li>
+        <li><a href="<c:url value='/base/home.do'/>" title="首页">首页</a></li>
+        <li><a href="javascript:void(0);" title="分类" id="acs">消&nbsp;息</a></li>
         <li><a href="" title="个人中心">个&nbsp;人&nbsp;中&nbsp;心</a></li>
       </ul>
     </div>
   </div>
 </header>
+<div style="display: none" id="showMessage" class="pops-up">
+  <div style="background: #fff;position: relative;z-index:2;"  data-am-widget="tabs" class="am-tabs am-tabs-default am-no-layout">
+    <ul class="am-tabs-nav am-cf">
+     <%-- <li class="am-active"><a href="[data-tab-panel-0]"><i class="bz-icon1"></i>
+        <span style="float: left;margin-left: 10px;">关注</span><i class="sod-sr"></i></a></li>--%>
+      <li class="am-active"><a href="[data-tab-panel-0]">
+        <i class="bz-icon2"></i>
+        <span style="float: left;margin-left: 10px;">评论</span><i class="sod-sr"></i>
+      </a></li>
+      <li class=""><a href="[data-tab-panel-1]">
+        <i class="bz-icon3"></i>
+        <span style="float: left;margin-left: 10px;">点赞</span>
+      </a></li>
+    </ul>
+    <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+      <%--<div data-tab-panel-0="" class="am-tab-panel am-active">
+        <div class="aboud-you">
+          <div class="list-you"><span>这些人最近关注了你</span></div>
+          <ul class="list-name">
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Andy</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>Lily</span></li>
+            <li><div class="name-img"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div><span>wangjl</span></li>
+          </ul>
+          <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>--%>
+      <div data-tab-panel-0="" class="am-tab-panel am-active">
+        <div class="discuss">
+          <ul class="discuss-2" id="newcommentList">
+           <%-- <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Andya</a>回复了你</p>
+                <p class="text-time">51分钟前</p>
+                <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+              </div>
+            </li>
+            <li class="review">
+              <div class="matter">
+                <p class="text-h1"><a href="#">Joe</a>回复了你</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#">原来木板水印是一门高深的技艺，之前从来没
+                  有关注过，真心觉得中国的非遗文化值得我们
+                  去传承。</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+              </div>
+            </li>--%>
+          </ul>
+          <div class="more"><a href="javascript:void(0);" onclick="getCommentList()"><i class="time-1"></i>查看更多评论</a></div>
+        </div>
+      </div>
+      <div data-tab-panel-1="" class="am-tab-panel ">
+        <div class="discuss">
+          <ul class="discuss-2" id="newPraiseList">
+           <%-- <li class="review">
+              <div class="matter">
+                <p class="text-h1">Joe</p>
+                <p class="text-time">1小时前</p>
+                <p class="text-content"><a href="#">觉得你的评论“还不错”很赞</a></p>
+                <div class="owner"><img class="am-circle" src="../shop2015/upload/120102-p1-11.jpg"></div>
+              </div>
 
+            </li>--%>
+          </ul>
+          <div class="more"><a href="javascript:void(0);" onclick="getPraiseList()"><i class="time-1"></i>查看更多点赞</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg" ></div>
+</div>
 <div class="work-details" id="work-details">
   <p class="ptext1">${product.subName}</p>
   <c:if test="${!empty product.productPictureList}">
@@ -99,13 +171,13 @@
 ${product.productDescription.content}
   <!--购买-->
   <div class="purchase-inheritor">
-    <a href="#">我&nbsp;要&nbsp;购&nbsp;买</a>
+    <a href="http://www.efeiyi.com/product/productModel/${product.productModelList[0].id}">我&nbsp;要&nbsp;购&nbsp;买</a>
   </div>
   <!--购买-->
   <div class="inheritor ">
 
     <div class="inheritor-text">
-      <p class="itor-text-1">${product.master.fullName}</p>
+      <a href="http://${product.master.name}.efeiyi.com"><p class="itor-text-1">${product.master.fullName}</p></a>
 
       <p class="itor-text-2">${product.name}</p>
 
@@ -128,7 +200,7 @@ ${product.productDescription.content}
       </p>
 
       <p class="itor-text-4">${product.master.brief}</p>
-      <a class="gz-fd-icon" href="#" onclick="saveMasterFllow('${product.master.id}')" id="">
+      <a class="gz-fd-icon" href="javascript:void(0);" onclick="saveMasterFllow('${product.master.id}')" id="">
         <c:if test="${flag == true}">
           <input id="saveMasterFllow" type="hidden" value="0">
           取消关注
@@ -140,7 +212,7 @@ ${product.productDescription.content}
 
       </a>
 
-      <div class="gz-fd-img"><a href="#"><img src="${product.master.favicon}"></a>
+      <div class="gz-fd-img"><a href="http://${product.master.name}.efeiyi.com"><img src="${product.master.favicon}"></a>
       </div>
     </div>
   </div>
@@ -151,7 +223,7 @@ ${product.productDescription.content}
       </div>
 
     </div>
-    <div class="more"><a href="#"><i class="time-1"></i>查看更多评论</a></div>
+    <div class="more"><a href="javascript:void(0);" onclick="getData()"><i class="time-1"></i>查看更多评论</a></div>
     <input type="hidden" name="" id="content" value="" />
 </div>
   <!--评论-->
@@ -166,19 +238,16 @@ ${product.productDescription.content}
       <i class="s-solid ft-a"></i>
       <a href="#" class="ft-a" onclick="storeProduct('${product.id}')"> <i class="good-3"></i> </a>
       <i class="s-solid ft-a"></i>
-      <a href="#" class="ft-a" style="position:relative">
-        <i class="good-4"></i>
-        <div class="nr-share">
+      <a href="javascript:void(0);" class="ft-a"   style="position:relative">
+        <i class="good-4" id="good-4"></i>
+        <div class="nr-share" id="nr-share" style="display: none">
         <div class="nr-bg">
           <div class="jiathis_style">
             <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"></a>
             <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"></a>
             <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"></a>
             <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"></a>
-           <%-- <a class="jiathis_button_weixin"   style="width: 2rem" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin" ></span></a>
-            <a class="jiathis_button_tqq"   style="width: 2rem" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq" ></span></a>
-            <a class="jiathis_button_tsina"  style="width: 2rem" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina" ></span></a>
-            <a class="jiathis_button_cqq"  style="width: 2rem" title="分享到QQ好友"><span class="jiathis_txt jtico jtico_cqq" ></span></a>--%>
+
           </div>
         </div>
         </div>
@@ -206,15 +275,34 @@ ${product.productDescription.content}
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          alert("您还未登陆，请登录后再操作");
+          //alert("您还未登陆，请登录后再操作");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="true"){
           $("#"+masterId).html("取消关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="del"){
           $("#"+masterId).html("关注");
+          if(oper=="0"){
+            var val = $("#saveMasterFllow").val("1");
+          }
+          if(oper=="1"){
+            var val = $("#saveMasterFllow").val("0");
+          }
           return true;
         }
         if(data=="error"){
@@ -228,12 +316,7 @@ ${product.productDescription.content}
         return false;
       },
       complete:function(){
-        if(oper=="0"){
-          var val = $("#saveMasterFllow").val("1");
-        }
-        if(oper=="1"){
-          var val = $("#saveMasterFllow").val("0");
-        }
+
       }
     });
   }
@@ -269,7 +352,7 @@ var startNum=1;
                       "<p class='text-time'>"+cTime+"</p> " +
                       "<p class='text-content'>" +
                       "<a href='#'onclick='showmodal2(this)' about='"+data.list[i].id+"'>"+data.list[i].content+"</a></p> " +
-                      "<div class='owner'><img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/></div> " +
+                      "<div class='owner'><img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/></div> " +
                       "<div class='owner-good'>" +
                       "<a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.list[i].id+"\")' about='${product.id}' name='up'><i class='good-1'></i><em>"+amout1+"</em></a></div> ");
               pubu.append(box);
@@ -376,7 +459,15 @@ function savaUP(productId){
     dataType:"json",
     success:function(data2){
      if(data2=="false"){
-       alert("您还未登陆，请登录后再操作！！！");
+       //alert("您还未登陆，请登录后再操作！！！");
+       //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+       var go = window.confirm("去登陆吧?");
+       if(go==true){
+         window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+       }
+       else{
+         return false;//取消
+       }
        return false;
      }
       if(data2=="repeat"){
@@ -385,9 +476,19 @@ function savaUP(productId){
       }
       if(data2=="true" && oper=='up'){
         $("#em1").html(parseInt($("#em1").text())+1);
+        if($("#good-1").attr("name")=="down"){
+          $("#good-1").attr("name","up");
+        }else{
+          $("#good-1").attr("name","down");
+        }
       }
       if(data2=="true" && oper=='down'){
         $("#em1").html(parseInt($("#em1").text())-1);
+        if($("#good-1").attr("name")=="down"){
+          $("#good-1").attr("name","up");
+        }else{
+          $("#good-1").attr("name","down");
+        }
       }
     },
     error:function(){
@@ -395,11 +496,7 @@ function savaUP(productId){
       return false;
     },
     complete:function(){
-      if($("#good-1").attr("name")=="down"){
-        $("#good-1").attr("name","up");
-      }else{
-        $("#good-1").attr("name","down");
-      }
+
 
 
     }
@@ -433,13 +530,21 @@ function savaUP(productId){
       async:true,
       success:function(data){
         if(data==false){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         $(".dialogue").append("<div class='matter'> <p class='text-h1'>${myUser.name2}</p> " +
                 "<p class='text-time'>刚刚</p> <p class='text-content'>" +
                 "<a href='#' >"+CommentValue+"</a></p> <div class='owner'>" +
-                "<img class='am-circle' src='/scripts/assets/images/120102-p1-11.jpg'/>" +
+                "<img class='am-circle' src='<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>'/>" +
                 "</div> <div class='owner-good'><a href='javascript:void(0);' onclick='commentUpAndDown(this,\""+data.id+"\")' about='${product.id}' name='up'>" +
                 "<i class='good-1'></i><em>"+data.amount+"</em></a></div> " + "</div>");
       },
@@ -471,7 +576,14 @@ function savaUP(productId){
         async: true,
         success:function(data){
           if(data==false){
-            alert("您还未登陆，请登录后再操作！！！");
+            //alert("您还未登陆，请登录后再操作！！！");
+            var go = window.confirm("去登陆吧?");
+            if(go==true){
+              window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+            }
+            else{
+              return false;//取消
+            }
             return false;
           }
           $("#"+contentId).append("<div class='respond'> <p><span class='txt-name'>" +
@@ -502,7 +614,14 @@ function savaUP(productId){
       dataType:"json",
       success:function(data2){
         if(data2=="false"){
-          alert("您还未登陆，请登录后再操作！！！");
+          //alert("您还未登陆，请登录后再操作！！！");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/'/>"+productId;
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data2=="repeat"){
@@ -542,7 +661,14 @@ function savaUP(productId){
       dataType:"json",
       success:function(data){
         if(data=="false"){
-          showAlert("提示","您还未登陆，请登录后再操作");
+          //showAlert("提示","您还未登陆，请登录后再操作");
+          var go = window.confirm("去登陆吧?");
+          if(go==true){
+            window.location.href ="<c:url value='/wapShowProduct/${product.id}'/>";
+          }
+          else{
+            return false;//取消
+          }
           return false;
         }
         if(data=="repeat"){
@@ -565,6 +691,126 @@ function savaUP(productId){
       }
     });
   }
+  var commentNumber = 1;
+  var praiseNumber = 1;
+  function getCommentList(){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/comment/getCommentList.do?pageEntity.size=5&pageEntity.index='/>"+commentNumber,
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data && data.length>=1){
+          for(i in data){
+            var  pubu =$("#newcommentList");
+            var cTime =transdate(data[i].createDateTime);
+            var userName = data[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
+
+            var box = $("<li class=\"review\"><div class=\"matter\"> <p class=\"text-h1\">" +
+                    "<a href=\"#\">"+userName+"</a>回复了你</p> " +
+                    "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"gotoWatch('"+data[i].id+"','"+data[i].product+"')\">"+data[i].content+"</a></p> " +
+                    "<div class=\"owner\"><img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div></div> </li>");
+            pubu.append(box);
+
+          }
+
+        }else{
+          flag = true;
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        commentNumber =commentNumber+1;
+      }
+    });
+
+  }
+  function getPraiseList(){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/praise/getPraiseList.do?pageEntity.size=10&pageEntity.index='/>"+praiseNumber,
+      data:"",
+      dataType:"json",
+      success:function(data){
+        if(data && data.length>=1){
+          for(i in data){
+            var  pubu =$("#newPraiseList");
+            var cTime =transdate(data[i].createDateTime);
+            var userName = data[i].user.name2;
+            if(userName==null){
+              userName ="匿名用户";
+            }
+
+            var box = $("<li class=\"review\"> <div class=\"matter\"> <p class=\"text-h1\">"+userName+"</p> " +
+                    "<p class=\"text-time\">"+cTime+"</p> <p class=\"text-content\">" +
+                    "<a href=\"javascript:void(0);\" onclick=\"watchPraise('"+data[i].id+"','"+data[i].product+"')\">觉得你的评论“还不错”很赞</a></p> <div class=\"owner\">" +
+                    "<img class=\"am-circle\" src=\"<c:url value='/scripts/assets/images/120102-p1-11.jpg'/>\"></div> </div> " +
+                    "</li>");
+            pubu.append(box);
+
+          }
+
+        }else{
+          flag = true;
+        }
+
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+        praiseNumber =praiseNumber+1;
+      }
+    });
+
+  }
+  $(document).ready(function(){
+    getCommentList();
+    getPraiseList();
+  });
+  function gotoWatch(data1,data2){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/comment/watchComment.do?commentId='/>"+data1,
+      data:"",
+      dataType:"json",
+      success:function(o){
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+      }
+    });
+  }
+  function watchPraise(data1,data2){
+    $.ajax({
+      type:"get",
+      url:"<c:url value='/praise/watchPraise.do?commentId='/>"+data1,
+      data:"",
+      dataType:"json",
+      success:function(o){
+        window.location.href="<c:url value='/project/showProduct/'/>"+data2;
+      },
+      error:function(){
+        alert("出错了，请联系管理员！！！");
+        return false;
+      },
+      complete:function(){
+      }
+    });
+  }
 </script>
 
 <!--//End--footer-->
@@ -581,9 +827,10 @@ function savaUP(productId){
 <script src="<c:url value='/resources/assets/js/amazeui.min.js?v=20150831'/>"></script>
 <!--自定义js--Start-->
 
-<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>
+<%--<script src="<c:url value='/scripts/assets/wap/js/system.js?v=20150831'/>"></script>--%>
 <script src="<c:url value='/scripts/assets/wap/js/cyclopedia.js?v=20150831'/>"></script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
 <!--自定义js--End-->
 </body>
 </html>

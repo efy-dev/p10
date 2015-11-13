@@ -529,6 +529,8 @@ CREATE TABLE `master_work_store` (
 )
 ;
 
+
+
 CREATE TABLE `product_model_record` (
   `id`  char(16) NOT NULL ,
   `amount`  integer(255) NULL ,
@@ -603,6 +605,14 @@ ADD COLUMN `status`  varchar(8) NULL AFTER `ads_order`;
 
 ---------------------未执行 ------------------------------
 
+-------------------------------2015-10-27------------------------已执行
+alter table purchase_coupon_batch add start_receive_time datetime default null;
+alter table purchase_coupon_batch add end_receive_time datetime default null;
+alter table purchase_coupon add column isbind char(1);
+alter table purchase_coupon add column bind_time datetime;
+-------------------------------------------------------------------------
+
+
 
 
 
@@ -613,7 +623,44 @@ CREATE TABLE `base_document_picture` (
   PRIMARY KEY (`id`)
 )
 ;
+ALTER TABLE `advertisement`
+ADD COLUMN `price`  varchar(32) NULL AFTER `status`;
+
+ALTER TABLE `master`
+ADD COLUMN `remark`  varchar(50) NULL AFTER `fans_amount`;
+=================================
+ALTER TABLE `master`
+DROP COLUMN `remark`;
+
+ALTER TABLE `master_news`
+ADD COLUMN `remark`  varchar(50) NULL AFTER `type`;
+
+CREATE TABLE `base_operation_record` (
+  `id`  char(16) NOT NULL ,
+  `username`  varchar(255) NULL ,
+  `target_name`  varchar(255) NULL ,
+  `create_time`  datetime NULL ,
+  PRIMARY KEY (`id`)
+)
+;
+ALTER TABLE `base_operation_record`
+ADD COLUMN `operation`  varchar(255) NULL AFTER `create_time`;
+
+
+===========================================2015/11/5=========================================
 
 
 
+ALTER TABLE `master_message`
+ADD COLUMN `data_source`  varchar(255) NULL AFTER `author`;
 
+ALTER TABLE `master_work`
+ADD COLUMN `store_amount`  int(16) NULL AFTER `tenant_id`;
+
+===========================================2015/11/11=========================================
+
+ALTER TABLE `subject`
+ADD COLUMN `type`  varchar(255) NULL AFTER `name`,
+ADD COLUMN `show`  varchar(255) NULL AFTER `type`,
+ADD COLUMN `template`  varchar(255) NULL AFTER `show`,
+ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;

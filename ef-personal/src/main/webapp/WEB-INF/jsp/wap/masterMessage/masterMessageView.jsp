@@ -54,9 +54,12 @@
               <a class="suit-gz" onclick="changeStatus(this,'${object.master.id}');"><span>${object.master.followStatus}</span></a> </div>
             <div class="dynamic-st">
               <div class="dynamic-suit-st-img">
-                <p><img src="/scripts/assets/upload/120102-p1-2.jpg"></p>
+                <c:if test="${!empty object.messageAttachmentLists && object.messageAttachmentLists.size() > 0}">
+                  <c:forEach items="${object.messageAttachmentLists}" var="attr">
+                    <p><img src="http://tenant.efeiyi.com/${attr.pictureUrl}@!master-intro-product"></p>
+                  </c:forEach>
+                </c:if>
                 <p class="txt">${object.content}</p>
-                <p><img src="/scripts/assets/upload/120102-p1-3.jpg"></p>
               </div>
             </div>
           </div>
@@ -485,9 +488,12 @@
       dataType:"json",
       error:function(){alert("操作失败.请联系系统管理员!")},
       success:function(msg){
-        if(msg == "1"){
+        if(msg == "noRole"){
+          alert("您还未登录,请登录后操作");
+        }
+        if(msg == "del"){
           $(o).find("span").html("关注");
-        }else if(msg == "2"){
+        }else if(msg == "add"){
           $(o).find("span").html("已关注");
         }
       }

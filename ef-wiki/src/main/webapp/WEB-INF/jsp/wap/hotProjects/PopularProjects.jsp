@@ -17,12 +17,12 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>工艺</title>
+  <title>热门工艺</title>
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<c:url value='/scripts/assets/images/favicon.ico'/>">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -79,7 +79,7 @@
             <c:forEach var="ppj" items="${popularProjectsList}">
               <ul class="hot" id="box">
                 <li>
-                  <a href="<c:url value='/base/brifProject.do?projectId=${ppj.project.id}'/>"><img src="${ppj.project.picture_wap_url}"></a>
+                  <a href="<c:url value='/base/brifProject/${ppj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${ppj.project.picture_wap_url}"></a>
                   <div class="hot-poge">
                     <span style="margin-right: 1rem">人气</span>
                  <%-- <span>${fn:length(ppj.project.projectFolloweds)}</span>--%>
@@ -93,11 +93,9 @@
         <div class="am-tab-panel " style="display:none;">
           <div class="suit">
             <div class="dynamic" style="border-bottom: 0;">
-             <%-- <% out.println(AuthorizationUtil.getMyUser().getId());
-                out.println(request.getAttribute("isShow"));
-              %>--%>
+
               <%if(AuthorizationUtil.getMyUser().getId()==null || "no".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){%>
-              <div class="suit">
+              <%--<div class="suit">
                 <div class="dynamic" id="recommends">
                   <div class="attention">
                     <p>您还没有关注任何工艺,下面是我们为你推荐的几项具体工艺项目</p>
@@ -109,8 +107,14 @@
                         <!--只显示9个-->
                         <li>
                           <div class="suit-list-bt">
-                            <a href="#"><img src="${apj.project.picture_url}"></a>
-                            <a class="gz-fd-icon" id="${apj.project.id}" href="#" onclick="saveProjectFllow('${apj.project.id}')">关注</a>
+                              <a href="<c:url value='/base/brifProject.do?projectId=${apj.project.id}'/>"><img src="${apj.project.picture_url}"></a>
+                              <c:if test="${apj.attention=='0'}">
+                                  <a class="gz-fd-icon" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="0">关注</a>
+                              </c:if>
+                              <c:if test="${apj.attention=='1'}">
+                                  <a class="gz-fd-icon" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="1">已关注</a>
+                              </c:if>
+
                           </div>
                         </li>
                     </c:forEach>
@@ -123,7 +127,50 @@
 
                 </div>
                 <a href="#" class="state-btn" style="color: #000;" onclick="getData('<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>')">查看更多工艺</a>
-              </div>
+              </div>--%>
+                <div class="suit">
+                    <div class="dynamic" style="border-bottom:0;">
+                        <div class="suit-focus">
+                            <div class="title">您可能喜欢的工艺:</div>
+                            <div class="div-list">
+
+                                <c:if test="${!empty  attentionProjectsList}">
+                                 <ul>
+                                    <c:forEach var="apj" items="${attentionProjectsList}">
+                                    <li>
+                                        <p class="tb">
+                                            <a href="<c:url value='/base/brifProject/${apj.project.id}/1'/>"><img src="http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/${apj.project.picture_wap_url}"></a>
+                                            <c:if test="${apj.attention=='0'}">
+                                            <a class="icon-guanzu" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="0">关注</a>
+                                            </c:if>
+                                            <c:if test="${apj.attention=='1'}">
+                                                <a class="icon-guanzu" id="${apj.project.id}" href="javascript:void(0);" onclick="saveProjectFllow('${apj.project.id}')" about="1">已关注</a>
+                                            </c:if>
+                                        </p>
+                                        <P>${apj.project.name}</P>
+                                    </li>
+                                    </c:forEach>
+                                 </ul>
+                                </c:if>
+                            </div>
+                            <a href="#上一页" title="上一页" class="btn-gz top-btn"></a>
+                            <a href="#下一页" title="下一页" class="btn-gz bot-btn"></a>
+                        </div>
+                        <div class="attention">
+                            <p>以下是您关注的相关工艺的最新动态</p>
+                        </div>
+                        <div class="dynamic">
+                            <%if(AuthorizationUtil.getMyUser().getId()!=null){%>
+                            <ul class="suit-zt-2" id="hadAttentionProjects">
+
+                            </ul>
+                            <%}%>
+
+                        </div>
+                    </div>
+                </div>
+
+
               <%}%>
               <c:if test="${isShow =='no'}">
                 <input id="flag" type="hidden" name="flag" value="front" />
@@ -133,8 +180,7 @@
               </c:if>
               <%
                 if(AuthorizationUtil.getMyUser().getId()!=null && "ok".equalsIgnoreCase(request.getAttribute("isShow").toString()) ){
-                /*  out.println(request.getAttribute("isShow"));
-                  out.println(AuthorizationUtil.getMyUser().getId());*/
+
               %>
 
               <div class="dynamic" id="after">
@@ -153,6 +199,7 @@
                       <p><a href="#"> 增加相关大师5位</a></p>
                     </div>
                   </li>--%>
+
                 </ul>
               </div>
               <%}%>
@@ -207,8 +254,8 @@
                             var flag = $("#flag").val();
                             //alert(flag)
                             if(ajaxkey && flag=="front"){
-                                PBL("#recommends","#recommend",2);
-                                getData("<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
+                                //PBL("#recommends","#recommend",2);
+                                //getData("<c:url value='/basic/xmj.do?qm=plistProjectRecommended_default&conditions=&pageEntity.size=10&pageEntity.index='/>");
                             }
                             if(ajaxkey2 && flag=="back"){
                                 PBL("#after","#attention",2);
@@ -240,9 +287,16 @@
          alert("您还未登陆，请登录后再操作");
          return false;
          }*/
+        var ab = $("#"+projectId).attr("about");
+        var oper;
+        if(ab=='0'){
+            oper ='add';
+        }else{
+            oper ='del';
+        }
         $.ajax({
             type:"get",
-            url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper=add",//设置请求的脚本地址
+            url:"<c:url value='/base/attention.do?projectId='/>"+projectId+"&oper="+oper,//设置请求的脚本地址
             data:"",
             dataType:"json",
             success:function(data){
@@ -256,15 +310,18 @@
                  }
                  */
                 if(data=="false"){
-                    alert("您还未登陆，请登录后再操作");
+                    //alert("您还未登陆，请登录后再操作");
+                    window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
                     return false;
                 }
                 if(data=="true"){
-                    $("#"+projectId).html("取消关注");
+                    $("#"+projectId).html("已关注");
+                    $("#"+projectId).attr("about","1");
                     return true;
                 }
                 if(data=="del"){
                     $("#"+projectId).html("关注");
+                    $("#"+projectId).attr("about","0");
                     return true;
                 }
                 if(data=="error"){
@@ -313,7 +370,7 @@
         isAttention = false;
         $.ajax({
             type:"get",
-            url:"<c:url value='/base/Isattention.do?projectId='/>"+projectId,
+            url:"<c:url value='/base/Isattention/'/>"+projectId,
             data:"",
             async:false,
             dataType:"json",
@@ -358,13 +415,15 @@
 
                         var projectid = data.list[i].project.id;
                         var word ="关注";
+                        var at='0';
                         checkIsAttention(projectid);
                         if(isAttention==true){
                             word = "已关注";
+                            at='1';
                         }
                         var box = $("<li> <div class='suit-list-bt'>" +
-                                "<a href='#'><img src='"+data.list[i].project.picture_url+"'></a>" +
-                                " <a class='gz-fd-icon' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
+                                "<a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"> <img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a>" +
+                                " <a class='gz-fd-icon' about='"+at+"' id='"+projectid+"' href='#' onclick='saveProjectFllow(\""+projectid+"\")'>" +
                                 word +
                                 "</a> </div> </li>");
 
@@ -409,7 +468,7 @@
                         var moods = data.list[i].project.fsAmount;
                         if(moods==null) moods=0;
                         var box = $("<ul class='hot' id='box'>" +
-                                "<li><a href='#'><img src='"+data.list[i].project.picture_url+"'></a> " +
+                                "<li><a href=\"<c:url value='/base/brifProject/'/>"+data.list[i].project.id+"/1\"><img src='http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data.list[i].project.picture_wap_url+"'></a> " +
                                 "<div class='hot-poge'> <span style='margin-right: 1rem'>人气</span> " +
                                 "<span>"+moods+"</span> " +
                                 "</div></li> </ul>");
@@ -502,13 +561,13 @@
                     for(i in data){
                         for(var key in data[i]){
                             var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
-                                    " <a href=\"<c:url value='/base/brifProject.do?projectId='/>"+data[i][key].project.id+"\"><img src=\""+data[i][key].project.picture_url+"\"> " +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
                                     "<div class=\"tp-bg-0\"> " +
                                     "<table> <tr><td>" +
                                     "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
                                     "</div></a> </div> <div class=\"suit-zt--2-text am-u-sm-7 am-u-end\"> " +
                                     "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
-                                    "<a href=\"#\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+                                    "<a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/2\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
 
                         }
 
@@ -543,6 +602,52 @@
         var index=$(this).index();
         $(this).addClass('active').siblings('.item').removeClass('active');
         tabsBd.eq(index).show().siblings('.am-tab-panel').hide();
+
+        $.ajax({
+            type:"get",//设置get请求方式
+            url:"<c:url value='/base/afterAttention.do?conditions=&pageEntity.size=10&pageEntity.index=1'/>",
+            data:"",//设置请求的数据
+            async:false,
+            dataType:"json",
+            success:function(data){
+                var pubu = $("#hadAttentionProjects");
+
+                if(data && data.length>=1){
+                    for(i in data){
+                        for(var key in data[i]){
+                            var box = $(" <li> <div class=\"suit-zt--2-img am-u-sm-5 am-u-end\">" +
+                                    " <a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/1\"><img src=\"http://ec-efeiyi.oss-cn-beijing.aliyuncs.com/"+data[i][key].project.picture_wap_url+"\"> " +
+                                    "<div class=\"tp-bg-0\"> " +
+                                    "<table> <tr><td>" +
+                                    "<div style=\"padding: 0 1rem;\">"+data[i][key].project.name+"</div></td></tr> </table> " +
+                                    "</div></a> </div> <div class=\"suit-zt--2-text am-u-sm-7 am-u-end\"> " +
+                                    "<h4>"+data[i][key].project.name+"详情更新了</h4> <p>" +
+                                    "<a href=\"<c:url value='/base/brifProject/'/>"+data[i][key].project.id+"/2\"> 增加相关作品"+key+"幅</a></p> </div> </li> </ul>");
+
+                        }
+
+                        pubu.append(box);
+
+                    }
+
+                }else{
+                    flag = true;
+                }
+
+            },
+            error:function(){
+
+                alert("出错了，请联系管理员！！！");
+                return false;
+            },
+            complete:function(){
+
+            }
+        })
+
+
+
+
         //自定义加载数据函数
         $("#wikiNav li").each(function(index,element){
 

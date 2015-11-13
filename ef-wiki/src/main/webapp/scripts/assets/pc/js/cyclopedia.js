@@ -68,28 +68,28 @@ $(function(){
         return false;
     })
     //关注
-    /*$('.btn-guan').click(function(){
-        $(this).toggleClass('active');
-        if($(this).find('.gz-icon').is(':visible')){
-            $(this).find('.gz-icon').hide();
-            $(this).find('.icon-txl').hide();
-        }else{
-            $(this).find('.gz-icon').show();
-            $(this).find('.icon-txl').show();
-        }
-        if($(this).hasClass('active')){
-            $(this).find('em').html('已关注')
-        }else{
-            $(this).find('em').html('关注')
-        }
-        return false;
-    })*/
+    //$('.btn-guan').click(function(){
+    //    $(this).toggleClass('active');
+    //    if($(this).find('.gz-icon').is(':visible')){
+    //        $(this).find('.gz-icon').hide();
+    //        $(this).find('.icon-txl').hide();
+    //    }else{
+    //        $(this).find('.gz-icon').show();
+    //        $(this).find('.icon-txl').show();
+    //    }
+    //    if($(this).hasClass('active')){
+    //        $(this).find('em').html('已关注')
+    //    }else{
+    //        $(this).find('em').html('关注')
+    //    }
+    //    return false;
+    //})
     //110209工艺详情页-作品简介
     $('.details .detaile-left .detaile-intro .intro-matter li').click(function(){
         $(this).addClass('active').siblings('li').removeClass('active');
         $('.master-tab').eq($(this).index()).show().siblings('.master-tab').hide();
     })
-//110209工艺详情页-作品简介-2弹出框
+    //110209工艺详情页-作品简介-2弹出框
     $(function(){
         $("#btn-xj").click(function(){
             $("#word").show();
@@ -125,7 +125,7 @@ $(function(){
 //huifu js
 $(function(){
     $('.details .detaile-left .detaile-comment .comment li .status .status-right .hf a').click(function(){
-        $(this).find('.review').slideToggle();
+        $(this).parent().parent().parent().parent().find('.review').slideToggle();
         return false;
     })
 })
@@ -136,14 +136,47 @@ $(function(){
         return false
     })
 })
-
 //gongyi-erjihuifu
 $(function(){
     $('.details .detaile-left .detaile-comment .comment li .status .status-right .ef a').click(function(){
         $(this).parent().parent().parent().parent().find(".review-sr").slideToggle();
         return false;
     })
+
+
+    $('.review-sr .btn').bind('click',function(){
+        $(this).parents().find('.review-sr').slideUp();
+        return false;
+    })
 })
 
 
+//shoucang
+
+/*
+ $(function(){
+ $('.details .detaile-left .detaile-share .thumb-up .thump-collect a').click(function(){
+ $(this).find('.details .detaile-left .detaile-share .thumb-up .thump-collect .s-icon').toggle(function(){
+ $(this).addClass('s-icon1');
+ }),
+ function(){
+ $(this).removeClass('s-icon')
+ }
+ })
+ })
+ */
+
+
+//收藏
+/*var oBiao=$('.details .detaile-left .detaile-share .thumb-up .thump-collect a');
+oBiao.click(function(){
+    var oCllect=$(this).parents('.collect');
+    $(this).find('.s-icon').toggleClass('s-icon1');
+    if($(this).hasClass('s-icon')){
+        $(this).find('em').html('收藏')
+    }else{
+        $(this).find('em').html('已收藏')
+    }
+})*/
+//
 

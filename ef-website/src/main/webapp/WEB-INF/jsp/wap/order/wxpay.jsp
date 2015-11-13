@@ -31,10 +31,20 @@
 //                    alert(res.err_code + res.err.desc + res.err_msg);
                     if (res.err_msg == "get_brand_wcpay_request:ok") {//支付成功
                         //跳转到查看支付是否成功
-                        window.location.href = "<c:url value="/order/myEfeiyi/view/${orderId}"/>";
+                        <c:if test="${not empty order.callback}">
+                        window.location.href = "${order.callback}";
+                        </c:if>
+                        <c:if test="${empty order.callback}">
+                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
+                        </c:if>
                     }
                     else {
-                            window.location.href = "<c:url value="/order/myEfeiyi/view/${orderId}"/>";
+                        <c:if test="${not empty order.callback}">
+                        window.location.href = "${order.callback}";
+                        </c:if>
+                        <c:if test="${empty order.callback}">
+                        window.location.href = "http://i.efeiyi.com/order/myEfeiyi/view/${orderId}";
+                        </c:if>
                     }
                 }
         );

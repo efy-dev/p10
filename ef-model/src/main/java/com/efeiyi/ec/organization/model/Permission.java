@@ -90,8 +90,9 @@ public class Permission implements GrantedAuthority {
         this.role = role;
     }
 
-    @Override
-    @Transient
+//    @Override
+//    @Transient
+    @Column(name = "authority")
     public String getAuthority() {
         return authority;
     }
