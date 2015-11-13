@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product_model")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProductModel implements Serializable {
 
     private String id;
@@ -32,16 +32,6 @@ public class ProductModel implements Serializable {
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private List<ProductPicture> productPictureList;
-    private GroupProduct groupProduct;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "productModel")
-    public GroupProduct getGroupProduct() {
-        return groupProduct;
-    }
-
-    public void setGroupProduct(GroupProduct groupProduct) {
-        this.groupProduct = groupProduct;
-    }
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
