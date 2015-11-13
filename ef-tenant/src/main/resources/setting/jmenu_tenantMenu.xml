@@ -4,11 +4,13 @@
         <jnode id="serviceManager" url="" state="" text_zh_CN="业务管理"><!--系统管理-->
             <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order" state="closed" extend="" access="" text_zh_CN="订单管理">
                 <match url="/basic/xm.do?qm=plistPurchaseOrder_default&amp;view=order"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrder_search"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=order"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=order"/>
             </jnode>
             <jnode id="" url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default&amp;view=delivery" state="closed" extend="" access="" text_zh_CN="发货记录管理">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default&amp;view=delivery"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_search"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderProduct&amp;view=delivery"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderDelivery"/>

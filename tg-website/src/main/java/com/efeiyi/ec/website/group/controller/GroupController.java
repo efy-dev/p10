@@ -81,7 +81,7 @@ public class GroupController {
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://j.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://tuan.efeiyi.com/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         //if(!flag){
             return "redirect:" + url;
         /*}else {
@@ -363,14 +363,15 @@ public class GroupController {
                                     i = i + member1.getSubMemberList().size();
                                 }
                             }
+
                         }
                         if(bigUser.getRedPacket()==null){
-                            bigUser.setRedPacket(new BigDecimal("0"));
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }else {
-                            bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
                         }
                         if (member.getRedPacket()==null){
-                            member.setRedPacket(new BigDecimal("0"));
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }else {
                             member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }
