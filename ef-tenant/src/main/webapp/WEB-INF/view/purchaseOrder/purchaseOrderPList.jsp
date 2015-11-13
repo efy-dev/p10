@@ -70,6 +70,9 @@
                                <c:if test="${purchaseOrder.orderStatus==1}">
                                    等待付款
                                </c:if>
+                                <c:if test="${purchaseOrder.orderStatus==3}">
+                                    等待成团
+                                </c:if>
                                 <c:if test="${purchaseOrder.orderStatus==5}">
                                     立即发货
                                 </c:if>
@@ -217,6 +220,9 @@
         }else if(temp == "等待付款"){
 
             alert("等待付款，无法发货!")
+        }else if(temp == "等待成团"){
+
+            alert("等待成团，无法发货!")
         }else{
             alert("已经发货!")
         }
