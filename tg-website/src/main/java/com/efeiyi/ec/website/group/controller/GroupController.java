@@ -160,11 +160,22 @@ public class GroupController {
                 Date endTime = calendar.getTime();
                 Date dateNow = new Date();
                 long min = endTime.getTime()-dateNow.getTime();
-                long leftMin = min/(1000*60);
-                String left = String.valueOf(leftMin);
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#numberName#="+purchaseOrder.getReceiverName()+"&#productName#="+group.getGroupProduct().getProductModel().getName()+"&#timeLeft#="+left, "1108985", PConst.TIANYI);
+                long leftDay = min/(1000*60*60*24);
+                long leftHour = (min/(1000*60*60))%24;
+                long leftMin = (min/(1000*60))%60;
+                String left = "";
+                if(leftDay>0){
+                    left = leftDay+"天"+leftHour+"时"+leftMin+"分";
+                }else {
+                    if(leftHour>0){
+                        left = leftHour+"时"+leftMin+"分";
+                    }else {
+                        left = leftMin+"分";
+                    }
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size()), "1108985", PConst.TIANYI);
 
-                if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
                     baseManager.saveOrUpdate(Group.class.getName(),group);
                     for(Member member1:group.getMemberList()){
@@ -202,7 +213,7 @@ public class GroupController {
                         purchaseOrder1.setOrderStatus("5");
                         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
                     }
-                }
+                }*/
 
                 model.addAttribute("groupId",group.getId());
                 String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
@@ -292,9 +303,9 @@ public class GroupController {
                 break;
             }
         }
-        if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+        /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
             flag = true;
-        }
+        }*/
         //设置参团与否参数
         String url = "";
         if (flag){
@@ -309,7 +320,8 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.DATE,limintDay);
+        calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
@@ -331,7 +343,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.DATE,limintDay);
+            calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){
@@ -365,7 +378,7 @@ public class GroupController {
                         baseManager.saveOrUpdate(Member.class.getName(),member);
 
                         //发送短信
-                        this.smsCheckManager.send(member.getUser().getUsername(), "#productName#="+group.getGroupProduct().getProductModel().getName()+"&#redPacket#="+group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
+                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#="+group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
 
                     }
 
