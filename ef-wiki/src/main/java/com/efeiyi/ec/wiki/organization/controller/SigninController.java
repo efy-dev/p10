@@ -276,12 +276,12 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/listProduct/{projectId}")
-    public void forwardFind2(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() +"/project/listProduct/"+projectId);
+    public String forwardFind2(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return "redirect:/project/listProduct/"+projectId;
     }
-    @RequestMapping("/showProduct/{productId}")
-    public void forwardFind3(@PathVariable String productId,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId);
+    @RequestMapping("/showProduct/{productId}/{projectId}")
+    public void forwardFind3(@PathVariable String productId,@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() +"/project/showProduct/"+productId+"/"+projectId);
     }
     @RequestMapping("/beforeAttention.do")
     public void forwardFind4(HttpServletRequest request, HttpServletResponse response) throws IOException {

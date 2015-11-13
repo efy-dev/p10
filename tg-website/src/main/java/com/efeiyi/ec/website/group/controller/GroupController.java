@@ -7,10 +7,11 @@ import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.organization.model.MyUser;
 import com.efeiyi.ec.purchase.model.PurchaseOrder;
 import com.efeiyi.ec.purchase.model.PurchaseOrderGroup;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.website.organization.service.SmsCheckManager;
 import com.efeiyi.ec.website.organization.util.AuthorizationUtil;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
+import com.ming800.core.p.PConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,9 @@ import java.util.List;
 public class GroupController {
     @Autowired
     private BaseManager baseManager;
+
+    @Autowired
+    private SmsCheckManager smsCheckManager;
 
     //跳转协议
     @RequestMapping(value = "/group.do")
@@ -147,7 +151,31 @@ public class GroupController {
                 purchaseOrderGroup.setPurchaseOrder(purchaseOrder);
                 baseManager.saveOrUpdate(PurchaseOrderGroup.class.getName(),purchaseOrderGroup);
 
-                if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+                //发送短信
+                Date createTime = group.getCreateDateTime();
+                int limintDay = group.getGroupProduct().getGroupPurchaseTime();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(createTime);
+                calendar.add(Calendar.DATE,limintDay);
+                Date endTime = calendar.getTime();
+                Date dateNow = new Date();
+                long min = endTime.getTime()-dateNow.getTime();
+                long leftDay = min/(1000*60*60*24);
+                long leftHour = (min/(1000*60*60))%24;
+                long leftMin = (min/(1000*60))%60;
+                String left = "";
+                if(leftDay>0){
+                    left = leftDay+"天"+leftHour+"时"+leftMin+"分";
+                }else {
+                    if(leftHour>0){
+                        left = leftHour+"时"+leftMin+"分";
+                    }else {
+                        left = leftMin+"分";
+                    }
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size()), "1108985", PConst.TIANYI);
+
+                /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
                     baseManager.saveOrUpdate(Group.class.getName(),group);
                     for(Member member1:group.getMemberList()){
@@ -162,8 +190,17 @@ public class GroupController {
                                 }
                             }
                         }
-                        bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member1.getRedPacket()==null){
+                            member1.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            member1.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
+
                         baseManager.saveOrUpdate(Member.class.getName(),member1);
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
 
@@ -176,7 +213,7 @@ public class GroupController {
                         purchaseOrder1.setOrderStatus("5");
                         baseManager.saveOrUpdate(PurchaseOrder.class.getName(),purchaseOrder1);
                     }
-                }
+                }*/
 
                 model.addAttribute("groupId",group.getId());
                 String url = "?groupProductId="+groupProductId+"&groupId="+group.getId()+"&memberId="+member.getId();
@@ -266,9 +303,9 @@ public class GroupController {
                 break;
             }
         }
-        if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
+        /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
             flag = true;
-        }
+        }*/
         //设置参团与否参数
         String url = "";
         if (flag){
@@ -283,7 +320,8 @@ public class GroupController {
         int limintDay = group.getGroupProduct().getGroupPurchaseTime();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(createTime);
-        calendar.add(Calendar.DATE,limintDay);
+        //calendar.add(Calendar.DATE,limintDay);
+        calendar.add(Calendar.MINUTE,10);
         Date endTime = calendar.getTime();
 
 
@@ -297,7 +335,7 @@ public class GroupController {
 
     //对所有团进行成团操作并发送红包
     @RequestMapping(value = "/sendRedPacket")
-    public String sendRedPacket(HttpServletRequest request, Model model) throws Exception{
+    public void sendRedPacket(HttpServletRequest request, Model model) throws Exception{
         XQuery xQuery = new XQuery("listGroup_default3",request);
         List<Group> list = baseManager.listObject(xQuery);
         for(Group group:list){
@@ -305,7 +343,8 @@ public class GroupController {
             int limintDay = group.getGroupProduct().getGroupPurchaseTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(createTime);
-            calendar.add(Calendar.DATE,limintDay);
+            //calendar.add(Calendar.DATE,limintDay);
+            calendar.add(Calendar.MINUTE,10);
             Date endTime = calendar.getTime();
             Date date = new Date();
             if(date.after(endTime)){
@@ -325,10 +364,21 @@ public class GroupController {
                                 }
                             }
                         }
-                        bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
-                        member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        if(bigUser.getRedPacket()==null){
+                            bigUser.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                        }
+                        if (member.getRedPacket()==null){
+                            member.setRedPacket(new BigDecimal("0"));
+                        }else {
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
+                        }
                         baseManager.saveOrUpdate(BigUser.class.getName(),bigUser);
                         baseManager.saveOrUpdate(Member.class.getName(),member);
+
+                        //发送短信
+                        this.smsCheckManager.send(member.getUser().getUsername(), "#redPacket#="+group.getGroupProduct().getBonus().multiply(new BigDecimal(i)), "1109007", PConst.TIANYI);
 
                     }
 
@@ -346,7 +396,6 @@ public class GroupController {
                 }
             }
         }
-        return "";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.efeiyi.ec.website.organization.model;
 
 import com.alibaba.fastjson.JSON;
+import com.efeiyi.ec.website.organization.model.SmsProvider;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -65,7 +66,7 @@ public class YunPianSmsProvider implements SmsProvider {
     public SendCode post(String phone, String content, String tpl_id) {
 
         try {
-            content = URLEncoder.encode("#code#=" + content + "&#company#=e飞蚁", ENCODING);
+            content = URLEncoder.encode(content, ENCODING);
 
         } catch (Exception e) {
             e.printStackTrace();
