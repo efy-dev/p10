@@ -1,5 +1,6 @@
 package com.efeiyi.ec.product.model;
 
+import com.efeiyi.ec.group.model.GroupProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,6 +32,17 @@ public class ProductModel implements Serializable {
     private ProductModelDescription productModelDescription;
     private String customProperty;//自定义属性值
     private List<ProductPicture> productPictureList;
+    private GroupProduct groupProduct;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "productModel")
+    public GroupProduct getGroupProduct() {
+        return groupProduct;
+    }
+
+    public void setGroupProduct(GroupProduct groupProduct) {
+        this.groupProduct = groupProduct;
+    }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productModel")
     public List<ProductPicture> getProductPictureList() {
