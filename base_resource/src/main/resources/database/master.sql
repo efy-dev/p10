@@ -670,3 +670,6 @@ ADD COLUMN `sort`  integer(255) NULL AFTER `product_model_id`;
 
 ALTER TABLE `product`
 ADD COLUMN `show_datetime`  datetime NULL AFTER `fans_amount`;
+
+ALTER TABLE `project`
+ADD COLUMN `context`  varchar(255) NULL AFTER `picture_pc_url`;

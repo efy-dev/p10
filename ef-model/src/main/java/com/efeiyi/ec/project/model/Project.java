@@ -50,6 +50,7 @@ public class Project implements Serializable {
     private List<ProjectRecommended> projectRecommendeds;
     private Long fsAmount;
     private List<MasterProject> masterProjects;
+    private String context;
 
 
     @Column(name="picture_wap_url")
@@ -273,6 +274,15 @@ public class Project implements Serializable {
 
     public void setPicture_pc_url(String picture_pc_url) {
         this.picture_pc_url = picture_pc_url;
+    }
+
+    @Column(name = "context")
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
     }
 }
 
