@@ -119,6 +119,7 @@ public class ProductController extends BaseController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String identify = sdf.format(new Date());
         String url = "";
+        Integer sort = 0;
         for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             ProductPicture productPicture = new ProductPicture();
             //上传文件
@@ -135,10 +136,14 @@ public class ProductController extends BaseController {
                 try {
                     aliOssUploadManager.uploadFile(mf, "ec-efeiyi", url);
                     productPicture.setPictureUrl(url);
+                    if(request.getParameter("status").equals("3")){
+                        sort = productManager.productPictureSort(product.getId())+1;
+                       productPicture.setSort(sort);
+                    }
                     productPicture.setStatus(request.getParameter("status"));
                     productPicture.setProduct(product);
                     baseManager.saveOrUpdate(ProductPicture.class.getTypeName(), productPicture);
-                    data = productPicture.getId() + ":" + url + ":" + imgName+hz;
+                    data = productPicture.getId() + ":" + url + ":" + imgName+hz+":"+sort;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -651,5 +656,13 @@ public class ProductController extends BaseController {
             e.printStackTrace();
         }
         return subjectId;
+    }
+
+    @RequestMapping("/changePictureSort.do")
+    @ResponseBody
+    public String changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort ) throws Exception {
+         productManager.changePictureSort(sourceId,sourceSort,targetId,targetSort);
+         return "";
+
     }
 }

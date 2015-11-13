@@ -22,4 +22,8 @@ public interface ProductManager {
     Product setProductStatus(String status,String id);
 
     String outExcel1(String[] homes,String on,String down);
+
+    public  Integer productPictureSort(String productId);
+
+    public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort);
 }

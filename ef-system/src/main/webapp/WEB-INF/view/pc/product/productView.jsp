@@ -410,7 +410,7 @@
                             <c:forEach var="productPicture" items="${object.productPictureList}">
                                 <c:if test="${productPicture.status == '3' || productPicture.status == '9'}">
                                     <li style=""
-                                        name="${productPicture.id}">
+                                        name="${productPicture.id}" sort="${productPicture.sort}">
                                         <dl style="margin-top: 6px;position:relative">
                                             <dt style="width: 35%">
                                                 <a title="点击查看原图" href="javascript:void (0);"
@@ -695,6 +695,7 @@
                 var pictureId = data.split(":")[0].trim();
                 var imgUrl = data.split(":")[1];
                 var imgName = data.split(":")[2];
+                var sort = data.split(":")[3];
                 var url = "http://pro.efeiyi.com/" + imgUrl + "@!product-model";
                 var trueUrl = "http://pro.efeiyi.com/" + imgUrl + "@!water-mask";
                 ///图片信息
@@ -711,7 +712,7 @@
 //                        ' </td>' +
 //                        '</tr>';
                 ///显示图片
-                var img = '<li style="" name="' + pictureId + '">' +
+                var img = '<li style="" sort="'+sort+'" name="' + pictureId + '">' +
                         '<dl style="margin-top: 6px;position:relative" >' +
                         '  <dt  style="width: 35%">' +
                         '    <a title="点击查看原图" href="javascript:void (0);" onclick="tc(\'' + trueUrl + '\')">' +
@@ -855,21 +856,52 @@
      */
     function upImg(obj){
        var li = $(obj).parents("li");
+        var sourceId = $(li).attr("name");
+        var sourceSort = $(li).attr("sort");
         var getup = $(li).prev();
-
+        var targetId = $(getup).attr("name");
+        var targetSort = $(getup).attr("sort");
         if(getup.length==0){
             alert("已经是第一个了!");
         }else{
-            $(getup).before(li);
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/changePictureSort.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {sourceId: sourceId,sourceSort:sourceSort,targetId:targetId,targetSort:targetSort},
+                success: function (data) {
+                    $(getup).before(li);
+                    $(li).attr("sort",targetSort);
+                    $(getup).attr("sort",sourceSort);
+                }
+            });
+
         }
     }
     function downImg(obj){
         var li = $(obj).parents("li");
+        var sourceId = $(li).attr("name");
+        var sourceSort = $(li).attr("sort");
         var getdown = $(li).next();
+        var targetId = $(getdown).attr("name");
+        var targetSort = $(getdown).attr("sort");
         if(getdown.length==0){
             alert("已经是最后一个了!");
         }else{
-         $(getdown).after(li);
+            $.ajax({
+                type: "get",
+                url: '<c:url value="/product/changePictureSort.do"/>',
+                cache: false,
+                dataType: "json",
+                data: {sourceId: sourceId,sourceSort:sourceSort,targetId:targetId,targetSort:targetSort},
+                success: function (data) {
+                    $(getdown).after(li);
+                    $(li).attr("sort",targetSort);
+                    $(getdown).attr("sort",sourceSort)
+                }
+            });
+
         }
 
     }

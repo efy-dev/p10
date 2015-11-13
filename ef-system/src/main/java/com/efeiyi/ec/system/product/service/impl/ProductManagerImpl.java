@@ -469,4 +469,20 @@ public class ProductManagerImpl implements ProductManager{
         return fileName;
 
     }
+
+    @Override
+    public  Integer productPictureSort(String productId){
+        return productDao.getProductPicture(productId);
+    }
+
+    @Override
+    public void changePictureSort(String sourceId,String sourceSort,String targetId,String targetSort){
+          ProductPicture source = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),sourceId);
+          ProductPicture target = (ProductPicture)xdoDao.getObject(ProductPicture.class.getName(),targetId);
+          source.setSort(Integer.parseInt(targetSort));
+          target.setSort(Integer.parseInt(sourceSort ));
+        xdoDao.saveOrUpdateObject(source);
+        xdoDao.saveOrUpdateObject(target);
+
+    }
 }

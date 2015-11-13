@@ -664,3 +664,6 @@ ADD COLUMN `type`  varchar(255) NULL AFTER `name`,
 ADD COLUMN `show`  varchar(255) NULL AFTER `type`,
 ADD COLUMN `template`  varchar(255) NULL AFTER `show`,
 ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;
+
+ALTER TABLE `product_picture`
+ADD COLUMN `sort`  integer(255) NULL AFTER `product_model_id`;
