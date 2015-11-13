@@ -386,7 +386,8 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setStatus("1");
             praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
-            product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
+            //product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
+            product.setFsAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
         }
 
@@ -401,15 +402,16 @@ public class WikiIndexController extends WikibaseController {
                 //baseManager.delete(Praise2Product.class.getName(), praise2Product1.getId());
                   baseManager.remove(Praise2Product.class.getName(), praise2Product1.getId());
             long FsAmount =0;
-            if(product.getFsAmount() == null){
+            if(product.getAmount() == null){
                 FsAmount =0;
-            }else  if(product.getFsAmount() - 1<=0){
+            }else  if(product.getAmount() - 1<=0){
                 FsAmount =0;
-            }else if (product.getFsAmount() - 1>=1){
-                FsAmount =product.getFsAmount() - 1;
+            }else if (product.getAmount() - 1>=1){
+                FsAmount =product.getAmount() - 1;
             }
             //product.setFsAmount(product.getFsAmount() == null ? 0 : product.getFsAmount() - 1);
-            product.setFsAmount(FsAmount);
+            //product.setFsAmount(FsAmount);
+            product.setAmount(FsAmount);
             baseManager.saveOrUpdate(Product.class.getName(), product);
         }
 

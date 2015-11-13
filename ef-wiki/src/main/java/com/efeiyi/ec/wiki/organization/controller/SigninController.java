@@ -276,8 +276,8 @@ public class   SigninController extends BaseController {
     }
 
     @RequestMapping("/listProduct/{projectId}")
-    public void forwardFind2(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() +"/project/listProduct/"+projectId);
+    public String forwardFind2(@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return "redirect:/project/listProduct/"+projectId;
     }
     @RequestMapping("/showProduct/{productId}/{projectId}")
     public void forwardFind3(@PathVariable String productId,@PathVariable String projectId,HttpServletRequest request, HttpServletResponse response) throws IOException {

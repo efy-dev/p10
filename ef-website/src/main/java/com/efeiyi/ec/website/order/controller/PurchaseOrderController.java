@@ -69,6 +69,7 @@ public class PurchaseOrderController extends BaseController {
         productModel.setPrice(groupProduct.getGroupPrice());
         productModel.setAmount(groupProduct.getProductModel().getAmount());
         productModel.setName(groupProduct.getProductModel().getName());
+        productModel.setProductModel_url(groupProduct.getProductModel().getProductModel_url());
         CartProduct cartProduct = new CartProduct();
         String callback = request.getParameter("callback");
         cartProduct.setProductModel(productModel);
