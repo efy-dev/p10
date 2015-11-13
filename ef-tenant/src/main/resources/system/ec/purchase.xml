@@ -13,6 +13,7 @@
                 <field name="orderStatus" label="订单状态" inputType="text">
                     <statusType fieldName="orderStatus">
                         <item label="等待付款" value="1"/>
+                        <item label="等待成团" value="3"/>
                         <item label="等待收货" value="5"/>
                         <item label="已发货" value="7"/>
                         <item label="未评价" value="9"/>
@@ -27,9 +28,10 @@
                     result="/purchaseOrder/purchaseOrderPList" execute="com.efeiyi.ec.system.purchaseOrder.controller.PurchaseOrderHandler">
                     <query name="default" label="默认" type="auto" orderBy="serial:asc">
                         <condition name="id" defaultValue="0" operation="ne" label="订单id" inputType="default"/>
-                        <condition name="tenant.id" defaultValue="${MY_USER}" operation="eq" inputType="default"/>
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                     </query>
                     <query name="search" label="查询" type="auto" orderBy="createDatetime:desc">
+                        <condition name="tenant.id" defaultValue="${MY_TENANT}" operation="eq" inputType="default"/>
                         <condition name="orderStatus"  operation="eq" label="订单状态" inputType="select_status" key="purchaseOrder.orderStatus"/>
                         <condition name="serial"  operation="eq" label="订单号" inputType="text"/>
                         <condition name="createDatetime" operation="ge" label="起始时间" inputType="date" dataType="date"/>
