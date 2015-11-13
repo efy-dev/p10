@@ -667,3 +667,6 @@ ADD COLUMN `create_datetime`  datetime NULL AFTER `template`;
 
 ALTER TABLE `product_picture`
 ADD COLUMN `sort`  integer(255) NULL AFTER `product_model_id`;
+
+ALTER TABLE `product`
+ADD COLUMN `show_datetime`  datetime NULL AFTER `fans_amount`;

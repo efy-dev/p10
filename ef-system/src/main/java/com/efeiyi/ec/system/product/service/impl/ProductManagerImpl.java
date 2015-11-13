@@ -330,8 +330,17 @@ public class ProductManagerImpl implements ProductManager{
 
     @Override
     public Product setProductStatus(String status, String id) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String identify = sdf.format(new Date());
         Product product = (Product)xdoDao.getObject(Product.class.getName(),id);
         product.setStatus(status);
+        if(status.equals("1")){
+            try {
+                product.setShowDateTime(sdf.parse(identify));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         xdoDao.saveOrUpdateObject(product);
         return product;
     }

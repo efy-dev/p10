@@ -42,6 +42,7 @@ public class Product implements Serializable{
     private Long fsAmount;
     private Long amount;
     private  String type;//1：普通2：收藏品
+    private  Date showDateTime;
 
     @Transient
     @JsonIgnore
@@ -246,5 +247,14 @@ public class Product implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Column(name = "show_datetime")
+    public Date getShowDateTime() {
+        return showDateTime;
+    }
+
+    public void setShowDateTime(Date showDateTime) {
+        this.showDateTime = showDateTime;
     }
 }

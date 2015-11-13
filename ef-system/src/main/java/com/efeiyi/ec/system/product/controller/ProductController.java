@@ -590,14 +590,17 @@ public class ProductController extends BaseController {
     @RequestMapping("/setProductStatus.do")
     @ResponseBody
     public String setProductStatus(String id, String status, HttpServletRequest request) {
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         String data = id;
         try {
-           productManager.setProductStatus(status,id);
+          Product product =  productManager.setProductStatus(status, id);
+            if(status.equals("1"))
+            data = sdf.format(product.getShowDateTime());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return data;
     }
 
     @RequestMapping("/updateAmount.do")
