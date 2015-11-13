@@ -365,12 +365,12 @@ public class GroupController {
                             }
                         }
                         if(bigUser.getRedPacket()==null){
-                            bigUser.setRedPacket(new BigDecimal("0"));
+                            bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }else {
-                            bigUser.setRedPacket(bigUser.getRedPacket().multiply(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
+                            bigUser.setRedPacket(bigUser.getRedPacket().add(group.getGroupProduct().getBonus().multiply(new BigDecimal(i))));
                         }
                         if (member.getRedPacket()==null){
-                            member.setRedPacket(new BigDecimal("0"));
+                            member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }else {
                             member.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
                         }
