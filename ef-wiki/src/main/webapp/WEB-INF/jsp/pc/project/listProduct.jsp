@@ -727,7 +727,7 @@
         }
         if(data2=="true" && oper=='up'){
           //$("#em1").html(parseInt($("#em1").text())+1);
-          $("#"+ds).html(parseInt($("#em1").text())+1);
+          $("#"+ds).html(parseInt($("#"+ds).text())+1);
           if($("#good-1").attr("name")=="down"){
             $("#good-1").attr("name","up");
           }else{
@@ -736,7 +736,7 @@
         }
         if(data2=="true" && oper=='down'){
           //$("#em1").html(parseInt($("#em1").text())-1);
-          $("#"+ds).html(parseInt($("#em1").text())+1);
+          $("#"+ds).html(parseInt($("#"+ds).text())+1);
           if($("#good-1").attr("name")=="down"){
             $("#good-1").attr("name","up");
           }else{
