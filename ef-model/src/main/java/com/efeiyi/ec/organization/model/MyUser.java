@@ -260,11 +260,14 @@ public class MyUser implements Serializable, UserDetails ,BaseUser{
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> gList = new ArrayList<GrantedAuthority>();
       if(role!=null) {
-          if (role.getPermissionsList() != null) {
-              for (Permission permission : role.getPermissionsList()) {
-                  gList.add(permission);
-              }
-          }
+          Permission rolePermission = new Permission();//角色即权限
+          rolePermission.setAuthority(role.getName());
+          gList.add(rolePermission);
+//          if (role.getPermissionsList() != null) {
+//              for (Permission permission : role.getPermissionsList()) {
+//                  gList.add(permission);
+//              }
+//          }
       }
         Permission defaultPermission = new Permission();//每个用户都默认带ROLE_USER这个权限
         defaultPermission.setAuthority("ROLE_USER");//普通用户
