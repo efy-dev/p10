@@ -21,6 +21,7 @@
     <http auto-config="true" entry-point-ref="casEntryPoint" use-expressions="true">
         <csrf disabled="true"/>
         <intercept-url pattern="/brifProject/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/listProduct/**" access="isAuthenticated()"/>
         <intercept-url pattern="/wapbrifProject/**" access="isAuthenticated()"/>
         <intercept-url pattern="/brifProject2/**" access="isAuthenticated()"/>
         <intercept-url pattern="/wapShowProduct/**" access="isAuthenticated()"/>

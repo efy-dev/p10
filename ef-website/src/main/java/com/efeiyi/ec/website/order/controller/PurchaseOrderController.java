@@ -69,6 +69,7 @@ public class PurchaseOrderController extends BaseController {
         productModel.setPrice(groupProduct.getGroupPrice());
         productModel.setAmount(groupProduct.getProductModel().getAmount());
         productModel.setName(groupProduct.getProductModel().getName());
+        productModel.setProductModel_url(groupProduct.getProductModel().getProductModel_url());
         CartProduct cartProduct = new CartProduct();
         String callback = request.getParameter("callback");
         cartProduct.setProductModel(productModel);
@@ -200,6 +201,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
         model.addAttribute("cart", cart);
+        request.getSession().removeAttribute("cart");
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 

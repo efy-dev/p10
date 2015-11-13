@@ -47,7 +47,7 @@
 <div class="list-find">
   <!--头部-->
   <div class="list-f-title">
-    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getParameter("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
+    <p><a href="<c:url value='/pc/index.do'/>">工艺</a><i class="fu-icon"></i><a href="<c:url value='/pc/index.do'/>">动态</a><i class="fu-icon"></i><a href="<c:url value='/project/listProduct/'/><%=request.getAttribute("projectId")%>">作品列表</a><i class="fu-icon"></i><span>作品详情</span></p>
   </div>
   <div class="ae">
     <div class="details ae">
@@ -499,7 +499,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+data;
+            window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+${projectId};
           }
           else{
             return false;//取消
@@ -551,7 +551,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/${product.id}'/>";
+            window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/"+${projectId};
           }
           else{
             return false;//取消
@@ -623,7 +623,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+ds;
+            window.location.href ="<c:url value='/showProduct/'/>"+ds+"/"+${projectId};
           }
           else{
             return false;//取消
@@ -679,7 +679,7 @@ function getHfProduct(e){
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/"+${projectId};
           }
           else{
             return false;//取消
@@ -731,7 +731,7 @@ function getHfProduct(e){
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId;
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/"+${projectId};
           }
           else{
             return false;//取消
