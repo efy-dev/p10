@@ -673,3 +673,7 @@ ADD COLUMN `show_datetime`  datetime NULL AFTER `fans_amount`;
 
 ALTER TABLE `project`
 ADD COLUMN `context`  varchar(255) NULL AFTER `picture_pc_url`;
+
+ALTER TABLE `advertisement`
+ADD COLUMN `group_name`  varchar(255) NULL AFTER `price`;
+

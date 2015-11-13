@@ -457,6 +457,15 @@
         <entity name="Advertisement" label="产品列表"
                 basic="simple" others=""
                 model="com.efeiyi.ec.product.model.Advertisement">
+            <fields>
+                <field name="groupName" label="分组" inputType="text">
+                    <statusType fieldName="groupName">
+                        <item label="营销活动" value="yxhd"/>
+                        <item label="热卖商品" value="rmsp"/>
+                        <item label="banner广告" value="bgg"/>
+                    </statusType>
+                </field>
+            </fields>
             <does>
                 <do name="plistAdvertisement" access="" label="产品分页列表"
                     result="/advertisement/advertisementPList" >
@@ -467,6 +476,7 @@
                     <query name="default1" label="快速查询" type="auto" orderBy="adsOrder:desc">
                         <condition name="name"  operation="like" label="广告名称" inputType="text"/>
                         <condition name="status"  operation="ne" label="产品编号" defaultValue="0" inputType="default"/>
+                        <condition name="groupName" operation="eq" label="类别" inputType="select_status" key="Advertisement.groupName"/>
                     </query>
                 </do>
                 <do name="removeAdvertisement" label="删除广告" access="" result="json"/>
