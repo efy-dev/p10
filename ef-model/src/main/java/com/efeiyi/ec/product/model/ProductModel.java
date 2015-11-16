@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "product_model")
-//@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class ProductModel implements Serializable {
 
     private String id;

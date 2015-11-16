@@ -85,7 +85,7 @@
               </c:if>
             </div>
             <div class="center ae">
-              <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.group.groupProduct.id}}"/>" ><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
+              <div class="pic"><a href="<c:url value="/product/groupProduct/${purchaseOrderGroup.group.groupProduct.id}"/>" ><img src="http://pro.efeiyi.com/${purchaseOrderGroup.purchaseOrder.purchaseOrderProductList.get(0).productModel.productModel_url}@!group-mobile-picture-list"></a></div>
               <div class="txt ae"><p>交易金额：${purchaseOrderGroup.purchaseOrder.total}元</p>
                 <c:if test="${purchaseOrderGroup.group.status==1||purchaseOrderGroup.group.status==5}">
                   <p>返回红包：0元</p>

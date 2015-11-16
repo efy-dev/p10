@@ -387,8 +387,9 @@ public class WikiIndexController extends WikibaseController {
             praise2Product.setModerator(null);
             baseManager.saveOrUpdate(Praise2Product.class.getName(), praise2Product);
             //product.setFsAmount(product.getFsAmount() == null ? 1 : product.getFsAmount() + 1);
-            product.setFsAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
+            product.setAmount(product.getAmount() == null ? 1 : product.getAmount() + 1);
             baseManager.saveOrUpdate(Product.class.getName(), product);
+            System.out.println(product);
         }
 
 
