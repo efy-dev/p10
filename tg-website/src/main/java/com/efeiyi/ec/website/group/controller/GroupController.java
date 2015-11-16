@@ -81,7 +81,7 @@ public class GroupController {
 
         String amount = "1";
        // String url = "/group/createGroup?groupProductId="+groupProductId+"&groupId="+groupId+"&memberId="+memberId+"&callback=http://192.168.1.46:8080/group/createGroup";
-        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://j.efeiyi.com/tg-website/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
+        String url = "http://www.efeiyi.com/order/groupBuy/"+groupProductId+"/"+amount+"?callback=http://tuan.efeiyi.com/group/createGroup"+"&groupId="+groupId+"&memberId="+memberId;
         //if(!flag){
             return "redirect:" + url;
         /*}else {
@@ -164,6 +164,7 @@ public class GroupController {
                 long leftHour = (min/(1000*60*60))%24;
                 long leftMin = (min/(1000*60))%60;
                 String left = "";
+                String memberLeft = "";
                 if(leftDay>0){
                     left = leftDay+"天"+leftHour+"时"+leftMin+"分";
                 }else {
@@ -173,7 +174,12 @@ public class GroupController {
                         left = leftMin+"分";
                     }
                 }
-                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size()), "1108985", PConst.TIANYI);
+                if(groupProduct.getMemberAmount()-group.getMemberList().size()>0){
+                    memberLeft = String.valueOf(groupProduct.getMemberAmount()-group.getMemberList().size());
+                }else {
+                    memberLeft = "0";
+                }
+                this.smsCheckManager.send(group.getManUser().getUsername(), "#userName#="+purchaseOrder.getReceiverName()+"&#timeLeft#="+left+"&#memberLeft#="+memberLeft, "1108985", PConst.TIANYI);
 
                 /*if(group.getMemberList().size()==group.getGroupProduct().getMemberAmount()){
                     group.setStatus("3");
@@ -363,6 +369,7 @@ public class GroupController {
                                     i = i + member1.getSubMemberList().size();
                                 }
                             }
+
                         }
                         if(bigUser.getRedPacket()==null){
                             bigUser.setRedPacket(group.getGroupProduct().getBonus().multiply(new BigDecimal(i)));
