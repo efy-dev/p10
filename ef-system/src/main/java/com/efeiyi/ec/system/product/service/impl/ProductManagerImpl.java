@@ -292,6 +292,9 @@ public class ProductManagerImpl implements ProductManager{
 
     @Override
     public Subject saveSubject(Subject subject, String[] flag, String[] spId, String[] subjectPicture) {
+        String style = "<style>\n" +
+                       ".topbar,.header,.footer {display: none}\n" +
+                       "</style>";
         SubjectDescription subjectDescription = subject.getSubjectDescription();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if("".equals(subject.getId())) {
@@ -306,6 +309,9 @@ public class ProductManagerImpl implements ProductManager{
         if("1".equals(subject.getTemplate())){
             subject.setStartDateTime(null);
             subject.setEndDateTime(null);
+
+        }if("2".equals(subject.getTemplate())){
+            subject.getSubjectDescription().setContent(subject.getSubjectDescription().getContent()+style);
         }
         xdoDao.saveOrUpdateObject(subjectDescription);
         subject.setSubjectDescription(subjectDescription);
