@@ -37,6 +37,7 @@
                     <th class="table-set">操作</th>
                     <th class="table-title">标题</th>
                     <th class="table-title">跳转地址</th>
+                    <th class="table-title">类别</th>
                     <th class="table-title">序号</th>
                     <th class="table-title">图片</th>
 
@@ -45,7 +46,7 @@
                 <tbody>
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="banner">
-                    <tr id="${banner.id}" width="30%">
+                    <tr id="${banner.id}" width="25%">
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -61,13 +62,23 @@
                             </div>
                         </td>
                         <td class="am-hide-sm-only" width="15%">${banner.title}</td>
-                        <td class="am-hide-sm-only" width="25%">${banner.directUrl}</td>
-                        <td class="am-hide-sm-only" width="10%">
+                        <td class="am-hide-sm-only" width="25%">
+                             <a href="${banner.directUrl}" target="_blank">${banner.directUrl}</a>
+                        </td>
+                        <td class="am-hide-sm-only" width="15%">
+                            <c:if test="${banner.group == 'ec.home.banner'}">
+                                电商首页
+                            </c:if>
+                            <c:if test="${banner.group!='ec.home.banner'}">
+                               <ming800:status name="groupName" dataType="Banner.group" checkedValue="${banner.group}"  type="normal"/>
+                            </c:if>
+                        </td>
+                        <td class="am-hide-sm-only" width="5%">
                             <a href="#" onclick="toUpdateBannerOrder(this,'<c:url value="/banner/updateBannerOrder.do"/>')" bannerOrder="${banner.bannerOrder}" id="${banner.id}">
                                     ${banner.bannerOrder}
                             </a>
                         </td>
-                        <td class="am-hide-sm-only" width="20%"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
+                        <td class="am-hide-sm-only" width="15%"><img width="35px;" src="<c:url value="http://pro.efeiyi.com/${banner.imageUrl}@!product-model"/>" alt=""/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

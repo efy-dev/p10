@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/9/16 0016.
@@ -19,6 +20,7 @@ public class PurchaseOrderPaymentDetails {
     private Coupon coupon;
     private PurchaseOrderPayment purchaseOrderPayment;
     private String transactionNumber; //交易号
+    private Date createDateTime;//支付时间
 
 
     @Id
@@ -77,5 +79,14 @@ public class PurchaseOrderPaymentDetails {
 
     public void setTransactionNumber(String transactionNumber) {
         this.transactionNumber = transactionNumber;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }

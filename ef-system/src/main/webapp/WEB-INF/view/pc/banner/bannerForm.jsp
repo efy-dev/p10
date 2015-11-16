@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -7,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title></title>
@@ -20,9 +23,8 @@
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
             <form action="<c:url value="/basic/xmm.do"/>" method="post" enctype="multipart/form-data" class="am-form am-form-horizontal">
-
                 <input type="hidden" name="id" value="${object.id}">
-                <input type="hidden" name="groupName" value="${groupName}">
+                  <input type="hidden" name="group" value="${groupName}">
                 <input type="hidden" name="bucket" value="${bucket}">
                 <c:if test="${empty object.bannerOrder}">
                     <input type="hidden" name="bannerOrder" value="1">
@@ -47,6 +49,14 @@
                         <small>输入你要保存的标题</small>
                     </div>
                 </div>
+                <c:if test="${fn:contains(groupName,'ec.home.banner')}">
+                <div class="am-form-group">
+                    <label for="groupName" class="am-u-sm-3 am-form-label">类别 / Category</label>
+                    <div class="am-u-sm-9">
+                        <ming800:status name="groupName" dataType="Banner.group" checkedValue="${object.group}"  type="select"/>
+                    </div>
+                </div>
+                </c:if>
                 <div class="am-form-group">
                     <label for="imageUrl" class="am-u-sm-3 am-form-label">轮播图 / Banner</label>
 

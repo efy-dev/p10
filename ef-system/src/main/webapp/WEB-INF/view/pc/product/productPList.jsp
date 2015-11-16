@@ -36,12 +36,13 @@
                 <thead>
                 <tr>
                     <th class="table-set" width="30%">操作</th>
-                    <th class="table-title" width="25%">产品名称</th>
+                    <th class="table-title" width="20%">产品名称</th>
                     <th class="table-title" width="15%">产品编号</th>
-                    <th class="table-title" width="15%">项目</th>
-                    <th class="table-title" width="15%">状态</th>
-                    <%--<th class="table-title">产品价格</th>--%>
+                    <th class="table-title" width="10%">项目</th>
+                    <th class="table-title" width="10%">状态</th>
 
+                    <%--<th class="table-title">产品价格</th>--%>
+                    <th class="table-title" width="15%">上架时间</th>
 
                 </tr>
                 </thead>
@@ -133,6 +134,12 @@
                             </c:if>
                         </td>
                         <%--<td class="am-hide-sm-only">${product.price}</td>--%>
+                        <td class="am-hide-sm-only">
+                            <c:if test="${not empty product.showDateTime}">
+                                <fmt:formatDate value="${product.showDateTime}" type="both" pattern="YYYY-MM-dd HH:mm:ss"/>
+                            </c:if>
+
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -161,15 +168,17 @@
             success: function (data) {
                 if(status=="1"){
                     $(obj).text("下架");
-                    $(obj).attr("onclick","setStatus(this,'2','"+data+"')");
+                    $(obj).attr("onclick","setStatus(this,'2','"+id+"')");
                     var span =  '<span style="color: red">上架 </span>';
-                    $("#"+data+" td:eq(3)").html(span);
+                    $("#"+id+" td:eq(4)").html(span);
+                    $("#"+id+" td:eq(5)").html(data);
                 }
                if(status=="2"){
                    $(obj).text("上架");
-                   $(obj).attr("onclick","setStatus(this,'1','"+data+"')");
+                   $(obj).attr("onclick","setStatus(this,'1','"+id+"')");
                    var span =  '<span>下架 </span>';
-                   $("#"+data+" td:eq(3)").html(span);
+                   $("#"+id+" td:eq(4)").html(span);
+
                }
             }
         });

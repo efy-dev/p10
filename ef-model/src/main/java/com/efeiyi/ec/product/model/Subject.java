@@ -25,7 +25,8 @@ public class Subject {
     private String template;//1 普通 2 活动
     private String type;//类别
     private String subjectShow;//1 上架 0  下架
-    private Date createDateTime;
+    private Date startDateTime;
+    private Date endDateTime;
 
 
     @Id
@@ -131,15 +132,21 @@ public class Subject {
         this.subjectShow = subjectShow;
     }
 
-
-
-
-    @Column(name = "create_datetime")
-    public Date getCreateDateTime() {
-        return createDateTime;
+    @Column(name = "start_datetime")
+    public Date getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setCreateDateTime(Date createDateTime) {
-        this.createDateTime = createDateTime;
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    @Column(name = "end_datetime")
+    public Date getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
     }
 }

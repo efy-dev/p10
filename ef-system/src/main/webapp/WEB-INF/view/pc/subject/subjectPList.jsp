@@ -63,10 +63,9 @@
                 <tr>
                     <th class="table-set" width="30%">操作</th>
                     <th class="table-title" width=20%">专题名称</th>
-                    <th class="table-title" width="10%">专题类别</th>
-                    <th class="table-title" width="10%">模板</th>
+                    <th class="table-title" width="15%">专题类别</th>
+                    <th class="table-title" width="15%">模板</th>
                     <th class="table-title" width="10%">序号</th>
-                    <th class="table-title" width="15%">创建时间</th>
                     <th class="table-title" width="10%">状态</th>
                     <%--<th class="table-title">产品价格</th>--%>
 
@@ -129,9 +128,9 @@
                         <td class="am-hide-sm-only">
                             ${subject.subjectIndex}
                         </td>
-                        <td class="am-hide-sm-only">
-                            <fmt:formatDate value="${subject.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
-                        </td>
+                        <%--<td class="am-hide-sm-only">--%>
+                            <%--<fmt:formatDate value="${subject.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>--%>
+                        <%--</td>--%>
                         <td class="am-hide-sm-only">
                             <c:if test="${subject.subjectShow == '0'}">
                                    <span>
@@ -207,13 +206,13 @@
                     $(obj).text("下架");
                     $(obj).attr("show","0");
                     var span =  '<span style="color: red">上架 </span>';
-                    $("#"+data+" td:eq(6)").html(span);
+                    $("#"+data+" td:eq(5)").html(span);
                 }
                 if(show =="0"){
                     $(obj).text("上架");
                     $(obj).attr("show","1");
                     var span =  '<span>下架 </span>';
-                    $("#"+data+" td:eq(6)").html(span);
+                    $("#"+data+" td:eq(5)").html(span);
                 }
             }
         });

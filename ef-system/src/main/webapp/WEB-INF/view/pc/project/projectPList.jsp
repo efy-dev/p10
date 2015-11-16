@@ -15,6 +15,7 @@
 <html>
 <head>
     <title></title>
+    <script type="text/javascript" src="<c:url value='/scripts/recommended.js'/>"></script>
 </head>
 <body>
 <div style="text-align: left;margin-left: 10px;">
@@ -26,19 +27,19 @@
 <jsp:include page="/do/generateTabs.do?qm=${requestScope.qm}&conditions=${requestScope.conditions}"/>
 <table class="am-table am-table-bordered am-table-radius am-table-striped">
     <tr style="text-align: left">
-        <td width="15%">操作</td>
+        <td width="30%">操作</td>
         <td width="15%">项目名称</td>
         <td width="15%">项目编号</td>
         <td width="15%">省</td>
         <td width="15%">市</td>
-        <td width="15%">项目图片</td>
+        <td width="10%">项目图片</td>
 
     </tr>
 
 
     <c:forEach items="${requestScope.pageInfo.list}" var="project">
         <tr style="text-align: left" id="${project.id}">
-            <td width="15%">
+            <td width="25%">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs" style="width: 100%;">
                         <button onclick="window.location.href='<c:url
@@ -66,15 +67,53 @@
                             </button>
                         </c:if>
 
+                        <c:if test="${empty project.projectRecommendeds}">
+                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                               onclick="recommended(this,1,'<c:url
+                                       value="/Recommended/deleteObjectRecommended.do"/>')"
+                               href="#" recommend="1" recommendedId="${project.id}" id="">
+                                <span class="am-icon-heart"> 推荐</span>
+                            </a>
+
+
+                        </c:if>
+                        <c:if test="${not empty project.projectRecommendeds}">
+                            <c:forEach var="recommended"
+                                       items="${project.projectRecommendeds}">
+                                <c:if test="${recommended.project.id == project.id}">
+                                    <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                       href="#" onclick="recommended(this,1,'<c:url
+                                            value="/Recommended/deleteObjectRecommended.do"/>')"
+                                       recommendedId="${project.id}" id="${recommended.id}"
+                                       recommend="0">
+                                        <span class="am-icon-heart">取消推荐 </span>
+                                    </a>
+                                </c:if>
+                            </c:forEach>
+
+                        </c:if>
+                                    <span style="display: none;float: left;padding-left: 10px;">
+                                                <input type="text" name="sort" style="width: 35px;" value=""/>
+                                                <a class=" am-btn-primary"
+                                                   onclick="saveRecommended(this,'projectRecommended',1,'<c:url
+                                                           value="/Recommended/saveObjectRecommended.do"/>')"
+                                                   style="padding: 0px 10px 5px 10px"> 保存</a>
+                                       </span>
+
                     </div>
                 </div>
             </td>
             <td width="15%">
-                <c:if test="${project.level == 1}">
+
                     <a href="<c:url value="/basic/xm.do?qm=viewProject&param=project&id=${project.id}"/>">
                             ${project.name}
                     </a>
-                </c:if>
+
+                <c:forEach var="recommended" items="${project.projectRecommendeds}">
+                    <c:if test="${recommended.project.id == project.id}">
+                        <span id="${recommended.id}" style="margin-left: 5px;color: red;"> 推荐</span>
+                    </c:if>
+                </c:forEach>
             </td>
             <td width="15%">
                     ${project.serial}
