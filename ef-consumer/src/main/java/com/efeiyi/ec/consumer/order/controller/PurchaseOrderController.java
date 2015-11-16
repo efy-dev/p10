@@ -3,9 +3,7 @@ package com.efeiyi.ec.consumer.order.controller;
 import com.efeiyi.ec.consumer.organization.util.AuthorizationUtil;
 import com.efeiyi.ec.organization.model.BigUser;
 import com.efeiyi.ec.product.model.ProductModel;
-import com.efeiyi.ec.purchase.model.PurchaseOrder;
-import com.efeiyi.ec.purchase.model.PurchaseOrderDelivery;
-import com.efeiyi.ec.purchase.model.PurchaseOrderProduct;
+import com.efeiyi.ec.purchase.model.*;
 import com.ming800.core.base.service.BaseManager;
 import com.ming800.core.does.model.XQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,8 +108,33 @@ public class PurchaseOrderController {
     @RequestMapping({"/myEfeiyi/view/{orderId}"})
     public String viewPurchaseOrder(Model model, @PathVariable String orderId) {
         List dl = new ArrayList();
+        double couponPrice = 0;
         PurchaseOrder purchaseOrder = (PurchaseOrder) baseManager.getObject(PurchaseOrder.class.getName(), orderId);
         model.addAttribute("order", purchaseOrder);
+        model.addAttribute("coupon","0");
+        if(purchaseOrder.getOrderStatus().equals("1")||purchaseOrder.getOrderStatus().equals("17")){
+            PurchaseOrderPayment purchaseOrderPaymentTemp=purchaseOrder.getPurchaseOrderPaymentList().get(0);
+            for(PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp:purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()){
+                if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")){
+                    couponPrice +=purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
+                    model.addAttribute("coupon","1");
+                }
+            }
+        }else {
+            for(PurchaseOrderPayment purchaseOrderPaymentTemp:purchaseOrder.getPurchaseOrderPaymentList()){
+                if(purchaseOrderPaymentTemp.getStatus().equals("2")){
+                    for(PurchaseOrderPaymentDetails purchaseOrderPaymentDetailsTemp:purchaseOrderPaymentTemp.getPurchaseOrderPaymentDetailsList()){
+                        if(purchaseOrderPaymentDetailsTemp.getPayWay().equals("4")){
+                            couponPrice +=purchaseOrderPaymentDetailsTemp.getCoupon().getCouponBatch().getPrice();
+                            model.addAttribute("coupon","1");
+                        }
+                    }
+
+                }
+
+            }
+        }
+        model.addAttribute("couponPrice",couponPrice);
         String lc = "";
         String serial = "";
         String content = "";
