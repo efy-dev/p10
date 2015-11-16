@@ -17,9 +17,18 @@
                 <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewPaymentOrder=order"/>
                 <match url="/basic/xm.do?qm=viewConsumer&amp;viewPaymentConsumer=payment"/>
                 <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=view"/>
-                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;param=orderPayment"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=orderPayment"/>
                 <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=orderPayment"/>
                 <match url="/basic/xm.do?qm=plistPurchaseOrderPayment_search"/>
+            </jnode>
+            <jnode url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_default" access="admin,manager" text_zh_CN="支付记录详情">
+                <match url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_default"/>
+                <match url="/basic/xm.do?qm=plistPurchaseOrderPaymentDetails_search"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrderPayment&amp;view=purchaseOrderPaymentDetails&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;view=purchaseOrderPaymentDetails&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewPurchaseOrder&amp;viewIdentify=Details"/>
+                <match url= "/basic/xm.do?qm=viewPurchaseOrderProduct&amp;viewIdentify=Details"/>
+                <match url="/basic/xm.do?qm=viewConsumer&amp;view=purchaseOrderPaymentDetails"/>
             </jnode>
             <jnode url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default" access="admin,manager" text_zh_CN="发货记录">
                 <match url="/basic/xm.do?qm=plistPurchaseOrderDelivery_default"/>

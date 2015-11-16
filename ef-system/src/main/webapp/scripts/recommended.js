@@ -44,20 +44,24 @@ function deleteRecommended(obj,id,td,url){
 function saveRecommended(obj,groupName,td,saveUrl){
     var recommendId = $(obj).parent().prev("a").attr("recommendedId");
     var sort = $(obj).prev("input").val();
-    $.ajax({
-        type:"get",
-        url:saveUrl,
-        dataType:"json",
-        data:{groupName:groupName,recommendId:recommendId,status:"1",sort:sort},
-        success:function(data){
-            $(obj).parent("span").css({"display":"none"});
-            $(obj).parent("span").find("input").val("");
-            $(obj).parent().prev("a").attr("recommend","0");
-            $(obj).parent().prev("a").attr("id",data);
-            $(obj).parent().prev("a").find("span").text("取消推荐");
-            $("table tr[id='"+recommendId+"'] td:eq("+td+")").append("<span  id="+data+" style=\"margin-left: 5px;color: red;\" >推荐"+"</span>");
-        }
-    });
+    if(sort==""){
+        alert("请填写序号!");
+    }else {
+        $.ajax({
+            type: "get",
+            url: saveUrl,
+            dataType: "json",
+            data: {groupName: groupName, recommendId: recommendId, status: "1", sort: sort},
+            success: function (data) {
+                $(obj).parent("span").css({"display": "none"});
+                $(obj).parent("span").find("input").val("");
+                $(obj).parent().prev("a").attr("recommend", "0");
+                $(obj).parent().prev("a").attr("id", data);
+                $(obj).parent().prev("a").find("span").text("取消推荐");
+                $("table tr[id='" + recommendId + "'] td:eq(" + td + ")").append("<span  id=" + data + " style=\"margin-left: 5px;color: red;\" >推荐" + "</span>");
+            }
+        });
+    }
 }
 
 
