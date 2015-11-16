@@ -67,6 +67,10 @@ public class ProductDaoHibernate implements ProductDao{
                 "where pp.product_id = :productId "+
                 " and pp.status = '3' OR pp.status = '9' ";
         List<Object> objectList = this.getSession().createSQLQuery(sql).setParameter("productId",productId).list();
-        return (Integer)objectList.get(0);
+        if(objectList.get(0)==null){
+            return 0;
+        }else {
+            return (Integer) objectList.get(0);
+        }
     }
 }
