@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>开团详情</title>
+    <title>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -51,10 +51,10 @@
     <div class="custom">
         <div data-am-widget="slider" class="am-slider am-slider-a1 olli" data-am-slider='{&quot;directionNav&quot;:false}' >
             <ul class="am-slides ">
-                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${groupProduct.productModel.productModel_url}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                 <c:forEach items="${groupProduct.productModel.product.productPictureList}" var="picture">
                     <c:if test="${picture.status=='1'&&picture.productModel.id==groupProduct.productModel.id}">
-                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}${groupProduct.productModel.name}${groupProduct.productModel.product.subName}</span></div></div></li>
+                    <li><div class="colonel-pic ae"><img src="http://pro.efeiyi.com/${picture.pictureUrl}@!tg-efeiyi-view-list"><div class="c-page"><span>${groupProduct.productModel.product.name}[${groupProduct.productModel.name}]</span></div></div></li>
                     </c:if>
                 </c:forEach>
             </ul>
