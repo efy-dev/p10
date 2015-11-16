@@ -122,13 +122,7 @@
                 </div>
 
         </div>
-        <div class="am-form-group">
-            <label for="context" class="am-u-sm-3 am-form-label">项目简介</label>
 
-            <div class="am-u-sm-9">
-                <textarea id="context" name="context" placeholder="限200字以内" rows="3" cols="4">${object.context}</textarea>
-            </div>
-        </div>
         <div class="am-form-group">
             <label name="type" for="description" class="am-u-sm-3 am-form-label">项目描述 <small>*</small></label>
             <div class="am-u-sm-9" style="margin-top: 10px">

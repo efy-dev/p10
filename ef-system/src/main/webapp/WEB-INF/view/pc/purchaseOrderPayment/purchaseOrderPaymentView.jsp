@@ -90,7 +90,7 @@
             <tbody>
             <tr>
                 <td class="am-primary am-u-md-3">订单号</td>
-                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&param=orderPayment&viewIdentify=orderPayment&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
+                <td class="am-u-md-3"><a href="<c:url value='/basic/xm.do?qm=viewPurchaseOrder&viewIdentify=${viewIdentify}&id=${object.purchaseOrder.id}'/>">${object.purchaseOrder.serial}</a></td>
                 <td class="am-primary am-u-md-3">订单总价</td>
                 <td class="am-u-md-3"><fmt:formatNumber type="number" value="${object.purchaseOrder.total}" maxFractionDigits="2" minFractionDigits="2"/></td>
             </tr>

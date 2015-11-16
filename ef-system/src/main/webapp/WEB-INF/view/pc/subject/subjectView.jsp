@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ming800" uri="http://java.ming800.com/taglib" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title></title>
@@ -42,7 +43,7 @@
                 <td class="am-u-md-3">${object.startDateTime}</td>
                 <td class="am-primary am-u-md-3">结束时间</td>
                 <td class="am-u-md-3" colspan="3">
-                        ${object.endDateTime}
+                            ${object.endDateTime}
                 </td>
             </tr>
             </c:if>
