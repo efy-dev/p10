@@ -499,7 +499,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+${projectId};
+            window.location.href ="<c:url value='/showProduct/'/>"+data+"/"+"${projectId}";
           }
           else{
             return false;//取消
@@ -551,7 +551,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/"+${projectId};
+            window.location.href ="<c:url value='/showProduct/${product.id}'/>"+"/${projectId}";
           }
           else{
             return false;//取消
@@ -623,7 +623,7 @@ function getHfProduct(e){
           //alert("您还未登陆，请登录后再操作！！！");
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+ds+"/"+${projectId};
+            window.location.href ="<c:url value='/showProduct/'/>"+ds+"/${projectId}";
           }
           else{
             return false;//取消
@@ -676,10 +676,9 @@ function getHfProduct(e){
       success:function(data2){
         if(data2=="false"){
           //alert("您还未登陆，请登录后再操作！！！");
-          //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/"+${projectId};
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }
           else{
             return false;//取消
@@ -731,7 +730,7 @@ function getHfProduct(e){
           //window.location.href ="http://passport.efeiyi.com/login?service=http://master.efeiyi.com/ef-wiki/sso.do";
           var go = window.confirm("去登陆吧?");
           if(go==true){
-            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/"+${projectId};
+            window.location.href ="<c:url value='/showProduct/'/>"+productId+"/${projectId}";
           }
           else{
             return false;//取消

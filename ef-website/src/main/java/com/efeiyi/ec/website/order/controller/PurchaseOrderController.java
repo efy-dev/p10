@@ -201,6 +201,7 @@ public class PurchaseOrderController extends BaseController {
         model.addAttribute("purchaseOrder", purchaseOrder);
         model.addAttribute("isEasyBuy", false);
         model.addAttribute("cart", cart);
+        request.getSession().removeAttribute("cart");
         return "/purchaseOrder/purchaseOrderConfirm";
     }
 
