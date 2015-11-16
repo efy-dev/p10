@@ -46,6 +46,7 @@
                 <tr>
                     <th class="table-set" >操作</th>
                     <th class="table-title">广告名称</th>
+                    <th class="table-title">类别</th>
                     <th class="table-title">广告链接</th>
                     <th class="table-title">广告图片</th>
                     <th class="table-title">价格</th>
@@ -57,7 +58,7 @@
 
                 <c:forEach items="${requestScope.pageInfo.list}" var="ads">
                     <tr id="${ads.id}">
-                        <td width="16%">
+                        <td width="15%">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
 
@@ -71,18 +72,21 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="am-hide-sm-only" width="16%">${ads.name}</td>
-                        <td class="am-hide-sm-only" width="16%">
+                        <td class="am-hide-sm-only" width="20%">${ads.name}</td>
+                        <td class="am-hide-sm-only" width="15%">
+                            <ming800:status name="groupName" dataType="Advertisement.groupName" checkedValue="${ads.groupName}" type="normal"/>
+                        </td>
+                        <td class="am-hide-sm-only" width="15%">
                            <a target="_blank" href="${ads.redirect}">${ads.redirect}</a>
                         </td>
-                        <td class="am-hide-sm-only" width="16%">
+                        <td class="am-hide-sm-only" width="15%">
                             <img width="35px;" src="<c:url value="http://pro.efeiyi.com/${ads.img}@!product-model"/>"
                                  alt=""/>
                         </td>
-                        <td class="am-hide-sm-only" width="16%">
+                        <td class="am-hide-sm-only" width="10%">
                            ${ads.price}
                         </td>
-                        <td class="am-hide-sm-only" width="16%">${ads.adsOrder}</td>
+                        <td class="am-hide-sm-only" width="10%">${ads.adsOrder}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

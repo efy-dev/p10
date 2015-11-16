@@ -127,6 +127,60 @@ public class HomeController {
 
         return "/home";
     }
+    @RequestMapping({"/home1.do"})
+    public String home1(HttpServletRequest request, Model model) throws Exception {
+
+        //判断是否有需要重定向的页面
+        String redirectUrl = request.getParameter("redirect");
+        if (redirectUrl != null) {
+            return "redirect:" + redirectUrl;
+        }
+        List<Object> categoryList = objectRecommendedManager.getRecommendedList("categoryRecommended");
+        HashMap<String, List> map = new HashMap<>();
+        HashMap<String, List> projectMap = new HashMap<>();
+        for (Object object : categoryList) {
+            XQuery xQuery = new XQuery("listProjectCategoryProductModel_default", request);
+            xQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            map.put(((ProjectCategory) object).getId(), baseManager.listObject(xQuery));
+            //首页
+            XQuery projectQuery = new XQuery("listProject_default", request);
+            projectQuery.put("projectCategory_id", ((ProjectCategory) object).getId());
+            projectQuery.setSortHql("");
+            projectQuery.updateHql();
+            projectMap.put(((ProjectCategory) object).getId(), baseManager.listObject(projectQuery));
+        }
+        model.addAttribute("recommendMap", map);
+        model.addAttribute("categoryList", categoryList);
+
+        //首页轮播图
+        List<Object> bannerList = bannerManager.getBannerList("ec.home.banner");
+        model.addAttribute("bannerList", bannerList);
+
+        //传承人
+        List<Object> masterList = objectRecommendedManager.getRecommendedList("ec.masterRecommended");
+        model.addAttribute("masterList", masterList);
+        model.addAttribute("sign", "000");
+
+        //广告区域 营销活动 热卖商品 广告区
+        XQuery subjectQuery = new XQuery("listAdvertisement_default", request);
+        XQuery subjectQuery2 = new XQuery("listAdvertisement_default2", request);
+        XQuery subjectQuery3 = new XQuery("listAdvertisement_default3", request);
+        List<Object> subjectList = baseManager.listObject(subjectQuery);
+        List<Object> subjectList2 = baseManager.listObject(subjectQuery2);
+        List<Object> subjectList3 = baseManager.listObject(subjectQuery3);
+        //热卖商品
+        if (subjectList != null && subjectList.size() > 0) {
+            model.addAttribute("advertisement", subjectList);
+        }
+        if (subjectList2 != null && subjectList2.size() > 0) {
+            model.addAttribute("advertisement2", subjectList2);
+        }
+        if (subjectList3 != null && subjectList3.size() > 0) {
+            model.addAttribute("advertisement3", subjectList3);
+        }
+        model.addAttribute("projectMap", projectMap);
+        return "/home";
+    }
 
     @RequestMapping({"/productCategory.do"})
     public String listProductCategory(HttpServletRequest request, Model model) throws Exception {

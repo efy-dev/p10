@@ -1,5 +1,6 @@
 package com.efeiyi.ec.system.product.dao.hibernate;
 
+import com.efeiyi.ec.product.model.ProductPicture;
 import com.efeiyi.ec.system.product.dao.ProductDao;
 import com.ming800.core.base.dao.XdoDao;
 import org.hibernate.Session;
@@ -57,5 +58,15 @@ public class ProductDaoHibernate implements ProductDao{
                 "order by p.serial";
        List objectList = this.getSession().createSQLQuery(sql).list();
         return  objectList;
+    }
+
+    @Override
+    public Integer getProductPicture(String productId) {
+        String sql = "select MAX(sort)  " +
+                "from product_picture pp " +
+                "where pp.product_id = :productId "+
+                " and pp.status = '3' OR pp.status = '9' ";
+        List<Object> objectList = this.getSession().createSQLQuery(sql).setParameter("productId",productId).list();
+        return (Integer)objectList.get(0);
     }
 }

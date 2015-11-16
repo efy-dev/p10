@@ -121,12 +121,20 @@
             <ul class="rf">
               <li>
                 <div class="text">
-                  <h4>${msg.master.fullName}</h4>
+                    <h4>
+                        <a href="<c:url value='/masterMessage/introView/${object.id}'/>">
+                            ${msg.master.fullName}
+                        </a>
+                    </h4>
                   <p>${msg.master.projectName}</p>
                   <p><span><ming800:status name='level' dataType='Tenant.level' checkedValue='${object.level}' type='normal'/>传承人</span></p>
                   <a class="btn-guan" onclick="followMaster(this,'${msg.master.id}');"><i class="gz-icon"></i><em>关注</em></a>
                 </div>
-                <div class="img"><img src="http://tenant.efeiyi.com/${msg.master.favicon}@!master-favicon-view"></div>
+                <div class="img">
+                    <a href="<c:url value='/masterMessage/introView/${object.id}'/>">
+                        <img src="http://tenant.efeiyi.com/${msg.master.favicon}@!master-favicon-view">
+                    </a>
+                </div>
               </li>
             </ul>
           </div>
@@ -176,207 +184,231 @@
   $(document).ready(function(){
       getData();
   })
-  function getData(){
-    var msgId = "${msg.id}";
-    $.ajax({
-      type: "get",//设置get请求方式
-      url: "<c:url value='/masterMessage/getComment.do'/>",//设置请求的脚本地址
-      data: "msgId="+msgId,//设置请求的数据
-      async: false,
-      dataType: "json",//设置请求返回的数据格式
-      success: function (data) {
-        var box = $("#pubu");
-        if(data != null && data.length > 0){
-          for(var i= 0;i<data.length;i++){
-            var userName = data[i].user.name2;
-            if(userName==null){
-              userName ="匿名用户";
-            }
-            var cTime = transdate(data[i].createDateTime);
-            var sub = "<li class=\"ae\" id=\"father"+data[i].id+"\">"+
-                    "                                <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/"+data[i].favicon+"\"></a></div>"+
-                    "                                <div class=\"text\"><span><a href=\"#\">"+userName+" ：</a></span><span>"+data[i].content+"</span></div>"+
-                    "                                <div class=\"status ae\">"+
-                    "                                    <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                    "                                    <div class=\"status-right\">"+
-                    "                                        <div class=\"hf\"><a href=\"javascript:void(0);\">回复</a></div>"+
-                    "                                        <div class=\"zan\">"+
-                    "                                            <a href=\"#\"><i class=\"icon\"></i> <em>"+data[i].amount+"</em></a>"+
-                    "                                        </div>"+
-                    "                                    </div>"+
-                    "                                </div>"+
-                    "                                <div class=\"review ae\" style=\"display: none;\">"+
-                    "                                    <textarea></textarea>"+
-                    "                                    <div class=\"btn1 ae\">"+
-                    "                                        <input type=\"button\" onclick=\"subComment(this,'"+data[i].id+"');\" class=\"btn\" value=\"评论\">"+
-                    "                                    </div>"+
-                    "                                </div>"+
-                    "                            </li>";
-            getSubCommentByFatherId(data[i].id,userName,true);
-            box.append(sub);
-          }
-        }
-      }
-    })
-  }
-  function getSubCommentByFatherId(fatherId,name,flag){
-    $.ajax({
-      type: "get",//设置get请求方式
-      url: "<c:url value='/masterMessage/getSubCommentList.do'/>",//设置请求的脚本地址
-      data: "fatherId=" + fatherId,//设置请求的数据
-      async: true,
-      dataType: "json",//设置请求返回的数据格式
-      success: function (data) {
-          console.log(data);
-        if(data && data != null){
-          for(var i = 0;i<data.length;i++){
-            var box = $("#father"+fatherId);
-            var userName = data[i].user.name2;
-            if(userName==null){
-              userName ="匿名用户";
-            }
-            var cTime = transdate(data[i].createDateTime);
-            if(i == 0 && flag == true){
-              var sub ="<ul class=\"add-obtain\" id=\""+fatherId+"\">"+
-                      "                                    <li style=\"margin: 0;border-bottom: 0;\" class=\"obtain\">"+
-                      "                                        <div class=\"ae\">"+
-                      "                                            <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"../shop2015/upload/yonghm.jpg\"></a></div>"+
-                      "                                            <div class=\"text\"><span><a href=\"#\">"+userName+" 回复 "+name+"：</a></span><span>"+data[i].content+"</span></div>"+
-                      "                                            <div class=\"status ae\">"+
-                      "                                                <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                      "                                                <div class=\"status-right\">"+
-                      "                                                    <div class=\"ef\"><a onclick=\"getHfProduct2(this)\">回复</a></div>"+
-                      "                                                    <div class=\"zan\">"+
-                      "                                                        <a href=\"#\"><i class=\"icon\"></i> <em>"+data[i].amount+"</em></a>"+
-                      "                                                    </div>"+
-                      "                                                </div>"+
-                      "                                            </div>"+
-                      "                                            <div class=\"review-sr ae\" style=\"display: none;\">"+
-                      "                                                <textarea></textarea>"+
-                      "                                                <div class=\"btn1 ae\">"+
-                      "                                                    <input type=\"button\" onclick=\"subComment(this,'"+data[i].id+"');\" class=\"btn\" value=\"评论\">"+
-                      "                                                </div>"+
-                      "                                            </div>"+
-                      "                                        </div>"+
-                      "                                    </li>"+
-                      "                                </ul>";
-              box.append(sub);
-            }else{
-              var sub = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data[i].id+"\" class=\"obtain\">"+
-                      "                                        <div class=\"ae\">"+
-                      "                                            <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"../shop2015/upload/yonghm.jpg\"></a></div>"+
-                      "                                            <div class=\"text\"><span><a href=\"#\">"+userName+" 回复 "+name+"：</a></span><span>"+data[i].content+"</span></div>"+
-                      "                                            <div class=\"status ae\">"+
-                      "                                                <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                      "                                                <div class=\"status-right\">"+
-                      "                                                    <div class=\"ef\"><a onclick=\"getHfProduct2(this)\">回复</a></div>"+
-                      "                                                    <div class=\"zan\">"+
-                      "                                                        <a href=\"#\"><i class=\"icon\"></i> <em>"+data[i].amount+"</em></a>"+
-                      "                                                    </div>"+
-                      "                                                </div>"+
-                      "                                            </div>"+
-                      "                                            <div class=\"review-sr ae\" style=\"display: none;\">"+
-                      "                                                <textarea></textarea>"+
-                      "                                                <div class=\"btn1 ae\">"+
-                      "                                                    <input type=\"button\" onclick=\"subComment(this,'"+data[i].id+"');\" class=\"btn\" value=\"评论\">"+
-                      "                                                </div>"+
-                      "                                            </div>"+
-                      "                                        </div>"+
-                      "                                    </li>";
-              $("#"+fatherId).after(sub);
-            }
-            getSubCommentByFatherId(data[i].id,userName,false);
-          }
-        }
-      }
-    })
-  }
-  function subComment(o,commId){
-      var content = $(o).parent().prev().val();
+  function getData() {
+      var workId = "${msg.id}";
       $.ajax({
-          type: "post",//设置get请求方式
-          url: "<c:url value='/masterMessage/subComment.do'/>",//设置请求的脚本地址
-          data: "content="+content+ "&commId=" + commId,//设置请求的数据
-          async: true,
+          type: "get",//设置get请求方式
+          url: "<c:url value='/masterMessage/getMsgComment.do'/>",//设置请求的脚本地址
+          data: "workId=" + workId,//设置请求的数据
+          async: false,
           dataType: "json",//设置请求返回的数据格式
           success: function (data) {
-              var box = $(o).parent().parent().parent().parent().parent();
-              if(data != "noRole"){
-                  var userName = data.user.name2;
-                  if(userName==null){
-                      userName ="匿名用户";
+              var box = $("#pubu");
+              if (data != null && data.length > 0) {
+                  for (var i = 0; i < data.length; i++) {
+                      var userName = data[i].user.name2;
+                      if (userName == null) {
+                          userName = "匿名用户";
+                      }
+                      var cTime = transdate(data[i].createDateTime);
+                      var sub = "<li class=\"ae\" id=\"father" + data[i].id + "\">" +
+                              "                                <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/" + data.favicon + "@!master-favicon-view\"></a></div>" +
+                              "                                <div class=\"text\"><span><a href=\"#\">" + userName + " ：</a></span><span>" + data[i].content + "</span></div>" +
+                              "                                <div class=\"status ae\">" +
+                              "                                    <div class=\"status-left\"><span>" + cTime + "</span></div>" +
+                              "                                    <div class=\"status-right\">" +
+                              "                                        <div class=\"hf\"><a onclick=\"getHfProduct2(this)\"\">回复</a></div>" +
+                              "                                        <div class=\"zan\">" +
+                              "                                            <a onclick=\"praiseWorkComment(this,'" + data[i].id + "','" + workId + "');\"><i class=\"icon\"></i> <em>" + data[i].amount + "</em></a>" +
+                              "                                        </div>" +
+                              "                                    </div>" +
+                              "                                </div>" +
+                              "                                <div class=\"review-sr ae\" style=\"display: none;\">" +
+                              "                                    <textarea></textarea>" +
+                              "                                    <div class=\"btn1 ae\">" +
+                              "                                        <input type=\"button\" onclick=\"subComment(this,'" + data[i].id + "','" + workId + "','0');\" class=\"btn\" value=\"评论\">" +
+                              "                                    </div>" +
+                              "                                </div>" +
+                              "                            </li>";
+                      getSubCommentByFatherId(data[i].id, userName, data[i].id);
+                      box.append(sub);
                   }
               }
-              var cTime = transdate(data.createDateTime);
-              if(data =="noRole"){
-                  alert("您还没有登录,请登录后操作!");
-              }else{
-                  var sub = "<li class=\"ae\">"+
-                          "<div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"../shop2015/upload/yonghm.jpg\"></a></div>"+
-                          "   <div class=\"text\"><span><a href=\"#\">"+userName+" ：</a></span><span>"+content+"</span></div>"+
-                          "     <div class=\"status ae\">"+
-                          "       <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                          "          <div class=\"status-right\">"+
-                          "          <div class=\"\"><a>回复</a></div>"+
-                          "          <div class=\"zan\">"+
-                          "             <a href=\"#\"><i class=\"icon\"></i> <em>"+data.amount+"</em></a>"+
-                          "          </div>"+
-                          "         </div>"+
-                          "       </div>"+
-                          "     <div class=\"review ae\" style=\"display: none;\">"+
-                          "     <textarea></textarea>"+
-                          "     <div class=\"btn1 ae\">"+
-                          "        <input type=\"button\" class=\"btn\" value=\"评论\">"+
-                          "     </div>"+
-                          "  </div>"+
-                          "</li>";
-                  box.after(sub);
-              }
-              return false;
           }
       })
   }
-  function subMainComment(o,msgId){
-      var content = $(o).parent().prev().val();
+  function getSubCommentByFatherId(fatherId, name, parentId) {
+      var sfatherId = fatherId;
+      var sparentId = parentId;
+      var workId = "${msg.id}";
       $.ajax({
-          type: "post",//设置get请求方式
-          url: "<c:url value='/masterMessage/subMainComment.do'/>",//设置请求的脚本地址
-          data: "content=" + content + "&msgId=" + msgId,//设置请求的数据
+          type: "get",//设置get请求方式
+          url: "<c:url value='/masterMessage/getSubCommentList.do?fatherId='/>"+ sfatherId,//设置请求的脚本地址
+          data: "",//设置请求的数据
           async: true,
           dataType: "json",//设置请求返回的数据格式
           success: function (data) {
-              var box = $(o).parent().parent().prev();
-              if(data != "noRole"){
+              console.log(fatherId+"---"+parentId);
+              if (data && data != null) {
+                  for (var i = 0; i < data.length; i++) {
+                      var box ;
+                      if(sparentId == sfatherId){
+                          box = $("#father"+sfatherId);
+                      }
+                      var userName = data[i].user.name2;
+                      if (userName == null) {
+                          userName = "匿名用户";
+                      }
+                      var cTime = transdate(data[i].createDateTime);
+                      var sub =$( "<li style=\"margin: 0;border-bottom: 0;\" id=\"" + data[i].id + "\" class=\"obtain\">" +
+                              "                                        <div class=\"ae\">" +
+                              "                                            <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/" + data.favicon + "@!master-favicon-view\"></a></div>" +
+                              "                                            <div class=\"text\"><span><a href=\"#\">" + userName + " 回复 " + name + "：</a></span><span>" + data[i].content + "</span></div>" +
+                              "                                            <div class=\"status ae\">" +
+                              "                                                <div class=\"status-left\"><span>" + cTime + "</span></div>" +
+                              "                                                <div class=\"status-right\">" +
+                              "                                                    <div class=\"hf\"><a onclick=\"getHfProduct2(this)\">回复</a></div>" +
+                              "                                                    <div class=\"zan\">" +
+                              "                                                        <a onclick=\"praiseWorkComment(this,'" + data[i].id + "','" + workId + "');\"><i class=\"icon\"></i> <em>" + data[i].amount + "</em></a>" +
+                              "                                                    </div>" +
+                              "                                                </div>" +
+                              "                                            </div>" +
+                              "                                            <div class=\"review-sr ae\" style=\"display: none;\">" +
+                              "                                                <textarea></textarea>" +
+                              "                                                <div class=\"btn1 ae\">" +
+                              "                                                    <input type=\"button\" onclick=\"subComment(this,'" + data[i].id + "','" + workId + "','"+sfatherId+"','"+userName+"');\" class=\"btn\" value=\"评论\">" +
+                              "                                                </div>" +
+                              "                                            </div>" +
+                              "                                        </div>" +
+                              "                                    </li>");
+                      if(sfatherId == sparentId){
+                          box.append(sub);
+                      }else{
+                          $("ul li[id='"+sfatherId+"']").after(sub);
+                      }
+                      var subId = data[i].id;
+                      getSubCommentByFatherId(subId, userName, sparentId);
+                  }
+              }
+          }
+      })
+  }
+  function subComment(o, fatherId, workId ,parentId) {
+      var content = $(o).parent().prev().val();
+      $.ajax({
+          type: "post",//设置get请求方式
+          url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
+          data: "content=" + content + "&fatherId=" + fatherId + "&workId=" + workId,//设置请求的数据
+          async: true,
+          dataType: "json",//设置请求返回的数据格式
+          success: function (data) {
+              var box;
+              if(parentId == '0'){
+                  box = $(o).parent().parent().parent();
+              }else{
+                  box = $(o).parent().parent().parent().parent().parent();
+              }
+//                var box = $(o).parent().parent().parent().parent().parent();
+              if (data != "noRole") {
                   var userName = data.user.name2;
-                  if(userName==null){
-                      userName ="匿名用户";
+                  if (userName == null) {
+                      userName = "匿名用户";
                   }
               }
               var cTime = transdate(data.createDateTime);
-              var sub;
-              if(data =="noRole"){
+              if (data == "noRole") {
                   alert("您还没有登录,请登录后操作!");
-              }else{
-                  sub += "<li class=\"ae\">"+
-                          "<div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"../shop2015/upload/yonghm.jpg\"></a></div>"+
-                          "   <div class=\"text\"><span><a href=\"#\">"+userName+" ：</a></span><span>"+content+"</span></div>"+
-                          "     <div class=\"status ae\">"+
-                          "       <div class=\"status-left\"><span>"+cTime+"</span></div>"+
-                          "          <div class=\"status-right\">"+
-                          "          <div class=\"\"><a>回复</a></div>"+
-                          "          <div class=\"zan\">"+
-                          "             <a href=\"#\"><i class=\"icon\"></i> <em>"+data.amount+"</em></a>"+
-                          "          </div>"+
-                          "         </div>"+
-                          "       </div>"+
-                          "     <div class=\"review ae\" style=\"display: none;\">"+
-                          "     <textarea></textarea>"+
-                          "     <div class=\"btn1 ae\">"+
-                          "        <input type=\"button\" class=\"btn\" value=\"评论\">"+
-                          "     </div>"+
-                          "  </div>"+
+              } else {
+                  var sub =   "<li style=\"margin: 0;border-bottom: 0;\" id=\"" + data.id + "\" class=\"obtain\">" +
+                          " <div class=\"ae\">" +
+                          "<div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"http://tenant.efeiyi.com/" + data.favicon + "@!master-favicon-view\"></a></div>" +
+                          "   <div class=\"text\"><span><a href=\"#\">" + userName + " ：</a></span><span>" + content + "</span></div>" +
+                          "     <div class=\"status ae\">" +
+                          "       <div class=\"status-left\"><span>" + cTime + "</span></div>" +
+                          "          <div class=\"status-right\">" +
+                          "          <div class=\"hf\"><a onclick=\"getHfProduct2(this)\">回复</a></div>" +
+                          "          <div class=\"zan\">" +
+                          "             <a onclick=\"praiseWorkComment(this,'" + data.id + "','" + workId + "');\"><i class=\"icon\"></i> <em>" + data.amount + "</em></a>" +
+                          "          </div>" +
+                          "         </div>" +
+                          "       </div>" +
+                          "     <div class=\"review-sr ae\" style=\"display: none;\">" +
+                          "     <textarea></textarea>" +
+                          "     <div class=\"btn1 ae\">" +
+                          "        <input type=\"button\" onclick=\"subComment(this,'" + data.id + "','" + workId + "' , '"+parentId+"','"+userName+"');\" class=\"btn\" value=\"评论\">" +
+                          "     </div>" +
+                          "  </div>" +
+                          "</div>" +
                           "</li>";
                   box.append(sub);
+              }
+          },complete:function(){
+              $(o).parent().prev().val("");
+              $(o).parent().parent().slideUp();
+          }
+      })
+  }
+  function subMainComment(o, msgId, parentId , name) {
+      var content = $(o).parent().prev().val();
+      $.ajax({
+          type: "post",//设置get请求方式
+          url: "<c:url value='/masterMessage/commentMsg.do'/>",//设置请求的脚本地址
+          data: "content=" + content + "&fatherId=" + parentId + "&workId=" + msgId,//设置请求的数据
+          async: false,
+          dataType: "json",//设置请求返回的数据格式
+          success: function (data) {
+//                var box = $(o).parent().parent().prev();
+              var box = $("#pubu");
+              var cTime = transdate(data.createDateTime);
+              if (data == "noRole") {
+                  alert("您还没有登录,请登录后操作!");
+              } else {
+                  var userName = data.user.name2;
+                  if (userName == null) {
+                      userName = "匿名用户";
+                  }
+                  $(o).parent().prev().empty();
+                  var sub = "<li style=\"margin: 0;border-bottom: 0;\" id=\"" + data.id + "\" class=\"obtain\">" +
+                          "                                        <div class=\"ae\">" +
+                          "<div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\"" + data.favicon + "\"></a></div>" +
+                          "   <div class=\"text\"><span><a href=\"#\">" + userName + " ：</a></span><span>" + content + "</span></div>" +
+                          "     <div class=\"status ae\">" +
+                          "       <div class=\"status-left\"><span>" + cTime + "</span></div>" +
+                          "          <div class=\"status-right\">" +
+                          "              <div class=\"hf\"><a onclick=\"getHfProduct2(this)\">回复</a></div>" +
+                          "          <div class=\"zan\">" +
+                          "              <a onclick=\"praiseWorkComment(this,'" + data.id + "','" + msgId + "');\"><i class=\"icon\"></i> <em>" + data.amount + "</em></a>" +
+                          "          </div>" +
+                          "          </div>" +
+                          "     </div>" +
+                          "     <div class=\"review-sr ae\" style=\"display: none;\">" +
+                          "     <textarea></textarea>" +
+                          "     <div class=\"btn1 ae\">" +
+                          "        <input type=\"button\" onclick=\"subComment(this,'" + data.id + "','" + msgId + "','"+parentId+"' , '"+userName+"');\" class=\"btn\" value=\"评论\">" +
+                          "     </div>" +
+                          "  </div>" +
+                          "  </div>" +
+                          "</li>";
+                  box.append(sub);
+              }
+          },complete:function(){
+              $(o).parent().prev().val("");
+          }
+      })
+  }
+  function praiseWorkComment(o, commentId, workId) {
+      $.ajax({
+          type: "post",//设置get请求方式
+          url: "<c:url value='/masterMessage/praiseMsgComment.do'/>",//设置请求的脚本地址
+          data: "workId=" + workId + "&commentId=" + commentId,//设置请求的数据
+          async: true,
+          dataType: "json",//设置请求返回的数据格式
+          success: function (data) {
+              var num = $(o).find("em").html();
+              if (data == "noRole") {
+                  alert("您还未登录,请登录后操作!");
+              } else if (data == "del") {
+                  if (num != "0") {
+                      $(o).find("em").html(parseInt(num) - 1);
+                  } else {
+                      $(o).find("em").html(0);
+                  }
+              } else if (data == "add") {
+                  if (num != "0") {
+                      $(o).find("em").html(parseInt(num) + 1);
+                  } else {
+                      $(o).find("em").html(1);
+                  }
               }
           }
       })
@@ -420,7 +452,8 @@
     })
   }
   function getHfProduct2(e){
-    $(e).parent().parent().parent().parent().find(".review-sr").slideToggle();
+      $(e).parent().parent().parent().next().slideToggle();
+    //$(e).parent().parent().parent().parent().find(".review-sr").slideToggle();
     return false;
   }
 </script>
