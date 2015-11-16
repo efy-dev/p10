@@ -27,7 +27,7 @@ public class Subject {
     private String subjectShow;//1 上架 0  下架
     private Date startDateTime;
     private Date endDateTime;
-
+    private Date createDateTime;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -148,5 +148,14 @@ public class Subject {
 
     public void setEndDateTime(Date endDateTime) {
         this.endDateTime = endDateTime;
+    }
+
+    @Column(name = "create_datetime")
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }
