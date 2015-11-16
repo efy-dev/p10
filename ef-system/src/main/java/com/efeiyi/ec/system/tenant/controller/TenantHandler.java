@@ -32,12 +32,12 @@ public class TenantHandler implements MultipartHandler {
         HashMap<String, Object> paramMap = xSaveOrUpdate.getParamMap();
 
         if (!multipartRequest.getFile("logo").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "ec-efeiyi", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
-            paramMap.put("logoUrl", "logo/" + multipartRequest.getFile("logo").getOriginalFilename());
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("logo"), "ec-efeiyi", "logo/" + identify+multipartRequest.getFile("logo").getOriginalFilename());
+            paramMap.put("logoUrl", "logo/" +identify+ multipartRequest.getFile("logo").getOriginalFilename());
         }
         if (!multipartRequest.getFile("pictureUrl").getOriginalFilename().equals("")) {
-            aliOssUploadManager.uploadFile(multipartRequest.getFile("pictureUrl"), "ec-efeiyi", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
-            paramMap.put("pictureUrl", "tenant/" + multipartRequest.getFile("pictureUrl").getOriginalFilename());
+            aliOssUploadManager.uploadFile(multipartRequest.getFile("pictureUrl"), "ec-efeiyi", "tenant/" +identify+ multipartRequest.getFile("pictureUrl").getOriginalFilename());
+            paramMap.put("pictureUrl", "tenant/" +identify+ multipartRequest.getFile("pictureUrl").getOriginalFilename());
         }
 
         //������� start

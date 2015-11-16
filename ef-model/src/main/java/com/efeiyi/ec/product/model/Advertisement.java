@@ -18,6 +18,7 @@ public class Advertisement {
     private Integer adsOrder;
     private String status;
     private String price;
+    private String groupName;
 
     @Column(name = "price")
     public String getPrice() {
@@ -82,5 +83,14 @@ public class Advertisement {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "group_name")
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }

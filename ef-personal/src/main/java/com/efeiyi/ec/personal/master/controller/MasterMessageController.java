@@ -456,7 +456,6 @@ public class MasterMessageController {
 //		String conditions = request.getParameter("conditions");
 		if (!"0".equals(conditions)){
 			String[] attr = conditions.split(":");
-			System.out.print(attr[1]);
 			query.put("master_id", attr[1].substring(0,attr[1].length()));
 		}
 		PageEntity pageEntity = new PageEntity();
@@ -678,6 +677,8 @@ public class MasterMessageController {
 		MyUser user = AuthorizationUtil.getMyUser();
 		if(user == null || user.getId() == null){
 			msg.getMaster().setFollowStatus("关注");
+			msg.setPraiseNum(msg.getPraiseNum() == null?0:msg.getPraiseNum());
+			model.addAttribute("result","收藏");
 		}else {
 			String queryHql2 = "from MasterFollowed f where f.master.id=:masterId and f.user.id=:userId and f.status = '1'";
 			queryMap.clear();
@@ -689,6 +690,16 @@ public class MasterMessageController {
 			}else{
 				msg.getMaster().setFollowStatus("关注");
 			}
+			String querHql = "from MasterMessageStore f where f.masterMessage.id=:msgId and f.user.id=:userId and f.status = '1'";
+			queryMap.clear();
+			queryMap.put("msgId",msg.getId());
+			queryMap.put("userId",user.getId());
+			MasterMessageStore store = (MasterMessageStore) baseManager.getUniqueObjectByConditions(querHql,queryMap);
+			if (store != null && store.getId() != null){
+				model.addAttribute("result","已收藏");
+			}else{
+				model.addAttribute("result","收藏");
+			}
 		}
 		model.addAttribute("msg",msg);
 		String queryHql = "from MasterComment c where c.masterMessage.id =:msgId order by createDateTime Desc";
@@ -698,55 +709,7 @@ public class MasterMessageController {
 		if (list != null && list.size() > 0){
 			model.addAttribute("commentList",list);
 		}
-		return "/masterMessage/masterMessageView";
-	}
-
-	@ResponseBody
-	@RequestMapping("/subComment.do")
-	public Object submitComment(HttpServletRequest request){
-		String commId = request.getParameter("commId");
-		String content = request.getParameter("content");
-		MyUser user = AuthorizationUtil.getMyUser();
-		if (user == null || user.getId() == null){
-			return "noRole";
-		}
-		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
-		MasterComment subComment = new MasterComment();
-		subComment.setCreateDateTime(new Date());
-		subComment.setUser(user);
-		subComment.setFatherComment(comment);
-		subComment.setMasterMessage(comment.getMasterMessage());
-		subComment.setContent(content);
-		subComment.setAmount(0);
-		subComment.setStatus("1");
-		baseManager.saveOrUpdate(MasterComment.class.getName(),subComment);
-		comment.getMasterMessage().setAmount(comment.getMasterMessage().getAmount()== null?1:comment.getMasterMessage().getAmount() + 1);
-		return subComment;
-	}
-
-	@ResponseBody
-	@RequestMapping("/subMainComment.do")
-	public Object submitMainComment(HttpServletRequest request){
-		String msgId = request.getParameter("msgId");
-		String content = request.getParameter("content");
-		MyUser user = AuthorizationUtil.getMyUser();
-		if (user == null || user.getId() == null){
-			return "noRole";
-		}
-		MasterMessage msg = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
-		MasterComment sub = new MasterComment();
-		MasterComment main = new MasterComment();
-		main.setId("0");
-		sub.setCreateDateTime(new Date());
-		sub.setUser(user);
-		sub.setFatherComment(main);
-		sub.setMasterMessage(msg);
-		sub.setContent(content);
-		sub.setAmount(0);
-		sub.setStatus("1");
-		baseManager.saveOrUpdate(MasterComment.class.getName(),sub);
-		msg.setAmount(msg.getAmount()==null?1:msg.getAmount() + 1);
-		return sub;
+		return "/masterMessage/masterMessageDatils";
 	}
 
 	@ResponseBody
@@ -758,43 +721,43 @@ public class MasterMessageController {
 		if (user == null || user.getId() == null){
 			return "noRole";
 		}
-		String queryHql = "from MasterMessagePraise p where p.message.id=:msgId and p.user.id=:userId";
+		String queryHql = "from MasterMessageStore p where p.masterMessage.id=:msgId and p.user.id=:userId";
 		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
 		queryMap.put("msgId",msgId);
 		queryMap.put("userId",user.getId());
-		MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
+		MasterMessageStore praise = (MasterMessageStore) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
 		if (praise == null){
-			MasterMessagePraise messagePraise = new MasterMessagePraise();
-			messagePraise.setStatus("1");
-			messagePraise.setCreateDateTime(new Date());
-			messagePraise.setMessage(message);
-			messagePraise.setUser(user);
-			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(),messagePraise);
-			message.setPraiseNum(message.getPraiseNum()==null?1:message.getPraiseNum() + 1);
+			MasterMessageStore msgStore = new MasterMessageStore();
+			msgStore.setStatus("1");
+			msgStore.setCreateDateTime(new Date());
+			msgStore.setMasterMessage(message);
+			msgStore.setUser(user);
+			baseManager.saveOrUpdate(MasterMessageStore.class.getName(),msgStore);
+			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() + 1);
 			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "add";
 		}else{
-			baseManager.delete(MasterMessagePraise.class.getName(),praise.getId());
-			message.setPraiseNum(message.getPraiseNum()==null?0:message.getPraiseNum() - 1);
+			baseManager.delete(MasterMessageStore.class.getName(),praise.getId());
+			message.setAmount(message.getAmount() == null ? 1 : message.getAmount() - 1);
 			baseManager.saveOrUpdate(MasterMessage.class.getName(),message);
 			return "del";
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping("/getComment.do")
-	public List getCommentListByMsgId(HttpServletRequest request){
-		String msgId = request.getParameter("msgId");
-		String queryHql = "from MasterComment c where c.masterMessage.id=:msgId and c.fatherComment.id='0' order by createDateTime Desc";
-		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("msgId",msgId);
-		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
-		if (list != null && list.size() > 0){
-			return list;
-		}else{
-			return null;
-		}
-	}
+//	@ResponseBody
+//	@RequestMapping("/getComment.do")
+//	public List getCommentListByMsgId(HttpServletRequest request){
+//		String msgId = request.getParameter("msgId");
+//		String queryHql = "from MasterComment c where c.masterMessage.id=:msgId and c.fatherComment.id='0' order by createDateTime Desc";
+//		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+//		queryMap.put("msgId",msgId);
+//		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
+//		if (list != null && list.size() > 0){
+//			return list;
+//		}else{
+//			return null;
+//		}
+//	}
 
 	@ResponseBody
 	@RequestMapping("/getSubCommentList.do")
@@ -1005,13 +968,38 @@ public class MasterMessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/getWorkComment.do")
-	public List getWorkComment(HttpServletRequest request){
-		String workId = request.getParameter("workId");
-		String queryHql = "from MasterComment c where c.masterWork.id=:workId and c.fatherComment.id='0' order by createDateTime Desc";
-		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
-		queryMap.put("workId",workId);
-		List<MasterComment> list = baseManager.listObject(queryHql,queryMap);
+	@RequestMapping("/getWorkComment/{qm}/{msgId}/{size}/{index}")
+	public List getWorkComment(HttpServletRequest request,@PathVariable String qm ,@PathVariable String msgId,@PathVariable String size,@PathVariable String index) throws Exception {
+		XQuery xQuery = new XQuery(qm,request);
+		xQuery.put("masterWork_id",msgId);
+		PageEntity entity = new PageEntity();
+		if (index != null) {
+			entity.setIndex(Integer.parseInt(index));
+			entity.setSize(Integer.parseInt(size));
+		}
+		xQuery.setPageEntity(entity);
+		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		List<MasterComment> list = pageInfo.getList();
+		if (list != null && list.size() > 0){
+			return list;
+		}else{
+			return null;
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping("/getMsgComment/{qm}/{msgId}/{size}/{index}")
+	public List getMsgComment(HttpServletRequest request ,@PathVariable String qm ,@PathVariable String msgId,@PathVariable String size,@PathVariable String index) throws Exception {
+		XQuery xQuery = new XQuery(qm,request);
+		xQuery.put("masterMessage_id",msgId);
+		PageEntity entity = new PageEntity();
+		if (index != null) {
+			entity.setIndex(Integer.parseInt(index));
+			entity.setSize(Integer.parseInt(size));
+		}
+		xQuery.setPageEntity(entity);
+		PageInfo pageInfo = baseManager.listPageInfo(xQuery);
+		List<MasterComment> list = pageInfo.getList();
 		if (list != null && list.size() > 0){
 			return list;
 		}else{
@@ -1164,6 +1152,41 @@ public class MasterMessageController {
 	}
 
 	@ResponseBody
+	@RequestMapping("/commentMsg.do")
+	public Object commentMsg(HttpServletRequest request){
+		String content = request.getParameter("content");
+		String msgId = request.getParameter("workId");
+		String fatherId = request.getParameter("fatherId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		if (user == null || user.getId() == null){
+			return "noRole";
+		}
+		if (content == null){
+			return "nothing";
+		}
+		MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterComment comment = new MasterComment();
+		if (!"0".equals(fatherId)){
+			MasterComment fatherCom = (MasterComment) baseManager.getObject(MasterComment.class.getName(),fatherId);
+			comment.setFatherComment(fatherCom);
+		}else{
+			MasterComment fatherCom = new MasterComment();
+			fatherCom.setId("0");
+			comment.setFatherComment(fatherCom);
+		}
+		comment.setMasterMessage(work);
+		comment.setUser(user);
+		comment.setContent(content);
+		comment.setAmount(0);
+		comment.setCreateDateTime(new Date());
+		comment.setStatus("1");
+		baseManager.saveOrUpdate(MasterComment.class.getName(),comment);
+		work.setAmount(work.getAmount()==null ? 1 :work.getAmount() + 1);
+		baseManager.saveOrUpdate(MasterMessage.class.getName(),work);
+		return comment;
+	}
+
+	@ResponseBody
 	@RequestMapping("/praiseWorkComment.do")
 	public String praiseWorkComment(HttpServletRequest request){
 		String workId = request.getParameter("workId");
@@ -1195,6 +1218,42 @@ public class MasterMessageController {
 			baseManager.saveOrUpdate(MasterWorkPraise.class.getName(),workPraise);
 			work.setAmount(work.getAmount()==null?1:work.getAmount() + 1);
 			baseManager.saveOrUpdate(MasterWork.class.getName(),work);
+			return "add";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping("/praiseMsgComment.do")
+	public String praiseMsgComment(HttpServletRequest request){
+		String msgId = request.getParameter("workId");
+		String commId = request.getParameter("commentId");
+		MyUser user = AuthorizationUtil.getMyUser();
+		MasterMessage work = (MasterMessage) baseManager.getObject(MasterMessage.class.getName(),msgId);
+		MasterComment comment = (MasterComment) baseManager.getObject(MasterComment.class.getName(),commId);
+		if (user.getId() == null){
+			return "noRole";
+		}
+		String queryHql = "from MasterMessagePraise p where p.message.id=:workId and p.user.id=:userId and p.comment.id=:commId";
+		LinkedHashMap<String,Object> queryMap = new LinkedHashMap<>();
+		queryMap.put("workId",msgId);
+		queryMap.put("userId",user.getId());
+		queryMap.put("commId",commId);
+		MasterMessagePraise praise = (MasterMessagePraise) baseManager.getUniqueObjectByConditions(queryHql,queryMap);
+		if (praise != null){
+			baseManager.delete(MasterWorkPraise.class.getName(),praise.getId());
+			work.setAmount(work.getAmount()==null?0:work.getAmount() - 1);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(),work);
+			return "del";
+		}else{
+			MasterMessagePraise workPraise = new MasterMessagePraise();
+			workPraise.setCreateDateTime(new Date());
+			workPraise.setStatus("1");
+			workPraise.setComment(comment);
+			workPraise.setMessage(work);
+			workPraise.setUser(user);
+			baseManager.saveOrUpdate(MasterMessagePraise.class.getName(),workPraise);
+			work.setAmount(work.getAmount()==null?1:work.getAmount() + 1);
+			baseManager.saveOrUpdate(MasterMessage.class.getName(),work);
 			return "add";
 		}
 	}

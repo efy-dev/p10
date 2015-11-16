@@ -13,6 +13,7 @@
 <html>
 <head>
   <link href="<c:url value="/scripts/upload/uploadify.css"/>" rel="stylesheet"/>
+
     <style type="text/css">
         .line{margin-bottom:20px;}
         /* 复制提示 */
@@ -62,7 +63,7 @@
             <label name="template" class="am-u-sm-3 am-form-label">专题模板</label>
 
             <div class="am-u-sm-9">
-                <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}" type="select" />
+                <ming800:status name="template" dataType="Subject.template" checkedValue="${object.template}" type="select" onchange="changeTemplate(this)" />
             </div>
         </div>
         <div class="am-form-group">
@@ -72,19 +73,29 @@
                 <ming800:status name="type" dataType="Subject.type" checkedValue="${object.type}" type="select" />
             </div>
         </div>
-        <c:if test="${not empty object.id}">
-            <div class="am-form-group">
-                <label name="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
+         <c:if test="${object.template=='2'}">
+          <c:set value="block" var="dis"/>
+          </c:if>
+          <c:if test="${object.template=='1'|| empty object.template }">
+              <c:set value="none" var="dis"/>
+              </c:if>
+            <div class="am-form-group" style="display: ${dis};" id="display">
+
+                <label name="createDate" class="am-u-sm-3 am-form-label">活动时间</label>
 
                 <div class="am-u-sm-9">
                     <div style="margin-top: 9px;">
-                        <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
-                        <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>
+
+                        起始:
+                        <input style="width: 30%"  value="" type="text" id="startDateTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDateTime\')}',minDate:'%y-%M-%d %H:%m:%s'})"  name="startDateTime" />
+                        结束:
+                        <input  style="width: 30%" value=""  id="endDateTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDateTime\')}'})" name="endDateTime"/>
+                        <%--<fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm"/>--%>
+
                     </div>
                     <!-- <small>必填项*</small>-->
                 </div>
             </div>
-        </c:if>
     <div class="am-form-group" >
 
 
@@ -124,8 +135,19 @@
       <a id="btn_upload3"></a>
     </div>
   </div>
+        <c:if test="${not empty object.id}">
+            <div class="am-form-group">
+                <label name="createDate" class="am-u-sm-3 am-form-label">创建时间</label>
 
-
+                <div class="am-u-sm-9">
+                    <div style="margin-top: 9px;">
+                        <input value="${object.createDateTime}" type="hidden" name="createDateTime"/>
+                        <fmt:formatDate value="${object.createDateTime}" type="both" pattern="YYYY-MM-dd HH:mm:ss"/>
+                    </div>
+                    <!-- <small>必填项*</small>-->
+                </div>
+            </div>
+        </c:if>
   <div class="am-u-md-13">
     <div class="am-panel am-panel-default">
       <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
@@ -198,6 +220,7 @@
 <script src="<c:url value='/resources/plugins/ckeditor/ckeditor.js'/>"></script>
 <script src="<c:url value="/scripts/upload/jquery.uploadify.js"/>"></script>
 <script type="text/javascript" src="<c:url value='/scripts/jquery.zclip.js'/>"></script>
+<script src="<c:url value="/resources/plugins/My97DatePicker/WdatePicker.js" />" ></script>
 <script type="text/javascript">
 
   //复制图片地址
@@ -227,7 +250,10 @@
      $(".copy").each(function(){
        copyInit($(this));
      });
-
+    var startDateTime = '${object.startDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+    var endDateTime = '${object.endDateTime}'.substring(0,'${object.startDateTime}'.lastIndexOf("."));
+    $("#startDateTime").val(startDateTime);
+       $("#endDateTime").val(endDateTime);
      $('#btn_upload').uploadify({
        uploader: '<c:url value="/product/subjectUploadify.do?status=1&subjectId=${object.id}"/>',            // 服务器处理地址
        swf: '<c:url value="/scripts/upload/uploadify.swf"/>',
@@ -340,6 +366,15 @@
      }
 
  }
+
+    function changeTemplate(obj){
+        if($(obj).val()=="2"){
+            $("#display").css({"display":"block"});
+        }
+        if($(obj).val()=="1"){
+            $("#display").css({"display":"none"});
+        }
+    }
 </script>
 
 

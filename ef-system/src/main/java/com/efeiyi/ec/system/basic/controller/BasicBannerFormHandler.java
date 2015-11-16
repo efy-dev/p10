@@ -30,7 +30,7 @@ public class BasicBannerFormHandler implements MultipartHandler{
         String url=request.getParameter("OldImageUrl");
         String bucket;
         if(!multipartRequest.getFile("imageUrl").getOriginalFilename().equals("")) {
-         url = "banner/"+identify+"_"+request.getParameter("groupName")+".jpg";
+         url = "banner/"+identify+"_"+multipartRequest.getFile("imageUrl").getOriginalFilename();
          bucket = request.getParameter("bucket");
             boolean result = aliOssUploadManager.uploadFile(multipartRequest.getFile("imageUrl"), bucket, url);
         }
@@ -38,7 +38,11 @@ public class BasicBannerFormHandler implements MultipartHandler{
         XSaveOrUpdate xSaveOrUpdate = new XSaveOrUpdate(tempDo.getName(),request);
         HashMap<String,Object> paramMap = xSaveOrUpdate.getParamMap();
         paramMap.put("imageUrl",url);
-        paramMap.put("group",request.getParameter("groupName"));
+        if(request.getParameter("groupName")==null||"ec.home.banner".equals(request.getParameter("groupName"))) {
+            paramMap.put("group", request.getParameter("group"));
+        }else {
+            paramMap.put("group", request.getParameter("groupName"));
+        }
         paramMap.put("status","1");
 
 //        Master tenant = new Master();

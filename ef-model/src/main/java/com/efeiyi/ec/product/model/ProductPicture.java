@@ -18,7 +18,7 @@ public class ProductPicture {
     private String status;//1:商品图片 2: 主图片 3:详情页的图片
     private Product product;
     private ProductModel productModel;//规格商品
-    //   private Integer sort;
+    private Integer sort;
 
     @Id
     @GenericGenerator(name = "id", strategy = "com.ming800.core.p.model.M8idGenerator")
@@ -69,5 +69,14 @@ public class ProductPicture {
 
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
+    }
+
+    @Column(name = "sort")
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }
