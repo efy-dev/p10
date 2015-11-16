@@ -245,7 +245,7 @@
                         amount = data[i].praiseNum;
                     }
                     var childNode = "<li style=\"margin: 0;border-bottom: 0;\" id=\""+data[i].id+"\" class=\"obtain\">"+
-                            "           <div class=\"ae\">"
+                            "           <div class=\"ae\">"+
                             "               <div class=\"img\"><a href=\"#\"><img class=\"am-circle\" src=\""+src+"\"></a></div>"+
                             "               <div class=\"text\"><span><a href=\"#\">"+userName+" 回复 "+name+"：</a></span><span>"+data[i].content+"</span></div>"+
                             "               <div class=\"status ae\">"+
