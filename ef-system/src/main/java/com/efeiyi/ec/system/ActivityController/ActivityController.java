@@ -26,7 +26,6 @@ public class ActivityController {
 
 
 	@RequestMapping("/yx.do")
-
 	public String  yx(HttpServletRequest request)throws Exception{
 
 		return  "redirect:http://tuan.efeiyi.com/group/sendRedPacket";

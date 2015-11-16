@@ -16,7 +16,7 @@
 </head>
 <body>
 <a class="am-btn am-btn-default am-btn-xs am-text-secondary" target="_blank"
-   href="<c:url value="/activity/yx.do"/>"><span
+   href="<c:url value="/professional/yx.do"/>"><span
         class="am-icon-pencil-square-o">发放成团红包</span>
 </a>
 
